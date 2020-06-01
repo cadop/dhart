@@ -1,0 +1,116 @@
+\hypertarget{view__analysis___c_8h}{}\doxysection{H\+:/\+Human\+Metrics/\+Codebase/\+Human\+Factors/interfaces/view\+\_\+analysis\+\_\+C.h File Reference}
+\label{view__analysis___c_8h}\index{H:/HumanMetrics/Codebase/HumanFactors/interfaces/view\_analysis\_C.h@{H:/HumanMetrics/Codebase/HumanFactors/interfaces/view\_analysis\_C.h}}
+{\ttfamily \#include $<$cinterface\+\_\+utils.\+h$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$view\+\_\+analysis.\+h$>$}\newline
+{\ttfamily \#include $<$raytracer\+\_\+\+C.\+h$>$}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}}~extern \char`\"{}C\char`\"{} \+\_\+\+\_\+declspec(dllexport) int
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{view__analysis___c_8h_a7d5cc71136e07f1ec4df62614c8e7ab8}{Sphereical\+View\+Analysis\+Aggregate}} (H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer $\ast$E\+RT, H\+F\+::\+Spatial\+Structures\+::\+Node $\ast$node\+\_\+ptr, int node\+\_\+size, int max\+\_\+rays, float upward\+\_\+fov, float downward\+\_\+fov, float height, H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE AT, std\+::vector$<$ float $>$ $\ast$$\ast$out\+\_\+scores, float $\ast$$\ast$out\+\_\+scores\+\_\+ptr, int $\ast$out\+\_\+scores\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Perform view analysis from a list of points and aggregate the results into an ordered list of scores. Scores are aggregated by the aggregation specified in AT aggregation method \end{DoxyCompactList}\item 
+\mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{view__analysis___c_8h_a2e94dafbec5747041a43164ac605c380}{Sphereical\+View\+Analysis\+Aggregate\+Flat}} (H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer $\ast$E\+RT, const float $\ast$node\+\_\+ptr, int node\+\_\+size, int max\+\_\+rays, float upward\+\_\+fov, float downward\+\_\+fov, float height, H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE AT, std\+::vector$<$ float $>$ $\ast$$\ast$out\+\_\+scores, float $\ast$$\ast$out\+\_\+scores\+\_\+ptr, int $\ast$out\+\_\+scores\+\_\+size)
+\item 
+\mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{view__analysis___c_8h_a94d3ddc3981020e2852fc77e51266185}{Spherical\+View\+Analysis\+No\+Aggregate}} (H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer $\ast$E\+RT, const H\+F\+::\+Spatial\+Structures\+::\+Node $\ast$node\+\_\+ptr, int node\+\_\+size, int $\ast$max\+\_\+rays, float upward\+\_\+fov, float downward\+\_\+fov, float height, std\+::vector$<$ \mbox{\hyperlink{struct_ray_result}{Ray\+Result}} $>$ $\ast$$\ast$out\+\_\+results, \mbox{\hyperlink{struct_ray_result}{Ray\+Result}} $\ast$$\ast$out\+\_\+results\+\_\+ptr)
+\begin{DoxyCompactList}\small\item\em Perform view analysis without any aggregation \end{DoxyCompactList}\item 
+\mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{view__analysis___c_8h_a348af4492f3e4e7ffab6da3e86de3924}{Spherical\+View\+Analysis\+No\+Aggregate\+Flat}} (H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer $\ast$E\+RT, const float $\ast$node\+\_\+ptr, int node\+\_\+size, int $\ast$max\+\_\+rays, float upward\+\_\+fov, float downward\+\_\+fov, float height, std\+::vector$<$ \mbox{\hyperlink{struct_ray_result}{Ray\+Result}} $>$ $\ast$$\ast$out\+\_\+results, \mbox{\hyperlink{struct_ray_result}{Ray\+Result}} $\ast$$\ast$out\+\_\+results\+\_\+ptr)
+\item 
+\mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{view__analysis___c_8h_af572b7bec28d55bf2c72719742703dff}{Spherical\+Distribute}} (int $\ast$num\+\_\+rays, std\+::vector$<$ float $>$ $\ast$$\ast$out\+\_\+direction\+\_\+vector, float $\ast$$\ast$out\+\_\+direction\+\_\+data, float upward\+\_\+fov, float downward\+\_\+fov)
+\begin{DoxyCompactList}\small\item\em Distribute directions in a sphere \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}\label{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}} 
+\index{view\_analysis\_C.h@{view\_analysis\_C.h}!C\_INTERFACE@{C\_INTERFACE}}
+\index{C\_INTERFACE@{C\_INTERFACE}!view\_analysis\_C.h@{view\_analysis\_C.h}}
+\doxysubsubsection{\texorpdfstring{C\_INTERFACE}{C\_INTERFACE}}
+{\footnotesize\ttfamily \#define C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE~extern \char`\"{}C\char`\"{} \+\_\+\+\_\+declspec(dllexport) int}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{view__analysis___c_8h_a7d5cc71136e07f1ec4df62614c8e7ab8}\label{view__analysis___c_8h_a7d5cc71136e07f1ec4df62614c8e7ab8}} 
+\index{view\_analysis\_C.h@{view\_analysis\_C.h}!SphereicalViewAnalysisAggregate@{SphereicalViewAnalysisAggregate}}
+\index{SphereicalViewAnalysisAggregate@{SphereicalViewAnalysisAggregate}!view\_analysis\_C.h@{view\_analysis\_C.h}}
+\doxysubsubsection{\texorpdfstring{SphereicalViewAnalysisAggregate()}{SphereicalViewAnalysisAggregate()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Sphereical\+View\+Analysis\+Aggregate (\begin{DoxyParamCaption}\item[{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer $\ast$}]{E\+RT,  }\item[{H\+F\+::\+Spatial\+Structures\+::\+Node $\ast$}]{node\+\_\+ptr,  }\item[{int}]{node\+\_\+size,  }\item[{int}]{max\+\_\+rays,  }\item[{float}]{upward\+\_\+fov,  }\item[{float}]{downward\+\_\+fov,  }\item[{float}]{height,  }\item[{H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}]{AT,  }\item[{std\+::vector$<$ float $>$ $\ast$$\ast$}]{out\+\_\+scores,  }\item[{float $\ast$$\ast$}]{out\+\_\+scores\+\_\+ptr,  }\item[{int $\ast$}]{out\+\_\+scores\+\_\+size }\end{DoxyParamCaption})}
+
+
+
+Perform view analysis from a list of points and aggregate the results into an ordered list of scores. Scores are aggregated by the aggregation specified in AT aggregation method 
+
+
+\begin{DoxyParams}{Parameters}
+{\em E\+RT} & A fully initialized Embree\+Ray\+Tracer \\
+\hline
+{\em node\+\_\+ptr} & A pointer to some array of nodes \\
+\hline
+{\em node\+\_\+size} & Number of nodes in node\+\_\+ptr \\
+\hline
+{\em max\+\_\+rays} & Number of rays to evenly distribute in a sphere \\
+\hline
+{\em height} & height to offset nodes from the ground \\
+\hline
+{\em AT} & Type of aggregation method to use to group distance values \\
+\hline
+{\em out\+\_\+scores} & Output parameter for score vector \\
+\hline
+{\em out\+\_\+scores\+\_\+ptr} & Output parameter for the score vector\textquotesingle{}s underlying data \\
+\hline
+{\em out\+\_\+scores\+\_\+size} & Output size of the vector\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{view__analysis___c_8h_a2e94dafbec5747041a43164ac605c380}\label{view__analysis___c_8h_a2e94dafbec5747041a43164ac605c380}} 
+\index{view\_analysis\_C.h@{view\_analysis\_C.h}!SphereicalViewAnalysisAggregateFlat@{SphereicalViewAnalysisAggregateFlat}}
+\index{SphereicalViewAnalysisAggregateFlat@{SphereicalViewAnalysisAggregateFlat}!view\_analysis\_C.h@{view\_analysis\_C.h}}
+\doxysubsubsection{\texorpdfstring{SphereicalViewAnalysisAggregateFlat()}{SphereicalViewAnalysisAggregateFlat()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Sphereical\+View\+Analysis\+Aggregate\+Flat (\begin{DoxyParamCaption}\item[{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer $\ast$}]{E\+RT,  }\item[{const float $\ast$}]{node\+\_\+ptr,  }\item[{int}]{node\+\_\+size,  }\item[{int}]{max\+\_\+rays,  }\item[{float}]{upward\+\_\+fov,  }\item[{float}]{downward\+\_\+fov,  }\item[{float}]{height,  }\item[{H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}]{AT,  }\item[{std\+::vector$<$ float $>$ $\ast$$\ast$}]{out\+\_\+scores,  }\item[{float $\ast$$\ast$}]{out\+\_\+scores\+\_\+ptr,  }\item[{int $\ast$}]{out\+\_\+scores\+\_\+size }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{view__analysis___c_8h_af572b7bec28d55bf2c72719742703dff}\label{view__analysis___c_8h_af572b7bec28d55bf2c72719742703dff}} 
+\index{view\_analysis\_C.h@{view\_analysis\_C.h}!SphericalDistribute@{SphericalDistribute}}
+\index{SphericalDistribute@{SphericalDistribute}!view\_analysis\_C.h@{view\_analysis\_C.h}}
+\doxysubsubsection{\texorpdfstring{SphericalDistribute()}{SphericalDistribute()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Spherical\+Distribute (\begin{DoxyParamCaption}\item[{int $\ast$}]{num\+\_\+rays,  }\item[{std\+::vector$<$ float $>$ $\ast$$\ast$}]{out\+\_\+direction\+\_\+vector,  }\item[{float $\ast$$\ast$}]{out\+\_\+direction\+\_\+data,  }\item[{float}]{upward\+\_\+fov,  }\item[{float}]{downward\+\_\+fov }\end{DoxyParamCaption})}
+
+
+
+Distribute directions in a sphere 
+
+\mbox{\Hypertarget{view__analysis___c_8h_a94d3ddc3981020e2852fc77e51266185}\label{view__analysis___c_8h_a94d3ddc3981020e2852fc77e51266185}} 
+\index{view\_analysis\_C.h@{view\_analysis\_C.h}!SphericalViewAnalysisNoAggregate@{SphericalViewAnalysisNoAggregate}}
+\index{SphericalViewAnalysisNoAggregate@{SphericalViewAnalysisNoAggregate}!view\_analysis\_C.h@{view\_analysis\_C.h}}
+\doxysubsubsection{\texorpdfstring{SphericalViewAnalysisNoAggregate()}{SphericalViewAnalysisNoAggregate()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Spherical\+View\+Analysis\+No\+Aggregate (\begin{DoxyParamCaption}\item[{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer $\ast$}]{E\+RT,  }\item[{const H\+F\+::\+Spatial\+Structures\+::\+Node $\ast$}]{node\+\_\+ptr,  }\item[{int}]{node\+\_\+size,  }\item[{int $\ast$}]{max\+\_\+rays,  }\item[{float}]{upward\+\_\+fov,  }\item[{float}]{downward\+\_\+fov,  }\item[{float}]{height,  }\item[{std\+::vector$<$ \mbox{\hyperlink{struct_ray_result}{Ray\+Result}} $>$ $\ast$$\ast$}]{out\+\_\+results,  }\item[{\mbox{\hyperlink{struct_ray_result}{Ray\+Result}} $\ast$$\ast$}]{out\+\_\+results\+\_\+ptr }\end{DoxyParamCaption})}
+
+
+
+Perform view analysis without any aggregation 
+
+
+\begin{DoxyParams}{Parameters}
+{\em E\+RT} & Raytracer to use in this function\\
+\hline
+{\em node\+\_\+ptr} & Positions to use in this calculation\\
+\hline
+{\em node\+\_\+size} & Number of nodes in node\+\_\+ptr\\
+\hline
+{\em max\+\_\+rays} & Number of rays to fire per node\\
+\hline
+{\em height} & height to offset nodes\\
+\hline
+{\em out\+\_\+results} & Vector to store results in \\
+\hline
+{\em out\+\_\+results\+\_\+ptr} & Pointer to the result vector\textquotesingle{}s data\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{view__analysis___c_8h_a348af4492f3e4e7ffab6da3e86de3924}\label{view__analysis___c_8h_a348af4492f3e4e7ffab6da3e86de3924}} 
+\index{view\_analysis\_C.h@{view\_analysis\_C.h}!SphericalViewAnalysisNoAggregateFlat@{SphericalViewAnalysisNoAggregateFlat}}
+\index{SphericalViewAnalysisNoAggregateFlat@{SphericalViewAnalysisNoAggregateFlat}!view\_analysis\_C.h@{view\_analysis\_C.h}}
+\doxysubsubsection{\texorpdfstring{SphericalViewAnalysisNoAggregateFlat()}{SphericalViewAnalysisNoAggregateFlat()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Spherical\+View\+Analysis\+No\+Aggregate\+Flat (\begin{DoxyParamCaption}\item[{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer $\ast$}]{E\+RT,  }\item[{const float $\ast$}]{node\+\_\+ptr,  }\item[{int}]{node\+\_\+size,  }\item[{int $\ast$}]{max\+\_\+rays,  }\item[{float}]{upward\+\_\+fov,  }\item[{float}]{downward\+\_\+fov,  }\item[{float}]{height,  }\item[{std\+::vector$<$ \mbox{\hyperlink{struct_ray_result}{Ray\+Result}} $>$ $\ast$$\ast$}]{out\+\_\+results,  }\item[{\mbox{\hyperlink{struct_ray_result}{Ray\+Result}} $\ast$$\ast$}]{out\+\_\+results\+\_\+ptr }\end{DoxyParamCaption})}
+

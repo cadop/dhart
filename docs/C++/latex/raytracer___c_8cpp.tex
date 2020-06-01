@@ -1,0 +1,110 @@
+\hypertarget{raytracer___c_8cpp}{}\doxysection{H\+:/\+Human\+Metrics/\+Codebase/\+Human\+Factors/interfaces/raytracer\+\_\+C.cpp File Reference}
+\label{raytracer___c_8cpp}\index{H:/HumanMetrics/Codebase/HumanFactors/interfaces/raytracer\_C.cpp@{H:/HumanMetrics/Codebase/HumanFactors/interfaces/raytracer\_C.cpp}}
+{\ttfamily \#include $<$raytracer\+\_\+\+C.\+h$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$embree\+\_\+raytracer.\+h$>$}\newline
+{\ttfamily \#include $<$meshinfo.\+h$>$}\newline
+{\ttfamily \#include $<$H\+F\+Exceptions.\+h$>$}\newline
+{\ttfamily \#include $<$cinterface\+\_\+utils.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{raytracer___c_8cpp_a5aca795180e2de153a50140905008a85}{Create\+Raytracer}} (vector$<$ Mesh\+Info $>$ $\ast$mesh, Embree\+Ray\+Tracer $\ast$$\ast$out\+\_\+raytracer)
+\item 
+\mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{raytracer___c_8cpp_ac7ff0b75adf7d24754a702f09d5bcf07}{Destroy\+Ray\+Tracer}} (H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer $\ast$rt\+\_\+to\+\_\+destroy)
+\item 
+\mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{raytracer___c_8cpp_a3104ee3687c70b5045ac3c69eb557b99}{Fire\+Single\+Ray\+Distance}} (H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer $\ast$ert, const float $\ast$origin, const float $\ast$direction, const float max\+\_\+distance, float $\ast$out\+\_\+distance, int $\ast$out\+\_\+meshid)
+\item 
+\mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{raytracer___c_8cpp_a6dcb31db6dbee37c03f277cb61cfdf37}{Fire\+Rays\+Distance}} (H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer $\ast$ert, float $\ast$origins, int num\+\_\+origins, float $\ast$directions, int num\+\_\+directions, std\+::vector$<$ \mbox{\hyperlink{struct_ray_result}{Ray\+Result}} $>$ $\ast$$\ast$out\+\_\+results, \mbox{\hyperlink{struct_ray_result}{Ray\+Result}} $\ast$$\ast$results\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Fire rays for each node in origins/directions as ordered pairs and get distance back as a result \end{DoxyCompactList}\item 
+\mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{raytracer___c_8cpp_a67ddefe6ede8108cc7f5b0caf16a6b3c}{Fire\+Ray}} (Embree\+Ray\+Tracer $\ast$ert, float \&x, float \&y, float \&z, float dx, float dy, float dz, float max\+\_\+distance, bool \&result)
+\item 
+\mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{raytracer___c_8cpp_a55e18bda7a37169d7faa0ef4a500e1ac}{Fire\+Multiple\+Rays}} (Embree\+Ray\+Tracer $\ast$ert, float $\ast$origins, const float $\ast$directions, int size, float max\+\_\+distance, bool $\ast$result\+\_\+array)
+\item 
+\mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{raytracer___c_8cpp_aa68421910b89f2105fc4b5543dd1a687}{Fire\+Multiple\+Origins\+One\+Direction}} (Embree\+Ray\+Tracer $\ast$ert, float $\ast$origins, const float $\ast$direction, int size, float max\+\_\+distance, bool $\ast$result\+\_\+array)
+\item 
+\mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{raytracer___c_8cpp_a675ea2b9ea120fabab5ddc23aaae543e}{Fire\+Multiple\+Directions\+One\+Origin}} (Embree\+Ray\+Tracer $\ast$ert, const float $\ast$origin, float $\ast$directions, int size, float max\+\_\+distance, bool $\ast$result\+\_\+array)
+\item 
+\mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{raytracer___c_8cpp_a724a138dea36f9e47bfd8ffb86e45be0}{Fire\+Occlusion\+Rays}} (Embree\+Ray\+Tracer $\ast$ert, const float $\ast$origins, const float $\ast$directions, int origin\+\_\+size, int direction\+\_\+size, float max\+\_\+distance, bool $\ast$result\+\_\+array)
+\item 
+\mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{raytracer___c_8cpp_a6843f6f7f216087b5990d0b21abb7e86}{Destroy\+Ray\+Result\+Vector}} (std\+::vector$<$ \mbox{\hyperlink{struct_ray_result}{Ray\+Result}} $>$ $\ast$var)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{raytracer___c_8cpp_a5aca795180e2de153a50140905008a85}\label{raytracer___c_8cpp_a5aca795180e2de153a50140905008a85}} 
+\index{raytracer\_C.cpp@{raytracer\_C.cpp}!CreateRaytracer@{CreateRaytracer}}
+\index{CreateRaytracer@{CreateRaytracer}!raytracer\_C.cpp@{raytracer\_C.cpp}}
+\doxysubsubsection{\texorpdfstring{CreateRaytracer()}{CreateRaytracer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Create\+Raytracer (\begin{DoxyParamCaption}\item[{vector$<$ Mesh\+Info $>$ $\ast$}]{mesh,  }\item[{Embree\+Ray\+Tracer $\ast$$\ast$}]{out\+\_\+raytracer }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{raytracer___c_8cpp_a6843f6f7f216087b5990d0b21abb7e86}\label{raytracer___c_8cpp_a6843f6f7f216087b5990d0b21abb7e86}} 
+\index{raytracer\_C.cpp@{raytracer\_C.cpp}!DestroyRayResultVector@{DestroyRayResultVector}}
+\index{DestroyRayResultVector@{DestroyRayResultVector}!raytracer\_C.cpp@{raytracer\_C.cpp}}
+\doxysubsubsection{\texorpdfstring{DestroyRayResultVector()}{DestroyRayResultVector()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Destroy\+Ray\+Result\+Vector (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{struct_ray_result}{Ray\+Result}} $>$ $\ast$}]{var }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{raytracer___c_8cpp_ac7ff0b75adf7d24754a702f09d5bcf07}\label{raytracer___c_8cpp_ac7ff0b75adf7d24754a702f09d5bcf07}} 
+\index{raytracer\_C.cpp@{raytracer\_C.cpp}!DestroyRayTracer@{DestroyRayTracer}}
+\index{DestroyRayTracer@{DestroyRayTracer}!raytracer\_C.cpp@{raytracer\_C.cpp}}
+\doxysubsubsection{\texorpdfstring{DestroyRayTracer()}{DestroyRayTracer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Destroy\+Ray\+Tracer (\begin{DoxyParamCaption}\item[{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer $\ast$}]{rt\+\_\+to\+\_\+destroy }\end{DoxyParamCaption})}
+
+
+
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em rt\+\_\+to\+\_\+destroy} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{raytracer___c_8cpp_a675ea2b9ea120fabab5ddc23aaae543e}\label{raytracer___c_8cpp_a675ea2b9ea120fabab5ddc23aaae543e}} 
+\index{raytracer\_C.cpp@{raytracer\_C.cpp}!FireMultipleDirectionsOneOrigin@{FireMultipleDirectionsOneOrigin}}
+\index{FireMultipleDirectionsOneOrigin@{FireMultipleDirectionsOneOrigin}!raytracer\_C.cpp@{raytracer\_C.cpp}}
+\doxysubsubsection{\texorpdfstring{FireMultipleDirectionsOneOrigin()}{FireMultipleDirectionsOneOrigin()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Fire\+Multiple\+Directions\+One\+Origin (\begin{DoxyParamCaption}\item[{Embree\+Ray\+Tracer $\ast$}]{ert,  }\item[{const float $\ast$}]{origin,  }\item[{float $\ast$}]{directions,  }\item[{int}]{size,  }\item[{float}]{max\+\_\+distance,  }\item[{bool $\ast$}]{result\+\_\+array }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{raytracer___c_8cpp_aa68421910b89f2105fc4b5543dd1a687}\label{raytracer___c_8cpp_aa68421910b89f2105fc4b5543dd1a687}} 
+\index{raytracer\_C.cpp@{raytracer\_C.cpp}!FireMultipleOriginsOneDirection@{FireMultipleOriginsOneDirection}}
+\index{FireMultipleOriginsOneDirection@{FireMultipleOriginsOneDirection}!raytracer\_C.cpp@{raytracer\_C.cpp}}
+\doxysubsubsection{\texorpdfstring{FireMultipleOriginsOneDirection()}{FireMultipleOriginsOneDirection()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Fire\+Multiple\+Origins\+One\+Direction (\begin{DoxyParamCaption}\item[{Embree\+Ray\+Tracer $\ast$}]{ert,  }\item[{float $\ast$}]{origins,  }\item[{const float $\ast$}]{direction,  }\item[{int}]{size,  }\item[{float}]{max\+\_\+distance,  }\item[{bool $\ast$}]{result\+\_\+array }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{raytracer___c_8cpp_a55e18bda7a37169d7faa0ef4a500e1ac}\label{raytracer___c_8cpp_a55e18bda7a37169d7faa0ef4a500e1ac}} 
+\index{raytracer\_C.cpp@{raytracer\_C.cpp}!FireMultipleRays@{FireMultipleRays}}
+\index{FireMultipleRays@{FireMultipleRays}!raytracer\_C.cpp@{raytracer\_C.cpp}}
+\doxysubsubsection{\texorpdfstring{FireMultipleRays()}{FireMultipleRays()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Fire\+Multiple\+Rays (\begin{DoxyParamCaption}\item[{Embree\+Ray\+Tracer $\ast$}]{ert,  }\item[{float $\ast$}]{origins,  }\item[{const float $\ast$}]{directions,  }\item[{int}]{size,  }\item[{float}]{max\+\_\+distance,  }\item[{bool $\ast$}]{result\+\_\+array }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{raytracer___c_8cpp_a724a138dea36f9e47bfd8ffb86e45be0}\label{raytracer___c_8cpp_a724a138dea36f9e47bfd8ffb86e45be0}} 
+\index{raytracer\_C.cpp@{raytracer\_C.cpp}!FireOcclusionRays@{FireOcclusionRays}}
+\index{FireOcclusionRays@{FireOcclusionRays}!raytracer\_C.cpp@{raytracer\_C.cpp}}
+\doxysubsubsection{\texorpdfstring{FireOcclusionRays()}{FireOcclusionRays()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Fire\+Occlusion\+Rays (\begin{DoxyParamCaption}\item[{Embree\+Ray\+Tracer $\ast$}]{ert,  }\item[{const float $\ast$}]{origins,  }\item[{const float $\ast$}]{directions,  }\item[{int}]{origin\+\_\+size,  }\item[{int}]{direction\+\_\+size,  }\item[{float}]{max\+\_\+distance,  }\item[{bool $\ast$}]{result\+\_\+array }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{raytracer___c_8cpp_a67ddefe6ede8108cc7f5b0caf16a6b3c}\label{raytracer___c_8cpp_a67ddefe6ede8108cc7f5b0caf16a6b3c}} 
+\index{raytracer\_C.cpp@{raytracer\_C.cpp}!FireRay@{FireRay}}
+\index{FireRay@{FireRay}!raytracer\_C.cpp@{raytracer\_C.cpp}}
+\doxysubsubsection{\texorpdfstring{FireRay()}{FireRay()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Fire\+Ray (\begin{DoxyParamCaption}\item[{Embree\+Ray\+Tracer $\ast$}]{ert,  }\item[{float \&}]{x,  }\item[{float \&}]{y,  }\item[{float \&}]{z,  }\item[{float}]{dx,  }\item[{float}]{dy,  }\item[{float}]{dz,  }\item[{float}]{max\+\_\+distance,  }\item[{bool \&}]{result }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{raytracer___c_8cpp_a6dcb31db6dbee37c03f277cb61cfdf37}\label{raytracer___c_8cpp_a6dcb31db6dbee37c03f277cb61cfdf37}} 
+\index{raytracer\_C.cpp@{raytracer\_C.cpp}!FireRaysDistance@{FireRaysDistance}}
+\index{FireRaysDistance@{FireRaysDistance}!raytracer\_C.cpp@{raytracer\_C.cpp}}
+\doxysubsubsection{\texorpdfstring{FireRaysDistance()}{FireRaysDistance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Fire\+Rays\+Distance (\begin{DoxyParamCaption}\item[{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer $\ast$}]{ert,  }\item[{float $\ast$}]{origins,  }\item[{int}]{num\+\_\+origins,  }\item[{float $\ast$}]{directions,  }\item[{int}]{num\+\_\+directions,  }\item[{std\+::vector$<$ \mbox{\hyperlink{struct_ray_result}{Ray\+Result}} $>$ $\ast$$\ast$}]{out\+\_\+results,  }\item[{\mbox{\hyperlink{struct_ray_result}{Ray\+Result}} $\ast$$\ast$}]{results\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+Fire rays for each node in origins/directions as ordered pairs and get distance back as a result 
+
+\mbox{\Hypertarget{raytracer___c_8cpp_a3104ee3687c70b5045ac3c69eb557b99}\label{raytracer___c_8cpp_a3104ee3687c70b5045ac3c69eb557b99}} 
+\index{raytracer\_C.cpp@{raytracer\_C.cpp}!FireSingleRayDistance@{FireSingleRayDistance}}
+\index{FireSingleRayDistance@{FireSingleRayDistance}!raytracer\_C.cpp@{raytracer\_C.cpp}}
+\doxysubsubsection{\texorpdfstring{FireSingleRayDistance()}{FireSingleRayDistance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Fire\+Single\+Ray\+Distance (\begin{DoxyParamCaption}\item[{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer $\ast$}]{ert,  }\item[{const float $\ast$}]{origin,  }\item[{const float $\ast$}]{direction,  }\item[{const float}]{max\+\_\+distance,  }\item[{float $\ast$}]{out\+\_\+distance,  }\item[{int $\ast$}]{out\+\_\+meshid }\end{DoxyParamCaption})}
+

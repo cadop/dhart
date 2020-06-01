@@ -1,0 +1,1 @@
+Each release should be stored in this folder as a zip file

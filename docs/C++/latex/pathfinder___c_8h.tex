@@ -1,0 +1,76 @@
+\hypertarget{pathfinder___c_8h}{}\doxysection{H\+:/\+Human\+Metrics/\+Codebase/\+Human\+Factors/interfaces/pathfinder\+\_\+C.h File Reference}
+\label{pathfinder___c_8h}\index{H:/HumanMetrics/Codebase/HumanFactors/interfaces/pathfinder\_C.h@{H:/HumanMetrics/Codebase/HumanFactors/interfaces/pathfinder\_C.h}}
+{\ttfamily \#include $<$cinterface\+\_\+utils.\+h$>$}\newline
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespace_h_f}{HF}}
+\item 
+ \mbox{\hyperlink{namespace_h_f_1_1_spatial_structures}{H\+F\+::\+Spatial\+Structures}}
+\item 
+ \mbox{\hyperlink{namespace_h_f_1_1_pathfinding}{H\+F\+::\+Pathfinding}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{pathfinder___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}}~extern \char`\"{}C\char`\"{} \+\_\+\+\_\+declspec(dllexport) int
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{pathfinder___c_8h_ae024c8b4ea32148644b61d4c1a1332fa}{Create\+Path}} (const H\+F\+::\+Spatial\+Structures\+::\+Graph $\ast$g, int start, int end, int $\ast$out\+\_\+size, H\+F\+::\+Spatial\+Structures\+::\+Path $\ast$$\ast$out\+\_\+path, H\+F\+::\+Spatial\+Structures\+::\+Path\+Member $\ast$$\ast$out\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Create a path from start to end in C++. If no path exists, the N\+O\+\_\+\+P\+A\+TH error code will be returned, and both pointers will be left as they were before the function was called. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{pathfinder___c_8h_a497790dddfb220484737711a1f1eff56}{Create\+Paths}} (const H\+F\+::\+Spatial\+Structures\+::\+Graph $\ast$g, const int $\ast$start, const int $\ast$end, H\+F\+::\+Spatial\+Structures\+::\+Path $\ast$$\ast$out\+\_\+path\+\_\+ptr\+\_\+holder, H\+F\+::\+Spatial\+Structures\+::\+Path\+Member $\ast$$\ast$out\+\_\+path\+\_\+member\+\_\+ptr\+\_\+holder, int $\ast$out\+\_\+sizes, int num\+\_\+paths)
+\begin{DoxyCompactList}\small\item\em Create multiple paths from start to end in C++. both out\+\_\+ members return as arrays of pointers, with one for each element. Sizes of zero represent non-\/existant paths, and will be set to null pointers \end{DoxyCompactList}\item 
+\mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{pathfinder___c_8h_aac725d282f4fecd3aba1b3273c26e7e1}{Get\+Path\+Info}} (H\+F\+::\+Spatial\+Structures\+::\+Path $\ast$p, H\+F\+::\+Spatial\+Structures\+::\+Path\+Member $\ast$$\ast$out\+\_\+member\+\_\+ptr, int $\ast$out\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Get various information about a path \end{DoxyCompactList}\item 
+\mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{pathfinder___c_8h_a884a3374d971261a01ccfd3b21e288e5}{Destroy\+Path}} (H\+F\+::\+Spatial\+Structures\+::\+Path $\ast$path\+\_\+to\+\_\+destroy)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{pathfinder___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}\label{pathfinder___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}} 
+\index{pathfinder\_C.h@{pathfinder\_C.h}!C\_INTERFACE@{C\_INTERFACE}}
+\index{C\_INTERFACE@{C\_INTERFACE}!pathfinder\_C.h@{pathfinder\_C.h}}
+\doxysubsubsection{\texorpdfstring{C\_INTERFACE}{C\_INTERFACE}}
+{\footnotesize\ttfamily \#define C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE~extern \char`\"{}C\char`\"{} \+\_\+\+\_\+declspec(dllexport) int}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{pathfinder___c_8h_ae024c8b4ea32148644b61d4c1a1332fa}\label{pathfinder___c_8h_ae024c8b4ea32148644b61d4c1a1332fa}} 
+\index{pathfinder\_C.h@{pathfinder\_C.h}!CreatePath@{CreatePath}}
+\index{CreatePath@{CreatePath}!pathfinder\_C.h@{pathfinder\_C.h}}
+\doxysubsubsection{\texorpdfstring{CreatePath()}{CreatePath()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Create\+Path (\begin{DoxyParamCaption}\item[{const H\+F\+::\+Spatial\+Structures\+::\+Graph $\ast$}]{g,  }\item[{int}]{start,  }\item[{int}]{end,  }\item[{int $\ast$}]{out\+\_\+size,  }\item[{H\+F\+::\+Spatial\+Structures\+::\+Path $\ast$$\ast$}]{out\+\_\+path,  }\item[{H\+F\+::\+Spatial\+Structures\+::\+Path\+Member $\ast$$\ast$}]{out\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+Create a path from start to end in C++. If no path exists, the N\+O\+\_\+\+P\+A\+TH error code will be returned, and both pointers will be left as they were before the function was called. 
+
+\mbox{\Hypertarget{pathfinder___c_8h_a497790dddfb220484737711a1f1eff56}\label{pathfinder___c_8h_a497790dddfb220484737711a1f1eff56}} 
+\index{pathfinder\_C.h@{pathfinder\_C.h}!CreatePaths@{CreatePaths}}
+\index{CreatePaths@{CreatePaths}!pathfinder\_C.h@{pathfinder\_C.h}}
+\doxysubsubsection{\texorpdfstring{CreatePaths()}{CreatePaths()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Create\+Paths (\begin{DoxyParamCaption}\item[{const H\+F\+::\+Spatial\+Structures\+::\+Graph $\ast$}]{g,  }\item[{const int $\ast$}]{start,  }\item[{const int $\ast$}]{end,  }\item[{H\+F\+::\+Spatial\+Structures\+::\+Path $\ast$$\ast$}]{out\+\_\+path\+\_\+ptr\+\_\+holder,  }\item[{H\+F\+::\+Spatial\+Structures\+::\+Path\+Member $\ast$$\ast$}]{out\+\_\+path\+\_\+member\+\_\+ptr\+\_\+holder,  }\item[{int $\ast$}]{out\+\_\+sizes,  }\item[{int}]{num\+\_\+paths }\end{DoxyParamCaption})}
+
+
+
+Create multiple paths from start to end in C++. both out\+\_\+ members return as arrays of pointers, with one for each element. Sizes of zero represent non-\/existant paths, and will be set to null pointers 
+
+\mbox{\Hypertarget{pathfinder___c_8h_a884a3374d971261a01ccfd3b21e288e5}\label{pathfinder___c_8h_a884a3374d971261a01ccfd3b21e288e5}} 
+\index{pathfinder\_C.h@{pathfinder\_C.h}!DestroyPath@{DestroyPath}}
+\index{DestroyPath@{DestroyPath}!pathfinder\_C.h@{pathfinder\_C.h}}
+\doxysubsubsection{\texorpdfstring{DestroyPath()}{DestroyPath()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Destroy\+Path (\begin{DoxyParamCaption}\item[{H\+F\+::\+Spatial\+Structures\+::\+Path $\ast$}]{path\+\_\+to\+\_\+destroy }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pathfinder___c_8h_aac725d282f4fecd3aba1b3273c26e7e1}\label{pathfinder___c_8h_aac725d282f4fecd3aba1b3273c26e7e1}} 
+\index{pathfinder\_C.h@{pathfinder\_C.h}!GetPathInfo@{GetPathInfo}}
+\index{GetPathInfo@{GetPathInfo}!pathfinder\_C.h@{pathfinder\_C.h}}
+\doxysubsubsection{\texorpdfstring{GetPathInfo()}{GetPathInfo()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{view__analysis___c_8h_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Get\+Path\+Info (\begin{DoxyParamCaption}\item[{H\+F\+::\+Spatial\+Structures\+::\+Path $\ast$}]{p,  }\item[{H\+F\+::\+Spatial\+Structures\+::\+Path\+Member $\ast$$\ast$}]{out\+\_\+member\+\_\+ptr,  }\item[{int $\ast$}]{out\+\_\+size }\end{DoxyParamCaption})}
+
+
+
+Get various information about a path 
+
