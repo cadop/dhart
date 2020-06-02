@@ -1,0 +1,1182 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HumanFactorsCSharp</name>
+    </assembly>
+    <members>
+        <member name="T:HumanFactors.NativeUtils.CVectorAndData">
+            <summary> Pointers to a c++ vector's data, the vector itself, and the size of the vector </summary>
+            <remarks>
+            Carries all data necessary to create an instance of <see cref="T:HumanFactors.NativeUtils.NativeArray`1" />. Note that
+            usage of the name "vector" here corresponds to the C++ Standard Library's std::vector
+            object, not the 3D vector described in <see cref="T:HumanFactors.Vector3D" />
+            </remarks>
+        </member>
+        <member name="F:HumanFactors.NativeUtils.CVectorAndData.data">
+            <summary>
+            Pointer to vector's data in C++. This is what .array maps the span to.
+            </summary>
+        </member>
+        <member name="F:HumanFactors.NativeUtils.CVectorAndData.vector">
+            <summary>
+            Pointer to the vector itself in unmanaged memory Used for deletion.
+            </summary>
+        </member>
+        <member name="F:HumanFactors.NativeUtils.CVectorAndData.size">
+            <summary>
+            The number of elements held in unmanaged memory
+            </summary>
+        </member>
+        <member name="F:HumanFactors.NativeUtils.CVectorAndData.size2">
+            <summary>
+            The size of the second dimension of this vector (if any). 
+            </summary>
+        </member>
+        <member name="M:HumanFactors.NativeUtils.CVectorAndData.#ctor(System.IntPtr,System.IntPtr,System.Int32,System.Int32)">
+            <summary> Initializes a new instance of <see cref="T:HumanFactors.NativeUtils.CVectorAndData" />. </summary>
+            <param name="in_data"> Pointer to the vector's data. </param>
+            <param name="in_vector"> Pointer to the vector itself. </param>
+            <param name="size"> The number of elements within this vector. </param>
+            <param name="size2">
+            The number of elements held in this vector's second dimension. If set to -1, the array
+            is considered 1 dimensional.
+            </param>
+        </member>
+        <member name="M:HumanFactors.NativeUtils.CVectorAndData.IsValid">
+            <summary>
+            Returns true if this CVectorAndData was constructed with valid pointers, and holds atleast one element.
+            </summary>
+            <returns>
+              <c>true</c> if size > 0 and both the data and vector pointers are not equal to IntPtr.Zero otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="T:HumanFactors.NativeUtils.NativeConstants">
+            <summary>
+            Holds global information relevant to interop.
+            </summary>
+        </member>
+        <member name="F:HumanFactors.NativeUtils.NativeConstants.DLLPath">
+            <summary>
+            Relative path to the humanfactors DLL.
+            </summary>
+        </member>
+        <member name="T:HumanFactors.NativeUtils.HelperFunctions">
+            <summary>
+            Contains some functions useful for interop.
+            </summary>
+        </member>
+        <member name="M:HumanFactors.NativeUtils.HelperFunctions.MarshalUnmananagedArray2Struct``1(System.IntPtr,System.Int32,``0[]@)">
+            <summary> Copy an array of structs from unmanaged memory into managed memory </summary>
+            <typeparam name="T"> The type of struct to copy </typeparam>
+            <param name="unmanagedArray"> Pointer to the array in unmanaged memory. </param>
+            <param name="length"> Number of elements in the unmanaged array. </param>
+            <param name="mangagedArray"> An output parameter for the managed array to write to. This will be resized.</param>
+            <returns> The new array of structs in managed memory. </returns>
+        </member>
+        <member name="M:HumanFactors.NativeUtils.HelperFunctions.FlattenVectorArray(System.Collections.Generic.IEnumerable{HumanFactors.Vector3D})">
+            <summary>
+            Flatten a given vector array into an array of floats. Useful for preparing for Pinvoke
+            </summary>
+            <param name="vectors">The array of vectors to flatten</param>
+            <returns>An array of floats 3x as big as the array of vectors. </returns>
+        </member>
+        <member name="M:HumanFactors.NativeUtils.HelperFunctions.FloatArrayToVectorArray(System.Single[],System.Boolean[])">
+            <summary>
+            Convert a flat array of floats into a vector of points where <paramref
+            name="float_array" /> is true
+            </summary>
+            <param name="float_array">
+            The array of floats. Every 3 values should correspond to a single Vector3D
+            </param>
+            <param name="result_array">
+            Length must be equal to the length of <paramref name="float_array" /> / 3. If the <c>
+            false </c> then the Vector3D at this index will be set to null. Otherwise, it will be
+            converted from the float array.
+            </param>
+            <returns> An array of Vector3D </returns>
+            <exception cref="T:System.ArgumentException">
+            The number of elements in <paramref name="result_array" /> is not equal to the number of
+            elements in <paramref name="float_array" />/3
+            </exception>
+        </member>
+        <member name="T:HumanFactors.NativeUtils.NativeObject">
+            <summary>
+            An object that holds a pointer to unmanaged memory or some other resource that must be freed.
+            Safehandle, but is able to report size to the garbage collector to improve performance.
+            </summary>
+            <remarks>All uses of pointers in this library will be wrapped by this, since it ensures that no memory is leaked
+            under any circumstances. </remarks>
+        </member>
+        <member name="F:HumanFactors.NativeUtils.NativeObject.pressure">
+            <summary>
+            The size of the object pointed to in unmanaged memory in bytes. Used to exert pressure on the GC. 
+            While not mandatory, accurately setting this will improve the performance of the garbage collector.
+            </summary>
+        </member>
+        <member name="P:HumanFactors.NativeUtils.NativeObject.Pointer">
+            <summary> Pointer to the object in unmanaged memory. </summary>
+        </member>
+        <member name="M:HumanFactors.NativeUtils.NativeObject.#ctor(System.IntPtr,System.Int32)">
+            <summary>
+            Create a new Native Object to manage the lifetime of the object pointed to by <paramref name="in_native_pointer" />.
+            </summary>
+            <param name="in_native_pointer"> Pointer to the held object in unmanaged memory.</param>
+            <param name="in_pressure">
+            The size of the unmanaged object in bytes. This is used for tuning the garbage
+            collector. If this is 0 or lower, the garbage collector will be unaffected.
+            </param>
+        </member>
+        <member name="P:HumanFactors.NativeUtils.NativeObject.IsInvalid">
+            <summary>
+            There is no way to invalidate this class without destroying it, so will always return
+            <c> false </c>
+            </summary>
+        </member>
+        <member name="M:HumanFactors.NativeUtils.NativeObject.Finalize">
+            <summary>
+            Finalizes an instance of the <see cref="T:HumanFactors.NativeUtils.NativeObject" /> by removing the pressure
+            applied in the constructor.
+            </summary>
+        </member>
+        <member name="T:HumanFactors.NativeUtils.NativeArray`1">
+            <summary>
+            A NativeObject that owns a readable array in unmanaged memory accessible through the .array member.
+            </summary>
+            <typeparam name="T"> The type of the array pointed to in unmanaged memory. </typeparam>
+        </member>
+        <member name="M:HumanFactors.NativeUtils.NativeArray`1.CalcTSize(HumanFactors.NativeUtils.CVectorAndData,System.Int32)">
+            <summary> Calculate the size of our struct so we can properly set the pressure </summary>
+            <returns> The size of the struct in bytes </returns>
+            <remarks>
+            The size of <typeparamref name="T" /> is automatically calculated and multiplied by the
+            number of elements to get the number of bytes occupied by this object in unmanaged
+            memory. This ignores the inherent size of a C++ vector but is accurate enough for the
+            garbage collector.
+            </remarks>
+        </member>
+        <member name="P:HumanFactors.NativeUtils.NativeArray`1.array">
+            <summary>
+            Read only access to this unmanaged array as a <see cref="T:System.Span`1"/>.
+            </summary>
+            <returns>A <see cref="T:System.Span`1"/> referencing the entirety of the unmanaged array.</returns>
+            <remarks>
+            This only returns a reference to the unmanaged array, not a copy. If you want to copy
+            the array, use the <see cref="M:HumanFactors.NativeUtils.NativeArray`1.CopyArray" /> method.
+            </remarks>
+        </member>
+        <member name="M:HumanFactors.NativeUtils.NativeArray`1.CopyArray">
+            <summary> Marshal the unmanaged array pointed to by this object into a managed array.</summary>
+            <returns>A deep copy of the unmanaged array in managed memory. </returns>
+            <remarks>
+            In most cases it is recommended to use the <see cref="P:HumanFactors.NativeUtils.NativeArray`1.array" /> property, as it saves
+            time and memory by not copying the data into managed memory.
+            </remarks>
+        </member>
+        <member name="F:HumanFactors.NativeUtils.NativeArray`1.ptrs">
+            <summary>
+            Data and vector pointers. Used for the construction of new spans and the freeing of
+            resources when this object is finalized.
+            </summary>
+        </member>
+        <member name="P:HumanFactors.NativeUtils.NativeArray`1.size">
+            <summary> The number of elements in the array. </summary>
+        </member>
+        <member name="M:HumanFactors.NativeUtils.NativeArray`1.#ctor(HumanFactors.NativeUtils.CVectorAndData,System.Int32)">
+            <summary> Construct a new native array to wrap an unmanaged array in C++ </summary>
+            <param name="ptrs"> Information about the vector to wrap </param>
+            <param name="size">
+            The size in bytes of this array in unmanaged memory. If set to -1, the size will
+            automatically be calculated.
+            </param>
+        </member>
+        <member name="T:HumanFactors.NativeUtils.NativeArray2D`1">
+            <summary> A wrapper for a two dimensional array in unmanaged memory. </summary>
+            <typeparam name="T"> The type of object pointed to in unmanaged memory. </typeparam>
+            <seealso cref="T:HumanFactors.NativeUtils.NativeArray`1" />
+        </member>
+        <member name="P:HumanFactors.NativeUtils.NativeArray2D`1.array">
+            <summary> Get the entire array as a flattened one dimensional array. </summary>
+        </member>
+        <member name="P:HumanFactors.NativeUtils.NativeArray2D`1.Item(System.Int32)">
+            <summary> Get a reference to a row of this array. </summary>
+            <value> The <see cref="T:System.Span`1" />. </value>
+            <param name="i"> The row to reference. </param>
+            <returns>
+            A new span from the beginning of row[ <paramref name="i" />] to the end of row[
+            <paramref name="i" />.
+            </returns>
+        </member>
+        <member name="M:HumanFactors.NativeUtils.NativeArray2D`1.#ctor(HumanFactors.NativeUtils.CVectorAndData)">
+            <summary> Initializes a new instance of the <see cref="T:HumanFactors.NativeUtils.NativeArray2D`1" /> class. </summary>
+            <param name="ptrs"> Must have size2 set to a value greater than one. </param>
+        </member>
+        <member name="T:HumanFactors.NativeUtils.CommonNativeArrays.ManagedFloatArray">
+            <summary>
+            Contains an array of floats in managed memory
+            </summary>
+        </member>
+        <member name="T:HumanFactors.NativeUtils.CommonNativeArrays.NativeMethods">
+            <summary>
+            Native methods for interacting with the common arrays.
+            </summary>
+        </member>
+        <member name="M:HumanFactors.NativeUtils.CommonNativeArrays.NativeMethods.DestroyFloatVector(System.IntPtr)">
+            <summary>Destroys float vector pointed to by <paramref name="ptr"/>.</summary>
+            <param name="ptr">The pointer to delete.</param>
+            <returns>HF_STATUS.OK if successful</returns>
+        </member>
+        <member name="T:HumanFactors.Exceptions.HF_STATUS">
+             <summary>
+             Common error codes to convey the state of the program.
+             </summary>
+            <remarks> Used as the return type for most native functions. </remarks>
+        </member>
+        <member name="F:HumanFactors.Exceptions.HF_STATUS.OK">
+            <summary>
+            The equested operation executed successfully.
+            </summary>
+        </member>
+        <member name="F:HumanFactors.Exceptions.HF_STATUS.NOT_IMPLEMENTED">
+            <summary>
+            This functionality has not yet been implemented. This should not be seen at all in release.
+            </summary>
+        </member>
+        <member name="F:HumanFactors.Exceptions.HF_STATUS.GENERIC_ERROR">
+            <summary>
+            A generic error code often used as a catch all. Instances of this code being returned
+            should be made more specific using another error code.
+            </summary>
+        </member>
+        <member name="F:HumanFactors.Exceptions.HF_STATUS.NOT_FOUND">
+            <summary>
+            The file at the given path was not found.
+            </summary>
+        </member>
+        <member name="F:HumanFactors.Exceptions.HF_STATUS.INVALID_MESH">
+            <summary>
+            The provided mesh was invalid.
+            </summary>
+        </member>
+        <member name="F:HumanFactors.Exceptions.HF_STATUS.NO_GRAPH">
+            <summary>
+            No graph was produced by the given input.
+            </summary>
+        </member>
+        <member name="F:HumanFactors.Exceptions.HF_STATUS.INVALID_COST">
+            <summary>
+            Unused.
+            </summary>
+        </member>
+        <member name="F:HumanFactors.Exceptions.HF_STATUS.MISSING_DEPEND">
+            <summary>
+            An external dependency required for this function to execute was not found.
+            </summary>
+        </member>
+        <member name="F:HumanFactors.Exceptions.HF_STATUS.OUT_OF_MEMORY">
+            <summary>
+            Ran out of memory during execution, usually because the dataset was too big.
+            </summary>
+        </member>
+        <member name="F:HumanFactors.Exceptions.HF_STATUS.MALFORMED_DB">
+            <summary>
+            Unused.
+            </summary>
+        </member>
+        <member name="F:HumanFactors.Exceptions.HF_STATUS.DB_BUSY">
+            <summary>
+            Unused.
+            </summary>
+        </member>
+        <member name="F:HumanFactors.Exceptions.HF_STATUS.INVALID_PTR">
+            <summary>
+            One or more of the given pointers was invalid.
+            </summary>
+        </member>
+        <member name="F:HumanFactors.Exceptions.HF_STATUS.OUT_OF_RANGE">
+            <summary>
+            The requested element was out of the range of the container.
+            </summary>
+        </member>
+        <member name="F:HumanFactors.Exceptions.HF_STATUS.NO_PATH">
+            <summary>
+            No path could be found between the start and endpoints given. Used exclusively for pathfinding.
+            </summary>
+        </member>
+        <member name="T:HumanFactors.Exceptions.InvalidMeshException">
+            <summary>
+            The file passed was not an obj file, or was an invalid obj file.
+            </summary>
+        </member>
+        <member name="M:HumanFactors.Exceptions.InvalidMeshException.#ctor(System.String)">
+            <summary>Initializes a new instance of the <see cref="T:HumanFactors.Exceptions.InvalidMeshException" /> class.</summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="T:HumanFactors.Extensions">
+            <summary>
+            Some extension functions that are used internally.
+            </summary>
+        </member>
+        <member name="M:HumanFactors.Extensions.IsFinite(System.Single)">
+            <summary>
+            Determines whether this float is finite.
+            </summary>
+            <param name="s">The float to check.</param>
+            <returns>
+              <c>true</c> if the specified float is finite; otherwise, <c>false</c>.
+            </returns>
+            <remarks> A float is finite if it is not equal to NAN, positive infinity, or negative infinity.</remarks>
+        </member>
+        <member name="T:HumanFactors.Vector3D">
+            <summary>
+            A three dimensional vector.
+            </summary>
+        </member>
+        <member name="M:HumanFactors.Vector3D.#ctor(System.Single,System.Single,System.Single)">
+            <summary>
+            Initializes a new instance <see cref="T:HumanFactors.Vector3D"/>.
+            </summary>
+            <param name="X">The x coordinate.</param>
+            <param name="Y">The y coordinate.</param>
+            <param name="Z">The z coordinate.</param>
+        </member>
+        <member name="P:HumanFactors.Vector3D.Item(System.Int32)">
+            <summary>
+            Get a component of this vector as if it were an array of 3 floats
+            </summary>
+            <value>
+            The index of the coordinate to get.
+            </value>
+            <param name="i">Index of the coordinate</param>
+            <returns> The x coordinate for 0, the y coordinate for 1, the z coordinate for 2 </returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"> the input is greater than 2 or less than 0 </exception>
+        </member>
+        <member name="M:HumanFactors.Vector3D.ToArray">
+            <summary>
+            Convert this vector3D to an array of floats
+            </summary>
+            <returns>A 3 element array containing X,Y, and Z</returns>
+        </member>
+        <member name="M:HumanFactors.Vector3D.DistanceTo(HumanFactors.Vector3D)">
+            <summary>
+            Calculate the distance between this vector and <paramref name="V2"/>
+            </summary>
+            <param name="V2">The vector to calculate distance to </param>
+            <returns> The distance between this vector and <paramref name="V2"/> </returns>
+        </member>
+        <member name="M:HumanFactors.Vector3D.IsValid">
+            <summary>
+            Check if this point is valid.
+            </summary>
+            <returns><see langword="false"/> if the point contains NaN, </returns>
+            <remarks> A point is considered valid if all of its coordinates are finite <see cref="M:HumanFactors.Extensions.IsFinite(System.Single)"/> </remarks>
+        </member>
+        <member name="T:HumanFactors.SpatialStructures.CSRInfo">
+            <summary> Contains info necessary to reconstruct or access a CSR </summary>
+        </member>
+        <member name="F:HumanFactors.SpatialStructures.CSRInfo.nnz">
+            <summary> The number of nonzeros contained by the graph. </summary>
+        </member>
+        <member name="F:HumanFactors.SpatialStructures.CSRInfo.cols">
+            <summary> The number of columns in the graph. </summary>
+        </member>
+        <member name="F:HumanFactors.SpatialStructures.CSRInfo.rows">
+            <summary> The number of rows in the graph </summary>
+        </member>
+        <member name="F:HumanFactors.SpatialStructures.CSRInfo.data">
+            <summary> A pointer to the graph's data array </summary>
+        </member>
+        <member name="F:HumanFactors.SpatialStructures.CSRInfo.outer_indices">
+            <summary> A pointer to the graph's outer_indices array. </summary>
+        </member>
+        <member name="F:HumanFactors.SpatialStructures.CSRInfo.inner_indices">
+            <summary> A pointer to the graph's inner indices array. </summary>
+        </member>
+        <member name="M:HumanFactors.SpatialStructures.CSRInfo.#ctor(System.Int32,System.Int32,System.Int32,System.IntPtr,System.IntPtr,System.IntPtr)">
+            <summary> Initializes a new instance of the <see cref="T:HumanFactors.SpatialStructures.CSRInfo" /> struct. </summary>
+            <param name="nnz"> The number of non-zeros </param>
+            <param name="cols"> The number of columns. </param>
+            <param name="rows"> The number of rows. </param>
+            <param name="data"> Pointer to the CSR's data array. </param>
+            <param name="outer_indices"> Pointer to the CSR's outer_indices array. </param>
+            <param name="inner_indices"> Pointer to the CSR's inner_indices array. </param>
+        </member>
+        <member name="T:HumanFactors.SpatialStructures.GraphEdgeAggregation">
+            <summary> Methods for aggregating edge costs per node from the graph </summary>
+        </member>
+        <member name="T:HumanFactors.SpatialStructures.Graph">
+            <summary> Holds a graph in unmanaged memory as a CSR. </summary>
+        </member>
+        <member name="F:HumanFactors.SpatialStructures.Graph.CSRPointers">
+            <summary> This graph's CSR pointers. </summary>
+        </member>
+        <member name="M:HumanFactors.SpatialStructures.Graph.#ctor(System.IntPtr)">
+            <summary> Wrap a graph that already exists in unmanaged memory. </summary>
+            <param name="GraphPtr"> Pointer to the grpah in unmanaged memory </param>
+        </member>
+        <member name="M:HumanFactors.SpatialStructures.Graph.#ctor">
+            <summary> Construct a new empty graph in unmanaged memory. </summary>
+        </member>
+        <member name="M:HumanFactors.SpatialStructures.Graph.AddEdge(HumanFactors.Vector3D,HumanFactors.Vector3D,System.Single)">
+            <summary> Add a new edge to the graph </summary>
+            <param name="parent"> x,y,z location for the parent </param>
+            <param name="child"> x,y,z location for the child </param>
+            <param name="cost"> cost for parent to child </param>
+        </member>
+        <member name="M:HumanFactors.SpatialStructures.Graph.AddEdge(System.Int32,System.Int32,System.Single)">
+            <summary> Add a new edge to the graph </summary>
+            <param name="parent_id"> ID of the parent node </param>
+            <param name="child_id"> ID of the child node </param>
+            <param name="cost"> cost for parent to child </param>
+        </member>
+        <member name="M:HumanFactors.SpatialStructures.Graph.getNodes">
+            <summary> Get an array of of the graph's current nodes </summary>
+            <returns> An array of the graph's nodes. </returns>
+        </member>
+        <member name="M:HumanFactors.SpatialStructures.Graph.CompressToCSR">
+            <summary> Compress the graph, and get pointers to a CSR representation of it. </summary>
+            <remarks>
+            The CSR pointers can be mapped to after retrieved from C++ using <see cref="T:System.Span`1" />.
+            </remarks>
+        </member>
+        <member name="M:HumanFactors.SpatialStructures.Graph.AggregateEdgeCosts(HumanFactors.SpatialStructures.GraphEdgeAggregation,System.Boolean)">
+            <summary>
+            Summarize the edgecosts for every node in the graph. This will compress the graph if not
+            compressed already.
+            </summary>
+            <param name="type"> </param>
+            <param name="directed">
+            Whether or not the graph is directed. If set to <see langword="true" /> each nodes's
+            score will only consider incomning edges. Otherwise, each node's score will consider
+            outgoing and incoming edges.
+            </param>
+            <returns>
+            An array of scores, in which each element corresponds to a node in the graph sorted by ID.
+            </returns>
+        </member>
+        <member name="M:HumanFactors.SpatialStructures.Graph.GetNodeID(HumanFactors.Vector3D)">
+            <summary>
+            Gets the ID of a node in the graph.
+            </summary>
+            <param name="node">The node to get the ID for.</param>
+            <returns>The ID of the node, or -1 if the node isn't in the graph.</returns>
+        </member>
+        <member name="T:HumanFactors.SpatialStructures.Node">
+            <summary>
+            A point in space. Used internally by the graph generator.
+            </summary>
+        </member>
+        <member name="F:HumanFactors.SpatialStructures.Node.x">
+            <summary>
+            The X coordinate.
+            </summary>
+        </member>
+        <member name="F:HumanFactors.SpatialStructures.Node.y">
+            <summary>
+            The Y coordinate.
+            </summary>
+        </member>
+        <member name="F:HumanFactors.SpatialStructures.Node.z">
+            <summary>
+            The Z coordinate
+            </summary>
+        </member>
+        <member name="F:HumanFactors.SpatialStructures.Node.type">
+            <summary>
+            Unused.
+            </summary>
+        </member>
+        <member name="F:HumanFactors.SpatialStructures.Node.id">
+            <summary>
+            The ID of this node.
+            </summary>
+        </member>
+        <member name="T:HumanFactors.SpatialStructures.NodeList">
+            <summary>
+            A list of nodes from a graph in unmanaged memory.
+            </summary>
+        </member>
+        <member name="M:HumanFactors.SpatialStructures.NodeList.#ctor(HumanFactors.NativeUtils.CVectorAndData)">
+            <summary>
+            Initializes a new instance of the <see cref="T:HumanFactors.SpatialStructures.NodeList"/> class.
+            </summary>
+            <param name="in_vector">The vector to create this nodelist from.</param>
+        </member>
+        <member name="T:HumanFactors.Geometry.NativeMethods">
+            <summary>
+            Native methods for the Geometry namespace
+            </summary>
+        </member>
+        <member name="F:HumanFactors.Geometry.NativeMethods.dllpath">
+            <summary>
+            Path to the HumanFactors dll copied from <see cref="T:HumanFactors.NativeUtils.NativeConstants"/>.
+            </summary>
+        </member>
+        <member name="M:HumanFactors.Geometry.NativeMethods.C_LoadOBJ(System.String,System.Single,System.Single,System.Single)">
+            <summary>
+            Attempt to load the OBJ at the given filepath. If a rotation is specifed, the obj will be rotated after
+            it is loaded.
+            </summary>
+            <param name="obj_path">Filepath for the obj to load</param>
+            <param name="xrot"> Degrees to rotate the mesh on the z axis. </param>
+            <param name="yrot"> Degrees to rotate the mesh on the y axis.</param>
+            <param name="zrot"> Degrees to rotate the mesh on the z axis. </param>
+            <returns> A pointer to a valid instance of meshinfo from C++ </returns>
+        </member>
+        <member name="M:HumanFactors.Geometry.NativeMethods.C_StoreMesh(System.Collections.Generic.IEnumerable{System.Single},System.Collections.Generic.IEnumerable{System.Int32},System.String,System.Int32)">
+            <summary>
+            Store a mesh in managed memory.
+            </summary>
+            <returns>A pointer to the mesh in unmanaged memory</returns>
+            <exception cref="T:HumanFactors.Exceptions.InvalidMeshException">That did not represent a valid mesh</exception>
+        </member>
+        <member name="M:HumanFactors.Geometry.NativeMethods.C_RotateMesh(System.IntPtr,System.Single,System.Single,System.Single)">
+            <summary>
+            Rotate this mesh in C++
+            </summary>
+        </member>
+        <member name="M:HumanFactors.Geometry.NativeMethods.LoadOBJ(System.String,System.Int32,System.Single,System.Single,System.Single,System.IntPtr@)">
+            <summary>
+            Loads an OBJ file into meshinfo at the given instance 
+            </summary>
+        </member>
+        <member name="T:HumanFactors.Geometry.MeshInfo">
+            <summary> Wrapper for a mesh in unmanaged memory. </summary>
+        </member>
+        <member name="M:HumanFactors.Geometry.MeshInfo.CalculatePresure">
+            <summary> Calculates the mesh's pressure. Unimplemented for now </summary>
+        </member>
+        <member name="M:HumanFactors.Geometry.MeshInfo.ReleaseHandle">
+            <summary> Executes the code required to delete the mesh </summary>
+            <returns>
+            true if the handle is released successfully; otherwise, in the event of a catastrophic
+            failure, false. In this case, it generates a releaseHandleFailed MDA Managed Debugging Assistant.
+            </returns>
+        </member>
+        <member name="M:HumanFactors.Geometry.MeshInfo.#ctor(System.IntPtr,System.Int32)">
+            <summary> Create a new meshinfo instance from the given pointer. </summary>
+            <param name="pointer"> Pointer to an existing meshinfo instance in unmanaged memory. </param>
+            <remarks>
+            This shouldn't be called directly unless pointer is gauranteed to point to a valid mesh
+            in unmanaged memory.
+            </remarks>
+        </member>
+        <member name="M:HumanFactors.Geometry.MeshInfo.#ctor(System.Int32[],System.Single[],System.String,System.Int32)">
+            <summary>
+            Create a new instance of <see cref="T:HumanFactors.Geometry.MeshInfo" /> from an array of vertices and triangle indices.
+            </summary>
+            <param name="indices">
+            An array of indices for the triangles in the mesh. Each integer should correspond to 3
+            values in <paramref name="vertices" />, and every 3 integers should represent a complete
+            triangle for the mesh.
+            </param>
+            <param name="vertices">
+            Vertices of the mesh. Each 3 floats represent the X,Y, and Z of a point in space.
+            </param>
+            <param name="name"> The name of the mesh. Unused for now. </param>
+            <param name="id">
+            The unique identifier for this mesh. If -1, this will automatically be set
+            </param>
+            <exception cref="T:HumanFactors.Exceptions.InvalidMeshException">
+            The input <paramref name="indices" /> and <paramref name="vertices" /> result in an
+            invalid mesh.
+            </exception>
+        </member>
+        <member name="M:HumanFactors.Geometry.MeshInfo.RotateMesh(System.Single,System.Single,System.Single)">
+            <summary> Rotates this mesh by the desired magnitude. </summary>
+            <param name="xrot"> Degrees to rotate the mesh on the z axis. </param>
+            <param name="yrot"> Degrees to rotate the mesh on the y axis. </param>
+            <param name="zrot"> Degrees to rotate the mesh on the z axis. </param>
+        </member>
+        <member name="M:HumanFactors.Geometry.MeshInfo.RotateMesh(HumanFactors.Vector3D)">
+            <summary> Rotate this mesh by the desired magnitude. </summary>
+            <param name="rotation"> How far to rotate the mesh on the X,Y, and Z, axises in degrees. </param>
+        </member>
+        <member name="T:HumanFactors.Geometry.CommonRotations">
+            <summary>
+            Contains several constants for frequently used rotations.
+            </summary>
+        </member>
+        <member name="F:HumanFactors.Geometry.CommonRotations.Zup_To_Yup">
+            <summary>
+            To convert a mesh from Z-Up to Y-Up
+            </summary>
+        </member>
+        <member name="F:HumanFactors.Geometry.CommonRotations.Yup_To_Zup">
+            <summary>
+            To convert a mesh from Y-Up to Z-Up.
+            </summary>
+        </member>
+        <member name="T:HumanFactors.Geometry.OBJLoader">
+            <summary>
+            Contains functions to load a mesh from an obj file.
+            </summary>
+        </member>
+        <member name="M:HumanFactors.Geometry.OBJLoader.LoadOBJ(System.String,System.Single,System.Single,System.Single)">
+            <summary>
+            Attempt to load the OBJ at the given filepath. If a rotation is specifed, the mesh will be rotated
+            </summary>
+            <param name="path"> Filepath for the obj to load. </param>
+            <param name="xrot"> Degrees to rotate the mesh on the z axis. </param>
+            <param name="yrot"> Degrees to rotate the mesh on the y axis. </param>
+            <param name="zrot"> Degrees to rotate the mesh on the z axis. </param>
+            <returns>
+            A new instance of <see cref="T:HumanFactors.Geometry.MeshInfo" /> holding a reference to the unmanaged mesh.
+            </returns>
+            <exception cref="T:System.IO.FileNotFoundException">
+            No file was found at the given path.
+            </exception>
+            <exception cref="T:HumanFactors.Exceptions.InvalidMeshException">
+            The file at the given path did not represent a valid OBJ.
+            </exception>
+            <example>
+            Loading a mesh from plane.obj with no rotation.
+            <code> MeshInfo MI = OBJLoader.LoadOBJ("plane.obj"); </code>
+            </example>
+        </member>
+        <member name="M:HumanFactors.Geometry.OBJLoader.LoadOBJ(System.String,HumanFactors.Vector3D)">
+             <summary>
+             Attempt to load the OBJ at the given filepath. If a rotation is specifed, the mesh will be rotated.
+             </summary>
+             <param name="path"> Filepath for the obj to load </param>
+             <param name="rotation"> X,Y, and Z values in degrees to rotate the mesh </param>
+             <returns>
+             A new instance of <see cref="T:HumanFactors.Geometry.MeshInfo" /> holding a reference to the unmanaged mesh.
+             </returns>
+             <exception cref="T:System.IO.FileNotFoundException">
+             No file was found at the given path
+             </exception>
+             <exception cref="T:HumanFactors.Exceptions.InvalidMeshException">
+             The file at the given path was not a valid OBJ
+             </exception>
+             <example>
+             Using a predefined rotation from  <see cref="T:HumanFactors.Geometry.CommonRotations"/> to load a mesh then convert it from Y-up to Z-up
+             <code>MeshInfo MI = OBJLoader.LoadOBJ("plane.obj", CommonRotations.Yup_To_Zup)</code>
+             </example>
+            <remarks>This overload is useful in combination with <see cref="T:HumanFactors.Geometry.CommonRotations"/>. </remarks>
+        </member>
+        <member name="T:HumanFactors.RayTracing.EmbreeBVH">
+            <summary>
+            Contains A BVH for use with the <see cref="T:HumanFactors.RayTracing.EmbreeRaytracer"/>.
+            </summary>
+        </member>
+        <member name="M:HumanFactors.RayTracing.EmbreeBVH.#ctor(HumanFactors.Geometry.MeshInfo)">
+            <summary>
+            Create a new BVH for the mesh located at <paramref name="MI"/>
+            </summary>
+            <param name="MI">Mesh to use for BVH construction</param>
+        </member>
+        <member name="T:HumanFactors.RayTracing.EmbreeRaytracer">
+            <summary> A wrapper for Intel's Embree raytracing library. </summary>
+        </member>
+        <member name="M:HumanFactors.RayTracing.EmbreeRaytracer.IntersectForPoint(HumanFactors.RayTracing.EmbreeBVH,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Fire a single ray, and get a point in return if it intersects. If it misses, an invalid
+            point is returned.
+            </summary>
+            <param name="bvh"> Geometry to intersect. </param>
+            <param name="x"> Origin X component </param>
+            <param name="y"> Origin Y component </param>
+            <param name="z"> Origin Z component </param>
+            <param name="dx"> Direction X component </param>
+            <param name="dy"> Direction Y component </param>
+            <param name="dz"> Direction Z component </param>
+            <param name="max_distance">
+            Maximum distance to consider for intersections. Set to -1 for infinite
+            </param>
+            <returns>
+            A Vector3D containing the hitpoint. If no hit was detected, the point will be invalid.
+            This can easily be checked using Vector3D's <see cref="M:HumanFactors.Vector3D.IsValid" />
+            </returns>
+        </member>
+        <member name="M:HumanFactors.RayTracing.EmbreeRaytracer.IntersectForPoint(HumanFactors.RayTracing.EmbreeBVH,HumanFactors.Vector3D,HumanFactors.Vector3D,System.Single)">
+            <summary>
+            Fire a single ray from origin in direction, and get the hitpoint if it intersects.
+            </summary>
+            <param name="bvh"> An embree bvh containing the geometry to intersect with </param>
+            <param name="origin"> x,y,z location where the ray is fired from </param>
+            <param name="direction"> x,y,z direction for the ray to be fired in </param>
+            <param name="max_distance"> Maximum distance to consider for intersection </param>
+            <returns>
+            <returns> A vector of <see cref="T:HumanFactors.Vector3D" /> for the hitpoint of each ray fired. If a
+            ray didn't hit, its point will be invalid, checkable using <see
+            cref="M:HumanFactors.Vector3D.IsValid" />. </returns>
+            </returns>
+        </member>
+        <member name="M:HumanFactors.RayTracing.EmbreeRaytracer.IntersectForPoints(HumanFactors.RayTracing.EmbreeBVH,System.Collections.Generic.IEnumerable{HumanFactors.Vector3D},System.Collections.Generic.IEnumerable{HumanFactors.Vector3D},System.Single)">
+            <summary> Fire multiple rays and recieve hitpoints in return. </summary>
+            <param name="bvh"> Geometry to intersect with. </param>
+            <param name="origins"> A list of x,y,z coordinates to fire rays from. </param>
+            <param name="directions"> A list of x,y,z directions to fire in. </param>
+            <param name="max_distance"> Maximum distance to consider for intersection. </param>
+            <returns>
+            A vector of <see cref="T:HumanFactors.Vector3D" /> for the hitpoint of each ray fired. If a ray didn't
+            hit, its point will be invalid, checkable using <see cref="M:HumanFactors.Vector3D.IsValid" />.
+            </returns>
+            <remarks>
+            <para> Can be fired in 3 configurations: </para>
+            <list type="bullet">
+            <item>
+            <font color="#2a2a2a"> Equal amount of directions/origins: Fire a ray for every pair of
+            origin/direction in order. i.e. (origin[0], direction[0]), (origin[1], direction[1]) </font>
+            </item>
+            <item>
+            <font color="#2a2a2a"> One direction, multiple origins: Fire a ray in the given
+            direction from each origin point in origins. </font>
+            </item>
+            <item>
+            <font color="#2a2a2a"> One origin, multiple directions: Fire a ray from the origin point
+            in each direction in directions </font>
+            </item>
+            </list>
+            </remarks>
+            <exception cref="T:System.ArgumentException">
+            Length of <paramref name="directions" /> and <paramref name="origins" /> did not match
+            any of the valid cases.
+            </exception>
+        </member>
+        <member name="M:HumanFactors.RayTracing.EmbreeRaytracer.IntersectForDistance(HumanFactors.RayTracing.EmbreeBVH,HumanFactors.Vector3D,HumanFactors.Vector3D,System.Single)">
+            <summary>
+            Fire a single ray and get the distance to its hit and the meshID if it hit anything. If
+            it missed, then distance will be -1.
+            </summary>
+            <param name="bvh"> An embree bvh containing the geometry to intersect with </param>
+            <param name="origin"> x,y,z locations where is fired from </param>
+            <param name="direction"> x,y,z direction for the ray to be fired in </param>
+            <param name="max_distance"> Maximum distance to consider for intersection </param>
+            <returns>
+            A <see cref="T:HumanFactors.RayTracing.RayResult" /> with a distance to the hitpoint and meshid it hit. If the
+            distance is equal to -1, then the ray missed
+            </returns>
+        </member>
+        <member name="M:HumanFactors.RayTracing.EmbreeRaytracer.IntersectForDistances(HumanFactors.RayTracing.EmbreeBVH,System.Collections.Generic.IEnumerable{HumanFactors.Vector3D},System.Collections.Generic.IEnumerable{HumanFactors.Vector3D},System.Single)">
+            <summary> Fire multiple rays for distance and meshid. </summary>
+            <param name="bvh">
+            An <see cref="T:HumanFactors.RayTracing.EmbreeBVH" /> containing the geometry to intersect with.
+            </param>
+            <param name="origins"> x,y,z locations where rays are fired from. </param>
+            <param name="directions"> x,y,z direction for the ray to be fired in. </param>
+            <param name="max_distance"> Maximum distance to consider for intersection. </param>
+            <returns>
+            <see cref="T:HumanFactors.RayTracing.RayResults" /> for every ray fired in order. Rays that missed will have a
+            distance and meshid of -1.
+            </returns>
+            <remarks>
+            <para> Can be fired in 3 configurations: </para>
+            <list type="bullet">
+            <item>
+            <font color="#2a2a2a"> Equal amount of directions/origins: Fire a ray for every pair of
+            origin/direction in order. i.e. (origin[0], direction[0]), (origin[1], direction[1]). </font>
+            </item>
+            <item>
+            <font color="#2a2a2a"> One direction, multiple origins: Fire a ray in the given
+            direction from each origin point in origins. </font>
+            </item>
+            <item>
+            <font color="#2a2a2a"> One origin, multiple directions: Fire a ray from the origin point
+            in each direction in directions. </font>
+            </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:HumanFactors.RayTracing.EmbreeRaytracer.IntersectOccluded(HumanFactors.RayTracing.EmbreeBVH,System.Collections.Generic.IEnumerable{HumanFactors.Vector3D},System.Collections.Generic.IEnumerable{HumanFactors.Vector3D},System.Single)">
+            <summary>
+            Fire one or more occlusion rays in C++. Occlusion rays are faster than standard rays,
+            however are only capable of returning or not they hit anything.
+            </summary>
+            <param name="bvh"> A valid Embree BVH. </param>
+            <param name="origin"> One or more origins. </param>
+            <param name="direction"> One or more directions. </param>
+            <param name="max_distance">
+            Maximum distance that a ray can travel. Any hits beyond this point are not counted.
+            </param>
+            <returns>
+            An array of <c> true </c> or <c> false </c> values indicating hits or misses respectively.
+            </returns>
+        </member>
+        <member name="M:HumanFactors.RayTracing.NativeMethods.C_IntersectPoints(System.IntPtr,System.Collections.Generic.IEnumerable{HumanFactors.Vector3D},System.Collections.Generic.IEnumerable{HumanFactors.Vector3D},System.Single)">
+            <summary>
+            cs the intersect points.
+            </summary>
+            <param name="ert">The ert.</param>
+            <param name="origins">The origins.</param>
+            <param name="directions">The directions.</param>
+            <param name="max_distance">The maximum distance.</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException">Arguments did not match one of the predefined cases!</exception>
+            <exception cref="T:System.Exception">Multiple rays failed to fire</exception>
+        </member>
+        <member name="T:HumanFactors.RayTracing.RayResult">
+            <summary>
+            Contains distance and mesh_id. Used for returning large amounts of results from the raytracer
+            </summary>
+        </member>
+        <member name="T:HumanFactors.RayTracing.RayResults">
+            <summary>
+            An array of rayresults pointed to in unmanaged memory
+            </summary>
+        </member>
+        <member name="M:HumanFactors.RayTracing.RayResults.#ctor(HumanFactors.NativeUtils.CVectorAndData)">
+            <summary>
+            Initializes a new instance of <see cref="T:HumanFactors.RayTracing.RayResults"/>.
+            </summary>
+            <param name="in_ptr">Info needed to wrap the managed array.</param>
+        </member>
+        <member name="T:HumanFactors.GraphGenerator.GraphGenerator">
+            <summary>
+            Generatea graph of accessible space.
+            </summary>
+        </member>
+        <member name="M:HumanFactors.GraphGenerator.GraphGenerator.GenerateGraph(HumanFactors.RayTracing.EmbreeBVH,HumanFactors.Vector3D,HumanFactors.Vector3D,System.Int32,System.Single,System.Single,System.Single,System.Single,System.Int32,System.Int32)">
+             <summary>
+             Generate a graph of accessible space with the given settings. If no graph can be
+             generated, null will be returned.
+             </summary>
+             <param name="bvh">
+             A valid BVH to conduct the graph generation on. Geometry must be Z-Up.
+             </param>
+             <param name="start_point">
+             The starting point for the graph generator. If this isn't above solid ground, no nodes will
+             be generated.
+             </param>
+             <param name="spacing"> Space between nodes. Lower values will yield more nodes for a higher resolution graph. </param>
+             <param name="max_nodes"> The maximum amount of nodes to generate. </param>
+             <param name="up_step"> Maximum height of a step the graph can traverse. Any steps higher this will be considered inaccessible. </param>
+             <param name="up_slope">
+             Maximum upward slope the graph can traverse in degrees. Any slopes steeper than this
+             will be considered inaccessible.
+             </param>
+             <param name="down_step">
+             Maximum step down the graph can traverse. Any steps steeper than this will be considered inaccessible.
+             </param>
+             <param name="down_slope">
+             The maximum downward slope the graph can traverse. Any slopes steeper than this will be
+             considered inaccessible.
+             </param>
+             <param name="max_step_connections">
+             Multiplier for number of children to generate for each node. Increasing this value will
+             increase the number of edges in the graph, and as a result the amount of memory the
+             algorithm requires.
+             </param>
+             <param name="core_count">
+             Number of cores to use. -1 will use all available cores, and 0 will run a serialized version of the algorithm.
+             </param>
+             <returns> The resulting graph or, If no nodes were generated, null. </returns>
+             <example>
+             <code>
+            MeshInfo Mesh = OBJLoader.LoadOBJ("plane.obj", CommonRotations.Yup_To_Zup);
+            EmbreeBVH BVH = new EmbreeBVH(Mesh);
+            
+            Vector3D start_point = new Vector3D(0, 9000, 1);
+            Vector3D spacing = new Vector3D(1, 1, 1);
+             
+             // A standard graph with a spacing of 1 meter on each side with a maximum of 100 nodes
+            Graph G = HumanFactors.GraphGenerator.GraphGenerator.GenerateGraph(BVH, start_point, spacing, 100);
+            
+             // A graph that cannot traverse stairs
+            Graph G = HumanFactors.GraphGenerator.GraphGenerator.GenerateGraph(BVH, start_point, spacing, 100, up_step:0, downstep:0);
+            
+             // A graph that is able to traverse up 30 degree slopes, but can only traverse down 10 degree slopes
+            Graph G = HumanFactors.GraphGenerator.GraphGenerator.GenerateGraph(BVH, start_point, spacing, 100, up_slope:30, down_slope:10);
+             </code>
+             </example>
+             <remarks>All parameters relating to distances are in meters unless otherwise specified. </remarks>
+        </member>
+        <member name="T:HumanFactors.ViewAnalysis.ViewAggregateType">
+            <summary>
+            The type of aggregation method to use for <see
+            cref="M:HumanFactors.ViewAnalysis.ViewAnalysis.ViewAnalysisAggregate(HumanFactors.RayTracing.EmbreeBVH,System.Collections.Generic.IEnumerable{HumanFactors.Vector3D},System.Int32,System.Single,System.Single,System.Single,HumanFactors.ViewAnalysis.ViewAggregateType)" />.
+            </summary>
+        </member>
+        <member name="F:HumanFactors.ViewAnalysis.ViewAggregateType.COUNT">
+            <summary> The number of rays that hit an object. </summary>
+        </member>
+        <member name="F:HumanFactors.ViewAnalysis.ViewAggregateType.SUM">
+            <summary> The sum of distances from the origin to each hitpoint. </summary>
+        </member>
+        <member name="F:HumanFactors.ViewAnalysis.ViewAggregateType.AVERAGE">
+            <summary> The average of the distance from the origin to each hit point. </summary>
+        </member>
+        <member name="F:HumanFactors.ViewAnalysis.ViewAggregateType.MAX">
+            <summary> The maximum distance from the origin to any hitpoint. </summary>
+        </member>
+        <member name="F:HumanFactors.ViewAnalysis.ViewAggregateType.MIN">
+            <summary> The minimum distance from the origin to any hitpoint. </summary>
+        </member>
+        <member name="T:HumanFactors.ViewAnalysis.ViewAnalysis">
+            <summary> Contains functions for performing view analysis. </summary>
+        </member>
+        <member name="M:HumanFactors.ViewAnalysis.ViewAnalysis.ViewAnalysisAggregate(HumanFactors.RayTracing.EmbreeBVH,System.Collections.Generic.IEnumerable{HumanFactors.Vector3D},System.Int32,System.Single,System.Single,System.Single,HumanFactors.ViewAnalysis.ViewAggregateType)">
+            <summary> Conduct view analysis and aggregate the results for each node. </summary>
+            <param name="bvh"> The Geometry to intersect with. </param>
+            <param name="nodes"> Points to perform view analysis from. </param>
+            <param name="ray_count">
+            Number of rays to fire. Higher values provide more accurate analysis, but increase the runtime.
+            </param>
+            <param name="upward_fov">
+            Maximum angle in degrees above the viewer's eye level that is considered.
+            </param>
+            <param name="downward_fov">
+            Maximum angle in degrees below the viewer's eye level that is considered.
+            </param>
+            <param name="height">
+            Height of the observer. Nodes are offset this distance from the ground before analysis
+            is performed
+            </param>
+            <param name="type">
+            How the distances for all hits should be aggregated. See <see cref="T:HumanFactors.ViewAnalysis.ViewAggregateType"
+            /> for a list of all types and what they do.
+            </param>
+            <returns>
+            An ordered array of floats corresponding to the score for each node in nodes.
+            </returns>
+            <remarks>
+            This function is much lighter in memory than <see
+            cref="M:HumanFactors.ViewAnalysis.ViewAnalysis.ViewAnalysisStandard(HumanFactors.RayTracing.EmbreeBVH,System.Collections.Generic.IEnumerable{HumanFactors.Vector3D},System.Int32,System.Single,System.Single,System.Single)" /> since all operations are done in place on single floats. Use this as a
+            faster alternative if the scores are all that's needed.
+            </remarks>
+        </member>
+        <member name="M:HumanFactors.ViewAnalysis.ViewAnalysis.ViewAnalysisStandard(HumanFactors.RayTracing.EmbreeBVH,System.Collections.Generic.IEnumerable{HumanFactors.Vector3D},System.Int32,System.Single,System.Single,System.Single)">
+            <summary> Conduct view analysis and get the results for each ray hit. </summary>
+            <param name="bvh"> The Geometry to intersect with. </param>
+            <param name="nodes"> Points to perform view analysis from. </param>
+            <param name="ray_count">
+            Number of rays to fire. Higher values provide more accurate analysis, but increase the runtime.
+            </param>
+            <param name="upward_fov">
+            Maximum angle in degrees above the viewer's eye level that is considered.
+            </param>
+            <param name="downward_fov">
+            Maximum angle in degrees below the viewer's eye level that is considered.
+            </param>
+            <param name="height">
+            Height of the observer. Nodes are offset this distance from the ground before analysis
+            is performed.
+            </param>
+            <returns>
+            A 2 dimensional array of results for each node and each ray fired. For example, every
+            ray for node one is located at row 1, and the results for node 2 are located at row 2.
+            </returns>
+            <remarks>
+            Note that the number of rays fired may exactly match <paramref name="ray_count" />
+            depending on the provided field of view restrictions. The hitpoints for each ray in the
+            returned array can be determined using the directions from <see
+            cref="M:HumanFactors.ViewAnalysis.ViewAnalysis.SphericallyDistributeRays(System.Int32,System.Single,System.Single)" />.
+            </remarks>
+        </member>
+        <member name="M:HumanFactors.ViewAnalysis.ViewAnalysis.SphericallyDistributeRays(System.Int32,System.Single,System.Single)">
+            <summary> Distribute directions equally in a sphere. </summary>
+            <param name="num_rays"> The number of rays to generate. </param>
+            <param name="upward_fov"> Maximum angle in degrees upwards to generate . </param>
+            <param name="downward_fov"> Maximum angle in degrees downwards to generate. </param>
+            <returns> An array of equally distributed directions. </returns>
+        </member>
+        <member name="T:HumanFactors.ViewAnalysis.ViewAnalysisResult">
+            <summary> A struct containing the results of a ray intersection. </summary>
+        </member>
+        <member name="F:HumanFactors.ViewAnalysis.ViewAnalysisResult.distance">
+            <summary>
+            The distance from the origin to the hitpoint. Equal to -1 if the ray didn't hit
+            </summary>
+        </member>
+        <member name="F:HumanFactors.ViewAnalysis.ViewAnalysisResult.meshid">
+            <summary> The ID of the mesh hit. </summary>
+        </member>
+        <member name="T:HumanFactors.ViewAnalysis.ResultArray">
+            <summary>
+            An array of results from <see cref="M:HumanFactors.ViewAnalysis.ViewAnalysis.ViewAnalysisStandard(HumanFactors.RayTracing.EmbreeBVH,System.Collections.Generic.IEnumerable{HumanFactors.Vector3D},System.Int32,System.Single,System.Single,System.Single)" />
+            </summary>
+        </member>
+        <member name="M:HumanFactors.ViewAnalysis.ResultArray.#ctor(HumanFactors.NativeUtils.CVectorAndData)">
+            <summary> Initializes a new instance of the <see cref="T:HumanFactors.ViewAnalysis.ResultArray" /> class. </summary>
+            <param name="ptrs"> Must have size2 set to a value greater than one. </param>
+        </member>
+        <member name="T:HumanFactors.ViewAnalysis.DirectionArray">
+            <summary>
+            An array of directions from <see cref="M:HumanFactors.ViewAnalysis.ViewAnalysis.SphericallyDistributeRays(System.Int32,System.Single,System.Single)" />
+            </summary>
+        </member>
+        <member name="M:HumanFactors.ViewAnalysis.DirectionArray.#ctor(HumanFactors.NativeUtils.CVectorAndData)">
+            <summary> Initializes a new instance of the <see cref="T:HumanFactors.ViewAnalysis.DirectionArray" /> class. </summary>
+            <param name="ptr"> Info needed to create the array. </param>
+        </member>
+        <member name="T:HumanFactors.VisibilityGraph.VisibilityGraph">
+            <summary> Contains all methods for generating Visibility Graphs. </summary>
+        </member>
+        <member name="M:HumanFactors.VisibilityGraph.VisibilityGraph.GenerateAllToAll(HumanFactors.RayTracing.EmbreeBVH,System.Collections.Generic.IEnumerable{HumanFactors.Vector3D},System.Single,System.Boolean)">
+            <summary>
+            Create a visibility graph from every node to every node in <paramref name="nodes" />.
+            </summary>
+            <param name="bvh"> The BVH to intersect with. </param>
+            <param name="nodes"> The nodes to use in the visibility graph. </param>
+            <param name="height">
+            The height to offset each node from the ground. Any nodes that clip into geometry when
+            offset by height will not be considered for any edge connections.
+            </param>
+            <param name="directed">
+            if set to <c> true </c> generate a directed graph, otherwise generate an undirected graph.
+            </param>
+            <returns> A Graph containing the visbility graph. </returns>
+            <remarks>
+            <para>
+            It is suggested in most contexts to set <paramref name="directed" /> to <see
+            langword="true" />, due to the complexity of generating a visibility graph. An
+            undirected visibility graph performs N^2 operations, while a directed visibility graph
+            only performs n(n+1)/2 operations. The Directed graph saves space by only storing
+            connections between two nodes in the edgelist of a one of the nodes instead of both nodes.
+            </para>
+            The results of the visibility graph can be easily summarized per node by using the
+            Graph's <see cref="M:HumanFactors.SpatialStructures.Graph.AggregateEdgeCosts(HumanFactors.SpatialStructures.GraphEdgeAggregation,System.Boolean)" /> method.
+            </remarks>
+        </member>
+        <member name="M:HumanFactors.VisibilityGraph.VisibilityGraph.GenerateGroupToGroup(HumanFactors.RayTracing.EmbreeBVH,System.Collections.Generic.IEnumerable{HumanFactors.Vector3D},System.Collections.Generic.IEnumerable{HumanFactors.Vector3D},System.Single)">
+            <summary>
+            Generate a directed visibility graph from nodes in <paramref name="group_a" /> to the
+            nodes in <paramref name="group_b" />.
+            </summary>
+            <param name="bvh"> The geometry to use for generating the visibility graph. </param>
+            <param name="group_a"> The nodes to fire rays from. </param>
+            <param name="group_b"> The nodes to fire rays to. </param>
+            <param name="height">
+            The height to offset nodes from the ground. Any nodes that clip into geometry when
+            offset by height will not be considered for any edge connections.
+            </param>
+            <returns>
+            A graph contanining the visibility graph. Nodes in group_a will be assigned IDs before
+            those in group_b. <seealso cref="M:HumanFactors.VisibilityGraph.VisibilityGraph.GenerateAllToAll(HumanFactors.RayTracing.EmbreeBVH,System.Collections.Generic.IEnumerable{HumanFactors.Vector3D},System.Single,System.Boolean)" />
+            </returns>
+        </member>
+        <member name="T:HumanFactors.Pathfinding.ShortestPath">
+            <summary>
+            Methods to calculate the shortest path for <see cref="T:HumanFactors.SpatialStructures.Graph" />
+            </summary>
+        </member>
+        <member name="M:HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath(HumanFactors.SpatialStructures.Graph,System.Int32,System.Int32)">
+            <summary>
+            Perform Dijkstra's shortest path algorithm to find a path from <paramref name="start_id"
+            /> to <paramref name="end_id" />
+            </summary>
+            <param name="graph"> The graph to conduct the search on. </param>
+            <param name="start_id"> The ID of the node to start at. </param>
+            <param name="end_id"> The ID of the node to path to. </param>
+            <returns> A path from <paramref name="start_id" /> to <paramref name="end_id" /> </returns>
+            <exception cref="T:System.IndexOutOfRangeException">
+            <paramref name="start_id" /> or <paramref name="end_id" /> are not the ids of any nodes
+            in the graph.
+            </exception>
+            <remarks>
+            For searching multiple paths at once efficiently it's recommended to use <see
+            cref="M:HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti(HumanFactors.SpatialStructures.Graph,System.Collections.Generic.IEnumerable{HumanFactors.Vector3D},System.Collections.Generic.IEnumerable{HumanFactors.Vector3D})" />.
+            </remarks>
+        </member>
+        <member name="M:HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath(HumanFactors.SpatialStructures.Graph,HumanFactors.Vector3D,HumanFactors.Vector3D)">
+            <summary>
+            Perform Dijkstra's shortest path algorithm to find a path from <paramref name="start_id"
+            /> to <paramref name="end_id" />.
+            </summary>
+            <param name="graph"> The graph to conduct the search on. </param>
+            <param name="start_node"> The node to start at. </param>
+            <param name="end_node"> The node to end at. </param>
+            <returns>
+            A path from <paramref name="start_node" /> to <paramref name="end_node" />.
+            </returns>
+            <exception cref="T:System.IndexOutOfRangeException">
+            <paramref name="start_id" /> or <paramref name="end_id" /> do not exist in the graph.
+            </exception>
+            <remarks>
+            For searching multiple paths at once efficiently use <see
+            cref="M:HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti(HumanFactors.SpatialStructures.Graph,System.Collections.Generic.IEnumerable{HumanFactors.Vector3D},System.Collections.Generic.IEnumerable{HumanFactors.Vector3D})" />
+            </remarks>
+            <remarks>
+            For searching multiple paths at once efficiently it's recommended to use <see
+            cref="M:HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti(HumanFactors.SpatialStructures.Graph,System.Collections.Generic.IEnumerable{HumanFactors.Vector3D},System.Collections.Generic.IEnumerable{HumanFactors.Vector3D})" />.
+            </remarks>
+        </member>
+        <member name="M:HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti(HumanFactors.SpatialStructures.Graph,System.Int32[],System.Int32[])">
+            <summary> Find the shortest paths between each pair of start_id and end_id in order. </summary>
+            <param name="graph"> The graph to generate paths in. </param>
+            <param name="start_ids">
+            Ids for the start points to generate paths from. Length should be equal to that of
+            <paramref name="end_ids" />.
+            </param>
+            <param name="end_ids">
+            Ids for the end points to generate paths to. Length should be equal to that of <paramref
+            name="start_ids" />.
+            </param>
+            <returns> </returns>
+            <exception cref="T:System.ArgumentException">
+            Length of <paramref name="start_ids"/> didn't equal length of <paramref name="end_ids"/>.
+            </exception>
+            <exception cref="T:System.IndexOutOfRangeException">
+            One or more of the start or end ids do not exist in <paramref name="graph" />.
+            </exception>
+        </member>
+        <member name="M:HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti(HumanFactors.SpatialStructures.Graph,System.Collections.Generic.IEnumerable{HumanFactors.Vector3D},System.Collections.Generic.IEnumerable{HumanFactors.Vector3D})">
+            <summary> Find the shortest paths between each pair of start_id and end_id in order. </summary>
+            <param name="graph"> The graph to generate paths in. </param>
+            <param name="start_nodes">
+            Start points to generate paths from. Length should be equal to that of <paramref
+            name="end_nodes" />.
+            </param>
+            <param name="end_nodes">
+            End points to generate paths to. Length should be equal to that of <paramref
+            name="start_nodes" />.
+            </param>
+            <returns> </returns>
+            <exception cref="T:System.ArgumentException">
+            Length of <paramref name="start_nodes"/> didn't equal length of <paramref name="end_nodes"/>.
+            </exception>
+            <exception cref="T:System.IndexOutOfRangeException">
+            One or more of the start or end nodes do not exist in <paramref name="graph" />.
+            </exception>
+        </member>
+        <member name="M:HumanFactors.Pathfinding.NativeMethods.C_CreatePath(System.IntPtr,System.Int32,System.Int32)">
+            <summary>
+            Generate a path from start to end. 
+            </summary>
+            <returns>A <see cref="T:HumanFactors.NativeUtils.CVectorAndData"/> to the generated path.</returns>
+            <exception cref="T:System.IndexOutOfRangeException">Start or end points were not in the graph</exception>
+        </member>
+        <member name="M:HumanFactors.Pathfinding.NativeMethods.C_CreatePaths(System.IntPtr,System.Collections.Generic.IEnumerable{System.Int32},System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+            Generate a path from start to end. 
+            </summary>
+            <returns>An array of <see cref="T:HumanFactors.NativeUtils.CVectorAndData"/> to the generated paths.</returns>
+            <exception cref="T:System.IndexOutOfRangeException">Start or end points were not in the graph</exception>
+        </member>
+        <member name="M:HumanFactors.Pathfinding.NativeMethods.C_DestroyPath(System.IntPtr)">
+            <summary>
+            Destroy an existing path object. 
+            </summary>
+        </member>
+        <member name="T:HumanFactors.Pathfinding.PathMember">
+            <summary>
+            A node in <see langword="abstract"/>path
+            </summary>
+        </member>
+        <member name="F:HumanFactors.Pathfinding.PathMember.cost_to_next">
+            <summary>
+            The cost to next node in the path
+            </summary>
+        </member>
+        <member name="F:HumanFactors.Pathfinding.PathMember.id">
+            <summary>
+            The ID of this node
+            </summary>
+        </member>
+        <member name="T:HumanFactors.Pathfinding.Path">
+            <summary>
+            A collection of node ids and costs representing a path. Holds <see cref="T:HumanFactors.Pathfinding.PathMember"/>s.
+            </summary>
+        </member>
+        <member name="M:HumanFactors.Pathfinding.Path.#ctor(HumanFactors.NativeUtils.CVectorAndData)">
+            <summary>
+            Initializes a new path from a pointer to a path in unmanaged memory.
+            </summary>
+        </member>
+        <member name="M:HumanFactors.Pathfinding.Path.ReleaseHandle">
+            <summary>
+            Free the path in unmanaged memory. 
+            </summary>
+        </member>
+    </members>
+</doc>
