@@ -1,0 +1,1 @@
+_declspec(dllexport) int CountVertices();
