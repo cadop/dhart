@@ -30,6 +30,7 @@ set(EXTERNAL_DIR "${CMAKE_SOURCE_DIR}\\external")
 set (ENABLE_EXPORTS ON)
 
 add_subdirectory(${CSHARP_DIR})
+set(CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}/${HumanFactors_Config}")
 # Setup
 add_library(HumanFactors SHARED)
 
