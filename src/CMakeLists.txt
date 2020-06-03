@@ -1,5 +1,14 @@
 ﻿cmake_minimum_required (VERSION 3.8)
 
+set(PYTHON_PACKAGE_DIR "Python")
+set(CSHARP_DIR "CSharp")
+set(C_INTERFACE_DIR "Cinterface")
+set(C_PACKAGE_DIR "Cpp")
+set(C_TEST_DRIVER_DIR "Cpp/tests/src")
+set(DEPENDENCY_BINARIES "external/Embree/bin/tbb.dll external/Embree/bin/embree3.dll")
+message([warning] ${C_PACKAGE_DIR})
+
+
 project ("humanfactors"
 	VERSION "0.0.1")
 
@@ -21,7 +30,7 @@ set(HumanFactors_Config "StandaloneGraphGenerator" CACHE STRING "What projects t
 set(EXTERNAL_DIR "${CMAKE_SOURCE_DIR}\\external")
 set (ENABLE_EXPORTS ON)
 
-add_subdirectory(humanfactorscsharp)
+add_subdirectory(${CSHARP_DIR})
 # Setup
 add_library(HumanFactors SHARED)
 
@@ -32,19 +41,19 @@ target_include_directories(
 		interfaces
 	    ${CMAKE_CURRENT_LIST_DIR}
 )
-add_subdirectory(packages/exceptions)
+add_subdirectory(${C_PACKAGE_DIR}/exceptions)
 add_subdirectory(external)
 install(
 	FILES
-		humanfactorspy/humanfactorspy/common_native_functions.py
-		humanfactorspy/humanfactorspy/Exceptions.py
-		humanfactorspy/humanfactorspy/native_numpy_like.py
-		humanfactorspy/humanfactorspy/__init__.py
+		${PYTHON_PACKAGE_DIR}/humanfactorspy/common_native_functions.py
+		${PYTHON_PACKAGE_DIR}/humanfactorspy/Exceptions.py
+		${PYTHON_PACKAGE_DIR}/humanfactorspy/native_numpy_like.py
+		${PYTHON_PACKAGE_DIR}/humanfactorspy/__init__.py
 	DESTINATION humanfactorspy
 )
 install(DIRECTORY 
-			"humanfactorspy/humanfactorspy/Example Models" 
-			"humanfactorspy/humanfactorspy/Examples" 
+			"${PYTHON_PACKAGE_DIR}/humanfactorspy/Example Models" 
+			"${PYTHON_PACKAGE_DIR}/humanfactorspy/Examples" 
 			
 		DESTINATION ${CMAKE_INSTALL_PREFIX})
 install(
@@ -91,11 +100,11 @@ endif()
 message([STATUS] ${HumanFactors_Config} " Selected as the current HumanFactors_Configuration")
 if(${HumanFactors_Config} STREQUAL "All")
 	message([STATUS] "Generating all packages")
-	add_subdirectory(packages/raytracer)
-	add_subdirectory(packages/spatialstructures)
-	add_subdirectory(packages/objloader)
-	add_subdirectory(packages/analysismethods)
-	add_subdirectory(packages/pathfinding)
+	add_subdirectory(${C_PACKAGE_DIR}/raytracer)
+	add_subdirectory(${C_PACKAGE_DIR}/spatialstructures)
+	add_subdirectory(${C_PACKAGE_DIR}/objloader)
+	add_subdirectory(${C_PACKAGE_DIR}/analysismethods)
+	add_subdirectory(${C_PACKAGE_DIR}/pathfinding)
 	target_link_libraries(
 		HumanFactors PRIVATE 
 			EmbreeRayTracer
@@ -115,39 +124,39 @@ if(${HumanFactors_Config} STREQUAL "All")
 	target_sources(
 	    HumanFactors
 		PRIVATE
-			interfaces/analysis_C.cpp
-			interfaces/cinterface_utils.cpp
-			interfaces/raytracer_C.cpp
-			interfaces/spatialstructures_C.cpp
-			interfaces/view_analysis_C.cpp
-			interfaces/visibility_graph_C.cpp
-			interfaces/analysis_C.h
-			interfaces/cinterface_utils.h
-			interfaces/raytracer_C.h
-			interfaces/spatialstructures_C.h
-			interfaces/view_analysis_C.h
-			interfaces/visibility_graph_C.h
-			interfaces/objloader_C.cpp
-			interfaces/objloader_C.h
-			interfaces/pathfinder_C.cpp
-			interfaces/pathfinder_C.h
+			${C_INTERFACE_DIR}/analysis_C.cpp
+			${C_INTERFACE_DIR}/cinterface_utils.cpp
+			${C_INTERFACE_DIR}/raytracer_C.cpp
+			${C_INTERFACE_DIR}/spatialstructures_C.cpp
+			${C_INTERFACE_DIR}/view_analysis_C.cpp
+			${C_INTERFACE_DIR}/visibility_graph_C.cpp
+			${C_INTERFACE_DIR}/analysis_C.h
+			${C_INTERFACE_DIR}/cinterface_utils.h
+			${C_INTERFACE_DIR}/raytracer_C.h
+			${C_INTERFACE_DIR}/spatialstructures_C.h
+			${C_INTERFACE_DIR}/view_analysis_C.h
+			${C_INTERFACE_DIR}/visibility_graph_C.h
+			${C_INTERFACE_DIR}/objloader_C.cpp
+			${C_INTERFACE_DIR}/objloader_C.h
+			${C_INTERFACE_DIR}/pathfinder_C.cpp
+			${C_INTERFACE_DIR}/pathfinder_C.h
 	)
 	install( 
 		DIRECTORY 
-			humanfactorspy/humanfactorspy/raytracer	
-			humanfactorspy/humanfactorspy/spatialstructures
-			humanfactorspy/humanfactorspy/geometry
-			humanfactorspy/humanfactorspy/viewanalysis
-			humanfactorspy/humanfactorspy/visibilitygraph
-			humanfactorspy/humanfactorspy/pathfinding
-			humanfactorspy/humanfactorspy/graphgenerator
+			${PYTHON_PACKAGE_DIR}/humanfactorspy/raytracer	
+			${PYTHON_PACKAGE_DIR}/humanfactorspy/spatialstructures
+			${PYTHON_PACKAGE_DIR}/humanfactorspy/geometry
+			${PYTHON_PACKAGE_DIR}/humanfactorspy/viewanalysis
+			${PYTHON_PACKAGE_DIR}/humanfactorspy/visibilitygraph
+			${PYTHON_PACKAGE_DIR}/humanfactorspy/pathfinding
+			${PYTHON_PACKAGE_DIR}/humanfactorspy/graphgenerator
 			DESTINATION humanfactorspy
 	)
 
 elseif(${HumanFactors_Config} STREQUAL "StandaloneRayTracer")
 	message([STATUS] "Building standalone raytracer")
-	add_subdirectory(packages/raytracer)
-	add_subdirectory(packages/objloader)
+	add_subdirectory(${C_PACKAGE_DIR}/raytracer)
+	add_subdirectory(${C_PACKAGE_DIR}/objloader)
 
 	target_link_libraries(
 		HumanFactors 
@@ -158,12 +167,12 @@ elseif(${HumanFactors_Config} STREQUAL "StandaloneRayTracer")
 	target_sources(
 	    HumanFactors
 		PRIVATE
-			interfaces/objloader_C.cpp
-			interfaces/objloader_C.h
-			interfaces/raytracer_C.cpp
-			interfaces/raytracer_C.h
-			interfaces/cinterface_utils.h
-			interfaces/cinterface_utils.cpp
+			${C_INTERFACE_DIR}/objloader_C.cpp
+			${C_INTERFACE_DIR}/objloader_C.h
+			${C_INTERFACE_DIR}/raytracer_C.cpp
+			${C_INTERFACE_DIR}/raytracer_C.h
+			${C_INTERFACE_DIR}/cinterface_utils.h
+			${C_INTERFACE_DIR}/cinterface_utils.cpp
 	)
 	install(
 		FILES 
@@ -173,17 +182,17 @@ elseif(${HumanFactors_Config} STREQUAL "StandaloneRayTracer")
 	)
 	install(
 		DIRECTORY
-			humanfactorspy/humanfactorspy/geometry
-			humanfactorspy/humanfactorspy/raytracer
+			${PYTHON_PACKAGE_DIR}/humanfactorspy/geometry
+			${PYTHON_PACKAGE_DIR}/humanfactorspy/raytracer
 		DESTINATION humanfactorspy
 	)
 
 elseif(${HumanFactors_Config} STREQUAL "StandaloneGraphGenerator")
 	message([STATUS] "Building standalone graph generator")
-	add_subdirectory(packages/raytracer)
-	add_subdirectory(packages/objloader)
-	add_subdirectory(packages/analysismethods)
-	add_subdirectory(packages/spatialstructures)
+	add_subdirectory(${C_PACKAGE_DIR}/raytracer)
+	add_subdirectory(${C_PACKAGE_DIR}/objloader)
+	add_subdirectory(${C_PACKAGE_DIR}/analysismethods)
+	add_subdirectory(${C_PACKAGE_DIR}/spatialstructures)
 
 	target_link_libraries(
 		HumanFactors 
@@ -196,14 +205,14 @@ elseif(${HumanFactors_Config} STREQUAL "StandaloneGraphGenerator")
 	target_sources(
 	    HumanFactors
 		PRIVATE
-			interfaces/objloader_C.cpp
-			interfaces/objloader_C.h
-			interfaces/raytracer_C.cpp
-			interfaces/raytracer_C.h
-			interfaces/cinterface_utils.h
-			interfaces/cinterface_utils.cpp
-			interfaces/spatialstructures_C.h
-			interfaces/spatialstructures_C.cpp
+			${C_INTERFACE_DIR}/objloader_C.cpp
+			${C_INTERFACE_DIR}/objloader_C.h
+			${C_INTERFACE_DIR}/raytracer_C.cpp
+			${C_INTERFACE_DIR}/raytracer_C.h
+			${C_INTERFACE_DIR}/cinterface_utils.h
+			${C_INTERFACE_DIR}/cinterface_utils.cpp
+			${C_INTERFACE_DIR}/spatialstructures_C.h
+			${C_INTERFACE_DIR}/spatialstructures_C.cpp
 	)
 	install(
 		FILES 
@@ -213,19 +222,19 @@ elseif(${HumanFactors_Config} STREQUAL "StandaloneGraphGenerator")
 	)
 	install(
 		DIRECTORY
-			humanfactorspy/humanfactorspy/geometry
-			humanfactorspy/humanfactorspy/raytracer
-			humanfactorspy/humanfactorspy/spatialstructures
-			humanfactorspy/humanfactorspy/graphgenerator
+			${PYTHON_PACKAGE_DIR}/humanfactorspy/geometry
+			${PYTHON_PACKAGE_DIR}/humanfactorspy/raytracer
+			${PYTHON_PACKAGE_DIR}/humanfactorspy/spatialstructures
+			${PYTHON_PACKAGE_DIR}/humanfactorspy/graphgenerator
 		DESTINATION humanfactorspy
 	)
 
 	elseif(${HumanFactors_Config} STREQUAL "StandaloneVisibilityGraph")
 		message([STATUS] "Building standalone Visibility Graph")
-		add_subdirectory(packages/raytracer)
-		add_subdirectory(packages/objloader)
-		add_subdirectory(packages/analysismethods)
-		add_subdirectory(packages/spatialstructures)
+		add_subdirectory(${C_PACKAGE_DIR}/raytracer)
+		add_subdirectory(${C_PACKAGE_DIR}/objloader)
+		add_subdirectory(${C_PACKAGE_DIR}/analysismethods)
+		add_subdirectory(${C_PACKAGE_DIR}/spatialstructures)
 
 		target_link_libraries(
 			HumanFactors 
@@ -238,16 +247,16 @@ elseif(${HumanFactors_Config} STREQUAL "StandaloneGraphGenerator")
 		target_sources(
 			HumanFactors
 			PRIVATE
-				interfaces/objloader_C.cpp
-				interfaces/objloader_C.h
-				interfaces/raytracer_C.cpp
-				interfaces/raytracer_C.h
-				interfaces/cinterface_utils.h
-				interfaces/cinterface_utils.cpp
-				interfaces/spatialstructures_C.h
-				interfaces/spatialstructures_C.cpp
-				interfaces/visibility_graph_C.cpp
-				interfaces/visibility_graph_C.h
+				${C_INTERFACE_DIR}/objloader_C.cpp
+				${C_INTERFACE_DIR}/objloader_C.h
+				${C_INTERFACE_DIR}/raytracer_C.cpp
+				${C_INTERFACE_DIR}/raytracer_C.h
+				${C_INTERFACE_DIR}/cinterface_utils.h
+				${C_INTERFACE_DIR}/cinterface_utils.cpp
+				${C_INTERFACE_DIR}/spatialstructures_C.h
+				${C_INTERFACE_DIR}/spatialstructures_C.cpp
+				${C_INTERFACE_DIR}/visibility_graph_C.cpp
+				${C_INTERFACE_DIR}/visibility_graph_C.h
 		)
 		install(
 			FILES 
@@ -257,19 +266,19 @@ elseif(${HumanFactors_Config} STREQUAL "StandaloneGraphGenerator")
 		)
 		install(
 			DIRECTORY
-				humanfactorspy/humanfactorspy/geometry
-				humanfactorspy/humanfactorspy/raytracer
-				humanfactorspy/humanfactorspy/spatialstructures
-				humanfactorspy/humanfactorspy/visibilitygraph
+				${PYTHON_PACKAGE_DIR}/humanfactorspy/geometry
+				${PYTHON_PACKAGE_DIR}/humanfactorspy/raytracer
+				${PYTHON_PACKAGE_DIR}/humanfactorspy/spatialstructures
+				${PYTHON_PACKAGE_DIR}/humanfactorspy/visibilitygraph
 			DESTINATION humanfactorspy
 		)
 	
 	elseif(${HumanFactors_Config} STREQUAL "StandaloneViewAnalysis")
 		message([STATUS] "Building standalone ViewAnalysis")
-		add_subdirectory(packages/raytracer)
-		add_subdirectory(packages/objloader)
-		add_subdirectory(packages/analysismethods)
-		add_subdirectory(packages/spatialstructures)
+		add_subdirectory(${C_PACKAGE_DIR}/raytracer)
+		add_subdirectory(${C_PACKAGE_DIR}/objloader)
+		add_subdirectory(${C_PACKAGE_DIR}/analysismethods)
+		add_subdirectory(${C_PACKAGE_DIR}/spatialstructures)
 
 		target_link_libraries(
 			HumanFactors 
@@ -282,16 +291,16 @@ elseif(${HumanFactors_Config} STREQUAL "StandaloneGraphGenerator")
 		target_sources(
 			HumanFactors
 			PRIVATE
-				interfaces/objloader_C.cpp
-				interfaces/objloader_C.h
-				interfaces/raytracer_C.cpp
-				interfaces/raytracer_C.h
-				interfaces/cinterface_utils.h
-				interfaces/cinterface_utils.cpp
-				interfaces/spatialstructures_C.h
-				interfaces/spatialstructures_C.cpp
-				interfaces/view_analysis_C.cpp
-				interfaces/view_analysis_C.h
+				${C_INTERFACE_DIR}/objloader_C.cpp
+				${C_INTERFACE_DIR}/objloader_C.h
+				${C_INTERFACE_DIR}/raytracer_C.cpp
+				${C_INTERFACE_DIR}/raytracer_C.h
+				${C_INTERFACE_DIR}/cinterface_utils.h
+				${C_INTERFACE_DIR}/cinterface_utils.cpp
+				${C_INTERFACE_DIR}/spatialstructures_C.h
+				${C_INTERFACE_DIR}/spatialstructures_C.cpp
+				${C_INTERFACE_DIR}/view_analysis_C.cpp
+				${C_INTERFACE_DIR}/view_analysis_C.h
 		)
 		install(
 			FILES 
@@ -301,10 +310,10 @@ elseif(${HumanFactors_Config} STREQUAL "StandaloneGraphGenerator")
 		)
 		install(
 			DIRECTORY
-				humanfactorspy/humanfactorspy/geometry
-				humanfactorspy/humanfactorspy/raytracer
-				humanfactorspy/humanfactorspy/spatialstructures
-				humanfactorspy/humanfactorspy/viewanalysis
+				${PYTHON_PACKAGE_DIR}/humanfactorspy/geometry
+				${PYTHON_PACKAGE_DIR}/humanfactorspy/raytracer
+				${PYTHON_PACKAGE_DIR}/humanfactorspy/spatialstructures
+				${PYTHON_PACKAGE_DIR}/humanfactorspy/viewanalysis
 			DESTINATION humanfactorspy
 		)
 	elseif(${HumanFactors_Config} STREQUAL "StandaloneViewAnalysis")
@@ -377,20 +386,20 @@ if(HumanFactors_EnableTests)
 		target_sources(
 			HFUnitTests
 				PRIVATE
-					tests/src/AnalysisMethods.cpp
-					tests/src/embree_raytracer.cpp
-					tests/src/SpatialStructures.cpp
-					tests/src/OBJLoader.cpp
-					tests/src/VisibilityGraph.cpp
-					tests/src/ViewAnalysis.cpp
-					tests/src/PathFinding.cpp
+					${C_TEST_DRIVER_DIR}/AnalysisMethods.cpp
+					${C_TEST_DRIVER_DIR}/embree_raytracer.cpp
+					${C_TEST_DRIVER_DIR}/SpatialStructures.cpp
+					${C_TEST_DRIVER_DIR}/OBJLoader.cpp
+					${C_TEST_DRIVER_DIR}/VisibilityGraph.cpp
+					${C_TEST_DRIVER_DIR}/ViewAnalysis.cpp
+					${C_TEST_DRIVER_DIR}/PathFinding.cpp
 			)
 	elseif(${HumanFactors_Config} STREQUAL "StandaloneRayTracer")
 		target_sources(
 			HFUnitTests
 			PRIVATE
-				tests/src/embree_raytracer.cpp
-				tests/src/OBJLoader.cpp
+				${C_TEST_DRIVER_DIR}/embree_raytracer.cpp
+				${C_TEST_DRIVER_DIR}/OBJLoader.cpp
 			)
 		target_include_directories(
 			HFUnitTests
@@ -419,10 +428,10 @@ if(HumanFactors_EnableTests)
 		target_sources(
 			HFUnitTests
 			PRIVATE
-				tests/src/embree_raytracer.cpp
-				tests/src/OBJLoader.cpp
-				tests/src/SpatialStructures.cpp
-				tests/src/AnalysisMethods.cpp
+				${C_TEST_DRIVER_DIR}/embree_raytracer.cpp
+				${C_TEST_DRIVER_DIR}/OBJLoader.cpp
+				${C_TEST_DRIVER_DIR}/SpatialStructures.cpp
+				${C_TEST_DRIVER_DIR}/AnalysisMethods.cpp
 		)
 	elseif(${HumanFactors_Config} STREQUAL "StandaloneVisibilityGraph")
 		target_link_libraries(
@@ -438,10 +447,10 @@ if(HumanFactors_EnableTests)
 		target_sources(
 			HFUnitTests
 			PRIVATE
-				tests/src/embree_raytracer.cpp
-				tests/src/OBJLoader.cpp
-				tests/src/SpatialStructures.cpp
-				tests/src/VisibilityGraph.cpp
+				${C_TEST_DRIVER_DIR}/embree_raytracer.cpp
+				${C_TEST_DRIVER_DIR}/OBJLoader.cpp
+				${C_TEST_DRIVER_DIR}/SpatialStructures.cpp
+				${C_TEST_DRIVER_DIR}/VisibilityGraph.cpp
 		)
 	elseif(${HumanFactors_Config} STREQUAL "StandaloneViewAnalysis")
 		target_link_libraries(
@@ -457,10 +466,10 @@ if(HumanFactors_EnableTests)
 		target_sources(
 			HFUnitTests
 			PRIVATE
-				tests/src/embree_raytracer.cpp
-				tests/src/OBJLoader.cpp
-				tests/src/SpatialStructures.cpp
-				tests/src/ViewAnalysis.cpp
+				${C_TEST_DRIVER_DIR}/embree_raytracer.cpp
+				${C_TEST_DRIVER_DIR}/OBJLoader.cpp
+				${C_TEST_DRIVER_DIR}/SpatialStructures.cpp
+				${C_TEST_DRIVER_DIR}/ViewAnalysis.cpp
 		)
 
 	endif()
@@ -536,7 +545,7 @@ add_custom_command(TARGET HumanFactors POST_BUILD
 include(CMakePackageConfigHelpers)
 add_custom_command(TARGET HumanFactors POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
-        "${CMAKE_CURRENT_SOURCE_DIR}/humanfactorspy/humanfactorspy/Example Models"
+        "${CMAKE_CURRENT_SOURCE_DIR}/${PYTHON_PACKAGE_DIR}/humanfactorspy/Example Models"
         "${CMAKE_CURRENT_BINARY_DIR}/humanfactorscsharp/$<CONFIGURATION>/ExampleModels")
 
 
