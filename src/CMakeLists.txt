@@ -5,8 +5,7 @@ set(CSHARP_DIR "CSharp")
 set(C_INTERFACE_DIR "Cinterface")
 set(C_PACKAGE_DIR "Cpp")
 set(C_TEST_DRIVER_DIR "Cpp/tests/src")
-set(DEPENDENCY_BINARIES "external/Embree/bin/tbb.dll external/Embree/bin/embree3.dll")
-message([warning] ${C_PACKAGE_DIR})
+set(DEPENDENCY_BINARIES "${CMAKE_SOURCE_DIR}/external/Embree/bin/tbb.dll" "${CMAKE_SOURCE_DIR}/external/Embree/bin/embree3.dll")
 
 
 project ("humanfactors"
@@ -24,7 +23,7 @@ set_property(
 		StandaloneViewAnalysis
 )
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_FLAGS "/EHsc/MP")
+set(CMAKE_CXX_FLAGS "/EHsc /MP")
 option(HumanFactors_EnableTests "Install unit tests to the bin directory" ON)
 set(HumanFactors_Config "StandaloneGraphGenerator" CACHE STRING "What projects to build")
 set(EXTERNAL_DIR "${CMAKE_SOURCE_DIR}\\external")
@@ -38,7 +37,7 @@ add_library(HumanFactors SHARED)
 target_include_directories(
 	HumanFactors
 	PRIVATE
-		interfaces
+		${C_INTERFACE_DIR}
 	    ${CMAKE_CURRENT_LIST_DIR}
 )
 add_subdirectory(${C_PACKAGE_DIR}/exceptions)
@@ -65,10 +64,7 @@ install(
 )
 
 install(
-	FILES 
-		${CMAKE_CURRENT_SOURCE_DIR}/bin/embree3.dll 
-		${CMAKE_CURRENT_SOURCE_DIR}/bin/tbb.dll
-	DESTINATION humanfactorspy/bin
+	FILES ${DEPENDENCY_BINARIES} DESTINATION humanfactorspy/bin
 )
 # /$$$$$$                       /$$$$$$  /$$                                          /$$     /$$                    
 # /$$__  $$                     /$$__  $$|__/                                         | $$    |__/                    
@@ -114,12 +110,6 @@ if(${HumanFactors_Config} STREQUAL "All")
 			VisibilityGraph
 			ViewAnalysis
 			Pathfinder
-	)
-	install(
-		FILES 
-		${CMAKE_CURRENT_SOURCE_DIR}/bin/embree3.dll
-		${CMAKE_CURRENT_SOURCE_DIR}/bin/tbb.dll
-		DESTINATION bin
 	)
 	target_sources(
 	    HumanFactors
@@ -175,12 +165,6 @@ elseif(${HumanFactors_Config} STREQUAL "StandaloneRayTracer")
 			${C_INTERFACE_DIR}/cinterface_utils.cpp
 	)
 	install(
-		FILES 
-			${CMAKE_CURRENT_SOURCE_DIR}/bin/embree3.dll 
-			${CMAKE_CURRENT_SOURCE_DIR}/bin/tbb.dll
-		DESTINATION bin
-	)
-	install(
 		DIRECTORY
 			${PYTHON_PACKAGE_DIR}/humanfactorspy/geometry
 			${PYTHON_PACKAGE_DIR}/humanfactorspy/raytracer
@@ -213,12 +197,6 @@ elseif(${HumanFactors_Config} STREQUAL "StandaloneGraphGenerator")
 			${C_INTERFACE_DIR}/cinterface_utils.cpp
 			${C_INTERFACE_DIR}/spatialstructures_C.h
 			${C_INTERFACE_DIR}/spatialstructures_C.cpp
-	)
-	install(
-		FILES 
-			${CMAKE_CURRENT_SOURCE_DIR}/bin/embree3.dll 
-			${CMAKE_CURRENT_SOURCE_DIR}/bin/tbb.dll
-		DESTINATION bin
 	)
 	install(
 		DIRECTORY
@@ -259,12 +237,6 @@ elseif(${HumanFactors_Config} STREQUAL "StandaloneGraphGenerator")
 				${C_INTERFACE_DIR}/visibility_graph_C.h
 		)
 		install(
-			FILES 
-				${CMAKE_CURRENT_SOURCE_DIR}/bin/embree3.dll 
-				${CMAKE_CURRENT_SOURCE_DIR}/bin/tbb.dll
-			DESTINATION bin
-		)
-		install(
 			DIRECTORY
 				${PYTHON_PACKAGE_DIR}/humanfactorspy/geometry
 				${PYTHON_PACKAGE_DIR}/humanfactorspy/raytracer
@@ -301,12 +273,6 @@ elseif(${HumanFactors_Config} STREQUAL "StandaloneGraphGenerator")
 				${C_INTERFACE_DIR}/spatialstructures_C.cpp
 				${C_INTERFACE_DIR}/view_analysis_C.cpp
 				${C_INTERFACE_DIR}/view_analysis_C.h
-		)
-		install(
-			FILES 
-				${CMAKE_CURRENT_SOURCE_DIR}/bin/embree3.dll 
-				${CMAKE_CURRENT_SOURCE_DIR}/bin/tbb.dll
-			DESTINATION bin
 		)
 		install(
 			DIRECTORY
@@ -488,19 +454,13 @@ if(HumanFactors_EnableTests)
 	add_custom_command(
 		TARGET HFUnitTests PRE_BUILD
 		COMMAND ${CMAKE_COMMAND} -E copy 
-		${CMAKE_CURRENT_SOURCE_DIR}/bin/embree3.dll
-		$<TARGET_FILE_DIR:HFUnitTests>
-	)
-	add_custom_command(
-		TARGET HFUnitTests PRE_BUILD
-		COMMAND ${CMAKE_COMMAND} -E copy 
-		${CMAKE_CURRENT_SOURCE_DIR}/bin/tbb.dll
+		${DEPENDENCY_BINARIES}
 		$<TARGET_FILE_DIR:HFUnitTests>
 	)
 	add_custom_command(
 		TARGET HFUnitTests PRE_BUILD
 		COMMAND ${CMAKE_COMMAND} -E copy_directory
-		"${CMAKE_CURRENT_SOURCE_DIR}/tests/Example Models"
+		"${CMAKE_CURRENT_SOURCE_DIR}/${C_PACKAGE_DIR}/tests/Example Models"
 		$<TARGET_FILE_DIR:HFUnitTests>
 	)
 endif()
