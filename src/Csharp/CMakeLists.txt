@@ -50,12 +50,9 @@ set_target_properties(
 
 
 target_compile_options(HumanFactorsCSharp PRIVATE "/unsafe")
-install(TARGETS HumanFactorsCSharp
+ install(TARGETS HumanFactorsCSharp
 		EXPORT HumanFactorsCSharp
-		LIBRARY DESTINATION lib
-		ARCHIVE DESTINATION lib
 		RUNTIME DESTINATION bin
-		INCLUDES DESTINATION include
 )
 
 
@@ -73,10 +70,7 @@ set_target_properties(
 )
 install(TARGETS hfcsharptest
 		EXPORT hfcsharptest
-		LIBRARY DESTINATION lib
-		ARCHIVE DESTINATION lib
 		RUNTIME DESTINATION bin
-		INCLUDES DESTINATION include
 )
 
 
