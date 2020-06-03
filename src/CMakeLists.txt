@@ -6,7 +6,10 @@ set(CSHARP_DIR "CSharp")
 set(C_INTERFACE_DIR "Cinterface")
 set(C_PACKAGE_DIR "Cpp")
 set(C_TEST_DRIVER_DIR "Cpp/tests/src")
-set(DEPENDENCY_BINARIES "${CMAKE_SOURCE_DIR}/external/Embree/bin/tbb.dll" "${CMAKE_SOURCE_DIR}/external/Embree/bin/embree3.dll")
+set(DEPENDENCY_BINARIES
+		"${CMAKE_SOURCE_DIR}/external/Embree/bin/tbb.dll" 
+		"${CMAKE_SOURCE_DIR}/external/Embree/bin/embree3.dll"
+)
 
 project ("humanfactors" VERSION "0.0.1")
 set(project_name "HumanFactors")
@@ -21,7 +24,6 @@ set_property(
 		StandaloneVisibilityGraph
 		StandaloneViewAnalysis
 )
-
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS "/EHsc /MP")
 option(HumanFactors_EnableTests "Install unit tests to the bin directory" ON)
@@ -462,15 +464,8 @@ endif()
 # /$$$$$$| $$  | $$ /$$$$$$$/ |  $$$$/  $$$$$$$| $$| $$
 #|______/|__/  |__/|_______/   \___/  \_______/|__/|__/
 
-# Install python if the option is set to true
-if(HumanFactors_EnablePython)
-	message("Installing Python!")
-	install(DIRECTORY ${PYTHON_MODULES} DESTINATION humanfactorspy)
-	install(FILES ${PYTHON_FILES} DESTINATION humanfactorspy)
-	install(FILES ${DEPENDENCY_BINARIES} DESTINATION humanfactorspy/bin)
-	LIST(APPEND ROOT_FILES ${PYTHON_PACKAGE_DIR}/setup.py)
-endif()
 
+# Install the current C++ Project
 install(TARGETS ${project_name}
 		EXPORT ${project_name}Targets
 		LIBRARY DESTINATION lib
@@ -478,6 +473,19 @@ install(TARGETS ${project_name}
 		RUNTIME DESTINATION bin
 		INCLUDES DESTINATION include
 	)
+
+# Install python if the option is set to true
+if(HumanFactors_EnablePython)
+	message("Installing Python!")
+	install(DIRECTORY ${PYTHON_MODULES} DESTINATION humanfactorspy)
+	install(FILES ${PYTHON_FILES} DESTINATION humanfactorspy)
+	install(FILES ${DEPENDENCY_BINARIES} DESTINATION humanfactorspy/bin)
+	install(FILES "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIGURATION>/HumanFactors.dll" DESTINATION humanfactorspy/bin)
+
+	LIST(APPEND ROOT_FILES ${PYTHON_PACKAGE_DIR}/setup.py)
+endif()
+
+
 install(EXPORT ${project_name}Targets
 	FILE
 		${project_name}Targets.cmake
