@@ -20,10 +20,10 @@ set_property(
 	CACHE HumanFactors_Config PROPERTY
 	STRINGS 
 		All
-		StandaloneRayTracer
-		StandaloneGraphGenerator
-		StandaloneVisibilityGraph
-		StandaloneViewAnalysis
+		RayTracer
+		GraphGenerator
+		VisibilityGraph
+		ViewAnalysis
 )
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS "/EHsc /MP")
@@ -31,7 +31,7 @@ option(HumanFactors_EnableTests "Install unit tests to the bin directory" ON)
 option(HumanFactors_EnableCSharp "Include C# Interface" ON)
 option(HumanFactors_EnablePython "Include Python Interface" ON)
 set(HumanFactors_InstallTitle "" CACHE STRING "Installed package will be written to release/<InstallTitle>/. An empty string will follow default behavior.")
-set(HumanFactors_Config "StandaloneGraphGenerator" CACHE STRING "What projects to build")
+set(HumanFactors_Config "GraphGenerator" CACHE STRING "What projects to build")
 set(EXTERNAL_DIR "${CMAKE_SOURCE_DIR}\\external")
 set (ENABLE_EXPORTS ON)
 
@@ -148,8 +148,8 @@ if(${HumanFactors_Config} STREQUAL "All")
 			${PYTHON_PACKAGE_DIR}/humanfactorspy/graphgenerator
 	)
 
-elseif(${HumanFactors_Config} STREQUAL "StandaloneRayTracer")
-	message([STATUS] "Building standalone raytracer")
+elseif(${HumanFactors_Config} STREQUAL "RayTracer")
+	message([STATUS] "Building  raytracer")
 	add_subdirectory(${C_PACKAGE_DIR}/raytracer)
 	add_subdirectory(${C_PACKAGE_DIR}/objloader)
 
@@ -174,8 +174,8 @@ elseif(${HumanFactors_Config} STREQUAL "StandaloneRayTracer")
 			${PYTHON_PACKAGE_DIR}/humanfactorspy/raytracer
 	)
 
-elseif(${HumanFactors_Config} STREQUAL "StandaloneGraphGenerator")
-	message([STATUS] "Building standalone graph generator")
+elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
+	message([STATUS] "Building  graph generator")
 	add_subdirectory(${C_PACKAGE_DIR}/raytracer)
 	add_subdirectory(${C_PACKAGE_DIR}/objloader)
 	add_subdirectory(${C_PACKAGE_DIR}/analysismethods)
@@ -208,8 +208,8 @@ elseif(${HumanFactors_Config} STREQUAL "StandaloneGraphGenerator")
 			${PYTHON_PACKAGE_DIR}/humanfactorspy/graphgenerator
 	)
 
-	elseif(${HumanFactors_Config} STREQUAL "StandaloneVisibilityGraph")
-		message([STATUS] "Building standalone Visibility Graph")
+	elseif(${HumanFactors_Config} STREQUAL "VisibilityGraph")
+		message([STATUS] "Building  Visibility Graph")
 		add_subdirectory(${C_PACKAGE_DIR}/raytracer)
 		add_subdirectory(${C_PACKAGE_DIR}/objloader)
 		add_subdirectory(${C_PACKAGE_DIR}/analysismethods)
@@ -244,8 +244,8 @@ elseif(${HumanFactors_Config} STREQUAL "StandaloneGraphGenerator")
 				${PYTHON_PACKAGE_DIR}/humanfactorspy/visibilitygraph
 		)
 	
-	elseif(${HumanFactors_Config} STREQUAL "StandaloneViewAnalysis")
-		message([STATUS] "Building standalone ViewAnalysis")
+	elseif(${HumanFactors_Config} STREQUAL "ViewAnalysis")
+		message([STATUS] "Building  ViewAnalysis")
 		add_subdirectory(${C_PACKAGE_DIR}/raytracer)
 		add_subdirectory(${C_PACKAGE_DIR}/objloader)
 		add_subdirectory(${C_PACKAGE_DIR}/analysismethods)
@@ -280,7 +280,7 @@ elseif(${HumanFactors_Config} STREQUAL "StandaloneGraphGenerator")
 				${PYTHON_PACKAGE_DIR}/humanfactorspy/viewanalysis
 		)
 
-	elseif(${HumanFactors_Config} STREQUAL "StandaloneViewAnalysis")
+	elseif(${HumanFactors_Config} STREQUAL "ViewAnalysis")
 	
 else()
 	message(FATAL_ERROR "That is not a valid configuration ${HumanFactors_Config}")
@@ -359,7 +359,7 @@ if(HumanFactors_EnableTests)
 					${C_TEST_DRIVER_DIR}/ViewAnalysis.cpp
 					${C_TEST_DRIVER_DIR}/PathFinding.cpp
 			)
-	elseif(${HumanFactors_Config} STREQUAL "StandaloneRayTracer")
+	elseif(${HumanFactors_Config} STREQUAL "RayTracer")
 		target_sources(
 			HFUnitTests
 			PRIVATE
@@ -379,7 +379,7 @@ if(HumanFactors_EnableTests)
 				HFExceptions 
 				EmbreeRayTracer
 			)
-	elseif(${HumanFactors_Config} STREQUAL "StandaloneGraphGenerator")
+	elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
 		target_link_libraries(
 			HFUnitTests
 			PRIVATE
@@ -398,7 +398,7 @@ if(HumanFactors_EnableTests)
 				${C_TEST_DRIVER_DIR}/SpatialStructures.cpp
 				${C_TEST_DRIVER_DIR}/AnalysisMethods.cpp
 		)
-	elseif(${HumanFactors_Config} STREQUAL "StandaloneVisibilityGraph")
+	elseif(${HumanFactors_Config} STREQUAL "VisibilityGraph")
 		target_link_libraries(
 			HFUnitTests
 			PRIVATE
@@ -417,7 +417,7 @@ if(HumanFactors_EnableTests)
 				${C_TEST_DRIVER_DIR}/SpatialStructures.cpp
 				${C_TEST_DRIVER_DIR}/VisibilityGraph.cpp
 		)
-	elseif(${HumanFactors_Config} STREQUAL "StandaloneViewAnalysis")
+	elseif(${HumanFactors_Config} STREQUAL "ViewAnalysis")
 		target_link_libraries(
 			HFUnitTests
 			PRIVATE
