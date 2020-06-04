@@ -15,6 +15,7 @@ set(DEPENDENCY_BINARIES
 project ("humanfactors" VERSION "0.0.1")
 set(project_name "HumanFactors")
 
+
 # Configuration options
 set_property(
 	CACHE HumanFactors_Config PROPERTY
@@ -22,7 +23,6 @@ set_property(
 		All
 		RayTracer
 		GraphGenerator
-		VisibilityGraph
 		ViewAnalysis
 		VisibilityGraph
 		Pathfinder
@@ -57,7 +57,6 @@ endif()
 
 # Setup
 add_library(HumanFactors SHARED)
-
 # These files are always needed
 target_include_directories(	HumanFactors PRIVATE ${C_INTERFACE_DIR}  ${CMAKE_CURRENT_LIST_DIR})
 add_subdirectory(${C_PACKAGE_DIR}/exceptions)
@@ -202,6 +201,8 @@ elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
 			${C_INTERFACE_DIR}/cinterface_utils.cpp
 			${C_INTERFACE_DIR}/spatialstructures_C.h
 			${C_INTERFACE_DIR}/spatialstructures_C.cpp
+			${C_INTERFACE_DIR}/analysis_C.cpp
+			${C_INTERFACE_DIR}/analysis_C.h
 	)
 	LIST(APPEND PYTHON_MODULES
 			${PYTHON_PACKAGE_DIR}/humanfactorspy/geometry
@@ -598,23 +599,31 @@ install(EXPORT ${project_name}Targets
 
 if (HumanFactors_EnableCSharp)
 	add_subdirectory(${CSHARP_DIR})
-	
+
+	add_custom_command(TARGET HumanFactors POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy_if_different
+			"${CMAKE_SOURCE_DIR}/external/Embree/bin/tbb.dll" 
+			"${CMAKE_CURRENT_BINARY_DIR}/CSharp/$<CONFIGURATION>/tbb.dll"
+	)
+
+	add_custom_command(TARGET HumanFactors POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy_if_different
+			"${CMAKE_SOURCE_DIR}/external/Embree/bin/embree3.dll" 
+			"${CMAKE_CURRENT_BINARY_DIR}/CSharp/$<CONFIGURATION>/embree3.dll"
+	)
+
 	# The following commands copy resources necessary for C# to perform its unittests
 	add_custom_command(TARGET HumanFactors POST_BUILD
 		COMMAND ${CMAKE_COMMAND} -E copy_if_different
 			"${CMAKE_CURRENT_BINARY_DIR}/$<CONFIGURATION>/HumanFactors.dll"
-			"${CMAKE_CURRENT_BINARY_DIR}/humanfactorscsharp/$<CONFIGURATION>/HumanFactors.dll")
-
-	add_custom_command(TARGET HumanFactors POST_BUILD
-		COMMAND ${CMAKE_COMMAND} -E copy_directory
-			"${CMAKE_CURRENT_SOURCE_DIR}/bin"
-			"${CMAKE_CURRENT_BINARY_DIR}/humanfactorscsharp/$<CONFIGURATION>/"
+			"${CMAKE_CURRENT_BINARY_DIR}/CSharp/$<CONFIGURATION>/HumanFactors.dll"
 	)
+
 	# Copy example models to the build directory for C#
 	add_custom_command(TARGET HumanFactors POST_BUILD
 		COMMAND ${CMAKE_COMMAND} -E copy_directory
 			"${CMAKE_CURRENT_SOURCE_DIR}/${PYTHON_PACKAGE_DIR}/humanfactorspy/Example Models"
-			"${CMAKE_CURRENT_BINARY_DIR}/humanfactorscsharp/$<CONFIGURATION>/ExampleModels"
+			"${CMAKE_CURRENT_BINARY_DIR}/CSharp/$<CONFIGURATION>/ExampleModels"
 	)
 endif()
 

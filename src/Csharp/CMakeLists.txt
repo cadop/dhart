@@ -28,13 +28,37 @@ set(CMAKE_CSharp_FLAGS "/langversion:7.3")
 
 # Include packages. These will add source files to ${sources} and test files to ${test_sources} for each package
 include(${CMAKE_CURRENT_LIST_DIR}/packages/base/package.cmake)
-include(${CMAKE_CURRENT_LIST_DIR}/packages/spatialstructures/package.cmake)
-include(${CMAKE_CURRENT_LIST_DIR}/packages/geometry/package.cmake)
-include(${CMAKE_CURRENT_LIST_DIR}/packages/raytracer/package.cmake)
-include(${CMAKE_CURRENT_LIST_DIR}/packages/graphgenerator/package.cmake)
-include(${CMAKE_CURRENT_LIST_DIR}/packages/viewanalysis/package.cmake)
-include(${CMAKE_CURRENT_LIST_DIR}/packages/visibilitygraph/package.cmake)
-include(${CMAKE_CURRENT_LIST_DIR}/packages/pathfinding/package.cmake)
+
+if(${HumanFactors_Config} STREQUAL "All")
+	include(${CMAKE_CURRENT_LIST_DIR}/packages/spatialstructures/package.cmake)
+	include(${CMAKE_CURRENT_LIST_DIR}/packages/geometry/package.cmake)
+	include(${CMAKE_CURRENT_LIST_DIR}/packages/raytracer/package.cmake)
+	include(${CMAKE_CURRENT_LIST_DIR}/packages/graphgenerator/package.cmake)
+	include(${CMAKE_CURRENT_LIST_DIR}/packages/viewanalysis/package.cmake)
+	include(${CMAKE_CURRENT_LIST_DIR}/packages/visibilitygraph/package.cmake)
+	include(${CMAKE_CURRENT_LIST_DIR}/packages/pathfinding/package.cmake)
+elseif(${HumanFactors_Config} STREQUAL "RayTracer")
+	include(${CMAKE_CURRENT_LIST_DIR}/packages/raytracer/package.cmake)
+	include(${CMAKE_CURRENT_LIST_DIR}/packages/geometry/package.cmake)
+elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
+	include(${CMAKE_CURRENT_LIST_DIR}/packages/spatialstructures/package.cmake)
+	include(${CMAKE_CURRENT_LIST_DIR}/packages/raytracer/package.cmake)
+	include(${CMAKE_CURRENT_LIST_DIR}/packages/geometry/package.cmake)
+	include(${CMAKE_CURRENT_LIST_DIR}/packages/graphgenerator/package.cmake)
+elseif(${HumanFactors_Config} STREQUAL "VisibilityGraph")
+	include(${CMAKE_CURRENT_LIST_DIR}/packages/spatialstructures/package.cmake)
+	include(${CMAKE_CURRENT_LIST_DIR}/packages/raytracer/package.cmake)
+	include(${CMAKE_CURRENT_LIST_DIR}/packages/geometry/package.cmake)
+	include(${CMAKE_CURRENT_LIST_DIR}/packages/visibilitygraph/package.cmake)
+elseif(${HumanFactors_Config} STREQUAL "ViewAnalysis")
+	include(${CMAKE_CURRENT_LIST_DIR}/packages/raytracer/package.cmake)
+	include(${CMAKE_CURRENT_LIST_DIR}/packages/geometry/package.cmake)
+	include(${CMAKE_CURRENT_LIST_DIR}/packages/viewanalysis/package.cmake)
+elseif(${HumanFactors_Config} STREQUAL "Pathfinder")
+	include(${CMAKE_CURRENT_LIST_DIR}/packages/pathfinding/package.cmake)
+	include(${CMAKE_CURRENT_LIST_DIR}/packages/spatialstructures/package.cmake)
+endif()
+
 
 add_library(HumanFactorsCSharp SHARED)
 
@@ -48,17 +72,14 @@ set_target_properties(
 		VS_DOTNET_TARGET_FRAMEWORK_VERSION "v4.5"
 )
 
-
 target_compile_options(HumanFactorsCSharp PRIVATE "/unsafe")
  install(TARGETS HumanFactorsCSharp
 		EXPORT HumanFactorsCSharp
 		RUNTIME DESTINATION bin
 )
 
-
 add_library(hfcsharptest)
 target_sources(hfcsharptest PRIVATE	${test_sources})
-
 
 set_target_properties(
 		hfcsharptest
@@ -68,9 +89,6 @@ set_target_properties(
 		VS_DOTNET_TARGET_FRAMEWORK_VERSION "v4.5.1"
 		VS_DOTNET_REFERENCES "${test_references}"
 )
-install(TARGETS hfcsharptest
-		EXPORT hfcsharptest
-		RUNTIME DESTINATION bin
-)
+install(TARGETS hfcsharptest EXPORT hfcsharptest RUNTIME DESTINATION bin)
 
 
