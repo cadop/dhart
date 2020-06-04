@@ -33,7 +33,6 @@ set(HumanFactors_Config "StandaloneGraphGenerator" CACHE STRING "What projects t
 set(EXTERNAL_DIR "${CMAKE_SOURCE_DIR}\\external")
 set (ENABLE_EXPORTS ON)
 
-add_subdirectory(${CSHARP_DIR})
 
 # Change install directory based on which options were selected
 set(CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}/${HumanFactors_Config}")
@@ -473,6 +472,7 @@ install(TARGETS ${project_name}
 		RUNTIME DESTINATION bin
 		INCLUDES DESTINATION include
 	)
+install(FILES ${DEPENDENCY_BINARIES} DESTINATION bin)
 
 # Install python if the option is set to true
 if(HumanFactors_EnablePython)
@@ -495,32 +495,28 @@ install(EXPORT ${project_name}Targets
 		lib/cmake/${project_name}
 )
 
-# Copy over human factors dlls for the C# build
-include(CMakePackageConfigHelpers)
-add_custom_command(TARGET HumanFactors POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIGURATION>/HumanFactors.dll"
-        "${CMAKE_CURRENT_BINARY_DIR}/humanfactorscsharp/$<CONFIGURATION>/HumanFactors.dll")
+if (HumanFactors_EnableCSharp)
+	add_subdirectory(${CSHARP_DIR})
+	
+	# The following commands copy resources necessary for C# to perform its unittests
+	add_custom_command(TARGET HumanFactors POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy_if_different
+			"${CMAKE_CURRENT_BINARY_DIR}/$<CONFIGURATION>/HumanFactors.dll"
+			"${CMAKE_CURRENT_BINARY_DIR}/humanfactorscsharp/$<CONFIGURATION>/HumanFactors.dll")
 
-add_custom_command(TARGET HumanFactors POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-        "${CMAKE_CURRENT_SOURCE_DIR}/bin"
-        "${CMAKE_CURRENT_BINARY_DIR}/humanfactorscsharp/$<CONFIGURATION>/")
-
-# Copy example models to the build directory for C#
-add_custom_command(TARGET HumanFactors POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-        "${CMAKE_CURRENT_SOURCE_DIR}/${PYTHON_PACKAGE_DIR}/humanfactorspy/Example Models"
-        "${CMAKE_CURRENT_BINARY_DIR}/humanfactorscsharp/$<CONFIGURATION>/ExampleModels"
-)
-
-# Install all required dlls to the /bin directory
-install(FILES 
-		"${CMAKE_CURRENT_BINARY_DIR}/$<CONFIGURATION>/HumanFactors.dll"
-		"${CMAKE_CURRENT_BINARY_DIR}/$<CONFIGURATION>/embree3.dll"
-		"${CMAKE_CURRENT_BINARY_DIR}/$<CONFIGURATION>/tbb.dll"
-		TYPE BIN
+	add_custom_command(TARGET HumanFactors POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy_directory
+			"${CMAKE_CURRENT_SOURCE_DIR}/bin"
+			"${CMAKE_CURRENT_BINARY_DIR}/humanfactorscsharp/$<CONFIGURATION>/"
 	)
+	# Copy example models to the build directory for C#
+	add_custom_command(TARGET HumanFactors POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy_directory
+			"${CMAKE_CURRENT_SOURCE_DIR}/${PYTHON_PACKAGE_DIR}/humanfactorspy/Example Models"
+			"${CMAKE_CURRENT_BINARY_DIR}/humanfactorscsharp/$<CONFIGURATION>/ExampleModels"
+	)
+endif()
+
 
 install(FILES ${ROOT_FILES} DESTINATION ${CMAKE_INSTALL_PREFIX})
 #add_library(${project_name}::${project_name} ALIAS ${project_name})
