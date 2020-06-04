@@ -30,26 +30,28 @@ set(CMAKE_CXX_FLAGS "/EHsc /MP")
 option(HumanFactors_EnableTests "Install unit tests to the bin directory" ON)
 option(HumanFactors_EnableCSharp "Include C# Interface" ON)
 option(HumanFactors_EnablePython "Include Python Interface" ON)
-option(HumanFactors_UseDefaultInstallPath "If true, use the install path defined by your platform." OFF)
+set(HumanFactors_InstallTitle "" CACHE STRING "Installed package will be written to release/<InstallTitle>/. An empty string will follow default behavior.")
 set(HumanFactors_Config "StandaloneGraphGenerator" CACHE STRING "What projects to build")
 set(EXTERNAL_DIR "${CMAKE_SOURCE_DIR}\\external")
 set (ENABLE_EXPORTS ON)
 
-# Change install path if specified
-if (NOT HumanFactors_UseDefaultInstallPath)
-	if (HumanFactors_EnablePython) 
-		set(LANGUAGE_SUPPORT_STRING ${LANGUAGE_SUPPORT_STRING}Python_)
-	endif()
-	if (HumanFactors_EnableCSharp) 
-		set(LANGUAGE_SUPPORT_STRING ${LANGUAGE_SUPPORT_STRING}CSharp_) 
-	endif()
-
-	set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/release/${LANGUAGE_SUPPORT_STRING}${HumanFactors_Config})
-	message(${CMAKE_INSTALL_PREFIX})
+if (NOT "${HumanFactors_InstallTitle}" STREQUAL "")
+	set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/release/${HumanFactors_InstallTitle})
 endif()
 
-# Change install directory based on which options were selected
-# set(CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}/${HumanFactors_Config}")
+# Change install path if specified
+
+#if (NOT HumanFactors_UseDefaultInstallPath)
+#	if (HumanFactors_EnablePython) 
+#		set(LANGUAGE_SUPPORT_STRING ${LANGUAGE_SUPPORT_STRING}Python_)
+#	endif()
+#	if (HumanFactors_EnableCSharp) 
+#		set(LANGUAGE_SUPPORT_STRING ${LANGUAGE_SUPPORT_STRING}CSharp_) 
+#	endif()
+#
+#	set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/release/${LANGUAGE_SUPPORT_STRING}${HumanFactors_Config})
+#	message(${CMAKE_INSTALL_PREFIX})
+#endif()
 
 # Setup
 add_library(HumanFactors SHARED)
