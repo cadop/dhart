@@ -275,12 +275,13 @@ elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
 				${C_INTERFACE_DIR}/view_analysis_C.cpp
 				${C_INTERFACE_DIR}/view_analysis_C.h
 		)
-		LIST(APPEND 
+		LIST(APPEND PYTHON_MODULES
 				${PYTHON_PACKAGE_DIR}/humanfactorspy/geometry
 				${PYTHON_PACKAGE_DIR}/humanfactorspy/raytracer
 				${PYTHON_PACKAGE_DIR}/humanfactorspy/spatialstructures
 				${PYTHON_PACKAGE_DIR}/humanfactorspy/viewanalysis
 		)
+	
 	elseif(${HumanFactors_Config} STREQUAL "VisibilityGraph")
 		message([STATUS] "Building Visibilitygraph")
 		add_subdirectory(${C_PACKAGE_DIR}/raytracer)
@@ -310,14 +311,37 @@ elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
 				${C_INTERFACE_DIR}/visibility_graph_C.h
 				${C_INTERFACE_DIR}/visibility_graph_C.cpp
 		)
-		LIST(APPEND 
+		LIST(APPEND PYTHON_MODULES
 				${PYTHON_PACKAGE_DIR}/humanfactorspy/geometry
 				${PYTHON_PACKAGE_DIR}/humanfactorspy/raytracer
 				${PYTHON_PACKAGE_DIR}/humanfactorspy/spatialstructures
 				${PYTHON_PACKAGE_DIR}/humanfactorspy/VisibilityGraph
 		)
+		
+	elseif(${HumanFactors_Config} STREQUAL "Pathfinder")
 
-	elseif(${HumanFactors_Config} STREQUAL "ViewAnalysis")
+		add_subdirectory(${C_PACKAGE_DIR}/spatialstructures)
+		add_subdirectory(${C_PACKAGE_DIR}/pathfinding)
+		target_link_libraries(
+			HumanFactors 
+			PRIVATE
+				SpatialStructures
+				Pathfinder
+		)
+		target_sources(
+			HumanFactors
+			PRIVATE
+				${C_INTERFACE_DIR}/cinterface_utils.h
+				${C_INTERFACE_DIR}/cinterface_utils.cpp
+				${C_INTERFACE_DIR}/spatialstructures_C.h
+				${C_INTERFACE_DIR}/spatialstructures_C.cpp
+				${C_INTERFACE_DIR}/pathfinder_C.h
+				${C_INTERFACE_DIR}/pathfinder_C.cpp
+		)
+		LIST(APPEND PYTHON_MODULES
+				${PYTHON_PACKAGE_DIR}/humanfactorspy/spatialstructures
+				${PYTHON_PACKAGE_DIR}/humanfactorspy/pathfinder
+		)
 	
 else()
 	message(FATAL_ERROR "That is not a valid configuration ${HumanFactors_Config}")
@@ -491,6 +515,21 @@ if(HumanFactors_EnableTests)
 				${C_TEST_DRIVER_DIR}/OBJLoader.cpp
 				${C_TEST_DRIVER_DIR}/SpatialStructures.cpp
 				${C_TEST_DRIVER_DIR}/VisibilityGraph.cpp
+		)
+	elseif(${HumanFactors_Config} STREQUAL "Pathfinder")
+		target_link_libraries(
+			HFUnitTests
+			PRIVATE
+				gtest_main
+				HFExceptions
+				SpatialStructures
+				Pathfinder
+		)
+		target_sources(
+			HFUnitTests
+			PRIVATE
+				${C_TEST_DRIVER_DIR}/SpatialStructures.cpp
+				${C_TEST_DRIVER_DIR}/PathFinding.cpp
 		)
 	endif()
 	# add_test(NAME FirstTest COMMAND HFUnitTests)
