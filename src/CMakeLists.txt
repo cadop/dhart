@@ -1,71 +1,75 @@
 ﻿cmake_minimum_required (VERSION 3.8)
 
+# Paths
 set(PYTHON_PACKAGE_DIR "Python")
 set(CSHARP_DIR "CSharp")
 set(C_INTERFACE_DIR "Cinterface")
 set(C_PACKAGE_DIR "Cpp")
 set(C_TEST_DRIVER_DIR "Cpp/tests/src")
-set(DEPENDENCY_BINARIES "${CMAKE_SOURCE_DIR}/external/Embree/bin/tbb.dll" "${CMAKE_SOURCE_DIR}/external/Embree/bin/embree3.dll")
+set(DEPENDENCY_BINARIES
+		"${CMAKE_SOURCE_DIR}/external/Embree/bin/tbb.dll" 
+		"${CMAKE_SOURCE_DIR}/external/Embree/bin/embree3.dll"
+)
 
 
-project ("humanfactors"
-	VERSION "0.0.1")
-
-# HumanFactors_Configure Variables
+project ("humanfactors" VERSION "0.0.1")
 set(project_name "HumanFactors")
+
+# Configuration options
 set_property(
 	CACHE HumanFactors_Config PROPERTY
 	STRINGS 
 		All
-		StandaloneRayTracer
-		StandaloneGraphGenerator
-		StandaloneVisibilityGraph
-		StandaloneViewAnalysis
+		RayTracer
+		GraphGenerator
+		VisibilityGraph
+		ViewAnalysis
 )
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS "/EHsc /MP")
 option(HumanFactors_EnableTests "Install unit tests to the bin directory" ON)
-set(HumanFactors_Config "StandaloneGraphGenerator" CACHE STRING "What projects to build")
+option(HumanFactors_EnableCSharp "Include C# Interface" ON)
+option(HumanFactors_EnablePython "Include Python Interface" ON)
+set(HumanFactors_InstallTitle "" CACHE STRING "Installed package will be written to release/<InstallTitle>/. An empty string will follow default behavior.")
+set(HumanFactors_Config "GraphGenerator" CACHE STRING "What projects to build")
 set(EXTERNAL_DIR "${CMAKE_SOURCE_DIR}\\external")
 set (ENABLE_EXPORTS ON)
 
-add_subdirectory(${CSHARP_DIR})
+if (NOT "${HumanFactors_InstallTitle}" STREQUAL "")
+	set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/release/${HumanFactors_InstallTitle})
+endif()
+
+# Change install path if specified
+
+#if (NOT HumanFactors_UseDefaultInstallPath)
+#	if (HumanFactors_EnablePython) 
+#		set(LANGUAGE_SUPPORT_STRING ${LANGUAGE_SUPPORT_STRING}Python_)
+#	endif()
+#	if (HumanFactors_EnableCSharp) 
+#		set(LANGUAGE_SUPPORT_STRING ${LANGUAGE_SUPPORT_STRING}CSharp_) 
+#	endif()
+#
+#	set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/release/${LANGUAGE_SUPPORT_STRING}${HumanFactors_Config})
+#	message(${CMAKE_INSTALL_PREFIX})
+#endif()
+
 # Setup
 add_library(HumanFactors SHARED)
 
-# Add some global packages to the list
-target_include_directories(
-	HumanFactors
-	PRIVATE
-		${C_INTERFACE_DIR}
-	    ${CMAKE_CURRENT_LIST_DIR}
-)
+# These files are always needed
+target_include_directories(	HumanFactors PRIVATE ${C_INTERFACE_DIR}  ${CMAKE_CURRENT_LIST_DIR})
 add_subdirectory(${C_PACKAGE_DIR}/exceptions)
 add_subdirectory(external)
-install(
-	FILES
-		${PYTHON_PACKAGE_DIR}/humanfactorspy/common_native_functions.py
-		${PYTHON_PACKAGE_DIR}/humanfactorspy/Exceptions.py
-		${PYTHON_PACKAGE_DIR}/humanfactorspy/native_numpy_like.py
-		${PYTHON_PACKAGE_DIR}/humanfactorspy/__init__.py
-	DESTINATION humanfactorspy
-)
-install(DIRECTORY 
-			"${PYTHON_PACKAGE_DIR}/humanfactorspy/Example Models" 
-			"${PYTHON_PACKAGE_DIR}/humanfactorspy/Examples" 
-			
-		DESTINATION ${CMAKE_INSTALL_PREFIX})
-install(
-	FILES
-		${PYTHON_PACKAGE_DIR}/README.md
-		${PYTHON_PACKAGE_DIR}/setup.py
-	DESTINATION
-		${CMAKE_INSTALL_PREFIX}
-)
 
-install(
-	FILES ${DEPENDENCY_BINARIES} DESTINATION humanfactorspy/bin
-)
+# Set Compiler flags based on whether or not this is the release build
+if(CMAKE_BUILD_TYPE MATCHES Release)
+	set(CMAKE_CXX_FLAGS "/EHsc /openmp -O2")
+	message([STATUS] "Using release optimizations")
+else()
+	set(CMAKE_CXX_FLAGS "/openmp /EHsc /MP")
+endif()
+
+
 # /$$$$$$                       /$$$$$$  /$$                                          /$$     /$$                    
 # /$$__  $$                     /$$__  $$|__/                                         | $$    |__/                    
 #| $$  \__/  /$$$$$$  /$$$$$$$ | $$  \__/ /$$  /$$$$$$  /$$   /$$  /$$$$$$  /$$$$$$  /$$$$$$   /$$  /$$$$$$  /$$$$$$$ 
@@ -78,19 +82,22 @@ install(
 #                                            |  $$$$$$/                                                               
 #                                             \______/                                                                
 
-# Set Compiler flags based on whether or not this is the release build
-if(CMAKE_BUILD_TYPE MATCHES Release)
-	set(
-		CMAKE_CXX_FLAGS "/EHsc /openmp -O2"
-	)
-	message([STATUS] "Using release optimizations")
-else()
-	# set(CMAKE_CXX_CLANG_TIDY clang-tidy -checks=-*,clang-analyzer*,clang-analyzer-cplusplus*,performance*,cppcoreguidlines* --extra-arg=-EHsc --extra-arg-before=--driver-mode=cl)
-	set(
-		CMAKE_CXX_FLAGS 
-			"/openmp /EHsc /MP"
-	)
-endif()
+# These are lists of the files that need to be installed based configuration
+set(PYTHON_MODULES  #Folders in the python directory that need to be copied over
+		"${PYTHON_PACKAGE_DIR}/humanfactorspy/Example Models" 
+		"${PYTHON_PACKAGE_DIR}/humanfactorspy/Examples" 
+)
+
+set(PYTHON_FILES # Files to be placed in the python root directory
+		${PYTHON_PACKAGE_DIR}/humanfactorspy/common_native_functions.py
+		${PYTHON_PACKAGE_DIR}/humanfactorspy/Exceptions.py
+		${PYTHON_PACKAGE_DIR}/humanfactorspy/native_numpy_like.py
+		${PYTHON_PACKAGE_DIR}/humanfactorspy/__init__.py
+
+)
+set(ROOT_FILES # Files to be placed in the root of the project
+		${PYTHON_PACKAGE_DIR}/README.md
+)
 
 # Change linked targets based on HumanFactors_Config
 message([STATUS] ${HumanFactors_Config} " Selected as the current HumanFactors_Configuration")
@@ -131,8 +138,7 @@ if(${HumanFactors_Config} STREQUAL "All")
 			${C_INTERFACE_DIR}/pathfinder_C.cpp
 			${C_INTERFACE_DIR}/pathfinder_C.h
 	)
-	install( 
-		DIRECTORY 
+	LIST (APPEND PYTHON_MODULES
 			${PYTHON_PACKAGE_DIR}/humanfactorspy/raytracer	
 			${PYTHON_PACKAGE_DIR}/humanfactorspy/spatialstructures
 			${PYTHON_PACKAGE_DIR}/humanfactorspy/geometry
@@ -140,11 +146,10 @@ if(${HumanFactors_Config} STREQUAL "All")
 			${PYTHON_PACKAGE_DIR}/humanfactorspy/visibilitygraph
 			${PYTHON_PACKAGE_DIR}/humanfactorspy/pathfinding
 			${PYTHON_PACKAGE_DIR}/humanfactorspy/graphgenerator
-			DESTINATION humanfactorspy
 	)
 
-elseif(${HumanFactors_Config} STREQUAL "StandaloneRayTracer")
-	message([STATUS] "Building standalone raytracer")
+elseif(${HumanFactors_Config} STREQUAL "RayTracer")
+	message([STATUS] "Building  raytracer")
 	add_subdirectory(${C_PACKAGE_DIR}/raytracer)
 	add_subdirectory(${C_PACKAGE_DIR}/objloader)
 
@@ -164,15 +169,13 @@ elseif(${HumanFactors_Config} STREQUAL "StandaloneRayTracer")
 			${C_INTERFACE_DIR}/cinterface_utils.h
 			${C_INTERFACE_DIR}/cinterface_utils.cpp
 	)
-	install(
-		DIRECTORY
+	LIST (APPEND PYTHON_MODULES
 			${PYTHON_PACKAGE_DIR}/humanfactorspy/geometry
 			${PYTHON_PACKAGE_DIR}/humanfactorspy/raytracer
-		DESTINATION humanfactorspy
 	)
 
-elseif(${HumanFactors_Config} STREQUAL "StandaloneGraphGenerator")
-	message([STATUS] "Building standalone graph generator")
+elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
+	message([STATUS] "Building  graph generator")
 	add_subdirectory(${C_PACKAGE_DIR}/raytracer)
 	add_subdirectory(${C_PACKAGE_DIR}/objloader)
 	add_subdirectory(${C_PACKAGE_DIR}/analysismethods)
@@ -198,17 +201,15 @@ elseif(${HumanFactors_Config} STREQUAL "StandaloneGraphGenerator")
 			${C_INTERFACE_DIR}/spatialstructures_C.h
 			${C_INTERFACE_DIR}/spatialstructures_C.cpp
 	)
-	install(
-		DIRECTORY
+	LIST(APPEND PYTHON_MODULES
 			${PYTHON_PACKAGE_DIR}/humanfactorspy/geometry
 			${PYTHON_PACKAGE_DIR}/humanfactorspy/raytracer
 			${PYTHON_PACKAGE_DIR}/humanfactorspy/spatialstructures
 			${PYTHON_PACKAGE_DIR}/humanfactorspy/graphgenerator
-		DESTINATION humanfactorspy
 	)
 
-	elseif(${HumanFactors_Config} STREQUAL "StandaloneVisibilityGraph")
-		message([STATUS] "Building standalone Visibility Graph")
+	elseif(${HumanFactors_Config} STREQUAL "VisibilityGraph")
+		message([STATUS] "Building  Visibility Graph")
 		add_subdirectory(${C_PACKAGE_DIR}/raytracer)
 		add_subdirectory(${C_PACKAGE_DIR}/objloader)
 		add_subdirectory(${C_PACKAGE_DIR}/analysismethods)
@@ -236,17 +237,15 @@ elseif(${HumanFactors_Config} STREQUAL "StandaloneGraphGenerator")
 				${C_INTERFACE_DIR}/visibility_graph_C.cpp
 				${C_INTERFACE_DIR}/visibility_graph_C.h
 		)
-		install(
-			DIRECTORY
+		LIST(APPEND PYTHON_MODULES
 				${PYTHON_PACKAGE_DIR}/humanfactorspy/geometry
 				${PYTHON_PACKAGE_DIR}/humanfactorspy/raytracer
 				${PYTHON_PACKAGE_DIR}/humanfactorspy/spatialstructures
 				${PYTHON_PACKAGE_DIR}/humanfactorspy/visibilitygraph
-			DESTINATION humanfactorspy
 		)
 	
-	elseif(${HumanFactors_Config} STREQUAL "StandaloneViewAnalysis")
-		message([STATUS] "Building standalone ViewAnalysis")
+	elseif(${HumanFactors_Config} STREQUAL "ViewAnalysis")
+		message([STATUS] "Building  ViewAnalysis")
 		add_subdirectory(${C_PACKAGE_DIR}/raytracer)
 		add_subdirectory(${C_PACKAGE_DIR}/objloader)
 		add_subdirectory(${C_PACKAGE_DIR}/analysismethods)
@@ -274,19 +273,19 @@ elseif(${HumanFactors_Config} STREQUAL "StandaloneGraphGenerator")
 				${C_INTERFACE_DIR}/view_analysis_C.cpp
 				${C_INTERFACE_DIR}/view_analysis_C.h
 		)
-		install(
-			DIRECTORY
+		LIST(APPEND 
 				${PYTHON_PACKAGE_DIR}/humanfactorspy/geometry
 				${PYTHON_PACKAGE_DIR}/humanfactorspy/raytracer
 				${PYTHON_PACKAGE_DIR}/humanfactorspy/spatialstructures
 				${PYTHON_PACKAGE_DIR}/humanfactorspy/viewanalysis
-			DESTINATION humanfactorspy
 		)
-	elseif(${HumanFactors_Config} STREQUAL "StandaloneViewAnalysis")
+
+	elseif(${HumanFactors_Config} STREQUAL "ViewAnalysis")
 	
 else()
 	message(FATAL_ERROR "That is not a valid configuration ${HumanFactors_Config}")
 endif()
+
 
 # /$$$$$$$$                   /$$             
 #|__  $$__/                  | $$             
@@ -360,7 +359,7 @@ if(HumanFactors_EnableTests)
 					${C_TEST_DRIVER_DIR}/ViewAnalysis.cpp
 					${C_TEST_DRIVER_DIR}/PathFinding.cpp
 			)
-	elseif(${HumanFactors_Config} STREQUAL "StandaloneRayTracer")
+	elseif(${HumanFactors_Config} STREQUAL "RayTracer")
 		target_sources(
 			HFUnitTests
 			PRIVATE
@@ -380,7 +379,7 @@ if(HumanFactors_EnableTests)
 				HFExceptions 
 				EmbreeRayTracer
 			)
-	elseif(${HumanFactors_Config} STREQUAL "StandaloneGraphGenerator")
+	elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
 		target_link_libraries(
 			HFUnitTests
 			PRIVATE
@@ -399,7 +398,7 @@ if(HumanFactors_EnableTests)
 				${C_TEST_DRIVER_DIR}/SpatialStructures.cpp
 				${C_TEST_DRIVER_DIR}/AnalysisMethods.cpp
 		)
-	elseif(${HumanFactors_Config} STREQUAL "StandaloneVisibilityGraph")
+	elseif(${HumanFactors_Config} STREQUAL "VisibilityGraph")
 		target_link_libraries(
 			HFUnitTests
 			PRIVATE
@@ -418,7 +417,7 @@ if(HumanFactors_EnableTests)
 				${C_TEST_DRIVER_DIR}/SpatialStructures.cpp
 				${C_TEST_DRIVER_DIR}/VisibilityGraph.cpp
 		)
-	elseif(${HumanFactors_Config} STREQUAL "StandaloneViewAnalysis")
+	elseif(${HumanFactors_Config} STREQUAL "ViewAnalysis")
 		target_link_libraries(
 			HFUnitTests
 			PRIVATE
@@ -474,47 +473,60 @@ endif()
 # /$$$$$$| $$  | $$ /$$$$$$$/ |  $$$$/  $$$$$$$| $$| $$
 #|______/|__/  |__/|_______/   \___/  \_______/|__/|__/
 
+
+# Install the current C++ Project
 install(TARGETS ${project_name}
 		EXPORT ${project_name}Targets
 		LIBRARY DESTINATION lib
 		ARCHIVE DESTINATION lib
-		RUNTIME DESTINATION humanfactorspy/bin
+		RUNTIME DESTINATION bin
 		INCLUDES DESTINATION include
 	)
+install(FILES ${DEPENDENCY_BINARIES} DESTINATION bin)
+
+# Install python if the option is set to true
+if(HumanFactors_EnablePython)
+	message("Installing Python!")
+	install(DIRECTORY ${PYTHON_MODULES} DESTINATION humanfactorspy)
+	install(FILES ${PYTHON_FILES} DESTINATION humanfactorspy)
+	install(FILES ${DEPENDENCY_BINARIES} DESTINATION humanfactorspy/bin)
+	install(FILES "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIGURATION>/HumanFactors.dll" DESTINATION humanfactorspy/bin)
+
+	LIST(APPEND ROOT_FILES ${PYTHON_PACKAGE_DIR}/setup.py)
+endif()
+
+
 install(EXPORT ${project_name}Targets
-		FILE
-			${project_name}Targets.cmake
-#		NAMESPACE
-#			${project_name}::
-		DESTINATION
-			lib/cmake/${project_name}
-		)
-
-# Copy over human factors dlls for the C# build
-include(CMakePackageConfigHelpers)
-add_custom_command(TARGET HumanFactors POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIGURATION>/HumanFactors.dll"
-        "${CMAKE_CURRENT_BINARY_DIR}/humanfactorscsharp/$<CONFIGURATION>/HumanFactors.dll")
-
-add_custom_command(TARGET HumanFactors POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-        "${CMAKE_CURRENT_SOURCE_DIR}/bin"
-        "${CMAKE_CURRENT_BINARY_DIR}/humanfactorscsharp/$<CONFIGURATION>/")
-
-# Copy example models to the build directory for C#
-add_custom_command(TARGET HumanFactors POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-        "${CMAKE_CURRENT_SOURCE_DIR}/${PYTHON_PACKAGE_DIR}/humanfactorspy/Example Models"
-        "${CMAKE_CURRENT_BINARY_DIR}/humanfactorscsharp/$<CONFIGURATION>/ExampleModels"
+	FILE
+		${project_name}Targets.cmake
+#	NAMESPACE
+#		${project_name}::
+	DESTINATION
+		lib/cmake/${project_name}
 )
 
-# Install all required dlls to the /bin directory
-install(FILES 
-		"${CMAKE_CURRENT_BINARY_DIR}/$<CONFIGURATION>/HumanFactors.dll"
-		"${CMAKE_CURRENT_BINARY_DIR}/$<CONFIGURATION>/embree3.dll"
-		"${CMAKE_CURRENT_BINARY_DIR}/$<CONFIGURATION>/tbb.dll"
-		TYPE BIN
-	)
+if (HumanFactors_EnableCSharp)
+	add_subdirectory(${CSHARP_DIR})
+	
+	# The following commands copy resources necessary for C# to perform its unittests
+	add_custom_command(TARGET HumanFactors POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy_if_different
+			"${CMAKE_CURRENT_BINARY_DIR}/$<CONFIGURATION>/HumanFactors.dll"
+			"${CMAKE_CURRENT_BINARY_DIR}/humanfactorscsharp/$<CONFIGURATION>/HumanFactors.dll")
 
+	add_custom_command(TARGET HumanFactors POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy_directory
+			"${CMAKE_CURRENT_SOURCE_DIR}/bin"
+			"${CMAKE_CURRENT_BINARY_DIR}/humanfactorscsharp/$<CONFIGURATION>/"
+	)
+	# Copy example models to the build directory for C#
+	add_custom_command(TARGET HumanFactors POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy_directory
+			"${CMAKE_CURRENT_SOURCE_DIR}/${PYTHON_PACKAGE_DIR}/humanfactorspy/Example Models"
+			"${CMAKE_CURRENT_BINARY_DIR}/humanfactorscsharp/$<CONFIGURATION>/ExampleModels"
+	)
+endif()
+
+
+install(FILES ${ROOT_FILES} DESTINATION ${CMAKE_INSTALL_PREFIX})
 #add_library(${project_name}::${project_name} ALIAS ${project_name})
