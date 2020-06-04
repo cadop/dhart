@@ -1,6 +1,5 @@
 #include "gtest/gtest.h"
 #include <array>
-#include <graph_generator.h>
 #include <gtest/gtest.h>
 #include <embree_raytracer.h>
 #include <objloader.h>
