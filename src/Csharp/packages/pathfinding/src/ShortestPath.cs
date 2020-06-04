@@ -1,7 +1,6 @@
 ﻿using HumanFactors.Exceptions;
 using HumanFactors.NativeUtils;
 using HumanFactors.NativeUtils.CommonNativeArrays;
-using HumanFactors.RayTracing;
 using HumanFactors.SpatialStructures;
 using System;
 using System.Collections;

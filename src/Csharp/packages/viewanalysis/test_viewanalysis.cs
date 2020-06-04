@@ -1,6 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using HumanFactors.Geometry;
-using HumanFactors.SpatialStructures;
 using HumanFactors.RayTracing;
 using System.Runtime.InteropServices;
 using System;

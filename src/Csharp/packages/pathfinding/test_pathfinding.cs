@@ -1,8 +1,5 @@
-using HumanFactors.Geometry;
 using HumanFactors.Pathfinding;
-using HumanFactors.RayTracing;
 using HumanFactors.SpatialStructures;
-using HumanFactors.VisibilityGraph;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;

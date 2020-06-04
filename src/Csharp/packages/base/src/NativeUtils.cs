@@ -1,5 +1,4 @@
 ﻿using HumanFactors.NativeUtils.CommonNativeArrays;
-using HumanFactors.SpatialStructures;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
