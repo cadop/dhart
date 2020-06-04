@@ -11,6 +11,7 @@ set(DEPENDENCY_BINARIES
 		"${CMAKE_SOURCE_DIR}/external/Embree/bin/embree3.dll"
 )
 
+
 project ("humanfactors" VERSION "0.0.1")
 set(project_name "HumanFactors")
 
@@ -29,13 +30,26 @@ set(CMAKE_CXX_FLAGS "/EHsc /MP")
 option(HumanFactors_EnableTests "Install unit tests to the bin directory" ON)
 option(HumanFactors_EnableCSharp "Include C# Interface" ON)
 option(HumanFactors_EnablePython "Include Python Interface" ON)
+option(HumanFactors_UseDefaultInstallPath "If true, use the install path defined by your platform." OFF)
 set(HumanFactors_Config "StandaloneGraphGenerator" CACHE STRING "What projects to build")
 set(EXTERNAL_DIR "${CMAKE_SOURCE_DIR}\\external")
 set (ENABLE_EXPORTS ON)
 
+# Change install path if specified
+if (NOT HumanFactors_UseDefaultInstallPath)
+	if (HumanFactors_EnablePython) 
+		set(LANGUAGE_SUPPORT_STRING ${LANGUAGE_SUPPORT_STRING}Python_)
+	endif()
+	if (HumanFactors_EnableCSharp) 
+		set(LANGUAGE_SUPPORT_STRING ${LANGUAGE_SUPPORT_STRING}CSharp_) 
+	endif()
+
+	set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/release/${LANGUAGE_SUPPORT_STRING}${HumanFactors_Config})
+	message(${CMAKE_INSTALL_PREFIX})
+endif()
 
 # Change install directory based on which options were selected
-set(CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}/${HumanFactors_Config}")
+# set(CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}/${HumanFactors_Config}")
 
 # Setup
 add_library(HumanFactors SHARED)
@@ -47,16 +61,10 @@ add_subdirectory(external)
 
 # Set Compiler flags based on whether or not this is the release build
 if(CMAKE_BUILD_TYPE MATCHES Release)
-	set(
-		CMAKE_CXX_FLAGS "/EHsc /openmp -O2"
-	)
+	set(CMAKE_CXX_FLAGS "/EHsc /openmp -O2")
 	message([STATUS] "Using release optimizations")
 else()
-	# set(CMAKE_CXX_CLANG_TIDY clang-tidy -checks=-*,clang-analyzer*,clang-analyzer-cplusplus*,performance*,cppcoreguidlines* --extra-arg=-EHsc --extra-arg-before=--driver-mode=cl)
-	set(
-		CMAKE_CXX_FLAGS 
-			"/openmp /EHsc /MP"
-	)
+	set(CMAKE_CXX_FLAGS "/openmp /EHsc /MP")
 endif()
 
 
