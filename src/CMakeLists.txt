@@ -9,7 +9,23 @@ set(C_TEST_DRIVER_DIR "Cpp/tests/src")
 set(DEPENDENCY_BINARIES
 		"${CMAKE_SOURCE_DIR}/external/Embree/bin/tbb.dll" 
 		"${CMAKE_SOURCE_DIR}/external/Embree/bin/embree3.dll"
+		"${CMAKE_SOURCE_DIR}/external/Microsoft/Release/msvcp140.dll"
+		"${CMAKE_SOURCE_DIR}/external/Microsoft/Release/vcruntime140.dll"
 )
+
+
+set(DEBUG_DEPENDENCY_BINARIES
+	"${CMAKE_SOURCE_DIR}/external/Microsoft/Debug/vcruntime140_1d.dll"
+	"${CMAKE_SOURCE_DIR}/external/Microsoft/Debug/vcruntime140d.dll"
+	"${CMAKE_SOURCE_DIR}/external/Microsoft/Debug/vcomp140d.dll"
+	"${CMAKE_SOURCE_DIR}/external/Microsoft/Debug/msvcp140d.dll"
+)
+
+set(RELEASE_DEPENDENCY_BINARIES
+	"${CMAKE_SOURCE_DIR}/external/Microsoft/Release/vcruntime140_1.dll"
+	"${CMAKE_SOURCE_DIR}/external/Microsoft/Release/vcomp140.dll"
+)
+
 
 
 project ("humanfactors" VERSION "0.0.1")
@@ -584,8 +600,25 @@ if(HumanFactors_EnablePython)
 	install(FILES ${DEPENDENCY_BINARIES} DESTINATION humanfactorspy/bin)
 	install(FILES "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIGURATION>/HumanFactors.dll" DESTINATION humanfactorspy/bin)
 
+	install (FILES ${RELEASE_DEPENDENCY_BINARIES} CONFIGURATIONS Release DESTINATION humanfactorspy/bin)
+	install (FILES ${DEBUG_DEPENDENCY_BINARIES} CONFIGURATIONS Debug DESTINATION humanfactorspy/bin)
+
 	LIST(APPEND ROOT_FILES ${PYTHON_PACKAGE_DIR}/setup.py)
 endif()
+
+
+install (FILES ${RELEASE_DEPENDENCY_BINARIES} CONFIGURATIONS Release DESTINATION bin)
+install (FILES ${DEBUG_DEPENDENCY_BINARIES} CONFIGURATIONS Debug DESTINATION bin)
+
+#
+#if ($<IF<$<Config:Release>>)
+#	install(FILES ${RELEASE_DEPENDENCY_BINARIES} DESTINATION humanfactorspy/bin)
+#else()
+#	install(FILES ${DEBUG_DEPENDENCY_BINARIES} DESTINATION humanfactorspy/bin)
+#endif()
+
+
+#install(FILES $<IF:$<CONFIG:Release>,${RELEASE_DEPENDENCY_BINARIES},${DEBUG_DEPENDENCY_BINARIES}> DESTINATION humanfactorspy/bin)
 
 
 install(EXPORT ${project_name}Targets
