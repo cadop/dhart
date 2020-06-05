@@ -1,8 +1,9 @@
 var searchData=
 [
-  ['addedgefromnodeids_0',['AddEdgeFromNodeIDs',['../spatialstructures___c_8cpp.html#aa36a860766b35afca68828da5e377c68',1,'AddEdgeFromNodeIDs(Graph *graph, int parent_id, int child_id, float score):&#160;spatialstructures_C.cpp'],['../spatialstructures___c_8h.html#a0f38cc17daedc23e2fb21115fbb24d07',1,'AddEdgeFromNodeIDs(HF::SpatialStructures::Graph *graph, int parent_id, int child_id, float score):&#160;spatialstructures_C.h']]],
-  ['addedgefromnodes_1',['AddEdgeFromNodes',['../spatialstructures___c_8cpp.html#acbf5cf8175b7b7d45359f036a94c67a5',1,'AddEdgeFromNodes(Graph *graph, const float *parent, const float *child, float score):&#160;spatialstructures_C.cpp'],['../spatialstructures___c_8h.html#ac886f77eaff2a7b396a0ea47f78ef9af',1,'AddEdgeFromNodes(HF::SpatialStructures::Graph *graph, const float *parent, const float *child, float score):&#160;spatialstructures_C.h']]],
-  ['aggregatecosts_2',['AggregateCosts',['../spatialstructures___c_8cpp.html#aeb839716ce17c69e04939c1b9d4ca244',1,'AggregateCosts(const Graph *graph, int agg, bool directed, std::vector&lt; float &gt; **out_vector_ptr, float **out_data_ptr):&#160;spatialstructures_C.cpp'],['../spatialstructures___c_8h.html#a6a53ede89ff44ba3c8bf697c9626fcbe',1,'AggregateCosts(const HF::SpatialStructures::Graph *graph, int agg, bool directed, std::vector&lt; float &gt; **out_vector_ptr, float **out_data_ptr):&#160;spatialstructures_C.h']]],
-  ['analysis_5fc_2ecpp_3',['analysis_C.cpp',['../analysis___c_8cpp.html',1,'']]],
-  ['analysis_5fc_2eh_4',['analysis_C.h',['../analysis___c_8h.html',1,'']]]
+  ['addedge_0',['addEdge',['../class_h_f_1_1_spatial_structures_1_1_graph.html#a604a648f1f73d687ad4544d2ac163212',1,'HF::SpatialStructures::Graph']]],
+  ['addverts_1',['AddVerts',['../class_h_f_1_1_geometry_1_1_mesh_info.html#a35a764d76bb738c933592dc95d475234',1,'HF::Geometry::MeshInfo::AddVerts(const std::vector&lt; std::array&lt; float, 3 &gt;&gt; &amp;verts)'],['../class_h_f_1_1_geometry_1_1_mesh_info.html#a3d9b22866ed60c3dd1d54bbd06b38e60',1,'HF::Geometry::MeshInfo::AddVerts(const std::vector&lt; float &gt; &amp;verts, std::vector&lt; int &gt; &amp;indices)']]],
+  ['aggregategraph_2',['AggregateGraph',['../class_h_f_1_1_spatial_structures_1_1_graph.html#a3285be5da987692e0b3671f49d67d21b',1,'HF::SpatialStructures::Graph']]],
+  ['angleto_3',['angleTo',['../struct_h_f_1_1_spatial_structures_1_1_node.html#a260ab9e9763234dab08decfc2aa6bf63',1,'HF::SpatialStructures::Node']]],
+  ['attrib_5ft_4',['attrib_t',['../structtinyobj_1_1attrib__t.html',1,'tinyobj']]],
+  ['analysis_5',['Analysis',['../index.html',1,'']]]
 ];

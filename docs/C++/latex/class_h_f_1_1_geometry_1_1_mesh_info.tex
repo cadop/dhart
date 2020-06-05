@@ -1,0 +1,268 @@
+\hypertarget{class_h_f_1_1_geometry_1_1_mesh_info}{}\doxysection{HF\+::Geometry\+::Mesh\+Info Class Reference}
+\label{class_h_f_1_1_geometry_1_1_mesh_info}\index{HF::Geometry::MeshInfo@{HF::Geometry::MeshInfo}}
+
+
+Holds vertices and some other information about a specific mesh  
+
+
+
+
+{\ttfamily \#include $<$meshinfo.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_h_f_1_1_geometry_1_1_mesh_info_af564a1fb0a0389878edf369b653164fb}{Mesh\+Info}} (const std\+::vector$<$ std\+::array$<$ float, 3 $>$$>$ \&vertices, int id, std\+::string name=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{class_h_f_1_1_geometry_1_1_mesh_info}{Mesh\+Info}} object from an unindexed vector of vertices, an ID, and a name \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_h_f_1_1_geometry_1_1_mesh_info_a98504dd2742ca9adb7f5ff1f1443faaf}{Mesh\+Info}} (const std\+::vector$<$ float $>$ \&in\+\_\+vertices, const std\+::vector$<$ int $>$ \&in\+\_\+indexes, int id, std\+::string name=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{class_h_f_1_1_geometry_1_1_mesh_info}{Mesh\+Info}} object from an indexed vector of vertices \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_h_f_1_1_geometry_1_1_mesh_info_a35a764d76bb738c933592dc95d475234}{Add\+Verts}} (const std\+::vector$<$ std\+::array$<$ float, 3 $>$$>$ \&verts)
+\begin{DoxyCompactList}\small\item\em Append a list of verts onto the end of the mesh. This will cause the array to be resized. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_h_f_1_1_geometry_1_1_mesh_info_a3d9b22866ed60c3dd1d54bbd06b38e60}{Add\+Verts}} (const std\+::vector$<$ float $>$ \&verts, std\+::vector$<$ int $>$ \&indices)
+\begin{DoxyCompactList}\small\item\em Populate the mesh using only an array of floats and vertices corresponding to mesh x,y,z values and triangle indexes respectively. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_h_f_1_1_geometry_1_1_mesh_info_aa0a92bb9f188b0d712fc3f462ea7184b}{Num\+Verts}} () const
+\begin{DoxyCompactList}\small\item\em Get the number of vertices stored in this mesh info \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_h_f_1_1_geometry_1_1_mesh_info_a1238a0e79916f20efcf584236214fe4a}{Num\+Tris}} () const
+\begin{DoxyCompactList}\small\item\em Get the total number of triangles in the given mesh \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_h_f_1_1_geometry_1_1_mesh_info_a0b045826387ad47da69e5c098caf91dd}{Convert\+To\+Rhino\+Coordinates}} ()
+\begin{DoxyCompactList}\small\item\em Convert the internal coordinates of this mesh to rhino coordinates \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_h_f_1_1_geometry_1_1_mesh_info_aa78330b65f42be9a33a6e58fa2717f73}{Convert\+To\+O\+B\+J\+Coordinates}} ()
+\begin{DoxyCompactList}\small\item\em Convert the internal coordinates of this mesh to O\+BJ coordinates \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_h_f_1_1_geometry_1_1_mesh_info_a2fd71111a71467b3f10fb13ff86cc208}{Perform\+Rotation}} (float rx, float ry, float rz)
+\begin{DoxyCompactList}\small\item\em Rotate this mesh by x,y,z rotations in degrees. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_h_f_1_1_geometry_1_1_mesh_info_a0a5677e9e852ca1dd4ea25e417e41a45}{Get\+Mesh\+ID}} () const
+\begin{DoxyCompactList}\small\item\em Return a copy of mesh\+ID \end{DoxyCompactList}\item 
+std\+::vector$<$ float $>$ \mbox{\hyperlink{class_h_f_1_1_geometry_1_1_mesh_info_af7a2c6ef7914efa285372598bda8bc05}{get\+Raw\+Vertices}} () const
+\begin{DoxyCompactList}\small\item\em Get a copy of the underlying vertex buffer. Helpful for filling other bufferss \end{DoxyCompactList}\item 
+std\+::vector$<$ int $>$ \mbox{\hyperlink{class_h_f_1_1_geometry_1_1_mesh_info_a1a1a8be9e09b773984d497f4c2694849}{get\+Raw\+Indices}} () const
+\begin{DoxyCompactList}\small\item\em Get a copy of the underlying index buffer. Useful for copying into other buffers \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ \mbox{\hyperlink{class_h_f_1_1_geometry_1_1_mesh_info_accddfbfd7c4867a4a7bd599a6c8ac532}{Get\+Verts\+As\+Arrays}} () const
+\begin{DoxyCompactList}\small\item\em Get verticies as a vector of floats. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_h_f_1_1_geometry_1_1_mesh_info_a7d30016f14b635d17e6668fba38c7676}\label{class_h_f_1_1_geometry_1_1_mesh_info_a7d30016f14b635d17e6668fba38c7676}} 
+void {\bfseries Set\+Mesh\+ID} (int new\+\_\+id)
+\item 
+bool \mbox{\hyperlink{class_h_f_1_1_geometry_1_1_mesh_info_a726c12d5215ad9b63f4f5138c877d43e}{operator==}} (const \mbox{\hyperlink{class_h_f_1_1_geometry_1_1_mesh_info}{Mesh\+Info}} \&M2) const
+\begin{DoxyCompactList}\small\item\em Compare the vertices of two mesh info objects \end{DoxyCompactList}\item 
+std\+::array$<$ float, 3 $>$ \mbox{\hyperlink{class_h_f_1_1_geometry_1_1_mesh_info_aae7fbe8088590d8967a6340534a9adfb}{operator\mbox{[}$\,$\mbox{]}}} (int i) const
+\begin{DoxyCompactList}\small\item\em Get a vertice at a specific vertex in the mesh \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Holds vertices and some other information about a specific mesh 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_h_f_1_1_geometry_1_1_mesh_info_af564a1fb0a0389878edf369b653164fb}\label{class_h_f_1_1_geometry_1_1_mesh_info_af564a1fb0a0389878edf369b653164fb}} 
+\index{HF::Geometry::MeshInfo@{HF::Geometry::MeshInfo}!MeshInfo@{MeshInfo}}
+\index{MeshInfo@{MeshInfo}!HF::Geometry::MeshInfo@{HF::Geometry::MeshInfo}}
+\doxysubsubsection{\texorpdfstring{MeshInfo()}{MeshInfo()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily H\+F\+::\+Geometry\+::\+Mesh\+Info\+::\+Mesh\+Info (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::array$<$ float, 3 $>$$>$ \&}]{vertices,  }\item[{int}]{id,  }\item[{std\+::string}]{name = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Construct a new \mbox{\hyperlink{class_h_f_1_1_geometry_1_1_mesh_info}{Mesh\+Info}} object from an unindexed vector of vertices, an ID, and a name 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertices} & An ordered list of vertices, Every 3 vertices form a triangle in the mesh\\
+\hline
+{\em id} & The id of this mesh\\
+\hline
+{\em name} & The name of this mesh\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_h_f_1_1_geometry_1_1_mesh_info_a98504dd2742ca9adb7f5ff1f1443faaf}\label{class_h_f_1_1_geometry_1_1_mesh_info_a98504dd2742ca9adb7f5ff1f1443faaf}} 
+\index{HF::Geometry::MeshInfo@{HF::Geometry::MeshInfo}!MeshInfo@{MeshInfo}}
+\index{MeshInfo@{MeshInfo}!HF::Geometry::MeshInfo@{HF::Geometry::MeshInfo}}
+\doxysubsubsection{\texorpdfstring{MeshInfo()}{MeshInfo()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily H\+F\+::\+Geometry\+::\+Mesh\+Info\+::\+Mesh\+Info (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ float $>$ \&}]{in\+\_\+vertices,  }\item[{const std\+::vector$<$ int $>$ \&}]{in\+\_\+indexes,  }\item[{int}]{id,  }\item[{std\+::string}]{name = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Construct a new \mbox{\hyperlink{class_h_f_1_1_geometry_1_1_mesh_info}{Mesh\+Info}} object from an indexed vector of vertices 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertices} & An ordered list of floats with each 3 floats representing a single vertex.\\
+\hline
+{\em indexes} & A vector of indexes with each index matching up with a vertex in vertices.\\
+\hline
+{\em id} & The id of this mesh\\
+\hline
+{\em name} & The name of this mesh\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_h_f_1_1_geometry_1_1_mesh_info_a3d9b22866ed60c3dd1d54bbd06b38e60}\label{class_h_f_1_1_geometry_1_1_mesh_info_a3d9b22866ed60c3dd1d54bbd06b38e60}} 
+\index{HF::Geometry::MeshInfo@{HF::Geometry::MeshInfo}!AddVerts@{AddVerts}}
+\index{AddVerts@{AddVerts}!HF::Geometry::MeshInfo@{HF::Geometry::MeshInfo}}
+\doxysubsubsection{\texorpdfstring{AddVerts()}{AddVerts()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void H\+F\+::\+Geometry\+::\+Mesh\+Info\+::\+Add\+Verts (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ float $>$ \&}]{verts,  }\item[{std\+::vector$<$ int $>$ \&}]{indices }\end{DoxyParamCaption})}
+
+
+
+Populate the mesh using only an array of floats and vertices corresponding to mesh x,y,z values and triangle indexes respectively. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em verts} & \\
+\hline
+{\em indices} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_h_f_1_1_geometry_1_1_mesh_info_a35a764d76bb738c933592dc95d475234}\label{class_h_f_1_1_geometry_1_1_mesh_info_a35a764d76bb738c933592dc95d475234}} 
+\index{HF::Geometry::MeshInfo@{HF::Geometry::MeshInfo}!AddVerts@{AddVerts}}
+\index{AddVerts@{AddVerts}!HF::Geometry::MeshInfo@{HF::Geometry::MeshInfo}}
+\doxysubsubsection{\texorpdfstring{AddVerts()}{AddVerts()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void H\+F\+::\+Geometry\+::\+Mesh\+Info\+::\+Add\+Verts (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::array$<$ float, 3 $>$$>$ \&}]{verts }\end{DoxyParamCaption})}
+
+
+
+Append a list of verts onto the end of the mesh. This will cause the array to be resized. 
+
+\mbox{\Hypertarget{class_h_f_1_1_geometry_1_1_mesh_info_aa78330b65f42be9a33a6e58fa2717f73}\label{class_h_f_1_1_geometry_1_1_mesh_info_aa78330b65f42be9a33a6e58fa2717f73}} 
+\index{HF::Geometry::MeshInfo@{HF::Geometry::MeshInfo}!ConvertToOBJCoordinates@{ConvertToOBJCoordinates}}
+\index{ConvertToOBJCoordinates@{ConvertToOBJCoordinates}!HF::Geometry::MeshInfo@{HF::Geometry::MeshInfo}}
+\doxysubsubsection{\texorpdfstring{ConvertToOBJCoordinates()}{ConvertToOBJCoordinates()}}
+{\footnotesize\ttfamily void H\+F\+::\+Geometry\+::\+Mesh\+Info\+::\+Convert\+To\+O\+B\+J\+Coordinates (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Convert the internal coordinates of this mesh to O\+BJ coordinates 
+
+\mbox{\Hypertarget{class_h_f_1_1_geometry_1_1_mesh_info_a0b045826387ad47da69e5c098caf91dd}\label{class_h_f_1_1_geometry_1_1_mesh_info_a0b045826387ad47da69e5c098caf91dd}} 
+\index{HF::Geometry::MeshInfo@{HF::Geometry::MeshInfo}!ConvertToRhinoCoordinates@{ConvertToRhinoCoordinates}}
+\index{ConvertToRhinoCoordinates@{ConvertToRhinoCoordinates}!HF::Geometry::MeshInfo@{HF::Geometry::MeshInfo}}
+\doxysubsubsection{\texorpdfstring{ConvertToRhinoCoordinates()}{ConvertToRhinoCoordinates()}}
+{\footnotesize\ttfamily void H\+F\+::\+Geometry\+::\+Mesh\+Info\+::\+Convert\+To\+Rhino\+Coordinates (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Convert the internal coordinates of this mesh to rhino coordinates 
+
+\mbox{\Hypertarget{class_h_f_1_1_geometry_1_1_mesh_info_a0a5677e9e852ca1dd4ea25e417e41a45}\label{class_h_f_1_1_geometry_1_1_mesh_info_a0a5677e9e852ca1dd4ea25e417e41a45}} 
+\index{HF::Geometry::MeshInfo@{HF::Geometry::MeshInfo}!GetMeshID@{GetMeshID}}
+\index{GetMeshID@{GetMeshID}!HF::Geometry::MeshInfo@{HF::Geometry::MeshInfo}}
+\doxysubsubsection{\texorpdfstring{GetMeshID()}{GetMeshID()}}
+{\footnotesize\ttfamily int H\+F\+::\+Geometry\+::\+Mesh\+Info\+::\+Get\+Mesh\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Return a copy of mesh\+ID 
+
+\mbox{\Hypertarget{class_h_f_1_1_geometry_1_1_mesh_info_a1a1a8be9e09b773984d497f4c2694849}\label{class_h_f_1_1_geometry_1_1_mesh_info_a1a1a8be9e09b773984d497f4c2694849}} 
+\index{HF::Geometry::MeshInfo@{HF::Geometry::MeshInfo}!getRawIndices@{getRawIndices}}
+\index{getRawIndices@{getRawIndices}!HF::Geometry::MeshInfo@{HF::Geometry::MeshInfo}}
+\doxysubsubsection{\texorpdfstring{getRawIndices()}{getRawIndices()}}
+{\footnotesize\ttfamily std\+::vector$<$ int $>$ H\+F\+::\+Geometry\+::\+Mesh\+Info\+::get\+Raw\+Indices (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get a copy of the underlying index buffer. Useful for copying into other buffers 
+
+/// \mbox{\Hypertarget{class_h_f_1_1_geometry_1_1_mesh_info_af7a2c6ef7914efa285372598bda8bc05}\label{class_h_f_1_1_geometry_1_1_mesh_info_af7a2c6ef7914efa285372598bda8bc05}} 
+\index{HF::Geometry::MeshInfo@{HF::Geometry::MeshInfo}!getRawVertices@{getRawVertices}}
+\index{getRawVertices@{getRawVertices}!HF::Geometry::MeshInfo@{HF::Geometry::MeshInfo}}
+\doxysubsubsection{\texorpdfstring{getRawVertices()}{getRawVertices()}}
+{\footnotesize\ttfamily std\+::vector$<$ float $>$ H\+F\+::\+Geometry\+::\+Mesh\+Info\+::get\+Raw\+Vertices (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get a copy of the underlying vertex buffer. Helpful for filling other bufferss 
+
+\mbox{\Hypertarget{class_h_f_1_1_geometry_1_1_mesh_info_accddfbfd7c4867a4a7bd599a6c8ac532}\label{class_h_f_1_1_geometry_1_1_mesh_info_accddfbfd7c4867a4a7bd599a6c8ac532}} 
+\index{HF::Geometry::MeshInfo@{HF::Geometry::MeshInfo}!GetVertsAsArrays@{GetVertsAsArrays}}
+\index{GetVertsAsArrays@{GetVertsAsArrays}!HF::Geometry::MeshInfo@{HF::Geometry::MeshInfo}}
+\doxysubsubsection{\texorpdfstring{GetVertsAsArrays()}{GetVertsAsArrays()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ H\+F\+::\+Geometry\+::\+Mesh\+Info\+::\+Get\+Verts\+As\+Arrays (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get verticies as a vector of floats. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_h_f_1_1_geometry_1_1_mesh_info_a1238a0e79916f20efcf584236214fe4a}\label{class_h_f_1_1_geometry_1_1_mesh_info_a1238a0e79916f20efcf584236214fe4a}} 
+\index{HF::Geometry::MeshInfo@{HF::Geometry::MeshInfo}!NumTris@{NumTris}}
+\index{NumTris@{NumTris}!HF::Geometry::MeshInfo@{HF::Geometry::MeshInfo}}
+\doxysubsubsection{\texorpdfstring{NumTris()}{NumTris()}}
+{\footnotesize\ttfamily int H\+F\+::\+Geometry\+::\+Mesh\+Info\+::\+Num\+Tris (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the total number of triangles in the given mesh 
+
+\begin{DoxyReturn}{Returns}
+num\+Verts/3
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_h_f_1_1_geometry_1_1_mesh_info_aa0a92bb9f188b0d712fc3f462ea7184b}\label{class_h_f_1_1_geometry_1_1_mesh_info_aa0a92bb9f188b0d712fc3f462ea7184b}} 
+\index{HF::Geometry::MeshInfo@{HF::Geometry::MeshInfo}!NumVerts@{NumVerts}}
+\index{NumVerts@{NumVerts}!HF::Geometry::MeshInfo@{HF::Geometry::MeshInfo}}
+\doxysubsubsection{\texorpdfstring{NumVerts()}{NumVerts()}}
+{\footnotesize\ttfamily int H\+F\+::\+Geometry\+::\+Mesh\+Info\+::\+Num\+Verts (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the number of vertices stored in this mesh info 
+
+\begin{DoxyReturn}{Returns}
+Total number of stored vertices
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_h_f_1_1_geometry_1_1_mesh_info_a726c12d5215ad9b63f4f5138c877d43e}\label{class_h_f_1_1_geometry_1_1_mesh_info_a726c12d5215ad9b63f4f5138c877d43e}} 
+\index{HF::Geometry::MeshInfo@{HF::Geometry::MeshInfo}!operator==@{operator==}}
+\index{operator==@{operator==}!HF::Geometry::MeshInfo@{HF::Geometry::MeshInfo}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool H\+F\+::\+Geometry\+::\+Mesh\+Info\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_h_f_1_1_geometry_1_1_mesh_info}{Mesh\+Info}} \&}]{M2 }\end{DoxyParamCaption}) const}
+
+
+
+Compare the vertices of two mesh info objects 
+
+
+\begin{DoxyParams}{Parameters}
+{\em M2} & Mesh info to compare with\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if all vertices are equal within a certain tolerance
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_h_f_1_1_geometry_1_1_mesh_info_aae7fbe8088590d8967a6340534a9adfb}\label{class_h_f_1_1_geometry_1_1_mesh_info_aae7fbe8088590d8967a6340534a9adfb}} 
+\index{HF::Geometry::MeshInfo@{HF::Geometry::MeshInfo}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!HF::Geometry::MeshInfo@{HF::Geometry::MeshInfo}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily std\+::array$<$ float, 3 $>$ H\+F\+::\+Geometry\+::\+Mesh\+Info\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption}) const}
+
+
+
+Get a vertice at a specific vertex in the mesh 
+
+/// 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & Index of the desired vertice\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An array of floats for the x,y, and z coordinates
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_h_f_1_1_geometry_1_1_mesh_info_a2fd71111a71467b3f10fb13ff86cc208}\label{class_h_f_1_1_geometry_1_1_mesh_info_a2fd71111a71467b3f10fb13ff86cc208}} 
+\index{HF::Geometry::MeshInfo@{HF::Geometry::MeshInfo}!PerformRotation@{PerformRotation}}
+\index{PerformRotation@{PerformRotation}!HF::Geometry::MeshInfo@{HF::Geometry::MeshInfo}}
+\doxysubsubsection{\texorpdfstring{PerformRotation()}{PerformRotation()}}
+{\footnotesize\ttfamily void H\+F\+::\+Geometry\+::\+Mesh\+Info\+::\+Perform\+Rotation (\begin{DoxyParamCaption}\item[{float}]{rx,  }\item[{float}]{ry,  }\item[{float}]{rz }\end{DoxyParamCaption})}
+
+
+
+Rotate this mesh by x,y,z rotations in degrees. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/objloader/src/meshinfo.\+h\item 
+Cpp/objloader/src/meshinfo.\+cpp\end{DoxyCompactItemize}

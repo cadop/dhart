@@ -1,0 +1,89 @@
+\hypertarget{classtinyobj_1_1_obj_reader}{}\doxysection{tinyobj\+::Obj\+Reader Class Reference}
+\label{classtinyobj_1_1_obj_reader}\index{tinyobj::ObjReader@{tinyobj::ObjReader}}
+
+
+{\ttfamily \#include $<$tiny\+\_\+obj\+\_\+loader.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classtinyobj_1_1_obj_reader_a2aff0b5142ad265dc9fa276064f69700}{Parse\+From\+File}} (const std\+::string \&filename, const \mbox{\hyperlink{structtinyobj_1_1_obj_reader_config}{Obj\+Reader\+Config}} \&config=\mbox{\hyperlink{structtinyobj_1_1_obj_reader_config}{Obj\+Reader\+Config}}())
+\item 
+bool \mbox{\hyperlink{classtinyobj_1_1_obj_reader_a89a253a20fdf22305b068143cc58dfce}{Parse\+From\+String}} (const std\+::string \&obj\+\_\+text, const std\+::string \&mtl\+\_\+text, const \mbox{\hyperlink{structtinyobj_1_1_obj_reader_config}{Obj\+Reader\+Config}} \&config=\mbox{\hyperlink{structtinyobj_1_1_obj_reader_config}{Obj\+Reader\+Config}}())
+\item 
+bool \mbox{\hyperlink{classtinyobj_1_1_obj_reader_ac4c689535db68c233dd063e7c726139d}{Valid}} () const
+\item 
+\mbox{\Hypertarget{classtinyobj_1_1_obj_reader_a401a50066858c7ddc60557f37c03f2ba}\label{classtinyobj_1_1_obj_reader_a401a50066858c7ddc60557f37c03f2ba}} 
+const \mbox{\hyperlink{structtinyobj_1_1attrib__t}{attrib\+\_\+t}} \& {\bfseries Get\+Attrib} () const
+\item 
+\mbox{\Hypertarget{classtinyobj_1_1_obj_reader_a584bc1aa69abedfc63e021b5fda8aade}\label{classtinyobj_1_1_obj_reader_a584bc1aa69abedfc63e021b5fda8aade}} 
+const std\+::vector$<$ \mbox{\hyperlink{structtinyobj_1_1shape__t}{shape\+\_\+t}} $>$ \& {\bfseries Get\+Shapes} () const
+\item 
+\mbox{\Hypertarget{classtinyobj_1_1_obj_reader_ac585ed52ad27e280ae5379aac4e41e64}\label{classtinyobj_1_1_obj_reader_ac585ed52ad27e280ae5379aac4e41e64}} 
+const std\+::vector$<$ \mbox{\hyperlink{structtinyobj_1_1material__t}{material\+\_\+t}} $>$ \& {\bfseries Get\+Materials} () const
+\item 
+const std\+::string \& \mbox{\hyperlink{classtinyobj_1_1_obj_reader_a5d464866fc4c15c85d410d926f402cf3}{Warning}} () const
+\item 
+const std\+::string \& \mbox{\hyperlink{classtinyobj_1_1_obj_reader_a3a17995f7280cd035e05c80cc78de1ea}{Error}} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Wavefront .obj reader class(v2 A\+P\+I) 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classtinyobj_1_1_obj_reader_a3a17995f7280cd035e05c80cc78de1ea}\label{classtinyobj_1_1_obj_reader_a3a17995f7280cd035e05c80cc78de1ea}} 
+\index{tinyobj::ObjReader@{tinyobj::ObjReader}!Error@{Error}}
+\index{Error@{Error}!tinyobj::ObjReader@{tinyobj::ObjReader}}
+\doxysubsubsection{\texorpdfstring{Error()}{Error()}}
+{\footnotesize\ttfamily const std\+::string\& tinyobj\+::\+Obj\+Reader\+::\+Error (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Error message(filled when {\ttfamily Load} or {\ttfamily Parse} failed) \mbox{\Hypertarget{classtinyobj_1_1_obj_reader_a2aff0b5142ad265dc9fa276064f69700}\label{classtinyobj_1_1_obj_reader_a2aff0b5142ad265dc9fa276064f69700}} 
+\index{tinyobj::ObjReader@{tinyobj::ObjReader}!ParseFromFile@{ParseFromFile}}
+\index{ParseFromFile@{ParseFromFile}!tinyobj::ObjReader@{tinyobj::ObjReader}}
+\doxysubsubsection{\texorpdfstring{ParseFromFile()}{ParseFromFile()}}
+{\footnotesize\ttfamily bool tinyobj\+::\+Obj\+Reader\+::\+Parse\+From\+File (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename,  }\item[{const \mbox{\hyperlink{structtinyobj_1_1_obj_reader_config}{Obj\+Reader\+Config}} \&}]{config = {\ttfamily \mbox{\hyperlink{structtinyobj_1_1_obj_reader_config}{Obj\+Reader\+Config}}()} }\end{DoxyParamCaption})}
+
+Load .obj and .mtl from a file.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em filename} & wavefront .obj filename \\
+\hline
+\mbox{\texttt{ in}}  & {\em config} & Reader configuration \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classtinyobj_1_1_obj_reader_a89a253a20fdf22305b068143cc58dfce}\label{classtinyobj_1_1_obj_reader_a89a253a20fdf22305b068143cc58dfce}} 
+\index{tinyobj::ObjReader@{tinyobj::ObjReader}!ParseFromString@{ParseFromString}}
+\index{ParseFromString@{ParseFromString}!tinyobj::ObjReader@{tinyobj::ObjReader}}
+\doxysubsubsection{\texorpdfstring{ParseFromString()}{ParseFromString()}}
+{\footnotesize\ttfamily bool tinyobj\+::\+Obj\+Reader\+::\+Parse\+From\+String (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{obj\+\_\+text,  }\item[{const std\+::string \&}]{mtl\+\_\+text,  }\item[{const \mbox{\hyperlink{structtinyobj_1_1_obj_reader_config}{Obj\+Reader\+Config}} \&}]{config = {\ttfamily \mbox{\hyperlink{structtinyobj_1_1_obj_reader_config}{Obj\+Reader\+Config}}()} }\end{DoxyParamCaption})}
+
+Parse .obj from a text string. Need to supply .mtl text string by {\ttfamily mtl\+\_\+text}. This function ignores {\ttfamily mtllib} line in .obj text.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em obj\+\_\+text} & wavefront .obj filename \\
+\hline
+\mbox{\texttt{ in}}  & {\em mtl\+\_\+text} & wavefront .mtl filename \\
+\hline
+\mbox{\texttt{ in}}  & {\em config} & Reader configuration \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classtinyobj_1_1_obj_reader_ac4c689535db68c233dd063e7c726139d}\label{classtinyobj_1_1_obj_reader_ac4c689535db68c233dd063e7c726139d}} 
+\index{tinyobj::ObjReader@{tinyobj::ObjReader}!Valid@{Valid}}
+\index{Valid@{Valid}!tinyobj::ObjReader@{tinyobj::ObjReader}}
+\doxysubsubsection{\texorpdfstring{Valid()}{Valid()}}
+{\footnotesize\ttfamily bool tinyobj\+::\+Obj\+Reader\+::\+Valid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+.obj was loaded or parsed correctly. \mbox{\Hypertarget{classtinyobj_1_1_obj_reader_a5d464866fc4c15c85d410d926f402cf3}\label{classtinyobj_1_1_obj_reader_a5d464866fc4c15c85d410d926f402cf3}} 
+\index{tinyobj::ObjReader@{tinyobj::ObjReader}!Warning@{Warning}}
+\index{Warning@{Warning}!tinyobj::ObjReader@{tinyobj::ObjReader}}
+\doxysubsubsection{\texorpdfstring{Warning()}{Warning()}}
+{\footnotesize\ttfamily const std\+::string\& tinyobj\+::\+Obj\+Reader\+::\+Warning (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Warning message(may be filled after {\ttfamily Load} or {\ttfamily Parse}) 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/objloader/src/tiny\+\_\+obj\+\_\+loader.\+h\end{DoxyCompactItemize}
