@@ -1,5 +1,87 @@
-\label{index_mainpage}%
-\Hypertarget{index_mainpage}%
+\label{index_md_Cpp_mainpage}%
+\Hypertarget{index_md_Cpp_mainpage}%
+ Analysis of the Environment for A\+D\+A\+PT\hypertarget{index_autotoc_md1}{}\doxysection{Table of contents}\label{index_autotoc_md1}
+
+\begin{DoxyItemize}
+\item Getting started
+\item Pre-\/requisites
+\item Documentation
+\end{DoxyItemize}\hypertarget{index_autotoc_md2}{}\doxysection{Getting started}\label{index_autotoc_md2}
+This guide will describe how to retrieve the contents of this repository, and build Analysis from source.
+
+\doxysubsection*{Please note\+: Analysis is currently designed to run on a PC~\newline
+ running the Windows 10 operating system.}
+
+Also note\+: This guide is a \textquotesingle{}work-\/in-\/progress\textquotesingle{} and subject to change.
+
+Pre-\/requisites\+:
+
+{\bfseries{Git for Windows\+:}}~\newline
+ If you do not already have Git for Windows on your machine,~\newline
+ please download and install Git for Windows at \href{https://gitforwindows.org/}{\texttt{ https\+://gitforwindows.\+org/}}
+
+{\bfseries{Microsoft Visual Studio 2019\+:}}~\newline
+ \href{https://visualstudio.microsoft.com/downloads/}{\texttt{ https\+://visualstudio.\+microsoft.\+com/downloads/}}~\newline
+ You may use the Community edition.
+
+{\bfseries{C\+Make (Windows win64-\/x64)}}~\newline
+ \href{https://cmake.org/download/}{\texttt{ https\+://cmake.\+org/download/}}
+
+Once the software above is installed on your machine, you may continue with the following\+:
+
+{\bfseries{0.}} Open {\bfseries{Git Bash}}. Git Bash (M\+I\+N\+G\+W64) begins at {\ttfamily $\sim$}, your home directory.~\newline
+ You may remain here, or navigate to a directory of your choice.~\newline
+ In the next step, you will clone the {\bfseries{Analysis}} repository.
+
+{\bfseries{1.}}~\newline
+ Type {\ttfamily git clone \href{mailto:git@git.njit.edu}{\texttt{ git@git.\+njit.\+edu}}\+:A\+D\+A\+P\+T/\+Analysis.\+git} at the prompt~\newline
+ and hit E\+N\+T\+ER. The Analysis repository will then be cloned to your local machine.
+
+{\bfseries{2.}}~\newline
+ Open {\bfseries{Microsoft Visual Studio 2019}}. After seeing the splash/welcome screen,~\newline
+ please click the button that reads {\bfseries{Open a local folder}}.
+
+{\bfseries{3.}}~\newline
+ When the {\bfseries{Browse}} window appears, navigate to the {\bfseries{Analysis}} folder~\newline
+ (the repository that you had cloned) on your local machine.~\newline
+ Then, navigate to {\bfseries{src}}.~\newline
+ Click the {\bfseries{Select}} folder button to confirm.~\newline
 
 
-\href{modules.html}{\texttt{ Go to modules}} 
+{\bfseries{4.}}~\newline
+ If the {\bfseries{Solution Explorer}} view is not already open, you may open by~\newline
+ navigating to {\bfseries{View $>$ Solution Explorer}}, or alternatively,~\newline
+ you can also use the {\bfseries{Ctrl + Alt + L}} shortcut to reveal Solution Explorer.~\newline
+ Here, you can examine the sources imported by Visual Studio.~\newline
+
+
+{\bfseries{5.}}~\newline
+ {\bfseries{We are now ready to build Analysis.}}~\newline
+ {\bfseries{C\+Make}} is used to aid in the compilation process.~\newline
+ To build, navigate to {\bfseries{Build $>$ Build All}},~\newline
+ or you may use the {\bfseries{Ctrl + Shift + B}} keyboard shortcut.~\newline
+
+
+{\bfseries{You have now built the sources for Analysis.}}~\newline
+ You can find the build files in {\bfseries{.\textbackslash{}\+Analysis\textbackslash{}src\textbackslash{}out\textbackslash{}build\textbackslash{}x64-\/Debug}}\hypertarget{index_autotoc_md3}{}\doxysection{Documentation}\label{index_autotoc_md3}
+Documentation for {\bfseries{Analysis}} can be found in .\textbackslash{}\+Analysis\textbackslash{}docs$<$br$>$
+
+The codebase is comprised of sources from\+: ~\newline
+
+\begin{DoxyItemize}
+\item C++ (see .\textbackslash{}\+Analysis\textbackslash{}docs\textbackslash{}C++)
+\item C\# (see .\textbackslash{}\+Analysis\textbackslash{}docs\textbackslash{}C\#)
+\item Python (see .\textbackslash{}\+Analysis\textbackslash{}docs\textbackslash{}\+Python Docs)
+\end{DoxyItemize}\hypertarget{index_autotoc_md4}{}\doxysection{C++}\label{index_autotoc_md4}
+The C++ portion of the codebase makes extensive use of the {\bfseries{Boost}} libraries.~\newline
+ You may read more about Boost at their website\+: \href{https://www.boost.org/}{\texttt{ https\+://www.\+boost.\+org/}}~\newline
+~\newline
+
+
+\uline{Please note\+:} The Boost libraries are {\bfseries{dynamically linked}} at runtime,~\newline
+ so you do {\bfseries{N\+OT}} need to download and install Boost to build {\bfseries{Analysis}}.~\newline
+ Boost is included with this repository.
+
+T\+BA\+: C\# details~\newline
+ T\+BA\+: Python details~\newline
+ 

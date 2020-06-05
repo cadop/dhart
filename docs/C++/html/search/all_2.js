@@ -1,13 +1,12 @@
 var searchData=
 [
-  ['deleterawptr_19',['DeleteRawPtr',['../cinterface__utils_8h.html#a1746287300e1f05c45d84f3837e24557',1,'cinterface_utils.h']]],
-  ['destroyedges_20',['DestroyEdges',['../spatialstructures___c_8cpp.html#a096db51ed2ef0bde017b3a4f5ebec461',1,'DestroyEdges(vector&lt; Edge &gt; *edgelist_to_destroy):&#160;spatialstructures_C.cpp'],['../spatialstructures___c_8h.html#ac46191088d698cc007a2176ab6b5674d',1,'DestroyEdges(std::vector&lt; HF::SpatialStructures::Edge &gt; *edgelist_to_destroy):&#160;spatialstructures_C.h']]],
-  ['destroyfloatvector_21',['DestroyFloatVector',['../cinterface__utils_8cpp.html#af77723a4383b278169e80cf0e361ec44',1,'DestroyFloatVector(std::vector&lt; float &gt; *float_vector):&#160;cinterface_utils.cpp'],['../cinterface__utils_8h.html#af77723a4383b278169e80cf0e361ec44',1,'DestroyFloatVector(std::vector&lt; float &gt; *float_vector):&#160;cinterface_utils.cpp']]],
-  ['destroygraph_22',['DestroyGraph',['../spatialstructures___c_8cpp.html#aa3422d2d9a8f3745f258c0e975e79b00',1,'DestroyGraph(Graph *graph_to_destroy):&#160;spatialstructures_C.cpp'],['../spatialstructures___c_8h.html#a645abacd11e1fa535f953344aaa77727',1,'DestroyGraph(HF::SpatialStructures::Graph *graph_to_destroy):&#160;spatialstructures_C.h']]],
-  ['destroymeshinfo_23',['DestroyMeshInfo',['../objloader___c_8cpp.html#aabfc21f1322cb921b5fca4d9826d2538',1,'DestroyMeshInfo(vector&lt; MeshInfo &gt; *meshes_to_destroy):&#160;objloader_C.cpp'],['../objloader___c_8h.html#a5f58f569ea99355c9de85658b31bc0bf',1,'DestroyMeshInfo(std::vector&lt; HF::Geometry::MeshInfo &gt; *mesh_to_destroy):&#160;objloader_C.h']]],
-  ['destroynodes_24',['DestroyNodes',['../spatialstructures___c_8cpp.html#a7f14006f4e344dd44887b8613534fdb4',1,'DestroyNodes(vector&lt; Node &gt; *nodelist_to_destroy):&#160;spatialstructures_C.cpp'],['../spatialstructures___c_8h.html#a87e9b9ecfc5293712d75f3cb8c992c77',1,'DestroyNodes(std::vector&lt; HF::SpatialStructures::Node &gt; *nodelist_to_destroy):&#160;spatialstructures_C.h']]],
-  ['destroypath_25',['DestroyPath',['../pathfinder___c_8cpp.html#a1d41878681be41a2f03087787da0f25e',1,'DestroyPath(Path *path_to_destroy):&#160;pathfinder_C.cpp'],['../pathfinder___c_8h.html#a884a3374d971261a01ccfd3b21e288e5',1,'DestroyPath(HF::SpatialStructures::Path *path_to_destroy):&#160;pathfinder_C.h']]],
-  ['destroyrayresultvector_26',['DestroyRayResultVector',['../raytracer___c_8cpp.html#a6843f6f7f216087b5990d0b21abb7e86',1,'DestroyRayResultVector(std::vector&lt; RayResult &gt; *var):&#160;raytracer_C.cpp'],['../raytracer___c_8h.html#a5a68e1d668554f73ee06de8aeeaaffad',1,'DestroyRayResultVector(std::vector&lt; RayResult &gt; *analysis):&#160;raytracer_C.cpp']]],
-  ['destroyraytracer_27',['DestroyRayTracer',['../raytracer___c_8cpp.html#ac7ff0b75adf7d24754a702f09d5bcf07',1,'DestroyRayTracer(HF::RayTracer::EmbreeRayTracer *rt_to_destroy):&#160;raytracer_C.cpp'],['../raytracer___c_8h.html#ac7ff0b75adf7d24754a702f09d5bcf07',1,'DestroyRayTracer(HF::RayTracer::EmbreeRayTracer *rt_to_destroy):&#160;raytracer_C.cpp']]],
-  ['distance_28',['distance',['../struct_ray_result.html#afff68ebcccf0c6fc2bb1a8ec39009dc6',1,'RayResult']]]
+  ['callback_5ft_5f_9',['callback_t_',['../structtinyobj_1_1callback__t__.html',1,'tinyobj']]],
+  ['clear_10',['Clear',['../class_h_f_1_1_spatial_structures_1_1_graph.html#a994dbd15119eb6548d2e15f4de4b88a6',1,'HF::SpatialStructures::Graph']]],
+  ['clearqueue_11',['clearQueue',['../class_h_f_1_1_analysis_methods_1_1_unique_queue.html#a9b63b2d577ec77a205d2443a9e58aff6',1,'HF::AnalysisMethods::UniqueQueue']]],
+  ['close_12',['Close',['../class_h_f_1_1_d_b_1_1_connection.html#ac6c02051cd0d391c244d02d35b86b963',1,'HF::DB::Connection']]],
+  ['compress_13',['Compress',['../class_h_f_1_1_spatial_structures_1_1_graph.html#a41cece77d0eee98df39ecc6d3a366ec8',1,'HF::SpatialStructures::Graph']]],
+  ['connection_14',['Connection',['../class_h_f_1_1_d_b_1_1_connection.html',1,'HF::DB::Connection'],['../class_h_f_1_1_d_b_1_1_connection.html#a9c59dc99738342e58aa48ac2ec8ce7d9',1,'HF::DB::Connection::Connection()']]],
+  ['converttoobjcoordinates_15',['ConvertToOBJCoordinates',['../class_h_f_1_1_geometry_1_1_mesh_info.html#aa78330b65f42be9a33a6e58fa2717f73',1,'HF::Geometry::MeshInfo']]],
+  ['converttorhinocoordinates_16',['ConvertToRhinoCoordinates',['../class_h_f_1_1_geometry_1_1_mesh_info.html#a0b045826387ad47da69e5c098caf91dd',1,'HF::Geometry::MeshInfo']]],
+  ['csrptrs_17',['CSRPtrs',['../struct_h_f_1_1_spatial_structures_1_1_c_s_r_ptrs.html',1,'HF::SpatialStructures']]]
 ];
