@@ -3,7 +3,6 @@ using HumanFactors.NativeUtils;
 using HumanFactors.Exceptions;
 using System;
 using System.Runtime.InteropServices;
-using HumanFactors.SpatialStructures;
 using System.Runtime.Serialization.Json;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Collections;

@@ -53,7 +53,6 @@ def test_visibilitygraph_group():
     mesh_path = "Example Models\\plane.obj"
     obj = LoadOBJ(mesh_path, rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(obj)
-    input("remember me")
     graph_size = 10
     nodes_a = [(i, i, 0) for i in range(int(-graph_size / 2), int(graph_size / 2))]
     nodes_b_bad = [(0, 0, -20), (0, 0, -21)]
