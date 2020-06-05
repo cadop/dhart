@@ -1,10 +1,12 @@
 #pragma once
+
 #include <node.h>
 #include <vector>
+
 namespace HF {
 	namespace SpatialStructures {
 		/// <summary>
-		/// Describes the type of step an edge conencts to 
+		/// Describes the type of step an edge connects to 
 		/// </summary>
 		enum STEP {
 			NOT_CONNECTED = 0,
@@ -19,9 +21,9 @@ namespace HF {
 		/// Indicates a connection between two nodes
 		/// </summary>
 		struct Edge {
-			Node child;
-			STEP step_type;
-			float score;
+			Node child;			///< The child node for this edge ///<
+			STEP step_type;		///< see enum STEP, valid range is [0, 4] ///<
+			float score;		///< TODO description ///<
 
 			/// <summary>
 			/// Construct a new edge
@@ -37,15 +39,16 @@ namespace HF {
 		/// Like an edge, but without the node attached since that isn't always relevant.
 		/// </summary>
 		struct IntEdge {
-			int child;
-			float weight;
+			int child;      ///< Identifier of child node ///<
+			float weight;	///< Weight of edge ///<
 		};
+
 		/// <summary>
 		/// A collection of edges for a specific node
 		///</summary>
 		struct EdgeSet {
-			int parent;
-			std::vector<IntEdge> children;
+			int parent;						///< Identifier of parent node ///<
+			std::vector<IntEdge> children;	///< vector of IntEdge (children) ///<
 		};
 	}
 }

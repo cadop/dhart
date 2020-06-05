@@ -10,10 +10,14 @@ namespace HF {
 		/// A wrapper for a sqlite database. Automatically closes upon being destroyed. 
 		/// </summary>
 		class Connection {
-		
+			
+			/// <summary>
+			/// Opens a connection via the string specified by path
+			/// </summary>
+			/// <param name="path">The name of connection to open</param>
 			void OpenConnection(std::string path);
 		public:
-			sqlite3* conn; // Current connection to the database
+			sqlite3* conn; ///< Current connection to the database ///<
 			
 			/// <summary>
 			/// Create a new database connection
@@ -52,7 +56,6 @@ namespace HF {
 			/// </summary>
 			/// <param name="path"></param>
 			Database(std::string path);
-
 		};
 	}
 }
