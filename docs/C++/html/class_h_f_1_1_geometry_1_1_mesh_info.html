@@ -80,6 +80,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:ae7fffcc1e7bab5a5c88f79033d0a73a1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_h_f_1_1_geometry_1_1_mesh_info.html#ae7fffcc1e7bab5a5c88f79033d0a73a1">MeshInfo</a> ()</td></tr>
+<tr class="memdesc:ae7fffcc1e7bab5a5c88f79033d0a73a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor, all fields initialized except for member indices  <a href="class_h_f_1_1_geometry_1_1_mesh_info.html#ae7fffcc1e7bab5a5c88f79033d0a73a1">More...</a><br /></td></tr>
+<tr class="separator:ae7fffcc1e7bab5a5c88f79033d0a73a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af564a1fb0a0389878edf369b653164fb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_h_f_1_1_geometry_1_1_mesh_info.html#af564a1fb0a0389878edf369b653164fb">MeshInfo</a> (const std::vector&lt; std::array&lt; float, 3 &gt;&gt; &amp;vertices, int id, std::string name=&quot;&quot;)</td></tr>
 <tr class="memdesc:af564a1fb0a0389878edf369b653164fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="class_h_f_1_1_geometry_1_1_mesh_info.html" title="Holds vertices and some other information about a specific mesh">MeshInfo</a> object from an unindexed vector of vertices, an ID, and a name  <a href="class_h_f_1_1_geometry_1_1_mesh_info.html#af564a1fb0a0389878edf369b653164fb">More...</a><br /></td></tr>
 <tr class="separator:af564a1fb0a0389878edf369b653164fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -105,35 +108,62 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:aa78330b65f42be9a33a6e58fa2717f73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert the internal coordinates of this mesh to OBJ coordinates  <a href="class_h_f_1_1_geometry_1_1_mesh_info.html#aa78330b65f42be9a33a6e58fa2717f73">More...</a><br /></td></tr>
 <tr class="separator:aa78330b65f42be9a33a6e58fa2717f73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2fd71111a71467b3f10fb13ff86cc208"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_h_f_1_1_geometry_1_1_mesh_info.html#a2fd71111a71467b3f10fb13ff86cc208">PerformRotation</a> (float rx, float ry, float rz)</td></tr>
-<tr class="memdesc:a2fd71111a71467b3f10fb13ff86cc208"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotate this mesh by x,y,z rotations in degrees.  <a href="class_h_f_1_1_geometry_1_1_mesh_info.html#a2fd71111a71467b3f10fb13ff86cc208">More...</a><br /></td></tr>
+<tr class="memdesc:a2fd71111a71467b3f10fb13ff86cc208"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotate this mesh by x, y, z rotations in degrees (pitch, yaw, roll)  <a href="class_h_f_1_1_geometry_1_1_mesh_info.html#a2fd71111a71467b3f10fb13ff86cc208">More...</a><br /></td></tr>
 <tr class="separator:a2fd71111a71467b3f10fb13ff86cc208"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a5677e9e852ca1dd4ea25e417e41a45"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_h_f_1_1_geometry_1_1_mesh_info.html#a0a5677e9e852ca1dd4ea25e417e41a45">GetMeshID</a> () const</td></tr>
-<tr class="memdesc:a0a5677e9e852ca1dd4ea25e417e41a45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a copy of meshID  <a href="class_h_f_1_1_geometry_1_1_mesh_info.html#a0a5677e9e852ca1dd4ea25e417e41a45">More...</a><br /></td></tr>
+<tr class="memdesc:a0a5677e9e852ca1dd4ea25e417e41a45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a copy of meshid  <a href="class_h_f_1_1_geometry_1_1_mesh_info.html#a0a5677e9e852ca1dd4ea25e417e41a45">More...</a><br /></td></tr>
 <tr class="separator:a0a5677e9e852ca1dd4ea25e417e41a45"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af7a2c6ef7914efa285372598bda8bc05"><td class="memItemLeft" align="right" valign="top">std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_h_f_1_1_geometry_1_1_mesh_info.html#af7a2c6ef7914efa285372598bda8bc05">getRawVertices</a> () const</td></tr>
-<tr class="memdesc:af7a2c6ef7914efa285372598bda8bc05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a copy of the underlying vertex buffer. Helpful for filling other bufferss  <a href="class_h_f_1_1_geometry_1_1_mesh_info.html#af7a2c6ef7914efa285372598bda8bc05">More...</a><br /></td></tr>
+<tr class="memdesc:af7a2c6ef7914efa285372598bda8bc05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a copy of the underlying vertex buffer. Helpful for filling other buffers  <a href="class_h_f_1_1_geometry_1_1_mesh_info.html#af7a2c6ef7914efa285372598bda8bc05">More...</a><br /></td></tr>
 <tr class="separator:af7a2c6ef7914efa285372598bda8bc05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a1a8be9e09b773984d497f4c2694849"><td class="memItemLeft" align="right" valign="top">std::vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_h_f_1_1_geometry_1_1_mesh_info.html#a1a1a8be9e09b773984d497f4c2694849">getRawIndices</a> () const</td></tr>
-<tr class="memdesc:a1a1a8be9e09b773984d497f4c2694849"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a copy of the underlying index buffer. Useful for copying into other buffers  <a href="class_h_f_1_1_geometry_1_1_mesh_info.html#a1a1a8be9e09b773984d497f4c2694849">More...</a><br /></td></tr>
+<tr class="memdesc:a1a1a8be9e09b773984d497f4c2694849"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a copy of the underlying index buffer. Useful for copying into other buffers  <a href="class_h_f_1_1_geometry_1_1_mesh_info.html#a1a1a8be9e09b773984d497f4c2694849">More...</a><br /></td></tr>
 <tr class="separator:a1a1a8be9e09b773984d497f4c2694849"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:accddfbfd7c4867a4a7bd599a6c8ac532"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::array&lt; float, 3 &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_h_f_1_1_geometry_1_1_mesh_info.html#accddfbfd7c4867a4a7bd599a6c8ac532">GetVertsAsArrays</a> () const</td></tr>
-<tr class="memdesc:accddfbfd7c4867a4a7bd599a6c8ac532"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get verticies as a vector of floats.  <a href="class_h_f_1_1_geometry_1_1_mesh_info.html#accddfbfd7c4867a4a7bd599a6c8ac532">More...</a><br /></td></tr>
+<tr class="memdesc:accddfbfd7c4867a4a7bd599a6c8ac532"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve vertices as a vector of arrays of float.  <a href="class_h_f_1_1_geometry_1_1_mesh_info.html#accddfbfd7c4867a4a7bd599a6c8ac532">More...</a><br /></td></tr>
 <tr class="separator:accddfbfd7c4867a4a7bd599a6c8ac532"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d30016f14b635d17e6668fba38c7676"><td class="memItemLeft" align="right" valign="top"><a id="a7d30016f14b635d17e6668fba38c7676"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetMeshID</b> (int new_id)</td></tr>
+<tr class="memitem:a7d30016f14b635d17e6668fba38c7676"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_h_f_1_1_geometry_1_1_mesh_info.html#a7d30016f14b635d17e6668fba38c7676">SetMeshID</a> (int new_id)</td></tr>
+<tr class="memdesc:a7d30016f14b635d17e6668fba38c7676"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns the value of new_id to meshid  <a href="class_h_f_1_1_geometry_1_1_mesh_info.html#a7d30016f14b635d17e6668fba38c7676">More...</a><br /></td></tr>
 <tr class="separator:a7d30016f14b635d17e6668fba38c7676"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a726c12d5215ad9b63f4f5138c877d43e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_h_f_1_1_geometry_1_1_mesh_info.html#a726c12d5215ad9b63f4f5138c877d43e">operator==</a> (const <a class="el" href="class_h_f_1_1_geometry_1_1_mesh_info.html">MeshInfo</a> &amp;M2) const</td></tr>
-<tr class="memdesc:a726c12d5215ad9b63f4f5138c877d43e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare the vertices of two mesh info objects  <a href="class_h_f_1_1_geometry_1_1_mesh_info.html#a726c12d5215ad9b63f4f5138c877d43e">More...</a><br /></td></tr>
+<tr class="memdesc:a726c12d5215ad9b63f4f5138c877d43e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare the vertices of two <a class="el" href="class_h_f_1_1_geometry_1_1_mesh_info.html" title="Holds vertices and some other information about a specific mesh">MeshInfo</a> objects  <a href="class_h_f_1_1_geometry_1_1_mesh_info.html#a726c12d5215ad9b63f4f5138c877d43e">More...</a><br /></td></tr>
 <tr class="separator:a726c12d5215ad9b63f4f5138c877d43e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae7fbe8088590d8967a6340534a9adfb"><td class="memItemLeft" align="right" valign="top">std::array&lt; float, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_h_f_1_1_geometry_1_1_mesh_info.html#aae7fbe8088590d8967a6340534a9adfb">operator[]</a> (int i) const</td></tr>
-<tr class="memdesc:aae7fbe8088590d8967a6340534a9adfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a vertice at a specific vertex in the mesh  <a href="class_h_f_1_1_geometry_1_1_mesh_info.html#aae7fbe8088590d8967a6340534a9adfb">More...</a><br /></td></tr>
+<tr class="memdesc:aae7fbe8088590d8967a6340534a9adfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get vertex at a specific index in the mesh  <a href="class_h_f_1_1_geometry_1_1_mesh_info.html#aae7fbe8088590d8967a6340534a9adfb">More...</a><br /></td></tr>
 <tr class="separator:aae7fbe8088590d8967a6340534a9adfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Holds vertices and some other information about a specific mesh </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ae7fffcc1e7bab5a5c88f79033d0a73a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7fffcc1e7bab5a5c88f79033d0a73a1">&#9670;&nbsp;</a></span>MeshInfo() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">HF::Geometry::MeshInfo::MeshInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default constructor, all fields initialized except for member indices </p>
+
+</div>
+</div>
 <a id="af564a1fb0a0389878edf369b653164fb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af564a1fb0a0389878edf369b653164fb">&#9670;&nbsp;</a></span>MeshInfo() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af564a1fb0a0389878edf369b653164fb">&#9670;&nbsp;</a></span>MeshInfo() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -177,7 +207,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>SetMeshID</b> (int ne
 </div>
 </div>
 <a id="a98504dd2742ca9adb7f5ff1f1443faaf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a98504dd2742ca9adb7f5ff1f1443faaf">&#9670;&nbsp;</a></span>MeshInfo() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a98504dd2742ca9adb7f5ff1f1443faaf">&#9670;&nbsp;</a></span>MeshInfo() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -338,7 +368,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>SetMeshID</b> (int ne
       </table>
 </div><div class="memdoc">
 
-<p>Return a copy of meshID </p>
+<p>Return a copy of meshid </p>
+<dl class="section return"><dt>Returns</dt><dd>The member field meshid, by value</dd></dl>
 
 </div>
 </div>
@@ -357,8 +388,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>SetMeshID</b> (int ne
       </table>
 </div><div class="memdoc">
 
-<p>Get a copy of the underlying index buffer. Useful for copying into other buffers </p>
-<p>/// </p>
+<p>Retrieve a copy of the underlying index buffer. Useful for copying into other buffers </p>
+<dl class="section return"><dt>Returns</dt><dd>A copy of the member field indices, the underlying index buffer (using std::copy)</dd></dl>
 
 </div>
 </div>
@@ -377,7 +408,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>SetMeshID</b> (int ne
       </table>
 </div><div class="memdoc">
 
-<p>Get a copy of the underlying vertex buffer. Helpful for filling other bufferss </p>
+<p>Retrieve a copy of the underlying vertex buffer. Helpful for filling other buffers </p>
+<dl class="section return"><dt>Returns</dt><dd>A copy of the member field verts, the underlying vertex buffer (using std::copy)</dd></dl>
 
 </div>
 </div>
@@ -396,8 +428,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>SetMeshID</b> (int ne
       </table>
 </div><div class="memdoc">
 
-<p>Get verticies as a vector of floats. </p>
-<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+<p>Retrieve vertices as a vector of arrays of float. </p>
+<dl class="section return"><dt>Returns</dt><dd>A vector of arrays of float</dd></dl>
 
 </div>
 </div>
@@ -457,14 +489,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>SetMeshID</b> (int ne
       </table>
 </div><div class="memdoc">
 
-<p>Compare the vertices of two mesh info objects </p>
+<p>Compare the vertices of two <a class="el" href="class_h_f_1_1_geometry_1_1_mesh_info.html" title="Holds vertices and some other information about a specific mesh">MeshInfo</a> objects </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">M2</td><td>Mesh info to compare with</td></tr>
+    <tr><td class="paramname">M2</td><td>The desired <a class="el" href="class_h_f_1_1_geometry_1_1_mesh_info.html" title="Holds vertices and some other information about a specific mesh">MeshInfo</a> to compare</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>True if all vertices are equal within a certain tolerance</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>True if all vertices are equal within a certain tolerance, false otherwise</dd></dl>
 
 </div>
 </div>
@@ -484,15 +516,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>SetMeshID</b> (int ne
       </table>
 </div><div class="memdoc">
 
-<p>Get a vertice at a specific vertex in the mesh </p>
-<p>/// </p>
+<p>Get vertex at a specific index in the mesh </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">i</td><td>Index of the desired vertice</td></tr>
+    <tr><td class="paramname">i</td><td>Index of the desired vertex</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>An array of floats for the x,y, and z coordinates</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>An array of floats representing the x, y, and z coordinates</dd></dl>
 
 </div>
 </div>
@@ -528,7 +559,41 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>SetMeshID</b> (int ne
       </table>
 </div><div class="memdoc">
 
-<p>Rotate this mesh by x,y,z rotations in degrees. </p>
+<p>Rotate this mesh by x, y, z rotations in degrees (pitch, yaw, roll) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rx</td><td>Determines the pitch angle</td></tr>
+    <tr><td class="paramname">ry</td><td>Determines the yaw angle</td></tr>
+    <tr><td class="paramname">rz</td><td>Determines the roll angle</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a7d30016f14b635d17e6668fba38c7676"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d30016f14b635d17e6668fba38c7676">&#9670;&nbsp;</a></span>SetMeshID()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HF::Geometry::MeshInfo::SetMeshID </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>new_id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Assigns the value of new_id to meshid </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">new_id</td><td>The desired id to assign to member field meshid</td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

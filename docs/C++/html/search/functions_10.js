@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['_7econnection_228',['~Connection',['../class_h_f_1_1_d_b_1_1_connection.html#a8bc2548efafa31ad284ea1e312b3be07',1,'HF::DB::Connection']]],
-  ['_7eembreeraytracer_229',['~EmbreeRayTracer',['../class_h_f_1_1_ray_tracer_1_1_embree_ray_tracer.html#a2948458e764f0294996c91b00356073e',1,'HF::RayTracer::EmbreeRayTracer']]]
+  ['warning_282',['Warning',['../classtinyobj_1_1_obj_reader.html#a5d464866fc4c15c85d410d926f402cf3',1,'tinyobj::ObjReader']]]
 ];
