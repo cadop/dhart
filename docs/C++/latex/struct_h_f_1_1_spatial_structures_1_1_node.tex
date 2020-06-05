@@ -14,12 +14,12 @@ A point in space with an ID
 \item 
 \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node_a3d229a53bb7328f88649fd48e6098b5d}{Node}} ()
 \begin{DoxyCompactList}\small\item\em Default constructor. Constructs everything with N\+AN \end{DoxyCompactList}\item 
-\mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node_a5e6500cbe9a1c29ebca5045dceebe9d6}{Node}} (float x, float y, float z, int ID=-\/1)
+\mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node_a5e6500cbe9a1c29ebca5045dceebe9d6}{Node}} (float x, float y, float \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node_a495b47689917e0395ce96ee01d3f5ed3}{z}}, int ID=-\/1)
 \begin{DoxyCompactList}\small\item\em Create a node without an ID \end{DoxyCompactList}\item 
 \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node_a7d3f18b093670b7696aa1aecf8adab00}{Node}} (const std\+::array$<$ float, 3 $>$ \&position)
 \begin{DoxyCompactList}\small\item\em Create a node without an ID \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{struct_h_f_1_1_spatial_structures_1_1_node_afc1e769b57e880909a11178bb8654adf}\label{struct_h_f_1_1_spatial_structures_1_1_node_afc1e769b57e880909a11178bb8654adf}} 
-{\bfseries Node} (const std\+::array$<$ float, 3 $>$ \&position, N\+O\+D\+E\+\_\+\+T\+Y\+PE t, int id)
+{\bfseries Node} (const std\+::array$<$ float, 3 $>$ \&position, N\+O\+D\+E\+\_\+\+T\+Y\+PE t, int \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node_a8212d00e6913abf0ca6fec1f2624b677}{id}})
 \item 
 float \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node_abbd66b566460f9557a373b5fbcc30bb1}{distance\+To}} (const \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} \&n2) const
 \begin{DoxyCompactList}\small\item\em Calculate the distance between this node and the given node \end{DoxyCompactList}\item 
@@ -31,35 +31,31 @@ std\+::array$<$ float, 3 $>$ \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_
 \begin{DoxyCompactList}\small\item\em Returns the x,y,z of this node as an array of 3 floats \end{DoxyCompactList}\item 
 float \& \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node_a556efc898ddc67b64fff560d0c7b5a0a}{operator\mbox{[}$\,$\mbox{]}}} (int i)
 \begin{DoxyCompactList}\small\item\em Directly access a nodes\textquotesingle{}s position as if it were an array of 3 floats \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{struct_h_f_1_1_spatial_structures_1_1_node_ae3e88bd4eecfdbd93431953ed07b8a7b}\label{struct_h_f_1_1_spatial_structures_1_1_node_ae3e88bd4eecfdbd93431953ed07b8a7b}} 
-float {\bfseries operator\mbox{[}$\,$\mbox{]}} (int i) const
-\item 
+float \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node_ae3e88bd4eecfdbd93431953ed07b8a7b}{operator\mbox{[}$\,$\mbox{]}}} (int i) const
+\begin{DoxyCompactList}\small\item\em Access a nodes\textquotesingle{}s position, by value \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node_af687c2e97fffe3b7d14e3cfa8af3e5cd}{operator==}} (const \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} \&n2) const
-\begin{DoxyCompactList}\small\item\em Check if N1 occupies the same space as N2 \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{struct_h_f_1_1_spatial_structures_1_1_node_a5a3306ea1b8904361b038391718ccc07}\label{struct_h_f_1_1_spatial_structures_1_1_node_a5a3306ea1b8904361b038391718ccc07}} 
-void {\bfseries operator=} (const std\+::array$<$ float, 3 $>$ \&n2)
-\item 
-\mbox{\Hypertarget{struct_h_f_1_1_spatial_structures_1_1_node_a6137878845816e2fe8ecbe1215c490fd}\label{struct_h_f_1_1_spatial_structures_1_1_node_a6137878845816e2fe8ecbe1215c490fd}} 
-bool {\bfseries operator!=} (const \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} \&n2) const
-\item 
-\mbox{\Hypertarget{struct_h_f_1_1_spatial_structures_1_1_node_ad58a4eb9f0a15c645eedf668d9bcec54}\label{struct_h_f_1_1_spatial_structures_1_1_node_ad58a4eb9f0a15c645eedf668d9bcec54}} 
-\mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} {\bfseries operator-\/} (const \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} \&n2) const
-\item 
-\mbox{\Hypertarget{struct_h_f_1_1_spatial_structures_1_1_node_a064540b380fc6251bdf6d740abf7a169}\label{struct_h_f_1_1_spatial_structures_1_1_node_a064540b380fc6251bdf6d740abf7a169}} 
-\mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} {\bfseries operator+} (const \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} \&n2) const
-\item 
-\mbox{\Hypertarget{struct_h_f_1_1_spatial_structures_1_1_node_a099271bad26dd059037f3c84459058e0}\label{struct_h_f_1_1_spatial_structures_1_1_node_a099271bad26dd059037f3c84459058e0}} 
-\mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} {\bfseries operator$\ast$} (const \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} \&n2) const
-\item 
-\mbox{\Hypertarget{struct_h_f_1_1_spatial_structures_1_1_node_a1d74d883b7291a760908f3dc81783b3d}\label{struct_h_f_1_1_spatial_structures_1_1_node_a1d74d883b7291a760908f3dc81783b3d}} 
-bool {\bfseries operator$<$} (const \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} \&n2) const
-\item 
-\mbox{\Hypertarget{struct_h_f_1_1_spatial_structures_1_1_node_a7547e73076e40bb880261574216e4251}\label{struct_h_f_1_1_spatial_structures_1_1_node_a7547e73076e40bb880261574216e4251}} 
-bool {\bfseries operator$<$} (const \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} \&n2)
-\item 
-\mbox{\Hypertarget{struct_h_f_1_1_spatial_structures_1_1_node_a9d67cccc8b0fc57d61390da493149790}\label{struct_h_f_1_1_spatial_structures_1_1_node_a9d67cccc8b0fc57d61390da493149790}} 
-bool {\bfseries operator$>$} (const \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} \&n2) const
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Check if n1 occupies the same space as n2 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node_a5a3306ea1b8904361b038391718ccc07}{operator=}} (const std\+::array$<$ float, 3 $>$ \&n2)
+\begin{DoxyCompactList}\small\item\em Assigns the values of array n2 to n1 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node_a6137878845816e2fe8ecbe1215c490fd}{operator!=}} (const \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} \&n2) const
+\begin{DoxyCompactList}\small\item\em See operator==, checks if n1 does N\+OT occupy the same space as n2 
+\begin{DoxyParams}{Parameters}
+{\em n2} & \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} to compare with N1\\
+\hline
+\end{DoxyParams}
+\end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node_ad58a4eb9f0a15c645eedf668d9bcec54}{operator-\/}} (const \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} \&n2) const
+\begin{DoxyCompactList}\small\item\em Creates a node from the vector subtraction of n1, n2 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node_a064540b380fc6251bdf6d740abf7a169}{operator+}} (const \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} \&n2) const
+\begin{DoxyCompactList}\small\item\em Creates a new node from the vector addition of n1, n2 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node_a099271bad26dd059037f3c84459058e0}{operator$\ast$}} (const \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} \&n2) const
+\begin{DoxyCompactList}\small\item\em Creates a new node from the dot product of n1, n2 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node_a1d74d883b7291a760908f3dc81783b3d}{operator$<$}} (const \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} \&n2) const
+\begin{DoxyCompactList}\small\item\em Determines if n1\textquotesingle{}s id (an integer) is less than n2\textquotesingle{}s id \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node_a7547e73076e40bb880261574216e4251}{operator$<$}} (const \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} \&n2)
+\begin{DoxyCompactList}\small\item\em Determines if n1\textquotesingle{}s id (an integer) is less than n2\textquotesingle{}s id -\/ const qualification omitted for std\+::sort \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node_a9d67cccc8b0fc57d61390da493149790}{operator$>$}} (const \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} \&n2) const
+\begin{DoxyCompactList}\small\item\em Determines if n1\textquotesingle{}s id (an integer) is greater than n2\textquotesingle{}s id \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -70,14 +66,14 @@ float {\bfseries x}
 float {\bfseries y}
 \item 
 \mbox{\Hypertarget{struct_h_f_1_1_spatial_structures_1_1_node_a495b47689917e0395ce96ee01d3f5ed3}\label{struct_h_f_1_1_spatial_structures_1_1_node_a495b47689917e0395ce96ee01d3f5ed3}} 
-float {\bfseries z}
-\item 
+float \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node_a495b47689917e0395ce96ee01d3f5ed3}{z}}
+\begin{DoxyCompactList}\small\item\em Cartesian coordinates x, y, z ///$<$. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{struct_h_f_1_1_spatial_structures_1_1_node_a3894a51f72b82cea2d6675a91fcb39cf}\label{struct_h_f_1_1_spatial_structures_1_1_node_a3894a51f72b82cea2d6675a91fcb39cf}} 
-short {\bfseries type} = G\+R\+A\+PH
-\item 
+short \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node_a3894a51f72b82cea2d6675a91fcb39cf}{type}} = G\+R\+A\+PH
+\begin{DoxyCompactList}\small\item\em Default this field to G\+R\+A\+PH ///$<$. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{struct_h_f_1_1_spatial_structures_1_1_node_a8212d00e6913abf0ca6fec1f2624b677}\label{struct_h_f_1_1_spatial_structures_1_1_node_a8212d00e6913abf0ca6fec1f2624b677}} 
-int {\bfseries id}
-\end{DoxyCompactItemize}
+int \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node_a8212d00e6913abf0ca6fec1f2624b677}{id}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} identifier ///$<$. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -207,6 +203,129 @@ Returns the x,y,z of this node as an array of 3 floats
 \begin{DoxyReturn}{Returns}
 
 \end{DoxyReturn}
+\mbox{\Hypertarget{struct_h_f_1_1_spatial_structures_1_1_node_a6137878845816e2fe8ecbe1215c490fd}\label{struct_h_f_1_1_spatial_structures_1_1_node_a6137878845816e2fe8ecbe1215c490fd}} 
+\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily bool H\+F\+::\+Spatial\+Structures\+::\+Node\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const}
+
+
+
+See operator==, checks if n1 does N\+OT occupy the same space as n2 
+\begin{DoxyParams}{Parameters}
+{\em n2} & \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} to compare with N1\\
+\hline
+\end{DoxyParams}
+
+
+\begin{DoxyReturn}{Returns}
+True if the distance between n1 and n2 is greater than or equal to Rounding Precision, false otherwise
+\end{DoxyReturn}
+\mbox{\Hypertarget{struct_h_f_1_1_spatial_structures_1_1_node_a099271bad26dd059037f3c84459058e0}\label{struct_h_f_1_1_spatial_structures_1_1_node_a099271bad26dd059037f3c84459058e0}} 
+\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} H\+F\+::\+Spatial\+Structures\+::\+Node\+::operator$\ast$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates a new node from the dot product of n1, n2 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n2} & Second factor of dot product, N1 (dot) N2\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A node with the values obtained from the dot product of N1 and N2 
+\end{DoxyReturn}
+\mbox{\Hypertarget{struct_h_f_1_1_spatial_structures_1_1_node_a064540b380fc6251bdf6d740abf7a169}\label{struct_h_f_1_1_spatial_structures_1_1_node_a064540b380fc6251bdf6d740abf7a169}} 
+\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator+@{operator+}}
+\index{operator+@{operator+}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} H\+F\+::\+Spatial\+Structures\+::\+Node\+::operator+ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates a new node from the vector addition of n1, n2 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n2} & \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} to add to n1\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A node with the values obtained from n1 + n2
+\end{DoxyReturn}
+\mbox{\Hypertarget{struct_h_f_1_1_spatial_structures_1_1_node_ad58a4eb9f0a15c645eedf668d9bcec54}\label{struct_h_f_1_1_spatial_structures_1_1_node_ad58a4eb9f0a15c645eedf668d9bcec54}} 
+\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} H\+F\+::\+Spatial\+Structures\+::\+Node\+::operator-\/ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates a node from the vector subtraction of n1, n2 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n2} & \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} to subtract from N1\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A node with the values obtained from n1 -\/ n2
+\end{DoxyReturn}
+\mbox{\Hypertarget{struct_h_f_1_1_spatial_structures_1_1_node_a7547e73076e40bb880261574216e4251}\label{struct_h_f_1_1_spatial_structures_1_1_node_a7547e73076e40bb880261574216e4251}} 
+\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
+\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool H\+F\+::\+Spatial\+Structures\+::\+Node\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} \&}]{n2 }\end{DoxyParamCaption})}
+
+
+
+Determines if n1\textquotesingle{}s id (an integer) is less than n2\textquotesingle{}s id -\/ const qualification omitted for std\+::sort 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n2} & \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} whose id will be compared with n1\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if n1\textquotesingle{}s id is less than n2\textquotesingle{}s id, false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{struct_h_f_1_1_spatial_structures_1_1_node_a1d74d883b7291a760908f3dc81783b3d}\label{struct_h_f_1_1_spatial_structures_1_1_node_a1d74d883b7291a760908f3dc81783b3d}} 
+\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
+\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool H\+F\+::\+Spatial\+Structures\+::\+Node\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const}
+
+
+
+Determines if n1\textquotesingle{}s id (an integer) is less than n2\textquotesingle{}s id 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n2} & \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} whose id will be compared with n1\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if n1\textquotesingle{}s id is less than n2\textquotesingle{}s id, false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{struct_h_f_1_1_spatial_structures_1_1_node_a5a3306ea1b8904361b038391718ccc07}\label{struct_h_f_1_1_spatial_structures_1_1_node_a5a3306ea1b8904361b038391718ccc07}} 
+\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator=@{operator=}}
+\index{operator=@{operator=}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily void H\+F\+::\+Spatial\+Structures\+::\+Node\+::operator= (\begin{DoxyParamCaption}\item[{const std\+::array$<$ float, 3 $>$ \&}]{n2 }\end{DoxyParamCaption})}
+
+
+
+Assigns the values of array n2 to n1 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n2} & Array whose values will be assigned to n1\\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{struct_h_f_1_1_spatial_structures_1_1_node_af687c2e97fffe3b7d14e3cfa8af3e5cd}\label{struct_h_f_1_1_spatial_structures_1_1_node_af687c2e97fffe3b7d14e3cfa8af3e5cd}} 
 \index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator==@{operator==}}
 \index{operator==@{operator==}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
@@ -215,20 +334,38 @@ Returns the x,y,z of this node as an array of 3 floats
 
 
 
-Check if N1 occupies the same space as N2 
+Check if n1 occupies the same space as n2 
 
 
 \begin{DoxyParams}{Parameters}
-{\em n2} & \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} to comapre with N1\\
+{\em n2} & \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} to compare with n1\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 True if the distance between n1 and n2 is less than Rounding Precision, false otherwise
 \end{DoxyReturn}
+\mbox{\Hypertarget{struct_h_f_1_1_spatial_structures_1_1_node_a9d67cccc8b0fc57d61390da493149790}\label{struct_h_f_1_1_spatial_structures_1_1_node_a9d67cccc8b0fc57d61390da493149790}} 
+\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator$>$@{operator$>$}}
+\index{operator$>$@{operator$>$}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
+\doxysubsubsection{\texorpdfstring{operator$>$()}{operator>()}}
+{\footnotesize\ttfamily bool H\+F\+::\+Spatial\+Structures\+::\+Node\+::operator$>$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const}
+
+
+
+Determines if n1\textquotesingle{}s id (an integer) is greater than n2\textquotesingle{}s id 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n2} & \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{Node}} whose id will be compared with n1\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if n1\textquotesingle{}s id is greater than n2\textquotesingle{}s id, false otherwise 
+\end{DoxyReturn}
 \mbox{\Hypertarget{struct_h_f_1_1_spatial_structures_1_1_node_a556efc898ddc67b64fff560d0c7b5a0a}\label{struct_h_f_1_1_spatial_structures_1_1_node_a556efc898ddc67b64fff560d0c7b5a0a}} 
 \index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator\mbox{[}\mbox{]}@{operator[]}}
 \index{operator\mbox{[}\mbox{]}@{operator[]}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily float \& H\+F\+::\+Spatial\+Structures\+::\+Node\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})}
 
 
@@ -237,11 +374,29 @@ Directly access a nodes\textquotesingle{}s position as if it were an array of 3 
 
 
 \begin{DoxyParams}{Parameters}
-{\em i} & index. 0=x, 1=y, 2=z\\
+{\em i} & Index. 0 = x, 1 = y, 2 = z\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-a float for the requested cordinate
+a reference to the member float for the requested coordinate
+\end{DoxyReturn}
+\mbox{\Hypertarget{struct_h_f_1_1_spatial_structures_1_1_node_ae3e88bd4eecfdbd93431953ed07b8a7b}\label{struct_h_f_1_1_spatial_structures_1_1_node_ae3e88bd4eecfdbd93431953ed07b8a7b}} 
+\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily float H\+F\+::\+Spatial\+Structures\+::\+Node\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption}) const}
+
+
+
+Access a nodes\textquotesingle{}s position, by value 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & Index. 0 = x, 1 = y, 2 = z\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the value (copy) of the member float for the requested coordinate
 \end{DoxyReturn}
 
 

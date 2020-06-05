@@ -1,4 +1,0 @@
-var searchData=
-[
-  ['c_5finterface_145',['C_INTERFACE',['../analysis___c_8h.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe',1,'C_INTERFACE():&#160;analysis_C.h'],['../cinterface__utils_8h.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe',1,'C_INTERFACE():&#160;cinterface_utils.h'],['../objloader___c_8h.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe',1,'C_INTERFACE():&#160;objloader_C.h'],['../pathfinder___c_8h.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe',1,'C_INTERFACE():&#160;pathfinder_C.h'],['../raytracer___c_8h.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe',1,'C_INTERFACE():&#160;raytracer_C.h'],['../spatialstructures___c_8h.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe',1,'C_INTERFACE():&#160;spatialstructures_C.h'],['../view__analysis___c_8h.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe',1,'C_INTERFACE():&#160;view_analysis_C.h']]]
-];

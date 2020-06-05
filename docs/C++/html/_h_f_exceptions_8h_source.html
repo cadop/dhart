@@ -70,59 +70,61 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;exception&gt;</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;cstring&gt;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_h_f.html">HF</a> {</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    <span class="keyword">namespace </span>Exceptions {</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;        <span class="keyword">enum</span> HF_STATUS {</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;            OK = 1,</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;            <span class="comment">// Special Codes //</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;            NOT_IMPLEMENTED = -54, <span class="comment">// This function hasn&#39;t been implemented yet!</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;            <span class="comment">// Error Codes //</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;            GENERIC_ERROR = 0,      <span class="comment">// Not sure what happened here (If this gets thrown, either fix it or give it a status code!)</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;            NOT_FOUND = -1,         <span class="comment">// The path given did not lead to any file</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;            INVALID_OBJ = -2,       <span class="comment">// The given path did not point to a valid obj file</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;            NO_GRAPH = -3,          <span class="comment">// This requires a valid graph in the DB to execute successfully</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;            INVALID_COST = -4,      <span class="comment">// The given cost name does not exist in the database</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;            MISSING_DEPEND = -5,    <span class="comment">// A dependency for this object is missing.</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            OUT_OF_MEMORY = -6,     <span class="comment">// Ran out of memory during the last operation</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;            MALFORMED_DB = -7,      <span class="comment">// The database exists, but is in some kind of error state</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            DB_BUSY = -8,           <span class="comment">// The database is busy (is there some external connection?)</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            INVALID_PTR = -9,       <span class="comment">// One or more of the given pointers didn&#39;t lead to anything</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            OUT_OF_RANGE = -10,     <span class="comment">// Tried to reference something not in the given container</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            NO_PATH = -11,          <span class="comment">// There is no path between the start and end points</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        };</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="struct_h_f_1_1_exceptions_1_1_file_not_found.html">   27</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="struct_h_f_1_1_exceptions_1_1_file_not_found.html">FileNotFound</a> : <span class="keyword">public</span> std::exception</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        {</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">char</span>* what() <span class="keyword">const</span> <span class="keywordflow">throw</span> ()</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            {</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                <span class="keywordflow">return</span> <span class="stringliteral">&quot;Couldn&#39;t find the given file!&quot;</span>;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            }</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        };</div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="struct_h_f_1_1_exceptions_1_1_invalid_o_b_j.html">   34</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="struct_h_f_1_1_exceptions_1_1_invalid_o_b_j.html">InvalidOBJ</a> : <span class="keyword">public</span> std::exception</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">char</span>* what() <span class="keyword">const</span> <span class="keywordflow">throw</span> ()</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            {</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                <span class="keywordflow">return</span> <span class="stringliteral">&quot;The obj given couldn&#39;t be read!&quot;</span>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            }</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        };</div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="struct_h_f_1_1_exceptions_1_1_missing_dependency.html">   41</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="struct_h_f_1_1_exceptions_1_1_missing_dependency.html">MissingDependency</a> : <span class="keyword">public</span> std::exception</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        {</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">char</span>* what() <span class="keyword">const</span> <span class="keywordflow">throw</span> ()</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            {</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                <span class="keywordflow">return</span> <span class="stringliteral">&quot;C++ Exception&quot;</span>;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            }</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        };</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    }</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;}</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;exception&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;cstring&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_h_f.html">HF</a> {</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    <span class="keyword">namespace </span>Exceptions {</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;        <span class="keyword">enum</span> HF_STATUS {</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;            OK = 1,                 </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;            NOT_IMPLEMENTED = -54,  </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;            GENERIC_ERROR = 0,      </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;            NOT_FOUND = -1,         </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;            INVALID_OBJ = -2,       </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;            NO_GRAPH = -3,          </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            INVALID_COST = -4,      </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;            MISSING_DEPEND = -5,    </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            OUT_OF_MEMORY = -6,     </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            MALFORMED_DB = -7,      </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            DB_BUSY = -8,           </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            INVALID_PTR = -9,       </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            OUT_OF_RANGE = -10,     </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            NO_PATH = -11,          </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        };</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="struct_h_f_1_1_exceptions_1_1_file_not_found.html">   32</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="struct_h_f_1_1_exceptions_1_1_file_not_found.html">FileNotFound</a> : <span class="keyword">public</span> std::exception</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        {</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">char</span>* what() <span class="keyword">const</span> <span class="keywordflow">throw</span> ()</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            {</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                <span class="keywordflow">return</span> <span class="stringliteral">&quot;Couldn&#39;t find the given file!&quot;</span>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            }</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        };</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="struct_h_f_1_1_exceptions_1_1_invalid_o_b_j.html">   43</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="struct_h_f_1_1_exceptions_1_1_invalid_o_b_j.html">InvalidOBJ</a> : <span class="keyword">public</span> std::exception</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        {</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">char</span>* what() <span class="keyword">const</span> <span class="keywordflow">throw</span> ()</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            {</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                <span class="keywordflow">return</span> <span class="stringliteral">&quot;The obj given couldn&#39;t be read!&quot;</span>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            }</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        };</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="struct_h_f_1_1_exceptions_1_1_missing_dependency.html">   54</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="struct_h_f_1_1_exceptions_1_1_missing_dependency.html">MissingDependency</a> : <span class="keyword">public</span> std::exception</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        {</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">char</span>* what() <span class="keyword">const</span> <span class="keywordflow">throw</span> ()</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            {</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                <span class="keywordflow">return</span> <span class="stringliteral">&quot;C++ Exception&quot;</span>;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            }</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        };</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    }</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="astruct_h_f_1_1_exceptions_1_1_file_not_found_html"><div class="ttname"><a href="struct_h_f_1_1_exceptions_1_1_file_not_found.html">HF::Exceptions::FileNotFound</a></div><div class="ttdef"><b>Definition:</b> HFExceptions.h:28</div></div>
+<div class="ttc" id="astruct_h_f_1_1_exceptions_1_1_file_not_found_html"><div class="ttname"><a href="struct_h_f_1_1_exceptions_1_1_file_not_found.html">HF::Exceptions::FileNotFound</a></div><div class="ttdoc">Thrown when desired file is not found</div><div class="ttdef"><b>Definition:</b> HFExceptions.h:33</div></div>
 <div class="ttc" id="anamespace_h_f_html"><div class="ttname"><a href="namespace_h_f.html">HF</a></div><div class="ttdoc">Output CSR for interop with other languages</div><div class="ttdef"><b>Definition:</b> graph_generator.cpp:6</div></div>
-<div class="ttc" id="astruct_h_f_1_1_exceptions_1_1_invalid_o_b_j_html"><div class="ttname"><a href="struct_h_f_1_1_exceptions_1_1_invalid_o_b_j.html">HF::Exceptions::InvalidOBJ</a></div><div class="ttdef"><b>Definition:</b> HFExceptions.h:35</div></div>
-<div class="ttc" id="astruct_h_f_1_1_exceptions_1_1_missing_dependency_html"><div class="ttname"><a href="struct_h_f_1_1_exceptions_1_1_missing_dependency.html">HF::Exceptions::MissingDependency</a></div><div class="ttdef"><b>Definition:</b> HFExceptions.h:42</div></div>
+<div class="ttc" id="astruct_h_f_1_1_exceptions_1_1_invalid_o_b_j_html"><div class="ttname"><a href="struct_h_f_1_1_exceptions_1_1_invalid_o_b_j.html">HF::Exceptions::InvalidOBJ</a></div><div class="ttdoc">Thrown when the desired object could not be read</div><div class="ttdef"><b>Definition:</b> HFExceptions.h:44</div></div>
+<div class="ttc" id="astruct_h_f_1_1_exceptions_1_1_missing_dependency_html"><div class="ttname"><a href="struct_h_f_1_1_exceptions_1_1_missing_dependency.html">HF::Exceptions::MissingDependency</a></div><div class="ttdoc">Thrown when a dependency is missing</div><div class="ttdef"><b>Definition:</b> HFExceptions.h:55</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
