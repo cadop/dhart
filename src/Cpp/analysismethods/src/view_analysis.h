@@ -3,9 +3,10 @@
 #include <cmath>
 #include <iostream>
 #include <assert.h>
-#ifndef VIEW_ANALYSIS_G
 
+#ifndef VIEW_ANALYSIS_G
 #define VIEW_ANALYSIS_G
+
 //Forward Declares
 namespace HF {
 	namespace SpatialStructures {
@@ -60,6 +61,10 @@ namespace HF::AnalysisMethods::ViewAnalysis {
 	/// <summary>
 	/// Apply the desired aggregate function to the value;
 	/// </summary>
+	/// <param name="out_total">reference to float</param>
+	/// <param name="new_value">value of float</param>
+	/// <param name="agg_type">AGGREGATE_TYPE - valid range is [0, 4]</param>
+	/// <param name="count">count value to use</param>
 	inline void Aggregate(float& out_total, float new_value, const AGGREGATE_TYPE agg_type, int count = 0) {
 		switch (agg_type) {
 		case AGGREGATE_TYPE::COUNT:
@@ -109,6 +114,7 @@ namespace HF::AnalysisMethods::ViewAnalysis {
 	/// <param name="Nodes"> A list of nodes with atleast (x,y,z) coordinates </param>
 	/// <param name="num_rays"> The number of rays to shoot in the view analysis </param>
 	/// <param name="height"> Height off the ground to fire from</param>
+	/// <returns>A vector of typename RES</returns>
 	template <typename RES, typename RT, typename N>
 	std::vector<RES> SphericalViewAnalysis(
 		RT& ray_tracer,
@@ -152,6 +158,7 @@ namespace HF::AnalysisMethods::ViewAnalysis {
 	/// <param name="num_rays"> The number of rays to fire, evenly distributed in a sphere </param>
 	/// <param name="height"> Nodes will be raised this distance off the ground before being evaluated </param>
 	/// <param name="aggregation"> Aggregation method to use </param>
+	/// <returns> A vector of float (TODO: better description) </returns>
 	template<typename RT, typename N>
 	std::vector<float> SphericalRayshootWithAnyRTForDistance(
 		RT& ray_tracer,
@@ -194,4 +201,5 @@ namespace HF::AnalysisMethods::ViewAnalysis {
 		return out_scores;
 	}
 }
+
 #endif

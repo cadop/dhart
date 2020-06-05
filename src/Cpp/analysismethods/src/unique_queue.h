@@ -4,6 +4,7 @@
 
 #ifndef UNIQUE_QUEUE_INCLUDE_GUARD
 #define UNIQUE_QUEUE_INCLUDE_GUARD
+
 namespace HF {
 	namespace AnalysisMethods {
 		//TODO: Make this generic?
@@ -12,8 +13,8 @@ namespace HF {
 		/// </summary>
 		class UniqueQueue {
 		private:
-			std::queue<HF::SpatialStructures::Node> node_queue;
-			robin_hood::unordered_map<HF::SpatialStructures::Node, int> hashmap;
+			std::queue<HF::SpatialStructures::Node> node_queue;						///< A std::queue of Node ///<
+			robin_hood::unordered_map<HF::SpatialStructures::Node, int> hashmap;	///< a hashmap of K = Node, V = int ///<
 
 		public:
 
@@ -77,4 +78,5 @@ namespace HF {
 		};
 	}
 }
+
 #endif

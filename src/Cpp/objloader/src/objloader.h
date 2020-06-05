@@ -1,7 +1,9 @@
 #ifndef OBJLOADER_H
 #define OBJLOADER_H
+
 #include <vector>
 #include <string>
+
 namespace HF
 {
 	namespace Geometry
@@ -44,11 +46,12 @@ namespace HF
 		);
 
 		/// <summary>
-		/// Load a list of vertices raw from the specified file. 
+		/// Load a list of vertices raw from the specified file.
+		/// <param name="path">The path for the desired file from which vertices will be loaded</param>
 		/// </summary>
+		/// <returns>a vector of array (type float, size 3) that represents the vertices from the file specified at path</returns>
 		std::vector<std::array<float, 3>> LoadRawVertices(std::string path);
 	}
 }
-
 
 #endif

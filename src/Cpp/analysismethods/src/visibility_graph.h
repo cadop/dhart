@@ -7,6 +7,7 @@ namespace HF {
 		struct Node;
 		struct Edge;
 	}
+
 	namespace RayTracer {
 		class EmbreeRayTracer;
 	}
@@ -19,19 +20,24 @@ namespace HF {
 			/// All variations for generating the visibility graph 
 			/// </summary>
 			
-
-			///<summary>
-			/// Generate a visibility between all nodes in input nodes
-			///</summary>
+			/// <summary>
+			/// Generate a visibility graph between all nodes in input nodes
+			/// </summary>
+			/// <param name="ert">reference to EmbreeRayTracer for the VisibilityGraph</param>
+			/// <param name="input_nodes">reference to vector of Node for VisibilityGraph</param>
+			/// <param name="height">Desired height for the VisibilityGraph</param>
 			HF::SpatialStructures::Graph AllToAll(
 				HF::RayTracer::EmbreeRayTracer& ert,
 				const std::vector<HF::SpatialStructures::Node> & input_nodes,
 				float height = 1.7f
 			);
 
-			///<summary>
+			/// <summary>
 			/// Generate a visibility graph between every node in set a and every node in set b
-			///</summary> 
+			/// </summary> 
+			/// <param name="ert">reference to EmbreeRayTracer for the VisibilityGraph</param>
+			/// <param name="input_nodes">reference to vector of Node for VisibilityGraph</param>
+			/// <param name="height">Desired height for the VisibilityGraph</param>
 			HF::SpatialStructures::Graph GroupToGroup(
 				HF::RayTracer::EmbreeRayTracer& ert,
 				const std::vector<HF::SpatialStructures::Node> & from,
@@ -39,9 +45,13 @@ namespace HF {
 				float height = 1.7f
 			);
 
-			///<summary>
+			/// <summary>
 			/// Parallel AllToAll Algorithm for an undirected visibility graph
 			/// </summary>
+			/// <param name="ert">reference to EmbreeRayTracer for the VisibilityGraph</param>
+			/// <param name="input_nodes">reference to vector of Node for VisibilityGraph</param>
+			/// <param name="height">Desired height for the VisibilityGraph</param>
+			/// <param name="cores">Core count for the graph</param>
 			HF::SpatialStructures::Graph AllToAllUndirected(
 				HF::RayTracer::EmbreeRayTracer& ert,
 				const std::vector<HF::SpatialStructures::Node>& nodes,

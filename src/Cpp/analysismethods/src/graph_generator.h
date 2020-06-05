@@ -12,14 +12,14 @@ namespace HF {
 		class GraphGenerator;
 		class UniqueQueue;
 
-		// Determines which geometry the ray will collide with
+		///< Determines which geometry the ray will collide with ///<
 		enum HIT_FLAG {
 			FLOORS = 1,
 			OBSTACLES = 2,
 			BOTH = 3
 		};
 
-		// Calculates P(n,r) as an array with each 2 values being a pair
+		///< Calculates P(n,r) as an array with each 2 values being a pair ///<
 		std::set<std::pair<int, int>> permutations(int limit);
 
 		/// <summary>
@@ -28,22 +28,27 @@ namespace HF {
 		class GraphGenerator
 		{
 		private:
-			int walkable_surfaces; // Corresponds to the meshID of walkable surfaces in the Raytracer
-			int obstacle_surfaces; // Corresponds to the meshid of obstacle surfaces in the Raytracer
-			int core_count;	//How many cores we're using
-			RayTracer::EmbreeRayTracer ray_tracer;
+			int walkable_surfaces;					///< Corresponds to the meshID of walkable surfaces in the Raytracer ///<
+			int obstacle_surfaces;					///< Corresponds to the meshid of obstacle surfaces in the Raytracer ///<
+			int core_count;							///< How many cores we're using ///<
+			RayTracer::EmbreeRayTracer ray_tracer;	///< EmbreeRayTracer member ///<
 
-			// >---OPTIONS---/// maybe should be a struct?
+			///< >---OPTIONS---/// maybe should be a struct? ///<
 			v3 spacing;
 			v3 start;
+
 			float downstep;
 			float upslope;
 			float downslope;
 			float upstep;
+
 			int max_step_connection;
+
 			float step_height;
 			float floor_offset;
+
 			int max_nodes;
+
 			friend class GraphGeneratorPrivate; // Make our private implementation our friend
 		
 		public:

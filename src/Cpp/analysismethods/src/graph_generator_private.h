@@ -12,17 +12,29 @@ namespace HF{
 		class GraphGeneratorPrivate {
 		
 		private:
-			HF::SpatialStructures::Graph G; // An internal graph that is iterated upon as the program is executed
-			HF::AnalysisMethods::GraphGenerator & GG; // The underlying graph generator;
+			HF::SpatialStructures::Graph G;			  ///< An internal graph that is iterated upon as the program is executed ///<
+			HF::AnalysisMethods::GraphGenerator & GG; ///< The underlying graph generator; ///<
 
+			/// <summary>
+			/// Invokes CheckRay using a temporary instance of v3 (named testpos), constructed from position
+			/// </summary>
+			/// <param name="position">The node to use for CheckRay</param>
+			/// <returns>See CheckRay, returns value from CheckRay(testpos, down, FLOORS)</returns>
 			bool WalkableCheck(const SpatialStructures::Node& position);
 
-			// Calculate positions for every direction pair in directions, then deposit in out children
+			/// <summary>
+			/// Calculate positions for every direction pair in directions, then deposit in out children
+			/// </summary>
+			/// <param name="parent">The parent node</param>
+			/// <param name="directions">A reference to a direction pair (coordinates)</param>
+			/// <param name="out_children">A reference to a vector of Node where children will be deposited</param>
 			void Graphdirecs(const SpatialStructures::Node& parent, const std::vector<std::pair<int, int>>& directions, std::vector<SpatialStructures::Node>& out_children);
 
 			///<summary>
 			/// Push point to the ground if there is ground beneath it and return true. Return false if it isn't on any walkable terrain.
 			///</summary>
+			/// <param name="start">Reference to v3 instance</param>
+			/// <returns>Returns true if CheckRay(start, down) is true, false otherwise</returns>
 			bool CheckStart(v3& start);
 
 			/// <summary>
@@ -47,7 +59,12 @@ namespace HF{
 			/// <returns></returns>
 			void CrawlGeomParallel(UniqueQueue& todo);
 
-			// Ranks children then stores relations?
+			/// <summary>
+			/// Ranks children then stores relations?
+			/// </summary>
+			/// <param name="parent">The desired parent node</param>
+			/// <param name="directions">A reference to a vector of integer pairs, representing directions</param>
+			/// <param name="out_relations">A reference to a vector of Edge, representing relations</param>
 			inline void ComputerParent(const HF::SpatialStructures::Node& parent, const std::vector<std::pair<int, int>>& directions, std::vector<HF::SpatialStructures::Edge>& out_relations);
 
 			/// <summary>
@@ -76,13 +93,28 @@ namespace HF{
 			/// <returns>True if there is an unobstructed path between parent and child</returns>
 			bool OcclusionCheck(const SpatialStructures::Node & parent, const SpatialStructures::Node & child);
 			
-			// Check the floor
+			/// <summary>
+			/// Check the floor
+			/// </summary>
+			/// <param name="parent">The desired parent</param>
+			/// <param name="child">The desired child</param>
+			/// <returns>True if the child isn't lower than the maximum z coordinate offset, false otherwise</returns>
 			bool CheckFloor(const HF::SpatialStructures::Node& parent, HF::SpatialStructures::Node& child);
 
-			//  Returns true if the slope is up, and false otherwise
+			/// <summary>
+			/// Returns true if the slope is up, and false otherwise
+			/// </summary>
+			/// <param name="n1">The first node to compare</param>
+			/// <param name="n2">The second node to compare</param>
+			/// <returns>True, if the slope of n1 and n2 is positive (upward), false otherwise</returns>
 			bool isUpSlope(const HF::SpatialStructures::Node& n1, const HF::SpatialStructures::Node& n2);
 
-			// Calculates children for parent and places them in out_children
+			/// <summary>
+			/// Calculates children for parent and places them in out_children
+			/// </summary>
+			/// <param name="parent">Reference to parent node</param>
+			/// <param name="possible_children">Reference to vector of node, representing possible children</param>
+			/// <param name="out_children">Reference to vector of Edge, representing edges of children</param>
 			void GetChildren(const HF::SpatialStructures::Node & parent, const std::vector<SpatialStructures::Node>& possible_children, std::vector<HF::SpatialStructures::Edge>& out_children);
 
 			/// <summary>
@@ -93,19 +125,40 @@ namespace HF{
 			/// <returns>A list of valid nodes</returns>
 			std::vector<HF::SpatialStructures::Node> CheckChildren(const HF::SpatialStructures::Node& parent, std::vector<HF::SpatialStructures::Node> Children);
 
-			// Check if there is a connection between each node
+			/// <summary>
+			/// Check if there is a connection between each node
+			/// </summary>
+			/// <param name="parent">The desired parent node</param>
+			/// <param name="child">The desired child node</param>
+			/// <returns>True if parent and child are connected, false otherwise</returns>
 			bool IsConnected(const HF::SpatialStructures::Node& parent, const HF::SpatialStructures::Node& child);
-
-			// Get the distance between the node and where the ray hits. If the ray doesn't hit return 0
+			
+			/// <summary>
+			/// Get the distance between the node and where the ray hits. If the ray doesn't hit return 0
+			/// </summary>
+			/// <param name="p1">The desired node to assess</param>
+			/// <param name="direction">The direction of the ray</param>
+			/// <param name="flag">Ray collision status, 1 = FLOORS, 2 = OBSTACLES, 3 = BOTH (the default)</param>
+			/// <returns>Distance between the node and the ray collision -- 0.0f if ray does not hit</returns>
 			float RayDist(const HF::SpatialStructures::Node& p1, const v3& direction, HIT_FLAG flag = HIT_FLAG::BOTH);
 
 			///<summary>
-			///  Check if the parent and child have a connection between them. May move nodes around to fit on ground mesh.
+			/// Check if the parent and child have a connection between them. May move nodes around to fit on ground mesh.
 			///</summary>
 			HF::SpatialStructures::STEP CheckConnection(const HF::SpatialStructures::Node& parent, const HF::SpatialStructures::Node& child);
 
 		public:
+
+			/// <summary>
+			/// Default constructor
+			/// </summary>
+			/// <param name="GG">The GraphGenerator used to create this instance</param>
 			GraphGeneratorPrivate(GraphGenerator & GG);
+
+			/// <summary>
+			/// TODO description
+			/// </summary>
+			/// <returns>TODO returns</returns>
 			HF::SpatialStructures::Graph BuildNetwork();
 		};
 	}

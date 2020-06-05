@@ -1,6 +1,6 @@
-
 #include <Dense>
 #include <array>
+
 //#define EIGEN_DONT_ALIGN_STATICALLY
 //#define EIGEN_DONT_VECTORIZE
 
@@ -31,29 +31,33 @@ namespace HF {
 		/// </summary>
 		class MeshInfo {
 		private:
-			int meshid; // Unique ID of this mesh in the Db
-			Eigen::Matrix3X<float> verts; // A Matrix of vertices for this mesh
-			Eigen::Matrix3X<int> indices; // A Matrix of triangle indexes for this mesh
-			std::string name = ""; // A name to help identify the mesh from other meshes
+			int meshid;						///< Unique ID of this mesh in the Db ///<
+			Eigen::Matrix3X<float> verts;	///< A Matrix of vertices for this mesh ///<
+			Eigen::Matrix3X<int> indices;	///< A Matrix of triangle indices for this mesh ///<
+			std::string name = "";			///< A name to help identify the mesh from other meshes ///<
 
 		
 		/// <summary>
-		/// Set the specific coordinates at index to x, y, and z. 
+		/// Set the specific coordinates at index to x, y, and z.
 		/// </summary>
-		/// <param name="index">Place in the array to set the coordinate</param>
-		/// <param name="x"> X coordinate</param>
-		/// <param name="y"> Y coordinate</param>
-		/// <param name="z"> Z coordinate</param>
+		/// <param name="index">Position in the array to assign the coordinate</param>
+		/// <param name="x">X coordinate</param>
+		/// <param name="y">Y coordinate</param>
+		/// <param name="z">Z coordinate</param>
 		void SetVert(int index, float x, float y, float z);
 
 		/// <summary>
 		/// Insert an unindexed list of vertices into the triangle and vertex buffers using hashing. 
 		/// </summary>
-		/// <param name="vertices">An ordered list of vertices, Every 3 vertices form a triangle in the mesh</param>
+		/// <param name="vertices">An ordered list of vertices; every 3 vertices form a triangle in the mesh</param>
 		void VectorsToBuffers(const std::vector<std::array<float,3>> & vertices);
 		public:
 
+			/// <summary>
+			/// Default constructor, all fields initialized except for member indices
+			/// </summary>
 			MeshInfo() { meshid = 0; verts.resize(3, 0); name = "INVALID"; };
+
 			/// <summary>
 			/// Construct a new MeshInfo object from an unindexed vector of vertices, an ID, and a name
 			/// </summary>
@@ -70,7 +74,6 @@ namespace HF {
 			/// <param name="id">The id of this mesh</param>
 			/// <param name="name">The name of this mesh</param>
 			MeshInfo(const std::vector<float>& in_vertices, const std::vector<int>& in_indexes,  int id, std::string name = "");
-
 
 			/// <summary>
 			/// Append a list of verts onto the end of the mesh. This will cause the array to be resized.
@@ -108,51 +111,57 @@ namespace HF {
 			void ConvertToOBJCoordinates();
 
 			/// <summary>
-			/// Rotate this mesh by x,y,z rotations in degrees.
-			/// </summary>
+			/// Rotate this mesh by x, y, z rotations in degrees (pitch, yaw, roll)
+ 			/// </summary>
+			/// <param name="rx">Determines the pitch angle</param>
+			/// <param name="ry">Determines the yaw angle</param>
+			/// <param name="rz">Determines the roll angle</param>
 			void PerformRotation(float rx, float ry, float rz);
 
 			/// <summary>
-			/// Return a copy of meshID
+			/// Return a copy of meshid
 			/// </summary>
+			/// <returns>The member field meshid, by value</returns>
 			int GetMeshID() const;
 
-
 			/// <summary>
-			/// Get a copy of the underlying vertex buffer. Helpful for filling other bufferss
+			/// Retrieve a copy of the underlying vertex buffer. Helpful for filling other buffers
 			/// </summary>
+			/// <returns>A copy of the member field verts, the underlying vertex buffer (using std::copy)</returns>
 			std::vector<float> getRawVertices() const;
 			
-			/// /// <summary>
-			/// Get a copy of the underlying index buffer. Useful for copying into other buffers
+			/// <summary>
+			/// Retrieve a copy of the underlying index buffer. Useful for copying into other buffers
 			/// </summary>
+			/// <returns>A copy of the member field indices, the underlying index buffer (using std::copy)</returns>
 			std::vector<int> getRawIndices() const;
 
-			
-
-
-			//TODO: Find a better solution for this.
+			// TODO: Find a better solution for this.
 			/// <summary>
-			///  Get verticies as a vector of floats. 
+			/// Retrieve vertices as a vector of arrays of float.
 			/// </summary>
-			/// <returns></returns>
+			/// <returns>A vector of arrays of float</returns>
 			std::vector<std::array<float, 3>> GetVertsAsArrays() const;
+
+			/// <summary>
+			/// Assigns the value of new_id to meshid
+			/// </summary>
+			/// <param name="new_id">The desired id to assign to member field meshid</param>
 			void SetMeshID(int new_id);
 
 			/// <summary>
-			/// Compare the vertices of two mesh info objects
+			/// Compare the vertices of two MeshInfo objects
 			/// </summary>
-			/// <param name="M2">Mesh info to compare with</param>
-			/// <returns>True if all vertices are equal within a certain tolerance</returns>
+			/// <param name="M2">The desired MeshInfo to compare</param>
+			/// <returns>True if all vertices are equal within a certain tolerance, false otherwise</returns>
 			bool operator==(const MeshInfo& M2) const;
 			
-			/// /// <summary>
-			/// Get a vertice at a specific vertex in the mesh
+			/// <summary>
+			/// Get vertex at a specific index in the mesh
 			/// </summary>
-			/// <param name="i">Index of the desired vertice</param>
-			/// <returns>An array of floats for the x,y, and z coordinates</returns>
+			/// <param name="i">Index of the desired vertex</param>
+			/// <returns>An array of floats representing the x, y, and z coordinates</returns>
 			std::array<float, 3> operator[](int i) const;
-
 		};
 	}
 }
