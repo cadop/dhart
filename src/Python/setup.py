@@ -1,4 +1,5 @@
 from setuptools import setup, find_packages
+from glob import glob
 
 setup(name='humanfactors',
       version='0.2.2',
@@ -7,7 +8,7 @@ setup(name='humanfactors',
       author_email='',
       packages=find_packages(),
       data_files = [
-            ('bin', ["humanfactorspy/bin/HumanFactors.dll", "humanfactorspy/bin/tbb.dll", "humanfactorspy/bin/embree3.dll"])
+            ('bin', glob("humanfactorspy/bin/*"))
       ],
       install_requires=[
             'numpy',
