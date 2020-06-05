@@ -30,7 +30,7 @@ def DijkstraShortestPath(
     start: List[Union[int, Tuple[float, float, float]]],
     end: List[Union[int, Tuple[float, float, float]]],
 ) -> Union[List[Union[Path, None]], Union[Path, None]]:
-    """ Find the shortest path from start to end using Dijkstra's algorithm
+    """ Find the shortest path from start to end using Dijkstra's shortest path algorithm
     
     Accepts a list of starting / ending points or single starting/ending
     points. 
@@ -42,8 +42,53 @@ def DijkstraShortestPath(
     
     Returns:
         List[Union[path, None]]: if multiple start/end ids were passed
-        OR
-        Union[Path, None]: If there was no path between A and B
+        Union[Path, None]: One start or end point was passed
+
+        If a path cannot be found to connect a start and end point that
+        path will be returned as None.
+
+    Example:
+        Creating a graph, adding edges to it, then generating a path from node 0 to 3.
+        
+        >>> from humanfactorspy.pathfinding import DijkstraShortestPath
+        >>> from humanfactorspy.spatialstructures import Graph
+
+        >>> g = Graph()
+        >>> g.AddEdgeToGraph(0, 1, 100)
+        >>> g.AddEdgeToGraph(0, 2, 50)
+        >>> g.AddEdgeToGraph(1, 3, 10)
+        >>> g.AddEdgeToGraph(2, 3, 10)
+        >>> csr = g.CompressToCSR()
+
+        >>> SP = DijkstraShortestPath(g, 0, 3)
+        >>> print(SP)
+        [(50., 0) (10., 2) ( 0., 3)]
+
+        The same, but creating multiple paths.
+        
+        >>> from humanfactorspy.pathfinding import DijkstraShortestPath
+        >>> from humanfactorspy.spatialstructures import Graph
+
+        >>> g = Graph()
+        >>> g.AddEdgeToGraph(0, 1, 100)
+        >>> g.AddEdgeToGraph(0, 2, 50)
+        >>> g.AddEdgeToGraph(1, 3, 10)
+        >>> g.AddEdgeToGraph(2, 3, 10)
+        >>> csr = g.CompressToCSR()
+
+        >>> SP = DijkstraShortestPath(g, [1] * 10, [3] * 10)
+        >>> for path in SP:
+        ...     print(path)
+        [(10., 1) ( 0., 3)]
+        [(10., 1) ( 0., 3)]
+        [(10., 1) ( 0., 3)]
+        [(10., 1) ( 0., 3)]
+        [(10., 1) ( 0., 3)]
+        [(10., 1) ( 0., 3)]
+        [(10., 1) ( 0., 3)]
+        [(10., 1) ( 0., 3)]
+        [(10., 1) ( 0., 3)]
+        [(10., 1) ( 0., 3)]
 
     Raises:
         humanfactorspy.Exceptions.: Start or End did not exist in 

@@ -4,7 +4,7 @@ from . import pathfinder_native_functions
 
 
 class PathMemberStruct(ctypes.Structure):
-    """ A node in a path """
+    """ A node in a path. Contains the cost to the next node and an ID """
 
     _fields_ = [
         ("cost_to_next", ctypes.c_float),

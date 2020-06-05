@@ -10,12 +10,12 @@ from humanfactorspy.native_numpy_like import NativeNumpyLike
 class ResultStruct(ctypes.Structure):
     """ A struct of results containing distance, and meshid 
 
-    If the ray didn't hit anything, both distance and MeshID are usually set
-    to zero.    
+    If the ray didn't hit anything, both distance and MeshID will be
+    set to 0
 
     Attributes:
-        [0] = distance
-        [1] = Mesh_ID
+        [0] = distance to the hitpoint or 0 if no geometry was hit
+        [1] = The ID of the geometry hit, or 0 if no geometry was hit
     """
 
     _fields_ = [("distance", ctypes.c_float), ("meshid", ctypes.c_int)]
@@ -56,7 +56,7 @@ class RayResultList(NativeNumpyLike):
         )
 
 
-def isValidBVH(bvh: object):
+def isValidBVH(bvh: object) -> bool:
     """ Check if the given object is actually a BVH before sending the pointer to C++
 
     If this check were not performed, the pointer from any object with the .pointer attribute
@@ -83,23 +83,12 @@ def Intersect(
     
     In situations where multiple rays are shot, rays will be fired in parallel. 
 
-    Accepts the following configurations:
-        1) Single origin, single direction
-        2) Multiple origins, multiple directions
-        3) Single origin, multiple directions
-        4) Multiple origins, single direction
-
-    Example::
-
-        # Single Ray
-        result = FireRayForResults(bvh, (x,y,z), (x,y,z))
-        distance, meshid = result[0], result[1]
-
-        # Multiple Rays
-        results = FireRayForResults(bvh, [(x,y,z), (x,y,z)], (0,0,-1))
-        
-        node1_distance, node1_meshid = results.array[0][0], results.array[0][1]
-        node2_distance, node2_meshid = results.array[1][0], results.array[1][1]
+    Note:
+        Accepts the following configurations:
+            1) Single origin, single direction
+            2) Multiple origins, multiple directions
+            3) Single origin, multiple directions
+            4) Multiple origins, single direction
 
     Args:
         bvh: A valid Embree BVH
@@ -111,6 +100,52 @@ def Intersect(
         Union[numpy.array, Tuple[float, int]]: If a single ray, then a tuple of float
             for distance and an int for meshid. If multiple rays, return a numpy array of
             RayResult structs. In all cases, a distance/meshid of -1 indicates a miss.
+
+    Examples:
+        Firing a single ray
+
+        >>> from humanfactorspy.geometry import LoadOBJ, CommonRotations, ConstructPlane
+        >>> from humanfactorspy.raytracer import EmbreeBVH, Intersect
+        
+        >>> loaded_obj = ConstructPlane()
+        >>> loaded_obj.Rotate(CommonRotations.Yup_to_Zup)
+        >>> bvh = EmbreeBVH(loaded_obj)
+        
+        >>> result = Intersect(bvh, (0,0,1), (0,0,-1))
+        >>> print(result)
+        (0.9999999403953552, 39)
+
+
+        Firing rays with an equal number of directions and origins
+
+        >>> from humanfactorspy.geometry import LoadOBJ, CommonRotations, ConstructPlane
+        >>> from humanfactorspy.raytracer import EmbreeBVH, Intersect
+
+        >>> loaded_obj = ConstructPlane()
+        >>> loaded_obj.Rotate(CommonRotations.Yup_to_Zup)
+        >>> bvh = EmbreeBVH(loaded_obj)
+
+        >>> hit_point = Intersect(bvh, [(0,0,1)] * 10, [(0,0,-1)] * 10)
+        >>> print(hit_point)
+        [(0.99999994, 39) (0.99999994, 39) (0.99999994, 39) (0.99999994, 39)
+         (0.99999994, 39) (0.99999994, 39) (0.99999994, 39) (0.99999994, 39)
+         (0.99999994, 39) (0.99999994, 39)]
+
+        Firing multiple rays with one direction and multiple origins
+
+        >>> from humanfactorspy.geometry import LoadOBJ, CommonRotations, ConstructPlane
+        >>> from humanfactorspy.raytracer import EmbreeBVH, Intersect
+
+        >>> loaded_obj = ConstructPlane()
+        >>> loaded_obj.Rotate(CommonRotations.Yup_to_Zup)
+        >>> bvh = EmbreeBVH(loaded_obj)
+
+        >>> origins = [(0,0,x) for x in range(0,5)]
+        >>> hit_point = Intersect(bvh, origins, (0,0,-1))
+        >>> print(hit_point)
+        [(-1.        , -1) ( 0.99999994, 39) ( 1.9999999 , 39) ( 3.        , 39)
+         ( 3.9999995 , 39)]
+
     """
     if isinstance(origin, tuple) and isinstance(direction, tuple):
         return raytracer_native_functions.FireRaySingleDistance(
@@ -148,7 +183,13 @@ def IntersectForPoint(
     in a single direction, set origins OR directions to a single value. If
     they are both set to a single value then the ray will be fired as a single 
     ray via FireRay.
-    
+
+    Note:
+        Accepts the following configurations:
+            1) Single origin, single direction
+            2) Multiple origins, multiple directions
+            3) Single origin, multiple directions
+            4) Multiple origins, single direction
     Args:
         origins: A list of origins or the origin point to shoot from
         directions: A list of directions or the direction to shoot in
@@ -159,6 +200,20 @@ def IntersectForPoint(
             and tuples of 3 floats where the rays did intersect geometry
     Raises:
         TypeError : When the passed BVH is invalid
+
+    Examples:
+        Fire a single ray straight downwards
+
+        >>> from humanfactorspy.geometry import LoadOBJ, CommonRotations, ConstructPlane
+        >>> from humanfactorspy.raytracer import EmbreeBVH, IntersectForPoint
+
+        >>> loaded_obj = ConstructPlane()
+        >>> loaded_obj.Rotate(CommonRotations.Yup_to_Zup)
+        >>> bvh = EmbreeBVH(loaded_obj)
+
+        >>> hit_point = IntersectForPoint(bvh, (0,0,1), (0,0,-1))
+        >>> print(hit_point)
+        (0.0, 0.0, 5.960464477539063e-08)
     """
     isValidBVH(bvh)
     origins_is_list = False
@@ -235,6 +290,21 @@ def IntersectOccluded(
     
     Raises:
         TypeError: BVH is not a valid EmbreeBVH
+
+    Example:
+        Firing multiple rays from a single origin in multiple directions
+
+        >>> from humanfactorspy.geometry import LoadOBJ, CommonRotations, ConstructPlane
+        >>> from humanfactorspy.raytracer import EmbreeBVH, IntersectOccluded
+
+        >>> loaded_obj = ConstructPlane()
+        >>> loaded_obj.Rotate(CommonRotations.Yup_to_Zup)
+        >>> bvh = EmbreeBVH(loaded_obj)
+
+        >>> directions = [(0,0,-1), (0,1,0), (1,0,0)]
+        >>> hit_point = IntersectOccluded(bvh, (0,0,1), directions)
+        >>> print(hit_point)
+        [True, False, False]
     """
     isValidBVH(bvh)
 
