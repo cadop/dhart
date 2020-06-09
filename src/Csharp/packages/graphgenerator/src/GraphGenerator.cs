@@ -5,8 +5,9 @@ using System;
 namespace HumanFactors.GraphGenerator
 {
     /// <summary>
-    /// Generatea graph of accessible space.
+    /// Generate a <see cref="Graph"/> from the accessible space in the model.
     /// </summary>
+    ///<remarks> Use the graph generator to quickly map out accessible space in an environment for other analysis methods without needing to manually place nodes.</remarks>
     public static class GraphGenerator{
 
 

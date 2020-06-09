@@ -11,7 +11,7 @@ namespace HumanFactors.Geometry
         /// Attempt to load the OBJ at the given filepath. If a rotation is specifed, the mesh will be rotated
         /// </summary>
         /// <param name="path"> Filepath for the obj to load. </param>
-        /// <param name="xrot"> Degrees to rotate the mesh on the z axis. </param>
+        /// <param name="xrot"> Degrees to rotate the mesh on the x axis. </param>
         /// <param name="yrot"> Degrees to rotate the mesh on the y axis. </param>
         /// <param name="zrot"> Degrees to rotate the mesh on the z axis. </param>
         /// <returns>
@@ -36,7 +36,7 @@ namespace HumanFactors.Geometry
         /// <summary>
         /// Attempt to load the OBJ at the given filepath. If a rotation is specifed, the mesh will be rotated.
         /// </summary>
-        /// <param name="path"> Filepath for the obj to load </param>
+        /// <param name="path"> Filepath to the obj file to load. </param>
         /// <param name="rotation"> X,Y, and Z values in degrees to rotate the mesh </param>
         /// <returns>
         /// A new instance of <see cref="MeshInfo" /> holding a reference to the unmanaged mesh.

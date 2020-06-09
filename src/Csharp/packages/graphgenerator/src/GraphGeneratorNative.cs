@@ -24,7 +24,7 @@ namespace HumanFactors.GraphGenerator {
         ) {
             IntPtr out_graph = new IntPtr();
             float[] start_arr = start_point.ToArray();
-            float[] spacing_arr = start_point.ToArray();
+            float[] spacing_arr = spacing.ToArray();
 
             HF_STATUS res = GenerateGraph(
                 bvh,

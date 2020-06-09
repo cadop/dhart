@@ -10,6 +10,8 @@ namespace HumanFactors.NativeUtils
     /// An object that holds a pointer to unmanaged memory or some other resource that must be freed.
     /// Safehandle, but is able to report size to the garbage collector to improve performance.
     /// </summary>
+    /// <remarks>All uses of pointers in this library will be wrapped by this, since it ensures that no memory is leaked
+    /// under any circumstances. </remarks>
     public abstract class NativeObject : SafeHandle
     {
 
@@ -23,7 +25,7 @@ namespace HumanFactors.NativeUtils
         public IntPtr Pointer { get => handle;}
 
         /// <summary>
-        /// Create a new Native Object to manage the lifetime of <paramref name="in_native_pointer" />
+        /// Create a new Native Object to manage the lifetime of the object pointed to by <paramref name="in_native_pointer" />.
         /// </summary>
         /// <param name="in_native_pointer"> Pointer to the held object in unmanaged memory.</param>
         /// <param name="in_pressure">
@@ -89,6 +91,33 @@ namespace HumanFactors.NativeUtils
         /// </remarks>
         unsafe virtual public Span<T> array { get => new Span<T>(ptrs.data.ToPointer(), size); }
 
+        unsafe public override string ToString()
+        {
+            var arr = this.array;
+            
+            const int threshold = 15;
+            int n = array.Length;
+            
+            // Truncate if the size of the array is higher than the threshold
+            int truncate_after = -1;
+            if (n > threshold)
+                truncate_after = 5;
+
+            string out_str = "[";
+            for(int i = 0; i < arr.Length; i++)
+            {
+                var element = arr[i];
+
+                /// Print dots if we hit this point
+                if (i == truncate_after && truncate_after > 0)
+                    out_str += ". . . ";
+                else if (truncate_after < 0 || i < truncate_after || i > Math.Max(arr.Length - truncate_after, 3))
+                    out_str += element.ToString() + ", ";
+            }
+
+            out_str = out_str.Remove(out_str.LastIndexOf(","));
+            return out_str + "]";
+        }
 
         /// <summary> Marshal the unmanaged array pointed to by this object into a managed array.</summary>
         /// <returns>A deep copy of the unmanaged array in managed memory. </returns>
