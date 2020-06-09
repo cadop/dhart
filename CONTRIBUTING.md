@@ -35,3 +35,20 @@ Coding standards are important, sometimes there is the ‘industry standard’ w
 
 * Naming Conventions and Coding Standards have to be well followed (https://sites.google.com/site/wcfpandu/student-of-the-month/c-coding-standards-and-naming-conventions)
 * Code general architecture should be discussed and well maintained.
+
+
+
+C++ Doxygen Guidelines
+
+Overview
+
+Methods and xml format to use in methods
+Algorithms should be documented inline with source rather than headers
+Interface details should remain with headers
+
+Implementation
+
+To have a TODO automatically pull to documentation use:
+///TODO: 
+
+Snippits should be used for long examples that are over 10 lines. Example usage is:
