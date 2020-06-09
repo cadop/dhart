@@ -18,6 +18,9 @@ namespace HF
 		/// <summary>
 		/// A point in space with an ID
 		/// </summary>
+
+		/// \snippet Cpp\snippets\spatialstructures\node.cpp SnippetName
+
 		struct Node {
 		public:
 			float x, y, z;		///< Cartesian coordinates x, y, z ///<
