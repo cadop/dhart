@@ -2,18 +2,19 @@
 #include <Constants.h>
 #include <exception>
 #include <cmath>
+
 namespace HF {
 	namespace SpatialStructures {
-		Node::Node()
-		{
+		Node::Node() {
 			x = NAN;
 			y = NAN;
 			z = NAN;
 			id = NAN;
 		}
+
 		Node::Node(float x, float y, float z, int id) : x(x), y(y), z(z), id(id) {};
-		Node::Node(const std::array<float, 3>& position)
-		{
+		
+		Node::Node(const std::array<float, 3>& position) {
 			x = position[0];
 			y = position[1];
 			z = position[2];
@@ -21,14 +22,14 @@ namespace HF {
 			type = NODE_TYPE::GRAPH;
 		}
 
-		Node::Node(const std::array<float, 3>& position, NODE_TYPE t, int id)
-		{
+		Node::Node(const std::array<float, 3>& position, NODE_TYPE t, int id) {
 			id = -1;
 			type = t;
 			x = position[0];
 			y = position[1];
 			z = position[2];
 		}
+
 		float Node::distanceTo(const Node& n2) const {
 			return
 				sqrtf(pow((x - n2.x), 2) +
@@ -56,8 +57,7 @@ namespace HF {
 			}
 		}
 
-		float Node::operator[](int i) const
-		{
+		float Node::operator[](int i) const {
 			switch (i) {
 			case 0:
 				return x;
@@ -69,12 +69,11 @@ namespace HF {
 				return z;
 				break;
 			default:
-				throw std::exception(); //TODO: Make this a custom human factors exception
+				throw std::exception(); // TODO: Make this a custom human factors exception
 			}
 		}
 
-		bool Node::operator==(const Node& n2) const
-		{
+		bool Node::operator==(const Node& n2) const {
 			const float dist = sqrtf(powf(n2.x - x, 2) + powf(n2.y - y, 2)  + powf(n2.z - z, 2));
 			return dist < ROUNDING_PRECISION;
 		}
@@ -92,7 +91,7 @@ namespace HF {
 		inline Node Node::operator-(const Node& n2)const { return Node(x - n2.x, y - n2.y, z - n2.z); }
 		inline Node Node::operator+(const Node& n2) const { return Node(x + n2.x, y + n2.y, z + n2.z); }
 
-		//TODO: Dot product?
+		// TODO: Dot product?
 		inline Node Node::operator*(const Node& n2) const {
 			return Node(x * n2.x, y * n2.y, z * n2.z);
 		}
@@ -101,7 +100,7 @@ namespace HF {
 		bool Node::operator<(const Node& n2){return id < n2.id;	} // This needs to exist for std sort
 		bool Node::operator>(const Node& n2) const { return id > n2.id; }
 
-		//Normalize the vector by reference
+		// Normalize the vector by reference
 		void Normalize(std::array<float, 3>& vector) {
 			auto magnitude = sqrtf(powf(vector[0], 2) + powf(vector[1], 2) + powf(vector[2], 2));
 			vector[0] = vector[0] / magnitude; 
@@ -119,8 +118,8 @@ namespace HF {
 			Normalize(direction_vector);
 			return direction_vector;
 		}
-		std::array<float, 3> Node::getArray() const
-		{
+
+		std::array<float, 3> Node::getArray() const {
 			return std::array<float, 3>{x, y, z};
 		}
 	}

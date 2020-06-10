@@ -1,5 +1,12 @@
+///
+/// \file		graph.cpp
+///	\brief		Source file for a graph ADT
+///
+/// \author		TBA
+/// \date		06 Jun 2020
+///
 #include "graph.h"
-#include "graph.h"
+
 #include <Graph.h>
 #include <algorithm>
 #include <math.h>
@@ -8,6 +15,7 @@
 
 using namespace Eigen;
 using std::vector;
+
 namespace HF::SpatialStructures {
 	int Graph::size() const { return id_to_nodes.size(); }
 

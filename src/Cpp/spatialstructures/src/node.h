@@ -1,3 +1,10 @@
+///
+/// \file		node.h
+///	\brief		Header file for a node data structure, used in a graph ADT
+///
+/// \author		TBA
+/// \date		06 Jun 2020
+///
 #pragma once
 
 #ifndef HF_NODE
@@ -11,7 +18,7 @@ namespace HF
 	namespace SpatialStructures {
 		enum NODE_TYPE {
 			GRAPH = 0,
-			POI = 1,		///< POI is 'point of interest' ///<
+			POI = 1,		///< POI is 'point of interest'
 			OTHER = 2
 		};
 
@@ -20,9 +27,9 @@ namespace HF
 		/// </summary>
 		struct Node {
 		public:
-			float x, y, z;		///< Cartesian coordinates x, y, z ///<
-			short type = GRAPH; ///< Default this field to GRAPH ///<
-			int id;				///< Node identifier ///<
+			float x, y, z;		///< Cartesian coordinates x, y, z
+			short type = GRAPH; ///< Default this field to GRAPH
+			int id;				///< Node identifier
 
 			/// <summary>
 			/// Default constructor. Constructs everything with NAN
@@ -359,4 +366,4 @@ namespace std {
 	}
 }
 
-#endif
+#endif /// HF_NODE

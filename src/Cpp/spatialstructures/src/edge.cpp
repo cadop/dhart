@@ -1,3 +1,10 @@
+///
+/// \file		edge.cpp
+///	\brief		Source file for an edge data type, used by a graph ADT
+///
+/// \author		TBA
+/// \date		06 Jun 2020
+///
 #include <Edge.h>
 
 namespace HF {
