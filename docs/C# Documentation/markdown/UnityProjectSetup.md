@@ -1,5 +1,5 @@
 
-# Walkthrough
+# Setting Up a Unity Project for Human Factors
 
 ## Table of Contents
   - [Before we begin](#before-we-begin)
@@ -12,12 +12,6 @@
 
 ## Before we begin
 
- This guide will demonstrate setting up a new unity project from scratch, then importing the HumanFactors API and verifying that it's working. 
-
-### Prerequisites
-
-- An installation of [Unity](https://unity3d.com/get-unity/download). This project has been tested with Unity 2019.3f, but should work from 2018.3 on. 
-- A copy of the HumanFactors release built with support for C#. The `bin` folder should contain the following files:
 
 ```
 1. embree3.dll
@@ -33,7 +27,6 @@
 11. vcruntime140_1.dll
 ```
 
-- An installation of Visual Studio with Unity integration. Instructions for installing Visual Studio in Unity are available [here](https://docs.microsoft.com/en-us/visualstudio/cross-platform/getting-started-with-visual-studio-tools-for-unity?view=vs-2019).
   
 ## Creating a new project
 
@@ -135,4 +128,4 @@ Here's a magnified image of the console's output shown in the red box.
 
 !["Console Output"](../assets/walkthroughs/unity/1_project_setup/ExpectedOutput.png)
 
-If you've made it this far, then you're ready to move on to the Graph Generator. [Here's](../assets/walkthroughs/unity/1_project_setup/HumanFactors%20UnitySetup.zip) a zipped version of the entire Unity Project from this walkthrough.
+If you've made it this far, then you're ready to move on to the [Graph Generator](GraphGeneratorExample.md). [Here's](../assets/walkthroughs/unity/1_project_setup/HumanFactors%20UnitySetup.zip) a zipped version of the entire Unity Project from this walkthrough. 
