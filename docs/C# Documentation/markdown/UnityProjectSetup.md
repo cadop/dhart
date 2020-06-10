@@ -1,5 +1,6 @@
 
 # Walkthrough
+
 ## Before we begin
 
  This guide will demonstrate setting up a new unity project from scratch, then importing the HumanFactors API and verifying that it's working. 
@@ -13,20 +14,18 @@
 1. embree3.dll
 2. HumanFactors.dll
 3. HumanFactorsCSharp.dll
-4. Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
-5. msvcp140.dll
-6. System.Buffers.dll
-7. System.Memory.dll
-8. System.Runtime.CompilerServices.Unsafe.dll
-9. tbb.dll
-10. vcomp140.dll
-11. vcruntime140.dll
-12. vcruntime140_1.dll
+4. msvcp140.dll
+5. System.Buffers.dll
+6. System.Memory.dll
+7. System.Runtime.CompilerServices.Unsafe.dll
+8. tbb.dll
+9. vcomp140.dll
+10. vcruntime140.dll
+11. vcruntime140_1.dll
 ```
 
 - An installation of Visual Studio with Unity integration. Instructions for installing Visual Studio in Unity are available [here](https://docs.microsoft.com/en-us/visualstudio/cross-platform/getting-started-with-visual-studio-tools-for-unity?view=vs-2019).
   
-
 ## Creating a new project
 
 Open up the Unity Hub then click the *NEW* button.
@@ -42,11 +41,11 @@ Upon completion you should be greeted by an empty unity scene.
 
 ## Importing The Human Factors Library
 
-Now that the project is set up, we need to place the binaries for HumanFactors in the assets folder so Unity can see and interface with them. Unzip the HumanFactors release package(Don't try to drag from a zipped folder you will get an error), then drag the `bin` folder into the assets window. If you don't see the assets window, then you can click the assets folder on the left side directly under the project tab. 
+Now that the project is set up, we need to place the binaries for HumanFactors in the assets folder so Unity can see and interface with them. Unzip the HumanFactors release package(Don't try to drag from a zipped folder you will get an error), then drag the `bin` folder into the assets window. If you don't see the assets window, then you can click the assets folder on the left side directly under the project tab.
 
 ![Moving the bin folder into the assets directory](../images/bin_to_assets.png)
 
-To verify that the installation is working, we're going to create a small script that constructs a sample plane. Right click on a blank space in the assets window, mouse over *Create*, then select  then select *C# Script*. 
+To verify that the installation is working, we're going to create a small script that constructs a sample plane. Right click on a blank space in the assets window, mouse over *Create*, then select  then select *C# Script*.
 
 !["Creating a new C# script"](../images/create_new_script.png)
 
@@ -58,15 +57,34 @@ Double click on the newly created script to open visual studio. If Mono-Develop 
 
 !["HumanFactors referenced by your project"](../images/visual_studio_human_factors_reference.png)
 
-## Creating A Plane in HumanFactors
-Now that we know the library can be referenced by our new script, we will create a plane to ensure that it's working correctly. In the VisualStudio window you've just opened, add the line: 
-``` C#
-using HumanFactors.Geometry;
-```
- to the top of the file, then In the `Start()` function of new behaviour script, add the following code to create a new plane from a list of vertices/indices.
+## Creating A Plane and Firing a Ray at it. in HumanFactors
+
+Now that we know the HumanFactors library can be referenced by our New Unity Project, lets check to see that it's working with a simple script. This script will perform the following when playmode is entered:
+
+1) Create a Plane
+2) Fire a ray at the plane
+3) Get the point where the ray intersected the plane.
+
+In the Visual Studio window you've just opened, Look at the contents of NewBehavior Script.cs It should match this image:
+
+!["NewBehaviourScriptBlank](../images/blank_new_behaviour_script.png)
+
+### Writing the Script
+
+To reduce the length of calls into HumanFactors, we're going to declare which namespaces will be used in this script. Add the following lines to the top of the script
 
 ``` C#
-        /// Create the array of the plane's vertices and indices
+using HumanFactors.Geometry;
+using HumanFactors.RayTracing;
+```
+
+The top block of your script should look like this.
+!["NewBehaviourScript Usings"](../images/add_using_delcarations.png)
+
+Now that we've declared what we're using HumanFactors, lets actually use it in our code. In the `Start()` function of new behaviour script, add the following code to create a new plane from a list of vertices/indices.
+
+``` C#
+        /// Create an array of a plane's vertices and indices
         float[] plane_vertices = {
             -20f, 0.0f, 20f,
             -20f, 0.0f, -20f,
@@ -75,23 +93,37 @@ using HumanFactors.Geometry;
         };
         int[] plane_indices = { 3, 1, 0, 2, 3, 0 };
 
-        /// Send them to human factors
+        /// Send them to HumanFactors
         MeshInfo Plane = new MeshInfo(plane_indices, plane_vertices);
 
-        UnityEngine.Debug.Log(Plane);
+        /// Generate a BVH for the RayTracer
+        EmbreeBVH bvh = new EmbreeBVH(Plane);
+
+        /// Fire a ray straight down at the plane, then store the result
+        Vector3D origin = new Vector3D(1, 1, 0);
+        Vector3D direction = new Vector3D(0, -1, 0);
+        var hitpoint = EmbreeRaytracer.IntersectForPoint(bvh, origin, direction);
+
+        /// Print the x, y, and z components of the hitpoint
+        Debug.Log("(" + hitpoint.x + "," + hitpoint.y + "," + hitpoint.z + ")");
 ```
 
-After finished your entire code should look like this.
+After finished your entire code should look like this. Once you've verified this is true, make sure to save it.
 
 ![Add Using HumanFactors](../images/create_plane.png)
 
-Now that we have a usable script, we need to attach it to some game object in order to run it. Head back to the unity window, drag *NewBehaviorScript.CS* to *Main Camera* in the scene hierarchy. Since *NewBehaviorScript* is a component of the *Main Camera*, its `Start()` function containing our plane construction code will be run when the editor enters play mode.
+### Testing the Script
+
+Now that we have a usable script, we need to attach it to some game object in order to run it. In the Unity Window drag *NewBehaviorScript.cs* to *Main Camera* in the scene hierarchy. Since *NewBehaviorScript* is a component of the *Main Camera*, its `Start()` function containing our sample code will be run when the editor enters play mode.
 
 ![Add Using HumanFactors](../images/drag_into_camera.png)
 
-Click the play button to enter play mode, then look at your editor's console. If everything went right, then the console located at the bottom of your editor's window should show HumanFactors.Geometry.MeshInfo. 
-
+Click the play button (shown in blue below) to enter play mode, then look at your editor's console. If everything went right, then the console located at the bottom of your editor's window should show `(1,0,0)`, which is the exact point where the ray intersected the plane.
 
 ![Add Using HumanFactors](../images/console_show_meshinfo.png)
 
-If you've made it this far, then you're ready to move on to the Graph Generator.
+Here's a magnified image of the consoles output shown in the red box.
+
+!["Console Output"](../images/ExpectedOutput.png)
+
+If you've made it this far, then you're ready to move on to the Graph Generator. [Here's]() a zipped version of the entire Unity Project from this walkthrough.
