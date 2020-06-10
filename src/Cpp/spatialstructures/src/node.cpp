@@ -1,3 +1,10 @@
+///
+/// \file		node.cpp
+///	\brief		Source file for a node data structure, used in a graph ADT
+///
+/// \author		TBA
+/// \date		06 Jun 2020
+///
 #include <node.h>
 #include <Constants.h>
 #include <exception>
