@@ -6,8 +6,25 @@
 
 ### Prerequisites
 
-- An installation of [Unity](https://unity3d.com/get-unity/download) (Latest version preferred). This example will use the Unity hub, but stand alone versions of unity are also applicable.
-- A copy of the HumanFactors release built with support for C#.
+- An installation of [Unity](https://unity3d.com/get-unity/download). This project has been tested with Unity 2019.3f, but should work from 2018.3 on. 
+- A copy of the HumanFactors release built with support for C#. The `bin` folder should contain the following files:
+
+```
+1. embree3.dll
+2. HumanFactors.dll
+3. HumanFactorsCSharp.dll
+4. Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+5. msvcp140.dll
+6. System.Buffers.dll
+7. System.Memory.dll
+8. System.Runtime.CompilerServices.Unsafe.dll
+9. tbb.dll
+10. vcomp140.dll
+11. vcruntime140.dll
+12. vcruntime140_1.dll
+```
+
+- An installation of Visual Studio with Unity integration. Instructions for installing Visual Studio in Unity are available [here](https://docs.microsoft.com/en-us/visualstudio/cross-platform/getting-started-with-visual-studio-tools-for-unity?view=vs-2019).
   
 
 ## Creating a new project
@@ -24,6 +41,7 @@ Upon completion you should be greeted by an empty unity scene.
 ![Empty Unity Scene](../images/blank_unity_scene.PNG)
 
 ## Importing The Human Factors Library
+
 Now that the project is set up, we need to place the binaries for HumanFactors in the assets folder so Unity can see and interface with them. Unzip the HumanFactors release package(Don't try to drag from a zipped folder you will get an error), then drag the `bin` folder into the assets window. If you don't see the assets window, then you can click the assets folder on the left side directly under the project tab. 
 
 ![Moving the bin folder into the assets directory](../images/bin_to_assets.png)
@@ -32,7 +50,11 @@ To verify that the installation is working, we're going to create a small script
 
 !["Creating a new C# script"](../images/create_new_script.png)
 
-Double click on the newly created script and visual studio should open up (or mono-develop if you don't have visual studio installed). In Visual Studio, navigate to the *Solution Explorer*, and expand the drop downs for your solution, Assembly-C-Sharp, and References. If everything was done correctly, you should see HumanFactors C# under the references for your project.
+Double click on the newly created script to open visual studio. If Mono-Develop appears instead then you do not have visual studio support for unity, and can follow the instructions in prerequisites to install it.
+
+!["Double Click On Script"](../images/double_click_on_script.png)
+
+ In Visual Studio, navigate to the *Solution Explorer*, and expand the drop downs for your solution, Assembly-C-Sharp, and References. If everything was done correctly, you should see HumanFactors C# under the references for your project.
 
 !["HumanFactors referenced by your project"](../images/visual_studio_human_factors_reference.png)
 
