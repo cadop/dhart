@@ -48,7 +48,7 @@ Interface details should remain with headers
 
 Implementation
 
-To have a TODO automatically pull to documentation use: <code>///TODO:</code>
+To have a TODO automatically pull to documentation use: <code>/// TODO:</code>
 
 <h1>Snippets and code samples</h1>
 
@@ -102,28 +102,95 @@ start with the <code>\code{.cpp}</code> tag.
 <code>/// \code{.cpp}</code>
 
 <b>Step 1:</b><br>
-Create the comment block where the code example will appear.
-We will put the code block within this comment block.
+Create the section where the code sample will appear.
+We will be using the <code>///</code> comment style.
 
-<code>/*!
-std::cout << "Your sample code goes here." << std::endl;
-*/
-</code>
+<code>/// std::cout << "Your sample code goes here." << std::endl;
+/// std::cout << "Notice the whitespace after the '///'. << std::endl;
+/// // Use '//' for comments within the sample.</code><br>
+
+To be clear:
+- <b>All</b> lines in the sample must begin with <code>///</code>, followed by a whitespace
+- Any comments that occur within the sample must begin with <code>//</code>, followed by a whitespace.
+
+Our convention dictates that a single character of whitespace ('<code> </code>')
+<br> <b>must</b> follow a <code>///</code> or <code>//</code>, whenever:
+- a <code>\code</code> tag is initiated
+- a sample line of code begins
+- a comment begins within the sample code
+- a <code>\endcode</code> tag is used to end a sample 
+
+<br>This ensures ease of viewing<br>
+for anyone reading the source code -- <br>
+and also assists Doxygen with the<br>
+formatting process for the HTML export.<br>
+
+For more information, see<br> 
+'Why the use of <code>///</code> and <code>//</code>?'<br>
+at the bottom of this page.<br>
 
 <b>Step 2:</b><br>
 End your code sample with the tag <code>\endcode</code>
 
-<code>/// \endcode
-</code>
+<code>/// \endcode</code>
 
-In total, a code sample would look like this:
+A properly-formatted sample will look like this:
+
+<code>/// \code{.cpp}
+/// std::cout << "Your sample code goes here." << std::endl;
+/// std::cout << "Notice the whitespace after the '///'. << std::endl;
+/// // Use '//' for comments within the sample.
+/// \endcode</code><br>
+
+In the final HTML, your sample would look like this:
+
+<code>std::cout << "Your sample code goes here." << std::endl;
+std::cout << "Notice the whitespace after the '///'. << std::endl;
+// Use '//' for comments within the sample.</code>
+
+You may now use <b>'Run Doxygen'</b> to export your documentation.
+(There are no extra steps, unlike with the snippet section)
+
+<h2>Why the use of <code>///</code> and <code>//</code>?</h2>
+
+It may seem pedantic to insist on using <code>///</code> for the entire code sample,
+<br> and <code>//</code> for comments within the sample -- but there is a reason
+for this.<br>
+
+As you may know, there are many ways to invoke a comment in C++,<br>
+particularly for use with Doxygen -- such as:<br><br>
+<code>/* A C-style comment */</code><br>
+<code>/*! Qt variant of a C-style comment */</code><br>
+<code>// C++ style double-slash comment</code><br>
+<code>/// C++ style triple-slash comment</code><br>
+
+You can read more about the specifics of Doxygen-legal comment styling here:
+https://www.doxygen.nl/manual/docblocks.html
+
+<b>The use of <code>///</code> for the entirety of the code sample,<br>
+because it permits the use of <code>//</code> within the code sample whenever
+necessary.</b>This is important for including comments within your code sample.<b>
+
+If, for example, your code sample were to look like this:<br>
 
 <code>/// \code{.cpp}
 /*!
-std::cout << "Your sample code goes here." << std::endl;
-*/
-/// endcode
-</code>
+std::cout << "Here is my sample" << std::endl;
+// Here is a comment
+*/</code>
 
-You may now use 'Run Doxygen' to export your documentation.
-(There are no extra steps, unlike with the snippet section)
+...the final Doxygen HTML export would look like this:<br>
+
+<code>
+@verbatim 
+        std::cout << "Here is my sample" << std::endl;
+@endverbatim
+Here is a comment</code>
+
+It seems that Doxygen will have issues with differentiating comments<br>
+within the code sample, with a comment that would end the code sample.<br>
+
+It is unclear as to why the <code>@verbatim</code> and <code>@endverbatim</code>
+tags appear in place of <code>/*!</code> and <code>/*</code> respectively --<br>,
+but if the convention described above is used, particularly if comments are to<br>
+be included in the code sample, there will be no issues.<br>
