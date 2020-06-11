@@ -115,12 +115,69 @@ If the code has advanced past the null check, that means the GraphGenerator was 
 
 ### Save and Test
 
-This script is ready to go. Save your script, minimize Visual Studio, then switch back to the Unity Editor. The process for testing this script is identical to the previous tutorial. Attach the script to the main camera, then press the play button and inspect your output.
+Make sure your script matches this, then move on to verify it works.
+``` C#
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using HumanFactors;
+using HumanFactors.SpatialStructures;
+using HumanFactors.GraphGenerator;
+using HumanFactors.RayTracing;
+using HumanFactors.Geometry;
+
+public class NewBehaviourScript : MonoBehaviour
+{
+    // Start is called before the first frame update
+    void Start()
+    {
+        // Create an array of a plane's vertices and indices
+        float[] plane_vertices = {
+            -10f, 10f, 0f,
+            -10f, -10f, 0f,
+             10f, 10f, 0f,
+             10f, -10f, 0f
+        };
+        int[] plane_indices = { 3, 1, 0, 2, 3, 0 };
+
+        // Send them to HumanFactors
+        MeshInfo Plane = new MeshInfo(plane_indices, plane_vertices);
+
+        // Generate a BVH for the RayTracer
+        EmbreeBVH bvh = new EmbreeBVH(Plane);
+
+        // Set Options for the Graph Generator
+        Vector3D start_point = new Vector3D(0, 0, 1); // The point to start graph generation
+        Vector3D spacing = new Vector3D(1, 1, 1); // The spacing between each node
+
+        // Generate the Graph
+        Graph G = GraphGenerator.GenerateGraph(bvh, start_point, spacing);
+
+        // Check if the graph generator succeeded
+        if (G is null)
+        {
+            Debug.Log("The Graph failed to generate.");
+            return;
+        }
+
+        // Get a list of nodes from the graph and print them.
+        NodeList nodes = G.getNodes();
+        Debug.Log(nodes);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}
+```
+
+Save your script, minimize Visual Studio, then switch back to the Unity Editor. The process for testing this script is identical to the previous tutorial. Attach the script to the main camera, then press the play button and inspect your output.
 ![Attach script and test](../assets/walkthroughs/unity/2_raycast_at_plane/drag_into_camera.png)
 
 If you want a better view, you can click on the output to switch over to the console tab, then click on the message containing our output for a closer look. To switch back to the previous view, you can click on the "Project" tab just above the console window.
 
 ![View Console](../assets/walkthroughs/unity/3_graph_generator/output.png)
-
 
 Note that this is not the full list of nodes due to the size of the output. 
