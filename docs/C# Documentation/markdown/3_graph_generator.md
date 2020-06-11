@@ -173,11 +173,18 @@ public class NewBehaviourScript : MonoBehaviour
 }
 ```
 
-Save your script, minimize Visual Studio, then switch back to the Unity Editor. The process for testing this script is identical to the previous tutorial. Attach the script to the main camera, then press the play button and inspect your output.
+Save your script, minimize Visual Studio, then switch back to the Unity Editor. The process for testing this script is identical to the process in the previous tutorial. Attach the script to the main camera, then press the play button and inspect your output.
+
 ![Attach script and test](../assets/walkthroughs/unity/2_raycast_at_plane/drag_into_camera.png)
 
-If you want a better view, you can click on the output to switch over to the console tab, then click on the message containing our output for a closer look. To switch back to the previous view, you can click on the "Project" tab just above the console window.
+Like in the previous tutorial, the output is at the bottom of the screen but it's cut off. To get a better view, click on the output to switch over to the console tab, then click on the message containing our output highlighted in blue for a closer look.
 
-![View Console](../assets/walkthroughs/unity/3_graph_generator/output.png)
+![View Console](../assets/walkthroughs/unity/3_graph_generator/console_view.png)
 
-Note that this is not the full list of nodes due to the size of the output. 
+The highlighted text should read:
+
+``` [(0.000,0.000,0.000), (-1.000,-1.000,0.000), (-1.000,0.000,0.000), (-1.000,1.000,0.000), (0.000,-1.000,0.000), . . . (10.000,7.000,0.000), (10.000,8.000,0.000), (10.000,9.000,0.000), (10.000,10.000,0.000)]```
+
+Note that this is not the full list of nodes due to the size of the output. In order to view every node we'll have to print them in a loop. 
+
+Switch back to the previous view by clicking on the Project tab just above the blue highlighted message. In the above image this tab is circled in red. After this, exit playmode by clicking on the blue play button at the top of the screen.
