@@ -8,7 +8,7 @@ Next Tutorial: [Passing a Mesh From Unity to HumanFactors](4_reading_mesh_from_u
 - [Using the Graph Generator](#using-the-graph-generator)
   - [Intro](#intro)
     - [Conceptual Overview](#conceptual-overview)
-  - [First Graph Generation](#first-graph-generation)
+  - [Simple Graph Generation](#simple-graph-generation)
     - [Creating the Plane](#creating-the-plane)
     - [Generating the Graph](#generating-the-graph)
     - [Checking for success](#checking-for-success)
@@ -23,13 +23,13 @@ This tutorial picks up from where [Tutorial 1: Unity Project Setup](1_unity_proj
 
 To put it simply, the **Graph Generator** maps out "accessible" space on a model from a given starting point. As the name implies, this map of the space is stored as a series of nodes and edges in a **Graph**. Each node represents a point in space that a human can occupy, and each edge between nodes indicates that a human can traverse from one node to another node. The Graph Generator is a powerful tool for analyzing space, since the graph or nodes it outputs can be used as input to all of the analysis methods offered by HumanFactors. This allows the user to go straight from modifying a model or scene, to analyzing it with minimal effort.
 
-## First Graph Generation
+## Simple Graph Generation
 
-For now, we will begin with minimum required settings, then work our way up to examples that make use of the GraphGenerators optional settings. To generate a graph at minimum, the following arguments are requried:
+For now, we will begin with the minimum required settings to run the Graph Generator then work our way up to examples that make use of the optional settings. To generate a graph at minimum, the following arguments are requried:
 
 1) A BVH containing the mesh you want to use for graph generation.
-2) A starting point.
-3) The spacing nodes.
+2) A point to start graph generation at.
+3) The spacing between nodes.
 
 To get started, we will once again set up our using declarations to import the functionality we need.
 
@@ -45,7 +45,7 @@ using HumanFactors.RayTracing;
 
 ### Creating the Plane
 
-Internally, the graph uses the *EmbreeRayTracer* which requires a BVH, so we can follow the process as the [previous tutorial](2_raycast_at_plane.md) to create a BVH for it. For the purposes of this tutorial we will use a plane that is 10mx10m instead of 20mx20m, and oriented on the xy plane instead of the yz plane.
+Internally, the graph uses the *EmbreeRayTracer* which requires a BVH, so we can follow the process as the [previous tutorial](2_raycast_at_plane.md) to create a plane, then generate a BVH from it. For the purposes of this tutorial we will use a plane that is 10mx10m instead of 20mx20m, and oriented on the xy plane instead of the yz plane.
 
 In the start function add the following code:
 ``` C#
@@ -64,16 +64,17 @@ In the start function add the following code:
         // Generate a BVH for the RayTracer
         EmbreeBVH bvh = new EmbreeBVH(Plane);
 ```
-
-Our Start() function should look like this at the end of this section.
 ![Creating The Plane](../assets/walkthroughs/unity/3_graph_generator/creating_the_plane.PNG)
 
 ### Generating the Graph
 
-Now that we have the geometry we are going to traverse, let's generate a graph on it. In the code below, we define a starting point for the graph, then we define the spacing between each node. Lower spacing results in a larger, more detailed graph, while higher spacing creates smaller less detailed graphs. For now, we will keep the spacing at 1m in all directions.
+Now that we have a BVH, let's generate a graph on it. In the code below, we define a starting point for the graph, then we define the spacing between each node.
 
-Enter this code below the BVH code from the previous section.
+We'll place our start point 1 meter above the origin of the scene (0,0,1). Starting directly at the origin, (0,0,0), would put the start point inside of the plane we're using for the ground, causing the initial ground check to fail. 
 
+For this demonstration, we'll use a spacing of one meter in each direction, so each node in our graph will be at maximum one meter apart. Generally, lower spacing results in a more dense, detailed graph, while higher spacing creates less dense, less detailed graphs.
+
+To accomplish the above, enter this code below the BVH code from the previous section.
 ```C#
         // Set Options for the Graph Generator
         Vector3D start_point = new Vector3D(0, 0, 1); // The point to start thegraph generation
@@ -87,7 +88,7 @@ Enter this code below the BVH code from the previous section.
 
 ### Checking for success
 
-Before moving any further, we need to check if the graph generator was able to generate a graph from our input. If the GraphGenerator could not generate any connections from the start point, or the start point was not over any solid ground, the graph will fail to generate and the Graph Generator will return a null value. Let's add a null check before interacting with the graph any further.
+Before interacting with the returned value, we need to check if the Graph Generator was able to generate a graph from our input. If the Graph Generator could not generate any connections from the start point, or the start point was not over any solid ground, the graph will fail to generate and the Graph Generator will return a null value. Let's add a null check just after the graph is generated.
 
 ``` C#
         // Check if the graph generator succeeded
@@ -99,11 +100,11 @@ Before moving any further, we need to check if the graph generator was able to g
 
 ![Checking For Success](../assets/walkthroughs/unity/3_graph_generator/checking_for_success.PNG)
 
-Now, if the graph fails to generate we will get a nice error message instead of later getting a null reference exception when we try to interact with it.
+Now, if the graph fails to generate, Unity will print our nice error message and stop executing the script instead of later throwing a null reference exception when we try to interact with it.
 
 ### Retrieving A list of nodes
 
-If the code has advanced past the null check, that means the GraphGenerator was successful and G now contains a graph of the accessible space on Plane. For this demo we will get a list of all nodes within the graph, and print them to get an idea of where this graph traversed.
+If the code has advanced past the null check, that means the GraphGenerator was successful and G now contains a graph of the accessible space on Plane using our settings. For this tutorial we will get a list of all nodes within the graph, and print them to get an idea of where this graph traversed.
 
 ``` C#
         // Get a list of nodes from the graph and print them.
@@ -115,7 +116,8 @@ If the code has advanced past the null check, that means the GraphGenerator was 
 
 ### Save and Test
 
-Make sure your script matches this, then move on to verify it works.
+Here is the full script we've created from this demo. Make sure yours matches it before moving on to testing.
+
 ``` C#
 using System.Collections;
 using System.Collections.Generic;
