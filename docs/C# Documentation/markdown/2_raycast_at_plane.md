@@ -5,6 +5,14 @@ Previous Tutorial: [Project Setup](1_unity_project_setup.md)
 |
 Next Tutorial: [Graph Generator](3_graph_generator.md)
 
+## Table of Contents
+
+- [Using the RayTracer](#using-the-raytracer)
+  - [Table of Contents](#table-of-contents)
+  - [Intro](#intro)
+  - [Writing the Script](#writing-the-script)
+  - [Testing](#testing)
+  - [Conclusion](#conclusion)
 
 ## Intro
 
@@ -14,14 +22,11 @@ Now that we know the HumanFactors library can be referenced by our New Unity Pro
 2) Fire a ray at the plane.
 3) Print the point where the ray intersected the plane.
 
+## Writing the Script
 
-
-## Walkthrough
 In the Visual Studio window you've just opened, Look at the contents of NewBehavior Script.cs It should match this image:
 
 !["NewBehaviourScriptBlank](../assets/walkthroughs/unity/2_raycast_at_plane/blank_new_behaviour_script.png)
-
-### Writing the Script
 
 To reduce the length of calls into HumanFactors, we're going to declare which namespaces will be used in this script. Add the following lines to the top of the script
 
@@ -64,7 +69,7 @@ After finished your entire code should look like this. Once you've verified this
 
 ![Add Using HumanFactors](../assets/walkthroughs/unity/2_raycast_at_plane/create_plane.png)
 
-### Testing the Script
+## Testing
 
 Now that we have a usable script, we need to attach it to some game object in order to run it. In the Unity Window drag *NewBehaviorScript.cs* to *Main Camera* in the scene hierarchy. Since *NewBehaviorScript* is a component of the *Main Camera*, its `Start()` function containing our sample code will be run when the editor enters play mode.
 
@@ -81,6 +86,7 @@ Here's a magnified image of the console's output shown in the red box.
 If your console's output matches this, then you're successfully completed this tutorial.
 
 ## Conclusion
+
 Full project Link: [Tutorial 2: Casting a Ray at A Plane](../assets/walkthroughs/unity/2_raycast_at_plane/Tutorial%202%20-%20Unity%20Project.zip)
 
 

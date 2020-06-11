@@ -34,7 +34,6 @@ Next Tutorial: [Project Setup](1_unity_project_setup.md)
   10. vcruntime140.dll
   11. vcruntime140_1.dll
 
-  
 ## Creating a new project
 
 Open up the Unity Hub then click the *NEW* button.
@@ -74,7 +73,6 @@ If you see HumanFactors in your project's references, then you've reached the en
 ## Conclusion
 
 Below is a link to the unity project created in this tutorial.
-
 
 [Tutorial 1: Unity Project Setup](../assets/walkthroughs/unity/1_project_setup/Tutorial%201-%20Unity%20Project.zip)
 
