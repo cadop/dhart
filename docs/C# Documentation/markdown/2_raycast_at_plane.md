@@ -11,6 +11,9 @@ Next Tutorial: [Graph Generator](3_graph_generator.md)
   - [Table of Contents](#table-of-contents)
   - [Intro](#intro)
   - [Writing the Script](#writing-the-script)
+    - [Using Declarations](#using-declarations)
+    - [Creating a Plane](#creating-a-plane)
+    - [Casting a Ray](#casting-a-ray)
   - [Testing](#testing)
     - [Adding the script to the camera](#adding-the-script-to-the-camera)
     - [Executing the Script](#executing-the-script)
@@ -30,6 +33,10 @@ In the Visual Studio window you've just opened, Look at the contents of NewBehav
 
 !["NewBehaviourScriptBlank](../assets/walkthroughs/unity/2_raycast_at_plane/blank_new_behaviour_script.png)
 
+*Figure* **2.1**
+
+### Using Declarations
+
 To reduce the length of calls into HumanFactors, we're going to declare which namespaces will be used in this script. Add the following lines to the top of the script:
 
 ``` C#
@@ -41,31 +48,65 @@ using HumanFactors;
 The top block of your script should look like this.
 
 !["NewBehaviourScript Usings"](../assets/walkthroughs/unity/2_raycast_at_plane/add_using_delcarations.png)
->**Note:** While editing your code, you may notice this colored bar to the left of the code between the line numbers and the code itself. This bar displays the changes you've made to the current document. When you make unsaved changes it turns yellow, then once you save it will turn green.
 
-Now that we've declared what we're using HumanFactors, lets actually use it in our code. In the `Start()` function of new behaviour script, add the following code to create a new plane from a list of vertices/indices.
+*Figure* **2.2**
+
+>**Note:** While editing your code, you may notice this colored bar to the left between the line numbers and the code itself. This bar displays the changes you've made to the current document. When you make unsaved changes it turns yellow, then once you save it will turn green.
+
+### Creating a Plane
+
+Using HumanFactors, we will create a plane through code for our ray to intersect with. To create a mesh we require two things:
+
+1) The (x,y,z) location of every vertex that comprises the mesh as an array of floats.
+2) The Indexes for each triangle or "Face" of the mesh as an array of integers.
+
+Here are the vertex and index arrays for a 10x10 plane on the xy plane. 
+``` C#
+        // Create an array of a plane's vertices and indices
+        float[] plane_vertices = {
+            -10f, 10f, 0f,
+            -10f, -10f, 0f,
+             10f, 10f, 0f,
+             10f, -10f, 0f
+        };
+        int[] plane_indices = {
+          3, 1, 0,
+          2, 3, 0
+        };
+```
+**TODO**: Replace these links with links to our documentation.
+
+For more information on what both of these arrays mean, see out the [MeshInfo Documentation]()
+We will use these arrays to construct a new **MeshInfo** object in HumanFactors.
 
 ``` C#
-        /// Create an array of a plane's vertices and indices
-        float[] plane_vertices = {
-            -20f, 0.0f, 20f,
-            -20f, 0.0f, -20f,
-             20f, 0.0f, 20f,
-             20f, 0.0f, -20f
-        };
-        int[] plane_indices = { 3, 1, 0, 2, 3, 0 };
-
-        /// Send them to HumanFactors
         MeshInfo Plane = new MeshInfo(plane_indices, plane_vertices);
+```
 
-        /// Generate a BVH for the RayTracer
+Now that we have a plane mesh in HumanFactors, we must generate a Bounding Volume Hierarchy, or BVH, from it to use as input for the Raytracer. The BVH is an accelerated data structure that drastically reduces the time required to perform ray intersections. You can read more about the BVH in its dedicated article [Bounding Volume Hierarchy](). To generate a BVH from an instance of mesh info, just call the BVH constructor with the MeshInfo as an argument.
+
+``` C#
         EmbreeBVH bvh = new EmbreeBVH(Plane);
+```
 
+With the BVH created, we're now ready to call the raytracer and cast a ray.
+
+### Casting a Ray
+
+Depending on which function you call, the EmbreeRaytracer can return 3 different types of information: the coordinates where a ray intersected the bvh, the distance from the ray's origin to the point where it intersected the BVH, or a simple true/false value for whether or not the ray intersects the mesh. For this demo we'll be using the function [IntersectForPoint]() to get the point where the ray intersects the BVH. 
+
+We'll cast the ray from the point(1,0,1) and cast it in the direction (0,0,-1). Below is the code to do that.
+
+``` C#
         /// Fire a ray straight down at the plane, then store the result
         Vector3D origin = new Vector3D(1, 1, 0);
         Vector3D direction = new Vector3D(0, -1, 0);
         var hitpoint = EmbreeRaytracer.IntersectForPoint(bvh, origin, direction);
+```
 
+Once hitpoint is obtained, we will print it using Debug.Log(). This will make it appear in the Unity console.
+
+``` C#
         /// Print the x, y, and z components of the hitpoint
         Debug.Log("(" + hitpoint.x + "," + hitpoint.y + "," + hitpoint.z + ")");
 ```
