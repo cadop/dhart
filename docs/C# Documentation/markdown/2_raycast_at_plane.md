@@ -33,6 +33,7 @@ To reduce the length of calls into HumanFactors, we're going to declare which na
 ``` C#
 using HumanFactors.Geometry;
 using HumanFactors.RayTracing;
+using HumanFactors;
 ```
 
 The top block of your script should look like this.
@@ -69,7 +70,54 @@ After finished your entire code should look like this. Once you've verified this
 
 ![Add Using HumanFactors](../assets/walkthroughs/unity/2_raycast_at_plane/create_plane.png)
 
+``` C#
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using HumanFactors.Geometry;
+using HumanFactors.RayTracing;
+using HumanFactors;
+
+public class NewBehaviourScript : MonoBehaviour
+{
+    // Start is called before the first frame update
+    void Start()
+    {
+        /// Create an array of a plane's vertices and indices
+        float[] plane_vertices = {
+            -20f, 0.0f, 20f,
+            -20f, 0.0f, -20f,
+             20f, 0.0f, 20f,
+             20f, 0.0f, -20f
+        };
+        int[] plane_indices = { 3, 1, 0, 2, 3, 0 };
+
+        /// Send them to HumanFactors
+        MeshInfo Plane = new MeshInfo(plane_indices, plane_vertices);
+
+        /// Generate a BVH for the RayTracer
+        EmbreeBVH bvh = new EmbreeBVH(Plane);
+
+        /// Fire a ray straight down at the plane, then store the result
+        Vector3D origin = new Vector3D(1, 1, 0);
+        Vector3D direction = new Vector3D(0, -1, 0);
+        var hitpoint = EmbreeRaytracer.IntersectForPoint(bvh, origin, direction);
+
+        /// Print the contents of point
+        Debug.Log("(" + hitpoint.x + "," + hitpoint.y + "," + hitpoint.z + ")");
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+}
+```
+
+
 ## Testing
+
 
 Now that we have a usable script, we need to attach it to some game object in order to run it. In the Unity Window drag *NewBehaviorScript.cs* to *Main Camera* in the scene hierarchy. Since *NewBehaviorScript* is a component of the *Main Camera*, its `Start()` function containing our sample code will be run when the editor enters play mode.
 
