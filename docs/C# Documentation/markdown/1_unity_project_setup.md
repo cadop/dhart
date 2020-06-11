@@ -15,6 +15,7 @@ Next Tutorial: [Project Setup](1_unity_project_setup.md)
 ### Prerequisites
 
 - An installation of [Unity](https://unity3d.com/get-unity/download). This project has been tested with Unity 2019.3f, but should work from 2018.3 on. 
+- An installation of Visual Studio with Unity integration. Instructions for installing Visual Studio in Unity are available [here](https://docs.microsoft.com/en-us/visualstudio/cross-platform/getting-started-with-visual-studio-tools-for-unity?view=vs-2019).
 - A copy of the HumanFactors release built with support for C#. The `bin` folder should contain the following files:
   1. embree3.dll
   2. HumanFactors.dll
@@ -27,7 +28,7 @@ Next Tutorial: [Project Setup](1_unity_project_setup.md)
   9. vcomp140.dll
   10. vcruntime140.dll
   11. vcruntime140_1.dll
-- An installation of Visual Studio with Unity integration. Instructions for installing Visual Studio in Unity are available [here](https://docs.microsoft.com/en-us/visualstudio/cross-platform/getting-started-with-visual-studio-tools-for-unity?view=vs-2019).
+
   
 ## Creating a new project
 
@@ -60,4 +61,13 @@ Double click on the newly created script to open visual studio. If Mono-Develop 
 
 !["HumanFactors referenced by your project"](../assets/walkthroughs/unity/1_project_setup/visual_studio_human_factors_reference.png)
 
-To verify that HumanFactors is properly functioning move on to the next tutorial: [Using the Raytracer](2_raycast_at_plane.md)
+If you see HumanFactors in your project's references, then you've reached the end of this tutorial. and are ready to start using the HumanFactors library.
+
+## Conclusion
+
+Below is a link to the unity project created in this tutorial.
+
+
+[Tutorial 1: Unity Project Setup](../assets/walkthroughs/unity/1_project_setup/Tutorial%201-%20Unity%20Project.zip)
+
+In the next turorial: [Using the Raytracer](2_raycast_at_plane.md) we will use HumanFactors to create a plane, cast a ray at it, then get the point where the ray intersected the plane. 
