@@ -1,5 +1,6 @@
 
 # Setting Up a Unity Project for Human Factors
+
 Next Tutorial: [Project Setup](1_unity_project_setup.md)
 
 ## Table of Contents
@@ -7,6 +8,7 @@ Next Tutorial: [Project Setup](1_unity_project_setup.md)
 - [Setting Up a Unity Project for Human Factors](#setting-up-a-unity-project-for-human-factors)
   - [Table of Contents](#table-of-contents)
   - [Before we begin](#before-we-begin)
+    - [What will be accomplished in this guide](#what-will-be-accomplished-in-this-guide)
     - [Prerequisites](#prerequisites)
   - [Creating a new project](#creating-a-new-project)
   - [Importing The Human Factors Library](#importing-the-human-factors-library)
@@ -17,9 +19,14 @@ Next Tutorial: [Project Setup](1_unity_project_setup.md)
 
  This guide will demonstrate setting up a new unity project from scratch, then importing the HumanFactors API and verifying that it can be referenced by the Unity Project.
 
+### What will be accomplished in this guide
+
+- Creating a New Unity Project
+- Importing HumanFactors
+  
 ### Prerequisites
 
-- An installation of [Unity](https://unity3d.com/get-unity/download). This project has been tested with Unity 2019.3f, but should work from 2018.3 on. 
+- An installation of [Unity](https://unity3d.com/get-unity/download). This project has been tested with Unity 2019.3f, but should work from 2018.3 on.
 - An installation of Visual Studio with Unity integration. Instructions for installing Visual Studio in Unity are available [here](https://docs.microsoft.com/en-us/visualstudio/cross-platform/getting-started-with-visual-studio-tools-for-unity?view=vs-2019).
 - A copy of the HumanFactors release built with support for C#. The `bin` folder should contain the following files:
   1. embree3.dll
@@ -33,6 +40,7 @@ Next Tutorial: [Project Setup](1_unity_project_setup.md)
   9. vcomp140.dll
   10. vcruntime140.dll
   11. vcruntime140_1.dll
+
 
 ## Creating a new project
 
@@ -53,20 +61,23 @@ Now that the project is set up, we need to place the binaries for HumanFactors i
 
 ![Moving the bin folder into the assets directory](../assets/walkthroughs/unity/1_project_setup/bin_to_assets.png)
 
-
 ## Verifying Unity can Reference HumanFactors
 
-To verify that the installation is working, we're going to create a small script that constructs a sample plane. Right click on a blank space in the assets window, mouse over *Create*, then select  then select *C# Script*.
+To verify that the library was loaded correctly by our unity project, we're going to create a new script, and look to see if Unity added HumanFactors as a reference to it. Right click on a blank space in the assets window, mouse over *Create*, then select *C# Script*.
 
 !["Creating a new C# script"](../assets/walkthroughs/unity/1_project_setup/create_new_script.png)
 
-Double click on the newly created script to open visual studio. If Mono-Develop appears instead then you do not have visual studio support for unity, and can follow the instructions in prerequisites to install it.
+Looking in the assets window, you should notice a new script there titled NewBehaviourScript.cs by default. We will leave this as it's name, and refer to it as NewBehaviorScript from now on. Double click on NewBehaviourScript to open Visual Studio. If Mono-Develop appears instead then you do not have Visual Studio support for unity, and can follow the instructions in prerequisites to install it.
 
 !["Double Click On Script"](../assets/walkthroughs/unity/1_project_setup/double_click_on_script.png)
 
- In Visual Studio, navigate to the *Solution Explorer*, and expand the drop downs for your solution, Assembly-C-Sharp, and References. If everything was done correctly, you should see HumanFactors C# under the references for your project.
+In Visual Studio, navigate to the *Solution Explorer*, and expand the drop downs for your solution, Assembly-C-Sharp, and References. If everything was done correctly, you should see HumanFactors C# under the references for your project.
 
 !["HumanFactors referenced by your project"](../assets/walkthroughs/unity/1_project_setup/visual_studio_human_factors_reference.png)
+
+>**Note:** Your version of Visual Studio may use the light theme by default like pictured below. This is purely visual and will not have any impact on this tutorial.
+
+!["Light Theme"](../assets/walkthroughs/unity/1_project_setup/light_visual_studio.png)
 
 If you see HumanFactors in your project's references, then you've reached the end of this tutorial. and are ready to start using the HumanFactors library.
 
@@ -75,5 +86,7 @@ If you see HumanFactors in your project's references, then you've reached the en
 Below is a link to the unity project created in this tutorial.
 
 [Tutorial 1: Unity Project Setup](../assets/walkthroughs/unity/1_project_setup/Tutorial%201-%20Unity%20Project.zip)
+
+In this tutorial, we went through the process of creating unity project and adding the Analysis toolkit to the project. In the following tutorials, we will use this basis for using the modules that come with the Analysis toolkit.
 
 In the next turorial: [Using the Raytracer](2_raycast_at_plane.md) we will use HumanFactors to create a plane, cast a ray at it, then get the point where the ray intersected the plane.
