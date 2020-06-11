@@ -174,6 +174,10 @@ The codebase is comprised of sources from:
 The C++ portion of the codebase uses a subset of the <b>Boost</b> libraries,<br>
 and the sources are included with this repository.
 
+Because the Boost sources are included with Analysis,<br>
+(in <code>Analysis\src\external\boost</code>),<br>
+you do <b>not</b> need to download or install Boost to build the repository.
+
 You may read more about Boost at their website: https://www.boost.org/
 
 TBA: C# details<br>
