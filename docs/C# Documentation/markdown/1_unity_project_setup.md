@@ -3,10 +3,15 @@
 Next Tutorial: [Project Setup](1_unity_project_setup.md)
 
 ## Table of Contents
+
+- [Setting Up a Unity Project for Human Factors](#setting-up-a-unity-project-for-human-factors)
+  - [Table of Contents](#table-of-contents)
   - [Before we begin](#before-we-begin)
     - [Prerequisites](#prerequisites)
   - [Creating a new project](#creating-a-new-project)
   - [Importing The Human Factors Library](#importing-the-human-factors-library)
+  - [Verifying Unity can Reference HumanFactors](#verifying-unity-can-reference-humanfactors)
+  - [Conclusion](#conclusion)
 
 ## Before we begin
 
@@ -49,6 +54,9 @@ Now that the project is set up, we need to place the binaries for HumanFactors i
 
 ![Moving the bin folder into the assets directory](../assets/walkthroughs/unity/1_project_setup/bin_to_assets.png)
 
+
+## Verifying Unity can Reference HumanFactors
+
 To verify that the installation is working, we're going to create a small script that constructs a sample plane. Right click on a blank space in the assets window, mouse over *Create*, then select  then select *C# Script*.
 
 !["Creating a new C# script"](../assets/walkthroughs/unity/1_project_setup/create_new_script.png)
@@ -70,4 +78,4 @@ Below is a link to the unity project created in this tutorial.
 
 [Tutorial 1: Unity Project Setup](../assets/walkthroughs/unity/1_project_setup/Tutorial%201-%20Unity%20Project.zip)
 
-In the next turorial: [Using the Raytracer](2_raycast_at_plane.md) we will use HumanFactors to create a plane, cast a ray at it, then get the point where the ray intersected the plane. 
+In the next turorial: [Using the Raytracer](2_raycast_at_plane.md) we will use HumanFactors to create a plane, cast a ray at it, then get the point where the ray intersected the plane.
