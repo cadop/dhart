@@ -67,6 +67,10 @@ Now that we have created a blank project, we need to import the HumanFactors' bi
 
 Unzip the HumanFactors release package to another location (Don't try to drag and drop assets from a zipped folder, you will get an error), then, as shown in Figure 1.4, drag the `bin` folder from the location you extracted the release to into the Unity Editor's assets window. Once you've done this, Unity should display the *bin* folder alongside the existing *Scenes* folder.
 
+>**NOTE**: If you accidentally drag the bin folder into the *Scenes* or anywhere else that would cause two copies of the same dll to exist at the same time, delete them before proceding. Multiple copies of the same DLL will cause conflicts and may result in Unity being unable to load it in the future steps. You'll know this has happened if you see the following error `Multiple plugins with the same name 'humanfactors' (found at 'Assets/Scenes/bin/HumanFactors.dll' and 'Assets/bin/HumanFactors.dll')...` at the bottom of the screen.
+>![Duplicate DLL Error](../assets/walkthroughs/unity/1_project_setup/duplicate_dll_error.png)
+>![Delete Image](../assets/walkthroughs/unity/1_project_setup/delete.png)
+
 ## Verifying Unity can reference HumanFactors
 
 The binaries have been added to our project as assets, but let's make sure Unity is able to reference them in code. To verify that Unity can reference the HumanFactors binaries, we're going to create a new script and look at its references. If we did everything correctly, Unity should automatically have added HumanFactorsCSharp as a reference.
