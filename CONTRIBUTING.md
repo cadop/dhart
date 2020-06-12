@@ -15,10 +15,7 @@ Documentation is vital and must be done throughout the project, not the end. Thi
 * links to C# and Python interfaces for each function, module
 
 <h1>Unity users</h1>
-* Natural Docs by Greg Valure
-* Installing Natural Docs on Windows
-* Download the Windows version of Natural Docs from it’s website
-* Natural Docs for Unity plugin (https://unitysquid.com/create-c-documentation-for-unity-like-a-pro/)
+* Doxygen
 
 There are three users of the codebase.
 - People that will develop the foundation of the code (includes people like you).
@@ -40,7 +37,7 @@ It should also be in the documentation.
 * Naming Conventions and Coding Standards have to be well followed (https://sites.google.com/site/wcfpandu/student-of-the-month/c-coding-standards-and-naming-conventions)
 * Code general architecture should be discussed and well maintained.
 
-<h1>C++ Doxygen Guidelines</h1>
+<h1>Doxygen Guidelines</h1>
 <b>Overview</b><br>
 * Methods and xml format to use in methods
 * Algorithms should be documented inline with source rather than headers
@@ -51,7 +48,7 @@ It should also be in the documentation.
 - Documenting the heads of each file
 - Documenting member fields
 - Snippets and Code Samples
-- Adding images
+- Adding images for headers/sources, and markdown files (<code>.md</code>)
 - Why the use of <code>///</code> and <code>//</code>?
 
 <h2>Using <code>TODO</code></h2>
@@ -99,6 +96,20 @@ An example of a file head would look like this:
 Other notes:<b>
 - Follow each <code>///</code> with a <b>single</b> space, before using a tag.
 - Follow each tag with <b>two</b> tabs, then provide the description.
+
+<h2>Documenting member fields</h2>
+
+Here is a simple example:<br>
+<code>struct position {
+    float x, y, z;  ///< Cartesian coordinates x, y, and z
+    int id;         ///< Unique identifier
+};</code>
+
+The general format is <code>///< Description goes here</code>,<br>
+notice that a <b>single whitespace character</b> follows <code>///<</code><br>
+and the field descriptions are in alignment with each other, using tabs.<br>
+Sometimes, this is not always possible,<br>
+but do your best to keep the formatting <b>neat</b> and <b>consistent</b>.
 
 <h2>Snippets and code samples</h2>
 
@@ -203,36 +214,70 @@ std::cout << "Notice the whitespace after the '///'. << std::endl;
 You may now use <b>'Run Doxygen'</b> to export your documentation.
 (There are no extra steps, unlike with the snippet section)
 
-<h2>Adding images</h2>
+<h2>Adding images for headers/sources, and markdown files (<code>.md</code>)</h2>
 
-We will be using the <code>\image</code> tag to add images.<br>
+For <b>headers/sources</b>,<br>
+we will be using the <code>\image</code> tag to add images.<br>
 https://www.doxygen.nl/manual/commands.html#cmdimage
 
+For <b>markdown files (<code>.md</code>)</b>,<br>
+we will be using the markdown syntax for images.<br>
+https://guides.github.com/features/mastering-markdown/
+
 <b>Step 0:</b><br>
-Save a copy of [image_file],<br>
+Begin by saving copy of <b>image_file</b>,<br>
 which is the filename of the desired image,<br>
 into the following directory:<br>
-<b>Analysis\docs\C++\img\[enclosing_folder]\[module_name]</b>
 
-For example, the full filepath of <code>node.h</code> is<br>
-<b>Analysis\src\Cpp\spatialstructures\src\node.h</b>
+```
+Analysis\docs\language\img\enclosing_folder\module_name
+```
+<code><b>language</b></code>,<br>
+<code><b>enclosing_folder</b></code>,<br>
+and <code><b>module_name</b></code> are placeholders.<br>
 
-[enclosing_folder] is <b>spatialstructures</b><br>
-[module_name] is <b>node</b>
+<code>img</code> will be a subdirectory within <code><b>language</b></code>.
+
+<b>Note:</b><br>
+In the <b>Analysis\docs</b> directory,<br>
+there are <b>three</b> subdirectories:<br>
+for which the <code><b>language</b></code> placeholder applies:
+- C# Documentation
+- C++
+- Python Docs
+
+For <code><b>language</b></code>,<br>
+<b>be sure to choose the appropriate subdirectory</b><br>
+when saving your file.
+
+Although this particular example deals with inserting an image<br>
+into a C++ header file, the same steps will apply for C# or Python sources.<br>
+
+For instance, the full filepath of <code>node.h</code> is<br>
+<code><b>Analysis\src\Cpp\spatialstructures\src\node.h</b></code>
+
+<code><b>language</b></code> is <b>C++</b><br>
+<code><b>enclosing_folder</b></code> is <b>spatialstructures</b><br>
+<code><b>module_name</b></code> is <b>node</b><br>
 
 So, if we wanted to insert an image for any documentation<br>
 for <code>node.h</code> or <code>node.cpp</code>,<br>
 the image would be saved into the following directory:<br>
 
-<b>Analysis\docs\C++\img\spatialstructures\node</b>
+<code><b>Analysis\docs\C++\img\spatialstructures\node</b></code>
 
-If directories [enclosing_folder] and [module_name]<br>
+If directories <code><b>img</b></code>, <code><b>enclosing_folder</b></code>, or <code><b>module_name</b></code><br>
 do not already exist, you may create them.<br>
 
-We can now proceed to editing the file where we want to insert the desired image.
+We can now proceed to editing the file where we want to insert the desired image.<br>
+This could be a header/source file (step 1a), or a markdown file (step 1b).<br>
 
-<b>Step 1:</b><br>
-In the file where you want the image to appear,<br>
+Scroll down to the instructions that apply to your use case.<br>
+
+<h3>Adding an image to a header/source file</h3>
+
+<b>Step 1a:</b><br>
+In the header/source file where you want the image to appear,<br>
 navigate to the line of code where you want the image to appear.<br>
 
 We will now utilize the <code>\image</code> tag.
@@ -240,16 +285,55 @@ We will now utilize the <code>\image</code> tag.
 At the line where you want the image to appear,<br>
 enter the following:
 
-<code>/// \image html [enclosing_folder]\[module_name]\[image_file]</code>
+```
+/// \image html language\img\enclosing_folder\module_name\image_file
+```
+
+Remember this example is using placeholders;<br>
+be sure that <b>language</b>, <b>enclosing_folder</b>, <b>module_name</b>,<br>
+and <b>image_file</b> correspond to where your image is saved.<br>
+
+Also note that <b>img</b> is a subdirectory within your chosen <b>language</b> directory.<br>
 
 An example use of the <code>\image</code> tag would be:<br>
 
-<code>/// \image html spatialstructures\node\test.png</code>
+<code>/// \image html C++\img\spatialstructures\node\test.png</code>
 
 We will now move on to the <b>Doxygen GUI frontend</b> application.
 
+<h3>Adding an image to a markdown file (<code>.md</code>)</h3>
+
+<b>Step 1b:</b><br>
+In the markdown file where you want the image to appear,<br>
+navigate to the line at which the image should be inserted.<br>
+
+We will now utilize the markdown syntax for images.<br>
+
+At the line where you want the image to appear,<br>
+enter the following:
+
+```
+![image_name](language\img\enclosing_folder\module_name\image_file)
+```
+Remember this example is using placeholders;<br>
+be sure that <b>language</b>, <b>enclosing_folder</b>, <b>module_name</b>,<br>
+and <b>image_file</b> correspond to where your image is saved.<br>
+
+An example use of the syntax would be:<br>
+
+```
+![TestImage](C++\img\spatialstructures\node\test.png)
+```
+
+<code><b>language</b></code> is <b>C++</b><br>
+<code><b>enclosing_folder</b></code> is <b>spatialstructures</b><br>
+<code><b>module_name</b></code> is <b>node</b><br>
+<code><b>image_file</b></code> is <b>test.png</b>
+
+We will now move on to the <b>Doxygen GUI frontend (Doxywizard)</b> application.
+
 <b>Step 2:</b><br>
-In <b>Doxygen GUI frontend</b> -- load the repository's Doxyfile.<br>
+In <b>Doxygen GUI frontend (Doxywizard)</b> -- load the repository's Doxyfile.<br>
 
 Click <b>File > Open...</b><br>
 
@@ -272,15 +356,22 @@ click the <b>Select...</b> button.<br>
 
 Verify that you are already in the <b>Analysis\src</b> directory.<br>
 If not, navigate to that directory.<br>
-Then, click the <b>Cpp</b> folder.<b>
-Click <b>Select folder</b>.<br>
+Then, click the appropriate subdirectory within <b>src</b>.<br>
+(Choose the directory of the <b>language</b> you wish to export documentation for)<br>
+
+- Cinterface
+- Csharp
+- Python
+- Cpp
+
+Click one of the subdirectories above, then click <b>Select folder</b>.<br>
 
 Finally,<br>
 underneath 'Specify the directory where doxygen should put the generated documentation',<br>
 click the <b>Select...</b> button.<br>
 
-For any documentation that has been verified and destined for the repository,
-navigate to <b>Analysis\docs\C++</b>, then click <b>Select Folder</b>.<br>
+For any documentation that has been verified and destined for the repository,<br>
+navigate to <b>Analysis\docs</b>, then click <b>Select Folder</b>.<br>
 
 For test runs (always do test runs first before pushing anything to the repository),<br>
 navigate to a directory of your choice (outside of your local copy of <b>Analysis</b>),<br>
@@ -297,7 +388,7 @@ scroll down until you see the text field for <b>IMAGE_PATH</b>.<br>
 Click the folder icon for <b>IMAGE_PATH</b>.<br>
 
 In the file explorer window that appears,<br>
-navigate to <b>Analysis\docs\C++\img</b>.<br>
+navigate to <b>Analysis\docs</b>.<br>
 Then, click <b>Select Folder</b>.<br>
 
 We have now configured our image path for Doxygen.<br>
