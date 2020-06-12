@@ -40,9 +40,9 @@ Your script should match Figure 2.1.
 To reduce the length of calls into HumanFactors, we're going to declare which namespaces will be used in this script. Add the following lines to the top of the script:
 
 ``` C#
-using HumanFactors.Geometry;
-using HumanFactors.RayTracing;
 using HumanFactors;
+using HumanFactors.RayTracing;
+using HumanFactors.Geometry;
 ```
 
 lines, 1-5 of your code should match Figure 2.2.
@@ -104,7 +104,7 @@ Now that we have a plane mesh in HumanFactors, we must generate a *Bounding Volu
 
 At this point, our start function should look like the following code:
 
-``` C# 
+``` C#
     void Start()
     {
         // Create arrays for the plane's vertices and indices
@@ -257,26 +257,26 @@ Now that we have a usable script, we need to attach it to some game object in or
 
 In the Unity window drag *NewBehaviorScript.cs* to *Main Camera* in the scene hierarchy.
 
-![Add Using HumanFactors](../assets/walkthroughs/unity/2_raycast_at_plane/drag_into_camera.png)
+![Drag NewBehaviour.cs Into Camera](../assets/walkthroughs/unity/2_raycast_at_plane/drag_into_camera.png)
 
 After doing this, it may look like nothing happened, but by dragging NewBehaviorScript over the camera you've added NewBehaviorScript to the camera as a component. You can verify this by Left Clicking the camera in the scene hierarchy and looking at its components in the Inspector on the right sidebar.
 
 ![Look At Camera In Sidebar](../assets/walkthroughs/unity/2_raycast_at_plane/camera_in_sidebar.png)
 
-At the bottom of the Inspector you should see a header for New Behaviour Script at the bottom. Once you've made sure of this you can click on empty space in the scene to deselect the camera.
+At the bottom of the Inspector you should see a header for New Behaviour Script. Once you've made sure it exists, you can click on an empty space in the scene view to deselect the camera.
 
 ### Executing the Script
 
-Now that we've set *NewBehaviorScript* as a component of the *Main Camera*, it's `Start()` function containing our code will be run when the editor enters play mode. To enter playmode, press the play button located at the top of your screen.
+Now that we've set *NewBehaviorScript* as a component of the *Main Camera*, its `Start()` function containing our code will run when the editor enters play mode. To enter playmode, press the play button located at the top center of your screen.
 
 ![Look At Camera In Sidebar](../assets/walkthroughs/unity/2_raycast_at_plane/play_mode_button.png)
 
 Once clicked, you will enter play mode, and the button will turn blue.
 
 >**NOTE:** If when entering play mode, the game window becomes full screen like below, that means you have the *Maximize On Play* option enabled. You can disable it by pressing the  *Maximize On Play* button circled in red below. For this tutorial series, we will leave this option off since it hides the console.
-![Look At Camera In Sidebar](../assets/walkthroughs/unity/2_raycast_at_plane/playmode_maximize_on_play.png)
+![Circled Maximize On Play Button](../assets/walkthroughs/unity/2_raycast_at_plane/playmode_maximize_on_play.png)
 
-If everything went right, then after entering play mode the console located at the bottom of your editor's window should show `(1,0,0)`, which is the exact point where the ray intersected the plane.
+If everything went right, after entering play mode the console located at the bottom of your editor's window should show `(1,0,0)`, which is the exact point where the ray intersected the plane.
 
 ![Add Using HumanFactors](../assets/walkthroughs/unity/2_raycast_at_plane/console_show_meshinfo.png)
 
@@ -301,4 +301,4 @@ If your console's output matches this, then you're successfully completed this t
 
 Full project Link: [Tutorial 2: Casting a Ray at A Plane](../assets/walkthroughs/unity/2_raycast_at_plane/Tutorial%202%20-%20Unity%20Project.zip)
 
-In this tutorial we've successfully created a plane from an array of vertices and triangle indexes, then casted a ray at it and found the point where the ray and the plane intersected. In the next tutorial we will build upon this knowledge to cover a core part of the HumanFactors Library: The [Graph Generator](3_graph_generator.md).
+In this tutorial we've successfully created a plane from an array of vertices and triangle indexes, then casted a ray at it, then found the point where the ray and the plane intersected. Through this we've gained some experience using Visual Studio with Unity and became more familiar with the Editor's UI. In the next tutorial we will build upon this experience to cover a core part of the HumanFactors Library: The [Graph Generator](3_graph_generator.md).
