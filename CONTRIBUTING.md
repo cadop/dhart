@@ -19,21 +19,21 @@ Documentation is vital and must be done throughout the project, not the end. Thi
 * Installing Natural Docs on Windows
 * Download the Windows version of Natural Docs from it’s website
 * Natural Docs for Unity plugin (https://unitysquid.com/create-c-documentation-for-unity-like-a-pro/)
-	
-There are three users of the codebase. 
-- People that will develop the foundation of the code (includes people like you). 
-- People that will use the interfaces and our codebase as an API. 
-- People that will use final products that are built with the codebase.  
-Each user group must be considered at each stage. 
+
+There are three users of the codebase.
+- People that will develop the foundation of the code (includes people like you).
+- People that will use the interfaces and our codebase as an API.
+- People that will use final products that are built with the codebase.
+Each user group must be considered at each stage.
 
 Coding standards are important, sometimes there is the ‘industry standard’ way.<br>
 This is not always in alignment with the needs of the project or with research.<br>
 It’s likely some things will be different, it should always be discussed and clarified.<br>
-It should also be in the documentation. 
+It should also be in the documentation.
 
 <h1>Python</h1>
 * pep8 convention in most cases (ask otherwise)
-* Do not make everything a class. A class should only be used when it is very clearly necessary. Algorithms should be done in a functional way. 
+* Do not make everything a class. A class should only be used when it is very clearly necessary. Algorithms should be done in a functional way.
 * Do not add dependencies without making an issue on why you need it (this goes for libraries that are not already listed as dependencies for the code)
 
 <h1>C#</h1>
@@ -51,6 +51,7 @@ It should also be in the documentation.
 - Documenting the heads of each file
 - Documenting member fields
 - Snippets and Code Samples
+- Adding images
 - Why the use of <code>///</code> and <code>//</code>?
 
 <h2>Using <code>TODO</code></h2>
@@ -169,14 +170,14 @@ Our convention dictates that a single character of whitespace ('<code> </code>')
 - a <code>\code</code> tag is initiated
 - a sample line of code begins
 - a comment begins within the sample code
-- a <code>\endcode</code> tag is used to end a sample 
+- a <code>\endcode</code> tag is used to end a sample
 
 <br>This ensures ease of viewing<br>
 for anyone reading the source code -- <br>
 and also assists Doxygen with the<br>
 formatting process for the HTML export.<br>
 
-For more information, see<br> 
+For more information, see<br>
 'Why the use of <code>///</code> and <code>//</code>?'<br>
 at the bottom of this page.<br>
 
@@ -201,6 +202,111 @@ std::cout << "Notice the whitespace after the '///'. << std::endl;
 
 You may now use <b>'Run Doxygen'</b> to export your documentation.
 (There are no extra steps, unlike with the snippet section)
+
+<h2>Adding images</h2>
+
+We will be using the <code>\image</code> tag to add images.<br>
+https://www.doxygen.nl/manual/commands.html#cmdimage
+
+<b>Step 0:</b><br>
+Save a copy of [image_file],<br>
+which is the filename of the desired image,<br>
+into the following directory:<br>
+<b>Analysis\docs\C++\img\[enclosing_folder]\[module_name]</b>
+
+For example, the full filepath of <code>node.h</code> is<br>
+<b>Analysis\src\Cpp\spatialstructures\src\node.h</b>
+
+[enclosing_folder] is <b>spatialstructures</b><br>
+[module_name] is <b>node</b>
+
+So, if we wanted to insert an image for any documentation<br>
+for <code>node.h</code> or <code>node.cpp</code>,<br>
+the image would be saved into the following directory:<br>
+
+<b>Analysis\docs\C++\img\spatialstructures\node</b>
+
+If directories [enclosing_folder] and [module_name]<br>
+do not already exist, you may create them.<br>
+
+We can now proceed to editing the file where we want to insert the desired image.
+
+<b>Step 1:</b><br>
+In the file where you want the image to appear,<br>
+navigate to the line of code where you want the image to appear.<br>
+
+We will now utilize the <code>\image</code> tag.
+
+At the line where you want the image to appear,<br>
+enter the following:
+
+<code>/// \image html [enclosing_folder]\[module_name]\[image_file]</code>
+
+An example use of the <code>\image</code> tag would be:<br>
+
+<code>/// \image html spatialstructures\node\test.png</code>
+
+We will now move on to the <b>Doxygen GUI frontend</b> application.
+
+<b>Step 2:</b><br>
+In <b>Doxygen GUI frontend</b> -- load the repository's Doxyfile.<br>
+
+Click <b>File > Open...</b><br>
+
+The 'Open configuration file' file explorer will appear.<br>
+Navigate to your local copy of the Analysis repository,<br>
+then click the <b>src</b> folder.<br>
+
+Select the <b>Doxyfile</b> icon, and click <b>Open</b>.<br>
+
+Next,<br>
+to the right of 'Step 1: Specify the working directory from which doxygen will run',<br>
+click the <b>Select...</b> button.<br>
+
+Navigate to your local copy of the Analysis repository,<br>
+then click the <b>src</b> folder.<br>
+
+Then,<br>
+underneath 'Specify the directory to scan for source code',<br>
+click the <b>Select...</b> button.<br>
+
+Verify that you are already in the <b>Analysis\src</b> directory.<br>
+If not, navigate to that directory.<br>
+Then, click the <b>Cpp</b> folder.<b>
+Click <b>Select folder</b>.<br>
+
+Finally,<br>
+underneath 'Specify the directory where doxygen should put the generated documentation',<br>
+click the <b>Select...</b> button.<br>
+
+For any documentation that has been verified and destined for the repository,
+navigate to <b>Analysis\docs\C++</b>, then click <b>Select Folder</b>.<br>
+
+For test runs (always do test runs first before pushing anything to the repository),<br>
+navigate to a directory of your choice (outside of your local copy of <b>Analysis</b>),<br>
+then click <b>Select Folder</b>.<br>
+
+<b>Step 3:</b><br>
+We are now able to define where Doxygen will search for images.<br>
+
+Click the <b>Expert</b> tab.<br>
+Underneath <b>Topics</b> (on the left hand side of the window),<br>
+select <b>Input</b>,<br>
+then on the right side,<br>
+scroll down until you see the text field for <b>IMAGE_PATH</b>.<br>
+Click the folder icon for <b>IMAGE_PATH</b>.<br>
+
+In the file explorer window that appears,<br>
+navigate to <b>Analysis\docs\C++\img</b>.<br>
+Then, click <b>Select Folder</b>.<br>
+
+We have now configured our image path for Doxygen.<br>
+
+<b>Step 4:</b><br>
+If there is nothing else you would like to configure,<br>
+select the <b>Run</b> tab, then click <b>Run doxygen</b>.<br>
+
+Your documentation will now be generated.
 
 <h2>Why the use of <code>///</code> and <code>//</code>?</h2>
 
@@ -233,7 +339,7 @@ std::cout << "Here is my sample" << std::endl;
 ...the final Doxygen HTML export would look like this:<br>
 
 <code>
-@verbatim 
+@verbatim
         std::cout << "Here is my sample" << std::endl;
 @endverbatim
 Here is a comment</code>
