@@ -19,25 +19,29 @@ Next Tutorial: [Graph Generator](3_graph_generator.md)
 
 ## Intro
 
-Now that we know the HumanFactors library can be referenced by our New Unity Project, lets check to see that it's working with a simple script. This script will perform the following when playmode is entered:
+Now that we know the HumanFactors library can be referenced by our new Unity Project, lets check to see that it's working by writing a simple script that utilizes the Raytracer. Ray intersections are used internally by many of the analysis methods in HumanFactors, and can be a very useful tool for analyzing space. In this tutorial we will write a script that performs following when playmode is entered:
 
 1) Create a Plane in HumanFactors from vertices and triangle indexes.
 2) Cast a ray at the plane.
 3) Print the point where the ray intersected the plane.
 
+This tutorial assumes that you've completed the first tutorial, since we will be using the project created in it as a base, and building upon concepts first established there. If you want to start here, you can download the full unity project at the end of the previous tutorial.
+
+Now, let's begin writing our script.
+
 ## Writing the Script
 
-In the Visual Studio window you've just opened, Look at the contents of NewBehavior Script.cs.
+!["HFExampleScriptBlank](../assets/walkthroughs/unity/2_raycast_at_plane/blank_new_behaviour_script.png)
 
-!["NewBehaviourScriptBlank](../assets/walkthroughs/unity/2_raycast_at_plane/blank_new_behaviour_script.png)
+*Figure* **2.1**: *A Blank MonoBehavior Script*
 
-*Figure* **2.1**
-
-Your script should match Figure 2.1.
+In the Visual Studio window you've just opened, Look at the contents of the NewBehaviorScript.cs script we created in the last tutorial. The contents of your script should match that of Figure 2.1. Once you're sure of this, it's time to start filling it in.
 
 ### Using Declarations
 
-To reduce the length of calls into HumanFactors, we're going to declare which namespaces will be used in this script. Add the following lines to the top of the script:
+Before getting into the logic of the script itself, we will add using declarations for the namespaces in HumanFactors that we plan to reference in this script. 
+
+Add the following lines to the top of the script.
 
 ``` C#
 using HumanFactors;
@@ -45,31 +49,30 @@ using HumanFactors.RayTracing;
 using HumanFactors.Geometry;
 ```
 
-lines, 1-5 of your code should match Figure 2.2.
 
 !["NewBehaviourScript Usings"](../assets/walkthroughs/unity/2_raycast_at_plane/add_using_delcarations.png)
 
-*Figure* **2.2**
+*Figure* **2.2**: *The Using declarations required for this script*
 
->**Note:** While editing your code, you may notice the colored bar to the left between the line numbers and the code itself. This bar displays the changes you've made to the current document. When you make unsaved changes the bar will appear and be colored yellow,  then once you save it will turn green.
+Lines, 1-6 of your code should match Figure 2.2.
 
+>**NOTE:** While editing your code, you may notice the colored bar to the left between the line numbers and the code itself. This bar displays the changes you've made to the current document. When you make unsaved changes the bar will appear and be colored yellow,  then once you save it will turn green.
 
 !["Body Of Start"](../assets/walkthroughs/unity/2_raycast_at_plane/body_of_start.png)
 
+*Figure* **2.3**: *The body of the Start method highlighted*
 
-*Figure* **2.3**
-
-With using declartions in place, the rest of our code will be entered in the body of the `Start()` function beginning on line 13. This section is highlighted in Figure 2.3.
-
+With using declartions in place, we'll be writing the rest of our code in the body of the `Start()` function beginning on line 13. This section is highlighted in yellow in Figure 2.3. Next we will move onto creating a plane in code.
 
 ### Creating a Plane
 
-In this section, we will create a plane through code for our ray to intersect with. To create a mesh we require two pieces of information:
+To create any mesh we require two arrays:
 
-1) The (x,y,z) location of every vertex that comprises the mesh as an array of floats.
-2) The indexes for each triangle or "face" of the mesh as an array of integers.
+1) An array of floats containing the (x,y,z) location of every vertex in the mesh.
+2) An array of Integers containing the indexes for each triangle or "face" of the mesh.
 
-Here are the vertex and index arrays for a 10x10 plane on the xy plane.
+A plane is comprised of four vertices, and two triangles. Here are the vertex and index arrays for a 10x10 plane on the xy plane.
+
 ``` C#
         // Create arrays for the plane's vertices and indices
         float[] plane_vertices = {
@@ -84,25 +87,27 @@ Here are the vertex and index arrays for a 10x10 plane on the xy plane.
         };
 ```
 
+In both arrays, every 3 elements represents a seperate object. So the first vertex, is at location (-10,10,0) and the first triangle is comprised of the fourth, second, and first vertices. For more information on what both of these arrays mean, see out the [MeshInfo Documentation]().
+
 **TODO**: Replace these links with links to our documentation.
 
-For more information on what both of these arrays mean, see out the [MeshInfo Documentation]().
-
-We will use these arrays to construct a new *MeshInfo* object in HumanFactors. Call the MeshInfo constructor with the two arrays we defined above.
+We will use these arrays to construct a new *MeshInfo* object in HumanFactors. Call the MeshInfo constructor with the two arrays we defined above as arguments.
 
 ``` C#
         // Construct a meshinfo instance for the plane
         MeshInfo Plane = new MeshInfo(plane_indices, plane_vertices);
 ```
 
-Now that we have a plane mesh in HumanFactors, we must generate a *Bounding Volume Hierarchy*, or BVH, from it to use as input for the Raytracer. The BVH is an accelerated data structure that drastically reduces the time required to perform ray intersections. You can read more about the BVH in its dedicated article [Bounding Volume Hierarchy](). To generate a BVH from an instance of MeshInfo, call the BVH constructor with the MeshInfo instance as an argument.
+HumanFactors now has that plane we just created, but the mesh itself cannot be used with the Raytracer. We'll first need to generate a Bounding Volume Hierarchy, or BVH from the mesh if we want to perform ray intersections with it. In short, a BVH is an accelerated data structure that drastically reduces the time required to perform ray intersections. You can read more about the BVH in its dedicated article [Bounding Volume Hierarchy]().
+
+To generate a BVH from an instance of MeshInfo, call the BVH constructor with the MeshInfo instance as an argument.
 
 ``` C#
         // Generate a BVH from the MeshInfo instance
         EmbreeBVH bvh = new EmbreeBVH(Plane);
 ```
 
-At this point, our start function should look like the following code:
+At this point, our start function should match the following code:
 
 ``` C#
     void Start()
@@ -129,7 +134,7 @@ At this point, our start function should look like the following code:
 
 !["BVH Construction Script"](../assets/walkthroughs/unity/2_raycast_at_plane/creating_a_plane.png)
 
-With the BVH created, we're  ready to call the Raytracer and cast a ray.
+With the BVH created, we're ready to call the Raytracer and cast a ray.
 
 ### Casting a Ray
 
@@ -264,6 +269,10 @@ After doing this, it may look like nothing happened, but by dragging NewBehavior
 ![Look At Camera In Sidebar](../assets/walkthroughs/unity/2_raycast_at_plane/camera_in_sidebar.png)
 
 At the bottom of the Inspector you should see a header for New Behaviour Script. Once you've made sure it exists, you can click on an empty space in the scene view to deselect the camera.
+
+>**NOTE**: If you click on the camera and notice multiple copies of the script, you can remove a component by left clicking on the rightmost side of header for the components of the extra scripts in the inspector, then click the remove component button.
+>![Remove Extra Component](../assets/walkthroughs/unity/2_raycast_at_plane/remove_extra_component.png)
+
 
 ### Executing the Script
 
