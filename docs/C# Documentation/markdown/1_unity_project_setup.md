@@ -13,7 +13,7 @@ Next Tutorial: [Project Setup](1_unity_project_setup.md)
 
 ## Before we begin
 
- This guide will demonstrate setting up a new Unity project from scratch, importing the HumanFactors API as an asset, then verifying it can be referenced by the Unity Project.
+ This guide will demonstrate setting up a new Unity project from scratch, importing the HumanFactors API as an asset, then verifying the Unity project can reference it.
 
  In this guide we will cover the following:
 
@@ -24,7 +24,7 @@ Next Tutorial: [Project Setup](1_unity_project_setup.md)
 ### Prerequisites
 
 - An installation of [Unity](https://unity3d.com/get-unity/download). This tutorial has been tested with Unity 2019.3f, but should work from 2018.3 on.
-- An installation of Visual Studio with Unity integration. Instructions for installing Unity with support for Visual Studio, or adding VisualStudio support to an existing installation of Unity are available [here](https://docs.microsoft.com/en-us/visualstudio/cross-platform/getting-started-with-visual-studio-tools-for-unity?view=vs-2019).
+- An installation of Visual Studio with Unity integration. Instructions for installing Unity with support for Visual Studio or adding VisualStudio support to an existing installation of Unity are available [here](https://docs.microsoft.com/en-us/visualstudio/cross-platform/getting-started-with-visual-studio-tools-for-unity?view=vs-2019).
 - A copy of the HumanFactors release built with support for C#. The `bin` folder of the release should contain the following files:
   1. embree3.dll
   2. HumanFactors.dll
@@ -44,19 +44,18 @@ Next Tutorial: [Project Setup](1_unity_project_setup.md)
 
 *Figure* **1.1**: *Creating a new project in the Unity Hub*
 
-To begin, open up the Unity Hub then click the *NEW* button  to create a new project.
- a new unity project.
+To begin, open the Unity Hub then click the *NEW* button to create a new project.
 
 ![Choose Project Type](../assets/walkthroughs/unity/1_project_setup/unity_choose_project_type.PNG)
 
 *Figure* **1.2**: *The Create a Project Dialog*
 
-Select your desired project type, directory, and project name. For the sake of this tutorial, we will be using the *3D* project type, and naming our project *HumanFactorsUnitySetup*. When done with this, press the *Create* button to create the project and wait while unity imports all the necessary info.
+Select your desired project type, directory, and project name. For the sake of this tutorial, we will be using the *3D* project type and naming our project *HumanFactorsUnitySetup*. When done with this, press the *Create* button to create the project and wait while Unity imports all the necessary files.
 
 ![Empty Unity Scene](../assets/walkthroughs/unity/1_project_setup/blank_unity_scene.PNG)
 *Figure* **1.3**: *An empty Unity scene*
 
-Upon completion you should be greeted by an empty Unity Scene.
+Upon completion you should be greeted by an empty Unity scene.
 
 ## Importing the Human Factors Library
 
@@ -70,7 +69,7 @@ Unzip the HumanFactors release package to another location (Don't try to drag an
 
 ## Verifying Unity can reference HumanFactors
 
-The binaries have been added to our project as assets, but let's make sure Unity is able to reference them in code. To verify that Unity is able to reference the HumanFactors binaries, we're going to create a new script and look at its references. If we did everything correctly, Unity should automatically have added HumanFactorsCSharp as a reference.
+The binaries have been added to our project as assets, but let's make sure Unity is able to reference them in code. To verify that Unity can reference the HumanFactors binaries, we're going to create a new script and look at its references. If we did everything correctly, Unity should automatically have added HumanFactorsCSharp as a reference.
 
 !["Creating a new C# script"](../assets/walkthroughs/unity/1_project_setup/create_new_script.png)
 
@@ -78,18 +77,30 @@ The binaries have been added to our project as assets, but let's make sure Unity
 
 Right click on a blank space in the assets window, hover over *Create*, then click *C# Script*.
 
-!["Double Click On Script"](../assets/walkthroughs/unity/1_project_setup/double_click_on_script.png)
-*Figure* **1.6**: *NewBehaviourScript.cs*
+![Don't click anything! Rename the script](../assets/walkthroughs/unity/1_project_setup/../2_raycast_at_plane/rename_script.png)
 
-Looking in the assets window, you should notice a new script titled NewBehaviourScript.cs by default. We will leave this as its name, and refer to it as NewBehaviorScript from now on. Double click on NewBehaviourScript to open Visual Studio.
+*Figure*  **1.6**: *Renaming a new script*
+
+Looking in the assets window, you should notice a new script file next to Scenes directory titled NewBehaviourScript.cs by default, and the name of it is highlighted in blue indicatign that you can rename it. Rename the script to HFExampleScript.cs.
+
+>**NOTE:** If you didn't name the file properly, don't worry. You can change the name of the script by right clicking on it and clicking *Rename*.
+>![Rename Dialog](../assets/walkthroughs/unity/1_project_setup/../2_raycast_at_plane/rename_dialog.png)
+
+!["Double Click On Script"](../assets/walkthroughs/unity/1_project_setup/double_click_on_script.png)
+*Figure* **1.7**: *HFExampleScript.cs in the assets window*
+
+Now that we have our new script, double click on it to open Visual studio.
 
 !["HumanFactors referenced by your project"](../assets/walkthroughs/unity/1_project_setup/visual_studio_human_factors_reference.png)
 
-*Figure* **1.7**: *Viewing the references of a project in Visual Studio*
+*Figure* **1.8**: *Viewing the references of a project in Visual Studio*
 
-In Visual Studio, navigate to the *Solution Explorer* then expand the drop downs for your solution, Assembly-C-Sharp, and References. If everything was done correctly, you should see HumanFactors C# under the references for your project, as shown in Figure 1.7.
+In Visual Studio, navigate to the *Solution Explorer* then expand the drop downs for your solution, Assembly-C-Sharp, and References. If everything was done correctly, you should see HumanFactors C# under the references for your project, as shown in Figure 1.8.
 
 > **NOTE**: If Mono-Develop appears instead of Visual Studio, then your installation of Unity is not set up to support Visual Studio. You can follow the above instructions from [Prerequisites](#prerequisites) to fix this.
+
+> **NOTE**: If you renamed the file earlier, then your class's name may not match the name of the class in Figure 1.8. To fix this, just replace the class's name with `HFExampleScript.cs` on line 5. 
+> !["Change Class name"](../assets/walkthroughs/unity/1_project_setup/../2_raycast_at_plane/change_class_name.png)
 
 >**NOTE:** Your version of Visual Studio may use the light theme by default like pictured below. This is purely visual and will not have any impact on this tutorial.
 > !["Light Theme"](../assets/walkthroughs/unity/1_project_setup/light_visual_studio.png)
@@ -104,4 +115,4 @@ Below is a link to the unity project created in this tutorial.
 
 In this tutorial, we went through the process of creating unity project and adding the Analysis toolkit to the project. In the following tutorials, we will use this basis for using the modules that come with the Analysis toolkit.
 
-In the next turorial: [Using the Raytracer](2_raycast_at_plane.md) we will use HumanFactors to create a plane, cast a ray at it, then get the point where the ray intersected the plane.
+In the next tutorial: [Using the Raytracer](2_raycast_at_plane.md) we will use HumanFactors to create a plane, cast a ray at it, then get the point where the ray intersected the plane.
