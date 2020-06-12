@@ -39,7 +39,7 @@ In the Visual Studio window you've just opened, Look at the contents of the NewB
 
 ### Using Declarations
 
-Before getting into the logic of the script itself, we will add using declarations for the namespaces in HumanFactors that we plan to reference in this script. 
+Before getting into the logic of the script itself, we will add using declarations for the namespaces in HumanFactors that we plan to reference in this script.
 
 Add the following lines to the top of the script.
 
@@ -50,7 +50,7 @@ using HumanFactors.Geometry;
 ```
 
 
-!["NewBehaviourScript Usings"](../assets/walkthroughs/unity/2_raycast_at_plane/add_using_delcarations.png)
+!["HFExampleScript Usings"](../assets/walkthroughs/unity/2_raycast_at_plane/add_using_delcarations.png)
 
 *Figure* **2.2**: *The Using declarations required for this script*
 
@@ -204,7 +204,7 @@ using HumanFactors;
 using HumanFactors.RayTracing;
 using HumanFactors.Geometry;
 
-public class NewBehaviourScript : MonoBehaviour
+public class HFExampleScript : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -260,19 +260,20 @@ Now that we have a usable script, we need to attach it to some game object in or
 
 ### Adding the script to the camera
 
-In the Unity window drag *NewBehaviorScript.cs* to *Main Camera* in the scene hierarchy.
+In the Unity window drag *HFExampleScript.cs* to *Main Camera* in the scene hierarchy.
 
 ![Drag NewBehaviour.cs Into Camera](../assets/walkthroughs/unity/2_raycast_at_plane/drag_into_camera.png)
 
 After doing this, it may look like nothing happened, but by dragging NewBehaviorScript over the camera you've added NewBehaviorScript to the camera as a component. You can verify this by Left Clicking the camera in the scene hierarchy and looking at its components in the Inspector on the right sidebar.
 
+>**NOTE**: If you don't see the inspector in the right sidebar, you can enable it by selecting Window > General > Inspector from the top menubar. ![Re-Open Inspector](../assets/walkthroughs/unity/2_raycast_at_plane/re_open_inspector.png)
+
 ![Look At Camera In Sidebar](../assets/walkthroughs/unity/2_raycast_at_plane/camera_in_sidebar.png)
 
-At the bottom of the Inspector you should see a header for New Behaviour Script. Once you've made sure it exists, you can click on an empty space in the scene view to deselect the camera.
+At the bottom of the Inspector you should see a header for HF Example Script. Once you've made sure it exists, you can click on an empty space in the scene view to deselect the camera.
 
 >**NOTE**: If you click on the camera and notice multiple copies of the script, you can remove a component by left clicking on the rightmost side of header for the components of the extra scripts in the inspector, then click the remove component button.
 >![Remove Extra Component](../assets/walkthroughs/unity/2_raycast_at_plane/remove_extra_component.png)
-
 
 ### Executing the Script
 
