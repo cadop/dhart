@@ -12,10 +12,11 @@ Next Tutorial: [Passing a Mesh From Unity to HumanFactors](@ref MeshFromUnity)
     - [Using Declarations](#using-declarations)
     - [Creating the Plane](#creating-the-plane)
     - [Generating the Graph](#generating-the-graph)
-    - [Retrieving A list of nodes](#retrieving-a-list-of-nodes)
+    - [Retrieving a list of nodes](#retrieving-a-list-of-nodes)
     - [Save and Test](#save-and-test)
-  - [Cases where the GraphGenerator fails](#cases-where-the-graphgenerator-fails)
+  - [Handling cases where a Graph could not be generated](#handling-cases-where-a-graph-could-not-be-generated)
     - [Checking for success](#checking-for-success)
+    - [Testing](#testing)
   - [Conclusion](#conclusion)
 
 ## Intro
@@ -30,11 +31,11 @@ In this tutorial we will cover the following:
 
 ### Conceptual Overview
 
-To put it simply, the **Graph Generator** maps out "accessible" space on a model from a given starting point. As the name implies, this map of the space is stored as a series of nodes and edges in a **Graph**. Each node represents a point in space that a human can occupy, and each edge between nodes indicates that a human can traverse from one node to another node. The Graph Generator is a powerful tool for analyzing space, since the graph or nodes it outputs can be used as input to all of the analysis methods offered by HumanFactors. This allows the user to go straight from modifying a model or scene, to analyzing it with minimal effort.
+To put it simply, the **Graph Generator** maps out "accessible" space on a model from a given starting point. As the name implies, this map of the space is stored as a series of nodes and edges in a **Graph**. Each node represents a point in space that a human can occupy, and each edge between nodes indicates that a human can traverse from one node to another node. The Graph Generator is a powerful tool for analyzing space, since the graph or nodes it outputs can be used as input to all the analysis methods offered by HumanFactors. This allows the user to go straight from modifying a model or scene, to analyzing it with minimal effort.
 
 ## Simple Graph Generation
 
-For now, we will begin with the minimum required settings to run the Graph Generator then work our way up to examples that make use of the optional settings. To generate a graph at minimum, the following arguments are requried:
+For now, we will begin with the minimum required settings to run the Graph Generator then work our way up to examples that make use of the optional settings. To generate a graph at minimum, the following arguments are required:
 
 1. A BVH containing the mesh you want to use for graph generation.
 2. A point to start graph generation at.
@@ -45,7 +46,7 @@ For now, we will begin with the minimum required settings to run the Graph Gener
 
 *Figure* **3.1** *Blank HFExampleScript.cs*
 
-To begin: open up the blank HFExample Script that we created in the project setup by double clicking on it in the Unity editor if it isn't open already. 
+To begin: open the blank HFExample Script that we created in the project setup by double clicking on it in the Unity editor if it isn't open already. 
 
 ### Using Declarations
 
@@ -65,9 +66,9 @@ using HumanFactors.RayTracing;
 
 ### Creating the Plane
 
-Internally, the graph uses the *EmbreeRayTracer* which requires a BVH, so we can follow the process as the [Project 2A](@ref UsingTheRayTracer) to create a plane, then generate a BVH from it. If you want a more in depth explanation of this code, please look at the previous tutorial if you want more information about this code.
+Internally, the graph uses the *EmbreeRayTracer* which requires a BVH, so we can follow the process as the [Project 2A](@ref UsingTheRayTracer) to create a plane, then generate a BVH from it. If you want a more in-depth explanation of this code, please look at the previous tutorial if you want more information about this code.
 
-Add the following code in the body of the Start function on line 13:
+Add the following code in the body of the Start method on line 13:
 
 ```{.cs}
         // Create the plane's vertex and index arrays
@@ -89,7 +90,7 @@ Add the following code in the body of the Start function on line 13:
         EmbreeBVH bvh = new EmbreeBVH(Plane);
 ```
 
-[Picture of the start function at this point](../assets/walkthroughs/unity/3_graph_generator/creating_the_plane.PNG)
+[Picture of the start method at this point](../assets/walkthroughs/unity/3_graph_generator/creating_the_plane.PNG)
 
 ### Generating the Graph
 
@@ -107,7 +108,7 @@ We'll use a spacing of one meter in each direction, so each node in our graph wi
         Vector3D spacing = new Vector3D(1, 1, 1);
 ```
 
-Finally we will call the GraphGenerator with these arguments.
+Finally, we will call the GraphGenerator with these arguments.
 
 ```{.cs}
         // Generate the Graph
@@ -127,7 +128,7 @@ All of that together is:
 
 [Picture of entire Start method until this point.](../assets/walkthroughs/unity/3_graph_generator/generating_the_graph.PNG)
 
-### Retrieving A list of nodes
+### Retrieving a list of nodes
 
 G now contains a graph of the accessible space on Plane using the settings we passed as arguments. To verify that our results are correct, we will get a list of nodes from the graph, then print them to the unity console.
 
@@ -166,7 +167,10 @@ public class HFExampleScript : MonoBehaviour
              10f, 10f, 0f,
              10f, -10f, 0f
         };
-        int[] plane_indices = { 3, 1, 0, 2, 3, 0 };
+        int[] plane_indices = { 
+                3, 1, 0,
+                2, 3, 0 
+        };
 
         // Send them to HumanFactors
         MeshInfo Plane = new MeshInfo(plane_indices, plane_vertices);
@@ -213,7 +217,7 @@ The process for testing this script is identical to the process in [The Raytrace
 
 *Figure* **3.4** *How to view the Console Tab*
 
-Like in the previous tutorial, the output is at the bottom of the screen, but it doesn't fit in on one line so it's cut off. To get a better view, click on the output itself, or click on the console tab circled in Figure 3.4 to view the console
+Like in the previous tutorial, the output is at the bottom of the screen, but it doesn't fit in on one line, so it's cut off. To get a better view, click on the output itself, or click on the console tab circled in Figure 3.4 to view the console
 
 ![View Console](../assets/walkthroughs/unity/3_graph_generator/console_view.png)
 
@@ -225,17 +229,28 @@ Once in the console window, click on the message containing our output, highligh
 [(0.000,0.000,0.000), (-1.000,-1.000,0.000), (-1.000,0.000,0.000), (-1.000,1.000,0.000), (0.000,-1.000,0.000), . . . (10.000,7.000,0.000), (10.000,8.000,0.000), (10.000,9.000,0.000), (10.000,10.000,0.000)]
 ```
 
-> **Note:**  this is not the full list of nodes. The list has been truncated due to the size of the output. In order to view every node we'll have to print them in a loop.
+> **Note:**  this is not the full list of nodes. The list has been truncated due to the size of the output. To view every node, we'll have to print them in a loop.
 
-Confirm your results match, then switch back to the previous view by clicking on the Project tab circled in red in Figure 3.5. After that, exit playmode by clicking on the blue play button at the top of the screen. If you've reached this point then you have successfully generated a Graph using Human Factors and have completed this part of the tutorial. Next we will cover cases where the graph generator will be unable to generate a graph, and how to handle if a graph could not be generated.
+Confirm your results match, then switch back to the previous view by clicking on the Project tab circled in red in Figure 3.5. After that, exit playmode by clicking on the blue play button at the top of the screen. If you've reached this point, then you have successfully generated a Graph using Human Factors and have completed this part of the tutorial. Next we will cover cases where the graph generator will be unable to generate a graph, and how to handle if a graph could not be generated.
 
-## Cases where the GraphGenerator fails
+## Handling cases where a Graph could not be generated
 
-We've covered situations where we know the GraphGenerator will generate a graph, however what about sitauations where we're taking user input, or operating on a new model.
+We've covered situations where we know the GraphGenerator will generate a graph, however it's important to know what happens in situations where it is unknown if a graph can be generated because we're taking user input, operating on a new model, or making changes to the geometry we're generating the graph on.
+
+
+ A Graph can fail to generate if at least one of the two cases is true:
+
+1. The initial ground check didn't intersect with any geometry, usually means the start point wasn't over the ground.
+2. The graph couldn't generate any nodes after the initial ground check. Some examples of this are.
+   - The ground check was in a space too narrow to generate any extra nodes given the current spacing
+   - The start point was on a slope too steep for the upslope/downslope to traverse up or down.
+   - The start point is in a wall, making it impossible to generate any nodes around it.
+
+This tutorial will cover safely handling cases where graphs could not be generated by checking the return value of the graph generator.
 
 ### Checking for success
 
-Before interacting with the returned value, we need to check if the Graph Generator was able to generate a graph from our input. If the Graph Generator could not generate any connections from the start point, or the start point was not over any solid ground, the graph will fail to generate and the Graph Generator will return a null value. Let's add a null check just after the graph is generated.
+If the Graph Generator failed due to one of the two cases listed above, a null value will be returned instead of a graph. To catch when this happens, let's add a null check just after the graph is generated on *Line 41*.
 
 ```{.cs}
         // Check if the graph generator succeeded
@@ -245,12 +260,24 @@ Before interacting with the returned value, we need to check if the Graph Genera
         }
 ```
 
-![Checking For Success](../assets/walkthroughs/unity/3_graph_generator/checking_for_success.PNG)
+Now, if the graph fails to generate,  our code will print a clear error message and immediately stop executing the script. If we did not have this check and our graph did fail to generate, then we would get a confusing Null Reference Exception later when interacting with the graph.  
 
-Now, if the graph fails to generate, Unity will print our nice error message and stop executing the script instead of later throwing a null reference exception when we try to interact with it.
+### Testing
+
+To test that our null check is successful, we'll go to line 34 and change our start point to be at (200, 0, 1) instead of (0,0,1): `Vector3D start_point = new Vector3D(200, 0, 1);` This is far, far beyond where our plane is and should result in case 1: the initial ground check failing to find any valid ground.
+
+[Picture of the full Start() method for this test.](../assets/walkthroughs/unity/3_graph_generator/checking_for_success.PNG)
+
+Since the camera is already setup all we need to do is enter playmode to test this. Make sure your code matches the picture, **save** the file, minimize Visual Studio, open the Unity editor, then press the play button. 
+
+![Failure](../assets/walkthroughs/unity/3_graph_generator/failure.PNG)
+
+*Figure* **3.5** *Error message printed after the graph failed to generate* 
+
+If you did this correctly, then the error message we wrote earlier should appear instead of the output from the previous section. If you received this result, then you now know how to handle cases where the graph generator could not generate a graph.
 
 ## Conclusion
 
-Here is a link the the full project created in this guide: [Full Project](../assets/walkthroughs/unity/3_graph_generator/Tutorial%203%20-%20Graph%20Generator.zip)
+Here is a link the full project created in this guide: [Full Project](../assets/walkthroughs/unity/3_graph_generator/Tutorial%203%20-%20Graph%20Generator.zip)
 
 In the next tutorial, [Reading Meshes From Unity](4_reading_a_mesh_from_unity.md), we will use geometry from the unity scene to generate a graph, instead of generating our own plane. 
