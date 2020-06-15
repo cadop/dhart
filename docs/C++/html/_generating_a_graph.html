@@ -73,14 +73,16 @@ $(function() {
 </ul>
 </li>
 <li><a href="#simple-graph-generation">Simple Graph Generation</a><ul>
+<li><a href="#using-declarations">Using Declarations</a></li>
 <li><a href="#creating-the-plane">Creating the Plane</a></li>
 <li><a href="#generating-the-graph">Generating the Graph</a></li>
-<li><a href="#retrieving-a-list-of-nodes">Retrieving A list of nodes</a></li>
+<li><a href="#retrieving-a-list-of-nodes">Retrieving a list of nodes</a></li>
 <li><a href="#save-and-test">Save and Test</a></li>
 </ul>
 </li>
-<li><a href="#cases-where-the-graphgenerator-fails">Cases where the GraphGenerator fails</a><ul>
+<li><a href="#handling-cases-where-a-graph-could-not-be-generated">Handling cases where a Graph could not be generated</a><ul>
 <li><a href="#checking-for-success">Checking for success</a></li>
+<li><a href="#testing">Testing</a></li>
 </ul>
 </li>
 <li><a href="#conclusion">Conclusion</a></li>
@@ -89,151 +91,197 @@ $(function() {
 </ul>
 <h1><a class="anchor" id="autotoc_md16"></a>
 Intro</h1>
-<p>This tutorial picks up from where H:/HFGitlab/Analysis/docs/C# Documentation/markdown/1_unity_project_setup.md "Tutorial 1: Unity Project Setup" ended. If you are just beginning here, then you can download the Unity project from the bottom of tutorial 1.</p>
+<p>This tutorial picks up from where <a class="el" href="_unity_project_setup.html">Tutorial 1: Unity Project Setup</a> ended. If you are just beginning here, then you can download the Unity project from the bottom of tutorial 1.</p>
 <p>In this tutorial we will cover the following:</p>
-<p>1) Calling the GraphGenerator with a bvh, spacing, and a start point. 2) Reading nodes from a graph after it has been generated. 3) Handling cases where the GraphGenerator could not generate a graph.</p>
+<ol type="1">
+<li>Calling the GraphGenerator with a BVH, spacing, and a start point.</li>
+<li>Reading nodes from a graph after it has been generated.</li>
+<li>Handling cases where the GraphGenerator could not generate a graph.</li>
+</ol>
 <h2><a class="anchor" id="autotoc_md17"></a>
 Conceptual Overview</h2>
-<p>To put it simply, the <b>Graph Generator</b> maps out "accessible" space on a model from a given starting point. As the name implies, this map of the space is stored as a series of nodes and edges in a <b>Graph</b>. Each node represents a point in space that a human can occupy, and each edge between nodes indicates that a human can traverse from one node to another node. The Graph Generator is a powerful tool for analyzing space, since the graph or nodes it outputs can be used as input to all of the analysis methods offered by HumanFactors. This allows the user to go straight from modifying a model or scene, to analyzing it with minimal effort.</p>
+<p>To put it simply, the <b>Graph Generator</b> maps out "accessible" space on a model from a given starting point. As the name implies, this map of the space is stored as a series of nodes and edges in a <b>Graph</b>. Each node represents a point in space that a human can occupy, and each edge between nodes indicates that a human can traverse from one node to another node. The Graph Generator is a powerful tool for analyzing space, since the graph or nodes it outputs can be used as input to all the analysis methods offered by HumanFactors. This allows the user to go straight from modifying a model or scene, to analyzing it with minimal effort.</p>
 <h1><a class="anchor" id="autotoc_md18"></a>
 Simple Graph Generation</h1>
-<p>For now, we will begin with the minimum required settings to run the Graph Generator then work our way up to examples that make use of the optional settings. To generate a graph at minimum, the following arguments are requried:</p>
-<p>1) A BVH containing the mesh you want to use for graph generation. 2) A point to start graph generation at. 3) The spacing between nodes.</p>
-<p>To get started, we will once again set up our using declarations to import the functionality we need.</p>
-<div class="fragment"><div class="line">using HumanFactors;</div>
-<div class="line">using HumanFactors.Geometry;</div>
-<div class="line">using HumanFactors.SpatialStructures;</div>
-<div class="line">using HumanFactors.GraphGenerator;</div>
-<div class="line">using HumanFactors.RayTracing;</div>
-</div><!-- fragment --><p><img src="../assets/walkthroughs/unity/3_graph_generator/using_declarations.png" alt="Using Declarations" class="inline"/></p>
+<p>For now, we will begin with the minimum required settings to run the Graph Generator then work our way up to examples that make use of the optional settings. To generate a graph at minimum, the following arguments are required:</p>
+<ol type="1">
+<li>A BVH containing the mesh you want to use for graph generation.</li>
+<li>A point to start graph generation at.</li>
+<li>The spacing between nodes.</li>
+</ol>
+<p><img src="../assets/walkthroughs/unity/2_raycast_at_plane/blank_new_behaviour_script.png" alt="HFExampleScriptBlank" class="inline"/></p>
+<p><em>Figure</em> <b>3.1</b> <em>Blank HFExampleScript.cs</em></p>
+<p>To begin: open the blank HFExample Script that we created in the project setup by double clicking on it in the Unity editor if it isn't open already.</p>
 <h2><a class="anchor" id="autotoc_md19"></a>
+Using Declarations</h2>
+<p><img src="../assets/walkthroughs/unity/3_graph_generator/using_declarations.png" alt="Using Declarations" class="inline"/></p>
+<p><em>Figure</em> <b>3.2</b> <em>Using declarations for this tutorial</em></p>
+<p>To get started, we will once again set up our using declarations to import the functionality we need, starting on line 3 of our blank script.</p>
+<div class="fragment"><div class="line"><span class="keyword">using</span> HumanFactors;</div>
+<div class="line"><span class="keyword">using</span> HumanFactors.Geometry;</div>
+<div class="line"><span class="keyword">using</span> HumanFactors.SpatialStructures;</div>
+<div class="line"><span class="keyword">using</span> HumanFactors.GraphGenerator;</div>
+<div class="line"><span class="keyword">using</span> HumanFactors.RayTracing;</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md20"></a>
 Creating the Plane</h2>
-<p>Internally, the graph uses the <em>EmbreeRayTracer</em> which requires a BVH, so we can follow the process as the Project 2A to create a plane, then generate a BVH from it.</p>
-<p>In the start function add the following code in the body of the Start function on line 13:</p>
-<div class="fragment"><div class="line">// Create the plane&#39;s vertex and index arrays</div>
-<div class="line">float[] plane_vertices = {</div>
+<p>Internally, the graph uses the <em>EmbreeRayTracer</em> which requires a BVH, so we can follow the process as the Project 2A to create a plane, then generate a BVH from it. If you want a more in-depth explanation of this code, please look at the previous tutorial if you want more information about this code.</p>
+<p>Add the following code in the body of the Start method on line 13:</p>
+<div class="fragment"><div class="line"><span class="comment">// Create the plane&#39;s vertex and index arrays</span></div>
+<div class="line"><span class="keywordtype">float</span>[] plane_vertices = {</div>
 <div class="line">    -10f, 10f, 0f,</div>
 <div class="line">    -10f, -10f, 0f,</div>
 <div class="line">     10f, 10f, 0f,</div>
 <div class="line">     10f, -10f, 0f</div>
 <div class="line">};</div>
-<div class="line">int[] plane_indices = {</div>
+<div class="line"><span class="keywordtype">int</span>[] plane_indices = {</div>
 <div class="line">   3, 1, 0,</div>
 <div class="line">   2, 3, 0</div>
 <div class="line">};</div>
 <div class="line"> </div>
-<div class="line">// Send them to HumanFactors</div>
-<div class="line">MeshInfo Plane = new MeshInfo(plane_indices, plane_vertices);</div>
+<div class="line"><span class="comment">// Send them to HumanFactors</span></div>
+<div class="line">MeshInfo Plane = <span class="keyword">new</span> MeshInfo(plane_indices, plane_vertices);</div>
 <div class="line"> </div>
-<div class="line">// Generate a BVH for the RayTracer</div>
-<div class="line">EmbreeBVH bvh = new EmbreeBVH(Plane);</div>
-</div><!-- fragment --><p><img src="../assets/walkthroughs/unity/3_graph_generator/creating_the_plane.PNG" alt="Creating The Plane" class="inline"/></p>
-<h2><a class="anchor" id="autotoc_md20"></a>
-Generating the Graph</h2>
-<p>Now that we have a BVH, let's generate a graph on it. In the code below, we define a starting point for the graph, then we define the spacing between each node.</p>
-<p>We'll place our start point 1 meter above the origin of the scene (0,0,1). Starting directly at the origin, (0,0,0), would put the start point inside of the plane we're using for the ground, causing the initial ground check to fail.</p>
-<div class="fragment"><div class="line">{C#}</div>
-<div class="line">       Vector3D start_point = new Vector3D(0, 0, 1);</div>
-</div><!-- fragment --><p>We'll use a spacing of one meter in each direction, so each node in our graph will be at maximum one meter apart.</p>
-<div class="fragment"><div class="line">Vector3D start_point = new Vector3D(0, 0, 1);</div>
-</div><!-- fragment --><p>Finally we will call the GraphGenerator with these arguments.</p>
-<div class="fragment"><div class="line">{C#}</div>
-<div class="line">       // Generate the Graph</div>
-<div class="line">       Graph G = GraphGenerator.GenerateGraph(bvh, start_point, spacing);</div>
-</div><!-- fragment --><p><img src="../assets/walkthroughs/unity/3_graph_generator/generating_the_graph.PNG" alt="Generating The Graph" class="inline"/></p>
+<div class="line"><span class="comment">// Generate a BVH for the RayTracer</span></div>
+<div class="line">EmbreeBVH bvh = <span class="keyword">new</span> EmbreeBVH(Plane);</div>
+</div><!-- fragment --><p><a href="../assets/walkthroughs/unity/3_graph_generator/creating_the_plane.PNG">Picture of the start method at this point</a></p>
 <h2><a class="anchor" id="autotoc_md21"></a>
-Retrieving A list of nodes</h2>
-<p>G now contains a graph of the accessible space on Plane using our settings. For this tutorial we will get a list of all nodes within the graph, and print them to get an idea of where this graph traversed.</p>
-<div class="fragment"><div class="line">// Get a list of nodes from the graph and print them.</div>
+Generating the Graph</h2>
+<p>Now that we have a BVH, let's generate a graph on it. In the code below, we will define a starting point for the graph, then the spacing between each node.</p>
+<p>We'll place our start point 1 meter above the origin of the scene (0,0,1). Starting directly at the origin, (0,0,0), would put the start point inside of the plane we're using for the ground causing the initial ground check to fail.</p>
+<div class="fragment"><div class="line">Vector3D start_point = <span class="keyword">new</span> Vector3D(0, 0, 1);</div>
+</div><!-- fragment --><p>We'll use a spacing of one meter in each direction, so each node in our graph will be at maximum one meter apart.</p>
+<div class="fragment"><div class="line">Vector3D spacing = <span class="keyword">new</span> Vector3D(1, 1, 1);</div>
+</div><!-- fragment --><p>Finally, we will call the GraphGenerator with these arguments.</p>
+<div class="fragment"><div class="line"><span class="comment">// Generate the Graph</span></div>
+<div class="line">Graph G = GraphGenerator.GenerateGraph(bvh, start_point, spacing);</div>
+</div><!-- fragment --><p>All of that together is:</p>
+<div class="fragment"><div class="line"><span class="comment">// Set Start Point and Spacing</span></div>
+<div class="line">Vector3D start_point = <span class="keyword">new</span> Vector3D(0, 0, 1);</div>
+<div class="line">Vector3D spacing = <span class="keyword">new</span> Vector3D(1, 1, 1);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Generate the graph</span></div>
+<div class="line">Graph G = GraphGenerator.GenerateGraph(bvh, start_point, spacing);</div>
+</div><!-- fragment --><p><a href="../assets/walkthroughs/unity/3_graph_generator/generating_the_graph.PNG">Picture of entire Start method until this point.</a></p>
+<h2><a class="anchor" id="autotoc_md22"></a>
+Retrieving a list of nodes</h2>
+<p>Our graph G now contains a graph of the accessible space on the plane generated using the settings we passed as arguments. To verify that our results are correct, we will get a list of nodes from the graph, then print them to the unity console.</p>
+<p>Enter the following code at the bottom of the start method:</p>
+<div class="fragment"><div class="line"><span class="comment">// Get a list of nodes from the graph and print them.</span></div>
 <div class="line">NodeList nodes = G.getNodes();</div>
 <div class="line">Debug.Log(nodes);</div>
-</div><!-- fragment --><p><img src="../assets/walkthroughs/unity/3_graph_generator/print_nodes.png" alt="Print Nodes" class="inline"/></p>
-<h2><a class="anchor" id="autotoc_md22"></a>
+</div><!-- fragment --><p><a href="../assets/walkthroughs/unity/3_graph_generator/print_nodes.png">Picture of entire Start method Until this Point</a></p>
+<h2><a class="anchor" id="autotoc_md23"></a>
 Save and Test</h2>
 <p>Here is the full script we've created from this demo. Make sure yours matches it before moving on to testing.</p>
-<div class="fragment"><div class="line">using System.Collections;</div>
-<div class="line">using System.Collections.Generic;</div>
-<div class="line">using UnityEngine;</div>
-<div class="line">using HumanFactors;</div>
-<div class="line">using HumanFactors.SpatialStructures;</div>
-<div class="line">using HumanFactors.GraphGenerator;</div>
-<div class="line">using HumanFactors.RayTracing;</div>
-<div class="line">using HumanFactors.Geometry;</div>
+<div class="fragment"><div class="line"><span class="keyword">using</span> System.Collections;</div>
+<div class="line"><span class="keyword">using</span> System.Collections.Generic;</div>
+<div class="line"><span class="keyword">using</span> UnityEngine;</div>
+<div class="line"><span class="keyword">using</span> HumanFactors;</div>
+<div class="line"><span class="keyword">using</span> HumanFactors.SpatialStructures;</div>
+<div class="line"><span class="keyword">using</span> HumanFactors.GraphGenerator;</div>
+<div class="line"><span class="keyword">using</span> HumanFactors.RayTracing;</div>
+<div class="line"><span class="keyword">using</span> HumanFactors.Geometry;</div>
 <div class="line"> </div>
-<div class="line">public class NewBehaviourScript : MonoBehaviour</div>
+<div class="line"><span class="keyword">public</span> <span class="keyword">class </span>HFExampleScript : MonoBehaviour</div>
 <div class="line">{</div>
-<div class="line">    // Start is called before the first frame update</div>
-<div class="line">    void Start()</div>
+<div class="line">    <span class="comment">// Start is called before the first frame update</span></div>
+<div class="line">    <span class="keywordtype">void</span> Start()</div>
 <div class="line">    {</div>
-<div class="line">        // Create an array of a plane&#39;s vertices and indices</div>
-<div class="line">        float[] plane_vertices = {</div>
+<div class="line">        <span class="comment">// Create an array of a plane&#39;s vertices and indices</span></div>
+<div class="line">        <span class="keywordtype">float</span>[] plane_vertices = {</div>
 <div class="line">            -10f, 10f, 0f,</div>
 <div class="line">            -10f, -10f, 0f,</div>
 <div class="line">             10f, 10f, 0f,</div>
 <div class="line">             10f, -10f, 0f</div>
 <div class="line">        };</div>
-<div class="line">        int[] plane_indices = { 3, 1, 0, 2, 3, 0 };</div>
+<div class="line">        <span class="keywordtype">int</span>[] plane_indices = { </div>
+<div class="line">                3, 1, 0,</div>
+<div class="line">                2, 3, 0 </div>
+<div class="line">        };</div>
 <div class="line"> </div>
-<div class="line">        // Send them to HumanFactors</div>
-<div class="line">        MeshInfo Plane = new MeshInfo(plane_indices, plane_vertices);</div>
+<div class="line">        <span class="comment">// Send them to HumanFactors</span></div>
+<div class="line">        MeshInfo Plane = <span class="keyword">new</span> MeshInfo(plane_indices, plane_vertices);</div>
 <div class="line"> </div>
-<div class="line">        // Generate a BVH for the RayTracer</div>
-<div class="line">        EmbreeBVH bvh = new EmbreeBVH(Plane);</div>
+<div class="line">        <span class="comment">// Generate a BVH for the RayTracer</span></div>
+<div class="line">        EmbreeBVH bvh = <span class="keyword">new</span> EmbreeBVH(Plane);</div>
 <div class="line"> </div>
-<div class="line">        // Set Options for the Graph Generator</div>
-<div class="line">        Vector3D start_point = new Vector3D(0, 0, 1); // The point to start graph generation</div>
-<div class="line">        Vector3D spacing = new Vector3D(1, 1, 1); // The spacing between each node</div>
+<div class="line">        <span class="comment">// Set Options for the Graph Generator</span></div>
+<div class="line">        Vector3D start_point = <span class="keyword">new</span> Vector3D(0, 0, 1); <span class="comment">// The point to start graph generation</span></div>
+<div class="line">        Vector3D spacing = <span class="keyword">new</span> Vector3D(1, 1, 1); <span class="comment">// The spacing between each node</span></div>
 <div class="line"> </div>
-<div class="line">        // Generate the Graph</div>
+<div class="line">        <span class="comment">// Generate the Graph</span></div>
 <div class="line">        Graph G = GraphGenerator.GenerateGraph(bvh, start_point, spacing);</div>
 <div class="line"> </div>
-<div class="line">        // Check if the graph generator succeeded</div>
-<div class="line">        if (G is null)</div>
+<div class="line">        <span class="comment">// Check if the graph generator succeeded</span></div>
+<div class="line">        <span class="keywordflow">if</span> (G is <span class="keyword">null</span>)</div>
 <div class="line">        {</div>
-<div class="line">            Debug.Log(&quot;The Graph failed to generate.&quot;);</div>
-<div class="line">            return;</div>
+<div class="line">            Debug.Log(<span class="stringliteral">&quot;The Graph failed to generate.&quot;</span>);</div>
+<div class="line">            <span class="keywordflow">return</span>;</div>
 <div class="line">        }</div>
 <div class="line"> </div>
-<div class="line">        // Get a list of nodes from the graph and print them.</div>
+<div class="line">        <span class="comment">// Get a list of nodes from the graph and print them.</span></div>
 <div class="line">        NodeList nodes = G.getNodes();</div>
 <div class="line">        Debug.Log(nodes);</div>
 <div class="line">    }</div>
 <div class="line"> </div>
-<div class="line">    // Update is called once per frame</div>
-<div class="line">    void Update()</div>
+<div class="line">    <span class="comment">// Update is called once per frame</span></div>
+<div class="line">    <span class="keywordtype">void</span> Update()</div>
 <div class="line">    {</div>
 <div class="line"> </div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>Save your script, minimize Visual Studio, then switch back to the Unity Editor. The process for testing this script is identical to the process in the previous tutorial. Attach the script to the main camera, then press the play button and inspect your output.</p>
+</div><!-- fragment --><p>Once you've confirmed that your script matches this code, <b>save</b> your script, minimize Visual Studio, then switch back to the Unity Editor.</p>
 <p><img src="../assets/walkthroughs/unity/2_raycast_at_plane/drag_into_camera.png" alt="Attach script and test" class="inline"/></p>
-<p>Like in the previous tutorial, the output is at the bottom of the screen but it's cut off. To get a better view, click on the output to switch over to the console tab, then click on the message containing our output highlighted in blue for a closer look.</p>
+<p><em>Figure</em> <b>3.3</b> <em>Dragging HFExampleScript onto the Main Camera as a component.</em></p>
+<p>The process for testing this script is identical to the process in <a class="el" href="_using_the_raytracer.html">The Raytracer Tutorial</a>. Attach the script to the main camera, then press the play button and inspect your output.</p>
+<p><img src="../assets/walkthroughs/unity/3_graph_generator/click_on_console.png" alt="Switch To the Console" class="inline"/></p>
+<p><em>Figure</em> <b>3.4</b> <em>How to view the Console Tab</em></p>
+<p>Like in the previous tutorial, the output is at the bottom of the screen, but it doesn't fit in on one line, so it's cut off. To get a better view, click on the output itself, or click on the console tab circled in Figure 3.4 to view the console. The console contains a history of outputs, as well as the option to click on any output message to get more information.</p>
 <p><img src="../assets/walkthroughs/unity/3_graph_generator/console_view.png" alt="View Console" class="inline"/></p>
-<p>The highlighted text should read:</p>
-<div class="fragment"><div class="line">&gt; **Note:**  this is not the full list of nodes. The list has been truncated due to the size of the output. In order to view every node we&#39;ll have to print them in a loop.</div>
-<div class="line"> </div>
-<div class="line">Switch back to the previous view by clicking on the Project tab just above the blue highlighted message. In the above image this tab is circled in red. After this, exit playmode by clicking on the blue play button at the top of the screen.</div>
-<div class="line"> </div>
-<div class="line">## Cases where the GraphGenerator fails</div>
-<div class="line"> </div>
-<div class="line">We&#39;ve covered situations where we know the GraphGenerator will generate a graph, however what about sitauations where </div>
-<div class="line"> </div>
-<div class="line">### Checking for success</div>
-<div class="line"> </div>
-<div class="line">Before interacting with the returned value, we need to check if the Graph Generator was able to generate a graph from our input. If the Graph Generator could not generate any connections from the start point, or the start point was not over any solid ground, the graph will fail to generate and the Graph Generator will return a null value. Let&#39;s add a null check just after the graph is generated.</div>
-<div class="line"> </div>
-<div class="line">``` C#</div>
-<div class="line">        // Check if the graph generator succeeded</div>
-<div class="line">        if (G is null) {</div>
-<div class="line">            Debug.Log(&quot;The Graph failed to generate.&quot;);</div>
-<div class="line">            return;</div>
-<div class="line">        }</div>
-</div><!-- fragment --><p><img src="../assets/walkthroughs/unity/3_graph_generator/checking_for_success.PNG" alt="Checking For Success" class="inline"/></p>
-<p>Now, if the graph fails to generate, Unity will print our nice error message and stop executing the script instead of later throwing a null reference exception when we try to interact with it. </p>
-<h1><a class="anchor" id="autotoc_md23"></a>
+<p><em>Figure</em> <b>3.5</b> <em>Highlighted Graph Output and how to switch back to the assets window</em></p>
+<p>Once the console tab is open, click on the message containing the graph generator's output, highlighted in blue in Figure 3.5, for a more detailed view. Like in Figure 3.5, the highlighted text should read:</p>
+<div class="fragment"><div class="line">[(0.000,0.000,0.000), (-1.000,-1.000,0.000), (-1.000,0.000,0.000), (-1.000,1.000,0.000), (0.000,-1.000,0.000), . . . (10.000,7.000,0.000), (10.000,8.000,0.000), (10.000,9.000,0.000), (10.000,10.000,0.000)]</div>
+</div><!-- fragment --><blockquote class="doxtable">
+<p><b>Note:</b> this is not the full list of nodes. The list has been truncated due to the size of the output. To view every node, you must print them in a loop. </p>
+</blockquote>
+<p>Confirm your results match, then switch back to the previous view by clicking on the Project tab circled in red in Figure 3.5. After that, exit playmode by clicking on the blue play button at the top of the screen. If you've reached this point, then you have successfully generated a Graph using Human Factors and have completed this part of the tutorial. Next we will cover cases where the graph generator will be unable to generate a graph, and how to handle if a graph could not be generated.</p>
+<h1><a class="anchor" id="autotoc_md24"></a>
+Handling cases where a Graph could not be generated</h1>
+<p>We've covered situations where we know the GraphGenerator will generate a graph, however it's important to know what happens in situations where it is unknown if a graph can be generated because we're taking user input, operating on a new model, or making changes to the geometry we're generating the graph on.</p>
+<p>A Graph can fail to generate if at least one of the two cases is true:</p>
+<ol type="1">
+<li>The initial ground check didn't intersect with any geometry, usually means the start point wasn't over the ground.</li>
+<li>The Graph Generator couldn't generate any nodes after the initial ground check. Some examples of this are.<ul>
+<li>The ground check was in a space too narrow to generate any extra nodes given the current spacing</li>
+<li>The start point was on a slope too steep for the upslope/downslope to traverse up or down.</li>
+<li>The start point is in a wall, making it impossible to generate any nodes around it.</li>
+</ul>
+</li>
+</ol>
+<p>This tutorial will cover safely handling cases where graphs could not be generated by checking the return value of the graph generator.</p>
+<h2><a class="anchor" id="autotoc_md25"></a>
+Checking for success</h2>
+<p>If the Graph Generator failed due to one of the two cases listed above, a null value will be returned instead of a graph. To catch when this happens, let's add a null check just after the graph is generated on <em>Line 41</em>.</p>
+<div class="fragment"><div class="line"><span class="comment">// Check if the graph generator succeeded</span></div>
+<div class="line"><span class="keywordflow">if</span> (G is <span class="keyword">null</span>) {</div>
+<div class="line">    Debug.Log(<span class="stringliteral">&quot;The Graph failed to generate.&quot;</span>);</div>
+<div class="line">    <span class="keywordflow">return</span>;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>Now, if the graph fails to generate, our code will print a clear error message and immediately stop executing the script. If we did not have this check and our graph did fail to generate, then we would get a confusing Null Reference Exception later when interacting with the graph. <br  />
+</p>
+<h2><a class="anchor" id="autotoc_md26"></a>
+Testing</h2>
+<p>To test that our null check is successful, we'll go to <em>line 34</em> and change our start point to be at (200, 0, 1) instead of (0,0,1): <code>Vector3D start_point = new Vector3D(200, 0, 1);</code> This is far, far beyond where our plane is and should result in case 1: the initial ground check failing to find any valid ground.</p>
+<p><a href="../assets/walkthroughs/unity/3_graph_generator/checking_for_success.PNG">Picture of the full Start() method for this test.</a></p>
+<p>Since the camera is already setup, all we need to do is enter playmode to test this. Make sure your code matches the picture, <b>save</b> the file, minimize Visual Studio, open the Unity editor, then press the play button.</p>
+<p><img src="../assets/walkthroughs/unity/3_graph_generator/failure.PNG" alt="Failure" class="inline"/></p>
+<p><em>Figure</em> <b>3.5</b> <em>Our error message printed after the graph failed to generate</em></p>
+<p>If you did this correctly, then the error message we wrote earlier should appear instead of the output from the previous section. If you received this result, then you now know how to handle cases where the graph generator could not generate a graph.</p>
+<h1><a class="anchor" id="autotoc_md27"></a>
 Conclusion</h1>
-<p>Here is a link the the full project created in this guide: <a href="../assets/walkthroughs/unity/3_graph_generator/Tutorial%203%20-%20Graph%20Generator.zip">Full Project</a></p>
-<p>In the next tutorial, Reading Meshes From Unity, we will use geometry from the unity scene to generate a graph, instead of generating our own plane. </p>
+<p>Here is a link the full project created in this guide: <a href="../assets/walkthroughs/unity/3_graph_generator/Tutorial%203%20-%20Graph%20Generator.zip">Full Project</a></p>
+<p>In this tutorial we successfully generated a graph from a bvh, start point, and spacing. We also handled a case where a graph was unable to be generated, and wrote a custom error message to be printed instead of throwing a null reference exception.</p>
+<p>In the next tutorial, Reading Meshes From Unity, we will use geometry from the Unity scene to generate a graph, instead of manually creatng our own plane. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- start footer part -->

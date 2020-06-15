@@ -130,9 +130,10 @@ All of that together is:
 
 ### Retrieving a list of nodes
 
-G now contains a graph of the accessible space on Plane using the settings we passed as arguments. To verify that our results are correct, we will get a list of nodes from the graph, then print them to the unity console.
+Our graph G now contains a graph of the accessible space on the plane generated using the settings we passed as arguments. To verify that our results are correct, we will get a list of nodes from the graph, then print them to the unity console.
 
-Enter the following code at the bottom of the start method.
+Enter the following code at the bottom of the start method:
+
 ```{.cs}
         // Get a list of nodes from the graph and print them.
         NodeList nodes = G.getNodes();
@@ -205,31 +206,31 @@ public class HFExampleScript : MonoBehaviour
 }
 ```
 
-Once you've confirmed that your script matches this code, save your script, minimize Visual Studio, then switch back to the Unity Editor.
+Once you've confirmed that your script matches this code, **save** your script, minimize Visual Studio, then switch back to the Unity Editor.
 
 ![Attach script and test](../assets/walkthroughs/unity/2_raycast_at_plane/drag_into_camera.png)
 
 *Figure* **3.3** *Dragging HFExampleScript onto the Main Camera as a component.*
 
-The process for testing this script is identical to the process in [The Raytracer Tutorial]{@ref UsingTheRaytracer}. Attach the script to the main camera, then press the play button and inspect your output.
+The process for testing this script is identical to the process in [The Raytracer Tutorial](@ref UsingTheRaytracer). Attach the script to the main camera, then press the play button and inspect your output.
 
 ![Switch To the Console](../assets/walkthroughs/unity/3_graph_generator/click_on_console.png)
 
 *Figure* **3.4** *How to view the Console Tab*
 
-Like in the previous tutorial, the output is at the bottom of the screen, but it doesn't fit in on one line, so it's cut off. To get a better view, click on the output itself, or click on the console tab circled in Figure 3.4 to view the console
+Like in the previous tutorial, the output is at the bottom of the screen, but it doesn't fit in on one line, so it's cut off. To get a better view, click on the output itself, or click on the console tab circled in Figure 3.4 to view the console. The console contains a history of outputs, as well as the option to click on any output message to get more information.
 
 ![View Console](../assets/walkthroughs/unity/3_graph_generator/console_view.png)
 
 *Figure* **3.5** *Highlighted Graph Output and how to switch back to the assets window*
 
-Once in the console window, click on the message containing our output, highlighted in blue in figure 3.5, for a closer look. Like in Figure 3.5, the highlighted text should read:
+Once the console tab is open, click on the message containing the graph generator's output, highlighted in blue in Figure 3.5, for a more detailed view. Like in Figure 3.5, the highlighted text should read:
 
 ```
 [(0.000,0.000,0.000), (-1.000,-1.000,0.000), (-1.000,0.000,0.000), (-1.000,1.000,0.000), (0.000,-1.000,0.000), . . . (10.000,7.000,0.000), (10.000,8.000,0.000), (10.000,9.000,0.000), (10.000,10.000,0.000)]
 ```
 
-> **Note:**  this is not the full list of nodes. The list has been truncated due to the size of the output. To view every node, we'll have to print them in a loop.
+> **Note:**  this is not the full list of nodes. The list has been truncated due to the size of the output. To view every node, you must print them in a loop.
 
 Confirm your results match, then switch back to the previous view by clicking on the Project tab circled in red in Figure 3.5. After that, exit playmode by clicking on the blue play button at the top of the screen. If you've reached this point, then you have successfully generated a Graph using Human Factors and have completed this part of the tutorial. Next we will cover cases where the graph generator will be unable to generate a graph, and how to handle if a graph could not be generated.
 
@@ -237,11 +238,10 @@ Confirm your results match, then switch back to the previous view by clicking on
 
 We've covered situations where we know the GraphGenerator will generate a graph, however it's important to know what happens in situations where it is unknown if a graph can be generated because we're taking user input, operating on a new model, or making changes to the geometry we're generating the graph on.
 
-
  A Graph can fail to generate if at least one of the two cases is true:
 
 1. The initial ground check didn't intersect with any geometry, usually means the start point wasn't over the ground.
-2. The graph couldn't generate any nodes after the initial ground check. Some examples of this are.
+2. The Graph Generator couldn't generate any nodes after the initial ground check. Some examples of this are.
    - The ground check was in a space too narrow to generate any extra nodes given the current spacing
    - The start point was on a slope too steep for the upslope/downslope to traverse up or down.
    - The start point is in a wall, making it impossible to generate any nodes around it.
@@ -264,15 +264,15 @@ Now, if the graph fails to generate,  our code will print a clear error message 
 
 ### Testing
 
-To test that our null check is successful, we'll go to line 34 and change our start point to be at (200, 0, 1) instead of (0,0,1): `Vector3D start_point = new Vector3D(200, 0, 1);` This is far, far beyond where our plane is and should result in case 1: the initial ground check failing to find any valid ground.
+To test that our null check is successful, we'll go to *line 34* and change our start point to be at (200, 0, 1) instead of (0,0,1): `Vector3D start_point = new Vector3D(200, 0, 1);` This is far, far beyond where our plane is and should result in case 1: the initial ground check failing to find any valid ground.
 
 [Picture of the full Start() method for this test.](../assets/walkthroughs/unity/3_graph_generator/checking_for_success.PNG)
 
-Since the camera is already setup all we need to do is enter playmode to test this. Make sure your code matches the picture, **save** the file, minimize Visual Studio, open the Unity editor, then press the play button. 
+Since the camera is already setup, all we need to do is enter playmode to test this. Make sure your code matches the picture, **save** the file, minimize Visual Studio, open the Unity editor, then press the play button.
 
 ![Failure](../assets/walkthroughs/unity/3_graph_generator/failure.PNG)
 
-*Figure* **3.5** *Error message printed after the graph failed to generate* 
+*Figure* **3.5** *Our error message printed after the graph failed to generate*
 
 If you did this correctly, then the error message we wrote earlier should appear instead of the output from the previous section. If you received this result, then you now know how to handle cases where the graph generator could not generate a graph.
 
@@ -280,4 +280,6 @@ If you did this correctly, then the error message we wrote earlier should appear
 
 Here is a link the full project created in this guide: [Full Project](../assets/walkthroughs/unity/3_graph_generator/Tutorial%203%20-%20Graph%20Generator.zip)
 
-In the next tutorial, [Reading Meshes From Unity](4_reading_a_mesh_from_unity.md), we will use geometry from the unity scene to generate a graph, instead of generating our own plane. 
+In this tutorial we successfully generated a graph from a bvh, start point, and spacing. We also handled a case where a graph was unable to be generated, and wrote a custom error message to be printed instead of throwing a null reference exception.
+
+In the next tutorial, [Reading Meshes From Unity](4_reading_a_mesh_from_unity.md), we will use geometry from the Unity scene to generate a graph, instead of manually creatng our own plane.

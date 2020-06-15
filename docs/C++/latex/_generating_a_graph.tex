@@ -10,76 +10,94 @@ Previous Tutorial\+: \mbox{\hyperlink{_unity_project_setup}{Project Setup}} $\ve
 \end{DoxyItemize}
 \item \href{\#simple-graph-generation}{\texttt{ Simple Graph Generation}}
 \begin{DoxyItemize}
+\item \href{\#using-declarations}{\texttt{ Using Declarations}}
 \item \href{\#creating-the-plane}{\texttt{ Creating the Plane}}
 \item \href{\#generating-the-graph}{\texttt{ Generating the Graph}}
-\item \href{\#retrieving-a-list-of-nodes}{\texttt{ Retrieving A list of nodes}}
+\item \href{\#retrieving-a-list-of-nodes}{\texttt{ Retrieving a list of nodes}}
 \item \href{\#save-and-test}{\texttt{ Save and Test}}
 \end{DoxyItemize}
-\item \href{\#cases-where-the-graphgenerator-fails}{\texttt{ Cases where the Graph\+Generator fails}}
+\item \href{\#handling-cases-where-a-graph-could-not-be-generated}{\texttt{ Handling cases where a Graph could not be generated}}
 \begin{DoxyItemize}
 \item \href{\#checking-for-success}{\texttt{ Checking for success}}
+\item \href{\#testing}{\texttt{ Testing}}
 \end{DoxyItemize}
 \item \href{\#conclusion}{\texttt{ Conclusion}}
 \end{DoxyItemize}
 \end{DoxyItemize}\hypertarget{_generating_a_graph_autotoc_md16}{}\doxysection{Intro}\label{_generating_a_graph_autotoc_md16}
-This tutorial picks up from where H\+:/\+H\+F\+Gitlab/\+Analysis/docs/C\# Documentation/markdown/1\+\_\+unity\+\_\+project\+\_\+setup.\+md \char`\"{}\+Tutorial 1\+: Unity Project Setup\char`\"{} ended. If you are just beginning here, then you can download the Unity project from the bottom of tutorial 1.
+This tutorial picks up from where \mbox{\hyperlink{_unity_project_setup}{Tutorial 1\+: Unity Project Setup}} ended. If you are just beginning here, then you can download the Unity project from the bottom of tutorial 1.
 
 In this tutorial we will cover the following\+:
 
-1) Calling the Graph\+Generator with a bvh, spacing, and a start point. 2) Reading nodes from a graph after it has been generated. 3) Handling cases where the Graph\+Generator could not generate a graph.\hypertarget{_generating_a_graph_autotoc_md17}{}\doxysubsection{Conceptual Overview}\label{_generating_a_graph_autotoc_md17}
-To put it simply, the {\bfseries{Graph Generator}} maps out \char`\"{}accessible\char`\"{} space on a model from a given starting point. As the name implies, this map of the space is stored as a series of nodes and edges in a {\bfseries{Graph}}. Each node represents a point in space that a human can occupy, and each edge between nodes indicates that a human can traverse from one node to another node. The Graph Generator is a powerful tool for analyzing space, since the graph or nodes it outputs can be used as input to all of the analysis methods offered by Human\+Factors. This allows the user to go straight from modifying a model or scene, to analyzing it with minimal effort.\hypertarget{_generating_a_graph_autotoc_md18}{}\doxysection{Simple Graph Generation}\label{_generating_a_graph_autotoc_md18}
-For now, we will begin with the minimum required settings to run the Graph Generator then work our way up to examples that make use of the optional settings. To generate a graph at minimum, the following arguments are requried\+:
 
-1) A B\+VH containing the mesh you want to use for graph generation. 2) A point to start graph generation at. 3) The spacing between nodes.
+\begin{DoxyEnumerate}
+\item Calling the Graph\+Generator with a B\+VH, spacing, and a start point.
+\item Reading nodes from a graph after it has been generated.
+\item Handling cases where the Graph\+Generator could not generate a graph.
+\end{DoxyEnumerate}\hypertarget{_generating_a_graph_autotoc_md17}{}\doxysubsection{Conceptual Overview}\label{_generating_a_graph_autotoc_md17}
+To put it simply, the {\bfseries{Graph Generator}} maps out \char`\"{}accessible\char`\"{} space on a model from a given starting point. As the name implies, this map of the space is stored as a series of nodes and edges in a {\bfseries{Graph}}. Each node represents a point in space that a human can occupy, and each edge between nodes indicates that a human can traverse from one node to another node. The Graph Generator is a powerful tool for analyzing space, since the graph or nodes it outputs can be used as input to all the analysis methods offered by Human\+Factors. This allows the user to go straight from modifying a model or scene, to analyzing it with minimal effort.\hypertarget{_generating_a_graph_autotoc_md18}{}\doxysection{Simple Graph Generation}\label{_generating_a_graph_autotoc_md18}
+For now, we will begin with the minimum required settings to run the Graph Generator then work our way up to examples that make use of the optional settings. To generate a graph at minimum, the following arguments are required\+:
 
-To get started, we will once again set up our using declarations to import the functionality we need.
+
+\begin{DoxyEnumerate}
+\item A B\+VH containing the mesh you want to use for graph generation.
+\item A point to start graph generation at.
+\item The spacing between nodes.
+\end{DoxyEnumerate}
+
+
+
+{\itshape Figure} {\bfseries{3.\+1}} {\itshape Blank H\+F\+Example\+Script.\+cs}
+
+To begin\+: open the blank H\+F\+Example Script that we created in the project setup by double clicking on it in the Unity editor if it isn\textquotesingle{}t open already.\hypertarget{_generating_a_graph_autotoc_md19}{}\doxysubsection{Using Declarations}\label{_generating_a_graph_autotoc_md19}
+
+
+{\itshape Figure} {\bfseries{3.\+2}} {\itshape Using declarations for this tutorial}
+
+To get started, we will once again set up our using declarations to import the functionality we need, starting on line 3 of our blank script.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{using HumanFactors;}
-\DoxyCodeLine{using HumanFactors.Geometry;}
-\DoxyCodeLine{using HumanFactors.SpatialStructures;}
-\DoxyCodeLine{using HumanFactors.GraphGenerator;}
-\DoxyCodeLine{using HumanFactors.RayTracing;}
+\DoxyCodeLine{\textcolor{keyword}{using} HumanFactors;}
+\DoxyCodeLine{\textcolor{keyword}{using} HumanFactors.Geometry;}
+\DoxyCodeLine{\textcolor{keyword}{using} HumanFactors.SpatialStructures;}
+\DoxyCodeLine{\textcolor{keyword}{using} HumanFactors.GraphGenerator;}
+\DoxyCodeLine{\textcolor{keyword}{using} HumanFactors.RayTracing;}
 \end{DoxyCode}
+\hypertarget{_generating_a_graph_autotoc_md20}{}\doxysubsection{Creating the Plane}\label{_generating_a_graph_autotoc_md20}
+Internally, the graph uses the {\itshape Embree\+Ray\+Tracer} which requires a B\+VH, so we can follow the process as the Project 2A to create a plane, then generate a B\+VH from it. If you want a more in-\/depth explanation of this code, please look at the previous tutorial if you want more information about this code.
 
-
-\hypertarget{_generating_a_graph_autotoc_md19}{}\doxysubsection{Creating the Plane}\label{_generating_a_graph_autotoc_md19}
-Internally, the graph uses the {\itshape Embree\+Ray\+Tracer} which requires a B\+VH, so we can follow the process as the Project 2A to create a plane, then generate a B\+VH from it.
-
-In the start function add the following code in the body of the Start function on line 13\+:
+Add the following code in the body of the Start method on line 13\+:
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{// Create the plane's vertex and index arrays}
-\DoxyCodeLine{float[] plane\_vertices = \{}
+\DoxyCodeLine{\textcolor{comment}{// Create the plane's vertex and index arrays}}
+\DoxyCodeLine{\textcolor{keywordtype}{float}[] plane\_vertices = \{}
 \DoxyCodeLine{    -\/10f, 10f, 0f,}
 \DoxyCodeLine{    -\/10f, -\/10f, 0f,}
 \DoxyCodeLine{     10f, 10f, 0f,}
 \DoxyCodeLine{     10f, -\/10f, 0f}
 \DoxyCodeLine{\};}
-\DoxyCodeLine{int[] plane\_indices = \{}
+\DoxyCodeLine{\textcolor{keywordtype}{int}[] plane\_indices = \{}
 \DoxyCodeLine{   3, 1, 0,}
 \DoxyCodeLine{   2, 3, 0}
 \DoxyCodeLine{\};}
 \DoxyCodeLine{}
-\DoxyCodeLine{// Send them to HumanFactors}
-\DoxyCodeLine{MeshInfo Plane = new MeshInfo(plane\_indices, plane\_vertices);}
+\DoxyCodeLine{\textcolor{comment}{// Send them to HumanFactors}}
+\DoxyCodeLine{MeshInfo Plane = \textcolor{keyword}{new} MeshInfo(plane\_indices, plane\_vertices);}
 \DoxyCodeLine{}
-\DoxyCodeLine{// Generate a BVH for the RayTracer}
-\DoxyCodeLine{EmbreeBVH bvh = new EmbreeBVH(Plane);}
+\DoxyCodeLine{\textcolor{comment}{// Generate a BVH for the RayTracer}}
+\DoxyCodeLine{EmbreeBVH bvh = \textcolor{keyword}{new} EmbreeBVH(Plane);}
 \end{DoxyCode}
 
 
-\hypertarget{_generating_a_graph_autotoc_md20}{}\doxysubsection{Generating the Graph}\label{_generating_a_graph_autotoc_md20}
-Now that we have a B\+VH, let\textquotesingle{}s generate a graph on it. In the code below, we define a starting point for the graph, then we define the spacing between each node.
+\href{../assets/walkthroughs/unity/3_graph_generator/creating_the_plane.PNG}{\texttt{ Picture of the start method at this point}}\hypertarget{_generating_a_graph_autotoc_md21}{}\doxysubsection{Generating the Graph}\label{_generating_a_graph_autotoc_md21}
+Now that we have a B\+VH, let\textquotesingle{}s generate a graph on it. In the code below, we will define a starting point for the graph, then the spacing between each node.
 
-We\textquotesingle{}ll place our start point 1 meter above the origin of the scene (0,0,1). Starting directly at the origin, (0,0,0), would put the start point inside of the plane we\textquotesingle{}re using for the ground, causing the initial ground check to fail.
+We\textquotesingle{}ll place our start point 1 meter above the origin of the scene (0,0,1). Starting directly at the origin, (0,0,0), would put the start point inside of the plane we\textquotesingle{}re using for the ground causing the initial ground check to fail.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\{C\#\}}
-\DoxyCodeLine{       Vector3D start\_point = new Vector3D(0, 0, 1);}
+\DoxyCodeLine{Vector3D start\_point = \textcolor{keyword}{new} Vector3D(0, 0, 1);}
 \end{DoxyCode}
 
 
@@ -87,86 +105,103 @@ We\textquotesingle{}ll use a spacing of one meter in each direction, so each nod
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{Vector3D start\_point = new Vector3D(0, 0, 1);}
+\DoxyCodeLine{Vector3D spacing = \textcolor{keyword}{new} Vector3D(1, 1, 1);}
 \end{DoxyCode}
 
 
-Finally we will call the Graph\+Generator with these arguments.
+Finally, we will call the Graph\+Generator with these arguments.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\{C\#\}}
-\DoxyCodeLine{       // Generate the Graph}
-\DoxyCodeLine{       Graph G = GraphGenerator.GenerateGraph(bvh, start\_point, spacing);}
+\DoxyCodeLine{\textcolor{comment}{// Generate the Graph}}
+\DoxyCodeLine{Graph G = GraphGenerator.GenerateGraph(bvh, start\_point, spacing);}
 \end{DoxyCode}
 
 
-\hypertarget{_generating_a_graph_autotoc_md21}{}\doxysubsection{Retrieving A list of nodes}\label{_generating_a_graph_autotoc_md21}
-G now contains a graph of the accessible space on Plane using our settings. For this tutorial we will get a list of all nodes within the graph, and print them to get an idea of where this graph traversed.
+All of that together is\+:
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{// Get a list of nodes from the graph and print them.}
+\DoxyCodeLine{\textcolor{comment}{// Set Start Point and Spacing}}
+\DoxyCodeLine{Vector3D start\_point = \textcolor{keyword}{new} Vector3D(0, 0, 1);}
+\DoxyCodeLine{Vector3D spacing = \textcolor{keyword}{new} Vector3D(1, 1, 1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Generate the graph}}
+\DoxyCodeLine{Graph G = GraphGenerator.GenerateGraph(bvh, start\_point, spacing);}
+\end{DoxyCode}
+
+
+\href{../assets/walkthroughs/unity/3_graph_generator/generating_the_graph.PNG}{\texttt{ Picture of entire Start method until this point.}}\hypertarget{_generating_a_graph_autotoc_md22}{}\doxysubsection{Retrieving a list of nodes}\label{_generating_a_graph_autotoc_md22}
+Our graph G now contains a graph of the accessible space on the plane generated using the settings we passed as arguments. To verify that our results are correct, we will get a list of nodes from the graph, then print them to the unity console.
+
+Enter the following code at the bottom of the start method\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Get a list of nodes from the graph and print them.}}
 \DoxyCodeLine{NodeList nodes = G.getNodes();}
 \DoxyCodeLine{Debug.Log(nodes);}
 \end{DoxyCode}
 
 
-\hypertarget{_generating_a_graph_autotoc_md22}{}\doxysubsection{Save and Test}\label{_generating_a_graph_autotoc_md22}
+\href{../assets/walkthroughs/unity/3_graph_generator/print_nodes.png}{\texttt{ Picture of entire Start method Until this Point}}\hypertarget{_generating_a_graph_autotoc_md23}{}\doxysubsection{Save and Test}\label{_generating_a_graph_autotoc_md23}
 Here is the full script we\textquotesingle{}ve created from this demo. Make sure yours matches it before moving on to testing.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{using System.Collections;}
-\DoxyCodeLine{using System.Collections.Generic;}
-\DoxyCodeLine{using UnityEngine;}
-\DoxyCodeLine{using HumanFactors;}
-\DoxyCodeLine{using HumanFactors.SpatialStructures;}
-\DoxyCodeLine{using HumanFactors.GraphGenerator;}
-\DoxyCodeLine{using HumanFactors.RayTracing;}
-\DoxyCodeLine{using HumanFactors.Geometry;}
+\DoxyCodeLine{\textcolor{keyword}{using} System.Collections;}
+\DoxyCodeLine{\textcolor{keyword}{using} System.Collections.Generic;}
+\DoxyCodeLine{\textcolor{keyword}{using} UnityEngine;}
+\DoxyCodeLine{\textcolor{keyword}{using} HumanFactors;}
+\DoxyCodeLine{\textcolor{keyword}{using} HumanFactors.SpatialStructures;}
+\DoxyCodeLine{\textcolor{keyword}{using} HumanFactors.GraphGenerator;}
+\DoxyCodeLine{\textcolor{keyword}{using} HumanFactors.RayTracing;}
+\DoxyCodeLine{\textcolor{keyword}{using} HumanFactors.Geometry;}
 \DoxyCodeLine{}
-\DoxyCodeLine{public class NewBehaviourScript : MonoBehaviour}
+\DoxyCodeLine{\textcolor{keyword}{public} \textcolor{keyword}{class }HFExampleScript : MonoBehaviour}
 \DoxyCodeLine{\{}
-\DoxyCodeLine{    // Start is called before the first frame update}
-\DoxyCodeLine{    void Start()}
+\DoxyCodeLine{    \textcolor{comment}{// Start is called before the first frame update}}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} Start()}
 \DoxyCodeLine{    \{}
-\DoxyCodeLine{        // Create an array of a plane's vertices and indices}
-\DoxyCodeLine{        float[] plane\_vertices = \{}
+\DoxyCodeLine{        \textcolor{comment}{// Create an array of a plane's vertices and indices}}
+\DoxyCodeLine{        \textcolor{keywordtype}{float}[] plane\_vertices = \{}
 \DoxyCodeLine{            -\/10f, 10f, 0f,}
 \DoxyCodeLine{            -\/10f, -\/10f, 0f,}
 \DoxyCodeLine{             10f, 10f, 0f,}
 \DoxyCodeLine{             10f, -\/10f, 0f}
 \DoxyCodeLine{        \};}
-\DoxyCodeLine{        int[] plane\_indices = \{ 3, 1, 0, 2, 3, 0 \};}
+\DoxyCodeLine{        \textcolor{keywordtype}{int}[] plane\_indices = \{ }
+\DoxyCodeLine{                3, 1, 0,}
+\DoxyCodeLine{                2, 3, 0 }
+\DoxyCodeLine{        \};}
 \DoxyCodeLine{}
-\DoxyCodeLine{        // Send them to HumanFactors}
-\DoxyCodeLine{        MeshInfo Plane = new MeshInfo(plane\_indices, plane\_vertices);}
+\DoxyCodeLine{        \textcolor{comment}{// Send them to HumanFactors}}
+\DoxyCodeLine{        MeshInfo Plane = \textcolor{keyword}{new} MeshInfo(plane\_indices, plane\_vertices);}
 \DoxyCodeLine{}
-\DoxyCodeLine{        // Generate a BVH for the RayTracer}
-\DoxyCodeLine{        EmbreeBVH bvh = new EmbreeBVH(Plane);}
+\DoxyCodeLine{        \textcolor{comment}{// Generate a BVH for the RayTracer}}
+\DoxyCodeLine{        EmbreeBVH bvh = \textcolor{keyword}{new} EmbreeBVH(Plane);}
 \DoxyCodeLine{}
-\DoxyCodeLine{        // Set Options for the Graph Generator}
-\DoxyCodeLine{        Vector3D start\_point = new Vector3D(0, 0, 1); // The point to start graph generation}
-\DoxyCodeLine{        Vector3D spacing = new Vector3D(1, 1, 1); // The spacing between each node}
+\DoxyCodeLine{        \textcolor{comment}{// Set Options for the Graph Generator}}
+\DoxyCodeLine{        Vector3D start\_point = \textcolor{keyword}{new} Vector3D(0, 0, 1); \textcolor{comment}{// The point to start graph generation}}
+\DoxyCodeLine{        Vector3D spacing = \textcolor{keyword}{new} Vector3D(1, 1, 1); \textcolor{comment}{// The spacing between each node}}
 \DoxyCodeLine{}
-\DoxyCodeLine{        // Generate the Graph}
+\DoxyCodeLine{        \textcolor{comment}{// Generate the Graph}}
 \DoxyCodeLine{        Graph G = GraphGenerator.GenerateGraph(bvh, start\_point, spacing);}
 \DoxyCodeLine{}
-\DoxyCodeLine{        // Check if the graph generator succeeded}
-\DoxyCodeLine{        if (G is null)}
+\DoxyCodeLine{        \textcolor{comment}{// Check if the graph generator succeeded}}
+\DoxyCodeLine{        \textcolor{keywordflow}{if} (G is \textcolor{keyword}{null})}
 \DoxyCodeLine{        \{}
-\DoxyCodeLine{            Debug.Log("The Graph failed to generate.");}
-\DoxyCodeLine{            return;}
+\DoxyCodeLine{            Debug.Log(\textcolor{stringliteral}{"The Graph failed to generate."});}
+\DoxyCodeLine{            \textcolor{keywordflow}{return};}
 \DoxyCodeLine{        \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{        // Get a list of nodes from the graph and print them.}
+\DoxyCodeLine{        \textcolor{comment}{// Get a list of nodes from the graph and print them.}}
 \DoxyCodeLine{        NodeList nodes = G.getNodes();}
 \DoxyCodeLine{        Debug.Log(nodes);}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    // Update is called once per frame}
-\DoxyCodeLine{    void Update()}
+\DoxyCodeLine{    \textcolor{comment}{// Update is called once per frame}}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} Update()}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \}}
@@ -174,42 +209,80 @@ Here is the full script we\textquotesingle{}ve created from this demo. Make sure
 \end{DoxyCode}
 
 
-Save your script, minimize Visual Studio, then switch back to the Unity Editor. The process for testing this script is identical to the process in the previous tutorial. Attach the script to the main camera, then press the play button and inspect your output.
+Once you\textquotesingle{}ve confirmed that your script matches this code, {\bfseries{save}} your script, minimize Visual Studio, then switch back to the Unity Editor.
 
 
 
-Like in the previous tutorial, the output is at the bottom of the screen but it\textquotesingle{}s cut off. To get a better view, click on the output to switch over to the console tab, then click on the message containing our output highlighted in blue for a closer look.
+{\itshape Figure} {\bfseries{3.\+3}} {\itshape Dragging H\+F\+Example\+Script onto the Main Camera as a component.}
+
+The process for testing this script is identical to the process in \mbox{\hyperlink{_using_the_raytracer}{The Raytracer Tutorial}}. Attach the script to the main camera, then press the play button and inspect your output.
 
 
 
-The highlighted text should read\+:
+{\itshape Figure} {\bfseries{3.\+4}} {\itshape How to view the Console Tab}
+
+Like in the previous tutorial, the output is at the bottom of the screen, but it doesn\textquotesingle{}t fit in on one line, so it\textquotesingle{}s cut off. To get a better view, click on the output itself, or click on the console tab circled in Figure 3.\+4 to view the console. The console contains a history of outputs, as well as the option to click on any output message to get more information.
+
+
+
+{\itshape Figure} {\bfseries{3.\+5}} {\itshape Highlighted Graph Output and how to switch back to the assets window}
+
+Once the console tab is open, click on the message containing the graph generator\textquotesingle{}s output, highlighted in blue in Figure 3.\+5, for a more detailed view. Like in Figure 3.\+5, the highlighted text should read\+:
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{> **Note:**  this is not the full list of nodes. The list has been truncated due to the size of the output. In order to view every node we'll have to print them in a loop.}
-\DoxyCodeLine{}
-\DoxyCodeLine{Switch back to the previous view by clicking on the Project tab just above the blue highlighted message. In the above image this tab is circled in red. After this, exit playmode by clicking on the blue play button at the top of the screen.}
-\DoxyCodeLine{}
-\DoxyCodeLine{\#\# Cases where the GraphGenerator fails}
-\DoxyCodeLine{}
-\DoxyCodeLine{We've covered situations where we know the GraphGenerator will generate a graph, however what about sitauations where }
-\DoxyCodeLine{}
-\DoxyCodeLine{\#\#\# Checking for success}
-\DoxyCodeLine{}
-\DoxyCodeLine{Before interacting with the returned value, we need to check if the Graph Generator was able to generate a graph from our input. If the Graph Generator could not generate any connections from the start point, or the start point was not over any solid ground, the graph will fail to generate and the Graph Generator will return a null value. Let's add a null check just after the graph is generated.}
-\DoxyCodeLine{}
-\DoxyCodeLine{``` C\#}
-\DoxyCodeLine{        // Check if the graph generator succeeded}
-\DoxyCodeLine{        if (G is null) \{}
-\DoxyCodeLine{            Debug.Log("The Graph failed to generate.");}
-\DoxyCodeLine{            return;}
-\DoxyCodeLine{        \}}
+\DoxyCodeLine{[(0.000,0.000,0.000), (-\/1.000,-\/1.000,0.000), (-\/1.000,0.000,0.000), (-\/1.000,1.000,0.000), (0.000,-\/1.000,0.000), . . . (10.000,7.000,0.000), (10.000,8.000,0.000), (10.000,9.000,0.000), (10.000,10.000,0.000)]}
 \end{DoxyCode}
 
 
+\begin{quote}
+{\bfseries{Note\+:}} this is not the full list of nodes. The list has been truncated due to the size of the output. To view every node, you must print them in a loop. \end{quote}
 
 
-Now, if the graph fails to generate, Unity will print our nice error message and stop executing the script instead of later throwing a null reference exception when we try to interact with it. \hypertarget{_generating_a_graph_autotoc_md23}{}\doxysection{Conclusion}\label{_generating_a_graph_autotoc_md23}
-Here is a link the the full project created in this guide\+: \href{../assets/walkthroughs/unity/3_graph_generator/Tutorial\%203\%20-\%20Graph\%20Generator.zip}{\texttt{ Full Project}}
+Confirm your results match, then switch back to the previous view by clicking on the Project tab circled in red in Figure 3.\+5. After that, exit playmode by clicking on the blue play button at the top of the screen. If you\textquotesingle{}ve reached this point, then you have successfully generated a Graph using Human Factors and have completed this part of the tutorial. Next we will cover cases where the graph generator will be unable to generate a graph, and how to handle if a graph could not be generated.\hypertarget{_generating_a_graph_autotoc_md24}{}\doxysection{Handling cases where a Graph could not be generated}\label{_generating_a_graph_autotoc_md24}
+We\textquotesingle{}ve covered situations where we know the Graph\+Generator will generate a graph, however it\textquotesingle{}s important to know what happens in situations where it is unknown if a graph can be generated because we\textquotesingle{}re taking user input, operating on a new model, or making changes to the geometry we\textquotesingle{}re generating the graph on.
 
-In the next tutorial, Reading Meshes From Unity, we will use geometry from the unity scene to generate a graph, instead of generating our own plane. 
+A Graph can fail to generate if at least one of the two cases is true\+:
+
+
+\begin{DoxyEnumerate}
+\item The initial ground check didn\textquotesingle{}t intersect with any geometry, usually means the start point wasn\textquotesingle{}t over the ground.
+\item The Graph Generator couldn\textquotesingle{}t generate any nodes after the initial ground check. Some examples of this are.
+\begin{DoxyItemize}
+\item The ground check was in a space too narrow to generate any extra nodes given the current spacing
+\item The start point was on a slope too steep for the upslope/downslope to traverse up or down.
+\item The start point is in a wall, making it impossible to generate any nodes around it.
+\end{DoxyItemize}
+\end{DoxyEnumerate}
+
+This tutorial will cover safely handling cases where graphs could not be generated by checking the return value of the graph generator.\hypertarget{_generating_a_graph_autotoc_md25}{}\doxysubsection{Checking for success}\label{_generating_a_graph_autotoc_md25}
+If the Graph Generator failed due to one of the two cases listed above, a null value will be returned instead of a graph. To catch when this happens, let\textquotesingle{}s add a null check just after the graph is generated on {\itshape Line 41}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Check if the graph generator succeeded}}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (G is \textcolor{keyword}{null}) \{}
+\DoxyCodeLine{    Debug.Log(\textcolor{stringliteral}{"The Graph failed to generate."});}
+\DoxyCodeLine{    \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+Now, if the graph fails to generate, our code will print a clear error message and immediately stop executing the script. If we did not have this check and our graph did fail to generate, then we would get a confusing Null Reference Exception later when interacting with the graph. ~\newline
+\hypertarget{_generating_a_graph_autotoc_md26}{}\doxysubsection{Testing}\label{_generating_a_graph_autotoc_md26}
+To test that our null check is successful, we\textquotesingle{}ll go to {\itshape line 34} and change our start point to be at (200, 0, 1) instead of (0,0,1)\+: {\ttfamily Vector3D start\+\_\+point = new Vector3\+D(200, 0, 1);} This is far, far beyond where our plane is and should result in case 1\+: the initial ground check failing to find any valid ground.
+
+\href{../assets/walkthroughs/unity/3_graph_generator/checking_for_success.PNG}{\texttt{ Picture of the full Start() method for this test.}}
+
+Since the camera is already setup, all we need to do is enter playmode to test this. Make sure your code matches the picture, {\bfseries{save}} the file, minimize Visual Studio, open the Unity editor, then press the play button.
+
+
+
+{\itshape Figure} {\bfseries{3.\+5}} {\itshape Our error message printed after the graph failed to generate}
+
+If you did this correctly, then the error message we wrote earlier should appear instead of the output from the previous section. If you received this result, then you now know how to handle cases where the graph generator could not generate a graph.\hypertarget{_generating_a_graph_autotoc_md27}{}\doxysection{Conclusion}\label{_generating_a_graph_autotoc_md27}
+Here is a link the full project created in this guide\+: \href{../assets/walkthroughs/unity/3_graph_generator/Tutorial\%203\%20-\%20Graph\%20Generator.zip}{\texttt{ Full Project}}
+
+In this tutorial we successfully generated a graph from a bvh, start point, and spacing. We also handled a case where a graph was unable to be generated, and wrote a custom error message to be printed instead of throwing a null reference exception.
+
+In the next tutorial, Reading Meshes From Unity, we will use geometry from the Unity scene to generate a graph, instead of manually creatng our own plane. 

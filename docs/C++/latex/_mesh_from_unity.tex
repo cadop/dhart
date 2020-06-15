@@ -27,20 +27,20 @@ Previous Tutorial\+: \mbox{\hyperlink{_generating_a_graph}{The Graph Generator}}
 \item \href{\#comparing-output}{\texttt{ Comparing Output}}
 \end{DoxyItemize}
 \end{DoxyItemize}
-\end{DoxyItemize}\hypertarget{_mesh_from_unity_autotoc_md24}{}\doxysection{Intro}\label{_mesh_from_unity_autotoc_md24}
-This tutorial will demonstrate how to pass geometry from the scene in Unity to Human Factors. We\textquotesingle{}ll be using the project created in the previous guide\+: H\+:/\+H\+F\+Gitlab/\+Analysis/docs/C\# Documentation/markdown/3\+\_\+graph\+\_\+generator.\+md \char`\"{}\+The Graph Generator\char`\"{}, and we\textquotesingle{}ll be using concepts covered in the previous guides.\hypertarget{_mesh_from_unity_autotoc_md25}{}\doxysection{Scene Setup}\label{_mesh_from_unity_autotoc_md25}
+\end{DoxyItemize}\hypertarget{_mesh_from_unity_autotoc_md28}{}\doxysection{Intro}\label{_mesh_from_unity_autotoc_md28}
+This tutorial will demonstrate how to pass geometry from the scene in Unity to Human Factors. We\textquotesingle{}ll be using the project created in the previous guide\+: H\+:/\+H\+F\+Gitlab/\+Analysis/docs/C\# Documentation/markdown/3\+\_\+graph\+\_\+generator.\+md \char`\"{}\+The Graph Generator\char`\"{}, and we\textquotesingle{}ll be using concepts covered in the previous guides.\hypertarget{_mesh_from_unity_autotoc_md29}{}\doxysection{Scene Setup}\label{_mesh_from_unity_autotoc_md29}
 Up until this point, we haven\textquotesingle{}t needed to interact with the unity scene, aside script to the camera game object that\textquotesingle{}s already there. In order for us to demonstrate reading geometry from the scene, we must first create geometry in the scene. For this example, we will create a plane in unity instead of creating our own plane in code.
 
 To begin, open up the unity project from H\+:/\+H\+F\+Gitlab/\+Analysis/docs/C\# Documentation/markdown/3\+\_\+graph\+\_\+generator.\+md \char`\"{}\+The Graph Generator\char`\"{}.
 
 
 
-From here we will create a new plane then translate it directly to the origin.\hypertarget{_mesh_from_unity_autotoc_md26}{}\doxysubsection{Creating the Plane}\label{_mesh_from_unity_autotoc_md26}
+From here we will create a new plane then translate it directly to the origin.\hypertarget{_mesh_from_unity_autotoc_md30}{}\doxysubsection{Creating the Plane}\label{_mesh_from_unity_autotoc_md30}
 Using the menubar at the top of the screen select Game\+Object $>$ 3D Object $>$ Plane.
 
 
 
-Once clicked, a new 1x1 plane will be created, however it may not have been created at the origin exactly. For this tutorial we will reset the plane\textquotesingle{}s position just be be sure it\textquotesingle{}s always placed exactly in the same place.\hypertarget{_mesh_from_unity_autotoc_md27}{}\doxysubsection{Resetting the Plane\textquotesingle{}s Position}\label{_mesh_from_unity_autotoc_md27}
+Once clicked, a new 1x1 plane will be created, however it may not have been created at the origin exactly. For this tutorial we will reset the plane\textquotesingle{}s position just be be sure it\textquotesingle{}s always placed exactly in the same place.\hypertarget{_mesh_from_unity_autotoc_md31}{}\doxysubsection{Resetting the Plane\textquotesingle{}s Position}\label{_mesh_from_unity_autotoc_md31}
 Left Click on the newly created plane and look at {\bfseries{Transform}} header in the Inspector located at the right sidebar.
 
 
@@ -53,8 +53,8 @@ After clicking that button, your plane should be moved to the origin like in the
 
 
 
-Now that we have the plane ready to go, we can begin working on the script to get its vertices and triangles.\hypertarget{_mesh_from_unity_autotoc_md28}{}\doxysection{Writing the Script}\label{_mesh_from_unity_autotoc_md28}
-Open up the New Behavior script we created in the H\+:/\+H\+F\+Gitlab/\+Analysis/docs/C\# Documentation/markdown/3\+\_\+graph\+\_\+generator.\+md \char`\"{}previous tutorial\char`\"{}\hypertarget{_mesh_from_unity_autotoc_md29}{}\doxysubsection{Set Usings}\label{_mesh_from_unity_autotoc_md29}
+Now that we have the plane ready to go, we can begin working on the script to get its vertices and triangles.\hypertarget{_mesh_from_unity_autotoc_md32}{}\doxysection{Writing the Script}\label{_mesh_from_unity_autotoc_md32}
+Open up the New Behavior script we created in the H\+:/\+H\+F\+Gitlab/\+Analysis/docs/C\# Documentation/markdown/3\+\_\+graph\+\_\+generator.\+md \char`\"{}previous tutorial\char`\"{}\hypertarget{_mesh_from_unity_autotoc_md33}{}\doxysubsection{Set Usings}\label{_mesh_from_unity_autotoc_md33}
 Just like last time, we\textquotesingle{}re going to declare which namespaces this script will use in the using section. Graph\+On\+Plane will require the same usings as the previous project as well as the Graph Generator Namespace
 
 
@@ -68,7 +68,7 @@ Just like last time, we\textquotesingle{}re going to declare which namespaces th
 
 Your usings for this script should look like this.
 
-\hypertarget{_mesh_from_unity_autotoc_md30}{}\doxysubsection{Setup for adding references through the unity inspector}\label{_mesh_from_unity_autotoc_md30}
+\hypertarget{_mesh_from_unity_autotoc_md34}{}\doxysubsection{Setup for adding references through the unity inspector}\label{_mesh_from_unity_autotoc_md34}
 Before we can worry about generating the graph, first we need to get the mesh from the Plane Gameobject we created in the Unity Editor. There are many ways to reference a Game\+Object from a script code, but for this example we\textquotesingle{}ll be setting up our script so we can select the mesh to use from the scene in the Unity Inspector. For now, all we need to do is declare a Game\+Object member for our new class as shown below.
 
 
@@ -79,8 +79,8 @@ Before we can worry about generating the graph, first we need to get the mesh fr
 
 
 
-Later we\textquotesingle{}ll use the unity inspector to assign the plane we created in the scene to this object\hypertarget{_mesh_from_unity_autotoc_md31}{}\doxysubsection{Passing Meshes from Game\+Objects to Human\+Factors}\label{_mesh_from_unity_autotoc_md31}
-Now that we have a reference to the plane game object we want to use, we need to get the raw vertices and faces of plane so we can pass it to Human\+Factors for use in the graph generator.\hypertarget{_mesh_from_unity_autotoc_md32}{}\doxysubsubsection{Getting a reference to the mesh held by a specific Game Object}\label{_mesh_from_unity_autotoc_md32}
+Later we\textquotesingle{}ll use the unity inspector to assign the plane we created in the scene to this object\hypertarget{_mesh_from_unity_autotoc_md35}{}\doxysubsection{Passing Meshes from Game\+Objects to Human\+Factors}\label{_mesh_from_unity_autotoc_md35}
+Now that we have a reference to the plane game object we want to use, we need to get the raw vertices and faces of plane so we can pass it to Human\+Factors for use in the graph generator.\hypertarget{_mesh_from_unity_autotoc_md36}{}\doxysubsubsection{Getting a reference to the mesh held by a specific Game Object}\label{_mesh_from_unity_autotoc_md36}
 Before we can extract the triangles and vertices from one an instance of a Unity Mesh, we first need to get a reference to the Mesh itself. Doing this requires some understanding of Unity Game\+Objects and their components. Tabbing back over to Unity for a moment, clicking on the plane, then looking at the inspector in the right reveals that the plane we see in the scene isn\textquotesingle{}t just a mesh, but is in fact a \href{https://docs.unity3d.com/Manual/class-GameObject.html}{\texttt{ {\bfseries{Game\+Object}}}} comprised of several different components.
 
 
@@ -108,7 +108,7 @@ Then we\textquotesingle{}ll access the actual mesh carried by {\ttfamily Filter}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Mesh PlaneMesh = Filter.mesh;}
 \end{DoxyCode}
-\hypertarget{_mesh_from_unity_autotoc_md33}{}\doxysubsubsection{Getting the vertices and triangles from a Unity Mesh}\label{_mesh_from_unity_autotoc_md33}
+\hypertarget{_mesh_from_unity_autotoc_md37}{}\doxysubsubsection{Getting the vertices and triangles from a Unity Mesh}\label{_mesh_from_unity_autotoc_md37}
 We\textquotesingle{}re not out of the woods yet. For Human Factors to use a mesh it needs two things\+:
 
 1) The (x,y,z) location of every vertex that comprises the mesh as an array of floats. 2) The Indexes for each triangle or \char`\"{}\+Face\char`\"{} of the mesh as an array of integers.
@@ -135,7 +135,7 @@ Just above Start(), add the following Method\+:
 \end{DoxyCode}
 
 
-\hypertarget{_mesh_from_unity_autotoc_md34}{}\doxysubsubsection{Transforming the Mesh from Y-\/\+Up to Z-\/\+Up}\label{_mesh_from_unity_autotoc_md34}
+\hypertarget{_mesh_from_unity_autotoc_md38}{}\doxysubsubsection{Transforming the Mesh from Y-\/\+Up to Z-\/\+Up}\label{_mesh_from_unity_autotoc_md38}
 But wait, there\textquotesingle{}s one more step involved when directly pulling meshes from Unity. Another quick peek at the editor in the top right corner reveals that Unity\textquotesingle{}s coordinate system is fundamentally different from the coordinate system needed by Human Factors.
 
  
@@ -163,6 +163,6 @@ Your end file should look like the following\+:
 
 
 
-screenshot, so instead I\textquotesingle{}ll just post the full code in this document here.\hypertarget{_mesh_from_unity_autotoc_md35}{}\doxysection{Executing the Script}\label{_mesh_from_unity_autotoc_md35}
-\hypertarget{_mesh_from_unity_autotoc_md36}{}\doxysubsection{Adding References Through the Unity Inspector}\label{_mesh_from_unity_autotoc_md36}
-\hypertarget{_mesh_from_unity_autotoc_md37}{}\doxysubsection{Comparing Output}\label{_mesh_from_unity_autotoc_md37}
+screenshot, so instead I\textquotesingle{}ll just post the full code in this document here.\hypertarget{_mesh_from_unity_autotoc_md39}{}\doxysection{Executing the Script}\label{_mesh_from_unity_autotoc_md39}
+\hypertarget{_mesh_from_unity_autotoc_md40}{}\doxysubsection{Adding References Through the Unity Inspector}\label{_mesh_from_unity_autotoc_md40}
+\hypertarget{_mesh_from_unity_autotoc_md41}{}\doxysubsection{Comparing Output}\label{_mesh_from_unity_autotoc_md41}
