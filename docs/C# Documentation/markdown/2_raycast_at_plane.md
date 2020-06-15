@@ -37,6 +37,8 @@ Now, let's begin writing our script.
 
 In the Visual Studio window we opened in the last tutorial, look at the contents of HFExampleScript.cs. The contents should match that of Figure 2.1. Once you're sure of this, it's time to start filling it in.
 
+>**NOTE**: Remember, if you ever exit out of Visual Studio, you can always reopen it by double clicking a script in the assets window.
+
 ### Using Declarations
 
 Before getting into the logic of the script itself, we will add using declarations for the namespaces in HumanFactors that we plan to reference.
