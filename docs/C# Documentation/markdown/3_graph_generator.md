@@ -9,6 +9,7 @@ Next Tutorial: [Passing a Mesh From Unity to HumanFactors](@ref MeshFromUnity)
   - [Intro](#intro)
     - [Conceptual Overview](#conceptual-overview)
   - [Simple Graph Generation](#simple-graph-generation)
+    - [Using Declarations](#using-declarations)
     - [Creating the Plane](#creating-the-plane)
     - [Generating the Graph](#generating-the-graph)
     - [Retrieving A list of nodes](#retrieving-a-list-of-nodes)
@@ -39,7 +40,20 @@ For now, we will begin with the minimum required settings to run the Graph Gener
 2. A point to start graph generation at.
 3. The spacing between nodes.
 
-To get started, we will once again set up our using declarations to import the functionality we need.
+
+![HFExampleScriptBlank](../assets/walkthroughs/unity/2_raycast_at_plane/blank_new_behaviour_script.png)
+
+*Figure* **3.1** *Blank HFExampleScript.cs*
+
+To begin: open up the blank HFExample Script that we created in the project setup by double clicking on it in the Unity editor if it isn't open already. 
+
+### Using Declarations
+
+![Using Declarations](../assets/walkthroughs/unity/3_graph_generator/using_declarations.png)
+
+*Figure* **3.2** *Using declarations for this tutorial*
+
+To get started, we will once again set up our using declarations to import the functionality we need, starting on line 3 of our blank script. 
 
 ```{.cs}
 using HumanFactors;
@@ -49,11 +63,9 @@ using HumanFactors.GraphGenerator;
 using HumanFactors.RayTracing;
 ```
 
-![Using Declarations](../assets/walkthroughs/unity/3_graph_generator/using_declarations.png)
-
 ### Creating the Plane
 
-Internally, the graph uses the *EmbreeRayTracer* which requires a BVH, so we can follow the process as the [Project 2A](@ref UsingTheRayTracer) to create a plane, then generate a BVH from it.
+Internally, the graph uses the *EmbreeRayTracer* which requires a BVH, so we can follow the process as the [Project 2A](@ref UsingTheRayTracer) to create a plane, then generate a BVH from it. If you want a more in depth explanation of this code, please look at the previous tutorial if you want more information about this code.
 
 Add the following code in the body of the Start function on line 13:
 
@@ -81,7 +93,7 @@ Add the following code in the body of the Start function on line 13:
 
 ### Generating the Graph
 
-Now that we have a BVH, let's generate a graph on it. In the code below, we define a starting point for the graph, then we define the spacing between each node.
+Now that we have a BVH, let's generate a graph on it. In the code below, we will define a starting point for the graph, then the spacing between each node.
 
 We'll place our start point 1 meter above the origin of the scene (0,0,1). Starting directly at the origin, (0,0,0), would put the start point inside of the plane we're using for the ground causing the initial ground check to fail.
 
@@ -117,8 +129,9 @@ All of that together is:
 
 ### Retrieving A list of nodes
 
-G now contains a graph of the accessible space on Plane using our settings. For this tutorial we will get a list of all nodes within the graph, and print them to get an idea of where this graph traversed.
+G now contains a graph of the accessible space on Plane using the settings we passed as arguments. To verify that our results are correct, we will get a list of nodes from the graph, then print them to the unity console.
 
+Enter the following code at the bottom of the start method.
 ```{.cs}
         // Get a list of nodes from the graph and print them.
         NodeList nodes = G.getNodes();
@@ -188,15 +201,25 @@ public class HFExampleScript : MonoBehaviour
 }
 ```
 
-Save your script, minimize Visual Studio, then switch back to the Unity Editor. The process for testing this script is identical to the process in [The Raytracer Tutorial]{@ref UsingTheRaytracer}. Attach the script to the main camera, then press the play button and inspect your output.
+Once you've confirmed that your script matches this code, save your script, minimize Visual Studio, then switch back to the Unity Editor.
 
 ![Attach script and test](../assets/walkthroughs/unity/2_raycast_at_plane/drag_into_camera.png)
 
-Like in the previous tutorial, the output is at the bottom of the screen but it's cut off. To get a better view, click on the output to switch over to the console tab, then click on the message containing our output highlighted in blue for a closer look.
+*Figure* **3.3** *Dragging HFExampleScript onto the Main Camera as a component.*
+
+The process for testing this script is identical to the process in [The Raytracer Tutorial]{@ref UsingTheRaytracer}. Attach the script to the main camera, then press the play button and inspect your output.
+
+![Switch To the Console](../assets/walkthroughs/unity/3_graph_generator/click_on_console.png)
+
+*Figure* **3.4** *How to view the Console Tab*
+
+Like in the previous tutorial, the output is at the bottom of the screen, but it doesn't fit in on one line so it's cut off. To get a better view, click on the output itself, or click on the console tab circled in Figure 3.4 to view the console
 
 ![View Console](../assets/walkthroughs/unity/3_graph_generator/console_view.png)
 
-The highlighted text should read:
+*Figure* **3.5** *Highlighted Graph Output and how to switch back to the assets window*
+
+Once in the console window, click on the message containing our output, highlighted in blue in figure 3.5, for a closer look. Like in Figure 3.5, the highlighted text should read:
 
 ```
 [(0.000,0.000,0.000), (-1.000,-1.000,0.000), (-1.000,0.000,0.000), (-1.000,1.000,0.000), (0.000,-1.000,0.000), . . . (10.000,7.000,0.000), (10.000,8.000,0.000), (10.000,9.000,0.000), (10.000,10.000,0.000)]
@@ -204,11 +227,11 @@ The highlighted text should read:
 
 > **Note:**  this is not the full list of nodes. The list has been truncated due to the size of the output. In order to view every node we'll have to print them in a loop.
 
-Switch back to the previous view by clicking on the Project tab just above the blue highlighted message. In the above image this tab is circled in red. After this, exit playmode by clicking on the blue play button at the top of the screen.
+Confirm your results match, then switch back to the previous view by clicking on the Project tab circled in red in Figure 3.5. After that, exit playmode by clicking on the blue play button at the top of the screen. If you've reached this point then you have successfully generated a Graph using Human Factors and have completed this part of the tutorial. Next we will cover cases where the graph generator will be unable to generate a graph, and how to handle if a graph could not be generated.
 
 ## Cases where the GraphGenerator fails
 
-We've covered situations where we know the GraphGenerator will generate a graph, however what about sitauations where we're taking user input, or operating on a new model. 
+We've covered situations where we know the GraphGenerator will generate a graph, however what about sitauations where we're taking user input, or operating on a new model.
 
 ### Checking for success
 
