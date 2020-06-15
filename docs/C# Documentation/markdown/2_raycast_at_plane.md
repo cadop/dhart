@@ -132,13 +132,13 @@ At this point, our start function should match the following code:
     }
 ```
 
-!["BVH Construction Script"](../assets/walkthroughs/unity/2_raycast_at_plane/creating_a_plane.png)
+[Image in Visual Studio](../assets/walkthroughs/unity/2_raycast_at_plane/creating_a_plane.png)
 
 With the BVH created, we're ready to call the Raytracer and cast a ray.
 
 ### Casting a Ray
 
-We'll put the origin point of the ray at (1,0,1) and cast it in the direction (0,0,-1). This should intersect with the plane we defined earlier at the point (1,0,0). Define an origin point and a direction for the ray.
+We'll put the origin point of the ray at (1,0,1) and cast it in the direction (0,0,-1). This should intersect with the plane we defined earlier at the point (1,0,0). In the start function just below the the line we create the BVH, define an origin point and a direction for the ray.
 
 ``` C#
         // Define origin and direction
@@ -188,9 +188,7 @@ Here's all of that together:
         ")");
 ```
 
-And our start function up until this point:
-
-![Casting A Ray](../assets/walkthroughs/unity/2_raycast_at_plane/casting_a_ray.png)
+[Image of our Start() function up until this point](../assets/walkthroughs/unity/2_raycast_at_plane/casting_a_ray.png)
 
 ### Wrapping Up
 
@@ -217,7 +215,7 @@ public class HFExampleScript : MonoBehaviour
              10f, -10f, 0f
         };
         int[] plane_indices = {
-          3, 1, 0,z
+          3, 1, 0,
           2, 3, 0
         };
 
@@ -305,6 +303,7 @@ Figure 2.4B is a magnified version of the console's output enclosed by the red b
 > You will see your output in the space where the assets tab occupied, instead of the bottom bar. You can switch back to the assets window by clicking the project tab to the left of the console tab.
 > !["Back to Assets"](../assets/walkthroughs/unity/2_raycast_at_plane/enabled_log_messages.png)
 > Future calls to `Debug.Log()` will appear at the bottom of the screen like shown in Figure 2.4.
+
 If your console's output matches this, then you're successfully completed this tutorial. You can press the play button again to exit playmode.
 
 ## Conclusion
