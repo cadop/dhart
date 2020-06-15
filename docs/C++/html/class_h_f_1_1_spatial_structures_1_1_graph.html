@@ -83,6 +83,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af8225b5596508853ec637e72873a45cb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_h_f_1_1_spatial_structures_1_1_graph.html#af8225b5596508853ec637e72873a45cb">Graph</a> (const std::vector&lt; std::vector&lt; int &gt;&gt; &amp;edges, const std::vector&lt; std::vector&lt; float &gt;&gt; &amp;distances, const std::vector&lt; <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_node.html">Node</a> &gt; &amp;<a class="el" href="class_h_f_1_1_spatial_structures_1_1_graph.html#aa70347b8a33b57c6f0a72d6eca4248d7">Nodes</a>)</td></tr>
 <tr class="memdesc:af8225b5596508853ec637e72873a45cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a graph from a list of nodes and edges. This is faster than just using the addEdge method  <a href="class_h_f_1_1_spatial_structures_1_1_graph.html#af8225b5596508853ec637e72873a45cb">More...</a><br /></td></tr>
 <tr class="separator:af8225b5596508853ec637e72873a45cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5456486f43b49867082946106542f09"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_h_f_1_1_spatial_structures_1_1_graph.html#ad5456486f43b49867082946106542f09">Graph</a> ()</td></tr>
+<tr class="separator:ad5456486f43b49867082946106542f09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af00121404a647b0d619f201cf9ebc797"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_h_f_1_1_spatial_structures_1_1_graph.html#af00121404a647b0d619f201cf9ebc797">HasEdge</a> (const std::array&lt; float, 3 &gt; &amp;parent, const std::array&lt; float, 3 &gt; &amp;child, bool undirected=false) const</td></tr>
 <tr class="memdesc:af00121404a647b0d619f201cf9ebc797"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine if the graph has an edge with this parent and child, by constructing temporary <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_node.html" title="A point in space with an ID">Node</a> (using the params parent and child) and calling the member function overload of HasEdge that accepts (const <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_node.html" title="A point in space with an ID">Node</a> &amp;).  <a href="class_h_f_1_1_spatial_structures_1_1_graph.html#af00121404a647b0d619f201cf9ebc797">More...</a><br /></td></tr>
 <tr class="separator:af00121404a647b0d619f201cf9ebc797"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -101,7 +103,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1a26ebb794b444e2214cf0b0fed5a529"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_edge_set.html">EdgeSet</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_h_f_1_1_spatial_structures_1_1_graph.html#a1a26ebb794b444e2214cf0b0fed5a529">GetEdges</a> () const</td></tr>
 <tr class="memdesc:a1a26ebb794b444e2214cf0b0fed5a529"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get every edge/node in the given graph as IDs  <a href="class_h_f_1_1_spatial_structures_1_1_graph.html#a1a26ebb794b444e2214cf0b0fed5a529">More...</a><br /></td></tr>
 <tr class="separator:a1a26ebb794b444e2214cf0b0fed5a529"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3285be5da987692e0b3671f49d67d21b"><td class="memItemLeft" align="right" valign="top">std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_h_f_1_1_spatial_structures_1_1_graph.html#a3285be5da987692e0b3671f49d67d21b">AggregateGraph</a> (COST_AGGREGATE agg_type, bool directed=true) const</td></tr>
+<tr class="memitem:a3285be5da987692e0b3671f49d67d21b"><td class="memItemLeft" align="right" valign="top">std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_h_f_1_1_spatial_structures_1_1_graph.html#a3285be5da987692e0b3671f49d67d21b">AggregateGraph</a> (<a class="el" href="graph_8h.html#a6b23c0b2531c78f6d5049873c184f4f9">COST_AGGREGATE</a> agg_type, bool directed=true) const</td></tr>
 <tr class="memdesc:a3285be5da987692e0b3671f49d67d21b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate an ordered list of scores for the graph  <a href="class_h_f_1_1_spatial_structures_1_1_graph.html#a3285be5da987692e0b3671f49d67d21b">More...</a><br /></td></tr>
 <tr class="separator:a3285be5da987692e0b3671f49d67d21b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c2ea4fda7d310b500456ff14527bab9"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_edge.html">Edge</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_h_f_1_1_spatial_structures_1_1_graph.html#a7c2ea4fda7d310b500456ff14527bab9">operator[]</a> (const <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_node.html">Node</a> &amp;n) const</td></tr>
@@ -148,7 +150,7 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><p>A <a class="el" href="namespace_h_f.html" title="Output CSR for interop with other languages">HF</a> <a class="el" href="class_h_f_1_1_spatial_structures_1_1_graph.html" title="A HF Graph similar to the one stored in python Invariants: 1) Always stores a valid graph 2) Every no...">Graph</a> similar to the one stored in python Invariants: 1) Always stores a valid graph 2) Every node added will be assigned a unique ID </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af8225b5596508853ec637e72873a45cb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af8225b5596508853ec637e72873a45cb">&#9670;&nbsp;</a></span>Graph()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af8225b5596508853ec637e72873a45cb">&#9670;&nbsp;</a></span>Graph() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -188,7 +190,48 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<div class="fragment"><div class="line"><span class="comment">// Create the nodes</span></div>
+<div class="line">Node node_0(12.0, 23.1, 34.2, 456);</div>
+<div class="line">Node node_1(45.3, 56.4, 67.5, 789);</div>
+<div class="line">Node node_2(55.5, 25.1, 85.2, 940);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create a container (vector) of nodes</span></div>
+<div class="line">std::vector&lt;Node&gt; nodes = { node_0, node_1, node_2 };</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create matrices for edges and distances, edges.size() == distances().size()</span></div>
+<div class="line">std::vector&lt;std::vector&lt;int&gt;&gt; edges = { {1, 2, 3}, {4, 5, 6}, {7, 8, 9 } };</div>
+<div class="line">std::vector&lt;std::vector&lt;float&gt;&gt; distances = { {12.0, 23.1, 45.2}, {67.3, 89.4, 98.5}, {76.6, 54.7, 32.8} };</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Now you can create a Graph - note that nodes, edges, and distances are passed by reference</span></div>
+<div class="line"><a class="code" href="class_h_f_1_1_spatial_structures_1_1_graph.html#ad5456486f43b49867082946106542f09">Graph</a> graph(edges, distances, nodes); </div>
+</div><!-- fragment --> 
+</div>
+</div>
+<a id="ad5456486f43b49867082946106542f09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5456486f43b49867082946106542f09">&#9670;&nbsp;</a></span>Graph() <span class="overload">[2/2]</span></h2>
 
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">HF::SpatialStructures::Graph::Graph </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="fragment"><div class="line"><a class="code" href="class_h_f_1_1_spatial_structures_1_1_graph.html#ad5456486f43b49867082946106542f09">Graph</a> graph();  <span class="comment">// This represents an order-zero graph (null graph)</span></div>
+<div class="line">                <span class="comment">// It lacks vertices and edges.</span></div>
+</div><!-- fragment --> 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -233,7 +276,18 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-
+<div class="fragment"><div class="line"><span class="comment">// Create a graph - see parameterized Graph constructor</span></div>
+<div class="line"><span class="comment">// All arguments are passed by reference to Graph</span></div>
+<div class="line"><a class="code" href="class_h_f_1_1_spatial_structures_1_1_graph.html#ad5456486f43b49867082946106542f09">Graph</a> graph(edges, distances, nodes); <span class="comment">// edges is std::vector&lt;std::vector&lt;int&gt;&gt;</span></div>
+<div class="line">                                      <span class="comment">// distances is std::vector&lt;std::vector&lt;float&gt;&gt;</span></div>
+<div class="line">                                      <span class="comment">// nodes is std::vector&lt;Node&gt;</span></div>
+<div class="line"> </div>
+<div class="line">Node n_parent(12.3f, 45.6f, 78.9f, 123);</div>
+<div class="line">Node n_child(123.4f, 456.7f, 789.1f, 456);</div>
+<div class="line"><span class="keywordtype">float</span> node_score = 4.5f;</div>
+<div class="line"> </div>
+<div class="line">graph.addEdge(n_parent, n_child, node_score);</div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="afa04fa06b0802acd9eebe46a8c7a1787"></a>
@@ -277,7 +331,20 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-
+<div class="fragment"><div class="line"><span class="comment">// Create a graph - see parameterized Graph constructor</span></div>
+<div class="line"><span class="comment">// All arguments are passed by reference to Graph</span></div>
+<div class="line"><a class="code" href="class_h_f_1_1_spatial_structures_1_1_graph.html#ad5456486f43b49867082946106542f09">Graph</a> graph(edges, distances, nodes); <span class="comment">// edges is std::vector&lt;std::vector&lt;int&gt;&gt;</span></div>
+<div class="line">                                      <span class="comment">// distances is std::vector&lt;std::vector&lt;float&gt;&gt;</span></div>
+<div class="line">                                      <span class="comment">// nodes is std::vector&lt;Node&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> parent = 5201;</div>
+<div class="line"><span class="keywordtype">int</span> child = 6547;</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">float</span> node_score = 64.8f;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// if the provided parent, 5201, is not within graph, it will be created within addEdge</span></div>
+<div class="line">graph.addEdge(parent, child, node_score);</div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="a3285be5da987692e0b3671f49d67d21b"></a>
@@ -289,7 +356,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">std::vector&lt; float &gt; HF::SpatialStructures::Graph::AggregateGraph </td>
           <td>(</td>
-          <td class="paramtype">COST_AGGREGATE&#160;</td>
+          <td class="paramtype"><a class="el" href="graph_8h.html#a6b23c0b2531c78f6d5049873c184f4f9">COST_AGGREGATE</a>&#160;</td>
           <td class="paramname"><em>agg_type</em>, </td>
         </tr>
         <tr>
@@ -315,7 +382,18 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>a vector of type float of the edge costs</dd></dl>
-
+<div class="fragment"><div class="line"><span class="comment">// Create a graph - see parameterized Graph constructor</span></div>
+<div class="line"><span class="comment">// All arguments are passed by reference to Graph</span></div>
+<div class="line"><a class="code" href="class_h_f_1_1_spatial_structures_1_1_graph.html#ad5456486f43b49867082946106542f09">Graph</a> graph(edges, distances, nodes); <span class="comment">// edges is std::vector&lt;std::vector&lt;int&gt;&gt;</span></div>
+<div class="line">                                      <span class="comment">// distances is std::vector&lt;std::vector&lt;float&gt;&gt;</span></div>
+<div class="line">                                      <span class="comment">// nodes is std::vector&lt;Node&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// graph must be compressed, or a exception will be thrown</span></div>
+<div class="line"><a class="code" href="graph_8h.html#a6b23c0b2531c78f6d5049873c184f4f9">COST_AGGREGATE</a> aggregate = COST_AGGREGATE::AVERAGE;     <span class="comment">// aggregate == 1 in this case</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// directed parameter may be true or false</span></div>
+<div class="line">std::vector&lt;float&gt; aggregate_graph = graph.AggregateGraph(aggregate, <span class="keyword">true</span>); </div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="a994dbd15119eb6548d2e15f4de4b88a6"></a>
@@ -334,7 +412,17 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Clear all nodes and edges in the graph. </p>
-
+<div class="fragment"><div class="line"><span class="comment">// Create a graph - see parameterized Graph constructor</span></div>
+<div class="line"><span class="comment">// All arguments are passed by reference to Graph</span></div>
+<div class="line"><a class="code" href="class_h_f_1_1_spatial_structures_1_1_graph.html#ad5456486f43b49867082946106542f09">Graph</a> graph(edges, distances, nodes); <span class="comment">// edges is std::vector&lt;std::vector&lt;int&gt;&gt;</span></div>
+<div class="line">                                      <span class="comment">// distances is std::vector&lt;std::vector&lt;float&gt;&gt;</span></div>
+<div class="line">                                      <span class="comment">// nodes is std::vector&lt;Node&gt;</span></div>
+<div class="line">                                      <span class="comment">// needs_compression == false</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// If we want to remove all nodes and edges from graph, we may do so with Clear:</span></div>
+<div class="line">graph.Clear();                      <span class="comment">// edge_matrix is zeroed out, buffer is squeezed,</span></div>
+<div class="line">                                    <span class="comment">// triplets are also cleared, and needs_compression == true</span></div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="a41cece77d0eee98df39ecc6d3a366ec8"></a>
@@ -353,7 +441,35 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Compress the graph, significantly reducing memory usage, but disabling insertion. </p>
-
+<div class="fragment"><div class="line"><span class="comment">// The following member functions require the usage of Compress()</span></div>
+<div class="line"><span class="comment">// prior to being invoked, or else an exception will be thrown:</span></div>
+<div class="line"><span class="comment">//      Graph::GetEdges</span></div>
+<div class="line"><span class="comment">//      Graph::AggregateGraph</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Graph::GetCSRPointers also requires the usage of Compress prior to being invoked,</span></div>
+<div class="line"><span class="comment">// but will not throw an exception if this requirement is not fulfilled.</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// The usage of the following member functions will require the usage of Compress()</span></div>
+<div class="line"><span class="comment">// after being invoked:</span></div>
+<div class="line"><span class="comment">//      Graph::addEdge (all overloads)</span></div>
+<div class="line"><span class="comment">//      Graph::Clear</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create a graph - see parameterized Graph constructor</span></div>
+<div class="line"><span class="comment">// All arguments are passed by reference to Graph</span></div>
+<div class="line"><a class="code" href="class_h_f_1_1_spatial_structures_1_1_graph.html#ad5456486f43b49867082946106542f09">Graph</a> graph(edges, distances, nodes); <span class="comment">// edges is std::vector&lt;std::vector&lt;int&gt;&gt;</span></div>
+<div class="line">                                      <span class="comment">// distances is std::vector&lt;std::vector&lt;float&gt;&gt;</span></div>
+<div class="line">                                      <span class="comment">// nodes is std::vector&lt;Node&gt;</span></div>
+<div class="line">                                      <span class="comment">// needs_compression == false</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> parent = 345;</div>
+<div class="line"><span class="keywordtype">int</span> child = 6809;</div>
+<div class="line"><span class="keywordtype">float</span> score = 77.4f</div>
+<div class="line"> </div>
+<div class="line">graph.addEdge(parent, child, score);    <span class="comment">// needs_compression == true</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// In order to use GetEdges, or AggregateGraph, we must compress our graph instance</span></div>
+<div class="line">graph.Compress();                       <span class="comment">// GetEdges and AggregateGraph are now usable</span></div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="a313eb2f8a0f5edcb2bd4b6f6b03af428"></a>
@@ -372,7 +488,8 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Calculate cross slope for the given graph </p>
-
+<div class="fragment"><div class="line">TODO example - code commented out in graph.cpp</div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="a890e0f6603eca56c4c70772d5b559d53"></a>
@@ -391,7 +508,8 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Calculate energy for the given graph </p>
-
+<div class="fragment"><div class="line">TODO example - code commented out in graph.cpp</div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="afccd105c93a826bde0457449f774fd04"></a>
@@ -411,7 +529,20 @@ Public Member Functions</h2></td></tr>
 
 <p>Obtain pointers to the 3 arrays of the CSR, as well as any extra info that may be necesary to use the CSR in another language. This will automatically compress the graph if it isn't compressed already </p>
 <dl class="section return"><dt>Returns</dt><dd>An instance of a struct <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_c_s_r_ptrs.html" title="TODO summary">CSRPtrs</a>, using the member field edge_matrix</dd></dl>
-
+<div class="fragment"><div class="line"><span class="comment">// Create a graph - see parameterized Graph constructor</span></div>
+<div class="line"><span class="comment">// All arguments are passed by reference to Graph</span></div>
+<div class="line"><a class="code" href="class_h_f_1_1_spatial_structures_1_1_graph.html#ad5456486f43b49867082946106542f09">Graph</a> graph(edges, distances, nodes); <span class="comment">// edges is std::vector&lt;std::vector&lt;int&gt;&gt;</span></div>
+<div class="line">                                      <span class="comment">// distances is std::vector&lt;std::vector&lt;float&gt;&gt;</span></div>
+<div class="line">                                      <span class="comment">// nodes is std::vector&lt;Node&gt;</span></div>
+<div class="line">                                      <span class="comment">// needs_compression field is false</span></div>
+<div class="line"> </div>
+<div class="line">graph.Compress();                     <span class="comment">// Although the needs_compression field is false upon</span></div>
+<div class="line">                                      <span class="comment">// creating a Graph, Compress() still needs to be invoked</span></div>
+<div class="line">                                      <span class="comment">// prior to using GetCSRPointers.</span></div>
+<div class="line">                                      <span class="comment">// (see line 24 of graph.cpp)</span></div>
+<div class="line"> </div>
+<div class="line">CSRPtrs returned_csr = graph.GetCSRPointers();</div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="a1a26ebb794b444e2214cf0b0fed5a529"></a>
@@ -431,7 +562,29 @@ Public Member Functions</h2></td></tr>
 
 <p>Get every edge/node in the given graph as IDs </p>
 <dl class="section return"><dt>Returns</dt><dd>A list of <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_edge_set.html" title="A collection of edges for a specific node /summary&gt;">EdgeSet</a> (<a class="el" href="class_h_f_1_1_spatial_structures_1_1_graph.html" title="A HF Graph similar to the one stored in python Invariants: 1) Always stores a valid graph 2) Every no...">Graph</a> in the form of IDs)</dd></dl>
-
+<div class="fragment"><div class="line"><span class="comment">// Create a graph - see parameterized Graph constructor</span></div>
+<div class="line"><span class="comment">// All arguments are passed by reference to Graph</span></div>
+<div class="line"><a class="code" href="class_h_f_1_1_spatial_structures_1_1_graph.html#ad5456486f43b49867082946106542f09">Graph</a> graph(edges, distances, nodes); <span class="comment">// edges is std::vector&lt;std::vector&lt;int&gt;&gt;</span></div>
+<div class="line">                                      <span class="comment">// distances is std::vector&lt;std::vector&lt;float&gt;&gt;</span></div>
+<div class="line">                                      <span class="comment">// nodes is std::vector&lt;Node&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// graph must be compressed, or a exception will be thrown</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// To brief, an EdgeSet has the following layout:</span></div>
+<div class="line"><span class="comment">//      struct EdgeSet {</span></div>
+<div class="line"><span class="comment">//          int parent;</span></div>
+<div class="line"><span class="comment">//          std::vector&lt;IntEdge&gt; children;</span></div>
+<div class="line"><span class="comment">//      };</span></div>
+<div class="line"><span class="comment">//</span></div>
+<div class="line"><span class="comment">//  An IntEdge has the following layout:</span></div>
+<div class="line"><span class="comment">//      struct IntEdge {</span></div>
+<div class="line"><span class="comment">//          int child;</span></div>
+<div class="line"><span class="comment">//          float weight;</span></div>
+<div class="line"><span class="comment">//      };</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// A std::vector&lt;EdgeSet&gt; is a Graph, in the form of IDs.</span></div>
+<div class="line">std::vector&lt;EdgeSet&gt; edge_set = graph.GetEdges();</div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="af59beedafb4af0ee99d54761e1c681fc"></a>
@@ -452,7 +605,31 @@ Public Member Functions</h2></td></tr>
 
 <p>Retrieve the ID for the given node. </p>
 <dl class="section return"><dt>Returns</dt><dd>The ID assigned to this node. -1 if it was not yet added to the graph</dd></dl>
-
+<div class="fragment"><div class="line"><span class="comment">// Create a graph - see parameterized Graph constructor</span></div>
+<div class="line"><span class="comment">// All arguments are passed by reference to Graph</span></div>
+<div class="line"><a class="code" href="class_h_f_1_1_spatial_structures_1_1_graph.html#ad5456486f43b49867082946106542f09">Graph</a> graph(edges, distances, nodes); <span class="comment">// edges is std::vector&lt;std::vector&lt;int&gt;&gt;</span></div>
+<div class="line">                                      <span class="comment">// distances is std::vector&lt;std::vector&lt;float&gt;&gt;</span></div>
+<div class="line">                                      <span class="comment">// nodes is std::vector&lt;Node&gt;</span></div>
+<div class="line"> </div>
+<div class="line">Node other_node(55.0f, 66.1f, 15.5f, 9510); <span class="comment">// Let&#39;s construct a Node we know is not in graph.</span></div>
+<div class="line"><span class="keywordtype">bool</span> has_key = graph.hasKey(other_node);    <span class="comment">// other_node does not exist in graph, so has_key == false;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> ID = graph.getID(other_node);           <span class="comment">// ID will assigned -1, because other_node is not a part of graph.</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Likewise, if we pass a Node instance that indeed exists...</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Retrieve the nodes from the graph, or use the original instance of </span></div>
+<div class="line"><span class="comment">// std::vector&lt;Node&gt; passed to Graph upon instantiation</span></div>
+<div class="line">std::vector&lt;Node&gt; nodes = graph.Nodes();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// nodes[index] yields an instance of Node that we can pass to hasKey.</span></div>
+<div class="line"><span class="comment">// Any node that exists with graph can be passed to this member function</span></div>
+<div class="line"><span class="comment">// to determine if the graph has the node&#39;s key, or not.</span></div>
+<div class="line"><span class="keywordtype">int</span> index = 2;                  <span class="comment">// we assume for this example that index 2 is valid.</span></div>
+<div class="line">Node good_node = nodes[index];</div>
+<div class="line"> </div>
+<div class="line">ID = graph.getID(good_node);    <span class="comment">// ID &gt; -1, i.e. it is a Node instance that exists within this Graph.</span></div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="a9f521e01db7e3c038ab2c1fac09b67df"></a>
@@ -479,7 +656,22 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A list of edges to and from node N</dd></dl>
-
+<div class="fragment"><div class="line"><span class="comment">// Create a graph - see parameterized Graph constructor</span></div>
+<div class="line"><span class="comment">// All arguments are passed by reference to Graph</span></div>
+<div class="line"><a class="code" href="class_h_f_1_1_spatial_structures_1_1_graph.html#ad5456486f43b49867082946106542f09">Graph</a> graph(edges, distances, nodes); <span class="comment">// edges is std::vector&lt;std::vector&lt;int&gt;&gt;</span></div>
+<div class="line">                                      <span class="comment">// distances is std::vector&lt;std::vector&lt;float&gt;&gt;</span></div>
+<div class="line">                                      <span class="comment">// nodes is std::vector&lt;Node&gt; </span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Retrieve the nodes from the graph, or use the original instance of </span></div>
+<div class="line"><span class="comment">// std::vector&lt;Node&gt; passed to Graph upon instantiation</span></div>
+<div class="line">std::vector&lt;Node&gt; nodes = graph.Nodes();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// nodes[index] yields an instance of Node that we can pass to GetUndirectedEdges.</span></div>
+<div class="line"><span class="comment">// Any node that exists with graph can be passed to this member function</span></div>
+<div class="line"><span class="comment">// to retrieve a vector of undirected edges.</span></div>
+<div class="line"><span class="keywordtype">int</span> index = 2;</div>
+<div class="line">std::vector&lt;Edge&gt; undirected_edges = graph.GetUndirectedEdges(nodes[index]);</div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="affca013028fca6ac730f3f313744500b"></a>
@@ -517,14 +709,31 @@ Public Member Functions</h2></td></tr>
 <p>Determine if the graph has an edge with this parent and child, using references to <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_node.html" title="A point in space with an ID">Node</a> </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">parent</td><td></td></tr>
-    <tr><td class="paramname">child</td><td></td></tr>
+    <tr><td class="paramname">parent</td><td>Parent node of edge; u to v, parent is u</td></tr>
+    <tr><td class="paramname">child</td><td>Child node of edge; u to v, child is v</td></tr>
+    <tr><td class="paramname">undirected</td><td>true if undirected, false otherwise</td></tr>
   </table>
   </dd>
 </dl>
-<p>&lt;param name="undirected&gt;</p>
 <dl class="section return"><dt>Returns</dt><dd>True if edge exists with parent and child (<a class="el" href="struct_h_f_1_1_spatial_structures_1_1_node.html" title="A point in space with an ID">Node</a> &amp;), false otherwise</dd></dl>
-
+<div class="fragment"><div class="line"><span class="comment">// Create a graph - see parameterized Graph constructor</span></div>
+<div class="line"><span class="comment">// All arguments are passed by reference to Graph</span></div>
+<div class="line"><a class="code" href="class_h_f_1_1_spatial_structures_1_1_graph.html#ad5456486f43b49867082946106542f09">Graph</a> graph(edges, distances, nodes); <span class="comment">// edges is std::vector&lt;std::vector&lt;int&gt;&gt;</span></div>
+<div class="line">                                      <span class="comment">// distances is std::vector&lt;std::vector&lt;float&gt;&gt;</span></div>
+<div class="line">                                      <span class="comment">// nodes is std::vector&lt;Node&gt;                                       </span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Prepare {x, y, z} coordinates (positions)</span></div>
+<div class="line">std::array&lt;float, 3&gt; parent_pos = { 12.3, 45.6, 78.9 };</div>
+<div class="line">std::array&lt;float, 3&gt; child_pos = { 123.1, 456.2, 789.3 };</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// This member function overload requires that Node objects be passed in,</span></div>
+<div class="line"><span class="comment">// as opposed to instances of std::array&lt;float, 3&gt;</span></div>
+<div class="line">Node parent(parent_pos);</div>
+<div class="line">Node child(child_pos);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// last argument can be true/false for undirected/directed graph respectively</span></div>
+<div class="line"><span class="keywordtype">bool</span> has_edge = graph.HasEdge(parent, child, <span class="keyword">true</span>);</div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="af00121404a647b0d619f201cf9ebc797"></a>
@@ -561,7 +770,19 @@ Public Member Functions</h2></td></tr>
 
 <p>Determine if the graph has an edge with this parent and child, by constructing temporary <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_node.html" title="A point in space with an ID">Node</a> (using the params parent and child) and calling the member function overload of HasEdge that accepts (const <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_node.html" title="A point in space with an ID">Node</a> &amp;). </p>
 <dl class="section return"><dt>Returns</dt><dd>See return for member function overload that accepts (const <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_node.html" title="A point in space with an ID">Node</a> &amp;)</dd></dl>
-
+<div class="fragment"><div class="line"><span class="comment">// Create a graph - see parameterized Graph constructor</span></div>
+<div class="line"><span class="comment">// All arguments are passed by reference to Graph</span></div>
+<div class="line"><a class="code" href="class_h_f_1_1_spatial_structures_1_1_graph.html#ad5456486f43b49867082946106542f09">Graph</a> graph(edges, distances, nodes); <span class="comment">// edges is std::vector&lt;std::vector&lt;int&gt;&gt;</span></div>
+<div class="line">                                      <span class="comment">// distances is std::vector&lt;std::vector&lt;float&gt;&gt;</span></div>
+<div class="line">                                      <span class="comment">// nodes is std::vector&lt;Node&gt;                                       </span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Prepare {x, y, z} coordinates (positions)</span></div>
+<div class="line">std::array&lt;float, 3&gt; parent_pos = { 12.3, 45.6, 78.9 };</div>
+<div class="line">std::array&lt;float, 3&gt; child_pos = { 123.1, 456.2, 789.3 };</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// last argument can be true/false for undirected/directed graph respectively</span></div>
+<div class="line"><span class="keywordtype">bool</span> has_edge = graph.HasEdge(parent_pos, child_pos, <span class="keyword">true</span>);</div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="aae29b0f69f0fff53113b7f968a128796"></a>
@@ -606,7 +827,14 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if checkForEdge(parent, child), or undirected &amp;&amp; checkForEdge(child, parent), false otherwise</dd></dl>
-
+<div class="fragment"><div class="line"><span class="comment">// Create a graph - see parameterized Graph constructor</span></div>
+<div class="line"><span class="comment">// All arguments are passed by reference to Graph</span></div>
+<div class="line"><a class="code" href="class_h_f_1_1_spatial_structures_1_1_graph.html#ad5456486f43b49867082946106542f09">Graph</a> graph(edges, distances, nodes); <span class="comment">// edges is std::vector&lt;std::vector&lt;int&gt;&gt;</span></div>
+<div class="line">                                      <span class="comment">// distances is std::vector&lt;std::vector&lt;float&gt;&gt;</span></div>
+<div class="line">                                      <span class="comment">// nodes is std::vector&lt;Node&gt; </span></div>
+<div class="line"> </div>
+<div class="line">graph.HasEdge(3, 5, <span class="keyword">true</span>);</div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="a4de020064d58c4ab376a26c30be863a3"></a>
@@ -633,7 +861,29 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the node exists, false otherwise</dd></dl>
-
+<div class="fragment"><div class="line"><span class="comment">// Create a graph - see parameterized Graph constructor</span></div>
+<div class="line"><span class="comment">// All arguments are passed by reference to Graph</span></div>
+<div class="line"><a class="code" href="class_h_f_1_1_spatial_structures_1_1_graph.html#ad5456486f43b49867082946106542f09">Graph</a> graph(edges, distances, nodes); <span class="comment">// edges is std::vector&lt;std::vector&lt;int&gt;&gt;</span></div>
+<div class="line">                                      <span class="comment">// distances is std::vector&lt;std::vector&lt;float&gt;&gt;</span></div>
+<div class="line">                                      <span class="comment">// nodes is std::vector&lt;Node&gt;</span></div>
+<div class="line"> </div>
+<div class="line">Node other_node(55.0f, 66.1f, 15.5f, 9510); <span class="comment">// Let&#39;s construct a Node we know is not in graph.</span></div>
+<div class="line"><span class="keywordtype">bool</span> has_key = graph.hasKey(other_node);    <span class="comment">// other_node does not exist in graph, so has_key == false;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Likewise, if we pass a Node instance that indeed exists...</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Retrieve the nodes from the graph, or use the original instance of </span></div>
+<div class="line"><span class="comment">// std::vector&lt;Node&gt; passed to Graph upon instantiation</span></div>
+<div class="line">std::vector&lt;Node&gt; nodes = graph.Nodes();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// nodes[index] yields an instance of Node that we can pass to hasKey.</span></div>
+<div class="line"><span class="comment">// Any node that exists with graph can be passed to this member function</span></div>
+<div class="line"><span class="comment">// to determine if the graph has the node&#39;s key, or not.</span></div>
+<div class="line"><span class="keywordtype">int</span> index = 2;</div>
+<div class="line">Node good_node = nodes[index];</div>
+<div class="line"> </div>
+<div class="line">has_key = graph.hasKey(good_node);      <span class="comment">// now has_key is true</span></div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="a794c342603cefb342fdc698ba539b25f"></a>
@@ -660,7 +910,28 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The node corresponding to id, by value</dd></dl>
-
+<div class="fragment"><div class="line"><span class="comment">// Create the nodes</span></div>
+<div class="line">Node node_0(12.0, 23.1, 34.2, 456);</div>
+<div class="line">Node node_1(45.3, 56.4, 67.5, 789);</div>
+<div class="line">Node node_2(55.5, 25.1, 85.2, 940);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create a container (vector) of nodes</span></div>
+<div class="line">std::vector&lt;Node&gt; nodes = { node_0, node_1, node_2 };</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create matrices for edges and distances, edges.size() == distances().size()</span></div>
+<div class="line">std::vector&lt;std::vector&lt;int&gt;&gt; edges = { {1, 2, 3}, {4, 5, 6}, {7, 8, 9 } };</div>
+<div class="line">std::vector&lt;std::vector&lt;float&gt;&gt; distances = { {12.0, 23.1, 45.2}, {67.3, 89.4, 98.5}, {76.6, 54.7, 32.8} };</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Now you can create a Graph - note that nodes, edges, and distances are passed by reference</span></div>
+<div class="line"><a class="code" href="class_h_f_1_1_spatial_structures_1_1_graph.html#ad5456486f43b49867082946106542f09">Graph</a> graph(edges, distances, nodes);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Let&#39;s retrieve node_1, assuming we know the ID of node_1.</span></div>
+<div class="line"><span class="keywordtype">int</span> desired_node_id = 789;</div>
+<div class="line">Node node_from_id = graph.NodeFromID(desired_node_id);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Note that NodeFromID ceases to work if the id argument provided does not exist as an ID among</span></div>
+<div class="line"><span class="comment">// the nodes within graph</span></div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="aa70347b8a33b57c6f0a72d6eca4248d7"></a>
@@ -680,7 +951,14 @@ Public Member Functions</h2></td></tr>
 
 <p>Get a list of nodes from the graph sorted by ID </p>
 <dl class="section return"><dt>Returns</dt><dd>A sorted vector of nodes</dd></dl>
-
+<div class="fragment"><div class="line"><span class="comment">// Create a graph - see parameterized Graph constructor</span></div>
+<div class="line"><span class="comment">// All arguments are passed by reference to Graph</span></div>
+<div class="line"><a class="code" href="class_h_f_1_1_spatial_structures_1_1_graph.html#ad5456486f43b49867082946106542f09">Graph</a> graph(edges, distances, nodes); <span class="comment">// edges is std::vector&lt;std::vector&lt;int&gt;&gt;</span></div>
+<div class="line">                                      <span class="comment">// distances is std::vector&lt;std::vector&lt;float&gt;&gt;</span></div>
+<div class="line">                                      <span class="comment">// nodes is std::vector&lt;Node&gt; </span></div>
+<div class="line"> </div>
+<div class="line">std::vector&lt;node&gt; nodes_from_graph = graph.Nodes();</div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="aeddbbec01c6354b7076f47f71fc1a220"></a>
@@ -700,7 +978,17 @@ Public Member Functions</h2></td></tr>
 
 <p>Get a list of nodes as arrays of floats </p>
 <dl class="section return"><dt>Returns</dt><dd>A list of floats for each position of every node in the graph </dd></dl>
-
+<div class="fragment"><div class="line"><span class="comment">// Create a graph - see parameterized Graph constructor</span></div>
+<div class="line"><span class="comment">// All arguments are passed by reference to Graph</span></div>
+<div class="line"><a class="code" href="class_h_f_1_1_spatial_structures_1_1_graph.html#ad5456486f43b49867082946106542f09">Graph</a> graph(edges, distances, nodes); <span class="comment">// edges is std::vector&lt;std::vector&lt;int&gt;&gt;</span></div>
+<div class="line">                                      <span class="comment">// distances is std::vector&lt;std::vector&lt;float&gt;&gt;</span></div>
+<div class="line">                                      <span class="comment">// nodes is std::vector&lt;Node&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// A container of std::array&lt;float, 3&gt; is constructed and populated within</span></div>
+<div class="line"><span class="comment">// NodesAsFloat3, and returned. Each array of 3 floats represents a Node&#39;s position</span></div>
+<div class="line"><span class="comment">// within the Cartesian coordinate system. { x, y, z }</span></div>
+<div class="line">std::vector&lt;std::array&lt;float, 3&gt;&gt; nodes_as_floats = graph.NodesAsFloat3();</div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="a7c2ea4fda7d310b500456ff14527bab9"></a>
@@ -733,7 +1021,25 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-
+<div class="fragment"><div class="line"><span class="comment">// Create a graph - see parameterized Graph constructor</span></div>
+<div class="line"><span class="comment">// All arguments are passed by reference to Graph</span></div>
+<div class="line"><a class="code" href="class_h_f_1_1_spatial_structures_1_1_graph.html#ad5456486f43b49867082946106542f09">Graph</a> graph(edges, distances, nodes); <span class="comment">// edges is std::vector&lt;std::vector&lt;int&gt;&gt;</span></div>
+<div class="line">                                      <span class="comment">// distances is std::vector&lt;std::vector&lt;float&gt;&gt;</span></div>
+<div class="line">                                      <span class="comment">// nodes is std::vector&lt;Node&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Retrieve the nodes from the graph, or use the original instance of </span></div>
+<div class="line"><span class="comment">// std::vector&lt;Node&gt; passed to Graph upon instantiation</span></div>
+<div class="line">std::vector&lt;Node&gt; nodes = graph.Nodes();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// nodes[index] yields an instance of Node that we can pass to GetUndirectedEdges.</span></div>
+<div class="line"><span class="comment">// Any node that exists with graph can be passed to this member function</span></div>
+<div class="line"><span class="comment">// to retrieve a vector of edges.</span></div>
+<div class="line"><span class="keywordtype">int</span> index = 2;</div>
+<div class="line">Node node = nodes[index];</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Note that if node does not exist within graph, that an exception will be thrown.</span></div>
+<div class="line">std::vector&lt;Edge&gt; undirected_edges = graph[node];</div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="a2710af2a75976862d7a235793567d2f3"></a>
@@ -753,14 +1059,23 @@ Public Member Functions</h2></td></tr>
 
 <p>Determine how many nodes are in the graph </p>
 <dl class="section return"><dt>Returns</dt><dd>An int displaying how many nodes are in the graph (id_to_nodes.size())</dd></dl>
-
+<div class="fragment"><div class="line"><span class="comment">// Create a graph - see parameterized Graph constructor</span></div>
+<div class="line"><span class="comment">// All arguments are passed by reference to Graph</span></div>
+<div class="line"><a class="code" href="class_h_f_1_1_spatial_structures_1_1_graph.html#ad5456486f43b49867082946106542f09">Graph</a> graph(edges, distances, nodes); <span class="comment">// edges is std::vector&lt;std::vector&lt;int&gt;&gt;</span></div>
+<div class="line">                                      <span class="comment">// distances is std::vector&lt;std::vector&lt;float&gt;&gt;</span></div>
+<div class="line">                                      <span class="comment">// nodes is std::vector&lt;Node&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> id_count = graph.size();          <span class="comment">// We retrieve the size of the node id count within graph</span></div>
+</div><!-- fragment --> 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>Cpp/spatialstructures/src/<a class="el" href="graph_8h_source.html">graph.h</a></li>
-<li>Cpp/spatialstructures/src/graph.cpp</li>
+<li>Cpp/spatialstructures/src/<a class="el" href="graph_8cpp.html">graph.cpp</a></li>
 </ul>
 </div><!-- contents -->
+<div class="ttc" id="agraph_8h_html_a6b23c0b2531c78f6d5049873c184f4f9"><div class="ttname"><a href="graph_8h.html#a6b23c0b2531c78f6d5049873c184f4f9">HF::SpatialStructures::COST_AGGREGATE</a></div><div class="ttdeci">COST_AGGREGATE</div><div class="ttdoc">TODO summary</div><div class="ttdef"><b>Definition:</b> graph.h:29</div></div>
+<div class="ttc" id="aclass_h_f_1_1_spatial_structures_1_1_graph_html_ad5456486f43b49867082946106542f09"><div class="ttname"><a href="class_h_f_1_1_spatial_structures_1_1_graph.html#ad5456486f43b49867082946106542f09">HF::SpatialStructures::Graph::Graph</a></div><div class="ttdeci">Graph()</div><div class="ttdef"><b>Definition:</b> graph.h:157</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

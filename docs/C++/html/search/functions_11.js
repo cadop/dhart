@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['_7econnection_283',['~Connection',['../class_h_f_1_1_d_b_1_1_connection.html#a8bc2548efafa31ad284ea1e312b3be07',1,'HF::DB::Connection']]],
-  ['_7eembreeraytracer_284',['~EmbreeRayTracer',['../class_h_f_1_1_ray_tracer_1_1_embree_ray_tracer.html#a2948458e764f0294996c91b00356073e',1,'HF::RayTracer::EmbreeRayTracer']]]
+  ['_7econnection_318',['~Connection',['../class_h_f_1_1_d_b_1_1_connection.html#a8bc2548efafa31ad284ea1e312b3be07',1,'HF::DB::Connection']]],
+  ['_7eembreeraytracer_319',['~EmbreeRayTracer',['../class_h_f_1_1_ray_tracer_1_1_embree_ray_tracer.html#a2948458e764f0294996c91b00356073e',1,'HF::RayTracer::EmbreeRayTracer']]]
 ];

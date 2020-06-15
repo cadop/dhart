@@ -113,7 +113,7 @@ Public Member Functions</h2></td></tr>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a864cebbf4e5d7c135c501a63d42f8708"><td class="memItemLeft" align="right" valign="top"><a id="a864cebbf4e5d7c135c501a63d42f8708"></a>
 std::vector&lt; <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_path_member.html">PathMember</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_h_f_1_1_spatial_structures_1_1_path.html#a864cebbf4e5d7c135c501a63d42f8708">members</a></td></tr>
-<tr class="memdesc:a864cebbf4e5d7c135c501a63d42f8708"><td class="mdescLeft">&#160;</td><td class="mdescRight">The underlying vector of <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_path_member.html">PathMember</a> ///&lt;. <br /></td></tr>
+<tr class="memdesc:a864cebbf4e5d7c135c501a63d42f8708"><td class="mdescLeft">&#160;</td><td class="mdescRight">The underlying vector of <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_path_member.html">PathMember</a>. <br /></td></tr>
 <tr class="separator:a864cebbf4e5d7c135c501a63d42f8708"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -153,7 +153,15 @@ std::vector&lt; <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_path_m
   </table>
   </dd>
 </dl>
-
+<div class="fragment"><div class="line"><span class="comment">// Assuming an instance of Path, named path, already exists --</span></div>
+<div class="line"><span class="comment">// we can use AddNode to construct a PathMember and have Path add it to its members container.</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> node_id = 278;</div>
+<div class="line"><span class="keywordtype">float</span> cost = 3.14f;</div>
+<div class="line"> </div>
+<div class="line">path.AddNode(node_id, cost);    <span class="comment">// A PathMember is constructed within AddNode from node_id and cost</span></div>
+<div class="line">                                <span class="comment">// and is then appended to the underlying members vector (via push_back)</span></div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="a3066bac2d76b5c8a28b35a8d1f6ace71"></a>
@@ -173,7 +181,16 @@ std::vector&lt; <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_path_m
 
 <p>Determines if the underlying members vector is empty, or not </p>
 <dl class="section return"><dt>Returns</dt><dd>True if the underyling members vector is empty, false otherwise</dd></dl>
-
+<div class="fragment"><div class="line">Path path();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// There are no PathMembers in path&#39;s members container.</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// if empty() returns true, that means the underlying members vector is of size 0 (no members)</span></div>
+<div class="line"><span class="comment">// otherwise, empty returns false. In this case, path.empty() returns true.</span></div>
+<div class="line">std::string result = path.empty() ? <span class="stringliteral">&quot;is empty&quot;</span> : <span class="stringliteral">&quot;has at least one member&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;The Path object &quot;</span> &lt;&lt; result &lt;&lt; std::endl;</div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="a942cb49007bbeb5588e2d526c68bdcf9"></a>
@@ -192,7 +209,29 @@ std::vector&lt; <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_path_m
 </div><div class="memdoc">
 
 <p>Return the pointer to the underlying path member vector </p>
-
+<div class="fragment"><div class="line"><span class="comment">// Create the PathMembers</span></div>
+<div class="line">PathMember p0 = { 3.14f, 3 };</div>
+<div class="line">PathMember p1 = { 2.78f, 2 };</div>
+<div class="line">PathMember p2 = { 1.64f, 1 };</div>
+<div class="line">PathMember p3 = { 9.35f, 7 };</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create the container of PathMembers</span></div>
+<div class="line">std::vector&lt;PathMember&gt; <a class="code" href="struct_h_f_1_1_spatial_structures_1_1_path.html#a864cebbf4e5d7c135c501a63d42f8708">members</a>{p0, p1, p2, p3};</div>
+<div class="line"> </div>
+<div class="line">Path path(<a class="code" href="struct_h_f_1_1_spatial_structures_1_1_path.html#a864cebbf4e5d7c135c501a63d42f8708">members</a>);                         <span class="comment">// Create the Path object, path</span></div>
+<div class="line"> </div>
+<div class="line">PathMember *ptr = path.GetPMPointer();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// You now have a pointer to the underlying buffer of the members vector with in a PathMember.</span></div>
+<div class="line">PathMember *curr = ptr;</div>
+<div class="line">PathMember *finish = ptr + path.size();</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordflow">while</span> (curr != finish) {</div>
+<div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Cost: &quot;</span> &lt;&lt; curr-&gt;cost &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
+<div class="line">              &lt;&lt; <span class="stringliteral">&quot;Node: &quot;</span> &lt;&lt; curr-&gt;node &lt;&lt; std::endl;</div>
+<div class="line">    ++curr;</div>
+<div class="line">}</div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="ac8cd7f5bcbaf0f399ce196c8967ae87e"></a>
@@ -218,8 +257,40 @@ std::vector&lt; <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_path_m
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>True, if all <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_path_member.html">PathMember</a> elements in p2 are equal to all <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_path_member.html">PathMember</a> elements in p1, false otherwise </dd></dl>
-
+<dl class="section return"><dt>Returns</dt><dd>True, if all <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_path_member.html">PathMember</a> elements in p2 are equal to all <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_path_member.html">PathMember</a> elements in p1, false otherwise</dd></dl>
+<div class="fragment"><div class="line">PathMember p0 = { 3.14f, 3 };               <span class="comment">// Create all the PathMember objects</span></div>
+<div class="line">PathMember p1 = { 2.78f, 2 };</div>
+<div class="line"> </div>
+<div class="line">PathMember p2 = { 3.14f, 3 };</div>
+<div class="line">PathMember p3 = { 2.78f, 2 };</div>
+<div class="line"> </div>
+<div class="line">PathMember p4 = { 1.1f, 9 };</div>
+<div class="line">PathMember p5 = { 123.0f, 10 };</div>
+<div class="line"> </div>
+<div class="line">std::vector&lt;PathMember&gt; members_0{p0, p1};  <span class="comment">// Create the PathMember vectors</span></div>
+<div class="line">std::vector&lt;PathMember&gt; members_1{p2, p3};</div>
+<div class="line">std::vector&lt;PathMember&gt; members_2{p4, p5};</div>
+<div class="line">std::vector&lt;PathMember&gt; members_3{p1, p0};</div>
+<div class="line"> </div>
+<div class="line">Path path_0(members_0);                     <span class="comment">// Create the Path objects</span></div>
+<div class="line">Path path_1(members_1);</div>
+<div class="line">Path path_2(members_2);</div>
+<div class="line">Path path_3(members_3);</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">bool</span> same_values_same_order = path_0 == path_1;</div>
+<div class="line"><span class="keywordtype">bool</span> totally_different = path_0 == path_2;</div>
+<div class="line"><span class="keywordtype">bool</span> same_values_different_order = path_0 == path_3;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// path_0 and path_1 share the same PathMember values, with an identical permutation,</span></div>
+<div class="line"><span class="comment">// so they are equivalent.</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// path_0 and path_2 are not equivalent, because they have completely different PathMember</span></div>
+<div class="line"><span class="comment">// values.</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// path_0 and path_3 are not equivalent, because although they have PathMember objects of</span></div>
+<div class="line"><span class="comment">// the same values, the order in which path_0 and path_3 have their member vectors arranged</span></div>
+<div class="line"><span class="comment">// are different.</span></div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="a4bbba8e48932e990cc6d523ac628765a"></a>
@@ -241,12 +312,27 @@ std::vector&lt; <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_path_m
 <p>Retrieve a <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_path_member.html">PathMember</a> from the underlying <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_path_member.html">PathMember</a> vector, by value </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">i</td><td>The index for the desired <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_path_member.html">PathMember</a> element within members <dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_path_member.html">PathMember</a> within the members vector, at index i, by value </dd></dl>
-</td></tr>
+    <tr><td class="paramname">i</td><td>The index for the desired <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_path_member.html">PathMember</a> element within members</td></tr>
   </table>
   </dd>
 </dl>
-
+<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_path_member.html">PathMember</a> within the members vector, at index i, by value</dd></dl>
+<div class="fragment"><div class="line"><span class="comment">// Create the PathMembers</span></div>
+<div class="line">PathMember p0 = { 3.14f, 3 };</div>
+<div class="line">PathMember p1 = { 2.78f, 2 };</div>
+<div class="line">PathMember p2 = { 1.64f, 1 };</div>
+<div class="line">PathMember p3 = { 9.35f, 7 };</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create the container of PathMembers</span></div>
+<div class="line">std::vector&lt;PathMember&gt; <a class="code" href="struct_h_f_1_1_spatial_structures_1_1_path.html#a864cebbf4e5d7c135c501a63d42f8708">members</a>{p0, p1, p2, p3};</div>
+<div class="line"> </div>
+<div class="line">Path path(<a class="code" href="struct_h_f_1_1_spatial_structures_1_1_path.html#a864cebbf4e5d7c135c501a63d42f8708">members</a>);                         <span class="comment">// Create the Path object, path</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">int</span> desired_index = 2;</div>
+<div class="line">PathMember result = path[desired_index];    <span class="comment">// a copy of the element at desired_index</span></div>
+<div class="line">                                            <span class="comment">// within the internal members vector</span></div>
+<div class="line">                                            <span class="comment">// is assigned to result</span></div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="a61a8a911a572d91683229a80ede5f541"></a>
@@ -273,7 +359,8 @@ std::vector&lt; <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_path_m
 </div><div class="memdoc">
 
 <p>Default constructor, empty block </p>
-
+<div class="fragment"><div class="line">Path path();</div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="a7af74c09bd92982650ac8628d48e8f99"></a>
@@ -293,7 +380,18 @@ std::vector&lt; <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_path_m
 </div><div class="memdoc">
 
 <p>Construct a path from an ordered list of path members </p>
-
+<div class="fragment"><div class="line"><span class="comment">// Create the PathMembers</span></div>
+<div class="line">PathMember p0 = { 3.14f, 3 };</div>
+<div class="line">PathMember p1 = { 2.78f, 2 };</div>
+<div class="line">PathMember p2 = { 1.64f, 1 };</div>
+<div class="line">PathMember p3 = { 9.35, 7 };</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create the container of PathMembers</span></div>
+<div class="line">std::vector&lt;PathMember&gt; <a class="code" href="struct_h_f_1_1_spatial_structures_1_1_path.html#a864cebbf4e5d7c135c501a63d42f8708">members</a>{p0, p1, p2, p3};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create the path, using the container of PathMembers</span></div>
+<div class="line">Path path(<a class="code" href="struct_h_f_1_1_spatial_structures_1_1_path.html#a864cebbf4e5d7c135c501a63d42f8708">members</a>);</div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="adf2bad9ac73dbdc436c365654d54ad98"></a>
@@ -312,7 +410,21 @@ std::vector&lt; <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_path_m
 </div><div class="memdoc">
 
 <p>Invokes std::reverse to reverse the contents of the underlying members vector, using iterators </p>
-
+<div class="fragment"><div class="line"><span class="comment">// Create the PathMembers</span></div>
+<div class="line">PathMember p0 = { 3.14f, 3 };</div>
+<div class="line">PathMember p1 = { 2.78f, 2 };</div>
+<div class="line">PathMember p2 = { 1.64f, 1 };</div>
+<div class="line">PathMember p3 = { 9.35f, 7 };</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create the container of PathMembers</span></div>
+<div class="line">std::vector&lt;PathMember&gt; <a class="code" href="struct_h_f_1_1_spatial_structures_1_1_path.html#a864cebbf4e5d7c135c501a63d42f8708">members</a>{p0, p1, p2, p3};</div>
+<div class="line"> </div>
+<div class="line">Path path(<a class="code" href="struct_h_f_1_1_spatial_structures_1_1_path.html#a864cebbf4e5d7c135c501a63d42f8708">members</a>);         <span class="comment">// Create the Path object, path</span></div>
+<div class="line">path.AddNode(278, 3.14f);   <span class="comment">// Append one more PathMember to path</span></div>
+<div class="line"> </div>
+<div class="line">path.Reverse();             <span class="comment">// The order of the PathMembers within members is now that of</span></div>
+<div class="line">                            <span class="comment">// p3, p2, p1, p0</span></div>
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="a28f61f0f57b38a5249a11a725d9d692b"></a>
@@ -331,15 +443,31 @@ std::vector&lt; <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_path_m
 </div><div class="memdoc">
 
 <p>Retrieves the length of the underlying members vector (<a class="el" href="struct_h_f_1_1_spatial_structures_1_1_path_member.html">PathMember</a> count) </p>
-<dl class="section return"><dt>Returns</dt><dd>The value returned by members.size() - the current <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_path_member.html">PathMember</a> count </dd></dl>
-
+<dl class="section return"><dt>Returns</dt><dd>The value returned by members.size() - the current <a class="el" href="struct_h_f_1_1_spatial_structures_1_1_path_member.html">PathMember</a> count</dd></dl>
+<div class="fragment"><div class="line"><span class="comment">// Create the PathMembers</span></div>
+<div class="line">PathMember p0 = { 3.14f, 3 };</div>
+<div class="line">PathMember p1 = { 2.78f, 2 };</div>
+<div class="line">PathMember p2 = { 1.64f, 1 };</div>
+<div class="line">PathMember p3 = { 9.35f, 7 };</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create the container of PathMembers</span></div>
+<div class="line">std::vector&lt;PathMember&gt; <a class="code" href="struct_h_f_1_1_spatial_structures_1_1_path.html#a864cebbf4e5d7c135c501a63d42f8708">members</a>{p0, p1, p2, p3};</div>
+<div class="line"> </div>
+<div class="line">Path path(<a class="code" href="struct_h_f_1_1_spatial_structures_1_1_path.html#a864cebbf4e5d7c135c501a63d42f8708">members</a>);         <span class="comment">// Create the Path object, path</span></div>
+<div class="line">path.AddNode(278, 3.14f);   <span class="comment">// Add one more PathMember to path</span></div>
+<div class="line"> </div>
+<div class="line">std::string result = path.size() &gt;= 5 ? <span class="stringliteral">&quot;at least 5 members&quot;</span> : <span class="stringliteral">&quot;under 5 members&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;The Path object has &quot;</span> &lt;&lt; result &lt;&lt; std::endl;</div>
+</div><!-- fragment --> 
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following files:<ul>
 <li>Cpp/spatialstructures/src/<a class="el" href="path_8h_source.html">path.h</a></li>
-<li>Cpp/spatialstructures/src/path.cpp</li>
+<li>Cpp/spatialstructures/src/<a class="el" href="path_8cpp.html">path.cpp</a></li>
 </ul>
 </div><!-- contents -->
+<div class="ttc" id="astruct_h_f_1_1_spatial_structures_1_1_path_html_a864cebbf4e5d7c135c501a63d42f8708"><div class="ttname"><a href="struct_h_f_1_1_spatial_structures_1_1_path.html#a864cebbf4e5d7c135c501a63d42f8708">HF::SpatialStructures::Path::members</a></div><div class="ttdeci">std::vector&lt; PathMember &gt; members</div><div class="ttdoc">The underlying vector of PathMember.</div><div class="ttdef"><b>Definition:</b> path.h:67</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
