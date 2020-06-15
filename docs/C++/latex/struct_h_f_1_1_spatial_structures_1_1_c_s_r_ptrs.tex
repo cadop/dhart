@@ -19,22 +19,22 @@ bool \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_c_s_r_ptrs_a46650242
 \item 
 \mbox{\Hypertarget{struct_h_f_1_1_spatial_structures_1_1_c_s_r_ptrs_a67ae38cef6b322331f0e9100b3f480f8}\label{struct_h_f_1_1_spatial_structures_1_1_c_s_r_ptrs_a67ae38cef6b322331f0e9100b3f480f8}} 
 int \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_c_s_r_ptrs_a67ae38cef6b322331f0e9100b3f480f8}{nnz}}
-\begin{DoxyCompactList}\small\item\em T\+O\+DO description ///$<$. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em T\+O\+DO description. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{struct_h_f_1_1_spatial_structures_1_1_c_s_r_ptrs_ab7ef161d6dfc8b606c120cbf5181ed68}\label{struct_h_f_1_1_spatial_structures_1_1_c_s_r_ptrs_ab7ef161d6dfc8b606c120cbf5181ed68}} 
 int \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_c_s_r_ptrs_ab7ef161d6dfc8b606c120cbf5181ed68}{rows}}
-\begin{DoxyCompactList}\small\item\em row count ///$<$ \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em row count \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{struct_h_f_1_1_spatial_structures_1_1_c_s_r_ptrs_a5aed9a3184fd7d7aded80c97c33e2dc5}\label{struct_h_f_1_1_spatial_structures_1_1_c_s_r_ptrs_a5aed9a3184fd7d7aded80c97c33e2dc5}} 
 int \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_c_s_r_ptrs_a5aed9a3184fd7d7aded80c97c33e2dc5}{cols}}
-\begin{DoxyCompactList}\small\item\em column count ///$<$ \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em column count \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{struct_h_f_1_1_spatial_structures_1_1_c_s_r_ptrs_ab31bc5e69630e9101a82790c3a525386}\label{struct_h_f_1_1_spatial_structures_1_1_c_s_r_ptrs_ab31bc5e69630e9101a82790c3a525386}} 
 float $\ast$ \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_c_s_r_ptrs_ab31bc5e69630e9101a82790c3a525386}{data}}
-\begin{DoxyCompactList}\small\item\em T\+O\+DO description ///$<$. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em T\+O\+DO description. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{struct_h_f_1_1_spatial_structures_1_1_c_s_r_ptrs_a49c0ac5c7fde9a797887699bc4670de4}\label{struct_h_f_1_1_spatial_structures_1_1_c_s_r_ptrs_a49c0ac5c7fde9a797887699bc4670de4}} 
 int $\ast$ \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_c_s_r_ptrs_a49c0ac5c7fde9a797887699bc4670de4}{outer\+\_\+indices}}
-\begin{DoxyCompactList}\small\item\em T\+O\+DO description ///$<$. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em T\+O\+DO description. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{struct_h_f_1_1_spatial_structures_1_1_c_s_r_ptrs_a9a946e3ae6172a03c6a98e1dee39cc19}\label{struct_h_f_1_1_spatial_structures_1_1_c_s_r_ptrs_a9a946e3ae6172a03c6a98e1dee39cc19}} 
 int $\ast$ \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_c_s_r_ptrs_a9a946e3ae6172a03c6a98e1dee39cc19}{inner\+\_\+indices}}
-\begin{DoxyCompactList}\small\item\em T\+O\+DO description ///$<$. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em T\+O\+DO description. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -57,7 +57,17 @@ Determines if member pointers data, outer\+\_\+indices, and inner\+\_\+indices a
 True if data, outer\+\_\+indices, and inner\+\_\+indices are non-\/null, false otherwise
 \end{DoxyReturn}
 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{float}* \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_c_s_r_ptrs_ab31bc5e69630e9101a82790c3a525386}{data}} = \textcolor{keyword}{new} \textcolor{keywordtype}{float}[16];}
+\DoxyCodeLine{\textcolor{keywordtype}{int}* \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_c_s_r_ptrs_a49c0ac5c7fde9a797887699bc4670de4}{outer\_indices}} = \textcolor{keyword}{new} \textcolor{keywordtype}{int}[16];}
+\DoxyCodeLine{\textcolor{keywordtype}{int}* \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_c_s_r_ptrs_a9a946e3ae6172a03c6a98e1dee39cc19}{inner\_indices}} = \textcolor{keyword}{new} \textcolor{keywordtype}{int}[16];}
+\DoxyCodeLine{}
+\DoxyCodeLine{CSRPtrs csr = \{ 1, 2, 3, \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_c_s_r_ptrs_ab31bc5e69630e9101a82790c3a525386}{data}}, \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_c_s_r_ptrs_a49c0ac5c7fde9a797887699bc4670de4}{outer\_indices}}, \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_c_s_r_ptrs_a9a946e3ae6172a03c6a98e1dee39cc19}{inner\_indices}} \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} validity = csr.AreValid(); \textcolor{comment}{// validity == true, since all pointer fields are non-\/null}}
+\end{DoxyCode}
+ 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-Cpp/spatialstructures/src/graph.\+h\end{DoxyCompactItemize}
+Cpp/spatialstructures/src/\mbox{\hyperlink{graph_8h}{graph.\+h}}\end{DoxyCompactItemize}

@@ -93,21 +93,21 @@ $(function() {
 </ul>
 </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md28"></a>
+<h1><a class="anchor" id="autotoc_md27"></a>
 Intro</h1>
 <p>This tutorial will demonstrate how to pass geometry from the scene in Unity to Human Factors. We'll be using the project created in the previous guide: H:/HFGitlab/Analysis/docs/C# Documentation/markdown/3_graph_generator.md "The Graph Generator", and we'll be using concepts covered in the previous guides.</p>
-<h1><a class="anchor" id="autotoc_md29"></a>
+<h1><a class="anchor" id="autotoc_md28"></a>
 Scene Setup</h1>
 <p>Up until this point, we haven't needed to interact with the unity scene, aside script to the camera game object that's already there. In order for us to demonstrate reading geometry from the scene, we must first create geometry in the scene. For this example, we will create a plane in unity instead of creating our own plane in code.</p>
 <p>To begin, open up the unity project from H:/HFGitlab/Analysis/docs/C# Documentation/markdown/3_graph_generator.md "The Graph Generator".</p>
 <p><img src="../assets/walkthroughs/unity/4_graph_generator/start_point.png" alt="Blank Scene" class="inline"/></p>
 <p>From here we will create a new plane then translate it directly to the origin.</p>
-<h2><a class="anchor" id="autotoc_md30"></a>
+<h2><a class="anchor" id="autotoc_md29"></a>
 Creating the Plane</h2>
 <p>Using the menubar at the top of the screen select GameObject &gt; 3D Object &gt; Plane.</p>
 <p><img src="../assets/walkthroughs/unity/4_graph_generator/create_plane.png" alt="Plane Created" class="inline"/></p>
 <p>Once clicked, a new 1x1 plane will be created, however it may not have been created at the origin exactly. For this tutorial we will reset the plane's position just be be sure it's always placed exactly in the same place.</p>
-<h2><a class="anchor" id="autotoc_md31"></a>
+<h2><a class="anchor" id="autotoc_md30"></a>
 Resetting the Plane's Position</h2>
 <p>Left Click on the newly created plane and look at <b>Transform</b> header in the Inspector located at the right sidebar.</p>
 <p><img src="../assets/walkthroughs/unity/4_graph_generator/look_at_transforms.png" alt="Transform Visible" class="inline"/></p>
@@ -116,10 +116,10 @@ Resetting the Plane's Position</h2>
 <p>After clicking that button, your plane should be moved to the origin like in the image below. Ensure the position, rotation and scale values in the transform section completely match those of the image.</p>
 <p><img src="../assets/walkthroughs/unity/4_graph_generator/resetted_plane.png" alt="Plane After Reset Position" class="inline"/></p>
 <p>Now that we have the plane ready to go, we can begin working on the script to get its vertices and triangles.</p>
-<h1><a class="anchor" id="autotoc_md32"></a>
+<h1><a class="anchor" id="autotoc_md31"></a>
 Writing the Script</h1>
 <p>Open up the New Behavior script we created in the H:/HFGitlab/Analysis/docs/C# Documentation/markdown/3_graph_generator.md "previous tutorial"</p>
-<h2><a class="anchor" id="autotoc_md33"></a>
+<h2><a class="anchor" id="autotoc_md32"></a>
 Set Usings</h2>
 <p>Just like last time, we're going to declare which namespaces this script will use in the using section. GraphOnPlane will require the same usings as the previous project as well as the Graph Generator Namespace</p>
 <div class="fragment"><div class="line">using HumanFactors.Geometry;</div>
@@ -128,16 +128,16 @@ Set Usings</h2>
 <div class="line">using HumanFactors.SpatialStructures;</div>
 </div><!-- fragment --><p>Your usings for this script should look like this.</p>
 <p><img src="../assets/walkthroughs/unity/4_graph_generator/usings.png" alt="Empty Script" class="inline"/></p>
-<h2><a class="anchor" id="autotoc_md34"></a>
+<h2><a class="anchor" id="autotoc_md33"></a>
 Setup for adding references through the unity inspector</h2>
 <p>Before we can worry about generating the graph, first we need to get the mesh from the Plane Gameobject we created in the Unity Editor. There are many ways to reference a GameObject from a script code, but for this example we'll be setting up our script so we can select the mesh to use from the scene in the Unity Inspector. For now, all we need to do is declare a GameObject member for our new class as shown below.</p>
 <div class="fragment"><div class="line">GameObject PlaneReference;</div>
 </div><!-- fragment --><p><img src="../assets/walkthroughs/unity/4_graph_generator/PlaneReference.png" alt="PlaneReference" class="inline"/></p>
 <p>Later we'll use the unity inspector to assign the plane we created in the scene to this object</p>
-<h2><a class="anchor" id="autotoc_md35"></a>
+<h2><a class="anchor" id="autotoc_md34"></a>
 Passing Meshes from GameObjects to HumanFactors</h2>
 <p>Now that we have a reference to the plane game object we want to use, we need to get the raw vertices and faces of plane so we can pass it to HumanFactors for use in the graph generator.</p>
-<h3><a class="anchor" id="autotoc_md36"></a>
+<h3><a class="anchor" id="autotoc_md35"></a>
 Getting a reference to the mesh held by a specific Game Object</h3>
 <p>Before we can extract the triangles and vertices from one an instance of a Unity Mesh, we first need to get a reference to the Mesh itself. Doing this requires some understanding of Unity GameObjects and their components. Tabbing back over to Unity for a moment, clicking on the plane, then looking at the inspector in the right reveals that the plane we see in the scene isn't just a mesh, but is in fact a <a href="https://docs.unity3d.com/Manual/class-GameObject.html"><b>GameObject</b></a> comprised of several different components.</p>
 <p><img src="../assets/walkthroughs/unity/4_graph_generator/plane_inspector.png" alt="PlaneReference" class="inline"/></p>
@@ -151,7 +151,7 @@ Getting a reference to the mesh held by a specific Game Object</h3>
 <div class="line">       MeshFilter Filter = PlaneReference.GetComponent&lt;MeshFilter&gt;();</div>
 </div><!-- fragment --><p>Then we'll access the actual mesh carried by <code>Filter</code> by calling its .mesh property</p>
 <div class="fragment"><div class="line">Mesh PlaneMesh = Filter.mesh;</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md37"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md36"></a>
 Getting the vertices and triangles from a Unity Mesh</h3>
 <p>We're not out of the woods yet. For Human Factors to use a mesh it needs two things:</p>
 <p>1) The (x,y,z) location of every vertex that comprises the mesh as an array of floats. 2) The Indexes for each triangle or "Face" of the mesh as an array of integers.</p>
@@ -171,7 +171,7 @@ Getting the vertices and triangles from a Unity Mesh</h3>
 <div class="line">    return return_array;</div>
 <div class="line">}</div>
 </div><!-- fragment --><p><img src="../assets/walkthroughs/unity/4_graph_generator/flatten_vertex_array.png" alt="FlattenVertexArray" class="inline"/></p>
-<h3><a class="anchor" id="autotoc_md38"></a>
+<h3><a class="anchor" id="autotoc_md37"></a>
 Transforming the Mesh from Y-Up to Z-Up</h3>
 <p>But wait, there's one more step involved when directly pulling meshes from Unity. Another quick peek at the editor in the top right corner reveals that Unity's coordinate system is fundamentally different from the coordinate system needed by Human Factors.</p>
 <p><img src="../assets/walkthroughs/unity/4_graph_generator/unity_coordinate_system.png" alt="UnityCoords" class="inline"/> <img src="../assets/walkthroughs/unity/4_graph_generator/rhino_coordinates.png" alt="RhinoCoords" class="inline"/></p>
@@ -190,11 +190,11 @@ Transforming the Mesh from Y-Up to Z-Up</h3>
 </div><!-- fragment --><p>Your end file should look like the following:</p>
 <p><img src="../assets/walkthroughs/unity/4_graph_generator/end_of_getting_mesh.png" alt="End Of Getting Mesh" class="inline"/></p>
 <p>screenshot, so instead I'll just post the full code in this document here.</p>
-<h1><a class="anchor" id="autotoc_md39"></a>
+<h1><a class="anchor" id="autotoc_md38"></a>
 Executing the Script</h1>
-<h2><a class="anchor" id="autotoc_md40"></a>
+<h2><a class="anchor" id="autotoc_md39"></a>
 Adding References Through the Unity Inspector</h2>
-<h2><a class="anchor" id="autotoc_md41"></a>
+<h2><a class="anchor" id="autotoc_md40"></a>
 Comparing Output</h2>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

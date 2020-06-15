@@ -87,15 +87,15 @@ $(function() {
 </ul>
 </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md19"></a>
+<h1><a class="anchor" id="autotoc_md18"></a>
 Intro</h1>
 <p>This tutorial picks up from where H:/HFGitlab/Analysis/docs/C# Documentation/markdown/1_unity_project_setup.md "Tutorial 1: Unity Project Setup" ended. If you are just beginning here, then you can download the Unity project from the bottom of tutorial 1.</p>
 <p>In this tutorial we will cover the following:</p>
 <p>1) Calling the GraphGenerator with a bvh, spacing, and a start point. 2) Reading nodes from a graph after it has been generated. 3) Handling cases where the GraphGenerator could not generate a graph.</p>
-<h2><a class="anchor" id="autotoc_md20"></a>
+<h2><a class="anchor" id="autotoc_md19"></a>
 Conceptual Overview</h2>
 <p>To put it simply, the <b>Graph Generator</b> maps out "accessible" space on a model from a given starting point. As the name implies, this map of the space is stored as a series of nodes and edges in a <b>Graph</b>. Each node represents a point in space that a human can occupy, and each edge between nodes indicates that a human can traverse from one node to another node. The Graph Generator is a powerful tool for analyzing space, since the graph or nodes it outputs can be used as input to all of the analysis methods offered by HumanFactors. This allows the user to go straight from modifying a model or scene, to analyzing it with minimal effort.</p>
-<h1><a class="anchor" id="autotoc_md21"></a>
+<h1><a class="anchor" id="autotoc_md20"></a>
 Simple Graph Generation</h1>
 <p>For now, we will begin with the minimum required settings to run the Graph Generator then work our way up to examples that make use of the optional settings. To generate a graph at minimum, the following arguments are requried:</p>
 <p>1) A BVH containing the mesh you want to use for graph generation. 2) A point to start graph generation at. 3) The spacing between nodes.</p>
@@ -106,7 +106,7 @@ Simple Graph Generation</h1>
 <div class="line">using HumanFactors.GraphGenerator;</div>
 <div class="line">using HumanFactors.RayTracing;</div>
 </div><!-- fragment --><p><img src="../assets/walkthroughs/unity/3_graph_generator/using_declarations.png" alt="Using Declarations" class="inline"/></p>
-<h2><a class="anchor" id="autotoc_md22"></a>
+<h2><a class="anchor" id="autotoc_md21"></a>
 Creating the Plane</h2>
 <p>Internally, the graph uses the <em>EmbreeRayTracer</em> which requires a BVH, so we can follow the process as the H:/HFGitlab/Analysis/docs/C# Documentation/markdown/2_raycast_at_plane.md "previous tutorial" to create a plane, then generate a BVH from it.</p>
 <p>In the start function add the following code in the body of the Start function on line 13:</p>
@@ -128,7 +128,7 @@ Creating the Plane</h2>
 <div class="line">// Generate a BVH for the RayTracer</div>
 <div class="line">EmbreeBVH bvh = new EmbreeBVH(Plane);</div>
 </div><!-- fragment --><p><img src="../assets/walkthroughs/unity/3_graph_generator/creating_the_plane.PNG" alt="Creating The Plane" class="inline"/></p>
-<h2><a class="anchor" id="autotoc_md23"></a>
+<h2><a class="anchor" id="autotoc_md22"></a>
 Generating the Graph</h2>
 <p>Now that we have a BVH, let's generate a graph on it. In the code below, we define a starting point for the graph, then we define the spacing between each node.</p>
 <p>We'll place our start point 1 meter above the origin of the scene (0,0,1). Starting directly at the origin, (0,0,0), would put the start point inside of the plane we're using for the ground, causing the initial ground check to fail.</p>
@@ -141,14 +141,14 @@ Generating the Graph</h2>
 <div class="line">       // Generate the Graph</div>
 <div class="line">       Graph G = GraphGenerator.GenerateGraph(bvh, start_point, spacing);</div>
 </div><!-- fragment --><p><img src="../assets/walkthroughs/unity/3_graph_generator/generating_the_graph.PNG" alt="Generating The Graph" class="inline"/></p>
-<h2><a class="anchor" id="autotoc_md24"></a>
+<h2><a class="anchor" id="autotoc_md23"></a>
 Retrieving A list of nodes</h2>
 <p>G now contains a graph of the accessible space on Plane using our settings. For this tutorial we will get a list of all nodes within the graph, and print them to get an idea of where this graph traversed.</p>
 <div class="fragment"><div class="line">// Get a list of nodes from the graph and print them.</div>
 <div class="line">NodeList nodes = G.getNodes();</div>
 <div class="line">Debug.Log(nodes);</div>
 </div><!-- fragment --><p><img src="../assets/walkthroughs/unity/3_graph_generator/print_nodes.png" alt="Print Nodes" class="inline"/></p>
-<h2><a class="anchor" id="autotoc_md25"></a>
+<h2><a class="anchor" id="autotoc_md24"></a>
 Save and Test</h2>
 <p>Here is the full script we've created from this demo. Make sure yours matches it before moving on to testing.</p>
 <div class="fragment"><div class="line">using System.Collections;</div>
@@ -230,7 +230,7 @@ Save and Test</h2>
 <div class="line">        }</div>
 </div><!-- fragment --><p><img src="../assets/walkthroughs/unity/3_graph_generator/checking_for_success.PNG" alt="Checking For Success" class="inline"/></p>
 <p>Now, if the graph fails to generate, Unity will print our nice error message and stop executing the script instead of later throwing a null reference exception when we try to interact with it. </p>
-<h1><a class="anchor" id="autotoc_md26"></a>
+<h1><a class="anchor" id="autotoc_md25"></a>
 Conclusion</h1>
 <p>Here is a link the the full project created in this guide: <a href="../assets/walkthroughs/unity/3_graph_generator/Tutorial%203%20-%20Graph%20Generator.zip">Full Project</a></p>
 <p>In the next tutorial, Reading Meshes From Unity, we will use geometry from the unity scene to generate a graph, instead of generating our own plane. </p>

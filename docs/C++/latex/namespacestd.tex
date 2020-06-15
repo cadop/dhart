@@ -27,10 +27,35 @@ ostream \& {\bfseries operator$<$$<$} (ostream \&os, const \mbox{\hyperlink{stru
 \mbox{\Hypertarget{namespacestd_aee30eba635bd37255ea68605678ad5a2}\label{namespacestd_aee30eba635bd37255ea68605678ad5a2}} 
 ostream \& {\bfseries operator$<$$<$} (ostream \&os, const std\+::array$<$ float, 3 $>$ n)
 \item 
-\mbox{\Hypertarget{namespacestd_af6138876bfed2f7c6cb87dc2c9628692}\label{namespacestd_af6138876bfed2f7c6cb87dc2c9628692}} 
-ostream \& {\bfseries operator$<$$<$} (ostream \&os, const \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_path}{H\+F\+::\+Spatial\+Structures\+::\+Path}} p)
+ostream \& \mbox{\hyperlink{namespacestd_af6138876bfed2f7c6cb87dc2c9628692}{operator$<$$<$}} (ostream \&os, const \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_path}{H\+F\+::\+Spatial\+Structures\+::\+Path}} p)
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Hashing code for nodes. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacestd_af6138876bfed2f7c6cb87dc2c9628692}\label{namespacestd_af6138876bfed2f7c6cb87dc2c9628692}} 
+\index{std@{std}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!std@{std}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}}
+{\footnotesize\ttfamily ostream\& std\+::operator$<$$<$ (\begin{DoxyParamCaption}\item[{ostream \&}]{os,  }\item[{const \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_path}{H\+F\+::\+Spatial\+Structures\+::\+Path}}}]{p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Create the PathMembers}}
+\DoxyCodeLine{PathMember p0 = \{ 3.14f, 3 \};}
+\DoxyCodeLine{PathMember p1 = \{ 2.78f, 2 \};}
+\DoxyCodeLine{PathMember p2 = \{ 1.64f, 1 \};}
+\DoxyCodeLine{PathMember p3 = \{ 9.35f, 7 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the container of PathMembers}}
+\DoxyCodeLine{std::vector<PathMember> members\{p0, p1, p2, p3\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{Path path(members);                         \textcolor{comment}{// Create the Path object, path}}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::cout << path << std::endl;             \textcolor{comment}{// Output path to an ostream, like cout}}
+\DoxyCodeLine{\textcolor{comment}{// Output is:}}
+\DoxyCodeLine{\textcolor{comment}{// (3) -\/3.14-\/> (2) -\/2.78-\/> (1) -\/1.64-\/> (7) -\/9.35-\/>}}
+\end{DoxyCode}
+ 

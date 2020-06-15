@@ -1,9 +1,9 @@
 
-# Setting Up a Unity Project for Human Factors {#ProjectSetup}
+# Setting Up a Unity Project for Human Factors {#UnityProjectSetup}
 
 Next Tutorial: [Using The Raytracer](@ref UsingTheRaytracer)
 
-- [Setting Up a Unity Project for Human Factors {#ProjectSetup}](#setting-up-a-unity-project-for-human-factors-projectsetup)
+- [Setting Up a Unity Project for Human Factors {#UnityProjectSetup}](#setting-up-a-unity-project-for-human-factors-unityprojectsetup)
   - [Before we begin](#before-we-begin)
     - [Prerequisites](#prerequisites)
   - [Creating a new project](#creating-a-new-project)
@@ -12,8 +12,6 @@ Next Tutorial: [Using The Raytracer](@ref UsingTheRaytracer)
   - [Conclusion](#conclusion)
 
 ## Before we begin
-
-This guide will demonstrate setting up a new Unity project from scratch, importing the HumanFactors API as an asset, then verifying the Unity project can reference it.
 
 In this guide we will cover the following:
 
@@ -103,7 +101,7 @@ Now that we have our new script, double click on it to open Visual studio.
 
 In Visual Studio, navigate to the *Solution Explorer* then expand the drop downs for your solution, Assembly-C-Sharp, and References. If everything was done correctly, you should see HumanFactors C# under the references for your project, as shown in Figure 1.8.
 
-> **NOTE**: If Mono-Develop appears instead of Visual Studio, then your installation of Unity is not set up to support Visual Studio. You can follow the above instructions from [Prerequisites](#prerequisites) to fix this.
+> **NOTE**: If Mono-Develop appears instead of Visual Studio, then your installation of Unity is not set up to support Visual Studio. You can follow the above instructions from prerequisites to fix this.
 
 > **NOTE**: If you renamed the file earlier, then your class's name may not match the name of the class in Figure 1.8. To fix this, just replace the class's name with `HFExampleScript.cs` on line 5.
 > 
@@ -122,4 +120,4 @@ Below is a link to the unity project created in this tutorial.
 
 In this tutorial, we went through the process of creating unity project and adding the Analysis toolkit to the project. In the following tutorials, we will use this basis for using the modules that come with the Analysis toolkit.
 
-In the next tutorial: [Using the Raytracer](2_raycast_at_plane.md) we will use HumanFactors to create a plane, cast a ray at it, then get the point where the ray intersected the plane.
+In the next tutorial: [Using the Raytracer](@ref UsingTheRayTracer) we will use HumanFactors to create a plane, cast a ray at it, then get the point where the ray intersected the plane.

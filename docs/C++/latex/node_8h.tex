@@ -1,0 +1,69 @@
+\hypertarget{node_8h}{}\doxysection{Cpp/spatialstructures/src/node.h File Reference}
+\label{node_8h}\index{Cpp/spatialstructures/src/node.h@{Cpp/spatialstructures/src/node.h}}
+
+
+Header file for a node data structure, used in a graph A\+DT.  
+
+
+{\ttfamily \#include $<$array$>$}\newline
+{\ttfamily \#include $<$ostream$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{H\+F\+::\+Spatial\+Structures\+::\+Node}}
+\begin{DoxyCompactList}\small\item\em A point in space with an ID \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structstd_1_1hash_3_01_h_f_1_1_spatial_structures_1_1_node_01_4}{std\+::hash$<$ H\+F\+::\+Spatial\+Structures\+::\+Node $>$}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespace_h_f}{HF}}
+\begin{DoxyCompactList}\small\item\em Output C\+SR for interop with other languages \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{namespacestd}{std}}
+\begin{DoxyCompactList}\small\item\em Hashing code for nodes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{node_8h_aa8ecd83cd353318532d791fc819343cc}{H\+F\+::\+Spatial\+Structures\+::\+N\+O\+D\+E\+\_\+\+T\+Y\+PE}} \{ {\bfseries G\+R\+A\+PH} = 0, 
+\mbox{\hyperlink{node_8h_aa8ecd83cd353318532d791fc819343cca023bd38e0854e766e5c483d451a383ad}{H\+F\+::\+Spatial\+Structures\+::\+P\+OI}} = 1, 
+{\bfseries O\+T\+H\+ER} = 2
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{namespacestd_a3340e7ae931e28e5c83e07f1d48d3ea2}\label{namespacestd_a3340e7ae931e28e5c83e07f1d48d3ea2}} 
+{\footnotesize template$<$typename SizeT $>$ }\\void {\bfseries std\+::hash\+\_\+combine\+\_\+impl} (SizeT \&seed, SizeT value) noexcept
+\item 
+\mbox{\Hypertarget{namespacestd_af16e54cd5d732cad0aaf6c74059a027b}\label{namespacestd_af16e54cd5d732cad0aaf6c74059a027b}} 
+ostream \& {\bfseries std\+::operator$<$$<$} (ostream \&os, const \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_node}{H\+F\+::\+Spatial\+Structures\+::\+Node}} n)
+\item 
+\mbox{\Hypertarget{namespacestd_aee30eba635bd37255ea68605678ad5a2}\label{namespacestd_aee30eba635bd37255ea68605678ad5a2}} 
+ostream \& {\bfseries std\+::operator$<$$<$} (ostream \&os, const std\+::array$<$ float, 3 $>$ n)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Header file for a node data structure, used in a graph A\+DT. 
+
+\begin{DoxyAuthor}{Author}
+T\+BA 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+06 Jun 2020 
+\end{DoxyDate}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{node_8h_aa8ecd83cd353318532d791fc819343cc}\label{node_8h_aa8ecd83cd353318532d791fc819343cc}} 
+\index{node.h@{node.h}!NODE\_TYPE@{NODE\_TYPE}}
+\index{NODE\_TYPE@{NODE\_TYPE}!node.h@{node.h}}
+\doxysubsubsection{\texorpdfstring{NODE\_TYPE}{NODE\_TYPE}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{node_8h_aa8ecd83cd353318532d791fc819343cc}{H\+F\+::\+Spatial\+Structures\+::\+N\+O\+D\+E\+\_\+\+T\+Y\+PE}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{POI@{POI}!node.h@{node.h}}\index{node.h@{node.h}!POI@{POI}}}\mbox{\Hypertarget{node_8h_aa8ecd83cd353318532d791fc819343cca023bd38e0854e766e5c483d451a383ad}\label{node_8h_aa8ecd83cd353318532d791fc819343cca023bd38e0854e766e5c483d451a383ad}} 
+P\+OI&P\+OI is \textquotesingle{}point of interest\textquotesingle{}. \\
+\hline
+
+\end{DoxyEnumFields}

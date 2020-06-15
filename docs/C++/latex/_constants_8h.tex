@@ -1,0 +1,63 @@
+\hypertarget{_constants_8h}{}\doxysection{Cpp/spatialstructures/src/\+Constants.h File Reference}
+\label{_constants_8h}\index{Cpp/spatialstructures/src/Constants.h@{Cpp/spatialstructures/src/Constants.h}}
+
+
+Header file for constants/procedures in the H\+F\+::\+Spatial\+Structures namespace.  
+
+
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespace_h_f}{HF}}
+\begin{DoxyCompactList}\small\item\em Output C\+SR for interop with other languages \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{_constants_8h_a2663b7e0dd2b9fb87e582feddcd13a8c}{H\+F\+::\+Spatial\+Structures\+::roundhf}} (float f)
+\begin{DoxyCompactList}\small\item\em Round a float using std\+::round \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{_constants_8h_a0140105869479399be75147c8f77e724}\label{_constants_8h_a0140105869479399be75147c8f77e724}} 
+constexpr float {\bfseries H\+F\+::\+Spatial\+Structures\+::\+R\+O\+U\+N\+D\+I\+N\+G\+\_\+\+P\+R\+E\+C\+I\+S\+I\+ON} = 0.\+0001f
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Header file for constants/procedures in the H\+F\+::\+Spatial\+Structures namespace. 
+
+\begin{DoxyAuthor}{Author}
+T\+BA 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+06 Jun 2020 
+\end{DoxyDate}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_constants_8h_a2663b7e0dd2b9fb87e582feddcd13a8c}\label{_constants_8h_a2663b7e0dd2b9fb87e582feddcd13a8c}} 
+\index{Constants.h@{Constants.h}!roundhf@{roundhf}}
+\index{roundhf@{roundhf}!Constants.h@{Constants.h}}
+\doxysubsubsection{\texorpdfstring{roundhf()}{roundhf()}}
+{\footnotesize\ttfamily float H\+F\+::\+Spatial\+Structures\+::roundhf (\begin{DoxyParamCaption}\item[{float}]{f }\end{DoxyParamCaption})}
+
+
+
+Round a float using std\+::round 
+
+
+\begin{DoxyParams}{Parameters}
+{\em f} & The desired float to round\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A rounded floating-\/point value using std\+::round and R\+O\+U\+N\+D\+I\+N\+G\+\_\+\+P\+R\+E\+C\+I\+S\+I\+ON
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// std::round from the cmath library is used in roundhf.}}
+\DoxyCodeLine{\textcolor{comment}{// Precision is to the nearest ten-\/thousandth}}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} my\_pi = 3.141592653589793238462643383279502884197169399375105820974944592307816406286}
+\DoxyCodeLine{float rounded = \mbox{\hyperlink{_constants_8h_a2663b7e0dd2b9fb87e582feddcd13a8c}{HF::SpatialStructures::roundhf}}(my\_pi);  \textcolor{comment}{//  rounded == 3.1416   }}
+\end{DoxyCode}
+ 

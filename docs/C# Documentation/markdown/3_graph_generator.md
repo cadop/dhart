@@ -1,7 +1,7 @@
 
 # Using the Graph Generator {#GeneratingAGraph}
 
-Previous Tutorial: [Using the Raytracer](@ref UsingTheRaytracer)
+Previous Tutorial: [Project Setup](@ref UnityProjectSetup)
 |
 Next Tutorial: [Passing a Mesh From Unity to HumanFactors](@ref MeshFromUnity)
 
@@ -53,7 +53,7 @@ using HumanFactors.RayTracing;
 
 ### Creating the Plane
 
-Internally, the graph uses the *EmbreeRayTracer* which requires a BVH, so we can follow the process as the [previous tutorial](2_raycast_at_plane.md) to create a plane, then generate a BVH from it.
+Internally, the graph uses the *EmbreeRayTracer* which requires a BVH, so we can follow the process as the [Project 2A](@ref UsingTheRayTracer) to create a plane, then generate a BVH from it.
 
 In the start function add the following code in the body of the Start function on line 13:
 
