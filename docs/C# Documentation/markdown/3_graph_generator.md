@@ -11,14 +11,21 @@ Next Tutorial: [Passing a Mesh From Unity to HumanFactors](4_reading_mesh_from_u
   - [Simple Graph Generation](#simple-graph-generation)
     - [Creating the Plane](#creating-the-plane)
     - [Generating the Graph](#generating-the-graph)
-    - [Checking for success](#checking-for-success)
     - [Retrieving A list of nodes](#retrieving-a-list-of-nodes)
     - [Save and Test](#save-and-test)
+  - [Cases where the GraphGenerator fails](#cases-where-the-graphgenerator-fails)
+    - [Checking for success](#checking-for-success)
   - [Conclusion](#conclusion)
 
 ## Intro
 
 This tutorial picks up from where [Tutorial 1: Unity Project Setup](1_unity_project_setup.md) ended. If you are just beginning here, then you can download the Unity project from the bottom of tutorial 1.
+
+In this tutorial we will cover the following:
+
+1) Calling the GraphGenerator with a bvh, spacing, and a start point.
+2) Reading nodes from a graph after it has been generated.
+3) Handling cases where the GraphGenerator could not generate a graph.
 
 ### Conceptual Overview
 
@@ -46,18 +53,22 @@ using HumanFactors.RayTracing;
 
 ### Creating the Plane
 
-Internally, the graph uses the *EmbreeRayTracer* which requires a BVH, so we can follow the process as the [previous tutorial](2_raycast_at_plane.md) to create a plane, then generate a BVH from it. For the purposes of this tutorial we will use a plane that is 10mx10m instead of 20mx20m, and oriented on the xy plane instead of the yz plane.
+Internally, the graph uses the *EmbreeRayTracer* which requires a BVH, so we can follow the process as the [previous tutorial](2_raycast_at_plane.md) to create a plane, then generate a BVH from it.
 
-In the start function add the following code:
+In the start function add the following code in the body of the Start function on line 13:
+
 ``` C#
-        // Create an array of a plane's vertices and indices
+        // Create the plane's vertex and index arrays
         float[] plane_vertices = {
             -10f, 10f, 0f,
             -10f, -10f, 0f,
              10f, 10f, 0f,
              10f, -10f, 0f
         };
-        int[] plane_indices = { 3, 1, 0, 2, 3, 0 };
+        int[] plane_indices = {
+           3, 1, 0,
+           2, 3, 0
+        };
 
         // Send them to HumanFactors
         MeshInfo Plane = new MeshInfo(plane_indices, plane_vertices);
@@ -65,47 +76,37 @@ In the start function add the following code:
         // Generate a BVH for the RayTracer
         EmbreeBVH bvh = new EmbreeBVH(Plane);
 ```
+
 ![Creating The Plane](../assets/walkthroughs/unity/3_graph_generator/creating_the_plane.PNG)
 
 ### Generating the Graph
 
 Now that we have a BVH, let's generate a graph on it. In the code below, we define a starting point for the graph, then we define the spacing between each node.
 
-We'll place our start point 1 meter above the origin of the scene (0,0,1). Starting directly at the origin, (0,0,0), would put the start point inside of the plane we're using for the ground, causing the initial ground check to fail. 
+We'll place our start point 1 meter above the origin of the scene (0,0,1). Starting directly at the origin, (0,0,0), would put the start point inside of the plane we're using for the ground, causing the initial ground check to fail.
 
-For this demonstration, we'll use a spacing of one meter in each direction, so each node in our graph will be at maximum one meter apart. Generally, lower spacing results in a more dense, detailed graph, while higher spacing creates less dense, less detailed graphs.
-
-To accomplish the above, enter this code below the BVH code from the previous section.
 ```C#
-        // Set Options for the Graph Generator
-        Vector3D start_point = new Vector3D(0, 0, 1); // The point to start thegraph generation
-        Vector3D spacing = new Vector3D(1, 1, 1); // The spacing between each node
+        Vector3D start_point = new Vector3D(0, 0, 1);
+```
 
+We'll use a spacing of one meter in each direction, so each node in our graph will be at maximum one meter apart.
+
+``` C#
+        Vector3D start_point = new Vector3D(0, 0, 1);
+```
+
+Finally we will call the GraphGenerator with these arguments.
+
+```C#
         // Generate the Graph
         Graph G = GraphGenerator.GenerateGraph(bvh, start_point, spacing);
 ```
 
 ![Generating The Graph](../assets/walkthroughs/unity/3_graph_generator/generating_the_graph.PNG)
 
-### Checking for success
-
-Before interacting with the returned value, we need to check if the Graph Generator was able to generate a graph from our input. If the Graph Generator could not generate any connections from the start point, or the start point was not over any solid ground, the graph will fail to generate and the Graph Generator will return a null value. Let's add a null check just after the graph is generated.
-
-``` C#
-        // Check if the graph generator succeeded
-        if (G is null) {
-            Debug.Log("The Graph failed to generate.");
-            return;
-        }
-```
-
-![Checking For Success](../assets/walkthroughs/unity/3_graph_generator/checking_for_success.PNG)
-
-Now, if the graph fails to generate, Unity will print our nice error message and stop executing the script instead of later throwing a null reference exception when we try to interact with it.
-
 ### Retrieving A list of nodes
 
-If the code has advanced past the null check, that means the GraphGenerator was successful and G now contains a graph of the accessible space on Plane using our settings. For this tutorial we will get a list of all nodes within the graph, and print them to get an idea of where this graph traversed.
+G now contains a graph of the accessible space on Plane using our settings. For this tutorial we will get a list of all nodes within the graph, and print them to get an idea of where this graph traversed.
 
 ``` C#
         // Get a list of nodes from the graph and print them.
@@ -171,7 +172,7 @@ public class NewBehaviourScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
 ```
@@ -188,10 +189,29 @@ The highlighted text should read:
 
 ``` [(0.000,0.000,0.000), (-1.000,-1.000,0.000), (-1.000,0.000,0.000), (-1.000,1.000,0.000), (0.000,-1.000,0.000), . . . (10.000,7.000,0.000), (10.000,8.000,0.000), (10.000,9.000,0.000), (10.000,10.000,0.000)]```
 
-Note that this is not the full list of nodes due to the size of the output. In order to view every node we'll have to print them in a loop. 
+> **Note:**  this is not the full list of nodes. The list has been truncated due to the size of the output. In order to view every node we'll have to print them in a loop.
 
 Switch back to the previous view by clicking on the Project tab just above the blue highlighted message. In the above image this tab is circled in red. After this, exit playmode by clicking on the blue play button at the top of the screen.
 
+## Cases where the GraphGenerator fails
+
+We've covered situations where we know the GraphGenerator will generate a graph, however what about sitauations where 
+
+### Checking for success
+
+Before interacting with the returned value, we need to check if the Graph Generator was able to generate a graph from our input. If the Graph Generator could not generate any connections from the start point, or the start point was not over any solid ground, the graph will fail to generate and the Graph Generator will return a null value. Let's add a null check just after the graph is generated.
+
+``` C#
+        // Check if the graph generator succeeded
+        if (G is null) {
+            Debug.Log("The Graph failed to generate.");
+            return;
+        }
+```
+
+![Checking For Success](../assets/walkthroughs/unity/3_graph_generator/checking_for_success.PNG)
+
+Now, if the graph fails to generate, Unity will print our nice error message and stop executing the script instead of later throwing a null reference exception when we try to interact with it.
 ## Conclusion
 
 Here is a link the the full project created in this guide: [Full Project](../assets/walkthroughs/unity/3_graph_generator/Tutorial%203%20-%20Graph%20Generator.zip)
