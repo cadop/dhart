@@ -1,9 +1,9 @@
 
-# Setting Up a Unity Project for Human Factors
+# Setting Up a Unity Project for Human Factors {#ProjectSetup}
 
-Next Tutorial: [Project Setup](1_unity_project_setup.md)
+Next Tutorial: [Using The Raytracer](@ref UsingTheRaytracer)
 
-- [Setting Up a Unity Project for Human Factors](#setting-up-a-unity-project-for-human-factors)
+- [Setting Up a Unity Project for Human Factors {#ProjectSetup}](#setting-up-a-unity-project-for-human-factors-projectsetup)
   - [Before we begin](#before-we-begin)
     - [Prerequisites](#prerequisites)
   - [Creating a new project](#creating-a-new-project)

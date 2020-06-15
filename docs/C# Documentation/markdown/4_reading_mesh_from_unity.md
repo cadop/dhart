@@ -1,8 +1,8 @@
-# Reading a Mesh From Unity
+# Reading a Mesh From Unity {#MeshFromUnity}
 
-Previous Tutorial: [The Graph Generator](3_graph_generator.md)
+Previous Tutorial: [The Graph Generator](@ref GeneratingAGraph)
 
-- [Reading a Mesh From Unity](#reading-a-mesh-from-unity)
+- [Reading a Mesh From Unity {#MeshFromUnity}](#reading-a-mesh-from-unity-meshfromunity)
   - [Intro](#intro)
   - [Scene Setup](#scene-setup)
     - [Creating the Plane](#creating-the-plane)

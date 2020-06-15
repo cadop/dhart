@@ -1,11 +1,11 @@
 
-# Using the RayTracer
+# Using the RayTracer {#UsingTheRaytracer}
 
-Previous Tutorial: [Project Setup](1_unity_project_setup.md)
+Previous Tutorial: [Project Setup](@ref ProjectSetup)
 |
-Next Tutorial: [Graph Generator](3_graph_generator.md)
+Next Tutorial: [Graph Generator](@ref GeneratingAGraph)
 
-- [Using the RayTracer](#using-the-raytracer)
+- [Using the RayTracer {#UsingTheRaytracer}](#using-the-raytracer-usingtheraytracer)
   - [Intro](#intro)
   - [Writing the Script](#writing-the-script)
     - [Using Declarations](#using-declarations)

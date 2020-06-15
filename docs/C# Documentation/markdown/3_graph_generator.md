@@ -1,11 +1,11 @@
 
-# Using the Graph Generator
+# Using the Graph Generator {#GeneratingAGraph}
 
-Previous Tutorial: [Using the Raytracer](2_raycast_at_plane.md)
+Previous Tutorial: [Using the Raytracer](@ref UsingTheRaytracer)
 |
-Next Tutorial: [Passing a Mesh From Unity to HumanFactors](4_reading_mesh_from_unity.md)
+Next Tutorial: [Passing a Mesh From Unity to HumanFactors](@ref MeshFromUnity)
 
-- [Using the Graph Generator](#using-the-graph-generator)
+- [Using the Graph Generator {#GeneratingAGraph}](#using-the-graph-generator-generatingagraph)
   - [Intro](#intro)
     - [Conceptual Overview](#conceptual-overview)
   - [Simple Graph Generation](#simple-graph-generation)
