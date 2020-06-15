@@ -67,7 +67,7 @@ Now that we have created a blank project, we need to import the HumanFactors' bi
 
 Unzip the HumanFactors release package to another location (Don't try to drag and drop assets from a zipped folder, you will get an error), then, as shown in Figure 1.4, drag the `bin` folder from the location you extracted the release to into the Unity Editor's assets window. Once you've done this, Unity should display the *bin* folder alongside the existing *Scenes* folder.
 
->**NOTE**: If you accidentally drag the bin folder into the *Scenes* or anywhere else that would cause two copies of the same dll to exist at the same time, delete them before proceding. Multiple copies of the same DLL will cause conflicts and may result in Unity being unable to load it in the future steps. You'll know this has happened if you see the following error `Multiple plugins with the same name 'humanfactors' (found at 'Assets/Scenes/bin/HumanFactors.dll' and 'Assets/bin/HumanFactors.dll')...` at the bottom of the screen.
+>**NOTE**: If you accidentally drag the bin folder into the *Scenes* folder or anywhere else that would cause two copies of the same dll to exist at the same time, delete any duplicates before proceding. Multiple copies of the same DLL will cause conflicts and may result in Unity being unable to load it in the future steps. You'll know this has happened if you see the following error `Multiple plugins with the same name 'humanfactors' (found at 'Assets/Scenes/bin/HumanFactors.dll' and 'Assets/bin/HumanFactors.dll')...` at the bottom of the screen.
 >![Duplicate DLL Error](../assets/walkthroughs/unity/1_project_setup/duplicate_dll_error.png)
 >![Delete Image](../assets/walkthroughs/unity/1_project_setup/delete.png)
 
@@ -87,7 +87,7 @@ Right click on a blank space in the assets window, hover over *Create*, then cli
 
 Looking in the assets window, you should notice a new script file next to Scenes directory titled NewBehaviourScript.cs by default, and the name of it is highlighted in blue indicatign that you can rename it. Rename the script to HFExampleScript.cs.
 
->**NOTE:** If you didn't name the file properly, don't worry. You can change the name of the script by right clicking on it and clicking *Rename*.
+>**NOTE:** If you didn't name the file properly you can change the name of the script by right clicking on it and clicking *Rename*.
 >![Rename Dialog](../assets/walkthroughs/unity/1_project_setup/../2_raycast_at_plane/rename_dialog.png)
 
 !["Double Click On Script"](../assets/walkthroughs/unity/1_project_setup/double_click_on_script.png)
