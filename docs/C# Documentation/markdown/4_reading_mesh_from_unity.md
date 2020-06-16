@@ -2,27 +2,11 @@
 
 Previous Tutorial: [The Graph Generator](@ref GeneratingAGraph)
 
-- [Reading a Mesh From Unity {#MeshFromUnity}](#reading-a-mesh-from-unity-meshfromunity)
-  - [Intro](#intro)
-  - [Scene Setup](#scene-setup)
-    - [Creating the Plane](#creating-the-plane)
-    - [Resetting the Plane's Position](#resetting-the-planes-position)
-  - [Writing the Script](#writing-the-script)
-    - [Set Usings](#set-usings)
-    - [Setup for adding references through the Unity Inspector](#setup-for-adding-references-through-the-unity-inspector)
-  - [Passing Meshes from GameObjects to HumanFactors](#passing-meshes-from-gameobjects-to-humanfactors)
-    - [Getting a reference to the mesh held by a specific Game Object](#getting-a-reference-to-the-mesh-held-by-a-specific-game-object)
-      - [Background on Gameobjects and components](#background-on-gameobjects-and-components)
-      - [Retrieving the Mesh from a GameObject](#retrieving-the-mesh-from-a-gameobject)
-      - [Getting the vertices and triangles from a Unity Mesh](#getting-the-vertices-and-triangles-from-a-unity-mesh)
-      - [Transforming the Mesh from Y-Up to Z-Up](#transforming-the-mesh-from-y-up-to-z-up)
-  - [Executing the Script](#executing-the-script)
-    - [Adding References Through the Unity Inspector](#adding-references-through-the-unity-inspector)
-    - [Comparing Output](#comparing-output)
+[TOC]
 
 ## Intro
 
-In this tutorial we'll be using the project created in the previous guide: [The Graph Generator](3_graph_generator.md), and we'll be using concepts covered in the previous guides.
+In this tutorial we'll be using the project created in the previous guide: [The Graph Generator](@ref GeneratingAGraph), and we'll be using concepts covered in the previous guides.
 
 In this guide we will cover:
 
@@ -32,13 +16,13 @@ In this guide we will cover:
 
 ## Scene Setup
 
-Up until this point, we haven't needed to interact with the unity scene, aside from attaching a script to the camera that is placed by default. For us to demonstrate reading geometry from the scene, we must first create geometry in the scene. For this example, we will create a plane in unity instead of creating our own plane in code.
+Up until this point, we haven't needed to interact with the Unity scene, aside from attaching a script to the camera that is placed by default. For us to demonstrate reading geometry from the scene, we must first create geometry in the scene. For this example, we will create a plane in Unity instead of creating our own plane in code.
 
-To begin, open the unity project from [Using The Raytracer](@ref UsingTheRayTracer) or [The Graph Generator](@ref GraphGenerator)
+To begin, open the Unity project from [Using The Raytracer](@ref UsingTheRayTracer) or [The Graph Generator](@ref GraphGenerator)
 
 ![Blank Scene](../assets/walkthroughs/unity/4_mesh_reading/start_point.png)
 
-From here we will create a new Plane in the unity scene to match the plane we created in the previous examples.
+From here we will create a new Plane in the Unity scene to match the plane we created in the previous examples.
 
 ### Creating the Plane
 
@@ -48,7 +32,7 @@ From here we will create a new Plane in the unity scene to match the plane we cr
 
 Using the menubar at the top of the screen select GameObject > 3D Object > Plane.
 
-Once clicked, a new 10x10 plane will be created at the center of the scene window's view. The plane we created in code was centered on the origin, but this plane isn't since it was created where we were looking. We must reset this plane to the origin before moving any further.
+Once clicked, a new 10x10 plane will be created at the center of the scene window's view. The plane we created in code was centered on the origin, but this plane isn't since it was created where the scene editor's camera was looking. We must reset this plane to the origin before moving any further.
 
 ### Resetting the Plane's Position
 
@@ -74,10 +58,15 @@ After clicking that button, your plane should be moved to the origin like in Fig
 
 **TODO**: What should I say here? Should I offer two paths for tutorial 2A and 2B respectively? Or should I just tell people to use one or the other?
 
-### Set Usings
+### Using declarations
 
-Just like the previous tutorials, we're going to declare which namespaces this script will use in the using section. This script will require the same using declarations as the Graph Generator tutorial. 
-``` C#
+![Empty Script](../assets/walkthroughs/unity/4_mesh_reading/usings.png)
+
+*Figure* **4.5** *Using declarations for this script*
+
+Just like the previous tutorials, we're going to declare which namespaces this script will use in the using section. This script will require the same using declarations as the Graph Generator tutorial.
+
+```{.cs}
 using HumanFactors;
 using HumanFactors.Geometry;
 using HumanFactors.RayTracing;
@@ -87,10 +76,6 @@ using HumanFactors.SpatialStructures;
 
 Your usings for this script should look like this.
 
-![Empty Script](../assets/walkthroughs/unity/4_mesh_reading/usings.png)
-
-*Figure* **4.5** *Using declarations for this script*
-
 ### Setup for adding references through the Unity Inspector
 
 ![PlaneReference](../assets/walkthroughs/unity/4_mesh_reading/PlaneReference.png)
@@ -99,7 +84,7 @@ Your usings for this script should look like this.
 
 There are many ways to reference a GameObject from a script, but for this example we'll be setting up our script so we can select which mesh we want to use to use from the scene in the Unity Inspector. Add GameObject a class member to the script on line 9.
 
-``` C#
+```{.cs}
 GameObject PlaneInScene;
 ```
 
@@ -109,17 +94,17 @@ Later we'll use the Unity Inspector to assign the plane in the scene to this Gam
 
 Now that we have a reference to the Game Object we want to use; we need to get the raw vertices and faces of the plane so we can pass them to HumanFactors.
 
-### Getting a reference to the mesh held by a specific Game Object
+## Getting a reference to the mesh held by a specific Game Object
 
 Before we can extract the triangles and vertices from one an instance of a Unity Mesh, we first need to get a reference to the Mesh itself. Doing this requires some understanding of Unity GameObjects and their components.
 
-#### Background on Gameobjects and components
+### Background on Gameobjects and components
 
 ![PlaneReference](../assets/walkthroughs/unity/4_mesh_reading/plane_inspector.png)
 
 *Figure* **4.6**: *Components of the plane shown in the Unity Inspector*
 
-Minimize Visual Studio then switch back to Unity for a moment. Clicking on the plane we created previously, then look at the at the Inspector on the right sidebar, as shown in Figure 4.6. Here you can view all information about the plane, such as its position, the material it uses, which mesh it's referencing, etc. but you'll notice the inspector is split into several sections: Transform, Meshfilter, Mesh Collider. Each of these sections are a separate **Component** and the object we see in the scene is just a container for those components called a [**GameObject**](https://docs.unity3d.com/Manual/class-GameObject.html). 
+Minimize Visual Studio then switch back to Unity for a moment. Click on the plane we created previously, then look at the at the Inspector on the right sidebar. It should look similar to figure 4.6 Here you can view all information about the plane, such as its position, the material it uses, which mesh it's referencing, etc. but you'll notice the inspector is split into several sections: Transform, Meshfilter, Mesh Collider. Each of these sections are a separate **Component** and the object we see in the scene is just a container for those components called a [**GameObject**](https://docs.unity3d.com/Manual/class-GameObject.html). 
 
 As stated in the Unity Documentation:
 
@@ -127,17 +112,17 @@ As stated in the Unity Documentation:
 
 What this means for us is that the plane we see in the scene is not a mesh, but a GameObject that contains a [MeshFilter](https://docs.unity3d.com/ScriptReference/MeshFilter.html) that contains a Mesh, like GameObject > Mesh Filter > Mesh. To obtain the Mesh itself, we must get it from the MeshFilter component of the plane GameObject. A game object's components can be retrieved using the [GetComponent](https://docs.unity3d.com/ScriptReference/GameObject.GetComponent.html) method.
 
-#### Retrieving the Mesh from a GameObject
+### Retrieving the Mesh from a GameObject
 
 In our script we will store a reference to the plane's mesh filter in a variable named `PlaneFilter` at the beginning of the script's Start() function like so:
 
-```C#
+```{.cs}
         MeshFilter PlaneFilter = PlaneReference.GetComponent<MeshFilter>();
 ```
 
 Then we can access the actual mesh carried by `PlaneFilter` by calling its .mesh property:
 
-``` C#
+```{.cs}
         Mesh PlaneMesh = Filter.mesh;
 ```
 
@@ -151,7 +136,7 @@ To simplify the process of converting the vertices to a suitable format, we will
 
 Just above the Start() function, add the following method:
 
-``` C#
+```{.cs}
     private float[] Vector3ArrayToFloatArray(Vector3[] vertices)
     {
         float[] return_array = new float[vertices.Length * 3];
@@ -173,7 +158,7 @@ Just above the Start() function, add the following method:
 
 Now we can call that method with the meshes vertices as input to get an array usable with HumanFactors. Retrieve the indices and vertices from the mesh by calling its .triangles and .vertices properties respectively, making sure to convert the array of vertices array from an array of Vector3 to an array of floats.
 
-```C#
+```{.cs}
         // Get Triangle Indexes and Vertices from the Mesh 
         int[] plane_indices = PlaneMesh.triangles;
         float[] plane_vertices = Vector3ArrayToFloatArray(PlaneMesh.vertices);
@@ -181,14 +166,14 @@ Now we can call that method with the meshes vertices as input to get an array us
 
 After that, the process of creating an instance of MeshInfo is identical to the previous tutorials:
 
-``` C#
+```{.cs}
         // Send to HumanFactors
         MeshInfo PlaneMeshInfo = new MeshInfo(tris, FlattenVertexArray(vertices));
 ```
 
 Before we can continue to using this mesh it's important to cover a significant difference between this mesh and the mesh we've been creating in our code. 
 
-#### Transforming the Mesh from Y-Up to Z-Up
+### Transforming the Mesh from Y-Up to Z-Up
 
 ![UnityCoords](../assets/walkthroughs/unity/4_reading_mesh_from_unity/../4_mesh_reading/unity_coordinate_system.png)
 ![RhinoCoords](../assets/walkthroughs/unity/4_mesh_reading/rhino_coordinates.png)
@@ -199,7 +184,7 @@ The Graph Generator expects geometry to be stored as if the Z-Axis were up as sh
 
 Enter the following code to rotate the plane to the correct orientation:
 
-```C#
+```{.cs}
         //Rotate to Z-Up
         PlaneMeshInfo.RotateMesh(CommonRotations.Yup_To_Zup);
 ```
