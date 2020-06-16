@@ -54,11 +54,9 @@ After clicking that button, your plane should be moved to the origin like in Fig
 
 ## Writing the Script
 
-Depending on which tutorial you started from, you will follow a different path later on. This first section will be the same for both paths however, so follow the guide below.
-
 ![Blank Visual Studio Page](../assets/walkthroughs/unity/1_project_setup/visual_studio_human_factors_reference.png)
 
-Double click on HFExampleScript that we created in project 1 to open up VisualStudio. You should see a blank page like the above.
+Double click on HFExampleScript that we created in project 1 to open up Visual Studio if it isn't open already. You should see a blank page like the above.
 
 Just like the previous tutorials, we're going to declare which namespaces this script will use in the using section. For now we only need one using declaration. Add this to the top of your script like in the previous tutorials.
 
@@ -66,7 +64,7 @@ Just like the previous tutorials, we're going to declare which namespaces this s
 using HumanFactors.Geometry;
 ```
 
-Later you will be using different sections depending on whether you're generating a graph or firing a ray. 
+Later you will be using different sections depending on whether you're generating a graph or firing a ray.
 
 ### Setup for Adding References Through The Unity Inspector
 
@@ -177,7 +175,7 @@ Enter the following code to rotate the plane to the correct orientation:
         PlaneMeshInfo.RotateMesh(CommonRotations.Yup_To_Zup);
 ```
 
-### Branching Paths
+### Choose code to verify results
 
 Up until this point, your code should match the code below.
 
@@ -219,6 +217,8 @@ public class HFExampleScript : MonoBehaviour
 
         //Rotate to Z-Up
         PlaneMeshInfo.RotateMesh(CommonRotations.Yup_To_Zup);
+
+
     }
 
     // Update is called once per frame
@@ -228,14 +228,20 @@ public class HFExampleScript : MonoBehaviour
     }
 }
 ```
+[Screenshot of the entire code until this point](../assets/walkthroughs/unity/4_mesh_reading/end_of_getting_mesh.png)
 
-To test whether this code can successfully read a mesh, you can use the code from either the Graph Generator or the RayTracer, substituting the Plane variable for PlaneMeshinfo.  Remember to add the appropriate using declarations to the top of the file as well.
+To test whether this code can successfully read a mesh, *pick either the graph generator or the raytracer tutorial to use for testing*.  Substitute PlaneMeshInfo everywhere the code from the previous tutorials use Plane. The code you take from the other sections should be added directly after PlaneMeshInfo.RotateMesh().
+
+The lines you should copy for each tutorial are:
+
+- Lines 30 - 49 for the Graph Generator.
+- Lines 28 - 43 for the Raytracer.
+
+Make sure to copy over any other using declarations that the selected tutorial uses, since those are required for it to function. Once you've finished this, ***SAVE*** your script, minimize Visual Studio and switch to the Unity Editor.
 
 ## Testing the Script
 
-[Screenshot of the entire code until this point](../assets/walkthroughs/unity/4_mesh_reading/end_of_getting_mesh.png)
-
-Our camera should be ready to go from the previous scripts, allowing us to simply hit the play button and view the results, but we still need to assign the Plane GameObject to the script in the Unity Inspector.
+Like in the previous tutorials, drag the HFExampleScript onto the Main Camera object in the scene hierarchy to set it as a component. In the previous scripts we were ready to go after this step, but here we need to assign the Plane GameObject to the script in the Unity Inspector.
 
 ### Adding References to Properties Through the Unity Inspector
 
