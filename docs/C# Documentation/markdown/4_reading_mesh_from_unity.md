@@ -180,7 +180,7 @@ Before we can continue to using this mesh it's important to cover a significant 
 
 *Figure* **4.8**: *Left: Unity's coordinate system. Right: HumanFactors's Coordinate system*
 
-The Graph Generator expects geometry to be stored as if the Z-Axis were up as shown in the picture on the right. Unity however, the Y-Axis is up as shown in the left picture, meaning that we'll get inaccurate results if we use the meshes as is. To solve this, *MeshInfo* has a method *RotateMesh* that can rotate MeshInfo objects after they've been construction. Another class in the Geometry namespace titled *CommonRotations* contains the rotation necessary to perform this conversion.
+The Graph Generator expects geometry to be stored as if the Z-Axis were up as shown in the picture on the right. In Unity however, the Y-Axis is up, as shown in the left picture, meaning that we'll get inaccurate results if we use the meshes as is. To solve this, *MeshInfo* has a method *RotateMesh* that can rotate MeshInfo objects after they've been construction. Another class in the Geometry namespace titled *CommonRotations* contains the rotation necessary to perform this conversion.
 
 Enter the following code to rotate the plane to the correct orientation:
 
@@ -189,10 +189,42 @@ Enter the following code to rotate the plane to the correct orientation:
         PlaneMeshInfo.RotateMesh(CommonRotations.Yup_To_Zup);
 ```
 
-![End Of Getting Mesh](../assets/walkthroughs/unity/4_mesh_reading/end_of_getting_mesh.png)
+[Screenshot of the entire code until this point](../assets/walkthroughs/unity/4_mesh_reading/end_of_getting_mesh.png)
+
+TODO: Make sure your code matches this point, save, etc.
 
 ## Executing the Script
 
-### Adding References Through the Unity Inspector
+Our camera should be ready to go from the previous scripts, allowing us to simply hit the play button and view the results, but we still need to add the game object to the script in the Unity Inspector.
+
+### Adding References to Properties Through the Unity Inspector
+
+![Unity Inspector New Attribute](../assets/walkthroughs/unity/4_mesh_reading/inspect_new_attribute.png)
+
+*Figure* **4.9**: *Red circle: main camera, Highlighted: PlaneInScene Reference, Blue Circle: Assign Reference Button*
+
+Click on the Main Camera in the left under the scene hierarchy. Notice that the HF Example Script component now has a new element under it titled *Plane In Scene*. This is the class member we created earlier, and we must assign it to the Plane we created. To assign the plane to this script, click the icon to the right of *Plane In Scene* (Circled in blue in Figure 4.9).
+
+![Gameobject Select Window](../assets/walkthroughs/unity/4_mesh_reading/gameobject_select_window.png)
+
+*Figure* **4.10**: *Gameobject Select Window*
+
+A new window will appear asking you to select a game object. Double click on Plane, highlighted in Figure 4.10, then look back at the Unity Inspector.
+
+![Gameobject Select Window](../assets/walkthroughs/unity/4_mesh_reading/inspect_with_plane.png)
+
+*Figure* **4.11**: *Inspector With Plane*
+
+You should now see the plane in the Unity Inspector next to PlaneInScene, like in Figure 4.11. If you see this, then you have successfully added the plane to the script as a reference.
 
 ### Comparing Output
+
+TODO: Output?
+
+Now, enter play mode by clicking the play button. If you have performed the above steps correctly, then your output shoudld be identical to the previous tutorial, and you have successfully completed this tutorial.
+
+## Conclusion
+
+With this you have successfully read geometry from the Unity Scene and passed it to HumanFactors. This concludes the tutorial series for this point.
+
+If you want a more indepth look at using the Inspector to assign properties to components, see the [Official Unity Documentation](https://docs.unity3d.com/Manual/EditingValueProperties.html).
