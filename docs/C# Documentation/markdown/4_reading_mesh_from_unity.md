@@ -68,7 +68,7 @@ Later you will be using different sections depending on whether you're generatin
 
 ### Setup for Adding References Through The Unity Inspector
 
-![PlaneReference](../assets/walkthroughs/unity/4_mesh_reading/PlaneReference.png)
+![PlaneReference](../assets/walkthroughs/unity/4_mesh_reading/plane_in_scene.png)
 
 *Figure* **4.6**: *Script with a GameObject property*
 
@@ -175,11 +175,11 @@ Enter the following code to rotate the plane to the correct orientation:
         PlaneMeshInfo.RotateMesh(CommonRotations.Yup_To_Zup);
 ```
 
-### Choose code to verify results
+### Choose code From Previous Tutorial to Verify Results
 
 Up until this point, your code should match the code below.
 
-``` {.cs}
+```{.cs}
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -228,6 +228,7 @@ public class HFExampleScript : MonoBehaviour
     }
 }
 ```
+
 [Screenshot of the entire code until this point](../assets/walkthroughs/unity/4_mesh_reading/end_of_getting_mesh.png)
 
 To test whether this code can successfully read a mesh, *pick either the graph generator or the raytracer tutorial to use for testing*.  Substitute PlaneMeshInfo everywhere the code from the previous tutorials use Plane. The code you take from the other sections should be added directly after PlaneMeshInfo.RotateMesh().
@@ -265,7 +266,16 @@ You should now see the plane in the Unity Inspector next to PlaneInScene, like i
 
 ### Comparing Output
 
-Now, enter play mode by clicking the play button. If you have performed the above steps correctly, then your output should be identical to the output of the tutorial you chose to use in the Branching Paths section. If this is true then you have successfully completed this tutorial.
+Now, enter play mode by clicking the play button. If you have performed the above steps correctly, then your output should be identical to the output of the tutorial you chose to use in the Branching Paths section.
+
+***Graph Generator***  :
+
+`[(0.000,0.000,0.000), (-1.000,-1.000,0.000), (-1.000,0.000,0.000), (-1.000,1.000,0.000), (0.000,-1.000,0.000), . . . (10.000,7.000,0.000), (10.000,8.000,0.000), (10.000,9.000,0.000), (10.000,10.000,0.000)]`
+
+***Raytracer*** :
+`(0,0,1)`
+
+If your output matches that of the tutorial you picked, then  is true then you have successfully completed this tutorial.
 
 ## Conclusion
 
