@@ -1,7 +1,7 @@
 
 # Setting Up a Unity Project for Human Factors {#UnityProjectSetup}
 
-Next Tutorial: [Using The Raytracer](@ref UsingTheRaytracer)
+Next Tutorial: [Using The Raytracer](@ref UsingTheRaytracer) OR [Generating A Graph](@ref GeneratingAGraph)
 
 - [Setting Up a Unity Project for Human Factors {#UnityProjectSetup}](#setting-up-a-unity-project-for-human-factors-unityprojectsetup)
   - [Before we begin](#before-we-begin)

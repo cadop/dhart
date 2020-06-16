@@ -16,7 +16,7 @@ In this guide we will cover:
 
 ## Scene Setup
 
-Up until this point, we haven't needed to interact with the Unity scene, aside from attaching a script to the Main Camera object that is placed by default. For us to demonstrate reading geometry from the scene, we will use the Unity editor to create a plane in the scene that's similar to the plane we previously created in code, but half the siz.
+Up until this point, we haven't needed to interact with the Unity scene, aside from attaching a script to the Main Camera object that is placed by default. For us to demonstrate reading geometry from the scene, we will use the Unity editor to create a plane in the scene that's similar to the plane we previously created in code, but half the size.
 
 ![Blank Scene](../assets/walkthroughs/unity/4_mesh_reading/start_point.png)
 
@@ -166,7 +166,7 @@ Before we can continue to using this mesh it's important to cover a significant 
 
 *Figure* **4.8**: *Left: Unity's coordinate system. Right: HumanFactors's Coordinate system*
 
-The Graph Generator expects geometry to be stored as if the Z-Axis were up as shown in the picture on the right. In Unity however, the Y-Axis is up, as shown in the left picture, meaning that we'll get inaccurate results if we use the meshes as is. To solve this, *MeshInfo* has a method *RotateMesh* that can rotate MeshInfo objects after they've been construction. Another class in the Geometry namespace titled *CommonRotations* contains the rotation necessary to perform this conversion.
+The Graph Generator expects geometry to be stored as if the Z-Axis were up as shown in the picture on the right. In Unity however, the Y-Axis is up, as shown in the left picture, meaning that we'll get inaccurate results if we use the mesh as is. To solve this, *MeshInfo* has a method *RotateMesh* that allows it to rotate itself after  is has been constructed. Another class in the Geometry namespace titled *CommonRotations* contains the rotation necessary to perform this conversion.
 
 Enter the following code to rotate the plane to the correct orientation:
 
@@ -174,6 +174,8 @@ Enter the following code to rotate the plane to the correct orientation:
         //Rotate to Z-Up
         PlaneMeshInfo.RotateMesh(CommonRotations.Yup_To_Zup);
 ```
+
+Now that the plane is in the correct orienteation, we are ready to move on to verifying that we loaded the mesh successfully.
 
 ### Choose code From Previous Tutorial to Verify Results
 
@@ -231,14 +233,14 @@ public class HFExampleScript : MonoBehaviour
 
 [Screenshot of the entire code until this point](../assets/walkthroughs/unity/4_mesh_reading/end_of_getting_mesh.png)
 
-To test whether this code can successfully read a mesh, *pick either the graph generator or the raytracer tutorial to use for testing*.  Substitute `PlaneMeshInfo` everywhere the code from the previous tutorials use `Plane`. The code you take from the other sections should be added directly after the line containing `PlaneMeshInfo.RotateMesh()`.
+To see if we're successfully reading the mesh from the scene, *pick either the graph generator or the raytracer tutorial to use for testing*.  Substitute `PlaneMeshInfo` everywhere the code from the previous tutorials use `Plane`. The code you take from the other sections should be added directly after the line containing `PlaneMeshInfo.RotateMesh()`.
 
 The lines you should copy for each tutorial are:
 
 - Lines 30 - 49 for the Graph Generator.
 - Lines 28 - 43 for the Raytracer.
 
-Make sure to copy over any other using declarations that the selected tutorial uses, since those are required for it to function. Once you've finished this, ***SAVE*** your script, minimize Visual Studio and switch to the Unity Editor.
+Make sure to copy over any other using declarations that the selected tutorial uses, since those are required for it to function. Once you've finished this, ***SAVE*** your script, minimize Visual Studio, and switch to the Unity Editor.
 
 ## Testing the Script
 
@@ -248,7 +250,7 @@ Like in the previous tutorials, drag the HFExampleScript onto the Main Camera ob
 
 ![Unity Inspector New Attribute](../assets/walkthroughs/unity/4_mesh_reading/inspect_new_attribute.png)
 
-*Figure* **4.9**: *Red circle: main camera, Highlighted: PlaneInScene Reference, Blue Circle: Assign Reference Button*
+*Figure* **4.9**: *Red circle: Main Camera, Highlighted: PlaneInScene Reference, Blue Circle: Assign Reference Button*
 
 Click on the Main Camera in the left under the scene hierarchy. Notice that the HF Example Script component now has a new element under it titled *Plane In Scene*. This is the class member we created earlier, and we must assign it to the Plane we created. To assign the plane to this script, click the icon to the right of *Plane In Scene* (Circled in blue in Figure 4.9).
 
@@ -274,7 +276,7 @@ Now, enter play mode by clicking the play button. If you have performed the abov
 ***Raytracer*** :
 `(1,0,0)`
 
-> **NOTE**: For the raytracer you might get an extremely low number for the Z component such as 5.960464E-08. This is normal, since none of the plane's vertices are exactly at whole numbers like in our example script. In fact, if you try to print any Vector3s like the ones returned from Mesh.vertices they will round their components before displaying them. Keep this in mind when reviewing results in the future.
+> **NOTE**: For the raytracer you might get an extremely low number for the Z component such as 5.960464E-08 instead of 0. This is normal, since none of the plane's vertices are exactly at whole numbers like they were in our example script. In fact, if you try to print any Vector3s like the ones returned from Mesh.vertices, they will round their components before displaying them. The nodelist returned from the graph will also round the components for every node it contains when converted to a string.  Keep this in mind when reviewing results in the future.
 
 If your output matches the above output for the code you've chosen, then you have successfully completed this tutorial.
 
