@@ -1,6 +1,6 @@
 # Reading a Mesh From Unity {#MeshFromUnity}
 
-Previous Tutorial: [The Graph Generator](@ref GeneratingAGraph)
+Previous Tutorial: [The Graph Generator](@ref GeneratingAGraph) OR [Using the RayTracer](@ref UsingTheRaytracer)
 
 [TOC]
 
@@ -16,13 +16,11 @@ In this guide we will cover:
 
 ## Scene Setup
 
-Up until this point, we haven't needed to interact with the Unity scene, aside from attaching a script to the camera that is placed by default. For us to demonstrate reading geometry from the scene, we must first create geometry in the scene. For this example, we will create a plane in Unity instead of creating our own plane in code.
-
-To begin, open the Unity project from [Using The Raytracer](@ref UsingTheRayTracer) or [The Graph Generator](@ref GraphGenerator)
+Up until this point, we haven't needed to interact with the Unity scene, aside from attaching a script to the Main Camera object that is placed by default. For us to demonstrate reading geometry from the scene, we will create a plane in the scene that's similar to the plane we previously created in code.
 
 ![Blank Scene](../assets/walkthroughs/unity/4_mesh_reading/start_point.png)
 
-From here we will create a new Plane in the Unity scene to match the plane we created in the previous examples.
+To begin, open the Unity project from [Using The Raytracer](@ref UsingTheRayTracer) or [The Graph Generator](@ref GraphGenerator).
 
 ### Creating the Plane
 
@@ -58,7 +56,7 @@ After clicking that button, your plane should be moved to the origin like in Fig
 
 **TODO**: What should I say here? Should I offer two paths for tutorial 2A and 2B respectively? Or should I just tell people to use one or the other?
 
-### Using declarations
+### Using Declarations
 
 ![Empty Script](../assets/walkthroughs/unity/4_mesh_reading/usings.png)
 
@@ -76,7 +74,7 @@ using HumanFactors.SpatialStructures;
 
 Your usings for this script should look like this.
 
-### Setup for adding references through the Unity Inspector
+### Setup for Adding References Through The Unity Inspector
 
 ![PlaneReference](../assets/walkthroughs/unity/4_mesh_reading/PlaneReference.png)
 
@@ -90,15 +88,11 @@ GameObject PlaneInScene;
 
 Later we'll use the Unity Inspector to assign the plane in the scene to this GameObject.
 
-## Passing Meshes from GameObjects to HumanFactors
-
-Now that we have a reference to the Game Object we want to use; we need to get the raw vertices and faces of the plane so we can pass them to HumanFactors.
-
-## Getting a reference to the mesh held by a specific Game Object
+### Getting a Reference to the Mesh Held by a Specific GameObject
 
 Before we can extract the triangles and vertices from one an instance of a Unity Mesh, we first need to get a reference to the Mesh itself. Doing this requires some understanding of Unity GameObjects and their components.
 
-### Background on Gameobjects and components
+#### Background on GameObjects and Components
 
 ![PlaneReference](../assets/walkthroughs/unity/4_mesh_reading/plane_inspector.png)
 
@@ -112,7 +106,7 @@ As stated in the Unity Documentation:
 
 What this means for us is that the plane we see in the scene is not a mesh, but a GameObject that contains a [MeshFilter](https://docs.unity3d.com/ScriptReference/MeshFilter.html) that contains a Mesh, like GameObject > Mesh Filter > Mesh. To obtain the Mesh itself, we must get it from the MeshFilter component of the plane GameObject. A game object's components can be retrieved using the [GetComponent](https://docs.unity3d.com/ScriptReference/GameObject.GetComponent.html) method.
 
-### Retrieving the Mesh from a GameObject
+#### In Practice
 
 In our script we will store a reference to the plane's mesh filter in a variable named `PlaneFilter` at the beginning of the script's Start() function like so:
 
@@ -128,7 +122,7 @@ Then we can access the actual mesh carried by `PlaneFilter` by calling its .mesh
 
 Now we have the plane as a mesh and are ready to get the required info from it for human factors.
 
-#### Getting the vertices and triangles from a Unity Mesh
+### Getting the Vertices and Triangles
 
 As previously stated, a mesh is comprised of an index and vertex array. To use this mesh in HumanFactors, we need to construct a MeshInfo object using these arrays. Fortunately, Unity provides a straightforward way to access the triangle indices of a mesh in a format that we can use for HumanFactors, but unfortunately the vertices only come in an array of Vector3, instead of the array of floats that we need. We will need to write a method to convert this array of Vector3 into an array of floats before we can use it in HumanFactors.
 
@@ -173,7 +167,7 @@ After that, the process of creating an instance of MeshInfo is identical to the 
 
 Before we can continue to using this mesh it's important to cover a significant difference between this mesh and the mesh we've been creating in our code. 
 
-### Transforming the Mesh from Y-Up to Z-Up
+### Transforming the Mesh From Y-Up to Z-Up
 
 ![UnityCoords](../assets/walkthroughs/unity/4_reading_mesh_from_unity/../4_mesh_reading/unity_coordinate_system.png)
 ![RhinoCoords](../assets/walkthroughs/unity/4_mesh_reading/rhino_coordinates.png)
@@ -193,9 +187,9 @@ Enter the following code to rotate the plane to the correct orientation:
 
 TODO: Make sure your code matches this point, save, etc.
 
-## Executing the Script
+## Testing the Script
 
-Our camera should be ready to go from the previous scripts, allowing us to simply hit the play button and view the results, but we still need to add the game object to the script in the Unity Inspector.
+Our camera should be ready to go from the previous scripts, allowing us to simply hit the play button and view the results, but we still need to assign the Plane GameObject to the script in the Unity Inspector.
 
 ### Adding References to Properties Through the Unity Inspector
 
