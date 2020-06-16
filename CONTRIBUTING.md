@@ -232,14 +232,15 @@ we have a subdirectory named <b>docs</b>.<br>
 
 The Analysis Doxyfile will already be configured to have it's <code>IMAGE_PATH</code><br>
 configured such that its working directory for images begins at<br>
-<code>Analysis\docs</code>. When we proceed to later steps, and we are to insert
-the path of an image file, assume that the working directory for images begins at<br>
+<code>Analysis\docs</code>.<br>
+When we proceed to later steps, and we are to insert the path of an image file,<br>
+assume that the working directory for images begins at<br>
 <code>Analysis\docs.</code>
 
 For example, if a file is saved at:<br>
-<code>Analysis\docs\C++\img\spatialstructures\node\test-image_node-h.png</code>,<br>
+<code>Analysis\docs\C++\images\spatialstructures\node\test-image_node-h.png</code>,<br>
 you will specify the path:<br>
-<code>C++\img\spatialstructures\node\test-image_node-h.png</code>.
+<code>C++\images\spatialstructures\node\test-image_node-h.png</code>.
 
 Notice that the <b>Analysis\docs</b> portion is omitted when specifying the image,<br>
 since our Doxyfile will already its <code>IMAGE_PATH</code> configured to begin at <b>Analysis\docs</b>.
@@ -256,7 +257,7 @@ Analysis\docs\language\img\enclosing_folder\module_name
 <code><b>enclosing_folder</b></code>,<br>
 and <code><b>module_name</b></code> are <b>placeholders</b>.<br>
 
-<code>img</code> will be a subdirectory within <code><b>language</b></code>.
+<code>images</code> will be a subdirectory within <code><b>language</b></code>.
 
 <b>Note:</b><br>
 In the <b>Analysis\docs</b> directory,<br>
@@ -267,8 +268,7 @@ for which the <code><b>language</b></code> placeholder applies:
 - Python Docs
 
 ![DocsSubdirs](docs/contributing-guides/images/file_explorer_docs_subdirs.png)
-<b>The img subdirectory in docs is for images that don't belong with<br>
-C# Documentation, C++, or Python Docs -- such as the images in <i>this</i> file.</b>
+<b>The contributing-guides subdirectory is for the images in <i>this</i> file.</b>
 
 For <code><b>language</b></code>,<br>
 <b>be sure to choose the appropriate subdirectory</b><br>
@@ -289,7 +289,7 @@ So, if we wanted to insert an image for any documentation<br>
 for <code>node.h</code> or <code>node.cpp</code>,<br>
 the image would be saved into the following directory:<br>
 
-<code><b>Analysis\docs\C++\img\spatialstructures\node</b></code>
+<code><b>Analysis\docs\C++\images\spatialstructures\node</b></code>
 
 ![NodePictureSample](docs/contributing-guides/images/file_explorer_docs_img_node-h.png)
 
@@ -314,18 +314,18 @@ At the line where you want the image to appear,<br>
 enter the following:
 
 ```
-/// \image html language\img\enclosing_folder\module_name\image_file
+/// \image html language\images\enclosing_folder\module_name\image_file
 ```
 
 Remember this example is using placeholders;<br>
 be sure that <b>language</b>, <b>enclosing_folder</b>, <b>module_name</b>,<br>
 and <b>image_file</b> correspond to where your image is saved.<br>
 
-Also note that <b>img</b> is a subdirectory within your chosen <b>language</b> directory.<br>
+Also note that <b>images</b> is a subdirectory within your chosen <b>language</b> directory.<br>
 
 An example use of the <code>\image</code> tag would be:<br>
 
-<code>/// \image html C++\img\spatialstructures\node\test-image_node-h.png</code>
+<code>/// \image html C++\images\spatialstructures\node\test-image_node-h.png</code>
 
 ![VSImageNode-h](docs/contributing-guides/images/vs_imagetag_node-h.png)
 <b>See line 42 - example use of the <code>\image</code> tag.
@@ -344,7 +344,7 @@ At the line where you want the image to appear,<br>
 enter the following:
 
 ```
-![image_name](language\img\enclosing_folder\module_name\image_file)
+![image_name](language\images\enclosing_folder\module_name\image_file)
 ```
 Remember this example is using placeholders;<br>
 be sure that <b>language</b>, <b>enclosing_folder</b>, <b>module_name</b>,<br>
@@ -353,7 +353,7 @@ and <b>image_file</b> correspond to where your image is saved.<br>
 An example use of the syntax would be:<br>
 
 ```
-![TestImage](C++\img\spatialstructures\node\test.png)
+![TestImage](C++\images\spatialstructures\node\test.png)
 ```
 <code><b>language</b></code> is <b>C++</b><br>
 <code><b>enclosing_folder</b></code> is <b>spatialstructures</b><br>
