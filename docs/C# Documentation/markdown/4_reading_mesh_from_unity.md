@@ -36,13 +36,13 @@ Up until this point, we haven't needed to interact with the unity scene, aside f
 
 To begin, open the unity project from [Using The Raytracer](@ref UsingTheRayTracer) or [The Graph Generator](@ref GraphGenerator)
 
-![Blank Scene](../assets/walkthroughs/unity/4_graph_generator/start_point.png)
+![Blank Scene](../assets/walkthroughs/unity/4_mesh_reading/start_point.png)
 
 From here we will create a new Plane in the unity scene to match the plane we created in the previous examples.
 
 ### Creating the Plane
 
-![Plane Created](../assets/walkthroughs/unity/4_graph_generator/create_plane.png)
+![Plane Created](../assets/walkthroughs/unity/4_mesh_reading/create_plane.png)
 
 *Figure* **4.1**: *Creating a plane using the menu bar*
 
@@ -52,19 +52,19 @@ Once clicked, a new 10x10 plane will be created at the center of the scene windo
 
 ### Resetting the Plane's Position
 
-![Transform Visible](../assets/walkthroughs/unity/4_graph_generator/look_at_transforms.png)
+![Transform Visible](../assets/walkthroughs/unity/4_mesh_reading/look_at_transforms.png)
 
 *Figure* **4.2**: *View the plane in the inspector*
 
 Left Click on the newly created plane and look at **Transform** header in the Inspector located at the right sidebar.
 
-![Reset Position](../assets/walkthroughs/unity/4_graph_generator/reset_position.png)
+![Reset Position](../assets/walkthroughs/unity/4_mesh_reading/reset_position.png)
 
 *Figure* **4.3**: *Resetting the plane's position*
 
 Under **Transform** you can see the plane's position, rotation and scale within the scene. To set the plane's position to the origin, left on the three dots to the right of the transform header, and select *Reset Position*.
 
-![Plane After Reset Position](../assets/walkthroughs/unity/4_graph_generator/resetted_plane.png)
+![Plane After Reset Position](../assets/walkthroughs/unity/4_mesh_reading/resetted_plane.png)
 
 *Figure* **4.4**: *The plane centered at the scene origin*
 
@@ -87,13 +87,13 @@ using HumanFactors.SpatialStructures;
 
 Your usings for this script should look like this.
 
-![Empty Script](../assets/walkthroughs/unity/4_graph_generator/usings.png)
+![Empty Script](../assets/walkthroughs/unity/4_mesh_reading/usings.png)
 
 *Figure* **4.5** *Using declarations for this script*
 
 ### Setup for adding references through the Unity Inspector
 
-![PlaneReference](../assets/walkthroughs/unity/4_graph_generator/PlaneReference.png)
+![PlaneReference](../assets/walkthroughs/unity/4_mesh_reading/PlaneReference.png)
 
 *Figure* **4.6**: *Script with a GameObject class member added*
 
@@ -115,7 +115,7 @@ Before we can extract the triangles and vertices from one an instance of a Unity
 
 #### Background on Gameobjects and components
 
-![PlaneReference](../assets/walkthroughs/unity/4_graph_generator/plane_inspector.png)
+![PlaneReference](../assets/walkthroughs/unity/4_mesh_reading/plane_inspector.png)
 
 *Figure* **4.6**: *Components of the plane shown in the Unity Inspector*
 
@@ -167,7 +167,7 @@ Just above the Start() function, add the following method:
     }
 ```
 
-![Convert Vector3 Array](../assets/walkthroughs/unity/4_graph_generator/flatten_vertex_array.png)
+![Convert Vector3 Array](../assets/walkthroughs/unity/4_mesh_reading/flatten_vertex_array.png)
 
 *Figure* **4.7**: *Location for Vector3ArrayToFloatArray*
 
@@ -186,12 +186,12 @@ After that, the process of creating an instance of MeshInfo is identical to the 
         MeshInfo PlaneMeshInfo = new MeshInfo(tris, FlattenVertexArray(vertices));
 ```
 
-Before we can continue to use this mesh it's important to cover a significant difference between this mesh and the mesh we've been creating in our code. 
+Before we can continue to using this mesh it's important to cover a significant difference between this mesh and the mesh we've been creating in our code. 
 
 #### Transforming the Mesh from Y-Up to Z-Up
 
 ![UnityCoords](../assets/walkthroughs/unity/4_reading_mesh_from_unity/../4_mesh_reading/unity_coordinate_system.png)
-![RhinoCoords](../assets/walkthroughs/unity/4_graph_generator/rhino_coordinates.png)
+![RhinoCoords](../assets/walkthroughs/unity/4_mesh_reading/rhino_coordinates.png)
 
 *Figure* **4.8**: *Left: Unity's coordinate system. Right: HumanFactors's Coordinate system*
 
@@ -204,7 +204,7 @@ Enter the following code to rotate the plane to the correct orientation:
         PlaneMeshInfo.RotateMesh(CommonRotations.Yup_To_Zup);
 ```
 
-![End Of Getting Mesh](../assets/walkthroughs/unity/4_graph_generator/end_of_getting_mesh.png)
+![End Of Getting Mesh](../assets/walkthroughs/unity/4_mesh_reading/end_of_getting_mesh.png)
 
 ## Executing the Script
 
