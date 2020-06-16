@@ -266,7 +266,7 @@ for which the <code><b>language</b></code> placeholder applies:
 - C++
 - Python Docs
 
-![DocsSubdirs](docs/img/contributing/file_explorer_docs_subdirs.png)
+![DocsSubdirs](docs/contributing-guides/images/file_explorer_docs_subdirs.png)
 <b>The img subdirectory in docs is for images that don't belong with<br>
 C# Documentation, C++, or Python Docs -- such as the images in <i>this</i> file.</b>
 
@@ -291,7 +291,7 @@ the image would be saved into the following directory:<br>
 
 <code><b>Analysis\docs\C++\img\spatialstructures\node</b></code>
 
-![NodePictureSample](docs/img/contributing/file_explorer_docs_img_node-h.png)
+![NodePictureSample](docs/contributing-guides/images/file_explorer_docs_img_node-h.png)
 
 If directories <code><b>img</b></code>, <code><b>enclosing_folder</b></code>,<br>
 or <code><b>module_name</b></code><br>
@@ -327,7 +327,7 @@ An example use of the <code>\image</code> tag would be:<br>
 
 <code>/// \image html C++\img\spatialstructures\node\test-image_node-h.png</code>
 
-![VSImageNode-h](docs/img/contributing/vs_imagetag_node-h.png)
+![VSImageNode-h](docs/contributing-guides/images/vs_imagetag_node-h.png)
 <b>See line 42 - example use of the <code>\image</code> tag.
 
 We will now move on to the <b>Doxygen GUI frontend (Doxywizard)</b> application.
@@ -360,26 +360,26 @@ An example use of the syntax would be:<br>
 <code><b>module_name</b></code> is <b>node</b><br>
 <code><b>image_file</b></code> is <b>test.png</b>
 
-![VSImageMDMainpage](docs/img/contributing/vs_imagemd_mainpage.png)
+![VSImageMDMainpage](docs/contributing-guides/images/vs_imagemd_mainpage.png)
 <b>This particular example is of mainpage.md, in Analysis\src\Cpp</b>
 
 We will now move on to the <b>Doxygen GUI frontend (Doxywizard)</b> application.
 
 <b>Step 2:</b><br>
 Open Doxywizard.<br>
-![DoxywizardOpen](docs/img/contributing/startmenu_doxygen.png)
+![DoxywizardOpen](docs/contributing-guides/images/startmenu_doxygen.png)
 
 In <b>Doxygen GUI frontend (Doxywizard)</b> -- load the repository's Doxyfile.<br>
 
 Click <b>File > Open...</b><br>
 
-![DoxygenFileOpen](docs/img/contributing/doxygen_fileopen.png)
+![DoxygenFileOpen](docs/contributing-guides/images/doxygen_fileopen.png)
 
 The 'Open configuration file' file explorer will appear.<br>
 Navigate to your local copy of the Analysis repository,<br>
 then click the <b>Doxyfile</b> icon.<br>
 
-![DoxygenOpenDoxyfile0](docs/img/contributing/doxygen_open_doxyfile_0.png)
+![DoxygenOpenDoxyfile0](docs/contributing-guides/images/doxygen_open_doxyfile_0.png)
 <b>Your path to the Analysis repository will differ, depending where it resides locally on your machine.</b>
 
 Upon loading the Doxyfile, it will be preconfigured for <b>C++</b>.
@@ -390,13 +390,13 @@ which is the root directory of the Analysis repository.
 The <b>Source code directory</b> will be configured for <code>./src/Cpp</code><br>
 and the <b>Destination directory</b> will be configured for <code>./docs/C++</code>.<br>
 
-![DoxygenWizardCpp](docs/img/contributing/doxygen_wizard_cpp.png)
+![DoxygenWizardCpp](docs/contributing-guides/images/doxygen_wizard_cpp.png)
 <b>This is how the 'Wizard' page for Doxywizard may look for a C++ documentation export.</b>
 
-![DoxygenWizardSource](docs/img/contributing/doxygen_wizard_source.png)
+![DoxygenWizardSource](docs/contributing-guides/images/doxygen_wizard_source.png)
 <b>Change the highlighted portion to Csharp for C# sources, or Python for Python sources.</b>
 
-![DoxygenWizardDest](docs/img/contributing/doxygen_wizard_dest.png)
+![DoxygenWizardDest](docs/contributing-guides/images/doxygen_wizard_dest.png)
 <b>Change the highlighed portion to C# Documentation for C# exports, or Python for Python exports.</b>
 
 Suggestion:<br>
@@ -411,7 +411,7 @@ you will want to provide a <b>relative path</b> to <b>test_docs</b>,<br>
 from Doxywizard's working directory.<br>
 (this will differ, depending on where your copy of Analysis resides on your machine)
 
-![DoxygenWizardDestTest](docs/img/contributing/doxygen_wizard_dest_test.png)
+![DoxygenWizardDestTest](docs/contributing-guides/images/doxygen_wizard_dest_test.png)
 <b>For this example, the destination directory is set to move up two parent directories, so that it can reach Desktop/test_docs.</b>
 
 <b>Step 3:</b><br>
@@ -423,54 +423,54 @@ but you may <b>add to it</b> by doing the following:
 
 Click the <b>Expert</b> tab.<br>
 
-![DoxygenExpertTab](docs/img/contributing/doxygen_expert_tab.png)
+![DoxygenExpertTab](docs/contributing-guides/images/doxygen_expert_tab.png)
 
 Underneath <b>Topics</b> (on the left hand side of the window),<br>
 select <b>Input</b>,<br>
 
-![DoxygenExpertTabTopicsInput](docs/img/contributing/doxygen_expert_tab_topics_input.png)
+![DoxygenExpertTabTopicsInput](docs/contributing-guides/images/doxygen_expert_tab_topics_input.png)
 
 then on the right side,<br>
 scroll down until you see the text field for <b>IMAGE_PATH</b>.<br>
 
-![DoxygenExpertTabImagePath0](docs/img/contributing/doxygen_expert_tab_image_path_0.png)
+![DoxygenExpertTabImagePath0](docs/contributing-guides/images/doxygen_expert_tab_image_path_0.png)
 
 Click the folder icon for <b>IMAGE_PATH</b>.<br>
 
-![DoxygenExpertTabImagePath1](docs/img/contributing/doxygen_expert_tab_image_path_1.png)
+![DoxygenExpertTabImagePath1](docs/contributing-guides/images/doxygen_expert_tab_image_path_1.png)
 
 In the file explorer window that appears,<br>
 navigate to <b>a directory of your choice.</b>.<br>
 Then, click <b>Select Folder</b>.<br>
 
-![DoxygenExpertTabImagePath2](docs/img/contributing/doxygen_expert_tab_image_path_2.png)
+![DoxygenExpertTabImagePath2](docs/contributing-guides/images/doxygen_expert_tab_image_path_2.png)
 <b>You can add to the IMAGE_PATH by selecting any directory of your choice.</b><br>
 <b>The result will be a filepath relative to Doxygen's working directory.</b>
 
 We have now configured another image path for Doxygen.<br>
 
-![DoxygenExpertTabImagePath3](docs/img/contributing/doxygen_expert_tab_image_path_3.png)
+![DoxygenExpertTabImagePath3](docs/contributing-guides/images/doxygen_expert_tab_image_path_3.png)
 <b>When Doxygen inserts images into documentation, it will begin its search in the Analysis\docs directory.</b><br>
 <b>If you have added another path to IMAGE_PATH (not shown here), it will also search this path.</b>
 
 <b>Step 4:</b><br>
 
-![DoxygenRun0](docs/img/contributing/doxygen_run_0.png)
+![DoxygenRun0](docs/contributing-guides/images/doxygen_run_0.png)
 
 If there is nothing else you would like to configure,<br>
 select the <b>Run</b> tab, then click <b>Run doxygen</b>.<br>
 
 Your documentation will now be generated.
 
-![DoxygenRun1](docs/img/contributing/doxygen_run_1.png)
+![DoxygenRun1](docs/contributing-guides/images/doxygen_run_1.png)
 
 Here are some examples for inserting an image into <code>node.h</code>,<br>
 and <code>mainpage.md</code>.
 
-![DoxygenPreviewNodeH](docs/img/contributing/doxygen_preview_node-h.png)
+![DoxygenPreviewNodeH](docs/contributing-guides/images/doxygen_preview_node-h.png)
 <b><code>\image</code> tag was used within <code>node.h</code>.</b>
 
-![DoxygenPreviewMainpage](docs/img/contributing/doxygen_preview_mainpage.png)
+![DoxygenPreviewMainpage](docs/contributing-guides/images/doxygen_preview_mainpage.png)
 <b>Markdown syntax for images was used for <code>mainpage.md</code>.</b>
 
 <h2>Why the use of <code>///</code> and <code>//</code>?</h2>
