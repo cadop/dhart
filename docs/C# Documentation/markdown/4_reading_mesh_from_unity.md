@@ -6,7 +6,7 @@ Previous Tutorial: [The Graph Generator](@ref GeneratingAGraph)
 
 ## Intro
 
-In this tutorial we'll be using the project created in the first tutorial: [Project Setup](@ref UnityProjectSetup), and we'll be using concepts covered in the previous guides.
+In this tutorial we'll be using the project created in the first tutorial: [Project Setup](@ref UnityProjectSetup), and we'll be using concepts and code covered in the previous guides.
 
 In this guide we will cover:
 
@@ -16,11 +16,11 @@ In this guide we will cover:
 
 ## Scene Setup
 
-Up until this point, we haven't needed to interact with the Unity scene, aside from attaching a script to the Main Camera object that is placed by default. For us to demonstrate reading geometry from the scene, we will use the Unity editor to create a plane in the scene that's similar to the plane we previously created in code.
+Up until this point, we haven't needed to interact with the Unity scene, aside from attaching a script to the Main Camera object that is placed by default. For us to demonstrate reading geometry from the scene, we will use the Unity editor to create a plane in the scene that's similar to the plane we previously created in code, but half the siz.
 
 ![Blank Scene](../assets/walkthroughs/unity/4_mesh_reading/start_point.png)
 
-To begin, open the Unity project from [Unity Project Setup](@ref UnityProjectSetup)
+To begin, open the Unity project from [Unity Project Setup](@ref UnityProjectSetup).
 
 ### Creating the Plane
 
@@ -36,7 +36,7 @@ Once clicked, a new 10x10 plane will be created at the center of the scene windo
 
 ![Transform Visible](../assets/walkthroughs/unity/4_mesh_reading/look_at_transforms.png)
 
-*Figure* **4.2**: *View the plane in the inspector*
+*Figure* **4.2**: *Highlighted: The plane's x,y,z position*
 
 Left Click on the newly created plane and look at **Transform** header in the Inspector located at the right sidebar.
 
@@ -56,7 +56,7 @@ After clicking that button, your plane should be moved to the origin like in Fig
 
 ![Blank Visual Studio Page](../assets/walkthroughs/unity/1_project_setup/visual_studio_human_factors_reference.png)
 
-Double click on HFExampleScript that we created in project 1 to open up Visual Studio if it isn't open already. You should see a blank page like the above.
+Double click on HFExampleScript that we created in the first tutorial to open up Visual Studio if it isn't open already. You should see a blank page like the above.
 
 Just like the previous tutorials, we're going to declare which namespaces this script will use in the using section. For now we only need one using declaration. Add this to the top of your script like in the previous tutorials.
 
@@ -72,7 +72,7 @@ Later you will be using different sections depending on whether you're generatin
 
 *Figure* **4.6**: *Script with a GameObject property*
 
-There are many ways to reference a GameObject from a script, but for this example we'll be setting up our script so we can select which mesh we want to use to use from the scene in the Unity Inspector. Add A GameObject property to the script like shown on line 7 of figure 4.6.
+There are many ways to reference a GameObject in the scene from a script, but for this example we'll be setting up our script so we can select a mesh in the scene from the Unity Inspector. Add a GameObject property to the script like shown on line 7 of figure 4.6.
 
 ```{.cs}
 GameObject PlaneInScene;
@@ -90,17 +90,17 @@ Before we can extract the triangles and vertices from one an instance of a Unity
 
 *Figure* **4.6**: *Components of the Plane shown in the Unity Inspector*
 
-Minimize Visual Studio then switch back to Unity for a moment. Click on the plane we created previously, then look at the at the Inspector on the right sidebar. It should look similar to Figure 4.6. Here you can view all information about the plane, such as its position, the material it uses, which mesh it's referencing, etc. You'll notice the inspector is split into several sections: Transform, Meshfilter, Mesh Collider. Each of these sections are a separate **Component** and the object we see in the scene is just a container for those components called a [**GameObject**](https://docs.unity3d.com/Manual/class-GameObject.html). 
+Minimize Visual Studio then switch back to Unity for a moment. Left click on the plane we created previously, then look at the at the Inspector on the right sidebar. It should look similar to Figure 4.6. Here you can view all information about the plane, such as its position, the material it uses, which mesh it's referencing, etc. You'll notice the inspector is split into several sections: Transform, Meshfilter, Mesh Collider, and MeshRenderer. Each of these sections is a separate **Component** and the object we see in the scene is just a container for those components called a [**GameObject**](https://docs.unity3d.com/Manual/class-GameObject.html).
 
 As stated in the Unity Documentation:
 
 > *GameObjects are the fundamental objects in Unity that represent characters, props and scenery. They do not accomplish much in themselves, but they act as containers for Components, which implement the real functionality.*
 
-What this means for us is that the plane we see in the scene is not a mesh, but a GameObject that contains a [MeshFilter](https://docs.unity3d.com/ScriptReference/MeshFilter.html) that contains a Mesh, like GameObject > Mesh Filter > Mesh. To obtain the Mesh itself, we must get it from the MeshFilter component of the plane GameObject. A game object's components can be retrieved using the [GetComponent](https://docs.unity3d.com/ScriptReference/GameObject.GetComponent.html) method.
+What this means for us is that the plane we see in the scene is not a Mesh, but a GameObject that contains a [MeshFilter](https://docs.unity3d.com/ScriptReference/MeshFilter.html) that contains a Mesh. You can think of it like GameObject > Mesh Filter > Mesh. To obtain the Mesh itself, we must get it from the MeshFilter component of the Plane GameObject.
 
 #### In Practice
 
-In our script we will store a reference to the plane's mesh filter in a variable named `PlaneFilter` at the beginning of the script's Start() function like so:
+A game object's components can be retrieved using the [GetComponent](https://docs.unity3d.com/ScriptReference/GameObject.GetComponent.html) method. Go back to the Visual Studio window. In our script we will store a reference to the plane's mesh filter in a variable named `PlaneFilter` at the beginning of the script's Start() function like so:
 
 ```{.cs}
         MeshFilter PlaneFilter = PlaneInScene.GetComponent<MeshFilter>();
@@ -266,16 +266,15 @@ You should now see the plane in the Unity Inspector next to PlaneInScene, like i
 
 ### Comparing Output
 
-Now, enter play mode by clicking the play button. If you have performed the above steps correctly, then your output should be identical to the output of the tutorial you chose to use in the Branching Paths section.
+Now, enter play mode by clicking the play button. If you have performed the above steps correctly, then your output should match The output below for the code you've chosen:
 
 ***Graph Generator***  :
+`[(0.000,0.000,0.000), (-1.000,-1.000,0.000), (-1.000,0.000,0.000), (-1.000,1.000,0.000), (0.000,-1.000,0.000), . . . (2.000,5.000,0.000), (3.000,5.000,0.000), (4.000,-5.000,0.000), (4.000,5.000,0.000)]`
 
-`[(0.000,0.000,0.000), (-1.000,-1.000,0.000), (-1.000,0.000,0.000), (-1.000,1.000,0.000), (0.000,-1.000,0.000), . . . (10.000,7.000,0.000), (10.000,8.000,0.000), (10.000,9.000,0.000), (10.000,10.000,0.000)]`
-
-***Raytracer*** :
+***Raytracer*** : *(Identical to the output of Tutorial 2A)*
 `(0,0,1)`
 
-If your output matches that of the tutorial you picked, then  is true then you have successfully completed this tutorial.
+If your output matches the above output for the code you've chosen, then you have successfully completed this tutorial.
 
 ## Conclusion
 
