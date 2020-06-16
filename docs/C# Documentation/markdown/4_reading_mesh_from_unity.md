@@ -231,7 +231,7 @@ public class HFExampleScript : MonoBehaviour
 
 [Screenshot of the entire code until this point](../assets/walkthroughs/unity/4_mesh_reading/end_of_getting_mesh.png)
 
-To test whether this code can successfully read a mesh, *pick either the graph generator or the raytracer tutorial to use for testing*.  Substitute PlaneMeshInfo everywhere the code from the previous tutorials use Plane. The code you take from the other sections should be added directly after PlaneMeshInfo.RotateMesh().
+To test whether this code can successfully read a mesh, *pick either the graph generator or the raytracer tutorial to use for testing*.  Substitute `PlaneMeshInfo` everywhere the code from the previous tutorials use `Plane`. The code you take from the other sections should be added directly after the line containing `PlaneMeshInfo.RotateMesh()`.
 
 The lines you should copy for each tutorial are:
 
@@ -271,8 +271,10 @@ Now, enter play mode by clicking the play button. If you have performed the abov
 ***Graph Generator***  :
 `[(0.000,0.000,0.000), (-1.000,-1.000,0.000), (-1.000,0.000,0.000), (-1.000,1.000,0.000), (0.000,-1.000,0.000), . . . (2.000,5.000,0.000), (3.000,5.000,0.000), (4.000,-5.000,0.000), (4.000,5.000,0.000)]`
 
-***Raytracer*** : *(Identical to the output of Tutorial 2A)*
-`(0,0,1)`
+***Raytracer*** :
+`(1,0,0)`
+
+> **NOTE**: For the raytracer you might get an extremely low number for the Z component such as 5.960464E-08. This is normal, since none of the plane's vertices are exactly at whole numbers like in our example script. In fact, if you try to print any Vector3s like the ones returned from Mesh.vertices they will round their components before displaying them. Keep this in mind when reviewing results in the future.
 
 If your output matches the above output for the code you've chosen, then you have successfully completed this tutorial.
 
