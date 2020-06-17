@@ -5,17 +5,7 @@ Previous Tutorial: [Project Setup](@ref UnityProjectSetup)
 |
 Next Tutorial: [Graph Generator](@ref GeneratingAGraph)
 
-- [Using the RayTracer {#UsingTheRaytracer}](#using-the-raytracer-usingtheraytracer)
-  - [Intro](#intro)
-  - [Writing the Script](#writing-the-script)
-    - [Using Declarations](#using-declarations)
-    - [Creating a Plane](#creating-a-plane)
-    - [Casting a Ray](#casting-a-ray)
-    - [Wrapping Up](#wrapping-up)
-  - [Testing](#testing)
-    - [Adding the script to the camera](#adding-the-script-to-the-camera)
-    - [Executing the Script](#executing-the-script)
-  - [Conclusion](#conclusion)
+[TOC]
 
 ## Intro
 

@@ -3,13 +3,7 @@
 
 Next Tutorial: [Using The Raytracer](@ref UsingTheRaytracer) OR [Generating A Graph](@ref GeneratingAGraph)
 
-- [Setting Up a Unity Project for Human Factors {#UnityProjectSetup}](#setting-up-a-unity-project-for-human-factors-unityprojectsetup)
-  - [Before we begin](#before-we-begin)
-    - [Prerequisites](#prerequisites)
-  - [Creating a new project](#creating-a-new-project)
-  - [Importing the Human Factors Library](#importing-the-human-factors-library)
-  - [Verifying Unity can reference HumanFactors](#verifying-unity-can-reference-humanfactors)
-  - [Conclusion](#conclusion)
+[TOC]
 
 ## Before we begin
 

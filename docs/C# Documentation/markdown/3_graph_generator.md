@@ -5,19 +5,7 @@ Previous Tutorial: [Project Setup](@ref UnityProjectSetup)
 |
 Next Tutorial: [Passing a Mesh From Unity to HumanFactors](@ref MeshFromUnity)
 
-- [Using the Graph Generator {#GeneratingAGraph}](#using-the-graph-generator-generatingagraph)
-  - [Intro](#intro)
-    - [Conceptual Overview](#conceptual-overview)
-  - [Simple Graph Generation](#simple-graph-generation)
-    - [Using Declarations](#using-declarations)
-    - [Creating the Plane](#creating-the-plane)
-    - [Generating the Graph](#generating-the-graph)
-    - [Retrieving a list of nodes](#retrieving-a-list-of-nodes)
-    - [Save and Test](#save-and-test)
-  - [Handling cases where a Graph could not be generated](#handling-cases-where-a-graph-could-not-be-generated)
-    - [Checking for success](#checking-for-success)
-    - [Testing](#testing)
-  - [Conclusion](#conclusion)
+[TOC]
 
 ## Intro
 
