@@ -18,13 +18,13 @@ In this guide we will cover:
 
 Up until this point, we haven't needed to interact with the Unity scene, aside from attaching a script to the Main Camera object that is placed by default. For us to demonstrate reading geometry from the scene, we will use the Unity editor to create a plane in the scene that's similar to the plane we previously created in code, but half the size.
 
-![Blank Scene](../assets/walkthroughs/unity/4_mesh_reading/start_point.png)
+![Blank Scene](walkthroughs/unity/4_mesh_reading/start_point.png)
 
 To begin, open the Unity project from [Unity Project Setup](@ref UnityProjectSetup).
 
 ### Creating the Plane
 
-![Plane Created](../assets/walkthroughs/unity/4_mesh_reading/create_plane.png)
+![Plane Created](walkthroughs/unity/4_mesh_reading/create_plane.png)
 
 *Figure* **4.1**: *Creating a plane using the menu bar*
 
@@ -34,19 +34,19 @@ Once clicked, a new 10x10 plane will be created at the center of the scene windo
 
 ### Resetting the Plane's Position
 
-![Transform Visible](../assets/walkthroughs/unity/4_mesh_reading/look_at_transforms.png)
+![Transform Visible](walkthroughs/unity/4_mesh_reading/look_at_transforms.png)
 
 *Figure* **4.2**: *Highlighted: The plane's x,y,z position*
 
 Left Click on the newly created plane and look at **Transform** header in the Inspector located at the right sidebar.
 
-![Reset Position](../assets/walkthroughs/unity/4_mesh_reading/reset_position.png)
+![Reset Position](walkthroughs/unity/4_mesh_reading/reset_position.png)
 
 *Figure* **4.3**: *Resetting the plane's position*
 
 Under **Transform** you can see the plane's position, rotation and scale within the scene. To set the plane's position to the origin, left on the three dots to the right of the transform header, and select *Reset Position*.
 
-![Plane After Reset Position](../assets/walkthroughs/unity/4_mesh_reading/resetted_plane.png)
+![Plane After Reset Position](walkthroughs/unity/4_mesh_reading/resetted_plane.png)
 
 *Figure* **4.4**: *The plane centered at the scene origin*
 
@@ -54,7 +54,7 @@ After clicking that button, your plane should be moved to the origin like in Fig
 
 ## Writing the Script
 
-![Blank Visual Studio Page](../assets/walkthroughs/unity/1_project_setup/visual_studio_human_factors_reference.png)
+![Blank Visual Studio Page](walkthroughs/unity/1_project_setup/visual_studio_human_factors_reference.png)
 
 Double click on HFExampleScript that we created in the first tutorial to open up Visual Studio if it isn't open already. You should see a blank page like the above.
 
@@ -68,7 +68,7 @@ Later you will be using different sections depending on whether you're generatin
 
 ### Setup for Adding References Through The Unity Inspector
 
-![PlaneReference](../assets/walkthroughs/unity/4_mesh_reading/plane_in_scene.png)
+![PlaneReference](walkthroughs/unity/4_mesh_reading/plane_in_scene.png)
 
 *Figure* **4.6**: *Script with a GameObject property*
 
@@ -86,7 +86,7 @@ Before we can extract the triangles and vertices from one an instance of a Unity
 
 #### Background on GameObjects and Components
 
-![PlaneReference](../assets/walkthroughs/unity/4_mesh_reading/plane_inspector.png)
+![PlaneReference](walkthroughs/unity/4_mesh_reading/plane_inspector.png)
 
 *Figure* **4.6**: *Components of the Plane shown in the Unity Inspector*
 
@@ -138,7 +138,7 @@ On line 9, just above the Start() function, add the following method:
     }
 ```
 
-![Convert Vector3 Array](../assets/walkthroughs/unity/4_mesh_reading/flatten_vertex_array.png)
+![Convert Vector3 Array](walkthroughs/unity/4_mesh_reading/flatten_vertex_array.png)
 
 *Figure* **4.7**: *Location for Vector3ArrayToFloatArray*
 
@@ -161,8 +161,8 @@ Before we can continue to using this mesh it's important to cover a significant 
 
 ### Transforming the Mesh From Y-Up to Z-Up
 
-![UnityCoords](../assets/walkthroughs/unity/4_reading_mesh_from_unity/../4_mesh_reading/unity_coordinate_system.png)
-![RhinoCoords](../assets/walkthroughs/unity/4_mesh_reading/rhino_coordinates.png)
+![UnityCoords](walkthroughs/unity/4_reading_mesh_from_unity/../4_mesh_reading/unity_coordinate_system.png)
+![RhinoCoords](walkthroughs/unity/4_mesh_reading/rhino_coordinates.png)
 
 *Figure* **4.8**: *Left: Unity's coordinate system. Right: HumanFactors's Coordinate system*
 
@@ -231,7 +231,7 @@ public class HFExampleScript : MonoBehaviour
 }
 ```
 
-[Screenshot of the entire code until this point](../assets/walkthroughs/unity/4_mesh_reading/end_of_getting_mesh.png)
+[Screenshot of the entire code until this point](walkthroughs/unity/4_mesh_reading/end_of_getting_mesh.png)
 
 To see if we're successfully reading the mesh from the scene, *pick either the graph generator or the raytracer tutorial to use for testing*.  Substitute `PlaneMeshInfo` everywhere the code from the previous tutorials use `Plane`. The code you take from the other sections should be added directly after the line containing `PlaneMeshInfo.RotateMesh()`.
 
@@ -248,19 +248,19 @@ Like in the previous tutorials, drag the HFExampleScript onto the Main Camera ob
 
 ### Adding References to Properties Through the Unity Inspector
 
-![Unity Inspector New Attribute](../assets/walkthroughs/unity/4_mesh_reading/inspect_new_attribute.png)
+![Unity Inspector New Attribute](walkthroughs/unity/4_mesh_reading/inspect_new_attribute.png)
 
 *Figure* **4.9**: *Red circle: Main Camera, Highlighted: PlaneInScene Reference, Blue Circle: Assign Reference Button*
 
 Click on the Main Camera in the left under the scene hierarchy. Notice that the HF Example Script component now has a new element under it titled *Plane In Scene*. This is the class member we created earlier, and we must assign it to the Plane we created. To assign the plane to this script, click the icon to the right of *Plane In Scene* (Circled in blue in Figure 4.9).
 
-![Gameobject Select Window](../assets/walkthroughs/unity/4_mesh_reading/gameobject_select_window.png)
+![Gameobject Select Window](walkthroughs/unity/4_mesh_reading/gameobject_select_window.png)
 
 *Figure* **4.10**: *Gameobject Select Window*
 
 A new window will appear asking you to select a game object. Double click on Plane, highlighted in Figure 4.10, then look back at the Unity Inspector.
 
-![Gameobject Select Window](../assets/walkthroughs/unity/4_mesh_reading/inspect_with_plane.png)
+![Gameobject Select Window](walkthroughs/unity/4_mesh_reading/inspect_with_plane.png)
 
 *Figure* **4.11**: *Inspector With Plane*
 

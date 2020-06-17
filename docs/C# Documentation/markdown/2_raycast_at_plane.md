@@ -31,7 +31,7 @@ Now, let's begin writing our script.
 
 ## Writing the Script
 
-![HFExampleScriptBlank](../assets/walkthroughs/unity/2_raycast_at_plane/blank_new_behaviour_script.png)
+![HFExampleScriptBlank](walkthroughs/unity/2_raycast_at_plane/blank_new_behaviour_script.png)
 
 *Figure* **2.1**: *A Blank MonoBehavior Script*
 
@@ -51,7 +51,7 @@ using HumanFactors.RayTracing;
 using HumanFactors.Geometry;
 ```
 
-![HFExampleScript Usings](../assets/walkthroughs/unity/2_raycast_at_plane/add_using_delcarations.png)
+![HFExampleScript Usings](walkthroughs/unity/2_raycast_at_plane/add_using_delcarations.png)
 
 *Figure* **2.2**: *The Using declarations required for this script*
 
@@ -59,7 +59,7 @@ Lines, 1-6 of your code should match Figure 2.2.
 
 > **NOTE:** While editing your code, you may notice the colored bar to the left between the line numbers and the code itself. This bar displays the changes you've made to the current document. When you make unsaved changes, the bar will appear and be colored yellow, then once you save it will turn green.
 
-![Body Of Start](../assets/walkthroughs/unity/2_raycast_at_plane/body_of_start.png)
+![Body Of Start](walkthroughs/unity/2_raycast_at_plane/body_of_start.png)
 
 *Figure* **2.3**: *The body of the Start method highlighted*
 
@@ -133,7 +133,7 @@ At this point, your start function should match the following code:
     }
 ```
 
-[Image in Visual Studio](../assets/walkthroughs/unity/2_raycast_at_plane/creating_a_plane.png)
+[Image in Visual Studio](walkthroughs/unity/2_raycast_at_plane/creating_a_plane.png)
 
 With the BVH created, we're ready to call the Raytracer and cast a ray.
 
@@ -189,7 +189,7 @@ Here's all of that together:
         ")");
 ```
 
-[Image of our Start() function up until this point](../assets/walkthroughs/unity/2_raycast_at_plane/casting_a_ray.png)
+[Image of our Start() function up until this point](walkthroughs/unity/2_raycast_at_plane/casting_a_ray.png)
 
 ### Wrapping Up
 
@@ -251,7 +251,7 @@ public class HFExampleScript : MonoBehaviour
 
 Once you've verified your code matches, ***make sure to save the script  by clicking File then Save in the top menu or pressing Ctrl + S on your keyboard.*** Unity will NOT be able to use the script unless you save it. If you're unsure, the bar on the left-hand side between your code and the line numbers should be solid green, and the title of your assembly should not have an asterisk next to it.
 
-![Add Using HumanFactors](../assets/walkthroughs/unity/2_raycast_at_plane/saved_vs_unsaved.png)
+![Add Using HumanFactors](walkthroughs/unity/2_raycast_at_plane/saved_vs_unsaved.png)
 
 ## Testing
 
@@ -259,58 +259,58 @@ Now that we have a usable script, we need to attach it to some game object in or
 
 ### Adding the script to the camera
 
-![Drag HFExampleScript.cs Into Camera](../assets/walkthroughs/unity/2_raycast_at_plane/drag_into_camera.png)
+![Drag HFExampleScript.cs Into Camera](walkthroughs/unity/2_raycast_at_plane/drag_into_camera.png)
 
 *Figure* **2.4** *Adding HFExampleScript to the camera as a component*
 
 In the Unity window drag *HFExampleScript.cs* to *Main Camera* in the scene hierarchy like shown in Figure 2.4. After doing this, it may appear as if nothing happened, but by dragging HFExampleScript over the camera you've added HFExampleScript to the camera as a component.
 
-![Look At Camera In Sidebar](../assets/walkthroughs/unity/2_raycast_at_plane/camera_in_sidebar.png)
+![Look At Camera In Sidebar](walkthroughs/unity/2_raycast_at_plane/camera_in_sidebar.png)
 
 *Figure* **2.5** *Viewing the components of the Main Camera*
 
 You can verify that the script has been added to the camera by left clicking the camera in the scene hierarchy and looking at its components in the Inspector on the right sidebar. At the bottom of the Inspector you should see a header for HF Example Script like the one highlighted in Figure 2.5. Once you've made sure it exists, you can click on an empty space in the scene view to deselect the camera.
 
-> **NOTE**: If you don't see the inspector in the right sidebar, you can enable it by selecting Window > General > Inspector from the top menubar. ![Re-Open Inspector](../assets/walkthroughs/unity/2_raycast_at_plane/re_open_inspector.png)
+> **NOTE**: If you don't see the inspector in the right sidebar, you can enable it by selecting Window > General > Inspector from the top menubar. ![Re-Open Inspector](walkthroughs/unity/2_raycast_at_plane/re_open_inspector.png)
 
 > **NOTE**: If you notice multiple copies of the script in the Inspector, you can remove duplicates by left clicking on the rightmost side of header for the duplicate components' headers, then clicking *Remove Component*.
->![Remove Extra Component](../assets/walkthroughs/unity/2_raycast_at_plane/remove_extra_component.png)
+>![Remove Extra Component](walkthroughs/unity/2_raycast_at_plane/remove_extra_component.png)
 
 ### Executing the Script
 
 Now that we've set *HFExampleScript* as a component of the *Main Camera*, its `Start()` function containing our code will run when the editor enters play mode.
 
-![Look At Camera In Sidebar](../assets/walkthroughs/unity/2_raycast_at_plane/play_mode_button.png)
+![Look At Camera In Sidebar](walkthroughs/unity/2_raycast_at_plane/play_mode_button.png)
 
 *Figure* **2.6** *Circled play button in editor window*
 
 To enter playmode, press the play button located at the top center of your screen, circled in red in Figure 2.6. Once clicked, you will enter play mode, indicated by  the play button turning blue.
 
 > **NOTE:** If when entering play mode, the game window becomes full screen like below, that means you have the *Maximize On Play* option enabled. You can disable it by pressing the  *Maximize On Play* button circled in red below. For this tutorial series, we will leave this option off since it hides the console.
->![Circled Maximize On Play Button](../assets/walkthroughs/unity/2_raycast_at_plane/playmode_maximize_on_play.png)
+>![Circled Maximize On Play Button](walkthroughs/unity/2_raycast_at_plane/playmode_maximize_on_play.png)
 
-![Add Using HumanFactors](../assets/walkthroughs/unity/2_raycast_at_plane/console_show_meshinfo.png) 
+![Add Using HumanFactors](walkthroughs/unity/2_raycast_at_plane/console_show_meshinfo.png) 
 
 *Figure* **2.7A** *Intersection Results in play mode.*
 
-![Console Output](../assets/walkthroughs/unity/2_raycast_at_plane/ExpectedOutput.png)
+![Console Output](walkthroughs/unity/2_raycast_at_plane/ExpectedOutput.png)
 
 *Figure* **2.7B** *Results from 2.7A magnified*
 
 If everything went right, after entering play mode the console located at the bottom of your editor's window should show `(1,0,0)`, which is the exact point where the ray intersected the plane. Figure 2.7B is a magnified version of the console's output enclosed by the red box shown in 2.7A.
 
 > **NOTE**: If you see no output at all, that means your version of Unity has log messages disabled. To enable log messages click on the Console tab just above the assets window to open the console.
-> ![Change To Console](../assets/walkthroughs/unity/2_raycast_at_plane/click_console_tab.png)
+> ![Change To Console](walkthroughs/unity/2_raycast_at_plane/click_console_tab.png)
 > After this, you should notice the three buttons in the top right of the console window. The Left most button with an exclamation point in a speech bubble should be greyed out. Click on this button to enable log messages.
-> ![Enable Log Messages](../assets/walkthroughs/unity/2_raycast_at_plane/click_to_enable_log_messages.png)
+> ![Enable Log Messages](walkthroughs/unity/2_raycast_at_plane/click_to_enable_log_messages.png)
 > You will see your output in the space where the assets tab occupied, instead of the bottom bar. You can switch back to the assets window by clicking the project tab to the left of the console tab.
-> ![Back to Assets](../assets/walkthroughs/unity/2_raycast_at_plane/enabled_log_messages.png)
+> ![Back to Assets](walkthroughs/unity/2_raycast_at_plane/enabled_log_messages.png)
 > Future calls to `Debug.Log()` will appear at the bottom of the screen like shown in Figure 2.4.
 
 If your console's output matches, then you've successfully completed this tutorial. You can press the play button again to exit playmode.
 
 ## Conclusion
 
-Full project Link: [Tutorial 2: Casting a Ray at A Plane](../assets/walkthroughs/unity/2_raycast_at_plane/Tutorial%202%20-%20Unity%20Project.zip)
+Full project Link: [Tutorial 2: Casting a Ray at A Plane](walkthroughs/unity/2_raycast_at_plane/Tutorial%202%20-%20Unity%20Project.zip)
 
 In this tutorial we've successfully created a plane from an array of vertices and triangle indexes, then casted a ray at it, then found the point where the ray and the plane intersected. Through this we've gained some experience using Visual Studio with Unity and became more familiar with the Editor's UI. In the next tutorial we will build upon this experience to cover a core part of the HumanFactors Library: The [Graph Generator](@ref GeneratingAGraph).

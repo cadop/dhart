@@ -42,7 +42,7 @@ For now, we will begin with the minimum required settings to run the Graph Gener
 3. The spacing between nodes.
 
 
-![HFExampleScriptBlank](../assets/walkthroughs/unity/2_raycast_at_plane/blank_new_behaviour_script.png)
+![HFExampleScriptBlank](walkthroughs/unity/2_raycast_at_plane/blank_new_behaviour_script.png)
 
 *Figure* **3.1** *Blank HFExampleScript.cs*
 
@@ -50,7 +50,7 @@ To begin: open the blank HFExample Script that we created in the project setup b
 
 ### Using Declarations
 
-![Using Declarations](../assets/walkthroughs/unity/3_graph_generator/using_declarations.png)
+![Using Declarations](walkthroughs/unity/3_graph_generator/using_declarations.png)
 
 *Figure* **3.2** *Using declarations for this tutorial*
 
@@ -90,7 +90,7 @@ Add the following code in the body of the Start method on line 13:
         EmbreeBVH bvh = new EmbreeBVH(Plane);
 ```
 
-[Picture of the start method at this point](../assets/walkthroughs/unity/3_graph_generator/creating_the_plane.PNG)
+[Picture of the start method at this point](walkthroughs/unity/3_graph_generator/creating_the_plane.PNG)
 
 ### Generating the Graph
 
@@ -126,7 +126,7 @@ All of that together is:
         Graph G = GraphGenerator.GenerateGraph(bvh, start_point, spacing);
 ```
 
-[Picture of entire Start method until this point.](../assets/walkthroughs/unity/3_graph_generator/generating_the_graph.PNG)
+[Picture of entire Start method until this point.](walkthroughs/unity/3_graph_generator/generating_the_graph.PNG)
 
 ### Retrieving a list of nodes
 
@@ -140,7 +140,7 @@ Enter the following code at the bottom of the start method:
         Debug.Log(nodes);
 ```
 
-[Picture of entire Start method Until this Point](../assets/walkthroughs/unity/3_graph_generator/print_nodes.png)
+[Picture of entire Start method Until this Point](walkthroughs/unity/3_graph_generator/print_nodes.png)
 
 ### Save and Test
 
@@ -208,19 +208,19 @@ public class HFExampleScript : MonoBehaviour
 
 Once you've confirmed that your script matches this code, **save** your script, minimize Visual Studio, then switch back to the Unity Editor.
 
-![Attach script and test](../assets/walkthroughs/unity/2_raycast_at_plane/drag_into_camera.png)
+![Attach script and test](walkthroughs/unity/2_raycast_at_plane/drag_into_camera.png)
 
 *Figure* **3.3** *Dragging HFExampleScript onto the Main Camera as a component.*
 
 The process for testing this script is identical to the process in [The Raytracer Tutorial](@ref UsingTheRaytracer). Attach the script to the main camera, then press the play button and inspect your output.
 
-![Switch To the Console](../assets/walkthroughs/unity/3_graph_generator/click_on_console.png)
+![Switch To the Console](walkthroughs/unity/3_graph_generator/click_on_console.png)
 
 *Figure* **3.4** *How to view the Console Tab*
 
 Like in the previous tutorial, the output is at the bottom of the screen, but it doesn't fit in on one line, so it's cut off. To get a better view, click on the output itself, or click on the console tab circled in Figure 3.4 to view the console. The console contains a history of outputs, as well as the option to click on any output message to get more information.
 
-![View Console](../assets/walkthroughs/unity/3_graph_generator/console_view.png)
+![View Console](walkthroughs/unity/3_graph_generator/console_view.png)
 
 *Figure* **3.5** *Highlighted Graph Output and how to switch back to the assets window*
 
@@ -266,11 +266,11 @@ Now, if the graph fails to generate,  our code will print a clear error message 
 
 To test that our null check is successful, we'll go to *line 34* and change our start point to be at (200, 0, 1) instead of (0,0,1): `Vector3D start_point = new Vector3D(200, 0, 1);` This is far, far beyond where our plane is and should result in case 1: the initial ground check failing to find any valid ground.
 
-[Picture of the full Start() method for this test.](../assets/walkthroughs/unity/3_graph_generator/checking_for_success.PNG)
+[Picture of the full Start() method for this test.](walkthroughs/unity/3_graph_generator/checking_for_success.PNG)
 
 Since the camera is already setup, all we need to do is enter playmode to test this. Make sure your code matches the picture, **save** the file, minimize Visual Studio, open the Unity editor, then press the play button.
 
-![Failure](../assets/walkthroughs/unity/3_graph_generator/failure.PNG)
+![Failure](walkthroughs/unity/3_graph_generator/failure.PNG)
 
 *Figure* **3.5** *Our error message printed after the graph failed to generate*
 
@@ -278,7 +278,7 @@ If you did this correctly, then the error message we wrote earlier should appear
 
 ## Conclusion
 
-Here is a link the full project created in this guide: [Full Project](../assets/walkthroughs/unity/3_graph_generator/Tutorial%203%20-%20Graph%20Generator.zip)
+Here is a link the full project created in this guide: [Full Project](walkthroughs/unity/3_graph_generator/Tutorial%203%20-%20Graph%20Generator.zip)
 
 In this tutorial we successfully generated a graph from a bvh, start point, and spacing. We also handled a case where a graph was unable to be generated, and wrote a custom error message to be printed instead of throwing a null reference exception.
 
