@@ -1,3 +1,10 @@
+///
+///	\file		meshinfo.h
+///	\brief		Source file for MeshInfo
+///
+///	\author		TBA
+///	\date		16 Jun 2020
+///
 #include <meshinfo.h>
 #include <Geometry>
 #include <HFExceptions.h>
@@ -211,7 +218,7 @@ namespace HF {
 		}
 		bool MeshInfo::operator==(const MeshInfo& M2) const
 		{
-			// Get out quickly if the number of vertices donsn't match
+			// Get out quickly if the number of vertices do not match
 			if (NumVerts() != M2.NumVerts()) return false;
 
 			for (int i = 0; i < NumVerts(); i++) {

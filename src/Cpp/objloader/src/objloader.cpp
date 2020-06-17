@@ -1,4 +1,10 @@
-
+///
+///	\file		objloader.cpp
+///	\brief		Source file for functions in the HF::Geometry namespace
+///
+///	\author		TBA
+///	\date		16 Jun 2020
+///
 #include <objloader.h>
 #include <Dense>
 #include <meshinfo.h>
