@@ -110,7 +110,7 @@ If you see HumanFactors in your project's references, then you've successfully i
 
 Below is a link to the unity project created in this tutorial.
 
-[Tutorial 1: Unity Project Setup](walkthroughs/unity/1_project_setup/Tutorial%201-%20Unity%20Project.zip)
+[Tutorial 1: Unity Project Setup](../assets/walkthroughs/unity/1_project_setup/Tutorial%201-%20Unity%20Project.zip)
 
 In this tutorial, we went through the process of creating unity project and adding the Analysis toolkit to the project. In the following tutorials, we will use this basis for using the modules that come with the Analysis toolkit.
 

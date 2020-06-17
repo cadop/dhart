@@ -258,7 +258,7 @@ To test that our null check is successful, we'll go to *line 34* and change our 
 
 Since the camera is already setup, all we need to do is enter playmode to test this. Make sure your code matches the picture, **save** the file, minimize Visual Studio, open the Unity editor, then press the play button.
 
-![Failure](walkthroughs/unity/3_graph_generator/failure.PNG)
+![Failure](walkthroughs/unity/3_graph_generator/failure.png)
 
 *Figure* **3.5** *Our error message printed after the graph failed to generate*
 
@@ -266,8 +266,8 @@ If you did this correctly, then the error message we wrote earlier should appear
 
 ## Conclusion
 
-Here is a link the full project created in this guide: [Full Project](walkthroughs/unity/3_graph_generator/Tutorial%203%20-%20Graph%20Generator.zip)
+Here is a link the full project created in this guide: [Full Project](../assets/walkthroughs/unity/3_graph_generator/Tutorial%203%20-%20Graph%20Generator.zip)
 
 In this tutorial we successfully generated a graph from a bvh, start point, and spacing. We also handled a case where a graph was unable to be generated, and wrote a custom error message to be printed instead of throwing a null reference exception.
 
-In the next tutorial, [Reading Meshes From Unity](4_reading_a_mesh_from_unity.md), we will use geometry from the Unity scene to generate a graph, instead of manually creatng our own plane.
+In the next tutorial, [Reading Meshes From Unity](@ref #MeshFromUnity), we will use geometry from the Unity scene to generate a graph, instead of manually creatng our own plane.
