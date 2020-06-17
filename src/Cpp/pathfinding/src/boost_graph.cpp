@@ -1,11 +1,17 @@
+///
+///	\file		boost_graph.cpp
+///	\brief		Source file for BoostGraph
+///
+///	\author		TBA
+///	\date		17 Jun 2020
+///
 #include <boost_graph.h>
-
-
 
 #include <graph.h>
 #include <node.h>
 #include <Edge.h>
 #include <assert.h>
+
 using HF::SpatialStructures::Graph;
 using HF::SpatialStructures::Node;
 using std::vector;
@@ -38,5 +44,6 @@ namespace HF::Pathfinding {
 		p.resize(n);
 		d.resize(n);
 	}
+
 	BoostGraph::~BoostGraph() = default;
 }
