@@ -12,10 +12,10 @@ bool \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_path_member_a7b021c0
 \item 
 \mbox{\Hypertarget{struct_h_f_1_1_spatial_structures_1_1_path_member_aa854e4b8d04fc62d8e09cff48ba95d68}\label{struct_h_f_1_1_spatial_structures_1_1_path_member_aa854e4b8d04fc62d8e09cff48ba95d68}} 
 float \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_path_member_aa854e4b8d04fc62d8e09cff48ba95d68}{cost}}
-\begin{DoxyCompactList}\small\item\em The cost of a \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_path_member}{Path\+Member}} (weight) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em The cost of a \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_path_member}{Path\+Member}} (weight) ///$<$. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{struct_h_f_1_1_spatial_structures_1_1_path_member_aed2cf97b3136ad0929cdd3c5c2b96e1c}\label{struct_h_f_1_1_spatial_structures_1_1_path_member_aed2cf97b3136ad0929cdd3c5c2b96e1c}} 
 int \mbox{\hyperlink{struct_h_f_1_1_spatial_structures_1_1_path_member_aed2cf97b3136ad0929cdd3c5c2b96e1c}{node}}
-\begin{DoxyCompactList}\small\item\em The node identifier. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The node identifier ///$<$. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Member Function Documentation}
@@ -35,21 +35,9 @@ See operator==, determines if \mbox{\hyperlink{struct_h_f_1_1_spatial_structures
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-True if p1 and p2 do N\+OT have equivalent cost/node values, false otherwise
+True if p1 and p2 do N\+OT have equivalent cost/node values, false otherwise 
 \end{DoxyReturn}
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{PathMember p0 = \{ 3.14f, 3 \};}
-\DoxyCodeLine{PathMember p1 = \{ 2.78f, 2 \};}
-\DoxyCodeLine{PathMember p2 = \{ 2.78f, 2 \};}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordtype}{bool} is\_true = p1 != p2;}
-\DoxyCodeLine{\textcolor{keywordtype}{bool} is\_false = p0 != p1;}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// applies the inverse of operator== to evaluate operator!=}}
-\DoxyCodeLine{\textcolor{comment}{// since fields of p1 and p2 have different values, is\_true is in fact, true}}
-\end{DoxyCode}
- \mbox{\Hypertarget{struct_h_f_1_1_spatial_structures_1_1_path_member_af59604b398e925b0b24030a00dd92f59}\label{struct_h_f_1_1_spatial_structures_1_1_path_member_af59604b398e925b0b24030a00dd92f59}} 
+\mbox{\Hypertarget{struct_h_f_1_1_spatial_structures_1_1_path_member_af59604b398e925b0b24030a00dd92f59}\label{struct_h_f_1_1_spatial_structures_1_1_path_member_af59604b398e925b0b24030a00dd92f59}} 
 \index{HF::SpatialStructures::PathMember@{HF::SpatialStructures::PathMember}!operator==@{operator==}}
 \index{operator==@{operator==}!HF::SpatialStructures::PathMember@{HF::SpatialStructures::PathMember}}
 \doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
@@ -65,22 +53,10 @@ Determines if Path\+Members p1 and p2 have equal cost and node (identifier) valu
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-True if p1 and p2 have equivalent cost and node values, false otherwise
+True if p1 and p2 have equivalent cost and node values, false otherwise 
 \end{DoxyReturn}
 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{PathMember p0 = \{ 3.14f, 3 \};}
-\DoxyCodeLine{PathMember p1 = \{ 2.78f, 2 \};}
-\DoxyCodeLine{PathMember p2 = \{ 2.78f, 2 \};}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordtype}{bool} equiv = p1 == p2;}
-\DoxyCodeLine{\textcolor{keywordtype}{bool} not\_equiv = p0 == p1;}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// cost and node fields of p1 and p2 are identical, so equiv evaluates true}}
-\DoxyCodeLine{\textcolor{comment}{// not\_equiv evaluates false, since fields of p0 and p1 do not have matching values}}
-\end{DoxyCode}
- 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-Cpp/spatialstructures/src/\mbox{\hyperlink{path_8h}{path.\+h}}\end{DoxyCompactItemize}
+Cpp/spatialstructures/src/path.\+h\end{DoxyCompactItemize}
