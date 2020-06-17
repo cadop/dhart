@@ -203,3 +203,178 @@ namespace NodeTests {
 
 
 }
+
+///
+///	The following are tests for the code samples for HF::SpatialStructures::Node
+///
+
+namespace NodeExampleTests {
+	TEST(_Node, DefaultConstructor) {
+		HF::SpatialStructures::Node node_0(12.0, 23.1, 34.2, 456);
+
+		/*
+		std::cout << 12.0 << " " << node_0.x << std::endl;
+		std::cout << 23.1 << " " << node_0.y << std::endl;
+		std::cout << 34.2 << " " << node_0.z << std::endl;
+		std::cout << 456 << " " << node_0.id << std::endl;
+		*/
+	}
+
+	TEST(_Node, ParamConstructorNoID) {
+		HF::SpatialStructures::Node node_0(12.0, 23.1, 34.2);
+	}
+
+	TEST(_Node, ParamConstructorArray) {
+#include <array>
+
+		std::array<float, 3> pos = { 12.0, 23.1, 34.2 };
+		HF::SpatialStructures::Node node(pos);
+	}
+
+	TEST(_node, ParamConstructorArrayTypeID) {
+#include <array>
+	
+		std::array<float, 3> pos = { 12.0, 23.1, 34.2 };
+		HF::SpatialStructures::Node node(pos, HF::SpatialStructures::NODE_TYPE::GRAPH, 456);
+	}
+
+	TEST(_node, DistanceTo) {
+		HF::SpatialStructures::Node node_0(12.0, 23.1, 34.2, 456);
+		HF::SpatialStructures::Node node_1(45.3, 56.4, 67.5, 789);
+	
+		float euclidean_distance = node_0.distanceTo(node_1);
+	}
+
+	TEST(_node, AngleTo) {
+		/// TODO code sample: line 40 of node.cpp - 'This needs an actual angle formula'
+	}
+
+	TEST(_node, DirectionTo) {
+#include <array>
+		
+		HF::SpatialStructures::Node node_0(12.0, 23.1, 34.2, 456);
+		HF::SpatialStructures::Node node_1(45.3, 56.4, 67.5, 789);
+		
+		std::array<float, 3> direction_vector = node_0.directionTo(node_1);
+	}
+
+	TEST(_node, GetArray) {
+#include <array>
+
+		HF::SpatialStructures::Node node(12.0, 23.1, 34.2, 456);
+		
+		// An array is created from within the getArray() member function
+		std::array<float, 3> arr = node.getArray();
+		
+		// ref_arr and ref_node have the same value, but
+		// refer to different locations in memory -- 
+		// arr does not consist of the same memory locations as
+		// that of the coordinate fields within node.
+		float& ref_arr = arr[0];
+		float& ref_node = node.x;
+
+		/*
+		std::cout << "ref_arr: " << ref_arr << "\tref_node: " << ref_node << std::endl;
+		std::cout << "ref_arr: " << &ref_arr << "\tref_node: " << &ref_node << std::endl;
+		*/
+	}
+
+	TEST(_node, OperatorIndexByRef) {
+		HF::SpatialStructures::Node node(12.0, 23.1, 34.2, 456);	// (x, y, z), ID
+		
+		float& position = node[1];			// access by reference
+		position = 93.5;					// node.y is now 93.5
+
+		/*
+		std::cout << "node.y = " << node.y << std::endl;
+		std::cout << "position = " << position << std::endl;
+		*/
+	}
+
+	TEST(_node, OperatorIndexByVal) {
+		HF::SpatialStructures::Node node(12.0, 23.1, 34.2, 456);	// (x, y, z), ID
+		
+		float position = node[1];			// access by reference
+		position = 93.5;					// node.y is still 23.1
+	
+		std::cout << "node.y = " << node.y << std::endl;
+		std::cout << "position = " << position << std::endl;
+	}
+
+	TEST(_node, OperatorEquality) {
+		HF::SpatialStructures::Node node_0(12.0, 23.1, 34.2, 456);
+		HF::SpatialStructures::Node node_1(45.3, 56.4, 67.5, 789);
+		
+		bool same_position = node_0 == node_1;
+		
+		if (same_position) {
+			std::cout << "Occupies the same space" << std::endl;
+		} else {
+			std::cout << "Different positions" << std::endl;
+		}
+		
+		// same_position evaluates to false
+	}
+
+	TEST(_node, OperatorAssignment) {
+#include <array>
+		/* Cannot test -- not defined in node.cpp
+		HF::SpatialStructures::Node node(12.0, 23.1, 34.2);
+		std::cout << node.x << ", " << node.y << ", " << node.z << std::endl;
+		std::array<float, 3> position = { 45.3, 56.4, 67.5 };
+
+		node = position;
+
+		std::cout << node.x << ", " << node.y << ", " << node.z << std::endl;
+		*/
+	}
+
+	TEST(_node, OperatorNEquality) {
+		HF::SpatialStructures::Node node_0(12.0, 23.1, 34.2, 456);
+		HF::SpatialStructures::Node node_1(45.3, 56.4, 67.5, 789);
+		
+		// Does the inverse of operator==.
+		bool different_positions = node_0 != node_1;
+		
+		/*/
+		if (different_positions) {
+			std::cout << "Different positions" << std::endl;
+		}
+		else {
+			std::cout << "Occupies the same space" << std::endl;
+		}
+		*/
+		
+		// different_positions evaluates to true
+	}
+
+	TEST(_node, OperatorMinus) {
+
+	}
+
+	TEST(_node, OperatorPlus) {
+
+	}
+
+	TEST(_node, OperatorMultiply) {
+
+	}
+
+	TEST(_node, OperatorLessThanConst) {
+
+	}
+
+	TEST(_node, OperatorLessThan) {
+
+	}
+	
+	TEST(_node, OperatorGreaterThanConst) {
+		HF::SpatialStructures::Node node_0(12.0, 23.1, 34.2, 456);
+		HF::SpatialStructures::Node node_1(45.3, 56.4, 67.5, 789);
+		
+		// operator< compares ID fields of node_0 and node_1
+		bool compare = node_0 > node_1;	// evaluates to false, since 456 < 789
+
+		/*std::cout << compare << std::endl;*/
+	}
+}

@@ -36,7 +36,7 @@ namespace HF
 			/// </summary>
 			
 			/// \code{.cpp}
-			/// Node node();	// all fields initialized to NAN
+			/// HF::SpatialStructures::Node node();	// all fields initialized to NAN
 			/// \endcode
 			Node();
 
@@ -50,7 +50,7 @@ namespace HF
 			/// <param name="id"> ID of the node </param>
 			
 			/// \code{.cpp}
-			/// Node node_0(12.0, 23.1, 34.2, 456)
+			/// HF::SpatialStructures::Node node_0(12.0, 23.1, 34.2);	// default ID is -1
 			/// \endcode
 			Node(float x, float y, float z, int ID = -1);
 
@@ -60,16 +60,20 @@ namespace HF
 			/// <param name="position">An array of 3 floats for x,y,z</param>
 			
 			/// \code{.cpp}
+			/// #include <array>
+			///
 			/// std::array<float, 3> pos = { 12.0, 23.1, 34.2 };
-			/// Node node(pos);		// id == -1, type == NODE_TYPE::GRAPH
+			/// HF::SpatialStructures::Node node(pos);		// id == -1, type == NODE_TYPE::GRAPH
 			/// \endcode
 			Node(const std::array<float, 3>& position);
 
 			// Create a point of interest
 			
 			/// \code{.cpp}
+			/// #include <array>
+			///
 			/// std::array<float, 3> pos = { 12.0, 23.1, 34.2 };
-			/// Node node(pos, NODE_TYPE::GRAPH, 456);
+			/// HF::SpatialStructures::Node node(pos, HF::SpatialStructures::NODE_TYPE::GRAPH, 456);
 			/// \endcode
 			Node(const std::array<float, 3>& position, NODE_TYPE t, int id);
 
@@ -80,8 +84,8 @@ namespace HF
 			/// <returns>Distance between this node and n2</returns>
 			
 			/// \code{.cpp}
-			/// Node node_0(12.0, 23.1, 34.2, 456);
-			/// Node node_1(45.3, 56.4, 67.5, 789);
+			/// HF::SpatialStructures::Node node_0(12.0, 23.1, 34.2, 456);
+			/// HF::SpatialStructures::Node node_1(45.3, 56.4, 67.5, 789);
 			///
 			/// float euclidean_distance = node_0.distanceTo(node_1);
 			/// \endcode
@@ -105,8 +109,10 @@ namespace HF
 			/// <returns> an array of 3 floats indicating a direction</returns>
 
 			/// \code{.cpp}
-			/// Node node_0(12.0, 23.1, 34.2, 456);
-			/// Node node_1(45.3, 56.4, 67.5, 789);
+			/// #include <array>
+			///
+			/// HF::SpatialStructures::Node node_0(12.0, 23.1, 34.2, 456);
+			/// HF::SpatialStructures::Node node_1(45.3, 56.4, 67.5, 789);
 			///
 			/// std::array<float, 3> direction_vector = node_0.directionTo(node_1);
 			/// \endcode
@@ -119,7 +125,9 @@ namespace HF
 			/// <returns></returns>
 
 			/// \code{.cpp}
-			/// Node node(12.0, 23.1, 34.2, 456);
+			/// #include <array>
+			///
+			/// HF::SpatialStructures::Node node(12.0, 23.1, 34.2, 456);
 			///
 			/// // An array is created from within the getArray() member function
 			/// std::array<float, 3> arr = node.getArray();
@@ -142,10 +150,10 @@ namespace HF
 			/// <returns>a reference to the member float for the requested coordinate</returns>
 
 			/// \code{.cpp}
-			/// Node node(12.0, 23.1, 34.2, 456);	// (x, y, z), ID
+			/// HF::SpatialStructures::Node node(12.0, 23.1, 34.2, 456);	// (x, y, z), ID
 			///
 			/// float& position = node[1];			// access by reference
-			/// position = 93.5						// node.y is now 93.5
+			/// position = 93.5;					// node.y is now 93.5
 			/// \endcode
 			float& operator[](int i);
 
@@ -156,7 +164,7 @@ namespace HF
 			/// <returns>the value (copy) of the member float for the requested coordinate</returns>
 
 			/// \code{.cpp}
-			/// Node node(12.0, 23.1, 34.2, 456);	// (x, y, z), ID
+			/// HF::SpatialStructures::Node node(12.0, 23.1, 34.2, 456);	// (x, y, z), ID
 			///
 			/// float position = node[1];			// access by reference
 			/// position = 93.5						// node.y is still 23.1
@@ -170,8 +178,8 @@ namespace HF
 			/// <returns>True if the distance between n1 and n2 is less than Rounding Precision, false otherwise</returns>
 
 			/// \code{.cpp}
-			/// Node node_0(12.0, 23.1, 34.2, 456);
-			/// Node node_1(45.3, 56.4, 67.5, 789);
+			/// HF::SpatialStructures::Node node_0(12.0, 23.1, 34.2, 456);
+			/// HF::SpatialStructures::Node node_1(45.3, 56.4, 67.5, 789);
 			///
 			/// bool same_position = node_0 == node_1;
 			///
@@ -181,7 +189,7 @@ namespace HF
 			/// 	std::cout << "Different positions" << std::endl;
 			/// }
 			///
-			/// // same_position evaluates to true
+			/// // same_position evaluates to false
 			/// \endcode
 			bool operator==(const Node& n2) const;
 
@@ -192,7 +200,10 @@ namespace HF
 			/// <param name="n2">Array whose values will be assigned to n1</param>
 
 			/// \code{.cpp}
-			/// Node node(12.0, 23.1, 34.2);
+			/// // Note: This member function is not defined in node.cpp (commented out)
+			/// #include <array>
+			///
+			/// HF::SpatialStructures::Node node(12.0, 23.1, 34.2);
 			/// std::array<float, 3> position = { 45.3, 56.4, 67.5 };
 			///
 			/// node = position;			// assigns node's x, y, z fields to that of position's values
@@ -206,8 +217,8 @@ namespace HF
 			/// <returns>True if the distance between n1 and n2 is greater than or equal to Rounding Precision, false otherwise</returns>
 			
 			/// \code{.cpp}
-			/// Node node_0(12.0, 23.1, 34.2, 456);
-			/// Node node_1(45.3, 56.4, 67.5, 789);
+			/// HF::SpatialStructures::Node node_0(12.0, 23.1, 34.2, 456);
+			/// HF::SpatialStructures::Node node_1(45.3, 56.4, 67.5, 789);
 			///
 			/// // Does the inverse of operator==.
 			/// bool different_positions = node_0 != node_1;
@@ -229,10 +240,10 @@ namespace HF
 			/// <returns>A node with the values obtained from n1 - n2</returns>
 
 			/// \code{.cpp}
-			/// Node node_0(12.0, 23.1, 34.2, 456);
-			/// Node node_1(45.3, 56.4, 67.5, 789);
+			/// HF::SpatialStructures::Node node_0(12.0, 23.1, 34.2, 456);
+			/// HF::SpatialStructures::Node node_1(45.3, 56.4, 67.5, 789);
 			///
-			/// Node node_2 = node_1 - node_0;
+			/// HF::SpatialStructures::Node node_2 = node_1 - node_0;
 			///
 			/// // node_2 has values (x = 33.3, y = 33.3, z = 33.3, id = -1, type = NODE_TYPE::GRAPH)
 			/// // id and type are given default values as per Node::Node(const std::array<float, 3>& position)
@@ -247,10 +258,10 @@ namespace HF
 			/// <returns>A node with the values obtained from n1 + n2</returns>
 
 			/// \code{.cpp}
-			/// Node node_0(12.0, 23.1, 34.2, 456);
-			/// Node node_1(45.3, 56.4, 67.5, 789);
+			/// HF::SpatialStructures::Node node_0(12.0, 23.1, 34.2, 456);
+			/// HF::SpatialStructures::Node node_1(45.3, 56.4, 67.5, 789);
 			///
-			/// Node node_2 = node_1 + node_0;
+			/// HF::SpatialStructures::Node node_2 = node_1 + node_0;
 			///
 			/// // node_2 has values (x = 57.3, y = 79.5, z = 101.7, id = -1, type = NODE_TYPE::GRAPH)
 			/// // id and type are given default values as per Node::Node(const std::array<float, 3>& position)
@@ -264,10 +275,10 @@ namespace HF
 			/// <returns>A node with the values obtained from the dot product of N1 and N2</returns>
 
 			/// \code{.cpp}
-			/// Node node_0(12.0, 23.1, 34.2, 456);
-			/// Node node_1(45.3, 56.4, 67.5, 789);
+			/// HF::SpatialStructures::Node node_0(12.0, 23.1, 34.2, 456);
+			/// HF::SpatialStructures::Node node_1(45.3, 56.4, 67.5, 789);
 			///
-			/// Node node_2 = node_1 * node_0;
+			/// HF::SpatialStructures::Node node_2 = node_1 * node_0;
 			///
 			/// // node_2 has values (x = 543.6, y = 1302.84, z = 2308.5, id = -1, type = NODE_TYPE::GRAPH)
 			/// // id and type are given default values as per Node::Node(const std::array<float, 3>& position)
@@ -281,8 +292,8 @@ namespace HF
 			/// <returns>True if n1's id is less than n2's id, false otherwise</returns>
 
 			/// \code{.cpp}
-			/// Node node_0(12.0, 23.1, 34.2, 456);
-			/// Node node_1(45.3, 56.4, 67.5, 789);
+			/// HF::SpatialStructures::Node node_0(12.0, 23.1, 34.2, 456);
+			/// HF::SpatialStructures::Node node_1(45.3, 56.4, 67.5, 789);
 			///
 			/// // operator< compares ID fields of node_0 and node_1
 			/// bool compare = node_0 < node_1;		// evaluates to true, since 456 < 789
@@ -296,11 +307,14 @@ namespace HF
 			/// <returns>True if n1's id is less than n2's id, false otherwise</returns>
 
 			/// \code{.cpp}
+			/// #include <vector>
+			/// #include <algorithm>
+			///
 			/// // For this example, we are not concerned about the node coordinates.
-			/// Node node_0(0.0, 0.0, 0.0, 3);
-			/// Node node_1(0.0, 0.0, 0.0, 1);
-			/// Node node_2(0.0, 0.0, 0.0, 2);
-			/// Node node_3(0.0, 0.0, 0.0, 0);
+			/// HF::SpatialStructures::Node node_0(0.0, 0.0, 0.0, 3);
+			/// HF::SpatialStructures::Node node_1(0.0, 0.0, 0.0, 1);
+			/// HF::SpatialStructures::Node node_2(0.0, 0.0, 0.0, 2);
+			/// HF::SpatialStructures::Node node_3(0.0, 0.0, 0.0, 0);
 			///
 			/// std::vector<Node> vec{ node_0, node_1, node_2, node_3 };
 			///
@@ -323,9 +337,8 @@ namespace HF
 			/// <returns>True if n1's id is greater than n2's id, false otherwise</returns>
 
 			/// \code{.cpp}
-			///
-			/// Node node_0(12.0, 23.1, 34.2, 456);
-			/// Node node_1(45.3, 56.4, 67.5, 789);
+			/// HF::SpatialStructures::Node node_0(12.0, 23.1, 34.2, 456);
+			/// HF::SpatialStructures::Node node_1(45.3, 56.4, 67.5, 789);
 			///
 			/// // operator< compares ID fields of node_0 and node_1
 			/// bool compare = node_0 > node_1;	// evaluates to false, since 456 < 789
