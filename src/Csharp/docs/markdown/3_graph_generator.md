@@ -266,7 +266,7 @@ If you did this correctly, then the error message we wrote earlier should appear
 
 ## Conclusion
 
-Here is a link the full project created in this guide: [Full Project](../assets/walkthroughs/unity/3_graph_generator/Tutorial%203%20-%20Graph%20Generator.zip)
+Here is a link the full project created in this guide: [Full Project](Tutorial%203%20-%20Graph%20Generator.zip)
 
 In this tutorial we successfully generated a graph from a bvh, start point, and spacing. We also handled a case where a graph was unable to be generated, and wrote a custom error message to be printed instead of throwing a null reference exception.
 

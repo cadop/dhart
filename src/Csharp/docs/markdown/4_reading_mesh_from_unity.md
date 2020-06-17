@@ -282,7 +282,7 @@ If your output matches the above output for the code you've chosen, then you hav
 
 ## Conclusion
 
-Here is a link the full project created in this guide: [Full Project](../assets/walkthroughs/unity/4_mesh_reading/Tutorial%204%20-%20Reading%20Mesh%20From%20Unity.zip)
+Here is a link the full project created in this guide: [Full Project](Tutorial%204%20-%20Reading%20Mesh%20From%20Unity.zip)
 
 With this you have successfully read geometry from the Unity Scene and passed it to HumanFactors. This concludes the tutorial series for this point.
 

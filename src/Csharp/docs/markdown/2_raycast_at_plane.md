@@ -301,6 +301,6 @@ If your console's output matches, then you've successfully completed this tutori
 
 ## Conclusion
 
-Full project Link: [Tutorial 2: Casting a Ray at A Plane](../assets/walkthroughs/unity/2_raycast_at_plane/Tutorial%202%20-%20Unity%20Project.zip)
+Full project Link: [Tutorial 2: Casting a Ray at A Plane](Tutorial%202%20-%20Unity%20Project.zip)
 
 In this tutorial we've successfully created a plane from an array of vertices and triangle indexes, then casted a ray at it, then found the point where the ray and the plane intersected. Through this we've gained some experience using Visual Studio with Unity and became more familiar with the Editor's UI. In the next tutorial we will build upon this experience to cover a core part of the HumanFactors Library: The [Graph Generator](@ref GeneratingAGraph).
