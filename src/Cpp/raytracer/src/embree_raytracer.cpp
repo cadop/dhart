@@ -356,8 +356,9 @@ namespace HF {
 			std::vector<bool> out_array;
 			int cores = std::thread::hardware_concurrency();
 			if (origins.size() < cores || directions.size() < cores)
+				// Don't use more cores than there are rays. This caused a hard to find bug earlier.
+				// Doesn't seem to happen with the other ray types. (race condition?)
 				omp_set_num_threads(min(max(origins.size(), directions.size()), 16));
-				//use_parallel = false;
 
 			if (directions.size() > 1 && origins.size() > 1) {
 				out_array.resize(origins.size());
