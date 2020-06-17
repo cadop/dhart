@@ -1,0 +1,139 @@
+\hypertarget{class_human_factors_1_1_native_utils_1_1_native_array}{}\doxysection{Human\+Factors.\+Native\+Utils.\+Native\+Array$<$ T $>$ Class Template Reference}
+\label{class_human_factors_1_1_native_utils_1_1_native_array}\index{HumanFactors.NativeUtils.NativeArray$<$ T $>$@{HumanFactors.NativeUtils.NativeArray$<$ T $>$}}
+
+
+A \mbox{\hyperlink{class_human_factors_1_1_native_utils_1_1_native_object}{Native\+Object}} that owns a readable array in unmanaged memory accessible through the .array member.  
+
+
+Inheritance diagram for Human\+Factors.\+Native\+Utils.\+Native\+Array$<$ T $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{class_human_factors_1_1_native_utils_1_1_native_array}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+unsafe override string \mbox{\hyperlink{class_human_factors_1_1_native_utils_1_1_native_array_a02ec6be681dc2006c5eb725ce59a9999}{To\+String}} ()
+\item 
+virtual T\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_human_factors_1_1_native_utils_1_1_native_array_a9ea74c37970f76b067ebae91b6918c8c}{Copy\+Array}} ()
+\begin{DoxyCompactList}\small\item\em Marshal the unmanaged array pointed to by this object into a managed array. \end{DoxyCompactList}\item 
+unsafe \mbox{\hyperlink{class_human_factors_1_1_native_utils_1_1_native_array_a7937d264e0ecfc2e59da02f385c4cf09}{Native\+Array}} (\mbox{\hyperlink{struct_human_factors_1_1_native_utils_1_1_c_vector_and_data}{C\+Vector\+And\+Data}} \mbox{\hyperlink{class_human_factors_1_1_native_utils_1_1_native_array_a53f1d544231f6a628bb83b982afcb4d5}{ptrs}}, int \mbox{\hyperlink{class_human_factors_1_1_native_utils_1_1_native_array_a08f9370818434ce452d8113466c8a0f0}{size}}=-\/1)
+\begin{DoxyCompactList}\small\item\em Construct a new native array to wrap an unmanaged array in C++ \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_human_factors_1_1_native_utils_1_1_c_vector_and_data}{C\+Vector\+And\+Data}} \mbox{\hyperlink{class_human_factors_1_1_native_utils_1_1_native_array_a53f1d544231f6a628bb83b982afcb4d5}{ptrs}}
+\begin{DoxyCompactList}\small\item\em Data and vector pointers. Used for the construction of new spans and the freeing of resources when this object is finalized. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+virtual unsafe Span$<$ T $>$ \mbox{\hyperlink{class_human_factors_1_1_native_utils_1_1_native_array_a9304ed6a5641e9bde42756d3e2a9f52c}{array}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Read only access to this unmanaged array as a Span$<$\+T$>$. \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_human_factors_1_1_native_utils_1_1_native_array_a08f9370818434ce452d8113466c8a0f0}{size}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The number of elements in the array. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+A \mbox{\hyperlink{class_human_factors_1_1_native_utils_1_1_native_object}{Native\+Object}} that owns a readable array in unmanaged memory accessible through the .array member. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type of the array pointed to in unmanaged memory. \\
+\hline
+\end{DoxyTemplParams}
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em struct}]\end{description}
+\end{Desc}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_human_factors_1_1_native_utils_1_1_native_array_a7937d264e0ecfc2e59da02f385c4cf09}\label{class_human_factors_1_1_native_utils_1_1_native_array_a7937d264e0ecfc2e59da02f385c4cf09}} 
+\index{HumanFactors.NativeUtils.NativeArray$<$ T $>$@{HumanFactors.NativeUtils.NativeArray$<$ T $>$}!NativeArray@{NativeArray}}
+\index{NativeArray@{NativeArray}!HumanFactors.NativeUtils.NativeArray$<$ T $>$@{HumanFactors.NativeUtils.NativeArray$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{NativeArray()}{NativeArray()}}
+{\footnotesize\ttfamily unsafe \mbox{\hyperlink{class_human_factors_1_1_native_utils_1_1_native_array}{Human\+Factors.\+Native\+Utils.\+Native\+Array}}$<$ T $>$.\mbox{\hyperlink{class_human_factors_1_1_native_utils_1_1_native_array}{Native\+Array}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_human_factors_1_1_native_utils_1_1_c_vector_and_data}{C\+Vector\+And\+Data}}}]{ptrs,  }\item[{int}]{size = {\ttfamily -\/1} }\end{DoxyParamCaption})}
+
+
+
+Construct a new native array to wrap an unmanaged array in C++ 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ptrs} & Information about the vector to wrap \\
+\hline
+{\em size} & The size in bytes of this array in unmanaged memory. If set to -\/1, the size will automatically be calculated. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_human_factors_1_1_native_utils_1_1_native_array_a9ea74c37970f76b067ebae91b6918c8c}\label{class_human_factors_1_1_native_utils_1_1_native_array_a9ea74c37970f76b067ebae91b6918c8c}} 
+\index{HumanFactors.NativeUtils.NativeArray$<$ T $>$@{HumanFactors.NativeUtils.NativeArray$<$ T $>$}!CopyArray@{CopyArray}}
+\index{CopyArray@{CopyArray}!HumanFactors.NativeUtils.NativeArray$<$ T $>$@{HumanFactors.NativeUtils.NativeArray$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{CopyArray()}{CopyArray()}}
+{\footnotesize\ttfamily virtual T \mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_human_factors_1_1_native_utils_1_1_native_array}{Human\+Factors.\+Native\+Utils.\+Native\+Array}}$<$ T $>$.Copy\+Array (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Marshal the unmanaged array pointed to by this object into a managed array. 
+
+\begin{DoxyReturn}{Returns}
+A deep copy of the unmanaged array in managed memory. 
+\end{DoxyReturn}
+
+
+In most cases it is recommended to use the \mbox{\hyperlink{class_human_factors_1_1_native_utils_1_1_native_array_a9304ed6a5641e9bde42756d3e2a9f52c}{array}} property, as it saves time and memory by not copying the data into managed memory. \mbox{\Hypertarget{class_human_factors_1_1_native_utils_1_1_native_array_a02ec6be681dc2006c5eb725ce59a9999}\label{class_human_factors_1_1_native_utils_1_1_native_array_a02ec6be681dc2006c5eb725ce59a9999}} 
+\index{HumanFactors.NativeUtils.NativeArray$<$ T $>$@{HumanFactors.NativeUtils.NativeArray$<$ T $>$}!ToString@{ToString}}
+\index{ToString@{ToString}!HumanFactors.NativeUtils.NativeArray$<$ T $>$@{HumanFactors.NativeUtils.NativeArray$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily unsafe override string \mbox{\hyperlink{class_human_factors_1_1_native_utils_1_1_native_array}{Human\+Factors.\+Native\+Utils.\+Native\+Array}}$<$ T $>$.To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Print dots if we hit this point
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_human_factors_1_1_native_utils_1_1_native_array_a53f1d544231f6a628bb83b982afcb4d5}\label{class_human_factors_1_1_native_utils_1_1_native_array_a53f1d544231f6a628bb83b982afcb4d5}} 
+\index{HumanFactors.NativeUtils.NativeArray$<$ T $>$@{HumanFactors.NativeUtils.NativeArray$<$ T $>$}!ptrs@{ptrs}}
+\index{ptrs@{ptrs}!HumanFactors.NativeUtils.NativeArray$<$ T $>$@{HumanFactors.NativeUtils.NativeArray$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{ptrs}{ptrs}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_human_factors_1_1_native_utils_1_1_c_vector_and_data}{C\+Vector\+And\+Data}} \mbox{\hyperlink{class_human_factors_1_1_native_utils_1_1_native_array}{Human\+Factors.\+Native\+Utils.\+Native\+Array}}$<$ T $>$.ptrs\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Data and vector pointers. Used for the construction of new spans and the freeing of resources when this object is finalized. 
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{class_human_factors_1_1_native_utils_1_1_native_array_a9304ed6a5641e9bde42756d3e2a9f52c}\label{class_human_factors_1_1_native_utils_1_1_native_array_a9304ed6a5641e9bde42756d3e2a9f52c}} 
+\index{HumanFactors.NativeUtils.NativeArray$<$ T $>$@{HumanFactors.NativeUtils.NativeArray$<$ T $>$}!array@{array}}
+\index{array@{array}!HumanFactors.NativeUtils.NativeArray$<$ T $>$@{HumanFactors.NativeUtils.NativeArray$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{array}{array}}
+{\footnotesize\ttfamily virtual unsafe Span$<$T$>$ \mbox{\hyperlink{class_human_factors_1_1_native_utils_1_1_native_array}{Human\+Factors.\+Native\+Utils.\+Native\+Array}}$<$ T $>$.array\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Read only access to this unmanaged array as a Span$<$\+T$>$. 
+
+\begin{DoxyReturn}{Returns}
+A Span$<$\+T$>$ referencing the entirety of the unmanaged array.
+\end{DoxyReturn}
+
+
+This only returns a reference to the unmanaged array, not a copy. If you want to copy the array, use the \mbox{\hyperlink{class_human_factors_1_1_native_utils_1_1_native_array_a9ea74c37970f76b067ebae91b6918c8c}{Copy\+Array}} method. \mbox{\Hypertarget{class_human_factors_1_1_native_utils_1_1_native_array_a08f9370818434ce452d8113466c8a0f0}\label{class_human_factors_1_1_native_utils_1_1_native_array_a08f9370818434ce452d8113466c8a0f0}} 
+\index{HumanFactors.NativeUtils.NativeArray$<$ T $>$@{HumanFactors.NativeUtils.NativeArray$<$ T $>$}!size@{size}}
+\index{size@{size}!HumanFactors.NativeUtils.NativeArray$<$ T $>$@{HumanFactors.NativeUtils.NativeArray$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{size}{size}}
+{\footnotesize\ttfamily virtual int \mbox{\hyperlink{class_human_factors_1_1_native_utils_1_1_native_array}{Human\+Factors.\+Native\+Utils.\+Native\+Array}}$<$ T $>$.size\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+The number of elements in the array. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Csharp/packages/base/src/Pointer\+Holder.\+cs\end{DoxyCompactItemize}

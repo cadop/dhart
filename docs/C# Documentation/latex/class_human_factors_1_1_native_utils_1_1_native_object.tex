@@ -1,0 +1,96 @@
+\hypertarget{class_human_factors_1_1_native_utils_1_1_native_object}{}\doxysection{Human\+Factors.\+Native\+Utils.\+Native\+Object Class Reference}
+\label{class_human_factors_1_1_native_utils_1_1_native_object}\index{HumanFactors.NativeUtils.NativeObject@{HumanFactors.NativeUtils.NativeObject}}
+
+
+An object that holds a pointer to unmanaged memory or some other resource that must be freed. Safehandle, but is able to report size to the garbage collector to improve performance.  
+
+
+Inheritance diagram for Human\+Factors.\+Native\+Utils.\+Native\+Object\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.964912cm]{class_human_factors_1_1_native_utils_1_1_native_object}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_human_factors_1_1_native_utils_1_1_native_object_ae7f34573598d48a9ef666b96895c7201}{Native\+Object}} (Int\+Ptr in\+\_\+native\+\_\+pointer, int in\+\_\+pressure=0)
+\begin{DoxyCompactList}\small\item\em Create a new Native Object to manage the lifetime of the object pointed to by {\itshape in\+\_\+native\+\_\+pointer} . \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_human_factors_1_1_native_utils_1_1_native_object_a46b2320d66a2b0405024db48f376b72c}{pressure}}
+\begin{DoxyCompactList}\small\item\em The size of the object pointed to in unmanaged memory in bytes. Used to exert pressure on the GC. While not mandatory, accurately setting this will improve the performance of the garbage collector. \end{DoxyCompactList}\item 
+override bool \mbox{\hyperlink{class_human_factors_1_1_native_utils_1_1_native_object_a33340c37b83300ec09f6fc7982d2fb70}{Is\+Invalid}} =$>$ false
+\begin{DoxyCompactList}\small\item\em There is no way to invalidate this class without destroying it, so will always return {\ttfamily  false } \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+Int\+Ptr \mbox{\hyperlink{class_human_factors_1_1_native_utils_1_1_native_object_aa58c089e79cb4acc260755a41952d3d6}{Pointer}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Pointer to the object in unmanaged memory. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+An object that holds a pointer to unmanaged memory or some other resource that must be freed. Safehandle, but is able to report size to the garbage collector to improve performance. 
+
+All uses of pointers in this library will be wrapped by this, since it ensures that no memory is leaked under any circumstances. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_human_factors_1_1_native_utils_1_1_native_object_ae7f34573598d48a9ef666b96895c7201}\label{class_human_factors_1_1_native_utils_1_1_native_object_ae7f34573598d48a9ef666b96895c7201}} 
+\index{HumanFactors.NativeUtils.NativeObject@{HumanFactors.NativeUtils.NativeObject}!NativeObject@{NativeObject}}
+\index{NativeObject@{NativeObject}!HumanFactors.NativeUtils.NativeObject@{HumanFactors.NativeUtils.NativeObject}}
+\doxysubsubsection{\texorpdfstring{NativeObject()}{NativeObject()}}
+{\footnotesize\ttfamily Human\+Factors.\+Native\+Utils.\+Native\+Object.\+Native\+Object (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{in\+\_\+native\+\_\+pointer,  }\item[{int}]{in\+\_\+pressure = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Create a new Native Object to manage the lifetime of the object pointed to by {\itshape in\+\_\+native\+\_\+pointer} . 
+
+
+\begin{DoxyParams}{Parameters}
+{\em in\+\_\+native\+\_\+pointer} & Pointer to the held object in unmanaged memory.\\
+\hline
+{\em in\+\_\+pressure} & The size of the unmanaged object in bytes. This is used for tuning the garbage collector. If this is 0 or lower, the garbage collector will be unaffected. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_human_factors_1_1_native_utils_1_1_native_object_a33340c37b83300ec09f6fc7982d2fb70}\label{class_human_factors_1_1_native_utils_1_1_native_object_a33340c37b83300ec09f6fc7982d2fb70}} 
+\index{HumanFactors.NativeUtils.NativeObject@{HumanFactors.NativeUtils.NativeObject}!IsInvalid@{IsInvalid}}
+\index{IsInvalid@{IsInvalid}!HumanFactors.NativeUtils.NativeObject@{HumanFactors.NativeUtils.NativeObject}}
+\doxysubsubsection{\texorpdfstring{IsInvalid}{IsInvalid}}
+{\footnotesize\ttfamily override bool Human\+Factors.\+Native\+Utils.\+Native\+Object.\+Is\+Invalid =$>$ false}
+
+
+
+There is no way to invalidate this class without destroying it, so will always return {\ttfamily  false } 
+
+\mbox{\Hypertarget{class_human_factors_1_1_native_utils_1_1_native_object_a46b2320d66a2b0405024db48f376b72c}\label{class_human_factors_1_1_native_utils_1_1_native_object_a46b2320d66a2b0405024db48f376b72c}} 
+\index{HumanFactors.NativeUtils.NativeObject@{HumanFactors.NativeUtils.NativeObject}!pressure@{pressure}}
+\index{pressure@{pressure}!HumanFactors.NativeUtils.NativeObject@{HumanFactors.NativeUtils.NativeObject}}
+\doxysubsubsection{\texorpdfstring{pressure}{pressure}}
+{\footnotesize\ttfamily int Human\+Factors.\+Native\+Utils.\+Native\+Object.\+pressure}
+
+
+
+The size of the object pointed to in unmanaged memory in bytes. Used to exert pressure on the GC. While not mandatory, accurately setting this will improve the performance of the garbage collector. 
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{class_human_factors_1_1_native_utils_1_1_native_object_aa58c089e79cb4acc260755a41952d3d6}\label{class_human_factors_1_1_native_utils_1_1_native_object_aa58c089e79cb4acc260755a41952d3d6}} 
+\index{HumanFactors.NativeUtils.NativeObject@{HumanFactors.NativeUtils.NativeObject}!Pointer@{Pointer}}
+\index{Pointer@{Pointer}!HumanFactors.NativeUtils.NativeObject@{HumanFactors.NativeUtils.NativeObject}}
+\doxysubsubsection{\texorpdfstring{Pointer}{Pointer}}
+{\footnotesize\ttfamily Int\+Ptr Human\+Factors.\+Native\+Utils.\+Native\+Object.\+Pointer\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Pointer to the object in unmanaged memory. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Csharp/packages/base/src/Pointer\+Holder.\+cs\end{DoxyCompactItemize}
