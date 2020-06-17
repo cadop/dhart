@@ -1,3 +1,10 @@
+///
+///	\file		visibility_graph.cpp
+///	\brief		Source file for VisibilityGraph namespace (procedures)
+///
+///	\author		TBA
+///	\date		17 Jun 2020
+///
 #include <visibility_graph.h>
 
 #include <array>
