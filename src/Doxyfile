@@ -58,7 +58,7 @@ PROJECT_LOGO           =
 # entered, it will be relative to the location where doxygen was started. If
 # left blank the current directory will be used.
 
-OUTPUT_DIRECTORY       = "./docs/C# Documentation"
+OUTPUT_DIRECTORY       = ..\docs\C++
 
 # If the CREATE_SUBDIRS tag is set to YES then doxygen will create 4096 sub-
 # directories (in 2 levels) under the output directory of each output format and
@@ -277,7 +277,7 @@ OPTIMIZE_OUTPUT_FOR_C  = NO
 # qualified scopes will look different, etc.
 # The default value is: NO.
 
-OPTIMIZE_OUTPUT_JAVA   = YES
+OPTIMIZE_OUTPUT_JAVA   = NO
 
 # Set the OPTIMIZE_FOR_FORTRAN tag to YES if your project consists of Fortran
 # sources. Doxygen will then generate output that is tailored for Fortran.
@@ -823,8 +823,8 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = ./src/Csharp \
-                         src/Csharp/docs/markdown
+INPUT                  = "..\docs\C# Documentation\markdown" \
+                         Cpp
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -965,8 +965,7 @@ EXAMPLE_RECURSIVE      = NO
 # that contain images that are to be included in the documentation (see the
 # \image command).
 
-IMAGE_PATH             = ./docs \
-                         src/Csharp/docs/img
+IMAGE_PATH             =
 
 # The INPUT_FILTER tag can be used to specify a program that doxygen should
 # invoke to filter for each input file. Doxygen will invoke the filter program
@@ -1022,7 +1021,7 @@ FILTER_SOURCE_PATTERNS =
 # (index.html). This can be useful if you have a project on for instance GitHub
 # and want to reuse the introduction page also for the doxygen output.
 
-USE_MDFILE_AS_MAINPAGE = ./src/Csharp/mainpage.md
+USE_MDFILE_AS_MAINPAGE = mainpage.md
 
 #---------------------------------------------------------------------------
 # Configuration options related to source browsing
@@ -1252,10 +1251,7 @@ HTML_EXTRA_STYLESHEET  =
 # files will be copied as-is; there are no commands or markers available.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_EXTRA_FILES       = "src/Csharp/docs/assets/walkthroughs/unity/1_project_setup/Tutorial 1- Unity Project.zip" \
-                         "src/Csharp/docs/assets/walkthroughs/unity/2_raycast_at_plane/Tutorial 2 - Unity Project.zip" \
-                         "src/Csharp/docs/assets/walkthroughs/unity/3_graph_generator/Tutorial 3 - Graph Generator.zip" \
-                         "src/Csharp/docs/assets/walkthroughs/unity/4_mesh_reading/Tutorial 4 - Reading Mesh From Unity.zip"
+HTML_EXTRA_FILES       =
 
 # The HTML_COLORSTYLE_HUE tag controls the color of the HTML output. Doxygen
 # will adjust the colors in the style sheet and background images according to
