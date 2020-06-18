@@ -55,8 +55,9 @@ After clicking that button, your plane should be moved to the origin like in Fig
 ## Writing the Script
 
 ![Blank Visual Studio Page](walkthroughs/unity/1_project_setup/visual_studio_human_factors_reference.png)
+*Figure* **4.5** *An Empty Script*
 
-Double click on HFExampleScript that we created in the first tutorial to open up Visual Studio if it isn't open already. You should see a blank page like the above.
+Double click on HFExampleScript that we created in the first tutorial to open up Visual Studio if it isn't open already. You should see a blank page like the above. If you're coming from a previous tutorial, *please clear it so it matches this*.
 
 Just like the previous tutorials, we're going to declare which namespaces this script will use in the using section. For now we only need one using declaration. Add this to the top of your script like in the previous tutorials.
 
@@ -68,14 +69,14 @@ Later you will be using different sections depending on whether you're generatin
 
 ### Setup for Adding References Through The Unity Inspector
 
-![PlaneReference](walkthroughs/unity/4_mesh_reading/plane_in_scene.png)
+![PlaneReference](walkthroughs/unity/4_mesh_reading/plane_in_scene.PNG)
 
 *Figure* **4.6**: *Script with a GameObject property*
 
 There are many ways to reference a GameObject in the scene from a script, but for this example we'll be setting up our script so we can select a mesh in the scene from the Unity Inspector. Add a GameObject property to the script like shown on line 7 of figure 4.6.
 
 ```{.cs}
-GameObject PlaneInScene;
+public GameObject PlaneInScene;
 ```
 
 Later we'll use the Unity Inspector to assign the plane in the scene to this property.
@@ -86,11 +87,11 @@ Before we can extract the triangles and vertices from one an instance of a Unity
 
 #### Background on GameObjects and Components
 
-![PlaneReference](walkthroughs/unity/4_mesh_reading/plane_inspector.png)
+![PlaneReference](walkthroughs/unity/4_mesh_reading/plane_inspector.PNG)
 
-*Figure* **4.6**: *Components of the Plane shown in the Unity Inspector*
+*Figure* **4.7**: *Components of the Plane shown in the Unity Inspector*
 
-Minimize Visual Studio then switch back to Unity for a moment. Left click on the plane we created previously, then look at the at the Inspector on the right sidebar. It should look similar to Figure 4.6. Here you can view all information about the plane, such as its position, the material it uses, which mesh it's referencing, etc. You'll notice the inspector is split into several sections: Transform, Meshfilter, Mesh Collider, and MeshRenderer. Each of these sections is a separate **Component** and the object we see in the scene is just a container for those components called a [**GameObject**](https://docs.unity3d.com/Manual/class-GameObject.html).
+Minimize Visual Studio then switch back to Unity for a moment. Left click on the plane we created previously, then look at the Inspector on the right sidebar. It should look similar to Figure 4.7. Here you can view all information about the plane, such as its position, the material it uses, which mesh it's referencing, etc. You'll notice the inspector is split into several sections: Transform, Meshfilter, Mesh Collider, and MeshRenderer. Each of these sections is a separate **Component** and the object we see in the scene is just a container for those components called a [**GameObject**](https://docs.unity3d.com/Manual/class-GameObject.html).
 
 As stated in the Unity Documentation:
 
@@ -100,7 +101,7 @@ What this means for us is that the plane we see in the scene is not a Mesh, but 
 
 #### In Practice
 
-A game object's components can be retrieved using the [GetComponent](https://docs.unity3d.com/ScriptReference/GameObject.GetComponent.html) method. Go back to the Visual Studio window. In our script we will store a reference to the plane's mesh filter in a variable named `PlaneFilter` at the beginning of the script's Start() function like so:
+A game object's components can be retrieved using the [GetComponent](https://docs.unity3d.com/ScriptReference/GameObject.GetComponent.html) method. Go back to the Visual Studio window. In our script we will store a reference to the plane's mesh filter in a variable named `PlaneFilter` at the beginning of the script's `Start()` function like so:
 
 ```{.cs}
         MeshFilter PlaneFilter = PlaneInScene.GetComponent<MeshFilter>();
@@ -138,11 +139,11 @@ On line 9, just above the Start() function, add the following method:
     }
 ```
 
-![Convert Vector3 Array](walkthroughs/unity/4_mesh_reading/flatten_vertex_array.png)
+![Convert Vector3 Array](walkthroughs/unity/4_mesh_reading/flatten_vertex_array.PNG)
 
-*Figure* **4.7**: *Location for Vector3ArrayToFloatArray*
+*Figure* **4.8**: *Location for Vector3ArrayToFloatArray*
 
-Now we can call this method with the mesh's vertices as input to get an array usable with HumanFactors. Retrieve the indices and vertices from the mesh by calling its .triangles and .vertices properties, making sure to convert the array of vertices array from an array of Vector3 to an array of floats.
+Now we can call this method with the mesh's vertices as input to get an array usable with HumanFactors. Retrieve the indices and vertices from the mesh by calling its `.triangles` and `.vertices` properties, making sure to convert the array of vertices array from an array of Vector3 to an array of floats.
 
 ```{.cs}
         // Get Triangle Indexes and Vertices from the Mesh
@@ -161,10 +162,9 @@ Before we can continue to using this mesh it's important to cover a significant 
 
 ### Transforming the Mesh From Y-Up to Z-Up
 
-![UnityCoords](walkthroughs/unity/4_reading_mesh_from_unity/../4_mesh_reading/unity_coordinate_system.png)
-![RhinoCoords](walkthroughs/unity/4_mesh_reading/rhino_coordinates.png)
+![UnityCoords](walkthroughs/unity/4_mesh_reading/unity_coordinate_system.png) ![RhinoCoords](walkthroughs/unity/4_mesh_reading/rhino_coordinates.PNG)
 
-*Figure* **4.8**: *Left: Unity's coordinate system. Right: HumanFactors's Coordinate system*
+*Figure* **4.9**: *Left: Unity's coordinate system. Right: HumanFactors's Coordinate system*
 
 The Graph Generator expects geometry to be stored as if the Z-Axis were up as shown in the picture on the right. In Unity however, the Y-Axis is up, as shown in the left picture, meaning that we'll get inaccurate results if we use the mesh as is. To solve this, *MeshInfo* has a method *RotateMesh* that allows it to rotate itself after  is has been constructed. Another class in the Geometry namespace titled *CommonRotations* contains the rotation necessary to perform this conversion.
 
@@ -175,7 +175,7 @@ Enter the following code to rotate the plane to the correct orientation:
         PlaneMeshInfo.RotateMesh(CommonRotations.Yup_To_Zup);
 ```
 
-Now that the plane is in the correct orienteation, we are ready to move on to verifying that we loaded the mesh successfully.
+Now that the plane is in the correct orientation, we are ready to move on to verifying that we loaded the mesh successfully.
 
 ### Choose code From Previous Tutorial to Verify Results
 
@@ -231,16 +231,73 @@ public class HFExampleScript : MonoBehaviour
 }
 ```
 
-[Screenshot of the entire code until this point](walkthroughs/unity/4_mesh_reading/end_of_getting_mesh.png)
+![Screenshot of the entire code until this point](walkthroughs/unity/4_mesh_reading/end_of_getting_mesh.png)
 
 To see if we're successfully reading the mesh from the scene, *pick either the graph generator or the raytracer tutorial to use for testing*.  Substitute `PlaneMeshInfo` everywhere the code from the previous tutorials use `Plane`. The code you take from the other sections should be added directly after the line containing `PlaneMeshInfo.RotateMesh()`.
 
 The lines you should copy for each tutorial are:
 
-- Lines 30 - 49 for the Graph Generator.
-- Lines 28 - 43 for the Raytracer.
+#### Graph Generator
 
-Make sure to copy over any other using declarations that the selected tutorial uses, since those are required for it to function. Once you've finished this, ***SAVE*** your script, minimize Visual Studio, and switch to the Unity Editor.
+Add the following using statments:
+
+```{.cs}
+using HumanFactors;
+using HumanFactors.RayTracing;
+using HumanFactors.Geometry;
+```
+
+Copy and paste lines Lines 30 - 42 from the Graph Generator tutorial:
+
+```{.cs}
+        // Generate a BVH for the RayTracer
+        EmbreeBVH bvh = new EmbreeBVH(PlaneMeshInfo);
+
+        // Set Options for the Graph Generator
+        Vector3D start_point = new Vector3D(0, 0, 1);
+        Vector3D spacing = new Vector3D(1, 1, 1);
+
+        // Generate the Graph
+        Graph G = GraphGenerator.GenerateGraph(bvh, start_point, spacing);
+
+        // Get a list of nodes from the graph and print them.
+        NodeList nodes = G.getNodes();
+        Debug.Log(nodes);
+```
+
+#### Ray Tracer
+
+Add the following using statments:
+
+```{.cs}
+using HumanFactors;
+using HumanFactors.SpatialStructures;
+using HumanFactors.GraphGenerator;
+using HumanFactors.RayTracing;
+```
+
+Copy and paste lines 28 - 43 from the raytracer tutorial:
+
+```{.cs}
+        // Generate a BVH from the MeshInfo instance
+        EmbreeBVH bvh = new EmbreeBVH(PlaneMeshInfo);
+
+        // Define origin and direction
+        Vector3D origin = new Vector3D(1, 0, 1);
+        Vector3D direction = new Vector3D(0, 0, -1);
+
+        // Cast the ray, store the hitpoint
+        Vector3D intersection_point = EmbreeRaytracer.IntersectForPoint(bvh, origin, direction);
+
+        // Print the x, y, and z components of the intersection_point
+        Debug.Log(
+            "(" + intersection_point.x +
+            "," + intersection_point.y +
+            "," + intersection_point.z +
+        ")")
+```
+
+**Make sure to copy over any other using declarations that the selected tutorial uses**, since those are required for it to function. Once you've finished this, ***SAVE*** your script, minimize Visual Studio, and switch to the Unity Editor.
 
 ## Testing the Script
 
@@ -250,21 +307,21 @@ Like in the previous tutorials, drag the HFExampleScript onto the Main Camera ob
 
 ![Unity Inspector New Attribute](walkthroughs/unity/4_mesh_reading/inspect_new_attribute.png)
 
-*Figure* **4.9**: *Red circle: Main Camera, Highlighted: PlaneInScene Reference, Blue Circle: Assign Reference Button*
+*Figure* **4.10**: *Red circle: Main Camera, Highlighted: PlaneInScene Reference, Blue Circle: Assign Reference Button*
 
-Click on the Main Camera in the left under the scene hierarchy. Notice that the HF Example Script component now has a new element under it titled *Plane In Scene*. This is the class member we created earlier, and we must assign it to the Plane we created. To assign the plane to this script, click the icon to the right of *Plane In Scene* (Circled in blue in Figure 4.9).
+Click on the Main Camera in the left under the scene hierarchy. Notice that the HF Example Script component now has a new element under it titled *Plane In Scene*. This is the class member we created earlier, and we must assign it to the Plane we created. To assign the plane to this script, click the icon to the right of *Plane In Scene* (Circled in blue in Figure 4.10).
 
 ![Gameobject Select Window](walkthroughs/unity/4_mesh_reading/gameobject_select_window.png)
 
-*Figure* **4.10**: *Gameobject Select Window*
+*Figure* **4.11**: *Gameobject Select Window*
 
-A new window will appear asking you to select a game object. Double click on Plane, highlighted in Figure 4.10, then look back at the Unity Inspector.
+A new window will appear asking you to select a game object. Double click on Plane, highlighted in Figure 4.11, then look back at the Unity Inspector.
 
 ![Gameobject Select Window](walkthroughs/unity/4_mesh_reading/inspect_with_plane.png)
 
-*Figure* **4.11**: *Inspector With Plane*
+*Figure* **4.12**: *Inspector With Plane*
 
-You should now see the plane in the Unity Inspector next to PlaneInScene, like in Figure 4.11. If you see this, then you have successfully added the plane to the script as a reference.
+You should now see the plane in the Unity Inspector next to PlaneInScene, like in Figure 4.12. If you see this, then you have successfully added the plane to the script as a reference.
 
 ### Comparing Output
 
