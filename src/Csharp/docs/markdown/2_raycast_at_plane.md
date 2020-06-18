@@ -115,15 +115,15 @@ At this point, your start function should match the following code:
           2, 3, 0
         };
 
-        // Generate a BVH from the MeshInfo instance
+        // Construct a meshinfo instance for the plane
         MeshInfo Plane = new MeshInfo(plane_indices, plane_vertices);
 
-        // Construct a meshinfo instance for the plane
+        // Generate a BVH from the MeshInfo instance
         EmbreeBVH bvh = new EmbreeBVH(Plane);
     }
 ```
 
-[Image in Visual Studio](walkthroughs/unity/2_raycast_at_plane/creating_a_plane.png)
+![Image in Visual Studio](walkthroughs/unity/2_raycast_at_plane/creating_a_plane.png)
 
 With the BVH created, we're ready to call the Raytracer and cast a ray.
 
@@ -143,7 +143,7 @@ Depending on which function you call, the EmbreeRaytracer can return 3 different
 2. The distance from the ray's origin to the point where it intersected the mesh
 3. A boolean true/false for whether the ray intersected the mesh at any point.
 
-For this guide we will use [IntersectForPoint]() to get the point where the ray intersects the mesh. Starting on line 30 call the EmbreeRayTracer's **IntersectForPoint** function with the bvh, origin and direction as arguments.
+For this guide we will use [IntersectForPoint]() to get the point where the ray intersects the mesh. Starting on line 35 call the EmbreeRayTracer's **IntersectForPoint** function with the bvh, origin and direction as arguments.
 
 ```{.cs}
         // Cast the ray, store the hitpoint.
@@ -179,7 +179,7 @@ Here's all of that together:
         ")");
 ```
 
-[Image of our Start() function up until this point](walkthroughs/unity/2_raycast_at_plane/casting_a_ray.png)
+![Image of our Start() function up until this point](walkthroughs/unity/2_raycast_at_plane/casting_a_ray.png)
 
 ### Wrapping Up
 
@@ -210,10 +210,10 @@ public class HFExampleScript : MonoBehaviour
           2, 3, 0
         };
 
-        // Generate a BVH from the MeshInfo instance
+        // Construct a meshinfo instance for the plane
         MeshInfo Plane = new MeshInfo(plane_indices, plane_vertices);
 
-        // Construct a meshinfo instance for the plane
+        // Generate a BVH from the MeshInfo instance
         EmbreeBVH bvh = new EmbreeBVH(Plane);
 
         // Define origin and direction

@@ -38,11 +38,11 @@ In this guide we will cover the following:
 
 To begin, open the Unity Hub then click the *NEW* button to create a new project.
 
-![Choose Project Type](walkthroughs/unity/1_project_setup/unity_choose_project_type.PNG)
+![Choose Project Type](walkthroughs/unity/1_project_setup/unity_choose_project_type.png)
 
 *Figure* **1.2**: *The Create a Project Dialog*
 
-Select your desired project type, directory, and project name. For the sake of this tutorial, we will be using the *3D* project type and naming our project *HumanFactorsUnitySetup*. When done with this, press the *Create* button to create the project and wait while Unity imports all the necessary files.
+Select your desired project type, directory, and project name. For the sake of this tutorial, we will be using the *3D* project type and naming our project *HumanFactorsUnitySetup*, but you can name your project whatever you want. When done with this, press the *Create* button to create the project and wait while Unity imports all the necessary files.
 
 ![Empty Unity Scene](walkthroughs/unity/1_project_setup/blank_unity_scene.PNG)
 
@@ -52,13 +52,13 @@ Upon completion you should be greeted by an empty Unity scene.
 
 ## Importing the Human Factors Library
 
-Now that we have created a blank project, we need to import the HumanFactors' binaries as assets so Unity can see and interface with them.
+Now that we have created a blank project, we need to import the HumanFactors binaries as assets so Unity can see and interface with them.
 
 ![Moving the bin folder into the assets directory](walkthroughs/unity/1_project_setup/bin_to_assets.png)
 
 *Figure* **1.4**: *Dragging the HumanFactors bin folder into the Unity Project*
 
-Unzip the HumanFactors release package to another location (Don't try to drag and drop assets from a zipped folder, you will get an error), then, as shown in Figure 1.4, drag the `bin` folder from the location you extracted the release to into the Unity Editor's assets window. Once you've done this, Unity should display the *bin* folder alongside the existing *Scenes* folder.
+If the HumanFactors release package is zipped, unzip the contents to another location before copying it or  you will get an error when trying to import it.  Once you have the files, as shown in Figure 1.4, drag the `bin` folder from the location you extracted the release to into the Unity Editor's assets window. Once you've done this, Unity should display the *bin* folder alongside the existing *Scenes* folder.
 
 > **NOTE**: If you accidentally drag the bin folder into the *Scenes* folder or anywhere else that would cause two copies of the same dll to exist at the same time, delete any duplicates before proceding. Multiple copies of the same DLL will cause conflicts and may result in Unity being unable to load it in the future steps. You'll know this has happened if you see the following error `Multiple plugins with the same name 'humanfactors' (found at 'Assets/Scenes/bin/HumanFactors.dll' and 'Assets/bin/HumanFactors.dll')...` at the bottom of the screen.
 >![Duplicate DLL Error](walkthroughs/unity/1_project_setup/duplicate_dll_error.png)
@@ -72,15 +72,15 @@ The binaries have been added to our project as assets, but let's make sure Unity
 
 *Figure* **1.5**: *Creating a new C# Script*
 
-Right click on a blank space in the assets window, hover over *Create*, then click *C# Script*.
+To create a new script, right click on a blank space in the assets window, hover over *Create*, then click *C# Script*.
 
-![Don't click anything! Rename the script](walkthroughs/unity/1_project_setup/../2_raycast_at_plane/rename_script.png)
+![Don't click anything! Rename the script](walkthroughs/unity/2_raycast_at_plane/rename_script.png)
 
 *Figure*  **1.6**: *Renaming a new script*
 
 Looking in the assets window, you should notice a new script file next to Scenes directory titled NewBehaviourScript.cs by default, and the name of it is highlighted in blue indicatign that you can rename it. Rename the script to HFExampleScript.cs.
 
-> **NOTE:** If you didn't name the file properly you can change the name of the script by right clicking on it and clicking *Rename*
+> **NOTE:** If you didn't name the file properly you can change the name of the script by right clicking on it and clicking *Rename*. This won't change the name of the class that the script contains however, so be prepared to change that when we open it. 
 >![Rename Dialog](walkthroughs/unity/1_project_setup/../2_raycast_at_plane/rename_dialog.png)
 
 ![Double Click On Script](walkthroughs/unity/1_project_setup/double_click_on_script.png)
@@ -114,4 +114,4 @@ Below is a link to the unity project created in this tutorial.
 
 In this tutorial, we went through the process of creating unity project and adding the Analysis toolkit to the project. In the following tutorials, we will use this basis for using the modules that come with the Analysis toolkit.
 
-In the next tutorial: [Using the Raytracer](@ref UsingTheRayTracer) we will use HumanFactors to create a plane, cast a ray at it, then get the point where the ray intersected the plane.
+In the next tutorial: [Using the Raytracer](@ref UsingTheRaytracer) we will use HumanFactors to create a plane, cast a ray at it, then get the point where the ray intersected the plane.
