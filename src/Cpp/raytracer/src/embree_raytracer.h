@@ -117,6 +117,36 @@ namespace HF {
 			/// True if the ray intersected some geometry and the origin is updated with the hit
 			/// point. False otherwise.
 			/// </returns>
+			/// 
+			/*!
+				\par Example
+				\code 
+					// Create Plane
+					const vector<float> plane_vertices{
+						-10.0f, 10.0f, 0.0f,
+						-10.0f, -10.0f, 0.0f,
+						10.0f, 10.0f, 0.0f,
+						10.0f, -10.0f, 0.0f,
+					};
+					const vector<int> plane_indices{3, 1, 0, 2, 3, 0};
+
+					// Create RayTracer
+					EmbreeRayTracer ert(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+
+					std::array<float, 3> origin{0,0,1};
+					std::array<float, 3> direction{0,0,-1};
+					bool res;
+
+					// Fire a ray straight down and ensure it connects with a distance of 1 (within a certain tolerance)
+					res = ert.FireRay(origin, direction);
+					std::cout << "(" << origin[0] << ", " << origin[1] << ", " << origin[2] << ")" << std::endl;
+
+					origin[0] = 0; origin[1] = 0; origin[2] = 1;
+					// Fire a ray straight up and ensure it misses
+					res = ert.FireRay(origin, origin);
+					std::cout << res << std::endl;
+				\endcode
+			*/
 			bool FireRay(
 				std::array<float, 3>& origin,
 				const std::array<float, 3>& dir,
@@ -143,6 +173,37 @@ namespace HF {
 			/// is ignored
 			/// </param>
 			/// <returns> true if the ray hit, false otherwise </returns>
+			/*!
+				\par Example
+				\code
+
+				// Create Plane
+				const vector<float> plane_vertices{
+					-10.0f, 10.0f, 0.0f,
+					-10.0f, -10.0f, 0.0f,
+					10.0f, 10.0f, 0.0f,
+					10.0f, -10.0f, 0.0f,
+				};
+				const vector<int> plane_indices{3, 1, 0, 2, 3, 0};
+
+				// Create RayTracer
+				EmbreeRayTracer ert(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+				
+				float x = 0; float y = 0; float z = 1;
+				bool res;
+
+				// Fire a ray straight down and print the hitpoint
+				res = ert.FireRay(x, y, z, 0, 0, -1);
+				std::cout << "(" << x << ", " <<  y << ", "  << z << ")" <<  std::endl;
+
+				x = 0; y = 0; z = 1;
+
+				// Fire a ray straight up and ensure it misses
+				res = ert.FireRay(x, y, z, 0, 0, 1);
+				std::cout << res << std::endl;
+				
+				\endcode
+			*/
 			bool FireRay(
 				float& x,
 				float& y,
@@ -203,7 +264,7 @@ namespace HF {
 				const vector<int> plane_indices{3, 1, 0, 2, 3, 0};
 
 				// Create RayTracer
-				EmbreeRayTracer ERT (vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+				EmbreeRayTracer ert(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
 			
 				// Create a vector of directions and origins. 
 				std::array<float, 3> origin{ 0,0,1 };
@@ -213,7 +274,7 @@ namespace HF {
 				std::vector<std::array<float, 3>> directions(10, direction);
 
 				// Fire every ray. Results should all be true and be within a certain distance of zero;
-				std::vector<bool> results = k.FireRays(origins, directions);
+				std::vector<bool> results = ert.FireRays(origins, directions);
 
 				// Iterate through and print all results
 				for (int i = 0; i < 10; i++)
@@ -273,12 +334,43 @@ namespace HF {
 			);
 
 			/// <summary>
-			/// Fire an occlusion ray. Only returns true if hit, can't return hitpoint but is faster than firing a standard ray.
+			/// Fire an occlusion ray. Only returns true if hit, can't return hitpoint but is faster
+			/// than firing a standard ray.
 			/// </summary>
-			/// <param name="origin"> Start point of the ray</param>
-			/// <param name="direction"> Direction of the ray</param>
-			/// <param name="max_dist"> Maximum distance of the ray. If negative, use infinite distance </param>
-			/// <returns>True if hit, false otherwise</returns>
+			/// <param name="origin"> Start point of the ray </param>
+			/// <param name="direction"> Direction of the ray </param>
+			/// <param name="max_dist">
+			/// Maximum distance of the ray. If negative, use infinite distance.
+			/// </param>
+			/// <returns> True if hit, false otherwise. </returns>
+			/*!
+				\par Example
+				\code
+					// Create Plane
+					const std::vector<float> plane_vertices{
+						-10.0f, 10.0f, 0.0f,
+						-10.0f, -10.0f, 0.0f,
+						10.0f, 10.0f, 0.0f,
+						10.0f, -10.0f, 0.0f,
+					};
+					const std::vector<int> plane_indices{3, 1, 0, 2, 3, 0};
+
+					// Create RayTracer
+					EmbreeRayTracer ert (vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+
+					std::array<float, 3> origin{ 0,0,1 };
+					std::array<float, 3> direction{ 0,0,-1 };
+					bool res = false;
+
+					// This will hit
+					res = ert.FireOcclusionRay(origin, direction);
+					std::cout << res << std::endl;
+
+					// This will miss
+					res = ert.FireOcclusionRay(origin, origin);
+					std::cout << res << std::endl;
+				\endcode
+			*/
 			bool FireOcclusionRay(
 				const std::array<float, 3>& origin,
 				const std::array<float, 3>& direction,
@@ -318,6 +410,37 @@ namespace HF {
 			/// </item>
 			/// </list>
 			/// </remarks>
+			/*!
+				\par Example
+				\code
+					// Create Plane
+					const std::vector<float> plane_vertices{
+						-10.0f, 10.0f, 0.0f,
+						-10.0f, -10.0f, 0.0f,
+						10.0f, 10.0f, 0.0f,
+						10.0f, -10.0f, 0.0f,
+					};
+					const std::vector<int> plane_indices{3, 1, 0, 2, 3, 0};
+
+					// Create RayTracer
+					EmbreeRayTracer ert (vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+
+					// Create a vector of directions and origins.
+					std::array<float, 3> origin{ 0,0,1 };
+					std::array<float, 3> direction{ 0,0,-1 };
+
+					std::vector<std::array<float, 3>> origins(10, origin);
+					std::vector<std::array<float, 3>> directions(10, direction);
+
+					// Fire every ray. Results should all be true;
+					auto results = k.FireOcclusionRays(origins, directions);
+
+					// print through all results
+					for (int i = 0; i < 10; i++)
+						std::cout << results[i] << std::endl;
+				\endcode
+			
+			*/
 			std::vector<bool> FireOcclusionRays(
 				const std::vector<std::array<float, 3>>& origins,
 				const std::vector<std::array<float, 3>>& directions,
@@ -337,6 +460,32 @@ namespace HF {
 			/// (NOT IMPLEMENTED) The id of the only mesh for this ray to collide with. -1 for all.
 			/// </param>
 			/// <returns> True if the ray hit anything, false otherwise. </returns>
+			/// 
+			/*!
+				\par Example
+				\code 
+				// Create Plane
+				const std::vector<float> plane_vertices{
+					-10.0f, 10.0f, 0.0f,
+					-10.0f, -10.0f, 0.0f,
+					10.0f, 10.0f, 0.0f,
+					10.0f, -10.0f, 0.0f,
+				};
+				const std::vector<int> plane_indices{3, 1, 0, 2, 3, 0};
+
+				// Create RayTracer
+				EmbreeRayTracer ert (vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+				
+				bool res = false;
+				// This should hit
+				res = ert.FireOcclusionRay(0,0,1,0,0,-1);
+				std::cout << res << std::endl;
+
+				// This should miss
+				res = ert.FireOcclusionRay(0,0,1,0,0,-1);
+				std::cout << res << std::endl;
+				\endcode
+			*/
 			bool FireOcclusionRay(
 				float x,
 				float y,
@@ -380,7 +529,7 @@ namespace HF {
 			/// adding meshes.
 			/// </param>
 			/// <returns> True if successful </returns>
-			/// <exception cref="std::exception">RTC failed to allocate vertex and or index buffers.</exception>
+			/// <exception cref="std::exception">Embree failed to allocate vertex and or index buffers.</exception>
 			bool InsertNewMesh(std::vector<std::array<float, 3>>& Mesh, int ID, bool Commit = false);
 
 			/// <summary>
