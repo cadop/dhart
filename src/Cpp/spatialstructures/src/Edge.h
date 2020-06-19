@@ -40,10 +40,12 @@ namespace HF {
 			/// <param name="Step_Type">The type of step </param>
 
 			/// \code{.cpp}
-			/// Node node(12.0, 23.1, 34.2, 456);
+			/// #include "Edge.h"			// also includes node.h
+			///
+			/// HF::SpatialStructures::Node node(12.0, 23.1, 34.2, 456);
 			/// float score = 4.3f;
 			///
-			/// Edge edge(node, score, STEP::NOT_CONNECTED);
+			/// HF::SpatialStructures::Edge edge(node, score, STEP::NOT_CONNECTED);
 			/// \endcode
 			Edge(const Node& Child, float Score = 0, STEP Step_Type = NONE);
 		};

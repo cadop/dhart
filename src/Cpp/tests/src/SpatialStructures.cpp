@@ -225,15 +225,11 @@ namespace NodeExampleTests {
 	}
 
 	TEST(_Node, ParamConstructorArray) {
-#include <array>
-
 		std::array<float, 3> pos = { 12.0, 23.1, 34.2 };
 		HF::SpatialStructures::Node node(pos);
 	}
 
 	TEST(_node, ParamConstructorArrayTypeID) {
-#include <array>
-	
 		std::array<float, 3> pos = { 12.0, 23.1, 34.2 };
 		HF::SpatialStructures::Node node(pos, HF::SpatialStructures::NODE_TYPE::GRAPH, 456);
 	}
@@ -250,8 +246,6 @@ namespace NodeExampleTests {
 	}
 
 	TEST(_node, DirectionTo) {
-#include <array>
-		
 		HF::SpatialStructures::Node node_0(12.0, 23.1, 34.2, 456);
 		HF::SpatialStructures::Node node_1(45.3, 56.4, 67.5, 789);
 		
@@ -259,8 +253,6 @@ namespace NodeExampleTests {
 	}
 
 	TEST(_node, GetArray) {
-#include <array>
-
 		HF::SpatialStructures::Node node(12.0, 23.1, 34.2, 456);
 		
 		// An array is created from within the getArray() member function
@@ -296,9 +288,11 @@ namespace NodeExampleTests {
 		
 		float position = node[1];			// access by reference
 		position = 93.5;					// node.y is still 23.1
-	
+		
+		/*
 		std::cout << "node.y = " << node.y << std::endl;
 		std::cout << "position = " << position << std::endl;
+		*/
 	}
 
 	TEST(_node, OperatorEquality) {
@@ -307,17 +301,18 @@ namespace NodeExampleTests {
 		
 		bool same_position = node_0 == node_1;
 		
+		/*
 		if (same_position) {
 			std::cout << "Occupies the same space" << std::endl;
 		} else {
 			std::cout << "Different positions" << std::endl;
 		}
+		*/
 		
 		// same_position evaluates to false
 	}
 
 	TEST(_node, OperatorAssignment) {
-#include <array>
 		/* Cannot test -- not defined in node.cpp
 		HF::SpatialStructures::Node node(12.0, 23.1, 34.2);
 		std::cout << node.x << ", " << node.y << ", " << node.z << std::endl;
@@ -374,15 +369,15 @@ namespace NodeExampleTests {
 	}
 
 	TEST(_node, OperatorMultiply) {
-		 HF::SpatialStructures::Node node_0(12.0, 23.1, 34.2, 456);
-		 HF::SpatialStructures::Node node_1(45.3, 56.4, 67.5, 789);
+		HF::SpatialStructures::Node node_0(12.0, 23.1, 34.2, 456);
+		HF::SpatialStructures::Node node_1(45.3, 56.4, 67.5, 789);
 		
-		 HF::SpatialStructures::Node node_2 = node_1 * node_0;
+		HF::SpatialStructures::Node node_2 = node_1 * node_0;
 		
-		 // node_2 has values (x = 543.6, y = 1302.84, z = 2308.5, id = -1, type = NODE_TYPE::GRAPH)
-		 // id and type are given default values as per Node::Node(const std::array<float, 3>& position)
+		// node_2 has values (x = 543.6, y = 1302.84, z = 2308.5, id = -1, type = NODE_TYPE::GRAPH)
+		// id and type are given default values as per Node::Node(const std::array<float, 3>& position)
 
-		 //std::cout << node_2.x << " " << node_2.y << " " << node_2.z << std::endl;
+		//std::cout << node_2.x << " " << node_2.y << " " << node_2.z << std::endl;
 	}
 
 	TEST(_node, OperatorLessThanConst) {
@@ -398,10 +393,7 @@ namespace NodeExampleTests {
 		*/
 	}
 
-	TEST(_node, OperatorLessThan) {
-		#include <vector>
-		#include <algorithm>
-		
+	TEST(_node, OperatorLessThan) {		
 		// For this example, we are not concerned about the node coordinates.
 		HF::SpatialStructures::Node node_0(0.0, 0.0, 0.0, 3);
 		HF::SpatialStructures::Node node_1(0.0, 0.0, 0.0, 1);
@@ -436,3 +428,267 @@ namespace NodeExampleTests {
 		*/
 	}
 }
+
+///
+///	The following are tests for the code samples for HF::SpatialStructures::Edge
+///
+
+namespace EdgeExampleTests {
+	TEST(_edge, EdgeConstructor) {
+		HF::SpatialStructures::Node node(12.0, 23.1, 34.2, 456);
+		float score = 4.3f;
+		
+		HF::SpatialStructures::Edge edge(node, score, STEP::NOT_CONNECTED);
+	}
+}
+
+///
+///	The following are tests for the code samples for HF::SpatialStructures::Path
+///
+
+#include "path.h"
+namespace PathExampleTests {
+	TEST(_pathMember, OperatorEquality) {
+		HF::SpatialStructures::PathMember p0 = { 3.14f, 3 };
+		HF::SpatialStructures::PathMember p1 = { 2.78f, 2 };
+		HF::SpatialStructures::PathMember p2 = { 2.78f, 2 };
+
+		bool is_true = p1 == p2;
+		bool is_false = p0 == p1;
+		
+		// cost and node fields of p1 and p2 are identical, so equiv evaluates true
+		// not_equiv evaluates false, since fields of p0 and p1 do not have matching values
+
+		/*
+		auto str_equiv = equiv ? "true" : "false";
+		auto str_nequiv = not_equiv ? "true" : "false";
+		std::cout << str_equiv << " " << str_nequiv << std::endl;
+		*/
+	}
+
+	TEST(_pathMember, OperatorNEquality) {
+		HF::SpatialStructures::PathMember p0 = { 3.14f, 3 };
+		HF::SpatialStructures::PathMember p1 = { 2.78f, 2 };
+		HF::SpatialStructures::PathMember p2 = { 2.78f, 2 };
+		
+		bool is_true = p1 == p2;
+		bool is_false = p0 != p1;
+		
+		// applies the inverse of operator== to evaluate operator!=
+		// since fields of p1 and p2 have different values, is_true is in fact, true
+		// is_false evaluates to true.
+
+		/*
+		auto str_equiv = is_true ? "true" : "false";
+		auto str_nequiv = is_false ? "true" : "false";
+		std::cout << str_equiv << " " << str_nequiv << std::endl;
+		*/
+	}
+
+	TEST(_path, NoArgConstructor) {
+		HF::SpatialStructures::Path path();
+	}
+
+	TEST(_path, ParamConstructor) {
+		// Create the PathMembers
+		HF::SpatialStructures::PathMember p0 = { 3.14f, 3 };
+		HF::SpatialStructures::PathMember p1 = { 2.78f, 2 };
+		HF::SpatialStructures::PathMember p2 = { 1.64f, 1 };
+		HF::SpatialStructures::PathMember p3 = { 9.35, 7 };
+		
+		// Create the container of PathMembers
+		std::vector<HF::SpatialStructures::PathMember> members{p0, p1, p2, p3};
+		
+		// Create the path, using the container of PathMembers
+		HF::SpatialStructures::Path path(members);
+	}
+
+	TEST(_path, AddNode) {
+		// Create the PathMembers
+		HF::SpatialStructures::PathMember p0 = { 3.14f, 3 };
+		HF::SpatialStructures::PathMember p1 = { 2.78f, 2 };
+		HF::SpatialStructures::PathMember p2 = { 1.64f, 1 };
+		HF::SpatialStructures::PathMember p3 = { 9.35, 7 };
+
+		// Create the container of PathMembers
+		std::vector<HF::SpatialStructures::PathMember> members{ p0, p1, p2, p3 };
+
+		// Create the path, using the container of PathMembers
+		HF::SpatialStructures::Path path(members);
+		
+		int node_id = 278;
+		float cost = 8.92f;
+		
+		path.AddNode(node_id, cost);	// A PathMember is constructed within AddNode from node_id and cost
+										// and is then appended to the underlying members vector (via push_back)
+	}
+
+	TEST(_path, Empty) {
+		HF::SpatialStructures::Path mypath;
+		
+		// There are no PathMembers in path's members container.
+		
+		// if empty() returns true, that means the underlying members vector is of size 0 (no members)
+		// otherwise, empty returns false. In this case, path.empty() returns true.
+		std::string result = mypath.empty() ? "is empty" : "has at least one member";
+		
+		//std::cout << "The Path object " << result << std::endl;
+	}
+
+	TEST(_path, Size) {
+		// Create the PathMembers
+		HF::SpatialStructures::PathMember p0 = { 3.14f, 3 };
+		HF::SpatialStructures::PathMember p1 = { 2.78f, 2 };
+		HF::SpatialStructures::PathMember p2 = { 1.64f, 1 };
+		HF::SpatialStructures::PathMember p3 = { 9.35f, 7 };
+		
+		// Create the container of PathMembers
+		std::vector<HF::SpatialStructures::PathMember> members{p0, p1, p2, p3};
+		
+		HF::SpatialStructures::Path path(members);			// Create the Path object, path
+		path.AddNode(278, 3.14f);	// Add one more PathMember to path
+		
+		std::string result = path.size() >= 5 ? "at least 5 members" : "under 5 members";
+		
+		//std::cout << "The Path object has " << result << std::endl;
+	}
+
+	TEST(_path, Reverse) {
+		// Create the PathMembers
+		HF::SpatialStructures::PathMember p0 = { 3.14f, 3 };
+		HF::SpatialStructures::PathMember p1 = { 2.78f, 2 };
+		HF::SpatialStructures::PathMember p2 = { 1.64f, 1 };
+		HF::SpatialStructures::PathMember p3 = { 9.35f, 7 };
+		
+		// Create the container of PathMembers
+		std::vector<HF::SpatialStructures::PathMember> members{p0, p1, p2, p3};
+		
+		HF::SpatialStructures::Path path(members);			// Create the Path object, path
+		path.AddNode(278, 3.14f);	// Append one more PathMember to path
+		
+		path.Reverse();				// The order of the PathMembers within members is now that of
+									// p3, p2, p1, p0
+
+		//std::cout << path << std::endl;
+	}
+
+	TEST(_path, OperatorEquality) {
+		HF::SpatialStructures::PathMember p0 = { 3.14f, 3 };				// Create all the PathMember objects
+		HF::SpatialStructures::PathMember p1 = { 2.78f, 2 };
+		
+		HF::SpatialStructures::PathMember p2 = { 3.14f, 3 };
+		HF::SpatialStructures::PathMember p3 = { 2.78f, 2 };
+		
+		HF::SpatialStructures::PathMember p4 = { 1.1f, 9 };
+		HF::SpatialStructures::PathMember p5 = { 123.0f, 10 };
+		
+		std::vector<HF::SpatialStructures::PathMember> members_0{p0, p1};	// Create the HF::SpatialStructures::PathMember vectors
+		std::vector<HF::SpatialStructures::PathMember> members_1{p2, p3};
+		std::vector<HF::SpatialStructures::PathMember> members_2{p4, p5};
+		std::vector<HF::SpatialStructures::PathMember> members_3{p1, p0};
+
+		HF::SpatialStructures::Path path_0(members_0);						// Create the Path objects
+		HF::SpatialStructures::Path path_1(members_1);
+		HF::SpatialStructures::Path path_2(members_2);
+		HF::SpatialStructures::Path path_3(members_3);
+		
+		bool same_values_same_order = path_0 == path_1;
+		bool totally_different = path_0 == path_2;
+		bool same_values_different_order = path_0 == path_3;
+		
+		// path_0 and path_1 share the same PathMember values, with an identical permutation,
+		// so they are equivalent.
+
+		//ASSERT_TRUE(same_values_different_order);
+		
+		// path_0 and path_2 are not equivalent, because they have completely different PathMember
+		// values.
+
+		//ASSERT_TRUE(!totally_different);
+		
+		// path_0 and path_3 are not equivalent, because although they have PathMember objects of
+		// the same values, the order in which path_0 and path_3 have their member vectors arranged
+		// are different.
+
+		//ASSERT_TRUE(!same_values_different_order);
+	}
+
+	TEST(_path, OperatorIndex) {
+		// Create the PathMembers
+		HF::SpatialStructures::PathMember p0 = { 3.14f, 3 };
+		HF::SpatialStructures::PathMember p1 = { 2.78f, 2 };
+		HF::SpatialStructures::PathMember p2 = { 1.64f, 1 };
+		HF::SpatialStructures::PathMember p3 = { 9.35f, 7 };
+		
+		// Create the container of PathMembers
+		std::vector<HF::SpatialStructures::PathMember> members{p0, p1, p2, p3};
+		
+		HF::SpatialStructures::Path path(members);							// Create the Path object, path
+		
+		const int desired_index = 2;
+		HF::SpatialStructures::PathMember result = path[desired_index];	// a copy of the element at desired_index
+														// within the internal members vector
+														// is assigned to result
+
+		//ASSERT_TRUE(&result != &path[desired_index]);
+	}
+
+	TEST(_path, GetPMPointer) {
+		// Create the PathMembers
+		HF::SpatialStructures::PathMember p0 = { 3.14f, 3 };
+		HF::SpatialStructures::PathMember p1 = { 2.78f, 2 };
+		HF::SpatialStructures::PathMember p2 = { 1.64f, 1 };
+		HF::SpatialStructures::PathMember p3 = { 9.35f, 7 };
+		
+		// Create the container of PathMembers
+		std::vector<HF::SpatialStructures::PathMember> members{p0, p1, p2, p3};
+		
+		HF::SpatialStructures::Path path(members);							// Create the Path object, path
+		
+		HF::SpatialStructures::PathMember *ptr = path.GetPMPointer();
+		
+		// You now have a pointer to the underlying buffer of the members vector with in a PathMember.
+		HF::SpatialStructures::PathMember *curr = ptr;
+		HF::SpatialStructures::PathMember *finish = ptr + path.size();
+		
+		while (curr != finish) {
+			std::cout << "Cost: " << curr->cost << " " 
+					  << "Node: " << curr->node << std::endl;
+			++curr;
+		}
+	}
+
+	TEST(_path, OperatorLessThanLessThan) {
+		 // Create the PathMembers
+		 HF::SpatialStructures::PathMember p0 = { 3.14f, 3 };
+		 HF::SpatialStructures::PathMember p1 = { 2.78f, 2 };
+		 HF::SpatialStructures::PathMember p2 = { 1.64f, 1 };
+		 HF::SpatialStructures::PathMember p3 = { 9.35f, 7 };
+		
+			// Create the container of PathMembers
+		 std::vector<HF::SpatialStructures::PathMember> members{p0, p1, p2, p3};
+		
+		 HF::SpatialStructures::Path path(members);							// Create the Path object, path
+		
+		 std::cout << path << std::endl;				// Output path to an ostream, like cout
+		 // Output is:
+			// (3) -3.14-> (2) -2.78-> (1) -1.64-> (7) -9.35->
+	}
+}
+
+///
+///	The following are tests for the code samples for HF::SpatialStructures::Graph
+///
+
+namespace GraphExampleTests {
+
+}
+
+///
+///	The following are tests for the code samples for HF::SpatialStructures::Constants
+///
+
+namespace ConstantsExampleTests {
+
+}
+
