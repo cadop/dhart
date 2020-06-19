@@ -51,7 +51,6 @@ It should also be in the documentation.
 - Documenting member fields
 - Snippets and Code Samples
 - Adding images for headers/sources, and markdown files (<code>.md</code>)
-- Why the use of <code>///</code> and <code>//</code>?
 
 <h2>Using <code>TODO</code></h2>
 To have a TODO automatically pull to documentation use:<br>
@@ -158,62 +157,45 @@ Snippets will now appear when you navigate to the Run tab, and click 'Run Doxyge
 <h3>The <code>\code</code> tag should be used for code block examples under 10 lines.</h3>
 https://www.doxygen.nl/manual/commands.html#cmdcode
 
-To use the <code>\code</code> tag:
+Here is an example for using the <code>\code</code> tag:
 
-<b>Step 0:</b><br>
-In a header file, at the line where you want the code sample to appear,
-start with the <code>\code{.cpp}</code> tag.
+```
+/*!
+    \code
+        // Use the '//' comment style.
+        std::cout << "Here is a test statement." << std::endl;
+        
+        // You may indent your code sample as needed.
+        struct my_point {
+            double m_x;
+            double m_y;
+        };
+    \endcode
+*/
+```
 
-<code>/// \code{.cpp}</code>
+Follow these steps to ensure consistency within the codebase:
+0. Start an example block with <code>/*!</code>, then hit <b>ENTER</b> to go to the next line.
+1. Hit <b>TAB</b> once, then use the <code>\code</code> tag. Then, hit <b>ENTER</b>.
+2. Hit <b>TAB</b> twice, then begin your code example. You may indent as necessary for your example.
+ 
+3. When your example is finished, hit <b>ENTER</b>, then <b>BACKSPACE</b> so that you are inline with the <code>\code</code> tag.
+4. Use the <code>\endcode</code> tag to end your example.<br>Then hit <b>ENTER, then hit <b>BACKSPACE</b> as many times as necessary so that you are inline with <code>/*!</code>.
 
-<b>Step 1:</b><br>
-Create the section where the code sample will appear.
-We will be using the <code>///</code> comment style.
+5. Finally, end the example block with <code>*/</code>.
 
-<code>/// std::cout << "Your sample code goes here." << std::endl;
-/// std::cout << "Notice the whitespace after the '///'. << std::endl;
-/// // Use '//' for comments within the sample.</code><br>
+- Note that any comments that occur within the sample must begin with <code>//</code>, followed by a whitespace.
 
-To be clear:
-- <b>All</b> lines in the sample must begin with <code>///</code>, followed by a whitespace
-- Any comments that occur within the sample must begin with <code>//</code>, followed by a whitespace.
-
-Our convention dictates that a single character of whitespace ('<code> </code>')
-<br> <b>must</b> follow a <code>///</code> or <code>//</code>, whenever:
-- a <code>\code</code> tag is initiated
-- a sample line of code begins
-- a comment begins within the sample code
-- a <code>\endcode</code> tag is used to end a sample
+This procedure strikes the best compromise between:
+- Making sure that comments work within a code example
+- Not having to remove <code>//</code> or <code>///</code> per line of the example
 
 <br>This ensures ease of viewing<br>
 for anyone reading the source code -- <br>
 and also assists Doxygen with the<br>
-formatting process for the HTML export.<br>
+formatting process for the HTML export.
 
-For more information, see<br>
-'Why the use of <code>///</code> and <code>//</code>?'<br>
-at the bottom of this page.<br>
-
-<b>Step 2:</b><br>
-End your code sample with the tag <code>\endcode</code>
-
-<code>/// \endcode</code>
-
-A properly-formatted sample will look like this:
-
-<code>/// \code{.cpp}
-/// std::cout << "Your sample code goes here." << std::endl;
-/// std::cout << "Notice the whitespace after the '///'. << std::endl;
-/// // Use '//' for comments within the sample.
-/// \endcode</code><br>
-
-In the final HTML, your sample would look like this:
-
-<code>std::cout << "Your sample code goes here." << std::endl;
-std::cout << "Notice the whitespace after the '///'. << std::endl;
-// Use '//' for comments within the sample.</code>
-
-You may now use <b>'Run Doxygen'</b> to export your documentation.
+You may now use <b>'Run Doxygen'</b> to export your documentation.<br>
 (There are no extra steps, unlike with the snippet section)
 
 <h2>Adding images for headers/sources, and markdown files (<code>.md</code>)</h2>
@@ -473,46 +455,3 @@ and <code>mainpage.md</code>.
 ![DoxygenPreviewMainpage](docs/contributing-guides/images/doxygen_preview_mainpage.png)
 <b>Markdown syntax for images was used for <code>mainpage.md</code>.</b>
 
-<h2>Why the use of <code>///</code> and <code>//</code>?</h2>
-
-It may seem pedantic to insist on using <code>///</code> for the entire code sample,
-<br> and <code>//</code> for comments within the sample -- but there is a reason
-for this.<br>
-
-As you may know, there are many ways to invoke a comment in C++,<br>
-particularly for use with Doxygen -- such as:<br><br>
-<code>/* A C-style comment */</code><br>
-<code>/*! Qt variant of a C-style comment */</code><br>
-<code>// C++ style double-slash comment</code><br>
-<code>/// C++ style triple-slash comment</code><br>
-
-You can read more about the specifics of Doxygen-legal comment styling here:
-https://www.doxygen.nl/manual/docblocks.html
-
-<b>The use of <code>///</code> for the entirety of the code sample,<br>
-because it permits the use of <code>//</code> within the code sample whenever
-necessary.</b>This is important for including comments within your code sample.<b>
-
-If, for example, your code sample were to look like this:<br>
-
-<code>/// \code{.cpp}
-/*!
-std::cout << "Here is my sample" << std::endl;
-// Here is a comment
-*/</code>
-
-...the final Doxygen HTML export would look like this:<br>
-
-<code>
-@verbatim
-        std::cout << "Here is my sample" << std::endl;
-@endverbatim
-Here is a comment</code>
-
-It seems that Doxygen will have issues with differentiating comments<br>
-within the code sample, with a comment that would end the code sample.<br>
-
-It is unclear as to why the <code>@verbatim</code> and <code>@endverbatim</code>
-tags appear in place of <code>/*!</code> and <code>/*</code> respectively --<br>
-but if the convention described above is used, particularly if comments are to<br>
-be included in the code sample, there will be no issues.<br>
