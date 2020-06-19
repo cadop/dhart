@@ -41,14 +41,16 @@ namespace HF {
 		/// <summary>
 		/// Contains no information about the ray itself, 
 		/// </summary>
-		/// \deprecated Never used. Leftover from partially implemented feature
-		struct HitInfo {
-		
-		};
+		/// \deprecated Never used. Leftover from partially implemented experimental feature. This eventually became the RayResult
+		/// struct seen in the C-interface. Moving the RayResult struct to the C interface was far more useful than what could be
+		/// accomplished here, since it allowed the Cinterface and its clients to define their own RayRequest structs that could
+		/// be filled through templates. 
+		struct HitInfo {};
 
 		/// <summary>
 		/// A ray request, that depends on RayRequestLiteHolder
 		/// </summary>
+		/// \deprecated Unused. See HitInfo.
 		struct RayRequestLite {
 			const std::array<float, 3> * origin;	///< A pointer to an origin in the collection's origins array ///<
 			const std::array<float, 3> * direction; ///< A pointer to a direction in the collection's directions array ///<
@@ -78,6 +80,7 @@ namespace HF {
 		/// <summary>
 		/// Holds a set of ray requests, reusing memory where possible
 		/// </summary>
+		/// \deprecated Unused see HitInfo.
 		class RayRequestCollection {
 			std::vector<RayRequestLite> requests; ///< The vector of requests ///<
 			std::vector<std::array<float, 3>> directions; ///< The vector of directions ///<
