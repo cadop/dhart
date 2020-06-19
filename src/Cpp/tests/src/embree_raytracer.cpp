@@ -14,10 +14,9 @@ using std::cerr;
 using std::endl;
 
 /// <summary>
-/// Create a new raytracer from a basic 10x10 plane centered on the origin. 
+/// Create a new raytracer from a basic 10x10 plane centered on the origin.
 /// </summary>
-inline EmbreeRayTracer CreateRTWithPlane(){
-
+inline EmbreeRayTracer CreateRTWithPlane() {
 	const vector<float> plane_vertices{
 		-10.0f, 10.0f, 0.0f,
 		-10.0f, -10.0f, 0.0f,
@@ -25,14 +24,14 @@ inline EmbreeRayTracer CreateRTWithPlane(){
 		10.0f, -10.0f, 0.0f,
 	};
 
-	const vector<int> plane_indices{3, 1, 0, 2, 3, 0};
+	const vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 	return EmbreeRayTracer(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
 }
 
 /// <summary>
 /// Calc distance between two arrays.
 /// </summary>
-inline float Distance(const array<float,3> & p1, const array<float,3> & p2) {
+inline float Distance(const array<float, 3>& p1, const array<float, 3>& p2) {
 	return sqrt(
 		pow(p1[0] - p2[0], 2)
 		+ pow(p1[1] - p2[1], 2)
@@ -140,7 +139,6 @@ TEST(_EmbreeRayTracer, HitPointsAreAccurate) {
 
 // TODO: Add a distance check to this?
 TEST(_EmbreeRayTracer, FireRays) {
-
 	// Create plane
 	const std::vector<float> plane_vertices{
 		-10.0f, 10.0f, 0.0f,
@@ -155,10 +153,10 @@ TEST(_EmbreeRayTracer, FireRays) {
 
 	// Create an array of directions all containing {0,0,-1}
 	std::vector<std::array<float, 3>> directions(10, std::array<float, 3>{0, 0, -1});
-	
+
 	// Create an array of origin points moving further to the left with each point
 	std::vector<std::array<float, 3>> origins(10);
-	for (int i = 0; i < 10; i++) origins[i] = std::array<float, 3>{static_cast<float>(1.99*i), 0, 1};
+	for (int i = 0; i < 10; i++) origins[i] = std::array<float, 3>{static_cast<float>(1.99 * i), 0, 1};
 
 	// Fire every ray. Results should all be true and be within a certain distance of zero;
 	auto results = ert.FireRays(origins, directions);
@@ -183,11 +181,9 @@ TEST(_EmbreeRayTracer, FireRays) {
 		else ASSERT_FALSE(results[i]);
 	}
 	std::cerr << "]" << std::endl;
-
 }
 
 TEST(_EmbreeRayTracer, FireOcclusionRays) {
-
 	// Create Plane
 	const std::vector<float> plane_vertices{
 		-10.0f, 10.0f, 0.0f,
@@ -215,11 +211,10 @@ TEST(_EmbreeRayTracer, FireOcclusionRays) {
 	// Iterate through all results to print them
 	std::cerr << "[";
 	for (int i = 0; i < 10; i++) {
-
 		// Print true if the ray intersected, false otherwise
 		if (results[i]) std::cout << "True";
 		else std::cerr << "False";
-		
+
 		// Add a comma if it's not the last member
 		if (i != 9) std::cerr << ", ";
 
@@ -242,7 +237,7 @@ TEST(_EmbreeRayTracer, FireRay) {
 	// Create RayTracer
 	EmbreeRayTracer ert(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
 
-	float x = 0; float y = 0;float z = 1;
+	float x = 0; float y = 0; float z = 1;
 	bool res;
 
 	// Fire a ray straight down and ensure it connects with a distance of 1 (within a certain tolerance)
@@ -290,7 +285,7 @@ TEST(_EmbreeRayTracer, FireRayArrayOverload) {
 	ASSERT_NEAR(Distance(origin, std::array<float, 3>{0, 0, 0}), 0, 0.0001);
 
 	// Fire a ray straight up and ensure it misses
-	origin = std::array<float,3>{ 0,0,1 };
+	origin = std::array<float, 3>{ 0, 0, 1 };
 	res = ert.FireRay(
 		origin,
 		std::array<float, 3>{0, 0, 1}
@@ -303,7 +298,7 @@ TEST(_EmbreeRayTracer, FireRayArrayOverload) {
 	ASSERT_FALSE(res);
 }
 
-TEST(_EmbreeRayTracer, Intersect){
+TEST(_EmbreeRayTracer, Intersect) {
 	// Create Plane
 	const vector<float> plane_vertices{
 		-10.0f, 10.0f, 0.0f,
@@ -320,7 +315,7 @@ TEST(_EmbreeRayTracer, Intersect){
 
 	// Fire a ray straight down
 	res = ert.Intersect(0, 0, 1, 0, 0, -1);
-	
+
 	// Print distance if it connected
 	if (res.DidHit()) std::cerr << res.distance << std::endl;
 	else std::cerr << "Miss" << std::endl;
@@ -348,18 +343,18 @@ TEST(_EmbreeRayTracer, FireAnyRay) {
 
 	// Create RayTracer
 	EmbreeRayTracer ert(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
-	
-	// Create a vector of direction and origin arrays. 
+
+	// Create a vector of direction and origin arrays.
 	std::array<float, 3> origin{ 0,0,1 };
 	std::array<float, 3> direction{ 0,0,-1 };
 
 	bool res = false; float out_dist = -1; int out_id = -1;
-	
-	// Fire a ray straight down 	
+
+	// Fire a ray straight down
 	res = ert.FireAnyRay(origin, direction, out_dist, out_id);
 	ASSERT_TRUE(res);
 	ASSERT_NEAR(out_dist, 1, 0.0001);
-	
+
 	// Print its distance if it connected
 	if (res) std::cerr << out_dist << std::endl;
 	else std::cerr << "Miss" << std::endl;
@@ -367,13 +362,13 @@ TEST(_EmbreeRayTracer, FireAnyRay) {
 	// Fire a ray straight up and ensure it misses
 	res = ert.FireAnyRay(origin, origin, out_dist, out_id);
 	ASSERT_FALSE(res);
-	
+
 	// Print its distance if it connected
 	if (res) std::cerr << out_dist << std::endl;
 	else std::cerr << "Miss" << std::endl;
 }
 
-TEST(_EmbreeRayTracer, FireAnyOcclusionRay){
+TEST(_EmbreeRayTracer, FireAnyOcclusionRay) {
 	// Create Plane
 	const vector<float> plane_vertices{
 		-10.0f, 10.0f, 0.0f,
@@ -432,10 +427,10 @@ TEST(_EmbreeRayTracer, FireOcclusionRayArray) {
 
 	// Fire a ray straight up
 	res = ert.FireOcclusionRay(
-		std::array<float, 3>{0, 0, 1}, 
+		std::array<float, 3>{0, 0, 1},
 		std::array<float, 3>{0, 0, 1}
 	);
-	
+
 	ASSERT_FALSE(res);
 	if (res) std::cerr << "True" << std::endl;
 	else std::cerr << "False" << std::endl;
@@ -453,15 +448,15 @@ TEST(_EmbreeRayTracer, FireOcclusionRay) {
 
 	// Create RayTracer
 	EmbreeRayTracer ert(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
-		
+
 	// Fire a ray straight down
-	bool res = ert.FireOcclusionRay(0,0,1,0,0,-1);
+	bool res = ert.FireOcclusionRay(0, 0, 1, 0, 0, -1);
 	ASSERT_TRUE(res);
 	if (res) std::cerr << "True" << std::endl;
 	else std::cerr << "False" << std::endl;
 
 	// Fire a ray straight up
-	res = ert.FireOcclusionRay(0,0,1,0,0,1);
+	res = ert.FireOcclusionRay(0, 0, 1, 0, 0, 1);
 	ASSERT_FALSE(res);
 	if (res) std::cerr << "True" << std::endl;
 	else std::cerr << "False" << std::endl;
