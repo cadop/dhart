@@ -18,14 +18,16 @@ namespace HF {
 		/// <param name="f">The desired float to round</param>
 		/// <returns>A rounded floating-point value using std::round and ROUNDING_PRECISION</returns>
 
-		/// \code{.cpp}
-		/// // be sure to #include "Constants.h"
-		///
-		/// // std::round from the cmath library is used in roundhf.
-		/// // Precision is to the nearest ten-thousandth
-		/// const float my_pi = 3.141592653589793238462643383279502884197169399375105820974944592307816406286;
-		/// float rounded = HF::SpatialStructures::roundhf(my_pi);	// 	rounded == 3.1416	
-		/// \endcode
+		/*!
+			\code
+				// be sure to #include "Constants.h"
+				// std::round from the cmath library is used in roundhf.
+				// Precision is to the nearest ten-thousandth
+
+				const float my_pi = 3.141592653589793238462643383279502884197169399375105820974944592307816406286;
+				float rounded = HF::SpatialStructures::roundhf(my_pi);	// 	rounded == 3.1416
+			\endcode
+		*/
 		float roundhf(float f);
 	}
 }

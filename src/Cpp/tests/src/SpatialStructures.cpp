@@ -486,7 +486,7 @@ namespace PathExampleTests {
 	}
 
 	TEST(_path, NoArgConstructor) {
-		HF::SpatialStructures::Path path();
+		HF::SpatialStructures::Path path;
 	}
 
 	TEST(_path, ParamConstructor) {
@@ -715,7 +715,7 @@ namespace GraphExampleTests {
 	}
 
 	TEST(_graph, NoArgConstructor) {
-		HF::SpatialStructures::Graph graph();	// This represents an order-zero graph (null graph)
+		HF::SpatialStructures::Graph graph;		// This represents an order-zero graph (null graph)
 												// It lacks vertices and edges.
 	}
 
@@ -1150,27 +1150,122 @@ namespace GraphExampleTests {
 	}
 
 	TEST(_graph, Compress) {
+		// Create the nodes
+		HF::SpatialStructures::Node node_0(1.0f, 1.0f, 2.0f, 4);
+		HF::SpatialStructures::Node node_1(2.0f, 3.0f, 4.0f, 5);
+		HF::SpatialStructures::Node node_2(11.0f, 22.0f, 140.0f, 6);
 
+		// Create a container (vector) of nodes
+		std::vector<HF::SpatialStructures::Node> nodes = { node_0, node_1, node_2 };
+
+		// Create matrices for edges and distances, edges.size() == distances().size()
+		std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
+		std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
+
+		// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
+		// Note: graph is compressed upon instantiation
+		HF::SpatialStructures::Graph graph(edges, distances, nodes);
+
+		// Create a pair of nodes
+		HF::SpatialStructures::Node n_parent(4.0f, 5.0f, 6.0f);
+		HF::SpatialStructures::Node n_child(7.0f, 8.0f, 9.0f);
+
+		graph.addEdge(n_parent, n_child);	// default score is 1.0f
+
+		// In order to use GetEdges, or AggregateGraph, we must compress our graph instance
+		graph.Compress();						// GetEdges and AggregateGraph are now usable
 	}
 
 	TEST(_graph, GetCSRPointers) {
+		// be sure to #include "graph.h"
 
+		// Create the nodes
+		HF::SpatialStructures::Node node_0(1.0f, 1.0f, 2.0f, 4);
+		HF::SpatialStructures::Node node_1(2.0f, 3.0f, 4.0f, 5);
+		HF::SpatialStructures::Node node_2(11.0f, 22.0f, 140.0f, 6);
+
+		// Create a container (vector) of nodes
+		std::vector<HF::SpatialStructures::Node> nodes = { node_0, node_1, node_2 };
+
+		// Create matrices for edges and distances, edges.size() == distances().size()
+		std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
+		std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
+
+		// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
+		// Note: graph is compressed upon instantiation
+		HF::SpatialStructures::Graph graph(edges, distances, nodes);
+
+		// Create a pair of nodes
+		HF::SpatialStructures::Node n_parent(4.0f, 5.0f, 6.0f);
+		HF::SpatialStructures::Node n_child(7.0f, 8.0f, 9.0f);
+
+		graph.addEdge(n_parent, n_child);	// default score is 1.0f
+
+		// Graph will be compressed automatically be GetCSRPointers
+		CSRPtrs returned_csr = graph.GetCSRPointers();
 	}
 
 	TEST(_graph, NodeFromID) {
+		// be sure to #include "graph.h"
 
+		// Create the nodes
+		HF::SpatialStructures::Node node_0(1.0f, 1.0f, 2.0f, 4);
+		HF::SpatialStructures::Node node_1(2.0f, 3.0f, 4.0f, 5);
+		HF::SpatialStructures::Node node_2(11.0f, 22.0f, 140.0f, 6);
+
+		// Create a container (vector) of nodes
+		std::vector<HF::SpatialStructures::Node> nodes = { node_0, node_1, node_2 };
+
+		// Create matrices for edges and distances, edges.size() == distances().size()
+		std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
+		std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
+
+		// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
+		// Note: graph is compressed upon instantiation
+		HF::SpatialStructures::Graph graph(edges, distances, nodes);
+
+		// Let's retrieve node_1.
+		int desired_node_id = 2;
+		HF::SpatialStructures::Node node_from_id = graph.NodeFromID(desired_node_id);
+
+		// Note that NodeFromID ceases to work if the id argument provided does not exist as an ID among
+		// the nodes within graph
+		ASSERT_TRUE(node_from_id.id == desired_node_id);
 	}
 
 	TEST(_graph, Clear) {
+		// Create the nodes
+		HF::SpatialStructures::Node node_0(1.0f, 1.0f, 2.0f, 4);
+		HF::SpatialStructures::Node node_1(2.0f, 3.0f, 4.0f, 5);
+		HF::SpatialStructures::Node node_2(11.0f, 22.0f, 140.0f, 6);
 
+		// Create a container (vector) of nodes
+		std::vector<HF::SpatialStructures::Node> nodes = { node_0, node_1, node_2 };
+
+		// Create matrices for edges and distances, edges.size() == distances().size()
+		std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
+		std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
+
+		// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
+		// Note: graph is compressed upon instantiation
+		HF::SpatialStructures::Graph graph(edges, distances, nodes);
+
+		// If we want to remove all nodes and edges from graph, we may do so with Clear:
+		graph.Clear();						// edge_matrix is zeroed out, buffer is squeezed,
+											// triplets are also cleared, and needs_compression == true
+	
+		auto v = graph.NodesAsFloat3();
+		for (auto n : v) {
+			std::cout << n << std::endl;
+		}
 	}
 
 	TEST(_graph, GenerateCrossSlope) {
-
+		// TODO example - code commented out in graph.cpp
 	}
 
 	TEST(_graph, GenerateEnergy) {
-
+		// TODO example - code commented out in graph.cpp
 	}
 }
 

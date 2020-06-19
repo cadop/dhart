@@ -307,6 +307,11 @@ namespace HF::SpatialStructures {
 		edge_matrix.data().squeeze();
 		triplets.clear();
 		needs_compression = true;
+
+		// Other graph representations should be cleared too
+		ordered_nodes.clear();
+		id_to_nodes.clear();
+		idmap.clear();
 	}
 }
 
