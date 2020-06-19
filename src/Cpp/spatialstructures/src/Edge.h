@@ -40,7 +40,7 @@ namespace HF {
 			/// <param name="Step_Type">The type of step </param>
 
 			/// \code{.cpp}
-			/// #include "Edge.h"			// also includes node.h
+			/// // be sure to #include "Edge.h"
 			///
 			/// HF::SpatialStructures::Node node(12.0, 23.1, 34.2, 456);
 			/// float score = 4.3f;

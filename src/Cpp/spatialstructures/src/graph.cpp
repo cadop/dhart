@@ -273,11 +273,20 @@ namespace HF::SpatialStructures {
 
 		std::vector <std::array<float, 3> > out_nodes(n);
 
+		/*
 		for (int i = 0; i < n; i++)
 		{
 			out_nodes[i][0] = N[n].x;
 			out_nodes[i][1] = N[n].y;
 			out_nodes[i][2] = N[n].z;
+		}
+		*/
+
+		/// This yields the intended output
+		for (int i = 0; i < n; i++) {
+			out_nodes[i][0] = N[i].x;
+			out_nodes[i][1] = N[i].y;
+			out_nodes[i][2] = N[i].z;
 		}
 
 		return out_nodes;

@@ -36,7 +36,7 @@ namespace HF
 			/// </summary>
 			
 			/// \code{.cpp}
-			/// #include "node.h"
+			/// // be sure to #include "node.h"
 			///
 			/// HF::SpatialStructures::Node node();	// all fields initialized to NAN
 			/// \endcode
@@ -52,7 +52,7 @@ namespace HF
 			/// <param name="id"> ID of the node </param>
 			
 			/// \code{.cpp}
-			/// #include "node.h"
+			/// // be sure to #include "node.h"
 			///
 			/// HF::SpatialStructures::Node node_0(12.0, 23.1, 34.2);	// default ID is -1
 			/// \endcode
@@ -64,8 +64,7 @@ namespace HF
 			/// <param name="position">An array of 3 floats for x,y,z</param>
 			
 			/// \code{.cpp}
-			/// #include "node.h"
-			/// #include <array>
+			/// // be sure to #include "node.h"
 			///
 			/// std::array<float, 3> pos = { 12.0, 23.1, 34.2 };
 			/// HF::SpatialStructures::Node node(pos);		// id == -1, type == NODE_TYPE::GRAPH
@@ -75,8 +74,7 @@ namespace HF
 			// Create a point of interest
 			
 			/// \code{.cpp}
-			/// #include "node.h"
-			/// #include <array>
+			/// // be sure to #include "node.h"
 			///
 			/// std::array<float, 3> pos = { 12.0, 23.1, 34.2 };
 			/// HF::SpatialStructures::Node node(pos, HF::SpatialStructures::NODE_TYPE::GRAPH, 456);
@@ -90,7 +88,7 @@ namespace HF
 			/// <returns>Distance between this node and n2</returns>
 			
 			/// \code{.cpp}
-			/// #include "node.h"
+			/// // be sure to #include "node.h"
 			///
 			/// HF::SpatialStructures::Node node_0(12.0, 23.1, 34.2, 456);
 			/// HF::SpatialStructures::Node node_1(45.3, 56.4, 67.5, 789);
@@ -117,8 +115,7 @@ namespace HF
 			/// <returns> an array of 3 floats indicating a direction</returns>
 
 			/// \code{.cpp}
-			/// #include "node.h"
-			/// #include <array>
+			/// // be sure to #include "node.h"
 			///
 			/// HF::SpatialStructures::Node node_0(12.0, 23.1, 34.2, 456);
 			/// HF::SpatialStructures::Node node_1(45.3, 56.4, 67.5, 789);
@@ -134,8 +131,7 @@ namespace HF
 			/// <returns></returns>
 
 			/// \code{.cpp}
-			/// #include "node.h"
-			/// #include <array>
+			/// // be sure to #include "node.h"
 			///
 			/// HF::SpatialStructures::Node node(12.0, 23.1, 34.2, 456);
 			///
@@ -160,7 +156,7 @@ namespace HF
 			/// <returns>a reference to the member float for the requested coordinate</returns>
 
 			/// \code{.cpp}
-			/// #include "node.h"
+			/// // be sure to #include "node.h"
 			///
 			/// HF::SpatialStructures::Node node(12.0, 23.1, 34.2, 456);	// (x, y, z), ID
 			///
@@ -176,7 +172,7 @@ namespace HF
 			/// <returns>the value (copy) of the member float for the requested coordinate</returns>
 
 			/// \code{.cpp}
-			/// #include "node.h"
+			/// // be sure to #include "node.h"
 			///
 			/// HF::SpatialStructures::Node node(12.0, 23.1, 34.2, 456);	// (x, y, z), ID
 			///
@@ -192,7 +188,7 @@ namespace HF
 			/// <returns>True if the distance between n1 and n2 is less than Rounding Precision, false otherwise</returns>
 
 			/// \code{.cpp}
-			/// #include "node.h"
+			/// // be sure to #include "node.h"
 			///
 			/// HF::SpatialStructures::Node node_0(12.0, 23.1, 34.2, 456);
 			/// HF::SpatialStructures::Node node_1(45.3, 56.4, 67.5, 789);
@@ -217,8 +213,7 @@ namespace HF
 
 			/// \code{.cpp}
 			/// // Note: This member function is not defined in node.cpp (commented out)
-			/// #include "node.h"
-			/// #include <array>
+			/// // be sure to #include "node.h"
 			///
 			/// HF::SpatialStructures::Node node(12.0, 23.1, 34.2);
 			/// std::array<float, 3> position = { 45.3, 56.4, 67.5 };
@@ -234,7 +229,7 @@ namespace HF
 			/// <returns>True if the distance between n1 and n2 is greater than or equal to Rounding Precision, false otherwise</returns>
 			
 			/// \code{.cpp}
-			/// #include "node.h"
+			/// // be sure to #include "node.h"
 			///
 			/// HF::SpatialStructures::Node node_0(12.0, 23.1, 34.2, 456);
 			/// HF::SpatialStructures::Node node_1(45.3, 56.4, 67.5, 789);
@@ -259,7 +254,7 @@ namespace HF
 			/// <returns>A node with the values obtained from n1 - n2</returns>
 
 			/// \code{.cpp}
-			/// #include "node.h"
+			/// // be sure to #include "node.h"
 			///
 			/// HF::SpatialStructures::Node node_0(12.0, 23.1, 34.2, 456);
 			/// HF::SpatialStructures::Node node_1(45.3, 56.4, 67.5, 789);
@@ -279,7 +274,7 @@ namespace HF
 			/// <returns>A node with the values obtained from n1 + n2</returns>
 
 			/// \code{.cpp}
-			/// #include "node.h"
+			/// // be sure to #include "node.h"
 			///
 			/// HF::SpatialStructures::Node node_0(12.0, 23.1, 34.2, 456);
 			/// HF::SpatialStructures::Node node_1(45.3, 56.4, 67.5, 789);
@@ -298,7 +293,7 @@ namespace HF
 			/// <returns>A node with the values obtained from the dot product of N1 and N2</returns>
 
 			/// \code{.cpp}
-			/// #include "node.h"
+			/// // be sure to #include "node.h"
 			///
 			/// HF::SpatialStructures::Node node_0(12.0, 23.1, 34.2, 456);
 			/// HF::SpatialStructures::Node node_1(45.3, 56.4, 67.5, 789);
@@ -317,7 +312,7 @@ namespace HF
 			/// <returns>True if n1's id is less than n2's id, false otherwise</returns>
 
 			/// \code{.cpp}
-			/// #include "node.h"
+			/// // be sure to #include "node.h"
 			///
 			/// HF::SpatialStructures::Node node_0(12.0, 23.1, 34.2, 456);
 			/// HF::SpatialStructures::Node node_1(45.3, 56.4, 67.5, 789);
@@ -334,9 +329,7 @@ namespace HF
 			/// <returns>True if n1's id is less than n2's id, false otherwise</returns>
 
 			/// \code{.cpp}
-			/// #include "node.h"
-			/// #include <vector>
-			/// #include <algorithm>
+			/// // be sure to #include "node.h", #include <vector>, and #include <algorithm>
 			///
 			/// // For this example, we are not concerned about the node coordinates.
 			/// HF::SpatialStructures::Node node_0(0.0, 0.0, 0.0, 3);
@@ -365,7 +358,7 @@ namespace HF
 			/// <returns>True if n1's id is greater than n2's id, false otherwise</returns>
 
 			/// \code{.cpp}
-			/// #include "node.h"
+			/// // be sure to #include "node.h"
 			///
 			/// HF::SpatialStructures::Node node_0(12.0, 23.1, 34.2, 456);
 			/// HF::SpatialStructures::Node node_1(45.3, 56.4, 67.5, 789);
