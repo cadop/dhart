@@ -349,23 +349,78 @@ namespace NodeExampleTests {
 	}
 
 	TEST(_node, OperatorMinus) {
+		HF::SpatialStructures::Node node_0(12.0, 23.1, 34.2, 456);
+		HF::SpatialStructures::Node node_1(45.3, 56.4, 67.5, 789);
+		
+		// removed inline keyword from line 98 in node.cpp
+		HF::SpatialStructures::Node node_2 = node_1 - node_0;
 
+		// node_2 has values (x = 33.3, y = 33.3, z = 33.3, id = -1, type = NODE_TYPE::GRAPH)
+		// id and type are given default values as per Node::Node(const std::array<float, 3>& position)
+	
+		//std::cout << node_2.x << " " << node_2.y << " " << node_2.z << std::endl;
 	}
 
 	TEST(_node, OperatorPlus) {
+		HF::SpatialStructures::Node node_0(12.0, 23.1, 34.2, 456);
+		HF::SpatialStructures::Node node_1(45.3, 56.4, 67.5, 789);
+		
+		HF::SpatialStructures::Node node_2 = node_1 + node_0;
+		
+		// node_2 has values (x = 57.3, y = 79.5, z = 101.7, id = -1, type = NODE_TYPE::GRAPH)
+		// id and type are given default values as per Node::Node(const std::array<float, 3>& position)
 
+		//std::cout << node_2.x << " " << node_2.y << " " << node_2.z << std::endl;
 	}
 
 	TEST(_node, OperatorMultiply) {
+		 HF::SpatialStructures::Node node_0(12.0, 23.1, 34.2, 456);
+		 HF::SpatialStructures::Node node_1(45.3, 56.4, 67.5, 789);
+		
+		 HF::SpatialStructures::Node node_2 = node_1 * node_0;
+		
+		 // node_2 has values (x = 543.6, y = 1302.84, z = 2308.5, id = -1, type = NODE_TYPE::GRAPH)
+		 // id and type are given default values as per Node::Node(const std::array<float, 3>& position)
 
+		 //std::cout << node_2.x << " " << node_2.y << " " << node_2.z << std::endl;
 	}
 
 	TEST(_node, OperatorLessThanConst) {
+		HF::SpatialStructures::Node node_0(12.0, 23.1, 34.2, 456);
+		HF::SpatialStructures::Node node_1(45.3, 56.4, 67.5, 789);
+		
+		/// // operator< compares ID fields of node_0 and node_1
+		bool compare = node_0 < node_1;		// evaluates to true, since 456 < 789
 
+		/*
+		auto str = compare ? "true" : "false";
+		std::cout << str << std::endl;
+		*/
 	}
 
 	TEST(_node, OperatorLessThan) {
-
+		#include <vector>
+		#include <algorithm>
+		
+		// For this example, we are not concerned about the node coordinates.
+		HF::SpatialStructures::Node node_0(0.0, 0.0, 0.0, 3);
+		HF::SpatialStructures::Node node_1(0.0, 0.0, 0.0, 1);
+		HF::SpatialStructures::Node node_2(0.0, 0.0, 0.0, 2);
+		HF::SpatialStructures::Node node_3(0.0, 0.0, 0.0, 0);
+		
+		std::vector<Node> vec{ node_0, node_1, node_2, node_3 };
+		
+		// operator< sorts Node by ID, in non-decreasing order
+		std::sort(vec.begin(), vec.end());	// uses natural ordering through operator<, non-const
+		
+		std::vector<Node>::iterator it = vec.begin();
+		
+		/*
+		while (it != vec.end()) {
+			std::cout << "Node ID: " << it->id << std::endl;
+			++it;
+		} // Node ID will print in order by ID, from smallest to largest
+		*/
 	}
 	
 	TEST(_node, OperatorGreaterThanConst) {
@@ -375,6 +430,9 @@ namespace NodeExampleTests {
 		// operator< compares ID fields of node_0 and node_1
 		bool compare = node_0 > node_1;	// evaluates to false, since 456 < 789
 
-		/*std::cout << compare << std::endl;*/
+		/*
+		auto str = compare ? "true" : "false";
+		std::cout << str << std::endl;
+		*/
 	}
 }
