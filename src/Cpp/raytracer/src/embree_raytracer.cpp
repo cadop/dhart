@@ -1,3 +1,5 @@
+/// \file embree_raytracer.cpp \brief Contains implementation for the see cref="EmbreeRayTracer"/>.
+
 #include <embree_raytracer.h>
 #include <corecrt_math_defines.h>
 #include <functional>
@@ -13,6 +15,9 @@
 namespace HF {
 	namespace RayTracer {
 
+
+		/// <summary> Calculate the hitpoint of a ray from its origin, direction and distance </summary>
+		/// \deprecated Unused.
 		template <typename P, typename D>
 		P CalculateHitPoint(const P& origin, const D& direction, float distance) {
 			const float x = origin[0] + (direction[0] * distance);
@@ -23,22 +28,41 @@ namespace HF {
 
 		bool HitStruct::DidHit() const { return meshid != RTC_INVALID_GEOMETRY_ID; };
 
+		/// <summary>
+		/// Check an embree device for errors.
+		/// </summary>
+		/// <param name="device">Device to check for errors</param>
+		/// <exception cref="std::exception">Some error is found while casting rays.</exception>
 		void CheckState(RTCDevice& device) {
 			auto err = rtcGetDeviceError(device);
 
 			if (err != RTCError::RTC_ERROR_NONE)
 				throw std::exception("RTC DEVICE ERROR");
 		}
+		/// <summary>
+		/// A vertex. Used internally in Embree.
+		/// </summary>
 		struct Vertex { float x, y, z; };
+
+		/// <summary>
+		/// A triangle. Used internally in Embree.
+		/// </summary>
 		struct Triangle { int v0, v1, v2; };
 
+		/// \deprecated Use the version in ViewAnalysis.
+		[[deprecated("Use the version in ViewAnalysis.")]]
 		static inline double getRandomNumber() {
 			return static_cast<double> (1.0 - (rand()) / static_cast<double>(RAND_MAX / 2.0));
 		}
-
+		
+		/// \deprecated Use the version in ViewAnalysis.
+		[[deprecated("Use the version in ViewAnalysis.")]]
 		static inline float myradians(float angle) {
 			return angle * (static_cast<float>(M_PI) / 180.00f);
 		}
+		
+		/// \deprecated Use the version in ViewAnalysis.
+		[[deprecated("Use the version in viewanalysis")]]
 		static inline unsigned long mix(unsigned long a, unsigned long b, unsigned long c)
 		{
 			a = a - b;  a = a - c;  a = a ^ (c >> 13);
@@ -52,6 +76,9 @@ namespace HF {
 			c = c - a;  c = c - b;  c = c ^ (b >> 15);
 			return c;
 		}
+		
+		/// \deprecated Use the version in ViewAnalysis.
+		[[deprecated("Use the version in viewanalysis")]]
 		static inline std::vector<std::array<float, 3>> genSphereRays(int step)
 		{
 			const float up_angle = 50;
@@ -77,7 +104,8 @@ namespace HF {
 			}
 		}
 
-		//TODO: Factor this into another component
+		/// \deprecated Use the version in view analysis
+		[[deprecated("Use the version in viewanalysis")]]
 		std::vector<std::array<float, 3>> genFibbonacciRays(int numrays) {
 			int n = numrays;
 			const float up_angle = 40;
@@ -107,26 +135,28 @@ namespace HF {
 			return outrays;
 		}
 
-		// TODO: Performance here can be improved by using indexing
 		/// <summary>
-		/// Index a list of verticies and place them into a triangle and vertex buffer
+		/// Index a list of verticies and place them into a triangle and vertex buffer.
 		/// </summary>
-		/// <param name="vertices">Mesh vertices</param>
-		/// <param name="Tribuffer">Output triangle buffer</param>
-		/// <param name="Vbuffer">Output Vertex Buffer</param>
+		/// <param name="vertices">Mesh vertices.</param>
+		/// <param name="Tribuffer">Output triangle buffer.</param>
+		/// <param name="Vbuffer">Output Vertex Buffer.</param>
+		/// <remarks>Internally, this uses a hashmap to create an index map of vertices.</remarks>
+		/// \todo Performance here can be improved by using indexing.
 		inline void vectorsToBuffers(
 			const std::vector<std::array<float, 3>>& vertices,
 			std::vector<Triangle>& Tribuffer,
 			std::vector<Vertex>& Vbuffer
 		) {
 			robin_hood::unordered_map <std::array<float, 3>, int> index_map;
+			
 			int next_id = 0;
-
 			int vertsize = vertices.size();
 
 			for (int i = 0; i < vertsize; i += 3) {
 				std::array<int, 3> ids;
 
+				//  Get the ids for the next 3 vertices
 				for (int k = 0; k < 3; k++)
 				{
 					auto vert = vertices[i + k];
@@ -138,23 +168,31 @@ namespace HF {
 					else {
 						index_map[vert] = next_id;
 						current_id = next_id;
+
+						// Store new vertex in the vertex buffer
 						Vbuffer.emplace_back(Vertex{ vert[0], vert[1], vert[2] });
 						next_id++;
 					}
 					ids[k] = current_id;
 				}
+
+				// Store new triangle in the triangle buffer.
 				Tribuffer.emplace_back(Triangle{ ids[0], ids[1], ids[2] });
 			}
 		}
 
 		/// <summary>
-		/// Package raw arrays of floats and indices in buffers to the required embree types. NOTE: This will std::move
-		/// out of in_indicies and in_verticies, destroying both of them.
+		/// Package raw arrays of floats and indices in buffers to the required Embree types.
 		/// </summary>
-		/// <param name="in_vertices">An array of floats in which every 3 floats represents a vertex</param>
-		/// <param name="in_indices">An array of integers in which every 3 integers represents a triangle</param>
-		/// <param name="out_vertices">Output array for vertex Objects</param>
-		/// <param name="out_triangles">Output array for traingle objects</param>
+		/// <param name="in_vertices">
+		/// An array of floats in which every 3 floats represents a vertex.
+		/// </param>
+		/// <param name="in_indices">
+		/// An array of integers in which every 3 integers represents a triangle.
+		/// </param>
+		/// <param name="out_vertices"> Output array for vertexes.</param>
+		/// <param name="out_triangles"> Output array for triangles.</param>
+		/// \todo May be faster as a std::move or std::copy.
 		inline void buffersToStructs(
 			std::vector<float>& in_vertices,
 			std::vector<int>& in_indices,
@@ -194,19 +232,21 @@ namespace HF {
 			std::vector<Vertex> verts;
 			vectorsToBuffers(geometry, tris, verts);
 
+			// Cast to triangle/vertex structs so we can operate on them.  This trick is from the embree tutorial
 			triangles = (Triangle*)rtcSetNewGeometryBuffer(geom, RTC_BUFFER_TYPE_INDEX, 0, RTC_FORMAT_UINT3, sizeof(Triangle), tris.size() + 1);
 			Vertices = (Vertex*)rtcSetNewGeometryBuffer(geom, RTC_BUFFER_TYPE_VERTEX, 0, RTC_FORMAT_FLOAT3, sizeof(Vertex), verts.size() + 1);
 
 			// If either of these turns up null, this can't function
 			if (!triangles || !Vertices)
 				throw std::exception("RTC DEVICE ERROR");
+			
 			for (int i = 0; i < tris.size(); i++)
 				triangles[i] = tris[i];
 
 			for (int i = 0; i < verts.size(); i++)
 				Vertices[i] = verts[i];
 
-			// Add geometry
+			// Add geometry and commit the scene
 			rtcCommitGeometry(geom);
 			rtcAttachGeometryByID(scene, geom, 0);
 			rtcCommitScene(scene);
@@ -246,7 +286,8 @@ namespace HF {
 			rtcIntersect1(scene, &context, &hit);
 
 			CheckState(device);
-			// If valid geometry was hit, and the geometry matches the caller's desired mesh (if specified) then update the hitpoint and return
+			// If valid geometry was hit, and the geometry matches the caller's desired mesh
+			// (if specified) then update the hitpoint and return
 			if (hit.hit.geomID == RTC_INVALID_GEOMETRY_ID || (mesh_id > -1 && hit.hit.geomID != mesh_id)) return false;
 			else {
 				x = x + (dx * hit.ray.tfar);
@@ -429,6 +470,8 @@ namespace HF {
 		/// <summary>
 		/// Fire 8 rays and update the requests based on results
 		/// </summary>
+		// \deprecated Cumbersome to use compared to other functions. Unused.
+		[[deprecated]]
 		inline void Fire8Rays(
 			std::vector<std::reference_wrapper<FullRayRequest>>& requests,
 			const RTCScene& scene,
@@ -480,8 +523,6 @@ namespace HF {
 
 			rtcOccluded1(scene, &context, &ray);
 
-			//std::cout << ray.tfar << std::endl;
-			// If hit, tfar will equal -infinity
 			return ray.tfar == -INFINITY;
 		}
 
@@ -504,8 +545,10 @@ namespace HF {
 			// Set Setup buffers
 			std::vector<Triangle> tris;	std::vector<Vertex> verts;
 			vectorsToBuffers(Mesh, tris, verts);
-
+			
 			RTCGeometry geom = rtcNewGeometry(device, RTC_GEOMETRY_TYPE_TRIANGLE);
+
+			// Create Geometry/Triangle buffers
 			triangles = static_cast<Triangle*>(
 				rtcSetNewGeometryBuffer(
 					geom,
@@ -526,13 +569,18 @@ namespace HF {
 					verts.size() + 1
 				)
 				);
+
+			// Use the move from tris/verts into embree's buffers
 			std::move(tris.begin(), tris.end(), triangles);
 			std::move(verts.begin(), verts.end(), Vertices);
 
+			// Even if the scene isn't going to be committed, we need to commit the 
+			// geometry.
 			rtcCommitGeometry(geom);
 			rtcAttachGeometryByID(scene, geom, ID);
 			geometry.push_back(geom);
 
+			// Commit the scene if specified
 			if (Commit)
 				rtcCommitScene(scene);
 
