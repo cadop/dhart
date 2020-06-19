@@ -41,6 +41,7 @@ namespace HF {
 		/// <summary>
 		/// Contains no information about the ray itself, 
 		/// </summary>
+		/// \deprecated Never used. Leftover from partially implemented feature
 		struct HitInfo {
 		
 		};

@@ -1,3 +1,5 @@
+/// \file embree_raytracer.h \brief Contains definitions for the see cref="EmbreeRayTracer"/>.
+
 #pragma once
 #ifndef EMBREE_RAY_TRACER
 #define EMBREE_RAY_TRACER
@@ -38,17 +40,19 @@ namespace HF {
 		/// but more rays.
 		/// </param>
 		/// <returns> An array of directions distributed in a sphere. </returns>
+		/// \deprecated Use the version in ViewAnalysis
 		[[deprecated]]
 		std::vector<std::array<float, 3>> genSphereRays(int step);
 
 		/// <summary> Generate a set of equally distributed directions in sphere. </summary>
 		/// <remarks>
 		/// The directions from this function are better distributed than those of <see
-		/// cref="genSphereRays" />. The implementation of this function is based
-		/// on https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere.
+		/// cref="genSphereRays" />. The implementation of this function is based on
+		/// https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere.
 		/// </remarks>
 		/// <param name="numrays"> The number of directions to generate. </param>
 		/// <returns> An array of equally spaced directions. </returns>
+		/// \deprecated Use the version in ViewAnalysis
 		[[deprecated]]
 		std::vector<std::array<float, 3>> genFibbonacciRays(int numrays);
 
@@ -60,16 +64,17 @@ namespace HF {
 		/// provides methods for adding geometry to Embree's geometry buffers.
 		/// </remarks>
 		/// \todo Could use a constructor overload for a single instance of meshinfo for conveience. 
+		/// \todo Many functions support MeshID but don't actually check for it. 
 		class EmbreeRayTracer {
 			/// All objects in Embree are created from this. https://www.embree.org/api.html#device-object
 			RTCDevice device; 
-			///  Container for a set of geometries, and the BVH. https://www.embree.org/api.html#scene-object
+			/// Container for a set of geometries, and the BVH. https://www.embree.org/api.html#scene-object
 			RTCScene scene;
 			/// Context to fire rays within.
 			RTCIntersectContext context;
-			/// Triangle buffer. Is used in multiple places, but contents are dumped. 
+			/// Triangle buffer. Is used in multiple places, but contents are dumped.
 			Triangle* triangles;
-			/// Vertex buffer. Is used in multiple places but contents are dumped. 
+			/// Vertex buffer. Is used in multiple places but contents are dumped.
 			Vertex* Vertices;
 
 			std::vector<RTCGeometry> geometry; //> A list of the geometry being used by RTCScene.
@@ -79,16 +84,18 @@ namespace HF {
 
 			/// <summary> Create a new EmbreeRayTracer and add a single mesh to the scene. </summary>
 			/// <param name="MI"> The mesh to use for scene construction. </param>
-			/// <exception cref="Exception">Thrown if MI contains no vertices.</exception>
+			/// <exception cref="Exception"> Thrown if MI contains no vertices. </exception>
 			/// \todo This function calls
-			/// <c>throw; </c>
+			/// <c> throw; </c>
 			/// <a href="https://en.cppreference.com/w/cpp/language/throw"> </a>
 			/// which is meant to only be used to rethrow previously thrown exceptions. This should
 			/// be throwing
 			/// <see cref="HF::Exceptions::InvalidOBJ" />
 			EmbreeRayTracer(std::vector<HF::Geometry::MeshInfo>& MI);
 
-			/// <summary> Create a new Raytracer and generate its BVH from a flat array of vertices. </summary>
+			/// <summary>
+			/// Create a new Raytracer and generate its BVH from a flat array of vertices.
+			/// </summary>
 			/// <param name="geometry">
 			/// A vector of float arrays representing geometry. Every 3 arrays should form a single
 			/// triangle of the mesh
@@ -98,7 +105,9 @@ namespace HF {
 			/// building from an array of triangle indices and an array of vertices. Internally a
 			/// hashmap is used to assign an ID to every vertex in order to generate the index array.
 			/// </remarks>
-			/// <exception cref="std::exception"> Embree's geometry buffers could not be initialized. </exception>
+			/// <exception cref="std::exception">
+			/// Embree's geometry buffers could not be initialized.
+			/// </exception>
 			EmbreeRayTracer(const std::vector<std::array<float, 3>>& geometry);
 
 			/// <summary>
@@ -181,8 +190,8 @@ namespace HF {
 			/// Any intersections beyond this distance are ignored. Set to -1 count any hit
 			/// regardless of distance.
 			/// </param>
-			/// <param name="mesh_id">
-			/// the id of the only mesh for this ray to collide with. Any geometry wihtout this ID
+			/// <param name="mesh_id"> (UNUSED)
+			/// The id of the only mesh for this ray to collide with. Any geometry wihtout this ID
 			/// is ignored
 			/// </param>
 			/// <returns> true if the ray hit, false otherwise </returns>
@@ -240,9 +249,12 @@ namespace HF {
 			/// <param name="origins"> An array of x,y,z coordinates to fire rays from. </param>
 			/// <param name="directions"> An array of x,y,z directions to fire in. </param>
 			/// <param name="use_parallel">
-			/// Fire rays in parallel if true, if not don't. All available cores will be used
+			/// Cast rays in parallel if true, if not fire in serial. All available cores will be used.
 			/// </param>
-			/// <param name="max_distance">Maximum distance the ray can travel. Any intersections beyond this distance will be ignored. If set to 1, all intersections will be counted regardless of distance. </param>
+			/// <param name="max_distance">
+			/// Maximum distance the ray can travel. Any intersections beyond this distance will be
+			/// ignored. If set to 1, all intersections will be counted regardless of distance.
+			/// </param>
 			/// <param name="mesh_id"> (UNUSED) Only intersect with the mesh of this ID </param>
 			/// <returns>
 			/// A vector of <see cref="Vector3D" /> for the hitpoint of each ray fired. If a ray
@@ -253,17 +265,16 @@ namespace HF {
 			/// <para> Can be fired in 3 configurations: </para>
 			/// <list type="bullet">
 			/// <item>
-			/// Equal amount of directions/origins: Fire a ray for every pair
-			/// of origin/direction in order. i.e. (origin[0], direction[0]), (origin[1],
-			/// direction[1]) 
+			/// Equal amount of directions/origins: Fire a ray for every pair of origin/direction in
+			/// order. i.e. (origin[0], direction[0]), (origin[1], direction[1])
 			/// </item>
 			/// <item>
-			/// One direction, multiple origins: Fire a ray in the given
-			/// direction from each origin point in origins.
+			/// One direction, multiple origins: Fire a ray in the given direction from each origin
+			/// point in origins.
 			/// </item>
 			/// <item>
-			/// One origin, multiple directions: Fire a ray from the origin
-			/// point in each direction in directions.
+			/// One origin, multiple directions: Fire a ray from the origin point in each direction
+			/// in directions.
 			/// </item>
 			/// </list>
 			/// </remarks>
@@ -294,7 +305,7 @@ namespace HF {
 					std::vector<std::array<float, 3>> origins(10);
 					for (int i = 0; i < 10; i++) origins[i] = std::array<float, 3>{static_cast<float>(2*i), 0, 1};
 
-					// Fire every ray. 
+					// Fire every ray.
 					auto results = ert.FireRays(origins, directions);
 
 					// Print results
@@ -321,23 +332,21 @@ namespace HF {
 			);
 
 			/// <summary> Cast a ray and store all relevant information in a HitStruct. </summary>
-			/// <param name="x"> x component of the ray's origin </param>
-			/// <param name="y"> y component of the ray's origin </param>
-			/// <param name="z"> z component of the ray's origin </param>
-			/// <param name="dx"> x component of the ray's direction </param>
-			/// <param name="dy"> y component of the ray's direction </param>
-			/// <param name="dz"> z component of the ray's direction </param>
+			/// <param name="x"> x component of the ray's origin. </param>
+			/// <param name="y"> y component of the ray's origin. </param>
+			/// <param name="z"> z component of the ray's origin. </param>
+			/// <param name="dx"> x component of the ray's direction. </param>
+			/// <param name="dy"> y component of the ray's direction. </param>
+			/// <param name="dz"> z component of the ray's direction. </param>
 			/// <param name="max_distance">
 			/// Maximum distance the ray can travel. Any intersections beyond this distance will be
 			/// ignored. If set to -1, all intersections will be counted regardless of distance.
 			/// </param>
 			/// <param name="mesh_id">
 			/// (UNIMPLEMENTED) the id of the only mesh for this ray to collide with. Any geometry
-			/// wihtout this ID is ignored
+			/// wihtout this ID is ignored.
 			/// </param>
-			/// <returns>
-			/// A HitStruct containing information about the intersection if any occurred.
-			/// </returns>
+			/// <returns> A HitStruct containing information about the intersection if any occurred. </returns>
 			/**
 				\par Example
 				\code
@@ -362,7 +371,7 @@ namespace HF {
 					if (res.DidHit()) std::cerr << res.distance << std::endl;
 					else std::cerr << "Miss" << std::endl;
 
-					// Fire a ray straight up 
+					// Fire a ray straight up
 					res = ert.Intersect(0, 0, 1, 0, 0, 1);
 
 					//Print distance if it connected
@@ -384,11 +393,9 @@ namespace HF {
 				int mesh_id = -1
 			);
 
-			/// <summary>
-			/// Cast an occlusion ray with origin and direction as arrays.
-			/// </summary>
-			/// <param name="origin"> Start point of the ray </param>
-			/// <param name="direction"> Direction of the ray </param>
+			/// <summary> Cast an occlusion ray using arrays as input. </summary>
+			/// <param name="origin"> Start point of the ray. </param>
+			/// <param name="direction"> Direction of the ray. </param>
 			/// <param name="max_dist">
 			/// Maximum distance of the ray. Any hits beyond this distance will not be counted. If
 			/// negative, count all hits regardless of distance.
@@ -444,10 +451,10 @@ namespace HF {
 				float max_dist = -1
 			);
 
-			/// <summary> Fire multiple occlusion rays </summary>
+			/// <summary> Cast multiple occlusion rays in parallel. </summary>
 			/// <param name="origins">
 			/// A list of origins. If only one is supplied then it will be fired for every direction
-			/// in directions
+			/// in directions.
 			/// </param>
 			/// <param name="directions">
 			/// A list of directions. If only one is supplied then it will be fired for every origin
@@ -463,17 +470,16 @@ namespace HF {
 			/// <para> Can be fired in 3 configurations: </para>
 			/// <list type="bullet">
 			/// <item>
-			/// Equal amount of directions/origins: Fire a ray for every pair
-			/// of origin/direction in order. i.e. (origin[0], direction[0]), (origin[1],
-			/// direction[1])
+			/// Equal amount of directions/origins: Fire a ray for every pair of origin/direction in
+			/// order. i.e. (origin[0], direction[0]), (origin[1], direction[1])
 			/// </item>
 			/// <item>
-			/// One direction, multiple origins: Fire a ray in the given
-			/// direction from each origin point in origins.
+			/// One direction, multiple origins: Fire a ray in the given direction from each origin
+			/// point in origins.
 			/// </item>
 			/// <item>
-			/// One origin, multiple directions: Fire a ray from the origin
-			/// point in each direction in directions.
+			/// One origin, multiple directions: Fire a ray from the origin point in each direction
+			/// in directions.
 			/// </item>
 			/// </list>
 			/// </remarks>
@@ -495,8 +501,8 @@ namespace HF {
 					// Create an array of directions all containing {0,0,-1}
 					std::vector<std::array<float, 3>> directions(10, std::array<float, 3>{0, 0, -1});
 
-					// Create an array of origins with the first 5 values being above the plane and the last
-					// five values being under it.
+					// Create an array of origins with the first 5 values being above the plane and
+					// the last five values being under it.
 					std::vector<std::array<float, 3>> origins(10);
 					for (int i = 0; i < 5; i++) origins[i] = std::array<float, 3>{0.0f, 0.0f, 1.0f};
 					for (int i = 5; i < 10; i++) origins[i] = std::array<float, 3>{0.0f, 0.0f, -1.0f};
@@ -526,19 +532,21 @@ namespace HF {
 				, bool use_parallel = true
 			);
 
-			/// <summary> Fire a single occlusion ray. </summary>
+			/// <summary> Cast a single occlusion ray. </summary>
 			/// <param name="x"> x component of the ray's origin. </param>
 			/// <param name="y"> y component of the ray's origin. </param>
 			/// <param name="z"> z component of the ray's origin. </param>
 			/// <param name="dx"> x component of the ray's direction. </param>
 			/// <param name="dy"> y component of the ray's direction. </param>
 			/// <param name="dz"> z component of the ray's direction. </param>
-			/// <param name="distance"> maximum distance of the ray. -1 for infinite. </param>
+			/// <param name="distance">
+			/// Maximum distance of the ray. Any hits beyond this distance will not be counted. If
+			/// negative, count all hits regardless of distance.
+			/// </param>
 			/// <param name="mesh_id">
 			/// (NOT IMPLEMENTED) The id of the only mesh for this ray to collide with. -1 for all.
 			/// </param>
-			/// <returns> True if the ray hit anything, false otherwise. </returns>
-			/// 
+			/// <returns> True if the ray intersected any geometry. False otherwise. </returns>
 			/*!
 				\par Example
 				\code 
@@ -588,6 +596,8 @@ namespace HF {
 			/// A list of requests to fire. These requests will be updated with the results of each shot.
 			/// </param>
 			/// <param name="parallel"> If true will fire rays in parallel. </param>
+			/// \deprecated Never used. Holdover from the previous codebase.
+			[[deprecated]]
 			void FireRequests(
 				std::vector<FullRayRequest>& requests,
 				bool parallel = true
@@ -598,28 +608,31 @@ namespace HF {
 			/// A list of requests to fire. Each request will be updated with hitpoints if successful.
 			/// </param>
 			/// <param name="parallel"> If true, fire rays in parallel </param>
+			/// \deprecated Never used. Holdover from the previous codebase.
 			[[deprecated]]
 			void FireOcclusionRequests(
 				std::vector<FullRayRequest>& requests,
 				bool parallel = true
 			);
 
-			/// <summary>
-			/// Add a new mesh to the Scene with the specified ID. If False, then the addition
-			/// failed, or the ID was already taken.
-			/// </summary>
+			/// <summary> Add a new mesh to this raytracer's BVH with the specified ID. </summary>
 			/// <param name="Mesh"> A vector of 3d points composing the mesh </param>
 			/// <param name="ID"> the id of the mesh </param>
 			/// <param name="Commit">
 			/// Whether or not to commit changes yet. This is slow, so only do this when you're done
 			/// adding meshes.
 			/// </param>
-			/// <returns> True if successful </returns>
-			/// <exception cref="std::exception">Embree failed to allocate vertex and or index buffers.</exception>
+			/// <returns>
+			/// True if the mesh was added successfully, false if the addition failed or the ID was
+			/// already taken.
+			/// </returns>
+			/// <exception cref="std::exception">
+			/// Embree failed to allocate vertex and or index buffers.
+			/// </exception>
 			bool InsertNewMesh(std::vector<std::array<float, 3>>& Mesh, int ID, bool Commit = false);
 
 			/// <summary>
-			/// Add a new mesh to the Scene with the specified ID. If False, then the addition
+			/// Add a new mesh to the BVH with the specified ID. If False, then the addition
 			/// failed, or the ID was already taken.
 			/// </summary>
 			/// <param name="Mesh"> A vector of 3d points composing the mesh </param>
@@ -629,21 +642,21 @@ namespace HF {
 			/// adding meshes.
 			/// </param>
 			/// <returns> True if successful </returns>
-			/// <exception cref="std::exception">RTC failed to allocate vertex and or index buffers.</exception>
+			/// <exception cref="std::exception">
+			/// RTC failed to allocate vertex and or index buffers.
+			/// </exception>
 			bool EmbreeRayTracer::InsertNewMesh(HF::Geometry::MeshInfo& Mesh, bool Commit);
 
-			/// <summary>
-			/// Add several new meshes to the Scene.
-			/// </summary>
+			/// <summary> Add several new meshes to the BVH. </summary>
 			/// <param name="Meshes"> A vector of meshinfo to each be added as a seperate mesh. </param>
 			/// <param name="Commit">
-			/// Whether or not to commit changes to the scene after every new mesh has been added.
+			/// Whether or not to commit changes to the scene after all meshes in Meshes have been added.
 			/// </param>
 			/// <returns> True. </returns>
 			bool InsertNewMesh(std::vector<HF::Geometry::MeshInfo>& Meshes, bool Commit = true);
 
 			/// <summary>
-			/// Template for firing rays using any kind of container for the direction and origin.
+			/// Template for firing rays using array-like containers for the direction and origin.
 			/// </summary>
 			/// <param name="node"> A point in space. Must atleast have [0], [1], and [2] defined </param>
 			/// <param name="direction">
@@ -657,8 +670,8 @@ namespace HF {
 			/// </param>
 			/// <returns> True if the ray intersected any geometry, false otherwise. </returns>
 			/// <remarks>
-			/// This is preferrable to use over the other ray functions for the sake of performance
-			/// since the use of templates ensures no unnecessary conversions are performed.
+			/// This is preferrable to use over the other ray functions in many circumstances since
+			/// the use of templates ensures no unnecessary conversions are performed.
 			/// </remarks>
 			/// \note C++ 2020's Concepts would be a good way to explain how to use this whenever
 			/// they get implemented.
@@ -726,23 +739,20 @@ namespace HF {
 			}
 
 			/// <summary>
-			/// Fire a ray from <paramref name="node" /> in <paramref name="direction" /> and tell
-			/// if it intersects any geometry.
+			/// Template for firing rays using array-like containers for the direction and origin.
+			/// Similar to <see cref="FireAnyRay" />.
 			/// </summary>
-			/// <param name="node"> A point in space. Must atleast have [0], [1], and [2] defined </param>
+			/// <param name="node"> A point in space. Must atleast have [0], [1], and [2] defined. </param>
 			/// <param name="direction">
-			/// Direction to fire the ray in. Same constraints as node, but can be a different type
+			/// Direction to fire the ray in. Same constraints as node, but can be a different type.
 			/// </param>
 			/// <param name="max_distance"> Maximum distance the ray can travel. </param>
 			/// <returns> true if the ray connected with anything, false otherwise. </returns>
 			/// <remarks>
 			/// Like the other occlusion functions, this is much faster than its counterparts at the
 			/// cost of only being able to return true if the ray intersects any geometry, and false
-			/// if it doesn't. Should future ray tracers be developed, this template will support
-			/// all of them (considering they implement the required functions). This is preferrable
-			/// to use over the other ray functions for the sake of performance and maintainability.
+			/// if it doesn't.
 			/// </remarks>
-			/// 
 			/// \note C++ 2020's Concepts would be a good way to explain how to use this whenever
 			/// they get implemented.
 			/*!	
@@ -803,9 +813,7 @@ namespace HF {
 			/// <summary> Increment reference counters to prevent destruction when a copy is made. <summary>
 			void operator=(const EmbreeRayTracer& ERT2);
 
-			/// <summary>
-			/// Custom destructor to ensure cleanup of embree resources
-			/// </summary>
+			/// <summary> Custom destructor to ensure cleanup of embree resources. </summary>
 			~EmbreeRayTracer();
 		};
 	}
