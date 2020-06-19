@@ -34,39 +34,41 @@ namespace HF {
 			/// <param name="input_nodes">reference to vector of Node for VisibilityGraph</param>
 			/// <param name="height">Desired height for the VisibilityGraph</param>
 
-			/// \code{.cpp}
-			/// using HF::RayTracer::EmbreeRayTracer;		// needed for EmbreeRayTracer
-			/// using HF::SpatialStructures::Node;			// needed for Node
-			/// using HF::Geometry::LoadMeshObjects;		// needed for LoadMeshObjects
-			/// using HF::Geometry::Graph;					// needed for Graph
-			///
-			/// std::string plane_path = "plane.obj";		// path to an OBJ file for a flat plane
-			///
-			/// // Create an EmbreeRayTracer.
-			/// // Note that LoadMeshObjects has two more arguments after plane_path -
-			///	//		an enum HF::Geometry::GROUP_METHOD (defaults to GROUP_METHOD::ONLY_FILE)
-			/// //		a bool (defaults to true, used to convert OBJ coordinate system to Rhino coordinates)
-			///
-			/// EmbreeRayTracer tracer(LoadMeshObjects(plane_path));
-			///
-			///	std::vector<Node> node_vec;			// Container of nodes
-			/// const int reserve_count = 100;		// Pre-defined reserve size
-			/// node_vec.reserve(reserve_count);	// Reserve reserve_count blocks for node_vec
-			///
-			/// // Construct reserve_count Node and insert each of them into node_vec
-			/// for (float i = -5.0; i < 5.0; i++) {
-			///		// runs 10 times
-			///		for (float j = -5; j < 5.0; j++) {
-			///			// runs 10 times
-			///			node_vec.emplace_back(Node(i, j, 0.0f));	// all Node ID default to -1
-			///		}
-			/// }
-			///
-			///	// AllToAll constructs and returns a Graph 
-			/// // consisting of Node (from node_vec) that do not occlude each other
-			/// float desired_height = 2.0f;		// Height of graph
-			/// Graph graph = AllToAll(tracer, node_vec, desired_height);
-			/// \endcode
+			/*!
+			 \code{.cpp}
+			 using HF::RayTracer::EmbreeRayTracer;		// needed for EmbreeRayTracer
+			 using HF::SpatialStructures::Node;			// needed for Node
+			 using HF::Geometry::LoadMeshObjects;		// needed for LoadMeshObjects
+			 using HF::Geometry::Graph;					// needed for Graph
+			
+			 std::string plane_path = "plane.obj";		// path to an OBJ file for a flat plane
+			
+			 // Create an EmbreeRayTracer.
+			 // Note that LoadMeshObjects has two more arguments after plane_path -
+				//		an enum HF::Geometry::GROUP_METHOD (defaults to GROUP_METHOD::ONLY_FILE)
+			 //		a bool (defaults to true, used to convert OBJ coordinate system to Rhino coordinates)
+			
+			 EmbreeRayTracer tracer(LoadMeshObjects(plane_path));
+			
+				std::vector<Node> node_vec;			// Container of nodes
+			 const int reserve_count = 100;		// Pre-defined reserve size
+			 node_vec.reserve(reserve_count);	// Reserve reserve_count blocks for node_vec
+			
+			 // Construct reserve_count Node and insert each of them into node_vec
+			 for (float i = -5.0; i < 5.0; i++) {
+					// runs 10 times
+					for (float j = -5; j < 5.0; j++) {
+						// runs 10 times
+						node_vec.emplace_back(Node(i, j, 0.0f));	// all Node ID default to -1
+					}
+			 }
+			
+				// AllToAll constructs and returns a Graph 
+			 // consisting of Node (from node_vec) that do not occlude each other
+			 float desired_height = 2.0f;		// Height of graph
+			 Graph graph = AllToAll(tracer, node_vec, desired_height);
+			 \endcode
+			*/
 			HF::SpatialStructures::Graph AllToAll(
 				HF::RayTracer::EmbreeRayTracer& ert,
 				const std::vector<HF::SpatialStructures::Node>& input_nodes,
@@ -80,48 +82,50 @@ namespace HF {
 			/// <param name="input_nodes">reference to vector of Node for VisibilityGraph</param>
 			/// <param name="height">Desired height for the VisibilityGraph</param>
 
-			/// \code{.cpp}
-			/// using HF::RayTracer::EmbreeRayTracer;		// needed for EmbreeRayTracer
-			/// using HF::SpatialStructures::Node;			// needed for Node
-			/// using HF::Geometry::LoadMeshObjects;		// needed for LoadMeshObjects
-			/// using HF::Geometry::Graph;					// needed for Graph
-			///
-			/// std::string plane_path = "plane.obj";		// path to an OBJ file for a flat plane
-			///
-			/// // Create an EmbreeRayTracer.
-			/// // Note that LoadMeshObjects has two more arguments after plane_path -
-			///	//		an enum HF::Geometry::GROUP_METHOD (defaults to GROUP_METHOD::ONLY_FILE)
-			/// //		a bool (defaults to true, used to convert OBJ coordinate system to Rhino coordinates)
-			/// 
-			/// EmbreeRayTracer tracer(LoadMeshObjects(plane_path));
-			///
-			///	std::vector<Node> node_vec_0;		// First container of Node
-			/// std::vector<Node> node_vec_1;		// Second container of Node
-			///
-			/// const int reserve_count = 100;		// Pre-defined reserve size
-			/// node_vec_0.reserve(reserve_count);	// Reserve reserve_count blocks for both vectors
-			/// node_vec_1.reserve(reserve_count);
-			///
-			/// // 0) Construct reserve_count Node and insert each of them into node_vec_0
-			/// for (float i = -5.0; i < 5.0; i++) {
-			///		// runs 10 times
-			///		for (float j = -5.0; j < 5.0; j++) {
-			///			// runs 10 times
-			///			node_vec_0.emplace_back(Node(i, j, 0.0f));	// all Node ID default to -1
-			///		}
-			/// }
-			///
-			/// // 1) Construct reserve_count Node and insert each of them into node_vec_1
-			/// for (float i = 0.0; i < 10.0; i++) {
-			///		for (float j = 0.0; j < 10.0; j++) {
-			///			node_vec_1.emplace_back(Node(i, j, 0.0f));	// all Node ID default to -1
-			///		}
-			///
-			///	// GroupToGroup constructs and returns a Graph consisting of Node
-			/// // (between node_vec_0 and node_vec_1) such that the nodes do not occlude each other
-			/// float desired_height = 2.0f;		// Height of graph
-			/// Graph graph = GroupToGroup(tracer, node_vec_0, node_vec_1, desired_height);
-			/// \endcode
+			/*!
+			 \code{.cpp}
+			 using HF::RayTracer::EmbreeRayTracer;		// needed for EmbreeRayTracer
+			 using HF::SpatialStructures::Node;			// needed for Node
+			 using HF::Geometry::LoadMeshObjects;		// needed for LoadMeshObjects
+			 using HF::Geometry::Graph;					// needed for Graph
+			
+			 std::string plane_path = "plane.obj";		// path to an OBJ file for a flat plane
+			
+			 // Create an EmbreeRayTracer.
+			 // Note that LoadMeshObjects has two more arguments after plane_path -
+				//		an enum HF::Geometry::GROUP_METHOD (defaults to GROUP_METHOD::ONLY_FILE)
+			 //		a bool (defaults to true, used to convert OBJ coordinate system to Rhino coordinates)
+			 
+			 EmbreeRayTracer tracer(LoadMeshObjects(plane_path));
+			
+				std::vector<Node> node_vec_0;		// First container of Node
+			 std::vector<Node> node_vec_1;		// Second container of Node
+			
+			 const int reserve_count = 100;		// Pre-defined reserve size
+			 node_vec_0.reserve(reserve_count);	// Reserve reserve_count blocks for both vectors
+			 node_vec_1.reserve(reserve_count);
+			
+			 // 0) Construct reserve_count Node and insert each of them into node_vec_0
+			 for (float i = -5.0; i < 5.0; i++) {
+					// runs 10 times
+					for (float j = -5.0; j < 5.0; j++) {
+						// runs 10 times
+						node_vec_0.emplace_back(Node(i, j, 0.0f));	// all Node ID default to -1
+					}
+			 }
+			
+			 // 1) Construct reserve_count Node and insert each of them into node_vec_1
+			 for (float i = 0.0; i < 10.0; i++) {
+					for (float j = 0.0; j < 10.0; j++) {
+						node_vec_1.emplace_back(Node(i, j, 0.0f));	// all Node ID default to -1
+					}
+			
+				// GroupToGroup constructs and returns a Graph consisting of Node
+			 // (between node_vec_0 and node_vec_1) such that the nodes do not occlude each other
+			 float desired_height = 2.0f;		// Height of graph
+			 Graph graph = GroupToGroup(tracer, node_vec_0, node_vec_1, desired_height);
+			 \endcode
+			*/
 			HF::SpatialStructures::Graph GroupToGroup(
 				HF::RayTracer::EmbreeRayTracer& ert,
 				const std::vector<HF::SpatialStructures::Node> & from,
@@ -137,41 +141,43 @@ namespace HF {
 			/// <param name="height">Desired height for the VisibilityGraph</param>
 			/// <param name="cores">Core count for the graph</param>
 
-			/// \code{.cpp}
-			/// using HF::RayTracer::EmbreeRayTracer;		// needed for EmbreeRayTracer
-			/// using HF::SpatialStructures::Node;			// needed for Node
-			/// using HF::Geometry::LoadMeshObjects;		// needed for LoadMeshObjects
-			/// using HF::Geometry::Graph;					// needed for Graph
-			///
-			/// std::string plane_path = "plane.obj";		// path to an OBJ file for a flat plane
-			///
-			/// // Create an EmbreeRayTracer.
-			/// // Note that LoadMeshObjects has two more arguments after plane_path -
-			///	//		an enum HF::Geometry::GROUP_METHOD (defaults to GROUP_METHOD::ONLY_FILE)
-			/// //		a bool (defaults to true, used to convert OBJ coordinate system to Rhino coordinates)
-			/// 
-			/// EmbreeRayTracer tracer(LoadMeshObjects(plane_path));
-			///
-			///	std::vector<Node> node_vec;			// Container of nodes
-			/// const int reserve_count = 100;		// Pre-defined reserve size
-			/// node_vec.reserve(reserve_count);	// Reserve reserve_count blocks for node_vec
-			///
-			/// // Construct reserve_count Node and insert each of them into node_vec
-			/// for (float i = -5.0; i < 5.0; i++) {
-			///		// runs 10 times
-			///		for (float j = -5; j < 5.0; j++) {
-			///			// runs 10 times
-			///			node_vec.emplace_back(Node(i, j, 0.0f));	// all Node ID default to -1
-			///		}
-			/// }
-			///
-			///	// AllToAllUndirected constructs and returns a Graph 
-			/// // consisting of Node (from node_vec) that do not occlude each other
-			/// float desired_height = 2.0f;		// Height of graph
-			/// int core_count = 4;					// For omp_set_num_threads(int num_threads), CPU core count
-			///
-			/// Graph graph = AllToAllUndirected(tracer, node_vec, desired_height, core_count);
-			/// \endcode
+			/*!
+			 \code{.cpp}
+			 using HF::RayTracer::EmbreeRayTracer;		// needed for EmbreeRayTracer
+			 using HF::SpatialStructures::Node;			// needed for Node
+			 using HF::Geometry::LoadMeshObjects;		// needed for LoadMeshObjects
+			 using HF::Geometry::Graph;					// needed for Graph
+			
+			 std::string plane_path = "plane.obj";		// path to an OBJ file for a flat plane
+			
+			 // Create an EmbreeRayTracer.
+			 // Note that LoadMeshObjects has two more arguments after plane_path -
+				//		an enum HF::Geometry::GROUP_METHOD (defaults to GROUP_METHOD::ONLY_FILE)
+			 //		a bool (defaults to true, used to convert OBJ coordinate system to Rhino coordinates)
+			 
+			 EmbreeRayTracer tracer(LoadMeshObjects(plane_path));
+			
+				std::vector<Node> node_vec;			// Container of nodes
+			 const int reserve_count = 100;		// Pre-defined reserve size
+			 node_vec.reserve(reserve_count);	// Reserve reserve_count blocks for node_vec
+			
+			 // Construct reserve_count Node and insert each of them into node_vec
+			 for (float i = -5.0; i < 5.0; i++) {
+					// runs 10 times
+					for (float j = -5; j < 5.0; j++) {
+						// runs 10 times
+						node_vec.emplace_back(Node(i, j, 0.0f));	// all Node ID default to -1
+					}
+			 }
+			
+				// AllToAllUndirected constructs and returns a Graph 
+			 // consisting of Node (from node_vec) that do not occlude each other
+			 float desired_height = 2.0f;		// Height of graph
+			 int core_count = 4;					// For omp_set_num_threads(int num_threads), CPU core count
+			
+			 Graph graph = AllToAllUndirected(tracer, node_vec, desired_height, core_count);
+			 \endcode
+			*/
 			HF::SpatialStructures::Graph AllToAllUndirected(
 				HF::RayTracer::EmbreeRayTracer& ert,
 				const std::vector<HF::SpatialStructures::Node>& nodes,
