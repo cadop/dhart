@@ -39,12 +39,16 @@ namespace HF {
 			/// <param name="Score"> the score of this edge</param>
 			/// <param name="Step_Type">The type of step </param>
 
-			/// \code{.cpp}
-			/// Node node(12.0, 23.1, 34.2, 456);
-			/// float score = 4.3f;
-			///
-			/// Edge edge(node, score, STEP::NOT_CONNECTED);
-			/// \endcode
+			/*!
+				\code
+					// be sure to #include "Edge.h"
+			
+					HF::SpatialStructures::Node node(12.0, 23.1, 34.2, 456);
+					float score = 4.3f;
+			
+					HF::SpatialStructures::Edge edge(node, score, STEP::NOT_CONNECTED);
+				\endcode
+			*/
 			Edge(const Node& Child, float Score = 0, STEP Step_Type = NONE);
 		};
 
@@ -59,7 +63,7 @@ namespace HF {
 
 		/// <summary>
 		/// A collection of edges for a specific node
-		///</summary>
+		/// </summary>
 		struct EdgeSet {
 			int parent;						///< Identifier of parent node
 			std::vector<IntEdge> children;	///< vector of IntEdge (children)
