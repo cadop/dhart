@@ -86,3 +86,38 @@ TEST(_Pathfinding, MultiplePaths) {
 		ASSERT_EQ(OP, path);
 }
 
+///
+///	The following are tests for the code samples for HF::SpatialStructures::Pathfinding
+///
+
+TEST(_boostGraph, Constructor) {
+
+}
+
+TEST(_boostGraph, Destructor) {
+
+}
+
+TEST(_boostGraphDeleter, OperatorFunction) {
+
+}
+
+TEST(_pathFinding, CreateBoostGraph) {
+
+}
+
+TEST(_pathFinding, FindPath) {
+
+}
+
+TEST(_pathFinding, FindPaths) {
+
+}
+
+TEST(_pathFinding, FindAllPaths) {
+
+}
+
+TEST(_pathFinding, InsertPathsIntoArray) {
+
+}

@@ -74,3 +74,18 @@ TEST(_VisibilityGraph, NodesOnFlatPlaneWithWallDontConnect) {
 	}
 }
 
+///
+///	The following are tests for the code samples for HF::AnalysisMethods::VisibilityGraph
+///
+
+TEST(_visibilityGraph, AllToAll) {
+
+}
+
+TEST(_visibilityGraph, GroupToGroup) {
+
+}
+
+TEST(_visibilityGraph, AllToAllUndirected) {
+
+}

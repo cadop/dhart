@@ -169,3 +169,91 @@ TEST(_MeshInfo, CanReproduceInputArray) {
 	
 	CompareVertArrays(raw_verts, MI[0].GetVertsAsArrays());
 }
+
+///
+///	The following are tests for the code samples for HF::Geometry
+///
+
+/// start objloader.h
+TEST(_meshInfo, LoadMeshObjectsStrValue) {
+
+}
+
+TEST(_meshInfo, LoadMeshObjectsStrRef) {
+
+}
+
+TEST(_meshInfo, LoadRawVertices) {
+
+}
+/// end objloader.h
+
+TEST(_meshInfo, ConstructorDefault) {
+
+}
+
+TEST(_meshInfo, ConstructorParamCoordsAsArray) {
+
+}
+
+TEST(_meshInfo, ConstructorParamCoordsAsFloat) {
+
+}
+
+TEST(_meshInfo, AddVertsAsArray) {
+
+}
+
+TEST(_meshInfo, AddVertsAsFloatAndIndices) {
+
+}
+
+TEST(_meshInfo, NumVerts) {
+
+}
+
+TEST(_meshInfo, NumTris) {
+
+}
+
+TEST(_meshInfo, ConvertToRhinoCoordinates) {
+
+}
+
+TEST(_meshInfo, ConvertToOBJCoordinates) {
+
+}
+
+TEST(_meshInfo, PerformRotation) {
+
+}
+
+TEST(_meshInfo, GetMeshID) {
+
+}
+
+TEST(_meshInfo, GetRawVertices) {
+
+}
+
+TEST(_meshInfo, GetRawIndices) {
+
+}
+
+TEST(_meshInfo, GetVertsAsArrays) {
+
+}
+
+TEST(_meshInfo, SetMeshID) {
+
+}
+
+TEST(_meshInfo, OperatorEquality) {
+
+}
+
+TEST(_meshInfo, OperatorIndex) {
+
+}
+
+
