@@ -355,10 +355,10 @@ TEST(_pathFinding, InsertPathsIntoArray) {
 	std::unique_ptr<int[]> result_sizes(new int[MAX_SIZE]);
 
 	// Retrieve raw pointers so their addresses can be passed to InsertPathsIntoArray
-	
 	HF::SpatialStructures::Path* ppath = result_paths.get();
 	HF::SpatialStructures::PathMember* pmembers = result_path_members.get();
 	int* psizes = result_sizes.get();
 
+	// Use InsertPathsIntoArray
 	HF::Pathfinding::InsertPathsIntoArray(boostGraph.get(), parents, children, &ppath, &pmembers, psizes);
 }
