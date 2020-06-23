@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['_7econnection_147',['~Connection',['../class_h_f_1_1_d_b_1_1_connection.html#a8bc2548efafa31ad284ea1e312b3be07',1,'HF::DB::Connection']]],
-  ['_7eembreeraytracer_148',['~EmbreeRayTracer',['../class_h_f_1_1_ray_tracer_1_1_embree_ray_tracer.html#a2948458e764f0294996c91b00356073e',1,'HF::RayTracer::EmbreeRayTracer']]]
+  ['x_404',['x',['../a00175.html#aad8e270f026ac9dd20ee294b2b1a21de',1,'HF::RayTracer::Vertex::x()'],['../a01065.html#af1dd2557d9f2d048ff3af3776b796b4f',1,'HF::RayTracer::FullRayRequest::x()'],['../a01101.html#a78dfebaa44da09b03d7ca15445c8d222',1,'HF::SpatialStructures::Node::x()']]]
 ];

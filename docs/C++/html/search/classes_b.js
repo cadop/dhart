@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['node_181',['Node',['../struct_h_f_1_1_spatial_structures_1_1_node.html',1,'HF::SpatialStructures']]]
+  ['rayrequestcollection_433',['RayRequestCollection',['../a01077.html',1,'HF::RayTracer']]],
+  ['rayrequestlite_434',['RayRequestLite',['../a01073.html',1,'HF::RayTracer']]],
+  ['rayresult_435',['RayResult',['../a01117.html',1,'']]]
 ];

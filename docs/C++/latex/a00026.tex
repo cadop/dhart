@@ -1,0 +1,57 @@
+\hypertarget{a00026}{}\doxysection{Cpp/analysismethods/src/view\+\_\+analysis.h File Reference}
+\label{a00026}\index{Cpp/analysismethods/src/view\_analysis.h@{Cpp/analysismethods/src/view\_analysis.h}}
+
+
+Contains declarations for the for \mbox{\hyperlink{a00168}{View\+Analysis}}.  
+
+
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$array$>$}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{a00171}{HF}}
+\begin{DoxyCompactList}\small\item\em Output C\+SR for interop with other languages \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00174}{H\+F\+::\+Spatial\+Structures}}
+\item 
+ \mbox{\hyperlink{a00175}{H\+F\+::\+Ray\+Tracer}}
+\item 
+ \mbox{\hyperlink{a00173}{H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis}}
+\item 
+ \mbox{\hyperlink{a00172}{H\+F\+::\+Analysis\+Methods}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{a00173_a0a616a205221414bf7aa28966b461dec}{H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}} \{ \newline
+\mbox{\hyperlink{a00173_a0a616a205221414bf7aa28966b461deca4905ac9d6a22bdfc1ae096094ce6248d}{H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+C\+O\+U\+NT}} = 0, 
+\mbox{\hyperlink{a00173_a0a616a205221414bf7aa28966b461deca6970bdc2201030b9c03fbdcf3973858a}{H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+S\+UM}} = 1, 
+\mbox{\hyperlink{a00173_a0a616a205221414bf7aa28966b461deca16de38737a9f8366e9b2042b4e9b6290}{H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+A\+V\+E\+R\+A\+GE}} = 2, 
+\mbox{\hyperlink{a00173_a0a616a205221414bf7aa28966b461deca26a4b44a837bf97b972628509912b4a5}{H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+M\+AX}} = 3, 
+\newline
+\mbox{\hyperlink{a00173_a0a616a205221414bf7aa28966b461decace31e2a082d17e038fcc6e3006166653}{H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+M\+IN}} = 4
+ \}
+\begin{DoxyCompactList}\small\item\em The type of aggregation to use for View\+Analysis\+Aggregate \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ std\+::array$<$ float, 3 $>$ $>$ \mbox{\hyperlink{a00168_ga9fc392fe8fc058674ffd5f4c8273a714}{H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+Fibbonacci\+Distribute\+Points}} (int num\+\_\+points, float upwards\+\_\+fov=50.\+0f, float downward\+\_\+fov=70.\+0f)
+\begin{DoxyCompactList}\small\item\em Evenly distribute a set of points around a sphere centered at the origin. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{a01065}{H\+F\+::\+Ray\+Tracer\+::\+Full\+Ray\+Request}} $>$ $>$ \mbox{\hyperlink{a00173_a1e3455e890bf7cbaf0e1974c17a37584}{H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+Spherical\+View\+Analysis\+With\+Ray\+Requests}} (\mbox{\hyperlink{a01061}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&ert, const std\+::vector$<$ \mbox{\hyperlink{a01101}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \&nodes, int max\+\_\+rays, float height=1.\+7f)
+\begin{DoxyCompactList}\small\item\em Conduct view analysis and get ray requests as the result \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a00173_abd3ed7f9595c30784ca668bf886a8d77}{H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+Aggregate}} (float \&out\+\_\+total, float new\+\_\+value, const \mbox{\hyperlink{a00152_a8a1aa9474094ff70818051c921c0537f}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}} agg\+\_\+type, int count=0)
+\item 
+std\+::vector$<$ float $>$ \mbox{\hyperlink{a00173_a03b0855fd4aef49007db04ebb368a243}{H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+Spherical\+View\+Analysis\+Average\+Distance}} (\mbox{\hyperlink{a01061}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&ert, const std\+::vector$<$ \mbox{\hyperlink{a01101}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ Nodes, int max\+\_\+rays, float height=1.\+7f)
+\begin{DoxyCompactList}\small\item\em Conduct view analysis with hardcoded embree raytracer \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename R\+ES , typename RT , typename N $>$ }\\std\+::vector$<$ R\+ES $>$ \mbox{\hyperlink{a00168_ga8090bf1d24c0cff934daba1c76d82ba6}{H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+Spherical\+View\+Analysis}} (RT \&ray\+\_\+tracer, const std\+::vector$<$ N $>$ \&Nodes, int num\+\_\+rays, float upward\+\_\+limit=50.\+0f, float downward\+\_\+limit=70.\+0f, float height=1.\+7f)
+\begin{DoxyCompactList}\small\item\em Conduct view analysis with any Raytracer in parallel. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename RT , typename N $>$ }\\std\+::vector$<$ float $>$ \mbox{\hyperlink{a00168_ga249100bce7370ba4202f47294f179f81}{H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+Spherical\+Rayshoot\+With\+Any\+R\+T\+For\+Distance}} (RT \&ray\+\_\+tracer, const std\+::vector$<$ N $>$ \&Nodes, int num\+\_\+rays, float upward\+\_\+limit=50.\+0f, float downward\+\_\+limit=70.\+0f, float height=1.\+7f, const \mbox{\hyperlink{a00152_a8a1aa9474094ff70818051c921c0537f}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}} aggregation=\mbox{\hyperlink{a00152_a8a1aa9474094ff70818051c921c0537fa6970bdc2201030b9c03fbdcf3973858a}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+S\+UM}})
+\begin{DoxyCompactList}\small\item\em Conduct view analysis and recieve a summarized set of results for each node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Contains declarations for the for \mbox{\hyperlink{a00168}{View\+Analysis}}. 
+

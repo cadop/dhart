@@ -1,0 +1,97 @@
+\hypertarget{a00095}{}\doxysection{Cpp/spatialstructures/src/\+Edge.h File Reference}
+\label{a00095}\index{Cpp/spatialstructures/src/Edge.h@{Cpp/spatialstructures/src/Edge.h}}
+
+
+Header file for an Edge data type, used by a graph A\+DT.  
+
+
+{\ttfamily \#include $<$node.\+h$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{a01081}{H\+F\+::\+Spatial\+Structures\+::\+Edge}}
+\begin{DoxyCompactList}\small\item\em Indicates a connection between two nodes \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a00174_a01085}{H\+F\+::\+Spatial\+Structures\+::\+Int\+Edge}}
+\begin{DoxyCompactList}\small\item\em Like an edge, but without the node attached since that isn\textquotesingle{}t always relevant.  \mbox{\hyperlink{a00174_a01085}{More...}}\end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a00174_a01089}{H\+F\+::\+Spatial\+Structures\+::\+Edge\+Set}}
+\begin{DoxyCompactList}\small\item\em A collection of edges for a specific node  \mbox{\hyperlink{a00174_a01089}{More...}}\end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{a00171}{HF}}
+\begin{DoxyCompactList}\small\item\em Output C\+SR for interop with other languages \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00174}{H\+F\+::\+Spatial\+Structures}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{a00174_af0378d900074d484ba791d4317e5935e}{H\+F\+::\+Spatial\+Structures\+::\+S\+T\+EP}} \{ \newline
+\mbox{\hyperlink{a00174_af0378d900074d484ba791d4317e5935ea7a2b5bf64195a97a6b132bf9c58d0bf9}{H\+F\+::\+Spatial\+Structures\+::\+N\+O\+T\+\_\+\+C\+O\+N\+N\+E\+C\+T\+ED}} = 0, 
+\mbox{\hyperlink{a00174_af0378d900074d484ba791d4317e5935ea45ef4ea34d22b5d90e23d61af2f1f51a}{H\+F\+::\+Spatial\+Structures\+::\+N\+O\+NE}} = 1, 
+\mbox{\hyperlink{a00174_af0378d900074d484ba791d4317e5935ea599bf51c4226a80ada6f743f6e9acd5c}{H\+F\+::\+Spatial\+Structures\+::\+UP}} = 2, 
+\mbox{\hyperlink{a00174_af0378d900074d484ba791d4317e5935ea023b84d27813ed1b354da97011695e98}{H\+F\+::\+Spatial\+Structures\+::\+D\+O\+WN}} = 3, 
+\newline
+\mbox{\hyperlink{a00174_af0378d900074d484ba791d4317e5935eaa734acd80348ed3c2f2df367e7ab1bac}{H\+F\+::\+Spatial\+Structures\+::\+O\+V\+ER}} = 4
+ \}
+\begin{DoxyCompactList}\small\item\em Describes the type of step an edge connects to \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Header file for an Edge data type, used by a graph A\+DT. 
+
+\begin{DoxyAuthor}{Author}
+T\+BA 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+06 Jun 2020 
+\end{DoxyDate}
+
+
+\doxysubsection{Class Documentation}
+\index{HF::SpatialStructures::IntEdge@{HF::SpatialStructures::IntEdge}}\label{a01085}
+\Hypertarget{a00174_a01085}
+\doxysubsubsection{struct HF\+::Spatial\+Structures\+::Int\+Edge}
+Like an edge, but without the node attached since that isn\textquotesingle{}t always relevant. 
+
+
+
+Definition at line 59 of file Edge.\+h.
+
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00174_a7662d9deb8c69743b37c0c8da3f51610}\label{a00174_a7662d9deb8c69743b37c0c8da3f51610}} 
+int&
+child&
+Identifier of child node. \\
+\hline
+
+\mbox{\Hypertarget{a00174_a4c5bcbef0f0b977f2bbf4495939c9f18}\label{a00174_a4c5bcbef0f0b977f2bbf4495939c9f18}} 
+float&
+weight&
+Weight of edge. \\
+\hline
+
+\end{DoxyFields}
+\index{HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}}\label{a01089}
+\Hypertarget{a00174_a01089}
+\doxysubsubsection{struct HF\+::Spatial\+Structures\+::Edge\+Set}
+A collection of edges for a specific node 
+
+
+
+Definition at line 67 of file Edge.\+h.
+
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00174_ae0ed1fa60810e109100548a03e10259c}\label{a00174_ae0ed1fa60810e109100548a03e10259c}} 
+vector$<$ \mbox{\hyperlink{a00174_a01085}{IntEdge}} $>$&
+children&
+vector of \mbox{\hyperlink{a00174_a01085}{Int\+Edge}} (children) \\
+\hline
+
+\mbox{\Hypertarget{a00174_a1cf561c1c38a93316f15ac2ab29fc8f4}\label{a00174_a1cf561c1c38a93316f15ac2ab29fc8f4}} 
+int&
+parent&
+Identifier of parent node. \\
+\hline
+
+\end{DoxyFields}

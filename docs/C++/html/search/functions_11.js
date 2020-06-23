@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['_7econnection_283',['~Connection',['../class_h_f_1_1_d_b_1_1_connection.html#a8bc2548efafa31ad284ea1e312b3be07',1,'HF::DB::Connection']]],
-  ['_7eembreeraytracer_284',['~EmbreeRayTracer',['../class_h_f_1_1_ray_tracer_1_1_embree_ray_tracer.html#a2948458e764f0294996c91b00356073e',1,'HF::RayTracer::EmbreeRayTracer']]]
+  ['vectorstobuffers_697',['VectorsToBuffers',['../a01025.html#ab6c9f34df6ad1a8e357d5a78b5f6b583',1,'HF::Geometry::MeshInfo::VectorsToBuffers()'],['../a00175.html#a9a8051c9b70fc0ae60337d4a38bf5f57',1,'HF::RayTracer::vectorsToBuffers()']]]
 ];

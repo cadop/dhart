@@ -1,0 +1,82 @@
+\hypertarget{a00047}{}\doxysection{Cpp/objloader/src/meshinfo.h File Reference}
+\label{a00047}\index{Cpp/objloader/src/meshinfo.h@{Cpp/objloader/src/meshinfo.h}}
+
+
+Source file for Mesh\+Info.  
+
+
+{\ttfamily \#include $<$Dense$>$}\newline
+{\ttfamily \#include $<$array$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{a01021}{std\+::hash$<$ std\+::array$<$ float, 3 $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Template specialization of std\+::hash, using std\+::array$<$float, 3$>$ as type. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{a01025}{H\+F\+::\+Geometry\+::\+Mesh\+Info}}
+\begin{DoxyCompactList}\small\item\em Holds vertices and some other information about a specific mesh \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{a00171}{HF}}
+\begin{DoxyCompactList}\small\item\em Output C\+SR for interop with other languages \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00178}{H\+F\+::\+Geometry}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename SizeT $>$ }\\void \mbox{\hyperlink{a00047_a78d69e3306ec9cf190f79b72217f2340}{std\+::array\+\_\+hash\+\_\+combine\+\_\+impl}} (SizeT \&seed, SizeT value)
+\begin{DoxyCompactList}\small\item\em Used to create a seed \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Source file for Mesh\+Info. 
+
+Header file for Mesh\+Info.
+
+\begin{DoxyAuthor}{Author}
+T\+BA 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+16 Jun 2020 
+\end{DoxyDate}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{a00047_a78d69e3306ec9cf190f79b72217f2340}\label{a00047_a78d69e3306ec9cf190f79b72217f2340}} 
+\index{meshinfo.h@{meshinfo.h}!array\_hash\_combine\_impl@{array\_hash\_combine\_impl}}
+\index{array\_hash\_combine\_impl@{array\_hash\_combine\_impl}!meshinfo.h@{meshinfo.h}}
+\doxysubsubsection{\texorpdfstring{array\_hash\_combine\_impl()}{array\_hash\_combine\_impl()}}
+{\footnotesize\ttfamily template$<$typename SizeT $>$ \\
+void std\+::array\+\_\+hash\+\_\+combine\+\_\+impl (\begin{DoxyParamCaption}\item[{SizeT \&}]{seed,  }\item[{SizeT}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Used to create a seed 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em SizeT} & Integral type, such as size\+\_\+t (implementation defined)\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::size\_t seed\_in = 0;}
+\DoxyCodeLine{std::size\_t value\_in = VALUE\_USER\_DEFINED;  \textcolor{comment}{// user-\/defined value for seed}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// seed\_in is passed by reference}}
+\DoxyCodeLine{std::array\_hash\_combine\_impl<size\_t>(seed\_in, value\_in);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// seed\_in has now been given a value by array\_hash\_combine\_impl}}
+\end{DoxyCode}
+ 
+
+Definition at line 32 of file meshinfo.\+h.
+
+
+
+References std\+::array\+\_\+hash\+\_\+combine\+\_\+impl().
+
+
+
+Referenced by std\+::array\+\_\+hash\+\_\+combine\+\_\+impl(), and std\+::hash$<$ std\+::array$<$ float, 3 $>$ $>$\+::operator()().
+
