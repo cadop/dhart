@@ -134,29 +134,28 @@ namespace HF {
 			
 			/*!
 				\code{.cpp}
-					// In order to create a Boost graph, we must first create a
-					// HF::SpatialStructures::Graph instance first.
-			
-					using HF::SpatialStructures::Node;
-					using HF::SpatialStructures::Graph;
-			
+					// be sure to #include "boost_graph.h", #include "node.h", #include "graph.h", and #include <vector>
+
+					// In order to create a BoostGraph, we must first create a Graph instance first.
+					// We must prepare the nodes, their edges, and the weights (distances) of each edge.
+
 					// Create the nodes
-					Node node_0(12.0, 23.1, 34.2, 456);
-					Node node_1(45.3, 56.4, 67.5, 789);
-					Node node_2(55.5, 25.1, 85.2, 940);
-			
+					HF::SpatialStructures::Node node_0(1.0f, 1.0f, 2.0f);
+					HF::SpatialStructures::Node node_1(2.0f, 3.0f, 4.0f, 5);
+					HF::SpatialStructures::Node node_2(11.0f, 22.0f, 140.0f);
+
 					// Create a container (vector) of nodes
-					std::vector<Node> nodes = { node_0, node_1, node_2 };
-			
+					std::vector<HF::SpatialStructures::Node> nodes = { node_0, node_1, node_2 };
+
 					// Create matrices for edges and distances, edges.size() == distances().size()
-					std::vector<std::vector<int>> edges = { {1, 2, 3}, {4, 5, 6}, {7, 8, 9 } };
-					std::vector<std::vector<float>> distances = { {12.0, 23.1, 45.2}, {67.3, 89.4, 98.5}, {76.6, 54.7, 32.8} };
-			
+					std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
+					std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
+
 					// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
-					Graph g(edges, distances, nodes);
-			
-					// Passing Graph g to BoostGraph bg, by reference
-					BoostGraph bg(g);
+					HF::SpatialStructures::Graph graph(edges, distances, nodes);
+
+					// Passing Graph graph to BoostGraph bg, by reference
+					HF::Pathfinding::BoostGraph bg(graph);
 				\endcode
 			*/
 			BoostGraph(const HF::SpatialStructures::Graph& graph);
@@ -167,15 +166,33 @@ namespace HF {
 			
 			/*!
 				\code{.cpp}
+					// be sure to #include "boost_graph.h", #include "node.h", #include "graph.h", and #include <vector>
+
+					// In order to create a BoostGraph, we must first create a Graph instance first.
+					// We must prepare the nodes, their edges, and the weights (distances) of each edge.
+
+					// Create the nodes
+					HF::SpatialStructures::Node node_0(1.0f, 1.0f, 2.0f);
+					HF::SpatialStructures::Node node_1(2.0f, 3.0f, 4.0f, 5);
+					HF::SpatialStructures::Node node_2(11.0f, 22.0f, 140.0f);
+
+					// Create a container (vector) of nodes
+					std::vector<HF::SpatialStructures::Node> nodes = { node_0, node_1, node_2 };
+
+					// Create matrices for edges and distances, edges.size() == distances().size()
+					std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
+					std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
+
+					// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
+					HF::SpatialStructures::Graph graph(edges, distances, nodes);
+
 					// Begin scope
 					{
-						// Create a HF::SpatialStructures::Graph g here first.
-			
-						// Create a BoostGraph bg, from a Graph g (passing g by reference)
-						BoostGraph bg(g);
+						// Create a BoostGraph bg, from a Graph graph (passing g by reference)
+						HF::Pathfinding::BoostGraph bg(graph);
 					}
 					// End scope
-			
+
 					// When bg goes out of scope, BoostGraph::~BoostGraph is called
 					// An explicit call to BoostGraph::~BoostGraph is also made when
 					// invoking operator delete on a (BoostGraph *)
