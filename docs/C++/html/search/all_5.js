@@ -1,12 +1,16 @@
 var searchData=
 [
-  ['filenotfound_41',['FileNotFound',['../struct_h_f_1_1_exceptions_1_1_file_not_found.html',1,'HF::Exceptions']]],
-  ['fireanyray_42',['FireAnyRay',['../class_h_f_1_1_ray_tracer_1_1_embree_ray_tracer.html#a795f5be6b5cedf3c849e8c67d41e220f',1,'HF::RayTracer::EmbreeRayTracer']]],
-  ['fireocclusionray_43',['FireOcclusionRay',['../class_h_f_1_1_ray_tracer_1_1_embree_ray_tracer.html#a54809c56dbaada56b6692668bf33780d',1,'HF::RayTracer::EmbreeRayTracer::FireOcclusionRay(const std::array&lt; float, 3 &gt; &amp;origin, const std::array&lt; float, 3 &gt; &amp;direction, float max_dist=-1)'],['../class_h_f_1_1_ray_tracer_1_1_embree_ray_tracer.html#aaf5a611b81d21ff616fdff44b5fd4f30',1,'HF::RayTracer::EmbreeRayTracer::FireOcclusionRay(float x, float y, float z, float dx, float dy, float dz, float distance=-1, int mesh_id=-1)']]],
-  ['fireocclusionrays_44',['FireOcclusionRays',['../class_h_f_1_1_ray_tracer_1_1_embree_ray_tracer.html#a18e55d29b728c4c868883e20c2bf5883',1,'HF::RayTracer::EmbreeRayTracer']]],
-  ['fireocclusionrequests_45',['FireOcclusionRequests',['../class_h_f_1_1_ray_tracer_1_1_embree_ray_tracer.html#a2fd625932160afeebd0169967d733217',1,'HF::RayTracer::EmbreeRayTracer']]],
-  ['fireray_46',['FireRay',['../class_h_f_1_1_ray_tracer_1_1_embree_ray_tracer.html#a61aa9665f98c3383c2d5cbdef6e4ac00',1,'HF::RayTracer::EmbreeRayTracer::FireRay(std::array&lt; float, 3 &gt; &amp;origin, const std::array&lt; float, 3 &gt; &amp;dir, float distance=-1, int mesh_id=-1)'],['../class_h_f_1_1_ray_tracer_1_1_embree_ray_tracer.html#a5d8230c1d095cb539c5be8becaeb2d5d',1,'HF::RayTracer::EmbreeRayTracer::FireRay(float &amp;x, float &amp;y, float &amp;z, float dx, float dy, float dz, float distance=-1, int mesh_id=-1)']]],
-  ['firerequests_47',['FireRequests',['../class_h_f_1_1_ray_tracer_1_1_embree_ray_tracer.html#acc1fc8eaa0139696ec31362384a37d5f',1,'HF::RayTracer::EmbreeRayTracer']]],
-  ['forcepush_48',['forcePush',['../class_h_f_1_1_analysis_methods_1_1_unique_queue.html#af50bcd7fffb59767edbf7d5b6b5d69b6',1,'HF::AnalysisMethods::UniqueQueue']]],
-  ['fullrayrequest_49',['FullRayRequest',['../struct_h_f_1_1_ray_tracer_1_1_full_ray_request.html',1,'HF::RayTracer::FullRayRequest'],['../struct_h_f_1_1_ray_tracer_1_1_full_ray_request.html#a4f92e6cd7a91b65f12781eab6d8bad41',1,'HF::RayTracer::FullRayRequest::FullRayRequest(float x, float y, float z, float dx, float dy, float dz, float Distance=-1)'],['../struct_h_f_1_1_ray_tracer_1_1_full_ray_request.html#ae96c4c944750f00e950f134cd7838619',1,'HF::RayTracer::FullRayRequest::FullRayRequest()']]]
+  ['edge_107',['Edge',['../a01081.html',1,'HF::SpatialStructures::Edge'],['../a01081.html#aef0cf597e116d00ae3f4826578c14e7e',1,'HF::SpatialStructures::Edge::Edge()']]],
+  ['edge_2ecpp_108',['edge.cpp',['../a00092.html',1,'']]],
+  ['edge_2eh_109',['Edge.h',['../a00095.html',1,'']]],
+  ['edge_5fcost_110',['Edge_Cost',['../a00179.html#a01029',1,'HF::Pathfinding']]],
+  ['edge_5fmatrix_111',['edge_matrix',['../a01097.html#a77d4522c02692328c767ff439ca6511a',1,'HF::SpatialStructures::Graph']]],
+  ['edgeset_112',['EdgeSet',['../a00174.html#a01089',1,'HF::SpatialStructures']]],
+  ['eigen_113',['Eigen',['../a00181.html',1,'']]],
+  ['embree_5fray_5ftracer_114',['EMBREE_RAY_TRACER',['../a00071.html#a06bf78213fa612762b01a2b1959bd131',1,'embree_raytracer.h']]],
+  ['embree_5fraytracer_2ecpp_115',['embree_raytracer.cpp',['../a00068.html',1,'']]],
+  ['embree_5fraytracer_2eh_116',['embree_raytracer.h',['../a00071.html',1,'']]],
+  ['embreeraytracer_117',['EmbreeRayTracer',['../a01061.html',1,'HF::RayTracer::EmbreeRayTracer'],['../a01061.html#ac46476760e07cb2579eeb2b4c094522a',1,'HF::RayTracer::EmbreeRayTracer::EmbreeRayTracer()'],['../a01061.html#ab51061e309585cc48d58a6170ccea619',1,'HF::RayTracer::EmbreeRayTracer::EmbreeRayTracer(std::vector&lt; HF::Geometry::MeshInfo &gt; &amp;MI)'],['../a01061.html#a425bef2c0b6b26ee95aedb72089d84c6',1,'HF::RayTracer::EmbreeRayTracer::EmbreeRayTracer(const std::vector&lt; std::array&lt; float, 3 &gt;&gt; &amp;geometry)']]],
+  ['empty_118',['empty',['../a01005.html#a792665a25bcf313e5925247855b5f7d3',1,'HF::AnalysisMethods::UniqueQueue::empty()'],['../a01113.html#a3066bac2d76b5c8a28b35a8d1f6ace71',1,'HF::SpatialStructures::Path::empty()']]],
+  ['insertnewmesh_119',['InsertNewMesh',['../a01061.html#a8eb977b7d801e2f519dbd9a4d98d6e2a',1,'HF::RayTracer::EmbreeRayTracer']]]
 ];

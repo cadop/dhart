@@ -1,0 +1,433 @@
+\hypertarget{a00179}{}\doxysection{HF\+::Pathfinding Namespace Reference}
+\label{a00179}\index{HF::Pathfinding@{HF::Pathfinding}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{a01037}{Boost\+Graph}}
+\begin{DoxyCompactList}\small\item\em Holds the necessary state for the Boost pathfinding algorithm \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a01045}{Boost\+Graph\+Deleter}}
+\begin{DoxyCompactList}\small\item\em Forward declared to prevent clients from importing boost. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a00179_a01029}{Edge\+\_\+\+Cost}}
+\begin{DoxyCompactList}\small\item\em Represents the weight of an edge within a graph, used by graph\+\_\+t  \mbox{\hyperlink{a00179_a01029}{More...}}\end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a00179_a01033}{vertex\+\_\+data}}
+\begin{DoxyCompactList}\small\item\em Represents a vertex descriptor, used by graph\+\_\+t  \mbox{\hyperlink{a00179_a01033}{More...}}\end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{a00179_a6a7d0e8dbb7d77b728522649c8cdce20}{pair}} = std\+::pair$<$ int, int $>$
+\begin{DoxyCompactList}\small\item\em Alias for std\+::pair$<$int, int$>$ \end{DoxyCompactList}\item 
+typedef boost\+::compressed\+\_\+sparse\+\_\+row\+\_\+graph$<$ boost\+::directedS, \mbox{\hyperlink{a00179_a01033}{vertex\+\_\+data}}, \mbox{\hyperlink{a00179_a01029}{Edge\+\_\+\+Cost}} $>$ \mbox{\hyperlink{a00179_a9314d552e0a8092644fa080c9945bd25}{graph\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Alias for a graph type, a directed Compressed Sparse Row (C\+SR) graph See struct \mbox{\hyperlink{a00179_a01033}{vertex\+\_\+data}} and struct \mbox{\hyperlink{a00179_a01029}{Edge\+\_\+\+Cost}} \end{DoxyCompactList}\item 
+typedef boost\+::graph\+\_\+traits$<$ \mbox{\hyperlink{a00179_a9314d552e0a8092644fa080c9945bd25}{graph\+\_\+t}} $>$\+::\mbox{\hyperlink{a00179_aff4215affd9d683505478f5b7dcc1804}{vertex\+\_\+descriptor}} \mbox{\hyperlink{a00179_aff4215affd9d683505478f5b7dcc1804}{vertex\+\_\+descriptor}}
+\begin{DoxyCompactList}\small\item\em Alias for a vertex\+\_\+descriptor See graph\+\_\+t \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01113}{Path}} \mbox{\hyperlink{a00179_a47d06b1c4bd84f4d0a7519ea0e96ff02}{Find\+Path}} (\mbox{\hyperlink{a01037}{Boost\+Graph}} $\ast$bg, int start\+\_\+id, int end\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Find a path between points A and B \end{DoxyCompactList}\item 
+vector$<$ \mbox{\hyperlink{a01113}{Path}} $>$ \mbox{\hyperlink{a00179_a15badb9d0a17849de7b21105605c9c91}{Find\+Paths}} (\mbox{\hyperlink{a01037}{Boost\+Graph}} $\ast$bg, const std\+::vector$<$ int $>$ \&start\+\_\+points, const std\+::vector$<$ int $>$ \&end\+\_\+points)
+\begin{DoxyCompactList}\small\item\em More efficient than calling Find\+Path manually. Organises paths by starting point, calculates only one predecessor matrix per unique starting point, then finds a path for every pair. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a00179_a417084c97d0672af2da7739157a9d8c0}{Insert\+Paths\+Into\+Array}} (const \mbox{\hyperlink{a01037}{Boost\+Graph}} $\ast$bg, const std\+::vector$<$ int $>$ \&start\+\_\+points, const std\+::vector$<$ int $>$ \&end\+\_\+points, \mbox{\hyperlink{a01113}{H\+F\+::\+Spatial\+Structures\+::\+Path}} $\ast$$\ast$out\+\_\+paths, \mbox{\hyperlink{a01109}{H\+F\+::\+Spatial\+Structures\+::\+Path\+Member}} $\ast$$\ast$out\+\_\+path\+\_\+members, int $\ast$out\+\_\+sizes)
+\begin{DoxyCompactList}\small\item\em Runs Dijkstra\textquotesingle{}s Shortest Path Algorithm on a (\mbox{\hyperlink{a01037}{Boost\+Graph}} $\ast$) bg, and inserts the constructed paths into an array of (\mbox{\hyperlink{a01113}{H\+F\+::\+Spatial\+Structures\+::\+Path}} $\ast$), as well as the Path\+Members into an array of (\mbox{\hyperlink{a01109}{H\+F\+::\+Spatial\+Structures\+::\+Path\+Member}} $\ast$). \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{a01037}{Boost\+Graph}}, \mbox{\hyperlink{a01045}{Boost\+Graph\+Deleter}} $>$ \mbox{\hyperlink{a00179_aee466bf2324daa4b600cc59c90e78977}{Create\+Boost\+Graph}} (const \mbox{\hyperlink{a01097}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} \&g)
+\begin{DoxyCompactList}\small\item\em Create a new boost graph from the given H\+F\+Graph 
+\begin{DoxyParams}{Parameters}
+{\em g} & The desired Graph used to create a \mbox{\hyperlink{a01037}{Boost\+Graph}}\\
+\hline
+\end{DoxyParams}
+\end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{a01113}{H\+F\+::\+Spatial\+Structures\+::\+Path}} $>$ \mbox{\hyperlink{a00179_aca184278e9b8fe32fd9505e4f28e53e6}{Find\+All\+Paths}} (\mbox{\hyperlink{a01037}{Boost\+Graph}} $\ast$bg, int start\+\_\+id, int end\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Find a path from every node to every node (N\+O\+TE\+: Not implemented yet.) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Class Documentation}
+\index{HF::Pathfinding::Edge\_Cost@{HF::Pathfinding::Edge\_Cost}}\label{a01029}
+\Hypertarget{a00179_a01029}
+\doxysubsubsection{struct HF\+::Pathfinding\+::Edge\+\_\+\+Cost}
+Represents the weight of an edge within a graph, used by graph\+\_\+t 
+
+
+
+Definition at line 87 of file boost\+\_\+graph.\+h.
+
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00179_aefea62ffa2c7078ac7d9f2eefaa96e07}\label{a00179_aefea62ffa2c7078ac7d9f2eefaa96e07}} 
+float&
+weight&
+weight/cost of an edge \\
+\hline
+
+\end{DoxyFields}
+\index{HF::Pathfinding::vertex\_data@{HF::Pathfinding::vertex\_data}}\label{a01033}
+\Hypertarget{a00179_a01033}
+\doxysubsubsection{struct HF\+::Pathfinding\+::vertex\+\_\+data}
+Represents a vertex descriptor, used by graph\+\_\+t 
+
+
+
+Definition at line 94 of file boost\+\_\+graph.\+h.
+
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00179_a3f23d92f8d538033cf4096201083944e}\label{a00179_a3f23d92f8d538033cf4096201083944e}} 
+double&
+d&
+\\
+\hline
+
+\mbox{\Hypertarget{a00179_a77df9b09cb03d4029237496b485d77e3}\label{a00179_a77df9b09cb03d4029237496b485d77e3}} 
+graph\_traits$<$ compressed\_sparse\_row\_graph$<$ directedS $>$ $>$::\mbox{\hyperlink{a00179_aff4215affd9d683505478f5b7dcc1804}{vertex\_descriptor}}&
+p&
+A vertex\+\_\+descriptor for a directed Boost C\+SR graph. \\
+\hline
+
+\end{DoxyFields}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{a00179_a9314d552e0a8092644fa080c9945bd25}\label{a00179_a9314d552e0a8092644fa080c9945bd25}} 
+\index{HF::Pathfinding@{HF::Pathfinding}!graph\_t@{graph\_t}}
+\index{graph\_t@{graph\_t}!HF::Pathfinding@{HF::Pathfinding}}
+\doxysubsubsection{\texorpdfstring{graph\_t}{graph\_t}}
+{\footnotesize\ttfamily typedef boost\+::compressed\+\_\+sparse\+\_\+row\+\_\+graph$<$ boost\+::directedS, \mbox{\hyperlink{a00179_a01033}{vertex\+\_\+data}}, \mbox{\hyperlink{a00179_a01029}{Edge\+\_\+\+Cost}} $>$ \mbox{\hyperlink{a00179_a9314d552e0a8092644fa080c9945bd25}{H\+F\+::\+Pathfinding\+::graph\+\_\+t}}}
+
+
+
+Alias for a graph type, a directed Compressed Sparse Row (C\+SR) graph See struct \mbox{\hyperlink{a00179_a01033}{vertex\+\_\+data}} and struct \mbox{\hyperlink{a00179_a01029}{Edge\+\_\+\+Cost}} 
+
+
+
+Definition at line 109 of file boost\+\_\+graph.\+h.
+
+\mbox{\Hypertarget{a00179_a6a7d0e8dbb7d77b728522649c8cdce20}\label{a00179_a6a7d0e8dbb7d77b728522649c8cdce20}} 
+\index{HF::Pathfinding@{HF::Pathfinding}!pair@{pair}}
+\index{pair@{pair}!HF::Pathfinding@{HF::Pathfinding}}
+\doxysubsubsection{\texorpdfstring{pair}{pair}}
+{\footnotesize\ttfamily typedef std\+::pair$<$ int, int $>$ \mbox{\hyperlink{a00179_a6a7d0e8dbb7d77b728522649c8cdce20}{H\+F\+::\+Pathfinding\+::pair}}}
+
+
+
+Alias for std\+::pair$<$int, int$>$ 
+
+
+
+Definition at line 82 of file boost\+\_\+graph.\+h.
+
+\mbox{\Hypertarget{a00179_aff4215affd9d683505478f5b7dcc1804}\label{a00179_aff4215affd9d683505478f5b7dcc1804}} 
+\index{HF::Pathfinding@{HF::Pathfinding}!vertex\_descriptor@{vertex\_descriptor}}
+\index{vertex\_descriptor@{vertex\_descriptor}!HF::Pathfinding@{HF::Pathfinding}}
+\doxysubsubsection{\texorpdfstring{vertex\_descriptor}{vertex\_descriptor}}
+{\footnotesize\ttfamily typedef boost\+::graph\+\_\+traits$<$ \mbox{\hyperlink{a00179_a9314d552e0a8092644fa080c9945bd25}{graph\+\_\+t}} $>$\+::\mbox{\hyperlink{a00179_aff4215affd9d683505478f5b7dcc1804}{vertex\+\_\+descriptor}} \mbox{\hyperlink{a00179_aff4215affd9d683505478f5b7dcc1804}{H\+F\+::\+Pathfinding\+::vertex\+\_\+descriptor}}}
+
+
+
+Alias for a vertex\+\_\+descriptor See graph\+\_\+t 
+
+
+
+Definition at line 115 of file boost\+\_\+graph.\+h.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{a00179_aee466bf2324daa4b600cc59c90e78977}\label{a00179_aee466bf2324daa4b600cc59c90e78977}} 
+\index{HF::Pathfinding@{HF::Pathfinding}!CreateBoostGraph@{CreateBoostGraph}}
+\index{CreateBoostGraph@{CreateBoostGraph}!HF::Pathfinding@{HF::Pathfinding}}
+\doxysubsubsection{\texorpdfstring{CreateBoostGraph()}{CreateBoostGraph()}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{a01037}{Boost\+Graph}}, \mbox{\hyperlink{a01045}{Boost\+Graph\+Deleter}} $>$ H\+F\+::\+Pathfinding\+::\+Create\+Boost\+Graph (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01097}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} \&}]{g }\end{DoxyParamCaption})}
+
+
+
+Create a new boost graph from the given H\+F\+Graph 
+\begin{DoxyParams}{Parameters}
+{\em g} & The desired Graph used to create a \mbox{\hyperlink{a01037}{Boost\+Graph}}\\
+\hline
+\end{DoxyParams}
+
+
+\begin{DoxyReturn}{Returns}
+A smart pointer (unique\+\_\+ptr) of type \mbox{\hyperlink{a01037}{Boost\+Graph}}, created from the H\+F\+Graph
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{We must first have a \mbox{\hyperlink{a01097}{HF::SpatialStructures::Graph}} instance first.}
+\DoxyCodeLine{}
+\DoxyCodeLine{using \mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}};          \textcolor{comment}{// for Node}}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01097}{HF::SpatialStructures::Graph}};         \textcolor{comment}{// for Graph}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the nodes}}
+\DoxyCodeLine{Node node\_0(12.0, 23.1, 34.2, 456);}
+\DoxyCodeLine{Node node\_1(45.3, 56.4, 67.5, 789);}
+\DoxyCodeLine{Node node\_2(55.5, 25.1, 85.2, 940);}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{// Create a container (vector) of nodes}}
+\DoxyCodeLine{std::vector<Node> nodes = \{ node\_0, node\_1, node\_2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create matrices for edges and distances, edges.size() == distances().size()}}
+\DoxyCodeLine{   std::vector<std::vector<int>> edges = \{ \{1, 2, 3\}, \{4, 5, 6\}, \{7, 8, 9 \} \};}
+\DoxyCodeLine{std::vector<std::vector<float>> distances = \{ \{12.0, 23.1, 45.2\}, \{67.3, 89.4, 98.5\}, \{76.6, 54.7, 32.8\} \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{// Create a Graph -\/ note that nodes, edges, and distances are passed by reference}}
+\DoxyCodeLine{Graph g(edges, distances, nodes);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Now we can create a BoostGraph -\/ note that Graph g is passed by reference}}
+\DoxyCodeLine{std::unique\_ptr<BoostGraph, BoostGraphDeleter> boostGraph = \mbox{\hyperlink{a00179_aee466bf2324daa4b600cc59c90e78977}{CreateBoostGraph}}(g);}
+\end{DoxyCode}
+ 
+\end{DoxyReturn}
+
+
+Definition at line 185 of file path\+\_\+finder.\+cpp.
+
+
+
+Referenced by Create\+Path(), and Create\+Paths().
+
+\mbox{\Hypertarget{a00179_aca184278e9b8fe32fd9505e4f28e53e6}\label{a00179_aca184278e9b8fe32fd9505e4f28e53e6}} 
+\index{HF::Pathfinding@{HF::Pathfinding}!FindAllPaths@{FindAllPaths}}
+\index{FindAllPaths@{FindAllPaths}!HF::Pathfinding@{HF::Pathfinding}}
+\doxysubsubsection{\texorpdfstring{FindAllPaths()}{FindAllPaths()}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{a01113}{H\+F\+::\+Spatial\+Structures\+::\+Path}}$>$ H\+F\+::\+Pathfinding\+::\+Find\+All\+Paths (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01037}{Boost\+Graph}} $\ast$}]{bg,  }\item[{int}]{start\+\_\+id,  }\item[{int}]{end\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Find a path from every node to every node (N\+O\+TE\+: Not implemented yet.) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bg} & A \mbox{\hyperlink{a01037}{Boost\+Graph}} for the desired traversal\\
+\hline
+{\em start\+\_\+id} & Identifier for the starting node (start point)\\
+\hline
+{\em end\+\_\+id} & Identifier for the ending node (end point)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A std\+::vector of Path
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01113}{HF::SpatialStructures::Path}};      \textcolor{comment}{// for Path}}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01097}{HF::SpatialStructures::Graph}};     \textcolor{comment}{// for Graph}}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{// Build a Graph g with the following edges, then compress g}}
+\DoxyCodeLine{Graph g;}
+\DoxyCodeLine{g.\mbox{\hyperlink{a01097_a604a648f1f73d687ad4544d2ac163212}{addEdge}}(0, 1, 100);}
+\DoxyCodeLine{g.addEdge(0, 2, 50);}
+\DoxyCodeLine{g.addEdge(1, 3, 10);}
+\DoxyCodeLine{g.addEdge(2, 3, 10);}
+\DoxyCodeLine{g.Compress();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a std::unique\_ptr<BoostGraph, BoostGraphDeleter> from an HF::SpatialStructures::Graph g}}
+\DoxyCodeLine{   std::unique\_ptr<BoostGraph, BoostGraphDeleter> boostGraph = \mbox{\hyperlink{a00179_aee466bf2324daa4b600cc59c90e78977}{CreateBoostGraph}}(g);}
+\DoxyCodeLine{   }
+\DoxyCodeLine{   \textcolor{comment}{// Prepare range of IDs}}
+\DoxyCodeLine{   \textcolor{keywordtype}{int} begin\_id = 0;}
+\DoxyCodeLine{\textcolor{keywordtype}{int} end\_id = 3;}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{// Use std::unique\_ptr's get member function to retrieve a raw pointer}}
+\DoxyCodeLine{std::vector<Path> found\_paths = \mbox{\hyperlink{a00179_aca184278e9b8fe32fd9505e4f28e53e6}{FindAllPaths}}(boostGraph.get(), begin\_id, end\_id);}
+\end{DoxyCode}
+ \mbox{\Hypertarget{a00179_a47d06b1c4bd84f4d0a7519ea0e96ff02}\label{a00179_a47d06b1c4bd84f4d0a7519ea0e96ff02}} 
+\index{HF::Pathfinding@{HF::Pathfinding}!FindPath@{FindPath}}
+\index{FindPath@{FindPath}!HF::Pathfinding@{HF::Pathfinding}}
+\doxysubsubsection{\texorpdfstring{FindPath()}{FindPath()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01113}{H\+F\+::\+Spatial\+Structures\+::\+Path}} H\+F\+::\+Pathfinding\+::\+Find\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01037}{Boost\+Graph}} $\ast$}]{bg,  }\item[{int}]{start\+\_\+id,  }\item[{int}]{end\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Find a path between points A and B 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bg} & The boost graph containing edges/nodes \\
+\hline
+{\em start\+\_\+id} & ID of the starting node \\
+\hline
+{\em end\+\_\+id} & ID of the ending node \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A Path constructed using Dijkstra\textquotesingle{}s Shortest Path algorithm
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// We must first have a HF::SpatialStructures::Graph instance first.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}};          \textcolor{comment}{// for Node}}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01097}{HF::SpatialStructures::Graph}};         \textcolor{comment}{// for Graph}}
+\DoxyCodeLine{   \textcolor{keyword}{using} \mbox{\hyperlink{a01113}{HF::SpatialStructures::Path}};           \textcolor{comment}{// for Path}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the nodes}}
+\DoxyCodeLine{Node node\_0(12.0, 23.1, 34.2, 456);}
+\DoxyCodeLine{Node node\_1(45.3, 56.4, 67.5, 789);}
+\DoxyCodeLine{Node node\_2(55.5, 25.1, 85.2, 940);}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{// Create a container (vector) of nodes}}
+\DoxyCodeLine{std::vector<Node> nodes = \{ node\_0, node\_1, node\_2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create matrices for edges and distances, edges.size() == distances().size()}}
+\DoxyCodeLine{   std::vector<std::vector<int>> edges = \{ \{1, 2, 3\}, \{4, 5, 6\}, \{7, 8, 9 \} \};}
+\DoxyCodeLine{std::vector<std::vector<float>> distances = \{ \{12.0, 23.1, 45.2\}, \{67.3, 89.4, 98.5\}, \{76.6, 54.7, 32.8\} \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{// Create a Graph -\/ note that nodes, edges, and distances are passed by reference}}
+\DoxyCodeLine{Graph g(edges, distances, nodes);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Now we can create a BoostGraph -\/ note that Graph g is passed by reference}}
+\DoxyCodeLine{std::unique\_ptr<BoostGraph, BoostGraphDeleter> boostGraph = \mbox{\hyperlink{a00179_aee466bf2324daa4b600cc59c90e78977}{CreateBoostGraph}}(g);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Prepare the range of IDs (from Nodes)}}
+\DoxyCodeLine{\textcolor{keywordtype}{int} id\_begin = node\_0.id;       \textcolor{comment}{// id\_begin == 456}}
+\DoxyCodeLine{\textcolor{keywordtype}{int} id\_end = node\_2.id;         \textcolor{comment}{// id\_end == 940}}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{// Use the std::unique\_ptr::get function to retrieve a raw pointer for FindPath}}
+\DoxyCodeLine{   Path found\_path = \mbox{\hyperlink{a00179_a47d06b1c4bd84f4d0a7519ea0e96ff02}{FindPath}}(boostGraph.get(), id\_begin, id\_end);}
+\end{DoxyCode}
+ 
+
+Definition at line 102 of file path\+\_\+finder.\+cpp.
+
+
+
+References Build\+Distance\+And\+Predecessor(), Construct\+Shortest\+Path\+From\+Pred(), and H\+F\+::\+Pathfinding\+::\+Boost\+Graph\+::g.
+
+
+
+Referenced by Create\+Path().
+
+\mbox{\Hypertarget{a00179_a15badb9d0a17849de7b21105605c9c91}\label{a00179_a15badb9d0a17849de7b21105605c9c91}} 
+\index{HF::Pathfinding@{HF::Pathfinding}!FindPaths@{FindPaths}}
+\index{FindPaths@{FindPaths}!HF::Pathfinding@{HF::Pathfinding}}
+\doxysubsubsection{\texorpdfstring{FindPaths()}{FindPaths()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{a01113}{H\+F\+::\+Spatial\+Structures\+::\+Path}} $>$ H\+F\+::\+Pathfinding\+::\+Find\+Paths (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01037}{Boost\+Graph}} $\ast$}]{bg,  }\item[{const std\+::vector$<$ int $>$ \&}]{start\+\_\+points,  }\item[{const std\+::vector$<$ int $>$ \&}]{end\+\_\+points }\end{DoxyParamCaption})}
+
+
+
+More efficient than calling Find\+Path manually. Organises paths by starting point, calculates only one predecessor matrix per unique starting point, then finds a path for every pair. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & The boost graph containing edges/nodes \\
+\hline
+{\em start\+\_\+points} & Ordered list of starting points \\
+\hline
+{\em end\+\_\+points} & Ordered list of ending points \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a std\+::vector of Path, constructed using Dijkstra\textquotesingle{}s Shortest Path algorithm
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01113}{HF::SpatialStructures::Path}};      \textcolor{comment}{// for Path}}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01097}{HF::SpatialStructures::Graph}};     \textcolor{comment}{// for Graph}}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{// Build a Graph g with the following edges, then compress g}}
+\DoxyCodeLine{Graph g;}
+\DoxyCodeLine{g.\mbox{\hyperlink{a01097_a604a648f1f73d687ad4544d2ac163212}{addEdge}}(0, 1, 100);}
+\DoxyCodeLine{g.addEdge(0, 2, 50);}
+\DoxyCodeLine{g.addEdge(1, 3, 10);}
+\DoxyCodeLine{g.addEdge(2, 3, 10);}
+\DoxyCodeLine{g.Compress();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a std::unique\_ptr<BoostGraph, BoostGraphDeleter> from an HF::SpatialStructures::Graph g}}
+\DoxyCodeLine{   std::unique\_ptr<BoostGraph, BoostGraphDeleter> boostGraph = \mbox{\hyperlink{a00179_aee466bf2324daa4b600cc59c90e78977}{CreateBoostGraph}}(g);}
+\DoxyCodeLine{   }
+\DoxyCodeLine{   \textcolor{comment}{// Create a vector of 100 int, initialized to value 0}}
+\DoxyCodeLine{   std::vector<int> start\_vec(100, 0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a vector of 100 int, initialized to value 3}}
+\DoxyCodeLine{   std::vector<int> end\_vec(100, 3);}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{// Use std::unique\_ptr's get member function to retrieve a raw pointer}}
+\DoxyCodeLine{std::vector<Path> found\_paths = \mbox{\hyperlink{a00179_a15badb9d0a17849de7b21105605c9c91}{FindPaths}}(boostGraph.get(), start\_vec, end\_vec);}
+\end{DoxyCode}
+ 
+
+Definition at line 109 of file path\+\_\+finder.\+cpp.
+
+
+
+References Build\+Distance\+And\+Predecessor(), Construct\+Shortest\+Path\+From\+Pred(), and H\+F\+::\+Pathfinding\+::\+Boost\+Graph\+::g.
+
+\mbox{\Hypertarget{a00179_a417084c97d0672af2da7739157a9d8c0}\label{a00179_a417084c97d0672af2da7739157a9d8c0}} 
+\index{HF::Pathfinding@{HF::Pathfinding}!InsertPathsIntoArray@{InsertPathsIntoArray}}
+\index{InsertPathsIntoArray@{InsertPathsIntoArray}!HF::Pathfinding@{HF::Pathfinding}}
+\doxysubsubsection{\texorpdfstring{InsertPathsIntoArray()}{InsertPathsIntoArray()}}
+{\footnotesize\ttfamily void H\+F\+::\+Pathfinding\+::\+Insert\+Paths\+Into\+Array (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01037}{Boost\+Graph}} $\ast$}]{bg,  }\item[{const std\+::vector$<$ int $>$ \&}]{start\+\_\+points,  }\item[{const std\+::vector$<$ int $>$ \&}]{end\+\_\+points,  }\item[{\mbox{\hyperlink{a01113}{H\+F\+::\+Spatial\+Structures\+::\+Path}} $\ast$$\ast$}]{out\+\_\+paths,  }\item[{\mbox{\hyperlink{a01109}{H\+F\+::\+Spatial\+Structures\+::\+Path\+Member}} $\ast$$\ast$}]{out\+\_\+path\+\_\+members,  }\item[{int $\ast$}]{out\+\_\+sizes }\end{DoxyParamCaption})}
+
+
+
+Runs Dijkstra\textquotesingle{}s Shortest Path Algorithm on a (\mbox{\hyperlink{a01037}{Boost\+Graph}} $\ast$) bg, and inserts the constructed paths into an array of (\mbox{\hyperlink{a01113}{H\+F\+::\+Spatial\+Structures\+::\+Path}} $\ast$), as well as the Path\+Members into an array of (\mbox{\hyperlink{a01109}{H\+F\+::\+Spatial\+Structures\+::\+Path\+Member}} $\ast$). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bg} & Address of a \mbox{\hyperlink{a01037}{Boost\+Graph}}\\
+\hline
+{\em start\+\_\+points} & Vector of starting points\\
+\hline
+{\em end\+\_\+points} & Vector of ending points\\
+\hline
+{\em out\+\_\+paths} & Pointer to dynamically allocated array of \mbox{\hyperlink{a01113}{H\+F\+::\+Spatial\+Structures\+::\+Path}}\\
+\hline
+{\em out\+\_\+path\+\_\+members} & Pointer to dynamically allocated array of \mbox{\hyperlink{a01109}{H\+F\+::\+Spatial\+Structures\+::\+Path\+Member}}\\
+\hline
+\end{DoxyParams}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01113}{HF::SpatialStructures::Path}};          \textcolor{comment}{// for Path}}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01109}{HF::SpatialStructures::PathMember}};    \textcolor{comment}{// for PathMember}}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01097}{HF::SpatialStructures::Graph}};         \textcolor{comment}{// for Graph}}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{// Build a Graph g with the following edges, then compress g}}
+\DoxyCodeLine{Graph g;}
+\DoxyCodeLine{g.\mbox{\hyperlink{a01097_a604a648f1f73d687ad4544d2ac163212}{addEdge}}(0, 1, 100);}
+\DoxyCodeLine{g.addEdge(0, 2, 50);}
+\DoxyCodeLine{g.addEdge(1, 3, 10);}
+\DoxyCodeLine{g.addEdge(2, 3, 10);}
+\DoxyCodeLine{g.Compress();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a std::unique\_ptr<BoostGraph, BoostGraphDeleter> from an HF::SpatialStructures::Graph g}}
+\DoxyCodeLine{   std::unique\_ptr<BoostGraph, BoostGraphDeleter> boostGraph = \mbox{\hyperlink{a00179_aee466bf2324daa4b600cc59c90e78977}{CreateBoostGraph}}(g);}
+\DoxyCodeLine{   }
+\DoxyCodeLine{   \textcolor{comment}{// Create a vector of 100 int, initialized to value 0}}
+\DoxyCodeLine{   std::vector<int> start\_vec(100, 0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a vector of 100 int, initialized to value 3}}
+\DoxyCodeLine{   std::vector<int> end\_vec(100, 3);}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{// Create smart pointers to hold Paths, PathMembers, and the sizes}}
+\DoxyCodeLine{std::unique\_ptr<Path[]> result\_paths(\textcolor{keyword}{new} Path[MAX\_SIZE]);}
+\DoxyCodeLine{std::unique\_ptr<PathMember[]> result\_path\_members(\textcolor{keyword}{new} PathMember[MAX\_SIZE]);}
+\DoxyCodeLine{std::unique\_ptr<int[]> result\_sizes(\textcolor{keyword}{new} \textcolor{keywordtype}{int}[MAX\_SIZE]);}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{// Retrieve raw pointers so their addresses can be passed to InsertPathsIntoArray}}
+\DoxyCodeLine{   Path* ppath = result\_paths.get();}
+\DoxyCodeLine{   PathMember* pmembers = result\_path\_members.get();}
+\DoxyCodeLine{\textcolor{keywordtype}{int}* psizes = result\_sizes.get();}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{// Call InsertPathsIntoArray}}
+\DoxyCodeLine{   \mbox{\hyperlink{a00179_a417084c97d0672af2da7739157a9d8c0}{InsertPathsIntoArray}}(boostGraph.get(), start\_vec, end\_vec, \&ppath, \&pmembers, psizes);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// No need to call operator delete on result\_paths, result\_path\_members, or result\_sizes,}}
+\DoxyCodeLine{\textcolor{comment}{// as their memory resources are handled by std::unique\_ptr}}
+\end{DoxyCode}
+ 
+
+Definition at line 132 of file path\+\_\+finder.\+cpp.
+
+
+
+References Build\+Distance\+And\+Predecessor(), Construct\+Shortest\+Path\+From\+Pred(), H\+F\+::\+Pathfinding\+::\+Boost\+Graph\+::g, H\+F\+::\+Spatial\+Structures\+::\+Path\+::\+Get\+P\+M\+Pointer(), and H\+F\+::\+Spatial\+Structures\+::\+Path\+::size().
+
+
+
+Referenced by Create\+Paths().
+

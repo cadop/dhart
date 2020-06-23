@@ -1,0 +1,77 @@
+\hypertarget{a01045}{}\doxysection{HF\+::Pathfinding\+::Boost\+Graph\+Deleter Struct Reference}
+\label{a01045}\index{HF::Pathfinding::BoostGraphDeleter@{HF::Pathfinding::BoostGraphDeleter}}
+
+
+Forward declared to prevent clients from importing boost.  
+
+
+
+
+{\ttfamily \#include $<$path\+\_\+finder.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{a01045_a9a83be18f095f5e04d287412cc4bd1d5}{operator()}} (\mbox{\hyperlink{a01037}{Boost\+Graph}} $\ast$bg) const
+\begin{DoxyCompactList}\small\item\em Used to destroy a \mbox{\hyperlink{a01037}{Boost\+Graph}} \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Forward declared to prevent clients from importing boost. 
+
+Just deletes the \mbox{\hyperlink{a01037}{Boost\+Graph}}. This way clients don\textquotesingle{}t need any of the boost stuff (for std\+::unique\+\_\+ptr$<$\+T, Deleter$>$, T == typename/class, Deleter == user-\/supplied struct which contains an operator() for destroying the pointee)
+
+Definition at line 25 of file path\+\_\+finder.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a01045_a9a83be18f095f5e04d287412cc4bd1d5}\label{a01045_a9a83be18f095f5e04d287412cc4bd1d5}} 
+\index{HF::Pathfinding::BoostGraphDeleter@{HF::Pathfinding::BoostGraphDeleter}!operator()@{operator()}}
+\index{operator()@{operator()}!HF::Pathfinding::BoostGraphDeleter@{HF::Pathfinding::BoostGraphDeleter}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily void H\+F\+::\+Pathfinding\+::\+Boost\+Graph\+Deleter\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01037}{Boost\+Graph}} $\ast$}]{bg }\end{DoxyParamCaption}) const}
+
+
+
+Used to destroy a \mbox{\hyperlink{a01037}{Boost\+Graph}} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bg} & The address of a \mbox{\hyperlink{a01037}{Boost\+Graph}} (pointer to \mbox{\hyperlink{a01037}{Boost\+Graph}})\\
+\hline
+\end{DoxyParams}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{   \textcolor{comment}{// BoostGraphDeleter is needed by std::unique\_ptr to destroy a BoostGraph; it is not meant to be called directly.}}
+\DoxyCodeLine{\textcolor{comment}{// You do not want to pass the address of a stack-\/allocated BoostGraph to BoostGraphDeleter::operator().}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// BoostGraphDeleter's operator() calls operator delete on the (BoostGraph *) argument,}}
+\DoxyCodeLine{\textcolor{comment}{// and passing the address of a stack-\/allocated BoostGraph for said argument}}
+\DoxyCodeLine{\textcolor{comment}{// will result in undefined behavior.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{// In other words, don't do this:}}
+\DoxyCodeLine{}
+\DoxyCodeLine{   BoostGraphDeleter bg\_deleter;}
+\DoxyCodeLine{   }
+\DoxyCodeLine{   \textcolor{comment}{// Create a stack-\/allocated BoostGraph from a HF::SpatialStructures::Graph g}}
+\DoxyCodeLine{   BoostGraph boostGraph(g);        \textcolor{comment}{// not created using operator new}}
+\DoxyCodeLine{}
+\DoxyCodeLine{   \textcolor{comment}{// Using a BoostGraphDeleter on the (address of a) stack-\/allocated BoostGraph}}
+\DoxyCodeLine{bg\_deleter(\&boostGraph);        \textcolor{comment}{// calls operator delete for a (BoostGraph *)}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// The type BoostGraphDeleter is only for use with std::unique\_ptr.}}
+\DoxyCodeLine{\textcolor{comment}{// See BoostGraph::CreateBoostGraph for BoostGraphDeleter's intended use.}}
+\end{DoxyCode}
+ 
+
+Definition at line 189 of file path\+\_\+finder.\+cpp.
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/pathfinding/src/\mbox{\hyperlink{a00065}{path\+\_\+finder.\+h}}\item 
+Cpp/pathfinding/src/\mbox{\hyperlink{a00062}{path\+\_\+finder.\+cpp}}\end{DoxyCompactItemize}

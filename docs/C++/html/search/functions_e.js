@@ -1,5 +1,9 @@
 var searchData=
 [
-  ['setmeshid_279',['SetMeshID',['../class_h_f_1_1_geometry_1_1_mesh_info.html#a7d30016f14b635d17e6668fba38c7676',1,'HF::Geometry::MeshInfo']]],
-  ['size_280',['size',['../class_h_f_1_1_analysis_methods_1_1_unique_queue.html#a714234140a2c4a49eb5ba4418cd87c8f',1,'HF::AnalysisMethods::UniqueQueue::size()'],['../class_h_f_1_1_spatial_structures_1_1_graph.html#a2710af2a75976862d7a235793567d2f3',1,'HF::SpatialStructures::Graph::size()'],['../struct_h_f_1_1_spatial_structures_1_1_path.html#a28f61f0f57b38a5249a11a725d9d692b',1,'HF::SpatialStructures::Path::size()']]]
+  ['raydist_674',['RayDist',['../a01001.html#a004e901067ff86491b33aae4f33d33f2',1,'HF::AnalysisMethods::GraphGeneratorPrivate']]],
+  ['rayrequestcollection_675',['RayRequestCollection',['../a01077.html#a7f872e666a018d6e9cc35726c18bb6e6',1,'HF::RayTracer::RayRequestCollection']]],
+  ['recordresult_676',['RecordResult',['../a01073.html#a1bce6ede5955c0ae5263e287362c8a1f',1,'HF::RayTracer::RayRequestLite']]],
+  ['reverse_677',['Reverse',['../a01113.html#adf2bad9ac73dbdc436c365654d54ad98',1,'HF::SpatialStructures::Path']]],
+  ['rotatemesh_678',['RotateMesh',['../a00164.html#gaaae27ea29ec17a7f3def98c435622504',1,'RotateMesh(vector&lt; MeshInfo &gt; *mesh_to_rotate, float xrot, float yrot, float zrot):&#160;objloader_C.cpp'],['../a00164.html#gaaae27ea29ec17a7f3def98c435622504',1,'RotateMesh(std::vector&lt; HF::Geometry::MeshInfo &gt; *mesh_to_rotate, float xrot, float yrot, float zrot):&#160;objloader_C.cpp']]],
+  ['roundhf_679',['roundhf',['../a00174.html#a2663b7e0dd2b9fb87e582feddcd13a8c',1,'HF::SpatialStructures']]]
 ];

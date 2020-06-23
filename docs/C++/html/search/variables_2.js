@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['id_294',['id',['../struct_h_f_1_1_spatial_structures_1_1_node.html#a8212d00e6913abf0ca6fec1f2624b677',1,'HF::SpatialStructures::Node']]],
-  ['inner_5findices_295',['inner_indices',['../struct_h_f_1_1_spatial_structures_1_1_c_s_r_ptrs.html#a9a946e3ae6172a03c6a98e1dee39cc19',1,'HF::SpatialStructures::CSRPtrs']]]
+  ['edge_5fmatrix_720',['edge_matrix',['../a01097.html#a77d4522c02692328c767ff439ca6511a',1,'HF::SpatialStructures::Graph']]]
 ];

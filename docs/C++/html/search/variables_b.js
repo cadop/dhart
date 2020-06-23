@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['was_5ffired_310',['was_fired',['../struct_h_f_1_1_ray_tracer_1_1_full_ray_request.html#af6cccf4f2ebdcba8c0a30d8d1f233b78',1,'HF::RayTracer::FullRayRequest']]],
-  ['weight_311',['weight',['../struct_h_f_1_1_spatial_structures_1_1_int_edge.html#a4c5bcbef0f0b977f2bbf4495939c9f18',1,'HF::SpatialStructures::IntEdge']]]
+  ['ray_5ftracer_750',['ray_tracer',['../a00997.html#a9c3191a3e49b8ab9a83d87c889bf3793',1,'HF::AnalysisMethods::GraphGenerator']]],
+  ['requests_751',['requests',['../a01077.html#a5e67308128c6653ae52dbe4e3d408a67',1,'HF::RayTracer::RayRequestCollection']]],
+  ['rounding_5fprecision_752',['ROUNDING_PRECISION',['../a00174.html#a0140105869479399be75147c8f77e724',1,'HF::SpatialStructures']]],
+  ['rows_753',['rows',['../a01093.html#ab7ef161d6dfc8b606c120cbf5181ed68',1,'HF::SpatialStructures::CSRPtrs']]]
 ];

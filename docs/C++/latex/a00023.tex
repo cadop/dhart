@@ -1,0 +1,47 @@
+\hypertarget{a00023}{}\doxysection{Cpp/analysismethods/src/view\+\_\+analysis.cpp File Reference}
+\label{a00023}\index{Cpp/analysismethods/src/view\_analysis.cpp@{Cpp/analysismethods/src/view\_analysis.cpp}}
+
+
+Contains implementation for \mbox{\hyperlink{a00168}{View\+Analysis}}.  
+
+
+{\ttfamily \#include $<$view\+\_\+analysis.\+h$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$array$>$}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$embree\+\_\+raytracer.\+h$>$}\newline
+{\ttfamily \#include $<$Ray\+Request.\+h$>$}\newline
+{\ttfamily \#include $<$node.\+h$>$}\newline
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{a00171}{HF}}
+\begin{DoxyCompactList}\small\item\em Output C\+SR for interop with other languages \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00172}{H\+F\+::\+Analysis\+Methods}}
+\item 
+ \mbox{\hyperlink{a00173}{H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+constexpr float \mbox{\hyperlink{a00173_a2034cc822af4f41aa70c9b3450873d58}{H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+Convert\+To\+Radians}} (float num\+\_\+in\+\_\+degrees)
+\begin{DoxyCompactList}\small\item\em Convert a number from degrees to radians. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a00173_a93736cf04cfb45988e094e8b2efb2bd6}{H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+Normalize}} (std\+::array$<$ float, 3 $>$ \&vec)
+\begin{DoxyCompactList}\small\item\em Normalize a vector. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a00173_a58df074201e5978c5f45401820f7c3a2}{H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+Cap\+Altitude}} (std\+::array$<$ float, 3 $>$ \&vec, float max\+\_\+angle, float min\+\_\+angle)
+\item 
+bool \mbox{\hyperlink{a00173_ae2b003df15838dc5928082445fd6524d}{H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+Altitude\+Within\+Range}} (const std\+::array$<$ float, 3 $>$ \&vec, float max\+\_\+angle, float min\+\_\+angle)
+\item 
+vector$<$ std\+::array$<$ float, 3 $>$ $>$ \mbox{\hyperlink{a00173_a2780d3f9e9ea879d43121893c60a520c}{H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+Fibbonacci\+Dist}} (int num\+\_\+points, float upwards\+\_\+fov, float downward\+\_\+fov)
+\item 
+vector$<$ std\+::array$<$ float, 3 $>$ $>$ \mbox{\hyperlink{a00168_ga9fc392fe8fc058674ffd5f4c8273a714}{H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+Fibbonacci\+Distribute\+Points}} (int num\+\_\+points, float upwards\+\_\+fov=50.\+0f, float downward\+\_\+fov=70.\+0f)
+\begin{DoxyCompactList}\small\item\em Evenly distribute a set of points around a sphere centered at the origin. \end{DoxyCompactList}\item 
+std\+::vector$<$ float $>$ \mbox{\hyperlink{a00173_af29c2ecd8da07d73a38c0f589f44ac3b}{H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+Spherical\+View\+Analysis\+With\+Distance}} (\mbox{\hyperlink{a01061}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&ert, const std\+::vector$<$ \mbox{\hyperlink{a01101}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ Nodes, int max\+\_\+rays, float height)
+\item 
+vector$<$ vector$<$ \mbox{\hyperlink{a01065}{Full\+Ray\+Request}} $>$ $>$ \mbox{\hyperlink{a00173_aad7b55a42de41fa5c917c68c7019ac1f}{H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+Spherical\+View\+Analysis\+From\+Ray\+Requests}} (\mbox{\hyperlink{a01061}{Embree\+Ray\+Tracer}} \&ert, const vector$<$ \mbox{\hyperlink{a01101}{Node}} $>$ \&nodes, int max\+\_\+rays, float height)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Contains implementation for \mbox{\hyperlink{a00168}{View\+Analysis}}. 
+
