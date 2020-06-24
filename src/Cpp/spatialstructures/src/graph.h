@@ -1,10 +1,6 @@
+/// \file graph.h \brief Header file for a graph ADT
 ///
-/// \file		graph.h
-///	\brief		Header file for a graph ADT
-///
-/// \author		TBA
-/// \date		06 Jun 2020
-///
+/// \author TBA \date 06 Jun 2020
 #pragma once
 
 #include <robin_hood.h>
@@ -17,24 +13,23 @@
 namespace Eigen {
 }
 
-/// <summary>
-/// Output CSR for interop with other languages
-/// </summary>
+/// <summary> Output CSR for interop with other languages </summary>
 namespace HF {
 	namespace SpatialStructures {
 
-		/// <summary>
-		/// TODO summary
-		/// </summary>
+		/*! How to aggregate the graph's edge costs.
+
+		\see 
+		
+		
+		*/
 		enum class COST_AGGREGATE : int {
 			SUM = 0,
 			AVERAGE = 1,
 			COUNT = 2
 		};
 
-		/// <summary>
-		/// TODO summary
-		/// </summary>
+		/// <summary> TODO summary </summary>
 		struct CSRPtrs {
 			int nnz;	///< TODO description
 			int rows;	///< row count
@@ -45,9 +40,12 @@ namespace HF {
 			int* inner_indices;		///< TODO description
 
 			/// <summary>
-			/// Determines if member pointers data, outer_indices, and inner_indices are non-null, or not
+			/// Determines if member pointers data, outer_indices, and inner_indices are non-null,
+			/// or not
 			/// </summary>
-			/// <returns>True if data, outer_indices, and inner_indices are non-null, false otherwise</returns>
+			/// <returns>
+			/// True if data, outer_indices, and inner_indices are non-null, false otherwise
+			/// </returns>
 
 			/*!
 				\code
@@ -72,8 +70,7 @@ namespace HF {
 		};
 
 		/// <summary>
-		/// A HF Graph similar to the one stored in python
-		/// Invariants:
+		/// A HF Graph similar to the one stored in python Invariants:
 		/// 1) Always stores a valid graph
 		/// 2) Every node added will be assigned a unique ID
 		/// </summary>
@@ -98,7 +95,7 @@ namespace HF {
 					// definition of Graph::addEdge(const Node& parent, const Node& child, float score)
 				\endcode
 			*/
-			///	\snippet spatialstructures\src\graph.cpp GetOrAssignID_Node
+			/// \snippet spatialstructures\src\graph.cpp GetOrAssignID_Node
 			int getOrAssignID(const Node& input_node);
 
 			/// <summary>
@@ -111,11 +108,11 @@ namespace HF {
 					// definition of Graph::addEdge(int parent_id, int child_id, float score)
 				\endcode
 			*/
-			///	\snippet spatialstructures\src\graph.cpp GetOrAssignID_int
+			/// \snippet spatialstructures\src\graph.cpp GetOrAssignID_int
 			int getOrAssignID(int input_int);
 
 			/// <summary>
-			/// Iterate through every edge in parent to find child. Returns when child is found	
+			/// Iterate through every edge in parent to find child. Returns when child is found
 			/// </summary>
 
 			/*!
@@ -123,12 +120,10 @@ namespace HF {
 					// definition of Graph::checkForEdge(int parent, int child) const
 				\endcode
 			*/
-			///	\snippet spatialstructures\src\graph.cpp CheckForEdge
+			/// \snippet spatialstructures\src\graph.cpp CheckForEdge
 			bool checkForEdge(int parent, int child) const;
 
-			/// <summary>
-			/// Add an empty node for this new id
-			/// </summary>
+			/// <summary> Add an empty node for this new id </summary>
 
 			/*!
 				\code
@@ -141,11 +136,16 @@ namespace HF {
 			// TODO: could this be cleaned up through a template?
 
 			/// <summary>
-			/// Construct a graph from a list of nodes and edges. This is faster than just using the addEdge method
-			/// </summary> 
-			/// <param name="edges">The desired edges for Graph, in the form of an adjacency matrix (reference)</param>
-			/// <param name="distances">The desired distances for Graph, following the form of param edges (reference)</param>
-			/// <param name="Nodes">A vector of Node for Graph (reference)</param>
+			/// Construct a graph from a list of nodes and edges. This is faster than just using the
+			/// addEdge method
+			/// </summary>
+			/// <param name="edges">
+			/// The desired edges for Graph, in the form of an adjacency matrix (reference)
+			/// </param>
+			/// <param name="distances">
+			/// The desired distances for Graph, following the form of param edges (reference)
+			/// </param>
+			/// <param name="Nodes"> A vector of Node for Graph (reference) </param>
 			
 			/*!
 				\code
@@ -163,7 +163,8 @@ namespace HF {
 					std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
 					std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
 			
-					// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
+					// Now you can create a Graph - note that nodes, edges, and distances are passed
+					// by reference
 					HF::SpatialStructures::Graph graph(edges, distances, nodes);
 				\endcode
 			*/
@@ -183,11 +184,9 @@ namespace HF {
 			*/
 			Graph() {};
 
-			/// <summary>
-			/// Determine if the graph has an edge with this parent and child, 
-			/// by constructing temporary Node (using the params parent and child) 
-			/// and calling the member function overload of HasEdge that accepts (const Node &).
-			/// </summary>
+			/// <summary> Determine if the graph has an edge with this parent and child, by
+			/// constructing temporary Node (using the params parent and child) and calling the
+			/// member function overload of HasEdge that accepts (const Node &). </summary>
 			/// <returns>See return for member function overload that accepts (const Node &)</returns>
 			
 			/*!
@@ -206,7 +205,8 @@ namespace HF {
 					std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
 					std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
 			
-					// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
+					// Now you can create a Graph - note that nodes, edges, and distances are passed
+					// by reference
 					HF::SpatialStructures::Graph graph(edges, distances, nodes);									  
 			
 					// Prepare {x, y, z} coordinates (positions)
@@ -219,12 +219,10 @@ namespace HF {
 			*/
 			bool HasEdge(const std::array<float, 3>& parent, const std::array<float, 3>& child, bool undirected = false) const;
 
-			/// <summary>
-			/// Determine if the graph has an edge with this parent and child, using references to Node
-			/// </summary>
-			/// <param name="parent">Parent node of edge; u to v, parent is u</param>
-			/// <param name="child">Child node of edge; u to v, child is v</param>
-			/// <param name="undirected">true if undirected, false otherwise</param>
+			/// <summary> Determine if the graph has an edge with this parent and child, using
+			/// references to Node </summary> <param name="parent">Parent node of edge; u to v,
+			/// parent is u</param> <param name="child">Child node of edge; u to v, child is
+			/// v</param> <param name="undirected">true if undirected, false otherwise</param>
 			/// <returns>True if edge exists with parent and child (Node &), false otherwise</returns>
 
 			/*!
@@ -243,7 +241,8 @@ namespace HF {
 					std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
 					std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
 			
-					// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
+					// Now you can create a Graph - note that nodes, edges, and distances are passed
+					// by reference
 					HF::SpatialStructures::Graph graph(edges, distances, nodes);
 			
 					// last argument can be true/false for undirected/directed graph respectively
@@ -252,13 +251,12 @@ namespace HF {
 			*/
 			bool HasEdge(const Node& parent, const Node& child, const bool undirected = false) const;
 			
-			/// <summary>
-			/// Determine if the graph has an edge with this parent and child, using the integer identifiers for nodes
-			/// </summary>
-			/// <param name="parent">Identifier for parent node (integer)</param>
-			/// <param name="child">Identifier for child node (integer)</param>
-			/// <param name="undirected">True if undirected graph, false otherwise. False by default.</param>
-			/// <returns>True if checkForEdge(parent, child), or undirected && checkForEdge(child, parent), false otherwise</returns>
+			/// <summary> Determine if the graph has an edge with this parent and child, using the
+			/// integer identifiers for nodes </summary> <param name="parent">Identifier for parent
+			/// node (integer)</param> <param name="child">Identifier for child node
+			/// (integer)</param> <param name="undirected">True if undirected graph, false
+			/// otherwise. False by default.</param> <returns>True if checkForEdge(parent, child),
+			/// or undirected && checkForEdge(child, parent), false otherwise</returns>
 
 			/*!
 				\code
@@ -276,7 +274,8 @@ namespace HF {
 					std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
 					std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
 			
-					// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
+					// Now you can create a Graph - note that nodes, edges, and distances are passed
+					// by reference
 					HF::SpatialStructures::Graph graph(edges, distances, nodes);
 			
 					// last argument can be true/false for undirected/directed graph respectively
@@ -285,10 +284,8 @@ namespace HF {
 			*/
 			bool HasEdge(int parent, int child, bool undirected = false) const;
 
-			/// <summary>
-			/// Get a list of nodes from the graph sorted by ID
-			/// </summary>
-			/// <returns>A sorted vector of nodes</returns>
+			/// <summary> Get a list of nodes from the graph sorted by ID </summary>
+			/// <returns> A sorted vector of nodes </returns>
 
 			/*!
 				\code
@@ -306,7 +303,8 @@ namespace HF {
 					std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
 					std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
 			
-					// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
+					// Now you can create a Graph - note that nodes, edges, and distances are passed
+					// by reference
 					HF::SpatialStructures::Graph graph(edges, distances, nodes);	
 			
 					// Nodes() returns a copy of the ordered_nodes field
@@ -315,11 +313,9 @@ namespace HF {
 			*/
 			std::vector<Node> Nodes() const;
 
-			/// <summary>
-			/// Get a list of edges to and from node N
-			/// </summary>
-			/// <param name="N">The Node from which the list of edges will be derived</param>
-			/// <returns>A list of edges to and from node N</returns>
+			/// <summary> Get a list of edges to and from node N </summary>
+			/// <param name="N"> The Node from which the list of edges will be derived </param>
+			/// <returns> A list of edges to and from node N </returns>
 
 			/*!
 				\code
@@ -337,26 +333,25 @@ namespace HF {
 					std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
 					std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
 			
-					// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
+					// Now you can create a Graph - note that nodes, edges, and distances are passed
+					// by reference
 					HF::SpatialStructures::Graph graph(edges, distances, nodes);	
 			
-					// Retrieve the nodes from the graph, or use the original instance of 
+					// Retrieve the nodes from the graph, or use the original instance of
 					// std::vector<HF::SpatialStructures::Node> passed to Graph upon instantiation
 					std::vector<HF::SpatialStructures::Node> get_nodes = graph.Nodes();
 			
-					// nodes[index] yields an instance of Node that we can pass to GetUndirectedEdges.
-					// Any node that exists with graph can be passed to this member function
-					// to retrieve a vector of undirected edges.
+					// nodes[index] yields an instance of Node that we can pass to
+					// GetUndirectedEdges. Any node that exists with graph can be passed to this
+					// member function to retrieve a vector of undirected edges.
 					int index = 2;
 					std::vector<HF::SpatialStructures::Edge> undirected_edges = graph.GetUndirectedEdges(get_nodes[index]);
 				\endcode
 			*/
 			std::vector<Edge> GetUndirectedEdges(const Node & N) const;
 		
-			/// <summary>
-			/// Get every edge/node in the given graph as IDs
-			/// </summary>
-			/// <returns>A list of EdgeSet (Graph in the form of IDs)</returns>
+			/// <summary> Get every edge/node in the given graph as IDs </summary>
+			/// <returns> A list of EdgeSet (Graph in the form of IDs) </returns>
 
 			/*!
 				\code
@@ -374,23 +369,18 @@ namespace HF {
 					std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
 					std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
 			
-					// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
+					// Now you can create a Graph - note that nodes, edges, and distances are passed
+					// by reference
 					// Note: graph is compressed upon instantiation
 					HF::SpatialStructures::Graph graph(edges, distances, nodes);	
 			
 					// graph must be compressed, or a exception will be thrown
 			
-					// To brief, an EdgeSet has the following layout:
-					//		struct EdgeSet {
-					//			int parent;
-					//			std::vector<IntEdge> children;
-					//		};
+					// To brief, an EdgeSet has the following layout: struct EdgeSet { int parent;
+					// std::vector<IntEdge> children; };
 					//
-					//	An IntEdge has the following layout:
-					//		struct IntEdge {
-					//			int child;
-					//			float weight;
-					//		};
+					// An IntEdge has the following layout: struct IntEdge { int child; float
+					// weight; };
 			
 					// A std::vector<EdgeSet> is a Graph, in the form of IDs.
 					std::vector<HF::SpatialStructures::EdgeSet> edge_set = graph.GetEdges();
@@ -398,12 +388,10 @@ namespace HF {
 			*/
 			std::vector<EdgeSet> GetEdges() const;
 
-			/// <summary>
-			/// Generate an ordered list of scores for the graph
-			/// </summary>
-			/// <param name="agg_type">0 for SUM, 1 for AVERAGE, 2 for COUNT</param>
-			/// <param name="directed">if graph is directed or not, default is true</param>
-			/// <returns>a vector of type float of the edge costs</returns>
+			/// <summary> Generate an ordered list of scores for the graph </summary>
+			/// <param name="agg_type"> 0 for SUM, 1 for AVERAGE, 2 for COUNT </param>
+			/// <param name="directed"> if graph is directed or not, default is true </param>
+			/// <returns> a vector of type float of the edge costs </returns>
 
 			/*!
 				\code
@@ -421,7 +409,8 @@ namespace HF {
 					std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
 					std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
 			
-					// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
+					// Now you can create a Graph - note that nodes, edges, and distances are passed
+					// by reference
 					// Note: graph is compressed upon instantiation
 					HF::SpatialStructures::Graph graph(edges, distances, nodes);
 			
@@ -434,12 +423,12 @@ namespace HF {
 			*/
 			std::vector<float> AggregateGraph(COST_AGGREGATE agg_type, bool directed=true) const;
 
-			/// <summary>
-			/// Get a list of edges for the given node
-			/// </summary>
-			/// <param name="n">Node from which a list of edges will be derived</param>
-			/// <returns>A copy of the graph's list</returns>
-			/// <exception cref="std::outofrange"> Thrown if the requested object is not in the dictionary</exception>
+			/// <summary> Get a list of edges for the given node </summary>
+			/// <param name="n"> Node from which a list of edges will be derived </param>
+			/// <returns> A copy of the graph's list </returns>
+			/// <exception cref="std::outofrange">
+			/// Thrown if the requested object is not in the dictionary
+			/// </exception>
 
 			/*!
 				\code
@@ -457,17 +446,18 @@ namespace HF {
 					std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
 					std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
 			
-					// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
+					// Now you can create a Graph - note that nodes, edges, and distances are passed
+					// by reference
 					// Note: graph is compressed upon instantiation
 					HF::SpatialStructures::Graph graph(edges, distances, nodes);
 			
-					// Retrieve the nodes from the graph, or use the original instance of 
+					// Retrieve the nodes from the graph, or use the original instance of
 					// std::vector<Node> passed to Graph upon instantiation
 					std::vector<HF::SpatialStructures::Node> get_nodes = graph.Nodes();
 			
-					// nodes[index] yields an instance of Node that we can pass to GetUndirectedEdges.
-					// Any node that exists with graph can be passed to this member function
-					// to retrieve a vector of edges.
+					// nodes[index] yields an instance of Node that we can pass to
+					// GetUndirectedEdges. Any node that exists with graph can be passed to this
+					// member function to retrieve a vector of edges.
 					int index = 2;
 					HF::SpatialStructures::Node node = get_nodes[index];
 			
@@ -485,12 +475,12 @@ namespace HF {
 			const std::vector<Edge> operator[](const Node& n) const;
 
 			/// <summary>
-			/// Construct a new edge for the graph from parent and child pair. If the parent is not in the graph
-			/// as a key then it will be added
+			/// Construct a new edge for the graph from parent and child pair. If the parent is not
+			/// in the graph as a key then it will be added
 			/// </summary>
-			/// <param name="parent">The parent node to add to</param>
-			/// <param name="child">The child node to add as an edge</param>
-			/// <param name="score">The score for the given edge</param>
+			/// <param name="parent"> The parent node to add to </param>
+			/// <param name="child"> The child node to add as an edge </param>
+			/// <param name="score"> The score for the given edge </param>
 
 			/*!
 				\code
@@ -508,7 +498,8 @@ namespace HF {
 					std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
 					std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
 			
-					// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
+					// Now you can create a Graph - note that nodes, edges, and distances are passed
+					// by reference
 					// Note: graph is compressed upon instantiation
 					HF::SpatialStructures::Graph graph(edges, distances, nodes);
 			
@@ -522,12 +513,12 @@ namespace HF {
 			void addEdge(const Node& parent, const Node& child, float score = 1.0f);
 
 			/// <summary>
-			/// Construct a new edge for the graph using parent and child IDs.
-			/// If the parent_id is not in the graph as a key, it will be added
+			/// Construct a new edge for the graph using parent and child IDs. If the parent_id is
+			/// not in the graph as a key, it will be added
 			/// </summary>
-			/// <param name="parent_id">The ID of the parent node for the edge to construct</param>
-			/// <param name="child_id">The ID of the child node for the edge to construct</param>
-			/// <param name="score">The score for the given edge</param>
+			/// <param name="parent_id"> The ID of the parent node for the edge to construct </param>
+			/// <param name="child_id"> The ID of the child node for the edge to construct </param>
+			/// <param name="score"> The score for the given edge </param>
 			
 			/*!
 				\code
@@ -545,7 +536,8 @@ namespace HF {
 					std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
 					std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
 			
-					// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
+					// Now you can create a Graph - note that nodes, edges, and distances are passed
+					// by reference
 					// Note: graph is compressed upon instantiation
 					HF::SpatialStructures::Graph graph(edges, distances, nodes);
 			
@@ -558,11 +550,9 @@ namespace HF {
 			*/
 			void addEdge(int parent_id, int child_id, float score);
 
-			/// <summary>
-			/// Tell whether or not the graph has the given node in it as a parent
-			/// </summary>
-			/// <param name="n">Node to check for</param>
-			/// <returns>True if the node exists, false otherwise</returns>
+			/// <summary> Tell whether or not the graph has the given node in it as a parent </summary>
+			/// <param name="n"> Node to check for </param>
+			/// <returns> True if the node exists, false otherwise </returns>
 			
 			/*!
 				\code
@@ -580,7 +570,8 @@ namespace HF {
 					std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
 					std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
 			
-					// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
+					// Now you can create a Graph - note that nodes, edges, and distances are passed
+					// by reference
 					// Note: graph is compressed upon instantiation
 					HF::SpatialStructures::Graph graph(edges, distances, nodes);
 			
@@ -589,13 +580,13 @@ namespace HF {
 			
 					// Likewise, if we pass a Node instance that indeed exists...
 			
-					// Retrieve the nodes from the graph, or use the original instance of 
+					// Retrieve the nodes from the graph, or use the original instance of
 					// std::vector<Node> passed to Graph upon instantiation
 					std::vector<HF::SpatialStructures::Node> get_nodes = graph.Nodes();
 			
-					// nodes[index] yields an instance of Node that we can pass to hasKey.
-					// Any node that exists with graph can be passed to this member function
-					// to determine if the graph has the node's key, or not.
+					// nodes[index] yields an instance of Node that we can pass to hasKey. Any node
+					// that exists with graph can be passed to this member function to determine if
+					// the graph has the node's key, or not.
 					int index = 2;
 					HF::SpatialStructures::Node good_node = get_nodes[index];
 			
@@ -604,10 +595,8 @@ namespace HF {
 			*/
 			bool hasKey(const Node& n) const;
 
-			/// <summary>
-			/// Get a list of nodes as arrays of floats
-			/// </summary>
-			/// <returns>A list of floats for each position of every node in the graph </returns>
+			/// <summary> Get a list of nodes as arrays of floats </summary>
+			/// <returns> A list of floats for each position of every node in the graph </returns>
 			
 			/*!
 				\code
@@ -625,13 +614,14 @@ namespace HF {
 					std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
 					std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
 			
-					// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
+					// Now you can create a Graph - note that nodes, edges, and distances are passed
+					// by reference
 					// Note: graph is compressed upon instantiation
 					HF::SpatialStructures::Graph graph(edges, distances, nodes);
 			
 					// A container of std::array<float, 3> is constructed and populated within
-					// NodesAsFloat3, and returned. Each array of 3 floats represents a Node's position
-					// within the Cartesian coordinate system. { x, y, z }
+					// NodesAsFloat3, and returned. Each array of 3 floats represents a Node's
+					// position within the Cartesian coordinate system. { x, y, z }
 					std::vector<std::array<float, 3>> nodes_as_floats = graph.NodesAsFloat3();
 			
 					// The two loops below will yield the same output
@@ -646,10 +636,8 @@ namespace HF {
 			*/
 			std::vector<std::array<float, 3>> NodesAsFloat3() const;
 
-			/// <summary>
-			/// Determine how many nodes are in the graph
-			/// </summary>
-			/// <returns>An int displaying how many nodes are in the graph (id_to_nodes.size())</returns>
+			/// <summary> Determine how many nodes are in the graph </summary>
+			/// <returns> An int displaying how many nodes are in the graph (id_to_nodes.size()) </returns>
 			
 			/*!
 				\code
@@ -667,7 +655,8 @@ namespace HF {
 					std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
 					std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
 			
-					// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
+					// Now you can create a Graph - note that nodes, edges, and distances are passed
+					// by reference
 					// Note: graph is compressed upon instantiation
 					HF::SpatialStructures::Graph graph(edges, distances, nodes);
 			
@@ -676,10 +665,8 @@ namespace HF {
 			*/
 			int size() const;
 
-			/// <summary>
-			/// Retrieve the ID for the given node.
-			/// </summary>
-			/// <returns>The ID assigned to this node. -1 if it was not yet added to the graph</returns>
+			/// <summary> Retrieve the ID for the given node. </summary>
+			/// <returns> The ID assigned to this node. -1 if it was not yet added to the graph </returns>
 			
 			/*!
 				\code
@@ -697,7 +684,8 @@ namespace HF {
 					std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
 					std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
 			
-					// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
+					// Now you can create a Graph - note that nodes, edges, and distances are passed
+					// by reference
 					// Note: graph is compressed upon instantiation
 					HF::SpatialStructures::Graph graph(edges, distances, nodes);
 			
@@ -708,13 +696,13 @@ namespace HF {
 			
 					// Likewise, if we pass a Node instance that indeed exists...
 			
-					// Retrieve the nodes from the graph, or use the original instance of 
+					// Retrieve the nodes from the graph, or use the original instance of
 					// std::vector<Node> passed to Graph upon instantiation
 					std::vector<HF::SpatialStructures::Node> get_nodes = graph.Nodes();
 			
-					// nodes[index] yields an instance of Node that we can pass to hasKey.
-					// Any node that exists with graph can be passed to this member function
-					// to determine if the graph has the node's key, or not.
+					// nodes[index] yields an instance of Node that we can pass to hasKey. Any node
+					// that exists with graph can be passed to this member function to determine if
+					// the graph has the node's key, or not.
 					int index = 2;					// we assume for this example that index 2 is valid.
 					HF::SpatialStructures::Node good_node = get_nodes[index];
 			
@@ -743,7 +731,8 @@ namespace HF {
 					std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
 					std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
 
-					// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
+					// Now you can create a Graph - note that nodes, edges, and distances are passed
+					// by reference
 					// Note: graph is compressed upon instantiation
 					HF::SpatialStructures::Graph graph(edges, distances, nodes);
 			
@@ -760,10 +749,11 @@ namespace HF {
 			void Compress();
 
 			/// <summary>
-			/// Obtain pointers to the 3 arrays of the CSR, as well as any extra info that may be necesary to use
-			/// the CSR in another language. This will automatically compress the graph if it isn't compressed already
+			/// Obtain pointers to the 3 arrays of the CSR, as well as any extra info that may be
+			/// necesary to use the CSR in another language. This will automatically compress the
+			/// graph if it isn't compressed already
 			/// </summary>
-			/// <returns>An instance of a struct CSRPtrs, using the member field edge_matrix</returns>
+			/// <returns> An instance of a struct CSRPtrs, using the member field edge_matrix </returns>
 			
 			/*!
 				\code
@@ -781,7 +771,8 @@ namespace HF {
 					std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
 					std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
 
-					// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
+					// Now you can create a Graph - note that nodes, edges, and distances are passed
+					// by reference
 					// Note: graph is compressed upon instantiation
 					HF::SpatialStructures::Graph graph(edges, distances, nodes);
 
@@ -797,11 +788,9 @@ namespace HF {
 			*/
 			CSRPtrs GetCSRPointers();
 
-			/// <summary>
-			/// Retrieve the node that corresponds to id
-			/// </summary>
-			/// <param name="id">The id for the desired node</param>
-			/// <returns>The node corresponding to id, by value</returns>
+			/// <summary> Retrieve the node that corresponds to id </summary>
+			/// <param name="id"> The id for the desired node </param>
+			/// <returns> The node corresponding to id, by value </returns>
 			
 			/*!
 				\code
@@ -819,7 +808,8 @@ namespace HF {
 					std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
 					std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
 
-					// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
+					// Now you can create a Graph - note that nodes, edges, and distances are passed
+					// by reference
 					// Note: graph is compressed upon instantiation
 					HF::SpatialStructures::Graph graph(edges, distances, nodes);
 			
@@ -827,15 +817,13 @@ namespace HF {
 					int desired_node_id = 2;
 					HF::SpatialStructures::Node node_from_id = graph.NodeFromID(desired_node_id);
 			
-					// Note that NodeFromID ceases to work if the id argument provided does not exist as an ID among
-					// the nodes within graph
+					// Note that NodeFromID ceases to work if the id argument provided does not
+					// exist as an ID among the nodes within graph
 				\endcode
 			*/
 			Node NodeFromID(int id) const;
 
-			/// <summary>
-			/// Clear all nodes and edges in the graph.
-			/// </summary>
+			/// <summary> Clear all nodes and edges in the graph. </summary>
 			
 			/*!
 				\code
@@ -853,22 +841,22 @@ namespace HF {
 					std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
 					std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
 
-					// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
+					// Now you can create a Graph - note that nodes, edges, and distances are passed
+					// by reference
 					// Note: graph is compressed upon instantiation
 					HF::SpatialStructures::Graph graph(edges, distances, nodes);
 			
 					// If we want to remove all nodes and edges from graph, we may do so with Clear:
 					graph.Clear();						// edge_matrix is zeroed out, buffer is squeezed,
-														// triplets are also cleared, and needs_compression == true
+														// triplets are also cleared, and
+														// needs_compression == true
 				\endcode
 			*/
 			void Clear();
 
 			// TODO: Should these even be in the graph?
 
-			/// <summary>
-			/// Calculate cross slope for the given graph
-			/// </summary>
+			/// <summary> Calculate cross slope for the given graph </summary>
 			
 			/*!
 				\code
@@ -877,9 +865,7 @@ namespace HF {
 			*/
 			void GenerateCrossSlope();
 
-			/// <summary>
-			/// Calculate energy for the given graph
-			/// </summary>
+			/// <summary> Calculate energy for the given graph </summary>
 			
 			/*!
 				\code
