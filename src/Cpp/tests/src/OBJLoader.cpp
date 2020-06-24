@@ -169,3 +169,512 @@ TEST(_MeshInfo, CanReproduceInputArray) {
 	
 	CompareVertArrays(raw_verts, MI[0].GetVertsAsArrays());
 }
+
+///
+///	The following are tests for the code samples for HF::Geometry
+///
+
+/// start objloader.h
+TEST(_meshInfo, LoadMeshObjectsOne) {
+	// be sure to #include "objloader.h", and #include <vector>
+
+	// Relative path begins where EXE file is located
+	// If file_path is not a path to a valid OBJ file, HF::Exceptions::FileNotFound is thrown
+	std::string file_path = "big_teapot.obj";
+
+	// meshvec is a vector of meshinfo from file_path
+	std::vector<HF::Geometry::MeshInfo> meshvec = HF::Geometry::LoadMeshObjects(file_path, HF::Geometry::GROUP_METHOD::ONLY_FILE, false);
+
+	// Retrieve the MeshInfo
+	HF::Geometry::MeshInfo info = meshvec[0];
+}
+
+TEST(_meshInfo, LoadMeshObjectsMany) {
+	// be sure to #include "objloader.h", and #include <vector>
+
+	// Prepare the file paths 
+	const auto PATH_0 = "big_teapot.obj";
+	const auto PATH_1 = "plane.obj";
+	const auto PATH_2 = "sibenik.obj";
+
+	// PATH_0, PATH_1, and PATH_2 each represent a path to an OBJ file.
+	// Note that if any path in pathvec is invalid, HF::Exceptions::FileNotFound will be thrown
+	// when LoadMeshObjects is called 
+	std::vector<std::string> pathvec = { PATH_0, PATH_1, PATH_2 };
+
+	// The overload for LoadMeshObjects is called for each member (which is an OBJ file path) in pathvec,
+	// then IDs are reassigned for each MeshInfo object within the std::vector<MeshInfo> that is returned
+	std::vector<HF::Geometry::MeshInfo> meshvec = HF::Geometry::LoadMeshObjects(pathvec, HF::Geometry::GROUP_METHOD::ONLY_FILE, false);
+
+	std::cout << "Total loaded: " << meshvec.size() << std::endl;
+
+	// Print IDs of all mesh info
+	for (auto mesh_info : meshvec) {
+		std::cout << "Mesh ID: " << mesh_info.GetMeshID() << std::endl;
+	}
+}
+
+TEST(_meshInfo, LoadRawVertices) {
+	// be sure to #include "objloader.h", and #include <vector>
+
+	// Note that filepath must lead to a valid OBJ file, or
+	// HF::Exceptions::InvalidOBJ will be thrown when Geometry::LoadMeshObjects is called
+	std::string filepath = "plane.obj";
+
+	// Vertices now contains the raw vertices loaded from the OBJ file specified at filepath
+	std::vector<std::array<float, 3>> vertices = HF::Geometry::LoadRawVertices(filepath);
+	
+	// Display the vertices from filepath
+	std::cout << "Vertices from " << filepath << ": " << std::endl;
+	for (auto vertex : vertices) {
+		std::cout << "(" << vertex[0] << ", " << vertex[1] << ", " << vertex[2] << ")" << std::endl;
+	}
+}
+/// end objloader.h
+
+TEST(_meshInfo, ConstructorDefault) {
+	// be sure to #include "meshinfo.h"
+
+	HF::Geometry::MeshInfo mesh;	// meshid == 0; verts is given 3 rows, 0 cols; name == "INVALID"
+}
+
+TEST(_meshInfo, ConstructorParamCoordsAsArray) {
+	// be sure to #include "meshinfo.h", and #include <vector>
+
+	// Prepare the vertices
+	std::array<float, 3> vertex_0 = { 34.1, 63.9, 16.5 };
+	std::array<float, 3> vertex_1 = { 23.5, 85.7, 45.2 };
+	std::array<float, 3> vertex_2 = { 12.0, 24.6, 99.4 };
+
+	// Create an array of vertices
+	std::vector<std::array<float, 3>> vertices{ vertex_0, vertex_1, vertex_2 };
+
+	// This mesh contains a triangle (due to having 3 vertices), id == 3451, name == "My Mesh"
+	// Note that vertices is passed by reference.
+	// Also, passing a std::vector<std::array<float, 3>> with (size < 1) will cause
+	// HF::Exceptions::InvalidOBJ to be thrown.
+	HF::Geometry::MeshInfo mesh(vertices, 3451, "My Mesh");
+
+	// Display the vertices for mesh
+	std::cout << "Vertices in mesh with ID " << mesh.GetMeshID() << ": " << std::endl;
+	for (auto vertex : mesh.GetVertsAsArrays()) {
+		std::cout << "(" << vertex[0] << ", " << vertex[1] << ", " << vertex[2] << ")" << std::endl;
+	}
+}
+
+TEST(_meshInfo, ConstructorParamCoordsAsFloat) {
+	// be sure to #include "meshinfo.h", and #include <vector>
+
+	// Prepare the vertices. Every three floats represents one vertex.
+	std::vector<float> vertices = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
+	                            //    0					1				2
+
+	// If indices.size() == 3, this means that vertices.size() == 9,
+	// and each member of indices represents a std::array<float, 3>
+	std::vector<int> indices = { 0, 1, 2 };
+
+	// Note that vertices and indices are passed by reference.
+	// Also, passing a std::vector<float> with a size that is not a multiple of 3,
+	// or passing a std::vector<int> with a size that is not a multiple of 3 --
+	// will cause HF::Exceptions::InvalidOBJ to be thrown.
+	// Also, indices.size() == (vertices.size() / 3), because all members of indices
+	// must correspond to the index of the first member representing the initial coordinate within a vertex.
+	HF::Geometry::MeshInfo mesh(vertices, indices, 5901, "This Mesh");
+
+	// Display the vertices for mesh
+	std::cout << "Vertices in mesh with ID " << mesh.GetMeshID() << ": " << std::endl;
+	for (auto vertex : mesh.GetVertsAsArrays()) {
+		std::cout << "(" << vertex[0] << ", " << vertex[1] << ", " << vertex[2] << ")" << std::endl;
+	}
+}
+
+TEST(_meshInfo, AddVertsAsArray) {
+	// be sure to #include "meshinfo.h", and #include <vector>
+
+	// Prepare the vertices
+	std::array<float, 3> vertex_0 = { 34.1, 63.9, 16.5 };
+	std::array<float, 3> vertex_1 = { 23.5, 85.7, 45.2 };
+	std::array<float, 3> vertex_2 = { 12.0, 24.6, 99.4 };
+
+	// Create a vector of vertices
+	std::vector<std::array<float, 3>> vertices{ vertex_0, vertex_1, vertex_2 };
+
+	// Create the MeshInfo instance - this example uses the no-arg constructor
+	HF::Geometry::MeshInfo mesh;	// meshid == 0; verts is given 3 rows, 0 cols; name == "INVALID"
+
+	// Append the vertices to the mesh
+	mesh.AddVerts(vertices);
+
+	std::cout << "size: " << mesh.getRawVertices().size() << std::endl;
+
+	// Display the vertices for mesh
+	std::cout << "Vertices in mesh with ID " << mesh.GetMeshID() << ": " << std::endl;
+	for (auto vertex : mesh.GetVertsAsArrays()) {
+		std::cout << "(" << vertex[0] << ", " << vertex[1] << ", " << vertex[2] << ")" << std::endl;
+	}
+}
+
+TEST(_meshInfo, AddVertsAsFloatAndIndices) {
+	/*
+	// be sure to #include "meshinfo.h", and #include <vector>
+
+	// TODO: needs implementation
+
+	// Prepare the vertices. Every three floats represents one vertex.
+	std::vector<float> vertices = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
+												//    0					1				2
+
+	// If indices.size() == 3, this means that vertices.size() == 9,
+	// and each member of indices represents a std::array<float, 3>
+	std::vector<int> indices = { 0, 1, 2 };
+
+	// Create the MeshInfo instance - this example uses the no-arg constructor
+	HF::Geometry::MeshInfo mesh;	// meshid == 0; verts is given 3 rows, 0 cols; name == "INVALID"
+
+	// Append the vertices to the mesh.
+	mesh.AddVerts(vertices, indices);
+	*/
+}
+
+TEST(_meshInfo, NumVerts) {
+	// be sure to #include "meshinfo.h", and #include <vector>
+
+	// Prepare the vertices
+	std::array<float, 3> vertex_0 = { 34.1, 63.9, 16.5 };
+	std::array<float, 3> vertex_1 = { 23.5, 85.7, 45.2 };
+	std::array<float, 3> vertex_2 = { 12.0, 24.6, 99.4 };
+
+	// Create an array of vertices
+	std::vector<std::array<float, 3>> vertices{ vertex_0, vertex_1, vertex_2 };
+
+	// Create the MeshInfo
+	HF::Geometry::MeshInfo mesh(vertices, 3451, "My Mesh");
+
+	int vert_count = 0;
+	if ((vert_count = mesh.NumVerts()) == 0) {
+		std::cout << "This mesh has no vertices." << std::endl;
+	} else {
+		std::cout << "Vertex count: " << vert_count << std::endl;
+	}
+
+	// Output is: 'Vertex count: 3'
+}
+
+TEST(_meshInfo, NumTris) {
+	// be sure to #include "meshinfo.h", and #include <vector>
+
+	// Prepare the vertices
+	std::array<float, 3> vertex_0 = { 34.1, 63.9, 16.5 };
+	std::array<float, 3> vertex_1 = { 23.5, 85.7, 45.2 };
+	std::array<float, 3> vertex_2 = { 12.0, 24.6, 99.4 };
+
+	// Create an array of vertices
+	std::vector<std::array<float, 3>> vertices{ vertex_0, vertex_1, vertex_2 };
+
+	// Create the MeshInfo
+	HF::Geometry::MeshInfo mesh(vertices, 3451, "My Mesh");
+
+	int tri_count = 0;
+	if ((tri_count = mesh.NumTris()) == 0) {
+		std::cout << "This mesh has no triangles." << std::endl;
+	} else {
+		std::cout << "Triangle count: " << tri_count << std::endl;
+	}
+
+	// Output is: 'Triangle count: 1'
+	// Note that (mesh.NumVerts() / 3 && mesh.NumTris()) will always be true,
+	// since three vertices compose a single triangle.
+}
+
+TEST(_meshInfo, ConvertToRhinoCoordinates) {
+	// be sure to #include "meshinfo.h", and #include <vector>
+
+	// Prepare the vertices
+	std::array<float, 3> vertex_0 = { 34.1, 63.9, 16.5 };
+	std::array<float, 3> vertex_1 = { 23.5, 85.7, 45.2 };
+	std::array<float, 3> vertex_2 = { 12.0, 24.6, 99.4 };
+
+	// Create an array of vertices
+	std::vector<std::array<float, 3>> vertices{ vertex_0, vertex_1, vertex_2 };
+
+	// Create the MeshInfo
+	HF::Geometry::MeshInfo mesh(vertices, 3451, "My Mesh");
+
+	// Convert the coordinates
+	mesh.ConvertToRhinoCoordinates();
+
+	// Note: If vertices contain NaN or +/- infinity values, std::exception is thrown
+
+	// Display the vertices for mesh
+	std::cout << "Vertices in mesh with ID " << mesh.GetMeshID() << ": " << std::endl;
+	for (auto vertex : mesh.GetVertsAsArrays()) {
+		std::cout << "(" << vertex[0] << ", " << vertex[1] << ", " << vertex[2] << ")" << std::endl;
+	}
+}
+
+TEST(_meshInfo, ConvertToOBJCoordinates) {
+	// be sure to #include "meshinfo.h", and #include <vector>
+
+	// Prepare the vertices
+	std::array<float, 3> vertex_0 = { 34.1, 63.9, 16.5 };
+	std::array<float, 3> vertex_1 = { 23.5, 85.7, 45.2 };
+	std::array<float, 3> vertex_2 = { 12.0, 24.6, 99.4 };
+
+	// Create an array of vertices
+	std::vector<std::array<float, 3>> vertices{ vertex_0, vertex_1, vertex_2 };
+
+	// Create the MeshInfo
+	HF::Geometry::MeshInfo mesh(vertices, 3451, "My Mesh");
+
+	// Convert the coordinates
+	mesh.ConvertToOBJCoordinates();
+
+	// Note: Program will abort if any coordinate is NaN
+
+	// Display the vertices for mesh
+	std::cout << "Vertices in mesh with ID " << mesh.GetMeshID() << ": " << std::endl;
+	for (auto vertex : mesh.GetVertsAsArrays()) {
+		std::cout << "(" << vertex[0] << ", " << vertex[1] << ", " << vertex[2] << ")" << std::endl;
+	}
+}
+
+TEST(_meshInfo, PerformRotation) {
+	// Prepare the vertices
+	std::array<float, 3> vertex_0 = { 34.1, 63.9, 16.5 };
+	std::array<float, 3> vertex_1 = { 23.5, 85.7, 45.2 };
+	std::array<float, 3> vertex_2 = { 12.0, 24.6, 99.4 };
+
+	// Create an array of vertices
+	std::vector<std::array<float, 3>> vertices{ vertex_0, vertex_1, vertex_2 };
+
+	// Create the MeshInfo
+	HF::Geometry::MeshInfo mesh(vertices, 3451, "My Mesh");
+
+	// Perform rotation
+	float rot_x = 10.0;
+	float rot_y = 20.0;
+	float rot_z = 30.0;
+
+	mesh.PerformRotation(rot_x, rot_y, rot_z);
+
+	// Display the vertices for mesh
+	std::cout << "Vertices in mesh with ID " << mesh.GetMeshID() << ": " << std::endl;
+	for (auto vertex : mesh.GetVertsAsArrays()) {
+		std::cout << "(" << vertex[0] << ", " << vertex[1] << ", " << vertex[2] << ")" << std::endl;
+	}
+}
+
+TEST(_meshInfo, GetMeshID) {
+	// be sure to #include "meshinfo.h", and #include <vector>
+
+	// Prepare the vertices
+	std::array<float, 3> vertex_0 = { 34.1, 63.9, 16.5 };
+	std::array<float, 3> vertex_1 = { 23.5, 85.7, 45.2 };
+	std::array<float, 3> vertex_2 = { 12.0, 24.6, 99.4 };
+
+	// Create an array of vertices
+	std::vector<std::array<float, 3>> vertices{ vertex_0, vertex_1, vertex_2 };
+
+	// Create the MeshInfo
+	HF::Geometry::MeshInfo mesh(vertices, 3451, "My Mesh");
+
+	// Use GetMeshID to do an ID match
+	int mesh_id = -1;
+	if ((mesh_id = mesh.GetMeshID()) == 3451) {
+		std::cout << "Retrieved 'My Mesh'" << std::endl;
+	}
+}
+
+TEST(_meshInfo, GetRawVertices) {
+	// be sure to #include "meshinfo.h", and #include <vector>
+
+	// Prepare the vertices. Every three floats represents one vertex.
+	std::vector<float> vertices = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
+	                            //    0				  1				    2
+
+	// If indices.size() == 3, this means that vertices.size() == 9,
+	// and each member of indices represents a std::array<float, 3>
+	std::vector<int> indices = { 0, 1, 2 };
+
+	// Create the mesh.
+	HF::Geometry::MeshInfo mesh(vertices, indices, 5901, "This Mesh");
+
+	// Retrieve copies of mesh's vertices.
+	std::vector<float> vertices_copy_0 = mesh.getRawVertices();
+	std::vector<float> vertices_copy_1 = mesh.getRawVertices();
+
+	// Uses std::vector<float>'s operator== to determine member equality
+	if (vertices_copy_0 == vertices_copy_1) {
+		std::cout << "vertices_copy_0 and vertices_copy_1 share the same elements/permutation." << std::endl;
+	}
+
+	// This will demonstrate that vertices_copy_0 and vertices_copy_1 are different container instances
+	// Output:	vertices_copy_0 and vertices_copy_1 share the same elements/permutation.
+	//			vertices_copy_0 and vertices_copy_1 are different container instances.
+	if (&vertices_copy_0 != &vertices_copy_1) {
+		std::cout << "vertices_copy_0 and vertices_copy_1 are different container instances." << std::endl;
+	}
+
+	// Output all coordinates
+	const int total = mesh.NumTris() * 3;
+	int offset = 0;
+
+	for (int i = 0; i < total; i++) {
+		auto y_offset = static_cast<int64_t>(offset) + 1;
+		auto z_offset = static_cast<int64_t>(offset) + 2;
+
+		std::cout << "(" << vertices_copy_0[offset] << ", " 
+			<< vertices_copy_0[y_offset] << ", " 
+			<< vertices_copy_0[z_offset] << ")" << std::endl;
+			offset += 3;
+	}
+}
+
+TEST(_meshInfo, GetRawIndices) {
+	// be sure to #include "meshinfo.h", and #include <vector>
+
+	// Prepare the vertices. Every three floats represents one vertex.
+	std::vector<float> vertices = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
+	//    0				  1				    2
+
+	// If indices.size() == 3, this means that vertices.size() == 9,
+	// and each member of indices represents a std::array<float, 3>
+	std::vector<int> indices = { 0, 1, 2 };
+
+	// Create the mesh.
+	HF::Geometry::MeshInfo mesh(vertices, indices, 5901, "This Mesh");
+
+	// Retrieve a copy of mesh's index vector
+	std::vector<int> indices_copy_0 = mesh.getRawIndices();
+	std::vector<int> indices_copy_1 = mesh.getRawIndices();
+
+	// Uses std::vector<int>'s operator== to determine member equality
+	if (indices_copy_0 == indices_copy_1) {
+		std::cout << "indices_copy_0 and indices_copy_1 share the same elements/permutation." << std::endl;
+	}
+
+	// This will demonstrate that indices_copy_0 and indices_copy_1 are different container instances
+	// Output:	indices_copy_0 and indices_copy_1 share the same elements/permutation.
+	//			indices_copy_0 and indices_copy_1 are different container instances.
+	if (&indices_copy_0 != &indices_copy_1) {
+		std::cout << "indices_copy_0 and indices_copy_1 are different container instances." << std::endl;
+	}
+
+	// Output the indices
+	for (auto i : indices_copy_0) {
+		std::cout << i << std::endl;
+	}
+}
+
+TEST(_meshInfo, GetVertsAsArrays) {
+	// be sure to #include "meshinfo.h", and #include <vector>
+
+	// Prepare the vertices. Every three floats represents one vertex.
+	std::vector<float> vertices = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
+	//    0				  1				    2
+
+	// If indices.size() == 3, this means that vertices.size() == 9,
+	// and each member of indices represents a std::array<float, 3>
+	std::vector<int> indices = { 0, 1, 2 };
+
+	// Create the mesh.
+	HF::Geometry::MeshInfo mesh(vertices, indices, 5901, "This Mesh");
+
+	// Retrieve vertices as a vector of coordinates (x, y, z)
+	// Useful if your vertices were prepared from a one-dimensional container c, of float
+	// (such that c.size() % 3 == 0)
+	std::vector<std::array<float, 3>> vert_container = mesh.GetVertsAsArrays();
+
+	// Display the vertices for mesh
+	std::cout << "Vertices in mesh with ID " << mesh.GetMeshID() << ": " << std::endl;
+	for (auto vertex : mesh.GetVertsAsArrays()) {
+		std::cout << "(" << vertex[0] << ", " << vertex[1] << ", " << vertex[2] << ")" << std::endl;
+	}
+}
+
+TEST(_meshInfo, SetMeshID) {
+	// be sure to #include "meshinfo.h", and #include <vector>
+
+	// Prepare the vertices. Every three floats represents one vertex.
+	std::vector<float> vertices = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
+	//    0				  1				    2
+
+	// If indices.size() == 3, this means that vertices.size() == 9,
+	// and each member of indices represents a std::array<float, 3>
+	std::vector<int> indices = { 0, 1, 2 };
+
+	// Create the mesh.
+	HF::Geometry::MeshInfo mesh(vertices, indices, 5901, "This Mesh");
+
+	// Prepare a new mesh ID.
+	int new_mesh_id = 9999;
+
+	// Assign new_mesh_id to mesh.
+	mesh.SetMeshID(new_mesh_id);
+
+	// Test for value equality. Will return true.
+	if (new_mesh_id == mesh.GetMeshID()) {
+		std::cout << "ID assignment successful." << std::endl;
+	}
+}
+
+TEST(_meshInfo, OperatorEquality) {
+	// be sure to #include "meshinfo.h", and #include <vector>
+
+	// Prepare the vertices. Every three floats represents one vertex.
+	std::vector<float> vertices_0 = { 11.0, 22.0, 33.0, 44.0, 55.0, 66.0, 77.0, 88.0, 99.0 };
+	//	  0                 1                 2
+
+	std::vector<float> vertices_1 = { 11.0, 22.0, 33.0, 44.0, 55.0, 66.0, 77.0, 88.0, 99.0 };
+	//	  0                 1                 2
+
+	// indices[0] refers to vertices[0] (beginning of vertex 0)
+	// indices[1] refers to vertices[3] (beginning of vertex 1)
+	// indices[2] refers to vertices[6] (beginning of vertex 2)
+	std::vector<int> indices_0 = { 0, 1, 2 };
+	std::vector<int> indices_1 = { 0, 1, 2 };
+
+	HF::Geometry::MeshInfo mesh_0(vertices_0, indices_0, 5901, "This Mesh");
+	HF::Geometry::MeshInfo mesh_1(vertices_1, indices_0, 4790, "That Mesh");
+
+	bool equivalent = mesh_0 == mesh_1;		// returns true
+
+	// operator== will determine if two MeshInfo are equal if
+	// the Euclidean distance between each matching element in mesh_0 and mesh_1
+	// is within 0.001. This means that for all i between vertices_0 and vertices_1 --
+	// each x, y, z within
+	//		vertices_0[i] and vertices_1[i]
+	//	must be within 0.001 to be considered equivalent.
+
+	// Of course, this also means that if
+	//		mesh_0.NumVerts() != mesh_1.NumVerts(),
+	//	mesh_0 and mesh_1 are not equivalent at all.
+
+	ASSERT_TRUE(equivalent);
+}
+
+TEST(_meshInfo, OperatorIndex) {
+	// be sure to #include "meshinfo.h", and #include <vector>
+
+	// Prepare the vertices. Every three floats represents one vertex.
+	std::vector<float> vertices = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
+	//    0				  1				    2
+
+	// If indices.size() == 3, this means that vertices.size() == 9,
+	// and each member of indices represents a std::array<float, 3>
+	std::vector<int> indices = { 0, 1, 2 };
+
+	// Create the mesh
+	HF::Geometry::MeshInfo mesh(vertices, indices, 5901, "This Mesh");
+
+	// Retrieve the desired vertex
+	int index = 1;
+
+	// vertex consists of { 23.5, 85.7, 45.2 }
+	// which is the second triplet of coordinates within vertices_0.
+	auto vertex = mesh[index];
+
+	std::cout << "Retrieved at index " << index << ": (" << vertex[0] << ", "
+		<< vertex[1] << ", "
+		<< vertex[2] << ")" << std::endl;
+}

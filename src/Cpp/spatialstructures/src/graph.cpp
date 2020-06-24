@@ -157,6 +157,7 @@ namespace HF::SpatialStructures {
 
 	void Graph::addEdge(const Node& parent, const Node& child, float score)
 	{
+		// ![GetOrAssignID_Node]
 		needs_compression = true;
 
 		int parent_id = getOrAssignID(parent);
@@ -164,22 +165,27 @@ namespace HF::SpatialStructures {
 		triplets.emplace_back(
 			Eigen::Triplet<float>(parent_id, child_id, score)
 		);
+		// ![GetOrAssignID_Node]
 	}
 
 	void Graph::addEdge(int parent_id, int child_id, float score)
 	{
+		// ![GetOrAssignID_int]
 		needs_compression = true;
 		next_id = std::max(child_id, std::max(parent_id, next_id));
 		getOrAssignID(child_id);
 		getOrAssignID(parent_id);
 		triplets.emplace_back(Eigen::Triplet<float>(parent_id, child_id, score));
+		// ![GetOrAssignID_int]
 	}
 
 	bool Graph::checkForEdge(int parent, int child) const {
+		// ![CheckForEdge]
 		for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, parent); it; ++it)
 			if (it.col() == child) return true;
 		
 		return false;
+		// ![CheckForEdge]
 	}
 
 	bool Graph::HasEdge(int parent, int child, bool undirected) const {

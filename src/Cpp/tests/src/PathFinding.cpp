@@ -86,3 +86,279 @@ TEST(_Pathfinding, MultiplePaths) {
 		ASSERT_EQ(OP, path);
 }
 
+///
+///	The following are tests for the code samples for HF::SpatialStructures::Pathfinding
+///
+
+TEST(_boostGraph, Constructor) {
+	// be sure to #include "boost_graph.h", #include "node.h", #include "graph.h", and #include <vector>
+
+	// In order to create a BoostGraph, we must first create a Graph instance first.
+	// We must prepare the nodes, their edges, and the weights (distances) of each edge.
+
+	// Create the nodes
+	HF::SpatialStructures::Node node_0(1.0f, 1.0f, 2.0f);
+	HF::SpatialStructures::Node node_1(2.0f, 3.0f, 4.0f, 5);
+	HF::SpatialStructures::Node node_2(11.0f, 22.0f, 140.0f);
+
+	// Create a container (vector) of nodes
+	std::vector<HF::SpatialStructures::Node> nodes = { node_0, node_1, node_2 };
+
+	// Create matrices for edges and distances, edges.size() == distances().size()
+	std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
+	std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
+
+	// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
+	HF::SpatialStructures::Graph graph(edges, distances, nodes);
+
+	// Passing Graph graph to BoostGraph bg, by reference
+	HF::Pathfinding::BoostGraph bg(graph);
+}
+
+TEST(_boostGraph, Destructor) {
+	// be sure to #include "boost_graph.h", #include "node.h", #include "graph.h", and #include <vector>
+
+	// In order to create a BoostGraph, we must first create a Graph instance first.
+	// We must prepare the nodes, their edges, and the weights (distances) of each edge.
+
+	// Create the nodes
+	HF::SpatialStructures::Node node_0(1.0f, 1.0f, 2.0f);
+	HF::SpatialStructures::Node node_1(2.0f, 3.0f, 4.0f, 5);
+	HF::SpatialStructures::Node node_2(11.0f, 22.0f, 140.0f);
+
+	// Create a container (vector) of nodes
+	std::vector<HF::SpatialStructures::Node> nodes = { node_0, node_1, node_2 };
+
+	// Create matrices for edges and distances, edges.size() == distances().size()
+	std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
+	std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
+
+	// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
+	HF::SpatialStructures::Graph graph(edges, distances, nodes);
+
+	// Begin scope
+	{
+		// Create a BoostGraph bg, from a Graph graph (passing g by reference)
+		HF::Pathfinding::BoostGraph bg(graph);
+	}
+	// End scope
+
+	// When bg goes out of scope, BoostGraph::~BoostGraph is called
+	// An explicit call to BoostGraph::~BoostGraph is also made when
+	// invoking operator delete on a (BoostGraph *)
+}
+
+TEST(_boostGraphDeleter, OperatorFunction) {
+	// be sure to #include "path_finder.h", #include "boost_graph.h", 
+	// #include "node.h", #include "graph.h", and #include <vector>
+
+	// For this example, we must have a BoostGraph instance to use with BoostGraphDeleter.
+	// In order to create a BoostGraph, we must first create a Graph instance first.
+	// We must prepare the nodes, their edges, and the weights (distances) of each edge.
+
+	// Create the nodes
+	HF::SpatialStructures::Node node_0(1.0f, 1.0f, 2.0f);
+	HF::SpatialStructures::Node node_1(2.0f, 3.0f, 4.0f, 5);
+	HF::SpatialStructures::Node node_2(11.0f, 22.0f, 140.0f);
+
+	// Create a container (vector) of nodes
+	std::vector<HF::SpatialStructures::Node> nodes = { node_0, node_1, node_2 };
+
+	// Create matrices for edges and distances, edges.size() == distances().size()
+	std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
+	std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
+
+	// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
+	HF::SpatialStructures::Graph graph(edges, distances, nodes);
+
+	// Passing Graph graph to BoostGraph bg, by reference
+	HF::Pathfinding::BoostGraph bg(graph);
+
+	//
+	// Read below on BoostGraphDeleter -- this is important.
+	//
+
+	// BoostGraphDeleter is needed by std::unique_ptr to destroy a BoostGraph; it is not meant to be called directly.
+	// You do not want to pass the address of a stack-allocated BoostGraph to BoostGraphDeleter::operator().
+
+	// BoostGraphDeleter's operator() calls operator delete on the (BoostGraph *) argument,
+	// and passing the address of a stack-allocated BoostGraph for said argument
+	// will result in undefined behavior.
+
+	//
+	// In other words, do __not__ do the following:
+	//
+	/* 
+		This code compiles and builds, but this is an example of what NOT to do --
+		so the remainder of this test is commented out.
+	
+	HF::Pathfinding::BoostGraphDeleter bg_deleter;
+
+	// Create a stack-allocated BoostGraph from a HF::SpatialStructures::Graph graph
+	HF::Pathfinding::BoostGraph boostGraph(graph);	// not created using operator new
+
+	// Using a BoostGraphDeleter on the (address of a) stack-allocated BoostGraph
+	bg_deleter(&boostGraph);						// calls operator delete for a (BoostGraph *)
+
+	// The type BoostGraphDeleter is only for use with std::unique_ptr.
+	// See BoostGraph::CreateBoostGraph for BoostGraphDeleter's intended use.
+	*/
+}
+
+TEST(_pathFinding, CreateBoostGraph) {
+	// be sure to #include "path_finder.h", #include "boost_graph.h",
+	// #include "node.h", and #include "graph.h"
+
+	// For this example, we must have a BoostGraph instance to use with BoostGraphDeleter.
+	// In order to create a BoostGraph, we must first create a Graph instance first.
+	// We must prepare the nodes, their edges, and the weights (distances) of each edge.
+
+	// Create the nodes
+	HF::SpatialStructures::Node node_0(1.0f, 1.0f, 2.0f);
+	HF::SpatialStructures::Node node_1(2.0f, 3.0f, 4.0f, 5);
+	HF::SpatialStructures::Node node_2(11.0f, 22.0f, 140.0f);
+
+	// Create a container (vector) of nodes
+	std::vector<HF::SpatialStructures::Node> nodes = { node_0, node_1, node_2 };
+
+	// Create matrices for edges and distances, edges.size() == distances().size()
+	std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
+	std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
+
+	// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
+	HF::SpatialStructures::Graph graph(edges, distances, nodes);
+
+	// Now we can create a smart pointer to a BoostGraph
+	// Note the type of boostGraph - it is a
+	//		std::unique_ptr<HF::Pathfinding::BoostGraph, HF::Pathfinding::BoostGraphDeleter>.
+	// Use the auto keyword for type inference, or your choice of using statements/typedef to make
+	// the use of the type described above easier.
+	auto boostGraph = HF::Pathfinding::CreateBoostGraph(graph);
+}
+
+
+TEST(_pathFinding, FindPath) {
+	// be sure to #include "path_finder.h", #include "boost_graph.h", and #include "graph.h"
+	
+	// Create a Graph g, and compress it.
+	HF::SpatialStructures::Graph g;
+	g.addEdge(0, 1, 1);
+	g.addEdge(0, 2, 2);
+	g.addEdge(1, 3, 3);
+	g.addEdge(2, 4, 1);
+	g.addEdge(3, 4, 5);
+	g.Compress();
+
+	// Create a boostGraph from g
+	auto boostGraph = HF::Pathfinding::CreateBoostGraph(g);
+
+	// Get the path from node (id 0) to node (id 3)
+	HF::SpatialStructures::Path path = HF::Pathfinding::FindPath(boostGraph.get(), 0, 3);
+
+	// Print the nodes along the shortest path
+	std::cout << "Shortest path from node id 0 to node id 3:" << std::endl;
+	for (auto p : path.members) {
+		std::cout << p.node << std::endl;
+	}
+}
+
+TEST(_pathFinding, FindPaths) {
+	// be sure to #include "path_finder.h", #include "boost_graph.h", and #include "graph.h"
+
+	// Create a Graph g, and compress it.
+	HF::SpatialStructures::Graph g;
+	g.addEdge(0, 1, 1);
+	g.addEdge(0, 2, 2);
+	g.addEdge(1, 3, 3);
+	g.addEdge(2, 4, 1);
+	g.addEdge(3, 4, 5);
+	g.Compress();
+
+	// Create a boostGraph from g
+	auto boostGraph = HF::Pathfinding::CreateBoostGraph(g);
+
+	// Prepare the parents and children vectors --
+	// We will be searching for the shortest path from node 0 to node 3,
+	// as well as the shortest path from node 0 to node 4.
+	std::vector<int> parents = { 0, 0 };
+	std::vector<int> children = { 3, 4 };
+
+	std::vector<HF::SpatialStructures::Path> paths 
+		= HF::Pathfinding::FindPaths(boostGraph.get(), parents, children);
+
+	// Get the shortest paths, which are already stored in paths
+	auto path_0_3 = paths[0];
+	auto path_0_4 = paths[1];
+
+	// Print the shortest path from node 0 to node 3
+	std::cout << "Shortest path from node id 0 to node id 3:" << std::endl;
+	for (auto p : path_0_3.members) {
+		std::cout << p.node << std::endl;
+	}
+
+	// Print the shortest path from node 0 to node 4
+	std::cout << "Shortest path from node id 0 to node id 4:" << std::endl;
+	for (auto p : path_0_4.members) {
+		std::cout << p.node << std::endl;
+	}
+}
+
+TEST(_pathFinding, FindAllPaths) {
+	// NOTE: HF::Pathfinding::FindAllPaths is not implemented yet.
+
+	// be sure to #include "path_finder.h", #include "boost_graph.h", and #include "graph.h"
+
+	// Create a Graph g, and compress it.
+	HF::SpatialStructures::Graph g;
+	g.addEdge(0, 1, 1);
+	g.addEdge(0, 2, 2);
+	g.addEdge(1, 3, 3);
+	g.addEdge(2, 4, 1);
+	g.addEdge(3, 4, 5);
+	g.Compress();
+
+	// Create a boostGraph from g
+	auto boostGraph = HF::Pathfinding::CreateBoostGraph(g);
+
+	// Cannot test this just yet -- FindAllPaths is yet to be implemented
+	// Get the path from node (id 0) to node (id 4)
+	// auto all_paths = HF::Pathfinding::FindAllPaths(boostGraph.get(), 0, 4);
+
+	// all_paths will contain all shortest paths for [node 0, node 4]
+}
+
+TEST(_pathFinding, InsertPathsIntoArray) {
+	// be sure to #include "path_finder.h", #include "boost_graph.h", and #include "graph.h"
+
+	// Create a Graph g, and compress it.
+	HF::SpatialStructures::Graph g;
+	g.addEdge(0, 1, 1);
+	g.addEdge(0, 2, 2);
+	g.addEdge(1, 3, 3);
+	g.addEdge(2, 4, 1);
+	g.addEdge(3, 4, 5);
+	g.Compress();
+
+	// Create a boostGraph from g
+	auto boostGraph = HF::Pathfinding::CreateBoostGraph(g);
+
+	// Prepare the parents and children vectors --
+	// We will be searching for the shortest path from node 0 to node 3,
+	// as well as the shortest path from node 0 to node 4.
+	std::vector<int> parents = { 0, 0 };
+	std::vector<int> children = { 3, 4 };
+
+	// Create smart pointers to hold Path, PathMember and sizes
+	const int MAX_SIZE = 4;
+	std::unique_ptr<HF::SpatialStructures::Path[]> result_paths(new Path[MAX_SIZE]);
+	std::unique_ptr<HF::SpatialStructures::PathMember[]> result_path_members(new PathMember[MAX_SIZE]);
+	std::unique_ptr<int[]> result_sizes(new int[MAX_SIZE]);
+
+	// Retrieve raw pointers so their addresses can be passed to InsertPathsIntoArray
+	HF::SpatialStructures::Path* ppath = result_paths.get();
+	HF::SpatialStructures::PathMember* pmembers = result_path_members.get();
+	int* psizes = result_sizes.get();
+
+	// Use InsertPathsIntoArray
+	HF::Pathfinding::InsertPathsIntoArray(boostGraph.get(), parents, children, &ppath, &pmembers, psizes);
+}

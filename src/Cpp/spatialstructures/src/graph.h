@@ -93,9 +93,12 @@ namespace HF {
 			/// then assign it one.
 			/// </summary>
 
-			/// \code
-			/// TODO example
-			/// \endcode
+			/*!
+				\code
+					// definition of Graph::addEdge(const Node& parent, const Node& child, float score)
+				\endcode
+			*/
+			///	\snippet spatialstructures\src\graph.cpp GetOrAssignID_Node
 			int getOrAssignID(const Node& input_node);
 
 			/// <summary>
@@ -103,27 +106,35 @@ namespace HF {
 			/// then assign it one.
 			/// </summary>
 
-			/// \code
-			/// TODO example
-			/// \endcode
+			/*!
+				\code
+					// definition of Graph::addEdge(int parent_id, int child_id, float score)
+				\endcode
+			*/
+			///	\snippet spatialstructures\src\graph.cpp GetOrAssignID_int
 			int getOrAssignID(int input_int);
 
 			/// <summary>
 			/// Iterate through every edge in parent to find child. Returns when child is found	
 			/// </summary>
 
-			/// \code
-			/// TODO example
-			/// \endcode
+			/*!
+				\code
+					// definition of Graph::checkForEdge(int parent, int child) const
+				\endcode
+			*/
+			///	\snippet spatialstructures\src\graph.cpp CheckForEdge
 			bool checkForEdge(int parent, int child) const;
 
 			/// <summary>
 			/// Add an empty node for this new id
 			/// </summary>
 
-			/// \code
-			/// TODO example
-			/// \endcode
+			/*!
+				\code
+					// No implementation for this private function
+				\endcode
+			*/
 			void UpdateIDs(int new_id);
 
 		public:
