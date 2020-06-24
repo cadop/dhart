@@ -1,6 +1,8 @@
 /// \file graph.h \brief Header file for a graph ADT
 ///
 /// \author TBA \date 06 Jun 2020
+/// \todo Forward declares for eigen.  
+
 #pragma once
 
 #include <robin_hood.h>
@@ -9,7 +11,6 @@
 #include <Node.h>
 #include <Eigen>
 
-// TODO: Forward Declares? Later.
 namespace Eigen {
 }
 
@@ -17,37 +18,47 @@ namespace Eigen {
 namespace HF {
 	namespace SpatialStructures {
 
-		/*! How to aggregate the graph's edge costs.
 
-		\see 
+		/*! Ways to aggregate the costs for edges of each node. 
 		
-		
+		\see Aggregate Graph for details on how to use this struct.
 		*/
 		enum class COST_AGGREGATE : int {
+			// Add the cost of all edges.
 			SUM = 0,
+			// Average the cost of all edges
 			AVERAGE = 1,
+			// Count how many edges this node has. 
 			COUNT = 2
 		};
 
-		/// <summary> TODO summary </summary>
-		struct CSRPtrs {
-			int nnz;	///< TODO description
-			int rows;	///< row count
-			int cols;	///< column count
+		/*! A struct to hold all necessary information for a CSR.
 
-			float* data;			///< TODO description
-			int* outer_indices;		///< TODO description
-			int* inner_indices;		///< TODO description
+			\details 
+			This can be used by external clients to recreate or map to 
+			the csr. For more information see 
+			https://eigen.tuxfamily.org/dox/group__TutorialSparse.html
+		*/
+		struct CSRPtrs {
+			int nnz;	///< Number of non-zeros
+			int rows;	///< Number of rows in this CSR.
+			int cols;	///< Number of columns in this CSR.
+
+			float* data;			///< Pointer to the CSR's data array.
+			int* outer_indices;		///< Pointer to the CSR's outer indices array. 
+			int* inner_indices;		///< Pointer to the CSR's inner indices array.
 
 			/// <summary>
-			/// Determines if member pointers data, outer_indices, and inner_indices are non-null,
-			/// or not
+			/// Verify this object points to a valid CSR.
 			/// </summary>
 			/// <returns>
-			/// True if data, outer_indices, and inner_indices are non-null, false otherwise
+			/// True if data, outer_indices, and inner_indices are non-null, false otherwise,
 			/// </returns>
-
 			/*!
+				\remarks
+				This is implemented this way because uninitialized or invalid Eigen arrays will return
+				null if they are in an invalid state (uninitialized, uncompressed, etc). 
+
 				\code
 					// be sure to #include "graph.h", and #include <memory>
 			
@@ -69,28 +80,37 @@ namespace HF {
 			}
 		};
 
-		/// <summary>
-		/// A HF Graph similar to the one stored in python Invariants:
-		/// 1) Always stores a valid graph
-		/// 2) Every node added will be assigned a unique ID
-		/// </summary>
+		/*! \brief A Graph of nodes connected by edges that supports both integers and HF::SpatialStructures::Node.
+			
+			\details
+			Internally, this object uses Eigen (https://eigen.tuxfamily.org/dox/group__TutorialSparse.html)
+			to store and maintain a CSR matrix.
+
+			\invariant
+				Always stores a valid graph and always assignes a unique ID to every node.
+				
+		*/
 		class Graph {
 		private:
-			// TODO: Should there be a reverse map?
-			std::vector<Node> ordered_nodes;				///< A ordered list of nodes with ids
+			std::vector<Node> ordered_nodes;				///< A list of nodes contained by the graph
 			std::vector<int> id_to_nodes;					///< a list that indexes ordered_nodes with ids
 			robin_hood::unordered_map<Node, int> idmap;		///< Maps a list of X,Y,Z positions to ids
-			Eigen::SparseMatrix<float, 1> edge_matrix;		///< Contains all edges between nodes
-			int next_id = 0;								///< The ID of the next unique node
-			std::vector<Eigen::Triplet<float>> triplets;	///< vector of Triplet, type float
+			Eigen::SparseMatrix<float, 1> edge_matrix;		///< The CSR matrix
+			int next_id = 0;								///< The id for the next unique node
+			std::vector<Eigen::Triplet<float>> triplets;	///< A list of edges for construction by a list of triplets.
 			bool needs_compression = true;					///< The CSR is inaccurate and requires compression
 
 			/// <summary>
-			/// Get the unique ID for this x, y, z position. If one does not exist yet for this node
-			/// then assign it one.
+			/// Get the unique ID for this x, y, z position or assign it a unique ID if one doesn't already exist
 			/// </summary>
-
 			/*!
+				\details 
+				If the node has not yet been seen by the graph, next_id will be assigned to it and incremented,
+				then the node node will and its new id will be added to idmap. If the node has already been 
+				assigned an ID, then the ID will be returned directly from idmap. 
+
+				\param input_node Node to retrieve and potentially assign a new ID for. 
+				\returns The ID of input_node. 
 				\code
 					// definition of Graph::addEdge(const Node& parent, const Node& child, float score)
 				\endcode
@@ -98,12 +118,12 @@ namespace HF {
 			/// \snippet spatialstructures\src\graph.cpp GetOrAssignID_Node
 			int getOrAssignID(const Node& input_node);
 
-			/// <summary>
-			/// Get the unique ID for this x, y, z position. If one does not exist yet for this node
-			/// then assign it one.
-			/// </summary>
-
 			/*!
+				\brief Add an ID to the graph if it doesn't exist already.
+
+				\details 
+				This onyl exists 
+
 				\code
 					// definition of Graph::addEdge(int parent_id, int child_id, float score)
 				\endcode
@@ -111,62 +131,68 @@ namespace HF {
 			/// \snippet spatialstructures\src\graph.cpp GetOrAssignID_int
 			int getOrAssignID(int input_int);
 
-			/// <summary>
-			/// Iterate through every edge in parent to find child. Returns when child is found
-			/// </summary>
 
 			/*!
-				\code
-					// definition of Graph::checkForEdge(int parent, int child) const
-				\endcode
+				\brief Determine if an edge between parent and child exists in the graph.
+				
+				\details 
+				Iterates through every row in the parent's column to find child. If child
+				is not found in this column, false is returned. If child can be found in this
+				column, then true is returned.
+
+				\par Time Complexity
+				O(k) where k is the number of edges from parent.
+				
 			*/
 			/// \snippet spatialstructures\src\graph.cpp CheckForEdge
 			bool checkForEdge(int parent, int child) const;
 
 			/// <summary> Add an empty node for this new id </summary>
-
-			/*!
-				\code
-					// No implementation for this private function
-				\endcode
-			*/
+			/*! \deprecated Never Implemented.*/
 			void UpdateIDs(int new_id);
 
 		public:
-			// TODO: could this be cleaned up through a template?
-
-			/// <summary>
-			/// Construct a graph from a list of nodes and edges. This is faster than just using the
-			/// addEdge method
-			/// </summary>
-			/// <param name="edges">
-			/// The desired edges for Graph, in the form of an adjacency matrix (reference)
-			/// </param>
-			/// <param name="distances">
-			/// The desired distances for Graph, following the form of param edges (reference)
-			/// </param>
-			/// <param name="Nodes"> A vector of Node for Graph (reference) </param>
-			
 			/*!
-				\code
-					// be sure to #include "graph.h"
+			 \brief Construct a graph from a list of nodes, edges, and distances. 
+
+			 \param edges Ordered array of arrays of edges for each node in nodes.
+			 \param distances Ordered array of distance from parent to child for each edge in edges.
+			 \param Nodes Ordered array of nodes to act as a parent to all children in it's array in edges.
+
+			 \pre 1) The size of all input arrays must match: 
+			 `(edges.size() == nodes.size() && nodes.size() == distances.size())`
 			
-					// Create the nodes
-					HF::SpatialStructures::Node node_0(1.0f, 1.0f, 2.0f);
-					HF::SpatialStructures::Node node_1(2.0f, 3.0f, 4.0f, 5);
-					HF::SpatialStructures::Node node_2(11.0f, 22.0f, 140.0f);
-			
-					// Create a container (vector) of nodes
-					std::vector<HF::SpatialStructures::Node> nodes = { node_0, node_1, node_2 };
-			
-					// Create matrices for edges and distances, edges.size() == distances().size()
-					std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
-					std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
-			
-					// Now you can create a Graph - note that nodes, edges, and distances are passed
-					// by reference
-					HF::SpatialStructures::Graph graph(edges, distances, nodes);
-				\endcode
+			\pre 2) For the node at `nodes[i]`, `edges[i]` should contain an array for the id of all nodes
+			that `nodes[i]` has an edge from and, and `distances[i]` should contain an array of the the distance
+			from `nodes[i]` to one of the nodes it has an edge to in `edges[i]`.
+
+			 \remarks
+			 This constructor can offer "slightly higher performance and memory consumption"
+			 than constructing a graph using Graph::addEdge in a loop according to official eigen documentation,
+			 however it may not be feasible for certain situations where the entire graph isn't
+			 known before the constructor is called. 
+			 The implementation is based on the algorithm from Eigen's documentation under
+			 the section Filling a Sparse Matrix 
+			 https://eigen.tuxfamily.org/dox/group__TutorialSparse.html.
+
+			\code
+				// be sure to #include "graph.h"
+		
+				// Create the nodes
+				HF::SpatialStructures::Node node_0(1.0f, 1.0f, 2.0f);
+				HF::SpatialStructures::Node node_1(2.0f, 3.0f, 4.0f, 5);
+				HF::SpatialStructures::Node node_2(11.0f, 22.0f, 140.0f);
+		
+				// Create a container (vector) of nodes
+				std::vector<HF::SpatialStructures::Node> nodes = { node_0, node_1, node_2 };
+		
+				// Create matrices for edges and distances, edges.size() == distances().size()
+				std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
+				std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
+		
+				// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
+				HF::SpatialStructures::Graph graph(edges, distances, nodes);
+			\endcode
 			*/
 			Graph(
 				const std::vector<std::vector<int>> & edges, 
@@ -174,22 +200,34 @@ namespace HF {
 				const std::vector<Node> & Nodes
 			);
 
-			/*!
+			/*! \brief Construct an empty graph.
+
+				\remarks This can be used to create a new graph to later be filled with edges/nodes
+				by calling Graph::addEdge() then calling Graph::MakeCompressed. Implementatin
+				is based on the Eigen documentation for Filling a CSR:
+				https://eigen.tuxfamily.org/dox/group__TutorialSparse.html.
+
+
 				\code
 					// be sure to #include "graph.h"
-			
 					HF::SpatialStructures::Graph graph;		// This represents an order-zero graph (null graph)
 															// It lacks vertices and edges.
 				\endcode
 			*/
 			Graph() {};
 
-			/// <summary> Determine if the graph has an edge with this parent and child, by
-			/// constructing temporary Node (using the params parent and child) and calling the
-			/// member function overload of HasEdge that accepts (const Node &). </summary>
-			/// <returns>See return for member function overload that accepts (const Node &)</returns>
+			/*! \brief Determine if the graph has an edge from parent to child.
 			
-			/*!
+				\param parent Parent of the edge to check for.
+				\param child Child of the edge to check for.
+				\param undirected If true, look for an edge from child to parent as well.
+				\returns True if an edge between parent and child exists 
+				(also child and parent if undirected is true).
+
+				\remarks
+				Converts parent and child to Node then calls the node overload.
+				
+				\exception std::exception if the matrix is uncompressed.
 				\code
 					// be sure to #include "graph.h"
 			
@@ -217,15 +255,24 @@ namespace HF {
 					bool has_edge = graph.HasEdge(parent_pos, child_pos, true);
 				\endcode
 			*/
-			bool HasEdge(const std::array<float, 3>& parent, const std::array<float, 3>& child, bool undirected = false) const;
+			bool HasEdge(
+				const std::array<float, 3>& parent,
+				const std::array<float, 3>& child,
+				bool undirected = false
+			) const;
 
-			/// <summary> Determine if the graph has an edge with this parent and child, using
-			/// references to Node </summary> <param name="parent">Parent node of edge; u to v,
-			/// parent is u</param> <param name="child">Child node of edge; u to v, child is
-			/// v</param> <param name="undirected">true if undirected, false otherwise</param>
-			/// <returns>True if edge exists with parent and child (Node &), false otherwise</returns>
+			/* \brief Determine if the graph has an edge from parent to child.
+			
+				\param parent Parent of the edge to check for.
+				\param child Child of the edge to check for.
+				\param undirected If true, look for an edge from child to parent as well.
+				\returns True if an edge between parentand child exists
+				(also child and parent if undirected is true).
 
-			/*!
+				\remarks
+				Gets the IDs of both nodes, then calls the integer overload.
+				
+				\exception std::exception if the graph is uncompressed.
 				\code
 					// be sure to #include "graph.h"
 			
@@ -250,15 +297,16 @@ namespace HF {
 				\endcode
 			*/
 			bool HasEdge(const Node& parent, const Node& child, const bool undirected = false) const;
-			
-			/// <summary> Determine if the graph has an edge with this parent and child, using the
-			/// integer identifiers for nodes </summary> <param name="parent">Identifier for parent
-			/// node (integer)</param> <param name="child">Identifier for child node
-			/// (integer)</param> <param name="undirected">True if undirected graph, false
-			/// otherwise. False by default.</param> <returns>True if checkForEdge(parent, child),
-			/// or undirected && checkForEdge(child, parent), false otherwise</returns>
+			/* \brief Determine if the graph has an edge from parent to child.
 
-			/*!
+				\param parent Parent of the edge to check for.
+				\param child Child of the edge to check for.
+				\param undirected If true, look for an edge from child to parent as well.
+				\returns True if an edge between parentand child exists
+				(also child and parent if undirected is true).
+
+				\exception std::exception if the graph is uncompressed.
+				
 				\code
 					// be sure to #include "graph.h"
 			
@@ -284,8 +332,8 @@ namespace HF {
 			*/
 			bool HasEdge(int parent, int child, bool undirected = false) const;
 
-			/// <summary> Get a list of nodes from the graph sorted by ID </summary>
-			/// <returns> A sorted vector of nodes </returns>
+			/// <summary> Get a list of nodes from the graph sorted by ID. </summary>
+			/// <returns> A sorted vector of nodes. </returns>
 
 			/*!
 				\code
@@ -313,11 +361,17 @@ namespace HF {
 			*/
 			std::vector<Node> Nodes() const;
 
-			/// <summary> Get a list of edges to and from node N </summary>
-			/// <param name="N"> The Node from which the list of edges will be derived </param>
-			/// <returns> A list of edges to and from node N </returns>
-
+			/// <summary> Get a list of all edges to and from node N. </summary>
+			/// <param name="N"> The Node to get edges from and to. </param>
+			/// <returns> A list of edges to and from node N or an empty array if is not 
+			/// in the graph. </returns>
 			/*!
+
+				\par Time Complexity
+				`O(k)` where k is the number of edges in the graph since it needs to iterate through 
+				every edge in the graph to find the edges to this node.
+
+				\see operator[] to get a list of directed edges only containing edges from N.
 				\code
 					// be sure to #include "graph.h"
 			
@@ -350,10 +404,16 @@ namespace HF {
 			*/
 			std::vector<Edge> GetUndirectedEdges(const Node & N) const;
 		
-			/// <summary> Get every edge/node in the given graph as IDs </summary>
-			/// <returns> A list of EdgeSet (Graph in the form of IDs) </returns>
-
+			/// <summary> Get every in the given graph as IDs. </summary>
+			/// <returns> An array of edgesets for every node in the graph
+			/// (Graph in the form of IDs). </returns>
 			/*!
+				
+				\exception std::exception if the graph isn't compressed.
+				
+				\par Time Complexity
+				O(k) where k is the number of edges in the graph.
+
 				\code
 					// be sure to #include "graph.h"
 			
@@ -388,12 +448,19 @@ namespace HF {
 			*/
 			std::vector<EdgeSet> GetEdges() const;
 
-			/// <summary> Generate an ordered list of scores for the graph </summary>
-			/// <param name="agg_type"> 0 for SUM, 1 for AVERAGE, 2 for COUNT </param>
-			/// <param name="directed"> if graph is directed or not, default is true </param>
-			/// <returns> a vector of type float of the edge costs </returns>
-
+			/// <summary> Summarize the costs of every outgoing edge for every
+			/// node in the graph. </summary>
+			/// <param name="agg_type"> Type of aggregation to use. </param>
+			/// <param name="directed"> If true, include both incoming and
+			/// outgoing edges for every node in nodes </param>
+			/// <returns> An ordered list of scores for agg_type on 
+			/// each node in the graph. </returns>
 			/*!
+				
+				\remarks Can be useful to get scores from the VisibilityGraph.
+
+				\exception std::out_of_range if agg_type doesn't match any value of COST_AGGREGATE.
+				\see COST_AGGREGATE to see a list of supported aggregation types.
 				\code
 					// be sure to #include "graph.h"
 			
