@@ -52,14 +52,22 @@ namespace HF::SpatialStructures {
 	}
 
 	vector<Edge> Graph::GetUndirectedEdges(const Node & n) const {
+		// Get the ID of n
 		int node_id = getID(n);
+		// If N is not in the graph, return an empty array.
 		if (node_id < 0) return vector<Edge>();
 
+		// Get the directed edges for this node from calling
+		// operator[]
 		vector<Edge> out_edges = (*this)[n];
 
+		// Iterate through every other node 
 		for (int i = 0; i < size(); i++) {
+			
+			// Don't look in this node's edge array
 			if (i == node_id) continue;
-				
+			
+			// See if this edge 
 			if (HasEdge(i, node_id)) {
 				float cost = edge_matrix.coeff(i, node_id);
 				Node child_node = NodeFromID(i);
@@ -70,16 +78,26 @@ namespace HF::SpatialStructures {
 		}
 		return out_edges;
 	}
+
 	std::vector<EdgeSet> Graph::GetEdges() const
 	{
+		// Throw if we're not compressed since this is a const function
+		// and compressing the graph will make it non-const
 		if (this->needs_compression)
 			throw std::exception("The graph must be compressed!");
+
+		// Preallocate an array of edge sets
 		vector<EdgeSet> out_edges(this->size());
+		
+		// Iterate through every row in the csr 
 		for (int k = 0; k < edge_matrix.outerSize(); ++k) {
 			auto& edgeset = out_edges[k];
 			edgeset.parent = k;
+
+			// Iterate every column in the row. 
 			for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, k); it; ++it)
 			{
+				// Add to array of edgesets
 				float cost = it.value();
 				int child = it.col();
 				edgeset.children.push_back(IntEdge{ child, cost });
@@ -140,6 +158,7 @@ namespace HF::SpatialStructures {
 		}
 		return out_costs;
 	}
+
 	const std::vector<Edge> Graph::operator[](const Node& n) const
 	{
 		int parent_id = idmap.at(n);
@@ -193,16 +212,18 @@ namespace HF::SpatialStructures {
 	}
 
 	bool Graph::HasEdge(const Node& parent, const Node& child, const bool undirected) const {
+		// Throw if the graph isn't compresesed. 
 		if (!edge_matrix.isCompressed())
 			throw std::exception("Can't get this for uncompressed matrix!");
 
-		// First check if this is even a key to begin with
+		// Return early if parent or child don't exist in the graph
 		if (!hasKey(parent) || !hasKey(child)) return false;
 
-		// Knowing that these nodes were assigned IDs, lets get them
+		// Get the id of both parent and child.
 		int parent_id = idmap.at(parent);
 		int child_id = idmap.at(child);
 		
+		// Call integer overload.
 		return HasEdge(parent_id, child_id, undirected);
 	}
 
@@ -235,8 +256,8 @@ namespace HF::SpatialStructures {
 
 	Graph::Graph(const vector<vector<int>>& edges, const vector<vector<float>> & distances, const vector<Node> & Nodes)
 	{
-
-		// Generate an array of sizes for every column
+		// Generate an array with the size of every column from
+		// the size of the edges array
 		assert(edges.size() == distances.size());
 		vector<int> sizes(edges.size());
 		for (int i = 0; i < edges.size(); i++) {
@@ -247,24 +268,33 @@ namespace HF::SpatialStructures {
 		edge_matrix.resize(edges.size(),  edges.size());
 		edge_matrix.reserve(sizes);
 
-		//Insert non-zeros
+		// Iterate through every node in nodes
 		for (int row_num = 0; row_num < edges.size(); row_num++)
 		{
-			getOrAssignID(Nodes[row_num]); //Add this node to our dictionary/ordered_node list
-			auto& row = edges[row_num];
-			for (int col_num = 0; col_num < row.size(); col_num++) {
-				float dist = distances[row_num][col_num];
-				int col = row[col_num];
-				edge_matrix.insert(row_num, col) = dist;
+			//Add this node to our dictionary/ordered_node list
+			getOrAssignID(Nodes[row_num]);
+
+			// Get the row out of the edges array
+			const auto & row = edges[row_num];
+			for (int i = 0; i < row.size(); i++) {
+				
+				// Get the column and distance from the row and distance array
+				float dist = distances[row_num][i];
+				int col_num = row[i];
+
+				// Insert it into the edge matrix. 
+				edge_matrix.insert(row_num, col_num) = dist;
 			}
 		}
+
+		// Compress the edge matrix to finalize it.
 		edge_matrix.makeCompressed();
 		//assert(edge_matrix.nonZeros() > 0);
 		needs_compression = false;
 	}
 
 	bool Graph::HasEdge(const std::array<float, 3>& parent, const std::array<float, 3>& child, bool undirected) const {
-		// Just convert it and pass it over to the other has edge
+		// Just convert it and pass it over to the other HasEdge
 		const Node p(parent);
 		const Node c(child);
 		return HasEdge(p, c, undirected);
