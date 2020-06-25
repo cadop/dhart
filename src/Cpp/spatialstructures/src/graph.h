@@ -18,7 +18,7 @@ namespace HF {
 	namespace SpatialStructures {
 
 
-		/*! Methods of aggregating the costs for edges for each node in the graph. 
+		/*! \brief Methods of aggregating the costs for edges for each node in the graph. 
 		
 		\see Aggregate Graph for details on how to use this struct.
 		*/
@@ -31,7 +31,7 @@ namespace HF {
 			COUNT = 2
 		};
 
-		/*! A struct to hold all necessary information for a CSR.
+		/*! \brief A struct to hold all necessary information for a CSR.
 
 			\remarks 
 			This can be used by external clients to recreate or map to 
