@@ -1,10 +1,6 @@
+/// \file Edge.h \brief Header file for an Edge data type, used by a graph ADT
 ///
-/// \file		Edge.h
-///	\brief		Header file for an Edge data type, used by a graph ADT
-///
-/// \author		TBA
-/// \date		06 Jun 2020
-///
+/// \author TBA \date 06 Jun 2020
 #pragma once
 
 #include <node.h>
@@ -12,33 +8,32 @@
 
 namespace HF {
 	namespace SpatialStructures {
-		/// <summary>
-		/// Describes the type of step an edge connects to 
-		/// </summary>
+		/// <summary> Describes the type of step an edge connects to. </summary>
 		enum STEP {
-			NOT_CONNECTED = 0,
-			NONE = 1,
-			UP = 2,
-			DOWN = 3,
-			OVER = 4
+			NOT_CONNECTED = 0, ///< No connection between parent and child.
+			NONE = 1,		 ///< Parent and child are on the same plane and no step is required.
+			UP = 2,			///< A step up is required to get from parent to child.
+			DOWN = 3,		///< A step down is required to get from parent to child.
+			OVER = 4		///< A step over something is required to get from parent to child.
 		};
 
-		// TODO: Should this be a private class?
-		/// <summary>
-		/// Indicates a connection between two nodes
-		/// </summary>
+		/// <summary> A connection to a child node. </summary>
+		/*!
+			\remarks To save memory, edge contains no parent node. This is usually because edges can be
+			placed in arrays to match the order of parent nodes.
+		
+		*/
 		struct Edge {
-			Node child;			///< The child node for this edge
-			STEP step_type;		///< see enum STEP, valid range is [0, 4]
-			float score;
+			Node child;			///< The child node for this edge.
+			STEP step_type;		///< Step required to traverse this edge \see STEP for info on every step type. 
+			float score;		///< The cost required to traverse this edge.
 
-			/// <summary>
-			/// Construct a new edge
-			/// </summary>
-			/// <param name="Child"> the node that this edge connects to </param>
-			/// <param name="Score"> the score of this edge</param>
-			/// <param name="Step_Type">The type of step </param>
-
+			/// <summary> Construct a new edge to child. </summary>
+			/// <param name="Child"> The node being traversed to. </param>
+			/// <param name="Score"> The cost to traverse from parent to child. </param>
+			/// <param name="Step_Type">
+			/// The type of step required to traverse from parent to child.
+			/// </param>
 			/*!
 				\code
 					// be sure to #include "Edge.h"
@@ -53,17 +48,18 @@ namespace HF {
 		};
 
 
-		/// <summary>
-		/// Like an edge, but without the node attached since that isn't always relevant.
-		/// </summary>
+		/// <summary> A lighter version of Edge that contains an ID instead of a full node object.. </summary>
 		struct IntEdge {
 			int child;      ///< Identifier of child node
-			float weight;	///< Weight of edge
+			float weight;	///< Cost to traverse to child. 
 		};
 
-		/// <summary>
-		/// A collection of edges for a specific node
-		/// </summary>
+		/// <summary> A collection of edges and a parent. </summary>
+		/*!
+			\remarks
+			This can to represent a node and its edges without repeating any information such
+			as parent_id or node objects.
+		*/
 		struct EdgeSet {
 			int parent;						///< Identifier of parent node
 			std::vector<IntEdge> children;	///< vector of IntEdge (children)

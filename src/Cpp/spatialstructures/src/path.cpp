@@ -26,15 +26,22 @@ namespace HF::SpatialStructures {
 	}
 
 	bool Path::operator==(const Path& P2) const {
+
+		// Return early if the sizes of this and P2 don't match
 		if (P2.size() != this->size()) return false;
 
+		// Otherwise, comapre elements one by one
 		for (int i = 0; i < this->size(); i++)
 		{
 			auto our_pm = (*this)[i];
 			auto their_pm = P2[i];
+
 			if (our_pm != their_pm)
 				return false;
 		}
+
+		// If we've gotten this far, then all path members
+		// must be equal.
 		return true;
 	}
 
