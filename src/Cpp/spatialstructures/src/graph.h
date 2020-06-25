@@ -1,7 +1,6 @@
 /// \file graph.h \brief Header file for a graph ADT
 ///
-/// \author TBA \date 06 Jun 2020
-/// \todo Forward declares for eigen.  
+/// \author TBA \date 06 Jun 2020 \todo Forward declares for eigen.
 
 #pragma once
 
@@ -19,7 +18,7 @@ namespace HF {
 	namespace SpatialStructures {
 
 
-		/*! Ways to aggregate the costs for edges of each node. 
+		/*! Methods of aggregating the costs for edges for each node in the graph. 
 		
 		\see Aggregate Graph for details on how to use this struct.
 		*/
@@ -28,19 +27,20 @@ namespace HF {
 			SUM = 0,
 			// Average the cost of all edges
 			AVERAGE = 1,
-			// Count how many edges this node has. 
+			// Count how many edges this node has.
 			COUNT = 2
 		};
 
 		/*! A struct to hold all necessary information for a CSR.
 
-			\details 
+			\remarks 
 			This can be used by external clients to recreate or map to 
-			the csr. For more information see 
+			an existing CSR. For more information on what these arrays contain
+			see
 			https://eigen.tuxfamily.org/dox/group__TutorialSparse.html
 		*/
 		struct CSRPtrs {
-			int nnz;	///< Number of non-zeros
+			int nnz;	///< Number of non-zeros contained by the CSR
 			int rows;	///< Number of rows in this CSR.
 			int cols;	///< Number of columns in this CSR.
 
@@ -48,16 +48,17 @@ namespace HF {
 			int* outer_indices;		///< Pointer to the CSR's outer indices array. 
 			int* inner_indices;		///< Pointer to the CSR's inner indices array.
 
-			/// <summary>
-			/// Verify this object points to a valid CSR.
-			/// </summary>
+			/// <summary> Verify the CSR referenced by this instance is valid. </summary>
 			/// <returns>
 			/// True if data, outer_indices, and inner_indices are non-null, false otherwise,
 			/// </returns>
 			/*!
+				\details
+				Simply checks that all the contained arrays are not null. 
+
 				\remarks
-				This is implemented this way because uninitialized or invalid Eigen arrays will return
-				null if they are in an invalid state (uninitialized, uncompressed, etc). 
+				For now, this just checks if any of the arrays are null since Eigen arrays will return
+				null pointers if they are in an invalid state (uninitialized, uncompressed, etc). 
 
 				\code
 					// be sure to #include "graph.h", and #include <memory>
@@ -87,21 +88,22 @@ namespace HF {
 			to store and maintain a CSR matrix.
 
 			\invariant
-				Always stores a valid graph and always assignes a unique ID to every node.
-				
+				Every node in the graph will have a Unique ID with no repeats
+
 		*/
 		class Graph {
 		private:
-			std::vector<Node> ordered_nodes;				///< A list of nodes contained by the graph
-			std::vector<int> id_to_nodes;					///< a list that indexes ordered_nodes with ids
+			std::vector<Node> ordered_nodes;				///< A list of nodes contained by the graph.
+			std::vector<int> id_to_nodes;					///< Maps ids to indexes in ordered_nodes.
 			robin_hood::unordered_map<Node, int> idmap;		///< Maps a list of X,Y,Z positions to ids
-			Eigen::SparseMatrix<float, 1> edge_matrix;		///< The CSR matrix
-			int next_id = 0;								///< The id for the next unique node
-			std::vector<Eigen::Triplet<float>> triplets;	///< A list of edges for construction by a list of triplets.
-			bool needs_compression = true;					///< The CSR is inaccurate and requires compression
+			Eigen::SparseMatrix<float, 1> edge_matrix;		///< The underlying CSR containing edge nformation.
+			int next_id = 0;								///< The id for the next unique node.
+			std::vector<Eigen::Triplet<float>> triplets;	///< Edges to be converted to a CSR when Graph::Compress() is called.
+			bool needs_compression = true;					///< If true, the CSR is inaccurate and requires compression.
 
 			/// <summary>
-			/// Get the unique ID for this x, y, z position or assign it a unique ID if one doesn't already exist
+			/// Get the unique ID for this x, y, z position, assigning it an new one if it doesn't
+			/// already exist
 			/// </summary>
 			/*!
 				\details 
@@ -111,6 +113,7 @@ namespace HF {
 
 				\param input_node Node to retrieve and potentially assign a new ID for. 
 				\returns The ID of input_node. 
+
 				\code
 					// definition of Graph::addEdge(const Node& parent, const Node& child, float score)
 				\endcode
@@ -159,12 +162,18 @@ namespace HF {
 			 \param distances Ordered array of distance from parent to child for each edge in edges.
 			 \param Nodes Ordered array of nodes to act as a parent to all children in it's array in edges.
 
+			\details Preallocates the matrix it in element by element and compresses it. 
+
 			 \pre 1) The size of all input arrays must match: 
 			 `(edges.size() == nodes.size() && nodes.size() == distances.size())`
 			
 			\pre 2) For the node at `nodes[i]`, `edges[i]` should contain an array for the id of all nodes
 			that `nodes[i]` has an edge from and, and `distances[i]` should contain an array of the the distance
 			from `nodes[i]` to one of the nodes it has an edge to in `edges[i]`.
+
+			\note After constructing a graph with this constructor, it will not be able to be modified.
+			Use the empty constructor and use addEdge if you want to modify the graph after construction.
+			This may change in the future. 
 
 			 \remarks
 			 This constructor can offer "slightly higher performance and memory consumption"
@@ -203,10 +212,13 @@ namespace HF {
 			/*! \brief Construct an empty graph.
 
 				\remarks This can be used to create a new graph to later be filled with edges/nodes
-				by calling Graph::addEdge() then calling Graph::MakeCompressed. Implementatin
+				by calling Graph::addEdge() then calling Graph::Compress(). Implementation
 				is based on the Eigen documentation for Filling a CSR:
 				https://eigen.tuxfamily.org/dox/group__TutorialSparse.html.
 
+				
+				\see Graph::addEdge() for details on adding edges.
+				\see Graph::Compress() for details on compressing the graph.
 
 				\code
 					// be sure to #include "graph.h"
@@ -363,15 +375,16 @@ namespace HF {
 
 			/// <summary> Get a list of all edges to and from node N. </summary>
 			/// <param name="N"> The Node to get edges from and to. </param>
-			/// <returns> A list of edges to and from node N or an empty array if is not 
-			/// in the graph. </returns>
+			/// <returns>
+			/// A list of edges to and from node N or an empty array if is not in the graph.
+			/// </returns>
 			/*!
-
 				\par Time Complexity
 				`O(k)` where k is the number of edges in the graph since it needs to iterate through 
 				every edge in the graph to find the edges to this node.
 
 				\see operator[] to get a list of directed edges only containing edges from N.
+				
 				\code
 					// be sure to #include "graph.h"
 			
@@ -405,11 +418,12 @@ namespace HF {
 			std::vector<Edge> GetUndirectedEdges(const Node & N) const;
 		
 			/// <summary> Get every in the given graph as IDs. </summary>
-			/// <returns> An array of edgesets for every node in the graph
-			/// (Graph in the form of IDs). </returns>
+			/// <returns>
+			/// An array of edgesets for every node in the graph (Graph in the form of IDs).
+			/// </returns>
 			/*!
 				
-				\exception std::exception if the graph isn't compressed.
+				\exception std::exception if the graph hasn't been compressed. compressed.
 				
 				\par Time Complexity
 				O(k) where k is the number of edges in the graph.
@@ -448,18 +462,25 @@ namespace HF {
 			*/
 			std::vector<EdgeSet> GetEdges() const;
 
-			/// <summary> Summarize the costs of every outgoing edge for every
-			/// node in the graph. </summary>
+			/// <summary>
+			/// Summarize the costs of every outgoing edge for every node in the graph.
+			/// </summary>
 			/// <param name="agg_type"> Type of aggregation to use. </param>
-			/// <param name="directed"> If true, include both incoming and
-			/// outgoing edges for every node in nodes </param>
-			/// <returns> An ordered list of scores for agg_type on 
-			/// each node in the graph. </returns>
+			/// <param name="directed">
+			/// If true, include both incoming and outgoing edges for calculating a node's score.
+			/// </param>
+			/// <returns> An ordered list of scores for agg_type on each node in the graph. </returns>
 			/*!
 				
 				\remarks Can be useful to get scores from the VisibilityGraph.
 
 				\exception std::out_of_range if agg_type doesn't match any value of COST_AGGREGATE.
+				\exception Std::exception if the graph isn't compressed.
+
+				\par Time Complexity
+				If undirected: `O(k)` where k is the total number of edges in the graph.\n
+				If directed: `O(n)` where n is the total number of nodes in the graph.
+
 				\see COST_AGGREGATE to see a list of supported aggregation types.
 				\code
 					// be sure to #include "graph.h"
@@ -490,14 +511,13 @@ namespace HF {
 			*/
 			std::vector<float> AggregateGraph(COST_AGGREGATE agg_type, bool directed=true) const;
 
-			/// <summary> Get a list of edges for the given node </summary>
-			/// <param name="n"> Node from which a list of edges will be derived </param>
-			/// <returns> A copy of the graph's list </returns>
-			/// <exception cref="std::outofrange">
-			/// Thrown if the requested object is not in the dictionary
-			/// </exception>
+			/// <summary> Get a list of all edges from Node n. </summary>
+			/// <param name="n"> Parent of all edges to retrieve. </param>
+			/// <returns> An array of edges from node n. </returns>
+			/// <exception cref="std::outofrange"> n does not exist in the graph. </exception>
 
 			/*!
+				\todo Should this just return an empty list instead of throwing?
 				\code
 					// be sure to #include "graph.h"
 			
@@ -541,15 +561,26 @@ namespace HF {
 			*/
 			const std::vector<Edge> operator[](const Node& n) const;
 
-			/// <summary>
-			/// Construct a new edge for the graph from parent and child pair. If the parent is not
-			/// in the graph as a key then it will be added
-			/// </summary>
-			/// <param name="parent"> The parent node to add to </param>
-			/// <param name="child"> The child node to add as an edge </param>
-			/// <param name="score"> The score for the given edge </param>
-
+			/// <summary> Add a new edge to the graph from parent to child. </summary>
+			/// <param name="parent"> Parent node of the edge. </param>
+			/// <param name="child"> Child node of the edge. </param>
+			/// <param name="score"> Cost of traversing from aprent to child. </param>
 			/*!
+				\details 
+				If the parent or child node do not have an ID. An ID will be assigned
+				automatically.
+
+				\warning
+				This will not work if the graph wasn't created from the empty constructor since
+				it has no internal edge list to add to.
+
+				\remarks
+				This adds a new element to the triplet list so next time Compress
+				is called, the value is added to the graph. 
+
+				\todo How should this signal that the graph can't have edges added to it? Or how do
+				we add edges to an existing graph quickly without adding to its edge list?
+
 				\code
 					// be sure to #include "graph.h"
 			
@@ -579,15 +610,24 @@ namespace HF {
 			*/
 			void addEdge(const Node& parent, const Node& child, float score = 1.0f);
 
-			/// <summary>
-			/// Construct a new edge for the graph using parent and child IDs. If the parent_id is
-			/// not in the graph as a key, it will be added
-			/// </summary>
-			/// <param name="parent_id"> The ID of the parent node for the edge to construct </param>
-			/// <param name="child_id"> The ID of the child node for the edge to construct </param>
-			/// <param name="score"> The score for the given edge </param>
-			
+			/// <summary> Add a new edge to the graph from parent to child. </summary>
+			/// <param name="parent"> Parent node of the edge. </param>
+			/// <param name="child"> Child node of the edge. </param>
+			/// <param name="score"> Cost of traversing from aprent to child. </param>
 			/*!
+				\details
+				If the parent or child ids don't exist in the dictionary, they will be added.
+
+				\warning
+				This will not work if the graph wasn't created from the empty constructor since
+				it has no internal edge list to add to.
+
+				\remarks
+				This adds a new element to the triplet list so next time Compress is called, 
+				the value is added to the graph.
+
+				\todo How should this signal that the graph can't have edges added to it? Or how do
+				we add edges to an existing graph quickly without adding to its edge list?
 				\code
 					// be sure to #include "graph.h"
 			
@@ -617,11 +657,18 @@ namespace HF {
 			*/
 			void addEdge(int parent_id, int child_id, float score);
 
-			/// <summary> Tell whether or not the graph has the given node in it as a parent </summary>
-			/// <param name="n"> Node to check for </param>
-			/// <returns> True if the node exists, false otherwise </returns>
+			/// <summary> Determine if n exists in the graph. </summary>
+			/// <param name="n"> Node to look for. </param>
+			/// <returns> True if the node exists, false otherwise. </returns>
 			
 			/*!
+
+				\details
+				Performs a single hash to check if n exists in the hashmap.
+
+				\par Time Complexity
+				O(1) since it's a single hash function.
+
 				\code
 					// be sure to #include "graph.h"
 			
@@ -662,10 +709,14 @@ namespace HF {
 			*/
 			bool hasKey(const Node& n) const;
 
-			/// <summary> Get a list of nodes as arrays of floats </summary>
-			/// <returns> A list of floats for each position of every node in the graph </returns>
-			
+			/// <summary> Get a list of nodes as float arrays. </summary>
+			/// <returns>
+			/// An array of float arrays containing the position of every node in the graph in order.
+			/// </returns>
 			/*!
+				\remarks
+				May be useful for to functions that take arrays instead of nodes.
+				
 				\code
 					// be sure to #include "graph.h"
 			
@@ -703,10 +754,10 @@ namespace HF {
 			*/
 			std::vector<std::array<float, 3>> NodesAsFloat3() const;
 
-			/// <summary> Determine how many nodes are in the graph </summary>
-			/// <returns> An int displaying how many nodes are in the graph (id_to_nodes.size()) </returns>
-			
+			/// <summary> Determine how many nodes are in the graph. </summary>
+			/// <returns> The number of nodes in the graph. </returns>
 			/*!
+				\details Size is directly returned from `id_to_nodes.size()`. 
 				\code
 					// be sure to #include "graph.h"
 			
@@ -732,9 +783,8 @@ namespace HF {
 			*/
 			int size() const;
 
-			/// <summary> Retrieve the ID for the given node. </summary>
+			/// <summary> Retrieve the ID for node in this graph. </summary>
 			/// <returns> The ID assigned to this node. -1 if it was not yet added to the graph </returns>
-			
 			/*!
 				\code
 					// be sure to #include "graph.h"
@@ -778,11 +828,23 @@ namespace HF {
 			*/
 			int getID(const Node& node) const;
 
-			/// <summary>
-			/// Compress the graph, significantly reducing memory usage, but disabling insertion.
-			/// </summary>
-			
 			/*!
+				\brief Compress the graph to a CSR and enable the usage of several functions.
+
+				\details 
+				This won't do anything if called on an already compressed graph. The graph is "compressed"
+				by resizing the edge matrix to the maximum ID of any node in triplets, then calling
+				setFromTriplets(). 
+
+				\note 
+				This function actually doesn't actually reduce memory usage since it keeps the edge list
+				in order to allow for modifications to the graph. In the future, it may be beneficial allow for
+				the user to pass in a boolean that would delete the triplet array if true. 
+
+				\remarks
+				This method of constructing the CSR is based on Eigen's documentation for 
+				Filling a sparse matrix https://eigen.tuxfamily.org/dox/group__TutorialSparse.html.
+
 				\code
 					// be sure to #include "graph.h"
 
@@ -816,13 +878,21 @@ namespace HF {
 			void Compress();
 
 			/// <summary>
-			/// Obtain pointers to the 3 arrays of the CSR, as well as any extra info that may be
-			/// necesary to use the CSR in another language. This will automatically compress the
+			/// Obtain the size of and pointers to the 3 arrays that comprise this graph's CSR.
 			/// graph if it isn't compressed already
 			/// </summary>
-			/// <returns> An instance of a struct CSRPtrs, using the member field edge_matrix </returns>
+			/// <returns> Pointers and sizes of the arrays that comprise the CSR. If the CSR cannot
+			/// be constructed due to factors such as an empty input array, then the CSRPtrs contain null
+			/// values for it's pointers. </returns>
 			
 			/*!
+				\details This will automatically call Compress if it hasn't been called already.
+
+				\remarks 
+				This can be useful for reconstructing or mapping to the CSR without interacting
+				with eigen at all. Numpy can directly make map the arrays returned by this function
+				to it's own CSR implementation.
+
 				\code
 					// be sure to #include "graph.h"
 
@@ -852,14 +922,16 @@ namespace HF {
 					// Graph will be compressed automatically be GetCSRPointers
 					CSRPtrs returned_csr = graph.GetCSRPointers();
 				\endcode
+
+				\see CSRPtrs.AreValid() for checking if the return value represents a valid CSR.
 			*/
 			CSRPtrs GetCSRPointers();
 
-			/// <summary> Retrieve the node that corresponds to id </summary>
-			/// <param name="id"> The id for the desired node </param>
+			/// <summary> Retrieve the node that corresponds to id. </summary>
+			/// <param name="id"> The ID of the node to get. </param>
 			/// <returns> The node corresponding to id, by value </returns>
-			
 			/*!
+				\exception std::out_of_range id didn't belong to any node in the graph. 
 				\code
 					// be sure to #include "graph.h"
 
@@ -890,8 +962,7 @@ namespace HF {
 			*/
 			Node NodeFromID(int id) const;
 
-			/// <summary> Clear all nodes and edges in the graph. </summary>
-			
+			/// <summary> Clear all nodes and edges from the graph. </summary>
 			/*!
 				\code
 					// be sure to #include "graph.h"
@@ -922,10 +993,9 @@ namespace HF {
 			void Clear();
 
 			// TODO: Should these even be in the graph?
-
 			/// <summary> Calculate cross slope for the given graph </summary>
-			
 			/*!
+				\deprecated Not Implemented.
 				\code
 					// TODO example - code commented out in graph.cpp
 				\endcode
@@ -933,8 +1003,8 @@ namespace HF {
 			void GenerateCrossSlope();
 
 			/// <summary> Calculate energy for the given graph </summary>
-			
 			/*!
+				\deprecated Not Implemented.
 				\code
 					// TODO example - code commented out in graph.cpp
 				\endcode
