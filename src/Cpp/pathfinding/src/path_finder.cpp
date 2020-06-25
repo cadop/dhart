@@ -127,7 +127,6 @@ namespace HF::Pathfinding {
 
 		\returns
 		A DistPred filled with the distance and predecessor arrays for ID in g.
-
 	*/
 	inline DistPred BuildDistanceAndPredecessor(const graph_t& g, int id) {
 
@@ -158,17 +157,17 @@ namespace HF::Pathfinding {
 
 	vector<Path> FindPaths( BoostGraph * bg, const vector<int> & start_points, const vector<int> & end_points)
 	{
+		// Get the graph from bg
 		const graph_t& graph = bg->g;
 		vector<Path> paths(start_points.size());
-
-		robin_hood::unordered_map<int, DistPred> dpm;
-
+		
 		// Generate predecessor matrices for every unique start point
+		robin_hood::unordered_map<int, DistPred> dpm;
 		for (int start_point : start_points) 
 			if (dpm.count(start_point) == 0)
 				dpm[start_point] = BuildDistanceAndPredecessor(graph, start_point);
 
-		//Create shortestpaths for every pair
+		//Create shortestpaths for start_end pair
 		for (int i = 0; i < start_points.size(); i++) {
 			int start = start_points[i];
 			int end = end_points[i];
@@ -188,43 +187,55 @@ namespace HF::Pathfinding {
 		int* out_sizes
 	) {
 
+		// Get graph from boost graph
 		const graph_t& graph = bg->g;
 		robin_hood::unordered_map<int, DistPred> dpm;
 
+		// Use maximum number of cores for this machine 
 		int core_count = std::thread::hardware_concurrency();
 		int cores_to_use = std::min(core_count-1, static_cast<int>(start_points.size()));
 		omp_set_num_threads(cores_to_use);
 
 
-		//printf("Performing setup for %d paths using a max of, %d cores\n", static_cast<int>(start_points.size()), cores_to_use);
 		// Generate predecessor matrices for every unique start point
 		std::vector<int> start_copy = start_points;
 		std::sort(std::execution::par_unseq, start_copy.begin(),start_copy.end());
 		std::vector<int> unique_starts;
 		std::unique_copy(start_copy.begin(), start_copy.end(), std::back_inserter(unique_starts));
 
-		//Preallocate the hash map
-		for (auto uc : unique_starts) {
+		// Preallocate entries for the hash map
+		for (auto uc : unique_starts)
 			dpm.emplace(std::pair<int, DistPred>{uc, DistPred()});
-		}
+
+		// Build Predecessors and distance matrices in parallel
 	#pragma omp parallel for schedule(dynamic) if (unique_starts.size() > cores_to_use && cores_to_use > 4)
 		for (int i = 0; i < unique_starts.size(); i++) {
 			int start_point = unique_starts[i];
 			dpm[start_point] = BuildDistanceAndPredecessor(graph, start_point);
 		}
 
-		//Create shortestpaths for every pair
-
+		// Create paths in parallel.
 #pragma omp parallel for schedule(dynamic) if (cores_to_use > 4)
 		for (int i = 0; i < start_points.size(); i++) {
+
+			// Get the start and end point for this path
 			int start = start_points[i];
 			int end = end_points[i];
+
+			// Get a reference to the distance and predecessor array for this start point. 
 			const auto& dist_pred = dpm[start];
 
+			// Construct the shortest path, store a point for it in out_paths at index i
 			out_paths[i] = new Path(ConstructShortestPathFromPred(start, end, dist_pred));
+
+			// Store a pointer to that path's PathMembers in out_path_members
 			out_path_members[i] = out_paths[i]->GetPMPointer();
+
+			// Store the size of the path's PathMembers in index i of out_sizes
 			out_sizes[i] = out_paths[i]->size();
 
+			// If the size of the path is zero, delete the path and set it's pointer
+			// to a null pointer in the output array.
 			if (out_sizes[i] == 0) {
 				delete (out_paths[i]);
 				out_paths[i] = nullptr;
