@@ -16,23 +16,33 @@
 namespace HF
 {
 	namespace SpatialStructures {
+
+		/*!
+			\brief The type of node this is.
+			
+			\remarks
+
+			This was primarially used in the previous codebase to differentiate the different types of
+			nodes in the database. Since the database is not implemented here, this goes entirely
+			unused.
+		*/
 		enum NODE_TYPE {
-			GRAPH = 0,
+			GRAPH = 0,		///< This node is a graph node.
 			POI = 1,		///< POI is 'point of interest'
-			OTHER = 2
+			OTHER = 2		///< This node doesn't belong in any other category. 
 		};
 
 		/// <summary>
-		/// A point in space with an ID
+		/// A point in space with an ID.
 		/// </summary>
 		struct Node {
 		public:
 			float x, y, z;		///< Cartesian coordinates x, y, z
-			short type = GRAPH; ///< Default this field to GRAPH
+			short type = GRAPH; ///< Unused. \see NODE_TYPE
 			int id;				///< Node identifier
 
 			/// <summary>
-			/// Default constructor. Constructs everything with NAN
+			/// Default constructor. Every element contained is defaulted to NAN.
 			/// </summary>
 			
 			/*!
@@ -44,13 +54,12 @@ namespace HF
 			*/
 			Node();
 
-			// Constructors
 			/// <summary>
-			/// Create a node without an ID
+			/// Create a node without an ID.
 			/// </summary>
-			/// <param name="x"> X coordinate</param>
-			/// <param name="y"> Y coordinate</param>
-			/// <param name="z"> Z coordinate</param>
+			/// <param name="x"> X coordinate.</param>
+			/// <param name="y"> Y coordinate.</param>
+			/// <param name="z"> Z coordinate.</param>
 			/// <param name="id"> ID of the node </param>
 			
 			/*!
@@ -63,10 +72,9 @@ namespace HF
 			Node(float x, float y, float z, int ID = -1);
 
 			/// <summary>
-			/// Create a node without an ID
+			/// Create a node from an array.
 			/// </summary>
-			/// <param name="position">An array of 3 floats for x,y,z</param>
-			
+			/// <param name="position">An array of 3 floats for x,y,z.</param>
 			/*!
 				\code
 					// be sure to #include "node.h"
@@ -90,10 +98,10 @@ namespace HF
 			Node(const std::array<float, 3>& position, NODE_TYPE t, int id);
 
 			/// <summary>
-			/// Calculate the distance between this node and the given node
+			/// Calculate the distance between this node and n2.
 			/// </summary>
-			/// <param name="n2">Note to get distance to </param>
-			/// <returns>Distance between this node and n2</returns>
+			/// <param name="n2">Note to calculate the distance to. </param>
+			/// <returns>Distance between this node and n2.</returns>
 			
 			/*!
 				\code
@@ -138,10 +146,9 @@ namespace HF
 			std::array<float, 3> directionTo(const Node& n2) const;
 
 			/// <summary>
-			/// Returns the x,y,z of this node as an array of 3 floats
+			/// Returns the x,y,z of this node as an array of 3 floats.
 			/// </summary>
-			/// <param name="n2"></param>
-			/// <returns></returns>
+			/// <returns> The x,y, and z coordinates of this node as an array of floats.</returns>
 
 			/*!
 				\code
@@ -165,12 +172,15 @@ namespace HF
 			// Operators
 
 			/// <summary>
-			/// Directly access a nodes's position as if it were an array of 3 floats
+			/// Directly access a nodes's position as if it were an array of 3 floats,
 			/// </summary>
 			/// <param name="i"> Index. 0 = x, 1 = y, 2 = z</param>
-			/// <returns>a reference to the member float for the requested coordinate</returns>
-
+			/// <returns>A reference to the member float for the requested coordinate</returns>
 			/*!
+				\exception std::exception i was greater than 2 or less than 0.
+
+				\todo Exception should be std::out_of_range to match other functionality
+
 				\code
 				// be sure to #include "node.h"
 			
@@ -183,12 +193,18 @@ namespace HF
 			float& operator[](int i);
 
 			/// <summary>
-			/// Access a nodes's position, by value
+			/// Access a nodes's position, by value.
 			/// </summary>
 			/// <param name="i"> Index. 0 = x, 1 = y, 2 = z</param>
 			/// <returns>the value (copy) of the member float for the requested coordinate</returns>
-
 			/*!
+				\remarks Unlike the non-const version of this function, this will actually allow the caller
+				to change the value of x, y, or z. Will automatically be selected if the node isn't const. 
+				
+				\exception std::exception i was greater than 2 or less than 0.
+				
+				\todo Exception should be std::out_of_range to match other functionality
+
 				\code
 					// be sure to #include "node.h"
 			
@@ -201,11 +217,11 @@ namespace HF
 			float operator[](int i) const;
 
 			/// <summary>
-			/// Check if n1 occupies the same space as n2
+			/// Check if this node occupies the same space as n2.
 			/// </summary>
 			/// <param name="n2">Node to compare with n1</param>
-			/// <returns>True if the distance between n1 and n2 is less than Rounding Precision, false otherwise</returns>
-
+			/// <returns>True if the distance between n1 and n2 is less than Rounding Precision,
+			///  false otherwise.</returns>
 			/*!
 				\code
 					// be sure to #include "node.h"
@@ -228,11 +244,11 @@ namespace HF
 
 
 			/// <summary>
-			/// Assigns the values of array n2 to n1
+			/// Assigns the values of array n2 to n1.
 			/// </summary>
-			/// <param name="n2">Array whose values will be assigned to n1</param>
-
+			/// <param name="n2">Array whose values will be assigned to n1.</param>
 			/*!
+				\deprecated Undefined. The default copy behavior is used instead.
 				\code
 					// Note: This member function is not defined in node.cpp (commented out)
 
@@ -247,10 +263,11 @@ namespace HF
 			void operator=(const std::array<float, 3>& n2);
 
 			/// <summary>
-			/// See operator==, checks if n1 does NOT occupy the same space as n2
-			/// <param name="n2">Node to compare with N1</param>
+			/// See operator==, checks if this node does NOT occupy the same space as n2.
+			/// <param name="n2">Node to compare with this node.</param>
 			/// </summary>
-			/// <returns>True if the distance between n1 and n2 is greater than or equal to Rounding Precision, false otherwise</returns>
+			/// <returns>True if the distance between n1 and n2 greator greater than or equal to Rounding Precision,
+			///  false otherwise.</returns>
 			
 			/*!
 				\code
@@ -274,9 +291,9 @@ namespace HF
 			bool operator!=(const Node& n2) const;
 
 			/// <summary>
-			/// Creates a node from the vector subtraction of n1, n2
+			/// Creates a node from the vector subtraction of this node and n2's position.
 			/// </summary>
-			/// <param name="n2">Node to subtract from N1</param>
+			/// <param name="n2">Node to subtract from this node.</param>
 			/// <returns>A node with the values obtained from n1 - n2</returns>
 			
 			/*!
@@ -296,7 +313,7 @@ namespace HF
 			Node operator-(const Node& n2) const;
 
 			/// <summary>
-			/// Creates a new node from the vector addition of n1, n2
+			/// Creates a new node from the vector addition of this node and n2.
 			/// </summary>
 			/// <param name="n2">Node to add to n1</param>
 			/// <returns>A node with the values obtained from n1 + n2</returns>
@@ -317,7 +334,7 @@ namespace HF
 			Node operator+(const Node& n2) const;
 
 			/// <summary>
-			/// Creates a new node from the dot product of n1, n2
+			/// Creates a new node from the dot product of this node and n2.
 			/// </summary>
 			/// <param name="n2">Second factor of dot product, N1 (dot) N2</param>
 			/// <returns>A node with the values obtained from the dot product of N1 and N2</returns>
@@ -338,11 +355,10 @@ namespace HF
 			Node operator*(const Node& n2) const;
 
 			/// <summary>
-			/// Determines if n1's id (an integer) is less than n2's id
+			/// Determines if this node's id (an integer) is less than n2's id.
 			/// </summary>
-			/// <param name="n2">Node whose id will be compared with n1</param>
-			/// <returns>True if n1's id is less than n2's id, false otherwise</returns>
-
+			/// <param name="n2">Node to compare against. </param>
+			/// <returns>True if this node's id is less than n2's id, false otherwise</returns>
 			/*!
 				\code
 					// be sure to #include "node.h"
@@ -357,10 +373,11 @@ namespace HF
 			bool operator<(const Node& n2) const;
 
 			/// <summary>
-			/// Determines if n1's id (an integer) is less than n2's id - const qualification omitted for std::sort
+			/// Determines if this node's id (an integer) is less than n2's id.
+			/// const qualification omitted for std::sort.
 			/// </summary>
 			/// <param name="n2">Node whose id will be compared with n1</param>
-			/// <returns>True if n1's id is less than n2's id, false otherwise</returns>
+			/// <returns>True if this node's id is less than n2's id, false otherwise</returns>
 
 			/*!
 				\code
@@ -388,7 +405,7 @@ namespace HF
 			bool operator<(const Node& n2);
 
 			/// <summary>
-			/// Determines if n1's id (an integer) is greater than n2's id
+			/// Determines if this node's id (an integer) is greater than n2's id
 			/// </summary>
 			/// <param name="n2">Node whose id will be compared with n1</param>
 			/// <returns>True if n1's id is greater than n2's id, false otherwise</returns>
@@ -411,12 +428,14 @@ namespace HF
 
 /// Hashing code for nodes
 namespace std {
+	/// \brief combine value into the hash value of seed
 	template <typename SizeT>
 	inline void hash_combine_impl(SizeT& seed, SizeT value) noexcept
 	{
 		seed ^= value + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 	}
 
+	/// \brief Hash this node by combining the hashes of all of it's position elements.
 	template <>
 	struct hash<HF::SpatialStructures::Node>
 	{
@@ -429,11 +448,13 @@ namespace std {
 		}
 	};
 
+	/// \brief Create a string containing the x,y,z position of this node
 	inline ostream& operator<<(ostream& os, const HF::SpatialStructures::Node n) {
 		os << "(" << n.x << ", " << n.y << ", " << n.z << ")";
 		return os;
 	}
 
+	/// \brief Create a string containing the x,y,z positions of this array.
 	inline ostream& operator<<(ostream& os, const std::array<float, 3> n) {
 		os << "(" << n[0] << "," << n[1] << "," << n[2] << ")";
 		return os;
