@@ -20,14 +20,14 @@ namespace HF {
 
 		/*! \brief Methods of aggregating the costs for edges for each node in the graph. 
 		
-		\see Aggregate Graph for details on how to use this struct.
+		\see Graph.AggregateGraph() for details on how to use this enum.
 		*/
 		enum class COST_AGGREGATE : int {
-			// Add the cost of all edges.
+			/// Add the cost of all edges.
 			SUM = 0,
-			// Average the cost of all edges
+			/// Average the cost of all edges
 			AVERAGE = 1,
-			// Count how many edges this node has.
+			/// Count how many edges this node has.
 			COUNT = 2
 		};
 
@@ -123,9 +123,6 @@ namespace HF {
 
 			/*!
 				\brief Add an ID to the graph if it doesn't exist already.
-
-				\details 
-				This onyl exists 
 
 				\code
 					// definition of Graph::addEdge(int parent_id, int child_id, float score)
@@ -273,7 +270,7 @@ namespace HF {
 				bool undirected = false
 			) const;
 
-			/* \brief Determine if the graph has an edge from parent to child.
+			/*! \brief Determine if the graph has an edge from parent to child.
 			
 				\param parent Parent of the edge to check for.
 				\param child Child of the edge to check for.
@@ -309,6 +306,7 @@ namespace HF {
 				\endcode
 			*/
 			bool HasEdge(const Node& parent, const Node& child, const bool undirected = false) const;
+			
 			/* \brief Determine if the graph has an edge from parent to child.
 
 				\param parent Parent of the edge to check for.
@@ -472,7 +470,7 @@ namespace HF {
 			/// <returns> An ordered list of scores for agg_type on each node in the graph. </returns>
 			/*!
 				
-				\remarks Can be useful to get scores from the VisibilityGraph.
+				\remarks Useful for getting scores from the VisibilityGraph.
 
 				\exception std::out_of_range if agg_type doesn't match any value of COST_AGGREGATE.
 				\exception Std::exception if the graph isn't compressed.
@@ -929,7 +927,7 @@ namespace HF {
 
 			/// <summary> Retrieve the node that corresponds to id. </summary>
 			/// <param name="id"> The ID of the node to get. </param>
-			/// <returns> The node corresponding to id, by value </returns>
+			/// <returns> The node corresponding to id, by value. </returns>
 			/*!
 				\exception std::out_of_range id didn't belong to any node in the graph. 
 				\code

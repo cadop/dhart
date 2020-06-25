@@ -44,7 +44,6 @@ namespace HF
 			/// <summary>
 			/// Default constructor. Every element contained is defaulted to NAN.
 			/// </summary>
-			
 			/*!
 				\code
 					// be sure to #include "node.h"
@@ -85,9 +84,11 @@ namespace HF
 			*/
 			Node(const std::array<float, 3>& position);
 
-			// Create a point of interest
-			
 			/*!
+				\brief Constructor to create a node with a different NODE_TYPE.
+
+				\see NODE_TYPE
+
 				\code
 					// be sure to #include "node.h"
 
