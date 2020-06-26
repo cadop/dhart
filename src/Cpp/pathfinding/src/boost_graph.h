@@ -89,13 +89,13 @@ namespace HF {
 		// Note: These structs and typedefs are used to simplify creation and usage of the boost
 		// graph and serve no purpose outside of that.
 
-		/// <summary> Used internally by the BoostGraph to hold edge costs. </summary>
+		/// <summary> Data stored for every edge in the BoostGraph. </summary>
 		/*! \details Each edge in the graph only stores its weight as a float. */
 		struct Edge_Cost { 
 			float weight; ///< Cost of traversing this edge.
 		};
 
-		/// <summary> Data held by each vertex in the BoostGraph. </summary>
+		/// <summary> Data stored for every vertex in the BoostGraph.</summary>
 		/*!
 			\details 
 			Every vertex stores in the graph stores it's index p and a unique double d.
@@ -133,7 +133,7 @@ namespace HF {
 		/// type. /summary>
 		typedef boost::graph_traits< graph_t >::vertex_descriptor vertex_descriptor;
 
-		/// <summary> Alias for std::pair<int, int> </summary>
+		/// <summary> Shorten std::pair to simplify graph construction. </summary>
 		typedef std::pair <int, int> pair;
 
 		/*!
@@ -168,9 +168,9 @@ namespace HF {
 				\param graph Graph to create a graph in boost from. 
 
 				\details 
-				Every edge in the  is used to create a graph in Boost.
-				This will also allocate space equal to the number of nodes in g for this class's p and d arrays for use
-				in FindPath.
+				Every edge and node in the graph is used to create a graph in Boost. This will also allocate space
+				equal to the number of nodes in g for this class's p and d arrays for use in FindPath as an 
+				optimization.
 
 				\invariant
 				This class will always carry a valid boost graph. 
@@ -204,8 +204,16 @@ namespace HF {
 			*/
 			BoostGraph(const HF::SpatialStructures::Graph& graph);
 
-			/// <summary> Empty destructor required for BoostGraphDeleter to work in path_finder.h </summary>
+			/// <summary> Explicit Destructor required for BoostGraphDeleter to work in path_finder.h. </summary>
 			/*!
+
+				\details Calls the default destruction behavior. 
+
+				\warning 
+				Do not modify this function! This class is still using the default destructor, but unique pointer
+				requires the destructor to be declared. 
+
+
 				\code{.cpp}
 					// be sure to #include "boost_graph.h", #include "node.h", #include "graph.h",
 					// and #include <vector>

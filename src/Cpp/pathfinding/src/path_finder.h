@@ -1,4 +1,4 @@
-/// \file path_finder.h \brief Header file for BoostGraphDeleter
+/// \file path_finder.h \brief Contains declarations for various pathfinding functions. 
 ///
 /// \author TBA \date 17 Jun 2020
 #include <memory>
@@ -12,30 +12,41 @@ namespace HF {
 		class PathMember;
 	}
 
+	/*! 
+		\brief Algorithms to find the shortest path between nodes in a HF::SpatialStructures::Graph. 
+	
+		\details
+		This namespace utilizes pathfinding algorithms from Boost internally.To make use of the algorithms
+		in this namespace, first you must create a BoostGraph from the HF::SpatialStructures::Graph you 
+		want to find paths in.		
+
+		\see HF::SpatialStructures::Path for a description of the path datatype.
+		\see BoostGraph for details on generating a BoostGraph from a HF::SpatialStructures::Graph.
+	*/
 	namespace Pathfinding {
 		class BoostGraph; // Forward declared to prevent clients from importing boost. 	
 
 		/*!
-			\brief A struct solely to hold a delete function for the boost graph. 
+			\brief Deleter for the BoostGraph. 
 
 			\remarks
 			 BoostGraphDeleter is needed by std::unique_ptr to destroy a  BoostGraph; it is not meant to be called directly. 
-			 You do not want to pass the address of a stack-allocated BoostGraph to BoostGraphDeleter::operator().
-			 BoostGraphDeleter's operator() calls operator delete on the (BoostGraph *) argument, and passing the address 
-			 of a stack-allocated BoostGraph for said argument will result in undefined behavior.
 		
 			\remarks Implementation based on standard library reference for unique pointer
 			https://en.cppreference.com/w/cpp/memory/unique_ptr
 
-			\warning BoostGraphDeleter is only for use with std::unique_ptr.
+			\warning BoostGraphDeleter is only for use with std::unique_ptr. You do not want to pass the address of a 
+			stack-allocated BoostGraph to BoostGraphDeleter.operator()(). BoostGraphDeleter.operator() calls operator 
+			delete on the (BoostGraph *) argument, and passing the address of a stack-allocated BoostGraph for said 
+			argument will result in undefined behavior.
 
-			\see BoostGraph::CreateBoostGraph for BoostGraphDeleter's intended use.
+			\see CreateBoostGraph for BoostGraphDeleter's intended use.
 		*/
 		struct BoostGraphDeleter {
 		public:
 
-			/// <summary> A simple struct to wrap and delete a boost graph. </summary>
-			/// <param name="bg"> The address of a BoostGraph (pointer to BoostGraph) </param>
+			/// <summary> Delete a boost graph. </summary>
+			/// <param name="bg"> Pointer to the boost graph to delete. </param>
 			/*!
 				\code
 					// be sure to #include "path_finder.h", #include "boost_graph.h", #include
@@ -99,7 +110,9 @@ namespace HF {
 			This returns a pointer since it insulates the caller from needing to import Boost, which
 			is extremely useful for the C_Interface since its clients will not need to use boost at
 			all and it doesn't need to go through the trouble of compiling all of the boost library
-			(again). 
+			(again). A unique pointer was chosen here so the caller doesn't need to worry about
+			manually deleting the returned boost graph at a later point. 
+
 			
 			\code
 				// be sure to #include "path_finder.h", #include "boost_graph.h", #include "node.h",
@@ -188,15 +201,16 @@ namespace HF {
 			\returns 
 			An ordered array of paths matching the order of the pairs of start_id and end_id.
 			Paths that could not be generated will be returned as paths with no nodes.
-	
-			\pre Length of start_points must match that of end_points.
 
 			\details
 			More efficient than calling FindPath manually in a loop. Sorts paths by starting point,
 			calculates only one predecessor matrix per unique starting point, then finds a
 			path for every pair. 
 
+			\pre Length of start_points must match that of end_points.
+			
 			\todo This isn't in parallel! Can be implemented using a similar approach to InsertPathsIntoArray. 
+			
 			\code
 				// be sure to #include "path_finder.h", #include "boost_graph.h", and #include "graph.h"
 
@@ -244,12 +258,23 @@ namespace HF {
 		);
 
 		/// <summary> Find a path from every node to every node (NOTE: Not implemented yet.) </summary>
-		/// <param name="bg"> A BoostGraph for the desired traversal </param>
-		/// <param name="start_id"> Identifier for the starting node (start point) </param>
-		/// <param name="end_id"> Identifier for the ending node (end point) </param>
-		/// <returns> A std::vector of Path </returns>
-		/// \todo Implement this.
+		/// <param name="bg"> Graph to generate all paths for. traversal </param>
+		/// <returns> A list of every path that could be generated from this graph. </returns>
 		/*!
+			\details
+			Calculate a permutation for every combination of nodes in the graph,
+			then call FindPaths, OR Write a unique function inspired by FindPaths
+			that just runs through a range of paths. 
+
+			\remarks
+			May benefit from using an algorithm optimized for this like
+			https://www.boost.org/doc/libs/1_73_0/libs/graph/doc/floyd_warshall_shortest.html.
+
+			\exception std::out_of_memory if the memory required is too large.
+
+			\warning This will allocate a large amount of memory. Ensure that this won't run out
+			of memory when called, or be prepared to catch an out of memory exception.
+			\todo Implement this function to the specifications outlined here. 
 			 \code
 				// NOTE: HF::Pathfinding::FindAllPaths is not implemented yet.
 
@@ -273,7 +298,7 @@ namespace HF {
 				// all_paths will contain all shortest paths for [node 0, node 4]
 			 \endcode
 		*/
-		std::vector<HF::SpatialStructures::Path> FindAllPaths(BoostGraph * bg, int start_id, int end_id);
+		std::vector<HF::SpatialStructures::Path> FindAllPaths(BoostGraph * bg);
 		
 		/*!
 			\brief A special version of FindPaths optimized for the C_Interface.
@@ -299,11 +324,11 @@ namespace HF {
 			\remarks 
 			Usually the C-Interface is able to simply wrap existing functions with minimal code to make them accessible to exernal
 			callers, however in this specific situation there were real performance gains to be found by implementing this function
-			directly in the path_finder itself. It's efficent and safe for that purpose, but FindPaths should be preferred
-			outside of that context	since this function can be quite dangerous if not handled properly. 
+			directly in HF::PathFinding itself. It's efficent and safe for that purpose, but \link FindPaths \endlink should be 
+			preferred outside of that context since this function can be quite dangerous if not handled properly. 
 
 			\warning
-			The caller is responsible for freeing all of the memory allocated in out_paths and out_sizes.The contents of
+			The caller is responsible for freeing all of the memory allocated in out_paths and out_sizes. The contents of
 			out_path_members will automatically be deleted when the path they belong to is deleted. Do not try
 			to manually delete out_path_members or the path that owns it will throw a null pointer exception
 			when it is deleted.
