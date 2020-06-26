@@ -55,7 +55,18 @@ namespace std {
 	};
 }
 
-// Unsure of why this exists. 
+/*!  
+	\brief The Boost C++ library. https://www.boost.org/
+
+	\details
+	HumanFactors uses a subset of the boost library containing only the essentials for 
+	creating graphs and running shortest path algorithms. Use of boost is 
+	exclusive to the HF::Pathfinding namespace. 
+
+	\see BoostGraph For the graph implementation used.
+	\see path_finder.h for the boost functionality used. 
+	
+*/
 namespace boost
 {
 #ifdef BOOST_NO_EXCEPTIONS
@@ -75,32 +86,51 @@ namespace HF {
 	}
 
 	namespace Pathfinding {
-		using pair = std::pair<int, int>;
+		// Note: These structs and typedefs are used to simplify creation and usage of the boost
+		// graph and serve no purpose outside of that.
 
-		/// <summary> Represents the weight of an edge within a graph, used by graph_t </summary>
+		/// <summary> Used internally by the BoostGraph to hold edge costs. </summary>
+		/*! \details Each edge in the graph only stores its weight as a float. */
 		struct Edge_Cost { 
-			float weight;	///< weight/cost of an edge
+			float weight; ///< Cost of traversing this edge.
 		};
 
-		/// <summary> Represents a vertex descriptor, used by graph_t </summary>
+		/// <summary> Data held by each vertex in the BoostGraph. </summary>
+		/*!
+			\details 
+			Every vertex stores in the graph stores it's index p and a unique double d.
+		
+			\todo Is the double d needed?
+		
+		*/
 		struct vertex_data {
 			boost::graph_traits<
 				boost::compressed_sparse_row_graph<boost::directedS>
-			>::vertex_descriptor p;			///< A vertex_descriptor for a directed Boost CSR graph
-			double d;
+			>::vertex_descriptor p;			///< The index of a vertex in the CSR.
+			double d;						///< Unknown may have been used for the colormap. 
 		};
 
-		/// <summary>
-		/// Alias for a graph type, a directed Compressed Sparse Row (CSR) graph See struct
-		/// vertex_data and struct Edge_Cost
-		/// </summary>
+		/*! 
+			\brief Type of graph held by the BoostGraph.
+
+			\details
+			Set the graph as directed, store vertex_data for each vertex store Edge_Cost for each edge. 
+
+			\remarks
+			By changing the contents of this typedef, you can change the type of graph that the BoostGraph holds,
+			and the the type of data stored for each vertex or edge.
+
+			\see vertex_data for info on what every vertex in the graph holds.
+			\see Edge_Cost for info on what every edge in the graph holds. 
+		*/
 		typedef boost::compressed_sparse_row_graph<
 			boost::directedS,
 			vertex_data,
 			Edge_Cost
 		> graph_t;
 
-		/// <summary> Alias for a vertex_descriptor See graph_t </summary>
+		/// <summary> Quick alias to shorten the typename of vertex descriptors for our graph_t
+		/// type. /summary>
 		typedef boost::graph_traits< graph_t >::vertex_descriptor vertex_descriptor;
 
 		/// <summary> Alias for std::pair<int, int> </summary>
@@ -125,10 +155,11 @@ namespace HF {
 			 after creation.
 
 			 \see HF::SpatialStructures::Graph for a graph that's better supported in HumanFactors.
+			 \see graph_t for info about the graph in boost this class holds. 
 		*/
 		class BoostGraph {
 		public:
-			graph_t g;							///< Directed CSR graph (Boost)
+			graph_t g;							///< The underlying graph in boost.
 			std::vector<vertex_descriptor> p;	///< Vertex array preallocated to the number of nodes in the graph.
 			std::vector<double> d;				///< Distance array preallocated to the number of nodes in the graph.
 
@@ -173,9 +204,7 @@ namespace HF {
 			*/
 			BoostGraph(const HF::SpatialStructures::Graph& graph);
 
-			/// <summary>
-			/// Empty destructor required for BoostGraphDeleter to work in path_finder.h
-			/// </summary>
+			/// <summary> Empty destructor required for BoostGraphDeleter to work in path_finder.h </summary>
 			/*!
 				\code{.cpp}
 					// be sure to #include "boost_graph.h", #include "node.h", #include "graph.h",
