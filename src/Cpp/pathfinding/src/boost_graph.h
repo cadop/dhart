@@ -1,20 +1,16 @@
+/// \file boost_graph.h \brief Header file for BoostGraph
 ///
-///	\file		boost_graph.h
-///	\brief		Header file for BoostGraph
-///
-///	\author		TBA
-///	\date		17 Jun 2020
-///
+/// \author TBA \date 17 Jun 2020
 #include <boost/graph/graph_traits.hpp>
 #include <boost/graph/adjacency_matrix.hpp>
 #include <boost/graph/directed_graph.hpp>
 #include <boost/graph/compressed_sparse_row_graph.hpp>
 #include <boost/graph/adjacency_list.hpp>
 
+
+// Define a hash function for arrays of 3 floats.
 namespace std {
-	/// <summary>
-	/// Used to create a seed
-	/// </summary>
+	/// <summary> Combine hashes for multiple floats. </summary>
 	/// @tparam SizeT Integral type, such as size_t (implementation defined)
 
 	/*!
@@ -33,23 +29,19 @@ namespace std {
 	{
 		seed ^= value + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 	}
-
 	template <>
 	struct hash<std::array<float, 3>>
 	{
-		/// <summary>
-		/// Returns a seed
-		/// </summary>
-		/// <param name="k">Reference to an array of coordinates (x, y, z)</param>
-		/// <returns>A seed, using std::array_has_combine_impl</returns>
-
+		/// <summary> Template specialization to hash an array of floats. </summary>
+		/// <param name="k"> Reference to an array of coordinates (x, y, z) </param>
+		/// <returns> Hash for x,y, and z. </returns>
 		/*!
 			\code{.cpp}
 				// Create coordinates, (x, y, z)
 				std::array<float, 3> arr = { 123.0, 456.1, 789.2 };
 		
-				// Using the template specialization for std::hash (which takes a std::array<float, 3>),
-				// we retrieve a seed
+				// Using the template specialization for std::hash (which takes a std::array<float,
+				// 3>), we retrieve a seed
 				std::size_t arr_hash = std::hash<std::array<float, 3>>(arr);
 			\endcode
 		*/
@@ -63,6 +55,18 @@ namespace std {
 	};
 }
 
+/*!  
+	\brief The Boost C++ library. https://www.boost.org/
+
+	\details
+	HumanFactors uses a subset of the boost library containing only the essentials for 
+	creating graphs and running shortest path algorithms. Use of boost is 
+	exclusive to the HF::Pathfinding namespace. 
+
+	\see BoostGraph For the graph implementation used.
+	\see path_finder.h for the boost functionality used. 
+	
+*/
 namespace boost
 {
 #ifdef BOOST_NO_EXCEPTIONS
@@ -72,69 +76,108 @@ namespace boost
 #endif
 }
 
+
 namespace HF {
+
+	// Forward Declares
 	namespace SpatialStructures {
-		class Graph;	///< see graph.h in spatialstructures
-		class Node;		///< see node.h in spatialstructures
+		class Graph;
+		class Node;		
 	}
 
 	namespace Pathfinding {
-		using pair = std::pair<int, int>;
+		// Note: These structs and typedefs are used to simplify creation and usage of the boost
+		// graph and serve no purpose outside of that.
 
-		/// <summary>
-		/// Represents the weight of an edge within a graph, used by graph_t
-		/// </summary>
+		/// <summary> Data stored for every edge in the BoostGraph. </summary>
+		/*! \details Each edge in the graph only stores its weight as a float. */
 		struct Edge_Cost { 
-			float weight;	///< weight/cost of an edge
+			float weight; ///< Cost of traversing this edge.
 		};
 
-		/// <summary>
-		/// Represents a vertex descriptor, used by graph_t
-		/// </summary>
+		/// <summary> Data stored for every vertex in the BoostGraph.</summary>
+		/*!
+			\details 
+			Every vertex stores in the graph stores it's index p and a unique double d.
+		
+			\todo Is the double d needed?
+		
+		*/
 		struct vertex_data {
 			boost::graph_traits<
 				boost::compressed_sparse_row_graph<boost::directedS>
-			>::vertex_descriptor p;			///< A vertex_descriptor for a directed Boost CSR graph
-			double d;
+			>::vertex_descriptor p;			///< The index of a vertex in the CSR.
+			double d;						///< Unknown may have been used for the colormap. 
 		};
 
-		/// <summary>
-		/// Alias for a graph type, a directed Compressed Sparse Row (CSR) graph
-		/// See struct vertex_data and struct Edge_Cost
-		/// </summary>
+		/*! 
+			\brief Type of graph held by the BoostGraph.
+
+			\details
+			Set the graph as directed, store vertex_data for each vertex store Edge_Cost for each edge. 
+
+			\remarks
+			By changing the contents of this typedef, you can change the type of graph that the BoostGraph holds,
+			and the the type of data stored for each vertex or edge.
+
+			\see vertex_data for info on what every vertex in the graph holds.
+			\see Edge_Cost for info on what every edge in the graph holds. 
+		*/
 		typedef boost::compressed_sparse_row_graph<
 			boost::directedS,
 			vertex_data,
 			Edge_Cost
 		> graph_t;
 
-		/// <summary>
-		/// Alias for a vertex_descriptor
-		/// See graph_t
-		/// </summary>
+		/// <summary> Quick alias to shorten the typename of vertex descriptors for our graph_t
+		/// type. /summary>
 		typedef boost::graph_traits< graph_t >::vertex_descriptor vertex_descriptor;
 
-		/// <summary>
-		/// Alias for std::pair<int, int>
-		/// </summary>
+		/// <summary> Shorten std::pair to simplify graph construction. </summary>
 		typedef std::pair <int, int> pair;
 
-		/// <summary>
-		/// Holds the necessary state for the Boost pathfinding algorithm
-		/// </summary>
+		/*!
+			\brief A graph usable with the BoostGraphLibrary.
+
+			\details
+			Contains a CSR in boost created from a graph in HumanFactors. This is necessary
+			for using any of the BoostGraphLibrary functions.
+
+			\remarks
+			None of the memebers of this class should need to be modified after the class is created.
+			This is  intended to be a pseudo-wrapper to make the HF::SpatialStructures::Graph usable with boost. 
+			You can read more about the boost graph libary in the official boost documentation:
+			https://www.boost.org/doc/libs/1_73_0/libs/graph/doc/quick_tour.html
+
+			\remarks
+			 Boost's graphs can be difficult to use due to the extensive use of templates. This limits
+			 their usage outside of the HF::Pathfinder, so there aren't any functions to interact with the boost graph
+			 after creation.
+
+			 \see HF::SpatialStructures::Graph for a graph that's better supported in HumanFactors.
+			 \see graph_t for info about the graph in boost this class holds. 
+		*/
 		class BoostGraph {
 		public:
-			graph_t g;							///< Directed CSR graph (Boost)
-			std::vector<vertex_descriptor> p;	///< Container of vertex_descriptor
-			std::vector<double> d;				///< Container of double
+			graph_t g;							///< The underlying graph in boost.
+			std::vector<vertex_descriptor> p;	///< Vertex array preallocated to the number of nodes in the graph.
+			std::vector<double> d;				///< Distance array preallocated to the number of nodes in the graph.
 
-			/// <summary>
-			/// Create a new Boost graph from the given HF Graph
-			/// </summary>
-			
+			/// <summary> Create a boost graph from a HF::SpatialStructures::Graph. </summary>
 			/*!
+				\param graph Graph to create a graph in boost from. 
+
+				\details 
+				Every edge and node in the graph is used to create a graph in Boost. This will also allocate space
+				equal to the number of nodes in g for this class's p and d arrays for use in FindPath as an 
+				optimization.
+
+				\invariant
+				This class will always carry a valid boost graph. 
+
 				\code{.cpp}
-					// be sure to #include "boost_graph.h", #include "node.h", #include "graph.h", and #include <vector>
+					// be sure to #include "boost_graph.h", #include "node.h", #include "graph.h",
+					// and #include <vector>
 
 					// In order to create a BoostGraph, we must first create a Graph instance first.
 					// We must prepare the nodes, their edges, and the weights (distances) of each edge.
@@ -151,7 +194,8 @@ namespace HF {
 					std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
 					std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
 
-					// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
+					// Now you can create a Graph - note that nodes, edges, and distances are passed
+					// by reference
 					HF::SpatialStructures::Graph graph(edges, distances, nodes);
 
 					// Passing Graph graph to BoostGraph bg, by reference
@@ -160,13 +204,19 @@ namespace HF {
 			*/
 			BoostGraph(const HF::SpatialStructures::Graph& graph);
 
-			/// <summary>
-			/// Destroy the current Boost graph (uses compiler-generated implementation via 'default')
-			/// </summary>
-			
+			/// <summary> Explicit Destructor required for BoostGraphDeleter to work in path_finder.h. </summary>
 			/*!
+
+				\details Calls the default destruction behavior. 
+
+				\warning 
+				Do not modify this function! This class is still using the default destructor, but unique pointer
+				requires the destructor to be declared. 
+
+
 				\code{.cpp}
-					// be sure to #include "boost_graph.h", #include "node.h", #include "graph.h", and #include <vector>
+					// be sure to #include "boost_graph.h", #include "node.h", #include "graph.h",
+					// and #include <vector>
 
 					// In order to create a BoostGraph, we must first create a Graph instance first.
 					// We must prepare the nodes, their edges, and the weights (distances) of each edge.
@@ -183,7 +233,8 @@ namespace HF {
 					std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
 					std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
 
-					// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
+					// Now you can create a Graph - note that nodes, edges, and distances are passed
+					// by reference
 					HF::SpatialStructures::Graph graph(edges, distances, nodes);
 
 					// Begin scope
@@ -193,9 +244,9 @@ namespace HF {
 					}
 					// End scope
 
-					// When bg goes out of scope, BoostGraph::~BoostGraph is called
-					// An explicit call to BoostGraph::~BoostGraph is also made when
-					// invoking operator delete on a (BoostGraph *)
+					// When bg goes out of scope, BoostGraph::~BoostGraph is called An explicit call
+					// to BoostGraph::~BoostGraph is also made when invoking operator delete on a
+					// (BoostGraph *)
 				\endcode
 			*/
 			~BoostGraph();
