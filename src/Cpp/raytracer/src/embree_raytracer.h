@@ -25,7 +25,7 @@ namespace HF {
 	namespace RayTracer {
 		/// <summary> A simple hit struct to carry all relevant information about hits. </summary>
 		struct HitStruct {
-			float distance = -1.0f;  ///<Distance from the origin point to the hit point. Set to -1 if no hit was recorded.
+			float distance = -1.0f;  ///< Distance from the origin point to the hit point. Set to -1 if no hit was recorded.
 			unsigned int meshid = -1; ///< The ID of the hit mesh. Set to -1 if no hit was recorded
 
 			/// <summary> Determine whether or not this hitstruct contains a hit. </summary>
@@ -37,7 +37,7 @@ namespace HF {
 		struct Vertex;
 		struct Triangle;
 
-		//TODO: This may be better served in another class
+		// TODO: This may be better served in another class
 		/// <summary> Generate a vector of directions to distribute rays in 360 degrees. </summary>
 		/// <remarks> This algorithm is from the old python codebase. </remarks>
 		/// <param name="step">
@@ -85,6 +85,19 @@ namespace HF {
 			std::vector<RTCGeometry> geometry; //> A list of the geometry being used by RTCScene.
 
 		public:
+			/// <summary>Create an EmbreeRayTracer with no arguments</summary>
+
+			/*!
+				\code
+					// Requires #include "embree_raytracer.h", #include "objloader.h"
+
+					// For brevity
+					using HF::RayTracer::EmbreeRayTracer;
+
+					// Create the EmbreeRayTracer, no arguments
+					EmbreeRayTracer ert;
+				\endcode
+			*/
 			EmbreeRayTracer() {}
 
 			/// <summary> Create a new EmbreeRayTracer and add a single mesh to the scene. </summary>
@@ -96,6 +109,23 @@ namespace HF {
 			/// which is meant to only be used to rethrow previously thrown exceptions. This should
 			/// be throwing
 			/// <see cref="HF::Exceptions::InvalidOBJ" />
+
+			/*!
+				\code
+					// Requires #include "embree_raytracer.h", #include "objloader.h"
+
+					// For brevity
+					using HF::Geometry::MeshInfo;
+					using HF::RayTracer::EmbreeRayTracer;
+
+					// Prepare the obj file path
+					std::string teapot_path = "teapot.obj";
+					std::vector<MeshInfo> geom = HF::Geometry::LoadMeshObjects(teapot_path, HF::Geometry::ONLY_FILE);
+
+					// Create the EmbreeRayTracer
+					auto ert = EmbreeRayTracer(geom);
+				\endcode
+			*/
 			EmbreeRayTracer(std::vector<HF::Geometry::MeshInfo>& MI);
 
 			/// <summary>
@@ -113,6 +143,25 @@ namespace HF {
 			/// <exception cref="std::exception">
 			/// Embree's geometry buffers could not be initialized.
 			/// </exception>
+
+			/*!
+				\code
+					// Requires #include "embree_raytracer.h", #include "objloader.h"
+
+					// Create a container of coordinates
+					std::vector<std::array<float, 3>> directions = {
+						{0, 0, 1},
+						{0, 1, 0},
+						{1, 0, 0},
+						{-1, 0, 0},
+						{0, -1, 0},
+						{0, 0, -1},
+					};
+
+					// Create the EmbreeRayTracer
+					auto ert = HF::RayTracer::EmbreeRayTracer(directions);
+				\endcode
+			*/
 			EmbreeRayTracer(const std::vector<std::array<float, 3>>& geometry);
 
 			/// <summary>
@@ -680,6 +729,37 @@ namespace HF {
 			/// <exception cref="std::exception">
 			/// Embree failed to allocate vertex and or index buffers.
 			/// </exception>
+
+			/*!
+				\code
+					// Requires #include "embree_raytracer.h", #include "objloader.h"
+
+					// Create a container of coordinates
+					std::vector<std::array<float, 3>> directions = {
+						{0, 0, 1},
+						{0, 1, 0},
+						{1, 0, 0},
+						{-1, 0, 0},
+						{0, -1, 0},
+						{0, 0, -1},
+					};
+
+					// Create the EmbreeRayTracer
+					auto ert = HF::RayTracer::EmbreeRayTracer(directions);
+
+					// Prepare the mesh ID
+					const int id = 214;
+
+					// Insert the mesh, Commit parameter defaults to false
+					bool status = ert.InsertNewMesh(directions, id);
+
+					// Retrieve status
+					std::string result = status ? "status okay" : "status not okay";
+					std::cout << result << std::endl;
+				\endcode
+
+				`>>>status okay`\n
+			*/
 			bool InsertNewMesh(std::vector<std::array<float, 3>>& Mesh, int ID, bool Commit = false);
 
 			/// <summary>
@@ -696,6 +776,45 @@ namespace HF {
 			/// <exception cref="std::exception">
 			/// RTC failed to allocate vertex and or index buffers.
 			/// </exception>
+
+			/*!
+				\code
+					// Requires #include "embree_raytracer.h", #include "objloader.h"
+
+					// Create a container of coordinates
+					std::vector<std::array<float, 3>> directions = {
+						{0, 0, 1},
+						{0, 1, 0},
+						{1, 0, 0}
+					};
+
+
+					// Create the EmbreeRayTracer
+					auto ert = HF::RayTracer::EmbreeRayTracer(directions);
+
+					// Prepare coordinates to create a mesh
+					std::vector<std::array<float, 3>> mesh_coords = { 
+						{-1, 0, 0},
+						{0, -1, 0},
+						{0, 0, -1} 
+					};
+
+					// Create a mesh
+					const int id = 325;
+					const std::string mesh_name = "my mesh";
+					HF::Geometry::MeshInfo mesh(mesh_coords, id, mesh_name);
+
+					// Determine if mesh insertion successful
+					if (ert.InsertNewMesh(mesh, false)) {
+						std::cout << "Mesh insertion okay" << std::endl;
+					}
+					else {
+						std::cout << "Mesh insertion error" << std::endl;
+					}
+				\endcode
+
+				`>>>Mesh insertion okay`\n
+			*/
 			bool EmbreeRayTracer::InsertNewMesh(HF::Geometry::MeshInfo& Mesh, bool Commit);
 
 			/// <summary> Add several new meshes to the BVH. </summary>
@@ -704,6 +823,57 @@ namespace HF {
 			/// Whether or not to commit changes to the scene after all meshes in Meshes have been added.
 			/// </param>
 			/// <returns> True. </returns>
+
+			/*!
+				\code
+					// Requires #include "embree_raytracer.h", #include "objloader.h"
+
+					// For brevity
+					using HF::Geometry::MeshInfo;
+					using HF::RayTracer::EmbreeRayTracer;
+
+					// Prepare the obj file path
+					std::string teapot_path = "teapot.obj";
+					std::vector<MeshInfo> geom = HF::Geometry::LoadMeshObjects(teapot_path, HF::Geometry::ONLY_FILE);
+
+					// Create the EmbreeRayTracer
+					auto ert = EmbreeRayTracer(geom);
+
+					// Prepare coordinates to create a mesh
+					std::vector<std::array<float, 3>> mesh_coords_0 = {
+						{0, 0, 1},
+						{0, 1, 0},
+						{1, 0, 0}
+					};
+
+					std::vector<std::array<float, 3>> mesh_coords_1 = {
+						{-1, 0, 0},
+						{0, -1, 0},
+						{0, 0, -1}
+					};
+
+					// Prepare mesh IDs and names
+					const int mesh_id_0 = 241;
+					const int mesh_id_1 = 363;
+					const std::string mesh_name_0 = "this mesh";
+					const std::string mesh_name_1 = "that mesh";
+
+					// Create each MeshInfo
+					MeshInfo mesh_0(mesh_coords_0, mesh_id_0, mesh_name_0);
+					MeshInfo mesh_1(mesh_coords_1, mesh_id_1, mesh_name_1);
+
+					// Create a container of MeshInfo
+					std::vector<MeshInfo> mesh_vec = { mesh_0, mesh_1 };
+
+					// Determine if mesh insertion successful
+					if (ert.InsertNewMesh(mesh_vec, false)) {
+						std::cout << "Mesh insertion okay" << std::endl;
+					}
+					else {
+						std::cout << "Mesh insertion error" << std::endl;
+					}
+				\endcode
+			*/
 			bool InsertNewMesh(std::vector<HF::Geometry::MeshInfo>& Meshes, bool Commit = true);
 
 			/// <summary>
@@ -856,7 +1026,6 @@ namespace HF {
 				`>>> True`\n
 				`>>> False`
 			*/
-
 			template <typename N, typename V>
 			bool FireAnyOcclusionRay(
 				const N& origin,
@@ -872,9 +1041,59 @@ namespace HF {
 			}
 
 			/// <summary> Increment reference counters to prevent destruction when a copy is made. <summary>
+			/// <param name="ERT2">Reference to EmbreeRayTracer, the right-hand side of the = statement</param>
+
+			/*!
+				\code
+					// Requires #include "embree_raytracer.h"
+
+					// Create a container of coordinates
+					std::vector<std::array<float, 3>> directions = {
+						{0, 0, 1},
+						{0, 1, 0},
+						{1, 0, 0},
+						{-1, 0, 0},
+						{0, -1, 0},
+						{0, 0, -1},
+					};
+
+					// Create the EmbreeRayTracer
+					HF::RayTracer::EmbreeRayTracer ert_0(directions);
+
+					// Create an EmbreeRayTracer, no arguments
+					HF::RayTracer::EmbreeRayTracer ert_1;
+
+					// If and when ert_0 goes out of scope,
+					// data within ert_0 will be retained inside of ert_1.
+					ert_1 = ert_0;
+				\endcode
+			*/
 			void operator=(const EmbreeRayTracer& ERT2);
 
 			/// <summary> Custom destructor to ensure cleanup of embree resources. </summary>
+
+			/*!
+				\code
+					// Requires #include "embree_raytracer.h", #include "objloader.h"
+
+					// For brevity
+					using HF::Geometry::MeshInfo;
+					using HF::RayTracer::EmbreeRayTracer;
+
+					// Prepare the obj file path
+					std::string teapot_path = "teapot.obj";
+					std::vector<MeshInfo> geom = HF::Geometry::LoadMeshObjects(teapot_path, HF::Geometry::ONLY_FILE);
+
+					// Begin scope
+					{
+						// Create the EmbreeRayTracer
+						auto ert = EmbreeRayTracer(geom);
+
+						// Use ert within this scope
+					}
+					// end scope - destructor called at end of scope
+				\endcode
+			*/
 			~EmbreeRayTracer();
 		};
 	}
