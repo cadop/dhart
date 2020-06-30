@@ -69,8 +69,12 @@ TEST(_ViewAnalysis, AggregateDoesntReturnInfinite) {
 
 TEST(_ViewAnalysis, FibbonacciDistributePoints) {
 	int size = 8;
+
+	// For brevity
+	using HF::AnalysisMethods::ViewAnalysis::FibbonacciDistributePoints;
+
 	// Generate points without any limitations on fov
-	auto points = HF::AnalysisMethods::ViewAnalysis::FibbonacciDistributePoints(size, 90.0f, 90.0f);
+	auto points = FibbonacciDistributePoints(size, 90.0f, 90.0f);
 	ASSERT_TRUE(points.size() == size);
 
 	// Print number of points
@@ -153,6 +157,7 @@ TEST(_ViewAnalysis, SphericalViewAnalysis) {
 
 	// Use this so we can fit within 80 characters
 	using HF::AnalysisMethods::ViewAnalysis::SphericalViewAnalysis;
+	using HF::RayTracer::EmbreeRayTracer;
 
 	// Create Plane
 	const std::vector<float> plane_vertices{

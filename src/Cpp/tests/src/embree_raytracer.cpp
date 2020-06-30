@@ -6,6 +6,8 @@
 #include <robin_hood.h>
 #include <cmath>
 
+#include "RayRequest.h"
+
 using namespace HF::Geometry;
 using namespace HF::RayTracer;
 using std::vector;
@@ -460,4 +462,182 @@ TEST(_EmbreeRayTracer, FireOcclusionRay) {
 	ASSERT_FALSE(res);
 	if (res) std::cerr << "True" << std::endl;
 	else std::cerr << "False" << std::endl;
+}
+
+TEST(_EmbreeRayTracer, InsertNewMesh) {
+	// Requires #include "embree_raytracer.h", #include "objloader.h"
+
+	// Create a container of coordinates
+	std::vector<std::array<float, 3>> directions = {
+		{0, 0, 1},
+		{0, 1, 0},
+		{1, 0, 0},
+		{-1, 0, 0},
+		{0, -1, 0},
+		{0, 0, -1},
+	};
+
+	// Create the EmbreeRayTracer
+	auto ert = HF::RayTracer::EmbreeRayTracer(directions);
+
+	// Prepare the mesh ID
+	const int id = 214;
+
+	// Insert the mesh, Commit parameter defaults to false
+	bool status = ert.InsertNewMesh(directions, id);
+
+	std::string result = status ? "ok" : "not ok";
+	std::cout << result << std::endl;
+}
+
+TEST(_EmbreeRayTracer, InsertNewMeshOneMesh) {
+	// Requires #include "embree_raytracer.h", #include "objloader.h"
+
+	// Create a container of coordinates
+	std::vector<std::array<float, 3>> directions = {
+		{0, 0, 1},
+		{0, 1, 0},
+		{1, 0, 0}
+	};
+
+
+	// Create the EmbreeRayTracer
+	auto ert = HF::RayTracer::EmbreeRayTracer(directions);
+
+	// Prepare coordinates to create a mesh
+	std::vector<std::array<float, 3>> mesh_coords = { {-1, 0, 0},
+		{0, -1, 0},
+		{0, 0, -1} };
+
+	// Create a mesh
+	const int id = 325;
+	const std::string mesh_name = "my mesh";
+	HF::Geometry::MeshInfo mesh(mesh_coords, id, mesh_name);
+
+	// Determine if mesh insertion successful
+	if (ert.InsertNewMesh(mesh, false)) {
+		std::cout << "Mesh insertion okay" << std::endl;
+	}
+	else {
+		std::cout << "Mesh insertion error" << std::endl;
+	}
+}
+
+TEST(_EmbreeRayTracer, InsertNewMeshVecMesh) {
+	// Requires #include "embree_raytracer.h", #include "objloader.h"
+
+	// For brevity
+	using HF::Geometry::MeshInfo;
+	using HF::RayTracer::EmbreeRayTracer;
+
+	// Prepare the obj file path
+	std::string teapot_path = "teapot.obj";
+	std::vector<MeshInfo> geom = HF::Geometry::LoadMeshObjects(teapot_path, HF::Geometry::ONLY_FILE);
+
+	// Create the EmbreeRayTracer
+	auto ert = EmbreeRayTracer(geom);
+
+	// Prepare coordinates to create a mesh
+	std::vector<std::array<float, 3>> mesh_coords_0 = {
+		{0, 0, 1},
+		{0, 1, 0},
+		{1, 0, 0}
+	};
+
+	std::vector<std::array<float, 3>> mesh_coords_1 = {
+		{-1, 0, 0},
+		{0, -1, 0},
+		{0, 0, -1}
+	};
+
+	// Prepare mesh IDs and names
+	const int mesh_id_0 = 241;
+	const int mesh_id_1 = 363;
+	const std::string mesh_name_0 = "this mesh";
+	const std::string mesh_name_1 = "that mesh";
+
+	// Create each MeshInfo
+	MeshInfo mesh_0(mesh_coords_0, mesh_id_0, mesh_name_0);
+	MeshInfo mesh_1(mesh_coords_1, mesh_id_1, mesh_name_1);
+
+	// Create a container of MeshInfo
+	std::vector<MeshInfo> mesh_vec = { mesh_0, mesh_1 };
+
+	// Determine if mesh insertion successful
+	if (ert.InsertNewMesh(mesh_vec, false)) {
+		std::cout << "Mesh insertion okay" << std::endl;
+	}
+	else {
+		std::cout << "Mesh insertion error" << std::endl;
+	}
+}
+
+TEST(_EmbreeRayTracer, OperatorAssignment) {
+	// Requires #include "embree_raytracer.h"
+
+	// Create a container of coordinates
+	std::vector<std::array<float, 3>> directions = {
+		{0, 0, 1},
+		{0, 1, 0},
+		{1, 0, 0},
+		{-1, 0, 0},
+		{0, -1, 0},
+		{0, 0, -1},
+	};
+
+	// Create the EmbreeRayTracer
+	HF::RayTracer::EmbreeRayTracer ert_0(directions);
+	
+	// Create an EmbreeRayTracer, no arguments
+	HF::RayTracer::EmbreeRayTracer ert_1;
+
+	// If and when ert_0 goes out of scope,
+	// data within ert_0 will be retained inside of ert_1.
+	ert_1 = ert_0;
+}
+
+TEST(_FullRayRequest, ConstructorArgs) {
+	// Requires #include "RayRequest.h"
+
+	// For brevity
+	using HF::RayTracer::FullRayRequest;
+
+	// Prepare FullRayRequest's parameters
+	const float x_in = 0.0;
+	const float y_in = 0.0;
+	const float z_in = 0.0;
+	const float dx_in = 1.0;
+	const float dy_in = 1.0;
+	const float dz_in = 2.0;
+	const float distance_in = 10.0;
+
+	// Create the FullRayRequest 
+	FullRayRequest request(x_in, y_in, z_in, dx_in, dy_in, dz_in, distance_in);
+}
+
+TEST(_FullRayRequest, DidHit) {
+	// Requires #include "RayRequest.h"
+
+	// For brevity
+	using HF::RayTracer::FullRayRequest;
+
+	// Prepare FullRayRequest's parameters
+	const float x_in = 0.0;
+	const float y_in = 0.0;
+	const float z_in = 0.0;
+	const float dx_in = 1.0;
+	const float dy_in = 1.0;
+	const float dz_in = 2.0;
+	const float distance_in = 10.0;
+
+	// Create the FullRayRequest 
+	FullRayRequest request(x_in, y_in, z_in, dx_in, dy_in, dz_in, distance_in);
+
+	// Use didHit
+	if (request.didHit()) {
+		std::cout << "Hit" << std::endl;
+	}
+	else {
+		std::cout << "Miss" << std::endl;
+	}
 }

@@ -35,26 +35,26 @@ namespace HF {
 		class GraphGenerator
 		{
 		private:
-			int walkable_surfaces;					///< Corresponds to the meshID of walkable surfaces in the Raytracer
-			int obstacle_surfaces;					///< Corresponds to the meshid of obstacle surfaces in the Raytracer
+			int walkable_surfaces;					///< Corresponds to the mesh ID of walkable surfaces in the Raytracer
+			int obstacle_surfaces;					///< Corresponds to the mesh ID of obstacle surfaces in the Raytracer
 			int core_count;							///< How many cores we're using
 			RayTracer::EmbreeRayTracer ray_tracer;	///< EmbreeRayTracer member
 
 			///< >---OPTIONS---/// maybe should be a struct?
-			v3 spacing;
-			v3 start;
+			v3 spacing;								///< Spacing coordinates
+			v3 start;								///< Starting position coordinates
 
-			float downstep;
-			float upslope;
-			float downslope;
-			float upstep;
+			float downstep;							///< Downstep value
+			float upslope;							///< Upslope value
+			float downslope;						///< Downslope value
+			float upstep;							///< Upstep value
 
-			int max_step_connection;
+			int max_step_connection;				///< Maximum step connection
 
-			float step_height;
-			float floor_offset;
+			float step_height;						///< Step height value
+			float floor_offset;						///< Floor offset value
 
-			int max_nodes;
+			int max_nodes;							///< Maximum node count
 
 			friend class GraphGeneratorPrivate; // Make our private implementation our friend
 		
