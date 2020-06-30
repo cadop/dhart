@@ -1,0 +1,143 @@
+\hypertarget{a00274}{}\doxysection{HF\+::Analysis\+Methods Namespace Reference}
+\label{a00274}\index{HF::AnalysisMethods@{HF::AnalysisMethods}}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{a00275}{View\+Analysis}}
+\item 
+ \mbox{\hyperlink{a00278}{Visibility\+Graph}}
+\begin{DoxyCompactList}\small\item\em Evaluate visibility between points in a set of locations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{a01099}{Graph\+Generator}}
+\begin{DoxyCompactList}\small\item\em Generate a graph of all areas accessible from a given start point \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{a01103}{Graph\+Generator\+Private}}
+\begin{DoxyCompactList}\small\item\em Contains the private implementation of the graph generator so clients aren\textquotesingle{}t forced to recompile \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{a01107}{Unique\+Queue}}
+\begin{DoxyCompactList}\small\item\em A queue that ensures every unique object can only enter the queue once \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{a00274_a4554e785d259fe736c0b7022cbe58a54}{v3}} = std\+::array$<$ float, 3 $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{a00274_ad9c47eeb68b0196bb5b8a24be28b860c}{H\+I\+T\+\_\+\+F\+L\+AG}} \{ \mbox{\hyperlink{a00274_ad9c47eeb68b0196bb5b8a24be28b860ca8570052eaa04e37245be1357a2786a0f}{F\+L\+O\+O\+RS}} = 1, 
+\mbox{\hyperlink{a00274_ad9c47eeb68b0196bb5b8a24be28b860cab0364512b19fe75e1929c6741983dace}{O\+B\+S\+T\+A\+C\+L\+ES}} = 2, 
+\mbox{\hyperlink{a00274_ad9c47eeb68b0196bb5b8a24be28b860ca77cb8d8886aafaff131061767ad5fc30}{B\+O\+TH}} = 3
+ \}
+\begin{DoxyCompactList}\small\item\em Determines which geometry the ray will collide with. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00011_ac812385b35e52a68f2eba8435fb7b1bf}{std\+::set}}$<$ \mbox{\hyperlink{a00011_a3394fa820b983014dcac29faca0e4f19}{std\+::pair}}$<$ int, int $>$ $>$ \mbox{\hyperlink{a00274_a119aa13054604cc379223a2f424a3a65}{permutations}} (int limit)
+\begin{DoxyCompactList}\small\item\em Create a set of every permution for 0-\/limit \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{a00274_a8d42b80118c1260844cfa033d20a98f0}{fact}} (int n)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+constexpr \mbox{\hyperlink{a00274_a4554e785d259fe736c0b7022cbe58a54}{v3}} \mbox{\hyperlink{a00274_a1030acde4b168f6ccd5799b3c5bd6b6a}{down}} \{ 0, 0, -\/1 \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{a00274_a4554e785d259fe736c0b7022cbe58a54}\label{a00274_a4554e785d259fe736c0b7022cbe58a54}} 
+\index{HF::AnalysisMethods@{HF::AnalysisMethods}!v3@{v3}}
+\index{v3@{v3}!HF::AnalysisMethods@{HF::AnalysisMethods}}
+\doxysubsubsection{\texorpdfstring{v3}{v3}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{a00274_a4554e785d259fe736c0b7022cbe58a54}{H\+F\+::\+Analysis\+Methods\+::v3}} = typedef std\+::array$<$float, 3$>$}
+
+
+
+Definition at line 18 of file graph\+\_\+generator.\+h.
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{a00274_ad9c47eeb68b0196bb5b8a24be28b860c}\label{a00274_ad9c47eeb68b0196bb5b8a24be28b860c}} 
+\index{HF::AnalysisMethods@{HF::AnalysisMethods}!HIT\_FLAG@{HIT\_FLAG}}
+\index{HIT\_FLAG@{HIT\_FLAG}!HF::AnalysisMethods@{HF::AnalysisMethods}}
+\doxysubsubsection{\texorpdfstring{HIT\_FLAG}{HIT\_FLAG}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{a00274_ad9c47eeb68b0196bb5b8a24be28b860c}{H\+F\+::\+Analysis\+Methods\+::\+H\+I\+T\+\_\+\+F\+L\+AG}}}
+
+
+
+Determines which geometry the ray will collide with. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FLOORS@{FLOORS}!HF::AnalysisMethods@{HF::AnalysisMethods}}\index{HF::AnalysisMethods@{HF::AnalysisMethods}!FLOORS@{FLOORS}}}\mbox{\Hypertarget{a00274_ad9c47eeb68b0196bb5b8a24be28b860ca8570052eaa04e37245be1357a2786a0f}\label{a00274_ad9c47eeb68b0196bb5b8a24be28b860ca8570052eaa04e37245be1357a2786a0f}} 
+F\+L\+O\+O\+RS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OBSTACLES@{OBSTACLES}!HF::AnalysisMethods@{HF::AnalysisMethods}}\index{HF::AnalysisMethods@{HF::AnalysisMethods}!OBSTACLES@{OBSTACLES}}}\mbox{\Hypertarget{a00274_ad9c47eeb68b0196bb5b8a24be28b860cab0364512b19fe75e1929c6741983dace}\label{a00274_ad9c47eeb68b0196bb5b8a24be28b860cab0364512b19fe75e1929c6741983dace}} 
+O\+B\+S\+T\+A\+C\+L\+ES&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BOTH@{BOTH}!HF::AnalysisMethods@{HF::AnalysisMethods}}\index{HF::AnalysisMethods@{HF::AnalysisMethods}!BOTH@{BOTH}}}\mbox{\Hypertarget{a00274_ad9c47eeb68b0196bb5b8a24be28b860ca77cb8d8886aafaff131061767ad5fc30}\label{a00274_ad9c47eeb68b0196bb5b8a24be28b860ca77cb8d8886aafaff131061767ad5fc30}} 
+B\+O\+TH&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 23 of file graph\+\_\+generator.\+h.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{a00274_a8d42b80118c1260844cfa033d20a98f0}\label{a00274_a8d42b80118c1260844cfa033d20a98f0}} 
+\index{HF::AnalysisMethods@{HF::AnalysisMethods}!fact@{fact}}
+\index{fact@{fact}!HF::AnalysisMethods@{HF::AnalysisMethods}}
+\doxysubsubsection{\texorpdfstring{fact()}{fact()}}
+{\footnotesize\ttfamily int H\+F\+::\+Analysis\+Methods\+::fact (\begin{DoxyParamCaption}\item[{int}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 28 of file graph\+\_\+generator\+\_\+private.\+cpp.
+
+\mbox{\Hypertarget{a00274_a119aa13054604cc379223a2f424a3a65}\label{a00274_a119aa13054604cc379223a2f424a3a65}} 
+\index{HF::AnalysisMethods@{HF::AnalysisMethods}!permutations@{permutations}}
+\index{permutations@{permutations}!HF::AnalysisMethods@{HF::AnalysisMethods}}
+\doxysubsubsection{\texorpdfstring{permutations()}{permutations()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00011_ac812385b35e52a68f2eba8435fb7b1bf}{std\+::set}}$<$ \mbox{\hyperlink{a00011_a3394fa820b983014dcac29faca0e4f19}{std\+::pair}}$<$ int, int $>$ $>$ H\+F\+::\+Analysis\+Methods\+::permutations (\begin{DoxyParamCaption}\item[{int}]{limit }\end{DoxyParamCaption})}
+
+
+
+Create a set of every permution for 0-\/limit 
+
+
+\begin{DoxyParams}{Parameters}
+{\em limit} & Max number in the set\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A list of all permutions for 0-\/limit
+\end{DoxyReturn}
+
+
+Definition at line 35 of file graph\+\_\+generator\+\_\+private.\+cpp.
+
+
+
+Referenced by H\+F\+::\+Analysis\+Methods\+::\+Graph\+Generator\+Private\+::\+Crawl\+Geom(), and H\+F\+::\+Analysis\+Methods\+::\+Graph\+Generator\+Private\+::\+Crawl\+Geom\+Parallel().
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{a00274_a1030acde4b168f6ccd5799b3c5bd6b6a}\label{a00274_a1030acde4b168f6ccd5799b3c5bd6b6a}} 
+\index{HF::AnalysisMethods@{HF::AnalysisMethods}!down@{down}}
+\index{down@{down}!HF::AnalysisMethods@{HF::AnalysisMethods}}
+\doxysubsubsection{\texorpdfstring{down}{down}}
+{\footnotesize\ttfamily constexpr \mbox{\hyperlink{a00274_a4554e785d259fe736c0b7022cbe58a54}{v3}} H\+F\+::\+Analysis\+Methods\+::down \{ 0, 0, -\/1 \}\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+
+
+Definition at line 26 of file graph\+\_\+generator\+\_\+private.\+cpp.
+
+
+
+Referenced by H\+F\+::\+Analysis\+Methods\+::\+Graph\+Generator\+Private\+::\+Check\+Children(), H\+F\+::\+Analysis\+Methods\+::\+Graph\+Generator\+Private\+::\+Check\+Floor(), H\+F\+::\+Analysis\+Methods\+::\+Graph\+Generator\+Private\+::\+Check\+Start(), and H\+F\+::\+Analysis\+Methods\+::\+Graph\+Generator\+Private\+::\+Walkable\+Check().
+

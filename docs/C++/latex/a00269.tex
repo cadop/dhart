@@ -1,0 +1,510 @@
+\hypertarget{a00269}{}\doxysection{Spatial\+Structures}
+\label{a00269}\index{SpatialStructures@{SpatialStructures}}
+
+
+Contains the Graph and Node datatypes.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00269_ga0cc5b82caab046c65a201e4e7be5e9d4}{Get\+All\+Nodes\+From\+Graph}} (const \mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$graph, std\+::vector$<$ \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ $\ast$$\ast$out\+\_\+vector\+\_\+ptr, \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $\ast$$\ast$out\+\_\+data\+\_\+ptr)
+\begin{DoxyCompactList}\small\item\em Get a vector of every node in the given graph pointer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00269_gab39b5c750b266835efbc3c6c9da0a431}{Get\+Edges\+For\+Node}} (const \mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$graph, const \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $\ast$Node, std\+::vector$<$ \mbox{\hyperlink{a01183}{H\+F\+::\+Spatial\+Structures\+::\+Edge}} $>$ $\ast$$\ast$out\+\_\+vector\+\_\+ptr, \mbox{\hyperlink{a01183}{H\+F\+::\+Spatial\+Structures\+::\+Edge}} $\ast$$\ast$out\+\_\+edge\+\_\+list\+\_\+ptr, int $\ast$out\+\_\+edge\+\_\+list\+\_\+size)
+\item 
+\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00269_gac17c1fc05e6bf6900bac8689b7619bfb}{Get\+Size\+Of\+Node\+Vector}} (const std\+::vector$<$ \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ $\ast$node\+\_\+list, int $\ast$out\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Get the size of a node vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00269_ga712f182888672382dd4a1776f850915a}{Get\+Size\+Of\+Edge\+Vector}} (const std\+::vector$<$ \mbox{\hyperlink{a01183}{H\+F\+::\+Spatial\+Structures\+::\+Edge}} $>$ $\ast$edge\+\_\+list, int $\ast$out\+\_\+size)
+\item 
+\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00269_ga6a53ede89ff44ba3c8bf697c9626fcbe}{Aggregate\+Costs}} (const \mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$graph, int agg, bool directed, std\+::vector$<$ float $>$ $\ast$$\ast$out\+\_\+vector\+\_\+ptr, float $\ast$$\ast$out\+\_\+data\+\_\+ptr)
+\begin{DoxyCompactList}\small\item\em Get an ordered array of costs for each node aggregatted by the desired method. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00269_ga262a8f714fbd8d74840efa5832597fff}{Create\+Graph}} (const float $\ast$nodes, int num\+\_\+nodes, \mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$$\ast$out\+\_\+graph)
+\begin{DoxyCompactList}\small\item\em Create a new empty graph. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00269_gac886f77eaff2a7b396a0ea47f78ef9af}{Add\+Edge\+From\+Nodes}} (\mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$graph, const float $\ast$parent, const float $\ast$child, float score)
+\begin{DoxyCompactList}\small\item\em Add an edge between parent and child. If parent or child doesn\textquotesingle{}t already exist in the graph, they will be added and automatically assigned new I\+DS. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00269_ga0f38cc17daedc23e2fb21115fbb24d07}{Add\+Edge\+From\+Node\+I\+Ds}} (\mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$graph, int parent\+\_\+id, int child\+\_\+id, float score)
+\begin{DoxyCompactList}\small\item\em Create a new edge between parent\+\_\+id and child\+\_\+id. If these I\+Ds don\textquotesingle{}t yet exist in the graph they will be added. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00269_ga1aebc84e3562370327576641b1ce2dcc}{Get\+C\+S\+R\+Pointers}} (\mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$graph, int $\ast$out\+\_\+nnz, int $\ast$out\+\_\+num\+\_\+rows, int $\ast$out\+\_\+num\+\_\+cols, float $\ast$$\ast$out\+\_\+data\+\_\+ptr, int $\ast$$\ast$out\+\_\+inner\+\_\+indices\+\_\+ptr, int $\ast$$\ast$out\+\_\+outer\+\_\+indices\+\_\+ptr)
+\begin{DoxyCompactList}\small\item\em Retrieve all information for a graph\textquotesingle{}s C\+SR representation. This will compress the graph if it was not yet already compressed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00269_ga31fad78ce410cd523bb337f46b078b4c}{Get\+Node\+ID}} (\mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$graph, const float $\ast$point, int $\ast$out\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Get the id of the given node in the graph. If the node does not exist, {\itshape out\+\_\+id}  will be set to -\/1. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00269_gab7ecc1be5c746ed3f99ab7494316c65d}{Compress}} (\mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$graph)
+\begin{DoxyCompactList}\small\item\em Compress the given graph into a csr representation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00269_ga775863df40e342a8c5a2cddf7512ea44}{Clear\+Graph}} (\mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$graph)
+\begin{DoxyCompactList}\small\item\em Clear the nodes/edges for the given graph. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00269_ga87e9b9ecfc5293712d75f3cb8c992c77}{Destroy\+Nodes}} (std\+::vector$<$ \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ $\ast$nodelist\+\_\+to\+\_\+destroy)
+\begin{DoxyCompactList}\small\item\em Delete the vector of nodes at the given pointer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00269_gac46191088d698cc007a2176ab6b5674d}{Destroy\+Edges}} (std\+::vector$<$ \mbox{\hyperlink{a01183}{H\+F\+::\+Spatial\+Structures\+::\+Edge}} $>$ $\ast$edgelist\+\_\+to\+\_\+destroy)
+\begin{DoxyCompactList}\small\item\em Delete the vector of edges at the given pointer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00269_ga645abacd11e1fa535f953344aaa77727}{Destroy\+Graph}} (\mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$graph\+\_\+to\+\_\+destroy)
+\begin{DoxyCompactList}\small\item\em Delete a graph. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Contains the Graph and Node datatypes. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{a00269_ga0f38cc17daedc23e2fb21115fbb24d07}\label{a00269_ga0f38cc17daedc23e2fb21115fbb24d07}} 
+\index{SpatialStructures@{SpatialStructures}!AddEdgeFromNodeIDs@{AddEdgeFromNodeIDs}}
+\index{AddEdgeFromNodeIDs@{AddEdgeFromNodeIDs}!SpatialStructures@{SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{AddEdgeFromNodeIDs()}{AddEdgeFromNodeIDs()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Add\+Edge\+From\+Node\+I\+Ds (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$}]{graph,  }\item[{int}]{parent\+\_\+id,  }\item[{int}]{child\+\_\+id,  }\item[{float}]{score }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00248}{Cinterface/spatialstructures\+\_\+\+C.\+h}}$>$}
+
+
+
+Create a new edge between parent\+\_\+id and child\+\_\+id. If these I\+Ds don\textquotesingle{}t yet exist in the graph they will be added. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & Graph to create the new edge in. \\
+\hline
+{\em parent} & The parent\textquotesingle{}s id in the graph. \\
+\hline
+{\em child} & The child\textquotesingle{}s id in the graph. \\
+\hline
+{\em score} & The cost from parent to child. \\
+\hline
+{\em returns} & H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+OK on completion. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 98 of file spatialstructures\+\_\+\+C.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Graph\+::add\+Edge(), and H\+F\+::\+Exceptions\+::\+OK.
+
+\mbox{\Hypertarget{a00269_gac886f77eaff2a7b396a0ea47f78ef9af}\label{a00269_gac886f77eaff2a7b396a0ea47f78ef9af}} 
+\index{SpatialStructures@{SpatialStructures}!AddEdgeFromNodes@{AddEdgeFromNodes}}
+\index{AddEdgeFromNodes@{AddEdgeFromNodes}!SpatialStructures@{SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{AddEdgeFromNodes()}{AddEdgeFromNodes()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Add\+Edge\+From\+Nodes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$}]{graph,  }\item[{const float $\ast$}]{parent,  }\item[{const float $\ast$}]{child,  }\item[{float}]{score }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00248}{Cinterface/spatialstructures\+\_\+\+C.\+h}}$>$}
+
+
+
+Add an edge between parent and child. If parent or child doesn\textquotesingle{}t already exist in the graph, they will be added and automatically assigned new I\+DS. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & Graph to add the new edge to. \\
+\hline
+{\em parent} & A 3 element float array containing the x, y, and z coordinate of the parent node. \\
+\hline
+{\em child} & A 3 element float array containing the x, y, and z coordinate of the child node, \\
+\hline
+{\em score} & The cost from parent to child \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+OK on success. H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+I\+N\+V\+A\+L\+I\+D\+\_\+\+P\+TR on an invalidparent or child node. 
+\end{DoxyReturn}
+
+
+Definition at line 78 of file spatialstructures\+\_\+\+C.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Graph\+::add\+Edge(), H\+F\+::\+Exceptions\+::\+I\+N\+V\+A\+L\+I\+D\+\_\+\+P\+TR, and H\+F\+::\+Exceptions\+::\+OK.
+
+\mbox{\Hypertarget{a00269_ga6a53ede89ff44ba3c8bf697c9626fcbe}\label{a00269_ga6a53ede89ff44ba3c8bf697c9626fcbe}} 
+\index{SpatialStructures@{SpatialStructures}!AggregateCosts@{AggregateCosts}}
+\index{AggregateCosts@{AggregateCosts}!SpatialStructures@{SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{AggregateCosts()}{AggregateCosts()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Aggregate\+Costs (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$}]{graph,  }\item[{int}]{agg,  }\item[{bool}]{directed,  }\item[{std\+::vector$<$ float $>$ $\ast$$\ast$}]{out\+\_\+vector\+\_\+ptr,  }\item[{float $\ast$$\ast$}]{out\+\_\+data\+\_\+ptr }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00248}{Cinterface/spatialstructures\+\_\+\+C.\+h}}$>$}
+
+
+
+Get an ordered array of costs for each node aggregatted by the desired method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & Graph to aggregare edges from. \\
+\hline
+{\em agg} & Aggregation type to use. \\
+\hline
+{\em directed} & If true, only count outgoing edges for a node, otherwise count both outgoing and incoming edges. \\
+\hline
+{\em out\+\_\+vector\+\_\+ptr} & Output parameter for the vector. \\
+\hline
+{\em out\+\_\+vector\+\_\+ptr} & Output parameter for the vector\textquotesingle{}s held data. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+OK if successful. If the graph wasn\textquotesingle{}t valid H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+N\+O\+\_\+\+G\+R\+A\+PH. 
+\end{DoxyReturn}
+
+
+Definition at line 49 of file spatialstructures\+\_\+\+C.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Aggregate\+Graph(), H\+F\+::\+Exceptions\+::\+N\+O\+\_\+\+G\+R\+A\+PH, and H\+F\+::\+Exceptions\+::\+OK.
+
+\mbox{\Hypertarget{a00269_ga775863df40e342a8c5a2cddf7512ea44}\label{a00269_ga775863df40e342a8c5a2cddf7512ea44}} 
+\index{SpatialStructures@{SpatialStructures}!ClearGraph@{ClearGraph}}
+\index{ClearGraph@{ClearGraph}!SpatialStructures@{SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{ClearGraph()}{ClearGraph()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Clear\+Graph (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$}]{graph }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00248}{Cinterface/spatialstructures\+\_\+\+C.\+h}}$>$}
+
+
+
+Clear the nodes/edges for the given graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & Graph to clear nodes from. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+OK on completion. 
+\end{DoxyReturn}
+
+
+Definition at line 142 of file spatialstructures\+\_\+\+C.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Clear(), and H\+F\+::\+Exceptions\+::\+OK.
+
+\mbox{\Hypertarget{a00269_gab7ecc1be5c746ed3f99ab7494316c65d}\label{a00269_gab7ecc1be5c746ed3f99ab7494316c65d}} 
+\index{SpatialStructures@{SpatialStructures}!Compress@{Compress}}
+\index{Compress@{Compress}!SpatialStructures@{SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{Compress()}{Compress()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Compress (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$}]{graph }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00248}{Cinterface/spatialstructures\+\_\+\+C.\+h}}$>$}
+
+
+
+Compress the given graph into a csr representation. 
+
+\begin{DoxyReturn}{Returns}
+H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+OK on completion. 
+\end{DoxyReturn}
+
+
+This will reduce the memory footprint of the graph, and invalidate all existing C\+SR representations of it. If the graph is already compressed, this will be a no-\/op. 
+
+Definition at line 136 of file spatialstructures\+\_\+\+C.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Compress(), and H\+F\+::\+Exceptions\+::\+OK.
+
+
+
+Referenced by H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Get\+C\+S\+R\+Pointers().
+
+\mbox{\Hypertarget{a00269_ga262a8f714fbd8d74840efa5832597fff}\label{a00269_ga262a8f714fbd8d74840efa5832597fff}} 
+\index{SpatialStructures@{SpatialStructures}!CreateGraph@{CreateGraph}}
+\index{CreateGraph@{CreateGraph}!SpatialStructures@{SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{CreateGraph()}{CreateGraph()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Create\+Graph (\begin{DoxyParamCaption}\item[{const float $\ast$}]{nodes,  }\item[{int}]{num\+\_\+nodes,  }\item[{\mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$$\ast$}]{out\+\_\+graph }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00248}{Cinterface/spatialstructures\+\_\+\+C.\+h}}$>$}
+
+
+
+Create a new empty graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nodes} & Unused. \\
+\hline
+{\em num\+\_\+nodes} & Unused. \\
+\hline
+{\em out\+\_\+graph} & Output parameter to store the graph in. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+OK on completion. 
+\end{DoxyReturn}
+
+
+Definition at line 67 of file spatialstructures\+\_\+\+C.\+cpp.
+
+
+
+References H\+F\+::\+Exceptions\+::\+OK.
+
+\mbox{\Hypertarget{a00269_gac46191088d698cc007a2176ab6b5674d}\label{a00269_gac46191088d698cc007a2176ab6b5674d}} 
+\index{SpatialStructures@{SpatialStructures}!DestroyEdges@{DestroyEdges}}
+\index{DestroyEdges@{DestroyEdges}!SpatialStructures@{SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{DestroyEdges()}{DestroyEdges()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Destroy\+Edges (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{a01183}{H\+F\+::\+Spatial\+Structures\+::\+Edge}} $>$ $\ast$}]{edgelist\+\_\+to\+\_\+destroy }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00248}{Cinterface/spatialstructures\+\_\+\+C.\+h}}$>$}
+
+
+
+Delete the vector of edges at the given pointer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em edgelist\+\_\+to\+\_\+destroy} & Vector of nodes to destroy. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+OK on completion. 
+\end{DoxyReturn}
+
+
+Definition at line 75 of file C\+Interface.\+cpp.
+
+
+
+References H\+F\+::\+Exceptions\+::\+OK.
+
+\mbox{\Hypertarget{a00269_ga645abacd11e1fa535f953344aaa77727}\label{a00269_ga645abacd11e1fa535f953344aaa77727}} 
+\index{SpatialStructures@{SpatialStructures}!DestroyGraph@{DestroyGraph}}
+\index{DestroyGraph@{DestroyGraph}!SpatialStructures@{SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{DestroyGraph()}{DestroyGraph()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Destroy\+Graph (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$}]{graph\+\_\+to\+\_\+destroy }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00248}{Cinterface/spatialstructures\+\_\+\+C.\+h}}$>$}
+
+
+
+Delete a graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph\+\_\+to\+\_\+destroy} & Graph to delete. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+OK on completion. 
+\end{DoxyReturn}
+
+
+Definition at line 80 of file C\+Interface.\+cpp.
+
+
+
+References H\+F\+::\+Exceptions\+::\+OK.
+
+\mbox{\Hypertarget{a00269_ga87e9b9ecfc5293712d75f3cb8c992c77}\label{a00269_ga87e9b9ecfc5293712d75f3cb8c992c77}} 
+\index{SpatialStructures@{SpatialStructures}!DestroyNodes@{DestroyNodes}}
+\index{DestroyNodes@{DestroyNodes}!SpatialStructures@{SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{DestroyNodes()}{DestroyNodes()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Destroy\+Nodes (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ $\ast$}]{nodelist\+\_\+to\+\_\+destroy }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00248}{Cinterface/spatialstructures\+\_\+\+C.\+h}}$>$}
+
+
+
+Delete the vector of nodes at the given pointer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nodelist\+\_\+to\+\_\+destroy} & Vector of nodes to destroy. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+OK on completion. 
+\end{DoxyReturn}
+
+
+Definition at line 70 of file C\+Interface.\+cpp.
+
+
+
+References H\+F\+::\+Exceptions\+::\+OK.
+
+\mbox{\Hypertarget{a00269_ga0cc5b82caab046c65a201e4e7be5e9d4}\label{a00269_ga0cc5b82caab046c65a201e4e7be5e9d4}} 
+\index{SpatialStructures@{SpatialStructures}!GetAllNodesFromGraph@{GetAllNodesFromGraph}}
+\index{GetAllNodesFromGraph@{GetAllNodesFromGraph}!SpatialStructures@{SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{GetAllNodesFromGraph()}{GetAllNodesFromGraph()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Get\+All\+Nodes\+From\+Graph (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$}]{graph,  }\item[{std\+::vector$<$ \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ $\ast$$\ast$}]{out\+\_\+vector\+\_\+ptr,  }\item[{\mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $\ast$$\ast$}]{out\+\_\+data\+\_\+ptr }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00248}{Cinterface/spatialstructures\+\_\+\+C.\+h}}$>$}
+
+
+
+Get a vector of every node in the given graph pointer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & Graph to retrieve nodes from. \\
+\hline
+{\em out\+\_\+vector\+\_\+ptr} & Output parameter for the new vector. \\
+\hline
+{\em out\+\_\+data\+\_\+ptr} & Output parameter for the vector\textquotesingle{}s data. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+I\+N\+V\+A\+L\+I\+D\+\_\+\+P\+TR if the given pointer was invalid. H\+F\+::\+G\+E\+N\+E\+R\+I\+C\+\_\+\+E\+R\+R\+OR if the graph is not valid. H\+F\+::\+OK if successful. 
+\end{DoxyReturn}
+
+
+Definition at line 15 of file spatialstructures\+\_\+\+C.\+cpp.
+
+
+
+References H\+F\+::\+Exceptions\+::\+G\+E\+N\+E\+R\+I\+C\+\_\+\+E\+R\+R\+OR, H\+F\+::\+Exceptions\+::\+I\+N\+V\+A\+L\+I\+D\+\_\+\+P\+TR, H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Nodes(), and H\+F\+::\+Exceptions\+::\+OK.
+
+\mbox{\Hypertarget{a00269_ga1aebc84e3562370327576641b1ce2dcc}\label{a00269_ga1aebc84e3562370327576641b1ce2dcc}} 
+\index{SpatialStructures@{SpatialStructures}!GetCSRPointers@{GetCSRPointers}}
+\index{GetCSRPointers@{GetCSRPointers}!SpatialStructures@{SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{GetCSRPointers()}{GetCSRPointers()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Get\+C\+S\+R\+Pointers (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$}]{graph,  }\item[{int $\ast$}]{out\+\_\+nnz,  }\item[{int $\ast$}]{out\+\_\+num\+\_\+rows,  }\item[{int $\ast$}]{out\+\_\+num\+\_\+cols,  }\item[{float $\ast$$\ast$}]{out\+\_\+data\+\_\+ptr,  }\item[{int $\ast$$\ast$}]{out\+\_\+inner\+\_\+indices\+\_\+ptr,  }\item[{int $\ast$$\ast$}]{out\+\_\+outer\+\_\+indices\+\_\+ptr }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00248}{Cinterface/spatialstructures\+\_\+\+C.\+h}}$>$}
+
+
+
+Retrieve all information for a graph\textquotesingle{}s C\+SR representation. This will compress the graph if it was not yet already compressed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em out\+\_\+nnz} & Number of non-\/zeros contained within the graph. \\
+\hline
+{\em out\+\_\+num\+\_\+rows} & Number of rows contained within the graph. \\
+\hline
+{\em out\+\_\+num\+\_\+rows} & Number of columns contained within the graph. \\
+\hline
+{\em out\+\_\+data\+\_\+ptr} & Pointer to the graph\textquotesingle{}s data array. \\
+\hline
+{\em out\+\_\+inner\+\_\+indices\+\_\+ptr} & Pointer to the graph\textquotesingle{}s inner indices array. \\
+\hline
+{\em out\+\_\+inner\+\_\+indices\+\_\+ptr} & Pointer to the graph\textquotesingle{}s outer indices array. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+OK on completion. 
+\end{DoxyReturn}
+
+
+Definition at line 103 of file spatialstructures\+\_\+\+C.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Get\+C\+S\+R\+Pointers(), H\+F\+::\+Spatial\+Structures\+::\+C\+S\+R\+Ptrs\+::nnz, and H\+F\+::\+Exceptions\+::\+OK.
+
+\mbox{\Hypertarget{a00269_gab39b5c750b266835efbc3c6c9da0a431}\label{a00269_gab39b5c750b266835efbc3c6c9da0a431}} 
+\index{SpatialStructures@{SpatialStructures}!GetEdgesForNode@{GetEdgesForNode}}
+\index{GetEdgesForNode@{GetEdgesForNode}!SpatialStructures@{SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{GetEdgesForNode()}{GetEdgesForNode()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Get\+Edges\+For\+Node (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$}]{graph,  }\item[{const \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $\ast$}]{Node,  }\item[{std\+::vector$<$ \mbox{\hyperlink{a01183}{H\+F\+::\+Spatial\+Structures\+::\+Edge}} $>$ $\ast$$\ast$}]{out\+\_\+vector\+\_\+ptr,  }\item[{\mbox{\hyperlink{a01183}{H\+F\+::\+Spatial\+Structures\+::\+Edge}} $\ast$$\ast$}]{out\+\_\+edge\+\_\+list\+\_\+ptr,  }\item[{int $\ast$}]{out\+\_\+edge\+\_\+list\+\_\+size }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00248}{Cinterface/spatialstructures\+\_\+\+C.\+h}}$>$}
+
+\mbox{\Hypertarget{a00269_ga31fad78ce410cd523bb337f46b078b4c}\label{a00269_ga31fad78ce410cd523bb337f46b078b4c}} 
+\index{SpatialStructures@{SpatialStructures}!GetNodeID@{GetNodeID}}
+\index{GetNodeID@{GetNodeID}!SpatialStructures@{SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{GetNodeID()}{GetNodeID()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Get\+Node\+ID (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$}]{graph,  }\item[{const float $\ast$}]{point,  }\item[{int $\ast$}]{out\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00248}{Cinterface/spatialstructures\+\_\+\+C.\+h}}$>$}
+
+
+
+Get the id of the given node in the graph. If the node does not exist, {\itshape out\+\_\+id}  will be set to -\/1. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & The graph to get the ID from. \\
+\hline
+{\em point} & A 3 float array containing the x,y, and z coordinates of the point to get the ID for. \\
+\hline
+{\em out\+\_\+id} & Output parameter for the id. Set to -\/1 if that point couldn\textquotesingle{}t be found in {\itshape graph}  \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+OK on completion. 
+\end{DoxyReturn}
+
+
+Definition at line 125 of file spatialstructures\+\_\+\+C.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Graph\+::get\+I\+D(), and H\+F\+::\+Exceptions\+::\+OK.
+
+\mbox{\Hypertarget{a00269_ga712f182888672382dd4a1776f850915a}\label{a00269_ga712f182888672382dd4a1776f850915a}} 
+\index{SpatialStructures@{SpatialStructures}!GetSizeOfEdgeVector@{GetSizeOfEdgeVector}}
+\index{GetSizeOfEdgeVector@{GetSizeOfEdgeVector}!SpatialStructures@{SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{GetSizeOfEdgeVector()}{GetSizeOfEdgeVector()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Get\+Size\+Of\+Edge\+Vector (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{a01183}{H\+F\+::\+Spatial\+Structures\+::\+Edge}} $>$ $\ast$}]{edge\+\_\+list,  }\item[{int $\ast$}]{out\+\_\+size }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00248}{Cinterface/spatialstructures\+\_\+\+C.\+h}}$>$}
+
+
+
+Definition at line 65 of file C\+Interface.\+cpp.
+
+
+
+References H\+F\+::\+Exceptions\+::\+OK.
+
+\mbox{\Hypertarget{a00269_gac17c1fc05e6bf6900bac8689b7619bfb}\label{a00269_gac17c1fc05e6bf6900bac8689b7619bfb}} 
+\index{SpatialStructures@{SpatialStructures}!GetSizeOfNodeVector@{GetSizeOfNodeVector}}
+\index{GetSizeOfNodeVector@{GetSizeOfNodeVector}!SpatialStructures@{SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{GetSizeOfNodeVector()}{GetSizeOfNodeVector()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Get\+Size\+Of\+Node\+Vector (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ $\ast$}]{node\+\_\+list,  }\item[{int $\ast$}]{out\+\_\+size }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00248}{Cinterface/spatialstructures\+\_\+\+C.\+h}}$>$}
+
+
+
+Get the size of a node vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node\+\_\+list} & Node vector to get the size from. \\
+\hline
+{\em out\+\_\+size} & Size of the vector will be written to this int. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+OK on completion. 
+\end{DoxyReturn}
+
+
+Definition at line 60 of file C\+Interface.\+cpp.
+
+
+
+References H\+F\+::\+Exceptions\+::\+OK.
+

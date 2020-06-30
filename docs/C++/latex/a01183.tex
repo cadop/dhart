@@ -1,0 +1,128 @@
+\hypertarget{a01183}{}\doxysection{HF\+::Spatial\+Structures\+::Edge Struct Reference}
+\label{a01183}\index{HF::SpatialStructures::Edge@{HF::SpatialStructures::Edge}}
+
+
+A connection to a child node.  
+
+
+
+
+{\ttfamily \#include $<$Edge.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01183_aef0cf597e116d00ae3f4826578c14e7e}{Edge}} (const \mbox{\hyperlink{a01203}{Node}} \&Child, float Score=0, \mbox{\hyperlink{a00276_af0378d900074d484ba791d4317e5935e}{S\+T\+EP}} Step\+\_\+\+Type=\mbox{\hyperlink{a00276_af0378d900074d484ba791d4317e5935ea45ef4ea34d22b5d90e23d61af2f1f51a}{N\+O\+NE}})
+\begin{DoxyCompactList}\small\item\em Construct a new edge to child. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01203}{Node}} \mbox{\hyperlink{a01183_a7194f21733a2251ec083b3c448ad0484}{child}}
+\begin{DoxyCompactList}\small\item\em The child node for this edge. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00276_af0378d900074d484ba791d4317e5935e}{S\+T\+EP}} \mbox{\hyperlink{a01183_a79b64af5b0377c99c5020a603e1464c5}{step\+\_\+type}}
+\begin{DoxyCompactList}\small\item\em Step required to traverse this edge. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{a01183_a8ac634140d603f7471f059d5845e9467}{score}}
+\begin{DoxyCompactList}\small\item\em The cost required to traverse this edge. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A connection to a child node. 
+
+\begin{DoxyRemark}{Remarks}
+To save memory, edge contains no parent node. This is usually because edges can be placed in arrays to match the order of parent nodes. 
+\end{DoxyRemark}
+
+
+Definition at line 29 of file Edge.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{a01183_aef0cf597e116d00ae3f4826578c14e7e}\label{a01183_aef0cf597e116d00ae3f4826578c14e7e}} 
+\index{HF::SpatialStructures::Edge@{HF::SpatialStructures::Edge}!Edge@{Edge}}
+\index{Edge@{Edge}!HF::SpatialStructures::Edge@{HF::SpatialStructures::Edge}}
+\doxysubsubsection{\texorpdfstring{Edge()}{Edge()}}
+{\footnotesize\ttfamily H\+F\+::\+Spatial\+Structures\+::\+Edge\+::\+Edge (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01203}{Node}} \&}]{Child,  }\item[{float}]{Score = {\ttfamily 0},  }\item[{\mbox{\hyperlink{a00276_af0378d900074d484ba791d4317e5935e}{S\+T\+EP}}}]{Step\+\_\+\+Type = {\ttfamily \mbox{\hyperlink{a00276_af0378d900074d484ba791d4317e5935ea45ef4ea34d22b5d90e23d61af2f1f51a}{N\+O\+NE}}} }\end{DoxyParamCaption})}
+
+
+
+Construct a new edge to child. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Child} & The node being traversed to. \\
+\hline
+{\em Score} & The cost to traverse from parent to child. \\
+\hline
+{\em Step\+\_\+\+Type} & The type of step required to traverse from parent to child. \\
+\hline
+\end{DoxyParams}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "Edge.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a01203}{HF::SpatialStructures::Node}} node(12.0, 23.1, 34.2, 456);}
+\DoxyCodeLine{\textcolor{keywordtype}{float} \mbox{\hyperlink{a01183_a8ac634140d603f7471f059d5845e9467}{score}} = 4.3f;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a01183}{HF::SpatialStructures::Edge}} edge(node, \mbox{\hyperlink{a01183_a8ac634140d603f7471f059d5845e9467}{score}}, \mbox{\hyperlink{a00276_af0378d900074d484ba791d4317e5935ea7a2b5bf64195a97a6b132bf9c58d0bf9}{STEP::NOT\_CONNECTED}});}
+\end{DoxyCode}
+ 
+
+Definition at line 12 of file edge.\+cpp.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01183_a7194f21733a2251ec083b3c448ad0484}\label{a01183_a7194f21733a2251ec083b3c448ad0484}} 
+\index{HF::SpatialStructures::Edge@{HF::SpatialStructures::Edge}!child@{child}}
+\index{child@{child}!HF::SpatialStructures::Edge@{HF::SpatialStructures::Edge}}
+\doxysubsubsection{\texorpdfstring{child}{child}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01203}{Node}} H\+F\+::\+Spatial\+Structures\+::\+Edge\+::child}
+
+
+
+The child node for this edge. 
+
+
+
+Definition at line 30 of file Edge.\+h.
+
+\mbox{\Hypertarget{a01183_a8ac634140d603f7471f059d5845e9467}\label{a01183_a8ac634140d603f7471f059d5845e9467}} 
+\index{HF::SpatialStructures::Edge@{HF::SpatialStructures::Edge}!score@{score}}
+\index{score@{score}!HF::SpatialStructures::Edge@{HF::SpatialStructures::Edge}}
+\doxysubsubsection{\texorpdfstring{score}{score}}
+{\footnotesize\ttfamily float H\+F\+::\+Spatial\+Structures\+::\+Edge\+::score}
+
+
+
+The cost required to traverse this edge. 
+
+
+
+Definition at line 32 of file Edge.\+h.
+
+\mbox{\Hypertarget{a01183_a79b64af5b0377c99c5020a603e1464c5}\label{a01183_a79b64af5b0377c99c5020a603e1464c5}} 
+\index{HF::SpatialStructures::Edge@{HF::SpatialStructures::Edge}!step\_type@{step\_type}}
+\index{step\_type@{step\_type}!HF::SpatialStructures::Edge@{HF::SpatialStructures::Edge}}
+\doxysubsubsection{\texorpdfstring{step\_type}{step\_type}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00276_af0378d900074d484ba791d4317e5935e}{S\+T\+EP}} H\+F\+::\+Spatial\+Structures\+::\+Edge\+::step\+\_\+type}
+
+
+
+Step required to traverse this edge. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a00276_af0378d900074d484ba791d4317e5935e}{S\+T\+EP}} for info on every step type. 
+\end{DoxySeeAlso}
+
+
+Definition at line 31 of file Edge.\+h.
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/spatialstructures/src/\mbox{\hyperlink{a00146}{Edge.\+h}}\item 
+Cpp/spatialstructures/src/\mbox{\hyperlink{a00143}{edge.\+cpp}}\end{DoxyCompactItemize}

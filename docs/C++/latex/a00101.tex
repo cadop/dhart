@@ -1,47 +1,47 @@
-\hypertarget{a00101}{}\doxysection{Cpp/spatialstructures/src/graph.h File Reference}
-\label{a00101}\index{Cpp/spatialstructures/src/graph.h@{Cpp/spatialstructures/src/graph.h}}
+\hypertarget{a00101}{}\doxysection{Cpp/objloader/src/objloader.h File Reference}
+\label{a00101}\index{Cpp/objloader/src/objloader.h@{Cpp/objloader/src/objloader.h}}
 
 
-Header file for a graph A\+DT.  
+Contains definitions for the \mbox{\hyperlink{a00280}{Geometry}} namespace.  
 
 
-{\ttfamily \#include $<$robin\+\_\+hood.\+h$>$}\newline
 {\ttfamily \#include $<$vector$>$}\newline
-{\ttfamily \#include $<$Edge.\+h$>$}\newline
-{\ttfamily \#include $<$Node.\+h$>$}\newline
-{\ttfamily \#include $<$Eigen$>$}\newline
-\doxysubsection*{Classes}
-\begin{DoxyCompactItemize}
-\item 
-struct \mbox{\hyperlink{a01093}{H\+F\+::\+Spatial\+Structures\+::\+C\+S\+R\+Ptrs}}
-\begin{DoxyCompactList}\small\item\em T\+O\+DO summary \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{a01097}{H\+F\+::\+Spatial\+Structures\+::\+Graph}}
-\begin{DoxyCompactList}\small\item\em A \mbox{\hyperlink{a00171}{HF}} \mbox{\hyperlink{a01097}{Graph}} similar to the one stored in python Invariants\+: 1) Always stores a valid graph 2) Every node added will be assigned a unique ID \end{DoxyCompactList}\end{DoxyCompactItemize}
+{\ttfamily \#include $<$string$>$}\newline
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{a00181}{Eigen}}
-\item 
- \mbox{\hyperlink{a00171}{HF}}
+ \mbox{\hyperlink{a00281}{Eigen}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{a00281}{Eigen}} a C++ template library for linear algebra\+: matrices, vectors, numerical solvers, and related algorithms. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00273}{HF}}
 \begin{DoxyCompactList}\small\item\em Output C\+SR for interop with other languages \end{DoxyCompactList}\item 
- \mbox{\hyperlink{a00174}{H\+F\+::\+Spatial\+Structures}}
-\end{DoxyCompactItemize}
+ \mbox{\hyperlink{a00280}{H\+F\+::\+Geometry}}
+\begin{DoxyCompactList}\small\item\em Manipulate and load geometry from disk. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
-enum \mbox{\hyperlink{a00174_a6b23c0b2531c78f6d5049873c184f4f9}{H\+F\+::\+Spatial\+Structures\+::\+C\+O\+S\+T\+\_\+\+A\+G\+G\+R\+E\+G\+A\+TE}} \+: int \{ \mbox{\hyperlink{a00174_a6b23c0b2531c78f6d5049873c184f4f9a6970bdc2201030b9c03fbdcf3973858a}{H\+F\+::\+Spatial\+Structures\+::\+C\+O\+S\+T\+\_\+\+A\+G\+G\+R\+E\+G\+A\+T\+E\+::\+S\+UM}} = 0, 
-\mbox{\hyperlink{a00174_a6b23c0b2531c78f6d5049873c184f4f9a16de38737a9f8366e9b2042b4e9b6290}{H\+F\+::\+Spatial\+Structures\+::\+C\+O\+S\+T\+\_\+\+A\+G\+G\+R\+E\+G\+A\+T\+E\+::\+A\+V\+E\+R\+A\+GE}} = 1, 
-\mbox{\hyperlink{a00174_a6b23c0b2531c78f6d5049873c184f4f9a4905ac9d6a22bdfc1ae096094ce6248d}{H\+F\+::\+Spatial\+Structures\+::\+C\+O\+S\+T\+\_\+\+A\+G\+G\+R\+E\+G\+A\+T\+E\+::\+C\+O\+U\+NT}} = 2
+enum \mbox{\hyperlink{a00280_aa9f0bc5275641fe23f6a7d760751bbc5}{H\+F\+::\+Geometry\+::\+G\+R\+O\+U\+P\+\_\+\+M\+E\+T\+H\+OD}} \{ \mbox{\hyperlink{a00280_aa9f0bc5275641fe23f6a7d760751bbc5a1f09cac4eec7512c5db99bd1c050ee1e}{H\+F\+::\+Geometry\+::\+O\+N\+L\+Y\+\_\+\+F\+I\+LE}} = 0, 
+\mbox{\hyperlink{a00280_aa9f0bc5275641fe23f6a7d760751bbc5afeacc3d8dc97902c6bf9332bdcda9912}{H\+F\+::\+Geometry\+::\+B\+Y\+\_\+\+G\+R\+O\+UP}} = 1, 
+\mbox{\hyperlink{a00280_aa9f0bc5275641fe23f6a7d760751bbc5ac47c481b667efc6c2689d46cd456237c}{H\+F\+::\+Geometry\+::\+B\+Y\+\_\+\+M\+A\+T\+E\+R\+I\+AL}} = 2, 
+\mbox{\hyperlink{a00280_aa9f0bc5275641fe23f6a7d760751bbc5a42c850fb543d857db34aea03c8671f2b}{H\+F\+::\+Geometry\+::\+M\+A\+T\+E\+R\+I\+A\+L\+\_\+\+A\+N\+D\+\_\+\+F\+I\+LE}} = 3
  \}
-\begin{DoxyCompactList}\small\item\em T\+O\+DO summary \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Method of grouping submeshes in O\+BJ files. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ Mesh\+Info $>$ \mbox{\hyperlink{a00280_a6cd66262c11d9276be46e3fcd9a3a712}{H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects}} (std\+::string path, G\+R\+O\+U\+P\+\_\+\+M\+E\+T\+H\+OD gm=O\+N\+L\+Y\+\_\+\+F\+I\+LE, bool change\+\_\+coords=true)
+\begin{DoxyCompactList}\small\item\em Create \mbox{\hyperlink{a01127}{Mesh\+Info}} instances from the O\+BJ at path. \end{DoxyCompactList}\item 
+vector$<$ Mesh\+Info $>$ \mbox{\hyperlink{a00280_af77d26cedf5f90073cce07aa8c528094}{H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects}} (std\+::vector$<$ std\+::string $>$ \&path, G\+R\+O\+U\+P\+\_\+\+M\+E\+T\+H\+OD gm=O\+N\+L\+Y\+\_\+\+F\+I\+LE, bool change\+\_\+coords=true)
+\begin{DoxyCompactList}\small\item\em Create \mbox{\hyperlink{a01127}{Mesh\+Info}} instances from the O\+BJ files in path. \end{DoxyCompactList}\item 
+vector$<$ array$<$ float, 3 $>$ $>$ \mbox{\hyperlink{a00280_aec1df746155d224838048d3a43c2fe96}{H\+F\+::\+Geometry\+::\+Load\+Raw\+Vertices}} (std\+::string path)
+\begin{DoxyCompactList}\small\item\em Load a list of vertices directly from an O\+BJ file. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Header file for a graph A\+DT. 
+Contains definitions for the \mbox{\hyperlink{a00280}{Geometry}} namespace. 
 
 \begin{DoxyAuthor}{Author}
 T\+BA 
 \end{DoxyAuthor}
 \begin{DoxyDate}{Date}
-06 Jun 2020 
+16 Jun 2020 
 \end{DoxyDate}

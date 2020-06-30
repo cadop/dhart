@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Analysis: Cpp/spatialstructures/src/edge.cpp File Reference</title>
+<title>Analysis: Cpp/objloader/src/meshinfo.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,38 +61,78 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_882abde7eca0231e2bae1ceefe5e858a.html">Cpp</a></li><li class="navelem"><a class="el" href="dir_66731bdf74d76a38b2c500ac62cfdf48.html">spatialstructures</a></li><li class="navelem"><a class="el" href="dir_7fdf8b1285a3d76ae7bf3420b7ffebee.html">src</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_882abde7eca0231e2bae1ceefe5e858a.html">Cpp</a></li><li class="navelem"><a class="el" href="dir_46f038d98c29b85ae873c4d3a30697d6.html">objloader</a></li><li class="navelem"><a class="el" href="dir_e8729f7e450b4a44d154406cba6833f7.html">src</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#define-members">Macros</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">edge.cpp File Reference</div>  </div>
+<div class="title">meshinfo.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Source file for an edge data type, used by a graph ADT.  
+<p>Contains implementation for the <a class="el" href="">MeshInfo</a> class.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;<a class="el" href="a00095_source.html">Edge.h</a>&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="a00095_source.html">meshinfo.h</a>&gt;</code><br />
+<code>#include &lt;Geometry&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00086_source.html">HFExceptions.h</a>&gt;</code><br />
+<code>#include &lt;math.h&gt;</code><br />
+<code>#include &lt;corecrt_math_defines.h&gt;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;robin_hood.h&gt;</code><br />
 </div>
 <p><a href="a00092_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a00171"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00171.html">HF</a></td></tr>
-<tr class="memdesc:a00171"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output CSR for interop with other languages <br /></td></tr>
+<tr class="memitem:a00273"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00273.html">HF</a></td></tr>
+<tr class="memdesc:a00273"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output CSR for interop with other languages <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00174"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00174.html">HF::SpatialStructures</a></td></tr>
+<tr class="memitem:a00280"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00280.html">HF::Geometry</a></td></tr>
+<tr class="memdesc:a00280"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manipulate and load geometry from disk. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a525335710b53cb064ca56b936120431e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00092.html#a525335710b53cb064ca56b936120431e">_USE_MATH_DEFINES</a></td></tr>
+<tr class="separator:a525335710b53cb064ca56b936120431e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a16c42809aebe3f4d5bcc7b0e15ccae78"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00280.html#a16c42809aebe3f4d5bcc7b0e15ccae78">HF::Geometry::IndexRawVertices</a> (const vector&lt; array&lt; float, 3 &gt;&gt; &amp;vertices, vector&lt; int &gt; &amp;mapped_indexes, vector&lt; float &gt; &amp;mapped_vertices)</td></tr>
+<tr class="memdesc:a16c42809aebe3f4d5bcc7b0e15ccae78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Index an array of vertices.  <a href="a00280.html#a16c42809aebe3f4d5bcc7b0e15ccae78">More...</a><br /></td></tr>
+<tr class="separator:a16c42809aebe3f4d5bcc7b0e15ccae78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f68dc29844b30ade25aadac3d3bf026"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00280.html#a2f68dc29844b30ade25aadac3d3bf026">HF::Geometry::arrayDist</a> (const array&lt; float, 3 &gt; from, const array&lt; float, 3 &gt; &amp;to)</td></tr>
+<tr class="memdesc:a2f68dc29844b30ade25aadac3d3bf026"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the distance between from and to.  <a href="a00280.html#a2f68dc29844b30ade25aadac3d3bf026">More...</a><br /></td></tr>
+<tr class="separator:a2f68dc29844b30ade25aadac3d3bf026"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Source file for an edge data type, used by a graph ADT. </p>
+<div class="textblock"><p>Contains implementation for the <a class="el" href="">MeshInfo</a> class. </p>
 <dl class="section author"><dt>Author</dt><dd>TBA </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>06 Jun 2020 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>16 Jun 2020 </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="a00092_source.html">edge.cpp</a>.</p>
-</div></div><!-- contents -->
+<p class="definition">Definition in file <a class="el" href="a00092_source.html">meshinfo.cpp</a>.</p>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a525335710b53cb064ca56b936120431e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a525335710b53cb064ca56b936120431e">&#9670;&nbsp;</a></span>_USE_MATH_DEFINES</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define _USE_MATH_DEFINES</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00092_source.html#l00018">18</a> of file <a class="el" href="a00092_source.html">meshinfo.cpp</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

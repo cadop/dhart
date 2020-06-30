@@ -1,0 +1,324 @@
+\hypertarget{a01107}{}\doxysection{HF\+::Analysis\+Methods\+::Unique\+Queue Class Reference}
+\label{a01107}\index{HF::AnalysisMethods::UniqueQueue@{HF::AnalysisMethods::UniqueQueue}}
+
+
+A queue that ensures every unique object can only enter the queue once  
+
+
+
+
+{\ttfamily \#include $<$unique\+\_\+queue.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{a01107_ab68b0a487ec4c6a63b94aa21e9958614}{push}} (const \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&p)
+\begin{DoxyCompactList}\small\item\em Add a node to the queue if it has never previously been in the queue. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \mbox{\hyperlink{a01107_aea67255188a3f8d9f9755f85efdd4b60}{pop}} ()
+\begin{DoxyCompactList}\small\item\em Remove the topmost node from the queue and return it \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{a01107_a714234140a2c4a49eb5ba4418cd87c8f}{size}} () const
+\begin{DoxyCompactList}\small\item\em Determine how many nodes are currently in the queue \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \mbox{\hyperlink{a01107_a4a3a37a96c45dfa3a654d5d4e7d07a4a}{pop\+From\+Dict}} ()
+\begin{DoxyCompactList}\small\item\em Remove the topmost node from the queue, but allow it to enter again in the future \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01107_a53326f383a1dd1c083037213044b112b}{has\+Node}} (const \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&p) const
+\begin{DoxyCompactList}\small\item\em Check to see if the node has ever been in the queue \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01107_af50bcd7fffb59767edbf7d5b6b5d69b6}{force\+Push}} (const \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&p)
+\begin{DoxyCompactList}\small\item\em Forcibly push a node onto the queue without checking it. Saves a hash function, but risks breaking the invariant. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01107_a792665a25bcf313e5925247855b5f7d3}{empty}} () const
+\begin{DoxyCompactList}\small\item\em Tell if the queue is empty \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a01107_a9b63b2d577ec77a205d2443a9e58aff6}{clear\+Queue}} ()
+\begin{DoxyCompactList}\small\item\em Clear every node from the queue, but not the dictionary \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{a01203}{Spatial\+Structures\+::\+Node}} $>$ \mbox{\hyperlink{a01107_afc00a6953228ef2639a6b40a7ce64e28}{pop\+Many}} (int max=-\/1)
+\begin{DoxyCompactList}\small\item\em Pop a set amount of nodes from the queue, and return them as a vector 
+\begin{DoxyParams}{Parameters}
+{\em max} & Maximum allowed amount of nodes. If set to -\/1, pop all\\
+\hline
+\end{DoxyParams}
+\end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::queue$<$ \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \mbox{\hyperlink{a01107_a108fa4b8cd807b67c03a084e88d475d9}{node\+\_\+queue}}
+\begin{DoxyCompactList}\small\item\em A std\+::queue of Node ///$<$. \end{DoxyCompactList}\item 
+robin\+\_\+hood\+::unordered\+\_\+map$<$ \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}}, int $>$ \mbox{\hyperlink{a01107_a140a4e0eedf300410609e3eb52ad7bf1}{hashmap}}
+\begin{DoxyCompactList}\small\item\em a hashmap of K = Node, V = int ///$<$ \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A queue that ensures every unique object can only enter the queue once 
+
+
+
+Definition at line 21 of file unique\+\_\+queue.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a01107_a9b63b2d577ec77a205d2443a9e58aff6}\label{a01107_a9b63b2d577ec77a205d2443a9e58aff6}} 
+\index{HF::AnalysisMethods::UniqueQueue@{HF::AnalysisMethods::UniqueQueue}!clearQueue@{clearQueue}}
+\index{clearQueue@{clearQueue}!HF::AnalysisMethods::UniqueQueue@{HF::AnalysisMethods::UniqueQueue}}
+\doxysubsubsection{\texorpdfstring{clearQueue()}{clearQueue()}}
+{\footnotesize\ttfamily void H\+F\+::\+Analysis\+Methods\+::\+Unique\+Queue\+::clear\+Queue (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Clear every node from the queue, but not the dictionary 
+
+
+
+Definition at line 54 of file unique\+\_\+queue.\+cpp.
+
+
+
+References node\+\_\+queue.
+
+\mbox{\Hypertarget{a01107_a792665a25bcf313e5925247855b5f7d3}\label{a01107_a792665a25bcf313e5925247855b5f7d3}} 
+\index{HF::AnalysisMethods::UniqueQueue@{HF::AnalysisMethods::UniqueQueue}!empty@{empty}}
+\index{empty@{empty}!HF::AnalysisMethods::UniqueQueue@{HF::AnalysisMethods::UniqueQueue}}
+\doxysubsubsection{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily bool H\+F\+::\+Analysis\+Methods\+::\+Unique\+Queue\+::empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Tell if the queue is empty 
+
+\begin{DoxyReturn}{Returns}
+False if there is atleast one node in the queue
+\end{DoxyReturn}
+
+
+Definition at line 51 of file unique\+\_\+queue.\+cpp.
+
+
+
+References size().
+
+
+
+Referenced by H\+F\+::\+Analysis\+Methods\+::\+Graph\+Generator\+Private\+::\+Crawl\+Geom(), and H\+F\+::\+Analysis\+Methods\+::\+Graph\+Generator\+Private\+::\+Crawl\+Geom\+Parallel().
+
+\mbox{\Hypertarget{a01107_af50bcd7fffb59767edbf7d5b6b5d69b6}\label{a01107_af50bcd7fffb59767edbf7d5b6b5d69b6}} 
+\index{HF::AnalysisMethods::UniqueQueue@{HF::AnalysisMethods::UniqueQueue}!forcePush@{forcePush}}
+\index{forcePush@{forcePush}!HF::AnalysisMethods::UniqueQueue@{HF::AnalysisMethods::UniqueQueue}}
+\doxysubsubsection{\texorpdfstring{forcePush()}{forcePush()}}
+{\footnotesize\ttfamily bool H\+F\+::\+Analysis\+Methods\+::\+Unique\+Queue\+::force\+Push (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&}]{p }\end{DoxyParamCaption})}
+
+
+
+Forcibly push a node onto the queue without checking it. Saves a hash function, but risks breaking the invariant. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & Node to push\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line 46 of file unique\+\_\+queue.\+cpp.
+
+
+
+References hashmap, and node\+\_\+queue.
+
+\mbox{\Hypertarget{a01107_a53326f383a1dd1c083037213044b112b}\label{a01107_a53326f383a1dd1c083037213044b112b}} 
+\index{HF::AnalysisMethods::UniqueQueue@{HF::AnalysisMethods::UniqueQueue}!hasNode@{hasNode}}
+\index{hasNode@{hasNode}!HF::AnalysisMethods::UniqueQueue@{HF::AnalysisMethods::UniqueQueue}}
+\doxysubsubsection{\texorpdfstring{hasNode()}{hasNode()}}
+{\footnotesize\ttfamily bool H\+F\+::\+Analysis\+Methods\+::\+Unique\+Queue\+::has\+Node (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&}]{p }\end{DoxyParamCaption}) const}
+
+
+
+Check to see if the node has ever been in the queue 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & Node to check the existance of \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the node has existed in the queue
+\end{DoxyReturn}
+
+
+Definition at line 42 of file unique\+\_\+queue.\+cpp.
+
+
+
+References hashmap.
+
+\mbox{\Hypertarget{a01107_aea67255188a3f8d9f9755f85efdd4b60}\label{a01107_aea67255188a3f8d9f9755f85efdd4b60}} 
+\index{HF::AnalysisMethods::UniqueQueue@{HF::AnalysisMethods::UniqueQueue}!pop@{pop}}
+\index{pop@{pop}!HF::AnalysisMethods::UniqueQueue@{HF::AnalysisMethods::UniqueQueue}}
+\doxysubsubsection{\texorpdfstring{pop()}{pop()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} H\+F\+::\+Analysis\+Methods\+::\+Unique\+Queue\+::pop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Remove the topmost node from the queue and return it 
+
+\begin{DoxyReturn}{Returns}
+The node at the top of the stack
+\end{DoxyReturn}
+
+
+Definition at line 23 of file unique\+\_\+queue.\+cpp.
+
+
+
+References node\+\_\+queue.
+
+
+
+Referenced by H\+F\+::\+Analysis\+Methods\+::\+Graph\+Generator\+Private\+::\+Crawl\+Geom(), H\+F\+::\+Analysis\+Methods\+::\+Graph\+Generator\+Private\+::\+Crawl\+Geom\+Parallel(), and pop\+Many().
+
+\mbox{\Hypertarget{a01107_a4a3a37a96c45dfa3a654d5d4e7d07a4a}\label{a01107_a4a3a37a96c45dfa3a654d5d4e7d07a4a}} 
+\index{HF::AnalysisMethods::UniqueQueue@{HF::AnalysisMethods::UniqueQueue}!popFromDict@{popFromDict}}
+\index{popFromDict@{popFromDict}!HF::AnalysisMethods::UniqueQueue@{HF::AnalysisMethods::UniqueQueue}}
+\doxysubsubsection{\texorpdfstring{popFromDict()}{popFromDict()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} H\+F\+::\+Analysis\+Methods\+::\+Unique\+Queue\+::pop\+From\+Dict (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Remove the topmost node from the queue, but allow it to enter again in the future 
+
+\begin{DoxyReturn}{Returns}
+Topmost node in the queue
+\end{DoxyReturn}
+
+
+Definition at line 34 of file unique\+\_\+queue.\+cpp.
+
+
+
+References hashmap, and node\+\_\+queue.
+
+\mbox{\Hypertarget{a01107_afc00a6953228ef2639a6b40a7ce64e28}\label{a01107_afc00a6953228ef2639a6b40a7ce64e28}} 
+\index{HF::AnalysisMethods::UniqueQueue@{HF::AnalysisMethods::UniqueQueue}!popMany@{popMany}}
+\index{popMany@{popMany}!HF::AnalysisMethods::UniqueQueue@{HF::AnalysisMethods::UniqueQueue}}
+\doxysubsubsection{\texorpdfstring{popMany()}{popMany()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{a01203}{Spatial\+Structures\+::\+Node}} $>$ H\+F\+::\+Analysis\+Methods\+::\+Unique\+Queue\+::pop\+Many (\begin{DoxyParamCaption}\item[{int}]{max = {\ttfamily -\/1} }\end{DoxyParamCaption})}
+
+
+
+Pop a set amount of nodes from the queue, and return them as a vector 
+\begin{DoxyParams}{Parameters}
+{\em max} & Maximum allowed amount of nodes. If set to -\/1, pop all\\
+\hline
+\end{DoxyParams}
+
+
+
+
+Definition at line 58 of file unique\+\_\+queue.\+cpp.
+
+
+
+References node\+\_\+queue, pop(), and size().
+
+
+
+Referenced by H\+F\+::\+Analysis\+Methods\+::\+Graph\+Generator\+Private\+::\+Crawl\+Geom\+Parallel().
+
+\mbox{\Hypertarget{a01107_ab68b0a487ec4c6a63b94aa21e9958614}\label{a01107_ab68b0a487ec4c6a63b94aa21e9958614}} 
+\index{HF::AnalysisMethods::UniqueQueue@{HF::AnalysisMethods::UniqueQueue}!push@{push}}
+\index{push@{push}!HF::AnalysisMethods::UniqueQueue@{HF::AnalysisMethods::UniqueQueue}}
+\doxysubsubsection{\texorpdfstring{push()}{push()}}
+{\footnotesize\ttfamily bool H\+F\+::\+Analysis\+Methods\+::\+Unique\+Queue\+::push (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&}]{p }\end{DoxyParamCaption})}
+
+
+
+Add a node to the queue if it has never previously been in the queue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & The node to add\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+False if the node wasn\textquotesingle{}t added, true if it was
+\end{DoxyReturn}
+
+
+Definition at line 12 of file unique\+\_\+queue.\+cpp.
+
+
+
+References hashmap, and node\+\_\+queue.
+
+
+
+Referenced by H\+F\+::\+Analysis\+Methods\+::\+Graph\+Generator\+Private\+::\+Build\+Network(), H\+F\+::\+Analysis\+Methods\+::\+Graph\+Generator\+Private\+::\+Crawl\+Geom(), and H\+F\+::\+Analysis\+Methods\+::\+Graph\+Generator\+Private\+::\+Crawl\+Geom\+Parallel().
+
+\mbox{\Hypertarget{a01107_a714234140a2c4a49eb5ba4418cd87c8f}\label{a01107_a714234140a2c4a49eb5ba4418cd87c8f}} 
+\index{HF::AnalysisMethods::UniqueQueue@{HF::AnalysisMethods::UniqueQueue}!size@{size}}
+\index{size@{size}!HF::AnalysisMethods::UniqueQueue@{HF::AnalysisMethods::UniqueQueue}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily int H\+F\+::\+Analysis\+Methods\+::\+Unique\+Queue\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Determine how many nodes are currently in the queue 
+
+\begin{DoxyReturn}{Returns}
+The amount of nodes in the queue
+\end{DoxyReturn}
+
+
+Definition at line 30 of file unique\+\_\+queue.\+cpp.
+
+
+
+References node\+\_\+queue.
+
+
+
+Referenced by H\+F\+::\+Analysis\+Methods\+::\+Graph\+Generator\+Private\+::\+Crawl\+Geom\+Parallel(), empty(), and pop\+Many().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01107_a140a4e0eedf300410609e3eb52ad7bf1}\label{a01107_a140a4e0eedf300410609e3eb52ad7bf1}} 
+\index{HF::AnalysisMethods::UniqueQueue@{HF::AnalysisMethods::UniqueQueue}!hashmap@{hashmap}}
+\index{hashmap@{hashmap}!HF::AnalysisMethods::UniqueQueue@{HF::AnalysisMethods::UniqueQueue}}
+\doxysubsubsection{\texorpdfstring{hashmap}{hashmap}}
+{\footnotesize\ttfamily robin\+\_\+hood\+::unordered\+\_\+map$<$\mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}}, int$>$ H\+F\+::\+Analysis\+Methods\+::\+Unique\+Queue\+::hashmap\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+a hashmap of K = Node, V = int ///$<$ 
+
+
+
+Definition at line 24 of file unique\+\_\+queue.\+h.
+
+
+
+Referenced by force\+Push(), has\+Node(), pop\+From\+Dict(), and push().
+
+\mbox{\Hypertarget{a01107_a108fa4b8cd807b67c03a084e88d475d9}\label{a01107_a108fa4b8cd807b67c03a084e88d475d9}} 
+\index{HF::AnalysisMethods::UniqueQueue@{HF::AnalysisMethods::UniqueQueue}!node\_queue@{node\_queue}}
+\index{node\_queue@{node\_queue}!HF::AnalysisMethods::UniqueQueue@{HF::AnalysisMethods::UniqueQueue}}
+\doxysubsubsection{\texorpdfstring{node\_queue}{node\_queue}}
+{\footnotesize\ttfamily std\+::queue$<$\mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}}$>$ H\+F\+::\+Analysis\+Methods\+::\+Unique\+Queue\+::node\+\_\+queue\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+A std\+::queue of Node ///$<$. 
+
+
+
+Definition at line 23 of file unique\+\_\+queue.\+h.
+
+
+
+Referenced by clear\+Queue(), force\+Push(), pop(), pop\+From\+Dict(), pop\+Many(), push(), and size().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/analysismethods/src/\mbox{\hyperlink{a00020}{unique\+\_\+queue.\+h}}\item 
+Cpp/analysismethods/src/\mbox{\hyperlink{a00017}{unique\+\_\+queue.\+cpp}}\end{DoxyCompactItemize}

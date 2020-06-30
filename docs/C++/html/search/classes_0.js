@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['boostgraph_409',['BoostGraph',['../a01037.html',1,'HF::Pathfinding']]],
-  ['boostgraphdeleter_410',['BoostGraphDeleter',['../a01045.html',1,'HF::Pathfinding']]]
+  ['boostgraph_411',['BoostGraph',['../a01139.html',1,'HF::Pathfinding']]],
+  ['boostgraphdeleter_412',['BoostGraphDeleter',['../a01147.html',1,'HF::Pathfinding']]]
 ];

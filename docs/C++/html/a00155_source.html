@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Analysis: Cinterface/visibility_graph_C.cpp Source File</title>
+<title>Analysis: Cpp/spatialstructures/src/node.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,135 +61,161 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_37600e7aa46d6eb08a97d98a1c09ffb1.html">Cinterface</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_882abde7eca0231e2bae1ceefe5e858a.html">Cpp</a></li><li class="navelem"><a class="el" href="dir_66731bdf74d76a38b2c500ac62cfdf48.html">spatialstructures</a></li><li class="navelem"><a class="el" href="dir_7fdf8b1285a3d76ae7bf3420b7ffebee.html">src</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">visibility_graph_C.cpp</div>  </div>
+<div class="title">node.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00155.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00158.html">visibility_graph_C.h</a>&quot;</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00032.html">visibility_graph.h</a>&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00071.html">embree_raytracer.h</a>&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00101.html">graph.h</a>&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00104.html">node.h</a>&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00038.html">HFExceptions.h</a>&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">using namespace </span><a class="code" href="a00175.html">HF::RayTracer</a>;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">using namespace </span><a class="code" href="a00174.html">HF::SpatialStructures</a>;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">using namespace </span><a class="code" href="a00172.html">HF::AnalysisMethods</a>;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">using</span> std::vector;</div>
+<a href="a00155.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#ifndef HF_NODE</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#define HF_NODE</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="a00155.html#ae4ffe42f069a68102473a4f7c8328437">   12</a></span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;array&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;ostream&gt;</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="a00169.html#ga0255e6c4811298e61110adc64c0f8acd">   16</a></span>&#160;<a class="code" href="a00116.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> <a class="code" href="a00169.html#ga0255e6c4811298e61110adc64c0f8acd">CreateVisibilityGraphAllToAll</a>(</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="a01061.html">EmbreeRayTracer</a>* ert,</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">float</span>* nodes,</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">int</span> num_nodes,</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="a01097.html">Graph</a>** out_graph,</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">float</span> height</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;) {</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">auto</span> array_of_nodes = <a class="code" href="a00083.html#a2f5650b0bad6c47aa34fc2206433a34b">ConvertRawFloatArrayToPoints</a>(nodes, num_nodes);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    vector&lt;Node&gt; vector_of_nodes(num_nodes);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; num_nodes; i++) {</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span>&amp; arr = array_of_nodes[i];</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keyword">auto</span>&amp; vec = vector_of_nodes[i];</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        vec[0] = arr[0]; vec[1] = arr[1]; vec[2] = arr[2];</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    }</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="a01097.html">Graph</a> * vg = <span class="keyword">new</span> <a class="code" href="a01097.html">Graph</a>();</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    *vg = <a class="code" href="a00176.html#aa5e31d3364f1dbee72065b8f5dc38574">VisibilityGraph::AllToAll</a>(*ert, vector_of_nodes, height );</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    *out_graph = vg;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="a00177.html#aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d">HF::Exceptions::HF_STATUS::OK</a>;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;}</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="a00169.html#ga9b0664a60bcdf276b0fe0a2023b3d9b8">   40</a></span>&#160;<a class="code" href="a00116.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> <a class="code" href="a00169.html#ga9b0664a60bcdf276b0fe0a2023b3d9b8">CreateVisibilityGraphAllToAllUndirected</a>(</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="a01061.html">EmbreeRayTracer</a>* ert, </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">float</span>* nodes,</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">int</span> num_nodes, </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="a01097.html">Graph</a>** out_graph,</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">float</span> height,</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">int</span> cores</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;) {</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">auto</span> array_of_nodes = <a class="code" href="a00083.html#a2f5650b0bad6c47aa34fc2206433a34b">ConvertRawFloatArrayToPoints</a>(nodes, num_nodes);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    vector&lt;Node&gt; vector_of_nodes(num_nodes);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; num_nodes; i++) {</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span>&amp; arr = array_of_nodes[i];</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keyword">auto</span>&amp; vec = vector_of_nodes[i];</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        vec[0] = arr[0]; vec[1] = arr[1]; vec[2] = arr[2];</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    }</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <a class="code" href="a01097.html">Graph</a>* vg = <span class="keyword">new</span> <a class="code" href="a01097.html">Graph</a>();</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    *vg = <a class="code" href="a00176.html#a2c0cbb953168bcc6a5727bf8122b1286">VisibilityGraph::AllToAllUndirected</a>(*ert, vector_of_nodes, height, cores);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    *out_graph = vg;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="a00177.html#aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d">HF::Exceptions::HF_STATUS::OK</a>;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;}</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="a00169.html#gaf2e404cb696aee3473cac0d1507576d8">   64</a></span>&#160;<a class="code" href="a00116.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> <a class="code" href="a00169.html#gaf2e404cb696aee3473cac0d1507576d8">CreateVisibilityGraphGroupToGroup</a>(</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <a class="code" href="a01061.html">HF::RayTracer::EmbreeRayTracer</a>* ert, </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">float</span>* group_a, </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">int</span> size_a,</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">float</span>* group_b, </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">int</span> size_b,</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <a class="code" href="a01097.html">Graph</a>** out_graph,</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordtype">float</span> height</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;) {</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keyword">auto</span> array_a = <a class="code" href="a00083.html#a2f5650b0bad6c47aa34fc2206433a34b">ConvertRawFloatArrayToPoints</a>(group_a, size_a);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keyword">auto</span> array_b = <a class="code" href="a00083.html#a2f5650b0bad6c47aa34fc2206433a34b">ConvertRawFloatArrayToPoints</a>(group_b, size_b);</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    vector&lt;Node&gt; vector_a(size_a);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    vector&lt;Node&gt; vector_b(size_b);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; size_a; i++) {</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span>&amp; arra = array_a[i];</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keyword">auto</span>&amp; va = vector_a[i];</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        va[0] = arra[0]; va[1] = arra[1]; va[2] = arra[2];</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    }</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; size_b; i++) {</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span>&amp; arrb = array_b[i];</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="keyword">auto</span>&amp; vb = vector_b[i];</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        vb[0] = arrb[0]; vb[1] = arrb[1]; vb[2] = arrb[2];</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    }</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    *out_graph = <span class="keyword">new</span> <a class="code" href="a01097.html">Graph</a>();</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    **out_graph = <a class="code" href="a00176.html#a85f2d1e50a9458e1a4b0bb8a0e0adafa">VisibilityGraph::GroupToGroup</a>(*ert, vector_a, vector_b, height);</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordflow">if</span> ((*out_graph)-&gt;GetCSRPointers().AreValid()) {</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="a00177.html#aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d">HF::Exceptions::HF_STATUS::OK</a>;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    }</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keyword">delete</span>* out_graph;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="a00177.html#aed53c233beb1d9ec1b0c5fc2bfbb1051ab9036b1fec7e201bf970944267471d35">HF::Exceptions::HF_STATUS::NO_GRAPH</a>;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    }</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;}</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00273.html">HF</a></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">namespace </span>SpatialStructures {</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="a00276.html#aa8ecd83cd353318532d791fc819343cc">   29</a></span>&#160;        <span class="keyword">enum</span> <a class="code" href="a00276.html#aa8ecd83cd353318532d791fc819343cc">NODE_TYPE</a> {</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="a00276.html#aa8ecd83cd353318532d791fc819343cca5c2876be9857d3e0192c9e1cb3797bf8">   30</a></span>&#160;            <a class="code" href="a00276.html#aa8ecd83cd353318532d791fc819343cca5c2876be9857d3e0192c9e1cb3797bf8">GRAPH</a> = 0,      </div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="a00276.html#aa8ecd83cd353318532d791fc819343cca023bd38e0854e766e5c483d451a383ad">   31</a></span>&#160;            <a class="code" href="a00276.html#aa8ecd83cd353318532d791fc819343cca023bd38e0854e766e5c483d451a383ad">POI</a> = 1,        </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            <a class="code" href="a00276.html#aa8ecd83cd353318532d791fc819343cca996f30fa669937983b628671c4493b8e">OTHER</a> = 2       </div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="a00276.html#aa8ecd83cd353318532d791fc819343cca996f30fa669937983b628671c4493b8e">   33</a></span>&#160;        };</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="a01203.html">   38</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="a01203.html">Node</a> {</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="a01203.html#a495b47689917e0395ce96ee01d3f5ed3">   40</a></span>&#160;            <span class="keywordtype">float</span> <a class="code" href="a01203.html#a78dfebaa44da09b03d7ca15445c8d222">x</a>, <a class="code" href="a01203.html#a41981fb2cc6dc0edb787f921188702b0">y</a>, <a class="code" href="a01203.html#a495b47689917e0395ce96ee01d3f5ed3">z</a>;      </div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="a01203.html#a3894a51f72b82cea2d6675a91fcb39cf">   41</a></span>&#160;            <span class="keywordtype">short</span> <a class="code" href="a01203.html#a3894a51f72b82cea2d6675a91fcb39cf">type</a> = <a class="code" href="a00276.html#aa8ecd83cd353318532d791fc819343cca5c2876be9857d3e0192c9e1cb3797bf8">GRAPH</a>; </div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="a01203.html#a8212d00e6913abf0ca6fec1f2624b677">   42</a></span>&#160;            <span class="keywordtype">int</span> <a class="code" href="a01203.html#a8212d00e6913abf0ca6fec1f2624b677">id</a>;             </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <a class="code" href="a01203.html#a3d229a53bb7328f88649fd48e6098b5d">Node</a>();</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <a class="code" href="a01203.html#a3d229a53bb7328f88649fd48e6098b5d">Node</a>(<span class="keywordtype">float</span> <a class="code" href="a01203.html#a78dfebaa44da09b03d7ca15445c8d222">x</a>, <span class="keywordtype">float</span> <a class="code" href="a01203.html#a41981fb2cc6dc0edb787f921188702b0">y</a>, <span class="keywordtype">float</span> <a class="code" href="a01203.html#a495b47689917e0395ce96ee01d3f5ed3">z</a>, <span class="keywordtype">int</span> ID = -1);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            <a class="code" href="a01203.html#a3d229a53bb7328f88649fd48e6098b5d">Node</a>(<span class="keyword">const</span> std::array&lt;float, 3&gt;&amp; position);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            <a class="code" href="a01203.html#a3d229a53bb7328f88649fd48e6098b5d">Node</a>(<span class="keyword">const</span> std::array&lt;float, 3&gt;&amp; position, <a class="code" href="a00276.html#aa8ecd83cd353318532d791fc819343cc">NODE_TYPE</a> t, <span class="keywordtype">int</span> <span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            <span class="keywordtype">float</span> <a class="code" href="a01203.html#abbd66b566460f9557a373b5fbcc30bb1">distanceTo</a>(<span class="keyword">const</span> <a class="code" href="a01203.html">Node</a>&amp; n2) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
+<div class="line"><a name="l00129"></a><span class="lineno"><a class="line" href="a01203.html#a260ab9e9763234dab08decfc2aa6bf63">  129</a></span>&#160;            <span class="keywordtype">float</span> <a class="code" href="a01203.html#a260ab9e9763234dab08decfc2aa6bf63">angleTo</a>(<span class="keyword">const</span> <a class="code" href="a01203.html">Node</a>&amp; n2) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;            std::array&lt;float, 3&gt; <a class="code" href="a01203.html#ad3f7898ef3178eef0c3579869a7f5c67">directionTo</a>(<span class="keyword">const</span> <a class="code" href="a01203.html">Node</a>&amp; n2) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            std::array&lt;float, 3&gt; <a class="code" href="a01203.html#a51c4642674d54d02b8600f7ffeb45670">getArray</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            <span class="comment">// Operators</span></div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;            <span class="keywordtype">float</span>&amp; <a class="code" href="a01203.html#a556efc898ddc67b64fff560d0c7b5a0a">operator[]</a>(<span class="keywordtype">int</span> i);</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; </div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; </div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;            <span class="keywordtype">float</span> <a class="code" href="a01203.html#a556efc898ddc67b64fff560d0c7b5a0a">operator[]</a>(<span class="keywordtype">int</span> i) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160; </div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160; </div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="a01203.html#af687c2e97fffe3b7d14e3cfa8af3e5cd">operator==</a>(<span class="keyword">const</span> <a class="code" href="a01203.html">Node</a>&amp; n2) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; </div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160; </div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160; </div>
+<div class="line"><a name="l00264"></a><span class="lineno"><a class="line" href="a01203.html#a5a3306ea1b8904361b038391718ccc07">  264</a></span>&#160;            <span class="keywordtype">void</span> <a class="code" href="a01203.html#a5a3306ea1b8904361b038391718ccc07">operator=</a>(<span class="keyword">const</span> std::array&lt;float, 3&gt;&amp; n2);</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160; </div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;            </div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="a01203.html#a6137878845816e2fe8ecbe1215c490fd">operator!=</a>(<span class="keyword">const</span> <a class="code" href="a01203.html">Node</a>&amp; n2) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160; </div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;            </div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;            <a class="code" href="a01203.html">Node</a> <a class="code" href="a01203.html#ad58a4eb9f0a15c645eedf668d9bcec54">operator-</a>(<span class="keyword">const</span> <a class="code" href="a01203.html">Node</a>&amp; n2) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160; </div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160; </div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;            <a class="code" href="a01203.html">Node</a> <a class="code" href="a01203.html#a064540b380fc6251bdf6d740abf7a169">operator+</a>(<span class="keyword">const</span> <a class="code" href="a01203.html">Node</a>&amp; n2) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160; </div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160; </div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;            <a class="code" href="a01203.html">Node</a> <a class="code" href="a01203.html#a099271bad26dd059037f3c84459058e0">operator*</a>(<span class="keyword">const</span> <a class="code" href="a01203.html">Node</a>&amp; n2) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160; </div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160; </div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="a01203.html#a1d74d883b7291a760908f3dc81783b3d">operator&lt;</a>(<span class="keyword">const</span> <a class="code" href="a01203.html">Node</a>&amp; n2) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160; </div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160; </div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="a01203.html#a1d74d883b7291a760908f3dc81783b3d">operator&lt;</a>(<span class="keyword">const</span> <a class="code" href="a01203.html">Node</a>&amp; n2);</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160; </div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160; </div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="a01203.html#a9d67cccc8b0fc57d61390da493149790">operator&gt;</a>(<span class="keyword">const</span> <a class="code" href="a01203.html">Node</a>&amp; n2) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;        };</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;    };</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;}</div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160; </div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;<span class="keyword">namespace </span>std {</div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> SizeT&gt;</div>
+<div class="line"><a name="l00434"></a><span class="lineno"><a class="line" href="a00155.html#a3340e7ae931e28e5c83e07f1d48d3ea2">  434</a></span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="a00155.html#a3340e7ae931e28e5c83e07f1d48d3ea2">hash_combine_impl</a>(SizeT&amp; seed, SizeT value) noexcept</div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;    {</div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;        seed ^= value + 0x9e3779b9 + (seed &lt;&lt; 6) + (seed &gt;&gt; 2);</div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;    }</div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160; </div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;    <span class="keyword">template</span> &lt;&gt;</div>
+<div class="line"><a name="l00441"></a><span class="lineno"><a class="line" href="a01207.html">  441</a></span>&#160;    <span class="keyword">struct </span>hash&lt;<a class="code" href="a00273.html">HF</a>::SpatialStructures::Node&gt;</div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;    {</div>
+<div class="line"><a name="l00443"></a><span class="lineno"><a class="line" href="a01207.html#ae698fc86d39e9e05ca2f030654fa45ca">  443</a></span>&#160;        <span class="keyword">inline</span> std::size_t <a class="code" href="a01207.html#ae698fc86d39e9e05ca2f030654fa45ca">operator()</a>(<span class="keyword">const</span> <a class="code" href="a01203.html">HF::SpatialStructures::Node</a>&amp; k) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;        {</div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;            <span class="keywordtype">size_t</span> seed = std::hash&lt;float&gt;()(k.x);</div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;            <a class="code" href="a00155.html#a3340e7ae931e28e5c83e07f1d48d3ea2">hash_combine_impl</a>(seed, std::hash&lt;float&gt;()(k.y));</div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;            <a class="code" href="a00155.html#a3340e7ae931e28e5c83e07f1d48d3ea2">hash_combine_impl</a>(seed, std::hash&lt;float&gt;()(k.z));</div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;            <span class="keywordflow">return</span> seed;</div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;        }</div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;    };</div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160; </div>
+<div class="line"><a name="l00453"></a><span class="lineno"><a class="line" href="a00155.html#af16e54cd5d732cad0aaf6c74059a027b">  453</a></span>&#160;    <span class="keyword">inline</span> ostream&amp; <a class="code" href="a00155.html#af16e54cd5d732cad0aaf6c74059a027b">operator&lt;&lt;</a>(ostream&amp; os, <span class="keyword">const</span> <a class="code" href="a01203.html">HF::SpatialStructures::Node</a> n) {</div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;        os &lt;&lt; <span class="stringliteral">&quot;(&quot;</span> &lt;&lt; n.<a class="code" href="a01203.html#a78dfebaa44da09b03d7ca15445c8d222">x</a> &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; n.<a class="code" href="a01203.html#a41981fb2cc6dc0edb787f921188702b0">y</a> &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; n.<a class="code" href="a01203.html#a495b47689917e0395ce96ee01d3f5ed3">z</a> &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;</div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;        <span class="keywordflow">return</span> os;</div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;    }</div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160; </div>
+<div class="line"><a name="l00459"></a><span class="lineno"><a class="line" href="a00155.html#aee30eba635bd37255ea68605678ad5a2">  459</a></span>&#160;    <span class="keyword">inline</span> ostream&amp; <a class="code" href="a00155.html#af16e54cd5d732cad0aaf6c74059a027b">operator&lt;&lt;</a>(ostream&amp; os, <span class="keyword">const</span> std::array&lt;float, 3&gt; n) {</div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;        os &lt;&lt; <span class="stringliteral">&quot;(&quot;</span> &lt;&lt; n[0] &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; n[1] &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; n[2] &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;</div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;        <span class="keywordflow">return</span> os;</div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;    }</div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;}</div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160; </div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;<span class="preprocessor">#endif </span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aa00176_html_aa5e31d3364f1dbee72065b8f5dc38574"><div class="ttname"><a href="a00176.html#aa5e31d3364f1dbee72065b8f5dc38574">HF::AnalysisMethods::VisibilityGraph::AllToAll</a></div><div class="ttdeci">Graph AllToAll(EmbreeRayTracer &amp;ert, const vector&lt; Node &gt; &amp;nodes, float height)</div><div class="ttdoc">All variations for generating the visibility graph</div><div class="ttdef"><b>Definition:</b> <a href="a00029_source.html#l00070">visibility_graph.cpp:70</a></div></div>
-<div class="ttc" id="aa00158_html"><div class="ttname"><a href="a00158.html">visibility_graph_C.h</a></div></div>
-<div class="ttc" id="aa00169_html_gaf2e404cb696aee3473cac0d1507576d8"><div class="ttname"><a href="a00169.html#gaf2e404cb696aee3473cac0d1507576d8">CreateVisibilityGraphGroupToGroup</a></div><div class="ttdeci">C_INTERFACE CreateVisibilityGraphGroupToGroup(HF::RayTracer::EmbreeRayTracer *ert, const float *group_a, const int size_a, const float *group_b, const int size_b, Graph **out_graph, float height)</div><div class="ttdoc">Create a new visibility from the nodes in group_a to the nodes in group_b.</div><div class="ttdef"><b>Definition:</b> <a href="a00155_source.html#l00064">visibility_graph_C.cpp:64</a></div></div>
-<div class="ttc" id="aa00101_html"><div class="ttname"><a href="a00101.html">graph.h</a></div><div class="ttdoc">Header file for a graph ADT.</div></div>
-<div class="ttc" id="aa00176_html_a2c0cbb953168bcc6a5727bf8122b1286"><div class="ttname"><a href="a00176.html#a2c0cbb953168bcc6a5727bf8122b1286">HF::AnalysisMethods::VisibilityGraph::AllToAllUndirected</a></div><div class="ttdeci">Graph AllToAllUndirected(EmbreeRayTracer &amp;ert, const vector&lt; Node &gt; &amp;nodes, float height, int cores)</div><div class="ttdoc">Parallel AllToAll Algorithm for an undirected visibility graph</div><div class="ttdef"><b>Definition:</b> <a href="a00029_source.html#l00150">visibility_graph.cpp:150</a></div></div>
-<div class="ttc" id="aa00174_html"><div class="ttname"><a href="a00174.html">HF::SpatialStructures</a></div><div class="ttdef"><b>Definition:</b> <a href="a00026_source.html#l00014">view_analysis.h:14</a></div></div>
-<div class="ttc" id="aa00172_html"><div class="ttname"><a href="a00172.html">HF::AnalysisMethods</a></div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00007">graph_generator.cpp:7</a></div></div>
-<div class="ttc" id="aa00177_html_aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d"><div class="ttname"><a href="a00177.html#aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d">HF::Exceptions::OK</a></div><div class="ttdeci">@ OK</div><div class="ttdoc">All systems go. ///&lt;.</div><div class="ttdef"><b>Definition:</b> <a href="a00038_source.html#l00011">HFExceptions.h:9</a></div></div>
-<div class="ttc" id="aa00176_html_a85f2d1e50a9458e1a4b0bb8a0e0adafa"><div class="ttname"><a href="a00176.html#a85f2d1e50a9458e1a4b0bb8a0e0adafa">HF::AnalysisMethods::VisibilityGraph::GroupToGroup</a></div><div class="ttdeci">Graph GroupToGroup(EmbreeRayTracer &amp;ert, const vector&lt; Node &gt; &amp;from, const vector&lt; Node &gt; &amp;to, float height)</div><div class="ttdoc">Generate a visibility graph between every node in set a and every node in set b</div><div class="ttdef"><b>Definition:</b> <a href="a00029_source.html#l00107">visibility_graph.cpp:107</a></div></div>
-<div class="ttc" id="aa00169_html_ga9b0664a60bcdf276b0fe0a2023b3d9b8"><div class="ttname"><a href="a00169.html#ga9b0664a60bcdf276b0fe0a2023b3d9b8">CreateVisibilityGraphAllToAllUndirected</a></div><div class="ttdeci">C_INTERFACE CreateVisibilityGraphAllToAllUndirected(EmbreeRayTracer *ert, const float *nodes, int num_nodes, Graph **out_graph, float height, const int cores)</div><div class="ttdoc">Create a new undirected visibility graph between all nodes in nodes.</div><div class="ttdef"><b>Definition:</b> <a href="a00155_source.html#l00040">visibility_graph_C.cpp:40</a></div></div>
-<div class="ttc" id="aa00104_html"><div class="ttname"><a href="a00104.html">node.h</a></div><div class="ttdoc">Header file for a node data structure, used in a graph ADT.</div></div>
-<div class="ttc" id="aa00175_html"><div class="ttname"><a href="a00175.html">HF::RayTracer</a></div><div class="ttdef"><b>Definition:</b> <a href="a00026_source.html#l00017">view_analysis.h:17</a></div></div>
-<div class="ttc" id="aa00177_html_aed53c233beb1d9ec1b0c5fc2bfbb1051ab9036b1fec7e201bf970944267471d35"><div class="ttname"><a href="a00177.html#aed53c233beb1d9ec1b0c5fc2bfbb1051ab9036b1fec7e201bf970944267471d35">HF::Exceptions::NO_GRAPH</a></div><div class="ttdeci">@ NO_GRAPH</div><div class="ttdoc">This requires a valid graph in the DB to execute successfully ///&lt;.</div><div class="ttdef"><b>Definition:</b> <a href="a00038_source.html#l00018">HFExceptions.h:18</a></div></div>
-<div class="ttc" id="aa00038_html"><div class="ttname"><a href="a00038.html">HFExceptions.h</a></div></div>
-<div class="ttc" id="aa00032_html"><div class="ttname"><a href="a00032.html">visibility_graph.h</a></div><div class="ttdoc">Header file for VisibilityGraph namespace (procedures)</div></div>
-<div class="ttc" id="aa01061_html"><div class="ttname"><a href="a01061.html">HF::RayTracer::EmbreeRayTracer</a></div><div class="ttdoc">A wrapper for Intel's Embree Library.</div><div class="ttdef"><b>Definition:</b> <a href="a00071_source.html#l00068">embree_raytracer.h:68</a></div></div>
-<div class="ttc" id="aa00116_html_a91fa3b2bb3a7312ec39d74cc1fbc7bbe"><div class="ttname"><a href="a00116.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a></div><div class="ttdeci">#define C_INTERFACE</div><div class="ttdef"><b>Definition:</b> <a href="a00116_source.html#l00006">analysis_C.h:5</a></div></div>
-<div class="ttc" id="aa01097_html"><div class="ttname"><a href="a01097.html">HF::SpatialStructures::Graph</a></div><div class="ttdoc">A HF Graph similar to the one stored in python Invariants: 1) Always stores a valid graph 2) Every no...</div><div class="ttdef"><b>Definition:</b> <a href="a00101_source.html#l00080">graph.h:80</a></div></div>
-<div class="ttc" id="aa00169_html_ga0255e6c4811298e61110adc64c0f8acd"><div class="ttname"><a href="a00169.html#ga0255e6c4811298e61110adc64c0f8acd">CreateVisibilityGraphAllToAll</a></div><div class="ttdeci">C_INTERFACE CreateVisibilityGraphAllToAll(EmbreeRayTracer *ert, const float *nodes, int num_nodes, Graph **out_graph, float height)</div><div class="ttdoc">Create a new directed visibility graph between all nodes in nodes.</div><div class="ttdef"><b>Definition:</b> <a href="a00155_source.html#l00016">visibility_graph_C.cpp:16</a></div></div>
-<div class="ttc" id="aa00071_html"><div class="ttname"><a href="a00071.html">embree_raytracer.h</a></div><div class="ttdoc">Contains definitions for the see cref=&quot;EmbreeRayTracer&quot;/&gt;.</div></div>
-<div class="ttc" id="aa00083_html_a2f5650b0bad6c47aa34fc2206433a34b"><div class="ttname"><a href="a00083.html#a2f5650b0bad6c47aa34fc2206433a34b">ConvertRawFloatArrayToPoints</a></div><div class="ttdeci">std::vector&lt; std::array&lt; float, 3 &gt; &gt; ConvertRawFloatArrayToPoints(const float *raw_array, int size)</div><div class="ttdoc">Convert a raw array from an external caller to an organized vector of points</div><div class="ttdef"><b>Definition:</b> <a href="a00083_source.html#l00024">CInterface.cpp:24</a></div></div>
+<div class="ttc" id="aa01203_html_a099271bad26dd059037f3c84459058e0"><div class="ttname"><a href="a01203.html#a099271bad26dd059037f3c84459058e0">HF::SpatialStructures::Node::operator*</a></div><div class="ttdeci">Node operator*(const Node &amp;n2) const</div><div class="ttdoc">Creates a new node from the dot product of this node and n2.</div><div class="ttdef"><b>Definition:</b> <a href="a01499_source.html#l00113">node.cpp:113</a></div></div>
+<div class="ttc" id="aa01203_html_af687c2e97fffe3b7d14e3cfa8af3e5cd"><div class="ttname"><a href="a01203.html#af687c2e97fffe3b7d14e3cfa8af3e5cd">HF::SpatialStructures::Node::operator==</a></div><div class="ttdeci">bool operator==(const Node &amp;n2) const</div><div class="ttdoc">Check if this node occupies the same space as n2.</div><div class="ttdef"><b>Definition:</b> <a href="a01499_source.html#l00083">node.cpp:83</a></div></div>
+<div class="ttc" id="aa00276_html_aa8ecd83cd353318532d791fc819343cca996f30fa669937983b628671c4493b8e"><div class="ttname"><a href="a00276.html#aa8ecd83cd353318532d791fc819343cca996f30fa669937983b628671c4493b8e">HF::SpatialStructures::OTHER</a></div><div class="ttdeci">@ OTHER</div><div class="ttdoc">This node doesn't belong in any other category.</div><div class="ttdef"><b>Definition:</b> <a href="a00155_source.html#l00033">node.h:32</a></div></div>
+<div class="ttc" id="aa01203_html"><div class="ttname"><a href="a01203.html">HF::SpatialStructures::Node</a></div><div class="ttdoc">A point in space with an ID.</div><div class="ttdef"><b>Definition:</b> <a href="a00155_source.html#l00038">node.h:38</a></div></div>
+<div class="ttc" id="aa00276_html_aa8ecd83cd353318532d791fc819343cca5c2876be9857d3e0192c9e1cb3797bf8"><div class="ttname"><a href="a00276.html#aa8ecd83cd353318532d791fc819343cca5c2876be9857d3e0192c9e1cb3797bf8">HF::SpatialStructures::GRAPH</a></div><div class="ttdeci">@ GRAPH</div><div class="ttdoc">This node is a graph node.</div><div class="ttdef"><b>Definition:</b> <a href="a00155_source.html#l00030">node.h:30</a></div></div>
+<div class="ttc" id="aa01203_html_a260ab9e9763234dab08decfc2aa6bf63"><div class="ttname"><a href="a01203.html#a260ab9e9763234dab08decfc2aa6bf63">HF::SpatialStructures::Node::angleTo</a></div><div class="ttdeci">float angleTo(const Node &amp;n2) const</div><div class="ttdoc">Calculate the angle between node 1 and n2</div></div>
+<div class="ttc" id="aa01203_html_a8212d00e6913abf0ca6fec1f2624b677"><div class="ttname"><a href="a01203.html#a8212d00e6913abf0ca6fec1f2624b677">HF::SpatialStructures::Node::id</a></div><div class="ttdeci">int id</div><div class="ttdoc">Node identifier.</div><div class="ttdef"><b>Definition:</b> <a href="a00155_source.html#l00042">node.h:42</a></div></div>
+<div class="ttc" id="aa01203_html_a556efc898ddc67b64fff560d0c7b5a0a"><div class="ttname"><a href="a01203.html#a556efc898ddc67b64fff560d0c7b5a0a">HF::SpatialStructures::Node::operator[]</a></div><div class="ttdeci">float &amp; operator[](int i)</div><div class="ttdoc">Directly access a nodes's position as if it were an array of 3 floats,</div><div class="ttdef"><b>Definition:</b> <a href="a01499_source.html#l00051">node.cpp:51</a></div></div>
+<div class="ttc" id="aa01203_html_a3894a51f72b82cea2d6675a91fcb39cf"><div class="ttname"><a href="a01203.html#a3894a51f72b82cea2d6675a91fcb39cf">HF::SpatialStructures::Node::type</a></div><div class="ttdeci">short type</div><div class="ttdoc">Unused.</div><div class="ttdef"><b>Definition:</b> <a href="a00155_source.html#l00041">node.h:41</a></div></div>
+<div class="ttc" id="aa01203_html_a495b47689917e0395ce96ee01d3f5ed3"><div class="ttname"><a href="a01203.html#a495b47689917e0395ce96ee01d3f5ed3">HF::SpatialStructures::Node::z</a></div><div class="ttdeci">float z</div><div class="ttdoc">Cartesian coordinates x, y, z.</div><div class="ttdef"><b>Definition:</b> <a href="a00155_source.html#l00040">node.h:40</a></div></div>
+<div class="ttc" id="aa01203_html_a064540b380fc6251bdf6d740abf7a169"><div class="ttname"><a href="a01203.html#a064540b380fc6251bdf6d740abf7a169">HF::SpatialStructures::Node::operator+</a></div><div class="ttdeci">Node operator+(const Node &amp;n2) const</div><div class="ttdoc">Creates a new node from the vector addition of this node and n2.</div><div class="ttdef"><b>Definition:</b> <a href="a01499_source.html#l00104">node.cpp:104</a></div></div>
+<div class="ttc" id="aa01203_html_ad58a4eb9f0a15c645eedf668d9bcec54"><div class="ttname"><a href="a01203.html#ad58a4eb9f0a15c645eedf668d9bcec54">HF::SpatialStructures::Node::operator-</a></div><div class="ttdeci">Node operator-(const Node &amp;n2) const</div><div class="ttdoc">Creates a node from the vector subtraction of this node and n2's position.</div><div class="ttdef"><b>Definition:</b> <a href="a01499_source.html#l00100">node.cpp:100</a></div></div>
+<div class="ttc" id="aa01203_html_a51c4642674d54d02b8600f7ffeb45670"><div class="ttname"><a href="a01203.html#a51c4642674d54d02b8600f7ffeb45670">HF::SpatialStructures::Node::getArray</a></div><div class="ttdeci">std::array&lt; float, 3 &gt; getArray() const</div><div class="ttdoc">Returns the x,y,z of this node as an array of 3 floats.</div><div class="ttdef"><b>Definition:</b> <a href="a01499_source.html#l00140">node.cpp:140</a></div></div>
+<div class="ttc" id="aa01203_html_a78dfebaa44da09b03d7ca15445c8d222"><div class="ttname"><a href="a01203.html#a78dfebaa44da09b03d7ca15445c8d222">HF::SpatialStructures::Node::x</a></div><div class="ttdeci">float x</div><div class="ttdef"><b>Definition:</b> <a href="a00155_source.html#l00040">node.h:40</a></div></div>
+<div class="ttc" id="aa01203_html_a9d67cccc8b0fc57d61390da493149790"><div class="ttname"><a href="a01203.html#a9d67cccc8b0fc57d61390da493149790">HF::SpatialStructures::Node::operator&gt;</a></div><div class="ttdeci">bool operator&gt;(const Node &amp;n2) const</div><div class="ttdoc">Determines if this node's id (an integer) is greater than n2's id</div><div class="ttdef"><b>Definition:</b> <a href="a01499_source.html#l00119">node.cpp:119</a></div></div>
+<div class="ttc" id="aa00276_html_aa8ecd83cd353318532d791fc819343cca023bd38e0854e766e5c483d451a383ad"><div class="ttname"><a href="a00276.html#aa8ecd83cd353318532d791fc819343cca023bd38e0854e766e5c483d451a383ad">HF::SpatialStructures::POI</a></div><div class="ttdeci">@ POI</div><div class="ttdoc">POI is 'point of interest'.</div><div class="ttdef"><b>Definition:</b> <a href="a00155_source.html#l00031">node.h:31</a></div></div>
+<div class="ttc" id="aa01203_html_a6137878845816e2fe8ecbe1215c490fd"><div class="ttname"><a href="a01203.html#a6137878845816e2fe8ecbe1215c490fd">HF::SpatialStructures::Node::operator!=</a></div><div class="ttdeci">bool operator!=(const Node &amp;n2) const</div><div class="ttdoc">See operator==, checks if this node does NOT occupy the same space as n2. Node to compare with this n...</div><div class="ttdef"><b>Definition:</b> <a href="a01499_source.html#l00096">node.cpp:96</a></div></div>
+<div class="ttc" id="aa00276_html_aa8ecd83cd353318532d791fc819343cc"><div class="ttname"><a href="a00276.html#aa8ecd83cd353318532d791fc819343cc">HF::SpatialStructures::NODE_TYPE</a></div><div class="ttdeci">NODE_TYPE</div><div class="ttdoc">The type of node this is.</div><div class="ttdef"><b>Definition:</b> <a href="a00155_source.html#l00029">node.h:29</a></div></div>
+<div class="ttc" id="aa01203_html_ad3f7898ef3178eef0c3579869a7f5c67"><div class="ttname"><a href="a01203.html#ad3f7898ef3178eef0c3579869a7f5c67">HF::SpatialStructures::Node::directionTo</a></div><div class="ttdeci">std::array&lt; float, 3 &gt; directionTo(const Node &amp;n2) const</div><div class="ttdoc">Get the direction between this node and another node</div><div class="ttdef"><b>Definition:</b> <a href="a01499_source.html#l00130">node.cpp:130</a></div></div>
+<div class="ttc" id="aa01203_html_a41981fb2cc6dc0edb787f921188702b0"><div class="ttname"><a href="a01203.html#a41981fb2cc6dc0edb787f921188702b0">HF::SpatialStructures::Node::y</a></div><div class="ttdeci">float y</div><div class="ttdef"><b>Definition:</b> <a href="a00155_source.html#l00040">node.h:40</a></div></div>
+<div class="ttc" id="aa01203_html_a3d229a53bb7328f88649fd48e6098b5d"><div class="ttname"><a href="a01203.html#a3d229a53bb7328f88649fd48e6098b5d">HF::SpatialStructures::Node::Node</a></div><div class="ttdeci">Node()</div><div class="ttdoc">Default constructor. Every element contained is defaulted to NAN.</div><div class="ttdef"><b>Definition:</b> <a href="a01499_source.html#l00015">node.cpp:15</a></div></div>
+<div class="ttc" id="aa01203_html_a5a3306ea1b8904361b038391718ccc07"><div class="ttname"><a href="a01203.html#a5a3306ea1b8904361b038391718ccc07">HF::SpatialStructures::Node::operator=</a></div><div class="ttdeci">void operator=(const std::array&lt; float, 3 &gt; &amp;n2)</div><div class="ttdoc">Assigns the values of array n2 to n1.</div></div>
+<div class="ttc" id="aa00155_html_af16e54cd5d732cad0aaf6c74059a027b"><div class="ttname"><a href="a00155.html#af16e54cd5d732cad0aaf6c74059a027b">std::operator&lt;&lt;</a></div><div class="ttdeci">ostream &amp; operator&lt;&lt;(ostream &amp;os, const HF::SpatialStructures::Node n)</div><div class="ttdoc">Create a string containing the x,y,z position of this node.</div><div class="ttdef"><b>Definition:</b> <a href="a00155_source.html#l00453">node.h:453</a></div></div>
+<div class="ttc" id="aa00155_html_a3340e7ae931e28e5c83e07f1d48d3ea2"><div class="ttname"><a href="a00155.html#a3340e7ae931e28e5c83e07f1d48d3ea2">std::hash_combine_impl</a></div><div class="ttdeci">void hash_combine_impl(SizeT &amp;seed, SizeT value) noexcept</div><div class="ttdoc">combine value into the hash value of seed</div><div class="ttdef"><b>Definition:</b> <a href="a00155_source.html#l00434">node.h:434</a></div></div>
+<div class="ttc" id="aa01203_html_abbd66b566460f9557a373b5fbcc30bb1"><div class="ttname"><a href="a01203.html#abbd66b566460f9557a373b5fbcc30bb1">HF::SpatialStructures::Node::distanceTo</a></div><div class="ttdeci">float distanceTo(const Node &amp;n2) const</div><div class="ttdoc">Calculate the distance between this node and n2.</div><div class="ttdef"><b>Definition:</b> <a href="a01499_source.html#l00040">node.cpp:40</a></div></div>
+<div class="ttc" id="aa00273_html"><div class="ttname"><a href="a00273.html">HF</a></div><div class="ttdoc">Output CSR for interop with other languages</div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00013">graph_generator.cpp:13</a></div></div>
+<div class="ttc" id="aa01203_html_a1d74d883b7291a760908f3dc81783b3d"><div class="ttname"><a href="a01203.html#a1d74d883b7291a760908f3dc81783b3d">HF::SpatialStructures::Node::operator&lt;</a></div><div class="ttdeci">bool operator&lt;(const Node &amp;n2) const</div><div class="ttdoc">Determines if this node's id (an integer) is less than n2's id.</div><div class="ttdef"><b>Definition:</b> <a href="a01499_source.html#l00117">node.cpp:117</a></div></div>
+<div class="ttc" id="aa01207_html_ae698fc86d39e9e05ca2f030654fa45ca"><div class="ttname"><a href="a01207.html#ae698fc86d39e9e05ca2f030654fa45ca">std::hash&lt; HF::SpatialStructures::Node &gt;::operator()</a></div><div class="ttdeci">std::size_t operator()(const HF::SpatialStructures::Node &amp;k) const noexcept</div><div class="ttdef"><b>Definition:</b> <a href="a00155_source.html#l00443">node.h:443</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

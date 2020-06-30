@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Analysis: Cinterface/objloader_C.cpp File Reference</title>
+<title>Analysis: Cpp/raytracer/src/RayRequest.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,42 +61,27 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_37600e7aa46d6eb08a97d98a1c09ffb1.html">Cinterface</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_882abde7eca0231e2bae1ceefe5e858a.html">Cpp</a></li><li class="navelem"><a class="el" href="dir_1061d284018fbd45bbbfc991ca095c8e.html">raytracer</a></li><li class="navelem"><a class="el" href="dir_198e8c151f4aa06153c41e30091296f4.html">src</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">objloader_C.cpp File Reference</div>  </div>
+<div class="title">RayRequest.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;<a class="el" href="a00128_source.html">objloader_C.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00053_source.html">objloader.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00047_source.html">meshinfo.h</a>&gt;</code><br />
-<code>#include &lt;vector&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00038_source.html">HFExceptions.h</a>&gt;</code><br />
-<code>#include &lt;iostream&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00122_source.html">cinterface_utils.h</a>&gt;</code><br />
+
+<p>Contains implementation for the <a class="el" href="a00277.html">RayTracer</a> namespace.  
+<a href="#details">More...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="a00128_source.html">RayRequest.h</a>&quot;</code><br />
 </div>
 <p><a href="a00125_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:gac420d6b9a02309afc06c99ee7f85fefe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00152.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00164.html#gac420d6b9a02309afc06c99ee7f85fefe">LoadOBJ</a> (const char *obj_paths, int length, float xrot, float yrot, float zrot, vector&lt; <a class="el" href="a01025.html">MeshInfo</a> &gt; **out_list)</td></tr>
-<tr class="memdesc:gac420d6b9a02309afc06c99ee7f85fefe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load an obj from the given path then rotate it by x,y, and z  <a href="a00164.html#gac420d6b9a02309afc06c99ee7f85fefe">More...</a><br /></td></tr>
-<tr class="separator:gac420d6b9a02309afc06c99ee7f85fefe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae463d4af8d6f7edc9dffa84b1099f247"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00152.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00164.html#gae463d4af8d6f7edc9dffa84b1099f247">StoreMesh</a> (vector&lt; <a class="el" href="a01025.html">MeshInfo</a> &gt; **out_info, const int *indices, int num_indices, const float *vertices, int num_vertices, const char *name, int id)</td></tr>
-<tr class="memdesc:gae463d4af8d6f7edc9dffa84b1099f247"><td class="mdescLeft">&#160;</td><td class="mdescRight">Store a mesh from python as meshinfo  <a href="a00164.html#gae463d4af8d6f7edc9dffa84b1099f247">More...</a><br /></td></tr>
-<tr class="separator:gae463d4af8d6f7edc9dffa84b1099f247"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaaae27ea29ec17a7f3def98c435622504"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00152.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00164.html#gaaae27ea29ec17a7f3def98c435622504">RotateMesh</a> (vector&lt; <a class="el" href="a01025.html">MeshInfo</a> &gt; *mesh_to_rotate, float xrot, float yrot, float zrot)</td></tr>
-<tr class="memdesc:gaaae27ea29ec17a7f3def98c435622504"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotate an existing mesh  <a href="a00164.html#gaaae27ea29ec17a7f3def98c435622504">More...</a><br /></td></tr>
-<tr class="separator:gaaae27ea29ec17a7f3def98c435622504"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5f58f569ea99355c9de85658b31bc0bf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00152.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00164.html#ga5f58f569ea99355c9de85658b31bc0bf">DestroyMeshInfo</a> (vector&lt; <a class="el" href="a01025.html">MeshInfo</a> &gt; *meshes_to_destroy)</td></tr>
-<tr class="memdesc:ga5f58f569ea99355c9de85658b31bc0bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete all instaces of mesh info in the given vector  <a href="a00164.html#ga5f58f569ea99355c9de85658b31bc0bf">More...</a><br /></td></tr>
-<tr class="separator:ga5f58f569ea99355c9de85658b31bc0bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-</div><!-- contents -->
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Contains implementation for the <a class="el" href="a00277.html">RayTracer</a> namespace. </p>
+<dl class="section author"><dt>Author</dt><dd>TBA </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>26 Jun 2020 </dd></dl>
+
+<p class="definition">Definition in file <a class="el" href="a00125_source.html">RayRequest.cpp</a>.</p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

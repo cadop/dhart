@@ -1,63 +1,100 @@
-\hypertarget{a00146}{}\doxysection{Cinterface/spatialstructures\+\_\+C.h File Reference}
-\label{a00146}\index{Cinterface/spatialstructures\_C.h@{Cinterface/spatialstructures\_C.h}}
-{\ttfamily \#include $<$cinterface\+\_\+utils.\+h$>$}\newline
+\hypertarget{a00146}{}\doxysection{Cpp/spatialstructures/src/\+Edge.h File Reference}
+\label{a00146}\index{Cpp/spatialstructures/src/Edge.h@{Cpp/spatialstructures/src/Edge.h}}
+
+
+Contains definitions for the \mbox{\hyperlink{a01183}{Edge}} structure.  
+
+
+{\ttfamily \#include $<$node.\+h$>$}\newline
 {\ttfamily \#include $<$vector$>$}\newline
-{\ttfamily \#include $<$array$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{a01183}{H\+F\+::\+Spatial\+Structures\+::\+Edge}}
+\begin{DoxyCompactList}\small\item\em A connection to a child node. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a00276_a01187}{H\+F\+::\+Spatial\+Structures\+::\+Int\+Edge}}
+\begin{DoxyCompactList}\small\item\em A lighter version of \mbox{\hyperlink{a01183}{Edge}} that contains an ID instead of a full node object..  \mbox{\hyperlink{a00276_a01187}{More...}}\end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a00276_a01191}{H\+F\+::\+Spatial\+Structures\+::\+Edge\+Set}}
+\begin{DoxyCompactList}\small\item\em A collection of edges and a parent.  \mbox{\hyperlink{a00276_a01191}{More...}}\end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{a00171}{HF}}
+ \mbox{\hyperlink{a00273}{HF}}
 \begin{DoxyCompactList}\small\item\em Output C\+SR for interop with other languages \end{DoxyCompactList}\item 
- \mbox{\hyperlink{a00174}{H\+F\+::\+Spatial\+Structures}}
-\end{DoxyCompactItemize}
-\doxysubsection*{Macros}
+ \mbox{\hyperlink{a00276}{H\+F\+::\+Spatial\+Structures}}
+\begin{DoxyCompactList}\small\item\em Contains standard fundamental data structures for representing space used throughout Human\+Factors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
-\#define \mbox{\hyperlink{a00146_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}}~extern \char`\"{}C\char`\"{} \+\_\+\+\_\+declspec(dllexport) int
-\end{DoxyCompactItemize}
-\doxysubsection*{Functions}
-\begin{DoxyCompactItemize}
-\item 
-\mbox{\hyperlink{a00152_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00167_ga0cc5b82caab046c65a201e4e7be5e9d4}{Get\+All\+Nodes\+From\+Graph}} (const \mbox{\hyperlink{a01097}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$graph, std\+::vector$<$ \mbox{\hyperlink{a01101}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ $\ast$$\ast$out\+\_\+vector\+\_\+ptr, \mbox{\hyperlink{a01101}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $\ast$$\ast$out\+\_\+data\+\_\+ptr)
-\begin{DoxyCompactList}\small\item\em Get a vector of every node in the given graph pointer. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00152_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00167_gab39b5c750b266835efbc3c6c9da0a431}{Get\+Edges\+For\+Node}} (const \mbox{\hyperlink{a01097}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$graph, const \mbox{\hyperlink{a01101}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $\ast$Node, std\+::vector$<$ \mbox{\hyperlink{a01081}{H\+F\+::\+Spatial\+Structures\+::\+Edge}} $>$ $\ast$$\ast$out\+\_\+vector\+\_\+ptr, \mbox{\hyperlink{a01081}{H\+F\+::\+Spatial\+Structures\+::\+Edge}} $\ast$$\ast$out\+\_\+edge\+\_\+list\+\_\+ptr, int $\ast$out\+\_\+edge\+\_\+list\+\_\+size)
-\item 
-\mbox{\hyperlink{a00152_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00167_gac17c1fc05e6bf6900bac8689b7619bfb}{Get\+Size\+Of\+Node\+Vector}} (const std\+::vector$<$ \mbox{\hyperlink{a01101}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ $\ast$node\+\_\+list, int $\ast$out\+\_\+size)
-\begin{DoxyCompactList}\small\item\em Get the size of a node vector. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00152_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00167_ga712f182888672382dd4a1776f850915a}{Get\+Size\+Of\+Edge\+Vector}} (const std\+::vector$<$ \mbox{\hyperlink{a01081}{H\+F\+::\+Spatial\+Structures\+::\+Edge}} $>$ $\ast$edge\+\_\+list, int $\ast$out\+\_\+size)
-\item 
-\mbox{\hyperlink{a00152_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00167_ga6a53ede89ff44ba3c8bf697c9626fcbe}{Aggregate\+Costs}} (const \mbox{\hyperlink{a01097}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$graph, int agg, bool directed, std\+::vector$<$ float $>$ $\ast$$\ast$out\+\_\+vector\+\_\+ptr, float $\ast$$\ast$out\+\_\+data\+\_\+ptr)
-\begin{DoxyCompactList}\small\item\em Get an ordered array of costs for each node aggregatted by the desired method. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00152_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00167_ga262a8f714fbd8d74840efa5832597fff}{Create\+Graph}} (const float $\ast$nodes, int num\+\_\+nodes, \mbox{\hyperlink{a01097}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$$\ast$out\+\_\+graph)
-\begin{DoxyCompactList}\small\item\em Create a new empty graph. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00152_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00167_gac886f77eaff2a7b396a0ea47f78ef9af}{Add\+Edge\+From\+Nodes}} (\mbox{\hyperlink{a01097}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$graph, const float $\ast$parent, const float $\ast$child, float score)
-\begin{DoxyCompactList}\small\item\em Add an edge between parent and child. If parent or child doesn\textquotesingle{}t already exist in the graph, they will be added and automatically assigned new I\+DS. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00152_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00167_ga0f38cc17daedc23e2fb21115fbb24d07}{Add\+Edge\+From\+Node\+I\+Ds}} (\mbox{\hyperlink{a01097}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$graph, int parent\+\_\+id, int child\+\_\+id, float score)
-\begin{DoxyCompactList}\small\item\em Create a new edge between parent\+\_\+id and child\+\_\+id. If these I\+Ds don\textquotesingle{}t yet exist in the graph they will be added. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00152_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00167_ga1aebc84e3562370327576641b1ce2dcc}{Get\+C\+S\+R\+Pointers}} (\mbox{\hyperlink{a01097}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$graph, int $\ast$out\+\_\+nnz, int $\ast$out\+\_\+num\+\_\+rows, int $\ast$out\+\_\+num\+\_\+cols, float $\ast$$\ast$out\+\_\+data\+\_\+ptr, int $\ast$$\ast$out\+\_\+inner\+\_\+indices\+\_\+ptr, int $\ast$$\ast$out\+\_\+outer\+\_\+indices\+\_\+ptr)
-\begin{DoxyCompactList}\small\item\em Retrieve all information for a graph\textquotesingle{}s C\+SR representation. This will compress the graph if it was not yet already compressed. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00152_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00167_ga31fad78ce410cd523bb337f46b078b4c}{Get\+Node\+ID}} (\mbox{\hyperlink{a01097}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$graph, const float $\ast$point, int $\ast$out\+\_\+id)
-\begin{DoxyCompactList}\small\item\em Get the id of the given node in the graph. If the node does not exist, {\itshape out\+\_\+id}  will be set to -\/1. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00152_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00167_gab7ecc1be5c746ed3f99ab7494316c65d}{Compress}} (\mbox{\hyperlink{a01097}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$graph)
-\begin{DoxyCompactList}\small\item\em Compress the given graph into a csr representation. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00152_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00167_ga775863df40e342a8c5a2cddf7512ea44}{Clear\+Graph}} (\mbox{\hyperlink{a01097}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$graph)
-\begin{DoxyCompactList}\small\item\em Clear the nodes/edges for the given graph. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00152_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00167_ga87e9b9ecfc5293712d75f3cb8c992c77}{Destroy\+Nodes}} (std\+::vector$<$ \mbox{\hyperlink{a01101}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ $\ast$nodelist\+\_\+to\+\_\+destroy)
-\begin{DoxyCompactList}\small\item\em Delete the vector of nodes at the given pointer. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00152_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00167_gac46191088d698cc007a2176ab6b5674d}{Destroy\+Edges}} (std\+::vector$<$ \mbox{\hyperlink{a01081}{H\+F\+::\+Spatial\+Structures\+::\+Edge}} $>$ $\ast$edgelist\+\_\+to\+\_\+destroy)
-\begin{DoxyCompactList}\small\item\em Delete the vector of edges at the given pointer. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00152_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00167_ga645abacd11e1fa535f953344aaa77727}{Destroy\+Graph}} (\mbox{\hyperlink{a01097}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$graph\+\_\+to\+\_\+destroy)
-\begin{DoxyCompactList}\small\item\em Delete a graph. \end{DoxyCompactList}\end{DoxyCompactItemize}
+enum \mbox{\hyperlink{a00276_af0378d900074d484ba791d4317e5935e}{H\+F\+::\+Spatial\+Structures\+::\+S\+T\+EP}} \{ \newline
+\mbox{\hyperlink{a00276_af0378d900074d484ba791d4317e5935ea7a2b5bf64195a97a6b132bf9c58d0bf9}{H\+F\+::\+Spatial\+Structures\+::\+N\+O\+T\+\_\+\+C\+O\+N\+N\+E\+C\+T\+ED}} = 0, 
+\mbox{\hyperlink{a00276_af0378d900074d484ba791d4317e5935ea45ef4ea34d22b5d90e23d61af2f1f51a}{H\+F\+::\+Spatial\+Structures\+::\+N\+O\+NE}} = 1, 
+\mbox{\hyperlink{a00276_af0378d900074d484ba791d4317e5935ea599bf51c4226a80ada6f743f6e9acd5c}{H\+F\+::\+Spatial\+Structures\+::\+UP}} = 2, 
+\mbox{\hyperlink{a00276_af0378d900074d484ba791d4317e5935ea023b84d27813ed1b354da97011695e98}{H\+F\+::\+Spatial\+Structures\+::\+D\+O\+WN}} = 3, 
+\newline
+\mbox{\hyperlink{a00276_af0378d900074d484ba791d4317e5935eaa734acd80348ed3c2f2df367e7ab1bac}{H\+F\+::\+Spatial\+Structures\+::\+O\+V\+ER}} = 4
+ \}
+\begin{DoxyCompactList}\small\item\em Describes the type of step an edge connects to. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\doxysubsection{Macro Definition Documentation}
-\mbox{\Hypertarget{a00146_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}\label{a00146_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}} 
-\index{spatialstructures\_C.h@{spatialstructures\_C.h}!C\_INTERFACE@{C\_INTERFACE}}
-\index{C\_INTERFACE@{C\_INTERFACE}!spatialstructures\_C.h@{spatialstructures\_C.h}}
-\doxysubsubsection{\texorpdfstring{C\_INTERFACE}{C\_INTERFACE}}
-{\footnotesize\ttfamily \#define C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE~extern \char`\"{}C\char`\"{} \+\_\+\+\_\+declspec(dllexport) int}
+\doxysubsection{Detailed Description}
+Contains definitions for the \mbox{\hyperlink{a01183}{Edge}} structure. 
+
+\begin{DoxyAuthor}{Author}
+T\+BA 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+26 Jun 2020 
+\end{DoxyDate}
+
+
+\doxysubsection{Class Documentation}
+\index{HF::SpatialStructures::IntEdge@{HF::SpatialStructures::IntEdge}}\label{a01187}
+\Hypertarget{a00276_a01187}
+\doxysubsubsection{struct HF\+::Spatial\+Structures\+::Int\+Edge}
+A lighter version of \mbox{\hyperlink{a01183}{Edge}} that contains an ID instead of a full node object.. 
 
 
 
-Definition at line 6 of file spatialstructures\+\_\+\+C.\+h.
+Definition at line 55 of file Edge.\+h.
 
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00276_a7662d9deb8c69743b37c0c8da3f51610}\label{a00276_a7662d9deb8c69743b37c0c8da3f51610}} 
+int&
+child&
+Identifier of child node. \\
+\hline
+
+\mbox{\Hypertarget{a00276_a4c5bcbef0f0b977f2bbf4495939c9f18}\label{a00276_a4c5bcbef0f0b977f2bbf4495939c9f18}} 
+float&
+weight&
+Cost to traverse to child. \\
+\hline
+
+\end{DoxyFields}
+\index{HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}}\label{a01191}
+\Hypertarget{a00276_a01191}
+\doxysubsubsection{struct HF\+::Spatial\+Structures\+::Edge\+Set}
+A collection of edges and a parent. 
+
+\begin{DoxyRemark}{Remarks}
+This can to represent a node and its edges without repeating any information such as parent\+\_\+id or node objects. 
+\end{DoxyRemark}
+
+
+Definition at line 66 of file Edge.\+h.
+
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00276_ae0ed1fa60810e109100548a03e10259c}\label{a00276_ae0ed1fa60810e109100548a03e10259c}} 
+vector$<$ \mbox{\hyperlink{a00276_a01187}{IntEdge}} $>$&
+children&
+vector of \mbox{\hyperlink{a00276_a01187}{Int\+Edge}} (children) \\
+\hline
+
+\mbox{\Hypertarget{a00276_a1cf561c1c38a93316f15ac2ab29fc8f4}\label{a00276_a1cf561c1c38a93316f15ac2ab29fc8f4}} 
+int&
+parent&
+Identifier of parent node. \\
+\hline
+
+\end{DoxyFields}
