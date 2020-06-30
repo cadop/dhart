@@ -1,6 +1,11 @@
-/// \file boost_graph.h \brief Header file for BoostGraph
 ///
-/// \author TBA \date 17 Jun 2020
+///	\file		boost_graph.h
+/// \brief		Contains definitions for the <see cref="HF::Pathfinding::BoostGraph">BoostGraph</cref> class
+///
+///	\author		TBA
+///	\date		17 Jun 2020
+///
+
 #include <boost/graph/graph_traits.hpp>
 #include <boost/graph/adjacency_matrix.hpp>
 #include <boost/graph/directed_graph.hpp>

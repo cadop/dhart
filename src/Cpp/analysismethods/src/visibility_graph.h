@@ -1,10 +1,10 @@
 ///
 ///	\file		visibility_graph.h
-///	\brief		Header file for VisibilityGraph namespace (procedures)
+///	\brief		Contains definitions for the <see cref = "HF::AnalysisMethods::VisibilityGraph">VisibilityGraph</cref> class
 ///
 ///	\author		TBA
 ///	\date		17 Jun 2020
-///
+
 #include <vector>
 
 // Forward Declares

@@ -1,3 +1,10 @@
+///
+/// \file		RayRequest.cpp
+/// \brief		Contains implementation for the <see cref="HF::RayTracer">RayTracer</cref> namespace
+///
+///	\author		TBA
+///	\date		26 Jun 2020
+
 #include "RayRequest.h"
 
 HF::RayTracer::FullRayRequest::FullRayRequest(float X, float Y, float Z, float DX, float DY, float DZ, float Distance) :

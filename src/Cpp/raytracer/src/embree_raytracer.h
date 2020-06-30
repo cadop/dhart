@@ -1,4 +1,9 @@
-/// \file embree_raytracer.h \brief Contains definitions for the see cref="EmbreeRayTracer"/>.
+///
+/// \file		embree_raytracer.h
+/// \brief		Contains definitions for the <see cref="HF::RayTracer::EmbreeRayTracer">EmbreeRayTracer</cref>
+///
+///	\author		TBA
+///	\date		26 Jun 2020
 
 #pragma once
 #ifndef EMBREE_RAY_TRACER

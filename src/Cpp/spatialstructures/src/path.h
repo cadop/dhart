@@ -1,6 +1,11 @@
-/// \file path.h \brief Header file for Path/PathMember data types
 ///
-/// \author TBA \date 06 Jun 2020
+/// \file		path.h
+///	\brief		Contains definitions for the <see cref="HF::SpatialStructures::Path">Path</cref> structure
+///
+/// \author		TBA
+/// \date		06 Jun 2020
+///
+
 #pragma once
 
 #include <vector>

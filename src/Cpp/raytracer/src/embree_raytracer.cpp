@@ -1,4 +1,9 @@
-/// \file embree_raytracer.cpp \brief Contains implementation for the see cref="EmbreeRayTracer"/>.
+///
+/// \file		embree_raytracer.cpp
+/// \brief		Contains implementation for the <see cref="HF::RayTracer::EmbreeRayTracer">EmbreeRayTracer</cref>
+///
+///	\author		TBA
+///	\date		26 Jun 2020
 
 #include <embree_raytracer.h>
 #include <corecrt_math_defines.h>

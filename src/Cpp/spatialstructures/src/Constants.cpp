@@ -1,10 +1,10 @@
 ///
-/// \file		Constants.cpp
-///	\brief		Source file for constants/procedures in the HF::SpatialStructures namespace
+///	\file		Constants.cpp
+///	\brief		Contains implementation for the <see cref="HF::SpatialStructures">HF::SpatialStructures</cref> namespace
 ///
-/// \author		TBA
-/// \date		06 Jun 2020
-///
+/// \author	TBA 
+/// \date	06 Jun 2020
+
 #include <Constants.h>
 #include <numeric>
 #include <cstdlib>

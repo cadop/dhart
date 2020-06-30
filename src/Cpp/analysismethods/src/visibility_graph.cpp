@@ -1,10 +1,10 @@
 ///
 ///	\file		visibility_graph.cpp
-///	\brief		Source file for VisibilityGraph namespace (procedures)
+///	\brief		Contains implementation for the <see cref = "HF::AnalysisMethods::VisibilityGraph">VisibilityGraph</cref> class
 ///
 ///	\author		TBA
 ///	\date		17 Jun 2020
-///
+
 #include <visibility_graph.h>
 
 #include <array>

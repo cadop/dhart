@@ -1,6 +1,10 @@
-/// \file objloader.h \brief Declarations for functions related to loading OBJ files from disk. 
 ///
-/// \author TBA \date 16 Jun 2020
+///	\file		objloader.h
+/// \brief		Contains definitions for the <see cref="HF::Geometry">Geometry</cref> namespace
+///
+///	\author		TBA
+///	\date		16 Jun 2020
+
 #ifndef OBJLOADER_H
 #define OBJLOADER_H
 

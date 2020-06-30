@@ -1,10 +1,10 @@
 ///
 /// \file		path.cpp
-///	\brief		Source file for Path/PathMember data types
+///	\brief		Contains implementation for the <see cref="HF::SpatialStructures::Path">Path</cref> structure
 ///
 /// \author		TBA
 /// \date		06 Jun 2020
-///
+
 #include <path.h>
 #include <algorithm>
 

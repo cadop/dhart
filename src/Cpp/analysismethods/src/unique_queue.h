@@ -1,3 +1,10 @@
+///
+/// \file		unique_queue.h
+/// \brief		Contains definitions for the <see cref="HF::AnalysisMethods::UniqueQueue">UniqueQueue</cref> class
+///
+///	\author		TBA
+///	\date		26 Jun 2020
+
 #include <robin_hood.h>
 #include <queue>
 #include <node.h>

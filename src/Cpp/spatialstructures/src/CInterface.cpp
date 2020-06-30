@@ -1,10 +1,10 @@
 ///
-/// \file		CInterface.cpp
-///	\brief		Source file for interoperability between programming languages
+///	\file		CInterface.cpp
+///	\brief		Contains implementation for the CInterface
 ///
-/// \author		TBA
-/// \date		06 Jun 2020
-///
+/// \author	TBA 
+/// \date	06 Jun 2020
+
 #include <spatialstructures_C.h>
 #include <iostream>
 #include <Constants.h>

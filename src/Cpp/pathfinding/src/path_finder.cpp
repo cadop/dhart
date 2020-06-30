@@ -1,7 +1,11 @@
-/// \file path_finder.cpp \brief Source file for BoostGraph, BoostGraphDeleter, as well as DistPred,
-/// and miscellaneous procedures
 ///
-/// \author TBA \date 17 Jun 2020
+///	\file		path_finder.cpp
+/// \brief		Contains implmentation for the <see cref="HF::Pathfinding::BoostGraphDeleter">BoostGraphDeleter</cref> structure
+///
+///	\author		TBA
+///	\date		17 Jun 2020
+///
+
 #include <path_finder.h>
 
 #include <vector>

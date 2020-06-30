@@ -1,3 +1,10 @@
+///
+/// \file		unique_queue.cpp
+/// \brief		Contains implementation for the <see cref="HF::AnalysisMethods::UniqueQueue">UniqueQueue</cref> class
+///
+///	\author		TBA
+///	\date		26 Jun 2020
+
 #include <unique_queue.h>
 
 namespace HF {

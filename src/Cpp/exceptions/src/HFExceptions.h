@@ -1,3 +1,10 @@
+///
+/// \file		HFExceptions.h
+/// \brief		Contains definitions for the <see cref="HF::Exceptions">Exceptions</cref> namespace
+///
+///	\author		TBA
+///	\date		26 Jun 2020
+
 #pragma once
 
 #include <exception>

@@ -1,3 +1,10 @@
+///
+/// \file		RayRequest.h
+/// \brief		Contains definitions for the <see cref="HF::RayTracer">RayTracer</cref> namespace
+///
+///	\author		TBA
+///	\date		26 Jun 2020
+
 #pragma once
 #include <vector>
 #include <array>
