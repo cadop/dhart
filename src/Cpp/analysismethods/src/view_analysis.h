@@ -67,24 +67,27 @@ namespace HF::AnalysisMethods::ViewAnalysis {
 
 		\par Example
 		\code
+			// Requires #include "view_analysis.h"
 
-		int size = 8;
+			// Prepare maximum number of points to distribute
+			int size = 8;
 
-		// Generate points without any limitations on fov
-		auto points = HF::AnalysisMethods::ViewAnalysis::FibbonacciDistributePoints(size, 90.0f, 90.0f);
+			// Generate points without any limitations on fov
+			auto points = HF::AnalysisMethods::ViewAnalysis::FibbonacciDistributePoints(size, 90.0f, 90.0f);
 
-		// Print number of points
-		std::cout << "Number of Points:" << points.size() << std::endl;
+			// Print number of points
+			std::cout << "Number of Points:" << points.size() << std::endl;
 
-		// Iterate through results and print every point.
-		std::cout << "[";
-		for (int i = 0; i < size; i++) {
-			const auto& point =  points[i];
-			std::cout << "(" << point[0] << ", " << point[1] << ", " << point[2] << ")";
-			if (i != size-1) std::cout << ", ";
-		}
-		std::cout << "]" << std::endl;
+			// Iterate through results and print every point.
+			std::cout << "[";
+			for (int i = 0; i < size; i++) {
+				const auto& point =  points[i];
+				std::cout << "(" << point[0] << ", " << point[1] << ", " << point[2] << ")";
+				if (i != size-1) std::cout << ", ";
+			}
+			std::cout << "]" << std::endl;
 		\endcode
+
 
 		`>>> Number of Points:8`\n
 		`>>> [(-0, -1, 0), (-0.304862, -0.75, -0.586992), (0.813476, -0.5, 0.29708), (-0.894994, -0.25, 0.369441),`
@@ -132,8 +135,7 @@ namespace HF::AnalysisMethods::ViewAnalysis {
 
 		\par Example
 		\code
-
-			// Requires #include <numeric>
+			// Requires #include "view_analysis.h", #include <numeric>
 
 			// Use this to save some space.
 			using HF::AnalysisMethods::ViewAnalysis::AGGREGATE_TYPE;
@@ -176,8 +178,8 @@ namespace HF::AnalysisMethods::ViewAnalysis {
 			for (int val : values) Aggregate(total, val, AGGREGATE_TYPE::COUNT);
 			std::cerr << "Count: " << total << std::endl;
 			ASSERT_EQ(total, 5);
-
 		\endcode
+
 		`>>> Average: 3`\n
 		`>>> Sum: 15`\n
 		`>>> Max: 5`\n
@@ -270,6 +272,8 @@ namespace HF::AnalysisMethods::ViewAnalysis {
 
 		\par Example
 		\code
+			// Requires #include "view_analysis.h"
+
 			// Use this so we can fit within 80 characters
 			using HF::AnalysisMethods::ViewAnalysis::SphericalViewAnalysis;
 
@@ -280,6 +284,7 @@ namespace HF::AnalysisMethods::ViewAnalysis {
 				10.0f, 10.0f, 0.0f,
 				10.0f, -10.0f, 0.0f,
 			};
+
 			const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 			// Create RayTracer
@@ -290,6 +295,7 @@ namespace HF::AnalysisMethods::ViewAnalysis {
 			// Define a struct that only stores the distance when sethit is called.
 			struct SampleResults {
 				float dist = -1.0f;
+
 				inline void SetHit(
 					const std::array<float, 3> & node,
 					const std::array<float, 3> & direction,
@@ -328,6 +334,7 @@ namespace HF::AnalysisMethods::ViewAnalysis {
 			}
 			std::cerr << ")" << std::endl;
 		\endcode
+
 
 		`>>> (-1, 7.35812, -1, -1, 3.70356, -1, 5.56647, 12.1517, -1, 2.36725, -1, -1, 2.97477, 2.58713, -1,`
 		`	-1, 1.91404, 5.95885, 4.26368, 1.86167, -1, -1, 2.0406, 2.78304, -1, -1, -1, -1, 2.83909, 2.05302, `
@@ -416,6 +423,8 @@ namespace HF::AnalysisMethods::ViewAnalysis {
 
 		\par Example
 		\code
+			// Requires #include "view_analysis.h"
+
 			// Use this so we can fit within 80 characters
 			using HF::AnalysisMethods::ViewAnalysis::SphericalRayshootWithAnyRTForDistance;
 			using HF::AnalysisMethods::ViewAnalysis::AGGREGATE_TYPE;
@@ -455,6 +464,7 @@ namespace HF::AnalysisMethods::ViewAnalysis {
 			}
 			std::cerr << ")" << std::endl;
 		\endcode
+
 		`>>> (2746.72, 932.565, 170.858, 76.8413)`
 
 		\todo Should this have a height check like the one in the VisibilityGraph?
