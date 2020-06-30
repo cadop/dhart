@@ -74,11 +74,14 @@ namespace HF::AnalysisMethods::ViewAnalysis {
 		\code
 			// Requires #include "view_analysis.h"
 
+			// For brevity
+			using HF::AnalysisMethods::ViewAnalysis::FibbonacciDistributePoints;
+
 			// Prepare maximum number of points to distribute
 			int size = 8;
 
 			// Generate points without any limitations on fov
-			auto points = HF::AnalysisMethods::ViewAnalysis::FibbonacciDistributePoints(size, 90.0f, 90.0f);
+			auto points = FibbonacciDistributePoints(size, 90.0f, 90.0f);
 
 			// Print number of points
 			std::cout << "Number of Points:" << points.size() << std::endl;
@@ -88,7 +91,7 @@ namespace HF::AnalysisMethods::ViewAnalysis {
 			for (int i = 0; i < size; i++) {
 				const auto& point =  points[i];
 				std::cout << "(" << point[0] << ", " << point[1] << ", " << point[2] << ")";
-				if (i != size-1) std::cout << ", ";
+				if (i != size - 1) std::cout << ", ";
 			}
 			std::cout << "]" << std::endl;
 		\endcode
@@ -182,7 +185,6 @@ namespace HF::AnalysisMethods::ViewAnalysis {
 			total = 0.0f;
 			for (int val : values) Aggregate(total, val, AGGREGATE_TYPE::COUNT);
 			std::cerr << "Count: " << total << std::endl;
-			ASSERT_EQ(total, 5);
 		\endcode
 
 		`>>> Average: 3`\n
@@ -281,6 +283,8 @@ namespace HF::AnalysisMethods::ViewAnalysis {
 
 			// Use this so we can fit within 80 characters
 			using HF::AnalysisMethods::ViewAnalysis::SphericalViewAnalysis;
+			using HF::RayTracer::EmbreeRayTracer;
+			using HF::Geometry::MeshInfo;
 
 			// Create Plane
 			const std::vector<float> plane_vertices{
@@ -433,6 +437,8 @@ namespace HF::AnalysisMethods::ViewAnalysis {
 			// Use this so we can fit within 80 characters
 			using HF::AnalysisMethods::ViewAnalysis::SphericalRayshootWithAnyRTForDistance;
 			using HF::AnalysisMethods::ViewAnalysis::AGGREGATE_TYPE;
+			using HF::RayTracer::EmbreeRayTracer;
+			using HF::Geometry::MeshInfo;
 
 			// Create Plane
 			const std::vector<float> plane_vertices{
