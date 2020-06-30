@@ -130,18 +130,25 @@ namespace HF {
 			/// </returns>
 			/*!
 				\par Example
-				\code 
+				\code
+					// Requires #include "embree_raytracer.h", #include "meshinfo.h"
+
+					// for brevity
+					using HF::RayTracer::EmbreeRayTracer;
+					using HF::Geometry::MeshInfo;
+
 					// Create Plane
-					const vector<float> plane_vertices{
-						-10.0f, 10.0f, 0.0f,
-						-10.0f, -10.0f, 0.0f,
-						10.0f, 10.0f, 0.0f,
-						10.0f, -10.0f, 0.0f,
+					const std::vector<float> plane_vertices{
+								-10.0f, 10.0f, 0.0f,
+								-10.0f, -10.0f, 0.0f,
+								10.0f, 10.0f, 0.0f,
+								10.0f, -10.0f, 0.0f,
 					};
-					const vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
+
+					const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 					// Create RayTracer
-					EmbreeRayTracer ert(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+					EmbreeRayTracer ert(std::vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
 
 					// Fire a ray straight down
 					std::array<float, 3> origin{ 0,0,1 };
@@ -155,7 +162,7 @@ namespace HF {
 					else std::cerr << "Miss" << std::endl;
 
 					// Fire a ray straight up
-					origin = std::array<float,3>{ 0,0,1 };
+					origin = std::array<float, 3>{ 0, 0, 1 };
 					res = ert.FireRay(
 						origin,
 						std::array<float, 3>{0, 0, 1}
@@ -198,37 +205,42 @@ namespace HF {
 			/*!
 				\par Example
 				\code
+					// Requires #include "embree_raytracer.h", #include "meshinfo.h"
 
-				// Create Plane
-				const vector<float> plane_vertices{
-					-10.0f, 10.0f, 0.0f,
-					-10.0f, -10.0f, 0.0f,
-					10.0f, 10.0f, 0.0f,
-					10.0f, -10.0f, 0.0f,
-				};
-				const vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
+					// for brevity
+					using HF::RayTracer::EmbreeRayTracer;
+					using HF::Geometry::MeshInfo;
 
-				// Create RayTracer
-				EmbreeRayTracer ert(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+					// Create Plane
+					const std::vector<float> plane_vertices{
+						-10.0f, 10.0f, 0.0f,
+						-10.0f, -10.0f, 0.0f,
+						10.0f, 10.0f, 0.0f,
+						10.0f, -10.0f, 0.0f,
+					};
 
-				bool res;
+					const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
-				// Fire a ray straight down directly at the plane
-				float x = 0; float y = 0;float z = 1;
-				res = ert.FireRay(x, y, z, 0, 0, -1);
-				
-				// Print output
-				if (res) std::cerr << "(" << x << ", " << y << ", " << z << ")" << std::endl;
-				else std::cerr << "Miss" << std::endl;
+					// Create RayTracer
+					EmbreeRayTracer ert(std::vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
 
-				// Fire a ray straight up
-				x = 0; y = 0; z = 1;
-				res = ert.FireRay(x, y, z, 0, 0, 1);
-				
-				// Print output
-				if (res) std::cerr << "(" << x << ", " << y << ", " << z << ")" << std::endl;
-				else std::cerr << "Miss" << std::endl;
-				
+					bool res;
+
+					// Fire a ray straight down directly at the plane
+					float x = 0; float y = 0; float z = 1;
+					res = ert.FireRay(x, y, z, 0, 0, -1);
+
+					// Print output
+					if (res) std::cerr << "(" << x << ", " << y << ", " << z << ")" << std::endl;
+					else std::cerr << "Miss" << std::endl;
+
+					// Fire a ray straight up
+					x = 0; y = 0; z = 1;
+					res = ert.FireRay(x, y, z, 0, 0, 1);
+
+					// Print output
+					if (res) std::cerr << "(" << x << ", " << y << ", " << z << ")" << std::endl;
+					else std::cerr << "Miss" << std::endl;
 				\endcode
 
 				`>>>(0, 0, 0)`\n
@@ -284,8 +296,13 @@ namespace HF {
 			/// </exception>
 			/*!
 				\par Example
-				\code{.cpp}
-				
+				\code
+					// Requires #include "embree_raytracer.h", #include "meshinfo.h"
+
+					// for brevity
+					using HF::RayTracer::EmbreeRayTracer;
+					using HF::Geometry::MeshInfo;
+
 					// Create plane
 					const std::vector<float> plane_vertices{
 						-10.0f, 10.0f, 0.0f,
@@ -293,17 +310,18 @@ namespace HF {
 						10.0f, 10.0f, 0.0f,
 						10.0f, -10.0f, 0.0f,
 					};
+
 					const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 					// Create RayTracer
-					EmbreeRayTracer ert(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+					EmbreeRayTracer ert(std::vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
 
 					// Create an array of directions all containing {0,0,-1}
-					std::vector<std::array<float, 3>> directions(10, std::array<float, 3>{0, 0, -1});
+					std::vector<std::array<float, 3>> directions(10, std::array<float, 3>{ 0, 0, -1 });
 
 					// Create an array of origin points moving further to the left with each point
 					std::vector<std::array<float, 3>> origins(10);
-					for (int i = 0; i < 10; i++) origins[i] = std::array<float, 3>{static_cast<float>(2*i), 0, 1};
+					for (int i = 0; i < 10; i++) origins[i] = std::array<float, 3>{static_cast<float>(2 * i), 0, 1};
 
 					// Fire every ray.
 					auto results = ert.FireRays(origins, directions);
@@ -350,17 +368,24 @@ namespace HF {
 			/**
 				\par Example
 				\code
+					// Requires #include "embree_raytracer.h", #include "meshinfo.h"
+
+					// for brevity
+					using HF::RayTracer::EmbreeRayTracer;
+					using HF::Geometry::MeshInfo;
+
 					// Create Plane
-					const vector<float> plane_vertices{
+					const std::vector<float> plane_vertices{
 						-10.0f, 10.0f, 0.0f,
 						-10.0f, -10.0f, 0.0f,
 						10.0f, 10.0f, 0.0f,
 						10.0f, -10.0f, 0.0f,
 					};
-					const vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
+
+					const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 					// Create RayTracer
-					EmbreeRayTracer ert(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+					EmbreeRayTracer ert(std::vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
 
 					HitStruct res;
 
@@ -409,22 +434,29 @@ namespace HF {
 			/*!
 				\par Example
 				\code
+					// Requires #include "embree_raytracer.h", #include "meshinfo.h"
+
+					// for brevity
+					using HF::RayTracer::EmbreeRayTracer;
+					using HF::Geometry::MeshInfo;
+
 					// Create Plane
-					const vector<float> plane_vertices{
+					const std::vector<float> plane_vertices{
 						-10.0f, 10.0f, 0.0f,
 						-10.0f, -10.0f, 0.0f,
 						10.0f, 10.0f, 0.0f,
 						10.0f, -10.0f, 0.0f,
 					};
-					const vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
+
+					const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 					// Create RayTracer
-					EmbreeRayTracer ert(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+					EmbreeRayTracer ert(std::vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
 
 					// Fire a ray straight down
 					bool res = ert.FireOcclusionRay(
-						std::array<float, 3>{0, 0, 1},
-						std::array<float, 3>{0, 0, -1}
+						std::array<float, 3>{ 0, 0, 1 },
+						std::array<float, 3>{ 0, 0, -1 }
 					);
 
 					// Print Result
@@ -433,8 +465,8 @@ namespace HF {
 
 					// Fire a ray straight up
 					res = ert.FireOcclusionRay(
-						std::array<float, 3>{0, 0, 1},
-						std::array<float, 3>{0, 0, 1}
+						std::array<float, 3>{ 0, 0, 1 },
+						std::array<float, 3>{ 0, 0, 1 }
 					);
 
 					// Print Result.
@@ -486,6 +518,12 @@ namespace HF {
 			/*!
 				\par Example
 				\code
+					// Requires #include "embree_raytracer.h", #include "meshinfo.h"
+
+					// for brevity
+					using HF::RayTracer::EmbreeRayTracer;
+					using HF::Geometry::MeshInfo;
+
 					// Create Plane
 					const std::vector<float> plane_vertices{
 						-10.0f, 10.0f, 0.0f,
@@ -493,10 +531,11 @@ namespace HF {
 						10.0f, 10.0f, 0.0f,
 						10.0f, -10.0f, 0.0f,
 					};
+
 					const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 					// Create RayTracer
-					EmbreeRayTracer ert(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+					EmbreeRayTracer ert(std::vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
 
 					// Create an array of directions all containing {0,0,-1}
 					std::vector<std::array<float, 3>> directions(10, std::array<float, 3>{0, 0, -1});
@@ -504,8 +543,8 @@ namespace HF {
 					// Create an array of origins with the first 5 values being above the plane and
 					// the last five values being under it.
 					std::vector<std::array<float, 3>> origins(10);
-					for (int i = 0; i < 5; i++) origins[i] = std::array<float, 3>{0.0f, 0.0f, 1.0f};
-					for (int i = 5; i < 10; i++) origins[i] = std::array<float, 3>{0.0f, 0.0f, -1.0f};
+					for (int i = 0; i < 5; i++) origins[i] = std::array<float, 3>{ 0.0f, 0.0f, 1.0f };
+					for (int i = 5; i < 10; i++) origins[i] = std::array<float, 3>{ 0.0f, 0.0f, -1.0f };
 
 					// Cast every occlusion ray
 					std::vector<bool> results = ert.FireOcclusionRays(origins, directions);
@@ -513,7 +552,6 @@ namespace HF {
 					// Iterate through all results to print them
 					std::cout << "[";
 					for (int i = 0; i < 10; i++) {
-
 						// Print true if the ray intersected, false otherwise
 						if (results[i]) std::cout << "True";
 						else std::cout << "False";
@@ -523,6 +561,7 @@ namespace HF {
 					}
 					std::cout << "]" << std::endl;
 				\endcode
+
 				`>>> [True, True, True, True, True, False, False, False, False, False]`
 			*/
 			std::vector<bool> FireOcclusionRays(
@@ -549,29 +588,36 @@ namespace HF {
 			/// <returns> True if the ray intersected any geometry. False otherwise. </returns>
 			/*!
 				\par Example
-				\code 
+				\code
+					// Requires #include "embree_raytracer.h", #include "meshinfo.h"
+
+					// for brevity
+					using HF::RayTracer::EmbreeRayTracer;
+					using HF::Geometry::MeshInfo;
+
 					// Create Plane
-					const vector<float> plane_vertices{
+					const std::vector<float> plane_vertices{
 						-10.0f, 10.0f, 0.0f,
 						-10.0f, -10.0f, 0.0f,
 						10.0f, 10.0f, 0.0f,
 						10.0f, -10.0f, 0.0f,
 					};
-					const vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
+
+					const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 					// Create RayTracer
-					EmbreeRayTracer ert(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+					EmbreeRayTracer ert(std::vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
 
 					// Fire a ray straight down
-					bool res = ert.FireOcclusionRay(0,0,1,0,0,-1);
+					bool res = ert.FireOcclusionRay(0, 0, 1, 0, 0, -1);
 
 					// Print Results
 					if (res) std::cerr << "True" << std::endl;
 					else std::cerr << "False" << std::endl;
 
 					// Fire a ray straight up
-					res = ert.FireOcclusionRay(0,0,1,0,0,1);
-					
+					res = ert.FireOcclusionRay(0, 0, 1, 0, 0, 1);
+
 					// Print results
 					if (res) std::cerr << "True" << std::endl;
 					else std::cerr << "False" << std::endl;
@@ -677,23 +723,28 @@ namespace HF {
 			/// they get implemented.
 			/*!
 				\par Example
-				\code 
-					// Create Plane
-					auto ert = CreateRTWithPlane();
+				\code
+					// Requires #include "embree_raytracer.h", #include "meshinfo.h"
+
+					// for brevity
+					using HF::RayTracer::EmbreeRayTracer;
+					using HF::Geometry::MeshInfo;
+
 					const std::vector<float> plane_vertices{
 						-10.0f, 10.0f, 0.0f,
 						-10.0f, -10.0f, 0.0f,
 						10.0f, 10.0f, 0.0f,
 						10.0f, -10.0f, 0.0f,
 					};
+
 					const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
-					// Create RayTracer
-					EmbreeRayTracer ert(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+					// Create a new raytracer from a basic 10x10 plane centered on the origin.
+					EmbreeRayTracer ert(std::vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
 
 					// Create origin/direction arrays
-					std::array<float, 3> origin{ 0,0,1 };
-					std::array<float, 3> direction{ 0,0,-1 };
+					std::array<float, 3> origin{ 0, 0, 1 };
+					std::array<float, 3> direction{ 0, 0, -1 };
 
 					bool res = false; float out_dist = -1; int out_id = -1;
 
@@ -710,7 +761,6 @@ namespace HF {
 					// Print its distance if it connected
 					if (res) std::cerr << out_dist << std::endl;
 					else std::cerr << "Miss" << std::endl;
-				
 				\endcode
 
 				`>>>(0, 0, 0)`\n
@@ -757,7 +807,12 @@ namespace HF {
 			/// they get implemented.
 			/*!	
 				\par Example
-				\code{ .cpp }
+				\code
+					// Requires #include "embree_raytracer.h", #include "meshinfo.h"
+
+					// for brevity
+					using HF::RayTracer::EmbreeRayTracer;
+					using HF::Geometry::MeshInfo;
 
 					// Create Plane
 					const vector<float> plane_vertices{
@@ -766,10 +821,11 @@ namespace HF {
 						10.0f, 10.0f, 0.0f,
 						10.0f, -10.0f, 0.0f,
 					};
-					const vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
+
+					const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 					// Create RayTracer
-					EmbreeRayTracer ert(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+					EmbreeRayTracer ert(std::vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
 
 					// Fire a ray straight down
 					bool res = ert.FireAnyOcclusionRay(
