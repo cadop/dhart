@@ -1,76 +1,168 @@
-\hypertarget{a00110}{}\doxysection{Cpp/spatialstructures/src/path.h File Reference}
-\label{a00110}\index{Cpp/spatialstructures/src/path.h@{Cpp/spatialstructures/src/path.h}}
+\hypertarget{a00110}{}\doxysection{Cpp/pathfinding/src/boost\+\_\+graph.h File Reference}
+\label{a00110}\index{Cpp/pathfinding/src/boost\_graph.h@{Cpp/pathfinding/src/boost\_graph.h}}
 
 
-Header file for Path/\+Path\+Member data types.  
+Contains definitions for the \mbox{\hyperlink{a01139}{Boost\+Graph}} class.  
 
 
-{\ttfamily \#include $<$vector$>$}\newline
-{\ttfamily \#include $<$iostream$>$}\newline
-{\ttfamily \#include \char`\"{}Constants.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$boost/graph/graph\+\_\+traits.\+hpp$>$}\newline
+{\ttfamily \#include $<$boost/graph/adjacency\+\_\+matrix.\+hpp$>$}\newline
+{\ttfamily \#include $<$boost/graph/directed\+\_\+graph.\+hpp$>$}\newline
+{\ttfamily \#include $<$boost/graph/compressed\+\_\+sparse\+\_\+row\+\_\+graph.\+hpp$>$}\newline
+{\ttfamily \#include $<$boost/graph/adjacency\+\_\+list.\+hpp$>$}\newline
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-struct \mbox{\hyperlink{a01109}{H\+F\+::\+Spatial\+Structures\+::\+Path\+Member}}
-\item 
-struct \mbox{\hyperlink{a01113}{H\+F\+::\+Spatial\+Structures\+::\+Path}}
-\begin{DoxyCompactList}\small\item\em A point in space with an ID \end{DoxyCompactList}\end{DoxyCompactItemize}
+struct \mbox{\hyperlink{a01123}{std\+::hash$<$ std\+::array$<$ float, 3 $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Template specialization of std\+::hash for using std\+::array$<$float, 3$>$. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a00282_a01131}{H\+F\+::\+Pathfinding\+::\+Edge\+\_\+\+Cost}}
+\begin{DoxyCompactList}\small\item\em Data stored for every edge in the \mbox{\hyperlink{a01139}{Boost\+Graph}}.  \mbox{\hyperlink{a00282_a01131}{More...}}\end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a00282_a01135}{H\+F\+::\+Pathfinding\+::vertex\+\_\+data}}
+\begin{DoxyCompactList}\small\item\em Data stored for every vertex in the \mbox{\hyperlink{a01139}{Boost\+Graph}}.  \mbox{\hyperlink{a00282_a01135}{More...}}\end{DoxyCompactList}\item 
+class \mbox{\hyperlink{a01139}{H\+F\+::\+Pathfinding\+::\+Boost\+Graph}}
+\begin{DoxyCompactList}\small\item\em A graph usable with the Boost\+Graph\+Library. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{a00171}{HF}}
+ \mbox{\hyperlink{a00283}{boost}}
+\begin{DoxyCompactList}\small\item\em The Boost C++ library. \href{https://www.boost.org/}{\texttt{ https\+://www.\+boost.\+org/}}. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00273}{HF}}
 \begin{DoxyCompactList}\small\item\em Output C\+SR for interop with other languages \end{DoxyCompactList}\item 
- \mbox{\hyperlink{a00174}{H\+F\+::\+Spatial\+Structures}}
-\end{DoxyCompactItemize}
+ \mbox{\hyperlink{a00276}{H\+F\+::\+Spatial\+Structures}}
+\begin{DoxyCompactList}\small\item\em Contains standard fundamental data structures for representing space used throughout Human\+Factors. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00282}{H\+F\+::\+Pathfinding}}
+\begin{DoxyCompactList}\small\item\em Algorithms to find the shortest path between nodes in a \mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef boost\+::compressed\+\_\+sparse\+\_\+row\+\_\+graph$<$ boost\+::directedS, vertex\+\_\+data, Edge\+\_\+\+Cost $>$ \mbox{\hyperlink{a00282_a9314d552e0a8092644fa080c9945bd25}{H\+F\+::\+Pathfinding\+::graph\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Type of graph held by the \mbox{\hyperlink{a01139}{Boost\+Graph}}. \end{DoxyCompactList}\item 
+typedef boost\+::graph\+\_\+traits$<$ graph\+\_\+t $>$\+::vertex\+\_\+descriptor \mbox{\hyperlink{a00282_aff4215affd9d683505478f5b7dcc1804}{H\+F\+::\+Pathfinding\+::vertex\+\_\+descriptor}}
+\begin{DoxyCompactList}\small\item\em Quick alias to shorten the typename of vertex descriptors for our graph\+\_\+t type. /summary$>$ \end{DoxyCompactList}\item 
+typedef std\+::pair$<$ int, int $>$ \mbox{\hyperlink{a00282_acc378c1e475802d96758aaef12d33dbc}{H\+F\+::\+Pathfinding\+::pair}}
+\begin{DoxyCompactList}\small\item\em Shorten std\+::pair to simplify graph construction. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-ostream \& \mbox{\hyperlink{a00110_af6138876bfed2f7c6cb87dc2c9628692}{std\+::operator$<$$<$}} (ostream \&os, const \mbox{\hyperlink{a01113}{H\+F\+::\+Spatial\+Structures\+::\+Path}} p)
-\end{DoxyCompactItemize}
+{\footnotesize template$<$typename SizeT $>$ }\\void \mbox{\hyperlink{a00095_a78d69e3306ec9cf190f79b72217f2340}{std\+::array\+\_\+hash\+\_\+combine\+\_\+impl}} (SizeT \&seed, SizeT value)
+\begin{DoxyCompactList}\small\item\em Combine the hash of value into seed. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Header file for Path/\+Path\+Member data types. 
+Contains definitions for the \mbox{\hyperlink{a01139}{Boost\+Graph}} class. 
 
 \begin{DoxyAuthor}{Author}
 T\+BA 
 \end{DoxyAuthor}
 \begin{DoxyDate}{Date}
-06 Jun 2020 
+17 Jun 2020 
 \end{DoxyDate}
 
 
-\doxysubsection{Function Documentation}
-\mbox{\Hypertarget{a00110_af6138876bfed2f7c6cb87dc2c9628692}\label{a00110_af6138876bfed2f7c6cb87dc2c9628692}} 
-\index{path.h@{path.h}!operator$<$$<$@{operator$<$$<$}}
-\index{operator$<$$<$@{operator$<$$<$}!path.h@{path.h}}
-\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}}
-{\footnotesize\ttfamily ostream\& std\+::operator$<$$<$ (\begin{DoxyParamCaption}\item[{ostream \&}]{os,  }\item[{const \mbox{\hyperlink{a01113}{H\+F\+::\+Spatial\+Structures\+::\+Path}}}]{p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\doxysubsection{Class Documentation}
+\index{HF::Pathfinding::Edge\_Cost@{HF::Pathfinding::Edge\_Cost}}\label{a01131}
+\Hypertarget{a00282_a01131}
+\doxysubsubsection{struct HF\+::Pathfinding\+::Edge\+\_\+\+Cost}
+Data stored for every edge in the \mbox{\hyperlink{a01139}{Boost\+Graph}}. 
 
+Each edge in the graph only stores its weight as a float. 
+
+Definition at line 99 of file boost\+\_\+graph.\+h.
+
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00282_aefea62ffa2c7078ac7d9f2eefaa96e07}\label{a00282_aefea62ffa2c7078ac7d9f2eefaa96e07}} 
+float&
+weight&
+Cost of traversing this edge. \\
+\hline
+
+\end{DoxyFields}
+\index{HF::Pathfinding::vertex\_data@{HF::Pathfinding::vertex\_data}}\label{a01135}
+\Hypertarget{a00282_a01135}
+\doxysubsubsection{struct HF\+::Pathfinding\+::vertex\+\_\+data}
+Data stored for every vertex in the \mbox{\hyperlink{a01139}{Boost\+Graph}}. 
+
+Every vertex stores in the graph stores it\textquotesingle{}s index p and a unique double d.
+
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{a00264__todo000014}{Todo}}]Is the double d needed?\end{DoxyRefDesc}
+
+
+Definition at line 111 of file boost\+\_\+graph.\+h.
+
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00282_a3f23d92f8d538033cf4096201083944e}\label{a00282_a3f23d92f8d538033cf4096201083944e}} 
+double&
+d&
+Unknown may have been used for the colormap. \\
+\hline
+
+\mbox{\Hypertarget{a00282_a77df9b09cb03d4029237496b485d77e3}\label{a00282_a77df9b09cb03d4029237496b485d77e3}} 
+graph\_traits$<$ compressed\_sparse\_row\_graph$<$ directedS $>$ $>$::\mbox{\hyperlink{a00282_aff4215affd9d683505478f5b7dcc1804}{vertex\_descriptor}}&
+p&
+The index of a vertex in the C\+SR. \\
+\hline
+
+\end{DoxyFields}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{a00095_a78d69e3306ec9cf190f79b72217f2340}\label{a00095_a78d69e3306ec9cf190f79b72217f2340}} 
+\index{boost\_graph.h@{boost\_graph.h}!array\_hash\_combine\_impl@{array\_hash\_combine\_impl}}
+\index{array\_hash\_combine\_impl@{array\_hash\_combine\_impl}!boost\_graph.h@{boost\_graph.h}}
+\doxysubsubsection{\texorpdfstring{array\_hash\_combine\_impl()}{array\_hash\_combine\_impl()}}
+{\footnotesize\ttfamily template$<$typename SizeT $>$ \\
+void std\+::array\+\_\+hash\+\_\+combine\+\_\+impl (\begin{DoxyParamCaption}\item[{SizeT \&}]{seed,  }\item[{SizeT}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Combine the hash of value into seed. 
+
+Combine hashes for multiple floats.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em SizeT} & Integral type, such as size\+\_\+t (implementation defined)\\
+\hline
+\end{DoxyTemplParams}
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "path.h"}}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "meshinfo.h"}}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Create the PathMembers}}
-\DoxyCodeLine{\mbox{\hyperlink{a01109}{HF::SpatialStructures::PathMember}} p0 = \{ 3.14f, 3 \};}
-\DoxyCodeLine{\mbox{\hyperlink{a01109}{HF::SpatialStructures::PathMember}} p1 = \{ 2.78f, 2 \};}
-\DoxyCodeLine{\mbox{\hyperlink{a01109}{HF::SpatialStructures::PathMember}} p2 = \{ 1.64f, 1 \};}
-\DoxyCodeLine{\mbox{\hyperlink{a01109}{HF::SpatialStructures::PathMember}} p3 = \{ 9.35f, 7 \};}
+\DoxyCodeLine{std::size\_t seed\_in = 0;}
+\DoxyCodeLine{std::size\_t value\_in = VALUE\_USER\_DEFINED;  \textcolor{comment}{// user-\/defined value for seed}}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Create the container of PathMembers}}
-\DoxyCodeLine{std::vector<HF::SpatialStructures::PathMember> members\{p0, p1, p2, p3\};}
+\DoxyCodeLine{\textcolor{comment}{// seed\_in is passed by reference}}
+\DoxyCodeLine{std::array\_hash\_combine\_impl<size\_t>(seed\_in, value\_in);}
 \DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a01113}{HF::SpatialStructures::Path}} path(members);                          \textcolor{comment}{// Create the Path object, path}}
+\DoxyCodeLine{\textcolor{comment}{// seed\_in has now been given a value by array\_hash\_combine\_impl}}
+\end{DoxyCode}
+
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em SizeT} & Integral type, such as size\+\_\+t (implementation defined)\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::size\_t seed\_in = 0;}
+\DoxyCodeLine{std::size\_t value\_in = VALUE\_USER\_DEFINED;  \textcolor{comment}{// user-\/defined value for seed}}
 \DoxyCodeLine{}
-\DoxyCodeLine{std::cout << path << std::endl;             \textcolor{comment}{// Output path to an ostream, like cout}}
-\DoxyCodeLine{\textcolor{comment}{// Output is:}}
-\DoxyCodeLine{\textcolor{comment}{// (3) -\/3.14-\/> (2) -\/2.78-\/> (1) -\/1.64-\/> (7) -\/9.35-\/>}}
+\DoxyCodeLine{\textcolor{comment}{// seed\_in is passed by reference}}
+\DoxyCodeLine{std::array\_hash\_combine\_impl<size\_t>(seed\_in, value\_in);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// seed\_in has now been given a value by array\_hash\_combine\_impl}}
 \end{DoxyCode}
  
 
-Definition at line 361 of file path.\+h.
+Definition at line 32 of file meshinfo.\+h.
 
 
 
-References std\+::operator$<$$<$(), and H\+F\+::\+Spatial\+Structures\+::\+Path\+::size().
+References std\+::array\+\_\+hash\+\_\+combine\+\_\+impl().
+
+
+
+Referenced by std\+::array\+\_\+hash\+\_\+combine\+\_\+impl(), and std\+::hash$<$ std\+::array$<$ float, 3 $>$ $>$\+::operator()().
 

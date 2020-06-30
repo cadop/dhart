@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['rayrequestcollection_433',['RayRequestCollection',['../a01077.html',1,'HF::RayTracer']]],
-  ['rayrequestlite_434',['RayRequestLite',['../a01073.html',1,'HF::RayTracer']]],
-  ['rayresult_435',['RayResult',['../a01117.html',1,'']]]
+  ['rayrequestcollection_435',['RayRequestCollection',['../a01179.html',1,'HF::RayTracer']]],
+  ['rayrequestlite_436',['RayRequestLite',['../a01175.html',1,'HF::RayTracer']]],
+  ['rayresult_437',['RayResult',['../a01219.html',1,'']]]
 ];

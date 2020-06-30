@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Analysis: Cinterface/cinterface_utils.cpp File Reference</title>
+<title>Analysis: Cpp/raytracer/src/embree_raytracer.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,132 +61,161 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_37600e7aa46d6eb08a97d98a1c09ffb1.html">Cinterface</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_882abde7eca0231e2bae1ceefe5e858a.html">Cpp</a></li><li class="navelem"><a class="el" href="dir_1061d284018fbd45bbbfc991ca095c8e.html">raytracer</a></li><li class="navelem"><a class="el" href="dir_198e8c151f4aa06153c41e30091296f4.html">src</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">cinterface_utils.cpp File Reference</div>  </div>
+<div class="title">embree_raytracer.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;<a class="el" href="a00122_source.html">cinterface_utils.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00038_source.html">HFExceptions.h</a>&gt;</code><br />
+
+<p>Contains implementation for the <a class="el" href="a01163.html">EmbreeRayTracer</a>  
+<a href="#details">More...</a></p>
+<div class="textblock"><code>#include &lt;<a class="el" href="a00122_source.html">embree_raytracer.h</a>&gt;</code><br />
+<code>#include &lt;corecrt_math_defines.h&gt;</code><br />
+<code>#include &lt;functional&gt;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;thread&gt;</code><br />
+<code>#include &lt;robin_hood.h&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00095_source.html">meshinfo.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00128_source.html">RayRequest.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00086_source.html">HFExceptions.h</a>&gt;</code><br />
 </div>
 <p><a href="a00119_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:a01151"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00277.html#a01151">HF::RayTracer::Vertex</a></td></tr>
+<tr class="memdesc:a01151"><td class="mdescLeft">&#160;</td><td class="mdescRight">A vertex. Used internally in Embree.  <a href="a00277.html#a01151">More...</a><br /></td></tr>
+<tr class="separator:a01151"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01155"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00277.html#a01155">HF::RayTracer::Triangle</a></td></tr>
+<tr class="memdesc:a01155"><td class="mdescLeft">&#160;</td><td class="mdescRight">A triangle. Used internally in Embree.  <a href="a00277.html#a01155">More...</a><br /></td></tr>
+<tr class="separator:a01155"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a00273"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00273.html">HF</a></td></tr>
+<tr class="memdesc:a00273"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output CSR for interop with other languages <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00277"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00277.html">HF::RayTracer</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a2f5650b0bad6c47aa34fc2206433a34b"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::array&lt; float, 3 &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00119.html#a2f5650b0bad6c47aa34fc2206433a34b">ConvertRawFloatArrayToPoints</a> (const float *raw_array, int size)</td></tr>
-<tr class="memdesc:a2f5650b0bad6c47aa34fc2206433a34b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a raw array from an external caller to an organized vector of points  <a href="a00119.html#a2f5650b0bad6c47aa34fc2206433a34b">More...</a><br /></td></tr>
-<tr class="separator:a2f5650b0bad6c47aa34fc2206433a34b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a353d5244f19898d13d1d38193ea6ef1e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::array&lt; int, 3 &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00119.html#a353d5244f19898d13d1d38193ea6ef1e">ConvertRawIntArrayToPoints</a> (const int *raw_array, int size)</td></tr>
-<tr class="separator:a353d5244f19898d13d1d38193ea6ef1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af77723a4383b278169e80cf0e361ec44"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00152.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00119.html#af77723a4383b278169e80cf0e361ec44">DestroyFloatVector</a> (std::vector&lt; float &gt; *float_vector)</td></tr>
-<tr class="memdesc:af77723a4383b278169e80cf0e361ec44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete a float vector that's pointed to by <em>float_vector</em>   <a href="a00119.html#af77723a4383b278169e80cf0e361ec44">More...</a><br /></td></tr>
-<tr class="separator:af77723a4383b278169e80cf0e361ec44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad36c0e67c4b26522c82d29a2f4c2e7e7"><td class="memTemplParams" colspan="2">template&lt;typename P , typename D &gt; </td></tr>
+<tr class="memitem:ad36c0e67c4b26522c82d29a2f4c2e7e7"><td class="memTemplItemLeft" align="right" valign="top">P&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00277.html#ad36c0e67c4b26522c82d29a2f4c2e7e7">HF::RayTracer::CalculateHitPoint</a> (const P &amp;origin, const D &amp;direction, float distance)</td></tr>
+<tr class="memdesc:ad36c0e67c4b26522c82d29a2f4c2e7e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the hitpoint of a ray from its origin, direction and distance  <a href="a00277.html#ad36c0e67c4b26522c82d29a2f4c2e7e7">More...</a><br /></td></tr>
+<tr class="separator:ad36c0e67c4b26522c82d29a2f4c2e7e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c9d1d9869aee1f51b5de11f7d9420ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00277.html#a9c9d1d9869aee1f51b5de11f7d9420ec">HF::RayTracer::CheckState</a> (RTCDevice &amp;device)</td></tr>
+<tr class="memdesc:a9c9d1d9869aee1f51b5de11f7d9420ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check an embree device for errors.  <a href="a00277.html#a9c9d1d9869aee1f51b5de11f7d9420ec">More...</a><br /></td></tr>
+<tr class="separator:a9c9d1d9869aee1f51b5de11f7d9420ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb85d3abbe51075a71812fdc95de8322"><td class="memItemLeft" align="right" valign="top">static double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00277.html#adb85d3abbe51075a71812fdc95de8322">HF::RayTracer::getRandomNumber</a> ()</td></tr>
+<tr class="separator:adb85d3abbe51075a71812fdc95de8322"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0429e7d02ef59bcad3fa5f7ec2b620dc"><td class="memItemLeft" align="right" valign="top">static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00277.html#a0429e7d02ef59bcad3fa5f7ec2b620dc">HF::RayTracer::myradians</a> (float angle)</td></tr>
+<tr class="separator:a0429e7d02ef59bcad3fa5f7ec2b620dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af350b924e9637d84c8b316a3b1641bbc"><td class="memItemLeft" align="right" valign="top">static unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00277.html#af350b924e9637d84c8b316a3b1641bbc">HF::RayTracer::mix</a> (unsigned long a, unsigned long b, unsigned long c)</td></tr>
+<tr class="separator:af350b924e9637d84c8b316a3b1641bbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03d93804b73bd4a5d8ab8e679e5b28cd"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; std::array&lt; float, 3 &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00277.html#a03d93804b73bd4a5d8ab8e679e5b28cd">HF::RayTracer::genSphereRays</a> (int step)</td></tr>
+<tr class="memdesc:a03d93804b73bd4a5d8ab8e679e5b28cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a vector of directions to distribute rays in 360 degrees.  <a href="a00277.html#a03d93804b73bd4a5d8ab8e679e5b28cd">More...</a><br /></td></tr>
+<tr class="separator:a03d93804b73bd4a5d8ab8e679e5b28cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6df9ff0fb8610752d548354b3e6600e0"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::array&lt; float, 3 &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00277.html#a6df9ff0fb8610752d548354b3e6600e0">HF::RayTracer::genFibbonacciRays</a> (int numrays)</td></tr>
+<tr class="memdesc:a6df9ff0fb8610752d548354b3e6600e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a set of equally distributed directions in sphere.  <a href="a00277.html#a6df9ff0fb8610752d548354b3e6600e0">More...</a><br /></td></tr>
+<tr class="separator:a6df9ff0fb8610752d548354b3e6600e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a8051c9b70fc0ae60337d4a38bf5f57"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00277.html#a9a8051c9b70fc0ae60337d4a38bf5f57">HF::RayTracer::vectorsToBuffers</a> (const std::vector&lt; std::array&lt; float, 3 &gt;&gt; &amp;vertices, std::vector&lt; Triangle &gt; &amp;Tribuffer, std::vector&lt; Vertex &gt; &amp;Vbuffer)</td></tr>
+<tr class="memdesc:a9a8051c9b70fc0ae60337d4a38bf5f57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Index a list of verticies and place them into a triangle and vertex buffer.  <a href="a00277.html#a9a8051c9b70fc0ae60337d4a38bf5f57">More...</a><br /></td></tr>
+<tr class="separator:a9a8051c9b70fc0ae60337d4a38bf5f57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac8c0b245ea813969c50b6496cc67945"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00277.html#aac8c0b245ea813969c50b6496cc67945">HF::RayTracer::buffersToStructs</a> (std::vector&lt; float &gt; &amp;in_vertices, std::vector&lt; int &gt; &amp;in_indices, std::vector&lt; Vertex &gt; &amp;out_vertices, std::vector&lt; Triangle &gt; &amp;out_triangles)</td></tr>
+<tr class="memdesc:aac8c0b245ea813969c50b6496cc67945"><td class="mdescLeft">&#160;</td><td class="mdescRight">Package raw arrays of floats and indices in buffers to the required Embree types.  <a href="a00277.html#aac8c0b245ea813969c50b6496cc67945">More...</a><br /></td></tr>
+<tr class="separator:aac8c0b245ea813969c50b6496cc67945"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f55b13b0c41f777baed8813d2fb0c18"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00277.html#a3f55b13b0c41f777baed8813d2fb0c18">HF::RayTracer::Fire8Rays</a> (std::vector&lt; std::reference_wrapper&lt; FullRayRequest &gt;&gt; &amp;requests, const RTCScene &amp;scene, RTCIntersectContext &amp;context)</td></tr>
+<tr class="memdesc:a3f55b13b0c41f777baed8813d2fb0c18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fire 8 rays and update the requests based on results  <a href="a00277.html#a3f55b13b0c41f777baed8813d2fb0c18">More...</a><br /></td></tr>
+<tr class="separator:a3f55b13b0c41f777baed8813d2fb0c18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="a2f5650b0bad6c47aa34fc2206433a34b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2f5650b0bad6c47aa34fc2206433a34b">&#9670;&nbsp;</a></span>ConvertRawFloatArrayToPoints()</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Contains implementation for the <a class="el" href="a01163.html">EmbreeRayTracer</a> </p>
+<dl class="section author"><dt>Author</dt><dd>TBA </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>26 Jun 2020 </dd></dl>
+
+<p class="definition">Definition in file <a class="el" href="a00119_source.html">embree_raytracer.cpp</a>.</p>
+</div><hr/><h2 class="groupheader">Class Documentation</h2>
+<a name="a01151" id="a01151"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01151">&#9670;&nbsp;</a></span>HF::RayTracer::Vertex</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;std::array&lt;float, 3&gt; &gt; ConvertRawFloatArrayToPoints </td>
-          <td>(</td>
-          <td class="paramtype">const float *&#160;</td>
-          <td class="paramname"><em>raw_array</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>size</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="memname">struct HF::RayTracer::Vertex</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<div class="textblock"><p>A vertex. Used internally in Embree. </p>
 
-<p>Convert a raw array from an external caller to an organized vector of points </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">raw_array</td><td>Pointer to the external array</td></tr>
-    <tr><td class="paramname">size</td><td>The number of points stored in the raw array, equal to the total number of floats / 3</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A list of points</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">raw_array</td><td>Pointer to the external array</td></tr>
-    <tr><td class="paramname">size</td><td>The number of points stored in the raw array, equal to the total number of floats / 3</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd></dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="a00119_source.html#l00005">5</a> of file <a class="el" href="a00119_source.html">cinterface_utils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00119_source.html#l00050">50</a> of file <a class="el" href="a00119_source.html">embree_raytracer.cpp</a>.</p>
+</div><table class="fieldtable">
+<tr><th colspan="3">Class Members</th></tr>
+<tr><td class="fieldtype">
+<a id="aad8e270f026ac9dd20ee294b2b1a21de"></a>float</td>
+<td class="fieldname">
+x</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="aa27c7b22316499f43093c2b7768c06ea"></a>float</td>
+<td class="fieldname">
+y</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="ab8599cc6220e686dac319622f7d2f364"></a>float</td>
+<td class="fieldname">
+z</td>
+<td class="fielddoc">
+</td></tr>
+</table>
 
 </div>
 </div>
-<a id="a353d5244f19898d13d1d38193ea6ef1e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a353d5244f19898d13d1d38193ea6ef1e">&#9670;&nbsp;</a></span>ConvertRawIntArrayToPoints()</h2>
+<a name="a01155" id="a01155"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01155">&#9670;&nbsp;</a></span>HF::RayTracer::Triangle</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;std::array&lt;int, 3&gt; &gt; ConvertRawIntArrayToPoints </td>
-          <td>(</td>
-          <td class="paramtype">const int *&#160;</td>
-          <td class="paramname"><em>raw_array</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>size</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="memname">struct HF::RayTracer::Triangle</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<div class="textblock"><p>A triangle. Used internally in Embree. </p>
 
-<p class="definition">Definition at line <a class="el" href="a00119_source.html#l00016">16</a> of file <a class="el" href="a00119_source.html">cinterface_utils.cpp</a>.</p>
-
-</div>
-</div>
-<a id="af77723a4383b278169e80cf0e361ec44"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af77723a4383b278169e80cf0e361ec44">&#9670;&nbsp;</a></span>DestroyFloatVector()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00152.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> DestroyFloatVector </td>
-          <td>(</td>
-          <td class="paramtype">std::vector&lt; float &gt; *&#160;</td>
-          <td class="paramname"><em>float_vector</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Delete a float vector that's pointed to by <em>float_vector</em>  </p>
-
-<p class="definition">Definition at line <a class="el" href="a00119_source.html#l00027">27</a> of file <a class="el" href="a00119_source.html">cinterface_utils.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00122_source.html#l00025">DeleteRawPtr()</a>, and <a class="el" href="a00038_source.html#l00009">HF::Exceptions::OK</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00119_source.html#l00055">55</a> of file <a class="el" href="a00119_source.html">embree_raytracer.cpp</a>.</p>
+</div><table class="fieldtable">
+<tr><th colspan="3">Class Members</th></tr>
+<tr><td class="fieldtype">
+<a id="a504a02b108984ddfa3f521cf40b17e61"></a>int</td>
+<td class="fieldname">
+v0</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="afc086ccfe3fc951af959d905056358c4"></a>int</td>
+<td class="fieldname">
+v1</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="ab7bfa105fb125dfc9e31ecf8cbf0f9fa"></a>int</td>
+<td class="fieldname">
+v2</td>
+<td class="fielddoc">
+</td></tr>
+</table>
 
 </div>
 </div>

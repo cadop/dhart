@@ -73,7 +73,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Source file for VisibilityGraph namespace (procedures)  
+<p>Contains implementation for the <a class="el" href="a00278.html">VisibilityGraph</a> class.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;<a class="el" href="a00032_source.html">visibility_graph.h</a>&gt;</code><br />
 <code>#include &lt;array&gt;</code><br />
@@ -81,44 +81,48 @@ $(function() {
 <code>#include &lt;omp.h&gt;</code><br />
 <code>#include &lt;algorithm&gt;</code><br />
 <code>#include &lt;robin_hood.h&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00101_source.html">graph.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00071_source.html">embree_raytracer.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00095_source.html">Edge.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00104_source.html">node.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00152_source.html">graph.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00122_source.html">embree_raytracer.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00146_source.html">Edge.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00155_source.html">node.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00140_source.html">Constants.h</a>&gt;</code><br />
 </div>
 <p><a href="a00029_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a00171"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00171.html">HF</a></td></tr>
-<tr class="memdesc:a00171"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output CSR for interop with other languages <br /></td></tr>
+<tr class="memitem:a00273"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00273.html">HF</a></td></tr>
+<tr class="memdesc:a00273"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output CSR for interop with other languages <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00172"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00172.html">HF::AnalysisMethods</a></td></tr>
+<tr class="memitem:a00274"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00274.html">HF::AnalysisMethods</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00176"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00176.html">HF::AnalysisMethods::VisibilityGraph</a></td></tr>
+<tr class="memitem:a00278"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00278.html">HF::AnalysisMethods::VisibilityGraph</a></td></tr>
+<tr class="memdesc:a00278"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate visibility between points in a set of locations. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:adb5df7862e7c6b7cf2cb6a158491c420"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00176.html#adb5df7862e7c6b7cf2cb6a158491c420">HF::AnalysisMethods::VisibilityGraph::HeightCheck</a> (const <a class="el" href="a01101.html">Node</a> &amp;<a class="el" href="a01101.html">Node</a>, float height, <a class="el" href="a01061.html">EmbreeRayTracer</a> &amp;ert)</td></tr>
+<tr class="memitem:adb5df7862e7c6b7cf2cb6a158491c420"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00278.html#adb5df7862e7c6b7cf2cb6a158491c420">HF::AnalysisMethods::VisibilityGraph::HeightCheck</a> (const <a class="el" href="a01203.html">Node</a> &amp;<a class="el" href="a01203.html">Node</a>, float height, <a class="el" href="a01163.html">EmbreeRayTracer</a> &amp;ert)</td></tr>
+<tr class="memdesc:adb5df7862e7c6b7cf2cb6a158491c420"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if Node can be raised by height without clipping into any geometry.  <a href="a00278.html#adb5df7862e7c6b7cf2cb6a158491c420">More...</a><br /></td></tr>
 <tr class="separator:adb5df7862e7c6b7cf2cb6a158491c420"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b0f3ed5bc5298f12b5ffce7d457b92a"><td class="memItemLeft" align="right" valign="top">std::vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00176.html#a8b0f3ed5bc5298f12b5ffce7d457b92a">HF::AnalysisMethods::VisibilityGraph::HeightCheckAllNodes</a> (const std::vector&lt; <a class="el" href="a01101.html">Node</a> &gt; &amp;nodes_to_filter, float height, <a class="el" href="a01061.html">EmbreeRayTracer</a> &amp;ert)</td></tr>
-<tr class="separator:a8b0f3ed5bc5298f12b5ffce7d457b92a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a059b752a99bbc272ec501b781ce73cc5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00176.html#a059b752a99bbc272ec501b781ce73cc5">HF::AnalysisMethods::VisibilityGraph::IsOcclusionBetween</a> (const <a class="el" href="a01101.html">Node</a> &amp;node_a, const <a class="el" href="a01101.html">Node</a> &amp;node_b, <a class="el" href="a01061.html">EmbreeRayTracer</a> &amp;ert, float height=1.7f, float pre_calculated_distance=0.0f)</td></tr>
-<tr class="memdesc:a059b752a99bbc272ec501b781ce73cc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks to see if there's an occlusion between two nodes at height level  <a href="a00176.html#a059b752a99bbc272ec501b781ce73cc5">More...</a><br /></td></tr>
+<tr class="memitem:a5d3eda634ef618a61bc49b0639b0ad07"><td class="memItemLeft" align="right" valign="top">vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00278.html#a5d3eda634ef618a61bc49b0639b0ad07">HF::AnalysisMethods::VisibilityGraph::HeightCheckAllNodes</a> (const vector&lt; <a class="el" href="a01203.html">Node</a> &gt; &amp;nodes_to_filter, float height, <a class="el" href="a01163.html">EmbreeRayTracer</a> &amp;ert)</td></tr>
+<tr class="memdesc:a5d3eda634ef618a61bc49b0639b0ad07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the indexes of all nodes that pass the HeightCheck.  <a href="a00278.html#a5d3eda634ef618a61bc49b0639b0ad07">More...</a><br /></td></tr>
+<tr class="separator:a5d3eda634ef618a61bc49b0639b0ad07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a059b752a99bbc272ec501b781ce73cc5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00278.html#a059b752a99bbc272ec501b781ce73cc5">HF::AnalysisMethods::VisibilityGraph::IsOcclusionBetween</a> (const <a class="el" href="a01203.html">Node</a> &amp;node_a, const <a class="el" href="a01203.html">Node</a> &amp;node_b, <a class="el" href="a01163.html">EmbreeRayTracer</a> &amp;ert, float height=1.7f, float pre_calculated_distance=0.0f)</td></tr>
+<tr class="memdesc:a059b752a99bbc272ec501b781ce73cc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform a line of sight check between two nodes.  <a href="a00278.html#a059b752a99bbc272ec501b781ce73cc5">More...</a><br /></td></tr>
 <tr class="separator:a059b752a99bbc272ec501b781ce73cc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5e31d3364f1dbee72065b8f5dc38574"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a01097.html">Graph</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00176.html#aa5e31d3364f1dbee72065b8f5dc38574">HF::AnalysisMethods::VisibilityGraph::AllToAll</a> (<a class="el" href="a01061.html">HF::RayTracer::EmbreeRayTracer</a> &amp;ert, const std::vector&lt; <a class="el" href="a01101.html">HF::SpatialStructures::Node</a> &gt; &amp;input_nodes, float height=1.7f)</td></tr>
-<tr class="memdesc:aa5e31d3364f1dbee72065b8f5dc38574"><td class="mdescLeft">&#160;</td><td class="mdescRight">All variations for generating the visibility graph  <a href="a00176.html#aa5e31d3364f1dbee72065b8f5dc38574">More...</a><br /></td></tr>
+<tr class="memitem:aa5e31d3364f1dbee72065b8f5dc38574"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a01199.html">Graph</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00278.html#aa5e31d3364f1dbee72065b8f5dc38574">HF::AnalysisMethods::VisibilityGraph::AllToAll</a> (<a class="el" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a> &amp;ert, const std::vector&lt; <a class="el" href="a01203.html">HF::SpatialStructures::Node</a> &gt; &amp;input_nodes, float height=1.7f)</td></tr>
+<tr class="memdesc:aa5e31d3364f1dbee72065b8f5dc38574"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a Visibility Graph between every node in a set of nodes in parallel.  <a href="a00278.html#aa5e31d3364f1dbee72065b8f5dc38574">More...</a><br /></td></tr>
 <tr class="separator:aa5e31d3364f1dbee72065b8f5dc38574"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a85f2d1e50a9458e1a4b0bb8a0e0adafa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a01097.html">Graph</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00176.html#a85f2d1e50a9458e1a4b0bb8a0e0adafa">HF::AnalysisMethods::VisibilityGraph::GroupToGroup</a> (<a class="el" href="a01061.html">HF::RayTracer::EmbreeRayTracer</a> &amp;ert, const std::vector&lt; <a class="el" href="a01101.html">HF::SpatialStructures::Node</a> &gt; &amp;from, const std::vector&lt; <a class="el" href="a01101.html">HF::SpatialStructures::Node</a> &gt; &amp;to, float height=1.7f)</td></tr>
-<tr class="memdesc:a85f2d1e50a9458e1a4b0bb8a0e0adafa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a visibility graph between every node in set a and every node in set b  <a href="a00176.html#a85f2d1e50a9458e1a4b0bb8a0e0adafa">More...</a><br /></td></tr>
+<tr class="memitem:a85f2d1e50a9458e1a4b0bb8a0e0adafa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a01199.html">Graph</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00278.html#a85f2d1e50a9458e1a4b0bb8a0e0adafa">HF::AnalysisMethods::VisibilityGraph::GroupToGroup</a> (<a class="el" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a> &amp;ert, const std::vector&lt; <a class="el" href="a01203.html">HF::SpatialStructures::Node</a> &gt; &amp;from, const std::vector&lt; <a class="el" href="a01203.html">HF::SpatialStructures::Node</a> &gt; &amp;to, float height=1.7f)</td></tr>
+<tr class="memdesc:a85f2d1e50a9458e1a4b0bb8a0e0adafa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a Visibility Graph from a set of nodes to another set of nodes.  <a href="a00278.html#a85f2d1e50a9458e1a4b0bb8a0e0adafa">More...</a><br /></td></tr>
 <tr class="separator:a85f2d1e50a9458e1a4b0bb8a0e0adafa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c0cbb953168bcc6a5727bf8122b1286"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a01097.html">Graph</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00176.html#a2c0cbb953168bcc6a5727bf8122b1286">HF::AnalysisMethods::VisibilityGraph::AllToAllUndirected</a> (<a class="el" href="a01061.html">HF::RayTracer::EmbreeRayTracer</a> &amp;ert, const std::vector&lt; <a class="el" href="a01101.html">HF::SpatialStructures::Node</a> &gt; &amp;nodes, float height, int cores=-1)</td></tr>
-<tr class="memdesc:a2c0cbb953168bcc6a5727bf8122b1286"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parallel AllToAll Algorithm for an undirected visibility graph  <a href="a00176.html#a2c0cbb953168bcc6a5727bf8122b1286">More...</a><br /></td></tr>
+<tr class="memitem:a2c0cbb953168bcc6a5727bf8122b1286"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a01199.html">Graph</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00278.html#a2c0cbb953168bcc6a5727bf8122b1286">HF::AnalysisMethods::VisibilityGraph::AllToAllUndirected</a> (<a class="el" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a> &amp;ert, const std::vector&lt; <a class="el" href="a01203.html">HF::SpatialStructures::Node</a> &gt; &amp;nodes, float height, int cores=-1)</td></tr>
+<tr class="memdesc:a2c0cbb953168bcc6a5727bf8122b1286"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a Visibility Graph with every edge stored twice.  <a href="a00278.html#a2c0cbb953168bcc6a5727bf8122b1286">More...</a><br /></td></tr>
 <tr class="separator:a2c0cbb953168bcc6a5727bf8122b1286"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Source file for VisibilityGraph namespace (procedures) </p>
+<div class="textblock"><p>Contains implementation for the <a class="el" href="a00278.html">VisibilityGraph</a> class. </p>
 <dl class="section author"><dt>Author</dt><dd>TBA </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>17 Jun 2020 </dd></dl>
 

@@ -1,0 +1,198 @@
+\hypertarget{a01195}{}\doxysection{HF\+::Spatial\+Structures\+::C\+S\+R\+Ptrs Struct Reference}
+\label{a01195}\index{HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}}
+
+
+A struct to hold all necessary information for a C\+SR.  
+
+
+
+
+{\ttfamily \#include $<$graph.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{a01195_a4665024245e559dac8c3d620372dc47e}{Are\+Valid}} ()
+\begin{DoxyCompactList}\small\item\em Verify the C\+SR referenced by this instance is valid. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{a01195_a67ae38cef6b322331f0e9100b3f480f8}{nnz}}
+\begin{DoxyCompactList}\small\item\em Number of non-\/zeros contained by the C\+SR. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{a01195_ab7ef161d6dfc8b606c120cbf5181ed68}{rows}}
+\begin{DoxyCompactList}\small\item\em Number of rows in this C\+SR. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{a01195_a5aed9a3184fd7d7aded80c97c33e2dc5}{cols}}
+\begin{DoxyCompactList}\small\item\em Number of columns in this C\+SR. \end{DoxyCompactList}\item 
+float $\ast$ \mbox{\hyperlink{a01195_ab31bc5e69630e9101a82790c3a525386}{data}}
+\begin{DoxyCompactList}\small\item\em Pointer to the C\+SR\textquotesingle{}s data array. \end{DoxyCompactList}\item 
+int $\ast$ \mbox{\hyperlink{a01195_a49c0ac5c7fde9a797887699bc4670de4}{outer\+\_\+indices}}
+\begin{DoxyCompactList}\small\item\em Pointer to the C\+SR\textquotesingle{}s outer indices array. \end{DoxyCompactList}\item 
+int $\ast$ \mbox{\hyperlink{a01195_a9a946e3ae6172a03c6a98e1dee39cc19}{inner\+\_\+indices}}
+\begin{DoxyCompactList}\small\item\em Pointer to the C\+SR\textquotesingle{}s inner indices array. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A struct to hold all necessary information for a C\+SR. 
+
+\begin{DoxyRemark}{Remarks}
+This can be used by external clients to recreate or map to an existing C\+SR. For more information on what these arrays contain see \href{https://eigen.tuxfamily.org/dox/group__TutorialSparse.html}{\texttt{ https\+://eigen.\+tuxfamily.\+org/dox/group\+\_\+\+\_\+\+Tutorial\+Sparse.\+html}} 
+\end{DoxyRemark}
+
+
+Definition at line 44 of file graph.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a01195_a4665024245e559dac8c3d620372dc47e}\label{a01195_a4665024245e559dac8c3d620372dc47e}} 
+\index{HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}!AreValid@{AreValid}}
+\index{AreValid@{AreValid}!HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}}
+\doxysubsubsection{\texorpdfstring{AreValid()}{AreValid()}}
+{\footnotesize\ttfamily bool H\+F\+::\+Spatial\+Structures\+::\+C\+S\+R\+Ptrs\+::\+Are\+Valid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Verify the C\+SR referenced by this instance is valid. 
+
+\begin{DoxyReturn}{Returns}
+True if data, outer\+\_\+indices, and inner\+\_\+indices are non-\/null, false otherwise, 
+\end{DoxyReturn}
+
+
+Simply checks that all the contained arrays are not null.
+
+\begin{DoxyRemark}{Remarks}
+For now, this just checks if any of the arrays are null since \mbox{\hyperlink{a00281}{Eigen}} arrays will return null pointers if they are in an invalid state (uninitialized, uncompressed, etc).
+\end{DoxyRemark}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "graph.h", and \#include <memory>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::unique\_ptr<float[]> \mbox{\hyperlink{a01195_ab31bc5e69630e9101a82790c3a525386}{data}}(\textcolor{keyword}{new} \textcolor{keywordtype}{float}[16]);}
+\DoxyCodeLine{std::unique\_ptr<int[]> \mbox{\hyperlink{a01195_a49c0ac5c7fde9a797887699bc4670de4}{outer\_indices}}(\textcolor{keyword}{new} \textcolor{keywordtype}{int}[16]);}
+\DoxyCodeLine{std::unique\_ptr<int[]> \mbox{\hyperlink{a01195_a9a946e3ae6172a03c6a98e1dee39cc19}{inner\_indices}}(\textcolor{keyword}{new} \textcolor{keywordtype}{int}[16]);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{float}* p\_data = \mbox{\hyperlink{a01195_ab31bc5e69630e9101a82790c3a525386}{data}}.get();}
+\DoxyCodeLine{\textcolor{keywordtype}{int}* p\_outer\_indices = \mbox{\hyperlink{a01195_a49c0ac5c7fde9a797887699bc4670de4}{outer\_indices}}.get();}
+\DoxyCodeLine{\textcolor{keywordtype}{int}* p\_inner\_indices = \mbox{\hyperlink{a01195_a9a946e3ae6172a03c6a98e1dee39cc19}{inner\_indices}}.get();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a01195}{HF::SpatialStructures::CSRPtrs}} csr = \{ 16, 16, 16, p\_data, p\_outer\_indices, p\_inner\_indices \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} validity = csr.\mbox{\hyperlink{a01195_a4665024245e559dac8c3d620372dc47e}{AreValid}}(); \textcolor{comment}{// validity == true, since all pointer fields are non-\/null}}
+\end{DoxyCode}
+ 
+
+Definition at line 81 of file graph.\+h.
+
+
+
+References data, inner\+\_\+indices, and outer\+\_\+indices.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01195_a5aed9a3184fd7d7aded80c97c33e2dc5}\label{a01195_a5aed9a3184fd7d7aded80c97c33e2dc5}} 
+\index{HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}!cols@{cols}}
+\index{cols@{cols}!HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}}
+\doxysubsubsection{\texorpdfstring{cols}{cols}}
+{\footnotesize\ttfamily int H\+F\+::\+Spatial\+Structures\+::\+C\+S\+R\+Ptrs\+::cols}
+
+
+
+Number of columns in this C\+SR. 
+
+
+
+Definition at line 47 of file graph.\+h.
+
+\mbox{\Hypertarget{a01195_ab31bc5e69630e9101a82790c3a525386}\label{a01195_ab31bc5e69630e9101a82790c3a525386}} 
+\index{HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}!data@{data}}
+\index{data@{data}!HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}}
+\doxysubsubsection{\texorpdfstring{data}{data}}
+{\footnotesize\ttfamily float$\ast$ H\+F\+::\+Spatial\+Structures\+::\+C\+S\+R\+Ptrs\+::data}
+
+
+
+Pointer to the C\+SR\textquotesingle{}s data array. 
+
+
+
+Definition at line 49 of file graph.\+h.
+
+
+
+Referenced by Are\+Valid().
+
+\mbox{\Hypertarget{a01195_a9a946e3ae6172a03c6a98e1dee39cc19}\label{a01195_a9a946e3ae6172a03c6a98e1dee39cc19}} 
+\index{HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}!inner\_indices@{inner\_indices}}
+\index{inner\_indices@{inner\_indices}!HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}}
+\doxysubsubsection{\texorpdfstring{inner\_indices}{inner\_indices}}
+{\footnotesize\ttfamily int$\ast$ H\+F\+::\+Spatial\+Structures\+::\+C\+S\+R\+Ptrs\+::inner\+\_\+indices}
+
+
+
+Pointer to the C\+SR\textquotesingle{}s inner indices array. 
+
+
+
+Definition at line 51 of file graph.\+h.
+
+
+
+Referenced by Are\+Valid().
+
+\mbox{\Hypertarget{a01195_a67ae38cef6b322331f0e9100b3f480f8}\label{a01195_a67ae38cef6b322331f0e9100b3f480f8}} 
+\index{HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}!nnz@{nnz}}
+\index{nnz@{nnz}!HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}}
+\doxysubsubsection{\texorpdfstring{nnz}{nnz}}
+{\footnotesize\ttfamily int H\+F\+::\+Spatial\+Structures\+::\+C\+S\+R\+Ptrs\+::nnz}
+
+
+
+Number of non-\/zeros contained by the C\+SR. 
+
+
+
+Definition at line 45 of file graph.\+h.
+
+
+
+Referenced by Get\+C\+S\+R\+Pointers().
+
+\mbox{\Hypertarget{a01195_a49c0ac5c7fde9a797887699bc4670de4}\label{a01195_a49c0ac5c7fde9a797887699bc4670de4}} 
+\index{HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}!outer\_indices@{outer\_indices}}
+\index{outer\_indices@{outer\_indices}!HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}}
+\doxysubsubsection{\texorpdfstring{outer\_indices}{outer\_indices}}
+{\footnotesize\ttfamily int$\ast$ H\+F\+::\+Spatial\+Structures\+::\+C\+S\+R\+Ptrs\+::outer\+\_\+indices}
+
+
+
+Pointer to the C\+SR\textquotesingle{}s outer indices array. 
+
+
+
+Definition at line 50 of file graph.\+h.
+
+
+
+Referenced by Are\+Valid().
+
+\mbox{\Hypertarget{a01195_ab7ef161d6dfc8b606c120cbf5181ed68}\label{a01195_ab7ef161d6dfc8b606c120cbf5181ed68}} 
+\index{HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}!rows@{rows}}
+\index{rows@{rows}!HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}}
+\doxysubsubsection{\texorpdfstring{rows}{rows}}
+{\footnotesize\ttfamily int H\+F\+::\+Spatial\+Structures\+::\+C\+S\+R\+Ptrs\+::rows}
+
+
+
+Number of rows in this C\+SR. 
+
+
+
+Definition at line 46 of file graph.\+h.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/spatialstructures/src/\mbox{\hyperlink{a00152}{graph.\+h}}\end{DoxyCompactItemize}
