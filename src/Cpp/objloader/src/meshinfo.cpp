@@ -1,10 +1,10 @@
 ///
-///	\file		meshinfo.h
-///	\brief		Source file for MeshInfo
+///	\file		meshinfo.cpp
+/// \brief		Contains implementation for the <see cref = "HF::SpatialStructures::MeshInfo">MeshInfo</cref> class
 ///
 ///	\author		TBA
 ///	\date		16 Jun 2020
-///
+
 #include <meshinfo.h>
 #include <Geometry>
 #include <HFExceptions.h>

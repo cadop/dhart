@@ -1,10 +1,10 @@
 ///
 ///	\file		boost_graph.cpp
-///	\brief		Source file for BoostGraph
+/// \brief		Contains implementation for the <see cref="HF::Pathfinding::BoostGraph">BoostGraph</cref> class
 ///
 ///	\author		TBA
 ///	\date		17 Jun 2020
-///
+
 #include <boost_graph.h>
 
 #include <graph.h>

@@ -1,4 +1,9 @@
-/// \file view_analysis.h \brief Contains declarations for the for <see cref="ViewAnalysis"/>.
+///
+/// \file		view_analysis.h
+/// \brief		Contains definitions for the <see cref="HF::AnalysisMethods::ViewAnalysis">ViewAnalysis</cref> namespace
+///
+///	\author		TBA
+///	\date		26 Jun 2020
 
 #include <vector>
 #include <array>

@@ -1,6 +1,13 @@
 #include <graph_generator.h>
 #include <graph_generator_private.h>
 #include <charconv>
+///
+/// \file		graph_generator.cpp
+/// \brief		Contains implementation for the <see cref="HF::AnalysisMethods::GraphGenerator">GraphGenerator</cref>
+///
+///	\author		TBA
+///	\date		26 Jun 2020
+
 #include <iostream>
 
 namespace HF {

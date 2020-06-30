@@ -1,3 +1,10 @@
+///
+/// \file		graph_generator_private.cpp
+/// \brief		Contains implementation for the <see cref="HF::AnalysisMethods::GraphGeneratorPrivate">GraphGeneratorPrivate</cref> class
+///
+///	\author		TBA
+///	\date		26 Jun 2020
+
 #include <graph_generator_private.h>
 
 #include <iostream>

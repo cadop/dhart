@@ -1,6 +1,10 @@
-/// \file meshinfo.h \brief Header file for MeshInfo
 ///
-/// \author TBA \date 16 Jun 2020
+///	\file		meshinfo.h
+/// \brief		Contains definitions for the <see cref = "HF::SpatialStructures::MeshInfo">MeshInfo</cref> class
+///
+///	\author		TBA
+///	\date		16 Jun 2020
+
 #include <Dense>
 #include <array>
 

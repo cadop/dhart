@@ -1,6 +1,9 @@
-/// \file Edge.h \brief Header file for an Edge data type, used by a graph ADT
 ///
-/// \author TBA \date 06 Jun 2020
+/// \file		Edge.h
+/// \brief		Contains definitions for the <see cref="HF::SpatialStructures::Edge">Edge</cref> structure
+///
+///	\author		TBA
+///	\date		26 Jun 2020
 #pragma once
 
 #include <node.h>

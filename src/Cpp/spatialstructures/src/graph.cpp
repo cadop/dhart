@@ -1,6 +1,12 @@
-/// \file graph.cpp \brief Source file for a graph ADT
 ///
-/// \author TBA \date 06 Jun 2020
+/// \file	graph.cpp 
+/// \brief	Contains implementation for the <see cref="HF::SpatialStructures::Graph">Graph</cref> class
+///
+/// \author	TBA 
+/// \date	06 Jun 2020 
+
+/// \todo Forward declares for eigen.
+
 #include "graph.h"
 
 #include <Graph.h>

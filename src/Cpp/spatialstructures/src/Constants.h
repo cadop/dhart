@@ -1,6 +1,10 @@
-/// \file Constants.h \brief Header file for constants/procedures in the HF::SpatialStructures namespace
 ///
-/// \author TBA \date 06 Jun 2020
+///	\file		Constants.h 
+///	\brief		Contains definitions for the <see cref="HF::SpatialStructures">HF::SpatialStructures</cref> namespace
+///
+/// \author	TBA 
+/// \date	06 Jun 2020
+
 #pragma once
 
 namespace HF {

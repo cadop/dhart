@@ -1,3 +1,10 @@
+///
+/// \file		graph_generator.h
+/// \brief		Contains definitions for the <see cref="HF::AnalysisMethods::GraphGenerator">GraphGenerator</cref>
+///
+///	\author		TBA
+///	\date		26 Jun 2020
+
 #pragma once
 #define _USE_MATH_DEFINES
 #include <Node.h>

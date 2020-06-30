@@ -1,3 +1,10 @@
+///
+/// \file		graph_generator_private.h
+/// \brief		Contains definitions for the <see cref="HF::AnalysisMethods::GraphGeneratorPrivate">GraphGeneratorPrivate</cref> class
+///
+///	\author		TBA
+///	\date		26 Jun 2020
+
 #include <node.h>
 #include <edge.h>
 #include <graph.h>

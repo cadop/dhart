@@ -1,10 +1,10 @@
 ///
 /// \file		node.h
-///	\brief		Header file for a node data structure, used in a graph ADT
+///	\brief		Contains definitions for the <see cref="HF::SpatialStructures::Node">Node</cref> structure
 ///
 /// \author		TBA
 /// \date		06 Jun 2020
-///
+
 #pragma once
 
 #ifndef HF_NODE

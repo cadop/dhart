@@ -1,4 +1,10 @@
-/// \file view_analysis.cpp \brief Contains implementation for <see cref="ViewAnalysis"/>.
+///
+/// \file		view_analysis.cpp
+/// \brief		Contains implementation for the <see cref="HF::AnalysisMethods::ViewAnalysis">ViewAnalysis</cref> namespace
+///
+///	\author		TBA
+///	\date		26 Jun 2020
+
 #include <view_analysis.h>
 
 #include <vector>

@@ -1,7 +1,9 @@
-/// \file graph.h \brief Header file for a graph ADT
 ///
-/// \author TBA \date 06 Jun 2020 \todo Forward declares for eigen.
-
+/// \file	graph.h 
+/// \brief	Contains definitions for the <see cref="HF::SpatialStructures::Graph">Graph</cref> class
+///
+/// \author	TBA 
+/// \date	06 Jun 2020 
 #pragma once
 
 #include <robin_hood.h>
