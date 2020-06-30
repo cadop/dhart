@@ -11,11 +11,11 @@
 namespace HF {
 	namespace RayTracer {
 		struct FullRayRequest {
-			float x, y, z;			///< X, Y, and Z origin points ///<
-			float dx, dy, dz;		///< X, Y and Z direction to fire the ray in ///<
-			bool was_fired = false; ///< Whether this ray was fired or not ///<
-			float distance = -1;	///< Before firing: the maximum distance of the ray. After firing: distance to the hitpoint or -9999 on miss ///<
-			int mesh_id = -1;		///< The ID of the hit mesh ///<
+			float x, y, z;			///< X, Y, and Z origin points
+			float dx, dy, dz;		///< X, Y and Z direction to fire the ray in
+			bool was_fired = false; ///< Whether this ray was fired or not
+			float distance = -1;	///< Before firing: the maximum distance of the ray. After firing: distance to the hitpoint or -9999 on miss
+			int mesh_id = -1;		///< The ID of the hit mesh
 			
 			/// <summary>
 			/// Constructs a FullRayRequest from origin points (x, y, z) 
@@ -29,6 +29,27 @@ namespace HF {
 			/// <param name="dy">The y destination coordinate</param>
 			/// <param name="dz">The z destination coordinate</param>
 			/// <param name="Distance">The maximum distance of the ray (upon construction)</param>
+
+			/*!
+				\code
+					// Requires #include "RayRequest.h"
+
+					// For brevity
+					using HF::RayTracer::FullRayRequest;
+
+					// Prepare FullRayRequest's parameters
+					const float x_in = 0.0;
+					const float y_in = 0.0;
+					const float z_in = 0.0;
+					const float dx_in = 1.0;
+					const float dy_in = 1.0;
+					const float dz_in = 2.0;
+					const float distance_in = 10.0;
+
+					// Create the FullRayRequest
+					FullRayRequest request(x_in, y_in, z_in, dx_in, dy_in, dz_in, distance_in);
+				\endcode
+			*/
 			FullRayRequest(float x, float y, float z, 
 						   float dx, float dy, float dz, 
 						   float Distance = -1);
@@ -36,12 +57,55 @@ namespace HF {
 			/// <summary>
 			/// Default constructor, empty code block.
 			/// </summary>
+
+			/*!
+				\code
+					// Requires #include "RayRequest.h"
+
+					// For brevity
+					using HF::RayTracer::FullRayRequest;
+
+					// Create the FullRayRequest (no arguments)
+					FullRayRequest request;
+				\endcode
+			*/
 			FullRayRequest() {};
 			
 			/// <summary>
 			/// Tells if the rayrequest it or not. If true, the hit was successful, false otherwise.
 			/// Rays that weren't fired yet are considered as not hitting.
 			/// </summary>
+
+			/*!
+				\code
+					// Requires #include "RayRequest.h"
+
+					// For brevity
+					using HF::RayTracer::FullRayRequest;
+
+					// Prepare FullRayRequest's parameters
+					const float x_in = 0.0;
+					const float y_in = 0.0;
+					const float z_in = 0.0;
+					const float dx_in = 1.0;
+					const float dy_in = 1.0;
+					const float dz_in = 2.0;
+					const float distance_in = 10.0;
+
+					// Create the FullRayRequest
+					FullRayRequest request(x_in, y_in, z_in, dx_in, dy_in, dz_in, distance_in);
+
+					// Use didHit
+					if (request.didHit()) {
+						std::cout << "Hit" << std::endl;
+					}
+					else {
+						std::cout << "Miss" << std::endl;
+					}
+				\endcode
+
+				`>>>Miss`\n
+			*/
 			bool didHit();
 		};
 
@@ -59,10 +123,10 @@ namespace HF {
 		/// </summary>
 		/// \deprecated Unused. See HitInfo.
 		struct RayRequestLite {
-			const std::array<float, 3> * origin;	///< A pointer to an origin in the collection's origins array ///<
-			const std::array<float, 3> * direction; ///< A pointer to a direction in the collection's directions array ///<
-			float distance;							///< The ray's distance ///<
-			int meshid;								///< The mesh ID of the ray ///<
+			const std::array<float, 3> * origin;	///< A pointer to an origin in the collection's origins array
+			const std::array<float, 3> * direction; ///< A pointer to a direction in the collection's directions array
+			float distance;							///< The ray's distance
+			int meshid;								///< The mesh ID of the ray
 
 			/// <summary>
 			/// Retrieves a RayRequestLite's direction array, by value
@@ -89,9 +153,9 @@ namespace HF {
 		/// </summary>
 		/// \deprecated Unused see HitInfo.
 		class RayRequestCollection {
-			std::vector<RayRequestLite> requests; ///< The vector of requests ///<
-			std::vector<std::array<float, 3>> directions; ///< The vector of directions ///<
-			std::vector<std::array<float, 3>> positions;  ///< The vector of positions ///<
+			std::vector<RayRequestLite> requests; ///< The vector of requests
+			std::vector<std::array<float, 3>> directions; ///< The vector of directions
+			std::vector<std::array<float, 3>> positions;  ///< The vector of positions
 
 			/// <summary>
 			/// Constructs a RayRequestCollection from origin coordinates, and direction coordinates

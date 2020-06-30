@@ -6,6 +6,8 @@
 #include <robin_hood.h>
 #include <cmath>
 
+#include "RayRequest.h"
+
 using namespace HF::Geometry;
 using namespace HF::RayTracer;
 using std::vector;
@@ -592,4 +594,50 @@ TEST(_EmbreeRayTracer, OperatorAssignment) {
 	// If and when ert_0 goes out of scope,
 	// data within ert_0 will be retained inside of ert_1.
 	ert_1 = ert_0;
+}
+
+TEST(_FullRayRequest, ConstructorArgs) {
+	// Requires #include "RayRequest.h"
+
+	// For brevity
+	using HF::RayTracer::FullRayRequest;
+
+	// Prepare FullRayRequest's parameters
+	const float x_in = 0.0;
+	const float y_in = 0.0;
+	const float z_in = 0.0;
+	const float dx_in = 1.0;
+	const float dy_in = 1.0;
+	const float dz_in = 2.0;
+	const float distance_in = 10.0;
+
+	// Create the FullRayRequest 
+	FullRayRequest request(x_in, y_in, z_in, dx_in, dy_in, dz_in, distance_in);
+}
+
+TEST(_FullRayRequest, DidHit) {
+	// Requires #include "RayRequest.h"
+
+	// For brevity
+	using HF::RayTracer::FullRayRequest;
+
+	// Prepare FullRayRequest's parameters
+	const float x_in = 0.0;
+	const float y_in = 0.0;
+	const float z_in = 0.0;
+	const float dx_in = 1.0;
+	const float dy_in = 1.0;
+	const float dz_in = 2.0;
+	const float distance_in = 10.0;
+
+	// Create the FullRayRequest 
+	FullRayRequest request(x_in, y_in, z_in, dx_in, dy_in, dz_in, distance_in);
+
+	// Use didHit
+	if (request.didHit()) {
+		std::cout << "Hit" << std::endl;
+	}
+	else {
+		std::cout << "Miss" << std::endl;
+	}
 }
