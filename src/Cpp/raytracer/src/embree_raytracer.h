@@ -37,7 +37,7 @@ namespace HF::Geometry {
 namespace HF::RayTracer {
 	/// <summary> A simple hit struct to carry all relevant information about hits. </summary>
 	struct HitStruct {
-		float distance = -1.0f;  / //< Distance from the origin point to the hit point. Set to -1 if no hit was recorded.
+		float distance = -1.0f;  ///< Distance from the origin point to the hit point. Set to -1 if no hit was recorded.
 		unsigned int meshid = -1; ///< The ID of the hit mesh. Set to -1 if no hit was recorded
 
 		/// <summary> Determine whether or not this hitstruct contains a hit. </summary>
