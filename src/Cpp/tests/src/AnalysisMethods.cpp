@@ -14,7 +14,7 @@ namespace HF {
 	TEST(_GraphGenerator, RunGraphGenerator) {
 		auto mesh = Geometry::LoadMeshObjects("plane.obj");
 		RayTracer::EmbreeRayTracer rt(mesh);
-		auto GG = AnalysisMethods::GraphGenerator(rt, 0);
+		auto GG = GraphGenerator::GraphGenerator(rt, 0);
 	
 		auto g = GG.BuildNetwork(
 			std::array<float, 3>{0, 0, 0.5},
@@ -33,20 +33,20 @@ namespace HF {
 	}
 
 	TEST(_UniqueQueue, BlockRepeats) {
-		HF::AnalysisMethods::UniqueQueue q;
+		HF::GraphGenerator::UniqueQueue q;
 		SpatialStructures::Node n1{ 1,2,3 };
 		EXPECT_TRUE(q.push(n1));
 		EXPECT_FALSE(q.push(n1));
 	}
 
 	TEST(_UniqueQueue, Size) {
-		HF::AnalysisMethods::UniqueQueue q;
+		HF::GraphGenerator::UniqueQueue q;
 		SpatialStructures::Node n1{ 1,2,3 };
 		q.push(n1);
 		ASSERT_EQ(q.size(), 1);
 	}
 	TEST(_UniqueQueue, Empty) {
-		HF::AnalysisMethods::UniqueQueue q;
+		HF::GraphGenerator::UniqueQueue q;
 		SpatialStructures::Node n1{ 1,2,3 };
 		ASSERT_TRUE(q.empty());
 		q.push(n1);

@@ -10,7 +10,7 @@
 
 using namespace HF::RayTracer;
 using namespace HF::SpatialStructures;
-using namespace HF::AnalysisMethods;
+using namespace HF;
 using std::vector;
 
 C_INTERFACE CreateVisibilityGraphAllToAll(

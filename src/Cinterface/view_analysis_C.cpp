@@ -12,7 +12,7 @@ using namespace HF::Exceptions;
 using HF::RayTracer::EmbreeRayTracer;
 using std::vector;
 using HF::SpatialStructures::Node;
-using namespace HF::AnalysisMethods;
+using namespace HF;
 
 C_INTERFACE SphereicalViewAnalysisAggregate(
 	EmbreeRayTracer* ERT, 
