@@ -14,6 +14,8 @@
 #include <edge.h>
 #include <path.h>
 
+#include "pathfinder_C.h"
+
 using namespace HF::SpatialStructures;
 using namespace HF::Pathfinding;
 
@@ -380,3 +382,132 @@ TEST(_pathFinding, InsertPathsIntoArray) {
 
 }
 */
+
+namespace CInterfaceTests {
+	TEST(_PathfinderCInterface, CreatePath) {
+		// Requires #include "pathfinder_C.h", #include "graph.h", #include "path.h", #include "path_finder.h"
+
+		// Create a Graph g, and compress it.
+		HF::SpatialStructures::Graph g;
+		g.addEdge(0, 1, 1);
+		g.addEdge(0, 2, 2);
+		g.addEdge(1, 3, 3);
+		g.addEdge(2, 4, 1);
+		g.addEdge(3, 4, 5);
+		g.Compress();
+
+		// Create a boostGraph from g
+		auto boostGraph = HF::Pathfinding::CreateBoostGraph(g);
+
+		// Prepare parameters for CreatePath
+		HF::SpatialStructures::Path* out_path = nullptr;
+		HF::SpatialStructures::PathMember* out_path_member = nullptr;
+		int out_size = -1;
+
+		CreatePath(&g, 0, 4, &out_size, &out_path, &out_path_member);
+
+		// Use out_path, out_path_member
+
+		// Remember to free resources when finished
+		DestroyPath(out_path);
+
+		// At this point, out_path_member has also been destroyed, so we set this to nullptr
+		out_path_member = nullptr;
+	}
+
+	TEST(_PathfinderCInterface, CreatePaths) {
+		// Requires #include "pathfinder_C.h", #include "graph.h", #include "path.h", #include "path_finder.h"
+
+		// Create a Graph g, and compress it.
+		HF::SpatialStructures::Graph g;
+
+		// Create a boostGraph from g
+		auto boostGraph = HF::Pathfinding::CreateBoostGraph(g);
+
+		// Prepare starting and ending nodes
+		int start_nodes[] = { 0, 0, 1, 2, 3 };
+		int end_nodes[] = { 1, 2, 3, 4, 4 };
+
+		// Prepare parameters for CreatePaths
+		HF::SpatialStructures::Path* out_path = nullptr;
+		HF::SpatialStructures::PathMember* out_path_member = nullptr;
+		int out_size = -1;
+		const int path_size = 5;
+
+		// Sizes of paths
+		int out_sizes[] = { 1, 2, 3, 1, 5 };
+
+		CreatePaths(&g, start_nodes, end_nodes, &out_path, &out_path_member, out_sizes, path_size);
+
+		// Use out_path, out_path_member
+
+		// Remember to free resources when finished
+		DestroyPath(out_path);
+
+		// At this point, out_path_member has also been destroyed, so we set this to nullptr
+		out_path_member = nullptr;
+	}
+
+	TEST(_PathfinderCInterface, GetPathInfo) {
+		// Requires #include "pathfinder_C.h", #include "path.h"
+
+		// Requires #include "pathfinder_C.h", #include "graph.h", #include "path.h", #include "path_finder.h"
+
+		// Create a Graph g, and compress it.
+		HF::SpatialStructures::Graph g;
+		g.addEdge(0, 1, 1);
+		g.addEdge(0, 2, 2);
+		g.addEdge(1, 3, 3);
+		g.addEdge(2, 4, 1);
+		g.addEdge(3, 4, 5);
+		g.Compress();
+
+		// Create a boostGraph from g
+		auto boostGraph = HF::Pathfinding::CreateBoostGraph(g);
+
+		HF::SpatialStructures::Path* out_path = nullptr;
+		HF::SpatialStructures::PathMember* out_path_member = nullptr;
+		int out_size = -1;
+
+		CreatePath(&g, 0, 4, &out_size, &out_path, &out_path_member);
+
+		// Get out_path's info, store results in out_path_member and out_size
+		GetPathInfo(out_path, &out_path_member, &out_size);
+
+		// Remember to free resources when finished
+		DestroyPath(out_path);
+
+		// At this point, out_path_member has also been destroyed, so we set this to nullptr
+		out_path_member = nullptr;
+	}
+
+	TEST(_PathfinderCInterface, DestroyPath) {
+		// Requires #include "pathfinder_C.h", #include "graph.h", #include "path.h", #include "path_finder.h"
+
+		// Create a Graph g, and compress it.
+		HF::SpatialStructures::Graph g;
+		g.addEdge(0, 1, 1);
+		g.addEdge(0, 2, 2);
+		g.addEdge(1, 3, 3);
+		g.addEdge(2, 4, 1);
+		g.addEdge(3, 4, 5);
+		g.Compress();
+
+		// Create a boostGraph from g
+		auto boostGraph = HF::Pathfinding::CreateBoostGraph(g);
+
+		HF::SpatialStructures::Path* out_path = nullptr;
+		HF::SpatialStructures::PathMember* out_path_member = nullptr;
+		int out_size = -1;
+
+		CreatePath(&g, 0, 4, &out_size, &out_path, &out_path_member);
+
+		// Use out_path, out_path_member
+
+		// Remember to free resources when finished
+		DestroyPath(out_path);
+
+		// At this point, out_path_member has also been destroyed, so we set this to nullptr
+		out_path_member = nullptr;
+	}
+}
