@@ -170,6 +170,7 @@ This function will likely not be very useful elsewhere since most of its functio
 \DoxyCodeLine{total = 0.0f;}
 \DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} val : values) \mbox{\hyperlink{a00275_abd3ed7f9595c30784ca668bf886a8d77}{Aggregate}}(total, val, \mbox{\hyperlink{a00275_a0a616a205221414bf7aa28966b461deca4905ac9d6a22bdfc1ae096094ce6248d}{AGGREGATE\_TYPE::COUNT}});}
 \DoxyCodeLine{std::cerr << \textcolor{stringliteral}{"Count: "} << total << std::endl;}
+\DoxyCodeLine{ASSERT\_EQ(total, 5);}
 \end{DoxyCode}
 
 \end{DoxyParagraph}
@@ -179,10 +180,10 @@ This function will likely not be very useful elsewhere since most of its functio
 {\ttfamily $>$$>$$>$ Min\+: 1}~\newline
 {\ttfamily $>$$>$$>$ Count\+: 5}~\newline
  \begin{DoxyRefDesc}{Todo}
-\item[\mbox{\hyperlink{a00263__todo000012}{Todo}}]Min/\+Max and maybe the other functions should handle Na\+Ns for min/max to signal that no value already exists. The user can use the min and max numeric limits or zero for defaults like in the example, but it would be great to be able to use one value that would be reliably handled as default input for every case. \end{DoxyRefDesc}
+\item[\mbox{\hyperlink{a00264__todo000001}{Todo}}]Min/\+Max and maybe the other functions should handle Na\+Ns for min/max to signal that no value already exists. The user can use the min and max numeric limits or zero for defaults like in the example, but it would be great to be able to use one value that would be reliably handled as default input for every case. \end{DoxyRefDesc}
 
 
-Definition at line 200 of file view\+\_\+analysis.\+h.
+Definition at line 198 of file view\+\_\+analysis.\+h.
 
 
 
@@ -227,7 +228,7 @@ Referenced by Fibbonacci\+Dist().
 {\footnotesize\ttfamily bool H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+Cap\+Altitude (\begin{DoxyParamCaption}\item[{std\+::array$<$ float, 3 $>$ \&}]{vec,  }\item[{float}]{max\+\_\+angle,  }\item[{float}]{min\+\_\+angle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 \begin{DoxyRefDesc}{Deprecated}
-\item[\mbox{\hyperlink{a00264__deprecated000006}{Deprecated}}]Used in a failed attempt to map phi to the min and max angle. This idea was faulty and resulted in points that were not equally distributed. \end{DoxyRefDesc}
+\item[\mbox{\hyperlink{a00263__deprecated000001}{Deprecated}}]Used in a failed attempt to map phi to the min and max angle. This idea was faulty and resulted in points that were not equally distributed. \end{DoxyRefDesc}
 
 
 Definition at line 52 of file view\+\_\+analysis.\+cpp.
@@ -332,7 +333,7 @@ Conduct view analysis with hardcoded embree raytracer
 A vector of rayrequests containing the output
 \end{DoxyReturn}
 \begin{DoxyRefDesc}{Deprecated}
-\item[\mbox{\hyperlink{a00264__deprecated000010}{Deprecated}}]Not implemented. Use Spherical\+Rayshoot\+With\+Any\+R\+T\+For\+Distance instead. \end{DoxyRefDesc}
+\item[\mbox{\hyperlink{a00263__deprecated000005}{Deprecated}}]Not implemented. Use Spherical\+Rayshoot\+With\+Any\+R\+T\+For\+Distance instead. \end{DoxyRefDesc}
 \mbox{\Hypertarget{a00275_aad7b55a42de41fa5c917c68c7019ac1f}\label{a00275_aad7b55a42de41fa5c917c68c7019ac1f}} 
 \index{HF::AnalysisMethods::ViewAnalysis@{HF::AnalysisMethods::ViewAnalysis}!SphericalViewAnalysisFromRayRequests@{SphericalViewAnalysisFromRayRequests}}
 \index{SphericalViewAnalysisFromRayRequests@{SphericalViewAnalysisFromRayRequests}!HF::AnalysisMethods::ViewAnalysis@{HF::AnalysisMethods::ViewAnalysis}}
@@ -340,7 +341,7 @@ A vector of rayrequests containing the output
 {\footnotesize\ttfamily vector$<$vector$<$\mbox{\hyperlink{a01167}{Full\+Ray\+Request}}$>$ $>$ H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+Spherical\+View\+Analysis\+From\+Ray\+Requests (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01163}{Embree\+Ray\+Tracer}} \&}]{ert,  }\item[{const vector$<$ \mbox{\hyperlink{a01203}{Node}} $>$ \&}]{nodes,  }\item[{int}]{max\+\_\+rays,  }\item[{float}]{height }\end{DoxyParamCaption})}
 
 \begin{DoxyRefDesc}{Deprecated}
-\item[\mbox{\hyperlink{a00264__deprecated000008}{Deprecated}}]. Never used. Not even defined in the header \end{DoxyRefDesc}
+\item[\mbox{\hyperlink{a00263__deprecated000003}{Deprecated}}]. Never used. Not even defined in the header \end{DoxyRefDesc}
 
 
 Definition at line 186 of file view\+\_\+analysis.\+cpp.
@@ -356,7 +357,7 @@ References Fibbonacci\+Distribute\+Points(), and H\+F\+::\+Ray\+Tracer\+::\+Embr
 {\footnotesize\ttfamily std\+::vector$<$float$>$ H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+Spherical\+View\+Analysis\+With\+Distance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01163}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&}]{ert,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$}]{Nodes,  }\item[{int}]{max\+\_\+rays,  }\item[{float}]{height }\end{DoxyParamCaption})}
 
 \begin{DoxyRefDesc}{Deprecated}
-\item[\mbox{\hyperlink{a00264__deprecated000007}{Deprecated}}]. Never used, never implemented. \end{DoxyRefDesc}
+\item[\mbox{\hyperlink{a00263__deprecated000002}{Deprecated}}]. Never used, never implemented. \end{DoxyRefDesc}
 
 
 Definition at line 180 of file view\+\_\+analysis.\+cpp.
@@ -386,4 +387,4 @@ Conduct view analysis and get ray requests as the result
 A vector of rayrequests containing the output
 \end{DoxyReturn}
 \begin{DoxyRefDesc}{Deprecated}
-\item[\mbox{\hyperlink{a00264__deprecated000009}{Deprecated}}]Suceeded by Spherical\+View\+Analysis. \end{DoxyRefDesc}
+\item[\mbox{\hyperlink{a00263__deprecated000004}{Deprecated}}]Suceeded by Spherical\+View\+Analysis. \end{DoxyRefDesc}

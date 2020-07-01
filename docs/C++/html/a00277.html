@@ -143,9 +143,9 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <div class="textblock"><p>Contains no information about the ray itself, </p>
-<dl class="deprecated"><dt><b><a class="el" href="a00264.html#_deprecated000023">Deprecated:</a></b></dt><dd>Never used. Leftover from partially implemented experimental feature. This eventually became the <a class="el" href="a01219.html" title="The result of firing a ray at an object. Contains distance to the hitpoint and the ID of the mesh.">RayResult</a> struct seen in the C-interface. Moving the <a class="el" href="a01219.html" title="The result of firing a ray at an object. Contains distance to the hitpoint and the ID of the mesh.">RayResult</a> struct to the C interface was far more useful than what could be accomplished here, since it allowed the Cinterface and its clients to define their own RayRequest structs that could be filled through templates. </dd></dl>
+<dl class="deprecated"><dt><b><a class="el" href="a00263.html#_deprecated000018">Deprecated:</a></b></dt><dd>Never used. Leftover from partially implemented experimental feature. This eventually became the <a class="el" href="a01219.html" title="The result of firing a ray at an object. Contains distance to the hitpoint and the ID of the mesh.">RayResult</a> struct seen in the C-interface. Moving the <a class="el" href="a01219.html" title="The result of firing a ray at an object. Contains distance to the hitpoint and the ID of the mesh.">RayResult</a> struct to the C interface was far more useful than what could be accomplished here, since it allowed the Cinterface and its clients to define their own RayRequest structs that could be filled through templates. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="a00128_source.html#l00119">119</a> of file <a class="el" href="a00128_source.html">RayRequest.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00128_source.html#l00055">55</a> of file <a class="el" href="a00128_source.html">RayRequest.h</a>.</p>
 </div>
 </div>
 </div>
@@ -282,7 +282,7 @@ z</td>
   </table>
   </dd>
 </dl>
-<dl class="todo"><dt><b><a class="el" href="a00263.html#_todo000030">Todo:</a></b></dt><dd>May be faster as a std::move or std::copy. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="a00264.html#_todo000019">Todo:</a></b></dt><dd>May be faster as a std::move or std::copy. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="a00119_source.html#l00201">201</a> of file <a class="el" href="a00119_source.html">embree_raytracer.cpp</a>.</p>
 
@@ -323,7 +323,7 @@ template&lt;typename P , typename D &gt; </div>
 </div><div class="memdoc">
 
 <p>Calculate the hitpoint of a ray from its origin, direction and distance </p>
-<dl class="deprecated"><dt><b><a class="el" href="a00264.html#_deprecated000013">Deprecated:</a></b></dt><dd>Unused. </dd></dl>
+<dl class="deprecated"><dt><b><a class="el" href="a00263.html#_deprecated000008">Deprecated:</a></b></dt><dd>Unused. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="a00119_source.html#l00027">27</a> of file <a class="el" href="a00119_source.html">embree_raytracer.cpp</a>.</p>
 
@@ -430,7 +430,7 @@ template&lt;typename P , typename D &gt; </div>
 </div><div class="memdoc">
 
 <p>Generate a set of equally distributed directions in sphere. </p>
-<dl class="deprecated"><dt><b><a class="el" href="a00264.html#_deprecated000018">Deprecated:</a></b></dt><dd>Use the version in view analysis </dd></dl>
+<dl class="deprecated"><dt><b><a class="el" href="a00263.html#_deprecated000013">Deprecated:</a></b></dt><dd>Use the version in view analysis </dd></dl>
 <p>The directions from this function are better distributed than those of <a class="el" href="a00277.html#a03d93804b73bd4a5d8ab8e679e5b28cd" title="Generate a vector of directions to distribute rays in 360 degrees.">genSphereRays</a>. The implementation of this function is based on <a href="https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere">https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -439,7 +439,7 @@ template&lt;typename P , typename D &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>An array of equally spaced directions. </dd></dl>
-<dl class="deprecated"><dt><b><a class="el" href="a00264.html#_deprecated000020">Deprecated:</a></b></dt><dd>Use the version in ViewAnalysis </dd></dl>
+<dl class="deprecated"><dt><b><a class="el" href="a00263.html#_deprecated000015">Deprecated:</a></b></dt><dd>Use the version in ViewAnalysis </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="a00119_source.html#l00114">114</a> of file <a class="el" href="a00119_source.html">embree_raytracer.cpp</a>.</p>
 
@@ -472,7 +472,7 @@ template&lt;typename P , typename D &gt; </div>
 </div><div class="memdoc">
 
 <p>Generate a vector of directions to distribute rays in 360 degrees. </p>
-<dl class="deprecated"><dt><b><a class="el" href="a00264.html#_deprecated000017">Deprecated:</a></b></dt><dd>Use the version in ViewAnalysis. </dd></dl>
+<dl class="deprecated"><dt><b><a class="el" href="a00263.html#_deprecated000012">Deprecated:</a></b></dt><dd>Use the version in ViewAnalysis. </dd></dl>
 <p>This algorithm is from the old python codebase. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -481,7 +481,7 @@ template&lt;typename P , typename D &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>An array of directions distributed in a sphere. </dd></dl>
-<dl class="deprecated"><dt><b><a class="el" href="a00264.html#_deprecated000019">Deprecated:</a></b></dt><dd>Use the version in ViewAnalysis </dd></dl>
+<dl class="deprecated"><dt><b><a class="el" href="a00263.html#_deprecated000014">Deprecated:</a></b></dt><dd>Use the version in ViewAnalysis </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="a00119_source.html#l00087">87</a> of file <a class="el" href="a00119_source.html">embree_raytracer.cpp</a>.</p>
 
@@ -511,7 +511,7 @@ template&lt;typename P , typename D &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="deprecated"><dt><b><a class="el" href="a00264.html#_deprecated000014">Deprecated:</a></b></dt><dd>Use the version in ViewAnalysis. </dd></dl>
+<dl class="deprecated"><dt><b><a class="el" href="a00263.html#_deprecated000009">Deprecated:</a></b></dt><dd>Use the version in ViewAnalysis. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="a00119_source.html#l00059">59</a> of file <a class="el" href="a00119_source.html">embree_raytracer.cpp</a>.</p>
 
@@ -556,7 +556,7 @@ template&lt;typename P , typename D &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="deprecated"><dt><b><a class="el" href="a00264.html#_deprecated000016">Deprecated:</a></b></dt><dd>Use the version in ViewAnalysis. </dd></dl>
+<dl class="deprecated"><dt><b><a class="el" href="a00263.html#_deprecated000011">Deprecated:</a></b></dt><dd>Use the version in ViewAnalysis. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="a00119_source.html#l00071">71</a> of file <a class="el" href="a00119_source.html">embree_raytracer.cpp</a>.</p>
 
@@ -585,7 +585,7 @@ template&lt;typename P , typename D &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="deprecated"><dt><b><a class="el" href="a00264.html#_deprecated000015">Deprecated:</a></b></dt><dd>Use the version in ViewAnalysis. </dd></dl>
+<dl class="deprecated"><dt><b><a class="el" href="a00263.html#_deprecated000010">Deprecated:</a></b></dt><dd>Use the version in ViewAnalysis. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="a00119_source.html#l00065">65</a> of file <a class="el" href="a00119_source.html">embree_raytracer.cpp</a>.</p>
 
@@ -643,7 +643,7 @@ template&lt;typename P , typename D &gt; </div>
   </dd>
 </dl>
 <p>Internally, this uses a hashmap to create an index map of vertices.</p>
-<dl class="todo"><dt><b><a class="el" href="a00263.html#_todo000029">Todo:</a></b></dt><dd>Performance here can be improved by using indexing. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="a00264.html#_todo000018">Todo:</a></b></dt><dd>Performance here can be improved by using indexing. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="a00119_source.html#l00151">151</a> of file <a class="el" href="a00119_source.html">embree_raytracer.cpp</a>.</p>
 

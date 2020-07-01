@@ -1,0 +1,1320 @@
+\hypertarget{a01097}{}\doxysection{HF\+::Spatial\+Structures\+::Graph Class Reference}
+\label{a01097}\index{HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}}
+
+
+A \mbox{\hyperlink{a00171}{HF}} \mbox{\hyperlink{a01097}{Graph}} similar to the one stored in python Invariants\+: 1) Always stores a valid graph 2) Every node added will be assigned a unique ID  
+
+
+
+
+{\ttfamily \#include $<$graph.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01097_af8225b5596508853ec637e72873a45cb}{Graph}} (const std\+::vector$<$ std\+::vector$<$ int $>$$>$ \&edges, const std\+::vector$<$ std\+::vector$<$ float $>$$>$ \&distances, const std\+::vector$<$ \mbox{\hyperlink{a01101}{Node}} $>$ \&\mbox{\hyperlink{a01097_aa70347b8a33b57c6f0a72d6eca4248d7}{Nodes}})
+\begin{DoxyCompactList}\small\item\em Construct a graph from a list of nodes and edges. This is faster than just using the add\+Edge method \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01097_ad5456486f43b49867082946106542f09}{Graph}} ()
+\item 
+bool \mbox{\hyperlink{a01097_af00121404a647b0d619f201cf9ebc797}{Has\+Edge}} (const std\+::array$<$ float, 3 $>$ \&parent, const std\+::array$<$ float, 3 $>$ \&child, bool undirected=false) const
+\begin{DoxyCompactList}\small\item\em Determine if the graph has an edge with this parent and child, by constructing temporary \mbox{\hyperlink{a01101}{Node}} (using the params parent and child) and calling the member function overload of Has\+Edge that accepts (const \mbox{\hyperlink{a01101}{Node}} \&). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01097_affca013028fca6ac730f3f313744500b}{Has\+Edge}} (const \mbox{\hyperlink{a01101}{Node}} \&parent, const \mbox{\hyperlink{a01101}{Node}} \&child, const bool undirected=false) const
+\begin{DoxyCompactList}\small\item\em Determine if the graph has an edge with this parent and child, using references to \mbox{\hyperlink{a01101}{Node}} \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01097_aae29b0f69f0fff53113b7f968a128796}{Has\+Edge}} (int parent, int child, bool undirected=false) const
+\begin{DoxyCompactList}\small\item\em Determine if the graph has an edge with this parent and child, using the integer identifiers for nodes \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{a01101}{Node}} $>$ \mbox{\hyperlink{a01097_aa70347b8a33b57c6f0a72d6eca4248d7}{Nodes}} () const
+\begin{DoxyCompactList}\small\item\em Get a list of nodes from the graph sorted by ID \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{a01081}{Edge}} $>$ \mbox{\hyperlink{a01097_a9f521e01db7e3c038ab2c1fac09b67df}{Get\+Undirected\+Edges}} (const \mbox{\hyperlink{a01101}{Node}} \&N) const
+\begin{DoxyCompactList}\small\item\em Get a list of edges to and from node N \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{a00174_a01089}{Edge\+Set}} $>$ \mbox{\hyperlink{a01097_a1a26ebb794b444e2214cf0b0fed5a529}{Get\+Edges}} () const
+\begin{DoxyCompactList}\small\item\em Get every edge/node in the given graph as I\+Ds \end{DoxyCompactList}\item 
+std\+::vector$<$ float $>$ \mbox{\hyperlink{a01097_a3285be5da987692e0b3671f49d67d21b}{Aggregate\+Graph}} (\mbox{\hyperlink{a00174_a6b23c0b2531c78f6d5049873c184f4f9}{C\+O\+S\+T\+\_\+\+A\+G\+G\+R\+E\+G\+A\+TE}} agg\+\_\+type, bool directed=true) const
+\begin{DoxyCompactList}\small\item\em Generate an ordered list of scores for the graph \end{DoxyCompactList}\item 
+const std\+::vector$<$ \mbox{\hyperlink{a01081}{Edge}} $>$ \mbox{\hyperlink{a01097_a7c2ea4fda7d310b500456ff14527bab9}{operator\mbox{[}$\,$\mbox{]}}} (const \mbox{\hyperlink{a01101}{Node}} \&n) const
+\begin{DoxyCompactList}\small\item\em Get a list of edges for the given node \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a01097_a604a648f1f73d687ad4544d2ac163212}{add\+Edge}} (const \mbox{\hyperlink{a01101}{Node}} \&parent, const \mbox{\hyperlink{a01101}{Node}} \&child, float score=1.\+0f)
+\begin{DoxyCompactList}\small\item\em Construct a new edge for the graph from parent and child pair. If the parent is not in the graph as a key then it will be added \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a01097_afa04fa06b0802acd9eebe46a8c7a1787}{add\+Edge}} (int parent\+\_\+id, int child\+\_\+id, float score)
+\begin{DoxyCompactList}\small\item\em Construct a new edge for the graph using parent and child I\+Ds. If the parent\+\_\+id is not in the graph as a key, it will be added \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01097_a4de020064d58c4ab376a26c30be863a3}{has\+Key}} (const \mbox{\hyperlink{a01101}{Node}} \&n) const
+\begin{DoxyCompactList}\small\item\em Tell whether or not the graph has the given node in it as a parent \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ \mbox{\hyperlink{a01097_aeddbbec01c6354b7076f47f71fc1a220}{Nodes\+As\+Float3}} () const
+\begin{DoxyCompactList}\small\item\em Get a list of nodes as arrays of floats \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{a01097_a2710af2a75976862d7a235793567d2f3}{size}} () const
+\begin{DoxyCompactList}\small\item\em Determine how many nodes are in the graph \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{a01097_af59beedafb4af0ee99d54761e1c681fc}{get\+ID}} (const \mbox{\hyperlink{a01101}{Node}} \&node) const
+\begin{DoxyCompactList}\small\item\em Retrieve the ID for the given node. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a01097_a41cece77d0eee98df39ecc6d3a366ec8}{Compress}} ()
+\begin{DoxyCompactList}\small\item\em Compress the graph, significantly reducing memory usage, but disabling insertion. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01093}{C\+S\+R\+Ptrs}} \mbox{\hyperlink{a01097_afccd105c93a826bde0457449f774fd04}{Get\+C\+S\+R\+Pointers}} ()
+\begin{DoxyCompactList}\small\item\em Obtain pointers to the 3 arrays of the C\+SR, as well as any extra info that may be necesary to use the C\+SR in another language. This will automatically compress the graph if it isn\textquotesingle{}t compressed already \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01101}{Node}} \mbox{\hyperlink{a01097_a794c342603cefb342fdc698ba539b25f}{Node\+From\+ID}} (int id) const
+\begin{DoxyCompactList}\small\item\em Retrieve the node that corresponds to id \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a01097_a994dbd15119eb6548d2e15f4de4b88a6}{Clear}} ()
+\begin{DoxyCompactList}\small\item\em Clear all nodes and edges in the graph. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a01097_a313eb2f8a0f5edcb2bd4b6f6b03af428}{Generate\+Cross\+Slope}} ()
+\begin{DoxyCompactList}\small\item\em Calculate cross slope for the given graph \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a01097_a890e0f6603eca56c4c70772d5b559d53}{Generate\+Energy}} ()
+\begin{DoxyCompactList}\small\item\em Calculate energy for the given graph \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{a01097_afca147a681e4b39bc471e02d0f07eb37}{get\+Or\+Assign\+ID}} (const \mbox{\hyperlink{a01101}{Node}} \&input\+\_\+node)
+\begin{DoxyCompactList}\small\item\em Get the unique ID for this x, y, z position. If one does not exist yet for this node then assign it one. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{a01097_a133b6f44ac90ed6135752e32482b70f5}{get\+Or\+Assign\+ID}} (int input\+\_\+int)
+\begin{DoxyCompactList}\small\item\em Get the unique ID for this x, y, z position. If one does not exist yet for this node then assign it one. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01097_a902d654a1c1b6d391c27c6c2bd618bbc}{check\+For\+Edge}} (int parent, int child) const
+\begin{DoxyCompactList}\small\item\em Iterate through every edge in parent to find child. Returns when child is found \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a01097_a3640461d4c1d1ff55dd200fd5670bf9c}{Update\+I\+Ds}} (int new\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Add an empty node for this new id \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{a01101}{Node}} $>$ \mbox{\hyperlink{a01097_ad59ab7164b64e3d78b7032b28c2c6663}{ordered\+\_\+nodes}}
+\begin{DoxyCompactList}\small\item\em A ordered list of nodes with ids. \end{DoxyCompactList}\item 
+std\+::vector$<$ int $>$ \mbox{\hyperlink{a01097_ab6515ac2323a16e27adab7b20561a649}{id\+\_\+to\+\_\+nodes}}
+\begin{DoxyCompactList}\small\item\em a list that indexes ordered\+\_\+nodes with ids \end{DoxyCompactList}\item 
+robin\+\_\+hood\+::unordered\+\_\+map$<$ \mbox{\hyperlink{a01101}{Node}}, int $>$ \mbox{\hyperlink{a01097_a4da5e288f03773d18053c82731369b2a}{idmap}}
+\begin{DoxyCompactList}\small\item\em Maps a list of X,Y,Z positions to ids. \end{DoxyCompactList}\item 
+Eigen\+::\+Sparse\+Matrix$<$ float, 1 $>$ \mbox{\hyperlink{a01097_a77d4522c02692328c767ff439ca6511a}{edge\+\_\+matrix}}
+\begin{DoxyCompactList}\small\item\em Contains all edges between nodes. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{a01097_aaab13304c641df6fdcd3662d5c54dc78}{next\+\_\+id}} = 0
+\begin{DoxyCompactList}\small\item\em The ID of the next unique node. \end{DoxyCompactList}\item 
+std\+::vector$<$ Eigen\+::\+Triplet$<$ float $>$ $>$ \mbox{\hyperlink{a01097_a1cf07c256da74c2a03f81b4977364e85}{triplets}}
+\begin{DoxyCompactList}\small\item\em vector of Triplet, type float \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01097_a1cbd600663187d7cf985e9b6e7cea73f}{needs\+\_\+compression}} = true
+\begin{DoxyCompactList}\small\item\em The C\+SR is inaccurate and requires compression. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A \mbox{\hyperlink{a00171}{HF}} \mbox{\hyperlink{a01097}{Graph}} similar to the one stored in python Invariants\+: 1) Always stores a valid graph 2) Every node added will be assigned a unique ID 
+
+
+
+Definition at line 80 of file graph.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{a01097_af8225b5596508853ec637e72873a45cb}\label{a01097_af8225b5596508853ec637e72873a45cb}} 
+\index{HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}!Graph@{Graph}}
+\index{Graph@{Graph}!HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}}
+\doxysubsubsection{\texorpdfstring{Graph()}{Graph()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Graph (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::vector$<$ int $>$$>$ \&}]{edges,  }\item[{const std\+::vector$<$ std\+::vector$<$ float $>$$>$ \&}]{distances,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{a01101}{Node}} $>$ \&}]{Nodes }\end{DoxyParamCaption})}
+
+
+
+Construct a graph from a list of nodes and edges. This is faster than just using the add\+Edge method 
+
+
+\begin{DoxyParams}{Parameters}
+{\em edges} & The desired edges for \mbox{\hyperlink{a01097}{Graph}}, in the form of an adjacency matrix (reference)\\
+\hline
+{\em distances} & The desired distances for \mbox{\hyperlink{a01097}{Graph}}, following the form of param edges (reference)\\
+\hline
+{\em Nodes} & A vector of \mbox{\hyperlink{a01101}{Node}} for \mbox{\hyperlink{a01097}{Graph}} (reference)\\
+\hline
+\end{DoxyParams}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "graph.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the nodes}}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_0(1.0f, 1.0f, 2.0f);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_1(2.0f, 3.0f, 4.0f, 5);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_2(11.0f, 22.0f, 140.0f);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a container (vector) of nodes}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::Node> nodes = \{ node\_0, node\_1, node\_2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create matrices for edges and distances, edges.size() == distances().size()}}
+\DoxyCodeLine{std::vector<std::vector<int>> edges = \{ \{ 1, 2 \}, \{ 2 \}, \{ 1 \} \};}
+\DoxyCodeLine{std::vector<std::vector<float>> distances = \{ \{ 1.0f, 2.5f \}, \{ 54.0f \}, \{ 39.0f \} \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Now you can create a Graph -\/ note that nodes, edges, and distances are passed by reference}}
+\DoxyCodeLine{\mbox{\hyperlink{a01097}{HF::SpatialStructures::Graph}} graph(edges, distances, nodes);}
+\end{DoxyCode}
+ 
+
+Definition at line 230 of file graph.\+cpp.
+
+\mbox{\Hypertarget{a01097_ad5456486f43b49867082946106542f09}\label{a01097_ad5456486f43b49867082946106542f09}} 
+\index{HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}!Graph@{Graph}}
+\index{Graph@{Graph}!HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}}
+\doxysubsubsection{\texorpdfstring{Graph()}{Graph()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Graph (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "graph.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a01097}{HF::SpatialStructures::Graph}} graph;     \textcolor{comment}{// This represents an order-\/zero graph (null graph)}}
+\DoxyCodeLine{                                        \textcolor{comment}{// It lacks vertices and edges.}}
+\end{DoxyCode}
+ 
+
+Definition at line 173 of file graph.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a01097_a604a648f1f73d687ad4544d2ac163212}\label{a01097_a604a648f1f73d687ad4544d2ac163212}} 
+\index{HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}!addEdge@{addEdge}}
+\index{addEdge@{addEdge}!HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}}
+\doxysubsubsection{\texorpdfstring{addEdge()}{addEdge()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void H\+F\+::\+Spatial\+Structures\+::\+Graph\+::add\+Edge (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01101}{Node}} \&}]{parent,  }\item[{const \mbox{\hyperlink{a01101}{Node}} \&}]{child,  }\item[{float}]{score = {\ttfamily 1.0f} }\end{DoxyParamCaption})}
+
+
+
+Construct a new edge for the graph from parent and child pair. If the parent is not in the graph as a key then it will be added 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & The parent node to add to\\
+\hline
+{\em child} & The child node to add as an edge\\
+\hline
+{\em score} & The score for the given edge\\
+\hline
+\end{DoxyParams}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "graph.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the nodes}}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_0(1.0f, 1.0f, 2.0f);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_1(2.0f, 3.0f, 4.0f, 5);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_2(11.0f, 22.0f, 140.0f);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a container (vector) of nodes}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::Node> nodes = \{ node\_0, node\_1, node\_2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create matrices for edges and distances, edges.size() == distances().size()}}
+\DoxyCodeLine{std::vector<std::vector<int>> edges = \{ \{ 1, 2 \}, \{ 2 \}, \{ 1 \} \};}
+\DoxyCodeLine{std::vector<std::vector<float>> distances = \{ \{ 1.0f, 2.5f \}, \{ 54.0f \}, \{ 39.0f \} \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Now you can create a Graph -\/ note that nodes, edges, and distances are passed by reference}}
+\DoxyCodeLine{\textcolor{comment}{// Note: graph is compressed upon instantiation}}
+\DoxyCodeLine{\mbox{\hyperlink{a01097}{HF::SpatialStructures::Graph}} graph(edges, distances, nodes);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a pair of nodes}}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} n\_parent(4.0f, 5.0f, 6.0f);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} n\_child(7.0f, 8.0f, 9.0f);}
+\DoxyCodeLine{}
+\DoxyCodeLine{graph.\mbox{\hyperlink{a01097_a604a648f1f73d687ad4544d2ac163212}{addEdge}}(n\_parent, n\_child);   \textcolor{comment}{// default score is 1.0f}}
+\end{DoxyCode}
+ 
+
+Definition at line 158 of file graph.\+cpp.
+
+
+
+Referenced by Add\+Edge\+From\+Node\+I\+Ds(), Add\+Edge\+From\+Nodes(), H\+F\+::\+Analysis\+Methods\+::\+Graph\+Generator\+Private\+::\+Crawl\+Geom(), and H\+F\+::\+Analysis\+Methods\+::\+Graph\+Generator\+Private\+::\+Crawl\+Geom\+Parallel().
+
+\mbox{\Hypertarget{a01097_afa04fa06b0802acd9eebe46a8c7a1787}\label{a01097_afa04fa06b0802acd9eebe46a8c7a1787}} 
+\index{HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}!addEdge@{addEdge}}
+\index{addEdge@{addEdge}!HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}}
+\doxysubsubsection{\texorpdfstring{addEdge()}{addEdge()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void H\+F\+::\+Spatial\+Structures\+::\+Graph\+::add\+Edge (\begin{DoxyParamCaption}\item[{int}]{parent\+\_\+id,  }\item[{int}]{child\+\_\+id,  }\item[{float}]{score }\end{DoxyParamCaption})}
+
+
+
+Construct a new edge for the graph using parent and child I\+Ds. If the parent\+\_\+id is not in the graph as a key, it will be added 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent\+\_\+id} & The ID of the parent node for the edge to construct\\
+\hline
+{\em child\+\_\+id} & The ID of the child node for the edge to construct\\
+\hline
+{\em score} & The score for the given edge\\
+\hline
+\end{DoxyParams}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "graph.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the nodes}}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_0(1.0f, 1.0f, 2.0f, 4);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_1(2.0f, 3.0f, 4.0f, 5);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_2(11.0f, 22.0f, 140.0f, 6);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a container (vector) of nodes}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::Node> nodes = \{ node\_0, node\_1, node\_2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create matrices for edges and distances, edges.size() == distances().size()}}
+\DoxyCodeLine{std::vector<std::vector<int>> edges = \{ \{ 1, 2 \}, \{ 2 \}, \{ 1 \} \};}
+\DoxyCodeLine{std::vector<std::vector<float>> distances = \{ \{ 1.0f, 2.5f \}, \{ 54.0f \}, \{ 39.0f \} \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Now you can create a Graph -\/ note that nodes, edges, and distances are passed by reference}}
+\DoxyCodeLine{\textcolor{comment}{// Note: graph is compressed upon instantiation}}
+\DoxyCodeLine{\mbox{\hyperlink{a01097}{HF::SpatialStructures::Graph}} graph(edges, distances, nodes);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int} parent = 1;}
+\DoxyCodeLine{\textcolor{keywordtype}{int} child = 2;}
+\DoxyCodeLine{}
+\DoxyCodeLine{graph.\mbox{\hyperlink{a01097_a604a648f1f73d687ad4544d2ac163212}{addEdge}}(parent, child, 1.0f);}
+\DoxyCodeLine{graph.\mbox{\hyperlink{a01097_a41cece77d0eee98df39ecc6d3a366ec8}{Compress}}();}
+\end{DoxyCode}
+ 
+
+Definition at line 169 of file graph.\+cpp.
+
+\mbox{\Hypertarget{a01097_a3285be5da987692e0b3671f49d67d21b}\label{a01097_a3285be5da987692e0b3671f49d67d21b}} 
+\index{HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}!AggregateGraph@{AggregateGraph}}
+\index{AggregateGraph@{AggregateGraph}!HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}}
+\doxysubsubsection{\texorpdfstring{AggregateGraph()}{AggregateGraph()}}
+{\footnotesize\ttfamily std\+::vector$<$ float $>$ H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Aggregate\+Graph (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a00174_a6b23c0b2531c78f6d5049873c184f4f9}{C\+O\+S\+T\+\_\+\+A\+G\+G\+R\+E\+G\+A\+TE}}}]{agg\+\_\+type,  }\item[{bool}]{directed = {\ttfamily true} }\end{DoxyParamCaption}) const}
+
+
+
+Generate an ordered list of scores for the graph 
+
+
+\begin{DoxyParams}{Parameters}
+{\em agg\+\_\+type} & 0 for S\+UM, 1 for A\+V\+E\+R\+A\+GE, 2 for C\+O\+U\+NT\\
+\hline
+{\em directed} & if graph is directed or not, default is true\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a vector of type float of the edge costs
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "graph.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the nodes}}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_0(1.0f, 1.0f, 2.0f);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_1(2.0f, 3.0f, 4.0f, 5);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_2(11.0f, 22.0f, 140.0f);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a container (vector) of nodes}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::Node> nodes = \{ node\_0, node\_1, node\_2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create matrices for edges and distances, edges.size() == distances().size()}}
+\DoxyCodeLine{std::vector<std::vector<int>> edges = \{ \{ 1, 2 \}, \{ 2 \}, \{ 1 \} \};}
+\DoxyCodeLine{std::vector<std::vector<float>> distances = \{ \{ 1.0f, 2.5f \}, \{ 54.0f \}, \{ 39.0f \} \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Now you can create a Graph -\/ note that nodes, edges, and distances are passed by reference}}
+\DoxyCodeLine{\textcolor{comment}{// Note: graph is compressed upon instantiation}}
+\DoxyCodeLine{\mbox{\hyperlink{a01097}{HF::SpatialStructures::Graph}} graph(edges, distances, nodes);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// graph must be compressed, or a exception will be thrown}}
+\DoxyCodeLine{\mbox{\hyperlink{a00174_a6b23c0b2531c78f6d5049873c184f4f9}{HF::SpatialStructures::COST\_AGGREGATE}} aggregate = \mbox{\hyperlink{a00174_a6b23c0b2531c78f6d5049873c184f4f9a16de38737a9f8366e9b2042b4e9b6290}{HF::SpatialStructures::COST\_AGGREGATE::AVERAGE}};       \textcolor{comment}{// aggregate == 1 in this case}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// directed parameter may be true or false}}
+\DoxyCodeLine{std::vector<float> aggregate\_graph = graph.\mbox{\hyperlink{a01097_a3285be5da987692e0b3671f49d67d21b}{AggregateGraph}}(aggregate, \textcolor{keyword}{true}); }
+\end{DoxyCode}
+ 
+
+Definition at line 115 of file graph.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Aggregate().
+
+
+
+Referenced by Aggregate\+Costs().
+
+\mbox{\Hypertarget{a01097_a902d654a1c1b6d391c27c6c2bd618bbc}\label{a01097_a902d654a1c1b6d391c27c6c2bd618bbc}} 
+\index{HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}!checkForEdge@{checkForEdge}}
+\index{checkForEdge@{checkForEdge}!HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}}
+\doxysubsubsection{\texorpdfstring{checkForEdge()}{checkForEdge()}}
+{\footnotesize\ttfamily bool H\+F\+::\+Spatial\+Structures\+::\+Graph\+::check\+For\+Edge (\begin{DoxyParamCaption}\item[{int}]{parent,  }\item[{int}]{child }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Iterate through every edge in parent to find child. Returns when child is found 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{TODO example}
+\end{DoxyCode}
+ 
+
+Definition at line 178 of file graph.\+cpp.
+
+\mbox{\Hypertarget{a01097_a994dbd15119eb6548d2e15f4de4b88a6}\label{a01097_a994dbd15119eb6548d2e15f4de4b88a6}} 
+\index{HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}!Clear@{Clear}}
+\index{Clear@{Clear}!HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}}
+\doxysubsubsection{\texorpdfstring{Clear()}{Clear()}}
+{\footnotesize\ttfamily void H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Clear all nodes and edges in the graph. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "graph.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the nodes}}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_0(1.0f, 1.0f, 2.0f, 4);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_1(2.0f, 3.0f, 4.0f, 5);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_2(11.0f, 22.0f, 140.0f, 6);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a container (vector) of nodes}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::Node> nodes = \{ node\_0, node\_1, node\_2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create matrices for edges and distances, edges.size() == distances().size()}}
+\DoxyCodeLine{std::vector<std::vector<int>> edges = \{ \{ 1, 2 \}, \{ 2 \}, \{ 1 \} \};}
+\DoxyCodeLine{std::vector<std::vector<float>> distances = \{ \{ 1.0f, 2.5f \}, \{ 54.0f \}, \{ 39.0f \} \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Now you can create a Graph -\/ note that nodes, edges, and distances are passed by reference}}
+\DoxyCodeLine{\textcolor{comment}{// Note: graph is compressed upon instantiation}}
+\DoxyCodeLine{\mbox{\hyperlink{a01097}{HF::SpatialStructures::Graph}} graph(edges, distances, nodes);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// If we want to remove all nodes and edges from graph, we may do so with Clear:}}
+\DoxyCodeLine{graph.\mbox{\hyperlink{a01097_a994dbd15119eb6548d2e15f4de4b88a6}{Clear}}();                      \textcolor{comment}{// edge\_matrix is zeroed out, buffer is squeezed,}}
+\DoxyCodeLine{                                    \textcolor{comment}{// triplets are also cleared, and needs\_compression == true}}
+\end{DoxyCode}
+ 
+
+Definition at line 305 of file graph.\+cpp.
+
+
+
+Referenced by Clear\+Graph().
+
+\mbox{\Hypertarget{a01097_a41cece77d0eee98df39ecc6d3a366ec8}\label{a01097_a41cece77d0eee98df39ecc6d3a366ec8}} 
+\index{HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}!Compress@{Compress}}
+\index{Compress@{Compress}!HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}}
+\doxysubsubsection{\texorpdfstring{Compress()}{Compress()}}
+{\footnotesize\ttfamily void H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Compress (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Compress the graph, significantly reducing memory usage, but disabling insertion. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "graph.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the nodes}}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_0(1.0f, 1.0f, 2.0f, 4);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_1(2.0f, 3.0f, 4.0f, 5);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_2(11.0f, 22.0f, 140.0f, 6);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a container (vector) of nodes}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::Node> nodes = \{ node\_0, node\_1, node\_2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create matrices for edges and distances, edges.size() == distances().size()}}
+\DoxyCodeLine{std::vector<std::vector<int>> edges = \{ \{ 1, 2 \}, \{ 2 \}, \{ 1 \} \};}
+\DoxyCodeLine{std::vector<std::vector<float>> distances = \{ \{ 1.0f, 2.5f \}, \{ 54.0f \}, \{ 39.0f \} \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Now you can create a Graph -\/ note that nodes, edges, and distances are passed by reference}}
+\DoxyCodeLine{\textcolor{comment}{// Note: graph is compressed upon instantiation}}
+\DoxyCodeLine{\mbox{\hyperlink{a01097}{HF::SpatialStructures::Graph}} graph(edges, distances, nodes);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a pair of nodes}}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} n\_parent(4.0f, 5.0f, 6.0f);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} n\_child(7.0f, 8.0f, 9.0f);}
+\DoxyCodeLine{}
+\DoxyCodeLine{graph.\mbox{\hyperlink{a01097_a604a648f1f73d687ad4544d2ac163212}{addEdge}}(n\_parent, n\_child);   \textcolor{comment}{// default score is 1.0f}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// In order to use GetEdges, or AggregateGraph, we must compress our graph instance}}
+\DoxyCodeLine{graph.\mbox{\hyperlink{a01097_a41cece77d0eee98df39ecc6d3a366ec8}{Compress}}();                       \textcolor{comment}{// GetEdges and AggregateGraph are now usable}}
+\end{DoxyCode}
+ 
+
+Definition at line 295 of file graph.\+cpp.
+
+
+
+Referenced by Compress().
+
+\mbox{\Hypertarget{a01097_a313eb2f8a0f5edcb2bd4b6f6b03af428}\label{a01097_a313eb2f8a0f5edcb2bd4b6f6b03af428}} 
+\index{HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}!GenerateCrossSlope@{GenerateCrossSlope}}
+\index{GenerateCrossSlope@{GenerateCrossSlope}!HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}}
+\doxysubsubsection{\texorpdfstring{GenerateCrossSlope()}{GenerateCrossSlope()}}
+{\footnotesize\ttfamily void H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Generate\+Cross\+Slope (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Calculate cross slope for the given graph 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// TODO example -\/ code commented out in graph.cpp}}
+\end{DoxyCode}
+ \mbox{\Hypertarget{a01097_a890e0f6603eca56c4c70772d5b559d53}\label{a01097_a890e0f6603eca56c4c70772d5b559d53}} 
+\index{HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}!GenerateEnergy@{GenerateEnergy}}
+\index{GenerateEnergy@{GenerateEnergy}!HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}}
+\doxysubsubsection{\texorpdfstring{GenerateEnergy()}{GenerateEnergy()}}
+{\footnotesize\ttfamily void H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Generate\+Energy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Calculate energy for the given graph 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// TODO example -\/ code commented out in graph.cpp}}
+\end{DoxyCode}
+ \mbox{\Hypertarget{a01097_afccd105c93a826bde0457449f774fd04}\label{a01097_afccd105c93a826bde0457449f774fd04}} 
+\index{HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}!GetCSRPointers@{GetCSRPointers}}
+\index{GetCSRPointers@{GetCSRPointers}!HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}}
+\doxysubsubsection{\texorpdfstring{GetCSRPointers()}{GetCSRPointers()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01093}{C\+S\+R\+Ptrs}} H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Get\+C\+S\+R\+Pointers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Obtain pointers to the 3 arrays of the C\+SR, as well as any extra info that may be necesary to use the C\+SR in another language. This will automatically compress the graph if it isn\textquotesingle{}t compressed already 
+
+\begin{DoxyReturn}{Returns}
+An instance of a struct \mbox{\hyperlink{a01093}{C\+S\+R\+Ptrs}}, using the member field edge\+\_\+matrix
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "graph.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the nodes}}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_0(1.0f, 1.0f, 2.0f, 4);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_1(2.0f, 3.0f, 4.0f, 5);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_2(11.0f, 22.0f, 140.0f, 6);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a container (vector) of nodes}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::Node> nodes = \{ node\_0, node\_1, node\_2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create matrices for edges and distances, edges.size() == distances().size()}}
+\DoxyCodeLine{std::vector<std::vector<int>> edges = \{ \{ 1, 2 \}, \{ 2 \}, \{ 1 \} \};}
+\DoxyCodeLine{std::vector<std::vector<float>> distances = \{ \{ 1.0f, 2.5f \}, \{ 54.0f \}, \{ 39.0f \} \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Now you can create a Graph -\/ note that nodes, edges, and distances are passed by reference}}
+\DoxyCodeLine{\textcolor{comment}{// Note: graph is compressed upon instantiation}}
+\DoxyCodeLine{\mbox{\hyperlink{a01097}{HF::SpatialStructures::Graph}} graph(edges, distances, nodes);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a pair of nodes}}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} n\_parent(4.0f, 5.0f, 6.0f);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} n\_child(7.0f, 8.0f, 9.0f);}
+\DoxyCodeLine{}
+\DoxyCodeLine{graph.\mbox{\hyperlink{a01097_a604a648f1f73d687ad4544d2ac163212}{addEdge}}(n\_parent, n\_child);   \textcolor{comment}{// default score is 1.0f}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Graph will be compressed automatically be GetCSRPointers}}
+\DoxyCodeLine{CSRPtrs returned\_csr = graph.\mbox{\hyperlink{a01097_afccd105c93a826bde0457449f774fd04}{GetCSRPointers}}();}
+\end{DoxyCode}
+ 
+
+Definition at line 30 of file graph.\+cpp.
+
+
+
+References Compress().
+
+
+
+Referenced by Get\+C\+S\+R\+Pointers().
+
+\mbox{\Hypertarget{a01097_a1a26ebb794b444e2214cf0b0fed5a529}\label{a01097_a1a26ebb794b444e2214cf0b0fed5a529}} 
+\index{HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}!GetEdges@{GetEdges}}
+\index{GetEdges@{GetEdges}!HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}}
+\doxysubsubsection{\texorpdfstring{GetEdges()}{GetEdges()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{a00174_a01089}{Edge\+Set}} $>$ H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Get\+Edges (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get every edge/node in the given graph as I\+Ds 
+
+\begin{DoxyReturn}{Returns}
+A list of \mbox{\hyperlink{a00174_a01089}{Edge\+Set}} (\mbox{\hyperlink{a01097}{Graph}} in the form of I\+Ds)
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "graph.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the nodes}}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_0(1.0f, 1.0f, 2.0f);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_1(2.0f, 3.0f, 4.0f, 5);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_2(11.0f, 22.0f, 140.0f);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a container (vector) of nodes}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::Node> nodes = \{ node\_0, node\_1, node\_2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create matrices for edges and distances, edges.size() == distances().size()}}
+\DoxyCodeLine{std::vector<std::vector<int>> edges = \{ \{ 1, 2 \}, \{ 2 \}, \{ 1 \} \};}
+\DoxyCodeLine{std::vector<std::vector<float>> distances = \{ \{ 1.0f, 2.5f \}, \{ 54.0f \}, \{ 39.0f \} \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Now you can create a Graph -\/ note that nodes, edges, and distances are passed by reference}}
+\DoxyCodeLine{\textcolor{comment}{// Note: graph is compressed upon instantiation}}
+\DoxyCodeLine{\mbox{\hyperlink{a01097}{HF::SpatialStructures::Graph}} graph(edges, distances, nodes);    }
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// graph must be compressed, or a exception will be thrown}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// To brief, an EdgeSet has the following layout:}}
+\DoxyCodeLine{\textcolor{comment}{//      struct EdgeSet \{}}
+\DoxyCodeLine{\textcolor{comment}{//          int parent;}}
+\DoxyCodeLine{\textcolor{comment}{//          std::vector<IntEdge> children;}}
+\DoxyCodeLine{\textcolor{comment}{//      \};}}
+\DoxyCodeLine{\textcolor{comment}{//}}
+\DoxyCodeLine{\textcolor{comment}{//  An IntEdge has the following layout:}}
+\DoxyCodeLine{\textcolor{comment}{//      struct IntEdge \{}}
+\DoxyCodeLine{\textcolor{comment}{//          int child;}}
+\DoxyCodeLine{\textcolor{comment}{//          float weight;}}
+\DoxyCodeLine{\textcolor{comment}{//      \};}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// A std::vector<EdgeSet> is a Graph, in the form of IDs.}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::EdgeSet> edge\_set = graph.\mbox{\hyperlink{a01097_a1a26ebb794b444e2214cf0b0fed5a529}{GetEdges}}();}
+\end{DoxyCode}
+ 
+
+Definition at line 73 of file graph.\+cpp.
+
+
+
+Referenced by H\+F\+::\+Pathfinding\+::\+Boost\+Graph\+::\+Boost\+Graph().
+
+\mbox{\Hypertarget{a01097_af59beedafb4af0ee99d54761e1c681fc}\label{a01097_af59beedafb4af0ee99d54761e1c681fc}} 
+\index{HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}!getID@{getID}}
+\index{getID@{getID}!HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}}
+\doxysubsubsection{\texorpdfstring{getID()}{getID()}}
+{\footnotesize\ttfamily int H\+F\+::\+Spatial\+Structures\+::\+Graph\+::get\+ID (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01101}{Node}} \&}]{node }\end{DoxyParamCaption}) const}
+
+
+
+Retrieve the ID for the given node. 
+
+\begin{DoxyReturn}{Returns}
+The ID assigned to this node. -\/1 if it was not yet added to the graph
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "graph.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the nodes}}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_0(1.0f, 1.0f, 2.0f, 4);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_1(2.0f, 3.0f, 4.0f, 5);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_2(11.0f, 22.0f, 140.0f, 6);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a container (vector) of nodes}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::Node> nodes = \{ node\_0, node\_1, node\_2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create matrices for edges and distances, edges.size() == distances().size()}}
+\DoxyCodeLine{std::vector<std::vector<int>> edges = \{ \{ 1, 2 \}, \{ 2 \}, \{ 1 \} \};}
+\DoxyCodeLine{std::vector<std::vector<float>> distances = \{ \{ 1.0f, 2.5f \}, \{ 54.0f \}, \{ 39.0f \} \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Now you can create a Graph -\/ note that nodes, edges, and distances are passed by reference}}
+\DoxyCodeLine{\textcolor{comment}{// Note: graph is compressed upon instantiation}}
+\DoxyCodeLine{\mbox{\hyperlink{a01097}{HF::SpatialStructures::Graph}} graph(edges, distances, nodes);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} other\_node(55.0f, 66.1f, 15.5f, 9510);  \textcolor{comment}{// Let's construct a Node we know is not in graph.}}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} has\_key = graph.\mbox{\hyperlink{a01097_a4de020064d58c4ab376a26c30be863a3}{hasKey}}(other\_node);                            \textcolor{comment}{// other\_node does not exist in graph, so has\_key == false;}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int} ID = graph.\mbox{\hyperlink{a01097_af59beedafb4af0ee99d54761e1c681fc}{getID}}(other\_node);                                   \textcolor{comment}{// ID will assigned -\/1, because other\_node is not a part of graph.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Likewise, if we pass a Node instance that indeed exists...}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Retrieve the nodes from the graph, or use the original instance of }}
+\DoxyCodeLine{\textcolor{comment}{// std::vector<Node> passed to Graph upon instantiation}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::Node> get\_nodes = graph.\mbox{\hyperlink{a01097_aa70347b8a33b57c6f0a72d6eca4248d7}{Nodes}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// nodes[index] yields an instance of Node that we can pass to hasKey.}}
+\DoxyCodeLine{\textcolor{comment}{// Any node that exists with graph can be passed to this member function}}
+\DoxyCodeLine{\textcolor{comment}{// to determine if the graph has the node's key, or not.}}
+\DoxyCodeLine{\textcolor{keywordtype}{int} index = 2;                  \textcolor{comment}{// we assume for this example that index 2 is valid.}}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} good\_node = get\_nodes[index];}
+\DoxyCodeLine{}
+\DoxyCodeLine{ID = graph.\mbox{\hyperlink{a01097_af59beedafb4af0ee99d54761e1c681fc}{getID}}(good\_node);    \textcolor{comment}{// ID > -\/1, i.e. it is a Node instance that exists within this Graph.}}
+\end{DoxyCode}
+ 
+
+Definition at line 22 of file graph.\+cpp.
+
+
+
+Referenced by Get\+Node\+I\+D().
+
+\mbox{\Hypertarget{a01097_afca147a681e4b39bc471e02d0f07eb37}\label{a01097_afca147a681e4b39bc471e02d0f07eb37}} 
+\index{HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}!getOrAssignID@{getOrAssignID}}
+\index{getOrAssignID@{getOrAssignID}!HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}}
+\doxysubsubsection{\texorpdfstring{getOrAssignID()}{getOrAssignID()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily int H\+F\+::\+Spatial\+Structures\+::\+Graph\+::get\+Or\+Assign\+ID (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01101}{Node}} \&}]{input\+\_\+node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Get the unique ID for this x, y, z position. If one does not exist yet for this node then assign it one. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{TODO example}
+\end{DoxyCode}
+ 
+
+Definition at line 203 of file graph.\+cpp.
+
+\mbox{\Hypertarget{a01097_a133b6f44ac90ed6135752e32482b70f5}\label{a01097_a133b6f44ac90ed6135752e32482b70f5}} 
+\index{HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}!getOrAssignID@{getOrAssignID}}
+\index{getOrAssignID@{getOrAssignID}!HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}}
+\doxysubsubsection{\texorpdfstring{getOrAssignID()}{getOrAssignID()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily int H\+F\+::\+Spatial\+Structures\+::\+Graph\+::get\+Or\+Assign\+ID (\begin{DoxyParamCaption}\item[{int}]{input\+\_\+int }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Get the unique ID for this x, y, z position. If one does not exist yet for this node then assign it one. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{TODO example}
+\end{DoxyCode}
+ 
+
+Definition at line 217 of file graph.\+cpp.
+
+\mbox{\Hypertarget{a01097_a9f521e01db7e3c038ab2c1fac09b67df}\label{a01097_a9f521e01db7e3c038ab2c1fac09b67df}} 
+\index{HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}!GetUndirectedEdges@{GetUndirectedEdges}}
+\index{GetUndirectedEdges@{GetUndirectedEdges}!HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}}
+\doxysubsubsection{\texorpdfstring{GetUndirectedEdges()}{GetUndirectedEdges()}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{a01081}{Edge}} $>$ H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Get\+Undirected\+Edges (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01101}{Node}} \&}]{N }\end{DoxyParamCaption}) const}
+
+
+
+Get a list of edges to and from node N 
+
+
+\begin{DoxyParams}{Parameters}
+{\em N} & The \mbox{\hyperlink{a01101}{Node}} from which the list of edges will be derived\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A list of edges to and from node N
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "graph.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the nodes}}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_0(1.0f, 1.0f, 2.0f);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_1(2.0f, 3.0f, 4.0f, 5);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_2(11.0f, 22.0f, 140.0f);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a container (vector) of nodes}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::Node> nodes = \{ node\_0, node\_1, node\_2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create matrices for edges and distances, edges.size() == distances().size()}}
+\DoxyCodeLine{std::vector<std::vector<int>> edges = \{ \{ 1, 2 \}, \{ 2 \}, \{ 1 \} \};}
+\DoxyCodeLine{std::vector<std::vector<float>> distances = \{ \{ 1.0f, 2.5f \}, \{ 54.0f \}, \{ 39.0f \} \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Now you can create a Graph -\/ note that nodes, edges, and distances are passed by reference}}
+\DoxyCodeLine{\mbox{\hyperlink{a01097}{HF::SpatialStructures::Graph}} graph(edges, distances, nodes);    }
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Retrieve the nodes from the graph, or use the original instance of }}
+\DoxyCodeLine{\textcolor{comment}{// std::vector<HF::SpatialStructures::Node> passed to Graph upon instantiation}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::Node> get\_nodes = graph.\mbox{\hyperlink{a01097_aa70347b8a33b57c6f0a72d6eca4248d7}{Nodes}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// nodes[index] yields an instance of Node that we can pass to GetUndirectedEdges.}}
+\DoxyCodeLine{\textcolor{comment}{// Any node that exists with graph can be passed to this member function}}
+\DoxyCodeLine{\textcolor{comment}{// to retrieve a vector of undirected edges.}}
+\DoxyCodeLine{\textcolor{keywordtype}{int} index = 2;}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::Edge> undirected\_edges = graph.\mbox{\hyperlink{a01097_a9f521e01db7e3c038ab2c1fac09b67df}{GetUndirectedEdges}}(get\_nodes[index]);}
+\end{DoxyCode}
+ 
+
+Definition at line 54 of file graph.\+cpp.
+
+\mbox{\Hypertarget{a01097_affca013028fca6ac730f3f313744500b}\label{a01097_affca013028fca6ac730f3f313744500b}} 
+\index{HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}!HasEdge@{HasEdge}}
+\index{HasEdge@{HasEdge}!HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}}
+\doxysubsubsection{\texorpdfstring{HasEdge()}{HasEdge()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily bool H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Has\+Edge (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01101}{Node}} \&}]{parent,  }\item[{const \mbox{\hyperlink{a01101}{Node}} \&}]{child,  }\item[{const bool}]{undirected = {\ttfamily false} }\end{DoxyParamCaption}) const}
+
+
+
+Determine if the graph has an edge with this parent and child, using references to \mbox{\hyperlink{a01101}{Node}} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & Parent node of edge; u to v, parent is u\\
+\hline
+{\em child} & Child node of edge; u to v, child is v\\
+\hline
+{\em undirected} & true if undirected, false otherwise\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if edge exists with parent and child (\mbox{\hyperlink{a01101}{Node}} \&), false otherwise
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "graph.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the nodes}}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_0(1.0f, 1.0f, 2.0f);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_1(2.0f, 3.0f, 4.0f, 5);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_2(11.0f, 22.0f, 140.0f);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a container (vector) of nodes}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::Node> nodes = \{ node\_0, node\_1, node\_2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create matrices for edges and distances, edges.size() == distances().size()}}
+\DoxyCodeLine{std::vector<std::vector<int>> edges = \{ \{ 1, 2 \}, \{ 2 \}, \{ 1 \} \};}
+\DoxyCodeLine{std::vector<std::vector<float>> distances = \{ \{ 1.0f, 2.5f \}, \{ 54.0f \}, \{ 39.0f \} \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Now you can create a Graph -\/ note that nodes, edges, and distances are passed by reference}}
+\DoxyCodeLine{\mbox{\hyperlink{a01097}{HF::SpatialStructures::Graph}} graph(edges, distances, nodes);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// last argument can be true/false for undirected/directed graph respectively}}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} has\_edge = graph.\mbox{\hyperlink{a01097_af00121404a647b0d619f201cf9ebc797}{HasEdge}}(node\_1, node\_2, \textcolor{keyword}{true});}
+\end{DoxyCode}
+ 
+
+Definition at line 189 of file graph.\+cpp.
+
+\mbox{\Hypertarget{a01097_af00121404a647b0d619f201cf9ebc797}\label{a01097_af00121404a647b0d619f201cf9ebc797}} 
+\index{HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}!HasEdge@{HasEdge}}
+\index{HasEdge@{HasEdge}!HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}}
+\doxysubsubsection{\texorpdfstring{HasEdge()}{HasEdge()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily bool H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Has\+Edge (\begin{DoxyParamCaption}\item[{const std\+::array$<$ float, 3 $>$ \&}]{parent,  }\item[{const std\+::array$<$ float, 3 $>$ \&}]{child,  }\item[{bool}]{undirected = {\ttfamily false} }\end{DoxyParamCaption}) const}
+
+
+
+Determine if the graph has an edge with this parent and child, by constructing temporary \mbox{\hyperlink{a01101}{Node}} (using the params parent and child) and calling the member function overload of Has\+Edge that accepts (const \mbox{\hyperlink{a01101}{Node}} \&). 
+
+\begin{DoxyReturn}{Returns}
+See return for member function overload that accepts (const \mbox{\hyperlink{a01101}{Node}} \&)
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "graph.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the nodes}}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_0(1.0f, 1.0f, 2.0f);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_1(2.0f, 3.0f, 4.0f, 5);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_2(11.0f, 22.0f, 140.0f);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a container (vector) of nodes}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::Node> nodes = \{ node\_0, node\_1, node\_2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create matrices for edges and distances, edges.size() == distances().size()}}
+\DoxyCodeLine{std::vector<std::vector<int>> edges = \{ \{ 1, 2 \}, \{ 2 \}, \{ 1 \} \};}
+\DoxyCodeLine{std::vector<std::vector<float>> distances = \{ \{ 1.0f, 2.5f \}, \{ 54.0f \}, \{ 39.0f \} \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Now you can create a Graph -\/ note that nodes, edges, and distances are passed by reference}}
+\DoxyCodeLine{\mbox{\hyperlink{a01097}{HF::SpatialStructures::Graph}} graph(edges, distances, nodes);                                      }
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Prepare \{x, y, z\} coordinates (positions)}}
+\DoxyCodeLine{\textcolor{keyword}{auto} parent\_pos = node\_1.getArray();        \textcolor{comment}{// (2.0, 3.0, 4.0)}}
+\DoxyCodeLine{\textcolor{keyword}{auto} child\_pos = node\_2.getArray();         \textcolor{comment}{// (11.0, 22.0, 140.0)}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// last argument can be true/false for undirected/directed graph respectively}}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} has\_edge = graph.\mbox{\hyperlink{a01097_af00121404a647b0d619f201cf9ebc797}{HasEdge}}(parent\_pos, child\_pos, \textcolor{keyword}{true});}
+\end{DoxyCode}
+ 
+
+Definition at line 260 of file graph.\+cpp.
+
+\mbox{\Hypertarget{a01097_aae29b0f69f0fff53113b7f968a128796}\label{a01097_aae29b0f69f0fff53113b7f968a128796}} 
+\index{HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}!HasEdge@{HasEdge}}
+\index{HasEdge@{HasEdge}!HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}}
+\doxysubsubsection{\texorpdfstring{HasEdge()}{HasEdge()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily bool H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Has\+Edge (\begin{DoxyParamCaption}\item[{int}]{parent,  }\item[{int}]{child,  }\item[{bool}]{undirected = {\ttfamily false} }\end{DoxyParamCaption}) const}
+
+
+
+Determine if the graph has an edge with this parent and child, using the integer identifiers for nodes 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & Identifier for parent node (integer)\\
+\hline
+{\em child} & Identifier for child node (integer)\\
+\hline
+{\em undirected} & True if undirected graph, false otherwise. False by default.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if check\+For\+Edge(parent, child), or undirected \&\& check\+For\+Edge(child, parent), false otherwise
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "graph.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the nodes}}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_0(1.0f, 1.0f, 2.0f);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_1(2.0f, 3.0f, 4.0f, 5);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_2(11.0f, 22.0f, 140.0f);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a container (vector) of nodes}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::Node> nodes = \{ node\_0, node\_1, node\_2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create matrices for edges and distances, edges.size() == distances().size()}}
+\DoxyCodeLine{std::vector<std::vector<int>> edges = \{ \{ 1, 2 \}, \{ 2 \}, \{ 1 \} \};}
+\DoxyCodeLine{std::vector<std::vector<float>> distances = \{ \{ 1.0f, 2.5f \}, \{ 54.0f \}, \{ 39.0f \} \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Now you can create a Graph -\/ note that nodes, edges, and distances are passed by reference}}
+\DoxyCodeLine{\mbox{\hyperlink{a01097}{HF::SpatialStructures::Graph}} graph(edges, distances, nodes);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// last argument can be true/false for undirected/directed graph respectively}}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} has\_edge = graph.\mbox{\hyperlink{a01097_af00121404a647b0d619f201cf9ebc797}{HasEdge}}(0, 1, \textcolor{keyword}{true});}
+\end{DoxyCode}
+ 
+
+Definition at line 185 of file graph.\+cpp.
+
+\mbox{\Hypertarget{a01097_a4de020064d58c4ab376a26c30be863a3}\label{a01097_a4de020064d58c4ab376a26c30be863a3}} 
+\index{HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}!hasKey@{hasKey}}
+\index{hasKey@{hasKey}!HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}}
+\doxysubsubsection{\texorpdfstring{hasKey()}{hasKey()}}
+{\footnotesize\ttfamily bool H\+F\+::\+Spatial\+Structures\+::\+Graph\+::has\+Key (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01101}{Node}} \&}]{n }\end{DoxyParamCaption}) const}
+
+
+
+Tell whether or not the graph has the given node in it as a parent 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & \mbox{\hyperlink{a01101}{Node}} to check for\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the node exists, false otherwise
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "graph.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the nodes}}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_0(1.0f, 1.0f, 2.0f, 4);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_1(2.0f, 3.0f, 4.0f, 5);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_2(11.0f, 22.0f, 140.0f, 6);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a container (vector) of nodes}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::Node> nodes = \{ node\_0, node\_1, node\_2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create matrices for edges and distances, edges.size() == distances().size()}}
+\DoxyCodeLine{std::vector<std::vector<int>> edges = \{ \{ 1, 2 \}, \{ 2 \}, \{ 1 \} \};}
+\DoxyCodeLine{std::vector<std::vector<float>> distances = \{ \{ 1.0f, 2.5f \}, \{ 54.0f \}, \{ 39.0f \} \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Now you can create a Graph -\/ note that nodes, edges, and distances are passed by reference}}
+\DoxyCodeLine{\textcolor{comment}{// Note: graph is compressed upon instantiation}}
+\DoxyCodeLine{\mbox{\hyperlink{a01097}{HF::SpatialStructures::Graph}} graph(edges, distances, nodes);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} other\_node(55.0f, 66.1f, 15.5f, 9510);  \textcolor{comment}{// Let's construct a Node we know is not in graph.}}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} has\_key = graph.\mbox{\hyperlink{a01097_a4de020064d58c4ab376a26c30be863a3}{hasKey}}(other\_node);    \textcolor{comment}{// other\_node does not exist in graph, so has\_key == false;}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Likewise, if we pass a Node instance that indeed exists...}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Retrieve the nodes from the graph, or use the original instance of }}
+\DoxyCodeLine{\textcolor{comment}{// std::vector<Node> passed to Graph upon instantiation}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::Node> get\_nodes = graph.\mbox{\hyperlink{a01097_aa70347b8a33b57c6f0a72d6eca4248d7}{Nodes}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// nodes[index] yields an instance of Node that we can pass to hasKey.}}
+\DoxyCodeLine{\textcolor{comment}{// Any node that exists with graph can be passed to this member function}}
+\DoxyCodeLine{\textcolor{comment}{// to determine if the graph has the node's key, or not.}}
+\DoxyCodeLine{\textcolor{keywordtype}{int} index = 2;}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} good\_node = get\_nodes[index];}
+\DoxyCodeLine{}
+\DoxyCodeLine{has\_key = graph.\mbox{\hyperlink{a01097_a4de020064d58c4ab376a26c30be863a3}{hasKey}}(good\_node);      \textcolor{comment}{// now has\_key is true}}
+\end{DoxyCode}
+ 
+
+Definition at line 267 of file graph.\+cpp.
+
+\mbox{\Hypertarget{a01097_a794c342603cefb342fdc698ba539b25f}\label{a01097_a794c342603cefb342fdc698ba539b25f}} 
+\index{HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}!NodeFromID@{NodeFromID}}
+\index{NodeFromID@{NodeFromID}!HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}}
+\doxysubsubsection{\texorpdfstring{NodeFromID()}{NodeFromID()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01101}{Node}} H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Node\+From\+ID (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption}) const}
+
+
+
+Retrieve the node that corresponds to id 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The id for the desired node\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The node corresponding to id, by value
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "graph.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the nodes}}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_0(1.0f, 1.0f, 2.0f, 4);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_1(2.0f, 3.0f, 4.0f, 5);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_2(11.0f, 22.0f, 140.0f, 6);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a container (vector) of nodes}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::Node> nodes = \{ node\_0, node\_1, node\_2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create matrices for edges and distances, edges.size() == distances().size()}}
+\DoxyCodeLine{std::vector<std::vector<int>> edges = \{ \{ 1, 2 \}, \{ 2 \}, \{ 1 \} \};}
+\DoxyCodeLine{std::vector<std::vector<float>> distances = \{ \{ 1.0f, 2.5f \}, \{ 54.0f \}, \{ 39.0f \} \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Now you can create a Graph -\/ note that nodes, edges, and distances are passed by reference}}
+\DoxyCodeLine{\textcolor{comment}{// Note: graph is compressed upon instantiation}}
+\DoxyCodeLine{\mbox{\hyperlink{a01097}{HF::SpatialStructures::Graph}} graph(edges, distances, nodes);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Let's retrieve node\_1.}}
+\DoxyCodeLine{\textcolor{keywordtype}{int} desired\_node\_id = 2;}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_from\_id = graph.\mbox{\hyperlink{a01097_a794c342603cefb342fdc698ba539b25f}{NodeFromID}}(desired\_node\_id);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Note that NodeFromID ceases to work if the id argument provided does not exist as an ID among}}
+\DoxyCodeLine{\textcolor{comment}{// the nodes within graph}}
+\end{DoxyCode}
+ 
+
+Definition at line 48 of file graph.\+cpp.
+
+\mbox{\Hypertarget{a01097_aa70347b8a33b57c6f0a72d6eca4248d7}\label{a01097_aa70347b8a33b57c6f0a72d6eca4248d7}} 
+\index{HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}!Nodes@{Nodes}}
+\index{Nodes@{Nodes}!HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}}
+\doxysubsubsection{\texorpdfstring{Nodes()}{Nodes()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{a01101}{Node}} $>$ H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Nodes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get a list of nodes from the graph sorted by ID 
+
+\begin{DoxyReturn}{Returns}
+A sorted vector of nodes
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "graph.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the nodes}}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_0(1.0f, 1.0f, 2.0f);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_1(2.0f, 3.0f, 4.0f, 5);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_2(11.0f, 22.0f, 140.0f);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a container (vector) of nodes}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::Node> nodes = \{ node\_0, node\_1, node\_2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create matrices for edges and distances, edges.size() == distances().size()}}
+\DoxyCodeLine{std::vector<std::vector<int>> edges = \{ \{ 1, 2 \}, \{ 2 \}, \{ 1 \} \};}
+\DoxyCodeLine{std::vector<std::vector<float>> distances = \{ \{ 1.0f, 2.5f \}, \{ 54.0f \}, \{ 39.0f \} \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Now you can create a Graph -\/ note that nodes, edges, and distances are passed by reference}}
+\DoxyCodeLine{\mbox{\hyperlink{a01097}{HF::SpatialStructures::Graph}} graph(edges, distances, nodes);    }
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Nodes() returns a copy of the ordered\_nodes field}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::Node> nodes\_from\_graph = graph.\mbox{\hyperlink{a01097_aa70347b8a33b57c6f0a72d6eca4248d7}{Nodes}}();}
+\end{DoxyCode}
+ 
+
+Definition at line 50 of file graph.\+cpp.
+
+
+
+Referenced by H\+F\+::\+Pathfinding\+::\+Boost\+Graph\+::\+Boost\+Graph(), Generate\+Graph(), and Get\+All\+Nodes\+From\+Graph().
+
+\mbox{\Hypertarget{a01097_aeddbbec01c6354b7076f47f71fc1a220}\label{a01097_aeddbbec01c6354b7076f47f71fc1a220}} 
+\index{HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}!NodesAsFloat3@{NodesAsFloat3}}
+\index{NodesAsFloat3@{NodesAsFloat3}!HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}}
+\doxysubsubsection{\texorpdfstring{NodesAsFloat3()}{NodesAsFloat3()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Nodes\+As\+Float3 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get a list of nodes as arrays of floats 
+
+\begin{DoxyReturn}{Returns}
+A list of floats for each position of every node in the graph 
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "graph.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the nodes}}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_0(1.0f, 1.0f, 2.0f, 4);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_1(2.0f, 3.0f, 4.0f, 5);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_2(11.0f, 22.0f, 140.0f, 6);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a container (vector) of nodes}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::Node> nodes = \{ node\_0, node\_1, node\_2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create matrices for edges and distances, edges.size() == distances().size()}}
+\DoxyCodeLine{std::vector<std::vector<int>> edges = \{ \{ 1, 2 \}, \{ 2 \}, \{ 1 \} \};}
+\DoxyCodeLine{std::vector<std::vector<float>> distances = \{ \{ 1.0f, 2.5f \}, \{ 54.0f \}, \{ 39.0f \} \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Now you can create a Graph -\/ note that nodes, edges, and distances are passed by reference}}
+\DoxyCodeLine{\textcolor{comment}{// Note: graph is compressed upon instantiation}}
+\DoxyCodeLine{\mbox{\hyperlink{a01097}{HF::SpatialStructures::Graph}} graph(edges, distances, nodes);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// A container of std::array<float, 3> is constructed and populated within}}
+\DoxyCodeLine{\textcolor{comment}{// NodesAsFloat3, and returned. Each array of 3 floats represents a Node's position}}
+\DoxyCodeLine{\textcolor{comment}{// within the Cartesian coordinate system. \{ x, y, z \}}}
+\DoxyCodeLine{std::vector<std::array<float, 3>> nodes\_as\_floats = graph.\mbox{\hyperlink{a01097_aeddbbec01c6354b7076f47f71fc1a220}{NodesAsFloat3}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// The two loops below will yield the same output}}
+\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keyword}{auto} n : graph.\mbox{\hyperlink{a01097_aa70347b8a33b57c6f0a72d6eca4248d7}{Nodes}}()) \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"("} << n.x << \textcolor{stringliteral}{","} << n.y << \textcolor{stringliteral}{","} << n.z << \textcolor{stringliteral}{")"} << std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keyword}{auto} a : nodes\_as\_floats) \{}
+\DoxyCodeLine{    std::cout << a << std::endl;}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+ This yields the intended output
+
+Definition at line 269 of file graph.\+cpp.
+
+\mbox{\Hypertarget{a01097_a7c2ea4fda7d310b500456ff14527bab9}\label{a01097_a7c2ea4fda7d310b500456ff14527bab9}} 
+\index{HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily const std\+::vector$<$ \mbox{\hyperlink{a01081}{Edge}} $>$ H\+F\+::\+Spatial\+Structures\+::\+Graph\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01101}{Node}} \&}]{n }\end{DoxyParamCaption}) const}
+
+
+
+Get a list of edges for the given node 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & \mbox{\hyperlink{a01101}{Node}} from which a list of edges will be derived\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A copy of the graph\textquotesingle{}s list
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::outofrange} & Thrown if the requested object is not in the dictionary\\
+\hline
+\end{DoxyExceptions}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "graph.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the nodes}}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_0(1.0f, 1.0f, 2.0f);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_1(2.0f, 3.0f, 4.0f, 5);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_2(11.0f, 22.0f, 140.0f);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a container (vector) of nodes}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::Node> nodes = \{ node\_0, node\_1, node\_2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create matrices for edges and distances, edges.size() == distances().size()}}
+\DoxyCodeLine{std::vector<std::vector<int>> edges = \{ \{ 1, 2 \}, \{ 2 \}, \{ 1 \} \};}
+\DoxyCodeLine{std::vector<std::vector<float>> distances = \{ \{ 1.0f, 2.5f \}, \{ 54.0f \}, \{ 39.0f \} \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Now you can create a Graph -\/ note that nodes, edges, and distances are passed by reference}}
+\DoxyCodeLine{\textcolor{comment}{// Note: graph is compressed upon instantiation}}
+\DoxyCodeLine{\mbox{\hyperlink{a01097}{HF::SpatialStructures::Graph}} graph(edges, distances, nodes);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Retrieve the nodes from the graph, or use the original instance of }}
+\DoxyCodeLine{\textcolor{comment}{// std::vector<Node> passed to Graph upon instantiation}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::Node> get\_nodes = graph.\mbox{\hyperlink{a01097_aa70347b8a33b57c6f0a72d6eca4248d7}{Nodes}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// nodes[index] yields an instance of Node that we can pass to GetUndirectedEdges.}}
+\DoxyCodeLine{\textcolor{comment}{// Any node that exists with graph can be passed to this member function}}
+\DoxyCodeLine{\textcolor{comment}{// to retrieve a vector of edges.}}
+\DoxyCodeLine{\textcolor{keywordtype}{int} index = 2;}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node = get\_nodes[index];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Note that if node does not exist within graph, that an exception will be thrown.}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::Edge> undirected\_edges = graph[node];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// See a (node)-\/>(child\_node\_0, child\_node\_1, ... child\_node\_n)}}
+\DoxyCodeLine{std::cout << node.\mbox{\hyperlink{a01101_a51c4642674d54d02b8600f7ffeb45670}{getArray}}() << \textcolor{stringliteral}{"-\/>"};}
+\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keyword}{auto} e : undirected\_edges) \{}
+\DoxyCodeLine{    std::cout << e.child.getArray() << \textcolor{stringliteral}{", "};}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{std::cout << std::endl;}
+\end{DoxyCode}
+ 
+
+Definition at line 143 of file graph.\+cpp.
+
+\mbox{\Hypertarget{a01097_a2710af2a75976862d7a235793567d2f3}\label{a01097_a2710af2a75976862d7a235793567d2f3}} 
+\index{HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}!size@{size}}
+\index{size@{size}!HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily int H\+F\+::\+Spatial\+Structures\+::\+Graph\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Determine how many nodes are in the graph 
+
+\begin{DoxyReturn}{Returns}
+An int displaying how many nodes are in the graph (id\+\_\+to\+\_\+nodes.\+size())
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "graph.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the nodes}}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_0(1.0f, 1.0f, 2.0f, 4);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_1(2.0f, 3.0f, 4.0f, 5);}
+\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_2(11.0f, 22.0f, 140.0f, 6);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a container (vector) of nodes}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::Node> nodes = \{ node\_0, node\_1, node\_2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create matrices for edges and distances, edges.size() == distances().size()}}
+\DoxyCodeLine{std::vector<std::vector<int>> edges = \{ \{ 1, 2 \}, \{ 2 \}, \{ 1 \} \};}
+\DoxyCodeLine{std::vector<std::vector<float>> distances = \{ \{ 1.0f, 2.5f \}, \{ 54.0f \}, \{ 39.0f \} \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Now you can create a Graph -\/ note that nodes, edges, and distances are passed by reference}}
+\DoxyCodeLine{\textcolor{comment}{// Note: graph is compressed upon instantiation}}
+\DoxyCodeLine{\mbox{\hyperlink{a01097}{HF::SpatialStructures::Graph}} graph(edges, distances, nodes);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int} id\_count = graph.\mbox{\hyperlink{a01097_a2710af2a75976862d7a235793567d2f3}{size}}();          \textcolor{comment}{// We retrieve the size of the node id count within graph (3)}}
+\end{DoxyCode}
+ 
+
+Definition at line 20 of file graph.\+cpp.
+
+
+
+Referenced by H\+F\+::\+Pathfinding\+::\+Boost\+Graph\+::\+Boost\+Graph().
+
+\mbox{\Hypertarget{a01097_a3640461d4c1d1ff55dd200fd5670bf9c}\label{a01097_a3640461d4c1d1ff55dd200fd5670bf9c}} 
+\index{HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}!UpdateIDs@{UpdateIDs}}
+\index{UpdateIDs@{UpdateIDs}!HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}}
+\doxysubsubsection{\texorpdfstring{UpdateIDs()}{UpdateIDs()}}
+{\footnotesize\ttfamily void H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Update\+I\+Ds (\begin{DoxyParamCaption}\item[{int}]{new\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Add an empty node for this new id 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{TODO example}
+\end{DoxyCode}
+ 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01097_a77d4522c02692328c767ff439ca6511a}\label{a01097_a77d4522c02692328c767ff439ca6511a}} 
+\index{HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}!edge\_matrix@{edge\_matrix}}
+\index{edge\_matrix@{edge\_matrix}!HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}}
+\doxysubsubsection{\texorpdfstring{edge\_matrix}{edge\_matrix}}
+{\footnotesize\ttfamily Eigen\+::\+Sparse\+Matrix$<$float, 1$>$ H\+F\+::\+Spatial\+Structures\+::\+Graph\+::edge\+\_\+matrix\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Contains all edges between nodes. 
+
+
+
+Definition at line 86 of file graph.\+h.
+
+\mbox{\Hypertarget{a01097_ab6515ac2323a16e27adab7b20561a649}\label{a01097_ab6515ac2323a16e27adab7b20561a649}} 
+\index{HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}!id\_to\_nodes@{id\_to\_nodes}}
+\index{id\_to\_nodes@{id\_to\_nodes}!HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}}
+\doxysubsubsection{\texorpdfstring{id\_to\_nodes}{id\_to\_nodes}}
+{\footnotesize\ttfamily std\+::vector$<$int$>$ H\+F\+::\+Spatial\+Structures\+::\+Graph\+::id\+\_\+to\+\_\+nodes\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+a list that indexes ordered\+\_\+nodes with ids 
+
+
+
+Definition at line 84 of file graph.\+h.
+
+\mbox{\Hypertarget{a01097_a4da5e288f03773d18053c82731369b2a}\label{a01097_a4da5e288f03773d18053c82731369b2a}} 
+\index{HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}!idmap@{idmap}}
+\index{idmap@{idmap}!HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}}
+\doxysubsubsection{\texorpdfstring{idmap}{idmap}}
+{\footnotesize\ttfamily robin\+\_\+hood\+::unordered\+\_\+map$<$\mbox{\hyperlink{a01101}{Node}}, int$>$ H\+F\+::\+Spatial\+Structures\+::\+Graph\+::idmap\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Maps a list of X,Y,Z positions to ids. 
+
+
+
+Definition at line 85 of file graph.\+h.
+
+\mbox{\Hypertarget{a01097_a1cbd600663187d7cf985e9b6e7cea73f}\label{a01097_a1cbd600663187d7cf985e9b6e7cea73f}} 
+\index{HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}!needs\_compression@{needs\_compression}}
+\index{needs\_compression@{needs\_compression}!HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}}
+\doxysubsubsection{\texorpdfstring{needs\_compression}{needs\_compression}}
+{\footnotesize\ttfamily bool H\+F\+::\+Spatial\+Structures\+::\+Graph\+::needs\+\_\+compression = true\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The C\+SR is inaccurate and requires compression. 
+
+
+
+Definition at line 89 of file graph.\+h.
+
+\mbox{\Hypertarget{a01097_aaab13304c641df6fdcd3662d5c54dc78}\label{a01097_aaab13304c641df6fdcd3662d5c54dc78}} 
+\index{HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}!next\_id@{next\_id}}
+\index{next\_id@{next\_id}!HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}}
+\doxysubsubsection{\texorpdfstring{next\_id}{next\_id}}
+{\footnotesize\ttfamily int H\+F\+::\+Spatial\+Structures\+::\+Graph\+::next\+\_\+id = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The ID of the next unique node. 
+
+
+
+Definition at line 87 of file graph.\+h.
+
+\mbox{\Hypertarget{a01097_ad59ab7164b64e3d78b7032b28c2c6663}\label{a01097_ad59ab7164b64e3d78b7032b28c2c6663}} 
+\index{HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}!ordered\_nodes@{ordered\_nodes}}
+\index{ordered\_nodes@{ordered\_nodes}!HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}}
+\doxysubsubsection{\texorpdfstring{ordered\_nodes}{ordered\_nodes}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{a01101}{Node}}$>$ H\+F\+::\+Spatial\+Structures\+::\+Graph\+::ordered\+\_\+nodes\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+A ordered list of nodes with ids. 
+
+
+
+Definition at line 83 of file graph.\+h.
+
+\mbox{\Hypertarget{a01097_a1cf07c256da74c2a03f81b4977364e85}\label{a01097_a1cf07c256da74c2a03f81b4977364e85}} 
+\index{HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}!triplets@{triplets}}
+\index{triplets@{triplets}!HF::SpatialStructures::Graph@{HF::SpatialStructures::Graph}}
+\doxysubsubsection{\texorpdfstring{triplets}{triplets}}
+{\footnotesize\ttfamily std\+::vector$<$Eigen\+::\+Triplet$<$float$>$ $>$ H\+F\+::\+Spatial\+Structures\+::\+Graph\+::triplets\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+vector of Triplet, type float 
+
+
+
+Definition at line 88 of file graph.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/spatialstructures/src/\mbox{\hyperlink{a00101}{graph.\+h}}\item 
+Cpp/spatialstructures/src/\mbox{\hyperlink{a00098}{graph.\+cpp}}\end{DoxyCompactItemize}

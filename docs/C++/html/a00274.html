@@ -88,13 +88,13 @@ Namespaces</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01099.html">GraphGenerator</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a graph of accessible space from a given start point.  <a href="a01099.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a graph of all areas accessible from a given start point  <a href="a01099.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01103.html">GraphGeneratorPrivate</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains the private implementation of the <a class="el" href="a01099.html" title="Generate a graph of accessible space from a given start point.">GraphGenerator</a> to insulate the clients from the implementation.  <a href="a01103.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains the private implementation of the graph generator so clients aren't forced to recompile  <a href="a01103.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01107.html">UniqueQueue</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A queue that remembers every object inserted, and prevents the addition of nodes that have already been inserted even if they've been popped.  <a href="a01107.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A queue that ensures every unique object can only enter the queue once  <a href="a01107.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
@@ -114,10 +114,9 @@ Enumerations</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a119aa13054604cc379223a2f424a3a65"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00011.html#ac812385b35e52a68f2eba8435fb7b1bf">std::set</a>&lt; <a class="el" href="a00011.html#a3394fa820b983014dcac29faca0e4f19">std::pair</a>&lt; int, int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00274.html#a119aa13054604cc379223a2f424a3a65">permutations</a> (int limit)</td></tr>
-<tr class="memdesc:a119aa13054604cc379223a2f424a3a65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a set of every permutation for all numbers between 0 and limit.  <a href="a00274.html#a119aa13054604cc379223a2f424a3a65">More...</a><br /></td></tr>
+<tr class="memdesc:a119aa13054604cc379223a2f424a3a65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a set of every permution for 0-limit  <a href="a00274.html#a119aa13054604cc379223a2f424a3a65">More...</a><br /></td></tr>
 <tr class="separator:a119aa13054604cc379223a2f424a3a65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d42b80118c1260844cfa033d20a98f0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00274.html#a8d42b80118c1260844cfa033d20a98f0">fact</a> (int n)</td></tr>
-<tr class="memdesc:a8d42b80118c1260844cfa033d20a98f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Quick factorial oneliner.  <a href="a00274.html#a8d42b80118c1260844cfa033d20a98f0">More...</a><br /></td></tr>
 <tr class="separator:a8d42b80118c1260844cfa033d20a98f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
@@ -138,7 +137,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00008_source.html#l00017">17</a> of file <a class="el" href="a00008_source.html">graph_generator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00008_source.html#l00018">18</a> of file <a class="el" href="a00008_source.html">graph_generator.h</a>.</p>
 
 </div>
 </div>
@@ -156,17 +155,13 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Determines which geometry the ray will collide with. </p>
-<dl class="section remark"><dt>Remarks</dt><dd>Used internally by the <a class="el" href="a01099.html" title="Generate a graph of accessible space from a given start point.">GraphGenerator</a> to determine which type of geometry to collide with when casting a ray. </dd></dl>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ad9c47eeb68b0196bb5b8a24be28b860ca8570052eaa04e37245be1357a2786a0f"></a>FLOORS&#160;</td><td class="fielddoc"><p>Floors only. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="ad9c47eeb68b0196bb5b8a24be28b860cab0364512b19fe75e1929c6741983dace"></a>OBSTACLES&#160;</td><td class="fielddoc"><p>Obstacles only. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="ad9c47eeb68b0196bb5b8a24be28b860ca77cb8d8886aafaff131061767ad5fc30"></a>BOTH&#160;</td><td class="fielddoc"><p>Collide with floors and obstacles. </p>
-</td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ad9c47eeb68b0196bb5b8a24be28b860ca8570052eaa04e37245be1357a2786a0f"></a>FLOORS&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad9c47eeb68b0196bb5b8a24be28b860cab0364512b19fe75e1929c6741983dace"></a>OBSTACLES&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad9c47eeb68b0196bb5b8a24be28b860ca77cb8d8886aafaff131061767ad5fc30"></a>BOTH&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="a00008_source.html#l00029">29</a> of file <a class="el" href="a00008_source.html">graph_generator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00008_source.html#l00023">23</a> of file <a class="el" href="a00008_source.html">graph_generator.h</a>.</p>
 
 </div>
 </div>
@@ -195,10 +190,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Quick factorial oneliner. </p>
-<dl class="deprecated"><dt><b><a class="el" href="a00264.html#_deprecated000001">Deprecated:</a></b></dt><dd>Unused since this file's creation. Possible hold over from the previous codebase. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="a00011_source.html#l00032">32</a> of file <a class="el" href="a00011_source.html">graph_generator_private.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00011_source.html#l00028">28</a> of file <a class="el" href="a00011_source.html">graph_generator_private.cpp</a>.</p>
 
 </div>
 </div>
@@ -218,21 +210,18 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Create a set of every permutation for all numbers between 0 and limit. </p>
-<p>Calculate P(n,r) as an array with each unique permutaton of 2 values being a pair. <br  />
-</p>
+<p>Create a set of every permution for 0-limit </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">limit</td><td>Highest number in the set</td></tr>
+    <tr><td class="paramname">limit</td><td>Max number in the set</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A list of all permutations for numbers 0 to limit.</dd></dl>
-<dl class="todo"><dt><b><a class="el" href="a00263.html#_todo000002">Todo:</a></b></dt><dd>This can be optimized by using indexing instead of pushback. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A list of all permutions for 0-limit</dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="a00011_source.html#l00040">40</a> of file <a class="el" href="a00011_source.html">graph_generator_private.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00011_source.html#l00035">35</a> of file <a class="el" href="a00011_source.html">graph_generator_private.cpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="a00011_source.html#l00271">HF::AnalysisMethods::GraphGeneratorPrivate::CrawlGeom()</a>, and <a class="el" href="a00011_source.html#l00316">HF::AnalysisMethods::GraphGeneratorPrivate::CrawlGeomParallel()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="a00011_source.html#l00220">HF::AnalysisMethods::GraphGeneratorPrivate::CrawlGeom()</a>, and <a class="el" href="a00011_source.html#l00252">HF::AnalysisMethods::GraphGeneratorPrivate::CrawlGeomParallel()</a>.</p>
 
 </div>
 </div>
@@ -257,9 +246,9 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00011_source.html#l00027">27</a> of file <a class="el" href="a00011_source.html">graph_generator_private.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00011_source.html#l00026">26</a> of file <a class="el" href="a00011_source.html">graph_generator_private.cpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="a00011_source.html#l00190">HF::AnalysisMethods::GraphGeneratorPrivate::CheckChildren()</a>, <a class="el" href="a00011_source.html#l00143">HF::AnalysisMethods::GraphGeneratorPrivate::CheckFloor()</a>, <a class="el" href="a00011_source.html#l00105">HF::AnalysisMethods::GraphGeneratorPrivate::CheckStart()</a>, and <a class="el" href="a00011_source.html#l00061">HF::AnalysisMethods::GraphGeneratorPrivate::WalkableCheck()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="a00011_source.html#l00151">HF::AnalysisMethods::GraphGeneratorPrivate::CheckChildren()</a>, <a class="el" href="a00011_source.html#l00115">HF::AnalysisMethods::GraphGeneratorPrivate::CheckFloor()</a>, <a class="el" href="a00011_source.html#l00090">HF::AnalysisMethods::GraphGeneratorPrivate::CheckStart()</a>, and <a class="el" href="a00011_source.html#l00055">HF::AnalysisMethods::GraphGeneratorPrivate::WalkableCheck()</a>.</p>
 
 </div>
 </div>
