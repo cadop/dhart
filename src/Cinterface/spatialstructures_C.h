@@ -53,21 +53,12 @@ namespace HF {
 		AddEdgeFromNodes(g, n2, n0, 5);
 		AddEdgeFromNodes(g, n2, n1, 6);
 
-		// Dynamically allocate space for output parameters that will come from
-		// GetAllNodesFromGraph
 		auto out_vec = new std::vector<HF::SpatialStructures::Node>;
-		auto out_data = new HF::SpatialStructures::Node;
+		HF::SpatialStructures::Node* out_data = nullptr;
 
 		GetAllNodesFromGraph(g, &out_vec, &out_data);
 
-		// Release memory for g, out_vec, and out_data after use
 		DestroyGraph(g);
-		DestroyNodes(out_vec);
-
-		if (out_data) {
-			delete out_data;
-			out_data = nullptr;
-		}
 	\endcode
 */
 C_INTERFACE GetAllNodesFromGraph(
@@ -99,10 +90,10 @@ C_INTERFACE GetEdgesForNode(
 		HF::SpatialStructures::Node n2(0, 1, 2);
 		HF::SpatialStructures::Node n3(1, 2, 3);
 
-		auto node_vec = new std::vector<HF::SpatialStructures::Node>{ n0, n1, n2, n3 };
+		std::vector<HF::SpatialStructures::Node> node_vec{ n0, n1, n2, n3 };
 
 		int node_vec_size = -1;
-		GetSizeOfNodeVector(node_vec, &node_vec_size);
+		GetSizeOfNodeVector(&node_vec, &node_vec_size);
 
 		DestroyNodes(node_vec);
 	\endcode
@@ -159,18 +150,7 @@ C_INTERFACE GetSizeOfEdgeVector(
 		int aggregation_type = 0;
 		AggregateCosts(g, aggregation_type, false, &out_vector, &out_data);
 
-		// Release memory for g, out_vector, and out_data after use
 		DestroyGraph(g);
-
-		if (out_vector) {
-			delete out_vector;
-			out_vector = nullptr;
-
-			if (out_data) {
-				delete out_data;
-				out_data = nullptr;
-			}
-		}
 	\endcode 
 */
 C_INTERFACE AggregateCosts(
