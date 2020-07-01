@@ -14,7 +14,7 @@
 #include <edge.h>
 #include <node.h>
 
-using namespace HF;
+using namespace HF::AnalysisMethods;
 using HF::SpatialStructures::Graph;
 using HF::SpatialStructures::Node;
 using HF::RayTracer::EmbreeRayTracer;
@@ -71,7 +71,7 @@ TEST(_ViewAnalysis, FibbonacciDistributePoints) {
 	int size = 8;
 
 	// For brevity
-	using HF::ViewAnalysis::FibbonacciDistributePoints;
+	using HF::AnalysisMethods::ViewAnalysis::FibbonacciDistributePoints;
 
 	// Generate points without any limitations on fov
 	auto points = FibbonacciDistributePoints(size, 90.0f, 90.0f);
@@ -96,8 +96,8 @@ TEST(_ViewAnalysis, AggregateAverage)
 	// Requires #include <numeric>
 
 	// Use this to save some space.
-	using HF::ViewAnalysis::AGGREGATE_TYPE;
-	using HF::ViewAnalysis::Aggregate;
+	using HF::AnalysisMethods::ViewAnalysis::AGGREGATE_TYPE;
+	using HF::AnalysisMethods::ViewAnalysis::Aggregate;
 
 	// Undef these since they will prevent us from calling numericlimits
 #undef min
@@ -156,7 +156,7 @@ TEST(_ViewAnalysis, SphericalViewAnalysis) {
 	};
 
 	// Use this so we can fit within 80 characters
-	using HF::ViewAnalysis::SphericalViewAnalysis;
+	using HF::AnalysisMethods::ViewAnalysis::SphericalViewAnalysis;
 	using HF::RayTracer::EmbreeRayTracer;
 
 	// Create Plane
@@ -215,8 +215,8 @@ TEST(_ViewAnalysis, SphericalViewAnalysis) {
 
 TEST(_ViewAnalysis, ViewAnalysisAggregate) {
 	// Use this so we can fit within 80 characters
-	using HF::ViewAnalysis::SphericalRayshootWithAnyRTForDistance;
-	using HF::ViewAnalysis::AGGREGATE_TYPE;
+	using HF::AnalysisMethods::ViewAnalysis::SphericalRayshootWithAnyRTForDistance;
+	using HF::AnalysisMethods::ViewAnalysis::AGGREGATE_TYPE;
 
 	// Create Plane
 	const std::vector<float> plane_vertices{
