@@ -306,8 +306,6 @@ C_INTERFACE AddEdgeFromNodeIDs(
 			std::cout << "Graph creation failed" << std::endl;
 		}
 
-		CreateGraph(nullptr, -1, &g);
-
 		float n0[] = { 0, 0, 0 };
 		float n1[] = { 0, 1, 2 };
 		float n2[] = { 0, 1, 3 };
@@ -327,30 +325,7 @@ C_INTERFACE AddEdgeFromNodeIDs(
 
 		// Retrieve the CSR from the graph
 		CSRPtrs csr;
-
-		// Prepare the csr fields
-		const int MAX_SIZE = 16;
-		csr.data = new float[MAX_SIZE];
-		csr.inner_indices = new int[MAX_SIZE];
-		csr.outer_indices = new int[MAX_SIZE];
-
 		GetCSRPointers(g, &csr.nnz, &csr.rows, &csr.cols, &csr.data, &csr.inner_indices, &csr.outer_indices);
-
-		// Release CSR data
-		if (csr.data) {
-			delete csr.data;
-			csr.data = nullptr;
-		}
-
-		if (csr.inner_indices) {
-			delete csr.inner_indices;
-			csr.inner_indices = nullptr;
-		}
-
-		if (csr.outer_indices) {
-			delete csr.outer_indices;
-			csr.outer_indices = nullptr;
-		}
 
 		// Release memory for g after use
 		DestroyGraph(g);
@@ -392,8 +367,6 @@ C_INTERFACE GetCSRPointers(
 		else {
 			std::cout << "Graph creation failed" << std::endl;
 		}
-
-		CreateGraph(nullptr, -1, &g);
 
 		float n0[] = { 0, 0, 0 };
 		float n1[] = { 0, 1, 2 };
@@ -437,8 +410,6 @@ C_INTERFACE GetNodeID(
 			std::cout << "Graph creation failed" << std::endl;
 		}	
 
-		CreateGraph(nullptr, -1, &g);
-
 		float n0[] = { 0, 0, 0 };
 		float n1[] = { 0, 1, 2 };
 		float n2[] = { 0, 1, 3 };
@@ -481,8 +452,6 @@ C_INTERFACE Compress(
 		else {
 			std::cout << "Graph creation failed" << std::endl;
 		}
-
-		CreateGraph(nullptr, -1, &g);
 
 		float n0[] = { 0, 0, 0 };
 		float n1[] = { 0, 1, 2 };
@@ -568,8 +537,6 @@ C_INTERFACE DestroyEdges(
 		else {
 			std::cout << "Graph creation failed" << std::endl;
 		}
-
-		CreateGraph(nullptr, -1, &g);
 
 		// use Graph
 

@@ -9,6 +9,9 @@
 #include <edge.h>
 #include <node.h>
 
+#include "analysis_C.h"
+#include "graph.h"
+
 namespace HF {
 
 	TEST(_GraphGenerator, RunGraphGenerator) {
@@ -51,5 +54,51 @@ namespace HF {
 		ASSERT_TRUE(q.empty());
 		q.push(n1);
 		ASSERT_FALSE(q.empty());
+	}
+}
+
+namespace CInterfaceTests {
+	TEST(_AnalysisCInterface, GenerateGraph) {
+		// Requires #include "analysis_C.h", #include "embree_raytracer.h", #include "graph.h"
+
+		// Create a container of coordinates
+		std::vector<std::array<float, 3>> directions = {
+			{0, 0, 1},
+			{0, 1, 0},
+			{1, 0, 0},
+			{-1, 0, 0},
+			{0, -1, 0},
+			{0, 0, -1},
+		};
+
+		// Create the EmbreeRayTracer
+		auto ert = HF::RayTracer::EmbreeRayTracer(directions);
+
+		// Have a pointer to Graph ready
+		HF::SpatialStructures::Graph* g = nullptr;
+
+		// Prepare parameters
+		float start[] = { 0, 0, 0 };
+		float spacing[] = { 1, 1, 1 };
+		const int max_nodes = 6;
+		const float up_step = 1.5;
+		const float up_slope = 1.0;
+		const float down_step = 2.0;
+		const float down_slope = 0.5;
+		const int maximum_step_connections = 2;
+		const int cores = 4;
+		
+		if (GenerateGraph(&ert, start, spacing, max_nodes, up_step, up_slope, down_step, down_slope, maximum_step_connections, cores, &g)) {
+			std::cout << "GenerateGraph successful" << std::endl;
+		}
+		else {
+			std::cout << "GenerateGraph failed" << std::endl;
+		}
+
+		// Free memory resources once finished with Graph		
+		if (g) {
+			delete g;
+			g = nullptr;
+		}
 	}
 }
