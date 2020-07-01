@@ -15,8 +15,11 @@ namespace HF {
 			if (hashmap[p])
 				return false;
 
+			// Push it to the end of the queue, then 
+			// mark it in the hashmap.
 			node_queue.push(p);
 			hashmap[p] = 1;
+			
 			return true;
 		}
 
@@ -27,15 +30,14 @@ namespace HF {
 			return r;
 		}
 
-		int UniqueQueue::size() const {
-			return node_queue.size();
-		}
+		int UniqueQueue::size() const {return node_queue.size();}
 
 		HF::SpatialStructures::Node UniqueQueue::popFromDict() {
 			auto r = node_queue.front();
 			node_queue.pop();
-			hashmap.erase(r);
 
+			// Erase r from the hashmap to "forget" about it
+			hashmap.erase(r);
 			return r;
 		}
 
@@ -44,21 +46,30 @@ namespace HF {
 		}
 
 		bool UniqueQueue::forcePush(const HF::SpatialStructures::Node& p) {
+			// Forcibly set this to 1. Will have no effect
+			// if we've already seen this node.
 			hashmap[p] = 1;
+
 			node_queue.push(p);
 			return true;
 		}
-		bool UniqueQueue::empty() const {
-			return size() == 0;
-		}
+		bool UniqueQueue::empty() const {return size() == 0;}
+		
 		void UniqueQueue::clearQueue()
 		{
-			while(!node_queue.empty()) node_queue.pop();
+			// Queue has no clear function. We can however potentially use a swap idiom
+			// to speed this up. 
+			while (!node_queue.empty()) node_queue.pop();
 		}
+
 		std::vector<SpatialStructures::Node> UniqueQueue::popMany(int max)
 		{
+			// Create a new vector of nodes
 			std::vector<SpatialStructures::Node> out_nodes;
 			out_nodes.reserve(size());
+			
+			// Pop a node until the queue is empty, we hit max,
+			// or max is never set. 
 			int num_popped = 0;
 			while (!node_queue.empty() && num_popped < max)
 			{
