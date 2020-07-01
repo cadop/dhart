@@ -3,14 +3,14 @@
 #include <charconv>
 ///
 /// \file		graph_generator.cpp
-/// \brief		Contains implementation for the <see cref="HF::AnalysisMethods::GraphGenerator">GraphGenerator</cref>
+/// \brief		Contains implementation for the <see cref="HF::GraphGenerator::GraphGenerator">GraphGenerator</cref>
 ///
 ///	\author		TBA
 ///	\date		26 Jun 2020
 
 #include <iostream>
 
-namespace HF::AnalysisMethods {
+namespace HF::GraphGenerator {
 		
 	GraphGenerator::GraphGenerator(RayTracer::EmbreeRayTracer  & RT, int walkable_id, int obstacle_id) :
 		walkable_surfaces(walkable_id), obstacle_surfaces(obstacle_id) {

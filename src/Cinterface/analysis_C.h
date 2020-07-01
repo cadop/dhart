@@ -6,7 +6,7 @@
 
 namespace HF {
 	namespace SpatialStructures {class Graph;}
-	namespace AnalysisMethods {class GraphGenerator;}
+	namespace GraphGenerator {class GraphGenerator;}
 	namespace RayTracer {class EmbreeRayTracer;}
 }
 
