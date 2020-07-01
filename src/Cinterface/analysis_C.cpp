@@ -8,7 +8,7 @@
 #include <graph.h>
 
 using HF::SpatialStructures::Graph;
-using HF::AnalysisMethods::GraphGenerator;
+using HF::GraphGenerator::GraphGenerator;
 using namespace HF::Exceptions;
 
 
