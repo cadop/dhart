@@ -21,19 +21,19 @@ float \mbox{\hyperlink{a01167_af1dd2557d9f2d048ff3af3776b796b4f}{x}}
 float \mbox{\hyperlink{a01167_aa848157a3963087e703bf06a464501ad}{y}}
 \item 
 float \mbox{\hyperlink{a01167_a4017ea4eabf58a540096a913a26ce987}{z}}
-\begin{DoxyCompactList}\small\item\em X, Y, and Z origin points ///$<$. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em X, Y, and Z origin points. \end{DoxyCompactList}\item 
 float \mbox{\hyperlink{a01167_ae16f679ab21a1da3d3cd9bd919f36d22}{dx}}
 \item 
 float \mbox{\hyperlink{a01167_a5e8b14757b7508fedc33c9431f1b469f}{dy}}
 \item 
 float \mbox{\hyperlink{a01167_a498547060a53ede34687e03f0e6b47bd}{dz}}
-\begin{DoxyCompactList}\small\item\em X, Y and Z direction to fire the ray in ///$<$. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em X, Y and Z direction to fire the ray in. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{a01167_af6cccf4f2ebdcba8c0a30d8d1f233b78}{was\+\_\+fired}} = false
-\begin{DoxyCompactList}\small\item\em Whether this ray was fired or not ///$<$. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Whether this ray was fired or not. \end{DoxyCompactList}\item 
 float \mbox{\hyperlink{a01167_ace83a6bcb8c585a5067c10f9f79a0367}{distance}} = -\/1
-\begin{DoxyCompactList}\small\item\em Before firing\+: the maximum distance of the ray. After firing\+: distance to the hitpoint or -\/9999 on miss ///$<$. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Before firing\+: the maximum distance of the ray. After firing\+: distance to the hitpoint or -\/9999 on miss. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{a01167_a3929b4488920b8495b98e1f298c0bf27}{mesh\+\_\+id}} = -\/1
-\begin{DoxyCompactList}\small\item\em The ID of the hit mesh ///$<$. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The ID of the hit mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -73,6 +73,27 @@ Constructs a \mbox{\hyperlink{a01167}{Full\+Ray\+Request}} from origin points (x
 \end{DoxyParams}
 
 
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "RayRequest.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// For brevity}}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01167}{HF::RayTracer::FullRayRequest}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Prepare FullRayRequest's parameters}}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} x\_in = 0.0;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} y\_in = 0.0;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} z\_in = 0.0;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} dx\_in = 1.0;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} dy\_in = 1.0;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} dz\_in = 2.0;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} distance\_in = 10.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the FullRayRequest}}
+\DoxyCodeLine{\mbox{\hyperlink{a01167_ae96c4c944750f00e950f134cd7838619}{FullRayRequest}} request(x\_in, y\_in, z\_in, dx\_in, dy\_in, dz\_in, distance\_in);}
+\end{DoxyCode}
+ 
+
 Definition at line 10 of file Ray\+Request.\+cpp.
 
 \mbox{\Hypertarget{a01167_ae96c4c944750f00e950f134cd7838619}\label{a01167_ae96c4c944750f00e950f134cd7838619}} 
@@ -86,8 +107,18 @@ Definition at line 10 of file Ray\+Request.\+cpp.
 Default constructor, empty code block. 
 
 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "RayRequest.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// For brevity}}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01167}{HF::RayTracer::FullRayRequest}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the FullRayRequest (no arguments)}}
+\DoxyCodeLine{\mbox{\hyperlink{a01167_ae96c4c944750f00e950f134cd7838619}{FullRayRequest}} request;}
+\end{DoxyCode}
+ 
 
-Definition at line 39 of file Ray\+Request.\+h.
+Definition at line 72 of file Ray\+Request.\+h.
 
 
 
@@ -103,6 +134,36 @@ Definition at line 39 of file Ray\+Request.\+h.
 Tells if the rayrequest it or not. If true, the hit was successful, false otherwise. Rays that weren\textquotesingle{}t fired yet are considered as not hitting. 
 
 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "RayRequest.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// For brevity}}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01167}{HF::RayTracer::FullRayRequest}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Prepare FullRayRequest's parameters}}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} x\_in = 0.0;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} y\_in = 0.0;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} z\_in = 0.0;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} dx\_in = 1.0;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} dy\_in = 1.0;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} dz\_in = 2.0;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} distance\_in = 10.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the FullRayRequest}}
+\DoxyCodeLine{\mbox{\hyperlink{a01167_ae96c4c944750f00e950f134cd7838619}{FullRayRequest}} request(x\_in, y\_in, z\_in, dx\_in, dy\_in, dz\_in, distance\_in);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Use didHit}}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (request.didHit()) \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Hit"} << std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Miss"} << std::endl;}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+{\ttfamily $>$$>$$>$Miss}~\newline
+
 
 Definition at line 13 of file Ray\+Request.\+cpp.
 
@@ -117,7 +178,7 @@ Definition at line 13 of file Ray\+Request.\+cpp.
 
 
 
-Before firing\+: the maximum distance of the ray. After firing\+: distance to the hitpoint or -\/9999 on miss ///$<$. 
+Before firing\+: the maximum distance of the ray. After firing\+: distance to the hitpoint or -\/9999 on miss. 
 
 
 
@@ -151,7 +212,7 @@ Definition at line 15 of file Ray\+Request.\+h.
 
 
 
-X, Y and Z direction to fire the ray in ///$<$. 
+X, Y and Z direction to fire the ray in. 
 
 
 
@@ -165,7 +226,7 @@ Definition at line 15 of file Ray\+Request.\+h.
 
 
 
-The ID of the hit mesh ///$<$. 
+The ID of the hit mesh. 
 
 
 
@@ -179,7 +240,7 @@ Definition at line 18 of file Ray\+Request.\+h.
 
 
 
-Whether this ray was fired or not ///$<$. 
+Whether this ray was fired or not. 
 
 
 
@@ -213,7 +274,7 @@ Definition at line 14 of file Ray\+Request.\+h.
 
 
 
-X, Y, and Z origin points ///$<$. 
+X, Y, and Z origin points. 
 
 
 

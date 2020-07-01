@@ -99,7 +99,7 @@ $(function() {
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keyword">struct </span><a class="code" href="a00277.html#a01151">Vertex</a>;</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keyword">struct </span><a class="code" href="a00277.html#a01155">Triangle</a>;</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="comment">//TODO: This may be better served in another class</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="comment">// TODO: This may be better served in another class</span></div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"></span>        [[deprecated]]</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        std::vector&lt;std::array&lt;float, 3&gt;&gt; <a class="code" href="a00277.html#a03d93804b73bd4a5d8ab8e679e5b28cd">genSphereRays</a>(<span class="keywordtype">int</span> step);</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
@@ -116,142 +116,150 @@ $(function() {
 <div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="a01163.html#a3a243ef02c74fc6df958a4fd2506e7cc">   85</a></span>&#160;            std::vector&lt;RTCGeometry&gt; <a class="code" href="a01163.html#a3a243ef02c74fc6df958a4fd2506e7cc">geometry</a>; <span class="comment">//&gt; A list of the geometry being used by RTCScene.</span></div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="a01163.html#ac46476760e07cb2579eeb2b4c094522a">   88</a></span>&#160;            <a class="code" href="a01163.html#ac46476760e07cb2579eeb2b4c094522a">EmbreeRayTracer</a>() {}</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            <a class="code" href="a01163.html#ac46476760e07cb2579eeb2b4c094522a">EmbreeRayTracer</a>(std::vector&lt;HF::Geometry::MeshInfo&gt;&amp; MI);</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            <a class="code" href="a01163.html#ac46476760e07cb2579eeb2b4c094522a">EmbreeRayTracer</a>(<span class="keyword">const</span> std::vector&lt;std::array&lt;float, 3&gt;&gt;&amp; <a class="code" href="a01163.html#a3a243ef02c74fc6df958a4fd2506e7cc">geometry</a>);</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="a01163.html#a61aa9665f98c3383c2d5cbdef6e4ac00">FireRay</a>(</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;                std::array&lt;float, 3&gt;&amp; origin,</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;                <span class="keyword">const</span> std::array&lt;float, 3&gt;&amp; dir,</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;                <span class="keywordtype">float</span> distance = -1,</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;                <span class="keywordtype">int</span> mesh_id = -1</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;            );</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; </div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="a01163.html#a61aa9665f98c3383c2d5cbdef6e4ac00">FireRay</a>(</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;                <span class="keywordtype">float</span>&amp; x,</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;                <span class="keywordtype">float</span>&amp; y,</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;                <span class="keywordtype">float</span>&amp; z,</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;                <span class="keywordtype">float</span> dx,</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;                <span class="keywordtype">float</span> dy,</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;                <span class="keywordtype">float</span> dz,</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;                <span class="keywordtype">float</span> distance = -1,</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;                <span class="keywordtype">int</span> mesh_id = -1</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;            );</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160; </div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160; </div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;            std::vector&lt;bool&gt; <a class="code" href="a01163.html#a3348672e98a6b29edca1cfe65f5b9195">FireRays</a>(</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;                std::vector&lt;std::array&lt;float, 3&gt;&gt;&amp; origins,</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;                std::vector&lt;std::array&lt;float, 3&gt;&gt;&amp; directions,</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;                <span class="keywordtype">bool</span> use_parallel = <span class="keyword">true</span>,</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;                <span class="keywordtype">float</span> max_distance = -1,</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;                <span class="keywordtype">int</span> mesh_id = -1</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;            );</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160; </div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160; </div>
-<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;            <a class="code" href="a01159.html">HitStruct</a> <a class="code" href="a01163.html#ab65abb62a043f237cec50661077610c8">Intersect</a>(</div>
-<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;                <span class="keywordtype">float</span> x,</div>
-<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;                <span class="keywordtype">float</span> y,</div>
-<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;                <span class="keywordtype">float</span> z,</div>
-<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;                <span class="keywordtype">float</span> dx,</div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;                <span class="keywordtype">float</span> dy,</div>
-<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;                <span class="keywordtype">float</span> dz,</div>
-<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;                <span class="keywordtype">float</span> max_distance = -1,</div>
-<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;                <span class="keywordtype">int</span> mesh_id = -1</div>
-<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;            );</div>
-<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160; </div>
-<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160; </div>
-<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="a01163.html#a54809c56dbaada56b6692668bf33780d">FireOcclusionRay</a>(</div>
-<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160;                <span class="keyword">const</span> std::array&lt;float, 3&gt;&amp; origin,</div>
-<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;                <span class="keyword">const</span> std::array&lt;float, 3&gt;&amp; direction,</div>
-<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;                <span class="keywordtype">float</span> max_dist = -1</div>
-<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;            );</div>
-<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160; </div>
-<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160; </div>
-<div class="line"><a name="l00572"></a><span class="lineno">  572</span>&#160;            std::vector&lt;bool&gt; <a class="code" href="a01163.html#a18e55d29b728c4c868883e20c2bf5883">FireOcclusionRays</a>(</div>
-<div class="line"><a name="l00573"></a><span class="lineno">  573</span>&#160;                <span class="keyword">const</span> std::vector&lt;std::array&lt;float, 3&gt;&gt;&amp; origins,</div>
-<div class="line"><a name="l00574"></a><span class="lineno">  574</span>&#160;                <span class="keyword">const</span> std::vector&lt;std::array&lt;float, 3&gt;&gt;&amp; directions,</div>
-<div class="line"><a name="l00575"></a><span class="lineno">  575</span>&#160;                <span class="keywordtype">float</span> max_distance = -1</div>
-<div class="line"><a name="l00576"></a><span class="lineno">  576</span>&#160;                , <span class="keywordtype">bool</span> use_parallel = <span class="keyword">true</span></div>
-<div class="line"><a name="l00577"></a><span class="lineno">  577</span>&#160;            );</div>
-<div class="line"><a name="l00578"></a><span class="lineno">  578</span>&#160; </div>
-<div class="line"><a name="l00594"></a><span class="lineno">  594</span>&#160; </div>
-<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="a01163.html#a54809c56dbaada56b6692668bf33780d">FireOcclusionRay</a>(</div>
-<div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160;                <span class="keywordtype">float</span> x,</div>
-<div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160;                <span class="keywordtype">float</span> y,</div>
-<div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160;                <span class="keywordtype">float</span> z,</div>
-<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;                <span class="keywordtype">float</span> dx,</div>
-<div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160;                <span class="keywordtype">float</span> dy,</div>
-<div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160;                <span class="keywordtype">float</span> dz,</div>
-<div class="line"><a name="l00641"></a><span class="lineno">  641</span>&#160;                <span class="keywordtype">float</span> distance = -1,</div>
-<div class="line"><a name="l00642"></a><span class="lineno">  642</span>&#160;                <span class="keywordtype">int</span> mesh_id = -1</div>
-<div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160;            );</div>
-<div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160; </div>
-<div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160;            [[deprecated]]</div>
-<div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160;            <span class="keywordtype">void</span> <a class="code" href="a01163.html#acc1fc8eaa0139696ec31362384a37d5f">FireRequests</a>(</div>
-<div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160;                std::vector&lt;FullRayRequest&gt;&amp; requests,</div>
-<div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;                <span class="keywordtype">bool</span> parallel = <span class="keyword">true</span></div>
-<div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160;            );</div>
-<div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160; </div>
-<div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160;            [[deprecated]]</div>
-<div class="line"><a name="l00664"></a><span class="lineno"><a class="line" href="a01163.html#a2fd625932160afeebd0169967d733217">  664</a></span>&#160;            <span class="keywordtype">void</span> <a class="code" href="a01163.html#a2fd625932160afeebd0169967d733217">FireOcclusionRequests</a>(</div>
-<div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160;                std::vector&lt;FullRayRequest&gt;&amp; requests,</div>
-<div class="line"><a name="l00666"></a><span class="lineno">  666</span>&#160;                <span class="keywordtype">bool</span> parallel = <span class="keyword">true</span></div>
-<div class="line"><a name="l00667"></a><span class="lineno">  667</span>&#160;            );</div>
-<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160; </div>
-<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="a01163.html#adb4e7b71dcad5f274abe8d08a9defd09">InsertNewMesh</a>(std::vector&lt;std::array&lt;float, 3&gt;&gt;&amp; Mesh, <span class="keywordtype">int</span> ID, <span class="keywordtype">bool</span> Commit = <span class="keyword">false</span>);</div>
-<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160; </div>
-<div class="line"><a name="l00699"></a><span class="lineno"><a class="line" href="a01163.html#a8eb977b7d801e2f519dbd9a4d98d6e2a">  699</a></span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="a01163.html#adb4e7b71dcad5f274abe8d08a9defd09">EmbreeRayTracer::InsertNewMesh</a>(<a class="code" href="a01127.html">HF::Geometry::MeshInfo</a>&amp; Mesh, <span class="keywordtype">bool</span> Commit);</div>
-<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160; </div>
-<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="a01163.html#adb4e7b71dcad5f274abe8d08a9defd09">InsertNewMesh</a>(std::vector&lt;HF::Geometry::MeshInfo&gt;&amp; Meshes, <span class="keywordtype">bool</span> Commit = <span class="keyword">true</span>);</div>
-<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160; </div>
-<div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160; </div>
-<div class="line"><a name="l00775"></a><span class="lineno">  775</span>&#160;            <span class="keyword">template</span> &lt;<span class="keyword">typename</span> N, <span class="keyword">typename</span> V&gt;</div>
-<div class="line"><a name="l00776"></a><span class="lineno"><a class="line" href="a01163.html#a795f5be6b5cedf3c849e8c67d41e220f">  776</a></span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="a01163.html#a795f5be6b5cedf3c849e8c67d41e220f">FireAnyRay</a>(</div>
-<div class="line"><a name="l00777"></a><span class="lineno">  777</span>&#160;                <span class="keyword">const</span> N&amp; node,</div>
-<div class="line"><a name="l00778"></a><span class="lineno">  778</span>&#160;                <span class="keyword">const</span> V&amp; direction,</div>
-<div class="line"><a name="l00779"></a><span class="lineno">  779</span>&#160;                <span class="keywordtype">float</span>&amp; out_distance,</div>
-<div class="line"><a name="l00780"></a><span class="lineno">  780</span>&#160;                <span class="keywordtype">int</span>&amp; out_meshid,</div>
-<div class="line"><a name="l00781"></a><span class="lineno">  781</span>&#160;                <span class="keywordtype">float</span> max_distance = -1.0f</div>
-<div class="line"><a name="l00782"></a><span class="lineno">  782</span>&#160;            ) {</div>
-<div class="line"><a name="l00783"></a><span class="lineno">  783</span>&#160;                <span class="keyword">auto</span> result = <a class="code" href="a01163.html#ab65abb62a043f237cec50661077610c8">Intersect</a>(</div>
-<div class="line"><a name="l00784"></a><span class="lineno">  784</span>&#160;                    node[0], node[1], node[2],</div>
-<div class="line"><a name="l00785"></a><span class="lineno">  785</span>&#160;                    direction[0], direction[1], direction[2], max_distance</div>
-<div class="line"><a name="l00786"></a><span class="lineno">  786</span>&#160;                );</div>
-<div class="line"><a name="l00787"></a><span class="lineno">  787</span>&#160; </div>
-<div class="line"><a name="l00788"></a><span class="lineno">  788</span>&#160;                <span class="keywordflow">if</span> (!result.DidHit()) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00789"></a><span class="lineno">  789</span>&#160;                <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00790"></a><span class="lineno">  790</span>&#160;                    out_distance = result.distance;</div>
-<div class="line"><a name="l00791"></a><span class="lineno">  791</span>&#160;                    out_meshid = result.meshid;</div>
-<div class="line"><a name="l00792"></a><span class="lineno">  792</span>&#160;                    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00793"></a><span class="lineno">  793</span>&#160;                }</div>
-<div class="line"><a name="l00794"></a><span class="lineno">  794</span>&#160;            }</div>
-<div class="line"><a name="l00795"></a><span class="lineno">  795</span>&#160; </div>
-<div class="line"><a name="l00813"></a><span class="lineno">  813</span>&#160; </div>
-<div class="line"><a name="l00860"></a><span class="lineno">  860</span>&#160;            <span class="keyword">template</span> &lt;<span class="keyword">typename</span> N, <span class="keyword">typename</span> V&gt;</div>
-<div class="line"><a name="l00861"></a><span class="lineno"><a class="line" href="a01163.html#aa6417676838ed1764531e344d9f3a75c">  861</a></span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="a01163.html#aa6417676838ed1764531e344d9f3a75c">FireAnyOcclusionRay</a>(</div>
-<div class="line"><a name="l00862"></a><span class="lineno">  862</span>&#160;                <span class="keyword">const</span> N&amp; origin,</div>
-<div class="line"><a name="l00863"></a><span class="lineno">  863</span>&#160;                <span class="keyword">const</span> V&amp; direction,</div>
-<div class="line"><a name="l00864"></a><span class="lineno">  864</span>&#160;                <span class="keywordtype">float</span> max_distance = -1.0f,</div>
-<div class="line"><a name="l00865"></a><span class="lineno">  865</span>&#160;                <span class="keywordtype">int</span> mesh_id = -1</div>
-<div class="line"><a name="l00866"></a><span class="lineno">  866</span>&#160;            ) {</div>
-<div class="line"><a name="l00867"></a><span class="lineno">  867</span>&#160;                <span class="keywordflow">return</span> <a class="code" href="a01163.html#a54809c56dbaada56b6692668bf33780d">FireOcclusionRay</a>(</div>
-<div class="line"><a name="l00868"></a><span class="lineno">  868</span>&#160;                    origin[0], origin[1], origin[2],</div>
-<div class="line"><a name="l00869"></a><span class="lineno">  869</span>&#160;                    direction[0], direction[1], direction[2],</div>
-<div class="line"><a name="l00870"></a><span class="lineno">  870</span>&#160;                    max_distance, mesh_id</div>
-<div class="line"><a name="l00871"></a><span class="lineno">  871</span>&#160;                );</div>
-<div class="line"><a name="l00872"></a><span class="lineno">  872</span>&#160;            }</div>
-<div class="line"><a name="l00873"></a><span class="lineno">  873</span>&#160; </div>
-<div class="line"><a name="l00875"></a><span class="lineno">  875</span>&#160;            <span class="keywordtype">void</span> <a class="code" href="a01163.html#a70b9c1baf8390d8114c541d6a2ccb4f4">operator=</a>(<span class="keyword">const</span> <a class="code" href="a01163.html">EmbreeRayTracer</a>&amp; ERT2);</div>
-<div class="line"><a name="l00876"></a><span class="lineno">  876</span>&#160; </div>
-<div class="line"><a name="l00878"></a><span class="lineno">  878</span>&#160;            <a class="code" href="a01163.html#a2948458e764f0294996c91b00356073e">~EmbreeRayTracer</a>();</div>
-<div class="line"><a name="l00879"></a><span class="lineno">  879</span>&#160;        };</div>
-<div class="line"><a name="l00880"></a><span class="lineno">  880</span>&#160;    }</div>
-<div class="line"><a name="l00881"></a><span class="lineno">  881</span>&#160;}</div>
-<div class="line"><a name="l00882"></a><span class="lineno">  882</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno"><a class="line" href="a01163.html#ac46476760e07cb2579eeb2b4c094522a">  101</a></span>&#160;            <a class="code" href="a01163.html#ac46476760e07cb2579eeb2b4c094522a">EmbreeRayTracer</a>() {}</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;            <a class="code" href="a01163.html#ac46476760e07cb2579eeb2b4c094522a">EmbreeRayTracer</a>(std::vector&lt;HF::Geometry::MeshInfo&gt;&amp; MI);</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;            <a class="code" href="a01163.html#ac46476760e07cb2579eeb2b4c094522a">EmbreeRayTracer</a>(<span class="keyword">const</span> std::vector&lt;std::array&lt;float, 3&gt;&gt;&amp; <a class="code" href="a01163.html#a3a243ef02c74fc6df958a4fd2506e7cc">geometry</a>);</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160; </div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="a01163.html#a61aa9665f98c3383c2d5cbdef6e4ac00">FireRay</a>(</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;                std::array&lt;float, 3&gt;&amp; origin,</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                <span class="keyword">const</span> std::array&lt;float, 3&gt;&amp; dir,</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;                <span class="keywordtype">float</span> distance = -1,</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;                <span class="keywordtype">int</span> mesh_id = -1</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;            );</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160; </div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="a01163.html#a61aa9665f98c3383c2d5cbdef6e4ac00">FireRay</a>(</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;                <span class="keywordtype">float</span>&amp; x,</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;                <span class="keywordtype">float</span>&amp; y,</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;                <span class="keywordtype">float</span>&amp; z,</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;                <span class="keywordtype">float</span> dx,</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;                <span class="keywordtype">float</span> dy,</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;                <span class="keywordtype">float</span> dz,</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;                <span class="keywordtype">float</span> distance = -1,</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;                <span class="keywordtype">int</span> mesh_id = -1</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;            );</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160; </div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160; </div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;            std::vector&lt;bool&gt; <a class="code" href="a01163.html#a3348672e98a6b29edca1cfe65f5b9195">FireRays</a>(</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;                std::vector&lt;std::array&lt;float, 3&gt;&gt;&amp; origins,</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;                std::vector&lt;std::array&lt;float, 3&gt;&gt;&amp; directions,</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;                <span class="keywordtype">bool</span> use_parallel = <span class="keyword">true</span>,</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;                <span class="keywordtype">float</span> max_distance = -1,</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;                <span class="keywordtype">int</span> mesh_id = -1</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;            );</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160; </div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160; </div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;            <a class="code" href="a01159.html">HitStruct</a> <a class="code" href="a01163.html#ab65abb62a043f237cec50661077610c8">Intersect</a>(</div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;                <span class="keywordtype">float</span> x,</div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;                <span class="keywordtype">float</span> y,</div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;                <span class="keywordtype">float</span> z,</div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;                <span class="keywordtype">float</span> dx,</div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;                <span class="keywordtype">float</span> dy,</div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;                <span class="keywordtype">float</span> dz,</div>
+<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;                <span class="keywordtype">float</span> max_distance = -1,</div>
+<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;                <span class="keywordtype">int</span> mesh_id = -1</div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;            );</div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160; </div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160; </div>
+<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="a01163.html#a54809c56dbaada56b6692668bf33780d">FireOcclusionRay</a>(</div>
+<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;                <span class="keyword">const</span> std::array&lt;float, 3&gt;&amp; origin,</div>
+<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;                <span class="keyword">const</span> std::array&lt;float, 3&gt;&amp; direction,</div>
+<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;                <span class="keywordtype">float</span> max_dist = -1</div>
+<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;            );</div>
+<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160; </div>
+<div class="line"><a name="l00572"></a><span class="lineno">  572</span>&#160; </div>
+<div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160;            std::vector&lt;bool&gt; <a class="code" href="a01163.html#a18e55d29b728c4c868883e20c2bf5883">FireOcclusionRays</a>(</div>
+<div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160;                <span class="keyword">const</span> std::vector&lt;std::array&lt;float, 3&gt;&gt;&amp; origins,</div>
+<div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160;                <span class="keyword">const</span> std::vector&lt;std::array&lt;float, 3&gt;&gt;&amp; directions,</div>
+<div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160;                <span class="keywordtype">float</span> max_distance = -1</div>
+<div class="line"><a name="l00625"></a><span class="lineno">  625</span>&#160;                , <span class="keywordtype">bool</span> use_parallel = <span class="keyword">true</span></div>
+<div class="line"><a name="l00626"></a><span class="lineno">  626</span>&#160;            );</div>
+<div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160; </div>
+<div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160; </div>
+<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="a01163.html#a54809c56dbaada56b6692668bf33780d">FireOcclusionRay</a>(</div>
+<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;                <span class="keywordtype">float</span> x,</div>
+<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;                <span class="keywordtype">float</span> y,</div>
+<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;                <span class="keywordtype">float</span> z,</div>
+<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;                <span class="keywordtype">float</span> dx,</div>
+<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;                <span class="keywordtype">float</span> dy,</div>
+<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;                <span class="keywordtype">float</span> dz,</div>
+<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;                <span class="keywordtype">float</span> distance = -1,</div>
+<div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;                <span class="keywordtype">int</span> mesh_id = -1</div>
+<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;            );</div>
+<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160; </div>
+<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160;            [[deprecated]]</div>
+<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160;            <span class="keywordtype">void</span> <a class="code" href="a01163.html#acc1fc8eaa0139696ec31362384a37d5f">FireRequests</a>(</div>
+<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160;                std::vector&lt;FullRayRequest&gt;&amp; requests,</div>
+<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;                <span class="keywordtype">bool</span> parallel = <span class="keyword">true</span></div>
+<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;            );</div>
+<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160; </div>
+<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;            [[deprecated]]</div>
+<div class="line"><a name="l00713"></a><span class="lineno"><a class="line" href="a01163.html#a2fd625932160afeebd0169967d733217">  713</a></span>&#160;            <span class="keywordtype">void</span> <a class="code" href="a01163.html#a2fd625932160afeebd0169967d733217">FireOcclusionRequests</a>(</div>
+<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;                std::vector&lt;FullRayRequest&gt;&amp; requests,</div>
+<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;                <span class="keywordtype">bool</span> parallel = <span class="keyword">true</span></div>
+<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;            );</div>
+<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160; </div>
+<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160; </div>
+<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="a01163.html#adb4e7b71dcad5f274abe8d08a9defd09">InsertNewMesh</a>(std::vector&lt;std::array&lt;float, 3&gt;&gt;&amp; Mesh, <span class="keywordtype">int</span> ID, <span class="keywordtype">bool</span> Commit = <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160; </div>
+<div class="line"><a name="l00779"></a><span class="lineno">  779</span>&#160; </div>
+<div class="line"><a name="l00818"></a><span class="lineno"><a class="line" href="a01163.html#a8eb977b7d801e2f519dbd9a4d98d6e2a">  818</a></span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="a01163.html#adb4e7b71dcad5f274abe8d08a9defd09">EmbreeRayTracer::InsertNewMesh</a>(<a class="code" href="a01127.html">HF::Geometry::MeshInfo</a>&amp; Mesh, <span class="keywordtype">bool</span> Commit);</div>
+<div class="line"><a name="l00819"></a><span class="lineno">  819</span>&#160; </div>
+<div class="line"><a name="l00826"></a><span class="lineno">  826</span>&#160; </div>
+<div class="line"><a name="l00877"></a><span class="lineno">  877</span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="a01163.html#adb4e7b71dcad5f274abe8d08a9defd09">InsertNewMesh</a>(std::vector&lt;HF::Geometry::MeshInfo&gt;&amp; Meshes, <span class="keywordtype">bool</span> Commit = <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00878"></a><span class="lineno">  878</span>&#160; </div>
+<div class="line"><a name="l00899"></a><span class="lineno">  899</span>&#160; </div>
+<div class="line"><a name="l00945"></a><span class="lineno">  945</span>&#160;            <span class="keyword">template</span> &lt;<span class="keyword">typename</span> N, <span class="keyword">typename</span> V&gt;</div>
+<div class="line"><a name="l00946"></a><span class="lineno"><a class="line" href="a01163.html#a795f5be6b5cedf3c849e8c67d41e220f">  946</a></span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="a01163.html#a795f5be6b5cedf3c849e8c67d41e220f">FireAnyRay</a>(</div>
+<div class="line"><a name="l00947"></a><span class="lineno">  947</span>&#160;                <span class="keyword">const</span> N&amp; node,</div>
+<div class="line"><a name="l00948"></a><span class="lineno">  948</span>&#160;                <span class="keyword">const</span> V&amp; direction,</div>
+<div class="line"><a name="l00949"></a><span class="lineno">  949</span>&#160;                <span class="keywordtype">float</span>&amp; out_distance,</div>
+<div class="line"><a name="l00950"></a><span class="lineno">  950</span>&#160;                <span class="keywordtype">int</span>&amp; out_meshid,</div>
+<div class="line"><a name="l00951"></a><span class="lineno">  951</span>&#160;                <span class="keywordtype">float</span> max_distance = -1.0f</div>
+<div class="line"><a name="l00952"></a><span class="lineno">  952</span>&#160;            ) {</div>
+<div class="line"><a name="l00953"></a><span class="lineno">  953</span>&#160;                <span class="keyword">auto</span> result = <a class="code" href="a01163.html#ab65abb62a043f237cec50661077610c8">Intersect</a>(</div>
+<div class="line"><a name="l00954"></a><span class="lineno">  954</span>&#160;                    node[0], node[1], node[2],</div>
+<div class="line"><a name="l00955"></a><span class="lineno">  955</span>&#160;                    direction[0], direction[1], direction[2], max_distance</div>
+<div class="line"><a name="l00956"></a><span class="lineno">  956</span>&#160;                );</div>
+<div class="line"><a name="l00957"></a><span class="lineno">  957</span>&#160; </div>
+<div class="line"><a name="l00958"></a><span class="lineno">  958</span>&#160;                <span class="keywordflow">if</span> (!result.DidHit()) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00959"></a><span class="lineno">  959</span>&#160;                <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00960"></a><span class="lineno">  960</span>&#160;                    out_distance = result.distance;</div>
+<div class="line"><a name="l00961"></a><span class="lineno">  961</span>&#160;                    out_meshid = result.meshid;</div>
+<div class="line"><a name="l00962"></a><span class="lineno">  962</span>&#160;                    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00963"></a><span class="lineno">  963</span>&#160;                }</div>
+<div class="line"><a name="l00964"></a><span class="lineno">  964</span>&#160;            }</div>
+<div class="line"><a name="l00965"></a><span class="lineno">  965</span>&#160; </div>
+<div class="line"><a name="l00983"></a><span class="lineno">  983</span>&#160; </div>
+<div class="line"><a name="l01029"></a><span class="lineno"> 1029</span>&#160;            <span class="keyword">template</span> &lt;<span class="keyword">typename</span> N, <span class="keyword">typename</span> V&gt;</div>
+<div class="line"><a name="l01030"></a><span class="lineno"><a class="line" href="a01163.html#aa6417676838ed1764531e344d9f3a75c"> 1030</a></span>&#160;            <span class="keywordtype">bool</span> <a class="code" href="a01163.html#aa6417676838ed1764531e344d9f3a75c">FireAnyOcclusionRay</a>(</div>
+<div class="line"><a name="l01031"></a><span class="lineno"> 1031</span>&#160;                <span class="keyword">const</span> N&amp; origin,</div>
+<div class="line"><a name="l01032"></a><span class="lineno"> 1032</span>&#160;                <span class="keyword">const</span> V&amp; direction,</div>
+<div class="line"><a name="l01033"></a><span class="lineno"> 1033</span>&#160;                <span class="keywordtype">float</span> max_distance = -1.0f,</div>
+<div class="line"><a name="l01034"></a><span class="lineno"> 1034</span>&#160;                <span class="keywordtype">int</span> mesh_id = -1</div>
+<div class="line"><a name="l01035"></a><span class="lineno"> 1035</span>&#160;            ) {</div>
+<div class="line"><a name="l01036"></a><span class="lineno"> 1036</span>&#160;                <span class="keywordflow">return</span> <a class="code" href="a01163.html#a54809c56dbaada56b6692668bf33780d">FireOcclusionRay</a>(</div>
+<div class="line"><a name="l01037"></a><span class="lineno"> 1037</span>&#160;                    origin[0], origin[1], origin[2],</div>
+<div class="line"><a name="l01038"></a><span class="lineno"> 1038</span>&#160;                    direction[0], direction[1], direction[2],</div>
+<div class="line"><a name="l01039"></a><span class="lineno"> 1039</span>&#160;                    max_distance, mesh_id</div>
+<div class="line"><a name="l01040"></a><span class="lineno"> 1040</span>&#160;                );</div>
+<div class="line"><a name="l01041"></a><span class="lineno"> 1041</span>&#160;            }</div>
+<div class="line"><a name="l01042"></a><span class="lineno"> 1042</span>&#160; </div>
+<div class="line"><a name="l01045"></a><span class="lineno"> 1045</span>&#160; </div>
+<div class="line"><a name="l01071"></a><span class="lineno"> 1071</span>&#160;            <span class="keywordtype">void</span> <a class="code" href="a01163.html#a70b9c1baf8390d8114c541d6a2ccb4f4">operator=</a>(<span class="keyword">const</span> <a class="code" href="a01163.html">EmbreeRayTracer</a>&amp; ERT2);</div>
+<div class="line"><a name="l01072"></a><span class="lineno"> 1072</span>&#160; </div>
+<div class="line"><a name="l01074"></a><span class="lineno"> 1074</span>&#160; </div>
+<div class="line"><a name="l01097"></a><span class="lineno"> 1097</span>&#160;            <a class="code" href="a01163.html#a2948458e764f0294996c91b00356073e">~EmbreeRayTracer</a>();</div>
+<div class="line"><a name="l01098"></a><span class="lineno"> 1098</span>&#160;        };</div>
+<div class="line"><a name="l01099"></a><span class="lineno"> 1099</span>&#160;    }</div>
+<div class="line"><a name="l01100"></a><span class="lineno"> 1100</span>&#160;}</div>
+<div class="line"><a name="l01101"></a><span class="lineno"> 1101</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aa01163_html_a2948458e764f0294996c91b00356073e"><div class="ttname"><a href="a01163.html#a2948458e764f0294996c91b00356073e">HF::RayTracer::EmbreeRayTracer::~EmbreeRayTracer</a></div><div class="ttdeci">~EmbreeRayTracer()</div><div class="ttdoc">Custom destructor to ensure cleanup of embree resources.</div><div class="ttdef"><b>Definition:</b> <a href="a00119_source.html#l00667">embree_raytracer.cpp:667</a></div></div>
 <div class="ttc" id="aa01159_html_a2cd080c5762df7149b57d676573443fb"><div class="ttname"><a href="a01159.html#a2cd080c5762df7149b57d676573443fb">HF::RayTracer::HitStruct::DidHit</a></div><div class="ttdeci">bool DidHit() const</div><div class="ttdoc">Determine whether or not this hitstruct contains a hit.</div><div class="ttdef"><b>Definition:</b> <a href="a00119_source.html#l00034">embree_raytracer.cpp:34</a></div></div>
@@ -262,17 +270,17 @@ $(function() {
 <div class="ttc" id="aa01163_html_a01968c52807e6930909b7f9c31f45e80"><div class="ttname"><a href="a01163.html#a01968c52807e6930909b7f9c31f45e80">HF::RayTracer::EmbreeRayTracer::context</a></div><div class="ttdeci">RTCIntersectContext context</div><div class="ttdoc">Context to fire rays within.</div><div class="ttdef"><b>Definition:</b> <a href="a00122_source.html#l00079">embree_raytracer.h:79</a></div></div>
 <div class="ttc" id="aa01163_html_ab65abb62a043f237cec50661077610c8"><div class="ttname"><a href="a01163.html#ab65abb62a043f237cec50661077610c8">HF::RayTracer::EmbreeRayTracer::Intersect</a></div><div class="ttdeci">HitStruct Intersect(float x, float y, float z, float dx, float dy, float dz, float max_distance=-1, int mesh_id=-1)</div><div class="ttdoc">Cast a ray and store all relevant information in a HitStruct.</div><div class="ttdef"><b>Definition:</b> <a href="a00119_source.html#l00368">embree_raytracer.cpp:368</a></div></div>
 <div class="ttc" id="aa01163_html_a61aa9665f98c3383c2d5cbdef6e4ac00"><div class="ttname"><a href="a01163.html#a61aa9665f98c3383c2d5cbdef6e4ac00">HF::RayTracer::EmbreeRayTracer::FireRay</a></div><div class="ttdeci">bool FireRay(std::array&lt; float, 3 &gt; &amp;origin, const std::array&lt; float, 3 &gt; &amp;dir, float distance=-1, int mesh_id=-1)</div><div class="ttdoc">Cast a ray and overwrite the origin with the hitpoint if it intersects any geometry.</div><div class="ttdef"><b>Definition:</b> <a href="a00119_source.html#l00261">embree_raytracer.cpp:261</a></div></div>
-<div class="ttc" id="aa01163_html_aa6417676838ed1764531e344d9f3a75c"><div class="ttname"><a href="a01163.html#aa6417676838ed1764531e344d9f3a75c">HF::RayTracer::EmbreeRayTracer::FireAnyOcclusionRay</a></div><div class="ttdeci">bool FireAnyOcclusionRay(const N &amp;origin, const V &amp;direction, float max_distance=-1.0f, int mesh_id=-1)</div><div class="ttdoc">Template for firing rays using array-like containers for the direction and origin....</div><div class="ttdef"><b>Definition:</b> <a href="a00122_source.html#l00861">embree_raytracer.h:861</a></div></div>
+<div class="ttc" id="aa01163_html_aa6417676838ed1764531e344d9f3a75c"><div class="ttname"><a href="a01163.html#aa6417676838ed1764531e344d9f3a75c">HF::RayTracer::EmbreeRayTracer::FireAnyOcclusionRay</a></div><div class="ttdeci">bool FireAnyOcclusionRay(const N &amp;origin, const V &amp;direction, float max_distance=-1.0f, int mesh_id=-1)</div><div class="ttdoc">Template for firing rays using array-like containers for the direction and origin....</div><div class="ttdef"><b>Definition:</b> <a href="a00122_source.html#l01030">embree_raytracer.h:1030</a></div></div>
 <div class="ttc" id="aa01163_html_acc1fc8eaa0139696ec31362384a37d5f"><div class="ttname"><a href="a01163.html#acc1fc8eaa0139696ec31362384a37d5f">HF::RayTracer::EmbreeRayTracer::FireRequests</a></div><div class="ttdeci">void FireRequests(std::vector&lt; FullRayRequest &gt; &amp;requests, bool parallel=true)</div><div class="ttdoc">Fire a vector of ray requests.</div><div class="ttdef"><b>Definition:</b> <a href="a00119_source.html#l00534">embree_raytracer.cpp:534</a></div></div>
 <div class="ttc" id="aa01163_html_a62b06bf58c3b134de8f271fbc778e412"><div class="ttname"><a href="a01163.html#a62b06bf58c3b134de8f271fbc778e412">HF::RayTracer::EmbreeRayTracer::Vertices</a></div><div class="ttdeci">Vertex * Vertices</div><div class="ttdoc">Vertex buffer. Is used in multiple places but contents are dumped.</div><div class="ttdef"><b>Definition:</b> <a href="a00122_source.html#l00083">embree_raytracer.h:83</a></div></div>
 <div class="ttc" id="aa01159_html"><div class="ttname"><a href="a01159.html">HF::RayTracer::HitStruct</a></div><div class="ttdoc">A simple hit struct to carry all relevant information about hits.</div><div class="ttdef"><b>Definition:</b> <a href="a00122_source.html#l00027">embree_raytracer.h:27</a></div></div>
 <div class="ttc" id="aa01163_html_adb4e7b71dcad5f274abe8d08a9defd09"><div class="ttname"><a href="a01163.html#adb4e7b71dcad5f274abe8d08a9defd09">HF::RayTracer::EmbreeRayTracer::InsertNewMesh</a></div><div class="ttdeci">bool InsertNewMesh(std::vector&lt; std::array&lt; float, 3 &gt;&gt; &amp;Mesh, int ID, bool Commit=false)</div><div class="ttdoc">Add a new mesh to this raytracer's BVH with the specified ID.</div><div class="ttdef"><b>Definition:</b> <a href="a00119_source.html#l00548">embree_raytracer.cpp:548</a></div></div>
 <div class="ttc" id="aa01167_html"><div class="ttname"><a href="a01167.html">HF::RayTracer::FullRayRequest</a></div><div class="ttdef"><b>Definition:</b> <a href="a00128_source.html#l00013">RayRequest.h:13</a></div></div>
-<div class="ttc" id="aa01163_html_a795f5be6b5cedf3c849e8c67d41e220f"><div class="ttname"><a href="a01163.html#a795f5be6b5cedf3c849e8c67d41e220f">HF::RayTracer::EmbreeRayTracer::FireAnyRay</a></div><div class="ttdeci">bool FireAnyRay(const N &amp;node, const V &amp;direction, float &amp;out_distance, int &amp;out_meshid, float max_distance=-1.0f)</div><div class="ttdoc">Template for firing rays using array-like containers for the direction and origin.</div><div class="ttdef"><b>Definition:</b> <a href="a00122_source.html#l00776">embree_raytracer.h:776</a></div></div>
+<div class="ttc" id="aa01163_html_a795f5be6b5cedf3c849e8c67d41e220f"><div class="ttname"><a href="a01163.html#a795f5be6b5cedf3c849e8c67d41e220f">HF::RayTracer::EmbreeRayTracer::FireAnyRay</a></div><div class="ttdeci">bool FireAnyRay(const N &amp;node, const V &amp;direction, float &amp;out_distance, int &amp;out_meshid, float max_distance=-1.0f)</div><div class="ttdoc">Template for firing rays using array-like containers for the direction and origin.</div><div class="ttdef"><b>Definition:</b> <a href="a00122_source.html#l00946">embree_raytracer.h:946</a></div></div>
 <div class="ttc" id="aa01163_html_a3348672e98a6b29edca1cfe65f5b9195"><div class="ttname"><a href="a01163.html#a3348672e98a6b29edca1cfe65f5b9195">HF::RayTracer::EmbreeRayTracer::FireRays</a></div><div class="ttdeci">std::vector&lt; bool &gt; FireRays(std::vector&lt; std::array&lt; float, 3 &gt;&gt; &amp;origins, std::vector&lt; std::array&lt; float, 3 &gt;&gt; &amp;directions, bool use_parallel=true, float max_distance=-1, int mesh_id=-1)</div><div class="ttdoc">Fire multiple rays and recieve hitpoints in return.</div><div class="ttdef"><b>Definition:</b> <a href="a00119_source.html#l00305">embree_raytracer.cpp:305</a></div></div>
 <div class="ttc" id="aa00277_html_a6df9ff0fb8610752d548354b3e6600e0"><div class="ttname"><a href="a00277.html#a6df9ff0fb8610752d548354b3e6600e0">HF::RayTracer::genFibbonacciRays</a></div><div class="ttdeci">std::vector&lt; std::array&lt; float, 3 &gt; &gt; genFibbonacciRays(int numrays)</div><div class="ttdoc">Generate a set of equally distributed directions in sphere.</div><div class="ttdef"><b>Definition:</b> <a href="a00119_source.html#l00114">embree_raytracer.cpp:114</a></div></div>
 <div class="ttc" id="aa01163_html_a5608742889ff45a0294fdf21e5a85b2e"><div class="ttname"><a href="a01163.html#a5608742889ff45a0294fdf21e5a85b2e">HF::RayTracer::EmbreeRayTracer::device</a></div><div class="ttdeci">RTCDevice device</div><div class="ttdoc">All objects in Embree are created from this. https://www.embree.org/api.html#device-object.</div><div class="ttdef"><b>Definition:</b> <a href="a00122_source.html#l00075">embree_raytracer.h:75</a></div></div>
-<div class="ttc" id="aa01163_html_ac46476760e07cb2579eeb2b4c094522a"><div class="ttname"><a href="a01163.html#ac46476760e07cb2579eeb2b4c094522a">HF::RayTracer::EmbreeRayTracer::EmbreeRayTracer</a></div><div class="ttdeci">EmbreeRayTracer()</div><div class="ttdef"><b>Definition:</b> <a href="a00122_source.html#l00088">embree_raytracer.h:88</a></div></div>
+<div class="ttc" id="aa01163_html_ac46476760e07cb2579eeb2b4c094522a"><div class="ttname"><a href="a01163.html#ac46476760e07cb2579eeb2b4c094522a">HF::RayTracer::EmbreeRayTracer::EmbreeRayTracer</a></div><div class="ttdeci">EmbreeRayTracer()</div><div class="ttdoc">Create an EmbreeRayTracer with no arguments</div><div class="ttdef"><b>Definition:</b> <a href="a00122_source.html#l00101">embree_raytracer.h:101</a></div></div>
 <div class="ttc" id="aa01163_html_a70b9c1baf8390d8114c541d6a2ccb4f4"><div class="ttname"><a href="a01163.html#a70b9c1baf8390d8114c541d6a2ccb4f4">HF::RayTracer::EmbreeRayTracer::operator=</a></div><div class="ttdeci">void operator=(const EmbreeRayTracer &amp;ERT2)</div><div class="ttdoc">Increment reference counters to prevent destruction when a copy is made.</div><div class="ttdef"><b>Definition:</b> <a href="a00119_source.html#l00656">embree_raytracer.cpp:656</a></div></div>
 <div class="ttc" id="aa01163_html_a7c66f28f5b889021767745d198661da0"><div class="ttname"><a href="a01163.html#a7c66f28f5b889021767745d198661da0">HF::RayTracer::EmbreeRayTracer::scene</a></div><div class="ttdeci">RTCScene scene</div><div class="ttdoc">Container for a set of geometries, and the BVH. https://www.embree.org/api.html#scene-object.</div><div class="ttdef"><b>Definition:</b> <a href="a00122_source.html#l00077">embree_raytracer.h:77</a></div></div>
 <div class="ttc" id="aa00273_html"><div class="ttname"><a href="a00273.html">HF</a></div><div class="ttdoc">Output CSR for interop with other languages</div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00013">graph_generator.cpp:13</a></div></div>
