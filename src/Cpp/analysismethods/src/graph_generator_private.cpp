@@ -1,6 +1,6 @@
 ///
 /// \file		graph_generator_private.cpp
-/// \brief		Contains implementation for the <see cref="HF::AnalysisMethods::GraphGeneratorPrivate">GraphGeneratorPrivate</cref> class
+/// \brief		Contains implementation for the <see cref="HF::GraphGenerator::GraphGeneratorPrivate">GraphGeneratorPrivate</cref> class
 ///
 ///	\author		TBA
 ///	\date		26 Jun 2020
@@ -23,7 +23,7 @@ using std::vector;
 typedef std::pair<int, int> pair;
 typedef std::set<pair> set;
 
-namespace HF::AnalysisMethods {
+namespace HF::GraphGenerator {
 	constexpr v3 down{ 0, 0, -1 };
 	
 	/// Quick factorial oneliner

@@ -13,7 +13,7 @@ namespace HF {
 	
 	\remarks
 	The datatypes in the SpatialStructures Namespace are used throughout the HumanFactors library. 
-	For example, the HF::AnalysisMethods::GraphGenerator and HF::AnalysisMethods::VisibilityGraph both
+	For example, the HF::GraphGenerator and HF::VisibilityGraph both
 	produce a Graph	as output, allowing for the code to manage the Graph's internal CSR to be centralized
 	in a single location.
 	*/

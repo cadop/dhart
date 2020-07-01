@@ -1,6 +1,6 @@
 ///
 ///	\file		visibility_graph.cpp
-///	\brief		Contains implementation for the <see cref = "HF::AnalysisMethods::VisibilityGraph">VisibilityGraph</cref> class
+///	\brief		Contains implementation for the <see cref = "HF::VisibilityGraph">VisibilityGraph</cref> class
 ///
 ///	\author		TBA
 ///	\date		17 Jun 2020
@@ -19,13 +19,13 @@
 #include <node.h>
 #include <Constants.h>
 
-using namespace HF::AnalysisMethods;
+using namespace HF;
 using namespace HF::SpatialStructures;
 using HF::RayTracer::EmbreeRayTracer;
 using std::vector;
 using std::array;
 
-namespace HF::AnalysisMethods::VisibilityGraph {
+namespace HF::VisibilityGraph {
 	/*!
 		\brief Check if Node can be raised by height without clipping into any geometry.
 		

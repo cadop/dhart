@@ -1,6 +1,6 @@
 ///
 /// \file		view_analysis.cpp
-/// \brief		Contains implementation for the <see cref="HF::AnalysisMethods::ViewAnalysis">ViewAnalysis</cref> namespace
+/// \brief		Contains implementation for the <see cref="HF::ViewAnalysis">ViewAnalysis</cref> namespace
 ///
 ///	\author		TBA
 ///	\date		26 Jun 2020
@@ -21,7 +21,7 @@ using std::vector;
 using HF::SpatialStructures::Node;
 #undef min
 #undef max
-namespace HF::AnalysisMethods::ViewAnalysis {
+namespace HF::ViewAnalysis {
 
 	/// Convert a number from degrees to radians. 
 	constexpr float ConvertToRadians(float num_in_degrees) {

@@ -1,6 +1,6 @@
 ///
 /// \file		graph_generator.h
-/// \brief		Contains definitions for the <see cref="HF::AnalysisMethods::GraphGenerator">GraphGenerator</cref>
+/// \brief		Contains definitions for the <see cref="HF::GraphGenerator::GraphGenerator">GraphGenerator</cref>
 ///
 ///	\author		TBA
 ///	\date		26 Jun 2020
@@ -13,7 +13,12 @@
 #include <set>
 #include <embree_raytracer.h>
 
-namespace HF::AnalysisMethods {
+
+/*! \brief Generate a graph of accessible space from a given start point. 
+
+	\see GraphGenerator for more details.
+*/
+namespace HF::GraphGenerator {
 	using v3 = std::array<float, 3>;
 	class GraphGenerator;
 	class UniqueQueue;
@@ -125,7 +130,7 @@ namespace HF::AnalysisMethods {
 
 				using HF::Geometry::LoadMeshObjects;
 				using HF::RayTracer::EmbreeRayTracer;
-				using HF::AnalysisMethods::GraphGenerator;
+				using HF::GraphGenerator::GraphGenerator;
 				using HF::SpatialStructures::Graph;
 
 				// Prepare the file path for plane.obj, load the mesh objects into mesh

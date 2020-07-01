@@ -11,7 +11,7 @@
 #include <string>
 #include <array>
 
-using namespace HF::AnalysisMethods::VisibilityGraph;
+using namespace HF::VisibilityGraph;
 using HF::SpatialStructures::Graph;
 using HF::SpatialStructures::Node;
 using HF::RayTracer::EmbreeRayTracer;
@@ -75,7 +75,7 @@ TEST(_VisibilityGraph, NodesOnFlatPlaneWithWallDontConnect) {
 }
 
 ///
-///	The following are tests for the code samples for HF::AnalysisMethods::VisibilityGraph
+///	The following are tests for the code samples for HF::VisibilityGraph
 ///
 
 TEST(_visibilityGraph, AllToAll) {
@@ -109,7 +109,7 @@ TEST(_visibilityGraph, AllToAll) {
 	// AllToAll constructs and returns a Graph 
 	// consisting of Node (from node_vec) that do not occlude each other
 	float desired_height = 2.0f;		// Height of graph
-	HF::SpatialStructures::Graph graph = HF::AnalysisMethods::VisibilityGraph::AllToAll(tracer, node_vec, desired_height);
+	HF::SpatialStructures::Graph graph = HF::VisibilityGraph::AllToAll(tracer, node_vec, desired_height);
 }
 
 TEST(_visibilityGraph, GroupToGroup) {
@@ -153,7 +153,7 @@ TEST(_visibilityGraph, GroupToGroup) {
 	// GroupToGroup constructs and returns a Graph consisting of Node
 	// (between node_vec_0 and node_vec_1) such that the nodes do not occlude each other
 	float desired_height = 2.0f;		// Height of graph
-	HF::SpatialStructures::Graph graph = HF::AnalysisMethods::VisibilityGraph::GroupToGroup(tracer, node_vec_0, node_vec_1, desired_height);
+	HF::SpatialStructures::Graph graph = HF::VisibilityGraph::GroupToGroup(tracer, node_vec_0, node_vec_1, desired_height);
 }
 
 TEST(_visibilityGraph, AllToAllUndirected) {
@@ -189,5 +189,5 @@ TEST(_visibilityGraph, AllToAllUndirected) {
 	float desired_height = 2.0f;		// Height of graph
 	int core_count = 4;					// For omp_set_num_threads(int num_threads), CPU core count
 	HF::SpatialStructures::Graph graph = 
-		HF::AnalysisMethods::VisibilityGraph::AllToAllUndirected(tracer, node_vec, desired_height, core_count);
+		HF::VisibilityGraph::AllToAllUndirected(tracer, node_vec, desired_height, core_count);
 }

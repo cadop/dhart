@@ -1,9 +1,19 @@
 #include <vector>
 #include <array>
 
+/*!
+	\brief Perform human scale analysis on 3D environments.
 
+	\remarks
+	This is the base namespace for the HumanFactors package. All future modules should remain in this
+	namespace and this should act as a jump page for all major sections of documentation.
+
+*/
+namespace HF {
+}
 
 #define C_INTERFACE extern "C" __declspec(dllexport) int
+
 /// <summary>
 /// Convert a raw array from an external caller to an organized vector of points
 /// </summary>
