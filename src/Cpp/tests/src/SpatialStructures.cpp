@@ -4,6 +4,8 @@
 #include <node.h>
 #include <edge.h>
 
+#include "spatialstructures_C.h"
+
 using namespace HF::SpatialStructures;
 namespace GraphTests {
     TEST(_Graph, Creation) {
@@ -1283,3 +1285,390 @@ namespace ConstantsExampleTests {
 	}
 }
 
+namespace CInterfaceTests {
+	TEST(_NodeCInterface, GetAllNodesFromGraph) {
+		// Requires #include "graph.h"
+
+		HF::SpatialStructures::Graph* g = nullptr;
+
+		// parameters nodes and num_nodes are unused, according to documentation
+		if (CreateGraph(nullptr, -1, &g)) {
+			std::cout << "Graph creation successful";
+		}
+		else {
+			std::cout << "Graph creation failed" << std::endl;
+		}
+
+		float n0[] = { 0, 0, 0 };
+		float n1[] = { 0, 1, 2 };
+		float n2[] = { 0, 1, 3 };
+
+		AddEdgeFromNodes(g, n0, n1, 1);
+		AddEdgeFromNodes(g, n0, n2, 2);
+		AddEdgeFromNodes(g, n1, n0, 3);
+		AddEdgeFromNodes(g, n1, n2, 4);
+		AddEdgeFromNodes(g, n2, n0, 5);
+		AddEdgeFromNodes(g, n2, n1, 6);
+		
+		// Dynamically allocate space for output parameters that will come from
+		// GetAllNodesFromGraph
+		auto out_vec = new std::vector<HF::SpatialStructures::Node>;
+		auto out_data = new HF::SpatialStructures::Node;
+
+		GetAllNodesFromGraph(g, &out_vec, &out_data);
+
+		// Release memory for g, out_vec, and out_data after use
+		DestroyGraph(g);
+		DestroyNodes(out_vec);
+
+		if (out_data) {
+			delete out_data;
+			out_data = nullptr;
+		}
+	}
+
+	TEST(_NodeCInterface, GetEdgesForNode) {
+		// not ready yet
+	}
+
+	TEST(_NodeCInterface, GetSizeOfNodeVector) {
+		// Requires #include "node.h", #include <vector>
+
+		HF::SpatialStructures::Node n0(0, 0, 0);
+		HF::SpatialStructures::Node n1(0, 1, 1);
+		HF::SpatialStructures::Node n2(0, 1, 2);
+		HF::SpatialStructures::Node n3(1, 2, 3);
+
+		auto node_vec = new std::vector<HF::SpatialStructures::Node>{ n0, n1, n2, n3 };
+
+		int node_vec_size = -1;
+		GetSizeOfNodeVector(node_vec, &node_vec_size);
+
+		DestroyNodes(node_vec);
+	}
+
+	TEST(_NodeCInterface, GetSizeOfEdgeVector) {
+		// unused
+	}
+
+	TEST(_NodeCInterface, AggregateCosts) {
+		// Requires #include "graph.h"
+
+		HF::SpatialStructures::Graph* g = nullptr;
+
+		// parameters nodes and num_nodes are unused, according to documentation
+		if (CreateGraph(nullptr, -1, &g)) {
+			std::cout << "Graph creation successful";
+		}
+		else {
+			std::cout << "Graph creation failed" << std::endl;
+		}
+
+		float n0[] = { 0, 0, 0 };
+		float n1[] = { 0, 1, 2 };
+		float n2[] = { 0, 1, 3 };
+
+		AddEdgeFromNodes(g, n0, n1, 1);
+		AddEdgeFromNodes(g, n0, n2, 2);
+		AddEdgeFromNodes(g, n1, n0, 3);
+		AddEdgeFromNodes(g, n1, n2, 4);
+		AddEdgeFromNodes(g, n2, n0, 5);
+		AddEdgeFromNodes(g, n2, n1, 6);
+
+		std::vector<float>* out_vector = nullptr;
+		float* out_data = nullptr;
+
+		int aggregation_type = 0;
+		AggregateCosts(g, aggregation_type, false, &out_vector, &out_data);
+
+		// Release memory for g, out_vector, and out_data after use
+		DestroyGraph(g);
+
+		if (out_vector) {
+			delete out_vector;
+			out_vector = nullptr;
+
+			if (out_data) {
+				delete out_data;
+				out_data = nullptr;
+			}
+		}
+	}
+
+		TEST(_NodeCInterface, CreateGraph) {
+			// Requires #include "graph.h"
+
+			HF::SpatialStructures::Graph* g = nullptr;
+
+			// parameters nodes and num_nodes are unused, according to documentation
+			if (CreateGraph(nullptr, -1, &g)) {
+				std::cout << "Graph creation successful";
+			}
+			else {
+				std::cout << "Graph creation failed" << std::endl;
+			}
+
+			// use Graph
+
+			// Release memory for g after use
+			DestroyGraph(g);
+		}
+
+
+		TEST(_NodeCInterface, AddEdgeFromNodes) {
+			// Requires #include "graph.h"
+
+			HF::SpatialStructures::Graph* g = nullptr;
+
+			// parameters nodes and num_nodes are unused, according to documentation
+			if (CreateGraph(nullptr, -1, &g)) {
+				std::cout << "Graph creation successful";
+			}
+			else {
+				std::cout << "Graph creation failed" << std::endl;
+			}
+
+			float n0[] = { 0, 0, 0 };
+			float n1[] = { 0, 1, 2 };
+			const float distance = 3;
+
+			AddEdgeFromNodes(g, n0, n1, distance);
+
+			// Release memory for g after use
+			DestroyGraph(g);
+		}
+
+
+		TEST(_NodeCInterface, AddEdgeFromNodeIDs) {
+			// Requires #include "graph.h"
+
+			HF::SpatialStructures::Graph* g = nullptr;
+
+			// parameters nodes and num_nodes are unused, according to documentation
+			if (CreateGraph(nullptr, -1, &g)) {
+				std::cout << "Graph creation successful";
+			}
+			else {
+				std::cout << "Graph creation failed" << std::endl;
+			}
+
+			const int id0 = 0;
+			const int id1 = 1;
+			const float distance = 3;
+
+			AddEdgeFromNodeIDs(g, id0, id1, distance);
+
+			// Release memory for g after use
+			DestroyGraph(g);
+		}
+
+		TEST(_NodeCInterface, GetCSRPointers) {
+			// Requires #include "graph.h"
+
+			HF::SpatialStructures::Graph* g = nullptr;
+
+			// parameters nodes and num_nodes are unused, according to documentation
+			if (CreateGraph(nullptr, -1, &g)) {
+				std::cout << "Graph creation successful";
+			}
+			else {
+				std::cout << "Graph creation failed" << std::endl;
+			}
+
+			CreateGraph(nullptr, -1, &g);
+
+			float n0[] = { 0, 0, 0 };
+			float n1[] = { 0, 1, 2 };
+			float n2[] = { 0, 1, 3 };
+
+			AddEdgeFromNodes(g, n0, n1, 1);
+			AddEdgeFromNodes(g, n0, n2, 2);
+			AddEdgeFromNodes(g, n1, n0, 3);
+			AddEdgeFromNodes(g, n1, n2, 4);
+			AddEdgeFromNodes(g, n2, n0, 5);
+			AddEdgeFromNodes(g, n2, n1, 6);
+
+			Compress(g);
+
+			// data = { 1, 2, 3, 4, 5, 6 }
+			// r = { 0, 2, 4 }
+			// c = { 1, 2, 0, 2, 0, 1 }
+
+			// Retrieve the CSR from the graph
+			CSRPtrs csr;
+
+			// Prepare the csr fields
+			const int MAX_SIZE = 16;
+			csr.data = new float[MAX_SIZE];
+			csr.inner_indices = new int[MAX_SIZE];
+			csr.outer_indices = new int[MAX_SIZE];
+
+			GetCSRPointers(g, &csr.nnz, &csr.rows, &csr.cols, &csr.data, &csr.inner_indices, &csr.outer_indices);
+
+			// Release CSR data
+			if (csr.data) {
+				delete csr.data;
+				csr.data = nullptr;
+			}
+
+			if (csr.inner_indices) {
+				delete csr.inner_indices;
+				csr.inner_indices = nullptr;
+			}
+
+			if (csr.outer_indices) {
+				delete csr.outer_indices;
+				csr.outer_indices = nullptr;
+			}
+
+			// Release memory for g after use
+			DestroyGraph(g);
+		}
+
+		TEST(_NodeCInterface, GetNodeID) {
+			// Requires #include "graph.h"
+
+			HF::SpatialStructures::Graph* g = nullptr;
+
+			// parameters nodes and num_nodes are unused, according to documentation
+			if (CreateGraph(nullptr, -1, &g)) {
+				std::cout << "Graph creation successful";
+			}
+			else {
+				std::cout << "Graph creation failed" << std::endl;
+			}
+
+			CreateGraph(nullptr, -1, &g);
+
+			float n0[] = { 0, 0, 0 };
+			float n1[] = { 0, 1, 2 };
+			const float distance = 3;
+
+			AddEdgeFromNodes(g, n0, n1, distance);
+
+			float point[] = { 0, 1, 2 };
+			int result_id = -1;
+
+			GetNodeID(g, point, &result_id);
+
+			// Release memory for g after use
+			DestroyGraph(g);
+		}
+
+		TEST(_NodeCInterface, Compress) {
+			// Requires #include "graph.h"
+
+			HF::SpatialStructures::Graph* g = nullptr;
+
+			// parameters nodes and num_nodes are unused, according to documentation
+			if (CreateGraph(nullptr, -1, &g)) {
+				std::cout << "Graph creation successful";
+			}
+			else {
+				std::cout << "Graph creation failed" << std::endl;
+			}
+
+			CreateGraph(nullptr, -1, &g);
+
+			float n0[] = { 0, 0, 0 };
+			float n1[] = { 0, 1, 2 };
+			float n2[] = { 0, 1, 3 };
+
+			AddEdgeFromNodes(g, n0, n1, 1);
+			AddEdgeFromNodes(g, n0, n2, 2);
+			AddEdgeFromNodes(g, n1, n0, 3);
+			AddEdgeFromNodes(g, n1, n2, 4);
+			AddEdgeFromNodes(g, n2, n0, 5);
+			AddEdgeFromNodes(g, n2, n1, 6);
+
+			Compress(g);
+
+			// data = { 1, 2, 3, 4, 5, 6 }
+			// r = { 0, 2, 4 }
+			// c = { 1, 2, 0, 2, 0, 1 }
+
+			// Release memory for g after use
+			DestroyGraph(g);
+		}
+
+		TEST(_NodeCInterface, ClearGraph) {
+			// Requires #include "graph.h"
+
+			HF::SpatialStructures::Graph* g = nullptr;
+
+			// parameters nodes and num_nodes are unused, according to documentation
+			if (CreateGraph(nullptr, -1, &g)) {
+				std::cout << "Graph creation successful";
+			}
+			else {
+				std::cout << "Graph creation failed" << std::endl;
+			}
+
+			CreateGraph(nullptr, -1, &g);
+
+			float n0[] = { 0, 0, 0 };
+			float n1[] = { 0, 1, 2 };
+			const float distance = 3;
+
+			AddEdgeFromNodes(g, n0, n1, distance);
+
+			ClearGraph(g);
+
+			// Release memory for g after use
+			DestroyGraph(g);
+		}
+
+		TEST(_NodeCInterface, DestroyNodes) {
+			// Requires #include "node.h", #include <vector>
+
+			HF::SpatialStructures::Node n0(0, 0, 0);
+			HF::SpatialStructures::Node n1(0, 1, 1);
+			HF::SpatialStructures::Node n2(0, 1, 2);
+			HF::SpatialStructures::Node n3(1, 2, 3);
+
+			auto node_vec = new std::vector<HF::SpatialStructures::Node>{ n0, n1, n2, n3 };
+
+			// Use node_vec
+
+			DestroyNodes(node_vec);
+		}
+
+		TEST(_NodeCInterface, DestroyEdges) {
+			// Requires #include "node.h", #include <vector>
+
+			HF::SpatialStructures::Node n0(0, 0, 0);
+			HF::SpatialStructures::Node n1(0, 1, 1);
+			HF::SpatialStructures::Node n2(0, 1, 2);
+			HF::SpatialStructures::Node n3(1, 2, 3);
+
+			HF::SpatialStructures::Edge e0(n1); // parent is n0
+			HF::SpatialStructures::Edge e1(n3); // parent is n2
+
+			auto edge_vec = new std::vector<HF::SpatialStructures::Edge>{ e0, e1 };
+
+			// Use edge_vec
+
+			DestroyEdges(edge_vec);
+		}
+
+		TEST(_NodeCInterface, DestroyGraph) {
+			// Requires #include "graph.h"
+
+			HF::SpatialStructures::Graph* g = nullptr;
+
+			// parameters nodes and num_nodes are unused, according to documentation
+			if (CreateGraph(nullptr, -1, &g)) {
+				std::cout << "Graph creation successful";
+			}
+			else {
+				std::cout << "Graph creation failed" << std::endl;
+			}
+
+			CreateGraph(nullptr, -1, &g);
+
+			// use Graph
+
+			// Release memory for g after use
+			DestroyGraph(g);
+		}
+	}
