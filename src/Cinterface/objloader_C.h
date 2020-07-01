@@ -78,9 +78,9 @@ C_INTERFACE LoadOBJ(
 		std::vector<HF::Geometry::MeshInfo>* info = nullptr;
 
 		int mesh_indices[] = { 0, 1, 2 };
-		const int mesh_num_indices = sizeof * mesh_indices;
+		const int mesh_num_indices = 3;
 		float mesh_vertices[] = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
-		const int mesh_num_vertices = sizeof * mesh_vertices;
+		const int mesh_num_vertices = 9;
 
 		std::string mesh_name = "This mesh";
 		const int mesh_id = 0;
@@ -122,9 +122,9 @@ C_INTERFACE StoreMesh(
 		std::vector<HF::Geometry::MeshInfo>* info = nullptr;
 
 		int mesh_indices[] = { 0, 1, 2 };
-		const int mesh_num_indices = sizeof * mesh_indices;
+		const int mesh_num_indices = 3;
 		float mesh_vertices[] = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
-		const int mesh_num_vertices = sizeof * mesh_vertices;
+		const int mesh_num_vertices = 9;
 
 		std::string mesh_name = "This mesh";
 		const int mesh_id = 0;

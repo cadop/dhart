@@ -102,3 +102,52 @@ namespace CInterfaceTests {
 		}
 	}
 }
+
+namespace CInterfaceTests {
+	TEST(_CInterfaceUtils, ConvertRawFloatArrayToPoints) {
+		// Requires #include "cinterface_utils.h"
+
+		float raw_array[] = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
+		const int size = 9;
+
+		std::vector<std::array<float, 3>> points = ConvertRawFloatArrayToPoints(raw_array, size);
+	}
+
+	TEST(_CInterfaceUtils, ConvertRawIntArrayToPoints) {
+		// Requires #include "cinterface_utils.h"
+
+		int raw_array[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
+		const int size = 9;
+
+		std::vector<std::array<int, 3>> points = ConvertRawIntArrayToPoints(raw_array, size);
+	}
+
+	TEST(_CInterfaceUtils, DestroyFloatVector) {
+		// Requires #include "cinterface_utils.h"
+
+		std::vector<float>* vec = new std::vector<float>{ 3, 6, 9 };
+
+		// operator delete called on vec within DestroyFloatVector 
+		if (DestroyFloatVector(vec)) {
+			std::cout << "DestroyFloatVector was successful" << std::endl;
+			vec = nullptr;
+		}
+		else {
+			std::cout << "DestroyFloatVector unsuccessful" << std::endl;
+		}
+	}
+
+	TEST(_CInterfaceUtils, DeleteRawPtr) {
+		// Requires #include "cinterface_utils.h"
+
+		std::vector<int>* vec = new std::vector<int>{ 6, 3, 1, 0, 5, 0 };
+
+		DeleteRawPtr<std::vector<int>>(vec);
+
+		// At this point here, we assume DeleteRawPtr was successful.
+		// We set vec to nullptr to eliminate a dangling pointer.
+		if (vec) {
+			vec = nullptr;
+		}
+	}
+}
