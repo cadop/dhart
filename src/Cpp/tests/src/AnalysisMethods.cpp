@@ -19,7 +19,7 @@ namespace HF {
 		auto g = GG.BuildNetwork(
 			std::array<float, 3>{0, 0, 0.5},
 			std::array<float, 3>{0.02f, 0.02f, 0.02f},
-			100000,
+			1000,
 			1,
 			1,
 			1,

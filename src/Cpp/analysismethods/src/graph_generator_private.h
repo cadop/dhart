@@ -11,162 +11,303 @@
 #include <graph_generator.h>
 #include <unique_queue.h>
 #include <set>
-namespace HF{
-	namespace AnalysisMethods {
+namespace HF::AnalysisMethods {
+	/// <summary>
+	/// Contains the private implementation of the GraphGenerator to insulate the clients from the implementation.
+	/// </summary>
+	/// 
+	/*!
+		\todo Combine this with the graphgenerator public and create a single class. 
+	*/
+	class GraphGeneratorPrivate {
+	
+	private:
+		HF::SpatialStructures::Graph G;			  ///< An internal graph that is iterated upon as the program is executed
+		HF::AnalysisMethods::GraphGenerator & GG; ///< The underlying graph generator to hold all the settings
+
+		/// <summary> Determine if a node is above a valid floor. </summary>
+		/// <param name="position"> Node to check. </param>
+		/// <returns> True if the node is above a valid floor, false othewise. </returns>
+		/*! \details Identical to CheckRay, but without any side effects. (the value of position won't change).*/
+		bool WalkableCheck(const SpatialStructures::Node& position);
+
 		/// <summary>
-		/// Contains the private implementation of the graph generator so clients aren't forced to recompile
+		/// Calculate positions for every direction pair in directions, then deposit in out children
 		/// </summary>
-		class GraphGeneratorPrivate {
+		/// <param name="parent"> The parent node </param>
+		/// <param name="directions"> A reference to a direction pair (coordinates) </param>
+		/// <param name="out_children">
+		/// A reference to a vector of Node where children will be deposited.
+		/// </param>
+		/// \deprecated From old codebase. Replaced with \link permutations \endlink.
+		void Graphdirecs(
+			const SpatialStructures::Node& parent,
+			const std::vector<std::pair<int, int>>& directions,
+			std::vector<SpatialStructures::Node>& out_children
+		);
+
+		/// <summary>
+		/// Push point to the ground if there is ground beneath it.
+		/// </summary>
+		/// <param name="start"> Start point to check and modify. </param>
+		/// <returns> Returns true if CheckRay(start, down) is true, false otherwise </returns>
+		/// 
+		/*!
+			\post 
+			If true is returned, the start point is placed directly on top of the geometry below it.
+			If false, the start point is unmodified.
+			
+			\todo Is this needed? This is identical to CheckRay.
+		*/
+		bool CheckStart(v3& start);
+
+		/// <summary>
+		/// Populate out_children with a potential child position for every direction in directions.
+		/// </summary>
+		/// <param name="parent"> Parent to generate children for. </param>
+		/// <param name="directions">
+		/// X,Y pairs to use for generating children. I.E. A pair of `{1,2}`would create a child
+		/// at `{parent.x + 1*spacing.x, parent.y + 2*spacing.y, parent.z + spacing.z}.`
+		/// </param>
+		/// <param name="out_children"> Output parameter for children. </param>
+		/// 
+		/*!
+			\post out_children is filled with children generated from parent and directions.
+
+			\todo Potential speed gain here by using indexing instead of emplace_back.
+		*/
+		void GeneratePotentialChildren(
+			const HF::SpatialStructures::Node& parent,
+			const std::vector<std::pair<int, int>>& directions,
+			std::vector<HF::SpatialStructures::Node>& out_children
+		);
 		
-		private:
-			HF::SpatialStructures::Graph G;			  ///< An internal graph that is iterated upon as the program is executed ///<
-			HF::AnalysisMethods::GraphGenerator & GG; ///< The underlying graph generator; ///<
-
-			/// <summary>
-			/// Invokes CheckRay using a temporary instance of v3 (named testpos), constructed from position
-			/// </summary>
-			/// <param name="position">The node to use for CheckRay</param>
-			/// <returns>See CheckRay, returns value from CheckRay(testpos, down, FLOORS)</returns>
-			bool WalkableCheck(const SpatialStructures::Node& position);
-
-			/// <summary>
-			/// Calculate positions for every direction pair in directions, then deposit in out children
-			/// </summary>
-			/// <param name="parent">The parent node</param>
-			/// <param name="directions">A reference to a direction pair (coordinates)</param>
-			/// <param name="out_children">A reference to a vector of Node where children will be deposited</param>
-			void Graphdirecs(const SpatialStructures::Node& parent, const std::vector<std::pair<int, int>>& directions, std::vector<SpatialStructures::Node>& out_children);
-
-			///<summary>
-			/// Push point to the ground if there is ground beneath it and return true. Return false if it isn't on any walkable terrain.
-			///</summary>
-			/// <param name="start">Reference to v3 instance</param>
-			/// <returns>Returns true if CheckRay(start, down) is true, false otherwise</returns>
-			bool CheckStart(v3& start);
-
-			/// <summary>
-			/// Populate out_children with a potential child position for every direction in directions.
-			/// </summary>
-			/// <param name="parent">parent to start from</param>
-			/// <param name="directions">An array of pairs for the x and y direction</param>
-			/// <param name="out_children">Output array</param>
-			void GeneratePotentialChildren(const HF::SpatialStructures::Node& parent, const std::vector<std::pair<int, int>>& directions, std::vector<HF::SpatialStructures::Node>& out_children);
-
+		/// <summary> Begin breadth first search to populate the graph with with nodes and edges. </summary>
+		/// <param name="todo">
+		/// Todo list to hold unchecked nodes. Must atleast contain a single start point.
+		/// </param>
+		/*! 
+			\pre todo contains the starting point for the graph.
 			
-			/// <summary>
-			/// Populate the graph with with nodes and edges
-			/// </summary>
-			/// <param name="todo"> A unique queue with a single start point</param>
-			void CrawlGeom(UniqueQueue & todo);
-
-			/// <summary>
-			/// A parallel version of CrawlGeom
-			/// </summary>
-			/// <param name="todo"></param>
-			/// <returns></returns>
-			void CrawlGeomParallel(UniqueQueue& todo);
-
-			/// <summary>
-			/// Ranks children then stores relations?
-			/// </summary>
-			/// <param name="parent">The desired parent node</param>
-			/// <param name="directions">A reference to a vector of integer pairs, representing directions</param>
-			/// <param name="out_relations">A reference to a vector of Edge, representing relations</param>
-			inline void ComputerParent(const HF::SpatialStructures::Node& parent, const std::vector<std::pair<int, int>>& directions, std::vector<HF::SpatialStructures::Edge>& out_relations);
-
-			/// <summary>
-			/// Fire a ray using the Embree Ray Tracer
-			/// </summary>
-			/// <param name="position">Node to use as the origin. On Hit, this node's position will be overridden</param>
-			/// <param name="direction">Direction to fire the ray in</param>
-			/// <param name="flag">Fire at floors or obstacles</param>
-			/// <returns>True on hit, false otherwise</returns>
-			bool CheckRay(HF::SpatialStructures::Node& position, const v3& direction, HIT_FLAG flag = HIT_FLAG::BOTH);
+			\todo Extract the set logic for directions to another function.
 			
-			/// <summary>
-			/// Fire a ray using the Embree Ray Tracer
-			/// </summary>
-			/// <param name="position">Node to use as the origin. On Hit, this node's position will be overridden</param>
-			/// <param name="direction">Direction to fire the ray in</param>
-			/// <param name="flag">Fire at floors or obstacles</param>
-			/// <returns>True on hit, false otherwise</returns>
-			bool CheckRay(v3& position, const v3& direction, HIT_FLAG flag = HIT_FLAG::BOTH);
+			\see CrawlGeomParallel for a parallel version.
+		*/
+		void CrawlGeom(UniqueQueue & todo);
 
-			/// <summary>
-			/// Check if parent has a line of sight to child within max_dist
-			/// </summary>
-			/// <param name="parent"> Node to shoot from</param>
-			/// <param name="child">Node to shoot to</param>
-			/// <returns>True if there is an unobstructed path between parent and child</returns>
-			bool OcclusionCheck(const SpatialStructures::Node & parent, const SpatialStructures::Node & child);
+		/// <summary> A parallel version of CrawlGeom. </summary>
+		/// <param name="todo">
+		/// Todo list to use for execution. Must atleast contain a single start point.
+		/// </param>
+		/*! 
+			\pre todo contains the start point for the graph.
 			
-			/// <summary>
-			/// Check the floor
-			/// </summary>
-			/// <param name="parent">The desired parent</param>
-			/// <param name="child">The desired child</param>
-			/// <returns>True if the child isn't lower than the maximum z coordinate offset, false otherwise</returns>
-			bool CheckFloor(const HF::SpatialStructures::Node& parent, HF::SpatialStructures::Node& child);
-
-			/// <summary>
-			/// Returns true if the slope is up, and false otherwise
-			/// </summary>
-			/// <param name="n1">The first node to compare</param>
-			/// <param name="n2">The second node to compare</param>
-			/// <returns>True, if the slope of n1 and n2 is positive (upward), false otherwise</returns>
-			bool isUpSlope(const HF::SpatialStructures::Node& n1, const HF::SpatialStructures::Node& n2);
-
-			/// <summary>
-			/// Calculates children for parent and places them in out_children
-			/// </summary>
-			/// <param name="parent">Reference to parent node</param>
-			/// <param name="possible_children">Reference to vector of node, representing possible children</param>
-			/// <param name="out_children">Reference to vector of Edge, representing edges of children</param>
-			void GetChildren(const HF::SpatialStructures::Node & parent, const std::vector<SpatialStructures::Node>& possible_children, std::vector<HF::SpatialStructures::Edge>& out_children);
-
-			/// <summary>
-			/// Fire a ray from the parent to each child node to see if it satisfies step requirements
-			/// </summary>
-			/// <param name="parent">The parent node to fire the ray from</param>
-			/// <param name="children">A list of child nodes to check</param>
-			/// <returns>A list of valid nodes</returns>
-			std::vector<HF::SpatialStructures::Node> CheckChildren(const HF::SpatialStructures::Node& parent, std::vector<HF::SpatialStructures::Node> Children);
-
-			/// <summary>
-			/// Check if there is a connection between each node
-			/// </summary>
-			/// <param name="parent">The desired parent node</param>
-			/// <param name="child">The desired child node</param>
-			/// <returns>True if parent and child are connected, false otherwise</returns>
-			bool IsConnected(const HF::SpatialStructures::Node& parent, const HF::SpatialStructures::Node& child);
+			\todo Extract the set logic for directions to another function.
 			
-			/// <summary>
-			/// Get the distance between the node and where the ray hits. If the ray doesn't hit return 0
-			/// </summary>
-			/// <param name="p1">The desired node to assess</param>
-			/// <param name="direction">The direction of the ray</param>
-			/// <param name="flag">Ray collision status, 1 = FLOORS, 2 = OBSTACLES, 3 = BOTH (the default)</param>
-			/// <returns>Distance between the node and the ray collision -- 0.0f if ray does not hit</returns>
-			float RayDist(const HF::SpatialStructures::Node& p1, const v3& direction, HIT_FLAG flag = HIT_FLAG::BOTH);
+			\see CrawlGeom for a serial version.
+		*/
+		void CrawlGeomParallel(UniqueQueue& todo);
 
-			///<summary>
-			/// Check if the parent and child have a connection between them. May move nodes around to fit on ground mesh.
-			///</summary>
-			HF::SpatialStructures::STEP CheckConnection(const HF::SpatialStructures::Node& parent, const HF::SpatialStructures::Node& child);
+		/// <summary> Generate edges and children for parent in relations. </summary>
+		/// <param name="parent"> Parent node to generate children from. </param>
+		/// <param name="directions"> Directions to generate children in. </param>
+		/// <param name="out_relations"> Output parameter for relations. </param>
+		/*! 
+			\post out_relation contains all valid edges between parent and its children.
+		
+			\see GeneratePotentialChildren for info on how directions are used to generate children. 
+		*/
+		inline void ComputerParent(
+			const HF::SpatialStructures::Node& parent,
+			const std::vector<std::pair<int, int>>& directions,
+			std::vector<HF::SpatialStructures::Edge>& out_relations
+		);
 
-		public:
+		/// <summary> Cast a ray and overwrite position with the result. </summary>
+		/// <param name="position">
+		/// Node to use as the origin. On Hit, this node's position will be overridden
+		/// </param>
+		/// <param name="direction"> Direction to fire the ray in </param>
+		/// <param name="flag"> The type of geometry to intersect </param>
+		/// <returns> True if the ray intersected any geometry. False otherwise. </returns>
+		/*!
+			\post If true is returned, position contains the point where the casted ray intersected geometry.
+		*/
+		bool CheckRay(
+			HF::SpatialStructures::Node& position,
+			const v3& direction,
+			HIT_FLAG flag = HIT_FLAG::BOTH
+		);
+		
+		/// <summary> Cast a ray and overwrite position with the point of intersection. </summary>
+		/// <param name="position">
+		/// Node to use as the origin. On intersection, this node's position will be overridden
+		/// with the point of intersection.
+		/// </param>
+		/// <param name="direction"> Direction to cast the ray in. </param>
+		/// <param name="flag">
+		/// The type of geometry to collide with. See HIT_FLAG for more details.
+		/// </param>
+		/// <returns> True on hit, false otherwise. </returns>
+		/*!
+			\post If true is returned, position contains the point where the casted ray intersected geometry.
 
-			/// <summary>
-			/// Default constructor
-			/// </summary>
-			/// <param name="GG">The GraphGenerator used to create this instance</param>
-			GraphGeneratorPrivate(GraphGenerator & GG);
+			\exception std::exception if HIT_FLAG isn't a valid value.
+		*/
+		bool CheckRay(
+			v3& position,
+			const v3& direction,
+			HIT_FLAG flag = HIT_FLAG::BOTH
+		);
 
-			/// <summary>
-			/// TODO description
-			/// </summary>
-			/// <returns>TODO returns</returns>
-			HF::SpatialStructures::Graph BuildNetwork();
-		};
-	}
+		/// <summary> Check if there is an obstruction between parent and child. </summary>
+		/// <param name="parent"> Parent node to cast the ray from. </param>
+		/// <param name="child"> Child node to cast the ray to. </param>
+		/// <returns> True if there is an obstacle blocking line of sight between between parent and child. </returns>
+		/*! This function casts an occlusion ray from parent to child with a maximum distance
+			equal to the distance between both nodes.
+		*/
+		bool OcclusionCheck
+		(
+			const SpatialStructures::Node & parent,
+			const SpatialStructures::Node & child
+		);
+		
+		/// <summary>
+		/// Offset child to the floor, then check if it abides by upstep and downstep limits.
+		/// </summary>
+		/// <param name="parent"> Parent of child. </param>
+		/// <param name="child">
+		/// Child to check. Is moved to the floor if a floor is beneath it.
+		/// </param>
+		/// <returns>
+		/// True if the child has a floor beneath it, and when offset it doesn't exceed the
+		/// maximum upstep or downstep when compared to parent.
+		/// </returns>
+		/*! 
+			\deprecated 
+			\link CheckChildren \endlink performs the same function, but works on an array of nodes.
+		*/
+		bool CheckFloor(
+			const HF::SpatialStructures::Node& parent,
+			HF::SpatialStructures::Node& child
+		);
+
+		/// <summary> Determine if the graph can traverse the slope from n1 to n2. </summary>
+		/// <param name="n1"> Node that's being traversed from. </param>
+		/// <param name="n2"> Node that's being traversed to. </param>
+		/// <returns> True if the slope between n1 and n2 is within the limits in our settings. 
+		/// False otherwise. </returns>
+		/// \todo Rename this function to SlopeCheck, or SlopeCalc like the function it's based on in 
+		/// the original python code. 
+		bool isUpSlope(
+			const HF::SpatialStructures::Node& n1,
+			const HF::SpatialStructures::Node& n2
+		);
+
+		/// <summary> Create all possible edges from parent to possible_children. </summary>
+		/// <param name="parent"> Parent node used to generate contents of possible_children. </param>
+		/// <param name="possible_children">
+		/// Possible children for parent. Usually generated from GeneratePotentialChildren.
+		/// </param>
+		/// <param name="out_children">
+		/// An output array for valid edges in after they've been evaluated.
+		/// </param>
+		/*!
+			\details 
+			All children are offset to the ground using \link CheckChildren \endlink, then a connection to parent
+			is checked for using CheckConnection. If CheckChildren or CheckConnection is not successful
+			for a child node, then it will not have an edge created in out_children.
+
+			\post 
+			out_children contains a set of all valid edges between parent and the children in possible_children.
+		*/
+		void GetChildren(
+			const HF::SpatialStructures::Node & parent,
+			const std::vector<SpatialStructures::Node>& possible_children,
+			std::vector<HF::SpatialStructures::Edge>& out_children
+		);
+
+		/// <summary>
+		/// Offset all children to the ground, then check if traversing from parent would
+		/// require a step outside of step height limits.
+		/// </summary>
+		/// <param name="parent"> Parent of all children in children. </param>
+		/// <param name="children"> Child nodes to check. </param>
+		/// <returns>
+		/// All children that are above a valid floor and can be traversed to by parent without
+		/// requiring a step outside of step height limits.
+		/// </returns>
+		/*!
+			\todo Why is Children not const?
+		*/
+		std::vector<HF::SpatialStructures::Node> CheckChildren(
+			const HF::SpatialStructures::Node& parent,
+			std::vector<HF::SpatialStructures::Node> Children
+		);
+
+		/*! 
+			\deprecated
+			Never used or implemented. In the Python code this would have cast a ray
+			between parent and child then compared distance between the ray's intersection point
+			with the distance between parent and child to see if there was a clear line of sight.
+			Succeeded by \link OcclusionCheck \endlink. 
+		*/
+		bool IsConnected(
+			const HF::SpatialStructures::Node& parent,
+			const HF::SpatialStructures::Node& child
+		);
+		
+		/// <summary>
+		/// Get the distance between the node and where the ray hits. If the ray doesn't hit,
+		/// return 0.
+		/// </summary>
+		/// <param name="p1"> The desired node to assess </param>
+		/// <param name="direction"> The direction of the ray </param>
+		/// <param name="flag">
+		/// Ray collision status, 1 = FLOORS, 2 = OBSTACLES, 3 = BOTH (the default)
+		/// </param>
+		/// <returns>
+		/// Distance between the node and the ray collision -- 0.0f if ray does not hit
+		/// </returns>
+		/// \deprecated Not needed. This function was only used for checking if a ray was within
+		/// a certain distance of something, however the raytracer's maximum distance parameter
+		/// removes the need to check distance at all.
+		float RayDist(
+			const HF::SpatialStructures::Node& p1,
+			const v3& direction,
+			HIT_FLAG flag = HIT_FLAG::BOTH
+		);
+
+		/*!
+			\brief Check if parent can traverse to child.  
+			
+			\param parent Parent of child.
+			\param child Child generated from parent.
+
+			\returns The type of STEP from parent to child.
+
+			\details
+			Specifically, this function checks for a direct line of sight. If the line of sight check succeeds, then
+			it checks to see if the slope between parent and child is within the defined limits. If not, then
+			it will offset the child node upward by upstep if it's higher than the parent, or downward by downstep
+			if it's lower than parent and try the occlusion check again. 
+
+			\see STEP for details on each type of step.
+		*/
+		HF::SpatialStructures::STEP CheckConnection(
+			const HF::SpatialStructures::Node& parent,
+			const HF::SpatialStructures::Node& child
+		);
+
+	public:
+		/// <summary> Construct a graphgeneratorprivate with the settings of GG. </summary>
+		/// <param name="GG"> GraphGenerator containing settings to use when BuildNetwork is called. </param>
+		GraphGeneratorPrivate(GraphGenerator & GG);
+
+		/// <summary> Conduct a breadth first search of traversable space. </summary>
+		/// <returns> The Graph generated using the settings from GG. </returns>
+		/// \see GraphGenerator::BuildNetwork
+		HF::SpatialStructures::Graph BuildNetwork();
+	};
 }

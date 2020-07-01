@@ -13,161 +13,173 @@
 #include <set>
 #include <embree_raytracer.h>
 
-namespace HF {
-	namespace AnalysisMethods {
-		using v3 = std::array<float, 3>;
-		class GraphGenerator;
-		class UniqueQueue;
+namespace HF::AnalysisMethods {
+	using v3 = std::array<float, 3>;
+	class GraphGenerator;
+	class UniqueQueue;
 
-		///< Determines which geometry the ray will collide with
-		enum HIT_FLAG {
-			FLOORS = 1,
-			OBSTACLES = 2,
-			BOTH = 3
-		};
-
-		///< Calculates P(n,r) as an array with each 2 values being a pair
-		std::set<std::pair<int, int>> permutations(int limit);
-
-		/// <summary>
-		/// Generate a graph of all areas accessible from a given start point
-		/// </summary>
-		class GraphGenerator
-		{
-		private:
-			int walkable_surfaces;					///< Corresponds to the mesh ID of walkable surfaces in the Raytracer
-			int obstacle_surfaces;					///< Corresponds to the mesh ID of obstacle surfaces in the Raytracer
-			int core_count;							///< How many cores we're using
-			RayTracer::EmbreeRayTracer ray_tracer;	///< EmbreeRayTracer member
-
-			///< >---OPTIONS---/// maybe should be a struct?
-			v3 spacing;								///< Spacing coordinates
-			v3 start;								///< Starting position coordinates
-
-			float downstep;							///< Downstep value
-			float upslope;							///< Upslope value
-			float downslope;						///< Downslope value
-			float upstep;							///< Upstep value
-
-			int max_step_connection;				///< Maximum step connection
-
-			float step_height;						///< Step height value
-			float floor_offset;						///< Floor offset value
-
-			int max_nodes;							///< Maximum node count
-
-			friend class GraphGeneratorPrivate; // Make our private implementation our friend
+	/*! 
+		\brief Determines which geometry the ray will collide with.
 		
-		public:
-			/// <summary>
-			/// Create a new Graph Generator
-			/// </summary>
-			/// <param name="RT">The raytracer to use for this scene</param>
-			/// <param name="walkable_id">The Raytracer's ID for walkable geometry</param>
-			/// <param name="obstacle_id">The Raytracer's ID for obstacle geometry</param>
-			/// <param name="RT">The raytracer to use for this scene</param>
+		\remarks 
+		Used internally by the GraphGenerator to determine which type of geometry to collide with
+		when casting a ray. 
 
-			/*!
-				\code
-					// Requires #include "graph_generator.h"
+	*/ 
+	enum HIT_FLAG {
+		/// Floors only.
+		FLOORS = 1,
+		/// Obstacles only.
+		OBSTACLES = 2,
+		/// Collide with floors and obstacles.
+		BOTH = 3
+	};
 
-					// For brevity
-					using HF::Geometry::LoadMeshObjects;
-					using HF::RayTracer::EmbreeRayTracer;
-					using HF::AnalysisMethods::GraphGenerator;
+	/*! Calculate P(n,r) as an array with each unique permutaton of 2 values being a pair.  */
+	std::set<std::pair<int, int>> permutations(int limit);
 
-					// Prepare the file path for plane.obj, load the mesh objects into mesh
-					const std::string plane_path = "plane.obj";
-					auto mesh = LoadMeshObjects(plane_path);
+	/*! \brief Generate a graph of accessible space from a given start point.
 
-					// Create a GraphGenerator using an EmbreeRayTracer.
-					// walkable_id = 0, obstacle_id defaults to -1
-					EmbreeRayTracer ray_tracer(mesh);
-					GraphGenerator graph_generator = GraphGenerator(ray_tracer, 0);
+		\details
+		The Graph Generator maps out "accessible" space on a model from a given starting point. In graphs created
+		by this algorithm, node represents a point in space that a human can occupy, and each edge between nodes 
+		indicates that a human can traverse from one node to another node. The Graph Generator is a powerful tool 
+		for analyzing space, since the graph or nodes it outputs can be used as input to all the analysis methods 
+		offered by HumanFactors, allowing for it to be the starting point of other analysis methods within
+		HumanFactors.
+		
+		\remarks
+		This class serves as an interface to \link GraphGeneratorPrivate \endlink. All of the implementation 
+		for the GraphGenerator is located in its friend class GraphGeneratorPrivate. 
 
-					// Now you can use a GraphGenerator to build a graph (using BuildNetwork)
-				\endcode
-			*/
-			GraphGenerator(RayTracer::EmbreeRayTracer & RT, int walkable_id, int obstacle_id = -1);
+		\note 
+		All arguments are in meters for distances and degrees for angles
+		unless otherwise specified. For all calculations, the Graph Generator assumes
+		geometry is Z-Up i.e. upstep is how high the step is in the z-direction, ground
+		checks are performed in the -z direction etc. 
 
-			/// <summary>
-			/// Generate a graph based on the raytracer and the specified parameters
-			/// </summary>
-			/// <param name="start_point">Point to start the analysis at</param>
-			/// <param name="spacing">Spacing between nodes</param>
-			/// <param name="MaxNodes">Maximum amount of nodes for generation</param>
-			/// <param name="UpStep">Maximum height for a step</param>
-			/// <param name="UpSlope">Maximum allowed slope between two nodes</param>
-			/// <param name="DownSlope">Minimum Step allowed between nodes</param>
-			/// <param name="max_step_connection">Influences how many potential children are generated per parent node</param>
-			/// <param name="cores"> How many cores to use for the calculation. A setting of -1 will use all available
-			/// cores. A setting of 0 or 1 will disable parallel processing entirely.</param>
-			/// <returns>A graph generated with the given settings</returns>
+		\todo Obstacle/Walkable geometry support.
 
-			/*!
-				\code
-					// Requires #include "graph_generator.h"
+		\see GraphGeneratorPrivate for details about the implementation. 
 
-					// For brevity
-					using HF::Geometry::LoadMeshObjects;
-					using HF::RayTracer::EmbreeRayTracer;
-					using HF::AnalysisMethods::GraphGenerator;
-					using HF::SpatialStructures::Graph;
+	*/
+	class GraphGenerator
+	{
+	private:
+		int walkable_surfaces;					///< Corresponds to the meshID of walkable surfaces in the Raytracer (Unused)
+		int obstacle_surfaces;					///< Corresponds to the meshid of obstacle surfaces in the Raytracer (Unused)
+		int core_count;							///< Number of cores to use in parallel. 
+		RayTracer::EmbreeRayTracer ray_tracer;	///< Raytracer to use for all intersections 
+		v3 spacing; ///< Spacing between nodes.
+		v3 start;	///< Start point for graph generation
 
-					// Prepare the file path for plane.obj, load the mesh objects into mesh
-					const std::string plane_path = "plane.obj";
-					auto mesh = LoadMeshObjects(plane_path);
+		float downstep;			///< Maximum step down that can be considered accessible.
+		float upslope;			///< Maximum upward slope in degrees that can be considered accessible.
+		float downslope;		///< Maximum downard slope in degrees that can be considered accessible.
+		float upstep;			///< Maximum upward step that can be considered accessible.
+		float step_height;		 ///< Unused.
+		float floor_offset;		 ///< Unused.
+		int max_step_connection; ///< Multiplier for children to generate from a single parent node.
 
-					// Create a GraphGenerator using an EmbreeRayTracer.
-					// walkable_id = 0, obstacle_id defaults to -1
-					EmbreeRayTracer ray_tracer(mesh);
-					GraphGenerator graph_generator = GraphGenerator(ray_tracer, 0);
+		int max_nodes; ///< Maximum number of nodes to generate. If less than zero, generate nodes without a limit.
 
-					// Prepare the parameters for building a graph
-					std::array<float, 3> starting_position = { 0.0, 0.0, 0.5 };		// position to begin analysis
-					std::array<float, 3> node_spacing = { 0.02f, 0.02f, 0.02f };	// space between nodes
+		friend class GraphGeneratorPrivate; ///< Private implementation for the graph generator. 
 
-					const int maximum_nodes = 100000;								// maximum amount of nodes for generation
+	public:
+		/// <summary> Create a new Graph Generator. </summary>
+		/// <param name="RT">
+		/// The raytracer to use for this scene. Geometry for the Raytracer must be Z-Up.
+		/// </param>
+		/// <param name="walkable_id"> The Raytracer's ID for walkable geometry (Unused) </param>
+		/*!
+			\param obstacle_id ID to use for obstacle geometry (Unused)
+		*/
+		GraphGenerator(RayTracer::EmbreeRayTracer& RT, int walkable_id, int obstacle_id = -1);
 
-					float max_step_height = 1.0;									// maximum height for a step
-					float max_slope = 1.0;											// maximum allowed slope between two nodes
-					float min_slope = 1.0;											// minimum step allowed between nodes
+		/// <summary> Generate a Graph of accessible space. </summary>
+		/// <param name="start_point"> Starting point for the breadth first search. </param>
+		/// <param name="spacing"> Spacing between each node. </param>
+		/// <param name="MaxNodes">
+		/// Maximum amount of nodes for generation. Set to -1 for no limit.
+		/// </param>
+		/// <param name="UpStep"> Maximum upward step that can be considered accessible. </param>
+		/// <param name="UpSlope">
+		/// Maximum upward slope in degrees that can be considered accessible.
+		/// </param>
+		/// <param name="DownSlope">
+		/// Maximum downard slope in degrees that can be considered accessible.
+		/// </param>
+		/// <param name="max_step_connection">
+		/// Multiplier for children to generate from a single parent node.
+		/// </param>
+		/// <param name="cores">
+		/// Number of CPU cores to use for the calculation. A setting of -1 will use all available
+		/// cores. A setting of 0 or 1 will disable parallel processing entirely.
+		/// </param>
+		/// <returns> A Graph of accessible space for the provided arguments. </returns>
 
-					int max_step_connection = 1;									// influences how many potential children are generated
-																					// per parent node
+		/*!
+			\code
+				// Requires #include "graph_generator.h"
+				// For brevity
 
-					int core_count = 1;												// how many CPU cores are used in calculation
-																					//	defaults to -1 if not set and uses all available cores
-																					//  0 or 1 disables parallel processing entirely
+				using HF::Geometry::LoadMeshObjects;
+				using HF::RayTracer::EmbreeRayTracer;
+				using HF::AnalysisMethods::GraphGenerator;
+				using HF::SpatialStructures::Graph;
 
-					// Create a graph using BuildNetwork
-					Graph g = graph_generator.BuildNetwork(starting_position,
-														   node_spacing,
-														   maximum_nodes,
-														   max_step_height,
-														   max_slope,
-														   min_slope,
-														   max_step_connection,
-														   core_count);
+				// Prepare the file path for plane.obj, load the mesh objects into mesh
+				auto mesh = LoadMeshObjects(plane_path);
+				const std::string plane_path = "plane.obj";
+				// Create a GraphGenerator using an EmbreeRayTracer.
 
-					std::cout << "Graph size " << g.size() << std::endl;
-					g.Compress();
-				\endcode
+				EmbreeRayTracer ray_tracer(mesh);
+				// walkable_id = 0, obstacle_id defaults to -1
+				GraphGenerator graph_generator = GraphGenerator(ray_tracer, 0);
 
-				`>>>Graph size 101270`
-			*/
-			SpatialStructures::Graph BuildNetwork(
-				const v3& start_point,
-				const v3& Spacing,
-				int MaxNodes,
-				float UpStep,
-				float UpSlope,
-				float DownStep,
-				float DownSlope,
-				int max_step_connections,
-				int cores = -1
-			);
+				// Prepare the parameters for building a graph
+				std::array<float, 3> starting_position = { 0.0, 0.0, 0.5 };		// position to begin analysis
+				std::array<float, 3> node_spacing = { 0.02f, 0.02f, 0.02f };	// space between nodes
 
-		};
+				const int maximum_nodes = 100000;								// maximum amount of nodes for generation
+
+				float max_slope = 1.0;											// maximum allowed slope between two nodes
+				float max_step_height = 1.0;									// maximum height for a step
+
+				float min_slope = 1.0;											// minimum step allowed between nodes
+																				// per parent node
+				int max_step_connection = 1;									// influences how many potential children are generated
+				int core_count = 1;												// how many CPU cores are used in calculation
+
+																				//	defaults to -1 if not set and uses all available cores
+
+																				//  0 or 1 disables parallel processing entirely
+				Graph g = graph_generator.BuildNetwork(starting_position,
+				// Create a graph using BuildNetwork
+													   maximum_nodes,
+													   max_slope,
+													   min_slope,
+													   node_spacing,
+													   max_step_height,
+													   max_step_connection,
+
+													   core_count);
+				g.Compress();
+				std::cout << "Graph size " << g.size() << std::endl;
+
+			\endcode
+			`>>>Graph size 101270`
+		*/
+		SpatialStructures::Graph BuildNetwork(
+			const v3& start_point,
+			const v3& Spacing,
+			int MaxNodes,
+			float UpStep,
+			float UpSlope,
+			float DownStep,
+			float DownSlope,
+			int max_step_connections,
+			int cores = -1
+		);
 	};
 };
