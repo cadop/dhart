@@ -51,10 +51,10 @@ void \mbox{\hyperlink{a00277_a3f55b13b0c41f777baed8813d2fb0c18}{Fire8\+Rays}} (s
 Contains no information about the ray itself, 
 
 \begin{DoxyRefDesc}{Deprecated}
-\item[\mbox{\hyperlink{a00263__deprecated000018}{Deprecated}}]Never used. Leftover from partially implemented experimental feature. This eventually became the \mbox{\hyperlink{a01219}{Ray\+Result}} struct seen in the C-\/interface. Moving the \mbox{\hyperlink{a01219}{Ray\+Result}} struct to the C interface was far more useful than what could be accomplished here, since it allowed the Cinterface and its clients to define their own Ray\+Request structs that could be filled through templates. \end{DoxyRefDesc}
+\item[\mbox{\hyperlink{a00264__deprecated000023}{Deprecated}}]Never used. Leftover from partially implemented experimental feature. This eventually became the \mbox{\hyperlink{a01219}{Ray\+Result}} struct seen in the C-\/interface. Moving the \mbox{\hyperlink{a01219}{Ray\+Result}} struct to the C interface was far more useful than what could be accomplished here, since it allowed the Cinterface and its clients to define their own Ray\+Request structs that could be filled through templates. \end{DoxyRefDesc}
 
 
-Definition at line 55 of file Ray\+Request.\+h.
+Definition at line 119 of file Ray\+Request.\+h.
 
 \index{HF::RayTracer::Triangle@{HF::RayTracer::Triangle}}\label{a01155}
 \Hypertarget{a00277_a01155}
@@ -139,7 +139,7 @@ Package raw arrays of floats and indices in buffers to the required Embree types
 \hline
 \end{DoxyParams}
 \begin{DoxyRefDesc}{Todo}
-\item[\mbox{\hyperlink{a00264__todo000019}{Todo}}]May be faster as a std\+::move or std\+::copy. \end{DoxyRefDesc}
+\item[\mbox{\hyperlink{a00263__todo000030}{Todo}}]May be faster as a std\+::move or std\+::copy. \end{DoxyRefDesc}
 
 
 Definition at line 201 of file embree\+\_\+raytracer.\+cpp.
@@ -156,7 +156,7 @@ P H\+F\+::\+Ray\+Tracer\+::\+Calculate\+Hit\+Point (\begin{DoxyParamCaption}\ite
 Calculate the hitpoint of a ray from its origin, direction and distance 
 
 \begin{DoxyRefDesc}{Deprecated}
-\item[\mbox{\hyperlink{a00263__deprecated000008}{Deprecated}}]Unused. \end{DoxyRefDesc}
+\item[\mbox{\hyperlink{a00264__deprecated000013}{Deprecated}}]Unused. \end{DoxyRefDesc}
 
 
 Definition at line 27 of file embree\+\_\+raytracer.\+cpp.
@@ -218,7 +218,7 @@ Referenced by H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Fire\+Requests
 Generate a set of equally distributed directions in sphere. 
 
 \begin{DoxyRefDesc}{Deprecated}
-\item[\mbox{\hyperlink{a00263__deprecated000013}{Deprecated}}]Use the version in view analysis \end{DoxyRefDesc}
+\item[\mbox{\hyperlink{a00264__deprecated000018}{Deprecated}}]Use the version in view analysis \end{DoxyRefDesc}
 
 
 The directions from this function are better distributed than those of \mbox{\hyperlink{a00277_a03d93804b73bd4a5d8ab8e679e5b28cd}{gen\+Sphere\+Rays}}. The implementation of this function is based on \href{https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere}{\texttt{ https\+://stackoverflow.\+com/questions/9600801/evenly-\/distributing-\/n-\/points-\/on-\/a-\/sphere}}. 
@@ -232,7 +232,7 @@ The directions from this function are better distributed than those of \mbox{\hy
 An array of equally spaced directions. 
 \end{DoxyReturn}
 \begin{DoxyRefDesc}{Deprecated}
-\item[\mbox{\hyperlink{a00263__deprecated000015}{Deprecated}}]Use the version in View\+Analysis \end{DoxyRefDesc}
+\item[\mbox{\hyperlink{a00264__deprecated000020}{Deprecated}}]Use the version in View\+Analysis \end{DoxyRefDesc}
 
 
 Definition at line 114 of file embree\+\_\+raytracer.\+cpp.
@@ -252,7 +252,7 @@ References myradians().
 Generate a vector of directions to distribute rays in 360 degrees. 
 
 \begin{DoxyRefDesc}{Deprecated}
-\item[\mbox{\hyperlink{a00263__deprecated000012}{Deprecated}}]Use the version in View\+Analysis. \end{DoxyRefDesc}
+\item[\mbox{\hyperlink{a00264__deprecated000017}{Deprecated}}]Use the version in View\+Analysis. \end{DoxyRefDesc}
 
 
 This algorithm is from the old python codebase. 
@@ -266,7 +266,7 @@ This algorithm is from the old python codebase.
 An array of directions distributed in a sphere. 
 \end{DoxyReturn}
 \begin{DoxyRefDesc}{Deprecated}
-\item[\mbox{\hyperlink{a00263__deprecated000014}{Deprecated}}]Use the version in View\+Analysis \end{DoxyRefDesc}
+\item[\mbox{\hyperlink{a00264__deprecated000019}{Deprecated}}]Use the version in View\+Analysis \end{DoxyRefDesc}
 
 
 Definition at line 87 of file embree\+\_\+raytracer.\+cpp.
@@ -282,7 +282,7 @@ References myradians().
 {\footnotesize\ttfamily static double H\+F\+::\+Ray\+Tracer\+::get\+Random\+Number (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
 \begin{DoxyRefDesc}{Deprecated}
-\item[\mbox{\hyperlink{a00263__deprecated000009}{Deprecated}}]Use the version in View\+Analysis. \end{DoxyRefDesc}
+\item[\mbox{\hyperlink{a00264__deprecated000014}{Deprecated}}]Use the version in View\+Analysis. \end{DoxyRefDesc}
 
 
 Definition at line 59 of file embree\+\_\+raytracer.\+cpp.
@@ -294,7 +294,7 @@ Definition at line 59 of file embree\+\_\+raytracer.\+cpp.
 {\footnotesize\ttfamily static unsigned long H\+F\+::\+Ray\+Tracer\+::mix (\begin{DoxyParamCaption}\item[{unsigned long}]{a,  }\item[{unsigned long}]{b,  }\item[{unsigned long}]{c }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
 \begin{DoxyRefDesc}{Deprecated}
-\item[\mbox{\hyperlink{a00263__deprecated000011}{Deprecated}}]Use the version in View\+Analysis. \end{DoxyRefDesc}
+\item[\mbox{\hyperlink{a00264__deprecated000016}{Deprecated}}]Use the version in View\+Analysis. \end{DoxyRefDesc}
 
 
 Definition at line 71 of file embree\+\_\+raytracer.\+cpp.
@@ -306,7 +306,7 @@ Definition at line 71 of file embree\+\_\+raytracer.\+cpp.
 {\footnotesize\ttfamily static float H\+F\+::\+Ray\+Tracer\+::myradians (\begin{DoxyParamCaption}\item[{float}]{angle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
 \begin{DoxyRefDesc}{Deprecated}
-\item[\mbox{\hyperlink{a00263__deprecated000010}{Deprecated}}]Use the version in View\+Analysis. \end{DoxyRefDesc}
+\item[\mbox{\hyperlink{a00264__deprecated000015}{Deprecated}}]Use the version in View\+Analysis. \end{DoxyRefDesc}
 
 
 Definition at line 65 of file embree\+\_\+raytracer.\+cpp.
@@ -339,7 +339,7 @@ Index a list of verticies and place them into a triangle and vertex buffer.
 Internally, this uses a hashmap to create an index map of vertices.
 
 \begin{DoxyRefDesc}{Todo}
-\item[\mbox{\hyperlink{a00264__todo000018}{Todo}}]Performance here can be improved by using indexing. \end{DoxyRefDesc}
+\item[\mbox{\hyperlink{a00263__todo000029}{Todo}}]Performance here can be improved by using indexing. \end{DoxyRefDesc}
 
 
 Definition at line 151 of file embree\+\_\+raytracer.\+cpp.

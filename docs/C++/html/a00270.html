@@ -151,11 +151,14 @@ Functions</h2></td></tr>
 <dl class="section user"><dt>How FOV is implemented</dt><dd>Every point is equally distributed on a sphere using a formula based on this stack overflow answer: <a href="https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere">https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere</a>. This formula cannot easily be mapped to a specific vertical fov or cone, so instead this function will remove points that don't meet the constraints. Discarding points causes the number of points generated to be less than the num_rays argument, so the percentage of points discarded is calculated and a second run is performed with an adjusted num_rays value to get as close as possible to the value specified in the argument. This approach will not result in an exact match to the num_rays argument, and will run <a class="el" href="a00275.html#a2780d3f9e9ea879d43121893c60a520c">FibbonacciDist</a> twice.</dd></dl>
 <dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line"><span class="comment">// Requires #include &quot;view_analysis.h&quot;</span></div>
 <div class="line"> </div>
+<div class="line"><span class="comment">// For brevity</span></div>
+<div class="line"><span class="keyword">using</span> <a class="code" href="a00270.html#ga9fc392fe8fc058674ffd5f4c8273a714">HF::AnalysisMethods::ViewAnalysis::FibbonacciDistributePoints</a>;</div>
+<div class="line"> </div>
 <div class="line"><span class="comment">// Prepare maximum number of points to distribute</span></div>
 <div class="line"><span class="keywordtype">int</span> size = 8;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Generate points without any limitations on fov</span></div>
-<div class="line"><span class="keyword">auto</span> points = <a class="code" href="a00270.html#ga9fc392fe8fc058674ffd5f4c8273a714">HF::AnalysisMethods::ViewAnalysis::FibbonacciDistributePoints</a>(size, 90.0f, 90.0f);</div>
+<div class="line"><span class="keyword">auto</span> points = <a class="code" href="a00270.html#ga9fc392fe8fc058674ffd5f4c8273a714">FibbonacciDistributePoints</a>(size, 90.0f, 90.0f);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Print number of points</span></div>
 <div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;Number of Points:&quot;</span> &lt;&lt; points.size() &lt;&lt; std::endl;</div>
@@ -165,7 +168,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; size; i++) {</div>
 <div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span>&amp; point =  points[i];</div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;(&quot;</span> &lt;&lt; point[0] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; point[1] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; point[2] &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;</div>
-<div class="line">    <span class="keywordflow">if</span> (i != size-1) std::cout &lt;&lt; <span class="stringliteral">&quot;, &quot;</span>;</div>
+<div class="line">    <span class="keywordflow">if</span> (i != size - 1) std::cout &lt;&lt; <span class="stringliteral">&quot;, &quot;</span>;</div>
 <div class="line">}</div>
 <div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;]&quot;</span> &lt;&lt; std::endl;</div>
 </div><!-- fragment --></dd></dl>
@@ -176,7 +179,7 @@ Functions</h2></td></tr>
 
 <p class="reference">References <a class="el" href="a00023_source.html#l00118">HF::AnalysisMethods::ViewAnalysis::FibbonacciDist()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="a00251_source.html#l00125">SphericalDistribute()</a>, <a class="el" href="a00026_source.html#l00483">HF::AnalysisMethods::ViewAnalysis::SphericalRayshootWithAnyRTForDistance()</a>, <a class="el" href="a00026_source.html#l00353">HF::AnalysisMethods::ViewAnalysis::SphericalViewAnalysis()</a>, and <a class="el" href="a00023_source.html#l00186">HF::AnalysisMethods::ViewAnalysis::SphericalViewAnalysisFromRayRequests()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="a00251_source.html#l00125">SphericalDistribute()</a>, <a class="el" href="a00026_source.html#l00489">HF::AnalysisMethods::ViewAnalysis::SphericalRayshootWithAnyRTForDistance()</a>, <a class="el" href="a00026_source.html#l00357">HF::AnalysisMethods::ViewAnalysis::SphericalViewAnalysis()</a>, and <a class="el" href="a00023_source.html#l00186">HF::AnalysisMethods::ViewAnalysis::SphericalViewAnalysisFromRayRequests()</a>.</p>
 
 </div>
 </div>
@@ -281,7 +284,7 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="a00251_source.html#l00017">17</a> of file <a class="el" href="a00251_source.html">view_analysis_C.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="a00086_source.html#l00016">HF::Exceptions::OK</a>, and <a class="el" href="a00026_source.html#l00483">HF::AnalysisMethods::ViewAnalysis::SphericalRayshootWithAnyRTForDistance()</a>.</p>
+<p class="reference">References <a class="el" href="a00086_source.html#l00016">HF::Exceptions::OK</a>, and <a class="el" href="a00026_source.html#l00489">HF::AnalysisMethods::ViewAnalysis::SphericalRayshootWithAnyRTForDistance()</a>.</p>
 
 </div>
 </div>
@@ -388,7 +391,7 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="a00251_source.html#l00050">50</a> of file <a class="el" href="a00251_source.html">view_analysis_C.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="a00134_source.html#l00024">ConvertRawFloatArrayToPoints()</a>, <a class="el" href="a00086_source.html#l00016">HF::Exceptions::OK</a>, and <a class="el" href="a00026_source.html#l00483">HF::AnalysisMethods::ViewAnalysis::SphericalRayshootWithAnyRTForDistance()</a>.</p>
+<p class="reference">References <a class="el" href="a00134_source.html#l00024">ConvertRawFloatArrayToPoints()</a>, <a class="el" href="a00086_source.html#l00016">HF::Exceptions::OK</a>, and <a class="el" href="a00026_source.html#l00489">HF::AnalysisMethods::ViewAnalysis::SphericalRayshootWithAnyRTForDistance()</a>.</p>
 
 </div>
 </div>
@@ -561,6 +564,8 @@ template&lt;typename RT , typename N &gt; </div>
 <div class="line"><span class="comment">// Use this so we can fit within 80 characters</span></div>
 <div class="line"><span class="keyword">using</span> <a class="code" href="a00270.html#ga249100bce7370ba4202f47294f179f81">HF::AnalysisMethods::ViewAnalysis::SphericalRayshootWithAnyRTForDistance</a>;</div>
 <div class="line"><span class="keyword">using</span> <a class="code" href="a00275.html#a0a616a205221414bf7aa28966b461dec">HF::AnalysisMethods::ViewAnalysis::AGGREGATE_TYPE</a>;</div>
+<div class="line"><span class="keyword">using</span> <a class="code" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a>;</div>
+<div class="line"><span class="keyword">using</span> <a class="code" href="a01127.html">HF::Geometry::MeshInfo</a>;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Create Plane</span></div>
 <div class="line"><span class="keyword">const</span> std::vector&lt;float&gt; plane_vertices{</div>
@@ -598,13 +603,13 @@ template&lt;typename RT , typename N &gt; </div>
 <div class="line">std::cerr &lt;&lt; <span class="stringliteral">&quot;)&quot;</span> &lt;&lt; std::endl;</div>
 </div><!-- fragment --></dd></dl>
 <p><code>&gt;&gt;&gt; (2746.72, 932.565, 170.858, 76.8413)</code></p>
-<dl class="todo"><dt><b><a class="el" href="a00264.html#_todo000003">Todo:</a></b></dt><dd>Should this have a height check like the one in the <a class="el" href="a00278.html" title="Evaluate visibility between points in a set of locations.">VisibilityGraph</a>?</dd></dl>
-<dl class="todo"><dt><b><a class="el" href="a00264.html#_todo000004">Todo:</a></b></dt><dd>Rename this to ViewAnalysisAggregate.</dd></dl>
-<dl class="todo"><dt><b><a class="el" href="a00264.html#_todo000005">Todo:</a></b></dt><dd>Potential speed up here by using a Raytracer function that doesn't return the point of intersection. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="a00263.html#_todo000014">Todo:</a></b></dt><dd>Should this have a height check like the one in the <a class="el" href="a00278.html" title="Evaluate visibility between points in a set of locations.">VisibilityGraph</a>?</dd></dl>
+<dl class="todo"><dt><b><a class="el" href="a00263.html#_todo000015">Todo:</a></b></dt><dd>Rename this to ViewAnalysisAggregate.</dd></dl>
+<dl class="todo"><dt><b><a class="el" href="a00263.html#_todo000016">Todo:</a></b></dt><dd>Potential speed up here by using a Raytracer function that doesn't return the point of intersection. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="a00026_source.html#l00483">483</a> of file <a class="el" href="a00026_source.html">view_analysis.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00026_source.html#l00489">489</a> of file <a class="el" href="a00026_source.html">view_analysis.h</a>.</p>
 
-<p class="reference">References <a class="el" href="a00026_source.html#l00198">HF::AnalysisMethods::ViewAnalysis::Aggregate()</a>, and <a class="el" href="a00023_source.html#l00158">HF::AnalysisMethods::ViewAnalysis::FibbonacciDistributePoints()</a>.</p>
+<p class="reference">References <a class="el" href="a00026_source.html#l00200">HF::AnalysisMethods::ViewAnalysis::Aggregate()</a>, and <a class="el" href="a00023_source.html#l00158">HF::AnalysisMethods::ViewAnalysis::FibbonacciDistributePoints()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="a00251_source.html#l00017">SphereicalViewAnalysisAggregate()</a>, and <a class="el" href="a00251_source.html#l00050">SphereicalViewAnalysisAggregateFlat()</a>.</p>
 
@@ -699,6 +704,8 @@ template&lt;typename RES , typename RT , typename N &gt; </div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Use this so we can fit within 80 characters</span></div>
 <div class="line"><span class="keyword">using</span> <a class="code" href="a00270.html#ga8090bf1d24c0cff934daba1c76d82ba6">HF::AnalysisMethods::ViewAnalysis::SphericalViewAnalysis</a>;</div>
+<div class="line"><span class="keyword">using</span> <a class="code" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a>;</div>
+<div class="line"><span class="keyword">using</span> <a class="code" href="a01127.html">HF::Geometry::MeshInfo</a>;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Create Plane</span></div>
 <div class="line"><span class="keyword">const</span> std::vector&lt;float&gt; plane_vertices{</div>
@@ -758,9 +765,9 @@ template&lt;typename RES , typename RT , typename N &gt; </div>
 <div class="line">std::cerr &lt;&lt; <span class="stringliteral">&quot;)&quot;</span> &lt;&lt; std::endl;</div>
 </div><!-- fragment --></dd></dl>
 <p><code>&gt;&gt;&gt; (-1, 7.35812, -1, -1, 3.70356, -1, 5.56647, 12.1517, -1, 2.36725, -1, -1, 2.97477, 2.58713, -1,</code> <code>-1, 1.91404, 5.95885, 4.26368, 1.86167, -1, -1, 2.0406, 2.78304, -1, -1, -1, -1, 2.83909, 2.05302,</code> <code>-1, -1, 1.90724, 4.29017, 6.3381, 1.98544, -1, -1, 2.75554, 3.15929, -1, -1, 2.6345, -1, -1,</code> <code>6.80486, -1, 5.12012, -1)</code></p>
-<dl class="todo"><dt><b><a class="el" href="a00264.html#_todo000002">Todo:</a></b></dt><dd>Should this have a height check like the one in the <a class="el" href="a00278.html" title="Evaluate visibility between points in a set of locations.">VisibilityGraph</a>?</dd></dl>
+<dl class="todo"><dt><b><a class="el" href="a00263.html#_todo000013">Todo:</a></b></dt><dd>Should this have a height check like the one in the <a class="el" href="a00278.html" title="Evaluate visibility between points in a set of locations.">VisibilityGraph</a>?</dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="a00026_source.html#l00353">353</a> of file <a class="el" href="a00026_source.html">view_analysis.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00026_source.html#l00357">357</a> of file <a class="el" href="a00026_source.html">view_analysis.h</a>.</p>
 
 <p class="reference">References <a class="el" href="a00023_source.html#l00158">HF::AnalysisMethods::ViewAnalysis::FibbonacciDistributePoints()</a>.</p>
 
@@ -955,9 +962,11 @@ template&lt;typename RES , typename RT , typename N &gt; </div>
 </div>
 </div><!-- contents -->
 <div class="ttc" id="aa00275_html_a0a616a205221414bf7aa28966b461dec"><div class="ttname"><a href="a00275.html#a0a616a205221414bf7aa28966b461dec">HF::AnalysisMethods::ViewAnalysis::AGGREGATE_TYPE</a></div><div class="ttdeci">AGGREGATE_TYPE</div><div class="ttdoc">The type of aggregation to use for ViewAnalysisAggregate</div><div class="ttdef"><b>Definition:</b> <a href="a00026_source.html#l00038">view_analysis.h:38</a></div></div>
-<div class="ttc" id="aa00270_html_ga249100bce7370ba4202f47294f179f81"><div class="ttname"><a href="a00270.html#ga249100bce7370ba4202f47294f179f81">HF::AnalysisMethods::ViewAnalysis::SphericalRayshootWithAnyRTForDistance</a></div><div class="ttdeci">std::vector&lt; float &gt; SphericalRayshootWithAnyRTForDistance(RT &amp;ray_tracer, const std::vector&lt; N &gt; &amp;Nodes, int num_rays, float upward_limit=50.0f, float downward_limit=70.0f, float height=1.7f, const AGGREGATE_TYPE aggregation=AGGREGATE_TYPE::SUM)</div><div class="ttdoc">Conduct view analysis and recieve a summarized set of results for each node.</div><div class="ttdef"><b>Definition:</b> <a href="a00026_source.html#l00483">view_analysis.h:483</a></div></div>
-<div class="ttc" id="aa00270_html_ga8090bf1d24c0cff934daba1c76d82ba6"><div class="ttname"><a href="a00270.html#ga8090bf1d24c0cff934daba1c76d82ba6">HF::AnalysisMethods::ViewAnalysis::SphericalViewAnalysis</a></div><div class="ttdeci">std::vector&lt; RES &gt; SphericalViewAnalysis(RT &amp;ray_tracer, const std::vector&lt; N &gt; &amp;Nodes, int num_rays, float upward_limit=50.0f, float downward_limit=70.0f, float height=1.7f)</div><div class="ttdoc">Conduct view analysis with any Raytracer in parallel.</div><div class="ttdef"><b>Definition:</b> <a href="a00026_source.html#l00353">view_analysis.h:353</a></div></div>
+<div class="ttc" id="aa00270_html_ga249100bce7370ba4202f47294f179f81"><div class="ttname"><a href="a00270.html#ga249100bce7370ba4202f47294f179f81">HF::AnalysisMethods::ViewAnalysis::SphericalRayshootWithAnyRTForDistance</a></div><div class="ttdeci">std::vector&lt; float &gt; SphericalRayshootWithAnyRTForDistance(RT &amp;ray_tracer, const std::vector&lt; N &gt; &amp;Nodes, int num_rays, float upward_limit=50.0f, float downward_limit=70.0f, float height=1.7f, const AGGREGATE_TYPE aggregation=AGGREGATE_TYPE::SUM)</div><div class="ttdoc">Conduct view analysis and recieve a summarized set of results for each node.</div><div class="ttdef"><b>Definition:</b> <a href="a00026_source.html#l00489">view_analysis.h:489</a></div></div>
+<div class="ttc" id="aa00270_html_ga8090bf1d24c0cff934daba1c76d82ba6"><div class="ttname"><a href="a00270.html#ga8090bf1d24c0cff934daba1c76d82ba6">HF::AnalysisMethods::ViewAnalysis::SphericalViewAnalysis</a></div><div class="ttdeci">std::vector&lt; RES &gt; SphericalViewAnalysis(RT &amp;ray_tracer, const std::vector&lt; N &gt; &amp;Nodes, int num_rays, float upward_limit=50.0f, float downward_limit=70.0f, float height=1.7f)</div><div class="ttdoc">Conduct view analysis with any Raytracer in parallel.</div><div class="ttdef"><b>Definition:</b> <a href="a00026_source.html#l00357">view_analysis.h:357</a></div></div>
 <div class="ttc" id="aa00270_html_ga9fc392fe8fc058674ffd5f4c8273a714"><div class="ttname"><a href="a00270.html#ga9fc392fe8fc058674ffd5f4c8273a714">HF::AnalysisMethods::ViewAnalysis::FibbonacciDistributePoints</a></div><div class="ttdeci">vector&lt; std::array&lt; float, 3 &gt; &gt; FibbonacciDistributePoints(int num_points, float upwards_fov, float downward_fov)</div><div class="ttdoc">Evenly distribute a set of points around a sphere centered at the origin.</div><div class="ttdef"><b>Definition:</b> <a href="a00023_source.html#l00158">view_analysis.cpp:158</a></div></div>
+<div class="ttc" id="aa01163_html"><div class="ttname"><a href="a01163.html">HF::RayTracer::EmbreeRayTracer</a></div><div class="ttdoc">A wrapper for Intel's Embree Library.</div><div class="ttdef"><b>Definition:</b> <a href="a00122_source.html#l00073">embree_raytracer.h:73</a></div></div>
+<div class="ttc" id="aa01127_html"><div class="ttname"><a href="a01127.html">HF::Geometry::MeshInfo</a></div><div class="ttdoc">A collection of vertices and indices representing geometry.</div><div class="ttdef"><b>Definition:</b> <a href="a00095_source.html#l00083">meshinfo.h:83</a></div></div>
 <div class="ttc" id="aa00275_html_a0a616a205221414bf7aa28966b461deca6970bdc2201030b9c03fbdcf3973858a"><div class="ttname"><a href="a00275.html#a0a616a205221414bf7aa28966b461deca6970bdc2201030b9c03fbdcf3973858a">HF::AnalysisMethods::ViewAnalysis::AGGREGATE_TYPE::SUM</a></div><div class="ttdeci">@ SUM</div><div class="ttdoc">Sum of the distance from the origin to all intersections.</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

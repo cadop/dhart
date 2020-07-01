@@ -82,6 +82,7 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ac46476760e07cb2579eeb2b4c094522a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01163.html#ac46476760e07cb2579eeb2b4c094522a">EmbreeRayTracer</a> ()</td></tr>
+<tr class="memdesc:ac46476760e07cb2579eeb2b4c094522a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an <a class="el" href="a01163.html" title="A wrapper for Intel&#39;s Embree Library.">EmbreeRayTracer</a> with no arguments  <a href="a01163.html#ac46476760e07cb2579eeb2b4c094522a">More...</a><br /></td></tr>
 <tr class="separator:ac46476760e07cb2579eeb2b4c094522a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab51061e309585cc48d58a6170ccea619"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01163.html#ab51061e309585cc48d58a6170ccea619">EmbreeRayTracer</a> (std::vector&lt; <a class="el" href="a01127.html">HF::Geometry::MeshInfo</a> &gt; &amp;MI)</td></tr>
 <tr class="memdesc:ab51061e309585cc48d58a6170ccea619"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="a01163.html" title="A wrapper for Intel&#39;s Embree Library.">EmbreeRayTracer</a> and add a single mesh to the scene.  <a href="a01163.html#ab51061e309585cc48d58a6170ccea619">More...</a><br /></td></tr>
@@ -163,7 +164,7 @@ Private Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A wrapper for Intel's Embree Library. </p>
 <p>Provides several functions to quickly and simply perform ray intersections using Embree. This class will automatically dispose of Embree buffers when destroyed, incrementing Embree's reference counters on copy, and decrementing them on deletion. This class also provides methods for adding geometry to Embree's geometry buffers. </p>
-<dl class="todo"><dt><b><a class="el" href="a00264.html#_todo000020">Todo:</a></b></dt><dd><p class="startdd">Could use a constructor overload for a single instance of meshinfo for conveience. </p>
+<dl class="todo"><dt><b><a class="el" href="a00263.html#_todo000031">Todo:</a></b></dt><dd><p class="startdd">Could use a constructor overload for a single instance of meshinfo for conveience. </p>
 <p class="enddd">Many functions support MeshID but don't actually check for it. </p>
 </dd></dl>
 
@@ -192,7 +193,16 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00122_source.html#l00088">88</a> of file <a class="el" href="a00122_source.html">embree_raytracer.h</a>.</p>
+<p>Create an <a class="el" href="a01163.html" title="A wrapper for Intel&#39;s Embree Library.">EmbreeRayTracer</a> with no arguments </p>
+<div class="fragment"><div class="line"><span class="comment">// Requires #include &quot;embree_raytracer.h&quot;, #include &quot;objloader.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// For brevity</span></div>
+<div class="line"><span class="keyword">using</span> <a class="code" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a>;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create the EmbreeRayTracer, no arguments</span></div>
+<div class="line"><a class="code" href="a01163.html#ac46476760e07cb2579eeb2b4c094522a">EmbreeRayTracer</a> ert;</div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="a00122_source.html#l00101">101</a> of file <a class="el" href="a00122_source.html">embree_raytracer.h</a>.</p>
 
 </div>
 </div>
@@ -225,8 +235,20 @@ Private Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="todo"><dt><b><a class="el" href="a00264.html#_todo000021">Todo:</a></b></dt><dd>This function calls <code> throw; </code> <a href="https://en.cppreference.com/w/cpp/language/throw"></a> which is meant to only be used to rethrow previously thrown exceptions. This should be throwing <a class="el" href="a01115.html" title="Thrown when the desired object could not be read">HF::Exceptions::InvalidOBJ</a> </dd></dl>
-
+<dl class="todo"><dt><b><a class="el" href="a00263.html#_todo000032">Todo:</a></b></dt><dd>This function calls <code> throw; </code> <a href="https://en.cppreference.com/w/cpp/language/throw"></a> which is meant to only be used to rethrow previously thrown exceptions. This should be throwing <a class="el" href="a01115.html" title="Thrown when the desired object could not be read">HF::Exceptions::InvalidOBJ</a> </dd></dl>
+<div class="fragment"><div class="line"><span class="comment">// Requires #include &quot;embree_raytracer.h&quot;, #include &quot;objloader.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// For brevity</span></div>
+<div class="line"><span class="keyword">using</span> <a class="code" href="a01127.html">HF::Geometry::MeshInfo</a>;</div>
+<div class="line"><span class="keyword">using</span> <a class="code" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a>;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Prepare the obj file path</span></div>
+<div class="line">std::string teapot_path = <span class="stringliteral">&quot;teapot.obj&quot;</span>;</div>
+<div class="line">std::vector&lt;MeshInfo&gt; geom = <a class="code" href="a00280.html#a6cd66262c11d9276be46e3fcd9a3a712">HF::Geometry::LoadMeshObjects</a>(teapot_path, <a class="code" href="a00280.html#aa9f0bc5275641fe23f6a7d760751bbc5a1f09cac4eec7512c5db99bd1c050ee1e">HF::Geometry::ONLY_FILE</a>);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create the EmbreeRayTracer</span></div>
+<div class="line"><span class="keyword">auto</span> ert = <a class="code" href="a01163.html#ac46476760e07cb2579eeb2b4c094522a">EmbreeRayTracer</a>(geom);</div>
+</div><!-- fragment --> 
 <p class="definition">Definition at line <a class="el" href="a00119_source.html#l00458">458</a> of file <a class="el" href="a00119_source.html">embree_raytracer.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="a00122_source.html#l00079">context</a>, <a class="el" href="a00122_source.html#l00075">device</a>, <a class="el" href="a00119_source.html#l00548">InsertNewMesh()</a>, and <a class="el" href="a00122_source.html#l00077">scene</a>.</p>
@@ -263,7 +285,21 @@ Private Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-
+<div class="fragment"><div class="line"><span class="comment">// Requires #include &quot;embree_raytracer.h&quot;, #include &quot;objloader.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create a container of coordinates</span></div>
+<div class="line">std::vector&lt;std::array&lt;float, 3&gt;&gt; directions = {</div>
+<div class="line">    {0, 0, 1},</div>
+<div class="line">    {0, 1, 0},</div>
+<div class="line">    {1, 0, 0},</div>
+<div class="line">    {-1, 0, 0},</div>
+<div class="line">    {0, -1, 0},</div>
+<div class="line">    {0, 0, -1},</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create the EmbreeRayTracer</span></div>
+<div class="line"><span class="keyword">auto</span> ert = <a class="code" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a>(directions);</div>
+</div><!-- fragment --> 
 <p class="definition">Definition at line <a class="el" href="a00119_source.html#l00226">226</a> of file <a class="el" href="a00119_source.html">embree_raytracer.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="a00122_source.html#l00079">context</a>, <a class="el" href="a00122_source.html#l00075">device</a>, <a class="el" href="a00122_source.html#l00085">geometry</a>, <a class="el" href="a00122_source.html#l00077">scene</a>, <a class="el" href="a00122_source.html#l00081">triangles</a>, <a class="el" href="a00119_source.html#l00151">HF::RayTracer::vectorsToBuffers()</a>, and <a class="el" href="a00122_source.html#l00083">Vertices</a>.</p>
@@ -286,7 +322,25 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Custom destructor to ensure cleanup of embree resources. </p>
-
+<div class="fragment"><div class="line"><span class="comment">// Requires #include &quot;embree_raytracer.h&quot;, #include &quot;objloader.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// For brevity</span></div>
+<div class="line"><span class="keyword">using</span> <a class="code" href="a01127.html">HF::Geometry::MeshInfo</a>;</div>
+<div class="line"><span class="keyword">using</span> <a class="code" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a>;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Prepare the obj file path</span></div>
+<div class="line">std::string teapot_path = <span class="stringliteral">&quot;teapot.obj&quot;</span>;</div>
+<div class="line">std::vector&lt;MeshInfo&gt; geom = <a class="code" href="a00280.html#a6cd66262c11d9276be46e3fcd9a3a712">HF::Geometry::LoadMeshObjects</a>(teapot_path, <a class="code" href="a00280.html#aa9f0bc5275641fe23f6a7d760751bbc5a1f09cac4eec7512c5db99bd1c050ee1e">HF::Geometry::ONLY_FILE</a>);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Begin scope</span></div>
+<div class="line">{</div>
+<div class="line">    <span class="comment">// Create the EmbreeRayTracer</span></div>
+<div class="line">    <span class="keyword">auto</span> ert = <a class="code" href="a01163.html#ac46476760e07cb2579eeb2b4c094522a">EmbreeRayTracer</a>(geom);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// Use ert within this scope</span></div>
+<div class="line">}</div>
+<div class="line"><span class="comment">// end scope - destructor called at end of scope</span></div>
+</div><!-- fragment --> 
 <p class="definition">Definition at line <a class="el" href="a00119_source.html#l00667">667</a> of file <a class="el" href="a00119_source.html">embree_raytracer.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="a00122_source.html#l00075">device</a>, and <a class="el" href="a00122_source.html#l00077">scene</a>.</p>
@@ -336,6 +390,40 @@ Private Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
+<div class="fragment"><div class="line"><span class="comment">// Requires #include &quot;embree_raytracer.h&quot;, #include &quot;objloader.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create a container of coordinates</span></div>
+<div class="line">std::vector&lt;std::array&lt;float, 3&gt;&gt; directions = {</div>
+<div class="line">    {0, 0, 1},</div>
+<div class="line">    {0, 1, 0},</div>
+<div class="line">    {1, 0, 0}</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create the EmbreeRayTracer</span></div>
+<div class="line"><span class="keyword">auto</span> ert = <a class="code" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a>(directions);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Prepare coordinates to create a mesh</span></div>
+<div class="line">std::vector&lt;std::array&lt;float, 3&gt;&gt; mesh_coords = { </div>
+<div class="line">    {-1, 0, 0},</div>
+<div class="line">    {0, -1, 0},</div>
+<div class="line">    {0, 0, -1} </div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create a mesh</span></div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">int</span> <span class="keywordtype">id</span> = 325;</div>
+<div class="line"><span class="keyword">const</span> std::string mesh_name = <span class="stringliteral">&quot;my mesh&quot;</span>;</div>
+<div class="line"><a class="code" href="a01127.html">HF::Geometry::MeshInfo</a> mesh(mesh_coords, <span class="keywordtype">id</span>, mesh_name);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Determine if mesh insertion successful</span></div>
+<div class="line"><span class="keywordflow">if</span> (ert.InsertNewMesh(mesh, <span class="keyword">false</span>)) {</div>
+<div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Mesh insertion okay&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">}</div>
+<div class="line"><span class="keywordflow">else</span> {</div>
+<div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Mesh insertion error&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p><code>&gt;&gt;&gt;Mesh insertion okay</code><br  />
+</p>
 
 </div>
 </div>
@@ -441,7 +529,7 @@ template&lt;typename N , typename V &gt; </div>
 <p><code>&gt;&gt;&gt; True</code><br  />
 <code>&gt;&gt;&gt; False</code> </p>
 
-<p class="definition">Definition at line <a class="el" href="a00122_source.html#l00861">861</a> of file <a class="el" href="a00122_source.html">embree_raytracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00122_source.html#l01030">1030</a> of file <a class="el" href="a00122_source.html">embree_raytracer.h</a>.</p>
 
 <p class="reference">References <a class="el" href="a00119_source.html#l00389">FireOcclusionRay()</a>.</p>
 
@@ -558,7 +646,7 @@ template&lt;typename N , typename V &gt; </div>
 <p><code>&gt;&gt;&gt;(0, 0, 0)</code><br  />
 <code>&gt;&gt;&gt;Miss</code> </p>
 
-<p class="definition">Definition at line <a class="el" href="a00122_source.html#l00776">776</a> of file <a class="el" href="a00122_source.html">embree_raytracer.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00122_source.html#l00946">946</a> of file <a class="el" href="a00122_source.html">embree_raytracer.h</a>.</p>
 
 <p class="reference">References <a class="el" href="a00119_source.html#l00368">Intersect()</a>.</p>
 
@@ -653,7 +741,7 @@ template&lt;typename N , typename V &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="a00119_source.html#l00389">389</a> of file <a class="el" href="a00119_source.html">embree_raytracer.cpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="a00122_source.html#l00861">FireAnyOcclusionRay()</a>, <a class="el" href="a00119_source.html#l00397">FireOcclusionRays()</a>, and <a class="el" href="a00011_source.html#l00108">HF::AnalysisMethods::GraphGeneratorPrivate::OcclusionCheck()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="a00122_source.html#l01030">FireAnyOcclusionRay()</a>, <a class="el" href="a00119_source.html#l00397">FireOcclusionRays()</a>, and <a class="el" href="a00011_source.html#l00127">HF::AnalysisMethods::GraphGeneratorPrivate::OcclusionCheck()</a>.</p>
 
 </div>
 </div>
@@ -921,7 +1009,7 @@ One origin, multiple directions: Fire a ray from the origin point in each direct
   </table>
   </dd>
 </dl>
-<dl class="deprecated"><dt><b><a class="el" href="a00263.html#_deprecated000017">Deprecated:</a></b></dt><dd>Never used. Holdover from the previous codebase. </dd></dl>
+<dl class="deprecated"><dt><b><a class="el" href="a00264.html#_deprecated000022">Deprecated:</a></b></dt><dd>Never used. Holdover from the previous codebase. </dd></dl>
 
 </div>
 </div>
@@ -1143,7 +1231,7 @@ One origin, multiple directions: Fire a ray from the origin point in each direct
 
 <p class="definition">Definition at line <a class="el" href="a00119_source.html#l00261">261</a> of file <a class="el" href="a00119_source.html">embree_raytracer.cpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="a00011_source.html#l00329">HF::AnalysisMethods::GraphGeneratorPrivate::CheckRay()</a>, <a class="el" href="a00239_source.html#l00134">FireRay()</a>, and <a class="el" href="a00119_source.html#l00305">FireRays()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="a00011_source.html#l00415">HF::AnalysisMethods::GraphGeneratorPrivate::CheckRay()</a>, <a class="el" href="a00239_source.html#l00134">FireRay()</a>, and <a class="el" href="a00119_source.html#l00305">FireRays()</a>.</p>
 
 </div>
 </div>
@@ -1303,7 +1391,7 @@ One origin, multiple directions: Fire a ray from the origin point in each direct
   </table>
   </dd>
 </dl>
-<dl class="deprecated"><dt><b><a class="el" href="a00263.html#_deprecated000016">Deprecated:</a></b></dt><dd>Never used. Holdover from the previous codebase. </dd></dl>
+<dl class="deprecated"><dt><b><a class="el" href="a00264.html#_deprecated000021">Deprecated:</a></b></dt><dd>Never used. Holdover from the previous codebase. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="a00119_source.html#l00534">534</a> of file <a class="el" href="a00119_source.html">embree_raytracer.cpp</a>.</p>
 
@@ -1348,7 +1436,53 @@ One origin, multiple directions: Fire a ray from the origin point in each direct
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True. </dd></dl>
-
+<div class="fragment"><div class="line"><span class="comment">// Requires #include &quot;embree_raytracer.h&quot;, #include &quot;objloader.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// For brevity</span></div>
+<div class="line"><span class="keyword">using</span> <a class="code" href="a01127.html">HF::Geometry::MeshInfo</a>;</div>
+<div class="line"><span class="keyword">using</span> <a class="code" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a>;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Prepare the obj file path</span></div>
+<div class="line">std::string teapot_path = <span class="stringliteral">&quot;teapot.obj&quot;</span>;</div>
+<div class="line">std::vector&lt;MeshInfo&gt; geom = <a class="code" href="a00280.html#a6cd66262c11d9276be46e3fcd9a3a712">HF::Geometry::LoadMeshObjects</a>(teapot_path, <a class="code" href="a00280.html#aa9f0bc5275641fe23f6a7d760751bbc5a1f09cac4eec7512c5db99bd1c050ee1e">HF::Geometry::ONLY_FILE</a>);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create the EmbreeRayTracer</span></div>
+<div class="line"><span class="keyword">auto</span> ert = <a class="code" href="a01163.html#ac46476760e07cb2579eeb2b4c094522a">EmbreeRayTracer</a>(geom);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Prepare coordinates to create a mesh</span></div>
+<div class="line">std::vector&lt;std::array&lt;float, 3&gt;&gt; mesh_coords_0 = {</div>
+<div class="line">    {0, 0, 1},</div>
+<div class="line">    {0, 1, 0},</div>
+<div class="line">    {1, 0, 0}</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line">std::vector&lt;std::array&lt;float, 3&gt;&gt; mesh_coords_1 = {</div>
+<div class="line">    {-1, 0, 0},</div>
+<div class="line">    {0, -1, 0},</div>
+<div class="line">    {0, 0, -1}</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Prepare mesh IDs and names</span></div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">int</span> mesh_id_0 = 241;</div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">int</span> mesh_id_1 = 363;</div>
+<div class="line"><span class="keyword">const</span> std::string mesh_name_0 = <span class="stringliteral">&quot;this mesh&quot;</span>;</div>
+<div class="line"><span class="keyword">const</span> std::string mesh_name_1 = <span class="stringliteral">&quot;that mesh&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create each MeshInfo</span></div>
+<div class="line">MeshInfo mesh_0(mesh_coords_0, mesh_id_0, mesh_name_0);</div>
+<div class="line">MeshInfo mesh_1(mesh_coords_1, mesh_id_1, mesh_name_1);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create a container of MeshInfo</span></div>
+<div class="line">std::vector&lt;MeshInfo&gt; mesh_vec = { mesh_0, mesh_1 };</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Determine if mesh insertion successful</span></div>
+<div class="line"><span class="keywordflow">if</span> (ert.InsertNewMesh(mesh_vec, <span class="keyword">false</span>)) {</div>
+<div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Mesh insertion okay&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">}</div>
+<div class="line"><span class="keywordflow">else</span> {</div>
+<div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Mesh insertion error&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">}</div>
+</div><!-- fragment --> 
 <p class="definition">Definition at line <a class="el" href="a00119_source.html#l00644">644</a> of file <a class="el" href="a00119_source.html">embree_raytracer.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="a00119_source.html#l00548">InsertNewMesh()</a>, and <a class="el" href="a00122_source.html#l00077">scene</a>.</p>
@@ -1403,6 +1537,32 @@ One origin, multiple directions: Fire a ray from the origin point in each direct
   </table>
   </dd>
 </dl>
+<div class="fragment"><div class="line"><span class="comment">// Requires #include &quot;embree_raytracer.h&quot;, #include &quot;objloader.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create a container of coordinates</span></div>
+<div class="line">std::vector&lt;std::array&lt;float, 3&gt;&gt; directions = {</div>
+<div class="line">    {0, 0, 1},</div>
+<div class="line">    {0, 1, 0},</div>
+<div class="line">    {1, 0, 0},</div>
+<div class="line">    {-1, 0, 0},</div>
+<div class="line">    {0, -1, 0},</div>
+<div class="line">    {0, 0, -1},</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create the EmbreeRayTracer</span></div>
+<div class="line"><span class="keyword">auto</span> ert = <a class="code" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a>(directions);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Prepare the mesh ID</span></div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">int</span> <span class="keywordtype">id</span> = 214;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Insert the mesh, Commit parameter defaults to false</span></div>
+<div class="line"><span class="keywordtype">bool</span> status = ert.InsertNewMesh(directions, <span class="keywordtype">id</span>);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Retrieve status</span></div>
+<div class="line">std::string result = status ? <span class="stringliteral">&quot;status okay&quot;</span> : <span class="stringliteral">&quot;status not okay&quot;</span>;</div>
+<div class="line">std::cout &lt;&lt; result &lt;&lt; std::endl;</div>
+</div><!-- fragment --><p><code>&gt;&gt;&gt;status okay</code><br  />
+</p>
 
 <p class="definition">Definition at line <a class="el" href="a00119_source.html#l00548">548</a> of file <a class="el" href="a00119_source.html">embree_raytracer.cpp</a>.</p>
 
@@ -1531,7 +1691,7 @@ One origin, multiple directions: Fire a ray from the origin point in each direct
 
 <p class="reference">References <a class="el" href="a00122_source.html#l00079">context</a>, and <a class="el" href="a00122_source.html#l00077">scene</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="a00122_source.html#l00776">FireAnyRay()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="a00122_source.html#l00946">FireAnyRay()</a>.</p>
 
 </div>
 </div>
@@ -1552,7 +1712,34 @@ One origin, multiple directions: Fire a ray from the origin point in each direct
 </div><div class="memdoc">
 
 <p>Increment reference counters to prevent destruction when a copy is made. </p>
-
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ERT2</td><td>Reference to <a class="el" href="a01163.html" title="A wrapper for Intel&#39;s Embree Library.">EmbreeRayTracer</a>, the right-hand side of the = statement</td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><span class="comment">// Requires #include &quot;embree_raytracer.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create a container of coordinates</span></div>
+<div class="line">std::vector&lt;std::array&lt;float, 3&gt;&gt; directions = {</div>
+<div class="line">    {0, 0, 1},</div>
+<div class="line">    {0, 1, 0},</div>
+<div class="line">    {1, 0, 0},</div>
+<div class="line">    {-1, 0, 0},</div>
+<div class="line">    {0, -1, 0},</div>
+<div class="line">    {0, 0, -1},</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create the EmbreeRayTracer</span></div>
+<div class="line"><a class="code" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a> ert_0(directions);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create an EmbreeRayTracer, no arguments</span></div>
+<div class="line"><a class="code" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a> ert_1;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// If and when ert_0 goes out of scope,</span></div>
+<div class="line"><span class="comment">// data within ert_0 will be retained inside of ert_1.</span></div>
+<div class="line">ert_1 = ert_0;</div>
+</div><!-- fragment --> 
 <p class="definition">Definition at line <a class="el" href="a00119_source.html#l00656">656</a> of file <a class="el" href="a00119_source.html">embree_raytracer.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="a00122_source.html#l00079">context</a>, <a class="el" href="a00122_source.html#l00075">device</a>, <a class="el" href="a00122_source.html#l00085">geometry</a>, and <a class="el" href="a00122_source.html#l00077">scene</a>.</p>
@@ -1731,7 +1918,9 @@ One origin, multiple directions: Fire a ray from the origin point in each direct
 <li>Cpp/raytracer/src/<a class="el" href="a00119_source.html">embree_raytracer.cpp</a></li>
 </ul>
 </div><!-- contents -->
-<div class="ttc" id="aa01163_html_ac46476760e07cb2579eeb2b4c094522a"><div class="ttname"><a href="a01163.html#ac46476760e07cb2579eeb2b4c094522a">HF::RayTracer::EmbreeRayTracer::EmbreeRayTracer</a></div><div class="ttdeci">EmbreeRayTracer()</div><div class="ttdef"><b>Definition:</b> <a href="a00122_source.html#l00088">embree_raytracer.h:88</a></div></div>
+<div class="ttc" id="aa00280_html_aa9f0bc5275641fe23f6a7d760751bbc5a1f09cac4eec7512c5db99bd1c050ee1e"><div class="ttname"><a href="a00280.html#aa9f0bc5275641fe23f6a7d760751bbc5a1f09cac4eec7512c5db99bd1c050ee1e">HF::Geometry::ONLY_FILE</a></div><div class="ttdeci">@ ONLY_FILE</div><div class="ttdoc">Treat all the geometry in the file as a single mesh.</div><div class="ttdef"><b>Definition:</b> <a href="a00101_source.html#l00054">objloader.h:54</a></div></div>
+<div class="ttc" id="aa00280_html_a6cd66262c11d9276be46e3fcd9a3a712"><div class="ttname"><a href="a00280.html#a6cd66262c11d9276be46e3fcd9a3a712">HF::Geometry::LoadMeshObjects</a></div><div class="ttdeci">vector&lt; MeshInfo &gt; LoadMeshObjects(std::string path, GROUP_METHOD gm, bool change_coords)</div><div class="ttdoc">Create MeshInfo instances from the OBJ at path.</div><div class="ttdef"><b>Definition:</b> <a href="a00098_source.html#l00076">objloader.cpp:76</a></div></div>
+<div class="ttc" id="aa01163_html_ac46476760e07cb2579eeb2b4c094522a"><div class="ttname"><a href="a01163.html#ac46476760e07cb2579eeb2b4c094522a">HF::RayTracer::EmbreeRayTracer::EmbreeRayTracer</a></div><div class="ttdeci">EmbreeRayTracer()</div><div class="ttdoc">Create an EmbreeRayTracer with no arguments</div><div class="ttdef"><b>Definition:</b> <a href="a00122_source.html#l00101">embree_raytracer.h:101</a></div></div>
 <div class="ttc" id="aa01163_html"><div class="ttname"><a href="a01163.html">HF::RayTracer::EmbreeRayTracer</a></div><div class="ttdoc">A wrapper for Intel's Embree Library.</div><div class="ttdef"><b>Definition:</b> <a href="a00122_source.html#l00073">embree_raytracer.h:73</a></div></div>
 <div class="ttc" id="aa01127_html"><div class="ttname"><a href="a01127.html">HF::Geometry::MeshInfo</a></div><div class="ttdoc">A collection of vertices and indices representing geometry.</div><div class="ttdef"><b>Definition:</b> <a href="a00095_source.html#l00083">meshinfo.h:83</a></div></div>
 <!-- start footer part -->

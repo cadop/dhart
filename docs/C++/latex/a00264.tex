@@ -1,102 +1,90 @@
 
 \begin{DoxyRefList}
-\item[Member \mbox{\hyperlink{a00275_abd3ed7f9595c30784ca668bf886a8d77}{HF\+::Analysis\+Methods\+::View\+Analysis\+::Aggregate}} (float \&out\+\_\+total, float new\+\_\+value, const A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE agg\+\_\+type, int count=0)]\label{a00264__todo000001}%
-\Hypertarget{a00264__todo000001}%
-Min/\+Max and maybe the other functions should handle Na\+Ns for min/max to signal that no value already exists. The user can use the min and max numeric limits or zero for defaults like in the example, but it would be great to be able to use one value that would be reliably handled as default input for every case.  
-\item[Member \mbox{\hyperlink{a00270_ga8090bf1d24c0cff934daba1c76d82ba6}{HF\+::Analysis\+Methods\+::View\+Analysis\+::Spherical\+View\+Analysis}} (RT \&ray\+\_\+tracer, const std\+::vector$<$ N $>$ \&Nodes, int num\+\_\+rays, float upward\+\_\+limit=50.\+0f, float downward\+\_\+limit=70.\+0f, float height=1.\+7f)]\label{a00264__todo000002}%
-\Hypertarget{a00264__todo000002}%
-Should this have a height check like the one in the \mbox{\hyperlink{a00278}{Visibility\+Graph}}? 
-\item[Member \mbox{\hyperlink{a00270_ga249100bce7370ba4202f47294f179f81}{HF\+::Analysis\+Methods\+::View\+Analysis\+::Spherical\+Rayshoot\+With\+Any\+R\+T\+For\+Distance}} (RT \&ray\+\_\+tracer, const std\+::vector$<$ N $>$ \&Nodes, int num\+\_\+rays, float upward\+\_\+limit=50.\+0f, float downward\+\_\+limit=70.\+0f, float height=1.\+7f, const A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE aggregation=\mbox{\hyperlink{a00275_a0a616a205221414bf7aa28966b461deca6970bdc2201030b9c03fbdcf3973858a}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+S\+UM}})]\label{a00264__todo000003}%
-\Hypertarget{a00264__todo000003}%
-Should this have a height check like the one in the \mbox{\hyperlink{a00278}{Visibility\+Graph}}?
-
-\label{a00264__todo000004}%
-\Hypertarget{a00264__todo000004}%
-Rename this to View\+Analysis\+Aggregate.
-
-\label{a00264__todo000005}%
-\Hypertarget{a00264__todo000005}%
-Potential speed up here by using a Raytracer function that doesn\textquotesingle{}t return the point of intersection.  
-\item[Member \mbox{\hyperlink{a01127_af564a1fb0a0389878edf369b653164fb}{HF\+::Geometry\+::Mesh\+Info\+::Mesh\+Info}} (const std\+::vector$<$ std\+::array$<$ float, 3 $>$$>$ \&vertices, int id, std\+::string name=\char`\"{}\char`\"{})]\label{a00264__todo000006}%
-\Hypertarget{a00264__todo000006}%
-Change the std\+::exception to also be an Invalid\+O\+BJ exception. 
-
-Check for a number of vertices that aren\textquotesingle{}t a multiple of 3 like the other functions.  
-\item[Member \mbox{\hyperlink{a01127_a35a764d76bb738c933592dc95d475234}{HF\+::Geometry\+::Mesh\+Info\+::Add\+Verts}} (const std\+::vector$<$ std\+::array$<$ float, 3 $>$$>$ \&verts)]\label{a00264__todo000007}%
-\Hypertarget{a00264__todo000007}%
-Change std\+::exception to Human\+Factors\+::\+Invalid\+O\+BJ.  
-\item[Member \mbox{\hyperlink{a01127_a0b045826387ad47da69e5c098caf91dd}{HF\+::Geometry\+::Mesh\+Info\+::Convert\+To\+Rhino\+Coordinates}} ()]\label{a00264__todo000008}%
-\Hypertarget{a00264__todo000008}%
-Rename this to Convert\+To\+Z\+Up. 
-
-Just use the Rotate\+Mesh function. 
-
-Change exception to an assertion since it shouldn\textquotesingle{}t happen in production code.  
-\item[Member \mbox{\hyperlink{a01127_aa78330b65f42be9a33a6e58fa2717f73}{HF\+::Geometry\+::Mesh\+Info\+::Convert\+To\+O\+B\+J\+Coordinates}} ()]\label{a00264__todo000009}%
-\Hypertarget{a00264__todo000009}%
-Rename this to Convert\+To\+Yup. 
-
-Just use the Rotate\+Mesh function. 
-\item[Member \mbox{\hyperlink{a01127_a3b5f835ab34b3fb98286db94059d6055}{HF\+::Geometry\+::Mesh\+Info\+::get\+Raw\+Vertices}} () const]\label{a00264__todo000010}%
-\Hypertarget{a00264__todo000010}%
- Make a version of this function that just returns a const reference or pointer to the data. There\textquotesingle{}s not much reason to do a copy here.  
-\item[Member \mbox{\hyperlink{a01127_a6a48b289ce6a767ec332f0ab4ecf719a}{HF\+::Geometry\+::Mesh\+Info\+::get\+Raw\+Indices}} () const]\label{a00264__todo000011}%
-\Hypertarget{a00264__todo000011}%
- Version of this function that just returns a const reference to the data. There\textquotesingle{}s not much reason to do a copy here. 
-\item[Member \mbox{\hyperlink{a00280_a6cd66262c11d9276be46e3fcd9a3a712}{HF\+::Geometry\+::Load\+Mesh\+Objects}} (std\+::string path, G\+R\+O\+U\+P\+\_\+\+M\+E\+T\+H\+OD gm=O\+N\+L\+Y\+\_\+\+F\+I\+LE, bool change\+\_\+coords=true)]\label{a00264__todo000012}%
-\Hypertarget{a00264__todo000012}%
-the name of the mesh should probably just be the filename if the group type is O\+N\+L\+Y\+\_\+\+F\+I\+LE. 
-
-Definitely some areas for minor speed gains by using indexing instead of .push\+\_\+bcaks 
-
-Change std\+::exception to std\+::out\+\_\+of\+\_\+range. 
-
-Refactor this to break out whatever code can be repeated or reused. This has a Mc\+Cabe complexity of 25!!!! 
-\item[Member \mbox{\hyperlink{a00280_aec1df746155d224838048d3a43c2fe96}{HF\+::Geometry\+::Load\+Raw\+Vertices}} (std\+::string path)]\label{a00264__todo000013}%
-\Hypertarget{a00264__todo000013}%
-Check if the file exists then thow file not found exception instead of invalidobj. 
-\item[Class \mbox{\hyperlink{a00282}{HF\+::Pathfinding\+::vertex\+\_\+data}} ]\label{a00264__todo000014}%
-\Hypertarget{a00264__todo000014}%
-Is the double d needed? 
-\item[Member \mbox{\hyperlink{a00282_a977e4c93a977ab4e9e784d1e6fec79f4}{HF\+::Pathfinding\+::Construct\+Shortest\+Path\+From\+Pred}} (int start, int end, const std\+::vector$<$ size\+\_\+t $>$ \&pred, const std\+::vector$<$ float $>$ \&distances)]\label{a00264__todo000015}%
-\Hypertarget{a00264__todo000015}%
-Replace exception with an assert statment. It shouldn\textquotesingle{}t be triggered unless there\textquotesingle{}s a problem with this algorithm?  
-\item[Member \mbox{\hyperlink{a00282_a15badb9d0a17849de7b21105605c9c91}{HF\+::Pathfinding\+::Find\+Paths}} (\mbox{\hyperlink{a01139}{Boost\+Graph}} $\ast$bg, const std\+::vector$<$ int $>$ \&start\+\_\+points, const std\+::vector$<$ int $>$ \&end\+\_\+points)]\label{a00264__todo000016}%
-\Hypertarget{a00264__todo000016}%
-This isn\textquotesingle{}t in parallel! Can be implemented using a similar approach to Insert\+Paths\+Into\+Array.  
-\item[Member \mbox{\hyperlink{a00282_a336118692fd29dd27f8825ec5bb16b56}{HF\+::Pathfinding\+::Find\+All\+Paths}} (\mbox{\hyperlink{a01139}{Boost\+Graph}} $\ast$bg)]\label{a00264__todo000017}%
-\Hypertarget{a00264__todo000017}%
-Implement this function to the specifications outlined here.  
-\item[Member \mbox{\hyperlink{a00277_a9a8051c9b70fc0ae60337d4a38bf5f57}{HF\+::Ray\+Tracer\+::vectors\+To\+Buffers}} (const std\+::vector$<$ std\+::array$<$ float, 3 $>$$>$ \&vertices, std\+::vector$<$ Triangle $>$ \&Tribuffer, std\+::vector$<$ Vertex $>$ \&Vbuffer)]\label{a00264__todo000018}%
-\Hypertarget{a00264__todo000018}%
-Performance here can be improved by using indexing.  
-\item[Member \mbox{\hyperlink{a00277_aac8c0b245ea813969c50b6496cc67945}{HF\+::Ray\+Tracer\+::buffers\+To\+Structs}} (std\+::vector$<$ float $>$ \&in\+\_\+vertices, std\+::vector$<$ int $>$ \&in\+\_\+indices, std\+::vector$<$ Vertex $>$ \&out\+\_\+vertices, std\+::vector$<$ Triangle $>$ \&out\+\_\+triangles)]\label{a00264__todo000019}%
-\Hypertarget{a00264__todo000019}%
-May be faster as a std\+::move or std\+::copy.  
-\item[Class \mbox{\hyperlink{a01163}{HF\+::Ray\+Tracer\+::Embree\+Ray\+Tracer}} ]\label{a00264__todo000020}%
-\Hypertarget{a00264__todo000020}%
-Could use a constructor overload for a single instance of meshinfo for conveience. 
-
-Many functions support Mesh\+ID but don\textquotesingle{}t actually check for it.  
-\item[Member \mbox{\hyperlink{a01163_ab51061e309585cc48d58a6170ccea619}{HF\+::Ray\+Tracer\+::Embree\+Ray\+Tracer\+::Embree\+Ray\+Tracer}} (std\+::vector$<$ H\+F\+::\+Geometry\+::\+Mesh\+Info $>$ \&MI)]\label{a00264__todo000021}%
-\Hypertarget{a00264__todo000021}%
-This function calls {\ttfamily  throw; } \href{https://en.cppreference.com/w/cpp/language/throw}{\texttt{ }} which is meant to only be used to rethrow previously thrown exceptions. This should be throwing \mbox{\hyperlink{a01115}{H\+F\+::\+Exceptions\+::\+Invalid\+O\+BJ}}  
-\item[" ]\label{a00264__todo000022}%
-\Hypertarget{a00264__todo000022}%
-Forward declares for eigen.  
-\item[Member \mbox{\hyperlink{a01199_a7c2ea4fda7d310b500456ff14527bab9}{HF\+::Spatial\+Structures\+::Graph\+::operator\mbox{[}\mbox{]}}} (const \mbox{\hyperlink{a01203}{Node}} \&n) const]\label{a00264__todo000023}%
-\Hypertarget{a00264__todo000023}%
-Should this just return an empty list instead of throwing?  
-\item[Member \mbox{\hyperlink{a01199_a604a648f1f73d687ad4544d2ac163212}{HF\+::Spatial\+Structures\+::Graph\+::add\+Edge}} (const \mbox{\hyperlink{a01203}{Node}} \&parent, const \mbox{\hyperlink{a01203}{Node}} \&child, float score=1.\+0f)]\label{a00264__todo000024}%
-\Hypertarget{a00264__todo000024}%
-How should this signal that the graph can\textquotesingle{}t have edges added to it? Or how do we add edges to an existing graph quickly without adding to its edge list? 
-\item[Member \mbox{\hyperlink{a01199_afa04fa06b0802acd9eebe46a8c7a1787}{HF\+::Spatial\+Structures\+::Graph\+::add\+Edge}} (int parent\+\_\+id, int child\+\_\+id, float score)]\label{a00264__todo000025}%
-\Hypertarget{a00264__todo000025}%
-How should this signal that the graph can\textquotesingle{}t have edges added to it? Or how do we add edges to an existing graph quickly without adding to its edge list?  
-\item[Member \mbox{\hyperlink{a01203_a556efc898ddc67b64fff560d0c7b5a0a}{HF\+::Spatial\+Structures\+::Node\+::operator\mbox{[}\mbox{]}}} (int i)]\label{a00264__todo000026}%
-\Hypertarget{a00264__todo000026}%
-Exception should be std\+::out\+\_\+of\+\_\+range to match other functionality 
-\item[Member \mbox{\hyperlink{a01203_ae3e88bd4eecfdbd93431953ed07b8a7b}{HF\+::Spatial\+Structures\+::Node\+::operator\mbox{[}\mbox{]}}} (int i) const]\label{a00264__todo000027}%
-\Hypertarget{a00264__todo000027}%
-Exception should be std\+::out\+\_\+of\+\_\+range to match other functionality
+\item[Member \mbox{\hyperlink{a00274_a8d42b80118c1260844cfa033d20a98f0}{HF\+::Analysis\+Methods\+::fact}} (int n)]\label{a00264__deprecated000001}%
+\Hypertarget{a00264__deprecated000001}%
+Unused since this file\textquotesingle{}s creation. Possible hold over from the previous codebase.  
+\item[Member \mbox{\hyperlink{a01103_a26cb4fbbc3f178abeb229bf133ce8994}{HF\+::Analysis\+Methods\+::Graph\+Generator\+Private\+::Graphdirecs}} (const \mbox{\hyperlink{a01203}{Spatial\+Structures\+::\+Node}} \&parent, const std\+::vector$<$ std\+::pair$<$ int, int $>$$>$ \&directions, std\+::vector$<$ Spatial\+Structures\+::\+Node $>$ \&out\+\_\+children)]\label{a00264__deprecated000002}%
+\Hypertarget{a00264__deprecated000002}%
+From old codebase. Replaced with \mbox{\hyperlink{a00274_a119aa13054604cc379223a2f424a3a65}{permutations}}.  
+\item[Member \mbox{\hyperlink{a01103_a995db0b350cf618622213fbed4056f58}{HF\+::Analysis\+Methods\+::Graph\+Generator\+Private\+::Check\+Floor}} (const \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&parent, \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&child)]\label{a00264__deprecated000003}%
+\Hypertarget{a00264__deprecated000003}%
+ \mbox{\hyperlink{a01103_a08274f971c3347d89c23936d11e74a8d}{Check\+Children}} performs the same function, but works on an array of nodes.  
+\item[Member \mbox{\hyperlink{a01103_af999cfb5ef366bb9786b85d30822d1f3}{HF\+::Analysis\+Methods\+::Graph\+Generator\+Private\+::Is\+Connected}} (const \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&parent, const \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&child)]\label{a00264__deprecated000004}%
+\Hypertarget{a00264__deprecated000004}%
+ Never used or implemented. In the Python code this would have cast a ray between parent and child then compared distance between the ray\textquotesingle{}s intersection point with the distance between parent and child to see if there was a clear line of sight. Succeeded by \mbox{\hyperlink{a01103_a7eddeb69ec8465dcfa75e468ae79d79c}{Occlusion\+Check}}.  
+\item[Member \mbox{\hyperlink{a01103_a004e901067ff86491b33aae4f33d33f2}{HF\+::Analysis\+Methods\+::Graph\+Generator\+Private\+::Ray\+Dist}} (const \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&p1, const v3 \&direction, H\+I\+T\+\_\+\+F\+L\+AG flag=H\+I\+T\+\_\+\+F\+L\+A\+G\+::\+B\+O\+TH)]\label{a00264__deprecated000005}%
+\Hypertarget{a00264__deprecated000005}%
+Not needed. This function was only used for checking if a ray was within a certain distance of something, however the raytracer\textquotesingle{}s maximum distance parameter removes the need to check distance at all.  
+\item[Member \mbox{\hyperlink{a00275_a58df074201e5978c5f45401820f7c3a2}{HF\+::Analysis\+Methods\+::View\+Analysis\+::Cap\+Altitude}} (std\+::array$<$ float, 3 $>$ \&vec, float max\+\_\+angle, float min\+\_\+angle)]\label{a00264__deprecated000006}%
+\Hypertarget{a00264__deprecated000006}%
+ Used in a failed attempt to map phi to the min and max angle. This idea was faulty and resulted in points that were not equally distributed.  
+\item[Member \mbox{\hyperlink{a00275_af29c2ecd8da07d73a38c0f589f44ac3b}{HF\+::Analysis\+Methods\+::View\+Analysis\+::Spherical\+View\+Analysis\+With\+Distance}} (\mbox{\hyperlink{a01163}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&ert, const std\+::vector$<$ H\+F\+::\+Spatial\+Structures\+::\+Node $>$ Nodes, int max\+\_\+rays, float height)]\label{a00264__deprecated000007}%
+\Hypertarget{a00264__deprecated000007}%
+. Never used, never implemented.  
+\item[Member \mbox{\hyperlink{a00275_aad7b55a42de41fa5c917c68c7019ac1f}{HF\+::Analysis\+Methods\+::View\+Analysis\+::Spherical\+View\+Analysis\+From\+Ray\+Requests}} (Embree\+Ray\+Tracer \&ert, const vector$<$ Node $>$ \&nodes, int max\+\_\+rays, float height)]\label{a00264__deprecated000008}%
+\Hypertarget{a00264__deprecated000008}%
+. Never used. Not even defined in the header  
+\item[Member \mbox{\hyperlink{a00275_a1e3455e890bf7cbaf0e1974c17a37584}{HF\+::Analysis\+Methods\+::View\+Analysis\+::Spherical\+View\+Analysis\+With\+Ray\+Requests}} (\mbox{\hyperlink{a01163}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&ert, const std\+::vector$<$ H\+F\+::\+Spatial\+Structures\+::\+Node $>$ \&nodes, int max\+\_\+rays, float height=1.\+7f)]\label{a00264__deprecated000009}%
+\Hypertarget{a00264__deprecated000009}%
+Suceeded by Spherical\+View\+Analysis.  
+\item[Member \mbox{\hyperlink{a00275_a03b0855fd4aef49007db04ebb368a243}{HF\+::Analysis\+Methods\+::View\+Analysis\+::Spherical\+View\+Analysis\+Average\+Distance}} (\mbox{\hyperlink{a01163}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&ert, const std\+::vector$<$ H\+F\+::\+Spatial\+Structures\+::\+Node $>$ Nodes, int max\+\_\+rays, float height=1.\+7f)]\label{a00264__deprecated000010}%
+\Hypertarget{a00264__deprecated000010}%
+Not implemented. Use Spherical\+Rayshoot\+With\+Any\+R\+T\+For\+Distance instead.  
+\item[Member \mbox{\hyperlink{a01127_a3d9b22866ed60c3dd1d54bbd06b38e60}{HF\+::Geometry\+::Mesh\+Info\+::Add\+Verts}} (const std\+::vector$<$ float $>$ \&verts, std\+::vector$<$ int $>$ \&indices)]\label{a00264__deprecated000011}%
+\Hypertarget{a00264__deprecated000011}%
+ Unimplemented. Need to worry about indices being correct, and properly matching up with existing set of indices. 
+\item[Member \mbox{\hyperlink{a00280_a0248bddcdfb74e0e4105becff50e03ed}{HF\+::Geometry\+::Index\+Shape}} (const tinyobj\+::shape\+\_\+t \&shape, const vector$<$ tinyobj\+::real\+\_\+t $>$ \&verts, vector$<$ int $>$ out\+\_\+indices, vector$<$ float $>$ out\+\_\+vertexes)]\label{a00264__deprecated000012}%
+\Hypertarget{a00264__deprecated000012}%
+An attempt to break out and reuse part of Load\+Mesh\+Objects. Unused for now, but may be useful in breaking out the function later.  
+\item[Member \mbox{\hyperlink{a00277_ad36c0e67c4b26522c82d29a2f4c2e7e7}{HF\+::Ray\+Tracer\+::Calculate\+Hit\+Point}} (const P \&origin, const D \&direction, float distance)]\label{a00264__deprecated000013}%
+\Hypertarget{a00264__deprecated000013}%
+Unused.  
+\item[Member \mbox{\hyperlink{a00277_adb85d3abbe51075a71812fdc95de8322}{HF\+::Ray\+Tracer\+::get\+Random\+Number}} ()]\label{a00264__deprecated000014}%
+\Hypertarget{a00264__deprecated000014}%
+Use the version in View\+Analysis.  
+\item[Member \mbox{\hyperlink{a00277_a0429e7d02ef59bcad3fa5f7ec2b620dc}{HF\+::Ray\+Tracer\+::myradians}} (float angle)]\label{a00264__deprecated000015}%
+\Hypertarget{a00264__deprecated000015}%
+Use the version in View\+Analysis.  
+\item[Member \mbox{\hyperlink{a00277_af350b924e9637d84c8b316a3b1641bbc}{HF\+::Ray\+Tracer\+::mix}} (unsigned long a, unsigned long b, unsigned long c)]\label{a00264__deprecated000016}%
+\Hypertarget{a00264__deprecated000016}%
+Use the version in View\+Analysis.  
+\item[Member \mbox{\hyperlink{a00277_a03d93804b73bd4a5d8ab8e679e5b28cd}{HF\+::Ray\+Tracer\+::gen\+Sphere\+Rays}} (int step)]\label{a00264__deprecated000017}%
+\Hypertarget{a00264__deprecated000017}%
+Use the version in View\+Analysis.  
+\item[Member \mbox{\hyperlink{a00277_a6df9ff0fb8610752d548354b3e6600e0}{HF\+::Ray\+Tracer\+::gen\+Fibbonacci\+Rays}} (int numrays)]\label{a00264__deprecated000018}%
+\Hypertarget{a00264__deprecated000018}%
+Use the version in view analysis  
+\item[Member \mbox{\hyperlink{a00277_a03d93804b73bd4a5d8ab8e679e5b28cd}{HF\+::Ray\+Tracer\+::gen\+Sphere\+Rays}} (int step)]\label{a00264__deprecated000019}%
+\Hypertarget{a00264__deprecated000019}%
+Use the version in View\+Analysis  
+\item[Member \mbox{\hyperlink{a00277_a6df9ff0fb8610752d548354b3e6600e0}{HF\+::Ray\+Tracer\+::gen\+Fibbonacci\+Rays}} (int numrays)]\label{a00264__deprecated000020}%
+\Hypertarget{a00264__deprecated000020}%
+Use the version in View\+Analysis  
+\item[Member \mbox{\hyperlink{a01163_acc1fc8eaa0139696ec31362384a37d5f}{HF\+::Ray\+Tracer\+::Embree\+Ray\+Tracer\+::Fire\+Requests}} (std\+::vector$<$ Full\+Ray\+Request $>$ \&requests, bool parallel=true)]\label{a00264__deprecated000021}%
+\Hypertarget{a00264__deprecated000021}%
+Never used. Holdover from the previous codebase.  
+\item[Member \mbox{\hyperlink{a01163_a2fd625932160afeebd0169967d733217}{HF\+::Ray\+Tracer\+::Embree\+Ray\+Tracer\+::Fire\+Occlusion\+Requests}} (std\+::vector$<$ Full\+Ray\+Request $>$ \&requests, bool parallel=true)]\label{a00264__deprecated000022}%
+\Hypertarget{a00264__deprecated000022}%
+Never used. Holdover from the previous codebase.  
+\item[Class \mbox{\hyperlink{a00277}{HF\+::Ray\+Tracer\+::Hit\+Info}} ]\label{a00264__deprecated000023}%
+\Hypertarget{a00264__deprecated000023}%
+Never used. Leftover from partially implemented experimental feature. This eventually became the \mbox{\hyperlink{a01219}{Ray\+Result}} struct seen in the C-\/interface. Moving the \mbox{\hyperlink{a01219}{Ray\+Result}} struct to the C interface was far more useful than what could be accomplished here, since it allowed the Cinterface and its clients to define their own Ray\+Request structs that could be filled through templates.  
+\item[Class \mbox{\hyperlink{a01175}{HF\+::Ray\+Tracer\+::Ray\+Request\+Lite}} ]\label{a00264__deprecated000024}%
+\Hypertarget{a00264__deprecated000024}%
+Unused. See \mbox{\hyperlink{a00277_a01171}{Hit\+Info}}.  
+\item[Class \mbox{\hyperlink{a01179}{HF\+::Ray\+Tracer\+::Ray\+Request\+Collection}} ]\label{a00264__deprecated000025}%
+\Hypertarget{a00264__deprecated000025}%
+Unused see \mbox{\hyperlink{a00277_a01171}{Hit\+Info}}.  
+\item[Member \mbox{\hyperlink{a01199_a3640461d4c1d1ff55dd200fd5670bf9c}{HF\+::Spatial\+Structures\+::Graph\+::Update\+I\+Ds}} (int new\+\_\+id)]\label{a00264__deprecated000026}%
+\Hypertarget{a00264__deprecated000026}%
+Never Implemented.  
+\item[Member \mbox{\hyperlink{a01199_a313eb2f8a0f5edcb2bd4b6f6b03af428}{HF\+::Spatial\+Structures\+::Graph\+::Generate\+Cross\+Slope}} ()]\label{a00264__deprecated000027}%
+\Hypertarget{a00264__deprecated000027}%
+Not Implemented.  
+\item[Member \mbox{\hyperlink{a01199_a890e0f6603eca56c4c70772d5b559d53}{HF\+::Spatial\+Structures\+::Graph\+::Generate\+Energy}} ()]\label{a00264__deprecated000028}%
+\Hypertarget{a00264__deprecated000028}%
+Not Implemented.  
+\item[Member \mbox{\hyperlink{a01203_a5a3306ea1b8904361b038391718ccc07}{HF\+::Spatial\+Structures\+::Node\+::operator=}} (const std\+::array$<$ float, 3 $>$ \&n2)]\label{a00264__deprecated000029}%
+\Hypertarget{a00264__deprecated000029}%
+Undefined. The default copy behavior is used instead. 
 \end{DoxyRefList}
