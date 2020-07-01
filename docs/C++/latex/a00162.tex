@@ -1,0 +1,34 @@
+
+\begin{DoxyRefList}
+\item[Member \mbox{\hyperlink{a00173_abd3ed7f9595c30784ca668bf886a8d77}{HF\+::Analysis\+Methods\+::View\+Analysis\+::Aggregate}} (float \&out\+\_\+total, float new\+\_\+value, const A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE agg\+\_\+type, int count=0)]\label{a00162__todo000001}%
+\Hypertarget{a00162__todo000001}%
+Min/\+Max and maybe the other functions should handle Na\+Ns for min/max to signal that no value already exists. The user can use the min and max numeric limits or zero for defaults like in the example, but it would be great to be able to use one value that would be reliably handled as default input for every case.  
+\item[Member \mbox{\hyperlink{a00168_ga8090bf1d24c0cff934daba1c76d82ba6}{HF\+::Analysis\+Methods\+::View\+Analysis\+::Spherical\+View\+Analysis}} (RT \&ray\+\_\+tracer, const std\+::vector$<$ N $>$ \&Nodes, int num\+\_\+rays, float upward\+\_\+limit=50.\+0f, float downward\+\_\+limit=70.\+0f, float height=1.\+7f)]\label{a00162__todo000002}%
+\Hypertarget{a00162__todo000002}%
+Should this have a height check like the one in the \mbox{\hyperlink{a00176}{Visibility\+Graph}}? 
+\item[Member \mbox{\hyperlink{a00168_ga249100bce7370ba4202f47294f179f81}{HF\+::Analysis\+Methods\+::View\+Analysis\+::Spherical\+Rayshoot\+With\+Any\+R\+T\+For\+Distance}} (RT \&ray\+\_\+tracer, const std\+::vector$<$ N $>$ \&Nodes, int num\+\_\+rays, float upward\+\_\+limit=50.\+0f, float downward\+\_\+limit=70.\+0f, float height=1.\+7f, const A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE aggregation=\mbox{\hyperlink{a00173_a0a616a205221414bf7aa28966b461deca6970bdc2201030b9c03fbdcf3973858a}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+S\+UM}})]\label{a00162__todo000003}%
+\Hypertarget{a00162__todo000003}%
+Should this have a height check like the one in the \mbox{\hyperlink{a00176}{Visibility\+Graph}}?
+
+\label{a00162__todo000004}%
+\Hypertarget{a00162__todo000004}%
+Rename this to View\+Analysis\+Aggregate.
+
+\label{a00162__todo000005}%
+\Hypertarget{a00162__todo000005}%
+Potential speed up here by using a Raytracer function that doesn\textquotesingle{}t return the point of intersection.  
+\item[Member \mbox{\hyperlink{a00175_a9a8051c9b70fc0ae60337d4a38bf5f57}{HF\+::Ray\+Tracer\+::vectors\+To\+Buffers}} (const std\+::vector$<$ std\+::array$<$ float, 3 $>$$>$ \&vertices, std\+::vector$<$ Triangle $>$ \&Tribuffer, std\+::vector$<$ Vertex $>$ \&Vbuffer)]\label{a00162__todo000006}%
+\Hypertarget{a00162__todo000006}%
+Performance here can be improved by using indexing.  
+\item[Member \mbox{\hyperlink{a00175_aac8c0b245ea813969c50b6496cc67945}{HF\+::Ray\+Tracer\+::buffers\+To\+Structs}} (std\+::vector$<$ float $>$ \&in\+\_\+vertices, std\+::vector$<$ int $>$ \&in\+\_\+indices, std\+::vector$<$ Vertex $>$ \&out\+\_\+vertices, std\+::vector$<$ Triangle $>$ \&out\+\_\+triangles)]\label{a00162__todo000007}%
+\Hypertarget{a00162__todo000007}%
+May be faster as a std\+::move or std\+::copy.  
+\item[Class \mbox{\hyperlink{a01061}{HF\+::Ray\+Tracer\+::Embree\+Ray\+Tracer}} ]\label{a00162__todo000008}%
+\Hypertarget{a00162__todo000008}%
+Could use a constructor overload for a single instance of meshinfo for conveience. 
+
+Many functions support Mesh\+ID but don\textquotesingle{}t actually check for it.  
+\item[Member \mbox{\hyperlink{a01061_ab51061e309585cc48d58a6170ccea619}{HF\+::Ray\+Tracer\+::Embree\+Ray\+Tracer\+::Embree\+Ray\+Tracer}} (std\+::vector$<$ H\+F\+::\+Geometry\+::\+Mesh\+Info $>$ \&MI)]\label{a00162__todo000009}%
+\Hypertarget{a00162__todo000009}%
+This function calls {\ttfamily  throw; } \href{https://en.cppreference.com/w/cpp/language/throw}{\texttt{ }} which is meant to only be used to rethrow previously thrown exceptions. This should be throwing \mbox{\hyperlink{a01013}{H\+F\+::\+Exceptions\+::\+Invalid\+O\+BJ}} 
+\end{DoxyRefList}

@@ -1,0 +1,52 @@
+\hypertarget{a00065}{}\doxysection{Cpp/pathfinding/src/path\+\_\+finder.h File Reference}
+\label{a00065}\index{Cpp/pathfinding/src/path\_finder.h@{Cpp/pathfinding/src/path\_finder.h}}
+
+
+Header file for Boost\+Graph\+Deleter.  
+
+
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{a01045}{H\+F\+::\+Pathfinding\+::\+Boost\+Graph\+Deleter}}
+\begin{DoxyCompactList}\small\item\em Forward declared to prevent clients from importing boost. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{a00171}{HF}}
+\begin{DoxyCompactList}\small\item\em Output C\+SR for interop with other languages \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00174}{H\+F\+::\+Spatial\+Structures}}
+\item 
+ \mbox{\hyperlink{a00179}{H\+F\+::\+Pathfinding}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{a01037}{Boost\+Graph}}, \mbox{\hyperlink{a01045}{Boost\+Graph\+Deleter}} $>$ \mbox{\hyperlink{a00179_aee466bf2324daa4b600cc59c90e78977}{H\+F\+::\+Pathfinding\+::\+Create\+Boost\+Graph}} (const \mbox{\hyperlink{a01097}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} \&g)
+\begin{DoxyCompactList}\small\item\em Create a new boost graph from the given H\+F\+Graph 
+\begin{DoxyParams}{Parameters}
+{\em g} & The desired Graph used to create a \mbox{\hyperlink{a01037}{Boost\+Graph}}\\
+\hline
+\end{DoxyParams}
+\end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01113}{Path}} \mbox{\hyperlink{a00179_a47d06b1c4bd84f4d0a7519ea0e96ff02}{H\+F\+::\+Pathfinding\+::\+Find\+Path}} (\mbox{\hyperlink{a01037}{Boost\+Graph}} $\ast$bg, int start\+\_\+id, int end\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Find a path between points A and B \end{DoxyCompactList}\item 
+vector$<$ \mbox{\hyperlink{a01113}{Path}} $>$ \mbox{\hyperlink{a00179_a15badb9d0a17849de7b21105605c9c91}{H\+F\+::\+Pathfinding\+::\+Find\+Paths}} (\mbox{\hyperlink{a01037}{Boost\+Graph}} $\ast$bg, const std\+::vector$<$ int $>$ \&start\+\_\+points, const std\+::vector$<$ int $>$ \&end\+\_\+points)
+\begin{DoxyCompactList}\small\item\em More efficient than calling Find\+Path manually. Organises paths by starting point, calculates only one predecessor matrix per unique starting point, then finds a path for every pair. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{a01113}{H\+F\+::\+Spatial\+Structures\+::\+Path}} $>$ \mbox{\hyperlink{a00179_aca184278e9b8fe32fd9505e4f28e53e6}{H\+F\+::\+Pathfinding\+::\+Find\+All\+Paths}} (Boost\+Graph $\ast$bg, int start\+\_\+id, int end\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Find a path from every node to every node (N\+O\+TE\+: Not implemented yet.) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a00179_a417084c97d0672af2da7739157a9d8c0}{H\+F\+::\+Pathfinding\+::\+Insert\+Paths\+Into\+Array}} (const \mbox{\hyperlink{a01037}{Boost\+Graph}} $\ast$bg, const std\+::vector$<$ int $>$ \&start\+\_\+points, const std\+::vector$<$ int $>$ \&end\+\_\+points, \mbox{\hyperlink{a01113}{H\+F\+::\+Spatial\+Structures\+::\+Path}} $\ast$$\ast$out\+\_\+paths, \mbox{\hyperlink{a01109}{H\+F\+::\+Spatial\+Structures\+::\+Path\+Member}} $\ast$$\ast$out\+\_\+path\+\_\+members, int $\ast$out\+\_\+sizes)
+\begin{DoxyCompactList}\small\item\em Runs Dijkstra\textquotesingle{}s Shortest Path Algorithm on a (\mbox{\hyperlink{a01037}{Boost\+Graph}} $\ast$) bg, and inserts the constructed paths into an array of (\mbox{\hyperlink{a01113}{H\+F\+::\+Spatial\+Structures\+::\+Path}} $\ast$), as well as the Path\+Members into an array of (\mbox{\hyperlink{a01109}{H\+F\+::\+Spatial\+Structures\+::\+Path\+Member}} $\ast$). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Header file for Boost\+Graph\+Deleter. 
+
+\begin{DoxyAuthor}{Author}
+T\+BA 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+17 Jun 2020 
+\end{DoxyDate}

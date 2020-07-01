@@ -69,14 +69,11 @@ Every point is equally distributed on a sphere using a formula based on this sta
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{// Requires \#include "view\_analysis.h"}}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// For brevity}}
-\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a00270_ga9fc392fe8fc058674ffd5f4c8273a714}{HF::AnalysisMethods::ViewAnalysis::FibbonacciDistributePoints}};}
-\DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Prepare maximum number of points to distribute}}
 \DoxyCodeLine{\textcolor{keywordtype}{int} size = 8;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Generate points without any limitations on fov}}
-\DoxyCodeLine{\textcolor{keyword}{auto} points = \mbox{\hyperlink{a00270_ga9fc392fe8fc058674ffd5f4c8273a714}{FibbonacciDistributePoints}}(size, 90.0f, 90.0f);}
+\DoxyCodeLine{\textcolor{keyword}{auto} points = \mbox{\hyperlink{a00270_ga9fc392fe8fc058674ffd5f4c8273a714}{HF::AnalysisMethods::ViewAnalysis::FibbonacciDistributePoints}}(size, 90.0f, 90.0f);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Print number of points}}
 \DoxyCodeLine{std::cout << \textcolor{stringliteral}{"Number of Points:"} << points.size() << std::endl;}
@@ -86,7 +83,7 @@ Every point is equally distributed on a sphere using a formula based on this sta
 \DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < size; i++) \{}
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto}\& point =  points[i];}
 \DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"("} << point[0] << \textcolor{stringliteral}{", "} << point[1] << \textcolor{stringliteral}{", "} << point[2] << \textcolor{stringliteral}{")"};}
-\DoxyCodeLine{    \textcolor{keywordflow}{if} (i != size -\/ 1) std::cout << \textcolor{stringliteral}{", "};}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (i != size-\/1) std::cout << \textcolor{stringliteral}{", "};}
 \DoxyCodeLine{\}}
 \DoxyCodeLine{std::cout << \textcolor{stringliteral}{"]"} << std::endl;}
 \end{DoxyCode}
@@ -308,8 +305,6 @@ The analysis performed by this function is identical to that described in Spheri
 \DoxyCodeLine{\textcolor{comment}{// Use this so we can fit within 80 characters}}
 \DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a00270_ga249100bce7370ba4202f47294f179f81}{HF::AnalysisMethods::ViewAnalysis::SphericalRayshootWithAnyRTForDistance}};}
 \DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a00275_a0a616a205221414bf7aa28966b461dec}{HF::AnalysisMethods::ViewAnalysis::AGGREGATE\_TYPE}};}
-\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01163}{HF::RayTracer::EmbreeRayTracer}};}
-\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01127}{HF::Geometry::MeshInfo}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Create Plane}}
 \DoxyCodeLine{\textcolor{keyword}{const} std::vector<float> plane\_vertices\{}
@@ -351,18 +346,18 @@ The analysis performed by this function is identical to that described in Spheri
 {\ttfamily $>$$>$$>$ (2746.\+72, 932.\+565, 170.\+858, 76.\+8413)}
 
 \begin{DoxyRefDesc}{Todo}
-\item[\mbox{\hyperlink{a00263__todo000014}{Todo}}]Should this have a height check like the one in the \mbox{\hyperlink{a00278}{Visibility\+Graph}}?\end{DoxyRefDesc}
+\item[\mbox{\hyperlink{a00264__todo000003}{Todo}}]Should this have a height check like the one in the \mbox{\hyperlink{a00278}{Visibility\+Graph}}?\end{DoxyRefDesc}
 
 
 \begin{DoxyRefDesc}{Todo}
-\item[\mbox{\hyperlink{a00263__todo000015}{Todo}}]Rename this to View\+Analysis\+Aggregate.\end{DoxyRefDesc}
+\item[\mbox{\hyperlink{a00264__todo000004}{Todo}}]Rename this to View\+Analysis\+Aggregate.\end{DoxyRefDesc}
 
 
 \begin{DoxyRefDesc}{Todo}
-\item[\mbox{\hyperlink{a00263__todo000016}{Todo}}]Potential speed up here by using a Raytracer function that doesn\textquotesingle{}t return the point of intersection. \end{DoxyRefDesc}
+\item[\mbox{\hyperlink{a00264__todo000005}{Todo}}]Potential speed up here by using a Raytracer function that doesn\textquotesingle{}t return the point of intersection. \end{DoxyRefDesc}
 
 
-Definition at line 489 of file view\+\_\+analysis.\+h.
+Definition at line 483 of file view\+\_\+analysis.\+h.
 
 
 
@@ -433,8 +428,6 @@ An {\itshape approximately} num\+\_\+rays $\ast$ Nodes.\+size() long vector of R
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Use this so we can fit within 80 characters}}
 \DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a00270_ga8090bf1d24c0cff934daba1c76d82ba6}{HF::AnalysisMethods::ViewAnalysis::SphericalViewAnalysis}};}
-\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01163}{HF::RayTracer::EmbreeRayTracer}};}
-\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01127}{HF::Geometry::MeshInfo}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Create Plane}}
 \DoxyCodeLine{\textcolor{keyword}{const} std::vector<float> plane\_vertices\{}
@@ -498,10 +491,10 @@ An {\itshape approximately} num\+\_\+rays $\ast$ Nodes.\+size() long vector of R
 {\ttfamily $>$$>$$>$ (-\/1, 7.\+35812, -\/1, -\/1, 3.\+70356, -\/1, 5.\+56647, 12.\+1517, -\/1, 2.\+36725, -\/1, -\/1, 2.\+97477, 2.\+58713, -\/1,} {\ttfamily -\/1, 1.\+91404, 5.\+95885, 4.\+26368, 1.\+86167, -\/1, -\/1, 2.\+0406, 2.\+78304, -\/1, -\/1, -\/1, -\/1, 2.\+83909, 2.\+05302,} {\ttfamily -\/1, -\/1, 1.\+90724, 4.\+29017, 6.\+3381, 1.\+98544, -\/1, -\/1, 2.\+75554, 3.\+15929, -\/1, -\/1, 2.\+6345, -\/1, -\/1,} {\ttfamily 6.\+80486, -\/1, 5.\+12012, -\/1)}
 
 \begin{DoxyRefDesc}{Todo}
-\item[\mbox{\hyperlink{a00263__todo000013}{Todo}}]Should this have a height check like the one in the \mbox{\hyperlink{a00278}{Visibility\+Graph}}?\end{DoxyRefDesc}
+\item[\mbox{\hyperlink{a00264__todo000002}{Todo}}]Should this have a height check like the one in the \mbox{\hyperlink{a00278}{Visibility\+Graph}}?\end{DoxyRefDesc}
 
 
-Definition at line 357 of file view\+\_\+analysis.\+h.
+Definition at line 353 of file view\+\_\+analysis.\+h.
 
 
 

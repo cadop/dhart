@@ -2,7 +2,7 @@
 \label{a01107}\index{HF::AnalysisMethods::UniqueQueue@{HF::AnalysisMethods::UniqueQueue}}
 
 
-A queue that remembers every object inserted, and prevents the addition of nodes that have already been inserted even if they\textquotesingle{}ve been popped.  
+A queue that ensures every unique object can only enter the queue once  
 
 
 
@@ -15,44 +15,41 @@ A queue that remembers every object inserted, and prevents the addition of nodes
 bool \mbox{\hyperlink{a01107_ab68b0a487ec4c6a63b94aa21e9958614}{push}} (const \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&p)
 \begin{DoxyCompactList}\small\item\em Add a node to the queue if it has never previously been in the queue. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \mbox{\hyperlink{a01107_aea67255188a3f8d9f9755f85efdd4b60}{pop}} ()
-\begin{DoxyCompactList}\small\item\em Remove the topmost node from the queue and return it. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Remove the topmost node from the queue and return it \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{a01107_a714234140a2c4a49eb5ba4418cd87c8f}{size}} () const
-\begin{DoxyCompactList}\small\item\em Determine how many nodes are currently in the queue. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Determine how many nodes are currently in the queue \end{DoxyCompactList}\item 
 \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \mbox{\hyperlink{a01107_a4a3a37a96c45dfa3a654d5d4e7d07a4a}{pop\+From\+Dict}} ()
-\begin{DoxyCompactList}\small\item\em Retrieve the topmost node from the queue, but \char`\"{}forget\char`\"{} about it to allow it to enter again in the future. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Remove the topmost node from the queue, but allow it to enter again in the future \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{a01107_a53326f383a1dd1c083037213044b112b}{has\+Node}} (const \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&p) const
-\begin{DoxyCompactList}\small\item\em Check to see if the node has ever been in the queue. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Check to see if the node has ever been in the queue \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{a01107_af50bcd7fffb59767edbf7d5b6b5d69b6}{force\+Push}} (const \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&p)
 \begin{DoxyCompactList}\small\item\em Forcibly push a node onto the queue without checking it. Saves a hash function, but risks breaking the invariant. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{a01107_a792665a25bcf313e5925247855b5f7d3}{empty}} () const
-\begin{DoxyCompactList}\small\item\em Tell if the queue is empty. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Tell if the queue is empty \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{a01107_a9b63b2d577ec77a205d2443a9e58aff6}{clear\+Queue}} ()
-\begin{DoxyCompactList}\small\item\em Clear every node from the queue without forgetting them. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Clear every node from the queue, but not the dictionary \end{DoxyCompactList}\item 
 std\+::vector$<$ \mbox{\hyperlink{a01203}{Spatial\+Structures\+::\+Node}} $>$ \mbox{\hyperlink{a01107_afc00a6953228ef2639a6b40a7ce64e28}{pop\+Many}} (int max=-\/1)
-\begin{DoxyCompactList}\small\item\em Pop a set amount of nodes from the queue, and return them as a vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Pop a set amount of nodes from the queue, and return them as a vector 
+\begin{DoxyParams}{Parameters}
+{\em max} & Maximum allowed amount of nodes. If set to -\/1, pop all\\
+\hline
+\end{DoxyParams}
+\end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
 std\+::queue$<$ \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \mbox{\hyperlink{a01107_a108fa4b8cd807b67c03a084e88d475d9}{node\+\_\+queue}}
-\begin{DoxyCompactList}\small\item\em The underlying queue. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em A std\+::queue of Node ///$<$. \end{DoxyCompactList}\item 
 robin\+\_\+hood\+::unordered\+\_\+map$<$ \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}}, int $>$ \mbox{\hyperlink{a01107_a140a4e0eedf300410609e3eb52ad7bf1}{hashmap}}
-\begin{DoxyCompactList}\small\item\em Hashmap to keep track of nodes that have entered the queue. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em a hashmap of K = Node, V = int ///$<$ \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-A queue that remembers every object inserted, and prevents the addition of nodes that have already been inserted even if they\textquotesingle{}ve been popped. 
-
-\begin{DoxyInvariant}{Invariant}
-All unique nodes can only enter the queue once. After they\textquotesingle{}ve been popped, future attempts to push them will fail.
-\end{DoxyInvariant}
-\begin{DoxyRemark}{Remarks}
-This class was designed specificlaly to manage the \mbox{\hyperlink{a01099}{Graph\+Generator}}\textquotesingle{}s todo list with as few hashmap calls as possible.
-\end{DoxyRemark}
-\begin{DoxyRefDesc}{Todo}
-\item[\mbox{\hyperlink{a00263__todo000010}{Todo}}]This could be a useful standalone templated class. \end{DoxyRefDesc}
+A queue that ensures every unique object can only enter the queue once 
 
 
-Definition at line 30 of file unique\+\_\+queue.\+h.
+
+Definition at line 21 of file unique\+\_\+queue.\+h.
 
 
 
@@ -65,11 +62,11 @@ Definition at line 30 of file unique\+\_\+queue.\+h.
 
 
 
-Clear every node from the queue without forgetting them. 
+Clear every node from the queue, but not the dictionary 
 
 
 
-Definition at line 58 of file unique\+\_\+queue.\+cpp.
+Definition at line 54 of file unique\+\_\+queue.\+cpp.
 
 
 
@@ -83,14 +80,14 @@ References node\+\_\+queue.
 
 
 
-Tell if the queue is empty. 
+Tell if the queue is empty 
 
 \begin{DoxyReturn}{Returns}
-False if there is atleast one node in the queue. True otherwise. 
+False if there is atleast one node in the queue
 \end{DoxyReturn}
 
 
-Definition at line 56 of file unique\+\_\+queue.\+cpp.
+Definition at line 51 of file unique\+\_\+queue.\+cpp.
 
 
 
@@ -112,15 +109,15 @@ Forcibly push a node onto the queue without checking it. Saves a hash function, 
 
 
 \begin{DoxyParams}{Parameters}
-{\em p} & Node to add to the end of the queue. \\
+{\em p} & Node to push\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-Always true since it cannot fail. 
+
 \end{DoxyReturn}
 
 
-Definition at line 48 of file unique\+\_\+queue.\+cpp.
+Definition at line 46 of file unique\+\_\+queue.\+cpp.
 
 
 
@@ -134,19 +131,19 @@ References hashmap, and node\+\_\+queue.
 
 
 
-Check to see if the node has ever been in the queue. 
+Check to see if the node has ever been in the queue 
 
 
 \begin{DoxyParams}{Parameters}
-{\em p} & Node to check. \\
+{\em p} & Node to check the existance of \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-True if the node has existed in the queue. 
+True if the node has existed in the queue
 \end{DoxyReturn}
 
 
-Definition at line 44 of file unique\+\_\+queue.\+cpp.
+Definition at line 42 of file unique\+\_\+queue.\+cpp.
 
 
 
@@ -160,19 +157,14 @@ References hashmap.
 
 
 
-Remove the topmost node from the queue and return it. 
+Remove the topmost node from the queue and return it 
 
 \begin{DoxyReturn}{Returns}
-The node at the top of the queue. 
+The node at the top of the stack
 \end{DoxyReturn}
 
 
-\begin{DoxySeeAlso}{See also}
-\mbox{\hyperlink{a01107_a4a3a37a96c45dfa3a654d5d4e7d07a4a}{pop\+From\+Dict}} for removing the topmost node and allowing it to enter again in the future. 
-\end{DoxySeeAlso}
-
-
-Definition at line 26 of file unique\+\_\+queue.\+cpp.
+Definition at line 23 of file unique\+\_\+queue.\+cpp.
 
 
 
@@ -190,16 +182,14 @@ Referenced by H\+F\+::\+Analysis\+Methods\+::\+Graph\+Generator\+Private\+::\+Cr
 
 
 
-Retrieve the topmost node from the queue, but \char`\"{}forget\char`\"{} about it to allow it to enter again in the future. 
+Remove the topmost node from the queue, but allow it to enter again in the future 
 
 \begin{DoxyReturn}{Returns}
-Topmost node in the queue. 
+Topmost node in the queue
 \end{DoxyReturn}
 
 
-This sets the node\textquotesingle{}s value to 0 in the hashmap, making it behave exactly like a node that has never been seen by the queue. 
-
-Definition at line 35 of file unique\+\_\+queue.\+cpp.
+Definition at line 34 of file unique\+\_\+queue.\+cpp.
 
 
 
@@ -213,20 +203,16 @@ References hashmap, and node\+\_\+queue.
 
 
 
-Pop a set amount of nodes from the queue, and return them as a vector. 
-
-
+Pop a set amount of nodes from the queue, and return them as a vector 
 \begin{DoxyParams}{Parameters}
-{\em max} & Stop after popping this amount of nodes.\\
+{\em max} & Maximum allowed amount of nodes. If set to -\/1, pop all\\
 \hline
 \end{DoxyParams}
 
 
-Use this to quickly pop several nodes without having to make a function call for each. \begin{DoxyRefDesc}{Todo}
-\item[\mbox{\hyperlink{a00263__todo000011}{Todo}}]Opetion to pop every node by setting max to -\/1. \end{DoxyRefDesc}
 
 
-Definition at line 65 of file unique\+\_\+queue.\+cpp.
+Definition at line 58 of file unique\+\_\+queue.\+cpp.
 
 
 
@@ -248,15 +234,13 @@ Add a node to the queue if it has never previously been in the queue.
 
 
 \begin{DoxyParams}{Parameters}
-{\em p} & Node to add to the queue. \\
+{\em p} & The node to add\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-False if the node wasn\textquotesingle{}t added, true if it was 
+False if the node wasn\textquotesingle{}t added, true if it was
 \end{DoxyReturn}
 
-
-If the node has a value of 1 in hashmap, then the node is ignored. If the node doesn\textquotesingle{}t already exist in the hashmap, the call to hashmap\mbox{[}p\mbox{]} will automatically create an entry with a value of 0, indicating that the node hasn\textquotesingle{}t been seen before. 
 
 Definition at line 12 of file unique\+\_\+queue.\+cpp.
 
@@ -276,14 +260,14 @@ Referenced by H\+F\+::\+Analysis\+Methods\+::\+Graph\+Generator\+Private\+::\+Bu
 
 
 
-Determine how many nodes are currently in the queue. 
+Determine how many nodes are currently in the queue 
 
 \begin{DoxyReturn}{Returns}
-The number of nodes in the queue 
+The amount of nodes in the queue
 \end{DoxyReturn}
 
 
-Definition at line 33 of file unique\+\_\+queue.\+cpp.
+Definition at line 30 of file unique\+\_\+queue.\+cpp.
 
 
 
@@ -304,11 +288,11 @@ Referenced by H\+F\+::\+Analysis\+Methods\+::\+Graph\+Generator\+Private\+::\+Cr
 
 
 
-Hashmap to keep track of nodes that have entered the queue. 
+a hashmap of K = Node, V = int ///$<$ 
 
-Values of 0 indicate that a node has never been pushed before. Values of 1 indicate that a node has already been in the hashmap previously. 
 
-Definition at line 39 of file unique\+\_\+queue.\+h.
+
+Definition at line 24 of file unique\+\_\+queue.\+h.
 
 
 
@@ -322,11 +306,11 @@ Referenced by force\+Push(), has\+Node(), pop\+From\+Dict(), and push().
 
 
 
-The underlying queue. 
+A std\+::queue of Node ///$<$. 
 
 
 
-Definition at line 32 of file unique\+\_\+queue.\+h.
+Definition at line 23 of file unique\+\_\+queue.\+h.
 
 
 

@@ -1,0 +1,171 @@
+\hypertarget{a01037}{}\doxysection{HF\+::Pathfinding\+::Boost\+Graph Class Reference}
+\label{a01037}\index{HF::Pathfinding::BoostGraph@{HF::Pathfinding::BoostGraph}}
+
+
+Holds the necessary state for the Boost pathfinding algorithm  
+
+
+
+
+{\ttfamily \#include $<$boost\+\_\+graph.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01037_abb54875d0dfd2913eb642142647d7133}{Boost\+Graph}} (const \mbox{\hyperlink{a01097}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} \&graph)
+\begin{DoxyCompactList}\small\item\em Create a new Boost graph from the given \mbox{\hyperlink{a00171}{HF}} Graph \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01037_a9626c462cdaa2b8d869e7a4311c51b7d}{$\sim$\+Boost\+Graph}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the current Boost graph (uses compiler-\/generated implementation via \textquotesingle{}default\textquotesingle{}) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00179_a9314d552e0a8092644fa080c9945bd25}{graph\+\_\+t}} \mbox{\hyperlink{a01037_a8af65de831cc2255b7ad2069791124ef}{g}}
+\begin{DoxyCompactList}\small\item\em Directed C\+SR graph (Boost) \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{a00179_aff4215affd9d683505478f5b7dcc1804}{vertex\+\_\+descriptor}} $>$ \mbox{\hyperlink{a01037_ac7b026041a385cf55c089944a02e0c1d}{p}}
+\begin{DoxyCompactList}\small\item\em Container of vertex\+\_\+descriptor. \end{DoxyCompactList}\item 
+std\+::vector$<$ double $>$ \mbox{\hyperlink{a01037_a45e623a31de17dd7eba2e849822fc692}{d}}
+\begin{DoxyCompactList}\small\item\em Container of double. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Holds the necessary state for the Boost pathfinding algorithm 
+
+
+
+Definition at line 125 of file boost\+\_\+graph.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{a01037_abb54875d0dfd2913eb642142647d7133}\label{a01037_abb54875d0dfd2913eb642142647d7133}} 
+\index{HF::Pathfinding::BoostGraph@{HF::Pathfinding::BoostGraph}!BoostGraph@{BoostGraph}}
+\index{BoostGraph@{BoostGraph}!HF::Pathfinding::BoostGraph@{HF::Pathfinding::BoostGraph}}
+\doxysubsubsection{\texorpdfstring{BoostGraph()}{BoostGraph()}}
+{\footnotesize\ttfamily H\+F\+::\+Pathfinding\+::\+Boost\+Graph\+::\+Boost\+Graph (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01097}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} \&}]{graph }\end{DoxyParamCaption})}
+
+
+
+Create a new Boost graph from the given \mbox{\hyperlink{a00171}{HF}} Graph 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// In order to create a Boost graph, we must first create a}}
+\DoxyCodeLine{\textcolor{comment}{// HF::SpatialStructures::Graph instance first.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}};}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01097}{HF::SpatialStructures::Graph}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the nodes}}
+\DoxyCodeLine{Node node\_0(12.0, 23.1, 34.2, 456);}
+\DoxyCodeLine{Node node\_1(45.3, 56.4, 67.5, 789);}
+\DoxyCodeLine{Node node\_2(55.5, 25.1, 85.2, 940);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a container (vector) of nodes}}
+\DoxyCodeLine{std::vector<Node> nodes = \{ node\_0, node\_1, node\_2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create matrices for edges and distances, edges.size() == distances().size()}}
+\DoxyCodeLine{std::vector<std::vector<int>> edges = \{ \{1, 2, 3\}, \{4, 5, 6\}, \{7, 8, 9 \} \};}
+\DoxyCodeLine{std::vector<std::vector<float>> distances = \{ \{12.0, 23.1, 45.2\}, \{67.3, 89.4, 98.5\}, \{76.6, 54.7, 32.8\} \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Now you can create a Graph -\/ note that nodes, edges, and distances are passed by reference}}
+\DoxyCodeLine{Graph \mbox{\hyperlink{a01037_a8af65de831cc2255b7ad2069791124ef}{g}}(edges, distances, nodes);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Passing Graph g to BoostGraph bg, by reference}}
+\DoxyCodeLine{\mbox{\hyperlink{a01037_abb54875d0dfd2913eb642142647d7133}{BoostGraph}} bg(\mbox{\hyperlink{a01037_a8af65de831cc2255b7ad2069791124ef}{g}});}
+\end{DoxyCode}
+ 
+
+Definition at line 20 of file boost\+\_\+graph.\+cpp.
+
+
+
+References d, g, H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Get\+Edges(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Nodes(), p, H\+F\+::\+Spatial\+Structures\+::\+Graph\+::size(), and H\+F\+::\+Pathfinding\+::\+Edge\+\_\+\+Cost\+::weight.
+
+\mbox{\Hypertarget{a01037_a9626c462cdaa2b8d869e7a4311c51b7d}\label{a01037_a9626c462cdaa2b8d869e7a4311c51b7d}} 
+\index{HF::Pathfinding::BoostGraph@{HF::Pathfinding::BoostGraph}!````~BoostGraph@{$\sim$BoostGraph}}
+\index{````~BoostGraph@{$\sim$BoostGraph}!HF::Pathfinding::BoostGraph@{HF::Pathfinding::BoostGraph}}
+\doxysubsubsection{\texorpdfstring{$\sim$BoostGraph()}{~BoostGraph()}}
+{\footnotesize\ttfamily H\+F\+::\+Pathfinding\+::\+Boost\+Graph\+::$\sim$\+Boost\+Graph (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Destroy the current Boost graph (uses compiler-\/generated implementation via \textquotesingle{}default\textquotesingle{}) 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Begin scope}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{comment}{// Create a HF::SpatialStructures::Graph g here first.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{comment}{// Create a BoostGraph bg, from a Graph g (passing g by reference)}}
+\DoxyCodeLine{    \mbox{\hyperlink{a01037_abb54875d0dfd2913eb642142647d7133}{BoostGraph}} bg(\mbox{\hyperlink{a01037_a8af65de831cc2255b7ad2069791124ef}{g}});}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{comment}{// End scope}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// When bg goes out of scope, BoostGraph::\string~BoostGraph is called}}
+\DoxyCodeLine{\textcolor{comment}{// An explicit call to BoostGraph::\string~BoostGraph is also made when}}
+\DoxyCodeLine{\textcolor{comment}{// invoking operator delete on a (BoostGraph *)}}
+\end{DoxyCode}
+ 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01037_a45e623a31de17dd7eba2e849822fc692}\label{a01037_a45e623a31de17dd7eba2e849822fc692}} 
+\index{HF::Pathfinding::BoostGraph@{HF::Pathfinding::BoostGraph}!d@{d}}
+\index{d@{d}!HF::Pathfinding::BoostGraph@{HF::Pathfinding::BoostGraph}}
+\doxysubsubsection{\texorpdfstring{d}{d}}
+{\footnotesize\ttfamily std\+::vector$<$double$>$ H\+F\+::\+Pathfinding\+::\+Boost\+Graph\+::d}
+
+
+
+Container of double. 
+
+
+
+Definition at line 129 of file boost\+\_\+graph.\+h.
+
+
+
+Referenced by Boost\+Graph().
+
+\mbox{\Hypertarget{a01037_a8af65de831cc2255b7ad2069791124ef}\label{a01037_a8af65de831cc2255b7ad2069791124ef}} 
+\index{HF::Pathfinding::BoostGraph@{HF::Pathfinding::BoostGraph}!g@{g}}
+\index{g@{g}!HF::Pathfinding::BoostGraph@{HF::Pathfinding::BoostGraph}}
+\doxysubsubsection{\texorpdfstring{g}{g}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00179_a9314d552e0a8092644fa080c9945bd25}{graph\+\_\+t}} H\+F\+::\+Pathfinding\+::\+Boost\+Graph\+::g}
+
+
+
+Directed C\+SR graph (Boost) 
+
+
+
+Definition at line 127 of file boost\+\_\+graph.\+h.
+
+
+
+Referenced by Boost\+Graph(), H\+F\+::\+Pathfinding\+::\+Find\+Path(), H\+F\+::\+Pathfinding\+::\+Find\+Paths(), and H\+F\+::\+Pathfinding\+::\+Insert\+Paths\+Into\+Array().
+
+\mbox{\Hypertarget{a01037_ac7b026041a385cf55c089944a02e0c1d}\label{a01037_ac7b026041a385cf55c089944a02e0c1d}} 
+\index{HF::Pathfinding::BoostGraph@{HF::Pathfinding::BoostGraph}!p@{p}}
+\index{p@{p}!HF::Pathfinding::BoostGraph@{HF::Pathfinding::BoostGraph}}
+\doxysubsubsection{\texorpdfstring{p}{p}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{a00179_aff4215affd9d683505478f5b7dcc1804}{vertex\+\_\+descriptor}}$>$ H\+F\+::\+Pathfinding\+::\+Boost\+Graph\+::p}
+
+
+
+Container of vertex\+\_\+descriptor. 
+
+
+
+Definition at line 128 of file boost\+\_\+graph.\+h.
+
+
+
+Referenced by Boost\+Graph().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/pathfinding/src/\mbox{\hyperlink{a00059}{boost\+\_\+graph.\+h}}\item 
+Cpp/pathfinding/src/\mbox{\hyperlink{a00056}{boost\+\_\+graph.\+cpp}}\end{DoxyCompactItemize}
