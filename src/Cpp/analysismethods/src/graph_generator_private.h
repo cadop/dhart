@@ -1,6 +1,6 @@
 ///
 /// \file		graph_generator_private.h
-/// \brief		Contains definitions for the <see cref="HF::GraphGenerator::GraphGeneratorPrivate">GraphGeneratorPrivate</cref> class
+/// \brief		Contains definitions for the <see cref="HF::AnalysisMethods::GraphGeneratorPrivate">GraphGeneratorPrivate</cref> class
 ///
 ///	\author		TBA
 ///	\date		26 Jun 2020
@@ -11,7 +11,7 @@
 #include <graph_generator.h>
 #include <unique_queue.h>
 #include <set>
-namespace HF::GraphGenerator {
+namespace HF::AnalysisMethods {
 	/// <summary>
 	/// Contains the private implementation of the GraphGenerator to insulate the clients from the implementation.
 	/// </summary>
@@ -23,7 +23,7 @@ namespace HF::GraphGenerator {
 	
 	private:
 		HF::SpatialStructures::Graph G;			  ///< An internal graph that is iterated upon as the program is executed
-		HF::GraphGenerator::GraphGenerator & GG; ///< The underlying graph generator to hold all the settings
+		HF::AnalysisMethods::GraphGenerator & GG; ///< The underlying graph generator to hold all the settings
 
 		/// <summary> Determine if a node is above a valid floor. </summary>
 		/// <param name="position"> Node to check. </param>

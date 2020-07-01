@@ -1,6 +1,6 @@
 ///
 /// \file		view_analysis.h
-/// \brief		Contains definitions for the <see cref="HF::ViewAnalysis">ViewAnalysis</cref> namespace
+/// \brief		Contains definitions for the <see cref="HF::AnalysisMethods::ViewAnalysis">ViewAnalysis</cref> namespace
 ///
 ///	\author		TBA
 ///	\date		26 Jun 2020
@@ -25,23 +25,13 @@ namespace HF {
 	}
 }
 
-/*! 
+/*!
 
-	\brief Analyze space from the perspective of observers within a 3D environment.
+@namespace HF::AnalysisMethods::ViewAnalysis Analyze space from the perspective of observers within a scene.
+\see SphericalViewAnalysis for more details.
 
-	\details 
-	View Analysis contains a set of algorithms dedicated to evaluating the view of an observer
-	from specific points in a model. Generally this consists of equally distributing a series
-	of rays in a sphere around the observer, then casting the rays and calculating a result or
-	returning the raw results of each intersection.
-
-	\see FibbonacciDistributePoints for the algorithm used to equally distribute rays.
-	\see SphericalViewAnalysis for a view analysis algorithm that returns the ID and distance to 
-	intersection point of every ray casted.
-	\see SphericalRayshootWithAnyRTForDistance for an algorithm that aggregates the results of
-	view analysis into a score for each of the input observer points.
 */
-namespace HF::ViewAnalysis {
+namespace HF::AnalysisMethods::ViewAnalysis {
 	/// <summary>
 	/// The type of aggregation to use for <see cref="ViewAnalysisAggregate"/>
 	/// </summary>
@@ -63,7 +53,7 @@ namespace HF::ViewAnalysis {
 	/// \param upward_limit Maximum angle in degrees to cast rays above the viewpoint.
 	/// \param downward_limit Maximum angle in degrees to cast rays below the viewpoint.
 	
-	/// \returns A vector of arrays containing the x, y, and z coordinates of each point on the sphere.
+	/// /// \returns A vector of arrays containing the x, y, and z coordinates of each point on the sphere.
 	/*!  
 		\ingroup ViewAnalysis
 		\note
@@ -85,7 +75,7 @@ namespace HF::ViewAnalysis {
 			// Requires #include "view_analysis.h"
 
 			// For brevity
-			using HF::ViewAnalysis::FibbonacciDistributePoints;
+			using HF::AnalysisMethods::ViewAnalysis::FibbonacciDistributePoints;
 
 			// Prepare maximum number of points to distribute
 			int size = 8;
@@ -156,8 +146,8 @@ namespace HF::ViewAnalysis {
 			// Requires #include "view_analysis.h", #include <numeric>
 
 			// Use this to save some space.
-			using HF::ViewAnalysis::AGGREGATE_TYPE;
-			using HF::ViewAnalysis::Aggregate;
+			using HF::AnalysisMethods::ViewAnalysis::AGGREGATE_TYPE;
+			using HF::AnalysisMethods::ViewAnalysis::Aggregate;
 
 			// Undef these since they will prevent us from calling numericlimits
 			#undef min
@@ -292,7 +282,7 @@ namespace HF::ViewAnalysis {
 			// Requires #include "view_analysis.h"
 
 			// Use this so we can fit within 80 characters
-			using HF::ViewAnalysis::SphericalViewAnalysis;
+			using HF::AnalysisMethods::ViewAnalysis::SphericalViewAnalysis;
 			using HF::RayTracer::EmbreeRayTracer;
 			using HF::Geometry::MeshInfo;
 
@@ -445,8 +435,8 @@ namespace HF::ViewAnalysis {
 			// Requires #include "view_analysis.h"
 
 			// Use this so we can fit within 80 characters
-			using HF::ViewAnalysis::SphericalRayshootWithAnyRTForDistance;
-			using HF::ViewAnalysis::AGGREGATE_TYPE;
+			using HF::AnalysisMethods::ViewAnalysis::SphericalRayshootWithAnyRTForDistance;
+			using HF::AnalysisMethods::ViewAnalysis::AGGREGATE_TYPE;
 			using HF::RayTracer::EmbreeRayTracer;
 			using HF::Geometry::MeshInfo;
 

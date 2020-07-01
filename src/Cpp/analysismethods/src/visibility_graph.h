@@ -1,7 +1,7 @@
 ///
 ///	\file		visibility_graph.h
 ///
-///	\brief		Contains definitions for the <see cref = "HF::VisibilityGraph">VisibilityGraph</cref> class
+///	\brief		Contains definitions for the <see cref = "HF::AnalysisMethods::VisibilityGraph">VisibilityGraph</cref> class
 ///	\author		TBA
 ///	\date		17 Jun 2020
 
@@ -38,7 +38,7 @@ namespace HF {
 	\see HF::SpatialStructures::Graph for more info on the Graph Datatype that is returned from all functions
 	in the VisibilityGraph namespace.
 */
-namespace HF::VisibilityGraph {
+namespace HF::AnalysisMethods::VisibilityGraph {
 	/// <summary> Generate a Visibility Graph between every node in a set of nodes in parallel. </summary>
 
 	/// <param name="ert"> A Raytracer conatining the geometry to use as obstacles for occlusion checks. </param>
@@ -194,7 +194,7 @@ namespace HF::VisibilityGraph {
 			// GroupToGroup constructs and returns a Graph consisting of Node (between
 			// node_vec_0 and node_vec_1) such that the nodes do not occlude each other
 			float desired_height = 2.0f;		// Height of graph
-			HF::SpatialStructures::Graph graph = HF::VisibilityGraph::GroupToGroup(tracer, node_vec_0, node_vec_1, desired_height);
+			HF::SpatialStructures::Graph graph = HF::AnalysisMethods::VisibilityGraph::GroupToGroup(tracer, node_vec_0, node_vec_1, desired_height);
 		\endcode
 	*/
 	HF::SpatialStructures::Graph GroupToGroup(
@@ -265,7 +265,7 @@ namespace HF::VisibilityGraph {
 			float desired_height = 2.0f;		// Height of graph
 			int core_count = 4;					// For omp_set_num_threads(int num_threads), CPU core count
 			HF::SpatialStructures::Graph graph =
-				HF::VisibilityGraph::AllToAllUndirected(tracer, node_vec, desired_height, core_count);
+				HF::AnalysisMethods::VisibilityGraph::AllToAllUndirected(tracer, node_vec, desired_height, core_count);
 		\endcode
 	*/
 	HF::SpatialStructures::Graph AllToAllUndirected(

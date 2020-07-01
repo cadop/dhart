@@ -17,653 +17,657 @@
 #include <RayRequest.h>
 #include <HFExceptions.h>
 
-namespace HF::RayTracer {
-	/// <summary> Calculate the hitpoint of a ray from its origin, direction and distance </summary>
-	/// \deprecated Unused.
-	template <typename P, typename D>
-	P CalculateHitPoint(const P& origin, const D& direction, float distance) {
-		const float x = origin[0] + (direction[0] * distance);
-		const float y = origin[1] + (direction[1] * distance);
-		const float z = origin[2] + (direction[2] * distance);
-		return P{ x,y,z };
-	}
+namespace HF {
+	namespace RayTracer {
 
-	bool HitStruct::DidHit() const { return meshid != RTC_INVALID_GEOMETRY_ID; };
 
-	/// <summary>
-	/// Check an embree device for errors.
-	/// </summary>
-	/// <param name="device">Device to check for errors</param>
-	/// <exception cref="std::exception">Some error is found while casting rays.</exception>
-	void CheckState(RTCDevice& device) {
-		auto err = rtcGetDeviceError(device);
+		/// <summary> Calculate the hitpoint of a ray from its origin, direction and distance </summary>
+		/// \deprecated Unused.
+		template <typename P, typename D>
+		P CalculateHitPoint(const P& origin, const D& direction, float distance) {
+			const float x = origin[0] + (direction[0] * distance);
+			const float y = origin[1] + (direction[1] * distance);
+			const float z = origin[2] + (direction[2] * distance);
+			return P{ x,y,z };
+		}
 
-		if (err != RTCError::RTC_ERROR_NONE)
-			throw std::exception("RTC DEVICE ERROR");
-	}
-	/// <summary>
-	/// A vertex. Used internally in Embree.
-	/// </summary>
-	struct Vertex { float x, y, z; };
+		bool HitStruct::DidHit() const { return meshid != RTC_INVALID_GEOMETRY_ID; };
 
-	/// <summary>
-	/// A triangle. Used internally in Embree.
-	/// </summary>
-	struct Triangle { int v0, v1, v2; };
+		/// <summary>
+		/// Check an embree device for errors.
+		/// </summary>
+		/// <param name="device">Device to check for errors</param>
+		/// <exception cref="std::exception">Some error is found while casting rays.</exception>
+		void CheckState(RTCDevice& device) {
+			auto err = rtcGetDeviceError(device);
 
-	/// \deprecated Use the version in ViewAnalysis.
-	[[deprecated("Use the version in ViewAnalysis.")]]
-	static inline double getRandomNumber() {
-		return static_cast<double> (1.0 - (rand()) / static_cast<double>(RAND_MAX / 2.0));
-	}
-	
-	/// \deprecated Use the version in ViewAnalysis.
-	[[deprecated("Use the version in ViewAnalysis.")]]
-	static inline float myradians(float angle) {
-		return angle * (static_cast<float>(M_PI) / 180.00f);
-	}
-	
-	/// \deprecated Use the version in ViewAnalysis.
-	[[deprecated("Use the version in viewanalysis")]]
-	static inline unsigned long mix(unsigned long a, unsigned long b, unsigned long c)
-	{
-		a = a - b;  a = a - c;  a = a ^ (c >> 13);
-		b = b - c;  b = b - a;  b = b ^ (a << 8);
-		c = c - a;  c = c - b;  c = c ^ (b >> 13);
-		a = a - b;  a = a - c;  a = a ^ (c >> 12);
-		b = b - c;  b = b - a;  b = b ^ (a << 16);
-		c = c - a;  c = c - b;  c = c ^ (b >> 5);
-		a = a - b;  a = a - c;  a = a ^ (c >> 3);
-		b = b - c;  b = b - a;  b = b ^ (a << 10);
-		c = c - a;  c = c - b;  c = c ^ (b >> 15);
-		return c;
-	}
-	
-	/// \deprecated Use the version in ViewAnalysis.
-	[[deprecated("Use the version in viewanalysis")]]
-	static inline std::vector<std::array<float, 3>> genSphereRays(int step)
-	{
-		const float up_angle = 50;
-		const float down_angle = 70;
-		const float left_angle = 180;
-		const float right_angle = 180;
+			if (err != RTCError::RTC_ERROR_NONE)
+				throw std::exception("RTC DEVICE ERROR");
+		}
+		/// <summary>
+		/// A vertex. Used internally in Embree.
+		/// </summary>
+		struct Vertex { float x, y, z; };
 
-		float x, y, z;
-		float theta, phi;
+		/// <summary>
+		/// A triangle. Used internally in Embree.
+		/// </summary>
+		struct Triangle { int v0, v1, v2; };
 
-		std::vector<std::array<float, 3>> outrays;
-		for (int i = 90 - up_angle; i < 90 + down_angle; i += step) {
-			theta = myradians(i);
-			for (int j = -1 * right_angle; j < left_angle; j += step) {
-				phi = myradians(j);
+		/// \deprecated Use the version in ViewAnalysis.
+		[[deprecated("Use the version in ViewAnalysis.")]]
+		static inline double getRandomNumber() {
+			return static_cast<double> (1.0 - (rand()) / static_cast<double>(RAND_MAX / 2.0));
+		}
+		
+		/// \deprecated Use the version in ViewAnalysis.
+		[[deprecated("Use the version in ViewAnalysis.")]]
+		static inline float myradians(float angle) {
+			return angle * (static_cast<float>(M_PI) / 180.00f);
+		}
+		
+		/// \deprecated Use the version in ViewAnalysis.
+		[[deprecated("Use the version in viewanalysis")]]
+		static inline unsigned long mix(unsigned long a, unsigned long b, unsigned long c)
+		{
+			a = a - b;  a = a - c;  a = a ^ (c >> 13);
+			b = b - c;  b = b - a;  b = b ^ (a << 8);
+			c = c - a;  c = c - b;  c = c ^ (b >> 13);
+			a = a - b;  a = a - c;  a = a ^ (c >> 12);
+			b = b - c;  b = b - a;  b = b ^ (a << 16);
+			c = c - a;  c = c - b;  c = c ^ (b >> 5);
+			a = a - b;  a = a - c;  a = a ^ (c >> 3);
+			b = b - c;  b = b - a;  b = b ^ (a << 10);
+			c = c - a;  c = c - b;  c = c ^ (b >> 15);
+			return c;
+		}
+		
+		/// \deprecated Use the version in ViewAnalysis.
+		[[deprecated("Use the version in viewanalysis")]]
+		static inline std::vector<std::array<float, 3>> genSphereRays(int step)
+		{
+			const float up_angle = 50;
+			const float down_angle = 70;
+			const float left_angle = 180;
+			const float right_angle = 180;
 
-				x = sin(theta) * cos(phi);
-				y = sin(theta) * sin(phi);
-				z = cos(theta);
+			float x, y, z;
+			float theta, phi;
 
+			std::vector<std::array<float, 3>> outrays;
+			for (int i = 90 - up_angle; i < 90 + down_angle; i += step) {
+				theta = myradians(i);
+				for (int j = -1 * right_angle; j < left_angle; j += step) {
+					phi = myradians(j);
+
+					x = sin(theta) * cos(phi);
+					y = sin(theta) * sin(phi);
+					z = cos(theta);
+
+					outrays.emplace_back(std::array<float, 3>{x, y, z});
+				}
+			}
+		}
+
+		/// \deprecated Use the version in view analysis
+		[[deprecated("Use the version in viewanalysis")]]
+		std::vector<std::array<float, 3>> genFibbonacciRays(int numrays) {
+			int n = numrays;
+			const float up_angle = 40;
+			const float down_angle = 180 - 60;
+
+			const float upperlimit = myradians(up_angle);
+			const float lowerlimit = myradians(down_angle);
+
+			std::vector<std::array<float, 3>> outrays;
+			float offset = 2.0f / float(n);
+			const float increment = static_cast<float>(M_PI)* (3.0f - sqrtf(5.0f));
+			outrays.reserve(n);
+
+			for (int i = 0; i < n; i++) {
+				float y = ((float(i) * offset) - 1) - (offset / 0.2f);
+				float r = sqrt(1 - powf(y, 2));
+				float phi = (float(i + 1) * increment);
+
+				float x = cosf(phi) * r;
+				float z = sinf(phi) * r;
+
+				//	float angle = glm::angle(glm::vec3(x, y, z), axis);
+				//	if (!isnan(x) && !isnan(y) && !isnan(z) && angle > upperlimit&& angle < lowerlimit)
 				outrays.emplace_back(std::array<float, 3>{x, y, z});
 			}
-		}
-	}
 
-	/// \deprecated Use the version in view analysis
-	[[deprecated("Use the version in viewanalysis")]]
-	std::vector<std::array<float, 3>> genFibbonacciRays(int numrays) {
-		int n = numrays;
-		const float up_angle = 40;
-		const float down_angle = 180 - 60;
-
-		const float upperlimit = myradians(up_angle);
-		const float lowerlimit = myradians(down_angle);
-
-		std::vector<std::array<float, 3>> outrays;
-		float offset = 2.0f / float(n);
-		const float increment = static_cast<float>(M_PI)* (3.0f - sqrtf(5.0f));
-		outrays.reserve(n);
-
-		for (int i = 0; i < n; i++) {
-			float y = ((float(i) * offset) - 1) - (offset / 0.2f);
-			float r = sqrt(1 - powf(y, 2));
-			float phi = (float(i + 1) * increment);
-
-			float x = cosf(phi) * r;
-			float z = sinf(phi) * r;
-
-			//	float angle = glm::angle(glm::vec3(x, y, z), axis);
-			//	if (!isnan(x) && !isnan(y) && !isnan(z) && angle > upperlimit&& angle < lowerlimit)
-			outrays.emplace_back(std::array<float, 3>{x, y, z});
+			return outrays;
 		}
 
-		return outrays;
-	}
+		/// <summary>
+		/// Index a list of verticies and place them into a triangle and vertex buffer.
+		/// </summary>
+		/// <param name="vertices">Mesh vertices.</param>
+		/// <param name="Tribuffer">Output triangle buffer.</param>
+		/// <param name="Vbuffer">Output Vertex Buffer.</param>
+		/// <remarks>Internally, this uses a hashmap to create an index map of vertices.</remarks>
+		/// \todo Performance here can be improved by using indexing.
+		inline void vectorsToBuffers(
+			const std::vector<std::array<float, 3>>& vertices,
+			std::vector<Triangle>& Tribuffer,
+			std::vector<Vertex>& Vbuffer
+		) {
+			robin_hood::unordered_map <std::array<float, 3>, int> index_map;
+			
+			int next_id = 0;
+			int vertsize = vertices.size();
 
-	/// <summary>
-	/// Index a list of verticies and place them into a triangle and vertex buffer.
-	/// </summary>
-	/// <param name="vertices">Mesh vertices.</param>
-	/// <param name="Tribuffer">Output triangle buffer.</param>
-	/// <param name="Vbuffer">Output Vertex Buffer.</param>
-	/// <remarks>Internally, this uses a hashmap to create an index map of vertices.</remarks>
-	/// \todo Performance here can be improved by using indexing.
-	inline void vectorsToBuffers(
-		const std::vector<std::array<float, 3>>& vertices,
-		std::vector<Triangle>& Tribuffer,
-		std::vector<Vertex>& Vbuffer
-	) {
-		robin_hood::unordered_map <std::array<float, 3>, int> index_map;
-		
-		int next_id = 0;
-		int vertsize = vertices.size();
+			for (int i = 0; i < vertsize; i += 3) {
+				std::array<int, 3> ids;
 
-		for (int i = 0; i < vertsize; i += 3) {
-			std::array<int, 3> ids;
+				//  Get the ids for the next 3 vertices
+				for (int k = 0; k < 3; k++)
+				{
+					auto vert = vertices[i + k];
+					int current_id;
 
-			//  Get the ids for the next 3 vertices
-			for (int k = 0; k < 3; k++)
-			{
-				auto vert = vertices[i + k];
-				int current_id;
+					// Get ID from index map, or create a new ID if one doesn't exist
+					if (index_map.count(vert) > 0)
+						current_id = index_map[vert];
+					else {
+						index_map[vert] = next_id;
+						current_id = next_id;
 
-				// Get ID from index map, or create a new ID if one doesn't exist
-				if (index_map.count(vert) > 0)
-					current_id = index_map[vert];
-				else {
-					index_map[vert] = next_id;
-					current_id = next_id;
-
-					// Store new vertex in the vertex buffer
-					Vbuffer.emplace_back(Vertex{ vert[0], vert[1], vert[2] });
-					next_id++;
+						// Store new vertex in the vertex buffer
+						Vbuffer.emplace_back(Vertex{ vert[0], vert[1], vert[2] });
+						next_id++;
+					}
+					ids[k] = current_id;
 				}
-				ids[k] = current_id;
+
+				// Store new triangle in the triangle buffer.
+				Tribuffer.emplace_back(Triangle{ ids[0], ids[1], ids[2] });
+			}
+		}
+
+		/// <summary>
+		/// Package raw arrays of floats and indices in buffers to the required Embree types.
+		/// </summary>
+		/// <param name="in_vertices">
+		/// An array of floats in which every 3 floats represents a vertex.
+		/// </param>
+		/// <param name="in_indices">
+		/// An array of integers in which every 3 integers represents a triangle.
+		/// </param>
+		/// <param name="out_vertices"> Output array for vertexes.</param>
+		/// <param name="out_triangles"> Output array for triangles.</param>
+		/// \todo May be faster as a std::move or std::copy.
+		inline void buffersToStructs(
+			std::vector<float>& in_vertices,
+			std::vector<int>& in_indices,
+			std::vector<Vertex>& out_vertices,
+			std::vector<Triangle>& out_triangles
+		) {
+			out_vertices.resize(in_vertices.size() / 3);
+			for (int i = 0; i < in_vertices.size(); i += 3) {
+				out_vertices[i / 3] = Vertex{
+					in_vertices[i],
+					in_vertices[i + 1],
+					in_vertices[i + 2]
+				};
 			}
 
-			// Store new triangle in the triangle buffer.
-			Tribuffer.emplace_back(Triangle{ ids[0], ids[1], ids[2] });
-		}
-	}
-
-	/// <summary>
-	/// Package raw arrays of floats and indices in buffers to the required Embree types.
-	/// </summary>
-	/// <param name="in_vertices">
-	/// An array of floats in which every 3 floats represents a vertex.
-	/// </param>
-	/// <param name="in_indices">
-	/// An array of integers in which every 3 integers represents a triangle.
-	/// </param>
-	/// <param name="out_vertices"> Output array for vertexes.</param>
-	/// <param name="out_triangles"> Output array for triangles.</param>
-	/// \todo May be faster as a std::move or std::copy.
-	inline void buffersToStructs(
-		std::vector<float>& in_vertices,
-		std::vector<int>& in_indices,
-		std::vector<Vertex>& out_vertices,
-		std::vector<Triangle>& out_triangles
-	) {
-		out_vertices.resize(in_vertices.size() / 3);
-		for (int i = 0; i < in_vertices.size(); i += 3) {
-			out_vertices[i / 3] = Vertex{
-				in_vertices[i],
-				in_vertices[i + 1],
-				in_vertices[i + 2]
-			};
+			out_triangles.resize(in_indices.size() / 3);
+			for (int i = 0; i < in_indices.size(); i += 3) {
+				out_triangles[i / 3] = Triangle{
+					in_indices[i],
+					in_indices[i + 1],
+					in_indices[i + 2]
+				};
+			}
 		}
 
-		out_triangles.resize(in_indices.size() / 3);
-		for (int i = 0; i < in_indices.size(); i += 3) {
-			out_triangles[i / 3] = Triangle{
-				in_indices[i],
-				in_indices[i + 1],
-				in_indices[i + 2]
-			};
+		EmbreeRayTracer::EmbreeRayTracer(const std::vector<std::array<float, 3>>& geometry) {
+			device = rtcNewDevice("start_threads=1,set_affinity=1");
+			scene = rtcNewScene(device);
+			rtcSetSceneBuildQuality(scene, RTC_BUILD_QUALITY_HIGH);
+			rtcSetSceneFlags(scene, RTC_SCENE_FLAG_ROBUST);
+			RTCGeometry geom = rtcNewGeometry(device, RTC_GEOMETRY_TYPE_TRIANGLE);
+			Triangle* triangles;
+			Vertex* Vertices;
+
+			// Set Setup buffers
+			std::vector<Triangle> tris;
+			std::vector<Vertex> verts;
+			vectorsToBuffers(geometry, tris, verts);
+
+			// Cast to triangle/vertex structs so we can operate on them.  This trick is from the embree tutorial
+			triangles = (Triangle*)rtcSetNewGeometryBuffer(geom, RTC_BUFFER_TYPE_INDEX, 0, RTC_FORMAT_UINT3, sizeof(Triangle), tris.size() + 1);
+			Vertices = (Vertex*)rtcSetNewGeometryBuffer(geom, RTC_BUFFER_TYPE_VERTEX, 0, RTC_FORMAT_FLOAT3, sizeof(Vertex), verts.size() + 1);
+
+			// If either of these turns up null, this can't function
+			if (!triangles || !Vertices)
+				throw std::exception("RTC DEVICE ERROR");
+			
+			for (int i = 0; i < tris.size(); i++)
+				triangles[i] = tris[i];
+
+			for (int i = 0; i < verts.size(); i++)
+				Vertices[i] = verts[i];
+
+			// Add geometry and commit the scene
+			rtcCommitGeometry(geom);
+			rtcAttachGeometryByID(scene, geom, 0);
+			rtcCommitScene(scene);
+			rtcInitIntersectContext(&context);
 		}
-	}
 
-	EmbreeRayTracer::EmbreeRayTracer(const std::vector<std::array<float, 3>>& geometry) {
-		device = rtcNewDevice("start_threads=1,set_affinity=1");
-		scene = rtcNewScene(device);
-		rtcSetSceneBuildQuality(scene, RTC_BUILD_QUALITY_HIGH);
-		rtcSetSceneFlags(scene, RTC_SCENE_FLAG_ROBUST);
-		RTCGeometry geom = rtcNewGeometry(device, RTC_GEOMETRY_TYPE_TRIANGLE);
-		Triangle* triangles;
-		Vertex* Vertices;
+		bool EmbreeRayTracer::FireRay(
+			std::array<float, 3>& origin,
+			const std::array<float, 3>& dir,
+			float distance,
+			int mesh_id
+		) {
+			return FireRay(origin[0], origin[1], origin[2], dir[0], dir[1], dir[2], distance, mesh_id);
+		}
 
-		// Set Setup buffers
-		std::vector<Triangle> tris;
-		std::vector<Vertex> verts;
-		vectorsToBuffers(geometry, tris, verts);
+		bool EmbreeRayTracer::FireRay(float& x,
+			float& y,
+			float& z,
+			float dx,
+			float dy,
+			float dz,
+			float distance,
+			int mesh_id
+		) {
+			RTCRayHit hit;
 
-		// Cast to triangle/vertex structs so we can operate on them.  This trick is from the embree tutorial
-		triangles = (Triangle*)rtcSetNewGeometryBuffer(geom, RTC_BUFFER_TYPE_INDEX, 0, RTC_FORMAT_UINT3, sizeof(Triangle), tris.size() + 1);
-		Vertices = (Vertex*)rtcSetNewGeometryBuffer(geom, RTC_BUFFER_TYPE_VERTEX, 0, RTC_FORMAT_FLOAT3, sizeof(Vertex), verts.size() + 1);
+			hit.ray.org_x = x; hit.ray.org_y = y; hit.ray.org_z = z;
+			hit.ray.dir_x = dx; hit.ray.dir_y = dy; hit.ray.dir_z = dz;
 
-		// If either of these turns up null, this can't function
-		if (!triangles || !Vertices)
-			throw std::exception("RTC DEVICE ERROR");
-		
-		for (int i = 0; i < tris.size(); i++)
-			triangles[i] = tris[i];
+			hit.ray.tnear = 0.00000f;
+			hit.ray.tfar = INFINITY;//(distance > 0) ? distance : INFINITY;
+			hit.ray.time = 0.0f;
 
-		for (int i = 0; i < verts.size(); i++)
-			Vertices[i] = verts[i];
+			hit.hit.geomID = RTC_INVALID_GEOMETRY_ID;
+			hit.hit.primID = -1;
 
-		// Add geometry and commit the scene
-		rtcCommitGeometry(geom);
-		rtcAttachGeometryByID(scene, geom, 0);
-		rtcCommitScene(scene);
-		rtcInitIntersectContext(&context);
-	}
+			rtcIntersect1(scene, &context, &hit);
 
-	bool EmbreeRayTracer::FireRay(
-		std::array<float, 3>& origin,
-		const std::array<float, 3>& dir,
-		float distance,
-		int mesh_id
-	) {
-		return FireRay(origin[0], origin[1], origin[2], dir[0], dir[1], dir[2], distance, mesh_id);
-	}
+			CheckState(device);
+			// If valid geometry was hit, and the geometry matches the caller's desired mesh
+			// (if specified) then update the hitpoint and return
+			if (hit.hit.geomID == RTC_INVALID_GEOMETRY_ID || (mesh_id > -1 && hit.hit.geomID != mesh_id)) return false;
+			else {
+				x = x + (dx * hit.ray.tfar);
+				y = y + (dy * hit.ray.tfar);
+				z = z + (dz * hit.ray.tfar);
+				return true;
+			}
+		}
 
-	bool EmbreeRayTracer::FireRay(float& x,
-		float& y,
-		float& z,
-		float dx,
-		float dy,
-		float dz,
-		float distance,
-		int mesh_id
-	) {
-		RTCRayHit hit;
+		std::vector<bool> EmbreeRayTracer::FireRays(
+			std::vector<std::array<float, 3>>& origins,
+			std::vector<std::array<float, 3>>& directions,
+			bool use_parallel,
+			float max_distance,
+			int mesh_id
+		) {
+			std::vector<bool> out_results(origins.size());
 
-		hit.ray.org_x = x; hit.ray.org_y = y; hit.ray.org_z = z;
-		hit.ray.dir_x = dx; hit.ray.dir_y = dy; hit.ray.dir_z = dz;
+			// Allow users to shoot multiple rays with a single direction or origin
+			if (origins.size() > 1 && directions.size() > 1) {
+#pragma omp parallel for if(use_parallel) schedule(dynamic)
+				for (int i = 0; i < origins.size(); i++) {
+					auto& org = origins[i];
+					auto& dir = directions[i];
+					out_results[i] = FireRay(
+						org[0], org[1], org[2],
+						dir[0], dir[1], dir[2],
+						max_distance, mesh_id
+					);
+				}
+			}
 
-		hit.ray.tnear = 0.00000f;
-		hit.ray.tfar = INFINITY;//(distance > 0) ? distance : INFINITY;
-		hit.ray.time = 0.0f;
+			else if (origins.size() > 1 && directions.size() == 1) {
+				const auto& dir = directions[0];
+#pragma omp parallel for if(use_parallel) schedule(dynamic)
+				for (int i = 0; i < origins.size(); i++) {
+					auto& org = origins[i];
+					out_results[i] = FireRay(
+						org[0], org[1], org[2],
+						dir[0], dir[1], dir[2],
+						max_distance, mesh_id
+					);
+				}
+			}
 
-		hit.hit.geomID = RTC_INVALID_GEOMETRY_ID;
-		hit.hit.primID = -1;
+			else if (origins.size() == 1 && directions.size() > 1) {
+				out_results.resize(directions.size());
+#pragma omp parallel for if(use_parallel) schedule(dynamic)
+				for (int i = 0; i < directions.size(); i++) {
+					auto org = origins[0];
+					auto& dir = directions[i];
+					bool did_hit = FireRay(
+						org[0], org[1], org[2],
+						dir[0], dir[1], dir[2],
+						max_distance, mesh_id
+					);
+					if (did_hit) // Directions is the output array in this case
+					{
+						directions[i][0] = org[0];
+						directions[i][1] = org[1];
+						directions[i][2] = org[2];
+					}
+					out_results[i] = did_hit;
+				}
+			}
+			else {
+				throw std::exception("Incorrect usage of firerays");
+			}
 
-		rtcIntersect1(scene, &context, &hit);
+			return out_results;
+		}
 
-		CheckState(device);
-		// If valid geometry was hit, and the geometry matches the caller's desired mesh
-		// (if specified) then update the hitpoint and return
-		if (hit.hit.geomID == RTC_INVALID_GEOMETRY_ID || (mesh_id > -1 && hit.hit.geomID != mesh_id)) return false;
-		else {
-			x = x + (dx * hit.ray.tfar);
-			y = y + (dy * hit.ray.tfar);
-			z = z + (dz * hit.ray.tfar);
+		HitStruct EmbreeRayTracer::Intersect(
+			float x, float y, float z,
+			float dx, float dy, float dz,
+			float max_distance, int mesh_id
+		) {
+			RTCRayHit hit;
+			hit.ray.org_x = x; hit.ray.org_y = y; hit.ray.org_z = z;
+			hit.ray.dir_x = dx; hit.ray.dir_y = dy; hit.ray.dir_z = dz;
+
+			hit.ray.tnear = 0.00001f;
+			hit.ray.tfar = (max_distance > 0) ? max_distance : INFINITY;
+			hit.ray.time = 0.0f;
+
+			hit.hit.geomID = RTC_INVALID_GEOMETRY_ID;
+			hit.hit.primID = -1;
+
+			rtcIntersect1(scene, &context, &hit);
+
+			return HitStruct{ hit.ray.tfar, hit.hit.geomID };
+		}
+
+		bool EmbreeRayTracer::FireOcclusionRay(
+			const std::array<float, 3>& origin,
+			const std::array<float, 3>& direction,
+			float max_dist
+		) {
+			return FireOcclusionRay(origin[0], origin[1], origin[2], direction[0], direction[1], direction[2]);
+		}
+
+		std::vector<bool> EmbreeRayTracer::FireOcclusionRays(
+			const std::vector<std::array<float, 3>>& origins,
+			const std::vector<std::array<float, 3>>& directions,
+			float max_distance, bool use_parallel)
+		{
+			std::vector<bool> out_array;
+			int cores = std::thread::hardware_concurrency();
+			if (origins.size() < cores || directions.size() < cores)
+				// Don't use more cores than there are rays. This caused a hard to find bug earlier.
+				// Doesn't seem to happen with the other ray types. (race condition?)
+				omp_set_num_threads(min(max(origins.size(), directions.size()), 16));
+
+			if (directions.size() > 1 && origins.size() > 1) {
+				out_array.resize(origins.size());
+#pragma omp parallel for if(use_parallel) schedule(dynamic)
+				for (int i = 0; i < origins.size(); i++) {
+					//const std::array<float, 3> origin = { origins[i][0], origins[i][1], origins[i][2] };
+					//const std::array<float, 3> direction = directions[i];
+					//printf("Origin: %f, %f, %f\n", origin[0], origin[1]);
+					//printf("Direction: %f, %f, %f\n", direction[0], direction[1], direction[2]);
+					out_array[i] = FireOcclusionRay(
+						origins[i][0], origins[i][1], origins[i][2],
+						directions[i][0], directions[i][1], directions[i][2],
+						max_distance, -1
+					);
+				}
+			}
+			else if (directions.size() > 1 && origins.size() == 1) {
+				out_array.resize(directions.size());
+				const auto& origin = origins[0];
+				printf("Using multidirection, single origin\n");
+#pragma omp parallel for if(use_parallel) schedule(dynamic)
+				for (int i = 0; i < directions.size(); i++) {
+					const auto& direction = directions[i];
+					out_array[i] = FireOcclusionRay(
+						origin[0], origin[1], origin[2],
+						direction[0], direction[1], direction[2],
+						max_distance, -1
+					);
+				}
+			}
+			else if (directions.size() == 1 && origins.size() > 1)
+			{
+				out_array.resize(origins.size());
+				const auto& direction = directions[0];
+#pragma omp parallel for if(use_parallel) schedule(dynamic)
+				for (int i = 0; i < origins.size(); i++) {
+					const auto& origin = origins[i];
+					out_array[i] = FireOcclusionRay(
+						origin[0], origin[1], origin[2],
+						direction[0], direction[1], direction[2],
+						max_distance, -1
+					);
+				}
+			}
+			else if (directions.size() == 1 && origins.size() == 1) {
+				out_array = { FireOcclusionRay(origins[0], directions[0], max_distance) };
+			}
+			return out_array;
+		}
+
+		EmbreeRayTracer::EmbreeRayTracer(std::vector<HF::Geometry::MeshInfo>& MI) {
+			// Throw if MI's size is less than 0
+			if (MI.empty())
+			{
+				std::cerr << "Embree Ray Tracer was passed an empty vector of mesh info!" << std::endl;
+				throw;
+			}
+
+			device = rtcNewDevice("start_threads=1,set_affinity=1");
+			scene = rtcNewScene(device);
+			rtcSetSceneBuildQuality(scene, RTC_BUILD_QUALITY_HIGH);
+			rtcSetSceneFlags(scene, RTC_SCENE_FLAG_ROBUST);
+
+			InsertNewMesh(MI, true);
+			rtcInitIntersectContext(&context);
+		}
+
+		/// <summary>
+		/// Fire 8 rays and update the requests based on results
+		/// </summary>
+		// \deprecated Cumbersome to use compared to other functions. Unused.
+		[[deprecated]]
+		inline void Fire8Rays(
+			std::vector<std::reference_wrapper<FullRayRequest>>& requests,
+			const RTCScene& scene,
+			RTCIntersectContext& context
+		) {
+			assert(requests.size() < 8);
+			RTCRayHit8 hit;
+			const int num_shots = 8;
+			std::array<int, 8> valid = { 0,0,0,0,0,0,0,0 };
+
+			// Fill 8 shot array with origins and directions
+			for (int p = 0; p < requests.size(); p++) {
+				auto& req = requests[p].get();
+				hit.ray.dir_x[p] = req.dx; hit.ray.dir_y[p] = req.dy; hit.ray.dir_z[p] = req.dz;
+				hit.ray.org_x[p] = req.x; hit.ray.org_y[p] = req.y;	hit.ray.org_z[p] = req.z;
+
+				hit.ray.tnear[p] = 0.00000;
+				hit.ray.tfar[p] = req.distance > 0 ? req.distance : INFINITY; // Cap by distance if specified.
+				hit.ray.time[p] = 0.0f;
+
+				hit.hit.geomID[p] = RTC_INVALID_GEOMETRY_ID;
+				hit.hit.primID[p] = -1;
+				valid[p] = -1;
+			}
+
+			// Fire array
+			rtcIntersect8(valid.data(), scene, &context, &hit);
+
+			// Update requests if hits were confirmed
+			for (int k = 0; k < requests.size(); k++) {
+				if (hit.hit.geomID[k] != RTC_INVALID_GEOMETRY_ID)
+				{
+					auto& req = requests[k].get();
+					req.distance = hit.ray.tfar[k];
+					req.mesh_id = hit.hit.geomID[k];
+				}
+			}
+		}
+		bool EmbreeRayTracer::FireOcclusionRay(float x, float y, float z, float dx, float dy, float dz, float distance, int mesh_id)
+		{
+			RTCRay ray;
+			ray.org_x = x; ray.org_y = y; ray.org_z = z;
+			ray.dir_x = dx; ray.dir_y = dy; ray.dir_z = dz;
+
+			ray.tnear = 0.0001f;
+			ray.tfar = distance > 0 ? distance : INFINITY;
+			ray.time = 0.0f;
+			ray.flags = 0;
+
+			rtcOccluded1(scene, &context, &ray);
+
+			return ray.tfar == -INFINITY;
+		}
+
+		void EmbreeRayTracer::FireRequests(std::vector<FullRayRequest>& requests, bool parallel)
+		{
+			const int num_shots = 8;
+#pragma omp parallel for if(parallel) schedule(dynamic)
+			for (int i = 0; i < requests.size(); i += num_shots) {
+				// Create a reference vector for every 8 rays and send them to the fire function
+				auto start = requests.begin() + i;
+				auto end = requests.begin() + i + min(num_shots, (int)(requests.size() - i));
+				std::vector<std::reference_wrapper<FullRayRequest>> reference_vector(start, end);
+
+				Fire8Rays(reference_vector, scene, context);
+			}
+		}
+
+		bool EmbreeRayTracer::InsertNewMesh(std::vector<std::array<float, 3>>& Mesh, int ID, bool Commit)
+		{
+			// Set Setup buffers
+			std::vector<Triangle> tris;	std::vector<Vertex> verts;
+			vectorsToBuffers(Mesh, tris, verts);
+			
+			RTCGeometry geom = rtcNewGeometry(device, RTC_GEOMETRY_TYPE_TRIANGLE);
+
+			// Create Geometry/Triangle buffers
+			triangles = static_cast<Triangle*>(
+				rtcSetNewGeometryBuffer(
+					geom,
+					RTC_BUFFER_TYPE_INDEX,
+					0,
+					RTC_FORMAT_UINT3,
+					sizeof(Triangle),
+					tris.size() + 1
+				)
+				);
+			Vertices = static_cast<Vertex*>(
+				rtcSetNewGeometryBuffer(
+					geom,
+					RTC_BUFFER_TYPE_VERTEX,
+					0,
+					RTC_FORMAT_FLOAT3,
+					sizeof(Vertex),
+					verts.size() + 1
+				)
+				);
+
+			// Use the move from tris/verts into embree's buffers
+			std::move(tris.begin(), tris.end(), triangles);
+			std::move(verts.begin(), verts.end(), Vertices);
+
+			// Even if the scene isn't going to be committed, we need to commit the 
+			// geometry.
+			rtcCommitGeometry(geom);
+			rtcAttachGeometryByID(scene, geom, ID);
+			geometry.push_back(geom);
+
+			// Commit the scene if specified
+			if (Commit)
+				rtcCommitScene(scene);
+
+			return ID;
+		}
+
+		bool EmbreeRayTracer::InsertNewMesh(HF::Geometry::MeshInfo& Mesh, bool Commit) {
+			// Get vertex and triangle data from the mesh
+			std::vector<Triangle> tris;	std::vector<Vertex> verts;
+			auto indices = Mesh.getRawIndices(); auto vertices = Mesh.getRawVertices();
+			buffersToStructs(vertices, indices, verts, tris);
+
+			// Create embree buffers
+			RTCGeometry geom = rtcNewGeometry(device, RTC_GEOMETRY_TYPE_TRIANGLE);
+			triangles = static_cast<Triangle*>(
+				rtcSetNewGeometryBuffer(
+					geom,
+					RTC_BUFFER_TYPE_INDEX,
+					0,
+					RTC_FORMAT_UINT3,
+					sizeof(Triangle),
+					tris.size() + 1
+				)
+				);
+			Vertices = static_cast<Vertex*>(
+				rtcSetNewGeometryBuffer(
+					geom,
+					RTC_BUFFER_TYPE_VERTEX,
+					0,
+					RTC_FORMAT_FLOAT3,
+					sizeof(Vertex),
+					verts.size() + 1
+				)
+				);
+			if (!triangles || !Vertices) //? When would this occur
+				throw std::exception("RTC DEVICE ERROR");
+
+			// Move data into embree buffers
+			std::move(tris.begin(), tris.end(), triangles);
+			std::move(verts.begin(), verts.end(), Vertices);
+			geometry.push_back(geom);
+			rtcCommitGeometry(geom);
+
+			// If the mesh has an ID, then use that ID. Otherwise get an id from embree and assign it to the mesh.
+			const auto id = Mesh.GetMeshID();
+			if (id > 0) rtcAttachGeometryByID(scene, geom, id);
+			else Mesh.SetMeshID(rtcAttachGeometry(scene, geom));
+
+			// commit if specified
+			if (Commit)
+				rtcCommitScene(scene);
+
 			return true;
 		}
-	}
 
-	std::vector<bool> EmbreeRayTracer::FireRays(
-		std::vector<std::array<float, 3>>& origins,
-		std::vector<std::array<float, 3>>& directions,
-		bool use_parallel,
-		float max_distance,
-		int mesh_id
-	) {
-		std::vector<bool> out_results(origins.size());
-
-		// Allow users to shoot multiple rays with a single direction or origin
-		if (origins.size() > 1 && directions.size() > 1) {
-#pragma omp parallel for if(use_parallel) schedule(dynamic)
-			for (int i = 0; i < origins.size(); i++) {
-				auto& org = origins[i];
-				auto& dir = directions[i];
-				out_results[i] = FireRay(
-					org[0], org[1], org[2],
-					dir[0], dir[1], dir[2],
-					max_distance, mesh_id
-				);
-			}
-		}
-
-		else if (origins.size() > 1 && directions.size() == 1) {
-			const auto& dir = directions[0];
-#pragma omp parallel for if(use_parallel) schedule(dynamic)
-			for (int i = 0; i < origins.size(); i++) {
-				auto& org = origins[i];
-				out_results[i] = FireRay(
-					org[0], org[1], org[2],
-					dir[0], dir[1], dir[2],
-					max_distance, mesh_id
-				);
-			}
-		}
-
-		else if (origins.size() == 1 && directions.size() > 1) {
-			out_results.resize(directions.size());
-#pragma omp parallel for if(use_parallel) schedule(dynamic)
-			for (int i = 0; i < directions.size(); i++) {
-				auto org = origins[0];
-				auto& dir = directions[i];
-				bool did_hit = FireRay(
-					org[0], org[1], org[2],
-					dir[0], dir[1], dir[2],
-					max_distance, mesh_id
-				);
-				if (did_hit) // Directions is the output array in this case
-				{
-					directions[i][0] = org[0];
-					directions[i][1] = org[1];
-					directions[i][2] = org[2];
-				}
-				out_results[i] = did_hit;
-			}
-		}
-		else {
-			throw std::exception("Incorrect usage of firerays");
-		}
-
-		return out_results;
-	}
-
-	HitStruct EmbreeRayTracer::Intersect(
-		float x, float y, float z,
-		float dx, float dy, float dz,
-		float max_distance, int mesh_id
-	) {
-		RTCRayHit hit;
-		hit.ray.org_x = x; hit.ray.org_y = y; hit.ray.org_z = z;
-		hit.ray.dir_x = dx; hit.ray.dir_y = dy; hit.ray.dir_z = dz;
-
-		hit.ray.tnear = 0.00001f;
-		hit.ray.tfar = (max_distance > 0) ? max_distance : INFINITY;
-		hit.ray.time = 0.0f;
-
-		hit.hit.geomID = RTC_INVALID_GEOMETRY_ID;
-		hit.hit.primID = -1;
-
-		rtcIntersect1(scene, &context, &hit);
-
-		return HitStruct{ hit.ray.tfar, hit.hit.geomID };
-	}
-
-	bool EmbreeRayTracer::FireOcclusionRay(
-		const std::array<float, 3>& origin,
-		const std::array<float, 3>& direction,
-		float max_dist
-	) {
-		return FireOcclusionRay(origin[0], origin[1], origin[2], direction[0], direction[1], direction[2]);
-	}
-
-	std::vector<bool> EmbreeRayTracer::FireOcclusionRays(
-		const std::vector<std::array<float, 3>>& origins,
-		const std::vector<std::array<float, 3>>& directions,
-		float max_distance, bool use_parallel)
-	{
-		std::vector<bool> out_array;
-		int cores = std::thread::hardware_concurrency();
-		if (origins.size() < cores || directions.size() < cores)
-			// Don't use more cores than there are rays. This caused a hard to find bug earlier.
-			// Doesn't seem to happen with the other ray types. (race condition?)
-			omp_set_num_threads(min(max(origins.size(), directions.size()), 16));
-
-		if (directions.size() > 1 && origins.size() > 1) {
-			out_array.resize(origins.size());
-#pragma omp parallel for if(use_parallel) schedule(dynamic)
-			for (int i = 0; i < origins.size(); i++) {
-				//const std::array<float, 3> origin = { origins[i][0], origins[i][1], origins[i][2] };
-				//const std::array<float, 3> direction = directions[i];
-				//printf("Origin: %f, %f, %f\n", origin[0], origin[1]);
-				//printf("Direction: %f, %f, %f\n", direction[0], direction[1], direction[2]);
-				out_array[i] = FireOcclusionRay(
-					origins[i][0], origins[i][1], origins[i][2],
-					directions[i][0], directions[i][1], directions[i][2],
-					max_distance, -1
-				);
-			}
-		}
-		else if (directions.size() > 1 && origins.size() == 1) {
-			out_array.resize(directions.size());
-			const auto& origin = origins[0];
-			printf("Using multidirection, single origin\n");
-#pragma omp parallel for if(use_parallel) schedule(dynamic)
-			for (int i = 0; i < directions.size(); i++) {
-				const auto& direction = directions[i];
-				out_array[i] = FireOcclusionRay(
-					origin[0], origin[1], origin[2],
-					direction[0], direction[1], direction[2],
-					max_distance, -1
-				);
-			}
-		}
-		else if (directions.size() == 1 && origins.size() > 1)
+		bool EmbreeRayTracer::InsertNewMesh(std::vector<HF::Geometry::MeshInfo>& Meshes, bool Commit)
 		{
-			out_array.resize(origins.size());
-			const auto& direction = directions[0];
-#pragma omp parallel for if(use_parallel) schedule(dynamic)
-			for (int i = 0; i < origins.size(); i++) {
-				const auto& origin = origins[i];
-				out_array[i] = FireOcclusionRay(
-					origin[0], origin[1], origin[2],
-					direction[0], direction[1], direction[2],
-					max_distance, -1
-				);
-			}
-		}
-		else if (directions.size() == 1 && origins.size() == 1) {
-			out_array = { FireOcclusionRay(origins[0], directions[0], max_distance) };
-		}
-		return out_array;
-	}
+			for (auto& mesh : Meshes)
+				InsertNewMesh(mesh, false);
 
-	EmbreeRayTracer::EmbreeRayTracer(std::vector<HF::Geometry::MeshInfo>& MI) {
-		// Throw if MI's size is less than 0
-		if (MI.empty())
-		{
-			std::cerr << "Embree Ray Tracer was passed an empty vector of mesh info!" << std::endl;
-			throw;
+			if (Commit) // Only commit at the end to save performance.
+				rtcCommitScene(scene);
+
+			return true;
 		}
 
-		device = rtcNewDevice("start_threads=1,set_affinity=1");
-		scene = rtcNewScene(device);
-		rtcSetSceneBuildQuality(scene, RTC_BUILD_QUALITY_HIGH);
-		rtcSetSceneFlags(scene, RTC_SCENE_FLAG_ROBUST);
+		// Increment reference counters to prevent destruction when this thing goes out of scope
+		void EmbreeRayTracer::operator=(const EmbreeRayTracer& ERT2) {
+			device = ERT2.device;
+			context = ERT2.context;
+			scene = ERT2.scene;
+			geometry = ERT2.geometry;
 
-		InsertNewMesh(MI, true);
-		rtcInitIntersectContext(&context);
-	}
-
-	/// <summary>
-	/// Fire 8 rays and update the requests based on results
-	/// </summary>
-	// \deprecated Cumbersome to use compared to other functions. Unused.
-	[[deprecated]]
-	inline void Fire8Rays(
-		std::vector<std::reference_wrapper<FullRayRequest>>& requests,
-		const RTCScene& scene,
-		RTCIntersectContext& context
-	) {
-		assert(requests.size() < 8);
-		RTCRayHit8 hit;
-		const int num_shots = 8;
-		std::array<int, 8> valid = { 0,0,0,0,0,0,0,0 };
-
-		// Fill 8 shot array with origins and directions
-		for (int p = 0; p < requests.size(); p++) {
-			auto& req = requests[p].get();
-			hit.ray.dir_x[p] = req.dx; hit.ray.dir_y[p] = req.dy; hit.ray.dir_z[p] = req.dz;
-			hit.ray.org_x[p] = req.x; hit.ray.org_y[p] = req.y;	hit.ray.org_z[p] = req.z;
-
-			hit.ray.tnear[p] = 0.00000;
-			hit.ray.tfar[p] = req.distance > 0 ? req.distance : INFINITY; // Cap by distance if specified.
-			hit.ray.time[p] = 0.0f;
-
-			hit.hit.geomID[p] = RTC_INVALID_GEOMETRY_ID;
-			hit.hit.primID[p] = -1;
-			valid[p] = -1;
+			rtcRetainScene(scene);
+			rtcRetainDevice(device);
+			//	for (auto g : geometry) rtcRetainGeometry(g);
 		}
 
-		// Fire array
-		rtcIntersect8(valid.data(), scene, &context, &hit);
-
-		// Update requests if hits were confirmed
-		for (int k = 0; k < requests.size(); k++) {
-			if (hit.hit.geomID[k] != RTC_INVALID_GEOMETRY_ID)
-			{
-				auto& req = requests[k].get();
-				req.distance = hit.ray.tfar[k];
-				req.mesh_id = hit.hit.geomID[k];
-			}
+		EmbreeRayTracer::~EmbreeRayTracer() {
+			//for (auto& g : geometry) rtcReleaseGeometry(g);
+			rtcReleaseScene(scene);
+			rtcReleaseDevice(device);
 		}
-	}
-	bool EmbreeRayTracer::FireOcclusionRay(float x, float y, float z, float dx, float dy, float dz, float distance, int mesh_id)
-	{
-		RTCRay ray;
-		ray.org_x = x; ray.org_y = y; ray.org_z = z;
-		ray.dir_x = dx; ray.dir_y = dy; ray.dir_z = dz;
-
-		ray.tnear = 0.0001f;
-		ray.tfar = distance > 0 ? distance : INFINITY;
-		ray.time = 0.0f;
-		ray.flags = 0;
-
-		rtcOccluded1(scene, &context, &ray);
-
-		return ray.tfar == -INFINITY;
-	}
-
-	void EmbreeRayTracer::FireRequests(std::vector<FullRayRequest>& requests, bool parallel)
-	{
-		const int num_shots = 8;
-#pragma omp parallel for if(parallel) schedule(dynamic)
-		for (int i = 0; i < requests.size(); i += num_shots) {
-			// Create a reference vector for every 8 rays and send them to the fire function
-			auto start = requests.begin() + i;
-			auto end = requests.begin() + i + min(num_shots, (int)(requests.size() - i));
-			std::vector<std::reference_wrapper<FullRayRequest>> reference_vector(start, end);
-
-			Fire8Rays(reference_vector, scene, context);
-		}
-	}
-
-	bool EmbreeRayTracer::InsertNewMesh(std::vector<std::array<float, 3>>& Mesh, int ID, bool Commit)
-	{
-		// Set Setup buffers
-		std::vector<Triangle> tris;	std::vector<Vertex> verts;
-		vectorsToBuffers(Mesh, tris, verts);
-		
-		RTCGeometry geom = rtcNewGeometry(device, RTC_GEOMETRY_TYPE_TRIANGLE);
-
-		// Create Geometry/Triangle buffers
-		triangles = static_cast<Triangle*>(
-			rtcSetNewGeometryBuffer(
-				geom,
-				RTC_BUFFER_TYPE_INDEX,
-				0,
-				RTC_FORMAT_UINT3,
-				sizeof(Triangle),
-				tris.size() + 1
-			)
-			);
-		Vertices = static_cast<Vertex*>(
-			rtcSetNewGeometryBuffer(
-				geom,
-				RTC_BUFFER_TYPE_VERTEX,
-				0,
-				RTC_FORMAT_FLOAT3,
-				sizeof(Vertex),
-				verts.size() + 1
-			)
-			);
-
-		// Use the move from tris/verts into embree's buffers
-		std::move(tris.begin(), tris.end(), triangles);
-		std::move(verts.begin(), verts.end(), Vertices);
-
-		// Even if the scene isn't going to be committed, we need to commit the 
-		// geometry.
-		rtcCommitGeometry(geom);
-		rtcAttachGeometryByID(scene, geom, ID);
-		geometry.push_back(geom);
-
-		// Commit the scene if specified
-		if (Commit)
-			rtcCommitScene(scene);
-
-		return ID;
-	}
-
-	bool EmbreeRayTracer::InsertNewMesh(HF::Geometry::MeshInfo& Mesh, bool Commit) {
-		// Get vertex and triangle data from the mesh
-		std::vector<Triangle> tris;	std::vector<Vertex> verts;
-		auto indices = Mesh.getRawIndices(); auto vertices = Mesh.getRawVertices();
-		buffersToStructs(vertices, indices, verts, tris);
-
-		// Create embree buffers
-		RTCGeometry geom = rtcNewGeometry(device, RTC_GEOMETRY_TYPE_TRIANGLE);
-		triangles = static_cast<Triangle*>(
-			rtcSetNewGeometryBuffer(
-				geom,
-				RTC_BUFFER_TYPE_INDEX,
-				0,
-				RTC_FORMAT_UINT3,
-				sizeof(Triangle),
-				tris.size() + 1
-			)
-			);
-		Vertices = static_cast<Vertex*>(
-			rtcSetNewGeometryBuffer(
-				geom,
-				RTC_BUFFER_TYPE_VERTEX,
-				0,
-				RTC_FORMAT_FLOAT3,
-				sizeof(Vertex),
-				verts.size() + 1
-			)
-			);
-		if (!triangles || !Vertices) //? When would this occur
-			throw std::exception("RTC DEVICE ERROR");
-
-		// Move data into embree buffers
-		std::move(tris.begin(), tris.end(), triangles);
-		std::move(verts.begin(), verts.end(), Vertices);
-		geometry.push_back(geom);
-		rtcCommitGeometry(geom);
-
-		// If the mesh has an ID, then use that ID. Otherwise get an id from embree and assign it to the mesh.
-		const auto id = Mesh.GetMeshID();
-		if (id > 0) rtcAttachGeometryByID(scene, geom, id);
-		else Mesh.SetMeshID(rtcAttachGeometry(scene, geom));
-
-		// commit if specified
-		if (Commit)
-			rtcCommitScene(scene);
-
-		return true;
-	}
-
-	bool EmbreeRayTracer::InsertNewMesh(std::vector<HF::Geometry::MeshInfo>& Meshes, bool Commit)
-	{
-		for (auto& mesh : Meshes)
-			InsertNewMesh(mesh, false);
-
-		if (Commit) // Only commit at the end to save performance.
-			rtcCommitScene(scene);
-
-		return true;
-	}
-
-	// Increment reference counters to prevent destruction when this thing goes out of scope
-	void EmbreeRayTracer::operator=(const EmbreeRayTracer& ERT2) {
-		device = ERT2.device;
-		context = ERT2.context;
-		scene = ERT2.scene;
-		geometry = ERT2.geometry;
-
-		rtcRetainScene(scene);
-		rtcRetainDevice(device);
-		//	for (auto g : geometry) rtcRetainGeometry(g);
-	}
-
-	EmbreeRayTracer::~EmbreeRayTracer() {
-		//for (auto& g : geometry) rtcReleaseGeometry(g);
-		rtcReleaseScene(scene);
-		rtcReleaseDevice(device);
 	}
 }
