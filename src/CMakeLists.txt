@@ -26,6 +26,7 @@ set(RELEASE_DEPENDENCY_BINARIES
 	"${CMAKE_SOURCE_DIR}/external/Microsoft/Release/vcomp140.dll"
 )
 
+set(HF_SOURCES)
 
 
 project ("humanfactors" VERSION "0.0.1")
@@ -73,6 +74,7 @@ endif()
 
 # Setup
 add_library(HumanFactors SHARED)
+
 # These files are always needed
 target_include_directories(	HumanFactors PRIVATE ${C_INTERFACE_DIR}  ${CMAKE_CURRENT_LIST_DIR})
 add_subdirectory(${C_PACKAGE_DIR}/exceptions)
@@ -135,9 +137,7 @@ if(${HumanFactors_Config} STREQUAL "All")
 			ViewAnalysis
 			Pathfinder
 	)
-	target_sources(
-	    HumanFactors
-		PRIVATE
+	LIST(APPEND HF_SOURCES
 			${C_INTERFACE_DIR}/analysis_C.cpp
 			${C_INTERFACE_DIR}/cinterface_utils.cpp
 			${C_INTERFACE_DIR}/raytracer_C.cpp
@@ -176,9 +176,7 @@ elseif(${HumanFactors_Config} STREQUAL "RayTracer")
 			EmbreeRayTracer
 			OBJLoader
 	)
-	target_sources(
-	    HumanFactors
-		PRIVATE
+	LIST(APPEND HF_SOURCES
 			${C_INTERFACE_DIR}/objloader_C.cpp
 			${C_INTERFACE_DIR}/objloader_C.h
 			${C_INTERFACE_DIR}/raytracer_C.cpp
@@ -206,9 +204,8 @@ elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
 			SpatialStructures
 			GraphGenerator
 	)
-	target_sources(
-	    HumanFactors
-		PRIVATE
+
+	LIST(APPEND HF_SOURCES
 			${C_INTERFACE_DIR}/objloader_C.cpp
 			${C_INTERFACE_DIR}/objloader_C.h
 			${C_INTERFACE_DIR}/raytracer_C.cpp
@@ -242,9 +239,7 @@ elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
 				SpatialStructures
 				VisibilityGraph
 		)
-		target_sources(
-			HumanFactors
-			PRIVATE
+		LIST(APPEND HF_SOURCES
 				${C_INTERFACE_DIR}/objloader_C.cpp
 				${C_INTERFACE_DIR}/objloader_C.h
 				${C_INTERFACE_DIR}/raytracer_C.cpp
@@ -278,9 +273,7 @@ elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
 				SpatialStructures
 				ViewAnalysis
 		)
-		target_sources(
-			HumanFactors
-			PRIVATE
+		LIST(APPEND HF_SOURCES
 				${C_INTERFACE_DIR}/objloader_C.cpp
 				${C_INTERFACE_DIR}/objloader_C.h
 				${C_INTERFACE_DIR}/raytracer_C.cpp
@@ -314,9 +307,8 @@ elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
 				SpatialStructures
 				VisibilityGraph
 		)
-		target_sources(
-			HumanFactors
-			PRIVATE
+
+		LIST(APPEND HF_SOURCES
 				${C_INTERFACE_DIR}/objloader_C.cpp
 				${C_INTERFACE_DIR}/objloader_C.h
 				${C_INTERFACE_DIR}/raytracer_C.cpp
@@ -345,9 +337,7 @@ elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
 				SpatialStructures
 				Pathfinder
 		)
-		target_sources(
-			HumanFactors
-			PRIVATE
+		LIST(APPEND HF_SOURCES
 				${C_INTERFACE_DIR}/cinterface_utils.h
 				${C_INTERFACE_DIR}/cinterface_utils.cpp
 				${C_INTERFACE_DIR}/spatialstructures_C.h
@@ -363,6 +353,9 @@ elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
 else()
 	message(FATAL_ERROR "That is not a valid configuration ${HumanFactors_Config}")
 endif()
+
+# Add sources to HumanFactors
+target_sources(HumanFactors PRIVATE ${HF_SOURCES})
 
 
 # /$$$$$$$$                   /$$             
@@ -411,6 +404,9 @@ if(HumanFactors_EnableTests)
 
 	# Change the linked targets based on what config we're using
 	add_executable(HFUnitTests)
+
+	target_include_directories(HFUnitTests PRIVATE ${C_INTERFACE_DIR})
+
 	if(${HumanFactors_Config} STREQUAL "All")
 		message([STATUS] "Building all tests")
 		target_link_libraries(
@@ -429,6 +425,7 @@ if(HumanFactors_EnableTests)
 		target_sources(
 			HFUnitTests
 				PRIVATE
+					${HF_SOURCES}
 					${C_TEST_DRIVER_DIR}/AnalysisMethods.cpp
 					${C_TEST_DRIVER_DIR}/embree_raytracer.cpp
 					${C_TEST_DRIVER_DIR}/SpatialStructures.cpp
@@ -441,6 +438,7 @@ if(HumanFactors_EnableTests)
 		target_sources(
 			HFUnitTests
 			PRIVATE
+				${HF_SOURCES}
 				${C_TEST_DRIVER_DIR}/embree_raytracer.cpp
 				${C_TEST_DRIVER_DIR}/OBJLoader.cpp
 			)
@@ -471,6 +469,7 @@ if(HumanFactors_EnableTests)
 		target_sources(
 			HFUnitTests
 			PRIVATE
+				${HF_SOURCES}
 				${C_TEST_DRIVER_DIR}/embree_raytracer.cpp
 				${C_TEST_DRIVER_DIR}/OBJLoader.cpp
 				${C_TEST_DRIVER_DIR}/SpatialStructures.cpp
@@ -490,6 +489,7 @@ if(HumanFactors_EnableTests)
 		target_sources(
 			HFUnitTests
 			PRIVATE
+				${HF_SOURCES}
 				${C_TEST_DRIVER_DIR}/embree_raytracer.cpp
 				${C_TEST_DRIVER_DIR}/OBJLoader.cpp
 				${C_TEST_DRIVER_DIR}/SpatialStructures.cpp
@@ -509,6 +509,7 @@ if(HumanFactors_EnableTests)
 		target_sources(
 			HFUnitTests
 			PRIVATE
+				${HF_SOURCES}
 				${C_TEST_DRIVER_DIR}/embree_raytracer.cpp
 				${C_TEST_DRIVER_DIR}/OBJLoader.cpp
 				${C_TEST_DRIVER_DIR}/SpatialStructures.cpp
@@ -528,6 +529,7 @@ if(HumanFactors_EnableTests)
 		target_sources(
 			HFUnitTests
 			PRIVATE
+				${HF_SOURCES}
 				${C_TEST_DRIVER_DIR}/embree_raytracer.cpp
 				${C_TEST_DRIVER_DIR}/OBJLoader.cpp
 				${C_TEST_DRIVER_DIR}/SpatialStructures.cpp
@@ -571,6 +573,8 @@ if(HumanFactors_EnableTests)
 		$<TARGET_FILE_DIR:HFUnitTests>
 	)
 endif()
+
+
 
 # /$$$$$$                      /$$              /$$ /$$
 #|_  $$_/                     | $$             | $$| $$
