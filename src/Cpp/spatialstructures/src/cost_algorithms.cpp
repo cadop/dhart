@@ -14,8 +14,9 @@
 
 using HF::SpatialStructures::IntEdge;
 using HF::SpatialStructures::Graph;
+using HF::SpatialStructures::CostAlgorithms::CalculateCrossSlope;
 
-std::vector<IntEdge> HF::SpatialStructures::CostAlgorithms::CalculateCrossSlope(Graph& g) {
+std::vector<IntEdge> CalculateCrossSlope(Graph& g) {
 	std::vector<IntEdge> result;
 
 	// TODO implementation
