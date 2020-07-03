@@ -3,6 +3,11 @@ from humanfactorspy.geometry import meshinfo_native_functions
 import itertools
 from typing import *
 
+""" Mesh Info.
+
+Contains the MeshInfo Type.
+"""
+
 
 def Flatten(list_of_objects: List[Tuple[Any]]) -> List[Any]:
     """ Flatten a list of list of tuples """
@@ -10,7 +15,11 @@ def Flatten(list_of_objects: List[Tuple[Any]]) -> List[Any]:
 
 
 class MeshInfo(object):
-    """Information about a mesh from C++"""
+    """ A mesh stored in C++ as a 3*n array. 
+
+    MeshInfo is required in order to create Embree BVhs
+    
+    """
 
     def __init__(
         self,
@@ -18,11 +27,10 @@ class MeshInfo(object):
             List[Tuple[int, int, int]], List[int], ctypes.c_void_p, str
         ],
         vertices: Union[List[Tuple[float, float, float]], List[float], None] = None,
-        name: Union[None, str] = None,
-        id: Union[None, int] = None,
+        name: Union[None, str] = "",
+        id: Union[None, int] = 39,
     ):
-        """ Create a new meshinfo from either a pointer to an existing mesh object
-                or vertices for a mesh.
+        """ Create a new meshinfo from either a pointer to an existing mesh object or vertices for a mesh.
         
         Args:
             indices_or_pointer: Either a pointer to a valid mesh object from LoadOBJ, 
@@ -35,6 +43,17 @@ class MeshInfo(object):
 
         Raises:
             InvalidOBJException: The list of indices/vertices don't create a valid mesh
+
+
+        Examples:
+            Manually construct a flat plane, by giving the vertices and triangles straight
+            to the mesh info constructor. 
+            
+            >>> from humanfactorspy.geometry import MeshInfo
+            >>> vertices = [(-10, 0.0, 10), (-10, 0.0, -10),(10, 0.0, 10),(10, 0.0, 10),]
+            >>> tris = [[3, 1, 0], [2, 3, 0]]
+            >>> MI = MeshInfo(tris, vertices)
+
         """
 
         if isinstance(indices_or_pointer, ctypes.c_void_p):
@@ -56,7 +75,11 @@ class MeshInfo(object):
             )
 
     def Rotate(self, rotation: Tuple[float, float, float]) -> None:
-        """ Rotate the current mesh """
+        """ Rotate this mesh by the given rotation
+
+        Args:
+            rotation: number of degrees to rotate the mesh on the X Y and Z axis. 
+        """
         if not isinstance(rotation, (tuple, list)):
             raise TypeError("rotation was not of the correct type")
         meshinfo_native_functions.C_RotateMesh(self.__internal_ptr, rotation)
@@ -65,3 +88,17 @@ class MeshInfo(object):
         """ Clean up objects in C++ upon garbage collection """
         if self.__internal_ptr is not None:
             meshinfo_native_functions.DestroyMeshInfo(self.__internal_ptr)
+
+
+def ConstructPlane():
+    """ Construct a new plane object. Used internally for testing """
+
+    vertices = [
+        (-10, 0.0, 10),
+        (-10, 0.0, -10),
+        (10, 0.0, 10),
+        (10, 0.0, 10),
+    ]
+    tris = [[3, 1, 0], [2, 3, 0]]
+
+    return MeshInfo(tris, vertices)

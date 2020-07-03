@@ -163,10 +163,6 @@ class Graph:
         )
         return EdgeSumArray(vector_ptr, data_ptr, len(self.getNodes()))
 
-    # def __get__(this, node: Node.Node) -> Node.NodeList:
-    #   """ Get a list of edges for the given node  UNIMPLEMENTED"""
-    #    pass
-
     def __del__(self):
         if self.graph_ptr:
             spatial_structures_native_functions.DestroyGraph(self.graph_ptr)

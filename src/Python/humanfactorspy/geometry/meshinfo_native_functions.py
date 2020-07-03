@@ -88,7 +88,7 @@ def CreateMesh(
 
 
 def C_RotateMesh(mesh_ptr: c_void_p, rotation: Tuple[float, float, float]) -> None:
-    HFPython.RotateMesh(mesh_ptr, rotation[0], rotation[1], rotation[2])
+    HFPython.RotateMesh(mesh_ptr, c_float(rotation[0]), c_float(rotation[1]), c_float(rotation[2]))
     return
 
 
