@@ -57,8 +57,6 @@ elseif(${HumanFactors_Config} STREQUAL "ViewAnalysis")
 elseif(${HumanFactors_Config} STREQUAL "Pathfinder")
 	include(${CMAKE_CURRENT_LIST_DIR}/packages/pathfinding/package.cmake)
 	include(${CMAKE_CURRENT_LIST_DIR}/packages/spatialstructures/package.cmake)
-elseif(${HumanFactors_Config} STREQUAL "CostAlgorithms")
-	include(${CMAKE_CURRENT_LIST_DIR}/packages/spatialstructures/package.cmake)
 endif()
 
 
