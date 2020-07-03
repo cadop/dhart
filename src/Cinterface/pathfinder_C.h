@@ -32,6 +32,38 @@ Find paths between differnt points in a graph.
 /// HF_STATUS::NO_PATH if a path could not be generated. HF_STATUS::OK if a path was generated.
 /// </returns>
 /// <remarks> Uses the Boost Graph Library to perform Dijkstra's shortest path algorithm. For multiple paths, use <see cref="CreatePaths"/> for multiple paths at once. </remarks>
+/*!
+	\code
+		// Requires #include "pathfinder_C.h", #include "graph.h", #include "path.h", #include "path_finder.h"
+
+		// Create a Graph g, and compress it.
+		HF::SpatialStructures::Graph g;
+		g.addEdge(0, 1, 1);
+		g.addEdge(0, 2, 2);
+		g.addEdge(1, 3, 3);
+		g.addEdge(2, 4, 1);
+		g.addEdge(3, 4, 5);
+		g.Compress();
+
+		// Create a boostGraph from g
+		auto boostGraph = HF::Pathfinding::CreateBoostGraph(g);
+
+		// Prepare parameters for CreatePath
+		HF::SpatialStructures::Path* out_path = nullptr;
+		HF::SpatialStructures::PathMember* out_path_member = nullptr;
+		int out_size = -1;
+
+		CreatePath(&g, 0, 4, &out_size, &out_path, &out_path_member);
+
+		// Use out_path, out_path_member
+
+		// Remember to free resources when finished
+		DestroyPath(out_path);
+
+		// At this point, out_path_member has also been destroyed, so we set this to nullptr
+		out_path_member = nullptr;
+	\endcode
+*/
 C_INTERFACE CreatePath(
 	const HF::SpatialStructures::Graph* g,
 	int start,
@@ -60,7 +92,50 @@ C_INTERFACE CreatePath(
 /// Output array of integers representing the length of of each path in out_data's arrays. Sizes of
 /// 0 indicate that no path could be generated.
 /// </param>
+/// <param name="num_paths">Size of start and end arrays</param>
 /// <returns> HF::OK on completion. </returns>
+
+/*!
+	\code
+		// Requires #include "pathfinder_C.h", #include "graph.h", #include "path.h", #include "path_finder.h"
+
+		// Create a Graph g, and compress it.
+		HF::SpatialStructures::Graph g;
+		g.addEdge(0, 1, 1);
+		g.addEdge(0, 2, 2);
+		g.addEdge(1, 3, 3);
+		g.addEdge(2, 4, 1);
+		g.addEdge(3, 4, 5);
+		g.Compress();
+
+		// Create a boostGraph from g
+		auto boostGraph = HF::Pathfinding::CreateBoostGraph(g);
+
+		// Prepare starting and ending nodes
+		int start_nodes[] = { 0 };
+		int end_nodes[] = { 4 };
+
+		// Prepare parameters for CreatePaths
+		HF::SpatialStructures::Path* out_path = nullptr;
+		HF::SpatialStructures::PathMember* out_path_member = nullptr;
+		int out_size = -1;
+		const int path_size = 5;
+
+		// Sizes of paths
+		const int MAX_SIZE = 16;
+		int out_sizes[MAX_SIZE];
+
+		CreatePaths(&g, start_nodes, end_nodes, &out_path, &out_path_member, out_sizes, path_size);
+
+		// Use out_path, out_path_member
+
+		// Remember to free resources when finished
+		DestroyPath(out_path);
+
+		// At this point, out_path_member has also been destroyed, so we set this to nullptr
+		out_path_member = nullptr;
+	\endcode
+*/
 C_INTERFACE CreatePaths(
 	const HF::SpatialStructures::Graph* g,
 	const int* start,
@@ -76,6 +151,39 @@ C_INTERFACE CreatePaths(
 /// <param name="out_member_ptr"> Pointer to the path to get information from. Should not be null. </param>
 /// <param name="out_size"> The number of path members in the path. </param>
 /// <returns> HF_STATUS::NO_PATH if the path is not valid. HF_OK otherwise. </returns>
+
+/*!
+	\code
+		// Requires #include "pathfinder_C.h", #include "path.h"
+
+		// Create a Graph g, and compress it.
+		HF::SpatialStructures::Graph g;
+		g.addEdge(0, 1, 1);
+		g.addEdge(0, 2, 2);
+		g.addEdge(1, 3, 3);
+		g.addEdge(2, 4, 1);
+		g.addEdge(3, 4, 5);
+		g.Compress();
+
+		// Create a boostGraph from g
+		auto boostGraph = HF::Pathfinding::CreateBoostGraph(g);
+
+		HF::SpatialStructures::Path* out_path = nullptr;
+		HF::SpatialStructures::PathMember* out_path_member = nullptr;
+		int out_size = -1;
+
+		CreatePath(&g, 0, 4, &out_size, &out_path, &out_path_member);
+
+		// Get p's info, store results in out_path_member and out_size
+		GetPathInfo(p, &out_path_member, &out_size);
+
+		// Remember to free resources when finished
+		DestroyPath(out_path);
+
+		// At this point, out_path_member has also been destroyed, so we set this to nullptr
+		out_path_member = nullptr;
+	\endcode
+*/
 C_INTERFACE GetPathInfo(
 	HF::SpatialStructures::Path* p,
 	HF::SpatialStructures::PathMember** out_member_ptr,
@@ -84,6 +192,38 @@ C_INTERFACE GetPathInfo(
 
 /// <summary> Delete a path. </summary>
 /// <param name="path_to_destroy"> Pointer to the path to delete. </param>
+
+/*!
+	\code
+		// Requires #include "pathfinder_C.h", #include "graph.h", #include "path.h", #include "path_finder.h"
+
+		// Create a Graph g, and compress it.
+		HF::SpatialStructures::Graph g;
+		g.addEdge(0, 1, 1);
+		g.addEdge(0, 2, 2);
+		g.addEdge(1, 3, 3);
+		g.addEdge(2, 4, 1);
+		g.addEdge(3, 4, 5);
+		g.Compress();
+
+		// Create a boostGraph from g
+		auto boostGraph = HF::Pathfinding::CreateBoostGraph(g);
+
+		HF::SpatialStructures::Path* out_path = nullptr;
+		HF::SpatialStructures::PathMember* out_path_member = nullptr;
+		int out_size = -1;
+
+		CreatePath(&g, 0, 4, &out_size, &out_path, &out_path_member);
+
+		// Use out_path, out_path_member
+
+		// Remember to free resources when finished
+		DestroyPath(out_path);
+
+		// At this point, out_path_member has also been destroyed, so we set this to nullptr
+		out_path_member = nullptr;
+	\endcode
+*/
 C_INTERFACE DestroyPath(HF::SpatialStructures::Path* path_to_destroy);
 
 /**@}*/
