@@ -14,6 +14,11 @@
 #include <edge.h>
 #include <node.h>
 
+#include <view_analysis_C.h>
+#include <raytracer_C.h>
+#include <objloader_C.h>
+#include <HFExceptions.h>
+
 using namespace HF;
 using HF::SpatialStructures::Graph;
 using HF::SpatialStructures::Node;
@@ -21,10 +26,9 @@ using HF::RayTracer::EmbreeRayTracer;
 using HF::Geometry::MeshInfo;
 using namespace HF::Geometry;
 
-
 // The Utah teapot scaled up https://en.wikipedia.org/wiki/File:Utah_teapot_simple_2.png
 // to about 6.7 x 4 x 3.14. Has 3,238 vertices, 6,320 triangles. Copied to the directory
-// of the test executable when the project is built. 
+// of the test executable when the project is built.
 std::string big_teapot_path = "big_teapot.obj";
 
 TEST(_ViewAnalysis, AllRaysHit) {
@@ -202,15 +206,14 @@ TEST(_ViewAnalysis, SphericalViewAnalysis) {
 
 	// Compare results with expected results
 	std::vector<float> first_five_expected_results{ -1, 7.35812, -1, -1, 3.70356, -1 };
-	std::vector<float> last_five_expected_results = {-1, 6.80486, -1, 5.12012, -1};
+	std::vector<float> last_five_expected_results = { -1, 6.80486, -1, 5.12012, -1 };
 	std::vector<SampleResults> actual_first_five(first_results.begin(), first_results.begin() + 5);
 	std::vector<SampleResults> actual_last_five(first_results.end() - 5, first_results.end());
-	
+
 	for (int i = 0; i < 5; i++) {
 		ASSERT_NEAR(actual_first_five[i].dist, first_five_expected_results[i], 0.00001f);
 		ASSERT_NEAR(actual_last_five[i].dist, last_five_expected_results[i], 0.00001f);
 	}
-
 }
 
 TEST(_ViewAnalysis, ViewAnalysisAggregate) {
@@ -253,9 +256,339 @@ TEST(_ViewAnalysis, ViewAnalysisAggregate) {
 		{
 			// Since each node is getting further away, they should
 			// have a lower score than the node before them.
-			ASSERT_GT(results[i], results[i + 1]); 
+			ASSERT_GT(results[i], results[i + 1]);
 			std::cerr << ", ";
 		}
 	}
 	std::cerr << ")" << std::endl;
+}
+
+TEST(C_ViewAnalysisCInterface, SphericalViewAnalysisAggregate) {
+	// Create Plane
+	const std::vector<float> plane_vertices{
+		-10.0f, 10.0f, 0.0f,
+		-10.0f, -10.0f, 0.0f,
+		10.0f, 10.0f, 0.0f,
+		10.0f, -10.0f, 0.0f,
+	};
+	const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
+
+	// Create and allocate a new instacnce of meshinfo
+	std::vector<MeshInfo>* MI;
+	auto MIR = StoreMesh(
+		&MI,
+		plane_indices.data(),
+		plane_indices.size(),
+		plane_vertices.data(),
+		plane_vertices.size(),
+		"",
+		0
+	);
+	ASSERT_EQ(MIR, HF::Exceptions::HF_STATUS::OK);
+
+	// Create a new raytracer
+	EmbreeRayTracer* ert;
+	CreateRaytracer(MI, &ert);
+
+	// Create Nodes
+	std::vector<Node> nodes = {
+		Node(0,0,1),
+		Node(0,0,2),
+		Node(0,0,3),
+	};
+
+	// Make settings
+	float max_rays = 10000;
+	float up_fov = 90;
+	float down_fov = 90;
+	float height = 1.7f;
+	AGGREGATE_TYPE AT = AGGREGATE_TYPE::AVERAGE;
+
+	std::vector<float>* scores;
+	float* scores_ptr;
+	int scores_size;
+
+	// Run View Analysis
+	auto result = SphereicalViewAnalysisAggregate(
+		ert,
+		nodes.data(),
+		nodes.size(),
+		max_rays,
+		up_fov,
+		down_fov,
+		height,
+		AT,
+		&scores,
+		&scores_ptr,
+		&scores_size
+	);
+	ASSERT_EQ(result, HF::Exceptions::HF_STATUS::OK);
+	ASSERT_EQ(scores->size(), scores_size);
+
+	// print Results
+	for (int i = 0; i < scores->size(); i++)
+		std::cerr << (*scores)[i] << std::endl;
+
+	// Deallocate Memory
+	DestroyFloatVector(scores);
+	DestroyMeshInfo(MI);
+	DestroyRayTracer(ert);
+}
+
+TEST(C_ViewAnalysisCInterface, SphericalViewAnalysisAggregateFlat) {
+	// Create Plane
+	const std::vector<float> plane_vertices{
+		-10.0f, 10.0f, 0.0f,
+		-10.0f, -10.0f, 0.0f,
+		10.0f, 10.0f, 0.0f,
+		10.0f, -10.0f, 0.0f,
+	};
+	const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
+
+	// Create and allocate a new instacnce of meshinfo
+	std::vector<MeshInfo>* MI;
+	auto MIR = StoreMesh(
+		&MI,
+		plane_indices.data(),
+		plane_indices.size(),
+		plane_vertices.data(),
+		plane_vertices.size(),
+		"",
+		0
+	);
+	ASSERT_EQ(MIR, HF::Exceptions::HF_STATUS::OK);
+
+	// Create a new raytracer
+	EmbreeRayTracer* ert;
+	CreateRaytracer(MI, &ert);
+
+	// Create Nodes
+	std::vector<float> nodes = {
+		0,0,1,
+		0,0,2,
+		0,0,3,
+	};
+
+	// Make settings
+	float max_rays = 10000;
+	float up_fov = 90;
+	float down_fov = 90;
+	float height = 1.7f;
+	AGGREGATE_TYPE AT = AGGREGATE_TYPE::AVERAGE;
+
+	std::vector<float>* scores;
+	float* scores_ptr;
+	int scores_size;
+
+	// Run View Analysis
+	auto result = SphereicalViewAnalysisAggregateFlat(
+		ert,
+		nodes.data(),
+		nodes.size() / 3,
+		max_rays,
+		up_fov,
+		down_fov,
+		height,
+		AT,
+		&scores,
+		&scores_ptr,
+		&scores_size
+	);
+	ASSERT_EQ(result, HF::Exceptions::HF_STATUS::OK);
+	ASSERT_EQ(scores->size(), scores_size);
+
+	// print Results
+	for (int i = 0; i < scores->size(); i++)
+		std::cerr << (*scores)[i] << std::endl;
+
+	// Deallocate Memory
+	DestroyFloatVector(scores);
+	DestroyMeshInfo(MI);
+	DestroyRayTracer(ert);
+}
+
+TEST(C_ViewAnalysisCInterface, SphericalDistribute)
+{
+	int num_rays = 10;
+	std::vector<float>* out_float;
+	float* out_float_data;
+	float up_fov = 90.0f;
+	float down_fov = 90.0f;
+
+	auto status = SphericalDistribute(
+		&num_rays, 
+		&out_float, 
+		&out_float_data,
+		up_fov,
+		down_fov
+	);
+	ASSERT_EQ(status, HF::Exceptions::HF_STATUS::OK);
+	
+	std::cerr << "Number of rays: " << num_rays << std::endl;
+	for (int i = 0; i < num_rays; i++) {
+		int os = i * 3;
+
+		std::cerr << "("
+			<< out_float_data[os] << ", "
+			<< out_float_data[os+1] << ", "
+			<< out_float_data[os+2] << ")"
+			<< std::endl;
+	}
+
+	DestroyFloatVector(out_float);
+}
+
+
+TEST(C_ViewAnalysisCInterface, SphericalViewAnalysisNoAggregateFlat) {
+	// Create Plane
+	const std::vector<float> plane_vertices{
+		-10.0f, 10.0f, 0.0f,
+		-10.0f, -10.0f, 0.0f,
+		10.0f, 10.0f, 0.0f,
+		10.0f, -10.0f, 0.0f,
+	};
+	const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
+
+	// Create and allocate a new instacnce of meshinfo
+	std::vector<MeshInfo>* MI;
+	auto MIR = StoreMesh(
+		&MI,
+		plane_indices.data(),
+		plane_indices.size(),
+		plane_vertices.data(),
+		plane_vertices.size(),
+		"",
+		0
+	);
+
+	// Create a new raytracer
+	EmbreeRayTracer* ert;
+	CreateRaytracer(MI, &ert);
+
+	// Create Nodes
+	std::vector<float> nodes = {
+		0,0,1,
+		0,0,2,
+		0,0,3,
+	};
+
+	// Make settings
+	int max_rays = 10;
+	float up_fov = 90;
+	float down_fov = 90;
+	float height = 1.7f;
+	AGGREGATE_TYPE AT = AGGREGATE_TYPE::AVERAGE;
+
+	std::vector<RayResult>* results;
+	RayResult * results_ptr;
+
+	// Run View Analysis
+	auto result = SphericalViewAnalysisNoAggregateFlat(
+		ert,
+		nodes.data(),
+		nodes.size() / 3,
+		&max_rays,
+		up_fov,
+		down_fov,
+		height,
+		&results,
+		&results_ptr
+	);
+	ASSERT_EQ(result, HF::Exceptions::HF_STATUS::OK);
+
+	// print Results
+	std::cerr << "Num Rays: " << max_rays << std::endl;
+	for (int i = 0; i < nodes.size() / 3; i++) {
+		std::cerr << "Node " << i << ": ";
+		for (int k = 0; k < results->size() / 3; k++) {
+			int os = max_rays * i;
+			std::cerr << "(" << results_ptr[k+os].meshid
+			<< ", " << results_ptr[k+os].distance << "), ";
+		}
+		std::cerr << std::endl;
+	}
+
+	std::cerr << std::endl;
+
+	// Deallocate Memory
+	DestroyRayResultVector(results);
+	DestroyMeshInfo(MI);
+	DestroyRayTracer(ert);
+}
+
+TEST(C_ViewAnalysisCInterface, SphericalViewAnalysisNoAggregate) {
+	// Create Plane
+	const std::vector<float> plane_vertices{
+		-10.0f, 10.0f, 0.0f,
+		-10.0f, -10.0f, 0.0f,
+		10.0f, 10.0f, 0.0f,
+		10.0f, -10.0f, 0.0f,
+	};
+	const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
+
+	// Create and allocate a new instacnce of meshinfo
+	std::vector<MeshInfo>* MI;
+	auto MIR = StoreMesh(
+		&MI,
+		plane_indices.data(),
+		plane_indices.size(),
+		plane_vertices.data(),
+		plane_vertices.size(),
+		"",
+		0
+	);
+
+	// Create a new raytracer
+	EmbreeRayTracer* ert;
+	CreateRaytracer(MI, &ert);
+
+	// Create Nodes
+	std::vector<Node> nodes = {
+		Node(0,0,1),
+		Node(0,0,2),
+		Node(0,0,3),
+	};
+
+	// Make settings
+	int max_rays = 10;
+	float up_fov = 90;
+	float down_fov = 90;
+	float height = 1.7f;
+	AGGREGATE_TYPE AT = AGGREGATE_TYPE::AVERAGE;
+
+	std::vector<RayResult>* results;
+	RayResult* results_ptr;
+
+	// Run View Analysis
+	auto result = SphericalViewAnalysisNoAggregate(
+		ert,
+		nodes.data(),
+		nodes.size(),
+		&max_rays,
+		up_fov,
+		down_fov,
+		height,
+		&results,
+		&results_ptr
+	);
+	ASSERT_EQ(result, HF::Exceptions::HF_STATUS::OK);
+
+	// print Results
+	std::cerr << "Num Rays: " << max_rays << std::endl;
+	for (int i = 0; i < nodes.size(); i++) {
+		std::cerr << "Node " << i << ": ";
+		for (int k = 0; k < results->size()/3; k++) {
+			int os = max_rays * i;
+			std::cerr << "(" << results_ptr[k + os].meshid
+				<< ", " << results_ptr[k + os].distance << "), ";
+		}
+		std::cerr << std::endl;
+	}
+
+	std::cerr << std::endl;
+
+	// Deallocate Memory
+	DestroyRayResultVector(results);
+	DestroyMeshInfo(MI);
+	DestroyRayTracer(ert);
 }
