@@ -1614,6 +1614,19 @@ namespace CInterfaceTests {
 
 namespace CostAlgorithmsTests {
 	TEST(_CostAlgorithms, CalculateCrossSlope) {
-		// TODO test
+		Graph g;
+
+		
+		
+
+		std::vector<IntEdge> edge_result = CostAlgorithms::CalculateCrossSlope(g);
+
+		
+	}
+}
+
+namespace CInterfaceTests {
+	TEST(_CostAlgorithmsCInterface, CalculateAndStoreCrossSlope) {
+
 	}
 }

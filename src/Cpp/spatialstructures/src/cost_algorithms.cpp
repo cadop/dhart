@@ -6,7 +6,6 @@
 ///	\date		03 Jul 2020
 ///
 
-
 #include "cost_algorithms.h"
 #include "graph.h"
 
