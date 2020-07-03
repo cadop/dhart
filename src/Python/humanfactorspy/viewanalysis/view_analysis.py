@@ -36,14 +36,6 @@ def SphericalViewAnalysisAggregate(
     method. The actual number of rays fired may be slightly more or less than the amount specified,
     based on the fov limitations specified. 
 
-    Example::
-        # Fire 150 rays for nodes 1 and 2 at 1.7m, then get the average distance for both
-        Node1 = (0,0,1)
-        Node2 = (0,0,2)
-        results = SphereicalViewAnalysis(bvh,[Node1, Node2], 150, 1.7, AggregationType.AVERAGE)
-        Node1_average_distance = results.array[0]
-        Node2_average_distance = results.array[1]
-
     Args:
         bvh: the BVH for the geometry you're shooting at
         nodes: A list of tuples containing x,y,z coordinates of points to analyze
@@ -53,10 +45,41 @@ def SphericalViewAnalysisAggregate(
         downward_fov: maximum angle below from the user's eyelevel to be considred
         AT: aggregation method to use for distance. 
 
+    Examples:
+        Fire 150 rays for 3 nodesat 1.7m, then get the sum of the distance to every hit for all three
+
+        >>> from humanfactorspy.geometry import CommonRotations
+        >>> from humanfactorspy.raytracer import EmbreeBVH  
+        >>> from humanfactorspy.geometry.mesh_info import ConstructPlane
+        >>> from humanfactorspy.viewanalysis import SphericalViewAnalysisAggregate, AggregationType
+
+        >>> MI = ConstructPlane()
+        >>> MI.Rotate(CommonRotations.Zup_to_Yup)
+        >>> BVH = EmbreeBVH(MI)
+        >>> origins = [(0,0,1), (1,0,1), (2,0,50)]
+        >>> va = SphericalViewAnalysisAggregate(BVH, origins, 100, 1.7, agg_type=AggregationType.SUM)
+        >>> print(va)
+        [95.05698 73.62985  0.     ]
+
+        Fire 150 rays for 3 nodesat 1.7m, then get the average distance for all three
+        
+        >>> from humanfactorspy.geometry import CommonRotations
+        >>> from humanfactorspy.raytracer import EmbreeBVH  
+        >>> from humanfactorspy.geometry.mesh_info import ConstructPlane
+        >>> from humanfactorspy.viewanalysis import SphericalViewAnalysisAggregate, AggregationType
+
+        >>> MI = ConstructPlane()
+        >>> MI.Rotate(CommonRotations.Zup_to_Yup)
+        >>> BVH = EmbreeBVH(MI)
+        >>> origins = [(0,0,1), (1,0,1), (2,0,50)]
+        >>> va = SphericalViewAnalysisAggregate(BVH, origins, 100, 1.7, agg_type=AggregationType.AVERAGE)
+        >>> print(va)
+        [4.5265236 4.3311677 0.       ]
+
+
     Returns:
         ViewAnalysisAggregates: view analysis scores resulting from the view analysis calculation
     """
-
     if isinstance(nodes, tuple):
         nodes = [nodes]
 
@@ -110,6 +133,27 @@ def SphericalViewAnalysis(
 
     Returns:
         RayResult: A list of results of shape (ray_count, len(nodes))
+
+        Example:
+        Conducting view analysis on 2 nodes firing 10 rays.
+        
+        >>> from humanfactorspy.geometry import LoadOBJ, MeshInfo, CommonRotations
+        >>> from humanfactorspy.raytracer import EmbreeBVH  
+        >>> from humanfactorspy.geometry.mesh_info import ConstructPlane
+        >>> from humanfactorspy.viewanalysis import SphericalViewAnalysis
+
+        >>> MI = ConstructPlane()
+        >>> MI.Rotate(CommonRotations.Zup_to_Yup)
+        >>> BVH = EmbreeBVH(MI)
+        >>> origins = [(0,0,1), (1,0,1)]
+        >>> va = SphericalViewAnalysis(BVH, origins, 10, 1.7)
+        >>> print(va)
+        [[(-1.      , -1) (-1.      , -1) (-1.      , -1) (-1.      , -1)
+          (-1.      , -1) ( 5.40725 , 39) (-1.      , -1) (-1.      , -1)
+          ( 3.529445, 39) (-1.      , -1)]
+         [(-1.      , -1) (-1.      , -1) (-1.      , -1) (-1.      , -1)
+          (-1.      , -1) ( 5.40725 , 39) (-1.      , -1) (-1.      , -1)
+          ( 3.529445, 39) (-1.      , -1)]]
     """
     if isinstance(nodes, tuple):
         nodes = [nodes]
@@ -136,12 +180,38 @@ def SphericalViewAnalysis(
         lower_fov=downward_fov,
     )
 
-    print(ray_count)
     return RayResultList(score_vector_ptr, score_data_ptr, size, ray_count)
 
 
 def SphericallyDistributeRays(num_rays: int, upward_fov : float = 50, downward_fov: float = 70) -> ViewAnalysisDirections:
-    """ Distribute rays evenly in a sphere """
+    """ Distribute directions evenly in a sphere. 
+    
+    This is the same algorithm used in the other view analysis functions, so the
+    output of this can be used to get the hit points of results from 
+    SphericalViewAnalysis.
+
+    Args:
+        num_rays: the number of directions to generate, Note that the actual number may be higher
+        upward_fov: the maximum angle upwards to generate directions for in degrees
+        downward_fov: the maximum angle downwards to generate directions for in degrees
+
+    Example:
+        >>> from humanfactorspy.viewanalysis import SphericallyDistributeRays
+        >>> print(SphericallyDistributeRays(10))
+        [[-0.         -1.          0.        ]
+         [-0.26500335 -0.8181818  -0.51024675]
+         [ 0.7245825  -0.63636374  0.2646158 ]
+         [-0.8233362  -0.45454547  0.33986175]
+         [ 0.40777823 -0.2727272  -0.87139934]
+         [-0.86162955  0.09090906 -0.49932963]
+         [ 0.93965095  0.2727273  -0.20658147]
+         [-0.51228005  0.45454556  0.72866833]
+         [-0.09913298  0.6363636  -0.7649929 ]
+         [ 0.4396428   0.8181818   0.37053034]]
+    Returns:
+        A two dimensional array of directions
+    
+    """
 
     vector_ptr, data_ptr, num_rays = viewanalysis_native_functions.C_DistributeSpherical(num_rays, upward_fov, downward_fov)
     return ViewAnalysisDirections(vector_ptr, data_ptr, num_rays)

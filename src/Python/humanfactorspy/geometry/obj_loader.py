@@ -6,7 +6,7 @@ from . import MeshInfo
 
 
 class OBJGroupType(Enum):
-    """ How to seperate meshes from a single OBJ into different groups """
+    """ Different methods to seperate several meshes from a single OBJ """
 
     ONLY_FILE = 0  # Assign the same ID to all geometry in this file
     BY_GROUP = 1  # Assign different OBJ groups, different OBJs
@@ -25,16 +25,27 @@ def LoadOBJ(
         group_type: (NOT IMPLEMENTED) How IDs will be assigned to different
             parts of the mesh 
         rotation: Rotation in degrees to be performed on the OBJ after it is loaded. 
-            Useful for converting models from Y-Up to Z-Up
+            Useful for converting models from Y-Up to Z-Up.
     
     Returns:
-        MeshInfo: The meshinfo for the given OBJ
+        MeshInfo: A new meshinfo object containing a the vertices and triangles
+            for the obj in path.
    
     Raises:
         humanfactorspy.Exceptions.InvalidOBJException: The OBJ at path
             either did not exist or could not be loaded
         humanfactorspy.Exceptions.FileNotFoundException: No file exists
             at the given path.
+
+    Example:
+        Load plane.obj from a folder titled "Example Models" but fail because that file doesn't exist
+        
+        >>> from humanfactorspy.geometry import LoadOBJ
+        >>> MI = LoadOBJ("Example Models/plane.obj")
+        Traceback (most recent call last):
+        ...
+        humanfactorspy.Exceptions.FileNotFoundException
+
 
     """
 

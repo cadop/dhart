@@ -6,7 +6,7 @@ from . import viewanalysis_native_functions
 from humanfactorspy.native_numpy_like import NativeNumpyLike
 
 class ViewAnalysisAggregates(NativeNumpyLike):  # Should be a native numpy like
-    """ A list of distances returned from view analysis, with a single value for each node """
+    """ A set of results  returned from view analysis, with a single value for each node """
 
     native_type = c_float 
     delete_fp = viewanalysis_native_functions.C_DestroyScores
@@ -29,7 +29,7 @@ class ViewAnalysisAggregates(NativeNumpyLike):  # Should be a native numpy like
         )
 
 class ViewAnalysisDirections(NativeNumpyLike):  # Should be a native numpy like
-    """ Directions returned from C++ """
+    """ A list of directions returned from C++ """
 
     native_type = c_float
     delete_fp = viewanalysis_native_functions.C_DestroyScores
