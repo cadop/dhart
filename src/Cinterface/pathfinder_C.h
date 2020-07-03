@@ -101,13 +101,19 @@ C_INTERFACE CreatePath(
 
 		// Create a Graph g, and compress it.
 		HF::SpatialStructures::Graph g;
+		g.addEdge(0, 1, 1);
+		g.addEdge(0, 2, 2);
+		g.addEdge(1, 3, 3);
+		g.addEdge(2, 4, 1);
+		g.addEdge(3, 4, 5);
+		g.Compress();
 
 		// Create a boostGraph from g
 		auto boostGraph = HF::Pathfinding::CreateBoostGraph(g);
 
 		// Prepare starting and ending nodes
-		int start_nodes[] = { 0, 0, 1, 2, 3 };
-		int end_nodes[] = { 1, 2, 3, 4, 4 };
+		int start_nodes[] = { 0 };
+		int end_nodes[] = { 4 };
 
 		// Prepare parameters for CreatePaths
 		HF::SpatialStructures::Path* out_path = nullptr;
@@ -116,7 +122,8 @@ C_INTERFACE CreatePath(
 		const int path_size = 5;
 
 		// Sizes of paths
-		int out_sizes[] = { 1, 2, 3, 1, 5 };
+		const int MAX_SIZE = 16;
+		int out_sizes[MAX_SIZE];
 
 		CreatePaths(&g, start_nodes, end_nodes, &out_path, &out_path_member, out_sizes, path_size);
 
