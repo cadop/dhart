@@ -1617,3 +1617,9 @@ namespace CostAlgorithmsTests {
 		// TODO test
 	}
 }
+
+namespace CInterfaceTests {
+	TEST(_CostAlgorithmsCInterface, CalculateAndStoreCrossSlope) {
+		// TODO test
+	}
+}
