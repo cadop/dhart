@@ -144,11 +144,7 @@ namespace HF::SpatialStructures {
 		*/
 		/// \snippet spatialstructures\src\graph.cpp CheckForEdge
 		bool checkForEdge(int parent, int child) const;
-
-		/// <summary> Add an empty node for this new id </summary>
-		/*! \deprecated Never Implemented.*/
-		void UpdateIDs(int new_id);
-
+	
 	public:
 		/*!
 		 \brief Construct a graph from a list of nodes, edges, and distances. 
@@ -988,23 +984,5 @@ namespace HF::SpatialStructures {
 		*/
 		void Clear();
 
-		// TODO: Should these even be in the graph?
-		/// <summary> Calculate cross slope for the given graph </summary>
-		/*!
-			\deprecated Not Implemented.
-			\code
-				// TODO example - code commented out in graph.cpp
-			\endcode
-		*/
-		void GenerateCrossSlope();
-
-		/// <summary> Calculate energy for the given graph </summary>
-		/*!
-			\deprecated Not Implemented.
-			\code
-				// TODO example - code commented out in graph.cpp
-			\endcode
-		*/
-		void GenerateEnergy();
 	};
 }

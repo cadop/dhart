@@ -49,30 +49,6 @@ namespace HF::RayTracer {
 	struct Vertex;
 	struct Triangle;
 
-	// TODO: This may be better served in another class
-	/// <summary> Generate a vector of directions to distribute rays in 360 degrees. </summary>
-	/// <remarks> This algorithm is from the old python codebase. </remarks>
-	/// <param name="step">
-	/// The stepsize to use for distributing directions. Lower step sizes yield better coverage,
-	/// but more rays.
-	/// </param>
-	/// <returns> An array of directions distributed in a sphere. </returns>
-	/// \deprecated Use the version in ViewAnalysis
-	[[deprecated]]
-	std::vector<std::array<float, 3>> genSphereRays(int step);
-
-	/// <summary> Generate a set of equally distributed directions in sphere. </summary>
-	/// <remarks>
-	/// The directions from this function are better distributed than those of <see
-	/// cref="genSphereRays" />. The implementation of this function is based on
-	/// https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere.
-	/// </remarks>
-	/// <param name="numrays"> The number of directions to generate. </param>
-	/// <returns> An array of equally spaced directions. </returns>
-	/// \deprecated Use the version in ViewAnalysis
-	[[deprecated]]
-	std::vector<std::array<float, 3>> genFibbonacciRays(int numrays);
-
 	/// <summary> A wrapper for Intel's Embree Library. </summary>
 	/// <remarks>
 	/// Provides several functions to quickly and simply perform ray intersections using Embree.
@@ -701,30 +677,6 @@ namespace HF::RayTracer {
 			float dz,
 			float distance = -1,
 			int mesh_id = -1
-		);
-
-		/// <summary> Fire a vector of ray requests. </summary>
-		/// <param name="requests">
-		/// A list of requests to fire. These requests will be updated with the results of each shot.
-		/// </param>
-		/// <param name="parallel"> If true will fire rays in parallel. </param>
-		/// \deprecated Never used. Holdover from the previous codebase.
-		[[deprecated]]
-		void FireRequests(
-			std::vector<FullRayRequest>& requests,
-			bool parallel = true
-		);
-
-		/// <summary> Fire a vector of occlusion ray requests. </summary>
-		/// <param name="requests">
-		/// A list of requests to fire. Each request will be updated with hitpoints if successful.
-		/// </param>
-		/// <param name="parallel"> If true, fire rays in parallel </param>
-		/// \deprecated Never used. Holdover from the previous codebase.
-		[[deprecated]]
-		void FireOcclusionRequests(
-			std::vector<FullRayRequest>& requests,
-			bool parallel = true
 		);
 
 		/// <summary> Add a new mesh to this raytracer's BVH with the specified ID. </summary>

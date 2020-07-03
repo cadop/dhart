@@ -18,15 +18,6 @@
 #include <HFExceptions.h>
 
 namespace HF::RayTracer {
-	/// <summary> Calculate the hitpoint of a ray from its origin, direction and distance </summary>
-	/// \deprecated Unused.
-	template <typename P, typename D>
-	P CalculateHitPoint(const P& origin, const D& direction, float distance) {
-		const float x = origin[0] + (direction[0] * distance);
-		const float y = origin[1] + (direction[1] * distance);
-		const float z = origin[2] + (direction[2] * distance);
-		return P{ x,y,z };
-	}
 
 	bool HitStruct::DidHit() const { return meshid != RTC_INVALID_GEOMETRY_ID; };
 
@@ -50,93 +41,7 @@ namespace HF::RayTracer {
 	/// A triangle. Used internally in Embree.
 	/// </summary>
 	struct Triangle { int v0, v1, v2; };
-
-	/// \deprecated Use the version in ViewAnalysis.
-	[[deprecated("Use the version in ViewAnalysis.")]]
-	static inline double getRandomNumber() {
-		return static_cast<double> (1.0 - (rand()) / static_cast<double>(RAND_MAX / 2.0));
-	}
 	
-	/// \deprecated Use the version in ViewAnalysis.
-	[[deprecated("Use the version in ViewAnalysis.")]]
-	static inline float myradians(float angle) {
-		return angle * (static_cast<float>(M_PI) / 180.00f);
-	}
-	
-	/// \deprecated Use the version in ViewAnalysis.
-	[[deprecated("Use the version in viewanalysis")]]
-	static inline unsigned long mix(unsigned long a, unsigned long b, unsigned long c)
-	{
-		a = a - b;  a = a - c;  a = a ^ (c >> 13);
-		b = b - c;  b = b - a;  b = b ^ (a << 8);
-		c = c - a;  c = c - b;  c = c ^ (b >> 13);
-		a = a - b;  a = a - c;  a = a ^ (c >> 12);
-		b = b - c;  b = b - a;  b = b ^ (a << 16);
-		c = c - a;  c = c - b;  c = c ^ (b >> 5);
-		a = a - b;  a = a - c;  a = a ^ (c >> 3);
-		b = b - c;  b = b - a;  b = b ^ (a << 10);
-		c = c - a;  c = c - b;  c = c ^ (b >> 15);
-		return c;
-	}
-	
-	/// \deprecated Use the version in ViewAnalysis.
-	[[deprecated("Use the version in viewanalysis")]]
-	static inline std::vector<std::array<float, 3>> genSphereRays(int step)
-	{
-		const float up_angle = 50;
-		const float down_angle = 70;
-		const float left_angle = 180;
-		const float right_angle = 180;
-
-		float x, y, z;
-		float theta, phi;
-
-		std::vector<std::array<float, 3>> outrays;
-		for (int i = 90 - up_angle; i < 90 + down_angle; i += step) {
-			theta = myradians(i);
-			for (int j = -1 * right_angle; j < left_angle; j += step) {
-				phi = myradians(j);
-
-				x = sin(theta) * cos(phi);
-				y = sin(theta) * sin(phi);
-				z = cos(theta);
-
-				outrays.emplace_back(std::array<float, 3>{x, y, z});
-			}
-		}
-	}
-
-	/// \deprecated Use the version in view analysis
-	[[deprecated("Use the version in viewanalysis")]]
-	std::vector<std::array<float, 3>> genFibbonacciRays(int numrays) {
-		int n = numrays;
-		const float up_angle = 40;
-		const float down_angle = 180 - 60;
-
-		const float upperlimit = myradians(up_angle);
-		const float lowerlimit = myradians(down_angle);
-
-		std::vector<std::array<float, 3>> outrays;
-		float offset = 2.0f / float(n);
-		const float increment = static_cast<float>(M_PI)* (3.0f - sqrtf(5.0f));
-		outrays.reserve(n);
-
-		for (int i = 0; i < n; i++) {
-			float y = ((float(i) * offset) - 1) - (offset / 0.2f);
-			float r = sqrt(1 - powf(y, 2));
-			float phi = (float(i + 1) * increment);
-
-			float x = cosf(phi) * r;
-			float z = sinf(phi) * r;
-
-			//	float angle = glm::angle(glm::vec3(x, y, z), axis);
-			//	if (!isnan(x) && !isnan(y) && !isnan(z) && angle > upperlimit&& angle < lowerlimit)
-			outrays.emplace_back(std::array<float, 3>{x, y, z});
-		}
-
-		return outrays;
-	}
-
 	/// <summary>
 	/// Index a list of verticies and place them into a triangle and vertex buffer.
 	/// </summary>
@@ -469,49 +374,6 @@ namespace HF::RayTracer {
 		rtcInitIntersectContext(&context);
 	}
 
-	/// <summary>
-	/// Fire 8 rays and update the requests based on results
-	/// </summary>
-	// \deprecated Cumbersome to use compared to other functions. Unused.
-	[[deprecated]]
-	inline void Fire8Rays(
-		std::vector<std::reference_wrapper<FullRayRequest>>& requests,
-		const RTCScene& scene,
-		RTCIntersectContext& context
-	) {
-		assert(requests.size() < 8);
-		RTCRayHit8 hit;
-		const int num_shots = 8;
-		std::array<int, 8> valid = { 0,0,0,0,0,0,0,0 };
-
-		// Fill 8 shot array with origins and directions
-		for (int p = 0; p < requests.size(); p++) {
-			auto& req = requests[p].get();
-			hit.ray.dir_x[p] = req.dx; hit.ray.dir_y[p] = req.dy; hit.ray.dir_z[p] = req.dz;
-			hit.ray.org_x[p] = req.x; hit.ray.org_y[p] = req.y;	hit.ray.org_z[p] = req.z;
-
-			hit.ray.tnear[p] = 0.00000;
-			hit.ray.tfar[p] = req.distance > 0 ? req.distance : INFINITY; // Cap by distance if specified.
-			hit.ray.time[p] = 0.0f;
-
-			hit.hit.geomID[p] = RTC_INVALID_GEOMETRY_ID;
-			hit.hit.primID[p] = -1;
-			valid[p] = -1;
-		}
-
-		// Fire array
-		rtcIntersect8(valid.data(), scene, &context, &hit);
-
-		// Update requests if hits were confirmed
-		for (int k = 0; k < requests.size(); k++) {
-			if (hit.hit.geomID[k] != RTC_INVALID_GEOMETRY_ID)
-			{
-				auto& req = requests[k].get();
-				req.distance = hit.ray.tfar[k];
-				req.mesh_id = hit.hit.geomID[k];
-			}
-		}
-	}
 	bool EmbreeRayTracer::FireOcclusionRay(float x, float y, float z, float dx, float dy, float dz, float distance, int mesh_id)
 	{
 		RTCRay ray;
@@ -528,19 +390,6 @@ namespace HF::RayTracer {
 		return ray.tfar == -INFINITY;
 	}
 
-	void EmbreeRayTracer::FireRequests(std::vector<FullRayRequest>& requests, bool parallel)
-	{
-		const int num_shots = 8;
-#pragma omp parallel for if(parallel) schedule(dynamic)
-		for (int i = 0; i < requests.size(); i += num_shots) {
-			// Create a reference vector for every 8 rays and send them to the fire function
-			auto start = requests.begin() + i;
-			auto end = requests.begin() + i + min(num_shots, (int)(requests.size() - i));
-			std::vector<std::reference_wrapper<FullRayRequest>> reference_vector(start, end);
-
-			Fire8Rays(reference_vector, scene, context);
-		}
-	}
 
 	bool EmbreeRayTracer::InsertNewMesh(std::vector<std::array<float, 3>>& Mesh, int ID, bool Commit)
 	{

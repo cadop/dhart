@@ -45,40 +45,6 @@ namespace HF::ViewAnalysis {
 	}
 
 	/*!
-		\deprecated 
-		Used in a failed attempt to map phi to the min and max angle. This idea was faulty and resulted 
-		in points that were not equally distributed.
-	*/
-	inline bool CapAltitude(std::array<float, 3>& vec, float max_angle, float min_angle) {
-		
-		float& x = vec[0]; float& y = vec[1]; float& z = vec[2];
-		
-		// Convert to spherical coordinates
-		float r = sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
-		float theta = atan2(y, x);
-		//float phi = atan(sqrt(pow(x, 2) + pow(y, 2)) / z);
-		float phi = acos(z / r);
-
-
-		//maximum_phi = std::max(phi, maximum_phi);
-		//minimum_phi = std::min(phi, minimum_phi);
-
-		// Lerp phi
-		//printf("Old Phi: %f, ", phi);
-		phi = min_angle + (phi/static_cast<float>(M_PI)) * (max_angle - min_angle);
-		//printf("New Phi: %f\n", phi);
-		
-	//	new_maximum_phi = std::max(phi, new_maximum_phi);
-	//	new_minimum_phi = std::min(phi, new_minimum_phi);
-
-		x = r * sin(phi) * cos(theta);
-		y = r * sin(phi) * sin(theta);
-		z = r * (cos(phi));
-
-		//printf("(%f,%f,%f)\n", x,y,z);
-	}
-
-	/*!
 		Check if a vector's altitude is between max and min angle.
 
 		\param vec Vector to check the altitude of
@@ -173,46 +139,5 @@ namespace HF::ViewAnalysis {
 		// Generate a set of points with the new total.
 		out_points.clear();
 		return FibbonacciDist(new_out_points, upwards_fov, downward_fov);
-	}
-
-
-	/*! \deprecated. Never used, never implemented. */
-	std::vector<float> SphericalViewAnalysisWithDistance(HF::RayTracer::EmbreeRayTracer& ert, const std::vector<HF::SpatialStructures::Node> Nodes, int max_rays, float height)
-	{
-		return std::vector<float>();
-	}
-
-	/*! \deprecated. Never used. Not even defined in the header*/
-	vector<vector<FullRayRequest>> SphericalViewAnalysisFromRayRequests(
-		EmbreeRayTracer& ert, 
-		const vector<Node>& nodes,
-		int max_rays,
-		float height
-	){
-		const auto directions = FibbonacciDistributePoints(max_rays);
-		
-		// Preallocate an array of requests for each node
-		int num_directions = nodes.size();
-		int num_nodes = directions.size();
-		vector<vector<FullRayRequest>> out_requests(num_nodes, vector<FullRayRequest>(num_directions));
-		
-		for (int i = 0; i < num_nodes; i++) {
-			auto node_a = nodes[i];
-			auto origin_a = node_a.getArray();
-
-			auto& requests_for_this_node = out_requests[i];
-			FullRayRequest r(origin_a[0], origin_a[1], origin_a[2], -1,-1,-1,-1);
-			
-			for (int k = 0; k < directions.size(); k++) {
-				const auto & dir = directions[k];
-				auto& this_request = requests_for_this_node[k];
-				
-				this_request.dx = dir[0];
-				this_request.dy = dir[1];
-				this_request.dz = dir[2];
-			}
-			ert.FireRequests(requests_for_this_node);
-		}
-		return out_requests;
 	}
 }

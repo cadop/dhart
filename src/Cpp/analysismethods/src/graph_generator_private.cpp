@@ -26,11 +26,6 @@ typedef std::set<pair> set;
 namespace HF::GraphGenerator {
 	constexpr v3 down{ 0, 0, -1 };
 	
-	/// Quick factorial oneliner
-	/// \deprecated Unused since this file's creation. 
-	///  Possible hold over from the previous codebase. 
-	inline int fact(int n) { return (n == 1 || n == 0) ? 1 : fact(n - 1) * n; }
-
 	/// <summary>
 	/// Create a set of every permutation for all numbers between 0 and limit.
 	/// </summary>
@@ -140,21 +135,6 @@ namespace HF::GraphGenerator {
 		);
 	}
 
-	inline bool GraphGeneratorPrivate::CheckFloor(const Node& parent, Node& child)
-	{
-		// If the ray hits, check that the child isn't lower than our maximum z offset
-		if (CheckRay(child, down, HIT_FLAG::FLOORS)) {
-
-			// Calculate the vertical distance between parent and child
-			auto dstep = parent.z - child.z;
-			auto ustep = child.z - parent.z;
-
-			// Compare to the downstep and upsteap values in gg
-			return (dstep < GG.downstep && ustep < GG.upstep);
-		}
-
-		return false;
-	}
 
 	bool GraphGeneratorPrivate::isUpSlope(const Node& n1, const Node& n2)
 	{
