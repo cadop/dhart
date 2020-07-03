@@ -26,7 +26,7 @@ please download and install Git for Windows at https://gitforwindows.org/
 https://visualstudio.microsoft.com/downloads/<br>
 You may use the Community edition.
 
-<b>CMake (Windows win64-x64)</b><br>
+<b>CMake (Windows win64-x64) Version 3.8 or higher </b><br>
 https://cmake.org/download/
 
 Once the software above is installed on your machine,
