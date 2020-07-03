@@ -13,7 +13,7 @@ A wrapper for Intel\textquotesingle{}s Embree Library.
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{a01163_ac46476760e07cb2579eeb2b4c094522a}{Embree\+Ray\+Tracer}} ()
-\begin{DoxyCompactList}\small\item\em Create an \mbox{\hyperlink{a01163}{Embree\+Ray\+Tracer}} with no arguments \end{DoxyCompactList}\item 
+\item 
 \mbox{\hyperlink{a01163_ab51061e309585cc48d58a6170ccea619}{Embree\+Ray\+Tracer}} (std\+::vector$<$ \mbox{\hyperlink{a01127}{H\+F\+::\+Geometry\+::\+Mesh\+Info}} $>$ \&MI)
 \begin{DoxyCompactList}\small\item\em Create a new \mbox{\hyperlink{a01163}{Embree\+Ray\+Tracer}} and add a single mesh to the scene. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{a01163_a425bef2c0b6b26ee95aedb72089d84c6}{Embree\+Ray\+Tracer}} (const std\+::vector$<$ std\+::array$<$ float, 3 $>$$>$ \&\mbox{\hyperlink{a01163_a3a243ef02c74fc6df958a4fd2506e7cc}{geometry}})
@@ -73,7 +73,7 @@ A wrapper for Intel\textquotesingle{}s Embree Library.
 Provides several functions to quickly and simply perform ray intersections using Embree. This class will automatically dispose of Embree buffers when destroyed, incrementing Embree\textquotesingle{}s reference counters on copy, and decrementing them on deletion. This class also provides methods for adding geometry to Embree\textquotesingle{}s geometry buffers. 
 
 \begin{DoxyRefDesc}{Todo}
-\item[\mbox{\hyperlink{a00263__todo000031}{Todo}}]Could use a constructor overload for a single instance of meshinfo for conveience. 
+\item[\mbox{\hyperlink{a00264__todo000020}{Todo}}]Could use a constructor overload for a single instance of meshinfo for conveience. 
 
 Many functions support Mesh\+ID but don\textquotesingle{}t actually check for it. \end{DoxyRefDesc}
 
@@ -91,21 +91,7 @@ Definition at line 73 of file embree\+\_\+raytracer.\+h.
 
 
 
-Create an \mbox{\hyperlink{a01163}{Embree\+Ray\+Tracer}} with no arguments 
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// Requires \#include "embree\_raytracer.h", \#include "objloader.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// For brevity}}
-\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01163}{HF::RayTracer::EmbreeRayTracer}};}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Create the EmbreeRayTracer, no arguments}}
-\DoxyCodeLine{\mbox{\hyperlink{a01163_ac46476760e07cb2579eeb2b4c094522a}{EmbreeRayTracer}} ert;}
-\end{DoxyCode}
- 
-
-Definition at line 101 of file embree\+\_\+raytracer.\+h.
+Definition at line 88 of file embree\+\_\+raytracer.\+h.
 
 \mbox{\Hypertarget{a01163_ab51061e309585cc48d58a6170ccea619}\label{a01163_ab51061e309585cc48d58a6170ccea619}} 
 \index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!EmbreeRayTracer@{EmbreeRayTracer}}
@@ -128,25 +114,8 @@ Create a new \mbox{\hyperlink{a01163}{Embree\+Ray\+Tracer}} and add a single mes
 \hline
 \end{DoxyExceptions}
 \begin{DoxyRefDesc}{Todo}
-\item[\mbox{\hyperlink{a00263__todo000032}{Todo}}]This function calls {\ttfamily  throw; } \href{https://en.cppreference.com/w/cpp/language/throw}{\texttt{ }} which is meant to only be used to rethrow previously thrown exceptions. This should be throwing \mbox{\hyperlink{a01115}{H\+F\+::\+Exceptions\+::\+Invalid\+O\+BJ}} \end{DoxyRefDesc}
+\item[\mbox{\hyperlink{a00264__todo000021}{Todo}}]This function calls {\ttfamily  throw; } \href{https://en.cppreference.com/w/cpp/language/throw}{\texttt{ }} which is meant to only be used to rethrow previously thrown exceptions. This should be throwing \mbox{\hyperlink{a01115}{H\+F\+::\+Exceptions\+::\+Invalid\+O\+BJ}} \end{DoxyRefDesc}
 
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// Requires \#include "embree\_raytracer.h", \#include "objloader.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// For brevity}}
-\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01127}{HF::Geometry::MeshInfo}};}
-\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01163}{HF::RayTracer::EmbreeRayTracer}};}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Prepare the obj file path}}
-\DoxyCodeLine{std::string teapot\_path = \textcolor{stringliteral}{"teapot.obj"};}
-\DoxyCodeLine{std::vector<MeshInfo> geom = \mbox{\hyperlink{a00280_a6cd66262c11d9276be46e3fcd9a3a712}{HF::Geometry::LoadMeshObjects}}(teapot\_path, \mbox{\hyperlink{a00280_aa9f0bc5275641fe23f6a7d760751bbc5a1f09cac4eec7512c5db99bd1c050ee1e}{HF::Geometry::ONLY\_FILE}});}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Create the EmbreeRayTracer}}
-\DoxyCodeLine{\textcolor{keyword}{auto} ert = \mbox{\hyperlink{a01163_ac46476760e07cb2579eeb2b4c094522a}{EmbreeRayTracer}}(geom);}
-\end{DoxyCode}
- 
 
 Definition at line 458 of file embree\+\_\+raytracer.\+cpp.
 
@@ -180,25 +149,6 @@ Use of this function is discouraged since it is slower and less memory efficent 
 \end{DoxyExceptions}
 
 
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// Requires \#include "embree\_raytracer.h", \#include "objloader.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Create a container of coordinates}}
-\DoxyCodeLine{std::vector<std::array<float, 3>> directions = \{}
-\DoxyCodeLine{    \{0, 0, 1\},}
-\DoxyCodeLine{    \{0, 1, 0\},}
-\DoxyCodeLine{    \{1, 0, 0\},}
-\DoxyCodeLine{    \{-\/1, 0, 0\},}
-\DoxyCodeLine{    \{0, -\/1, 0\},}
-\DoxyCodeLine{    \{0, 0, -\/1\},}
-\DoxyCodeLine{\};}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Create the EmbreeRayTracer}}
-\DoxyCodeLine{\textcolor{keyword}{auto} ert = \mbox{\hyperlink{a01163}{HF::RayTracer::EmbreeRayTracer}}(directions);}
-\end{DoxyCode}
- 
-
 Definition at line 226 of file embree\+\_\+raytracer.\+cpp.
 
 
@@ -216,27 +166,6 @@ References context, device, geometry, scene, triangles, H\+F\+::\+Ray\+Tracer\+:
 Custom destructor to ensure cleanup of embree resources. 
 
 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// Requires \#include "embree\_raytracer.h", \#include "objloader.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// For brevity}}
-\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01127}{HF::Geometry::MeshInfo}};}
-\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01163}{HF::RayTracer::EmbreeRayTracer}};}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Prepare the obj file path}}
-\DoxyCodeLine{std::string teapot\_path = \textcolor{stringliteral}{"teapot.obj"};}
-\DoxyCodeLine{std::vector<MeshInfo> geom = \mbox{\hyperlink{a00280_a6cd66262c11d9276be46e3fcd9a3a712}{HF::Geometry::LoadMeshObjects}}(teapot\_path, \mbox{\hyperlink{a00280_aa9f0bc5275641fe23f6a7d760751bbc5a1f09cac4eec7512c5db99bd1c050ee1e}{HF::Geometry::ONLY\_FILE}});}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Begin scope}}
-\DoxyCodeLine{\{}
-\DoxyCodeLine{    \textcolor{comment}{// Create the EmbreeRayTracer}}
-\DoxyCodeLine{    \textcolor{keyword}{auto} ert = \mbox{\hyperlink{a01163_ac46476760e07cb2579eeb2b4c094522a}{EmbreeRayTracer}}(geom);}
-\DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{comment}{// Use ert within this scope}}
-\DoxyCodeLine{\}}
-\DoxyCodeLine{\textcolor{comment}{// end scope -\/ destructor called at end of scope}}
-\end{DoxyCode}
- 
 
 Definition at line 667 of file embree\+\_\+raytracer.\+cpp.
 
@@ -274,46 +203,6 @@ True if successful
 {\em std\+::exception} & R\+TC failed to allocate vertex and or index buffers. \\
 \hline
 \end{DoxyExceptions}
-
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// Requires \#include "embree\_raytracer.h", \#include "objloader.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Create a container of coordinates}}
-\DoxyCodeLine{std::vector<std::array<float, 3>> directions = \{}
-\DoxyCodeLine{    \{0, 0, 1\},}
-\DoxyCodeLine{    \{0, 1, 0\},}
-\DoxyCodeLine{    \{1, 0, 0\}}
-\DoxyCodeLine{\};}
-\DoxyCodeLine{}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Create the EmbreeRayTracer}}
-\DoxyCodeLine{\textcolor{keyword}{auto} ert = \mbox{\hyperlink{a01163}{HF::RayTracer::EmbreeRayTracer}}(directions);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Prepare coordinates to create a mesh}}
-\DoxyCodeLine{std::vector<std::array<float, 3>> mesh\_coords = \{ }
-\DoxyCodeLine{    \{-\/1, 0, 0\},}
-\DoxyCodeLine{    \{0, -\/1, 0\},}
-\DoxyCodeLine{    \{0, 0, -\/1\} }
-\DoxyCodeLine{\};}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Create a mesh}}
-\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} \textcolor{keywordtype}{id} = 325;}
-\DoxyCodeLine{\textcolor{keyword}{const} std::string mesh\_name = \textcolor{stringliteral}{"my mesh"};}
-\DoxyCodeLine{\mbox{\hyperlink{a01127}{HF::Geometry::MeshInfo}} mesh(mesh\_coords, \textcolor{keywordtype}{id}, mesh\_name);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Determine if mesh insertion successful}}
-\DoxyCodeLine{\textcolor{keywordflow}{if} (ert.InsertNewMesh(mesh, \textcolor{keyword}{false})) \{}
-\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Mesh insertion okay"} << std::endl;}
-\DoxyCodeLine{\}}
-\DoxyCodeLine{\textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Mesh insertion error"} << std::endl;}
-\DoxyCodeLine{\}}
-\end{DoxyCode}
-
-
-{\ttfamily $>$$>$$>$Mesh insertion okay}~\newline
 \mbox{\Hypertarget{a01163_aa6417676838ed1764531e344d9f3a75c}\label{a01163_aa6417676838ed1764531e344d9f3a75c}} 
 \index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!FireAnyOcclusionRay@{FireAnyOcclusionRay}}
 \index{FireAnyOcclusionRay@{FireAnyOcclusionRay}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
@@ -391,7 +280,7 @@ C++ 2020\textquotesingle{}s Concepts would be a good way to explain how to use t
 {\ttfamily $>$$>$$>$ True}~\newline
 {\ttfamily $>$$>$$>$ False} 
 
-Definition at line 1030 of file embree\+\_\+raytracer.\+h.
+Definition at line 861 of file embree\+\_\+raytracer.\+h.
 
 
 
@@ -481,7 +370,7 @@ C++ 2020\textquotesingle{}s Concepts would be a good way to explain how to use t
 {\ttfamily $>$$>$$>$(0, 0, 0)}~\newline
 {\ttfamily $>$$>$$>$Miss} 
 
-Definition at line 946 of file embree\+\_\+raytracer.\+h.
+Definition at line 776 of file embree\+\_\+raytracer.\+h.
 
 
 
@@ -764,7 +653,7 @@ Fire a vector of occlusion ray requests.
 \hline
 \end{DoxyParams}
 \begin{DoxyRefDesc}{Deprecated}
-\item[\mbox{\hyperlink{a00264__deprecated000022}{Deprecated}}]Never used. Holdover from the previous codebase. \end{DoxyRefDesc}
+\item[\mbox{\hyperlink{a00263__deprecated000017}{Deprecated}}]Never used. Holdover from the previous codebase. \end{DoxyRefDesc}
 \mbox{\Hypertarget{a01163_a5d8230c1d095cb539c5be8becaeb2d5d}\label{a01163_a5d8230c1d095cb539c5be8becaeb2d5d}} 
 \index{HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}!FireRay@{FireRay}}
 \index{FireRay@{FireRay}!HF::RayTracer::EmbreeRayTracer@{HF::RayTracer::EmbreeRayTracer}}
@@ -1051,7 +940,7 @@ Fire a vector of ray requests.
 \hline
 \end{DoxyParams}
 \begin{DoxyRefDesc}{Deprecated}
-\item[\mbox{\hyperlink{a00264__deprecated000021}{Deprecated}}]Never used. Holdover from the previous codebase. \end{DoxyRefDesc}
+\item[\mbox{\hyperlink{a00263__deprecated000016}{Deprecated}}]Never used. Holdover from the previous codebase. \end{DoxyRefDesc}
 
 
 Definition at line 534 of file embree\+\_\+raytracer.\+cpp.
@@ -1086,57 +975,6 @@ True.
 \end{DoxyReturn}
 
 
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// Requires \#include "embree\_raytracer.h", \#include "objloader.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// For brevity}}
-\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01127}{HF::Geometry::MeshInfo}};}
-\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01163}{HF::RayTracer::EmbreeRayTracer}};}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Prepare the obj file path}}
-\DoxyCodeLine{std::string teapot\_path = \textcolor{stringliteral}{"teapot.obj"};}
-\DoxyCodeLine{std::vector<MeshInfo> geom = \mbox{\hyperlink{a00280_a6cd66262c11d9276be46e3fcd9a3a712}{HF::Geometry::LoadMeshObjects}}(teapot\_path, \mbox{\hyperlink{a00280_aa9f0bc5275641fe23f6a7d760751bbc5a1f09cac4eec7512c5db99bd1c050ee1e}{HF::Geometry::ONLY\_FILE}});}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Create the EmbreeRayTracer}}
-\DoxyCodeLine{\textcolor{keyword}{auto} ert = \mbox{\hyperlink{a01163_ac46476760e07cb2579eeb2b4c094522a}{EmbreeRayTracer}}(geom);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Prepare coordinates to create a mesh}}
-\DoxyCodeLine{std::vector<std::array<float, 3>> mesh\_coords\_0 = \{}
-\DoxyCodeLine{    \{0, 0, 1\},}
-\DoxyCodeLine{    \{0, 1, 0\},}
-\DoxyCodeLine{    \{1, 0, 0\}}
-\DoxyCodeLine{\};}
-\DoxyCodeLine{}
-\DoxyCodeLine{std::vector<std::array<float, 3>> mesh\_coords\_1 = \{}
-\DoxyCodeLine{    \{-\/1, 0, 0\},}
-\DoxyCodeLine{    \{0, -\/1, 0\},}
-\DoxyCodeLine{    \{0, 0, -\/1\}}
-\DoxyCodeLine{\};}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Prepare mesh IDs and names}}
-\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} mesh\_id\_0 = 241;}
-\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} mesh\_id\_1 = 363;}
-\DoxyCodeLine{\textcolor{keyword}{const} std::string mesh\_name\_0 = \textcolor{stringliteral}{"this mesh"};}
-\DoxyCodeLine{\textcolor{keyword}{const} std::string mesh\_name\_1 = \textcolor{stringliteral}{"that mesh"};}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Create each MeshInfo}}
-\DoxyCodeLine{MeshInfo mesh\_0(mesh\_coords\_0, mesh\_id\_0, mesh\_name\_0);}
-\DoxyCodeLine{MeshInfo mesh\_1(mesh\_coords\_1, mesh\_id\_1, mesh\_name\_1);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Create a container of MeshInfo}}
-\DoxyCodeLine{std::vector<MeshInfo> mesh\_vec = \{ mesh\_0, mesh\_1 \};}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Determine if mesh insertion successful}}
-\DoxyCodeLine{\textcolor{keywordflow}{if} (ert.InsertNewMesh(mesh\_vec, \textcolor{keyword}{false})) \{}
-\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Mesh insertion okay"} << std::endl;}
-\DoxyCodeLine{\}}
-\DoxyCodeLine{\textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Mesh insertion error"} << std::endl;}
-\DoxyCodeLine{\}}
-\end{DoxyCode}
- 
-
 Definition at line 644 of file embree\+\_\+raytracer.\+cpp.
 
 
@@ -1170,38 +1008,6 @@ True if the mesh was added successfully, false if the addition failed or the ID 
 {\em std\+::exception} & Embree failed to allocate vertex and or index buffers. \\
 \hline
 \end{DoxyExceptions}
-
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// Requires \#include "embree\_raytracer.h", \#include "objloader.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Create a container of coordinates}}
-\DoxyCodeLine{std::vector<std::array<float, 3>> directions = \{}
-\DoxyCodeLine{    \{0, 0, 1\},}
-\DoxyCodeLine{    \{0, 1, 0\},}
-\DoxyCodeLine{    \{1, 0, 0\},}
-\DoxyCodeLine{    \{-\/1, 0, 0\},}
-\DoxyCodeLine{    \{0, -\/1, 0\},}
-\DoxyCodeLine{    \{0, 0, -\/1\},}
-\DoxyCodeLine{\};}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Create the EmbreeRayTracer}}
-\DoxyCodeLine{\textcolor{keyword}{auto} ert = \mbox{\hyperlink{a01163}{HF::RayTracer::EmbreeRayTracer}}(directions);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Prepare the mesh ID}}
-\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} \textcolor{keywordtype}{id} = 214;}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Insert the mesh, Commit parameter defaults to false}}
-\DoxyCodeLine{\textcolor{keywordtype}{bool} status = ert.InsertNewMesh(directions, \textcolor{keywordtype}{id});}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Retrieve status}}
-\DoxyCodeLine{std::string result = status ? \textcolor{stringliteral}{"status okay"} : \textcolor{stringliteral}{"status not okay"};}
-\DoxyCodeLine{std::cout << result << std::endl;}
-\end{DoxyCode}
-
-
-{\ttfamily $>$$>$$>$status okay}~\newline
 
 
 Definition at line 548 of file embree\+\_\+raytracer.\+cpp.
@@ -1310,37 +1116,6 @@ Referenced by Fire\+Any\+Ray().
 Increment reference counters to prevent destruction when a copy is made. 
 
 
-\begin{DoxyParams}{Parameters}
-{\em E\+R\+T2} & Reference to \mbox{\hyperlink{a01163}{Embree\+Ray\+Tracer}}, the right-\/hand side of the = statement\\
-\hline
-\end{DoxyParams}
-
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// Requires \#include "embree\_raytracer.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Create a container of coordinates}}
-\DoxyCodeLine{std::vector<std::array<float, 3>> directions = \{}
-\DoxyCodeLine{    \{0, 0, 1\},}
-\DoxyCodeLine{    \{0, 1, 0\},}
-\DoxyCodeLine{    \{1, 0, 0\},}
-\DoxyCodeLine{    \{-\/1, 0, 0\},}
-\DoxyCodeLine{    \{0, -\/1, 0\},}
-\DoxyCodeLine{    \{0, 0, -\/1\},}
-\DoxyCodeLine{\};}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Create the EmbreeRayTracer}}
-\DoxyCodeLine{\mbox{\hyperlink{a01163}{HF::RayTracer::EmbreeRayTracer}} ert\_0(directions);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Create an EmbreeRayTracer, no arguments}}
-\DoxyCodeLine{\mbox{\hyperlink{a01163}{HF::RayTracer::EmbreeRayTracer}} ert\_1;}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// If and when ert\_0 goes out of scope,}}
-\DoxyCodeLine{\textcolor{comment}{// data within ert\_0 will be retained inside of ert\_1.}}
-\DoxyCodeLine{ert\_1 = ert\_0;}
-\end{DoxyCode}
- 
 
 Definition at line 656 of file embree\+\_\+raytracer.\+cpp.
 

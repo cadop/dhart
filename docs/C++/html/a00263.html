@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Analysis: Todo List</title>
+<title>Analysis: Deprecated List</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,98 +62,58 @@ $(function() {
 </div><!-- top -->
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">Todo List </div>  </div>
+<div class="title">Deprecated List </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><dl class="reflist">
-<dt>Class <a class="el" href="a01099.html">HF::AnalysisMethods::GraphGenerator</a>  </dt>
-<dd><a class="anchor" id="_todo000001"></a>Obstacle/Walkable geometry support. </dd>
-<dt>Member <a class="el" href="a00274.html#a119aa13054604cc379223a2f424a3a65">HF::AnalysisMethods::permutations</a>  (int limit)</dt>
-<dd><a class="anchor" id="_todo000002"></a>This can be optimized by using indexing instead of pushback.  </dd>
-<dt>Class <a class="el" href="a01103.html">HF::AnalysisMethods::GraphGeneratorPrivate</a>  </dt>
-<dd><a class="anchor" id="_todo000003"></a>Combine this with the graphgenerator public and create a single class.  </dd>
-<dt>Member <a class="el" href="a01103.html#a1568d709b751c80c179896442ab2e007">HF::AnalysisMethods::GraphGeneratorPrivate::CheckStart</a>  (v3 &amp;start)</dt>
-<dd><a class="anchor" id="_todo000004"></a>Is this needed? This is identical to CheckRay.  </dd>
-<dt>Member <a class="el" href="a01103.html#a75a19433ef81576882b400f768fc8021">HF::AnalysisMethods::GraphGeneratorPrivate::GeneratePotentialChildren</a>  (const <a class="el" href="a01203.html" title="A point in space with an ID.">HF::SpatialStructures::Node</a> &amp;parent, const std::vector&lt; std::pair&lt; int, int &gt;&gt; &amp;directions, std::vector&lt; HF::SpatialStructures::Node &gt; &amp;out_children)</dt>
-<dd><a class="anchor" id="_todo000005"></a>Potential speed gain here by using indexing instead of emplace_back.  </dd>
-<dt>Member <a class="el" href="a01103.html#aa5f45900f602fa165221adb19e90f2de">HF::AnalysisMethods::GraphGeneratorPrivate::CrawlGeom</a>  (<a class="el" href="a01107.html" title="A queue that remembers every object inserted, and prevents the addition of nodes that have already be...">UniqueQueue</a> &amp;todo)</dt>
-<dd><a class="anchor" id="_todo000006"></a>Extract the set logic for directions to another function. </dd>
-<dt>Member <a class="el" href="a01103.html#a4c52e2f7e6c5fa475bdf0ffa2ba2c95f">HF::AnalysisMethods::GraphGeneratorPrivate::CrawlGeomParallel</a>  (<a class="el" href="a01107.html" title="A queue that remembers every object inserted, and prevents the addition of nodes that have already be...">UniqueQueue</a> &amp;todo)</dt>
-<dd><a class="anchor" id="_todo000007"></a>Extract the set logic for directions to another function. </dd>
-<dt>Member <a class="el" href="a01103.html#af1af78ecdc91bac7cfd1681ea07903fb">HF::AnalysisMethods::GraphGeneratorPrivate::isUpSlope</a>  (const <a class="el" href="a01203.html" title="A point in space with an ID.">HF::SpatialStructures::Node</a> &amp;n1, const <a class="el" href="a01203.html" title="A point in space with an ID.">HF::SpatialStructures::Node</a> &amp;n2)</dt>
-<dd><a class="anchor" id="_todo000008"></a>Rename this function to SlopeCheck, or SlopeCalc like the function it's based on in the original python code.  </dd>
-<dt>Member <a class="el" href="a01103.html#a08274f971c3347d89c23936d11e74a8d">HF::AnalysisMethods::GraphGeneratorPrivate::CheckChildren</a>  (const <a class="el" href="a01203.html" title="A point in space with an ID.">HF::SpatialStructures::Node</a> &amp;parent, std::vector&lt; HF::SpatialStructures::Node &gt; Children)</dt>
-<dd><a class="anchor" id="_todo000009"></a>Why is Children not const?  </dd>
-<dt>Class <a class="el" href="a01107.html">HF::AnalysisMethods::UniqueQueue</a>  </dt>
-<dd><a class="anchor" id="_todo000010"></a>This could be a useful standalone templated class.  </dd>
-<dt>Member <a class="el" href="a01107.html#afc00a6953228ef2639a6b40a7ce64e28">HF::AnalysisMethods::UniqueQueue::popMany</a>  (int max=-1)</dt>
-<dd><a class="anchor" id="_todo000011"></a>Opetion to pop every node by setting max to -1.  </dd>
-<dt>Member <a class="el" href="a00275.html#abd3ed7f9595c30784ca668bf886a8d77">HF::AnalysisMethods::ViewAnalysis::Aggregate</a>  (float &amp;out_total, float new_value, const AGGREGATE_TYPE agg_type, int count=0)</dt>
-<dd><a class="anchor" id="_todo000012"></a>Min/Max and maybe the other functions should handle NaNs for min/max to signal that no value already exists. The user can use the min and max numeric limits or zero for defaults like in the example, but it would be great to be able to use one value that would be reliably handled as default input for every case.  </dd>
-<dt>Member <a class="el" href="a00270.html#ga8090bf1d24c0cff934daba1c76d82ba6">HF::AnalysisMethods::ViewAnalysis::SphericalViewAnalysis</a>  (RT &amp;ray_tracer, const std::vector&lt; N &gt; &amp;Nodes, int num_rays, float upward_limit=50.0f, float downward_limit=70.0f, float height=1.7f)</dt>
-<dd><a class="anchor" id="_todo000013"></a>Should this have a height check like the one in the <a class="el" href="a00278.html" title="Evaluate visibility between points in a set of locations.">VisibilityGraph</a>? </dd>
-<dt>Member <a class="el" href="a00270.html#ga249100bce7370ba4202f47294f179f81">HF::AnalysisMethods::ViewAnalysis::SphericalRayshootWithAnyRTForDistance</a>  (RT &amp;ray_tracer, const std::vector&lt; N &gt; &amp;Nodes, int num_rays, float upward_limit=50.0f, float downward_limit=70.0f, float height=1.7f, const AGGREGATE_TYPE aggregation=<a class="el" href="a00275.html#a0a616a205221414bf7aa28966b461deca6970bdc2201030b9c03fbdcf3973858a" title="Sum of the distance from the origin to all intersections.">AGGREGATE_TYPE::SUM</a>)</dt>
-<dd><p class="startdd"><a class="anchor" id="_todo000014"></a>Should this have a height check like the one in the <a class="el" href="a00278.html" title="Evaluate visibility between points in a set of locations.">VisibilityGraph</a>?</p>
-<p class="interdd"><a class="anchor" id="_todo000015"></a>Rename this to ViewAnalysisAggregate.</p>
-<p class="enddd"><a class="anchor" id="_todo000016"></a>Potential speed up here by using a Raytracer function that doesn't return the point of intersection.  </p>
-</dd>
-<dt>Member <a class="el" href="a01127.html#af564a1fb0a0389878edf369b653164fb">HF::Geometry::MeshInfo::MeshInfo</a>  (const std::vector&lt; std::array&lt; float, 3 &gt;&gt; &amp;vertices, int id, std::string name="")</dt>
-<dd><p class="startdd"><a class="anchor" id="_todo000017"></a>Change the std::exception to also be an InvalidOBJ exception. </p>
-<p class="enddd">Check for a number of vertices that aren't a multiple of 3 like the other functions.  </p>
-</dd>
-<dt>Member <a class="el" href="a01127.html#a35a764d76bb738c933592dc95d475234">HF::Geometry::MeshInfo::AddVerts</a>  (const std::vector&lt; std::array&lt; float, 3 &gt;&gt; &amp;verts)</dt>
-<dd><a class="anchor" id="_todo000018"></a>Change std::exception to HumanFactors::InvalidOBJ.  </dd>
-<dt>Member <a class="el" href="a01127.html#a0b045826387ad47da69e5c098caf91dd">HF::Geometry::MeshInfo::ConvertToRhinoCoordinates</a>  ()</dt>
-<dd><p class="startdd"><a class="anchor" id="_todo000019"></a>Rename this to ConvertToZUp. </p>
-<p class="interdd">Just use the RotateMesh function. </p>
-<p class="enddd">Change exception to an assertion since it shouldn't happen in production code.  </p>
-</dd>
-<dt>Member <a class="el" href="a01127.html#aa78330b65f42be9a33a6e58fa2717f73">HF::Geometry::MeshInfo::ConvertToOBJCoordinates</a>  ()</dt>
-<dd><p class="startdd"><a class="anchor" id="_todo000020"></a>Rename this to ConvertToYup. </p>
-<p class="enddd">Just use the RotateMesh function. </p>
-</dd>
-<dt>Member <a class="el" href="a01127.html#a3b5f835ab34b3fb98286db94059d6055">HF::Geometry::MeshInfo::getRawVertices</a>  () const</dt>
-<dd><a class="anchor" id="_todo000021"></a> Make a version of this function that just returns a const reference or pointer to the data. There's not much reason to do a copy here.  </dd>
-<dt>Member <a class="el" href="a01127.html#a6a48b289ce6a767ec332f0ab4ecf719a">HF::Geometry::MeshInfo::getRawIndices</a>  () const</dt>
-<dd><a class="anchor" id="_todo000022"></a> Version of this function that just returns a const reference to the data. There's not much reason to do a copy here. </dd>
-<dt>Member <a class="el" href="a00280.html#a6cd66262c11d9276be46e3fcd9a3a712">HF::Geometry::LoadMeshObjects</a>  (std::string path, GROUP_METHOD gm=ONLY_FILE, bool change_coords=true)</dt>
-<dd><p class="startdd"><a class="anchor" id="_todo000023"></a>the name of the mesh should probably just be the filename if the group type is ONLY_FILE. </p>
-<p class="interdd">Definitely some areas for minor speed gains by using indexing instead of .push_bcaks </p>
-<p class="interdd">Change std::exception to std::out_of_range. </p>
-<p class="enddd">Refactor this to break out whatever code can be repeated or reused. This has a McCabe complexity of 25!!!! </p>
-</dd>
-<dt>Member <a class="el" href="a00280.html#aec1df746155d224838048d3a43c2fe96">HF::Geometry::LoadRawVertices</a>  (std::string path)</dt>
-<dd><a class="anchor" id="_todo000024"></a>Check if the file exists then thow file not found exception instead of invalidobj. </dd>
-<dt>Class <a class="el" href="a00282.html">HF::Pathfinding::vertex_data</a>  </dt>
-<dd><a class="anchor" id="_todo000025"></a>Is the double d needed? </dd>
-<dt>Member <a class="el" href="a00282.html#a977e4c93a977ab4e9e784d1e6fec79f4">HF::Pathfinding::ConstructShortestPathFromPred</a>  (int start, int end, const std::vector&lt; size_t &gt; &amp;pred, const std::vector&lt; float &gt; &amp;distances)</dt>
-<dd><a class="anchor" id="_todo000026"></a>Replace exception with an assert statment. It shouldn't be triggered unless there's a problem with this algorithm?  </dd>
-<dt>Member <a class="el" href="a00282.html#a15badb9d0a17849de7b21105605c9c91">HF::Pathfinding::FindPaths</a>  (<a class="el" href="a01139.html" title="A graph usable with the BoostGraphLibrary.">BoostGraph</a> *bg, const std::vector&lt; int &gt; &amp;start_points, const std::vector&lt; int &gt; &amp;end_points)</dt>
-<dd><a class="anchor" id="_todo000027"></a>This isn't in parallel! Can be implemented using a similar approach to InsertPathsIntoArray.  </dd>
-<dt>Member <a class="el" href="a00282.html#a336118692fd29dd27f8825ec5bb16b56">HF::Pathfinding::FindAllPaths</a>  (<a class="el" href="a01139.html" title="A graph usable with the BoostGraphLibrary.">BoostGraph</a> *bg)</dt>
-<dd><a class="anchor" id="_todo000028"></a>Implement this function to the specifications outlined here.  </dd>
-<dt>Member <a class="el" href="a00277.html#a9a8051c9b70fc0ae60337d4a38bf5f57">HF::RayTracer::vectorsToBuffers</a>  (const std::vector&lt; std::array&lt; float, 3 &gt;&gt; &amp;vertices, std::vector&lt; Triangle &gt; &amp;Tribuffer, std::vector&lt; Vertex &gt; &amp;Vbuffer)</dt>
-<dd><a class="anchor" id="_todo000029"></a>Performance here can be improved by using indexing.  </dd>
-<dt>Member <a class="el" href="a00277.html#aac8c0b245ea813969c50b6496cc67945">HF::RayTracer::buffersToStructs</a>  (std::vector&lt; float &gt; &amp;in_vertices, std::vector&lt; int &gt; &amp;in_indices, std::vector&lt; Vertex &gt; &amp;out_vertices, std::vector&lt; Triangle &gt; &amp;out_triangles)</dt>
-<dd><a class="anchor" id="_todo000030"></a>May be faster as a std::move or std::copy.  </dd>
-<dt>Class <a class="el" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a>  </dt>
-<dd><p class="startdd"><a class="anchor" id="_todo000031"></a>Could use a constructor overload for a single instance of meshinfo for conveience. </p>
-<p class="enddd">Many functions support MeshID but don't actually check for it.  </p>
-</dd>
-<dt>Member <a class="el" href="a01163.html#ab51061e309585cc48d58a6170ccea619">HF::RayTracer::EmbreeRayTracer::EmbreeRayTracer</a>  (std::vector&lt; HF::Geometry::MeshInfo &gt; &amp;MI)</dt>
-<dd><a class="anchor" id="_todo000032"></a>This function calls <code> throw; </code> <a href="https://en.cppreference.com/w/cpp/language/throw"></a> which is meant to only be used to rethrow previously thrown exceptions. This should be throwing <a class="el" href="a01115.html" title="Thrown when the desired object could not be read">HF::Exceptions::InvalidOBJ</a>  </dd>
-<dt>" </dt>
-<dd><a class="anchor" id="_todo000033"></a>Forward declares for eigen.  </dd>
-<dt>Member <a class="el" href="a01199.html#a7c2ea4fda7d310b500456ff14527bab9">HF::SpatialStructures::Graph::operator[]</a>  (const <a class="el" href="a01203.html" title="A point in space with an ID.">Node</a> &amp;n) const</dt>
-<dd><a class="anchor" id="_todo000034"></a>Should this just return an empty list instead of throwing?  </dd>
-<dt>Member <a class="el" href="a01199.html#a604a648f1f73d687ad4544d2ac163212">HF::SpatialStructures::Graph::addEdge</a>  (const <a class="el" href="a01203.html" title="A point in space with an ID.">Node</a> &amp;parent, const <a class="el" href="a01203.html" title="A point in space with an ID.">Node</a> &amp;child, float score=1.0f)</dt>
-<dd><a class="anchor" id="_todo000035"></a>How should this signal that the graph can't have edges added to it? Or how do we add edges to an existing graph quickly without adding to its edge list? </dd>
-<dt>Member <a class="el" href="a01199.html#afa04fa06b0802acd9eebe46a8c7a1787">HF::SpatialStructures::Graph::addEdge</a>  (int parent_id, int child_id, float score)</dt>
-<dd><a class="anchor" id="_todo000036"></a>How should this signal that the graph can't have edges added to it? Or how do we add edges to an existing graph quickly without adding to its edge list?  </dd>
-<dt>Member <a class="el" href="a01203.html#a556efc898ddc67b64fff560d0c7b5a0a">HF::SpatialStructures::Node::operator[]</a>  (int i)</dt>
-<dd><a class="anchor" id="_todo000037"></a>Exception should be std::out_of_range to match other functionality </dd>
-<dt>Member <a class="el" href="a01203.html#ae3e88bd4eecfdbd93431953ed07b8a7b">HF::SpatialStructures::Node::operator[]</a>  (int i) const</dt>
-<dd><a class="anchor" id="_todo000038"></a>Exception should be std::out_of_range to match other functionality</dd>
+<dt>Member <a class="el" href="a00275.html#a58df074201e5978c5f45401820f7c3a2">HF::AnalysisMethods::ViewAnalysis::CapAltitude</a>  (std::array&lt; float, 3 &gt; &amp;vec, float max_angle, float min_angle)</dt>
+<dd><a class="anchor" id="_deprecated000001"></a> Used in a failed attempt to map phi to the min and max angle. This idea was faulty and resulted in points that were not equally distributed.  </dd>
+<dt>Member <a class="el" href="a00275.html#af29c2ecd8da07d73a38c0f589f44ac3b">HF::AnalysisMethods::ViewAnalysis::SphericalViewAnalysisWithDistance</a>  (<a class="el" href="a01163.html" title="A wrapper for Intel&#39;s Embree Library.">HF::RayTracer::EmbreeRayTracer</a> &amp;ert, const std::vector&lt; HF::SpatialStructures::Node &gt; Nodes, int max_rays, float height)</dt>
+<dd><a class="anchor" id="_deprecated000002"></a>. Never used, never implemented.  </dd>
+<dt>Member <a class="el" href="a00275.html#aad7b55a42de41fa5c917c68c7019ac1f">HF::AnalysisMethods::ViewAnalysis::SphericalViewAnalysisFromRayRequests</a>  (EmbreeRayTracer &amp;ert, const vector&lt; Node &gt; &amp;nodes, int max_rays, float height)</dt>
+<dd><a class="anchor" id="_deprecated000003"></a>. Never used. Not even defined in the header  </dd>
+<dt>Member <a class="el" href="a00275.html#a1e3455e890bf7cbaf0e1974c17a37584">HF::AnalysisMethods::ViewAnalysis::SphericalViewAnalysisWithRayRequests</a>  (<a class="el" href="a01163.html" title="A wrapper for Intel&#39;s Embree Library.">HF::RayTracer::EmbreeRayTracer</a> &amp;ert, const std::vector&lt; HF::SpatialStructures::Node &gt; &amp;nodes, int max_rays, float height=1.7f)</dt>
+<dd><a class="anchor" id="_deprecated000004"></a>Suceeded by SphericalViewAnalysis.  </dd>
+<dt>Member <a class="el" href="a00275.html#a03b0855fd4aef49007db04ebb368a243">HF::AnalysisMethods::ViewAnalysis::SphericalViewAnalysisAverageDistance</a>  (<a class="el" href="a01163.html" title="A wrapper for Intel&#39;s Embree Library.">HF::RayTracer::EmbreeRayTracer</a> &amp;ert, const std::vector&lt; HF::SpatialStructures::Node &gt; Nodes, int max_rays, float height=1.7f)</dt>
+<dd><a class="anchor" id="_deprecated000005"></a>Not implemented. Use SphericalRayshootWithAnyRTForDistance instead.  </dd>
+<dt>Member <a class="el" href="a01127.html#a3d9b22866ed60c3dd1d54bbd06b38e60">HF::Geometry::MeshInfo::AddVerts</a>  (const std::vector&lt; float &gt; &amp;verts, std::vector&lt; int &gt; &amp;indices)</dt>
+<dd><a class="anchor" id="_deprecated000006"></a> Unimplemented. Need to worry about indices being correct, and properly matching up with existing set of indices. </dd>
+<dt>Member <a class="el" href="a00280.html#a0248bddcdfb74e0e4105becff50e03ed">HF::Geometry::IndexShape</a>  (const tinyobj::shape_t &amp;shape, const vector&lt; tinyobj::real_t &gt; &amp;verts, vector&lt; int &gt; out_indices, vector&lt; float &gt; out_vertexes)</dt>
+<dd><a class="anchor" id="_deprecated000007"></a>An attempt to break out and reuse part of LoadMeshObjects. Unused for now, but may be useful in breaking out the function later.  </dd>
+<dt>Member <a class="el" href="a00277.html#ad36c0e67c4b26522c82d29a2f4c2e7e7">HF::RayTracer::CalculateHitPoint</a>  (const P &amp;origin, const D &amp;direction, float distance)</dt>
+<dd><a class="anchor" id="_deprecated000008"></a>Unused.  </dd>
+<dt>Member <a class="el" href="a00277.html#adb85d3abbe51075a71812fdc95de8322">HF::RayTracer::getRandomNumber</a>  ()</dt>
+<dd><a class="anchor" id="_deprecated000009"></a>Use the version in ViewAnalysis.  </dd>
+<dt>Member <a class="el" href="a00277.html#a0429e7d02ef59bcad3fa5f7ec2b620dc">HF::RayTracer::myradians</a>  (float angle)</dt>
+<dd><a class="anchor" id="_deprecated000010"></a>Use the version in ViewAnalysis.  </dd>
+<dt>Member <a class="el" href="a00277.html#af350b924e9637d84c8b316a3b1641bbc">HF::RayTracer::mix</a>  (unsigned long a, unsigned long b, unsigned long c)</dt>
+<dd><a class="anchor" id="_deprecated000011"></a>Use the version in ViewAnalysis.  </dd>
+<dt>Member <a class="el" href="a00277.html#a03d93804b73bd4a5d8ab8e679e5b28cd">HF::RayTracer::genSphereRays</a>  (int step)</dt>
+<dd><a class="anchor" id="_deprecated000012"></a>Use the version in ViewAnalysis.  </dd>
+<dt>Member <a class="el" href="a00277.html#a6df9ff0fb8610752d548354b3e6600e0">HF::RayTracer::genFibbonacciRays</a>  (int numrays)</dt>
+<dd><a class="anchor" id="_deprecated000013"></a>Use the version in view analysis  </dd>
+<dt>Member <a class="el" href="a00277.html#a03d93804b73bd4a5d8ab8e679e5b28cd">HF::RayTracer::genSphereRays</a>  (int step)</dt>
+<dd><a class="anchor" id="_deprecated000014"></a>Use the version in ViewAnalysis  </dd>
+<dt>Member <a class="el" href="a00277.html#a6df9ff0fb8610752d548354b3e6600e0">HF::RayTracer::genFibbonacciRays</a>  (int numrays)</dt>
+<dd><a class="anchor" id="_deprecated000015"></a>Use the version in ViewAnalysis  </dd>
+<dt>Member <a class="el" href="a01163.html#acc1fc8eaa0139696ec31362384a37d5f">HF::RayTracer::EmbreeRayTracer::FireRequests</a>  (std::vector&lt; FullRayRequest &gt; &amp;requests, bool parallel=true)</dt>
+<dd><a class="anchor" id="_deprecated000016"></a>Never used. Holdover from the previous codebase.  </dd>
+<dt>Member <a class="el" href="a01163.html#a2fd625932160afeebd0169967d733217">HF::RayTracer::EmbreeRayTracer::FireOcclusionRequests</a>  (std::vector&lt; FullRayRequest &gt; &amp;requests, bool parallel=true)</dt>
+<dd><a class="anchor" id="_deprecated000017"></a>Never used. Holdover from the previous codebase.  </dd>
+<dt>Class <a class="el" href="a00277.html">HF::RayTracer::HitInfo</a>  </dt>
+<dd><a class="anchor" id="_deprecated000018"></a>Never used. Leftover from partially implemented experimental feature. This eventually became the <a class="el" href="a01219.html" title="The result of firing a ray at an object. Contains distance to the hitpoint and the ID of the mesh.">RayResult</a> struct seen in the C-interface. Moving the <a class="el" href="a01219.html" title="The result of firing a ray at an object. Contains distance to the hitpoint and the ID of the mesh.">RayResult</a> struct to the C interface was far more useful than what could be accomplished here, since it allowed the Cinterface and its clients to define their own RayRequest structs that could be filled through templates.  </dd>
+<dt>Class <a class="el" href="a01175.html">HF::RayTracer::RayRequestLite</a>  </dt>
+<dd><a class="anchor" id="_deprecated000019"></a>Unused. See <a class="el" href="a00277.html#a01171" title="Contains no information about the ray itself,">HitInfo</a>.  </dd>
+<dt>Class <a class="el" href="a01179.html">HF::RayTracer::RayRequestCollection</a>  </dt>
+<dd><a class="anchor" id="_deprecated000020"></a>Unused see <a class="el" href="a00277.html#a01171" title="Contains no information about the ray itself,">HitInfo</a>.  </dd>
+<dt>Member <a class="el" href="a01199.html#a3640461d4c1d1ff55dd200fd5670bf9c">HF::SpatialStructures::Graph::UpdateIDs</a>  (int new_id)</dt>
+<dd><a class="anchor" id="_deprecated000021"></a>Never Implemented.  </dd>
+<dt>Member <a class="el" href="a01199.html#a313eb2f8a0f5edcb2bd4b6f6b03af428">HF::SpatialStructures::Graph::GenerateCrossSlope</a>  ()</dt>
+<dd><a class="anchor" id="_deprecated000022"></a>Not Implemented.  </dd>
+<dt>Member <a class="el" href="a01199.html#a890e0f6603eca56c4c70772d5b559d53">HF::SpatialStructures::Graph::GenerateEnergy</a>  ()</dt>
+<dd><a class="anchor" id="_deprecated000023"></a>Not Implemented.  </dd>
+<dt>Member <a class="el" href="a01203.html#a5a3306ea1b8904361b038391718ccc07">HF::SpatialStructures::Node::operator=</a>  (const std::array&lt; float, 3 &gt; &amp;n2)</dt>
+<dd><a class="anchor" id="_deprecated000024"></a>Undefined. The default copy behavior is used instead. </dd>
 </dl>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

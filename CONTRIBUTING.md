@@ -1,3 +1,8 @@
+**Contributing**
+
+To submit a merge request, you must include the output of the unittests and/or 
+test cases if any source file is changed.
+
 **Documentation**
 Documentation is vital and must be done throughout the project, not the end.<br>
 This includes examples for the use of each function.<br>
