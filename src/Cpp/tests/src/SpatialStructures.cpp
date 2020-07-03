@@ -6,6 +6,8 @@
 
 #include "spatialstructures_C.h"
 
+#include "cost_algorithms.h"
+
 using namespace HF::SpatialStructures;
 namespace GraphTests {
     TEST(_Graph, Creation) {
@@ -1607,5 +1609,11 @@ namespace CInterfaceTests {
 
 		// Release memory for g after use
 		DestroyGraph(g);
+	}
+}
+
+namespace CostAlgorithmsTests {
+	TEST(_CostAlgorithms, CalculateCrossSlope) {
+		// TODO test
 	}
 }

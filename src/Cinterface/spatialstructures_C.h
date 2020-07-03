@@ -548,4 +548,15 @@ C_INTERFACE DestroyGraph(
 	HF::SpatialStructures::Graph* graph_to_destroy
 );
 
+/// <summary>Calculates and stores cross slope for all edges in Graph g</summary>
+/// <param name="g">The Graph to calculate and store cross slopes from</param>
+/// <returns>HF::STATUS::OK on completion</returns>
+
+/*!
+	\code
+		// TODO example
+	\endcode
+*/
+C_INTERFACE CalculateAndStoreCrossSlope(HF::SpatialStructures::Graph* g);
+
 /**@}*/

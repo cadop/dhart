@@ -1,3 +1,4 @@
+#include "cost_algorithms.h"
 #include <spatialstructures_C.h>
 #include <HFExceptions.h>
 #include <graph.h>
@@ -160,5 +161,11 @@ C_INTERFACE DestroyEdges(vector<Edge>* edgelist_to_destroy)
 C_INTERFACE DestroyGraph(Graph* graph_to_destroy)
 {
 	if (graph_to_destroy) delete graph_to_destroy;
+	return OK;
+}
+
+C_INTERFACE CalculateAndStoreCrossSlope(HF::SpatialStructures::Graph* g)
+{
+	// TODO implementation
 	return OK;
 }
