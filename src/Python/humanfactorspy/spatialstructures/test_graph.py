@@ -2,8 +2,6 @@ import pytest
 import unittest
 import os
 
-from humanfactorspy.geometry import LoadOBJ, CommonRotations
-from humanfactorspy.raytracer import embree_raytracer, EmbreeBVH
 from humanfactorspy.spatialstructures import NodeList, NodeStruct, Graph
 import humanfactorspy.spatialstructures.node as NodeFunctions
 
