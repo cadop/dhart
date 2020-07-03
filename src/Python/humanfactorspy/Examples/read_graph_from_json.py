@@ -71,16 +71,7 @@ def calcColors(Scores):
             else None
             for point in Scores
     ]
-   #for point in Scores:
-       
-        #scaling the point set
-     #   normalized = (point-min_v)/(max_v-min_v)
-    #    if normalized <= 0:
-    #        Colors.append(None)
-   #         continue
-   #     Colors.append(colorbar(normalized))
 
-   # return Colors
 
 def colorbarlab(val):
     # 0-1 scale
@@ -91,13 +82,20 @@ def colorbarlab(val):
     return ColorLAB(L,1,0,0)
 
 def colorbar(val):
-    
     r = min(max(0, 1.5-abs(1-4*(val-0.5))),1)
     g = min(max(0, 1.5-abs(1-4*(val-0.25))),1)
     b = min(max(0, 1.5-abs(1-4*val)),1)            #conver to hsv?
     tmp_color = rgb_to_hsv(r*255,g*255,b*255)
     return ColorHSV(tmp_color[0],tmp_color[1],tmp_color[2])
-    #return (tmp_color[0],tmp_color[1],tmp_color[2])
+
+def DrawPoints(nodes, colors, point_style, radius):
+    for node, scored_color in zip(jg.nodes, colors):
+        if scored_color == None:
+            continue
+            
+        node_to_add = Point3d(node[0], node[1], node[2]+push_off)
+        display.AddPoint(node_to_add, scored_color, point_style, radius)
+
 display = SetupDisplay()
 json_path = "H:\HumanMetrics\Codebase\HumanFactors\humanfactorspy\humanfactorspy\Examples\out_graph.json"
 push_off = 100
