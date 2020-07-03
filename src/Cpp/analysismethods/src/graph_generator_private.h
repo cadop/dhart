@@ -32,21 +32,6 @@ namespace HF::GraphGenerator {
 		bool WalkableCheck(const SpatialStructures::Node& position);
 
 		/// <summary>
-		/// Calculate positions for every direction pair in directions, then deposit in out children
-		/// </summary>
-		/// <param name="parent"> The parent node </param>
-		/// <param name="directions"> A reference to a direction pair (coordinates) </param>
-		/// <param name="out_children">
-		/// A reference to a vector of Node where children will be deposited.
-		/// </param>
-		/// \deprecated From old codebase. Replaced with \link permutations \endlink.
-		void Graphdirecs(
-			const SpatialStructures::Node& parent,
-			const std::vector<std::pair<int, int>>& directions,
-			std::vector<SpatialStructures::Node>& out_children
-		);
-
-		/// <summary>
 		/// Push point to the ground if there is ground beneath it.
 		/// </summary>
 		/// <param name="start"> Start point to check and modify. </param>
@@ -173,26 +158,6 @@ namespace HF::GraphGenerator {
 			const SpatialStructures::Node & child
 		);
 		
-		/// <summary>
-		/// Offset child to the floor, then check if it abides by upstep and downstep limits.
-		/// </summary>
-		/// <param name="parent"> Parent of child. </param>
-		/// <param name="child">
-		/// Child to check. Is moved to the floor if a floor is beneath it.
-		/// </param>
-		/// <returns>
-		/// True if the child has a floor beneath it, and when offset it doesn't exceed the
-		/// maximum upstep or downstep when compared to parent.
-		/// </returns>
-		/*! 
-			\deprecated 
-			\link CheckChildren \endlink performs the same function, but works on an array of nodes.
-		*/
-		bool CheckFloor(
-			const HF::SpatialStructures::Node& parent,
-			HF::SpatialStructures::Node& child
-		);
-
 		/// <summary> Determine if the graph can traverse the slope from n1 to n2. </summary>
 		/// <param name="n1"> Node that's being traversed from. </param>
 		/// <param name="n2"> Node that's being traversed to. </param>
@@ -246,38 +211,6 @@ namespace HF::GraphGenerator {
 			std::vector<HF::SpatialStructures::Node> Children
 		);
 
-		/*! 
-			\deprecated
-			Never used or implemented. In the Python code this would have cast a ray
-			between parent and child then compared distance between the ray's intersection point
-			with the distance between parent and child to see if there was a clear line of sight.
-			Succeeded by \link OcclusionCheck \endlink. 
-		*/
-		bool IsConnected(
-			const HF::SpatialStructures::Node& parent,
-			const HF::SpatialStructures::Node& child
-		);
-		
-		/// <summary>
-		/// Get the distance between the node and where the ray hits. If the ray doesn't hit,
-		/// return 0.
-		/// </summary>
-		/// <param name="p1"> The desired node to assess </param>
-		/// <param name="direction"> The direction of the ray </param>
-		/// <param name="flag">
-		/// Ray collision status, 1 = FLOORS, 2 = OBSTACLES, 3 = BOTH (the default)
-		/// </param>
-		/// <returns>
-		/// Distance between the node and the ray collision -- 0.0f if ray does not hit
-		/// </returns>
-		/// \deprecated Not needed. This function was only used for checking if a ray was within
-		/// a certain distance of something, however the raytracer's maximum distance parameter
-		/// removes the need to check distance at all.
-		float RayDist(
-			const HF::SpatialStructures::Node& p1,
-			const v3& direction,
-			HIT_FLAG flag = HIT_FLAG::BOTH
-		);
 
 		/*!
 			\brief Check if parent can traverse to child.  

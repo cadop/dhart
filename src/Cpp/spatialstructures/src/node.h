@@ -243,26 +243,6 @@ namespace HF
 			*/
 			bool operator==(const Node& n2) const;
 
-
-			/// <summary>
-			/// Assigns the values of array n2 to n1.
-			/// </summary>
-			/// <param name="n2">Array whose values will be assigned to n1.</param>
-			/*!
-				\deprecated Undefined. The default copy behavior is used instead.
-				\code
-					// Note: This member function is not defined in node.cpp (commented out)
-
-					// be sure to #include "node.h"
-			
-					HF::SpatialStructures::Node node(12.0, 23.1, 34.2);
-					std::array<float, 3> position = { 45.3, 56.4, 67.5 };
-			
-					node = position;			// assigns node's x, y, z fields to that of position's values
-				\endcode
-			*/
-			void operator=(const std::array<float, 3>& n2);
-
 			/// <summary>
 			/// See operator==, checks if this node does NOT occupy the same space as n2.
 			/// <param name="n2">Node to compare with this node.</param>

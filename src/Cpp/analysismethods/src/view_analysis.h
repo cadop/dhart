@@ -117,23 +117,6 @@ namespace HF::ViewAnalysis {
 		float upwards_fov = 50.0f,
 		float downward_fov = 70.0f
 	);
-
-	/// <summary>
-	/// Conduct view analysis and get ray requests as the result
-	/// </summary>
-	/// <param name="ert">The raytracer to shoot rays with</param>
-	/// <param name="nodes">The nodes to shoot rays from</param>
-	/// <param name="max_rays">Maximum number of rays to shoot per node</param>
-	/// <param name="max_rays">Nodes will be offset by this height before being analyzed</param>
-	/// <returns>A vector of rayrequests containing the output</returns>
-	/// \deprecated Suceeded by SphericalViewAnalysis.
-	std::vector<std::vector<HF::RayTracer::FullRayRequest>> SphericalViewAnalysisWithRayRequests(
-		HF::RayTracer::EmbreeRayTracer& ert,
-		const std::vector<HF::SpatialStructures::Node>& nodes,
-		int max_rays,
-		float height = 1.7f
-	);
-
 	/// </summary>
 	/// Apply an aggregation to the given value.
 	/// </summary>
@@ -234,24 +217,6 @@ namespace HF::ViewAnalysis {
 		return;
 	}
 
-	/// <summary>
-	///	Conduct view analysis with hardcoded embree raytracer
-	/// </summary>
-	/// <param name="ert">The raytracer to shoot rays with</param>
-	/// <param name="nodes">The nodes to shoot rays from</param>
-	/// <param name="max_rays">Maximum number of rays to shoot per node</param>
-	/// <param name="max_rays">Nodes will be offset by this height before being analyzed</param>
-	/// <returns>A vector of rayrequests containing the output</returns>
-	/// \deprecated Not implemented. Use SphericalRayshootWithAnyRTForDistance instead.
-	[[deprecated]]
-	std::vector<float> SphericalViewAnalysisAverageDistance(
-		HF::RayTracer::EmbreeRayTracer& ert,
-		const std::vector<HF::SpatialStructures::Node> Nodes,
-		int max_rays,
-		float height = 1.7f
-	);
-
-	/// <summary>
 	/// Conduct view analysis with any Raytracer in parallel.
 	/// </summary>
 	/// <param name="ray_tracer"> A valid raytracer that already has the geometry loaded. </param>

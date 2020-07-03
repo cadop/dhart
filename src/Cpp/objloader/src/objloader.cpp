@@ -20,58 +20,6 @@ using std::vector;
 using std::array;
 
 namespace HF::Geometry {
-	/// <summary> Create an indexed array of vertices from a tinyobj::shape and list of verts </summary>
-	/// <param name="shape"> Shape to index </param>
-	/// <param name="verts"> Vertex array from tinyobjloader </param>
-	/// <param name="out_indices"> Output array for indexes </param>
-	/// <param name="out_vertexes"> Output array for vertices </param>
-	/// \deprecated An attempt to break out and reuse part of LoadMeshObjects. Unused for now, but
-	/// may be useful in breaking out the function later.
-	void IndexShape(
-		const tinyobj::shape_t& shape,
-		const vector<tinyobj::real_t>& verts,
-		vector<int> out_indices,
-		vector<float> out_vertexes
-	) {
-		// Due to the fact that verts is indexed for the entire object instead of per shape, we need
-		// to remap the ids in verts to our own ids
-		auto& indices = shape.mesh.indices;
-		out_indices.reserve(indices.size());
-
-		robin_hood::unordered_map<int, int> remap;  //<their_id, our_id>
-		int last_id = 0; // Increment this with each new vertex seen
-
-		// Create array of indices
-		for (auto& index : indices)
-		{
-			const int their_id = index.vertex_index;
-			int our_id = -1;
-
-			// Get Id from the map or assign it if needed
-			if (remap.count(their_id) != 0)  our_id = remap[their_id];
-			else {
-				our_id = last_id++;
-				remap[their_id] = our_id;
-			}
-
-			// Push it back into our output index array
-			out_indices.push_back(our_id);
-		}
-
-		// Now create our array of vertexes based on the array of ids
-		const int unique_vertex_count = remap.size();
-		out_vertexes.resize(unique_vertex_count * 3);
-		for (auto it = remap.begin(); it != remap.end(); ++it) {
-			auto their_id = it->first; auto our_id = it->second;
-
-			const auto their_index = their_id * 3;
-			const auto our_index = our_id * 3;
-
-			out_vertexes[our_index] = verts[their_index];
-			out_vertexes[our_index + 1] = verts[their_index + 1];
-			out_vertexes[our_index + 2] = verts[their_index + 2];
-		}
-	}
 
 	vector<MeshInfo> LoadMeshObjects(std::string path, GROUP_METHOD gm, bool change_coords)
 	{

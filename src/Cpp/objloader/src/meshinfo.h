@@ -265,43 +265,7 @@ namespace HF::Geometry {
 			\endcode
 		*/
 		void AddVerts(const std::vector<std::array<float, 3>>& verts);
-
-		/// <summary>
-		/// Populate the mesh using only an array of floats and vertices corresponding to mesh
-		/// x,y,z values and triangle indexes respectively.
-		/// </summary>
-		/// <param name="verts"> </param>
-		/// <param name="indices"> </param>
-		/*!
-			\deprecated 
-			Unimplemented. Need to worry about indices being correct, and properly matching
-			up with existing set of indices.
-
-			\code
-				// be sure to #include "meshinfo.h", and #include <vector>
-
-				// TODO: needs implementation
-
-				// Prepare the vertices. Every three floats represents one vertex.
-				std::vector<float> vertices = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
-											// 0 1 2
-
-				// If indices.size() == 3, this means that vertices.size() == 9, and each member
-				// of indices represents a std::array<float, 3> i.e. indices[0] represents the
-				// 0th set of (x, y, z) coordinates, {34.1, 63.9, 16.5} indices[1] represents
-				// the 1st set of (x, y, z) coordinates, {23.5, 85.7, 45.2} indices[2]
-				// represents the 2nd set of (x, y, z) coordinates, {12.0, 24.6, 99.4}
-				std::vector<int> indices = { 0, 1, 2 };
-
-				// Create the MeshInfo instance - this example uses the no-arg constructor
-				HF::Geometry::MeshInfo mesh;	// meshid == 0; verts is given 3 rows, 0 cols; name == "INVALID"
-
-				// Append the vertices to the mesh.
-				mesh.AddVerts(vertices, indices);
-			\endcode
-		*/
-		void AddVerts(const std::vector<float>& verts, std::vector<int>& indices);
-
+	
 		/// <summary> Determine how many vertices are in this mesh. </summary>
 		/// <returns> Total number of vertices for this mesh. </returns>
 		/*!
