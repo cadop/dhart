@@ -88,36 +88,36 @@ std::vector<IntEdge> HF::SpatialStructures::CostAlgorithms::CalculateCrossSlope(
             switch (perpendicular_edges.size()) {
             case 0:
                 // No edges were found to be perpendicular to the edge
-                // formed by node parent_id and node child_id_a.
+                // formed by node parent_node and node child_node_a.
                 // The IntEdge to be created will use the existing edge data
-                // of parent_id and child_id_b.
+                // of parent_node and child_node_a (edge_data_a)
 
                 weight = edge_data_a;
                 break;
             case 1:
-                // One edge formed by node parent_id and one node child_id_b
+                // One edge formed by node parent_node and one other child_node by parent_node
                 // was found to be perpendicular to the edge formed by
-                // node parent_id and node child_id_a.
+                // node parent_node and node child_node_a.
 
                 a_z = child_node_a.z;
 
-                // z value of node_id_b
+                // z value of other child_node
                 b_z = perpendicular_edges[0].child.z;
 
                 // add the existing weight value to the delta of the z values
                 weight = std::abs(a_z - b_z) + perpendicular_edges[0].score;
                 break;
             case 2:
-                // Two edges -- each formed by node_parent_id and two separate
-                // node child_id_b's were found to be perpendicular to the edge
-                // formed by node parent_id and node child_a_id.
+                // Two edges -- each formed by node parent_node and two separate
+                // child node by node parent_node were found to be perpendicular to the edge
+                // formed by node parent_node and node child_node_a.
 
                 a_z = child_node_a.z;
 
-                // z value of the first node_id_b
+                // z value of the first other child_node
                 b_z = perpendicular_edges[0].child.z;
 
-                // z value of the second node_id_b
+                // z value of the second other child_node
                 c_z = perpendicular_edges[1].child.z;
 
                 // add the existing weight value to the delta of the z values
@@ -127,7 +127,7 @@ std::vector<IntEdge> HF::SpatialStructures::CostAlgorithms::CalculateCrossSlope(
                 break;
             }
 
-            // Create the IntEdge using child_id_a
+            // Create the IntEdge using child_node_a.id
             // and the cross slope value stored in weight --
             // then add it to our result container.
             IntEdge ie = { child_node_a.id, weight };
@@ -155,8 +155,7 @@ std::vector<HF::SpatialStructures::Edge> HF::SpatialStructures::CostAlgorithms::
             << " with data " << edge_b.score << std::endl;
 
         if (child_node_a == child_node_b) {
-            // We skip the child ID that we are currently on from the
-            // upper-level iteration.
+            // If child_node_b is the same as the child_node we passed in, skip it.
             std::cout << " *** SKIPPED ***" << std::endl;
         }
         else {
@@ -174,8 +173,6 @@ std::vector<HF::SpatialStructures::Edge> HF::SpatialStructures::CostAlgorithms::
             }
         }
     }
-
-
     return perpendicular_edges;
 }
 
