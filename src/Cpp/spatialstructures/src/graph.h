@@ -1071,5 +1071,7 @@ namespace HF::SpatialStructures {
 		*/
 		void Clear();
 
+		std::vector<Node> GetChildren(const Node& n) const;
+		std::vector<Node> GetChildren(const int parent_id);
 	};
 }

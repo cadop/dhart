@@ -1633,7 +1633,7 @@ namespace CostAlgorithmsTests {
 		// or else the g.next_id field will be off by however many nodes were skipped
 		// in the sequence.
 		// which will be very confusing when it is time to debug.
-		/*
+		
 		g.addEdge(n0, n1);
 		g.addEdge(n0, n2);
 		g.addEdge(n1, n3);
@@ -1650,7 +1650,7 @@ namespace CostAlgorithmsTests {
 		g.addEdge(n7, n8);
 
 		g.Compress();
-		*/
+		
 		CSRPtrs csr = g.GetCSRPointers();
 		// csr.nnz = 14
 		// csr.rows = 9

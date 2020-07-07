@@ -423,6 +423,22 @@ namespace HF::SpatialStructures {
 		id_to_nodes.clear();
 		idmap.clear();
 	}
+
+	std::vector<Node> Graph::GetChildren(const Node& n) const {
+		std::vector<Node> children;
+
+		auto edges = (*this)[n];
+
+		for (auto e : edges) {
+			children.push_back(e.child);
+		}
+
+		return children;
+	}
+
+	std::vector<Node> Graph::GetChildren(const int parent_id) {
+		return GetChildren(NodeFromID(parent_id));
+	}
 }
 
 /*
