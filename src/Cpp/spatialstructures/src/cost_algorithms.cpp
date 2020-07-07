@@ -41,20 +41,6 @@ std::vector<IntEdge> HF::SpatialStructures::CostAlgorithms::CalculateCrossSlope(
     // All cross slope data will be stored here and returned from this function.
     std::vector<IntEdge> result;
 
-    // Retrieve the graph in the form of a CSR.
-    CSRPtrs csr = g.GetCSRPointers();
-
-    if (csr.AreValid() == false) {
-        return result;
-    }
-    // csr.data[last_index] and csr.inner_indices[last_index]
-    // are the final values for those buffers, respectively.
-    const int last_index = csr.rows - 1;
-    std::cout << "csr.nnz = " << csr.nnz << std::endl;
-    std::cout << "csr.rows = " << csr.rows << std::endl;
-    std::cout << "csr.cols = " << csr.cols << std::endl;
-    std::cout << std::endl;
-
     // Retrieve all parent nodes from g at once.
     std::vector<Node> parents = g.Nodes();
 
@@ -161,19 +147,16 @@ std::vector<HF::SpatialStructures::Edge> HF::SpatialStructures::CostAlgorithms::
             std::cout << " *** SKIPPED ***" << std::endl;
         }
         else {
-            float edge_data_b = edge_b.score;
             auto vector_a = parent_node.directionTo(child_node_a);
             auto vector_b = parent_node.directionTo(child_node_b);
 
             if (is_perpendicular(vector_a, vector_b)) {
                 // If this evaluates true,
-                // we construct an Edge using child_node_b and
-                // edge_data_b, and save this Edge in a container.
-
-                Edge e(child_node_b, edge_data_b);
-                perpendicular_edges.push_back(e);
+                // we add edge_b to perpendicular_edges.
+                perpendicular_edges.push_back(edge_b);
             }
         }
     }
+
     return perpendicular_edges;
 }
