@@ -8,6 +8,7 @@
 
 #include "cost_algorithms.h"
 #include "graph.h"
+#include "Constants.h"
 
 #include <iostream>
 
@@ -15,154 +16,242 @@ using HF::SpatialStructures::IntEdge;
 using HF::SpatialStructures::Graph;
 
 std::vector<IntEdge> HF::SpatialStructures::CostAlgorithms::CalculateCrossSlope(Graph& g) {
-	std::vector<IntEdge> result;
+    /*
+        Remove these when example is no longer needed
+    */
+    /*
+    CSRPtrs csr;
 
-	// Leave this for now. We will construct a CSR in here just to get started.
-	//CSRPtrs csr = g.GetCSRPointers();
+    csr.nnz = 9;
+    csr.rows = 4;
+    csr.cols = 4;
 
-	//
-	// Get rid of this when you are ready to test the graph
-	CSRPtrs csr;
-	csr.nnz = 12;
-	csr.rows = 5;
-	csr.cols = 5;
-	csr.data = new float[12]{ 2, 1, 2, 1, 3, 1, 4, 4, 3, 1, 3, 3 };
-	csr.inner_indices = new int[12]{ 1, 4, 0, 2, 4, 1, 3, 2, 4, 0, 1, 3 };
-	csr.outer_indices = new int[5]{ 0, 2, 5, 7, 9 };
-	// 
-	//
+    //                             0  1  2  3  4  5  6  7  8
+    csr.data = new float[csr.nnz]{ 4, 2, 1, 3, 5, 2, 1, 2, 5 };
 
-	//
-	// May not really need these but they're here anyway
-	float* data_begin = csr.data;
-	float* data_end = csr.data + csr.nnz;
+    //                                    0  1  2  3  4  5  6  7  8
+    csr.inner_indices = new int[csr.nnz]{ 1, 3, 0, 3, 0, 2, 3, 1, 3 };
 
-	int* inner_indices_begin = csr.inner_indices;
-	int* inner_indices_end = csr.inner_indices + csr.nnz;
+    //                                     0  1  2  3
+    csr.outer_indices = new int[csr.rows]{ 0, 2, 4, 7 };
+    */
+    /*
+        End remove.
+    */
 
-	int* outer_indices_begin = csr.outer_indices; 
-	int* outer_indices_end = csr.outer_indices + csr.rows;
+    // Retrieve the graph in the form of a CSR.
+    CSRPtrs csr = g.GetCSRPointers();
 
-	int pos = 0;		// this represents the current index in csr.data
-						// also used by csr.inner_indices
-						// always increments until we end up at last address
-						// in csr.data
+    // csr.data[last_index] and csr.inner_indices[last_index]
+    // are the final values for those buffers, respectively.
+    const int last_index = csr.rows - 1;
 
-	int sub_pos = 0;	// this number represents what parent node id we are on
-						// we increment this when we move on to the next subarray
-	//
-	//
-	
-	int parent_id = 0;
-	int child_id = 0;
+    // All cross slope data will be stored here and returned from this function.
+    std::vector<IntEdge> result;
 
-	for (int i = 0; i < csr.nnz; i++) {
-		float* edge_data = csr.data + i;
-		child_id = csr.inner_indices[i];
-	
-		int next_child_id = -1;
-		if (i < csr.nnz - 1) {
-			next_child_id = csr.inner_indices[i + 1];
-		}
+    std::cout << "csr.nnz = " << csr.nnz << std::endl;
+    std::cout << "csr.rows = " << csr.rows << std::endl;
+    std::cout << "csr.cols = " << csr.cols << std::endl;
+    std::cout << std::endl;
 
-		std::cout << parent_id << " -> " << child_id << " " << *edge_data << std::endl;
+    for (int parent_id = 0; parent_id < csr.rows; parent_id++) {
+        // We iterate through all parent IDs, [0, csr.rows)
 
-		//
-		// Here, we can use parent_id, child_id, and *(edge_data)
-		// to do what we need with our CSR.
-		//
+        // Tests if we are at the last parent ID, needed for row_end_index
+        bool at_last_parent = parent_id == last_index;
 
-		if (next_child_id <= child_id) {
-			++parent_id;
-		}
-	}
+        // The starting index for csr.data and csr.inner_indices
+        // for the edge data/child IDs belonging to the current parent ID
+        int curr_row_index = csr.outer_indices[parent_id];
 
-	/*
-		struct CSRPtrs {
-			int nnz;			// count of non-zero elems
-			int rows;			// row count of decompressed adjacency matrix
-			int cols;			// column count of decompressed adjacency matrix
-								// also count of blocks in data
+        // The starting index for csr.data and csr.inner_indices
+        // for the edge data/child IDs belonging to the next parent ID
+        int next_row_index = csr.outer_indices[parent_id + 1];
 
-			float *data;		// pointer to buffer of edge distances (weights)
-			int *inner_indices;	// pointer to buffer of column indices
-			int *outer_indices;	// pointer to buffer of subarray offsets (for data)
-		};
+        // If at_last_parent
+        //      csr.nnz, count of non-zero values 
+        //      (size of csr.data and csr.inner_indices buffer)
+        // Else
+        //      next_row_index - offset for the next parent ID
+        const int row_end_index = at_last_parent ? csr.nnz : next_row_index;
 
+        if (row_end_index < csr.nnz) {
+            std::cout << "***** data_pos = " << csr.data[curr_row_index] << "\t"
+                << "row_end = " << csr.data[row_end_index] << " *****"
+                << std::endl;
+        }
+        else {
+            std::cout << "***** data_pos = " << csr.data[curr_row_index] << "\t"
+                << "row_end = "
+                << "null"
+                << " *****" << std::endl;
+        }
 
-		For a struct CSRPtrs csr --
-			csr.nnz is:
-				- count of non-zero elems
-				- block count of csr.data
+        // We retrieve parent_node, using parent_id, from g
+        // (the parent node for this row in the CSR).
+        Node parent_node = g.NodeFromID(parent_id);
 
-			csr.rows is:
-				- count of rows in decompressed adjacency matrix
+        // We must have a container to store all perpendicular edges found.
+        std::vector<Edge> perpendicular_edges;
 
-			csr.cols is:
-				- count of cols in decompressed adjacency matrix
+        for (int i = curr_row_index; i < row_end_index; i++) {
+            // We iterate through all edges/child IDs for the current parent_id.
+            // i is our current position within csr.data/csr.inner_indices
 
-			csr.data is:
-				- pointer to buffer of edge weights
-				- valid addresses range from [csr.data, csr.data + csr.nnz)
+            // Retrieve the current child ID
+            int child_id_a = csr.inner_indices[i];
 
-			csr.inner_indices is:
-				- pointer to buffer of destination column indices in decompressed matrix
-				- valid address range from [csr.inner_indices, csr.inner_indices + csr.nnz)
+            // Retrieve the edge data formed by parent_id and child_id_a.
+            const float edge_data_a = csr.data[i];
 
-			csr.outer_indices is:
-				- pointer to buffer of indices that split csr.data into subarrays
-				  such that csr.data == csr.data + csr.outer_indices[0],
-				  and csr.data + csr.outer_indices[1] is the address 
-				  of the next subarray within csr.data.
-				  A subarray contains the edge data for a particular row
-				  in the decompressed adjacency matrix.
+            // Retrieve the current child node from g, using child_id_a.
+            Node child_node_a = g.NodeFromID(child_id_a);
 
-		Example:
-			csr.data = 
-			{ 2, 1, 2, 1, 3, 1, 4, 4, 3, 1, 3, 3 };
-			
-			csr.inner_indices = 
-			{ 1, 4, 0, 2, 4, 1, 3, 2, 4, 0, 1, 3 };
+            // Calculate the vector from parent_node to child_node_a.
+            // We will denote this as vector_a.
+            auto vector_a = parent_node.directionTo(child_node_a);
 
-			csr.outer_indices =
-			{ 0, 2, 5, 7, 9 };
+            std::cout << "parent " << parent_id << " has child " << child_id_a
+                << " with data " << csr.data[i] << std::endl;
 
+            std::cout << "====== Comparing with other edges ======"
+                << std::endl;
 
-					0	1	2	3	4
-					-----------------
-			0		0	2	0	0	1
-			1		2	0	1	0	3
-			2		0	1	0	4	0
-			3		0	0	4	0	3
-			4		1	3	0	3	0
+            for (int k = curr_row_index; k < row_end_index; k++) {
+                // We iterate through all edges/child IDs for the current
+                // parent ID, to compare the edge formed by parent_id and
+                // child_a_id -- to every other edge formed 
+                // by parent_id and its other children.
 
+                // Retrieve the current child ID for the comparison
+                int child_id_b = csr.inner_indices[k];
 
-			address of subarray #0 (edge data of parent node id == 0)
-				csr.data + csr.outer_indices[0]
+                std::cout << "parent " << parent_id << " has child "
+                    << child_id_b << " with data " << csr.data[k];
 
-				all children of parent node id 0 are at:
-				csr.inner_indices
+                if (child_id_a == child_id_b) {
+                    // We skip the child ID that we are currently on from the
+                    // upper-level iteration.
+                    std::cout << " *** SKIPPED ***" << std::endl;
+                }
+                else {
+                    std::cout << std::endl;
 
-			address of subarray #1 (edge data of parent node id == 1)
-				csr.data + csr.outer_indices[1]
+                    // Retrieve the current child node from g, using child_id_b.
+                    Node child_node_b = g.NodeFromID(child_id_b);
 
-			address of subarray #2 (edge data of parent node id == 2)
-				csr.data + csr.outer_indices[2]
+                    // Calculate the vector from parent_node to child_node_b.
+                    // We will denote this as vector_b.
+                    auto vector_b = parent_node.directionTo(child_node_b);
 
-			address of subarray #3 (edge data of parent node id == 3)
-				csr.data + csr.outer_indices[3]
+                    // Calculate the dot product of vector_a and vector_b.
+                    // indices {0, 1, 2} are {x, y, z}.
+                    float dot_product =
+                    ((vector_a[0] * vector_b[0])
+                    + (vector_a[1] * vector_b[1])
+                    + (vector_a[2] * vector_b[2]));
 
-			address of subarray #4 (edge data of parent node id == 4)
-				csr.data + csr.outer_indices[4]
+                    // Mathematically,
+                    // two vectors are perpendicular if their dot product is
+                    // equal to zero. But since it is a mortal sin to test
+                    // floating point numbers for equality --
+                    // we can test if the dot product of
+                    // vector_a and vector_b is 'close enough' to zero,
+                    // by determining if our dot_product calculation
+                    // is less than our ROUNDING_PRECISION constant.
+                    // (which is 0.0001)
+                    if (std::abs(dot_product) < HF::SpatialStructures::ROUNDING_PRECISION) {
+                        // If this evaluates true,
+                        // we construct an Edge using child_node_b and
+                        // edge_data_b, and save this Edge in a container.
+                        const float edge_data_b = csr.data[k];
 
-			
-			
-	*/
+                        Edge e(child_node_b, edge_data_b);
+                        perpendicular_edges.push_back(e);
+                    }
+                }
+            }
 
-	// get rid of these when you are ready to test the graph!
-	delete csr.inner_indices;
-	delete csr.outer_indices;
-	delete csr.data;
+            std::cout << "====== End of comparing with other edges ======"
+                << std::endl;
+
+            float weight = 0.0;
+            float a_z = 0.0;
+            float b_z = 0.0;
+            float c_z = 0.0;
+
+            switch (perpendicular_edges.size()) {
+            case 0:
+                // No edges were found to be perpendicular to the edge
+                // formed by node parent_id and node child_id_a.
+                // The IntEdge to be created will use the existing edge data
+                // of parent_id and child_id_b.
+
+                weight = edge_data_a;
+                break;
+            case 1:
+                // One edge formed by node parent_id and one node child_id_b
+                // was found to be perpendicular to the edge formed by
+                // node parent_id and node child_id_a.
+
+                a_z = child_node_a.z;
+
+                // z value of node_id_b
+                b_z = perpendicular_edges[0].child.z;
+
+                // add the existing weight value to the delta of the z values
+                weight = std::abs(a_z - b_z) + perpendicular_edges[0].score;
+                break;
+            case 2:
+                // Two edges -- each formed by node_parent_id and two separate
+                // node child_id_b's were found to be perpendicular to the edge
+                // formed by node parent_id and node child_a_id.
+
+                a_z = child_node_a.z;
+
+                // z value of the first node_id_b
+                b_z = perpendicular_edges[0].child.z;
+
+                // z value of the second node_id_b
+                c_z = perpendicular_edges[1].child.z;
+
+                // add the existing weight value to the delta of the z values
+                weight = std::abs(b_z - c_z) + perpendicular_edges[0].score;
+                break;
+            default:
+                break;
+            }
+
+            // Create the IntEdge using child_id_a
+            // and the cross slope value stored in weight --
+            // then add it to our result container.
+            IntEdge ie = { child_id_a, weight };
+            result.push_back(ie);
+        }
+
+        std::cout << "***** ALL CHILDREN FOR THIS PARENT DONE *****\n"
+            << std::endl;
+    }
+
+    /*
+    // The container of IntEdge will be ordered
+    // according to the CSR -- all edges will be laid out consecutively.
+
+    // For example:
+    //      IntEdge for parent id 0 begin at result[csr.outer_indices[0]]
+    //      IntEdge for parent id 0 end at   result[csr.outer_indices[1]]
+    //      IntEdge for parent id 1 begin at result[csr.outer_indices[1]]
+    //      IntEdge for parent id 2 end at   result[csr.outer_indices[2]]
+
+    // csr.nnz == result.size()
+    return result;
+    */
+
+    /*
+    delete[] csr.outer_indices;
+    delete[] csr.inner_indices;
+    delete[] csr.data;
+    */
 
 	return result;
 }

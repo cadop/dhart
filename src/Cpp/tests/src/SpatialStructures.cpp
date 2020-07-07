@@ -1619,9 +1619,12 @@ namespace CostAlgorithmsTests {
 		
 		
 
+		
 		std::vector<IntEdge> edge_result = CostAlgorithms::CalculateCrossSlope(g);
 
-		
+		for (IntEdge ie : edge_result) {
+			std::cout << ie.child << " has weight " << ie.weight << std::endl;
+		}
 	}
 }
 
