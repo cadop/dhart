@@ -81,8 +81,17 @@ namespace HF::SpatialStructures {
 		float* data_begin() const;
 		float* data_end() const;
 
+		int* inner_begin() const;
+		int* inner_end() const;
+
+		int* outer_begin() const;
+		int* outer_end() const;
+
 		float* row_begin(int row_number) const;
 		float* row_end(int row_number) const;
+
+		int* col_begin(int row_number) const;
+		int* col_end(int row_number) const;
 	};
 
 	inline float* CSRPtrs::data_begin() const {
@@ -91,6 +100,22 @@ namespace HF::SpatialStructures {
 
 	inline float* CSRPtrs::data_end() const {
 		return data + nnz;
+	}
+
+	inline int* CSRPtrs::inner_begin() const {
+		return inner_indices;
+	}
+
+	inline int* CSRPtrs::inner_end() const {
+		return inner_indices + nnz;
+	}
+
+	inline int* CSRPtrs::outer_begin() const {
+		return outer_indices;
+	}
+
+	inline int* CSRPtrs::outer_end() const {
+		return outer_indices + rows;
 	}
 
 	inline float* CSRPtrs::row_begin(int row_number) const {
@@ -112,6 +137,30 @@ namespace HF::SpatialStructures {
 		}
 		else if (next_row > 0 && next_row == rows) {
 			end = data_end();
+		}
+
+		return end;
+	}
+
+	inline int* CSRPtrs::col_begin(int row_number) const {
+		int* begin = nullptr;
+
+		if (row_number >= 0 && row_number < rows) {
+			begin = inner_indices + outer_indices[row_number];
+		}
+
+		return begin;
+	}
+
+	inline int* CSRPtrs::col_end(int row_number) const {
+		int* end = nullptr;
+		const int next_row = row_number + 1;
+
+		if (next_row > 0 && next_row < rows) {
+			end = inner_indices + outer_indices[next_row];
+		}
+		else if (next_row > 0 && next_row == rows) {
+			end = inner_end();
 		}
 
 		return end;
