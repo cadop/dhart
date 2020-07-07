@@ -15,6 +15,28 @@
 using HF::SpatialStructures::IntEdge;
 using HF::SpatialStructures::Graph;
 
+bool HF::SpatialStructures::CostAlgorithms::is_perpendicular(std::array<float, 3> dir_a, std::array<float, 3> dir_b) {
+    bool perpendicular = false;
+
+    float dot_product =
+        ((dir_a[0] * dir_b[0])
+            + (dir_a[1] * dir_b[1])
+            + (dir_a[2] * dir_b[2]));
+
+    // Mathematically,
+    // two vectors are perpendicular if their dot product is
+    // equal to zero. But since it is a mortal sin to test
+    // floating point numbers for equality (using operator==) --
+    // we can test if the dot product of
+    // vector_a and vector_b is 'close enough' to zero,
+    // by determining if our dot_product calculation
+    // is less than our ROUNDING_PRECISION constant.
+    // (which is 0.0001)    
+    perpendicular = std::abs(dot_product) < HF::SpatialStructures::ROUNDING_PRECISION;
+
+    return perpendicular;
+}
+
 std::vector<IntEdge> HF::SpatialStructures::CostAlgorithms::CalculateCrossSlope(Graph& g) {
     // All cross slope data will be stored here and returned from this function.
     std::vector<IntEdge> result;
@@ -25,7 +47,6 @@ std::vector<IntEdge> HF::SpatialStructures::CostAlgorithms::CalculateCrossSlope(
     if (csr.AreValid() == false) {
         return result;
     }
-
     // csr.data[last_index] and csr.inner_indices[last_index]
     // are the final values for those buffers, respectively.
     const int last_index = csr.rows - 1;
@@ -36,78 +57,25 @@ std::vector<IntEdge> HF::SpatialStructures::CostAlgorithms::CalculateCrossSlope(
 
     for (int parent_id = 0; parent_id < csr.rows; parent_id++) {
         // We iterate through all parent IDs, [0, csr.rows)
-        // We also retrieve all child nodes for this parent
+        // We also retrieve all child nodes for this parent,
+        // as well as all edges that extend from this parent.
         Node parent_node = g.NodeFromID(parent_id);
         std::vector<Node> children = g.GetChildren(parent_node);
+        std::vector<Edge> edges = g[parent_node];
 
-        // We must have a container to store all perpendicular edges found.
-        std::vector<Edge> perpendicular_edges;
-
-        // Required for retrieving edge data for the current parent/child pair
-        int curr_child_index_a = 0;
-
-        for (Node child_node_a : children) {
-            // We iterate over all children for parent_node,
-            // and create a vector_a from parent_node and the current child,
-            // child_node_a.
-            float edge_data_a = csr.data[curr_child_index_a];
-            auto vector_a = parent_node.directionTo(child_node_a);
-
-            // Required for retrieving edge data for the current parent/child pair
-            int curr_child_index_b = curr_child_index_a;
+        for (Edge edge_a : edges) {
+            // We iterate over all edges that extend from parent_node.
+            Node child_node_a = edge_a.child;
+            float edge_data_a = edge_a.score;
 
             std::cout << "parent " << parent_id << " has child " << child_node_a.id
-                << " with data " << csr.data[curr_child_index_a] << std::endl;
+                << " with data " << edge_data_a << std::endl;
 
             std::cout << "====== Comparing with other edges ======"
                 << std::endl;
 
-            for (Node child_node_b : children) {
-                // We iterate over all children for parent_node,
-                // and create a vector_b from parent_node and the current child,
-                // child_node_b. 
-                // The goal is to compare vector_a with every other
-                // vector_b created by the common parent_node and its children.
-                std::cout << "parent " << parent_id << " has child " << child_node_b.id
-                    << " with data " << csr.data[curr_child_index_b] << std::endl;
-
-                if (child_node_a == child_node_b) {
-                    // We skip the child ID that we are currently on from the
-                    // upper-level iteration.
-                    std::cout << " *** SKIPPED ***" << std::endl;
-                }
-                else {
-                    float edge_data_b = csr.data[curr_child_index_b];
-                    auto vector_b = parent_node.directionTo(child_node_b);
-
-                    float dot_product =
-                        ((vector_a[0] * vector_b[0])
-                            + (vector_a[1] * vector_b[1])
-                            + (vector_a[2] * vector_b[2]));
-
-                    // Mathematically,
-                    // two vectors are perpendicular if their dot product is
-                    // equal to zero. But since it is a mortal sin to test
-                    // floating point numbers for equality (using operator==) --
-                    // we can test if the dot product of
-                    // vector_a and vector_b is 'close enough' to zero,
-                    // by determining if our dot_product calculation
-                    // is less than our ROUNDING_PRECISION constant.
-                    // (which is 0.0001)
-                    if (std::abs(dot_product) < HF::SpatialStructures::ROUNDING_PRECISION) {
-                        // If this evaluates true,
-                        // we construct an Edge using child_node_b and
-                        // edge_data_b, and save this Edge in a container.
-       
-                        Edge e(child_node_b, edge_data_b);
-                        perpendicular_edges.push_back(e);
-                    }
-                }
-
-                ++curr_child_index_b;
-            }
-
-            ++curr_child_index_a;
+            // We must have a container to store all perpendicular edges found.
+            std::vector<Edge> perpendicular_edges = GetPerpendicularEdges(parent_node, g[parent_node], child_node_a);
 
             std::cout << "====== End of comparing with other edges ======"
                 << std::endl;
@@ -170,8 +138,50 @@ std::vector<IntEdge> HF::SpatialStructures::CostAlgorithms::CalculateCrossSlope(
             << std::endl;
     }
 
-    /*
-    OLD VERSION
+    return result;
+}
+
+std::vector<HF::SpatialStructures::Edge> HF::SpatialStructures::CostAlgorithms::GetPerpendicularEdges(HF::SpatialStructures::Node& parent_node, std::vector<Edge> edges, Node& child_node_a) {
+    std::vector<HF::SpatialStructures::Edge> perpendicular_edges;
+
+    for (Edge edge_b : edges) {
+        Node child_node_b = edge_b.child;
+        // We iterate over all children for parent_node,
+        // and create a vector_b from parent_node and the current child,
+        // child_node_b. 
+        // The goal is to compare vector_a with every other
+        // vector_b created by the common parent_node and its children.
+        std::cout << "parent " << parent_node.id << " has child " << edge_b.child.id
+            << " with data " << edge_b.score << std::endl;
+
+        if (child_node_a == child_node_b) {
+            // We skip the child ID that we are currently on from the
+            // upper-level iteration.
+            std::cout << " *** SKIPPED ***" << std::endl;
+        }
+        else {
+            float edge_data_b = edge_b.score;
+            auto vector_a = parent_node.directionTo(child_node_a);
+            auto vector_b = parent_node.directionTo(child_node_b);
+
+            if (is_perpendicular(vector_a, vector_b)) {
+                // If this evaluates true,
+                // we construct an Edge using child_node_b and
+                // edge_data_b, and save this Edge in a container.
+
+                Edge e(child_node_b, edge_data_b);
+                perpendicular_edges.push_back(e);
+            }
+        }
+    }
+
+
+    return perpendicular_edges;
+}
+
+/*
+OLD VERSION
+std::vector<IntEdge> HF::SpatialStructures::CostAlgorithms::CalculateCrossSlope(Graph& g) {
 
     for (int parent_id = 0; parent_id < csr.rows; parent_id++) {
         // We iterate through all parent IDs, [0, csr.rows)
@@ -188,7 +198,7 @@ std::vector<IntEdge> HF::SpatialStructures::CostAlgorithms::CalculateCrossSlope(
         int next_row_index = csr.outer_indices[parent_id + 1];
 
         // If at_last_parent
-        //      csr.nnz, count of non-zero values 
+        //      csr.nnz, count of non-zero values
         //      (size of csr.data and csr.inner_indices buffer)
         // Else
         //      next_row_index - offset for the next parent ID
@@ -239,7 +249,7 @@ std::vector<IntEdge> HF::SpatialStructures::CostAlgorithms::CalculateCrossSlope(
             for (int k = curr_row_index; k < row_end_index; k++) {
                 // We iterate through all edges/child IDs for the current
                 // parent ID, to compare the edge formed by parent_id and
-                // child_a_id -- to every other edge formed 
+                // child_a_id -- to every other edge formed
                 // by parent_id and its other children.
 
                 // Retrieve the current child ID for the comparison
@@ -361,6 +371,5 @@ std::vector<IntEdge> HF::SpatialStructures::CostAlgorithms::CalculateCrossSlope(
     //      IntEdge for parent id 1 begin at result[csr.outer_indices[1]]
     //      IntEdge for parent id 2 end at   result[csr.outer_indices[2]]
 
-	return result;
+    return result;
     */
-}
