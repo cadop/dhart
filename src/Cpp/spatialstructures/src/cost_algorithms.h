@@ -32,7 +32,6 @@ namespace HF::SpatialStructures::CostAlgorithms {
 	*/
 	std::vector<IntEdge> CalculateCrossSlope(Graph& g);
 
-	//std::vector<Edge> GetPerpendicularEdges(Node& parent_node, std::vector<Node> children);
 	std::vector<Edge> GetPerpendicularEdges(Node& parent_node, std::vector<Edge> edges, Node& child_node_a);
 }
 

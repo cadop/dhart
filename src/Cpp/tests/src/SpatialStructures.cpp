@@ -1614,7 +1614,7 @@ namespace CInterfaceTests {
 
 namespace CostAlgorithmsTests {
 	TEST(_CostAlgorithms, CalculateCrossSlope) {
-		Node n0(1, 1, 2);
+		Node n0(-5, 2, 1);
 		Node n1(1, 2, 3);
 		Node n2(4, 5, 6);
 		Node n3(4, 5, 7);
@@ -1659,17 +1659,16 @@ namespace CostAlgorithmsTests {
 		// csr.inner_indices
 		// { 1, 2, 3, 4, 4, 5, 6, 5, 7, 6, 7, 8, 8, 7 }
 
-		if (csr.AreValid()) {
-			for (int i = 0; i < csr.nnz; i++) {
-				std::cout << "child id: " << csr.inner_indices[i] << std::endl;
-			}
-
-			std::vector<IntEdge> edge_result = CostAlgorithms::CalculateCrossSlope(g);
-
-			for (IntEdge ie : edge_result) {
-				std::cout << ie.child << " has weight " << ie.weight << std::endl;
-			}
+		for (int i = 0; i < csr.nnz; i++) {
+			std::cout << "child id: " << csr.inner_indices[i] << std::endl;
 		}
+
+		std::vector<IntEdge> edge_result = CostAlgorithms::CalculateCrossSlope(g);
+
+		for (IntEdge ie : edge_result) {
+			std::cout << ie.child << " has weight " << ie.weight << std::endl;
+		}
+		
 	}
 }
 

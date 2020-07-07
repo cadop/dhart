@@ -16,8 +16,6 @@ using HF::SpatialStructures::IntEdge;
 using HF::SpatialStructures::Graph;
 
 bool HF::SpatialStructures::CostAlgorithms::is_perpendicular(std::array<float, 3> dir_a, std::array<float, 3> dir_b) {
-    bool perpendicular = false;
-
     float dot_product =
         ((dir_a[0] * dir_b[0])
             + (dir_a[1] * dir_b[1])
@@ -32,9 +30,7 @@ bool HF::SpatialStructures::CostAlgorithms::is_perpendicular(std::array<float, 3
     // by determining if our dot_product calculation
     // is less than our ROUNDING_PRECISION constant.
     // (which is 0.0001)    
-    perpendicular = std::abs(dot_product) < HF::SpatialStructures::ROUNDING_PRECISION;
-
-    return perpendicular;
+    return std::abs(dot_product) < HF::SpatialStructures::ROUNDING_PRECISION;
 }
 
 std::vector<IntEdge> HF::SpatialStructures::CostAlgorithms::CalculateCrossSlope(Graph& g) {
@@ -63,6 +59,8 @@ std::vector<IntEdge> HF::SpatialStructures::CostAlgorithms::CalculateCrossSlope(
                 << std::endl;
 
             // We must have a container to store all perpendicular edges found.
+            // This container will have all edges that are perpendicular to edge_a --
+            // or rather, the vector formed by parent_node and child_node_a.
             std::vector<Edge> perpendicular_edges = GetPerpendicularEdges(parent_node, g[parent_node], child_node_a);
 
             std::cout << "====== End of comparing with other edges ======"
