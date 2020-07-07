@@ -19,6 +19,16 @@ namespace HF::SpatialStructures {
 }
 
 namespace HF::SpatialStructures::CostAlgorithms {
+	/// <summary> Determines if dir_a and dir_b (vectors) are perpendicular, or not </summary>
+	/// <param name="dir_a">The starting position</param>
+	/// <param name="dir_b">The ending position</param>
+	/// <returns>True, if dir_a and and dir_b have a dot product close to 0, false otherwise</returns>
+
+	/*!
+		\code
+			// TODO example
+		\endcode
+	*/
 	bool is_perpendicular(std::array<float, 3> dir_a, std::array<float, 3> dir_b);
 
 	/// <summary>Calculates cross slope for all edges in Graph g</summary>
@@ -32,6 +42,17 @@ namespace HF::SpatialStructures::CostAlgorithms {
 	*/
 	std::vector<IntEdge> CalculateCrossSlope(Graph& g);
 
+	/// <summary> Obtains a container of Edge that are perpendicular to the vector formed by parent_node and child_node_a</summary>
+	/// <param name="parent_node">The parent node</param>
+	/// <param name="edges">The Edge that extend from parent_node</param>
+	/// <param name="child_node_a">The child node that forms a vector (edge) with parent_node, that will be compared with all Edge in edges</param>
+	/// <returns>A container of Edge that were found to be perpendicular to the edge formed by parent_node and child_node_a</returns>
+
+	/*!
+		\code
+			// TODO example
+		\endcode
+	*/
 	std::vector<Edge> GetPerpendicularEdges(Node& parent_node, std::vector<Edge> edges, Node& child_node_a);
 }
 

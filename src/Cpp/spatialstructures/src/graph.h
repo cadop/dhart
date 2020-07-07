@@ -78,19 +78,108 @@ namespace HF::SpatialStructures {
 			return (data && outer_indices && inner_indices);
 		}
 
+		/// <summary> Returns the base address of the data buffer</summary>
+		/// <returns> The base address of the data buffer</returns>
+
+		/*!
+			\code
+				// TODO example
+			\endcode
+		*/
 		float* data_begin() const;
+		
+		/// <summary> Returns the address of one-past the last element within the data buffer</summary>
+		/// <returns> The address of one-past the last element within the data buffer</returns>
+		
+		/*!
+			\code
+				// TODO example
+			/endcode
+		*/
 		float* data_end() const;
 
+		/// <summary> Returns the base address of the inner_indices buffer</summary>
+		/// <returns> The base address of the inner_indices buffer</returns>
+
+		/*!
+			\code
+				// TODO example
+			\endcode
+		*/
 		int* inner_begin() const;
+
+		/// <summary> Returns the address of one-past the last element within the inner_indices buffer</summary>
+		/// <returns> The address of one-past the last element within the inner_indices buffer</summary>
+
+		/*!
+			\code
+				// TODO example
+			\endcode
+		*/
 		int* inner_end() const;
 
+		/// <summary> Returns the base address of the outer_indices buffer</summary>
+		/// <returns> The base address of the outer_indices buffer</returns>
+
+		/*!
+			\code
+				// TODO example
+			\endcode
+		*/
 		int* outer_begin() const;
+		
+		/// <summary> Returns the address of one-past the last element within the outer_indices buffer</summary>
+		/// <returns> The address of one-past the last element within the outer_indices buffer</returns>
+
+		/*!
+			\code
+				// TODO example
+			\endcode
+		*/
 		int* outer_end() const;
 
+		/// <summary> Returns the address of the first non-zero element of row_number within the CSR data buffer</summary>
+		/// <param name="row_number">The desired row number to access within the CSR</param>
+		/// <returns> The address of the first non-zero element within the CSR data buffer at row_number</returns>
+
+		/*!
+			\code
+				// TODO example
+			\endcode
+		*/
 		float* row_begin(int row_number) const;
+
+		/// <summary> Returns the address of the first non-zero element of row_number + 1, i.e. the base address of the next row within the CSR data buffer</summary>
+		/// <param name="row_number">The desired row number for the CSR such that the address returned is the address pointing to the beginning element for the subsequent row</param>
+		/// <returns> The address of the first non-zero element for row_number + 1 -- unless row_number + 1 == csr.rows, then data_end() is returned</returns>
+
+		/*!
+			\code
+				// TODO example
+			\endcode
+		*/
 		float* row_end(int row_number) const;
 
+		/// <summary> Returns the address of the element that determines the column where the first non-zero value begins within row_number</summary>
+		/// <param name="row_number">The desired row number for the CSR such that the address returned is of the value that dictates where the first non-zero value begins within row_number</param>
+		/// <returns> The address of the value that represents the column index of the first non-zero value within row_number</returns>
+
+		/*!
+			\code
+				// TODO example
+			\endcode
+		*/
 		int* col_begin(int row_number) const;
+
+		/// <summary> Returns the address of the element that denotes the end of a 'subarray' within inner_indices </summary>
+		/// <param name="row_number">The desired row number for the CSR such that the address returned is one-past the last value for a 'subarray' within inner_indices</param>
+		/// <returns>The address of the value that represents the column index of the first non-zero value for row_number + 1</returns>
+
+		/*!
+			\code
+				// TODO example
+			\endcode
+		*/
 		int* col_end(int row_number) const;
 	};
 
@@ -1071,7 +1160,26 @@ namespace HF::SpatialStructures {
 		*/
 		void Clear();
 
+		/// <summary> Retrieve n's child nodes - n is a parent node </summary>
+		/// <param name="n">The parent node from which child nodes will be derived</summary>
+		/// <returns>A container of child nodes that form edges that extend from parent node n</returns>
+
+		/*!
+			\code
+				// TODO example
+			\endcode
+		*/
 		std::vector<Node> GetChildren(const Node& n) const;
+
+		/// <summary>Retrieve node parent_id's child nodes</summary>
+		/// <param name="parent_id">The parent node ID from which child nodes will be derived</summary>
+		/// <returns>A container of child nodes that form edges that extend from node parent_id</returns>
+
+		/*!
+			\code
+				// TODO example
+			\endcode
+		*/
 		std::vector<Node> GetChildren(const int parent_id);
 	};
 }

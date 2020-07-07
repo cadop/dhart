@@ -1614,7 +1614,7 @@ namespace CInterfaceTests {
 
 namespace CostAlgorithmsTests {
 	TEST(_CostAlgorithms, CalculateCrossSlope) {
-		Node n0(-5, 2, 1);
+		Node n0(-5, 2, 0);
 		Node n1(1, 2, 3);
 		Node n2(4, 5, 6);
 		Node n3(4, 5, 7);
