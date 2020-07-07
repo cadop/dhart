@@ -74,10 +74,48 @@ namespace HF::SpatialStructures {
 				bool validity = csr.AreValid();	// validity == true, since all pointer fields are non-null
 			\endcode
 		*/
-		inline bool AreValid() {
+		bool AreValid() {
 			return (data && outer_indices && inner_indices);
 		}
+
+		float* data_begin() const;
+		float* data_end() const;
+
+		float* row_begin(int row_number) const;
+		float* row_end(int row_number) const;
 	};
+
+	inline float* CSRPtrs::data_begin() const {
+		return data;
+	}
+
+	inline float* CSRPtrs::data_end() const {
+		return data + nnz;
+	}
+
+	inline float* CSRPtrs::row_begin(int row_number) const {
+		float* begin = nullptr;
+		
+		if (row_number >= 0 && row_number < rows) {
+			begin = data + outer_indices[row_number];
+		}
+
+		return begin;
+	}
+
+	inline float* CSRPtrs::row_end(int row_number) const {
+		float* end = nullptr;
+		const int next_row = row_number + 1;
+
+		if (next_row > 0 && next_row < rows) {
+			end = data + outer_indices[next_row];
+		}
+		else if (next_row > 0 && next_row == rows) {
+			end = data_end();
+		}
+
+		return end;
+	}
 
 	/*! \brief A Graph of nodes connected by edges that supports both integers and HF::SpatialStructures::Node.
 		

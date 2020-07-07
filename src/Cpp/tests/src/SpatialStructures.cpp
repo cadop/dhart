@@ -1614,16 +1614,61 @@ namespace CInterfaceTests {
 
 namespace CostAlgorithmsTests {
 	TEST(_CostAlgorithms, CalculateCrossSlope) {
+		Node n0(1, 1, 2);
+		Node n1(1, 2, 3);
+		Node n2(4, 5, 6);
+		Node n3(4, 5, 7);
+		Node n4(5, 6, 6);
+		Node n5(6, 6, 6);
+		Node n6(3, 1, 2);
+		Node n7(1, 4, 2);
+		Node n8(5, 3, 2);
+
 		Graph g;
-
+		// all edges will have a default score, or distance, of 1.0f
 		
-		
+		// Note that edges must be added in order of appearance.
+		// E.g. you should not add an edge with Node n8 to the graph 
+		// without having added an edge with Node n7 first,
+		// or else the g.next_id field will be off by however many nodes were skipped
+		// in the sequence.
+		// which will be very confusing when it is time to debug.
+		/*
+		g.addEdge(n0, n1);
+		g.addEdge(n0, n2);
+		g.addEdge(n1, n3);
+		g.addEdge(n1, n4);
+		g.addEdge(n2, n4);
+		g.addEdge(n3, n5);
+		g.addEdge(n3, n6);
+		g.addEdge(n4, n5);
+		g.addEdge(n5, n6);
+		g.addEdge(n6, n7);
+		g.addEdge(n5, n7);
+		g.addEdge(n4, n8);	
+		g.addEdge(n5, n8);
+		g.addEdge(n7, n8);
 
-		
-		std::vector<IntEdge> edge_result = CostAlgorithms::CalculateCrossSlope(g);
+		g.Compress();
+		*/
+		CSRPtrs csr = g.GetCSRPointers();
+		// csr.nnz = 14
+		// csr.rows = 9
+		// csr.cols = 9
 
-		for (IntEdge ie : edge_result) {
-			std::cout << ie.child << " has weight " << ie.weight << std::endl;
+		// csr.inner_indices
+		// { 1, 2, 3, 4, 4, 5, 6, 5, 7, 6, 7, 8, 8, 7 }
+
+		if (csr.AreValid()) {
+			for (int i = 0; i < csr.nnz; i++) {
+				std::cout << "child id: " << csr.inner_indices[i] << std::endl;
+			}
+
+			std::vector<IntEdge> edge_result = CostAlgorithms::CalculateCrossSlope(g);
+
+			for (IntEdge ie : edge_result) {
+				std::cout << ie.child << " has weight " << ie.weight << std::endl;
+			}
 		}
 	}
 }

@@ -16,39 +16,19 @@ using HF::SpatialStructures::IntEdge;
 using HF::SpatialStructures::Graph;
 
 std::vector<IntEdge> HF::SpatialStructures::CostAlgorithms::CalculateCrossSlope(Graph& g) {
-    /*
-        Remove these when example is no longer needed
-    */
-    /*
-    CSRPtrs csr;
-
-    csr.nnz = 9;
-    csr.rows = 4;
-    csr.cols = 4;
-
-    //                             0  1  2  3  4  5  6  7  8
-    csr.data = new float[csr.nnz]{ 4, 2, 1, 3, 5, 2, 1, 2, 5 };
-
-    //                                    0  1  2  3  4  5  6  7  8
-    csr.inner_indices = new int[csr.nnz]{ 1, 3, 0, 3, 0, 2, 3, 1, 3 };
-
-    //                                     0  1  2  3
-    csr.outer_indices = new int[csr.rows]{ 0, 2, 4, 7 };
-    */
-    /*
-        End remove.
-    */
+    // All cross slope data will be stored here and returned from this function.
+    std::vector<IntEdge> result;
 
     // Retrieve the graph in the form of a CSR.
     CSRPtrs csr = g.GetCSRPointers();
 
+    if (csr.AreValid() == false) {
+        return result;
+    }
+
     // csr.data[last_index] and csr.inner_indices[last_index]
     // are the final values for those buffers, respectively.
     const int last_index = csr.rows - 1;
-
-    // All cross slope data will be stored here and returned from this function.
-    std::vector<IntEdge> result;
-
     std::cout << "csr.nnz = " << csr.nnz << std::endl;
     std::cout << "csr.rows = " << csr.rows << std::endl;
     std::cout << "csr.cols = " << csr.cols << std::endl;
@@ -233,7 +213,6 @@ std::vector<IntEdge> HF::SpatialStructures::CostAlgorithms::CalculateCrossSlope(
             << std::endl;
     }
 
-    /*
     // The container of IntEdge will be ordered
     // according to the CSR -- all edges will be laid out consecutively.
 
@@ -242,16 +221,6 @@ std::vector<IntEdge> HF::SpatialStructures::CostAlgorithms::CalculateCrossSlope(
     //      IntEdge for parent id 0 end at   result[csr.outer_indices[1]]
     //      IntEdge for parent id 1 begin at result[csr.outer_indices[1]]
     //      IntEdge for parent id 2 end at   result[csr.outer_indices[2]]
-
-    // csr.nnz == result.size()
-    return result;
-    */
-
-    /*
-    delete[] csr.outer_indices;
-    delete[] csr.inner_indices;
-    delete[] csr.data;
-    */
 
 	return result;
 }
