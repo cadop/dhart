@@ -33,7 +33,7 @@ namespace HF::SpatialStructures::CostAlgorithms {
 
 	/// <summary>Calculates cross slope for all edges in Graph g</summary>
 	/// <param name="g">The Graph to calculate cross slopes with</param>
-	/// <returns>A container of IntEdge, ordered by parent node ID</return>
+	/// <returns>A container of IntEdge, ordered by parent node ID</returns>
 
 	/*!
 		\code
@@ -41,6 +41,17 @@ namespace HF::SpatialStructures::CostAlgorithms {
 		\endcode
 	*/
 	std::vector<IntEdge> CalculateCrossSlope(Graph& g);
+
+	/// <summary>Calculates cross slope for all edges in Graph g (utilizes CSR representation)</summary>
+	/// <param name="g">The Graph to calculate cross slopes with</param>
+	/// <returns>A container of IntEdge, ordered by parent node ID</returns>
+
+	/*!
+		\code
+			// TODO example
+		\endcode
+	*/
+	std::vector<IntEdge> CalculateCrossSlopeCSR(Graph& g);
 
 	/// <summary> Obtains a container of Edge that are perpendicular to the vector formed by parent_node and child_node_a</summary>
 	/// <param name="parent_node">The parent node</param>
