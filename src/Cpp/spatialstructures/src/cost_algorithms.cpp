@@ -77,8 +77,8 @@ std::vector<EdgeSet> HF::SpatialStructures::CostAlgorithms::CalculateEnergyExpen
         }
 
         for (Edge e : edge_list) {
-            children.push_back(e.child, score);
-
+            IntEdge ie = { e.child.id, score };
+            children.push_back(ie);
         }
 
         EdgeSet es = { parent_node.id, children };
