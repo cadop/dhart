@@ -51,8 +51,7 @@ std::vector<EdgeSet> HF::SpatialStructures::CostAlgorithms::CalculateEnergyExpen
 
         std::vector<Edge> edge_list = g[parent_node];
         std::vector<IntEdge> children;
-        auto score = 0.0;
-        
+
         for (Edge link_a : edge_list) {
             auto dir = parent_node.directionTo(link_a.child);
             auto dz = link_a.child.z - parent_node.z;
@@ -72,12 +71,11 @@ std::vector<EdgeSet> HF::SpatialStructures::CostAlgorithms::CalculateEnergyExpen
                 * (slope) + 2.5;
 
             assert(e > 0);
-
-            score = e * parent_node.distanceTo(link_a.child);
+            link_a.score = e * parent_node.distanceTo(link_a.child);
         }
 
         for (Edge e : edge_list) {
-            IntEdge ie = { e.child.id, score };
+            IntEdge ie = { e.child.id, e.score };
             children.push_back(ie);
         }
 

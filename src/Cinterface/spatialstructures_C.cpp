@@ -223,6 +223,30 @@ C_INTERFACE CalculateAndStoreCrossSlope(HF::SpatialStructures::Graph* g)
 }
 
 C_INTERFACE CalculateAndStoreEnergyExpenditure(HF::SpatialStructures::Graph* g) {
+	auto edge_set = HF::SpatialStructures::CostAlgorithms::CalculateEnergyExpenditure(*g);
+	auto data = edge_set.data();
+
+	// Retrieve the CSR representation of g.
+	auto csr = g->GetCSRPointers();
+
+	int* col_curr = csr.inner_begin();
+
+	for (int parent_id = 0; parent_id < csr.rows; parent_id++) {
+		float* row_curr = csr.row_begin(parent_id);
+		float* row_end = csr.row_end(parent_id);
+
+		auto intedge = data->children.data();
+
+		while (row_curr < row_end) {
+			float desired_weight = intedge->weight - *row_curr;
+			g->addEdge(parent_id, *col_curr++, desired_weight);
+
+			++row_curr;
+			++intedge;
+		}
+
+		++data;
+	}
 
 
 	return OK;
