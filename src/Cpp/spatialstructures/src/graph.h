@@ -792,10 +792,14 @@ namespace HF::SpatialStructures {
 
 			\remarks
 			This adds a new element to the triplet list so next time Compress is called, 
-			the value is added to the graph.
+			the value is added to the graph. 
+			(Note: if an edge exists between parent_id and child_id,
+			the score value will be added to the existing score value for the edge
+			formed by parent_id and child_id).
 
 			\todo How should this signal that the graph can't have edges added to it? Or how do
 			we add edges to an existing graph quickly without adding to its edge list?
+
 			\code
 				// be sure to #include "graph.h"
 		

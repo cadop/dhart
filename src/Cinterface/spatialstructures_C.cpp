@@ -166,6 +166,58 @@ C_INTERFACE DestroyGraph(Graph* graph_to_destroy)
 
 C_INTERFACE CalculateAndStoreCrossSlope(HF::SpatialStructures::Graph* g)
 {
-	// TODO implementation
+	// cross_slope_edges
+	// is a std::vector<IntEdge>.
+
+	// We will iterate through this container
+	// and add these edges to *g.
+	// Get the underlying buffer for cross_slope_edges as well,
+	// we will iterate over it as a pointer.
+	auto cross_slope_edges = HF::SpatialStructures::CostAlgorithms::CalculateCrossSlopeCSR(*g);
+	auto data = cross_slope_edges.data();
+
+	// Retrieve the CSR representation of g.
+	auto csr = g->GetCSRPointers();
+
+	for (int parent_id = 0; parent_id < csr.nnz; parent_id++) {
+		// We iterate over all parent ids so that when we add these updated
+		// edges to g, they properly match up to the desired child nodes.
+
+		// Mark the addresses of the beginning of a row and end of a row in the CSR.
+		// These denote what child ID addresses belong to the current parent_id.
+		// [row_curr, row_end) are child ID addresses that belong to parent_id.
+		float* row_curr = csr.row_begin(parent_id);
+		float* row_end = csr.row_end(parent_id);
+
+		while (row_curr < row_end) {
+			// When edges are added to the graph,
+			// and an edge already exists between parent_id and child_id,
+			// the existing weight will be added to the parameter weight.
+			//
+			// This is not desired for this particular function --
+			// we want the edge data stored within the cross slope calculation
+			// to be THE edge data for when the graph is updated using
+			// CalculateAndStoreCrossSlope.
+			//
+			// Therefore, what we can do is this --
+			// for the parameter, pass the following:
+			//
+			// data->weight (which is the cross slope weight)
+			// - (*row_curr), which is the current weight of the parent-child pair.
+
+			float desired_weight = data->weight - *row_curr;
+			g->addEdge(parent_id, data->child, desired_weight);
+
+			++row_curr;
+			++data;
+			// The buffer that cross_slope_edges.data() points to
+			// and csr.nnz (edge count) have the same quantity,
+			// so this is safe.
+		}
+	}
+
+	// Make sure to compress the graph after adding edges
+	g->Compress();
+
 	return OK;
 }
