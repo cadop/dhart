@@ -179,7 +179,7 @@ C_INTERFACE CalculateAndStoreCrossSlope(HF::SpatialStructures::Graph* g)
 	// Retrieve the CSR representation of g.
 	auto csr = g->GetCSRPointers();
 
-	for (int parent_id = 0; parent_id < csr.nnz; parent_id++) {
+	for (int parent_id = 0; parent_id < csr.rows; parent_id++) {
 		// We iterate over all parent ids so that when we add these updated
 		// edges to g, they properly match up to the desired child nodes.
 

@@ -122,7 +122,6 @@ std::vector<IntEdge> HF::SpatialStructures::CostAlgorithms::CalculateCrossSlopeC
 
             */
 
-
             // Retrieve all Edge that are perpendicular to the following vector: 
             // parent_node.directionTo(child_node_a)
             std::vector<Edge> perpendicular_edges = GetPerpendicularEdges(parent_node, edges, child_node_a);

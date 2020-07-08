@@ -1767,6 +1767,13 @@ namespace CInterfaceTests {
 
 		g.Compress();
 
+		auto edge_set = g.GetEdges();
+		for (auto e : edge_set) {
+			for (auto c : e.children) {
+				std::cout << "parent " << e.parent << " has child " << c.child << " with weight " << c.weight << std::endl;
+			}
+		}
+
 		CSRPtrs csr = g.GetCSRPointers();
 		// csr.nnz = 14
 		// csr.rows = 9
@@ -1782,7 +1789,7 @@ namespace CInterfaceTests {
 			std::cout << "child id: " << csr.inner_indices[i] << std::endl;
 		}
 
-		auto edge_set = g.GetEdges();
+		edge_set = g.GetEdges();
 		for (auto e : edge_set) {
 			for (auto c : e.children) {
 				std::cout << "parent " << e.parent << " has child " << c.child << " with weight " << c.weight << std::endl;
