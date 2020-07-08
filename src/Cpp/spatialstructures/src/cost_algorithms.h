@@ -18,7 +18,10 @@ namespace HF::SpatialStructures {
 	class Graph;
 }
 
-namespace HF::SpatialStructures::CostAlgorithms {
+namespace HF::SpatialStructures::CostAlgorithms {	
+	float calculate_magnitude(std::array<float, 3> dir_a, std::array<float, 3> dir_b);
+	float calculate_dot_product(std::array<float, 3> dir_a, std::array<float, 3> dir_b);
+	
 	/// <summary> Determines if dir_a and dir_b (vectors) are perpendicular, or not </summary>
 	/// <param name="dir_a">The starting position</param>
 	/// <param name="dir_b">The ending position</param>

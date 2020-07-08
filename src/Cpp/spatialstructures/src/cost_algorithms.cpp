@@ -15,11 +15,16 @@
 using HF::SpatialStructures::IntEdge;
 using HF::SpatialStructures::Graph;
 
+float HF::SpatialStructures::CostAlgorithms::calculate_magnitude(std::array<float, 3> dir_a, std::array<float, 3> dir_b) {
+    return std::sqrtf(std::pow(dir_a[0] - dir_b[0], 2.0) + std::pow(dir_a[1] - dir_b[1], 2.0) + std::pow(dir_a[2] - dir_b[2], 2.0));
+}
+
+float HF::SpatialStructures::CostAlgorithms::calculate_dot_product(std::array<float, 3> dir_a, std::array<float, 3> dir_b) {
+    return (dir_a[0] * dir_b[0]) + (dir_a[1] * dir_b[1]) + (dir_a[2] * dir_b[2]);
+}
+
 bool HF::SpatialStructures::CostAlgorithms::is_perpendicular(std::array<float, 3> dir_a, std::array<float, 3> dir_b) {
-    float dot_product =
-        ((dir_a[0] * dir_b[0])
-            + (dir_a[1] * dir_b[1])
-            + (dir_a[2] * dir_b[2]));
+    float dot_product = calculate_dot_product(dir_a, dir_b);
 
     // Mathematically,
     // two vectors are perpendicular if their dot product is
@@ -102,6 +107,22 @@ std::vector<IntEdge> HF::SpatialStructures::CostAlgorithms::CalculateCrossSlopeC
             std::cout << "====== Comparing with other edges ======"
                 << std::endl;
 
+            /*
+                Here -- we should assess the step_type field for edge_a.
+
+                /// <summary> Describes the type of step an edge connects to. </summary>
+                enum STEP {
+                    NOT_CONNECTED = 0, ///< No connection between parent and child.
+                    NONE = 1,		 ///< Parent and child are on the same plane and no step is required.
+                    UP = 2,			///< A step up is required to get from parent to child.
+                    DOWN = 3,		///< A step down is required to get from parent to child.
+                    OVER = 4		///< A step over something is required to get from parent to child.
+                };
+
+
+            */
+
+
             // Retrieve all Edge that are perpendicular to the following vector: 
             // parent_node.directionTo(child_node_a)
             std::vector<Edge> perpendicular_edges = GetPerpendicularEdges(parent_node, edges, child_node_a);
@@ -110,9 +131,27 @@ std::vector<IntEdge> HF::SpatialStructures::CostAlgorithms::CalculateCrossSlopeC
                 << std::endl;
 
             float weight = 0.0;
+            float a_x = 0.0;
+            float b_x = 0.0;
+            float c_x = 0.0;
             float a_z = 0.0;
             float b_z = 0.0;
             float c_z = 0.0;
+
+            float angle_radians = 0.0;
+
+            /*
+                The cant of a railway track or camber of a road 
+                (also referred to as superelevation, cross slope or cross fall) 
+                is the rate of change in elevation (height) between the two rails or edges.
+
+                This is normally greater where the railway or road is curved; 
+                raising the outer rail or the outer edge of the road providing a banked turn, 
+                thus allowing vehicles to maneuver through the curve at higher speeds 
+                than would otherwise be possible if the surface is flat or level.
+            
+                https://en.wikipedia.org/wiki/Cant_(road/rail)#Off-camber_corner
+            */
 
             switch (perpendicular_edges.size()) {
             case 0:
@@ -123,17 +162,47 @@ std::vector<IntEdge> HF::SpatialStructures::CostAlgorithms::CalculateCrossSlopeC
                 weight = csr.data[i];
                 break;
             case 1:
+                
                 // One edge formed by node parent_node and one other child_node by parent_node
                 // was found to be perpendicular to the edge formed by
                 // node parent_node and node child_node_a.
+                a_x = child_node_a.x;
+                b_x = perpendicular_edges[0].child.x;
 
                 a_z = child_node_a.z;
-
-                // z value of other child_node
                 b_z = perpendicular_edges[0].child.z;
 
                 // add the existing weight value to the delta of the z values
-                weight = std::abs(a_z - b_z) + perpendicular_edges[0].score;
+                //weight = std::abs(a_z - b_z) + perpendicular_edges[0].score;
+
+                
+                weight = (a_z - b_z) / (a_x - b_x);
+                angle_radians = std::atan(weight);
+                
+
+                /*
+                    The vector formed by parent_node and child_node_a
+                    was found to have one perpendicular edge,
+                    formed by parent_node and perpendicular_edges[0].child.
+
+                    We therefore want to find the angle of the following vectors:
+                        - child_node_a to parent_node
+                        - child_node_a to perpendicular_edges[0].child
+                
+                    This ratio will yield the cosine of the cross slope angle.
+                */
+                
+                /*
+                auto vector_a = child_node_a.directionTo(parent_node);
+                auto vector_b = child_node_a.directionTo(perpendicular_edges[0].child);
+
+                // angle formed by vector_a and vector_b
+                float adjacent = calculate_dot_product(vector_a, vector_b);
+                float hypotenuse = calculate_magnitude(vector_a) * calculate_magnitude(vector_b);
+
+                weight = adjacent / hypotenuse;
+                angle_radians = std::acos(weight);
+                */
                 break;
             case 2:
                 // Two edges -- each formed by node parent_node and two separate
@@ -142,14 +211,28 @@ std::vector<IntEdge> HF::SpatialStructures::CostAlgorithms::CalculateCrossSlopeC
 
                 a_z = child_node_a.z;
 
-                // z value of the first other child_node
-                b_z = perpendicular_edges[0].child.z;
+                b_x = perpendicular_edges[0].child.x;
+                c_x = perpendicular_edges[1].child.x;
 
-                // z value of the second other child_node
+                b_z = perpendicular_edges[0].child.z;
                 c_z = perpendicular_edges[1].child.z;
 
                 // add the existing weight value to the delta of the z values
-                weight = std::abs(b_z - c_z) + perpendicular_edges[0].score;
+                //weight = std::abs(b_z - c_z) + perpendicular_edges[0].score;
+                
+                /*
+                    The vector formed by parent_node and child_node_a
+                    was found to have two perpendicular edges,
+                    each formed by parent_node and:
+                        - perpendicular_edges[0].child
+                        - perpendicular_edges[1].child
+
+                    We therefore want to find the angle of the following vectors:
+                        - perpendicular_edges[1] to perpendicular_edges[0]
+                */
+
+                weight = (b_z - c_z) / (b_x - c_x);
+                angle_radians = std::atan(weight);
                 break;
             }
 
@@ -191,6 +274,21 @@ std::vector<IntEdge> HF::SpatialStructures::CostAlgorithms::CalculateCrossSlope(
             std::cout << "====== Comparing with other edges ======"
                 << std::endl; 
 
+            /*
+                Here -- we should assess the step_type field for edge_a.
+
+                /// <summary> Describes the type of step an edge connects to. </summary>
+                enum STEP {
+                    NOT_CONNECTED = 0, ///< No connection between parent and child.
+                    NONE = 1,		 ///< Parent and child are on the same plane and no step is required.
+                    UP = 2,			///< A step up is required to get from parent to child.
+                    DOWN = 3,		///< A step down is required to get from parent to child.
+                    OVER = 4		///< A step over something is required to get from parent to child.
+                };
+
+
+            */
+
             // We must have a container to store all perpendicular edges found.
             // This container will have all edges that are perpendicular to edge_a --
             // or rather, the vector formed by parent_node and child_node_a.
@@ -225,6 +323,13 @@ std::vector<IntEdge> HF::SpatialStructures::CostAlgorithms::CalculateCrossSlope(
 
                 // add the existing weight value to the delta of the z values
                 weight = std::abs(a_z - b_z) + perpendicular_edges[0].score;
+
+
+                auto vector_a = child_node_a.directionTo(parent_node);
+                auto vector_b = child_node_a.directionTo(perpendicular_edges[0].child);
+
+                // angle formed by vector_a and vector_b
+
                 break;
             case 2:
                 // Two edges -- each formed by node parent_node and two separate
@@ -278,6 +383,21 @@ std::vector<HF::SpatialStructures::Edge> HF::SpatialStructures::CostAlgorithms::
             std::cout << " *** SKIPPED ***" << std::endl;
         }
         else {
+            /*
+                Here -- we should assess the step_type field for edge_b.
+
+                /// <summary> Describes the type of step an edge connects to. </summary>
+                enum STEP {
+                    NOT_CONNECTED = 0, ///< No connection between parent and child.
+                    NONE = 1,		 ///< Parent and child are on the same plane and no step is required.
+                    UP = 2,			///< A step up is required to get from parent to child.
+                    DOWN = 3,		///< A step down is required to get from parent to child.
+                    OVER = 4		///< A step over something is required to get from parent to child.
+                };
+
+                
+            */
+
             auto vector_a = parent_node.directionTo(child_node_a);
             auto vector_b = parent_node.directionTo(child_node_b);
 
