@@ -221,3 +221,9 @@ C_INTERFACE CalculateAndStoreCrossSlope(HF::SpatialStructures::Graph* g)
 
 	return OK;
 }
+
+C_INTERFACE CalculateAndStoreEnergyExpenditure(HF::SpatialStructures::Graph* g) {
+
+
+	return OK;
+}

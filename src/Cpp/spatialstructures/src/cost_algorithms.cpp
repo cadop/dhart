@@ -6,14 +6,88 @@
 ///	\date		03 Jul 2020
 ///
 
+#define _USE_MATH_DEFINES
+#include <cmath>
+#include <algorithm>
+
 #include "cost_algorithms.h"
 #include "graph.h"
 #include "Constants.h"
 
 #include <iostream>
 
+using HF::SpatialStructures::Node;
 using HF::SpatialStructures::IntEdge;
 using HF::SpatialStructures::Graph;
+using HF::SpatialStructures::EdgeSet;
+
+
+
+double HF::SpatialStructures::CostAlgorithms::to_radians(double degrees) {
+    return degrees * (M_PI / 180);
+}
+
+double HF::SpatialStructures::CostAlgorithms::to_degrees(double radians) {
+    return radians * (180 / M_PI);
+}
+
+std::vector<EdgeSet> HF::SpatialStructures::CostAlgorithms::CalculateEnergyExpenditure(Graph& g) {
+    // Energy expenditure data will be stored here and returned from this function.
+    std::vector<EdgeSet> edge_set;
+
+    CSRPtrs csr = g.GetCSRPointers();
+
+    const int last_index = csr.rows - 1;
+
+    for (int parent_id = 0; parent_id < csr.rows; parent_id++) {
+        bool at_last_parent = parent_id == last_index;
+
+        int curr_row_index = csr.outer_indices[parent_id];
+        int next_row_index = csr.outer_indices[parent_id + 1];
+
+        const int row_end_index = at_last_parent ? csr.nnz : next_row_index;
+
+        Node parent_node = g.NodeFromID(parent_id);
+
+        std::vector<Edge> edge_list = g[parent_node];
+        std::vector<IntEdge> children;
+        auto score = 0.0;
+        
+        for (Edge link_a : edge_list) {
+            auto dir = parent_node.directionTo(link_a.child);
+            auto dz = link_a.child.z - parent_node.z;
+            auto dy = link_a.child.y - parent_node.y;
+            auto dx = link_a.child.x - parent_node.x;
+
+            // angle formed by parent_node and link_a.child
+            auto angle = std::atan(std::sqrtf(std::pow(dz / dx, 2) + std::pow(dz / dy, 2)));
+
+            auto slope = std::clamp(std::tanf(angle), -0.4f, -0.4f);
+
+            auto e = 280.5 
+                * (std::pow(slope, 5)) - 58.7 
+                * (std::pow(slope, 4)) - 76.8 
+                * (std::pow(slope, 3)) + 51.9 
+                * (std::pow(slope, 2)) + 19.6 
+                * (slope) + 2.5;
+
+            assert(e > 0);
+
+            score = e * parent_node.distanceTo(link_a.child);
+        }
+
+        for (Edge e : edge_list) {
+            children.push_back(e.child, score);
+
+        }
+
+        EdgeSet es = { parent_node.id, children };
+        edge_set.push_back(es);
+    }
+
+    return edge_set;
+}
+
 
 float HF::SpatialStructures::CostAlgorithms::calculate_magnitude(std::array<float, 3> dir_a, std::array<float, 3> dir_b) {
     return std::sqrtf(std::pow(dir_a[0] - dir_b[0], 2.0) + std::pow(dir_a[1] - dir_b[1], 2.0) + std::pow(dir_a[2] - dir_b[2], 2.0));

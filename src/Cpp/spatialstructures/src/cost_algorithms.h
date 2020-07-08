@@ -14,11 +14,17 @@
 namespace HF::SpatialStructures {
 	struct Node;
 	struct Edge;
+	struct EdgeSet;
 	struct IntEdge;
 	class Graph;
 }
 
-namespace HF::SpatialStructures::CostAlgorithms {	
+namespace HF::SpatialStructures::CostAlgorithms {
+	double to_radians(double degrees);
+	double to_degrees(double radians);
+
+	std::vector<EdgeSet> CalculateEnergyExpenditure(Graph& g);
+
 	float calculate_magnitude(std::array<float, 3> dir_a, std::array<float, 3> dir_b);
 	float calculate_dot_product(std::array<float, 3> dir_a, std::array<float, 3> dir_b);
 	

@@ -559,4 +559,6 @@ C_INTERFACE DestroyGraph(
 */
 C_INTERFACE CalculateAndStoreCrossSlope(HF::SpatialStructures::Graph* g);
 
+C_INTERFACE CalculateAndStoreEnergyExpenditure(HF::SpatialStructures::Graph* g);
+
 /**@}*/

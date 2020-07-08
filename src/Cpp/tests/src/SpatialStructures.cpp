@@ -1726,6 +1726,10 @@ namespace CostAlgorithmsTests {
 			std::cout << ie.child << " has weight " << ie.weight << std::endl;
 		}
 	}
+
+	TEST(_CostAlgorithms, CalculateEnergyExpenditure) {
+
+	}
 }
 
 namespace CInterfaceTests {
@@ -1795,6 +1799,9 @@ namespace CInterfaceTests {
 				std::cout << "parent " << e.parent << " has child " << c.child << " with weight " << c.weight << std::endl;
 			}
 		}
+	}
+
+	TEST(_CostAlgorithmsCInterface, CalculateAndStoreEnergyExpenditure) {
 
 	}
 }
