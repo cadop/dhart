@@ -61,7 +61,7 @@ std::vector<IntEdge> HF::SpatialStructures::CostAlgorithms::CalculateCrossSlope(
             // We must have a container to store all perpendicular edges found.
             // This container will have all edges that are perpendicular to edge_a --
             // or rather, the vector formed by parent_node and child_node_a.
-            std::vector<Edge> perpendicular_edges = GetPerpendicularEdges(parent_node, g[parent_node], child_node_a);
+            std::vector<Edge> perpendicular_edges = GetPerpendicularEdges(parent_node, edges, child_node_a);
 
             std::cout << "====== End of comparing with other edges ======"
                 << std::endl;
