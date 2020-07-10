@@ -338,7 +338,7 @@ C_INTERFACE DeleteScoreArray(char*** scores_to_delete, int num_char_arrays) {
 		char** end = (*scores_to_delete) + num_char_arrays;
 
 		while (curr < end) {
-			char** victim = *curr;
+			char** victim = curr;
 			++curr;
 
 			delete* victim;
