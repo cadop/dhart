@@ -482,8 +482,7 @@ namespace HF::SpatialStructures {
 		
 		if (it == attr_map.end()) {
 			// if the attribute does not already exist...
-
-			// update iterator such that it matches up the new attribute_name : CSR bucket added
+			return;
 		}
 
 		// Get the CSR representation of this graph for attribute
@@ -533,8 +532,39 @@ namespace HF::SpatialStructures {
 	std::vector<std::string> Graph::GetNodeAttributes(std::string attribute) const {
 		std::vector<std::string> attributes;
 
-		for (auto& buckets : attr_map) {
-			attributes.push_back(buckets.first);
+		/* // requires #include <algorithm>, but not working?
+		std::string lower_cased =
+			std::transform(attribute.begin(), attribute.end(),
+				[](unsigned char c) { return std::tolower(c); }
+		);
+		*/
+		std::string lower_cased = attribute;
+
+		// Retrieve an iterator to the mapping (bucket)
+		// that gives us attr_map[attribute] == CSR
+		auto it = attr_map.find(lower_cased);
+
+
+		if (it == attr_map.end()) {
+			// if the attribute does not already exist...
+			return attributes;
+		}
+
+		// Get the CSR representation of this graph for attribute
+		Eigen::SparseMatrix<float, 1> it_csr = it->second;
+
+		CSRPtrs csr {
+			static_cast<int>(it_csr.nonZeros()),
+			static_cast<int>(it_csr.rows()),
+			static_cast<int>(it_csr.cols()),
+
+			it_csr.valuePtr(),
+			it_csr.outerIndexPtr(),
+			it_csr.innerIndexPtr()
+		};
+
+		for (int i = 0; i < csr.nnz; i++) {
+			attributes.push_back(std::to_string(csr.data[i]));
 		}
 
 		return attributes;
@@ -544,9 +574,33 @@ namespace HF::SpatialStructures {
 		// Fix later
 		std::string name_lower_cased = name;
 		
-		if (attr_map.find(name_lower_cased) != attr_map.end()) {
+		auto attr_it = attr_map.find(name_lower_cased);
+		if (attr_it != attr_map.end()) {
 			// if attr_map has (named_lower_cased : CSR), remove it
-			attr_map.erase(name);
+			
+			// Get the CSR representation of this graph for attribute
+			Eigen::SparseMatrix<float, 1>& it_csr = attr_it->second;
+
+			CSRPtrs csr {
+				static_cast<int>(it_csr.nonZeros()),
+				static_cast<int>(it_csr.rows()),
+				static_cast<int>(it_csr.cols()),
+
+				it_csr.valuePtr(),
+				it_csr.outerIndexPtr(),
+				it_csr.innerIndexPtr()
+			};
+
+			// Clear attribute data from csr.data.
+			std::memset(static_cast<void *>(csr.data), '\0', csr.nnz);
+
+			// What remains from ClearNodeAttributes are:
+			// name, or attribute name : CSR
+			//
+			// CSR has all of its edge data cleared out.
+			// The outer_indices (row offsets)
+			// and inner_indices (column indices for data)
+			// remain intact.
 		}
 	}
 }

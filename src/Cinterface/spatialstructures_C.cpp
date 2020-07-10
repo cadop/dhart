@@ -252,26 +252,69 @@ C_INTERFACE CalculateAndStoreEnergyExpenditure(HF::SpatialStructures::Graph* g) 
 	return OK;
 }
 
-C_INTERFACE AddNodeAttributes(HF::SpatialStructures::Graph* g, const int* ids, const char* attribute, const char** scores, int num_nodes) {
+C_INTERFACE AddNodeAttributes(HF::SpatialStructures::Graph* g, const int* ids, 
+							 const char* attribute, const char** scores, int num_nodes) {
+	
+	std::vector<int> v_ids(ids, ids + num_nodes);
+	std::vector<std::string> v_scores(scores, scores + num_nodes);
 
+	g->AddNodeAttributes(v_ids, std::string(attribute), v_scores);
 
 	return OK;
 }
 
-C_INTERFACE GetNodeAttributes(const HF::SpatialStructures::Graph* g, const char* attribute, char*** out_scores, int* out_score_size) {
+C_INTERFACE GetNodeAttributes(const HF::SpatialStructures::Graph* g, const char* attribute, 
+							  char*** out_scores, int* out_score_size) {
 
+	std::vector<std::string> v_attrs = g->GetNodeAttributes(std::string(attribute));
+
+	// Caller creates a char **scores variable.
+	// char **scores = new char*[max_size];
+	// They will do this: GetNodeAttributes(&g, "attr name", &scores, &score_size);
+	//
+	// In this function:
+	// deref out_scores, like this: (*out_scores)
+	// each (*out_scores)[i] will be newly allocated memory.
+	// (*out_scores)[i] = new char[std::strlen(attr_str_size)];
+	// std::strncpy((*out_scores)[i], src_str, attr_str_size);
+	// (*out_scores)[i][attr_str_size - 1] = '\0';
+
+	int i = 0;
+	for (auto v_str : v_attrs) {
+		const char* cstr = v_str.c_str();
+		size_t attr_str_size = std::strlen(cstr);
+
+		(*out_scores)[i] = new char[attr_str_size];
+
+		std::strncpy((*out_scores)[i], cstr, attr_str_size);
+		(*out_scores)[attr_str_size - 1] = '\0';
+
+		++i;
+	}
+
+
+	* out_score_size = v_attrs.size();
 
 	return OK;
 }
 
 C_INTERFACE DeleteScoreArray(char*** scores_to_delete, int num_char_arrays) {
+	if (scores_to_delete) {
+		char** curr = (*scores_to_delete);
+		char** end = (*scores_to_delete) + num_char_arrays;
 
+		while (curr < end) {
+			delete* curr;
+			++curr;
+		}
+
+	}
 
 	return OK;
 }
 
 C_INTERFACE ClearAttributeType(HF::SpatialStructures::Graph* g, const char* s) {
-
+	g->ClearNodeAttributes(std::string(s));
 
 	return OK;
 }
