@@ -465,8 +465,11 @@ namespace HF::SpatialStructures {
 		auto node_attr_map_it = node_attr_map.find(lower_cased);
 
 		if (node_attr_map_it == node_attr_map.end()) {
-			// if the attribute does not exist...
-			return;
+			// If the attribute type does not exist...create it.
+			node_attr_map[lower_cased] = NodeAttributeValueMap();
+
+			// Update this iterator so it can be used in the next code block
+			node_attr_map_it = node_attr_map.find(lower_cased);
 		}
 
 		// We now have the NodeAttributeValueMap for the desired attribute.
@@ -479,21 +482,37 @@ namespace HF::SpatialStructures {
 		auto node_attr_value_map_it = node_attr_value_map.find(id);
 		
 		if (node_attr_value_map_it == node_attr_value_map.end()) {
-			// If the node id provided does not exist...
-			return;
+			// If the node id provided does not exist in the value map...add it.
+			// Do not assign anything here yet, an empty string will suffice.
+			node_attr_value_map[id] = "";
+
+			// Update this iterator so it can be used in the next code block
+			node_attr_value_map_it = node_attr_value_map.find(id);
 		}
 
+		// Should be the same as the id parameter passed in.
 		const int found_id = node_attr_value_map_it->first;
+
+		// Will be used to assess whether it is floating point, or not
 		std::string found_attr_value = node_attr_value_map_it->second;
+
+		// Let's determine the data type of score:
+		bool score_is_floating_pt = HF::SpatialStructures::CostAlgorithms::is_floating_type(score);
+
+		// Let's determine the data type of found_attr_value:
+		bool attr_is_floating_pt = HF::SpatialStructures::CostAlgorithms::is_floating_type(found_attr_value);
 
 		/*
 			Need to determine if found_attr_value is
 				- a string
 				- a floating point value
+
+			and if the data type for score matches that of found_attr_value
 		*/
-		if (HF::SpatialStructures::CostAlgorithms::is_floating_type(found_attr_value)) {
-			// check parameter score to see if it matches...
-			if (HF::SpatialStructures::CostAlgorithms::is_floating_type(score)) {
+		if (attr_is_floating_pt) {
+			// if the current attribute value is floating point...
+			if (score_is_floating_pt) {
+				// Ok - data type matched.
 				node_attr_value_map_it->second = score;
 			}
 			else {
@@ -501,10 +520,12 @@ namespace HF::SpatialStructures {
 			}
 		}
 		else {
-			if (HF::SpatialStructures::CostAlgorithms::is_floating_type(score)) {
+			// if the current attribute value is not floating point...
+			if (score_is_floating_pt) {
 				// error?
 			}
 			else {
+				// Ok - data type matched
 				node_attr_value_map_it->second = score;
 			}
 		}
@@ -520,10 +541,9 @@ namespace HF::SpatialStructures {
 		auto scores_iterator = scores.begin();
 
 		for (int node_id : id) {
-			// We have to check that each node_id in id exists before attempting to add
-			// attribute data -- but just because one parent_id does not exist does not mean
-			// we need to stop the entire iteration (meaning we can still attempt to add
-			// attribute data to the other node_id in id)
+			// We can call AddNodeAttribute for each node_id in id.
+			// If the attribute type name does not exist,
+			// it will be created with the first invocation of AddNodeAttribute.
 			AddNodeAttribute(node_id, name, *(scores_iterator++));
 		}
 	}

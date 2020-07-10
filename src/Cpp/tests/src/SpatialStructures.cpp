@@ -1277,14 +1277,7 @@ namespace GraphExampleTests {
 	}
 
 	TEST(_graph, AddNodeAttribute) {
-		std::string value = "3.143";
 
-		    if (HF::SpatialStructures::CostAlgorithms::is_floating_type(value)) {
-			std::cout << "is floating point" << std::endl;
-		}
-		else {
-			std::cout << "not floating point" << std::endl;
-		}
 	}
 
 	TEST(_graph, AddNodeAttributes) {
