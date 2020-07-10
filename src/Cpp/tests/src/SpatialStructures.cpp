@@ -1275,6 +1275,22 @@ namespace GraphExampleTests {
 	TEST(_graph, GenerateEnergy) {
 		// TODO example - code commented out in graph.cpp
 	}
+
+	TEST(_graph, AddNodeAttribute) {
+
+	}
+
+	TEST(_graph, AddNodeAttributes) {
+
+	}
+
+	TEST(_graph, GetNodeAttributes) {
+
+	}
+
+	TEST(_graph, ClearNodeAttributes) {
+
+	}
 }
 
 ///
@@ -1292,6 +1308,22 @@ namespace ConstantsExampleTests {
 }
 
 namespace CInterfaceTests {
+	TEST(_graphCInterface, AddNodeAttributes) {
+
+	}
+
+	TEST(_graphCInterface, GetNodeAttributes) {
+
+	}
+
+	TEST(_graphCInterface, DeleteScoreArray) {
+
+	}
+
+	TEST(_graphCInterface, ClearAttributeType) {
+
+	}
+
 	TEST(_NodeCInterface, GetAllNodesFromGraph) {
 		// Requires #include "graph.h"
 
