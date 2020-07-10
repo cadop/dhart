@@ -344,7 +344,7 @@ namespace HF::SpatialStructures {
 		{
 			//Add this node to our dictionary/ordered_node list
 			getOrAssignID(Nodes[row_num]);
-
+			
 			// Get the row out of the edges array
 			const auto & row = edges[row_num];
 			for (int i = 0; i < row.size(); i++) {
@@ -362,6 +362,21 @@ namespace HF::SpatialStructures {
 		edge_matrix.makeCompressed();
 		//assert(edge_matrix.nonZeros() > 0);
 		needs_compression = false;
+
+		// Assign the first node attribute in attr_map, "Default",
+		// to be the current edge matrix (CSR).
+		attr_map["default"] = edge_matrix;
+		
+		/*
+			Need to initialize attr_map with all of the mappings
+			that are possible for this graph.
+
+			A unique CSR will be generated for these attributes.
+			Likely requires more work within issue 24 -
+			Multiple Costs for the Graph
+		*/
+		attr_map["cross slope"] = edge_matrix;
+		attr_map["energy expenditure"] = edge_matrix;
 	}
 
 	bool Graph::HasEdge(const std::array<float, 3>& parent, const std::array<float, 3>& child, bool undirected) const {
@@ -441,23 +456,98 @@ namespace HF::SpatialStructures {
 	}
 
 	void Graph::AddNodeAttribute(int id, std::string attribute, std::string score) {
+		// id is assumed to be the id of a parent node.
+
+		const auto node = NodeFromID(id);
+		bool node_not_found = hasKey(node);
+
+		if (node_not_found) {
+			// Check to see if a node with id exists in the graph.
+			// If not, return.
+			return;
+		}
+
+		/* // requires #include <algorithm>, but not working?
+		std::string lower_cased =
+			std::transform(attribute.begin(), attribute.end(), 
+				[](unsigned char c) { return std::tolower(c); }
+		);
+		*/
+		std::string lower_cased = attribute;
+
+		// Retrieve an iterator to the mapping (bucket)
+		// that gives us attr_map[attribute] == CSR
+		auto it = attr_map.find(lower_cased);
+
+		
+		if (it == attr_map.end()) {
+			// if the attribute does not already exist...
+
+			// update iterator such that it matches up the new attribute_name : CSR bucket added
+		}
+
+		// Get the CSR representation of this graph for attribute
+		Eigen::SparseMatrix<float, 1>& it_csr = it->second;
+		
+		CSRPtrs csr {
+			static_cast<int>(it_csr.nonZeros()),
+			static_cast<int>(it_csr.rows()),
+			static_cast<int>(it_csr.cols()),
+
+			it_csr.valuePtr(),
+			it_csr.outerIndexPtr(),
+			it_csr.innerIndexPtr()
+		};
+
+		// At this point here, we have found the node and attribute type we are looking for.
+		int child_id = csr.inner_indices[csr.outer_indices[id]];
+		float* edge_data_addr = csr.data + csr.outer_indices[id];
+
+		// Since score is a std::string, we parse it to a float value
+		// so that it may be assigned to *edge_data_addr.
+		*edge_data_addr = std::atof(score.c_str());
+
 
 	}
 
 	void Graph::AddNodeAttributes(std::vector<int> id, std::string name, std::vector<std::string> scores) {
+		// all id in id are assumed to be ids of parent nodes.
+		
+		// If size of id container and size of scores container are not in alignment,
+		// we return.
+		if (id.size() != scores.size()) {
+			return;
+		}
 
+		auto scores_iterator = scores.begin();
+
+		for (int parent_id : id) {
+			// We have to check that each parent_id in id exists before attempting to add
+			// attribute data -- but just because one parent_id does not exist does not mean
+			// we need to stop the entire iteration (meaning we can still attempt to add
+			// attribute data to the other parent_id in id)
+			AddNodeAttribute(parent_id, name, *(scores_iterator++));
+		}
 	}
 
 	std::vector<std::string> Graph::GetNodeAttributes(std::string attribute) const {
 		std::vector<std::string> attributes;
 
-
+		for (auto& buckets : attr_map) {
+			attributes.push_back(buckets.first);
+		}
 
 		return attributes;
 	}
 
 	void Graph::ClearNodeAttributes(std::string name) {
-
+		// Fix later
+		std::string name_lower_cased = name;
+		
+		if (attr_map.find(name_lower_cased) != attr_map.end()) {
+			// if attr_map has (named_lower_cased : CSR), remove it
+			attr_map.erase(name);
+		}
 	}
 }
 

@@ -266,6 +266,8 @@ namespace HF::SpatialStructures {
 
 	*/
 	class Graph {
+		using CSR = Eigen::SparseMatrix<float, 1>;
+
 	private:
 		std::vector<Node> ordered_nodes;				///< A list of nodes contained by the graph.
 		std::vector<int> id_to_nodes;					///< Maps ids to indexes in ordered_nodes.
@@ -274,6 +276,8 @@ namespace HF::SpatialStructures {
 		int next_id = 0;								///< The id for the next unique node.
 		std::vector<Eigen::Triplet<float>> triplets;	///< Edges to be converted to a CSR when Graph::Compress() is called.
 		bool needs_compression = true;					///< If true, the CSR is inaccurate and requires compression.
+
+		robin_hood::unordered_map<std::string, CSR> attr_map; ///< Node attribute name : CSR graph representation
 
 		/// <summary>
 		/// Get the unique ID for this x, y, z position, assigning it an new one if it doesn't
