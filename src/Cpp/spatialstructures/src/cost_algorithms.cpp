@@ -21,7 +21,11 @@ using HF::SpatialStructures::IntEdge;
 using HF::SpatialStructures::Graph;
 using HF::SpatialStructures::EdgeSet;
 
-
+bool HF::SpatialStructures::CostAlgorithms::is_floating_type(std::string value) {
+    char* ptr = nullptr;
+    std::strtof(value.c_str(), &ptr);
+    return *ptr == '\0';
+}
 
 double HF::SpatialStructures::CostAlgorithms::to_radians(double degrees) {
     return degrees * (M_PI / 180);

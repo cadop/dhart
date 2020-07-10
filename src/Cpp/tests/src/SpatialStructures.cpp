@@ -1277,7 +1277,14 @@ namespace GraphExampleTests {
 	}
 
 	TEST(_graph, AddNodeAttribute) {
+		std::string value = "3.143";
 
+		    if (HF::SpatialStructures::CostAlgorithms::is_floating_type(value)) {
+			std::cout << "is floating point" << std::endl;
+		}
+		else {
+			std::cout << "not floating point" << std::endl;
+		}
 	}
 
 	TEST(_graph, AddNodeAttributes) {
@@ -1706,6 +1713,7 @@ namespace CostAlgorithmsTests {
 		}
 	}
 
+	/*
 	TEST(_CostAlgorithms, CalculateCrossSlopeCSR) {
 		using HF::Geometry::LoadMeshObjects;
 		using HF::RayTracer::EmbreeRayTracer;
@@ -1721,7 +1729,7 @@ namespace CostAlgorithmsTests {
 		GraphGenerator graph_generator = GraphGenerator(ray_tracer, 0);
 
 
-		/*
+		
 			Start point:
 
 			x = -22.4280376
@@ -1736,7 +1744,7 @@ namespace CostAlgorithmsTests {
 			Downslope = 1
 			max connections out = 2
 			max nodes = 50
-		*/
+		
 
 		std::array<float, 3> starting_position = { -22.4280376, -12.856843,  5.4826779 };
 		std::array<float, 3> spacing = { 10, 10, 70 };
@@ -1756,10 +1764,10 @@ namespace CostAlgorithmsTests {
 
 		//g.Compress();
 
-		/*
+		
 		std::vector<IntEdge> int_edge = HF::SpatialStructures::CostAlgorithms::CalculateCrossSlopeCSR(g);
 		auto data = int_edge.data();
-		*/
+	
 
 		CSRPtrs csr = g.GetCSRPointers();
 		auto data = csr.data;
@@ -1782,7 +1790,9 @@ namespace CostAlgorithmsTests {
 		}
 		
 	}
+	*/
 
+	/*
 	TEST(_CostAlgorithms, CalculateEnergyExpenditure) {
 
 		using HF::Geometry::LoadMeshObjects;
@@ -1802,7 +1812,7 @@ namespace CostAlgorithmsTests {
 		GraphGenerator graph_generator = GraphGenerator(ray_tracer, 0);
 	
 		
-		/*
+		
 			Start point:
 
 			x = -22.4280376
@@ -1817,8 +1827,7 @@ namespace CostAlgorithmsTests {
 			Downslope = 1
 			max connections out = 2
 			max nodes = 50
-		*/
-
+		
 		std::array<float, 3> starting_position = { -22.4280376, -12.856843,  5.4826779 };
 		std::array<float, 3> spacing = { 10, 10, 70 };
 		auto upstep = 10;
@@ -1841,7 +1850,7 @@ namespace CostAlgorithmsTests {
 		std::vector<EdgeSet> edge_set = g.GetEdges();
 		//auto edge_set = g.GetEdges();
 
-		/*
+		//
 		CSRPtrs csr = g.GetCSRPointers();
 		int* col = csr.inner_begin();
 		for (int parent_id = 0; parent_id < csr.rows; parent_id++) {
@@ -1855,7 +1864,7 @@ namespace CostAlgorithmsTests {
 				++row_curr;
 			}
 		}
-		*/
+		//
 		
 		
 		auto edge_num = 0;
@@ -1867,7 +1876,9 @@ namespace CostAlgorithmsTests {
 		}
 	
 	}
+*/
 }
+
 
 namespace CInterfaceTests {
 	TEST(_CostAlgorithmsCInterface, CalculateAndStoreCrossSlope) {
@@ -1991,8 +2002,8 @@ namespace CInterfaceTests {
 		// csr.inner_indices
 		// { 1, 2, 3, 4, 4, 5, 6, 5, 7, 6, 7, 8, 8, 7 }
 
-		std::cout << "C interface test (EnergyExpenditure): " << std::endl;
-		CalculateAndStoreEnergyExpenditure(&g);
+		//std::cout << "C interface test (EnergyExpenditure): " << std::endl;
+		//CalculateAndStoreEnergyExpenditure(&g);
 
 		for (int i = 0; i < csr.nnz; i++) {
 			std::cout << "child id: " << csr.inner_indices[i] << std::endl;

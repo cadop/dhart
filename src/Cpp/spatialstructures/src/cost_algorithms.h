@@ -10,6 +10,7 @@
 #define COST_ALGORITHMS_H
 
 #include <vector>
+#include <string>
 
 namespace HF::SpatialStructures {
 	struct Node;
@@ -20,6 +21,8 @@ namespace HF::SpatialStructures {
 }
 
 namespace HF::SpatialStructures::CostAlgorithms {
+	bool is_floating_type(std::string value);
+
 	double to_radians(double degrees);
 	double to_degrees(double radians);
 

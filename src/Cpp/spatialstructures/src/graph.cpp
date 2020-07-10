@@ -15,6 +15,8 @@
 #include <Constants.h>
 #include <assert.h>
 
+#include "cost_algorithms.h"
+
 using namespace Eigen;
 using std::vector;
 
@@ -362,21 +364,6 @@ namespace HF::SpatialStructures {
 		edge_matrix.makeCompressed();
 		//assert(edge_matrix.nonZeros() > 0);
 		needs_compression = false;
-
-		// Assign the first node attribute in attr_map, "Default",
-		// to be the current edge matrix (CSR).
-		attr_map["default"] = edge_matrix;
-		
-		/*
-			Need to initialize attr_map with all of the mappings
-			that are possible for this graph.
-
-			A unique CSR will be generated for these attributes.
-			Likely requires more work within issue 24 -
-			Multiple Costs for the Graph
-		*/
-		attr_map["cross slope"] = edge_matrix;
-		attr_map["energy expenditure"] = edge_matrix;
 	}
 
 	bool Graph::HasEdge(const std::array<float, 3>& parent, const std::array<float, 3>& child, bool undirected) const {
@@ -456,8 +443,6 @@ namespace HF::SpatialStructures {
 	}
 
 	void Graph::AddNodeAttribute(int id, std::string attribute, std::string score) {
-		// id is assumed to be the id of a parent node.
-
 		const auto node = NodeFromID(id);
 		bool node_not_found = hasKey(node);
 
@@ -475,43 +460,57 @@ namespace HF::SpatialStructures {
 		*/
 		std::string lower_cased = attribute;
 
-		// Retrieve an iterator to the mapping (bucket)
-		// that gives us attr_map[attribute] == CSR
-		auto it = attr_map.find(lower_cased);
+		// Retrieve an iterator to the [node attribute : NodeAttributeValueMap]
+		// that corresponds with attribute
+		auto node_attr_map_it = node_attr_map.find(lower_cased);
 
-		
-		if (it == attr_map.end()) {
-			// if the attribute does not already exist...
+		if (node_attr_map_it == node_attr_map.end()) {
+			// if the attribute does not exist...
 			return;
 		}
 
-		// Get the CSR representation of this graph for attribute
-		Eigen::SparseMatrix<float, 1>& it_csr = it->second;
+		// We now have the NodeAttributeValueMap for the desired attribute.
+		// A NodeAttributeValueMap stores buckets of [node id : node attribute value as string]
+		NodeAttributeValueMap node_attr_value_map = node_attr_map_it->second;
+
+		// Need to see if id exists as a key within node_attr_value_map
+		// This will give us the position of a bucket containing:
+		// [node id : node attribute value as string]
+		auto node_attr_value_map_it = node_attr_value_map.find(id);
 		
-		CSRPtrs csr {
-			static_cast<int>(it_csr.nonZeros()),
-			static_cast<int>(it_csr.rows()),
-			static_cast<int>(it_csr.cols()),
+		if (node_attr_value_map_it == node_attr_value_map.end()) {
+			// If the node id provided does not exist...
+			return;
+		}
 
-			it_csr.valuePtr(),
-			it_csr.outerIndexPtr(),
-			it_csr.innerIndexPtr()
-		};
+		const int found_id = node_attr_value_map_it->first;
+		std::string found_attr_value = node_attr_value_map_it->second;
 
-		// At this point here, we have found the node and attribute type we are looking for.
-		int child_id = csr.inner_indices[csr.outer_indices[id]];
-		float* edge_data_addr = csr.data + csr.outer_indices[id];
-
-		// Since score is a std::string, we parse it to a float value
-		// so that it may be assigned to *edge_data_addr.
-		*edge_data_addr = std::atof(score.c_str());
-
-
+		/*
+			Need to determine if found_attr_value is
+				- a string
+				- a floating point value
+		*/
+		if (HF::SpatialStructures::CostAlgorithms::is_floating_type(found_attr_value)) {
+			// check parameter score to see if it matches...
+			if (HF::SpatialStructures::CostAlgorithms::is_floating_type(score)) {
+				node_attr_value_map_it->second = score;
+			}
+			else {
+				// error?
+			}
+		}
+		else {
+			if (HF::SpatialStructures::CostAlgorithms::is_floating_type(score)) {
+				// error?
+			}
+			else {
+				node_attr_value_map_it->second = score;
+			}
+		}
 	}
 
 	void Graph::AddNodeAttributes(std::vector<int> id, std::string name, std::vector<std::string> scores) {
-		// all id in id are assumed to be ids of parent nodes.
-		
 		// If size of id container and size of scores container are not in alignment,
 		// we return.
 		if (id.size() != scores.size()) {
@@ -520,12 +519,12 @@ namespace HF::SpatialStructures {
 
 		auto scores_iterator = scores.begin();
 
-		for (int parent_id : id) {
-			// We have to check that each parent_id in id exists before attempting to add
+		for (int node_id : id) {
+			// We have to check that each node_id in id exists before attempting to add
 			// attribute data -- but just because one parent_id does not exist does not mean
 			// we need to stop the entire iteration (meaning we can still attempt to add
-			// attribute data to the other parent_id in id)
-			AddNodeAttribute(parent_id, name, *(scores_iterator++));
+			// attribute data to the other node_id in id)
+			AddNodeAttribute(node_id, name, *(scores_iterator++));
 		}
 	}
 
@@ -540,68 +539,61 @@ namespace HF::SpatialStructures {
 		*/
 		std::string lower_cased = attribute;
 
-		// Retrieve an iterator to the mapping (bucket)
-		// that gives us attr_map[attribute] == CSR
-		auto it = attr_map.find(lower_cased);
+		auto node_attr_map_it = node_attr_map.find(lower_cased);
 
-
-		if (it == attr_map.end()) {
-			// if the attribute does not already exist...
+		if (node_attr_map_it == node_attr_map.end()) {
+			// If the attribute does not exist...
+			// return an empty container.
 			return attributes;
 		}
 
-		// Get the CSR representation of this graph for attribute
-		Eigen::SparseMatrix<float, 1> it_csr = it->second;
+		// We now have the NodeAttributeValueMap for the desired attribute.
+		// A NodeAttributeValueMap stores buckets of [node id : node attribute value as string]
+		NodeAttributeValueMap node_attr_value_map = node_attr_map_it->second;
 
-		CSRPtrs csr {
-			static_cast<int>(it_csr.nonZeros()),
-			static_cast<int>(it_csr.rows()),
-			static_cast<int>(it_csr.cols()),
-
-			it_csr.valuePtr(),
-			it_csr.outerIndexPtr(),
-			it_csr.innerIndexPtr()
-		};
-
-		for (int i = 0; i < csr.nnz; i++) {
-			attributes.push_back(std::to_string(csr.data[i]));
+		for (auto& bucket : node_attr_value_map) {
+			// For all buckets in the node_attr_value_map,
+			// extract the attribute (attr) and append it to attributes
+			std::string attr = bucket.second;
+			attributes.push_back(attr);
 		}
-
+		
+		// Return all attr found
 		return attributes;
 	}
 
 	void Graph::ClearNodeAttributes(std::string name) {
-		// Fix later
-		std::string name_lower_cased = name;
-		
-		auto attr_it = attr_map.find(name_lower_cased);
-		if (attr_it != attr_map.end()) {
-			// if attr_map has (named_lower_cased : CSR), remove it
-			
-			// Get the CSR representation of this graph for attribute
-			Eigen::SparseMatrix<float, 1>& it_csr = attr_it->second;
+		/* // requires #include <algorithm>, but not working?
+		std::string lower_cased =
+			std::transform(attribute.begin(), attribute.end(),
+				[](unsigned char c) { return std::tolower(c); }
+		);
+		*/
+		std::string lower_cased = name;
 
-			CSRPtrs csr {
-				static_cast<int>(it_csr.nonZeros()),
-				static_cast<int>(it_csr.rows()),
-				static_cast<int>(it_csr.cols()),
+		auto node_attr_map_it = node_attr_map.find(lower_cased);
 
-				it_csr.valuePtr(),
-				it_csr.outerIndexPtr(),
-				it_csr.innerIndexPtr()
-			};
-
-			// Clear attribute data from csr.data.
-			std::memset(static_cast<void *>(csr.data), '\0', csr.nnz);
-
-			// What remains from ClearNodeAttributes are:
-			// name, or attribute name : CSR
-			//
-			// CSR has all of its edge data cleared out.
-			// The outer_indices (row offsets)
-			// and inner_indices (column indices for data)
-			// remain intact.
+		if (node_attr_map_it == node_attr_map.end()) {
+			// If the attribute name does not exist,
+			// return.
+			return;
 		}
+
+		// Note that a node_attr_map is a
+		// unordered_map<std::string, NodeAttributeValueMap>
+		// where the key is attribute type name, like "cross slope",
+		// and the value is a hashmap, as described below:
+		///
+		// A NodeAttributeValueMap is a
+		// unordered_map<int, std::string>
+		// where the key is a node id,
+		// and the value is an attribute value, in the form of a string.
+		//
+		// What is being cleared is the
+		// NodeAttributeValueMap that is mapped to name.
+		// The attribute name is still a key in node_attr_map,
+		// but has no value -- which is the NodeAttributeValueMap instance.
+		node_attr_map[name].clear();
 	}
 }
 
