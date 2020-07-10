@@ -252,18 +252,6 @@ C_INTERFACE CalculateAndStoreEnergyExpenditure(HF::SpatialStructures::Graph* g) 
 	return OK;
 }
 
-C_INTERFACE CalculateAndStoreCrossSlope(HF::SpatialStructures::Graph* g) {
-
-
-	return OK;
-}
-
-C_INTERFACE CalculateAndStoreEnergyExpenditure(HF::SpatialStructures::Graph* g) {
-
-
-	return OK;
-}
-
 C_INTERFACE AddNodeAttributes(HF::SpatialStructures::Graph* g, const int* ids, const char* attribute, const char** scores, int num_nodes) {
 
 
