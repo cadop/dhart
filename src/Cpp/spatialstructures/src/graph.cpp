@@ -439,6 +439,26 @@ namespace HF::SpatialStructures {
 	std::vector<Node> Graph::GetChildren(const int parent_id) {
 		return GetChildren(NodeFromID(parent_id));
 	}
+
+	void Graph::AddNodeAttribute(int id, std::string attribute, std::string score) {
+
+	}
+
+	void Graph::AddNodeAttributes(std::vector<int> id, std::string name, std::vector<std::string> scores) {
+
+	}
+
+	std::vector<std::string> Graph::GetNodeAttributes(std::string attribute) const {
+		std::vector<std::string> attributes;
+
+
+
+		return attributes;
+	}
+
+	void Graph::ClearNodeAttributes(std::string name) {
+
+	}
 }
 
 /*

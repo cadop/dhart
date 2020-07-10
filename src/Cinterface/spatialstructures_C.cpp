@@ -251,3 +251,39 @@ C_INTERFACE CalculateAndStoreEnergyExpenditure(HF::SpatialStructures::Graph* g) 
 
 	return OK;
 }
+
+C_INTERFACE CalculateAndStoreCrossSlope(HF::SpatialStructures::Graph* g) {
+
+
+	return OK;
+}
+
+C_INTERFACE CalculateAndStoreEnergyExpenditure(HF::SpatialStructures::Graph* g) {
+
+
+	return OK;
+}
+
+C_INTERFACE AddNodeAttributes(HF::SpatialStructures::Graph* g, const int* ids, const char* attribute, const char** scores, int num_nodes) {
+
+
+	return OK;
+}
+
+C_INTERFACE GetNodeAttributes(const HF::SpatialStructures::Graph* g, const char* attribute, char*** out_scores, int* out_score_size) {
+
+
+	return OK;
+}
+
+C_INTERFACE DeleteScoreArray(char*** scores_to_delete, int num_char_arrays) {
+
+
+	return OK;
+}
+
+C_INTERFACE ClearAttributeType(HF::SpatialStructures::Graph* g, const char* s) {
+
+
+	return OK;
+}
