@@ -345,7 +345,7 @@ C_INTERFACE DeleteScoreArray(char*** scores_to_delete, int num_char_arrays) {
 			*victim = nullptr;	// eliminate dangling pointer
 		}
 
-		scores_to_delete = nullptr; // eliminate dangling pointer
+		*scores_to_delete = nullptr; // eliminate dangling pointer
 	}
 
 	return OK;

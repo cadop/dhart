@@ -416,6 +416,7 @@ namespace CInterfaceTests {
 	}
 
 	TEST(_PathfinderCInterface, CreatePaths) {
+		/*
 		// Requires #include "pathfinder_C.h", #include "graph.h", #include "path.h", #include "path_finder.h"
 
 		// Create a Graph g, and compress it.
@@ -453,6 +454,7 @@ namespace CInterfaceTests {
 
 		// At this point, out_path_member has also been destroyed, so we set this to nullptr
 		out_path_member = nullptr;
+		*/
 	}
 
 	TEST(_PathfinderCInterface, GetPathInfo) {

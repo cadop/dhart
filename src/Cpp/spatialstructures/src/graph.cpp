@@ -474,7 +474,7 @@ namespace HF::SpatialStructures {
 
 		// We now have the NodeAttributeValueMap for the desired attribute.
 		// A NodeAttributeValueMap stores buckets of [node id : node attribute value as string]
-		NodeAttributeValueMap node_attr_value_map = node_attr_map_it->second;
+		NodeAttributeValueMap& node_attr_value_map = node_attr_map_it->second;
 
 		// Need to see if id exists as a key within node_attr_value_map
 		// This will give us the position of a bucket containing:
@@ -483,8 +483,7 @@ namespace HF::SpatialStructures {
 		
 		if (node_attr_value_map_it == node_attr_value_map.end()) {
 			// If the node id provided does not exist in the value map...add it.
-			// Do not assign anything here yet, an empty string will suffice.
-			node_attr_value_map[id] = "";
+			node_attr_value_map[id] = score;
 
 			// Update this iterator so it can be used in the next code block
 			node_attr_value_map_it = node_attr_value_map.find(id);
