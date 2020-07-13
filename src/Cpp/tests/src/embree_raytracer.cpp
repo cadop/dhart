@@ -173,7 +173,8 @@ TEST(_EmbreeRayTracer, DeterministicResults) {
 			// Mark this in test explorer
 			float dist = Distance(origins[i], std::array<float, 3>{0, 0, 0});
 
-			// This ray is incorrect if it's distance is greater than our threshold
+			// This ray is incorrect if it's distance is greater than our threshold or it 
+			// doesn't intersect the ground. 
 			if (!results[i] || Distance(origins[i], std::array<float, 3>{0, 0, 0}) > 0.0001)
 			{
 				std::cerr << "FAILED] Trial: " << k << " Ray: " << i 
@@ -263,7 +264,7 @@ TEST(_EmbreeRayTracer, FireOcclusionRays) {
 	for (int i = 5; i < 10; i++) origins[i] = std::array<float, 3>{0.0f, 0.0f, -1.0f};
 
 	// Fire every ray.
-	std::vector<bool> results = ert.FireOcclusionRays(origins, directions);
+	std::vector<char> results = ert.FireOcclusionRays(origins, directions);
 
 	// Iterate through all results to print them
 	std::cerr << "[";
