@@ -139,6 +139,61 @@ TEST(_EmbreeRayTracer, HitPointsAreAccurate) {
 	}
 }
 
+// Fire a large volume of rays to assert that we don't have any issues with race conditions.
+TEST(_EmbreeRayTracer, DeterministicResults) {
+	// Create plane
+	const std::vector<float> plane_vertices{
+		-10.0f, 10.0f, 0.0f,
+		-10.0f, -10.0f, 0.0f,
+		10.0f, 10.0f, 0.0f,
+		10.0f, -10.0f, 0.0f,
+	};
+	const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
+
+	// Create RayTracer
+	EmbreeRayTracer ert(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+	
+	const int num_trials = 150;
+	const int num_rays = 1000;
+	int fails = 0;
+	int successes = 0;
+
+	// Iterate through number of trials
+	for (int k = 0; k < num_trials; k++) {
+
+		// Go Create direction/origin arrays
+		std::vector<std::array<float, 3>> directions(num_rays, std::array<float, 3>{0, 0, -1});
+		std::vector<std::array<float, 3>> origins(num_rays, std::array<float, 3>{0, 0, 1});
+		
+		// Fire rays in parallel
+		auto results = ert.FireRays(origins, directions);
+
+		// Check the result of each ray
+		for (int i = 0; i < num_rays; i++) {
+			// Mark this in test explorer
+			float dist = Distance(origins[i], std::array<float, 3>{0, 0, 0});
+
+			// This ray is incorrect if it's distance is greater than our threshold
+			if (!results[i] || Distance(origins[i], std::array<float, 3>{0, 0, 0}) > 0.0001)
+			{
+				std::cerr << "FAILED] Trial: " << k << " Ray: " << i 
+				<< " Result: "  << results[i] << " Distance: " << dist << std::endl;
+				fails++;
+			}
+			else
+				successes++;
+		}
+	}
+
+	// Print total number of fails / succeses if we fail
+	if (fails > 0) {
+		double fail_percent = static_cast<double>(fails) / static_cast<double>(successes);
+		std::cerr << "END RESULTS -  FAILURES:" << fails << ", SUCCESSES: " << successes
+			<< " RATE: " << fail_percent << "\%" << std::endl;
+	}
+	ASSERT_EQ(fails, 0);
+}
+
 // TODO: Add a distance check to this?
 TEST(_EmbreeRayTracer, FireRays) {
 	// Create plane
