@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Analysis: Cinterface/visibility_graph_C.h File Reference</title>
+<title>Analysis: Cinterface/visibility_graph_C.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,38 +66,31 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">visibility_graph_C.h File Reference</div>  </div>
+<div class="title">visibility_graph_C.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;<a class="el" href="a00224_source.html">cinterface_utils.h</a>&gt;</code><br />
-<code>#include &lt;raytracer_c.h&gt;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00263_source.html">visibility_graph_C.h</a>&quot;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00032_source.html">visibility_graph.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00122_source.html">embree_raytracer.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00152_source.html">graph.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00155_source.html">node.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00086_source.html">HFExceptions.h</a>&gt;</code><br />
 </div>
 <p><a href="a00260_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:a00273"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00273.html">HF</a></td></tr>
-<tr class="memdesc:a00273"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output CSR for interop with other languages <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00277"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00277.html">HF::RayTracer</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00276"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00276.html">HF::SpatialStructures</a></td></tr>
-<tr class="memdesc:a00276"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains standard fundamental data structures for representing space used throughout HumanFactors. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga0255e6c4811298e61110adc64c0f8acd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00271.html#ga0255e6c4811298e61110adc64c0f8acd">CreateVisibilityGraphAllToAll</a> (<a class="el" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a> *ert, const float *nodes, int num_nodes, <a class="el" href="a01199.html">HF::SpatialStructures::Graph</a> **out_graph, float height)</td></tr>
-<tr class="memdesc:ga0255e6c4811298e61110adc64c0f8acd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new directed visibility graph between all nodes in nodes.  <a href="a00271.html#ga0255e6c4811298e61110adc64c0f8acd">More...</a><br /></td></tr>
+<tr class="memitem:ga0255e6c4811298e61110adc64c0f8acd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00273.html#ga0255e6c4811298e61110adc64c0f8acd">CreateVisibilityGraphAllToAll</a> (<a class="el" href="a01165.html">EmbreeRayTracer</a> *ert, const float *nodes, int num_nodes, <a class="el" href="a01189.html">Graph</a> **out_graph, float height)</td></tr>
+<tr class="memdesc:ga0255e6c4811298e61110adc64c0f8acd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new directed visibility graph between all nodes in nodes.  <a href="a00273.html#ga0255e6c4811298e61110adc64c0f8acd">More...</a><br /></td></tr>
 <tr class="separator:ga0255e6c4811298e61110adc64c0f8acd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9b0664a60bcdf276b0fe0a2023b3d9b8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00271.html#ga9b0664a60bcdf276b0fe0a2023b3d9b8">CreateVisibilityGraphAllToAllUndirected</a> (<a class="el" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a> *ert, const float *nodes, int num_nodes, <a class="el" href="a01199.html">HF::SpatialStructures::Graph</a> **out_graph, float height, const int cores)</td></tr>
-<tr class="memdesc:ga9b0664a60bcdf276b0fe0a2023b3d9b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new undirected visibility graph between all nodes in nodes.  <a href="a00271.html#ga9b0664a60bcdf276b0fe0a2023b3d9b8">More...</a><br /></td></tr>
+<tr class="memitem:ga9b0664a60bcdf276b0fe0a2023b3d9b8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00273.html#ga9b0664a60bcdf276b0fe0a2023b3d9b8">CreateVisibilityGraphAllToAllUndirected</a> (<a class="el" href="a01165.html">EmbreeRayTracer</a> *ert, const float *nodes, int num_nodes, <a class="el" href="a01189.html">Graph</a> **out_graph, float height, const int cores)</td></tr>
+<tr class="memdesc:ga9b0664a60bcdf276b0fe0a2023b3d9b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new undirected visibility graph between all nodes in nodes.  <a href="a00273.html#ga9b0664a60bcdf276b0fe0a2023b3d9b8">More...</a><br /></td></tr>
 <tr class="separator:ga9b0664a60bcdf276b0fe0a2023b3d9b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf2e404cb696aee3473cac0d1507576d8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00271.html#gaf2e404cb696aee3473cac0d1507576d8">CreateVisibilityGraphGroupToGroup</a> (<a class="el" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a> *ert, const float *group_a, const int size_a, const float *group_b, const int size_b, <a class="el" href="a01199.html">HF::SpatialStructures::Graph</a> **out_graph, float height)</td></tr>
-<tr class="memdesc:gaf2e404cb696aee3473cac0d1507576d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new visibility from the nodes in group_a to the nodes in group_b.  <a href="a00271.html#gaf2e404cb696aee3473cac0d1507576d8">More...</a><br /></td></tr>
+<tr class="memitem:gaf2e404cb696aee3473cac0d1507576d8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00273.html#gaf2e404cb696aee3473cac0d1507576d8">CreateVisibilityGraphGroupToGroup</a> (<a class="el" href="a01165.html">HF::RayTracer::EmbreeRayTracer</a> *ert, const float *group_a, const int size_a, const float *group_b, const int size_b, <a class="el" href="a01189.html">Graph</a> **out_graph, float height)</td></tr>
+<tr class="memdesc:gaf2e404cb696aee3473cac0d1507576d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new visibility from the nodes in group_a to the nodes in group_b.  <a href="a00273.html#gaf2e404cb696aee3473cac0d1507576d8">More...</a><br /></td></tr>
 <tr class="separator:gaf2e404cb696aee3473cac0d1507576d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->

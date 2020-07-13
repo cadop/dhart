@@ -1,0 +1,490 @@
+\hypertarget{a01205}{}\doxysection{HF\+::Spatial\+Structures\+::Path Struct Reference}
+\label{a01205}\index{HF::SpatialStructures::Path@{HF::SpatialStructures::Path}}
+
+
+A collection of nodes that form a path.  
+
+
+
+
+{\ttfamily \#include $<$path.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01205_a61a8a911a572d91683229a80ede5f541}{Path\+::\+Path}} ()
+\begin{DoxyCompactList}\small\item\em Construct an empty path. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01205_a7af74c09bd92982650ac8628d48e8f99}{Path\+::\+Path}} (const std\+::vector$<$ \mbox{\hyperlink{a01201}{Path\+Member}} $>$ pm)
+\begin{DoxyCompactList}\small\item\em Construct a path from an ordered list of Path\+Members. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a01205_a55ded4e02787eb739770ebe28ef386a9}{Add\+Node}} (int node, float cost)
+\begin{DoxyCompactList}\small\item\em Add a new node to the path. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01205_a3066bac2d76b5c8a28b35a8d1f6ace71}{empty}} () const
+\begin{DoxyCompactList}\small\item\em Determine if this path has any nodes in it. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{a01205_a28f61f0f57b38a5249a11a725d9d692b}{size}} () const
+\begin{DoxyCompactList}\small\item\em Determine how many nodes are in this path. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a01205_adf2bad9ac73dbdc436c365654d54ad98}{Reverse}} ()
+\begin{DoxyCompactList}\small\item\em Reverse the direction of this path. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01205_ac8cd7f5bcbaf0f399ce196c8967ae87e}{operator==}} (const \mbox{\hyperlink{a01205}{Path}} \&p2) const
+\begin{DoxyCompactList}\small\item\em Determine if this path is identical to p2. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01201}{Path\+Member}} \mbox{\hyperlink{a01205_a4bbba8e48932e990cc6d523ac628765a}{operator\mbox{[}$\,$\mbox{]}}} (int i) const
+\begin{DoxyCompactList}\small\item\em Retrieve the node and cost in this path at index i. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01201}{Path\+Member}} $\ast$ \mbox{\hyperlink{a01205_a942cb49007bbeb5588e2d526c68bdcf9}{Get\+P\+M\+Pointer}} ()
+\begin{DoxyCompactList}\small\item\em Get a pointer to the path\textquotesingle{}s underlying path members vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{a01201}{Path\+Member}} $>$ \mbox{\hyperlink{a01205_a864cebbf4e5d7c135c501a63d42f8708}{members}}
+\begin{DoxyCompactList}\small\item\em Ordered array of Path\+Members that comprise the path. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A collection of nodes that form a path. 
+
+
+
+Definition at line 76 of file path.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a01205_a55ded4e02787eb739770ebe28ef386a9}\label{a01205_a55ded4e02787eb739770ebe28ef386a9}} 
+\index{HF::SpatialStructures::Path@{HF::SpatialStructures::Path}!AddNode@{AddNode}}
+\index{AddNode@{AddNode}!HF::SpatialStructures::Path@{HF::SpatialStructures::Path}}
+\doxysubsubsection{\texorpdfstring{AddNode()}{AddNode()}}
+{\footnotesize\ttfamily void H\+F\+::\+Spatial\+Structures\+::\+Path\+::\+Add\+Node (\begin{DoxyParamCaption}\item[{int}]{node,  }\item[{float}]{cost }\end{DoxyParamCaption})}
+
+
+
+Add a new node to the path. 
+
+Constructs a \mbox{\hyperlink{a01201}{Path\+Member}} and appends it to the underlying members vector. 
+\begin{DoxyParams}{Parameters}
+{\em node} & The identifier for the \mbox{\hyperlink{a01201}{Path\+Member}} \\
+\hline
+{\em cost} & The cost (weight) for the \mbox{\hyperlink{a01201}{Path\+Member}} \\
+\hline
+\end{DoxyParams}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "path.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the PathMembers}}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} p0 = \{ 3.14f, 3 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} p1 = \{ 2.78f, 2 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} p2 = \{ 1.64f, 1 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} p3 = \{ 9.35, 7 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the container of PathMembers}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::PathMember> \mbox{\hyperlink{a01205_a864cebbf4e5d7c135c501a63d42f8708}{members}}\{ p0, p1, p2, p3 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the path, using the container of PathMembers}}
+\DoxyCodeLine{\mbox{\hyperlink{a01205}{HF::SpatialStructures::Path}} path(\mbox{\hyperlink{a01205_a864cebbf4e5d7c135c501a63d42f8708}{members}});}
+\DoxyCodeLine{\textcolor{keywordtype}{int} node\_id = 278;}
+\DoxyCodeLine{\textcolor{keywordtype}{float} cost = 8.92f;}
+\DoxyCodeLine{}
+\DoxyCodeLine{path.\mbox{\hyperlink{a01205_a55ded4e02787eb739770ebe28ef386a9}{AddNode}}(node\_id, cost);    \textcolor{comment}{// A PathMember is constructed within AddNode from node\_id and cost}}
+\DoxyCodeLine{                                \textcolor{comment}{// and is then appended to the underlying}}
+\DoxyCodeLine{                                \textcolor{comment}{// members vector (via push\_back)}}
+\end{DoxyCode}
+ 
+
+Definition at line 12 of file path.\+cpp.
+
+
+
+References members.
+
+
+
+Referenced by H\+F\+::\+Pathfinding\+::\+Construct\+Shortest\+Path\+From\+Pred().
+
+\mbox{\Hypertarget{a01205_a3066bac2d76b5c8a28b35a8d1f6ace71}\label{a01205_a3066bac2d76b5c8a28b35a8d1f6ace71}} 
+\index{HF::SpatialStructures::Path@{HF::SpatialStructures::Path}!empty@{empty}}
+\index{empty@{empty}!HF::SpatialStructures::Path@{HF::SpatialStructures::Path}}
+\doxysubsubsection{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily bool H\+F\+::\+Spatial\+Structures\+::\+Path\+::empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Determine if this path has any nodes in it. 
+
+Checks if the size of members is zero. \begin{DoxyReturn}{Returns}
+True if the underyling members vector is empty, false otherwise 
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "path.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a01205}{HF::SpatialStructures::Path}} path;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// There are no PathMembers in path's members container.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// if empty() returns true, that means the underlying members vector is of size 0}}
+\DoxyCodeLine{\textcolor{comment}{// (no members) otherwise, empty returns false. In this case, path.empty() returns true.}}
+\DoxyCodeLine{std::string result = path.\mbox{\hyperlink{a01205_a3066bac2d76b5c8a28b35a8d1f6ace71}{empty}}() ? \textcolor{stringliteral}{"is empty"} : \textcolor{stringliteral}{"has at least one member"};}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"The Path object "} << result << std::endl;}
+\end{DoxyCode}
+ 
+
+Definition at line 16 of file path.\+cpp.
+
+
+
+References members.
+
+
+
+Referenced by Create\+Path().
+
+\mbox{\Hypertarget{a01205_a942cb49007bbeb5588e2d526c68bdcf9}\label{a01205_a942cb49007bbeb5588e2d526c68bdcf9}} 
+\index{HF::SpatialStructures::Path@{HF::SpatialStructures::Path}!GetPMPointer@{GetPMPointer}}
+\index{GetPMPointer@{GetPMPointer}!HF::SpatialStructures::Path@{HF::SpatialStructures::Path}}
+\doxysubsubsection{\texorpdfstring{GetPMPointer()}{GetPMPointer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01201}{Path\+Member}} $\ast$ H\+F\+::\+Spatial\+Structures\+::\+Path\+::\+Get\+P\+M\+Pointer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get a pointer to the path\textquotesingle{}s underlying path members vector. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "path.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the PathMembers}}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} p0 = \{ 3.14f, 3 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} p1 = \{ 2.78f, 2 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} p2 = \{ 1.64f, 1 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} p3 = \{ 9.35f, 7 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the container of PathMembers}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::PathMember> \mbox{\hyperlink{a01205_a864cebbf4e5d7c135c501a63d42f8708}{members}}\{p0, p1, p2, p3\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a01205}{HF::SpatialStructures::Path}} path(\mbox{\hyperlink{a01205_a864cebbf4e5d7c135c501a63d42f8708}{members}});                          \textcolor{comment}{// Create the Path object, path}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} *ptr = path.\mbox{\hyperlink{a01205_a942cb49007bbeb5588e2d526c68bdcf9}{GetPMPointer}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// You now have a pointer to the underlying buffer of the members vector with in a PathMember.}}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} *curr = ptr;}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} *finish = ptr + path.\mbox{\hyperlink{a01205_a28f61f0f57b38a5249a11a725d9d692b}{size}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{while} (curr != finish) \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Cost: "} << curr-\/>\mbox{\hyperlink{a01201_aa854e4b8d04fc62d8e09cff48ba95d68}{cost}} << \textcolor{stringliteral}{" "}}
+\DoxyCodeLine{              << \textcolor{stringliteral}{"Node: "} << curr-\/>\mbox{\hyperlink{a01201_aed2cf97b3136ad0929cdd3c5c2b96e1c}{node}} << std::endl;}
+\DoxyCodeLine{    ++curr;}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+ 
+
+Definition at line 56 of file path.\+cpp.
+
+
+
+References members.
+
+
+
+Referenced by Create\+Path(), Get\+Path\+Info(), and H\+F\+::\+Pathfinding\+::\+Insert\+Paths\+Into\+Array().
+
+\mbox{\Hypertarget{a01205_ac8cd7f5bcbaf0f399ce196c8967ae87e}\label{a01205_ac8cd7f5bcbaf0f399ce196c8967ae87e}} 
+\index{HF::SpatialStructures::Path@{HF::SpatialStructures::Path}!operator==@{operator==}}
+\index{operator==@{operator==}!HF::SpatialStructures::Path@{HF::SpatialStructures::Path}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool H\+F\+::\+Spatial\+Structures\+::\+Path\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01205}{Path}} \&}]{p2 }\end{DoxyParamCaption}) const}
+
+
+
+Determine if this path is identical to p2. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p2} & The \mbox{\hyperlink{a01205}{Path}} to compare against this path \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True, if all \mbox{\hyperlink{a01201}{Path\+Member}} elements in p2 are equal to all \mbox{\hyperlink{a01201}{Path\+Member}} elements in this path, false otherwise 
+\end{DoxyReturn}
+
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a01201_af59604b398e925b0b24030a00dd92f59}{Path\+Member.\+operator==()}}
+\end{DoxySeeAlso}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "path.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} p0 = \{ 3.14f, 3 \};                \textcolor{comment}{// Create all the PathMember objects}}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} p1 = \{ 2.78f, 2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} p2 = \{ 3.14f, 3 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} p3 = \{ 2.78f, 2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} p4 = \{ 1.1f, 9 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} p5 = \{ 123.0f, 10 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::PathMember> members\_0\{p0, p1\};   \textcolor{comment}{// Create the HF::SpatialStructures::PathMember vectors}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::PathMember> members\_1\{p2, p3\};}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::PathMember> members\_2\{p4, p5\};}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::PathMember> members\_3\{p1, p0\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a01205}{HF::SpatialStructures::Path}} path\_0(members\_0);                      \textcolor{comment}{// Create the Path objects}}
+\DoxyCodeLine{\mbox{\hyperlink{a01205}{HF::SpatialStructures::Path}} path\_1(members\_1);}
+\DoxyCodeLine{\mbox{\hyperlink{a01205}{HF::SpatialStructures::Path}} path\_2(members\_2);}
+\DoxyCodeLine{\mbox{\hyperlink{a01205}{HF::SpatialStructures::Path}} path\_3(members\_3);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} same\_values\_same\_order = path\_0 == path\_1;}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} totally\_different = path\_0 == path\_2;}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} same\_values\_different\_order = path\_0 == path\_3;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// path\_0 and path\_1 share the same PathMember values, with an identical permutation, so}}
+\DoxyCodeLine{\textcolor{comment}{// they are equivalent.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// path\_0 and path\_2 are not equivalent, because they have completely different}}
+\DoxyCodeLine{\textcolor{comment}{// PathMember values.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// path\_0 and path\_3 are not equivalent, because although they have PathMember objects}}
+\DoxyCodeLine{\textcolor{comment}{// of the same values, the order in which path\_0 and path\_3 have their member vectors}}
+\DoxyCodeLine{\textcolor{comment}{// arranged are different.}}
+\end{DoxyCode}
+ 
+
+Definition at line 28 of file path.\+cpp.
+
+
+
+References size().
+
+\mbox{\Hypertarget{a01205_a4bbba8e48932e990cc6d523ac628765a}\label{a01205_a4bbba8e48932e990cc6d523ac628765a}} 
+\index{HF::SpatialStructures::Path@{HF::SpatialStructures::Path}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!HF::SpatialStructures::Path@{HF::SpatialStructures::Path}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01201}{Path\+Member}} H\+F\+::\+Spatial\+Structures\+::\+Path\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption}) const}
+
+
+
+Retrieve the node and cost in this path at index i. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & The index for the desired \mbox{\hyperlink{a01201}{Path\+Member}} element within members. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A \mbox{\hyperlink{a01201}{Path\+Member}} within the members vector, at index i, by value. 
+\end{DoxyReturn}
+
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::out\+\_\+of\+\_\+range} & i extended past the number of nodes in the path.\\
+\hline
+\end{DoxyExceptions}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "path.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the PathMembers}}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} p0 = \{ 3.14f, 3 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} p1 = \{ 2.78f, 2 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} p2 = \{ 1.64f, 1 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} p3 = \{ 9.35f, 7 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the container of PathMembers}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::PathMember> \mbox{\hyperlink{a01205_a864cebbf4e5d7c135c501a63d42f8708}{members}}\{p0, p1, p2, p3\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a01205}{HF::SpatialStructures::Path}} path(\mbox{\hyperlink{a01205_a864cebbf4e5d7c135c501a63d42f8708}{members}});                      \textcolor{comment}{// Create the Path object, path}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} desired\_index = 2;}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} result = path[desired\_index]; \textcolor{comment}{// a copy of the element at desired\_index}}
+\DoxyCodeLine{                                                                \textcolor{comment}{// within the}}
+\DoxyCodeLine{                                                                \textcolor{comment}{// internal members}}
+\DoxyCodeLine{                                                                \textcolor{comment}{// vector is}}
+\DoxyCodeLine{                                                                \textcolor{comment}{// assigned to result}}
+\end{DoxyCode}
+ 
+
+Definition at line 48 of file path.\+cpp.
+
+
+
+References members.
+
+\mbox{\Hypertarget{a01205_a61a8a911a572d91683229a80ede5f541}\label{a01205_a61a8a911a572d91683229a80ede5f541}} 
+\index{HF::SpatialStructures::Path@{HF::SpatialStructures::Path}!Path::Path@{Path::Path}}
+\index{Path::Path@{Path::Path}!HF::SpatialStructures::Path@{HF::SpatialStructures::Path}}
+\doxysubsubsection{\texorpdfstring{Path::Path()}{Path::Path()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily H\+F\+::\+Spatial\+Structures\+::\+Path\+::\+Path\+::\+Path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct an empty path. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "path.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a01205}{HF::SpatialStructures::Path}} path;}
+\end{DoxyCode}
+ 
+
+Definition at line 88 of file path.\+h.
+
+
+
+References Path\+::\+Path().
+
+
+
+Referenced by Path\+::\+Path().
+
+\mbox{\Hypertarget{a01205_a7af74c09bd92982650ac8628d48e8f99}\label{a01205_a7af74c09bd92982650ac8628d48e8f99}} 
+\index{HF::SpatialStructures::Path@{HF::SpatialStructures::Path}!Path::Path@{Path::Path}}
+\index{Path::Path@{Path::Path}!HF::SpatialStructures::Path@{HF::SpatialStructures::Path}}
+\doxysubsubsection{\texorpdfstring{Path::Path()}{Path::Path()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily H\+F\+::\+Spatial\+Structures\+::\+Path\+::\+Path\+::\+Path (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{a01201}{Path\+Member}} $>$}]{pm }\end{DoxyParamCaption})}
+
+
+
+Construct a path from an ordered list of Path\+Members. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "path.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the PathMembers}}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} p0 = \{ 3.14f, 3 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} p1 = \{ 2.78f, 2 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} p2 = \{ 1.64f, 1 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} p3 = \{ 9.35, 7 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the container of PathMembers}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::PathMember> \mbox{\hyperlink{a01205_a864cebbf4e5d7c135c501a63d42f8708}{members}}\{p0, p1, p2, p3\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the path, using the container of PathMembers}}
+\DoxyCodeLine{\mbox{\hyperlink{a01205}{HF::SpatialStructures::Path}} path(\mbox{\hyperlink{a01205_a864cebbf4e5d7c135c501a63d42f8708}{members}});}
+\end{DoxyCode}
+ 
+
+References Path\+::\+Path().
+
+\mbox{\Hypertarget{a01205_adf2bad9ac73dbdc436c365654d54ad98}\label{a01205_adf2bad9ac73dbdc436c365654d54ad98}} 
+\index{HF::SpatialStructures::Path@{HF::SpatialStructures::Path}!Reverse@{Reverse}}
+\index{Reverse@{Reverse}!HF::SpatialStructures::Path@{HF::SpatialStructures::Path}}
+\doxysubsubsection{\texorpdfstring{Reverse()}{Reverse()}}
+{\footnotesize\ttfamily void H\+F\+::\+Spatial\+Structures\+::\+Path\+::\+Reverse (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Reverse the direction of this path. 
+
+Invokes std\+::reverse to reverse the contents of the underlying members vector using iterators
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "path.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the PathMembers}}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} p0 = \{ 3.14f, 3 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} p1 = \{ 2.78f, 2 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} p2 = \{ 1.64f, 1 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} p3 = \{ 9.35f, 7 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the container of PathMembers}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::PathMember> \mbox{\hyperlink{a01205_a864cebbf4e5d7c135c501a63d42f8708}{members}}\{p0, p1, p2, p3\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a01205}{HF::SpatialStructures::Path}} path(\mbox{\hyperlink{a01205_a864cebbf4e5d7c135c501a63d42f8708}{members}});          \textcolor{comment}{// Create the Path object, path}}
+\DoxyCodeLine{path.\mbox{\hyperlink{a01205_a55ded4e02787eb739770ebe28ef386a9}{AddNode}}(278, 3.14f);                           \textcolor{comment}{// Append one more PathMember to path}}
+\DoxyCodeLine{}
+\DoxyCodeLine{path.\mbox{\hyperlink{a01205_adf2bad9ac73dbdc436c365654d54ad98}{Reverse}}();             \textcolor{comment}{// The order of the PathMembers within members is now that of}}
+\DoxyCodeLine{                            \textcolor{comment}{// p3, p2, p1, p0}}
+\end{DoxyCode}
+ 
+
+Definition at line 24 of file path.\+cpp.
+
+
+
+References members.
+
+
+
+Referenced by H\+F\+::\+Pathfinding\+::\+Construct\+Shortest\+Path\+From\+Pred().
+
+\mbox{\Hypertarget{a01205_a28f61f0f57b38a5249a11a725d9d692b}\label{a01205_a28f61f0f57b38a5249a11a725d9d692b}} 
+\index{HF::SpatialStructures::Path@{HF::SpatialStructures::Path}!size@{size}}
+\index{size@{size}!HF::SpatialStructures::Path@{HF::SpatialStructures::Path}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily int H\+F\+::\+Spatial\+Structures\+::\+Path\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Determine how many nodes are in this path. 
+
+\begin{DoxyReturn}{Returns}
+The length of this path. 
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "path.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the PathMembers}}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} p0 = \{ 3.14f, 3 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} p1 = \{ 2.78f, 2 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} p2 = \{ 1.64f, 1 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} p3 = \{ 9.35f, 7 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the container of PathMembers}}
+\DoxyCodeLine{std::vector<HF::SpatialStructures::PathMember> \mbox{\hyperlink{a01205_a864cebbf4e5d7c135c501a63d42f8708}{members}}\{p0, p1, p2, p3\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a01205}{HF::SpatialStructures::Path}} path(\mbox{\hyperlink{a01205_a864cebbf4e5d7c135c501a63d42f8708}{members}});          \textcolor{comment}{// Create the Path object, path}}
+\DoxyCodeLine{path.\mbox{\hyperlink{a01205_a55ded4e02787eb739770ebe28ef386a9}{AddNode}}(278, 3.14f);   \textcolor{comment}{// Add one more PathMember to path}}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::string result = path.\mbox{\hyperlink{a01205_a28f61f0f57b38a5249a11a725d9d692b}{size}}() >= 5 ? \textcolor{stringliteral}{"at least 5 members"} : \textcolor{stringliteral}{"under 5 members"};}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"The Path object has "} << result << std::endl;}
+\end{DoxyCode}
+ 
+
+Definition at line 20 of file path.\+cpp.
+
+
+
+References members.
+
+
+
+Referenced by H\+F\+::\+Pathfinding\+::\+Construct\+Shortest\+Path\+From\+Pred(), Create\+Path(), Get\+Path\+Info(), H\+F\+::\+Pathfinding\+::\+Insert\+Paths\+Into\+Array(), std\+::operator$<$$<$(), and operator==().
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01205_a864cebbf4e5d7c135c501a63d42f8708}\label{a01205_a864cebbf4e5d7c135c501a63d42f8708}} 
+\index{HF::SpatialStructures::Path@{HF::SpatialStructures::Path}!members@{members}}
+\index{members@{members}!HF::SpatialStructures::Path@{HF::SpatialStructures::Path}}
+\doxysubsubsection{\texorpdfstring{members}{members}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{a01201}{Path\+Member}}$>$ H\+F\+::\+Spatial\+Structures\+::\+Path\+::members}
+
+
+
+Ordered array of Path\+Members that comprise the path. 
+
+
+
+Definition at line 78 of file path.\+h.
+
+
+
+Referenced by Add\+Node(), empty(), Get\+P\+M\+Pointer(), operator\mbox{[}$\,$\mbox{]}(), Reverse(), and size().
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/spatialstructures/src/\mbox{\hyperlink{a00161}{path.\+h}}\item 
+Cpp/spatialstructures/src/\mbox{\hyperlink{a00158}{path.\+cpp}}\end{DoxyCompactItemize}

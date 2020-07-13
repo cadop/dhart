@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Analysis: ViewAnalysis</title>
+<title>Analysis: RayTracer</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,70 +62,75 @@ $(function() {
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">ViewAnalysis</div>  </div>
+<div class="title">RayTracer</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Analyze the view from from points in the environment.  
+<p>Perform efficient ray intersections using Intel's Embree Library.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01209.html">RayResult</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The result of firing a ray at an object. Contains distance to the hitpoint and the ID of the mesh.  <a href="a01209.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga9fc392fe8fc058674ffd5f4c8273a714"><td class="memItemLeft" align="right" valign="top">vector&lt; std::array&lt; float, 3 &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00270.html#ga9fc392fe8fc058674ffd5f4c8273a714">HF::AnalysisMethods::ViewAnalysis::FibbonacciDistributePoints</a> (int num_points, float upwards_fov=50.0f, float downward_fov=70.0f)</td></tr>
-<tr class="memdesc:ga9fc392fe8fc058674ffd5f4c8273a714"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evenly distribute a set of points around a sphere centered at the origin.  <a href="a00270.html#ga9fc392fe8fc058674ffd5f4c8273a714">More...</a><br /></td></tr>
-<tr class="separator:ga9fc392fe8fc058674ffd5f4c8273a714"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga8090bf1d24c0cff934daba1c76d82ba6"><td class="memTemplParams" colspan="2">template&lt;typename RES , typename RT , typename N &gt; </td></tr>
-<tr class="memitem:ga8090bf1d24c0cff934daba1c76d82ba6"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; RES &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00270.html#ga8090bf1d24c0cff934daba1c76d82ba6">HF::AnalysisMethods::ViewAnalysis::SphericalViewAnalysis</a> (RT &amp;ray_tracer, const std::vector&lt; N &gt; &amp;Nodes, int num_rays, float upward_limit=50.0f, float downward_limit=70.0f, float height=1.7f)</td></tr>
-<tr class="memdesc:ga8090bf1d24c0cff934daba1c76d82ba6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Conduct view analysis with any Raytracer in parallel.  <a href="a00270.html#ga8090bf1d24c0cff934daba1c76d82ba6">More...</a><br /></td></tr>
-<tr class="separator:ga8090bf1d24c0cff934daba1c76d82ba6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga249100bce7370ba4202f47294f179f81"><td class="memTemplParams" colspan="2">template&lt;typename RT , typename N &gt; </td></tr>
-<tr class="memitem:ga249100bce7370ba4202f47294f179f81"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; float &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00270.html#ga249100bce7370ba4202f47294f179f81">HF::AnalysisMethods::ViewAnalysis::SphericalRayshootWithAnyRTForDistance</a> (RT &amp;ray_tracer, const std::vector&lt; N &gt; &amp;Nodes, int num_rays, float upward_limit=50.0f, float downward_limit=70.0f, float height=1.7f, const <a class="el" href="a00275.html#a0a616a205221414bf7aa28966b461dec">AGGREGATE_TYPE</a> aggregation=<a class="el" href="a00275.html#a0a616a205221414bf7aa28966b461deca6970bdc2201030b9c03fbdcf3973858a">AGGREGATE_TYPE::SUM</a>)</td></tr>
-<tr class="memdesc:ga249100bce7370ba4202f47294f179f81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Conduct view analysis and recieve a summarized set of results for each node.  <a href="a00270.html#ga249100bce7370ba4202f47294f179f81">More...</a><br /></td></tr>
-<tr class="separator:ga249100bce7370ba4202f47294f179f81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab6b8e3eab649b42ac014fb7d02d54892"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00270.html#gab6b8e3eab649b42ac014fb7d02d54892">SphereicalViewAnalysisAggregate</a> (<a class="el" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a> *ERT, <a class="el" href="a01203.html">HF::SpatialStructures::Node</a> *node_ptr, int node_size, int max_rays, float upward_fov, float downward_fov, float height, <a class="el" href="a00254.html#a8a1aa9474094ff70818051c921c0537f">AGGREGATE_TYPE</a> AT, std::vector&lt; float &gt; **out_scores, float **out_scores_ptr, int *out_scores_size)</td></tr>
-<tr class="memdesc:gab6b8e3eab649b42ac014fb7d02d54892"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform view analysis from a list of points and aggregate the results into an ordered list of scores. Scores are aggregated by the aggregation specified in AT aggregation method.  <a href="a00270.html#gab6b8e3eab649b42ac014fb7d02d54892">More...</a><br /></td></tr>
-<tr class="separator:gab6b8e3eab649b42ac014fb7d02d54892"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa4c5714c1e557ef83a03d447eb30c6d0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00270.html#gaa4c5714c1e557ef83a03d447eb30c6d0">SphereicalViewAnalysisAggregateFlat</a> (<a class="el" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a> *ERT, const float *node_ptr, int node_size, int max_rays, float upward_fov, float downward_fov, float height, <a class="el" href="a00254.html#a8a1aa9474094ff70818051c921c0537f">AGGREGATE_TYPE</a> AT, std::vector&lt; float &gt; **out_scores, float **out_scores_ptr, int *out_scores_size)</td></tr>
-<tr class="memdesc:gaa4c5714c1e557ef83a03d447eb30c6d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform view analysis from a list of points and aggregate the results into an ordered list of scores. Scores are aggregated by the aggregation specified in AT aggregation method.  <a href="a00270.html#gaa4c5714c1e557ef83a03d447eb30c6d0">More...</a><br /></td></tr>
-<tr class="separator:gaa4c5714c1e557ef83a03d447eb30c6d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga94d3ddc3981020e2852fc77e51266185"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00270.html#ga94d3ddc3981020e2852fc77e51266185">SphericalViewAnalysisNoAggregate</a> (<a class="el" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a> *ERT, const <a class="el" href="a01203.html">HF::SpatialStructures::Node</a> *node_ptr, int node_size, int *max_rays, float upward_fov, float downward_fov, float height, std::vector&lt; <a class="el" href="a01219.html">RayResult</a> &gt; **out_results, <a class="el" href="a01219.html">RayResult</a> **out_results_ptr)</td></tr>
-<tr class="memdesc:ga94d3ddc3981020e2852fc77e51266185"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform view analysis and recieve the distance and meshid for each individual ray.  <a href="a00270.html#ga94d3ddc3981020e2852fc77e51266185">More...</a><br /></td></tr>
-<tr class="separator:ga94d3ddc3981020e2852fc77e51266185"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga348af4492f3e4e7ffab6da3e86de3924"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00270.html#ga348af4492f3e4e7ffab6da3e86de3924">SphericalViewAnalysisNoAggregateFlat</a> (<a class="el" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a> *ERT, const float *node_ptr, int node_size, int *max_rays, float upward_fov, float downward_fov, float height, std::vector&lt; <a class="el" href="a01219.html">RayResult</a> &gt; **out_results, <a class="el" href="a01219.html">RayResult</a> **out_results_ptr)</td></tr>
-<tr class="memdesc:ga348af4492f3e4e7ffab6da3e86de3924"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform view analysis and recieve the distance and meshid for each individual ray.  <a href="a00270.html#ga348af4492f3e4e7ffab6da3e86de3924">More...</a><br /></td></tr>
-<tr class="separator:ga348af4492f3e4e7ffab6da3e86de3924"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf572b7bec28d55bf2c72719742703dff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00270.html#gaf572b7bec28d55bf2c72719742703dff">SphericalDistribute</a> (int *num_rays, std::vector&lt; float &gt; **out_direction_vector, float **out_direction_data, float upward_fov, float downward_fov)</td></tr>
-<tr class="memdesc:gaf572b7bec28d55bf2c72719742703dff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Distribute directions in a sphere  <a href="a00270.html#gaf572b7bec28d55bf2c72719742703dff">More...</a><br /></td></tr>
-<tr class="separator:gaf572b7bec28d55bf2c72719742703dff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1b13a025665fa4141f3d6660a6aefa5c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00270.html#ga1b13a025665fa4141f3d6660a6aefa5c">CreateRaytracer</a> (std::vector&lt; <a class="el" href="a01129.html">HF::Geometry::MeshInfo</a> &gt; *mesh, <a class="el" href="a01165.html">HF::RayTracer::EmbreeRayTracer</a> **out_raytracer)</td></tr>
+<tr class="memdesc:ga1b13a025665fa4141f3d6660a6aefa5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new raytracer using several meshes.  <a href="a00270.html#ga1b13a025665fa4141f3d6660a6aefa5c">More...</a><br /></td></tr>
+<tr class="separator:ga1b13a025665fa4141f3d6660a6aefa5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac7ff0b75adf7d24754a702f09d5bcf07"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00270.html#gac7ff0b75adf7d24754a702f09d5bcf07">DestroyRayTracer</a> (<a class="el" href="a01165.html">HF::RayTracer::EmbreeRayTracer</a> *rt_to_destroy)</td></tr>
+<tr class="memdesc:gac7ff0b75adf7d24754a702f09d5bcf07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete an existing raytracer.  <a href="a00270.html#gac7ff0b75adf7d24754a702f09d5bcf07">More...</a><br /></td></tr>
+<tr class="separator:gac7ff0b75adf7d24754a702f09d5bcf07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6dcb31db6dbee37c03f277cb61cfdf37"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00270.html#ga6dcb31db6dbee37c03f277cb61cfdf37">FireRaysDistance</a> (<a class="el" href="a01165.html">HF::RayTracer::EmbreeRayTracer</a> *ert, float *origins, int num_origins, float *directions, int num_directions, std::vector&lt; <a class="el" href="a01209.html">RayResult</a> &gt; **out_results, <a class="el" href="a01209.html">RayResult</a> **results_data)</td></tr>
+<tr class="memdesc:ga6dcb31db6dbee37c03f277cb61cfdf37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fire rays for each node in origins/directions as ordered pairs and get distance back as a result.  <a href="a00270.html#ga6dcb31db6dbee37c03f277cb61cfdf37">More...</a><br /></td></tr>
+<tr class="separator:ga6dcb31db6dbee37c03f277cb61cfdf37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3104ee3687c70b5045ac3c69eb557b99"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00270.html#ga3104ee3687c70b5045ac3c69eb557b99">FireSingleRayDistance</a> (<a class="el" href="a01165.html">HF::RayTracer::EmbreeRayTracer</a> *ert, const float *origin, const float *direction, const float max_distance, float *out_distance, int *out_meshid)</td></tr>
+<tr class="memdesc:ga3104ee3687c70b5045ac3c69eb557b99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fire a single ray and get the distance to its hit and the meshID if it hit anything. If it missed, then distance and meshid will both be -1.  <a href="a00270.html#ga3104ee3687c70b5045ac3c69eb557b99">More...</a><br /></td></tr>
+<tr class="separator:ga3104ee3687c70b5045ac3c69eb557b99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3c06d32b8a4af0110489372e292555fd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00270.html#ga3c06d32b8a4af0110489372e292555fd">FireRay</a> (<a class="el" href="a01165.html">HF::RayTracer::EmbreeRayTracer</a> *ert, float &amp;x, float &amp;y, float &amp;z, float dx, float dy, float dz, float max_distance, bool &amp;result)</td></tr>
+<tr class="memdesc:ga3c06d32b8a4af0110489372e292555fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fire a single ray from the raytracer and recieve a point in return.  <a href="a00270.html#ga3c06d32b8a4af0110489372e292555fd">More...</a><br /></td></tr>
+<tr class="separator:ga3c06d32b8a4af0110489372e292555fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4ebcc7736a5e5d25b7696f7ce9f2d645"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00270.html#ga4ebcc7736a5e5d25b7696f7ce9f2d645">FireMultipleRays</a> (<a class="el" href="a01165.html">HF::RayTracer::EmbreeRayTracer</a> *ert, float *origins, const float *directions, int size, float max_distance, bool *result_array)</td></tr>
+<tr class="memdesc:ga4ebcc7736a5e5d25b7696f7ce9f2d645"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fire multiple rays at once in parallel and recieve their hitpoints in return. The number of directions must be equal to the number of origins.  <a href="a00270.html#ga4ebcc7736a5e5d25b7696f7ce9f2d645">More...</a><br /></td></tr>
+<tr class="separator:ga4ebcc7736a5e5d25b7696f7ce9f2d645"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga245b0839ec087dfdec623a3e16ffa859"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00270.html#ga245b0839ec087dfdec623a3e16ffa859">FireMultipleOriginsOneDirection</a> (<a class="el" href="a01165.html">HF::RayTracer::EmbreeRayTracer</a> *ert, float *origins, const float *direction, int size, float max_distance, bool *result_array)</td></tr>
+<tr class="memdesc:ga245b0839ec087dfdec623a3e16ffa859"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fire rays from each origin point in the given direction.  <a href="a00270.html#ga245b0839ec087dfdec623a3e16ffa859">More...</a><br /></td></tr>
+<tr class="separator:ga245b0839ec087dfdec623a3e16ffa859"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga03461ff9a261808c13f79f054435d4a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00270.html#ga03461ff9a261808c13f79f054435d4a6">FireMultipleDirectionsOneOrigin</a> (<a class="el" href="a01165.html">HF::RayTracer::EmbreeRayTracer</a> *ert, const float *origin, float *directions, int size, float max_distance, bool *result_array)</td></tr>
+<tr class="memdesc:ga03461ff9a261808c13f79f054435d4a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fire rays from a single origin point in multiple directions and get a the points where they intersected the geometry.  <a href="a00270.html#ga03461ff9a261808c13f79f054435d4a6">More...</a><br /></td></tr>
+<tr class="separator:ga03461ff9a261808c13f79f054435d4a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6c1fa7c28a047526d9d41ad7d1a822bd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00270.html#ga6c1fa7c28a047526d9d41ad7d1a822bd">FireOcclusionRays</a> (<a class="el" href="a01165.html">HF::RayTracer::EmbreeRayTracer</a> *ert, const float *origins, const float *directions, int origin_size, int direction_size, float max_distance, bool *result_array)</td></tr>
+<tr class="memdesc:ga6c1fa7c28a047526d9d41ad7d1a822bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fire one or more occlusion rays in parallel.  <a href="a00270.html#ga6c1fa7c28a047526d9d41ad7d1a822bd">More...</a><br /></td></tr>
+<tr class="separator:ga6c1fa7c28a047526d9d41ad7d1a822bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5a68e1d668554f73ee06de8aeeaaffad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00270.html#ga5a68e1d668554f73ee06de8aeeaaffad">DestroyRayResultVector</a> (std::vector&lt; <a class="el" href="a01209.html">RayResult</a> &gt; *analysis)</td></tr>
+<tr class="memdesc:ga5a68e1d668554f73ee06de8aeeaaffad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy a vector of rayresults.  <a href="a00270.html#ga5a68e1d668554f73ee06de8aeeaaffad">More...</a><br /></td></tr>
+<tr class="separator:ga5a68e1d668554f73ee06de8aeeaaffad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p>Analyze the view from from points in the environment. </p>
+<p>Perform efficient ray intersections using Intel's Embree Library. </p>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ga9fc392fe8fc058674ffd5f4c8273a714"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga9fc392fe8fc058674ffd5f4c8273a714">&#9670;&nbsp;</a></span>FibbonacciDistributePoints()</h2>
+<a id="ga1b13a025665fa4141f3d6660a6aefa5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1b13a025665fa4141f3d6660a6aefa5c">&#9670;&nbsp;</a></span>CreateRaytracer()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; std::array&lt; float, 3 &gt; &gt; HF::AnalysisMethods::ViewAnalysis::FibbonacciDistributePoints </td>
+          <td class="memname"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> CreateRaytracer </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>num_points</em>, </td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="a01129.html">HF::Geometry::MeshInfo</a> &gt; *&#160;</td>
+          <td class="paramname"><em>mesh</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>upwards_fov</em> = <code>50.0f</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>downward_fov</em> = <code>70.0f</code>&#160;</td>
+          <td class="paramtype"><a class="el" href="a01165.html">HF::RayTracer::EmbreeRayTracer</a> **&#160;</td>
+          <td class="paramname"><em>out_raytracer</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -135,227 +140,130 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p><code>#include &lt;<a class="el" href="a00023.html">Cpp/analysismethods/src/view_analysis.cpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00245.html">Cinterface/raytracer_C.h</a>&gt;</code></p>
 
-<p>Evenly distribute a set of points around a sphere centered at the origin. </p>
+<p>Create a new raytracer using several meshes. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">num_points</td><td>Maximum number of points to distribute. </td></tr>
-    <tr><td class="paramname">upward_limit</td><td>Maximum angle in degrees to cast rays above the viewpoint. </td></tr>
-    <tr><td class="paramname">downward_limit</td><td>Maximum angle in degrees to cast rays below the viewpoint. /// </td></tr>
+    <tr><td class="paramname">mesh</td><td>The meshes to add to raytracer's BVH. </td></tr>
+    <tr><td class="paramname">out_raytracer</td><td>Output parameter for the new raytracer. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A vector of arrays containing the x, y, and z coordinates of each point on the sphere.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>The number of points returned by this function will not exactly equal the amount of points specified by num_points depending on the values of upwards_fov and downward fov. More information is available below.</dd></dl>
-<dl class="section user"><dt>How FOV is implemented</dt><dd>Every point is equally distributed on a sphere using a formula based on this stack overflow answer: <a href="https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere">https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere</a>. This formula cannot easily be mapped to a specific vertical fov or cone, so instead this function will remove points that don't meet the constraints. Discarding points causes the number of points generated to be less than the num_rays argument, so the percentage of points discarded is calculated and a second run is performed with an adjusted num_rays value to get as close as possible to the value specified in the argument. This approach will not result in an exact match to the num_rays argument, and will run <a class="el" href="a00275.html#a2780d3f9e9ea879d43121893c60a520c">FibbonacciDist</a> twice.</dd></dl>
-<dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line"><span class="comment">// Requires #include &quot;view_analysis.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Prepare maximum number of points to distribute</span></div>
-<div class="line"><span class="keywordtype">int</span> size = 8;</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Generate points without any limitations on fov</span></div>
-<div class="line"><span class="keyword">auto</span> points = <a class="code" href="a00270.html#ga9fc392fe8fc058674ffd5f4c8273a714">HF::AnalysisMethods::ViewAnalysis::FibbonacciDistributePoints</a>(size, 90.0f, 90.0f);</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Print number of points</span></div>
-<div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;Number of Points:&quot;</span> &lt;&lt; points.size() &lt;&lt; std::endl;</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Iterate through results and print every point.</span></div>
-<div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;[&quot;</span>;</div>
-<div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; size; i++) {</div>
-<div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span>&amp; point =  points[i];</div>
-<div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;(&quot;</span> &lt;&lt; point[0] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; point[1] &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; point[2] &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;</div>
-<div class="line">    <span class="keywordflow">if</span> (i != size-1) std::cout &lt;&lt; <span class="stringliteral">&quot;, &quot;</span>;</div>
-<div class="line">}</div>
-<div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;]&quot;</span> &lt;&lt; std::endl;</div>
-</div><!-- fragment --></dd></dl>
-<p><code>&gt;&gt;&gt; Number of Points:8</code><br  />
-<code>&gt;&gt;&gt; [(-0, -1, 0), (-0.304862, -0.75, -0.586992), (0.813476, -0.5, 0.29708), (-0.894994, -0.25, 0.369441),</code> <code>(0.423846, 0, -0.905734), (0.289781, 0.25, 0.923865), (-0.749296, 0.5, -0.43423), (0.64601, 0.75, -0.142025)]</code> </p>
+<dl class="section return"><dt>Returns</dt><dd>HF_STATUS::MISSING_DEPEND if Embree's dll couldn't be found. HF_STATUS::GENERIC_ERROR if <em>mesh</em>  is null. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="a00023_source.html#l00158">158</a> of file <a class="el" href="a00023_source.html">view_analysis.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00242_source.html#l00015">15</a> of file <a class="el" href="a00242_source.html">raytracer_C.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="a00023_source.html#l00118">HF::AnalysisMethods::ViewAnalysis::FibbonacciDist()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="a00251_source.html#l00125">SphericalDistribute()</a>, <a class="el" href="a00026_source.html#l00483">HF::AnalysisMethods::ViewAnalysis::SphericalRayshootWithAnyRTForDistance()</a>, <a class="el" href="a00026_source.html#l00353">HF::AnalysisMethods::ViewAnalysis::SphericalViewAnalysis()</a>, and <a class="el" href="a00023_source.html#l00186">HF::AnalysisMethods::ViewAnalysis::SphericalViewAnalysisFromRayRequests()</a>.</p>
+<p class="reference">References <a class="el" href="a00086_source.html#l00037">HF::Exceptions::GENERIC_ERROR</a>, <a class="el" href="a00086_source.html#l00042">HF::Exceptions::MISSING_DEPEND</a>, and <a class="el" href="a00086_source.html#l00031">HF::Exceptions::OK</a>.</p>
 
 </div>
 </div>
-<a id="gab6b8e3eab649b42ac014fb7d02d54892"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gab6b8e3eab649b42ac014fb7d02d54892">&#9670;&nbsp;</a></span>SphereicalViewAnalysisAggregate()</h2>
+<a id="ga5a68e1d668554f73ee06de8aeeaaffad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5a68e1d668554f73ee06de8aeeaaffad">&#9670;&nbsp;</a></span>DestroyRayResultVector()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> SphereicalViewAnalysisAggregate </td>
+          <td class="memname"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> DestroyRayResultVector </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a> *&#160;</td>
-          <td class="paramname"><em>ERT</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="a01209.html">RayResult</a> &gt; *&#160;</td>
+          <td class="paramname"><em>analysis</em></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="a01203.html">HF::SpatialStructures::Node</a> *&#160;</td>
-          <td class="paramname"><em>node_ptr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>node_size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>max_rays</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>upward_fov</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>downward_fov</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>height</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a00254.html#a8a1aa9474094ff70818051c921c0537f">AGGREGATE_TYPE</a>&#160;</td>
-          <td class="paramname"><em>AT</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; float &gt; **&#160;</td>
-          <td class="paramname"><em>out_scores</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float **&#160;</td>
-          <td class="paramname"><em>out_scores_ptr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>out_scores_size</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p><code>#include &lt;<a class="el" href="a00254.html">Cinterface/view_analysis_C.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00245.html">Cinterface/raytracer_C.h</a>&gt;</code></p>
 
-<p>Perform view analysis from a list of points and aggregate the results into an ordered list of scores. Scores are aggregated by the aggregation specified in AT aggregation method. </p>
+<p>Destroy a vector of rayresults. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">ERT</td><td>Raytracer to fire all rays from. </td></tr>
-    <tr><td class="paramname">node_ptr</td><td>Positions to perform view analysis from. </td></tr>
-    <tr><td class="paramname">node_size</td><td>Number of nodes in the array pointed at by node_ptr. </td></tr>
-    <tr><td class="paramname">max_rays</td><td>Number of rays to evenly distribute in a sphere. </td></tr>
-    <tr><td class="paramname">height</td><td>Height to offset nodes from the ground. </td></tr>
-    <tr><td class="paramname">AT</td><td>Type of aggregation method to use on distance values. </td></tr>
-    <tr><td class="paramname">out_scores</td><td>Output parameter for score vector. </td></tr>
-    <tr><td class="paramname">out_scores_ptr</td><td>Output parameter for the score vector's underlying data. </td></tr>
-    <tr><td class="paramname">out_scores_size</td><td>Number of elements in the output vector.. </td></tr>
+    <tr><td class="paramname">analysis</td><td>The ray results to destroy. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>HF_STATUS::OK on completion. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="a00251_source.html#l00017">17</a> of file <a class="el" href="a00251_source.html">view_analysis_C.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00242_source.html#l00222">222</a> of file <a class="el" href="a00242_source.html">raytracer_C.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="a00086_source.html#l00016">HF::Exceptions::OK</a>, and <a class="el" href="a00026_source.html#l00483">HF::AnalysisMethods::ViewAnalysis::SphericalRayshootWithAnyRTForDistance()</a>.</p>
+<p class="reference">References <a class="el" href="a00227_source.html#l00097">DeleteRawPtr()</a>, and <a class="el" href="a00086_source.html#l00031">HF::Exceptions::OK</a>.</p>
 
 </div>
 </div>
-<a id="gaa4c5714c1e557ef83a03d447eb30c6d0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaa4c5714c1e557ef83a03d447eb30c6d0">&#9670;&nbsp;</a></span>SphereicalViewAnalysisAggregateFlat()</h2>
+<a id="gac7ff0b75adf7d24754a702f09d5bcf07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac7ff0b75adf7d24754a702f09d5bcf07">&#9670;&nbsp;</a></span>DestroyRayTracer()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> SphereicalViewAnalysisAggregateFlat </td>
+          <td class="memname"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> DestroyRayTracer </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a> *&#160;</td>
-          <td class="paramname"><em>ERT</em>, </td>
+          <td class="paramtype"><a class="el" href="a01165.html">HF::RayTracer::EmbreeRayTracer</a> *&#160;</td>
+          <td class="paramname"><em>rt_to_destroy</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="a00245.html">Cinterface/raytracer_C.h</a>&gt;</code></p>
+
+<p>Delete an existing raytracer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rt_to_destroy</td><td>Raytracer to destroy. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>HF::OK on completion. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00242_source.html#l00032">32</a> of file <a class="el" href="a00242_source.html">raytracer_C.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="a00086_source.html#l00031">HF::Exceptions::OK</a>.</p>
+
+</div>
+</div>
+<a id="ga03461ff9a261808c13f79f054435d4a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga03461ff9a261808c13f79f054435d4a6">&#9670;&nbsp;</a></span>FireMultipleDirectionsOneOrigin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> FireMultipleDirectionsOneOrigin </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a01165.html">HF::RayTracer::EmbreeRayTracer</a> *&#160;</td>
+          <td class="paramname"><em>ert</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const float *&#160;</td>
-          <td class="paramname"><em>node_ptr</em>, </td>
+          <td class="paramname"><em>origin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>directions</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>node_size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>max_rays</em>, </td>
+          <td class="paramname"><em>size</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>upward_fov</em>, </td>
+          <td class="paramname"><em>max_distance</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>downward_fov</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>height</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a00254.html#a8a1aa9474094ff70818051c921c0537f">AGGREGATE_TYPE</a>&#160;</td>
-          <td class="paramname"><em>AT</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; float &gt; **&#160;</td>
-          <td class="paramname"><em>out_scores</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float **&#160;</td>
-          <td class="paramname"><em>out_scores_ptr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>out_scores_size</em>&#160;</td>
+          <td class="paramtype">bool *&#160;</td>
+          <td class="paramname"><em>result_array</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -365,559 +273,68 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p><code>#include &lt;<a class="el" href="a00254.html">Cinterface/view_analysis_C.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00245.html">Cinterface/raytracer_C.h</a>&gt;</code></p>
 
-<p>Perform view analysis from a list of points and aggregate the results into an ordered list of scores. Scores are aggregated by the aggregation specified in AT aggregation method. </p>
+<p>Fire rays from a single origin point in multiple directions and get a the points where they intersected the geometry. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">ERT</td><td>Raytracer to fire all rays from. </td></tr>
-    <tr><td class="paramname">node_ptr</td><td>Positions to perform view analysis from as a flat array of floats. Each 3 floats should represent a new point. </td></tr>
-    <tr><td class="paramname">node_size</td><td>Number of nodes in the array pointed at by node_ptr. Should be equal to the length of node_ptr/3. </td></tr>
-    <tr><td class="paramname">max_rays</td><td>Number of rays to evenly distribute in a sphere. </td></tr>
-    <tr><td class="paramname">upward_fov</td><td>Maximum degrees upward from the viewer's eye level to consider. </td></tr>
-    <tr><td class="paramname">downward_fov</td><td>Maximum degrees downward from the viewer's eye level to consider. </td></tr>
-    <tr><td class="paramname">height</td><td>Height to offset nodes from the ground. </td></tr>
-    <tr><td class="paramname">AT</td><td>Type of aggregation method to use on distance values. </td></tr>
-    <tr><td class="paramname">out_scores</td><td>Output parameter for score vector. </td></tr>
-    <tr><td class="paramname">out_scores_ptr</td><td>Output parameter for the score vector's underlying data. </td></tr>
-    <tr><td class="paramname">out_scores_size</td><td>Number of elements in the output vector.. </td></tr>
+    <tr><td class="paramname">ert</td><td>A pointer to a valid embree raytracer. </td></tr>
+    <tr><td class="paramname">origin</td><td>An array of 3 floats representing the X, Y, and Z coordinates of the origin to fire from respectively. </td></tr>
+    <tr><td class="paramname">directions</td><td>A list of floats representing directions, with each 3 floats representing one direction. If a ray fired in a direction resulted in a hit, that directionwill be overwritten to the hitpoint. </td></tr>
+    <tr><td class="paramname">size</td><td>Number of points and directions, equal to the total number of floats in one array / 3 </td></tr>
+    <tr><td class="paramname">max_distance</td><td>Maximum distance a ray can travel and still hit a target </td></tr>
+    <tr><td class="paramname">result_array</td><td>Output parameter conatining an ordered list of booleans set to true if the their rays hit, and false if their rays did not. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>HF_STATUS::OK on completion. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="a00251_source.html#l00050">50</a> of file <a class="el" href="a00251_source.html">view_analysis_C.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00242_source.html#l00190">190</a> of file <a class="el" href="a00242_source.html">raytracer_C.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="a00134_source.html#l00024">ConvertRawFloatArrayToPoints()</a>, <a class="el" href="a00086_source.html#l00016">HF::Exceptions::OK</a>, and <a class="el" href="a00026_source.html#l00483">HF::AnalysisMethods::ViewAnalysis::SphericalRayshootWithAnyRTForDistance()</a>.</p>
+<p class="reference">References <a class="el" href="a00134_source.html#l00024">ConvertRawFloatArrayToPoints()</a>, <a class="el" href="a00119_source.html#l00207">HF::RayTracer::EmbreeRayTracer::FireRays()</a>, and <a class="el" href="a00086_source.html#l00031">HF::Exceptions::OK</a>.</p>
 
 </div>
 </div>
-<a id="gaf572b7bec28d55bf2c72719742703dff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaf572b7bec28d55bf2c72719742703dff">&#9670;&nbsp;</a></span>SphericalDistribute()</h2>
+<a id="ga245b0839ec087dfdec623a3e16ffa859"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga245b0839ec087dfdec623a3e16ffa859">&#9670;&nbsp;</a></span>FireMultipleOriginsOneDirection()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> SphericalDistribute </td>
+          <td class="memname"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> FireMultipleOriginsOneDirection </td>
           <td>(</td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>num_rays</em>, </td>
+          <td class="paramtype"><a class="el" href="a01165.html">HF::RayTracer::EmbreeRayTracer</a> *&#160;</td>
+          <td class="paramname"><em>ert</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::vector&lt; float &gt; **&#160;</td>
-          <td class="paramname"><em>out_direction_vector</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float **&#160;</td>
-          <td class="paramname"><em>out_direction_data</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>upward_fov</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>downward_fov</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p><code>#include &lt;<a class="el" href="a00254.html">Cinterface/view_analysis_C.h</a>&gt;</code></p>
-
-<p>Distribute directions in a sphere </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">num_rays</td><td>The number of directions to generate. </td></tr>
-    <tr><td class="paramname">out_direction_vector</td><td>Output parameter for the resulting directions. </td></tr>
-    <tr><td class="paramname">upward_fov</td><td>Maximum degrees upward from the viewer's eye level to consider. </td></tr>
-    <tr><td class="paramname">downward_fov</td><td>Maximum degrees downward from the viewer's eye level to consider. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>HF_STATUS::OK On success. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="a00251_source.html#l00125">125</a> of file <a class="el" href="a00251_source.html">view_analysis_C.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00023_source.html#l00158">HF::AnalysisMethods::ViewAnalysis::FibbonacciDistributePoints()</a>, and <a class="el" href="a00086_source.html#l00016">HF::Exceptions::OK</a>.</p>
-
-</div>
-</div>
-<a id="ga249100bce7370ba4202f47294f179f81"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga249100bce7370ba4202f47294f179f81">&#9670;&nbsp;</a></span>SphericalRayshootWithAnyRTForDistance()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename RT , typename N &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt;float&gt; HF::AnalysisMethods::ViewAnalysis::SphericalRayshootWithAnyRTForDistance </td>
-          <td>(</td>
-          <td class="paramtype">RT &amp;&#160;</td>
-          <td class="paramname"><em>ray_tracer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::vector&lt; N &gt; &amp;&#160;</td>
-          <td class="paramname"><em>Nodes</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>num_rays</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>upward_limit</em> = <code>50.0f</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>downward_limit</em> = <code>70.0f</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>height</em> = <code>1.7f</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="a00275.html#a0a616a205221414bf7aa28966b461dec">AGGREGATE_TYPE</a>&#160;</td>
-          <td class="paramname"><em>aggregation</em> = <code><a class="el" href="a00275.html#a0a616a205221414bf7aa28966b461deca6970bdc2201030b9c03fbdcf3973858a">AGGREGATE_TYPE::SUM</a></code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p><code>#include &lt;<a class="el" href="a00026.html">Cpp/analysismethods/src/view_analysis.h</a>&gt;</code></p>
-
-<p>Conduct view analysis and recieve a summarized set of results for each node. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ray_tracer</td><td>A valid raytracer that already has the geometry loaded. </td></tr>
-    <tr><td class="paramname">Nodes</td><td>Points to perform analysis from. </td></tr>
-    <tr><td class="paramname">num_rays</td><td>The number of rays to cast from each point in nodes. The actual amount of rays cast may be less or more than this number. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">upward_limit</td><td>Maximum angle in degrees to cast rays above the viewpoint. </td></tr>
-    <tr><td class="paramname">downward_limit</td><td>Maximum angle in degrees to cast rays below the viewpoint. </td></tr>
-    <tr><td class="paramname">height</td><td>Height off the ground to cast from. All points in Nodes will be offset this distance from the ground (+Z) before calculations are performed </td></tr>
-    <tr><td class="paramname">aggregation</td><td>The type of aggregation to use.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">RT</td><td>A Raytracer with FireAnyRay defined for the type of N. </td></tr>
-    <tr><td class="paramname">N</td><td>A point that overloads [] for 0, 1 and 2.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A Nodes.size() long array of results for each node in Nodes.</dd></dl>
-<p>The analysis performed by this function is identical to that described in SphericalViewAnalysis, but results are summarized over the course of the analysis for every observer point instead of recording each individual intersection. The memory usage for this function is drastically lower than that of SphericalViewAnalysis, resulting in lower execution times at the cost of being restricted to a set of predefined aggregation methods.</p>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">std::bad_array_new_length</td><td>The number of rays is larger than that which can be stored in a std::vector.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="a00270.html#ga9fc392fe8fc058674ffd5f4c8273a714" title="Evenly distribute a set of points around a sphere centered at the origin.">FibbonacciDistributePoints</a> For details on how the directions are calculated from num_rays. </dd>
-<dd>
-<a class="el" href="a00270.html#ga8090bf1d24c0cff934daba1c76d82ba6" title="Conduct view analysis with any Raytracer in parallel.">SphericalViewAnalysis</a> to get the result of every ray fired instead of summarizing the results. </dd>
-<dd>
-<a class="el" href="a00275.html#a0a616a205221414bf7aa28966b461dec" title="The type of aggregation to use for ViewAnalysisAggregate">AGGREGATE_TYPE</a> for a list of aggregation methods. </dd>
-<dd>
-<a class="el" href="a00275.html#abd3ed7f9595c30784ca668bf886a8d77">Aggregate</a> for the implementation of all aggregation methods.</dd></dl>
-<dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line"><span class="comment">// Requires #include &quot;view_analysis.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Use this so we can fit within 80 characters</span></div>
-<div class="line"><span class="keyword">using</span> <a class="code" href="a00270.html#ga249100bce7370ba4202f47294f179f81">HF::AnalysisMethods::ViewAnalysis::SphericalRayshootWithAnyRTForDistance</a>;</div>
-<div class="line"><span class="keyword">using</span> <a class="code" href="a00275.html#a0a616a205221414bf7aa28966b461dec">HF::AnalysisMethods::ViewAnalysis::AGGREGATE_TYPE</a>;</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Create Plane</span></div>
-<div class="line"><span class="keyword">const</span> std::vector&lt;float&gt; plane_vertices{</div>
-<div class="line">    -10.0f, 10.0f, 0.0f,</div>
-<div class="line">    -10.0f, -10.0f, 0.0f,</div>
-<div class="line">    10.0f, 10.0f, 0.0f,</div>
-<div class="line">    10.0f, -10.0f, 0.0f,</div>
-<div class="line">};</div>
-<div class="line"><span class="keyword">const</span> std::vector&lt;int&gt; plane_indices{ 3, 1, 0, 2, 3, 0 };</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Create RayTracer</span></div>
-<div class="line">EmbreeRayTracer ert(std::vector&lt;MeshInfo&gt;{</div>
-<div class="line">    MeshInfo(plane_vertices, plane_indices, 0, <span class="stringliteral">&quot; &quot;</span>)}</div>
-<div class="line">);</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Define observer points</span></div>
-<div class="line">std::vector&lt;std::array&lt;float, 3&gt;&gt; points{</div>
-<div class="line">    {0,0,0}, {10,10,0}, {20,20,0}, {30, 30, 0}</div>
-<div class="line">};</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Perform View Analysis and sum the distance to all intersections</span></div>
-<div class="line"><span class="comment">// for every node</span></div>
-<div class="line"><span class="keywordtype">int</span> num_rays = 2000;</div>
-<div class="line"><span class="keyword">auto</span> results = <a class="code" href="a00270.html#ga249100bce7370ba4202f47294f179f81">SphericalRayshootWithAnyRTForDistance</a>(</div>
-<div class="line">    ert, points, num_rays, 90.0f, 90.0f, 1.7f, <a class="code" href="a00275.html#a0a616a205221414bf7aa28966b461deca6970bdc2201030b9c03fbdcf3973858a">AGGREGATE_TYPE::SUM</a></div>
-<div class="line">);</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Print Results</span></div>
-<div class="line">std::cerr &lt;&lt; <span class="stringliteral">&quot;(&quot;</span>;</div>
-<div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; results.size(); i++) {</div>
-<div class="line">    std::cerr &lt;&lt; results[i];</div>
-<div class="line"> </div>
-<div class="line">    <span class="keywordflow">if</span> (i != results.size() - 1) std::cerr &lt;&lt; <span class="stringliteral">&quot;, &quot;</span>;</div>
-<div class="line">}</div>
-<div class="line">std::cerr &lt;&lt; <span class="stringliteral">&quot;)&quot;</span> &lt;&lt; std::endl;</div>
-</div><!-- fragment --></dd></dl>
-<p><code>&gt;&gt;&gt; (2746.72, 932.565, 170.858, 76.8413)</code></p>
-<dl class="todo"><dt><b><a class="el" href="a00264.html#_todo000003">Todo:</a></b></dt><dd>Should this have a height check like the one in the <a class="el" href="a00278.html" title="Evaluate visibility between points in a set of locations.">VisibilityGraph</a>?</dd></dl>
-<dl class="todo"><dt><b><a class="el" href="a00264.html#_todo000004">Todo:</a></b></dt><dd>Rename this to ViewAnalysisAggregate.</dd></dl>
-<dl class="todo"><dt><b><a class="el" href="a00264.html#_todo000005">Todo:</a></b></dt><dd>Potential speed up here by using a Raytracer function that doesn't return the point of intersection. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="a00026_source.html#l00483">483</a> of file <a class="el" href="a00026_source.html">view_analysis.h</a>.</p>
-
-<p class="reference">References <a class="el" href="a00026_source.html#l00198">HF::AnalysisMethods::ViewAnalysis::Aggregate()</a>, and <a class="el" href="a00023_source.html#l00158">HF::AnalysisMethods::ViewAnalysis::FibbonacciDistributePoints()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="a00251_source.html#l00017">SphereicalViewAnalysisAggregate()</a>, and <a class="el" href="a00251_source.html#l00050">SphereicalViewAnalysisAggregateFlat()</a>.</p>
-
-</div>
-</div>
-<a id="ga8090bf1d24c0cff934daba1c76d82ba6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga8090bf1d24c0cff934daba1c76d82ba6">&#9670;&nbsp;</a></span>SphericalViewAnalysis()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename RES , typename RT , typename N &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt;RES&gt; HF::AnalysisMethods::ViewAnalysis::SphericalViewAnalysis </td>
-          <td>(</td>
-          <td class="paramtype">RT &amp;&#160;</td>
-          <td class="paramname"><em>ray_tracer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::vector&lt; N &gt; &amp;&#160;</td>
-          <td class="paramname"><em>Nodes</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>num_rays</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>upward_limit</em> = <code>50.0f</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>downward_limit</em> = <code>70.0f</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>height</em> = <code>1.7f</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p><code>#include &lt;<a class="el" href="a00026.html">Cpp/analysismethods/src/view_analysis.h</a>&gt;</code></p>
-
-<p>Conduct view analysis with any Raytracer in parallel. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ray_tracer</td><td>A valid raytracer that already has the geometry loaded. </td></tr>
-    <tr><td class="paramname">Nodes</td><td>Points to perform analysis from. </td></tr>
-    <tr><td class="paramname">num_rays</td><td>The number of rays to cast from each point in nodes. The actual amount of rays cast may be less or more than this number. </td></tr>
-    <tr><td class="paramname">upward_limit</td><td>Maximum angle in degrees to cast rays above the viewpoint. </td></tr>
-    <tr><td class="paramname">downward_limit</td><td>Maximum angle in degrees to cast rays below the viewpoint. </td></tr>
-    <tr><td class="paramname">height</td><td>Height off the ground to cast from. All points in Nodes will be offset this distance from the ground (+Z) before calculations are performed</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">RES</td><td>A class or struct that has a .SetHit() function. This function will be called with the node, direction, distance to intersection, and MeshID intersected for every ray that intersects geometry.</td></tr>
-    <tr><td class="paramname">RT</td><td>A Raytracer with FireAnyRay defined for the type of N. </td></tr>
-    <tr><td class="paramname">N</td><td>A point that overloads [] for 0, 1 and 2.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>An <em>approximately</em> num_rays * Nodes.size() long vector of RES with one element for every ray fired. Results will be laid out in order with the first node's results first, then the second, etc. Every ray that intersected something, and all elements that didn't result in an intersection will left at their default values.</dd></dl>
-<p><a class="el" href="a00275.html">ViewAnalysis</a> is calculated by casting a series of rays equally distributed in a sphere from each point in Nodes. This function will run in parallel using all available cores. Depending on RES, this function's complexity and results can vary.</p>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">std::bad_array_new_length</td><td>The number of rays is larger than that which can be stored in a std::vector.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="a00270.html#ga9fc392fe8fc058674ffd5f4c8273a714" title="Evenly distribute a set of points around a sphere centered at the origin.">FibbonacciDistributePoints</a> For details on how the directions are calculated from num_rays. </dd>
-<dd>
-<a class="el" href="a00270.html#ga249100bce7370ba4202f47294f179f81" title="Conduct view analysis and recieve a summarized set of results for each node.">SphericalRayshootWithAnyRTForDistance</a> for a more efficent method of getting a summary of the results.</dd></dl>
-<dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line"><span class="comment">// Requires #include &quot;view_analysis.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Use this so we can fit within 80 characters</span></div>
-<div class="line"><span class="keyword">using</span> <a class="code" href="a00270.html#ga8090bf1d24c0cff934daba1c76d82ba6">HF::AnalysisMethods::ViewAnalysis::SphericalViewAnalysis</a>;</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Create Plane</span></div>
-<div class="line"><span class="keyword">const</span> std::vector&lt;float&gt; plane_vertices{</div>
-<div class="line">    -10.0f, 10.0f, 0.0f,</div>
-<div class="line">    -10.0f, -10.0f, 0.0f,</div>
-<div class="line">    10.0f, 10.0f, 0.0f,</div>
-<div class="line">    10.0f, -10.0f, 0.0f,</div>
-<div class="line">};</div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">const</span> std::vector&lt;int&gt; plane_indices{ 3, 1, 0, 2, 3, 0 };</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Create RayTracer</span></div>
-<div class="line">EmbreeRayTracer ert(std::vector&lt;MeshInfo&gt;{</div>
-<div class="line">    MeshInfo(plane_vertices, plane_indices, 0, <span class="stringliteral">&quot; &quot;</span>)}</div>
-<div class="line">);</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Define a struct that only stores the distance when sethit is called.</span></div>
-<div class="line"><span class="keyword">struct </span>SampleResults {</div>
-<div class="line">    <span class="keywordtype">float</span> dist = -1.0f;</div>
-<div class="line"> </div>
-<div class="line">    <span class="keyword">inline</span> <span class="keywordtype">void</span> SetHit(</div>
-<div class="line">        <span class="keyword">const</span> std::array&lt;float, 3&gt; &amp; node,</div>
-<div class="line">        <span class="keyword">const</span> std::array&lt;float, 3&gt; &amp; direction,</div>
-<div class="line">        <span class="keywordtype">float</span> distance,</div>
-<div class="line">        <span class="keywordtype">int</span> meshID</div>
-<div class="line">    ) {</div>
-<div class="line">        dist = distance;</div>
-<div class="line">    }</div>
-<div class="line">};</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Define observer points</span></div>
-<div class="line">std::vector&lt;std::array&lt;float, 3&gt;&gt; points{</div>
-<div class="line">    {0,0,0}, {1,1,0}, {1,2,0}, {1000, 1000, 0}</div>
-<div class="line">};</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Perform View Analysis</span></div>
-<div class="line"><span class="keywordtype">int</span> num_rays = 50;</div>
-<div class="line"><span class="keyword">auto</span> results = SphericalViewAnalysis&lt;SampleResults&gt;(ert, points, num_rays);</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Determine how many directions there were since there may have been less than</span></div>
-<div class="line"><span class="comment">// what we specified</span></div>
-<div class="line"><span class="keywordtype">int</span> num_directions = results.size() / points.size();</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Construct a vector from the results of the first node</span></div>
-<div class="line">std::vector&lt;SampleResults&gt; first_results(</div>
-<div class="line">    results.begin(), results.begin() + num_directions</div>
-<div class="line">);</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Print Results</span></div>
-<div class="line">std::cerr &lt;&lt; <span class="stringliteral">&quot;(&quot;</span>;</div>
-<div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; first_results.size(); i++) {</div>
-<div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> &amp; result = first_results[i];</div>
-<div class="line">    std::cerr &lt;&lt; result.dist;</div>
-<div class="line"> </div>
-<div class="line">    <span class="keywordflow">if</span> (i != first_results.size() - 1) std::cerr &lt;&lt; <span class="stringliteral">&quot;, &quot;</span>;</div>
-<div class="line">}</div>
-<div class="line">std::cerr &lt;&lt; <span class="stringliteral">&quot;)&quot;</span> &lt;&lt; std::endl;</div>
-</div><!-- fragment --></dd></dl>
-<p><code>&gt;&gt;&gt; (-1, 7.35812, -1, -1, 3.70356, -1, 5.56647, 12.1517, -1, 2.36725, -1, -1, 2.97477, 2.58713, -1,</code> <code>-1, 1.91404, 5.95885, 4.26368, 1.86167, -1, -1, 2.0406, 2.78304, -1, -1, -1, -1, 2.83909, 2.05302,</code> <code>-1, -1, 1.90724, 4.29017, 6.3381, 1.98544, -1, -1, 2.75554, 3.15929, -1, -1, 2.6345, -1, -1,</code> <code>6.80486, -1, 5.12012, -1)</code></p>
-<dl class="todo"><dt><b><a class="el" href="a00264.html#_todo000002">Todo:</a></b></dt><dd>Should this have a height check like the one in the <a class="el" href="a00278.html" title="Evaluate visibility between points in a set of locations.">VisibilityGraph</a>?</dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="a00026_source.html#l00353">353</a> of file <a class="el" href="a00026_source.html">view_analysis.h</a>.</p>
-
-<p class="reference">References <a class="el" href="a00023_source.html#l00158">HF::AnalysisMethods::ViewAnalysis::FibbonacciDistributePoints()</a>.</p>
-
-</div>
-</div>
-<a id="ga94d3ddc3981020e2852fc77e51266185"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga94d3ddc3981020e2852fc77e51266185">&#9670;&nbsp;</a></span>SphericalViewAnalysisNoAggregate()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> SphericalViewAnalysisNoAggregate </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a> *&#160;</td>
-          <td class="paramname"><em>ERT</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="a01203.html">HF::SpatialStructures::Node</a> *&#160;</td>
-          <td class="paramname"><em>node_ptr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>node_size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>max_rays</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>upward_fov</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>downward_fov</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>height</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="a01219.html">RayResult</a> &gt; **&#160;</td>
-          <td class="paramname"><em>out_results</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a01219.html">RayResult</a> **&#160;</td>
-          <td class="paramname"><em>out_results_ptr</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p><code>#include &lt;<a class="el" href="a00254.html">Cinterface/view_analysis_C.h</a>&gt;</code></p>
-
-<p>Perform view analysis and recieve the distance and meshid for each individual ray. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ERT</td><td>Raytracer to fire rays from. </td></tr>
-    <tr><td class="paramname">node_ptr</td><td>Positions to perform view analysis from . </td></tr>
-    <tr><td class="paramname">node_size</td><td>Number of nodes in node_ptr. </td></tr>
-    <tr><td class="paramname">max_rays</td><td>Number of rays to fire per node. </td></tr>
-    <tr><td class="paramname">upward_fov</td><td>Maximum degrees upward from the viewer's eye level to consider. </td></tr>
-    <tr><td class="paramname">downward_fov</td><td>Maximum degrees downward from the viewer's eye level to consider. </td></tr>
-    <tr><td class="paramname">height</td><td>Height to offset nodes to. </td></tr>
-    <tr><td class="paramname">out_results</td><td>Vector to store results in. </td></tr>
-    <tr><td class="paramname">out_results_ptr</td><td>Pointer to the result vector's data. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>HF_STATUS::OK on vomplryion. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="a00251_source.html#l00073">73</a> of file <a class="el" href="a00251_source.html">view_analysis_C.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00086_source.html#l00016">HF::Exceptions::OK</a>.</p>
-
-</div>
-</div>
-<a id="ga348af4492f3e4e7ffab6da3e86de3924"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga348af4492f3e4e7ffab6da3e86de3924">&#9670;&nbsp;</a></span>SphericalViewAnalysisNoAggregateFlat()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> SphericalViewAnalysisNoAggregateFlat </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a> *&#160;</td>
-          <td class="paramname"><em>ERT</em>, </td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>origins</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const float *&#160;</td>
-          <td class="paramname"><em>node_ptr</em>, </td>
+          <td class="paramname"><em>direction</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>node_size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>max_rays</em>, </td>
+          <td class="paramname"><em>size</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>upward_fov</em>, </td>
+          <td class="paramname"><em>max_distance</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>downward_fov</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>height</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="a01219.html">RayResult</a> &gt; **&#160;</td>
-          <td class="paramname"><em>out_results</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a01219.html">RayResult</a> **&#160;</td>
-          <td class="paramname"><em>out_results_ptr</em>&#160;</td>
+          <td class="paramtype">bool *&#160;</td>
+          <td class="paramname"><em>result_array</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -927,38 +344,432 @@ template&lt;typename RES , typename RT , typename N &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p><code>#include &lt;<a class="el" href="a00254.html">Cinterface/view_analysis_C.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00245.html">Cinterface/raytracer_C.h</a>&gt;</code></p>
 
-<p>Perform view analysis and recieve the distance and meshid for each individual ray. </p>
+<p>Fire rays from each origin point in the given direction. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">ERT</td><td>Raytracer to fire all rays from. </td></tr>
-    <tr><td class="paramname">node_ptr</td><td>Positions to perform view analysis from as a flat array of floats. Each 3 floats should represent a new point. </td></tr>
-    <tr><td class="paramname">node_size</td><td>Number of nodes in the array pointed at by node_ptr. Should be equal to the length of node_ptr/3. </td></tr>
-    <tr><td class="paramname">max_rays</td><td>Number of rays to evenly distribute in a sphere. </td></tr>
-    <tr><td class="paramname">upward_fov</td><td>Maximum degrees upward from the viewer's eye level to consider. </td></tr>
-    <tr><td class="paramname">downward_fov</td><td>Maximum degrees downward from the viewer's eye level to consider. </td></tr>
-    <tr><td class="paramname">height</td><td>Height to offset nodes from the ground. </td></tr>
-    <tr><td class="paramname">out_scores</td><td>Output parameter for score vector. </td></tr>
-    <tr><td class="paramname">out_scores_ptr</td><td>Output parameter for the score vector's underlying data. </td></tr>
-    <tr><td class="paramname">out_scores_size</td><td>Number of elements in the output vector. </td></tr>
+    <tr><td class="paramname">ert</td><td>The raytracer to fire each ray from. </td></tr>
+    <tr><td class="paramname">origins</td><td>A list of floats representing origin points, with each 3 floats representing one point. </td></tr>
+    <tr><td class="paramname">direction</td><td>An array of 3 floats representing the X, Y, and Z coordinates respectively. </td></tr>
+    <tr><td class="paramname">size</td><td>Number of points and directions, equal to the total number of floats in one array / 3. </td></tr>
+    <tr><td class="paramname">max_distance</td><td>Maximum distance a ray can travel and still hit a target. </td></tr>
+    <tr><td class="paramname">result_array</td><td>Output parameter conatining an ordered list of booleans set to true if the their rays hit, and false if their rays did not. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00242_source.html#l00168">168</a> of file <a class="el" href="a00242_source.html">raytracer_C.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="a00134_source.html#l00024">ConvertRawFloatArrayToPoints()</a>, <a class="el" href="a00119_source.html#l00207">HF::RayTracer::EmbreeRayTracer::FireRays()</a>, and <a class="el" href="a00086_source.html#l00031">HF::Exceptions::OK</a>.</p>
+
+</div>
+</div>
+<a id="ga4ebcc7736a5e5d25b7696f7ce9f2d645"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4ebcc7736a5e5d25b7696f7ce9f2d645">&#9670;&nbsp;</a></span>FireMultipleRays()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> FireMultipleRays </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a01165.html">HF::RayTracer::EmbreeRayTracer</a> *&#160;</td>
+          <td class="paramname"><em>ert</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>origins</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float *&#160;</td>
+          <td class="paramname"><em>directions</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>max_distance</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool *&#160;</td>
+          <td class="paramname"><em>result_array</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="a00245.html">Cinterface/raytracer_C.h</a>&gt;</code></p>
+
+<p>Fire multiple rays at once in parallel and recieve their hitpoints in return. The number of directions must be equal to the number of origins. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ert</td><td>Raytracer to fire each ray from. </td></tr>
+    <tr><td class="paramname">origins</td><td>A list of floats representing origin points, with each 3 floats representing one point. If the ray fired from a point is successful, said point will be overwritten with the place it hit. </td></tr>
+    <tr><td class="paramname">directions</td><td>A list of floats representing ray directions, with each 3 floats representing one direction. </td></tr>
+    <tr><td class="paramname">size</td><td>Number of points and directions, equal to the total number of floats in one array / 3. </td></tr>
+    <tr><td class="paramname">max_distance</td><td>Maximum distance a ray can travel and still hit a target. Any hits beyond this point will not be recorded. </td></tr>
+    <tr><td class="paramname">result_array</td><td>Output parameter conatining an ordered list of booleans set to true if the their rays hit, and false if their rays did not. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>HF_STATUS::OK on completion. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="a00251_source.html#l00105">105</a> of file <a class="el" href="a00251_source.html">view_analysis_C.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00242_source.html#l00140">140</a> of file <a class="el" href="a00242_source.html">raytracer_C.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="a00134_source.html#l00024">ConvertRawFloatArrayToPoints()</a>, and <a class="el" href="a00086_source.html#l00016">HF::Exceptions::OK</a>.</p>
+<p class="reference">References <a class="el" href="a00134_source.html#l00024">ConvertRawFloatArrayToPoints()</a>, <a class="el" href="a00119_source.html#l00207">HF::RayTracer::EmbreeRayTracer::FireRays()</a>, and <a class="el" href="a00086_source.html#l00031">HF::Exceptions::OK</a>.</p>
+
+</div>
+</div>
+<a id="ga6c1fa7c28a047526d9d41ad7d1a822bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6c1fa7c28a047526d9d41ad7d1a822bd">&#9670;&nbsp;</a></span>FireOcclusionRays()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> FireOcclusionRays </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a01165.html">HF::RayTracer::EmbreeRayTracer</a> *&#160;</td>
+          <td class="paramname"><em>ert</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float *&#160;</td>
+          <td class="paramname"><em>origins</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float *&#160;</td>
+          <td class="paramname"><em>directions</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>origin_size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>direction_size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>max_distance</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool *&#160;</td>
+          <td class="paramname"><em>result_array</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="a00245.html">Cinterface/raytracer_C.h</a>&gt;</code></p>
+
+<p>Fire one or more occlusion rays in parallel. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ert</td><td>A pointer to a valid embree raytracer </td></tr>
+    <tr><td class="paramname">origins</td><td>A list of floats representing origin points, with each 3 floats representing one point </td></tr>
+    <tr><td class="paramname">directions</td><td>a list of floats representing ray directions, with each 3 floats representing one direction </td></tr>
+    <tr><td class="paramname">origin_size</td><td>How many origins points are included are included. Note that a single origin point is 3 floats, so this should equal the length of the origin array/3. This must match direction_size or be equal to one. </td></tr>
+    <tr><td class="paramname">direction_size</td><td>How many directions are included. Note that a single direction is 3 floats, so this should equal the length of the origin array/3. This must match origin_size or be equal to one. </td></tr>
+    <tr><td class="paramname">max_distance</td><td>Maximum distance a ray can travel and still hit a target. </td></tr>
+    <tr><td class="paramname">result_array</td><td>Output array booleans </td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Occlusion rays are noticably faster than standard rays but are only capable of returning whether they hit something or not. This makes them good for line of sight checks. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00242_source.html#l00212">212</a> of file <a class="el" href="a00242_source.html">raytracer_C.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="a00134_source.html#l00024">ConvertRawFloatArrayToPoints()</a>, <a class="el" href="a00119_source.html#l00299">HF::RayTracer::EmbreeRayTracer::FireOcclusionRays()</a>, and <a class="el" href="a00086_source.html#l00031">HF::Exceptions::OK</a>.</p>
+
+</div>
+</div>
+<a id="ga3c06d32b8a4af0110489372e292555fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3c06d32b8a4af0110489372e292555fd">&#9670;&nbsp;</a></span>FireRay()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> FireRay </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a01165.html">HF::RayTracer::EmbreeRayTracer</a> *&#160;</td>
+          <td class="paramname"><em>ert</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float &amp;&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float &amp;&#160;</td>
+          <td class="paramname"><em>z</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>dx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>dy</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>dz</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>max_distance</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool &amp;&#160;</td>
+          <td class="paramname"><em>result</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="a00245.html">Cinterface/raytracer_C.h</a>&gt;</code></p>
+
+<p>Fire a single ray from the raytracer and recieve a point in return. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ert</td><td>Raytracer to fire each ray from. </td></tr>
+    <tr><td class="paramname">x</td><td>x coordinate of the ray's origin. Will be set to the hit point's x coordinate if the ray something. </td></tr>
+    <tr><td class="paramname">y</td><td>y coordinate of the ray's origin. Will be set to the hit point's y coordinate if the ray something. </td></tr>
+    <tr><td class="paramname">z</td><td>z coordinate of the ray's origin. Will be set to the hit point's z coordinate if the ray something. </td></tr>
+    <tr><td class="paramname">dx</td><td>x coordinate of the ray's direction. </td></tr>
+    <tr><td class="paramname">dy</td><td>y coordinate of the ray's direction. </td></tr>
+    <tr><td class="paramname">dz</td><td>z coordinate of the ray's direction. </td></tr>
+    <tr><td class="paramname">max_distance</td><td>Maximum distance to record a hit within. Any hits beyond this distance will not be counted. </td></tr>
+    <tr><td class="paramname">result</td><td>Set to true if the ray hits, false otherwise </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>HF::OK on completion. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00242_source.html#l00134">134</a> of file <a class="el" href="a00242_source.html">raytracer_C.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="a00119_source.html#l00163">HF::RayTracer::EmbreeRayTracer::FireRay()</a>, and <a class="el" href="a00086_source.html#l00031">HF::Exceptions::OK</a>.</p>
+
+</div>
+</div>
+<a id="ga6dcb31db6dbee37c03f277cb61cfdf37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6dcb31db6dbee37c03f277cb61cfdf37">&#9670;&nbsp;</a></span>FireRaysDistance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> FireRaysDistance </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a01165.html">HF::RayTracer::EmbreeRayTracer</a> *&#160;</td>
+          <td class="paramname"><em>ert</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>origins</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>num_origins</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>directions</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>num_directions</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="a01209.html">RayResult</a> &gt; **&#160;</td>
+          <td class="paramname"><em>out_results</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a01209.html">RayResult</a> **&#160;</td>
+          <td class="paramname"><em>results_data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="a00245.html">Cinterface/raytracer_C.h</a>&gt;</code></p>
+
+<p>Fire rays for each node in origins/directions as ordered pairs and get distance back as a result. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ert</td><td>The raytracer to use for firing every ray. </td></tr>
+    <tr><td class="paramname">origins</td><td>An array of origin points to fire rays from. Should be an array of floats with every 3 floats representing a new origin point. </td></tr>
+    <tr><td class="paramname">num_origins</td><td>The number of points in origins. NOTE: This should be equal to the length of origins/3, since every 3 floats in origins equals a single point. </td></tr>
+    <tr><td class="paramname">directions</td><td>An array of directions points to fire rays from. Should be an array of floats with every 3 floats representing a new direction. </td></tr>
+    <tr><td class="paramname">num_directions</td><td>The number of directions in directions. NOTE: This should be equal to the length of directions/3, since every 3 floats in directions equals a single direction. </td></tr>
+    <tr><td class="paramname">out_results</td><td>Output parameter for ray results. </td></tr>
+    <tr><td class="paramname">results_data</td><td>Output parameter for the data of the array held by <em>out_results</em>  </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>HF_STATUS::OK on completion. HF::GENERICE_ERROR if the input parameters didn't meet atleast one of the required cases below. </dd></dl>
+<p>Can be fired in 3 configurations: </p>
+<ul>
+<li>
+&lt;font color="#2a2a2a"&gt; Equal amount of directions/origins: Fire a ray for every pair of origin/direction in order. i.e. (origin[0], direction[0]), (origin[1], direction[1]). &lt;/font&gt;  </li>
+<li>
+&lt;font color="#2a2a2a"&gt; One direction, multiple origins: Fire a ray in the given direction from each origin point in origins. &lt;/font&gt;  </li>
+<li>
+&lt;font color="#2a2a2a"&gt; One origin, multiple directions: Fire a ray from the origin point in each direction in directions. &lt;/font&gt;  </li>
+</ul>
+
+<p class="definition">Definition at line <a class="el" href="a00242_source.html#l00052">52</a> of file <a class="el" href="a00242_source.html">raytracer_C.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="a00134_source.html#l00024">ConvertRawFloatArrayToPoints()</a>, <a class="el" href="a00122_source.html#l00910">HF::RayTracer::EmbreeRayTracer::FireAnyRay()</a>, <a class="el" href="a00086_source.html#l00037">HF::Exceptions::GENERIC_ERROR</a>, and <a class="el" href="a00086_source.html#l00031">HF::Exceptions::OK</a>.</p>
+
+</div>
+</div>
+<a id="ga3104ee3687c70b5045ac3c69eb557b99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3104ee3687c70b5045ac3c69eb557b99">&#9670;&nbsp;</a></span>FireSingleRayDistance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> FireSingleRayDistance </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a01165.html">HF::RayTracer::EmbreeRayTracer</a> *&#160;</td>
+          <td class="paramname"><em>ert</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float *&#160;</td>
+          <td class="paramname"><em>origin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float *&#160;</td>
+          <td class="paramname"><em>direction</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>max_distance</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>out_distance</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>out_meshid</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="a00245.html">Cinterface/raytracer_C.h</a>&gt;</code></p>
+
+<p>Fire a single ray and get the distance to its hit and the meshID if it hit anything. If it missed, then distance and meshid will both be -1. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ert</td><td>The ray tracer to fire from. </td></tr>
+    <tr><td class="paramname">origin</td><td>The origin point to fire from. </td></tr>
+    <tr><td class="paramname">direction</td><td>The direction to fire the ray in. </td></tr>
+    <tr><td class="paramname">max_distance</td><td>Maximum distance to record a hit within. Any hits beyond this distance will not be counted. </td></tr>
+    <tr><td class="paramname">out_distance</td><td>Out parameter for Distance to the hitpoint. Will be set to -1 if the ray didn't hit anything. </td></tr>
+    <tr><td class="paramname">out_meshid</td><td>Out parameter for the ID of the hit mesh. Will be set to -1 if the ray didn't hit anything. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>HF_STATUS::OK on success. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00242_source.html#l00039">39</a> of file <a class="el" href="a00242_source.html">raytracer_C.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="a00122_source.html#l00910">HF::RayTracer::EmbreeRayTracer::FireAnyRay()</a>, and <a class="el" href="a00086_source.html#l00031">HF::Exceptions::OK</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
-<div class="ttc" id="aa00275_html_a0a616a205221414bf7aa28966b461dec"><div class="ttname"><a href="a00275.html#a0a616a205221414bf7aa28966b461dec">HF::AnalysisMethods::ViewAnalysis::AGGREGATE_TYPE</a></div><div class="ttdeci">AGGREGATE_TYPE</div><div class="ttdoc">The type of aggregation to use for ViewAnalysisAggregate</div><div class="ttdef"><b>Definition:</b> <a href="a00026_source.html#l00038">view_analysis.h:38</a></div></div>
-<div class="ttc" id="aa00270_html_ga249100bce7370ba4202f47294f179f81"><div class="ttname"><a href="a00270.html#ga249100bce7370ba4202f47294f179f81">HF::AnalysisMethods::ViewAnalysis::SphericalRayshootWithAnyRTForDistance</a></div><div class="ttdeci">std::vector&lt; float &gt; SphericalRayshootWithAnyRTForDistance(RT &amp;ray_tracer, const std::vector&lt; N &gt; &amp;Nodes, int num_rays, float upward_limit=50.0f, float downward_limit=70.0f, float height=1.7f, const AGGREGATE_TYPE aggregation=AGGREGATE_TYPE::SUM)</div><div class="ttdoc">Conduct view analysis and recieve a summarized set of results for each node.</div><div class="ttdef"><b>Definition:</b> <a href="a00026_source.html#l00483">view_analysis.h:483</a></div></div>
-<div class="ttc" id="aa00270_html_ga8090bf1d24c0cff934daba1c76d82ba6"><div class="ttname"><a href="a00270.html#ga8090bf1d24c0cff934daba1c76d82ba6">HF::AnalysisMethods::ViewAnalysis::SphericalViewAnalysis</a></div><div class="ttdeci">std::vector&lt; RES &gt; SphericalViewAnalysis(RT &amp;ray_tracer, const std::vector&lt; N &gt; &amp;Nodes, int num_rays, float upward_limit=50.0f, float downward_limit=70.0f, float height=1.7f)</div><div class="ttdoc">Conduct view analysis with any Raytracer in parallel.</div><div class="ttdef"><b>Definition:</b> <a href="a00026_source.html#l00353">view_analysis.h:353</a></div></div>
-<div class="ttc" id="aa00270_html_ga9fc392fe8fc058674ffd5f4c8273a714"><div class="ttname"><a href="a00270.html#ga9fc392fe8fc058674ffd5f4c8273a714">HF::AnalysisMethods::ViewAnalysis::FibbonacciDistributePoints</a></div><div class="ttdeci">vector&lt; std::array&lt; float, 3 &gt; &gt; FibbonacciDistributePoints(int num_points, float upwards_fov, float downward_fov)</div><div class="ttdoc">Evenly distribute a set of points around a sphere centered at the origin.</div><div class="ttdef"><b>Definition:</b> <a href="a00023_source.html#l00158">view_analysis.cpp:158</a></div></div>
-<div class="ttc" id="aa00275_html_a0a616a205221414bf7aa28966b461deca6970bdc2201030b9c03fbdcf3973858a"><div class="ttname"><a href="a00275.html#a0a616a205221414bf7aa28966b461deca6970bdc2201030b9c03fbdcf3973858a">HF::AnalysisMethods::ViewAnalysis::AGGREGATE_TYPE::SUM</a></div><div class="ttdeci">@ SUM</div><div class="ttdoc">Sum of the distance from the origin to all intersections.</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

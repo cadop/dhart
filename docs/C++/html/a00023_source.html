@@ -81,18 +81,18 @@ $(function() {
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00155.html">node.h</a>&gt;</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">using namespace </span><a class="code" href="a00277.html">HF::RayTracer</a>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">using namespace </span><a class="code" href="a00279.html">HF::RayTracer</a>;</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">using</span> std::vector;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">using</span> <a class="code" href="a01203.html">HF::SpatialStructures::Node</a>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">using</span> <a class="code" href="a01193.html">HF::SpatialStructures::Node</a>;</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#undef min</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#undef max</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="a00275.html">   24</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="a00275.html">HF::AnalysisMethods::ViewAnalysis</a> {</div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="a00277.html">   24</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="a00277.html">HF::ViewAnalysis</a> {</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="a00275.html#a2034cc822af4f41aa70c9b3450873d58">   27</a></span>&#160;    constexpr <span class="keywordtype">float</span> <a class="code" href="a00275.html#a2034cc822af4f41aa70c9b3450873d58">ConvertToRadians</a>(<span class="keywordtype">float</span> num_in_degrees) {</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="a00277.html#a9dcf81751f63f5c7356a4f45159184bb">   27</a></span>&#160;    constexpr <span class="keywordtype">float</span> <a class="code" href="a00277.html#a9dcf81751f63f5c7356a4f45159184bb">ConvertToRadians</a>(<span class="keywordtype">float</span> num_in_degrees) {</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keywordflow">return</span> num_in_degrees * (<span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(M_PI) / 180.00f);</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    }</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="a00275.html#a93736cf04cfb45988e094e8b2efb2bd6">   33</a></span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="a00275.html#a93736cf04cfb45988e094e8b2efb2bd6">Normalize</a>(std::array&lt;float, 3&gt; &amp; vec) {</div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="a00277.html#a38ed3d26d2fcc4bde1790c53eda3945a">   33</a></span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="a00277.html#a38ed3d26d2fcc4bde1790c53eda3945a">Normalize</a>(std::array&lt;float, 3&gt; &amp; vec) {</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keywordtype">float</span>&amp; x = vec[0];</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keywordtype">float</span>&amp; y = vec[1];</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keywordtype">float</span>&amp; z = vec[2];</div>
@@ -106,160 +106,86 @@ $(function() {
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    }</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="a00275.html#a58df074201e5978c5f45401820f7c3a2">   52</a></span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="a00275.html#a58df074201e5978c5f45401820f7c3a2">CapAltitude</a>(std::array&lt;float, 3&gt;&amp; vec, <span class="keywordtype">float</span> max_angle, <span class="keywordtype">float</span> min_angle) {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordtype">float</span>&amp; x = vec[0]; <span class="keywordtype">float</span>&amp; y = vec[1]; <span class="keywordtype">float</span>&amp; z = vec[2];</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="comment">// Convert to spherical coordinates</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordtype">float</span> r = sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keywordtype">float</span> theta = atan2(y, x);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="comment">//float phi = atan(sqrt(pow(x, 2) + pow(y, 2)) / z);</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keywordtype">float</span> phi = acos(z / r);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="comment">//maximum_phi = std::max(phi, maximum_phi);</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="comment">//minimum_phi = std::min(phi, minimum_phi);</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="comment">// Lerp phi</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="comment">//printf(&quot;Old Phi: %f, &quot;, phi);</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        phi = min_angle + (phi/<span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(M_PI)) * (max_angle - min_angle);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="comment">//printf(&quot;New Phi: %f\n&quot;, phi);</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="comment">//  new_maximum_phi = std::max(phi, new_maximum_phi);</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="comment">//  new_minimum_phi = std::min(phi, new_minimum_phi);</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        x = r * sin(phi) * cos(theta);</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        y = r * sin(phi) * sin(theta);</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        z = r * (cos(phi));</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="comment">//printf(&quot;(%f,%f,%f)\n&quot;, x,y,z);</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    }</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="a00275.html#ae2b003df15838dc5928082445fd6524d">   96</a></span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="a00275.html#ae2b003df15838dc5928082445fd6524d">AltitudeWithinRange</a>(<span class="keyword">const</span> std::array&lt;float, 3&gt;&amp; vec, <span class="keywordtype">float</span> max_angle, <span class="keywordtype">float</span> min_angle) {</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="keywordtype">float</span> x = vec[0]; <span class="keywordtype">float</span> y = vec[1]; <span class="keywordtype">float</span> z = vec[2];</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keywordtype">float</span> r = sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <span class="keywordtype">float</span> phi = acos(z / r);</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="keywordflow">return</span> (phi &gt;= min_angle &amp;&amp; phi &lt;= max_angle);</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    }</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno"><a class="line" href="a00275.html#a2780d3f9e9ea879d43121893c60a520c">  118</a></span>&#160;    vector&lt;std::array&lt;float, 3&gt;&gt; <a class="code" href="a00275.html#a2780d3f9e9ea879d43121893c60a520c">FibbonacciDist</a>(</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        <span class="keywordtype">int</span> num_points,</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <span class="keywordtype">float</span> upwards_fov,</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        <span class="keywordtype">float</span> downward_fov</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    ) {</div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="a00277.html#a94327f2628a43ffe3dc4ab854e8aa20d">   62</a></span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="a00277.html#a94327f2628a43ffe3dc4ab854e8aa20d">AltitudeWithinRange</a>(<span class="keyword">const</span> std::array&lt;float, 3&gt;&amp; vec, <span class="keywordtype">float</span> max_angle, <span class="keywordtype">float</span> min_angle) {</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordtype">float</span> x = vec[0]; <span class="keywordtype">float</span> y = vec[1]; <span class="keywordtype">float</span> z = vec[2];</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordtype">float</span> r = sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="keywordtype">float</span> phi = acos(z / r);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keywordflow">return</span> (phi &gt;= min_angle &amp;&amp; phi &lt;= max_angle);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    }</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="a00277.html#ad171585ac55c35e394e26a2f80364a0f">   84</a></span>&#160;    vector&lt;std::array&lt;float, 3&gt;&gt; <a class="code" href="a00277.html#ad171585ac55c35e394e26a2f80364a0f">FibbonacciDist</a>(</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="keywordtype">int</span> num_points,</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keywordtype">float</span> upwards_fov,</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="keywordtype">float</span> downward_fov</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    ) {</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="comment">// Convert limits to radians</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">float</span> upperlimit = <a class="code" href="a00277.html#a9dcf81751f63f5c7356a4f45159184bb">ConvertToRadians</a>(upwards_fov);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">float</span> lowerlimit = <a class="code" href="a00277.html#a9dcf81751f63f5c7356a4f45159184bb">ConvertToRadians</a>(downward_fov);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="comment">// Calculate maximum and minimum altitude</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">float</span> max_phi = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(M_PI_2) + lowerlimit;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">float</span> min_phi = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(M_PI_2) - upperlimit;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">int</span> n = num_points;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        std::vector&lt;std::array&lt;float, 3&gt;&gt; out_points;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <span class="keywordtype">float</span> offset = 2.0f / float(n);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">float</span> increment = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(M_PI)* (3.0f - sqrtf(5.0f));</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 5; i &lt; n + 5; i++) {</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            <span class="keywordtype">float</span> y = ((float(i) * offset) - 1.0f) - (offset / 0.2f);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            <span class="keywordtype">float</span> r = sqrtf(1.0f - powf(y, 2));</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            <span class="keywordtype">float</span> phi = (float(i + 1) * increment);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            <span class="keywordtype">float</span> x = cosf(phi) * r;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            <span class="keywordtype">float</span> z = sinf(phi) * r;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            <span class="comment">// Check for nans. These can sometimes occur at the beginning and end of the result set</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            <span class="comment">// due to imprecision.</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            <span class="keywordflow">if</span> (!isnan(x) &amp;&amp; !isnan(y) &amp;&amp; !isnan(z)) {</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                <span class="keyword">auto</span> new_point = std::array&lt;float, 3&gt;{x, y, z};</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                <a class="code" href="a00277.html#a38ed3d26d2fcc4bde1790c53eda3945a">Normalize</a>(new_point);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                <span class="keywordflow">if</span> (<a class="code" href="a00277.html#a94327f2628a43ffe3dc4ab854e8aa20d">AltitudeWithinRange</a>(new_point, max_phi, min_phi))</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                    out_points.emplace_back(new_point);</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            }</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        }</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <span class="keywordflow">return</span> out_points;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    }</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <span class="comment">// Convert limits to radians</span></div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">float</span> upperlimit = <a class="code" href="a00275.html#a2034cc822af4f41aa70c9b3450873d58">ConvertToRadians</a>(upwards_fov);</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">float</span> lowerlimit = <a class="code" href="a00275.html#a2034cc822af4f41aa70c9b3450873d58">ConvertToRadians</a>(downward_fov);</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        <span class="comment">// Calculate maximum and minimum altitude</span></div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">float</span> max_phi = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(M_PI_2) + lowerlimit;</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">float</span> min_phi = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(M_PI_2) - upperlimit;</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">int</span> n = num_points;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        std::vector&lt;std::array&lt;float, 3&gt;&gt; out_points;</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        <span class="keywordtype">float</span> offset = 2.0f / float(n);</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">float</span> increment = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(M_PI)* (3.0f - sqrtf(5.0f));</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 5; i &lt; n + 5; i++) {</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;            <span class="keywordtype">float</span> y = ((float(i) * offset) - 1.0f) - (offset / 0.2f);</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            <span class="keywordtype">float</span> r = sqrtf(1.0f - powf(y, 2));</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;            </div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;            <span class="keywordtype">float</span> phi = (float(i + 1) * increment);</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;            <span class="keywordtype">float</span> x = cosf(phi) * r;</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;            <span class="keywordtype">float</span> z = sinf(phi) * r;</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; </div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;            <span class="comment">// Check for nans. These can sometimes occur at the beginning and end of the result set</span></div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;            <span class="comment">// due to imprecision.</span></div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;            <span class="keywordflow">if</span> (!isnan(x) &amp;&amp; !isnan(y) &amp;&amp; !isnan(z)) {</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                <span class="keyword">auto</span> new_point = std::array&lt;float, 3&gt;{x, y, z};</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                <a class="code" href="a00275.html#a93736cf04cfb45988e094e8b2efb2bd6">Normalize</a>(new_point);</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                <span class="keywordflow">if</span> (<a class="code" href="a00275.html#ae2b003df15838dc5928082445fd6524d">AltitudeWithinRange</a>(new_point, max_phi, min_phi))</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                    out_points.emplace_back(new_point);</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;            }</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        }</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        <span class="keywordflow">return</span> out_points;</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    }</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
-<div class="line"><a name="l00158"></a><span class="lineno"><a class="line" href="a00270.html#ga9fc392fe8fc058674ffd5f4c8273a714">  158</a></span>&#160;    vector&lt;std::array&lt;float, 3&gt;&gt; <a class="code" href="a00270.html#ga9fc392fe8fc058674ffd5f4c8273a714">FibbonacciDistributePoints</a>(</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        <span class="keywordtype">int</span> num_points,</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        <span class="keywordtype">float</span> upwards_fov,</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        <span class="keywordtype">float</span> downward_fov</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    ){</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        <span class="comment">// Generate initial set of directions</span></div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        <span class="keyword">auto</span> out_points = <a class="code" href="a00275.html#a2780d3f9e9ea879d43121893c60a520c">FibbonacciDist</a>(num_points, upwards_fov, downward_fov);</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        </div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        <span class="comment">// Calculate a percentage of points discarded. </span></div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        <span class="keywordtype">int</span> points_removed = num_points - out_points.size();</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        <span class="keywordtype">double</span> percent_removed = <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(points_removed) / <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(num_points);</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        <span class="comment">// Calculate a new total based on percentage of points removed</span></div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        <span class="keywordtype">int</span> new_out_points = (num_points / (1.0 - percent_removed));</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;        </div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        <span class="comment">// Generate a set of points with the new total.</span></div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        out_points.clear();</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="a00275.html#a2780d3f9e9ea879d43121893c60a520c">FibbonacciDist</a>(new_out_points, upwards_fov, downward_fov);</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    }</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
-<div class="line"><a name="l00180"></a><span class="lineno"><a class="line" href="a00275.html#af29c2ecd8da07d73a38c0f589f44ac3b">  180</a></span>&#160;    std::vector&lt;float&gt; <a class="code" href="a00275.html#af29c2ecd8da07d73a38c0f589f44ac3b">SphericalViewAnalysisWithDistance</a>(<a class="code" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a>&amp; ert, <span class="keyword">const</span> std::vector&lt;HF::SpatialStructures::Node&gt; Nodes, <span class="keywordtype">int</span> max_rays, <span class="keywordtype">float</span> height)</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    {</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        <span class="keywordflow">return</span> std::vector&lt;float&gt;();</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    }</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160; </div>
-<div class="line"><a name="l00186"></a><span class="lineno"><a class="line" href="a00275.html#aad7b55a42de41fa5c917c68c7019ac1f">  186</a></span>&#160;    vector&lt;vector&lt;FullRayRequest&gt;&gt; <a class="code" href="a00275.html#aad7b55a42de41fa5c917c68c7019ac1f">SphericalViewAnalysisFromRayRequests</a>(</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        <a class="code" href="a01163.html">EmbreeRayTracer</a>&amp; ert, </div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        <span class="keyword">const</span> vector&lt;Node&gt;&amp; nodes,</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        <span class="keywordtype">int</span> max_rays,</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        <span class="keywordtype">float</span> height</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    ){</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> directions = <a class="code" href="a00270.html#ga9fc392fe8fc058674ffd5f4c8273a714">FibbonacciDistributePoints</a>(max_rays);</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;        </div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        <span class="comment">// Preallocate an array of requests for each node</span></div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        <span class="keywordtype">int</span> num_directions = nodes.size();</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        <span class="keywordtype">int</span> num_nodes = directions.size();</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        vector&lt;vector&lt;FullRayRequest&gt;&gt; out_requests(num_nodes, vector&lt;FullRayRequest&gt;(num_directions));</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        </div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; num_nodes; i++) {</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;            <span class="keyword">auto</span> node_a = nodes[i];</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;            <span class="keyword">auto</span> origin_a = node_a.getArray();</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; </div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;            <span class="keyword">auto</span>&amp; requests_for_this_node = out_requests[i];</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;            <a class="code" href="a01167.html">FullRayRequest</a> r(origin_a[0], origin_a[1], origin_a[2], -1,-1,-1,-1);</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;            </div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = 0; k &lt; directions.size(); k++) {</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;                <span class="keyword">const</span> <span class="keyword">auto</span> &amp; dir = directions[k];</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;                <span class="keyword">auto</span>&amp; this_request = requests_for_this_node[k];</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;                </div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;                this_request.dx = dir[0];</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;                this_request.dy = dir[1];</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;                this_request.dz = dir[2];</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;            }</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;            ert.<a class="code" href="a01163.html#acc1fc8eaa0139696ec31362384a37d5f">FireRequests</a>(requests_for_this_node);</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;        }</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;        <span class="keywordflow">return</span> out_requests;</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    }</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;}</div>
+<div class="line"><a name="l00124"></a><span class="lineno"><a class="line" href="a00272.html#ga6ca336e3887ef82d17b0713c2bf862df">  124</a></span>&#160;    vector&lt;std::array&lt;float, 3&gt;&gt; <a class="code" href="a00272.html#ga6ca336e3887ef82d17b0713c2bf862df">FibbonacciDistributePoints</a>(</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        <span class="keywordtype">int</span> num_points,</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <span class="keywordtype">float</span> upwards_fov,</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        <span class="keywordtype">float</span> downward_fov</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    ){</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        <span class="comment">// Generate initial set of directions</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        <span class="keyword">auto</span> out_points = <a class="code" href="a00277.html#ad171585ac55c35e394e26a2f80364a0f">FibbonacciDist</a>(num_points, upwards_fov, downward_fov);</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        </div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        <span class="comment">// Calculate a percentage of points discarded. </span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        <span class="keywordtype">int</span> points_removed = num_points - out_points.size();</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        <span class="keywordtype">double</span> percent_removed = <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(points_removed) / <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(num_points);</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        <span class="comment">// Calculate a new total based on percentage of points removed</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        <span class="keywordtype">int</span> new_out_points = (num_points / (1.0 - percent_removed));</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        </div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        <span class="comment">// Generate a set of points with the new total.</span></div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        out_points.clear();</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="a00277.html#ad171585ac55c35e394e26a2f80364a0f">FibbonacciDist</a>(new_out_points, upwards_fov, downward_fov);</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    }</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aa00275_html_ae2b003df15838dc5928082445fd6524d"><div class="ttname"><a href="a00275.html#ae2b003df15838dc5928082445fd6524d">HF::AnalysisMethods::ViewAnalysis::AltitudeWithinRange</a></div><div class="ttdeci">bool AltitudeWithinRange(const std::array&lt; float, 3 &gt; &amp;vec, float max_angle, float min_angle)</div><div class="ttdef"><b>Definition:</b> <a href="a00023_source.html#l00096">view_analysis.cpp:96</a></div></div>
-<div class="ttc" id="aa00275_html_a58df074201e5978c5f45401820f7c3a2"><div class="ttname"><a href="a00275.html#a58df074201e5978c5f45401820f7c3a2">HF::AnalysisMethods::ViewAnalysis::CapAltitude</a></div><div class="ttdeci">bool CapAltitude(std::array&lt; float, 3 &gt; &amp;vec, float max_angle, float min_angle)</div><div class="ttdef"><b>Definition:</b> <a href="a00023_source.html#l00052">view_analysis.cpp:52</a></div></div>
-<div class="ttc" id="aa01203_html"><div class="ttname"><a href="a01203.html">HF::SpatialStructures::Node</a></div><div class="ttdoc">A point in space with an ID.</div><div class="ttdef"><b>Definition:</b> <a href="a00155_source.html#l00038">node.h:38</a></div></div>
+<div class="ttc" id="aa00277_html_a38ed3d26d2fcc4bde1790c53eda3945a"><div class="ttname"><a href="a00277.html#a38ed3d26d2fcc4bde1790c53eda3945a">HF::ViewAnalysis::Normalize</a></div><div class="ttdeci">void Normalize(std::array&lt; float, 3 &gt; &amp;vec)</div><div class="ttdoc">Normalize a vector.</div><div class="ttdef"><b>Definition:</b> <a href="a00023_source.html#l00033">view_analysis.cpp:33</a></div></div>
+<div class="ttc" id="aa00277_html_ad171585ac55c35e394e26a2f80364a0f"><div class="ttname"><a href="a00277.html#ad171585ac55c35e394e26a2f80364a0f">HF::ViewAnalysis::FibbonacciDist</a></div><div class="ttdeci">vector&lt; std::array&lt; float, 3 &gt; &gt; FibbonacciDist(int num_points, float upwards_fov, float downward_fov)</div><div class="ttdef"><b>Definition:</b> <a href="a00023_source.html#l00084">view_analysis.cpp:84</a></div></div>
+<div class="ttc" id="aa00279_html"><div class="ttname"><a href="a00279.html">HF::RayTracer</a></div><div class="ttdoc">Cast rays to determine if and where they intersect geometry.</div><div class="ttdef"><b>Definition:</b> <a href="a00026_source.html#l00022">view_analysis.h:22</a></div></div>
 <div class="ttc" id="aa00122_html"><div class="ttname"><a href="a00122.html">embree_raytracer.h</a></div><div class="ttdoc">Contains definitions for the EmbreeRayTracer</div></div>
-<div class="ttc" id="aa00275_html"><div class="ttname"><a href="a00275.html">HF::AnalysisMethods::ViewAnalysis</a></div><div class="ttdef"><b>Definition:</b> <a href="a00023_source.html#l00024">view_analysis.cpp:24</a></div></div>
-<div class="ttc" id="aa01163_html_acc1fc8eaa0139696ec31362384a37d5f"><div class="ttname"><a href="a01163.html#acc1fc8eaa0139696ec31362384a37d5f">HF::RayTracer::EmbreeRayTracer::FireRequests</a></div><div class="ttdeci">void FireRequests(std::vector&lt; FullRayRequest &gt; &amp;requests, bool parallel=true)</div><div class="ttdoc">Fire a vector of ray requests.</div><div class="ttdef"><b>Definition:</b> <a href="a00119_source.html#l00534">embree_raytracer.cpp:534</a></div></div>
+<div class="ttc" id="aa00277_html_a94327f2628a43ffe3dc4ab854e8aa20d"><div class="ttname"><a href="a00277.html#a94327f2628a43ffe3dc4ab854e8aa20d">HF::ViewAnalysis::AltitudeWithinRange</a></div><div class="ttdeci">bool AltitudeWithinRange(const std::array&lt; float, 3 &gt; &amp;vec, float max_angle, float min_angle)</div><div class="ttdef"><b>Definition:</b> <a href="a00023_source.html#l00062">view_analysis.cpp:62</a></div></div>
+<div class="ttc" id="aa00272_html_ga6ca336e3887ef82d17b0713c2bf862df"><div class="ttname"><a href="a00272.html#ga6ca336e3887ef82d17b0713c2bf862df">HF::ViewAnalysis::FibbonacciDistributePoints</a></div><div class="ttdeci">vector&lt; std::array&lt; float, 3 &gt; &gt; FibbonacciDistributePoints(int num_points, float upwards_fov, float downward_fov)</div><div class="ttdoc">Evenly distribute a set of points around a sphere centered at the origin.</div><div class="ttdef"><b>Definition:</b> <a href="a00023_source.html#l00124">view_analysis.cpp:124</a></div></div>
 <div class="ttc" id="aa00155_html"><div class="ttname"><a href="a00155.html">node.h</a></div><div class="ttdoc">Contains definitions for the Node structure.</div></div>
-<div class="ttc" id="aa01167_html"><div class="ttname"><a href="a01167.html">HF::RayTracer::FullRayRequest</a></div><div class="ttdef"><b>Definition:</b> <a href="a00128_source.html#l00013">RayRequest.h:13</a></div></div>
 <div class="ttc" id="aa00026_html"><div class="ttname"><a href="a00026.html">view_analysis.h</a></div><div class="ttdoc">Contains definitions for the ViewAnalysis namespace.</div></div>
-<div class="ttc" id="aa00275_html_a93736cf04cfb45988e094e8b2efb2bd6"><div class="ttname"><a href="a00275.html#a93736cf04cfb45988e094e8b2efb2bd6">HF::AnalysisMethods::ViewAnalysis::Normalize</a></div><div class="ttdeci">void Normalize(std::array&lt; float, 3 &gt; &amp;vec)</div><div class="ttdoc">Normalize a vector.</div><div class="ttdef"><b>Definition:</b> <a href="a00023_source.html#l00033">view_analysis.cpp:33</a></div></div>
-<div class="ttc" id="aa00275_html_af29c2ecd8da07d73a38c0f589f44ac3b"><div class="ttname"><a href="a00275.html#af29c2ecd8da07d73a38c0f589f44ac3b">HF::AnalysisMethods::ViewAnalysis::SphericalViewAnalysisWithDistance</a></div><div class="ttdeci">std::vector&lt; float &gt; SphericalViewAnalysisWithDistance(HF::RayTracer::EmbreeRayTracer &amp;ert, const std::vector&lt; HF::SpatialStructures::Node &gt; Nodes, int max_rays, float height)</div><div class="ttdef"><b>Definition:</b> <a href="a00023_source.html#l00180">view_analysis.cpp:180</a></div></div>
-<div class="ttc" id="aa00275_html_a2034cc822af4f41aa70c9b3450873d58"><div class="ttname"><a href="a00275.html#a2034cc822af4f41aa70c9b3450873d58">HF::AnalysisMethods::ViewAnalysis::ConvertToRadians</a></div><div class="ttdeci">constexpr float ConvertToRadians(float num_in_degrees)</div><div class="ttdoc">Convert a number from degrees to radians.</div><div class="ttdef"><b>Definition:</b> <a href="a00023_source.html#l00027">view_analysis.cpp:27</a></div></div>
-<div class="ttc" id="aa00270_html_ga9fc392fe8fc058674ffd5f4c8273a714"><div class="ttname"><a href="a00270.html#ga9fc392fe8fc058674ffd5f4c8273a714">HF::AnalysisMethods::ViewAnalysis::FibbonacciDistributePoints</a></div><div class="ttdeci">vector&lt; std::array&lt; float, 3 &gt; &gt; FibbonacciDistributePoints(int num_points, float upwards_fov, float downward_fov)</div><div class="ttdoc">Evenly distribute a set of points around a sphere centered at the origin.</div><div class="ttdef"><b>Definition:</b> <a href="a00023_source.html#l00158">view_analysis.cpp:158</a></div></div>
-<div class="ttc" id="aa00277_html"><div class="ttname"><a href="a00277.html">HF::RayTracer</a></div><div class="ttdef"><b>Definition:</b> <a href="a00026_source.html#l00022">view_analysis.h:22</a></div></div>
-<div class="ttc" id="aa01163_html"><div class="ttname"><a href="a01163.html">HF::RayTracer::EmbreeRayTracer</a></div><div class="ttdoc">A wrapper for Intel's Embree Library.</div><div class="ttdef"><b>Definition:</b> <a href="a00122_source.html#l00073">embree_raytracer.h:73</a></div></div>
-<div class="ttc" id="aa00275_html_aad7b55a42de41fa5c917c68c7019ac1f"><div class="ttname"><a href="a00275.html#aad7b55a42de41fa5c917c68c7019ac1f">HF::AnalysisMethods::ViewAnalysis::SphericalViewAnalysisFromRayRequests</a></div><div class="ttdeci">vector&lt; vector&lt; FullRayRequest &gt; &gt; SphericalViewAnalysisFromRayRequests(EmbreeRayTracer &amp;ert, const vector&lt; Node &gt; &amp;nodes, int max_rays, float height)</div><div class="ttdef"><b>Definition:</b> <a href="a00023_source.html#l00186">view_analysis.cpp:186</a></div></div>
-<div class="ttc" id="aa00275_html_a2780d3f9e9ea879d43121893c60a520c"><div class="ttname"><a href="a00275.html#a2780d3f9e9ea879d43121893c60a520c">HF::AnalysisMethods::ViewAnalysis::FibbonacciDist</a></div><div class="ttdeci">vector&lt; std::array&lt; float, 3 &gt; &gt; FibbonacciDist(int num_points, float upwards_fov, float downward_fov)</div><div class="ttdef"><b>Definition:</b> <a href="a00023_source.html#l00118">view_analysis.cpp:118</a></div></div>
+<div class="ttc" id="aa00277_html_a9dcf81751f63f5c7356a4f45159184bb"><div class="ttname"><a href="a00277.html#a9dcf81751f63f5c7356a4f45159184bb">HF::ViewAnalysis::ConvertToRadians</a></div><div class="ttdeci">constexpr float ConvertToRadians(float num_in_degrees)</div><div class="ttdoc">Convert a number from degrees to radians.</div><div class="ttdef"><b>Definition:</b> <a href="a00023_source.html#l00027">view_analysis.cpp:27</a></div></div>
+<div class="ttc" id="aa00277_html"><div class="ttname"><a href="a00277.html">HF::ViewAnalysis</a></div><div class="ttdoc">Analyze space from the perspective of observers within a 3D environment.</div><div class="ttdef"><b>Definition:</b> <a href="a00023_source.html#l00024">view_analysis.cpp:24</a></div></div>
+<div class="ttc" id="aa01193_html"><div class="ttname"><a href="a01193.html">HF::SpatialStructures::Node</a></div><div class="ttdoc">A point in space with an ID.</div><div class="ttdef"><b>Definition:</b> <a href="a00155_source.html#l00038">node.h:38</a></div></div>
 <div class="ttc" id="aa00128_html"><div class="ttname"><a href="a00128.html">RayRequest.h</a></div><div class="ttdoc">Contains definitions for the RayTracer namespace.</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

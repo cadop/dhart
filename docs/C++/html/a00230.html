@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Analysis: Cinterface/objloader_C.h File Reference</title>
+<title>Analysis: Cinterface/objloader_C.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,63 +66,36 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">objloader_C.h File Reference</div>  </div>
+<div class="title">objloader_C.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;vector&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="a00233_source.html">objloader_C.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00101_source.html">objloader.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00095_source.html">meshinfo.h</a>&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00086_source.html">HFExceptions.h</a>&gt;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00227_source.html">cinterface_utils.h</a>&gt;</code><br />
 </div>
 <p><a href="a00230_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:a00273"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00273.html">HF</a></td></tr>
-<tr class="memdesc:a00273"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output CSR for interop with other languages <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00280"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00280.html">HF::Geometry</a></td></tr>
-<tr class="memdesc:a00280"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manipulate and load geometry from disk. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:a91fa3b2bb3a7312ec39d74cc1fbc7bbe"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00230.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;&#160;&#160;extern &quot;C&quot; __declspec(dllexport) int</td></tr>
-<tr class="separator:a91fa3b2bb3a7312ec39d74cc1fbc7bbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gac420d6b9a02309afc06c99ee7f85fefe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00266.html#gac420d6b9a02309afc06c99ee7f85fefe">LoadOBJ</a> (const char *obj_path, int length, float xrot, float yrot, float zrot, std::vector&lt; <a class="el" href="a01127.html">HF::Geometry::MeshInfo</a> &gt; **out_list)</td></tr>
-<tr class="memdesc:gac420d6b9a02309afc06c99ee7f85fefe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load an obj from the given path then rotate it by x,y, and z  <a href="a00266.html#gac420d6b9a02309afc06c99ee7f85fefe">More...</a><br /></td></tr>
+<tr class="memitem:gac420d6b9a02309afc06c99ee7f85fefe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00268.html#gac420d6b9a02309afc06c99ee7f85fefe">LoadOBJ</a> (const char *obj_paths, int length, float xrot, float yrot, float zrot, vector&lt; <a class="el" href="a01129.html">MeshInfo</a> &gt; **out_list)</td></tr>
+<tr class="memdesc:gac420d6b9a02309afc06c99ee7f85fefe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load an obj from the given path then rotate it by x,y, and z  <a href="a00268.html#gac420d6b9a02309afc06c99ee7f85fefe">More...</a><br /></td></tr>
 <tr class="separator:gac420d6b9a02309afc06c99ee7f85fefe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae463d4af8d6f7edc9dffa84b1099f247"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00266.html#gae463d4af8d6f7edc9dffa84b1099f247">StoreMesh</a> (std::vector&lt; <a class="el" href="a01127.html">HF::Geometry::MeshInfo</a> &gt; **out_info, const int *indices, int num_indices, const float *vertices, int num_vertices, const char *name, int id)</td></tr>
-<tr class="memdesc:gae463d4af8d6f7edc9dffa84b1099f247"><td class="mdescLeft">&#160;</td><td class="mdescRight">Store a mesh from python as meshinfo  <a href="a00266.html#gae463d4af8d6f7edc9dffa84b1099f247">More...</a><br /></td></tr>
+<tr class="memitem:gae463d4af8d6f7edc9dffa84b1099f247"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00268.html#gae463d4af8d6f7edc9dffa84b1099f247">StoreMesh</a> (vector&lt; <a class="el" href="a01129.html">MeshInfo</a> &gt; **out_info, const int *indices, int num_indices, const float *vertices, int num_vertices, const char *name, int id)</td></tr>
+<tr class="memdesc:gae463d4af8d6f7edc9dffa84b1099f247"><td class="mdescLeft">&#160;</td><td class="mdescRight">Store a mesh from python as meshinfo  <a href="a00268.html#gae463d4af8d6f7edc9dffa84b1099f247">More...</a><br /></td></tr>
 <tr class="separator:gae463d4af8d6f7edc9dffa84b1099f247"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaaae27ea29ec17a7f3def98c435622504"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00266.html#gaaae27ea29ec17a7f3def98c435622504">RotateMesh</a> (std::vector&lt; <a class="el" href="a01127.html">HF::Geometry::MeshInfo</a> &gt; *mesh_to_rotate, float xrot, float yrot, float zrot)</td></tr>
-<tr class="memdesc:gaaae27ea29ec17a7f3def98c435622504"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotate an existing mesh  <a href="a00266.html#gaaae27ea29ec17a7f3def98c435622504">More...</a><br /></td></tr>
+<tr class="memitem:gaaae27ea29ec17a7f3def98c435622504"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00268.html#gaaae27ea29ec17a7f3def98c435622504">RotateMesh</a> (vector&lt; <a class="el" href="a01129.html">MeshInfo</a> &gt; *mesh_to_rotate, float xrot, float yrot, float zrot)</td></tr>
+<tr class="memdesc:gaaae27ea29ec17a7f3def98c435622504"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotate an existing mesh  <a href="a00268.html#gaaae27ea29ec17a7f3def98c435622504">More...</a><br /></td></tr>
 <tr class="separator:gaaae27ea29ec17a7f3def98c435622504"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5f58f569ea99355c9de85658b31bc0bf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00266.html#ga5f58f569ea99355c9de85658b31bc0bf">DestroyMeshInfo</a> (std::vector&lt; <a class="el" href="a01127.html">HF::Geometry::MeshInfo</a> &gt; *mesh_to_destroy)</td></tr>
-<tr class="memdesc:ga5f58f569ea99355c9de85658b31bc0bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete all instaces of mesh info in the given vector  <a href="a00266.html#ga5f58f569ea99355c9de85658b31bc0bf">More...</a><br /></td></tr>
+<tr class="memitem:ga5f58f569ea99355c9de85658b31bc0bf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00268.html#ga5f58f569ea99355c9de85658b31bc0bf">DestroyMeshInfo</a> (vector&lt; <a class="el" href="a01129.html">MeshInfo</a> &gt; *meshes_to_destroy)</td></tr>
+<tr class="memdesc:ga5f58f569ea99355c9de85658b31bc0bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete all instances of mesh info in the given vector  <a href="a00268.html#ga5f58f569ea99355c9de85658b31bc0bf">More...</a><br /></td></tr>
 <tr class="separator:ga5f58f569ea99355c9de85658b31bc0bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a91fa3b2bb3a7312ec39d74cc1fbc7bbe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">&#9670;&nbsp;</a></span>C_INTERFACE</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define C_INTERFACE&#160;&#160;&#160;extern &quot;C&quot; __declspec(dllexport) int</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00230_source.html#l00004">4</a> of file <a class="el" href="a00230_source.html">objloader_C.h</a>.</p>
-
-</div>
-</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

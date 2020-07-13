@@ -2,36 +2,34 @@
 \label{a00032}\index{Cpp/analysismethods/src/visibility\_graph.h@{Cpp/analysismethods/src/visibility\_graph.h}}
 
 
-Contains definitions for the \mbox{\hyperlink{a00278}{Visibility\+Graph}} class.  
+Contains definitions for the \mbox{\hyperlink{a00280}{Visibility\+Graph}} class.  
 
 
 {\ttfamily \#include $<$vector$>$}\newline
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{a00273}{HF}}
-\begin{DoxyCompactList}\small\item\em Output C\+SR for interop with other languages \end{DoxyCompactList}\item 
- \mbox{\hyperlink{a00276}{H\+F\+::\+Spatial\+Structures}}
+ \mbox{\hyperlink{a00275}{HF}}
+\begin{DoxyCompactList}\small\item\em Perform human scale analysis on 3D environments. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00278}{H\+F\+::\+Spatial\+Structures}}
 \begin{DoxyCompactList}\small\item\em Contains standard fundamental data structures for representing space used throughout Human\+Factors. \end{DoxyCompactList}\item 
- \mbox{\hyperlink{a00277}{H\+F\+::\+Ray\+Tracer}}
-\item 
- \mbox{\hyperlink{a00274}{H\+F\+::\+Analysis\+Methods}}
-\item 
- \mbox{\hyperlink{a00278}{H\+F\+::\+Analysis\+Methods\+::\+Visibility\+Graph}}
+ \mbox{\hyperlink{a00279}{H\+F\+::\+Ray\+Tracer}}
+\begin{DoxyCompactList}\small\item\em Cast rays to determine if and where they intersect geometry. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00280}{H\+F\+::\+Visibility\+Graph}}
 \begin{DoxyCompactList}\small\item\em Evaluate visibility between points in a set of locations. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{a01199}{Graph}} \mbox{\hyperlink{a00278_aa5e31d3364f1dbee72065b8f5dc38574}{H\+F\+::\+Analysis\+Methods\+::\+Visibility\+Graph\+::\+All\+To\+All}} (\mbox{\hyperlink{a01163}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&ert, const std\+::vector$<$ \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \&input\+\_\+nodes, float height=1.\+7f)
+\mbox{\hyperlink{a01189}{Graph}} \mbox{\hyperlink{a00280_a12eb1e4c06400c4625cd22d925927b03}{H\+F\+::\+Visibility\+Graph\+::\+All\+To\+All}} (\mbox{\hyperlink{a01165}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&ert, const std\+::vector$<$ \mbox{\hyperlink{a01193}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \&input\+\_\+nodes, float height=1.\+7f)
 \begin{DoxyCompactList}\small\item\em Generate a Visibility Graph between every node in a set of nodes in parallel. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a01199}{Graph}} \mbox{\hyperlink{a00278_a85f2d1e50a9458e1a4b0bb8a0e0adafa}{H\+F\+::\+Analysis\+Methods\+::\+Visibility\+Graph\+::\+Group\+To\+Group}} (\mbox{\hyperlink{a01163}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&ert, const std\+::vector$<$ \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \&from, const std\+::vector$<$ \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \&to, float height=1.\+7f)
+\mbox{\hyperlink{a01189}{Graph}} \mbox{\hyperlink{a00280_ae42a5aafdfcc29b6a668355c07602efb}{H\+F\+::\+Visibility\+Graph\+::\+Group\+To\+Group}} (\mbox{\hyperlink{a01165}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&ert, const std\+::vector$<$ \mbox{\hyperlink{a01193}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \&from, const std\+::vector$<$ \mbox{\hyperlink{a01193}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \&to, float height=1.\+7f)
 \begin{DoxyCompactList}\small\item\em Generate a Visibility Graph from a set of nodes to another set of nodes. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a01199}{Graph}} \mbox{\hyperlink{a00278_a2c0cbb953168bcc6a5727bf8122b1286}{H\+F\+::\+Analysis\+Methods\+::\+Visibility\+Graph\+::\+All\+To\+All\+Undirected}} (\mbox{\hyperlink{a01163}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&ert, const std\+::vector$<$ \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \&nodes, float height, int cores=-\/1)
+\mbox{\hyperlink{a01189}{Graph}} \mbox{\hyperlink{a00280_ab1db87927118f70786a664c3b3cc7905}{H\+F\+::\+Visibility\+Graph\+::\+All\+To\+All\+Undirected}} (\mbox{\hyperlink{a01165}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&ert, const std\+::vector$<$ \mbox{\hyperlink{a01193}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \&nodes, float height, int cores=-\/1)
 \begin{DoxyCompactList}\small\item\em Generate a Visibility Graph with every edge stored twice. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Contains definitions for the \mbox{\hyperlink{a00278}{Visibility\+Graph}} class. 
+Contains definitions for the \mbox{\hyperlink{a00280}{Visibility\+Graph}} class. 
 
 \begin{DoxyAuthor}{Author}
 T\+BA 

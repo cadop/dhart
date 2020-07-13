@@ -4,7 +4,7 @@ var indexSectionsWithContent =
   1: "bcdefghimnprtuv",
   2: "beh",
   3: "abceghimnoprsuv",
-  4: "abcdefghilmnoprsuvw~",
+  4: "abcdefghilmnoprsvw~",
   5: "cdefghimnoprstuvwxyz",
   6: "gpsv",
   7: "acghns",
@@ -12,7 +12,7 @@ var indexSectionsWithContent =
   9: "g",
   10: "_ceht",
   11: "gprsv",
-  12: "adit"
+  12: "ait"
 };
 
 var indexSectionNames =

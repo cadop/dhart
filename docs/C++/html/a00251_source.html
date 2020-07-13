@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Analysis: Cinterface/view_analysis_C.cpp Source File</title>
+<title>Analysis: Cinterface/spatialstructures_C.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,185 +66,147 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">view_analysis_C.cpp</div>  </div>
+<div class="title">spatialstructures_C.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00251.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00254.html">view_analysis_C.h</a>&gt;</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;robin_hood.h&gt;</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00086.html">HFExceptions.h</a>&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00026.html">view_analysis.h</a>&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00122.html">embree_raytracer.h</a>&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00152.html">graph.h</a>&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00155.html">node.h</a>&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">using</span> <a class="code" href="a01199.html">HF::SpatialStructures::Graph</a>;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">using namespace </span><a class="code" href="a00279.html">HF::Exceptions</a>;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">using</span> <a class="code" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a>;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">using</span> std::vector;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">using</span> <a class="code" href="a01203.html">HF::SpatialStructures::Node</a>;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">using namespace </span><a class="code" href="a00274.html">HF::AnalysisMethods</a>;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="a00270.html#gab6b8e3eab649b42ac014fb7d02d54892">   17</a></span>&#160;<a class="code" href="a00218.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> <a class="code" href="a00270.html#gab6b8e3eab649b42ac014fb7d02d54892">SphereicalViewAnalysisAggregate</a>(</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="a01163.html">EmbreeRayTracer</a>* ERT, </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="a01203.html">Node</a> * node_ptr,</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordtype">int</span> node_size,</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">int</span> max_rays,</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">float</span> upward_fov,</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">float</span> downward_fov,</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">float</span> height,</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="a00254.html#a8a1aa9474094ff70818051c921c0537f">AGGREGATE_TYPE</a> AT,</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    vector&lt;float&gt;** out_scores,</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">float</span>** out_scores_ptr, </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">int</span>* out_scores_size</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;) {</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    vector&lt;float&gt;* scores = <span class="keyword">new</span> vector&lt;float&gt;();</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    vector&lt;Node&gt; nodes(node_ptr, node_ptr + node_size);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    *scores = <a class="code" href="a00270.html#ga249100bce7370ba4202f47294f179f81">ViewAnalysis::SphericalRayshootWithAnyRTForDistance</a>(</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        *ERT,</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        nodes,</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        max_rays,</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        upward_fov,</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        downward_fov,</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        height,</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        (<a class="code" href="a00275.html#a0a616a205221414bf7aa28966b461dec">ViewAnalysis::AGGREGATE_TYPE</a>)AT</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    );</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    *out_scores = scores;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    *out_scores_ptr = scores-&gt;data();</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    *out_scores_size = scores-&gt;size(); <span class="comment">// Shouldn&#39;t this always be the same?</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="a00279.html#aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d">OK</a>;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;}</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="a00270.html#gaa4c5714c1e557ef83a03d447eb30c6d0">   50</a></span>&#160;<a class="code" href="a00218.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> <a class="code" href="a00270.html#gaa4c5714c1e557ef83a03d447eb30c6d0">SphereicalViewAnalysisAggregateFlat</a>(<a class="code" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a>* ERT, <span class="keyword">const</span> <span class="keywordtype">float</span>* node_ptr, <span class="keywordtype">int</span> node_size, <span class="keywordtype">int</span> max_rays, <span class="keywordtype">float</span> upward_fov, <span class="keywordtype">float</span> downward_fov, <span class="keywordtype">float</span> height, <a class="code" href="a00254.html#a8a1aa9474094ff70818051c921c0537f">AGGREGATE_TYPE</a> AT, std::vector&lt;float&gt;** out_scores, <span class="keywordtype">float</span>** out_scores_ptr, <span class="keywordtype">int</span>* out_scores_size)</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;{</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    vector&lt;float&gt;* scores = <span class="keyword">new</span> vector&lt;float&gt;();</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    vector&lt;std::array&lt;float, 3&gt;&gt; nodes = <a class="code" href="a00134.html#a2f5650b0bad6c47aa34fc2206433a34b">ConvertRawFloatArrayToPoints</a>(node_ptr, node_size);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    *scores = <a class="code" href="a00270.html#ga249100bce7370ba4202f47294f179f81">ViewAnalysis::SphericalRayshootWithAnyRTForDistance</a>(</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        *ERT,</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        nodes,</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        max_rays,</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        upward_fov,</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        downward_fov,</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        height,</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        (<a class="code" href="a00275.html#a0a616a205221414bf7aa28966b461dec">ViewAnalysis::AGGREGATE_TYPE</a>)AT</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    );</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    *out_scores = scores;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    *out_scores_ptr = scores-&gt;data();</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    *out_scores_size = scores-&gt;size(); <span class="comment">// Shouldn&#39;t this always be the same?</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="a00279.html#aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d">OK</a>;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;}</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="a00270.html#ga94d3ddc3981020e2852fc77e51266185">   73</a></span>&#160;<a class="code" href="a00218.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> <a class="code" href="a00270.html#ga94d3ddc3981020e2852fc77e51266185">SphericalViewAnalysisNoAggregate</a>(</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <a class="code" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a>* ERT,</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keyword">const</span> <a class="code" href="a01203.html">HF::SpatialStructures::Node</a>* node_ptr,</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordtype">int</span> node_size,</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordtype">int</span> * max_rays,</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">float</span> upward_fov,</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">float</span> downward_fov,</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">float</span> height,</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    std::vector&lt;RayResult&gt; ** out_results,</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <a class="code" href="a01219.html">RayResult</a> ** out_results_ptr</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="comment">//std::vector&lt;float&gt;** out_directions</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;){</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    vector&lt;RayResult&gt; * scores = <span class="keyword">new</span> vector&lt;RayResult&gt;();</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    vector&lt;Node&gt; nodes(node_ptr, node_ptr + node_size);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    *scores = ViewAnalysis::SphericalViewAnalysis&lt;RayResult&gt;(</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        *ERT,</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        nodes,</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        *max_rays,</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        upward_fov,</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        downward_fov,</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        height</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    );</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    *out_results = scores;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    *out_results_ptr = scores-&gt;data();</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    *max_rays = scores-&gt;size()/node_size;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="comment">//printf(&quot;Score size: %d\n&quot;, *max_rays);</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="a00279.html#aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d">OK</a>;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;}</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
-<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="a00270.html#ga348af4492f3e4e7ffab6da3e86de3924">  105</a></span>&#160;<a class="code" href="a00218.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> <a class="code" href="a00270.html#ga348af4492f3e4e7ffab6da3e86de3924">SphericalViewAnalysisNoAggregateFlat</a>(<a class="code" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a>* ERT, <span class="keyword">const</span> <span class="keywordtype">float</span>* node_ptr, <span class="keywordtype">int</span> node_size, <span class="keywordtype">int</span>* max_rays, <span class="keywordtype">float</span> upward_fov, <span class="keywordtype">float</span> downward_fov, <span class="keywordtype">float</span> height, std::vector&lt;RayResult&gt;** out_results, <a class="code" href="a01219.html">RayResult</a>** out_results_ptr)</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;{</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    vector&lt;RayResult&gt;* scores = <span class="keyword">new</span> vector&lt;RayResult&gt;();</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keyword">auto</span> nodes = <a class="code" href="a00134.html#a2f5650b0bad6c47aa34fc2206433a34b">ConvertRawFloatArrayToPoints</a>(node_ptr,node_size);</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    *scores = ViewAnalysis::SphericalViewAnalysis&lt;RayResult&gt;(</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        *ERT,</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        nodes,</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        *max_rays,</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        upward_fov,</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        downward_fov,</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        height</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        );</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    *out_results = scores;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    *out_results_ptr = scores-&gt;data();</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    *max_rays = scores-&gt;size() / node_size;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="a00279.html#aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d">OK</a>;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;}</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
-<div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="a00270.html#gaf572b7bec28d55bf2c72719742703dff">  125</a></span>&#160;<a class="code" href="a00218.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> <a class="code" href="a00270.html#gaf572b7bec28d55bf2c72719742703dff">SphericalDistribute</a>(</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keywordtype">int</span> * num_rays, </div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    vector&lt;float&gt;** out_direction_vector,</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <span class="keywordtype">float</span>** out_direction_data,</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keywordtype">float</span> upward_fov,</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="keywordtype">float</span> downward_fov</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;) {</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    *out_direction_vector = <span class="keyword">new</span> vector&lt;float&gt;();</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    <span class="keyword">auto</span> array_array = <a class="code" href="a00270.html#ga9fc392fe8fc058674ffd5f4c8273a714">ViewAnalysis::FibbonacciDistributePoints</a>(*num_rays, upward_fov, downward_fov);</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    </div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keyword">auto</span>&amp; out_directions = **out_direction_vector;</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    </div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    out_directions.resize(array_array.size()*3);</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; array_array.size(); i += 1) {</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        <span class="keywordtype">float</span> os = i * 3;</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span>&amp; arr = array_array[i];</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        out_directions[os] = arr[0];</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        out_directions[os + 1] = arr[1];</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        out_directions[os + 2] = arr[2];</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    }</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    *out_direction_data = out_directions.data();</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    *num_rays = array_array.size();</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="a00279.html#aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d">OK</a>;</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;}</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160; </div>
+<a href="a00251.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00227.html">cinterface_utils.h</a>&gt;</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;array&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#define C_INTERFACE extern &quot;C&quot; __declspec(dllexport) int</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="a00251.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">    6</a></span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00275.html">HF</a> {</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="keyword">namespace </span>SpatialStructures {</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;        <span class="keyword">class </span>Graph;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;        <span class="keyword">enum class</span> <a class="code" href="a00278.html#a6b23c0b2531c78f6d5049873c184f4f9">COST_AGGREGATE</a> : int;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        struct Node; <span class="comment">// Careful with these forward declares!</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        struct Edge; <span class="comment">// Spent like 2 hours reading mangled names because I accidentally</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    }                <span class="comment">// defined these as classes (V) instead of structs (U)</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;}</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<a class="code" href="a00251.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> <a class="code" href="a00271.html#ga0cc5b82caab046c65a201e4e7be5e9d4">GetAllNodesFromGraph</a>(</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    const HF::SpatialStructures::Graph* graph,</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    std::vector&lt;HF::SpatialStructures::Node&gt;** out_vector_ptr,</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    HF::SpatialStructures::Node** out_data_ptr</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">// DOn&#39;t document this because it&#39;s not ready yet.</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="a00271.html#gab39b5c750b266835efbc3c6c9da0a431">   71</a></span>&#160;<a class="code" href="a00251.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> <a class="code" href="a00271.html#gab39b5c750b266835efbc3c6c9da0a431">GetEdgesForNode</a>(</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    const HF::SpatialStructures::Graph* graph,</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    const HF::SpatialStructures::Node* Node,</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    std::vector&lt;HF::SpatialStructures::Edge&gt;** out_vector_ptr,</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    HF::SpatialStructures::Edge** out_edge_list_ptr,</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    int* out_edge_list_size</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<a class="code" href="a00251.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> <a class="code" href="a00271.html#gac17c1fc05e6bf6900bac8689b7619bfb">GetSizeOfNodeVector</a>(</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    const std::vector&lt;HF::SpatialStructures::Node&gt;* node_list,</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    int* out_size</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">// This is never used. Don&#39;t include.</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<a class="code" href="a00251.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> <a class="code" href="a00271.html#ga712f182888672382dd4a1776f850915a">GetSizeOfEdgeVector</a>(</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    const std::vector&lt;HF::SpatialStructures::Edge&gt;* edge_list,</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    int* out_size</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;);</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<a class="code" href="a00251.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> <a class="code" href="a00271.html#ga6a53ede89ff44ba3c8bf697c9626fcbe">AggregateCosts</a>(</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    const HF::SpatialStructures::Graph* graph,</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    int agg,</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    bool directed,</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    std::vector&lt;float&gt;** out_vector_ptr,</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    float** out_data_ptr</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;);</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<a class="code" href="a00251.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> <a class="code" href="a00271.html#ga262a8f714fbd8d74840efa5832597fff">CreateGraph</a>(</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    const float* nodes,</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    int num_nodes,</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    HF::SpatialStructures::Graph** out_graph</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;);</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; </div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160; </div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<a class="code" href="a00251.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> <a class="code" href="a00271.html#gac886f77eaff2a7b396a0ea47f78ef9af">AddEdgeFromNodes</a>(</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    HF::SpatialStructures::Graph* graph,</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    const float* parent,</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    const float* child,</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    float score</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;);</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160; </div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160; </div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<a class="code" href="a00251.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> <a class="code" href="a00271.html#ga0f38cc17daedc23e2fb21115fbb24d07">AddEdgeFromNodeIDs</a>(</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    HF::SpatialStructures::Graph* graph,</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    int parent_id,</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    int child_id,</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    float score</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;);</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160; </div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160; </div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;<a class="code" href="a00251.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> <a class="code" href="a00271.html#ga1aebc84e3562370327576641b1ce2dcc">GetCSRPointers</a>(</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    HF::SpatialStructures::Graph* graph,</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;    int* out_nnz,</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    int* out_num_rows,</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    int* out_num_cols,</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;    float** out_data_ptr,</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;    int** out_inner_indices_ptr,</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;    int** out_outer_indices_ptr</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;);</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160; </div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160; </div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;<a class="code" href="a00251.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> <a class="code" href="a00271.html#ga31fad78ce410cd523bb337f46b078b4c">GetNodeID</a>(</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;    HF::SpatialStructures::Graph* graph,</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;    const float* point,</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;    int* out_id</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;);</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160; </div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160; </div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;<a class="code" href="a00251.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> <a class="code" href="a00271.html#gab7ecc1be5c746ed3f99ab7494316c65d">Compress</a>(</div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;    HF::SpatialStructures::Graph* graph</div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;);</div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160; </div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160; </div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;<a class="code" href="a00251.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> <a class="code" href="a00271.html#ga775863df40e342a8c5a2cddf7512ea44">ClearGraph</a>(</div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;    HF::SpatialStructures::Graph* graph</div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;);</div>
+<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160; </div>
+<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160; </div>
+<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;<a class="code" href="a00251.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> <a class="code" href="a00271.html#ga87e9b9ecfc5293712d75f3cb8c992c77">DestroyNodes</a>(</div>
+<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;    std::vector&lt;HF::SpatialStructures::Node&gt;* nodelist_to_destroy</div>
+<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;);</div>
+<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160; </div>
+<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160; </div>
+<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;<a class="code" href="a00251.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> <a class="code" href="a00271.html#gac46191088d698cc007a2176ab6b5674d">DestroyEdges</a>(</div>
+<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;    std::vector&lt;HF::SpatialStructures::Edge&gt;* edgelist_to_destroy</div>
+<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;);</div>
+<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160; </div>
+<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160; </div>
+<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;<a class="code" href="a00251.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> <a class="code" href="a00271.html#ga645abacd11e1fa535f953344aaa77727">DestroyGraph</a>(</div>
+<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;    HF::SpatialStructures::Graph* graph_to_destroy</div>
+<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;);</div>
+<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aa00134_html_a2f5650b0bad6c47aa34fc2206433a34b"><div class="ttname"><a href="a00134.html#a2f5650b0bad6c47aa34fc2206433a34b">ConvertRawFloatArrayToPoints</a></div><div class="ttdeci">std::vector&lt; std::array&lt; float, 3 &gt; &gt; ConvertRawFloatArrayToPoints(const float *raw_array, int size)</div><div class="ttdoc">Convert a raw array from an external caller to an organized vector of points</div><div class="ttdef"><b>Definition:</b> <a href="a00134_source.html#l00024">CInterface.cpp:24</a></div></div>
-<div class="ttc" id="aa00086_html"><div class="ttname"><a href="a00086.html">HFExceptions.h</a></div><div class="ttdoc">Contains definitions for the Exceptions namespace.</div></div>
-<div class="ttc" id="aa00274_html"><div class="ttname"><a href="a00274.html">HF::AnalysisMethods</a></div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00014">graph_generator.cpp:14</a></div></div>
-<div class="ttc" id="aa00270_html_gaf572b7bec28d55bf2c72719742703dff"><div class="ttname"><a href="a00270.html#gaf572b7bec28d55bf2c72719742703dff">SphericalDistribute</a></div><div class="ttdeci">C_INTERFACE SphericalDistribute(int *num_rays, vector&lt; float &gt; **out_direction_vector, float **out_direction_data, float upward_fov, float downward_fov)</div><div class="ttdoc">Distribute directions in a sphere</div><div class="ttdef"><b>Definition:</b> <a href="a00251_source.html#l00125">view_analysis_C.cpp:125</a></div></div>
-<div class="ttc" id="aa01203_html"><div class="ttname"><a href="a01203.html">HF::SpatialStructures::Node</a></div><div class="ttdoc">A point in space with an ID.</div><div class="ttdef"><b>Definition:</b> <a href="a00155_source.html#l00038">node.h:38</a></div></div>
-<div class="ttc" id="aa00279_html"><div class="ttname"><a href="a00279.html">HF::Exceptions</a></div><div class="ttdef"><b>Definition:</b> <a href="a00086_source.html#l00014">HFExceptions.h:14</a></div></div>
-<div class="ttc" id="aa00122_html"><div class="ttname"><a href="a00122.html">embree_raytracer.h</a></div><div class="ttdoc">Contains definitions for the EmbreeRayTracer</div></div>
-<div class="ttc" id="aa00254_html"><div class="ttname"><a href="a00254.html">view_analysis_C.h</a></div></div>
-<div class="ttc" id="aa00270_html_gaa4c5714c1e557ef83a03d447eb30c6d0"><div class="ttname"><a href="a00270.html#gaa4c5714c1e557ef83a03d447eb30c6d0">SphereicalViewAnalysisAggregateFlat</a></div><div class="ttdeci">C_INTERFACE SphereicalViewAnalysisAggregateFlat(HF::RayTracer::EmbreeRayTracer *ERT, const float *node_ptr, int node_size, int max_rays, float upward_fov, float downward_fov, float height, AGGREGATE_TYPE AT, std::vector&lt; float &gt; **out_scores, float **out_scores_ptr, int *out_scores_size)</div><div class="ttdoc">Perform view analysis from a list of points and aggregate the results into an ordered list of scores....</div><div class="ttdef"><b>Definition:</b> <a href="a00251_source.html#l00050">view_analysis_C.cpp:50</a></div></div>
-<div class="ttc" id="aa01199_html"><div class="ttname"><a href="a01199.html">HF::SpatialStructures::Graph</a></div><div class="ttdoc">A Graph of nodes connected by edges that supports both integers and HF::SpatialStructures::Node.</div><div class="ttdef"><b>Definition:</b> <a href="a00152_source.html#l00096">graph.h:96</a></div></div>
-<div class="ttc" id="aa00152_html"><div class="ttname"><a href="a00152.html">graph.h</a></div><div class="ttdoc">Contains definitions for the Graph class.</div></div>
-<div class="ttc" id="aa00254_html_a8a1aa9474094ff70818051c921c0537f"><div class="ttname"><a href="a00254.html#a8a1aa9474094ff70818051c921c0537f">AGGREGATE_TYPE</a></div><div class="ttdeci">AGGREGATE_TYPE</div><div class="ttdoc">How to aggregate edges the results of view analysis</div><div class="ttdef"><b>Definition:</b> <a href="a00254_source.html#l00013">view_analysis_C.h:13</a></div></div>
-<div class="ttc" id="aa00270_html_ga94d3ddc3981020e2852fc77e51266185"><div class="ttname"><a href="a00270.html#ga94d3ddc3981020e2852fc77e51266185">SphericalViewAnalysisNoAggregate</a></div><div class="ttdeci">C_INTERFACE SphericalViewAnalysisNoAggregate(HF::RayTracer::EmbreeRayTracer *ERT, const HF::SpatialStructures::Node *node_ptr, int node_size, int *max_rays, float upward_fov, float downward_fov, float height, std::vector&lt; RayResult &gt; **out_results, RayResult **out_results_ptr)</div><div class="ttdoc">Perform view analysis and recieve the distance and meshid for each individual ray.</div><div class="ttdef"><b>Definition:</b> <a href="a00251_source.html#l00073">view_analysis_C.cpp:73</a></div></div>
-<div class="ttc" id="aa00270_html_gab6b8e3eab649b42ac014fb7d02d54892"><div class="ttname"><a href="a00270.html#gab6b8e3eab649b42ac014fb7d02d54892">SphereicalViewAnalysisAggregate</a></div><div class="ttdeci">C_INTERFACE SphereicalViewAnalysisAggregate(EmbreeRayTracer *ERT, Node *node_ptr, int node_size, int max_rays, float upward_fov, float downward_fov, float height, AGGREGATE_TYPE AT, vector&lt; float &gt; **out_scores, float **out_scores_ptr, int *out_scores_size)</div><div class="ttdoc">Perform view analysis from a list of points and aggregate the results into an ordered list of scores....</div><div class="ttdef"><b>Definition:</b> <a href="a00251_source.html#l00017">view_analysis_C.cpp:17</a></div></div>
-<div class="ttc" id="aa00155_html"><div class="ttname"><a href="a00155.html">node.h</a></div><div class="ttdoc">Contains definitions for the Node structure.</div></div>
-<div class="ttc" id="aa00275_html_a0a616a205221414bf7aa28966b461dec"><div class="ttname"><a href="a00275.html#a0a616a205221414bf7aa28966b461dec">HF::AnalysisMethods::ViewAnalysis::AGGREGATE_TYPE</a></div><div class="ttdeci">AGGREGATE_TYPE</div><div class="ttdoc">The type of aggregation to use for ViewAnalysisAggregate</div><div class="ttdef"><b>Definition:</b> <a href="a00026_source.html#l00038">view_analysis.h:38</a></div></div>
-<div class="ttc" id="aa00270_html_ga249100bce7370ba4202f47294f179f81"><div class="ttname"><a href="a00270.html#ga249100bce7370ba4202f47294f179f81">HF::AnalysisMethods::ViewAnalysis::SphericalRayshootWithAnyRTForDistance</a></div><div class="ttdeci">std::vector&lt; float &gt; SphericalRayshootWithAnyRTForDistance(RT &amp;ray_tracer, const std::vector&lt; N &gt; &amp;Nodes, int num_rays, float upward_limit=50.0f, float downward_limit=70.0f, float height=1.7f, const AGGREGATE_TYPE aggregation=AGGREGATE_TYPE::SUM)</div><div class="ttdoc">Conduct view analysis and recieve a summarized set of results for each node.</div><div class="ttdef"><b>Definition:</b> <a href="a00026_source.html#l00483">view_analysis.h:483</a></div></div>
-<div class="ttc" id="aa00026_html"><div class="ttname"><a href="a00026.html">view_analysis.h</a></div><div class="ttdoc">Contains definitions for the ViewAnalysis namespace.</div></div>
-<div class="ttc" id="aa00270_html_ga9fc392fe8fc058674ffd5f4c8273a714"><div class="ttname"><a href="a00270.html#ga9fc392fe8fc058674ffd5f4c8273a714">HF::AnalysisMethods::ViewAnalysis::FibbonacciDistributePoints</a></div><div class="ttdeci">vector&lt; std::array&lt; float, 3 &gt; &gt; FibbonacciDistributePoints(int num_points, float upwards_fov, float downward_fov)</div><div class="ttdoc">Evenly distribute a set of points around a sphere centered at the origin.</div><div class="ttdef"><b>Definition:</b> <a href="a00023_source.html#l00158">view_analysis.cpp:158</a></div></div>
-<div class="ttc" id="aa00270_html_ga348af4492f3e4e7ffab6da3e86de3924"><div class="ttname"><a href="a00270.html#ga348af4492f3e4e7ffab6da3e86de3924">SphericalViewAnalysisNoAggregateFlat</a></div><div class="ttdeci">C_INTERFACE SphericalViewAnalysisNoAggregateFlat(HF::RayTracer::EmbreeRayTracer *ERT, const float *node_ptr, int node_size, int *max_rays, float upward_fov, float downward_fov, float height, std::vector&lt; RayResult &gt; **out_results, RayResult **out_results_ptr)</div><div class="ttdoc">Perform view analysis and recieve the distance and meshid for each individual ray.</div><div class="ttdef"><b>Definition:</b> <a href="a00251_source.html#l00105">view_analysis_C.cpp:105</a></div></div>
-<div class="ttc" id="aa00218_html_a91fa3b2bb3a7312ec39d74cc1fbc7bbe"><div class="ttname"><a href="a00218.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a></div><div class="ttdeci">#define C_INTERFACE</div><div class="ttdef"><b>Definition:</b> <a href="a00218_source.html#l00006">analysis_C.h:5</a></div></div>
-<div class="ttc" id="aa01219_html"><div class="ttname"><a href="a01219.html">RayResult</a></div><div class="ttdoc">The result of firing a ray at an object. Contains distance to the hitpoint and the ID of the mesh.</div><div class="ttdef"><b>Definition:</b> <a href="a00242_source.html#l00025">raytracer_C.h:25</a></div></div>
-<div class="ttc" id="aa01163_html"><div class="ttname"><a href="a01163.html">HF::RayTracer::EmbreeRayTracer</a></div><div class="ttdoc">A wrapper for Intel's Embree Library.</div><div class="ttdef"><b>Definition:</b> <a href="a00122_source.html#l00073">embree_raytracer.h:73</a></div></div>
-<div class="ttc" id="aa00279_html_aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d"><div class="ttname"><a href="a00279.html#aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d">HF::Exceptions::OK</a></div><div class="ttdeci">@ OK</div><div class="ttdoc">All systems go. ///&lt;.</div><div class="ttdef"><b>Definition:</b> <a href="a00086_source.html#l00018">HFExceptions.h:16</a></div></div>
+<div class="ttc" id="aa00271_html_ga262a8f714fbd8d74840efa5832597fff"><div class="ttname"><a href="a00271.html#ga262a8f714fbd8d74840efa5832597fff">CreateGraph</a></div><div class="ttdeci">C_INTERFACE CreateGraph(const float *nodes, int num_nodes, HF::SpatialStructures::Graph **out_graph)</div><div class="ttdoc">Create a new empty graph.</div><div class="ttdef"><b>Definition:</b> <a href="a00248_source.html#l00067">spatialstructures_C.cpp:67</a></div></div>
+<div class="ttc" id="aa00271_html_ga712f182888672382dd4a1776f850915a"><div class="ttname"><a href="a00271.html#ga712f182888672382dd4a1776f850915a">GetSizeOfEdgeVector</a></div><div class="ttdeci">C_INTERFACE GetSizeOfEdgeVector(const std::vector&lt; HF::SpatialStructures::Edge &gt; *edge_list, int *out_size)</div><div class="ttdef"><b>Definition:</b> <a href="a00134_source.html#l00065">CInterface.cpp:65</a></div></div>
+<div class="ttc" id="aa00271_html_ga0f38cc17daedc23e2fb21115fbb24d07"><div class="ttname"><a href="a00271.html#ga0f38cc17daedc23e2fb21115fbb24d07">AddEdgeFromNodeIDs</a></div><div class="ttdeci">C_INTERFACE AddEdgeFromNodeIDs(HF::SpatialStructures::Graph *graph, int parent_id, int child_id, float score)</div><div class="ttdoc">Create a new edge between parent_id and child_id. If these IDs don't yet exist in the graph they will...</div><div class="ttdef"><b>Definition:</b> <a href="a00248_source.html#l00098">spatialstructures_C.cpp:98</a></div></div>
+<div class="ttc" id="aa00271_html_ga31fad78ce410cd523bb337f46b078b4c"><div class="ttname"><a href="a00271.html#ga31fad78ce410cd523bb337f46b078b4c">GetNodeID</a></div><div class="ttdeci">C_INTERFACE GetNodeID(HF::SpatialStructures::Graph *graph, const float *point, int *out_id)</div><div class="ttdoc">Get the id of the given node in the graph. If the node does not exist, out_id  will be set to -1.</div><div class="ttdef"><b>Definition:</b> <a href="a00248_source.html#l00125">spatialstructures_C.cpp:125</a></div></div>
+<div class="ttc" id="aa00271_html_ga775863df40e342a8c5a2cddf7512ea44"><div class="ttname"><a href="a00271.html#ga775863df40e342a8c5a2cddf7512ea44">ClearGraph</a></div><div class="ttdeci">C_INTERFACE ClearGraph(HF::SpatialStructures::Graph *graph)</div><div class="ttdoc">Clear the nodes/edges for the given graph.</div><div class="ttdef"><b>Definition:</b> <a href="a00248_source.html#l00142">spatialstructures_C.cpp:142</a></div></div>
+<div class="ttc" id="aa00275_html"><div class="ttname"><a href="a00275.html">HF</a></div><div class="ttdoc">Perform human scale analysis on 3D environments.</div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00013">graph_generator.cpp:13</a></div></div>
+<div class="ttc" id="aa00271_html_gab39b5c750b266835efbc3c6c9da0a431"><div class="ttname"><a href="a00271.html#gab39b5c750b266835efbc3c6c9da0a431">GetEdgesForNode</a></div><div class="ttdeci">C_INTERFACE GetEdgesForNode(const HF::SpatialStructures::Graph *graph, const HF::SpatialStructures::Node *Node, std::vector&lt; HF::SpatialStructures::Edge &gt; **out_vector_ptr, HF::SpatialStructures::Edge **out_edge_list_ptr, int *out_edge_list_size)</div></div>
+<div class="ttc" id="aa00271_html_gac17c1fc05e6bf6900bac8689b7619bfb"><div class="ttname"><a href="a00271.html#gac17c1fc05e6bf6900bac8689b7619bfb">GetSizeOfNodeVector</a></div><div class="ttdeci">C_INTERFACE GetSizeOfNodeVector(const std::vector&lt; HF::SpatialStructures::Node &gt; *node_list, int *out_size)</div><div class="ttdoc">Get the size of a node vector.</div><div class="ttdef"><b>Definition:</b> <a href="a00134_source.html#l00060">CInterface.cpp:60</a></div></div>
+<div class="ttc" id="aa00271_html_ga0cc5b82caab046c65a201e4e7be5e9d4"><div class="ttname"><a href="a00271.html#ga0cc5b82caab046c65a201e4e7be5e9d4">GetAllNodesFromGraph</a></div><div class="ttdeci">C_INTERFACE GetAllNodesFromGraph(const HF::SpatialStructures::Graph *graph, std::vector&lt; HF::SpatialStructures::Node &gt; **out_vector_ptr, HF::SpatialStructures::Node **out_data_ptr)</div><div class="ttdoc">Get a vector of every node in the given graph pointer.</div><div class="ttdef"><b>Definition:</b> <a href="a00248_source.html#l00015">spatialstructures_C.cpp:15</a></div></div>
+<div class="ttc" id="aa00278_html_a6b23c0b2531c78f6d5049873c184f4f9"><div class="ttname"><a href="a00278.html#a6b23c0b2531c78f6d5049873c184f4f9">HF::SpatialStructures::COST_AGGREGATE</a></div><div class="ttdeci">COST_AGGREGATE</div><div class="ttdoc">Methods of aggregating the costs for edges for each node in the graph.</div><div class="ttdef"><b>Definition:</b> <a href="a00152_source.html#l00023">graph.h:23</a></div></div>
+<div class="ttc" id="aa00271_html_ga645abacd11e1fa535f953344aaa77727"><div class="ttname"><a href="a00271.html#ga645abacd11e1fa535f953344aaa77727">DestroyGraph</a></div><div class="ttdeci">C_INTERFACE DestroyGraph(HF::SpatialStructures::Graph *graph_to_destroy)</div><div class="ttdoc">Delete a graph.</div><div class="ttdef"><b>Definition:</b> <a href="a00134_source.html#l00080">CInterface.cpp:80</a></div></div>
+<div class="ttc" id="aa00271_html_gac886f77eaff2a7b396a0ea47f78ef9af"><div class="ttname"><a href="a00271.html#gac886f77eaff2a7b396a0ea47f78ef9af">AddEdgeFromNodes</a></div><div class="ttdeci">C_INTERFACE AddEdgeFromNodes(HF::SpatialStructures::Graph *graph, const float *parent, const float *child, float score)</div><div class="ttdoc">Add an edge between parent and child. If parent or child doesn't already exist in the graph,...</div><div class="ttdef"><b>Definition:</b> <a href="a00248_source.html#l00078">spatialstructures_C.cpp:78</a></div></div>
+<div class="ttc" id="aa00271_html_ga6a53ede89ff44ba3c8bf697c9626fcbe"><div class="ttname"><a href="a00271.html#ga6a53ede89ff44ba3c8bf697c9626fcbe">AggregateCosts</a></div><div class="ttdeci">C_INTERFACE AggregateCosts(const HF::SpatialStructures::Graph *graph, int agg, bool directed, std::vector&lt; float &gt; **out_vector_ptr, float **out_data_ptr)</div><div class="ttdoc">Get an ordered array of costs for each node aggregatted by the desired method.</div><div class="ttdef"><b>Definition:</b> <a href="a00248_source.html#l00049">spatialstructures_C.cpp:49</a></div></div>
+<div class="ttc" id="aa00227_html"><div class="ttname"><a href="a00227.html">cinterface_utils.h</a></div></div>
+<div class="ttc" id="aa00271_html_gab7ecc1be5c746ed3f99ab7494316c65d"><div class="ttname"><a href="a00271.html#gab7ecc1be5c746ed3f99ab7494316c65d">Compress</a></div><div class="ttdeci">C_INTERFACE Compress(HF::SpatialStructures::Graph *graph)</div><div class="ttdoc">Compress the given graph into a csr representation.</div><div class="ttdef"><b>Definition:</b> <a href="a00248_source.html#l00136">spatialstructures_C.cpp:136</a></div></div>
+<div class="ttc" id="aa00271_html_ga1aebc84e3562370327576641b1ce2dcc"><div class="ttname"><a href="a00271.html#ga1aebc84e3562370327576641b1ce2dcc">GetCSRPointers</a></div><div class="ttdeci">C_INTERFACE GetCSRPointers(HF::SpatialStructures::Graph *graph, int *out_nnz, int *out_num_rows, int *out_num_cols, float **out_data_ptr, int **out_inner_indices_ptr, int **out_outer_indices_ptr)</div><div class="ttdoc">Retrieve all information for a graph's CSR representation. This will compress the graph if it was not...</div><div class="ttdef"><b>Definition:</b> <a href="a00248_source.html#l00103">spatialstructures_C.cpp:103</a></div></div>
+<div class="ttc" id="aa00251_html_a91fa3b2bb3a7312ec39d74cc1fbc7bbe"><div class="ttname"><a href="a00251.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a></div><div class="ttdeci">#define C_INTERFACE</div><div class="ttdef"><b>Definition:</b> <a href="a00251_source.html#l00006">spatialstructures_C.h:5</a></div></div>
+<div class="ttc" id="aa00271_html_ga87e9b9ecfc5293712d75f3cb8c992c77"><div class="ttname"><a href="a00271.html#ga87e9b9ecfc5293712d75f3cb8c992c77">DestroyNodes</a></div><div class="ttdeci">C_INTERFACE DestroyNodes(std::vector&lt; HF::SpatialStructures::Node &gt; *nodelist_to_destroy)</div><div class="ttdoc">Delete the vector of nodes at the given pointer.</div><div class="ttdef"><b>Definition:</b> <a href="a00134_source.html#l00070">CInterface.cpp:70</a></div></div>
+<div class="ttc" id="aa00271_html_gac46191088d698cc007a2176ab6b5674d"><div class="ttname"><a href="a00271.html#gac46191088d698cc007a2176ab6b5674d">DestroyEdges</a></div><div class="ttdeci">C_INTERFACE DestroyEdges(std::vector&lt; HF::SpatialStructures::Edge &gt; *edgelist_to_destroy)</div><div class="ttdoc">Delete the vector of edges at the given pointer.</div><div class="ttdef"><b>Definition:</b> <a href="a00134_source.html#l00075">CInterface.cpp:75</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

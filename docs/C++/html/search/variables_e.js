@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['upslope_766',['upslope',['../a01099.html#a8cab1b85830809329c35038c42bb57a3',1,'HF::AnalysisMethods::GraphGenerator']]],
-  ['upstep_767',['upstep',['../a01099.html#aac816910437119f892f37a263d0ce924',1,'HF::AnalysisMethods::GraphGenerator']]]
+  ['upslope_698',['upslope',['../a01101.html#a3bf8f31f3192dad1db49abd03e3a2503',1,'HF::GraphGenerator::GraphGenerator']]],
+  ['upstep_699',['upstep',['../a01101.html#a161d82b678c4ca4dc94eae851602fb08',1,'HF::GraphGenerator::GraphGenerator']]]
 ];

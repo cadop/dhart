@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Analysis: HF::SpatialStructures::Node Struct Reference</title>
+<title>Analysis: HF::GraphGenerator::GraphGenerator Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,167 +61,118 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00171.html">HF</a></li><li class="navelem"><a class="el" href="a00174.html">SpatialStructures</a></li><li class="navelem"><a class="el" href="a01101.html">Node</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00275.html">HF</a></li><li class="navelem"><a class="el" href="a00276.html">GraphGenerator</a></li><li class="navelem"><a class="el" href="a01101.html">GraphGenerator</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
 <a href="a01098.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">HF::SpatialStructures::Node Struct Reference</div>  </div>
+<div class="title">HF::GraphGenerator::GraphGenerator Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>A point in space with an ID  
+<p>Generate a graph of accessible space from a given start point.  
  <a href="a01101.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00104_source.html">node.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00008_source.html">graph_generator.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3d229a53bb7328f88649fd48e6098b5d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#a3d229a53bb7328f88649fd48e6098b5d">Node</a> ()</td></tr>
-<tr class="memdesc:a3d229a53bb7328f88649fd48e6098b5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor. Constructs everything with NAN  <a href="a01101.html#a3d229a53bb7328f88649fd48e6098b5d">More...</a><br /></td></tr>
-<tr class="separator:a3d229a53bb7328f88649fd48e6098b5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e6500cbe9a1c29ebca5045dceebe9d6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#a5e6500cbe9a1c29ebca5045dceebe9d6">Node</a> (float <a class="el" href="a01101.html#a78dfebaa44da09b03d7ca15445c8d222">x</a>, float <a class="el" href="a01101.html#a41981fb2cc6dc0edb787f921188702b0">y</a>, float <a class="el" href="a01101.html#a495b47689917e0395ce96ee01d3f5ed3">z</a>, int ID=-1)</td></tr>
-<tr class="memdesc:a5e6500cbe9a1c29ebca5045dceebe9d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a node without an ID  <a href="a01101.html#a5e6500cbe9a1c29ebca5045dceebe9d6">More...</a><br /></td></tr>
-<tr class="separator:a5e6500cbe9a1c29ebca5045dceebe9d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d3f18b093670b7696aa1aecf8adab00"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#a7d3f18b093670b7696aa1aecf8adab00">Node</a> (const std::array&lt; float, 3 &gt; &amp;position)</td></tr>
-<tr class="memdesc:a7d3f18b093670b7696aa1aecf8adab00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a node without an ID  <a href="a01101.html#a7d3f18b093670b7696aa1aecf8adab00">More...</a><br /></td></tr>
-<tr class="separator:a7d3f18b093670b7696aa1aecf8adab00"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc1e769b57e880909a11178bb8654adf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#afc1e769b57e880909a11178bb8654adf">Node</a> (const std::array&lt; float, 3 &gt; &amp;position, <a class="el" href="a00174.html#aa8ecd83cd353318532d791fc819343cc">NODE_TYPE</a> t, int <a class="el" href="a01101.html#a8212d00e6913abf0ca6fec1f2624b677">id</a>)</td></tr>
-<tr class="separator:afc1e769b57e880909a11178bb8654adf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abbd66b566460f9557a373b5fbcc30bb1"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#abbd66b566460f9557a373b5fbcc30bb1">distanceTo</a> (const <a class="el" href="a01101.html">Node</a> &amp;n2) const</td></tr>
-<tr class="memdesc:abbd66b566460f9557a373b5fbcc30bb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the distance between this node and the given node  <a href="a01101.html#abbd66b566460f9557a373b5fbcc30bb1">More...</a><br /></td></tr>
-<tr class="separator:abbd66b566460f9557a373b5fbcc30bb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a260ab9e9763234dab08decfc2aa6bf63"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#a260ab9e9763234dab08decfc2aa6bf63">angleTo</a> (const <a class="el" href="a01101.html">Node</a> &amp;n2) const</td></tr>
-<tr class="memdesc:a260ab9e9763234dab08decfc2aa6bf63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the angle between node 1 and n2  <a href="a01101.html#a260ab9e9763234dab08decfc2aa6bf63">More...</a><br /></td></tr>
-<tr class="separator:a260ab9e9763234dab08decfc2aa6bf63"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad3f7898ef3178eef0c3579869a7f5c67"><td class="memItemLeft" align="right" valign="top">std::array&lt; float, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#ad3f7898ef3178eef0c3579869a7f5c67">directionTo</a> (const <a class="el" href="a01101.html">Node</a> &amp;n2) const</td></tr>
-<tr class="memdesc:ad3f7898ef3178eef0c3579869a7f5c67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the direction between this node and another node  <a href="a01101.html#ad3f7898ef3178eef0c3579869a7f5c67">More...</a><br /></td></tr>
-<tr class="separator:ad3f7898ef3178eef0c3579869a7f5c67"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a51c4642674d54d02b8600f7ffeb45670"><td class="memItemLeft" align="right" valign="top">std::array&lt; float, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#a51c4642674d54d02b8600f7ffeb45670">getArray</a> () const</td></tr>
-<tr class="memdesc:a51c4642674d54d02b8600f7ffeb45670"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the x,y,z of this node as an array of 3 floats  <a href="a01101.html#a51c4642674d54d02b8600f7ffeb45670">More...</a><br /></td></tr>
-<tr class="separator:a51c4642674d54d02b8600f7ffeb45670"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a556efc898ddc67b64fff560d0c7b5a0a"><td class="memItemLeft" align="right" valign="top">float &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#a556efc898ddc67b64fff560d0c7b5a0a">operator[]</a> (int i)</td></tr>
-<tr class="memdesc:a556efc898ddc67b64fff560d0c7b5a0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Directly access a nodes's position as if it were an array of 3 floats  <a href="a01101.html#a556efc898ddc67b64fff560d0c7b5a0a">More...</a><br /></td></tr>
-<tr class="separator:a556efc898ddc67b64fff560d0c7b5a0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3e88bd4eecfdbd93431953ed07b8a7b"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#ae3e88bd4eecfdbd93431953ed07b8a7b">operator[]</a> (int i) const</td></tr>
-<tr class="memdesc:ae3e88bd4eecfdbd93431953ed07b8a7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access a nodes's position, by value  <a href="a01101.html#ae3e88bd4eecfdbd93431953ed07b8a7b">More...</a><br /></td></tr>
-<tr class="separator:ae3e88bd4eecfdbd93431953ed07b8a7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af687c2e97fffe3b7d14e3cfa8af3e5cd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#af687c2e97fffe3b7d14e3cfa8af3e5cd">operator==</a> (const <a class="el" href="a01101.html">Node</a> &amp;n2) const</td></tr>
-<tr class="memdesc:af687c2e97fffe3b7d14e3cfa8af3e5cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if n1 occupies the same space as n2  <a href="a01101.html#af687c2e97fffe3b7d14e3cfa8af3e5cd">More...</a><br /></td></tr>
-<tr class="separator:af687c2e97fffe3b7d14e3cfa8af3e5cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a3306ea1b8904361b038391718ccc07"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#a5a3306ea1b8904361b038391718ccc07">operator=</a> (const std::array&lt; float, 3 &gt; &amp;n2)</td></tr>
-<tr class="memdesc:a5a3306ea1b8904361b038391718ccc07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns the values of array n2 to n1  <a href="a01101.html#a5a3306ea1b8904361b038391718ccc07">More...</a><br /></td></tr>
-<tr class="separator:a5a3306ea1b8904361b038391718ccc07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6137878845816e2fe8ecbe1215c490fd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#a6137878845816e2fe8ecbe1215c490fd">operator!=</a> (const <a class="el" href="a01101.html">Node</a> &amp;n2) const</td></tr>
-<tr class="memdesc:a6137878845816e2fe8ecbe1215c490fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">See operator==, checks if n1 does NOT occupy the same space as n2 </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">n2</td><td><a class="el" href="a01101.html" title="A point in space with an ID">Node</a> to compare with N1</td></tr>
-  </table>
-  </dd>
-</dl>
- <a href="a01101.html#a6137878845816e2fe8ecbe1215c490fd">More...</a><br /></td></tr>
-<tr class="separator:a6137878845816e2fe8ecbe1215c490fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad58a4eb9f0a15c645eedf668d9bcec54"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a01101.html">Node</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#ad58a4eb9f0a15c645eedf668d9bcec54">operator-</a> (const <a class="el" href="a01101.html">Node</a> &amp;n2) const</td></tr>
-<tr class="memdesc:ad58a4eb9f0a15c645eedf668d9bcec54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a node from the vector subtraction of n1, n2  <a href="a01101.html#ad58a4eb9f0a15c645eedf668d9bcec54">More...</a><br /></td></tr>
-<tr class="separator:ad58a4eb9f0a15c645eedf668d9bcec54"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a064540b380fc6251bdf6d740abf7a169"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a01101.html">Node</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#a064540b380fc6251bdf6d740abf7a169">operator+</a> (const <a class="el" href="a01101.html">Node</a> &amp;n2) const</td></tr>
-<tr class="memdesc:a064540b380fc6251bdf6d740abf7a169"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new node from the vector addition of n1, n2  <a href="a01101.html#a064540b380fc6251bdf6d740abf7a169">More...</a><br /></td></tr>
-<tr class="separator:a064540b380fc6251bdf6d740abf7a169"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a099271bad26dd059037f3c84459058e0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a01101.html">Node</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#a099271bad26dd059037f3c84459058e0">operator*</a> (const <a class="el" href="a01101.html">Node</a> &amp;n2) const</td></tr>
-<tr class="memdesc:a099271bad26dd059037f3c84459058e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new node from the dot product of n1, n2  <a href="a01101.html#a099271bad26dd059037f3c84459058e0">More...</a><br /></td></tr>
-<tr class="separator:a099271bad26dd059037f3c84459058e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d74d883b7291a760908f3dc81783b3d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#a1d74d883b7291a760908f3dc81783b3d">operator&lt;</a> (const <a class="el" href="a01101.html">Node</a> &amp;n2) const</td></tr>
-<tr class="memdesc:a1d74d883b7291a760908f3dc81783b3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines if n1's id (an integer) is less than n2's id  <a href="a01101.html#a1d74d883b7291a760908f3dc81783b3d">More...</a><br /></td></tr>
-<tr class="separator:a1d74d883b7291a760908f3dc81783b3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7547e73076e40bb880261574216e4251"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#a7547e73076e40bb880261574216e4251">operator&lt;</a> (const <a class="el" href="a01101.html">Node</a> &amp;n2)</td></tr>
-<tr class="memdesc:a7547e73076e40bb880261574216e4251"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines if n1's id (an integer) is less than n2's id - const qualification omitted for std::sort  <a href="a01101.html#a7547e73076e40bb880261574216e4251">More...</a><br /></td></tr>
-<tr class="separator:a7547e73076e40bb880261574216e4251"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d67cccc8b0fc57d61390da493149790"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#a9d67cccc8b0fc57d61390da493149790">operator&gt;</a> (const <a class="el" href="a01101.html">Node</a> &amp;n2) const</td></tr>
-<tr class="memdesc:a9d67cccc8b0fc57d61390da493149790"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines if n1's id (an integer) is greater than n2's id  <a href="a01101.html#a9d67cccc8b0fc57d61390da493149790">More...</a><br /></td></tr>
-<tr class="separator:a9d67cccc8b0fc57d61390da493149790"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d5c02761a3cbf57aea95ae014d032a9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#a0d5c02761a3cbf57aea95ae014d032a9">GraphGenerator</a> (<a class="el" href="a01165.html">RayTracer::EmbreeRayTracer</a> &amp;RT, int walkable_id, int obstacle_id=-1)</td></tr>
+<tr class="memdesc:a0d5c02761a3cbf57aea95ae014d032a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new Graph Generator.  <a href="a01101.html#a0d5c02761a3cbf57aea95ae014d032a9">More...</a><br /></td></tr>
+<tr class="separator:a0d5c02761a3cbf57aea95ae014d032a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0044b9075921c7510b047f9076ad0a5e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a01189.html">SpatialStructures::Graph</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#a0044b9075921c7510b047f9076ad0a5e">BuildNetwork</a> (const <a class="el" href="a00276.html#a8c29578574c275e66fbd439be62c125e">v3</a> &amp;start_point, const <a class="el" href="a00276.html#a8c29578574c275e66fbd439be62c125e">v3</a> &amp;Spacing, int MaxNodes, float UpStep, float UpSlope, float DownStep, float DownSlope, int max_step_connections, int cores=-1)</td></tr>
+<tr class="memdesc:a0044b9075921c7510b047f9076ad0a5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a Graph of accessible space.  <a href="a01101.html#a0044b9075921c7510b047f9076ad0a5e">More...</a><br /></td></tr>
+<tr class="separator:a0044b9075921c7510b047f9076ad0a5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a78dfebaa44da09b03d7ca15445c8d222"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#a78dfebaa44da09b03d7ca15445c8d222">x</a></td></tr>
-<tr class="separator:a78dfebaa44da09b03d7ca15445c8d222"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a41981fb2cc6dc0edb787f921188702b0"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#a41981fb2cc6dc0edb787f921188702b0">y</a></td></tr>
-<tr class="separator:a41981fb2cc6dc0edb787f921188702b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a495b47689917e0395ce96ee01d3f5ed3"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#a495b47689917e0395ce96ee01d3f5ed3">z</a></td></tr>
-<tr class="memdesc:a495b47689917e0395ce96ee01d3f5ed3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cartesian coordinates x, y, z.  <a href="a01101.html#a495b47689917e0395ce96ee01d3f5ed3">More...</a><br /></td></tr>
-<tr class="separator:a495b47689917e0395ce96ee01d3f5ed3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3894a51f72b82cea2d6675a91fcb39cf"><td class="memItemLeft" align="right" valign="top">short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#a3894a51f72b82cea2d6675a91fcb39cf">type</a> = <a class="el" href="a00174.html#aa8ecd83cd353318532d791fc819343cca5c2876be9857d3e0192c9e1cb3797bf8">GRAPH</a></td></tr>
-<tr class="memdesc:a3894a51f72b82cea2d6675a91fcb39cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default this field to GRAPH.  <a href="a01101.html#a3894a51f72b82cea2d6675a91fcb39cf">More...</a><br /></td></tr>
-<tr class="separator:a3894a51f72b82cea2d6675a91fcb39cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8212d00e6913abf0ca6fec1f2624b677"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#a8212d00e6913abf0ca6fec1f2624b677">id</a></td></tr>
-<tr class="memdesc:a8212d00e6913abf0ca6fec1f2624b677"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="a01101.html" title="A point in space with an ID">Node</a> identifier.  <a href="a01101.html#a8212d00e6913abf0ca6fec1f2624b677">More...</a><br /></td></tr>
-<tr class="separator:a8212d00e6913abf0ca6fec1f2624b677"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a385e9a4d690cadb978d4ab4cb5185cd6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#a385e9a4d690cadb978d4ab4cb5185cd6">walkable_surfaces</a></td></tr>
+<tr class="memdesc:a385e9a4d690cadb978d4ab4cb5185cd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Corresponds to the meshID of walkable surfaces in the Raytracer (Unused)  <a href="a01101.html#a385e9a4d690cadb978d4ab4cb5185cd6">More...</a><br /></td></tr>
+<tr class="separator:a385e9a4d690cadb978d4ab4cb5185cd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a455de4cc964be74f8ad7622bdc20796a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#a455de4cc964be74f8ad7622bdc20796a">obstacle_surfaces</a></td></tr>
+<tr class="memdesc:a455de4cc964be74f8ad7622bdc20796a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Corresponds to the meshid of obstacle surfaces in the Raytracer (Unused)  <a href="a01101.html#a455de4cc964be74f8ad7622bdc20796a">More...</a><br /></td></tr>
+<tr class="separator:a455de4cc964be74f8ad7622bdc20796a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16da7abe348f7af1d232867f2d719db1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#a16da7abe348f7af1d232867f2d719db1">core_count</a></td></tr>
+<tr class="memdesc:a16da7abe348f7af1d232867f2d719db1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of cores to use in parallel.  <a href="a01101.html#a16da7abe348f7af1d232867f2d719db1">More...</a><br /></td></tr>
+<tr class="separator:a16da7abe348f7af1d232867f2d719db1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e3a66ea1b5b1325bdf082e7fee7f47e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a01165.html">RayTracer::EmbreeRayTracer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#a6e3a66ea1b5b1325bdf082e7fee7f47e">ray_tracer</a></td></tr>
+<tr class="memdesc:a6e3a66ea1b5b1325bdf082e7fee7f47e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Raytracer to use for all intersections.  <a href="a01101.html#a6e3a66ea1b5b1325bdf082e7fee7f47e">More...</a><br /></td></tr>
+<tr class="separator:a6e3a66ea1b5b1325bdf082e7fee7f47e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac68ce8f1034d1e4afdbcade8d4206612"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00276.html#a8c29578574c275e66fbd439be62c125e">v3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#ac68ce8f1034d1e4afdbcade8d4206612">spacing</a></td></tr>
+<tr class="memdesc:ac68ce8f1034d1e4afdbcade8d4206612"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spacing between nodes.  <a href="a01101.html#ac68ce8f1034d1e4afdbcade8d4206612">More...</a><br /></td></tr>
+<tr class="separator:ac68ce8f1034d1e4afdbcade8d4206612"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9e53ca26e8a4f7d43b7b353bd4f4846"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00276.html#a8c29578574c275e66fbd439be62c125e">v3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#af9e53ca26e8a4f7d43b7b353bd4f4846">start</a></td></tr>
+<tr class="memdesc:af9e53ca26e8a4f7d43b7b353bd4f4846"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start point for graph generation.  <a href="a01101.html#af9e53ca26e8a4f7d43b7b353bd4f4846">More...</a><br /></td></tr>
+<tr class="separator:af9e53ca26e8a4f7d43b7b353bd4f4846"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a7fd22576b53f4b63ab92f4f7112006"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#a1a7fd22576b53f4b63ab92f4f7112006">downstep</a></td></tr>
+<tr class="memdesc:a1a7fd22576b53f4b63ab92f4f7112006"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum step down that can be considered accessible.  <a href="a01101.html#a1a7fd22576b53f4b63ab92f4f7112006">More...</a><br /></td></tr>
+<tr class="separator:a1a7fd22576b53f4b63ab92f4f7112006"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bf8f31f3192dad1db49abd03e3a2503"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#a3bf8f31f3192dad1db49abd03e3a2503">upslope</a></td></tr>
+<tr class="memdesc:a3bf8f31f3192dad1db49abd03e3a2503"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum upward slope in degrees that can be considered accessible.  <a href="a01101.html#a3bf8f31f3192dad1db49abd03e3a2503">More...</a><br /></td></tr>
+<tr class="separator:a3bf8f31f3192dad1db49abd03e3a2503"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cbc45046a831656d0a84003df187a6e"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#a2cbc45046a831656d0a84003df187a6e">downslope</a></td></tr>
+<tr class="memdesc:a2cbc45046a831656d0a84003df187a6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum downard slope in degrees that can be considered accessible.  <a href="a01101.html#a2cbc45046a831656d0a84003df187a6e">More...</a><br /></td></tr>
+<tr class="separator:a2cbc45046a831656d0a84003df187a6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a161d82b678c4ca4dc94eae851602fb08"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#a161d82b678c4ca4dc94eae851602fb08">upstep</a></td></tr>
+<tr class="memdesc:a161d82b678c4ca4dc94eae851602fb08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum upward step that can be considered accessible.  <a href="a01101.html#a161d82b678c4ca4dc94eae851602fb08">More...</a><br /></td></tr>
+<tr class="separator:a161d82b678c4ca4dc94eae851602fb08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada6726b2b1551bf8add26c18229bed96"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#ada6726b2b1551bf8add26c18229bed96">step_height</a></td></tr>
+<tr class="memdesc:ada6726b2b1551bf8add26c18229bed96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unused.  <a href="a01101.html#ada6726b2b1551bf8add26c18229bed96">More...</a><br /></td></tr>
+<tr class="separator:ada6726b2b1551bf8add26c18229bed96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bdee503345645ede58132833b4803e6"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#a3bdee503345645ede58132833b4803e6">floor_offset</a></td></tr>
+<tr class="memdesc:a3bdee503345645ede58132833b4803e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unused.  <a href="a01101.html#a3bdee503345645ede58132833b4803e6">More...</a><br /></td></tr>
+<tr class="separator:a3bdee503345645ede58132833b4803e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73847391cae1bc6c5a0ed5416844ab68"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#a73847391cae1bc6c5a0ed5416844ab68">max_step_connection</a></td></tr>
+<tr class="memdesc:a73847391cae1bc6c5a0ed5416844ab68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplier for children to generate from a single parent node.  <a href="a01101.html#a73847391cae1bc6c5a0ed5416844ab68">More...</a><br /></td></tr>
+<tr class="separator:a73847391cae1bc6c5a0ed5416844ab68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6afac9c527d8483943ef61e9e9a1ca15"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#a6afac9c527d8483943ef61e9e9a1ca15">max_nodes</a></td></tr>
+<tr class="memdesc:a6afac9c527d8483943ef61e9e9a1ca15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum number of nodes to generate. If less than zero, generate nodes without a limit.  <a href="a01101.html#a6afac9c527d8483943ef61e9e9a1ca15">More...</a><br /></td></tr>
+<tr class="separator:a6afac9c527d8483943ef61e9e9a1ca15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:aa297d0e5ad99ca27a68edd2a4b1ff75b"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html#aa297d0e5ad99ca27a68edd2a4b1ff75b">GraphGeneratorPrivate</a></td></tr>
+<tr class="memdesc:aa297d0e5ad99ca27a68edd2a4b1ff75b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Private implementation for the graph generator.  <a href="a01101.html#aa297d0e5ad99ca27a68edd2a4b1ff75b">More...</a><br /></td></tr>
+<tr class="separator:aa297d0e5ad99ca27a68edd2a4b1ff75b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A point in space with an ID </p>
+<div class="textblock"><p>Generate a graph of accessible space from a given start point. </p>
+<p>The Graph Generator maps out "accessible" space on a model from a given starting point. In graphs created by this algorithm, node represents a point in space that a human can occupy, and each edge between nodes indicates that a human can traverse from one node to another node. The Graph Generator is a powerful tool for analyzing space, since the graph or nodes it outputs can be used as input to all the analysis methods offered by HumanFactors, allowing for it to be the starting point of other analysis methods within HumanFactors.</p>
+<dl class="section remark"><dt>Remarks</dt><dd>This class serves as an interface to <a class="el" href="a01105.html">GraphGeneratorPrivate</a>. All of the implementation for the <a class="el" href="a01101.html" title="Generate a graph of accessible space from a given start point.">GraphGenerator</a> is located in its friend class <a class="el" href="a01105.html" title="Contains the private implementation of the GraphGenerator to insulate the clients from the implementa...">GraphGeneratorPrivate</a>.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>All arguments are in meters for distances and degrees for angles unless otherwise specified. For all calculations, the Graph Generator assumes geometry is Z-Up i.e. upstep is how high the step is in the z-direction, ground checks are performed in the -z direction etc.</dd></dl>
+<dl class="todo"><dt><b><a class="el" href="a00266.html#_todo000001">Todo:</a></b></dt><dd>Obstacle/Walkable geometry support.</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="a01105.html" title="Contains the private implementation of the GraphGenerator to insulate the clients from the implementa...">GraphGeneratorPrivate</a> for details about the implementation. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="a00104_source.html#l00028">28</a> of file <a class="el" href="a00104_source.html">node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00008_source.html#l00071">71</a> of file <a class="el" href="a00008_source.html">graph_generator.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a3d229a53bb7328f88649fd48e6098b5d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3d229a53bb7328f88649fd48e6098b5d">&#9670;&nbsp;</a></span>Node() <span class="overload">[1/4]</span></h2>
+<a id="a0d5c02761a3cbf57aea95ae014d032a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d5c02761a3cbf57aea95ae014d032a9">&#9670;&nbsp;</a></span>GraphGenerator()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">HF::SpatialStructures::Node::Node </td>
+          <td class="memname">HF::GraphGenerator::GraphGenerator::GraphGenerator </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Default constructor. Constructs everything with NAN </p>
-<div class="fragment"><div class="line"><span class="comment">// be sure to #include &quot;node.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><a class="code" href="a01101.html">HF::SpatialStructures::Node</a> node(); <span class="comment">// all fields initialized to NAN            </span></div>
-</div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="a01396_source.html#l00015">15</a> of file <a class="el" href="a01396_source.html">node.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00104_source.html#l00030">x</a>, <a class="el" href="a00104_source.html#l00030">y</a>, and <a class="el" href="a00104_source.html#l00030">z</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="a01396_source.html#l00113">operator*()</a>, <a class="el" href="a01396_source.html#l00104">operator+()</a>, and <a class="el" href="a01396_source.html#l00100">operator-()</a>.</p>
-
-</div>
-</div>
-<a id="a5e6500cbe9a1c29ebca5045dceebe9d6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5e6500cbe9a1c29ebca5045dceebe9d6">&#9670;&nbsp;</a></span>Node() <span class="overload">[2/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">HF::SpatialStructures::Node::Node </td>
-          <td>(</td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>y</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>z</em>, </td>
+          <td class="paramtype"><a class="el" href="a01165.html">RayTracer::EmbreeRayTracer</a> &amp;&#160;</td>
+          <td class="paramname"><em>RT</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>ID</em> = <code>-1</code>&#160;</td>
+          <td class="paramname"><em>walkable_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>obstacle_id</em> = <code>-1</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -231,802 +182,595 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Create a node without an ID </p>
+<p>Create a new Graph Generator. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">x</td><td>X coordinate</td></tr>
-    <tr><td class="paramname">y</td><td>Y coordinate</td></tr>
-    <tr><td class="paramname">z</td><td>Z coordinate</td></tr>
-    <tr><td class="paramname">id</td><td>ID of the node </td></tr>
+    <tr><td class="paramname">RT</td><td>The raytracer to use for this scene. <a class="el" href="a00282.html" title="Manipulate and load geometry from disk.">Geometry</a> for the Raytracer must be Z-Up. </td></tr>
+    <tr><td class="paramname">walkable_id</td><td>The Raytracer's ID for walkable geometry (Unused) </td></tr>
   </table>
   </dd>
 </dl>
-<div class="fragment"><div class="line"><span class="comment">// be sure to #include &quot;node.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><a class="code" href="a01101.html">HF::SpatialStructures::Node</a> node_0(12.0, 23.1, 34.2);   <span class="comment">// default ID is -1</span></div>
-</div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="a01396_source.html#l00022">22</a> of file <a class="el" href="a01396_source.html">node.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a7d3f18b093670b7696aa1aecf8adab00"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7d3f18b093670b7696aa1aecf8adab00">&#9670;&nbsp;</a></span>Node() <span class="overload">[3/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">HF::SpatialStructures::Node::Node </td>
-          <td>(</td>
-          <td class="paramtype">const std::array&lt; float, 3 &gt; &amp;&#160;</td>
-          <td class="paramname"><em>position</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Create a node without an ID </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">position</td><td>An array of 3 floats for x,y,z</td></tr>
+    <tr><td class="paramname">obstacle_id</td><td>ID to use for obstacle geometry (Unused) </td></tr>
   </table>
   </dd>
 </dl>
-<div class="fragment"><div class="line"><span class="comment">// be sure to #include &quot;node.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line">std::array&lt;float, 3&gt; pos = { 12.0, 23.1, 34.2 };</div>
-<div class="line"><a class="code" href="a01101.html">HF::SpatialStructures::Node</a> node(pos);      <span class="comment">// id == -1, type == NODE_TYPE::GRAPH</span></div>
-</div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="a01396_source.html#l00024">24</a> of file <a class="el" href="a01396_source.html">node.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="a00104_source.html#l00020">HF::SpatialStructures::GRAPH</a>, <a class="el" href="a00104_source.html#l00031">type</a>, <a class="el" href="a00104_source.html#l00030">x</a>, <a class="el" href="a00104_source.html#l00030">y</a>, and <a class="el" href="a00104_source.html#l00030">z</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00015">15</a> of file <a class="el" href="a00005_source.html">graph_generator.cpp</a>.</p>
 
-</div>
-</div>
-<a id="afc1e769b57e880909a11178bb8654adf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afc1e769b57e880909a11178bb8654adf">&#9670;&nbsp;</a></span>Node() <span class="overload">[4/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">HF::SpatialStructures::Node::Node </td>
-          <td>(</td>
-          <td class="paramtype">const std::array&lt; float, 3 &gt; &amp;&#160;</td>
-          <td class="paramname"><em>position</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a00174.html#aa8ecd83cd353318532d791fc819343cc">NODE_TYPE</a>&#160;</td>
-          <td class="paramname"><em>t</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>id</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<div class="fragment"><div class="line"><span class="comment">// be sure to #include &quot;node.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line">std::array&lt;float, 3&gt; pos = { 12.0, 23.1, 34.2 };</div>
-<div class="line"><a class="code" href="a01101.html">HF::SpatialStructures::Node</a> node(pos, <a class="code" href="a00174.html#aa8ecd83cd353318532d791fc819343cca5c2876be9857d3e0192c9e1cb3797bf8">HF::SpatialStructures::NODE_TYPE::GRAPH</a>, 456);</div>
-</div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="a01396_source.html#l00032">32</a> of file <a class="el" href="a01396_source.html">node.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00104_source.html#l00031">type</a>, <a class="el" href="a00104_source.html#l00030">x</a>, <a class="el" href="a00104_source.html#l00030">y</a>, and <a class="el" href="a00104_source.html#l00030">z</a>.</p>
+<p class="reference">References <a class="el" href="a00008_source.html#l00077">ray_tracer</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a260ab9e9763234dab08decfc2aa6bf63"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a260ab9e9763234dab08decfc2aa6bf63">&#9670;&nbsp;</a></span>angleTo()</h2>
+<a id="a0044b9075921c7510b047f9076ad0a5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0044b9075921c7510b047f9076ad0a5e">&#9670;&nbsp;</a></span>BuildNetwork()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float HF::SpatialStructures::Node::angleTo </td>
+          <td class="memname"><a class="el" href="a01189.html">SpatialStructures::Graph</a> HF::GraphGenerator::GraphGenerator::BuildNetwork </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="a01101.html">Node</a> &amp;&#160;</td>
-          <td class="paramname"><em>n2</em></td><td>)</td>
-          <td> const</td>
+          <td class="paramtype">const <a class="el" href="a00276.html#a8c29578574c275e66fbd439be62c125e">v3</a> &amp;&#160;</td>
+          <td class="paramname"><em>start_point</em>, </td>
         </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Calculate the angle between node 1 and n2 </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">n2</td><td><a class="el" href="a01101.html" title="A point in space with an ID">Node</a> to calculate direction to </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Angle between this node and n2</dd></dl>
-<div class="fragment"><div class="line">TODO code sample: line 40 of node.cpp - <span class="stringliteral">&#39;This needs an actual angle formula&#39;</span></div>
-</div><!-- fragment --> 
-</div>
-</div>
-<a id="ad3f7898ef3178eef0c3579869a7f5c67"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad3f7898ef3178eef0c3579869a7f5c67">&#9670;&nbsp;</a></span>directionTo()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
         <tr>
-          <td class="memname">std::array&lt; float, 3 &gt; HF::SpatialStructures::Node::directionTo </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="a01101.html">Node</a> &amp;&#160;</td>
-          <td class="paramname"><em>n2</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get the direction between this node and another node </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">n2</td><td>The node to get the direction to </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>an array of 3 floats indicating a direction</dd></dl>
-<div class="fragment"><div class="line"><span class="comment">// be sure to #include &quot;node.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><a class="code" href="a01101.html">HF::SpatialStructures::Node</a> node_0(12.0, 23.1, 34.2, 456);</div>
-<div class="line"><a class="code" href="a01101.html">HF::SpatialStructures::Node</a> node_1(45.3, 56.4, 67.5, 789);</div>
-<div class="line"> </div>
-<div class="line">std::array&lt;float, 3&gt; direction_vector = node_0.directionTo(node_1);</div>
-</div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="a01396_source.html#l00130">130</a> of file <a class="el" href="a01396_source.html">node.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a01396_source.html#l00122">HF::SpatialStructures::Normalize()</a>, <a class="el" href="a00104_source.html#l00030">x</a>, <a class="el" href="a00104_source.html#l00030">y</a>, and <a class="el" href="a00104_source.html#l00030">z</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="a00029_source.html#l00048">HF::AnalysisMethods::VisibilityGraph::IsOcclusionBetween()</a>, and <a class="el" href="a00011_source.html#l00101">HF::AnalysisMethods::GraphGeneratorPrivate::OcclusionCheck()</a>.</p>
-
-</div>
-</div>
-<a id="abbd66b566460f9557a373b5fbcc30bb1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abbd66b566460f9557a373b5fbcc30bb1">&#9670;&nbsp;</a></span>distanceTo()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">float HF::SpatialStructures::Node::distanceTo </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="a01101.html">Node</a> &amp;&#160;</td>
-          <td class="paramname"><em>n2</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Calculate the distance between this node and the given node </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">n2</td><td>Note to get distance to </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Distance between this node and n2</dd></dl>
-<div class="fragment"><div class="line"><span class="comment">// be sure to #include &quot;node.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><a class="code" href="a01101.html">HF::SpatialStructures::Node</a> node_0(12.0, 23.1, 34.2, 456);</div>
-<div class="line"><a class="code" href="a01101.html">HF::SpatialStructures::Node</a> node_1(45.3, 56.4, 67.5, 789);</div>
-<div class="line"><span class="keywordtype">float</span> euclidean_distance = node_0.distanceTo(node_1);</div>
-</div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="a01396_source.html#l00040">40</a> of file <a class="el" href="a01396_source.html">node.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00104_source.html#l00030">x</a>, <a class="el" href="a00104_source.html#l00030">y</a>, and <a class="el" href="a00104_source.html#l00030">z</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="a00029_source.html#l00070">HF::AnalysisMethods::VisibilityGraph::AllToAll()</a>, <a class="el" href="a00029_source.html#l00150">HF::AnalysisMethods::VisibilityGraph::AllToAllUndirected()</a>, <a class="el" href="a00011_source.html#l00131">HF::AnalysisMethods::GraphGeneratorPrivate::GetChildren()</a>, <a class="el" href="a00029_source.html#l00107">HF::AnalysisMethods::VisibilityGraph::GroupToGroup()</a>, <a class="el" href="a00029_source.html#l00048">HF::AnalysisMethods::VisibilityGraph::IsOcclusionBetween()</a>, and <a class="el" href="a00011_source.html#l00101">HF::AnalysisMethods::GraphGeneratorPrivate::OcclusionCheck()</a>.</p>
-
-</div>
-</div>
-<a id="a51c4642674d54d02b8600f7ffeb45670"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a51c4642674d54d02b8600f7ffeb45670">&#9670;&nbsp;</a></span>getArray()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::array&lt; float, 3 &gt; HF::SpatialStructures::Node::getArray </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Returns the x,y,z of this node as an array of 3 floats </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">n2</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd></dd></dl>
-<div class="fragment"><div class="line"><span class="comment">// be sure to #include &quot;node.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><a class="code" href="a01101.html">HF::SpatialStructures::Node</a> node(12.0, 23.1, 34.2, 456);</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// An array is created from within the getArray() member function</span></div>
-<div class="line">std::array&lt;float, 3&gt; arr = node.<a class="code" href="a01101.html#a51c4642674d54d02b8600f7ffeb45670">getArray</a>();</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// ref_arr and ref_node have the same value, but</span></div>
-<div class="line"><span class="comment">// refer to different locations in memory -- </span></div>
-<div class="line"><span class="comment">// arr does not consist of the same memory locations as</span></div>
-<div class="line"><span class="comment">// that of the coordinate fields within node.</span></div>
-<div class="line"><span class="keywordtype">float</span>&amp; ref_arr = arr[0];</div>
-<div class="line"><span class="keywordtype">float</span>&amp; ref_node = node.<a class="code" href="a01101.html#a78dfebaa44da09b03d7ca15445c8d222">x</a>;</div>
-</div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="a01396_source.html#l00140">140</a> of file <a class="el" href="a01396_source.html">node.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00104_source.html#l00030">x</a>, <a class="el" href="a00104_source.html#l00030">y</a>, and <a class="el" href="a00104_source.html#l00030">z</a>.</p>
-
-</div>
-</div>
-<a id="a6137878845816e2fe8ecbe1215c490fd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6137878845816e2fe8ecbe1215c490fd">&#9670;&nbsp;</a></span>operator!=()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool HF::SpatialStructures::Node::operator!= </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="a01101.html">Node</a> &amp;&#160;</td>
-          <td class="paramname"><em>n2</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>See operator==, checks if n1 does NOT occupy the same space as n2 </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">n2</td><td><a class="el" href="a01101.html" title="A point in space with an ID">Node</a> to compare with N1</td></tr>
-  </table>
-  </dd>
-</dl>
-</p>
-<dl class="section return"><dt>Returns</dt><dd>True if the distance between n1 and n2 is greater than or equal to Rounding Precision, false otherwise</dd></dl>
-<div class="fragment"><div class="line"><span class="comment">// be sure to #include &quot;node.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><a class="code" href="a01101.html">HF::SpatialStructures::Node</a> node_0(12.0, 23.1, 34.2, 456);</div>
-<div class="line"><a class="code" href="a01101.html">HF::SpatialStructures::Node</a> node_1(45.3, 56.4, 67.5, 789);</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Does the inverse of operator==.</span></div>
-<div class="line"><span class="keywordtype">bool</span> different_positions = node_0 != node_1;</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordflow">if</span> (different_positions) {</div>
-<div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Different positions&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line">} <span class="keywordflow">else</span> {</div>
-<div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Occupies the same space&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// different_positions evaluates to true</span></div>
-</div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="a01396_source.html#l00096">96</a> of file <a class="el" href="a01396_source.html">node.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a01396_source.html#l00083">operator==()</a>.</p>
-
-</div>
-</div>
-<a id="a099271bad26dd059037f3c84459058e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a099271bad26dd059037f3c84459058e0">&#9670;&nbsp;</a></span>operator*()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a01101.html">Node</a> HF::SpatialStructures::Node::operator* </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="a01101.html">Node</a> &amp;&#160;</td>
-          <td class="paramname"><em>n2</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Creates a new node from the dot product of n1, n2 </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">n2</td><td>Second factor of dot product, N1 (dot) N2</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A node with the values obtained from the dot product of N1 and N2</dd></dl>
-<div class="fragment"><div class="line"><span class="comment">// be sure to #include &quot;node.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><a class="code" href="a01101.html">HF::SpatialStructures::Node</a> node_0(12.0, 23.1, 34.2, 456);</div>
-<div class="line"><a class="code" href="a01101.html">HF::SpatialStructures::Node</a> node_1(45.3, 56.4, 67.5, 789);</div>
-<div class="line"> </div>
-<div class="line"><a class="code" href="a01101.html">HF::SpatialStructures::Node</a> node_2 = node_1 * node_0;</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// node_2 has values (x = 543.6, y = 1302.84, z = 2308.5, id = -1, type = NODE_TYPE::GRAPH)</span></div>
-<div class="line"><span class="comment">// id and type are given default values as per Node::Node(const std::array&lt;float, 3&gt;&amp; position)</span></div>
-</div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="a01396_source.html#l00113">113</a> of file <a class="el" href="a01396_source.html">node.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a01396_source.html#l00015">Node()</a>, <a class="el" href="a00104_source.html#l00030">x</a>, <a class="el" href="a00104_source.html#l00030">y</a>, and <a class="el" href="a00104_source.html#l00030">z</a>.</p>
-
-</div>
-</div>
-<a id="a064540b380fc6251bdf6d740abf7a169"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a064540b380fc6251bdf6d740abf7a169">&#9670;&nbsp;</a></span>operator+()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a01101.html">Node</a> HF::SpatialStructures::Node::operator+ </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="a01101.html">Node</a> &amp;&#160;</td>
-          <td class="paramname"><em>n2</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Creates a new node from the vector addition of n1, n2 </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">n2</td><td><a class="el" href="a01101.html" title="A point in space with an ID">Node</a> to add to n1</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A node with the values obtained from n1 + n2</dd></dl>
-<div class="fragment"><div class="line"><span class="comment">// be sure to #include &quot;node.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><a class="code" href="a01101.html">HF::SpatialStructures::Node</a> node_0(12.0, 23.1, 34.2, 456);</div>
-<div class="line"><a class="code" href="a01101.html">HF::SpatialStructures::Node</a> node_1(45.3, 56.4, 67.5, 789);</div>
-<div class="line"> </div>
-<div class="line"><a class="code" href="a01101.html">HF::SpatialStructures::Node</a> node_2 = node_1 + node_0;</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// node_2 has values (x = 57.3, y = 79.5, z = 101.7, id = -1, type = NODE_TYPE::GRAPH)</span></div>
-<div class="line"><span class="comment">// id and type are given default values as per Node::Node(const std::array&lt;float, 3&gt;&amp; position)</span></div>
-</div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="a01396_source.html#l00104">104</a> of file <a class="el" href="a01396_source.html">node.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a01396_source.html#l00015">Node()</a>, <a class="el" href="a00104_source.html#l00030">x</a>, <a class="el" href="a00104_source.html#l00030">y</a>, and <a class="el" href="a00104_source.html#l00030">z</a>.</p>
-
-</div>
-</div>
-<a id="ad58a4eb9f0a15c645eedf668d9bcec54"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad58a4eb9f0a15c645eedf668d9bcec54">&#9670;&nbsp;</a></span>operator-()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a01101.html">Node</a> HF::SpatialStructures::Node::operator- </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="a01101.html">Node</a> &amp;&#160;</td>
-          <td class="paramname"><em>n2</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Creates a node from the vector subtraction of n1, n2 </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">n2</td><td><a class="el" href="a01101.html" title="A point in space with an ID">Node</a> to subtract from N1</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A node with the values obtained from n1 - n2</dd></dl>
-<div class="fragment"><div class="line"><span class="comment">// be sure to #include &quot;node.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><a class="code" href="a01101.html">HF::SpatialStructures::Node</a> node_0(12.0, 23.1, 34.2, 456);</div>
-<div class="line"><a class="code" href="a01101.html">HF::SpatialStructures::Node</a> node_1(45.3, 56.4, 67.5, 789);</div>
-<div class="line"> </div>
-<div class="line"><a class="code" href="a01101.html">HF::SpatialStructures::Node</a> node_2 = node_1 - node_0;</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// node_2 has values (x = 33.3, y = 33.3, z = 33.3, id = -1, type = NODE_TYPE::GRAPH)</span></div>
-<div class="line"><span class="comment">// id and type are given default values as per Node::Node(const std::array&lt;float, 3&gt;&amp; position)</span></div>
-</div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="a01396_source.html#l00100">100</a> of file <a class="el" href="a01396_source.html">node.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a01396_source.html#l00015">Node()</a>, <a class="el" href="a00104_source.html#l00030">x</a>, <a class="el" href="a00104_source.html#l00030">y</a>, and <a class="el" href="a00104_source.html#l00030">z</a>.</p>
-
-</div>
-</div>
-<a id="a7547e73076e40bb880261574216e4251"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7547e73076e40bb880261574216e4251">&#9670;&nbsp;</a></span>operator&lt;() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool HF::SpatialStructures::Node::operator&lt; </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="a01101.html">Node</a> &amp;&#160;</td>
-          <td class="paramname"><em>n2</em></td><td>)</td>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const <a class="el" href="a00276.html#a8c29578574c275e66fbd439be62c125e">v3</a> &amp;&#160;</td>
+          <td class="paramname"><em>Spacing</em>, </td>
         </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Determines if n1's id (an integer) is less than n2's id - const qualification omitted for std::sort </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">n2</td><td><a class="el" href="a01101.html" title="A point in space with an ID">Node</a> whose id will be compared with n1</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>True if n1's id is less than n2's id, false otherwise</dd></dl>
-<div class="fragment"><div class="line"><span class="comment">// be sure to #include &quot;node.h&quot;, and #include &lt;algorithm&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// For this example, we are not concerned about the node coordinates.</span></div>
-<div class="line"><a class="code" href="a01101.html">HF::SpatialStructures::Node</a> node_0(0.0, 0.0, 0.0, 3);</div>
-<div class="line"><a class="code" href="a01101.html">HF::SpatialStructures::Node</a> node_1(0.0, 0.0, 0.0, 1);</div>
-<div class="line"><a class="code" href="a01101.html">HF::SpatialStructures::Node</a> node_2(0.0, 0.0, 0.0, 2);</div>
-<div class="line"><a class="code" href="a01101.html">HF::SpatialStructures::Node</a> node_3(0.0, 0.0, 0.0, 0);</div>
-<div class="line"> </div>
-<div class="line">std::vector&lt;HF::SpatialStructures::Node&gt; vec{ node_0, node_1, node_2, node_3 };</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// operator&lt; sorts Node by ID, in non-decreasing order</span></div>
-<div class="line">std::sort(vec.begin(), vec.end());  <span class="comment">// uses natural ordering through operator&lt;, non-const</span></div>
-<div class="line"> </div>
-<div class="line">std::vector&lt;HF::SpatialStructures::Node&gt;::iterator it = vec.begin();</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordflow">while</span> (it != vec.end()) {</div>
-<div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Node ID: &quot;</span> &lt;&lt; it-&gt;id &lt;&lt; std::endl;</div>
-<div class="line">    \++it;</div>
-<div class="line">} <span class="comment">// Node ID will print in order by ID, from smallest to largest</span></div>
-</div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="a01396_source.html#l00118">118</a> of file <a class="el" href="a01396_source.html">node.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00104_source.html#l00032">id</a>.</p>
-
-</div>
-</div>
-<a id="a1d74d883b7291a760908f3dc81783b3d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1d74d883b7291a760908f3dc81783b3d">&#9670;&nbsp;</a></span>operator&lt;() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
         <tr>
-          <td class="memname">bool HF::SpatialStructures::Node::operator&lt; </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="a01101.html">Node</a> &amp;&#160;</td>
-          <td class="paramname"><em>n2</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Determines if n1's id (an integer) is less than n2's id </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">n2</td><td><a class="el" href="a01101.html" title="A point in space with an ID">Node</a> whose id will be compared with n1</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>True if n1's id is less than n2's id, false otherwise</dd></dl>
-<div class="fragment"><div class="line"><span class="comment">// be sure to #include &quot;node.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><a class="code" href="a01101.html">HF::SpatialStructures::Node</a> node_0(12.0, 23.1, 34.2, 456);</div>
-<div class="line"><a class="code" href="a01101.html">HF::SpatialStructures::Node</a> node_1(45.3, 56.4, 67.5, 789);</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// operator&lt; compares ID fields of node_0 and node_1</span></div>
-<div class="line"><span class="keywordtype">bool</span> compare = node_0 &lt; node_1;     <span class="comment">// evaluates to true, since 456 &lt; 789</span></div>
-</div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="a01396_source.html#l00117">117</a> of file <a class="el" href="a01396_source.html">node.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00104_source.html#l00032">id</a>.</p>
-
-</div>
-</div>
-<a id="a5a3306ea1b8904361b038391718ccc07"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a3306ea1b8904361b038391718ccc07">&#9670;&nbsp;</a></span>operator=()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void HF::SpatialStructures::Node::operator= </td>
-          <td>(</td>
-          <td class="paramtype">const std::array&lt; float, 3 &gt; &amp;&#160;</td>
-          <td class="paramname"><em>n2</em></td><td>)</td>
+          <td class="paramkey"></td>
           <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Assigns the values of array n2 to n1 </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">n2</td><td>Array whose values will be assigned to n1</td></tr>
-  </table>
-  </dd>
-</dl>
-<div class="fragment"><div class="line"><span class="comment">// Note: This member function is not defined in node.cpp (commented out)</span></div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// be sure to #include &quot;node.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><a class="code" href="a01101.html">HF::SpatialStructures::Node</a> node(12.0, 23.1, 34.2);</div>
-<div class="line">std::array&lt;float, 3&gt; position = { 45.3, 56.4, 67.5 };</div>
-<div class="line"> </div>
-<div class="line">node = position;            <span class="comment">// assigns node&#39;s x, y, z fields to that of position&#39;s values</span></div>
-</div><!-- fragment --> 
-</div>
-</div>
-<a id="af687c2e97fffe3b7d14e3cfa8af3e5cd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af687c2e97fffe3b7d14e3cfa8af3e5cd">&#9670;&nbsp;</a></span>operator==()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool HF::SpatialStructures::Node::operator== </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="a01101.html">Node</a> &amp;&#160;</td>
-          <td class="paramname"><em>n2</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Check if n1 occupies the same space as n2 </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">n2</td><td><a class="el" href="a01101.html" title="A point in space with an ID">Node</a> to compare with n1</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>True if the distance between n1 and n2 is less than Rounding Precision, false otherwise</dd></dl>
-<div class="fragment"><div class="line"><span class="comment">// be sure to #include &quot;node.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><a class="code" href="a01101.html">HF::SpatialStructures::Node</a> node_0(12.0, 23.1, 34.2, 456);</div>
-<div class="line"><a class="code" href="a01101.html">HF::SpatialStructures::Node</a> node_1(45.3, 56.4, 67.5, 789);</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">bool</span> same_position = node_0 == node_1;</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordflow">if</span> (same_position) {</div>
-<div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Occupies the same space&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line">} <span class="keywordflow">else</span> {</div>
-<div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Different positions&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// same_position evaluates to false</span></div>
-</div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="a01396_source.html#l00083">83</a> of file <a class="el" href="a01396_source.html">node.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00089_source.html#l00014">HF::SpatialStructures::ROUNDING_PRECISION</a>, <a class="el" href="a00104_source.html#l00030">x</a>, <a class="el" href="a00104_source.html#l00030">y</a>, and <a class="el" href="a00104_source.html#l00030">z</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="a01396_source.html#l00096">operator!=()</a>.</p>
-
-</div>
-</div>
-<a id="a9d67cccc8b0fc57d61390da493149790"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9d67cccc8b0fc57d61390da493149790">&#9670;&nbsp;</a></span>operator&gt;()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool HF::SpatialStructures::Node::operator&gt; </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="a01101.html">Node</a> &amp;&#160;</td>
-          <td class="paramname"><em>n2</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Determines if n1's id (an integer) is greater than n2's id </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">n2</td><td><a class="el" href="a01101.html" title="A point in space with an ID">Node</a> whose id will be compared with n1</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>True if n1's id is greater than n2's id, false otherwise</dd></dl>
-<div class="fragment"><div class="line"><span class="comment">// be sure to #include &quot;node.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><a class="code" href="a01101.html">HF::SpatialStructures::Node</a> node_0(12.0, 23.1, 34.2, 456);</div>
-<div class="line"><a class="code" href="a01101.html">HF::SpatialStructures::Node</a> node_1(45.3, 56.4, 67.5, 789);</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// operator&lt; compares ID fields of node_0 and node_1</span></div>
-<div class="line"><span class="keywordtype">bool</span> compare = node_0 &gt; node_1; <span class="comment">// evaluates to false, since 456 &lt; 789</span></div>
-</div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="a01396_source.html#l00119">119</a> of file <a class="el" href="a01396_source.html">node.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00104_source.html#l00032">id</a>.</p>
-
-</div>
-</div>
-<a id="a556efc898ddc67b64fff560d0c7b5a0a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a556efc898ddc67b64fff560d0c7b5a0a">&#9670;&nbsp;</a></span>operator[]() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">float &amp; HF::SpatialStructures::Node::operator[] </td>
-          <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>i</em></td><td>)</td>
+          <td class="paramname"><em>MaxNodes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>UpStep</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>UpSlope</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>DownStep</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>DownSlope</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>max_step_connections</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>cores</em> = <code>-1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Directly access a nodes's position as if it were an array of 3 floats </p>
+<p>Generate a Graph of accessible space. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">i</td><td>Index. 0 = x, 1 = y, 2 = z</td></tr>
+    <tr><td class="paramname">start_point</td><td>Starting point for the breadth first search. </td></tr>
+    <tr><td class="paramname">spacing</td><td>Spacing between each node. </td></tr>
+    <tr><td class="paramname">MaxNodes</td><td>Maximum amount of nodes for generation. Set to -1 for no limit. </td></tr>
+    <tr><td class="paramname">UpStep</td><td>Maximum upward step that can be considered accessible. </td></tr>
+    <tr><td class="paramname">UpSlope</td><td>Maximum upward slope in degrees that can be considered accessible. </td></tr>
+    <tr><td class="paramname">DownSlope</td><td>Maximum downard slope in degrees that can be considered accessible. </td></tr>
+    <tr><td class="paramname">max_step_connection</td><td>Multiplier for children to generate from a single parent node. </td></tr>
+    <tr><td class="paramname">cores</td><td>Number of CPU cores to use for the calculation. A setting of -1 will use all available cores. A setting of 0 or 1 will disable parallel processing entirely. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>a reference to the member float for the requested coordinate</dd></dl>
-<div class="fragment"><div class="line"><span class="comment">// be sure to #include &quot;node.h&quot;</span></div>
+<dl class="section return"><dt>Returns</dt><dd>A Graph of accessible space for the provided arguments. </dd></dl>
+<div class="fragment"><div class="line"><span class="comment">// Requires #include &quot;graph_generator.h&quot;</span></div>
+<div class="line"><span class="comment">// For brevity</span></div>
 <div class="line"> </div>
-<div class="line"><a class="code" href="a01101.html">HF::SpatialStructures::Node</a> node(12.0, 23.1, 34.2, 456);    <span class="comment">// (x, y, z), ID</span></div>
+<div class="line"><span class="keyword">using</span> <a class="code" href="a00282.html#ad32d656c7a8c84beded49e1f14f64176">HF::Geometry::LoadMeshObjects</a>;</div>
+<div class="line"><span class="keyword">using</span> <a class="code" href="a01165.html">HF::RayTracer::EmbreeRayTracer</a>;</div>
+<div class="line"><span class="keyword">using</span> <a class="code" href="a01101.html">HF::GraphGenerator::GraphGenerator</a>;</div>
+<div class="line"><span class="keyword">using</span> <a class="code" href="a01189.html">HF::SpatialStructures::Graph</a>;</div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">float</span>&amp; position = node[1];          <span class="comment">// access by reference</span></div>
-<div class="line">position = 93.5;                    <span class="comment">// node.y is now 93.5</span></div>
-</div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="a01396_source.html#l00051">51</a> of file <a class="el" href="a01396_source.html">node.cpp</a>.</p>
+<div class="line"><span class="comment">// Prepare the file path for plane.obj, load the mesh objects into mesh</span></div>
+<div class="line"><span class="keyword">auto</span> mesh = <a class="code" href="a00282.html#ad32d656c7a8c84beded49e1f14f64176">LoadMeshObjects</a>(plane_path);</div>
+<div class="line"><span class="keyword">const</span> std::string plane_path = <span class="stringliteral">&quot;plane.obj&quot;</span>;</div>
+<div class="line"><span class="comment">// Create a GraphGenerator using an EmbreeRayTracer.</span></div>
+<div class="line"> </div>
+<div class="line">EmbreeRayTracer <a class="code" href="a01101.html#a6e3a66ea1b5b1325bdf082e7fee7f47e">ray_tracer</a>(mesh);</div>
+<div class="line"><span class="comment">// walkable_id = 0, obstacle_id defaults to -1</span></div>
+<div class="line"><a class="code" href="a01101.html#a0d5c02761a3cbf57aea95ae014d032a9">GraphGenerator</a> graph_generator = <a class="code" href="a01101.html#a0d5c02761a3cbf57aea95ae014d032a9">GraphGenerator</a>(<a class="code" href="a01101.html#a6e3a66ea1b5b1325bdf082e7fee7f47e">ray_tracer</a>, 0);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Prepare the parameters for building a graph</span></div>
+<div class="line">std::array&lt;float, 3&gt; starting_position = { 0.0, 0.0, 0.5 };     <span class="comment">// position to begin analysis</span></div>
+<div class="line">std::array&lt;float, 3&gt; node_spacing = { 0.02f, 0.02f, 0.02f };    <span class="comment">// space between nodes</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">int</span> maximum_nodes = 100000;                               <span class="comment">// maximum amount of nodes for generation</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">float</span> max_slope = 1.0;                                          <span class="comment">// maximum allowed slope between two nodes</span></div>
+<div class="line"><span class="keywordtype">float</span> max_step_height = 1.0;                                    <span class="comment">// maximum height for a step</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">float</span> min_slope = 1.0;                                          <span class="comment">// minimum step allowed between nodes</span></div>
+<div class="line">                                                                <span class="comment">// per parent node</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="a01101.html#a73847391cae1bc6c5a0ed5416844ab68">max_step_connection</a> = 1;                                    <span class="comment">// influences how many potential children are generated</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="a01101.html#a16da7abe348f7af1d232867f2d719db1">core_count</a> = 1;                                             <span class="comment">// how many CPU cores are used in calculation</span></div>
+<div class="line"> </div>
+<div class="line">                                                                <span class="comment">//  defaults to -1 if not set and uses all available cores</span></div>
+<div class="line"> </div>
+<div class="line">                                                                <span class="comment">//  0 or 1 disables parallel processing entirely</span></div>
+<div class="line">Graph g = graph_generator.BuildNetwork(starting_position,</div>
+<div class="line"><span class="comment">// Create a graph using BuildNetwork</span></div>
+<div class="line">                                       maximum_nodes,</div>
+<div class="line">                                       max_slope,</div>
+<div class="line">                                       min_slope,</div>
+<div class="line">                                       node_spacing,</div>
+<div class="line">                                       max_step_height,</div>
+<div class="line">                                       <a class="code" href="a01101.html#a73847391cae1bc6c5a0ed5416844ab68">max_step_connection</a>,</div>
+<div class="line"> </div>
+<div class="line">                                       <a class="code" href="a01101.html#a16da7abe348f7af1d232867f2d719db1">core_count</a>);</div>
+<div class="line">g.<a class="code" href="a01189.html#a41cece77d0eee98df39ecc6d3a366ec8">Compress</a>();</div>
+<div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;Graph size &quot;</span> &lt;&lt; g.size() &lt;&lt; std::endl;</div>
+</div><!-- fragment --><p> <code>&gt;&gt;&gt;Graph size 101270</code> </p>
 
-<p class="reference">References <a class="el" href="a00104_source.html#l00030">x</a>, <a class="el" href="a00104_source.html#l00030">y</a>, and <a class="el" href="a00104_source.html#l00030">z</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00020">20</a> of file <a class="el" href="a00005_source.html">graph_generator.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="a00011_source.html#l00067">HF::GraphGenerator::GraphGeneratorPrivate::BuildNetwork()</a>, <a class="el" href="a00008_source.html#l00076">core_count</a>, <a class="el" href="a00008_source.html#l00083">downslope</a>, <a class="el" href="a00008_source.html#l00081">downstep</a>, <a class="el" href="a00008_source.html#l00089">max_nodes</a>, <a class="el" href="a00008_source.html#l00087">max_step_connection</a>, <a class="el" href="a00008_source.html#l00078">spacing</a>, <a class="el" href="a00008_source.html#l00079">start</a>, <a class="el" href="a00008_source.html#l00082">upslope</a>, and <a class="el" href="a00008_source.html#l00084">upstep</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00218_source.html#l00015">GenerateGraph()</a>.</p>
 
 </div>
 </div>
-<a id="ae3e88bd4eecfdbd93431953ed07b8a7b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae3e88bd4eecfdbd93431953ed07b8a7b">&#9670;&nbsp;</a></span>operator[]() <span class="overload">[2/2]</span></h2>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="aa297d0e5ad99ca27a68edd2a4b1ff75b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa297d0e5ad99ca27a68edd2a4b1ff75b">&#9670;&nbsp;</a></span>GraphGeneratorPrivate</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">float HF::SpatialStructures::Node::operator[] </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>i</em></td><td>)</td>
-          <td> const</td>
+          <td class="memname">friend class <a class="el" href="a01105.html">GraphGeneratorPrivate</a></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Access a nodes's position, by value </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">i</td><td>Index. 0 = x, 1 = y, 2 = z</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>the value (copy) of the member float for the requested coordinate</dd></dl>
-<div class="fragment"><div class="line"><span class="comment">// be sure to #include &quot;node.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><a class="code" href="a01101.html">HF::SpatialStructures::Node</a> node(12.0, 23.1, 34.2, 456);    <span class="comment">// (x, y, z), ID</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">float</span> position = node[1];           <span class="comment">// access by reference</span></div>
-<div class="line">position = 93.5                     <span class="comment">// node.y is still 23.1</span></div>
-</div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="a01396_source.html#l00067">67</a> of file <a class="el" href="a01396_source.html">node.cpp</a>.</p>
+<p>Private implementation for the graph generator. </p>
 
-<p class="reference">References <a class="el" href="a00104_source.html#l00030">x</a>, <a class="el" href="a00104_source.html#l00030">y</a>, and <a class="el" href="a00104_source.html#l00030">z</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00008_source.html#l00091">91</a> of file <a class="el" href="a00008_source.html">graph_generator.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a8212d00e6913abf0ca6fec1f2624b677"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8212d00e6913abf0ca6fec1f2624b677">&#9670;&nbsp;</a></span>id</h2>
+<a id="a16da7abe348f7af1d232867f2d719db1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16da7abe348f7af1d232867f2d719db1">&#9670;&nbsp;</a></span>core_count</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int HF::SpatialStructures::Node::id</td>
+          <td class="memname">int HF::GraphGenerator::GraphGenerator::core_count</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p><a class="el" href="a01101.html" title="A point in space with an ID">Node</a> identifier. </p>
+<p>Number of cores to use in parallel. </p>
 
-<p class="definition">Definition at line <a class="el" href="a00104_source.html#l00032">32</a> of file <a class="el" href="a00104_source.html">node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00008_source.html#l00076">76</a> of file <a class="el" href="a00008_source.html">graph_generator.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="a01396_source.html#l00117">operator&lt;()</a>, and <a class="el" href="a01396_source.html#l00119">operator&gt;()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="a00005_source.html#l00020">BuildNetwork()</a>, and <a class="el" href="a00011_source.html#l00067">HF::GraphGenerator::GraphGeneratorPrivate::BuildNetwork()</a>.</p>
 
 </div>
 </div>
-<a id="a3894a51f72b82cea2d6675a91fcb39cf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3894a51f72b82cea2d6675a91fcb39cf">&#9670;&nbsp;</a></span>type</h2>
+<a id="a2cbc45046a831656d0a84003df187a6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cbc45046a831656d0a84003df187a6e">&#9670;&nbsp;</a></span>downslope</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">short HF::SpatialStructures::Node::type = <a class="el" href="a00174.html#aa8ecd83cd353318532d791fc819343cca5c2876be9857d3e0192c9e1cb3797bf8">GRAPH</a></td>
+          <td class="memname">float HF::GraphGenerator::GraphGenerator::downslope</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Default this field to GRAPH. </p>
+<p>Maximum downard slope in degrees that can be considered accessible. </p>
 
-<p class="definition">Definition at line <a class="el" href="a00104_source.html#l00031">31</a> of file <a class="el" href="a00104_source.html">node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00008_source.html#l00083">83</a> of file <a class="el" href="a00008_source.html">graph_generator.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="a01396_source.html#l00024">Node()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="a00005_source.html#l00020">BuildNetwork()</a>, and <a class="el" href="a00011_source.html#l00139">HF::GraphGenerator::GraphGeneratorPrivate::isUpSlope()</a>.</p>
 
 </div>
 </div>
-<a id="a78dfebaa44da09b03d7ca15445c8d222"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a78dfebaa44da09b03d7ca15445c8d222">&#9670;&nbsp;</a></span>x</h2>
+<a id="a1a7fd22576b53f4b63ab92f4f7112006"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a7fd22576b53f4b63ab92f4f7112006">&#9670;&nbsp;</a></span>downstep</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">float HF::SpatialStructures::Node::x</td>
+          <td class="memname">float HF::GraphGenerator::GraphGenerator::downstep</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00104_source.html#l00030">30</a> of file <a class="el" href="a00104_source.html">node.h</a>.</p>
+<p>Maximum step down that can be considered accessible. </p>
 
-<p class="reference">Referenced by <a class="el" href="a01396_source.html#l00130">directionTo()</a>, <a class="el" href="a01396_source.html#l00040">distanceTo()</a>, <a class="el" href="a01396_source.html#l00140">getArray()</a>, <a class="el" href="a00011_source.html#l00121">HF::AnalysisMethods::GraphGeneratorPrivate::isUpSlope()</a>, <a class="el" href="a01396_source.html#l00015">Node()</a>, <a class="el" href="a00011_source.html#l00101">HF::AnalysisMethods::GraphGeneratorPrivate::OcclusionCheck()</a>, <a class="el" href="a01396_source.html#l00113">operator*()</a>, <a class="el" href="a01396_source.html#l00104">operator+()</a>, <a class="el" href="a01396_source.html#l00100">operator-()</a>, <a class="el" href="a00104_source.html#l00432">std::operator&lt;&lt;()</a>, <a class="el" href="a01396_source.html#l00083">operator==()</a>, and <a class="el" href="a01396_source.html#l00051">operator[]()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00008_source.html#l00081">81</a> of file <a class="el" href="a00008_source.html">graph_generator.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00005_source.html#l00020">BuildNetwork()</a>, <a class="el" href="a00011_source.html#l00170">HF::GraphGenerator::GraphGeneratorPrivate::CheckChildren()</a>, and <a class="el" href="a00011_source.html#l00189">HF::GraphGenerator::GraphGeneratorPrivate::CheckConnection()</a>.</p>
 
 </div>
 </div>
-<a id="a41981fb2cc6dc0edb787f921188702b0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a41981fb2cc6dc0edb787f921188702b0">&#9670;&nbsp;</a></span>y</h2>
+<a id="a3bdee503345645ede58132833b4803e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3bdee503345645ede58132833b4803e6">&#9670;&nbsp;</a></span>floor_offset</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">float HF::SpatialStructures::Node::y</td>
+          <td class="memname">float HF::GraphGenerator::GraphGenerator::floor_offset</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00104_source.html#l00030">30</a> of file <a class="el" href="a00104_source.html">node.h</a>.</p>
+<p>Unused. </p>
 
-<p class="reference">Referenced by <a class="el" href="a01396_source.html#l00130">directionTo()</a>, <a class="el" href="a01396_source.html#l00040">distanceTo()</a>, <a class="el" href="a01396_source.html#l00140">getArray()</a>, <a class="el" href="a00011_source.html#l00121">HF::AnalysisMethods::GraphGeneratorPrivate::isUpSlope()</a>, <a class="el" href="a01396_source.html#l00015">Node()</a>, <a class="el" href="a00011_source.html#l00101">HF::AnalysisMethods::GraphGeneratorPrivate::OcclusionCheck()</a>, <a class="el" href="a01396_source.html#l00113">operator*()</a>, <a class="el" href="a01396_source.html#l00104">operator+()</a>, <a class="el" href="a01396_source.html#l00100">operator-()</a>, <a class="el" href="a00104_source.html#l00432">std::operator&lt;&lt;()</a>, <a class="el" href="a01396_source.html#l00083">operator==()</a>, and <a class="el" href="a01396_source.html#l00051">operator[]()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00008_source.html#l00086">86</a> of file <a class="el" href="a00008_source.html">graph_generator.h</a>.</p>
 
 </div>
 </div>
-<a id="a495b47689917e0395ce96ee01d3f5ed3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a495b47689917e0395ce96ee01d3f5ed3">&#9670;&nbsp;</a></span>z</h2>
+<a id="a6afac9c527d8483943ef61e9e9a1ca15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6afac9c527d8483943ef61e9e9a1ca15">&#9670;&nbsp;</a></span>max_nodes</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">float HF::SpatialStructures::Node::z</td>
+          <td class="memname">int HF::GraphGenerator::GraphGenerator::max_nodes</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Cartesian coordinates x, y, z. </p>
+<p>Maximum number of nodes to generate. If less than zero, generate nodes without a limit. </p>
 
-<p class="definition">Definition at line <a class="el" href="a00104_source.html#l00030">30</a> of file <a class="el" href="a00104_source.html">node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00008_source.html#l00089">89</a> of file <a class="el" href="a00008_source.html">graph_generator.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="a00011_source.html#l00108">HF::AnalysisMethods::GraphGeneratorPrivate::CheckFloor()</a>, <a class="el" href="a01396_source.html#l00130">directionTo()</a>, <a class="el" href="a01396_source.html#l00040">distanceTo()</a>, <a class="el" href="a01396_source.html#l00140">getArray()</a>, <a class="el" href="a00011_source.html#l00121">HF::AnalysisMethods::GraphGeneratorPrivate::isUpSlope()</a>, <a class="el" href="a01396_source.html#l00015">Node()</a>, <a class="el" href="a00011_source.html#l00101">HF::AnalysisMethods::GraphGeneratorPrivate::OcclusionCheck()</a>, <a class="el" href="a01396_source.html#l00113">operator*()</a>, <a class="el" href="a01396_source.html#l00104">operator+()</a>, <a class="el" href="a01396_source.html#l00100">operator-()</a>, <a class="el" href="a00104_source.html#l00432">std::operator&lt;&lt;()</a>, <a class="el" href="a01396_source.html#l00083">operator==()</a>, and <a class="el" href="a01396_source.html#l00051">operator[]()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="a00005_source.html#l00020">BuildNetwork()</a>, <a class="el" href="a00011_source.html#l00251">HF::GraphGenerator::GraphGeneratorPrivate::CrawlGeom()</a>, and <a class="el" href="a00011_source.html#l00296">HF::GraphGenerator::GraphGeneratorPrivate::CrawlGeomParallel()</a>.</p>
 
 </div>
 </div>
-<hr/>The documentation for this struct was generated from the following files:<ul>
-<li>Cpp/spatialstructures/src/<a class="el" href="a00104_source.html">node.h</a></li>
-<li>Cpp/spatialstructures/src/<a class="el" href="a01396_source.html">node.cpp</a></li>
+<a id="a73847391cae1bc6c5a0ed5416844ab68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73847391cae1bc6c5a0ed5416844ab68">&#9670;&nbsp;</a></span>max_step_connection</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int HF::GraphGenerator::GraphGenerator::max_step_connection</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Multiplier for children to generate from a single parent node. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00008_source.html#l00087">87</a> of file <a class="el" href="a00008_source.html">graph_generator.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00005_source.html#l00020">BuildNetwork()</a>, <a class="el" href="a00011_source.html#l00251">HF::GraphGenerator::GraphGeneratorPrivate::CrawlGeom()</a>, and <a class="el" href="a00011_source.html#l00296">HF::GraphGenerator::GraphGeneratorPrivate::CrawlGeomParallel()</a>.</p>
+
+</div>
+</div>
+<a id="a455de4cc964be74f8ad7622bdc20796a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a455de4cc964be74f8ad7622bdc20796a">&#9670;&nbsp;</a></span>obstacle_surfaces</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int HF::GraphGenerator::GraphGenerator::obstacle_surfaces</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Corresponds to the meshid of obstacle surfaces in the Raytracer (Unused) </p>
+
+<p class="definition">Definition at line <a class="el" href="a00008_source.html#l00075">75</a> of file <a class="el" href="a00008_source.html">graph_generator.h</a>.</p>
+
+</div>
+</div>
+<a id="a6e3a66ea1b5b1325bdf082e7fee7f47e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e3a66ea1b5b1325bdf082e7fee7f47e">&#9670;&nbsp;</a></span>ray_tracer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a01165.html">RayTracer::EmbreeRayTracer</a> HF::GraphGenerator::GraphGenerator::ray_tracer</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Raytracer to use for all intersections. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00008_source.html#l00077">77</a> of file <a class="el" href="a00008_source.html">graph_generator.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00011_source.html#l00395">HF::GraphGenerator::GraphGeneratorPrivate::CheckRay()</a>, <a class="el" href="a00005_source.html#l00015">GraphGenerator()</a>, and <a class="el" href="a00011_source.html#l00122">HF::GraphGenerator::GraphGeneratorPrivate::OcclusionCheck()</a>.</p>
+
+</div>
+</div>
+<a id="ac68ce8f1034d1e4afdbcade8d4206612"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac68ce8f1034d1e4afdbcade8d4206612">&#9670;&nbsp;</a></span>spacing</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00276.html#a8c29578574c275e66fbd439be62c125e">v3</a> HF::GraphGenerator::GraphGenerator::spacing</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Spacing between nodes. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00008_source.html#l00078">78</a> of file <a class="el" href="a00008_source.html">graph_generator.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00005_source.html#l00020">BuildNetwork()</a>, and <a class="el" href="a00011_source.html#l00104">HF::GraphGenerator::GraphGeneratorPrivate::GeneratePotentialChildren()</a>.</p>
+
+</div>
+</div>
+<a id="af9e53ca26e8a4f7d43b7b353bd4f4846"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9e53ca26e8a4f7d43b7b353bd4f4846">&#9670;&nbsp;</a></span>start</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00276.html#a8c29578574c275e66fbd439be62c125e">v3</a> HF::GraphGenerator::GraphGenerator::start</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Start point for graph generation. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00008_source.html#l00079">79</a> of file <a class="el" href="a00008_source.html">graph_generator.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00005_source.html#l00020">BuildNetwork()</a>, and <a class="el" href="a00011_source.html#l00067">HF::GraphGenerator::GraphGeneratorPrivate::BuildNetwork()</a>.</p>
+
+</div>
+</div>
+<a id="ada6726b2b1551bf8add26c18229bed96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada6726b2b1551bf8add26c18229bed96">&#9670;&nbsp;</a></span>step_height</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float HF::GraphGenerator::GraphGenerator::step_height</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Unused. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00008_source.html#l00085">85</a> of file <a class="el" href="a00008_source.html">graph_generator.h</a>.</p>
+
+</div>
+</div>
+<a id="a3bf8f31f3192dad1db49abd03e3a2503"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3bf8f31f3192dad1db49abd03e3a2503">&#9670;&nbsp;</a></span>upslope</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float HF::GraphGenerator::GraphGenerator::upslope</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Maximum upward slope in degrees that can be considered accessible. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00008_source.html#l00082">82</a> of file <a class="el" href="a00008_source.html">graph_generator.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00005_source.html#l00020">BuildNetwork()</a>, and <a class="el" href="a00011_source.html#l00139">HF::GraphGenerator::GraphGeneratorPrivate::isUpSlope()</a>.</p>
+
+</div>
+</div>
+<a id="a161d82b678c4ca4dc94eae851602fb08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a161d82b678c4ca4dc94eae851602fb08">&#9670;&nbsp;</a></span>upstep</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float HF::GraphGenerator::GraphGenerator::upstep</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Maximum upward step that can be considered accessible. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00008_source.html#l00084">84</a> of file <a class="el" href="a00008_source.html">graph_generator.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00005_source.html#l00020">BuildNetwork()</a>, <a class="el" href="a00011_source.html#l00170">HF::GraphGenerator::GraphGeneratorPrivate::CheckChildren()</a>, and <a class="el" href="a00011_source.html#l00189">HF::GraphGenerator::GraphGeneratorPrivate::CheckConnection()</a>.</p>
+
+</div>
+</div>
+<a id="a385e9a4d690cadb978d4ab4cb5185cd6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a385e9a4d690cadb978d4ab4cb5185cd6">&#9670;&nbsp;</a></span>walkable_surfaces</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int HF::GraphGenerator::GraphGenerator::walkable_surfaces</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Corresponds to the meshID of walkable surfaces in the Raytracer (Unused) </p>
+
+<p class="definition">Definition at line <a class="el" href="a00008_source.html#l00074">74</a> of file <a class="el" href="a00008_source.html">graph_generator.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00011_source.html#l00411">HF::GraphGenerator::GraphGeneratorPrivate::CheckRay()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>Cpp/analysismethods/src/<a class="el" href="a00008_source.html">graph_generator.h</a></li>
+<li>Cpp/analysismethods/src/<a class="el" href="a00005_source.html">graph_generator.cpp</a></li>
 </ul>
 </div><!-- contents -->
-<div class="ttc" id="aa01101_html"><div class="ttname"><a href="a01101.html">HF::SpatialStructures::Node</a></div><div class="ttdoc">A point in space with an ID</div><div class="ttdef"><b>Definition:</b> <a href="a00104_source.html#l00028">node.h:28</a></div></div>
-<div class="ttc" id="aa00174_html_aa8ecd83cd353318532d791fc819343cca5c2876be9857d3e0192c9e1cb3797bf8"><div class="ttname"><a href="a00174.html#aa8ecd83cd353318532d791fc819343cca5c2876be9857d3e0192c9e1cb3797bf8">HF::SpatialStructures::GRAPH</a></div><div class="ttdeci">@ GRAPH</div><div class="ttdef"><b>Definition:</b> <a href="a00104_source.html#l00020">node.h:20</a></div></div>
-<div class="ttc" id="aa01101_html_a51c4642674d54d02b8600f7ffeb45670"><div class="ttname"><a href="a01101.html#a51c4642674d54d02b8600f7ffeb45670">HF::SpatialStructures::Node::getArray</a></div><div class="ttdeci">std::array&lt; float, 3 &gt; getArray() const</div><div class="ttdoc">Returns the x,y,z of this node as an array of 3 floats</div><div class="ttdef"><b>Definition:</b> <a href="a01396_source.html#l00140">node.cpp:140</a></div></div>
-<div class="ttc" id="aa01101_html_a78dfebaa44da09b03d7ca15445c8d222"><div class="ttname"><a href="a01101.html#a78dfebaa44da09b03d7ca15445c8d222">HF::SpatialStructures::Node::x</a></div><div class="ttdeci">float x</div><div class="ttdef"><b>Definition:</b> <a href="a00104_source.html#l00030">node.h:30</a></div></div>
+<div class="ttc" id="aa01165_html"><div class="ttname"><a href="a01165.html">HF::RayTracer::EmbreeRayTracer</a></div><div class="ttdoc">A wrapper for Intel's Embree Library.</div><div class="ttdef"><b>Definition:</b> <a href="a00122_source.html#l00061">embree_raytracer.h:61</a></div></div>
+<div class="ttc" id="aa01101_html"><div class="ttname"><a href="a01101.html">HF::GraphGenerator::GraphGenerator</a></div><div class="ttdoc">Generate a graph of accessible space from a given start point.</div><div class="ttdef"><b>Definition:</b> <a href="a00008_source.html#l00071">graph_generator.h:72</a></div></div>
+<div class="ttc" id="aa01101_html_a0d5c02761a3cbf57aea95ae014d032a9"><div class="ttname"><a href="a01101.html#a0d5c02761a3cbf57aea95ae014d032a9">HF::GraphGenerator::GraphGenerator::GraphGenerator</a></div><div class="ttdeci">GraphGenerator(RayTracer::EmbreeRayTracer &amp;RT, int walkable_id, int obstacle_id=-1)</div><div class="ttdoc">Create a new Graph Generator.</div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00015">graph_generator.cpp:15</a></div></div>
+<div class="ttc" id="aa01101_html_a73847391cae1bc6c5a0ed5416844ab68"><div class="ttname"><a href="a01101.html#a73847391cae1bc6c5a0ed5416844ab68">HF::GraphGenerator::GraphGenerator::max_step_connection</a></div><div class="ttdeci">int max_step_connection</div><div class="ttdoc">Multiplier for children to generate from a single parent node.</div><div class="ttdef"><b>Definition:</b> <a href="a00008_source.html#l00087">graph_generator.h:87</a></div></div>
+<div class="ttc" id="aa01101_html_a16da7abe348f7af1d232867f2d719db1"><div class="ttname"><a href="a01101.html#a16da7abe348f7af1d232867f2d719db1">HF::GraphGenerator::GraphGenerator::core_count</a></div><div class="ttdeci">int core_count</div><div class="ttdoc">Number of cores to use in parallel.</div><div class="ttdef"><b>Definition:</b> <a href="a00008_source.html#l00076">graph_generator.h:76</a></div></div>
+<div class="ttc" id="aa01189_html_a41cece77d0eee98df39ecc6d3a366ec8"><div class="ttname"><a href="a01189.html#a41cece77d0eee98df39ecc6d3a366ec8">HF::SpatialStructures::Graph::Compress</a></div><div class="ttdeci">void Compress()</div><div class="ttdoc">Compress the graph to a CSR and enable the usage of several functions.</div><div class="ttdef"><b>Definition:</b> <a href="a00149_source.html#l00395">graph.cpp:395</a></div></div>
+<div class="ttc" id="aa00282_html_ad32d656c7a8c84beded49e1f14f64176"><div class="ttname"><a href="a00282.html#ad32d656c7a8c84beded49e1f14f64176">HF::Geometry::LoadMeshObjects</a></div><div class="ttdeci">vector&lt; MeshInfo &gt; LoadMeshObjects(std::string path, GROUP_METHOD gm, bool change_coords)</div><div class="ttdoc">Create MeshInfo instances from the OBJ at path.</div><div class="ttdef"><b>Definition:</b> <a href="a00098_source.html#l00024">objloader.cpp:24</a></div></div>
+<div class="ttc" id="aa01189_html"><div class="ttname"><a href="a01189.html">HF::SpatialStructures::Graph</a></div><div class="ttdoc">A Graph of nodes connected by edges that supports both integers and HF::SpatialStructures::Node.</div><div class="ttdef"><b>Definition:</b> <a href="a00152_source.html#l00092">graph.h:92</a></div></div>
+<div class="ttc" id="aa01101_html_a6e3a66ea1b5b1325bdf082e7fee7f47e"><div class="ttname"><a href="a01101.html#a6e3a66ea1b5b1325bdf082e7fee7f47e">HF::GraphGenerator::GraphGenerator::ray_tracer</a></div><div class="ttdeci">RayTracer::EmbreeRayTracer ray_tracer</div><div class="ttdoc">Raytracer to use for all intersections.</div><div class="ttdef"><b>Definition:</b> <a href="a00008_source.html#l00077">graph_generator.h:77</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

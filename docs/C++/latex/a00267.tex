@@ -1,169 +1,114 @@
-\hypertarget{a00267}{}\doxysection{Pathfinding}
-\label{a00267}\index{Pathfinding@{Pathfinding}}
+\hypertarget{a00267}{}\doxysection{Graph\+Generator}
+\label{a00267}\index{GraphGenerator@{GraphGenerator}}
 
 
-Find paths between differnt points in a graph.  
+Perform a breadth first search on a mesh to find accessible space.  
 
 
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00267_gae024c8b4ea32148644b61d4c1a1332fa}{Create\+Path}} (const \mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$g, int start, int end, int $\ast$out\+\_\+size, \mbox{\hyperlink{a01215}{H\+F\+::\+Spatial\+Structures\+::\+Path}} $\ast$$\ast$out\+\_\+path, \mbox{\hyperlink{a01211}{H\+F\+::\+Spatial\+Structures\+::\+Path\+Member}} $\ast$$\ast$out\+\_\+data)
-\begin{DoxyCompactList}\small\item\em Create a path from start to end in C++. If no path exists, the N\+O\+\_\+\+P\+A\+TH error code will be returned, and both pointers will be left as they were before the function was called. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00267_ga497790dddfb220484737711a1f1eff56}{Create\+Paths}} (const \mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$g, const int $\ast$start, const int $\ast$end, \mbox{\hyperlink{a01215}{H\+F\+::\+Spatial\+Structures\+::\+Path}} $\ast$$\ast$out\+\_\+path\+\_\+ptr\+\_\+holder, \mbox{\hyperlink{a01211}{H\+F\+::\+Spatial\+Structures\+::\+Path\+Member}} $\ast$$\ast$out\+\_\+path\+\_\+member\+\_\+ptr\+\_\+holder, int $\ast$out\+\_\+sizes, int num\+\_\+paths)
-\begin{DoxyCompactList}\small\item\em Create multiple paths from start to end in C++. both out\+\_\+ members return as arrays of pointers, with one for each element. Sizes of zero represent non-\/existant paths, and will be set to null pointers \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00267_gaac725d282f4fecd3aba1b3273c26e7e1}{Get\+Path\+Info}} (\mbox{\hyperlink{a01215}{H\+F\+::\+Spatial\+Structures\+::\+Path}} $\ast$p, \mbox{\hyperlink{a01211}{H\+F\+::\+Spatial\+Structures\+::\+Path\+Member}} $\ast$$\ast$out\+\_\+member\+\_\+ptr, int $\ast$out\+\_\+size)
-\begin{DoxyCompactList}\small\item\em Get the size of a path and a pointer to its path members. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00267_ga884a3374d971261a01ccfd3b21e288e5}{Destroy\+Path}} (\mbox{\hyperlink{a01215}{H\+F\+::\+Spatial\+Structures\+::\+Path}} $\ast$path\+\_\+to\+\_\+destroy)
-\begin{DoxyCompactList}\small\item\em Delete a path. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\mbox{\hyperlink{a00257_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00267_gac2583dc1ee6786b15fa4f06bfde2130a}{Generate\+Graph}} (\mbox{\hyperlink{a01165}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ray\+\_\+tracer, const float $\ast$start\+\_\+point, const float $\ast$spacing, int Max\+Nodes, float Up\+Step, float Up\+Slope, float Down\+Step, float Down\+Slope, int max\+\_\+step\+\_\+connection, int core\+\_\+count, \mbox{\hyperlink{a01189}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$$\ast$out\+\_\+graph)
+\begin{DoxyCompactList}\small\item\em Construct a graph by performing a breadth first search of accessible space. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Find paths between differnt points in a graph. 
+Perform a breadth first search on a mesh to find accessible space. 
 
 
 
 \doxysubsection{Function Documentation}
-\mbox{\Hypertarget{a00267_gae024c8b4ea32148644b61d4c1a1332fa}\label{a00267_gae024c8b4ea32148644b61d4c1a1332fa}} 
-\index{Pathfinding@{Pathfinding}!CreatePath@{CreatePath}}
-\index{CreatePath@{CreatePath}!Pathfinding@{Pathfinding}}
-\doxysubsubsection{\texorpdfstring{CreatePath()}{CreatePath()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Create\+Path (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$}]{g,  }\item[{int}]{start,  }\item[{int}]{end,  }\item[{int $\ast$}]{out\+\_\+size,  }\item[{\mbox{\hyperlink{a01215}{H\+F\+::\+Spatial\+Structures\+::\+Path}} $\ast$$\ast$}]{out\+\_\+path,  }\item[{\mbox{\hyperlink{a01211}{H\+F\+::\+Spatial\+Structures\+::\+Path\+Member}} $\ast$$\ast$}]{out\+\_\+data }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{a00267_gac2583dc1ee6786b15fa4f06bfde2130a}\label{a00267_gac2583dc1ee6786b15fa4f06bfde2130a}} 
+\index{GraphGenerator@{GraphGenerator}!GenerateGraph@{GenerateGraph}}
+\index{GenerateGraph@{GenerateGraph}!GraphGenerator@{GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{GenerateGraph()}{GenerateGraph()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00257_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Generate\+Graph (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01165}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$}]{ray\+\_\+tracer,  }\item[{const float $\ast$}]{start\+\_\+point,  }\item[{const float $\ast$}]{spacing,  }\item[{int}]{Max\+Nodes,  }\item[{float}]{Up\+Step,  }\item[{float}]{Up\+Slope,  }\item[{float}]{Down\+Step,  }\item[{float}]{Down\+Slope,  }\item[{int}]{max\+\_\+step\+\_\+connection,  }\item[{int}]{core\+\_\+count,  }\item[{\mbox{\hyperlink{a01189}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$$\ast$}]{out\+\_\+graph }\end{DoxyParamCaption})}
 
 
 
-{\ttfamily \#include $<$\mbox{\hyperlink{a00236}{Cinterface/pathfinder\+\_\+\+C.\+h}}$>$}
+{\ttfamily \#include $<$\mbox{\hyperlink{a00221}{Cinterface/analysis\+\_\+\+C.\+h}}$>$}
 
 
 
-Create a path from start to end in C++. If no path exists, the N\+O\+\_\+\+P\+A\+TH error code will be returned, and both pointers will be left as they were before the function was called. 
+Construct a graph by performing a breadth first search of accessible space. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em g} & The graph to conduct the search on. \\
+{\em ray\+\_\+tracer} & Raytracer containing the geometry to use for graph generation. \\
 \hline
-{\em start} & The id of the node for the starting point of the path. The ID must belong to a node already within the graph! \\
+{\em start\+\_\+point} & The starting point for the graph generator to begin searching from. If this isn\textquotesingle{}t above solid ground, no nodes will be generated. \\
 \hline
-{\em end} & The id of the node for the end point of the path. The ID must belong to a node already within the graph! \\
+{\em spacing} & Space between nodes for each step of the search. Lower values will yield more nodes for a higher resolution graph.\\
 \hline
-{\em out\+\_\+path} & Return parameter for the path object. \\
+{\em Max\+Nodes} & Stop generation after this many nodes. -\/1 to generate an infinite amount of nodes. Note that The final count may be greater than this number. \\
 \hline
-{\em out\+\_\+data} & Return parameter for the path\textquotesingle{}s members. \\
+{\em Up\+Step} & Maximum height of a step the graph can traverse. Any steps higher this will be considered inaccessible. \\
+\hline
+{\em Up\+Slope} & Maximum upward slope the graph can traverse in degrees. Any slopes steeper than this will be considered inaccessible. \\
+\hline
+{\em Down\+Step} & Maximum step down the graph can traverse. Any steps steeper than this will be considered inaccessible. \\
+\hline
+{\em Down\+Slope} & The maximum downward slope the graph can traverse. Any slopes steeper than this will be considered inaccessible. \\
+\hline
+{\em max\+\_\+step\+\_\+connections} & Multiplier for number of children to generate for each node. Increasing this value will increase the number of edges in the graph, and as a result the amount of memory the algorithm requires. \\
+\hline
+{\em core\+\_\+count} & Number of cores to use. -\/1 will use all available cores, and 0 will run a serialized version of the algorithm. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+N\+O\+\_\+\+P\+A\+TH if a path could not be generated. H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+OK if a path was generated. 
+H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+OK if the graph creation was successful. H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+N\+O\+\_\+\+G\+R\+A\+PH if it failed to generate a graph with more than a single node. 
 \end{DoxyReturn}
 
 
-Uses the Boost Graph Library to perform Dijkstra\textquotesingle{}s shortest path algorithm. For multiple paths, use \mbox{\hyperlink{a00267_ga497790dddfb220484737711a1f1eff56}{Create\+Paths}} for multiple paths at once. 
 
-Definition at line 20 of file pathfinder\+\_\+\+C.\+cpp.
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "analysis\_C.h", \#include "embree\_raytracer.h", \#include "graph.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a container of coordinates}}
+\DoxyCodeLine{std::vector<std::array<float, 3>> directions = \{}
+\DoxyCodeLine{    \{0, 0, 1\},}
+\DoxyCodeLine{    \{0, 1, 0\},}
+\DoxyCodeLine{    \{1, 0, 0\},}
+\DoxyCodeLine{    \{-\/1, 0, 0\},}
+\DoxyCodeLine{    \{0, -\/1, 0\},}
+\DoxyCodeLine{    \{0, 0, -\/1\},}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the EmbreeRayTracer}}
+\DoxyCodeLine{\textcolor{keyword}{auto} ert = \mbox{\hyperlink{a01165}{HF::RayTracer::EmbreeRayTracer}}(directions);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Have a pointer to Graph ready}}
+\DoxyCodeLine{\mbox{\hyperlink{a01189}{HF::SpatialStructures::Graph}}* g = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Prepare parameters}}
+\DoxyCodeLine{\textcolor{keywordtype}{float} start[] = \{ 0, 0, 0 \};}
+\DoxyCodeLine{\textcolor{keywordtype}{float} spacing[] = \{ 1, 1, 1 \};}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} max\_nodes = 6;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} up\_step = 1.5;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} up\_slope = 1.0;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} down\_step = 2.0;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} down\_slope = 0.5;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} maximum\_step\_connections = 2;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} cores = 4;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (\mbox{\hyperlink{a00267_gac2583dc1ee6786b15fa4f06bfde2130a}{GenerateGraph}}(\&ert, start, spacing, max\_nodes, up\_step, up\_slope, down\_step, down\_slope, maximum\_step\_connections, cores, \&g)) \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"GenerateGraph successful"} << std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"GenerateGraph failed"} << std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Free memory resources once finished with Graph}}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (g) \{}
+\DoxyCodeLine{    \textcolor{keyword}{delete} g;}
+\DoxyCodeLine{    g = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+ 
 
-
-
-References H\+F\+::\+Pathfinding\+::\+Create\+Boost\+Graph(), H\+F\+::\+Spatial\+Structures\+::\+Path\+::empty(), H\+F\+::\+Pathfinding\+::\+Find\+Path(), H\+F\+::\+Spatial\+Structures\+::\+Path\+::\+Get\+P\+M\+Pointer(), H\+F\+::\+Exceptions\+::\+N\+O\+\_\+\+P\+A\+TH, H\+F\+::\+Exceptions\+::\+OK, and H\+F\+::\+Spatial\+Structures\+::\+Path\+::size().
-
-\mbox{\Hypertarget{a00267_ga497790dddfb220484737711a1f1eff56}\label{a00267_ga497790dddfb220484737711a1f1eff56}} 
-\index{Pathfinding@{Pathfinding}!CreatePaths@{CreatePaths}}
-\index{CreatePaths@{CreatePaths}!Pathfinding@{Pathfinding}}
-\doxysubsubsection{\texorpdfstring{CreatePaths()}{CreatePaths()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Create\+Paths (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$}]{g,  }\item[{const int $\ast$}]{start,  }\item[{const int $\ast$}]{end,  }\item[{\mbox{\hyperlink{a01215}{H\+F\+::\+Spatial\+Structures\+::\+Path}} $\ast$$\ast$}]{out\+\_\+path\+\_\+ptr\+\_\+holder,  }\item[{\mbox{\hyperlink{a01211}{H\+F\+::\+Spatial\+Structures\+::\+Path\+Member}} $\ast$$\ast$}]{out\+\_\+path\+\_\+member\+\_\+ptr\+\_\+holder,  }\item[{int $\ast$}]{out\+\_\+sizes,  }\item[{int}]{num\+\_\+paths }\end{DoxyParamCaption})}
-
-
-
-{\ttfamily \#include $<$\mbox{\hyperlink{a00236}{Cinterface/pathfinder\+\_\+\+C.\+h}}$>$}
-
-
-
-Create multiple paths from start to end in C++. both out\+\_\+ members return as arrays of pointers, with one for each element. Sizes of zero represent non-\/existant paths, and will be set to null pointers 
-
-
-\begin{DoxyParams}{Parameters}
-{\em g} & The graph to conduct the search on. \\
-\hline
-{\em start} & An array of ids for starting nodes. Length must match that of end and all the I\+DS must belong to nodes that already exist within the graph. \\
-\hline
-{\em end} & An array of ids for ending nodes. Length must match that of end and all the I\+DS must belong to nodes that already exist within the graph. \\
-\hline
-{\em out\+\_\+path\+\_\+ptr\+\_\+holder} & Return parameter for path objects. \\
-\hline
-{\em out\+\_\+data} & Return parameter for pointers to the path objects\textquotesingle{} underlying data. \\
-\hline
-{\em out\+\_\+sizes} & Output array of integers representing the length of of each path in out\+\_\+data\textquotesingle{}s arrays. Sizes of 0 indicate that no path could be generated. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-H\+F\+::\+OK on completion. 
-\end{DoxyReturn}
-
-
-Definition at line 46 of file pathfinder\+\_\+\+C.\+cpp.
-
-
-
-References H\+F\+::\+Pathfinding\+::\+Create\+Boost\+Graph(), H\+F\+::\+Pathfinding\+::\+Insert\+Paths\+Into\+Array(), and H\+F\+::\+Exceptions\+::\+OK.
-
-\mbox{\Hypertarget{a00267_ga884a3374d971261a01ccfd3b21e288e5}\label{a00267_ga884a3374d971261a01ccfd3b21e288e5}} 
-\index{Pathfinding@{Pathfinding}!DestroyPath@{DestroyPath}}
-\index{DestroyPath@{DestroyPath}!Pathfinding@{Pathfinding}}
-\doxysubsubsection{\texorpdfstring{DestroyPath()}{DestroyPath()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Destroy\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01215}{H\+F\+::\+Spatial\+Structures\+::\+Path}} $\ast$}]{path\+\_\+to\+\_\+destroy }\end{DoxyParamCaption})}
+Definition at line 15 of file analysis\+\_\+\+C.\+cpp.
 
 
 
-{\ttfamily \#include $<$\mbox{\hyperlink{a00236}{Cinterface/pathfinder\+\_\+\+C.\+h}}$>$}
-
-
-
-Delete a path. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em path\+\_\+to\+\_\+destroy} & Pointer to the path to delete. \\
-\hline
-\end{DoxyParams}
-
-
-Definition at line 93 of file pathfinder\+\_\+\+C.\+cpp.
-
-
-
-References Delete\+Raw\+Ptr(), and H\+F\+::\+Exceptions\+::\+OK.
-
-\mbox{\Hypertarget{a00267_gaac725d282f4fecd3aba1b3273c26e7e1}\label{a00267_gaac725d282f4fecd3aba1b3273c26e7e1}} 
-\index{Pathfinding@{Pathfinding}!GetPathInfo@{GetPathInfo}}
-\index{GetPathInfo@{GetPathInfo}!Pathfinding@{Pathfinding}}
-\doxysubsubsection{\texorpdfstring{GetPathInfo()}{GetPathInfo()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Get\+Path\+Info (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01215}{H\+F\+::\+Spatial\+Structures\+::\+Path}} $\ast$}]{p,  }\item[{\mbox{\hyperlink{a01211}{Path\+Member}} $\ast$$\ast$}]{out\+\_\+member\+\_\+ptr,  }\item[{int $\ast$}]{out\+\_\+size }\end{DoxyParamCaption})}
-
-
-
-{\ttfamily \#include $<$\mbox{\hyperlink{a00236}{Cinterface/pathfinder\+\_\+\+C.\+h}}$>$}
-
-
-
-Get the size of a path and a pointer to its path members. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em p} & Pointer to the path to get information from. This can handle null values. \\
-\hline
-{\em out\+\_\+member\+\_\+ptr} & Pointer to the path to get information from. Should not be null. \\
-\hline
-{\em out\+\_\+size} & The number of path members in the path. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+N\+O\+\_\+\+P\+A\+TH if the path is not valid. H\+F\+\_\+\+OK otherwise. 
-\end{DoxyReturn}
-
-
-Get the size of a path and a pointer to its path members.
-
-Definition at line 75 of file pathfinder\+\_\+\+C.\+cpp.
-
-
-
-References H\+F\+::\+Spatial\+Structures\+::\+Path\+::\+Get\+P\+M\+Pointer(), H\+F\+::\+Exceptions\+::\+N\+O\+\_\+\+P\+A\+TH, H\+F\+::\+Exceptions\+::\+OK, and H\+F\+::\+Spatial\+Structures\+::\+Path\+::size().
+References H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Build\+Network(), H\+F\+::\+Exceptions\+::\+N\+O\+\_\+\+G\+R\+A\+PH, H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Nodes(), and H\+F\+::\+Exceptions\+::\+OK.
 

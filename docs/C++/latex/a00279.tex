@@ -1,105 +1,191 @@
-\hypertarget{a00279}{}\doxysection{HF\+::Exceptions Namespace Reference}
-\label{a00279}\index{HF::Exceptions@{HF::Exceptions}}
+\hypertarget{a00279}{}\doxysection{HF\+::Ray\+Tracer Namespace Reference}
+\label{a00279}\index{HF::RayTracer@{HF::RayTracer}}
+
+
+Cast rays to determine if and where they intersect geometry.  
+
+
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-struct \mbox{\hyperlink{a01111}{File\+Not\+Found}}
-\begin{DoxyCompactList}\small\item\em Thrown when desired file is not found \end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{a01115}{Invalid\+O\+BJ}}
-\begin{DoxyCompactList}\small\item\em Thrown when the desired object could not be read \end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{a01119}{Missing\+Dependency}}
-\begin{DoxyCompactList}\small\item\em Thrown when a dependency is missing \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Enumerations}
+class \mbox{\hyperlink{a01165}{Embree\+Ray\+Tracer}}
+\begin{DoxyCompactList}\small\item\em A wrapper for Intel\textquotesingle{}s Embree Library. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a01169}{Full\+Ray\+Request}}
+\item 
+struct \mbox{\hyperlink{a01161}{Hit\+Struct}}
+\begin{DoxyCompactList}\small\item\em A simple hit struct to carry all relevant information about hits. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a00279_a01157}{Triangle}}
+\begin{DoxyCompactList}\small\item\em A triangle. Used internally in Embree.  \mbox{\hyperlink{a00279_a01157}{More...}}\end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a00279_a01153}{Vertex}}
+\begin{DoxyCompactList}\small\item\em A vertex. Used internally in Embree.  \mbox{\hyperlink{a00279_a01153}{More...}}\end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-enum \mbox{\hyperlink{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \{ \newline
-\mbox{\hyperlink{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d}{OK}} = 1, 
-\mbox{\hyperlink{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051acd7712929c704f3ad7d7af9113654098}{N\+O\+T\+\_\+\+I\+M\+P\+L\+E\+M\+E\+N\+T\+ED}} = -\/54, 
-\mbox{\hyperlink{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051a5bfa31d727681298e6c4cea74c848ddf}{G\+E\+N\+E\+R\+I\+C\+\_\+\+E\+R\+R\+OR}} = 0, 
-\mbox{\hyperlink{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051a42b2a897f1b46ae086e3965e22f0ed58}{N\+O\+T\+\_\+\+F\+O\+U\+ND}} = -\/1, 
-\newline
-\mbox{\hyperlink{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051a06ef98037b48ddc9685ab0d7519495b1}{I\+N\+V\+A\+L\+I\+D\+\_\+\+O\+BJ}} = -\/2, 
-\mbox{\hyperlink{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051ab9036b1fec7e201bf970944267471d35}{N\+O\+\_\+\+G\+R\+A\+PH}} = -\/3, 
-\mbox{\hyperlink{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051a6ffda360ff38334d4b03fb61abfd1aa0}{I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+O\+ST}} = -\/4, 
-\mbox{\hyperlink{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051a4ac9bf1100834909081553685467dfc1}{M\+I\+S\+S\+I\+N\+G\+\_\+\+D\+E\+P\+E\+ND}} = -\/5, 
-\newline
-\mbox{\hyperlink{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051a3b0d9d3819413f7a74bb5238725dd832}{O\+U\+T\+\_\+\+O\+F\+\_\+\+M\+E\+M\+O\+RY}} = -\/6, 
-\mbox{\hyperlink{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051a33fe75a4991277e4ed8c0f88f3e5db06}{M\+A\+L\+F\+O\+R\+M\+E\+D\+\_\+\+DB}} = -\/7, 
-\mbox{\hyperlink{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051a9626c67d85e20eea56e5a7efc2f6310f}{D\+B\+\_\+\+B\+U\+SY}} = -\/8, 
-\mbox{\hyperlink{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051ab31440d86dbcfa007f7c8121dcbeea85}{I\+N\+V\+A\+L\+I\+D\+\_\+\+P\+TR}} = -\/9, 
-\newline
-\mbox{\hyperlink{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051ad3084ed4c756294f67f316d74668eddb}{O\+U\+T\+\_\+\+O\+F\+\_\+\+R\+A\+N\+GE}} = -\/10, 
-\mbox{\hyperlink{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051af22cf512deb6784a81a27a8ec5316be9}{N\+O\+\_\+\+P\+A\+TH}} = -\/11
- \}
-\end{DoxyCompactItemize}
+void \mbox{\hyperlink{a00279_a9c9d1d9869aee1f51b5de11f7d9420ec}{Check\+State}} (R\+T\+C\+Device \&device)
+\begin{DoxyCompactList}\small\item\em Check an embree device for errors. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a00279_a9a8051c9b70fc0ae60337d4a38bf5f57}{vectors\+To\+Buffers}} (const std\+::vector$<$ std\+::array$<$ float, 3 $>$$>$ \&vertices, std\+::vector$<$ \mbox{\hyperlink{a00279_a01157}{Triangle}} $>$ \&Tribuffer, std\+::vector$<$ \mbox{\hyperlink{a00279_a01153}{Vertex}} $>$ \&Vbuffer)
+\begin{DoxyCompactList}\small\item\em Index a list of verticies and place them into a triangle and vertex buffer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a00279_aac8c0b245ea813969c50b6496cc67945}{buffers\+To\+Structs}} (std\+::vector$<$ float $>$ \&in\+\_\+vertices, std\+::vector$<$ int $>$ \&in\+\_\+indices, std\+::vector$<$ \mbox{\hyperlink{a00279_a01153}{Vertex}} $>$ \&out\+\_\+vertices, std\+::vector$<$ \mbox{\hyperlink{a00279_a01157}{Triangle}} $>$ \&out\+\_\+triangles)
+\begin{DoxyCompactList}\small\item\em Package raw arrays of floats and indices in buffers to the required Embree types. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\doxysubsection{Enumeration Type Documentation}
-\mbox{\Hypertarget{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051}\label{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051}} 
-\index{HF::Exceptions@{HF::Exceptions}!HF\_STATUS@{HF\_STATUS}}
-\index{HF\_STATUS@{HF\_STATUS}!HF::Exceptions@{HF::Exceptions}}
-\doxysubsubsection{\texorpdfstring{HF\_STATUS}{HF\_STATUS}}
-{\footnotesize\ttfamily enum \mbox{\hyperlink{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051}{H\+F\+::\+Exceptions\+::\+H\+F\+\_\+\+S\+T\+A\+T\+US}}}
+\doxysubsection{Detailed Description}
+Cast rays to determine if and where they intersect geometry. 
 
-\begin{DoxyEnumFields}{Enumerator}
-\raisebox{\heightof{T}}[0pt][0pt]{\index{OK@{OK}!HF::Exceptions@{HF::Exceptions}}\index{HF::Exceptions@{HF::Exceptions}!OK@{OK}}}\mbox{\Hypertarget{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d}\label{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d}} 
-OK&All systems go. ///$<$. Special Codes ///$<$ \\
+The basics of raytracing entail casting a ray from an origin point in a specific direction and determining whether or not it intersects with a set of geometry. Certain functions can even determine where the intersection occured. Generally, every \mbox{\hyperlink{a00279}{Ray\+Tracer}} will contain a set of geometry and provide functions for casting rays from an origin point in a specific direciton. Some generate an accelerated structure from geometry called a Bounding Volume Hierarchy, or B\+VH. A B\+VH can drastically decrease the time it takes to calculate ray intersections, but can be more complicated to manage compared to standard buffers of geometry.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a01165}{Embree\+Ray\+Tracer}} For an implementation of a raytracer using Intel\textquotesingle{}s Embree library as a backend. 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Class Documentation}
+\index{HF::RayTracer::Triangle@{HF::RayTracer::Triangle}}\label{a01157}
+\Hypertarget{a00279_a01157}
+\doxysubsubsection{struct HF\+::Ray\+Tracer\+::Triangle}
+A triangle. Used internally in Embree. 
+
+
+
+Definition at line 43 of file embree\+\_\+raytracer.\+cpp.
+
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00279_a504a02b108984ddfa3f521cf40b17e61}\label{a00279_a504a02b108984ddfa3f521cf40b17e61}} 
+int&
+v0&
+\\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{NOT\_IMPLEMENTED@{NOT\_IMPLEMENTED}!HF::Exceptions@{HF::Exceptions}}\index{HF::Exceptions@{HF::Exceptions}!NOT\_IMPLEMENTED@{NOT\_IMPLEMENTED}}}\mbox{\Hypertarget{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051acd7712929c704f3ad7d7af9113654098}\label{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051acd7712929c704f3ad7d7af9113654098}} 
-N\+O\+T\+\_\+\+I\+M\+P\+L\+E\+M\+E\+N\+T\+ED&This function hasn\textquotesingle{}t been implemented yet! ///$<$. Error Codes ///$<$ \\
+\mbox{\Hypertarget{a00279_afc086ccfe3fc951af959d905056358c4}\label{a00279_afc086ccfe3fc951af959d905056358c4}} 
+int&
+v1&
+\\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{GENERIC\_ERROR@{GENERIC\_ERROR}!HF::Exceptions@{HF::Exceptions}}\index{HF::Exceptions@{HF::Exceptions}!GENERIC\_ERROR@{GENERIC\_ERROR}}}\mbox{\Hypertarget{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051a5bfa31d727681298e6c4cea74c848ddf}\label{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051a5bfa31d727681298e6c4cea74c848ddf}} 
-G\+E\+N\+E\+R\+I\+C\+\_\+\+E\+R\+R\+OR&Not sure what happened here (If this gets thrown, either fix it or give it a status code!) ///$<$. \\
+\mbox{\Hypertarget{a00279_ab7bfa105fb125dfc9e31ecf8cbf0f9fa}\label{a00279_ab7bfa105fb125dfc9e31ecf8cbf0f9fa}} 
+int&
+v2&
+\\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{NOT\_FOUND@{NOT\_FOUND}!HF::Exceptions@{HF::Exceptions}}\index{HF::Exceptions@{HF::Exceptions}!NOT\_FOUND@{NOT\_FOUND}}}\mbox{\Hypertarget{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051a42b2a897f1b46ae086e3965e22f0ed58}\label{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051a42b2a897f1b46ae086e3965e22f0ed58}} 
-N\+O\+T\+\_\+\+F\+O\+U\+ND&The path given did not lead to any file ///$<$. \\
+\end{DoxyFields}
+\index{HF::RayTracer::Vertex@{HF::RayTracer::Vertex}}\label{a01153}
+\Hypertarget{a00279_a01153}
+\doxysubsubsection{struct HF\+::Ray\+Tracer\+::Vertex}
+A vertex. Used internally in Embree. 
+
+
+
+Definition at line 38 of file embree\+\_\+raytracer.\+cpp.
+
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00279_aad8e270f026ac9dd20ee294b2b1a21de}\label{a00279_aad8e270f026ac9dd20ee294b2b1a21de}} 
+float&
+x&
+\\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{INVALID\_OBJ@{INVALID\_OBJ}!HF::Exceptions@{HF::Exceptions}}\index{HF::Exceptions@{HF::Exceptions}!INVALID\_OBJ@{INVALID\_OBJ}}}\mbox{\Hypertarget{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051a06ef98037b48ddc9685ab0d7519495b1}\label{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051a06ef98037b48ddc9685ab0d7519495b1}} 
-I\+N\+V\+A\+L\+I\+D\+\_\+\+O\+BJ&The given path did not point to a valid obj file ///$<$. \\
+\mbox{\Hypertarget{a00279_aa27c7b22316499f43093c2b7768c06ea}\label{a00279_aa27c7b22316499f43093c2b7768c06ea}} 
+float&
+y&
+\\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{NO\_GRAPH@{NO\_GRAPH}!HF::Exceptions@{HF::Exceptions}}\index{HF::Exceptions@{HF::Exceptions}!NO\_GRAPH@{NO\_GRAPH}}}\mbox{\Hypertarget{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051ab9036b1fec7e201bf970944267471d35}\label{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051ab9036b1fec7e201bf970944267471d35}} 
-N\+O\+\_\+\+G\+R\+A\+PH&This requires a valid graph in the DB to execute successfully ///$<$. \\
+\mbox{\Hypertarget{a00279_ab8599cc6220e686dac319622f7d2f364}\label{a00279_ab8599cc6220e686dac319622f7d2f364}} 
+float&
+z&
+\\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{INVALID\_COST@{INVALID\_COST}!HF::Exceptions@{HF::Exceptions}}\index{HF::Exceptions@{HF::Exceptions}!INVALID\_COST@{INVALID\_COST}}}\mbox{\Hypertarget{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051a6ffda360ff38334d4b03fb61abfd1aa0}\label{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051a6ffda360ff38334d4b03fb61abfd1aa0}} 
-I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+O\+ST&The given cost name does not exist in the database ///$<$. \\
+\end{DoxyFields}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{a00279_aac8c0b245ea813969c50b6496cc67945}\label{a00279_aac8c0b245ea813969c50b6496cc67945}} 
+\index{HF::RayTracer@{HF::RayTracer}!buffersToStructs@{buffersToStructs}}
+\index{buffersToStructs@{buffersToStructs}!HF::RayTracer@{HF::RayTracer}}
+\doxysubsubsection{\texorpdfstring{buffersToStructs()}{buffersToStructs()}}
+{\footnotesize\ttfamily void H\+F\+::\+Ray\+Tracer\+::buffers\+To\+Structs (\begin{DoxyParamCaption}\item[{std\+::vector$<$ float $>$ \&}]{in\+\_\+vertices,  }\item[{std\+::vector$<$ int $>$ \&}]{in\+\_\+indices,  }\item[{std\+::vector$<$ \mbox{\hyperlink{a00279_a01153}{Vertex}} $>$ \&}]{out\+\_\+vertices,  }\item[{std\+::vector$<$ \mbox{\hyperlink{a00279_a01157}{Triangle}} $>$ \&}]{out\+\_\+triangles }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Package raw arrays of floats and indices in buffers to the required Embree types. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em in\+\_\+vertices} & An array of floats in which every 3 floats represents a vertex. \\
 \hline
-
-\raisebox{\heightof{T}}[0pt][0pt]{\index{MISSING\_DEPEND@{MISSING\_DEPEND}!HF::Exceptions@{HF::Exceptions}}\index{HF::Exceptions@{HF::Exceptions}!MISSING\_DEPEND@{MISSING\_DEPEND}}}\mbox{\Hypertarget{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051a4ac9bf1100834909081553685467dfc1}\label{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051a4ac9bf1100834909081553685467dfc1}} 
-M\+I\+S\+S\+I\+N\+G\+\_\+\+D\+E\+P\+E\+ND&A dependency for this object is missing. ///$<$. \\
+{\em in\+\_\+indices} & An array of integers in which every 3 integers represents a triangle. \\
 \hline
-
-\raisebox{\heightof{T}}[0pt][0pt]{\index{OUT\_OF\_MEMORY@{OUT\_OF\_MEMORY}!HF::Exceptions@{HF::Exceptions}}\index{HF::Exceptions@{HF::Exceptions}!OUT\_OF\_MEMORY@{OUT\_OF\_MEMORY}}}\mbox{\Hypertarget{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051a3b0d9d3819413f7a74bb5238725dd832}\label{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051a3b0d9d3819413f7a74bb5238725dd832}} 
-O\+U\+T\+\_\+\+O\+F\+\_\+\+M\+E\+M\+O\+RY&Ran out of memory during the last operation ///$<$. \\
+{\em out\+\_\+vertices} & Output array for vertexes.\\
 \hline
-
-\raisebox{\heightof{T}}[0pt][0pt]{\index{MALFORMED\_DB@{MALFORMED\_DB}!HF::Exceptions@{HF::Exceptions}}\index{HF::Exceptions@{HF::Exceptions}!MALFORMED\_DB@{MALFORMED\_DB}}}\mbox{\Hypertarget{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051a33fe75a4991277e4ed8c0f88f3e5db06}\label{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051a33fe75a4991277e4ed8c0f88f3e5db06}} 
-M\+A\+L\+F\+O\+R\+M\+E\+D\+\_\+\+DB&The database exists, but is in some kind of error state ///$<$. \\
+{\em out\+\_\+triangles} & Output array for triangles.\\
 \hline
+\end{DoxyParams}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{a00266__todo000030}{Todo}}]May be faster as a std\+::move or std\+::copy. \end{DoxyRefDesc}
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{DB\_BUSY@{DB\_BUSY}!HF::Exceptions@{HF::Exceptions}}\index{HF::Exceptions@{HF::Exceptions}!DB\_BUSY@{DB\_BUSY}}}\mbox{\Hypertarget{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051a9626c67d85e20eea56e5a7efc2f6310f}\label{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051a9626c67d85e20eea56e5a7efc2f6310f}} 
-D\+B\+\_\+\+B\+U\+SY&The database is busy (is there some external connection?) ///$<$. \\
+
+Definition at line 103 of file embree\+\_\+raytracer.\+cpp.
+
+\mbox{\Hypertarget{a00279_a9c9d1d9869aee1f51b5de11f7d9420ec}\label{a00279_a9c9d1d9869aee1f51b5de11f7d9420ec}} 
+\index{HF::RayTracer@{HF::RayTracer}!CheckState@{CheckState}}
+\index{CheckState@{CheckState}!HF::RayTracer@{HF::RayTracer}}
+\doxysubsubsection{\texorpdfstring{CheckState()}{CheckState()}}
+{\footnotesize\ttfamily void H\+F\+::\+Ray\+Tracer\+::\+Check\+State (\begin{DoxyParamCaption}\item[{R\+T\+C\+Device \&}]{device }\end{DoxyParamCaption})}
+
+
+
+Check an embree device for errors. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em device} & Device to check for errors\\
 \hline
+\end{DoxyParams}
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{INVALID\_PTR@{INVALID\_PTR}!HF::Exceptions@{HF::Exceptions}}\index{HF::Exceptions@{HF::Exceptions}!INVALID\_PTR@{INVALID\_PTR}}}\mbox{\Hypertarget{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051ab31440d86dbcfa007f7c8121dcbeea85}\label{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051ab31440d86dbcfa007f7c8121dcbeea85}} 
-I\+N\+V\+A\+L\+I\+D\+\_\+\+P\+TR&One or more of the given pointers didn\textquotesingle{}t lead to anything ///$<$. \\
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::exception} & Some error is found while casting rays.\\
 \hline
+\end{DoxyExceptions}
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{OUT\_OF\_RANGE@{OUT\_OF\_RANGE}!HF::Exceptions@{HF::Exceptions}}\index{HF::Exceptions@{HF::Exceptions}!OUT\_OF\_RANGE@{OUT\_OF\_RANGE}}}\mbox{\Hypertarget{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051ad3084ed4c756294f67f316d74668eddb}\label{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051ad3084ed4c756294f67f316d74668eddb}} 
-O\+U\+T\+\_\+\+O\+F\+\_\+\+R\+A\+N\+GE&Tried to reference something not in the given container ///$<$. \\
+
+Definition at line 29 of file embree\+\_\+raytracer.\+cpp.
+
+
+
+Referenced by H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Fire\+Ray().
+
+\mbox{\Hypertarget{a00279_a9a8051c9b70fc0ae60337d4a38bf5f57}\label{a00279_a9a8051c9b70fc0ae60337d4a38bf5f57}} 
+\index{HF::RayTracer@{HF::RayTracer}!vectorsToBuffers@{vectorsToBuffers}}
+\index{vectorsToBuffers@{vectorsToBuffers}!HF::RayTracer@{HF::RayTracer}}
+\doxysubsubsection{\texorpdfstring{vectorsToBuffers()}{vectorsToBuffers()}}
+{\footnotesize\ttfamily void H\+F\+::\+Ray\+Tracer\+::vectors\+To\+Buffers (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::array$<$ float, 3 $>$$>$ \&}]{vertices,  }\item[{std\+::vector$<$ \mbox{\hyperlink{a00279_a01157}{Triangle}} $>$ \&}]{Tribuffer,  }\item[{std\+::vector$<$ \mbox{\hyperlink{a00279_a01153}{Vertex}} $>$ \&}]{Vbuffer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Index a list of verticies and place them into a triangle and vertex buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertices} & Mesh vertices.\\
 \hline
-
-\raisebox{\heightof{T}}[0pt][0pt]{\index{NO\_PATH@{NO\_PATH}!HF::Exceptions@{HF::Exceptions}}\index{HF::Exceptions@{HF::Exceptions}!NO\_PATH@{NO\_PATH}}}\mbox{\Hypertarget{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051af22cf512deb6784a81a27a8ec5316be9}\label{a00279_aed53c233beb1d9ec1b0c5fc2bfbb1051af22cf512deb6784a81a27a8ec5316be9}} 
-N\+O\+\_\+\+P\+A\+TH&There is no path between the start and end points ///$<$. \\
+{\em Tribuffer} & Output triangle buffer.\\
 \hline
+{\em Vbuffer} & Output \mbox{\hyperlink{a00279_a01153}{Vertex}} Buffer.\\
+\hline
+\end{DoxyParams}
 
-\end{DoxyEnumFields}
+
+Internally, this uses a hashmap to create an index map of vertices.
+
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{a00266__todo000029}{Todo}}]Performance here can be improved by using indexing. \end{DoxyRefDesc}
 
 
-Definition at line 15 of file H\+F\+Exceptions.\+h.
+Definition at line 53 of file embree\+\_\+raytracer.\+cpp.
+
+
+
+Referenced by H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer(), and H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Insert\+New\+Mesh().
 

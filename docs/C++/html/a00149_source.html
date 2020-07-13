@@ -79,13 +79,13 @@ $(function() {
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00140.html">Constants.h</a>&gt;</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;assert.h&gt;</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">using namespace </span><a class="code" href="a00281.html">Eigen</a>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">using namespace </span><a class="code" href="a00283.html">Eigen</a>;</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">using</span> std::vector;</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00276.html">HF::SpatialStructures</a> {</div>
-<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="a01199.html#a2710af2a75976862d7a235793567d2f3">   22</a></span>&#160;    <span class="keywordtype">int</span> Graph::size()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> id_to_nodes.size(); }</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00278.html">HF::SpatialStructures</a> {</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="a01189.html#a2710af2a75976862d7a235793567d2f3">   22</a></span>&#160;    <span class="keywordtype">int</span> Graph::size()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> id_to_nodes.size(); }</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="a01199.html#af59beedafb4af0ee99d54761e1c681fc">   24</a></span>&#160;    <span class="keywordtype">int</span> Graph::getID(<span class="keyword">const</span> <a class="code" href="a01203.html">Node</a>&amp; node)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="a01189.html#af59beedafb4af0ee99d54761e1c681fc">   24</a></span>&#160;    <span class="keywordtype">int</span> Graph::getID(<span class="keyword">const</span> <a class="code" href="a01193.html">Node</a>&amp; node)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">    </span>{</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keywordflow">if</span> (hasKey(node))</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            <span class="keywordflow">return</span> idmap.at(node);</div>
@@ -93,14 +93,14 @@ $(function() {
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            <span class="keywordflow">return</span> -1;</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    }</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="a01199.html#afccd105c93a826bde0457449f774fd04">   32</a></span>&#160;    <a class="code" href="a01195.html">CSRPtrs</a> <a class="code" href="a00269.html#ga1aebc84e3562370327576641b1ce2dcc">Graph::GetCSRPointers</a>()</div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="a01189.html#afccd105c93a826bde0457449f774fd04">   32</a></span>&#160;    <a class="code" href="a01185.html">CSRPtrs</a> <a class="code" href="a00271.html#ga1aebc84e3562370327576641b1ce2dcc">Graph::GetCSRPointers</a>()</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    {</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="comment">// The graph must be compressed for this to work</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <a class="code" href="a00269.html#gab7ecc1be5c746ed3f99ab7494316c65d">Compress</a>(); </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <a class="code" href="a00271.html#gab7ecc1be5c746ed3f99ab7494316c65d">Compress</a>(); </div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        </div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="comment">// Construct CSRPtr with the required info from edge_matrix.</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <a class="code" href="a01195.html">CSRPtrs</a> out_csr{</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <a class="code" href="a01185.html">CSRPtrs</a> out_csr{</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(edge_matrix.nonZeros()),</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(edge_matrix.rows()),</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(edge_matrix.cols()),</div>
@@ -114,13 +114,13 @@ $(function() {
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    }</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="a01199.html#a794c342603cefb342fdc698ba539b25f">   53</a></span>&#160;    <a class="code" href="a01203.html">Node</a> Graph::NodeFromID(<span class="keywordtype">int</span> <span class="keywordtype">id</span>)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> ordered_nodes[id]; }</div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="a01189.html#a794c342603cefb342fdc698ba539b25f">   53</a></span>&#160;    <a class="code" href="a01193.html">Node</a> Graph::NodeFromID(<span class="keywordtype">int</span> <span class="keywordtype">id</span>)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> ordered_nodes[id]; }</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="a01199.html#aa70347b8a33b57c6f0a72d6eca4248d7">   55</a></span>&#160;    std::vector&lt;Node&gt; Graph::Nodes()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="a01189.html#aa70347b8a33b57c6f0a72d6eca4248d7">   55</a></span>&#160;    std::vector&lt;Node&gt; Graph::Nodes()<span class="keyword"> const </span>{</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordflow">return</span> ordered_nodes;</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    }</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="a01199.html#a9f521e01db7e3c038ab2c1fac09b67df">   59</a></span>&#160;    vector&lt;Edge&gt; Graph::GetUndirectedEdges(<span class="keyword">const</span> <a class="code" href="a01203.html">Node</a> &amp; n)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="a01189.html#a9f521e01db7e3c038ab2c1fac09b67df">   59</a></span>&#160;    vector&lt;Edge&gt; Graph::GetUndirectedEdges(<span class="keyword">const</span> <a class="code" href="a01193.html">Node</a> &amp; n)<span class="keyword"> const </span>{</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="comment">// Get the ID of n</span></div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordtype">int</span> node_id = getID(n);</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        </div>
@@ -139,8 +139,8 @@ $(function() {
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            <span class="comment">// See if this edge</span></div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            <span class="keywordflow">if</span> (HasEdge(i, node_id)) {</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                <span class="keywordtype">float</span> cost = edge_matrix.coeff(i, node_id);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                <a class="code" href="a01203.html">Node</a> child_node = NodeFromID(i);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                <a class="code" href="a01183.html">Edge</a> edge(child_node, cost);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                <a class="code" href="a01193.html">Node</a> child_node = NodeFromID(i);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                <a class="code" href="a01173.html">Edge</a> edge(child_node, cost);</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                </div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                out_edges.push_back(edge);</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            }</div>
@@ -148,7 +148,7 @@ $(function() {
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keywordflow">return</span> out_edges;</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    }</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="a01199.html#a1a26ebb794b444e2214cf0b0fed5a529">   87</a></span>&#160;    std::vector&lt;EdgeSet&gt; Graph::GetEdges()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="a01189.html#a1a26ebb794b444e2214cf0b0fed5a529">   87</a></span>&#160;    std::vector&lt;EdgeSet&gt; Graph::GetEdges()<span class="keyword"> const</span></div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keyword">    </span>{</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="comment">// Throw if we&#39;re not compressed since this is a const function and compressing the graph</span></div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="comment">// will make it non-const</span></div>
@@ -169,14 +169,14 @@ $(function() {
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                <span class="comment">// Add to array of edgesets</span></div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                <span class="keywordtype">float</span> cost = it.value();</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                <span class="keywordtype">int</span> child = it.col();</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                edgeset.children.push_back(<a class="code" href="a00276.html#a01187">IntEdge</a>{ child, cost });</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                edgeset.children.push_back(<a class="code" href="a00278.html#a01177">IntEdge</a>{ child, cost });</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            }</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        }</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <span class="keywordflow">return</span> out_edges;</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    }</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
-<div class="line"><a name="l00130"></a><span class="lineno"><a class="line" href="a00276.html#aff8692cdca1763985a0a6501abaedcd5">  130</a></span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="a00276.html#aff8692cdca1763985a0a6501abaedcd5">Aggregate</a>(<span class="keywordtype">float</span>&amp; out_total, <span class="keywordtype">float</span> new_value, <span class="keyword">const</span> <a class="code" href="a00276.html#a6b23c0b2531c78f6d5049873c184f4f9">COST_AGGREGATE</a> agg_type, <span class="keywordtype">int</span> &amp; count)</div>
+<div class="line"><a name="l00130"></a><span class="lineno"><a class="line" href="a00278.html#aff8692cdca1763985a0a6501abaedcd5">  130</a></span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="a00278.html#aff8692cdca1763985a0a6501abaedcd5">Aggregate</a>(<span class="keywordtype">float</span>&amp; out_total, <span class="keywordtype">float</span> new_value, <span class="keyword">const</span> <a class="code" href="a00278.html#a6b23c0b2531c78f6d5049873c184f4f9">COST_AGGREGATE</a> agg_type, <span class="keywordtype">int</span> &amp; count)</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    {</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        <span class="keywordflow">switch</span> (agg_type) {</div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        <span class="keywordflow">case</span> COST_AGGREGATE::COUNT:</div>
@@ -202,7 +202,7 @@ $(function() {
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        <span class="keywordflow">return</span>;</div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    }</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
-<div class="line"><a name="l00156"></a><span class="lineno"><a class="line" href="a01199.html#a3285be5da987692e0b3671f49d67d21b">  156</a></span>&#160;    std::vector&lt;float&gt; Graph::AggregateGraph(<a class="code" href="a00276.html#a6b23c0b2531c78f6d5049873c184f4f9">COST_AGGREGATE</a> agg_type, <span class="keywordtype">bool</span> directed)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno"><a class="line" href="a01189.html#a3285be5da987692e0b3671f49d67d21b">  156</a></span>&#160;    std::vector&lt;float&gt; Graph::AggregateGraph(<a class="code" href="a00278.html#a6b23c0b2531c78f6d5049873c184f4f9">COST_AGGREGATE</a> agg_type, <span class="keywordtype">bool</span> directed)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="keyword">    </span>{</div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        <span class="comment">// This won&#39;t work if the graph isn&#39;t compressed.</span></div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        <span class="keywordflow">if</span> (this-&gt;needs_compression) <span class="keywordflow">throw</span> std::exception(<span class="stringliteral">&quot;The graph must be compressed!&quot;</span>);</div>
@@ -221,7 +221,7 @@ $(function() {
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                <span class="keywordtype">int</span> count = edge_matrix.row(k).nonZeros();</div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;                <span class="comment">// Run aggregate once with the sum and count of the non-zeros in row k</span></div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;                <a class="code" href="a00276.html#aff8692cdca1763985a0a6501abaedcd5">Aggregate</a>(out_costs[k], sum, agg_type, count);</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;                <a class="code" href="a00278.html#aff8692cdca1763985a0a6501abaedcd5">Aggregate</a>(out_costs[k], sum, agg_type, count);</div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;            }</div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
@@ -245,15 +245,15 @@ $(function() {
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;                    <span class="keywordtype">int</span> parent = it.row();</div>
 <div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160; </div>
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;                    <span class="comment">// Aggregate costs for both the parent and the child.</span></div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;                    <a class="code" href="a00276.html#aff8692cdca1763985a0a6501abaedcd5">Aggregate</a>(out_costs[parent], cost, agg_type, count[parent]);</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;                    <a class="code" href="a00276.html#aff8692cdca1763985a0a6501abaedcd5">Aggregate</a>(out_costs[child], cost, agg_type, count[child]);</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;                    <a class="code" href="a00278.html#aff8692cdca1763985a0a6501abaedcd5">Aggregate</a>(out_costs[parent], cost, agg_type, count[parent]);</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;                    <a class="code" href="a00278.html#aff8692cdca1763985a0a6501abaedcd5">Aggregate</a>(out_costs[child], cost, agg_type, count[child]);</div>
 <div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;                }</div>
 <div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;            }</div>
 <div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        }</div>
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        <span class="keywordflow">return</span> out_costs;</div>
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    }</div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
-<div class="line"><a name="l00207"></a><span class="lineno"><a class="line" href="a01199.html#a7c2ea4fda7d310b500456ff14527bab9">  207</a></span>&#160;    <span class="keyword">const</span> std::vector&lt;Edge&gt; Graph::operator[](<span class="keyword">const</span> <a class="code" href="a01203.html">Node</a>&amp; n)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00207"></a><span class="lineno"><a class="line" href="a01189.html#a7c2ea4fda7d310b500456ff14527bab9">  207</a></span>&#160;    <span class="keyword">const</span> std::vector&lt;Edge&gt; Graph::operator[](<span class="keyword">const</span> <a class="code" href="a01193.html">Node</a>&amp; n)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="keyword">    </span>{</div>
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        <span class="comment">// Get the parent id at N. This will throw if n doesn&#39;t exist in the hashmap</span></div>
 <div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        <span class="keywordtype">int</span> parent_id = idmap.at(n);</div>
@@ -264,13 +264,13 @@ $(function() {
 <div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;            <span class="keyword">auto</span> value = it.value();</div>
 <div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;            <span class="keyword">auto</span> col = it.col();</div>
 <div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160; </div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;            out_edges.emplace_back(<a class="code" href="a01183.html">Edge</a>(NodeFromID(col), value));</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;            out_edges.emplace_back(<a class="code" href="a01173.html">Edge</a>(NodeFromID(col), value));</div>
 <div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;        }</div>
 <div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160; </div>
 <div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;        <span class="keywordflow">return</span> out_edges;</div>
 <div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    }</div>
 <div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160; </div>
-<div class="line"><a name="l00224"></a><span class="lineno"><a class="line" href="a01199.html#a604a648f1f73d687ad4544d2ac163212">  224</a></span>&#160;    <span class="keywordtype">void</span> Graph::addEdge(<span class="keyword">const</span> <a class="code" href="a01203.html">Node</a>&amp; parent, <span class="keyword">const</span> <a class="code" href="a01203.html">Node</a>&amp; child, <span class="keywordtype">float</span> score)</div>
+<div class="line"><a name="l00224"></a><span class="lineno"><a class="line" href="a01189.html#a604a648f1f73d687ad4544d2ac163212">  224</a></span>&#160;    <span class="keywordtype">void</span> Graph::addEdge(<span class="keyword">const</span> <a class="code" href="a01193.html">Node</a>&amp; parent, <span class="keyword">const</span> <a class="code" href="a01193.html">Node</a>&amp; child, <span class="keywordtype">float</span> score)</div>
 <div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    {</div>
 <div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        <span class="comment">// ![GetOrAssignID_Node]</span></div>
 <div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        needs_compression = <span class="keyword">true</span>;</div>
@@ -283,7 +283,7 @@ $(function() {
 <div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;        <span class="comment">// ![GetOrAssignID_Node]</span></div>
 <div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    }</div>
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160; </div>
-<div class="line"><a name="l00237"></a><span class="lineno"><a class="line" href="a01199.html#afa04fa06b0802acd9eebe46a8c7a1787">  237</a></span>&#160;    <span class="keywordtype">void</span> Graph::addEdge(<span class="keywordtype">int</span> parent_id, <span class="keywordtype">int</span> child_id, <span class="keywordtype">float</span> score)</div>
+<div class="line"><a name="l00237"></a><span class="lineno"><a class="line" href="a01189.html#afa04fa06b0802acd9eebe46a8c7a1787">  237</a></span>&#160;    <span class="keywordtype">void</span> Graph::addEdge(<span class="keywordtype">int</span> parent_id, <span class="keywordtype">int</span> child_id, <span class="keywordtype">float</span> score)</div>
 <div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    {</div>
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        <span class="comment">// ![GetOrAssignID_int]</span></div>
 <div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160; </div>
@@ -302,7 +302,7 @@ $(function() {
 <div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        <span class="comment">// ![GetOrAssignID_int]</span></div>
 <div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    }</div>
 <div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160; </div>
-<div class="line"><a name="l00256"></a><span class="lineno"><a class="line" href="a01199.html#a902d654a1c1b6d391c27c6c2bd618bbc">  256</a></span>&#160;    <span class="keywordtype">bool</span> Graph::checkForEdge(<span class="keywordtype">int</span> parent, <span class="keywordtype">int</span> child)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00256"></a><span class="lineno"><a class="line" href="a01189.html#a902d654a1c1b6d391c27c6c2bd618bbc">  256</a></span>&#160;    <span class="keywordtype">bool</span> Graph::checkForEdge(<span class="keywordtype">int</span> parent, <span class="keywordtype">int</span> child)<span class="keyword"> const </span>{</div>
 <div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;        <span class="comment">// ![CheckForEdge]</span></div>
 <div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;        </div>
 <div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        <span class="comment">// Iterate through parent&#39;s row to see if it has child.</span></div>
@@ -314,11 +314,11 @@ $(function() {
 <div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        <span class="comment">// ![CheckForEdge]</span></div>
 <div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    }</div>
 <div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160; </div>
-<div class="line"><a name="l00268"></a><span class="lineno"><a class="line" href="a01199.html#aae29b0f69f0fff53113b7f968a128796">  268</a></span>&#160;    <span class="keywordtype">bool</span> Graph::HasEdge(<span class="keywordtype">int</span> parent, <span class="keywordtype">int</span> child, <span class="keywordtype">bool</span> undirected)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00268"></a><span class="lineno"><a class="line" href="a01189.html#aae29b0f69f0fff53113b7f968a128796">  268</a></span>&#160;    <span class="keywordtype">bool</span> Graph::HasEdge(<span class="keywordtype">int</span> parent, <span class="keywordtype">int</span> child, <span class="keywordtype">bool</span> undirected)<span class="keyword"> const </span>{</div>
 <div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        <span class="keywordflow">return</span> (checkForEdge(parent, child) || (undirected &amp;&amp; checkForEdge(child, parent)));</div>
 <div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    }</div>
 <div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160; </div>
-<div class="line"><a name="l00272"></a><span class="lineno"><a class="line" href="a01199.html#affca013028fca6ac730f3f313744500b">  272</a></span>&#160;    <span class="keywordtype">bool</span> Graph::HasEdge(<span class="keyword">const</span> <a class="code" href="a01203.html">Node</a>&amp; parent, <span class="keyword">const</span> <a class="code" href="a01203.html">Node</a>&amp; child, <span class="keyword">const</span> <span class="keywordtype">bool</span> undirected)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00272"></a><span class="lineno"><a class="line" href="a01189.html#affca013028fca6ac730f3f313744500b">  272</a></span>&#160;    <span class="keywordtype">bool</span> Graph::HasEdge(<span class="keyword">const</span> <a class="code" href="a01193.html">Node</a>&amp; parent, <span class="keyword">const</span> <a class="code" href="a01193.html">Node</a>&amp; child, <span class="keyword">const</span> <span class="keywordtype">bool</span> undirected)<span class="keyword"> const </span>{</div>
 <div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;        <span class="comment">// Throw if the graph isn&#39;t compresesed.</span></div>
 <div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        <span class="keywordflow">if</span> (!edge_matrix.isCompressed())</div>
 <div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;            <span class="keywordflow">throw</span> std::exception(<span class="stringliteral">&quot;Can&#39;t get this for uncompressed matrix!&quot;</span>);</div>
@@ -334,7 +334,7 @@ $(function() {
 <div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        <span class="keywordflow">return</span> HasEdge(parent_id, child_id, undirected);</div>
 <div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    }</div>
 <div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160; </div>
-<div class="line"><a name="l00288"></a><span class="lineno"><a class="line" href="a01199.html#afca147a681e4b39bc471e02d0f07eb37">  288</a></span>&#160;    <span class="keywordtype">int</span> Graph::getOrAssignID(<span class="keyword">const</span> <a class="code" href="a01203.html">Node</a>&amp; input_node)</div>
+<div class="line"><a name="l00288"></a><span class="lineno"><a class="line" href="a01189.html#afca147a681e4b39bc471e02d0f07eb37">  288</a></span>&#160;    <span class="keywordtype">int</span> Graph::getOrAssignID(<span class="keyword">const</span> <a class="code" href="a01193.html">Node</a>&amp; input_node)</div>
 <div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    {</div>
 <div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;        <span class="comment">// If it&#39;s already in the hashmap, then just return the existing ID</span></div>
 <div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;        <span class="keywordflow">if</span> (hasKey(input_node))</div>
@@ -359,20 +359,20 @@ $(function() {
 <div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;        }</div>
 <div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    }</div>
 <div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160; </div>
-<div class="line"><a name="l00313"></a><span class="lineno"><a class="line" href="a01199.html#a133b6f44ac90ed6135752e32482b70f5">  313</a></span>&#160;    <span class="keywordtype">int</span> Graph::getOrAssignID(<span class="keywordtype">int</span> input_int)</div>
+<div class="line"><a name="l00313"></a><span class="lineno"><a class="line" href="a01189.html#a133b6f44ac90ed6135752e32482b70f5">  313</a></span>&#160;    <span class="keywordtype">int</span> Graph::getOrAssignID(<span class="keywordtype">int</span> input_int)</div>
 <div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    {</div>
 <div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;        <span class="comment">// If it&#39;s already in our id list, then just return it</span></div>
 <div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;        <span class="keywordflow">if</span> (std::find(this-&gt;id_to_nodes.begin(), this-&gt;id_to_nodes.end(), input_int)</div>
 <div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;            != this-&gt;id_to_nodes.end()) </div>
 <div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;            <span class="keywordflow">return</span> input_int;</div>
 <div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;            ordered_nodes.push_back(<a class="code" href="a01203.html">Node</a>());</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;            ordered_nodes.push_back(<a class="code" href="a01193.html">Node</a>());</div>
 <div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;            ordered_nodes.back().id = input_int;</div>
 <div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;            id_to_nodes.push_back(ordered_nodes.size() - 1);</div>
 <div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;        }</div>
 <div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    }</div>
 <div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160; </div>
-<div class="line"><a name="l00326"></a><span class="lineno"><a class="line" href="a01199.html#af8225b5596508853ec637e72873a45cb">  326</a></span>&#160;    Graph::Graph(</div>
+<div class="line"><a name="l00326"></a><span class="lineno"><a class="line" href="a01189.html#af8225b5596508853ec637e72873a45cb">  326</a></span>&#160;    Graph::Graph(</div>
 <div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;        <span class="keyword">const</span> vector&lt;vector&lt;int&gt;&gt;&amp; edges,</div>
 <div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;        <span class="keyword">const</span> vector&lt;vector&lt;float&gt;&gt; &amp; distances,</div>
 <div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;        <span class="keyword">const</span> vector&lt;Node&gt; &amp; Nodes</div>
@@ -413,16 +413,16 @@ $(function() {
 <div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;        needs_compression = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    }</div>
 <div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160; </div>
-<div class="line"><a name="l00367"></a><span class="lineno"><a class="line" href="a01199.html#af00121404a647b0d619f201cf9ebc797">  367</a></span>&#160;    <span class="keywordtype">bool</span> Graph::HasEdge(<span class="keyword">const</span> std::array&lt;float, 3&gt;&amp; parent, <span class="keyword">const</span> std::array&lt;float, 3&gt;&amp; child, <span class="keywordtype">bool</span> undirected)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00367"></a><span class="lineno"><a class="line" href="a01189.html#af00121404a647b0d619f201cf9ebc797">  367</a></span>&#160;    <span class="keywordtype">bool</span> Graph::HasEdge(<span class="keyword">const</span> std::array&lt;float, 3&gt;&amp; parent, <span class="keyword">const</span> std::array&lt;float, 3&gt;&amp; child, <span class="keywordtype">bool</span> undirected)<span class="keyword"> const </span>{</div>
 <div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;        <span class="comment">// Just convert it and pass it over to the other HasEdge</span></div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;        <span class="keyword">const</span> <a class="code" href="a01203.html">Node</a> p(parent);</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;        <span class="keyword">const</span> <a class="code" href="a01203.html">Node</a> c(child);</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;        <span class="keyword">const</span> <a class="code" href="a01193.html">Node</a> p(parent);</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;        <span class="keyword">const</span> <a class="code" href="a01193.html">Node</a> c(child);</div>
 <div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;        <span class="keywordflow">return</span> HasEdge(p, c, undirected);</div>
 <div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;    }</div>
 <div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160; </div>
-<div class="line"><a name="l00374"></a><span class="lineno"><a class="line" href="a01199.html#a4de020064d58c4ab376a26c30be863a3">  374</a></span>&#160;    <span class="keywordtype">bool</span> Graph::hasKey(<span class="keyword">const</span> <a class="code" href="a01203.html">Node</a>&amp; n)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> (idmap.count(n) &gt; 0); }</div>
+<div class="line"><a name="l00374"></a><span class="lineno"><a class="line" href="a01189.html#a4de020064d58c4ab376a26c30be863a3">  374</a></span>&#160;    <span class="keywordtype">bool</span> Graph::hasKey(<span class="keyword">const</span> <a class="code" href="a01193.html">Node</a>&amp; n)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> (idmap.count(n) &gt; 0); }</div>
 <div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160; </div>
-<div class="line"><a name="l00376"></a><span class="lineno"><a class="line" href="a01199.html#aeddbbec01c6354b7076f47f71fc1a220">  376</a></span>&#160;    std::vector&lt;std::array&lt;float, 3&gt;&gt; Graph::NodesAsFloat3()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00376"></a><span class="lineno"><a class="line" href="a01189.html#aeddbbec01c6354b7076f47f71fc1a220">  376</a></span>&#160;    std::vector&lt;std::array&lt;float, 3&gt;&gt; Graph::NodesAsFloat3()<span class="keyword"> const</span></div>
 <div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;<span class="keyword">    </span>{</div>
 <div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;        <span class="comment">// Get a constant reference to ordered_nodes to maintain const-ness of this function.</span></div>
 <div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> &amp; N= ordered_nodes;</div>
@@ -441,7 +441,7 @@ $(function() {
 <div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;        <span class="keywordflow">return</span> out_nodes;</div>
 <div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;    }</div>
 <div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160; </div>
-<div class="line"><a name="l00395"></a><span class="lineno"><a class="line" href="a01199.html#a41cece77d0eee98df39ecc6d3a366ec8">  395</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="a00269.html#gab7ecc1be5c746ed3f99ab7494316c65d">Graph::Compress</a>() {</div>
+<div class="line"><a name="l00395"></a><span class="lineno"><a class="line" href="a01189.html#a41cece77d0eee98df39ecc6d3a366ec8">  395</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="a00271.html#gab7ecc1be5c746ed3f99ab7494316c65d">Graph::Compress</a>() {</div>
 <div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160; </div>
 <div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;        <span class="comment">// Only do this if the graph needs compression.</span></div>
 <div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;        <span class="keywordflow">if</span> (needs_compression) {</div>
@@ -461,7 +461,7 @@ $(function() {
 <div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;        }</div>
 <div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;    }</div>
 <div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160; </div>
-<div class="line"><a name="l00415"></a><span class="lineno"><a class="line" href="a01199.html#a994dbd15119eb6548d2e15f4de4b88a6">  415</a></span>&#160;    <span class="keywordtype">void</span> Graph::Clear() {</div>
+<div class="line"><a name="l00415"></a><span class="lineno"><a class="line" href="a01189.html#a994dbd15119eb6548d2e15f4de4b88a6">  415</a></span>&#160;    <span class="keywordtype">void</span> Graph::Clear() {</div>
 <div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;        edge_matrix.setZero();</div>
 <div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;        edge_matrix.data().squeeze();</div>
 <div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;        triplets.clear();</div>
@@ -551,18 +551,18 @@ $(function() {
 <div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;<span class="comment">}</span></div>
 <div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;<span class="comment">*/</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aa00269_html_gab7ecc1be5c746ed3f99ab7494316c65d"><div class="ttname"><a href="a00269.html#gab7ecc1be5c746ed3f99ab7494316c65d">Compress</a></div><div class="ttdeci">C_INTERFACE Compress(Graph *graph)</div><div class="ttdoc">Compress the given graph into a csr representation.</div><div class="ttdef"><b>Definition:</b> <a href="a00245_source.html#l00136">spatialstructures_C.cpp:136</a></div></div>
-<div class="ttc" id="aa00269_html_ga1aebc84e3562370327576641b1ce2dcc"><div class="ttname"><a href="a00269.html#ga1aebc84e3562370327576641b1ce2dcc">GetCSRPointers</a></div><div class="ttdeci">C_INTERFACE GetCSRPointers(Graph *graph, int *out_nnz, int *out_num_rows, int *out_num_cols, float **out_data_ptr, int **out_inner_indices_ptr, int **out_outer_indices_ptr)</div><div class="ttdoc">Retrieve all information for a graph's CSR representation. This will compress the graph if it was not...</div><div class="ttdef"><b>Definition:</b> <a href="a00245_source.html#l00103">spatialstructures_C.cpp:103</a></div></div>
-<div class="ttc" id="aa01203_html"><div class="ttname"><a href="a01203.html">HF::SpatialStructures::Node</a></div><div class="ttdoc">A point in space with an ID.</div><div class="ttdef"><b>Definition:</b> <a href="a00155_source.html#l00038">node.h:38</a></div></div>
+<div class="ttc" id="aa00278_html_aff8692cdca1763985a0a6501abaedcd5"><div class="ttname"><a href="a00278.html#aff8692cdca1763985a0a6501abaedcd5">HF::SpatialStructures::Aggregate</a></div><div class="ttdeci">void Aggregate(float &amp;out_total, float new_value, const COST_AGGREGATE agg_type, int &amp;count)</div><div class="ttdoc">Aggregate new_value into out_total using the method specified in agg_type.</div><div class="ttdef"><b>Definition:</b> <a href="a00149_source.html#l00130">graph.cpp:130</a></div></div>
 <div class="ttc" id="aa00152_html"><div class="ttname"><a href="a00152.html">graph.h</a></div><div class="ttdoc">Contains definitions for the Graph class.</div></div>
-<div class="ttc" id="aa00276_html_a6b23c0b2531c78f6d5049873c184f4f9"><div class="ttname"><a href="a00276.html#a6b23c0b2531c78f6d5049873c184f4f9">HF::SpatialStructures::COST_AGGREGATE</a></div><div class="ttdeci">COST_AGGREGATE</div><div class="ttdoc">Methods of aggregating the costs for edges for each node in the graph.</div><div class="ttdef"><b>Definition:</b> <a href="a00152_source.html#l00027">graph.h:27</a></div></div>
-<div class="ttc" id="aa01195_html"><div class="ttname"><a href="a01195.html">HF::SpatialStructures::CSRPtrs</a></div><div class="ttdoc">A struct to hold all necessary information for a CSR.</div><div class="ttdef"><b>Definition:</b> <a href="a00152_source.html#l00044">graph.h:44</a></div></div>
-<div class="ttc" id="aa00276_html_a01187"><div class="ttname"><a href="a00276.html#a01187">HF::SpatialStructures::IntEdge</a></div><div class="ttdoc">A lighter version of Edge that contains an ID instead of a full node object..</div><div class="ttdef"><b>Definition:</b> <a href="a00146_source.html#l00055">Edge.h:55</a></div></div>
-<div class="ttc" id="aa00276_html_aff8692cdca1763985a0a6501abaedcd5"><div class="ttname"><a href="a00276.html#aff8692cdca1763985a0a6501abaedcd5">HF::SpatialStructures::Aggregate</a></div><div class="ttdeci">void Aggregate(float &amp;out_total, float new_value, const COST_AGGREGATE agg_type, int &amp;count)</div><div class="ttdoc">Aggregate new_value into out_total using the method specified in agg_type.</div><div class="ttdef"><b>Definition:</b> <a href="a00149_source.html#l00130">graph.cpp:130</a></div></div>
-<div class="ttc" id="aa00281_html"><div class="ttname"><a href="a00281.html">Eigen</a></div><div class="ttdoc">Eigen a C++ template library for linear algebra: matrices, vectors, numerical solvers,...</div><div class="ttdef"><b>Definition:</b> <a href="a00101_source.html#l00028">objloader.h:28</a></div></div>
-<div class="ttc" id="aa00276_html"><div class="ttname"><a href="a00276.html">HF::SpatialStructures</a></div><div class="ttdoc">Contains standard fundamental data structures for representing space used throughout HumanFactors.</div><div class="ttdef"><b>Definition:</b> <a href="a00026_source.html#l00019">view_analysis.h:19</a></div></div>
-<div class="ttc" id="aa01183_html"><div class="ttname"><a href="a01183.html">HF::SpatialStructures::Edge</a></div><div class="ttdoc">A connection to a child node.</div><div class="ttdef"><b>Definition:</b> <a href="a00146_source.html#l00029">Edge.h:29</a></div></div>
+<div class="ttc" id="aa00283_html"><div class="ttname"><a href="a00283.html">Eigen</a></div><div class="ttdoc">Eigen a C++ template library for linear algebra: matrices, vectors, numerical solvers,...</div><div class="ttdef"><b>Definition:</b> <a href="a00101_source.html#l00028">objloader.h:28</a></div></div>
+<div class="ttc" id="aa00278_html_a6b23c0b2531c78f6d5049873c184f4f9"><div class="ttname"><a href="a00278.html#a6b23c0b2531c78f6d5049873c184f4f9">HF::SpatialStructures::COST_AGGREGATE</a></div><div class="ttdeci">COST_AGGREGATE</div><div class="ttdoc">Methods of aggregating the costs for edges for each node in the graph.</div><div class="ttdef"><b>Definition:</b> <a href="a00152_source.html#l00023">graph.h:23</a></div></div>
 <div class="ttc" id="aa00140_html"><div class="ttname"><a href="a00140.html">Constants.h</a></div><div class="ttdoc">Contains definitions for the HF::SpatialStructures namespace.</div></div>
+<div class="ttc" id="aa00278_html_a01177"><div class="ttname"><a href="a00278.html#a01177">HF::SpatialStructures::IntEdge</a></div><div class="ttdoc">A lighter version of Edge that contains an ID instead of a full node object..</div><div class="ttdef"><b>Definition:</b> <a href="a00146_source.html#l00055">Edge.h:55</a></div></div>
+<div class="ttc" id="aa00271_html_gab7ecc1be5c746ed3f99ab7494316c65d"><div class="ttname"><a href="a00271.html#gab7ecc1be5c746ed3f99ab7494316c65d">Compress</a></div><div class="ttdeci">C_INTERFACE Compress(Graph *graph)</div><div class="ttdoc">Compress the given graph into a csr representation.</div><div class="ttdef"><b>Definition:</b> <a href="a00248_source.html#l00136">spatialstructures_C.cpp:136</a></div></div>
+<div class="ttc" id="aa01193_html"><div class="ttname"><a href="a01193.html">HF::SpatialStructures::Node</a></div><div class="ttdoc">A point in space with an ID.</div><div class="ttdef"><b>Definition:</b> <a href="a00155_source.html#l00038">node.h:38</a></div></div>
+<div class="ttc" id="aa00278_html"><div class="ttname"><a href="a00278.html">HF::SpatialStructures</a></div><div class="ttdoc">Contains standard fundamental data structures for representing space used throughout HumanFactors.</div><div class="ttdef"><b>Definition:</b> <a href="a00026_source.html#l00019">view_analysis.h:19</a></div></div>
+<div class="ttc" id="aa00271_html_ga1aebc84e3562370327576641b1ce2dcc"><div class="ttname"><a href="a00271.html#ga1aebc84e3562370327576641b1ce2dcc">GetCSRPointers</a></div><div class="ttdeci">C_INTERFACE GetCSRPointers(Graph *graph, int *out_nnz, int *out_num_rows, int *out_num_cols, float **out_data_ptr, int **out_inner_indices_ptr, int **out_outer_indices_ptr)</div><div class="ttdoc">Retrieve all information for a graph's CSR representation. This will compress the graph if it was not...</div><div class="ttdef"><b>Definition:</b> <a href="a00248_source.html#l00103">spatialstructures_C.cpp:103</a></div></div>
+<div class="ttc" id="aa01185_html"><div class="ttname"><a href="a01185.html">HF::SpatialStructures::CSRPtrs</a></div><div class="ttdoc">A struct to hold all necessary information for a CSR.</div><div class="ttdef"><b>Definition:</b> <a href="a00152_source.html#l00040">graph.h:40</a></div></div>
+<div class="ttc" id="aa01173_html"><div class="ttname"><a href="a01173.html">HF::SpatialStructures::Edge</a></div><div class="ttdoc">A connection to a child node.</div><div class="ttdef"><b>Definition:</b> <a href="a00146_source.html#l00029">Edge.h:29</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

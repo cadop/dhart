@@ -1,882 +1,477 @@
-\hypertarget{a01101}{}\doxysection{HF\+::Spatial\+Structures\+::Node Struct Reference}
-\label{a01101}\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
+\hypertarget{a01101}{}\doxysection{HF\+::Graph\+Generator\+::Graph\+Generator Class Reference}
+\label{a01101}\index{HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}}
 
 
-A point in space with an ID  
+Generate a graph of accessible space from a given start point.  
 
 
 
 
-{\ttfamily \#include $<$node.\+h$>$}
+{\ttfamily \#include $<$graph\+\_\+generator.\+h$>$}
 
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{a01101_a3d229a53bb7328f88649fd48e6098b5d}{Node}} ()
-\begin{DoxyCompactList}\small\item\em Default constructor. Constructs everything with N\+AN \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a01101_a5e6500cbe9a1c29ebca5045dceebe9d6}{Node}} (float \mbox{\hyperlink{a01101_a78dfebaa44da09b03d7ca15445c8d222}{x}}, float \mbox{\hyperlink{a01101_a41981fb2cc6dc0edb787f921188702b0}{y}}, float \mbox{\hyperlink{a01101_a495b47689917e0395ce96ee01d3f5ed3}{z}}, int ID=-\/1)
-\begin{DoxyCompactList}\small\item\em Create a node without an ID \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a01101_a7d3f18b093670b7696aa1aecf8adab00}{Node}} (const std\+::array$<$ float, 3 $>$ \&position)
-\begin{DoxyCompactList}\small\item\em Create a node without an ID \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a01101_afc1e769b57e880909a11178bb8654adf}{Node}} (const std\+::array$<$ float, 3 $>$ \&position, \mbox{\hyperlink{a00174_aa8ecd83cd353318532d791fc819343cc}{N\+O\+D\+E\+\_\+\+T\+Y\+PE}} t, int \mbox{\hyperlink{a01101_a8212d00e6913abf0ca6fec1f2624b677}{id}})
-\item 
-float \mbox{\hyperlink{a01101_abbd66b566460f9557a373b5fbcc30bb1}{distance\+To}} (const \mbox{\hyperlink{a01101}{Node}} \&n2) const
-\begin{DoxyCompactList}\small\item\em Calculate the distance between this node and the given node \end{DoxyCompactList}\item 
-float \mbox{\hyperlink{a01101_a260ab9e9763234dab08decfc2aa6bf63}{angle\+To}} (const \mbox{\hyperlink{a01101}{Node}} \&n2) const
-\begin{DoxyCompactList}\small\item\em Calculate the angle between node 1 and n2 \end{DoxyCompactList}\item 
-std\+::array$<$ float, 3 $>$ \mbox{\hyperlink{a01101_ad3f7898ef3178eef0c3579869a7f5c67}{direction\+To}} (const \mbox{\hyperlink{a01101}{Node}} \&n2) const
-\begin{DoxyCompactList}\small\item\em Get the direction between this node and another node \end{DoxyCompactList}\item 
-std\+::array$<$ float, 3 $>$ \mbox{\hyperlink{a01101_a51c4642674d54d02b8600f7ffeb45670}{get\+Array}} () const
-\begin{DoxyCompactList}\small\item\em Returns the x,y,z of this node as an array of 3 floats \end{DoxyCompactList}\item 
-float \& \mbox{\hyperlink{a01101_a556efc898ddc67b64fff560d0c7b5a0a}{operator\mbox{[}$\,$\mbox{]}}} (int i)
-\begin{DoxyCompactList}\small\item\em Directly access a nodes\textquotesingle{}s position as if it were an array of 3 floats \end{DoxyCompactList}\item 
-float \mbox{\hyperlink{a01101_ae3e88bd4eecfdbd93431953ed07b8a7b}{operator\mbox{[}$\,$\mbox{]}}} (int i) const
-\begin{DoxyCompactList}\small\item\em Access a nodes\textquotesingle{}s position, by value \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{a01101_af687c2e97fffe3b7d14e3cfa8af3e5cd}{operator==}} (const \mbox{\hyperlink{a01101}{Node}} \&n2) const
-\begin{DoxyCompactList}\small\item\em Check if n1 occupies the same space as n2 \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{a01101_a5a3306ea1b8904361b038391718ccc07}{operator=}} (const std\+::array$<$ float, 3 $>$ \&n2)
-\begin{DoxyCompactList}\small\item\em Assigns the values of array n2 to n1 \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{a01101_a6137878845816e2fe8ecbe1215c490fd}{operator!=}} (const \mbox{\hyperlink{a01101}{Node}} \&n2) const
-\begin{DoxyCompactList}\small\item\em See operator==, checks if n1 does N\+OT occupy the same space as n2 
-\begin{DoxyParams}{Parameters}
-{\em n2} & \mbox{\hyperlink{a01101}{Node}} to compare with N1\\
-\hline
-\end{DoxyParams}
-\end{DoxyCompactList}\item 
-\mbox{\hyperlink{a01101}{Node}} \mbox{\hyperlink{a01101_ad58a4eb9f0a15c645eedf668d9bcec54}{operator-\/}} (const \mbox{\hyperlink{a01101}{Node}} \&n2) const
-\begin{DoxyCompactList}\small\item\em Creates a node from the vector subtraction of n1, n2 \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a01101}{Node}} \mbox{\hyperlink{a01101_a064540b380fc6251bdf6d740abf7a169}{operator+}} (const \mbox{\hyperlink{a01101}{Node}} \&n2) const
-\begin{DoxyCompactList}\small\item\em Creates a new node from the vector addition of n1, n2 \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a01101}{Node}} \mbox{\hyperlink{a01101_a099271bad26dd059037f3c84459058e0}{operator$\ast$}} (const \mbox{\hyperlink{a01101}{Node}} \&n2) const
-\begin{DoxyCompactList}\small\item\em Creates a new node from the dot product of n1, n2 \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{a01101_a1d74d883b7291a760908f3dc81783b3d}{operator$<$}} (const \mbox{\hyperlink{a01101}{Node}} \&n2) const
-\begin{DoxyCompactList}\small\item\em Determines if n1\textquotesingle{}s id (an integer) is less than n2\textquotesingle{}s id \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{a01101_a7547e73076e40bb880261574216e4251}{operator$<$}} (const \mbox{\hyperlink{a01101}{Node}} \&n2)
-\begin{DoxyCompactList}\small\item\em Determines if n1\textquotesingle{}s id (an integer) is less than n2\textquotesingle{}s id -\/ const qualification omitted for std\+::sort \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{a01101_a9d67cccc8b0fc57d61390da493149790}{operator$>$}} (const \mbox{\hyperlink{a01101}{Node}} \&n2) const
-\begin{DoxyCompactList}\small\item\em Determines if n1\textquotesingle{}s id (an integer) is greater than n2\textquotesingle{}s id \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Public Attributes}
+\mbox{\hyperlink{a01101_a0d5c02761a3cbf57aea95ae014d032a9}{Graph\+Generator}} (\mbox{\hyperlink{a01165}{Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&RT, int walkable\+\_\+id, int obstacle\+\_\+id=-\/1)
+\begin{DoxyCompactList}\small\item\em Create a new Graph Generator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01189}{Spatial\+Structures\+::\+Graph}} \mbox{\hyperlink{a01101_a0044b9075921c7510b047f9076ad0a5e}{Build\+Network}} (const \mbox{\hyperlink{a00276_a8c29578574c275e66fbd439be62c125e}{v3}} \&start\+\_\+point, const \mbox{\hyperlink{a00276_a8c29578574c275e66fbd439be62c125e}{v3}} \&Spacing, int Max\+Nodes, float Up\+Step, float Up\+Slope, float Down\+Step, float Down\+Slope, int max\+\_\+step\+\_\+connections, int cores=-\/1)
+\begin{DoxyCompactList}\small\item\em Generate a Graph of accessible space. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-float \mbox{\hyperlink{a01101_a78dfebaa44da09b03d7ca15445c8d222}{x}}
+int \mbox{\hyperlink{a01101_a385e9a4d690cadb978d4ab4cb5185cd6}{walkable\+\_\+surfaces}}
+\begin{DoxyCompactList}\small\item\em Corresponds to the mesh\+ID of walkable surfaces in the Raytracer (Unused) \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{a01101_a455de4cc964be74f8ad7622bdc20796a}{obstacle\+\_\+surfaces}}
+\begin{DoxyCompactList}\small\item\em Corresponds to the meshid of obstacle surfaces in the Raytracer (Unused) \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{a01101_a16da7abe348f7af1d232867f2d719db1}{core\+\_\+count}}
+\begin{DoxyCompactList}\small\item\em Number of cores to use in parallel. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01165}{Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \mbox{\hyperlink{a01101_a6e3a66ea1b5b1325bdf082e7fee7f47e}{ray\+\_\+tracer}}
+\begin{DoxyCompactList}\small\item\em Raytracer to use for all intersections. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00276_a8c29578574c275e66fbd439be62c125e}{v3}} \mbox{\hyperlink{a01101_ac68ce8f1034d1e4afdbcade8d4206612}{spacing}}
+\begin{DoxyCompactList}\small\item\em Spacing between nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00276_a8c29578574c275e66fbd439be62c125e}{v3}} \mbox{\hyperlink{a01101_af9e53ca26e8a4f7d43b7b353bd4f4846}{start}}
+\begin{DoxyCompactList}\small\item\em Start point for graph generation. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{a01101_a1a7fd22576b53f4b63ab92f4f7112006}{downstep}}
+\begin{DoxyCompactList}\small\item\em Maximum step down that can be considered accessible. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{a01101_a3bf8f31f3192dad1db49abd03e3a2503}{upslope}}
+\begin{DoxyCompactList}\small\item\em Maximum upward slope in degrees that can be considered accessible. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{a01101_a2cbc45046a831656d0a84003df187a6e}{downslope}}
+\begin{DoxyCompactList}\small\item\em Maximum downard slope in degrees that can be considered accessible. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{a01101_a161d82b678c4ca4dc94eae851602fb08}{upstep}}
+\begin{DoxyCompactList}\small\item\em Maximum upward step that can be considered accessible. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{a01101_ada6726b2b1551bf8add26c18229bed96}{step\+\_\+height}}
+\begin{DoxyCompactList}\small\item\em Unused. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{a01101_a3bdee503345645ede58132833b4803e6}{floor\+\_\+offset}}
+\begin{DoxyCompactList}\small\item\em Unused. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{a01101_a73847391cae1bc6c5a0ed5416844ab68}{max\+\_\+step\+\_\+connection}}
+\begin{DoxyCompactList}\small\item\em Multiplier for children to generate from a single parent node. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{a01101_a6afac9c527d8483943ef61e9e9a1ca15}{max\+\_\+nodes}}
+\begin{DoxyCompactList}\small\item\em Maximum number of nodes to generate. If less than zero, generate nodes without a limit. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
 \item 
-float \mbox{\hyperlink{a01101_a41981fb2cc6dc0edb787f921188702b0}{y}}
-\item 
-float \mbox{\hyperlink{a01101_a495b47689917e0395ce96ee01d3f5ed3}{z}}
-\begin{DoxyCompactList}\small\item\em Cartesian coordinates x, y, z. \end{DoxyCompactList}\item 
-short \mbox{\hyperlink{a01101_a3894a51f72b82cea2d6675a91fcb39cf}{type}} = \mbox{\hyperlink{a00174_aa8ecd83cd353318532d791fc819343cca5c2876be9857d3e0192c9e1cb3797bf8}{G\+R\+A\+PH}}
-\begin{DoxyCompactList}\small\item\em Default this field to G\+R\+A\+PH. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{a01101_a8212d00e6913abf0ca6fec1f2624b677}{id}}
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{a01101}{Node}} identifier. \end{DoxyCompactList}\end{DoxyCompactItemize}
+class \mbox{\hyperlink{a01101_aa297d0e5ad99ca27a68edd2a4b1ff75b}{Graph\+Generator\+Private}}
+\begin{DoxyCompactList}\small\item\em Private implementation for the graph generator. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-A point in space with an ID 
+Generate a graph of accessible space from a given start point. 
+
+The Graph Generator maps out \char`\"{}accessible\char`\"{} space on a model from a given starting point. In graphs created by this algorithm, node represents a point in space that a human can occupy, and each edge between nodes indicates that a human can traverse from one node to another node. The Graph Generator is a powerful tool for analyzing space, since the graph or nodes it outputs can be used as input to all the analysis methods offered by Human\+Factors, allowing for it to be the starting point of other analysis methods within Human\+Factors.
+
+\begin{DoxyRemark}{Remarks}
+This class serves as an interface to \mbox{\hyperlink{a01105}{Graph\+Generator\+Private}}. All of the implementation for the \mbox{\hyperlink{a01101}{Graph\+Generator}} is located in its friend class \mbox{\hyperlink{a01105}{Graph\+Generator\+Private}}.
+\end{DoxyRemark}
+\begin{DoxyNote}{Note}
+All arguments are in meters for distances and degrees for angles unless otherwise specified. For all calculations, the Graph Generator assumes geometry is Z-\/\+Up i.\+e. upstep is how high the step is in the z-\/direction, ground checks are performed in the -\/z direction etc.
+\end{DoxyNote}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{a00266__todo000001}{Todo}}]Obstacle/\+Walkable geometry support.\end{DoxyRefDesc}
 
 
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a01105}{Graph\+Generator\+Private}} for details about the implementation. 
+\end{DoxySeeAlso}
 
-Definition at line 28 of file node.\+h.
+
+Definition at line 71 of file graph\+\_\+generator.\+h.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{a01101_a3d229a53bb7328f88649fd48e6098b5d}\label{a01101_a3d229a53bb7328f88649fd48e6098b5d}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!Node@{Node}}
-\index{Node@{Node}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{Node()}{Node()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
-{\footnotesize\ttfamily H\+F\+::\+Spatial\+Structures\+::\+Node\+::\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{a01101_a0d5c02761a3cbf57aea95ae014d032a9}\label{a01101_a0d5c02761a3cbf57aea95ae014d032a9}} 
+\index{HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}!GraphGenerator@{GraphGenerator}}
+\index{GraphGenerator@{GraphGenerator}!HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{GraphGenerator()}{GraphGenerator()}}
+{\footnotesize\ttfamily H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Graph\+Generator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01165}{Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&}]{RT,  }\item[{int}]{walkable\+\_\+id,  }\item[{int}]{obstacle\+\_\+id = {\ttfamily -\/1} }\end{DoxyParamCaption})}
 
 
 
-Default constructor. Constructs everything with N\+AN 
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "node.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node(); \textcolor{comment}{// all fields initialized to NAN            }}
-\end{DoxyCode}
- 
-
-Definition at line 15 of file node.\+cpp.
-
-
-
-References x, y, and z.
-
-
-
-Referenced by operator$\ast$(), operator+(), and operator-\/().
-
-\mbox{\Hypertarget{a01101_a5e6500cbe9a1c29ebca5045dceebe9d6}\label{a01101_a5e6500cbe9a1c29ebca5045dceebe9d6}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!Node@{Node}}
-\index{Node@{Node}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{Node()}{Node()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily H\+F\+::\+Spatial\+Structures\+::\+Node\+::\+Node (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{float}]{z,  }\item[{int}]{ID = {\ttfamily -\/1} }\end{DoxyParamCaption})}
-
-
-
-Create a node without an ID 
+Create a new Graph Generator. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em x} & X coordinate\\
+{\em RT} & The raytracer to use for this scene. \mbox{\hyperlink{a00282}{Geometry}} for the Raytracer must be Z-\/\+Up. \\
 \hline
-{\em y} & Y coordinate\\
-\hline
-{\em z} & Z coordinate\\
-\hline
-{\em id} & ID of the node \\
+{\em walkable\+\_\+id} & The Raytracer\textquotesingle{}s ID for walkable geometry (Unused) \\
 \hline
 \end{DoxyParams}
 
 
 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "node.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_0(12.0, 23.1, 34.2);   \textcolor{comment}{// default ID is -\/1}}
-\end{DoxyCode}
- 
-
-Definition at line 22 of file node.\+cpp.
-
-\mbox{\Hypertarget{a01101_a7d3f18b093670b7696aa1aecf8adab00}\label{a01101_a7d3f18b093670b7696aa1aecf8adab00}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!Node@{Node}}
-\index{Node@{Node}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{Node()}{Node()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
-{\footnotesize\ttfamily H\+F\+::\+Spatial\+Structures\+::\+Node\+::\+Node (\begin{DoxyParamCaption}\item[{const std\+::array$<$ float, 3 $>$ \&}]{position }\end{DoxyParamCaption})}
-
-
-
-Create a node without an ID 
-
-
 \begin{DoxyParams}{Parameters}
-{\em position} & An array of 3 floats for x,y,z\\
+{\em obstacle\+\_\+id} & ID to use for obstacle geometry (Unused) \\
 \hline
 \end{DoxyParams}
 
 
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "node.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{std::array<float, 3> pos = \{ 12.0, 23.1, 34.2 \};}
-\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node(pos);      \textcolor{comment}{// id == -\/1, type == NODE\_TYPE::GRAPH}}
-\end{DoxyCode}
- 
-
-Definition at line 24 of file node.\+cpp.
+Definition at line 15 of file graph\+\_\+generator.\+cpp.
 
 
 
-References H\+F\+::\+Spatial\+Structures\+::\+G\+R\+A\+PH, type, x, y, and z.
-
-\mbox{\Hypertarget{a01101_afc1e769b57e880909a11178bb8654adf}\label{a01101_afc1e769b57e880909a11178bb8654adf}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!Node@{Node}}
-\index{Node@{Node}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{Node()}{Node()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily H\+F\+::\+Spatial\+Structures\+::\+Node\+::\+Node (\begin{DoxyParamCaption}\item[{const std\+::array$<$ float, 3 $>$ \&}]{position,  }\item[{\mbox{\hyperlink{a00174_aa8ecd83cd353318532d791fc819343cc}{N\+O\+D\+E\+\_\+\+T\+Y\+PE}}}]{t,  }\item[{int}]{id }\end{DoxyParamCaption})}
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "node.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{std::array<float, 3> pos = \{ 12.0, 23.1, 34.2 \};}
-\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node(pos, \mbox{\hyperlink{a00174_aa8ecd83cd353318532d791fc819343cca5c2876be9857d3e0192c9e1cb3797bf8}{HF::SpatialStructures::NODE\_TYPE::GRAPH}}, 456);}
-\end{DoxyCode}
- 
-
-Definition at line 32 of file node.\+cpp.
-
-
-
-References type, x, y, and z.
+References ray\+\_\+tracer.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{a01101_a260ab9e9763234dab08decfc2aa6bf63}\label{a01101_a260ab9e9763234dab08decfc2aa6bf63}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!angleTo@{angleTo}}
-\index{angleTo@{angleTo}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{angleTo()}{angleTo()}}
-{\footnotesize\ttfamily float H\+F\+::\+Spatial\+Structures\+::\+Node\+::angle\+To (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01101}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const}
+\mbox{\Hypertarget{a01101_a0044b9075921c7510b047f9076ad0a5e}\label{a01101_a0044b9075921c7510b047f9076ad0a5e}} 
+\index{HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}!BuildNetwork@{BuildNetwork}}
+\index{BuildNetwork@{BuildNetwork}!HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{BuildNetwork()}{BuildNetwork()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01189}{Spatial\+Structures\+::\+Graph}} H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Build\+Network (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a00276_a8c29578574c275e66fbd439be62c125e}{v3}} \&}]{start\+\_\+point,  }\item[{const \mbox{\hyperlink{a00276_a8c29578574c275e66fbd439be62c125e}{v3}} \&}]{Spacing,  }\item[{int}]{Max\+Nodes,  }\item[{float}]{Up\+Step,  }\item[{float}]{Up\+Slope,  }\item[{float}]{Down\+Step,  }\item[{float}]{Down\+Slope,  }\item[{int}]{max\+\_\+step\+\_\+connections,  }\item[{int}]{cores = {\ttfamily -\/1} }\end{DoxyParamCaption})}
 
 
 
-Calculate the angle between node 1 and n2 
+Generate a Graph of accessible space. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em n2} & \mbox{\hyperlink{a01101}{Node}} to calculate direction to \\
+{\em start\+\_\+point} & Starting point for the breadth first search. \\
+\hline
+{\em spacing} & Spacing between each node. \\
+\hline
+{\em Max\+Nodes} & Maximum amount of nodes for generation. Set to -\/1 for no limit. \\
+\hline
+{\em Up\+Step} & Maximum upward step that can be considered accessible. \\
+\hline
+{\em Up\+Slope} & Maximum upward slope in degrees that can be considered accessible. \\
+\hline
+{\em Down\+Slope} & Maximum downard slope in degrees that can be considered accessible. \\
+\hline
+{\em max\+\_\+step\+\_\+connection} & Multiplier for children to generate from a single parent node. \\
+\hline
+{\em cores} & Number of C\+PU cores to use for the calculation. A setting of -\/1 will use all available cores. A setting of 0 or 1 will disable parallel processing entirely. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-Angle between this node and n2
+A Graph of accessible space for the provided arguments. 
 \end{DoxyReturn}
 
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{TODO code sample: line 40 of node.cpp -\/ \textcolor{stringliteral}{'This needs an actual angle formula'}}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "graph\_generator.h"}}
+\DoxyCodeLine{\textcolor{comment}{// For brevity}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a00282_ad32d656c7a8c84beded49e1f14f64176}{HF::Geometry::LoadMeshObjects}};}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01165}{HF::RayTracer::EmbreeRayTracer}};}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01101}{HF::GraphGenerator::GraphGenerator}};}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01189}{HF::SpatialStructures::Graph}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Prepare the file path for plane.obj, load the mesh objects into mesh}}
+\DoxyCodeLine{\textcolor{keyword}{auto} mesh = \mbox{\hyperlink{a00282_ad32d656c7a8c84beded49e1f14f64176}{LoadMeshObjects}}(plane\_path);}
+\DoxyCodeLine{\textcolor{keyword}{const} std::string plane\_path = \textcolor{stringliteral}{"plane.obj"};}
+\DoxyCodeLine{\textcolor{comment}{// Create a GraphGenerator using an EmbreeRayTracer.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{EmbreeRayTracer \mbox{\hyperlink{a01101_a6e3a66ea1b5b1325bdf082e7fee7f47e}{ray\_tracer}}(mesh);}
+\DoxyCodeLine{\textcolor{comment}{// walkable\_id = 0, obstacle\_id defaults to -\/1}}
+\DoxyCodeLine{\mbox{\hyperlink{a01101_a0d5c02761a3cbf57aea95ae014d032a9}{GraphGenerator}} graph\_generator = \mbox{\hyperlink{a01101_a0d5c02761a3cbf57aea95ae014d032a9}{GraphGenerator}}(\mbox{\hyperlink{a01101_a6e3a66ea1b5b1325bdf082e7fee7f47e}{ray\_tracer}}, 0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Prepare the parameters for building a graph}}
+\DoxyCodeLine{std::array<float, 3> starting\_position = \{ 0.0, 0.0, 0.5 \};     \textcolor{comment}{// position to begin analysis}}
+\DoxyCodeLine{std::array<float, 3> node\_spacing = \{ 0.02f, 0.02f, 0.02f \};    \textcolor{comment}{// space between nodes}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} maximum\_nodes = 100000;                               \textcolor{comment}{// maximum amount of nodes for generation}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{float} max\_slope = 1.0;                                          \textcolor{comment}{// maximum allowed slope between two nodes}}
+\DoxyCodeLine{\textcolor{keywordtype}{float} max\_step\_height = 1.0;                                    \textcolor{comment}{// maximum height for a step}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{float} min\_slope = 1.0;                                          \textcolor{comment}{// minimum step allowed between nodes}}
+\DoxyCodeLine{                                                                \textcolor{comment}{// per parent node}}
+\DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{a01101_a73847391cae1bc6c5a0ed5416844ab68}{max\_step\_connection}} = 1;                                    \textcolor{comment}{// influences how many potential children are generated}}
+\DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{a01101_a16da7abe348f7af1d232867f2d719db1}{core\_count}} = 1;                                             \textcolor{comment}{// how many CPU cores are used in calculation}}
+\DoxyCodeLine{}
+\DoxyCodeLine{                                                                \textcolor{comment}{//  defaults to -\/1 if not set and uses all available cores}}
+\DoxyCodeLine{}
+\DoxyCodeLine{                                                                \textcolor{comment}{//  0 or 1 disables parallel processing entirely}}
+\DoxyCodeLine{Graph g = graph\_generator.BuildNetwork(starting\_position,}
+\DoxyCodeLine{\textcolor{comment}{// Create a graph using BuildNetwork}}
+\DoxyCodeLine{                                       maximum\_nodes,}
+\DoxyCodeLine{                                       max\_slope,}
+\DoxyCodeLine{                                       min\_slope,}
+\DoxyCodeLine{                                       node\_spacing,}
+\DoxyCodeLine{                                       max\_step\_height,}
+\DoxyCodeLine{                                       \mbox{\hyperlink{a01101_a73847391cae1bc6c5a0ed5416844ab68}{max\_step\_connection}},}
+\DoxyCodeLine{}
+\DoxyCodeLine{                                       \mbox{\hyperlink{a01101_a16da7abe348f7af1d232867f2d719db1}{core\_count}});}
+\DoxyCodeLine{g.Compress();}
+\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"Graph size "} << g.size() << std::endl;}
 \end{DoxyCode}
- \mbox{\Hypertarget{a01101_ad3f7898ef3178eef0c3579869a7f5c67}\label{a01101_ad3f7898ef3178eef0c3579869a7f5c67}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!directionTo@{directionTo}}
-\index{directionTo@{directionTo}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{directionTo()}{directionTo()}}
-{\footnotesize\ttfamily std\+::array$<$ float, 3 $>$ H\+F\+::\+Spatial\+Structures\+::\+Node\+::direction\+To (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01101}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const}
+ {\ttfamily $>$$>$$>$Graph size 101270} 
 
+Definition at line 20 of file graph\+\_\+generator.\+cpp.
 
 
-Get the direction between this node and another node 
 
+References H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::\+Build\+Network(), core\+\_\+count, downslope, downstep, max\+\_\+nodes, max\+\_\+step\+\_\+connection, spacing, start, upslope, and upstep.
 
-\begin{DoxyParams}{Parameters}
-{\em n2} & The node to get the direction to \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-an array of 3 floats indicating a direction
-\end{DoxyReturn}
 
 
+Referenced by Generate\+Graph().
 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "node.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_0(12.0, 23.1, 34.2, 456);}
-\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_1(45.3, 56.4, 67.5, 789);}
-\DoxyCodeLine{}
-\DoxyCodeLine{std::array<float, 3> direction\_vector = node\_0.directionTo(node\_1);}
-\end{DoxyCode}
- 
 
-Definition at line 130 of file node.\+cpp.
 
+\doxysubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{a01101_aa297d0e5ad99ca27a68edd2a4b1ff75b}\label{a01101_aa297d0e5ad99ca27a68edd2a4b1ff75b}} 
+\index{HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}!GraphGeneratorPrivate@{GraphGeneratorPrivate}}
+\index{GraphGeneratorPrivate@{GraphGeneratorPrivate}!HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{GraphGeneratorPrivate}{GraphGeneratorPrivate}}
+{\footnotesize\ttfamily friend class \mbox{\hyperlink{a01105}{Graph\+Generator\+Private}}\hspace{0.3cm}{\ttfamily [friend]}}
 
 
-References H\+F\+::\+Spatial\+Structures\+::\+Normalize(), x, y, and z.
 
+Private implementation for the graph generator. 
 
 
-Referenced by H\+F\+::\+Analysis\+Methods\+::\+Visibility\+Graph\+::\+Is\+Occlusion\+Between(), and H\+F\+::\+Analysis\+Methods\+::\+Graph\+Generator\+Private\+::\+Occlusion\+Check().
 
-\mbox{\Hypertarget{a01101_abbd66b566460f9557a373b5fbcc30bb1}\label{a01101_abbd66b566460f9557a373b5fbcc30bb1}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!distanceTo@{distanceTo}}
-\index{distanceTo@{distanceTo}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{distanceTo()}{distanceTo()}}
-{\footnotesize\ttfamily float H\+F\+::\+Spatial\+Structures\+::\+Node\+::distance\+To (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01101}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const}
-
-
-
-Calculate the distance between this node and the given node 
-
-
-\begin{DoxyParams}{Parameters}
-{\em n2} & Note to get distance to \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-Distance between this node and n2
-\end{DoxyReturn}
-
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "node.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_0(12.0, 23.1, 34.2, 456);}
-\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_1(45.3, 56.4, 67.5, 789);}
-\DoxyCodeLine{\textcolor{keywordtype}{float} euclidean\_distance = node\_0.distanceTo(node\_1);}
-\end{DoxyCode}
- 
-
-Definition at line 40 of file node.\+cpp.
-
-
-
-References x, y, and z.
-
-
-
-Referenced by H\+F\+::\+Analysis\+Methods\+::\+Visibility\+Graph\+::\+All\+To\+All(), H\+F\+::\+Analysis\+Methods\+::\+Visibility\+Graph\+::\+All\+To\+All\+Undirected(), H\+F\+::\+Analysis\+Methods\+::\+Graph\+Generator\+Private\+::\+Get\+Children(), H\+F\+::\+Analysis\+Methods\+::\+Visibility\+Graph\+::\+Group\+To\+Group(), H\+F\+::\+Analysis\+Methods\+::\+Visibility\+Graph\+::\+Is\+Occlusion\+Between(), and H\+F\+::\+Analysis\+Methods\+::\+Graph\+Generator\+Private\+::\+Occlusion\+Check().
-
-\mbox{\Hypertarget{a01101_a51c4642674d54d02b8600f7ffeb45670}\label{a01101_a51c4642674d54d02b8600f7ffeb45670}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!getArray@{getArray}}
-\index{getArray@{getArray}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{getArray()}{getArray()}}
-{\footnotesize\ttfamily std\+::array$<$ float, 3 $>$ H\+F\+::\+Spatial\+Structures\+::\+Node\+::get\+Array (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
-
-
-
-Returns the x,y,z of this node as an array of 3 floats 
-
-
-\begin{DoxyParams}{Parameters}
-{\em n2} & \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-
-\end{DoxyReturn}
-
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "node.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node(12.0, 23.1, 34.2, 456);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// An array is created from within the getArray() member function}}
-\DoxyCodeLine{std::array<float, 3> arr = node.\mbox{\hyperlink{a01101_a51c4642674d54d02b8600f7ffeb45670}{getArray}}();}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// ref\_arr and ref\_node have the same value, but}}
-\DoxyCodeLine{\textcolor{comment}{// refer to different locations in memory -\/-\/ }}
-\DoxyCodeLine{\textcolor{comment}{// arr does not consist of the same memory locations as}}
-\DoxyCodeLine{\textcolor{comment}{// that of the coordinate fields within node.}}
-\DoxyCodeLine{\textcolor{keywordtype}{float}\& ref\_arr = arr[0];}
-\DoxyCodeLine{\textcolor{keywordtype}{float}\& ref\_node = node.\mbox{\hyperlink{a01101_a78dfebaa44da09b03d7ca15445c8d222}{x}};}
-\end{DoxyCode}
- 
-
-Definition at line 140 of file node.\+cpp.
-
-
-
-References x, y, and z.
-
-\mbox{\Hypertarget{a01101_a6137878845816e2fe8ecbe1215c490fd}\label{a01101_a6137878845816e2fe8ecbe1215c490fd}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator"!=@{operator"!=}}
-\index{operator"!=@{operator"!=}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
-{\footnotesize\ttfamily bool H\+F\+::\+Spatial\+Structures\+::\+Node\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01101}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const}
-
-
-
-See operator==, checks if n1 does N\+OT occupy the same space as n2 
-\begin{DoxyParams}{Parameters}
-{\em n2} & \mbox{\hyperlink{a01101}{Node}} to compare with N1\\
-\hline
-\end{DoxyParams}
-
-
-\begin{DoxyReturn}{Returns}
-True if the distance between n1 and n2 is greater than or equal to Rounding Precision, false otherwise
-\end{DoxyReturn}
-
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "node.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_0(12.0, 23.1, 34.2, 456);}
-\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_1(45.3, 56.4, 67.5, 789);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Does the inverse of operator==.}}
-\DoxyCodeLine{\textcolor{keywordtype}{bool} different\_positions = node\_0 != node\_1;}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordflow}{if} (different\_positions) \{}
-\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Different positions"} << std::endl;}
-\DoxyCodeLine{\} \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Occupies the same space"} << std::endl;}
-\DoxyCodeLine{\}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// different\_positions evaluates to true}}
-\end{DoxyCode}
- 
-
-Definition at line 96 of file node.\+cpp.
-
-
-
-References operator==().
-
-\mbox{\Hypertarget{a01101_a099271bad26dd059037f3c84459058e0}\label{a01101_a099271bad26dd059037f3c84459058e0}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator$\ast$@{operator$\ast$}}
-\index{operator$\ast$@{operator$\ast$}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a01101}{Node}} H\+F\+::\+Spatial\+Structures\+::\+Node\+::operator$\ast$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01101}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const}
-
-
-
-Creates a new node from the dot product of n1, n2 
-
-
-\begin{DoxyParams}{Parameters}
-{\em n2} & Second factor of dot product, N1 (dot) N2\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-A node with the values obtained from the dot product of N1 and N2
-\end{DoxyReturn}
-
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "node.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_0(12.0, 23.1, 34.2, 456);}
-\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_1(45.3, 56.4, 67.5, 789);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_2 = node\_1 * node\_0;}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// node\_2 has values (x = 543.6, y = 1302.84, z = 2308.5, id = -\/1, type = NODE\_TYPE::GRAPH)}}
-\DoxyCodeLine{\textcolor{comment}{// id and type are given default values as per Node::Node(const std::array<float, 3>\& position)}}
-\end{DoxyCode}
- 
-
-Definition at line 113 of file node.\+cpp.
-
-
-
-References Node(), x, y, and z.
-
-\mbox{\Hypertarget{a01101_a064540b380fc6251bdf6d740abf7a169}\label{a01101_a064540b380fc6251bdf6d740abf7a169}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator+@{operator+}}
-\index{operator+@{operator+}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a01101}{Node}} H\+F\+::\+Spatial\+Structures\+::\+Node\+::operator+ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01101}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const}
-
-
-
-Creates a new node from the vector addition of n1, n2 
-
-
-\begin{DoxyParams}{Parameters}
-{\em n2} & \mbox{\hyperlink{a01101}{Node}} to add to n1\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-A node with the values obtained from n1 + n2
-\end{DoxyReturn}
-
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "node.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_0(12.0, 23.1, 34.2, 456);}
-\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_1(45.3, 56.4, 67.5, 789);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_2 = node\_1 + node\_0;}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// node\_2 has values (x = 57.3, y = 79.5, z = 101.7, id = -\/1, type = NODE\_TYPE::GRAPH)}}
-\DoxyCodeLine{\textcolor{comment}{// id and type are given default values as per Node::Node(const std::array<float, 3>\& position)}}
-\end{DoxyCode}
- 
-
-Definition at line 104 of file node.\+cpp.
-
-
-
-References Node(), x, y, and z.
-
-\mbox{\Hypertarget{a01101_ad58a4eb9f0a15c645eedf668d9bcec54}\label{a01101_ad58a4eb9f0a15c645eedf668d9bcec54}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator-\/@{operator-\/}}
-\index{operator-\/@{operator-\/}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a01101}{Node}} H\+F\+::\+Spatial\+Structures\+::\+Node\+::operator-\/ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01101}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const}
-
-
-
-Creates a node from the vector subtraction of n1, n2 
-
-
-\begin{DoxyParams}{Parameters}
-{\em n2} & \mbox{\hyperlink{a01101}{Node}} to subtract from N1\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-A node with the values obtained from n1 -\/ n2
-\end{DoxyReturn}
-
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "node.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_0(12.0, 23.1, 34.2, 456);}
-\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_1(45.3, 56.4, 67.5, 789);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_2 = node\_1 -\/ node\_0;}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// node\_2 has values (x = 33.3, y = 33.3, z = 33.3, id = -\/1, type = NODE\_TYPE::GRAPH)}}
-\DoxyCodeLine{\textcolor{comment}{// id and type are given default values as per Node::Node(const std::array<float, 3>\& position)}}
-\end{DoxyCode}
- 
-
-Definition at line 100 of file node.\+cpp.
-
-
-
-References Node(), x, y, and z.
-
-\mbox{\Hypertarget{a01101_a7547e73076e40bb880261574216e4251}\label{a01101_a7547e73076e40bb880261574216e4251}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator$<$@{operator$<$}}
-\index{operator$<$@{operator$<$}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily bool H\+F\+::\+Spatial\+Structures\+::\+Node\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01101}{Node}} \&}]{n2 }\end{DoxyParamCaption})}
-
-
-
-Determines if n1\textquotesingle{}s id (an integer) is less than n2\textquotesingle{}s id -\/ const qualification omitted for std\+::sort 
-
-
-\begin{DoxyParams}{Parameters}
-{\em n2} & \mbox{\hyperlink{a01101}{Node}} whose id will be compared with n1\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-True if n1\textquotesingle{}s id is less than n2\textquotesingle{}s id, false otherwise
-\end{DoxyReturn}
-
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "node.h", and \#include <algorithm>}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// For this example, we are not concerned about the node coordinates.}}
-\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_0(0.0, 0.0, 0.0, 3);}
-\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_1(0.0, 0.0, 0.0, 1);}
-\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_2(0.0, 0.0, 0.0, 2);}
-\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_3(0.0, 0.0, 0.0, 0);}
-\DoxyCodeLine{}
-\DoxyCodeLine{std::vector<HF::SpatialStructures::Node> vec\{ node\_0, node\_1, node\_2, node\_3 \};}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// operator< sorts Node by ID, in non-\/decreasing order}}
-\DoxyCodeLine{std::sort(vec.begin(), vec.end());  \textcolor{comment}{// uses natural ordering through operator<, non-\/const}}
-\DoxyCodeLine{}
-\DoxyCodeLine{std::vector<HF::SpatialStructures::Node>::iterator it = vec.begin();}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordflow}{while} (it != vec.end()) \{}
-\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Node ID: "} << it-\/>id << std::endl;}
-\DoxyCodeLine{    \(\backslash\)++it;}
-\DoxyCodeLine{\} \textcolor{comment}{// Node ID will print in order by ID, from smallest to largest}}
-\end{DoxyCode}
- 
-
-Definition at line 118 of file node.\+cpp.
-
-
-
-References id.
-
-\mbox{\Hypertarget{a01101_a1d74d883b7291a760908f3dc81783b3d}\label{a01101_a1d74d883b7291a760908f3dc81783b3d}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator$<$@{operator$<$}}
-\index{operator$<$@{operator$<$}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily bool H\+F\+::\+Spatial\+Structures\+::\+Node\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01101}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const}
-
-
-
-Determines if n1\textquotesingle{}s id (an integer) is less than n2\textquotesingle{}s id 
-
-
-\begin{DoxyParams}{Parameters}
-{\em n2} & \mbox{\hyperlink{a01101}{Node}} whose id will be compared with n1\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-True if n1\textquotesingle{}s id is less than n2\textquotesingle{}s id, false otherwise
-\end{DoxyReturn}
-
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "node.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_0(12.0, 23.1, 34.2, 456);}
-\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_1(45.3, 56.4, 67.5, 789);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// operator< compares ID fields of node\_0 and node\_1}}
-\DoxyCodeLine{\textcolor{keywordtype}{bool} compare = node\_0 < node\_1;     \textcolor{comment}{// evaluates to true, since 456 < 789}}
-\end{DoxyCode}
- 
-
-Definition at line 117 of file node.\+cpp.
-
-
-
-References id.
-
-\mbox{\Hypertarget{a01101_a5a3306ea1b8904361b038391718ccc07}\label{a01101_a5a3306ea1b8904361b038391718ccc07}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator=@{operator=}}
-\index{operator=@{operator=}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily void H\+F\+::\+Spatial\+Structures\+::\+Node\+::operator= (\begin{DoxyParamCaption}\item[{const std\+::array$<$ float, 3 $>$ \&}]{n2 }\end{DoxyParamCaption})}
-
-
-
-Assigns the values of array n2 to n1 
-
-
-\begin{DoxyParams}{Parameters}
-{\em n2} & Array whose values will be assigned to n1\\
-\hline
-\end{DoxyParams}
-
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// Note: This member function is not defined in node.cpp (commented out)}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "node.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node(12.0, 23.1, 34.2);}
-\DoxyCodeLine{std::array<float, 3> position = \{ 45.3, 56.4, 67.5 \};}
-\DoxyCodeLine{}
-\DoxyCodeLine{node = position;            \textcolor{comment}{// assigns node's x, y, z fields to that of position's values}}
-\end{DoxyCode}
- \mbox{\Hypertarget{a01101_af687c2e97fffe3b7d14e3cfa8af3e5cd}\label{a01101_af687c2e97fffe3b7d14e3cfa8af3e5cd}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator==@{operator==}}
-\index{operator==@{operator==}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
-{\footnotesize\ttfamily bool H\+F\+::\+Spatial\+Structures\+::\+Node\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01101}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const}
-
-
-
-Check if n1 occupies the same space as n2 
-
-
-\begin{DoxyParams}{Parameters}
-{\em n2} & \mbox{\hyperlink{a01101}{Node}} to compare with n1\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-True if the distance between n1 and n2 is less than Rounding Precision, false otherwise
-\end{DoxyReturn}
-
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "node.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_0(12.0, 23.1, 34.2, 456);}
-\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_1(45.3, 56.4, 67.5, 789);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordtype}{bool} same\_position = node\_0 == node\_1;}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordflow}{if} (same\_position) \{}
-\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Occupies the same space"} << std::endl;}
-\DoxyCodeLine{\} \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Different positions"} << std::endl;}
-\DoxyCodeLine{\}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// same\_position evaluates to false}}
-\end{DoxyCode}
- 
-
-Definition at line 83 of file node.\+cpp.
-
-
-
-References H\+F\+::\+Spatial\+Structures\+::\+R\+O\+U\+N\+D\+I\+N\+G\+\_\+\+P\+R\+E\+C\+I\+S\+I\+ON, x, y, and z.
-
-
-
-Referenced by operator!=().
-
-\mbox{\Hypertarget{a01101_a9d67cccc8b0fc57d61390da493149790}\label{a01101_a9d67cccc8b0fc57d61390da493149790}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator$>$@{operator$>$}}
-\index{operator$>$@{operator$>$}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{operator$>$()}{operator>()}}
-{\footnotesize\ttfamily bool H\+F\+::\+Spatial\+Structures\+::\+Node\+::operator$>$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01101}{Node}} \&}]{n2 }\end{DoxyParamCaption}) const}
-
-
-
-Determines if n1\textquotesingle{}s id (an integer) is greater than n2\textquotesingle{}s id 
-
-
-\begin{DoxyParams}{Parameters}
-{\em n2} & \mbox{\hyperlink{a01101}{Node}} whose id will be compared with n1\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-True if n1\textquotesingle{}s id is greater than n2\textquotesingle{}s id, false otherwise
-\end{DoxyReturn}
-
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "node.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_0(12.0, 23.1, 34.2, 456);}
-\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node\_1(45.3, 56.4, 67.5, 789);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// operator< compares ID fields of node\_0 and node\_1}}
-\DoxyCodeLine{\textcolor{keywordtype}{bool} compare = node\_0 > node\_1; \textcolor{comment}{// evaluates to false, since 456 < 789}}
-\end{DoxyCode}
- 
-
-Definition at line 119 of file node.\+cpp.
-
-
-
-References id.
-
-\mbox{\Hypertarget{a01101_a556efc898ddc67b64fff560d0c7b5a0a}\label{a01101_a556efc898ddc67b64fff560d0c7b5a0a}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator\mbox{[}\mbox{]}@{operator[]}}
-\index{operator\mbox{[}\mbox{]}@{operator[]}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily float \& H\+F\+::\+Spatial\+Structures\+::\+Node\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})}
-
-
-
-Directly access a nodes\textquotesingle{}s position as if it were an array of 3 floats 
-
-
-\begin{DoxyParams}{Parameters}
-{\em i} & Index. 0 = x, 1 = y, 2 = z\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-a reference to the member float for the requested coordinate
-\end{DoxyReturn}
-
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "node.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node(12.0, 23.1, 34.2, 456);    \textcolor{comment}{// (x, y, z), ID}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordtype}{float}\& position = node[1];          \textcolor{comment}{// access by reference}}
-\DoxyCodeLine{position = 93.5;                    \textcolor{comment}{// node.y is now 93.5}}
-\end{DoxyCode}
- 
-
-Definition at line 51 of file node.\+cpp.
-
-
-
-References x, y, and z.
-
-\mbox{\Hypertarget{a01101_ae3e88bd4eecfdbd93431953ed07b8a7b}\label{a01101_ae3e88bd4eecfdbd93431953ed07b8a7b}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!operator\mbox{[}\mbox{]}@{operator[]}}
-\index{operator\mbox{[}\mbox{]}@{operator[]}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily float H\+F\+::\+Spatial\+Structures\+::\+Node\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption}) const}
-
-
-
-Access a nodes\textquotesingle{}s position, by value 
-
-
-\begin{DoxyParams}{Parameters}
-{\em i} & Index. 0 = x, 1 = y, 2 = z\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-the value (copy) of the member float for the requested coordinate
-\end{DoxyReturn}
-
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "node.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a01101}{HF::SpatialStructures::Node}} node(12.0, 23.1, 34.2, 456);    \textcolor{comment}{// (x, y, z), ID}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordtype}{float} position = node[1];           \textcolor{comment}{// access by reference}}
-\DoxyCodeLine{position = 93.5                     \textcolor{comment}{// node.y is still 23.1}}
-\end{DoxyCode}
- 
-
-Definition at line 67 of file node.\+cpp.
-
-
-
-References x, y, and z.
+Definition at line 91 of file graph\+\_\+generator.\+h.
 
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{a01101_a8212d00e6913abf0ca6fec1f2624b677}\label{a01101_a8212d00e6913abf0ca6fec1f2624b677}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!id@{id}}
-\index{id@{id}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{id}{id}}
-{\footnotesize\ttfamily int H\+F\+::\+Spatial\+Structures\+::\+Node\+::id}
+\mbox{\Hypertarget{a01101_a16da7abe348f7af1d232867f2d719db1}\label{a01101_a16da7abe348f7af1d232867f2d719db1}} 
+\index{HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}!core\_count@{core\_count}}
+\index{core\_count@{core\_count}!HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{core\_count}{core\_count}}
+{\footnotesize\ttfamily int H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::core\+\_\+count\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-\mbox{\hyperlink{a01101}{Node}} identifier. 
+Number of cores to use in parallel. 
 
 
 
-Definition at line 32 of file node.\+h.
+Definition at line 76 of file graph\+\_\+generator.\+h.
 
 
 
-Referenced by operator$<$(), and operator$>$().
+Referenced by Build\+Network(), and H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::\+Build\+Network().
 
-\mbox{\Hypertarget{a01101_a3894a51f72b82cea2d6675a91fcb39cf}\label{a01101_a3894a51f72b82cea2d6675a91fcb39cf}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!type@{type}}
-\index{type@{type}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{type}{type}}
-{\footnotesize\ttfamily short H\+F\+::\+Spatial\+Structures\+::\+Node\+::type = \mbox{\hyperlink{a00174_aa8ecd83cd353318532d791fc819343cca5c2876be9857d3e0192c9e1cb3797bf8}{G\+R\+A\+PH}}}
-
-
-
-Default this field to G\+R\+A\+PH. 
+\mbox{\Hypertarget{a01101_a2cbc45046a831656d0a84003df187a6e}\label{a01101_a2cbc45046a831656d0a84003df187a6e}} 
+\index{HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}!downslope@{downslope}}
+\index{downslope@{downslope}!HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{downslope}{downslope}}
+{\footnotesize\ttfamily float H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::downslope\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 31 of file node.\+h.
+Maximum downard slope in degrees that can be considered accessible. 
 
 
 
-Referenced by Node().
-
-\mbox{\Hypertarget{a01101_a78dfebaa44da09b03d7ca15445c8d222}\label{a01101_a78dfebaa44da09b03d7ca15445c8d222}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!x@{x}}
-\index{x@{x}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{x}{x}}
-{\footnotesize\ttfamily float H\+F\+::\+Spatial\+Structures\+::\+Node\+::x}
+Definition at line 83 of file graph\+\_\+generator.\+h.
 
 
 
-Definition at line 30 of file node.\+h.
+Referenced by Build\+Network(), and H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::is\+Up\+Slope().
+
+\mbox{\Hypertarget{a01101_a1a7fd22576b53f4b63ab92f4f7112006}\label{a01101_a1a7fd22576b53f4b63ab92f4f7112006}} 
+\index{HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}!downstep@{downstep}}
+\index{downstep@{downstep}!HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{downstep}{downstep}}
+{\footnotesize\ttfamily float H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::downstep\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Referenced by direction\+To(), distance\+To(), get\+Array(), H\+F\+::\+Analysis\+Methods\+::\+Graph\+Generator\+Private\+::is\+Up\+Slope(), Node(), H\+F\+::\+Analysis\+Methods\+::\+Graph\+Generator\+Private\+::\+Occlusion\+Check(), operator$\ast$(), operator+(), operator-\/(), std\+::operator$<$$<$(), operator==(), and operator\mbox{[}$\,$\mbox{]}().
-
-\mbox{\Hypertarget{a01101_a41981fb2cc6dc0edb787f921188702b0}\label{a01101_a41981fb2cc6dc0edb787f921188702b0}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!y@{y}}
-\index{y@{y}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{y}{y}}
-{\footnotesize\ttfamily float H\+F\+::\+Spatial\+Structures\+::\+Node\+::y}
+Maximum step down that can be considered accessible. 
 
 
 
-Definition at line 30 of file node.\+h.
+Definition at line 81 of file graph\+\_\+generator.\+h.
 
 
 
-Referenced by direction\+To(), distance\+To(), get\+Array(), H\+F\+::\+Analysis\+Methods\+::\+Graph\+Generator\+Private\+::is\+Up\+Slope(), Node(), H\+F\+::\+Analysis\+Methods\+::\+Graph\+Generator\+Private\+::\+Occlusion\+Check(), operator$\ast$(), operator+(), operator-\/(), std\+::operator$<$$<$(), operator==(), and operator\mbox{[}$\,$\mbox{]}().
+Referenced by Build\+Network(), H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::\+Check\+Children(), and H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::\+Check\+Connection().
 
-\mbox{\Hypertarget{a01101_a495b47689917e0395ce96ee01d3f5ed3}\label{a01101_a495b47689917e0395ce96ee01d3f5ed3}} 
-\index{HF::SpatialStructures::Node@{HF::SpatialStructures::Node}!z@{z}}
-\index{z@{z}!HF::SpatialStructures::Node@{HF::SpatialStructures::Node}}
-\doxysubsubsection{\texorpdfstring{z}{z}}
-{\footnotesize\ttfamily float H\+F\+::\+Spatial\+Structures\+::\+Node\+::z}
-
-
-
-Cartesian coordinates x, y, z. 
+\mbox{\Hypertarget{a01101_a3bdee503345645ede58132833b4803e6}\label{a01101_a3bdee503345645ede58132833b4803e6}} 
+\index{HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}!floor\_offset@{floor\_offset}}
+\index{floor\_offset@{floor\_offset}!HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{floor\_offset}{floor\_offset}}
+{\footnotesize\ttfamily float H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::floor\+\_\+offset\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 30 of file node.\+h.
+Unused. 
 
 
 
-Referenced by H\+F\+::\+Analysis\+Methods\+::\+Graph\+Generator\+Private\+::\+Check\+Floor(), direction\+To(), distance\+To(), get\+Array(), H\+F\+::\+Analysis\+Methods\+::\+Graph\+Generator\+Private\+::is\+Up\+Slope(), Node(), H\+F\+::\+Analysis\+Methods\+::\+Graph\+Generator\+Private\+::\+Occlusion\+Check(), operator$\ast$(), operator+(), operator-\/(), std\+::operator$<$$<$(), operator==(), and operator\mbox{[}$\,$\mbox{]}().
+Definition at line 86 of file graph\+\_\+generator.\+h.
+
+\mbox{\Hypertarget{a01101_a6afac9c527d8483943ef61e9e9a1ca15}\label{a01101_a6afac9c527d8483943ef61e9e9a1ca15}} 
+\index{HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}!max\_nodes@{max\_nodes}}
+\index{max\_nodes@{max\_nodes}!HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{max\_nodes}{max\_nodes}}
+{\footnotesize\ttfamily int H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::max\+\_\+nodes\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+Maximum number of nodes to generate. If less than zero, generate nodes without a limit. 
+
+
+
+Definition at line 89 of file graph\+\_\+generator.\+h.
+
+
+
+Referenced by Build\+Network(), H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::\+Crawl\+Geom(), and H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::\+Crawl\+Geom\+Parallel().
+
+\mbox{\Hypertarget{a01101_a73847391cae1bc6c5a0ed5416844ab68}\label{a01101_a73847391cae1bc6c5a0ed5416844ab68}} 
+\index{HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}!max\_step\_connection@{max\_step\_connection}}
+\index{max\_step\_connection@{max\_step\_connection}!HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{max\_step\_connection}{max\_step\_connection}}
+{\footnotesize\ttfamily int H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::max\+\_\+step\+\_\+connection\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Multiplier for children to generate from a single parent node. 
+
+
+
+Definition at line 87 of file graph\+\_\+generator.\+h.
+
+
+
+Referenced by Build\+Network(), H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::\+Crawl\+Geom(), and H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::\+Crawl\+Geom\+Parallel().
+
+\mbox{\Hypertarget{a01101_a455de4cc964be74f8ad7622bdc20796a}\label{a01101_a455de4cc964be74f8ad7622bdc20796a}} 
+\index{HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}!obstacle\_surfaces@{obstacle\_surfaces}}
+\index{obstacle\_surfaces@{obstacle\_surfaces}!HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{obstacle\_surfaces}{obstacle\_surfaces}}
+{\footnotesize\ttfamily int H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::obstacle\+\_\+surfaces\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Corresponds to the meshid of obstacle surfaces in the Raytracer (Unused) 
+
+
+
+Definition at line 75 of file graph\+\_\+generator.\+h.
+
+\mbox{\Hypertarget{a01101_a6e3a66ea1b5b1325bdf082e7fee7f47e}\label{a01101_a6e3a66ea1b5b1325bdf082e7fee7f47e}} 
+\index{HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}!ray\_tracer@{ray\_tracer}}
+\index{ray\_tracer@{ray\_tracer}!HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{ray\_tracer}{ray\_tracer}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01165}{Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::ray\+\_\+tracer\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Raytracer to use for all intersections. 
+
+
+
+Definition at line 77 of file graph\+\_\+generator.\+h.
+
+
+
+Referenced by H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::\+Check\+Ray(), Graph\+Generator(), and H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::\+Occlusion\+Check().
+
+\mbox{\Hypertarget{a01101_ac68ce8f1034d1e4afdbcade8d4206612}\label{a01101_ac68ce8f1034d1e4afdbcade8d4206612}} 
+\index{HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}!spacing@{spacing}}
+\index{spacing@{spacing}!HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{spacing}{spacing}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00276_a8c29578574c275e66fbd439be62c125e}{v3}} H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::spacing\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Spacing between nodes. 
+
+
+
+Definition at line 78 of file graph\+\_\+generator.\+h.
+
+
+
+Referenced by Build\+Network(), and H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::\+Generate\+Potential\+Children().
+
+\mbox{\Hypertarget{a01101_af9e53ca26e8a4f7d43b7b353bd4f4846}\label{a01101_af9e53ca26e8a4f7d43b7b353bd4f4846}} 
+\index{HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}!start@{start}}
+\index{start@{start}!HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{start}{start}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00276_a8c29578574c275e66fbd439be62c125e}{v3}} H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::start\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Start point for graph generation. 
+
+
+
+Definition at line 79 of file graph\+\_\+generator.\+h.
+
+
+
+Referenced by Build\+Network(), and H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::\+Build\+Network().
+
+\mbox{\Hypertarget{a01101_ada6726b2b1551bf8add26c18229bed96}\label{a01101_ada6726b2b1551bf8add26c18229bed96}} 
+\index{HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}!step\_height@{step\_height}}
+\index{step\_height@{step\_height}!HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{step\_height}{step\_height}}
+{\footnotesize\ttfamily float H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::step\+\_\+height\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Unused. 
+
+
+
+Definition at line 85 of file graph\+\_\+generator.\+h.
+
+\mbox{\Hypertarget{a01101_a3bf8f31f3192dad1db49abd03e3a2503}\label{a01101_a3bf8f31f3192dad1db49abd03e3a2503}} 
+\index{HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}!upslope@{upslope}}
+\index{upslope@{upslope}!HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{upslope}{upslope}}
+{\footnotesize\ttfamily float H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::upslope\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Maximum upward slope in degrees that can be considered accessible. 
+
+
+
+Definition at line 82 of file graph\+\_\+generator.\+h.
+
+
+
+Referenced by Build\+Network(), and H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::is\+Up\+Slope().
+
+\mbox{\Hypertarget{a01101_a161d82b678c4ca4dc94eae851602fb08}\label{a01101_a161d82b678c4ca4dc94eae851602fb08}} 
+\index{HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}!upstep@{upstep}}
+\index{upstep@{upstep}!HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{upstep}{upstep}}
+{\footnotesize\ttfamily float H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::upstep\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Maximum upward step that can be considered accessible. 
+
+
+
+Definition at line 84 of file graph\+\_\+generator.\+h.
+
+
+
+Referenced by Build\+Network(), H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::\+Check\+Children(), and H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::\+Check\+Connection().
+
+\mbox{\Hypertarget{a01101_a385e9a4d690cadb978d4ab4cb5185cd6}\label{a01101_a385e9a4d690cadb978d4ab4cb5185cd6}} 
+\index{HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}!walkable\_surfaces@{walkable\_surfaces}}
+\index{walkable\_surfaces@{walkable\_surfaces}!HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{walkable\_surfaces}{walkable\_surfaces}}
+{\footnotesize\ttfamily int H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::walkable\+\_\+surfaces\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Corresponds to the mesh\+ID of walkable surfaces in the Raytracer (Unused) 
+
+
+
+Definition at line 74 of file graph\+\_\+generator.\+h.
+
+
+
+Referenced by H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::\+Check\+Ray().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-Cpp/spatialstructures/src/\mbox{\hyperlink{a00104}{node.\+h}}\item 
-Cpp/spatialstructures/src/\mbox{\hyperlink{a01396}{node.\+cpp}}\end{DoxyCompactItemize}
+Cpp/analysismethods/src/\mbox{\hyperlink{a00008}{graph\+\_\+generator.\+h}}\item 
+Cpp/analysismethods/src/\mbox{\hyperlink{a00005}{graph\+\_\+generator.\+cpp}}\end{DoxyCompactItemize}

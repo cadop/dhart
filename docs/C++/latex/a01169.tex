@@ -1,0 +1,288 @@
+\hypertarget{a01169}{}\doxysection{HF\+::Ray\+Tracer\+::Full\+Ray\+Request Struct Reference}
+\label{a01169}\index{HF::RayTracer::FullRayRequest@{HF::RayTracer::FullRayRequest}}
+
+
+{\ttfamily \#include $<$Ray\+Request.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01169_a4f92e6cd7a91b65f12781eab6d8bad41}{Full\+Ray\+Request}} (float \mbox{\hyperlink{a01169_af1dd2557d9f2d048ff3af3776b796b4f}{x}}, float \mbox{\hyperlink{a01169_aa848157a3963087e703bf06a464501ad}{y}}, float \mbox{\hyperlink{a01169_a4017ea4eabf58a540096a913a26ce987}{z}}, float \mbox{\hyperlink{a01169_ae16f679ab21a1da3d3cd9bd919f36d22}{dx}}, float \mbox{\hyperlink{a01169_a5e8b14757b7508fedc33c9431f1b469f}{dy}}, float \mbox{\hyperlink{a01169_a498547060a53ede34687e03f0e6b47bd}{dz}}, float Distance=-\/1)
+\begin{DoxyCompactList}\small\item\em Constructs a \mbox{\hyperlink{a01169}{Full\+Ray\+Request}} from origin points (x, y, z) and destination points (dx, dy, dz), as well as a starting distance for the ray. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01169_ae96c4c944750f00e950f134cd7838619}{Full\+Ray\+Request}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor, empty code block. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01169_a348484c556eccae394520f01ce65ec31}{did\+Hit}} ()
+\begin{DoxyCompactList}\small\item\em Tells if the rayrequest it or not. If true, the hit was successful, false otherwise. Rays that weren\textquotesingle{}t fired yet are considered as not hitting. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{a01169_af1dd2557d9f2d048ff3af3776b796b4f}{x}}
+\item 
+float \mbox{\hyperlink{a01169_aa848157a3963087e703bf06a464501ad}{y}}
+\item 
+float \mbox{\hyperlink{a01169_a4017ea4eabf58a540096a913a26ce987}{z}}
+\begin{DoxyCompactList}\small\item\em X, Y, and Z origin points. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{a01169_ae16f679ab21a1da3d3cd9bd919f36d22}{dx}}
+\item 
+float \mbox{\hyperlink{a01169_a5e8b14757b7508fedc33c9431f1b469f}{dy}}
+\item 
+float \mbox{\hyperlink{a01169_a498547060a53ede34687e03f0e6b47bd}{dz}}
+\begin{DoxyCompactList}\small\item\em X, Y and Z direction to fire the ray in. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01169_af6cccf4f2ebdcba8c0a30d8d1f233b78}{was\+\_\+fired}} = false
+\begin{DoxyCompactList}\small\item\em Whether this ray was fired or not. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{a01169_ace83a6bcb8c585a5067c10f9f79a0367}{distance}} = -\/1
+\begin{DoxyCompactList}\small\item\em Before firing\+: the maximum distance of the ray. After firing\+: distance to the hitpoint or -\/9999 on miss. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{a01169_a3929b4488920b8495b98e1f298c0bf27}{mesh\+\_\+id}} = -\/1
+\begin{DoxyCompactList}\small\item\em The ID of the hit mesh. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 13 of file Ray\+Request.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{a01169_a4f92e6cd7a91b65f12781eab6d8bad41}\label{a01169_a4f92e6cd7a91b65f12781eab6d8bad41}} 
+\index{HF::RayTracer::FullRayRequest@{HF::RayTracer::FullRayRequest}!FullRayRequest@{FullRayRequest}}
+\index{FullRayRequest@{FullRayRequest}!HF::RayTracer::FullRayRequest@{HF::RayTracer::FullRayRequest}}
+\doxysubsubsection{\texorpdfstring{FullRayRequest()}{FullRayRequest()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily H\+F\+::\+Ray\+Tracer\+::\+Full\+Ray\+Request\+::\+Full\+Ray\+Request (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{float}]{z,  }\item[{float}]{dx,  }\item[{float}]{dy,  }\item[{float}]{dz,  }\item[{float}]{Distance = {\ttfamily -\/1} }\end{DoxyParamCaption})}
+
+
+
+Constructs a \mbox{\hyperlink{a01169}{Full\+Ray\+Request}} from origin points (x, y, z) and destination points (dx, dy, dz), as well as a starting distance for the ray. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The x origin coordinate\\
+\hline
+{\em y} & The y origin coordinate\\
+\hline
+{\em z} & The z origin coordinate\\
+\hline
+{\em dx} & The x destination coordinate\\
+\hline
+{\em dy} & The y destination coordinate\\
+\hline
+{\em dz} & The z destination coordinate\\
+\hline
+{\em Distance} & The maximum distance of the ray (upon construction)\\
+\hline
+\end{DoxyParams}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "RayRequest.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// For brevity}}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01169}{HF::RayTracer::FullRayRequest}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Prepare FullRayRequest's parameters}}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} x\_in = 0.0;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} y\_in = 0.0;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} z\_in = 0.0;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} dx\_in = 1.0;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} dy\_in = 1.0;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} dz\_in = 2.0;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} distance\_in = 10.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the FullRayRequest}}
+\DoxyCodeLine{\mbox{\hyperlink{a01169_ae96c4c944750f00e950f134cd7838619}{FullRayRequest}} request(x\_in, y\_in, z\_in, dx\_in, dy\_in, dz\_in, distance\_in);}
+\end{DoxyCode}
+ 
+
+Definition at line 10 of file Ray\+Request.\+cpp.
+
+\mbox{\Hypertarget{a01169_ae96c4c944750f00e950f134cd7838619}\label{a01169_ae96c4c944750f00e950f134cd7838619}} 
+\index{HF::RayTracer::FullRayRequest@{HF::RayTracer::FullRayRequest}!FullRayRequest@{FullRayRequest}}
+\index{FullRayRequest@{FullRayRequest}!HF::RayTracer::FullRayRequest@{HF::RayTracer::FullRayRequest}}
+\doxysubsubsection{\texorpdfstring{FullRayRequest()}{FullRayRequest()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily H\+F\+::\+Ray\+Tracer\+::\+Full\+Ray\+Request\+::\+Full\+Ray\+Request (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor, empty code block. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "RayRequest.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// For brevity}}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01169}{HF::RayTracer::FullRayRequest}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the FullRayRequest (no arguments)}}
+\DoxyCodeLine{\mbox{\hyperlink{a01169_ae96c4c944750f00e950f134cd7838619}{FullRayRequest}} request;}
+\end{DoxyCode}
+ 
+
+Definition at line 72 of file Ray\+Request.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a01169_a348484c556eccae394520f01ce65ec31}\label{a01169_a348484c556eccae394520f01ce65ec31}} 
+\index{HF::RayTracer::FullRayRequest@{HF::RayTracer::FullRayRequest}!didHit@{didHit}}
+\index{didHit@{didHit}!HF::RayTracer::FullRayRequest@{HF::RayTracer::FullRayRequest}}
+\doxysubsubsection{\texorpdfstring{didHit()}{didHit()}}
+{\footnotesize\ttfamily bool H\+F\+::\+Ray\+Tracer\+::\+Full\+Ray\+Request\+::did\+Hit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Tells if the rayrequest it or not. If true, the hit was successful, false otherwise. Rays that weren\textquotesingle{}t fired yet are considered as not hitting. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "RayRequest.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// For brevity}}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a01169}{HF::RayTracer::FullRayRequest}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Prepare FullRayRequest's parameters}}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} x\_in = 0.0;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} y\_in = 0.0;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} z\_in = 0.0;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} dx\_in = 1.0;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} dy\_in = 1.0;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} dz\_in = 2.0;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} distance\_in = 10.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the FullRayRequest}}
+\DoxyCodeLine{\mbox{\hyperlink{a01169_ae96c4c944750f00e950f134cd7838619}{FullRayRequest}} request(x\_in, y\_in, z\_in, dx\_in, dy\_in, dz\_in, distance\_in);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Use didHit}}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (request.didHit()) \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Hit"} << std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Miss"} << std::endl;}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+{\ttfamily $>$$>$$>$Miss}~\newline
+
+
+Definition at line 13 of file Ray\+Request.\+cpp.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01169_ace83a6bcb8c585a5067c10f9f79a0367}\label{a01169_ace83a6bcb8c585a5067c10f9f79a0367}} 
+\index{HF::RayTracer::FullRayRequest@{HF::RayTracer::FullRayRequest}!distance@{distance}}
+\index{distance@{distance}!HF::RayTracer::FullRayRequest@{HF::RayTracer::FullRayRequest}}
+\doxysubsubsection{\texorpdfstring{distance}{distance}}
+{\footnotesize\ttfamily float H\+F\+::\+Ray\+Tracer\+::\+Full\+Ray\+Request\+::distance = -\/1}
+
+
+
+Before firing\+: the maximum distance of the ray. After firing\+: distance to the hitpoint or -\/9999 on miss. 
+
+
+
+Definition at line 17 of file Ray\+Request.\+h.
+
+\mbox{\Hypertarget{a01169_ae16f679ab21a1da3d3cd9bd919f36d22}\label{a01169_ae16f679ab21a1da3d3cd9bd919f36d22}} 
+\index{HF::RayTracer::FullRayRequest@{HF::RayTracer::FullRayRequest}!dx@{dx}}
+\index{dx@{dx}!HF::RayTracer::FullRayRequest@{HF::RayTracer::FullRayRequest}}
+\doxysubsubsection{\texorpdfstring{dx}{dx}}
+{\footnotesize\ttfamily float H\+F\+::\+Ray\+Tracer\+::\+Full\+Ray\+Request\+::dx}
+
+
+
+Definition at line 15 of file Ray\+Request.\+h.
+
+\mbox{\Hypertarget{a01169_a5e8b14757b7508fedc33c9431f1b469f}\label{a01169_a5e8b14757b7508fedc33c9431f1b469f}} 
+\index{HF::RayTracer::FullRayRequest@{HF::RayTracer::FullRayRequest}!dy@{dy}}
+\index{dy@{dy}!HF::RayTracer::FullRayRequest@{HF::RayTracer::FullRayRequest}}
+\doxysubsubsection{\texorpdfstring{dy}{dy}}
+{\footnotesize\ttfamily float H\+F\+::\+Ray\+Tracer\+::\+Full\+Ray\+Request\+::dy}
+
+
+
+Definition at line 15 of file Ray\+Request.\+h.
+
+\mbox{\Hypertarget{a01169_a498547060a53ede34687e03f0e6b47bd}\label{a01169_a498547060a53ede34687e03f0e6b47bd}} 
+\index{HF::RayTracer::FullRayRequest@{HF::RayTracer::FullRayRequest}!dz@{dz}}
+\index{dz@{dz}!HF::RayTracer::FullRayRequest@{HF::RayTracer::FullRayRequest}}
+\doxysubsubsection{\texorpdfstring{dz}{dz}}
+{\footnotesize\ttfamily float H\+F\+::\+Ray\+Tracer\+::\+Full\+Ray\+Request\+::dz}
+
+
+
+X, Y and Z direction to fire the ray in. 
+
+
+
+Definition at line 15 of file Ray\+Request.\+h.
+
+\mbox{\Hypertarget{a01169_a3929b4488920b8495b98e1f298c0bf27}\label{a01169_a3929b4488920b8495b98e1f298c0bf27}} 
+\index{HF::RayTracer::FullRayRequest@{HF::RayTracer::FullRayRequest}!mesh\_id@{mesh\_id}}
+\index{mesh\_id@{mesh\_id}!HF::RayTracer::FullRayRequest@{HF::RayTracer::FullRayRequest}}
+\doxysubsubsection{\texorpdfstring{mesh\_id}{mesh\_id}}
+{\footnotesize\ttfamily int H\+F\+::\+Ray\+Tracer\+::\+Full\+Ray\+Request\+::mesh\+\_\+id = -\/1}
+
+
+
+The ID of the hit mesh. 
+
+
+
+Definition at line 18 of file Ray\+Request.\+h.
+
+\mbox{\Hypertarget{a01169_af6cccf4f2ebdcba8c0a30d8d1f233b78}\label{a01169_af6cccf4f2ebdcba8c0a30d8d1f233b78}} 
+\index{HF::RayTracer::FullRayRequest@{HF::RayTracer::FullRayRequest}!was\_fired@{was\_fired}}
+\index{was\_fired@{was\_fired}!HF::RayTracer::FullRayRequest@{HF::RayTracer::FullRayRequest}}
+\doxysubsubsection{\texorpdfstring{was\_fired}{was\_fired}}
+{\footnotesize\ttfamily bool H\+F\+::\+Ray\+Tracer\+::\+Full\+Ray\+Request\+::was\+\_\+fired = false}
+
+
+
+Whether this ray was fired or not. 
+
+
+
+Definition at line 16 of file Ray\+Request.\+h.
+
+\mbox{\Hypertarget{a01169_af1dd2557d9f2d048ff3af3776b796b4f}\label{a01169_af1dd2557d9f2d048ff3af3776b796b4f}} 
+\index{HF::RayTracer::FullRayRequest@{HF::RayTracer::FullRayRequest}!x@{x}}
+\index{x@{x}!HF::RayTracer::FullRayRequest@{HF::RayTracer::FullRayRequest}}
+\doxysubsubsection{\texorpdfstring{x}{x}}
+{\footnotesize\ttfamily float H\+F\+::\+Ray\+Tracer\+::\+Full\+Ray\+Request\+::x}
+
+
+
+Definition at line 14 of file Ray\+Request.\+h.
+
+\mbox{\Hypertarget{a01169_aa848157a3963087e703bf06a464501ad}\label{a01169_aa848157a3963087e703bf06a464501ad}} 
+\index{HF::RayTracer::FullRayRequest@{HF::RayTracer::FullRayRequest}!y@{y}}
+\index{y@{y}!HF::RayTracer::FullRayRequest@{HF::RayTracer::FullRayRequest}}
+\doxysubsubsection{\texorpdfstring{y}{y}}
+{\footnotesize\ttfamily float H\+F\+::\+Ray\+Tracer\+::\+Full\+Ray\+Request\+::y}
+
+
+
+Definition at line 14 of file Ray\+Request.\+h.
+
+\mbox{\Hypertarget{a01169_a4017ea4eabf58a540096a913a26ce987}\label{a01169_a4017ea4eabf58a540096a913a26ce987}} 
+\index{HF::RayTracer::FullRayRequest@{HF::RayTracer::FullRayRequest}!z@{z}}
+\index{z@{z}!HF::RayTracer::FullRayRequest@{HF::RayTracer::FullRayRequest}}
+\doxysubsubsection{\texorpdfstring{z}{z}}
+{\footnotesize\ttfamily float H\+F\+::\+Ray\+Tracer\+::\+Full\+Ray\+Request\+::z}
+
+
+
+X, Y, and Z origin points. 
+
+
+
+Definition at line 14 of file Ray\+Request.\+h.
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/raytracer/src/\mbox{\hyperlink{a00128}{Ray\+Request.\+h}}\item 
+Cpp/raytracer/src/\mbox{\hyperlink{a00125}{Ray\+Request.\+cpp}}\end{DoxyCompactItemize}

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Analysis: HF::SpatialStructures Namespace Reference</title>
+<title>Analysis: HF::GraphGenerator Namespace Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,391 +61,147 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00273.html">HF</a></li><li class="navelem"><a class="el" href="a00276.html">SpatialStructures</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00275.html">HF</a></li><li class="navelem"><a class="el" href="a00276.html">GraphGenerator</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">HF::SpatialStructures Namespace Reference</div>  </div>
+<div class="title">HF::GraphGenerator Namespace Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Contains standard fundamental data structures for representing space used throughout HumanFactors.  
+<p>Generate a graph of accessible space from a given start point.  
 <a href="a00276.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01195.html">CSRPtrs</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A struct to hold all necessary information for a CSR.  <a href="a01195.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01101.html">GraphGenerator</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a graph of accessible space from a given start point.  <a href="a01101.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01183.html">Edge</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A connection to a child node.  <a href="a01183.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01105.html">GraphGeneratorPrivate</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains the private implementation of the <a class="el" href="a01101.html" title="Generate a graph of accessible space from a given start point.">GraphGenerator</a> to insulate the clients from the implementation.  <a href="a01105.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01191"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00276.html#a01191">EdgeSet</a></td></tr>
-<tr class="memdesc:a01191"><td class="mdescLeft">&#160;</td><td class="mdescRight">A collection of edges and a parent.  <a href="a00276.html#a01191">More...</a><br /></td></tr>
-<tr class="separator:a01191"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01199.html">Graph</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A <a class="el" href="a01199.html" title="A Graph of nodes connected by edges that supports both integers and HF::SpatialStructures::Node.">Graph</a> of nodes connected by edges that supports both integers and <a class="el" href="a01203.html" title="A point in space with an ID.">HF::SpatialStructures::Node</a>.  <a href="a01199.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01109.html">UniqueQueue</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A queue that remembers every object inserted, and prevents the addition of nodes that have already been inserted even if they've been popped.  <a href="a01109.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01187"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00276.html#a01187">IntEdge</a></td></tr>
-<tr class="memdesc:a01187"><td class="mdescLeft">&#160;</td><td class="mdescRight">A lighter version of <a class="el" href="a01183.html" title="A connection to a child node.">Edge</a> that contains an ID instead of a full node object..  <a href="a00276.html#a01187">More...</a><br /></td></tr>
-<tr class="separator:a01187"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01203.html">Node</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A point in space with an ID.  <a href="a01203.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01215.html">Path</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A collection of nodes that form a path.  <a href="a01215.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html">PathMember</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ID of a node, and the cost cost to the node after it.  <a href="a01211.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a8c29578574c275e66fbd439be62c125e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00276.html#a8c29578574c275e66fbd439be62c125e">v3</a> = std::array&lt; float, 3 &gt;</td></tr>
+<tr class="separator:a8c29578574c275e66fbd439be62c125e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:af0378d900074d484ba791d4317e5935e"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00276.html#af0378d900074d484ba791d4317e5935e">STEP</a> { <br />
-&#160;&#160;<a class="el" href="a00276.html#af0378d900074d484ba791d4317e5935ea7a2b5bf64195a97a6b132bf9c58d0bf9">NOT_CONNECTED</a> = 0, 
-<a class="el" href="a00276.html#af0378d900074d484ba791d4317e5935ea45ef4ea34d22b5d90e23d61af2f1f51a">NONE</a> = 1, 
-<a class="el" href="a00276.html#af0378d900074d484ba791d4317e5935ea599bf51c4226a80ada6f743f6e9acd5c">UP</a> = 2, 
-<a class="el" href="a00276.html#af0378d900074d484ba791d4317e5935ea023b84d27813ed1b354da97011695e98">DOWN</a> = 3, 
-<br />
-&#160;&#160;<a class="el" href="a00276.html#af0378d900074d484ba791d4317e5935eaa734acd80348ed3c2f2df367e7ab1bac">OVER</a> = 4
-<br />
+<tr class="memitem:a6180d5bc4bbfa9a5a426089e1f1ad598"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00276.html#a6180d5bc4bbfa9a5a426089e1f1ad598">HIT_FLAG</a> { <a class="el" href="a00276.html#a6180d5bc4bbfa9a5a426089e1f1ad598aaf146b316ade4ca80d23d9d22b0539cc">FLOORS</a> = 1, 
+<a class="el" href="a00276.html#a6180d5bc4bbfa9a5a426089e1f1ad598a9118a6ea0d5aaa017a735193ac79d08d">OBSTACLES</a> = 2, 
+<a class="el" href="a00276.html#a6180d5bc4bbfa9a5a426089e1f1ad598a9d20e9f6abc3d3630c75432b0dac052c">BOTH</a> = 3
  }</td></tr>
-<tr class="memdesc:af0378d900074d484ba791d4317e5935e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Describes the type of step an edge connects to.  <a href="a00276.html#af0378d900074d484ba791d4317e5935e">More...</a><br /></td></tr>
-<tr class="separator:af0378d900074d484ba791d4317e5935e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b23c0b2531c78f6d5049873c184f4f9"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00276.html#a6b23c0b2531c78f6d5049873c184f4f9">COST_AGGREGATE</a> : int { <a class="el" href="a00276.html#a6b23c0b2531c78f6d5049873c184f4f9a6970bdc2201030b9c03fbdcf3973858a">COST_AGGREGATE::SUM</a> = 0, 
-<a class="el" href="a00276.html#a6b23c0b2531c78f6d5049873c184f4f9a16de38737a9f8366e9b2042b4e9b6290">COST_AGGREGATE::AVERAGE</a> = 1, 
-<a class="el" href="a00276.html#a6b23c0b2531c78f6d5049873c184f4f9a4905ac9d6a22bdfc1ae096094ce6248d">COST_AGGREGATE::COUNT</a> = 2
- }</td></tr>
-<tr class="memdesc:a6b23c0b2531c78f6d5049873c184f4f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Methods of aggregating the costs for edges for each node in the graph.  <a href="a00276.html#a6b23c0b2531c78f6d5049873c184f4f9">More...</a><br /></td></tr>
-<tr class="separator:a6b23c0b2531c78f6d5049873c184f4f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa8ecd83cd353318532d791fc819343cc"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00276.html#aa8ecd83cd353318532d791fc819343cc">NODE_TYPE</a> { <a class="el" href="a00276.html#aa8ecd83cd353318532d791fc819343cca5c2876be9857d3e0192c9e1cb3797bf8">GRAPH</a> = 0, 
-<a class="el" href="a00276.html#aa8ecd83cd353318532d791fc819343cca023bd38e0854e766e5c483d451a383ad">POI</a> = 1, 
-<a class="el" href="a00276.html#aa8ecd83cd353318532d791fc819343cca996f30fa669937983b628671c4493b8e">OTHER</a> = 2
- }</td></tr>
-<tr class="memdesc:aa8ecd83cd353318532d791fc819343cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of node this is.  <a href="a00276.html#aa8ecd83cd353318532d791fc819343cc">More...</a><br /></td></tr>
-<tr class="separator:aa8ecd83cd353318532d791fc819343cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a6180d5bc4bbfa9a5a426089e1f1ad598"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines which geometry the ray will collide with.  <a href="a00276.html#a6180d5bc4bbfa9a5a426089e1f1ad598">More...</a><br /></td></tr>
+<tr class="separator:a6180d5bc4bbfa9a5a426089e1f1ad598"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a2663b7e0dd2b9fb87e582feddcd13a8c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00276.html#a2663b7e0dd2b9fb87e582feddcd13a8c">roundhf</a> (float f)</td></tr>
-<tr class="memdesc:a2663b7e0dd2b9fb87e582feddcd13a8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Round a a float to the nearest ROUNDING_PRECISION.  <a href="a00276.html#a2663b7e0dd2b9fb87e582feddcd13a8c">More...</a><br /></td></tr>
-<tr class="separator:a2663b7e0dd2b9fb87e582feddcd13a8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff8692cdca1763985a0a6501abaedcd5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00276.html#aff8692cdca1763985a0a6501abaedcd5">Aggregate</a> (float &amp;out_total, float new_value, const <a class="el" href="a00276.html#a6b23c0b2531c78f6d5049873c184f4f9">COST_AGGREGATE</a> agg_type, int &amp;count)</td></tr>
-<tr class="memdesc:aff8692cdca1763985a0a6501abaedcd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aggregate new_value into out_total using the method specified in agg_type.  <a href="a00276.html#aff8692cdca1763985a0a6501abaedcd5">More...</a><br /></td></tr>
-<tr class="separator:aff8692cdca1763985a0a6501abaedcd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad9a8f0f70b3f60ac5cb7889885d851d1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00276.html#ad9a8f0f70b3f60ac5cb7889885d851d1">Normalize</a> (std::array&lt; float, 3 &gt; &amp;vector)</td></tr>
-<tr class="separator:ad9a8f0f70b3f60ac5cb7889885d851d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe5670b4cb780fd3ccf2a0d72a2e3c2e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00011.html#ac812385b35e52a68f2eba8435fb7b1bf">std::set</a>&lt; <a class="el" href="a00011.html#a3394fa820b983014dcac29faca0e4f19">std::pair</a>&lt; int, int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00276.html#afe5670b4cb780fd3ccf2a0d72a2e3c2e">permutations</a> (int limit)</td></tr>
+<tr class="memdesc:afe5670b4cb780fd3ccf2a0d72a2e3c2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a set of every permutation for all numbers between 0 and limit.  <a href="a00276.html#afe5670b4cb780fd3ccf2a0d72a2e3c2e">More...</a><br /></td></tr>
+<tr class="separator:afe5670b4cb780fd3ccf2a0d72a2e3c2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a0140105869479399be75147c8f77e724"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00276.html#a0140105869479399be75147c8f77e724">ROUNDING_PRECISION</a> = 0.0001f</td></tr>
-<tr class="memdesc:a0140105869479399be75147c8f77e724"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum value that can be represented in humanfactors.  <a href="a00276.html#a0140105869479399be75147c8f77e724">More...</a><br /></td></tr>
-<tr class="separator:a0140105869479399be75147c8f77e724"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcccdbd2d04ed6fc4e193e7110397992"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a00276.html#a8c29578574c275e66fbd439be62c125e">v3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00276.html#afcccdbd2d04ed6fc4e193e7110397992">down</a> { 0, 0, -1 }</td></tr>
+<tr class="separator:afcccdbd2d04ed6fc4e193e7110397992"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Contains standard fundamental data structures for representing space used throughout HumanFactors. </p>
-<dl class="section remark"><dt>Remarks</dt><dd>The datatypes in the <a class="el" href="a00276.html" title="Contains standard fundamental data structures for representing space used throughout HumanFactors.">SpatialStructures</a> Namespace are used throughout the HumanFactors library. For example, the <a class="el" href="a01099.html" title="Generate a graph of all areas accessible from a given start point">HF::AnalysisMethods::GraphGenerator</a> and <a class="el" href="a00278.html" title="Evaluate visibility between points in a set of locations.">HF::AnalysisMethods::VisibilityGraph</a> both produce a <a class="el" href="a01199.html" title="A Graph of nodes connected by edges that supports both integers and HF::SpatialStructures::Node.">Graph</a> as output, allowing for the code to manage the <a class="el" href="a01199.html" title="A Graph of nodes connected by edges that supports both integers and HF::SpatialStructures::Node.">Graph</a>'s internal CSR to be centralized in a single location. </dd></dl>
-</div><hr/><h2 class="groupheader">Class Documentation</h2>
-<a name="a01191" id="a01191"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a01191">&#9670;&nbsp;</a></span>HF::SpatialStructures::EdgeSet</h2>
+<div class="textblock"><p>Generate a graph of accessible space from a given start point. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="a01101.html" title="Generate a graph of accessible space from a given start point.">GraphGenerator</a> for more details. </dd></dl>
+</div><h2 class="groupheader">Typedef Documentation</h2>
+<a id="a8c29578574c275e66fbd439be62c125e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c29578574c275e66fbd439be62c125e">&#9670;&nbsp;</a></span>v3</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">struct HF::SpatialStructures::EdgeSet</td>
+          <td class="memname">using <a class="el" href="a00276.html#a8c29578574c275e66fbd439be62c125e">HF::GraphGenerator::v3</a> = typedef std::array&lt;float, 3&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="textblock"><p>A collection of edges and a parent. </p>
-<dl class="section remark"><dt>Remarks</dt><dd>This can to represent a node and its edges without repeating any information such as parent_id or node objects. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="a00146_source.html#l00066">66</a> of file <a class="el" href="a00146_source.html">Edge.h</a>.</p>
-</div><table class="fieldtable">
-<tr><th colspan="3">Class Members</th></tr>
-<tr><td class="fieldtype">
-<a id="ae0ed1fa60810e109100548a03e10259c"></a>vector&lt; <a class="el" href="a00276.html#a01187">IntEdge</a> &gt;</td>
-<td class="fieldname">
-children</td>
-<td class="fielddoc">
-vector of <a class="el" href="a00276.html#a01187" title="A lighter version of Edge that contains an ID instead of a full node object..">IntEdge</a> (children) </td></tr>
-<tr><td class="fieldtype">
-<a id="a1cf561c1c38a93316f15ac2ab29fc8f4"></a>int</td>
-<td class="fieldname">
-parent</td>
-<td class="fielddoc">
-Identifier of parent node. </td></tr>
-</table>
-
-</div>
-</div>
-<a name="a01187" id="a01187"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a01187">&#9670;&nbsp;</a></span>HF::SpatialStructures::IntEdge</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">struct HF::SpatialStructures::IntEdge</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<div class="textblock"><p>A lighter version of <a class="el" href="a01183.html" title="A connection to a child node.">Edge</a> that contains an ID instead of a full node object.. </p>
-
-<p class="definition">Definition at line <a class="el" href="a00146_source.html#l00055">55</a> of file <a class="el" href="a00146_source.html">Edge.h</a>.</p>
-</div><table class="fieldtable">
-<tr><th colspan="3">Class Members</th></tr>
-<tr><td class="fieldtype">
-<a id="a7662d9deb8c69743b37c0c8da3f51610"></a>int</td>
-<td class="fieldname">
-child</td>
-<td class="fielddoc">
-Identifier of child node. </td></tr>
-<tr><td class="fieldtype">
-<a id="a4c5bcbef0f0b977f2bbf4495939c9f18"></a>float</td>
-<td class="fieldname">
-weight</td>
-<td class="fielddoc">
-Cost to traverse to child. </td></tr>
-</table>
+<p class="definition">Definition at line <a class="el" href="a00008_source.html#l00022">22</a> of file <a class="el" href="a00008_source.html">graph_generator.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="a6b23c0b2531c78f6d5049873c184f4f9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6b23c0b2531c78f6d5049873c184f4f9">&#9670;&nbsp;</a></span>COST_AGGREGATE</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="a00276.html#a6b23c0b2531c78f6d5049873c184f4f9">HF::SpatialStructures::COST_AGGREGATE</a> : int</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Methods of aggregating the costs for edges for each node in the graph. </p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="a01199.html#a3285be5da987692e0b3671f49d67d21b" title="Summarize the costs of every outgoing edge for every node in the graph.">Graph.AggregateGraph()</a> for details on how to use this enum. </dd></dl>
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a6b23c0b2531c78f6d5049873c184f4f9a6970bdc2201030b9c03fbdcf3973858a"></a>SUM&#160;</td><td class="fielddoc"><p>Add the cost of all edges. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a6b23c0b2531c78f6d5049873c184f4f9a16de38737a9f8366e9b2042b4e9b6290"></a>AVERAGE&#160;</td><td class="fielddoc"><p>Average the cost of all edges. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a6b23c0b2531c78f6d5049873c184f4f9a4905ac9d6a22bdfc1ae096094ce6248d"></a>COUNT&#160;</td><td class="fielddoc"><p>Count how many edges this node has. </p>
-</td></tr>
-</table>
-
-<p class="definition">Definition at line <a class="el" href="a00152_source.html#l00027">27</a> of file <a class="el" href="a00152_source.html">graph.h</a>.</p>
-
-</div>
-</div>
-<a id="aa8ecd83cd353318532d791fc819343cc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa8ecd83cd353318532d791fc819343cc">&#9670;&nbsp;</a></span>NODE_TYPE</h2>
+<a id="a6180d5bc4bbfa9a5a426089e1f1ad598"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6180d5bc4bbfa9a5a426089e1f1ad598">&#9670;&nbsp;</a></span>HIT_FLAG</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="a00276.html#aa8ecd83cd353318532d791fc819343cc">HF::SpatialStructures::NODE_TYPE</a></td>
+          <td class="memname">enum <a class="el" href="a00276.html#a6180d5bc4bbfa9a5a426089e1f1ad598">HF::GraphGenerator::HIT_FLAG</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>The type of node this is. </p>
-<dl class="section remark"><dt>Remarks</dt><dd></dd></dl>
-<p>This was primarially used in the previous codebase to differentiate the different types of nodes in the database. Since the database is not implemented here, this goes entirely unused. </p>
+<p>Determines which geometry the ray will collide with. </p>
+<dl class="section remark"><dt>Remarks</dt><dd>Used internally by the <a class="el" href="a01101.html" title="Generate a graph of accessible space from a given start point.">GraphGenerator</a> to determine which type of geometry to collide with when casting a ray. </dd></dl>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa8ecd83cd353318532d791fc819343cca5c2876be9857d3e0192c9e1cb3797bf8"></a>GRAPH&#160;</td><td class="fielddoc"><p>This node is a graph node. </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a6180d5bc4bbfa9a5a426089e1f1ad598aaf146b316ade4ca80d23d9d22b0539cc"></a>FLOORS&#160;</td><td class="fielddoc"><p>Floors only. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="aa8ecd83cd353318532d791fc819343cca023bd38e0854e766e5c483d451a383ad"></a>POI&#160;</td><td class="fielddoc"><p>POI is 'point of interest'. </p>
+<tr><td class="fieldname"><a id="a6180d5bc4bbfa9a5a426089e1f1ad598a9118a6ea0d5aaa017a735193ac79d08d"></a>OBSTACLES&#160;</td><td class="fielddoc"><p>Obstacles only. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="aa8ecd83cd353318532d791fc819343cca996f30fa669937983b628671c4493b8e"></a>OTHER&#160;</td><td class="fielddoc"><p>This node doesn't belong in any other category. </p>
+<tr><td class="fieldname"><a id="a6180d5bc4bbfa9a5a426089e1f1ad598a9d20e9f6abc3d3630c75432b0dac052c"></a>BOTH&#160;</td><td class="fielddoc"><p>Collide with floors and obstacles. </p>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="a00155_source.html#l00029">29</a> of file <a class="el" href="a00155_source.html">node.h</a>.</p>
-
-</div>
-</div>
-<a id="af0378d900074d484ba791d4317e5935e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af0378d900074d484ba791d4317e5935e">&#9670;&nbsp;</a></span>STEP</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="a00276.html#af0378d900074d484ba791d4317e5935e">HF::SpatialStructures::STEP</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Describes the type of step an edge connects to. </p>
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="af0378d900074d484ba791d4317e5935ea7a2b5bf64195a97a6b132bf9c58d0bf9"></a>NOT_CONNECTED&#160;</td><td class="fielddoc"><p>No connection between parent and child. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="af0378d900074d484ba791d4317e5935ea45ef4ea34d22b5d90e23d61af2f1f51a"></a>NONE&#160;</td><td class="fielddoc"><p>Parent and child are on the same plane and no step is required. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="af0378d900074d484ba791d4317e5935ea599bf51c4226a80ada6f743f6e9acd5c"></a>UP&#160;</td><td class="fielddoc"><p>A step up is required to get from parent to child. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="af0378d900074d484ba791d4317e5935ea023b84d27813ed1b354da97011695e98"></a>DOWN&#160;</td><td class="fielddoc"><p>A step down is required to get from parent to child. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="af0378d900074d484ba791d4317e5935eaa734acd80348ed3c2f2df367e7ab1bac"></a>OVER&#160;</td><td class="fielddoc"><p>A step over something is required to get from parent to child. </p>
-</td></tr>
-</table>
-
-<p class="definition">Definition at line <a class="el" href="a00146_source.html#l00015">15</a> of file <a class="el" href="a00146_source.html">Edge.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00008_source.html#l00034">34</a> of file <a class="el" href="a00008_source.html">graph_generator.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="aff8692cdca1763985a0a6501abaedcd5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aff8692cdca1763985a0a6501abaedcd5">&#9670;&nbsp;</a></span>Aggregate()</h2>
+<a id="afe5670b4cb780fd3ccf2a0d72a2e3c2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe5670b4cb780fd3ccf2a0d72a2e3c2e">&#9670;&nbsp;</a></span>permutations()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void HF::SpatialStructures::Aggregate </td>
+          <td class="memname"><a class="el" href="a00011.html#ac812385b35e52a68f2eba8435fb7b1bf">std::set</a>&lt; <a class="el" href="a00011.html#a3394fa820b983014dcac29faca0e4f19">std::pair</a>&lt; int, int &gt; &gt; HF::GraphGenerator::permutations </td>
           <td>(</td>
-          <td class="paramtype">float &amp;&#160;</td>
-          <td class="paramname"><em>out_total</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>limit</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>new_value</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="a00276.html#a6b23c0b2531c78f6d5049873c184f4f9">COST_AGGREGATE</a>&#160;</td>
-          <td class="paramname"><em>agg_type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int &amp;&#160;</td>
-          <td class="paramname"><em>count</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p>Aggregate new_value into out_total using the method specified in agg_type. </p>
+<p>Create a set of every permutation for all numbers between 0 and limit. </p>
+<p>Calculate P(n,r) as an array with each unique permutaton of 2 values being a pair. <br  />
+</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">out_total</td><td>Total to aggregate new_value into. </td></tr>
-    <tr><td class="paramname">new_value</td><td>Value to aggregate into out_total. </td></tr>
-    <tr><td class="paramname">agg_type</td><td>Aggregation method to use. </td></tr>
-    <tr><td class="paramname">count</td><td>Number of elements. Incremented with each call. </td></tr>
+    <tr><td class="paramname">limit</td><td>Highest number in the set</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">std::out_of_range</td><td>agg_type doesn't exist in COST_AGGREgATE</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section remark"><dt>Remarks</dt><dd>This is similar to the function from ViewAnalysis but will increment count with each call.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="a00276.html#a6b23c0b2531c78f6d5049873c184f4f9" title="Methods of aggregating the costs for edges for each node in the graph.">COST_AGGREGATE</a> for more information on each aggregate type. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A list of all permutations for numbers 0 to limit.</dd></dl>
+<dl class="todo"><dt><b><a class="el" href="a00266.html#_todo000002">Todo:</a></b></dt><dd>This can be optimized by using indexing instead of pushback. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="a00149_source.html#l00130">130</a> of file <a class="el" href="a00149_source.html">graph.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00011_source.html#l00035">35</a> of file <a class="el" href="a00011_source.html">graph_generator_private.cpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="a00149_source.html#l00156">HF::SpatialStructures::Graph::AggregateGraph()</a>.</p>
-
-</div>
-</div>
-<a id="ad9a8f0f70b3f60ac5cb7889885d851d1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad9a8f0f70b3f60ac5cb7889885d851d1">&#9670;&nbsp;</a></span>Normalize()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void HF::SpatialStructures::Normalize </td>
-          <td>(</td>
-          <td class="paramtype">std::array&lt; float, 3 &gt; &amp;&#160;</td>
-          <td class="paramname"><em>vector</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a01499_source.html#l00122">122</a> of file <a class="el" href="a01499_source.html">node.cpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="a01499_source.html#l00130">HF::SpatialStructures::Node::directionTo()</a>.</p>
-
-</div>
-</div>
-<a id="a2663b7e0dd2b9fb87e582feddcd13a8c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2663b7e0dd2b9fb87e582feddcd13a8c">&#9670;&nbsp;</a></span>roundhf()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">float HF::SpatialStructures::roundhf </td>
-          <td>(</td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>f</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Round a a float to the nearest ROUNDING_PRECISION. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">f</td><td>The desired float to round. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>f rounded to the nearest rounding_precision. </dd></dl>
-<div class="fragment"><div class="line"><span class="comment">// be sure to #include &quot;Constants.h&quot; std::round from the cmath library is used in</span></div>
-<div class="line"><span class="comment">// roundhf. Precision is to the nearest ten-thousandth</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">const</span> <span class="keywordtype">float</span> my_pi = 3.141592653589793238462643383279502884197169399375105820974944592307816406286;</div>
-<div class="line"><span class="keywordtype">float</span> rounded = <a class="code" href="a00276.html#a2663b7e0dd2b9fb87e582feddcd13a8c">HF::SpatialStructures::roundhf</a>(my_pi);  <span class="comment">//  rounded == 3.1416</span></div>
-</div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="a00137_source.html#l00013">13</a> of file <a class="el" href="a00137_source.html">Constants.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00140_source.html#l00029">ROUNDING_PRECISION</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="a00011_source.html#l00064">HF::AnalysisMethods::GraphGeneratorPrivate::BuildNetwork()</a>, and <a class="el" href="a00011_source.html#l00094">HF::AnalysisMethods::GraphGeneratorPrivate::GeneratePotentialChildren()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="a00011_source.html#l00251">HF::GraphGenerator::GraphGeneratorPrivate::CrawlGeom()</a>, and <a class="el" href="a00011_source.html#l00296">HF::GraphGenerator::GraphGeneratorPrivate::CrawlGeomParallel()</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="a0140105869479399be75147c8f77e724"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0140105869479399be75147c8f77e724">&#9670;&nbsp;</a></span>ROUNDING_PRECISION</h2>
+<a id="afcccdbd2d04ed6fc4e193e7110397992"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcccdbd2d04ed6fc4e193e7110397992">&#9670;&nbsp;</a></span>down</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -454,7 +210,7 @@ Cost to traverse to child. </td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr float HF::SpatialStructures::ROUNDING_PRECISION = 0.0001f</td>
+          <td class="memname">constexpr <a class="el" href="a00276.html#a8c29578574c275e66fbd439be62c125e">v3</a> HF::GraphGenerator::down { 0, 0, -1 }</td>
         </tr>
       </table>
   </td>
@@ -464,17 +220,13 @@ Cost to traverse to child. </td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Minimum value that can be represented in humanfactors. </p>
-<p>All rounding operations in <a class="el" href="a00276.html" title="Contains standard fundamental data structures for representing space used throughout HumanFactors.">HF::SpatialStructures</a> will use this constant in rounding operations. </p>
+<p class="definition">Definition at line <a class="el" href="a00011_source.html#l00027">27</a> of file <a class="el" href="a00011_source.html">graph_generator_private.cpp</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="a00140_source.html#l00029">29</a> of file <a class="el" href="a00140_source.html">Constants.h</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="a00029_source.html#l00047">HF::AnalysisMethods::VisibilityGraph::HeightCheck()</a>, <a class="el" href="a00161_source.html#l00041">HF::SpatialStructures::PathMember::operator==()</a>, <a class="el" href="a01499_source.html#l00083">HF::SpatialStructures::Node::operator==()</a>, and <a class="el" href="a00137_source.html#l00013">roundhf()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="a00011_source.html#l00170">HF::GraphGenerator::GraphGeneratorPrivate::CheckChildren()</a>, <a class="el" href="a00011_source.html#l00100">HF::GraphGenerator::GraphGeneratorPrivate::CheckStart()</a>, and <a class="el" href="a00011_source.html#l00056">HF::GraphGenerator::GraphGeneratorPrivate::WalkableCheck()</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
-<div class="ttc" id="aa00276_html_a2663b7e0dd2b9fb87e582feddcd13a8c"><div class="ttname"><a href="a00276.html#a2663b7e0dd2b9fb87e582feddcd13a8c">HF::SpatialStructures::roundhf</a></div><div class="ttdeci">float roundhf(float f)</div><div class="ttdoc">Round a a float to the nearest ROUNDING_PRECISION.</div><div class="ttdef"><b>Definition:</b> <a href="a00137_source.html#l00013">Constants.cpp:13</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

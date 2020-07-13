@@ -2,7 +2,7 @@
 \label{a00116}\index{Cpp/pathfinding/src/path\_finder.h@{Cpp/pathfinding/src/path\_finder.h}}
 
 
-Contains definition for the \mbox{\hyperlink{a01147}{Boost\+Graph\+Deleter}} structure.  
+Contains definition for the \mbox{\hyperlink{a01149}{Boost\+Graph\+Deleter}} structure.  
 
 
 {\ttfamily \#include $<$memory$>$}\newline
@@ -10,34 +10,34 @@ Contains definition for the \mbox{\hyperlink{a01147}{Boost\+Graph\+Deleter}} str
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-struct \mbox{\hyperlink{a01147}{H\+F\+::\+Pathfinding\+::\+Boost\+Graph\+Deleter}}
-\begin{DoxyCompactList}\small\item\em Deleter for the \mbox{\hyperlink{a01139}{Boost\+Graph}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+struct \mbox{\hyperlink{a01149}{H\+F\+::\+Pathfinding\+::\+Boost\+Graph\+Deleter}}
+\begin{DoxyCompactList}\small\item\em Deleter for the \mbox{\hyperlink{a01141}{Boost\+Graph}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{a00273}{HF}}
-\begin{DoxyCompactList}\small\item\em Output C\+SR for interop with other languages \end{DoxyCompactList}\item 
- \mbox{\hyperlink{a00276}{H\+F\+::\+Spatial\+Structures}}
+ \mbox{\hyperlink{a00275}{HF}}
+\begin{DoxyCompactList}\small\item\em Perform human scale analysis on 3D environments. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00278}{H\+F\+::\+Spatial\+Structures}}
 \begin{DoxyCompactList}\small\item\em Contains standard fundamental data structures for representing space used throughout Human\+Factors. \end{DoxyCompactList}\item 
- \mbox{\hyperlink{a00282}{H\+F\+::\+Pathfinding}}
-\begin{DoxyCompactList}\small\item\em Algorithms to find the shortest path between nodes in a \mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+ \mbox{\hyperlink{a00284}{H\+F\+::\+Pathfinding}}
+\begin{DoxyCompactList}\small\item\em Algorithms to find the shortest path between nodes in a \mbox{\hyperlink{a01189}{H\+F\+::\+Spatial\+Structures\+::\+Graph}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{a01139}{Boost\+Graph}}, \mbox{\hyperlink{a01147}{Boost\+Graph\+Deleter}} $>$ \mbox{\hyperlink{a00282_aee466bf2324daa4b600cc59c90e78977}{H\+F\+::\+Pathfinding\+::\+Create\+Boost\+Graph}} (const \mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} \&g)
-\begin{DoxyCompactList}\small\item\em Create a new boost graph from a \mbox{\hyperlink{a00276}{H\+F\+::\+Spatial\+Structures}}\+:Graph. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a01215}{Path}} \mbox{\hyperlink{a00282_a47d06b1c4bd84f4d0a7519ea0e96ff02}{H\+F\+::\+Pathfinding\+::\+Find\+Path}} (\mbox{\hyperlink{a01139}{Boost\+Graph}} $\ast$bg, int start\+\_\+id, int end\+\_\+id)
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{a01141}{Boost\+Graph}}, \mbox{\hyperlink{a01149}{Boost\+Graph\+Deleter}} $>$ \mbox{\hyperlink{a00284_aee466bf2324daa4b600cc59c90e78977}{H\+F\+::\+Pathfinding\+::\+Create\+Boost\+Graph}} (const \mbox{\hyperlink{a01189}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} \&g)
+\begin{DoxyCompactList}\small\item\em Create a new boost graph from a \mbox{\hyperlink{a00278}{H\+F\+::\+Spatial\+Structures}}\+:Graph. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01205}{Path}} \mbox{\hyperlink{a00284_a47d06b1c4bd84f4d0a7519ea0e96ff02}{H\+F\+::\+Pathfinding\+::\+Find\+Path}} (\mbox{\hyperlink{a01141}{Boost\+Graph}} $\ast$bg, int start\+\_\+id, int end\+\_\+id)
 \begin{DoxyCompactList}\small\item\em Find a path between points A and B using Dijkstra\textquotesingle{}s Shortest Path algorithm. \end{DoxyCompactList}\item 
-vector$<$ \mbox{\hyperlink{a01215}{Path}} $>$ \mbox{\hyperlink{a00282_a15badb9d0a17849de7b21105605c9c91}{H\+F\+::\+Pathfinding\+::\+Find\+Paths}} (\mbox{\hyperlink{a01139}{Boost\+Graph}} $\ast$bg, const std\+::vector$<$ int $>$ \&start\+\_\+points, const std\+::vector$<$ int $>$ \&end\+\_\+points)
+vector$<$ \mbox{\hyperlink{a01205}{Path}} $>$ \mbox{\hyperlink{a00284_a15badb9d0a17849de7b21105605c9c91}{H\+F\+::\+Pathfinding\+::\+Find\+Paths}} (\mbox{\hyperlink{a01141}{Boost\+Graph}} $\ast$bg, const std\+::vector$<$ int $>$ \&start\+\_\+points, const std\+::vector$<$ int $>$ \&end\+\_\+points)
 \begin{DoxyCompactList}\small\item\em Find a path from every id in start\+\_\+ids to the matching end node in end\+\_\+ids. \end{DoxyCompactList}\item 
-std\+::vector$<$ \mbox{\hyperlink{a01215}{H\+F\+::\+Spatial\+Structures\+::\+Path}} $>$ \mbox{\hyperlink{a00282_a336118692fd29dd27f8825ec5bb16b56}{H\+F\+::\+Pathfinding\+::\+Find\+All\+Paths}} (Boost\+Graph $\ast$bg)
+std\+::vector$<$ \mbox{\hyperlink{a01205}{H\+F\+::\+Spatial\+Structures\+::\+Path}} $>$ \mbox{\hyperlink{a00284_a336118692fd29dd27f8825ec5bb16b56}{H\+F\+::\+Pathfinding\+::\+Find\+All\+Paths}} (Boost\+Graph $\ast$bg)
 \begin{DoxyCompactList}\small\item\em Find a path from every node to every node (N\+O\+TE\+: Not implemented yet.) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{a00282_a417084c97d0672af2da7739157a9d8c0}{H\+F\+::\+Pathfinding\+::\+Insert\+Paths\+Into\+Array}} (const \mbox{\hyperlink{a01139}{Boost\+Graph}} $\ast$bg, const std\+::vector$<$ int $>$ \&start\+\_\+points, const std\+::vector$<$ int $>$ \&end\+\_\+points, \mbox{\hyperlink{a01215}{H\+F\+::\+Spatial\+Structures\+::\+Path}} $\ast$$\ast$out\+\_\+paths, \mbox{\hyperlink{a01211}{H\+F\+::\+Spatial\+Structures\+::\+Path\+Member}} $\ast$$\ast$out\+\_\+path\+\_\+members, int $\ast$out\+\_\+sizes)
+void \mbox{\hyperlink{a00284_a417084c97d0672af2da7739157a9d8c0}{H\+F\+::\+Pathfinding\+::\+Insert\+Paths\+Into\+Array}} (const \mbox{\hyperlink{a01141}{Boost\+Graph}} $\ast$bg, const std\+::vector$<$ int $>$ \&start\+\_\+points, const std\+::vector$<$ int $>$ \&end\+\_\+points, \mbox{\hyperlink{a01205}{H\+F\+::\+Spatial\+Structures\+::\+Path}} $\ast$$\ast$out\+\_\+paths, \mbox{\hyperlink{a01201}{H\+F\+::\+Spatial\+Structures\+::\+Path\+Member}} $\ast$$\ast$out\+\_\+path\+\_\+members, int $\ast$out\+\_\+sizes)
 \begin{DoxyCompactList}\small\item\em A special version of Find\+Paths optimized for the C\+\_\+\+Interface. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Contains definition for the \mbox{\hyperlink{a01147}{Boost\+Graph\+Deleter}} structure. 
+Contains definition for the \mbox{\hyperlink{a01149}{Boost\+Graph\+Deleter}} structure. 
 
 \begin{DoxyAuthor}{Author}
 T\+BA 

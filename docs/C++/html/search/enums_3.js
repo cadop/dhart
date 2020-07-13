@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['hf_5fstatus_787',['HF_STATUS',['../a00279.html#aed53c233beb1d9ec1b0c5fc2bfbb1051',1,'HF::Exceptions']]],
-  ['hit_5fflag_788',['HIT_FLAG',['../a00274.html#ad9c47eeb68b0196bb5b8a24be28b860c',1,'HF::AnalysisMethods']]]
+  ['hf_5fstatus_719',['HF_STATUS',['../a00281.html#aed53c233beb1d9ec1b0c5fc2bfbb1051',1,'HF::Exceptions']]],
+  ['hit_5fflag_720',['HIT_FLAG',['../a00276.html#a6180d5bc4bbfa9a5a426089e1f1ad598',1,'HF::GraphGenerator']]]
 ];

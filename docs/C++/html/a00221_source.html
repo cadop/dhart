@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Analysis: Cinterface/cinterface_utils.cpp Source File</title>
+<title>Analysis: Cinterface/analysis_C.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,50 +66,44 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">cinterface_utils.cpp</div>  </div>
+<div class="title">analysis_C.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00221.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00224.html">cinterface_utils.h</a>&gt;</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00086.html">HFExceptions.h</a>&gt;</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<a href="a00221.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00227.html">cinterface_utils.h</a>&gt;</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;array&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="a00221.html#a2f5650b0bad6c47aa34fc2206433a34b">    5</a></span>&#160;std::vector&lt;std::array&lt;float, 3&gt;&gt; <a class="code" href="a00221.html#a2f5650b0bad6c47aa34fc2206433a34b">ConvertRawFloatArrayToPoints</a>(<span class="keyword">const</span> <span class="keywordtype">float</span>* raw_array, <span class="keywordtype">int</span> size) {</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    std::vector&lt;std::array&lt;float, 3&gt;&gt; out_array(size);</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; size; i++) {</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">int</span> os = i * 3;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;        out_array[i][0] = raw_array[os];</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;        out_array[i][1] = raw_array[os + 1];</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        out_array[i][2] = raw_array[os + 2];</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    }</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keywordflow">return</span> out_array;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;}</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="a00221.html#a353d5244f19898d13d1d38193ea6ef1e">   16</a></span>&#160;std::vector&lt;std::array&lt;int, 3&gt;&gt; <a class="code" href="a00221.html#a353d5244f19898d13d1d38193ea6ef1e">ConvertRawIntArrayToPoints</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>* raw_array, <span class="keywordtype">int</span> size) {</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    std::vector&lt;std::array&lt;int, 3&gt;&gt; out_array(size);</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; size; i++) {</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">int</span> os = i * 3;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        out_array[i][0] = raw_array[os];</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        out_array[i][1] = raw_array[os + 1];</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        out_array[i][2] = raw_array[os + 2];</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    }</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordflow">return</span> out_array;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;}</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="a00224.html#af77723a4383b278169e80cf0e361ec44">   27</a></span>&#160;<a class="code" href="a00218.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> <a class="code" href="a00221.html#af77723a4383b278169e80cf0e361ec44">DestroyFloatVector</a>(std::vector&lt;float&gt;* float_vector)</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;{</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="a00224.html#a1746287300e1f05c45d84f3837e24557">DeleteRawPtr</a>(float_vector);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="a00279.html#aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d">HF::Exceptions::HF_STATUS::OK</a>;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;}</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#define C_INTERFACE extern &quot;C&quot; __declspec(dllexport) int</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="a00221.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">    6</a></span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00275.html">HF</a> {</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="keyword">namespace </span>SpatialStructures {<span class="keyword">class </span>Graph;}</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keyword">namespace </span>GraphGenerator {<span class="keyword">class </span>GraphGenerator;}</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keyword">namespace </span>RayTracer {<span class="keyword">class </span>EmbreeRayTracer;}</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;}</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//---- Graph ----//</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<a class="code" href="a00221.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> <a class="code" href="a00267.html#gac2583dc1ee6786b15fa4f06bfde2130a">GenerateGraph</a>(</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <a class="code" href="a01165.html">HF::RayTracer::EmbreeRayTracer</a>* ray_tracer,</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">float</span>* start_point,</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">float</span>* spacing,</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordtype">int</span> MaxNodes,</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordtype">float</span> UpStep,</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordtype">float</span> UpSlope,</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordtype">float</span> DownStep,</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordtype">float</span> DownSlope,</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordtype">int</span> max_step_connection,</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordtype">int</span> core_count,</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <a class="code" href="a01189.html">HF::SpatialStructures::Graph</a>** out_graph</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aa00086_html"><div class="ttname"><a href="a00086.html">HFExceptions.h</a></div><div class="ttdoc">Contains definitions for the Exceptions namespace.</div></div>
-<div class="ttc" id="aa00224_html"><div class="ttname"><a href="a00224.html">cinterface_utils.h</a></div></div>
-<div class="ttc" id="aa00224_html_a1746287300e1f05c45d84f3837e24557"><div class="ttname"><a href="a00224.html#a1746287300e1f05c45d84f3837e24557">DeleteRawPtr</a></div><div class="ttdeci">void DeleteRawPtr(T *ptr)</div><div class="ttdoc">Delete some object pointed to by ptr</div><div class="ttdef"><b>Definition:</b> <a href="a00224_source.html#l00025">cinterface_utils.h:25</a></div></div>
-<div class="ttc" id="aa00221_html_af77723a4383b278169e80cf0e361ec44"><div class="ttname"><a href="a00221.html#af77723a4383b278169e80cf0e361ec44">DestroyFloatVector</a></div><div class="ttdeci">C_INTERFACE DestroyFloatVector(std::vector&lt; float &gt; *float_vector)</div><div class="ttdoc">Delete a float vector that's pointed to by float_vector</div><div class="ttdef"><b>Definition:</b> <a href="a00221_source.html#l00027">cinterface_utils.cpp:27</a></div></div>
-<div class="ttc" id="aa00221_html_a2f5650b0bad6c47aa34fc2206433a34b"><div class="ttname"><a href="a00221.html#a2f5650b0bad6c47aa34fc2206433a34b">ConvertRawFloatArrayToPoints</a></div><div class="ttdeci">std::vector&lt; std::array&lt; float, 3 &gt; &gt; ConvertRawFloatArrayToPoints(const float *raw_array, int size)</div><div class="ttdoc">Convert a raw array from an external caller to an organized vector of points</div><div class="ttdef"><b>Definition:</b> <a href="a00221_source.html#l00005">cinterface_utils.cpp:5</a></div></div>
-<div class="ttc" id="aa00218_html_a91fa3b2bb3a7312ec39d74cc1fbc7bbe"><div class="ttname"><a href="a00218.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a></div><div class="ttdeci">#define C_INTERFACE</div><div class="ttdef"><b>Definition:</b> <a href="a00218_source.html#l00006">analysis_C.h:5</a></div></div>
-<div class="ttc" id="aa00279_html_aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d"><div class="ttname"><a href="a00279.html#aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d">HF::Exceptions::OK</a></div><div class="ttdeci">@ OK</div><div class="ttdoc">All systems go. ///&lt;.</div><div class="ttdef"><b>Definition:</b> <a href="a00086_source.html#l00018">HFExceptions.h:16</a></div></div>
-<div class="ttc" id="aa00221_html_a353d5244f19898d13d1d38193ea6ef1e"><div class="ttname"><a href="a00221.html#a353d5244f19898d13d1d38193ea6ef1e">ConvertRawIntArrayToPoints</a></div><div class="ttdeci">std::vector&lt; std::array&lt; int, 3 &gt; &gt; ConvertRawIntArrayToPoints(const int *raw_array, int size)</div><div class="ttdef"><b>Definition:</b> <a href="a00221_source.html#l00016">cinterface_utils.cpp:16</a></div></div>
+<div class="ttc" id="aa01165_html"><div class="ttname"><a href="a01165.html">HF::RayTracer::EmbreeRayTracer</a></div><div class="ttdoc">A wrapper for Intel's Embree Library.</div><div class="ttdef"><b>Definition:</b> <a href="a00122_source.html#l00061">embree_raytracer.h:61</a></div></div>
+<div class="ttc" id="aa00275_html"><div class="ttname"><a href="a00275.html">HF</a></div><div class="ttdoc">Perform human scale analysis on 3D environments.</div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00013">graph_generator.cpp:13</a></div></div>
+<div class="ttc" id="aa00227_html"><div class="ttname"><a href="a00227.html">cinterface_utils.h</a></div></div>
+<div class="ttc" id="aa01189_html"><div class="ttname"><a href="a01189.html">HF::SpatialStructures::Graph</a></div><div class="ttdoc">A Graph of nodes connected by edges that supports both integers and HF::SpatialStructures::Node.</div><div class="ttdef"><b>Definition:</b> <a href="a00152_source.html#l00092">graph.h:92</a></div></div>
+<div class="ttc" id="aa00221_html_a91fa3b2bb3a7312ec39d74cc1fbc7bbe"><div class="ttname"><a href="a00221.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a></div><div class="ttdeci">#define C_INTERFACE</div><div class="ttdef"><b>Definition:</b> <a href="a00221_source.html#l00006">analysis_C.h:5</a></div></div>
+<div class="ttc" id="aa00267_html_gac2583dc1ee6786b15fa4f06bfde2130a"><div class="ttname"><a href="a00267.html#gac2583dc1ee6786b15fa4f06bfde2130a">GenerateGraph</a></div><div class="ttdeci">C_INTERFACE GenerateGraph(HF::RayTracer::EmbreeRayTracer *ray_tracer, const float *start_point, const float *spacing, int MaxNodes, float UpStep, float UpSlope, float DownStep, float DownSlope, int max_step_connection, int core_count, HF::SpatialStructures::Graph **out_graph)</div><div class="ttdoc">Construct a graph by performing a breadth first search of accessible space.</div><div class="ttdef"><b>Definition:</b> <a href="a00218_source.html#l00015">analysis_C.cpp:15</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

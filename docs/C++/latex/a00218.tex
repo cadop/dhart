@@ -1,39 +1,13 @@
-\hypertarget{a00218}{}\doxysection{Cinterface/analysis\+\_\+C.h File Reference}
-\label{a00218}\index{Cinterface/analysis\_C.h@{Cinterface/analysis\_C.h}}
-{\ttfamily \#include $<$cinterface\+\_\+utils.\+h$>$}\newline
-{\ttfamily \#include $<$vector$>$}\newline
-{\ttfamily \#include $<$array$>$}\newline
-\doxysubsection*{Namespaces}
-\begin{DoxyCompactItemize}
-\item 
- \mbox{\hyperlink{a00273}{HF}}
-\begin{DoxyCompactList}\small\item\em Output C\+SR for interop with other languages \end{DoxyCompactList}\item 
- \mbox{\hyperlink{a00276}{H\+F\+::\+Spatial\+Structures}}
-\begin{DoxyCompactList}\small\item\em Contains standard fundamental data structures for representing space used throughout Human\+Factors. \end{DoxyCompactList}\item 
- \mbox{\hyperlink{a00274}{H\+F\+::\+Analysis\+Methods}}
-\item 
- \mbox{\hyperlink{a00277}{H\+F\+::\+Ray\+Tracer}}
-\end{DoxyCompactItemize}
-\doxysubsection*{Macros}
-\begin{DoxyCompactItemize}
-\item 
-\#define \mbox{\hyperlink{a00218_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}}~extern \char`\"{}C\char`\"{} \+\_\+\+\_\+declspec(dllexport) int
-\end{DoxyCompactItemize}
+\hypertarget{a00218}{}\doxysection{Cinterface/analysis\+\_\+C.cpp File Reference}
+\label{a00218}\index{Cinterface/analysis\_C.cpp@{Cinterface/analysis\_C.cpp}}
+{\ttfamily \#include $<$analysis\+\_\+\+C.\+h$>$}\newline
+{\ttfamily \#include $<$robin\+\_\+hood.\+h$>$}\newline
+{\ttfamily \#include $<$H\+F\+Exceptions.\+h$>$}\newline
+{\ttfamily \#include $<$embree\+\_\+raytracer.\+h$>$}\newline
+{\ttfamily \#include $<$graph\+\_\+generator.\+h$>$}\newline
+{\ttfamily \#include $<$graph.\+h$>$}\newline
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00265_gac2583dc1ee6786b15fa4f06bfde2130a}{Generate\+Graph}} (\mbox{\hyperlink{a01163}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ray\+\_\+tracer, const float $\ast$start\+\_\+point, const float $\ast$spacing, int Max\+Nodes, float Up\+Step, float Up\+Slope, float Down\+Step, float Down\+Slope, int max\+\_\+step\+\_\+connection, int core\+\_\+count, \mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$$\ast$out\+\_\+graph)
+\mbox{\hyperlink{a00257_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00267_gac2583dc1ee6786b15fa4f06bfde2130a}{Generate\+Graph}} (\mbox{\hyperlink{a01165}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ray\+\_\+tracer, const float $\ast$start\+\_\+point, const float $\ast$spacing, int Max\+Nodes, float Up\+Step, float Up\+Slope, float Down\+Step, float Down\+Slope, int max\+\_\+step\+\_\+connections, int core\+\_\+count, \mbox{\hyperlink{a01189}{Graph}} $\ast$$\ast$out\+\_\+graph)
 \begin{DoxyCompactList}\small\item\em Construct a graph by performing a breadth first search of accessible space. \end{DoxyCompactList}\end{DoxyCompactItemize}
-
-
-\doxysubsection{Macro Definition Documentation}
-\mbox{\Hypertarget{a00218_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}\label{a00218_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}} 
-\index{analysis\_C.h@{analysis\_C.h}!C\_INTERFACE@{C\_INTERFACE}}
-\index{C\_INTERFACE@{C\_INTERFACE}!analysis\_C.h@{analysis\_C.h}}
-\doxysubsubsection{\texorpdfstring{C\_INTERFACE}{C\_INTERFACE}}
-{\footnotesize\ttfamily \#define C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE~extern \char`\"{}C\char`\"{} \+\_\+\+\_\+declspec(dllexport) int}
-
-
-
-Definition at line 6 of file analysis\+\_\+\+C.\+h.
-

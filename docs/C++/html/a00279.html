@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Analysis: HF::Exceptions Namespace Reference</title>
+<title>Analysis: HF::RayTracer Namespace Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,100 +61,285 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00273.html">HF</a></li><li class="navelem"><a class="el" href="a00279.html">Exceptions</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00275.html">HF</a></li><li class="navelem"><a class="el" href="a00279.html">RayTracer</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#enum-members">Enumerations</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">HF::Exceptions Namespace Reference</div>  </div>
+<div class="title">HF::RayTracer Namespace Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Cast rays to determine if and where they intersect geometry.  
+<a href="a00279.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01111.html">FileNotFound</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Thrown when desired file is not found  <a href="a01111.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01165.html">EmbreeRayTracer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A wrapper for Intel's Embree Library.  <a href="a01165.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01115.html">InvalidOBJ</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Thrown when the desired object could not be read  <a href="a01115.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01169.html">FullRayRequest</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01119.html">MissingDependency</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Thrown when a dependency is missing  <a href="a01119.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01161.html">HitStruct</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple hit struct to carry all relevant information about hits.  <a href="a01161.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01157"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00279.html#a01157">Triangle</a></td></tr>
+<tr class="memdesc:a01157"><td class="mdescLeft">&#160;</td><td class="mdescRight">A triangle. Used internally in Embree.  <a href="a00279.html#a01157">More...</a><br /></td></tr>
+<tr class="separator:a01157"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01153"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00279.html#a01153">Vertex</a></td></tr>
+<tr class="memdesc:a01153"><td class="mdescLeft">&#160;</td><td class="mdescRight">A vertex. Used internally in Embree.  <a href="a00279.html#a01153">More...</a><br /></td></tr>
+<tr class="separator:a01153"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:aed53c233beb1d9ec1b0c5fc2bfbb1051"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00279.html#aed53c233beb1d9ec1b0c5fc2bfbb1051">HF_STATUS</a> { <br />
-&#160;&#160;<a class="el" href="a00279.html#aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d">OK</a> = 1, 
-<a class="el" href="a00279.html#aed53c233beb1d9ec1b0c5fc2bfbb1051acd7712929c704f3ad7d7af9113654098">NOT_IMPLEMENTED</a> = -54, 
-<a class="el" href="a00279.html#aed53c233beb1d9ec1b0c5fc2bfbb1051a5bfa31d727681298e6c4cea74c848ddf">GENERIC_ERROR</a> = 0, 
-<a class="el" href="a00279.html#aed53c233beb1d9ec1b0c5fc2bfbb1051a42b2a897f1b46ae086e3965e22f0ed58">NOT_FOUND</a> = -1, 
-<br />
-&#160;&#160;<a class="el" href="a00279.html#aed53c233beb1d9ec1b0c5fc2bfbb1051a06ef98037b48ddc9685ab0d7519495b1">INVALID_OBJ</a> = -2, 
-<a class="el" href="a00279.html#aed53c233beb1d9ec1b0c5fc2bfbb1051ab9036b1fec7e201bf970944267471d35">NO_GRAPH</a> = -3, 
-<a class="el" href="a00279.html#aed53c233beb1d9ec1b0c5fc2bfbb1051a6ffda360ff38334d4b03fb61abfd1aa0">INVALID_COST</a> = -4, 
-<a class="el" href="a00279.html#aed53c233beb1d9ec1b0c5fc2bfbb1051a4ac9bf1100834909081553685467dfc1">MISSING_DEPEND</a> = -5, 
-<br />
-&#160;&#160;<a class="el" href="a00279.html#aed53c233beb1d9ec1b0c5fc2bfbb1051a3b0d9d3819413f7a74bb5238725dd832">OUT_OF_MEMORY</a> = -6, 
-<a class="el" href="a00279.html#aed53c233beb1d9ec1b0c5fc2bfbb1051a33fe75a4991277e4ed8c0f88f3e5db06">MALFORMED_DB</a> = -7, 
-<a class="el" href="a00279.html#aed53c233beb1d9ec1b0c5fc2bfbb1051a9626c67d85e20eea56e5a7efc2f6310f">DB_BUSY</a> = -8, 
-<a class="el" href="a00279.html#aed53c233beb1d9ec1b0c5fc2bfbb1051ab31440d86dbcfa007f7c8121dcbeea85">INVALID_PTR</a> = -9, 
-<br />
-&#160;&#160;<a class="el" href="a00279.html#aed53c233beb1d9ec1b0c5fc2bfbb1051ad3084ed4c756294f67f316d74668eddb">OUT_OF_RANGE</a> = -10, 
-<a class="el" href="a00279.html#aed53c233beb1d9ec1b0c5fc2bfbb1051af22cf512deb6784a81a27a8ec5316be9">NO_PATH</a> = -11
-<br />
- }</td></tr>
-<tr class="separator:aed53c233beb1d9ec1b0c5fc2bfbb1051"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a9c9d1d9869aee1f51b5de11f7d9420ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00279.html#a9c9d1d9869aee1f51b5de11f7d9420ec">CheckState</a> (RTCDevice &amp;device)</td></tr>
+<tr class="memdesc:a9c9d1d9869aee1f51b5de11f7d9420ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check an embree device for errors.  <a href="a00279.html#a9c9d1d9869aee1f51b5de11f7d9420ec">More...</a><br /></td></tr>
+<tr class="separator:a9c9d1d9869aee1f51b5de11f7d9420ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a8051c9b70fc0ae60337d4a38bf5f57"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00279.html#a9a8051c9b70fc0ae60337d4a38bf5f57">vectorsToBuffers</a> (const std::vector&lt; std::array&lt; float, 3 &gt;&gt; &amp;vertices, std::vector&lt; <a class="el" href="a00279.html#a01157">Triangle</a> &gt; &amp;Tribuffer, std::vector&lt; <a class="el" href="a00279.html#a01153">Vertex</a> &gt; &amp;Vbuffer)</td></tr>
+<tr class="memdesc:a9a8051c9b70fc0ae60337d4a38bf5f57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Index a list of verticies and place them into a triangle and vertex buffer.  <a href="a00279.html#a9a8051c9b70fc0ae60337d4a38bf5f57">More...</a><br /></td></tr>
+<tr class="separator:a9a8051c9b70fc0ae60337d4a38bf5f57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac8c0b245ea813969c50b6496cc67945"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00279.html#aac8c0b245ea813969c50b6496cc67945">buffersToStructs</a> (std::vector&lt; float &gt; &amp;in_vertices, std::vector&lt; int &gt; &amp;in_indices, std::vector&lt; <a class="el" href="a00279.html#a01153">Vertex</a> &gt; &amp;out_vertices, std::vector&lt; <a class="el" href="a00279.html#a01157">Triangle</a> &gt; &amp;out_triangles)</td></tr>
+<tr class="memdesc:aac8c0b245ea813969c50b6496cc67945"><td class="mdescLeft">&#160;</td><td class="mdescRight">Package raw arrays of floats and indices in buffers to the required Embree types.  <a href="a00279.html#aac8c0b245ea813969c50b6496cc67945">More...</a><br /></td></tr>
+<tr class="separator:aac8c0b245ea813969c50b6496cc67945"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="aed53c233beb1d9ec1b0c5fc2bfbb1051"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aed53c233beb1d9ec1b0c5fc2bfbb1051">&#9670;&nbsp;</a></span>HF_STATUS</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Cast rays to determine if and where they intersect geometry. </p>
+<p>The basics of raytracing entail casting a ray from an origin point in a specific direction and determining whether or not it intersects with a set of geometry. Certain functions can even determine where the intersection occured. Generally, every <a class="el" href="a00279.html" title="Cast rays to determine if and where they intersect geometry.">RayTracer</a> will contain a set of geometry and provide functions for casting rays from an origin point in a specific direciton. Some generate an accelerated structure from geometry called a Bounding Volume Hierarchy, or BVH. A BVH can drastically decrease the time it takes to calculate ray intersections, but can be more complicated to manage compared to standard buffers of geometry.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="a01165.html" title="A wrapper for Intel&#39;s Embree Library.">EmbreeRayTracer</a> For an implementation of a raytracer using Intel's Embree library as a backend. </dd></dl>
+</div><hr/><h2 class="groupheader">Class Documentation</h2>
+<a name="a01157" id="a01157"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01157">&#9670;&nbsp;</a></span>HF::RayTracer::Triangle</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="a00279.html#aed53c233beb1d9ec1b0c5fc2bfbb1051">HF::Exceptions::HF_STATUS</a></td>
+          <td class="memname">struct HF::RayTracer::Triangle</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d"></a>OK&#160;</td><td class="fielddoc"><p>All systems go. ///&lt;. </p>
-<p>Special Codes ///&lt; </p>
+<div class="textblock"><p>A triangle. Used internally in Embree. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00119_source.html#l00043">43</a> of file <a class="el" href="a00119_source.html">embree_raytracer.cpp</a>.</p>
+</div><table class="fieldtable">
+<tr><th colspan="3">Class Members</th></tr>
+<tr><td class="fieldtype">
+<a id="a504a02b108984ddfa3f521cf40b17e61"></a>int</td>
+<td class="fieldname">
+v0</td>
+<td class="fielddoc">
 </td></tr>
-<tr><td class="fieldname"><a id="aed53c233beb1d9ec1b0c5fc2bfbb1051acd7712929c704f3ad7d7af9113654098"></a>NOT_IMPLEMENTED&#160;</td><td class="fielddoc"><p>This function hasn't been implemented yet! ///&lt;. </p>
-<p>Error Codes ///&lt; </p>
+<tr><td class="fieldtype">
+<a id="afc086ccfe3fc951af959d905056358c4"></a>int</td>
+<td class="fieldname">
+v1</td>
+<td class="fielddoc">
 </td></tr>
-<tr><td class="fieldname"><a id="aed53c233beb1d9ec1b0c5fc2bfbb1051a5bfa31d727681298e6c4cea74c848ddf"></a>GENERIC_ERROR&#160;</td><td class="fielddoc"><p>Not sure what happened here (If this gets thrown, either fix it or give it a status code!) ///&lt;. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="aed53c233beb1d9ec1b0c5fc2bfbb1051a42b2a897f1b46ae086e3965e22f0ed58"></a>NOT_FOUND&#160;</td><td class="fielddoc"><p>The path given did not lead to any file ///&lt;. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="aed53c233beb1d9ec1b0c5fc2bfbb1051a06ef98037b48ddc9685ab0d7519495b1"></a>INVALID_OBJ&#160;</td><td class="fielddoc"><p>The given path did not point to a valid obj file ///&lt;. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="aed53c233beb1d9ec1b0c5fc2bfbb1051ab9036b1fec7e201bf970944267471d35"></a>NO_GRAPH&#160;</td><td class="fielddoc"><p>This requires a valid graph in the DB to execute successfully ///&lt;. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="aed53c233beb1d9ec1b0c5fc2bfbb1051a6ffda360ff38334d4b03fb61abfd1aa0"></a>INVALID_COST&#160;</td><td class="fielddoc"><p>The given cost name does not exist in the database ///&lt;. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="aed53c233beb1d9ec1b0c5fc2bfbb1051a4ac9bf1100834909081553685467dfc1"></a>MISSING_DEPEND&#160;</td><td class="fielddoc"><p>A dependency for this object is missing. ///&lt;. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="aed53c233beb1d9ec1b0c5fc2bfbb1051a3b0d9d3819413f7a74bb5238725dd832"></a>OUT_OF_MEMORY&#160;</td><td class="fielddoc"><p>Ran out of memory during the last operation ///&lt;. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="aed53c233beb1d9ec1b0c5fc2bfbb1051a33fe75a4991277e4ed8c0f88f3e5db06"></a>MALFORMED_DB&#160;</td><td class="fielddoc"><p>The database exists, but is in some kind of error state ///&lt;. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="aed53c233beb1d9ec1b0c5fc2bfbb1051a9626c67d85e20eea56e5a7efc2f6310f"></a>DB_BUSY&#160;</td><td class="fielddoc"><p>The database is busy (is there some external connection?) ///&lt;. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="aed53c233beb1d9ec1b0c5fc2bfbb1051ab31440d86dbcfa007f7c8121dcbeea85"></a>INVALID_PTR&#160;</td><td class="fielddoc"><p>One or more of the given pointers didn't lead to anything ///&lt;. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="aed53c233beb1d9ec1b0c5fc2bfbb1051ad3084ed4c756294f67f316d74668eddb"></a>OUT_OF_RANGE&#160;</td><td class="fielddoc"><p>Tried to reference something not in the given container ///&lt;. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="aed53c233beb1d9ec1b0c5fc2bfbb1051af22cf512deb6784a81a27a8ec5316be9"></a>NO_PATH&#160;</td><td class="fielddoc"><p>There is no path between the start and end points ///&lt;. </p>
+<tr><td class="fieldtype">
+<a id="ab7bfa105fb125dfc9e31ecf8cbf0f9fa"></a>int</td>
+<td class="fieldname">
+v2</td>
+<td class="fielddoc">
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="a00086_source.html#l00015">15</a> of file <a class="el" href="a00086_source.html">HFExceptions.h</a>.</p>
+</div>
+</div>
+<a name="a01153" id="a01153"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01153">&#9670;&nbsp;</a></span>HF::RayTracer::Vertex</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct HF::RayTracer::Vertex</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="textblock"><p>A vertex. Used internally in Embree. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00119_source.html#l00038">38</a> of file <a class="el" href="a00119_source.html">embree_raytracer.cpp</a>.</p>
+</div><table class="fieldtable">
+<tr><th colspan="3">Class Members</th></tr>
+<tr><td class="fieldtype">
+<a id="aad8e270f026ac9dd20ee294b2b1a21de"></a>float</td>
+<td class="fieldname">
+x</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="aa27c7b22316499f43093c2b7768c06ea"></a>float</td>
+<td class="fieldname">
+y</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="ab8599cc6220e686dac319622f7d2f364"></a>float</td>
+<td class="fieldname">
+z</td>
+<td class="fielddoc">
+</td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="aac8c0b245ea813969c50b6496cc67945"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac8c0b245ea813969c50b6496cc67945">&#9670;&nbsp;</a></span>buffersToStructs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HF::RayTracer::buffersToStructs </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; float &gt; &amp;&#160;</td>
+          <td class="paramname"><em>in_vertices</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>in_indices</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="a00279.html#a01153">Vertex</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>out_vertices</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="a00279.html#a01157">Triangle</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>out_triangles</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Package raw arrays of floats and indices in buffers to the required Embree types. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">in_vertices</td><td>An array of floats in which every 3 floats represents a vertex. </td></tr>
+    <tr><td class="paramname">in_indices</td><td>An array of integers in which every 3 integers represents a triangle. </td></tr>
+    <tr><td class="paramname">out_vertices</td><td>Output array for vertexes.</td></tr>
+    <tr><td class="paramname">out_triangles</td><td>Output array for triangles.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="todo"><dt><b><a class="el" href="a00266.html#_todo000030">Todo:</a></b></dt><dd>May be faster as a std::move or std::copy. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00119_source.html#l00103">103</a> of file <a class="el" href="a00119_source.html">embree_raytracer.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a9c9d1d9869aee1f51b5de11f7d9420ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c9d1d9869aee1f51b5de11f7d9420ec">&#9670;&nbsp;</a></span>CheckState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HF::RayTracer::CheckState </td>
+          <td>(</td>
+          <td class="paramtype">RTCDevice &amp;&#160;</td>
+          <td class="paramname"><em>device</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check an embree device for errors. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">device</td><td>Device to check for errors</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::exception</td><td>Some error is found while casting rays.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00119_source.html#l00029">29</a> of file <a class="el" href="a00119_source.html">embree_raytracer.cpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00119_source.html#l00172">HF::RayTracer::EmbreeRayTracer::FireRay()</a>.</p>
+
+</div>
+</div>
+<a id="a9a8051c9b70fc0ae60337d4a38bf5f57"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a8051c9b70fc0ae60337d4a38bf5f57">&#9670;&nbsp;</a></span>vectorsToBuffers()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HF::RayTracer::vectorsToBuffers </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; std::array&lt; float, 3 &gt;&gt; &amp;&#160;</td>
+          <td class="paramname"><em>vertices</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="a00279.html#a01157">Triangle</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>Tribuffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="a00279.html#a01153">Vertex</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>Vbuffer</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Index a list of verticies and place them into a triangle and vertex buffer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vertices</td><td>Mesh vertices.</td></tr>
+    <tr><td class="paramname">Tribuffer</td><td>Output triangle buffer.</td></tr>
+    <tr><td class="paramname">Vbuffer</td><td>Output <a class="el" href="a00279.html#a01153" title="A vertex. Used internally in Embree.">Vertex</a> Buffer.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Internally, this uses a hashmap to create an index map of vertices.</p>
+<dl class="todo"><dt><b><a class="el" href="a00266.html#_todo000029">Todo:</a></b></dt><dd>Performance here can be improved by using indexing. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00119_source.html#l00053">53</a> of file <a class="el" href="a00119_source.html">embree_raytracer.cpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00119_source.html#l00128">HF::RayTracer::EmbreeRayTracer::EmbreeRayTracer()</a>, and <a class="el" href="a00119_source.html#l00394">HF::RayTracer::EmbreeRayTracer::InsertNewMesh()</a>.</p>
 
 </div>
 </div>

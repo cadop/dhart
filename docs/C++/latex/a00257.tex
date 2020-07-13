@@ -1,18 +1,94 @@
-\hypertarget{a00257}{}\doxysection{Cinterface/visibility\+\_\+graph\+\_\+C.cpp File Reference}
-\label{a00257}\index{Cinterface/visibility\_graph\_C.cpp@{Cinterface/visibility\_graph\_C.cpp}}
-{\ttfamily \#include \char`\"{}visibility\+\_\+graph\+\_\+\+C.\+h\char`\"{}}\newline
+\hypertarget{a00257}{}\doxysection{Cinterface/view\+\_\+analysis\+\_\+C.h File Reference}
+\label{a00257}\index{Cinterface/view\_analysis\_C.h@{Cinterface/view\_analysis\_C.h}}
+{\ttfamily \#include $<$cinterface\+\_\+utils.\+h$>$}\newline
 {\ttfamily \#include $<$vector$>$}\newline
-{\ttfamily \#include $<$visibility\+\_\+graph.\+h$>$}\newline
-{\ttfamily \#include $<$embree\+\_\+raytracer.\+h$>$}\newline
-{\ttfamily \#include $<$graph.\+h$>$}\newline
-{\ttfamily \#include $<$node.\+h$>$}\newline
-{\ttfamily \#include $<$H\+F\+Exceptions.\+h$>$}\newline
+{\ttfamily \#include $<$raytracer\+\_\+\+C.\+h$>$}\newline
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{a00275}{HF}}
+\begin{DoxyCompactList}\small\item\em Perform human scale analysis on 3D environments. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00278}{H\+F\+::\+Spatial\+Structures}}
+\begin{DoxyCompactList}\small\item\em Contains standard fundamental data structures for representing space used throughout Human\+Factors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{a00257_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}}~extern \char`\"{}C\char`\"{} \+\_\+\+\_\+declspec(dllexport) int
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{a00257_a8a1aa9474094ff70818051c921c0537f}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}} \{ \newline
+\mbox{\hyperlink{a00257_a8a1aa9474094ff70818051c921c0537fa4905ac9d6a22bdfc1ae096094ce6248d}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+C\+O\+U\+NT}} = 0, 
+\mbox{\hyperlink{a00257_a8a1aa9474094ff70818051c921c0537fa6970bdc2201030b9c03fbdcf3973858a}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+S\+UM}} = 1, 
+\mbox{\hyperlink{a00257_a8a1aa9474094ff70818051c921c0537fa16de38737a9f8366e9b2042b4e9b6290}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+A\+V\+E\+R\+A\+GE}} = 2, 
+\mbox{\hyperlink{a00257_a8a1aa9474094ff70818051c921c0537fa26a4b44a837bf97b972628509912b4a5}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+M\+AX}} = 3, 
+\newline
+\mbox{\hyperlink{a00257_a8a1aa9474094ff70818051c921c0537face31e2a082d17e038fcc6e3006166653}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+M\+IN}} = 4
+ \}
+\begin{DoxyCompactList}\small\item\em How to aggregate edges the results of view analysis \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00271_ga0255e6c4811298e61110adc64c0f8acd}{Create\+Visibility\+Graph\+All\+To\+All}} (\mbox{\hyperlink{a01163}{Embree\+Ray\+Tracer}} $\ast$ert, const float $\ast$nodes, int num\+\_\+nodes, \mbox{\hyperlink{a01199}{Graph}} $\ast$$\ast$out\+\_\+graph, float height)
-\begin{DoxyCompactList}\small\item\em Create a new directed visibility graph between all nodes in nodes. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00271_ga9b0664a60bcdf276b0fe0a2023b3d9b8}{Create\+Visibility\+Graph\+All\+To\+All\+Undirected}} (\mbox{\hyperlink{a01163}{Embree\+Ray\+Tracer}} $\ast$ert, const float $\ast$nodes, int num\+\_\+nodes, \mbox{\hyperlink{a01199}{Graph}} $\ast$$\ast$out\+\_\+graph, float height, const int cores)
-\begin{DoxyCompactList}\small\item\em Create a new undirected visibility graph between all nodes in nodes. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00271_gaf2e404cb696aee3473cac0d1507576d8}{Create\+Visibility\+Graph\+Group\+To\+Group}} (\mbox{\hyperlink{a01163}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ert, const float $\ast$group\+\_\+a, const int size\+\_\+a, const float $\ast$group\+\_\+b, const int size\+\_\+b, \mbox{\hyperlink{a01199}{Graph}} $\ast$$\ast$out\+\_\+graph, float height)
-\begin{DoxyCompactList}\small\item\em Create a new visibility from the nodes in group\+\_\+a to the nodes in group\+\_\+b. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\mbox{\hyperlink{a00257_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00272_gab6b8e3eab649b42ac014fb7d02d54892}{Sphereical\+View\+Analysis\+Aggregate}} (\mbox{\hyperlink{a01165}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$E\+RT, \mbox{\hyperlink{a01193}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $\ast$node\+\_\+ptr, int node\+\_\+size, int max\+\_\+rays, float upward\+\_\+fov, float downward\+\_\+fov, float height, \mbox{\hyperlink{a00257_a8a1aa9474094ff70818051c921c0537f}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}} AT, std\+::vector$<$ float $>$ $\ast$$\ast$out\+\_\+scores, float $\ast$$\ast$out\+\_\+scores\+\_\+ptr, int $\ast$out\+\_\+scores\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Conduct View\+Analysis then aggregate the results. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00257_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00272_gaa4c5714c1e557ef83a03d447eb30c6d0}{Sphereical\+View\+Analysis\+Aggregate\+Flat}} (\mbox{\hyperlink{a01165}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$E\+RT, const float $\ast$node\+\_\+ptr, int node\+\_\+size, int max\+\_\+rays, float upward\+\_\+fov, float downward\+\_\+fov, float height, \mbox{\hyperlink{a00257_a8a1aa9474094ff70818051c921c0537f}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}} AT, std\+::vector$<$ float $>$ $\ast$$\ast$out\+\_\+scores, float $\ast$$\ast$out\+\_\+scores\+\_\+ptr, int $\ast$out\+\_\+scores\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Conduct view analysis and aggregate the results. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00257_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00272_ga94d3ddc3981020e2852fc77e51266185}{Spherical\+View\+Analysis\+No\+Aggregate}} (\mbox{\hyperlink{a01165}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$E\+RT, const \mbox{\hyperlink{a01193}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $\ast$node\+\_\+ptr, int node\+\_\+size, int $\ast$max\+\_\+rays, float upward\+\_\+fov, float downward\+\_\+fov, float height, std\+::vector$<$ \mbox{\hyperlink{a01209}{Ray\+Result}} $>$ $\ast$$\ast$out\+\_\+results, \mbox{\hyperlink{a01209}{Ray\+Result}} $\ast$$\ast$out\+\_\+results\+\_\+ptr)
+\begin{DoxyCompactList}\small\item\em Perform view analysis and get the distance and meshid for each individual ray casted. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00257_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00272_ga348af4492f3e4e7ffab6da3e86de3924}{Spherical\+View\+Analysis\+No\+Aggregate\+Flat}} (\mbox{\hyperlink{a01165}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$E\+RT, const float $\ast$node\+\_\+ptr, int node\+\_\+size, int $\ast$max\+\_\+rays, float upward\+\_\+fov, float downward\+\_\+fov, float height, std\+::vector$<$ \mbox{\hyperlink{a01209}{Ray\+Result}} $>$ $\ast$$\ast$out\+\_\+results, \mbox{\hyperlink{a01209}{Ray\+Result}} $\ast$$\ast$out\+\_\+results\+\_\+ptr)
+\begin{DoxyCompactList}\small\item\em Perform view analysis and get the distance and meshid for each individual ray casted. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00257_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00272_gaf572b7bec28d55bf2c72719742703dff}{Spherical\+Distribute}} (int $\ast$num\+\_\+rays, std\+::vector$<$ float $>$ $\ast$$\ast$out\+\_\+direction\+\_\+vector, float $\ast$$\ast$out\+\_\+direction\+\_\+data, float upward\+\_\+fov, float downward\+\_\+fov)
+\begin{DoxyCompactList}\small\item\em Equally distribute points around a unit sphere. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{a00257_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}\label{a00257_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}} 
+\index{view\_analysis\_C.h@{view\_analysis\_C.h}!C\_INTERFACE@{C\_INTERFACE}}
+\index{C\_INTERFACE@{C\_INTERFACE}!view\_analysis\_C.h@{view\_analysis\_C.h}}
+\doxysubsubsection{\texorpdfstring{C\_INTERFACE}{C\_INTERFACE}}
+{\footnotesize\ttfamily \#define C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE~extern \char`\"{}C\char`\"{} \+\_\+\+\_\+declspec(dllexport) int}
+
+
+
+Definition at line 5 of file view\+\_\+analysis\+\_\+\+C.\+h.
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{a00257_a8a1aa9474094ff70818051c921c0537f}\label{a00257_a8a1aa9474094ff70818051c921c0537f}} 
+\index{view\_analysis\_C.h@{view\_analysis\_C.h}!AGGREGATE\_TYPE@{AGGREGATE\_TYPE}}
+\index{AGGREGATE\_TYPE@{AGGREGATE\_TYPE}!view\_analysis\_C.h@{view\_analysis\_C.h}}
+\doxysubsubsection{\texorpdfstring{AGGREGATE\_TYPE}{AGGREGATE\_TYPE}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{a00257_a8a1aa9474094ff70818051c921c0537f}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+How to aggregate edges the results of view analysis 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{COUNT@{COUNT}!view\_analysis\_C.h@{view\_analysis\_C.h}}\index{view\_analysis\_C.h@{view\_analysis\_C.h}!COUNT@{COUNT}}}\mbox{\Hypertarget{a00257_a8a1aa9474094ff70818051c921c0537fa4905ac9d6a22bdfc1ae096094ce6248d}\label{a00257_a8a1aa9474094ff70818051c921c0537fa4905ac9d6a22bdfc1ae096094ce6248d}} 
+C\+O\+U\+NT&Number of rays that hit. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SUM@{SUM}!view\_analysis\_C.h@{view\_analysis\_C.h}}\index{view\_analysis\_C.h@{view\_analysis\_C.h}!SUM@{SUM}}}\mbox{\Hypertarget{a00257_a8a1aa9474094ff70818051c921c0537fa6970bdc2201030b9c03fbdcf3973858a}\label{a00257_a8a1aa9474094ff70818051c921c0537fa6970bdc2201030b9c03fbdcf3973858a}} 
+S\+UM&Sum of distances from the origin to each of its hitpoints. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AVERAGE@{AVERAGE}!view\_analysis\_C.h@{view\_analysis\_C.h}}\index{view\_analysis\_C.h@{view\_analysis\_C.h}!AVERAGE@{AVERAGE}}}\mbox{\Hypertarget{a00257_a8a1aa9474094ff70818051c921c0537fa16de38737a9f8366e9b2042b4e9b6290}\label{a00257_a8a1aa9474094ff70818051c921c0537fa16de38737a9f8366e9b2042b4e9b6290}} 
+A\+V\+E\+R\+A\+GE&Average distance of origin to its hit points. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MAX@{MAX}!view\_analysis\_C.h@{view\_analysis\_C.h}}\index{view\_analysis\_C.h@{view\_analysis\_C.h}!MAX@{MAX}}}\mbox{\Hypertarget{a00257_a8a1aa9474094ff70818051c921c0537fa26a4b44a837bf97b972628509912b4a5}\label{a00257_a8a1aa9474094ff70818051c921c0537fa26a4b44a837bf97b972628509912b4a5}} 
+M\+AX&Maximum distance from origin to its hit points. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MIN@{MIN}!view\_analysis\_C.h@{view\_analysis\_C.h}}\index{view\_analysis\_C.h@{view\_analysis\_C.h}!MIN@{MIN}}}\mbox{\Hypertarget{a00257_a8a1aa9474094ff70818051c921c0537face31e2a082d17e038fcc6e3006166653}\label{a00257_a8a1aa9474094ff70818051c921c0537face31e2a082d17e038fcc6e3006166653}} 
+M\+IN&Minimum distance from origin to its hit points. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 13 of file view\+\_\+analysis\+\_\+\+C.\+h.
+

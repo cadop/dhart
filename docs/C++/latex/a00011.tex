@@ -2,7 +2,7 @@
 \label{a00011}\index{Cpp/analysismethods/src/graph\_generator\_private.cpp@{Cpp/analysismethods/src/graph\_generator\_private.cpp}}
 
 
-Contains implementation for the \mbox{\hyperlink{a01103}{Graph\+Generator\+Private}} class.  
+Contains implementation for the \mbox{\hyperlink{a01105}{Graph\+Generator\+Private}} class.  
 
 
 {\ttfamily \#include $<$graph\+\_\+generator\+\_\+private.\+h$>$}\newline
@@ -12,13 +12,14 @@ Contains implementation for the \mbox{\hyperlink{a01103}{Graph\+Generator\+Priva
 {\ttfamily \#include $<$Constants.\+h$>$}\newline
 {\ttfamily \#include $<$graph\+\_\+generator.\+h$>$}\newline
 {\ttfamily \#include $<$unique\+\_\+queue.\+h$>$}\newline
+{\ttfamily \#include $<$embree\+\_\+raytracer.\+h$>$}\newline
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{a00273}{HF}}
-\begin{DoxyCompactList}\small\item\em Output C\+SR for interop with other languages \end{DoxyCompactList}\item 
- \mbox{\hyperlink{a00274}{H\+F\+::\+Analysis\+Methods}}
-\end{DoxyCompactItemize}
+ \mbox{\hyperlink{a00275}{HF}}
+\begin{DoxyCompactList}\small\item\em Perform human scale analysis on 3D environments. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00276}{H\+F\+::\+Graph\+Generator}}
+\begin{DoxyCompactList}\small\item\em Generate a graph of accessible space from a given start point. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
@@ -29,19 +30,17 @@ typedef std\+::set$<$ \mbox{\hyperlink{a00011_a3394fa820b983014dcac29faca0e4f19}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-int \mbox{\hyperlink{a00274_a8d42b80118c1260844cfa033d20a98f0}{H\+F\+::\+Analysis\+Methods\+::fact}} (int n)
-\item 
-\mbox{\hyperlink{a00011_ac812385b35e52a68f2eba8435fb7b1bf}{std\+::set}}$<$ \mbox{\hyperlink{a00011_a3394fa820b983014dcac29faca0e4f19}{std\+::pair}}$<$ int, int $>$ $>$ \mbox{\hyperlink{a00274_a119aa13054604cc379223a2f424a3a65}{H\+F\+::\+Analysis\+Methods\+::permutations}} (int limit)
-\begin{DoxyCompactList}\small\item\em Create a set of every permution for 0-\/limit \end{DoxyCompactList}\end{DoxyCompactItemize}
+\mbox{\hyperlink{a00011_ac812385b35e52a68f2eba8435fb7b1bf}{std\+::set}}$<$ \mbox{\hyperlink{a00011_a3394fa820b983014dcac29faca0e4f19}{std\+::pair}}$<$ int, int $>$ $>$ \mbox{\hyperlink{a00276_afe5670b4cb780fd3ccf2a0d72a2e3c2e}{H\+F\+::\+Graph\+Generator\+::permutations}} (int limit)
+\begin{DoxyCompactList}\small\item\em Create a set of every permutation for all numbers between 0 and limit. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-constexpr v3 \mbox{\hyperlink{a00274_a1030acde4b168f6ccd5799b3c5bd6b6a}{H\+F\+::\+Analysis\+Methods\+::down}} \{ 0, 0, -\/1 \}
+constexpr v3 \mbox{\hyperlink{a00276_afcccdbd2d04ed6fc4e193e7110397992}{H\+F\+::\+Graph\+Generator\+::down}} \{ 0, 0, -\/1 \}
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Contains implementation for the \mbox{\hyperlink{a01103}{Graph\+Generator\+Private}} class. 
+Contains implementation for the \mbox{\hyperlink{a01105}{Graph\+Generator\+Private}} class. 
 
 \begin{DoxyAuthor}{Author}
 T\+BA 
@@ -60,7 +59,7 @@ T\+BA
 
 
 
-Definition at line 21 of file graph\+\_\+generator\+\_\+private.\+cpp.
+Definition at line 23 of file graph\+\_\+generator\+\_\+private.\+cpp.
 
 \mbox{\Hypertarget{a00011_ac812385b35e52a68f2eba8435fb7b1bf}\label{a00011_ac812385b35e52a68f2eba8435fb7b1bf}} 
 \index{graph\_generator\_private.cpp@{graph\_generator\_private.cpp}!set@{set}}
@@ -70,5 +69,5 @@ Definition at line 21 of file graph\+\_\+generator\+\_\+private.\+cpp.
 
 
 
-Definition at line 22 of file graph\+\_\+generator\+\_\+private.\+cpp.
+Definition at line 24 of file graph\+\_\+generator\+\_\+private.\+cpp.
 

@@ -2,7 +2,7 @@
 \label{a00161}\index{Cpp/spatialstructures/src/path.h@{Cpp/spatialstructures/src/path.h}}
 
 
-Contains definitions for the \mbox{\hyperlink{a01215}{Path}} structure.  
+Contains definitions for the \mbox{\hyperlink{a01205}{Path}} structure.  
 
 
 {\ttfamily \#include $<$vector$>$}\newline
@@ -11,26 +11,26 @@ Contains definitions for the \mbox{\hyperlink{a01215}{Path}} structure.
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-struct \mbox{\hyperlink{a01211}{H\+F\+::\+Spatial\+Structures\+::\+Path\+Member}}
+struct \mbox{\hyperlink{a01201}{H\+F\+::\+Spatial\+Structures\+::\+Path\+Member}}
 \begin{DoxyCompactList}\small\item\em The ID of a node, and the cost cost to the node after it. \end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{a01215}{H\+F\+::\+Spatial\+Structures\+::\+Path}}
+struct \mbox{\hyperlink{a01205}{H\+F\+::\+Spatial\+Structures\+::\+Path}}
 \begin{DoxyCompactList}\small\item\em A collection of nodes that form a path. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{a00273}{HF}}
-\begin{DoxyCompactList}\small\item\em Output C\+SR for interop with other languages \end{DoxyCompactList}\item 
- \mbox{\hyperlink{a00276}{H\+F\+::\+Spatial\+Structures}}
+ \mbox{\hyperlink{a00275}{HF}}
+\begin{DoxyCompactList}\small\item\em Perform human scale analysis on 3D environments. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00278}{H\+F\+::\+Spatial\+Structures}}
 \begin{DoxyCompactList}\small\item\em Contains standard fundamental data structures for representing space used throughout Human\+Factors. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-ostream \& \mbox{\hyperlink{a00161_af6138876bfed2f7c6cb87dc2c9628692}{std\+::operator$<$$<$}} (ostream \&os, const \mbox{\hyperlink{a01215}{H\+F\+::\+Spatial\+Structures\+::\+Path}} p)
+ostream \& \mbox{\hyperlink{a00161_af6138876bfed2f7c6cb87dc2c9628692}{std\+::operator$<$$<$}} (ostream \&os, const \mbox{\hyperlink{a01205}{H\+F\+::\+Spatial\+Structures\+::\+Path}} p)
 \begin{DoxyCompactList}\small\item\em String representation of all the members contained by path p. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Contains definitions for the \mbox{\hyperlink{a01215}{Path}} structure. 
+Contains definitions for the \mbox{\hyperlink{a01205}{Path}} structure. 
 
 \begin{DoxyAuthor}{Author}
 T\+BA 
@@ -45,7 +45,7 @@ T\+BA
 \index{path.h@{path.h}!operator$<$$<$@{operator$<$$<$}}
 \index{operator$<$$<$@{operator$<$$<$}!path.h@{path.h}}
 \doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}}
-{\footnotesize\ttfamily ostream\& std\+::operator$<$$<$ (\begin{DoxyParamCaption}\item[{ostream \&}]{os,  }\item[{const \mbox{\hyperlink{a01215}{H\+F\+::\+Spatial\+Structures\+::\+Path}}}]{p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily ostream\& std\+::operator$<$$<$ (\begin{DoxyParamCaption}\item[{ostream \&}]{os,  }\item[{const \mbox{\hyperlink{a01205}{H\+F\+::\+Spatial\+Structures\+::\+Path}}}]{p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -56,15 +56,15 @@ String representation of all the members contained by path p.
 \DoxyCodeLine{\textcolor{comment}{// be sure to \#include "path.h"}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Create the PathMembers}}
-\DoxyCodeLine{\mbox{\hyperlink{a01211}{HF::SpatialStructures::PathMember}} p0 = \{ 3.14f, 3 \};}
-\DoxyCodeLine{\mbox{\hyperlink{a01211}{HF::SpatialStructures::PathMember}} p1 = \{ 2.78f, 2 \};}
-\DoxyCodeLine{\mbox{\hyperlink{a01211}{HF::SpatialStructures::PathMember}} p2 = \{ 1.64f, 1 \};}
-\DoxyCodeLine{\mbox{\hyperlink{a01211}{HF::SpatialStructures::PathMember}} p3 = \{ 9.35f, 7 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} p0 = \{ 3.14f, 3 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} p1 = \{ 2.78f, 2 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} p2 = \{ 1.64f, 1 \};}
+\DoxyCodeLine{\mbox{\hyperlink{a01201}{HF::SpatialStructures::PathMember}} p3 = \{ 9.35f, 7 \};}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Create the container of PathMembers}}
 \DoxyCodeLine{std::vector<HF::SpatialStructures::PathMember> members\{p0, p1, p2, p3\};}
 \DoxyCodeLine{}
-\DoxyCodeLine{\mbox{\hyperlink{a01215}{HF::SpatialStructures::Path}} path(members);                          \textcolor{comment}{// Create the Path object, path}}
+\DoxyCodeLine{\mbox{\hyperlink{a01205}{HF::SpatialStructures::Path}} path(members);                          \textcolor{comment}{// Create the Path object, path}}
 \DoxyCodeLine{}
 \DoxyCodeLine{std::cout << path << std::endl;             \textcolor{comment}{// Output path to an ostream, like cout}}
 \DoxyCodeLine{\textcolor{comment}{// Output is: (3) -\/3.14-\/> (2) -\/2.78-\/> (1) -\/1.64-\/> (7) -\/9.35-\/>}}

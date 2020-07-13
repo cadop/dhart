@@ -2,7 +2,7 @@
 \label{a00128}\index{Cpp/raytracer/src/RayRequest.h@{Cpp/raytracer/src/RayRequest.h}}
 
 
-Contains definitions for the \mbox{\hyperlink{a00277}{Ray\+Tracer}} namespace.  
+Contains definitions for the \mbox{\hyperlink{a00279}{Ray\+Tracer}} namespace.  
 
 
 {\ttfamily \#include $<$vector$>$}\newline
@@ -10,25 +10,19 @@ Contains definitions for the \mbox{\hyperlink{a00277}{Ray\+Tracer}} namespace.
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-struct \mbox{\hyperlink{a01167}{H\+F\+::\+Ray\+Tracer\+::\+Full\+Ray\+Request}}
-\item 
-struct \mbox{\hyperlink{a00277_a01171}{H\+F\+::\+Ray\+Tracer\+::\+Hit\+Info}}
-\begin{DoxyCompactList}\small\item\em Contains no information about the ray itself,  \mbox{\hyperlink{a00277_a01171}{More...}}\end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{a01175}{H\+F\+::\+Ray\+Tracer\+::\+Ray\+Request\+Lite}}
-\begin{DoxyCompactList}\small\item\em A ray request, that depends on Ray\+Request\+Lite\+Holder \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{a01179}{H\+F\+::\+Ray\+Tracer\+::\+Ray\+Request\+Collection}}
-\begin{DoxyCompactList}\small\item\em Holds a set of ray requests, reusing memory where possible \end{DoxyCompactList}\end{DoxyCompactItemize}
+struct \mbox{\hyperlink{a01169}{H\+F\+::\+Ray\+Tracer\+::\+Full\+Ray\+Request}}
+\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{a00273}{HF}}
-\begin{DoxyCompactList}\small\item\em Output C\+SR for interop with other languages \end{DoxyCompactList}\item 
- \mbox{\hyperlink{a00277}{H\+F\+::\+Ray\+Tracer}}
-\end{DoxyCompactItemize}
+ \mbox{\hyperlink{a00275}{HF}}
+\begin{DoxyCompactList}\small\item\em Perform human scale analysis on 3D environments. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00279}{H\+F\+::\+Ray\+Tracer}}
+\begin{DoxyCompactList}\small\item\em Cast rays to determine if and where they intersect geometry. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Contains definitions for the \mbox{\hyperlink{a00277}{Ray\+Tracer}} namespace. 
+Contains definitions for the \mbox{\hyperlink{a00279}{Ray\+Tracer}} namespace. 
 
 \begin{DoxyAuthor}{Author}
 T\+BA 
@@ -36,17 +30,3 @@ T\+BA
 \begin{DoxyDate}{Date}
 26 Jun 2020 
 \end{DoxyDate}
-
-
-\doxysubsection{Class Documentation}
-\index{HF::RayTracer::HitInfo@{HF::RayTracer::HitInfo}}\label{a01171}
-\Hypertarget{a00277_a01171}
-\doxysubsubsection{struct HF\+::Ray\+Tracer\+::Hit\+Info}
-Contains no information about the ray itself, 
-
-\begin{DoxyRefDesc}{Deprecated}
-\item[\mbox{\hyperlink{a00263__deprecated000018}{Deprecated}}]Never used. Leftover from partially implemented experimental feature. This eventually became the \mbox{\hyperlink{a01219}{Ray\+Result}} struct seen in the C-\/interface. Moving the \mbox{\hyperlink{a01219}{Ray\+Result}} struct to the C interface was far more useful than what could be accomplished here, since it allowed the Cinterface and its clients to define their own Ray\+Request structs that could be filled through templates. \end{DoxyRefDesc}
-
-
-Definition at line 55 of file Ray\+Request.\+h.
-

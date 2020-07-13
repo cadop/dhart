@@ -1,350 +1,300 @@
-\hypertarget{a00277}{}\doxysection{HF\+::Ray\+Tracer Namespace Reference}
-\label{a00277}\index{HF::RayTracer@{HF::RayTracer}}
-\doxysubsection*{Classes}
+\hypertarget{a00277}{}\doxysection{HF\+::View\+Analysis Namespace Reference}
+\label{a00277}\index{HF::ViewAnalysis@{HF::ViewAnalysis}}
+
+
+Analyze space from the perspective of observers within a 3D environment.  
+
+
+\doxysubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{a01163}{Embree\+Ray\+Tracer}}
-\begin{DoxyCompactList}\small\item\em A wrapper for Intel\textquotesingle{}s Embree Library. \end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{a01167}{Full\+Ray\+Request}}
-\item 
-struct \mbox{\hyperlink{a00277_a01171}{Hit\+Info}}
-\begin{DoxyCompactList}\small\item\em Contains no information about the ray itself,  \mbox{\hyperlink{a00277_a01171}{More...}}\end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{a01159}{Hit\+Struct}}
-\begin{DoxyCompactList}\small\item\em A simple hit struct to carry all relevant information about hits. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{a01179}{Ray\+Request\+Collection}}
-\begin{DoxyCompactList}\small\item\em Holds a set of ray requests, reusing memory where possible \end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{a01175}{Ray\+Request\+Lite}}
-\begin{DoxyCompactList}\small\item\em A ray request, that depends on Ray\+Request\+Lite\+Holder \end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{a00277_a01155}{Triangle}}
-\begin{DoxyCompactList}\small\item\em A triangle. Used internally in Embree.  \mbox{\hyperlink{a00277_a01155}{More...}}\end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{a00277_a01151}{Vertex}}
-\begin{DoxyCompactList}\small\item\em A vertex. Used internally in Embree.  \mbox{\hyperlink{a00277_a01151}{More...}}\end{DoxyCompactList}\end{DoxyCompactItemize}
+enum \mbox{\hyperlink{a00277_a1fcaa17d2a8df8896a3b0447973bd07b}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}} \{ \newline
+\mbox{\hyperlink{a00277_a1fcaa17d2a8df8896a3b0447973bd07ba4905ac9d6a22bdfc1ae096094ce6248d}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+C\+O\+U\+NT}} = 0, 
+\mbox{\hyperlink{a00277_a1fcaa17d2a8df8896a3b0447973bd07ba6970bdc2201030b9c03fbdcf3973858a}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+S\+UM}} = 1, 
+\mbox{\hyperlink{a00277_a1fcaa17d2a8df8896a3b0447973bd07ba16de38737a9f8366e9b2042b4e9b6290}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+A\+V\+E\+R\+A\+GE}} = 2, 
+\mbox{\hyperlink{a00277_a1fcaa17d2a8df8896a3b0447973bd07ba26a4b44a837bf97b972628509912b4a5}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+M\+AX}} = 3, 
+\newline
+\mbox{\hyperlink{a00277_a1fcaa17d2a8df8896a3b0447973bd07bace31e2a082d17e038fcc6e3006166653}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+M\+IN}} = 4
+ \}
+\begin{DoxyCompactList}\small\item\em The type of aggregation to use for View\+Analysis\+Aggregate \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\footnotesize template$<$typename P , typename D $>$ }\\P \mbox{\hyperlink{a00277_ad36c0e67c4b26522c82d29a2f4c2e7e7}{Calculate\+Hit\+Point}} (const P \&origin, const D \&direction, float distance)
-\begin{DoxyCompactList}\small\item\em Calculate the hitpoint of a ray from its origin, direction and distance \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{a00277_a9c9d1d9869aee1f51b5de11f7d9420ec}{Check\+State}} (R\+T\+C\+Device \&device)
-\begin{DoxyCompactList}\small\item\em Check an embree device for errors. \end{DoxyCompactList}\item 
-static double \mbox{\hyperlink{a00277_adb85d3abbe51075a71812fdc95de8322}{get\+Random\+Number}} ()
+constexpr float \mbox{\hyperlink{a00277_a9dcf81751f63f5c7356a4f45159184bb}{Convert\+To\+Radians}} (float num\+\_\+in\+\_\+degrees)
+\begin{DoxyCompactList}\small\item\em Convert a number from degrees to radians. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a00277_a38ed3d26d2fcc4bde1790c53eda3945a}{Normalize}} (std\+::array$<$ float, 3 $>$ \&vec)
+\begin{DoxyCompactList}\small\item\em Normalize a vector. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a00277_a94327f2628a43ffe3dc4ab854e8aa20d}{Altitude\+Within\+Range}} (const std\+::array$<$ float, 3 $>$ \&vec, float max\+\_\+angle, float min\+\_\+angle)
 \item 
-static float \mbox{\hyperlink{a00277_a0429e7d02ef59bcad3fa5f7ec2b620dc}{myradians}} (float angle)
+vector$<$ std\+::array$<$ float, 3 $>$ $>$ \mbox{\hyperlink{a00277_ad171585ac55c35e394e26a2f80364a0f}{Fibbonacci\+Dist}} (int num\+\_\+points, float upwards\+\_\+fov, float downward\+\_\+fov)
 \item 
-static unsigned long \mbox{\hyperlink{a00277_af350b924e9637d84c8b316a3b1641bbc}{mix}} (unsigned long a, unsigned long b, unsigned long c)
+vector$<$ std\+::array$<$ float, 3 $>$ $>$ \mbox{\hyperlink{a00272_ga6ca336e3887ef82d17b0713c2bf862df}{Fibbonacci\+Distribute\+Points}} (int num\+\_\+points, float upwards\+\_\+fov=50.\+0f, float downward\+\_\+fov=70.\+0f)
+\begin{DoxyCompactList}\small\item\em Evenly distribute a set of points around a sphere centered at the origin. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a00277_a38c197b654c753cb656ab60e88d65120}{Aggregate}} (float \&out\+\_\+total, float new\+\_\+value, const \mbox{\hyperlink{a00277_a1fcaa17d2a8df8896a3b0447973bd07b}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}} agg\+\_\+type, int count=0)
 \item 
-static std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ \mbox{\hyperlink{a00277_a03d93804b73bd4a5d8ab8e679e5b28cd}{gen\+Sphere\+Rays}} (int step)
-\begin{DoxyCompactList}\small\item\em Generate a vector of directions to distribute rays in 360 degrees. \end{DoxyCompactList}\item 
-std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ \mbox{\hyperlink{a00277_a6df9ff0fb8610752d548354b3e6600e0}{gen\+Fibbonacci\+Rays}} (int numrays)
-\begin{DoxyCompactList}\small\item\em Generate a set of equally distributed directions in sphere. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{a00277_a9a8051c9b70fc0ae60337d4a38bf5f57}{vectors\+To\+Buffers}} (const std\+::vector$<$ std\+::array$<$ float, 3 $>$$>$ \&vertices, std\+::vector$<$ \mbox{\hyperlink{a00277_a01155}{Triangle}} $>$ \&Tribuffer, std\+::vector$<$ \mbox{\hyperlink{a00277_a01151}{Vertex}} $>$ \&Vbuffer)
-\begin{DoxyCompactList}\small\item\em Index a list of verticies and place them into a triangle and vertex buffer. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{a00277_aac8c0b245ea813969c50b6496cc67945}{buffers\+To\+Structs}} (std\+::vector$<$ float $>$ \&in\+\_\+vertices, std\+::vector$<$ int $>$ \&in\+\_\+indices, std\+::vector$<$ \mbox{\hyperlink{a00277_a01151}{Vertex}} $>$ \&out\+\_\+vertices, std\+::vector$<$ \mbox{\hyperlink{a00277_a01155}{Triangle}} $>$ \&out\+\_\+triangles)
-\begin{DoxyCompactList}\small\item\em Package raw arrays of floats and indices in buffers to the required Embree types. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{a00277_a3f55b13b0c41f777baed8813d2fb0c18}{Fire8\+Rays}} (std\+::vector$<$ std\+::reference\+\_\+wrapper$<$ \mbox{\hyperlink{a01167}{Full\+Ray\+Request}} $>$$>$ \&requests, const R\+T\+C\+Scene \&scene, R\+T\+C\+Intersect\+Context \&context)
-\begin{DoxyCompactList}\small\item\em Fire 8 rays and update the requests based on results \end{DoxyCompactList}\end{DoxyCompactItemize}
+{\footnotesize template$<$typename R\+ES , typename RT , typename N $>$ }\\std\+::vector$<$ R\+ES $>$ \mbox{\hyperlink{a00272_gab99d16350ec1a4cac1dec3cbd731d7d8}{Spherical\+View\+Analysis}} (RT \&ray\+\_\+tracer, const std\+::vector$<$ N $>$ \&Nodes, int num\+\_\+rays, float upward\+\_\+limit=50.\+0f, float downward\+\_\+limit=70.\+0f, float height=1.\+7f)
+\begin{DoxyCompactList}\small\item\em Conduct view analysis with any Raytracer in parallel. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename RT , typename N $>$ }\\std\+::vector$<$ float $>$ \mbox{\hyperlink{a00272_gad2ee55f78e191d1ff90e083ad49dc49e}{Spherical\+Rayshoot\+With\+Any\+R\+T\+For\+Distance}} (RT \&ray\+\_\+tracer, const std\+::vector$<$ N $>$ \&Nodes, int num\+\_\+rays, float upward\+\_\+limit=50.\+0f, float downward\+\_\+limit=70.\+0f, float height=1.\+7f, const \mbox{\hyperlink{a00277_a1fcaa17d2a8df8896a3b0447973bd07b}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}} aggregation=\mbox{\hyperlink{a00277_a1fcaa17d2a8df8896a3b0447973bd07ba6970bdc2201030b9c03fbdcf3973858a}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+S\+UM}})
+\begin{DoxyCompactList}\small\item\em Conduct view analysis and recieve a summarized set of results for each node. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\doxysubsection{Class Documentation}
-\index{HF::RayTracer::HitInfo@{HF::RayTracer::HitInfo}}\label{a01171}
-\Hypertarget{a00277_a01171}
-\doxysubsubsection{struct HF\+::Ray\+Tracer\+::Hit\+Info}
-Contains no information about the ray itself, 
+\doxysubsection{Detailed Description}
+Analyze space from the perspective of observers within a 3D environment. 
 
-\begin{DoxyRefDesc}{Deprecated}
-\item[\mbox{\hyperlink{a00263__deprecated000018}{Deprecated}}]Never used. Leftover from partially implemented experimental feature. This eventually became the \mbox{\hyperlink{a01219}{Ray\+Result}} struct seen in the C-\/interface. Moving the \mbox{\hyperlink{a01219}{Ray\+Result}} struct to the C interface was far more useful than what could be accomplished here, since it allowed the Cinterface and its clients to define their own Ray\+Request structs that could be filled through templates. \end{DoxyRefDesc}
+View Analysis contains a set of algorithms dedicated to evaluating the view of an observer from specific points in a model. Generally this consists of equally distributing a series of rays in a sphere around the observer, then casting the rays and calculating a result or returning the raw results of each intersection.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a00272_ga6ca336e3887ef82d17b0713c2bf862df}{Fibbonacci\+Distribute\+Points}} for the algorithm used to equally distribute rays. 
+
+\mbox{\hyperlink{a00272_gab99d16350ec1a4cac1dec3cbd731d7d8}{Spherical\+View\+Analysis}} for a view analysis algorithm that returns the ID and distance to intersection point of every ray casted. 
+
+\mbox{\hyperlink{a00272_gad2ee55f78e191d1ff90e083ad49dc49e}{Spherical\+Rayshoot\+With\+Any\+R\+T\+For\+Distance}} for an algorithm that aggregates the results of view analysis into a score for each of the input observer points. 
+\end{DoxySeeAlso}
 
 
-Definition at line 55 of file Ray\+Request.\+h.
-
-\index{HF::RayTracer::Triangle@{HF::RayTracer::Triangle}}\label{a01155}
-\Hypertarget{a00277_a01155}
-\doxysubsubsection{struct HF\+::Ray\+Tracer\+::Triangle}
-A triangle. Used internally in Embree. 
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{a00277_a1fcaa17d2a8df8896a3b0447973bd07b}\label{a00277_a1fcaa17d2a8df8896a3b0447973bd07b}} 
+\index{HF::ViewAnalysis@{HF::ViewAnalysis}!AGGREGATE\_TYPE@{AGGREGATE\_TYPE}}
+\index{AGGREGATE\_TYPE@{AGGREGATE\_TYPE}!HF::ViewAnalysis@{HF::ViewAnalysis}}
+\doxysubsubsection{\texorpdfstring{AGGREGATE\_TYPE}{AGGREGATE\_TYPE}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{a00277_a1fcaa17d2a8df8896a3b0447973bd07b}{H\+F\+::\+View\+Analysis\+::\+A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}}\hspace{0.3cm}{\ttfamily [strong]}}
 
 
 
-Definition at line 55 of file embree\+\_\+raytracer.\+cpp.
+The type of aggregation to use for View\+Analysis\+Aggregate 
 
-\begin{DoxyFields}{Class Members}
-\mbox{\Hypertarget{a00277_a504a02b108984ddfa3f521cf40b17e61}\label{a00277_a504a02b108984ddfa3f521cf40b17e61}} 
-int&
-v0&
-\\
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{COUNT@{COUNT}!HF::ViewAnalysis@{HF::ViewAnalysis}}\index{HF::ViewAnalysis@{HF::ViewAnalysis}!COUNT@{COUNT}}}\mbox{\Hypertarget{a00277_a1fcaa17d2a8df8896a3b0447973bd07ba4905ac9d6a22bdfc1ae096094ce6248d}\label{a00277_a1fcaa17d2a8df8896a3b0447973bd07ba4905ac9d6a22bdfc1ae096094ce6248d}} 
+C\+O\+U\+NT&Total number of intersections. \\
 \hline
 
-\mbox{\Hypertarget{a00277_afc086ccfe3fc951af959d905056358c4}\label{a00277_afc086ccfe3fc951af959d905056358c4}} 
-int&
-v1&
-\\
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SUM@{SUM}!HF::ViewAnalysis@{HF::ViewAnalysis}}\index{HF::ViewAnalysis@{HF::ViewAnalysis}!SUM@{SUM}}}\mbox{\Hypertarget{a00277_a1fcaa17d2a8df8896a3b0447973bd07ba6970bdc2201030b9c03fbdcf3973858a}\label{a00277_a1fcaa17d2a8df8896a3b0447973bd07ba6970bdc2201030b9c03fbdcf3973858a}} 
+S\+UM&Sum of the distance from the origin to all intersections. \\
 \hline
 
-\mbox{\Hypertarget{a00277_ab7bfa105fb125dfc9e31ecf8cbf0f9fa}\label{a00277_ab7bfa105fb125dfc9e31ecf8cbf0f9fa}} 
-int&
-v2&
-\\
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AVERAGE@{AVERAGE}!HF::ViewAnalysis@{HF::ViewAnalysis}}\index{HF::ViewAnalysis@{HF::ViewAnalysis}!AVERAGE@{AVERAGE}}}\mbox{\Hypertarget{a00277_a1fcaa17d2a8df8896a3b0447973bd07ba16de38737a9f8366e9b2042b4e9b6290}\label{a00277_a1fcaa17d2a8df8896a3b0447973bd07ba16de38737a9f8366e9b2042b4e9b6290}} 
+A\+V\+E\+R\+A\+GE&Average distance from the origin to every intersection. \\
 \hline
 
-\end{DoxyFields}
-\index{HF::RayTracer::Vertex@{HF::RayTracer::Vertex}}\label{a01151}
-\Hypertarget{a00277_a01151}
-\doxysubsubsection{struct HF\+::Ray\+Tracer\+::Vertex}
-A vertex. Used internally in Embree. 
-
-
-
-Definition at line 50 of file embree\+\_\+raytracer.\+cpp.
-
-\begin{DoxyFields}{Class Members}
-\mbox{\Hypertarget{a00277_aad8e270f026ac9dd20ee294b2b1a21de}\label{a00277_aad8e270f026ac9dd20ee294b2b1a21de}} 
-float&
-x&
-\\
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MAX@{MAX}!HF::ViewAnalysis@{HF::ViewAnalysis}}\index{HF::ViewAnalysis@{HF::ViewAnalysis}!MAX@{MAX}}}\mbox{\Hypertarget{a00277_a1fcaa17d2a8df8896a3b0447973bd07ba26a4b44a837bf97b972628509912b4a5}\label{a00277_a1fcaa17d2a8df8896a3b0447973bd07ba26a4b44a837bf97b972628509912b4a5}} 
+M\+AX&Maximum distance from the origin to any intersection. \\
 \hline
 
-\mbox{\Hypertarget{a00277_aa27c7b22316499f43093c2b7768c06ea}\label{a00277_aa27c7b22316499f43093c2b7768c06ea}} 
-float&
-y&
-\\
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MIN@{MIN}!HF::ViewAnalysis@{HF::ViewAnalysis}}\index{HF::ViewAnalysis@{HF::ViewAnalysis}!MIN@{MIN}}}\mbox{\Hypertarget{a00277_a1fcaa17d2a8df8896a3b0447973bd07bace31e2a082d17e038fcc6e3006166653}\label{a00277_a1fcaa17d2a8df8896a3b0447973bd07bace31e2a082d17e038fcc6e3006166653}} 
+M\+IN&Minimum distance from the origin to any intersection. \\
 \hline
 
-\mbox{\Hypertarget{a00277_ab8599cc6220e686dac319622f7d2f364}\label{a00277_ab8599cc6220e686dac319622f7d2f364}} 
-float&
-z&
-\\
-\hline
+\end{DoxyEnumFields}
 
-\end{DoxyFields}
+
+Definition at line 48 of file view\+\_\+analysis.\+h.
+
 
 
 \doxysubsection{Function Documentation}
-\mbox{\Hypertarget{a00277_aac8c0b245ea813969c50b6496cc67945}\label{a00277_aac8c0b245ea813969c50b6496cc67945}} 
-\index{HF::RayTracer@{HF::RayTracer}!buffersToStructs@{buffersToStructs}}
-\index{buffersToStructs@{buffersToStructs}!HF::RayTracer@{HF::RayTracer}}
-\doxysubsubsection{\texorpdfstring{buffersToStructs()}{buffersToStructs()}}
-{\footnotesize\ttfamily void H\+F\+::\+Ray\+Tracer\+::buffers\+To\+Structs (\begin{DoxyParamCaption}\item[{std\+::vector$<$ float $>$ \&}]{in\+\_\+vertices,  }\item[{std\+::vector$<$ int $>$ \&}]{in\+\_\+indices,  }\item[{std\+::vector$<$ \mbox{\hyperlink{a00277_a01151}{Vertex}} $>$ \&}]{out\+\_\+vertices,  }\item[{std\+::vector$<$ \mbox{\hyperlink{a00277_a01155}{Triangle}} $>$ \&}]{out\+\_\+triangles }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\Hypertarget{a00277_a38c197b654c753cb656ab60e88d65120}\label{a00277_a38c197b654c753cb656ab60e88d65120}} 
+\index{HF::ViewAnalysis@{HF::ViewAnalysis}!Aggregate@{Aggregate}}
+\index{Aggregate@{Aggregate}!HF::ViewAnalysis@{HF::ViewAnalysis}}
+\doxysubsubsection{\texorpdfstring{Aggregate()}{Aggregate()}}
+{\footnotesize\ttfamily void H\+F\+::\+View\+Analysis\+::\+Aggregate (\begin{DoxyParamCaption}\item[{float \&}]{out\+\_\+total,  }\item[{float}]{new\+\_\+value,  }\item[{const \mbox{\hyperlink{a00277_a1fcaa17d2a8df8896a3b0447973bd07b}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}}}]{agg\+\_\+type,  }\item[{int}]{count = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Package raw arrays of floats and indices in buffers to the required Embree types. 
 
 
-\begin{DoxyParams}{Parameters}
-{\em in\+\_\+vertices} & An array of floats in which every 3 floats represents a vertex. \\
-\hline
-{\em in\+\_\+indices} & An array of integers in which every 3 integers represents a triangle. \\
-\hline
-{\em out\+\_\+vertices} & Output array for vertexes.\\
-\hline
-{\em out\+\_\+triangles} & Output array for triangles.\\
-\hline
-\end{DoxyParams}
-\begin{DoxyRefDesc}{Todo}
-\item[\mbox{\hyperlink{a00264__todo000019}{Todo}}]May be faster as a std\+::move or std\+::copy. \end{DoxyRefDesc}
-
-
-Definition at line 201 of file embree\+\_\+raytracer.\+cpp.
-
-\mbox{\Hypertarget{a00277_ad36c0e67c4b26522c82d29a2f4c2e7e7}\label{a00277_ad36c0e67c4b26522c82d29a2f4c2e7e7}} 
-\index{HF::RayTracer@{HF::RayTracer}!CalculateHitPoint@{CalculateHitPoint}}
-\index{CalculateHitPoint@{CalculateHitPoint}!HF::RayTracer@{HF::RayTracer}}
-\doxysubsubsection{\texorpdfstring{CalculateHitPoint()}{CalculateHitPoint()}}
-{\footnotesize\ttfamily template$<$typename P , typename D $>$ \\
-P H\+F\+::\+Ray\+Tracer\+::\+Calculate\+Hit\+Point (\begin{DoxyParamCaption}\item[{const P \&}]{origin,  }\item[{const D \&}]{direction,  }\item[{float}]{distance }\end{DoxyParamCaption})}
-
-
-
-Calculate the hitpoint of a ray from its origin, direction and distance 
-
-\begin{DoxyRefDesc}{Deprecated}
-\item[\mbox{\hyperlink{a00263__deprecated000008}{Deprecated}}]Unused. \end{DoxyRefDesc}
-
-
-Definition at line 27 of file embree\+\_\+raytracer.\+cpp.
-
-\mbox{\Hypertarget{a00277_a9c9d1d9869aee1f51b5de11f7d9420ec}\label{a00277_a9c9d1d9869aee1f51b5de11f7d9420ec}} 
-\index{HF::RayTracer@{HF::RayTracer}!CheckState@{CheckState}}
-\index{CheckState@{CheckState}!HF::RayTracer@{HF::RayTracer}}
-\doxysubsubsection{\texorpdfstring{CheckState()}{CheckState()}}
-{\footnotesize\ttfamily void H\+F\+::\+Ray\+Tracer\+::\+Check\+State (\begin{DoxyParamCaption}\item[{R\+T\+C\+Device \&}]{device }\end{DoxyParamCaption})}
-
-
-
-Check an embree device for errors. 
+Apply an aggregation to the given value.
 
 
 \begin{DoxyParams}{Parameters}
-{\em device} & Device to check for errors\\
+{\em out\+\_\+total} & The total of the current aggregation. This will be modified depending on agg\+\_\+type.\\
+\hline
+{\em new\+\_\+value} & New value to aggregate into out\+\_\+total. \\
+\hline
+{\em agg\+\_\+type} & The type of aggregation to use.\\
+\hline
+{\em count} & Number of elements encountered so far. Used for Count/\+Average.\\
 \hline
 \end{DoxyParams}
 
 \begin{DoxyExceptions}{Exceptions}
-{\em std\+::exception} & Some error is found while casting rays.\\
+{\em std\+::out\+\_\+of\+\_\+range} & agg\+\_\+type didn\textquotesingle{}t match any valid A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE.\\
 \hline
 \end{DoxyExceptions}
 
 
-Definition at line 41 of file embree\+\_\+raytracer.\+cpp.
+This can be called in a loop to summarize the results of some calculation as new values become available. This avoids having to allocate entire arrays of values then calculating the result at the end. \begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a00277_a1fcaa17d2a8df8896a3b0447973bd07b}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}} for a list of supported aggregation types.
+\end{DoxySeeAlso}
+\begin{DoxyNote}{Note}
+This function will likely not be very useful elsewhere since most of its functionality can be replaced by single function calls like std\+::min(a, b) or std\+::max(a,b). This was made a standalone function mostly to seperate calculating the result value from the implementation of the View Analysis itself.
+\end{DoxyNote}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "view\_analysis.h", \#include <numeric>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Use this to save some space.}}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a00277_a1fcaa17d2a8df8896a3b0447973bd07b}{HF::ViewAnalysis::AGGREGATE\_TYPE}};}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a00277_a38c197b654c753cb656ab60e88d65120}{HF::ViewAnalysis::Aggregate}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Undef these since they will prevent us from calling numericlimits}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#undef min}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#undef max}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Define values}}
+\DoxyCodeLine{std::vector<int> values = \{ 1, 2, 3, 4, 5 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Calculate Average}}
+\DoxyCodeLine{\textcolor{keywordtype}{float} total = 0.0f; \textcolor{keywordtype}{int} count = 0;}
+\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} val : values) \{}
+\DoxyCodeLine{    count += 1;}
+\DoxyCodeLine{    \mbox{\hyperlink{a00277_a38c197b654c753cb656ab60e88d65120}{Aggregate}}(total, val, \mbox{\hyperlink{a00277_a1fcaa17d2a8df8896a3b0447973bd07ba16de38737a9f8366e9b2042b4e9b6290}{AGGREGATE\_TYPE::AVERAGE}}, count);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{std::cerr << \textcolor{stringliteral}{"Average: "} << total << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Calculate Sum}}
+\DoxyCodeLine{total = 0.0f;}
+\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} val : values) \mbox{\hyperlink{a00277_a38c197b654c753cb656ab60e88d65120}{Aggregate}}(total, val, \mbox{\hyperlink{a00277_a1fcaa17d2a8df8896a3b0447973bd07ba6970bdc2201030b9c03fbdcf3973858a}{AGGREGATE\_TYPE::SUM}});}
+\DoxyCodeLine{std::cerr << \textcolor{stringliteral}{"Sum: "} << total << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Calculate Max. Start total at lowest possible float value to ensure}}
+\DoxyCodeLine{\textcolor{comment}{// it overwritten by the first element.}}
+\DoxyCodeLine{total = std::numeric\_limits<float>::min();}
+\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} val : values) \mbox{\hyperlink{a00277_a38c197b654c753cb656ab60e88d65120}{Aggregate}}(total, val, \mbox{\hyperlink{a00277_a1fcaa17d2a8df8896a3b0447973bd07ba26a4b44a837bf97b972628509912b4a5}{AGGREGATE\_TYPE::MAX}});}
+\DoxyCodeLine{std::cerr << \textcolor{stringliteral}{"Max: "} << total << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Calculate Min. Start total at highest possible float value to ensure}}
+\DoxyCodeLine{\textcolor{comment}{// it overwritten by the first element.}}
+\DoxyCodeLine{total = (std::numeric\_limits<float>::max());}
+\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} val : values) \mbox{\hyperlink{a00277_a38c197b654c753cb656ab60e88d65120}{Aggregate}}(total, val, \mbox{\hyperlink{a00277_a1fcaa17d2a8df8896a3b0447973bd07bace31e2a082d17e038fcc6e3006166653}{AGGREGATE\_TYPE::MIN}});}
+\DoxyCodeLine{std::cerr << \textcolor{stringliteral}{"Min: "} << total << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Calculate Count}}
+\DoxyCodeLine{total = 0.0f;}
+\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} val : values) \mbox{\hyperlink{a00277_a38c197b654c753cb656ab60e88d65120}{Aggregate}}(total, val, \mbox{\hyperlink{a00277_a1fcaa17d2a8df8896a3b0447973bd07ba4905ac9d6a22bdfc1ae096094ce6248d}{AGGREGATE\_TYPE::COUNT}});}
+\DoxyCodeLine{std::cerr << \textcolor{stringliteral}{"Count: "} << total << std::endl;}
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+{\ttfamily $>$$>$$>$ Average\+: 3}~\newline
+{\ttfamily $>$$>$$>$ Sum\+: 15}~\newline
+{\ttfamily $>$$>$$>$ Max\+: 5}~\newline
+{\ttfamily $>$$>$$>$ Min\+: 1}~\newline
+{\ttfamily $>$$>$$>$ Count\+: 5}~\newline
+ \begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{a00266__todo000012}{Todo}}]Min/\+Max and maybe the other functions should handle Na\+Ns for min/max to signal that no value already exists. The user can use the min and max numeric limits or zero for defaults like in the example, but it would be great to be able to use one value that would be reliably handled as default input for every case. \end{DoxyRefDesc}
+
+
+Definition at line 193 of file view\+\_\+analysis.\+h.
 
 
 
-Referenced by H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Fire\+Ray().
-
-\mbox{\Hypertarget{a00277_a3f55b13b0c41f777baed8813d2fb0c18}\label{a00277_a3f55b13b0c41f777baed8813d2fb0c18}} 
-\index{HF::RayTracer@{HF::RayTracer}!Fire8Rays@{Fire8Rays}}
-\index{Fire8Rays@{Fire8Rays}!HF::RayTracer@{HF::RayTracer}}
-\doxysubsubsection{\texorpdfstring{Fire8Rays()}{Fire8Rays()}}
-{\footnotesize\ttfamily void H\+F\+::\+Ray\+Tracer\+::\+Fire8\+Rays (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::reference\+\_\+wrapper$<$ \mbox{\hyperlink{a01167}{Full\+Ray\+Request}} $>$$>$ \&}]{requests,  }\item[{const R\+T\+C\+Scene \&}]{scene,  }\item[{R\+T\+C\+Intersect\+Context \&}]{context }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+References A\+V\+E\+R\+A\+GE, C\+O\+U\+NT, M\+AX, M\+IN, and S\+UM.
 
 
 
-Fire 8 rays and update the requests based on results 
+Referenced by Spherical\+Rayshoot\+With\+Any\+R\+T\+For\+Distance().
 
+\mbox{\Hypertarget{a00277_a94327f2628a43ffe3dc4ab854e8aa20d}\label{a00277_a94327f2628a43ffe3dc4ab854e8aa20d}} 
+\index{HF::ViewAnalysis@{HF::ViewAnalysis}!AltitudeWithinRange@{AltitudeWithinRange}}
+\index{AltitudeWithinRange@{AltitudeWithinRange}!HF::ViewAnalysis@{HF::ViewAnalysis}}
+\doxysubsubsection{\texorpdfstring{AltitudeWithinRange()}{AltitudeWithinRange()}}
+{\footnotesize\ttfamily bool H\+F\+::\+View\+Analysis\+::\+Altitude\+Within\+Range (\begin{DoxyParamCaption}\item[{const std\+::array$<$ float, 3 $>$ \&}]{vec,  }\item[{float}]{max\+\_\+angle,  }\item[{float}]{min\+\_\+angle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-
-Definition at line 480 of file embree\+\_\+raytracer.\+cpp.
-
-
-
-Referenced by H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Fire\+Requests().
-
-\mbox{\Hypertarget{a00277_a6df9ff0fb8610752d548354b3e6600e0}\label{a00277_a6df9ff0fb8610752d548354b3e6600e0}} 
-\index{HF::RayTracer@{HF::RayTracer}!genFibbonacciRays@{genFibbonacciRays}}
-\index{genFibbonacciRays@{genFibbonacciRays}!HF::RayTracer@{HF::RayTracer}}
-\doxysubsubsection{\texorpdfstring{genFibbonacciRays()}{genFibbonacciRays()}}
-{\footnotesize\ttfamily std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ H\+F\+::\+Ray\+Tracer\+::gen\+Fibbonacci\+Rays (\begin{DoxyParamCaption}\item[{int}]{numrays }\end{DoxyParamCaption})}
-
-
-
-Generate a set of equally distributed directions in sphere. 
-
-\begin{DoxyRefDesc}{Deprecated}
-\item[\mbox{\hyperlink{a00263__deprecated000013}{Deprecated}}]Use the version in view analysis \end{DoxyRefDesc}
-
-
-The directions from this function are better distributed than those of \mbox{\hyperlink{a00277_a03d93804b73bd4a5d8ab8e679e5b28cd}{gen\+Sphere\+Rays}}. The implementation of this function is based on \href{https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere}{\texttt{ https\+://stackoverflow.\+com/questions/9600801/evenly-\/distributing-\/n-\/points-\/on-\/a-\/sphere}}. 
+Check if a vector\textquotesingle{}s altitude is between max and min angle.
 
 
 \begin{DoxyParams}{Parameters}
-{\em numrays} & The number of directions to generate. \\
+{\em vec} & Vector to check the altitude of \\
+\hline
+{\em max\+\_\+angle} & Maximum allowed angle in radians \\
+\hline
+{\em min\+\_\+angle} & Minimum allowed angle in radians\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-An array of equally spaced directions. 
+True if vec\textquotesingle{}s altitude is between min and max angle, false if it isn\textquotesingle{}t.
 \end{DoxyReturn}
-\begin{DoxyRefDesc}{Deprecated}
-\item[\mbox{\hyperlink{a00263__deprecated000015}{Deprecated}}]Use the version in View\+Analysis \end{DoxyRefDesc}
+vec is converted to spherical coordinates to determine phi, which is then compared to max and min angle to calculate the result. 
 
-
-Definition at line 114 of file embree\+\_\+raytracer.\+cpp.
-
-
-
-References myradians().
-
-\mbox{\Hypertarget{a00277_a03d93804b73bd4a5d8ab8e679e5b28cd}\label{a00277_a03d93804b73bd4a5d8ab8e679e5b28cd}} 
-\index{HF::RayTracer@{HF::RayTracer}!genSphereRays@{genSphereRays}}
-\index{genSphereRays@{genSphereRays}!HF::RayTracer@{HF::RayTracer}}
-\doxysubsubsection{\texorpdfstring{genSphereRays()}{genSphereRays()}}
-{\footnotesize\ttfamily std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ H\+F\+::\+Ray\+Tracer\+::gen\+Sphere\+Rays (\begin{DoxyParamCaption}\item[{int}]{step }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+Definition at line 62 of file view\+\_\+analysis.\+cpp.
 
 
 
-Generate a vector of directions to distribute rays in 360 degrees. 
+Referenced by Fibbonacci\+Dist().
 
-\begin{DoxyRefDesc}{Deprecated}
-\item[\mbox{\hyperlink{a00263__deprecated000012}{Deprecated}}]Use the version in View\+Analysis. \end{DoxyRefDesc}
+\mbox{\Hypertarget{a00277_a9dcf81751f63f5c7356a4f45159184bb}\label{a00277_a9dcf81751f63f5c7356a4f45159184bb}} 
+\index{HF::ViewAnalysis@{HF::ViewAnalysis}!ConvertToRadians@{ConvertToRadians}}
+\index{ConvertToRadians@{ConvertToRadians}!HF::ViewAnalysis@{HF::ViewAnalysis}}
+\doxysubsubsection{\texorpdfstring{ConvertToRadians()}{ConvertToRadians()}}
+{\footnotesize\ttfamily constexpr float H\+F\+::\+View\+Analysis\+::\+Convert\+To\+Radians (\begin{DoxyParamCaption}\item[{float}]{num\+\_\+in\+\_\+degrees }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [constexpr]}}
 
 
-This algorithm is from the old python codebase. 
+
+Convert a number from degrees to radians. 
+
+
+
+Definition at line 27 of file view\+\_\+analysis.\+cpp.
+
+
+
+Referenced by Fibbonacci\+Dist().
+
+\mbox{\Hypertarget{a00277_ad171585ac55c35e394e26a2f80364a0f}\label{a00277_ad171585ac55c35e394e26a2f80364a0f}} 
+\index{HF::ViewAnalysis@{HF::ViewAnalysis}!FibbonacciDist@{FibbonacciDist}}
+\index{FibbonacciDist@{FibbonacciDist}!HF::ViewAnalysis@{HF::ViewAnalysis}}
+\doxysubsubsection{\texorpdfstring{FibbonacciDist()}{FibbonacciDist()}}
+{\footnotesize\ttfamily vector$<$std\+::array$<$float, 3$>$ $>$ H\+F\+::\+View\+Analysis\+::\+Fibbonacci\+Dist (\begin{DoxyParamCaption}\item[{int}]{num\+\_\+points,  }\item[{float}]{upwards\+\_\+fov,  }\item[{float}]{downward\+\_\+fov }\end{DoxyParamCaption})}
+
+Equally distribute points on a sphere using Fibbonacci
 
 
 \begin{DoxyParams}{Parameters}
-{\em step} & The stepsize to use for distributing directions. Lower step sizes yield better coverage, but more rays. \\
+{\em num\+\_\+points} & Number of points to generate. The actual number of points generated will be lower based given field of view limits. \\
+\hline
+{\em upwards\+\_\+fov} & Maximum altitude of generated points in degrees. \\
+\hline
+{\em downward\+\_\+fov} & Minimum altitude of points in degrees.\\
 \hline
 \end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-An array of directions distributed in a sphere. 
-\end{DoxyReturn}
-\begin{DoxyRefDesc}{Deprecated}
-\item[\mbox{\hyperlink{a00263__deprecated000014}{Deprecated}}]Use the version in View\+Analysis \end{DoxyRefDesc}
+Implementation is based on \href{https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere}{\texttt{ https\+://stackoverflow.\+com/questions/9600801/evenly-\/distributing-\/n-\/points-\/on-\/a-\/sphere}}.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a00277_a94327f2628a43ffe3dc4ab854e8aa20d}{Altitude\+Within\+Range}} to see how altitude is limited based on upward/downward fov. 
+\end{DoxySeeAlso}
 
 
-Definition at line 87 of file embree\+\_\+raytracer.\+cpp.
-
-
-
-References myradians().
-
-\mbox{\Hypertarget{a00277_adb85d3abbe51075a71812fdc95de8322}\label{a00277_adb85d3abbe51075a71812fdc95de8322}} 
-\index{HF::RayTracer@{HF::RayTracer}!getRandomNumber@{getRandomNumber}}
-\index{getRandomNumber@{getRandomNumber}!HF::RayTracer@{HF::RayTracer}}
-\doxysubsubsection{\texorpdfstring{getRandomNumber()}{getRandomNumber()}}
-{\footnotesize\ttfamily static double H\+F\+::\+Ray\+Tracer\+::get\+Random\+Number (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
-
-\begin{DoxyRefDesc}{Deprecated}
-\item[\mbox{\hyperlink{a00263__deprecated000009}{Deprecated}}]Use the version in View\+Analysis. \end{DoxyRefDesc}
-
-
-Definition at line 59 of file embree\+\_\+raytracer.\+cpp.
-
-\mbox{\Hypertarget{a00277_af350b924e9637d84c8b316a3b1641bbc}\label{a00277_af350b924e9637d84c8b316a3b1641bbc}} 
-\index{HF::RayTracer@{HF::RayTracer}!mix@{mix}}
-\index{mix@{mix}!HF::RayTracer@{HF::RayTracer}}
-\doxysubsubsection{\texorpdfstring{mix()}{mix()}}
-{\footnotesize\ttfamily static unsigned long H\+F\+::\+Ray\+Tracer\+::mix (\begin{DoxyParamCaption}\item[{unsigned long}]{a,  }\item[{unsigned long}]{b,  }\item[{unsigned long}]{c }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
-
-\begin{DoxyRefDesc}{Deprecated}
-\item[\mbox{\hyperlink{a00263__deprecated000011}{Deprecated}}]Use the version in View\+Analysis. \end{DoxyRefDesc}
-
-
-Definition at line 71 of file embree\+\_\+raytracer.\+cpp.
-
-\mbox{\Hypertarget{a00277_a0429e7d02ef59bcad3fa5f7ec2b620dc}\label{a00277_a0429e7d02ef59bcad3fa5f7ec2b620dc}} 
-\index{HF::RayTracer@{HF::RayTracer}!myradians@{myradians}}
-\index{myradians@{myradians}!HF::RayTracer@{HF::RayTracer}}
-\doxysubsubsection{\texorpdfstring{myradians()}{myradians()}}
-{\footnotesize\ttfamily static float H\+F\+::\+Ray\+Tracer\+::myradians (\begin{DoxyParamCaption}\item[{float}]{angle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
-
-\begin{DoxyRefDesc}{Deprecated}
-\item[\mbox{\hyperlink{a00263__deprecated000010}{Deprecated}}]Use the version in View\+Analysis. \end{DoxyRefDesc}
-
-
-Definition at line 65 of file embree\+\_\+raytracer.\+cpp.
+Definition at line 84 of file view\+\_\+analysis.\+cpp.
 
 
 
-Referenced by gen\+Fibbonacci\+Rays(), and gen\+Sphere\+Rays().
-
-\mbox{\Hypertarget{a00277_a9a8051c9b70fc0ae60337d4a38bf5f57}\label{a00277_a9a8051c9b70fc0ae60337d4a38bf5f57}} 
-\index{HF::RayTracer@{HF::RayTracer}!vectorsToBuffers@{vectorsToBuffers}}
-\index{vectorsToBuffers@{vectorsToBuffers}!HF::RayTracer@{HF::RayTracer}}
-\doxysubsubsection{\texorpdfstring{vectorsToBuffers()}{vectorsToBuffers()}}
-{\footnotesize\ttfamily void H\+F\+::\+Ray\+Tracer\+::vectors\+To\+Buffers (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::array$<$ float, 3 $>$$>$ \&}]{vertices,  }\item[{std\+::vector$<$ \mbox{\hyperlink{a00277_a01155}{Triangle}} $>$ \&}]{Tribuffer,  }\item[{std\+::vector$<$ \mbox{\hyperlink{a00277_a01151}{Vertex}} $>$ \&}]{Vbuffer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+References Altitude\+Within\+Range(), Convert\+To\+Radians(), and Normalize().
 
 
 
-Index a list of verticies and place them into a triangle and vertex buffer. 
+Referenced by Fibbonacci\+Distribute\+Points().
+
+\mbox{\Hypertarget{a00277_a38ed3d26d2fcc4bde1790c53eda3945a}\label{a00277_a38ed3d26d2fcc4bde1790c53eda3945a}} 
+\index{HF::ViewAnalysis@{HF::ViewAnalysis}!Normalize@{Normalize}}
+\index{Normalize@{Normalize}!HF::ViewAnalysis@{HF::ViewAnalysis}}
+\doxysubsubsection{\texorpdfstring{Normalize()}{Normalize()}}
+{\footnotesize\ttfamily void H\+F\+::\+View\+Analysis\+::\+Normalize (\begin{DoxyParamCaption}\item[{std\+::array$<$ float, 3 $>$ \&}]{vec }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Normalize a vector. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em vertices} & Mesh vertices.\\
-\hline
-{\em Tribuffer} & Output triangle buffer.\\
-\hline
-{\em Vbuffer} & Output \mbox{\hyperlink{a00277_a01151}{Vertex}} Buffer.\\
+{\em vec} & Vector to normalize. Will be updated with the normalized value. \\
 \hline
 \end{DoxyParams}
 
 
-Internally, this uses a hashmap to create an index map of vertices.
-
-\begin{DoxyRefDesc}{Todo}
-\item[\mbox{\hyperlink{a00264__todo000018}{Todo}}]Performance here can be improved by using indexing. \end{DoxyRefDesc}
-
-
-Definition at line 151 of file embree\+\_\+raytracer.\+cpp.
+Definition at line 33 of file view\+\_\+analysis.\+cpp.
 
 
 
-Referenced by H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer(), and H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Insert\+New\+Mesh().
+Referenced by Fibbonacci\+Dist().
 

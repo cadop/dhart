@@ -1,418 +1,343 @@
-\hypertarget{a00278}{}\doxysection{HF\+::Analysis\+Methods\+::Visibility\+Graph Namespace Reference}
-\label{a00278}\index{HF::AnalysisMethods::VisibilityGraph@{HF::AnalysisMethods::VisibilityGraph}}
+\hypertarget{a00278}{}\doxysection{HF\+::Spatial\+Structures Namespace Reference}
+\label{a00278}\index{HF::SpatialStructures@{HF::SpatialStructures}}
 
 
-Evaluate visibility between points in a set of locations.  
+Contains standard fundamental data structures for representing space used throughout Human\+Factors.  
 
 
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{a01185}{C\+S\+R\+Ptrs}}
+\begin{DoxyCompactList}\small\item\em A struct to hold all necessary information for a C\+SR. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a01173}{Edge}}
+\begin{DoxyCompactList}\small\item\em A connection to a child node. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a00278_a01181}{Edge\+Set}}
+\begin{DoxyCompactList}\small\item\em A collection of edges and a parent.  \mbox{\hyperlink{a00278_a01181}{More...}}\end{DoxyCompactList}\item 
+class \mbox{\hyperlink{a01189}{Graph}}
+\begin{DoxyCompactList}\small\item\em A \mbox{\hyperlink{a01189}{Graph}} of nodes connected by edges that supports both integers and \mbox{\hyperlink{a01193}{H\+F\+::\+Spatial\+Structures\+::\+Node}}. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a00278_a01177}{Int\+Edge}}
+\begin{DoxyCompactList}\small\item\em A lighter version of \mbox{\hyperlink{a01173}{Edge}} that contains an ID instead of a full node object..  \mbox{\hyperlink{a00278_a01177}{More...}}\end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a01193}{Node}}
+\begin{DoxyCompactList}\small\item\em A point in space with an ID. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a01205}{Path}}
+\begin{DoxyCompactList}\small\item\em A collection of nodes that form a path. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a01201}{Path\+Member}}
+\begin{DoxyCompactList}\small\item\em The ID of a node, and the cost cost to the node after it. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{a00278_af0378d900074d484ba791d4317e5935e}{S\+T\+EP}} \{ \newline
+\mbox{\hyperlink{a00278_af0378d900074d484ba791d4317e5935ea7a2b5bf64195a97a6b132bf9c58d0bf9}{N\+O\+T\+\_\+\+C\+O\+N\+N\+E\+C\+T\+ED}} = 0, 
+\mbox{\hyperlink{a00278_af0378d900074d484ba791d4317e5935ea45ef4ea34d22b5d90e23d61af2f1f51a}{N\+O\+NE}} = 1, 
+\mbox{\hyperlink{a00278_af0378d900074d484ba791d4317e5935ea599bf51c4226a80ada6f743f6e9acd5c}{UP}} = 2, 
+\mbox{\hyperlink{a00278_af0378d900074d484ba791d4317e5935ea023b84d27813ed1b354da97011695e98}{D\+O\+WN}} = 3, 
+\newline
+\mbox{\hyperlink{a00278_af0378d900074d484ba791d4317e5935eaa734acd80348ed3c2f2df367e7ab1bac}{O\+V\+ER}} = 4
+ \}
+\begin{DoxyCompactList}\small\item\em Describes the type of step an edge connects to. \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{a00278_a6b23c0b2531c78f6d5049873c184f4f9}{C\+O\+S\+T\+\_\+\+A\+G\+G\+R\+E\+G\+A\+TE}} \+: int \{ \mbox{\hyperlink{a00278_a6b23c0b2531c78f6d5049873c184f4f9a6970bdc2201030b9c03fbdcf3973858a}{C\+O\+S\+T\+\_\+\+A\+G\+G\+R\+E\+G\+A\+T\+E\+::\+S\+UM}} = 0, 
+\mbox{\hyperlink{a00278_a6b23c0b2531c78f6d5049873c184f4f9a16de38737a9f8366e9b2042b4e9b6290}{C\+O\+S\+T\+\_\+\+A\+G\+G\+R\+E\+G\+A\+T\+E\+::\+A\+V\+E\+R\+A\+GE}} = 1, 
+\mbox{\hyperlink{a00278_a6b23c0b2531c78f6d5049873c184f4f9a4905ac9d6a22bdfc1ae096094ce6248d}{C\+O\+S\+T\+\_\+\+A\+G\+G\+R\+E\+G\+A\+T\+E\+::\+C\+O\+U\+NT}} = 2
+ \}
+\begin{DoxyCompactList}\small\item\em Methods of aggregating the costs for edges for each node in the graph. \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{a00278_aa8ecd83cd353318532d791fc819343cc}{N\+O\+D\+E\+\_\+\+T\+Y\+PE}} \{ \mbox{\hyperlink{a00278_aa8ecd83cd353318532d791fc819343cca5c2876be9857d3e0192c9e1cb3797bf8}{G\+R\+A\+PH}} = 0, 
+\mbox{\hyperlink{a00278_aa8ecd83cd353318532d791fc819343cca023bd38e0854e766e5c483d451a383ad}{P\+OI}} = 1, 
+\mbox{\hyperlink{a00278_aa8ecd83cd353318532d791fc819343cca996f30fa669937983b628671c4493b8e}{O\+T\+H\+ER}} = 2
+ \}
+\begin{DoxyCompactList}\small\item\em The type of node this is. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-bool \mbox{\hyperlink{a00278_adb5df7862e7c6b7cf2cb6a158491c420}{Height\+Check}} (const \mbox{\hyperlink{a01203}{Node}} \&\mbox{\hyperlink{a01203}{Node}}, float height, \mbox{\hyperlink{a01163}{Embree\+Ray\+Tracer}} \&ert)
-\begin{DoxyCompactList}\small\item\em Check if Node can be raised by height without clipping into any geometry. \end{DoxyCompactList}\item 
-vector$<$ int $>$ \mbox{\hyperlink{a00278_a5d3eda634ef618a61bc49b0639b0ad07}{Height\+Check\+All\+Nodes}} (const vector$<$ \mbox{\hyperlink{a01203}{Node}} $>$ \&nodes\+\_\+to\+\_\+filter, float height, \mbox{\hyperlink{a01163}{Embree\+Ray\+Tracer}} \&ert)
-\begin{DoxyCompactList}\small\item\em Obtain the indexes of all nodes that pass the Height\+Check. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{a00278_a059b752a99bbc272ec501b781ce73cc5}{Is\+Occlusion\+Between}} (const \mbox{\hyperlink{a01203}{Node}} \&node\+\_\+a, const \mbox{\hyperlink{a01203}{Node}} \&node\+\_\+b, \mbox{\hyperlink{a01163}{Embree\+Ray\+Tracer}} \&ert, float height=1.\+7f, float pre\+\_\+calculated\+\_\+distance=0.\+0f)
-\begin{DoxyCompactList}\small\item\em Perform a line of sight check between two nodes. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a01199}{Graph}} \mbox{\hyperlink{a00278_aa5e31d3364f1dbee72065b8f5dc38574}{All\+To\+All}} (\mbox{\hyperlink{a01163}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&ert, const std\+::vector$<$ \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \&input\+\_\+nodes, float height=1.\+7f)
-\begin{DoxyCompactList}\small\item\em Generate a Visibility Graph between every node in a set of nodes in parallel. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a01199}{Graph}} \mbox{\hyperlink{a00278_a85f2d1e50a9458e1a4b0bb8a0e0adafa}{Group\+To\+Group}} (\mbox{\hyperlink{a01163}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&ert, const std\+::vector$<$ \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \&from, const std\+::vector$<$ \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \&to, float height=1.\+7f)
-\begin{DoxyCompactList}\small\item\em Generate a Visibility Graph from a set of nodes to another set of nodes. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a01199}{Graph}} \mbox{\hyperlink{a00278_a2c0cbb953168bcc6a5727bf8122b1286}{All\+To\+All\+Undirected}} (\mbox{\hyperlink{a01163}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&ert, const std\+::vector$<$ \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \&nodes, float height, int cores=-\/1)
-\begin{DoxyCompactList}\small\item\em Generate a Visibility Graph with every edge stored twice. \end{DoxyCompactList}\end{DoxyCompactItemize}
+float \mbox{\hyperlink{a00278_a2663b7e0dd2b9fb87e582feddcd13a8c}{roundhf}} (float f)
+\begin{DoxyCompactList}\small\item\em Round a a float to the nearest R\+O\+U\+N\+D\+I\+N\+G\+\_\+\+P\+R\+E\+C\+I\+S\+I\+ON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a00278_aff8692cdca1763985a0a6501abaedcd5}{Aggregate}} (float \&out\+\_\+total, float new\+\_\+value, const \mbox{\hyperlink{a00278_a6b23c0b2531c78f6d5049873c184f4f9}{C\+O\+S\+T\+\_\+\+A\+G\+G\+R\+E\+G\+A\+TE}} agg\+\_\+type, int \&count)
+\begin{DoxyCompactList}\small\item\em Aggregate new\+\_\+value into out\+\_\+total using the method specified in agg\+\_\+type. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a00278_ad9a8f0f70b3f60ac5cb7889885d851d1}{Normalize}} (std\+::array$<$ float, 3 $>$ \&vector)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+constexpr float \mbox{\hyperlink{a00278_a0140105869479399be75147c8f77e724}{R\+O\+U\+N\+D\+I\+N\+G\+\_\+\+P\+R\+E\+C\+I\+S\+I\+ON}} = 0.\+0001f
+\begin{DoxyCompactList}\small\item\em Minimum value that can be represented in humanfactors. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Evaluate visibility between points in a set of locations. 
-
-A Visibility Graph is a graph of points of space locations that have a clear line of sight to eachother.
-
-Edges in Visibility Graph are bidirectional, since if one node can see another node, the inverse is true. Generating a Visibility Graph from a set of nodes consists of performing a line of sight check between each combination of nodes, and creating an edge if the line of sight check passes.
+Contains standard fundamental data structures for representing space used throughout Human\+Factors. 
 
 \begin{DoxyRemark}{Remarks}
-One can quickly summarize the information in a Visibility Graph by summarizing the values of its edges for each node in the graph.
+The datatypes in the \mbox{\hyperlink{a00278}{Spatial\+Structures}} Namespace are used throughout the Human\+Factors library. For example, the \mbox{\hyperlink{a00276}{H\+F\+::\+Graph\+Generator}} and \mbox{\hyperlink{a00280}{H\+F\+::\+Visibility\+Graph}} both produce a \mbox{\hyperlink{a01189}{Graph}} as output, allowing for the code to manage the \mbox{\hyperlink{a01189}{Graph}}\textquotesingle{}s internal C\+SR to be centralized in a single location. 
 \end{DoxyRemark}
+
+
+\doxysubsection{Class Documentation}
+\index{HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}}\label{a01181}
+\Hypertarget{a00278_a01181}
+\doxysubsubsection{struct HF\+::Spatial\+Structures\+::Edge\+Set}
+A collection of edges and a parent. 
+
+\begin{DoxyRemark}{Remarks}
+This can to represent a node and its edges without repeating any information such as parent\+\_\+id or node objects. 
+\end{DoxyRemark}
+
+
+Definition at line 66 of file Edge.\+h.
+
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00278_ae0ed1fa60810e109100548a03e10259c}\label{a00278_ae0ed1fa60810e109100548a03e10259c}} 
+vector$<$ \mbox{\hyperlink{a00278_a01177}{IntEdge}} $>$&
+children&
+vector of \mbox{\hyperlink{a00278_a01177}{Int\+Edge}} (children) \\
+\hline
+
+\mbox{\Hypertarget{a00278_a1cf561c1c38a93316f15ac2ab29fc8f4}\label{a00278_a1cf561c1c38a93316f15ac2ab29fc8f4}} 
+int&
+parent&
+Identifier of parent node. \\
+\hline
+
+\end{DoxyFields}
+\index{HF::SpatialStructures::IntEdge@{HF::SpatialStructures::IntEdge}}\label{a01177}
+\Hypertarget{a00278_a01177}
+\doxysubsubsection{struct HF\+::Spatial\+Structures\+::Int\+Edge}
+A lighter version of \mbox{\hyperlink{a01173}{Edge}} that contains an ID instead of a full node object.. 
+
+
+
+Definition at line 55 of file Edge.\+h.
+
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00278_a7662d9deb8c69743b37c0c8da3f51610}\label{a00278_a7662d9deb8c69743b37c0c8da3f51610}} 
+int&
+child&
+Identifier of child node. \\
+\hline
+
+\mbox{\Hypertarget{a00278_a4c5bcbef0f0b977f2bbf4495939c9f18}\label{a00278_a4c5bcbef0f0b977f2bbf4495939c9f18}} 
+float&
+weight&
+Cost to traverse to child. \\
+\hline
+
+\end{DoxyFields}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{a00278_a6b23c0b2531c78f6d5049873c184f4f9}\label{a00278_a6b23c0b2531c78f6d5049873c184f4f9}} 
+\index{HF::SpatialStructures@{HF::SpatialStructures}!COST\_AGGREGATE@{COST\_AGGREGATE}}
+\index{COST\_AGGREGATE@{COST\_AGGREGATE}!HF::SpatialStructures@{HF::SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{COST\_AGGREGATE}{COST\_AGGREGATE}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{a00278_a6b23c0b2531c78f6d5049873c184f4f9}{H\+F\+::\+Spatial\+Structures\+::\+C\+O\+S\+T\+\_\+\+A\+G\+G\+R\+E\+G\+A\+TE}} \+: int\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Methods of aggregating the costs for edges for each node in the graph. 
+
 \begin{DoxySeeAlso}{See also}
-\mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} for more info on the Graph Datatype that is returned from all functions in the \mbox{\hyperlink{a00278}{Visibility\+Graph}} namespace. 
+\mbox{\hyperlink{a01189_a3285be5da987692e0b3671f49d67d21b}{Graph.\+Aggregate\+Graph()}} for details on how to use this enum. 
 \end{DoxySeeAlso}
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SUM@{SUM}!HF::SpatialStructures@{HF::SpatialStructures}}\index{HF::SpatialStructures@{HF::SpatialStructures}!SUM@{SUM}}}\mbox{\Hypertarget{a00278_a6b23c0b2531c78f6d5049873c184f4f9a6970bdc2201030b9c03fbdcf3973858a}\label{a00278_a6b23c0b2531c78f6d5049873c184f4f9a6970bdc2201030b9c03fbdcf3973858a}} 
+S\+UM&Add the cost of all edges. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AVERAGE@{AVERAGE}!HF::SpatialStructures@{HF::SpatialStructures}}\index{HF::SpatialStructures@{HF::SpatialStructures}!AVERAGE@{AVERAGE}}}\mbox{\Hypertarget{a00278_a6b23c0b2531c78f6d5049873c184f4f9a16de38737a9f8366e9b2042b4e9b6290}\label{a00278_a6b23c0b2531c78f6d5049873c184f4f9a16de38737a9f8366e9b2042b4e9b6290}} 
+A\+V\+E\+R\+A\+GE&Average the cost of all edges. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{COUNT@{COUNT}!HF::SpatialStructures@{HF::SpatialStructures}}\index{HF::SpatialStructures@{HF::SpatialStructures}!COUNT@{COUNT}}}\mbox{\Hypertarget{a00278_a6b23c0b2531c78f6d5049873c184f4f9a4905ac9d6a22bdfc1ae096094ce6248d}\label{a00278_a6b23c0b2531c78f6d5049873c184f4f9a4905ac9d6a22bdfc1ae096094ce6248d}} 
+C\+O\+U\+NT&Count how many edges this node has. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 23 of file graph.\+h.
+
+\mbox{\Hypertarget{a00278_aa8ecd83cd353318532d791fc819343cc}\label{a00278_aa8ecd83cd353318532d791fc819343cc}} 
+\index{HF::SpatialStructures@{HF::SpatialStructures}!NODE\_TYPE@{NODE\_TYPE}}
+\index{NODE\_TYPE@{NODE\_TYPE}!HF::SpatialStructures@{HF::SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{NODE\_TYPE}{NODE\_TYPE}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{a00278_aa8ecd83cd353318532d791fc819343cc}{H\+F\+::\+Spatial\+Structures\+::\+N\+O\+D\+E\+\_\+\+T\+Y\+PE}}}
+
+
+
+The type of node this is. 
+
+\begin{DoxyRemark}{Remarks}
+
+\end{DoxyRemark}
+This was primarially used in the previous codebase to differentiate the different types of nodes in the database. Since the database is not implemented here, this goes entirely unused. \begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GRAPH@{GRAPH}!HF::SpatialStructures@{HF::SpatialStructures}}\index{HF::SpatialStructures@{HF::SpatialStructures}!GRAPH@{GRAPH}}}\mbox{\Hypertarget{a00278_aa8ecd83cd353318532d791fc819343cca5c2876be9857d3e0192c9e1cb3797bf8}\label{a00278_aa8ecd83cd353318532d791fc819343cca5c2876be9857d3e0192c9e1cb3797bf8}} 
+G\+R\+A\+PH&This node is a graph node. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{POI@{POI}!HF::SpatialStructures@{HF::SpatialStructures}}\index{HF::SpatialStructures@{HF::SpatialStructures}!POI@{POI}}}\mbox{\Hypertarget{a00278_aa8ecd83cd353318532d791fc819343cca023bd38e0854e766e5c483d451a383ad}\label{a00278_aa8ecd83cd353318532d791fc819343cca023bd38e0854e766e5c483d451a383ad}} 
+P\+OI&P\+OI is \textquotesingle{}point of interest\textquotesingle{}. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OTHER@{OTHER}!HF::SpatialStructures@{HF::SpatialStructures}}\index{HF::SpatialStructures@{HF::SpatialStructures}!OTHER@{OTHER}}}\mbox{\Hypertarget{a00278_aa8ecd83cd353318532d791fc819343cca996f30fa669937983b628671c4493b8e}\label{a00278_aa8ecd83cd353318532d791fc819343cca996f30fa669937983b628671c4493b8e}} 
+O\+T\+H\+ER&This node doesn\textquotesingle{}t belong in any other category. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 29 of file node.\+h.
+
+\mbox{\Hypertarget{a00278_af0378d900074d484ba791d4317e5935e}\label{a00278_af0378d900074d484ba791d4317e5935e}} 
+\index{HF::SpatialStructures@{HF::SpatialStructures}!STEP@{STEP}}
+\index{STEP@{STEP}!HF::SpatialStructures@{HF::SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{STEP}{STEP}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{a00278_af0378d900074d484ba791d4317e5935e}{H\+F\+::\+Spatial\+Structures\+::\+S\+T\+EP}}}
+
+
+
+Describes the type of step an edge connects to. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NOT\_CONNECTED@{NOT\_CONNECTED}!HF::SpatialStructures@{HF::SpatialStructures}}\index{HF::SpatialStructures@{HF::SpatialStructures}!NOT\_CONNECTED@{NOT\_CONNECTED}}}\mbox{\Hypertarget{a00278_af0378d900074d484ba791d4317e5935ea7a2b5bf64195a97a6b132bf9c58d0bf9}\label{a00278_af0378d900074d484ba791d4317e5935ea7a2b5bf64195a97a6b132bf9c58d0bf9}} 
+N\+O\+T\+\_\+\+C\+O\+N\+N\+E\+C\+T\+ED&No connection between parent and child. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NONE@{NONE}!HF::SpatialStructures@{HF::SpatialStructures}}\index{HF::SpatialStructures@{HF::SpatialStructures}!NONE@{NONE}}}\mbox{\Hypertarget{a00278_af0378d900074d484ba791d4317e5935ea45ef4ea34d22b5d90e23d61af2f1f51a}\label{a00278_af0378d900074d484ba791d4317e5935ea45ef4ea34d22b5d90e23d61af2f1f51a}} 
+N\+O\+NE&Parent and child are on the same plane and no step is required. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UP@{UP}!HF::SpatialStructures@{HF::SpatialStructures}}\index{HF::SpatialStructures@{HF::SpatialStructures}!UP@{UP}}}\mbox{\Hypertarget{a00278_af0378d900074d484ba791d4317e5935ea599bf51c4226a80ada6f743f6e9acd5c}\label{a00278_af0378d900074d484ba791d4317e5935ea599bf51c4226a80ada6f743f6e9acd5c}} 
+UP&A step up is required to get from parent to child. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DOWN@{DOWN}!HF::SpatialStructures@{HF::SpatialStructures}}\index{HF::SpatialStructures@{HF::SpatialStructures}!DOWN@{DOWN}}}\mbox{\Hypertarget{a00278_af0378d900074d484ba791d4317e5935ea023b84d27813ed1b354da97011695e98}\label{a00278_af0378d900074d484ba791d4317e5935ea023b84d27813ed1b354da97011695e98}} 
+D\+O\+WN&A step down is required to get from parent to child. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OVER@{OVER}!HF::SpatialStructures@{HF::SpatialStructures}}\index{HF::SpatialStructures@{HF::SpatialStructures}!OVER@{OVER}}}\mbox{\Hypertarget{a00278_af0378d900074d484ba791d4317e5935eaa734acd80348ed3c2f2df367e7ab1bac}\label{a00278_af0378d900074d484ba791d4317e5935eaa734acd80348ed3c2f2df367e7ab1bac}} 
+O\+V\+ER&A step over something is required to get from parent to child. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 15 of file Edge.\+h.
+
 
 
 \doxysubsection{Function Documentation}
-\mbox{\Hypertarget{a00278_aa5e31d3364f1dbee72065b8f5dc38574}\label{a00278_aa5e31d3364f1dbee72065b8f5dc38574}} 
-\index{HF::AnalysisMethods::VisibilityGraph@{HF::AnalysisMethods::VisibilityGraph}!AllToAll@{AllToAll}}
-\index{AllToAll@{AllToAll}!HF::AnalysisMethods::VisibilityGraph@{HF::AnalysisMethods::VisibilityGraph}}
-\doxysubsubsection{\texorpdfstring{AllToAll()}{AllToAll()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} H\+F\+::\+Analysis\+Methods\+::\+Visibility\+Graph\+::\+All\+To\+All (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01163}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&}]{ert,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \&}]{input\+\_\+nodes,  }\item[{float}]{height = {\ttfamily 1.7f} }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{a00278_aff8692cdca1763985a0a6501abaedcd5}\label{a00278_aff8692cdca1763985a0a6501abaedcd5}} 
+\index{HF::SpatialStructures@{HF::SpatialStructures}!Aggregate@{Aggregate}}
+\index{Aggregate@{Aggregate}!HF::SpatialStructures@{HF::SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{Aggregate()}{Aggregate()}}
+{\footnotesize\ttfamily void H\+F\+::\+Spatial\+Structures\+::\+Aggregate (\begin{DoxyParamCaption}\item[{float \&}]{out\+\_\+total,  }\item[{float}]{new\+\_\+value,  }\item[{const \mbox{\hyperlink{a00278_a6b23c0b2531c78f6d5049873c184f4f9}{C\+O\+S\+T\+\_\+\+A\+G\+G\+R\+E\+G\+A\+TE}}}]{agg\+\_\+type,  }\item[{int \&}]{count }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Generate a Visibility Graph between every node in a set of nodes in parallel. 
+Aggregate new\+\_\+value into out\+\_\+total using the method specified in agg\+\_\+type. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em ert} & A Raytracer conatining the geometry to use as obstacles for occlusion checks. \\
+{\em out\+\_\+total} & Total to aggregate new\+\_\+value into. \\
 \hline
-{\em input\+\_\+nodes} & X,Y,Z locations of nodes for the Visibility Graph. \\
+{\em new\+\_\+value} & Value to aggregate into out\+\_\+total. \\
 \hline
-{\em height} & Height to offset nodes in the z-\/direction before generating the \mbox{\hyperlink{a00278}{Visibility\+Graph}}.\\
+{\em agg\+\_\+type} & Aggregation method to use. \\
+\hline
+{\em count} & Number of elements. Incremented with each call. \\
 \hline
 \end{DoxyParams}
 
 
-\begin{DoxyReturn}{Returns}
-A \mbox{\hyperlink{a00278}{Visibility\+Graph}} for generated from every node in input\+\_\+nodes. The cost of each edge in the graph is equal to the distance between both nodes.
-\end{DoxyReturn}
-\begin{DoxyNote}{Note}
-After nodes are offset from the ground, a check is performed to determine if it intersects any geometry. If offsetting the node causes it to intersect any geometry,then the node will not be considered for connections with other nodes and will always have no outgoing or incoming edges.
-\end{DoxyNote}
-Every node is offset height meters off the ground, then an occlusion ray is cast between every set of nodes. If this occlusion ray does not intersect any geometry then an edge is created between the set of nodes with a cost equal to the distance between both nodes. The Graph generated by this algorithm is directed, however for each pair of nodes the edge is only stored in the node with the lower ID. This reduces the size of the graph in memory by about 50\% and reduces the number of checks since every node will only need to check for edges with nodes that have a higher ID than itself.
 
-\begin{DoxyParagraph}{Parallelism}
-Edges are checked on a seperate core for each node. This algorithm will always use every core on a user\textquotesingle{}s machine.
-\end{DoxyParagraph}
-\begin{DoxyParagraph}{Complexity}
-The time complexity of this algorithm is O(n$^\wedge$2), performing approximately (n$^\wedge$2+n)/2 operations gauranteed for each execution. The space complexity matches the time complexity, but the actual space used can be less depending on the number of edges created.
-\end{DoxyParagraph}
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::out\+\_\+of\+\_\+range} & agg\+\_\+type doesn\textquotesingle{}t exist in C\+O\+S\+T\+\_\+\+A\+G\+G\+R\+Eg\+A\+TE\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyRemark}{Remarks}
+This is similar to the function from \mbox{\hyperlink{a00277}{View\+Analysis}} but will increment count with each call.
+\end{DoxyRemark}
 \begin{DoxySeeAlso}{See also}
-\mbox{\hyperlink{a00278_a2c0cbb953168bcc6a5727bf8122b1286}{All\+To\+All\+Undirected}} for a version of this algorithm that checks for edges between every node in nodes regardless of ID. 
-
-\mbox{\hyperlink{a00278_a85f2d1e50a9458e1a4b0bb8a0e0adafa}{Group\+To\+Group}} For an algortithm that only calculates a visibility graph for one \mbox{\hyperlink{a00011_ac812385b35e52a68f2eba8435fb7b1bf}{set}} of nodes to another \mbox{\hyperlink{a00011_ac812385b35e52a68f2eba8435fb7b1bf}{set}} of nodes.
-\end{DoxySeeAlso}
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "objloader.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// path to OBJ file for a flat plane}}
-\DoxyCodeLine{std::string plane\_path = \textcolor{stringliteral}{"plane.obj"};}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Create a vector of MeshInfo from plane\_path, using LoadMeshObjects. Note that}}
-\DoxyCodeLine{\textcolor{comment}{// LoadMeshObjects has two more arguments after plane\_path -\/ an enum}}
-\DoxyCodeLine{\textcolor{comment}{// HF::Geometry::GROUP\_METHOD (defaults to GROUP\_METHOD::ONLY\_FILE) a bool}}
-\DoxyCodeLine{\textcolor{comment}{// (defaults to true, used to convert OBJ coordinate system to Rhino coordinates)}}
-\DoxyCodeLine{std::vector<HF::Geometry::MeshInfo> meshInfo = \mbox{\hyperlink{a00280_a6cd66262c11d9276be46e3fcd9a3a712}{HF::Geometry::LoadMeshObjects}}(plane\_path);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Create an EmbreeRayTracer.}}
-\DoxyCodeLine{\mbox{\hyperlink{a01163}{HF::RayTracer::EmbreeRayTracer}} tracer(meshInfo);}
-\DoxyCodeLine{}
-\DoxyCodeLine{std::vector<HF::SpatialStructures::Node> node\_vec;      \textcolor{comment}{// container of nodes}}
-\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} reserve\_count = 100;                          \textcolor{comment}{// pre-\/defined reserve size}}
-\DoxyCodeLine{node\_vec.reserve(reserve\_count);                        \textcolor{comment}{// reserve reserve\_count blocks for node\_vec}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Construct reserve\_count Node and insert each of them into node\_vec}}
-\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{float} i = -\/5.0; i < 5.0; i++) \{}
-\DoxyCodeLine{    \textcolor{comment}{// runs 10 times}}
-\DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{float} j = -\/5; j < 5.0; j++) \{}
-\DoxyCodeLine{        \textcolor{comment}{// runs 10 times}}
-\DoxyCodeLine{        node\_vec.emplace\_back(Node(i, j, 0.0f));    \textcolor{comment}{// all Node ID default to -\/1}}
-\DoxyCodeLine{    \}}
-\DoxyCodeLine{\}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// AllToAll constructs and returns a Graph consisting of Node (from node\_vec)}}
-\DoxyCodeLine{\textcolor{comment}{// that do not occlude each other}}
-\DoxyCodeLine{\textcolor{keywordtype}{float} desired\_height = 2.0f;        \textcolor{comment}{// Height of graph}}
-\DoxyCodeLine{\mbox{\hyperlink{a01199}{HF::SpatialStructures::Graph}} graph = \mbox{\hyperlink{a00278_aa5e31d3364f1dbee72065b8f5dc38574}{AllToAll}}(tracer, node\_vec, desired\_height);}
-\end{DoxyCode}
- 
-
-Definition at line 128 of file visibility\+\_\+graph.\+cpp.
-
-
-
-References H\+F\+::\+Spatial\+Structures\+::\+Node\+::distance\+To(), Height\+Check\+All\+Nodes(), and Is\+Occlusion\+Between().
-
-
-
-Referenced by Create\+Visibility\+Graph\+All\+To\+All().
-
-\mbox{\Hypertarget{a00278_a2c0cbb953168bcc6a5727bf8122b1286}\label{a00278_a2c0cbb953168bcc6a5727bf8122b1286}} 
-\index{HF::AnalysisMethods::VisibilityGraph@{HF::AnalysisMethods::VisibilityGraph}!AllToAllUndirected@{AllToAllUndirected}}
-\index{AllToAllUndirected@{AllToAllUndirected}!HF::AnalysisMethods::VisibilityGraph@{HF::AnalysisMethods::VisibilityGraph}}
-\doxysubsubsection{\texorpdfstring{AllToAllUndirected()}{AllToAllUndirected()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} H\+F\+::\+Analysis\+Methods\+::\+Visibility\+Graph\+::\+All\+To\+All\+Undirected (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01163}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&}]{ert,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \&}]{nodes,  }\item[{float}]{height,  }\item[{int}]{cores = {\ttfamily -\/1} }\end{DoxyParamCaption})}
-
-
-
-Generate a Visibility Graph with every edge stored twice. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em ert} & A Raytracer conatining the geometry to use as obstacles for occlusion checks. \\
-\hline
-{\em from} & X,Y,Z locations of nodes to create the visibility graph from. \\
-\hline
-{\em Height} & to offset nodes in the z-\/direction before generating the \mbox{\hyperlink{a00278}{Visibility\+Graph}}. \\
-\hline
-{\em cores} & number of cores to use for parallel processing. -\/1 will use all available cores.\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-A \mbox{\hyperlink{a00278}{Visibility\+Graph}} generated from every node in input\+\_\+nodes. The cost of each edge in the graph is equal to the distance between both nodes.
-\end{DoxyReturn}
-Similar to \mbox{\hyperlink{a00278_aa5e31d3364f1dbee72065b8f5dc38574}{Visibility\+Graph\+::\+All\+To\+All}}, however every edge is stored in both nodes that it connects. For example, An edge betwee node 1 and node 2 would only be stored in node 1 in All\+To\+All, however here the edge would exist in both node1, and node2, in this algorithm.
-
-\begin{DoxyRemark}{Remarks}
-In most cases it\textquotesingle{}s preferred to use \mbox{\hyperlink{a00278_aa5e31d3364f1dbee72065b8f5dc38574}{Visibility\+Graph\+::\+All\+To\+All}} since it saves a lot of time and space, however it may be advantageous to have edges stored in both nodes for certain applications.
-\end{DoxyRemark}
-\begin{DoxyParagraph}{Parallelism}
-Edges are checked on a seperate core for each node. This algorithm will use every core on a user\textquotesingle{}s machine if cores is set to -\/1. Otherwise it will use the number of cores specified in cores.
-\end{DoxyParagraph}
-\begin{DoxyParagraph}{complexity}
-O(n$^\wedge$2) in space and time. ~\newline
-
-\end{DoxyParagraph}
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "objloader.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// path to OBJ file for a flat plane}}
-\DoxyCodeLine{std::string plane\_path = \textcolor{stringliteral}{"plane.obj"};}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Create a vector of MeshInfo from plane\_path, using LoadMeshObjects. Note that}}
-\DoxyCodeLine{\textcolor{comment}{// LoadMeshObjects has two more arguments after plane\_path -\/ an enum}}
-\DoxyCodeLine{\textcolor{comment}{// HF::Geometry::GROUP\_METHOD (defaults to GROUP\_METHOD::ONLY\_FILE) a bool}}
-\DoxyCodeLine{\textcolor{comment}{// (defaults to true, used to convert OBJ coordinate system to Rhino coordinates)}}
-\DoxyCodeLine{std::vector<HF::Geometry::MeshInfo> meshInfo = \mbox{\hyperlink{a00280_a6cd66262c11d9276be46e3fcd9a3a712}{HF::Geometry::LoadMeshObjects}}(plane\_path);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Create an EmbreeRayTracer.}}
-\DoxyCodeLine{\mbox{\hyperlink{a01163}{HF::RayTracer::EmbreeRayTracer}} tracer(meshInfo);}
-\DoxyCodeLine{}
-\DoxyCodeLine{std::vector<HF::SpatialStructures::Node> node\_vec;      \textcolor{comment}{// container of nodes}}
-\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} reserve\_count = 100;                          \textcolor{comment}{// pre-\/defined reserve size}}
-\DoxyCodeLine{node\_vec.reserve(reserve\_count);                        \textcolor{comment}{// reserve reserve\_count blocks for node\_vec}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Construct reserve\_count Node and insert each of them into node\_vec}}
-\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{float} i = -\/5.0; i < 5.0; i++) \{}
-\DoxyCodeLine{    \textcolor{comment}{// runs 10 times}}
-\DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{float} j = -\/5; j < 5.0; j++) \{}
-\DoxyCodeLine{        \textcolor{comment}{// runs 10 times}}
-\DoxyCodeLine{        node\_vec.emplace\_back(\mbox{\hyperlink{a01203}{HF::SpatialStructures::Node}}(i, j, 0.0f)); \textcolor{comment}{// all Node ID default to -\/1}}
-\DoxyCodeLine{    \}}
-\DoxyCodeLine{\}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// AllToAllUndirected constructs and returns a Graph consisting of Node (from}}
-\DoxyCodeLine{\textcolor{comment}{// node\_vec) that do not occlude each other}}
-\DoxyCodeLine{\textcolor{keywordtype}{float} desired\_height = 2.0f;        \textcolor{comment}{// Height of graph}}
-\DoxyCodeLine{\textcolor{keywordtype}{int} core\_count = 4;                 \textcolor{comment}{// For omp\_set\_num\_threads(int num\_threads), CPU core count}}
-\DoxyCodeLine{\mbox{\hyperlink{a01199}{HF::SpatialStructures::Graph}} graph =}
-\DoxyCodeLine{    \mbox{\hyperlink{a00278_a2c0cbb953168bcc6a5727bf8122b1286}{HF::AnalysisMethods::VisibilityGraph::AllToAllUndirected}}(tracer, node\_vec, desired\_height, core\_count);}
-\end{DoxyCode}
- 
-
-Definition at line 252 of file visibility\+\_\+graph.\+cpp.
-
-
-
-References H\+F\+::\+Spatial\+Structures\+::\+Node\+::distance\+To(), Height\+Check\+All\+Nodes(), and Is\+Occlusion\+Between().
-
-
-
-Referenced by Create\+Visibility\+Graph\+All\+To\+All\+Undirected().
-
-\mbox{\Hypertarget{a00278_a85f2d1e50a9458e1a4b0bb8a0e0adafa}\label{a00278_a85f2d1e50a9458e1a4b0bb8a0e0adafa}} 
-\index{HF::AnalysisMethods::VisibilityGraph@{HF::AnalysisMethods::VisibilityGraph}!GroupToGroup@{GroupToGroup}}
-\index{GroupToGroup@{GroupToGroup}!HF::AnalysisMethods::VisibilityGraph@{HF::AnalysisMethods::VisibilityGraph}}
-\doxysubsubsection{\texorpdfstring{GroupToGroup()}{GroupToGroup()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} H\+F\+::\+Analysis\+Methods\+::\+Visibility\+Graph\+::\+Group\+To\+Group (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01163}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&}]{ert,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \&}]{from,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \&}]{to,  }\item[{float}]{height = {\ttfamily 1.7f} }\end{DoxyParamCaption})}
-
-
-
-Generate a Visibility Graph from a set of nodes to another set of nodes. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em ert} & A Raytracer conatining the geometry to use as obstacles for occlusion checks. \\
-\hline
-{\em from} & X,Y,Z locations of nodes to cast rays from. \\
-\hline
-{\em to} & X,Y,Z locations of nodes to cast rays to. \\
-\hline
-{\em Height} & to offset nodes in the z-\/direction before generating the \mbox{\hyperlink{a00278}{Visibility\+Graph}}.\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-A \mbox{\hyperlink{a00278}{Visibility\+Graph}} generated from every node in from to every node in to. The cost of each edge in the graph is equal to the distance between both nodes.
-\end{DoxyReturn}
-\begin{DoxyNote}{Note}
-The ID of nodes in the new graph wil correspond to the node\textquotesingle{}s location in the from or to arrays. First every node in from will in from be placed in order, then every node in to will be placed in order. This means that the ID of every node in from will be equal to its index in from, and the ID of every node in to will be equal to the number of nodes in from plus its index in to.
-\end{DoxyNote}
-The algorithm used here is similar to that of \mbox{\hyperlink{a00278_aa5e31d3364f1dbee72065b8f5dc38574}{Visibility\+Graph\+::\+All\+To\+All}}, however edges are cast from every node in from to every node in to. All nodes in to will have no outgoing edges.
-
-\begin{DoxyRemark}{Remarks}
-This can be useful for generating the visibility graph for a subset of nodes, such as the visibility from a building to the outside, without needing to calculate the visibility from every node to every other node.
-\end{DoxyRemark}
-\begin{DoxyParagraph}{Parallelism}
-Edges are checked on a seperate core for each node. This algorithm will always use every core on a user\textquotesingle{}s machine.
-\end{DoxyParagraph}
-\begin{DoxyParagraph}{Complexity}
-In time\+: O(ft) where f is the number of nodes in from, and t is the number of nodes in to. In space, O(ft) as well.
-\end{DoxyParagraph}
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "objloader.h"}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// path to OBJ file for a flat plane}}
-\DoxyCodeLine{std::string plane\_path = \textcolor{stringliteral}{"plane.obj"};}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Create a vector of MeshInfo from plane\_path, using LoadMeshObjects. Note that}}
-\DoxyCodeLine{\textcolor{comment}{// LoadMeshObjects has two more arguments after plane\_path -\/ an enum}}
-\DoxyCodeLine{\textcolor{comment}{// HF::Geometry::GROUP\_METHOD (defaults to GROUP\_METHOD::ONLY\_FILE) a bool}}
-\DoxyCodeLine{\textcolor{comment}{// (defaults to true, used to convert OBJ coordinate system to Rhino coordinates)}}
-\DoxyCodeLine{std::vector<HF::Geometry::MeshInfo> meshInfo = \mbox{\hyperlink{a00280_a6cd66262c11d9276be46e3fcd9a3a712}{HF::Geometry::LoadMeshObjects}}(plane\_path);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Create an EmbreeRayTracer.}}
-\DoxyCodeLine{\mbox{\hyperlink{a01163}{HF::RayTracer::EmbreeRayTracer}} tracer(meshInfo);}
-\DoxyCodeLine{}
-\DoxyCodeLine{std::vector<HF::SpatialStructures::Node> node\_vec\_0;        \textcolor{comment}{// First container of Node}}
-\DoxyCodeLine{std::vector<HF::SpatialStructures::Node> node\_vec\_1;        \textcolor{comment}{// Second container of Node}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} reserve\_count = 100;      \textcolor{comment}{// Pre-\/defined reserve size}}
-\DoxyCodeLine{node\_vec\_0.reserve(reserve\_count);  \textcolor{comment}{// Reserve reserve\_count blocks for both vectors}}
-\DoxyCodeLine{node\_vec\_1.reserve(reserve\_count);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// 0) Construct reserve\_count Node and insert each of them into node\_vec\_0}}
-\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{float} i = -\/5.0; i < 5.0; i++) \{}
-\DoxyCodeLine{    \textcolor{comment}{// runs 10 times}}
-\DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{float} j = -\/5.0; j < 5.0; j++) \{}
-\DoxyCodeLine{        \textcolor{comment}{// runs 10 times}}
-\DoxyCodeLine{        node\_vec\_0.emplace\_back(\mbox{\hyperlink{a01203}{HF::SpatialStructures::Node}}(i, j, 0.0f));   \textcolor{comment}{// all Node ID default to -\/1}}
-\DoxyCodeLine{    \}}
-\DoxyCodeLine{\}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// 1) Construct reserve\_count Node and insert each of them into node\_vec\_1}}
-\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{float} i = 0.0; i < 10.0; i++) \{}
-\DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{float} j = 0.0; j < 10.0; j++) \{}
-\DoxyCodeLine{        node\_vec\_1.emplace\_back(\mbox{\hyperlink{a01203}{HF::SpatialStructures::Node}}(i, j, 0.0f));   \textcolor{comment}{// all Node ID default to -\/1}}
-\DoxyCodeLine{    \}}
-\DoxyCodeLine{\}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// GroupToGroup constructs and returns a Graph consisting of Node (between}}
-\DoxyCodeLine{\textcolor{comment}{// node\_vec\_0 and node\_vec\_1) such that the nodes do not occlude each other}}
-\DoxyCodeLine{\textcolor{keywordtype}{float} desired\_height = 2.0f;        \textcolor{comment}{// Height of graph}}
-\DoxyCodeLine{\mbox{\hyperlink{a01199}{HF::SpatialStructures::Graph}} graph = \mbox{\hyperlink{a00278_a85f2d1e50a9458e1a4b0bb8a0e0adafa}{HF::AnalysisMethods::VisibilityGraph::GroupToGroup}}(tracer, node\_vec\_0, node\_vec\_1, desired\_height);}
-\end{DoxyCode}
- 
-
-Definition at line 189 of file visibility\+\_\+graph.\+cpp.
-
-
-
-References H\+F\+::\+Spatial\+Structures\+::\+Node\+::distance\+To(), Height\+Check\+All\+Nodes(), and Is\+Occlusion\+Between().
-
-
-
-Referenced by Create\+Visibility\+Graph\+Group\+To\+Group().
-
-\mbox{\Hypertarget{a00278_adb5df7862e7c6b7cf2cb6a158491c420}\label{a00278_adb5df7862e7c6b7cf2cb6a158491c420}} 
-\index{HF::AnalysisMethods::VisibilityGraph@{HF::AnalysisMethods::VisibilityGraph}!HeightCheck@{HeightCheck}}
-\index{HeightCheck@{HeightCheck}!HF::AnalysisMethods::VisibilityGraph@{HF::AnalysisMethods::VisibilityGraph}}
-\doxysubsubsection{\texorpdfstring{HeightCheck()}{HeightCheck()}}
-{\footnotesize\ttfamily bool H\+F\+::\+Analysis\+Methods\+::\+Visibility\+Graph\+::\+Height\+Check (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01203}{Node}} \&}]{Node,  }\item[{float}]{height,  }\item[{\mbox{\hyperlink{a01163}{Embree\+Ray\+Tracer}} \&}]{ert }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Check if Node can be raised by height without clipping into any geometry. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em Node} & Node to perform height check on. \\
-\hline
-{\em height} & Distance to check above the node in meters. Default = 1.\+7m. \\
-\hline
-{\em ert} & Raytracer containing geometry to intersect with.\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-true if Node can be raised by height without intersecting with any geometry. False otherwise.
-\end{DoxyReturn}
-Cast an occlusion ray straight up with a distance of height to determine if it will intersect with any geometry.
-
-\begin{DoxyRemark}{Remarks}
-This is useful to prevent nodes from going through ceilings or other geometry when comparing the scores of all nodes in a model. 
-\end{DoxyRemark}
-
-
-Definition at line 47 of file visibility\+\_\+graph.\+cpp.
-
-
-
-References H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Fire\+Any\+Occlusion\+Ray(), and H\+F\+::\+Spatial\+Structures\+::\+R\+O\+U\+N\+D\+I\+N\+G\+\_\+\+P\+R\+E\+C\+I\+S\+I\+ON.
-
-
-
-Referenced by Height\+Check\+All\+Nodes().
-
-\mbox{\Hypertarget{a00278_a5d3eda634ef618a61bc49b0639b0ad07}\label{a00278_a5d3eda634ef618a61bc49b0639b0ad07}} 
-\index{HF::AnalysisMethods::VisibilityGraph@{HF::AnalysisMethods::VisibilityGraph}!HeightCheckAllNodes@{HeightCheckAllNodes}}
-\index{HeightCheckAllNodes@{HeightCheckAllNodes}!HF::AnalysisMethods::VisibilityGraph@{HF::AnalysisMethods::VisibilityGraph}}
-\doxysubsubsection{\texorpdfstring{HeightCheckAllNodes()}{HeightCheckAllNodes()}}
-{\footnotesize\ttfamily vector$<$int$>$ H\+F\+::\+Analysis\+Methods\+::\+Visibility\+Graph\+::\+Height\+Check\+All\+Nodes (\begin{DoxyParamCaption}\item[{const vector$<$ \mbox{\hyperlink{a01203}{Node}} $>$ \&}]{nodes\+\_\+to\+\_\+filter,  }\item[{float}]{height,  }\item[{\mbox{\hyperlink{a01163}{Embree\+Ray\+Tracer}} \&}]{ert }\end{DoxyParamCaption})}
-
-
-
-Obtain the indexes of all nodes that pass the Height\+Check. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em nodes\+\_\+to\+\_\+filter} & Nodes to perform the height check on \\
-\hline
-{\em height} & Height to check above the nodes \\
-\hline
-{\em ert} & Raytracer containing the geometry to use as obstacles\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-The indexes in nodes\+\_\+to\+\_\+filter of all nodes that pass the height check.
-\end{DoxyReturn}
-\begin{DoxySeeAlso}{See also}
-\mbox{\hyperlink{a00278_adb5df7862e7c6b7cf2cb6a158491c420}{Height\+Check}} 
+\mbox{\hyperlink{a00278_a6b23c0b2531c78f6d5049873c184f4f9}{C\+O\+S\+T\+\_\+\+A\+G\+G\+R\+E\+G\+A\+TE}} for more information on each aggregate type. 
 \end{DoxySeeAlso}
 
 
-Definition at line 69 of file visibility\+\_\+graph.\+cpp.
+Definition at line 130 of file graph.\+cpp.
 
 
 
-References Height\+Check().
+Referenced by H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Aggregate\+Graph().
+
+\mbox{\Hypertarget{a00278_ad9a8f0f70b3f60ac5cb7889885d851d1}\label{a00278_ad9a8f0f70b3f60ac5cb7889885d851d1}} 
+\index{HF::SpatialStructures@{HF::SpatialStructures}!Normalize@{Normalize}}
+\index{Normalize@{Normalize}!HF::SpatialStructures@{HF::SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{Normalize()}{Normalize()}}
+{\footnotesize\ttfamily void H\+F\+::\+Spatial\+Structures\+::\+Normalize (\begin{DoxyParamCaption}\item[{std\+::array$<$ float, 3 $>$ \&}]{vector }\end{DoxyParamCaption})}
 
 
 
-Referenced by All\+To\+All(), All\+To\+All\+Undirected(), and Group\+To\+Group().
-
-\mbox{\Hypertarget{a00278_a059b752a99bbc272ec501b781ce73cc5}\label{a00278_a059b752a99bbc272ec501b781ce73cc5}} 
-\index{HF::AnalysisMethods::VisibilityGraph@{HF::AnalysisMethods::VisibilityGraph}!IsOcclusionBetween@{IsOcclusionBetween}}
-\index{IsOcclusionBetween@{IsOcclusionBetween}!HF::AnalysisMethods::VisibilityGraph@{HF::AnalysisMethods::VisibilityGraph}}
-\doxysubsubsection{\texorpdfstring{IsOcclusionBetween()}{IsOcclusionBetween()}}
-{\footnotesize\ttfamily bool H\+F\+::\+Analysis\+Methods\+::\+Visibility\+Graph\+::\+Is\+Occlusion\+Between (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01203}{Node}} \&}]{node\+\_\+a,  }\item[{const \mbox{\hyperlink{a01203}{Node}} \&}]{node\+\_\+b,  }\item[{\mbox{\hyperlink{a01163}{Embree\+Ray\+Tracer}} \&}]{ert,  }\item[{float}]{height = {\ttfamily 1.7f},  }\item[{float}]{pre\+\_\+calculated\+\_\+distance = {\ttfamily 0.0f} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+Definition at line 122 of file node.\+cpp.
 
 
 
-Perform a line of sight check between two nodes. 
+Referenced by H\+F\+::\+Spatial\+Structures\+::\+Node\+::direction\+To().
+
+\mbox{\Hypertarget{a00278_a2663b7e0dd2b9fb87e582feddcd13a8c}\label{a00278_a2663b7e0dd2b9fb87e582feddcd13a8c}} 
+\index{HF::SpatialStructures@{HF::SpatialStructures}!roundhf@{roundhf}}
+\index{roundhf@{roundhf}!HF::SpatialStructures@{HF::SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{roundhf()}{roundhf()}}
+{\footnotesize\ttfamily float H\+F\+::\+Spatial\+Structures\+::roundhf (\begin{DoxyParamCaption}\item[{float}]{f }\end{DoxyParamCaption})}
+
+
+
+Round a a float to the nearest R\+O\+U\+N\+D\+I\+N\+G\+\_\+\+P\+R\+E\+C\+I\+S\+I\+ON. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em node\+\_\+a} & Node to check occlusion from. \\
-\hline
-{\em node\+\_\+b} & Node to check occlusion to. \\
-\hline
-{\em ert} & Raytracer containing the geometry to use as obstacles. \\
-\hline
-{\em height} & Distance to offset a node in the z-\/direction before performing the check. \\
-\hline
-{\em pre\+\_\+calculated\+\_\+distance} & Distance from node\+\_\+a to node\+\_\+b. If set to zero then this will be calculated automatically.\\
+{\em f} & The desired float to round. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-True if there is an obstacle blocking line of sight between node\+\_\+a and node\+\_\+b when raised to height.
+f rounded to the nearest rounding\+\_\+precision. 
 \end{DoxyReturn}
-Calculate the distance between node\+\_\+a and node\+\_\+b if required, then calculate the direction between them. Cast an occlusion ray in the direction between node\+\_\+a and node\+\_\+b with a maximum distance equal to the distance between them. If the ray intersects anything then the nodes don\textquotesingle{}t have a line of sight. 
-
-Definition at line 103 of file visibility\+\_\+graph.\+cpp.
 
 
 
-References H\+F\+::\+Spatial\+Structures\+::\+Node\+::direction\+To(), H\+F\+::\+Spatial\+Structures\+::\+Node\+::distance\+To(), and H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Fire\+Any\+Occlusion\+Ray().
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "Constants.h" std::round from the cmath library is used in}}
+\DoxyCodeLine{\textcolor{comment}{// roundhf. Precision is to the nearest ten-\/thousandth}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} my\_pi = 3.141592653589793238462643383279502884197169399375105820974944592307816406286;}
+\DoxyCodeLine{\textcolor{keywordtype}{float} rounded = \mbox{\hyperlink{a00278_a2663b7e0dd2b9fb87e582feddcd13a8c}{HF::SpatialStructures::roundhf}}(my\_pi);  \textcolor{comment}{//  rounded == 3.1416}}
+\end{DoxyCode}
+ 
+
+Definition at line 13 of file Constants.\+cpp.
 
 
 
-Referenced by All\+To\+All(), All\+To\+All\+Undirected(), and Group\+To\+Group().
+References R\+O\+U\+N\+D\+I\+N\+G\+\_\+\+P\+R\+E\+C\+I\+S\+I\+ON.
+
+
+
+Referenced by H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::\+Build\+Network(), and H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::\+Generate\+Potential\+Children().
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{a00278_a0140105869479399be75147c8f77e724}\label{a00278_a0140105869479399be75147c8f77e724}} 
+\index{HF::SpatialStructures@{HF::SpatialStructures}!ROUNDING\_PRECISION@{ROUNDING\_PRECISION}}
+\index{ROUNDING\_PRECISION@{ROUNDING\_PRECISION}!HF::SpatialStructures@{HF::SpatialStructures}}
+\doxysubsubsection{\texorpdfstring{ROUNDING\_PRECISION}{ROUNDING\_PRECISION}}
+{\footnotesize\ttfamily constexpr float H\+F\+::\+Spatial\+Structures\+::\+R\+O\+U\+N\+D\+I\+N\+G\+\_\+\+P\+R\+E\+C\+I\+S\+I\+ON = 0.\+0001f\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+
+
+Minimum value that can be represented in humanfactors. 
+
+All rounding operations in \mbox{\hyperlink{a00278}{H\+F\+::\+Spatial\+Structures}} will use this constant in rounding operations. 
+
+Definition at line 29 of file Constants.\+h.
+
+
+
+Referenced by H\+F\+::\+Visibility\+Graph\+::\+Height\+Check(), H\+F\+::\+Spatial\+Structures\+::\+Path\+Member\+::operator==(), H\+F\+::\+Spatial\+Structures\+::\+Node\+::operator==(), and roundhf().
 

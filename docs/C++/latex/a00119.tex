@@ -2,7 +2,7 @@
 \label{a00119}\index{Cpp/raytracer/src/embree\_raytracer.cpp@{Cpp/raytracer/src/embree\_raytracer.cpp}}
 
 
-Contains implementation for the \mbox{\hyperlink{a01163}{Embree\+Ray\+Tracer}}  
+Contains implementation for the \mbox{\hyperlink{a01165}{Embree\+Ray\+Tracer}}  
 
 
 {\ttfamily \#include $<$embree\+\_\+raytracer.\+h$>$}\newline
@@ -17,44 +17,30 @@ Contains implementation for the \mbox{\hyperlink{a01163}{Embree\+Ray\+Tracer}}
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-struct \mbox{\hyperlink{a00277_a01151}{H\+F\+::\+Ray\+Tracer\+::\+Vertex}}
-\begin{DoxyCompactList}\small\item\em A vertex. Used internally in Embree.  \mbox{\hyperlink{a00277_a01151}{More...}}\end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{a00277_a01155}{H\+F\+::\+Ray\+Tracer\+::\+Triangle}}
-\begin{DoxyCompactList}\small\item\em A triangle. Used internally in Embree.  \mbox{\hyperlink{a00277_a01155}{More...}}\end{DoxyCompactList}\end{DoxyCompactItemize}
+struct \mbox{\hyperlink{a00279_a01153}{H\+F\+::\+Ray\+Tracer\+::\+Vertex}}
+\begin{DoxyCompactList}\small\item\em A vertex. Used internally in Embree.  \mbox{\hyperlink{a00279_a01153}{More...}}\end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a00279_a01157}{H\+F\+::\+Ray\+Tracer\+::\+Triangle}}
+\begin{DoxyCompactList}\small\item\em A triangle. Used internally in Embree.  \mbox{\hyperlink{a00279_a01157}{More...}}\end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{a00273}{HF}}
-\begin{DoxyCompactList}\small\item\em Output C\+SR for interop with other languages \end{DoxyCompactList}\item 
- \mbox{\hyperlink{a00277}{H\+F\+::\+Ray\+Tracer}}
-\end{DoxyCompactItemize}
+ \mbox{\hyperlink{a00275}{HF}}
+\begin{DoxyCompactList}\small\item\em Perform human scale analysis on 3D environments. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00279}{H\+F\+::\+Ray\+Tracer}}
+\begin{DoxyCompactList}\small\item\em Cast rays to determine if and where they intersect geometry. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\footnotesize template$<$typename P , typename D $>$ }\\P \mbox{\hyperlink{a00277_ad36c0e67c4b26522c82d29a2f4c2e7e7}{H\+F\+::\+Ray\+Tracer\+::\+Calculate\+Hit\+Point}} (const P \&origin, const D \&direction, float distance)
-\begin{DoxyCompactList}\small\item\em Calculate the hitpoint of a ray from its origin, direction and distance \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{a00277_a9c9d1d9869aee1f51b5de11f7d9420ec}{H\+F\+::\+Ray\+Tracer\+::\+Check\+State}} (R\+T\+C\+Device \&device)
+void \mbox{\hyperlink{a00279_a9c9d1d9869aee1f51b5de11f7d9420ec}{H\+F\+::\+Ray\+Tracer\+::\+Check\+State}} (R\+T\+C\+Device \&device)
 \begin{DoxyCompactList}\small\item\em Check an embree device for errors. \end{DoxyCompactList}\item 
-static double \mbox{\hyperlink{a00277_adb85d3abbe51075a71812fdc95de8322}{H\+F\+::\+Ray\+Tracer\+::get\+Random\+Number}} ()
-\item 
-static float \mbox{\hyperlink{a00277_a0429e7d02ef59bcad3fa5f7ec2b620dc}{H\+F\+::\+Ray\+Tracer\+::myradians}} (float angle)
-\item 
-static unsigned long \mbox{\hyperlink{a00277_af350b924e9637d84c8b316a3b1641bbc}{H\+F\+::\+Ray\+Tracer\+::mix}} (unsigned long a, unsigned long b, unsigned long c)
-\item 
-static std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ \mbox{\hyperlink{a00277_a03d93804b73bd4a5d8ab8e679e5b28cd}{H\+F\+::\+Ray\+Tracer\+::gen\+Sphere\+Rays}} (int step)
-\begin{DoxyCompactList}\small\item\em Generate a vector of directions to distribute rays in 360 degrees. \end{DoxyCompactList}\item 
-std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ \mbox{\hyperlink{a00277_a6df9ff0fb8610752d548354b3e6600e0}{H\+F\+::\+Ray\+Tracer\+::gen\+Fibbonacci\+Rays}} (int numrays)
-\begin{DoxyCompactList}\small\item\em Generate a set of equally distributed directions in sphere. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{a00277_a9a8051c9b70fc0ae60337d4a38bf5f57}{H\+F\+::\+Ray\+Tracer\+::vectors\+To\+Buffers}} (const std\+::vector$<$ std\+::array$<$ float, 3 $>$$>$ \&vertices, std\+::vector$<$ Triangle $>$ \&Tribuffer, std\+::vector$<$ Vertex $>$ \&Vbuffer)
+void \mbox{\hyperlink{a00279_a9a8051c9b70fc0ae60337d4a38bf5f57}{H\+F\+::\+Ray\+Tracer\+::vectors\+To\+Buffers}} (const std\+::vector$<$ std\+::array$<$ float, 3 $>$$>$ \&vertices, std\+::vector$<$ Triangle $>$ \&Tribuffer, std\+::vector$<$ Vertex $>$ \&Vbuffer)
 \begin{DoxyCompactList}\small\item\em Index a list of verticies and place them into a triangle and vertex buffer. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{a00277_aac8c0b245ea813969c50b6496cc67945}{H\+F\+::\+Ray\+Tracer\+::buffers\+To\+Structs}} (std\+::vector$<$ float $>$ \&in\+\_\+vertices, std\+::vector$<$ int $>$ \&in\+\_\+indices, std\+::vector$<$ Vertex $>$ \&out\+\_\+vertices, std\+::vector$<$ Triangle $>$ \&out\+\_\+triangles)
-\begin{DoxyCompactList}\small\item\em Package raw arrays of floats and indices in buffers to the required Embree types. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{a00277_a3f55b13b0c41f777baed8813d2fb0c18}{H\+F\+::\+Ray\+Tracer\+::\+Fire8\+Rays}} (std\+::vector$<$ std\+::reference\+\_\+wrapper$<$ Full\+Ray\+Request $>$$>$ \&requests, const R\+T\+C\+Scene \&scene, R\+T\+C\+Intersect\+Context \&context)
-\begin{DoxyCompactList}\small\item\em Fire 8 rays and update the requests based on results \end{DoxyCompactList}\end{DoxyCompactItemize}
+void \mbox{\hyperlink{a00279_aac8c0b245ea813969c50b6496cc67945}{H\+F\+::\+Ray\+Tracer\+::buffers\+To\+Structs}} (std\+::vector$<$ float $>$ \&in\+\_\+vertices, std\+::vector$<$ int $>$ \&in\+\_\+indices, std\+::vector$<$ Vertex $>$ \&out\+\_\+vertices, std\+::vector$<$ Triangle $>$ \&out\+\_\+triangles)
+\begin{DoxyCompactList}\small\item\em Package raw arrays of floats and indices in buffers to the required Embree types. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Contains implementation for the \mbox{\hyperlink{a01163}{Embree\+Ray\+Tracer}} 
+Contains implementation for the \mbox{\hyperlink{a01165}{Embree\+Ray\+Tracer}} 
 
 \begin{DoxyAuthor}{Author}
 T\+BA 
@@ -65,58 +51,58 @@ T\+BA
 
 
 \doxysubsection{Class Documentation}
-\index{HF::RayTracer::Vertex@{HF::RayTracer::Vertex}}\label{a01151}
-\Hypertarget{a00277_a01151}
+\index{HF::RayTracer::Vertex@{HF::RayTracer::Vertex}}\label{a01153}
+\Hypertarget{a00279_a01153}
 \doxysubsubsection{struct HF\+::Ray\+Tracer\+::Vertex}
 A vertex. Used internally in Embree. 
 
 
 
-Definition at line 50 of file embree\+\_\+raytracer.\+cpp.
+Definition at line 38 of file embree\+\_\+raytracer.\+cpp.
 
 \begin{DoxyFields}{Class Members}
-\mbox{\Hypertarget{a00277_aad8e270f026ac9dd20ee294b2b1a21de}\label{a00277_aad8e270f026ac9dd20ee294b2b1a21de}} 
+\mbox{\Hypertarget{a00279_aad8e270f026ac9dd20ee294b2b1a21de}\label{a00279_aad8e270f026ac9dd20ee294b2b1a21de}} 
 float&
 x&
 \\
 \hline
 
-\mbox{\Hypertarget{a00277_aa27c7b22316499f43093c2b7768c06ea}\label{a00277_aa27c7b22316499f43093c2b7768c06ea}} 
+\mbox{\Hypertarget{a00279_aa27c7b22316499f43093c2b7768c06ea}\label{a00279_aa27c7b22316499f43093c2b7768c06ea}} 
 float&
 y&
 \\
 \hline
 
-\mbox{\Hypertarget{a00277_ab8599cc6220e686dac319622f7d2f364}\label{a00277_ab8599cc6220e686dac319622f7d2f364}} 
+\mbox{\Hypertarget{a00279_ab8599cc6220e686dac319622f7d2f364}\label{a00279_ab8599cc6220e686dac319622f7d2f364}} 
 float&
 z&
 \\
 \hline
 
 \end{DoxyFields}
-\index{HF::RayTracer::Triangle@{HF::RayTracer::Triangle}}\label{a01155}
-\Hypertarget{a00277_a01155}
+\index{HF::RayTracer::Triangle@{HF::RayTracer::Triangle}}\label{a01157}
+\Hypertarget{a00279_a01157}
 \doxysubsubsection{struct HF\+::Ray\+Tracer\+::Triangle}
 A triangle. Used internally in Embree. 
 
 
 
-Definition at line 55 of file embree\+\_\+raytracer.\+cpp.
+Definition at line 43 of file embree\+\_\+raytracer.\+cpp.
 
 \begin{DoxyFields}{Class Members}
-\mbox{\Hypertarget{a00277_a504a02b108984ddfa3f521cf40b17e61}\label{a00277_a504a02b108984ddfa3f521cf40b17e61}} 
+\mbox{\Hypertarget{a00279_a504a02b108984ddfa3f521cf40b17e61}\label{a00279_a504a02b108984ddfa3f521cf40b17e61}} 
 int&
 v0&
 \\
 \hline
 
-\mbox{\Hypertarget{a00277_afc086ccfe3fc951af959d905056358c4}\label{a00277_afc086ccfe3fc951af959d905056358c4}} 
+\mbox{\Hypertarget{a00279_afc086ccfe3fc951af959d905056358c4}\label{a00279_afc086ccfe3fc951af959d905056358c4}} 
 int&
 v1&
 \\
 \hline
 
-\mbox{\Hypertarget{a00277_ab7bfa105fb125dfc9e31ecf8cbf0f9fa}\label{a00277_ab7bfa105fb125dfc9e31ecf8cbf0f9fa}} 
+\mbox{\Hypertarget{a00279_ab7bfa105fb125dfc9e31ecf8cbf0f9fa}\label{a00279_ab7bfa105fb125dfc9e31ecf8cbf0f9fa}} 
 int&
 v2&
 \\

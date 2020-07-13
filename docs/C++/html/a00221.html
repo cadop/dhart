@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Analysis: Cinterface/cinterface_utils.cpp File Reference</title>
+<title>Analysis: Cinterface/analysis_C.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,127 +66,59 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">cinterface_utils.cpp File Reference</div>  </div>
+<div class="title">analysis_C.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;<a class="el" href="a00224_source.html">cinterface_utils.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00086_source.html">HFExceptions.h</a>&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="a00227_source.html">cinterface_utils.h</a>&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;array&gt;</code><br />
 </div>
 <p><a href="a00221_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a00275"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00275.html">HF</a></td></tr>
+<tr class="memdesc:a00275"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform human scale analysis on 3D environments. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00278"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00278.html">HF::SpatialStructures</a></td></tr>
+<tr class="memdesc:a00278"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains standard fundamental data structures for representing space used throughout HumanFactors. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00276"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00276.html">HF::GraphGenerator</a></td></tr>
+<tr class="memdesc:a00276"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a graph of accessible space from a given start point. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00279"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00279.html">HF::RayTracer</a></td></tr>
+<tr class="memdesc:a00279"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast rays to determine if and where they intersect geometry. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a91fa3b2bb3a7312ec39d74cc1fbc7bbe"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00221.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;&#160;&#160;extern &quot;C&quot; __declspec(dllexport) int</td></tr>
+<tr class="separator:a91fa3b2bb3a7312ec39d74cc1fbc7bbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a2f5650b0bad6c47aa34fc2206433a34b"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::array&lt; float, 3 &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00221.html#a2f5650b0bad6c47aa34fc2206433a34b">ConvertRawFloatArrayToPoints</a> (const float *raw_array, int size)</td></tr>
-<tr class="memdesc:a2f5650b0bad6c47aa34fc2206433a34b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a raw array from an external caller to an organized vector of points  <a href="a00221.html#a2f5650b0bad6c47aa34fc2206433a34b">More...</a><br /></td></tr>
-<tr class="separator:a2f5650b0bad6c47aa34fc2206433a34b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a353d5244f19898d13d1d38193ea6ef1e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::array&lt; int, 3 &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00221.html#a353d5244f19898d13d1d38193ea6ef1e">ConvertRawIntArrayToPoints</a> (const int *raw_array, int size)</td></tr>
-<tr class="separator:a353d5244f19898d13d1d38193ea6ef1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af77723a4383b278169e80cf0e361ec44"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00221.html#af77723a4383b278169e80cf0e361ec44">DestroyFloatVector</a> (std::vector&lt; float &gt; *float_vector)</td></tr>
-<tr class="memdesc:af77723a4383b278169e80cf0e361ec44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete a float vector that's pointed to by <em>float_vector</em>   <a href="a00221.html#af77723a4383b278169e80cf0e361ec44">More...</a><br /></td></tr>
-<tr class="separator:af77723a4383b278169e80cf0e361ec44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac2583dc1ee6786b15fa4f06bfde2130a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00267.html#gac2583dc1ee6786b15fa4f06bfde2130a">GenerateGraph</a> (<a class="el" href="a01165.html">HF::RayTracer::EmbreeRayTracer</a> *ray_tracer, const float *start_point, const float *spacing, int MaxNodes, float UpStep, float UpSlope, float DownStep, float DownSlope, int max_step_connection, int core_count, <a class="el" href="a01189.html">HF::SpatialStructures::Graph</a> **out_graph)</td></tr>
+<tr class="memdesc:gac2583dc1ee6786b15fa4f06bfde2130a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a graph by performing a breadth first search of accessible space.  <a href="a00267.html#gac2583dc1ee6786b15fa4f06bfde2130a">More...</a><br /></td></tr>
+<tr class="separator:gac2583dc1ee6786b15fa4f06bfde2130a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="a2f5650b0bad6c47aa34fc2206433a34b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2f5650b0bad6c47aa34fc2206433a34b">&#9670;&nbsp;</a></span>ConvertRawFloatArrayToPoints()</h2>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a91fa3b2bb3a7312ec39d74cc1fbc7bbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">&#9670;&nbsp;</a></span>C_INTERFACE</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;std::array&lt;float, 3&gt; &gt; ConvertRawFloatArrayToPoints </td>
-          <td>(</td>
-          <td class="paramtype">const float *&#160;</td>
-          <td class="paramname"><em>raw_array</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>size</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="memname">#define C_INTERFACE&#160;&#160;&#160;extern &quot;C&quot; __declspec(dllexport) int</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Convert a raw array from an external caller to an organized vector of points </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">raw_array</td><td>Pointer to the external array</td></tr>
-    <tr><td class="paramname">size</td><td>The number of points stored in the raw array, equal to the total number of floats / 3</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A list of points</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">raw_array</td><td>Pointer to the external array</td></tr>
-    <tr><td class="paramname">size</td><td>The number of points stored in the raw array, equal to the total number of floats / 3</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd></dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="a00221_source.html#l00005">5</a> of file <a class="el" href="a00221_source.html">cinterface_utils.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a353d5244f19898d13d1d38193ea6ef1e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a353d5244f19898d13d1d38193ea6ef1e">&#9670;&nbsp;</a></span>ConvertRawIntArrayToPoints()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt;std::array&lt;int, 3&gt; &gt; ConvertRawIntArrayToPoints </td>
-          <td>(</td>
-          <td class="paramtype">const int *&#160;</td>
-          <td class="paramname"><em>raw_array</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>size</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00221_source.html#l00016">16</a> of file <a class="el" href="a00221_source.html">cinterface_utils.cpp</a>.</p>
-
-</div>
-</div>
-<a id="af77723a4383b278169e80cf0e361ec44"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af77723a4383b278169e80cf0e361ec44">&#9670;&nbsp;</a></span>DestroyFloatVector()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> DestroyFloatVector </td>
-          <td>(</td>
-          <td class="paramtype">std::vector&lt; float &gt; *&#160;</td>
-          <td class="paramname"><em>float_vector</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Delete a float vector that's pointed to by <em>float_vector</em>  </p>
-
-<p class="definition">Definition at line <a class="el" href="a00221_source.html#l00027">27</a> of file <a class="el" href="a00221_source.html">cinterface_utils.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00224_source.html#l00025">DeleteRawPtr()</a>, and <a class="el" href="a00086_source.html#l00016">HF::Exceptions::OK</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00221_source.html#l00006">6</a> of file <a class="el" href="a00221_source.html">analysis_C.h</a>.</p>
 
 </div>
 </div>

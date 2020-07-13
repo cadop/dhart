@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Analysis: SpatialStructures</title>
+<title>Analysis: Pathfinding</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -64,91 +64,72 @@ $(function() {
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">SpatialStructures</div>  </div>
+<div class="title">Pathfinding</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Contains the Graph and Node datatypes.  
+<p>Find paths between differnt points in a graph.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga0cc5b82caab046c65a201e4e7be5e9d4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00269.html#ga0cc5b82caab046c65a201e4e7be5e9d4">GetAllNodesFromGraph</a> (const <a class="el" href="a01199.html">HF::SpatialStructures::Graph</a> *graph, std::vector&lt; <a class="el" href="a01203.html">HF::SpatialStructures::Node</a> &gt; **out_vector_ptr, <a class="el" href="a01203.html">HF::SpatialStructures::Node</a> **out_data_ptr)</td></tr>
-<tr class="memdesc:ga0cc5b82caab046c65a201e4e7be5e9d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a vector of every node in the given graph pointer.  <a href="a00269.html#ga0cc5b82caab046c65a201e4e7be5e9d4">More...</a><br /></td></tr>
-<tr class="separator:ga0cc5b82caab046c65a201e4e7be5e9d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab39b5c750b266835efbc3c6c9da0a431"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00269.html#gab39b5c750b266835efbc3c6c9da0a431">GetEdgesForNode</a> (const <a class="el" href="a01199.html">HF::SpatialStructures::Graph</a> *graph, const <a class="el" href="a01203.html">HF::SpatialStructures::Node</a> *Node, std::vector&lt; <a class="el" href="a01183.html">HF::SpatialStructures::Edge</a> &gt; **out_vector_ptr, <a class="el" href="a01183.html">HF::SpatialStructures::Edge</a> **out_edge_list_ptr, int *out_edge_list_size)</td></tr>
-<tr class="separator:gab39b5c750b266835efbc3c6c9da0a431"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac17c1fc05e6bf6900bac8689b7619bfb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00269.html#gac17c1fc05e6bf6900bac8689b7619bfb">GetSizeOfNodeVector</a> (const std::vector&lt; <a class="el" href="a01203.html">HF::SpatialStructures::Node</a> &gt; *node_list, int *out_size)</td></tr>
-<tr class="memdesc:gac17c1fc05e6bf6900bac8689b7619bfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the size of a node vector.  <a href="a00269.html#gac17c1fc05e6bf6900bac8689b7619bfb">More...</a><br /></td></tr>
-<tr class="separator:gac17c1fc05e6bf6900bac8689b7619bfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga712f182888672382dd4a1776f850915a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00269.html#ga712f182888672382dd4a1776f850915a">GetSizeOfEdgeVector</a> (const std::vector&lt; <a class="el" href="a01183.html">HF::SpatialStructures::Edge</a> &gt; *edge_list, int *out_size)</td></tr>
-<tr class="separator:ga712f182888672382dd4a1776f850915a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6a53ede89ff44ba3c8bf697c9626fcbe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00269.html#ga6a53ede89ff44ba3c8bf697c9626fcbe">AggregateCosts</a> (const <a class="el" href="a01199.html">HF::SpatialStructures::Graph</a> *graph, int agg, bool directed, std::vector&lt; float &gt; **out_vector_ptr, float **out_data_ptr)</td></tr>
-<tr class="memdesc:ga6a53ede89ff44ba3c8bf697c9626fcbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an ordered array of costs for each node aggregatted by the desired method.  <a href="a00269.html#ga6a53ede89ff44ba3c8bf697c9626fcbe">More...</a><br /></td></tr>
-<tr class="separator:ga6a53ede89ff44ba3c8bf697c9626fcbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga262a8f714fbd8d74840efa5832597fff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00269.html#ga262a8f714fbd8d74840efa5832597fff">CreateGraph</a> (const float *nodes, int num_nodes, <a class="el" href="a01199.html">HF::SpatialStructures::Graph</a> **out_graph)</td></tr>
-<tr class="memdesc:ga262a8f714fbd8d74840efa5832597fff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new empty graph.  <a href="a00269.html#ga262a8f714fbd8d74840efa5832597fff">More...</a><br /></td></tr>
-<tr class="separator:ga262a8f714fbd8d74840efa5832597fff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac886f77eaff2a7b396a0ea47f78ef9af"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00269.html#gac886f77eaff2a7b396a0ea47f78ef9af">AddEdgeFromNodes</a> (<a class="el" href="a01199.html">HF::SpatialStructures::Graph</a> *graph, const float *parent, const float *child, float score)</td></tr>
-<tr class="memdesc:gac886f77eaff2a7b396a0ea47f78ef9af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add an edge between parent and child. If parent or child doesn't already exist in the graph, they will be added and automatically assigned new IDS.  <a href="a00269.html#gac886f77eaff2a7b396a0ea47f78ef9af">More...</a><br /></td></tr>
-<tr class="separator:gac886f77eaff2a7b396a0ea47f78ef9af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0f38cc17daedc23e2fb21115fbb24d07"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00269.html#ga0f38cc17daedc23e2fb21115fbb24d07">AddEdgeFromNodeIDs</a> (<a class="el" href="a01199.html">HF::SpatialStructures::Graph</a> *graph, int parent_id, int child_id, float score)</td></tr>
-<tr class="memdesc:ga0f38cc17daedc23e2fb21115fbb24d07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new edge between parent_id and child_id. If these IDs don't yet exist in the graph they will be added.  <a href="a00269.html#ga0f38cc17daedc23e2fb21115fbb24d07">More...</a><br /></td></tr>
-<tr class="separator:ga0f38cc17daedc23e2fb21115fbb24d07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1aebc84e3562370327576641b1ce2dcc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00269.html#ga1aebc84e3562370327576641b1ce2dcc">GetCSRPointers</a> (<a class="el" href="a01199.html">HF::SpatialStructures::Graph</a> *graph, int *out_nnz, int *out_num_rows, int *out_num_cols, float **out_data_ptr, int **out_inner_indices_ptr, int **out_outer_indices_ptr)</td></tr>
-<tr class="memdesc:ga1aebc84e3562370327576641b1ce2dcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve all information for a graph's CSR representation. This will compress the graph if it was not yet already compressed.  <a href="a00269.html#ga1aebc84e3562370327576641b1ce2dcc">More...</a><br /></td></tr>
-<tr class="separator:ga1aebc84e3562370327576641b1ce2dcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga31fad78ce410cd523bb337f46b078b4c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00269.html#ga31fad78ce410cd523bb337f46b078b4c">GetNodeID</a> (<a class="el" href="a01199.html">HF::SpatialStructures::Graph</a> *graph, const float *point, int *out_id)</td></tr>
-<tr class="memdesc:ga31fad78ce410cd523bb337f46b078b4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the id of the given node in the graph. If the node does not exist, <em>out_id</em>  will be set to -1.  <a href="a00269.html#ga31fad78ce410cd523bb337f46b078b4c">More...</a><br /></td></tr>
-<tr class="separator:ga31fad78ce410cd523bb337f46b078b4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab7ecc1be5c746ed3f99ab7494316c65d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00269.html#gab7ecc1be5c746ed3f99ab7494316c65d">Compress</a> (<a class="el" href="a01199.html">HF::SpatialStructures::Graph</a> *graph)</td></tr>
-<tr class="memdesc:gab7ecc1be5c746ed3f99ab7494316c65d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compress the given graph into a csr representation.  <a href="a00269.html#gab7ecc1be5c746ed3f99ab7494316c65d">More...</a><br /></td></tr>
-<tr class="separator:gab7ecc1be5c746ed3f99ab7494316c65d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga775863df40e342a8c5a2cddf7512ea44"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00269.html#ga775863df40e342a8c5a2cddf7512ea44">ClearGraph</a> (<a class="el" href="a01199.html">HF::SpatialStructures::Graph</a> *graph)</td></tr>
-<tr class="memdesc:ga775863df40e342a8c5a2cddf7512ea44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear the nodes/edges for the given graph.  <a href="a00269.html#ga775863df40e342a8c5a2cddf7512ea44">More...</a><br /></td></tr>
-<tr class="separator:ga775863df40e342a8c5a2cddf7512ea44"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga87e9b9ecfc5293712d75f3cb8c992c77"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00269.html#ga87e9b9ecfc5293712d75f3cb8c992c77">DestroyNodes</a> (std::vector&lt; <a class="el" href="a01203.html">HF::SpatialStructures::Node</a> &gt; *nodelist_to_destroy)</td></tr>
-<tr class="memdesc:ga87e9b9ecfc5293712d75f3cb8c992c77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete the vector of nodes at the given pointer.  <a href="a00269.html#ga87e9b9ecfc5293712d75f3cb8c992c77">More...</a><br /></td></tr>
-<tr class="separator:ga87e9b9ecfc5293712d75f3cb8c992c77"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac46191088d698cc007a2176ab6b5674d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00269.html#gac46191088d698cc007a2176ab6b5674d">DestroyEdges</a> (std::vector&lt; <a class="el" href="a01183.html">HF::SpatialStructures::Edge</a> &gt; *edgelist_to_destroy)</td></tr>
-<tr class="memdesc:gac46191088d698cc007a2176ab6b5674d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete the vector of edges at the given pointer.  <a href="a00269.html#gac46191088d698cc007a2176ab6b5674d">More...</a><br /></td></tr>
-<tr class="separator:gac46191088d698cc007a2176ab6b5674d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga645abacd11e1fa535f953344aaa77727"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00269.html#ga645abacd11e1fa535f953344aaa77727">DestroyGraph</a> (<a class="el" href="a01199.html">HF::SpatialStructures::Graph</a> *graph_to_destroy)</td></tr>
-<tr class="memdesc:ga645abacd11e1fa535f953344aaa77727"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete a graph.  <a href="a00269.html#ga645abacd11e1fa535f953344aaa77727">More...</a><br /></td></tr>
-<tr class="separator:ga645abacd11e1fa535f953344aaa77727"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae024c8b4ea32148644b61d4c1a1332fa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00269.html#gae024c8b4ea32148644b61d4c1a1332fa">CreatePath</a> (const <a class="el" href="a01189.html">HF::SpatialStructures::Graph</a> *g, int start, int end, int *out_size, <a class="el" href="a01205.html">HF::SpatialStructures::Path</a> **out_path, <a class="el" href="a01201.html">HF::SpatialStructures::PathMember</a> **out_data)</td></tr>
+<tr class="memdesc:gae024c8b4ea32148644b61d4c1a1332fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a path from start to end in C++. If no path exists, the NO_PATH error code will be returned, and both pointers will be left as they were before the function was called.  <a href="a00269.html#gae024c8b4ea32148644b61d4c1a1332fa">More...</a><br /></td></tr>
+<tr class="separator:gae024c8b4ea32148644b61d4c1a1332fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga497790dddfb220484737711a1f1eff56"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00269.html#ga497790dddfb220484737711a1f1eff56">CreatePaths</a> (const <a class="el" href="a01189.html">HF::SpatialStructures::Graph</a> *g, const int *start, const int *end, <a class="el" href="a01205.html">HF::SpatialStructures::Path</a> **out_path_ptr_holder, <a class="el" href="a01201.html">HF::SpatialStructures::PathMember</a> **out_path_member_ptr_holder, int *out_sizes, int num_paths)</td></tr>
+<tr class="memdesc:ga497790dddfb220484737711a1f1eff56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create multiple paths from start to end in C++. both out_ members return as arrays of pointers, with one for each element. Sizes of zero represent non-existant paths, and will be set to null pointers  <a href="a00269.html#ga497790dddfb220484737711a1f1eff56">More...</a><br /></td></tr>
+<tr class="separator:ga497790dddfb220484737711a1f1eff56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaac725d282f4fecd3aba1b3273c26e7e1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00269.html#gaac725d282f4fecd3aba1b3273c26e7e1">GetPathInfo</a> (<a class="el" href="a01205.html">HF::SpatialStructures::Path</a> *p, <a class="el" href="a01201.html">HF::SpatialStructures::PathMember</a> **out_member_ptr, int *out_size)</td></tr>
+<tr class="memdesc:gaac725d282f4fecd3aba1b3273c26e7e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the size of a path and a pointer to its path members.  <a href="a00269.html#gaac725d282f4fecd3aba1b3273c26e7e1">More...</a><br /></td></tr>
+<tr class="separator:gaac725d282f4fecd3aba1b3273c26e7e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga884a3374d971261a01ccfd3b21e288e5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00269.html#ga884a3374d971261a01ccfd3b21e288e5">DestroyPath</a> (<a class="el" href="a01205.html">HF::SpatialStructures::Path</a> *path_to_destroy)</td></tr>
+<tr class="memdesc:ga884a3374d971261a01ccfd3b21e288e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete a path.  <a href="a00269.html#ga884a3374d971261a01ccfd3b21e288e5">More...</a><br /></td></tr>
+<tr class="separator:ga884a3374d971261a01ccfd3b21e288e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p>Contains the Graph and Node datatypes. </p>
+<p>Find paths between differnt points in a graph. </p>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ga0f38cc17daedc23e2fb21115fbb24d07"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga0f38cc17daedc23e2fb21115fbb24d07">&#9670;&nbsp;</a></span>AddEdgeFromNodeIDs()</h2>
+<a id="gae024c8b4ea32148644b61d4c1a1332fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae024c8b4ea32148644b61d4c1a1332fa">&#9670;&nbsp;</a></span>CreatePath()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> AddEdgeFromNodeIDs </td>
+          <td class="memname"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> CreatePath </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="a01199.html">HF::SpatialStructures::Graph</a> *&#160;</td>
-          <td class="paramname"><em>graph</em>, </td>
+          <td class="paramtype">const <a class="el" href="a01189.html">HF::SpatialStructures::Graph</a> *&#160;</td>
+          <td class="paramname"><em>g</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>parent_id</em>, </td>
+          <td class="paramname"><em>start</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>child_id</em>, </td>
+          <td class="paramname"><em>end</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>score</em>&#160;</td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>out_size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a01205.html">HF::SpatialStructures::Path</a> **&#160;</td>
+          <td class="paramname"><em>out_path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a01201.html">HF::SpatialStructures::PathMember</a> **&#160;</td>
+          <td class="paramname"><em>out_data</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -158,119 +139,103 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p><code>#include &lt;<a class="el" href="a00248.html">Cinterface/spatialstructures_C.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00239.html">Cinterface/pathfinder_C.h</a>&gt;</code></p>
 
-<p>Create a new edge between parent_id and child_id. If these IDs don't yet exist in the graph they will be added. </p>
+<p>Create a path from start to end in C++. If no path exists, the NO_PATH error code will be returned, and both pointers will be left as they were before the function was called. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">graph</td><td>Graph to create the new edge in. </td></tr>
-    <tr><td class="paramname">parent</td><td>The parent's id in the graph. </td></tr>
-    <tr><td class="paramname">child</td><td>The child's id in the graph. </td></tr>
-    <tr><td class="paramname">score</td><td>The cost from parent to child. </td></tr>
-    <tr><td class="paramname">returns</td><td>HF_STATUS::OK on completion. </td></tr>
+    <tr><td class="paramname">g</td><td>The graph to conduct the search on. </td></tr>
+    <tr><td class="paramname">start</td><td>The id of the node for the starting point of the path. The ID must belong to a node already within the graph! </td></tr>
+    <tr><td class="paramname">end</td><td>The id of the node for the end point of the path. The ID must belong to a node already within the graph! </td></tr>
+    <tr><td class="paramname">out_path</td><td>Return parameter for the path object. </td></tr>
+    <tr><td class="paramname">out_data</td><td>Return parameter for the path's members. </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>HF_STATUS::NO_PATH if a path could not be generated. HF_STATUS::OK if a path was generated. </dd></dl>
+<p>Uses the Boost Graph Library to perform Dijkstra's shortest path algorithm. For multiple paths, use <a class="el" href="a00269.html#ga497790dddfb220484737711a1f1eff56" title="Create multiple paths from start to end in C++. both out_ members return as arrays of pointers,...">CreatePaths</a> for multiple paths at once. </p>
+<div class="fragment"><div class="line"><span class="comment">// Requires #include &quot;pathfinder_C.h&quot;, #include &quot;graph.h&quot;, #include &quot;path.h&quot;, #include &quot;path_finder.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create a Graph g, and compress it.</span></div>
+<div class="line"><a class="code" href="a01189.html">HF::SpatialStructures::Graph</a> g;</div>
+<div class="line">g.<a class="code" href="a01189.html#a604a648f1f73d687ad4544d2ac163212">addEdge</a>(0, 1, 1);</div>
+<div class="line">g.<a class="code" href="a01189.html#a604a648f1f73d687ad4544d2ac163212">addEdge</a>(0, 2, 2);</div>
+<div class="line">g.<a class="code" href="a01189.html#a604a648f1f73d687ad4544d2ac163212">addEdge</a>(1, 3, 3);</div>
+<div class="line">g.<a class="code" href="a01189.html#a604a648f1f73d687ad4544d2ac163212">addEdge</a>(2, 4, 1);</div>
+<div class="line">g.<a class="code" href="a01189.html#a604a648f1f73d687ad4544d2ac163212">addEdge</a>(3, 4, 5);</div>
+<div class="line">g.<a class="code" href="a01189.html#a41cece77d0eee98df39ecc6d3a366ec8">Compress</a>();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create a boostGraph from g</span></div>
+<div class="line"><span class="keyword">auto</span> boostGraph = <a class="code" href="a00284.html#aee466bf2324daa4b600cc59c90e78977">HF::Pathfinding::CreateBoostGraph</a>(g);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Prepare parameters for CreatePath</span></div>
+<div class="line"><a class="code" href="a01205.html">HF::SpatialStructures::Path</a>* out_path = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a class="code" href="a01201.html">HF::SpatialStructures::PathMember</a>* out_path_member = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="keywordtype">int</span> out_size = -1;</div>
+<div class="line"> </div>
+<div class="line"><a class="code" href="a00269.html#gae024c8b4ea32148644b61d4c1a1332fa">CreatePath</a>(&amp;g, 0, 4, &amp;out_size, &amp;out_path, &amp;out_path_member);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Use out_path, out_path_member</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Remember to free resources when finished</span></div>
+<div class="line"><a class="code" href="a00269.html#ga884a3374d971261a01ccfd3b21e288e5">DestroyPath</a>(out_path);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// At this point, out_path_member has also been destroyed, so we set this to nullptr</span></div>
+<div class="line">out_path_member = <span class="keyword">nullptr</span>;</div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="a00236_source.html#l00020">20</a> of file <a class="el" href="a00236_source.html">pathfinder_C.cpp</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="a00245_source.html#l00098">98</a> of file <a class="el" href="a00245_source.html">spatialstructures_C.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00149_source.html#l00224">HF::SpatialStructures::Graph::addEdge()</a>, and <a class="el" href="a00086_source.html#l00016">HF::Exceptions::OK</a>.</p>
+<p class="reference">References <a class="el" href="a00113_source.html#l00267">HF::Pathfinding::CreateBoostGraph()</a>, <a class="el" href="a00158_source.html#l00016">HF::SpatialStructures::Path::empty()</a>, <a class="el" href="a00113_source.html#l00165">HF::Pathfinding::FindPath()</a>, <a class="el" href="a00158_source.html#l00056">HF::SpatialStructures::Path::GetPMPointer()</a>, <a class="el" href="a00086_source.html#l00048">HF::Exceptions::NO_PATH</a>, <a class="el" href="a00086_source.html#l00031">HF::Exceptions::OK</a>, and <a class="el" href="a00158_source.html#l00020">HF::SpatialStructures::Path::size()</a>.</p>
 
 </div>
 </div>
-<a id="gac886f77eaff2a7b396a0ea47f78ef9af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gac886f77eaff2a7b396a0ea47f78ef9af">&#9670;&nbsp;</a></span>AddEdgeFromNodes()</h2>
+<a id="ga497790dddfb220484737711a1f1eff56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga497790dddfb220484737711a1f1eff56">&#9670;&nbsp;</a></span>CreatePaths()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> AddEdgeFromNodes </td>
+          <td class="memname"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> CreatePaths </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="a01199.html">HF::SpatialStructures::Graph</a> *&#160;</td>
-          <td class="paramname"><em>graph</em>, </td>
+          <td class="paramtype">const <a class="el" href="a01189.html">HF::SpatialStructures::Graph</a> *&#160;</td>
+          <td class="paramname"><em>g</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const float *&#160;</td>
-          <td class="paramname"><em>parent</em>, </td>
+          <td class="paramtype">const int *&#160;</td>
+          <td class="paramname"><em>start</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const float *&#160;</td>
-          <td class="paramname"><em>child</em>, </td>
+          <td class="paramtype">const int *&#160;</td>
+          <td class="paramname"><em>end</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>score</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="a01205.html">HF::SpatialStructures::Path</a> **&#160;</td>
+          <td class="paramname"><em>out_path_ptr_holder</em>, </td>
         </tr>
         <tr>
+          <td class="paramkey"></td>
           <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramtype"><a class="el" href="a01201.html">HF::SpatialStructures::PathMember</a> **&#160;</td>
+          <td class="paramname"><em>out_path_member_ptr_holder</em>, </td>
         </tr>
-      </table>
-</div><div class="memdoc">
-
-<p><code>#include &lt;<a class="el" href="a00248.html">Cinterface/spatialstructures_C.h</a>&gt;</code></p>
-
-<p>Add an edge between parent and child. If parent or child doesn't already exist in the graph, they will be added and automatically assigned new IDS. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">graph</td><td>Graph to add the new edge to. </td></tr>
-    <tr><td class="paramname">parent</td><td>A 3 element float array containing the x, y, and z coordinate of the parent node. </td></tr>
-    <tr><td class="paramname">child</td><td>A 3 element float array containing the x, y, and z coordinate of the child node, </td></tr>
-    <tr><td class="paramname">score</td><td>The cost from parent to child </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>HF_STATUS::OK on success. HF_STATUS::INVALID_PTR on an invalidparent or child node. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="a00245_source.html#l00078">78</a> of file <a class="el" href="a00245_source.html">spatialstructures_C.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00149_source.html#l00224">HF::SpatialStructures::Graph::addEdge()</a>, <a class="el" href="a00086_source.html#l00031">HF::Exceptions::INVALID_PTR</a>, and <a class="el" href="a00086_source.html#l00016">HF::Exceptions::OK</a>.</p>
-
-</div>
-</div>
-<a id="ga6a53ede89ff44ba3c8bf697c9626fcbe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga6a53ede89ff44ba3c8bf697c9626fcbe">&#9670;&nbsp;</a></span>AggregateCosts()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> AggregateCosts </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="a01199.html">HF::SpatialStructures::Graph</a> *&#160;</td>
-          <td class="paramname"><em>graph</em>, </td>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>out_sizes</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>agg</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>directed</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; float &gt; **&#160;</td>
-          <td class="paramname"><em>out_vector_ptr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float **&#160;</td>
-          <td class="paramname"><em>out_data_ptr</em>&#160;</td>
+          <td class="paramname"><em>num_paths</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -280,479 +245,142 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p><code>#include &lt;<a class="el" href="a00248.html">Cinterface/spatialstructures_C.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00239.html">Cinterface/pathfinder_C.h</a>&gt;</code></p>
 
-<p>Get an ordered array of costs for each node aggregatted by the desired method. </p>
+<p>Create multiple paths from start to end in C++. both out_ members return as arrays of pointers, with one for each element. Sizes of zero represent non-existant paths, and will be set to null pointers </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">graph</td><td>Graph to aggregare edges from. </td></tr>
-    <tr><td class="paramname">agg</td><td>Aggregation type to use. </td></tr>
-    <tr><td class="paramname">directed</td><td>If true, only count outgoing edges for a node, otherwise count both outgoing and incoming edges. </td></tr>
-    <tr><td class="paramname">out_vector_ptr</td><td>Output parameter for the vector. </td></tr>
-    <tr><td class="paramname">out_vector_ptr</td><td>Output parameter for the vector's held data. </td></tr>
+    <tr><td class="paramname">g</td><td>The graph to conduct the search on. </td></tr>
+    <tr><td class="paramname">start</td><td>An array of ids for starting nodes. Length must match that of end and all the IDS must belong to nodes that already exist within the graph. </td></tr>
+    <tr><td class="paramname">end</td><td>An array of ids for ending nodes. Length must match that of end and all the IDS must belong to nodes that already exist within the graph. </td></tr>
+    <tr><td class="paramname">out_path_ptr_holder</td><td>Return parameter for path objects. </td></tr>
+    <tr><td class="paramname">out_data</td><td>Return parameter for pointers to the path objects' underlying data. </td></tr>
+    <tr><td class="paramname">out_sizes</td><td>Output array of integers representing the length of of each path in out_data's arrays. Sizes of 0 indicate that no path could be generated. </td></tr>
+    <tr><td class="paramname">num_paths</td><td>Size of start and end arrays</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>HF_STATUS::OK if successful. If the graph wasn't valid HF_STATUS::NO_GRAPH. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>HF::OK on completion. </dd></dl>
+<div class="fragment"><div class="line"><span class="comment">// Requires #include &quot;pathfinder_C.h&quot;, #include &quot;graph.h&quot;, #include &quot;path.h&quot;, #include &quot;path_finder.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create a Graph g, and compress it.</span></div>
+<div class="line"><a class="code" href="a01189.html">HF::SpatialStructures::Graph</a> g;</div>
+<div class="line">g.<a class="code" href="a01189.html#a604a648f1f73d687ad4544d2ac163212">addEdge</a>(0, 1, 1);</div>
+<div class="line">g.<a class="code" href="a01189.html#a604a648f1f73d687ad4544d2ac163212">addEdge</a>(0, 2, 2);</div>
+<div class="line">g.<a class="code" href="a01189.html#a604a648f1f73d687ad4544d2ac163212">addEdge</a>(1, 3, 3);</div>
+<div class="line">g.<a class="code" href="a01189.html#a604a648f1f73d687ad4544d2ac163212">addEdge</a>(2, 4, 1);</div>
+<div class="line">g.<a class="code" href="a01189.html#a604a648f1f73d687ad4544d2ac163212">addEdge</a>(3, 4, 5);</div>
+<div class="line">g.<a class="code" href="a01189.html#a41cece77d0eee98df39ecc6d3a366ec8">Compress</a>();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create a boostGraph from g</span></div>
+<div class="line"><span class="keyword">auto</span> boostGraph = <a class="code" href="a00284.html#aee466bf2324daa4b600cc59c90e78977">HF::Pathfinding::CreateBoostGraph</a>(g);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Prepare starting and ending nodes</span></div>
+<div class="line"><span class="keywordtype">int</span> start_nodes[] = { 0 };</div>
+<div class="line"><span class="keywordtype">int</span> end_nodes[] = { 4 };</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Prepare parameters for CreatePaths</span></div>
+<div class="line"><a class="code" href="a01205.html">HF::SpatialStructures::Path</a>* out_path = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a class="code" href="a01201.html">HF::SpatialStructures::PathMember</a>* out_path_member = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="keywordtype">int</span> out_size = -1;</div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">int</span> path_size = 5;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Sizes of paths</span></div>
+<div class="line"><span class="keyword">const</span> <span class="keywordtype">int</span> MAX_SIZE = 16;</div>
+<div class="line"><span class="keywordtype">int</span> out_sizes[MAX_SIZE];</div>
+<div class="line"> </div>
+<div class="line"><a class="code" href="a00269.html#ga497790dddfb220484737711a1f1eff56">CreatePaths</a>(&amp;g, start_nodes, end_nodes, &amp;out_path, &amp;out_path_member, out_sizes, path_size);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Use out_path, out_path_member</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Remember to free resources when finished</span></div>
+<div class="line"><a class="code" href="a00269.html#ga884a3374d971261a01ccfd3b21e288e5">DestroyPath</a>(out_path);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// At this point, out_path_member has also been destroyed, so we set this to nullptr</span></div>
+<div class="line">out_path_member = <span class="keyword">nullptr</span>;</div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="a00236_source.html#l00046">46</a> of file <a class="el" href="a00236_source.html">pathfinder_C.cpp</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="a00245_source.html#l00049">49</a> of file <a class="el" href="a00245_source.html">spatialstructures_C.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00149_source.html#l00156">HF::SpatialStructures::Graph::AggregateGraph()</a>, <a class="el" href="a00086_source.html#l00025">HF::Exceptions::NO_GRAPH</a>, and <a class="el" href="a00086_source.html#l00016">HF::Exceptions::OK</a>.</p>
+<p class="reference">References <a class="el" href="a00113_source.html#l00267">HF::Pathfinding::CreateBoostGraph()</a>, <a class="el" href="a00113_source.html#l00200">HF::Pathfinding::InsertPathsIntoArray()</a>, and <a class="el" href="a00086_source.html#l00031">HF::Exceptions::OK</a>.</p>
 
 </div>
 </div>
-<a id="ga775863df40e342a8c5a2cddf7512ea44"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga775863df40e342a8c5a2cddf7512ea44">&#9670;&nbsp;</a></span>ClearGraph()</h2>
+<a id="ga884a3374d971261a01ccfd3b21e288e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga884a3374d971261a01ccfd3b21e288e5">&#9670;&nbsp;</a></span>DestroyPath()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> ClearGraph </td>
+          <td class="memname"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> DestroyPath </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="a01199.html">HF::SpatialStructures::Graph</a> *&#160;</td>
-          <td class="paramname"><em>graph</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="a01205.html">HF::SpatialStructures::Path</a> *&#160;</td>
+          <td class="paramname"><em>path_to_destroy</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p><code>#include &lt;<a class="el" href="a00248.html">Cinterface/spatialstructures_C.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00239.html">Cinterface/pathfinder_C.h</a>&gt;</code></p>
 
-<p>Clear the nodes/edges for the given graph. </p>
+<p>Delete a path. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">graph</td><td>Graph to clear nodes from. </td></tr>
+    <tr><td class="paramname">path_to_destroy</td><td>Pointer to the path to delete. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>HF_STATUS::OK on completion. </dd></dl>
+<div class="fragment"><div class="line"><span class="comment">// Requires #include &quot;pathfinder_C.h&quot;, #include &quot;graph.h&quot;, #include &quot;path.h&quot;, #include &quot;path_finder.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create a Graph g, and compress it.</span></div>
+<div class="line"><a class="code" href="a01189.html">HF::SpatialStructures::Graph</a> g;</div>
+<div class="line">g.<a class="code" href="a01189.html#a604a648f1f73d687ad4544d2ac163212">addEdge</a>(0, 1, 1);</div>
+<div class="line">g.<a class="code" href="a01189.html#a604a648f1f73d687ad4544d2ac163212">addEdge</a>(0, 2, 2);</div>
+<div class="line">g.<a class="code" href="a01189.html#a604a648f1f73d687ad4544d2ac163212">addEdge</a>(1, 3, 3);</div>
+<div class="line">g.<a class="code" href="a01189.html#a604a648f1f73d687ad4544d2ac163212">addEdge</a>(2, 4, 1);</div>
+<div class="line">g.<a class="code" href="a01189.html#a604a648f1f73d687ad4544d2ac163212">addEdge</a>(3, 4, 5);</div>
+<div class="line">g.<a class="code" href="a01189.html#a41cece77d0eee98df39ecc6d3a366ec8">Compress</a>();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create a boostGraph from g</span></div>
+<div class="line"><span class="keyword">auto</span> boostGraph = <a class="code" href="a00284.html#aee466bf2324daa4b600cc59c90e78977">HF::Pathfinding::CreateBoostGraph</a>(g);</div>
+<div class="line"> </div>
+<div class="line"><a class="code" href="a01205.html">HF::SpatialStructures::Path</a>* out_path = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a class="code" href="a01201.html">HF::SpatialStructures::PathMember</a>* out_path_member = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="keywordtype">int</span> out_size = -1;</div>
+<div class="line"> </div>
+<div class="line"><a class="code" href="a00269.html#gae024c8b4ea32148644b61d4c1a1332fa">CreatePath</a>(&amp;g, 0, 4, &amp;out_size, &amp;out_path, &amp;out_path_member);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Use out_path, out_path_member</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Remember to free resources when finished</span></div>
+<div class="line"><a class="code" href="a00269.html#ga884a3374d971261a01ccfd3b21e288e5">DestroyPath</a>(out_path);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// At this point, out_path_member has also been destroyed, so we set this to nullptr</span></div>
+<div class="line">out_path_member = <span class="keyword">nullptr</span>;</div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="a00236_source.html#l00093">93</a> of file <a class="el" href="a00236_source.html">pathfinder_C.cpp</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="a00245_source.html#l00142">142</a> of file <a class="el" href="a00245_source.html">spatialstructures_C.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00149_source.html#l00415">HF::SpatialStructures::Graph::Clear()</a>, and <a class="el" href="a00086_source.html#l00016">HF::Exceptions::OK</a>.</p>
+<p class="reference">References <a class="el" href="a00227_source.html#l00097">DeleteRawPtr()</a>, and <a class="el" href="a00086_source.html#l00031">HF::Exceptions::OK</a>.</p>
 
 </div>
 </div>
-<a id="gab7ecc1be5c746ed3f99ab7494316c65d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gab7ecc1be5c746ed3f99ab7494316c65d">&#9670;&nbsp;</a></span>Compress()</h2>
+<a id="gaac725d282f4fecd3aba1b3273c26e7e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaac725d282f4fecd3aba1b3273c26e7e1">&#9670;&nbsp;</a></span>GetPathInfo()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> Compress </td>
+          <td class="memname"><a class="el" href="a00257.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> GetPathInfo </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="a01199.html">HF::SpatialStructures::Graph</a> *&#160;</td>
-          <td class="paramname"><em>graph</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p><code>#include &lt;<a class="el" href="a00248.html">Cinterface/spatialstructures_C.h</a>&gt;</code></p>
-
-<p>Compress the given graph into a csr representation. </p>
-<dl class="section return"><dt>Returns</dt><dd>HF_STATUS::OK on completion. </dd></dl>
-<p>This will reduce the memory footprint of the graph, and invalidate all existing CSR representations of it. If the graph is already compressed, this will be a no-op. </p>
-
-<p class="definition">Definition at line <a class="el" href="a00245_source.html#l00136">136</a> of file <a class="el" href="a00245_source.html">spatialstructures_C.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00149_source.html#l00395">HF::SpatialStructures::Graph::Compress()</a>, and <a class="el" href="a00086_source.html#l00016">HF::Exceptions::OK</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="a00149_source.html#l00032">HF::SpatialStructures::Graph::GetCSRPointers()</a>.</p>
-
-</div>
-</div>
-<a id="ga262a8f714fbd8d74840efa5832597fff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga262a8f714fbd8d74840efa5832597fff">&#9670;&nbsp;</a></span>CreateGraph()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> CreateGraph </td>
-          <td>(</td>
-          <td class="paramtype">const float *&#160;</td>
-          <td class="paramname"><em>nodes</em>, </td>
+          <td class="paramtype"><a class="el" href="a01205.html">HF::SpatialStructures::Path</a> *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>num_nodes</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a01199.html">HF::SpatialStructures::Graph</a> **&#160;</td>
-          <td class="paramname"><em>out_graph</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p><code>#include &lt;<a class="el" href="a00248.html">Cinterface/spatialstructures_C.h</a>&gt;</code></p>
-
-<p>Create a new empty graph. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">nodes</td><td>Unused. </td></tr>
-    <tr><td class="paramname">num_nodes</td><td>Unused. </td></tr>
-    <tr><td class="paramname">out_graph</td><td>Output parameter to store the graph in. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>HF_STATUS::OK on completion. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="a00245_source.html#l00067">67</a> of file <a class="el" href="a00245_source.html">spatialstructures_C.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00086_source.html#l00016">HF::Exceptions::OK</a>.</p>
-
-</div>
-</div>
-<a id="gac46191088d698cc007a2176ab6b5674d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gac46191088d698cc007a2176ab6b5674d">&#9670;&nbsp;</a></span>DestroyEdges()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> DestroyEdges </td>
-          <td>(</td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="a01183.html">HF::SpatialStructures::Edge</a> &gt; *&#160;</td>
-          <td class="paramname"><em>edgelist_to_destroy</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p><code>#include &lt;<a class="el" href="a00248.html">Cinterface/spatialstructures_C.h</a>&gt;</code></p>
-
-<p>Delete the vector of edges at the given pointer. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">edgelist_to_destroy</td><td>Vector of nodes to destroy. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>HF_STATUS::OK on completion. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="a00134_source.html#l00075">75</a> of file <a class="el" href="a00134_source.html">CInterface.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00086_source.html#l00016">HF::Exceptions::OK</a>.</p>
-
-</div>
-</div>
-<a id="ga645abacd11e1fa535f953344aaa77727"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga645abacd11e1fa535f953344aaa77727">&#9670;&nbsp;</a></span>DestroyGraph()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> DestroyGraph </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a01199.html">HF::SpatialStructures::Graph</a> *&#160;</td>
-          <td class="paramname"><em>graph_to_destroy</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p><code>#include &lt;<a class="el" href="a00248.html">Cinterface/spatialstructures_C.h</a>&gt;</code></p>
-
-<p>Delete a graph. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">graph_to_destroy</td><td>Graph to delete. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>HF_STATUS::OK on completion. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="a00134_source.html#l00080">80</a> of file <a class="el" href="a00134_source.html">CInterface.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00086_source.html#l00016">HF::Exceptions::OK</a>.</p>
-
-</div>
-</div>
-<a id="ga87e9b9ecfc5293712d75f3cb8c992c77"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga87e9b9ecfc5293712d75f3cb8c992c77">&#9670;&nbsp;</a></span>DestroyNodes()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> DestroyNodes </td>
-          <td>(</td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="a01203.html">HF::SpatialStructures::Node</a> &gt; *&#160;</td>
-          <td class="paramname"><em>nodelist_to_destroy</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p><code>#include &lt;<a class="el" href="a00248.html">Cinterface/spatialstructures_C.h</a>&gt;</code></p>
-
-<p>Delete the vector of nodes at the given pointer. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">nodelist_to_destroy</td><td>Vector of nodes to destroy. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>HF_STATUS::OK on completion. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="a00134_source.html#l00070">70</a> of file <a class="el" href="a00134_source.html">CInterface.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00086_source.html#l00016">HF::Exceptions::OK</a>.</p>
-
-</div>
-</div>
-<a id="ga0cc5b82caab046c65a201e4e7be5e9d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga0cc5b82caab046c65a201e4e7be5e9d4">&#9670;&nbsp;</a></span>GetAllNodesFromGraph()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> GetAllNodesFromGraph </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="a01199.html">HF::SpatialStructures::Graph</a> *&#160;</td>
-          <td class="paramname"><em>graph</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="a01203.html">HF::SpatialStructures::Node</a> &gt; **&#160;</td>
-          <td class="paramname"><em>out_vector_ptr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a01203.html">HF::SpatialStructures::Node</a> **&#160;</td>
-          <td class="paramname"><em>out_data_ptr</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p><code>#include &lt;<a class="el" href="a00248.html">Cinterface/spatialstructures_C.h</a>&gt;</code></p>
-
-<p>Get a vector of every node in the given graph pointer. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">graph</td><td>Graph to retrieve nodes from. </td></tr>
-    <tr><td class="paramname">out_vector_ptr</td><td>Output parameter for the new vector. </td></tr>
-    <tr><td class="paramname">out_data_ptr</td><td>Output parameter for the vector's data. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>HF_STATUS::INVALID_PTR if the given pointer was invalid. HF::GENERIC_ERROR if the graph is not valid. HF::OK if successful. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="a00245_source.html#l00015">15</a> of file <a class="el" href="a00245_source.html">spatialstructures_C.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00086_source.html#l00022">HF::Exceptions::GENERIC_ERROR</a>, <a class="el" href="a00086_source.html#l00031">HF::Exceptions::INVALID_PTR</a>, <a class="el" href="a00149_source.html#l00055">HF::SpatialStructures::Graph::Nodes()</a>, and <a class="el" href="a00086_source.html#l00016">HF::Exceptions::OK</a>.</p>
-
-</div>
-</div>
-<a id="ga1aebc84e3562370327576641b1ce2dcc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga1aebc84e3562370327576641b1ce2dcc">&#9670;&nbsp;</a></span>GetCSRPointers()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> GetCSRPointers </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a01199.html">HF::SpatialStructures::Graph</a> *&#160;</td>
-          <td class="paramname"><em>graph</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>out_nnz</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>out_num_rows</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>out_num_cols</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float **&#160;</td>
-          <td class="paramname"><em>out_data_ptr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int **&#160;</td>
-          <td class="paramname"><em>out_inner_indices_ptr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int **&#160;</td>
-          <td class="paramname"><em>out_outer_indices_ptr</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p><code>#include &lt;<a class="el" href="a00248.html">Cinterface/spatialstructures_C.h</a>&gt;</code></p>
-
-<p>Retrieve all information for a graph's CSR representation. This will compress the graph if it was not yet already compressed. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">out_nnz</td><td>Number of non-zeros contained within the graph. </td></tr>
-    <tr><td class="paramname">out_num_rows</td><td>Number of rows contained within the graph. </td></tr>
-    <tr><td class="paramname">out_num_rows</td><td>Number of columns contained within the graph. </td></tr>
-    <tr><td class="paramname">out_data_ptr</td><td>Pointer to the graph's data array. </td></tr>
-    <tr><td class="paramname">out_inner_indices_ptr</td><td>Pointer to the graph's inner indices array. </td></tr>
-    <tr><td class="paramname">out_inner_indices_ptr</td><td>Pointer to the graph's outer indices array. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>HF_STATUS::OK on completion. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="a00245_source.html#l00103">103</a> of file <a class="el" href="a00245_source.html">spatialstructures_C.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00149_source.html#l00032">HF::SpatialStructures::Graph::GetCSRPointers()</a>, <a class="el" href="a00152_source.html#l00045">HF::SpatialStructures::CSRPtrs::nnz</a>, and <a class="el" href="a00086_source.html#l00016">HF::Exceptions::OK</a>.</p>
-
-</div>
-</div>
-<a id="gab39b5c750b266835efbc3c6c9da0a431"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gab39b5c750b266835efbc3c6c9da0a431">&#9670;&nbsp;</a></span>GetEdgesForNode()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> GetEdgesForNode </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="a01199.html">HF::SpatialStructures::Graph</a> *&#160;</td>
-          <td class="paramname"><em>graph</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="a01203.html">HF::SpatialStructures::Node</a> *&#160;</td>
-          <td class="paramname"><em>Node</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="a01183.html">HF::SpatialStructures::Edge</a> &gt; **&#160;</td>
-          <td class="paramname"><em>out_vector_ptr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a01183.html">HF::SpatialStructures::Edge</a> **&#160;</td>
-          <td class="paramname"><em>out_edge_list_ptr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>out_edge_list_size</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p><code>#include &lt;<a class="el" href="a00248.html">Cinterface/spatialstructures_C.h</a>&gt;</code></p>
-
-</div>
-</div>
-<a id="ga31fad78ce410cd523bb337f46b078b4c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga31fad78ce410cd523bb337f46b078b4c">&#9670;&nbsp;</a></span>GetNodeID()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> GetNodeID </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a01199.html">HF::SpatialStructures::Graph</a> *&#160;</td>
-          <td class="paramname"><em>graph</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const float *&#160;</td>
-          <td class="paramname"><em>point</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>out_id</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p><code>#include &lt;<a class="el" href="a00248.html">Cinterface/spatialstructures_C.h</a>&gt;</code></p>
-
-<p>Get the id of the given node in the graph. If the node does not exist, <em>out_id</em>  will be set to -1. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">graph</td><td>The graph to get the ID from. </td></tr>
-    <tr><td class="paramname">point</td><td>A 3 float array containing the x,y, and z coordinates of the point to get the ID for. </td></tr>
-    <tr><td class="paramname">out_id</td><td>Output parameter for the id. Set to -1 if that point couldn't be found in <em>graph</em>  </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>HF_STATUS::OK on completion. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="a00245_source.html#l00125">125</a> of file <a class="el" href="a00245_source.html">spatialstructures_C.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00149_source.html#l00024">HF::SpatialStructures::Graph::getID()</a>, and <a class="el" href="a00086_source.html#l00016">HF::Exceptions::OK</a>.</p>
-
-</div>
-</div>
-<a id="ga712f182888672382dd4a1776f850915a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga712f182888672382dd4a1776f850915a">&#9670;&nbsp;</a></span>GetSizeOfEdgeVector()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> GetSizeOfEdgeVector </td>
-          <td>(</td>
-          <td class="paramtype">const std::vector&lt; <a class="el" href="a01183.html">HF::SpatialStructures::Edge</a> &gt; *&#160;</td>
-          <td class="paramname"><em>edge_list</em>, </td>
+          <td class="paramtype"><a class="el" href="a01201.html">PathMember</a> **&#160;</td>
+          <td class="paramname"><em>out_member_ptr</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -768,59 +396,65 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p><code>#include &lt;<a class="el" href="a00248.html">Cinterface/spatialstructures_C.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00239.html">Cinterface/pathfinder_C.h</a>&gt;</code></p>
 
-<p class="definition">Definition at line <a class="el" href="a00134_source.html#l00065">65</a> of file <a class="el" href="a00134_source.html">CInterface.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00086_source.html#l00016">HF::Exceptions::OK</a>.</p>
-
-</div>
-</div>
-<a id="gac17c1fc05e6bf6900bac8689b7619bfb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gac17c1fc05e6bf6900bac8689b7619bfb">&#9670;&nbsp;</a></span>GetSizeOfNodeVector()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> GetSizeOfNodeVector </td>
-          <td>(</td>
-          <td class="paramtype">const std::vector&lt; <a class="el" href="a01203.html">HF::SpatialStructures::Node</a> &gt; *&#160;</td>
-          <td class="paramname"><em>node_list</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>out_size</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p><code>#include &lt;<a class="el" href="a00248.html">Cinterface/spatialstructures_C.h</a>&gt;</code></p>
-
-<p>Get the size of a node vector. </p>
+<p>Get the size of a path and a pointer to its path members. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">node_list</td><td>Node vector to get the size from. </td></tr>
-    <tr><td class="paramname">out_size</td><td>Size of the vector will be written to this int. </td></tr>
+    <tr><td class="paramname">p</td><td>Pointer to the path to get information from. This can handle null values. </td></tr>
+    <tr><td class="paramname">out_member_ptr</td><td>Pointer to the path to get information from. Should not be null. </td></tr>
+    <tr><td class="paramname">out_size</td><td>The number of path members in the path. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>HF_STATUS::OK on completion. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>HF_STATUS::NO_PATH if the path is not valid. HF_OK otherwise. </dd></dl>
+<div class="fragment"><div class="line"><span class="comment">// Requires #include &quot;pathfinder_C.h&quot;, #include &quot;path.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create a Graph g, and compress it.</span></div>
+<div class="line"><a class="code" href="a01189.html">HF::SpatialStructures::Graph</a> g;</div>
+<div class="line">g.<a class="code" href="a01189.html#a604a648f1f73d687ad4544d2ac163212">addEdge</a>(0, 1, 1);</div>
+<div class="line">g.<a class="code" href="a01189.html#a604a648f1f73d687ad4544d2ac163212">addEdge</a>(0, 2, 2);</div>
+<div class="line">g.<a class="code" href="a01189.html#a604a648f1f73d687ad4544d2ac163212">addEdge</a>(1, 3, 3);</div>
+<div class="line">g.<a class="code" href="a01189.html#a604a648f1f73d687ad4544d2ac163212">addEdge</a>(2, 4, 1);</div>
+<div class="line">g.<a class="code" href="a01189.html#a604a648f1f73d687ad4544d2ac163212">addEdge</a>(3, 4, 5);</div>
+<div class="line">g.<a class="code" href="a01189.html#a41cece77d0eee98df39ecc6d3a366ec8">Compress</a>();</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Create a boostGraph from g</span></div>
+<div class="line"><span class="keyword">auto</span> boostGraph = <a class="code" href="a00284.html#aee466bf2324daa4b600cc59c90e78977">HF::Pathfinding::CreateBoostGraph</a>(g);</div>
+<div class="line"> </div>
+<div class="line"><a class="code" href="a01205.html">HF::SpatialStructures::Path</a>* out_path = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a class="code" href="a01201.html">HF::SpatialStructures::PathMember</a>* out_path_member = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="keywordtype">int</span> out_size = -1;</div>
+<div class="line"> </div>
+<div class="line"><a class="code" href="a00269.html#gae024c8b4ea32148644b61d4c1a1332fa">CreatePath</a>(&amp;g, 0, 4, &amp;out_size, &amp;out_path, &amp;out_path_member);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Get p&#39;s info, store results in out_path_member and out_size</span></div>
+<div class="line"><a class="code" href="a00269.html#gaac725d282f4fecd3aba1b3273c26e7e1">GetPathInfo</a>(p, &amp;out_path_member, &amp;out_size);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Remember to free resources when finished</span></div>
+<div class="line"><a class="code" href="a00269.html#ga884a3374d971261a01ccfd3b21e288e5">DestroyPath</a>(out_path);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// At this point, out_path_member has also been destroyed, so we set this to nullptr</span></div>
+<div class="line">out_path_member = <span class="keyword">nullptr</span>;</div>
+</div><!-- fragment --><p>Get the size of a path and a pointer to its path members.</p>
 
-<p class="definition">Definition at line <a class="el" href="a00134_source.html#l00060">60</a> of file <a class="el" href="a00134_source.html">CInterface.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00236_source.html#l00075">75</a> of file <a class="el" href="a00236_source.html">pathfinder_C.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="a00086_source.html#l00016">HF::Exceptions::OK</a>.</p>
+<p class="reference">References <a class="el" href="a00158_source.html#l00056">HF::SpatialStructures::Path::GetPMPointer()</a>, <a class="el" href="a00086_source.html#l00048">HF::Exceptions::NO_PATH</a>, <a class="el" href="a00086_source.html#l00031">HF::Exceptions::OK</a>, and <a class="el" href="a00158_source.html#l00020">HF::SpatialStructures::Path::size()</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
+<div class="ttc" id="aa01189_html_a604a648f1f73d687ad4544d2ac163212"><div class="ttname"><a href="a01189.html#a604a648f1f73d687ad4544d2ac163212">HF::SpatialStructures::Graph::addEdge</a></div><div class="ttdeci">void addEdge(const Node &amp;parent, const Node &amp;child, float score=1.0f)</div><div class="ttdoc">Add a new edge to the graph from parent to child.</div><div class="ttdef"><b>Definition:</b> <a href="a00149_source.html#l00224">graph.cpp:224</a></div></div>
+<div class="ttc" id="aa01201_html"><div class="ttname"><a href="a01201.html">HF::SpatialStructures::PathMember</a></div><div class="ttdoc">The ID of a node, and the cost cost to the node after it.</div><div class="ttdef"><b>Definition:</b> <a href="a00161_source.html#l00019">path.h:19</a></div></div>
+<div class="ttc" id="aa00269_html_gae024c8b4ea32148644b61d4c1a1332fa"><div class="ttname"><a href="a00269.html#gae024c8b4ea32148644b61d4c1a1332fa">CreatePath</a></div><div class="ttdeci">C_INTERFACE CreatePath(const Graph *g, int start, int end, int *out_size, Path **out_path, PathMember **out_data)</div><div class="ttdoc">Create a path from start to end in C++. If no path exists, the NO_PATH error code will be returned,...</div><div class="ttdef"><b>Definition:</b> <a href="a00236_source.html#l00020">pathfinder_C.cpp:20</a></div></div>
+<div class="ttc" id="aa00284_html_aee466bf2324daa4b600cc59c90e78977"><div class="ttname"><a href="a00284.html#aee466bf2324daa4b600cc59c90e78977">HF::Pathfinding::CreateBoostGraph</a></div><div class="ttdeci">std::unique_ptr&lt; BoostGraph, BoostGraphDeleter &gt; CreateBoostGraph(const HF::SpatialStructures::Graph &amp;g)</div><div class="ttdoc">Create a new boost graph from a HF::SpatialStructures:Graph.</div><div class="ttdef"><b>Definition:</b> <a href="a00113_source.html#l00267">path_finder.cpp:267</a></div></div>
+<div class="ttc" id="aa00269_html_gaac725d282f4fecd3aba1b3273c26e7e1"><div class="ttname"><a href="a00269.html#gaac725d282f4fecd3aba1b3273c26e7e1">GetPathInfo</a></div><div class="ttdeci">C_INTERFACE GetPathInfo(HF::SpatialStructures::Path *p, PathMember **out_member_ptr, int *out_size)</div><div class="ttdoc">Get the size of a path</div><div class="ttdef"><b>Definition:</b> <a href="a00236_source.html#l00075">pathfinder_C.cpp:75</a></div></div>
+<div class="ttc" id="aa00269_html_ga884a3374d971261a01ccfd3b21e288e5"><div class="ttname"><a href="a00269.html#ga884a3374d971261a01ccfd3b21e288e5">DestroyPath</a></div><div class="ttdeci">C_INTERFACE DestroyPath(Path *path_to_destroy)</div><div class="ttdoc">Delete a path.</div><div class="ttdef"><b>Definition:</b> <a href="a00236_source.html#l00093">pathfinder_C.cpp:93</a></div></div>
+<div class="ttc" id="aa01189_html_a41cece77d0eee98df39ecc6d3a366ec8"><div class="ttname"><a href="a01189.html#a41cece77d0eee98df39ecc6d3a366ec8">HF::SpatialStructures::Graph::Compress</a></div><div class="ttdeci">void Compress()</div><div class="ttdoc">Compress the graph to a CSR and enable the usage of several functions.</div><div class="ttdef"><b>Definition:</b> <a href="a00149_source.html#l00395">graph.cpp:395</a></div></div>
+<div class="ttc" id="aa01205_html"><div class="ttname"><a href="a01205.html">HF::SpatialStructures::Path</a></div><div class="ttdoc">A collection of nodes that form a path.</div><div class="ttdef"><b>Definition:</b> <a href="a00161_source.html#l00076">path.h:76</a></div></div>
+<div class="ttc" id="aa00269_html_ga497790dddfb220484737711a1f1eff56"><div class="ttname"><a href="a00269.html#ga497790dddfb220484737711a1f1eff56">CreatePaths</a></div><div class="ttdeci">C_INTERFACE CreatePaths(const Graph *g, const int *start, const int *end, Path **out_path_ptr_holder, PathMember **out_path_member_ptr_holder, int *out_sizes, int num_paths)</div><div class="ttdoc">Create multiple paths from start to end in C++. both out_ members return as arrays of pointers,...</div><div class="ttdef"><b>Definition:</b> <a href="a00236_source.html#l00046">pathfinder_C.cpp:46</a></div></div>
+<div class="ttc" id="aa01189_html"><div class="ttname"><a href="a01189.html">HF::SpatialStructures::Graph</a></div><div class="ttdoc">A Graph of nodes connected by edges that supports both integers and HF::SpatialStructures::Node.</div><div class="ttdef"><b>Definition:</b> <a href="a00152_source.html#l00092">graph.h:92</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

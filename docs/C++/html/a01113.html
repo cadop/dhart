@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Analysis: HF::SpatialStructures::Path Struct Reference</title>
+<title>Analysis: HF::Exceptions::FileNotFound Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,327 +61,35 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00171.html">HF</a></li><li class="navelem"><a class="el" href="a00174.html">SpatialStructures</a></li><li class="navelem"><a class="el" href="a01113.html">Path</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00275.html">HF</a></li><li class="navelem"><a class="el" href="a00281.html">Exceptions</a></li><li class="navelem"><a class="el" href="a01113.html">FileNotFound</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="a01110.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">HF::SpatialStructures::Path Struct Reference</div>  </div>
+<div class="title">HF::Exceptions::FileNotFound Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>A point in space with an ID  
+<p>Thrown when desired file is not found.  
  <a href="a01113.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="a00110_source.html">path.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="a00086_source.html">HFExceptions.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a61a8a911a572d91683229a80ede5f541"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01113.html#a61a8a911a572d91683229a80ede5f541">Path::Path</a> ()</td></tr>
-<tr class="memdesc:a61a8a911a572d91683229a80ede5f541"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor, empty block  <a href="a01113.html#a61a8a911a572d91683229a80ede5f541">More...</a><br /></td></tr>
-<tr class="separator:a61a8a911a572d91683229a80ede5f541"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7af74c09bd92982650ac8628d48e8f99"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01113.html#a7af74c09bd92982650ac8628d48e8f99">Path::Path</a> (const std::vector&lt; <a class="el" href="a01109.html">PathMember</a> &gt; pm)</td></tr>
-<tr class="memdesc:a7af74c09bd92982650ac8628d48e8f99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a path from an ordered list of path members  <a href="a01113.html#a7af74c09bd92982650ac8628d48e8f99">More...</a><br /></td></tr>
-<tr class="separator:a7af74c09bd92982650ac8628d48e8f99"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55ded4e02787eb739770ebe28ef386a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01113.html#a55ded4e02787eb739770ebe28ef386a9">AddNode</a> (int node, float cost)</td></tr>
-<tr class="memdesc:a55ded4e02787eb739770ebe28ef386a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="a01109.html">PathMember</a> and appends it to the underlying members vector  <a href="a01113.html#a55ded4e02787eb739770ebe28ef386a9">More...</a><br /></td></tr>
-<tr class="separator:a55ded4e02787eb739770ebe28ef386a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3066bac2d76b5c8a28b35a8d1f6ace71"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01113.html#a3066bac2d76b5c8a28b35a8d1f6ace71">empty</a> () const</td></tr>
-<tr class="memdesc:a3066bac2d76b5c8a28b35a8d1f6ace71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines if the underlying members vector is empty, or not  <a href="a01113.html#a3066bac2d76b5c8a28b35a8d1f6ace71">More...</a><br /></td></tr>
-<tr class="separator:a3066bac2d76b5c8a28b35a8d1f6ace71"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28f61f0f57b38a5249a11a725d9d692b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01113.html#a28f61f0f57b38a5249a11a725d9d692b">size</a> () const</td></tr>
-<tr class="memdesc:a28f61f0f57b38a5249a11a725d9d692b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the length of the underlying members vector (<a class="el" href="a01109.html">PathMember</a> count)  <a href="a01113.html#a28f61f0f57b38a5249a11a725d9d692b">More...</a><br /></td></tr>
-<tr class="separator:a28f61f0f57b38a5249a11a725d9d692b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf2bad9ac73dbdc436c365654d54ad98"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01113.html#adf2bad9ac73dbdc436c365654d54ad98">Reverse</a> ()</td></tr>
-<tr class="memdesc:adf2bad9ac73dbdc436c365654d54ad98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invokes std::reverse to reverse the contents of the underlying members vector, using iterators  <a href="a01113.html#adf2bad9ac73dbdc436c365654d54ad98">More...</a><br /></td></tr>
-<tr class="separator:adf2bad9ac73dbdc436c365654d54ad98"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8cd7f5bcbaf0f399ce196c8967ae87e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01113.html#ac8cd7f5bcbaf0f399ce196c8967ae87e">operator==</a> (const <a class="el" href="a01113.html">Path</a> &amp;p2) const</td></tr>
-<tr class="memdesc:ac8cd7f5bcbaf0f399ce196c8967ae87e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines if all <a class="el" href="a01109.html">PathMember</a> in p1 and p2's underlying <a class="el" href="a01109.html">PathMember</a> vector are equivalent, or not, see operator== for <a class="el" href="a01109.html">PathMember</a>  <a href="a01113.html#ac8cd7f5bcbaf0f399ce196c8967ae87e">More...</a><br /></td></tr>
-<tr class="separator:ac8cd7f5bcbaf0f399ce196c8967ae87e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4bbba8e48932e990cc6d523ac628765a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a01109.html">PathMember</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01113.html#a4bbba8e48932e990cc6d523ac628765a">operator[]</a> (int i) const</td></tr>
-<tr class="memdesc:a4bbba8e48932e990cc6d523ac628765a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a <a class="el" href="a01109.html">PathMember</a> from the underlying <a class="el" href="a01109.html">PathMember</a> vector, by value  <a href="a01113.html#a4bbba8e48932e990cc6d523ac628765a">More...</a><br /></td></tr>
-<tr class="separator:a4bbba8e48932e990cc6d523ac628765a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a942cb49007bbeb5588e2d526c68bdcf9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a01109.html">PathMember</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01113.html#a942cb49007bbeb5588e2d526c68bdcf9">GetPMPointer</a> ()</td></tr>
-<tr class="memdesc:a942cb49007bbeb5588e2d526c68bdcf9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the pointer to the underlying path member vector  <a href="a01113.html#a942cb49007bbeb5588e2d526c68bdcf9">More...</a><br /></td></tr>
-<tr class="separator:a942cb49007bbeb5588e2d526c68bdcf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a864cebbf4e5d7c135c501a63d42f8708"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="a01109.html">PathMember</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01113.html#a864cebbf4e5d7c135c501a63d42f8708">members</a></td></tr>
-<tr class="memdesc:a864cebbf4e5d7c135c501a63d42f8708"><td class="mdescLeft">&#160;</td><td class="mdescRight">The underlying vector of <a class="el" href="a01109.html">PathMember</a>.  <a href="a01113.html#a864cebbf4e5d7c135c501a63d42f8708">More...</a><br /></td></tr>
-<tr class="separator:a864cebbf4e5d7c135c501a63d42f8708"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcede4f1e3fc16cf919f36458cde3e68"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01113.html#afcede4f1e3fc16cf919f36458cde3e68">what</a> () const  throw ()</td></tr>
+<tr class="separator:afcede4f1e3fc16cf919f36458cde3e68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A point in space with an ID </p>
+<div class="textblock"><p>Thrown when desired file is not found. </p>
 
-<p class="definition">Definition at line <a class="el" href="a00110_source.html#l00082">82</a> of file <a class="el" href="a00110_source.html">path.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00086_source.html#l00052">52</a> of file <a class="el" href="a00086_source.html">HFExceptions.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a55ded4e02787eb739770ebe28ef386a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a55ded4e02787eb739770ebe28ef386a9">&#9670;&nbsp;</a></span>AddNode()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void HF::SpatialStructures::Path::AddNode </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>node</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>cost</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Constructs a <a class="el" href="a01109.html">PathMember</a> and appends it to the underlying members vector </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">node</td><td>The identifier for the <a class="el" href="a01109.html">PathMember</a></td></tr>
-    <tr><td class="paramname">cost</td><td>The cost (weight) for the <a class="el" href="a01109.html">PathMember</a></td></tr>
-  </table>
-  </dd>
-</dl>
-<div class="fragment"><div class="line"><span class="comment">// be sure to #include &quot;path.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Create the PathMembers</span></div>
-<div class="line"><a class="code" href="a01109.html">HF::SpatialStructures::PathMember</a> p0 = { 3.14f, 3 };</div>
-<div class="line"><a class="code" href="a01109.html">HF::SpatialStructures::PathMember</a> p1 = { 2.78f, 2 };</div>
-<div class="line"><a class="code" href="a01109.html">HF::SpatialStructures::PathMember</a> p2 = { 1.64f, 1 };</div>
-<div class="line"><a class="code" href="a01109.html">HF::SpatialStructures::PathMember</a> p3 = { 9.35, 7 };</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Create the container of PathMembers</span></div>
-<div class="line">std::vector&lt;HF::SpatialStructures::PathMember&gt; <a class="code" href="a01113.html#a864cebbf4e5d7c135c501a63d42f8708">members</a>{ p0, p1, p2, p3 };</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Create the path, using the container of PathMembers</span></div>
-<div class="line"><a class="code" href="a01113.html">HF::SpatialStructures::Path</a> path(<a class="code" href="a01113.html#a864cebbf4e5d7c135c501a63d42f8708">members</a>);</div>
-<div class="line"><span class="keywordtype">int</span> node_id = 278;</div>
-<div class="line"><span class="keywordtype">float</span> cost = 8.92f;</div>
-<div class="line"> </div>
-<div class="line">path.AddNode(node_id, cost);    <span class="comment">// A PathMember is constructed within AddNode from node_id and cost</span></div>
-<div class="line">                                <span class="comment">// and is then appended to the underlying members vector (via push_back)</span></div>
-</div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="a00107_source.html#l00012">12</a> of file <a class="el" href="a00107_source.html">path.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00110_source.html#l00084">members</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="a00062_source.html#l00051">ConstructShortestPathFromPred()</a>.</p>
-
-</div>
-</div>
-<a id="a3066bac2d76b5c8a28b35a8d1f6ace71"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3066bac2d76b5c8a28b35a8d1f6ace71">&#9670;&nbsp;</a></span>empty()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool HF::SpatialStructures::Path::empty </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Determines if the underlying members vector is empty, or not </p>
-<dl class="section return"><dt>Returns</dt><dd>True if the underyling members vector is empty, false otherwise</dd></dl>
-<div class="fragment"><div class="line"><span class="comment">// be sure to #include &quot;path.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><a class="code" href="a01113.html">HF::SpatialStructures::Path</a> path;</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// There are no PathMembers in path&#39;s members container.</span></div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// if empty() returns true, that means the underlying members vector is of size 0 (no members)</span></div>
-<div class="line"><span class="comment">// otherwise, empty returns false. In this case, path.empty() returns true.</span></div>
-<div class="line">std::string result = path.<a class="code" href="a01113.html#a3066bac2d76b5c8a28b35a8d1f6ace71">empty</a>() ? <span class="stringliteral">&quot;is empty&quot;</span> : <span class="stringliteral">&quot;has at least one member&quot;</span>;</div>
-<div class="line"> </div>
-<div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;The Path object &quot;</span> &lt;&lt; result &lt;&lt; std::endl;</div>
-</div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="a00107_source.html#l00016">16</a> of file <a class="el" href="a00107_source.html">path.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00110_source.html#l00084">members</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="a00131_source.html#l00020">CreatePath()</a>.</p>
-
-</div>
-</div>
-<a id="a942cb49007bbeb5588e2d526c68bdcf9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a942cb49007bbeb5588e2d526c68bdcf9">&#9670;&nbsp;</a></span>GetPMPointer()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a01109.html">PathMember</a> * HF::SpatialStructures::Path::GetPMPointer </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Return the pointer to the underlying path member vector </p>
-<div class="fragment"><div class="line"><span class="comment">// be sure to #include &quot;path.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Create the PathMembers</span></div>
-<div class="line"><a class="code" href="a01109.html">HF::SpatialStructures::PathMember</a> p0 = { 3.14f, 3 };</div>
-<div class="line"><a class="code" href="a01109.html">HF::SpatialStructures::PathMember</a> p1 = { 2.78f, 2 };</div>
-<div class="line"><a class="code" href="a01109.html">HF::SpatialStructures::PathMember</a> p2 = { 1.64f, 1 };</div>
-<div class="line"><a class="code" href="a01109.html">HF::SpatialStructures::PathMember</a> p3 = { 9.35f, 7 };</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Create the container of PathMembers</span></div>
-<div class="line">std::vector&lt;HF::SpatialStructures::PathMember&gt; <a class="code" href="a01113.html#a864cebbf4e5d7c135c501a63d42f8708">members</a>{p0, p1, p2, p3};</div>
-<div class="line"> </div>
-<div class="line"><a class="code" href="a01113.html">HF::SpatialStructures::Path</a> path(<a class="code" href="a01113.html#a864cebbf4e5d7c135c501a63d42f8708">members</a>);                          <span class="comment">// Create the Path object, path</span></div>
-<div class="line"> </div>
-<div class="line"><a class="code" href="a01109.html">HF::SpatialStructures::PathMember</a> *ptr = path.<a class="code" href="a01113.html#a942cb49007bbeb5588e2d526c68bdcf9">GetPMPointer</a>();</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// You now have a pointer to the underlying buffer of the members vector with in a PathMember.</span></div>
-<div class="line"><a class="code" href="a01109.html">HF::SpatialStructures::PathMember</a> *curr = ptr;</div>
-<div class="line"><a class="code" href="a01109.html">HF::SpatialStructures::PathMember</a> *finish = ptr + path.<a class="code" href="a01113.html#a28f61f0f57b38a5249a11a725d9d692b">size</a>();</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordflow">while</span> (curr != finish) {</div>
-<div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Cost: &quot;</span> &lt;&lt; curr-&gt;<a class="code" href="a01109.html#aa854e4b8d04fc62d8e09cff48ba95d68">cost</a> &lt;&lt; <span class="stringliteral">&quot; &quot;</span> </div>
-<div class="line">              &lt;&lt; <span class="stringliteral">&quot;Node: &quot;</span> &lt;&lt; curr-&gt;<a class="code" href="a01109.html#aed2cf97b3136ad0929cdd3c5c2b96e1c">node</a> &lt;&lt; std::endl;</div>
-<div class="line">    ++curr;</div>
-<div class="line">}</div>
-</div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="a00107_source.html#l00049">49</a> of file <a class="el" href="a00107_source.html">path.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00110_source.html#l00084">members</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="a00131_source.html#l00020">CreatePath()</a>, <a class="el" href="a00131_source.html#l00075">GetPathInfo()</a>, and <a class="el" href="a00062_source.html#l00132">HF::Pathfinding::InsertPathsIntoArray()</a>.</p>
-
-</div>
-</div>
-<a id="ac8cd7f5bcbaf0f399ce196c8967ae87e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac8cd7f5bcbaf0f399ce196c8967ae87e">&#9670;&nbsp;</a></span>operator==()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool HF::SpatialStructures::Path::operator== </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="a01113.html">Path</a> &amp;&#160;</td>
-          <td class="paramname"><em>p2</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Determines if all <a class="el" href="a01109.html">PathMember</a> in p1 and p2's underlying <a class="el" href="a01109.html">PathMember</a> vector are equivalent, or not, see operator== for <a class="el" href="a01109.html">PathMember</a> </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p2</td><td>The <a class="el" href="a01113.html" title="A point in space with an ID">Path</a> to compare against p1 (or rather, the elements of their <a class="el" href="a01109.html">PathMember</a> vectors)</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>True, if all <a class="el" href="a01109.html">PathMember</a> elements in p2 are equal to all <a class="el" href="a01109.html">PathMember</a> elements in p1, false otherwise</dd></dl>
-<div class="fragment"><div class="line"><span class="comment">// be sure to #include &quot;path.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><a class="code" href="a01109.html">HF::SpatialStructures::PathMember</a> p0 = { 3.14f, 3 };                <span class="comment">// Create all the PathMember objects</span></div>
-<div class="line"><a class="code" href="a01109.html">HF::SpatialStructures::PathMember</a> p1 = { 2.78f, 2 };</div>
-<div class="line"> </div>
-<div class="line"><a class="code" href="a01109.html">HF::SpatialStructures::PathMember</a> p2 = { 3.14f, 3 };</div>
-<div class="line"><a class="code" href="a01109.html">HF::SpatialStructures::PathMember</a> p3 = { 2.78f, 2 };</div>
-<div class="line"> </div>
-<div class="line"><a class="code" href="a01109.html">HF::SpatialStructures::PathMember</a> p4 = { 1.1f, 9 };</div>
-<div class="line"><a class="code" href="a01109.html">HF::SpatialStructures::PathMember</a> p5 = { 123.0f, 10 };</div>
-<div class="line"> </div>
-<div class="line">std::vector&lt;HF::SpatialStructures::PathMember&gt; members_0{p0, p1};   <span class="comment">// Create the HF::SpatialStructures::PathMember vectors</span></div>
-<div class="line">std::vector&lt;HF::SpatialStructures::PathMember&gt; members_1{p2, p3};</div>
-<div class="line">std::vector&lt;HF::SpatialStructures::PathMember&gt; members_2{p4, p5};</div>
-<div class="line">std::vector&lt;HF::SpatialStructures::PathMember&gt; members_3{p1, p0};</div>
-<div class="line"> </div>
-<div class="line"><a class="code" href="a01113.html">HF::SpatialStructures::Path</a> path_0(members_0);                      <span class="comment">// Create the Path objects</span></div>
-<div class="line"><a class="code" href="a01113.html">HF::SpatialStructures::Path</a> path_1(members_1);</div>
-<div class="line"><a class="code" href="a01113.html">HF::SpatialStructures::Path</a> path_2(members_2);</div>
-<div class="line"><a class="code" href="a01113.html">HF::SpatialStructures::Path</a> path_3(members_3);</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">bool</span> same_values_same_order = path_0 == path_1;</div>
-<div class="line"><span class="keywordtype">bool</span> totally_different = path_0 == path_2;</div>
-<div class="line"><span class="keywordtype">bool</span> same_values_different_order = path_0 == path_3;</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// path_0 and path_1 share the same PathMember values, with an identical permutation,</span></div>
-<div class="line"><span class="comment">// so they are equivalent.</span></div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// path_0 and path_2 are not equivalent, because they have completely different PathMember</span></div>
-<div class="line"><span class="comment">// values.</span></div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// path_0 and path_3 are not equivalent, because although they have PathMember objects of</span></div>
-<div class="line"><span class="comment">// the same values, the order in which path_0 and path_3 have their member vectors arranged</span></div>
-<div class="line"><span class="comment">// are different.</span></div>
-</div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="a00107_source.html#l00028">28</a> of file <a class="el" href="a00107_source.html">path.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00107_source.html#l00020">size()</a>.</p>
-
-</div>
-</div>
-<a id="a4bbba8e48932e990cc6d523ac628765a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4bbba8e48932e990cc6d523ac628765a">&#9670;&nbsp;</a></span>operator[]()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a01109.html">PathMember</a> HF::SpatialStructures::Path::operator[] </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>i</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Retrieve a <a class="el" href="a01109.html">PathMember</a> from the underlying <a class="el" href="a01109.html">PathMember</a> vector, by value </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">i</td><td>The index for the desired <a class="el" href="a01109.html">PathMember</a> element within members</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="a01109.html">PathMember</a> within the members vector, at index i, by value</dd></dl>
-<div class="fragment"><div class="line"><span class="comment">// be sure to #include &quot;path.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Create the PathMembers</span></div>
-<div class="line"><a class="code" href="a01109.html">HF::SpatialStructures::PathMember</a> p0 = { 3.14f, 3 };</div>
-<div class="line"><a class="code" href="a01109.html">HF::SpatialStructures::PathMember</a> p1 = { 2.78f, 2 };</div>
-<div class="line"><a class="code" href="a01109.html">HF::SpatialStructures::PathMember</a> p2 = { 1.64f, 1 };</div>
-<div class="line"><a class="code" href="a01109.html">HF::SpatialStructures::PathMember</a> p3 = { 9.35f, 7 };</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Create the container of PathMembers</span></div>
-<div class="line">std::vector&lt;HF::SpatialStructures::PathMember&gt; <a class="code" href="a01113.html#a864cebbf4e5d7c135c501a63d42f8708">members</a>{p0, p1, p2, p3};</div>
-<div class="line"> </div>
-<div class="line"><a class="code" href="a01113.html">HF::SpatialStructures::Path</a> path(<a class="code" href="a01113.html#a864cebbf4e5d7c135c501a63d42f8708">members</a>);                      <span class="comment">// Create the Path object, path</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">const</span> <span class="keywordtype">int</span> desired_index = 2;</div>
-<div class="line"><a class="code" href="a01109.html">HF::SpatialStructures::PathMember</a> result = path[desired_index]; <span class="comment">// a copy of the element at desired_index</span></div>
-<div class="line">                                                                <span class="comment">// within the internal members vector</span></div>
-<div class="line">                                                                <span class="comment">// is assigned to result</span></div>
-</div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="a00107_source.html#l00041">41</a> of file <a class="el" href="a00107_source.html">path.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00110_source.html#l00084">members</a>.</p>
-
-</div>
-</div>
-<a id="a61a8a911a572d91683229a80ede5f541"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a61a8a911a572d91683229a80ede5f541">&#9670;&nbsp;</a></span>Path::Path() <span class="overload">[1/2]</span></h2>
+<a id="afcede4f1e3fc16cf919f36458cde3e68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcede4f1e3fc16cf919f36458cde3e68">&#9670;&nbsp;</a></span>what()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -390,10 +98,16 @@ Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">HF::SpatialStructures::Path::Path::Path </td>
+          <td class="memname">const char* HF::Exceptions::FileNotFound::what </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
+        </tr>
+        <tr>
+          <td align="right">throw </td><td>(</td><td colspan="2"></td>
+        </tr>
+        <tr>
+          <td align="right"></td><td>)</td><td></td><td></td>
         </tr>
       </table>
   </td>
@@ -403,174 +117,14 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Default constructor, empty block </p>
-<div class="fragment"><div class="line"><span class="comment">// be sure to #include &quot;path.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><a class="code" href="a01113.html">HF::SpatialStructures::Path</a> path;</div>
-</div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="a00110_source.html#l00097">97</a> of file <a class="el" href="a00110_source.html">path.h</a>.</p>
-
-<p class="reference">References <a class="el" href="a00110_source.html#l00097">Path::Path()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="a00110_source.html#l00097">Path::Path()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00086_source.html#l00054">54</a> of file <a class="el" href="a00086_source.html">HFExceptions.h</a>.</p>
 
 </div>
 </div>
-<a id="a7af74c09bd92982650ac8628d48e8f99"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7af74c09bd92982650ac8628d48e8f99">&#9670;&nbsp;</a></span>Path::Path() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">HF::SpatialStructures::Path::Path::Path </td>
-          <td>(</td>
-          <td class="paramtype">const std::vector&lt; <a class="el" href="a01109.html">PathMember</a> &gt;&#160;</td>
-          <td class="paramname"><em>pm</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Construct a path from an ordered list of path members </p>
-<div class="fragment"><div class="line"><span class="comment">// be sure to #include &quot;path.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Create the PathMembers</span></div>
-<div class="line"><a class="code" href="a01109.html">HF::SpatialStructures::PathMember</a> p0 = { 3.14f, 3 };</div>
-<div class="line"><a class="code" href="a01109.html">HF::SpatialStructures::PathMember</a> p1 = { 2.78f, 2 };</div>
-<div class="line"><a class="code" href="a01109.html">HF::SpatialStructures::PathMember</a> p2 = { 1.64f, 1 };</div>
-<div class="line"><a class="code" href="a01109.html">HF::SpatialStructures::PathMember</a> p3 = { 9.35, 7 };</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Create the container of PathMembers</span></div>
-<div class="line">std::vector&lt;HF::SpatialStructures::PathMember&gt; <a class="code" href="a01113.html#a864cebbf4e5d7c135c501a63d42f8708">members</a>{p0, p1, p2, p3};</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Create the path, using the container of PathMembers</span></div>
-<div class="line"><a class="code" href="a01113.html">HF::SpatialStructures::Path</a> path(<a class="code" href="a01113.html#a864cebbf4e5d7c135c501a63d42f8708">members</a>);</div>
-</div><!-- fragment --> 
-<p class="reference">References <a class="el" href="a00110_source.html#l00097">Path::Path()</a>.</p>
-
-</div>
-</div>
-<a id="adf2bad9ac73dbdc436c365654d54ad98"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adf2bad9ac73dbdc436c365654d54ad98">&#9670;&nbsp;</a></span>Reverse()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void HF::SpatialStructures::Path::Reverse </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Invokes std::reverse to reverse the contents of the underlying members vector, using iterators </p>
-<div class="fragment"><div class="line"><span class="comment">// be sure to #include &quot;path.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Create the PathMembers</span></div>
-<div class="line"><a class="code" href="a01109.html">HF::SpatialStructures::PathMember</a> p0 = { 3.14f, 3 };</div>
-<div class="line"><a class="code" href="a01109.html">HF::SpatialStructures::PathMember</a> p1 = { 2.78f, 2 };</div>
-<div class="line"><a class="code" href="a01109.html">HF::SpatialStructures::PathMember</a> p2 = { 1.64f, 1 };</div>
-<div class="line"><a class="code" href="a01109.html">HF::SpatialStructures::PathMember</a> p3 = { 9.35f, 7 };</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Create the container of PathMembers</span></div>
-<div class="line">std::vector&lt;HF::SpatialStructures::PathMember&gt; <a class="code" href="a01113.html#a864cebbf4e5d7c135c501a63d42f8708">members</a>{p0, p1, p2, p3};</div>
-<div class="line"> </div>
-<div class="line"><a class="code" href="a01113.html">HF::SpatialStructures::Path</a> path(<a class="code" href="a01113.html#a864cebbf4e5d7c135c501a63d42f8708">members</a>);          <span class="comment">// Create the Path object, path</span></div>
-<div class="line">path.<a class="code" href="a01113.html#a55ded4e02787eb739770ebe28ef386a9">AddNode</a>(278, 3.14f);                           <span class="comment">// Append one more PathMember to path</span></div>
-<div class="line"> </div>
-<div class="line">path.<a class="code" href="a01113.html#adf2bad9ac73dbdc436c365654d54ad98">Reverse</a>();             <span class="comment">// The order of the PathMembers within members is now that of</span></div>
-<div class="line">                            <span class="comment">// p3, p2, p1, p0</span></div>
-</div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="a00107_source.html#l00024">24</a> of file <a class="el" href="a00107_source.html">path.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00110_source.html#l00084">members</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="a00062_source.html#l00051">ConstructShortestPathFromPred()</a>.</p>
-
-</div>
-</div>
-<a id="a28f61f0f57b38a5249a11a725d9d692b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a28f61f0f57b38a5249a11a725d9d692b">&#9670;&nbsp;</a></span>size()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int HF::SpatialStructures::Path::size </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Retrieves the length of the underlying members vector (<a class="el" href="a01109.html">PathMember</a> count) </p>
-<dl class="section return"><dt>Returns</dt><dd>The value returned by members.size() - the current <a class="el" href="a01109.html">PathMember</a> count</dd></dl>
-<div class="fragment"><div class="line"><span class="comment">// be sure to #include &quot;path.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Create the PathMembers</span></div>
-<div class="line"><a class="code" href="a01109.html">HF::SpatialStructures::PathMember</a> p0 = { 3.14f, 3 };</div>
-<div class="line"><a class="code" href="a01109.html">HF::SpatialStructures::PathMember</a> p1 = { 2.78f, 2 };</div>
-<div class="line"><a class="code" href="a01109.html">HF::SpatialStructures::PathMember</a> p2 = { 1.64f, 1 };</div>
-<div class="line"><a class="code" href="a01109.html">HF::SpatialStructures::PathMember</a> p3 = { 9.35f, 7 };</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Create the container of PathMembers</span></div>
-<div class="line">std::vector&lt;HF::SpatialStructures::PathMember&gt; <a class="code" href="a01113.html#a864cebbf4e5d7c135c501a63d42f8708">members</a>{p0, p1, p2, p3};</div>
-<div class="line"> </div>
-<div class="line"><a class="code" href="a01113.html">HF::SpatialStructures::Path</a> path(<a class="code" href="a01113.html#a864cebbf4e5d7c135c501a63d42f8708">members</a>);          <span class="comment">// Create the Path object, path</span></div>
-<div class="line">path.<a class="code" href="a01113.html#a55ded4e02787eb739770ebe28ef386a9">AddNode</a>(278, 3.14f);   <span class="comment">// Add one more PathMember to path</span></div>
-<div class="line"> </div>
-<div class="line">std::string result = path.<a class="code" href="a01113.html#a28f61f0f57b38a5249a11a725d9d692b">size</a>() &gt;= 5 ? <span class="stringliteral">&quot;at least 5 members&quot;</span> : <span class="stringliteral">&quot;under 5 members&quot;</span>;</div>
-<div class="line"> </div>
-<div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;The Path object has &quot;</span> &lt;&lt; result &lt;&lt; std::endl;</div>
-</div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="a00107_source.html#l00020">20</a> of file <a class="el" href="a00107_source.html">path.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00110_source.html#l00084">members</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="a00062_source.html#l00051">ConstructShortestPathFromPred()</a>, <a class="el" href="a00131_source.html#l00020">CreatePath()</a>, <a class="el" href="a00131_source.html#l00075">GetPathInfo()</a>, <a class="el" href="a00062_source.html#l00132">HF::Pathfinding::InsertPathsIntoArray()</a>, <a class="el" href="a00110_source.html#l00361">std::operator&lt;&lt;()</a>, and <a class="el" href="a00107_source.html#l00028">operator==()</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="a864cebbf4e5d7c135c501a63d42f8708"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a864cebbf4e5d7c135c501a63d42f8708">&#9670;&nbsp;</a></span>members</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt;<a class="el" href="a01109.html">PathMember</a>&gt; HF::SpatialStructures::Path::members</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The underlying vector of <a class="el" href="a01109.html">PathMember</a>. </p>
-
-<p class="definition">Definition at line <a class="el" href="a00110_source.html#l00084">84</a> of file <a class="el" href="a00110_source.html">path.h</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="a00107_source.html#l00012">AddNode()</a>, <a class="el" href="a00107_source.html#l00016">empty()</a>, <a class="el" href="a00107_source.html#l00049">GetPMPointer()</a>, <a class="el" href="a00107_source.html#l00041">operator[]()</a>, <a class="el" href="a00107_source.html#l00024">Reverse()</a>, and <a class="el" href="a00107_source.html#l00020">size()</a>.</p>
-
-</div>
-</div>
-<hr/>The documentation for this struct was generated from the following files:<ul>
-<li>Cpp/spatialstructures/src/<a class="el" href="a00110_source.html">path.h</a></li>
-<li>Cpp/spatialstructures/src/<a class="el" href="a00107_source.html">path.cpp</a></li>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>Cpp/exceptions/src/<a class="el" href="a00086_source.html">HFExceptions.h</a></li>
 </ul>
 </div><!-- contents -->
-<div class="ttc" id="aa01113_html_a28f61f0f57b38a5249a11a725d9d692b"><div class="ttname"><a href="a01113.html#a28f61f0f57b38a5249a11a725d9d692b">HF::SpatialStructures::Path::size</a></div><div class="ttdeci">int size() const</div><div class="ttdoc">Retrieves the length of the underlying members vector (PathMember count)</div><div class="ttdef"><b>Definition:</b> <a href="a00107_source.html#l00020">path.cpp:20</a></div></div>
-<div class="ttc" id="aa01113_html_a3066bac2d76b5c8a28b35a8d1f6ace71"><div class="ttname"><a href="a01113.html#a3066bac2d76b5c8a28b35a8d1f6ace71">HF::SpatialStructures::Path::empty</a></div><div class="ttdeci">bool empty() const</div><div class="ttdoc">Determines if the underlying members vector is empty, or not</div><div class="ttdef"><b>Definition:</b> <a href="a00107_source.html#l00016">path.cpp:16</a></div></div>
-<div class="ttc" id="aa01109_html_aa854e4b8d04fc62d8e09cff48ba95d68"><div class="ttname"><a href="a01109.html#aa854e4b8d04fc62d8e09cff48ba95d68">HF::SpatialStructures::PathMember::cost</a></div><div class="ttdeci">float cost</div><div class="ttdoc">The cost of a PathMember (weight)</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00018">path.h:18</a></div></div>
-<div class="ttc" id="aa01109_html"><div class="ttname"><a href="a01109.html">HF::SpatialStructures::PathMember</a></div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00017">path.h:17</a></div></div>
-<div class="ttc" id="aa01113_html"><div class="ttname"><a href="a01113.html">HF::SpatialStructures::Path</a></div><div class="ttdoc">A point in space with an ID</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00082">path.h:82</a></div></div>
-<div class="ttc" id="aa01113_html_a864cebbf4e5d7c135c501a63d42f8708"><div class="ttname"><a href="a01113.html#a864cebbf4e5d7c135c501a63d42f8708">HF::SpatialStructures::Path::members</a></div><div class="ttdeci">std::vector&lt; PathMember &gt; members</div><div class="ttdoc">The underlying vector of PathMember.</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00084">path.h:84</a></div></div>
-<div class="ttc" id="aa01109_html_aed2cf97b3136ad0929cdd3c5c2b96e1c"><div class="ttname"><a href="a01109.html#aed2cf97b3136ad0929cdd3c5c2b96e1c">HF::SpatialStructures::PathMember::node</a></div><div class="ttdeci">int node</div><div class="ttdoc">The node identifier.</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00019">path.h:19</a></div></div>
-<div class="ttc" id="aa01113_html_adf2bad9ac73dbdc436c365654d54ad98"><div class="ttname"><a href="a01113.html#adf2bad9ac73dbdc436c365654d54ad98">HF::SpatialStructures::Path::Reverse</a></div><div class="ttdeci">void Reverse()</div><div class="ttdoc">Invokes std::reverse to reverse the contents of the underlying members vector, using iterators</div><div class="ttdef"><b>Definition:</b> <a href="a00107_source.html#l00024">path.cpp:24</a></div></div>
-<div class="ttc" id="aa01113_html_a942cb49007bbeb5588e2d526c68bdcf9"><div class="ttname"><a href="a01113.html#a942cb49007bbeb5588e2d526c68bdcf9">HF::SpatialStructures::Path::GetPMPointer</a></div><div class="ttdeci">PathMember * GetPMPointer()</div><div class="ttdoc">Return the pointer to the underlying path member vector</div><div class="ttdef"><b>Definition:</b> <a href="a00107_source.html#l00049">path.cpp:49</a></div></div>
-<div class="ttc" id="aa01113_html_a55ded4e02787eb739770ebe28ef386a9"><div class="ttname"><a href="a01113.html#a55ded4e02787eb739770ebe28ef386a9">HF::SpatialStructures::Path::AddNode</a></div><div class="ttdeci">void AddNode(int node, float cost)</div><div class="ttdoc">Constructs a PathMember and appends it to the underlying members vector</div><div class="ttdef"><b>Definition:</b> <a href="a00107_source.html#l00012">path.cpp:12</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

@@ -1,40 +1,643 @@
-\hypertarget{a01105}{}\doxysection{std\+::hash$<$ HF\+::Spatial\+Structures\+::Node $>$ Struct Reference}
-\label{a01105}\index{std::hash$<$ HF::SpatialStructures::Node $>$@{std::hash$<$ HF::SpatialStructures::Node $>$}}
+\hypertarget{a01105}{}\doxysection{HF\+::Graph\+Generator\+::Graph\+Generator\+Private Class Reference}
+\label{a01105}\index{HF::GraphGenerator::GraphGeneratorPrivate@{HF::GraphGenerator::GraphGeneratorPrivate}}
 
 
-{\ttfamily \#include $<$node.\+h$>$}
+Contains the private implementation of the \mbox{\hyperlink{a01101}{Graph\+Generator}} to insulate the clients from the implementation.  
+
+
+
+
+{\ttfamily \#include $<$graph\+\_\+generator\+\_\+private.\+h$>$}
 
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-std\+::size\+\_\+t \mbox{\hyperlink{a01105_ae698fc86d39e9e05ca2f030654fa45ca}{operator()}} (const \mbox{\hyperlink{a01101}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&k) const noexcept
-\end{DoxyCompactItemize}
+\mbox{\hyperlink{a01105_a665e92cd93b734ce8d901b679bbd57ea}{Graph\+Generator\+Private}} (\mbox{\hyperlink{a01101}{Graph\+Generator}} \&\mbox{\hyperlink{a01105_a821adb5a1c656772091a8998cb1d3c7b}{GG}})
+\begin{DoxyCompactList}\small\item\em Construct a graphgeneratorprivate with the settings of GG. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01189}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} \mbox{\hyperlink{a01105_a47eb6c332523a1c5b89d542a87c7ea23}{Build\+Network}} ()
+\begin{DoxyCompactList}\small\item\em Conduct a breadth first search of traversable space. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{a01105_a7b257d8db4110e76d249e81810ca1084}{Walkable\+Check}} (const \mbox{\hyperlink{a01193}{Spatial\+Structures\+::\+Node}} \&position)
+\begin{DoxyCompactList}\small\item\em Determine if a node is above a valid floor. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01105_a50db86451d7ae5569daa8463e10247ec}{Check\+Start}} (\mbox{\hyperlink{a00276_a8c29578574c275e66fbd439be62c125e}{v3}} \&start)
+\begin{DoxyCompactList}\small\item\em Push point to the ground if there is ground beneath it. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a01105_a551344f5e893380e34b7719b66d560f1}{Generate\+Potential\+Children}} (const \mbox{\hyperlink{a01193}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&parent, const std\+::vector$<$ \mbox{\hyperlink{a00011_a3394fa820b983014dcac29faca0e4f19}{std\+::pair}}$<$ int, int $>$$>$ \&directions, std\+::vector$<$ \mbox{\hyperlink{a01193}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \&out\+\_\+children)
+\begin{DoxyCompactList}\small\item\em Populate out\+\_\+children with a potential child position for every direction in directions. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a01105_a7944155fef41ad8b6ae2c4258444aab1}{Crawl\+Geom}} (\mbox{\hyperlink{a01109}{Unique\+Queue}} \&todo)
+\begin{DoxyCompactList}\small\item\em Begin breadth first search to populate the graph with with nodes and edges. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a01105_a050d3cb17b0ea8c32625cf83ffe0d48d}{Crawl\+Geom\+Parallel}} (\mbox{\hyperlink{a01109}{Unique\+Queue}} \&todo)
+\begin{DoxyCompactList}\small\item\em A parallel version of Crawl\+Geom. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a01105_a5bda9a1954db74dd7754c975da304e22}{Computer\+Parent}} (const \mbox{\hyperlink{a01193}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&parent, const std\+::vector$<$ \mbox{\hyperlink{a00011_a3394fa820b983014dcac29faca0e4f19}{std\+::pair}}$<$ int, int $>$$>$ \&directions, std\+::vector$<$ \mbox{\hyperlink{a01173}{H\+F\+::\+Spatial\+Structures\+::\+Edge}} $>$ \&out\+\_\+relations)
+\begin{DoxyCompactList}\small\item\em Generate edges and children for parent in relations. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01105_a4ec2599ce52947670024890df33f85e9}{Check\+Ray}} (\mbox{\hyperlink{a01193}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&position, const \mbox{\hyperlink{a00276_a8c29578574c275e66fbd439be62c125e}{v3}} \&direction, \mbox{\hyperlink{a00276_a6180d5bc4bbfa9a5a426089e1f1ad598}{H\+I\+T\+\_\+\+F\+L\+AG}} flag=H\+I\+T\+\_\+\+F\+L\+A\+G\+::\+B\+O\+TH)
+\begin{DoxyCompactList}\small\item\em Cast a ray and overwrite position with the result. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01105_ac08636a123b62c95e1a3c438f84f2e06}{Check\+Ray}} (\mbox{\hyperlink{a00276_a8c29578574c275e66fbd439be62c125e}{v3}} \&position, const \mbox{\hyperlink{a00276_a8c29578574c275e66fbd439be62c125e}{v3}} \&direction, \mbox{\hyperlink{a00276_a6180d5bc4bbfa9a5a426089e1f1ad598}{H\+I\+T\+\_\+\+F\+L\+AG}} flag=H\+I\+T\+\_\+\+F\+L\+A\+G\+::\+B\+O\+TH)
+\begin{DoxyCompactList}\small\item\em Cast a ray and overwrite position with the point of intersection. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01105_acd3a1c33e1b452f3938a2cc7da4d6d26}{Occlusion\+Check}} (const \mbox{\hyperlink{a01193}{Spatial\+Structures\+::\+Node}} \&parent, const \mbox{\hyperlink{a01193}{Spatial\+Structures\+::\+Node}} \&child)
+\begin{DoxyCompactList}\small\item\em Check if there is an obstruction between parent and child. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01105_ac869aa5099472e5ad240c98ee92637a4}{is\+Up\+Slope}} (const \mbox{\hyperlink{a01193}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&n1, const \mbox{\hyperlink{a01193}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&n2)
+\begin{DoxyCompactList}\small\item\em Determine if the graph can traverse the slope from n1 to n2. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a01105_a2acd7efa04ae228a721cef631a38af28}{Get\+Children}} (const \mbox{\hyperlink{a01193}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&parent, const std\+::vector$<$ \mbox{\hyperlink{a01193}{Spatial\+Structures\+::\+Node}} $>$ \&possible\+\_\+children, std\+::vector$<$ \mbox{\hyperlink{a01173}{H\+F\+::\+Spatial\+Structures\+::\+Edge}} $>$ \&out\+\_\+children)
+\begin{DoxyCompactList}\small\item\em Create all possible edges from parent to possible\+\_\+children. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{a01193}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \mbox{\hyperlink{a01105_a29aa18d3ae2ef2082ab56ca9061d16ee}{Check\+Children}} (const \mbox{\hyperlink{a01193}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&parent, std\+::vector$<$ \mbox{\hyperlink{a01193}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ Children)
+\begin{DoxyCompactList}\small\item\em Offset all children to the ground, then check if traversing from parent would require a step outside of step height limits. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00278_af0378d900074d484ba791d4317e5935e}{H\+F\+::\+Spatial\+Structures\+::\+S\+T\+EP}} \mbox{\hyperlink{a01105_addf12e73a371c75c3c3d0ca8d0082c8f}{Check\+Connection}} (const \mbox{\hyperlink{a01193}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&parent, const \mbox{\hyperlink{a01193}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&child)
+\begin{DoxyCompactList}\small\item\em Check if parent can traverse to child. ~\newline
+ \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01189}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} \mbox{\hyperlink{a01105_a556e9b9bdd1a6244d4c7d42a5ec9d81f}{G}}
+\begin{DoxyCompactList}\small\item\em An internal graph that is iterated upon as the program is executed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01101}{H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator}} \& \mbox{\hyperlink{a01105_a821adb5a1c656772091a8998cb1d3c7b}{GG}}
+\begin{DoxyCompactList}\small\item\em The underlying graph generator to hold all the settings. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
+Contains the private implementation of the \mbox{\hyperlink{a01101}{Graph\+Generator}} to insulate the clients from the implementation. 
+
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{a00266__todo000003}{Todo}}]Combine this with the graphgenerator public and create a single class. \end{DoxyRefDesc}
 
 
-Definition at line 421 of file node.\+h.
+Definition at line 22 of file graph\+\_\+generator\+\_\+private.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{a01105_a665e92cd93b734ce8d901b679bbd57ea}\label{a01105_a665e92cd93b734ce8d901b679bbd57ea}} 
+\index{HF::GraphGenerator::GraphGeneratorPrivate@{HF::GraphGenerator::GraphGeneratorPrivate}!GraphGeneratorPrivate@{GraphGeneratorPrivate}}
+\index{GraphGeneratorPrivate@{GraphGeneratorPrivate}!HF::GraphGenerator::GraphGeneratorPrivate@{HF::GraphGenerator::GraphGeneratorPrivate}}
+\doxysubsubsection{\texorpdfstring{GraphGeneratorPrivate()}{GraphGeneratorPrivate()}}
+{\footnotesize\ttfamily H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::\+Graph\+Generator\+Private (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01101}{Graph\+Generator}} \&}]{GG }\end{DoxyParamCaption})}
+
+
+
+Construct a graphgeneratorprivate with the settings of GG. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em GG} & \mbox{\hyperlink{a01101}{Graph\+Generator}} containing settings to use when Build\+Network is called. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 64 of file graph\+\_\+generator\+\_\+private.\+cpp.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{a01105_ae698fc86d39e9e05ca2f030654fa45ca}\label{a01105_ae698fc86d39e9e05ca2f030654fa45ca}} 
-\index{std::hash$<$ HF::SpatialStructures::Node $>$@{std::hash$<$ HF::SpatialStructures::Node $>$}!operator()@{operator()}}
-\index{operator()@{operator()}!std::hash$<$ HF::SpatialStructures::Node $>$@{std::hash$<$ HF::SpatialStructures::Node $>$}}
-\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
-{\footnotesize\ttfamily std\+::size\+\_\+t std\+::hash$<$ \mbox{\hyperlink{a01101}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01101}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&}]{k }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+\mbox{\Hypertarget{a01105_a47eb6c332523a1c5b89d542a87c7ea23}\label{a01105_a47eb6c332523a1c5b89d542a87c7ea23}} 
+\index{HF::GraphGenerator::GraphGeneratorPrivate@{HF::GraphGenerator::GraphGeneratorPrivate}!BuildNetwork@{BuildNetwork}}
+\index{BuildNetwork@{BuildNetwork}!HF::GraphGenerator::GraphGeneratorPrivate@{HF::GraphGenerator::GraphGeneratorPrivate}}
+\doxysubsubsection{\texorpdfstring{BuildNetwork()}{BuildNetwork()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01189}{Graph}} H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::\+Build\+Network (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
-Definition at line 423 of file node.\+h.
+Conduct a breadth first search of traversable space. 
+
+\begin{DoxyReturn}{Returns}
+The Graph generated using the settings from GG. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a01101_a0044b9075921c7510b047f9076ad0a5e}{Graph\+Generator\+::\+Build\+Network}} 
+\end{DoxySeeAlso}
+
+
+Definition at line 67 of file graph\+\_\+generator\+\_\+private.\+cpp.
 
 
 
-References std\+::hash\+\_\+combine\+\_\+impl().
+References Check\+Start(), H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::core\+\_\+count, Crawl\+Geom(), Crawl\+Geom\+Parallel(), G, GG, H\+F\+::\+Graph\+Generator\+::\+Unique\+Queue\+::push(), H\+F\+::\+Spatial\+Structures\+::roundhf(), and H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::start.
 
 
 
-The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+Referenced by H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Build\+Network().
+
+\mbox{\Hypertarget{a01105_a29aa18d3ae2ef2082ab56ca9061d16ee}\label{a01105_a29aa18d3ae2ef2082ab56ca9061d16ee}} 
+\index{HF::GraphGenerator::GraphGeneratorPrivate@{HF::GraphGenerator::GraphGeneratorPrivate}!CheckChildren@{CheckChildren}}
+\index{CheckChildren@{CheckChildren}!HF::GraphGenerator::GraphGeneratorPrivate@{HF::GraphGenerator::GraphGeneratorPrivate}}
+\doxysubsubsection{\texorpdfstring{CheckChildren()}{CheckChildren()}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{a01193}{Node}} $>$ H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::\+Check\+Children (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01193}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&}]{parent,  }\item[{std\+::vector$<$ \mbox{\hyperlink{a01193}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$}]{Children }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Offset all children to the ground, then check if traversing from parent would require a step outside of step height limits. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & Parent of all children in children. \\
+\hline
+{\em children} & Child nodes to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+All children that are above a valid floor and can be traversed to by parent without requiring a step outside of step height limits. 
+\end{DoxyReturn}
+
+
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{a00266__todo000009}{Todo}}]Why is Children not const? \end{DoxyRefDesc}
+
+
+Definition at line 170 of file graph\+\_\+generator\+\_\+private.\+cpp.
+
+
+
+References Check\+Ray(), H\+F\+::\+Graph\+Generator\+::down, H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::downstep, GG, and H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::upstep.
+
+
+
+Referenced by Get\+Children().
+
+\mbox{\Hypertarget{a01105_addf12e73a371c75c3c3d0ca8d0082c8f}\label{a01105_addf12e73a371c75c3c3d0ca8d0082c8f}} 
+\index{HF::GraphGenerator::GraphGeneratorPrivate@{HF::GraphGenerator::GraphGeneratorPrivate}!CheckConnection@{CheckConnection}}
+\index{CheckConnection@{CheckConnection}!HF::GraphGenerator::GraphGeneratorPrivate@{HF::GraphGenerator::GraphGeneratorPrivate}}
+\doxysubsubsection{\texorpdfstring{CheckConnection()}{CheckConnection()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00278_af0378d900074d484ba791d4317e5935e}{S\+T\+EP}} H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::\+Check\+Connection (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01193}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&}]{parent,  }\item[{const \mbox{\hyperlink{a01193}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&}]{child }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Check if parent can traverse to child. ~\newline
+ 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & Parent of child. \\
+\hline
+{\em child} & Child generated from parent.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The type of S\+T\+EP from parent to child.
+\end{DoxyReturn}
+Specifically, this function checks for a direct line of sight. If the line of sight check succeeds, then it checks to see if the slope between parent and child is within the defined limits. If not, then it will offset the child node upward by upstep if it\textquotesingle{}s higher than the parent, or downward by downstep if it\textquotesingle{}s lower than parent and try the occlusion check again.
+
+\begin{DoxySeeAlso}{See also}
+S\+T\+EP for details on each type of step. 
+\end{DoxySeeAlso}
+
+
+Definition at line 189 of file graph\+\_\+generator\+\_\+private.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+D\+O\+WN, H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::downstep, GG, is\+Up\+Slope(), H\+F\+::\+Spatial\+Structures\+::\+N\+O\+NE, H\+F\+::\+Spatial\+Structures\+::\+N\+O\+T\+\_\+\+C\+O\+N\+N\+E\+C\+T\+ED, Occlusion\+Check(), H\+F\+::\+Spatial\+Structures\+::\+O\+V\+ER, H\+F\+::\+Spatial\+Structures\+::\+UP, and H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::upstep.
+
+
+
+Referenced by Get\+Children().
+
+\mbox{\Hypertarget{a01105_a4ec2599ce52947670024890df33f85e9}\label{a01105_a4ec2599ce52947670024890df33f85e9}} 
+\index{HF::GraphGenerator::GraphGeneratorPrivate@{HF::GraphGenerator::GraphGeneratorPrivate}!CheckRay@{CheckRay}}
+\index{CheckRay@{CheckRay}!HF::GraphGenerator::GraphGeneratorPrivate@{HF::GraphGenerator::GraphGeneratorPrivate}}
+\doxysubsubsection{\texorpdfstring{CheckRay()}{CheckRay()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::\+Check\+Ray (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01193}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&}]{position,  }\item[{const \mbox{\hyperlink{a00276_a8c29578574c275e66fbd439be62c125e}{v3}} \&}]{direction,  }\item[{\mbox{\hyperlink{a00276_a6180d5bc4bbfa9a5a426089e1f1ad598}{H\+I\+T\+\_\+\+F\+L\+AG}}}]{flag = {\ttfamily HIT\+\_\+FLAG\+:\+:BOTH} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Cast a ray and overwrite position with the result. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & Node to use as the origin. On Hit, this node\textquotesingle{}s position will be overridden \\
+\hline
+{\em direction} & Direction to fire the ray in \\
+\hline
+{\em flag} & The type of geometry to intersect \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the ray intersected any geometry. False otherwise. 
+\end{DoxyReturn}
+
+
+\begin{DoxyPostcond}{Postcondition}
+If true is returned, position contains the point where the casted ray intersected geometry. 
+\end{DoxyPostcond}
+
+
+Definition at line 411 of file graph\+\_\+generator\+\_\+private.\+cpp.
+
+
+
+References H\+F\+::\+Graph\+Generator\+::\+B\+O\+TH, H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Fire\+Ray(), H\+F\+::\+Graph\+Generator\+::\+F\+L\+O\+O\+RS, GG, H\+F\+::\+Graph\+Generator\+::\+O\+B\+S\+T\+A\+C\+L\+ES, H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::ray\+\_\+tracer, and H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::walkable\+\_\+surfaces.
+
+
+
+Referenced by Check\+Children(), and Check\+Start().
+
+\mbox{\Hypertarget{a01105_ac08636a123b62c95e1a3c438f84f2e06}\label{a01105_ac08636a123b62c95e1a3c438f84f2e06}} 
+\index{HF::GraphGenerator::GraphGeneratorPrivate@{HF::GraphGenerator::GraphGeneratorPrivate}!CheckRay@{CheckRay}}
+\index{CheckRay@{CheckRay}!HF::GraphGenerator::GraphGeneratorPrivate@{HF::GraphGenerator::GraphGeneratorPrivate}}
+\doxysubsubsection{\texorpdfstring{CheckRay()}{CheckRay()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::\+Check\+Ray (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a00276_a8c29578574c275e66fbd439be62c125e}{v3}} \&}]{position,  }\item[{const \mbox{\hyperlink{a00276_a8c29578574c275e66fbd439be62c125e}{v3}} \&}]{direction,  }\item[{\mbox{\hyperlink{a00276_a6180d5bc4bbfa9a5a426089e1f1ad598}{H\+I\+T\+\_\+\+F\+L\+AG}}}]{flag = {\ttfamily HIT\+\_\+FLAG\+:\+:BOTH} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Cast a ray and overwrite position with the point of intersection. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & Node to use as the origin. On intersection, this node\textquotesingle{}s position will be overridden with the point of intersection. \\
+\hline
+{\em direction} & Direction to cast the ray in. \\
+\hline
+{\em flag} & The type of geometry to collide with. See H\+I\+T\+\_\+\+F\+L\+AG for more details. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True on hit, false otherwise. 
+\end{DoxyReturn}
+
+
+\begin{DoxyPostcond}{Postcondition}
+If true is returned, position contains the point where the casted ray intersected geometry.
+\end{DoxyPostcond}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::exception} & if H\+I\+T\+\_\+\+F\+L\+AG isn\textquotesingle{}t a valid value. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 395 of file graph\+\_\+generator\+\_\+private.\+cpp.
+
+
+
+References H\+F\+::\+Graph\+Generator\+::\+B\+O\+TH, H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Fire\+Ray(), H\+F\+::\+Graph\+Generator\+::\+F\+L\+O\+O\+RS, GG, H\+F\+::\+Graph\+Generator\+::\+O\+B\+S\+T\+A\+C\+L\+ES, and H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::ray\+\_\+tracer.
+
+\mbox{\Hypertarget{a01105_a50db86451d7ae5569daa8463e10247ec}\label{a01105_a50db86451d7ae5569daa8463e10247ec}} 
+\index{HF::GraphGenerator::GraphGeneratorPrivate@{HF::GraphGenerator::GraphGeneratorPrivate}!CheckStart@{CheckStart}}
+\index{CheckStart@{CheckStart}!HF::GraphGenerator::GraphGeneratorPrivate@{HF::GraphGenerator::GraphGeneratorPrivate}}
+\doxysubsubsection{\texorpdfstring{CheckStart()}{CheckStart()}}
+{\footnotesize\ttfamily bool H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::\+Check\+Start (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a00276_a8c29578574c275e66fbd439be62c125e}{v3}} \&}]{start }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Push point to the ground if there is ground beneath it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start} & Start point to check and modify. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns true if Check\+Ray(start, down) is true, false otherwise 
+\end{DoxyReturn}
+
+
+\begin{DoxyPostcond}{Postcondition}
+If true is returned, the start point is placed directly on top of the geometry below it. If false, the start point is unmodified.
+\end{DoxyPostcond}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{a00266__todo000004}{Todo}}]Is this needed? This is identical to Check\+Ray. \end{DoxyRefDesc}
+
+
+Definition at line 100 of file graph\+\_\+generator\+\_\+private.\+cpp.
+
+
+
+References Check\+Ray(), and H\+F\+::\+Graph\+Generator\+::down.
+
+
+
+Referenced by Build\+Network().
+
+\mbox{\Hypertarget{a01105_a5bda9a1954db74dd7754c975da304e22}\label{a01105_a5bda9a1954db74dd7754c975da304e22}} 
+\index{HF::GraphGenerator::GraphGeneratorPrivate@{HF::GraphGenerator::GraphGeneratorPrivate}!ComputerParent@{ComputerParent}}
+\index{ComputerParent@{ComputerParent}!HF::GraphGenerator::GraphGeneratorPrivate@{HF::GraphGenerator::GraphGeneratorPrivate}}
+\doxysubsubsection{\texorpdfstring{ComputerParent()}{ComputerParent()}}
+{\footnotesize\ttfamily void H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::\+Computer\+Parent (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01193}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&}]{parent,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{a00011_a3394fa820b983014dcac29faca0e4f19}{std\+::pair}}$<$ int, int $>$$>$ \&}]{directions,  }\item[{std\+::vector$<$ \mbox{\hyperlink{a01173}{H\+F\+::\+Spatial\+Structures\+::\+Edge}} $>$ \&}]{out\+\_\+relations }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Generate edges and children for parent in relations. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & Parent node to generate children from. \\
+\hline
+{\em directions} & Directions to generate children in. \\
+\hline
+{\em out\+\_\+relations} & Output parameter for relations. \\
+\hline
+\end{DoxyParams}
+
+
+\begin{DoxyPostcond}{Postcondition}
+out\+\_\+relation contains all valid edges between parent and its children.
+\end{DoxyPostcond}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a01105_a551344f5e893380e34b7719b66d560f1}{Generate\+Potential\+Children}} for info on how directions are used to generate children. 
+\end{DoxySeeAlso}
+
+
+Definition at line 444 of file graph\+\_\+generator\+\_\+private.\+cpp.
+
+
+
+References Generate\+Potential\+Children(), and Get\+Children().
+
+
+
+Referenced by Crawl\+Geom(), and Crawl\+Geom\+Parallel().
+
+\mbox{\Hypertarget{a01105_a7944155fef41ad8b6ae2c4258444aab1}\label{a01105_a7944155fef41ad8b6ae2c4258444aab1}} 
+\index{HF::GraphGenerator::GraphGeneratorPrivate@{HF::GraphGenerator::GraphGeneratorPrivate}!CrawlGeom@{CrawlGeom}}
+\index{CrawlGeom@{CrawlGeom}!HF::GraphGenerator::GraphGeneratorPrivate@{HF::GraphGenerator::GraphGeneratorPrivate}}
+\doxysubsubsection{\texorpdfstring{CrawlGeom()}{CrawlGeom()}}
+{\footnotesize\ttfamily void H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::\+Crawl\+Geom (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01109}{Unique\+Queue}} \&}]{todo }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Begin breadth first search to populate the graph with with nodes and edges. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em todo} & Todo list to hold unchecked nodes. Must atleast contain a single start point. \\
+\hline
+\end{DoxyParams}
+
+
+\begin{DoxyPrecond}{Precondition}
+todo contains the starting point for the graph.
+\end{DoxyPrecond}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{a00266__todo000006}{Todo}}]Extract the set logic for directions to another function.\end{DoxyRefDesc}
+
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a01105_a050d3cb17b0ea8c32625cf83ffe0d48d}{Crawl\+Geom\+Parallel}} for a parallel version. 
+\end{DoxySeeAlso}
+
+
+Definition at line 251 of file graph\+\_\+generator\+\_\+private.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Graph\+::add\+Edge(), Computer\+Parent(), H\+F\+::\+Graph\+Generator\+::\+Unique\+Queue\+::empty(), G, GG, H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::max\+\_\+nodes, H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::max\+\_\+step\+\_\+connection, H\+F\+::\+Graph\+Generator\+::permutations(), H\+F\+::\+Graph\+Generator\+::\+Unique\+Queue\+::pop(), and H\+F\+::\+Graph\+Generator\+::\+Unique\+Queue\+::push().
+
+
+
+Referenced by Build\+Network().
+
+\mbox{\Hypertarget{a01105_a050d3cb17b0ea8c32625cf83ffe0d48d}\label{a01105_a050d3cb17b0ea8c32625cf83ffe0d48d}} 
+\index{HF::GraphGenerator::GraphGeneratorPrivate@{HF::GraphGenerator::GraphGeneratorPrivate}!CrawlGeomParallel@{CrawlGeomParallel}}
+\index{CrawlGeomParallel@{CrawlGeomParallel}!HF::GraphGenerator::GraphGeneratorPrivate@{HF::GraphGenerator::GraphGeneratorPrivate}}
+\doxysubsubsection{\texorpdfstring{CrawlGeomParallel()}{CrawlGeomParallel()}}
+{\footnotesize\ttfamily void H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::\+Crawl\+Geom\+Parallel (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01109}{Unique\+Queue}} \&}]{todo }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+A parallel version of Crawl\+Geom. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em todo} & Todo list to use for execution. Must atleast contain a single start point. \\
+\hline
+\end{DoxyParams}
+
+
+\begin{DoxyPrecond}{Precondition}
+todo contains the start point for the graph.
+\end{DoxyPrecond}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{a00266__todo000007}{Todo}}]Extract the set logic for directions to another function.\end{DoxyRefDesc}
+
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a01105_a7944155fef41ad8b6ae2c4258444aab1}{Crawl\+Geom}} for a serial version. 
+\end{DoxySeeAlso}
+
+
+Definition at line 296 of file graph\+\_\+generator\+\_\+private.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Graph\+::add\+Edge(), Computer\+Parent(), H\+F\+::\+Graph\+Generator\+::\+Unique\+Queue\+::empty(), G, GG, H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::max\+\_\+nodes, H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::max\+\_\+step\+\_\+connection, H\+F\+::\+Graph\+Generator\+::permutations(), H\+F\+::\+Graph\+Generator\+::\+Unique\+Queue\+::pop(), H\+F\+::\+Graph\+Generator\+::\+Unique\+Queue\+::pop\+Many(), H\+F\+::\+Graph\+Generator\+::\+Unique\+Queue\+::push(), and H\+F\+::\+Graph\+Generator\+::\+Unique\+Queue\+::size().
+
+
+
+Referenced by Build\+Network().
+
+\mbox{\Hypertarget{a01105_a551344f5e893380e34b7719b66d560f1}\label{a01105_a551344f5e893380e34b7719b66d560f1}} 
+\index{HF::GraphGenerator::GraphGeneratorPrivate@{HF::GraphGenerator::GraphGeneratorPrivate}!GeneratePotentialChildren@{GeneratePotentialChildren}}
+\index{GeneratePotentialChildren@{GeneratePotentialChildren}!HF::GraphGenerator::GraphGeneratorPrivate@{HF::GraphGenerator::GraphGeneratorPrivate}}
+\doxysubsubsection{\texorpdfstring{GeneratePotentialChildren()}{GeneratePotentialChildren()}}
+{\footnotesize\ttfamily void H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::\+Generate\+Potential\+Children (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01193}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&}]{parent,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{a00011_a3394fa820b983014dcac29faca0e4f19}{std\+::pair}}$<$ int, int $>$$>$ \&}]{directions,  }\item[{std\+::vector$<$ \mbox{\hyperlink{a01193}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \&}]{out\+\_\+children }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Populate out\+\_\+children with a potential child position for every direction in directions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & Parent to generate children for. \\
+\hline
+{\em directions} & X,Y pairs to use for generating children. I.\+E. A pair of {\ttfamily \{1,2\}}would create a child at {\ttfamily \{parent.\+x + 1$\ast$spacing.x, parent.\+y + 2$\ast$spacing.y, parent.\+z + spacing.\+z\}.} \\
+\hline
+{\em out\+\_\+children} & Output parameter for children. \\
+\hline
+\end{DoxyParams}
+
+
+\begin{DoxyPostcond}{Postcondition}
+out\+\_\+children is filled with children generated from parent and directions.
+\end{DoxyPostcond}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{a00266__todo000005}{Todo}}]Potential speed gain here by using indexing instead of emplace\+\_\+back. \end{DoxyRefDesc}
+
+
+Definition at line 104 of file graph\+\_\+generator\+\_\+private.\+cpp.
+
+
+
+References GG, H\+F\+::\+Spatial\+Structures\+::roundhf(), and H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::spacing.
+
+
+
+Referenced by Computer\+Parent().
+
+\mbox{\Hypertarget{a01105_a2acd7efa04ae228a721cef631a38af28}\label{a01105_a2acd7efa04ae228a721cef631a38af28}} 
+\index{HF::GraphGenerator::GraphGeneratorPrivate@{HF::GraphGenerator::GraphGeneratorPrivate}!GetChildren@{GetChildren}}
+\index{GetChildren@{GetChildren}!HF::GraphGenerator::GraphGeneratorPrivate@{HF::GraphGenerator::GraphGeneratorPrivate}}
+\doxysubsubsection{\texorpdfstring{GetChildren()}{GetChildren()}}
+{\footnotesize\ttfamily void H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::\+Get\+Children (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01193}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&}]{parent,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{a01193}{Spatial\+Structures\+::\+Node}} $>$ \&}]{possible\+\_\+children,  }\item[{std\+::vector$<$ \mbox{\hyperlink{a01173}{H\+F\+::\+Spatial\+Structures\+::\+Edge}} $>$ \&}]{out\+\_\+children }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Create all possible edges from parent to possible\+\_\+children. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & Parent node used to generate contents of possible\+\_\+children. \\
+\hline
+{\em possible\+\_\+children} & Possible children for parent. Usually generated from Generate\+Potential\+Children. \\
+\hline
+{\em out\+\_\+children} & An output array for valid edges in after they\textquotesingle{}ve been evaluated. \\
+\hline
+\end{DoxyParams}
+
+
+All children are offset to the ground using \mbox{\hyperlink{a01105_a29aa18d3ae2ef2082ab56ca9061d16ee}{Check\+Children}}, then a connection to parent is checked for using Check\+Connection. If Check\+Children or Check\+Connection is not successful for a child node, then it will not have an edge created in out\+\_\+children.
+
+\begin{DoxyPostcond}{Postcondition}
+out\+\_\+children contains a set of all valid edges between parent and the children in possible\+\_\+children. 
+\end{DoxyPostcond}
+
+
+Definition at line 152 of file graph\+\_\+generator\+\_\+private.\+cpp.
+
+
+
+References Check\+Children(), Check\+Connection(), H\+F\+::\+Spatial\+Structures\+::\+Node\+::distance\+To(), and H\+F\+::\+Spatial\+Structures\+::\+N\+O\+T\+\_\+\+C\+O\+N\+N\+E\+C\+T\+ED.
+
+
+
+Referenced by Computer\+Parent().
+
+\mbox{\Hypertarget{a01105_ac869aa5099472e5ad240c98ee92637a4}\label{a01105_ac869aa5099472e5ad240c98ee92637a4}} 
+\index{HF::GraphGenerator::GraphGeneratorPrivate@{HF::GraphGenerator::GraphGeneratorPrivate}!isUpSlope@{isUpSlope}}
+\index{isUpSlope@{isUpSlope}!HF::GraphGenerator::GraphGeneratorPrivate@{HF::GraphGenerator::GraphGeneratorPrivate}}
+\doxysubsubsection{\texorpdfstring{isUpSlope()}{isUpSlope()}}
+{\footnotesize\ttfamily bool H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::is\+Up\+Slope (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01193}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&}]{n1,  }\item[{const \mbox{\hyperlink{a01193}{H\+F\+::\+Spatial\+Structures\+::\+Node}} \&}]{n2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Determine if the graph can traverse the slope from n1 to n2. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n1} & Node that\textquotesingle{}s being traversed from. \\
+\hline
+{\em n2} & Node that\textquotesingle{}s being traversed to. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the slope between n1 and n2 is within the limits in our settings. False otherwise. 
+\end{DoxyReturn}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{a00266__todo000008}{Todo}}]Rename this function to Slope\+Check, or Slope\+Calc like the function it\textquotesingle{}s based on in the original python code. \end{DoxyRefDesc}
+
+
+Definition at line 139 of file graph\+\_\+generator\+\_\+private.\+cpp.
+
+
+
+References H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::downslope, GG, H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::upslope, H\+F\+::\+Spatial\+Structures\+::\+Node\+::x, H\+F\+::\+Spatial\+Structures\+::\+Node\+::y, and H\+F\+::\+Spatial\+Structures\+::\+Node\+::z.
+
+
+
+Referenced by Check\+Connection().
+
+\mbox{\Hypertarget{a01105_acd3a1c33e1b452f3938a2cc7da4d6d26}\label{a01105_acd3a1c33e1b452f3938a2cc7da4d6d26}} 
+\index{HF::GraphGenerator::GraphGeneratorPrivate@{HF::GraphGenerator::GraphGeneratorPrivate}!OcclusionCheck@{OcclusionCheck}}
+\index{OcclusionCheck@{OcclusionCheck}!HF::GraphGenerator::GraphGeneratorPrivate@{HF::GraphGenerator::GraphGeneratorPrivate}}
+\doxysubsubsection{\texorpdfstring{OcclusionCheck()}{OcclusionCheck()}}
+{\footnotesize\ttfamily bool H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::\+Occlusion\+Check (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01193}{Spatial\+Structures\+::\+Node}} \&}]{parent,  }\item[{const \mbox{\hyperlink{a01193}{Spatial\+Structures\+::\+Node}} \&}]{child }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Check if there is an obstruction between parent and child. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & Parent node to cast the ray from. \\
+\hline
+{\em child} & Child node to cast the ray to. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if there is an obstacle blocking line of sight between between parent and child. 
+\end{DoxyReturn}
+
+
+This function casts an occlusion ray from parent to child with a maximum distance equal to the distance between both nodes. 
+
+Definition at line 122 of file graph\+\_\+generator\+\_\+private.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Node\+::direction\+To(), H\+F\+::\+Spatial\+Structures\+::\+Node\+::distance\+To(), H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Fire\+Occlusion\+Ray(), GG, H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::ray\+\_\+tracer, H\+F\+::\+Spatial\+Structures\+::\+Node\+::x, H\+F\+::\+Spatial\+Structures\+::\+Node\+::y, and H\+F\+::\+Spatial\+Structures\+::\+Node\+::z.
+
+
+
+Referenced by Check\+Connection().
+
+\mbox{\Hypertarget{a01105_a7b257d8db4110e76d249e81810ca1084}\label{a01105_a7b257d8db4110e76d249e81810ca1084}} 
+\index{HF::GraphGenerator::GraphGeneratorPrivate@{HF::GraphGenerator::GraphGeneratorPrivate}!WalkableCheck@{WalkableCheck}}
+\index{WalkableCheck@{WalkableCheck}!HF::GraphGenerator::GraphGeneratorPrivate@{HF::GraphGenerator::GraphGeneratorPrivate}}
+\doxysubsubsection{\texorpdfstring{WalkableCheck()}{WalkableCheck()}}
+{\footnotesize\ttfamily bool H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::\+Walkable\+Check (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01193}{Spatial\+Structures\+::\+Node}} \&}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Determine if a node is above a valid floor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & Node to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the node is above a valid floor, false othewise. 
+\end{DoxyReturn}
+
+
+Identical to Check\+Ray, but without any side effects. (the value of position won\textquotesingle{}t change). 
+
+Definition at line 56 of file graph\+\_\+generator\+\_\+private.\+cpp.
+
+
+
+References H\+F\+::\+Graph\+Generator\+::down, and H\+F\+::\+Graph\+Generator\+::\+F\+L\+O\+O\+RS.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01105_a556e9b9bdd1a6244d4c7d42a5ec9d81f}\label{a01105_a556e9b9bdd1a6244d4c7d42a5ec9d81f}} 
+\index{HF::GraphGenerator::GraphGeneratorPrivate@{HF::GraphGenerator::GraphGeneratorPrivate}!G@{G}}
+\index{G@{G}!HF::GraphGenerator::GraphGeneratorPrivate@{HF::GraphGenerator::GraphGeneratorPrivate}}
+\doxysubsubsection{\texorpdfstring{G}{G}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01189}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::G\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+An internal graph that is iterated upon as the program is executed. 
+
+
+
+Definition at line 25 of file graph\+\_\+generator\+\_\+private.\+h.
+
+
+
+Referenced by Build\+Network(), Crawl\+Geom(), and Crawl\+Geom\+Parallel().
+
+\mbox{\Hypertarget{a01105_a821adb5a1c656772091a8998cb1d3c7b}\label{a01105_a821adb5a1c656772091a8998cb1d3c7b}} 
+\index{HF::GraphGenerator::GraphGeneratorPrivate@{HF::GraphGenerator::GraphGeneratorPrivate}!GG@{GG}}
+\index{GG@{GG}!HF::GraphGenerator::GraphGeneratorPrivate@{HF::GraphGenerator::GraphGeneratorPrivate}}
+\doxysubsubsection{\texorpdfstring{GG}{GG}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01101}{H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator}}\& H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+Private\+::\+GG\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The underlying graph generator to hold all the settings. 
+
+
+
+Definition at line 26 of file graph\+\_\+generator\+\_\+private.\+h.
+
+
+
+Referenced by Build\+Network(), Check\+Children(), Check\+Connection(), Check\+Ray(), Crawl\+Geom(), Crawl\+Geom\+Parallel(), Generate\+Potential\+Children(), is\+Up\+Slope(), and Occlusion\+Check().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-Cpp/spatialstructures/src/\mbox{\hyperlink{a00104}{node.\+h}}\end{DoxyCompactItemize}
+Cpp/analysismethods/src/\mbox{\hyperlink{a00014}{graph\+\_\+generator\+\_\+private.\+h}}\item 
+Cpp/analysismethods/src/\mbox{\hyperlink{a00011}{graph\+\_\+generator\+\_\+private.\+cpp}}\end{DoxyCompactItemize}
