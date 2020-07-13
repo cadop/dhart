@@ -7,7 +7,7 @@
 #include "objloader_C.h"
 
 #define eigen_plain_assert
-
+using namespace HF::Geometry;
 const std::string obj_directiory = "../../Models/";
 void PrintArray(std::array<float, 3> in_array) {
 	std::cerr << "(" << in_array[0] << "," << in_array[1] << "," << in_array[2] << ")";
@@ -66,6 +66,73 @@ void CompareVertArrays(const std::vector<std::array<float, 3>>& vert_array1, con
 		}
 	}
 }
+
+/*
+	\brief Check if two arrays are equal without checking the position of each vertex
+*/
+bool CompareVertArraysUnordered(
+	const std::vector<std::array<float, 3>>& vert_array1,
+	const std::vector<std::array<float, 3>>& vert_array2,
+	std::string label1 = "MI1",
+	std::string label2 = "MI2"
+) {
+	// Exit early if they don't match
+	if (!(vert_array1.size() == vert_array2.size()))
+		return false;
+
+	// Loop through every vertex
+	for (int i = 0; i < vert_array1.size(); i++) {
+		bool match = false;
+		auto this_vert = vert_array1[i];
+
+		// Compare to every vertex in vert_array2 to find a valid match
+		for (const auto& that_vert : vert_array2) {
+			auto dist = arrayDist(this_vert, that_vert);
+
+			if (dist < 0.001f) {
+				match = true;
+				break;
+			}
+		}
+		// If a match couldn't be found for this vertex then the arrays aren't equal and the test
+		// should fail.
+		if (!match) return false;
+	}
+
+	return true;
+}
+
+
+TEST(_OBJLoader, CorrectlyProducesOutput) {
+	
+	// Manually list vertices
+	const std::vector<std::array<float, 3>> known_verts = {
+		{20.140586853027344, 0.0, -18.842348098754883},
+		{-20.079360961914062, 0.0, -18.842348098754883},
+		{-20.079360961914062, 0.0, 18.940643310546875},
+		{20.140586853027344, 0.0, 18.940643310546875},
+		{20.140586853027344, 0.0, -18.842348098754883},
+		{-20.079360961914062, 0.0, 18.940643310546875}
+	};
+
+	// Load vertices from file
+	const auto loaded_verts = LoadRawVertices("plane.obj");
+
+	// Assert that they match. Order will be different.
+	ASSERT_TRUE(CompareVertArraysUnordered(known_verts, loaded_verts));
+
+	// Assert that an incorrect array of vertices would not pass
+	const std::vector<std::array<float, 3>> known_wrong_verts = {
+		{20.140586853027344, 0.0, -18.842348098754883},
+		{-20.079360961914062, 0.0, -18.842348098754883},
+		{-20.079360961914062, 0.0, 18.940643310546875},
+		{20.140586853027344, 0.0, 128.940643310546875},
+		{20.140586853027344, 0.0, -18.842348098754883},
+		{-20.079360961914062, 0.0, 18.940643310546875}
+	};
+	ASSERT_FALSE(CompareVertArraysUnordered(loaded_verts, known_wrong_verts));
+}
+
 TEST(_OBJLoader, ThrowMissingFileOnMissingMesh) {
 	auto paths = std::vector<std::string>{"ThisMeshDoesn'tExist" };
 	ASSERT_THROW(HF::Geometry::LoadMeshObjects(paths, HF::Geometry::BY_GROUP), HF::Exceptions::FileNotFound);
@@ -172,6 +239,7 @@ TEST(_MeshInfo, CanReproduceInputArray) {
 	
 	CompareVertArrays(raw_verts, MI[0].GetVertsAsArrays());
 }
+
 
 ///
 ///	The following are tests for the code samples for HF::Geometry
