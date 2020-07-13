@@ -226,7 +226,7 @@ namespace HF::Geometry {
 
 	int MeshInfo::GetMeshID() const { return meshid; }
 
-	vector<float> MeshInfo::getRawVertices() const
+	vector<float> MeshInfo::GetIndexedVertices() const
 	{
 		// Preallocate space for all vertices
 		vector<float> out_array(verts.size());
@@ -244,7 +244,7 @@ namespace HF::Geometry {
 		return out_array;
 	}
 
-	vector<array<float, 3>> MeshInfo::GetVertsAsArrays() const
+	vector<array<float, 3>> MeshInfo::GetUnindexedVertices() const
 	{
 		// Preallocate an array 3x the size of the triangle matrix
 		int tri_count = NumTris();
