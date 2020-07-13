@@ -475,13 +475,18 @@ namespace HF::Geometry {
 		*/
 		int GetMeshID() const;
 
-		/// <summary>
-		/// Retrieve a copy of this mesh's vertices as a 1D array.
-		/// </summary>
+
 		/// <returns>
 		/// A copy of every vertex in this array.
 		/// </returns>
 		/*!
+			
+			\brief Copy this mesh's vertices as a 1D array.
+
+			\details
+			The vertices are copied directly from this mesh's underlying eigen matrix. The index of each vertex
+			matches the index used for this mesh's index array. For Example the first element is the vertex at index 0, 
+			the second is the vertex for index 1, etc.
 
 			\todo
 			Make a version of this function that just returns a const reference or pointer to the data. 
@@ -542,7 +547,7 @@ namespace HF::Geometry {
 		/// Retrieve a copy of this mesh's index buffer as a 1D array.
 		/// </summary>
 		/// <returns>
-		/// A copy of this mesh's index buffer containing every index int his mesh.
+		/// A copy of this mesh's index buffer containing every index in this mesh.
 		/// </returns>
 		/*!
 
@@ -592,16 +597,25 @@ namespace HF::Geometry {
 		*/
 		std::vector<int> getRawIndices() const;
 
-		/// <summary> Retrieve vertices as a vector of arrays of float. </summary>
-		/// <returns> Every vertex in this mesh as an array of arrays of floats.  </returns>
+		/// <summary> Retrieve an unindexed array of this mesh's vertices. </summary>
 		/*!
+
+			\returns 
+			An array of vertices to match this mesh's array of indices.
+
+			\details
+			For every index in this mesh's indices array, copy the matching vertex into the return array.
+			This will result in vertexes being repeated multiple times. For example, the first element
+			is the vertex pointed to by the first index in indices, the second element is the  vertex
+			pointed to by the second index in indices etc.
 
 			\remarks
 			The output of this function should match the input for MeshInfo() to create this
-			mesh.
+			mesh. This function is not really useful outside of testing, since it's essentially
+			uncompressing the mesh and repeating a lot of data. 
 
-			\note
-			Not really useful outside of testing.
+			\see getRawVertices() for a more efficent way of reading this mesh's vertices. 
+			\see getRawIndices() for an ordered list of indices for each vertex in the return array.
 
 			\code
 				// be sure to #include "meshinfo.h", and #include <vector>

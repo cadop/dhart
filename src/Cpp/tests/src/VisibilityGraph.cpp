@@ -24,7 +24,7 @@ const std::string plane_path = "plane.obj"; // A flat plane
 const std::string walled_plane_path = "plane_walled.obj"; 
 
 TEST(_VisibilityGraph, NodesOnFlatPlaneAllConnect) {
-	EmbreeRayTracer plane_tracer(LoadMeshObjects(plane_path));
+	EmbreeRayTracer plane_tracer(LoadMeshObjects(plane_path, HF::Geometry::ONLY_FILE, true));
 	std::vector<Node> nodes;
 	nodes.reserve(100);
 	
@@ -40,7 +40,7 @@ TEST(_VisibilityGraph, NodesOnFlatPlaneAllConnect) {
 }
 
 TEST(_VisibilityGraph, ParallelNodesOnFlatPlaneAllConnect) {
-	EmbreeRayTracer plane_tracer(LoadMeshObjects(plane_path));
+	EmbreeRayTracer plane_tracer(LoadMeshObjects(plane_path, HF::Geometry::ONLY_FILE, true));
 	std::vector<Node> nodes;
 	nodes.reserve(100);
 
@@ -58,7 +58,7 @@ TEST(_VisibilityGraph, ParallelNodesOnFlatPlaneAllConnect) {
 
 
 TEST(_VisibilityGraph, NodesOnFlatPlaneWithWallDontConnect) {
-	EmbreeRayTracer plane_tracer(LoadMeshObjects(walled_plane_path));
+	EmbreeRayTracer plane_tracer(LoadMeshObjects(walled_plane_path, HF::Geometry::ONLY_FILE, true));
 	std::vector<Node> nodes{ Node(0,-1,0), Node(0,1,0) };
 
 	auto graph = AllToAll(plane_tracer, nodes);
