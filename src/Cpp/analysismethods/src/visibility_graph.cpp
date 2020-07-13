@@ -1,6 +1,6 @@
 ///
 ///	\file		visibility_graph.cpp
-///	\brief		Contains implementation for the <see cref = "HF::VisibilityGraph">VisibilityGraph</cref> class
+///	\brief		Contains implementation for the <see cref = "HF::VisibilityGraph">VisibilityGraph</see> class
 ///
 ///	\author		TBA
 ///	\date		17 Jun 2020

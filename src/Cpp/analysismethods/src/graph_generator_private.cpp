@@ -1,6 +1,6 @@
 ///
 /// \file		graph_generator_private.cpp
-/// \brief		Contains implementation for the <see cref="HF::GraphGenerator::GraphGeneratorPrivate">GraphGeneratorPrivate</cref> class
+/// \brief		Contains implementation for the <see cref="HF::GraphGenerator::GraphGeneratorPrivate">GraphGeneratorPrivate</see> class
 ///
 ///	\author		TBA
 ///	\date		26 Jun 2020

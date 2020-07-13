@@ -1,6 +1,6 @@
 ///
 /// \file	graph.h 
-/// \brief	Contains definitions for the <see cref="HF::SpatialStructures::Graph">Graph</cref> class
+/// \brief	Contains definitions for the <see cref="HF::SpatialStructures::Graph">Graph</see> class
 ///
 /// \author	TBA 
 /// \date	06 Jun 2020 

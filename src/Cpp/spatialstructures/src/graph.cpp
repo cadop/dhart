@@ -1,6 +1,6 @@
 ///
 /// \file	graph.cpp 
-/// \brief	Contains implementation for the <see cref="HF::SpatialStructures::Graph">Graph</cref> class
+/// \brief	Contains implementation for the <see cref="HF::SpatialStructures::Graph">Graph</see> class
 ///
 /// \author	TBA 
 /// \date	06 Jun 2020 

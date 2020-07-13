@@ -1,6 +1,6 @@
 ///
 ///	\file		path_finder.h
-/// \brief		Contains definition for the <see cref="HF::Pathfinding::BoostGraphDeleter">BoostGraphDeleter</cref> structure
+/// \brief		Contains definition for the <see cref="HF::Pathfinding::BoostGraphDeleter">BoostGraphDeleter</see> structure
 ///
 ///	\author		TBA
 ///	\date		17 Jun 2020

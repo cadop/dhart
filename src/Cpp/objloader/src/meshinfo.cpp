@@ -1,6 +1,6 @@
 ///
 ///	\file		meshinfo.cpp
-/// \brief		Contains implementation for the <see cref = "HF::SpatialStructures::MeshInfo">MeshInfo</cref> class
+/// \brief		Contains implementation for the <see cref = "HF::Geometry::MeshInfo">MeshInfo</see> class
 ///
 ///	\author		TBA
 ///	\date		16 Jun 2020
