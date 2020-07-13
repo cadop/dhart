@@ -1,6 +1,6 @@
 ///
 ///	\file		boost_graph.h
-/// \brief		Contains definitions for the <see cref="HF::Pathfinding::BoostGraph">BoostGraph</cref> class
+/// \brief		Contains definitions for the <see cref="HF::Pathfinding::BoostGraph">BoostGraph</see> class
 ///
 ///	\author		TBA
 ///	\date		17 Jun 2020

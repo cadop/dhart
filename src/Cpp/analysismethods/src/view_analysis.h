@@ -1,6 +1,6 @@
 ///
 /// \file		view_analysis.h
-/// \brief		Contains definitions for the <see cref="HF::ViewAnalysis">ViewAnalysis</cref> namespace
+/// \brief		Contains definitions for the <see cref="HF::ViewAnalysis">ViewAnalysis</see> namespace
 ///
 ///	\author		TBA
 ///	\date		26 Jun 2020

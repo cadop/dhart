@@ -1,6 +1,6 @@
 ///
 ///	\file		meshinfo.h
-/// \brief		Contains definitions for the <see cref = "HF::SpatialStructures::MeshInfo">MeshInfo</cref> class
+/// \brief		Contains definitions for the <see cref = "HF::Geometry::MeshInfo">MeshInfo</see> class
 ///
 ///	\author		TBA
 ///	\date		16 Jun 2020

@@ -1,6 +1,6 @@
 ///
 ///	\file		Constants.h 
-///	\brief		Contains definitions for the <see cref="HF::SpatialStructures">HF::SpatialStructures</cref> namespace
+///	\brief		Contains definitions for the <see cref="HF::SpatialStructures">HF::SpatialStructures</see> namespace
 ///
 /// \author	TBA 
 /// \date	06 Jun 2020

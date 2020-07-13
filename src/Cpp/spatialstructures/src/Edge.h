@@ -1,6 +1,6 @@
 ///
 /// \file		Edge.h
-/// \brief		Contains definitions for the <see cref="HF::SpatialStructures::Edge">Edge</cref> structure
+/// \brief		Contains definitions for the <see cref="HF::SpatialStructures::Edge">Edge</see> structure
 ///
 ///	\author		TBA
 ///	\date		26 Jun 2020

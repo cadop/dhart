@@ -1,6 +1,6 @@
 ///
 /// \file		embree_raytracer.cpp
-/// \brief		Contains implementation for the <see cref="HF::RayTracer::EmbreeRayTracer">EmbreeRayTracer</cref>
+/// \brief		Contains implementation for the <see cref="HF::RayTracer::EmbreeRayTracer">EmbreeRayTracer</see>
 ///
 ///	\author		TBA
 ///	\date		26 Jun 2020

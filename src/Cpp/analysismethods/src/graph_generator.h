@@ -1,6 +1,5 @@
-///
 /// \file		graph_generator.h
-/// \brief		Contains definitions for the <see cref="HF::GraphGenerator::GraphGenerator">GraphGenerator</cref>
+/// \brief		Contains definitions for the <see cref="HF::GraphGenerator::GraphGenerator">GraphGenerator</see>
 ///
 ///	\author		TBA
 ///	\date		26 Jun 2020
