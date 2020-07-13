@@ -1,6 +1,6 @@
 ///
 /// \file		unique_queue.cpp
-/// \brief		Contains implementation for the <see cref="HF::GraphGenerator::UniqueQueue">UniqueQueue</cref> class
+/// \brief		Contains implementation for the <see cref="HF::GraphGenerator::UniqueQueue">UniqueQueue</see> class
 ///
 ///	\author		TBA
 ///	\date		26 Jun 2020

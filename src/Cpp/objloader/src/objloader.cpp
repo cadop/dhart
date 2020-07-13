@@ -1,6 +1,6 @@
 ///
 ///	\file		objloader.cpp
-/// \brief		Contains implementation for the <see cref="HF::Geometry">Geometry</cref> namespace
+/// \brief		Contains implementation for the <see cref="HF::Geometry">Geometry</see> namespace
 ///
 ///	\author		TBA
 ///	\date		16 Jun 2020

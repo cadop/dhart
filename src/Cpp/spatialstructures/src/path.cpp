@@ -1,6 +1,6 @@
 ///
 /// \file		path.cpp
-///	\brief		Contains implementation for the <see cref="HF::SpatialStructures::Path">Path</cref> structure
+///	\brief		Contains implementation for the <see cref="HF::SpatialStructures::Path">Path</see> structure
 ///
 /// \author		TBA
 /// \date		06 Jun 2020

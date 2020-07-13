@@ -1,6 +1,6 @@
 ///
 /// \file		HFExceptions.h
-/// \brief		Contains definitions for the <see cref="HF::Exceptions">Exceptions</cref> namespace
+/// \brief		Contains definitions for the <see cref="HF::Exceptions">Exceptions</see> namespace
 ///
 ///	\author		TBA
 ///	\date		26 Jun 2020

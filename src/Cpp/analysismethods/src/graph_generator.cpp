@@ -3,7 +3,7 @@
 #include <charconv>
 ///
 /// \file		graph_generator.cpp
-/// \brief		Contains implementation for the <see cref="HF::GraphGenerator::GraphGenerator">GraphGenerator</cref>
+/// \brief		Contains implementation for the <see cref="HF::GraphGenerator::GraphGenerator">GraphGenerator</see>
 ///
 ///	\author		TBA
 ///	\date		26 Jun 2020

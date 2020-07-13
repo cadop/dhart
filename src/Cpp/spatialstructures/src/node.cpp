@@ -1,6 +1,6 @@
 ///
 /// \file		node.cpp
-///	\brief		Contains implementation for the <see cref="HF::SpatialStructures::Node">Node</cref> structure
+///	\brief		Contains implementation for the <see cref="HF::SpatialStructures::Node">Node</see> structure
 ///
 /// \author		TBA
 /// \date		06 Jun 2020

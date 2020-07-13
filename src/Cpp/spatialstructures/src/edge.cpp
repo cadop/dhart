@@ -1,6 +1,6 @@
 ///
 /// \file		edge.cpp
-/// \brief		Contains implementation for the <see cref = "HF::SpatialStructures::Edge">Edge</cref> structure
+/// \brief		Contains implementation for the <see cref = "HF::SpatialStructures::Edge">Edge</see> structure
 ///
 /// \author		TBA
 /// \date		06 Jun 2020
