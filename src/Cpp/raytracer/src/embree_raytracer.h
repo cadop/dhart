@@ -383,7 +383,7 @@ namespace HF::RayTracer {
 
 			` >>> [(0, 0, 0), (1.99, 0, 0), (3.98, 0, 0), (5.97, 0, 0), (7.96, 0, 0), (9.95, 0, 0), Miss, Miss, Miss, Miss] `
 		*/
-		std::vector<bool> FireRays(
+		std::vector<char> FireRays(
 			std::vector<std::array<float, 3>>& origins,
 			std::vector<std::array<float, 3>>& directions,
 			bool use_parallel = true,
@@ -589,7 +589,7 @@ namespace HF::RayTracer {
 				for (int i = 5; i < 10; i++) origins[i] = std::array<float, 3>{ 0.0f, 0.0f, -1.0f };
 
 				// Cast every occlusion ray
-				std::vector<bool> results = ert.FireOcclusionRays(origins, directions);
+				std::vector<char> results = ert.FireOcclusionRays(origins, directions);
 
 				// Iterate through all results to print them
 				std::cout << "[";
@@ -606,7 +606,7 @@ namespace HF::RayTracer {
 
 			`>>> [True, True, True, True, True, False, False, False, False, False]`
 		*/
-		std::vector<bool> FireOcclusionRays(
+		std::vector<char> FireOcclusionRays(
 			const std::vector<std::array<float, 3>>& origins,
 			const std::vector<std::array<float, 3>>& directions,
 			float max_distance = -1

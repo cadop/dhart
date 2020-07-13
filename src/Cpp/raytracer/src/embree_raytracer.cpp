@@ -204,14 +204,14 @@ namespace HF::RayTracer {
 		}
 	}
 
-	std::vector<bool> EmbreeRayTracer::FireRays(
+	std::vector<char> EmbreeRayTracer::FireRays(
 		std::vector<std::array<float, 3>>& origins,
 		std::vector<std::array<float, 3>>& directions,
 		bool use_parallel,
 		float max_distance,
 		int mesh_id
 	) {
-		std::vector<bool> out_results(origins.size());
+		std::vector<char> out_results(origins.size());
 
 		// Allow users to shoot multiple rays with a single direction or origin
 		if (origins.size() > 1 && directions.size() > 1) {
@@ -296,17 +296,17 @@ namespace HF::RayTracer {
 		return FireOcclusionRay(origin[0], origin[1], origin[2], direction[0], direction[1], direction[2]);
 	}
 
-	std::vector<bool> EmbreeRayTracer::FireOcclusionRays(
+	std::vector<char> EmbreeRayTracer::FireOcclusionRays(
 		const std::vector<std::array<float, 3>>& origins,
 		const std::vector<std::array<float, 3>>& directions,
 		float max_distance, bool use_parallel)
 	{
-		std::vector<bool> out_array;
+		std::vector<char> out_array;
 		int cores = std::thread::hardware_concurrency();
 		if (origins.size() < cores || directions.size() < cores)
 			// Don't use more cores than there are rays. This caused a hard to find bug earlier.
 			// Doesn't seem to happen with the other ray types. (race condition?)
-			omp_set_num_threads(min(max(origins.size(), directions.size()), 16));
+			omp_set_num_threads(min(max(origins.size(), directions.size()), cores));
 
 		if (directions.size() > 1 && origins.size() > 1) {
 			out_array.resize(origins.size());
