@@ -114,6 +114,7 @@ namespace HF::GraphGenerator {
 		// Only crawl geom if start collides
 		UniqueQueue q;
 		if (CheckStart(start)) {
+			start[2] = roundhf(start[2]); // round the z component of start node AFTER intersection
 			q.push(start);
 
 			// Run in parallel if specified
@@ -191,8 +192,8 @@ namespace HF::GraphGenerator {
 	void GraphGeneratorPrivate::GetChildren(
 		const Node& parent,
 		const vector<Node>& possible_children,
-		vector<Edge>& out_children
-	) {
+		vector<Edge>& out_children) 
+	{
 		// Iterate through every child in children
 		for (auto& child : CheckChildren(parent, possible_children)) {
 			// Determine step type (if any)
@@ -214,6 +215,9 @@ namespace HF::GraphGenerator {
 		for (auto& child : children) {
 			if (CheckRay(child, down))
 			{
+				// round the z component of the child node after it has been modified
+				// to account for the error in the ray intersection
+				child[2] = roundhf(child[2]);
 				// Check to see if the new position will satisfy up and downstep restrictions
 				auto dstep = parent[2] - child[2];
 				auto ustep = child[2] - parent[2];
