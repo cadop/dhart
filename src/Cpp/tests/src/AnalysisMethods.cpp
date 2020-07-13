@@ -15,7 +15,7 @@
 namespace HF {
 
 	TEST(_GraphGenerator, RunGraphGenerator) {
-		auto mesh = Geometry::LoadMeshObjects("plane.obj");
+		auto mesh = Geometry::LoadMeshObjects("plane.obj", HF::Geometry::ONLY_FILE, true);
 		RayTracer::EmbreeRayTracer rt(mesh);
 		auto GG = GraphGenerator::GraphGenerator(rt, 0);
 	

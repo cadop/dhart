@@ -138,7 +138,7 @@ TEST(_MeshInfo, CreationIsDeterministic) {
 
 TEST(_MeshInfo, CanDisableRotationOnLoad) {
 	auto test_paths = std::vector<std::string>{ "big_teapot.obj" }; // This is located in the folder where the EXE is
-	auto load1_MI = HF::Geometry::LoadMeshObjects(test_paths, HF::Geometry::ONLY_FILE)[0];
+	auto load1_MI = HF::Geometry::LoadMeshObjects(test_paths, HF::Geometry::ONLY_FILE, true)[0];
 	auto load2_MI = HF::Geometry::LoadMeshObjects(test_paths, HF::Geometry::ONLY_FILE, false)[0];
 
 	ASSERT_FALSE(load1_MI == load2_MI);

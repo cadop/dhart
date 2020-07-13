@@ -73,7 +73,7 @@ TEST(_EmbreeRayTracer, Copy) {
 
 TEST(_EmbreeRayTracer, OcclusionRays) {
 	std::string teapot_path = "big_teapot.obj";
-	auto geom = HF::Geometry::LoadMeshObjects(teapot_path, HF::Geometry::ONLY_FILE);
+	auto geom = HF::Geometry::LoadMeshObjects(teapot_path, HF::Geometry::ONLY_FILE, true);
 	auto k = HF::RayTracer::EmbreeRayTracer(geom);
 
 	// All of these rays should hit since the origin is inside of the teapot
@@ -92,7 +92,7 @@ TEST(_EmbreeRayTracer, OcclusionRays) {
 
 TEST(_EmbreeRayTracer, StandardRays) {
 	std::string teapot_path = "big_teapot.obj";
-	auto geom = HF::Geometry::LoadMeshObjects(teapot_path, HF::Geometry::ONLY_FILE);
+	auto geom = HF::Geometry::LoadMeshObjects(teapot_path, HF::Geometry::ONLY_FILE, true);
 	auto k = HF::RayTracer::EmbreeRayTracer(geom);
 
 	// All of these rays should hit since the origin is inside of the teapot
@@ -113,7 +113,7 @@ TEST(_EmbreeRayTracer, StandardRays) {
 
 TEST(_EmbreeRayTracer, HitPointsAreAccurate) {
 	std::string plane_path = "plane.obj";
-	auto geom = HF::Geometry::LoadMeshObjects(plane_path, HF::Geometry::ONLY_FILE);
+	auto geom = HF::Geometry::LoadMeshObjects(plane_path, HF::Geometry::ONLY_FILE, true);
 	auto k = HF::RayTracer::EmbreeRayTracer(geom);
 
 	// All of these rays should hit since the origin is inside of the teapot

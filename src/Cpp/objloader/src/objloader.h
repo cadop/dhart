@@ -96,7 +96,7 @@ namespace HF::Geometry{
 	std::vector<MeshInfo> LoadMeshObjects(
 		std::string path,
 		GROUP_METHOD gm = ONLY_FILE,
-		bool change_coords = true
+		bool change_coords = false
 	);
 
 	/// <summary> Create MeshInfo instances from the OBJ files in path. </summary>
@@ -139,7 +139,7 @@ namespace HF::Geometry{
 	std::vector<MeshInfo> LoadMeshObjects(
 		std::vector<std::string>& path,
 		GROUP_METHOD gm = ONLY_FILE,
-		bool change_coords = true
+		bool change_coords = false
 	);
 
 	/*!
