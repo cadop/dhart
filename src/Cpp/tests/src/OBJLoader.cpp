@@ -7,7 +7,7 @@
 #include "objloader_C.h"
 
 #define eigen_plain_assert
-
+using namespace HF::Geometry;
 const std::string obj_directiory = "../../Models/";
 void PrintArray(std::array<float, 3> in_array) {
 	std::cerr << "(" << in_array[0] << "," << in_array[1] << "," << in_array[2] << ")";
@@ -66,6 +66,73 @@ void CompareVertArrays(const std::vector<std::array<float, 3>>& vert_array1, con
 		}
 	}
 }
+
+/*
+	\brief Check if two arrays are equal without checking the position of each vertex
+*/
+bool CompareVertArraysUnordered(
+	const std::vector<std::array<float, 3>>& vert_array1,
+	const std::vector<std::array<float, 3>>& vert_array2,
+	std::string label1 = "MI1",
+	std::string label2 = "MI2"
+) {
+	// Exit early if they don't match
+	if (!(vert_array1.size() == vert_array2.size()))
+		return false;
+
+	// Loop through every vertex
+	for (int i = 0; i < vert_array1.size(); i++) {
+		bool match = false;
+		auto this_vert = vert_array1[i];
+
+		// Compare to every vertex in vert_array2 to find a valid match
+		for (const auto& that_vert : vert_array2) {
+			auto dist = arrayDist(this_vert, that_vert);
+
+			if (dist < 0.001f) {
+				match = true;
+				break;
+			}
+		}
+		// If a match couldn't be found for this vertex then the arrays aren't equal and the test
+		// should fail.
+		if (!match) return false;
+	}
+
+	return true;
+}
+
+
+TEST(_OBJLoader, CorrectlyProducesOutput) {
+	
+	// Manually list vertices
+	const std::vector<std::array<float, 3>> known_verts = {
+		{20.140586853027344, 0.0, -18.842348098754883},
+		{-20.079360961914062, 0.0, -18.842348098754883},
+		{-20.079360961914062, 0.0, 18.940643310546875},
+		{20.140586853027344, 0.0, 18.940643310546875},
+		{20.140586853027344, 0.0, -18.842348098754883},
+		{-20.079360961914062, 0.0, 18.940643310546875}
+	};
+
+	// Load vertices from file
+	const auto loaded_verts = LoadRawVertices("plane.obj");
+
+	// Assert that they match. Order will be different.
+	ASSERT_TRUE(CompareVertArraysUnordered(known_verts, loaded_verts));
+
+	// Assert that an incorrect array of vertices would not pass
+	const std::vector<std::array<float, 3>> known_wrong_verts = {
+		{20.140586853027344, 0.0, -18.842348098754883},
+		{-20.079360961914062, 0.0, -18.842348098754883},
+		{-20.079360961914062, 0.0, 18.940643310546875},
+		{20.140586853027344, 0.0, 128.940643310546875},
+		{20.140586853027344, 0.0, -18.842348098754883},
+		{-20.079360961914062, 0.0, 18.940643310546875}
+	};
+	ASSERT_FALSE(CompareVertArraysUnordered(loaded_verts, known_wrong_verts));
+}
+
 TEST(_OBJLoader, ThrowMissingFileOnMissingMesh) {
 	auto paths = std::vector<std::string>{"ThisMeshDoesn'tExist" };
 	ASSERT_THROW(HF::Geometry::LoadMeshObjects(paths, HF::Geometry::BY_GROUP), HF::Exceptions::FileNotFound);
@@ -170,8 +237,9 @@ TEST(_MeshInfo, CanReproduceInputArray) {
 	auto raw_verts = HF::Geometry::LoadRawVertices(obj_coord_paths[0]);
 	auto MI = HF::Geometry::LoadMeshObjects(obj_coord_paths[0], HF::Geometry::GROUP_METHOD::ONLY_FILE, false);
 	
-	CompareVertArrays(raw_verts, MI[0].GetVertsAsArrays());
+	CompareVertArrays(raw_verts, MI[0].GetUnindexedVertices());
 }
+
 
 ///
 ///	The following are tests for the code samples for HF::Geometry
@@ -260,7 +328,7 @@ TEST(_meshInfo, ConstructorParamCoordsAsArray) {
 
 	// Display the vertices for mesh
 	std::cout << "Vertices in mesh with ID " << mesh.GetMeshID() << ": " << std::endl;
-	for (auto vertex : mesh.GetVertsAsArrays()) {
+	for (auto vertex : mesh.GetUnindexedVertices()) {
 		std::cout << "(" << vertex[0] << ", " << vertex[1] << ", " << vertex[2] << ")" << std::endl;
 	}
 }
@@ -286,7 +354,7 @@ TEST(_meshInfo, ConstructorParamCoordsAsFloat) {
 
 	// Display the vertices for mesh
 	std::cout << "Vertices in mesh with ID " << mesh.GetMeshID() << ": " << std::endl;
-	for (auto vertex : mesh.GetVertsAsArrays()) {
+	for (auto vertex : mesh.GetUnindexedVertices()) {
 		std::cout << "(" << vertex[0] << ", " << vertex[1] << ", " << vertex[2] << ")" << std::endl;
 	}
 }
@@ -308,11 +376,11 @@ TEST(_meshInfo, AddVertsAsArray) {
 	// Append the vertices to the mesh
 	mesh.AddVerts(vertices);
 
-	std::cout << "size: " << mesh.getRawVertices().size() << std::endl;
+	std::cout << "size: " << mesh.GetIndexedVertices().size() << std::endl;
 
 	// Display the vertices for mesh
 	std::cout << "Vertices in mesh with ID " << mesh.GetMeshID() << ": " << std::endl;
-	for (auto vertex : mesh.GetVertsAsArrays()) {
+	for (auto vertex : mesh.GetUnindexedVertices()) {
 		std::cout << "(" << vertex[0] << ", " << vertex[1] << ", " << vertex[2] << ")" << std::endl;
 	}
 }
@@ -410,7 +478,7 @@ TEST(_meshInfo, ConvertToRhinoCoordinates) {
 
 	// Display the vertices for mesh
 	std::cout << "Vertices in mesh with ID " << mesh.GetMeshID() << ": " << std::endl;
-	for (auto vertex : mesh.GetVertsAsArrays()) {
+	for (auto vertex : mesh.GetUnindexedVertices()) {
 		std::cout << "(" << vertex[0] << ", " << vertex[1] << ", " << vertex[2] << ")" << std::endl;
 	}
 }
@@ -436,7 +504,7 @@ TEST(_meshInfo, ConvertToOBJCoordinates) {
 
 	// Display the vertices for mesh
 	std::cout << "Vertices in mesh with ID " << mesh.GetMeshID() << ": " << std::endl;
-	for (auto vertex : mesh.GetVertsAsArrays()) {
+	for (auto vertex : mesh.GetUnindexedVertices()) {
 		std::cout << "(" << vertex[0] << ", " << vertex[1] << ", " << vertex[2] << ")" << std::endl;
 	}
 }
@@ -462,7 +530,7 @@ TEST(_meshInfo, PerformRotation) {
 
 	// Display the vertices for mesh
 	std::cout << "Vertices in mesh with ID " << mesh.GetMeshID() << ": " << std::endl;
-	for (auto vertex : mesh.GetVertsAsArrays()) {
+	for (auto vertex : mesh.GetUnindexedVertices()) {
 		std::cout << "(" << vertex[0] << ", " << vertex[1] << ", " << vertex[2] << ")" << std::endl;
 	}
 }
@@ -503,8 +571,8 @@ TEST(_meshInfo, GetRawVertices) {
 	HF::Geometry::MeshInfo mesh(vertices, indices, 5901, "This Mesh");
 
 	// Retrieve copies of mesh's vertices.
-	std::vector<float> vertices_copy_0 = mesh.getRawVertices();
-	std::vector<float> vertices_copy_1 = mesh.getRawVertices();
+	std::vector<float> vertices_copy_0 = mesh.GetIndexedVertices();
+	std::vector<float> vertices_copy_1 = mesh.GetIndexedVertices();
 
 	// Uses std::vector<float>'s operator== to determine member equality
 	if (vertices_copy_0 == vertices_copy_1) {
@@ -586,11 +654,11 @@ TEST(_meshInfo, GetVertsAsArrays) {
 	// Retrieve vertices as a vector of coordinates (x, y, z)
 	// Useful if your vertices were prepared from a one-dimensional container c, of float
 	// (such that c.size() % 3 == 0)
-	std::vector<std::array<float, 3>> vert_container = mesh.GetVertsAsArrays();
+	std::vector<std::array<float, 3>> vert_container = mesh.GetUnindexedVertices();
 
 	// Display the vertices for mesh
 	std::cout << "Vertices in mesh with ID " << mesh.GetMeshID() << ": " << std::endl;
-	for (auto vertex : mesh.GetVertsAsArrays()) {
+	for (auto vertex : mesh.GetUnindexedVertices()) {
 		std::cout << "(" << vertex[0] << ", " << vertex[1] << ", " << vertex[2] << ")" << std::endl;
 	}
 }

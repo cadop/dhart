@@ -441,7 +441,7 @@ namespace HF::RayTracer {
 	bool EmbreeRayTracer::InsertNewMesh(HF::Geometry::MeshInfo& Mesh, bool Commit) {
 		// Get vertex and triangle data from the mesh
 		std::vector<Triangle> tris;	std::vector<Vertex> verts;
-		auto indices = Mesh.getRawIndices(); auto vertices = Mesh.getRawVertices();
+		auto indices = Mesh.getRawIndices(); auto vertices = Mesh.GetIndexedVertices();
 		buffersToStructs(vertices, indices, verts, tris);
 
 		// Create embree buffers

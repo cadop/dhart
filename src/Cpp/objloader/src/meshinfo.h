@@ -541,7 +541,7 @@ namespace HF::Geometry {
 				}
 			\endcode
 		*/
-		std::vector<float> getRawVertices() const;
+		std::vector<float> GetIndexedVertices() const;
 		
 		/// <summary>
 		/// Retrieve a copy of this mesh's index buffer as a 1D array.
@@ -640,7 +640,7 @@ namespace HF::Geometry {
 				std::vector<std::array<float, 3>> vert_container = mesh.GetVertsAsArrays();
 			\endcode
 		*/
-		std::vector<std::array<float, 3>> GetVertsAsArrays() const;
+		std::vector<std::array<float, 3>> GetUnindexedVertices() const;
 
 		/// <summary>Change the ID of this mesh.</summary>
 		/// <param name="new_id"> New ID to assign to this mesh. </param>
