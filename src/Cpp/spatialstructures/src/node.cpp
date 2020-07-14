@@ -110,7 +110,6 @@ namespace HF {
 			return Node(x * n2.x, y * n2.y, z * n2.z);
 		}
 		*/
-
 		Node Node::operator*(const Node& n2) const {
 			return Node(x * n2.x, y * n2.y, z * n2.z);
 		}

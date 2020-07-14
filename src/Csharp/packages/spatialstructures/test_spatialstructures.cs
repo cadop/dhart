@@ -78,10 +78,5 @@ namespace HumanFactors.Tests.SpatialStructures
             Assert.IsTrue(g.GetNodeID(node4) < 0);
         }
 
-        [TestMethod]
-        public void CalculateAndStoreCrossSlope()
-        {
-         
-        }
     }
 }
