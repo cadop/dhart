@@ -873,4 +873,29 @@ namespace CInterfaceTests {
 		// Release memory for info once finished with it
 		DestroyMeshInfo(info);
 	}
+
+	TEST(_Geometry, GetTestOBJPath) {
+		std::vector<std::string> strings_to_test = {
+		"teapot",
+		"plane",
+		"big teapot",
+		"energy blob",
+		"sibenik"
+		};
+
+		// Try to load these names. If a name isn't there is will throw. 
+		for (const auto& name : strings_to_test) 
+			HF::Geometry::LoadMeshObjects(HF::Geometry::GetTestOBJPath(name));
+
+		// Try to load a name that doesn't exist. This should throw.
+		try {
+			HF::Geometry::GetTestOBJPath("meshthatdoesntexist");
+			
+			// And put an instant fail here in case we actually reach this
+			ASSERT_TRUE(false);
+		}
+		catch (std::out_of_range& e) {
+			
+		}
+	}
 }
