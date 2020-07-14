@@ -183,13 +183,77 @@ namespace GraphTests {
 
 TEST(_Rounding, Equality) {
 
-	float f1 = 1.254864040f;
-	float f2 = 1.254854040f;
+	float f1 = 3.28399992f;
+	float f2 = 3.28390002f;
 
-	ASSERT_EQ(roundhf(f1), roundhf(f1));
+	float rounded_f1 = roundhf(f1);
+	float rounded_f2 = roundhf(f2);
+	ASSERT_EQ(rounded_f1, rounded_f2);
 	ASSERT_NE(std::hash<float>()(f1), std::hash<float>()(f2));
+	ASSERT_EQ(std::hash<float>()(rounded_f1), std::hash<float>()(rounded_f2));
 	ASSERT_EQ(std::hash<float>()(roundhf(f1)), std::hash<float>()(roundhf(f2)));
 }
+
+TEST(_Rounding, approach) {
+	float f1 = 3.28399992f;
+	float f2 = 3.28390002f;
+
+
+	ASSERT_EQ(std::trunc(f1 / ROUNDING_PRECISION), std::trunc(f2/ROUNDING_PRECISION));
+}
+
+TEST(_Rounding, StepByStep) {
+	float a1 = 3.28399991f;
+	float a2 = 3.28394318f;
+
+	float b1 = a1 / ROUNDING_PRECISION;
+	float b2 = a2 / ROUNDING_PRECISION;
+
+	float c1 = std::floor(b1);
+	float c2 = std::floor(b2);
+
+	float d1 = c1 * ROUNDING_PRECISION;
+	float d2 = c2 * ROUNDING_PRECISION;
+
+	ASSERT_EQ(d1, d2);
+}
+
+
+TEST(_Rounding, Seperate){
+	float a1 = 3.28399991f;
+	float a2 = 3.28394318f;
+
+	a1 = a1 / ROUNDING_PRECISION;
+	a1 = std::floor(a1);
+	a1 = a1 * ROUNDING_PRECISION;
+
+	a2 = a2 / ROUNDING_PRECISION;
+	a2 = std::floor(a2);
+	a2 = a2 * ROUNDING_PRECISION;
+
+	ASSERT_EQ(a1, a2);
+}
+
+
+TEST(_Rounding, Combined){
+	float a1 = 3.28399991f;
+	float a2 = 3.28394318f;
+
+	float r1 = std::floor(a1 / ROUNDING_PRECISION) * ROUNDING_PRECISION;
+	float r2 = std::floor(a2 / ROUNDING_PRECISION) * ROUNDING_PRECISION;
+
+	ASSERT_EQ(r1, r2);
+}
+
+TEST(_Node, Hashing) {
+	Node N1(-2.42799997, -12.8568001, 3.28399992);
+	Node N2(-2.42799997, -12.8568001, 3.28390002);
+
+	ASSERT_EQ(N1, N2);
+	ASSERT_EQ(roundhf(N1[2]), roundhf(N2[2]));
+	ASSERT_EQ(std::hash<Node>()(N1), std::hash<Node>()(N2));
+}
+
 
 
 namespace NodeTests {
