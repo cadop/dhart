@@ -3,6 +3,7 @@
 #include <graph.h>
 #include <node.h>
 #include <edge.h>
+#include <constants.h>
 
 #include "spatialstructures_C.h"
 
@@ -180,6 +181,17 @@ namespace GraphTests {
 	}
 }
 
+TEST(_Rounding, Equality) {
+
+	float f1 = 1.254864040f;
+	float f2 = 1.254854040f;
+
+	ASSERT_EQ(roundhf(f1), roundhf(f1));
+	ASSERT_NE(std::hash<float>()(f1), std::hash<float>()(f2));
+	ASSERT_EQ(std::hash<float>()(roundhf(f1)), std::hash<float>()(roundhf(f2)));
+}
+
+
 namespace NodeTests {
     TEST(_Node, Distance) {
         Node N1(0, 0, 1);
@@ -197,13 +209,11 @@ namespace NodeTests {
     }
 
     TEST(_Node, RoundingAndEquality) {
-        Node N1(0, 0, 0.0001);
-        Node N2(0, 0, 0);
-
-        ASSERT_TRUE(N1 != N2);
+		ASSERT_EQ(
+			Node(-22.4279995,-12.856001, 1.254864040), 
+			Node( -22.4279995,-12.856001, 1.254854040)
+		);
     }
-
-
 }
 
 ///

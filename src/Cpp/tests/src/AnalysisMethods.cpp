@@ -58,7 +58,7 @@ namespace HF {
 	}
 
 
-	TEST(_GraphGenerator, RoundingPrecision) {
+	TEST(_GraphGenerator, DuplicateNodes) {
 		auto mesh = Geometry::LoadMeshObjects("energy_blob.obj");
 
 		RayTracer::EmbreeRayTracer rt(mesh);
