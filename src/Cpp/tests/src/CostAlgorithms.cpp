@@ -9,13 +9,15 @@
 #include "graph_generator.h"
 
 #include "spatialstructures_C.h"
-
 #include "cost_algorithms.h"
 
 using namespace HF::SpatialStructures;
 
 namespace CostAlgorithmsTests {
 	TEST(_CostAlgorithms, CalculateCrossSlope) {
+		///
+		/// Would prefer to test this function with GraphGenerator and an OBJ file.
+		///
 		Node n0(-5, 2, 0);
 		Node n1(1, 2, 3);
 		Node n2(4, 5, 6);
@@ -73,7 +75,10 @@ namespace CostAlgorithmsTests {
 	}
 
 	/*
-	TEST(_CostAlgorithms, CalculateCrossSlopeCSR) {
+	TEST(_CostAlgorithms, CalculateCrossSlopeWithEnergyBlob) {
+		///
+		///	Cannot run this test until GraphGenerator is fixed.
+		///
 		using HF::Geometry::LoadMeshObjects;
 		using HF::RayTracer::EmbreeRayTracer;
 		using HF::GraphGenerator::GraphGenerator;
@@ -86,24 +91,6 @@ namespace CostAlgorithmsTests {
 
 		EmbreeRayTracer ray_tracer(mesh);
 		GraphGenerator graph_generator = GraphGenerator(ray_tracer, 0);
-
-
-
-			Start point:
-
-			x = -22.4280376
-			y = -12.856843
-			z = 5.4826779
-
-
-			Spacing = [10,10,70]
-			Upstep = 10
-			Downstep = 10
-			Up slope = 40
-			Downslope = 1
-			max connections out = 2
-			max nodes = 50
-
 
 		std::array<float, 3> starting_position = { -22.4280376, -12.856843,  5.4826779 };
 		std::array<float, 3> spacing = { 10, 10, 70 };
@@ -120,13 +107,9 @@ namespace CostAlgorithmsTests {
 			spacing, max_nodes, upstep, up_slope,
 			downstep, down_slope, core_count);
 
+		g.Compress();
 
-		//g.Compress();
-
-
-		std::vector<IntEdge> int_edge = HF::SpatialStructures::CostAlgorithms::CalculateCrossSlopeCSR(g);
-		auto data = int_edge.data();
-
+		std::vector<IntEdge> int_edge = HF::SpatialStructures::CostAlgorithms::CalculateCrossSlope(g);
 
 		CSRPtrs csr = g.GetCSRPointers();
 		auto data = csr.data;
@@ -141,8 +124,11 @@ namespace CostAlgorithmsTests {
 			while (row_curr < row_end) {
 				Node parent = g.NodeFromID(parent_id);
 				Node child = g.NodeFromID(col[i]);
-				std::cout << "parent ID # " << parent_id << "with pos " << parent.getArray() << " has child ID # " << col[i]
-					<< "at pos " << child.getArray() << " with edge value " << data[i] << std::endl;
+
+				std::cout << "parent ID # " << parent_id << "with pos " 
+				          << parent.getArray() << " has child ID # " << col[i]
+					      << " at pos " << child.getArray() << " with edge value " 
+						  << data[i] << std::endl;
 				++row_curr;
 				++i;
 			}
@@ -151,9 +137,64 @@ namespace CostAlgorithmsTests {
 	}
 	*/
 
-	/*
 	TEST(_CostAlgorithms, CalculateEnergyExpenditure) {
+		//
+		// Would prefer to test with GraphGenerator and an OBJ file.
+		//
+		Node n0(1, 2, 1);
+		Node n1(1, 2, 3);
+		Node n2(4, 5, 6);
+		Node n3(4, 6, 7);
+		Node n4(5, 6, 6);
+		Node n5(6, 7, 6);
+		Node n6(3, 1, 2);
+		Node n7(1, 4, 2);
+		Node n8(5, 3, 2);
+		
+		Graph g;
+		// all edges will have a default score, or distance, of 1.0f
 
+		// Note that edges must be added in order of appearance.
+		// E.g. you should not add an edge with Node n8 to the graph 
+		// without having added an edge with Node n7 first,
+		// or else the g.next_id field will be off by however many nodes were skipped
+		// in the sequence.
+		// which will be very confusing when it is time to debug.
+
+		g.addEdge(n0, n1);
+		
+		g.addEdge(n0, n2);
+		g.addEdge(n1, n3);
+		g.addEdge(n1, n4);
+		g.addEdge(n2, n4);
+		g.addEdge(n3, n5);
+		g.addEdge(n3, n6);
+		g.addEdge(n4, n5);
+		g.addEdge(n5, n6);
+		g.addEdge(n6, n7);
+		g.addEdge(n5, n7);
+		g.addEdge(n4, n8);
+		g.addEdge(n5, n8);
+		g.addEdge(n7, n8);
+		
+		g.Compress();
+	
+		std::vector<EdgeSet> edge_set = HF::SpatialStructures::CostAlgorithms::CalculateEnergyExpenditure(g);
+
+		auto edge_num = 0;
+		for (auto e : edge_set) {
+			for (auto c : e.children) {
+				std::cout << "Edge # " << edge_num << "\tparent " << (e.parent) << " has child " << (c.child) << " with weight " << c.weight << std::endl;
+				++edge_num;
+			}
+		}
+	}
+
+	/*
+	TEST(_CostAlgorithms, CalculateEnergyExpenditureWithEnergyBlob) {
+		///
+		///	Cannot run this test until GraphGenerator is fixed.
+		///
 		using HF::Geometry::LoadMeshObjects;
 		using HF::RayTracer::EmbreeRayTracer;
 		using HF::GraphGenerator::GraphGenerator;
@@ -163,29 +204,10 @@ namespace CostAlgorithmsTests {
 		std::vector<HF::Geometry::MeshInfo> mesh = LoadMeshObjects(file_path, HF::Geometry::GROUP_METHOD::ONLY_FILE, false);
 		//mesh[0].PerformRotation(90, 0, 0);
 
-		std::cout << "here" << std::endl;
-
 		//std::cout << mesh[0].getRawVertices()[0] << ", " << mesh[0].getRawVertices()[1] << ", " << mesh[0].getRawVertices()[2] << std::endl;
 
 		EmbreeRayTracer ray_tracer(mesh);
 		GraphGenerator graph_generator = GraphGenerator(ray_tracer, 0);
-
-
-
-			Start point:
-
-			x = -22.4280376
-			y = -12.856843
-			z = 5.4826779
-
-
-			Spacing = [10,10,70]
-			Upstep = 10
-			Downstep = 10
-			Up slope = 40
-			Downslope = 1
-			max connections out = 2
-			max nodes = 50
 
 		std::array<float, 3> starting_position = { -22.4280376, -12.856843,  5.4826779 };
 		std::array<float, 3> spacing = { 10, 10, 70 };
@@ -202,29 +224,9 @@ namespace CostAlgorithmsTests {
 			spacing, max_nodes, upstep, up_slope,
 			downstep, down_slope, core_count);
 
-
 		g.Compress();
 
-		//std::vector<EdgeSet> edge_set = HF::SpatialStructures::CostAlgorithms::CalculateEnergyExpenditure(g);
-		std::vector<EdgeSet> edge_set = g.GetEdges();
-		//auto edge_set = g.GetEdges();
-
-		//
-		CSRPtrs csr = g.GetCSRPointers();
-		int* col = csr.inner_begin();
-		for (int parent_id = 0; parent_id < csr.rows; parent_id++) {
-			float* row_begin = csr.row_begin(parent_id);
-			float* row_curr = row_begin;
-			float* row_end = csr.row_end(parent_id);
-
-			while (row_curr < row_end) {
-				std::cout << "parent ID # " << parent_id << " has child ID # " << *(col++)
-					<< " with edge value " << *(row_curr) << std::endl;
-				++row_curr;
-			}
-		}
-		//
-
+		std::vector<EdgeSet> edge_set = HF::SpatialStructures::CostAlgorithms::CalculateEnergyExpenditure(g);
 
 		auto edge_num = 0;
 		for (auto e : edge_set) {
@@ -235,9 +237,8 @@ namespace CostAlgorithmsTests {
 		}
 
 	}
-*/
+	*/
 }
-
 
 namespace CInterfaceTests {
 	TEST(_CostAlgorithmsCInterface, CalculateAndStoreCrossSlope) {

@@ -114,7 +114,7 @@ bool HF::SpatialStructures::CostAlgorithms::is_perpendicular(std::array<float, 3
     return std::abs(dot_product) < HF::SpatialStructures::ROUNDING_PRECISION;
 }
 
-std::vector<IntEdge> HF::SpatialStructures::CostAlgorithms::CalculateCrossSlopeCSR(Graph& g) {
+std::vector<IntEdge> HF::SpatialStructures::CostAlgorithms::CalculateCrossSlope(Graph& g) {
     // All cross slope data will be stored here and returned from this function.
     std::vector<IntEdge> result;
 
@@ -315,121 +315,6 @@ std::vector<IntEdge> HF::SpatialStructures::CostAlgorithms::CalculateCrossSlopeC
             // and the cross slope value stored in weight --
             // then add it to our result container.
             IntEdge ie = { child_id, weight };
-            result.push_back(ie);
-        }
-
-        std::cout << "***** ALL CHILDREN FOR THIS PARENT DONE *****\n"
-            << std::endl;
-    }
-
-    return result;
-}
-
-std::vector<IntEdge> HF::SpatialStructures::CostAlgorithms::CalculateCrossSlope(Graph& g) {
-    // All cross slope data will be stored here and returned from this function.
-    std::vector<IntEdge> result;
-
-    // Retrieve all parent nodes from g at once.
-    // This makes for an easy iteration of all nodes within g.
-    std::vector<Node> parents = g.Nodes();
-
-    for (Node parent_node : parents) {
-        // We iterate through all parent nodes,
-        // and retrieve the edges that extend from the current parent_node.
-        std::vector<Edge> edges = g[parent_node];
-
-        for (Edge edge_a : edges) {
-            // We iterate over all edges that extend from parent_node.
-            Node child_node_a = edge_a.child;
-            float edge_data_a = edge_a.score;
-
-            std::cout << "parent " << parent_node.id << " has child " << child_node_a.id
-                << " with data " << edge_data_a << std::endl;
-
-            std::cout << "====== Comparing with other edges ======"
-                << std::endl; 
-
-            /*
-                Here -- we should assess the step_type field for edge_a.
-
-                /// <summary> Describes the type of step an edge connects to. </summary>
-                enum STEP {
-                    NOT_CONNECTED = 0, ///< No connection between parent and child.
-                    NONE = 1,		 ///< Parent and child are on the same plane and no step is required.
-                    UP = 2,			///< A step up is required to get from parent to child.
-                    DOWN = 3,		///< A step down is required to get from parent to child.
-                    OVER = 4		///< A step over something is required to get from parent to child.
-                };
-
-
-            */
-
-            // We must have a container to store all perpendicular edges found.
-            // This container will have all edges that are perpendicular to edge_a --
-            // or rather, the vector formed by parent_node and child_node_a.
-            std::vector<Edge> perpendicular_edges = GetPerpendicularEdges(parent_node, edges, child_node_a);
-
-            std::cout << "====== End of comparing with other edges ======"
-                << std::endl;
-
-            float weight = 0.0;
-            float a_z = 0.0;
-            float b_z = 0.0;
-            float c_z = 0.0;
-
-            switch (perpendicular_edges.size()) {
-            case 0:
-                // No edges were found to be perpendicular to the edge
-                // formed by node parent_node and node child_node_a.
-                // The IntEdge to be created will use the existing edge data
-                // of parent_node and child_node_a (edge_data_a)
-
-                weight = edge_data_a;
-                break;
-            case 1:
-                // One edge formed by node parent_node and one other child_node by parent_node
-                // was found to be perpendicular to the edge formed by
-                // node parent_node and node child_node_a.
-
-                a_z = child_node_a.z;
-
-                // z value of other child_node
-                b_z = perpendicular_edges[0].child.z;
-
-                // add the existing weight value to the delta of the z values
-                weight = std::abs(a_z - b_z) + perpendicular_edges[0].score;
-
-
-                auto vector_a = child_node_a.directionTo(parent_node);
-                auto vector_b = child_node_a.directionTo(perpendicular_edges[0].child);
-
-                // angle formed by vector_a and vector_b
-
-                break;
-            case 2:
-                // Two edges -- each formed by node parent_node and two separate
-                // child node by node parent_node were found to be perpendicular to the edge
-                // formed by node parent_node and node child_node_a.
-
-                a_z = child_node_a.z;
-
-                // z value of the first other child_node
-                b_z = perpendicular_edges[0].child.z;
-
-                // z value of the second other child_node
-                c_z = perpendicular_edges[1].child.z;
-
-                // add the existing weight value to the delta of the z values
-                weight = std::abs(b_z - c_z) + perpendicular_edges[0].score;
-                break;
-            default:
-                break;
-            }
-
-            // Create the IntEdge using child_node_a.id
-            // and the cross slope value stored in weight --
-            // then add it to our result container.
-            IntEdge ie = { child_node_a.id, weight };
             result.push_back(ie);
         }
 

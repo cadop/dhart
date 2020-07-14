@@ -173,7 +173,7 @@ C_INTERFACE CalculateAndStoreCrossSlope(HF::SpatialStructures::Graph* g)
 	// and add these edges to *g.
 	// Get the underlying buffer for cross_slope_edges as well,
 	// we will iterate over it as a pointer.
-	auto cross_slope_edges = HF::SpatialStructures::CostAlgorithms::CalculateCrossSlopeCSR(*g);
+	auto cross_slope_edges = HF::SpatialStructures::CostAlgorithms::CalculateCrossSlope(*g);
 	auto data = cross_slope_edges.data();
 
 	// Retrieve the CSR representation of g.
