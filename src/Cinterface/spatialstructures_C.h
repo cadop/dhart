@@ -552,15 +552,6 @@ C_INTERFACE DestroyGraph(
 /// <param name="g">The Graph to calculate and store cross slopes from</param>
 /// <returns>HF::STATUS::OK on completion</returns>
 
-/*!
-	\code
-		// TODO example
-	\endcode
-*/
-C_INTERFACE CalculateAndStoreCrossSlope(HF::SpatialStructures::Graph* g);
-
-C_INTERFACE CalculateAndStoreEnergyExpenditure(HF::SpatialStructures::Graph* g);
-
 /// <summary> Add a new node attribute in the graph for the node at id.
 /// Returns an error code if the specified node doesn't exist in the graph.
 /// score and ids both point to arrays allocated by the caller which should be
