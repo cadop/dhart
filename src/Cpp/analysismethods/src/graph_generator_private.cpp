@@ -23,11 +23,10 @@ using std::vector;
 typedef std::pair<int, int> pair;
 typedef std::set<pair> set;
 
-
-
 namespace HF::GraphGenerator {
 	constexpr v3 down{ 0, 0, -1 };
 	
+	//< Directions that are used always used by the graph generator
 	static const vector<pair> init_directs = {
 		pair(-1, -1), pair(-1, 0), pair(-1, 1),
 		pair(0, -1), pair(0, 1), pair(1, -1),
@@ -62,8 +61,19 @@ namespace HF::GraphGenerator {
 		return perms;
 	}
 	
-	/*
+	/*!
 		\brief Create the set of directions to offset nodes in.
+
+		\param max_step_connections value of MaxStepConnections to generate directions for.
+
+		\details
+		Copies init_direcs then appends the output of permutations to it. If max_step_connections is 1,
+		only init_direcs is returned.
+
+		\returns
+		Set of directions for the given max_step_connections.
+
+		\see permutations to see how the value of max_step_connections influences generated steps.
 	*/
 	inline vector<pair> CreateDirecs(int max_step_connections) {
 		// A max_step_connections of 1 is just init_directs
