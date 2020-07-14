@@ -1,0 +1,191 @@
+\hypertarget{a00309}{}\doxysection{HF\+::Ray\+Tracer Namespace Reference}
+\label{a00309}\index{HF::RayTracer@{HF::RayTracer}}
+
+
+Cast rays to determine if and where they intersect geometry.  
+
+
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{a01196}{Embree\+Ray\+Tracer}}
+\begin{DoxyCompactList}\small\item\em A wrapper for Intel\textquotesingle{}s Embree Library. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a01200}{Full\+Ray\+Request}}
+\item 
+struct \mbox{\hyperlink{a01192}{Hit\+Struct}}
+\begin{DoxyCompactList}\small\item\em A simple hit struct to carry all relevant information about hits. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a00309_a01188}{Triangle}}
+\begin{DoxyCompactList}\small\item\em A triangle. Used internally in Embree.  \mbox{\hyperlink{a00309_a01188}{More...}}\end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a00309_a01184}{Vertex}}
+\begin{DoxyCompactList}\small\item\em A vertex. Used internally in Embree.  \mbox{\hyperlink{a00309_a01184}{More...}}\end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{a00309_a9c9d1d9869aee1f51b5de11f7d9420ec}{Check\+State}} (R\+T\+C\+Device \&device)
+\begin{DoxyCompactList}\small\item\em Check an embree device for errors. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a00309_a9a8051c9b70fc0ae60337d4a38bf5f57}{vectors\+To\+Buffers}} (const std\+::vector$<$ std\+::array$<$ float, 3 $>$$>$ \&vertices, std\+::vector$<$ \mbox{\hyperlink{a00309_a01188}{Triangle}} $>$ \&Tribuffer, std\+::vector$<$ \mbox{\hyperlink{a00309_a01184}{Vertex}} $>$ \&Vbuffer)
+\begin{DoxyCompactList}\small\item\em Index a list of verticies and place them into a triangle and vertex buffer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a00309_aac8c0b245ea813969c50b6496cc67945}{buffers\+To\+Structs}} (std\+::vector$<$ float $>$ \&in\+\_\+vertices, std\+::vector$<$ int $>$ \&in\+\_\+indices, std\+::vector$<$ \mbox{\hyperlink{a00309_a01184}{Vertex}} $>$ \&out\+\_\+vertices, std\+::vector$<$ \mbox{\hyperlink{a00309_a01188}{Triangle}} $>$ \&out\+\_\+triangles)
+\begin{DoxyCompactList}\small\item\em Package raw arrays of floats and indices in buffers to the required Embree types. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Cast rays to determine if and where they intersect geometry. 
+
+The basics of raytracing entail casting a ray from an origin point in a specific direction and determining whether or not it intersects with a set of geometry. Certain functions can even determine where the intersection occured. Generally, every \mbox{\hyperlink{a00309}{Ray\+Tracer}} will contain a set of geometry and provide functions for casting rays from an origin point in a specific direciton. Some generate an accelerated structure from geometry called a Bounding Volume Hierarchy, or B\+VH. A B\+VH can drastically decrease the time it takes to calculate ray intersections, but can be more complicated to manage compared to standard buffers of geometry.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a01196}{Embree\+Ray\+Tracer}} For an implementation of a raytracer using Intel\textquotesingle{}s Embree library as a backend. 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Class Documentation}
+\index{HF::RayTracer::Triangle@{HF::RayTracer::Triangle}}\label{a01188}
+\Hypertarget{a00309_a01188}
+\doxysubsubsection{struct HF\+::Ray\+Tracer\+::Triangle}
+A triangle. Used internally in Embree. 
+
+
+
+Definition at line 43 of file embree\+\_\+raytracer.\+cpp.
+
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00309_a504a02b108984ddfa3f521cf40b17e61}\label{a00309_a504a02b108984ddfa3f521cf40b17e61}} 
+int&
+v0&
+\\
+\hline
+
+\mbox{\Hypertarget{a00309_afc086ccfe3fc951af959d905056358c4}\label{a00309_afc086ccfe3fc951af959d905056358c4}} 
+int&
+v1&
+\\
+\hline
+
+\mbox{\Hypertarget{a00309_ab7bfa105fb125dfc9e31ecf8cbf0f9fa}\label{a00309_ab7bfa105fb125dfc9e31ecf8cbf0f9fa}} 
+int&
+v2&
+\\
+\hline
+
+\end{DoxyFields}
+\index{HF::RayTracer::Vertex@{HF::RayTracer::Vertex}}\label{a01184}
+\Hypertarget{a00309_a01184}
+\doxysubsubsection{struct HF\+::Ray\+Tracer\+::Vertex}
+A vertex. Used internally in Embree. 
+
+
+
+Definition at line 38 of file embree\+\_\+raytracer.\+cpp.
+
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00309_aad8e270f026ac9dd20ee294b2b1a21de}\label{a00309_aad8e270f026ac9dd20ee294b2b1a21de}} 
+float&
+x&
+\\
+\hline
+
+\mbox{\Hypertarget{a00309_aa27c7b22316499f43093c2b7768c06ea}\label{a00309_aa27c7b22316499f43093c2b7768c06ea}} 
+float&
+y&
+\\
+\hline
+
+\mbox{\Hypertarget{a00309_ab8599cc6220e686dac319622f7d2f364}\label{a00309_ab8599cc6220e686dac319622f7d2f364}} 
+float&
+z&
+\\
+\hline
+
+\end{DoxyFields}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{a00309_aac8c0b245ea813969c50b6496cc67945}\label{a00309_aac8c0b245ea813969c50b6496cc67945}} 
+\index{HF::RayTracer@{HF::RayTracer}!buffersToStructs@{buffersToStructs}}
+\index{buffersToStructs@{buffersToStructs}!HF::RayTracer@{HF::RayTracer}}
+\doxysubsubsection{\texorpdfstring{buffersToStructs()}{buffersToStructs()}}
+{\footnotesize\ttfamily void H\+F\+::\+Ray\+Tracer\+::buffers\+To\+Structs (\begin{DoxyParamCaption}\item[{std\+::vector$<$ float $>$ \&}]{in\+\_\+vertices,  }\item[{std\+::vector$<$ int $>$ \&}]{in\+\_\+indices,  }\item[{std\+::vector$<$ \mbox{\hyperlink{a00309_a01184}{Vertex}} $>$ \&}]{out\+\_\+vertices,  }\item[{std\+::vector$<$ \mbox{\hyperlink{a00309_a01188}{Triangle}} $>$ \&}]{out\+\_\+triangles }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Package raw arrays of floats and indices in buffers to the required Embree types. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em in\+\_\+vertices} & An array of floats in which every 3 floats represents a vertex. \\
+\hline
+{\em in\+\_\+indices} & An array of integers in which every 3 integers represents a triangle. \\
+\hline
+{\em out\+\_\+vertices} & Output array for vertexes.\\
+\hline
+{\em out\+\_\+triangles} & Output array for triangles.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{a00296__todo000030}{Todo}}]May be faster as a std\+::move or std\+::copy. \end{DoxyRefDesc}
+
+
+Definition at line 103 of file embree\+\_\+raytracer.\+cpp.
+
+\mbox{\Hypertarget{a00309_a9c9d1d9869aee1f51b5de11f7d9420ec}\label{a00309_a9c9d1d9869aee1f51b5de11f7d9420ec}} 
+\index{HF::RayTracer@{HF::RayTracer}!CheckState@{CheckState}}
+\index{CheckState@{CheckState}!HF::RayTracer@{HF::RayTracer}}
+\doxysubsubsection{\texorpdfstring{CheckState()}{CheckState()}}
+{\footnotesize\ttfamily void H\+F\+::\+Ray\+Tracer\+::\+Check\+State (\begin{DoxyParamCaption}\item[{R\+T\+C\+Device \&}]{device }\end{DoxyParamCaption})}
+
+
+
+Check an embree device for errors. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em device} & Device to check for errors\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::exception} & Some error is found while casting rays.\\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 29 of file embree\+\_\+raytracer.\+cpp.
+
+
+
+Referenced by H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Fire\+Ray().
+
+\mbox{\Hypertarget{a00309_a9a8051c9b70fc0ae60337d4a38bf5f57}\label{a00309_a9a8051c9b70fc0ae60337d4a38bf5f57}} 
+\index{HF::RayTracer@{HF::RayTracer}!vectorsToBuffers@{vectorsToBuffers}}
+\index{vectorsToBuffers@{vectorsToBuffers}!HF::RayTracer@{HF::RayTracer}}
+\doxysubsubsection{\texorpdfstring{vectorsToBuffers()}{vectorsToBuffers()}}
+{\footnotesize\ttfamily void H\+F\+::\+Ray\+Tracer\+::vectors\+To\+Buffers (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::array$<$ float, 3 $>$$>$ \&}]{vertices,  }\item[{std\+::vector$<$ \mbox{\hyperlink{a00309_a01188}{Triangle}} $>$ \&}]{Tribuffer,  }\item[{std\+::vector$<$ \mbox{\hyperlink{a00309_a01184}{Vertex}} $>$ \&}]{Vbuffer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Index a list of verticies and place them into a triangle and vertex buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertices} & Mesh vertices.\\
+\hline
+{\em Tribuffer} & Output triangle buffer.\\
+\hline
+{\em Vbuffer} & Output \mbox{\hyperlink{a00309_a01184}{Vertex}} Buffer.\\
+\hline
+\end{DoxyParams}
+
+
+Internally, this uses a hashmap to create an index map of vertices.
+
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{a00296__todo000029}{Todo}}]Performance here can be improved by using indexing. \end{DoxyRefDesc}
+
+
+Definition at line 53 of file embree\+\_\+raytracer.\+cpp.
+
+
+
+Referenced by H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer(), and H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Insert\+New\+Mesh().
+

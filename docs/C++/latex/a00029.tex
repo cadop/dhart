@@ -1,0 +1,51 @@
+\hypertarget{a00029}{}\doxysection{Cpp/analysismethods/src/visibility\+\_\+graph.cpp File Reference}
+\label{a00029}\index{Cpp/analysismethods/src/visibility\_graph.cpp@{Cpp/analysismethods/src/visibility\_graph.cpp}}
+
+
+Contains implementation for the \mbox{\hyperlink{a00310}{Visibility\+Graph}} class.  
+
+
+{\ttfamily \#include $<$visibility\+\_\+graph.\+h$>$}\newline
+{\ttfamily \#include $<$array$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include $<$omp.\+h$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$robin\+\_\+hood.\+h$>$}\newline
+{\ttfamily \#include $<$graph.\+h$>$}\newline
+{\ttfamily \#include $<$embree\+\_\+raytracer.\+h$>$}\newline
+{\ttfamily \#include $<$Edge.\+h$>$}\newline
+{\ttfamily \#include $<$node.\+h$>$}\newline
+{\ttfamily \#include $<$Constants.\+h$>$}\newline
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{a00305}{HF}}
+\begin{DoxyCompactList}\small\item\em Perform human scale analysis on 3D environments. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00310}{H\+F\+::\+Visibility\+Graph}}
+\begin{DoxyCompactList}\small\item\em Evaluate visibility between points in a set of locations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{a00310_af811d21e4c49275521912df9254bb737}{H\+F\+::\+Visibility\+Graph\+::\+Height\+Check}} (const \mbox{\hyperlink{a01224}{Node}} \&\mbox{\hyperlink{a01224}{Node}}, float height, \mbox{\hyperlink{a01196}{Embree\+Ray\+Tracer}} \&ert)
+\begin{DoxyCompactList}\small\item\em Check if Node can be raised by height without clipping into any geometry. \end{DoxyCompactList}\item 
+vector$<$ int $>$ \mbox{\hyperlink{a00310_a5cddfd8eb7ae23f8ecea0277ad5c3cc5}{H\+F\+::\+Visibility\+Graph\+::\+Height\+Check\+All\+Nodes}} (const vector$<$ \mbox{\hyperlink{a01224}{Node}} $>$ \&nodes\+\_\+to\+\_\+filter, float height, \mbox{\hyperlink{a01196}{Embree\+Ray\+Tracer}} \&ert)
+\begin{DoxyCompactList}\small\item\em Obtain the indexes of all nodes that pass the Height\+Check. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a00310_a4d9cf77879eb78075f7f7b0a7e31119a}{H\+F\+::\+Visibility\+Graph\+::\+Is\+Occlusion\+Between}} (const \mbox{\hyperlink{a01224}{Node}} \&node\+\_\+a, const \mbox{\hyperlink{a01224}{Node}} \&node\+\_\+b, \mbox{\hyperlink{a01196}{Embree\+Ray\+Tracer}} \&ert, float height=1.\+7f, float pre\+\_\+calculated\+\_\+distance=0.\+0f)
+\begin{DoxyCompactList}\small\item\em Perform a line of sight check between two nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01220}{Graph}} \mbox{\hyperlink{a00310_a12eb1e4c06400c4625cd22d925927b03}{H\+F\+::\+Visibility\+Graph\+::\+All\+To\+All}} (\mbox{\hyperlink{a01196}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&ert, const std\+::vector$<$ \mbox{\hyperlink{a01224}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \&input\+\_\+nodes, float height=1.\+7f)
+\begin{DoxyCompactList}\small\item\em Generate a Visibility Graph between every node in a set of nodes in parallel. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01220}{Graph}} \mbox{\hyperlink{a00310_ae42a5aafdfcc29b6a668355c07602efb}{H\+F\+::\+Visibility\+Graph\+::\+Group\+To\+Group}} (\mbox{\hyperlink{a01196}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&ert, const std\+::vector$<$ \mbox{\hyperlink{a01224}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \&from, const std\+::vector$<$ \mbox{\hyperlink{a01224}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \&to, float height=1.\+7f)
+\begin{DoxyCompactList}\small\item\em Generate a Visibility Graph from a set of nodes to another set of nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01220}{Graph}} \mbox{\hyperlink{a00310_ab1db87927118f70786a664c3b3cc7905}{H\+F\+::\+Visibility\+Graph\+::\+All\+To\+All\+Undirected}} (\mbox{\hyperlink{a01196}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&ert, const std\+::vector$<$ \mbox{\hyperlink{a01224}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \&nodes, float height, int cores=-\/1)
+\begin{DoxyCompactList}\small\item\em Generate a Visibility Graph with every edge stored twice. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Contains implementation for the \mbox{\hyperlink{a00310}{Visibility\+Graph}} class. 
+
+\begin{DoxyAuthor}{Author}
+T\+BA 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+17 Jun 2020 
+\end{DoxyDate}

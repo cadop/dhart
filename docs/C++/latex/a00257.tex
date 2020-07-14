@@ -1,0 +1,197 @@
+\hypertarget{a00257}{}\doxysection{Cinterface/cinterface\+\_\+utils.h File Reference}
+\label{a00257}\index{Cinterface/cinterface\_utils.h@{Cinterface/cinterface\_utils.h}}
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$array$>$}\newline
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{a00305}{HF}}
+\begin{DoxyCompactList}\small\item\em Perform human scale analysis on 3D environments. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{a00257_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}}~extern \char`\"{}C\char`\"{} \+\_\+\+\_\+declspec(dllexport) int
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ \mbox{\hyperlink{a00257_a2f5650b0bad6c47aa34fc2206433a34b}{Convert\+Raw\+Float\+Array\+To\+Points}} (const float $\ast$raw\+\_\+array, int size)
+\begin{DoxyCompactList}\small\item\em Convert a raw array from an external caller to an organized vector of points \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::array$<$ int, 3 $>$ $>$ \mbox{\hyperlink{a00257_a353d5244f19898d13d1d38193ea6ef1e}{Convert\+Raw\+Int\+Array\+To\+Points}} (const int $\ast$raw\+\_\+array, int size)
+\begin{DoxyCompactList}\small\item\em Convert a raw array from an external caller to an organized vector of points \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00287_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00257_af77723a4383b278169e80cf0e361ec44}{Destroy\+Float\+Vector}} (std\+::vector$<$ float $>$ $\ast$float\+\_\+vector)
+\begin{DoxyCompactList}\small\item\em Delete a float vector that\textquotesingle{}s pointed to by {\itshape float\+\_\+vector}  \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{a00257_a1746287300e1f05c45d84f3837e24557}{Delete\+Raw\+Ptr}} (T $\ast$ptr)
+\begin{DoxyCompactList}\small\item\em Delete some object pointed to by ptr \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{a00257_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}\label{a00257_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}} 
+\index{cinterface\_utils.h@{cinterface\_utils.h}!C\_INTERFACE@{C\_INTERFACE}}
+\index{C\_INTERFACE@{C\_INTERFACE}!cinterface\_utils.h@{cinterface\_utils.h}}
+\doxysubsubsection{\texorpdfstring{C\_INTERFACE}{C\_INTERFACE}}
+{\footnotesize\ttfamily \#define C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE~extern \char`\"{}C\char`\"{} \+\_\+\+\_\+declspec(dllexport) int}
+
+
+
+Definition at line 16 of file cinterface\+\_\+utils.\+h.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{a00257_a2f5650b0bad6c47aa34fc2206433a34b}\label{a00257_a2f5650b0bad6c47aa34fc2206433a34b}} 
+\index{cinterface\_utils.h@{cinterface\_utils.h}!ConvertRawFloatArrayToPoints@{ConvertRawFloatArrayToPoints}}
+\index{ConvertRawFloatArrayToPoints@{ConvertRawFloatArrayToPoints}!cinterface\_utils.h@{cinterface\_utils.h}}
+\doxysubsubsection{\texorpdfstring{ConvertRawFloatArrayToPoints()}{ConvertRawFloatArrayToPoints()}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::array$<$float, 3$>$ $>$ Convert\+Raw\+Float\+Array\+To\+Points (\begin{DoxyParamCaption}\item[{const float $\ast$}]{raw\+\_\+array,  }\item[{int}]{size }\end{DoxyParamCaption})}
+
+
+
+Convert a raw array from an external caller to an organized vector of points 
+
+
+\begin{DoxyParams}{Parameters}
+{\em raw\+\_\+array} & Pointer to the external array\\
+\hline
+{\em size} & The number of points stored in the raw array, equal to the total number of floats / 3\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A list of points
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "cinterface\_utils.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{float} vertices[] = \{ 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 \};}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} size = 9;}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::vector<std::array<float, 3>> points = \mbox{\hyperlink{a00149_a2f5650b0bad6c47aa34fc2206433a34b}{ConvertRawFloatArrayToPoints}}(vertices, size);}
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em raw\+\_\+array} & Pointer to the external array\\
+\hline
+{\em size} & The number of points stored in the raw array, equal to the total number of floats / 3\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Definition at line 24 of file C\+Interface.\+cpp.
+
+
+
+Referenced by Create\+Visibility\+Graph\+All\+To\+All(), Create\+Visibility\+Graph\+All\+To\+All\+Undirected(), Create\+Visibility\+Graph\+Group\+To\+Group(), Fire\+Multiple\+Directions\+One\+Origin(), Fire\+Multiple\+Origins\+One\+Direction(), Fire\+Multiple\+Rays(), Fire\+Occlusion\+Rays(), Fire\+Rays\+Distance(), Sphereical\+View\+Analysis\+Aggregate\+Flat(), and Spherical\+View\+Analysis\+No\+Aggregate\+Flat().
+
+\mbox{\Hypertarget{a00257_a353d5244f19898d13d1d38193ea6ef1e}\label{a00257_a353d5244f19898d13d1d38193ea6ef1e}} 
+\index{cinterface\_utils.h@{cinterface\_utils.h}!ConvertRawIntArrayToPoints@{ConvertRawIntArrayToPoints}}
+\index{ConvertRawIntArrayToPoints@{ConvertRawIntArrayToPoints}!cinterface\_utils.h@{cinterface\_utils.h}}
+\doxysubsubsection{\texorpdfstring{ConvertRawIntArrayToPoints()}{ConvertRawIntArrayToPoints()}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::array$<$int, 3$>$ $>$ Convert\+Raw\+Int\+Array\+To\+Points (\begin{DoxyParamCaption}\item[{const int $\ast$}]{raw\+\_\+array,  }\item[{int}]{size }\end{DoxyParamCaption})}
+
+
+
+Convert a raw array from an external caller to an organized vector of points 
+
+
+\begin{DoxyParams}{Parameters}
+{\em raw\+\_\+array} & Pointer to the external array\\
+\hline
+{\em size} & The number of points stored in the raw array, equal to the total number of ints / 3\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A list of points
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "cinterface\_utils.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int} raw\_array = \{ 0, 1, 2, 3, 4, 5, 6, 7, 8 \};}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} size = 9;}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::vector<std::array<int, 3>> points = \mbox{\hyperlink{a00149_a353d5244f19898d13d1d38193ea6ef1e}{ConvertRawIntArrayToPoints}}(raw\_array, size);}
+\end{DoxyCode}
+ 
+
+Definition at line 35 of file C\+Interface.\+cpp.
+
+\mbox{\Hypertarget{a00257_a1746287300e1f05c45d84f3837e24557}\label{a00257_a1746287300e1f05c45d84f3837e24557}} 
+\index{cinterface\_utils.h@{cinterface\_utils.h}!DeleteRawPtr@{DeleteRawPtr}}
+\index{DeleteRawPtr@{DeleteRawPtr}!cinterface\_utils.h@{cinterface\_utils.h}}
+\doxysubsubsection{\texorpdfstring{DeleteRawPtr()}{DeleteRawPtr()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void Delete\+Raw\+Ptr (\begin{DoxyParamCaption}\item[{T $\ast$}]{ptr }\end{DoxyParamCaption})}
+
+
+
+Delete some object pointed to by ptr 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & datatype of ptr\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "cinterface\_utils.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::vector<int>* vec = \textcolor{keyword}{new} std::vector<int>\{ 6, 3, 1, 0, 5, 0 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{DeleteRawPtr<std::vector<int>>(vec);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// At this point here, we assume DeleteRawPtr was successful.}}
+\DoxyCodeLine{\textcolor{comment}{// We set vec to nullptr to eliminate a dangling pointer.}}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (vec) \{}
+\DoxyCodeLine{    vec = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+ 
+
+Definition at line 97 of file cinterface\+\_\+utils.\+h.
+
+
+
+Referenced by Destroy\+Float\+Vector(), Destroy\+Path(), and Destroy\+Ray\+Result\+Vector().
+
+\mbox{\Hypertarget{a00257_af77723a4383b278169e80cf0e361ec44}\label{a00257_af77723a4383b278169e80cf0e361ec44}} 
+\index{cinterface\_utils.h@{cinterface\_utils.h}!DestroyFloatVector@{DestroyFloatVector}}
+\index{DestroyFloatVector@{DestroyFloatVector}!cinterface\_utils.h@{cinterface\_utils.h}}
+\doxysubsubsection{\texorpdfstring{DestroyFloatVector()}{DestroyFloatVector()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00287_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Destroy\+Float\+Vector (\begin{DoxyParamCaption}\item[{std\+::vector$<$ float $>$ $\ast$}]{float\+\_\+vector }\end{DoxyParamCaption})}
+
+
+
+Delete a float vector that\textquotesingle{}s pointed to by {\itshape float\+\_\+vector}  
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "cinterface\_utils.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::vector<float>* vec = \textcolor{keyword}{new} std::vector<float>\{ 3, 6, 9 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// operator delete called on vec within DestroyFloatVector}}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (\mbox{\hyperlink{a00254_af77723a4383b278169e80cf0e361ec44}{DestroyFloatVector}}(vec)) \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"DestroyFloatVector was successful"} << std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"DestroyFloatVector unsuccessful"} << std::endl;}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+ 
+
+Definition at line 27 of file cinterface\+\_\+utils.\+cpp.
+
+
+
+References Delete\+Raw\+Ptr(), and H\+F\+::\+Exceptions\+::\+OK.
+

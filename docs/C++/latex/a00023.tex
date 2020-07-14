@@ -1,0 +1,45 @@
+\hypertarget{a00023}{}\doxysection{Cpp/analysismethods/src/view\+\_\+analysis.cpp File Reference}
+\label{a00023}\index{Cpp/analysismethods/src/view\_analysis.cpp@{Cpp/analysismethods/src/view\_analysis.cpp}}
+
+
+Contains implementation for the \mbox{\hyperlink{a00307}{View\+Analysis}} namespace.  
+
+
+{\ttfamily \#include $<$view\+\_\+analysis.\+h$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$array$>$}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$embree\+\_\+raytracer.\+h$>$}\newline
+{\ttfamily \#include $<$Ray\+Request.\+h$>$}\newline
+{\ttfamily \#include $<$node.\+h$>$}\newline
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{a00305}{HF}}
+\begin{DoxyCompactList}\small\item\em Perform human scale analysis on 3D environments. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00307}{H\+F\+::\+View\+Analysis}}
+\begin{DoxyCompactList}\small\item\em Analyze space from the perspective of observers within a 3D environment. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+constexpr float \mbox{\hyperlink{a00307_a9dcf81751f63f5c7356a4f45159184bb}{H\+F\+::\+View\+Analysis\+::\+Convert\+To\+Radians}} (float num\+\_\+in\+\_\+degrees)
+\begin{DoxyCompactList}\small\item\em Convert a number from degrees to radians. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a00307_a38ed3d26d2fcc4bde1790c53eda3945a}{H\+F\+::\+View\+Analysis\+::\+Normalize}} (std\+::array$<$ float, 3 $>$ \&vec)
+\begin{DoxyCompactList}\small\item\em Normalize a vector. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a00307_a94327f2628a43ffe3dc4ab854e8aa20d}{H\+F\+::\+View\+Analysis\+::\+Altitude\+Within\+Range}} (const std\+::array$<$ float, 3 $>$ \&vec, float max\+\_\+angle, float min\+\_\+angle)
+\item 
+vector$<$ std\+::array$<$ float, 3 $>$ $>$ \mbox{\hyperlink{a00307_ad171585ac55c35e394e26a2f80364a0f}{H\+F\+::\+View\+Analysis\+::\+Fibbonacci\+Dist}} (int num\+\_\+points, float upwards\+\_\+fov, float downward\+\_\+fov)
+\item 
+vector$<$ std\+::array$<$ float, 3 $>$ $>$ \mbox{\hyperlink{a00302_ga6ca336e3887ef82d17b0713c2bf862df}{H\+F\+::\+View\+Analysis\+::\+Fibbonacci\+Distribute\+Points}} (int num\+\_\+points, float upwards\+\_\+fov=50.\+0f, float downward\+\_\+fov=70.\+0f)
+\begin{DoxyCompactList}\small\item\em Evenly distribute a set of points around a sphere centered at the origin. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Contains implementation for the \mbox{\hyperlink{a00307}{View\+Analysis}} namespace. 
+
+\begin{DoxyAuthor}{Author}
+T\+BA 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+26 Jun 2020 
+\end{DoxyDate}

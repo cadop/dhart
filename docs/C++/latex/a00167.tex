@@ -1,0 +1,100 @@
+\hypertarget{a00167}{}\doxysection{Cpp/spatialstructures/src/\+Edge.h File Reference}
+\label{a00167}\index{Cpp/spatialstructures/src/Edge.h@{Cpp/spatialstructures/src/Edge.h}}
+
+
+Contains definitions for the \mbox{\hyperlink{a01204}{Edge}} structure.  
+
+
+{\ttfamily \#include $<$node.\+h$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{a01204}{H\+F\+::\+Spatial\+Structures\+::\+Edge}}
+\begin{DoxyCompactList}\small\item\em A connection to a child node. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a00308_a01208}{H\+F\+::\+Spatial\+Structures\+::\+Int\+Edge}}
+\begin{DoxyCompactList}\small\item\em A lighter version of \mbox{\hyperlink{a01204}{Edge}} that contains an ID instead of a full node object..  \mbox{\hyperlink{a00308_a01208}{More...}}\end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a00308_a01212}{H\+F\+::\+Spatial\+Structures\+::\+Edge\+Set}}
+\begin{DoxyCompactList}\small\item\em A collection of edges and a parent.  \mbox{\hyperlink{a00308_a01212}{More...}}\end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{a00305}{HF}}
+\begin{DoxyCompactList}\small\item\em Perform human scale analysis on 3D environments. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00308}{H\+F\+::\+Spatial\+Structures}}
+\begin{DoxyCompactList}\small\item\em Contains standard fundamental data structures for representing space used throughout Human\+Factors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{a00308_af0378d900074d484ba791d4317e5935e}{H\+F\+::\+Spatial\+Structures\+::\+S\+T\+EP}} \{ \newline
+\mbox{\hyperlink{a00308_af0378d900074d484ba791d4317e5935ea7a2b5bf64195a97a6b132bf9c58d0bf9}{H\+F\+::\+Spatial\+Structures\+::\+N\+O\+T\+\_\+\+C\+O\+N\+N\+E\+C\+T\+ED}} = 0, 
+\mbox{\hyperlink{a00308_af0378d900074d484ba791d4317e5935ea45ef4ea34d22b5d90e23d61af2f1f51a}{H\+F\+::\+Spatial\+Structures\+::\+N\+O\+NE}} = 1, 
+\mbox{\hyperlink{a00308_af0378d900074d484ba791d4317e5935ea599bf51c4226a80ada6f743f6e9acd5c}{H\+F\+::\+Spatial\+Structures\+::\+UP}} = 2, 
+\mbox{\hyperlink{a00308_af0378d900074d484ba791d4317e5935ea023b84d27813ed1b354da97011695e98}{H\+F\+::\+Spatial\+Structures\+::\+D\+O\+WN}} = 3, 
+\newline
+\mbox{\hyperlink{a00308_af0378d900074d484ba791d4317e5935eaa734acd80348ed3c2f2df367e7ab1bac}{H\+F\+::\+Spatial\+Structures\+::\+O\+V\+ER}} = 4
+ \}
+\begin{DoxyCompactList}\small\item\em Describes the type of step an edge connects to. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Contains definitions for the \mbox{\hyperlink{a01204}{Edge}} structure. 
+
+\begin{DoxyAuthor}{Author}
+T\+BA 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+26 Jun 2020 
+\end{DoxyDate}
+
+
+\doxysubsection{Class Documentation}
+\index{HF::SpatialStructures::IntEdge@{HF::SpatialStructures::IntEdge}}\label{a01208}
+\Hypertarget{a00308_a01208}
+\doxysubsubsection{struct HF\+::Spatial\+Structures\+::Int\+Edge}
+A lighter version of \mbox{\hyperlink{a01204}{Edge}} that contains an ID instead of a full node object.. 
+
+
+
+Definition at line 55 of file Edge.\+h.
+
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00308_a7662d9deb8c69743b37c0c8da3f51610}\label{a00308_a7662d9deb8c69743b37c0c8da3f51610}} 
+int&
+child&
+Identifier of child node. \\
+\hline
+
+\mbox{\Hypertarget{a00308_a4c5bcbef0f0b977f2bbf4495939c9f18}\label{a00308_a4c5bcbef0f0b977f2bbf4495939c9f18}} 
+float&
+weight&
+Cost to traverse to child. \\
+\hline
+
+\end{DoxyFields}
+\index{HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}}\label{a01212}
+\Hypertarget{a00308_a01212}
+\doxysubsubsection{struct HF\+::Spatial\+Structures\+::Edge\+Set}
+A collection of edges and a parent. 
+
+\begin{DoxyRemark}{Remarks}
+This can to represent a node and its edges without repeating any information such as parent\+\_\+id or node objects. 
+\end{DoxyRemark}
+
+
+Definition at line 66 of file Edge.\+h.
+
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00308_ae0ed1fa60810e109100548a03e10259c}\label{a00308_ae0ed1fa60810e109100548a03e10259c}} 
+vector$<$ \mbox{\hyperlink{a00308_a01208}{IntEdge}} $>$&
+children&
+vector of \mbox{\hyperlink{a00308_a01208}{Int\+Edge}} (children) \\
+\hline
+
+\mbox{\Hypertarget{a00308_a1cf561c1c38a93316f15ac2ab29fc8f4}\label{a00308_a1cf561c1c38a93316f15ac2ab29fc8f4}} 
+int&
+parent&
+Identifier of parent node. \\
+\hline
+
+\end{DoxyFields}
