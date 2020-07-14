@@ -23,9 +23,18 @@ using std::vector;
 typedef std::pair<int, int> pair;
 typedef std::set<pair> set;
 
+
+
 namespace HF::GraphGenerator {
 	constexpr v3 down{ 0, 0, -1 };
 	
+	static const vector<pair> init_directs = {
+		pair(-1, -1), pair(-1, 0), pair(-1, 1),
+		pair(0, -1), pair(0, 1), pair(1, -1),
+		pair(1, 0), pair(1, 1)
+	};
+
+
 	/// <summary>
 	/// Create a set of every permutation for all numbers between 0 and limit.
 	/// </summary>
@@ -51,6 +60,26 @@ namespace HF::GraphGenerator {
 					perms.emplace(pair(j, k));
 
 		return perms;
+	}
+	
+	/*
+		\brief Create the set of directions to offset nodes in.
+	*/
+	inline vector<pair> CreateDirecs(int max_step_connections) {
+		// A max_step_connections of 1 is just init_directs
+		if (max_step_connections == 1) return init_directs;
+
+		// Otherwise generate extra directions
+		auto perms = permutations(max_step_connections);
+
+		// Copy init_directs into our output array
+		vector<pair> out_directions = init_directs;
+
+		// Resize our output array to fit the new permutations, then fill it
+		out_directions.resize(out_directions.size() + perms.size());
+		std::move(perms.begin(), perms.end(), out_directions.begin() + init_directs.size());
+	
+		return out_directions;
 	}
 
 	inline bool GraphGeneratorPrivate::WalkableCheck(const Node& position)
@@ -250,26 +279,7 @@ namespace HF::GraphGenerator {
 
 	void GraphGeneratorPrivate::CrawlGeom(UniqueQueue & todo)
 	{
-		if(todo.empty()) throw std::exception("Started with no start point!");
-		
-		// Create the default set of directions
-		const set init_directs = {
-			pair(-1, -1), pair(-1, 0), pair(-1, 1),
-			pair(0, -1), pair(0, 1), pair(1, -1),
-			pair(1, 0), pair(1, 1)
-		};
-
-		// Calculate all permutations of directions from the maximum
-		// value of max_step_conections.
-		set angle_directions = permutations(GG.max_step_connection);
-		vector<pair> directions;
-
-		// Union initial directions with the newly calculated directions
-		std::set_union(
-			init_directs.begin(), init_directs.end(), 
-			angle_directions.begin(), angle_directions.end(), 
-			std::back_inserter(directions)
-		);
+		const auto directions = CreateDirecs(GG.max_step_connection);
 
 		int num_nodes = 0;
 		while (!todo.empty() && (num_nodes < GG.max_nodes || GG.max_nodes < 0)) {
@@ -295,26 +305,8 @@ namespace HF::GraphGenerator {
 
 	void GraphGeneratorPrivate::CrawlGeomParallel(UniqueQueue & todo)
 	{
-		// Set logic to determine directions
-		const set init_directs = {
-			pair(-1, -1), pair(-1, 0), pair(-1, 1),
-			pair(0, -1), pair(0, 1), pair(1, -1),
-			pair(1, 0), pair(1, 1) 
-		};
-		set angle_directions = permutations(GG.max_step_connection);
+		auto directions = CreateDirecs(GG.max_step_connection);
 
-		// Set the number of threads to equal the number of cores in the machine
-		const int max_threads = std::thread::hardware_concurrency();
-		omp_set_num_threads(max_threads);
-
-		// Create a direction set
-		vector<pair> directions;
-		std::set_union(
-			init_directs.begin(), init_directs.end(), angle_directions.begin(),
-			angle_directions.end(), std::back_inserter(directions)
-		);
-		directions.shrink_to_fit();
-		
 		// Create a vector to use for edges
 		vector<Edge> links;
 		int num_nodes = 0;

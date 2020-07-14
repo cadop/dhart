@@ -14,7 +14,7 @@
 
 namespace HF {
 
-	TEST(_GraphGenerator, RunGraphGenerator) {
+	TEST(_GraphGenerator, GraphGeneratorParallel) {
 		auto mesh = Geometry::LoadMeshObjects("plane.obj", HF::Geometry::ONLY_FILE, true);
 		RayTracer::EmbreeRayTracer rt(mesh);
 		auto GG = GraphGenerator::GraphGenerator(rt, 0);
@@ -26,6 +26,28 @@ namespace HF {
 			1,
 			1,
 			1,
+			5,
+			1
+		);
+		printf("Graph size %i\n", g.size());
+		g.Compress();
+		ASSERT_GT(g.size(), 0);
+
+	}
+
+	TEST(_GraphGenerator, GraphGeneratorSingle) {
+		auto mesh = Geometry::LoadMeshObjects("plane.obj", HF::Geometry::ONLY_FILE, true);
+		RayTracer::EmbreeRayTracer rt(mesh);
+		auto GG = GraphGenerator::GraphGenerator(rt, 0);
+
+		auto g = GG.BuildNetwork(
+			std::array<float, 3>{0, 0, 0.5},
+			std::array<float, 3>{0.02f, 0.02f, 0.02f},
+			1000,
+			1,
+			1,
+			1,
+			5,
 			1,
 			1
 		);
