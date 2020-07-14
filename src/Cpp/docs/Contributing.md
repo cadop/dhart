@@ -6,7 +6,7 @@ test cases if any source file is changed.
 **Documentation**
 Documentation is vital and must be done throughout the project, not the end.<br>
 This includes examples for the use of each function.<br>
-Styles for documentation can be found in the [Documentation Guide](docs/Documentation.md).
+Styles for documentation can be found in the [Documentation Guide](Documentation.md).
 
 
 *Non-unity users*
