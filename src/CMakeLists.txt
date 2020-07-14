@@ -433,6 +433,7 @@ if(HumanFactors_EnableTests)
 					${C_TEST_DRIVER_DIR}/VisibilityGraph.cpp
 					${C_TEST_DRIVER_DIR}/ViewAnalysis.cpp
 					${C_TEST_DRIVER_DIR}/PathFinding.cpp
+					${C_TEST_DRIVER_DIR}/CostAlgorithms.cpp
 			)
 	elseif(${HumanFactors_Config} STREQUAL "RayTracer")
 		target_sources(

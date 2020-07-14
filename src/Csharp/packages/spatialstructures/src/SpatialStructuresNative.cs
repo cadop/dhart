@@ -51,7 +51,7 @@ namespace HumanFactors.SpatialStructures
         internal static IntPtr C_CreateGraph()
         {
             IntPtr out_ptr = new IntPtr();
-
+            
             var res = CreateGraph(new float[3], 0, ref out_ptr);
 
             if (res != HF_STATUS.OK)
