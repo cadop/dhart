@@ -1,47 +1,49 @@
-\hypertarget{a00116}{}\doxysection{Cpp/pathfinding/src/path\+\_\+finder.h File Reference}
-\label{a00116}\index{Cpp/pathfinding/src/path\_finder.h@{Cpp/pathfinding/src/path\_finder.h}}
+\hypertarget{a00116}{}\doxysection{Cpp/objloader/src/objloader.h File Reference}
+\label{a00116}\index{Cpp/objloader/src/objloader.h@{Cpp/objloader/src/objloader.h}}
 
 
-Contains definition for the \mbox{\hyperlink{a01147}{Boost\+Graph\+Deleter}} structure.  
+Contains definitions for the \mbox{\hyperlink{a00312}{Geometry}} namespace.  
 
 
-{\ttfamily \#include $<$memory$>$}\newline
 {\ttfamily \#include $<$vector$>$}\newline
-\doxysubsection*{Classes}
-\begin{DoxyCompactItemize}
-\item 
-struct \mbox{\hyperlink{a01147}{H\+F\+::\+Pathfinding\+::\+Boost\+Graph\+Deleter}}
-\begin{DoxyCompactList}\small\item\em Deleter for the \mbox{\hyperlink{a01139}{Boost\+Graph}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+{\ttfamily \#include $<$string$>$}\newline
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{a00273}{HF}}
-\begin{DoxyCompactList}\small\item\em Output C\+SR for interop with other languages \end{DoxyCompactList}\item 
- \mbox{\hyperlink{a00276}{H\+F\+::\+Spatial\+Structures}}
-\begin{DoxyCompactList}\small\item\em Contains standard fundamental data structures for representing space used throughout Human\+Factors. \end{DoxyCompactList}\item 
- \mbox{\hyperlink{a00282}{H\+F\+::\+Pathfinding}}
-\begin{DoxyCompactList}\small\item\em Algorithms to find the shortest path between nodes in a \mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+ \mbox{\hyperlink{a00313}{Eigen}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{a00313}{Eigen}} a C++ template library for linear algebra\+: matrices, vectors, numerical solvers, and related algorithms. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00305}{HF}}
+\begin{DoxyCompactList}\small\item\em Perform human scale analysis on 3D environments. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00312}{H\+F\+::\+Geometry}}
+\begin{DoxyCompactList}\small\item\em Manipulate and load geometry from disk. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{a00312_aa9f0bc5275641fe23f6a7d760751bbc5}{H\+F\+::\+Geometry\+::\+G\+R\+O\+U\+P\+\_\+\+M\+E\+T\+H\+OD}} \{ \mbox{\hyperlink{a00312_aa9f0bc5275641fe23f6a7d760751bbc5a1f09cac4eec7512c5db99bd1c050ee1e}{H\+F\+::\+Geometry\+::\+O\+N\+L\+Y\+\_\+\+F\+I\+LE}} = 0, 
+\mbox{\hyperlink{a00312_aa9f0bc5275641fe23f6a7d760751bbc5afeacc3d8dc97902c6bf9332bdcda9912}{H\+F\+::\+Geometry\+::\+B\+Y\+\_\+\+G\+R\+O\+UP}} = 1, 
+\mbox{\hyperlink{a00312_aa9f0bc5275641fe23f6a7d760751bbc5ac47c481b667efc6c2689d46cd456237c}{H\+F\+::\+Geometry\+::\+B\+Y\+\_\+\+M\+A\+T\+E\+R\+I\+AL}} = 2, 
+\mbox{\hyperlink{a00312_aa9f0bc5275641fe23f6a7d760751bbc5a42c850fb543d857db34aea03c8671f2b}{H\+F\+::\+Geometry\+::\+M\+A\+T\+E\+R\+I\+A\+L\+\_\+\+A\+N\+D\+\_\+\+F\+I\+LE}} = 3
+ \}
+\begin{DoxyCompactList}\small\item\em Method of grouping submeshes in O\+BJ files. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{a01139}{Boost\+Graph}}, \mbox{\hyperlink{a01147}{Boost\+Graph\+Deleter}} $>$ \mbox{\hyperlink{a00282_aee466bf2324daa4b600cc59c90e78977}{H\+F\+::\+Pathfinding\+::\+Create\+Boost\+Graph}} (const \mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} \&g)
-\begin{DoxyCompactList}\small\item\em Create a new boost graph from a \mbox{\hyperlink{a00276}{H\+F\+::\+Spatial\+Structures}}\+:Graph. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a01215}{Path}} \mbox{\hyperlink{a00282_a47d06b1c4bd84f4d0a7519ea0e96ff02}{H\+F\+::\+Pathfinding\+::\+Find\+Path}} (\mbox{\hyperlink{a01139}{Boost\+Graph}} $\ast$bg, int start\+\_\+id, int end\+\_\+id)
-\begin{DoxyCompactList}\small\item\em Find a path between points A and B using Dijkstra\textquotesingle{}s Shortest Path algorithm. \end{DoxyCompactList}\item 
-vector$<$ \mbox{\hyperlink{a01215}{Path}} $>$ \mbox{\hyperlink{a00282_a15badb9d0a17849de7b21105605c9c91}{H\+F\+::\+Pathfinding\+::\+Find\+Paths}} (\mbox{\hyperlink{a01139}{Boost\+Graph}} $\ast$bg, const std\+::vector$<$ int $>$ \&start\+\_\+points, const std\+::vector$<$ int $>$ \&end\+\_\+points)
-\begin{DoxyCompactList}\small\item\em Find a path from every id in start\+\_\+ids to the matching end node in end\+\_\+ids. \end{DoxyCompactList}\item 
-std\+::vector$<$ \mbox{\hyperlink{a01215}{H\+F\+::\+Spatial\+Structures\+::\+Path}} $>$ \mbox{\hyperlink{a00282_a336118692fd29dd27f8825ec5bb16b56}{H\+F\+::\+Pathfinding\+::\+Find\+All\+Paths}} (Boost\+Graph $\ast$bg)
-\begin{DoxyCompactList}\small\item\em Find a path from every node to every node (N\+O\+TE\+: Not implemented yet.) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{a00282_a417084c97d0672af2da7739157a9d8c0}{H\+F\+::\+Pathfinding\+::\+Insert\+Paths\+Into\+Array}} (const \mbox{\hyperlink{a01139}{Boost\+Graph}} $\ast$bg, const std\+::vector$<$ int $>$ \&start\+\_\+points, const std\+::vector$<$ int $>$ \&end\+\_\+points, \mbox{\hyperlink{a01215}{H\+F\+::\+Spatial\+Structures\+::\+Path}} $\ast$$\ast$out\+\_\+paths, \mbox{\hyperlink{a01211}{H\+F\+::\+Spatial\+Structures\+::\+Path\+Member}} $\ast$$\ast$out\+\_\+path\+\_\+members, int $\ast$out\+\_\+sizes)
-\begin{DoxyCompactList}\small\item\em A special version of Find\+Paths optimized for the C\+\_\+\+Interface. \end{DoxyCompactList}\end{DoxyCompactItemize}
+vector$<$ Mesh\+Info $>$ \mbox{\hyperlink{a00312_ad32d656c7a8c84beded49e1f14f64176}{H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects}} (std\+::string path, G\+R\+O\+U\+P\+\_\+\+M\+E\+T\+H\+OD gm=O\+N\+L\+Y\+\_\+\+F\+I\+LE, bool change\+\_\+coords=false)
+\begin{DoxyCompactList}\small\item\em Create \mbox{\hyperlink{a01160}{Mesh\+Info}} instances from the O\+BJ at path. \end{DoxyCompactList}\item 
+vector$<$ Mesh\+Info $>$ \mbox{\hyperlink{a00312_a882269ad4e0cc52d7071402b68db2a1c}{H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects}} (std\+::vector$<$ std\+::string $>$ \&path, G\+R\+O\+U\+P\+\_\+\+M\+E\+T\+H\+OD gm=O\+N\+L\+Y\+\_\+\+F\+I\+LE, bool change\+\_\+coords=false)
+\begin{DoxyCompactList}\small\item\em Create \mbox{\hyperlink{a01160}{Mesh\+Info}} instances from the O\+BJ files in path. \end{DoxyCompactList}\item 
+vector$<$ array$<$ float, 3 $>$ $>$ \mbox{\hyperlink{a00312_aec1df746155d224838048d3a43c2fe96}{H\+F\+::\+Geometry\+::\+Load\+Raw\+Vertices}} (std\+::string path)
+\begin{DoxyCompactList}\small\item\em Load a list of vertices directly from an O\+BJ file. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{a00312_adec2459f5c4ee10fd9d2154114d751de}{H\+F\+::\+Geometry\+::\+Get\+Test\+O\+B\+J\+Path}} (std\+::string key)
+\begin{DoxyCompactList}\small\item\em Get the path to the O\+BJ with the given key. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Contains definition for the \mbox{\hyperlink{a01147}{Boost\+Graph\+Deleter}} structure. 
+Contains definitions for the \mbox{\hyperlink{a00312}{Geometry}} namespace. 
 
 \begin{DoxyAuthor}{Author}
 T\+BA 
 \end{DoxyAuthor}
 \begin{DoxyDate}{Date}
-17 Jun 2020 
+16 Jun 2020 
 \end{DoxyDate}

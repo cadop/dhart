@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['intedge_428',['IntEdge',['../a00276.html#a01187',1,'HF::SpatialStructures']]],
-  ['invalidobj_429',['InvalidOBJ',['../a01115.html',1,'HF::Exceptions']]]
+  ['intedge_435',['IntEdge',['../a00308.html#a01208',1,'HF::SpatialStructures']]],
+  ['invalidobj_436',['InvalidOBJ',['../a01148.html',1,'HF::Exceptions']]]
 ];

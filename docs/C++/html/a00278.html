@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Analysis: HF::AnalysisMethods::VisibilityGraph Namespace Reference</title>
+<title>Analysis: Cinterface/spatialstructures_C.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,532 +61,84 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00273.html">HF</a></li><li class="navelem"><a class="el" href="a00274.html">AnalysisMethods</a></li><li class="navelem"><a class="el" href="a00278.html">VisibilityGraph</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_37600e7aa46d6eb08a97d98a1c09ffb1.html">Cinterface</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">HF::AnalysisMethods::VisibilityGraph Namespace Reference</div>  </div>
+<div class="title">spatialstructures_C.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>Evaluate visibility between points in a set of locations.  
-<a href="a00278.html#details">More...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="a00161_source.html">cost_algorithms.h</a>&quot;</code><br />
+<code>#include &lt;<a class="el" href="a00281_source.html">spatialstructures_C.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00101_source.html">HFExceptions.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00173_source.html">graph.h</a>&gt;</code><br />
+<code>#include &lt;edge.h&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00176_source.html">node.h</a>&gt;</code><br />
+<code>#include &lt;robin_hood.h&gt;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
+</div>
+<p><a href="a00278_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:adb5df7862e7c6b7cf2cb6a158491c420"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00278.html#adb5df7862e7c6b7cf2cb6a158491c420">HeightCheck</a> (const <a class="el" href="a01203.html">Node</a> &amp;<a class="el" href="a01203.html">Node</a>, float height, <a class="el" href="a01163.html">EmbreeRayTracer</a> &amp;ert)</td></tr>
-<tr class="memdesc:adb5df7862e7c6b7cf2cb6a158491c420"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if Node can be raised by height without clipping into any geometry.  <a href="a00278.html#adb5df7862e7c6b7cf2cb6a158491c420">More...</a><br /></td></tr>
-<tr class="separator:adb5df7862e7c6b7cf2cb6a158491c420"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d3eda634ef618a61bc49b0639b0ad07"><td class="memItemLeft" align="right" valign="top">vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00278.html#a5d3eda634ef618a61bc49b0639b0ad07">HeightCheckAllNodes</a> (const vector&lt; <a class="el" href="a01203.html">Node</a> &gt; &amp;nodes_to_filter, float height, <a class="el" href="a01163.html">EmbreeRayTracer</a> &amp;ert)</td></tr>
-<tr class="memdesc:a5d3eda634ef618a61bc49b0639b0ad07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the indexes of all nodes that pass the HeightCheck.  <a href="a00278.html#a5d3eda634ef618a61bc49b0639b0ad07">More...</a><br /></td></tr>
-<tr class="separator:a5d3eda634ef618a61bc49b0639b0ad07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a059b752a99bbc272ec501b781ce73cc5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00278.html#a059b752a99bbc272ec501b781ce73cc5">IsOcclusionBetween</a> (const <a class="el" href="a01203.html">Node</a> &amp;node_a, const <a class="el" href="a01203.html">Node</a> &amp;node_b, <a class="el" href="a01163.html">EmbreeRayTracer</a> &amp;ert, float height=1.7f, float pre_calculated_distance=0.0f)</td></tr>
-<tr class="memdesc:a059b752a99bbc272ec501b781ce73cc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform a line of sight check between two nodes.  <a href="a00278.html#a059b752a99bbc272ec501b781ce73cc5">More...</a><br /></td></tr>
-<tr class="separator:a059b752a99bbc272ec501b781ce73cc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5e31d3364f1dbee72065b8f5dc38574"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a01199.html">Graph</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00278.html#aa5e31d3364f1dbee72065b8f5dc38574">AllToAll</a> (<a class="el" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a> &amp;ert, const std::vector&lt; <a class="el" href="a01203.html">HF::SpatialStructures::Node</a> &gt; &amp;input_nodes, float height=1.7f)</td></tr>
-<tr class="memdesc:aa5e31d3364f1dbee72065b8f5dc38574"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a Visibility Graph between every node in a set of nodes in parallel.  <a href="a00278.html#aa5e31d3364f1dbee72065b8f5dc38574">More...</a><br /></td></tr>
-<tr class="separator:aa5e31d3364f1dbee72065b8f5dc38574"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a85f2d1e50a9458e1a4b0bb8a0e0adafa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a01199.html">Graph</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00278.html#a85f2d1e50a9458e1a4b0bb8a0e0adafa">GroupToGroup</a> (<a class="el" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a> &amp;ert, const std::vector&lt; <a class="el" href="a01203.html">HF::SpatialStructures::Node</a> &gt; &amp;from, const std::vector&lt; <a class="el" href="a01203.html">HF::SpatialStructures::Node</a> &gt; &amp;to, float height=1.7f)</td></tr>
-<tr class="memdesc:a85f2d1e50a9458e1a4b0bb8a0e0adafa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a Visibility Graph from a set of nodes to another set of nodes.  <a href="a00278.html#a85f2d1e50a9458e1a4b0bb8a0e0adafa">More...</a><br /></td></tr>
-<tr class="separator:a85f2d1e50a9458e1a4b0bb8a0e0adafa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c0cbb953168bcc6a5727bf8122b1286"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a01199.html">Graph</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00278.html#a2c0cbb953168bcc6a5727bf8122b1286">AllToAllUndirected</a> (<a class="el" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a> &amp;ert, const std::vector&lt; <a class="el" href="a01203.html">HF::SpatialStructures::Node</a> &gt; &amp;nodes, float height, int cores=-1)</td></tr>
-<tr class="memdesc:a2c0cbb953168bcc6a5727bf8122b1286"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a Visibility Graph with every edge stored twice.  <a href="a00278.html#a2c0cbb953168bcc6a5727bf8122b1286">More...</a><br /></td></tr>
-<tr class="separator:a2c0cbb953168bcc6a5727bf8122b1286"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0cc5b82caab046c65a201e4e7be5e9d4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00287.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00301.html#ga0cc5b82caab046c65a201e4e7be5e9d4">GetAllNodesFromGraph</a> (const <a class="el" href="a01220.html">Graph</a> *graph, vector&lt; <a class="el" href="a01224.html">Node</a> &gt; **out_vector_ptr, <a class="el" href="a01224.html">Node</a> **out_data_ptr)</td></tr>
+<tr class="memdesc:ga0cc5b82caab046c65a201e4e7be5e9d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a vector of every node in the given graph pointer.  <a href="a00301.html#ga0cc5b82caab046c65a201e4e7be5e9d4">More...</a><br /></td></tr>
+<tr class="separator:ga0cc5b82caab046c65a201e4e7be5e9d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac17c1fc05e6bf6900bac8689b7619bfb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00287.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00301.html#gac17c1fc05e6bf6900bac8689b7619bfb">GetSizeOfNodeVector</a> (const vector&lt; <a class="el" href="a01224.html">Node</a> &gt; *node_list, int *out_size)</td></tr>
+<tr class="memdesc:gac17c1fc05e6bf6900bac8689b7619bfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the size of a node vector.  <a href="a00301.html#gac17c1fc05e6bf6900bac8689b7619bfb">More...</a><br /></td></tr>
+<tr class="separator:gac17c1fc05e6bf6900bac8689b7619bfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga712f182888672382dd4a1776f850915a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00287.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00301.html#ga712f182888672382dd4a1776f850915a">GetSizeOfEdgeVector</a> (const vector&lt; <a class="el" href="a01204.html">Edge</a> &gt; *edge_list, int *out_size)</td></tr>
+<tr class="separator:ga712f182888672382dd4a1776f850915a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6a53ede89ff44ba3c8bf697c9626fcbe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00287.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00301.html#ga6a53ede89ff44ba3c8bf697c9626fcbe">AggregateCosts</a> (const <a class="el" href="a01220.html">Graph</a> *graph, int agg, bool directed, std::vector&lt; float &gt; **out_vector_ptr, float **out_data_ptr)</td></tr>
+<tr class="memdesc:ga6a53ede89ff44ba3c8bf697c9626fcbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an ordered array of costs for each node aggregatted by the desired method.  <a href="a00301.html#ga6a53ede89ff44ba3c8bf697c9626fcbe">More...</a><br /></td></tr>
+<tr class="separator:ga6a53ede89ff44ba3c8bf697c9626fcbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga262a8f714fbd8d74840efa5832597fff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00287.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00301.html#ga262a8f714fbd8d74840efa5832597fff">CreateGraph</a> (const float *nodes, int num_nodes, <a class="el" href="a01220.html">Graph</a> **out_graph)</td></tr>
+<tr class="memdesc:ga262a8f714fbd8d74840efa5832597fff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new empty graph.  <a href="a00301.html#ga262a8f714fbd8d74840efa5832597fff">More...</a><br /></td></tr>
+<tr class="separator:ga262a8f714fbd8d74840efa5832597fff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac886f77eaff2a7b396a0ea47f78ef9af"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00287.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00301.html#gac886f77eaff2a7b396a0ea47f78ef9af">AddEdgeFromNodes</a> (<a class="el" href="a01220.html">Graph</a> *graph, const float *parent, const float *child, float score)</td></tr>
+<tr class="memdesc:gac886f77eaff2a7b396a0ea47f78ef9af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add an edge between parent and child. If parent or child doesn't already exist in the graph, they will be added and automatically assigned new IDS.  <a href="a00301.html#gac886f77eaff2a7b396a0ea47f78ef9af">More...</a><br /></td></tr>
+<tr class="separator:gac886f77eaff2a7b396a0ea47f78ef9af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0f38cc17daedc23e2fb21115fbb24d07"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00287.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00301.html#ga0f38cc17daedc23e2fb21115fbb24d07">AddEdgeFromNodeIDs</a> (<a class="el" href="a01220.html">Graph</a> *graph, int parent_id, int child_id, float score)</td></tr>
+<tr class="memdesc:ga0f38cc17daedc23e2fb21115fbb24d07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new edge between parent_id and child_id. If these IDs don't yet exist in the graph they will be added.  <a href="a00301.html#ga0f38cc17daedc23e2fb21115fbb24d07">More...</a><br /></td></tr>
+<tr class="separator:ga0f38cc17daedc23e2fb21115fbb24d07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1aebc84e3562370327576641b1ce2dcc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00287.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00301.html#ga1aebc84e3562370327576641b1ce2dcc">GetCSRPointers</a> (<a class="el" href="a01220.html">Graph</a> *graph, int *out_nnz, int *out_num_rows, int *out_num_cols, float **out_data_ptr, int **out_inner_indices_ptr, int **out_outer_indices_ptr)</td></tr>
+<tr class="memdesc:ga1aebc84e3562370327576641b1ce2dcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve all information for a graph's CSR representation. This will compress the graph if it was not yet already compressed.  <a href="a00301.html#ga1aebc84e3562370327576641b1ce2dcc">More...</a><br /></td></tr>
+<tr class="separator:ga1aebc84e3562370327576641b1ce2dcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga31fad78ce410cd523bb337f46b078b4c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00287.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00301.html#ga31fad78ce410cd523bb337f46b078b4c">GetNodeID</a> (<a class="el" href="a01220.html">HF::SpatialStructures::Graph</a> *graph, const float *point, int *out_id)</td></tr>
+<tr class="memdesc:ga31fad78ce410cd523bb337f46b078b4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the id of the given node in the graph. If the node does not exist, <em>out_id</em>  will be set to -1.  <a href="a00301.html#ga31fad78ce410cd523bb337f46b078b4c">More...</a><br /></td></tr>
+<tr class="separator:ga31fad78ce410cd523bb337f46b078b4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab7ecc1be5c746ed3f99ab7494316c65d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00287.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00301.html#gab7ecc1be5c746ed3f99ab7494316c65d">Compress</a> (<a class="el" href="a01220.html">Graph</a> *graph)</td></tr>
+<tr class="memdesc:gab7ecc1be5c746ed3f99ab7494316c65d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compress the given graph into a csr representation.  <a href="a00301.html#gab7ecc1be5c746ed3f99ab7494316c65d">More...</a><br /></td></tr>
+<tr class="separator:gab7ecc1be5c746ed3f99ab7494316c65d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga775863df40e342a8c5a2cddf7512ea44"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00287.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00301.html#ga775863df40e342a8c5a2cddf7512ea44">ClearGraph</a> (<a class="el" href="a01220.html">HF::SpatialStructures::Graph</a> *graph)</td></tr>
+<tr class="memdesc:ga775863df40e342a8c5a2cddf7512ea44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear the nodes/edges for the given graph.  <a href="a00301.html#ga775863df40e342a8c5a2cddf7512ea44">More...</a><br /></td></tr>
+<tr class="separator:ga775863df40e342a8c5a2cddf7512ea44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga87e9b9ecfc5293712d75f3cb8c992c77"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00287.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00301.html#ga87e9b9ecfc5293712d75f3cb8c992c77">DestroyNodes</a> (vector&lt; <a class="el" href="a01224.html">Node</a> &gt; *nodelist_to_destroy)</td></tr>
+<tr class="memdesc:ga87e9b9ecfc5293712d75f3cb8c992c77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete the vector of nodes at the given pointer.  <a href="a00301.html#ga87e9b9ecfc5293712d75f3cb8c992c77">More...</a><br /></td></tr>
+<tr class="separator:ga87e9b9ecfc5293712d75f3cb8c992c77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac46191088d698cc007a2176ab6b5674d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00287.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00301.html#gac46191088d698cc007a2176ab6b5674d">DestroyEdges</a> (vector&lt; <a class="el" href="a01204.html">Edge</a> &gt; *edgelist_to_destroy)</td></tr>
+<tr class="memdesc:gac46191088d698cc007a2176ab6b5674d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete the vector of edges at the given pointer.  <a href="a00301.html#gac46191088d698cc007a2176ab6b5674d">More...</a><br /></td></tr>
+<tr class="separator:gac46191088d698cc007a2176ab6b5674d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga645abacd11e1fa535f953344aaa77727"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00287.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00301.html#ga645abacd11e1fa535f953344aaa77727">DestroyGraph</a> (<a class="el" href="a01220.html">Graph</a> *graph_to_destroy)</td></tr>
+<tr class="memdesc:ga645abacd11e1fa535f953344aaa77727"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete a graph.  <a href="a00301.html#ga645abacd11e1fa535f953344aaa77727">More...</a><br /></td></tr>
+<tr class="separator:ga645abacd11e1fa535f953344aaa77727"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad7060ed66926e8d028cd2e43e0cb73e6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00287.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00301.html#gad7060ed66926e8d028cd2e43e0cb73e6">AddNodeAttributes</a> (<a class="el" href="a01220.html">HF::SpatialStructures::Graph</a> *g, const int *ids, const char *attribute, const char **scores, int num_nodes)</td></tr>
+<tr class="memdesc:gad7060ed66926e8d028cd2e43e0cb73e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates and stores cross slope for all edges in Graph g  <a href="a00301.html#gad7060ed66926e8d028cd2e43e0cb73e6">More...</a><br /></td></tr>
+<tr class="separator:gad7060ed66926e8d028cd2e43e0cb73e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae130805e1d895ed2484f00ee9fc2db89"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00287.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00301.html#gae130805e1d895ed2484f00ee9fc2db89">GetNodeAttributes</a> (const <a class="el" href="a01220.html">HF::SpatialStructures::Graph</a> *g, const char *attribute, char ***out_scores, int *out_score_size)</td></tr>
+<tr class="memdesc:gae130805e1d895ed2484f00ee9fc2db89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attribute should be the name of the attribute to get from the graph. Memory shall be allocated in *out_scores to hold the char arrays. out_scores is a pointer to an array of pointers to char arrays, which will be allocated by the caller. The caller must call DeleteScores to deallocate these node scores. out_score_size should be updated to the length of the score array.  <a href="a00301.html#gae130805e1d895ed2484f00ee9fc2db89">More...</a><br /></td></tr>
+<tr class="separator:gae130805e1d895ed2484f00ee9fc2db89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad80511fa56358072eb0792e74c9792ad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00287.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00301.html#gad80511fa56358072eb0792e74c9792ad">DeleteScoreArray</a> (char ***scores_to_delete, int num_char_arrays)</td></tr>
+<tr class="memdesc:gad80511fa56358072eb0792e74c9792ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free the memory of every char array in scores_to_delete. The length of each contained char array should be determined by using strlen on the given array unless they are not delimited.  <a href="a00301.html#gad80511fa56358072eb0792e74c9792ad">More...</a><br /></td></tr>
+<tr class="separator:gad80511fa56358072eb0792e74c9792ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga718c5819f2cc2ffad1b9e8d0cb61dd9c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00287.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00301.html#ga718c5819f2cc2ffad1b9e8d0cb61dd9c">ClearAttributeType</a> (<a class="el" href="a01220.html">HF::SpatialStructures::Graph</a> *g, const char *s)</td></tr>
+<tr class="memdesc:ga718c5819f2cc2ffad1b9e8d0cb61dd9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes the contents of that attribute type in the graph  <a href="a00301.html#ga718c5819f2cc2ffad1b9e8d0cb61dd9c">More...</a><br /></td></tr>
+<tr class="separator:ga718c5819f2cc2ffad1b9e8d0cb61dd9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Evaluate visibility between points in a set of locations. </p>
-<p>A Visibility Graph is a graph of points of space locations that have a clear line of sight to eachother.</p>
-<p>Edges in Visibility Graph are bidirectional, since if one node can see another node, the inverse is true. Generating a Visibility Graph from a set of nodes consists of performing a line of sight check between each combination of nodes, and creating an edge if the line of sight check passes.</p>
-<dl class="section remark"><dt>Remarks</dt><dd>One can quickly summarize the information in a Visibility Graph by summarizing the values of its edges for each node in the graph.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="a01199.html" title="A Graph of nodes connected by edges that supports both integers and HF::SpatialStructures::Node.">HF::SpatialStructures::Graph</a> for more info on the Graph Datatype that is returned from all functions in the <a class="el" href="a00278.html" title="Evaluate visibility between points in a set of locations.">VisibilityGraph</a> namespace. </dd></dl>
-</div><h2 class="groupheader">Function Documentation</h2>
-<a id="aa5e31d3364f1dbee72065b8f5dc38574"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa5e31d3364f1dbee72065b8f5dc38574">&#9670;&nbsp;</a></span>AllToAll()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a01199.html">HF::SpatialStructures::Graph</a> HF::AnalysisMethods::VisibilityGraph::AllToAll </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a> &amp;&#160;</td>
-          <td class="paramname"><em>ert</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::vector&lt; <a class="el" href="a01203.html">HF::SpatialStructures::Node</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>input_nodes</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>height</em> = <code>1.7f</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Generate a Visibility Graph between every node in a set of nodes in parallel. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ert</td><td>A Raytracer conatining the geometry to use as obstacles for occlusion checks. </td></tr>
-    <tr><td class="paramname">input_nodes</td><td>X,Y,Z locations of nodes for the Visibility Graph. </td></tr>
-    <tr><td class="paramname">height</td><td>Height to offset nodes in the z-direction before generating the <a class="el" href="a00278.html" title="Evaluate visibility between points in a set of locations.">VisibilityGraph</a>.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="a00278.html" title="Evaluate visibility between points in a set of locations.">VisibilityGraph</a> for generated from every node in input_nodes. The cost of each edge in the graph is equal to the distance between both nodes.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>After nodes are offset from the ground, a check is performed to determine if it intersects any geometry. If offsetting the node causes it to intersect any geometry,then the node will not be considered for connections with other nodes and will always have no outgoing or incoming edges.</dd></dl>
-<p>Every node is offset height meters off the ground, then an occlusion ray is cast between every set of nodes. If this occlusion ray does not intersect any geometry then an edge is created between the set of nodes with a cost equal to the distance between both nodes. The Graph generated by this algorithm is directed, however for each pair of nodes the edge is only stored in the node with the lower ID. This reduces the size of the graph in memory by about 50% and reduces the number of checks since every node will only need to check for edges with nodes that have a higher ID than itself.</p>
-<dl class="section user"><dt>Parallelism</dt><dd>Edges are checked on a seperate core for each node. This algorithm will always use every core on a user's machine.</dd></dl>
-<dl class="section user"><dt>Complexity</dt><dd>The time complexity of this algorithm is O(n^2), performing approximately (n^2+n)/2 operations gauranteed for each execution. The space complexity matches the time complexity, but the actual space used can be less depending on the number of edges created.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="a00278.html#a2c0cbb953168bcc6a5727bf8122b1286" title="Generate a Visibility Graph with every edge stored twice.">AllToAllUndirected</a> for a version of this algorithm that checks for edges between every node in nodes regardless of ID. </dd>
-<dd>
-<a class="el" href="a00278.html#a85f2d1e50a9458e1a4b0bb8a0e0adafa" title="Generate a Visibility Graph from a set of nodes to another set of nodes.">GroupToGroup</a> For an algortithm that only calculates a visibility graph for one <a class="el" href="a00011.html#ac812385b35e52a68f2eba8435fb7b1bf">set</a> of nodes to another <a class="el" href="a00011.html#ac812385b35e52a68f2eba8435fb7b1bf">set</a> of nodes.</dd></dl>
-<div class="fragment"><div class="line"><span class="comment">// be sure to #include &quot;objloader.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// path to OBJ file for a flat plane</span></div>
-<div class="line">std::string plane_path = <span class="stringliteral">&quot;plane.obj&quot;</span>;</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Create a vector of MeshInfo from plane_path, using LoadMeshObjects. Note that</span></div>
-<div class="line"><span class="comment">// LoadMeshObjects has two more arguments after plane_path - an enum</span></div>
-<div class="line"><span class="comment">// HF::Geometry::GROUP_METHOD (defaults to GROUP_METHOD::ONLY_FILE) a bool</span></div>
-<div class="line"><span class="comment">// (defaults to true, used to convert OBJ coordinate system to Rhino coordinates)</span></div>
-<div class="line">std::vector&lt;HF::Geometry::MeshInfo&gt; meshInfo = <a class="code" href="a00280.html#a6cd66262c11d9276be46e3fcd9a3a712">HF::Geometry::LoadMeshObjects</a>(plane_path);</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Create an EmbreeRayTracer.</span></div>
-<div class="line"><a class="code" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a> tracer(meshInfo);</div>
-<div class="line"> </div>
-<div class="line">std::vector&lt;HF::SpatialStructures::Node&gt; node_vec;      <span class="comment">// container of nodes</span></div>
-<div class="line"><span class="keyword">const</span> <span class="keywordtype">int</span> reserve_count = 100;                          <span class="comment">// pre-defined reserve size</span></div>
-<div class="line">node_vec.reserve(reserve_count);                        <span class="comment">// reserve reserve_count blocks for node_vec</span></div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Construct reserve_count Node and insert each of them into node_vec</span></div>
-<div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">float</span> i = -5.0; i &lt; 5.0; i++) {</div>
-<div class="line">    <span class="comment">// runs 10 times</span></div>
-<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">float</span> j = -5; j &lt; 5.0; j++) {</div>
-<div class="line">        <span class="comment">// runs 10 times</span></div>
-<div class="line">        node_vec.emplace_back(Node(i, j, 0.0f));    <span class="comment">// all Node ID default to -1</span></div>
-<div class="line">    }</div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// AllToAll constructs and returns a Graph consisting of Node (from node_vec)</span></div>
-<div class="line"><span class="comment">// that do not occlude each other</span></div>
-<div class="line"><span class="keywordtype">float</span> desired_height = 2.0f;        <span class="comment">// Height of graph</span></div>
-<div class="line"><a class="code" href="a01199.html">HF::SpatialStructures::Graph</a> graph = <a class="code" href="a00278.html#aa5e31d3364f1dbee72065b8f5dc38574">AllToAll</a>(tracer, node_vec, desired_height);</div>
-</div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="a00029_source.html#l00128">128</a> of file <a class="el" href="a00029_source.html">visibility_graph.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a01499_source.html#l00040">HF::SpatialStructures::Node::distanceTo()</a>, <a class="el" href="a00029_source.html#l00069">HeightCheckAllNodes()</a>, and <a class="el" href="a00029_source.html#l00103">IsOcclusionBetween()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="a00257_source.html#l00016">CreateVisibilityGraphAllToAll()</a>.</p>
-
-</div>
-</div>
-<a id="a2c0cbb953168bcc6a5727bf8122b1286"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2c0cbb953168bcc6a5727bf8122b1286">&#9670;&nbsp;</a></span>AllToAllUndirected()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a01199.html">HF::SpatialStructures::Graph</a> HF::AnalysisMethods::VisibilityGraph::AllToAllUndirected </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a> &amp;&#160;</td>
-          <td class="paramname"><em>ert</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::vector&lt; <a class="el" href="a01203.html">HF::SpatialStructures::Node</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>nodes</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>height</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>cores</em> = <code>-1</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Generate a Visibility Graph with every edge stored twice. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ert</td><td>A Raytracer conatining the geometry to use as obstacles for occlusion checks. </td></tr>
-    <tr><td class="paramname">from</td><td>X,Y,Z locations of nodes to create the visibility graph from. </td></tr>
-    <tr><td class="paramname">Height</td><td>to offset nodes in the z-direction before generating the <a class="el" href="a00278.html" title="Evaluate visibility between points in a set of locations.">VisibilityGraph</a>. </td></tr>
-    <tr><td class="paramname">cores</td><td>number of cores to use for parallel processing. -1 will use all available cores.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="a00278.html" title="Evaluate visibility between points in a set of locations.">VisibilityGraph</a> generated from every node in input_nodes. The cost of each edge in the graph is equal to the distance between both nodes.</dd></dl>
-<p>Similar to <a class="el" href="a00278.html#aa5e31d3364f1dbee72065b8f5dc38574" title="Generate a Visibility Graph between every node in a set of nodes in parallel.">VisibilityGraph::AllToAll</a>, however every edge is stored in both nodes that it connects. For example, An edge betwee node 1 and node 2 would only be stored in node 1 in AllToAll, however here the edge would exist in both node1, and node2, in this algorithm.</p>
-<dl class="section remark"><dt>Remarks</dt><dd>In most cases it's preferred to use <a class="el" href="a00278.html#aa5e31d3364f1dbee72065b8f5dc38574" title="Generate a Visibility Graph between every node in a set of nodes in parallel.">VisibilityGraph::AllToAll</a> since it saves a lot of time and space, however it may be advantageous to have edges stored in both nodes for certain applications.</dd></dl>
-<dl class="section user"><dt>Parallelism</dt><dd>Edges are checked on a seperate core for each node. This algorithm will use every core on a user's machine if cores is set to -1. Otherwise it will use the number of cores specified in cores.</dd></dl>
-<dl class="section user"><dt>complexity</dt><dd>O(n^2) in space and time. <br  />
-</dd></dl>
-<div class="fragment"><div class="line"><span class="comment">// be sure to #include &quot;objloader.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// path to OBJ file for a flat plane</span></div>
-<div class="line">std::string plane_path = <span class="stringliteral">&quot;plane.obj&quot;</span>;</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Create a vector of MeshInfo from plane_path, using LoadMeshObjects. Note that</span></div>
-<div class="line"><span class="comment">// LoadMeshObjects has two more arguments after plane_path - an enum</span></div>
-<div class="line"><span class="comment">// HF::Geometry::GROUP_METHOD (defaults to GROUP_METHOD::ONLY_FILE) a bool</span></div>
-<div class="line"><span class="comment">// (defaults to true, used to convert OBJ coordinate system to Rhino coordinates)</span></div>
-<div class="line">std::vector&lt;HF::Geometry::MeshInfo&gt; meshInfo = <a class="code" href="a00280.html#a6cd66262c11d9276be46e3fcd9a3a712">HF::Geometry::LoadMeshObjects</a>(plane_path);</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Create an EmbreeRayTracer.</span></div>
-<div class="line"><a class="code" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a> tracer(meshInfo);</div>
-<div class="line"> </div>
-<div class="line">std::vector&lt;HF::SpatialStructures::Node&gt; node_vec;      <span class="comment">// container of nodes</span></div>
-<div class="line"><span class="keyword">const</span> <span class="keywordtype">int</span> reserve_count = 100;                          <span class="comment">// pre-defined reserve size</span></div>
-<div class="line">node_vec.reserve(reserve_count);                        <span class="comment">// reserve reserve_count blocks for node_vec</span></div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Construct reserve_count Node and insert each of them into node_vec</span></div>
-<div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">float</span> i = -5.0; i &lt; 5.0; i++) {</div>
-<div class="line">    <span class="comment">// runs 10 times</span></div>
-<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">float</span> j = -5; j &lt; 5.0; j++) {</div>
-<div class="line">        <span class="comment">// runs 10 times</span></div>
-<div class="line">        node_vec.emplace_back(<a class="code" href="a01203.html">HF::SpatialStructures::Node</a>(i, j, 0.0f)); <span class="comment">// all Node ID default to -1</span></div>
-<div class="line">    }</div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// AllToAllUndirected constructs and returns a Graph consisting of Node (from</span></div>
-<div class="line"><span class="comment">// node_vec) that do not occlude each other</span></div>
-<div class="line"><span class="keywordtype">float</span> desired_height = 2.0f;        <span class="comment">// Height of graph</span></div>
-<div class="line"><span class="keywordtype">int</span> core_count = 4;                 <span class="comment">// For omp_set_num_threads(int num_threads), CPU core count</span></div>
-<div class="line"><a class="code" href="a01199.html">HF::SpatialStructures::Graph</a> graph =</div>
-<div class="line">    <a class="code" href="a00278.html#a2c0cbb953168bcc6a5727bf8122b1286">HF::AnalysisMethods::VisibilityGraph::AllToAllUndirected</a>(tracer, node_vec, desired_height, core_count);</div>
-</div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="a00029_source.html#l00252">252</a> of file <a class="el" href="a00029_source.html">visibility_graph.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a01499_source.html#l00040">HF::SpatialStructures::Node::distanceTo()</a>, <a class="el" href="a00029_source.html#l00069">HeightCheckAllNodes()</a>, and <a class="el" href="a00029_source.html#l00103">IsOcclusionBetween()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="a00257_source.html#l00040">CreateVisibilityGraphAllToAllUndirected()</a>.</p>
-
-</div>
-</div>
-<a id="a85f2d1e50a9458e1a4b0bb8a0e0adafa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a85f2d1e50a9458e1a4b0bb8a0e0adafa">&#9670;&nbsp;</a></span>GroupToGroup()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a01199.html">HF::SpatialStructures::Graph</a> HF::AnalysisMethods::VisibilityGraph::GroupToGroup </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a> &amp;&#160;</td>
-          <td class="paramname"><em>ert</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::vector&lt; <a class="el" href="a01203.html">HF::SpatialStructures::Node</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>from</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::vector&lt; <a class="el" href="a01203.html">HF::SpatialStructures::Node</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>to</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>height</em> = <code>1.7f</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Generate a Visibility Graph from a set of nodes to another set of nodes. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ert</td><td>A Raytracer conatining the geometry to use as obstacles for occlusion checks. </td></tr>
-    <tr><td class="paramname">from</td><td>X,Y,Z locations of nodes to cast rays from. </td></tr>
-    <tr><td class="paramname">to</td><td>X,Y,Z locations of nodes to cast rays to. </td></tr>
-    <tr><td class="paramname">Height</td><td>to offset nodes in the z-direction before generating the <a class="el" href="a00278.html" title="Evaluate visibility between points in a set of locations.">VisibilityGraph</a>.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="a00278.html" title="Evaluate visibility between points in a set of locations.">VisibilityGraph</a> generated from every node in from to every node in to. The cost of each edge in the graph is equal to the distance between both nodes.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>The ID of nodes in the new graph wil correspond to the node's location in the from or to arrays. First every node in from will in from be placed in order, then every node in to will be placed in order. This means that the ID of every node in from will be equal to its index in from, and the ID of every node in to will be equal to the number of nodes in from plus its index in to.</dd></dl>
-<p>The algorithm used here is similar to that of <a class="el" href="a00278.html#aa5e31d3364f1dbee72065b8f5dc38574" title="Generate a Visibility Graph between every node in a set of nodes in parallel.">VisibilityGraph::AllToAll</a>, however edges are cast from every node in from to every node in to. All nodes in to will have no outgoing edges.</p>
-<dl class="section remark"><dt>Remarks</dt><dd>This can be useful for generating the visibility graph for a subset of nodes, such as the visibility from a building to the outside, without needing to calculate the visibility from every node to every other node.</dd></dl>
-<dl class="section user"><dt>Parallelism</dt><dd>Edges are checked on a seperate core for each node. This algorithm will always use every core on a user's machine.</dd></dl>
-<dl class="section user"><dt>Complexity</dt><dd>In time: O(ft) where f is the number of nodes in from, and t is the number of nodes in to. In space, O(ft) as well.</dd></dl>
-<div class="fragment"><div class="line"><span class="comment">// be sure to #include &quot;objloader.h&quot;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// path to OBJ file for a flat plane</span></div>
-<div class="line">std::string plane_path = <span class="stringliteral">&quot;plane.obj&quot;</span>;</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Create a vector of MeshInfo from plane_path, using LoadMeshObjects. Note that</span></div>
-<div class="line"><span class="comment">// LoadMeshObjects has two more arguments after plane_path - an enum</span></div>
-<div class="line"><span class="comment">// HF::Geometry::GROUP_METHOD (defaults to GROUP_METHOD::ONLY_FILE) a bool</span></div>
-<div class="line"><span class="comment">// (defaults to true, used to convert OBJ coordinate system to Rhino coordinates)</span></div>
-<div class="line">std::vector&lt;HF::Geometry::MeshInfo&gt; meshInfo = <a class="code" href="a00280.html#a6cd66262c11d9276be46e3fcd9a3a712">HF::Geometry::LoadMeshObjects</a>(plane_path);</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Create an EmbreeRayTracer.</span></div>
-<div class="line"><a class="code" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a> tracer(meshInfo);</div>
-<div class="line"> </div>
-<div class="line">std::vector&lt;HF::SpatialStructures::Node&gt; node_vec_0;        <span class="comment">// First container of Node</span></div>
-<div class="line">std::vector&lt;HF::SpatialStructures::Node&gt; node_vec_1;        <span class="comment">// Second container of Node</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">const</span> <span class="keywordtype">int</span> reserve_count = 100;      <span class="comment">// Pre-defined reserve size</span></div>
-<div class="line">node_vec_0.reserve(reserve_count);  <span class="comment">// Reserve reserve_count blocks for both vectors</span></div>
-<div class="line">node_vec_1.reserve(reserve_count);</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// 0) Construct reserve_count Node and insert each of them into node_vec_0</span></div>
-<div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">float</span> i = -5.0; i &lt; 5.0; i++) {</div>
-<div class="line">    <span class="comment">// runs 10 times</span></div>
-<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">float</span> j = -5.0; j &lt; 5.0; j++) {</div>
-<div class="line">        <span class="comment">// runs 10 times</span></div>
-<div class="line">        node_vec_0.emplace_back(<a class="code" href="a01203.html">HF::SpatialStructures::Node</a>(i, j, 0.0f));   <span class="comment">// all Node ID default to -1</span></div>
-<div class="line">    }</div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// 1) Construct reserve_count Node and insert each of them into node_vec_1</span></div>
-<div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">float</span> i = 0.0; i &lt; 10.0; i++) {</div>
-<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">float</span> j = 0.0; j &lt; 10.0; j++) {</div>
-<div class="line">        node_vec_1.emplace_back(<a class="code" href="a01203.html">HF::SpatialStructures::Node</a>(i, j, 0.0f));   <span class="comment">// all Node ID default to -1</span></div>
-<div class="line">    }</div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// GroupToGroup constructs and returns a Graph consisting of Node (between</span></div>
-<div class="line"><span class="comment">// node_vec_0 and node_vec_1) such that the nodes do not occlude each other</span></div>
-<div class="line"><span class="keywordtype">float</span> desired_height = 2.0f;        <span class="comment">// Height of graph</span></div>
-<div class="line"><a class="code" href="a01199.html">HF::SpatialStructures::Graph</a> graph = <a class="code" href="a00278.html#a85f2d1e50a9458e1a4b0bb8a0e0adafa">HF::AnalysisMethods::VisibilityGraph::GroupToGroup</a>(tracer, node_vec_0, node_vec_1, desired_height);</div>
-</div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="a00029_source.html#l00189">189</a> of file <a class="el" href="a00029_source.html">visibility_graph.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a01499_source.html#l00040">HF::SpatialStructures::Node::distanceTo()</a>, <a class="el" href="a00029_source.html#l00069">HeightCheckAllNodes()</a>, and <a class="el" href="a00029_source.html#l00103">IsOcclusionBetween()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="a00257_source.html#l00064">CreateVisibilityGraphGroupToGroup()</a>.</p>
-
-</div>
-</div>
-<a id="adb5df7862e7c6b7cf2cb6a158491c420"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adb5df7862e7c6b7cf2cb6a158491c420">&#9670;&nbsp;</a></span>HeightCheck()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool HF::AnalysisMethods::VisibilityGraph::HeightCheck </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="a01203.html">Node</a> &amp;&#160;</td>
-          <td class="paramname"><em>Node</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>height</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a01163.html">EmbreeRayTracer</a> &amp;&#160;</td>
-          <td class="paramname"><em>ert</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Check if Node can be raised by height without clipping into any geometry. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">Node</td><td>Node to perform height check on. </td></tr>
-    <tr><td class="paramname">height</td><td>Distance to check above the node in meters. Default = 1.7m. </td></tr>
-    <tr><td class="paramname">ert</td><td>Raytracer containing geometry to intersect with.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if Node can be raised by height without intersecting with any geometry. False otherwise.</dd></dl>
-<p>Cast an occlusion ray straight up with a distance of height to determine if it will intersect with any geometry.</p>
-<dl class="section remark"><dt>Remarks</dt><dd>This is useful to prevent nodes from going through ceilings or other geometry when comparing the scores of all nodes in a model. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="a00029_source.html#l00047">47</a> of file <a class="el" href="a00029_source.html">visibility_graph.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00122_source.html#l00861">HF::RayTracer::EmbreeRayTracer::FireAnyOcclusionRay()</a>, and <a class="el" href="a00140_source.html#l00029">HF::SpatialStructures::ROUNDING_PRECISION</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="a00029_source.html#l00069">HeightCheckAllNodes()</a>.</p>
-
-</div>
-</div>
-<a id="a5d3eda634ef618a61bc49b0639b0ad07"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d3eda634ef618a61bc49b0639b0ad07">&#9670;&nbsp;</a></span>HeightCheckAllNodes()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">vector&lt;int&gt; HF::AnalysisMethods::VisibilityGraph::HeightCheckAllNodes </td>
-          <td>(</td>
-          <td class="paramtype">const vector&lt; <a class="el" href="a01203.html">Node</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>nodes_to_filter</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>height</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a01163.html">EmbreeRayTracer</a> &amp;&#160;</td>
-          <td class="paramname"><em>ert</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Obtain the indexes of all nodes that pass the HeightCheck. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">nodes_to_filter</td><td>Nodes to perform the height check on </td></tr>
-    <tr><td class="paramname">height</td><td>Height to check above the nodes </td></tr>
-    <tr><td class="paramname">ert</td><td>Raytracer containing the geometry to use as obstacles</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The indexes in nodes_to_filter of all nodes that pass the height check.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="a00278.html#adb5df7862e7c6b7cf2cb6a158491c420" title="Check if Node can be raised by height without clipping into any geometry.">HeightCheck</a> </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="a00029_source.html#l00069">69</a> of file <a class="el" href="a00029_source.html">visibility_graph.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00029_source.html#l00047">HeightCheck()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="a00029_source.html#l00128">AllToAll()</a>, <a class="el" href="a00029_source.html#l00252">AllToAllUndirected()</a>, and <a class="el" href="a00029_source.html#l00189">GroupToGroup()</a>.</p>
-
-</div>
-</div>
-<a id="a059b752a99bbc272ec501b781ce73cc5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a059b752a99bbc272ec501b781ce73cc5">&#9670;&nbsp;</a></span>IsOcclusionBetween()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool HF::AnalysisMethods::VisibilityGraph::IsOcclusionBetween </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="a01203.html">Node</a> &amp;&#160;</td>
-          <td class="paramname"><em>node_a</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="a01203.html">Node</a> &amp;&#160;</td>
-          <td class="paramname"><em>node_b</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a01163.html">EmbreeRayTracer</a> &amp;&#160;</td>
-          <td class="paramname"><em>ert</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>height</em> = <code>1.7f</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>pre_calculated_distance</em> = <code>0.0f</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Perform a line of sight check between two nodes. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">node_a</td><td>Node to check occlusion from. </td></tr>
-    <tr><td class="paramname">node_b</td><td>Node to check occlusion to. </td></tr>
-    <tr><td class="paramname">ert</td><td>Raytracer containing the geometry to use as obstacles. </td></tr>
-    <tr><td class="paramname">height</td><td>Distance to offset a node in the z-direction before performing the check. </td></tr>
-    <tr><td class="paramname">pre_calculated_distance</td><td>Distance from node_a to node_b. If set to zero then this will be calculated automatically.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>True if there is an obstacle blocking line of sight between node_a and node_b when raised to height.</dd></dl>
-<p>Calculate the distance between node_a and node_b if required, then calculate the direction between them. Cast an occlusion ray in the direction between node_a and node_b with a maximum distance equal to the distance between them. If the ray intersects anything then the nodes don't have a line of sight. </p>
-
-<p class="definition">Definition at line <a class="el" href="a00029_source.html#l00103">103</a> of file <a class="el" href="a00029_source.html">visibility_graph.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a01499_source.html#l00130">HF::SpatialStructures::Node::directionTo()</a>, <a class="el" href="a01499_source.html#l00040">HF::SpatialStructures::Node::distanceTo()</a>, and <a class="el" href="a00122_source.html#l00861">HF::RayTracer::EmbreeRayTracer::FireAnyOcclusionRay()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="a00029_source.html#l00128">AllToAll()</a>, <a class="el" href="a00029_source.html#l00252">AllToAllUndirected()</a>, and <a class="el" href="a00029_source.html#l00189">GroupToGroup()</a>.</p>
-
-</div>
-</div>
 </div><!-- contents -->
-<div class="ttc" id="aa00278_html_a2c0cbb953168bcc6a5727bf8122b1286"><div class="ttname"><a href="a00278.html#a2c0cbb953168bcc6a5727bf8122b1286">HF::AnalysisMethods::VisibilityGraph::AllToAllUndirected</a></div><div class="ttdeci">Graph AllToAllUndirected(EmbreeRayTracer &amp;ert, const vector&lt; Node &gt; &amp;nodes, float height, int cores)</div><div class="ttdoc">Generate a Visibility Graph with every edge stored twice.</div><div class="ttdef"><b>Definition:</b> <a href="a00029_source.html#l00252">visibility_graph.cpp:252</a></div></div>
-<div class="ttc" id="aa00278_html_a85f2d1e50a9458e1a4b0bb8a0e0adafa"><div class="ttname"><a href="a00278.html#a85f2d1e50a9458e1a4b0bb8a0e0adafa">HF::AnalysisMethods::VisibilityGraph::GroupToGroup</a></div><div class="ttdeci">Graph GroupToGroup(EmbreeRayTracer &amp;ert, const vector&lt; Node &gt; &amp;from, const vector&lt; Node &gt; &amp;to, float height)</div><div class="ttdoc">Generate a Visibility Graph from a set of nodes to another set of nodes.</div><div class="ttdef"><b>Definition:</b> <a href="a00029_source.html#l00189">visibility_graph.cpp:189</a></div></div>
-<div class="ttc" id="aa01203_html"><div class="ttname"><a href="a01203.html">HF::SpatialStructures::Node</a></div><div class="ttdoc">A point in space with an ID.</div><div class="ttdef"><b>Definition:</b> <a href="a00155_source.html#l00038">node.h:38</a></div></div>
-<div class="ttc" id="aa01199_html"><div class="ttname"><a href="a01199.html">HF::SpatialStructures::Graph</a></div><div class="ttdoc">A Graph of nodes connected by edges that supports both integers and HF::SpatialStructures::Node.</div><div class="ttdef"><b>Definition:</b> <a href="a00152_source.html#l00096">graph.h:96</a></div></div>
-<div class="ttc" id="aa00280_html_a6cd66262c11d9276be46e3fcd9a3a712"><div class="ttname"><a href="a00280.html#a6cd66262c11d9276be46e3fcd9a3a712">HF::Geometry::LoadMeshObjects</a></div><div class="ttdeci">vector&lt; MeshInfo &gt; LoadMeshObjects(std::string path, GROUP_METHOD gm, bool change_coords)</div><div class="ttdoc">Create MeshInfo instances from the OBJ at path.</div><div class="ttdef"><b>Definition:</b> <a href="a00098_source.html#l00076">objloader.cpp:76</a></div></div>
-<div class="ttc" id="aa00278_html_aa5e31d3364f1dbee72065b8f5dc38574"><div class="ttname"><a href="a00278.html#aa5e31d3364f1dbee72065b8f5dc38574">HF::AnalysisMethods::VisibilityGraph::AllToAll</a></div><div class="ttdeci">Graph AllToAll(EmbreeRayTracer &amp;ert, const vector&lt; Node &gt; &amp;nodes, float height)</div><div class="ttdoc">Generate a Visibility Graph between every node in a set of nodes in parallel.</div><div class="ttdef"><b>Definition:</b> <a href="a00029_source.html#l00128">visibility_graph.cpp:128</a></div></div>
-<div class="ttc" id="aa01163_html"><div class="ttname"><a href="a01163.html">HF::RayTracer::EmbreeRayTracer</a></div><div class="ttdoc">A wrapper for Intel's Embree Library.</div><div class="ttdef"><b>Definition:</b> <a href="a00122_source.html#l00073">embree_raytracer.h:73</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

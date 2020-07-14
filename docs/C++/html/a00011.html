@@ -75,24 +75,26 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Contains implementation for the <a class="el" href="a01103.html">GraphGeneratorPrivate</a> class.  
+<p>Contains implementation for the <a class="el" href="a01136.html">GraphGeneratorPrivate</a> class.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;<a class="el" href="a00014_source.html">graph_generator_private.h</a>&gt;</code><br />
 <code>#include &lt;iostream&gt;</code><br />
 <code>#include &lt;omp.h&gt;</code><br />
 <code>#include &lt;thread&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00140_source.html">Constants.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00155_source.html">Constants.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="a00008_source.html">graph_generator.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="a00020_source.html">unique_queue.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00137_source.html">embree_raytracer.h</a>&gt;</code><br />
 </div>
 <p><a href="a00011_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a00273"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00273.html">HF</a></td></tr>
-<tr class="memdesc:a00273"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output CSR for interop with other languages <br /></td></tr>
+<tr class="memitem:a00305"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00305.html">HF</a></td></tr>
+<tr class="memdesc:a00305"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform human scale analysis on 3D environments. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00274"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00274.html">HF::AnalysisMethods</a></td></tr>
+<tr class="memitem:a00306"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00306.html">HF::GraphGenerator</a></td></tr>
+<tr class="memdesc:a00306"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a graph of accessible space from a given start point. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
@@ -104,19 +106,22 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a8d42b80118c1260844cfa033d20a98f0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00274.html#a8d42b80118c1260844cfa033d20a98f0">HF::AnalysisMethods::fact</a> (int n)</td></tr>
-<tr class="separator:a8d42b80118c1260844cfa033d20a98f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a119aa13054604cc379223a2f424a3a65"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00011.html#ac812385b35e52a68f2eba8435fb7b1bf">std::set</a>&lt; <a class="el" href="a00011.html#a3394fa820b983014dcac29faca0e4f19">std::pair</a>&lt; int, int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00274.html#a119aa13054604cc379223a2f424a3a65">HF::AnalysisMethods::permutations</a> (int limit)</td></tr>
-<tr class="memdesc:a119aa13054604cc379223a2f424a3a65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a set of every permution for 0-limit  <a href="a00274.html#a119aa13054604cc379223a2f424a3a65">More...</a><br /></td></tr>
-<tr class="separator:a119aa13054604cc379223a2f424a3a65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe5670b4cb780fd3ccf2a0d72a2e3c2e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00011.html#ac812385b35e52a68f2eba8435fb7b1bf">std::set</a>&lt; <a class="el" href="a00011.html#a3394fa820b983014dcac29faca0e4f19">std::pair</a>&lt; int, int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00306.html#afe5670b4cb780fd3ccf2a0d72a2e3c2e">HF::GraphGenerator::permutations</a> (int limit)</td></tr>
+<tr class="memdesc:afe5670b4cb780fd3ccf2a0d72a2e3c2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a set of every permutation for all numbers between 0 and limit.  <a href="a00306.html#afe5670b4cb780fd3ccf2a0d72a2e3c2e">More...</a><br /></td></tr>
+<tr class="separator:afe5670b4cb780fd3ccf2a0d72a2e3c2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4145f4284f549641c55103e2243f3b4c"><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="a00011.html#a3394fa820b983014dcac29faca0e4f19">pair</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00306.html#a4145f4284f549641c55103e2243f3b4c">HF::GraphGenerator::CreateDirecs</a> (int max_step_connections)</td></tr>
+<tr class="memdesc:a4145f4284f549641c55103e2243f3b4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create the set of directions to offset nodes in.  <a href="a00306.html#a4145f4284f549641c55103e2243f3b4c">More...</a><br /></td></tr>
+<tr class="separator:a4145f4284f549641c55103e2243f3b4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a1030acde4b168f6ccd5799b3c5bd6b6a"><td class="memItemLeft" align="right" valign="top">constexpr v3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00274.html#a1030acde4b168f6ccd5799b3c5bd6b6a">HF::AnalysisMethods::down</a> { 0, 0, -1 }</td></tr>
-<tr class="separator:a1030acde4b168f6ccd5799b3c5bd6b6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcccdbd2d04ed6fc4e193e7110397992"><td class="memItemLeft" align="right" valign="top">constexpr v3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00306.html#afcccdbd2d04ed6fc4e193e7110397992">HF::GraphGenerator::down</a> { 0, 0, -1 }</td></tr>
+<tr class="separator:afcccdbd2d04ed6fc4e193e7110397992"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad69a24044327f56034e251c25499a910"><td class="memItemLeft" align="right" valign="top">static const vector&lt; <a class="el" href="a00011.html#a3394fa820b983014dcac29faca0e4f19">pair</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00306.html#ad69a24044327f56034e251c25499a910">HF::GraphGenerator::init_directs</a></td></tr>
+<tr class="separator:ad69a24044327f56034e251c25499a910"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Contains implementation for the <a class="el" href="a01103.html">GraphGeneratorPrivate</a> class. </p>
+<div class="textblock"><p>Contains implementation for the <a class="el" href="a01136.html">GraphGeneratorPrivate</a> class. </p>
 <dl class="section author"><dt>Author</dt><dd>TBA </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>26 Jun 2020 </dd></dl>
 
@@ -134,7 +139,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00011_source.html#l00021">21</a> of file <a class="el" href="a00011_source.html">graph_generator_private.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00011_source.html#l00023">23</a> of file <a class="el" href="a00011_source.html">graph_generator_private.cpp</a>.</p>
 
 </div>
 </div>
@@ -150,7 +155,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00011_source.html#l00022">22</a> of file <a class="el" href="a00011_source.html">graph_generator_private.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00011_source.html#l00024">24</a> of file <a class="el" href="a00011_source.html">graph_generator_private.cpp</a>.</p>
 
 </div>
 </div>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Analysis: Cpp/objloader/src/objloader.cpp File Reference</title>
+<title>Analysis: Cpp/exceptions/src/HFExceptions.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,89 +61,27 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_882abde7eca0231e2bae1ceefe5e858a.html">Cpp</a></li><li class="navelem"><a class="el" href="dir_46f038d98c29b85ae873c4d3a30697d6.html">objloader</a></li><li class="navelem"><a class="el" href="dir_e8729f7e450b4a44d154406cba6833f7.html">src</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_882abde7eca0231e2bae1ceefe5e858a.html">Cpp</a></li><li class="navelem"><a class="el" href="dir_7900dd791a76306ff53b19fea9f7cb39.html">exceptions</a></li><li class="navelem"><a class="el" href="dir_33a10fd6e9f8fd1c9166c9bfe7f246d3.html">src</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">objloader.cpp File Reference</div>  </div>
+<div class="title">HFExceptions.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Contains implementation for the <a class="el" href="a00280.html">Geometry</a> namespace.  
+<p>Contains implementation for the <a class="el" href="a00311.html">Exceptions</a> namespace.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;<a class="el" href="a00101_source.html">objloader.h</a>&gt;</code><br />
-<code>#include &lt;Dense&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00095_source.html">meshinfo.h</a>&gt;</code><br />
-<code>#include &lt;tiny_obj_loader.h&gt;</code><br />
-<code>#include &lt;robin_hood.h&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00086_source.html">HFExceptions.h</a>&gt;</code><br />
-<code>#include &lt;iostream&gt;</code><br />
-<code>#include &lt;vector&gt;</code><br />
-<code>#include &lt;filesystem&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="a00101_source.html">HFExceptions.h</a>&gt;</code><br />
 </div>
 <p><a href="a00098_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:a00273"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00273.html">HF</a></td></tr>
-<tr class="memdesc:a00273"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output CSR for interop with other languages <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00280"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00280.html">HF::Geometry</a></td></tr>
-<tr class="memdesc:a00280"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manipulate and load geometry from disk. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:af14fac7fbc250522a78849d58d5b0811"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00098.html#af14fac7fbc250522a78849d58d5b0811">TINYOBJLOADER_IMPLEMENTATION</a></td></tr>
-<tr class="memdesc:af14fac7fbc250522a78849d58d5b0811"><td class="mdescLeft">&#160;</td><td class="mdescRight">This MUST be defined before importing tiny_obj_loader.h.  <a href="a00098.html#af14fac7fbc250522a78849d58d5b0811">More...</a><br /></td></tr>
-<tr class="separator:af14fac7fbc250522a78849d58d5b0811"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a0248bddcdfb74e0e4105becff50e03ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00280.html#a0248bddcdfb74e0e4105becff50e03ed">HF::Geometry::IndexShape</a> (const tinyobj::shape_t &amp;shape, const vector&lt; tinyobj::real_t &gt; &amp;verts, vector&lt; int &gt; out_indices, vector&lt; float &gt; out_vertexes)</td></tr>
-<tr class="memdesc:a0248bddcdfb74e0e4105becff50e03ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an indexed array of vertices from a tinyobj::shape and list of verts  <a href="a00280.html#a0248bddcdfb74e0e4105becff50e03ed">More...</a><br /></td></tr>
-<tr class="separator:a0248bddcdfb74e0e4105becff50e03ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6cd66262c11d9276be46e3fcd9a3a712"><td class="memItemLeft" align="right" valign="top">vector&lt; MeshInfo &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00280.html#a6cd66262c11d9276be46e3fcd9a3a712">HF::Geometry::LoadMeshObjects</a> (std::string path, GROUP_METHOD gm=ONLY_FILE, bool change_coords=true)</td></tr>
-<tr class="memdesc:a6cd66262c11d9276be46e3fcd9a3a712"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create <a class="el" href="a01127.html" title="A collection of vertices and indices representing geometry.">MeshInfo</a> instances from the OBJ at path.  <a href="a00280.html#a6cd66262c11d9276be46e3fcd9a3a712">More...</a><br /></td></tr>
-<tr class="separator:a6cd66262c11d9276be46e3fcd9a3a712"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec1df746155d224838048d3a43c2fe96"><td class="memItemLeft" align="right" valign="top">vector&lt; array&lt; float, 3 &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00280.html#aec1df746155d224838048d3a43c2fe96">HF::Geometry::LoadRawVertices</a> (std::string path)</td></tr>
-<tr class="memdesc:aec1df746155d224838048d3a43c2fe96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a list of vertices directly from an OBJ file.  <a href="a00280.html#aec1df746155d224838048d3a43c2fe96">More...</a><br /></td></tr>
-<tr class="separator:aec1df746155d224838048d3a43c2fe96"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af77d26cedf5f90073cce07aa8c528094"><td class="memItemLeft" align="right" valign="top">vector&lt; MeshInfo &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00280.html#af77d26cedf5f90073cce07aa8c528094">HF::Geometry::LoadMeshObjects</a> (std::vector&lt; std::string &gt; &amp;path, GROUP_METHOD gm=ONLY_FILE, bool change_coords=true)</td></tr>
-<tr class="memdesc:af77d26cedf5f90073cce07aa8c528094"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create <a class="el" href="a01127.html" title="A collection of vertices and indices representing geometry.">MeshInfo</a> instances from the OBJ files in path.  <a href="a00280.html#af77d26cedf5f90073cce07aa8c528094">More...</a><br /></td></tr>
-<tr class="separator:af77d26cedf5f90073cce07aa8c528094"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Contains implementation for the <a class="el" href="a00280.html">Geometry</a> namespace. </p>
+<div class="textblock"><p>Contains implementation for the <a class="el" href="a00311.html">Exceptions</a> namespace. </p>
 <dl class="section author"><dt>Author</dt><dd>TBA </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>16 Jun 2020 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>26 Jun 2020 </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="a00098_source.html">objloader.cpp</a>.</p>
-</div><h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="af14fac7fbc250522a78849d58d5b0811"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af14fac7fbc250522a78849d58d5b0811">&#9670;&nbsp;</a></span>TINYOBJLOADER_IMPLEMENTATION</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define TINYOBJLOADER_IMPLEMENTATION</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>This MUST be defined before importing tiny_obj_loader.h. </p>
-
-<p class="definition">Definition at line <a class="el" href="a00098_source.html#l00012">12</a> of file <a class="el" href="a00098_source.html">objloader.cpp</a>.</p>
-
-</div>
-</div>
-</div><!-- contents -->
+<p class="definition">Definition in file <a class="el" href="a00098_source.html">HFExceptions.cpp</a>.</p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

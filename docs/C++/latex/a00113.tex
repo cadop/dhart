@@ -1,61 +1,72 @@
-\hypertarget{a00113}{}\doxysection{Cpp/pathfinding/src/path\+\_\+finder.cpp File Reference}
-\label{a00113}\index{Cpp/pathfinding/src/path\_finder.cpp@{Cpp/pathfinding/src/path\_finder.cpp}}
+\hypertarget{a00113}{}\doxysection{Cpp/objloader/src/objloader.cpp File Reference}
+\label{a00113}\index{Cpp/objloader/src/objloader.cpp@{Cpp/objloader/src/objloader.cpp}}
 
 
-Contains implmentation for the \mbox{\hyperlink{a01147}{Boost\+Graph\+Deleter}} structure.  
+Contains implementation for the \mbox{\hyperlink{a00312}{Geometry}} namespace.  
 
 
-{\ttfamily \#include $<$path\+\_\+finder.\+h$>$}\newline
-{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$objloader.\+h$>$}\newline
+{\ttfamily \#include $<$Dense$>$}\newline
+{\ttfamily \#include $<$meshinfo.\+h$>$}\newline
+{\ttfamily \#include $<$tiny\+\_\+obj\+\_\+loader.\+h$>$}\newline
 {\ttfamily \#include $<$robin\+\_\+hood.\+h$>$}\newline
-{\ttfamily \#include $<$omp.\+h$>$}\newline
-{\ttfamily \#include $<$thread$>$}\newline
-{\ttfamily \#include $<$math.\+h$>$}\newline
-{\ttfamily \#include $<$execution$>$}\newline
-{\ttfamily \#include $<$memory$>$}\newline
-{\ttfamily \#include $<$boost/graph/dijkstra\+\_\+shortest\+\_\+paths.\+hpp$>$}\newline
-{\ttfamily \#include $<$boost/graph/breadth\+\_\+first\+\_\+search.\+hpp$>$}\newline
-{\ttfamily \#include $<$boost/graph/dijkstra\+\_\+shortest\+\_\+paths\+\_\+no\+\_\+color\+\_\+map.\+hpp$>$}\newline
-{\ttfamily \#include $<$boost/exception/exception.\+hpp$>$}\newline
-{\ttfamily \#include $<$boost\+\_\+graph.\+h$>$}\newline
-{\ttfamily \#include $<$path.\+h$>$}\newline
-\doxysubsection*{Classes}
-\begin{DoxyCompactItemize}
-\item 
-struct \mbox{\hyperlink{a01143}{H\+F\+::\+Pathfinding\+::\+Dist\+Pred}}
-\begin{DoxyCompactList}\small\item\em A single row of a distance and predecessor matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
+{\ttfamily \#include $<$H\+F\+Exceptions.\+h$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$filesystem$>$}\newline
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{a00273}{HF}}
-\begin{DoxyCompactList}\small\item\em Output C\+SR for interop with other languages \end{DoxyCompactList}\item 
- \mbox{\hyperlink{a00282}{H\+F\+::\+Pathfinding}}
-\begin{DoxyCompactList}\small\item\em Algorithms to find the shortest path between nodes in a \mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+ \mbox{\hyperlink{a00305}{HF}}
+\begin{DoxyCompactList}\small\item\em Perform human scale analysis on 3D environments. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00312}{H\+F\+::\+Geometry}}
+\begin{DoxyCompactList}\small\item\em Manipulate and load geometry from disk. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{a00113_af14fac7fbc250522a78849d58d5b0811}{T\+I\+N\+Y\+O\+B\+J\+L\+O\+A\+D\+E\+R\+\_\+\+I\+M\+P\+L\+E\+M\+E\+N\+T\+A\+T\+I\+ON}}
+\begin{DoxyCompactList}\small\item\em This M\+U\+ST be defined before importing tiny\+\_\+obj\+\_\+loader.\+h. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{a01215}{Path}} \mbox{\hyperlink{a00282_a977e4c93a977ab4e9e784d1e6fec79f4}{H\+F\+::\+Pathfinding\+::\+Construct\+Shortest\+Path\+From\+Pred}} (int start, int end, const std\+::vector$<$ size\+\_\+t $>$ \&pred, const std\+::vector$<$ float $>$ \&distances)
-\begin{DoxyCompactList}\small\item\em Construct the shortest path from start to end using the given predecessor and distance vectors. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a01215}{Path}} \mbox{\hyperlink{a00282_a322ac32effd41c99359b82df0890e34a}{H\+F\+::\+Pathfinding\+::\+Construct\+Shortest\+Path\+From\+Pred}} (int start, int end, const \mbox{\hyperlink{a01143}{Dist\+Pred}} \&dist\+\_\+pred)
-\begin{DoxyCompactList}\small\item\em Overload to call this with a dist\+Pred instead of the raw arrays. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a01143}{Dist\+Pred}} \mbox{\hyperlink{a00282_a9f6490539108da057db2486295458886}{H\+F\+::\+Pathfinding\+::\+Build\+Distance\+And\+Predecessor}} (const \mbox{\hyperlink{a00282_a9314d552e0a8092644fa080c9945bd25}{graph\+\_\+t}} \&g, int id)
-\begin{DoxyCompactList}\small\item\em Build a row of the distance and predecessor matrices for the node at id. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a01215}{Path}} \mbox{\hyperlink{a00282_a47d06b1c4bd84f4d0a7519ea0e96ff02}{H\+F\+::\+Pathfinding\+::\+Find\+Path}} (\mbox{\hyperlink{a01139}{Boost\+Graph}} $\ast$bg, int start\+\_\+id, int end\+\_\+id)
-\begin{DoxyCompactList}\small\item\em Find a path between points A and B using Dijkstra\textquotesingle{}s Shortest Path algorithm. \end{DoxyCompactList}\item 
-vector$<$ \mbox{\hyperlink{a01215}{Path}} $>$ \mbox{\hyperlink{a00282_a15badb9d0a17849de7b21105605c9c91}{H\+F\+::\+Pathfinding\+::\+Find\+Paths}} (\mbox{\hyperlink{a01139}{Boost\+Graph}} $\ast$bg, const std\+::vector$<$ int $>$ \&start\+\_\+points, const std\+::vector$<$ int $>$ \&end\+\_\+points)
-\begin{DoxyCompactList}\small\item\em Find a path from every id in start\+\_\+ids to the matching end node in end\+\_\+ids. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{a00282_a417084c97d0672af2da7739157a9d8c0}{H\+F\+::\+Pathfinding\+::\+Insert\+Paths\+Into\+Array}} (const \mbox{\hyperlink{a01139}{Boost\+Graph}} $\ast$bg, const std\+::vector$<$ int $>$ \&start\+\_\+points, const std\+::vector$<$ int $>$ \&end\+\_\+points, \mbox{\hyperlink{a01215}{H\+F\+::\+Spatial\+Structures\+::\+Path}} $\ast$$\ast$out\+\_\+paths, \mbox{\hyperlink{a01211}{H\+F\+::\+Spatial\+Structures\+::\+Path\+Member}} $\ast$$\ast$out\+\_\+path\+\_\+members, int $\ast$out\+\_\+sizes)
-\begin{DoxyCompactList}\small\item\em A special version of Find\+Paths optimized for the C\+\_\+\+Interface. \end{DoxyCompactList}\item 
-std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{a01139}{Boost\+Graph}}, \mbox{\hyperlink{a01147}{Boost\+Graph\+Deleter}} $>$ \mbox{\hyperlink{a00282_aee466bf2324daa4b600cc59c90e78977}{H\+F\+::\+Pathfinding\+::\+Create\+Boost\+Graph}} (const \mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} \&g)
-\begin{DoxyCompactList}\small\item\em Create a new boost graph from a \mbox{\hyperlink{a00276}{H\+F\+::\+Spatial\+Structures}}\+:Graph. \end{DoxyCompactList}\end{DoxyCompactItemize}
+vector$<$ Mesh\+Info $>$ \mbox{\hyperlink{a00312_ad32d656c7a8c84beded49e1f14f64176}{H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects}} (std\+::string path, G\+R\+O\+U\+P\+\_\+\+M\+E\+T\+H\+OD gm=O\+N\+L\+Y\+\_\+\+F\+I\+LE, bool change\+\_\+coords=false)
+\begin{DoxyCompactList}\small\item\em Create \mbox{\hyperlink{a01160}{Mesh\+Info}} instances from the O\+BJ at path. \end{DoxyCompactList}\item 
+vector$<$ array$<$ float, 3 $>$ $>$ \mbox{\hyperlink{a00312_aec1df746155d224838048d3a43c2fe96}{H\+F\+::\+Geometry\+::\+Load\+Raw\+Vertices}} (std\+::string path)
+\begin{DoxyCompactList}\small\item\em Load a list of vertices directly from an O\+BJ file. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{a00312_adec2459f5c4ee10fd9d2154114d751de}{H\+F\+::\+Geometry\+::\+Get\+Test\+O\+B\+J\+Path}} (std\+::string key)
+\begin{DoxyCompactList}\small\item\em Get the path to the O\+BJ with the given key. \end{DoxyCompactList}\item 
+vector$<$ Mesh\+Info $>$ \mbox{\hyperlink{a00312_a882269ad4e0cc52d7071402b68db2a1c}{H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects}} (std\+::vector$<$ std\+::string $>$ \&path, G\+R\+O\+U\+P\+\_\+\+M\+E\+T\+H\+OD gm=O\+N\+L\+Y\+\_\+\+F\+I\+LE, bool change\+\_\+coords=false)
+\begin{DoxyCompactList}\small\item\em Create \mbox{\hyperlink{a01160}{Mesh\+Info}} instances from the O\+BJ files in path. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static robin\+\_\+hood\+::unordered\+\_\+map$<$ string, string $>$ \mbox{\hyperlink{a00312_a13874b607886c8f427b2a8f332148553}{H\+F\+::\+Geometry\+::test\+\_\+model\+\_\+paths}}
+\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Contains implmentation for the \mbox{\hyperlink{a01147}{Boost\+Graph\+Deleter}} structure. 
+Contains implementation for the \mbox{\hyperlink{a00312}{Geometry}} namespace. 
 
 \begin{DoxyAuthor}{Author}
 T\+BA 
 \end{DoxyAuthor}
 \begin{DoxyDate}{Date}
-17 Jun 2020 
+16 Jun 2020 
 \end{DoxyDate}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{a00113_af14fac7fbc250522a78849d58d5b0811}\label{a00113_af14fac7fbc250522a78849d58d5b0811}} 
+\index{objloader.cpp@{objloader.cpp}!TINYOBJLOADER\_IMPLEMENTATION@{TINYOBJLOADER\_IMPLEMENTATION}}
+\index{TINYOBJLOADER\_IMPLEMENTATION@{TINYOBJLOADER\_IMPLEMENTATION}!objloader.cpp@{objloader.cpp}}
+\doxysubsubsection{\texorpdfstring{TINYOBJLOADER\_IMPLEMENTATION}{TINYOBJLOADER\_IMPLEMENTATION}}
+{\footnotesize\ttfamily \#define T\+I\+N\+Y\+O\+B\+J\+L\+O\+A\+D\+E\+R\+\_\+\+I\+M\+P\+L\+E\+M\+E\+N\+T\+A\+T\+I\+ON}
+
+
+
+This M\+U\+ST be defined before importing tiny\+\_\+obj\+\_\+loader.\+h. 
+
+
+
+Definition at line 12 of file objloader.\+cpp.
+

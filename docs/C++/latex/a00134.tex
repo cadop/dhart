@@ -1,99 +1,111 @@
-\hypertarget{a00134}{}\doxysection{Cpp/spatialstructures/src/\+C\+Interface.cpp File Reference}
-\label{a00134}\index{Cpp/spatialstructures/src/CInterface.cpp@{Cpp/spatialstructures/src/CInterface.cpp}}
+\hypertarget{a00134}{}\doxysection{Cpp/raytracer/src/embree\+\_\+raytracer.cpp File Reference}
+\label{a00134}\index{Cpp/raytracer/src/embree\_raytracer.cpp@{Cpp/raytracer/src/embree\_raytracer.cpp}}
 
 
-Contains implementation for the C\+Interface.  
+Contains implementation for the \mbox{\hyperlink{a01196}{Embree\+Ray\+Tracer}}  
 
 
-{\ttfamily \#include $<$spatialstructures\+\_\+\+C.\+h$>$}\newline
+{\ttfamily \#include $<$embree\+\_\+raytracer.\+h$>$}\newline
+{\ttfamily \#include $<$corecrt\+\_\+math\+\_\+defines.\+h$>$}\newline
+{\ttfamily \#include $<$functional$>$}\newline
 {\ttfamily \#include $<$iostream$>$}\newline
-{\ttfamily \#include $<$Constants.\+h$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include $<$robin\+\_\+hood.\+h$>$}\newline
+{\ttfamily \#include $<$meshinfo.\+h$>$}\newline
+{\ttfamily \#include $<$Ray\+Request.\+h$>$}\newline
 {\ttfamily \#include $<$H\+F\+Exceptions.\+h$>$}\newline
-{\ttfamily \#include $<$graph.\+h$>$}\newline
-{\ttfamily \#include $<$node.\+h$>$}\newline
-{\ttfamily \#include $<$edge.\+h$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{a00309_a01184}{H\+F\+::\+Ray\+Tracer\+::\+Vertex}}
+\begin{DoxyCompactList}\small\item\em A vertex. Used internally in Embree.  \mbox{\hyperlink{a00309_a01184}{More...}}\end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a00309_a01188}{H\+F\+::\+Ray\+Tracer\+::\+Triangle}}
+\begin{DoxyCompactList}\small\item\em A triangle. Used internally in Embree.  \mbox{\hyperlink{a00309_a01188}{More...}}\end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{a00305}{HF}}
+\begin{DoxyCompactList}\small\item\em Perform human scale analysis on 3D environments. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00309}{H\+F\+::\+Ray\+Tracer}}
+\begin{DoxyCompactList}\small\item\em Cast rays to determine if and where they intersect geometry. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ \mbox{\hyperlink{a00134_a2f5650b0bad6c47aa34fc2206433a34b}{Convert\+Raw\+Float\+Array\+To\+Points}} (const float $\ast$raw\+\_\+array, int size)
-\begin{DoxyCompactList}\small\item\em Convert a raw array from an external caller to an organized vector of points \end{DoxyCompactList}\item 
-std\+::vector$<$ std\+::array$<$ int, 3 $>$ $>$ \mbox{\hyperlink{a00134_a353d5244f19898d13d1d38193ea6ef1e}{Convert\+Raw\+Int\+Array\+To\+Points}} (const int $\ast$raw\+\_\+array, int size)
-\item 
-\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00134_aceee58dd1217540441beca3093877f5b}{Get\+Edges\+For\+Node}} (const Graph $\ast$graph, const Node $\ast$Node, vector$<$ Edge $>$ $\ast$$\ast$out\+\_\+vector\+\_\+ptr, Edge $\ast$$\ast$out\+\_\+edge\+\_\+list\+\_\+ptr, int $\ast$out\+\_\+edge\+\_\+list\+\_\+size)
-\item 
-\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00269_gac17c1fc05e6bf6900bac8689b7619bfb}{Get\+Size\+Of\+Node\+Vector}} (const std\+::vector$<$ \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ $\ast$node\+\_\+list, int $\ast$out\+\_\+size)
-\begin{DoxyCompactList}\small\item\em Get the size of a node vector. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00269_ga712f182888672382dd4a1776f850915a}{Get\+Size\+Of\+Edge\+Vector}} (const std\+::vector$<$ \mbox{\hyperlink{a01183}{H\+F\+::\+Spatial\+Structures\+::\+Edge}} $>$ $\ast$edge\+\_\+list, int $\ast$out\+\_\+size)
-\item 
-\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00269_ga87e9b9ecfc5293712d75f3cb8c992c77}{Destroy\+Nodes}} (std\+::vector$<$ \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ $\ast$nodelist\+\_\+to\+\_\+destroy)
-\begin{DoxyCompactList}\small\item\em Delete the vector of nodes at the given pointer. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00269_gac46191088d698cc007a2176ab6b5674d}{Destroy\+Edges}} (std\+::vector$<$ \mbox{\hyperlink{a01183}{H\+F\+::\+Spatial\+Structures\+::\+Edge}} $>$ $\ast$edgelist\+\_\+to\+\_\+destroy)
-\begin{DoxyCompactList}\small\item\em Delete the vector of edges at the given pointer. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00269_ga645abacd11e1fa535f953344aaa77727}{Destroy\+Graph}} (\mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$graph\+\_\+to\+\_\+destroy)
-\begin{DoxyCompactList}\small\item\em Delete a graph. \end{DoxyCompactList}\end{DoxyCompactItemize}
+void \mbox{\hyperlink{a00309_a9c9d1d9869aee1f51b5de11f7d9420ec}{H\+F\+::\+Ray\+Tracer\+::\+Check\+State}} (R\+T\+C\+Device \&device)
+\begin{DoxyCompactList}\small\item\em Check an embree device for errors. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a00309_a9a8051c9b70fc0ae60337d4a38bf5f57}{H\+F\+::\+Ray\+Tracer\+::vectors\+To\+Buffers}} (const std\+::vector$<$ std\+::array$<$ float, 3 $>$$>$ \&vertices, std\+::vector$<$ Triangle $>$ \&Tribuffer, std\+::vector$<$ Vertex $>$ \&Vbuffer)
+\begin{DoxyCompactList}\small\item\em Index a list of verticies and place them into a triangle and vertex buffer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a00309_aac8c0b245ea813969c50b6496cc67945}{H\+F\+::\+Ray\+Tracer\+::buffers\+To\+Structs}} (std\+::vector$<$ float $>$ \&in\+\_\+vertices, std\+::vector$<$ int $>$ \&in\+\_\+indices, std\+::vector$<$ Vertex $>$ \&out\+\_\+vertices, std\+::vector$<$ Triangle $>$ \&out\+\_\+triangles)
+\begin{DoxyCompactList}\small\item\em Package raw arrays of floats and indices in buffers to the required Embree types. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Contains implementation for the C\+Interface. 
+Contains implementation for the \mbox{\hyperlink{a01196}{Embree\+Ray\+Tracer}} 
 
 \begin{DoxyAuthor}{Author}
 T\+BA 
 \end{DoxyAuthor}
 \begin{DoxyDate}{Date}
-06 Jun 2020 
+26 Jun 2020 
 \end{DoxyDate}
 
 
-\doxysubsection{Function Documentation}
-\mbox{\Hypertarget{a00134_a2f5650b0bad6c47aa34fc2206433a34b}\label{a00134_a2f5650b0bad6c47aa34fc2206433a34b}} 
-\index{CInterface.cpp@{CInterface.cpp}!ConvertRawFloatArrayToPoints@{ConvertRawFloatArrayToPoints}}
-\index{ConvertRawFloatArrayToPoints@{ConvertRawFloatArrayToPoints}!CInterface.cpp@{CInterface.cpp}}
-\doxysubsubsection{\texorpdfstring{ConvertRawFloatArrayToPoints()}{ConvertRawFloatArrayToPoints()}}
-{\footnotesize\ttfamily std\+::vector$<$std\+::array$<$float, 3$>$ $>$ Convert\+Raw\+Float\+Array\+To\+Points (\begin{DoxyParamCaption}\item[{const float $\ast$}]{raw\+\_\+array,  }\item[{int}]{size }\end{DoxyParamCaption})}
+\doxysubsection{Class Documentation}
+\index{HF::RayTracer::Vertex@{HF::RayTracer::Vertex}}\label{a01184}
+\Hypertarget{a00309_a01184}
+\doxysubsubsection{struct HF\+::Ray\+Tracer\+::Vertex}
+A vertex. Used internally in Embree. 
 
 
 
-Convert a raw array from an external caller to an organized vector of points 
+Definition at line 38 of file embree\+\_\+raytracer.\+cpp.
 
-
-\begin{DoxyParams}{Parameters}
-{\em raw\+\_\+array} & Pointer to the external array\\
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00309_aad8e270f026ac9dd20ee294b2b1a21de}\label{a00309_aad8e270f026ac9dd20ee294b2b1a21de}} 
+float&
+x&
+\\
 \hline
-{\em size} & The number of points stored in the raw array, equal to the total number of floats / 3\\
+
+\mbox{\Hypertarget{a00309_aa27c7b22316499f43093c2b7768c06ea}\label{a00309_aa27c7b22316499f43093c2b7768c06ea}} 
+float&
+y&
+\\
 \hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
 
-\end{DoxyReturn}
+\mbox{\Hypertarget{a00309_ab8599cc6220e686dac319622f7d2f364}\label{a00309_ab8599cc6220e686dac319622f7d2f364}} 
+float&
+z&
+\\
+\hline
 
-
-Definition at line 24 of file C\+Interface.\+cpp.
-
-
-
-Referenced by Create\+Visibility\+Graph\+All\+To\+All(), Create\+Visibility\+Graph\+All\+To\+All\+Undirected(), Create\+Visibility\+Graph\+Group\+To\+Group(), Fire\+Multiple\+Directions\+One\+Origin(), Fire\+Multiple\+Origins\+One\+Direction(), Fire\+Multiple\+Rays(), Fire\+Occlusion\+Rays(), Fire\+Rays\+Distance(), Sphereical\+View\+Analysis\+Aggregate\+Flat(), and Spherical\+View\+Analysis\+No\+Aggregate\+Flat().
-
-\mbox{\Hypertarget{a00134_a353d5244f19898d13d1d38193ea6ef1e}\label{a00134_a353d5244f19898d13d1d38193ea6ef1e}} 
-\index{CInterface.cpp@{CInterface.cpp}!ConvertRawIntArrayToPoints@{ConvertRawIntArrayToPoints}}
-\index{ConvertRawIntArrayToPoints@{ConvertRawIntArrayToPoints}!CInterface.cpp@{CInterface.cpp}}
-\doxysubsubsection{\texorpdfstring{ConvertRawIntArrayToPoints()}{ConvertRawIntArrayToPoints()}}
-{\footnotesize\ttfamily std\+::vector$<$std\+::array$<$int, 3$>$ $>$ Convert\+Raw\+Int\+Array\+To\+Points (\begin{DoxyParamCaption}\item[{const int $\ast$}]{raw\+\_\+array,  }\item[{int}]{size }\end{DoxyParamCaption})}
+\end{DoxyFields}
+\index{HF::RayTracer::Triangle@{HF::RayTracer::Triangle}}\label{a01188}
+\Hypertarget{a00309_a01188}
+\doxysubsubsection{struct HF\+::Ray\+Tracer\+::Triangle}
+A triangle. Used internally in Embree. 
 
 
 
-Definition at line 35 of file C\+Interface.\+cpp.
+Definition at line 43 of file embree\+\_\+raytracer.\+cpp.
 
-\mbox{\Hypertarget{a00134_aceee58dd1217540441beca3093877f5b}\label{a00134_aceee58dd1217540441beca3093877f5b}} 
-\index{CInterface.cpp@{CInterface.cpp}!GetEdgesForNode@{GetEdgesForNode}}
-\index{GetEdgesForNode@{GetEdgesForNode}!CInterface.cpp@{CInterface.cpp}}
-\doxysubsubsection{\texorpdfstring{GetEdgesForNode()}{GetEdgesForNode()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Get\+Edges\+For\+Node (\begin{DoxyParamCaption}\item[{const Graph $\ast$}]{graph,  }\item[{const Node $\ast$}]{Node,  }\item[{vector$<$ Edge $>$ $\ast$$\ast$}]{out\+\_\+vector\+\_\+ptr,  }\item[{Edge $\ast$$\ast$}]{out\+\_\+edge\+\_\+list\+\_\+ptr,  }\item[{int $\ast$}]{out\+\_\+edge\+\_\+list\+\_\+size }\end{DoxyParamCaption})}
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00309_a504a02b108984ddfa3f521cf40b17e61}\label{a00309_a504a02b108984ddfa3f521cf40b17e61}} 
+int&
+v0&
+\\
+\hline
 
+\mbox{\Hypertarget{a00309_afc086ccfe3fc951af959d905056358c4}\label{a00309_afc086ccfe3fc951af959d905056358c4}} 
+int&
+v1&
+\\
+\hline
 
+\mbox{\Hypertarget{a00309_ab7bfa105fb125dfc9e31ecf8cbf0f9fa}\label{a00309_ab7bfa105fb125dfc9e31ecf8cbf0f9fa}} 
+int&
+v2&
+\\
+\hline
 
-Definition at line 46 of file C\+Interface.\+cpp.
-
-
-
-References H\+F\+::\+Exceptions\+::\+OK, and H\+F\+::\+Exceptions\+::\+O\+U\+T\+\_\+\+O\+F\+\_\+\+R\+A\+N\+GE.
-
+\end{DoxyFields}

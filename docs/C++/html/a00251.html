@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Analysis: Cinterface/view_analysis_C.cpp File Reference</title>
+<title>Analysis: Cinterface/analysis_C.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,39 +66,62 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">view_analysis_C.cpp File Reference</div>  </div>
+<div class="title">analysis_C.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;<a class="el" href="a00254_source.html">view_analysis_C.h</a>&gt;</code><br />
-<code>#include &lt;robin_hood.h&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00086_source.html">HFExceptions.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00026_source.html">view_analysis.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00122_source.html">embree_raytracer.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00152_source.html">graph.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00155_source.html">node.h</a>&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="a00257_source.html">cinterface_utils.h</a>&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;array&gt;</code><br />
 </div>
 <p><a href="a00251_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a00305"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00305.html">HF</a></td></tr>
+<tr class="memdesc:a00305"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform human scale analysis on 3D environments. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00308"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00308.html">HF::SpatialStructures</a></td></tr>
+<tr class="memdesc:a00308"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains standard fundamental data structures for representing space used throughout HumanFactors. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00306"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00306.html">HF::GraphGenerator</a></td></tr>
+<tr class="memdesc:a00306"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a graph of accessible space from a given start point. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00309"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00309.html">HF::RayTracer</a></td></tr>
+<tr class="memdesc:a00309"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast rays to determine if and where they intersect geometry. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a91fa3b2bb3a7312ec39d74cc1fbc7bbe"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00251.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;&#160;&#160;extern &quot;C&quot; __declspec(dllexport) int</td></tr>
+<tr class="separator:a91fa3b2bb3a7312ec39d74cc1fbc7bbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gab6b8e3eab649b42ac014fb7d02d54892"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00270.html#gab6b8e3eab649b42ac014fb7d02d54892">SphereicalViewAnalysisAggregate</a> (<a class="el" href="a01163.html">EmbreeRayTracer</a> *ERT, <a class="el" href="a01203.html">Node</a> *node_ptr, int node_size, int max_rays, float upward_fov, float downward_fov, float height, <a class="el" href="a00254.html#a8a1aa9474094ff70818051c921c0537f">AGGREGATE_TYPE</a> AT, vector&lt; float &gt; **out_scores, float **out_scores_ptr, int *out_scores_size)</td></tr>
-<tr class="memdesc:gab6b8e3eab649b42ac014fb7d02d54892"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform view analysis from a list of points and aggregate the results into an ordered list of scores. Scores are aggregated by the aggregation specified in AT aggregation method.  <a href="a00270.html#gab6b8e3eab649b42ac014fb7d02d54892">More...</a><br /></td></tr>
-<tr class="separator:gab6b8e3eab649b42ac014fb7d02d54892"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa4c5714c1e557ef83a03d447eb30c6d0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00270.html#gaa4c5714c1e557ef83a03d447eb30c6d0">SphereicalViewAnalysisAggregateFlat</a> (<a class="el" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a> *ERT, const float *node_ptr, int node_size, int max_rays, float upward_fov, float downward_fov, float height, <a class="el" href="a00254.html#a8a1aa9474094ff70818051c921c0537f">AGGREGATE_TYPE</a> AT, std::vector&lt; float &gt; **out_scores, float **out_scores_ptr, int *out_scores_size)</td></tr>
-<tr class="memdesc:gaa4c5714c1e557ef83a03d447eb30c6d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform view analysis from a list of points and aggregate the results into an ordered list of scores. Scores are aggregated by the aggregation specified in AT aggregation method.  <a href="a00270.html#gaa4c5714c1e557ef83a03d447eb30c6d0">More...</a><br /></td></tr>
-<tr class="separator:gaa4c5714c1e557ef83a03d447eb30c6d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga94d3ddc3981020e2852fc77e51266185"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00270.html#ga94d3ddc3981020e2852fc77e51266185">SphericalViewAnalysisNoAggregate</a> (<a class="el" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a> *ERT, const <a class="el" href="a01203.html">HF::SpatialStructures::Node</a> *node_ptr, int node_size, int *max_rays, float upward_fov, float downward_fov, float height, std::vector&lt; <a class="el" href="a01219.html">RayResult</a> &gt; **out_results, <a class="el" href="a01219.html">RayResult</a> **out_results_ptr)</td></tr>
-<tr class="memdesc:ga94d3ddc3981020e2852fc77e51266185"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform view analysis and recieve the distance and meshid for each individual ray.  <a href="a00270.html#ga94d3ddc3981020e2852fc77e51266185">More...</a><br /></td></tr>
-<tr class="separator:ga94d3ddc3981020e2852fc77e51266185"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga348af4492f3e4e7ffab6da3e86de3924"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00270.html#ga348af4492f3e4e7ffab6da3e86de3924">SphericalViewAnalysisNoAggregateFlat</a> (<a class="el" href="a01163.html">HF::RayTracer::EmbreeRayTracer</a> *ERT, const float *node_ptr, int node_size, int *max_rays, float upward_fov, float downward_fov, float height, std::vector&lt; <a class="el" href="a01219.html">RayResult</a> &gt; **out_results, <a class="el" href="a01219.html">RayResult</a> **out_results_ptr)</td></tr>
-<tr class="memdesc:ga348af4492f3e4e7ffab6da3e86de3924"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform view analysis and recieve the distance and meshid for each individual ray.  <a href="a00270.html#ga348af4492f3e4e7ffab6da3e86de3924">More...</a><br /></td></tr>
-<tr class="separator:ga348af4492f3e4e7ffab6da3e86de3924"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaf572b7bec28d55bf2c72719742703dff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00254.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00270.html#gaf572b7bec28d55bf2c72719742703dff">SphericalDistribute</a> (int *num_rays, vector&lt; float &gt; **out_direction_vector, float **out_direction_data, float upward_fov, float downward_fov)</td></tr>
-<tr class="memdesc:gaf572b7bec28d55bf2c72719742703dff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Distribute directions in a sphere  <a href="a00270.html#gaf572b7bec28d55bf2c72719742703dff">More...</a><br /></td></tr>
-<tr class="separator:gaf572b7bec28d55bf2c72719742703dff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac2583dc1ee6786b15fa4f06bfde2130a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00287.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00297.html#gac2583dc1ee6786b15fa4f06bfde2130a">GenerateGraph</a> (<a class="el" href="a01196.html">HF::RayTracer::EmbreeRayTracer</a> *ray_tracer, const float *start_point, const float *spacing, int MaxNodes, float UpStep, float UpSlope, float DownStep, float DownSlope, int max_step_connection, int core_count, <a class="el" href="a01220.html">HF::SpatialStructures::Graph</a> **out_graph)</td></tr>
+<tr class="memdesc:gac2583dc1ee6786b15fa4f06bfde2130a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a graph by performing a breadth first search of accessible space.  <a href="a00297.html#gac2583dc1ee6786b15fa4f06bfde2130a">More...</a><br /></td></tr>
+<tr class="separator:gac2583dc1ee6786b15fa4f06bfde2130a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a91fa3b2bb3a7312ec39d74cc1fbc7bbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">&#9670;&nbsp;</a></span>C_INTERFACE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define C_INTERFACE&#160;&#160;&#160;extern &quot;C&quot; __declspec(dllexport) int</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00251_source.html#l00006">6</a> of file <a class="el" href="a00251_source.html">analysis_C.h</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

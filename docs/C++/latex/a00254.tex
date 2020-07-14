@@ -1,94 +1,130 @@
-\hypertarget{a00254}{}\doxysection{Cinterface/view\+\_\+analysis\+\_\+C.h File Reference}
-\label{a00254}\index{Cinterface/view\_analysis\_C.h@{Cinterface/view\_analysis\_C.h}}
+\hypertarget{a00254}{}\doxysection{Cinterface/cinterface\+\_\+utils.cpp File Reference}
+\label{a00254}\index{Cinterface/cinterface\_utils.cpp@{Cinterface/cinterface\_utils.cpp}}
 {\ttfamily \#include $<$cinterface\+\_\+utils.\+h$>$}\newline
-{\ttfamily \#include $<$vector$>$}\newline
-{\ttfamily \#include $<$raytracer\+\_\+\+C.\+h$>$}\newline
-\doxysubsection*{Namespaces}
-\begin{DoxyCompactItemize}
-\item 
- \mbox{\hyperlink{a00273}{HF}}
-\begin{DoxyCompactList}\small\item\em Output C\+SR for interop with other languages \end{DoxyCompactList}\item 
- \mbox{\hyperlink{a00276}{H\+F\+::\+Spatial\+Structures}}
-\begin{DoxyCompactList}\small\item\em Contains standard fundamental data structures for representing space used throughout Human\+Factors. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Macros}
-\begin{DoxyCompactItemize}
-\item 
-\#define \mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}}~extern \char`\"{}C\char`\"{} \+\_\+\+\_\+declspec(dllexport) int
-\end{DoxyCompactItemize}
-\doxysubsection*{Enumerations}
-\begin{DoxyCompactItemize}
-\item 
-enum \mbox{\hyperlink{a00254_a8a1aa9474094ff70818051c921c0537f}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}} \{ \newline
-\mbox{\hyperlink{a00254_a8a1aa9474094ff70818051c921c0537fa4905ac9d6a22bdfc1ae096094ce6248d}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+C\+O\+U\+NT}} = 0, 
-\mbox{\hyperlink{a00254_a8a1aa9474094ff70818051c921c0537fa6970bdc2201030b9c03fbdcf3973858a}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+S\+UM}} = 1, 
-\mbox{\hyperlink{a00254_a8a1aa9474094ff70818051c921c0537fa16de38737a9f8366e9b2042b4e9b6290}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+A\+V\+E\+R\+A\+GE}} = 2, 
-\mbox{\hyperlink{a00254_a8a1aa9474094ff70818051c921c0537fa26a4b44a837bf97b972628509912b4a5}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+M\+AX}} = 3, 
-\newline
-\mbox{\hyperlink{a00254_a8a1aa9474094ff70818051c921c0537face31e2a082d17e038fcc6e3006166653}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+M\+IN}} = 4
- \}
-\begin{DoxyCompactList}\small\item\em How to aggregate edges the results of view analysis \end{DoxyCompactList}\end{DoxyCompactItemize}
+{\ttfamily \#include $<$H\+F\+Exceptions.\+h$>$}\newline
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00270_gab6b8e3eab649b42ac014fb7d02d54892}{Sphereical\+View\+Analysis\+Aggregate}} (\mbox{\hyperlink{a01163}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$E\+RT, \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $\ast$node\+\_\+ptr, int node\+\_\+size, int max\+\_\+rays, float upward\+\_\+fov, float downward\+\_\+fov, float height, \mbox{\hyperlink{a00254_a8a1aa9474094ff70818051c921c0537f}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}} AT, std\+::vector$<$ float $>$ $\ast$$\ast$out\+\_\+scores, float $\ast$$\ast$out\+\_\+scores\+\_\+ptr, int $\ast$out\+\_\+scores\+\_\+size)
-\begin{DoxyCompactList}\small\item\em Perform view analysis from a list of points and aggregate the results into an ordered list of scores. Scores are aggregated by the aggregation specified in AT aggregation method. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00270_gaa4c5714c1e557ef83a03d447eb30c6d0}{Sphereical\+View\+Analysis\+Aggregate\+Flat}} (\mbox{\hyperlink{a01163}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$E\+RT, const float $\ast$node\+\_\+ptr, int node\+\_\+size, int max\+\_\+rays, float upward\+\_\+fov, float downward\+\_\+fov, float height, \mbox{\hyperlink{a00254_a8a1aa9474094ff70818051c921c0537f}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}} AT, std\+::vector$<$ float $>$ $\ast$$\ast$out\+\_\+scores, float $\ast$$\ast$out\+\_\+scores\+\_\+ptr, int $\ast$out\+\_\+scores\+\_\+size)
-\begin{DoxyCompactList}\small\item\em Perform view analysis from a list of points and aggregate the results into an ordered list of scores. Scores are aggregated by the aggregation specified in AT aggregation method. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00270_ga94d3ddc3981020e2852fc77e51266185}{Spherical\+View\+Analysis\+No\+Aggregate}} (\mbox{\hyperlink{a01163}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$E\+RT, const \mbox{\hyperlink{a01203}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $\ast$node\+\_\+ptr, int node\+\_\+size, int $\ast$max\+\_\+rays, float upward\+\_\+fov, float downward\+\_\+fov, float height, std\+::vector$<$ \mbox{\hyperlink{a01219}{Ray\+Result}} $>$ $\ast$$\ast$out\+\_\+results, \mbox{\hyperlink{a01219}{Ray\+Result}} $\ast$$\ast$out\+\_\+results\+\_\+ptr)
-\begin{DoxyCompactList}\small\item\em Perform view analysis and recieve the distance and meshid for each individual ray. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00270_ga348af4492f3e4e7ffab6da3e86de3924}{Spherical\+View\+Analysis\+No\+Aggregate\+Flat}} (\mbox{\hyperlink{a01163}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$E\+RT, const float $\ast$node\+\_\+ptr, int node\+\_\+size, int $\ast$max\+\_\+rays, float upward\+\_\+fov, float downward\+\_\+fov, float height, std\+::vector$<$ \mbox{\hyperlink{a01219}{Ray\+Result}} $>$ $\ast$$\ast$out\+\_\+results, \mbox{\hyperlink{a01219}{Ray\+Result}} $\ast$$\ast$out\+\_\+results\+\_\+ptr)
-\begin{DoxyCompactList}\small\item\em Perform view analysis and recieve the distance and meshid for each individual ray. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00270_gaf572b7bec28d55bf2c72719742703dff}{Spherical\+Distribute}} (int $\ast$num\+\_\+rays, std\+::vector$<$ float $>$ $\ast$$\ast$out\+\_\+direction\+\_\+vector, float $\ast$$\ast$out\+\_\+direction\+\_\+data, float upward\+\_\+fov, float downward\+\_\+fov)
-\begin{DoxyCompactList}\small\item\em Distribute directions in a sphere \end{DoxyCompactList}\end{DoxyCompactItemize}
+std\+::vector$<$ std\+::array$<$ float, 3 $>$ $>$ \mbox{\hyperlink{a00254_a2f5650b0bad6c47aa34fc2206433a34b}{Convert\+Raw\+Float\+Array\+To\+Points}} (const float $\ast$raw\+\_\+array, int size)
+\begin{DoxyCompactList}\small\item\em Convert a raw array from an external caller to an organized vector of points \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::array$<$ int, 3 $>$ $>$ \mbox{\hyperlink{a00254_a353d5244f19898d13d1d38193ea6ef1e}{Convert\+Raw\+Int\+Array\+To\+Points}} (const int $\ast$raw\+\_\+array, int size)
+\begin{DoxyCompactList}\small\item\em Convert a raw array from an external caller to an organized vector of points \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00287_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00254_af77723a4383b278169e80cf0e361ec44}{Destroy\+Float\+Vector}} (std\+::vector$<$ float $>$ $\ast$float\+\_\+vector)
+\begin{DoxyCompactList}\small\item\em Delete a float vector that\textquotesingle{}s pointed to by {\itshape float\+\_\+vector}  \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\doxysubsection{Macro Definition Documentation}
-\mbox{\Hypertarget{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}\label{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}} 
-\index{view\_analysis\_C.h@{view\_analysis\_C.h}!C\_INTERFACE@{C\_INTERFACE}}
-\index{C\_INTERFACE@{C\_INTERFACE}!view\_analysis\_C.h@{view\_analysis\_C.h}}
-\doxysubsubsection{\texorpdfstring{C\_INTERFACE}{C\_INTERFACE}}
-{\footnotesize\ttfamily \#define C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE~extern \char`\"{}C\char`\"{} \+\_\+\+\_\+declspec(dllexport) int}
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{a00254_a2f5650b0bad6c47aa34fc2206433a34b}\label{a00254_a2f5650b0bad6c47aa34fc2206433a34b}} 
+\index{cinterface\_utils.cpp@{cinterface\_utils.cpp}!ConvertRawFloatArrayToPoints@{ConvertRawFloatArrayToPoints}}
+\index{ConvertRawFloatArrayToPoints@{ConvertRawFloatArrayToPoints}!cinterface\_utils.cpp@{cinterface\_utils.cpp}}
+\doxysubsubsection{\texorpdfstring{ConvertRawFloatArrayToPoints()}{ConvertRawFloatArrayToPoints()}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::array$<$float, 3$>$ $>$ Convert\+Raw\+Float\+Array\+To\+Points (\begin{DoxyParamCaption}\item[{const float $\ast$}]{raw\+\_\+array,  }\item[{int}]{size }\end{DoxyParamCaption})}
 
 
 
-Definition at line 5 of file view\+\_\+analysis\+\_\+\+C.\+h.
+Convert a raw array from an external caller to an organized vector of points 
 
 
-
-\doxysubsection{Enumeration Type Documentation}
-\mbox{\Hypertarget{a00254_a8a1aa9474094ff70818051c921c0537f}\label{a00254_a8a1aa9474094ff70818051c921c0537f}} 
-\index{view\_analysis\_C.h@{view\_analysis\_C.h}!AGGREGATE\_TYPE@{AGGREGATE\_TYPE}}
-\index{AGGREGATE\_TYPE@{AGGREGATE\_TYPE}!view\_analysis\_C.h@{view\_analysis\_C.h}}
-\doxysubsubsection{\texorpdfstring{AGGREGATE\_TYPE}{AGGREGATE\_TYPE}}
-{\footnotesize\ttfamily enum \mbox{\hyperlink{a00254_a8a1aa9474094ff70818051c921c0537f}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}}\hspace{0.3cm}{\ttfamily [strong]}}
-
-
-
-How to aggregate edges the results of view analysis 
-
-\begin{DoxyEnumFields}{Enumerator}
-\raisebox{\heightof{T}}[0pt][0pt]{\index{COUNT@{COUNT}!view\_analysis\_C.h@{view\_analysis\_C.h}}\index{view\_analysis\_C.h@{view\_analysis\_C.h}!COUNT@{COUNT}}}\mbox{\Hypertarget{a00254_a8a1aa9474094ff70818051c921c0537fa4905ac9d6a22bdfc1ae096094ce6248d}\label{a00254_a8a1aa9474094ff70818051c921c0537fa4905ac9d6a22bdfc1ae096094ce6248d}} 
-C\+O\+U\+NT&Number of rays that hit. \\
+\begin{DoxyParams}{Parameters}
+{\em raw\+\_\+array} & Pointer to the external array\\
 \hline
-
-\raisebox{\heightof{T}}[0pt][0pt]{\index{SUM@{SUM}!view\_analysis\_C.h@{view\_analysis\_C.h}}\index{view\_analysis\_C.h@{view\_analysis\_C.h}!SUM@{SUM}}}\mbox{\Hypertarget{a00254_a8a1aa9474094ff70818051c921c0537fa6970bdc2201030b9c03fbdcf3973858a}\label{a00254_a8a1aa9474094ff70818051c921c0537fa6970bdc2201030b9c03fbdcf3973858a}} 
-S\+UM&Sum of distances from the origin to each of its hitpoints. \\
+{\em size} & The number of points stored in the raw array, equal to the total number of floats / 3\\
 \hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A list of points
+\end{DoxyReturn}
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{AVERAGE@{AVERAGE}!view\_analysis\_C.h@{view\_analysis\_C.h}}\index{view\_analysis\_C.h@{view\_analysis\_C.h}!AVERAGE@{AVERAGE}}}\mbox{\Hypertarget{a00254_a8a1aa9474094ff70818051c921c0537fa16de38737a9f8366e9b2042b4e9b6290}\label{a00254_a8a1aa9474094ff70818051c921c0537fa16de38737a9f8366e9b2042b4e9b6290}} 
-A\+V\+E\+R\+A\+GE&Average distance of origin to its hit points. \\
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "cinterface\_utils.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{float} vertices[] = \{ 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 \};}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} size = 9;}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::vector<std::array<float, 3>> points = \mbox{\hyperlink{a00149_a2f5650b0bad6c47aa34fc2206433a34b}{ConvertRawFloatArrayToPoints}}(vertices, size);}
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em raw\+\_\+array} & Pointer to the external array\\
 \hline
-
-\raisebox{\heightof{T}}[0pt][0pt]{\index{MAX@{MAX}!view\_analysis\_C.h@{view\_analysis\_C.h}}\index{view\_analysis\_C.h@{view\_analysis\_C.h}!MAX@{MAX}}}\mbox{\Hypertarget{a00254_a8a1aa9474094ff70818051c921c0537fa26a4b44a837bf97b972628509912b4a5}\label{a00254_a8a1aa9474094ff70818051c921c0537fa26a4b44a837bf97b972628509912b4a5}} 
-M\+AX&Maximum distance from origin to its hit points. \\
+{\em size} & The number of points stored in the raw array, equal to the total number of floats / 3\\
 \hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{MIN@{MIN}!view\_analysis\_C.h@{view\_analysis\_C.h}}\index{view\_analysis\_C.h@{view\_analysis\_C.h}!MIN@{MIN}}}\mbox{\Hypertarget{a00254_a8a1aa9474094ff70818051c921c0537face31e2a082d17e038fcc6e3006166653}\label{a00254_a8a1aa9474094ff70818051c921c0537face31e2a082d17e038fcc6e3006166653}} 
-M\+IN&Minimum distance from origin to its hit points. \\
+\end{DoxyReturn}
+
+
+Definition at line 5 of file cinterface\+\_\+utils.\+cpp.
+
+\mbox{\Hypertarget{a00254_a353d5244f19898d13d1d38193ea6ef1e}\label{a00254_a353d5244f19898d13d1d38193ea6ef1e}} 
+\index{cinterface\_utils.cpp@{cinterface\_utils.cpp}!ConvertRawIntArrayToPoints@{ConvertRawIntArrayToPoints}}
+\index{ConvertRawIntArrayToPoints@{ConvertRawIntArrayToPoints}!cinterface\_utils.cpp@{cinterface\_utils.cpp}}
+\doxysubsubsection{\texorpdfstring{ConvertRawIntArrayToPoints()}{ConvertRawIntArrayToPoints()}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::array$<$int, 3$>$ $>$ Convert\+Raw\+Int\+Array\+To\+Points (\begin{DoxyParamCaption}\item[{const int $\ast$}]{raw\+\_\+array,  }\item[{int}]{size }\end{DoxyParamCaption})}
+
+
+
+Convert a raw array from an external caller to an organized vector of points 
+
+
+\begin{DoxyParams}{Parameters}
+{\em raw\+\_\+array} & Pointer to the external array\\
 \hline
+{\em size} & The number of points stored in the raw array, equal to the total number of ints / 3\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A list of points
+\end{DoxyReturn}
 
-\end{DoxyEnumFields}
 
 
-Definition at line 13 of file view\+\_\+analysis\+\_\+\+C.\+h.
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "cinterface\_utils.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int} raw\_array = \{ 0, 1, 2, 3, 4, 5, 6, 7, 8 \};}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} size = 9;}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::vector<std::array<int, 3>> points = \mbox{\hyperlink{a00149_a353d5244f19898d13d1d38193ea6ef1e}{ConvertRawIntArrayToPoints}}(raw\_array, size);}
+\end{DoxyCode}
+ 
+
+Definition at line 16 of file cinterface\+\_\+utils.\+cpp.
+
+\mbox{\Hypertarget{a00254_af77723a4383b278169e80cf0e361ec44}\label{a00254_af77723a4383b278169e80cf0e361ec44}} 
+\index{cinterface\_utils.cpp@{cinterface\_utils.cpp}!DestroyFloatVector@{DestroyFloatVector}}
+\index{DestroyFloatVector@{DestroyFloatVector}!cinterface\_utils.cpp@{cinterface\_utils.cpp}}
+\doxysubsubsection{\texorpdfstring{DestroyFloatVector()}{DestroyFloatVector()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00287_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Destroy\+Float\+Vector (\begin{DoxyParamCaption}\item[{std\+::vector$<$ float $>$ $\ast$}]{float\+\_\+vector }\end{DoxyParamCaption})}
+
+
+
+Delete a float vector that\textquotesingle{}s pointed to by {\itshape float\+\_\+vector}  
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "cinterface\_utils.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::vector<float>* vec = \textcolor{keyword}{new} std::vector<float>\{ 3, 6, 9 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// operator delete called on vec within DestroyFloatVector}}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (\mbox{\hyperlink{a00254_af77723a4383b278169e80cf0e361ec44}{DestroyFloatVector}}(vec)) \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"DestroyFloatVector was successful"} << std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"DestroyFloatVector unsuccessful"} << std::endl;}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+ 
+
+Definition at line 27 of file cinterface\+\_\+utils.\+cpp.
+
+
+
+References Delete\+Raw\+Ptr(), and H\+F\+::\+Exceptions\+::\+OK.
 

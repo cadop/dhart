@@ -1,12 +1,13 @@
 var searchData=
 [
-  ['analysismethods_444',['AnalysisMethods',['../a00274.html',1,'HF']]],
-  ['exceptions_445',['Exceptions',['../a00279.html',1,'HF']]],
-  ['geometry_446',['Geometry',['../a00280.html',1,'HF']]],
-  ['hf_447',['HF',['../a00273.html',1,'']]],
-  ['pathfinding_448',['Pathfinding',['../a00282.html',1,'HF']]],
-  ['raytracer_449',['RayTracer',['../a00277.html',1,'HF']]],
-  ['spatialstructures_450',['SpatialStructures',['../a00276.html',1,'HF']]],
-  ['viewanalysis_451',['ViewAnalysis',['../a00275.html',1,'HF::AnalysisMethods']]],
-  ['visibilitygraph_452',['VisibilityGraph',['../a00278.html',1,'HF::AnalysisMethods']]]
+  ['costalgorithms_449',['CostAlgorithms',['../a00316.html',1,'HF::SpatialStructures']]],
+  ['exceptions_450',['Exceptions',['../a00311.html',1,'HF']]],
+  ['geometry_451',['Geometry',['../a00312.html',1,'HF']]],
+  ['graphgenerator_452',['GraphGenerator',['../a00306.html',1,'HF']]],
+  ['hf_453',['HF',['../a00305.html',1,'']]],
+  ['pathfinding_454',['Pathfinding',['../a00314.html',1,'HF']]],
+  ['raytracer_455',['RayTracer',['../a00309.html',1,'HF']]],
+  ['spatialstructures_456',['SpatialStructures',['../a00308.html',1,'HF']]],
+  ['viewanalysis_457',['ViewAnalysis',['../a00307.html',1,'HF']]],
+  ['visibilitygraph_458',['VisibilityGraph',['../a00310.html',1,'HF']]]
 ];

@@ -1,22 +1,20 @@
-\hypertarget{a00260}{}\doxysection{Cinterface/visibility\+\_\+graph\+\_\+C.h File Reference}
-\label{a00260}\index{Cinterface/visibility\_graph\_C.h@{Cinterface/visibility\_graph\_C.h}}
+\hypertarget{a00260}{}\doxysection{Cinterface/objloader\+\_\+C.cpp File Reference}
+\label{a00260}\index{Cinterface/objloader\_C.cpp@{Cinterface/objloader\_C.cpp}}
+{\ttfamily \#include $<$objloader\+\_\+\+C.\+h$>$}\newline
+{\ttfamily \#include $<$objloader.\+h$>$}\newline
+{\ttfamily \#include $<$meshinfo.\+h$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$H\+F\+Exceptions.\+h$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
 {\ttfamily \#include $<$cinterface\+\_\+utils.\+h$>$}\newline
-{\ttfamily \#include $<$raytracer\+\_\+c.\+h$>$}\newline
-\doxysubsection*{Namespaces}
-\begin{DoxyCompactItemize}
-\item 
- \mbox{\hyperlink{a00273}{HF}}
-\begin{DoxyCompactList}\small\item\em Output C\+SR for interop with other languages \end{DoxyCompactList}\item 
- \mbox{\hyperlink{a00277}{H\+F\+::\+Ray\+Tracer}}
-\item 
- \mbox{\hyperlink{a00276}{H\+F\+::\+Spatial\+Structures}}
-\begin{DoxyCompactList}\small\item\em Contains standard fundamental data structures for representing space used throughout Human\+Factors. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00271_ga0255e6c4811298e61110adc64c0f8acd}{Create\+Visibility\+Graph\+All\+To\+All}} (\mbox{\hyperlink{a01163}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ert, const float $\ast$nodes, int num\+\_\+nodes, \mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$$\ast$out\+\_\+graph, float height)
-\begin{DoxyCompactList}\small\item\em Create a new directed visibility graph between all nodes in nodes. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00271_ga9b0664a60bcdf276b0fe0a2023b3d9b8}{Create\+Visibility\+Graph\+All\+To\+All\+Undirected}} (\mbox{\hyperlink{a01163}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ert, const float $\ast$nodes, int num\+\_\+nodes, \mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$$\ast$out\+\_\+graph, float height, const int cores)
-\begin{DoxyCompactList}\small\item\em Create a new undirected visibility graph between all nodes in nodes. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00254_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00271_gaf2e404cb696aee3473cac0d1507576d8}{Create\+Visibility\+Graph\+Group\+To\+Group}} (\mbox{\hyperlink{a01163}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ert, const float $\ast$group\+\_\+a, const int size\+\_\+a, const float $\ast$group\+\_\+b, const int size\+\_\+b, \mbox{\hyperlink{a01199}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$$\ast$out\+\_\+graph, float height)
-\begin{DoxyCompactList}\small\item\em Create a new visibility from the nodes in group\+\_\+a to the nodes in group\+\_\+b. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\mbox{\hyperlink{a00287_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00298_gac420d6b9a02309afc06c99ee7f85fefe}{Load\+O\+BJ}} (const char $\ast$obj\+\_\+paths, int length, float xrot, float yrot, float zrot, vector$<$ \mbox{\hyperlink{a01160}{Mesh\+Info}} $>$ $\ast$$\ast$out\+\_\+list)
+\begin{DoxyCompactList}\small\item\em Load an obj from the given path then rotate it by x,y, and z \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00287_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00298_gae463d4af8d6f7edc9dffa84b1099f247}{Store\+Mesh}} (vector$<$ \mbox{\hyperlink{a01160}{Mesh\+Info}} $>$ $\ast$$\ast$out\+\_\+info, const int $\ast$indices, int num\+\_\+indices, const float $\ast$vertices, int num\+\_\+vertices, const char $\ast$name, int id)
+\begin{DoxyCompactList}\small\item\em Store a mesh from python as meshinfo \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00287_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00298_gaaae27ea29ec17a7f3def98c435622504}{Rotate\+Mesh}} (vector$<$ \mbox{\hyperlink{a01160}{Mesh\+Info}} $>$ $\ast$mesh\+\_\+to\+\_\+rotate, float xrot, float yrot, float zrot)
+\begin{DoxyCompactList}\small\item\em Rotate an existing mesh \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00287_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00298_ga5f58f569ea99355c9de85658b31bc0bf}{Destroy\+Mesh\+Info}} (vector$<$ \mbox{\hyperlink{a01160}{Mesh\+Info}} $>$ $\ast$meshes\+\_\+to\+\_\+destroy)
+\begin{DoxyCompactList}\small\item\em Delete all instances of mesh info in the given vector \end{DoxyCompactList}\end{DoxyCompactItemize}

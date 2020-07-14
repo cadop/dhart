@@ -1,0 +1,114 @@
+\hypertarget{a00297}{}\doxysection{Graph\+Generator}
+\label{a00297}\index{GraphGenerator@{GraphGenerator}}
+
+
+Perform a breadth first search on a mesh to find accessible space.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00287_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00297_gac2583dc1ee6786b15fa4f06bfde2130a}{Generate\+Graph}} (\mbox{\hyperlink{a01196}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ray\+\_\+tracer, const float $\ast$start\+\_\+point, const float $\ast$spacing, int Max\+Nodes, float Up\+Step, float Up\+Slope, float Down\+Step, float Down\+Slope, int max\+\_\+step\+\_\+connection, int core\+\_\+count, \mbox{\hyperlink{a01220}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$$\ast$out\+\_\+graph)
+\begin{DoxyCompactList}\small\item\em Construct a graph by performing a breadth first search of accessible space. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Perform a breadth first search on a mesh to find accessible space. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{a00297_gac2583dc1ee6786b15fa4f06bfde2130a}\label{a00297_gac2583dc1ee6786b15fa4f06bfde2130a}} 
+\index{GraphGenerator@{GraphGenerator}!GenerateGraph@{GenerateGraph}}
+\index{GenerateGraph@{GenerateGraph}!GraphGenerator@{GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{GenerateGraph()}{GenerateGraph()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00287_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Generate\+Graph (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01196}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$}]{ray\+\_\+tracer,  }\item[{const float $\ast$}]{start\+\_\+point,  }\item[{const float $\ast$}]{spacing,  }\item[{int}]{Max\+Nodes,  }\item[{float}]{Up\+Step,  }\item[{float}]{Up\+Slope,  }\item[{float}]{Down\+Step,  }\item[{float}]{Down\+Slope,  }\item[{int}]{max\+\_\+step\+\_\+connection,  }\item[{int}]{core\+\_\+count,  }\item[{\mbox{\hyperlink{a01220}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$$\ast$}]{out\+\_\+graph }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00251}{Cinterface/analysis\+\_\+\+C.\+h}}$>$}
+
+
+
+Construct a graph by performing a breadth first search of accessible space. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ray\+\_\+tracer} & Raytracer containing the geometry to use for graph generation. \\
+\hline
+{\em start\+\_\+point} & The starting point for the graph generator to begin searching from. If this isn\textquotesingle{}t above solid ground, no nodes will be generated. \\
+\hline
+{\em spacing} & Space between nodes for each step of the search. Lower values will yield more nodes for a higher resolution graph.\\
+\hline
+{\em Max\+Nodes} & Stop generation after this many nodes. -\/1 to generate an infinite amount of nodes. Note that The final count may be greater than this number. \\
+\hline
+{\em Up\+Step} & Maximum height of a step the graph can traverse. Any steps higher this will be considered inaccessible. \\
+\hline
+{\em Up\+Slope} & Maximum upward slope the graph can traverse in degrees. Any slopes steeper than this will be considered inaccessible. \\
+\hline
+{\em Down\+Step} & Maximum step down the graph can traverse. Any steps steeper than this will be considered inaccessible. \\
+\hline
+{\em Down\+Slope} & The maximum downward slope the graph can traverse. Any slopes steeper than this will be considered inaccessible. \\
+\hline
+{\em max\+\_\+step\+\_\+connections} & Multiplier for number of children to generate for each node. Increasing this value will increase the number of edges in the graph, and as a result the amount of memory the algorithm requires. \\
+\hline
+{\em core\+\_\+count} & Number of cores to use. -\/1 will use all available cores, and 0 will run a serialized version of the algorithm. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+OK if the graph creation was successful. H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+N\+O\+\_\+\+G\+R\+A\+PH if it failed to generate a graph with more than a single node. 
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "analysis\_C.h", \#include "embree\_raytracer.h", \#include "graph.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a container of coordinates}}
+\DoxyCodeLine{std::vector<std::array<float, 3>> directions = \{}
+\DoxyCodeLine{    \{0, 0, 1\},}
+\DoxyCodeLine{    \{0, 1, 0\},}
+\DoxyCodeLine{    \{1, 0, 0\},}
+\DoxyCodeLine{    \{-\/1, 0, 0\},}
+\DoxyCodeLine{    \{0, -\/1, 0\},}
+\DoxyCodeLine{    \{0, 0, -\/1\},}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create the EmbreeRayTracer}}
+\DoxyCodeLine{\textcolor{keyword}{auto} ert = \mbox{\hyperlink{a01196}{HF::RayTracer::EmbreeRayTracer}}(directions);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Have a pointer to Graph ready}}
+\DoxyCodeLine{\mbox{\hyperlink{a01220}{HF::SpatialStructures::Graph}}* g = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Prepare parameters}}
+\DoxyCodeLine{\textcolor{keywordtype}{float} start[] = \{ 0, 0, 0 \};}
+\DoxyCodeLine{\textcolor{keywordtype}{float} spacing[] = \{ 1, 1, 1 \};}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} max\_nodes = 6;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} up\_step = 1.5;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} up\_slope = 1.0;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} down\_step = 2.0;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{float} down\_slope = 0.5;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} maximum\_step\_connections = 2;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} cores = 4;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (\mbox{\hyperlink{a00297_gac2583dc1ee6786b15fa4f06bfde2130a}{GenerateGraph}}(\&ert, start, spacing, max\_nodes, up\_step, up\_slope, down\_step, down\_slope, maximum\_step\_connections, cores, \&g)) \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"GenerateGraph successful"} << std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"GenerateGraph failed"} << std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Free memory resources once finished with Graph}}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (g) \{}
+\DoxyCodeLine{    \textcolor{keyword}{delete} g;}
+\DoxyCodeLine{    g = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+ 
+
+Definition at line 15 of file analysis\+\_\+\+C.\+cpp.
+
+
+
+References H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Build\+Network(), H\+F\+::\+Exceptions\+::\+N\+O\+\_\+\+G\+R\+A\+PH, H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Nodes(), and H\+F\+::\+Exceptions\+::\+OK.
+

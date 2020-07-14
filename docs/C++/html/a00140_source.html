@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Analysis: Cpp/spatialstructures/src/Constants.h Source File</title>
+<title>Analysis: Cpp/raytracer/src/RayRequest.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,31 +61,28 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_882abde7eca0231e2bae1ceefe5e858a.html">Cpp</a></li><li class="navelem"><a class="el" href="dir_66731bdf74d76a38b2c500ac62cfdf48.html">spatialstructures</a></li><li class="navelem"><a class="el" href="dir_7fdf8b1285a3d76ae7bf3420b7ffebee.html">src</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_882abde7eca0231e2bae1ceefe5e858a.html">Cpp</a></li><li class="navelem"><a class="el" href="dir_1061d284018fbd45bbbfc991ca095c8e.html">raytracer</a></li><li class="navelem"><a class="el" href="dir_198e8c151f4aa06153c41e30091296f4.html">src</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">Constants.h</div>  </div>
+<div class="title">RayRequest.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a00140.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00143.html">RayRequest.h</a>&quot;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00273.html">HF</a> {</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">namespace </span>SpatialStructures {</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="a00276.html#a0140105869479399be75147c8f77e724">   29</a></span>&#160;        constexpr <span class="keywordtype">float</span> <a class="code" href="a00276.html#a0140105869479399be75147c8f77e724">ROUNDING_PRECISION</a> = 0.0001f;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordtype">float</span> <a class="code" href="a00276.html#a2663b7e0dd2b9fb87e582feddcd13a8c">roundhf</a>(<span class="keywordtype">float</span> f);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    }</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="a01200.html#a4f92e6cd7a91b65f12781eab6d8bad41">   10</a></span>&#160;<a class="code" href="a01200.html#ae96c4c944750f00e950f134cd7838619">HF::RayTracer::FullRayRequest::FullRayRequest</a>(<span class="keywordtype">float</span> X, <span class="keywordtype">float</span> Y, <span class="keywordtype">float</span> Z, <span class="keywordtype">float</span> DX, <span class="keywordtype">float</span> DY, <span class="keywordtype">float</span> DZ, <span class="keywordtype">float</span> Distance) :</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    x(X), y(Y), z(Z), dx(DX), dy(DY), dz(DZ), distance(Distance) {};</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="a01200.html#a348484c556eccae394520f01ce65ec31">   13</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01200.html#a348484c556eccae394520f01ce65ec31">HF::RayTracer::FullRayRequest::didHit</a>()</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordflow">return</span> mesh_id != -1;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aa00276_html_a2663b7e0dd2b9fb87e582feddcd13a8c"><div class="ttname"><a href="a00276.html#a2663b7e0dd2b9fb87e582feddcd13a8c">HF::SpatialStructures::roundhf</a></div><div class="ttdeci">float roundhf(float f)</div><div class="ttdoc">Round a a float to the nearest ROUNDING_PRECISION.</div><div class="ttdef"><b>Definition:</b> <a href="a00137_source.html#l00013">Constants.cpp:13</a></div></div>
-<div class="ttc" id="aa00276_html_a0140105869479399be75147c8f77e724"><div class="ttname"><a href="a00276.html#a0140105869479399be75147c8f77e724">HF::SpatialStructures::ROUNDING_PRECISION</a></div><div class="ttdeci">constexpr float ROUNDING_PRECISION</div><div class="ttdoc">Minimum value that can be represented in humanfactors.</div><div class="ttdef"><b>Definition:</b> <a href="a00140_source.html#l00029">Constants.h:29</a></div></div>
-<div class="ttc" id="aa00273_html"><div class="ttname"><a href="a00273.html">HF</a></div><div class="ttdoc">Output CSR for interop with other languages</div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00013">graph_generator.cpp:13</a></div></div>
+<div class="ttc" id="aa01200_html_a348484c556eccae394520f01ce65ec31"><div class="ttname"><a href="a01200.html#a348484c556eccae394520f01ce65ec31">HF::RayTracer::FullRayRequest::didHit</a></div><div class="ttdeci">bool didHit()</div><div class="ttdoc">Tells if the rayrequest it or not. If true, the hit was successful, false otherwise....</div><div class="ttdef"><b>Definition:</b> <a href="a00140_source.html#l00013">RayRequest.cpp:13</a></div></div>
+<div class="ttc" id="aa01200_html_ae96c4c944750f00e950f134cd7838619"><div class="ttname"><a href="a01200.html#ae96c4c944750f00e950f134cd7838619">HF::RayTracer::FullRayRequest::FullRayRequest</a></div><div class="ttdeci">FullRayRequest()</div><div class="ttdoc">Default constructor, empty code block.</div><div class="ttdef"><b>Definition:</b> <a href="a00143_source.html#l00072">RayRequest.h:72</a></div></div>
+<div class="ttc" id="aa00143_html"><div class="ttname"><a href="a00143.html">RayRequest.h</a></div><div class="ttdoc">Contains definitions for the RayTracer namespace.</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

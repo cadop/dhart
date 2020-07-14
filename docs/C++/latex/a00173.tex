@@ -1,390 +1,47 @@
-\hypertarget{a00173}{}\doxysection{HF\+::Analysis\+Methods\+::View\+Analysis Namespace Reference}
-\label{a00173}\index{HF::AnalysisMethods::ViewAnalysis@{HF::AnalysisMethods::ViewAnalysis}}
+\hypertarget{a00173}{}\doxysection{Cpp/spatialstructures/src/graph.h File Reference}
+\label{a00173}\index{Cpp/spatialstructures/src/graph.h@{Cpp/spatialstructures/src/graph.h}}
+
+
+Contains definitions for the \mbox{\hyperlink{a01220}{Graph}} class.  
+
+
+{\ttfamily \#include $<$robin\+\_\+hood.\+h$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$Edge.\+h$>$}\newline
+{\ttfamily \#include $<$Node.\+h$>$}\newline
+{\ttfamily \#include $<$Eigen$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{a01216}{H\+F\+::\+Spatial\+Structures\+::\+C\+S\+R\+Ptrs}}
+\begin{DoxyCompactList}\small\item\em A struct to hold all necessary information for a C\+SR. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{a01220}{H\+F\+::\+Spatial\+Structures\+::\+Graph}}
+\begin{DoxyCompactList}\small\item\em A \mbox{\hyperlink{a01220}{Graph}} of nodes connected by edges that supports both integers and \mbox{\hyperlink{a01224}{H\+F\+::\+Spatial\+Structures\+::\+Node}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{a00313}{Eigen}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{a00313}{Eigen}} a C++ template library for linear algebra\+: matrices, vectors, numerical solvers, and related algorithms. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00305}{HF}}
+\begin{DoxyCompactList}\small\item\em Perform human scale analysis on 3D environments. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00308}{H\+F\+::\+Spatial\+Structures}}
+\begin{DoxyCompactList}\small\item\em Contains standard fundamental data structures for representing space used throughout Human\+Factors. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
-enum \mbox{\hyperlink{a00173_a0a616a205221414bf7aa28966b461dec}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}} \{ \newline
-\mbox{\hyperlink{a00173_a0a616a205221414bf7aa28966b461deca4905ac9d6a22bdfc1ae096094ce6248d}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+C\+O\+U\+NT}} = 0, 
-\mbox{\hyperlink{a00173_a0a616a205221414bf7aa28966b461deca6970bdc2201030b9c03fbdcf3973858a}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+S\+UM}} = 1, 
-\mbox{\hyperlink{a00173_a0a616a205221414bf7aa28966b461deca16de38737a9f8366e9b2042b4e9b6290}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+A\+V\+E\+R\+A\+GE}} = 2, 
-\mbox{\hyperlink{a00173_a0a616a205221414bf7aa28966b461deca26a4b44a837bf97b972628509912b4a5}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+M\+AX}} = 3, 
-\newline
-\mbox{\hyperlink{a00173_a0a616a205221414bf7aa28966b461decace31e2a082d17e038fcc6e3006166653}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+M\+IN}} = 4
+enum \mbox{\hyperlink{a00308_a6b23c0b2531c78f6d5049873c184f4f9}{H\+F\+::\+Spatial\+Structures\+::\+C\+O\+S\+T\+\_\+\+A\+G\+G\+R\+E\+G\+A\+TE}} \+: int \{ \mbox{\hyperlink{a00308_a6b23c0b2531c78f6d5049873c184f4f9a6970bdc2201030b9c03fbdcf3973858a}{H\+F\+::\+Spatial\+Structures\+::\+C\+O\+S\+T\+\_\+\+A\+G\+G\+R\+E\+G\+A\+T\+E\+::\+S\+UM}} = 0, 
+\mbox{\hyperlink{a00308_a6b23c0b2531c78f6d5049873c184f4f9a16de38737a9f8366e9b2042b4e9b6290}{H\+F\+::\+Spatial\+Structures\+::\+C\+O\+S\+T\+\_\+\+A\+G\+G\+R\+E\+G\+A\+T\+E\+::\+A\+V\+E\+R\+A\+GE}} = 1, 
+\mbox{\hyperlink{a00308_a6b23c0b2531c78f6d5049873c184f4f9a4905ac9d6a22bdfc1ae096094ce6248d}{H\+F\+::\+Spatial\+Structures\+::\+C\+O\+S\+T\+\_\+\+A\+G\+G\+R\+E\+G\+A\+T\+E\+::\+C\+O\+U\+NT}} = 2
  \}
-\begin{DoxyCompactList}\small\item\em The type of aggregation to use for View\+Analysis\+Aggregate \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Functions}
-\begin{DoxyCompactItemize}
-\item 
-constexpr float \mbox{\hyperlink{a00173_a2034cc822af4f41aa70c9b3450873d58}{Convert\+To\+Radians}} (float num\+\_\+in\+\_\+degrees)
-\begin{DoxyCompactList}\small\item\em Convert a number from degrees to radians. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{a00173_a93736cf04cfb45988e094e8b2efb2bd6}{Normalize}} (std\+::array$<$ float, 3 $>$ \&vec)
-\begin{DoxyCompactList}\small\item\em Normalize a vector. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{a00173_a58df074201e5978c5f45401820f7c3a2}{Cap\+Altitude}} (std\+::array$<$ float, 3 $>$ \&vec, float max\+\_\+angle, float min\+\_\+angle)
-\item 
-bool \mbox{\hyperlink{a00173_ae2b003df15838dc5928082445fd6524d}{Altitude\+Within\+Range}} (const std\+::array$<$ float, 3 $>$ \&vec, float max\+\_\+angle, float min\+\_\+angle)
-\item 
-vector$<$ std\+::array$<$ float, 3 $>$ $>$ \mbox{\hyperlink{a00173_a2780d3f9e9ea879d43121893c60a520c}{Fibbonacci\+Dist}} (int num\+\_\+points, float upwards\+\_\+fov, float downward\+\_\+fov)
-\item 
-vector$<$ std\+::array$<$ float, 3 $>$ $>$ \mbox{\hyperlink{a00168_ga9fc392fe8fc058674ffd5f4c8273a714}{Fibbonacci\+Distribute\+Points}} (int num\+\_\+points, float upwards\+\_\+fov=50.\+0f, float downward\+\_\+fov=70.\+0f)
-\begin{DoxyCompactList}\small\item\em Evenly distribute a set of points around a sphere centered at the origin. \end{DoxyCompactList}\item 
-std\+::vector$<$ float $>$ \mbox{\hyperlink{a00173_af29c2ecd8da07d73a38c0f589f44ac3b}{Spherical\+View\+Analysis\+With\+Distance}} (\mbox{\hyperlink{a01061}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&ert, const std\+::vector$<$ \mbox{\hyperlink{a01101}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ Nodes, int max\+\_\+rays, float height)
-\item 
-vector$<$ vector$<$ \mbox{\hyperlink{a01065}{Full\+Ray\+Request}} $>$ $>$ \mbox{\hyperlink{a00173_aad7b55a42de41fa5c917c68c7019ac1f}{Spherical\+View\+Analysis\+From\+Ray\+Requests}} (\mbox{\hyperlink{a01061}{Embree\+Ray\+Tracer}} \&ert, const vector$<$ \mbox{\hyperlink{a01101}{Node}} $>$ \&nodes, int max\+\_\+rays, float height)
-\item 
-std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{a01065}{H\+F\+::\+Ray\+Tracer\+::\+Full\+Ray\+Request}} $>$ $>$ \mbox{\hyperlink{a00173_a1e3455e890bf7cbaf0e1974c17a37584}{Spherical\+View\+Analysis\+With\+Ray\+Requests}} (\mbox{\hyperlink{a01061}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&ert, const std\+::vector$<$ \mbox{\hyperlink{a01101}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \&nodes, int max\+\_\+rays, float height=1.\+7f)
-\begin{DoxyCompactList}\small\item\em Conduct view analysis and get ray requests as the result \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{a00173_abd3ed7f9595c30784ca668bf886a8d77}{Aggregate}} (float \&out\+\_\+total, float new\+\_\+value, const \mbox{\hyperlink{a00173_a0a616a205221414bf7aa28966b461dec}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}} agg\+\_\+type, int count=0)
-\item 
-std\+::vector$<$ float $>$ \mbox{\hyperlink{a00173_a03b0855fd4aef49007db04ebb368a243}{Spherical\+View\+Analysis\+Average\+Distance}} (\mbox{\hyperlink{a01061}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&ert, const std\+::vector$<$ \mbox{\hyperlink{a01101}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ Nodes, int max\+\_\+rays, float height=1.\+7f)
-\begin{DoxyCompactList}\small\item\em Conduct view analysis with hardcoded embree raytracer \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename R\+ES , typename RT , typename N $>$ }\\std\+::vector$<$ R\+ES $>$ \mbox{\hyperlink{a00168_ga8090bf1d24c0cff934daba1c76d82ba6}{Spherical\+View\+Analysis}} (RT \&ray\+\_\+tracer, const std\+::vector$<$ N $>$ \&Nodes, int num\+\_\+rays, float upward\+\_\+limit=50.\+0f, float downward\+\_\+limit=70.\+0f, float height=1.\+7f)
-\begin{DoxyCompactList}\small\item\em Conduct view analysis with any Raytracer in parallel. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename RT , typename N $>$ }\\std\+::vector$<$ float $>$ \mbox{\hyperlink{a00168_ga249100bce7370ba4202f47294f179f81}{Spherical\+Rayshoot\+With\+Any\+R\+T\+For\+Distance}} (RT \&ray\+\_\+tracer, const std\+::vector$<$ N $>$ \&Nodes, int num\+\_\+rays, float upward\+\_\+limit=50.\+0f, float downward\+\_\+limit=70.\+0f, float height=1.\+7f, const \mbox{\hyperlink{a00173_a0a616a205221414bf7aa28966b461dec}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}} aggregation=\mbox{\hyperlink{a00173_a0a616a205221414bf7aa28966b461deca6970bdc2201030b9c03fbdcf3973858a}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+P\+E\+::\+S\+UM}})
-\begin{DoxyCompactList}\small\item\em Conduct view analysis and recieve a summarized set of results for each node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Methods of aggregating the costs for edges for each node in the graph. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Analyze space from the perspective of observers within a scene. \begin{DoxySeeAlso}{See also}
-\mbox{\hyperlink{a00168_ga8090bf1d24c0cff934daba1c76d82ba6}{Spherical\+View\+Analysis}} for more details. 
-\end{DoxySeeAlso}
-
-
-\doxysubsection{Enumeration Type Documentation}
-\mbox{\Hypertarget{a00173_a0a616a205221414bf7aa28966b461dec}\label{a00173_a0a616a205221414bf7aa28966b461dec}} 
-\index{HF::AnalysisMethods::ViewAnalysis@{HF::AnalysisMethods::ViewAnalysis}!AGGREGATE\_TYPE@{AGGREGATE\_TYPE}}
-\index{AGGREGATE\_TYPE@{AGGREGATE\_TYPE}!HF::AnalysisMethods::ViewAnalysis@{HF::AnalysisMethods::ViewAnalysis}}
-\doxysubsubsection{\texorpdfstring{AGGREGATE\_TYPE}{AGGREGATE\_TYPE}}
-{\footnotesize\ttfamily enum \mbox{\hyperlink{a00173_a0a616a205221414bf7aa28966b461dec}{H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}}\hspace{0.3cm}{\ttfamily [strong]}}
-
-
-
-The type of aggregation to use for View\+Analysis\+Aggregate 
-
-\begin{DoxyEnumFields}{Enumerator}
-\raisebox{\heightof{T}}[0pt][0pt]{\index{COUNT@{COUNT}!HF::AnalysisMethods::ViewAnalysis@{HF::AnalysisMethods::ViewAnalysis}}\index{HF::AnalysisMethods::ViewAnalysis@{HF::AnalysisMethods::ViewAnalysis}!COUNT@{COUNT}}}\mbox{\Hypertarget{a00173_a0a616a205221414bf7aa28966b461deca4905ac9d6a22bdfc1ae096094ce6248d}\label{a00173_a0a616a205221414bf7aa28966b461deca4905ac9d6a22bdfc1ae096094ce6248d}} 
-C\+O\+U\+NT&Total number of intersections. \\
-\hline
-
-\raisebox{\heightof{T}}[0pt][0pt]{\index{SUM@{SUM}!HF::AnalysisMethods::ViewAnalysis@{HF::AnalysisMethods::ViewAnalysis}}\index{HF::AnalysisMethods::ViewAnalysis@{HF::AnalysisMethods::ViewAnalysis}!SUM@{SUM}}}\mbox{\Hypertarget{a00173_a0a616a205221414bf7aa28966b461deca6970bdc2201030b9c03fbdcf3973858a}\label{a00173_a0a616a205221414bf7aa28966b461deca6970bdc2201030b9c03fbdcf3973858a}} 
-S\+UM&Sum of the distance from the origin to all intersections. \\
-\hline
-
-\raisebox{\heightof{T}}[0pt][0pt]{\index{AVERAGE@{AVERAGE}!HF::AnalysisMethods::ViewAnalysis@{HF::AnalysisMethods::ViewAnalysis}}\index{HF::AnalysisMethods::ViewAnalysis@{HF::AnalysisMethods::ViewAnalysis}!AVERAGE@{AVERAGE}}}\mbox{\Hypertarget{a00173_a0a616a205221414bf7aa28966b461deca16de38737a9f8366e9b2042b4e9b6290}\label{a00173_a0a616a205221414bf7aa28966b461deca16de38737a9f8366e9b2042b4e9b6290}} 
-A\+V\+E\+R\+A\+GE&Average distance from the origin to every intersection. \\
-\hline
-
-\raisebox{\heightof{T}}[0pt][0pt]{\index{MAX@{MAX}!HF::AnalysisMethods::ViewAnalysis@{HF::AnalysisMethods::ViewAnalysis}}\index{HF::AnalysisMethods::ViewAnalysis@{HF::AnalysisMethods::ViewAnalysis}!MAX@{MAX}}}\mbox{\Hypertarget{a00173_a0a616a205221414bf7aa28966b461deca26a4b44a837bf97b972628509912b4a5}\label{a00173_a0a616a205221414bf7aa28966b461deca26a4b44a837bf97b972628509912b4a5}} 
-M\+AX&Maximum distance from the origin to any intersection. \\
-\hline
-
-\raisebox{\heightof{T}}[0pt][0pt]{\index{MIN@{MIN}!HF::AnalysisMethods::ViewAnalysis@{HF::AnalysisMethods::ViewAnalysis}}\index{HF::AnalysisMethods::ViewAnalysis@{HF::AnalysisMethods::ViewAnalysis}!MIN@{MIN}}}\mbox{\Hypertarget{a00173_a0a616a205221414bf7aa28966b461decace31e2a082d17e038fcc6e3006166653}\label{a00173_a0a616a205221414bf7aa28966b461decace31e2a082d17e038fcc6e3006166653}} 
-M\+IN&Minimum distance from the origin to any intersection. \\
-\hline
-
-\end{DoxyEnumFields}
-
-
-Definition at line 33 of file view\+\_\+analysis.\+h.
-
-
-
-\doxysubsection{Function Documentation}
-\mbox{\Hypertarget{a00173_abd3ed7f9595c30784ca668bf886a8d77}\label{a00173_abd3ed7f9595c30784ca668bf886a8d77}} 
-\index{HF::AnalysisMethods::ViewAnalysis@{HF::AnalysisMethods::ViewAnalysis}!Aggregate@{Aggregate}}
-\index{Aggregate@{Aggregate}!HF::AnalysisMethods::ViewAnalysis@{HF::AnalysisMethods::ViewAnalysis}}
-\doxysubsubsection{\texorpdfstring{Aggregate()}{Aggregate()}}
-{\footnotesize\ttfamily void H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+Aggregate (\begin{DoxyParamCaption}\item[{float \&}]{out\+\_\+total,  }\item[{float}]{new\+\_\+value,  }\item[{const \mbox{\hyperlink{a00173_a0a616a205221414bf7aa28966b461dec}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}}}]{agg\+\_\+type,  }\item[{int}]{count = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-
-
-Apply an aggregation to the given value.
-
-
-\begin{DoxyParams}{Parameters}
-{\em out\+\_\+total} & The total of the current aggregation. This will be modified depending on agg\+\_\+type.\\
-\hline
-{\em new\+\_\+value} & New value to aggregate into out\+\_\+total. \\
-\hline
-{\em agg\+\_\+type} & The type of aggregation to use.\\
-\hline
-{\em count} & Number of elements encountered so far. Used for Count/\+Average.\\
-\hline
-\end{DoxyParams}
-
-\begin{DoxyExceptions}{Exceptions}
-{\em std\+::out\+\_\+of\+\_\+range} & agg\+\_\+type didn\textquotesingle{}t match any valid A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE.\\
-\hline
-\end{DoxyExceptions}
-
-
-This can be called in a loop to summarize the results of some calculation as new values become available. This avoids having to allocate entire arrays of values then calculating the result at the end. \begin{DoxySeeAlso}{See also}
-\mbox{\hyperlink{a00173_a0a616a205221414bf7aa28966b461dec}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}} for a list of supported aggregation types.
-\end{DoxySeeAlso}
-\begin{DoxyNote}{Note}
-This function will likely not be very useful elsewhere since most of its functionality can be replaced by single function calls like std\+::min(a, b) or std\+::max(a,b). This was made a standalone function mostly to seperate calculating the result value from the implementation of the View Analysis itself.
-\end{DoxyNote}
-\begin{DoxyParagraph}{Example}
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// Requires \#include <numeric>}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Use this to save some space.}}
-\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a00173_a0a616a205221414bf7aa28966b461dec}{HF::AnalysisMethods::ViewAnalysis::AGGREGATE\_TYPE}};}
-\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a00173_abd3ed7f9595c30784ca668bf886a8d77}{HF::AnalysisMethods::ViewAnalysis::Aggregate}};}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Undef these since they will prevent us from calling numericlimits}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#undef min}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#undef max}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Define values}}
-\DoxyCodeLine{std::vector<int> values = \{ 1, 2, 3, 4, 5 \};}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Calculate Average}}
-\DoxyCodeLine{\textcolor{keywordtype}{float} total = 0.0f; \textcolor{keywordtype}{int} count = 0;}
-\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} val : values) \{}
-\DoxyCodeLine{    count += 1;}
-\DoxyCodeLine{    \mbox{\hyperlink{a00173_abd3ed7f9595c30784ca668bf886a8d77}{Aggregate}}(total, val, \mbox{\hyperlink{a00173_a0a616a205221414bf7aa28966b461deca16de38737a9f8366e9b2042b4e9b6290}{AGGREGATE\_TYPE::AVERAGE}}, count);}
-\DoxyCodeLine{\}}
-\DoxyCodeLine{std::cerr << \textcolor{stringliteral}{"Average: "} << total << std::endl;}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Calculate Sum}}
-\DoxyCodeLine{total = 0.0f;}
-\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} val : values) \mbox{\hyperlink{a00173_abd3ed7f9595c30784ca668bf886a8d77}{Aggregate}}(total, val, \mbox{\hyperlink{a00173_a0a616a205221414bf7aa28966b461deca6970bdc2201030b9c03fbdcf3973858a}{AGGREGATE\_TYPE::SUM}});}
-\DoxyCodeLine{std::cerr << \textcolor{stringliteral}{"Sum: "} << total << std::endl;}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Calculate Max. Start total at lowest possible float value to ensure}}
-\DoxyCodeLine{\textcolor{comment}{// it overwritten by the first element.}}
-\DoxyCodeLine{total = std::numeric\_limits<float>::min();}
-\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} val : values) \mbox{\hyperlink{a00173_abd3ed7f9595c30784ca668bf886a8d77}{Aggregate}}(total, val, \mbox{\hyperlink{a00173_a0a616a205221414bf7aa28966b461deca26a4b44a837bf97b972628509912b4a5}{AGGREGATE\_TYPE::MAX}});}
-\DoxyCodeLine{std::cerr << \textcolor{stringliteral}{"Max: "} << total << std::endl;}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Calculate Min. Start total at highest possible float value to ensure}}
-\DoxyCodeLine{\textcolor{comment}{// it overwritten by the first element.}}
-\DoxyCodeLine{total = (std::numeric\_limits<float>::max());}
-\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} val : values) \mbox{\hyperlink{a00173_abd3ed7f9595c30784ca668bf886a8d77}{Aggregate}}(total, val, \mbox{\hyperlink{a00173_a0a616a205221414bf7aa28966b461decace31e2a082d17e038fcc6e3006166653}{AGGREGATE\_TYPE::MIN}});}
-\DoxyCodeLine{std::cerr << \textcolor{stringliteral}{"Min: "} << total << std::endl;}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Calculate Count}}
-\DoxyCodeLine{total = 0.0f;}
-\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} val : values) \mbox{\hyperlink{a00173_abd3ed7f9595c30784ca668bf886a8d77}{Aggregate}}(total, val, \mbox{\hyperlink{a00173_a0a616a205221414bf7aa28966b461deca4905ac9d6a22bdfc1ae096094ce6248d}{AGGREGATE\_TYPE::COUNT}});}
-\DoxyCodeLine{std::cerr << \textcolor{stringliteral}{"Count: "} << total << std::endl;}
-\DoxyCodeLine{ASSERT\_EQ(total, 5);}
-\end{DoxyCode}
- {\ttfamily $>$$>$$>$ Average\+: 3}~\newline
-{\ttfamily $>$$>$$>$ Sum\+: 15}~\newline
-{\ttfamily $>$$>$$>$ Max\+: 5}~\newline
-{\ttfamily $>$$>$$>$ Min\+: 1}~\newline
-{\ttfamily $>$$>$$>$ Count\+: 5}~\newline
- 
-\end{DoxyParagraph}
-\begin{DoxyRefDesc}{Todo}
-\item[\mbox{\hyperlink{a00162__todo000001}{Todo}}]Min/\+Max and maybe the other functions should handle Na\+Ns for min/max to signal that no value already exists. The user can use the min and max numeric limits or zero for defaults like in the example, but it would be great to be able to use one value that would be reliably handled as default input for every case. \end{DoxyRefDesc}
-
-
-Definition at line 191 of file view\+\_\+analysis.\+h.
-
-
-
-References A\+V\+E\+R\+A\+GE, C\+O\+U\+NT, M\+AX, M\+IN, and S\+UM.
-
-
-
-Referenced by Spherical\+Rayshoot\+With\+Any\+R\+T\+For\+Distance().
-
-\mbox{\Hypertarget{a00173_ae2b003df15838dc5928082445fd6524d}\label{a00173_ae2b003df15838dc5928082445fd6524d}} 
-\index{HF::AnalysisMethods::ViewAnalysis@{HF::AnalysisMethods::ViewAnalysis}!AltitudeWithinRange@{AltitudeWithinRange}}
-\index{AltitudeWithinRange@{AltitudeWithinRange}!HF::AnalysisMethods::ViewAnalysis@{HF::AnalysisMethods::ViewAnalysis}}
-\doxysubsubsection{\texorpdfstring{AltitudeWithinRange()}{AltitudeWithinRange()}}
-{\footnotesize\ttfamily bool H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+Altitude\+Within\+Range (\begin{DoxyParamCaption}\item[{const std\+::array$<$ float, 3 $>$ \&}]{vec,  }\item[{float}]{max\+\_\+angle,  }\item[{float}]{min\+\_\+angle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-Check if a vector\textquotesingle{}s altitude is between max and min angle.
-
-
-\begin{DoxyParams}{Parameters}
-{\em vec} & Vector to check the altitude of \\
-\hline
-{\em max\+\_\+angle} & Maximum allowed angle in radians \\
-\hline
-{\em min\+\_\+angle} & Minimum allowed angle in radians\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-True if vec\textquotesingle{}s altitude is between min and max angle, false if it isn\textquotesingle{}t.
-\end{DoxyReturn}
-vec is converted to spherical coordinates to determine phi, which is then compared to max and min angle to calculate the result. 
-
-Definition at line 90 of file view\+\_\+analysis.\+cpp.
-
-
-
-Referenced by Fibbonacci\+Dist().
-
-\mbox{\Hypertarget{a00173_a58df074201e5978c5f45401820f7c3a2}\label{a00173_a58df074201e5978c5f45401820f7c3a2}} 
-\index{HF::AnalysisMethods::ViewAnalysis@{HF::AnalysisMethods::ViewAnalysis}!CapAltitude@{CapAltitude}}
-\index{CapAltitude@{CapAltitude}!HF::AnalysisMethods::ViewAnalysis@{HF::AnalysisMethods::ViewAnalysis}}
-\doxysubsubsection{\texorpdfstring{CapAltitude()}{CapAltitude()}}
-{\footnotesize\ttfamily bool H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+Cap\+Altitude (\begin{DoxyParamCaption}\item[{std\+::array$<$ float, 3 $>$ \&}]{vec,  }\item[{float}]{max\+\_\+angle,  }\item[{float}]{min\+\_\+angle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-\begin{DoxyRefDesc}{Deprecated}
-\item[\mbox{\hyperlink{a00161__deprecated000001}{Deprecated}}]Used in a failed attempt to map phi to the min and max angle. This idea was faulty and resulted in points that were not equally distributed. \end{DoxyRefDesc}
-
-
-Definition at line 46 of file view\+\_\+analysis.\+cpp.
-
-\mbox{\Hypertarget{a00173_a2034cc822af4f41aa70c9b3450873d58}\label{a00173_a2034cc822af4f41aa70c9b3450873d58}} 
-\index{HF::AnalysisMethods::ViewAnalysis@{HF::AnalysisMethods::ViewAnalysis}!ConvertToRadians@{ConvertToRadians}}
-\index{ConvertToRadians@{ConvertToRadians}!HF::AnalysisMethods::ViewAnalysis@{HF::AnalysisMethods::ViewAnalysis}}
-\doxysubsubsection{\texorpdfstring{ConvertToRadians()}{ConvertToRadians()}}
-{\footnotesize\ttfamily constexpr float H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+Convert\+To\+Radians (\begin{DoxyParamCaption}\item[{float}]{num\+\_\+in\+\_\+degrees }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [constexpr]}}
-
-
-
-Convert a number from degrees to radians. 
-
-
-
-Definition at line 21 of file view\+\_\+analysis.\+cpp.
-
-
-
-Referenced by Fibbonacci\+Dist().
-
-\mbox{\Hypertarget{a00173_a2780d3f9e9ea879d43121893c60a520c}\label{a00173_a2780d3f9e9ea879d43121893c60a520c}} 
-\index{HF::AnalysisMethods::ViewAnalysis@{HF::AnalysisMethods::ViewAnalysis}!FibbonacciDist@{FibbonacciDist}}
-\index{FibbonacciDist@{FibbonacciDist}!HF::AnalysisMethods::ViewAnalysis@{HF::AnalysisMethods::ViewAnalysis}}
-\doxysubsubsection{\texorpdfstring{FibbonacciDist()}{FibbonacciDist()}}
-{\footnotesize\ttfamily vector$<$std\+::array$<$float, 3$>$ $>$ H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+Fibbonacci\+Dist (\begin{DoxyParamCaption}\item[{int}]{num\+\_\+points,  }\item[{float}]{upwards\+\_\+fov,  }\item[{float}]{downward\+\_\+fov }\end{DoxyParamCaption})}
-
-Equally distribute points on a sphere using Fibbonacci
-
-
-\begin{DoxyParams}{Parameters}
-{\em num\+\_\+points} & Number of points to generate. The actual number of points generated will be lower based given field of view limits. \\
-\hline
-{\em upwards\+\_\+fov} & Maximum altitude of generated points in degrees. \\
-\hline
-{\em downward\+\_\+fov} & Minimum altitude of points in degrees.\\
-\hline
-\end{DoxyParams}
-Implementation is based on \href{https://stackoverflow.com/questions/9600801/evenly-distributing-n-points-on-a-sphere}{\texttt{ https\+://stackoverflow.\+com/questions/9600801/evenly-\/distributing-\/n-\/points-\/on-\/a-\/sphere}}.
-
-\begin{DoxySeeAlso}{See also}
-\mbox{\hyperlink{a00173_ae2b003df15838dc5928082445fd6524d}{Altitude\+Within\+Range}} to see how altitude is limited based on upward/downward fov. 
-\end{DoxySeeAlso}
-
-
-Definition at line 112 of file view\+\_\+analysis.\+cpp.
-
-
-
-References Altitude\+Within\+Range(), Convert\+To\+Radians(), and Normalize().
-
-
-
-Referenced by Fibbonacci\+Distribute\+Points().
-
-\mbox{\Hypertarget{a00173_a93736cf04cfb45988e094e8b2efb2bd6}\label{a00173_a93736cf04cfb45988e094e8b2efb2bd6}} 
-\index{HF::AnalysisMethods::ViewAnalysis@{HF::AnalysisMethods::ViewAnalysis}!Normalize@{Normalize}}
-\index{Normalize@{Normalize}!HF::AnalysisMethods::ViewAnalysis@{HF::AnalysisMethods::ViewAnalysis}}
-\doxysubsubsection{\texorpdfstring{Normalize()}{Normalize()}}
-{\footnotesize\ttfamily void H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+Normalize (\begin{DoxyParamCaption}\item[{std\+::array$<$ float, 3 $>$ \&}]{vec }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Normalize a vector. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em vec} & Vector to normalize. Will be updated with the normalized value. \\
-\hline
-\end{DoxyParams}
-
-
-Definition at line 27 of file view\+\_\+analysis.\+cpp.
-
-
-
-Referenced by Fibbonacci\+Dist().
-
-\mbox{\Hypertarget{a00173_a03b0855fd4aef49007db04ebb368a243}\label{a00173_a03b0855fd4aef49007db04ebb368a243}} 
-\index{HF::AnalysisMethods::ViewAnalysis@{HF::AnalysisMethods::ViewAnalysis}!SphericalViewAnalysisAverageDistance@{SphericalViewAnalysisAverageDistance}}
-\index{SphericalViewAnalysisAverageDistance@{SphericalViewAnalysisAverageDistance}!HF::AnalysisMethods::ViewAnalysis@{HF::AnalysisMethods::ViewAnalysis}}
-\doxysubsubsection{\texorpdfstring{SphericalViewAnalysisAverageDistance()}{SphericalViewAnalysisAverageDistance()}}
-{\footnotesize\ttfamily std\+::vector$<$float$>$ H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+Spherical\+View\+Analysis\+Average\+Distance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01061}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&}]{ert,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{a01101}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$}]{Nodes,  }\item[{int}]{max\+\_\+rays,  }\item[{float}]{height = {\ttfamily 1.7f} }\end{DoxyParamCaption})}
-
-
-
-Conduct view analysis with hardcoded embree raytracer 
-
-
-\begin{DoxyParams}{Parameters}
-{\em ert} & The raytracer to shoot rays with\\
-\hline
-{\em nodes} & The nodes to shoot rays from\\
-\hline
-{\em max\+\_\+rays} & Maximum number of rays to shoot per node\\
-\hline
-{\em max\+\_\+rays} & Nodes will be offset by this height before being analyzed\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-A vector of rayrequests containing the output
-\end{DoxyReturn}
-\begin{DoxyRefDesc}{Deprecated}
-\item[\mbox{\hyperlink{a00161__deprecated000005}{Deprecated}}]Not implemented. Use Spherical\+Rayshoot\+With\+Any\+R\+T\+For\+Distance instead. \end{DoxyRefDesc}
-\mbox{\Hypertarget{a00173_aad7b55a42de41fa5c917c68c7019ac1f}\label{a00173_aad7b55a42de41fa5c917c68c7019ac1f}} 
-\index{HF::AnalysisMethods::ViewAnalysis@{HF::AnalysisMethods::ViewAnalysis}!SphericalViewAnalysisFromRayRequests@{SphericalViewAnalysisFromRayRequests}}
-\index{SphericalViewAnalysisFromRayRequests@{SphericalViewAnalysisFromRayRequests}!HF::AnalysisMethods::ViewAnalysis@{HF::AnalysisMethods::ViewAnalysis}}
-\doxysubsubsection{\texorpdfstring{SphericalViewAnalysisFromRayRequests()}{SphericalViewAnalysisFromRayRequests()}}
-{\footnotesize\ttfamily vector$<$vector$<$\mbox{\hyperlink{a01065}{Full\+Ray\+Request}}$>$ $>$ H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+Spherical\+View\+Analysis\+From\+Ray\+Requests (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01061}{Embree\+Ray\+Tracer}} \&}]{ert,  }\item[{const vector$<$ \mbox{\hyperlink{a01101}{Node}} $>$ \&}]{nodes,  }\item[{int}]{max\+\_\+rays,  }\item[{float}]{height }\end{DoxyParamCaption})}
-
-\begin{DoxyRefDesc}{Deprecated}
-\item[\mbox{\hyperlink{a00161__deprecated000003}{Deprecated}}]. Never used. Not even defined in the header \end{DoxyRefDesc}
-
-
-Definition at line 180 of file view\+\_\+analysis.\+cpp.
-
-
-
-References Fibbonacci\+Distribute\+Points(), and H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Fire\+Requests().
-
-\mbox{\Hypertarget{a00173_af29c2ecd8da07d73a38c0f589f44ac3b}\label{a00173_af29c2ecd8da07d73a38c0f589f44ac3b}} 
-\index{HF::AnalysisMethods::ViewAnalysis@{HF::AnalysisMethods::ViewAnalysis}!SphericalViewAnalysisWithDistance@{SphericalViewAnalysisWithDistance}}
-\index{SphericalViewAnalysisWithDistance@{SphericalViewAnalysisWithDistance}!HF::AnalysisMethods::ViewAnalysis@{HF::AnalysisMethods::ViewAnalysis}}
-\doxysubsubsection{\texorpdfstring{SphericalViewAnalysisWithDistance()}{SphericalViewAnalysisWithDistance()}}
-{\footnotesize\ttfamily std\+::vector$<$float$>$ H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+Spherical\+View\+Analysis\+With\+Distance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01061}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&}]{ert,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{a01101}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$}]{Nodes,  }\item[{int}]{max\+\_\+rays,  }\item[{float}]{height }\end{DoxyParamCaption})}
-
-\begin{DoxyRefDesc}{Deprecated}
-\item[\mbox{\hyperlink{a00161__deprecated000002}{Deprecated}}]. Never used, never implemented. \end{DoxyRefDesc}
-
-
-Definition at line 174 of file view\+\_\+analysis.\+cpp.
-
-\mbox{\Hypertarget{a00173_a1e3455e890bf7cbaf0e1974c17a37584}\label{a00173_a1e3455e890bf7cbaf0e1974c17a37584}} 
-\index{HF::AnalysisMethods::ViewAnalysis@{HF::AnalysisMethods::ViewAnalysis}!SphericalViewAnalysisWithRayRequests@{SphericalViewAnalysisWithRayRequests}}
-\index{SphericalViewAnalysisWithRayRequests@{SphericalViewAnalysisWithRayRequests}!HF::AnalysisMethods::ViewAnalysis@{HF::AnalysisMethods::ViewAnalysis}}
-\doxysubsubsection{\texorpdfstring{SphericalViewAnalysisWithRayRequests()}{SphericalViewAnalysisWithRayRequests()}}
-{\footnotesize\ttfamily std\+::vector$<$std\+::vector$<$\mbox{\hyperlink{a01065}{H\+F\+::\+Ray\+Tracer\+::\+Full\+Ray\+Request}}$>$ $>$ H\+F\+::\+Analysis\+Methods\+::\+View\+Analysis\+::\+Spherical\+View\+Analysis\+With\+Ray\+Requests (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01061}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&}]{ert,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{a01101}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $>$ \&}]{nodes,  }\item[{int}]{max\+\_\+rays,  }\item[{float}]{height = {\ttfamily 1.7f} }\end{DoxyParamCaption})}
-
-
-
-Conduct view analysis and get ray requests as the result 
-
-
-\begin{DoxyParams}{Parameters}
-{\em ert} & The raytracer to shoot rays with\\
-\hline
-{\em nodes} & The nodes to shoot rays from\\
-\hline
-{\em max\+\_\+rays} & Maximum number of rays to shoot per node\\
-\hline
-{\em max\+\_\+rays} & Nodes will be offset by this height before being analyzed\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-A vector of rayrequests containing the output
-\end{DoxyReturn}
-\begin{DoxyRefDesc}{Deprecated}
-\item[\mbox{\hyperlink{a00161__deprecated000004}{Deprecated}}]Suceeded by Spherical\+View\+Analysis. \end{DoxyRefDesc}
+Contains definitions for the \mbox{\hyperlink{a01220}{Graph}} class. 
+
+\begin{DoxyAuthor}{Author}
+T\+BA 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+06 Jun 2020 
+\end{DoxyDate}

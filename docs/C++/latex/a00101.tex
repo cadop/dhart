@@ -1,47 +1,59 @@
-\hypertarget{a00101}{}\doxysection{Cpp/objloader/src/objloader.h File Reference}
-\label{a00101}\index{Cpp/objloader/src/objloader.h@{Cpp/objloader/src/objloader.h}}
+\hypertarget{a00101}{}\doxysection{Cpp/exceptions/src/\+H\+F\+Exceptions.h File Reference}
+\label{a00101}\index{Cpp/exceptions/src/HFExceptions.h@{Cpp/exceptions/src/HFExceptions.h}}
 
 
-Contains definitions for the \mbox{\hyperlink{a00280}{Geometry}} namespace.  
+Contains definitions for the \mbox{\hyperlink{a00311}{Exceptions}} namespace.  
 
 
-{\ttfamily \#include $<$vector$>$}\newline
-{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$exception$>$}\newline
+{\ttfamily \#include $<$cstring$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{a01144}{H\+F\+::\+Exceptions\+::\+File\+Not\+Found}}
+\begin{DoxyCompactList}\small\item\em Thrown when desired file is not found. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a01148}{H\+F\+::\+Exceptions\+::\+Invalid\+O\+BJ}}
+\begin{DoxyCompactList}\small\item\em The O\+BJ file was not valid. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a01152}{H\+F\+::\+Exceptions\+::\+Missing\+Dependency}}
+\begin{DoxyCompactList}\small\item\em Thrown when a dependency is missing such as Embree. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
- \mbox{\hyperlink{a00281}{Eigen}}
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{a00281}{Eigen}} a C++ template library for linear algebra\+: matrices, vectors, numerical solvers, and related algorithms. \end{DoxyCompactList}\item 
- \mbox{\hyperlink{a00273}{HF}}
-\begin{DoxyCompactList}\small\item\em Output C\+SR for interop with other languages \end{DoxyCompactList}\item 
- \mbox{\hyperlink{a00280}{H\+F\+::\+Geometry}}
-\begin{DoxyCompactList}\small\item\em Manipulate and load geometry from disk. \end{DoxyCompactList}\end{DoxyCompactItemize}
+ \mbox{\hyperlink{a00305}{HF}}
+\begin{DoxyCompactList}\small\item\em Perform human scale analysis on 3D environments. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00311}{H\+F\+::\+Exceptions}}
+\begin{DoxyCompactList}\small\item\em Custom exceptions and error codes used interally by Human\+Factors. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
-enum \mbox{\hyperlink{a00280_aa9f0bc5275641fe23f6a7d760751bbc5}{H\+F\+::\+Geometry\+::\+G\+R\+O\+U\+P\+\_\+\+M\+E\+T\+H\+OD}} \{ \mbox{\hyperlink{a00280_aa9f0bc5275641fe23f6a7d760751bbc5a1f09cac4eec7512c5db99bd1c050ee1e}{H\+F\+::\+Geometry\+::\+O\+N\+L\+Y\+\_\+\+F\+I\+LE}} = 0, 
-\mbox{\hyperlink{a00280_aa9f0bc5275641fe23f6a7d760751bbc5afeacc3d8dc97902c6bf9332bdcda9912}{H\+F\+::\+Geometry\+::\+B\+Y\+\_\+\+G\+R\+O\+UP}} = 1, 
-\mbox{\hyperlink{a00280_aa9f0bc5275641fe23f6a7d760751bbc5ac47c481b667efc6c2689d46cd456237c}{H\+F\+::\+Geometry\+::\+B\+Y\+\_\+\+M\+A\+T\+E\+R\+I\+AL}} = 2, 
-\mbox{\hyperlink{a00280_aa9f0bc5275641fe23f6a7d760751bbc5a42c850fb543d857db34aea03c8671f2b}{H\+F\+::\+Geometry\+::\+M\+A\+T\+E\+R\+I\+A\+L\+\_\+\+A\+N\+D\+\_\+\+F\+I\+LE}} = 3
+enum \mbox{\hyperlink{a00311_aed53c233beb1d9ec1b0c5fc2bfbb1051}{H\+F\+::\+Exceptions\+::\+H\+F\+\_\+\+S\+T\+A\+T\+US}} \{ \newline
+\mbox{\hyperlink{a00311_aed53c233beb1d9ec1b0c5fc2bfbb1051a1c4bb363b033df614cec357be815e09d}{H\+F\+::\+Exceptions\+::\+OK}} = 1, 
+\mbox{\hyperlink{a00311_aed53c233beb1d9ec1b0c5fc2bfbb1051acd7712929c704f3ad7d7af9113654098}{H\+F\+::\+Exceptions\+::\+N\+O\+T\+\_\+\+I\+M\+P\+L\+E\+M\+E\+N\+T\+ED}} = -\/54, 
+\mbox{\hyperlink{a00311_aed53c233beb1d9ec1b0c5fc2bfbb1051a5bfa31d727681298e6c4cea74c848ddf}{H\+F\+::\+Exceptions\+::\+G\+E\+N\+E\+R\+I\+C\+\_\+\+E\+R\+R\+OR}} = 0, 
+\mbox{\hyperlink{a00311_aed53c233beb1d9ec1b0c5fc2bfbb1051a42b2a897f1b46ae086e3965e22f0ed58}{H\+F\+::\+Exceptions\+::\+N\+O\+T\+\_\+\+F\+O\+U\+ND}} = -\/1, 
+\newline
+\mbox{\hyperlink{a00311_aed53c233beb1d9ec1b0c5fc2bfbb1051a06ef98037b48ddc9685ab0d7519495b1}{H\+F\+::\+Exceptions\+::\+I\+N\+V\+A\+L\+I\+D\+\_\+\+O\+BJ}} = -\/2, 
+\mbox{\hyperlink{a00311_aed53c233beb1d9ec1b0c5fc2bfbb1051ab9036b1fec7e201bf970944267471d35}{H\+F\+::\+Exceptions\+::\+N\+O\+\_\+\+G\+R\+A\+PH}} = -\/3, 
+\mbox{\hyperlink{a00311_aed53c233beb1d9ec1b0c5fc2bfbb1051a6ffda360ff38334d4b03fb61abfd1aa0}{H\+F\+::\+Exceptions\+::\+I\+N\+V\+A\+L\+I\+D\+\_\+\+C\+O\+ST}} = -\/4, 
+\mbox{\hyperlink{a00311_aed53c233beb1d9ec1b0c5fc2bfbb1051a4ac9bf1100834909081553685467dfc1}{H\+F\+::\+Exceptions\+::\+M\+I\+S\+S\+I\+N\+G\+\_\+\+D\+E\+P\+E\+ND}} = -\/5, 
+\newline
+\mbox{\hyperlink{a00311_aed53c233beb1d9ec1b0c5fc2bfbb1051a3b0d9d3819413f7a74bb5238725dd832}{H\+F\+::\+Exceptions\+::\+O\+U\+T\+\_\+\+O\+F\+\_\+\+M\+E\+M\+O\+RY}} = -\/6, 
+\mbox{\hyperlink{a00311_aed53c233beb1d9ec1b0c5fc2bfbb1051a33fe75a4991277e4ed8c0f88f3e5db06}{H\+F\+::\+Exceptions\+::\+M\+A\+L\+F\+O\+R\+M\+E\+D\+\_\+\+DB}} = -\/7, 
+\mbox{\hyperlink{a00311_aed53c233beb1d9ec1b0c5fc2bfbb1051a9626c67d85e20eea56e5a7efc2f6310f}{H\+F\+::\+Exceptions\+::\+D\+B\+\_\+\+B\+U\+SY}} = -\/8, 
+\mbox{\hyperlink{a00311_aed53c233beb1d9ec1b0c5fc2bfbb1051ab31440d86dbcfa007f7c8121dcbeea85}{H\+F\+::\+Exceptions\+::\+I\+N\+V\+A\+L\+I\+D\+\_\+\+P\+TR}} = -\/9, 
+\newline
+\mbox{\hyperlink{a00311_aed53c233beb1d9ec1b0c5fc2bfbb1051ad3084ed4c756294f67f316d74668eddb}{H\+F\+::\+Exceptions\+::\+O\+U\+T\+\_\+\+O\+F\+\_\+\+R\+A\+N\+GE}} = -\/10, 
+\mbox{\hyperlink{a00311_aed53c233beb1d9ec1b0c5fc2bfbb1051af22cf512deb6784a81a27a8ec5316be9}{H\+F\+::\+Exceptions\+::\+N\+O\+\_\+\+P\+A\+TH}} = -\/11
  \}
-\begin{DoxyCompactList}\small\item\em Method of grouping submeshes in O\+BJ files. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Functions}
-\begin{DoxyCompactItemize}
-\item 
-vector$<$ Mesh\+Info $>$ \mbox{\hyperlink{a00280_a6cd66262c11d9276be46e3fcd9a3a712}{H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects}} (std\+::string path, G\+R\+O\+U\+P\+\_\+\+M\+E\+T\+H\+OD gm=O\+N\+L\+Y\+\_\+\+F\+I\+LE, bool change\+\_\+coords=true)
-\begin{DoxyCompactList}\small\item\em Create \mbox{\hyperlink{a01127}{Mesh\+Info}} instances from the O\+BJ at path. \end{DoxyCompactList}\item 
-vector$<$ Mesh\+Info $>$ \mbox{\hyperlink{a00280_af77d26cedf5f90073cce07aa8c528094}{H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects}} (std\+::vector$<$ std\+::string $>$ \&path, G\+R\+O\+U\+P\+\_\+\+M\+E\+T\+H\+OD gm=O\+N\+L\+Y\+\_\+\+F\+I\+LE, bool change\+\_\+coords=true)
-\begin{DoxyCompactList}\small\item\em Create \mbox{\hyperlink{a01127}{Mesh\+Info}} instances from the O\+BJ files in path. \end{DoxyCompactList}\item 
-vector$<$ array$<$ float, 3 $>$ $>$ \mbox{\hyperlink{a00280_aec1df746155d224838048d3a43c2fe96}{H\+F\+::\+Geometry\+::\+Load\+Raw\+Vertices}} (std\+::string path)
-\begin{DoxyCompactList}\small\item\em Load a list of vertices directly from an O\+BJ file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em A set of error codes standard throughout every Human\+Factors codebase. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Contains definitions for the \mbox{\hyperlink{a00280}{Geometry}} namespace. 
+Contains definitions for the \mbox{\hyperlink{a00311}{Exceptions}} namespace. 
 
 \begin{DoxyAuthor}{Author}
 T\+BA 
 \end{DoxyAuthor}
 \begin{DoxyDate}{Date}
-16 Jun 2020 
+26 Jun 2020 
 \end{DoxyDate}

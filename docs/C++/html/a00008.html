@@ -77,28 +77,29 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Contains definitions for the <a class="el" href="a01099.html">GraphGenerator</a>  
+<p>Contains definitions for the <a class="el" href="a01132.html">GraphGenerator</a>  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;Node.h&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00146_source.html">Edge.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00167_source.html">Edge.h</a>&gt;</code><br />
 <code>#include &lt;Graph.h&gt;</code><br />
 <code>#include &lt;set&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00122_source.html">embree_raytracer.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00137_source.html">embree_raytracer.h</a>&gt;</code><br />
 </div>
 <p><a href="a00008_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01099.html">HF::AnalysisMethods::GraphGenerator</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a graph of all areas accessible from a given start point  <a href="a01099.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01132.html">HF::GraphGenerator::GraphGenerator</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a graph of accessible space from a given start point.  <a href="a01132.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a00273"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00273.html">HF</a></td></tr>
-<tr class="memdesc:a00273"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output CSR for interop with other languages <br /></td></tr>
+<tr class="memitem:a00305"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00305.html">HF</a></td></tr>
+<tr class="memdesc:a00305"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform human scale analysis on 3D environments. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00274"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00274.html">HF::AnalysisMethods</a></td></tr>
+<tr class="memitem:a00306"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00306.html">HF::GraphGenerator</a></td></tr>
+<tr class="memdesc:a00306"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a graph of accessible space from a given start point. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
@@ -108,26 +109,26 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a4554e785d259fe736c0b7022cbe58a54"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00274.html#a4554e785d259fe736c0b7022cbe58a54">HF::AnalysisMethods::v3</a> = std::array&lt; float, 3 &gt;</td></tr>
-<tr class="separator:a4554e785d259fe736c0b7022cbe58a54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c29578574c275e66fbd439be62c125e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00306.html#a8c29578574c275e66fbd439be62c125e">HF::GraphGenerator::v3</a> = std::array&lt; float, 3 &gt;</td></tr>
+<tr class="separator:a8c29578574c275e66fbd439be62c125e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:ad9c47eeb68b0196bb5b8a24be28b860c"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00274.html#ad9c47eeb68b0196bb5b8a24be28b860c">HF::AnalysisMethods::HIT_FLAG</a> { <a class="el" href="a00274.html#ad9c47eeb68b0196bb5b8a24be28b860ca8570052eaa04e37245be1357a2786a0f">HF::AnalysisMethods::FLOORS</a> = 1, 
-<a class="el" href="a00274.html#ad9c47eeb68b0196bb5b8a24be28b860cab0364512b19fe75e1929c6741983dace">HF::AnalysisMethods::OBSTACLES</a> = 2, 
-<a class="el" href="a00274.html#ad9c47eeb68b0196bb5b8a24be28b860ca77cb8d8886aafaff131061767ad5fc30">HF::AnalysisMethods::BOTH</a> = 3
+<tr class="memitem:a6180d5bc4bbfa9a5a426089e1f1ad598"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00306.html#a6180d5bc4bbfa9a5a426089e1f1ad598">HF::GraphGenerator::HIT_FLAG</a> { <a class="el" href="a00306.html#a6180d5bc4bbfa9a5a426089e1f1ad598aaf146b316ade4ca80d23d9d22b0539cc">HF::GraphGenerator::FLOORS</a> = 1, 
+<a class="el" href="a00306.html#a6180d5bc4bbfa9a5a426089e1f1ad598a9118a6ea0d5aaa017a735193ac79d08d">HF::GraphGenerator::OBSTACLES</a> = 2, 
+<a class="el" href="a00306.html#a6180d5bc4bbfa9a5a426089e1f1ad598a9d20e9f6abc3d3630c75432b0dac052c">HF::GraphGenerator::BOTH</a> = 3
  }</td></tr>
-<tr class="memdesc:ad9c47eeb68b0196bb5b8a24be28b860c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines which geometry the ray will collide with.  <a href="a00274.html#ad9c47eeb68b0196bb5b8a24be28b860c">More...</a><br /></td></tr>
-<tr class="separator:ad9c47eeb68b0196bb5b8a24be28b860c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a6180d5bc4bbfa9a5a426089e1f1ad598"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines which geometry the ray will collide with.  <a href="a00306.html#a6180d5bc4bbfa9a5a426089e1f1ad598">More...</a><br /></td></tr>
+<tr class="separator:a6180d5bc4bbfa9a5a426089e1f1ad598"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a119aa13054604cc379223a2f424a3a65"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00011.html#ac812385b35e52a68f2eba8435fb7b1bf">std::set</a>&lt; <a class="el" href="a00011.html#a3394fa820b983014dcac29faca0e4f19">std::pair</a>&lt; int, int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00274.html#a119aa13054604cc379223a2f424a3a65">HF::AnalysisMethods::permutations</a> (int limit)</td></tr>
-<tr class="memdesc:a119aa13054604cc379223a2f424a3a65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a set of every permution for 0-limit  <a href="a00274.html#a119aa13054604cc379223a2f424a3a65">More...</a><br /></td></tr>
-<tr class="separator:a119aa13054604cc379223a2f424a3a65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe5670b4cb780fd3ccf2a0d72a2e3c2e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00011.html#ac812385b35e52a68f2eba8435fb7b1bf">std::set</a>&lt; <a class="el" href="a00011.html#a3394fa820b983014dcac29faca0e4f19">std::pair</a>&lt; int, int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00306.html#afe5670b4cb780fd3ccf2a0d72a2e3c2e">HF::GraphGenerator::permutations</a> (int limit)</td></tr>
+<tr class="memdesc:afe5670b4cb780fd3ccf2a0d72a2e3c2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a set of every permutation for all numbers between 0 and limit.  <a href="a00306.html#afe5670b4cb780fd3ccf2a0d72a2e3c2e">More...</a><br /></td></tr>
+<tr class="separator:afe5670b4cb780fd3ccf2a0d72a2e3c2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Contains definitions for the <a class="el" href="a01099.html">GraphGenerator</a> </p>
+<div class="textblock"><p>Contains definitions for the <a class="el" href="a01132.html">GraphGenerator</a> </p>
 <dl class="section author"><dt>Author</dt><dd>TBA </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>26 Jun 2020 </dd></dl>
 
@@ -145,7 +146,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00008_source.html#l00010">10</a> of file <a class="el" href="a00008_source.html">graph_generator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00008_source.html#l00009">9</a> of file <a class="el" href="a00008_source.html">graph_generator.h</a>.</p>
 
 </div>
 </div>

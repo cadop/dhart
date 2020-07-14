@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Analysis: Member List</title>
+<title>Analysis: HF::GraphGenerator::UniqueQueue Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,22 +61,390 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00273.html">HF</a></li><li class="navelem"><a class="el" href="a00282.html">Pathfinding</a></li><li class="navelem"><a class="el" href="a01143.html">DistPred</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00305.html">HF</a></li><li class="navelem"><a class="el" href="a00306.html">GraphGenerator</a></li><li class="navelem"><a class="el" href="a01140.html">UniqueQueue</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="a01137.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">HF::Pathfinding::DistPred Member List</div>  </div>
+<div class="title">HF::GraphGenerator::UniqueQueue Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a01143.html">HF::Pathfinding::DistPred</a>, including all inherited members.</p>
-<table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a01143.html#a079f5d82f75c505b08814a29cad55802">distance</a></td><td class="entry"><a class="el" href="a01143.html">HF::Pathfinding::DistPred</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="a01143.html#aa1bf8223e3be61f7863eaf5df3d91295">DistPred</a>()</td><td class="entry"><a class="el" href="a01143.html">HF::Pathfinding::DistPred</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a01143.html#acaae6c520377c845aa80013da3a3a869">DistPred</a>(int n)</td><td class="entry"><a class="el" href="a01143.html">HF::Pathfinding::DistPred</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="a01143.html#aefde8462d19db0960757cfbfd3825c8b">predecessor</a></td><td class="entry"><a class="el" href="a01143.html">HF::Pathfinding::DistPred</a></td><td class="entry"></td></tr>
-</table></div><!-- contents -->
+<p>A queue that remembers every object inserted, and prevents the addition of nodes that have already been inserted even if they've been popped.  
+ <a href="a01140.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="a00020_source.html">unique_queue.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ae0dc637a2d7c3aae32d8f035ac6b8016"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01140.html#ae0dc637a2d7c3aae32d8f035ac6b8016">push</a> (const <a class="el" href="a01224.html">HF::SpatialStructures::Node</a> &amp;p)</td></tr>
+<tr class="memdesc:ae0dc637a2d7c3aae32d8f035ac6b8016"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a node to the queue if it has never previously been in the queue.  <a href="a01140.html#ae0dc637a2d7c3aae32d8f035ac6b8016">More...</a><br /></td></tr>
+<tr class="separator:ae0dc637a2d7c3aae32d8f035ac6b8016"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4aab642bf2c86a04f6890711ab7f2437"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a01224.html">HF::SpatialStructures::Node</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01140.html#a4aab642bf2c86a04f6890711ab7f2437">pop</a> ()</td></tr>
+<tr class="memdesc:a4aab642bf2c86a04f6890711ab7f2437"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove the topmost node from the queue and return it.  <a href="a01140.html#a4aab642bf2c86a04f6890711ab7f2437">More...</a><br /></td></tr>
+<tr class="separator:a4aab642bf2c86a04f6890711ab7f2437"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d38edb96130bda3eb8126cc7501065f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01140.html#a6d38edb96130bda3eb8126cc7501065f">size</a> () const</td></tr>
+<tr class="memdesc:a6d38edb96130bda3eb8126cc7501065f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine how many nodes are currently in the queue.  <a href="a01140.html#a6d38edb96130bda3eb8126cc7501065f">More...</a><br /></td></tr>
+<tr class="separator:a6d38edb96130bda3eb8126cc7501065f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0b5106014e798684efc0d3bdc4939da"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a01224.html">HF::SpatialStructures::Node</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01140.html#ad0b5106014e798684efc0d3bdc4939da">popFromDict</a> ()</td></tr>
+<tr class="memdesc:ad0b5106014e798684efc0d3bdc4939da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the topmost node from the queue, but "forget" about it to allow it to enter again in the future.  <a href="a01140.html#ad0b5106014e798684efc0d3bdc4939da">More...</a><br /></td></tr>
+<tr class="separator:ad0b5106014e798684efc0d3bdc4939da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae990ff15bb41d6da5b477f0c91550116"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01140.html#ae990ff15bb41d6da5b477f0c91550116">hasNode</a> (const <a class="el" href="a01224.html">HF::SpatialStructures::Node</a> &amp;p) const</td></tr>
+<tr class="memdesc:ae990ff15bb41d6da5b477f0c91550116"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check to see if the node has ever been in the queue.  <a href="a01140.html#ae990ff15bb41d6da5b477f0c91550116">More...</a><br /></td></tr>
+<tr class="separator:ae990ff15bb41d6da5b477f0c91550116"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6708d5114e7fbc588ec4d17919d2ad8e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01140.html#a6708d5114e7fbc588ec4d17919d2ad8e">forcePush</a> (const <a class="el" href="a01224.html">HF::SpatialStructures::Node</a> &amp;p)</td></tr>
+<tr class="memdesc:a6708d5114e7fbc588ec4d17919d2ad8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forcibly push a node onto the queue without checking it. Saves a hash function, but risks breaking the invariant.  <a href="a01140.html#a6708d5114e7fbc588ec4d17919d2ad8e">More...</a><br /></td></tr>
+<tr class="separator:a6708d5114e7fbc588ec4d17919d2ad8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab659349de3391b0e2327f3736135752f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01140.html#ab659349de3391b0e2327f3736135752f">empty</a> () const</td></tr>
+<tr class="memdesc:ab659349de3391b0e2327f3736135752f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tell if the queue is empty.  <a href="a01140.html#ab659349de3391b0e2327f3736135752f">More...</a><br /></td></tr>
+<tr class="separator:ab659349de3391b0e2327f3736135752f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b1e179e1aa3d8d585c5708ae08ef3cc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01140.html#a8b1e179e1aa3d8d585c5708ae08ef3cc">clearQueue</a> ()</td></tr>
+<tr class="memdesc:a8b1e179e1aa3d8d585c5708ae08ef3cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear every node from the queue without forgetting them.  <a href="a01140.html#a8b1e179e1aa3d8d585c5708ae08ef3cc">More...</a><br /></td></tr>
+<tr class="separator:a8b1e179e1aa3d8d585c5708ae08ef3cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae941f357ddbefc3b670c43ce2d90b589"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="a01224.html">SpatialStructures::Node</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01140.html#ae941f357ddbefc3b670c43ce2d90b589">popMany</a> (int max=-1)</td></tr>
+<tr class="memdesc:ae941f357ddbefc3b670c43ce2d90b589"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pop a set amount of nodes from the queue, and return them as a vector.  <a href="a01140.html#ae941f357ddbefc3b670c43ce2d90b589">More...</a><br /></td></tr>
+<tr class="separator:ae941f357ddbefc3b670c43ce2d90b589"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a042595ba3856fb6912dbf5c6692daa75"><td class="memItemLeft" align="right" valign="top">std::queue&lt; <a class="el" href="a01224.html">HF::SpatialStructures::Node</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01140.html#a042595ba3856fb6912dbf5c6692daa75">node_queue</a></td></tr>
+<tr class="memdesc:a042595ba3856fb6912dbf5c6692daa75"><td class="mdescLeft">&#160;</td><td class="mdescRight">The underlying queue.  <a href="a01140.html#a042595ba3856fb6912dbf5c6692daa75">More...</a><br /></td></tr>
+<tr class="separator:a042595ba3856fb6912dbf5c6692daa75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac034e92d8100f2f6d96968c6de5b51c4"><td class="memItemLeft" align="right" valign="top">robin_hood::unordered_map&lt; <a class="el" href="a01224.html">HF::SpatialStructures::Node</a>, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01140.html#ac034e92d8100f2f6d96968c6de5b51c4">hashmap</a></td></tr>
+<tr class="memdesc:ac034e92d8100f2f6d96968c6de5b51c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hashmap to keep track of nodes that have entered the queue.  <a href="a01140.html#ac034e92d8100f2f6d96968c6de5b51c4">More...</a><br /></td></tr>
+<tr class="separator:ac034e92d8100f2f6d96968c6de5b51c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A queue that remembers every object inserted, and prevents the addition of nodes that have already been inserted even if they've been popped. </p>
+<dl class="section invariant"><dt>Invariant</dt><dd>All unique nodes can only enter the queue once. After they've been popped, future attempts to push them will fail.</dd></dl>
+<dl class="section remark"><dt>Remarks</dt><dd>This class was designed specificlaly to manage the <a class="el" href="a01132.html" title="Generate a graph of accessible space from a given start point.">GraphGenerator</a>'s todo list with as few hashmap calls as possible.</dd></dl>
+<dl class="todo"><dt><b><a class="el" href="a00296.html#_todo000010">Todo:</a></b></dt><dd>This could be a useful standalone templated class. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00020_source.html#l00029">29</a> of file <a class="el" href="a00020_source.html">unique_queue.h</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a8b1e179e1aa3d8d585c5708ae08ef3cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b1e179e1aa3d8d585c5708ae08ef3cc">&#9670;&nbsp;</a></span>clearQueue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HF::GraphGenerator::UniqueQueue::clearQueue </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clear every node from the queue without forgetting them. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00017_source.html#l00057">57</a> of file <a class="el" href="a00017_source.html">unique_queue.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="a00020_source.html#l00031">node_queue</a>.</p>
+
+</div>
+</div>
+<a id="ab659349de3391b0e2327f3736135752f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab659349de3391b0e2327f3736135752f">&#9670;&nbsp;</a></span>empty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool HF::GraphGenerator::UniqueQueue::empty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Tell if the queue is empty. </p>
+<dl class="section return"><dt>Returns</dt><dd>False if there is atleast one node in the queue. True otherwise. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00017_source.html#l00055">55</a> of file <a class="el" href="a00017_source.html">unique_queue.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="a00017_source.html#l00032">size()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00011_source.html#l00290">HF::GraphGenerator::GraphGeneratorPrivate::CrawlGeom()</a>, and <a class="el" href="a00011_source.html#l00316">HF::GraphGenerator::GraphGeneratorPrivate::CrawlGeomParallel()</a>.</p>
+
+</div>
+</div>
+<a id="a6708d5114e7fbc588ec4d17919d2ad8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6708d5114e7fbc588ec4d17919d2ad8e">&#9670;&nbsp;</a></span>forcePush()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool HF::GraphGenerator::UniqueQueue::forcePush </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a01224.html">HF::SpatialStructures::Node</a> &amp;&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Forcibly push a node onto the queue without checking it. Saves a hash function, but risks breaking the invariant. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>Node to add to the end of the queue. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Always true since it cannot fail. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00017_source.html#l00047">47</a> of file <a class="el" href="a00017_source.html">unique_queue.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="a00020_source.html#l00038">hashmap</a>, and <a class="el" href="a00020_source.html#l00031">node_queue</a>.</p>
+
+</div>
+</div>
+<a id="ae990ff15bb41d6da5b477f0c91550116"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae990ff15bb41d6da5b477f0c91550116">&#9670;&nbsp;</a></span>hasNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool HF::GraphGenerator::UniqueQueue::hasNode </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a01224.html">HF::SpatialStructures::Node</a> &amp;&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check to see if the node has ever been in the queue. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>Node to check. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the node has existed in the queue. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00017_source.html#l00043">43</a> of file <a class="el" href="a00017_source.html">unique_queue.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="a00020_source.html#l00038">hashmap</a>.</p>
+
+</div>
+</div>
+<a id="a4aab642bf2c86a04f6890711ab7f2437"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4aab642bf2c86a04f6890711ab7f2437">&#9670;&nbsp;</a></span>pop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a01224.html">HF::SpatialStructures::Node</a> HF::GraphGenerator::UniqueQueue::pop </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Remove the topmost node from the queue and return it. </p>
+<dl class="section return"><dt>Returns</dt><dd>The node at the top of the queue. </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="a01140.html#ad0b5106014e798684efc0d3bdc4939da" title="Retrieve the topmost node from the queue, but &quot;forget&quot; about it to allow it to enter again in the fut...">popFromDict</a> for removing the topmost node and allowing it to enter again in the future. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00017_source.html#l00025">25</a> of file <a class="el" href="a00017_source.html">unique_queue.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="a00020_source.html#l00031">node_queue</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00011_source.html#l00290">HF::GraphGenerator::GraphGeneratorPrivate::CrawlGeom()</a>, <a class="el" href="a00011_source.html#l00316">HF::GraphGenerator::GraphGeneratorPrivate::CrawlGeomParallel()</a>, and <a class="el" href="a00017_source.html#l00064">popMany()</a>.</p>
+
+</div>
+</div>
+<a id="ad0b5106014e798684efc0d3bdc4939da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0b5106014e798684efc0d3bdc4939da">&#9670;&nbsp;</a></span>popFromDict()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a01224.html">HF::SpatialStructures::Node</a> HF::GraphGenerator::UniqueQueue::popFromDict </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Retrieve the topmost node from the queue, but "forget" about it to allow it to enter again in the future. </p>
+<dl class="section return"><dt>Returns</dt><dd>Topmost node in the queue. </dd></dl>
+<p>This sets the node's value to 0 in the hashmap, making it behave exactly like a node that has never been seen by the queue. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00017_source.html#l00034">34</a> of file <a class="el" href="a00017_source.html">unique_queue.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="a00020_source.html#l00038">hashmap</a>, and <a class="el" href="a00020_source.html#l00031">node_queue</a>.</p>
+
+</div>
+</div>
+<a id="ae941f357ddbefc3b670c43ce2d90b589"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae941f357ddbefc3b670c43ce2d90b589">&#9670;&nbsp;</a></span>popMany()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="a01224.html">SpatialStructures::Node</a> &gt; HF::GraphGenerator::UniqueQueue::popMany </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>max</em> = <code>-1</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pop a set amount of nodes from the queue, and return them as a vector. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">max</td><td>Stop after popping this amount of nodes.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Use this to quickly pop several nodes without having to make a function call for each. </p><dl class="todo"><dt><b><a class="el" href="a00296.html#_todo000011">Todo:</a></b></dt><dd>Opetion to pop every node by setting max to -1.</dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00017_source.html#l00064">64</a> of file <a class="el" href="a00017_source.html">unique_queue.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="a00020_source.html#l00031">node_queue</a>, <a class="el" href="a00017_source.html#l00025">pop()</a>, and <a class="el" href="a00017_source.html#l00032">size()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00011_source.html#l00316">HF::GraphGenerator::GraphGeneratorPrivate::CrawlGeomParallel()</a>.</p>
+
+</div>
+</div>
+<a id="ae0dc637a2d7c3aae32d8f035ac6b8016"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0dc637a2d7c3aae32d8f035ac6b8016">&#9670;&nbsp;</a></span>push()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool HF::GraphGenerator::UniqueQueue::push </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a01224.html">HF::SpatialStructures::Node</a> &amp;&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add a node to the queue if it has never previously been in the queue. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>Node to add to the queue. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>False if the node wasn't added, true if it was </dd></dl>
+<p>If the node has a value of 1 in hashmap, then the node is ignored. If the node doesn't already exist in the hashmap, the call to hashmap[p] will automatically create an entry with a value of 0, indicating that the node hasn't been seen before. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00017_source.html#l00011">11</a> of file <a class="el" href="a00017_source.html">unique_queue.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="a00020_source.html#l00038">hashmap</a>, and <a class="el" href="a00020_source.html#l00031">node_queue</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00011_source.html#l00106">HF::GraphGenerator::GraphGeneratorPrivate::BuildNetwork()</a>, <a class="el" href="a00011_source.html#l00290">HF::GraphGenerator::GraphGeneratorPrivate::CrawlGeom()</a>, and <a class="el" href="a00011_source.html#l00316">HF::GraphGenerator::GraphGeneratorPrivate::CrawlGeomParallel()</a>.</p>
+
+</div>
+</div>
+<a id="a6d38edb96130bda3eb8126cc7501065f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d38edb96130bda3eb8126cc7501065f">&#9670;&nbsp;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int HF::GraphGenerator::UniqueQueue::size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Determine how many nodes are currently in the queue. </p>
+<dl class="section return"><dt>Returns</dt><dd>The number of nodes in the queue </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00017_source.html#l00032">32</a> of file <a class="el" href="a00017_source.html">unique_queue.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="a00020_source.html#l00031">node_queue</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00011_source.html#l00316">HF::GraphGenerator::GraphGeneratorPrivate::CrawlGeomParallel()</a>, <a class="el" href="a00017_source.html#l00055">empty()</a>, and <a class="el" href="a00017_source.html#l00064">popMany()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ac034e92d8100f2f6d96968c6de5b51c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac034e92d8100f2f6d96968c6de5b51c4">&#9670;&nbsp;</a></span>hashmap</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">robin_hood::unordered_map&lt;<a class="el" href="a01224.html">HF::SpatialStructures::Node</a>, int&gt; HF::GraphGenerator::UniqueQueue::hashmap</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Hashmap to keep track of nodes that have entered the queue. </p>
+<p>Values of 0 indicate that a node has never been pushed before. Values of 1 indicate that a node has already been in the hashmap previously. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00020_source.html#l00038">38</a> of file <a class="el" href="a00020_source.html">unique_queue.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00017_source.html#l00047">forcePush()</a>, <a class="el" href="a00017_source.html#l00043">hasNode()</a>, <a class="el" href="a00017_source.html#l00034">popFromDict()</a>, and <a class="el" href="a00017_source.html#l00011">push()</a>.</p>
+
+</div>
+</div>
+<a id="a042595ba3856fb6912dbf5c6692daa75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a042595ba3856fb6912dbf5c6692daa75">&#9670;&nbsp;</a></span>node_queue</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::queue&lt;<a class="el" href="a01224.html">HF::SpatialStructures::Node</a>&gt; HF::GraphGenerator::UniqueQueue::node_queue</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The underlying queue. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00020_source.html#l00031">31</a> of file <a class="el" href="a00020_source.html">unique_queue.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00017_source.html#l00057">clearQueue()</a>, <a class="el" href="a00017_source.html#l00047">forcePush()</a>, <a class="el" href="a00017_source.html#l00025">pop()</a>, <a class="el" href="a00017_source.html#l00034">popFromDict()</a>, <a class="el" href="a00017_source.html#l00064">popMany()</a>, <a class="el" href="a00017_source.html#l00011">push()</a>, and <a class="el" href="a00017_source.html#l00032">size()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>Cpp/analysismethods/src/<a class="el" href="a00020_source.html">unique_queue.h</a></li>
+<li>Cpp/analysismethods/src/<a class="el" href="a00017_source.html">unique_queue.cpp</a></li>
+</ul>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

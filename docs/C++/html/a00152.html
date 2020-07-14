@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Analysis: Cpp/spatialstructures/src/graph.h File Reference</title>
+<title>Analysis: Cpp/spatialstructures/src/Constants.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -65,61 +65,25 @@ $(function() {
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle">
-<div class="title">graph.h File Reference</div>  </div>
+<div class="title">Constants.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Contains definitions for the <a class="el" href="a01199.html">Graph</a> class.  
+<p>Contains implementation for the <a class="el" href="a00308.html">HF::SpatialStructures</a> namespace.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;robin_hood.h&gt;</code><br />
-<code>#include &lt;vector&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00146_source.html">Edge.h</a>&gt;</code><br />
-<code>#include &lt;Node.h&gt;</code><br />
-<code>#include &lt;Eigen&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="a00155_source.html">Constants.h</a>&gt;</code><br />
+<code>#include &lt;numeric&gt;</code><br />
+<code>#include &lt;cstdlib&gt;</code><br />
+<code>#include &lt;cmath&gt;</code><br />
 </div>
 <p><a href="a00152_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01195.html">HF::SpatialStructures::CSRPtrs</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A struct to hold all necessary information for a CSR.  <a href="a01195.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01199.html">HF::SpatialStructures::Graph</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A <a class="el" href="a01199.html" title="A Graph of nodes connected by edges that supports both integers and HF::SpatialStructures::Node.">Graph</a> of nodes connected by edges that supports both integers and <a class="el" href="a01203.html" title="A point in space with an ID.">HF::SpatialStructures::Node</a>.  <a href="a01199.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:a00281"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00281.html">Eigen</a></td></tr>
-<tr class="memdesc:a00281"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="a00281.html" title="Eigen a C++ template library for linear algebra: matrices, vectors, numerical solvers,...">Eigen</a> a C++ template library for linear algebra: matrices, vectors, numerical solvers, and related algorithms. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00273"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00273.html">HF</a></td></tr>
-<tr class="memdesc:a00273"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output CSR for interop with other languages <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00276"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00276.html">HF::SpatialStructures</a></td></tr>
-<tr class="memdesc:a00276"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains standard fundamental data structures for representing space used throughout HumanFactors. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:a6b23c0b2531c78f6d5049873c184f4f9"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00276.html#a6b23c0b2531c78f6d5049873c184f4f9">HF::SpatialStructures::COST_AGGREGATE</a> : int { <a class="el" href="a00276.html#a6b23c0b2531c78f6d5049873c184f4f9a6970bdc2201030b9c03fbdcf3973858a">HF::SpatialStructures::COST_AGGREGATE::SUM</a> = 0, 
-<a class="el" href="a00276.html#a6b23c0b2531c78f6d5049873c184f4f9a16de38737a9f8366e9b2042b4e9b6290">HF::SpatialStructures::COST_AGGREGATE::AVERAGE</a> = 1, 
-<a class="el" href="a00276.html#a6b23c0b2531c78f6d5049873c184f4f9a4905ac9d6a22bdfc1ae096094ce6248d">HF::SpatialStructures::COST_AGGREGATE::COUNT</a> = 2
- }</td></tr>
-<tr class="memdesc:a6b23c0b2531c78f6d5049873c184f4f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Methods of aggregating the costs for edges for each node in the graph.  <a href="a00276.html#a6b23c0b2531c78f6d5049873c184f4f9">More...</a><br /></td></tr>
-<tr class="separator:a6b23c0b2531c78f6d5049873c184f4f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Contains definitions for the <a class="el" href="a01199.html">Graph</a> class. </p>
+<div class="textblock"><p>Contains implementation for the <a class="el" href="a00308.html">HF::SpatialStructures</a> namespace. </p>
 <dl class="section author"><dt>Author</dt><dd>TBA </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>06 Jun 2020 </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="a00152_source.html">graph.h</a>.</p>
+<p class="definition">Definition in file <a class="el" href="a00152_source.html">Constants.cpp</a>.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

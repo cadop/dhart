@@ -1,0 +1,331 @@
+\hypertarget{a00299}{}\doxysection{Pathfinding}
+\label{a00299}\index{Pathfinding@{Pathfinding}}
+
+
+Find paths between differnt points in a graph.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00287_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00299_gae024c8b4ea32148644b61d4c1a1332fa}{Create\+Path}} (const \mbox{\hyperlink{a01220}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$g, int start, int end, int $\ast$out\+\_\+size, \mbox{\hyperlink{a01236}{H\+F\+::\+Spatial\+Structures\+::\+Path}} $\ast$$\ast$out\+\_\+path, \mbox{\hyperlink{a01232}{H\+F\+::\+Spatial\+Structures\+::\+Path\+Member}} $\ast$$\ast$out\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Create a path from start to end in C++. If no path exists, the N\+O\+\_\+\+P\+A\+TH error code will be returned, and both pointers will be left as they were before the function was called. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00287_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00299_ga497790dddfb220484737711a1f1eff56}{Create\+Paths}} (const \mbox{\hyperlink{a01220}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$g, const int $\ast$start, const int $\ast$end, \mbox{\hyperlink{a01236}{H\+F\+::\+Spatial\+Structures\+::\+Path}} $\ast$$\ast$out\+\_\+path\+\_\+ptr\+\_\+holder, \mbox{\hyperlink{a01232}{H\+F\+::\+Spatial\+Structures\+::\+Path\+Member}} $\ast$$\ast$out\+\_\+path\+\_\+member\+\_\+ptr\+\_\+holder, int $\ast$out\+\_\+sizes, int num\+\_\+paths)
+\begin{DoxyCompactList}\small\item\em Create multiple paths from start to end in C++. both out\+\_\+ members return as arrays of pointers, with one for each element. Sizes of zero represent non-\/existant paths, and will be set to null pointers \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00287_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00299_gaac725d282f4fecd3aba1b3273c26e7e1}{Get\+Path\+Info}} (\mbox{\hyperlink{a01236}{H\+F\+::\+Spatial\+Structures\+::\+Path}} $\ast$p, \mbox{\hyperlink{a01232}{H\+F\+::\+Spatial\+Structures\+::\+Path\+Member}} $\ast$$\ast$out\+\_\+member\+\_\+ptr, int $\ast$out\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Get the size of a path and a pointer to its path members. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00287_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00299_ga884a3374d971261a01ccfd3b21e288e5}{Destroy\+Path}} (\mbox{\hyperlink{a01236}{H\+F\+::\+Spatial\+Structures\+::\+Path}} $\ast$path\+\_\+to\+\_\+destroy)
+\begin{DoxyCompactList}\small\item\em Delete a path. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Find paths between differnt points in a graph. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{a00299_gae024c8b4ea32148644b61d4c1a1332fa}\label{a00299_gae024c8b4ea32148644b61d4c1a1332fa}} 
+\index{Pathfinding@{Pathfinding}!CreatePath@{CreatePath}}
+\index{CreatePath@{CreatePath}!Pathfinding@{Pathfinding}}
+\doxysubsubsection{\texorpdfstring{CreatePath()}{CreatePath()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00287_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Create\+Path (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01220}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$}]{g,  }\item[{int}]{start,  }\item[{int}]{end,  }\item[{int $\ast$}]{out\+\_\+size,  }\item[{\mbox{\hyperlink{a01236}{H\+F\+::\+Spatial\+Structures\+::\+Path}} $\ast$$\ast$}]{out\+\_\+path,  }\item[{\mbox{\hyperlink{a01232}{H\+F\+::\+Spatial\+Structures\+::\+Path\+Member}} $\ast$$\ast$}]{out\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00269}{Cinterface/pathfinder\+\_\+\+C.\+h}}$>$}
+
+
+
+Create a path from start to end in C++. If no path exists, the N\+O\+\_\+\+P\+A\+TH error code will be returned, and both pointers will be left as they were before the function was called. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph to conduct the search on. \\
+\hline
+{\em start} & The id of the node for the starting point of the path. The ID must belong to a node already within the graph! \\
+\hline
+{\em end} & The id of the node for the end point of the path. The ID must belong to a node already within the graph! \\
+\hline
+{\em out\+\_\+path} & Return parameter for the path object. \\
+\hline
+{\em out\+\_\+data} & Return parameter for the path\textquotesingle{}s members. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+N\+O\+\_\+\+P\+A\+TH if a path could not be generated. H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+OK if a path was generated. 
+\end{DoxyReturn}
+
+
+Uses the Boost Graph Library to perform Dijkstra\textquotesingle{}s shortest path algorithm. For multiple paths, use \mbox{\hyperlink{a00299_ga497790dddfb220484737711a1f1eff56}{Create\+Paths}} for multiple paths at once. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "pathfinder\_C.h", \#include "graph.h", \#include "path.h", \#include "path\_finder.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a Graph g, and compress it.}}
+\DoxyCodeLine{\mbox{\hyperlink{a01220}{HF::SpatialStructures::Graph}} g;}
+\DoxyCodeLine{g.\mbox{\hyperlink{a01220_a604a648f1f73d687ad4544d2ac163212}{addEdge}}(0, 1, 1);}
+\DoxyCodeLine{g.\mbox{\hyperlink{a01220_a604a648f1f73d687ad4544d2ac163212}{addEdge}}(0, 2, 2);}
+\DoxyCodeLine{g.\mbox{\hyperlink{a01220_a604a648f1f73d687ad4544d2ac163212}{addEdge}}(1, 3, 3);}
+\DoxyCodeLine{g.\mbox{\hyperlink{a01220_a604a648f1f73d687ad4544d2ac163212}{addEdge}}(2, 4, 1);}
+\DoxyCodeLine{g.\mbox{\hyperlink{a01220_a604a648f1f73d687ad4544d2ac163212}{addEdge}}(3, 4, 5);}
+\DoxyCodeLine{g.\mbox{\hyperlink{a01220_a41cece77d0eee98df39ecc6d3a366ec8}{Compress}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a boostGraph from g}}
+\DoxyCodeLine{\textcolor{keyword}{auto} boostGraph = \mbox{\hyperlink{a00314_aee466bf2324daa4b600cc59c90e78977}{HF::Pathfinding::CreateBoostGraph}}(g);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Prepare parameters for CreatePath}}
+\DoxyCodeLine{\mbox{\hyperlink{a01236}{HF::SpatialStructures::Path}}* out\_path = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\mbox{\hyperlink{a01232}{HF::SpatialStructures::PathMember}}* out\_path\_member = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\textcolor{keywordtype}{int} out\_size = -\/1;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a00299_gae024c8b4ea32148644b61d4c1a1332fa}{CreatePath}}(\&g, 0, 4, \&out\_size, \&out\_path, \&out\_path\_member);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Use out\_path, out\_path\_member}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Remember to free resources when finished}}
+\DoxyCodeLine{\mbox{\hyperlink{a00299_ga884a3374d971261a01ccfd3b21e288e5}{DestroyPath}}(out\_path);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// At this point, out\_path\_member has also been destroyed, so we set this to nullptr}}
+\DoxyCodeLine{out\_path\_member = \textcolor{keyword}{nullptr};}
+\end{DoxyCode}
+ 
+
+Definition at line 20 of file pathfinder\+\_\+\+C.\+cpp.
+
+
+
+References H\+F\+::\+Pathfinding\+::\+Create\+Boost\+Graph(), H\+F\+::\+Spatial\+Structures\+::\+Path\+::empty(), H\+F\+::\+Pathfinding\+::\+Find\+Path(), H\+F\+::\+Spatial\+Structures\+::\+Path\+::\+Get\+P\+M\+Pointer(), H\+F\+::\+Exceptions\+::\+N\+O\+\_\+\+P\+A\+TH, H\+F\+::\+Exceptions\+::\+OK, and H\+F\+::\+Spatial\+Structures\+::\+Path\+::size().
+
+\mbox{\Hypertarget{a00299_ga497790dddfb220484737711a1f1eff56}\label{a00299_ga497790dddfb220484737711a1f1eff56}} 
+\index{Pathfinding@{Pathfinding}!CreatePaths@{CreatePaths}}
+\index{CreatePaths@{CreatePaths}!Pathfinding@{Pathfinding}}
+\doxysubsubsection{\texorpdfstring{CreatePaths()}{CreatePaths()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00287_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Create\+Paths (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01220}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$}]{g,  }\item[{const int $\ast$}]{start,  }\item[{const int $\ast$}]{end,  }\item[{\mbox{\hyperlink{a01236}{H\+F\+::\+Spatial\+Structures\+::\+Path}} $\ast$$\ast$}]{out\+\_\+path\+\_\+ptr\+\_\+holder,  }\item[{\mbox{\hyperlink{a01232}{H\+F\+::\+Spatial\+Structures\+::\+Path\+Member}} $\ast$$\ast$}]{out\+\_\+path\+\_\+member\+\_\+ptr\+\_\+holder,  }\item[{int $\ast$}]{out\+\_\+sizes,  }\item[{int}]{num\+\_\+paths }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00269}{Cinterface/pathfinder\+\_\+\+C.\+h}}$>$}
+
+
+
+Create multiple paths from start to end in C++. both out\+\_\+ members return as arrays of pointers, with one for each element. Sizes of zero represent non-\/existant paths, and will be set to null pointers 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph to conduct the search on. \\
+\hline
+{\em start} & An array of ids for starting nodes. Length must match that of end and all the I\+DS must belong to nodes that already exist within the graph. \\
+\hline
+{\em end} & An array of ids for ending nodes. Length must match that of start and all the I\+DS must belong to nodes that already exist within the graph. \\
+\hline
+{\em out\+\_\+path\+\_\+ptr\+\_\+holder} & Return parameter for path objects. \\
+\hline
+{\em out\+\_\+data} & Return parameter for pointers to the path objects\textquotesingle{} underlying data. \\
+\hline
+{\em out\+\_\+sizes} & Output array of integers representing the length of of each path in out\+\_\+data\textquotesingle{}s arrays. Sizes of 0 indicate that no path could be generated. \\
+\hline
+{\em num\+\_\+paths} & Size of start and end arrays\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+H\+F\+::\+OK on completion. 
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "pathfinder\_C.h", \#include "graph.h", \#include "path.h", \#include "path\_finder.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a01220}{HF::SpatialStructures::Graph}} g;}
+\DoxyCodeLine{g.\mbox{\hyperlink{a01220_a604a648f1f73d687ad4544d2ac163212}{addEdge}}(0, 1, 1);}
+\DoxyCodeLine{g.\mbox{\hyperlink{a01220_a604a648f1f73d687ad4544d2ac163212}{addEdge}}(0, 2, 2);}
+\DoxyCodeLine{g.\mbox{\hyperlink{a01220_a604a648f1f73d687ad4544d2ac163212}{addEdge}}(1, 3, 3);}
+\DoxyCodeLine{g.\mbox{\hyperlink{a01220_a604a648f1f73d687ad4544d2ac163212}{addEdge}}(2, 4, 1);}
+\DoxyCodeLine{g.\mbox{\hyperlink{a01220_a604a648f1f73d687ad4544d2ac163212}{addEdge}}(3, 4, 5);}
+\DoxyCodeLine{g.\mbox{\hyperlink{a01220_a41cece77d0eee98df39ecc6d3a366ec8}{Compress}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Maximum amount of paths to search}}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} MAX\_SIZE = 2;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a Graph g, and compress it}}
+\DoxyCodeLine{\textcolor{keyword}{auto} boostGraph = \mbox{\hyperlink{a00314_aee466bf2324daa4b600cc59c90e78977}{HF::Pathfinding::CreateBoostGraph}}(g);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// We want to find the shortest paths from 0 to 3, and 0 to 4.}}
+\DoxyCodeLine{\textcolor{keywordtype}{int} start\_nodes[] = \{ 0, 0 \};}
+\DoxyCodeLine{\textcolor{keywordtype}{int} end\_nodes[] = \{ 3, 4 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create dynamically-\/allocated arrays of pointers to Path}}
+\DoxyCodeLine{\textcolor{comment}{// Create dynamically-\/allocated arrays of pointers to PathMember}}
+\DoxyCodeLine{\mbox{\hyperlink{a01236}{HF::SpatialStructures::Path}}** out\_path = \textcolor{keyword}{new} \mbox{\hyperlink{a01236}{HF::SpatialStructures::Path}} * [MAX\_SIZE];}
+\DoxyCodeLine{\mbox{\hyperlink{a01232}{HF::SpatialStructures::PathMember}}** out\_path\_member = \textcolor{keyword}{new} \mbox{\hyperlink{a01232}{HF::SpatialStructures::PathMember}} * [MAX\_SIZE];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Sizes of paths generated by CreatePaths. Sizes of 0 mean that a path was unable to be generated.}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}* out\_sizes = \textcolor{keyword}{new} \textcolor{keywordtype}{int}[MAX\_SIZE];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Use CreatePaths}}
+\DoxyCodeLine{\mbox{\hyperlink{a00299_ga497790dddfb220484737711a1f1eff56}{CreatePaths}}(\&g, start\_nodes, end\_nodes, out\_path, out\_path\_member, out\_sizes, MAX\_SIZE);}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < MAX\_SIZE; i++) \{}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (out\_path[i]) \{}
+\DoxyCodeLine{        \textcolor{comment}{// Release memory for all pointers in out\_path}}
+\DoxyCodeLine{        \mbox{\hyperlink{a00299_ga884a3374d971261a01ccfd3b21e288e5}{DestroyPath}}(out\_path[i]);}
+\DoxyCodeLine{        out\_path[i] = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (out\_path) \{}
+\DoxyCodeLine{    \textcolor{comment}{// Release memory for pointer to out\_path buffer}}
+\DoxyCodeLine{    \textcolor{keyword}{delete}[MAX\_SIZE] out\_path;}
+\DoxyCodeLine{    out\_path = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (out\_path\_member) \{}
+\DoxyCodeLine{    \textcolor{comment}{// Release memory for pointers to out\_path\_member buffer}}
+\DoxyCodeLine{    \textcolor{keyword}{delete}[MAX\_SIZE] out\_path\_member;}
+\DoxyCodeLine{    out\_path\_member = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (out\_sizes) \{}
+\DoxyCodeLine{    \textcolor{comment}{// Release memory for pointer to out\_sizes buffer}}
+\DoxyCodeLine{    \textcolor{keyword}{delete}[MAX\_SIZE] out\_sizes;}
+\DoxyCodeLine{    out\_sizes = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+ 
+
+Definition at line 46 of file pathfinder\+\_\+\+C.\+cpp.
+
+
+
+References H\+F\+::\+Pathfinding\+::\+Create\+Boost\+Graph(), H\+F\+::\+Pathfinding\+::\+Insert\+Paths\+Into\+Array(), and H\+F\+::\+Exceptions\+::\+OK.
+
+\mbox{\Hypertarget{a00299_ga884a3374d971261a01ccfd3b21e288e5}\label{a00299_ga884a3374d971261a01ccfd3b21e288e5}} 
+\index{Pathfinding@{Pathfinding}!DestroyPath@{DestroyPath}}
+\index{DestroyPath@{DestroyPath}!Pathfinding@{Pathfinding}}
+\doxysubsubsection{\texorpdfstring{DestroyPath()}{DestroyPath()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00287_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Destroy\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01236}{H\+F\+::\+Spatial\+Structures\+::\+Path}} $\ast$}]{path\+\_\+to\+\_\+destroy }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00269}{Cinterface/pathfinder\+\_\+\+C.\+h}}$>$}
+
+
+
+Delete a path. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path\+\_\+to\+\_\+destroy} & Pointer to the path to delete. \\
+\hline
+\end{DoxyParams}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "pathfinder\_C.h", \#include "graph.h", \#include "path.h", \#include "path\_finder.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a Graph g, and compress it.}}
+\DoxyCodeLine{\mbox{\hyperlink{a01220}{HF::SpatialStructures::Graph}} g;}
+\DoxyCodeLine{g.\mbox{\hyperlink{a01220_a604a648f1f73d687ad4544d2ac163212}{addEdge}}(0, 1, 1);}
+\DoxyCodeLine{g.\mbox{\hyperlink{a01220_a604a648f1f73d687ad4544d2ac163212}{addEdge}}(0, 2, 2);}
+\DoxyCodeLine{g.\mbox{\hyperlink{a01220_a604a648f1f73d687ad4544d2ac163212}{addEdge}}(1, 3, 3);}
+\DoxyCodeLine{g.\mbox{\hyperlink{a01220_a604a648f1f73d687ad4544d2ac163212}{addEdge}}(2, 4, 1);}
+\DoxyCodeLine{g.\mbox{\hyperlink{a01220_a604a648f1f73d687ad4544d2ac163212}{addEdge}}(3, 4, 5);}
+\DoxyCodeLine{g.\mbox{\hyperlink{a01220_a41cece77d0eee98df39ecc6d3a366ec8}{Compress}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a boostGraph from g}}
+\DoxyCodeLine{\textcolor{keyword}{auto} boostGraph = \mbox{\hyperlink{a00314_aee466bf2324daa4b600cc59c90e78977}{HF::Pathfinding::CreateBoostGraph}}(g);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a01236}{HF::SpatialStructures::Path}}* out\_path = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\mbox{\hyperlink{a01232}{HF::SpatialStructures::PathMember}}* out\_path\_member = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\textcolor{keywordtype}{int} out\_size = -\/1;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a00299_gae024c8b4ea32148644b61d4c1a1332fa}{CreatePath}}(\&g, 0, 4, \&out\_size, \&out\_path, \&out\_path\_member);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Use out\_path, out\_path\_member}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Remember to free resources when finished}}
+\DoxyCodeLine{\mbox{\hyperlink{a00299_ga884a3374d971261a01ccfd3b21e288e5}{DestroyPath}}(out\_path);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// At this point, out\_path\_member has also been destroyed, so we set this to nullptr}}
+\DoxyCodeLine{out\_path\_member = \textcolor{keyword}{nullptr};}
+\end{DoxyCode}
+ 
+
+Definition at line 93 of file pathfinder\+\_\+\+C.\+cpp.
+
+
+
+References Delete\+Raw\+Ptr(), and H\+F\+::\+Exceptions\+::\+OK.
+
+\mbox{\Hypertarget{a00299_gaac725d282f4fecd3aba1b3273c26e7e1}\label{a00299_gaac725d282f4fecd3aba1b3273c26e7e1}} 
+\index{Pathfinding@{Pathfinding}!GetPathInfo@{GetPathInfo}}
+\index{GetPathInfo@{GetPathInfo}!Pathfinding@{Pathfinding}}
+\doxysubsubsection{\texorpdfstring{GetPathInfo()}{GetPathInfo()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00287_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Get\+Path\+Info (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01236}{H\+F\+::\+Spatial\+Structures\+::\+Path}} $\ast$}]{p,  }\item[{\mbox{\hyperlink{a01232}{Path\+Member}} $\ast$$\ast$}]{out\+\_\+member\+\_\+ptr,  }\item[{int $\ast$}]{out\+\_\+size }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00269}{Cinterface/pathfinder\+\_\+\+C.\+h}}$>$}
+
+
+
+Get the size of a path and a pointer to its path members. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & Pointer to the path to get information from. This can handle null values. \\
+\hline
+{\em out\+\_\+member\+\_\+ptr} & Pointer to the path to get information from. Should not be null. \\
+\hline
+{\em out\+\_\+size} & The number of path members in the path. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+N\+O\+\_\+\+P\+A\+TH if the path is not valid. H\+F\+\_\+\+OK otherwise. 
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "pathfinder\_C.h", \#include "path.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a Graph g, and compress it.}}
+\DoxyCodeLine{\mbox{\hyperlink{a01220}{HF::SpatialStructures::Graph}} g;}
+\DoxyCodeLine{g.\mbox{\hyperlink{a01220_a604a648f1f73d687ad4544d2ac163212}{addEdge}}(0, 1, 1);}
+\DoxyCodeLine{g.\mbox{\hyperlink{a01220_a604a648f1f73d687ad4544d2ac163212}{addEdge}}(0, 2, 2);}
+\DoxyCodeLine{g.\mbox{\hyperlink{a01220_a604a648f1f73d687ad4544d2ac163212}{addEdge}}(1, 3, 3);}
+\DoxyCodeLine{g.\mbox{\hyperlink{a01220_a604a648f1f73d687ad4544d2ac163212}{addEdge}}(2, 4, 1);}
+\DoxyCodeLine{g.\mbox{\hyperlink{a01220_a604a648f1f73d687ad4544d2ac163212}{addEdge}}(3, 4, 5);}
+\DoxyCodeLine{g.\mbox{\hyperlink{a01220_a41cece77d0eee98df39ecc6d3a366ec8}{Compress}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create a boostGraph from g}}
+\DoxyCodeLine{\textcolor{keyword}{auto} boostGraph = \mbox{\hyperlink{a00314_aee466bf2324daa4b600cc59c90e78977}{HF::Pathfinding::CreateBoostGraph}}(g);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a01236}{HF::SpatialStructures::Path}}* out\_path = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\mbox{\hyperlink{a01232}{HF::SpatialStructures::PathMember}}* out\_path\_member = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\textcolor{keywordtype}{int} out\_size = -\/1;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a00299_gae024c8b4ea32148644b61d4c1a1332fa}{CreatePath}}(\&g, 0, 4, \&out\_size, \&out\_path, \&out\_path\_member);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Get p's info, store results in out\_path\_member and out\_size}}
+\DoxyCodeLine{\mbox{\hyperlink{a00299_gaac725d282f4fecd3aba1b3273c26e7e1}{GetPathInfo}}(p, \&out\_path\_member, \&out\_size);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Remember to free resources when finished}}
+\DoxyCodeLine{\mbox{\hyperlink{a00299_ga884a3374d971261a01ccfd3b21e288e5}{DestroyPath}}(out\_path);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// At this point, out\_path\_member has also been destroyed, so we set this to nullptr}}
+\DoxyCodeLine{out\_path\_member = \textcolor{keyword}{nullptr};}
+\end{DoxyCode}
+
+
+Get the size of a path and a pointer to its path members.
+
+Definition at line 75 of file pathfinder\+\_\+\+C.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Path\+::\+Get\+P\+M\+Pointer(), H\+F\+::\+Exceptions\+::\+N\+O\+\_\+\+P\+A\+TH, H\+F\+::\+Exceptions\+::\+OK, and H\+F\+::\+Spatial\+Structures\+::\+Path\+::size().
+

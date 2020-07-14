@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Analysis: Cpp/pathfinding/src/boost_graph.h Source File</title>
+<title>Analysis: Cpp/objloader/src/meshinfo.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,123 +61,171 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_882abde7eca0231e2bae1ceefe5e858a.html">Cpp</a></li><li class="navelem"><a class="el" href="dir_0e02576f053bf9c676481922c38373d1.html">pathfinding</a></li><li class="navelem"><a class="el" href="dir_d9dda2ac126eb26464c89893175cb5d7.html">src</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_882abde7eca0231e2bae1ceefe5e858a.html">Cpp</a></li><li class="navelem"><a class="el" href="dir_46f038d98c29b85ae873c4d3a30697d6.html">objloader</a></li><li class="navelem"><a class="el" href="dir_e8729f7e450b4a44d154406cba6833f7.html">src</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">boost_graph.h</div>  </div>
+<div class="title">meshinfo.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a00110.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;boost/graph/graph_traits.hpp&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;boost/graph/adjacency_matrix.hpp&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;boost/graph/directed_graph.hpp&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;boost/graph/compressed_sparse_row_graph.hpp&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;boost/graph/adjacency_list.hpp&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">// Define a hash function for arrays of 3 floats.</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">namespace </span>std {</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> SizeT&gt;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="a00095.html#a78d69e3306ec9cf190f79b72217f2340">array_hash_combine_impl</a>(SizeT&amp; seed, SizeT value)</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    {</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        seed ^= value + 0x9e3779b9 + (seed &lt;&lt; 6) + (seed &gt;&gt; 2);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    }</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">template</span> &lt;&gt;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">struct </span>hash&lt;std::array&lt;float, 3&gt;&gt;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    {</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="a01123.html#af1c504305bc3e72e72884840ae9b1177">   53</a></span>&#160;        <span class="keyword">inline</span> std::size_t <a class="code" href="a01123.html#af1c504305bc3e72e72884840ae9b1177">operator()</a>(<span class="keyword">const</span> std::array&lt;float, 3&gt;&amp; k)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">        </span>{</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <span class="keywordtype">size_t</span> seed = std::hash&lt;float&gt;()(k[0]);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <a class="code" href="a00095.html#a78d69e3306ec9cf190f79b72217f2340">array_hash_combine_impl</a>(seed, std::hash&lt;float&gt;()(k[1]));</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <a class="code" href="a00095.html#a78d69e3306ec9cf190f79b72217f2340">array_hash_combine_impl</a>(seed, std::hash&lt;float&gt;()(k[2]));</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keywordflow">return</span> seed;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        }</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    };</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;}</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="a00283.html">   75</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="a00283.html">boost</a></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;{</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">#ifdef BOOST_NO_EXCEPTIONS</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">void</span> throw_exception(std::exception <span class="keyword">const</span>&amp; e) {</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordflow">throw</span> 11; <span class="comment">// or whatever</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    };</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;}</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00273.html">HF</a> {</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="comment">// Forward Declares</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keyword">namespace </span>SpatialStructures {</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="keyword">class </span>Graph;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keyword">class </span>Node;     </div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    }</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keyword">namespace </span>Pathfinding {</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="comment">// Note: These structs and typedefs are used to simplify creation and usage of the boost</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <span class="comment">// graph and serve no purpose outside of that.</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="a00282.html">   99</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="a00282.html#a01131">Edge_Cost</a> { </div>
-<div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="a00282.html#aefea62ffa2c7078ac7d9f2eefaa96e07">  100</a></span>&#160;            <span class="keywordtype">float</span> <a class="code" href="a00282.html#aefea62ffa2c7078ac7d9f2eefaa96e07">weight</a>; </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        };</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
-<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="a00282.html">  111</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="a00282.html#a01135">vertex_data</a> {</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            boost::graph_traits&lt;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                boost::compressed_sparse_row_graph&lt;boost::directedS&gt;</div>
-<div class="line"><a name="l00114"></a><span class="lineno"><a class="line" href="a00282.html#a77df9b09cb03d4029237496b485d77e3">  114</a></span>&#160;            &gt;<a class="code" href="a00282.html#aff4215affd9d683505478f5b7dcc1804">::vertex_descriptor</a> <a class="code" href="a00282.html#a77df9b09cb03d4029237496b485d77e3">p</a>;         </div>
-<div class="line"><a name="l00115"></a><span class="lineno"><a class="line" href="a00282.html#a3f23d92f8d538033cf4096201083944e">  115</a></span>&#160;            <span class="keywordtype">double</span> <a class="code" href="a00282.html#a3f23d92f8d538033cf4096201083944e">d</a>;                       </div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        };</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        <span class="keyword">typedef</span> boost::compressed_sparse_row_graph&lt;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            boost::directedS,</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            <a class="code" href="a00282.html#a01135">vertex_data</a>,</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            <a class="code" href="a00282.html#a01131">Edge_Cost</a></div>
-<div class="line"><a name="l00135"></a><span class="lineno"><a class="line" href="a00282.html#a9314d552e0a8092644fa080c9945bd25">  135</a></span>&#160;        &gt; <a class="code" href="a00282.html#a9314d552e0a8092644fa080c9945bd25">graph_t</a>;</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
-<div class="line"><a name="l00139"></a><span class="lineno"><a class="line" href="a00282.html#aff4215affd9d683505478f5b7dcc1804">  139</a></span>&#160;        <span class="keyword">typedef</span> <a class="code" href="a00282.html#aff4215affd9d683505478f5b7dcc1804">boost::graph_traits&lt; graph_t &gt;::vertex_descriptor</a> <a class="code" href="a00282.html#aff4215affd9d683505478f5b7dcc1804">vertex_descriptor</a>;</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
-<div class="line"><a name="l00142"></a><span class="lineno"><a class="line" href="a00282.html#acc378c1e475802d96758aaef12d33dbc">  142</a></span>&#160;        <span class="keyword">typedef</span> std::pair &lt;int, int&gt; <a class="code" href="a00282.html#acc378c1e475802d96758aaef12d33dbc">pair</a>;</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
-<div class="line"><a name="l00165"></a><span class="lineno"><a class="line" href="a01139.html">  165</a></span>&#160;        <span class="keyword">class </span><a class="code" href="a01139.html">BoostGraph</a> {</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00167"></a><span class="lineno"><a class="line" href="a01139.html#a8af65de831cc2255b7ad2069791124ef">  167</a></span>&#160;            <a class="code" href="a00282.html#a9314d552e0a8092644fa080c9945bd25">graph_t</a> <a class="code" href="a01139.html#a8af65de831cc2255b7ad2069791124ef">g</a>;                          </div>
-<div class="line"><a name="l00168"></a><span class="lineno"><a class="line" href="a01139.html#ac7b026041a385cf55c089944a02e0c1d">  168</a></span>&#160;            std::vector&lt;vertex_descriptor&gt; <a class="code" href="a01139.html#ac7b026041a385cf55c089944a02e0c1d">p</a>;   </div>
-<div class="line"><a name="l00169"></a><span class="lineno"><a class="line" href="a01139.html#a45e623a31de17dd7eba2e849822fc692">  169</a></span>&#160;            std::vector&lt;double&gt; <a class="code" href="a01139.html#a45e623a31de17dd7eba2e849822fc692">d</a>;              </div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;            <a class="code" href="a01139.html#abb54875d0dfd2913eb642142647d7133">BoostGraph</a>(<span class="keyword">const</span> <a class="code" href="a01199.html">HF::SpatialStructures::Graph</a>&amp; graph);</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160; </div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160; </div>
-<div class="line"><a name="l00257"></a><span class="lineno"><a class="line" href="a01139.html#a9626c462cdaa2b8d869e7a4311c51b7d">  257</a></span>&#160;            <a class="code" href="a01139.html#a9626c462cdaa2b8d869e7a4311c51b7d">~BoostGraph</a>();</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;        };</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    }</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;}</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;Dense&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;array&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">//#define EIGEN_DONT_ALIGN_STATICALLY</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">//#define EIGEN_DONT_VECTORIZE</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">namespace </span>std {</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> SizeT&gt;</div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="a00110.html#a78d69e3306ec9cf190f79b72217f2340">   32</a></span>&#160;    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="a00110.html#a78d69e3306ec9cf190f79b72217f2340">array_hash_combine_impl</a>(SizeT&amp; seed, SizeT value)</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    {</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        seed ^= value + 0x9e3779b9 + (seed &lt;&lt; 6) + (seed &gt;&gt; 2);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    }</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">template</span> &lt;&gt;</div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="a01156.html">   39</a></span>&#160;    <span class="keyword">struct </span>hash&lt;std::array&lt;float, 3&gt;&gt;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    {</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="a01156.html#af1c504305bc3e72e72884840ae9b1177">   57</a></span>&#160;        <span class="keyword">inline</span> std::size_t <a class="code" href="a01156.html#af1c504305bc3e72e72884840ae9b1177">operator()</a>(<span class="keyword">const</span> std::array&lt;float, 3&gt;&amp; k)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">        </span>{</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="keywordtype">size_t</span> seed = std::hash&lt;float&gt;()(k[0]);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            <a class="code" href="a00110.html#a78d69e3306ec9cf190f79b72217f2340">array_hash_combine_impl</a>(seed, std::hash&lt;float&gt;()(k[1]));</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            <a class="code" href="a00110.html#a78d69e3306ec9cf190f79b72217f2340">array_hash_combine_impl</a>(seed, std::hash&lt;float&gt;()(k[2]));</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            <span class="keywordflow">return</span> seed;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        }</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    };</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;}</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00312.html">HF::Geometry</a> {</div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="a01160.html">   83</a></span>&#160;    <span class="keyword">class </span><a class="code" href="a01160.html">MeshInfo</a> {</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="a01160.html#a10c9be2ae52f22df6740ea4ffffb5892">   85</a></span>&#160;        <span class="keywordtype">int</span> <a class="code" href="a01160.html#a10c9be2ae52f22df6740ea4ffffb5892">meshid</a>;                     </div>
+<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="a01160.html#ae5c060d8f33f9dea73e281e668ea6322">   86</a></span>&#160;        Eigen::Matrix3X&lt;float&gt; <a class="code" href="a01160.html#ae5c060d8f33f9dea73e281e668ea6322">verts</a>;   </div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="a01160.html#a756ad924bd71d28ebb0eff73e3ba5111">   87</a></span>&#160;        Eigen::Matrix3X&lt;int&gt; <a class="code" href="a01160.html#a756ad924bd71d28ebb0eff73e3ba5111">indices</a>;   </div>
+<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="a01160.html#a5e491010fdd2b25dbeb2d238054d700d">   88</a></span>&#160;        std::string <a class="code" href="a01160.html#a5e491010fdd2b25dbeb2d238054d700d">name</a> = <span class="stringliteral">&quot;&quot;</span>;          </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="a01160.html#ab730105612bb713f3ff164a3795cf9b8">SetVert</a>(<span class="keywordtype">int</span> index, <span class="keywordtype">float</span> x, <span class="keywordtype">float</span> y, <span class="keywordtype">float</span> z);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="a01160.html#ab6c9f34df6ad1a8e357d5a78b5f6b583">VectorsToBuffers</a>(<span class="keyword">const</span> std::vector&lt;std::array&lt;float, 3&gt;&gt;&amp; vertices);</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00132"></a><span class="lineno"><a class="line" href="a01160.html#ae7fffcc1e7bab5a5c88f79033d0a73a1">  132</a></span>&#160;        <a class="code" href="a01160.html#ae7fffcc1e7bab5a5c88f79033d0a73a1">MeshInfo</a>() { <a class="code" href="a01160.html#a10c9be2ae52f22df6740ea4ffffb5892">meshid</a> = 0; <a class="code" href="a01160.html#ae5c060d8f33f9dea73e281e668ea6322">verts</a>.resize(3, 0); <a class="code" href="a01160.html#a5e491010fdd2b25dbeb2d238054d700d">name</a> = <span class="stringliteral">&quot;INVALID&quot;</span>; };</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160; </div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;        <a class="code" href="a01160.html#ae7fffcc1e7bab5a5c88f79033d0a73a1">MeshInfo</a>(</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            <span class="keyword">const</span> std::vector&lt;std::array&lt;float, 3&gt;&gt;&amp; vertices,</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;            <span class="keywordtype">int</span> <span class="keywordtype">id</span>,</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;            std::string <a class="code" href="a01160.html#a5e491010fdd2b25dbeb2d238054d700d">name</a> = <span class="stringliteral">&quot;&quot;</span></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        );</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;        <a class="code" href="a01160.html#ae7fffcc1e7bab5a5c88f79033d0a73a1">MeshInfo</a>(</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;            <span class="keyword">const</span> std::vector&lt;float&gt;&amp; in_vertices, </div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;            <span class="keyword">const</span> std::vector&lt;int&gt;&amp; in_indexes,</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;            <span class="keywordtype">int</span> <span class="keywordtype">id</span>, </div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;            std::string <a class="code" href="a01160.html#a5e491010fdd2b25dbeb2d238054d700d">name</a> = <span class="stringliteral">&quot;&quot;</span></div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;        );</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160; </div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="a01160.html#a35a764d76bb738c933592dc95d475234">AddVerts</a>(<span class="keyword">const</span> std::vector&lt;std::array&lt;float, 3&gt;&gt;&amp; <a class="code" href="a01160.html#ae5c060d8f33f9dea73e281e668ea6322">verts</a>);</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    </div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160; </div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        <span class="keywordtype">int</span> <a class="code" href="a01160.html#aa0a92bb9f188b0d712fc3f462ea7184b">NumVerts</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160; </div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160; </div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;        <span class="keywordtype">int</span> <a class="code" href="a01160.html#a1238a0e79916f20efcf584236214fe4a">NumTris</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160; </div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="a01160.html#a0b045826387ad47da69e5c098caf91dd">ConvertToRhinoCoordinates</a>();</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160; </div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="a01160.html#aa78330b65f42be9a33a6e58fa2717f73">ConvertToOBJCoordinates</a>();</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160; </div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;        <span class="comment">/*</span></div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;<span class="comment">            \details </span></div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;<span class="comment">            Uses Eigen&#39;s geometry module to create a rotation matrix, then applies it to </span></div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;<span class="comment">            this mesh&#39;s vertex matrix. </span></div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;<span class="comment">            \code</span></div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;<span class="comment">                // be sure to #include &quot;meshinfo.h&quot;, and #include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;<span class="comment">                // Prepare the vertices</span></div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;<span class="comment">                std::array&lt;float, 3&gt; vertex_0 = { 34.1, 63.9, 16.5 };</span></div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;<span class="comment">                std::array&lt;float, 3&gt; vertex_1 = { 23.5, 85.7, 45.2 };</span></div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;<span class="comment">                std::array&lt;float, 3&gt; vertex_2 = { 12.0, 24.6, 99.4 };</span></div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;<span class="comment">                // Create an array of vertices</span></div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;<span class="comment">                std::vector&lt;std::array&lt;float, 3&gt;&gt; vertices{ vertex_0, vertex_1, vertex_2 };</span></div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;<span class="comment">                // Create the MeshInfo</span></div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;<span class="comment">                HF::Geometry::MeshInfo mesh(vertices, 3451, &quot;My Mesh&quot;);</span></div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;<span class="comment">                // Perform rotation</span></div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;<span class="comment">                float rot_x = 10.0;</span></div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;<span class="comment">                float rot_y = 20.0;</span></div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;<span class="comment">                float rot_z = 30.0;</span></div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;<span class="comment">                mesh.PerformRotation(rot_x, rot_y, rot_z);</span></div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;<span class="comment">                // Display the vertices for mesh</span></div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;<span class="comment">                std::cout &lt;&lt; &quot;Vertices in mesh with ID &quot; &lt;&lt; mesh.GetMeshID() &lt;&lt; &quot;: &quot; &lt;&lt; std::endl;</span></div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;<span class="comment">                for (auto vertex : mesh.GetVertsAsArrays()) {</span></div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;<span class="comment">                    std::cout &lt;&lt; &quot;(&quot; &lt;&lt; vertex[0] &lt;&lt; &quot;, &quot; &lt;&lt; vertex[1] &lt;&lt; &quot;, &quot; &lt;&lt; vertex[2] &lt;&lt; &quot;)&quot; &lt;&lt; std::endl;</span></div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;<span class="comment">                }</span></div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;<span class="comment">            \endcode</span></div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;<span class="comment">        */</span></div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="a01160.html#a2fd71111a71467b3f10fb13ff86cc208">PerformRotation</a>(<span class="keywordtype">float</span> rx, <span class="keywordtype">float</span> ry, <span class="keywordtype">float</span> rz);</div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160; </div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160; </div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;        <span class="keywordtype">int</span> <a class="code" href="a01160.html#a0a5677e9e852ca1dd4ea25e417e41a45">GetMeshID</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160; </div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160; </div>
+<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160; </div>
+<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;        std::vector&lt;float&gt; <a class="code" href="a01160.html#a82d77829c8fb5f03bad9aa8a07436a62">GetIndexedVertices</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;        </div>
+<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160; </div>
+<div class="line"><a name="l00598"></a><span class="lineno">  598</span>&#160;        std::vector&lt;int&gt; <a class="code" href="a01160.html#a6a48b289ce6a767ec332f0ab4ecf719a">getRawIndices</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00599"></a><span class="lineno">  599</span>&#160; </div>
+<div class="line"><a name="l00601"></a><span class="lineno">  601</span>&#160; </div>
+<div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160;        std::vector&lt;std::array&lt;float, 3&gt;&gt; <a class="code" href="a01160.html#a3f061285ad30d95467b9fbbc4a3cf354">GetUnindexedVertices</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160; </div>
+<div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160; </div>
+<div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="a01160.html#a7d30016f14b635d17e6668fba38c7676">SetMeshID</a>(<span class="keywordtype">int</span> new_id);</div>
+<div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160; </div>
+<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160; </div>
+<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="a01160.html#a726c12d5215ad9b63f4f5138c877d43e">operator==</a>(<span class="keyword">const</span> <a class="code" href="a01160.html">MeshInfo</a>&amp; M2) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;        </div>
+<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160; </div>
+<div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160;        std::array&lt;float, 3&gt; <a class="code" href="a01160.html#a9a489d38b9c079d3bb460118a69f2da2">operator[]</a>(<span class="keywordtype">int</span> i) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160;    };</div>
+<div class="line"><a name="l00766"></a><span class="lineno">  766</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aa00282_html_acc378c1e475802d96758aaef12d33dbc"><div class="ttname"><a href="a00282.html#acc378c1e475802d96758aaef12d33dbc">HF::Pathfinding::pair</a></div><div class="ttdeci">std::pair&lt; int, int &gt; pair</div><div class="ttdoc">Shorten std::pair to simplify graph construction.</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00142">boost_graph.h:142</a></div></div>
-<div class="ttc" id="aa01123_html_af1c504305bc3e72e72884840ae9b1177"><div class="ttname"><a href="a01123.html#af1c504305bc3e72e72884840ae9b1177">std::hash&lt; std::array&lt; float, 3 &gt; &gt;::operator()</a></div><div class="ttdeci">std::size_t operator()(const std::array&lt; float, 3 &gt; &amp;k) const</div><div class="ttdoc">Template specialization to hash an array of floats.</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00053">boost_graph.h:53</a></div></div>
-<div class="ttc" id="aa00282_html_a01131"><div class="ttname"><a href="a00282.html#a01131">HF::Pathfinding::Edge_Cost</a></div><div class="ttdoc">Data stored for every edge in the BoostGraph.</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00099">boost_graph.h:99</a></div></div>
-<div class="ttc" id="aa00282_html_a01135"><div class="ttname"><a href="a00282.html#a01135">HF::Pathfinding::vertex_data</a></div><div class="ttdoc">Data stored for every vertex in the BoostGraph.</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00111">boost_graph.h:111</a></div></div>
-<div class="ttc" id="aa01199_html"><div class="ttname"><a href="a01199.html">HF::SpatialStructures::Graph</a></div><div class="ttdoc">A Graph of nodes connected by edges that supports both integers and HF::SpatialStructures::Node.</div><div class="ttdef"><b>Definition:</b> <a href="a00152_source.html#l00096">graph.h:96</a></div></div>
-<div class="ttc" id="aa01139_html_a45e623a31de17dd7eba2e849822fc692"><div class="ttname"><a href="a01139.html#a45e623a31de17dd7eba2e849822fc692">HF::Pathfinding::BoostGraph::d</a></div><div class="ttdeci">std::vector&lt; double &gt; d</div><div class="ttdoc">Distance array preallocated to the number of nodes in the graph.</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00169">boost_graph.h:169</a></div></div>
-<div class="ttc" id="aa01139_html_abb54875d0dfd2913eb642142647d7133"><div class="ttname"><a href="a01139.html#abb54875d0dfd2913eb642142647d7133">HF::Pathfinding::BoostGraph::BoostGraph</a></div><div class="ttdeci">BoostGraph(const HF::SpatialStructures::Graph &amp;graph)</div><div class="ttdoc">Create a boost graph from a HF::SpatialStructures::Graph.</div><div class="ttdef"><b>Definition:</b> <a href="a00107_source.html#l00020">boost_graph.cpp:20</a></div></div>
-<div class="ttc" id="aa00282_html_a9314d552e0a8092644fa080c9945bd25"><div class="ttname"><a href="a00282.html#a9314d552e0a8092644fa080c9945bd25">HF::Pathfinding::graph_t</a></div><div class="ttdeci">boost::compressed_sparse_row_graph&lt; boost::directedS, vertex_data, Edge_Cost &gt; graph_t</div><div class="ttdoc">Type of graph held by the BoostGraph.</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00135">boost_graph.h:135</a></div></div>
-<div class="ttc" id="aa00282_html_aff4215affd9d683505478f5b7dcc1804"><div class="ttname"><a href="a00282.html#aff4215affd9d683505478f5b7dcc1804">HF::Pathfinding::vertex_descriptor</a></div><div class="ttdeci">boost::graph_traits&lt; graph_t &gt;::vertex_descriptor vertex_descriptor</div><div class="ttdoc">Quick alias to shorten the typename of vertex descriptors for our graph_t type. /summary&gt;</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00139">boost_graph.h:139</a></div></div>
-<div class="ttc" id="aa00283_html"><div class="ttname"><a href="a00283.html">boost</a></div><div class="ttdoc">The Boost C++ library. https://www.boost.org/.</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00075">boost_graph.h:76</a></div></div>
-<div class="ttc" id="aa01139_html_ac7b026041a385cf55c089944a02e0c1d"><div class="ttname"><a href="a01139.html#ac7b026041a385cf55c089944a02e0c1d">HF::Pathfinding::BoostGraph::p</a></div><div class="ttdeci">std::vector&lt; vertex_descriptor &gt; p</div><div class="ttdoc">Vertex array preallocated to the number of nodes in the graph.</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00168">boost_graph.h:168</a></div></div>
-<div class="ttc" id="aa00282_html_a3f23d92f8d538033cf4096201083944e"><div class="ttname"><a href="a00282.html#a3f23d92f8d538033cf4096201083944e">HF::Pathfinding::vertex_data::d</a></div><div class="ttdeci">double d</div><div class="ttdoc">Unknown may have been used for the colormap.</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00115">boost_graph.h:115</a></div></div>
-<div class="ttc" id="aa00282_html_aefea62ffa2c7078ac7d9f2eefaa96e07"><div class="ttname"><a href="a00282.html#aefea62ffa2c7078ac7d9f2eefaa96e07">HF::Pathfinding::Edge_Cost::weight</a></div><div class="ttdeci">float weight</div><div class="ttdoc">Cost of traversing this edge.</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00100">boost_graph.h:100</a></div></div>
-<div class="ttc" id="aa00282_html_a77df9b09cb03d4029237496b485d77e3"><div class="ttname"><a href="a00282.html#a77df9b09cb03d4029237496b485d77e3">HF::Pathfinding::vertex_data::p</a></div><div class="ttdeci">boost::graph_traits&lt; boost::compressed_sparse_row_graph&lt; boost::directedS &gt; &gt;::vertex_descriptor p</div><div class="ttdoc">The index of a vertex in the CSR.</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00114">boost_graph.h:114</a></div></div>
-<div class="ttc" id="aa00095_html_a78d69e3306ec9cf190f79b72217f2340"><div class="ttname"><a href="a00095.html#a78d69e3306ec9cf190f79b72217f2340">std::array_hash_combine_impl</a></div><div class="ttdeci">void array_hash_combine_impl(SizeT &amp;seed, SizeT value)</div><div class="ttdoc">Combine the hash of value into seed.</div><div class="ttdef"><b>Definition:</b> <a href="a00095_source.html#l00032">meshinfo.h:32</a></div></div>
-<div class="ttc" id="aa01139_html_a9626c462cdaa2b8d869e7a4311c51b7d"><div class="ttname"><a href="a01139.html#a9626c462cdaa2b8d869e7a4311c51b7d">HF::Pathfinding::BoostGraph::~BoostGraph</a></div><div class="ttdeci">~BoostGraph()</div><div class="ttdoc">Explicit Destructor required for BoostGraphDeleter to work in path_finder.h.</div></div>
-<div class="ttc" id="aa01139_html"><div class="ttname"><a href="a01139.html">HF::Pathfinding::BoostGraph</a></div><div class="ttdoc">A graph usable with the BoostGraphLibrary.</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00165">boost_graph.h:165</a></div></div>
-<div class="ttc" id="aa01139_html_a8af65de831cc2255b7ad2069791124ef"><div class="ttname"><a href="a01139.html#a8af65de831cc2255b7ad2069791124ef">HF::Pathfinding::BoostGraph::g</a></div><div class="ttdeci">graph_t g</div><div class="ttdoc">The underlying graph in boost.</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00167">boost_graph.h:167</a></div></div>
-<div class="ttc" id="aa00273_html"><div class="ttname"><a href="a00273.html">HF</a></div><div class="ttdoc">Output CSR for interop with other languages</div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00013">graph_generator.cpp:13</a></div></div>
+<div class="ttc" id="aa01160_html_a0b045826387ad47da69e5c098caf91dd"><div class="ttname"><a href="a01160.html#a0b045826387ad47da69e5c098caf91dd">HF::Geometry::MeshInfo::ConvertToRhinoCoordinates</a></div><div class="ttdeci">void ConvertToRhinoCoordinates()</div><div class="ttdoc">Convert a mesh from Y-Up to Z-Up.</div><div class="ttdef"><b>Definition:</b> <a href="a00107_source.html#l00175">meshinfo.cpp:175</a></div></div>
+<div class="ttc" id="aa01160_html_a9a489d38b9c079d3bb460118a69f2da2"><div class="ttname"><a href="a01160.html#a9a489d38b9c079d3bb460118a69f2da2">HF::Geometry::MeshInfo::operator[]</a></div><div class="ttdeci">std::array&lt; float, 3 &gt; operator[](int i) const</div><div class="ttdoc">Get vertex at a specific index in the mesh.</div><div class="ttdef"><b>Definition:</b> <a href="a00107_source.html#l00266">meshinfo.cpp:266</a></div></div>
+<div class="ttc" id="aa01160_html_a6a48b289ce6a767ec332f0ab4ecf719a"><div class="ttname"><a href="a01160.html#a6a48b289ce6a767ec332f0ab4ecf719a">HF::Geometry::MeshInfo::getRawIndices</a></div><div class="ttdeci">std::vector&lt; int &gt; getRawIndices() const</div><div class="ttdoc">Retrieve a copy of this mesh's index buffer as a 1D array.</div><div class="ttdef"><b>Definition:</b> <a href="a00107_source.html#l00240">meshinfo.cpp:240</a></div></div>
+<div class="ttc" id="aa01160_html_ae5c060d8f33f9dea73e281e668ea6322"><div class="ttname"><a href="a01160.html#ae5c060d8f33f9dea73e281e668ea6322">HF::Geometry::MeshInfo::verts</a></div><div class="ttdeci">Eigen::Matrix3X&lt; float &gt; verts</div><div class="ttdoc">3 by X matrix of vertices</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00086">meshinfo.h:86</a></div></div>
+<div class="ttc" id="aa01160_html_a3f061285ad30d95467b9fbbc4a3cf354"><div class="ttname"><a href="a01160.html#a3f061285ad30d95467b9fbbc4a3cf354">HF::Geometry::MeshInfo::GetUnindexedVertices</a></div><div class="ttdeci">std::vector&lt; std::array&lt; float, 3 &gt; &gt; GetUnindexedVertices() const</div><div class="ttdoc">Retrieve an unindexed array of this mesh's vertices.</div><div class="ttdef"><b>Definition:</b> <a href="a00107_source.html#l00247">meshinfo.cpp:247</a></div></div>
+<div class="ttc" id="aa01160_html_ab730105612bb713f3ff164a3795cf9b8"><div class="ttname"><a href="a01160.html#ab730105612bb713f3ff164a3795cf9b8">HF::Geometry::MeshInfo::SetVert</a></div><div class="ttdeci">void SetVert(int index, float x, float y, float z)</div><div class="ttdoc">Change the position of the vertex at index.</div><div class="ttdef"><b>Definition:</b> <a href="a00107_source.html#l00038">meshinfo.cpp:38</a></div></div>
+<div class="ttc" id="aa01160_html_aa78330b65f42be9a33a6e58fa2717f73"><div class="ttname"><a href="a01160.html#aa78330b65f42be9a33a6e58fa2717f73">HF::Geometry::MeshInfo::ConvertToOBJCoordinates</a></div><div class="ttdeci">void ConvertToOBJCoordinates()</div><div class="ttdoc">Convert a mesh from Z-Up to Y-Up.</div><div class="ttdef"><b>Definition:</b> <a href="a00107_source.html#l00186">meshinfo.cpp:186</a></div></div>
+<div class="ttc" id="aa01160_html_ab6c9f34df6ad1a8e357d5a78b5f6b583"><div class="ttname"><a href="a01160.html#ab6c9f34df6ad1a8e357d5a78b5f6b583">HF::Geometry::MeshInfo::VectorsToBuffers</a></div><div class="ttdeci">void VectorsToBuffers(const std::vector&lt; std::array&lt; float, 3 &gt;&gt; &amp;vertices)</div><div class="ttdoc">Index vertices then insert them into verts and indices.</div><div class="ttdef"><b>Definition:</b> <a href="a00107_source.html#l00118">meshinfo.cpp:118</a></div></div>
+<div class="ttc" id="aa01160_html_a5e491010fdd2b25dbeb2d238054d700d"><div class="ttname"><a href="a01160.html#a5e491010fdd2b25dbeb2d238054d700d">HF::Geometry::MeshInfo::name</a></div><div class="ttdeci">std::string name</div><div class="ttdoc">A human-readable title.</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00088">meshinfo.h:88</a></div></div>
+<div class="ttc" id="aa01160_html"><div class="ttname"><a href="a01160.html">HF::Geometry::MeshInfo</a></div><div class="ttdoc">A collection of vertices and indices representing geometry.</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00083">meshinfo.h:83</a></div></div>
+<div class="ttc" id="aa01160_html_a82d77829c8fb5f03bad9aa8a07436a62"><div class="ttname"><a href="a01160.html#a82d77829c8fb5f03bad9aa8a07436a62">HF::Geometry::MeshInfo::GetIndexedVertices</a></div><div class="ttdeci">std::vector&lt; float &gt; GetIndexedVertices() const</div><div class="ttdoc">A copy of every vertex in this array.</div><div class="ttdef"><b>Definition:</b> <a href="a00107_source.html#l00229">meshinfo.cpp:229</a></div></div>
+<div class="ttc" id="aa01160_html_a1238a0e79916f20efcf584236214fe4a"><div class="ttname"><a href="a01160.html#a1238a0e79916f20efcf584236214fe4a">HF::Geometry::MeshInfo::NumTris</a></div><div class="ttdeci">int NumTris() const</div><div class="ttdoc">Calculate the total number of triangles in this mesh.</div><div class="ttdef"><b>Definition:</b> <a href="a00107_source.html#l00173">meshinfo.cpp:173</a></div></div>
+<div class="ttc" id="aa01160_html_a2fd71111a71467b3f10fb13ff86cc208"><div class="ttname"><a href="a01160.html#a2fd71111a71467b3f10fb13ff86cc208">HF::Geometry::MeshInfo::PerformRotation</a></div><div class="ttdeci">void PerformRotation(float rx, float ry, float rz)</div><div class="ttdoc">Rotate this mesh by x, y, z rotations in degrees (pitch, yaw, roll).</div><div class="ttdef"><b>Definition:</b> <a href="a00107_source.html#l00198">meshinfo.cpp:198</a></div></div>
+<div class="ttc" id="aa01156_html_af1c504305bc3e72e72884840ae9b1177"><div class="ttname"><a href="a01156.html#af1c504305bc3e72e72884840ae9b1177">std::hash&lt; std::array&lt; float, 3 &gt; &gt;::operator()</a></div><div class="ttdeci">std::size_t operator()(const std::array&lt; float, 3 &gt; &amp;k) const</div><div class="ttdoc">Calculate a hash for k.</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00057">meshinfo.h:57</a></div></div>
+<div class="ttc" id="aa00312_html"><div class="ttname"><a href="a00312.html">HF::Geometry</a></div><div class="ttdoc">Manipulate and load geometry from disk.</div><div class="ttdef"><b>Definition:</b> <a href="a00107_source.html#l00021">meshinfo.cpp:21</a></div></div>
+<div class="ttc" id="aa01160_html_a7d30016f14b635d17e6668fba38c7676"><div class="ttname"><a href="a01160.html#a7d30016f14b635d17e6668fba38c7676">HF::Geometry::MeshInfo::SetMeshID</a></div><div class="ttdeci">void SetMeshID(int new_id)</div><div class="ttdoc">Change the ID of this mesh.</div><div class="ttdef"><b>Definition:</b> <a href="a00107_source.html#l00264">meshinfo.cpp:264</a></div></div>
+<div class="ttc" id="aa01160_html_aa0a92bb9f188b0d712fc3f462ea7184b"><div class="ttname"><a href="a01160.html#aa0a92bb9f188b0d712fc3f462ea7184b">HF::Geometry::MeshInfo::NumVerts</a></div><div class="ttdeci">int NumVerts() const</div><div class="ttdoc">Determine how many vertices are in this mesh.</div><div class="ttdef"><b>Definition:</b> <a href="a00107_source.html#l00171">meshinfo.cpp:171</a></div></div>
+<div class="ttc" id="aa01160_html_a0a5677e9e852ca1dd4ea25e417e41a45"><div class="ttname"><a href="a01160.html#a0a5677e9e852ca1dd4ea25e417e41a45">HF::Geometry::MeshInfo::GetMeshID</a></div><div class="ttdeci">int GetMeshID() const</div><div class="ttdoc">Get the ID of this mesh.</div><div class="ttdef"><b>Definition:</b> <a href="a00107_source.html#l00227">meshinfo.cpp:227</a></div></div>
+<div class="ttc" id="aa01160_html_a756ad924bd71d28ebb0eff73e3ba5111"><div class="ttname"><a href="a01160.html#a756ad924bd71d28ebb0eff73e3ba5111">HF::Geometry::MeshInfo::indices</a></div><div class="ttdeci">Eigen::Matrix3X&lt; int &gt; indices</div><div class="ttdoc">3 by X matrix of indices for triangles.</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00087">meshinfo.h:87</a></div></div>
+<div class="ttc" id="aa01160_html_a35a764d76bb738c933592dc95d475234"><div class="ttname"><a href="a01160.html#a35a764d76bb738c933592dc95d475234">HF::Geometry::MeshInfo::AddVerts</a></div><div class="ttdeci">void AddVerts(const std::vector&lt; std::array&lt; float, 3 &gt;&gt; &amp;verts)</div><div class="ttdoc">Add more vertices to this mesh.</div><div class="ttdef"><b>Definition:</b> <a href="a00107_source.html#l00156">meshinfo.cpp:156</a></div></div>
+<div class="ttc" id="aa01160_html_a726c12d5215ad9b63f4f5138c877d43e"><div class="ttname"><a href="a01160.html#a726c12d5215ad9b63f4f5138c877d43e">HF::Geometry::MeshInfo::operator==</a></div><div class="ttdeci">bool operator==(const MeshInfo &amp;M2) const</div><div class="ttdoc">Compare the vertices of two MeshInfo objects.</div><div class="ttdef"><b>Definition:</b> <a href="a00107_source.html#l00289">meshinfo.cpp:289</a></div></div>
+<div class="ttc" id="aa01160_html_a10c9be2ae52f22df6740ea4ffffb5892"><div class="ttname"><a href="a01160.html#a10c9be2ae52f22df6740ea4ffffb5892">HF::Geometry::MeshInfo::meshid</a></div><div class="ttdeci">int meshid</div><div class="ttdoc">Identifier for this mesh.</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00085">meshinfo.h:85</a></div></div>
+<div class="ttc" id="aa01160_html_ae7fffcc1e7bab5a5c88f79033d0a73a1"><div class="ttname"><a href="a01160.html#ae7fffcc1e7bab5a5c88f79033d0a73a1">HF::Geometry::MeshInfo::MeshInfo</a></div><div class="ttdeci">MeshInfo()</div><div class="ttdoc">Construct an empty instance of MeshInfo.</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00132">meshinfo.h:132</a></div></div>
+<div class="ttc" id="aa00110_html_a78d69e3306ec9cf190f79b72217f2340"><div class="ttname"><a href="a00110.html#a78d69e3306ec9cf190f79b72217f2340">std::array_hash_combine_impl</a></div><div class="ttdeci">void array_hash_combine_impl(SizeT &amp;seed, SizeT value)</div><div class="ttdoc">Combine the hash of value into seed.</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00032">meshinfo.h:32</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

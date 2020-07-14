@@ -1,2 +1,105 @@
-\hypertarget{a01496}{}\doxysection{Cpp/snippets/spatialstructures/node.cpp File Reference}
-\label{a01496}\index{Cpp/snippets/spatialstructures/node.cpp@{Cpp/snippets/spatialstructures/node.cpp}}
+{\bfseries{Doxygen Guidelines}}
+
+This document explains the formatting and style for documenting code. To build the documentation, see \mbox{\hyperlink{a01497}{Building Documentation}} for information on documenting and building documentation.
+
+{\bfseries{Overview}}~\newline
+
+\begin{DoxyItemize}
+\item Methods and xml format to use in methods
+\item Algorithms should be documented inline with source rather than headers
+\item Interface details should remain with headers
+\end{DoxyItemize}
+
+{\bfseries{Table of contents}}~\newline
+
+\begin{DoxyItemize}
+\item Using T\+O\+DO
+\item Documenting the heads of each file
+\item Documenting member fields
+\item Snippets and Code Samples
+\item Adding images for headers/sources, and markdown files ({\ttfamily .md})
+\end{DoxyItemize}
+
+\doxysubsection*{Using {\ttfamily T\+O\+DO}}
+
+To have a T\+O\+DO automatically pull to documentation use\+:~\newline
+ {\ttfamily /// T\+O\+DO\+:}
+
+\doxysubsection*{Documenting the heads of each file (headers and sources)}
+
+{\bfseries{The head of each file should contain the following tags\+:}}~\newline
+
+
+{\ttfamily \textbackslash{}file}~\newline
+ Name of a file~\newline
+ e.\+g. {\bfseries{{\ttfamily /// \textbackslash{}file \mbox{\hyperlink{a00176}{node.\+h}}}}}~\newline
+ \href{https://www.doxygen.nl/manual/commands.html\#cmdfile}{\texttt{ https\+://www.\+doxygen.\+nl/manual/commands.\+html\#cmdfile}}
+
+{\ttfamily \textbackslash{}brief}~\newline
+ A one-\/line description describing the contents of the file~\newline
+ e.\+g. {\bfseries{{\ttfamily /// \textbackslash{}brief Header file for a node data structure, used in a graph A\+DT}}}~\newline
+ \href{https://www.doxygen.nl/manual/commands.html\#cmdbrief}{\texttt{ https\+://www.\+doxygen.\+nl/manual/commands.\+html\#cmdbrief}}
+
+{\ttfamily \textbackslash{}author}~\newline
+ The author of the file~\newline
+ If there are multiple authors,~\newline
+ you may use one {\ttfamily \textbackslash{}author} tag for all of the authors,~\newline
+ or one {\ttfamily \textbackslash{}author} tag per person/entity.~\newline
+ e.\+g. {\bfseries{{\ttfamily /// \textbackslash{}author John Doe}}}~\newline
+ \href{https://www.doxygen.nl/manual/commands.html\#cmdauthor}{\texttt{ https\+://www.\+doxygen.\+nl/manual/commands.\+html\#cmdauthor}}
+
+{\ttfamily \textbackslash{}date}~\newline
+ This may be the date of the file\textquotesingle{}s last update,~\newline
+ or the date the file was created -- whichever is relevant.~\newline
+ e.\+g. {\bfseries{{\ttfamily /// \textbackslash{}date 06 Jun 2020}}}~\newline
+ \href{https://www.doxygen.nl/manual/commands.html\#cmddate}{\texttt{ https\+://www.\+doxygen.\+nl/manual/commands.\+html\#cmddate}}
+
+An example of a file head would look like this\+: \begin{DoxyVerb}///
+/// \file       node.h
+/// \brief      Header file for a node data structure, used in a graph ADT
+///
+/// \author     John Doe
+/// \date       06 Jun 2020
+///
+\end{DoxyVerb}
+
+
+Other notes\+:~\newline
+
+\begin{DoxyItemize}
+\item Follow each {\ttfamily ///} with a {\bfseries{single}} space, before using a tag.
+\item Follow each tag with {\bfseries{two}} tabs, then provide the description.
+\end{DoxyItemize}
+
+\doxysubsection*{Documenting member fields}
+
+Here is a simple example\+:~\newline
+ struct position \{ float x, y, z; ///$<$ Cartesian coordinates x, y, and z int id; ///$<$ Unique identifier \};
+
+The general format is {\ttfamily ///$<$ Description goes here},~\newline
+ notice that a {\bfseries{single whitespace character}} follows {\ttfamily ///$<$}~\newline
+ and the field descriptions are in alignment with each other, using tabs.~\newline
+ Sometimes, this is not always possible,~\newline
+ but do your best to keep the formatting {\bfseries{neat}} and {\bfseries{consistent}}.
+
+\doxysubsection*{Snippets and code samples}
+
+\doxysubsubsection*{The {\ttfamily \textbackslash{}snippet} tag should be used for long examples that are over 10 lines.}
+
+\href{https://www.doxygen.nl/manual/commands.html\#cmdsnippet}{\texttt{ https\+://www.\+doxygen.\+nl/manual/commands.\+html\#cmdsnippet}}
+
+{\bfseries{Step 0\+:}}~\newline
+ In a header file, at the line where you want the snippet to appear\+: \begin{DoxyVerb}/// \snippet PATH_TO_FILE\filename.cpp SnippetName
+\end{DoxyVerb}
+
+
+If you would like to include line numbers for the snippet, you may use the tag {\ttfamily \textbackslash{}snippet\{lineno\}} This is best used for directly referencing source files from within this repo, since the line numbers that appear are the actual line numbers of the code used for the snippet.
+
+{\bfseries{Step 1\+:}}~\newline
+ In {\ttfamily P\+A\+T\+H\+\_\+\+T\+O\+\_\+\+F\+I\+LE\textbackslash{}filename.\+cpp} (where the snippet sample is), \begin{DoxyVerb}/// [SnippetName]
+std::cout << "My sample snippet" << std::endl;
+/// [SnippetName]
+\end{DoxyVerb}
+
+
+Notice that the code is not a comment. 

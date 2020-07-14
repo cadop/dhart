@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['uniquequeue_439',['UniqueQueue',['../a01107.html',1,'HF::AnalysisMethods']]]
+  ['uniquequeue_444',['UniqueQueue',['../a01140.html',1,'HF::GraphGenerator']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Analysis: Member List</title>
+<title>Analysis: HF::SpatialStructures::CSRPtrs Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -59,19 +59,595 @@ $(function() {
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="a00305.html">HF</a></li><li class="navelem"><a class="el" href="a00308.html">SpatialStructures</a></li><li class="navelem"><a class="el" href="a01216.html">CSRPtrs</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="a01213.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">RayResult Member List</div>  </div>
+<div class="title">HF::SpatialStructures::CSRPtrs Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a01219.html">RayResult</a>, including all inherited members.</p>
-<table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a01219.html#afff68ebcccf0c6fc2bb1a8ec39009dc6">distance</a></td><td class="entry"><a class="el" href="a01219.html">RayResult</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="a01219.html#a8396dcd612c36b2d5c0deb61adc137f5">meshid</a></td><td class="entry"><a class="el" href="a01219.html">RayResult</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a01219.html#a1407239fc0cc25bafcc3559d0a9d26bb">SetHit</a>(const N &amp;node, const V &amp;direction, float dist, int mid)</td><td class="entry"><a class="el" href="a01219.html">RayResult</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-</table></div><!-- contents -->
+<p>A struct to hold all necessary information for a CSR.  
+ <a href="a01216.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="a00173_source.html">graph.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a4665024245e559dac8c3d620372dc47e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01216.html#a4665024245e559dac8c3d620372dc47e">AreValid</a> ()</td></tr>
+<tr class="memdesc:a4665024245e559dac8c3d620372dc47e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verify the CSR referenced by this instance is valid.  <a href="a01216.html#a4665024245e559dac8c3d620372dc47e">More...</a><br /></td></tr>
+<tr class="separator:a4665024245e559dac8c3d620372dc47e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a368ab31f3c2aac9e89891bbba2538a5c"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01216.html#a368ab31f3c2aac9e89891bbba2538a5c">data_begin</a> () const</td></tr>
+<tr class="memdesc:a368ab31f3c2aac9e89891bbba2538a5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the base address of the data buffer  <a href="a01216.html#a368ab31f3c2aac9e89891bbba2538a5c">More...</a><br /></td></tr>
+<tr class="separator:a368ab31f3c2aac9e89891bbba2538a5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a220ea45692732b095343c101983c9fd1"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01216.html#a220ea45692732b095343c101983c9fd1">inner_begin</a> () const</td></tr>
+<tr class="memdesc:a220ea45692732b095343c101983c9fd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the address of one-past the last element within the data buffer  <a href="a01216.html#a220ea45692732b095343c101983c9fd1">More...</a><br /></td></tr>
+<tr class="separator:a220ea45692732b095343c101983c9fd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc8ca0af9231dbed59b3d36c20e888c4"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01216.html#adc8ca0af9231dbed59b3d36c20e888c4">inner_end</a> () const</td></tr>
+<tr class="memdesc:adc8ca0af9231dbed59b3d36c20e888c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the address of one-past the last element within the inner_indices buffer  <a href="a01216.html#adc8ca0af9231dbed59b3d36c20e888c4">More...</a><br /></td></tr>
+<tr class="separator:adc8ca0af9231dbed59b3d36c20e888c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1355646148b8925e5ffd3cc902a3ae9"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01216.html#ac1355646148b8925e5ffd3cc902a3ae9">outer_begin</a> () const</td></tr>
+<tr class="memdesc:ac1355646148b8925e5ffd3cc902a3ae9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the base address of the outer_indices buffer  <a href="a01216.html#ac1355646148b8925e5ffd3cc902a3ae9">More...</a><br /></td></tr>
+<tr class="separator:ac1355646148b8925e5ffd3cc902a3ae9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43deb4cf73477ba4c01a45f5b3d21667"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01216.html#a43deb4cf73477ba4c01a45f5b3d21667">outer_end</a> () const</td></tr>
+<tr class="memdesc:a43deb4cf73477ba4c01a45f5b3d21667"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the address of one-past the last element within the outer_indices buffer  <a href="a01216.html#a43deb4cf73477ba4c01a45f5b3d21667">More...</a><br /></td></tr>
+<tr class="separator:a43deb4cf73477ba4c01a45f5b3d21667"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ca24cfb89e6aa56761ad041dbecfd56"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01216.html#a9ca24cfb89e6aa56761ad041dbecfd56">row_begin</a> (int row_number) const</td></tr>
+<tr class="memdesc:a9ca24cfb89e6aa56761ad041dbecfd56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the address of the first non-zero element of row_number within the CSR data buffer  <a href="a01216.html#a9ca24cfb89e6aa56761ad041dbecfd56">More...</a><br /></td></tr>
+<tr class="separator:a9ca24cfb89e6aa56761ad041dbecfd56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade635c77fdaf7f5ba326edad25f23202"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01216.html#ade635c77fdaf7f5ba326edad25f23202">row_end</a> (int row_number) const</td></tr>
+<tr class="memdesc:ade635c77fdaf7f5ba326edad25f23202"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the address of the first non-zero element of row_number + 1, i.e. the base address of the next row within the CSR data buffer  <a href="a01216.html#ade635c77fdaf7f5ba326edad25f23202">More...</a><br /></td></tr>
+<tr class="separator:ade635c77fdaf7f5ba326edad25f23202"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc94ca756404ff660b38f0bb88c3b4d3"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01216.html#abc94ca756404ff660b38f0bb88c3b4d3">col_begin</a> (int row_number) const</td></tr>
+<tr class="memdesc:abc94ca756404ff660b38f0bb88c3b4d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the address of the element that determines the column where the first non-zero value begins within row_number  <a href="a01216.html#abc94ca756404ff660b38f0bb88c3b4d3">More...</a><br /></td></tr>
+<tr class="separator:abc94ca756404ff660b38f0bb88c3b4d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab42a6fe755392429bb4e08deb19f57e9"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01216.html#ab42a6fe755392429bb4e08deb19f57e9">col_end</a> (int row_number) const</td></tr>
+<tr class="memdesc:ab42a6fe755392429bb4e08deb19f57e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the address of the element that denotes the end of a 'subarray' within inner_indices  <a href="a01216.html#ab42a6fe755392429bb4e08deb19f57e9">More...</a><br /></td></tr>
+<tr class="separator:ab42a6fe755392429bb4e08deb19f57e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a67ae38cef6b322331f0e9100b3f480f8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01216.html#a67ae38cef6b322331f0e9100b3f480f8">nnz</a></td></tr>
+<tr class="memdesc:a67ae38cef6b322331f0e9100b3f480f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of non-zeros contained by the CSR.  <a href="a01216.html#a67ae38cef6b322331f0e9100b3f480f8">More...</a><br /></td></tr>
+<tr class="separator:a67ae38cef6b322331f0e9100b3f480f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7ef161d6dfc8b606c120cbf5181ed68"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01216.html#ab7ef161d6dfc8b606c120cbf5181ed68">rows</a></td></tr>
+<tr class="memdesc:ab7ef161d6dfc8b606c120cbf5181ed68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of rows in this CSR.  <a href="a01216.html#ab7ef161d6dfc8b606c120cbf5181ed68">More...</a><br /></td></tr>
+<tr class="separator:ab7ef161d6dfc8b606c120cbf5181ed68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5aed9a3184fd7d7aded80c97c33e2dc5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01216.html#a5aed9a3184fd7d7aded80c97c33e2dc5">cols</a></td></tr>
+<tr class="memdesc:a5aed9a3184fd7d7aded80c97c33e2dc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of columns in this CSR.  <a href="a01216.html#a5aed9a3184fd7d7aded80c97c33e2dc5">More...</a><br /></td></tr>
+<tr class="separator:a5aed9a3184fd7d7aded80c97c33e2dc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab31bc5e69630e9101a82790c3a525386"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01216.html#ab31bc5e69630e9101a82790c3a525386">data</a></td></tr>
+<tr class="memdesc:ab31bc5e69630e9101a82790c3a525386"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the CSR's data array.  <a href="a01216.html#ab31bc5e69630e9101a82790c3a525386">More...</a><br /></td></tr>
+<tr class="separator:ab31bc5e69630e9101a82790c3a525386"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49c0ac5c7fde9a797887699bc4670de4"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01216.html#a49c0ac5c7fde9a797887699bc4670de4">outer_indices</a></td></tr>
+<tr class="memdesc:a49c0ac5c7fde9a797887699bc4670de4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the CSR's outer indices array.  <a href="a01216.html#a49c0ac5c7fde9a797887699bc4670de4">More...</a><br /></td></tr>
+<tr class="separator:a49c0ac5c7fde9a797887699bc4670de4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a946e3ae6172a03c6a98e1dee39cc19"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01216.html#a9a946e3ae6172a03c6a98e1dee39cc19">inner_indices</a></td></tr>
+<tr class="memdesc:a9a946e3ae6172a03c6a98e1dee39cc19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the CSR's inner indices array.  <a href="a01216.html#a9a946e3ae6172a03c6a98e1dee39cc19">More...</a><br /></td></tr>
+<tr class="separator:a9a946e3ae6172a03c6a98e1dee39cc19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A struct to hold all necessary information for a CSR. </p>
+<dl class="section remark"><dt>Remarks</dt><dd>This can be used by external clients to recreate or map to an existing CSR. For more information on what these arrays contain see <a href="https://eigen.tuxfamily.org/dox/group__TutorialSparse.html">https://eigen.tuxfamily.org/dox/group__TutorialSparse.html</a> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00173_source.html#l00040">40</a> of file <a class="el" href="a00173_source.html">graph.h</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a4665024245e559dac8c3d620372dc47e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4665024245e559dac8c3d620372dc47e">&#9670;&nbsp;</a></span>AreValid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool HF::SpatialStructures::CSRPtrs::AreValid </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Verify the CSR referenced by this instance is valid. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if data, outer_indices, and inner_indices are non-null, false otherwise, </dd></dl>
+<p>Simply checks that all the contained arrays are not null.</p>
+<dl class="section remark"><dt>Remarks</dt><dd>For now, this just checks if any of the arrays are null since <a class="el" href="a00313.html" title="Eigen a C++ template library for linear algebra: matrices, vectors, numerical solvers,...">Eigen</a> arrays will return null pointers if they are in an invalid state (uninitialized, uncompressed, etc).</dd></dl>
+<div class="fragment"><div class="line"><span class="comment">// be sure to #include &quot;graph.h&quot;, and #include &lt;memory&gt;</span></div>
+<div class="line"> </div>
+<div class="line">std::unique_ptr&lt;float[]&gt; <a class="code" href="a01216.html#ab31bc5e69630e9101a82790c3a525386">data</a>(<span class="keyword">new</span> <span class="keywordtype">float</span>[16]);</div>
+<div class="line">std::unique_ptr&lt;int[]&gt; <a class="code" href="a01216.html#a49c0ac5c7fde9a797887699bc4670de4">outer_indices</a>(<span class="keyword">new</span> <span class="keywordtype">int</span>[16]);</div>
+<div class="line">std::unique_ptr&lt;int[]&gt; <a class="code" href="a01216.html#a9a946e3ae6172a03c6a98e1dee39cc19">inner_indices</a>(<span class="keyword">new</span> <span class="keywordtype">int</span>[16]);</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">float</span>* p_data = <a class="code" href="a01216.html#ab31bc5e69630e9101a82790c3a525386">data</a>.get();</div>
+<div class="line"><span class="keywordtype">int</span>* p_outer_indices = <a class="code" href="a01216.html#a49c0ac5c7fde9a797887699bc4670de4">outer_indices</a>.get();</div>
+<div class="line"><span class="keywordtype">int</span>* p_inner_indices = <a class="code" href="a01216.html#a9a946e3ae6172a03c6a98e1dee39cc19">inner_indices</a>.get();</div>
+<div class="line"> </div>
+<div class="line"><a class="code" href="a01216.html">HF::SpatialStructures::CSRPtrs</a> csr = { 16, 16, 16, p_data, p_outer_indices, p_inner_indices };</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">bool</span> validity = csr.<a class="code" href="a01216.html#a4665024245e559dac8c3d620372dc47e">AreValid</a>(); <span class="comment">// validity == true, since all pointer fields are non-null</span></div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="a00173_source.html#l00077">77</a> of file <a class="el" href="a00173_source.html">graph.h</a>.</p>
+
+<p class="reference">References <a class="el" href="a00173_source.html#l00045">data</a>, <a class="el" href="a00173_source.html#l00047">inner_indices</a>, and <a class="el" href="a00173_source.html#l00046">outer_indices</a>.</p>
+
+</div>
+</div>
+<a id="abc94ca756404ff660b38f0bb88c3b4d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc94ca756404ff660b38f0bb88c3b4d3">&#9670;&nbsp;</a></span>col_begin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int * HF::SpatialStructures::CSRPtrs::col_begin </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>row_number</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the address of the element that determines the column where the first non-zero value begins within row_number </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">row_number</td><td>The desired row number for the CSR such that the address returned is of the value that dictates where the first non-zero value begins within row_number</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The address of the value that represents the column index of the first non-zero value within row_number</dd></dl>
+<div class="fragment"><div class="line"><span class="comment">// TODO example</span></div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="a00173_source.html#l00234">234</a> of file <a class="el" href="a00173_source.html">graph.h</a>.</p>
+
+<p class="reference">References <a class="el" href="a00173_source.html#l00047">inner_indices</a>, <a class="el" href="a00173_source.html#l00046">outer_indices</a>, and <a class="el" href="a00173_source.html#l00042">rows</a>.</p>
+
+</div>
+</div>
+<a id="ab42a6fe755392429bb4e08deb19f57e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab42a6fe755392429bb4e08deb19f57e9">&#9670;&nbsp;</a></span>col_end()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int * HF::SpatialStructures::CSRPtrs::col_end </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>row_number</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the address of the element that denotes the end of a 'subarray' within inner_indices </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">row_number</td><td>The desired row number for the CSR such that the address returned is one-past the last value for a 'subarray' within inner_indices</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The address of the value that represents the column index of the first non-zero value for row_number + 1</dd></dl>
+<div class="fragment"><div class="line"><span class="comment">// TODO example</span></div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="a00173_source.html#l00244">244</a> of file <a class="el" href="a00173_source.html">graph.h</a>.</p>
+
+<p class="reference">References <a class="el" href="a00173_source.html#l00198">inner_end()</a>, <a class="el" href="a00173_source.html#l00047">inner_indices</a>, <a class="el" href="a00173_source.html#l00046">outer_indices</a>, and <a class="el" href="a00173_source.html#l00042">rows</a>.</p>
+
+</div>
+</div>
+<a id="a368ab31f3c2aac9e89891bbba2538a5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a368ab31f3c2aac9e89891bbba2538a5c">&#9670;&nbsp;</a></span>data_begin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float * HF::SpatialStructures::CSRPtrs::data_begin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the base address of the data buffer </p>
+<dl class="section return"><dt>Returns</dt><dd>The base address of the data buffer</dd></dl>
+<div class="fragment"><div class="line"><span class="comment">// TODO example</span></div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="a00173_source.html#l00186">186</a> of file <a class="el" href="a00173_source.html">graph.h</a>.</p>
+
+<p class="reference">References <a class="el" href="a00173_source.html#l00045">data</a>.</p>
+
+</div>
+</div>
+<a id="a220ea45692732b095343c101983c9fd1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a220ea45692732b095343c101983c9fd1">&#9670;&nbsp;</a></span>inner_begin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int * HF::SpatialStructures::CSRPtrs::inner_begin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the address of one-past the last element within the data buffer </p>
+<dl class="section return"><dt>Returns</dt><dd>The address of one-past the last element within the data buffer</dd></dl>
+<pre class="fragment">\code
+    // TODO example
+/endcode
+</pre><p> / float* data_end() const;</p>
+<p>/// </p>
+<p>Returns the base address of the inner_indices buffer </p>
+<p>/// </p><dl class="section return"><dt>Returns</dt><dd>The base address of the inner_indices buffer</dd></dl>
+<p>/*! </p><div class="fragment"><div class="line"><span class="comment">// TODO example</span></div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="a00173_source.html#l00194">194</a> of file <a class="el" href="a00173_source.html">graph.h</a>.</p>
+
+<p class="reference">References <a class="el" href="a00173_source.html#l00047">inner_indices</a>.</p>
+
+</div>
+</div>
+<a id="adc8ca0af9231dbed59b3d36c20e888c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc8ca0af9231dbed59b3d36c20e888c4">&#9670;&nbsp;</a></span>inner_end()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int * HF::SpatialStructures::CSRPtrs::inner_end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the address of one-past the last element within the inner_indices buffer </p>
+<dl class="section return"><dt>Returns</dt><dd>The address of one-past the last element within the inner_indices buffer </dd></dl>
+<div class="fragment"><div class="line"><span class="comment">// TODO example</span></div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="a00173_source.html#l00198">198</a> of file <a class="el" href="a00173_source.html">graph.h</a>.</p>
+
+<p class="reference">References <a class="el" href="a00173_source.html#l00047">inner_indices</a>, and <a class="el" href="a00173_source.html#l00041">nnz</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00173_source.html#l00244">col_end()</a>.</p>
+
+</div>
+</div>
+<a id="ac1355646148b8925e5ffd3cc902a3ae9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1355646148b8925e5ffd3cc902a3ae9">&#9670;&nbsp;</a></span>outer_begin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int * HF::SpatialStructures::CSRPtrs::outer_begin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the base address of the outer_indices buffer </p>
+<dl class="section return"><dt>Returns</dt><dd>The base address of the outer_indices buffer</dd></dl>
+<div class="fragment"><div class="line"><span class="comment">// TODO example</span></div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="a00173_source.html#l00202">202</a> of file <a class="el" href="a00173_source.html">graph.h</a>.</p>
+
+<p class="reference">References <a class="el" href="a00173_source.html#l00046">outer_indices</a>.</p>
+
+</div>
+</div>
+<a id="a43deb4cf73477ba4c01a45f5b3d21667"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43deb4cf73477ba4c01a45f5b3d21667">&#9670;&nbsp;</a></span>outer_end()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int * HF::SpatialStructures::CSRPtrs::outer_end </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the address of one-past the last element within the outer_indices buffer </p>
+<dl class="section return"><dt>Returns</dt><dd>The address of one-past the last element within the outer_indices buffer</dd></dl>
+<div class="fragment"><div class="line"><span class="comment">// TODO example</span></div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="a00173_source.html#l00206">206</a> of file <a class="el" href="a00173_source.html">graph.h</a>.</p>
+
+<p class="reference">References <a class="el" href="a00173_source.html#l00046">outer_indices</a>, and <a class="el" href="a00173_source.html#l00042">rows</a>.</p>
+
+</div>
+</div>
+<a id="a9ca24cfb89e6aa56761ad041dbecfd56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ca24cfb89e6aa56761ad041dbecfd56">&#9670;&nbsp;</a></span>row_begin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float * HF::SpatialStructures::CSRPtrs::row_begin </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>row_number</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the address of the first non-zero element of row_number within the CSR data buffer </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">row_number</td><td>The desired row number to access within the CSR</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The address of the first non-zero element within the CSR data buffer at row_number</dd></dl>
+<div class="fragment"><div class="line"><span class="comment">// TODO example</span></div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="a00173_source.html#l00210">210</a> of file <a class="el" href="a00173_source.html">graph.h</a>.</p>
+
+<p class="reference">References <a class="el" href="a00173_source.html#l00045">data</a>, <a class="el" href="a00173_source.html#l00046">outer_indices</a>, and <a class="el" href="a00173_source.html#l00042">rows</a>.</p>
+
+</div>
+</div>
+<a id="ade635c77fdaf7f5ba326edad25f23202"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade635c77fdaf7f5ba326edad25f23202">&#9670;&nbsp;</a></span>row_end()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float * HF::SpatialStructures::CSRPtrs::row_end </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>row_number</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the address of the first non-zero element of row_number + 1, i.e. the base address of the next row within the CSR data buffer </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">row_number</td><td>The desired row number for the CSR such that the address returned is the address pointing to the beginning element for the subsequent row</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The address of the first non-zero element for row_number + 1 &ndash; unless row_number + 1 == csr.rows, then data_end() is returned</dd></dl>
+<div class="fragment"><div class="line"><span class="comment">// TODO example</span></div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="a00173_source.html#l00220">220</a> of file <a class="el" href="a00173_source.html">graph.h</a>.</p>
+
+<p class="reference">References <a class="el" href="a00173_source.html#l00045">data</a>, <a class="el" href="a00173_source.html#l00046">outer_indices</a>, and <a class="el" href="a00173_source.html#l00042">rows</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a5aed9a3184fd7d7aded80c97c33e2dc5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5aed9a3184fd7d7aded80c97c33e2dc5">&#9670;&nbsp;</a></span>cols</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int HF::SpatialStructures::CSRPtrs::cols</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Number of columns in this CSR. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00173_source.html#l00043">43</a> of file <a class="el" href="a00173_source.html">graph.h</a>.</p>
+
+</div>
+</div>
+<a id="ab31bc5e69630e9101a82790c3a525386"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab31bc5e69630e9101a82790c3a525386">&#9670;&nbsp;</a></span>data</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float* HF::SpatialStructures::CSRPtrs::data</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pointer to the CSR's data array. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00173_source.html#l00045">45</a> of file <a class="el" href="a00173_source.html">graph.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00173_source.html#l00077">AreValid()</a>, <a class="el" href="a00173_source.html#l00186">data_begin()</a>, <a class="el" href="a00173_source.html#l00210">row_begin()</a>, and <a class="el" href="a00173_source.html#l00220">row_end()</a>.</p>
+
+</div>
+</div>
+<a id="a9a946e3ae6172a03c6a98e1dee39cc19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a946e3ae6172a03c6a98e1dee39cc19">&#9670;&nbsp;</a></span>inner_indices</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int* HF::SpatialStructures::CSRPtrs::inner_indices</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pointer to the CSR's inner indices array. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00173_source.html#l00047">47</a> of file <a class="el" href="a00173_source.html">graph.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00173_source.html#l00077">AreValid()</a>, <a class="el" href="a00173_source.html#l00234">col_begin()</a>, <a class="el" href="a00173_source.html#l00244">col_end()</a>, <a class="el" href="a00173_source.html#l00194">inner_begin()</a>, and <a class="el" href="a00173_source.html#l00198">inner_end()</a>.</p>
+
+</div>
+</div>
+<a id="a67ae38cef6b322331f0e9100b3f480f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67ae38cef6b322331f0e9100b3f480f8">&#9670;&nbsp;</a></span>nnz</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int HF::SpatialStructures::CSRPtrs::nnz</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Number of non-zeros contained by the CSR. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00173_source.html#l00041">41</a> of file <a class="el" href="a00173_source.html">graph.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00278_source.html#l00104">GetCSRPointers()</a>, and <a class="el" href="a00173_source.html#l00198">inner_end()</a>.</p>
+
+</div>
+</div>
+<a id="a49c0ac5c7fde9a797887699bc4670de4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49c0ac5c7fde9a797887699bc4670de4">&#9670;&nbsp;</a></span>outer_indices</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int* HF::SpatialStructures::CSRPtrs::outer_indices</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pointer to the CSR's outer indices array. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00173_source.html#l00046">46</a> of file <a class="el" href="a00173_source.html">graph.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00173_source.html#l00077">AreValid()</a>, <a class="el" href="a00173_source.html#l00234">col_begin()</a>, <a class="el" href="a00173_source.html#l00244">col_end()</a>, <a class="el" href="a00173_source.html#l00202">outer_begin()</a>, <a class="el" href="a00173_source.html#l00206">outer_end()</a>, <a class="el" href="a00173_source.html#l00210">row_begin()</a>, and <a class="el" href="a00173_source.html#l00220">row_end()</a>.</p>
+
+</div>
+</div>
+<a id="ab7ef161d6dfc8b606c120cbf5181ed68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7ef161d6dfc8b606c120cbf5181ed68">&#9670;&nbsp;</a></span>rows</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int HF::SpatialStructures::CSRPtrs::rows</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Number of rows in this CSR. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00173_source.html#l00042">42</a> of file <a class="el" href="a00173_source.html">graph.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00173_source.html#l00234">col_begin()</a>, <a class="el" href="a00173_source.html#l00244">col_end()</a>, <a class="el" href="a00173_source.html#l00206">outer_end()</a>, <a class="el" href="a00173_source.html#l00210">row_begin()</a>, and <a class="el" href="a00173_source.html#l00220">row_end()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>Cpp/spatialstructures/src/<a class="el" href="a00173_source.html">graph.h</a></li>
+</ul>
+</div><!-- contents -->
+<div class="ttc" id="aa01216_html"><div class="ttname"><a href="a01216.html">HF::SpatialStructures::CSRPtrs</a></div><div class="ttdoc">A struct to hold all necessary information for a CSR.</div><div class="ttdef"><b>Definition:</b> <a href="a00173_source.html#l00040">graph.h:40</a></div></div>
+<div class="ttc" id="aa01216_html_a9a946e3ae6172a03c6a98e1dee39cc19"><div class="ttname"><a href="a01216.html#a9a946e3ae6172a03c6a98e1dee39cc19">HF::SpatialStructures::CSRPtrs::inner_indices</a></div><div class="ttdeci">int * inner_indices</div><div class="ttdoc">Pointer to the CSR's inner indices array.</div><div class="ttdef"><b>Definition:</b> <a href="a00173_source.html#l00047">graph.h:47</a></div></div>
+<div class="ttc" id="aa01216_html_a49c0ac5c7fde9a797887699bc4670de4"><div class="ttname"><a href="a01216.html#a49c0ac5c7fde9a797887699bc4670de4">HF::SpatialStructures::CSRPtrs::outer_indices</a></div><div class="ttdeci">int * outer_indices</div><div class="ttdoc">Pointer to the CSR's outer indices array.</div><div class="ttdef"><b>Definition:</b> <a href="a00173_source.html#l00046">graph.h:46</a></div></div>
+<div class="ttc" id="aa01216_html_a4665024245e559dac8c3d620372dc47e"><div class="ttname"><a href="a01216.html#a4665024245e559dac8c3d620372dc47e">HF::SpatialStructures::CSRPtrs::AreValid</a></div><div class="ttdeci">bool AreValid()</div><div class="ttdoc">Verify the CSR referenced by this instance is valid.</div><div class="ttdef"><b>Definition:</b> <a href="a00173_source.html#l00077">graph.h:77</a></div></div>
+<div class="ttc" id="aa01216_html_ab31bc5e69630e9101a82790c3a525386"><div class="ttname"><a href="a01216.html#ab31bc5e69630e9101a82790c3a525386">HF::SpatialStructures::CSRPtrs::data</a></div><div class="ttdeci">float * data</div><div class="ttdoc">Pointer to the CSR's data array.</div><div class="ttdef"><b>Definition:</b> <a href="a00173_source.html#l00045">graph.h:45</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

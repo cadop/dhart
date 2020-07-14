@@ -1,0 +1,502 @@
+\hypertarget{a01216}{}\doxysection{HF\+::Spatial\+Structures\+::C\+S\+R\+Ptrs Struct Reference}
+\label{a01216}\index{HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}}
+
+
+A struct to hold all necessary information for a C\+SR.  
+
+
+
+
+{\ttfamily \#include $<$graph.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{a01216_a4665024245e559dac8c3d620372dc47e}{Are\+Valid}} ()
+\begin{DoxyCompactList}\small\item\em Verify the C\+SR referenced by this instance is valid. \end{DoxyCompactList}\item 
+float $\ast$ \mbox{\hyperlink{a01216_a368ab31f3c2aac9e89891bbba2538a5c}{data\+\_\+begin}} () const
+\begin{DoxyCompactList}\small\item\em Returns the base address of the data buffer \end{DoxyCompactList}\item 
+int $\ast$ \mbox{\hyperlink{a01216_a220ea45692732b095343c101983c9fd1}{inner\+\_\+begin}} () const
+\begin{DoxyCompactList}\small\item\em Returns the address of one-\/past the last element within the data buffer \end{DoxyCompactList}\item 
+int $\ast$ \mbox{\hyperlink{a01216_adc8ca0af9231dbed59b3d36c20e888c4}{inner\+\_\+end}} () const
+\begin{DoxyCompactList}\small\item\em Returns the address of one-\/past the last element within the inner\+\_\+indices buffer \end{DoxyCompactList}\item 
+int $\ast$ \mbox{\hyperlink{a01216_ac1355646148b8925e5ffd3cc902a3ae9}{outer\+\_\+begin}} () const
+\begin{DoxyCompactList}\small\item\em Returns the base address of the outer\+\_\+indices buffer \end{DoxyCompactList}\item 
+int $\ast$ \mbox{\hyperlink{a01216_a43deb4cf73477ba4c01a45f5b3d21667}{outer\+\_\+end}} () const
+\begin{DoxyCompactList}\small\item\em Returns the address of one-\/past the last element within the outer\+\_\+indices buffer \end{DoxyCompactList}\item 
+float $\ast$ \mbox{\hyperlink{a01216_a9ca24cfb89e6aa56761ad041dbecfd56}{row\+\_\+begin}} (int row\+\_\+number) const
+\begin{DoxyCompactList}\small\item\em Returns the address of the first non-\/zero element of row\+\_\+number within the C\+SR data buffer \end{DoxyCompactList}\item 
+float $\ast$ \mbox{\hyperlink{a01216_ade635c77fdaf7f5ba326edad25f23202}{row\+\_\+end}} (int row\+\_\+number) const
+\begin{DoxyCompactList}\small\item\em Returns the address of the first non-\/zero element of row\+\_\+number + 1, i.\+e. the base address of the next row within the C\+SR data buffer \end{DoxyCompactList}\item 
+int $\ast$ \mbox{\hyperlink{a01216_abc94ca756404ff660b38f0bb88c3b4d3}{col\+\_\+begin}} (int row\+\_\+number) const
+\begin{DoxyCompactList}\small\item\em Returns the address of the element that determines the column where the first non-\/zero value begins within row\+\_\+number \end{DoxyCompactList}\item 
+int $\ast$ \mbox{\hyperlink{a01216_ab42a6fe755392429bb4e08deb19f57e9}{col\+\_\+end}} (int row\+\_\+number) const
+\begin{DoxyCompactList}\small\item\em Returns the address of the element that denotes the end of a \textquotesingle{}subarray\textquotesingle{} within inner\+\_\+indices \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{a01216_a67ae38cef6b322331f0e9100b3f480f8}{nnz}}
+\begin{DoxyCompactList}\small\item\em Number of non-\/zeros contained by the C\+SR. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{a01216_ab7ef161d6dfc8b606c120cbf5181ed68}{rows}}
+\begin{DoxyCompactList}\small\item\em Number of rows in this C\+SR. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{a01216_a5aed9a3184fd7d7aded80c97c33e2dc5}{cols}}
+\begin{DoxyCompactList}\small\item\em Number of columns in this C\+SR. \end{DoxyCompactList}\item 
+float $\ast$ \mbox{\hyperlink{a01216_ab31bc5e69630e9101a82790c3a525386}{data}}
+\begin{DoxyCompactList}\small\item\em Pointer to the C\+SR\textquotesingle{}s data array. \end{DoxyCompactList}\item 
+int $\ast$ \mbox{\hyperlink{a01216_a49c0ac5c7fde9a797887699bc4670de4}{outer\+\_\+indices}}
+\begin{DoxyCompactList}\small\item\em Pointer to the C\+SR\textquotesingle{}s outer indices array. \end{DoxyCompactList}\item 
+int $\ast$ \mbox{\hyperlink{a01216_a9a946e3ae6172a03c6a98e1dee39cc19}{inner\+\_\+indices}}
+\begin{DoxyCompactList}\small\item\em Pointer to the C\+SR\textquotesingle{}s inner indices array. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A struct to hold all necessary information for a C\+SR. 
+
+\begin{DoxyRemark}{Remarks}
+This can be used by external clients to recreate or map to an existing C\+SR. For more information on what these arrays contain see \href{https://eigen.tuxfamily.org/dox/group__TutorialSparse.html}{\texttt{ https\+://eigen.\+tuxfamily.\+org/dox/group\+\_\+\+\_\+\+Tutorial\+Sparse.\+html}} 
+\end{DoxyRemark}
+
+
+Definition at line 40 of file graph.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a01216_a4665024245e559dac8c3d620372dc47e}\label{a01216_a4665024245e559dac8c3d620372dc47e}} 
+\index{HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}!AreValid@{AreValid}}
+\index{AreValid@{AreValid}!HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}}
+\doxysubsubsection{\texorpdfstring{AreValid()}{AreValid()}}
+{\footnotesize\ttfamily bool H\+F\+::\+Spatial\+Structures\+::\+C\+S\+R\+Ptrs\+::\+Are\+Valid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Verify the C\+SR referenced by this instance is valid. 
+
+\begin{DoxyReturn}{Returns}
+True if data, outer\+\_\+indices, and inner\+\_\+indices are non-\/null, false otherwise, 
+\end{DoxyReturn}
+
+
+Simply checks that all the contained arrays are not null.
+
+\begin{DoxyRemark}{Remarks}
+For now, this just checks if any of the arrays are null since \mbox{\hyperlink{a00313}{Eigen}} arrays will return null pointers if they are in an invalid state (uninitialized, uncompressed, etc).
+\end{DoxyRemark}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "graph.h", and \#include <memory>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::unique\_ptr<float[]> \mbox{\hyperlink{a01216_ab31bc5e69630e9101a82790c3a525386}{data}}(\textcolor{keyword}{new} \textcolor{keywordtype}{float}[16]);}
+\DoxyCodeLine{std::unique\_ptr<int[]> \mbox{\hyperlink{a01216_a49c0ac5c7fde9a797887699bc4670de4}{outer\_indices}}(\textcolor{keyword}{new} \textcolor{keywordtype}{int}[16]);}
+\DoxyCodeLine{std::unique\_ptr<int[]> \mbox{\hyperlink{a01216_a9a946e3ae6172a03c6a98e1dee39cc19}{inner\_indices}}(\textcolor{keyword}{new} \textcolor{keywordtype}{int}[16]);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{float}* p\_data = \mbox{\hyperlink{a01216_ab31bc5e69630e9101a82790c3a525386}{data}}.get();}
+\DoxyCodeLine{\textcolor{keywordtype}{int}* p\_outer\_indices = \mbox{\hyperlink{a01216_a49c0ac5c7fde9a797887699bc4670de4}{outer\_indices}}.get();}
+\DoxyCodeLine{\textcolor{keywordtype}{int}* p\_inner\_indices = \mbox{\hyperlink{a01216_a9a946e3ae6172a03c6a98e1dee39cc19}{inner\_indices}}.get();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{a01216}{HF::SpatialStructures::CSRPtrs}} csr = \{ 16, 16, 16, p\_data, p\_outer\_indices, p\_inner\_indices \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} validity = csr.\mbox{\hyperlink{a01216_a4665024245e559dac8c3d620372dc47e}{AreValid}}(); \textcolor{comment}{// validity == true, since all pointer fields are non-\/null}}
+\end{DoxyCode}
+ 
+
+Definition at line 77 of file graph.\+h.
+
+
+
+References data, inner\+\_\+indices, and outer\+\_\+indices.
+
+\mbox{\Hypertarget{a01216_abc94ca756404ff660b38f0bb88c3b4d3}\label{a01216_abc94ca756404ff660b38f0bb88c3b4d3}} 
+\index{HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}!col\_begin@{col\_begin}}
+\index{col\_begin@{col\_begin}!HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}}
+\doxysubsubsection{\texorpdfstring{col\_begin()}{col\_begin()}}
+{\footnotesize\ttfamily int $\ast$ H\+F\+::\+Spatial\+Structures\+::\+C\+S\+R\+Ptrs\+::col\+\_\+begin (\begin{DoxyParamCaption}\item[{int}]{row\+\_\+number }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the address of the element that determines the column where the first non-\/zero value begins within row\+\_\+number 
+
+
+\begin{DoxyParams}{Parameters}
+{\em row\+\_\+number} & The desired row number for the C\+SR such that the address returned is of the value that dictates where the first non-\/zero value begins within row\+\_\+number\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The address of the value that represents the column index of the first non-\/zero value within row\+\_\+number
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// TODO example}}
+\end{DoxyCode}
+ 
+
+Definition at line 234 of file graph.\+h.
+
+
+
+References inner\+\_\+indices, outer\+\_\+indices, and rows.
+
+\mbox{\Hypertarget{a01216_ab42a6fe755392429bb4e08deb19f57e9}\label{a01216_ab42a6fe755392429bb4e08deb19f57e9}} 
+\index{HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}!col\_end@{col\_end}}
+\index{col\_end@{col\_end}!HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}}
+\doxysubsubsection{\texorpdfstring{col\_end()}{col\_end()}}
+{\footnotesize\ttfamily int $\ast$ H\+F\+::\+Spatial\+Structures\+::\+C\+S\+R\+Ptrs\+::col\+\_\+end (\begin{DoxyParamCaption}\item[{int}]{row\+\_\+number }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the address of the element that denotes the end of a \textquotesingle{}subarray\textquotesingle{} within inner\+\_\+indices 
+
+
+\begin{DoxyParams}{Parameters}
+{\em row\+\_\+number} & The desired row number for the C\+SR such that the address returned is one-\/past the last value for a \textquotesingle{}subarray\textquotesingle{} within inner\+\_\+indices\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The address of the value that represents the column index of the first non-\/zero value for row\+\_\+number + 1
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// TODO example}}
+\end{DoxyCode}
+ 
+
+Definition at line 244 of file graph.\+h.
+
+
+
+References inner\+\_\+end(), inner\+\_\+indices, outer\+\_\+indices, and rows.
+
+\mbox{\Hypertarget{a01216_a368ab31f3c2aac9e89891bbba2538a5c}\label{a01216_a368ab31f3c2aac9e89891bbba2538a5c}} 
+\index{HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}!data\_begin@{data\_begin}}
+\index{data\_begin@{data\_begin}!HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}}
+\doxysubsubsection{\texorpdfstring{data\_begin()}{data\_begin()}}
+{\footnotesize\ttfamily float $\ast$ H\+F\+::\+Spatial\+Structures\+::\+C\+S\+R\+Ptrs\+::data\+\_\+begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the base address of the data buffer 
+
+\begin{DoxyReturn}{Returns}
+The base address of the data buffer
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// TODO example}}
+\end{DoxyCode}
+ 
+
+Definition at line 186 of file graph.\+h.
+
+
+
+References data.
+
+\mbox{\Hypertarget{a01216_a220ea45692732b095343c101983c9fd1}\label{a01216_a220ea45692732b095343c101983c9fd1}} 
+\index{HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}!inner\_begin@{inner\_begin}}
+\index{inner\_begin@{inner\_begin}!HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}}
+\doxysubsubsection{\texorpdfstring{inner\_begin()}{inner\_begin()}}
+{\footnotesize\ttfamily int $\ast$ H\+F\+::\+Spatial\+Structures\+::\+C\+S\+R\+Ptrs\+::inner\+\_\+begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the address of one-\/past the last element within the data buffer 
+
+\begin{DoxyReturn}{Returns}
+The address of one-\/past the last element within the data buffer
+\end{DoxyReturn}
+
+
+\begin{DoxyVerb}\code
+    // TODO example
+/endcode
+\end{DoxyVerb}
+ / float$\ast$ data\+\_\+end() const;
+
+/// 
+
+Returns the base address of the inner\+\_\+indices buffer 
+
+/// \begin{DoxyReturn}{Returns}
+The base address of the inner\+\_\+indices buffer
+\end{DoxyReturn}
+
+
+/$\ast$! 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// TODO example}}
+\end{DoxyCode}
+ 
+
+Definition at line 194 of file graph.\+h.
+
+
+
+References inner\+\_\+indices.
+
+\mbox{\Hypertarget{a01216_adc8ca0af9231dbed59b3d36c20e888c4}\label{a01216_adc8ca0af9231dbed59b3d36c20e888c4}} 
+\index{HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}!inner\_end@{inner\_end}}
+\index{inner\_end@{inner\_end}!HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}}
+\doxysubsubsection{\texorpdfstring{inner\_end()}{inner\_end()}}
+{\footnotesize\ttfamily int $\ast$ H\+F\+::\+Spatial\+Structures\+::\+C\+S\+R\+Ptrs\+::inner\+\_\+end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the address of one-\/past the last element within the inner\+\_\+indices buffer 
+
+\begin{DoxyReturn}{Returns}
+The address of one-\/past the last element within the inner\+\_\+indices buffer 
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// TODO example}}
+\end{DoxyCode}
+ 
+
+Definition at line 198 of file graph.\+h.
+
+
+
+References inner\+\_\+indices, and nnz.
+
+
+
+Referenced by col\+\_\+end().
+
+\mbox{\Hypertarget{a01216_ac1355646148b8925e5ffd3cc902a3ae9}\label{a01216_ac1355646148b8925e5ffd3cc902a3ae9}} 
+\index{HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}!outer\_begin@{outer\_begin}}
+\index{outer\_begin@{outer\_begin}!HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}}
+\doxysubsubsection{\texorpdfstring{outer\_begin()}{outer\_begin()}}
+{\footnotesize\ttfamily int $\ast$ H\+F\+::\+Spatial\+Structures\+::\+C\+S\+R\+Ptrs\+::outer\+\_\+begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the base address of the outer\+\_\+indices buffer 
+
+\begin{DoxyReturn}{Returns}
+The base address of the outer\+\_\+indices buffer
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// TODO example}}
+\end{DoxyCode}
+ 
+
+Definition at line 202 of file graph.\+h.
+
+
+
+References outer\+\_\+indices.
+
+\mbox{\Hypertarget{a01216_a43deb4cf73477ba4c01a45f5b3d21667}\label{a01216_a43deb4cf73477ba4c01a45f5b3d21667}} 
+\index{HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}!outer\_end@{outer\_end}}
+\index{outer\_end@{outer\_end}!HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}}
+\doxysubsubsection{\texorpdfstring{outer\_end()}{outer\_end()}}
+{\footnotesize\ttfamily int $\ast$ H\+F\+::\+Spatial\+Structures\+::\+C\+S\+R\+Ptrs\+::outer\+\_\+end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the address of one-\/past the last element within the outer\+\_\+indices buffer 
+
+\begin{DoxyReturn}{Returns}
+The address of one-\/past the last element within the outer\+\_\+indices buffer
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// TODO example}}
+\end{DoxyCode}
+ 
+
+Definition at line 206 of file graph.\+h.
+
+
+
+References outer\+\_\+indices, and rows.
+
+\mbox{\Hypertarget{a01216_a9ca24cfb89e6aa56761ad041dbecfd56}\label{a01216_a9ca24cfb89e6aa56761ad041dbecfd56}} 
+\index{HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}!row\_begin@{row\_begin}}
+\index{row\_begin@{row\_begin}!HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}}
+\doxysubsubsection{\texorpdfstring{row\_begin()}{row\_begin()}}
+{\footnotesize\ttfamily float $\ast$ H\+F\+::\+Spatial\+Structures\+::\+C\+S\+R\+Ptrs\+::row\+\_\+begin (\begin{DoxyParamCaption}\item[{int}]{row\+\_\+number }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the address of the first non-\/zero element of row\+\_\+number within the C\+SR data buffer 
+
+
+\begin{DoxyParams}{Parameters}
+{\em row\+\_\+number} & The desired row number to access within the C\+SR\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The address of the first non-\/zero element within the C\+SR data buffer at row\+\_\+number
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// TODO example}}
+\end{DoxyCode}
+ 
+
+Definition at line 210 of file graph.\+h.
+
+
+
+References data, outer\+\_\+indices, and rows.
+
+\mbox{\Hypertarget{a01216_ade635c77fdaf7f5ba326edad25f23202}\label{a01216_ade635c77fdaf7f5ba326edad25f23202}} 
+\index{HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}!row\_end@{row\_end}}
+\index{row\_end@{row\_end}!HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}}
+\doxysubsubsection{\texorpdfstring{row\_end()}{row\_end()}}
+{\footnotesize\ttfamily float $\ast$ H\+F\+::\+Spatial\+Structures\+::\+C\+S\+R\+Ptrs\+::row\+\_\+end (\begin{DoxyParamCaption}\item[{int}]{row\+\_\+number }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the address of the first non-\/zero element of row\+\_\+number + 1, i.\+e. the base address of the next row within the C\+SR data buffer 
+
+
+\begin{DoxyParams}{Parameters}
+{\em row\+\_\+number} & The desired row number for the C\+SR such that the address returned is the address pointing to the beginning element for the subsequent row\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The address of the first non-\/zero element for row\+\_\+number + 1 -- unless row\+\_\+number + 1 == csr.\+rows, then data\+\_\+end() is returned
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// TODO example}}
+\end{DoxyCode}
+ 
+
+Definition at line 220 of file graph.\+h.
+
+
+
+References data, outer\+\_\+indices, and rows.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01216_a5aed9a3184fd7d7aded80c97c33e2dc5}\label{a01216_a5aed9a3184fd7d7aded80c97c33e2dc5}} 
+\index{HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}!cols@{cols}}
+\index{cols@{cols}!HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}}
+\doxysubsubsection{\texorpdfstring{cols}{cols}}
+{\footnotesize\ttfamily int H\+F\+::\+Spatial\+Structures\+::\+C\+S\+R\+Ptrs\+::cols}
+
+
+
+Number of columns in this C\+SR. 
+
+
+
+Definition at line 43 of file graph.\+h.
+
+\mbox{\Hypertarget{a01216_ab31bc5e69630e9101a82790c3a525386}\label{a01216_ab31bc5e69630e9101a82790c3a525386}} 
+\index{HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}!data@{data}}
+\index{data@{data}!HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}}
+\doxysubsubsection{\texorpdfstring{data}{data}}
+{\footnotesize\ttfamily float$\ast$ H\+F\+::\+Spatial\+Structures\+::\+C\+S\+R\+Ptrs\+::data}
+
+
+
+Pointer to the C\+SR\textquotesingle{}s data array. 
+
+
+
+Definition at line 45 of file graph.\+h.
+
+
+
+Referenced by Are\+Valid(), data\+\_\+begin(), row\+\_\+begin(), and row\+\_\+end().
+
+\mbox{\Hypertarget{a01216_a9a946e3ae6172a03c6a98e1dee39cc19}\label{a01216_a9a946e3ae6172a03c6a98e1dee39cc19}} 
+\index{HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}!inner\_indices@{inner\_indices}}
+\index{inner\_indices@{inner\_indices}!HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}}
+\doxysubsubsection{\texorpdfstring{inner\_indices}{inner\_indices}}
+{\footnotesize\ttfamily int$\ast$ H\+F\+::\+Spatial\+Structures\+::\+C\+S\+R\+Ptrs\+::inner\+\_\+indices}
+
+
+
+Pointer to the C\+SR\textquotesingle{}s inner indices array. 
+
+
+
+Definition at line 47 of file graph.\+h.
+
+
+
+Referenced by Are\+Valid(), col\+\_\+begin(), col\+\_\+end(), inner\+\_\+begin(), and inner\+\_\+end().
+
+\mbox{\Hypertarget{a01216_a67ae38cef6b322331f0e9100b3f480f8}\label{a01216_a67ae38cef6b322331f0e9100b3f480f8}} 
+\index{HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}!nnz@{nnz}}
+\index{nnz@{nnz}!HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}}
+\doxysubsubsection{\texorpdfstring{nnz}{nnz}}
+{\footnotesize\ttfamily int H\+F\+::\+Spatial\+Structures\+::\+C\+S\+R\+Ptrs\+::nnz}
+
+
+
+Number of non-\/zeros contained by the C\+SR. 
+
+
+
+Definition at line 41 of file graph.\+h.
+
+
+
+Referenced by Get\+C\+S\+R\+Pointers(), and inner\+\_\+end().
+
+\mbox{\Hypertarget{a01216_a49c0ac5c7fde9a797887699bc4670de4}\label{a01216_a49c0ac5c7fde9a797887699bc4670de4}} 
+\index{HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}!outer\_indices@{outer\_indices}}
+\index{outer\_indices@{outer\_indices}!HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}}
+\doxysubsubsection{\texorpdfstring{outer\_indices}{outer\_indices}}
+{\footnotesize\ttfamily int$\ast$ H\+F\+::\+Spatial\+Structures\+::\+C\+S\+R\+Ptrs\+::outer\+\_\+indices}
+
+
+
+Pointer to the C\+SR\textquotesingle{}s outer indices array. 
+
+
+
+Definition at line 46 of file graph.\+h.
+
+
+
+Referenced by Are\+Valid(), col\+\_\+begin(), col\+\_\+end(), outer\+\_\+begin(), outer\+\_\+end(), row\+\_\+begin(), and row\+\_\+end().
+
+\mbox{\Hypertarget{a01216_ab7ef161d6dfc8b606c120cbf5181ed68}\label{a01216_ab7ef161d6dfc8b606c120cbf5181ed68}} 
+\index{HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}!rows@{rows}}
+\index{rows@{rows}!HF::SpatialStructures::CSRPtrs@{HF::SpatialStructures::CSRPtrs}}
+\doxysubsubsection{\texorpdfstring{rows}{rows}}
+{\footnotesize\ttfamily int H\+F\+::\+Spatial\+Structures\+::\+C\+S\+R\+Ptrs\+::rows}
+
+
+
+Number of rows in this C\+SR. 
+
+
+
+Definition at line 42 of file graph.\+h.
+
+
+
+Referenced by col\+\_\+begin(), col\+\_\+end(), outer\+\_\+end(), row\+\_\+begin(), and row\+\_\+end().
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/spatialstructures/src/\mbox{\hyperlink{a00173}{graph.\+h}}\end{DoxyCompactItemize}

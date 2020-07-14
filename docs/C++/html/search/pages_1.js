@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['deprecated_20list_839',['Deprecated List',['../a00263.html',1,'']]]
+  ['buildcmake_848',['BuildCMake',['../a01493.html',1,'']]],
+  ['buildvs_849',['BuildVS',['../a01494.html',1,'']]]
 ];
