@@ -224,40 +224,6 @@ elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
 			${PYTHON_PACKAGE_DIR}/humanfactorspy/graphgenerator
 	)
 
-	elseif(${HumanFactors_Config} STREQUAL "VisibilityGraph")
-		message([STATUS] "Building  Visibility Graph")
-		add_subdirectory(${C_PACKAGE_DIR}/raytracer)
-		add_subdirectory(${C_PACKAGE_DIR}/objloader)
-		add_subdirectory(${C_PACKAGE_DIR}/analysismethods)
-		add_subdirectory(${C_PACKAGE_DIR}/spatialstructures)
-
-		target_link_libraries(
-			HumanFactors 
-			PRIVATE
-				EmbreeRayTracer
-				OBJLoader
-				SpatialStructures
-				VisibilityGraph
-		)
-		LIST(APPEND HF_SOURCES
-				${C_INTERFACE_DIR}/objloader_C.cpp
-				${C_INTERFACE_DIR}/objloader_C.h
-				${C_INTERFACE_DIR}/raytracer_C.cpp
-				${C_INTERFACE_DIR}/raytracer_C.h
-				${C_INTERFACE_DIR}/cinterface_utils.h
-				${C_INTERFACE_DIR}/cinterface_utils.cpp
-				${C_INTERFACE_DIR}/spatialstructures_C.h
-				${C_INTERFACE_DIR}/spatialstructures_C.cpp
-				${C_INTERFACE_DIR}/visibility_graph_C.cpp
-				${C_INTERFACE_DIR}/visibility_graph_C.h
-		)
-		LIST(APPEND PYTHON_MODULES
-				${PYTHON_PACKAGE_DIR}/humanfactorspy/geometry
-				${PYTHON_PACKAGE_DIR}/humanfactorspy/raytracer
-				${PYTHON_PACKAGE_DIR}/humanfactorspy/spatialstructures
-				${PYTHON_PACKAGE_DIR}/humanfactorspy/visibilitygraph
-		)
-	
 	elseif(${HumanFactors_Config} STREQUAL "ViewAnalysis")
 		message([STATUS] "Building  ViewAnalysis")
 		add_subdirectory(${C_PACKAGE_DIR}/raytracer)
