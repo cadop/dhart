@@ -18,9 +18,18 @@
 
 using std::vector;
 using std::array;
+using std::string;
 
 namespace HF::Geometry {
 
+	static robin_hood::unordered_map<string, string> test_model_paths{
+		{"teapot", "teapot.obj"},
+		{"plane", "plane.obj" },
+		{"big teapot", "big_teapot.obj" },
+		{"energy blob", "energy_blob.obj" },
+		{"sibenik", "sibenik.obj" },
+	};
+	
 	vector<MeshInfo> LoadMeshObjects(std::string path, GROUP_METHOD gm, bool change_coords)
 	{
 		// First, attempt to load the obj
@@ -219,6 +228,11 @@ namespace HF::Geometry {
 		}
 
 		return out_verts;
+	}
+
+	std::string GetTestOBJPath(std::string key)
+	{
+		return test_model_paths.at(key);
 	}
 
 	vector<MeshInfo> LoadMeshObjects(vector<std::string>& path, GROUP_METHOD gm, bool change_coords)

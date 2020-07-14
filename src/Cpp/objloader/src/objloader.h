@@ -176,6 +176,19 @@ namespace HF::Geometry{
 		\endcode
 	*/
 	std::vector<std::array<float, 3>> LoadRawVertices(std::string path);
+	
+
+	/*!
+		\brief Get the path to the OBJ with the given key.
+	
+		\param key The name of the obj to get the path of
+
+		\returns
+		The path to the obj in key.
+
+		\throws std::out_of_range if the given key couldn't be found
+	*/
+	std::string GetTestOBJPath(std::string key);
 }
 
 #endif /// OBJLOADER_H
