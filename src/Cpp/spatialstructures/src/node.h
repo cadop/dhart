@@ -24,7 +24,7 @@ namespace HF
 
 			This was primarially used in the previous codebase to differentiate the different types of
 			nodes in the database. Since the database is not implemented here, this goes entirely
-			unused.
+			unused. May be useful in the future. 
 		*/
 		enum NODE_TYPE {
 			GRAPH = 0,		///< This node is a graph node.
@@ -38,7 +38,7 @@ namespace HF
 		struct Node {
 		public:
 			float x, y, z;		///< Cartesian coordinates x, y, z
-			short type = GRAPH; ///< Unused. \see NODE_TYPE
+			short type = GRAPH; ///< Unused. \see NODE_TYPE for more infomration about this.
 			int id;				///< Node identifier
 
 			/// <summary>
