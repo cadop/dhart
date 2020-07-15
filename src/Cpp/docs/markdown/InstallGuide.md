@@ -48,7 +48,7 @@ Scroll to the bottom then click on *Show Advanced Settings* to expand the advanc
 
 *Figure* **1.4**:  *Highlighted: Install directory textbox*
 
-First under advanced settings, make sure that your options under the Value column match the ones in *Figure* **1.4** before continuing. After you've verified this is true, enter the path you want to use in Install Directory or click the button to the right of the textbox to select it from a file explorer menu.
+First under advanced settings, make sure that your options under the Value column match the ones in *Figure* **1.4** before continuing. You can use either the debug or release configuration, but remember that it will affect which dlls are output once installed. After you've verified your settings match, enter the path you want to use in Install Directory or click the button to the right of the textbox to select it from a file explorer menu.
 
 ***Save your changes by pressing Ctrl + S*** then close the `CMakesettings.json` window. Now we will install the project.
 
@@ -70,9 +70,13 @@ The contents of your project should now be built and installed to the location y
 
 ![Contents of the bin directory](img/installguide/install_directory_bin.png)
 
-*Figure* **1.7**: Contents of the `bin` directory. This should be identical no matter which project type you used.
+*Figure* **1.7**: Contents of the Debug `bin` directory.
 
-To verify that the install step was completed successfully, open the `bin` folder in the directory you've installed the project to.  The contents of the bin directory should match those shown in *Figure 1.7*.  If this is true, then you've successfully performed the install step for HumanFactors. If the contents don't match,  make sure that your settings for the project you used exactly match those stated in the tutorial then try again.
+![Contents of the bin directory release](img/installguide/release_build.png)
+
+*Figure* **1.8**: Contents of the Release `bin` directory.
+
+To verify that the install step was completed successfully, open the `bin` folder in the directory you've installed the project to.  The contents of the bin directory should match those shown in *Figure 1.7* or *Figure 1.8* depending on whether you used the install or release builds.  If this is true, then you've successfully performed the install step for HumanFactors. If the contents don't match,  make sure that your settings for the project you used exactly match those stated in the tutorial then try again.
 
 ### CMake GUI
 
@@ -92,15 +96,21 @@ The generated project's install directory is set by the `CMAKE_INSTALL_PREFIX` v
 
 #### Build/Install
 
+![Build Button](img/installguide/how_to_change_config.png)
+
+*Figure* **2.3**: *Visual studio install configuration type drop down.*
+
+Before installing the project, take a look at the configuration type being built. This can be manually set by using the standard Visual Studio drop down at the top center of the screen. Remember what setting you have this set to before installing, because it will affect the output. 
+
 ![Build Button](img/installguide/build_button_circled.png)
 
-*Figure* **2.3**: *Circled: Build button for the install target.*
+*Figure* **2.4**: *Circled: Build button for the install target.*
 
-To install using a project generated with the cmake-gui: Right Click on the INSTALL target, then click the *Build* option.
+Right Click on the INSTALL target, then click the *Build* option.
 
 ![Installed Project Output](img/installguide/humanfactors_install_dir.png)
 
-*Figure* **2.4**: *Output of running the install step on a debug with no modifications to the install path.*
+*Figure* **2.5**: *Output of running the install step on a debug with no modifications to the install path.*
 
 Just like in open folder walkthrough, the contents of your project should now be built and installed to the location you specified as the `CMAKE_INSTALL_PREFIX`.
 
@@ -108,7 +118,11 @@ Just like in open folder walkthrough, the contents of your project should now be
 
 ![Contents of the bin directory](img/installguide/install_directory_bin.png)
 
-*Figure* **2.5**: Contents of the `bin` directory. This should be identical no matter which project type you used.
+*Figure* **2.6**: Contents of the Debug `bin` directory.
 
-To verify that the install step was completed successfully, open the `bin` folder in the directory you've installed the project to.  The contents of the bin directory should match those shown in *Figure 2.5*.  If this is true, then you've successfully performed the install step for HumanFactors. If the contents don't match,  make sure that your settings for the project you used exactly match those stated in the tutorial then try again.
+![Contents of the bin directory release](img/installguide/release_build.png)
+
+*Figure* **2.7**: Contents of the Release `bin` directory. 
+
+To verify that the install step was completed successfully, open the `bin` folder in the directory you've installed the project to.  The contents of the bin directory should match those shown in *Figure 2.6* or *Figure 2.7* depending on whether you used the release or debug builds. If this is true, then you've successfully performed the install step for HumanFactors. If the contents don't match,  make sure that your settings for the project you used exactly match those stated in the tutorial then try again.
 
