@@ -313,6 +313,28 @@ namespace HF::Pathfinding {
 				...etc...
 		*/
 
-		InsertPathsIntoArray(bg, start_points, end_points, out_paths, out_path_members, out_sizes);
+		/*
+		// Attempt 0: Run FindPaths, copy results into out_paths, out_path_members, and out_sizes
+		auto all_paths = FindPaths(bg, start_points, end_points);
+
+		for (auto path : all_paths) {
+			Path& p = *out_paths[curr_id];
+			PathMember*& pm = out_path_members[curr_id];
+
+			p = path;
+			pm = path.GetPMPointer();
+			out_sizes[curr_id] = pm->cost;
+
+			++curr_id;
+		}
+		*/
+
+		Path**& ref_out_paths = out_paths;
+		PathMember**& ref_out_path_members = out_path_members;
+		int*& ref_sizes = out_sizes;
+		
+		// Attempt 1: Run InsertPathsIntoArray and mutate out_paths, out_path_members, and out_sizes
+		//InsertPathsIntoArray(bg, start_points, end_points, out_paths, out_path_members, out_sizes);
+		InsertPathsIntoArray(bg, start_points, end_points, ref_out_paths, ref_out_path_members, ref_sizes);
 	}
 }
