@@ -169,23 +169,27 @@ namespace HF::RayTracer {
 		return FireRay(origin[0], origin[1], origin[2], dir[0], dir[1], dir[2], distance, mesh_id);
 	}
 
-	bool EmbreeRayTracer::FireRay(float& x,
-		float& y,
-		float& z,
-		float dx,
-		float dy,
-		float dz,
-		float distance,
-		int mesh_id
-	) {
+	bool EmbreeRayTracer::FireRay(
+			float& x,
+			float& y,
+			float& z,
+			float dx,
+			float dy,
+			float dz,
+			float distance,
+			int mesh_id) 
+	{
+		// Define an Embree hit data type to store results
 		RTCRayHit hit;
 
+		// Use the referenced values of the x,y,z position as the ray origin
 		hit.ray.org_x = x; hit.ray.org_y = y; hit.ray.org_z = z;
+		// Define the directions 
 		hit.ray.dir_x = dx; hit.ray.dir_y = dy; hit.ray.dir_z = dz;
 
-		hit.ray.tnear = 0.00000f;
-		hit.ray.tfar = INFINITY;//(distance > 0) ? distance : INFINITY;
-		hit.ray.time = 0.0f;
+		hit.ray.tnear = 0.0f; // The start of the ray segment
+		hit.ray.tfar = INFINITY; // The end of the ray segment
+		hit.ray.time = 0.0f; // Time of ray for motion blur, unrelated to our package
 
 		hit.hit.geomID = RTC_INVALID_GEOMETRY_ID;
 		hit.hit.primID = -1;
@@ -196,12 +200,22 @@ namespace HF::RayTracer {
 		// If valid geometry was hit, and the geometry matches the caller's desired mesh
 		// (if specified) then update the hitpoint and return
 		if (hit.hit.geomID == RTC_INVALID_GEOMETRY_ID || (mesh_id > -1 && hit.hit.geomID != mesh_id)) return false;
+		
+		// If the ray did hit, update the node position by translating the distance along the directions
 		else {
 			x = x + (dx * hit.ray.tfar);
 			y = y + (dy * hit.ray.tfar);
 			z = z + (dz * hit.ray.tfar);
 			return true;
 		}
+		/*
+		else {
+			x = x + (dx * hit.ray.tfar);
+			y = y + (dy * hit.ray.tfar);
+			z = z + (dz * hit.ray.tfar);
+			return true;
+		}
+		*/
 	}
 
 	std::vector<char> EmbreeRayTracer::FireRays(
