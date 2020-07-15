@@ -94,3 +94,14 @@ C_INTERFACE DestroyPath(Path* path_to_destroy) {
 	DeleteRawPtr(path_to_destroy);
 	return HF::Exceptions::OK;
 }
+
+C_INTERFACE CreateAllToAllPaths(
+	const HF::SpatialStructures::Graph* g,
+	HF::SpatialStructures::Path** out_path_ptr_holder,
+	HF::SpatialStructures::PathMember** out_path_member_ptr_holder,
+	int* out_sizes,
+	int num_paths
+) {
+
+	return HF::Exceptions::OK;
+}

@@ -329,6 +329,10 @@ TEST(_pathFinding, FindAllPaths) {
 	// all_paths will contain all shortest paths for [node 0, node 4]
 }
 
+TEST(_pathFinding, InsertAllToAllPathsIntoArray) {
+
+}
+
 /* This appears to always corrupt the heap when deallocating paths
    due to differing compiler options between google test and humanfactors.
 TEST(_pathFinding, InsertPathsIntoArray) {
@@ -539,5 +543,9 @@ namespace CInterfaceTests {
 
 		// At this point, out_path_member has also been destroyed, so we set this to nullptr
 		out_path_member = nullptr;
+	}
+
+	TEST(_PathFinderCInterface, CreateAllToAllPaths) {
+
 	}
 }

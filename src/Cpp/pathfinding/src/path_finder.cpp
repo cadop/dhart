@@ -271,4 +271,48 @@ namespace HF::Pathfinding {
 	void BoostGraphDeleter::operator()(BoostGraph* bg) const {
 		delete bg;
 	}
+
+	void InsertAllToAllPathsIntoArray(BoostGraph* bg, Path** out_paths, PathMember** out_path_members, int* out_sizes) {
+		size_t node_count = bg->p.size();
+		size_t max_path = node_count * node_count;
+
+		std::vector<int> start_points(max_path);
+		std::vector<int> end_points(max_path);
+
+		int curr_id = 0;
+
+		// Populate the start points,
+		// size will be (node_count)^2
+		for (int i = 0; i < node_count; i++) {
+			for (int k = 0; k < node_count; k++) {
+				start_points[curr_id++] = i;
+			}
+		}
+
+		curr_id = 0;
+
+		// Populate the end points,
+		// size will be (node_count)^2
+		for (int i = 0; i < node_count; i++) {
+			for (int k = 0; k < node_count; k++) {
+				end_points[curr_id++] = k;
+			}
+		}
+
+		/*
+			The idea is that
+				start_points[0] and end_points[0]
+				will be the path from 0 to 0,
+
+				start_points[1] and end_points[1]
+				will be the path from 0 to 1
+
+				start_points[2] and end_points[2]
+				will be the path from 0 to 2,
+
+				...etc...
+		*/
+
+		InsertPathsIntoArray(bg, start_points, end_points, out_paths, out_path_members, out_sizes);
+	}
 }

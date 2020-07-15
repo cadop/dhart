@@ -381,5 +381,7 @@ namespace HF {
 			HF::SpatialStructures::PathMember** out_path_members,
 			int* out_sizes
 		);
+
+		void InsertAllToAllPathsIntoArray(BoostGraph* bg, HF::SpatialStructures::Path** out_paths, HF::SpatialStructures::PathMember** out_path_members, int* out_sizes);
 	}
 }
