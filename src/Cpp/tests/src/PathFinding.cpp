@@ -356,14 +356,44 @@ TEST(_pathFinding, InsertAllToAllPathsIntoArray) {
 
 	int* sizes = new int[path_count];
 
+
+	int curr_id = 0;
+
+	std::vector<int> start_points(path_count);
+	// Populate the start points,
+	// size will be (node_count)^2
+	for (int i = 0; i < node_count; i++) {
+		for (int k = 0; k < node_count; k++) {
+			start_points[curr_id++] = i;
+		}
+	}
+
+	curr_id = 0;
+
+	std::vector<int> end_points(path_count);
+	// Populate the end points,
+	// size will be (node_count)^2
+	for (int i = 0; i < node_count; i++) {
+		for (int k = 0; k < node_count; k++) {
+			end_points[curr_id++] = k;
+		}
+	}
+
 	InsertAllToAllPathsIntoArray(bg.get(), out_paths, out_path_member, sizes);
 
-	//
-	// See out_paths, out_path_member, and sizes
-	//
 	for (int i = 0; i < path_count; i++) {
-		if (out_path_member[i]) {
-			std::cout << out_path_member[i]->node << " (cost) " << out_path_member[i]->cost << std::endl;
+		if (out_paths[i]) {
+			int total_cost = 0;
+			std::cout << "From " << start_points[i] << " to " << end_points[i] << std::endl;
+
+			Path p = *out_paths[i];
+			for (auto m : p.members) {
+				total_cost += m.cost;
+				std::cout << m.node << " cost " << m.cost << std::endl;
+			}
+
+			std::cout << "Total cost: " << total_cost << std::endl;
+			std::cout << "--------------------------" << std::endl;
 		}
 	}
 
