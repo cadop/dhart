@@ -105,27 +105,34 @@ namespace HF::GraphGenerator {
 
 	Graph GraphGeneratorPrivate::BuildNetwork()
 	{
-		// round the position of the start point
+		// This starts the graph generator
+
+		// Take the user defined start point and round it to the precision
+		// that the Analysis package can handle. 
 		v3 start = v3{
 			roundhf(GG.start[0]), 
 			roundhf(GG.start[1]),
 			roundhf(GG.start[2])};
 
+		// Define a queue to use for determining what nodes need to be checked
+		UniqueQueue q;  
 		// Only crawl geom if start collides
-		UniqueQueue q;
-		if (CheckStart(start)) {
-			start[2] = roundhf(start[2]); // round the z component of start node AFTER intersection
+		if (CheckStart(start)) 
+		{
+			// The start position should be valid, so add it as the first part of the queue
 			q.push(start);
 
 			// Run in parallel if specified
-			if (GG.core_count != 0 && GG.core_count != 1) {
-
+			if (GG.core_count != 0 && GG.core_count != 1) 
+			{
 				// Set the number of threads to core_count if it's greater than 1
 				if (GG.core_count > 1)	omp_set_num_threads(GG.core_count);
 				else omp_set_num_threads(std::thread::hardware_concurrency());
 
+				// Start the parallel version of the graph generator
 				CrawlGeomParallel(q);
 			}
+			// Run the single core version of the graph generator
 			else
 				CrawlGeom(q);
 		}
@@ -144,17 +151,27 @@ namespace HF::GraphGenerator {
 	inline void GraphGeneratorPrivate::GeneratePotentialChildren(
 		const Node& parent,
 		const vector<pair>& directions,
-		vector<Node>& out_children
-	) {
+		vector<Node>& out_children) 
+	{
+		//TODO: Explain clear()
 		out_children.clear();
 
 		//TODO: Speed gain can be achieved here by using indexing
+
+		// Iterate through the set of directions to create possible children
 		for (const auto & dir : directions) {
+			// Extract the x and y directions
 			auto i = dir.first; auto j = dir.second;
+
+			// Add the user-defined spacing to the x and y components of the parent.
+			// Then round the result.
+			//NOTE: It may not be necessary to round x and y here if it is rounded when moving the node
+			//		 or has come in as a rounded value.
 			const float x = roundhf(parent[0] + (i * GG.spacing[0]));
 			const float y = roundhf(parent[1] + (j * GG.spacing[1]));
 			const float z = roundhf(parent[2] + GG.spacing[2]);
 
+			// Add these new values as a node in the out_children list
 			out_children.emplace_back(Node(x, y, z));
 		}
 	}
@@ -194,13 +211,17 @@ namespace HF::GraphGenerator {
 		const vector<Node>& possible_children,
 		vector<Edge>& out_children) 
 	{
-		// Iterate through every child in children
-		for (auto& child : CheckChildren(parent, possible_children)) {
-			// Determine step type (if any)
+		// Iterate through every child in the set of possible_children
+		for (auto& child : CheckChildren(parent, possible_children)) 
+		{
+			// Determine the type of connection between the parent and child
+			//  including if it is a step, slope, or not connected
 			const STEP is_connected = CheckConnection(parent, child);
 
 			// If the node is connected Add it to out list of valid children
-			if (is_connected != STEP::NOT_CONNECTED) {
+			if (is_connected != STEP::NOT_CONNECTED) 
+			{
+				// Add the edge to the array of children, storing the distance and connection type
 				out_children.emplace_back(Edge(child, parent.distanceTo(child),is_connected));
 			}
 		}
@@ -211,13 +232,18 @@ namespace HF::GraphGenerator {
 	{
 		vector<Node> valid_children;
 
-		// iterate through every child in children
-		for (auto& child : children) {
+		// Iterate through every child in the set of possible children
+		for (auto& child : children) 
+		{
+			// Check if a ray intersects a mesh
 			if (CheckRay(child, down))
 			{
-				// round the z component of the child node after it has been modified
+                // round the z component of the child node after it has been modified
 				// to account for the error in the ray intersection
 				child[2] = roundhf(child[2]);
+				// TODO: this is a premature check and should be moved to the original calling function
+				//      after the step type check since upstep and downstep are parameters for stepping and not slope
+
 				// Check to see if the new position will satisfy up and downstep restrictions
 				auto dstep = parent[2] - child[2];
 				auto ustep = child[2] - parent[2];
@@ -319,14 +345,18 @@ namespace HF::GraphGenerator {
 
 	void GraphGeneratorPrivate::CrawlGeomParallel(UniqueQueue & todo)
 	{
+		// Generate the set of directions to use for each set of possible children
+		// Uses the maximum connection defined by the user
 		auto directions = CreateDirecs(GG.max_step_connection);
 
 		// Create a vector to use for edges
 		vector<Edge> links;
+		// Initialize a tracker for the number of nodes that can be compared to the max nodes limit
 		int num_nodes = 0;
 
-		// Iterate through every node int the todo-list
-		while (!todo.empty() && (num_nodes < GG.max_nodes || GG.max_nodes < 0)) {
+		// Iterate through every node int the todo-list while it does not reach the maximum number of nodes limit
+		while (!todo.empty() && (num_nodes < GG.max_nodes || GG.max_nodes < 0)) 
+		{
 			
 			// If the todo list is big enough, go into parallel;
 			if (todo.size() >= 100) {
@@ -345,15 +375,19 @@ namespace HF::GraphGenerator {
 				// while loop to not run anymore.
 				assert(to_be_done.size() > 0);
 
-				// Create output array
+				// Create array of edges that will be used to store results
 				vector<vector<Edge>> OutEdges(to_do_count);
 
 				// Compute valid children for every node in parallel.
 				#pragma omp parallel
 				{
 					#pragma omp for schedule(dynamic)
-					for (int i = 0; i < to_do_count; i++) {
+					// iterate through each parent node that needs to be checked
+					for (int i = 0; i < to_do_count; i++) 
+					{
 						const Node n = to_be_done[i];
+						// Use the node n with the given set of directions (from max connections)
+						// Place the results in the index of the outgoing edges of this (parent) node. 
 						ComputerParent(n, directions, OutEdges[i]);
 					}
 				}
@@ -377,25 +411,45 @@ namespace HF::GraphGenerator {
 				}
 			}
 
+			// TODO: This should just be combined with the code block above with links being index 0 of an array 
+			//        with length 1 so that it is compatible with the for loop 
+
 			// Otherwise go in sequence (identical to CrawlGeom)
-			else {
+			else 
+			{
+				// Get the oldest node (First in First Out)
 				const Node parent = todo.pop();
+				// TODO: explain what clear() is for
 				links.clear();
 
+				// Get the valid children nodes of the current possible parent node
 				ComputerParent(parent, directions, links);
 
+				// Iterate through the edges found
 				for (auto edge : links)
+					// Add each child of this parent node to the TODO queue to be checked as a parent
+					//  in the future
 					todo.push(edge.child);
 
+				// If the parent has at least one child connection
 				if (!links.empty())
-					for (auto & edge : links)
-						G.addEdge(parent, edge.child, edge.score);
+				{
 
-				++num_nodes;
-				//progress++;
-				//bar.progress(progress, max_nodes);
-			}
-		}
+					// Iterate through the edges found
+					for (auto& edge : links)
+					{
+						// Add the edge, consisting of a parent and child node, along with the cost
+						G.addEdge(parent, edge.child, edge.score); // TODO: Explain how this is storing step type
+					}
+
+					// Increments the total number of parent nodes
+					++num_nodes;
+
+				} // End if check for empty edges
+
+			} // End else for sequential calculation
+
+		} // End while loop for max nodes and queue
 	}
 
 	bool GraphGeneratorPrivate::CheckRay(v3& position, const v3& direction, HIT_FLAG flag)
@@ -414,46 +468,49 @@ namespace HF::GraphGenerator {
 		}
 	}
 
-	bool GraphGeneratorPrivate::CheckRay(Node& position, const v3& direction, HIT_FLAG flag) {
+	bool GraphGeneratorPrivate::CheckRay(Node& position, const v3& direction, HIT_FLAG flag) 
+	{
+
 		// Switch Geometry based on hitflag
-		switch (flag) {
+		switch (flag) 
+		{
+			// Floors and Obstacles are identical for now.
+			case HIT_FLAG::FLOORS:
+			case HIT_FLAG::OBSTACLES:
+				return GG.ray_tracer.FireRay(
+					position[0],
+					position[1],
+					position[2],
+					direction[0],
+					direction[1],
+					direction[2],
+					-1.0f,
+					GG.walkable_surfaces);
+				break;
 
-		// Floors and Obstacles are identical for now.
-		case HIT_FLAG::FLOORS:
-		case HIT_FLAG::OBSTACLES:
-			return GG.ray_tracer.FireRay(
-				position[0],
-				position[1],
-				position[2],
-				direction[0],
-				direction[1],
-				direction[2],
-				-1.0f,
-				GG.walkable_surfaces
-			);
-			break;
+			case HIT_FLAG::BOTH:
+				return GG.ray_tracer.FireRay(
+					position[0],
+					position[1],
+					position[2],
+					direction[0],
+					direction[1],
+					direction[2]);
 
-		case HIT_FLAG::BOTH:
-			return GG.ray_tracer.FireRay(
-				position[0],
-				position[1],
-				position[2],
-				direction[0],
-				direction[1],
-				direction[2]
-			);
-		default:
-			throw std::exception("Invalid CheckRay flag");
+			default:
+				throw std::exception("Invalid CheckRay flag");
 		}
 	}
 
 	inline void GraphGeneratorPrivate::ComputerParent(
-		const Node& parent,
-		const vector<pair>& directions,
-		vector<Edge>& child_links
-	){
+			const Node& parent,
+			const vector<pair>& directions,
+			vector<Edge>& child_links)
+	{
+		// Create an empty vector of nodes representing the possible children 
 		vector<Node> potential_children;
-		// Calculate the potential children.
+
+		// For the given parent and directions, create the set of possible children that must be checked
 		GeneratePotentialChildren(parent, directions, potential_children);
 		
 		// Fill child_links with valid edges from parent to children
