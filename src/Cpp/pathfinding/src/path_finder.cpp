@@ -314,74 +314,7 @@ namespace HF::Pathfinding {
 				...etc...
 		*/
 
-		Path**& ref_out_paths = out_paths;
-		PathMember**& ref_out_path_members = out_path_members;
-		int*& ref_sizes = out_sizes;
-		
 		// Run InsertPathsIntoArray and mutate out_paths, out_path_members, and out_sizes
-		// This appears to work, but we should take a copy of InsertPathsIntoArray's body
-		// and modify its implementation such that it is best suited for InsertAllToAllPathsIntoArray
-		InsertPathsIntoArray(bg, start_points, end_points, ref_out_paths, ref_out_path_members, ref_sizes);
-
-		/*
-		// Get graph from boost graph
-		const graph_t& graph = bg->g;
-		robin_hood::unordered_map<int, DistPred> dpm;
-
-		// Use maximum number of cores for this machine
-		int core_count = std::thread::hardware_concurrency();
-		int cores_to_use = std::min(core_count - 1, static_cast<int>(start_points.size()));
-		omp_set_num_threads(cores_to_use);
-
-		// Copy and the input array of starting points
-		std::vector<int> start_copy = start_points;
-
-		// Remove all duplicates, effectively creating an array of unique start ids
-		std::vector<int> unique_starts(node_count);
-		for (int i = 0; i < node_count; i++) {
-			unique_starts[i] = i;
-		}
-		
-		// Preallocate entries for the hash map in sequence so we don't corrupt the heap trying to
-		// add elements in parallel.
-		for (auto uc : unique_starts) {
-			dpm.emplace(std::pair<int, DistPred>{uc, DistPred()});
-		}
-
-		// Build predecessor and distance matrices for each unique start point in parallel
-//#pragma omp parallel for schedule(dynamic) if (unique_starts.size() > cores_to_use && cores_to_use > 4)
-		for (int i = 0; i < unique_starts.size(); i++) {
-			int start_point = unique_starts[i];
-			dpm[start_point] = BuildDistanceAndPredecessor(graph, start_point);
-		}
-
-		// Create paths in parallel.
-//#pragma omp parallel for schedule(dynamic) if (cores_to_use > 4)
-		for (int i = 0; i < start_points.size(); i++) {
-			// Get the start and end point for this path
-			int start = start_points[i];
-			int end = end_points[i];
-
-			// Get a reference to the distance and predecessor array for this start point.
-			const auto& dist_pred = dpm[start];
-
-			// Construct the shortest path, store a point for it in out_paths at index i
-			out_paths[i] = new Path(ConstructShortestPathFromPred(start, end, dist_pred));
-
-			// Store a pointer to that path's PathMembers in out_path_members
-			out_path_members[i] = out_paths[i]->GetPMPointer();
-
-			// Store the size of the path's PathMembers in index i of out_sizes
-			out_sizes[i] = out_paths[i]->size();
-
-			// If the size of the path is zero, delete the path and set it's pointer to a null
-			// pointer in the output array.
-			if (out_sizes[i] == 0) {
-				delete (out_paths[i]);
-				out_paths[i] = nullptr;
-			}
-		}
-		*/
+		InsertPathsIntoArray(bg, start_points, end_points, out_paths, out_path_members, out_sizes);
 	}
-	
 }
