@@ -298,8 +298,6 @@ namespace HF::Pathfinding {
 			}
 		}
 
-		curr_id = 0;
-
 		/*
 			The idea is that
 				start_points[0] and end_points[0]
