@@ -332,6 +332,7 @@ TEST(_pathFinding, FindAllPaths) {
 TEST(_pathFinding, InsertAllToAllPathsIntoArray) {
 	HF::SpatialStructures::Graph g;
 
+	// Add the edges
 	g.addEdge(0, 1, 1);
 	g.addEdge(0, 2, 2);
 	g.addEdge(1, 3, 3);
@@ -341,24 +342,32 @@ TEST(_pathFinding, InsertAllToAllPathsIntoArray) {
 	g.addEdge(4, 6, 3);
 	g.addEdge(5, 6, 1);
 
+	// Always compress the graph after adding edges
 	g.Compress();
 
+	// Create a BoostGraph (std::unique_ptr)
 	auto bg = CreateBoostGraph(g);
 
+	// Total paths is node_count ^ 2
 	size_t node_count = g.Nodes().size();
 	size_t path_count = node_count * node_count;
 
+	// Pointer to buffer of (Path *)
 	Path** out_paths = new Path* [path_count];
 	// out_paths[i...path_count - 1] will be alloc'ed by InsertPathsIntoArray
 
+	// Pointer to buffer of (PathMember *)
 	PathMember** out_path_member = new PathMember* [path_count];
 	// out_path_member[i...path_count - 1] points to out_paths[i...path_count - 1]->GetPMPointer();
 
+	// Pointer to buffer of (int)
 	int* sizes = new int[path_count];
 
-
+	//
+	// The two loops for start_points and end_points
+	// are just for the output.
+	//
 	int curr_id = 0;
-
 	std::vector<int> start_points(path_count);
 	// Populate the start points,
 	// size will be (node_count)^2
@@ -383,13 +392,14 @@ TEST(_pathFinding, InsertAllToAllPathsIntoArray) {
 
 	for (int i = 0; i < path_count; i++) {
 		if (out_paths[i]) {
+			// Always check if out_paths[i] is nonnull!
 			int total_cost = 0;
-			std::cout << "From " << start_points[i] << " to " << end_points[i] << std::endl;
+			std::cout << "Path from " << start_points[i] << " to " << end_points[i] << std::endl;
 
 			Path p = *out_paths[i];
 			for (auto m : p.members) {
 				total_cost += m.cost;
-				std::cout << m.node << " cost " << m.cost << std::endl;
+				std::cout << "node ID: " << m.node << "\tcost " << m.cost << std::endl;
 			}
 
 			std::cout << "Total cost: " << total_cost << std::endl;
@@ -519,7 +529,7 @@ namespace CInterfaceTests {
 
 		// Maximum amount of paths to search
 		const int MAX_SIZE = 2;
-		
+
 		// Create a Graph g, and compress it
 		auto boostGraph = HF::Pathfinding::CreateBoostGraph(g);
 
@@ -632,10 +642,10 @@ namespace CInterfaceTests {
 		out_path_member = nullptr;
 	}
 
-	TEST(_PathFinderCInterface, CreateAllToAllPaths) {
+	TEST(_PathfinderCInterface, CreateAllToAllPaths) {
 		HF::SpatialStructures::Graph g;
-		
-		// Add our edges
+
+		// Add the edges
 		g.addEdge(0, 1, 1);
 		g.addEdge(0, 2, 2);
 		g.addEdge(1, 3, 3);
@@ -645,17 +655,17 @@ namespace CInterfaceTests {
 		g.addEdge(4, 6, 3);
 		g.addEdge(5, 6, 1);
 
-		// Always compress the graph after add edges
+		// Always compress the graph after adding edges
 		g.Compress();
 
-		// Create a BoostGraph smart pointer
+		// Create a BoostGraph (std::unique_ptr)
 		auto bg = CreateBoostGraph(g);
 
-		// Total path count is node_count^2
+		// Total paths is node_count ^ 2
 		size_t node_count = g.Nodes().size();
 		size_t path_count = node_count * node_count;
 
-		// Pointer to buffer of (Path *).
+		// Pointer to buffer of (Path *)
 		Path** out_paths = new Path * [path_count];
 		// out_paths[i...path_count - 1] will be alloc'ed by InsertPathsIntoArray
 
@@ -663,18 +673,50 @@ namespace CInterfaceTests {
 		PathMember** out_path_member = new PathMember * [path_count];
 		// out_path_member[i...path_count - 1] points to out_paths[i...path_count - 1]->GetPMPointer();
 
-		// Pointer to buffer of int
+		// Pointer to buffer of (int)
 		int* sizes = new int[path_count];
 
-		// Use CreateAllToAllPaths
+		//
+		// The two loops for start_points and end_points
+		// are just for the output.
+		//
+		int curr_id = 0;
+		std::vector<int> start_points(path_count);
+		// Populate the start points,
+		// size will be (node_count)^2
+		for (int i = 0; i < node_count; i++) {
+			for (int k = 0; k < node_count; k++) {
+				start_points[curr_id++] = i;
+			}
+		}
+
+		curr_id = 0;
+
+		std::vector<int> end_points(path_count);
+		// Populate the end points,
+		// size will be (node_count)^2
+		for (int i = 0; i < node_count; i++) {
+			for (int k = 0; k < node_count; k++) {
+				end_points[curr_id++] = k;
+			}
+		}
+
 		CreateAllToAllPaths(&g, out_paths, out_path_member, sizes, path_count);
 
-		//
-		// See out_paths, out_path_member, and sizes
-		//
 		for (int i = 0; i < path_count; i++) {
-			if (out_path_member[i]) {
-				std::cout << out_path_member[i]->node << " (cost) " << out_path_member[i]->cost << std::endl;
+			if (out_paths[i]) {
+				// Always check if out_paths[i] is nonnull!
+				int total_cost = 0;
+				std::cout << "Path from " << start_points[i] << " to " << end_points[i] << std::endl;
+
+				Path p = *out_paths[i];
+				for (auto m : p.members) {
+					total_cost += m.cost;
+					std::cout << "node ID: " << m.node << "\tcost " << m.cost << std::endl;
+				}
+
+				std::cout << "Total cost: " << total_cost << std::endl;
+				std::cout << "--------------------------" << std::endl;
 			}
 		}
 

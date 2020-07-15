@@ -318,7 +318,7 @@ namespace HF::Pathfinding {
 		PathMember**& ref_out_path_members = out_path_members;
 		int*& ref_sizes = out_sizes;
 		
-		// Attempt 1: Run InsertPathsIntoArray and mutate out_paths, out_path_members, and out_sizes
+		// Run InsertPathsIntoArray and mutate out_paths, out_path_members, and out_sizes
 		// This appears to work, but we should take a copy of InsertPathsIntoArray's body
 		// and modify its implementation such that it is best suited for InsertAllToAllPathsIntoArray
 		InsertPathsIntoArray(bg, start_points, end_points, ref_out_paths, ref_out_path_members, ref_sizes);
