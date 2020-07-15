@@ -103,5 +103,8 @@ C_INTERFACE CreateAllToAllPaths(
 	int num_paths
 ) {
 
+	auto bg = CreateBoostGraph(*g);
+	InsertAllToAllPathsIntoArray(bg.get(), out_path_ptr_holder, out_path_member_ptr_holder, out_sizes);
+
 	return HF::Exceptions::OK;
 }

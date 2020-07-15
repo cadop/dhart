@@ -382,6 +382,82 @@ namespace HF {
 			int* out_sizes
 		);
 
+		/// <summary> TODO summary </summary>
+		/// <param name="bg"></param>
+		/// <param name="out_paths></param>
+		/// <param name="out_path_members"></param>
+		/// <param name="out_sizes"></param>
+
+		/*!
+			\code
+				HF::SpatialStructures::Graph g;
+
+				// Create the edges
+				g.addEdge(0, 1, 1);
+				g.addEdge(0, 2, 2);
+				g.addEdge(1, 3, 3);
+				g.addEdge(1, 4, 4);
+				g.addEdge(2, 4, 4);
+				g.addEdge(3, 5, 5);
+				g.addEdge(4, 6, 3);
+				g.addEdge(5, 6, 1);
+
+				// Always compress the graph after adding edges
+				g.Compress();
+
+				// Retrieve a smart pointer to a BoostGraph
+				auto bg = CreateBoostGraph(g);
+
+				// Total path count is node_count^2
+				size_t node_count = g.Nodes().size();
+				size_t path_count = node_count * node_count;
+
+				// Pointer to buffer of (Path *).
+				Path** out_paths = new Path* [path_count];
+				// out_paths[i...path_count - 1] will be alloc'ed by InsertPathsIntoArray
+
+				// Pointer to buffer of (PathMember *)
+				PathMember** out_path_member = new PathMember* [path_count];
+				// out_path_member[i...path_count - 1] points to out_paths[i...path_count - 1]->GetPMPointer();
+
+				// Pointer to buffer of int
+				int* sizes = new int[path_count];
+
+				// Use InsertAllToAllPathsIntoArray
+				InsertAllToAllPathsIntoArray(bg.get(), out_paths, out_path_member, sizes);
+
+				//
+				// See out_paths, out_path_member, and sizes
+				//
+				for (int i = 0; i < path_count; i++) {
+					if (out_path_member[i]) {
+						std::cout << out_path_member[i]->node << " (cost) " << out_path_member[i]->cost << std::endl;
+					}
+				}
+
+				//
+				// Resource cleanup
+				//
+				if (sizes) {
+					delete[] sizes;
+					sizes = nullptr;
+				}
+
+				if (out_path_member) {
+					delete[] out_path_member;
+					out_path_member = nullptr;
+				}
+
+				if (out_paths) {
+					for (int i = 0; i < path_count; i++) {
+						if (out_paths[i]) {
+							delete out_paths[i];
+							out_paths[i] = nullptr;
+						}
+					}
+				}
+			\endcode
+		*/
 		void InsertAllToAllPathsIntoArray(BoostGraph* bg, HF::SpatialStructures::Path** out_paths, HF::SpatialStructures::PathMember** out_path_members, int* out_sizes);
 	}
 }
