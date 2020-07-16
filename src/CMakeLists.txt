@@ -1,4 +1,4 @@
-﻿cmake_minimum_required (VERSION 3.8)
+cmake_minimum_required (VERSION 3.8)
 
 # Paths
 set(PYTHON_PACKAGE_DIR "Python")
@@ -9,21 +9,26 @@ set(C_TEST_DRIVER_DIR "Cpp/tests/src")
 set(DEPENDENCY_BINARIES
 		"${CMAKE_SOURCE_DIR}/external/Embree/bin/tbb.dll" 
 		"${CMAKE_SOURCE_DIR}/external/Embree/bin/embree3.dll"
-		"${CMAKE_SOURCE_DIR}/external/Microsoft/Release/msvcp140.dll"
-		"${CMAKE_SOURCE_DIR}/external/Microsoft/Release/vcruntime140.dll"
+		"${CMAKE_SOURCE_DIR}/external/Microsoft/cpp/Release/msvcp140.dll"
+		"${CMAKE_SOURCE_DIR}/external/Microsoft/cpp/Release/vcruntime140.dll"
 )
 
-
 set(DEBUG_DEPENDENCY_BINARIES
-	"${CMAKE_SOURCE_DIR}/external/Microsoft/Debug/vcruntime140_1d.dll"
-	"${CMAKE_SOURCE_DIR}/external/Microsoft/Debug/vcruntime140d.dll"
-	"${CMAKE_SOURCE_DIR}/external/Microsoft/Debug/vcomp140d.dll"
-	"${CMAKE_SOURCE_DIR}/external/Microsoft/Debug/msvcp140d.dll"
+	"${CMAKE_SOURCE_DIR}/external/Microsoft/cpp/Debug/vcruntime140_1d.dll"
+	"${CMAKE_SOURCE_DIR}/external/Microsoft/cpp/Debug/vcruntime140d.dll"
+	"${CMAKE_SOURCE_DIR}/external/Microsoft/cpp/Debug/vcomp140d.dll"
+	"${CMAKE_SOURCE_DIR}/external/Microsoft/cpp/Debug/msvcp140d.dll"
 )
 
 set(RELEASE_DEPENDENCY_BINARIES
-	"${CMAKE_SOURCE_DIR}/external/Microsoft/Release/vcruntime140_1.dll"
-	"${CMAKE_SOURCE_DIR}/external/Microsoft/Release/vcomp140.dll"
+	"${CMAKE_SOURCE_DIR}/external/Microsoft/cpp/Release/vcruntime140_1.dll"
+	"${CMAKE_SOURCE_DIR}/external/Microsoft/cpp/Release/vcomp140.dll"
+)
+
+set(CSHARP_DEPENDENCY_BINARIES
+	"${CMAKE_SOURCE_DIR}/external/Microsoft/csharp/System.Buffers.dll"
+	"${CMAKE_SOURCE_DIR}/external/Microsoft/csharp/System.Memory.dll"
+	"${CMAKE_SOURCE_DIR}/external/Microsoft/csharp/System.Runtime.CompilerServices.Unsafe.dll"
 )
 
 set(HF_SOURCES)
@@ -634,6 +639,7 @@ if (HumanFactors_EnableCSharp)
 			"${CMAKE_CURRENT_SOURCE_DIR}/${PYTHON_PACKAGE_DIR}/humanfactorspy/Example Models"
 			"${CMAKE_CURRENT_BINARY_DIR}/CSharp/$<CONFIGURATION>/ExampleModels"
 	)
+	install (FILES ${CSHARP_DEPENDENCY_BINARIES} DESTINATION bin)
 endif()
 
 
