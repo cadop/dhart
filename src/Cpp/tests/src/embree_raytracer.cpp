@@ -701,8 +701,17 @@ TEST(_FullRayRequest, DidHit) {
 	}
 }
 
+/*!
+	\brief How quickly the raytracer can fire rays directly at a simple plane.
+
+	\details
+	Likely isn't truly indicative of the raytracer's performance, but provides a starting point
+	for other more in depth performance tests. Variations on model complexity and ray direction
+	are suggested.
+*/
 TEST(Performance, EmbreeRaytracer) {
 	
+	// Number of trials is based on number of elements here
 	const vector<int> raycount = {
 		100,
 		1000,
@@ -712,6 +721,7 @@ TEST(Performance, EmbreeRaytracer) {
 	};
 	const int num_trials = raycount.size();
 
+	// Create Watches
 	std::vector<StopWatch> watches(num_trials);
 
 	// Setup raytracer

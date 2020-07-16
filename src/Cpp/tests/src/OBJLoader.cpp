@@ -905,8 +905,12 @@ namespace CInterfaceTests {
 }
 
 
+/*!
+	\brief Tests how quickly the raytracer can load OBJ files.
+*/
 TEST(Performance, OBJLoader)
 {
+	// Each of these names will be loaded in a seperate trial.
 	const vector<string> objs_to_load{
 		"teapot",
 		"sibenik",
@@ -918,6 +922,7 @@ TEST(Performance, OBJLoader)
 	vector<StopWatch> watches(num_trials);
 	vector<int> vert_count(num_trials);
 
+	// Run through trials
 	for (int i = 0; i < num_trials; i++) {
 		const auto& key = objs_to_load[i];
 		auto& watch = watches[i];
