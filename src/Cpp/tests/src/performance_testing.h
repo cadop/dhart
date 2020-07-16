@@ -55,25 +55,39 @@ struct StopWatch {
 	\param watches StopWatches containing ths start/end times to print.
 	\param num_units number of units were processed by each trial in order.
 	\param unit_name Name of units being processed. I.E. the graph generator would put Nodes.
+	\param trial_names Name of each trial. If blank, will be generated as Trial 1. Trial 2. etc.
 */
 inline void PrintTrials(
-	const std::vector<StopWatch> & watches,
+	const std::vector<StopWatch>& watches,
 	const std::vector<int> num_units,
-	std::string unit_name = "Elements"
+	std::string unit_name = "Elements",
+	std::vector<std::string> trial_names = std::vector<std::string>()
 ) {
-	// Iterate through the results of each trial.
-	for (int i = 0; i < watches.size(); i++) {
-		auto num_elements = num_units[i];
-		auto& this_trial = watches[i];
-		auto duration = this_trial.GetDuration();
+	const int num_trials = watches.size();
 
-		float units_per_ms = static_cast<float>(num_elements) / static_cast<float>(duration);
+	// Create trial names if none were specified
+	if (trial_names.size() == 0)
+	{
+		trial_names = std::vector<string>(num_trials);
+		
+		for (int i = 0; i < num_trials; i++)
+			trial_names[i] = "Trial " + std::to_string(i);
+	}
+
+	// Iterate through the results of each trial.
+	for (int i = 0; i < num_trials; i++) {
+		const auto trial_name = trial_names[i];
+		const auto num_elements = num_units[i];
+		const auto& this_trial = watches[i];
+		const auto duration = this_trial.GetDuration();
+
+		const float units_per_ms = static_cast<float>(num_elements) / static_cast<float>(duration);
 
 		// Print results.
-		std::cerr << "Trial " << i << " | "
-			<< "Count of " << unit_name << ": " << num_elements << ", "
+		std::cerr << trial_name << " | "
+			<< unit_name << ": " << num_elements << ", "
 			<< "Time: " << duration << hf_time_unit_postfix << ", "
-			<< unit_name << " / ms: " << units_per_ms
+			<< unit_name << "/ms: " << units_per_ms
 			<< std::endl;
 	}
 }
