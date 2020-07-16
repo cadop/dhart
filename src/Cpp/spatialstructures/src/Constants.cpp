@@ -10,6 +10,7 @@
 #include <cstdlib>
 #include <cmath>
 
-float HF::SpatialStructures::roundhf(float f) {
-	return std::round(f / ROUNDING_PRECISION) * ROUNDING_PRECISION ;
+float HF::SpatialStructures::roundhf(float f, float p, float r)
+{
+	return std::round(f * p) * r ;
 }
