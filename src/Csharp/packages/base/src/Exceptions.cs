@@ -1,14 +1,18 @@
 using System.IO;
 
-/// <summary>
-///
-/// </summary>
+/*! 
+    \brief Custom exceptions thrown by HumanFactors Internally
+    
+    \remarks
+    Exceptions are created here as needed, and generally existing C# excepions 
+    are preferred.
+*/
 namespace HumanFactors.Exceptions
 {
-    /// <summary>
-    /// Common error codes to convey the state of the program.
-    /// </summary>
-    ///<remarks> Used as the return type for most native functions. </remarks>
+    /*! 
+     \brief Common error codes to convey the state of the program.
+     \remarks Used as the return type for most native functions.
+    */
     internal enum HF_STATUS
     {
         /// <summary>
@@ -85,9 +89,7 @@ namespace HumanFactors.Exceptions
         NO_PATH = -11,
     };
 
-    /// <summary>
-    /// The file passed was not an obj file, or was an invalid obj file.
-    /// </summary>
+    /*! \brief The file passed was not an obj file, or was an invalid obj file */
     public class InvalidMeshException : System.Exception
     {
         /// <summary>Initializes a new instance of the <see cref="InvalidMeshException" /> class.</summary>
