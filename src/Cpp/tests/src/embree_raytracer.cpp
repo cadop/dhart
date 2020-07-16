@@ -8,10 +8,13 @@
 
 #include "RayRequest.h"
 
+#include "performance_testing.h"
+
 using namespace HF::Geometry;
 using namespace HF::RayTracer;
 using std::vector;
 using std::array;
+using std::string;
 using std::cerr;
 using std::endl;
 
@@ -696,4 +699,43 @@ TEST(_FullRayRequest, DidHit) {
 	else {
 		std::cout << "Miss" << std::endl;
 	}
+}
+
+TEST(Performance, EmbreeRaytracer) {
+	
+	const vector<int> raycount = {
+		100,
+		1000,
+		10000,
+		100000,
+		1000000
+	};
+	const int num_trials = raycount.size();
+
+	std::vector<StopWatch> watches(num_trials);
+
+	// Setup raytracer
+	string model_key = "plane";
+	string model_path = GetTestOBJPath(model_key);
+	auto meshes = LoadMeshObjects(model_path);
+	EmbreeRayTracer ert(meshes);
+
+	// Ray settings
+	array<float, 3> origin{ 0,0,1 };
+	array<float, 3> direction{ 0,0,-1};
+
+	for (int i = 0; i < num_trials; i++) {
+		const int num_rays = raycount[i];
+		auto& watch = watches[i];
+
+		// Create arrays of origins and directions
+		vector<array<float, 3>> origins(num_rays, origin);
+		vector<array<float, 3>> directions(num_rays, direction);
+		
+		watch.StartClock();
+		auto results = ert.FireRays(origins, directions);
+		watch.StopClock();
+	}
+	
+	PrintTrials(watches, raycount, "rays");
 }
