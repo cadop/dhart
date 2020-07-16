@@ -202,7 +202,7 @@ namespace CInterfaceTests {
 TEST(Performance, GraphGenerator) {
 
 	// Each element here will be evaluated in seperate trial
-	vector<int> max_nodes = { 
+	vector<int> max_node_array = { 
 		10,
 		100, 
 		500,
@@ -212,7 +212,7 @@ TEST(Performance, GraphGenerator) {
 	};
 
 	// Setup trial arrays
-	const int num_trials = max_nodes.size();
+	const int num_trials = max_node_array.size();
 	vector<StopWatch> watches(num_trials);	
 	vector<int> nodes_generated(num_trials);	
 	
@@ -229,22 +229,22 @@ TEST(Performance, GraphGenerator) {
 
 	// Run Trials and record results
 	for (int i = 0; i < num_trials; i++) {
-		auto& this_trial = watches[i];
-		int this_max = max_nodes[i];
+		auto& watch = watches[i];
+		int max_nodes = max_node_array[i];
 
-		this_trial.StartClock();
+		watch.StartClock();
 		auto GG = HF::GraphGenerator::GraphGenerator(ray_tracer, 0, 0);
 		auto graph = GG.BuildNetwork(
 			start,
 			spacing, 
-			this_max,
+			max_nodes,
 			up_step,
 			up_slope,
 			down_step,
 			down_slope,
 			max_step_connections
 		);
-		this_trial.StopClock();
+		watch.StopClock();
 
 		nodes_generated[i] = graph.size();
 	}
