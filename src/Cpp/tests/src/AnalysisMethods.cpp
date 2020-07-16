@@ -8,9 +8,31 @@
 #include <graph.h>
 #include <edge.h>
 #include <node.h>
+#include <analysis_C.h>
 
-#include "analysis_C.h"
-#include "graph.h"
+
+#include "performance_testing.h"
+
+using std::vector;
+
+using HF::RayTracer::EmbreeRayTracer;
+using HF::Geometry::MeshInfo;
+
+/// <summary>
+/// Create a new raytracer from a basic 10x10 plane centered on the origin.
+/// </summary>
+inline EmbreeRayTracer CreateRTWithPlane() {
+	const vector<float> plane_vertices{
+		-10.0f, 10.0f, 0.0f,
+		-10.0f, -10.0f, 0.0f,
+		10.0f, 10.0f, 0.0f,
+		10.0f, -10.0f, 0.0f,
+	};
+
+	const vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
+	return EmbreeRayTracer(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+}
+
 
 namespace HF {
 
@@ -54,7 +76,6 @@ namespace HF {
 		printf("Graph size %i\n", g.size());
 		g.Compress();
 		ASSERT_GT(g.size(), 0);
-
 	}
 
 	TEST(_UniqueQueue, BlockRepeats) {
@@ -172,4 +193,59 @@ namespace CInterfaceTests {
 			vec = nullptr;
 		}
 	}
+
+}
+TEST(Performance, GraphGenerator) {
+	vector<int> max_nodes = { 10, 100, 500, 1000, 5000, 10000, 50000, 100000 };
+	vector<trial> trials(max_nodes.size());	
+	vector<int> nodes_generated(max_nodes.size());	
+	
+	auto ray_tracer = CreateRTWithPlane();
+	std::array<float, 3> start{ 0,0,0 };
+	std::array<float, 3> spacing{ 0.05,0.05,0.05 };
+	float up_step = 1;
+	float down_step = 1;
+	float up_slope = 30;
+	float down_slope = 30;
+	int max_step_connections = 1;
+
+
+	// Run Trials
+	for (int i = 0; i < max_nodes.size(); i++) {
+		auto& this_trial = trials[i];
+		int this_max = max_nodes[i];
+
+		this_trial.start_clock();
+		auto GG = HF::GraphGenerator::GraphGenerator(ray_tracer, 0, 0);
+		auto graph = GG.BuildNetwork(
+			start,
+			spacing, 
+			this_max,
+			up_step,
+			up_slope,
+			down_step,
+			down_slope,
+			max_step_connections
+		);
+		this_trial.stop();
+
+		nodes_generated[i] = graph.size();
+	}
+
+	// Print Results
+	for (int i = 0; i < max_nodes.size(); i++) {
+		auto num_nodes = nodes_generated[i];
+		auto& this_trial = trials[i];
+		auto duration = this_trial.getDuration();
+
+		float nodes_per_ms = static_cast<float>(num_nodes) / static_cast<float>(duration);
+
+		std::cerr << "TRIAL " << i << " | "
+			<< "Number of nodes: " << num_nodes <<", " 
+			<< "Time: " << duration << "ms, "
+			<< "Nodes / ms: " << nodes_per_ms
+			<< std::endl;
+	}
+	
+
 }
