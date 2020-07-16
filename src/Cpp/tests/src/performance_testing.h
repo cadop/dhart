@@ -11,6 +11,8 @@ using std::string;
 // Set the type of clock by changing this variable here
 using this_clock = std::chrono::high_resolution_clock;
 using timepoint = this_clock::time_point;
+using hf_time_units = std::chrono::milliseconds; //< Units to use
+static const string hf_time_unit_postfix = "ms"; //< shorthand for units I.E. milliseconds = ms
 
 /*
 	\brief Results of a trial with a start/end point.
@@ -43,7 +45,7 @@ struct StopWatch {
 
 	/*! \brief Get the duration from start to now. */
 	inline long long GetDuration() const {
-		return duration_cast<std::chrono::milliseconds>(end - start).count();
+		return duration_cast<hf_time_units>(end - start).count();
 	}
 };
 
@@ -69,7 +71,7 @@ inline void PrintTrials(
 
 		std::cerr << "TRIAL " << i << " | "
 			<< "Count of " << unit_name << ": " << num_elements << ", "
-			<< "Time: " << duration << "ms, "
+			<< "Time: " << duration << hf_time_unit_postfix << ", "
 			<< unit_name << " / ms: " << units_per_ms
 			<< std::endl;
 	}
