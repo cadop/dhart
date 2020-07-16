@@ -74,6 +74,9 @@ inline void PrintTrials(
 			trial_names[i] = "Trial " + std::to_string(i);
 	}
 
+	std::cerr.imbue(std::locale(""));
+	std::cerr << std::fixed << std::showpoint << std::setprecision(3);
+
 	// Iterate through the results of each trial.
 	for (int i = 0; i < num_trials; i++) {
 		const auto trial_name = trial_names[i];
@@ -85,8 +88,8 @@ inline void PrintTrials(
 
 		// Print results.
 		std::cerr << trial_name << " | "
-			<< unit_name << ": " << num_elements << ", "
-			<< "Time: " << duration << hf_time_unit_postfix << ", "
+			<< unit_name << ": " << num_elements << " | "
+			<< "Time: " << duration << hf_time_unit_postfix << " | "
 			<< unit_name << "/ms: " << units_per_ms
 			<< std::endl;
 	}
