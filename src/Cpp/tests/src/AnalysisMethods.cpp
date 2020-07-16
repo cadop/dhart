@@ -233,19 +233,5 @@ TEST(Performance, GraphGenerator) {
 	}
 
 	// Print Results
-	for (int i = 0; i < max_nodes.size(); i++) {
-		auto num_nodes = nodes_generated[i];
-		auto& this_trial = trials[i];
-		auto duration = this_trial.getDuration();
-
-		float nodes_per_ms = static_cast<float>(num_nodes) / static_cast<float>(duration);
-
-		std::cerr << "TRIAL " << i << " | "
-			<< "Number of nodes: " << num_nodes <<", " 
-			<< "Time: " << duration << "ms, "
-			<< "Nodes / ms: " << nodes_per_ms
-			<< std::endl;
-	}
-	
-
+	PrintTrials(trials, nodes_generated, "Nodes");
 }
