@@ -136,7 +136,7 @@ namespace HumanFactors.NativeUtils
         /// Data and vector pointers. Used for the construction of new spans and the freeing of
         /// resources when this object is finalized.
         /// </summary>
-        protected CVectorAndData ptrs;
+        internal CVectorAndData ptrs;
 
         /// <summary> The number of elements in the array. </summary>
         public virtual int size { get => ptrs.size; }
@@ -147,7 +147,7 @@ namespace HumanFactors.NativeUtils
         /// The size in bytes of this array in unmanaged memory. If set to -1, the size will
         /// automatically be calculated.
         /// </param>
-        unsafe public NativeArray(CVectorAndData ptrs, int size = -1) : base(ptrs.vector, CalcTSize(ptrs, size)) {
+        unsafe internal NativeArray(CVectorAndData ptrs, int size = -1) : base(ptrs.vector, CalcTSize(ptrs, size)) {
             this.ptrs = ptrs;
         }
     }
@@ -171,7 +171,7 @@ namespace HumanFactors.NativeUtils
 
         /// <summary> Initializes a new instance of the <see cref="NativeArray2D{T}" /> class. </summary>
         /// <param name="ptrs"> Must have size2 set to a value greater than one. </param>
-        unsafe public NativeArray2D(CVectorAndData ptrs) : base(ptrs, ptrs.size * ptrs.size2) { }
+        unsafe internal NativeArray2D(CVectorAndData ptrs) : base(ptrs, ptrs.size * ptrs.size2) { }
     }
 
 }

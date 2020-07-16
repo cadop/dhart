@@ -21,7 +21,7 @@ namespace HumanFactors.NativeUtils
     /// usage of the name "vector" here corresponds to the C++ Standard Library's std::vector
     /// object, not the 3D vector described in <see cref="Vector3D" />
     /// </remarks>
-    public struct CVectorAndData
+    internal struct CVectorAndData
     {
         /// <summary>
         /// Pointer to vector's data in C++. This is what .array maps the span to.

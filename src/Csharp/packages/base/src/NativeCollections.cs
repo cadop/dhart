@@ -22,7 +22,7 @@ namespace HumanFactors.NativeUtils.CommonNativeArrays
     /// Contains an array of floats in managed memory
     /// </summary>
     public class ManagedFloatArray : NativeUtils.NativeArray<float> {
-        public ManagedFloatArray(CVectorAndData ptrs) : base(ptrs) { }
+        internal ManagedFloatArray(CVectorAndData ptrs) : base(ptrs) { }
         protected override bool ReleaseHandle() => (HF_STATUS.OK == NativeMethods.DestroyFloatVector(handle));
     }
 

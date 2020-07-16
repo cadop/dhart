@@ -26,7 +26,7 @@ namespace HumanFactors.Pathfinding
         /// <summary>
         /// Initializes a new path from a pointer to a path in unmanaged memory.
         /// </summary>
-        public Path(CVectorAndData ptrs) : base(ptrs) { }
+        internal Path(CVectorAndData ptrs) : base(ptrs) { }
 
         /// <summary>
         /// Free the path in unmanaged memory. 
