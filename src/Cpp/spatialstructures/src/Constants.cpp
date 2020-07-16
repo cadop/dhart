@@ -14,3 +14,8 @@ float HF::SpatialStructures::roundhf(float f, float p, float r)
 {
 	return std::round(f * p) * r ;
 }
+
+float HF::SpatialStructures::trunchf(float f, float p, float r)
+{
+	return std::truncf(f * p) * r;
+}
