@@ -8,9 +8,31 @@
 #include <graph.h>
 #include <edge.h>
 #include <node.h>
+#include <analysis_C.h>
 
-#include "analysis_C.h"
-#include "graph.h"
+
+#include "performance_testing.h"
+
+using std::vector;
+
+using HF::RayTracer::EmbreeRayTracer;
+using HF::Geometry::MeshInfo;
+
+/// <summary>
+/// Create a new raytracer from a basic 10x10 plane centered on the origin.
+/// </summary>
+inline EmbreeRayTracer CreateRTWithPlane() {
+	const vector<float> plane_vertices{
+		-10.0f, 10.0f, 0.0f,
+		-10.0f, -10.0f, 0.0f,
+		10.0f, 10.0f, 0.0f,
+		10.0f, -10.0f, 0.0f,
+	};
+
+	const vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
+	return EmbreeRayTracer(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+}
+
 
 namespace HF {
 
@@ -54,7 +76,6 @@ namespace HF {
 		printf("Graph size %i\n", g.size());
 		g.Compress();
 		ASSERT_GT(g.size(), 0);
-
 	}
 
 	TEST(_UniqueQueue, BlockRepeats) {
@@ -172,4 +193,62 @@ namespace CInterfaceTests {
 			vec = nullptr;
 		}
 	}
+
+}
+
+/*!
+	\brief Evaluates how quickly the graph generator can create nodes on a flat plane.
+*/
+TEST(Performance, GraphGenerator) {
+
+	// Each element here will be evaluated in seperate trial
+	vector<int> max_nodes_list = { 
+		10,
+		100, 
+		500,
+		1000,
+		5000, 
+		10000, 
+	};
+
+	// Setup trial arrays
+	const int num_trials = max_nodes_list.size();
+	vector<StopWatch> watches(num_trials);	
+	vector<int> nodes_generated(num_trials);	
+	
+	// Set Graph generator settings
+	auto ray_tracer = CreateRTWithPlane();
+	std::array<float, 3> start{ 0,0,0 };
+	std::array<float, 3> spacing{ 0.05,0.05,0.05 };
+	float up_step = 1;
+	float down_step = 1;
+	float up_slope = 30;
+	float down_slope = 30;
+	int max_step_connections = 1;
+
+
+	// Run Trials and record results
+	for (int i = 0; i < num_trials; i++) {
+		auto& watch = watches[i];
+		int max_nodes = max_nodes_list[i];
+
+		watch.StartClock();
+		auto GG = HF::GraphGenerator::GraphGenerator(ray_tracer, 0, 0);
+		auto graph = GG.BuildNetwork(
+			start,
+			spacing, 
+			max_nodes,
+			up_step,
+			up_slope,
+			down_step,
+			down_slope,
+			max_step_connections
+		);
+		watch.StopClock();
+
+		nodes_generated[i] = graph.size();
+	}
+
+	// Print Results
+	PrintTrials(watches, nodes_generated, "Nodes");
 }

@@ -5,10 +5,14 @@
 #include <string>
 
 #include "objloader_C.h"
-
+#include "performance_testing.h"
 #define eigen_plain_assert
 using namespace HF::Geometry;
+using std::string;
+using std::vector;
+
 const std::string obj_directiory = "../../Models/";
+
 void PrintArray(std::array<float, 3> in_array) {
 	std::cerr << "(" << in_array[0] << "," << in_array[1] << "," << in_array[2] << ")";
 }
@@ -898,4 +902,38 @@ namespace CInterfaceTests {
 			
 		}
 	}
+}
+
+
+/*!
+	\brief Tests how quickly the raytracer can load OBJ files.
+*/
+TEST(Performance, OBJLoader)
+{
+	// Each of these names will be loaded in a seperate trial.
+	const vector<string> objs_to_load{
+		"teapot",
+		"sibenik",
+		"energy blob",
+		"plane"
+	};
+
+	const int num_trials = objs_to_load.size();
+	vector<StopWatch> watches(num_trials);
+	vector<int> vert_count(num_trials);
+
+	// Run through trials
+	for (int i = 0; i < num_trials; i++) {
+		const auto& key = objs_to_load[i];
+		auto& watch = watches[i];
+		const string obj_path = HF::Geometry::GetTestOBJPath(key);
+
+		watch.StartClock();
+		const auto verts = LoadRawVertices(obj_path);
+		watch.StopClock();
+
+		vert_count[i] = verts.size();
+	}
+
+	PrintTrials(watches, vert_count, "vertices", objs_to_load);
 }

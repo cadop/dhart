@@ -399,6 +399,7 @@ if(HumanFactors_EnableTests)
 					${C_TEST_DRIVER_DIR}/VisibilityGraph.cpp
 					${C_TEST_DRIVER_DIR}/ViewAnalysis.cpp
 					${C_TEST_DRIVER_DIR}/PathFinding.cpp
+					${C_TEST_DRIVER_DIR}/performance_testing.h
 			)
 	elseif(${HumanFactors_Config} STREQUAL "RayTracer")
 		target_sources(
@@ -440,6 +441,7 @@ if(HumanFactors_EnableTests)
 				${C_TEST_DRIVER_DIR}/OBJLoader.cpp
 				${C_TEST_DRIVER_DIR}/SpatialStructures.cpp
 				${C_TEST_DRIVER_DIR}/AnalysisMethods.cpp
+				${C_TEST_DRIVER_DIR}/performance_testing.h
 		)
 	elseif(${HumanFactors_Config} STREQUAL "VisibilityGraph")
 		target_link_libraries(
@@ -460,6 +462,7 @@ if(HumanFactors_EnableTests)
 				${C_TEST_DRIVER_DIR}/OBJLoader.cpp
 				${C_TEST_DRIVER_DIR}/SpatialStructures.cpp
 				${C_TEST_DRIVER_DIR}/VisibilityGraph.cpp
+				${C_TEST_DRIVER_DIR}/performance_testing.h
 		)
 	elseif(${HumanFactors_Config} STREQUAL "ViewAnalysis")
 		target_link_libraries(
@@ -480,6 +483,7 @@ if(HumanFactors_EnableTests)
 				${C_TEST_DRIVER_DIR}/OBJLoader.cpp
 				${C_TEST_DRIVER_DIR}/SpatialStructures.cpp
 				${C_TEST_DRIVER_DIR}/ViewAnalysis.cpp
+				${C_TEST_DRIVER_DIR}/performance_testing.h
 		)
 	elseif(${HumanFactors_Config} STREQUAL "VisibilityGraph")
 		target_link_libraries(
@@ -500,6 +504,7 @@ if(HumanFactors_EnableTests)
 				${C_TEST_DRIVER_DIR}/OBJLoader.cpp
 				${C_TEST_DRIVER_DIR}/SpatialStructures.cpp
 				${C_TEST_DRIVER_DIR}/VisibilityGraph.cpp
+				${C_TEST_DRIVER_DIR}/performance_testing.h
 		)
 	elseif(${HumanFactors_Config} STREQUAL "Pathfinder")
 		target_link_libraries(
@@ -515,6 +520,7 @@ if(HumanFactors_EnableTests)
 			PRIVATE
 				${C_TEST_DRIVER_DIR}/SpatialStructures.cpp
 				${C_TEST_DRIVER_DIR}/PathFinding.cpp
+				${C_TEST_DRIVER_DIR}/performance_testing.h
 		)
 	endif()
 	# add_test(NAME FirstTest COMMAND HFUnitTests)
