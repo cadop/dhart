@@ -197,7 +197,7 @@ namespace CInterfaceTests {
 }
 TEST(Performance, GraphGenerator) {
 	vector<int> max_nodes = { 10, 100, 500, 1000, 5000, 10000, 50000, 100000 };
-	vector<trial> trials(max_nodes.size());	
+	vector<StopWatch> watches(max_nodes.size());	
 	vector<int> nodes_generated(max_nodes.size());	
 	
 	auto ray_tracer = CreateRTWithPlane();
@@ -212,10 +212,10 @@ TEST(Performance, GraphGenerator) {
 
 	// Run Trials
 	for (int i = 0; i < max_nodes.size(); i++) {
-		auto& this_trial = trials[i];
+		auto& this_trial = watches[i];
 		int this_max = max_nodes[i];
 
-		this_trial.start_clock();
+		this_trial.StartClock();
 		auto GG = HF::GraphGenerator::GraphGenerator(ray_tracer, 0, 0);
 		auto graph = GG.BuildNetwork(
 			start,
@@ -227,11 +227,11 @@ TEST(Performance, GraphGenerator) {
 			down_slope,
 			max_step_connections
 		);
-		this_trial.stop();
+		this_trial.StopClock();
 
 		nodes_generated[i] = graph.size();
 	}
 
 	// Print Results
-	PrintTrials(trials, nodes_generated, "Nodes");
+	PrintTrials(watches, nodes_generated, "Nodes");
 }
