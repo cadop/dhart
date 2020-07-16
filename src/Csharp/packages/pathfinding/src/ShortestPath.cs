@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 
 /*! 
-    \brief Calculate the shortest path between Points in a graph.
+    \brief Calculate the shortest path between oints in a graph.
 
     \see ShortestPath for a list of pathfinding functions.
     \see Path for information on the fundamental path datatype. 

@@ -23,7 +23,7 @@ using System;
 namespace HumanFactors.GraphGenerator
 {
     /*!
-    \brief     Generate a graph of accessible space on a mesh.
+    \brief Generate a graph of accessible space on a mesh.
 
     \remarks
      Use the graph generator to quickly map out accessible space in an environment for other
