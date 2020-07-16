@@ -195,11 +195,28 @@ namespace CInterfaceTests {
 	}
 
 }
+
+/*!
+	\brief Evaluates how quickly the graph generator can create nodes on a flat plane.
+*/
 TEST(Performance, GraphGenerator) {
-	vector<int> max_nodes = { 10, 100, 500, 1000, 5000, 10000, 50000, 100000 };
-	vector<StopWatch> watches(max_nodes.size());	
-	vector<int> nodes_generated(max_nodes.size());	
+
+	// Each element here will be evaluated in seperate trial
+	vector<int> max_nodes = { 
+		10,
+		100, 
+		500,
+		1000,
+		5000, 
+		10000, 
+	};
+
+	// Setup trial arrays
+	const int num_trials = max_nodes.size();
+	vector<StopWatch> watches(num_trials);	
+	vector<int> nodes_generated(num_trials);	
 	
+	// Set Graph generator settings
 	auto ray_tracer = CreateRTWithPlane();
 	std::array<float, 3> start{ 0,0,0 };
 	std::array<float, 3> spacing{ 0.05,0.05,0.05 };
@@ -210,8 +227,8 @@ TEST(Performance, GraphGenerator) {
 	int max_step_connections = 1;
 
 
-	// Run Trials
-	for (int i = 0; i < max_nodes.size(); i++) {
+	// Run Trials and record results
+	for (int i = 0; i < num_trials; i++) {
 		auto& this_trial = watches[i];
 		int this_max = max_nodes[i];
 

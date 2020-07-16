@@ -8,14 +8,13 @@
 using namespace std::chrono;
 using std::string;
 
-// Set the type of clock by changing this variable here
-using this_clock = std::chrono::high_resolution_clock;
+using this_clock = std::chrono::high_resolution_clock; //< Type of clock to use
 using timepoint = this_clock::time_point;
 using hf_time_units = std::chrono::milliseconds; //< Units to use
 static const string hf_time_unit_postfix = "ms"; //< shorthand for units I.E. milliseconds = ms
 
 /*
-	\brief Results of a trial with a start/end point.
+	\brief Utility class to simplify recording execution time.
 */
 struct StopWatch {
 
@@ -62,6 +61,7 @@ inline void PrintTrials(
 	const std::vector<int> num_units,
 	std::string unit_name = "Elements"
 ) {
+	// Iterate through the results of each trial.
 	for (int i = 0; i < watches.size(); i++) {
 		auto num_elements = num_units[i];
 		auto& this_trial = watches[i];
@@ -69,7 +69,8 @@ inline void PrintTrials(
 
 		float units_per_ms = static_cast<float>(num_elements) / static_cast<float>(duration);
 
-		std::cerr << "TRIAL " << i << " | "
+		// Print results.
+		std::cerr << "Trial " << i << " | "
 			<< "Count of " << unit_name << ": " << num_elements << ", "
 			<< "Time: " << duration << hf_time_unit_postfix << ", "
 			<< unit_name << " / ms: " << units_per_ms
