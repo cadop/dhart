@@ -32,3 +32,14 @@ Docstring examples should be compliant with ``doctest``.
 Navigate to the `docs` folder and run:
 
 ``make doctest``
+
+
+You can also test with ``pytest`` by navigating to the `build\Python` directory and first run:
+
+``pytest``
+
+then run 
+
+``pytest --doctest-modules --ignore-glob="*/Rhino*.py"``
+
+to test all files except for the ones requiring Rhino.
