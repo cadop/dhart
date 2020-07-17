@@ -3,10 +3,10 @@ import math
 from humanfactorspy.geometry import LoadOBJ, CommonRotations
 from humanfactorspy.raytracer import EmbreeBVH
 from humanfactorspy.graphgenerator.graph_generator import GenerateGraph
-
+import humanfactorspy
 
 def test_GetNodes():
-    mesh_path = "Example Models\\plane.obj"
+    mesh_path = humanfactorspy.get_sample_model("plane.obj")
     obj = LoadOBJ(mesh_path, rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(obj)
     g = GenerateGraph(bvh, (0, 0, 0.1), (0.5, 0.5, 0.5), 1000)
@@ -16,7 +16,7 @@ def test_GetNodes():
 
 
 def test_UnsuccessfulGraphCreationDoesntThrow():
-    mesh_path = "Example Models\\plane.obj"
+    mesh_path = humanfactorspy.get_sample_model("plane.obj")
     obj = LoadOBJ(mesh_path, rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(obj)
     g = GenerateGraph(bvh, (200000, 0, 0.1), (0.5, 0.5, 0.5), 1000)
@@ -24,7 +24,7 @@ def test_UnsuccessfulGraphCreationDoesntThrow():
 
 
 def test_EnsureParallelGraphIsEquivalentToStandardGraph():
-    mesh_path = "Example Models\\plane.obj"
+    mesh_path = humanfactorspy.get_sample_model("plane.obj")
     obj = LoadOBJ(mesh_path, rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(obj)
 
@@ -48,9 +48,8 @@ def test_EnsureParallelGraphIsEquivalentToStandardGraph():
         par_node = parallel_array[i]
 
         distance = math.sqrt(
-            pow(std_node[0] - par_node[0], 2)
-            + pow(std_node[1] - par_node[1], 2)
-            + pow(std_node[2] - par_node[2], 2)
-        )
+                            pow(std_node[0] - par_node[0], 2)
+                            + pow(std_node[1] - par_node[1], 2)
+                            + pow(std_node[2] - par_node[2], 2))
 
         assert distance < 0.001

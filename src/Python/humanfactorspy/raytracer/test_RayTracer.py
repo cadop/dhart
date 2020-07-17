@@ -6,17 +6,18 @@ from humanfactorspy.raytracer.embree_raytracer import *
 
 from time import time
 
+import humanfactorspy
 # Setup
 
 
 def test_BVHCreation():
-    mesh_path = "Example Models\\sponza.obj"
+    mesh_path = humanfactorspy.get_sample_model("sponza.obj") 
     obj = LoadOBJ(mesh_path, rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(obj)
 
 
 def test_FireRay():
-    plane = LoadOBJ("Example Models\\plane.obj", rotation=CommonRotations.Yup_to_Zup)
+    plane = LoadOBJ(humanfactorspy.get_sample_model("plane.obj"), rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(plane)
     origins = [(0, 0, 1), (1, 1, 1), (-1, -1, 1)]
     direction = (0, 0, -1)
@@ -37,7 +38,7 @@ def test_FireRay():
 
 
 def test_FireMultipleOfTheSameRay():
-    plane = LoadOBJ("Example Models\\plane.obj", rotation=CommonRotations.Yup_to_Zup)
+    plane = LoadOBJ(humanfactorspy.get_sample_model("plane.obj"), rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(plane)
     origins = [(0, 0, 1), (0, 0, 1), (0, 0, 1)]
     directions = [(0, 0, -1), (0, 0, -1), (0, 0, -1)]
@@ -50,7 +51,7 @@ def test_FireMultipleOfTheSameRay():
 
 
 def test_MultipleOriginSameDirection():
-    plane = LoadOBJ("Example Models\\plane.obj", rotation=CommonRotations.Yup_to_Zup)
+    plane = LoadOBJ(humanfactorspy.get_sample_model("plane.obj"), rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(plane)
     origins = [(1, 0, 1), (1, 1, 1), (0, 0, 1)]
     directions = (0, 0, -1)
@@ -66,7 +67,7 @@ def test_MultipleOriginSameDirection():
 
 
 def test_MultipleDirectionSameOrigin():
-    plane = LoadOBJ("Example Models\\plane.obj", rotation=CommonRotations.Yup_to_Zup)
+    plane = LoadOBJ(humanfactorspy.get_sample_model("plane.obj"), rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(plane)
     origins = [(0, 0, 1)]
     directions = [(0, 0, -1), (0, 0, 1), (0, 1, 0)]
@@ -84,7 +85,7 @@ def test_MultipleDirectionSameOrigin():
 
 
 def test_MultipleRaysMiss():
-    plane = LoadOBJ("Example Models\\plane.obj", rotation=CommonRotations.Yup_to_Zup)
+    plane = LoadOBJ(humanfactorspy.get_sample_model("plane.obj"), rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(plane)
     origins = [(0, 0, 1), (0, 0, 1), (0, 0, 1)]
     directions = [(0, 0, 1), (0, 1, 0), (1, 0, 0)]
@@ -98,7 +99,7 @@ def test_MultipleRaysMiss():
 
 
 def test_MultipleOcclusionRays():
-    plane = LoadOBJ("Example Models\\plane.obj", rotation=CommonRotations.Yup_to_Zup)
+    plane = LoadOBJ(humanfactorspy.get_sample_model("plane.obj"), rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(plane)
     origins = [(0.5, 0, 1), (0, 0.5, 1), (0, 0, 1)]
     directions_that_should_miss = [(0, 0, 1), (0, 1, 0), (1, 0, 0)]
@@ -116,7 +117,7 @@ def test_MultipleOcclusionRays():
 
 
 def test_SingleOcclusionRays():
-    plane = LoadOBJ("Example Models\\plane.obj", rotation=CommonRotations.Yup_to_Zup)
+    plane = LoadOBJ(humanfactorspy.get_sample_model("plane.obj"), rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(plane)
     origin = (0, 0, 1)
     directions_that_should_miss = [(0, 0, 1), (0, 1, 0), (1, 0, 0)]
@@ -140,7 +141,7 @@ def test_SingleOcclusionRays():
 
 
 def test_FireRayDistance():
-    plane = LoadOBJ("Example Models\\plane.obj", rotation=CommonRotations.Yup_to_Zup)
+    plane = LoadOBJ(humanfactorspy.get_sample_model("plane.obj"), rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(plane)
     origin = (0, 0, 1)
     direction = (0, 0, -1)
@@ -150,7 +151,7 @@ def test_FireRayDistance():
 
 
 def test_FireMultipleRayDistance():
-    plane = LoadOBJ("Example Models\\plane.obj", rotation=CommonRotations.Yup_to_Zup)
+    plane = LoadOBJ(humanfactorspy.get_sample_model("plane.obj"), rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(plane)
     origins = [(0, 0, 1), (0, 0, 2), (0, 0, 3)] * 5000
 

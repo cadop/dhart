@@ -5,8 +5,10 @@ from humanfactorspy.graphgenerator import GenerateGraph
 from humanfactorspy.raytracer import EmbreeBVH
 from humanfactorspy.pathfinding import DijkstraShortestPath
 
+import humanfactorspy
+
 # Load BVH
-obj_path = "H:\\HumanMetrics\\Codebase\\HumanFactors\\out\\install\\x64-Debug\\Example Models\\plane.obj"
+obj_path = humanfactorspy.get_sample_model("plane.obj")
 
 loaded_obj = LoadOBJ(obj_path, rotation=CommonRotations.Yup_to_Zup)
 embree_bvh = EmbreeBVH(loaded_obj)
@@ -14,7 +16,7 @@ embree_bvh = EmbreeBVH(loaded_obj)
 # Create graph
 start_point = (0, 0, 1)
 spacing = (0.01, 0.01, 0.01)
-max_nodes = 1500000
+max_nodes = 100000
 graph = GenerateGraph(embree_bvh, start_point, spacing, max_nodes)
 
 # Get Nodes

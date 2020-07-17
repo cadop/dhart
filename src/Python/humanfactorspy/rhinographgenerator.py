@@ -26,18 +26,15 @@ sqrt = math.sqrt
 
 max_nodes : int = 5000
 
-def CalculateDistance(
-    p1: Tuple[float, float, float], p2: Tuple[float, float, float],
-):
+def CalculateDistance(p1: Tuple[float, float, float], p2: Tuple[float, float, float]):
     """ Calculate the distance from p1 to p2 """
     return sqrt(pow(p1[0] - p2[0], 2), pow(p1[1] - p2[1], 2), pow(p1[2] - p2[2], 2))
 
 
-def rayDist(
-    bvh: EmbreeBVH,
-    origin: Tuple[float, float, float], 
-    direction: Tuple[float, float, float]
-) -> Union[float, None]:
+def rayDist(bvh: EmbreeBVH,
+            origin: Tuple[float, float, float], 
+            direction: Tuple[float, float, float]
+            ) -> Union[float, None]:
     """ Get the distance from the origin to its hit point
     
     Args:

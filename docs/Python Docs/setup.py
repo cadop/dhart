@@ -11,7 +11,8 @@ setup(name='humanfactors',
       ],
       install_requires=[
             'numpy',
-            'scipy'
+            'scipy',
+            'matplotlib',
       ],
       zip_safe=True,
       include_package_data=True

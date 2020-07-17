@@ -2,25 +2,25 @@ import tkinter as tk
 from tkinter import filedialog
 import numpy
 
-# import json
-
 from humanfactorspy.geometry import LoadOBJ, CommonRotations
 from humanfactorspy.raytracer import EmbreeBVH
 from humanfactorspy.graphgenerator import GenerateGraph
 from humanfactorspy.visibilitygraph import VisibilityGraphUndirectedAllToAll
 from humanfactorspy.spatialstructures.graph import CostAggregationType
 
+import humanfactorspy
+
 # Try to load ujson since it's really fast
 try:
     import orjson as this_json
     from sys import setrecursionlimit
     setrecursionlimit(99999)
-except:
-  #  import json as this_json
 
+except:
+    import json as this_json
     print("Ujson not detected. Using standard, slower python json writer ")
 
-obj_path = None
+obj_path = humanfactorspy.get_sample_model("Weston_Analysis.obj")
 ray_count = int(pow(10, 4.5))
 height = 120
 start_point = (-1, -6, 1623.976928)
@@ -38,16 +38,14 @@ obj = LoadOBJ(obj_path, rotation=CommonRotations.Yup_to_Zup)
 bvh = EmbreeBVH(obj)
 
 print("Generating Graph")
-graph = GenerateGraph(
-    bvh,
-    start_point,
-    spacing,
-    max_nodes,
-    up_step=20,
-    down_step=20,
-    max_step_connections=2,
-    cores=-1,
-)
+graph = GenerateGraph(bvh,
+                    start_point,
+                    spacing,
+                    max_nodes,
+                    up_step=20,
+                    down_step=20,
+                    max_step_connections=2,
+                    cores=-1)
 if not graph:
     print("No graph generated!")
     exit()
@@ -68,16 +66,10 @@ VG = VisibilityGraphUndirectedAllToAll(bvh, points, height)
 
 print("Aggregating.")
 VG.CompressToCSR()
-json_dict["vg_sum"] = VG.AggregateEdgeCosts(
-    CostAggregationType.SUM, False
-).array.tolist()
-json_dict["vg_count"] = VG.AggregateEdgeCosts(
-    CostAggregationType.COUNT, False
-).array.tolist()
-json_dict["vg_avg"] = VG.AggregateEdgeCosts(
-    CostAggregationType.AVERAGE, False
-).array.tolist()
+json_dict["vg_sum"] = VG.AggregateEdgeCosts(CostAggregationType.SUM, False).array.tolist()
+json_dict["vg_count"] = VG.AggregateEdgeCosts(CostAggregationType.COUNT, False).array.tolist()
+json_dict["vg_avg"] = VG.AggregateEdgeCosts(CostAggregationType.AVERAGE, False).array.tolist()
 
 print("Writing")
-with open("out_vg_score.json", "wb") as out_json:
+with open("out_vg_score.json", "w") as out_json:
     out_json.write(this_json.dumps(json_dict))

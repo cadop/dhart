@@ -13,7 +13,7 @@
 import os
 import sys
 
-sys.path.insert(0, os.path.abspath('../../../python_release/'))
+sys.path.insert(0, os.path.abspath('../../../build/Python'))
 
 # master_doc = 'source/index'
 
@@ -40,8 +40,8 @@ extensions = ['sphinx.ext.autodoc', 'sphinx.ext.imgmath', 'sphinx.ext.napoleon',
 # Napoleon settings
 napoleon_google_docstring = True
 napoleon_numpy_docstring = True
-napoleon_include_init_with_doc = False
-napoleon_include_private_with_doc = False
+napoleon_include_init_with_doc = True
+napoleon_include_private_with_doc = True
 napoleon_include_special_with_doc = True
 napoleon_use_admonition_for_examples = False
 napoleon_use_admonition_for_notes = False
@@ -122,8 +122,7 @@ html_static_path = ['_static']
 html_theme_options = {
     "edit_link": "true",
     "sidebar": "right",
-    "rootlinks": [("http://", "Github"),
-                  ("http://", "Paper")]
+    "rootlinks": [("http://", "Git")]
 }
 
 intersphinx_mapping = {

@@ -3,8 +3,10 @@ from humanfactorspy.geometry import LoadOBJ, CommonRotations
 from humanfactorspy.raytracer import EmbreeBVH
 from humanfactorspy.viewanalysis import SphericalViewAnalysis, SphericalViewAnalysisAggregate, AggregationType
 
+import humanfactorspy
+
 # Load BVH
-obj_path = "H:\\HumanMetrics\\Codebase\\HumanFactors\\out\\install\\x64-Debug\\Example Models\\plane.obj"
+obj_path = humanfactorspy.get_sample_model("plane.obj")
 
 loaded_obj = LoadOBJ(obj_path, rotation=CommonRotations.Yup_to_Zup)
 bvh = EmbreeBVH(loaded_obj)
@@ -15,7 +17,7 @@ ray_count = 1000
 height = 1.7
 
 results = SphericalViewAnalysis(bvh, p1, ray_count, height)
-aggregate_results = SphericalViewAnalysisAggregate(bvh, p1, ray_count, height, AggregationType.AVERAGE)
+aggregate_results = SphericalViewAnalysisAggregate(bvh, p1, ray_count, height, agg_type=AggregationType.AVERAGE)
 
 print(results)
 print(aggregate_results)

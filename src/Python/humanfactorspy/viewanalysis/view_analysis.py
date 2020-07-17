@@ -46,6 +46,7 @@ def SphericalViewAnalysisAggregate(
         AT: aggregation method to use for distance. 
 
     Examples:
+
         Fire 150 rays for 3 nodesat 1.7m, then get the sum of the distance to every hit for all three
 
         >>> from humanfactorspy.geometry import CommonRotations
@@ -78,8 +79,11 @@ def SphericalViewAnalysisAggregate(
 
 
     Returns:
+
         ViewAnalysisAggregates: view analysis scores resulting from the view analysis calculation
+
     """
+    
     if isinstance(nodes, tuple):
         nodes = [nodes]
 
@@ -91,20 +95,9 @@ def SphericalViewAnalysisAggregate(
         data_ptr = nodes.data_pointer
         size = len(nodes)
 
-    (
-        size,
-        score_vector_ptr,
-        score_data_ptr,
-    ) = viewanalysis_native_functions.C_SphericalViewAnalysisAggregate(
-        bvh.pointer,
-        data_ptr,
-        size,
-        ray_count,
-        height,
-        agg_type.value,
-        upper_fov=upward_fov,
-        lower_fov=downward_fov,
-    )
+    (size,score_vector_ptr,score_data_ptr) = viewanalysis_native_functions.C_SphericalViewAnalysisAggregate(
+                                                bvh.pointer, data_ptr, size, ray_count, height,
+                                                agg_type.value, upper_fov=upward_fov, lower_fov=downward_fov)
 
     return ViewAnalysisAggregates(score_vector_ptr, score_data_ptr, size)
 
@@ -124,6 +117,7 @@ def SphericalViewAnalysis(
     retrieved from the function SphericallyDistributeRays.
 
     Args:
+
         bvh: the BVH for the geometry you're shooting at
         nodes: A list of tuples containing x,y,z coordinates of points to analyze
         ray_count: Amount of rays to shoot, evenly distributed in a sphere around the center
@@ -132,9 +126,11 @@ def SphericalViewAnalysis(
         height: height to offset nodes from the ground in meters
 
     Returns:
+
         RayResult: A list of results of shape (ray_count, len(nodes))
 
-        Example:
+    Examples:
+
         Conducting view analysis on 2 nodes firing 10 rays.
         
         >>> from humanfactorspy.geometry import LoadOBJ, MeshInfo, CommonRotations
@@ -154,6 +150,7 @@ def SphericalViewAnalysis(
          [(-1.      , -1) (-1.      , -1) (-1.      , -1) (-1.      , -1)
           (-1.      , -1) ( 5.40725 , 39) (-1.      , -1) (-1.      , -1)
           ( 3.529445, 39) (-1.      , -1)]]
+
     """
     if isinstance(nodes, tuple):
         nodes = [nodes]
@@ -195,7 +192,12 @@ def SphericallyDistributeRays(num_rays: int, upward_fov : float = 50, downward_f
         upward_fov: the maximum angle upwards to generate directions for in degrees
         downward_fov: the maximum angle downwards to generate directions for in degrees
 
-    Example:
+    Returns:
+
+        A two dimensional array of directions
+
+    Examples:
+
         >>> from humanfactorspy.viewanalysis import SphericallyDistributeRays
         >>> print(SphericallyDistributeRays(10))
         [[-0.         -1.          0.        ]
@@ -208,8 +210,7 @@ def SphericallyDistributeRays(num_rays: int, upward_fov : float = 50, downward_f
          [-0.51228005  0.45454556  0.72866833]
          [-0.09913298  0.6363636  -0.7649929 ]
          [ 0.4396428   0.8181818   0.37053034]]
-    Returns:
-        A two dimensional array of directions
+
     
     """
 

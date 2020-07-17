@@ -2,19 +2,18 @@ import pytest
 
 from humanfactorspy.geometry import LoadOBJ, CommonRotations
 from humanfactorspy.raytracer import EmbreeBVH
-from humanfactorspy.viewanalysis.view_analysis import (
-    SphericalViewAnalysisAggregate,
-    AggregationType,
-    SphericalViewAnalysis,
-    SphericallyDistributeRays
-)
+from humanfactorspy.viewanalysis.view_analysis import (SphericalViewAnalysisAggregate,
+                                                        AggregationType,SphericalViewAnalysis,
+                                                        SphericallyDistributeRays)
+
+import humanfactorspy
 
 from time import time
 
 # Setup
 
 def test_Aggregates():
-    mesh_path = "Example Models\\plane.obj"
+    mesh_path = humanfactorspy.get_sample_model("plane.obj")
     obj = LoadOBJ(mesh_path,rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(obj)
 
@@ -27,7 +26,7 @@ def test_Aggregates():
     assert len(scores.array) == len(points)
 
 def test_AggregateCorrectness():
-    mesh_path = "Example Models\\plane.obj"
+    mesh_path = humanfactorspy.get_sample_model("plane.obj")
     obj = LoadOBJ(mesh_path, rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(obj)
 
@@ -43,7 +42,7 @@ def test_AggregateCorrectness():
 
 
 def test_NonAggregate():
-    mesh_path = "Example Models\\plane.obj"
+    mesh_path = humanfactorspy.get_sample_model("plane.obj")
     obj = LoadOBJ(mesh_path, rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(obj)
 

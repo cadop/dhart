@@ -14,7 +14,7 @@ def GenerateGraph(
     bvh: EmbreeBVH,
     start_point: Tuple[float, float, float],
     spacing: Tuple[float, float, float],
-    max_nodes: int,
+    max_nodes: int = -1,
     up_step: float = 0.197,
     up_slope: float = 20,
     down_step: float = 0.197,
@@ -31,8 +31,8 @@ def GenerateGraph(
             If this isn't above solid ground, the graph cannot be generated.
         spacing (Tuple[float, float, float]): Space between nodes.
              Lower values will yield more nodes for a higher resolution graph. 
-        max_nodes (int): The maximum amount of nodes to generate. Note:
-            This only counts nodes that have had their children calculated
+        max_nodes (int, optional): The maximum amount of nodes to generate. Default is
+            no maximum. Note: This only counts nodes that have had their children calculated
             so the actual number of nodes may be higher.
         up_step (float, optional): Maximum height of a step the graph can traverse.
              Any steps higher this will be considered inaccessible. Defaults to 0.197.
@@ -59,23 +59,40 @@ def GenerateGraph(
         >>> from humanfactorspy.raytracer import EmbreeBVH  
         >>> from humanfactorspy.geometry.mesh_info import ConstructPlane
         >>> from humanfactorspy.graphgenerator import GenerateGraph
+        >>> import humanfactorspy
 
         >>> MI = ConstructPlane()
         >>> MI.Rotate(CommonRotations.Zup_to_Yup)
         >>> BVH = EmbreeBVH(MI)
-        >>> graph = GenerateGraph(BVH, (0,0,1), (1,1,1), 2)
+        >>> graph = GenerateGraph(BVH, (0,0,1), (1,1,1),3)
         >>> for node in graph.getNodes():
         ...     print(f"({node[0]}, {node[1]}, {node[2]})")
-        (0.0, 0.0, 5.960464477539063e-08)
-        (-1.0, -1.0, 1.1920928955078125e-07)
-        (-1.0, 0.0, 5.960464477539063e-08)
-        (-1.0, 1.0, -1.1920928955078125e-07)
-        (0.0, 1.0, -1.1920928955078125e-07)
-        (1.0, 1.0, -1.1920928955078125e-07)
-        (-2.0, -2.0, 2.384185791015625e-07)
-        (-2.0, -1.0, 1.1920928955078125e-07)
-        (-2.0, 0.0, 5.960464477539063e-08)
+        (0.0, 0.0, 0.0)
+        (-1.0, -1.0, 0.0)
+        (-1.0, 0.0, 0.0)
+        (-1.0, 1.0, -0.0)
+        (-2.0, -2.0, 0.0)
+        (-2.0, -1.0, 0.0)
+        (-2.0, 0.0, 0.0)
+        (-2.0, 1.0, -0.0)
+
+        Alternatively, you can load an obj file
+
+        >>> obj_path = humanfactorspy.get_sample_model("plane.obj")
+        >>> obj = LoadOBJ(obj_path, rotation=CommonRotations.Yup_to_Zup)
+        >>> bvh = EmbreeBVH(obj)
+
+        >>> start_point = (-1, -6, 1623.976928)
+        >>> spacing = (0.5, 0.5, 0.5)
+        >>> max_nodes = 500
+
+        >>> graph = GenerateGraph(bvh, start_point, spacing, max_nodes, cores=-1)
+        >>> print( len(graph.getNodes()) )
+        594
+
+
     """   
+
     pointer = graph_generator_native_functions.GenerateGraph(
         bvh.pointer,
         start_point,
