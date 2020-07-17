@@ -67,9 +67,9 @@ namespace HumanFactors.NativeUtils
         public bool IsValid() => (size > 0 && data != IntPtr.Zero && vector != IntPtr.Zero);
     }
 
-    /// <summary>
-    /// Holds global information relevant to interop.
-    /// </summary>
+    /*! 
+        \brief Holds global information relevant to interop.
+    */
     internal static class NativeConstants
     {
         /// <summary>
