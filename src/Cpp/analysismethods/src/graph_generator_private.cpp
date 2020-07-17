@@ -92,6 +92,25 @@ namespace HF::GraphGenerator {
 		return out_directions;
 	}
 
+	/*!
+		\brief Move a node in `direction` by `dist` units.
+
+		\tparam D Must have [0], [1], [2] defined.
+		\tparam N Must have [0], [1], [2] defined. 
+
+		\param dist Distance to move the node.
+		\param direction Direction to move the node in.
+		\param node Node to move
+
+		\post Node's members at [0], [1], [2] been moved in `direction` by `dist` units.
+	*/
+	template<typename D, typename N>
+	inline void MoveNode(const float dist, const D& direction, N& node) {
+		node[0] += (direction[0] * dist);
+		node[1] += (direction[1] * dist);
+		node[2] += (direction[2] * dist);
+	}
+
 	inline bool GraphGeneratorPrivate::WalkableCheck(const Node& position)
 	{
 		// Create a copy of position so it isn't overridden by checkray
@@ -456,67 +475,54 @@ namespace HF::GraphGenerator {
 		} // End while loop for max nodes and queue
 	}
 
-	bool GraphGeneratorPrivate::CheckRay(v3& position, const v3& direction, HIT_FLAG flag)
+	inline bool GraphGeneratorPrivate::CheckRay(v3& position, const v3& direction, HIT_FLAG flag)
 	{
-		// Round the z value before raycast to assist with uniformity of embree output
-		//position[2] = roundhf(position[2], 1000.0f, 0.001f);
-
+		// Setup default params
+		float dist = -1.0f;
+		int id = -1.0f;
+		bool res = false;
+		
 		// Switch Geometry based on hitflag
 		switch (flag) {
 		case HIT_FLAG::FLOORS: // Both are the same for now. Waiting on obstacle support
 		case HIT_FLAG::OBSTACLES:
-			return GG.ray_tracer.FireRay(position, direction);
+			res = GG.ray_tracer.FireAnyRay(position, direction, dist, id);
 			break;
-
 		case HIT_FLAG::BOTH:
-			return GG.ray_tracer.FireRay(position, direction);
+			res = GG.ray_tracer.FireAnyRay(position, direction, dist, id); 
+			break;
 		default:
 			throw std::exception("Invalid CheckRay flag");
 		}
-	}
 
-	bool GraphGeneratorPrivate::CheckRay(Node& position, const v3& direction, HIT_FLAG flag) 
-	{
-		// Round the z value before raycast to assist with uniformity of embree output
-		//position[2] = roundhf(position[2], 1000.0f, 0.001f);
-
-		bool hit_result;
-
-		// Switch Geometry based on hitflag
-		switch (flag) 
-		{
-			// Floors and Obstacles are identical for now.
-			case HIT_FLAG::FLOORS:
-			case HIT_FLAG::OBSTACLES:
-				// Store the result of the ray intersection
-				hit_result = GG.ray_tracer.FireRay(position[0],position[1],position[2],
-													direction[0],direction[1],direction[2],
-													-1.0f, GG.walkable_surfaces);
-				break;
-
-			case HIT_FLAG::BOTH:
-				hit_result = GG.ray_tracer.FireRay(position[0],position[1],position[2],
-													direction[0],direction[1],direction[2]);
-				break;
-
-			default:
-				throw std::exception("Invalid CheckRay flag");
-		} // End Switch
-
-		// If the ray hit
-		if (hit_result)
-		{
+		// If successful, move the node
+		if (res) {
+			MoveNode(dist, direction, position);
+			
 			// Truncate the Z value before leaving this function
 			// This is for clarity, since the node was already modified
 			position[2] = trunchf(position[2]);
 		}
 
-		// Otherwise ray didn't hit, return False
-		else
-		{
-			return false;
-		}
+		// Return the result
+		return res;
+	}
 
+	inline bool GraphGeneratorPrivate::CheckRay(Node& position, const v3& direction, HIT_FLAG flag) {
+		
+		// Copy Node's position
+		auto pos = position.getArray();
+		
+		//Call the other overload, writing to pos
+		if (CheckRay(pos, direction, flag)) {
+
+			// Carry over changes to pos to the node. 
+			position[0] = pos[0];
+			position[1] = pos[1];
+			position[2] = pos[2];
+			return true;
+		}
+		return false;
 	}
 
 	inline void GraphGeneratorPrivate::ComputerParent(
