@@ -10,23 +10,19 @@ using System.Runtime.InteropServices;
 
 namespace HumanFactors.ViewAnalysis
 {
-    /// <summary> A struct containing the results of a ray intersection. </summary>
+    /*! \brief The results of a ray intersection. */
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
     public struct ViewAnalysisResult
     {
-        /// <summary>
-        /// The distance from the origin to the hitpoint. Equal to -1 if the ray didn't hit
-        /// </summary>
+        /// \brief The distance from the origin to the hitpoint. Equal to -1 if the ray didn't hit
         float distance;
-        /// <summary> The ID of the mesh hit. </summary>
+        /// \brief The ID of the intersected mesh. -1 if the ray didn't intersect any geometry.
         int meshid;
     }
-
-
-    /// <summary>
-    /// An array of results from <see cref="ViewAnalysis.ViewAnalysisStandard(EmbreeBVH,
-    /// IEnumerable{Vector3D}, int, float, float, float)" />
-    /// </summary>
+    
+    /*! 
+         \brief  An array of ViewAnalysisResult from ViewAnalysis.ViewAnalysisStandard
+   */
     public class ResultArray : NativeArray2D<ViewAnalysisResult>
     {
         /// <summary> Initializes a new instance of the <see cref="ResultArray" /> class. </summary>
@@ -35,10 +31,12 @@ namespace HumanFactors.ViewAnalysis
         protected override bool ReleaseHandle() => HF_STATUS.OK == NativeMethods.C_DeleteResultVector(handle);
     }
 
-    /// <summary>
-    /// An array of directions from <see cref="ViewAnalysis.SphericallyDistributeRays(int, float,
-    /// float)" />
-    /// </summary>
+    /*! 
+        \brief An array of float from ViewAnalysis.SphericallyDistributeRays
+
+        \details
+        Every 3 floats represent a direction.
+    */
     public class DirectionArray : NativeArray2D<float>
     {
         /// <summary> Initializes a new instance of the <see cref="DirectionArray" /> class. </summary>
