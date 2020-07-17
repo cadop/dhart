@@ -483,7 +483,7 @@ namespace HF::GraphGenerator {
 		bool res = false;
 		
 		// Round the z value before raycast to assist with uniformity of embree output
-		position[2] = roundhf(position[2]);
+		// position[2] = roundhf(position[2]); Was not needed, leaving here for potential use in future. 
 		
 		// Switch Geometry based on hitflag
 		switch (flag) {
