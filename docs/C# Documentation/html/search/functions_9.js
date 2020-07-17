@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['releasehandle_167',['ReleaseHandle',['../class_human_factors_1_1_geometry_1_1_mesh_info.html#a9ed5e9129b511932a34c79ead954007e',1,'HumanFactors.Geometry.MeshInfo.ReleaseHandle()'],['../class_human_factors_1_1_pathfinding_1_1_path.html#a979e48954fe6d869827b855cdc39d060',1,'HumanFactors.Pathfinding.Path.ReleaseHandle()']]],
-  ['rotatemesh_168',['RotateMesh',['../class_human_factors_1_1_geometry_1_1_mesh_info.html#a3f9bd73c9c82e777bb083439d457b8ad',1,'HumanFactors.Geometry.MeshInfo.RotateMesh(float xrot, float yrot, float zrot)'],['../class_human_factors_1_1_geometry_1_1_mesh_info.html#a62f20076e25f8f2c23c9ca473a98ed9d',1,'HumanFactors.Geometry.MeshInfo.RotateMesh(Vector3D rotation)']]]
+  ['nativearray_410',['NativeArray',['../class_human_factors_1_1_native_utils_1_1_native_array.html#a7937d264e0ecfc2e59da02f385c4cf09',1,'HumanFactors::NativeUtils::NativeArray']]],
+  ['nativearray2d_411',['NativeArray2D',['../class_human_factors_1_1_native_utils_1_1_native_array2_d.html#ad4c130f73ed7ffe9b7c59918f5583c46',1,'HumanFactors::NativeUtils::NativeArray2D']]],
+  ['nativeobject_412',['NativeObject',['../class_human_factors_1_1_native_utils_1_1_native_object.html#ae7f34573598d48a9ef666b96895c7201',1,'HumanFactors::NativeUtils::NativeObject']]],
+  ['nodelist_413',['NodeList',['../class_human_factors_1_1_spatial_structures_1_1_node_list.html#a7f359e67cb5f55b8c4652ed87c3b919f',1,'HumanFactors::SpatialStructures::NodeList']]]
 ];

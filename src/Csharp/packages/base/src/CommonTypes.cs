@@ -13,45 +13,53 @@ namespace HumanFactors
     /// </summary>
     public static class Extensions
     {
-        /// <summary>
-        /// Determines whether this float is finite.
-        /// </summary>
-        /// <param name="s">The float to check.</param>
-        /// <returns>
-        ///   <c>true</c> if the specified float is finite; otherwise, <c>false</c>.
-        /// </returns>
-        /// <remarks> A float is finite if it is not equal to NAN, positive infinity, or negative infinity.</remarks>
+        /*!
+            \brief Check if this float is finite. 
+            \param s The float to check.
+            \returns true if this float is finite; otherwise, false.
+            \details A float is finite if it is not equal to NAN, positive infinity, or negative infinity.
+        */
         public static bool IsFinite(this Single s) 
             => !(Single.IsNaN(s) || Single.IsInfinity(s) || Single.IsNegativeInfinity(s));
 
     }
 
-    /// <summary>
-    /// A three dimensional vector.
-    /// </summary>
-    public struct Vector3D {
-        public readonly float x, y, z;
+    /*! 
+        \brief A three dimensional vector with built in utility functions. 
+         
+        \details 
+        The Vector3D is the fundamental type of HumanFactors for handling position 
+        and direction values. 
 
-        /// <summary>
-        /// Initializes a new instance <see cref="Vector3D"/>.
-        /// </summary>
-        /// <param name="X">The x coordinate.</param>
-        /// <param name="Y">The y coordinate.</param>
-        /// <param name="Z">The z coordinate.</param>
+        \remarks
+        If using another library with similar types such as unity, 
+        consider making extension methods to easily convert them
+        to Vector3D.
+         
+    */
+    public struct Vector3D {
+        public readonly float x; ///< X component of this vector
+        public readonly float y; ///< Y component of this vector 
+        public readonly float z; ///< Z component of this vector
+
+        /*!
+            \brief Create a new instance of Vector3D
+            \param X The x coordinate.
+            \param Y The y coordinate.
+            \param Z The z coordinate.
+        */
         public Vector3D(float X, float Y, float Z)
         {
             x = X; y = Y; z = Z;
         }
 
-        /// <summary>
-        /// Get a component of this vector as if it were an array of 3 floats
-        /// </summary>
-        /// <value>
-        /// The index of the coordinate to get.
-        /// </value>
-        /// <param name="i">Index of the coordinate</param>
-        /// <returns> The x coordinate for 0, the y coordinate for 1, the z coordinate for 2 </returns>
-        /// <exception cref="System.ArgumentOutOfRangeException"> the input is greater than 2 or less than 0 </exception>
+        /*! 
+            \brief Get a component of this vector as if it were an array of 3 floats
+            \param i The index of the coordinate to get.
+            \returns The x coordinate for 0, the y coordinate for 1, the z coordinate for 2.
+            
+            \exception System.ArgumentOutOfRangeException i is greater than 2 or less than 0.
+        */
         public float this[int i]
         {
             get
@@ -70,20 +78,17 @@ namespace HumanFactors
             }
         }
 
-
-
-
-        /// <summary>
-        /// Convert this vector3D to an array of floats
-        /// </summary>
-        /// <returns>A 3 element array containing X,Y, and Z</returns>
+        /*!
+            \brief  Convert this vector3D to an array of floats
+            \returns A 3 element array containing X, Y, and Z
+        */
         public float[] ToArray() => new float[3] { x, y, z, };
-
-        /// <summary>
-        /// Calculate the distance between this vector and <paramref name="V2"/>
-        /// </summary>
-        /// <param name="V2">The vector to calculate distance to </param>
-        /// <returns> The distance between this vector and <paramref name="V2"/> </returns>
+        
+        /*!
+            \brief Calculate the distance between this vector and another.
+            \param V2 The vector to calculate distance to.
+            \returns The distance between this vector and V2.    
+        */
         public float DistanceTo(Vector3D V2)
         {
             return (float)Math.Sqrt(
@@ -93,11 +98,11 @@ namespace HumanFactors
             );
         }
 
-        /// <summary>
-        /// Check if this point is valid.
-        /// </summary>
-        /// <returns><see langword="false"/> if the point contains NaN, </returns>
-        /// <remarks> A point is considered valid if all of its coordinates are finite <see cref="HumanFactors.Extensions.IsFinite(float)"/> </remarks>
+        /*!
+            \brief Check if this vector is valid.
+            \returns false if the point contains any components that are not finite.
+            \see Single.IsFinite() for more information on how this is calculated.        
+        */    
         public bool IsValid() => x.IsFinite() && y.IsFinite() && z.IsFinite();
    };
 }

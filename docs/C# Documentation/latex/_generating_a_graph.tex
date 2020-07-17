@@ -27,7 +27,7 @@ For now, we will begin with the minimum required settings to run the Graph Gener
 
 {\itshape Figure} {\bfseries{3.\+1}} {\itshape Blank H\+F\+Example\+Script.\+cs}
 
-To begin\+: open the blank H\+F\+Example Script that we created in the project setup by double clicking on it in the Unity editor if it isn\textquotesingle{}t open already.\hypertarget{_generating_a_graph_autotoc_md19}{}\doxysubsection{Using Declarations}\label{_generating_a_graph_autotoc_md19}
+To begin\+: open the blank H\+F\+Example Script that we created in the project setup by double clicking on it in the Unity editor if it isn\textquotesingle{}t open already. You should see a blank page like the above. If you\textquotesingle{}re coming from a previous script, please clear it so it matches this.\hypertarget{_generating_a_graph_autotoc_md19}{}\doxysubsection{Using Declarations}\label{_generating_a_graph_autotoc_md19}
  
 \begin{DoxyInlineImage}
 \includegraphics[height=\baselineskip,keepaspectratio=true]{using_declarations.png}%Using Declarations
@@ -73,7 +73,11 @@ Add the following code in the body of the Start method on line 13\+:
 \end{DoxyCode}
 
 
-\href{walkthroughs/unity/3_graph_generator/creating_the_plane.PNG}{\texttt{ Picture of the start method at this point}}\hypertarget{_generating_a_graph_autotoc_md21}{}\doxysubsection{Generating the Graph}\label{_generating_a_graph_autotoc_md21}
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{creating_the_plane.PNG}%Picture of the start method at this point
+\end{DoxyInlineImage}
+  \hypertarget{_generating_a_graph_autotoc_md21}{}\doxysubsection{Generating the Graph}\label{_generating_a_graph_autotoc_md21}
 Now that we have a B\+VH, let\textquotesingle{}s generate a graph on it. In the code below, we will define a starting point for the graph, then the spacing between each node.
 
 We\textquotesingle{}ll place our start point 1 meter above the origin of the scene (0,0,1). Starting directly at the origin, (0,0,0), would put the start point inside of the plane we\textquotesingle{}re using for the ground causing the initial ground check to fail.
@@ -114,7 +118,11 @@ All of that together is\+:
 \end{DoxyCode}
 
 
-\href{walkthroughs/unity/3_graph_generator/generating_the_graph.PNG}{\texttt{ Picture of entire Start method until this point.}}\hypertarget{_generating_a_graph_autotoc_md22}{}\doxysubsection{Retrieving a list of nodes}\label{_generating_a_graph_autotoc_md22}
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{generating_the_graph.PNG}%Picture of entire Start method until this point.
+\end{DoxyInlineImage}
+  \hypertarget{_generating_a_graph_autotoc_md22}{}\doxysubsection{Retrieving a list of nodes}\label{_generating_a_graph_autotoc_md22}
 Our graph G now contains a graph of the accessible space on the plane generated using the settings we passed as arguments. To verify that our results are correct, we will get a list of nodes from the graph, then print them to the unity console.
 
 Enter the following code at the bottom of the start method\+:
@@ -127,7 +135,11 @@ Enter the following code at the bottom of the start method\+:
 \end{DoxyCode}
 
 
-\href{walkthroughs/unity/3_graph_generator/print_nodes.png}{\texttt{ Picture of entire Start method Until this Point}}\hypertarget{_generating_a_graph_autotoc_md23}{}\doxysubsection{Save and Test}\label{_generating_a_graph_autotoc_md23}
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{print_nodes.png}%Picture of entire Start method Until this Point
+\end{DoxyInlineImage}
+  \hypertarget{_generating_a_graph_autotoc_md23}{}\doxysubsection{Save and Test}\label{_generating_a_graph_autotoc_md23}
 Here is the full script we\textquotesingle{}ve created from this demo. Make sure yours matches it before moving on to testing.
 
 
@@ -165,18 +177,11 @@ Here is the full script we\textquotesingle{}ve created from this demo. Make sure
 \DoxyCodeLine{        EmbreeBVH bvh = \textcolor{keyword}{new} EmbreeBVH(Plane);}
 \DoxyCodeLine{}
 \DoxyCodeLine{        \textcolor{comment}{// Set Options for the Graph Generator}}
-\DoxyCodeLine{        Vector3D start\_point = \textcolor{keyword}{new} Vector3D(0, 0, 1); \textcolor{comment}{// The point to start graph generation}}
-\DoxyCodeLine{        Vector3D spacing = \textcolor{keyword}{new} Vector3D(1, 1, 1); \textcolor{comment}{// The spacing between each node}}
+\DoxyCodeLine{        Vector3D start\_point = \textcolor{keyword}{new} Vector3D(0, 0, 1);}
+\DoxyCodeLine{        Vector3D spacing = \textcolor{keyword}{new} Vector3D(1, 1, 1);}
 \DoxyCodeLine{}
 \DoxyCodeLine{        \textcolor{comment}{// Generate the Graph}}
 \DoxyCodeLine{        Graph G = GraphGenerator.GenerateGraph(bvh, start\_point, spacing);}
-\DoxyCodeLine{}
-\DoxyCodeLine{        \textcolor{comment}{// Check if the graph generator succeeded}}
-\DoxyCodeLine{        \textcolor{keywordflow}{if} (G is \textcolor{keyword}{null})}
-\DoxyCodeLine{        \{}
-\DoxyCodeLine{            Debug.Log(\textcolor{stringliteral}{"The Graph failed to generate."});}
-\DoxyCodeLine{            \textcolor{keywordflow}{return};}
-\DoxyCodeLine{        \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{        \textcolor{comment}{// Get a list of nodes from the graph and print them.}}
 \DoxyCodeLine{        NodeList nodes = G.getNodes();}
@@ -267,7 +272,11 @@ Now, if the graph fails to generate, our code will print a clear error message a
 \hypertarget{_generating_a_graph_autotoc_md26}{}\doxysubsection{Testing}\label{_generating_a_graph_autotoc_md26}
 To test that our null check is successful, we\textquotesingle{}ll go to {\itshape line 34} and change our start point to be at (200, 0, 1) instead of (0,0,1)\+: {\ttfamily Vector3D start\+\_\+point = new Vector3\+D(200, 0, 1);} This is far, far beyond where our plane is and should result in case 1\+: the initial ground check failing to find any valid ground.
 
-\href{walkthroughs/unity/3_graph_generator/checking_for_success.PNG}{\texttt{ Picture of the full Start() method for this test.}}
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{checking_for_success.PNG}%Picture of the full Start() method for this test.
+\end{DoxyInlineImage}
+  
 
 Since the camera is already setup, all we need to do is enter playmode to test this. Make sure your code matches the picture, {\bfseries{save}} the file, minimize Visual Studio, open the Unity editor, then press the play button.
 
@@ -284,4 +293,4 @@ Here is a link the full project created in this guide\+: \href{Tutorial\%203\%20
 
 In this tutorial we successfully generated a graph from a bvh, start point, and spacing. We also handled a case where a graph was unable to be generated, and wrote a custom error message to be printed instead of throwing a null reference exception.
 
-In the next tutorial, Reading Meshes From Unity, we will use geometry from the Unity scene to generate a graph, instead of manually creatng our own plane. 
+In the next tutorial, \mbox{\hyperlink{_mesh_from_unity}{Reading Meshes From Unity}}, we will use geometry from the Unity scene to generate a graph, instead of manually creatng our own plane. 

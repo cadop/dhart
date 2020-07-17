@@ -127,16 +127,20 @@ At this point, your start function should match the following code\+:
 \DoxyCodeLine{      2, 3, 0}
 \DoxyCodeLine{    \};}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{comment}{// Generate a BVH from the MeshInfo instance}}
+\DoxyCodeLine{    \textcolor{comment}{// Construct a meshinfo instance for the plane}}
 \DoxyCodeLine{    MeshInfo Plane = \textcolor{keyword}{new} MeshInfo(plane\_indices, plane\_vertices);}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{comment}{// Construct a meshinfo instance for the plane}}
+\DoxyCodeLine{    \textcolor{comment}{// Generate a BVH from the MeshInfo instance}}
 \DoxyCodeLine{    EmbreeBVH bvh = \textcolor{keyword}{new} EmbreeBVH(Plane);}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
 
 
-\href{walkthroughs/unity/2_raycast_at_plane/creating_a_plane.png}{\texttt{ Image in Visual Studio}}
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{creating_a_plane.png}%Image in Visual Studio
+\end{DoxyInlineImage}
+  
 
 With the B\+VH created, we\textquotesingle{}re ready to call the Raytracer and cast a ray.\hypertarget{_using_the_raytracer_autotoc_md10}{}\doxysubsection{Casting a Ray}\label{_using_the_raytracer_autotoc_md10}
 We\textquotesingle{}ll put the origin point of the ray at (1,0,1) and cast it in the direction (0,0,-\/1). This should intersect with the plane we defined earlier at the point (1,0,0). In the start method, just below the line we create the B\+VH, define an origin point and a direction for the ray.
@@ -158,7 +162,7 @@ Depending on which function you call, the Embree\+Raytracer can return 3 differe
 \item A boolean true/false for whether the ray intersected the mesh at any point.
 \end{DoxyEnumerate}
 
-For this guide we will use \mbox{[}Intersect\+For\+Point\mbox{]}() to get the point where the ray intersects the mesh. Starting on line 30 call the Embree\+Ray\+Tracer\textquotesingle{}s {\bfseries{Intersect\+For\+Point}} function with the bvh, origin and direction as arguments.
+For this guide we will use \mbox{[}Intersect\+For\+Point\mbox{]}() to get the point where the ray intersects the mesh. Starting on line 35 call the Embree\+Ray\+Tracer\textquotesingle{}s {\bfseries{Intersect\+For\+Point}} function with the bvh, origin and direction as arguments.
 
 
 \begin{DoxyCode}{0}
@@ -200,7 +204,11 @@ Here\textquotesingle{}s all of that together\+:
 \end{DoxyCode}
 
 
-\href{walkthroughs/unity/2_raycast_at_plane/casting_a_ray.png}{\texttt{ Image of our Start() function up until this point}}\hypertarget{_using_the_raytracer_autotoc_md11}{}\doxysubsection{Wrapping Up}\label{_using_the_raytracer_autotoc_md11}
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{casting_a_ray.png}%Image of our Start() function up until this point
+\end{DoxyInlineImage}
+  \hypertarget{_using_the_raytracer_autotoc_md11}{}\doxysubsection{Wrapping Up}\label{_using_the_raytracer_autotoc_md11}
 Here is the final script we\textquotesingle{}ve been building in this tutorial.
 
 
@@ -229,10 +237,10 @@ Here is the final script we\textquotesingle{}ve been building in this tutorial.
 \DoxyCodeLine{          2, 3, 0}
 \DoxyCodeLine{        \};}
 \DoxyCodeLine{}
-\DoxyCodeLine{        \textcolor{comment}{// Generate a BVH from the MeshInfo instance}}
+\DoxyCodeLine{        \textcolor{comment}{// Construct a meshinfo instance for the plane}}
 \DoxyCodeLine{        MeshInfo Plane = \textcolor{keyword}{new} MeshInfo(plane\_indices, plane\_vertices);}
 \DoxyCodeLine{}
-\DoxyCodeLine{        \textcolor{comment}{// Construct a meshinfo instance for the plane}}
+\DoxyCodeLine{        \textcolor{comment}{// Generate a BVH from the MeshInfo instance}}
 \DoxyCodeLine{        EmbreeBVH bvh = \textcolor{keyword}{new} EmbreeBVH(Plane);}
 \DoxyCodeLine{}
 \DoxyCodeLine{        \textcolor{comment}{// Define origin and direction}}

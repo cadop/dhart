@@ -1,26 +1,39 @@
 \hypertarget{namespace_human_factors_1_1_spatial_structures}{}\doxysection{Human\+Factors.\+Spatial\+Structures Namespace Reference}
 \label{namespace_human_factors_1_1_spatial_structures}\index{HumanFactors.SpatialStructures@{HumanFactors.SpatialStructures}}
+
+
+Standard fundamental data structures for representing space used throughout \mbox{\hyperlink{namespace_human_factors}{Human\+Factors}}.  
+
+
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 struct \mbox{\hyperlink{struct_human_factors_1_1_spatial_structures_1_1_c_s_r_info}{C\+S\+R\+Info}}
-\begin{DoxyCompactList}\small\item\em Contains info necessary to reconstruct or access a C\+SR \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Contains info necessary to reconstruct or access a C\+SR. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}}
-\begin{DoxyCompactList}\small\item\em Holds a graph in unmanaged memory as a C\+SR. \end{DoxyCompactList}\item 
-class {\bfseries Native\+Methods}
+\begin{DoxyCompactList}\small\item\em A graph representing connections between points in space. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods}{Native\+Methods}}
 \item 
 struct \mbox{\hyperlink{struct_human_factors_1_1_spatial_structures_1_1_node}{Node}}
-\begin{DoxyCompactList}\small\item\em A point in space. Used internally by the graph generator. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em A point in space. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_node_list}{Node\+List}}
-\begin{DoxyCompactList}\small\item\em A list of nodes from a graph in unmanaged memory. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em An array of Nodes directly from a graph in unmanaged memory. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
-enum \mbox{\hyperlink{namespace_human_factors_1_1_spatial_structures_abd405fa41da0f9a771d547aa47b6e1a0}{Graph\+Edge\+Aggregation}} \{ {\bfseries S\+UM} = 0, 
-{\bfseries A\+V\+E\+R\+A\+GE} = 1, 
-{\bfseries C\+O\+U\+NT} = 2
+enum \mbox{\hyperlink{namespace_human_factors_1_1_spatial_structures_abd405fa41da0f9a771d547aa47b6e1a0}{Graph\+Edge\+Aggregation}} \{ \mbox{\hyperlink{namespace_human_factors_1_1_spatial_structures_abd405fa41da0f9a771d547aa47b6e1a0a6970bdc2201030b9c03fbdcf3973858a}{Graph\+Edge\+Aggregation.\+S\+UM}} = 0, 
+\mbox{\hyperlink{namespace_human_factors_1_1_spatial_structures_abd405fa41da0f9a771d547aa47b6e1a0a16de38737a9f8366e9b2042b4e9b6290}{Graph\+Edge\+Aggregation.\+A\+V\+E\+R\+A\+GE}} = 1, 
+\mbox{\hyperlink{namespace_human_factors_1_1_spatial_structures_abd405fa41da0f9a771d547aa47b6e1a0a4905ac9d6a22bdfc1ae096094ce6248d}{Graph\+Edge\+Aggregation.\+C\+O\+U\+NT}} = 2
  \}
-\begin{DoxyCompactList}\small\item\em Methods for aggregating edge costs per node from the graph \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Methods for aggregating edge costs per node from the graph. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Standard fundamental data structures for representing space used throughout \mbox{\hyperlink{namespace_human_factors}{Human\+Factors}}. 
+
+\begin{DoxyRemark}{Remarks}
+The datatypes in the \mbox{\hyperlink{namespace_human_factors_1_1_spatial_structures}{Spatial\+Structures}} namespace are used throughout the \mbox{\hyperlink{namespace_human_factors}{Human\+Factors}}. For example, the \mbox{\hyperlink{namespace_human_factors_1_1_graph_generator}{Graph\+Generator}} and \mbox{\hyperlink{namespace_human_factors_1_1_visibility_graph}{Visibility\+Graph}} both produce a \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}} as output, allowing for the code to manage the \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}}\textquotesingle{}s internal C\+SR to be centralized in a single location. 
+\end{DoxyRemark}
 
 
 \doxysubsection{Enumeration Type Documentation}
@@ -32,5 +45,26 @@ enum \mbox{\hyperlink{namespace_human_factors_1_1_spatial_structures_abd405fa41d
 
 
 
-Methods for aggregating edge costs per node from the graph 
+Methods for aggregating edge costs per node from the graph. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a2d25a3d3158187875f0726844a4bf360}{Graph.\+Aggregate\+Edge\+Costs}} for usage of this enum. 
+\end{DoxySeeAlso}
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SUM@{SUM}!HumanFactors.SpatialStructures@{HumanFactors.SpatialStructures}}\index{HumanFactors.SpatialStructures@{HumanFactors.SpatialStructures}!SUM@{SUM}}}\mbox{\Hypertarget{namespace_human_factors_1_1_spatial_structures_abd405fa41da0f9a771d547aa47b6e1a0a6970bdc2201030b9c03fbdcf3973858a}\label{namespace_human_factors_1_1_spatial_structures_abd405fa41da0f9a771d547aa47b6e1a0a6970bdc2201030b9c03fbdcf3973858a}} 
+S\+UM&Add the cost of all edges. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AVERAGE@{AVERAGE}!HumanFactors.SpatialStructures@{HumanFactors.SpatialStructures}}\index{HumanFactors.SpatialStructures@{HumanFactors.SpatialStructures}!AVERAGE@{AVERAGE}}}\mbox{\Hypertarget{namespace_human_factors_1_1_spatial_structures_abd405fa41da0f9a771d547aa47b6e1a0a16de38737a9f8366e9b2042b4e9b6290}\label{namespace_human_factors_1_1_spatial_structures_abd405fa41da0f9a771d547aa47b6e1a0a16de38737a9f8366e9b2042b4e9b6290}} 
+A\+V\+E\+R\+A\+GE&Average the cost of all edges. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{COUNT@{COUNT}!HumanFactors.SpatialStructures@{HumanFactors.SpatialStructures}}\index{HumanFactors.SpatialStructures@{HumanFactors.SpatialStructures}!COUNT@{COUNT}}}\mbox{\Hypertarget{namespace_human_factors_1_1_spatial_structures_abd405fa41da0f9a771d547aa47b6e1a0a4905ac9d6a22bdfc1ae096094ce6248d}\label{namespace_human_factors_1_1_spatial_structures_abd405fa41da0f9a771d547aa47b6e1a0a4905ac9d6a22bdfc1ae096094ce6248d}} 
+C\+O\+U\+NT&Count the number of edges. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 18 of file Graph.\+cs.
 

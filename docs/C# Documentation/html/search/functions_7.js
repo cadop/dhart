@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['nativearray_163',['NativeArray',['../class_human_factors_1_1_native_utils_1_1_native_array.html#a7937d264e0ecfc2e59da02f385c4cf09',1,'HumanFactors::NativeUtils::NativeArray']]],
-  ['nativearray2d_164',['NativeArray2D',['../class_human_factors_1_1_native_utils_1_1_native_array2_d.html#ad4c130f73ed7ffe9b7c59918f5583c46',1,'HumanFactors::NativeUtils::NativeArray2D']]],
-  ['nativeobject_165',['NativeObject',['../class_human_factors_1_1_native_utils_1_1_native_object.html#ae7f34573598d48a9ef666b96895c7201',1,'HumanFactors::NativeUtils::NativeObject']]]
+  ['loadobj_406',['LoadOBJ',['../class_human_factors_1_1_geometry_1_1_native_methods.html#adf39cb5b0ee7a851f101cb81699a6e76',1,'HumanFactors.Geometry.NativeMethods.LoadOBJ()'],['../class_human_factors_1_1_geometry_1_1_o_b_j_loader.html#a098857909670796a533833086d753fb2',1,'HumanFactors.Geometry.OBJLoader.LoadOBJ(string path, float xrot=0, float yrot=0, float zrot=0)'],['../class_human_factors_1_1_geometry_1_1_o_b_j_loader.html#a3901e6fb42296a1ace65f52aefb83ff3',1,'HumanFactors.Geometry.OBJLoader.LoadOBJ(string path, Vector3D rotation)']]]
 ];

@@ -1,0 +1,331 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.18">
+  <compounddef id="_mesh_from_unity" kind="page">
+    <compoundname>MeshFromUnity</compoundname>
+    <title>Reading a Mesh From Unity</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Previous Tutorial: <ref refid="_generating_a_graph" kindref="compound">The Graph Generator</ref></para>
+<sect1 id="_mesh_from_unity_1autotoc_md28">
+<title>Intro</title>
+<para>In this tutorial we&apos;ll be using the project created in the first tutorial: <ref refid="_unity_project_setup" kindref="compound">Project Setup</ref>, and we&apos;ll be using concepts and code covered in the previous guides.</para>
+<para>In this guide we will cover:</para>
+<para><itemizedlist>
+<listitem><para>Assigning a game object to a script so it can be referenced by code.</para>
+</listitem><listitem><para>Accessing the components of a Game Object</para>
+</listitem><listitem><para>Transforming MeshInfo instances to Z-Up</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="_mesh_from_unity_1autotoc_md29">
+<title>Scene Setup</title>
+<para>Up until this point, we haven&apos;t needed to interact with the Unity scene, aside from attaching a script to the Main Camera object that is placed by default. For us to demonstrate reading geometry from the scene, we will use the Unity editor to create a plane in the scene that&apos;s similar to the plane we previously created in code, but half the size.</para>
+<para><image type="html" name="start_point.png" inline="yes">Blank Scene</image>
+ <image type="latex" name="start_point.png" inline="yes">Blank Scene</image>
+ <image type="rtf" name="start_point.png" inline="yes">Blank Scene</image>
+ <image type="docbook" name="start_point.png" inline="yes">Blank Scene</image>
+</para>
+<para>To begin, open the Unity project from <ref refid="_unity_project_setup" kindref="compound">Unity Project Setup</ref>.</para>
+<sect2 id="_mesh_from_unity_1autotoc_md30">
+<title>Creating the Plane</title>
+<para><image type="html" name="create_plane.png" inline="yes">Plane Created</image>
+ <image type="latex" name="create_plane.png" inline="yes">Plane Created</image>
+ <image type="rtf" name="create_plane.png" inline="yes">Plane Created</image>
+ <image type="docbook" name="create_plane.png" inline="yes">Plane Created</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>4.1</bold>: <emphasis>Creating a plane using the menu bar</emphasis></para>
+<para>Using the menubar at the top of the screen select GameObject &gt; 3D Object &gt; Plane.</para>
+<para>Once clicked, a new 10x10 plane will be created at the center of the scene window&apos;s view. The plane we created in code was centered on the origin, but this plane isn&apos;t since it was created where the scene editor&apos;s camera was looking. We must reset this plane to the origin before moving any further.</para>
+</sect2>
+<sect2 id="_mesh_from_unity_1autotoc_md31">
+<title>Resetting the Plane&apos;s Position</title>
+<para><image type="html" name="look_at_transforms.png" inline="yes">Transform Visible</image>
+ <image type="latex" name="look_at_transforms.png" inline="yes">Transform Visible</image>
+ <image type="rtf" name="look_at_transforms.png" inline="yes">Transform Visible</image>
+ <image type="docbook" name="look_at_transforms.png" inline="yes">Transform Visible</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>4.2</bold>: <emphasis>Highlighted: The plane&apos;s x,y,z position</emphasis></para>
+<para>Left Click on the newly created plane and look at <bold>Transform</bold> header in the Inspector located at the right sidebar.</para>
+<para><image type="html" name="reset_position.png" inline="yes">Reset Position</image>
+ <image type="latex" name="reset_position.png" inline="yes">Reset Position</image>
+ <image type="rtf" name="reset_position.png" inline="yes">Reset Position</image>
+ <image type="docbook" name="reset_position.png" inline="yes">Reset Position</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>4.3</bold>: <emphasis>Resetting the plane&apos;s position</emphasis></para>
+<para>Under <bold>Transform</bold> you can see the plane&apos;s position, rotation and scale within the scene. To set the plane&apos;s position to the origin, left on the three dots to the right of the transform header, and select <emphasis>Reset Position</emphasis>.</para>
+<para><image type="html" name="resetted_plane.png" inline="yes">Plane After Reset Position</image>
+ <image type="latex" name="resetted_plane.png" inline="yes">Plane After Reset Position</image>
+ <image type="rtf" name="resetted_plane.png" inline="yes">Plane After Reset Position</image>
+ <image type="docbook" name="resetted_plane.png" inline="yes">Plane After Reset Position</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>4.4</bold>: <emphasis>The plane centered at the scene origin</emphasis></para>
+<para>After clicking that button, your plane should be moved to the origin like in Figure 4.4. Note that the X, Y, and Z of the plane&apos;s position in the Inspector are all set to 0. Ensure that the rest of the variables in the transform header match that of Figure 4.4. Now that we have the plane ready to go, we can begin working on the script to get its vertices and triangles.</para>
+</sect2>
+</sect1>
+<sect1 id="_mesh_from_unity_1autotoc_md32">
+<title>Writing the Script</title>
+<para><image type="html" name="visual_studio_human_factors_reference.png" inline="yes">Blank Visual Studio Page</image>
+ <image type="latex" name="visual_studio_human_factors_reference.png" inline="yes">Blank Visual Studio Page</image>
+ <image type="rtf" name="visual_studio_human_factors_reference.png" inline="yes">Blank Visual Studio Page</image>
+ <image type="docbook" name="visual_studio_human_factors_reference.png" inline="yes">Blank Visual Studio Page</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>4.5</bold> <emphasis>An Empty Script</emphasis></para>
+<para>Double click on HFExampleScript that we created in the first tutorial to open up Visual Studio if it isn&apos;t open already. You should see a blank page like the above. If you&apos;re coming from a previous tutorial, <emphasis>please clear it so it matches this</emphasis>.</para>
+<para>Just like the previous tutorials, we&apos;re going to declare which namespaces this script will use in the using section. For now we only need one using declaration. Add this to the top of your script like in the previous tutorials.</para>
+<para><programlisting filename=".cs"><codeline><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.<ref refid="namespace_human_factors_1_1_geometry" kindref="compound">Geometry</ref>;</highlight></codeline>
+</programlisting></para>
+<para>Later you will be using different sections depending on whether you&apos;re generating a graph or firing a ray.</para>
+<sect2 id="_mesh_from_unity_1autotoc_md33">
+<title>Setup for Adding References Through The Unity Inspector</title>
+<para><image type="html" name="plane_in_scene.PNG" inline="yes">PlaneReference</image>
+ <image type="latex" name="plane_in_scene.PNG" inline="yes">PlaneReference</image>
+ <image type="rtf" name="plane_in_scene.PNG" inline="yes">PlaneReference</image>
+ <image type="docbook" name="plane_in_scene.PNG" inline="yes">PlaneReference</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>4.6</bold>: <emphasis>Script with a GameObject property</emphasis></para>
+<para>There are many ways to reference a GameObject in the scene from a script, but for this example we&apos;ll be setting up our script so we can select a mesh in the scene from the Unity Inspector. Add a GameObject property to the script like shown on line 7 of figure 4.6.</para>
+<para><programlisting filename=".cs"><codeline><highlight class="keyword">public</highlight><highlight class="normal"><sp/>GameObject<sp/>PlaneInScene;</highlight></codeline>
+</programlisting></para>
+<para>Later we&apos;ll use the Unity Inspector to assign the plane in the scene to this property.</para>
+</sect2>
+<sect2 id="_mesh_from_unity_1autotoc_md34">
+<title>Getting a Reference to the Mesh Held by a Specific GameObject</title>
+<para>Before we can extract the triangles and vertices from one an instance of a Unity Mesh, we first need to get a reference to the Mesh itself. Doing this requires some understanding of Unity GameObjects and their components.</para>
+<sect3 id="_mesh_from_unity_1autotoc_md35">
+<title>Background on GameObjects and Components</title>
+<para><image type="html" name="plane_inspector.PNG" inline="yes">PlaneReference</image>
+ <image type="latex" name="plane_inspector.PNG" inline="yes">PlaneReference</image>
+ <image type="rtf" name="plane_inspector.PNG" inline="yes">PlaneReference</image>
+ <image type="docbook" name="plane_inspector.PNG" inline="yes">PlaneReference</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>4.7</bold>: <emphasis>Components of the Plane shown in the Unity Inspector</emphasis></para>
+<para>Minimize Visual Studio then switch back to Unity for a moment. Left click on the plane we created previously, then look at the Inspector on the right sidebar. It should look similar to Figure 4.7. Here you can view all information about the plane, such as its position, the material it uses, which mesh it&apos;s referencing, etc. You&apos;ll notice the inspector is split into several sections: Transform, Meshfilter, Mesh Collider, and MeshRenderer. Each of these sections is a separate <bold>Component</bold> and the object we see in the scene is just a container for those components called a <ulink url="https://docs.unity3d.com/Manual/class-GameObject.html"><bold>GameObject</bold></ulink>.</para>
+<para>As stated in the Unity Documentation:</para>
+<para><blockquote><para><emphasis>GameObjects are the fundamental objects in Unity that represent characters, props and scenery. They do not accomplish much in themselves, but they act as containers for Components, which implement the real functionality.</emphasis> </para>
+</blockquote></para>
+<para>What this means for us is that the plane we see in the scene is not a Mesh, but a GameObject that contains a <ulink url="https://docs.unity3d.com/ScriptReference/MeshFilter.html">MeshFilter</ulink> that contains a Mesh. You can think of it like GameObject &gt; Mesh Filter &gt; Mesh. To obtain the Mesh itself, we must get it from the MeshFilter component of the Plane GameObject.</para>
+</sect3>
+<sect3 id="_mesh_from_unity_1autotoc_md36">
+<title>In Practice</title>
+<para>A game object&apos;s components can be retrieved using the <ulink url="https://docs.unity3d.com/ScriptReference/GameObject.GetComponent.html">GetComponent</ulink> method. Go back to the Visual Studio window. In our script we will store a reference to the plane&apos;s mesh filter in a variable named <computeroutput>PlaneFilter</computeroutput> at the beginning of the script&apos;s <computeroutput>Start()</computeroutput> function like so:</para>
+<para><programlisting filename=".cs"><codeline><highlight class="normal">MeshFilter<sp/>PlaneFilter<sp/>=<sp/>PlaneInScene.GetComponent&lt;MeshFilter&gt;();</highlight></codeline>
+</programlisting></para>
+<para>Then we can access the actual mesh carried by <computeroutput>PlaneFilter</computeroutput> by calling its .mesh property:</para>
+<para><programlisting filename=".cs"><codeline><highlight class="normal">Mesh<sp/>PlaneMesh<sp/>=<sp/>PlaneFilter.mesh;</highlight></codeline>
+</programlisting></para>
+<para>Now we have the plane as a mesh and are ready to get the required info from it for <ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.</para>
+</sect3>
+</sect2>
+<sect2 id="_mesh_from_unity_1autotoc_md37">
+<title>Getting the Vertices and Triangles</title>
+<para>As previously stated, a mesh is comprised of an index and vertex array. To use this mesh in <ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>, we need to construct a MeshInfo object using these arrays. Fortunately, Unity provides a straightforward way to access the triangle indices of a mesh in a format that we can use for <ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>, but unfortunately the vertices only come in an array of Vector3, instead of the array of floats that we need. We will need to write a method to convert this array of Vector3 into an array of floats before we can use it in <ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.</para>
+<para>To simplify the process of converting the vertices to a suitable format, we will add a separate method called <emphasis>Vector3ArrayToFloatArray</emphasis> that will transform the array of Vector3 into an array of float ready for Human Factors.</para>
+<para>On line 9, just above the Start() function, add the following method:</para>
+<para><programlisting filename=".cs"><codeline><highlight class="keyword">private</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">[]<sp/>Vector3ArrayToFloatArray(Vector3[]<sp/>vertices)</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">[]<sp/>return_array<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">[vertices.Length<sp/>*<sp/>3];</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>vertices.Length;<sp/>i++)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>os<sp/>=<sp/>i<sp/>*<sp/>3;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return_array[os]<sp/>=<sp/>vertices[i].x;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return_array[os<sp/>+<sp/>1]<sp/>=<sp/>vertices[i].y;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return_array[os<sp/>+<sp/>2]<sp/>=<sp/>vertices[i].z;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>return_array;</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+<para><image type="html" name="flatten_vertex_array.PNG" inline="yes">Convert Vector3 Array</image>
+ <image type="latex" name="flatten_vertex_array.PNG" inline="yes">Convert Vector3 Array</image>
+ <image type="rtf" name="flatten_vertex_array.PNG" inline="yes">Convert Vector3 Array</image>
+ <image type="docbook" name="flatten_vertex_array.PNG" inline="yes">Convert Vector3 Array</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>4.8</bold>: <emphasis>Location for Vector3ArrayToFloatArray</emphasis></para>
+<para>Now we can call this method with the mesh&apos;s vertices as input to get an array usable with <ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>. Retrieve the indices and vertices from the mesh by calling its <computeroutput>.triangles</computeroutput> and <computeroutput>.vertices</computeroutput> properties, making sure to convert the array of vertices array from an array of Vector3 to an array of floats.</para>
+<para><programlisting filename=".cs"><codeline><highlight class="comment">//<sp/>Get<sp/>Triangle<sp/>Indexes<sp/>and<sp/>Vertices<sp/>from<sp/>the<sp/>Mesh</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">[]<sp/>plane_indices<sp/>=<sp/>PlaneMesh.triangles;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">[]<sp/>plane_vertices<sp/>=<sp/>Vector3ArrayToFloatArray(PlaneMesh.vertices);</highlight></codeline>
+</programlisting></para>
+<para>After that, the process of constructing an instance of MeshInfo is identical to the previous tutorials:</para>
+<para><programlisting filename=".cs"><codeline><highlight class="comment">//<sp/>Send<sp/>to<sp/>HumanFactors</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">MeshInfo<sp/>PlaneMeshInfo<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>MeshInfo(plane_indices,<sp/>plane_vertices);</highlight></codeline>
+</programlisting></para>
+<para>Before we can continue to using this mesh it&apos;s important to cover a significant difference between this mesh and the mesh we&apos;ve been creating in our code.</para>
+</sect2>
+<sect2 id="_mesh_from_unity_1autotoc_md38">
+<title>Transforming the Mesh From Y-Up to Z-Up</title>
+<para><image type="html" name="unity_coordinate_system.png" inline="yes">UnityCoords</image>
+ <image type="latex" name="unity_coordinate_system.png" inline="yes">UnityCoords</image>
+ <image type="rtf" name="unity_coordinate_system.png" inline="yes">UnityCoords</image>
+ <image type="docbook" name="unity_coordinate_system.png" inline="yes">UnityCoords</image>
+ <image type="html" name="rhino_coordinates.PNG" inline="yes">RhinoCoords</image>
+ <image type="latex" name="rhino_coordinates.PNG" inline="yes">RhinoCoords</image>
+ <image type="rtf" name="rhino_coordinates.PNG" inline="yes">RhinoCoords</image>
+ <image type="docbook" name="rhino_coordinates.PNG" inline="yes">RhinoCoords</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>4.9</bold>: <emphasis>Left: Unity&apos;s coordinate system. Right: <ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>&apos;s Coordinate system</emphasis></para>
+<para>The Graph Generator expects geometry to be stored as if the Z-Axis were up as shown in the picture on the right. In Unity however, the Y-Axis is up, as shown in the left picture, meaning that we&apos;ll get inaccurate results if we use the mesh as is. To solve this, <emphasis>MeshInfo</emphasis> has a method <emphasis>RotateMesh</emphasis> that allows it to rotate itself after is has been constructed. Another class in the Geometry namespace titled <emphasis>CommonRotations</emphasis> contains the rotation necessary to perform this conversion.</para>
+<para>Enter the following code to rotate the plane to the correct orientation:</para>
+<para><programlisting filename=".cs"><codeline><highlight class="comment">//Rotate<sp/>to<sp/>Z-Up</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">PlaneMeshInfo.RotateMesh(CommonRotations.Yup_To_Zup);</highlight></codeline>
+</programlisting></para>
+<para>Now that the plane is in the correct orientation, we are ready to move on to verifying that we loaded the mesh successfully.</para>
+</sect2>
+<sect2 id="_mesh_from_unity_1autotoc_md39">
+<title>Choose code From Previous Tutorial to Verify Results</title>
+<para>Up until this point, your code should match the code below.</para>
+<para><programlisting filename=".cs"><codeline><highlight class="keyword">using</highlight><highlight class="normal"><sp/>System.Collections;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>System.Collections.Generic;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>UnityEngine;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.<ref refid="namespace_human_factors_1_1_geometry" kindref="compound">Geometry</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">HFExampleScript<sp/>:<sp/>MonoBehaviour</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>GameObject<sp/>PlaneInScene;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">[]<sp/>Vector3ArrayToFloatArray(Vector3[]<sp/>vertices)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">[]<sp/>return_array<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">[vertices.Length<sp/>*<sp/>3];</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>vertices.Length;<sp/>i++)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>os<sp/>=<sp/>i<sp/>*<sp/>3;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return_array[os]<sp/>=<sp/>vertices[i].x;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return_array[os<sp/>+<sp/>1]<sp/>=<sp/>vertices[i].y;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return_array[os<sp/>+<sp/>2]<sp/>=<sp/>vertices[i].z;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>return_array;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Start<sp/>is<sp/>called<sp/>before<sp/>the<sp/>first<sp/>frame<sp/>update</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Start()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MeshFilter<sp/>PlaneFilter<sp/>=<sp/>PlaneInScene.GetComponent&lt;MeshFilter&gt;();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Mesh<sp/>PlaneMesh<sp/>=<sp/>PlaneFilter.mesh;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Get<sp/>Triangle<sp/>Indexes<sp/>and<sp/>Vertices<sp/>from<sp/>the<sp/>Mesh</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">[]<sp/>plane_indices<sp/>=<sp/>PlaneMesh.triangles;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">[]<sp/>plane_vertices<sp/>=<sp/>Vector3ArrayToFloatArray(PlaneMesh.vertices);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Send<sp/>to<sp/>HumanFactors</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MeshInfo<sp/>PlaneMeshInfo<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>MeshInfo(plane_indices,<sp/>plane_vertices);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Rotate<sp/>to<sp/>Z-Up</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PlaneMeshInfo.RotateMesh(CommonRotations.Yup_To_Zup);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Update<sp/>is<sp/>called<sp/>once<sp/>per<sp/>frame</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Update()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+<para><image type="html" name="end_of_getting_mesh.png" inline="yes">Screenshot of the entire code until this point</image>
+ <image type="latex" name="end_of_getting_mesh.png" inline="yes">Screenshot of the entire code until this point</image>
+ <image type="rtf" name="end_of_getting_mesh.png" inline="yes">Screenshot of the entire code until this point</image>
+ <image type="docbook" name="end_of_getting_mesh.png" inline="yes">Screenshot of the entire code until this point</image>
+</para>
+<para>To see if we&apos;re successfully reading the mesh from the scene, <emphasis>pick either the graph generator or the raytracer tutorial to use for testing</emphasis>. Substitute <computeroutput>PlaneMeshInfo</computeroutput> everywhere the code from the previous tutorials use <computeroutput>Plane</computeroutput>. The code you take from the other sections should be added directly after the line containing <computeroutput>PlaneMeshInfo.RotateMesh()</computeroutput>.</para>
+<para>The lines you should copy for each tutorial are:</para>
+<sect3 id="_mesh_from_unity_1autotoc_md40">
+<title>Graph Generator</title>
+<para>Add the following using statments:</para>
+<para><programlisting filename=".cs"><codeline><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.<ref refid="namespace_human_factors_1_1_ray_tracing" kindref="compound">RayTracing</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.<ref refid="namespace_human_factors_1_1_geometry" kindref="compound">Geometry</ref>;</highlight></codeline>
+</programlisting></para>
+<para>Copy and paste lines Lines 30 - 42 from the Graph Generator tutorial:</para>
+<para><programlisting filename=".cs"><codeline><highlight class="comment">//<sp/>Generate<sp/>a<sp/>BVH<sp/>for<sp/>the<sp/>RayTracer</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">EmbreeBVH<sp/>bvh<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>EmbreeBVH(PlaneMeshInfo);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Set<sp/>Options<sp/>for<sp/>the<sp/>Graph<sp/>Generator</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">Vector3D<sp/>start_point<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(0,<sp/>0,<sp/>1);</highlight></codeline>
+<codeline><highlight class="normal">Vector3D<sp/>spacing<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(1,<sp/>1,<sp/>1);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Generate<sp/>the<sp/>Graph</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">Graph<sp/>G<sp/>=<sp/>GraphGenerator.GenerateGraph(bvh,<sp/>start_point,<sp/>spacing);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Get<sp/>a<sp/>list<sp/>of<sp/>nodes<sp/>from<sp/>the<sp/>graph<sp/>and<sp/>print<sp/>them.</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">NodeList<sp/>nodes<sp/>=<sp/>G.getNodes();</highlight></codeline>
+<codeline><highlight class="normal">Debug.Log(nodes);</highlight></codeline>
+</programlisting></para>
+</sect3>
+<sect3 id="_mesh_from_unity_1autotoc_md41">
+<title>Ray Tracer</title>
+<para>Add the following using statments:</para>
+<para><programlisting filename=".cs"><codeline><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.<ref refid="namespace_human_factors_1_1_spatial_structures" kindref="compound">SpatialStructures</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.<ref refid="namespace_human_factors_1_1_graph_generator" kindref="compound">GraphGenerator</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.<ref refid="namespace_human_factors_1_1_ray_tracing" kindref="compound">RayTracing</ref>;</highlight></codeline>
+</programlisting></para>
+<para>Copy and paste lines 28 - 43 from the raytracer tutorial:</para>
+<para><programlisting filename=".cs"><codeline><highlight class="comment">//<sp/>Generate<sp/>a<sp/>BVH<sp/>from<sp/>the<sp/>MeshInfo<sp/>instance</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">EmbreeBVH<sp/>bvh<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>EmbreeBVH(PlaneMeshInfo);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Define<sp/>origin<sp/>and<sp/>direction</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">Vector3D<sp/>origin<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(1,<sp/>0,<sp/>1);</highlight></codeline>
+<codeline><highlight class="normal">Vector3D<sp/>direction<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(0,<sp/>0,<sp/>-1);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Cast<sp/>the<sp/>ray,<sp/>store<sp/>the<sp/>hitpoint</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">Vector3D<sp/>intersection_point<sp/>=<sp/>EmbreeRaytracer.IntersectForPoint(bvh,<sp/>origin,<sp/>direction);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Print<sp/>the<sp/>x,<sp/>y,<sp/>and<sp/>z<sp/>components<sp/>of<sp/>the<sp/>intersection_point</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">Debug.Log(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;(&quot;</highlight><highlight class="normal"><sp/>+<sp/>intersection_point.x<sp/>+</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;,&quot;</highlight><highlight class="normal"><sp/>+<sp/>intersection_point.y<sp/>+</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;,&quot;</highlight><highlight class="normal"><sp/>+<sp/>intersection_point.z<sp/>+</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="stringliteral">&quot;)&quot;</highlight><highlight class="normal">)</highlight></codeline>
+</programlisting></para>
+<para><bold>Make sure to copy over any other using declarations that the selected tutorial uses</bold>, since those are required for it to function. Once you&apos;ve finished this, <emphasis><bold>SAVE</bold></emphasis> your script, minimize Visual Studio, and switch to the Unity Editor.</para>
+</sect3>
+</sect2>
+</sect1>
+<sect1 id="_mesh_from_unity_1autotoc_md42">
+<title>Testing the Script</title>
+<para>Like in the previous tutorials, drag the HFExampleScript onto the Main Camera object in the scene hierarchy to set it as a component. In the previous scripts we were ready to go after this step, but here we need to assign the Plane GameObject to the script in the Unity Inspector.</para>
+<sect2 id="_mesh_from_unity_1autotoc_md43">
+<title>Adding References to Properties Through the Unity Inspector</title>
+<para><image type="html" name="inspect_new_attribute.png" inline="yes">Unity Inspector New Attribute</image>
+ <image type="latex" name="inspect_new_attribute.png" inline="yes">Unity Inspector New Attribute</image>
+ <image type="rtf" name="inspect_new_attribute.png" inline="yes">Unity Inspector New Attribute</image>
+ <image type="docbook" name="inspect_new_attribute.png" inline="yes">Unity Inspector New Attribute</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>4.10</bold>: <emphasis>Red circle: Main Camera, Highlighted: PlaneInScene Reference, Blue Circle: Assign Reference Button</emphasis></para>
+<para>Click on the Main Camera in the left under the scene hierarchy. Notice that the HF Example Script component now has a new element under it titled <emphasis>Plane In Scene</emphasis>. This is the class member we created earlier, and we must assign it to the Plane we created. To assign the plane to this script, click the icon to the right of <emphasis>Plane In Scene</emphasis> (Circled in blue in Figure 4.10).</para>
+<para><image type="html" name="gameobject_select_window.png" inline="yes">Gameobject Select Window</image>
+ <image type="latex" name="gameobject_select_window.png" inline="yes">Gameobject Select Window</image>
+ <image type="rtf" name="gameobject_select_window.png" inline="yes">Gameobject Select Window</image>
+ <image type="docbook" name="gameobject_select_window.png" inline="yes">Gameobject Select Window</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>4.11</bold>: <emphasis>Gameobject Select Window</emphasis></para>
+<para>A new window will appear asking you to select a game object. Double click on Plane, highlighted in Figure 4.11, then look back at the Unity Inspector.</para>
+<para><image type="html" name="inspect_with_plane.png" inline="yes">Gameobject Select Window</image>
+ <image type="latex" name="inspect_with_plane.png" inline="yes">Gameobject Select Window</image>
+ <image type="rtf" name="inspect_with_plane.png" inline="yes">Gameobject Select Window</image>
+ <image type="docbook" name="inspect_with_plane.png" inline="yes">Gameobject Select Window</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>4.12</bold>: <emphasis>Inspector With Plane</emphasis></para>
+<para>You should now see the plane in the Unity Inspector next to PlaneInScene, like in Figure 4.12. If you see this, then you have successfully added the plane to the script as a reference.</para>
+</sect2>
+<sect2 id="_mesh_from_unity_1autotoc_md44">
+<title>Comparing Output</title>
+<para>Now, enter play mode by clicking the play button. If you have performed the above steps correctly, then your output should match The output below for the code you&apos;ve chosen:</para>
+<para><emphasis><bold>Graph Generator</bold></emphasis> : <computeroutput>[(0.000,0.000,0.000), (-1.000,-1.000,0.000), (-1.000,0.000,0.000), (-1.000,1.000,0.000), (0.000,-1.000,0.000), . . . (2.000,5.000,0.000), (3.000,5.000,0.000), (4.000,-5.000,0.000), (4.000,5.000,0.000)]</computeroutput></para>
+<para><emphasis><bold>Raytracer</bold></emphasis> : <computeroutput>(1,0,0)</computeroutput></para>
+<para><blockquote><para><bold>NOTE</bold>: For the raytracer you might get an extremely low number for the Z component such as 5.960464E-08 instead of 0. This is normal, since none of the plane&apos;s vertices are exactly at whole numbers like they were in our example script. In fact, if you try to print any Vector3s like the ones returned from Mesh.vertices, they will round their components before displaying them. The nodelist returned from the graph will also round the components for every node it contains when converted to a string. Keep this in mind when reviewing results in the future. </para>
+</blockquote></para>
+<para>If your output matches the above output for the code you&apos;ve chosen, then you have successfully completed this tutorial.</para>
+</sect2>
+</sect1>
+<sect1 id="_mesh_from_unity_1autotoc_md45">
+<title>Conclusion</title>
+<para>Here is a link the full project created in this guide: <ulink url="Tutorial%204%20-%20Reading%20Mesh%20From%20Unity.zip">Full Project</ulink></para>
+<para>With this you have successfully read geometry from the Unity Scene and passed it to <ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>. This concludes the tutorial series for this point.</para>
+<para>If you want a more indepth look at using the Inspector to assign properties to components, see the <ulink url="https://docs.unity3d.com/Manual/EditingValueProperties.html">Official Unity Documentation</ulink>. </para>
+</sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

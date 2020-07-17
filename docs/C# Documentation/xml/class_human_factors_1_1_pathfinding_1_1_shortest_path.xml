@@ -1,0 +1,318 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.18">
+  <compounddef id="class_human_factors_1_1_pathfinding_1_1_shortest_path" kind="class" language="C#" prot="public">
+    <compoundname>HumanFactors::Pathfinding::ShortestPath</compoundname>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_human_factors_1_1_pathfinding_1_1_shortest_path_1ab4bd85d84d83a30601a190f583e097ac" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_human_factors_1_1_pathfinding_1_1_path" kindref="compound">Path</ref></type>
+        <definition>static Path HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath</definition>
+        <argsstring>(Graph graph, int start_id, int end_id)</argsstring>
+        <name>DijkstraShortestPath</name>
+        <param>
+          <type><ref refid="class_human_factors_1_1_spatial_structures_1_1_graph" kindref="compound">Graph</ref></type>
+          <declname>graph</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>start_id</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>end_id</declname>
+        </param>
+        <briefdescription>
+<para>Perform Dijkstra&apos;s shortest path algorithm to find a path between two nodes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>graph</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The graph to conduct the search on. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>start_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The ID of the node to start at. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>end_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The ID of the node to find a path to.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A path from <emphasis>start_id</emphasis>  to <emphasis>end_id</emphasis>  <linebreak/>
+</para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>IndexOutOfRangeException</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><emphasis>start_id</emphasis>  or <emphasis>end_id</emphasis>  are not the ids of any nodes in the graph.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="class_human_factors_1_1_pathfinding_1_1_shortest_path_1ac63e41c1bc4310f6e64993c30d4a0fe5" kindref="member">DijkstraShortestPathMulti</ref> for efficently generating multiple paths in parallel. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/pathfinding/src/ShortestPath.cs" line="48" column="28" bodyfile="src/Csharp/packages/pathfinding/src/ShortestPath.cs" bodystart="48" bodyend="55"/>
+        <references refid="class_human_factors_1_1_pathfinding_1_1_native_methods_1ad6c05846f5dc7ed531abb7d3ac9ebe1b" compoundref="_pathfinding_native_8cs" startline="26" endline="41">HumanFactors.Pathfinding.NativeMethods.C_CreatePath</references>
+        <references refid="class_human_factors_1_1_native_utils_1_1_native_object_1aa58c089e79cb4acc260755a41952d3d6" compoundref="_pointer_holder_8cs" startline="49" endline="49">HumanFactors.NativeUtils.NativeObject.Pointer</references>
+        <references refid="struct_human_factors_1_1_native_utils_1_1_c_vector_and_data_1a8bcdb7b4516a15f5b905ebcd33a55e6c" compoundref="_native_utils_8cs" startline="38">HumanFactors.NativeUtils.CVectorAndData.size</references>
+        <referencedby refid="class_human_factors_1_1_pathfinding_1_1_shortest_path_1a7ca51d84089c860860ad7fb2fd717f61" compoundref="_shortest_path_8cs" startline="72" endline="78">HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_pathfinding_1_1_shortest_path_1a7ca51d84089c860860ad7fb2fd717f61" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_human_factors_1_1_pathfinding_1_1_path" kindref="compound">Path</ref></type>
+        <definition>static Path HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath</definition>
+        <argsstring>(Graph graph, Vector3D start_node, Vector3D end_node)</argsstring>
+        <name>DijkstraShortestPath</name>
+        <param>
+          <type><ref refid="class_human_factors_1_1_spatial_structures_1_1_graph" kindref="compound">Graph</ref></type>
+          <declname>graph</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref></type>
+          <declname>start_node</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref></type>
+          <declname>end_node</declname>
+        </param>
+        <briefdescription>
+<para>Perform Dijkstra&apos;s shortest path algorithm to find a path between two nodes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>graph</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The graph to conduct the search on. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>start_node</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The X,Y,Z of a node in the graph node to start at. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>end_node</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The X,Y,Z of a node in the graph node to end at.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A path from start_node to end_node.</para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>IndexOutOfRangeException</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>start_node or end_node don&apos;t exist in the graph.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="remark"><para>Gets the start id and end of both nodes, then calls the ID overload.</para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="class_human_factors_1_1_pathfinding_1_1_shortest_path_1ac63e41c1bc4310f6e64993c30d4a0fe5" kindref="member">DijkstraShortestPathMulti</ref> for efficently generating multiple paths in parallel. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/pathfinding/src/ShortestPath.cs" line="72" column="28" bodyfile="src/Csharp/packages/pathfinding/src/ShortestPath.cs" bodystart="72" bodyend="78"/>
+        <references refid="class_human_factors_1_1_pathfinding_1_1_shortest_path_1ab4bd85d84d83a30601a190f583e097ac" compoundref="_shortest_path_8cs" startline="48" endline="55">HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath</references>
+        <references refid="class_human_factors_1_1_spatial_structures_1_1_graph_1abe9106fd9584269e1291702aa401f6ac">HumanFactors.SpatialStructures.Graph.GetNodeID</references>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_pathfinding_1_1_shortest_path_1ac63e41c1bc4310f6e64993c30d4a0fe5" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_human_factors_1_1_pathfinding_1_1_path" kindref="compound">Path</ref>[]</type>
+        <definition>static Path [] HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti</definition>
+        <argsstring>(Graph graph, int[] start_ids, int[] end_ids)</argsstring>
+        <name>DijkstraShortestPathMulti</name>
+        <param>
+          <type><ref refid="class_human_factors_1_1_spatial_structures_1_1_graph" kindref="compound">Graph</ref></type>
+          <declname>graph</declname>
+        </param>
+        <param>
+          <type>int[]</type>
+          <declname>start_ids</declname>
+        </param>
+        <param>
+          <type>int[]</type>
+          <declname>end_ids</declname>
+        </param>
+        <briefdescription>
+<para>Find the shortest paths between each pair of start_id and end_id in order. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>graph</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The graph to generate paths in. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>start_ids</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ids for the start points to generate paths from. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>end_ids</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ids for the end points to generate paths to</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A list of paths in order from start_ids to end_ids. If a path could not be generated by a set of points, then the path at that location will be null.</para>
+</simplesect>
+Uses all available cores for parallel calculation.</para>
+<para><simplesect kind="pre"><para>The length of start_ids must match the length of end_ids.</para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>System.ArgumentException</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of start_ids didn&apos;t equal length of end_ids </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>IndexOutOfRangeException</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>One or more of the start or end ids do not exist in <emphasis>graph</emphasis> . </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/pathfinding/src/ShortestPath.cs" line="98" column="28" bodyfile="src/Csharp/packages/pathfinding/src/ShortestPath.cs" bodystart="98" bodyend="114"/>
+        <references refid="class_human_factors_1_1_pathfinding_1_1_native_methods_1a13d7f289f9366b7c7f9c4b90916f74e4" compoundref="_pathfinding_native_8cs" startline="48" endline="72">HumanFactors.Pathfinding.NativeMethods.C_CreatePaths</references>
+        <references refid="class_human_factors_1_1_native_utils_1_1_native_object_1aa58c089e79cb4acc260755a41952d3d6" compoundref="_pointer_holder_8cs" startline="49" endline="49">HumanFactors.NativeUtils.NativeObject.Pointer</references>
+        <referencedby refid="class_human_factors_1_1_pathfinding_1_1_shortest_path_1a82d7192b92262f014d7d94ff1e898afc" compoundref="_shortest_path_8cs" startline="135" endline="153">HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_pathfinding_1_1_shortest_path_1a82d7192b92262f014d7d94ff1e898afc" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_human_factors_1_1_pathfinding_1_1_path" kindref="compound">Path</ref>[]</type>
+        <definition>static Path [] HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti</definition>
+        <argsstring>(Graph graph, IEnumerable&lt; Vector3D &gt; start_nodes, IEnumerable&lt; Vector3D &gt; end_nodes)</argsstring>
+        <name>DijkstraShortestPathMulti</name>
+        <param>
+          <type><ref refid="class_human_factors_1_1_spatial_structures_1_1_graph" kindref="compound">Graph</ref></type>
+          <declname>graph</declname>
+        </param>
+        <param>
+          <type>IEnumerable&lt; <ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref> &gt;</type>
+          <declname>start_nodes</declname>
+        </param>
+        <param>
+          <type>IEnumerable&lt; <ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref> &gt;</type>
+          <declname>end_nodes</declname>
+        </param>
+        <briefdescription>
+<para>Find the shortest paths between each pair of start_id and end_id in order. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>graph</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The graph to generate paths in. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>start_nodes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Locations of the start points to generate paths from. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>end_nodes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Locations of the end nodes to generate paths to.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A list of paths in order from start_ids to end_ids. If a path could not be generated by a set of points, then the path at that location will be null.</para>
+</simplesect>
+Determines the IDs of nodes, then calls the other overload. Uses all available cores for parallel calculation.</para>
+<para><simplesect kind="pre"><para>1) The length of start_ids must match the length of end_ids. </para>
+</simplesect>
+<simplesect kind="pre"><para>2) Each node in start_nodes and end_nodes must contain the x,y,z position of an existing node in graph</para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>System.ArgumentException</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of start_ids didn&apos;t equal length of end_ids </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>IndexOutOfRangeException</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>One or more of the start or end ids do not exist in <emphasis>graph</emphasis> . </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/pathfinding/src/ShortestPath.cs" line="135" column="28" bodyfile="src/Csharp/packages/pathfinding/src/ShortestPath.cs" bodystart="135" bodyend="153"/>
+        <references refid="class_human_factors_1_1_pathfinding_1_1_shortest_path_1ac63e41c1bc4310f6e64993c30d4a0fe5" compoundref="_shortest_path_8cs" startline="98" endline="114">HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Functions for finding the shortest path between two nodes in a graph. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="class_human_factors_1_1_pathfinding_1_1_shortest_path" kindref="compound">ShortestPath</ref> for generating a single path between two nodes. </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="class_human_factors_1_1_pathfinding_1_1_shortest_path_1ab4bd85d84d83a30601a190f583e097ac" kindref="member">DijkstraShortestPath</ref> for generating multiple paths at once. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="src/Csharp/packages/pathfinding/src/ShortestPath.cs" line="32" column="19" bodyfile="src/Csharp/packages/pathfinding/src/ShortestPath.cs" bodystart="32" bodyend="155"/>
+    <listofallmembers>
+      <member refid="class_human_factors_1_1_pathfinding_1_1_shortest_path_1ab4bd85d84d83a30601a190f583e097ac" prot="public" virt="non-virtual"><scope>HumanFactors::Pathfinding::ShortestPath</scope><name>DijkstraShortestPath</name></member>
+      <member refid="class_human_factors_1_1_pathfinding_1_1_shortest_path_1a7ca51d84089c860860ad7fb2fd717f61" prot="public" virt="non-virtual"><scope>HumanFactors::Pathfinding::ShortestPath</scope><name>DijkstraShortestPath</name></member>
+      <member refid="class_human_factors_1_1_pathfinding_1_1_shortest_path_1ac63e41c1bc4310f6e64993c30d4a0fe5" prot="public" virt="non-virtual"><scope>HumanFactors::Pathfinding::ShortestPath</scope><name>DijkstraShortestPathMulti</name></member>
+      <member refid="class_human_factors_1_1_pathfinding_1_1_shortest_path_1a82d7192b92262f014d7d94ff1e898afc" prot="public" virt="non-virtual"><scope>HumanFactors::Pathfinding::ShortestPath</scope><name>DijkstraShortestPathMulti</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

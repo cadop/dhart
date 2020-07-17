@@ -64,7 +64,9 @@ After clicking that button, your plane should be moved to the origin like in Fig
 \end{DoxyInlineImage}
   
 
-Double click on H\+F\+Example\+Script that we created in the first tutorial to open up Visual Studio if it isn\textquotesingle{}t open already. You should see a blank page like the above.
+{\itshape Figure} {\bfseries{4.\+5}} {\itshape An Empty Script}
+
+Double click on H\+F\+Example\+Script that we created in the first tutorial to open up Visual Studio if it isn\textquotesingle{}t open already. You should see a blank page like the above. If you\textquotesingle{}re coming from a previous tutorial, {\itshape please clear it so it matches this}.
 
 Just like the previous tutorials, we\textquotesingle{}re going to declare which namespaces this script will use in the using section. For now we only need one using declaration. Add this to the top of your script like in the previous tutorials.
 
@@ -75,7 +77,11 @@ Just like the previous tutorials, we\textquotesingle{}re going to declare which 
 
 
 Later you will be using different sections depending on whether you\textquotesingle{}re generating a graph or firing a ray.\hypertarget{_mesh_from_unity_autotoc_md33}{}\doxysubsection{Setup for Adding References Through The Unity Inspector}\label{_mesh_from_unity_autotoc_md33}
-
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{plane_in_scene.PNG}%Plane\+Reference
+\end{DoxyInlineImage}
+  
 
 {\itshape Figure} {\bfseries{4.\+6}}\+: {\itshape Script with a Game\+Object property}
 
@@ -83,17 +89,21 @@ There are many ways to reference a Game\+Object in the scene from a script, but 
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{GameObject PlaneInScene;}
+\DoxyCodeLine{\textcolor{keyword}{public} GameObject PlaneInScene;}
 \end{DoxyCode}
 
 
 Later we\textquotesingle{}ll use the Unity Inspector to assign the plane in the scene to this property.\hypertarget{_mesh_from_unity_autotoc_md34}{}\doxysubsection{Getting a Reference to the Mesh Held by a Specific Game\+Object}\label{_mesh_from_unity_autotoc_md34}
 Before we can extract the triangles and vertices from one an instance of a Unity Mesh, we first need to get a reference to the Mesh itself. Doing this requires some understanding of Unity Game\+Objects and their components.\hypertarget{_mesh_from_unity_autotoc_md35}{}\doxysubsubsection{Background on Game\+Objects and Components}\label{_mesh_from_unity_autotoc_md35}
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{plane_inspector.PNG}%Plane\+Reference
+\end{DoxyInlineImage}
+  
 
+{\itshape Figure} {\bfseries{4.\+7}}\+: {\itshape Components of the Plane shown in the Unity Inspector}
 
-{\itshape Figure} {\bfseries{4.\+6}}\+: {\itshape Components of the Plane shown in the Unity Inspector}
-
-Minimize Visual Studio then switch back to Unity for a moment. Left click on the plane we created previously, then look at the at the Inspector on the right sidebar. It should look similar to Figure 4.\+6. Here you can view all information about the plane, such as its position, the material it uses, which mesh it\textquotesingle{}s referencing, etc. You\textquotesingle{}ll notice the inspector is split into several sections\+: Transform, Meshfilter, Mesh Collider, and Mesh\+Renderer. Each of these sections is a separate {\bfseries{Component}} and the object we see in the scene is just a container for those components called a \href{https://docs.unity3d.com/Manual/class-GameObject.html}{\texttt{ {\bfseries{Game\+Object}}}}.
+Minimize Visual Studio then switch back to Unity for a moment. Left click on the plane we created previously, then look at the Inspector on the right sidebar. It should look similar to Figure 4.\+7. Here you can view all information about the plane, such as its position, the material it uses, which mesh it\textquotesingle{}s referencing, etc. You\textquotesingle{}ll notice the inspector is split into several sections\+: Transform, Meshfilter, Mesh Collider, and Mesh\+Renderer. Each of these sections is a separate {\bfseries{Component}} and the object we see in the scene is just a container for those components called a \href{https://docs.unity3d.com/Manual/class-GameObject.html}{\texttt{ {\bfseries{Game\+Object}}}}.
 
 As stated in the Unity Documentation\+:
 
@@ -102,7 +112,7 @@ As stated in the Unity Documentation\+:
 
 
 What this means for us is that the plane we see in the scene is not a Mesh, but a Game\+Object that contains a \href{https://docs.unity3d.com/ScriptReference/MeshFilter.html}{\texttt{ Mesh\+Filter}} that contains a Mesh. You can think of it like Game\+Object $>$ Mesh Filter $>$ Mesh. To obtain the Mesh itself, we must get it from the Mesh\+Filter component of the Plane Game\+Object.\hypertarget{_mesh_from_unity_autotoc_md36}{}\doxysubsubsection{In Practice}\label{_mesh_from_unity_autotoc_md36}
-A game object\textquotesingle{}s components can be retrieved using the \href{https://docs.unity3d.com/ScriptReference/GameObject.GetComponent.html}{\texttt{ Get\+Component}} method. Go back to the Visual Studio window. In our script we will store a reference to the plane\textquotesingle{}s mesh filter in a variable named {\ttfamily Plane\+Filter} at the beginning of the script\textquotesingle{}s Start() function like so\+:
+A game object\textquotesingle{}s components can be retrieved using the \href{https://docs.unity3d.com/ScriptReference/GameObject.GetComponent.html}{\texttt{ Get\+Component}} method. Go back to the Visual Studio window. In our script we will store a reference to the plane\textquotesingle{}s mesh filter in a variable named {\ttfamily Plane\+Filter} at the beginning of the script\textquotesingle{}s {\ttfamily Start()} function like so\+:
 
 
 \begin{DoxyCode}{0}
@@ -143,11 +153,15 @@ On line 9, just above the Start() function, add the following method\+:
 \end{DoxyCode}
 
 
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{flatten_vertex_array.PNG}%Convert Vector3 Array
+\end{DoxyInlineImage}
+  
 
+{\itshape Figure} {\bfseries{4.\+8}}\+: {\itshape Location for Vector3\+Array\+To\+Float\+Array}
 
-{\itshape Figure} {\bfseries{4.\+7}}\+: {\itshape Location for Vector3\+Array\+To\+Float\+Array}
-
-Now we can call this method with the mesh\textquotesingle{}s vertices as input to get an array usable with \mbox{\hyperlink{namespace_human_factors}{Human\+Factors}}. Retrieve the indices and vertices from the mesh by calling its .triangles and .vertices properties, making sure to convert the array of vertices array from an array of Vector3 to an array of floats.
+Now we can call this method with the mesh\textquotesingle{}s vertices as input to get an array usable with \mbox{\hyperlink{namespace_human_factors}{Human\+Factors}}. Retrieve the indices and vertices from the mesh by calling its {\ttfamily .triangles} and {\ttfamily .vertices} properties, making sure to convert the array of vertices array from an array of Vector3 to an array of floats.
 
 
 \begin{DoxyCode}{0}
@@ -169,13 +183,15 @@ After that, the process of constructing an instance of Mesh\+Info is identical t
 Before we can continue to using this mesh it\textquotesingle{}s important to cover a significant difference between this mesh and the mesh we\textquotesingle{}ve been creating in our code.\hypertarget{_mesh_from_unity_autotoc_md38}{}\doxysubsection{Transforming the Mesh From Y-\/\+Up to Z-\/\+Up}\label{_mesh_from_unity_autotoc_md38}
  
 \begin{DoxyInlineImage}
-\includegraphics[height=\baselineskip,keepaspectratio=true]{walkthroughs/unity/4_reading_mesh_from_unity}%/../4\+\_\+mesh\+\_\+reading/unity\+\_\+coordinate\+\_\+system.png \char`\"{}\+Unity\+Coords\char`\"{}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{unity_coordinate_system.png}%Unity\+Coords
+\end{DoxyInlineImage}
+    
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{rhino_coordinates.PNG}%Rhino\+Coords
 \end{DoxyInlineImage}
   
 
-
-
-{\itshape Figure} {\bfseries{4.\+8}}\+: {\itshape Left\+: Unity\textquotesingle{}s coordinate system. Right\+: \mbox{\hyperlink{namespace_human_factors}{Human\+Factors}}\textquotesingle{}s Coordinate system}
+{\itshape Figure} {\bfseries{4.\+9}}\+: {\itshape Left\+: Unity\textquotesingle{}s coordinate system. Right\+: \mbox{\hyperlink{namespace_human_factors}{Human\+Factors}}\textquotesingle{}s Coordinate system}
 
 The Graph Generator expects geometry to be stored as if the Z-\/\+Axis were up as shown in the picture on the right. In Unity however, the Y-\/\+Axis is up, as shown in the left picture, meaning that we\textquotesingle{}ll get inaccurate results if we use the mesh as is. To solve this, {\itshape Mesh\+Info} has a method {\itshape Rotate\+Mesh} that allows it to rotate itself after is has been constructed. Another class in the Geometry namespace titled {\itshape Common\+Rotations} contains the rotation necessary to perform this conversion.
 
@@ -188,7 +204,7 @@ Enter the following code to rotate the plane to the correct orientation\+:
 \end{DoxyCode}
 
 
-Now that the plane is in the correct orienteation, we are ready to move on to verifying that we loaded the mesh successfully.\hypertarget{_mesh_from_unity_autotoc_md39}{}\doxysubsection{Choose code From Previous Tutorial to Verify Results}\label{_mesh_from_unity_autotoc_md39}
+Now that the plane is in the correct orientation, we are ready to move on to verifying that we loaded the mesh successfully.\hypertarget{_mesh_from_unity_autotoc_md39}{}\doxysubsection{Choose code From Previous Tutorial to Verify Results}\label{_mesh_from_unity_autotoc_md39}
 Up until this point, your code should match the code below.
 
 
@@ -243,29 +259,89 @@ Up until this point, your code should match the code below.
 \end{DoxyCode}
 
 
-\href{walkthroughs/unity/4_mesh_reading/end_of_getting_mesh.png}{\texttt{ Screenshot of the entire code until this point}}
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{end_of_getting_mesh.png}%Screenshot of the entire code until this point
+\end{DoxyInlineImage}
+  
 
 To see if we\textquotesingle{}re successfully reading the mesh from the scene, {\itshape pick either the graph generator or the raytracer tutorial to use for testing}. Substitute {\ttfamily Plane\+Mesh\+Info} everywhere the code from the previous tutorials use {\ttfamily Plane}. The code you take from the other sections should be added directly after the line containing {\ttfamily Plane\+Mesh\+Info.\+Rotate\+Mesh()}.
 
-The lines you should copy for each tutorial are\+:
+The lines you should copy for each tutorial are\+:\hypertarget{_mesh_from_unity_autotoc_md40}{}\doxysubsubsection{Graph Generator}\label{_mesh_from_unity_autotoc_md40}
+Add the following using statments\+:
 
 
-\begin{DoxyItemize}
-\item Lines 30 -\/ 49 for the Graph Generator.
-\item Lines 28 -\/ 43 for the Raytracer.
-\end{DoxyItemize}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{namespace_human_factors}{HumanFactors}};}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{namespace_human_factors}{HumanFactors}}.\mbox{\hyperlink{namespace_human_factors_1_1_ray_tracing}{RayTracing}};}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{namespace_human_factors}{HumanFactors}}.\mbox{\hyperlink{namespace_human_factors_1_1_geometry}{Geometry}};}
+\end{DoxyCode}
 
-Make sure to copy over any other using declarations that the selected tutorial uses, since those are required for it to function. Once you\textquotesingle{}ve finished this, {\itshape {\bfseries{S\+A\+VE}}} your script, minimize Visual Studio, and switch to the Unity Editor.\hypertarget{_mesh_from_unity_autotoc_md40}{}\doxysection{Testing the Script}\label{_mesh_from_unity_autotoc_md40}
-Like in the previous tutorials, drag the H\+F\+Example\+Script onto the Main Camera object in the scene hierarchy to set it as a component. In the previous scripts we were ready to go after this step, but here we need to assign the Plane Game\+Object to the script in the Unity Inspector.\hypertarget{_mesh_from_unity_autotoc_md41}{}\doxysubsection{Adding References to Properties Through the Unity Inspector}\label{_mesh_from_unity_autotoc_md41}
+
+Copy and paste lines Lines 30 -\/ 42 from the Graph Generator tutorial\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Generate a BVH for the RayTracer}}
+\DoxyCodeLine{EmbreeBVH bvh = \textcolor{keyword}{new} EmbreeBVH(PlaneMeshInfo);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Set Options for the Graph Generator}}
+\DoxyCodeLine{Vector3D start\_point = \textcolor{keyword}{new} Vector3D(0, 0, 1);}
+\DoxyCodeLine{Vector3D spacing = \textcolor{keyword}{new} Vector3D(1, 1, 1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Generate the Graph}}
+\DoxyCodeLine{Graph G = GraphGenerator.GenerateGraph(bvh, start\_point, spacing);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Get a list of nodes from the graph and print them.}}
+\DoxyCodeLine{NodeList nodes = G.getNodes();}
+\DoxyCodeLine{Debug.Log(nodes);}
+\end{DoxyCode}
+\hypertarget{_mesh_from_unity_autotoc_md41}{}\doxysubsubsection{Ray Tracer}\label{_mesh_from_unity_autotoc_md41}
+Add the following using statments\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{namespace_human_factors}{HumanFactors}};}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{namespace_human_factors}{HumanFactors}}.\mbox{\hyperlink{namespace_human_factors_1_1_spatial_structures}{SpatialStructures}};}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{namespace_human_factors}{HumanFactors}}.\mbox{\hyperlink{namespace_human_factors_1_1_graph_generator}{GraphGenerator}};}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{namespace_human_factors}{HumanFactors}}.\mbox{\hyperlink{namespace_human_factors_1_1_ray_tracing}{RayTracing}};}
+\end{DoxyCode}
+
+
+Copy and paste lines 28 -\/ 43 from the raytracer tutorial\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Generate a BVH from the MeshInfo instance}}
+\DoxyCodeLine{EmbreeBVH bvh = \textcolor{keyword}{new} EmbreeBVH(PlaneMeshInfo);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Define origin and direction}}
+\DoxyCodeLine{Vector3D origin = \textcolor{keyword}{new} Vector3D(1, 0, 1);}
+\DoxyCodeLine{Vector3D direction = \textcolor{keyword}{new} Vector3D(0, 0, -\/1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Cast the ray, store the hitpoint}}
+\DoxyCodeLine{Vector3D intersection\_point = EmbreeRaytracer.IntersectForPoint(bvh, origin, direction);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Print the x, y, and z components of the intersection\_point}}
+\DoxyCodeLine{Debug.Log(}
+\DoxyCodeLine{    \textcolor{stringliteral}{"("} + intersection\_point.x +}
+\DoxyCodeLine{    \textcolor{stringliteral}{","} + intersection\_point.y +}
+\DoxyCodeLine{    \textcolor{stringliteral}{","} + intersection\_point.z +}
+\DoxyCodeLine{\textcolor{stringliteral}{")"})}
+\end{DoxyCode}
+
+
+{\bfseries{Make sure to copy over any other using declarations that the selected tutorial uses}}, since those are required for it to function. Once you\textquotesingle{}ve finished this, {\itshape {\bfseries{S\+A\+VE}}} your script, minimize Visual Studio, and switch to the Unity Editor.\hypertarget{_mesh_from_unity_autotoc_md42}{}\doxysection{Testing the Script}\label{_mesh_from_unity_autotoc_md42}
+Like in the previous tutorials, drag the H\+F\+Example\+Script onto the Main Camera object in the scene hierarchy to set it as a component. In the previous scripts we were ready to go after this step, but here we need to assign the Plane Game\+Object to the script in the Unity Inspector.\hypertarget{_mesh_from_unity_autotoc_md43}{}\doxysubsection{Adding References to Properties Through the Unity Inspector}\label{_mesh_from_unity_autotoc_md43}
  
 \begin{DoxyInlineImage}
 \includegraphics[height=\baselineskip,keepaspectratio=true]{inspect_new_attribute.png}%Unity Inspector New Attribute
 \end{DoxyInlineImage}
   
 
-{\itshape Figure} {\bfseries{4.\+9}}\+: {\itshape Red circle\+: Main Camera, Highlighted\+: Plane\+In\+Scene Reference, Blue Circle\+: Assign Reference Button}
+{\itshape Figure} {\bfseries{4.\+10}}\+: {\itshape Red circle\+: Main Camera, Highlighted\+: Plane\+In\+Scene Reference, Blue Circle\+: Assign Reference Button}
 
-Click on the Main Camera in the left under the scene hierarchy. Notice that the HF Example Script component now has a new element under it titled {\itshape Plane In Scene}. This is the class member we created earlier, and we must assign it to the Plane we created. To assign the plane to this script, click the icon to the right of {\itshape Plane In Scene} (Circled in blue in Figure 4.\+9).
+Click on the Main Camera in the left under the scene hierarchy. Notice that the HF Example Script component now has a new element under it titled {\itshape Plane In Scene}. This is the class member we created earlier, and we must assign it to the Plane we created. To assign the plane to this script, click the icon to the right of {\itshape Plane In Scene} (Circled in blue in Figure 4.\+10).
 
  
 \begin{DoxyInlineImage}
@@ -273,9 +349,9 @@ Click on the Main Camera in the left under the scene hierarchy. Notice that the 
 \end{DoxyInlineImage}
   
 
-{\itshape Figure} {\bfseries{4.\+10}}\+: {\itshape Gameobject Select Window}
+{\itshape Figure} {\bfseries{4.\+11}}\+: {\itshape Gameobject Select Window}
 
-A new window will appear asking you to select a game object. Double click on Plane, highlighted in Figure 4.\+10, then look back at the Unity Inspector.
+A new window will appear asking you to select a game object. Double click on Plane, highlighted in Figure 4.\+11, then look back at the Unity Inspector.
 
  
 \begin{DoxyInlineImage}
@@ -283,9 +359,9 @@ A new window will appear asking you to select a game object. Double click on Pla
 \end{DoxyInlineImage}
   
 
-{\itshape Figure} {\bfseries{4.\+11}}\+: {\itshape Inspector With Plane}
+{\itshape Figure} {\bfseries{4.\+12}}\+: {\itshape Inspector With Plane}
 
-You should now see the plane in the Unity Inspector next to Plane\+In\+Scene, like in Figure 4.\+11. If you see this, then you have successfully added the plane to the script as a reference.\hypertarget{_mesh_from_unity_autotoc_md42}{}\doxysubsection{Comparing Output}\label{_mesh_from_unity_autotoc_md42}
+You should now see the plane in the Unity Inspector next to Plane\+In\+Scene, like in Figure 4.\+12. If you see this, then you have successfully added the plane to the script as a reference.\hypertarget{_mesh_from_unity_autotoc_md44}{}\doxysubsection{Comparing Output}\label{_mesh_from_unity_autotoc_md44}
 Now, enter play mode by clicking the play button. If you have performed the above steps correctly, then your output should match The output below for the code you\textquotesingle{}ve chosen\+:
 
 {\itshape {\bfseries{Graph Generator}}} \+: {\ttfamily \mbox{[}(0.\+000,0.\+000,0.\+000), (-\/1.\+000,-\/1.\+000,0.\+000), (-\/1.\+000,0.\+000,0.\+000), (-\/1.\+000,1.\+000,0.\+000), (0.\+000,-\/1.\+000,0.\+000), . . . (2.\+000,5.\+000,0.\+000), (3.\+000,5.\+000,0.\+000), (4.\+000,-\/5.\+000,0.\+000), (4.\+000,5.\+000,0.\+000)\mbox{]}}
@@ -296,7 +372,7 @@ Now, enter play mode by clicking the play button. If you have performed the abov
 {\bfseries{N\+O\+TE}}\+: For the raytracer you might get an extremely low number for the Z component such as 5.\+960464E-\/08 instead of 0. This is normal, since none of the plane\textquotesingle{}s vertices are exactly at whole numbers like they were in our example script. In fact, if you try to print any Vector3s like the ones returned from Mesh.\+vertices, they will round their components before displaying them. The nodelist returned from the graph will also round the components for every node it contains when converted to a string. Keep this in mind when reviewing results in the future. \end{quote}
 
 
-If your output matches the above output for the code you\textquotesingle{}ve chosen, then you have successfully completed this tutorial.\hypertarget{_mesh_from_unity_autotoc_md43}{}\doxysection{Conclusion}\label{_mesh_from_unity_autotoc_md43}
+If your output matches the above output for the code you\textquotesingle{}ve chosen, then you have successfully completed this tutorial.\hypertarget{_mesh_from_unity_autotoc_md45}{}\doxysection{Conclusion}\label{_mesh_from_unity_autotoc_md45}
 Here is a link the full project created in this guide\+: \href{Tutorial\%204\%20-\%20Reading\%20Mesh\%20From\%20Unity.zip}{\texttt{ Full Project}}
 
 With this you have successfully read geometry from the Unity Scene and passed it to \mbox{\hyperlink{namespace_human_factors}{Human\+Factors}}. This concludes the tutorial series for this point.

@@ -7,7 +7,9 @@ using System.Runtime.Serialization.Formatters;
 
 namespace HumanFactors.SpatialStructures
 {
-    /// <summary> Contains info necessary to reconstruct or access a CSR </summary>
+    /*! 
+        \brief Contains info necessary to reconstruct or access a CSR.
+    */
     public struct CSRInfo
     {
         /// <summary> The number of nonzeros contained by the graph. </summary>
@@ -35,7 +37,7 @@ namespace HumanFactors.SpatialStructures
         /// <param name="data"> Pointer to the CSR's data array. </param>
         /// <param name="outer_indices"> Pointer to the CSR's outer_indices array. </param>
         /// <param name="inner_indices"> Pointer to the CSR's inner_indices array. </param>
-        public CSRInfo(int nnz, int cols, int rows, IntPtr data, IntPtr outer_indices, IntPtr inner_indices)
+        internal CSRInfo(int nnz, int cols, int rows, IntPtr data, IntPtr outer_indices, IntPtr inner_indices)
         {
             this.nnz = nnz;
             this.rows = rows;

@@ -2,31 +2,63 @@
 \label{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h}\index{HumanFactors.RayTracing.EmbreeBVH@{HumanFactors.RayTracing.EmbreeBVH}}
 
 
-Contains A B\+VH for use with the Embree\+Raytracer.  
+A Bounding Volume Hierarchy for the \mbox{\hyperlink{class_human_factors_1_1_ray_tracing_1_1_embree_raytracer}{Embree\+Raytracer}}.  
 
 
-Inheritance diagram for Human\+Factors.\+Ray\+Tracing.\+Embree\+B\+VH\+:\begin{figure}[H]
+
+
+Inheritance diagram for Human\+Factors.\+Ray\+Tracing.\+Embree\+B\+VH\+:
+\nopagebreak
+\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=3.000000cm]{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h}
+\includegraphics[width=215pt]{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Human\+Factors.\+Ray\+Tracing.\+Embree\+B\+VH\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=215pt]{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h__coll__graph}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_abe609aebad5a2369ad13c891eb1802f4}{Embree\+B\+VH}} (\mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_mesh_info}{Mesh\+Info}} MI)
-\begin{DoxyCompactList}\small\item\em Create a new B\+VH for the mesh located at {\itshape MI}  \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Generate a B\+VH for an instance of Mesh\+Info. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_a9ece3f96ea62288bb7875ac37e037303}\label{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_a9ece3f96ea62288bb7875ac37e037303}} 
-override bool {\bfseries Release\+Handle} ()
-\end{DoxyCompactItemize}
+override bool \mbox{\hyperlink{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_a9ece3f96ea62288bb7875ac37e037303}{Release\+Handle}} ()
+\begin{DoxyCompactList}\small\item\em Free the native memory managed by this class. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-Contains A B\+VH for use with the Embree\+Raytracer. 
+A Bounding Volume Hierarchy for the \mbox{\hyperlink{class_human_factors_1_1_ray_tracing_1_1_embree_raytracer}{Embree\+Raytracer}}. 
+
+Upon calling the constructor for this class, a Bounding Volume Hierarchy is generated for the \mbox{\hyperlink{class_human_factors_1_1_ray_tracing_1_1_embree_raytracer}{Ray\+Tracing.\+Embree\+Raytracer}}. Without this structure, the raytracer cannot be used.
+
+\begin{DoxyRemark}{Remarks}
+A more detailed description of Embree\textquotesingle{}s B\+VH is available in intel\textquotesingle{}s paper\+: Embree\+: A Kernel Framework for Efficient C\+PU Ray Tracing \href{http://cseweb.ucsd.edu/~ravir/274/15/papers/a143-wald.pdf}{\texttt{ http\+://cseweb.\+ucsd.\+edu/$\sim$ravir/274/15/papers/a143-\/wald.\+pdf}}.
+\end{DoxyRemark}
+\begin{DoxyNote}{Note}
+In C++ this is is an Embree\+Ray\+Tracer.
+\end{DoxyNote}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000007}{Todo}}]Functions to add meshes to an existing B\+VH \end{DoxyRefDesc}
+
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_human_factors_1_1_ray_tracing_1_1_embree_raytracer}{Embree\+Raytracer}} for functions to use this B\+VH for ray intersections. 
+\end{DoxySeeAlso}
+
+
+Definition at line 30 of file Embree\+B\+V\+H.\+cs.
 
 
 
@@ -39,15 +71,65 @@ Contains A B\+VH for use with the Embree\+Raytracer.
 
 
 
-Create a new B\+VH for the mesh located at {\itshape MI}  
+Generate a B\+VH for an instance of Mesh\+Info. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em MI} & Mesh to use for B\+VH construction\\
+{\em MI} & Mesh to generate the B\+VH from.\\
 \hline
 \end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & Embree failed to create a B\+VH for the given mesh.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000008}{Todo}}]Add missing dependency exception \end{DoxyRefDesc}
+
+
+Definition at line 43 of file Embree\+B\+V\+H.\+cs.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_a9ece3f96ea62288bb7875ac37e037303}\label{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_a9ece3f96ea62288bb7875ac37e037303}} 
+\index{HumanFactors.RayTracing.EmbreeBVH@{HumanFactors.RayTracing.EmbreeBVH}!ReleaseHandle@{ReleaseHandle}}
+\index{ReleaseHandle@{ReleaseHandle}!HumanFactors.RayTracing.EmbreeBVH@{HumanFactors.RayTracing.EmbreeBVH}}
+\doxysubsubsection{\texorpdfstring{ReleaseHandle()}{ReleaseHandle()}}
+{\footnotesize\ttfamily override bool Human\+Factors.\+Ray\+Tracing.\+Embree\+B\+V\+H.\+Release\+Handle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Free the native memory managed by this class. 
+
+\begin{DoxyNote}{Note}
+the garbage collector will handle this automatically 
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+Do not attempt to use this class after freeing it! 
+\end{DoxyWarning}
+\begin{DoxyReturn}{Returns}
+True. This is guaranteed to execute properly. ~\newline
+ 
+\end{DoxyReturn}
+
+
+Definition at line 51 of file Embree\+B\+V\+H.\+cs.
+
+
+
+References Human\+Factors.\+Ray\+Tracing.\+Native\+Methods.\+C\+\_\+\+Destroy\+Ray\+Tracer().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_a9ece3f96ea62288bb7875ac37e037303_cgraph}
+\end{center}
+\end{figure}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-src/\+Csharp/packages/raytracer/src/Embree\+B\+V\+H.\+cs\end{DoxyCompactItemize}
+src/\+Csharp/packages/raytracer/src/\mbox{\hyperlink{_embree_b_v_h_8cs}{Embree\+B\+V\+H.\+cs}}\end{DoxyCompactItemize}

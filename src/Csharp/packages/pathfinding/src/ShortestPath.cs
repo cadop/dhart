@@ -10,29 +10,41 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 
+/*! 
+    \brief Calculate the shortest path between points in a Graph.
+
+    \see ShortestPath for a list of pathfinding functions.
+    \see Path for information on the fundamental path datatype. 
+
+    \see SpatialStructures.Graph for information about the graph itself
+    \see GraphGenerator to automatically generate a graph of accessible space on a mesh.
+
+*/
 namespace HumanFactors.Pathfinding
 {
-    /// <summary>
-    /// Methods to calculate the shortest path for <see cref="SpatialStructures.Graph" />
-    /// </summary>
+
+    /*!
+        \brief Functions for finding the shortest path between two nodes in a graph.
+
+        \see ShortestPath for generating a single path between two nodes.
+        \see DijkstraShortestPath for generating multiple paths at once. 
+    */
     public static class ShortestPath{
 
-        /// <summary>
-        /// Perform Dijkstra's shortest path algorithm to find a path from <paramref name="start_id"
-        /// /> to <paramref name="end_id" />
-        /// </summary>
-        /// <param name="graph"> The graph to conduct the search on. </param>
-        /// <param name="start_id"> The ID of the node to start at. </param>
-        /// <param name="end_id"> The ID of the node to path to. </param>
-        /// <returns> A path from <paramref name="start_id" /> to <paramref name="end_id" /> </returns>
-        /// <exception cref="IndexOutOfRangeException">
-        /// <paramref name="start_id" /> or <paramref name="end_id" /> are not the ids of any nodes
-        /// in the graph.
-        /// </exception>
-        /// <remarks>
-        /// For searching multiple paths at once efficiently it's recommended to use <see
-        /// cref="DijkstraShortestPathMulti(Graph, IEnumerable{Vector3D}, IEnumerable{Vector3D})" />.
-        /// </remarks>
+        /*!
+            \brief Perform Dijkstra's shortest path algorithm to find a path between two nodes.
+            
+            \param graph The graph to conduct the search on.
+            \param start_id The ID of the node to start at.
+            \param end_id The ID of the node to find a path to. 
+            
+            \returns A path from <paramref name="start_id" /> to <paramref name="end_id" />  
+            
+            \throws IndexOutOfRangeException <paramref name="start_id" /> or <paramref name="end_id" /> are not the ids of
+            any nodes in the graph.
+
+            \see DijkstraShortestPathMulti for efficently generating multiple paths in parallel.
+        */
         public static Path DijkstraShortestPath(Graph graph, int start_id, int end_id)
         {
             CVectorAndData cvad = NativeMethods.C_CreatePath(graph.Pointer, start_id, end_id);
@@ -42,27 +54,21 @@ namespace HumanFactors.Pathfinding
                 return new Path(cvad);
         }
 
-        /// <summary>
-        /// Perform Dijkstra's shortest path algorithm to find a path from <paramref name="start_id"
-        /// /> to <paramref name="end_id" />.
-        /// </summary>
-        /// <param name="graph"> The graph to conduct the search on. </param>
-        /// <param name="start_node"> The node to start at. </param>
-        /// <param name="end_node"> The node to end at. </param>
-        /// <returns>
-        /// A path from <paramref name="start_node" /> to <paramref name="end_node" />.
-        /// </returns>
-        /// <exception cref="IndexOutOfRangeException">
-        /// <paramref name="start_id" /> or <paramref name="end_id" /> do not exist in the graph.
-        /// </exception>
-        /// <remarks>
-        /// For searching multiple paths at once efficiently use <see
-        /// cref="DijkstraShortestPathMulti(Graph, IEnumerable{Vector3D}, IEnumerable{Vector3D})" />
-        /// </remarks>
-        /// <remarks>
-        /// For searching multiple paths at once efficiently it's recommended to use <see
-        /// cref="DijkstraShortestPathMulti(Graph, IEnumerable{Vector3D}, IEnumerable{Vector3D})" />.
-        /// </remarks>
+        /*!
+            \brief Perform Dijkstra's shortest path algorithm to find a path between two nodes.
+            
+            \param graph The graph to conduct the search on.
+            \param start_node The X,Y,Z of a node in the graph node to start at.
+            \param end_node The X,Y,Z of a node in the graph node to end at.
+            
+            \returns A path from start_node to end_node.
+            
+            \throws IndexOutOfRangeException start_node or end_node don't exist in the graph.
+
+            \remarks Gets the start id and end of both nodes, then calls the ID overload. 
+
+            \see DijkstraShortestPathMulti for efficently generating multiple paths in parallel.
+        */
         public static Path DijkstraShortestPath(Graph graph, Vector3D start_node, Vector3D end_node)
         {
             int parent_id = graph.GetNodeID(start_node);
@@ -71,23 +77,24 @@ namespace HumanFactors.Pathfinding
             return DijkstraShortestPath(graph, parent_id, child_id);
         }
 
-        /// <summary> Find the shortest paths between each pair of start_id and end_id in order. </summary>
-        /// <param name="graph"> The graph to generate paths in. </param>
-        /// <param name="start_ids">
-        /// Ids for the start points to generate paths from. Length should be equal to that of
-        /// <paramref name="end_ids" />.
-        /// </param>
-        /// <param name="end_ids">
-        /// Ids for the end points to generate paths to. Length should be equal to that of <paramref
-        /// name="start_ids" />.
-        /// </param>
-        /// <returns> </returns>
-        /// <exception cref="System.ArgumentException">
-        /// Length of <paramref name="start_ids"/> didn't equal length of <paramref name="end_ids"/>.
-        /// </exception>
-        /// <exception cref="IndexOutOfRangeException">
-        /// One or more of the start or end ids do not exist in <paramref name="graph" />.
-        /// </exception>
+        /*! 
+            \brief Find the shortest paths between each pair of start_id and end_id in order. 
+            
+            \param graph The graph to generate paths in.
+            \param start_ids Ids for the start points to generate paths from. 
+            \param end_ids Ids for the end points to generate paths to
+            
+            \returns
+            A list of paths in order from start_ids to end_ids. If a path could not be generated by a set of points,
+            then the path at that location will be null. 
+
+            \details Uses all available cores for parallel calculation. 
+
+            \pre The length of start_ids must match the length of end_ids.
+
+            \throws System.ArgumentException Length of start_ids didn't equal length of end_ids
+            \throws IndexOutOfRangeException One or more of the start or end ids do not exist in <paramref name="graph" />.
+        */
         public static Path[] DijkstraShortestPathMulti(Graph graph, int[] start_ids, int[] end_ids)
         {
             if (start_ids.Length != end_ids.Length) 
@@ -106,23 +113,25 @@ namespace HumanFactors.Pathfinding
             return paths;
         }
 
-        /// <summary> Find the shortest paths between each pair of start_id and end_id in order. </summary>
-        /// <param name="graph"> The graph to generate paths in. </param>
-        /// <param name="start_nodes">
-        /// Start points to generate paths from. Length should be equal to that of <paramref
-        /// name="end_nodes" />.
-        /// </param>
-        /// <param name="end_nodes">
-        /// End points to generate paths to. Length should be equal to that of <paramref
-        /// name="start_nodes" />.
-        /// </param>
-        /// <returns> </returns>
-        /// <exception cref="System.ArgumentException">
-        /// Length of <paramref name="start_nodes"/> didn't equal length of <paramref name="end_nodes"/>.
-        /// </exception>
-        /// <exception cref="IndexOutOfRangeException">
-        /// One or more of the start or end nodes do not exist in <paramref name="graph" />.
-        /// </exception>
+        /*! 
+            \brief Find the shortest paths between each pair of start_id and end_id in order. 
+            
+            \param graph The graph to generate paths in.
+            \param start_nodes Locations of the start points to generate paths from.
+            \param end_nodes Locations of the end nodes to generate paths to.
+            
+            \returns
+            A list of paths in order from start_ids to end_ids. If a path could not be generated by a set of points,
+            then the path at that location will be null. 
+
+            \details Determines the IDs of nodes, then calls the other overload. Uses all available cores for parallel calculation. 
+
+            \pre 1) The length of start_ids must match the length of end_ids.
+            \pre 2) Each node in start_nodes and end_nodes must contain the x,y,z position of an existing node in graph
+
+            \throws System.ArgumentException Length of start_ids didn't equal length of end_ids
+            \throws IndexOutOfRangeException One or more of the start or end ids do not exist in <paramref name="graph" />.
+        */
         public static Path[] DijkstraShortestPathMulti(Graph graph, IEnumerable<Vector3D> start_nodes, IEnumerable<Vector3D> end_nodes)
         {
             if (start_nodes.Count() != end_nodes.Count())

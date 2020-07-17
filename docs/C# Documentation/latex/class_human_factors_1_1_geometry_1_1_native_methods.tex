@@ -1,0 +1,229 @@
+\hypertarget{class_human_factors_1_1_geometry_1_1_native_methods}{}\doxysection{Human\+Factors.\+Geometry.\+Native\+Methods Class Reference}
+\label{class_human_factors_1_1_geometry_1_1_native_methods}\index{HumanFactors.Geometry.NativeMethods@{HumanFactors.Geometry.NativeMethods}}
+
+
+Native methods for the \mbox{\hyperlink{namespace_human_factors_1_1_geometry}{Geometry}} namespace  
+
+
+\doxysubsection*{Package Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_native_methods_ab6e72967e3eafc026eef3c55029964e1}{Store\+Mesh}} (ref Int\+Ptr out\+\_\+info, \mbox{[}In\mbox{]} int\mbox{[}$\,$\mbox{]} indices, int num\+\_\+indices, \mbox{[}In\mbox{]} float\mbox{[}$\,$\mbox{]} vertices, int num\+\_\+vertices, string name, int id)
+\item 
+static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_native_methods_aef0d55401f54dc146560c34f7de8c5f6}{Destroy\+Mesh\+Info}} (Int\+Ptr Mesh\+To\+Destroy)
+\item 
+static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_native_methods_a32ef96beb52ba493b079d7091073261c}{Rotate\+Mesh}} (Int\+Ptr Meshinfo, float xrot, float yrot, float zrot)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Package Functions}
+\begin{DoxyCompactItemize}
+\item 
+static Int\+Ptr \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_native_methods_a9eeec91b00cb0221c59ebedeac8dcd63}{C\+\_\+\+Load\+O\+BJ}} (string obj\+\_\+path, float xrot, float yrot, float zrot)
+\begin{DoxyCompactList}\small\item\em Attempt to load the O\+BJ at the given filepath. If a rotation is specifed, the obj will be rotated after it is loaded. \end{DoxyCompactList}\item 
+static Int\+Ptr \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_native_methods_a77e66bc56f1f090cdd088c02cacce4a2}{C\+\_\+\+Store\+Mesh}} (I\+Enumerable$<$ float $>$ vertices, I\+Enumerable$<$ int $>$ indices, string name, int id)
+\begin{DoxyCompactList}\small\item\em Store a mesh in managed memory. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_native_methods_a7c784afd0f49cf84c49cb0267d6701a7}{C\+\_\+\+Rotate\+Mesh}} (Int\+Ptr mesh, float xrot, float yrot, float zrot)
+\begin{DoxyCompactList}\small\item\em Rotate this mesh in C++ \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_native_methods_adf39cb5b0ee7a851f101cb81699a6e76}{Load\+O\+BJ}} (string obj\+\_\+paths, int length, float yrot, float xrot, float zrot, ref Int\+Ptr out\+\_\+mesh\+\_\+info)
+\begin{DoxyCompactList}\small\item\em Loads an O\+BJ file into meshinfo at the given instance \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const string \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_native_methods_a07c79b817c7f3758f1e97b06a26f527e}{dllpath}} = Native\+Constants.\+D\+L\+L\+Path
+\begin{DoxyCompactList}\small\item\em Path to the \mbox{\hyperlink{namespace_human_factors}{Human\+Factors}} dll copied from Native\+Constants. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Native methods for the \mbox{\hyperlink{namespace_human_factors_1_1_geometry}{Geometry}} namespace 
+
+
+
+Definition at line 19 of file Geometry\+Native.\+cs.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_human_factors_1_1_geometry_1_1_native_methods_a9eeec91b00cb0221c59ebedeac8dcd63}\label{class_human_factors_1_1_geometry_1_1_native_methods_a9eeec91b00cb0221c59ebedeac8dcd63}} 
+\index{HumanFactors.Geometry.NativeMethods@{HumanFactors.Geometry.NativeMethods}!C\_LoadOBJ@{C\_LoadOBJ}}
+\index{C\_LoadOBJ@{C\_LoadOBJ}!HumanFactors.Geometry.NativeMethods@{HumanFactors.Geometry.NativeMethods}}
+\doxysubsubsection{\texorpdfstring{C\_LoadOBJ()}{C\_LoadOBJ()}}
+{\footnotesize\ttfamily static Int\+Ptr Human\+Factors.\+Geometry.\+Native\+Methods.\+C\+\_\+\+Load\+O\+BJ (\begin{DoxyParamCaption}\item[{string}]{obj\+\_\+path,  }\item[{float}]{xrot,  }\item[{float}]{yrot,  }\item[{float}]{zrot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [package]}}
+
+
+
+Attempt to load the O\+BJ at the given filepath. If a rotation is specifed, the obj will be rotated after it is loaded. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj\+\_\+path} & Filepath for the obj to load\\
+\hline
+{\em xrot} & Degrees to rotate the mesh on the z axis. \\
+\hline
+{\em yrot} & Degrees to rotate the mesh on the y axis.\\
+\hline
+{\em zrot} & Degrees to rotate the mesh on the z axis. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to a valid instance of meshinfo from C++ 
+\end{DoxyReturn}
+
+
+Definition at line 36 of file Geometry\+Native.\+cs.
+
+
+
+References Human\+Factors.\+Geometry.\+Native\+Methods.\+Load\+O\+B\+J().
+
+
+
+Referenced by Human\+Factors.\+Geometry.\+O\+B\+J\+Loader.\+Load\+O\+B\+J().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_human_factors_1_1_geometry_1_1_native_methods_a9eeec91b00cb0221c59ebedeac8dcd63_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_human_factors_1_1_geometry_1_1_native_methods_a9eeec91b00cb0221c59ebedeac8dcd63_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_human_factors_1_1_geometry_1_1_native_methods_a7c784afd0f49cf84c49cb0267d6701a7}\label{class_human_factors_1_1_geometry_1_1_native_methods_a7c784afd0f49cf84c49cb0267d6701a7}} 
+\index{HumanFactors.Geometry.NativeMethods@{HumanFactors.Geometry.NativeMethods}!C\_RotateMesh@{C\_RotateMesh}}
+\index{C\_RotateMesh@{C\_RotateMesh}!HumanFactors.Geometry.NativeMethods@{HumanFactors.Geometry.NativeMethods}}
+\doxysubsubsection{\texorpdfstring{C\_RotateMesh()}{C\_RotateMesh()}}
+{\footnotesize\ttfamily static void Human\+Factors.\+Geometry.\+Native\+Methods.\+C\+\_\+\+Rotate\+Mesh (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{mesh,  }\item[{float}]{xrot,  }\item[{float}]{yrot,  }\item[{float}]{zrot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [package]}}
+
+
+
+Rotate this mesh in C++ 
+
+\mbox{\Hypertarget{class_human_factors_1_1_geometry_1_1_native_methods_a77e66bc56f1f090cdd088c02cacce4a2}\label{class_human_factors_1_1_geometry_1_1_native_methods_a77e66bc56f1f090cdd088c02cacce4a2}} 
+\index{HumanFactors.Geometry.NativeMethods@{HumanFactors.Geometry.NativeMethods}!C\_StoreMesh@{C\_StoreMesh}}
+\index{C\_StoreMesh@{C\_StoreMesh}!HumanFactors.Geometry.NativeMethods@{HumanFactors.Geometry.NativeMethods}}
+\doxysubsubsection{\texorpdfstring{C\_StoreMesh()}{C\_StoreMesh()}}
+{\footnotesize\ttfamily static Int\+Ptr Human\+Factors.\+Geometry.\+Native\+Methods.\+C\+\_\+\+Store\+Mesh (\begin{DoxyParamCaption}\item[{I\+Enumerable$<$ float $>$}]{vertices,  }\item[{I\+Enumerable$<$ int $>$}]{indices,  }\item[{string}]{name,  }\item[{int}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [package]}}
+
+
+
+Store a mesh in managed memory. 
+
+\begin{DoxyReturn}{Returns}
+A pointer to the mesh in unmanaged memory
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Invalid\+Mesh\+Exception} & That did not represent a valid mesh\\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 53 of file Geometry\+Native.\+cs.
+
+
+
+References Human\+Factors.\+Geometry.\+Native\+Methods.\+Store\+Mesh().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_human_factors_1_1_geometry_1_1_native_methods_a77e66bc56f1f090cdd088c02cacce4a2_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_human_factors_1_1_geometry_1_1_native_methods_aef0d55401f54dc146560c34f7de8c5f6}\label{class_human_factors_1_1_geometry_1_1_native_methods_aef0d55401f54dc146560c34f7de8c5f6}} 
+\index{HumanFactors.Geometry.NativeMethods@{HumanFactors.Geometry.NativeMethods}!DestroyMeshInfo@{DestroyMeshInfo}}
+\index{DestroyMeshInfo@{DestroyMeshInfo}!HumanFactors.Geometry.NativeMethods@{HumanFactors.Geometry.NativeMethods}}
+\doxysubsubsection{\texorpdfstring{DestroyMeshInfo()}{DestroyMeshInfo()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} Human\+Factors.\+Geometry.\+Native\+Methods.\+Destroy\+Mesh\+Info (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{Mesh\+To\+Destroy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [package]}}
+
+
+
+Referenced by Human\+Factors.\+Geometry.\+Mesh\+Info.\+Release\+Handle().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_human_factors_1_1_geometry_1_1_native_methods_aef0d55401f54dc146560c34f7de8c5f6_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_human_factors_1_1_geometry_1_1_native_methods_adf39cb5b0ee7a851f101cb81699a6e76}\label{class_human_factors_1_1_geometry_1_1_native_methods_adf39cb5b0ee7a851f101cb81699a6e76}} 
+\index{HumanFactors.Geometry.NativeMethods@{HumanFactors.Geometry.NativeMethods}!LoadOBJ@{LoadOBJ}}
+\index{LoadOBJ@{LoadOBJ}!HumanFactors.Geometry.NativeMethods@{HumanFactors.Geometry.NativeMethods}}
+\doxysubsubsection{\texorpdfstring{LoadOBJ()}{LoadOBJ()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} Human\+Factors.\+Geometry.\+Native\+Methods.\+Load\+O\+BJ (\begin{DoxyParamCaption}\item[{string}]{obj\+\_\+paths,  }\item[{int}]{length,  }\item[{float}]{yrot,  }\item[{float}]{xrot,  }\item[{float}]{zrot,  }\item[{ref Int\+Ptr}]{out\+\_\+mesh\+\_\+info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Loads an O\+BJ file into meshinfo at the given instance 
+
+
+
+Referenced by Human\+Factors.\+Geometry.\+Native\+Methods.\+C\+\_\+\+Load\+O\+B\+J().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_human_factors_1_1_geometry_1_1_native_methods_adf39cb5b0ee7a851f101cb81699a6e76_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_human_factors_1_1_geometry_1_1_native_methods_a32ef96beb52ba493b079d7091073261c}\label{class_human_factors_1_1_geometry_1_1_native_methods_a32ef96beb52ba493b079d7091073261c}} 
+\index{HumanFactors.Geometry.NativeMethods@{HumanFactors.Geometry.NativeMethods}!RotateMesh@{RotateMesh}}
+\index{RotateMesh@{RotateMesh}!HumanFactors.Geometry.NativeMethods@{HumanFactors.Geometry.NativeMethods}}
+\doxysubsubsection{\texorpdfstring{RotateMesh()}{RotateMesh()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} Human\+Factors.\+Geometry.\+Native\+Methods.\+Rotate\+Mesh (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{Meshinfo,  }\item[{float}]{xrot,  }\item[{float}]{yrot,  }\item[{float}]{zrot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [package]}}
+
+\mbox{\Hypertarget{class_human_factors_1_1_geometry_1_1_native_methods_ab6e72967e3eafc026eef3c55029964e1}\label{class_human_factors_1_1_geometry_1_1_native_methods_ab6e72967e3eafc026eef3c55029964e1}} 
+\index{HumanFactors.Geometry.NativeMethods@{HumanFactors.Geometry.NativeMethods}!StoreMesh@{StoreMesh}}
+\index{StoreMesh@{StoreMesh}!HumanFactors.Geometry.NativeMethods@{HumanFactors.Geometry.NativeMethods}}
+\doxysubsubsection{\texorpdfstring{StoreMesh()}{StoreMesh()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} Human\+Factors.\+Geometry.\+Native\+Methods.\+Store\+Mesh (\begin{DoxyParamCaption}\item[{ref Int\+Ptr}]{out\+\_\+info,  }\item[{\mbox{[}\+In\mbox{]} int\mbox{[}$\,$\mbox{]}}]{indices,  }\item[{int}]{num\+\_\+indices,  }\item[{\mbox{[}\+In\mbox{]} float\mbox{[}$\,$\mbox{]}}]{vertices,  }\item[{int}]{num\+\_\+vertices,  }\item[{string}]{name,  }\item[{int}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [package]}}
+
+
+
+Referenced by Human\+Factors.\+Geometry.\+Native\+Methods.\+C\+\_\+\+Store\+Mesh().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_human_factors_1_1_geometry_1_1_native_methods_ab6e72967e3eafc026eef3c55029964e1_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_human_factors_1_1_geometry_1_1_native_methods_a07c79b817c7f3758f1e97b06a26f527e}\label{class_human_factors_1_1_geometry_1_1_native_methods_a07c79b817c7f3758f1e97b06a26f527e}} 
+\index{HumanFactors.Geometry.NativeMethods@{HumanFactors.Geometry.NativeMethods}!dllpath@{dllpath}}
+\index{dllpath@{dllpath}!HumanFactors.Geometry.NativeMethods@{HumanFactors.Geometry.NativeMethods}}
+\doxysubsubsection{\texorpdfstring{dllpath}{dllpath}}
+{\footnotesize\ttfamily const string Human\+Factors.\+Geometry.\+Native\+Methods.\+dllpath = Native\+Constants.\+D\+L\+L\+Path\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Path to the \mbox{\hyperlink{namespace_human_factors}{Human\+Factors}} dll copied from Native\+Constants. 
+
+
+
+Definition at line 25 of file Geometry\+Native.\+cs.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Csharp/packages/geometry/src/\mbox{\hyperlink{_geometry_native_8cs}{Geometry\+Native.\+cs}}\end{DoxyCompactItemize}

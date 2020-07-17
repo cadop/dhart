@@ -1,0 +1,107 @@
+\hypertarget{class_human_factors_1_1_graph_generator_1_1_graph_generator}{}\doxysection{Human\+Factors.\+Graph\+Generator.\+Graph\+Generator Class Reference}
+\label{class_human_factors_1_1_graph_generator_1_1_graph_generator}\index{HumanFactors.GraphGenerator.GraphGenerator@{HumanFactors.GraphGenerator.GraphGenerator}}
+
+
+Generate a graph of accessible space on a mesh.  
+
+
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}} \mbox{\hyperlink{class_human_factors_1_1_graph_generator_1_1_graph_generator_a2672814edcde623d71233353fe6e0d2f}{Generate\+Graph}} (\mbox{\hyperlink{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h}{Embree\+B\+VH}} bvh, \mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}} start\+\_\+point, \mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}} spacing, int max\+\_\+nodes=-\/1, float up\+\_\+step=0.\+2f, float up\+\_\+slope=20, float down\+\_\+step=0.\+2f, float down\+\_\+slope=20, int max\+\_\+step\+\_\+connections=1, int core\+\_\+count=-\/1)
+\begin{DoxyCompactList}\small\item\em Generate a graph of accessible space with the given settings. If no graph can be generated, null will be returned. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Generate a graph of accessible space on a mesh. 
+
+\begin{DoxyRemark}{Remarks}
+Use the graph generator to quickly map out accessible space in an environment for other analysis methods without needing to manually place nodes. 
+\end{DoxyRemark}
+
+
+Definition at line 32 of file Graph\+Generator.\+cs.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_human_factors_1_1_graph_generator_1_1_graph_generator_a2672814edcde623d71233353fe6e0d2f}\label{class_human_factors_1_1_graph_generator_1_1_graph_generator_a2672814edcde623d71233353fe6e0d2f}} 
+\index{HumanFactors.GraphGenerator.GraphGenerator@{HumanFactors.GraphGenerator.GraphGenerator}!GenerateGraph@{GenerateGraph}}
+\index{GenerateGraph@{GenerateGraph}!HumanFactors.GraphGenerator.GraphGenerator@{HumanFactors.GraphGenerator.GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{GenerateGraph()}{GenerateGraph()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}} Human\+Factors.\+Graph\+Generator.\+Graph\+Generator.\+Generate\+Graph (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h}{Embree\+B\+VH}}}]{bvh,  }\item[{\mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}}}]{start\+\_\+point,  }\item[{\mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}}}]{spacing,  }\item[{int}]{max\+\_\+nodes = {\ttfamily -\/1},  }\item[{float}]{up\+\_\+step = {\ttfamily 0.2f},  }\item[{float}]{up\+\_\+slope = {\ttfamily 20},  }\item[{float}]{down\+\_\+step = {\ttfamily 0.2f},  }\item[{float}]{down\+\_\+slope = {\ttfamily 20},  }\item[{int}]{max\+\_\+step\+\_\+connections = {\ttfamily 1},  }\item[{int}]{core\+\_\+count = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Generate a graph of accessible space with the given settings. If no graph can be generated, null will be returned. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bvh} & A valid B\+VH to conduct the graph generation on. \mbox{\hyperlink{namespace_human_factors_1_1_geometry}{Geometry}} must be Z-\/\+Up. \\
+\hline
+{\em start\+\_\+point} & The starting point for the graph generator. If this isn\textquotesingle{}t above solid ground, no nodes will be generated.\\
+\hline
+{\em spacing} & Space between nodes. Lower values will yield more nodes for a higher resolution graph. \\
+\hline
+{\em max\+\_\+nodes} & The maximum amount of nodes to generate. \\
+\hline
+{\em up\+\_\+step} & Maximum height of a step the graph can traverse. Any steps higher this will be considered inaccessible. \\
+\hline
+{\em up\+\_\+slope} & Maximum upward slope the graph can traverse in degrees. Any slopes steeper than this will be considered inaccessible. \\
+\hline
+{\em down\+\_\+step} & Maximum step down the graph can traverse. Any steps steeper than this will be considered inaccessible.\\
+\hline
+{\em down\+\_\+slope} & The maximum downward slope the graph can traverse. Any slopes steeper than this will be considered inaccessible.\\
+\hline
+{\em max\+\_\+step\+\_\+connections} & Multiplier for number of children to generate for each node. Increasing this value will increase the number of edges in the graph, and as a result the amount of memory the algorithm requires.\\
+\hline
+{\em core\+\_\+count} & Number of cores to use. -\/1 will use all available cores, and 0 will run a serialized version of the algorithm.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The resulting graph or, If no nodes were generated, null.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+All parameters relating to distances are in meters, and all angles are in degrees. 
+
+\mbox{\hyperlink{namespace_human_factors_1_1_geometry}{Geometry}} M\+U\+ST be Z-\/\+UP in order for this to work.
+\end{DoxyNote}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{MeshInfo Mesh = OBJLoader.LoadOBJ(\textcolor{stringliteral}{"plane.obj"}, CommonRotations.Yup\_To\_Zup);}
+\DoxyCodeLine{EmbreeBVH BVH = \textcolor{keyword}{new} EmbreeBVH(Mesh);}
+\DoxyCodeLine{}
+\DoxyCodeLine{Vector3D start\_point = \textcolor{keyword}{new} Vector3D(0, 9000, 1);}
+\DoxyCodeLine{Vector3D spacing = \textcolor{keyword}{new} Vector3D(1, 1, 1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{// A standard graph with a spacing of 1 meter on each side with a maximum of 100 nodes}}
+\DoxyCodeLine{Graph G = \mbox{\hyperlink{namespace_human_factors}{HumanFactors}}.\mbox{\hyperlink{namespace_human_factors_1_1_graph_generator}{GraphGenerator}}.\mbox{\hyperlink{class_human_factors_1_1_graph_generator_1_1_graph_generator}{GraphGenerator}}.\mbox{\hyperlink{class_human_factors_1_1_graph_generator_1_1_graph_generator_a2672814edcde623d71233353fe6e0d2f}{GenerateGraph}}(BVH, start\_point, spacing, 100);}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \textcolor{comment}{// A graph that cannot traverse stairs}}
+\DoxyCodeLine{Graph G = \mbox{\hyperlink{namespace_human_factors}{HumanFactors}}.\mbox{\hyperlink{namespace_human_factors_1_1_graph_generator}{GraphGenerator}}.\mbox{\hyperlink{class_human_factors_1_1_graph_generator_1_1_graph_generator}{GraphGenerator}}.\mbox{\hyperlink{class_human_factors_1_1_graph_generator_1_1_graph_generator_a2672814edcde623d71233353fe6e0d2f}{GenerateGraph}}(BVH, start\_point, spacing, 100, up\_step:0, downstep:0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// A graph that is able to traverse up 30 degree slopes, but can only traverse down 10}}
+\DoxyCodeLine{\textcolor{comment}{// degree slopes}}
+\DoxyCodeLine{    Graph G = \mbox{\hyperlink{namespace_human_factors}{HumanFactors}}.\mbox{\hyperlink{namespace_human_factors_1_1_graph_generator}{GraphGenerator}}.\mbox{\hyperlink{class_human_factors_1_1_graph_generator_1_1_graph_generator}{GraphGenerator}}.\mbox{\hyperlink{class_human_factors_1_1_graph_generator_1_1_graph_generator_a2672814edcde623d71233353fe6e0d2f}{GenerateGraph}}(BVH, start\_point, spacing, 100, up\_slope:30, down\_slope:10);}
+\end{DoxyCode}
+ 
+
+Definition at line 83 of file Graph\+Generator.\+cs.
+
+
+
+References Human\+Factors.\+Graph\+Generator.\+Native\+Methods.\+C\+\_\+\+Generate\+Graph(), and Human\+Factors.\+Native\+Utils.\+Native\+Object.\+Pointer.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_human_factors_1_1_graph_generator_1_1_graph_generator_a2672814edcde623d71233353fe6e0d2f_cgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Csharp/packages/graphgenerator/src/\mbox{\hyperlink{_graph_generator_8cs}{Graph\+Generator.\+cs}}\end{DoxyCompactItemize}

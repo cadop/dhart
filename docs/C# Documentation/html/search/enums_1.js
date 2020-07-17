@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['viewaggregatetype_195',['ViewAggregateType',['../namespace_human_factors_1_1_view_analysis.html#ae24b8f5d9783a270e51183ff2eca765c',1,'HumanFactors::ViewAnalysis']]]
+  ['hf_5fstatus_460',['HF_STATUS',['../namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987f',1,'HumanFactors::Exceptions']]]
 ];

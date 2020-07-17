@@ -13,23 +13,24 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-/// <summary>
-/// A series of native array implementations that are useful throughout the entire program
-/// </summary>
+/*! \brief A set of native array implementations that are useful throughout the entire program. */
 namespace HumanFactors.NativeUtils.CommonNativeArrays
 {
-    /// <summary>
-    /// Contains an array of floats in managed memory
-    /// </summary>
+    /*! \brief An array of floats in unmanaged memory. */
     public class ManagedFloatArray : NativeUtils.NativeArray<float> {
-        public ManagedFloatArray(CVectorAndData ptrs) : base(ptrs) { }
+        internal ManagedFloatArray(CVectorAndData ptrs) : base(ptrs) { }
+
+        /*!
+			 \brief Free the native memory managed by this class. 
+			 \note the garbage collector will handle this automatically
+			 \warning Do not attempt to use this class after freeing it!
+			 \returns True. This is guaranteed to execute properly.  
+        */
         protected override bool ReleaseHandle() => (HF_STATUS.OK == NativeMethods.DestroyFloatVector(handle));
     }
 
 
-    /// <summary>
-    /// Native methods for interacting with the common arrays.
-    /// </summary>
+    /*! \brief Native methods for interacting with the common arrays. */
     internal static class NativeMethods{
         private const string dll_path = NativeConstants.DLLPath;
 
