@@ -28,6 +28,13 @@ namespace HumanFactors.ViewAnalysis
         /// <summary> Initializes a new instance of the <see cref="ResultArray" /> class. </summary>
         /// <param name="ptrs"> Must have size2 set to a value greater than one. </param>
         internal ResultArray(CVectorAndData ptrs) : base(ptrs) { }
+
+        /*!
+			 \brief Free the native memory managed by this class. 
+			 \note the garbage collector will handle this automatically
+			 \warning Do not attempt to use this class after freeing it!
+			 \returns True. This is guaranteed to execute properly.  
+		*/
         protected override bool ReleaseHandle() => HF_STATUS.OK == NativeMethods.C_DeleteResultVector(handle);
     }
 
@@ -42,7 +49,12 @@ namespace HumanFactors.ViewAnalysis
         /// <summary> Initializes a new instance of the <see cref="DirectionArray" /> class. </summary>
         /// <param name="ptr"> Info needed to create the array. </param>
         internal DirectionArray(CVectorAndData ptr) : base(ptr) { }
-
+        /*!
+			 \brief Free the native memory managed by this class. 
+			 \note the garbage collector will handle this automatically
+			 \warning Do not attempt to use this class after freeing it!
+			 \returns True. This is guaranteed to execute properly.  
+        */
         protected override bool ReleaseHandle()
         {
             HumanFactors.NativeUtils.CommonNativeArrays.NativeMethods.DestroyFloatVector(handle);

@@ -73,7 +73,6 @@ namespace HumanFactors.Geometry
             \warning
             This deletes the mesh in unmanaged memory! Don't try to use this class again after calling this function!
         */
-
 		protected override bool ReleaseHandle()
 		{
 			NativeMethods.DestroyMeshInfo(this.Pointer);

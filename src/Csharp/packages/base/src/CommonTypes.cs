@@ -38,7 +38,9 @@ namespace HumanFactors
          
     */
     public struct Vector3D {
-        public readonly float x, y, z; 
+        public readonly float x; ///< X component of this vector
+        public readonly float y; ///< Y component of this vector 
+        public readonly float z; ///< Z component of this vector
 
         /*!
             \brief Create a new instance of Vector3D

@@ -53,6 +53,12 @@ namespace HumanFactors.SpatialStructures
         internal NodeList(CVectorAndData in_vector) : base(in_vector)
         {
         }
+        /*!
+			 \brief Free the native memory managed by this class. 
+			 \note the garbage collector will handle this automatically
+			 \warning Do not attempt to use this class after freeing it!
+			 \returns True. This is guaranteed to execute properly.  
+        */
         protected override bool ReleaseHandle()
         {
             NativeMethods.C_DestroyNodeVector(handle);

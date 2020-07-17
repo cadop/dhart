@@ -34,6 +34,12 @@ namespace HumanFactors.RayTracing
         /// \param in_ptr Info needed to wrap the managed array.
         internal RayResults(CVectorAndData in_ptr) : base(in_ptr) {}
 
+        /*!
+         \brief Free the me 
+         \note the garbage collector will handle this automatically
+         \warning Do not attempt to use this class after freeing it!
+         \returns True. This is guaranteed to execute properly.  
+        */
         protected override bool ReleaseHandle()
         {
             NativeMethods.C_DestroyRayResults(handle);

@@ -116,7 +116,7 @@ namespace HumanFactors.Pathfinding
         /*! 
             \brief Find the shortest paths between each pair of start_id and end_id in order. 
             
-            \param Graph The graph to generate paths in.
+            \param graph The graph to generate paths in.
             \param start_nodes Locations of the start points to generate paths from.
             \param end_nodes Locations of the end nodes to generate paths to.
             

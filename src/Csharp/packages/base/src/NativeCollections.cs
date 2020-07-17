@@ -19,6 +19,13 @@ namespace HumanFactors.NativeUtils.CommonNativeArrays
     /*! \brief An array of floats in unmanaged memory. */
     public class ManagedFloatArray : NativeUtils.NativeArray<float> {
         internal ManagedFloatArray(CVectorAndData ptrs) : base(ptrs) { }
+
+        /*!
+			 \brief Free the native memory managed by this class. 
+			 \note the garbage collector will handle this automatically
+			 \warning Do not attempt to use this class after freeing it!
+			 \returns True. This is guaranteed to execute properly.  
+        */
         protected override bool ReleaseHandle() => (HF_STATUS.OK == NativeMethods.DestroyFloatVector(handle));
     }
 

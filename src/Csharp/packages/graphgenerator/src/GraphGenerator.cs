@@ -35,7 +35,7 @@ public static class GraphGenerator
         
         \brief  Generate a graph of accessible space with the given settings. If no graph can be generated, null will be returned.
 
-        \param BVH A valid BVH to conduct the graph generation on. Geometry must be Z-Up.
+        \param bvh A valid BVH to conduct the graph generation on. Geometry must be Z-Up.
         \param start_point The starting point for the graph generator. If this isn't above solid ground, no nodes will
         be generated.
         

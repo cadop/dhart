@@ -42,6 +42,12 @@ namespace HumanFactors.RayTracing
        */
         public EmbreeBVH(MeshInfo MI) : base(NativeMethods.C_ConstructRaytracer(MI.DangerousGetHandle()), MI.pressure) { }
 
+        /*!
+			 \brief Free the native memory managed by this class. 
+			 \note the garbage collector will handle this automatically
+			 \warning Do not attempt to use this class after freeing it!
+			 \returns True. This is guaranteed to execute properly.  
+		*/
         protected override bool ReleaseHandle()
         {
             NativeMethods.C_DestroyRayTracer(this.handle);
