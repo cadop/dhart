@@ -26,7 +26,7 @@ C_INTERFACE GenerateGraph(
 	Graph** out_graph
 ){
 	const std::array<float, 3> start_array{ start_point[0], start_point[1], start_point[2] };
-	const std::array<float, 3> spacing_array{ spacing[0], spacing[1], spacing[2] };
+	const std::array<double, 3> spacing_array{ spacing[0], spacing[1], spacing[2] };
 
 	Graph* G = new Graph();
 	GraphGenerator GraphGen(*ray_tracer, 0);

@@ -405,6 +405,7 @@ if(HumanFactors_EnableTests)
 					${C_TEST_DRIVER_DIR}/ViewAnalysis.cpp
 					${C_TEST_DRIVER_DIR}/PathFinding.cpp
 					${C_TEST_DRIVER_DIR}/performance_testing.h
+					${C_TEST_DRIVER_DIR}/GraphAlgorithms.cpp
 			)
 	elseif(${HumanFactors_Config} STREQUAL "RayTracer")
 		target_sources(

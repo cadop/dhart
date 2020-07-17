@@ -243,6 +243,7 @@ namespace HF::RayTracer {
 		/// The id of the only mesh for this ray to collide with. Any geometry wihtout this ID
 		/// is ignored
 		/// </param>
+		/// \warning The ray direction must be a unit vector.
 		/// <returns> true if the ray hit, false otherwise </returns>
 		/*!
 			\par Example

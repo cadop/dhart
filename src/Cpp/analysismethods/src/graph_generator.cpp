@@ -19,7 +19,7 @@ namespace HF::GraphGenerator {
 
 	SpatialStructures::Graph GraphGenerator::BuildNetwork(
 		const v3 & start_point,
-		const v3 & Spacing,
+		const v3d & Spacing,
 		int MaxNodes,
 		float UpStep,
 		float UpSlope,

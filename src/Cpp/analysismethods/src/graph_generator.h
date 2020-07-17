@@ -19,6 +19,7 @@
 */
 namespace HF::GraphGenerator {
 	using v3 = std::array<float, 3>;
+	using v3d = std::array<double, 3>;
 	class GraphGenerator;
 	class UniqueQueue;
 
@@ -74,7 +75,7 @@ namespace HF::GraphGenerator {
 		int obstacle_surfaces;					///< Corresponds to the meshid of obstacle surfaces in the Raytracer (Unused)
 		int core_count;							///< Number of cores to use in parallel. 
 		RayTracer::EmbreeRayTracer ray_tracer;	///< Raytracer to use for all intersections 
-		v3 spacing; ///< Spacing between nodes.
+		v3d spacing; ///< Spacing between nodes as a double to help with offset precisions
 		v3 start;	///< Start point for graph generation
 
 		float downstep;			///< Maximum step down that can be considered accessible.
@@ -176,7 +177,7 @@ namespace HF::GraphGenerator {
 		*/
 		SpatialStructures::Graph BuildNetwork(
 			const v3& start_point,
-			const v3& Spacing,
+			const v3d& Spacing,
 			int MaxNodes,
 			float UpStep,
 			float UpSlope,

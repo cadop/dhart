@@ -8,6 +8,7 @@
 #include <graph.h>
 #include <edge.h>
 #include <node.h>
+#include <Constants.h>
 #include <analysis_C.h>
 
 
@@ -43,7 +44,8 @@ namespace HF {
 	
 		auto g = GG.BuildNetwork(
 			std::array<float, 3>{0, 0, 0.5},
-			std::array<float, 3>{0.02f, 0.02f, 0.02f},
+			//std::array<float, 3>{0.02f, 0.02f, 0.02f},
+			std::array<double, 3>{0.02, 0.02, 0.02},
 			1000,
 			1,
 			1,
@@ -54,7 +56,44 @@ namespace HF {
 		printf("Graph size %i\n", g.size());
 		g.Compress();
 		ASSERT_GT(g.size(), 0);
+	}
 
+	TEST(_GraphGenerator, DuplicateNodes) {
+		auto mesh = Geometry::LoadMeshObjects("energy_blob.obj");
+
+		RayTracer::EmbreeRayTracer rt(mesh);
+		auto GG = GraphGenerator::GraphGenerator(rt, 0);
+
+		// Generate the graph 
+		auto g = GG.BuildNetwork(
+			std::array<float, 3>{-22.4280376, -12.856843, 5.4826779},
+			//std::array<float, 3>{10.0f, 10.0f, 70.0f},
+			std::array<double, 3>{10.0, 10.0, 70.0},
+			50,
+			10,
+			40,
+			10,
+			1,
+			2
+		);
+
+		ASSERT_GT(g.size(), 0);
+		// Assert that the distance from this node to every other node in the graph is > than rounding precision
+		const auto nodes = g.Nodes();
+		for (const auto& node : nodes) {
+			
+			int close_to_nodes = 0;
+			for (const auto& node2 : nodes)
+			{
+				// Check if this node closer to node2 than rounding_precision would allow
+				if (node.distanceTo(node2) < HF::SpatialStructures::ROUNDING_PRECISION)
+				{
+					close_to_nodes++;
+				}
+				// If it's closer to two nodes (itself and one more) then it's not being rounded
+				ASSERT_LT(close_to_nodes, 2);
+			}
+		}
 	}
 
 	TEST(_GraphGenerator, GraphGeneratorSingle) {
@@ -64,7 +103,7 @@ namespace HF {
 
 		auto g = GG.BuildNetwork(
 			std::array<float, 3>{0, 0, 0.5},
-			std::array<float, 3>{0.02f, 0.02f, 0.02f},
+			std::array<double, 3>{0.02, 0.02, 0.02},
 			1000,
 			1,
 			1,
@@ -219,7 +258,7 @@ TEST(Performance, GraphGenerator) {
 	// Set Graph generator settings
 	auto ray_tracer = CreateRTWithPlane();
 	std::array<float, 3> start{ 0,0,0 };
-	std::array<float, 3> spacing{ 0.05,0.05,0.05 };
+	std::array<double, 3> spacing{ 0.05,0.05,0.05 };
 	float up_step = 1;
 	float down_step = 1;
 	float up_slope = 30;
