@@ -381,5 +381,142 @@ namespace HF {
 			HF::SpatialStructures::PathMember** out_path_members,
 			int* out_sizes
 		);
+
+
+		/*!
+			\brief A special version of FindPaths optimized for the C_Interface, such that all paths possible
+				   from each node to every other node are generated.
+
+			\param bg Boost graph to generate paths in
+			\param out_paths Location for the the path pointer array to be created. Paths that could not be
+			generated will be left as null pointers.
+			\param out_path_members Location for the pathmember pointer array will be created. All path member
+			pointers will point to the PathMembers of the Path in paths at the same location. Paths that could not
+			be generated will be left as null pointers.
+			\param out_sizes Output raw_array of integers that will cntain the length of every path in path_members.
+			Paths that could not be generated will be left with a length of zero.
+
+			\pre
+			The length of start_ids must match the length of end_ids.
+
+			\post 1) out_path_members will point to a vector of pointers to vectors of PathMembers with an element for every path.
+			\post 2) out_paths will point to a vector of pointers to paths with an element for every path.
+			\post 3) out_sizes will point to an array of integers containing the size of every path in out_paths
+
+			\remarks
+			Usually the C-Interface is able to simply wrap existing functions with minimal code to make them accessible to exernal
+			callers, however in this specific situation there were real performance gains to be found by implementing this function
+			directly in HF::PathFinding itself. It's efficent and safe for that purpose, but \link FindPaths \endlink should be
+			preferred outside of that context since this function can be quite dangerous if not handled properly.
+
+			\warning
+			The caller is responsible for freeing all of the memory allocated in out_paths and out_sizes. The contents of
+			out_path_members will automatically be deleted when the path they belong to is deleted. Do not try
+			to manually delete out_path_members or the path that owns it will throw a null pointer exception
+			when it is deleted.
+
+
+			\code
+				HF::SpatialStructures::Graph g;
+
+				// Add the edges
+				g.addEdge(0, 1, 1);
+				g.addEdge(0, 2, 2);
+				g.addEdge(1, 3, 3);
+				g.addEdge(1, 4, 4);
+				g.addEdge(2, 4, 4);
+				g.addEdge(3, 5, 5);
+				g.addEdge(4, 6, 3);
+				g.addEdge(5, 6, 1);
+
+				// Always compress the graph after adding edges
+				g.Compress();
+
+				// Create a BoostGraph (std::unique_ptr)
+				auto bg = CreateBoostGraph(g);
+
+				// Total paths is node_count ^ 2
+				size_t node_count = g.Nodes().size();
+				size_t path_count = node_count * node_count;
+
+				// Pointer to buffer of (Path *)
+				Path** out_paths = new Path* [path_count];
+				// out_paths[i...path_count - 1] will be alloc'ed by InsertPathsIntoArray
+
+				// Pointer to buffer of (PathMember *)
+				PathMember** out_path_member = new PathMember* [path_count];
+				// out_path_member[i...path_count - 1] points to out_paths[i...path_count - 1]->GetPMPointer();
+
+				// Pointer to buffer of (int)
+				int* sizes = new int[path_count];
+
+				//
+				// The two loops for start_points and end_points
+				// are just for the output.
+				//
+				int curr_id = 0;
+				std::vector<int> start_points(path_count);
+				// Populate the start points,
+				// size will be (node_count)^2
+				for (int i = 0; i < node_count; i++) {
+					for (int k = 0; k < node_count; k++) {
+						start_points[curr_id++] = i;
+					}
+				}
+
+				curr_id = 0;
+
+				std::vector<int> end_points(path_count);
+				// Populate the end points,
+				// size will be (node_count)^2
+				for (int i = 0; i < node_count; i++) {
+					for (int k = 0; k < node_count; k++) {
+						end_points[curr_id++] = k;
+					}
+				}
+
+				InsertAllToAllPathsIntoArray(bg.get(), out_paths, out_path_member, sizes);
+
+				for (int i = 0; i < path_count; i++) {
+					if (out_paths[i]) {
+						// Always check if out_paths[i] is nonnull!
+						int total_cost = 0;
+						std::cout << "Path from " << start_points[i] << " to " << end_points[i] << std::endl;
+
+						Path p = *out_paths[i];
+						for (auto m : p.members) {
+							total_cost += m.cost;
+							std::cout << "node ID: " << m.node << "\tcost " << m.cost << std::endl;
+						}
+
+						std::cout << "Total cost: " << total_cost << std::endl;
+						std::cout << "--------------------------" << std::endl;
+					}
+				}
+
+				//
+				// Resource cleanup
+				//
+				if (sizes) {
+					delete[] sizes;
+					sizes = nullptr;
+				}
+
+				if (out_path_member) {
+					delete[] out_path_member;
+					out_path_member = nullptr;
+				}
+
+				if (out_paths) {
+					for (int i = 0; i < path_count; i++) {
+						if (out_paths[i]) {
+							delete out_paths[i];
+							out_paths[i] = nullptr;
+						}
+					}
+				}
+			\endcode
+		*/
+		void InsertAllToAllPathsIntoArray(BoostGraph* bg, HF::SpatialStructures::Path** out_paths, HF::SpatialStructures::PathMember** out_path_members, int* out_sizes);
 	}
 }
