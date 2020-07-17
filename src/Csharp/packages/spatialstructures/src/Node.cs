@@ -6,9 +6,12 @@ using System.Security.AccessControl;
 
 namespace HumanFactors.SpatialStructures
 {
-    /// <summary>
-    /// A point in space. Used internally by the graph generator.
-    /// </summary>
+    /*!
+        \brief A point in space.
+        
+        \remarks
+        Used internally by the graph generator.
+    */
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
     public struct Node
     {
@@ -38,14 +41,14 @@ namespace HumanFactors.SpatialStructures
         public int id;
     }
 
-    /// <summary>
-    /// A list of nodes from a graph in unmanaged memory.
-    /// </summary>
+    /*! 
+        \brief An array of Nodes directly from a graph in unmanaged memory.
+    */
     public class NodeList : NativeArray<Node>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="NodeList"/> class.
-        /// </summary>
+        /*!
+            \brief Initializes a new instance of the <see cref="NodeList"/>
+        */
         /// <param name="in_vector">The vector to create this nodelist from.</param>
         internal NodeList(CVectorAndData in_vector) : base(in_vector)
         {
