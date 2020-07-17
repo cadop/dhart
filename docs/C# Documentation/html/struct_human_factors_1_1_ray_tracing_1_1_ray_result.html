@@ -67,28 +67,114 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pac-methods">Package Functions</a> &#124;
 <a href="struct_human_factors_1_1_ray_tracing_1_1_ray_result-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">HumanFactors.RayTracing.RayResult Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Contains distance and mesh_id. Used for returning large amounts of results from the raytracer  
+<p>MeshID and Distance for a casted ray.  
  <a href="struct_human_factors_1_1_ray_tracing_1_1_ray_result.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:adf3eb5cc80f3153a2d777f88710397cf"><td class="memItemLeft" align="right" valign="top"><a id="adf3eb5cc80f3153a2d777f88710397cf"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>distance</b></td></tr>
+<tr class="memitem:adf3eb5cc80f3153a2d777f88710397cf"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_human_factors_1_1_ray_tracing_1_1_ray_result.html#adf3eb5cc80f3153a2d777f88710397cf">distance</a></td></tr>
+<tr class="memdesc:adf3eb5cc80f3153a2d777f88710397cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Distance from origin to the point of intersection. -1 if missed.  <a href="struct_human_factors_1_1_ray_tracing_1_1_ray_result.html#adf3eb5cc80f3153a2d777f88710397cf">More...</a><br /></td></tr>
 <tr class="separator:adf3eb5cc80f3153a2d777f88710397cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9f9d840fe8a986df68e3d30faf8241ec"><td class="memItemLeft" align="right" valign="top"><a id="a9f9d840fe8a986df68e3d30faf8241ec"></a>
-Int32&#160;</td><td class="memItemRight" valign="bottom"><b>mesh_id</b></td></tr>
+<tr class="memitem:a9f9d840fe8a986df68e3d30faf8241ec"><td class="memItemLeft" align="right" valign="top">Int32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_human_factors_1_1_ray_tracing_1_1_ray_result.html#a9f9d840fe8a986df68e3d30faf8241ec">mesh_id</a></td></tr>
+<tr class="memdesc:a9f9d840fe8a986df68e3d30faf8241ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">ID of the mesh intersected. -1 if missed.  <a href="struct_human_factors_1_1_ray_tracing_1_1_ray_result.html#a9f9d840fe8a986df68e3d30faf8241ec">More...</a><br /></td></tr>
 <tr class="separator:a9f9d840fe8a986df68e3d30faf8241ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pac-methods"></a>
+Package Functions</h2></td></tr>
+<tr class="memitem:a9cc88d0a4de2fed0c9c17e9d5878f54e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_human_factors_1_1_ray_tracing_1_1_ray_result.html#a9cc88d0a4de2fed0c9c17e9d5878f54e">RayResult</a> (float in_distance, int in_mesh_id)</td></tr>
+<tr class="separator:a9cc88d0a4de2fed0c9c17e9d5878f54e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Contains distance and mesh_id. Used for returning large amounts of results from the raytracer </p>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
-<li>src/Csharp/packages/raytracer/src/RayResultStructs.cs</li>
+<div class="textblock"><p>MeshID and Distance for a casted ray. </p>
+<dl class="section remark"><dt>Remarks</dt><dd>Used for returning large amounts of results from the raytracer.</dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000009">Todo:</a></b></dt><dd>Function .checkhit that returns false if in_distance or in_mesh_id are true </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_ray_result_structs_8cs_source.html#l00018">18</a> of file <a class="el" href="_ray_result_structs_8cs_source.html">RayResultStructs.cs</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a9cc88d0a4de2fed0c9c17e9d5878f54e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9cc88d0a4de2fed0c9c17e9d5878f54e">&#9670;&nbsp;</a></span>RayResult()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">HumanFactors.RayTracing.RayResult.RayResult </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>in_distance</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>in_mesh_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">package</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_ray_result_structs_8cs_source.html#l00023">23</a> of file <a class="el" href="_ray_result_structs_8cs_source.html">RayResultStructs.cs</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="adf3eb5cc80f3153a2d777f88710397cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf3eb5cc80f3153a2d777f88710397cf">&#9670;&nbsp;</a></span>distance</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float HumanFactors.RayTracing.RayResult.distance</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Distance from origin to the point of intersection. -1 if missed. </p>
+
+<p class="definition">Definition at line <a class="el" href="_ray_result_structs_8cs_source.html#l00020">20</a> of file <a class="el" href="_ray_result_structs_8cs_source.html">RayResultStructs.cs</a>.</p>
+
+</div>
+</div>
+<a id="a9f9d840fe8a986df68e3d30faf8241ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f9d840fe8a986df68e3d30faf8241ec">&#9670;&nbsp;</a></span>mesh_id</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Int32 HumanFactors.RayTracing.RayResult.mesh_id</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ID of the mesh intersected. -1 if missed. </p>
+
+<p class="definition">Definition at line <a class="el" href="_ray_result_structs_8cs_source.html#l00021">21</a> of file <a class="el" href="_ray_result_structs_8cs_source.html">RayResultStructs.cs</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>src/Csharp/packages/raytracer/src/<a class="el" href="_ray_result_structs_8cs_source.html">RayResultStructs.cs</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

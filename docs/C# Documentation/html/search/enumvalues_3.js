@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['sum_200',['SUM',['../namespace_human_factors_1_1_view_analysis.html#ae24b8f5d9783a270e51183ff2eca765ca6970bdc2201030b9c03fbdcf3973858a',1,'HumanFactors::ViewAnalysis']]]
+  ['generic_5ferror_465',['GENERIC_ERROR',['../namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987fa574dfca5e088abccfa24fec2a681e9c8',1,'HumanFactors::Exceptions']]]
 ];

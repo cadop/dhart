@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.18">
+  <compounddef id="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h" kind="class" language="C#" prot="public">
+    <compoundname>HumanFactors::RayTracing::EmbreeBVH</compoundname>
+    <basecompoundref refid="class_human_factors_1_1_native_utils_1_1_native_object" prot="public" virt="non-virtual">HumanFactors.NativeUtils.NativeObject</basecompoundref>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_1abe609aebad5a2369ad13c891eb1802f4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>HumanFactors.RayTracing.EmbreeBVH.EmbreeBVH</definition>
+        <argsstring>(MeshInfo MI)</argsstring>
+        <name>EmbreeBVH</name>
+        <param>
+          <type><ref refid="class_human_factors_1_1_geometry_1_1_mesh_info" kindref="compound">MeshInfo</ref></type>
+          <declname>MI</declname>
+        </param>
+        <briefdescription>
+<para>Generate a BVH for an instance of MeshInfo. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>MI</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Mesh to generate the BVH from.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>Exception</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Embree failed to create a BVH for the given mesh.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+<internal><para><xrefsect id="todo_1_todo000008"><xreftitle>Todo</xreftitle><xrefdescription><para>Add missing dependency exception </para>
+</xrefdescription></xrefsect></para>
+</internal>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/raytracer/src/EmbreeBVH.cs" line="43" column="16" bodyfile="src/Csharp/packages/raytracer/src/EmbreeBVH.cs" bodystart="43" bodyend="43"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_1a9ece3f96ea62288bb7875ac37e037303" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>override bool</type>
+        <definition>override bool HumanFactors.RayTracing.EmbreeBVH.ReleaseHandle</definition>
+        <argsstring>()</argsstring>
+        <name>ReleaseHandle</name>
+        <briefdescription>
+<para>Free the native memory managed by this class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>the garbage collector will handle this automatically </para>
+</simplesect>
+<simplesect kind="warning"><para>Do not attempt to use this class after freeing it! </para>
+</simplesect>
+<simplesect kind="return"><para>True. This is guaranteed to execute properly. <linebreak/>
+ </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/raytracer/src/EmbreeBVH.cs" line="51" column="33" bodyfile="src/Csharp/packages/raytracer/src/EmbreeBVH.cs" bodystart="51" bodyend="55"/>
+        <references refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1aeb49b62a21e0c3c115748f3fad2d0525">HumanFactors.RayTracing.NativeMethods.C_DestroyRayTracer</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A Bounding Volume Hierarchy for the <ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer" kindref="compound">EmbreeRaytracer</ref>. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Upon calling the constructor for this class, a Bounding Volume Hierarchy is generated for the <ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer" kindref="compound">RayTracing.EmbreeRaytracer</ref>. Without this structure, the raytracer cannot be used.</para>
+<para><simplesect kind="remark"><para>A more detailed description of Embree&apos;s BVH is available in intel&apos;s paper: Embree: A Kernel Framework for Efficient CPU Ray Tracing <ulink url="http://cseweb.ucsd.edu/~ravir/274/15/papers/a143-wald.pdf">http://cseweb.ucsd.edu/~ravir/274/15/papers/a143-wald.pdf</ulink>.</para>
+</simplesect>
+</para>
+<internal><para><simplesect kind="note"><para>In C++ this is is an EmbreeRayTracer.</para>
+</simplesect>
+<xrefsect id="todo_1_todo000007"><xreftitle>Todo</xreftitle><xrefdescription><para>Functions to add meshes to an existing BVH </para>
+</xrefdescription></xrefsect></para>
+<para><simplesect kind="see"><para><ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer" kindref="compound">EmbreeRaytracer</ref> for functions to use this BVH for ray intersections. </para>
+</simplesect>
+</para>
+</internal>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>HumanFactors.RayTracing.EmbreeBVH</label>
+        <link refid="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>HumanFactors::NativeUtils::NativeObject</label>
+        <link refid="class_human_factors_1_1_native_utils_1_1_native_object"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SafeHandle</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>HumanFactors.RayTracing.EmbreeBVH</label>
+        <link refid="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>HumanFactors::NativeUtils::NativeObject</label>
+        <link refid="class_human_factors_1_1_native_utils_1_1_native_object"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SafeHandle</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/Csharp/packages/raytracer/src/EmbreeBVH.cs" line="30" column="11" bodyfile="src/Csharp/packages/raytracer/src/EmbreeBVH.cs" bodystart="31" bodyend="56"/>
+    <listofallmembers>
+      <member refid="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_1abe609aebad5a2369ad13c891eb1802f4" prot="public" virt="non-virtual"><scope>HumanFactors::RayTracing::EmbreeBVH</scope><name>EmbreeBVH</name></member>
+      <member refid="class_human_factors_1_1_native_utils_1_1_native_object_1a33340c37b83300ec09f6fc7982d2fb70" prot="public" virt="non-virtual"><scope>HumanFactors::RayTracing::EmbreeBVH</scope><name>IsInvalid</name></member>
+      <member refid="class_human_factors_1_1_native_utils_1_1_native_object_1ae7f34573598d48a9ef666b96895c7201" prot="public" virt="non-virtual"><scope>HumanFactors::RayTracing::EmbreeBVH</scope><name>NativeObject</name></member>
+      <member refid="class_human_factors_1_1_native_utils_1_1_native_object_1aa58c089e79cb4acc260755a41952d3d6" prot="package" virt="non-virtual"><scope>HumanFactors::RayTracing::EmbreeBVH</scope><name>Pointer</name></member>
+      <member refid="class_human_factors_1_1_native_utils_1_1_native_object_1a46b2320d66a2b0405024db48f376b72c" prot="public" virt="non-virtual"><scope>HumanFactors::RayTracing::EmbreeBVH</scope><name>pressure</name></member>
+      <member refid="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_1a9ece3f96ea62288bb7875ac37e037303" prot="protected" virt="non-virtual"><scope>HumanFactors::RayTracing::EmbreeBVH</scope><name>ReleaseHandle</name></member>
+      <member refid="class_human_factors_1_1_native_utils_1_1_native_object_1a062ff788763ba2ad52a7c20000c8ecd8" prot="private" virt="non-virtual"><scope>HumanFactors::RayTracing::EmbreeBVH</scope><name>~NativeObject</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

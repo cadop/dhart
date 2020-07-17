@@ -1,11 +1,17 @@
 var searchData=
 [
-  ['reading_20a_20mesh_20from_20unity_66',['Reading a Mesh From Unity',['../_mesh_from_unity.html',1,'']]],
-  ['ranking_67',['Ranking',['../class_ranking.html',1,'']]],
-  ['rayresult_68',['RayResult',['../struct_human_factors_1_1_ray_tracing_1_1_ray_result.html',1,'HumanFactors::RayTracing']]],
-  ['rayresults_69',['RayResults',['../class_human_factors_1_1_ray_tracing_1_1_ray_results.html',1,'HumanFactors::RayTracing']]],
-  ['releasehandle_70',['ReleaseHandle',['../class_human_factors_1_1_geometry_1_1_mesh_info.html#a9ed5e9129b511932a34c79ead954007e',1,'HumanFactors.Geometry.MeshInfo.ReleaseHandle()'],['../class_human_factors_1_1_pathfinding_1_1_path.html#a979e48954fe6d869827b855cdc39d060',1,'HumanFactors.Pathfinding.Path.ReleaseHandle()']]],
-  ['resultarray_71',['ResultArray',['../class_human_factors_1_1_view_analysis_1_1_result_array.html',1,'HumanFactors::ViewAnalysis']]],
-  ['rotatemesh_72',['RotateMesh',['../class_human_factors_1_1_geometry_1_1_mesh_info.html#a3f9bd73c9c82e777bb083439d457b8ad',1,'HumanFactors.Geometry.MeshInfo.RotateMesh(float xrot, float yrot, float zrot)'],['../class_human_factors_1_1_geometry_1_1_mesh_info.html#a62f20076e25f8f2c23c9ca473a98ed9d',1,'HumanFactors.Geometry.MeshInfo.RotateMesh(Vector3D rotation)']]],
-  ['rows_73',['rows',['../struct_human_factors_1_1_spatial_structures_1_1_c_s_r_info.html#ac04b6031724adf665ddaec491590b358',1,'HumanFactors::SpatialStructures::CSRInfo']]]
+  ['id_126',['id',['../struct_human_factors_1_1_pathfinding_1_1_path_member.html#ac3aee5a3c5ee574a21991c27b4aa3bd8',1,'HumanFactors.Pathfinding.PathMember.id()'],['../struct_human_factors_1_1_spatial_structures_1_1_node.html#a624ea209367282f5c06182e44ab34446',1,'HumanFactors.SpatialStructures.Node.id()']]],
+  ['inner_5findices_127',['inner_indices',['../struct_human_factors_1_1_spatial_structures_1_1_c_s_r_info.html#a49d8b0c50132c906d2c3b42fcc912250',1,'HumanFactors::SpatialStructures::CSRInfo']]],
+  ['intersectfordistance_128',['IntersectForDistance',['../class_human_factors_1_1_ray_tracing_1_1_embree_raytracer.html#a2bd31afa0ffb40b98a81ea47fc876be6',1,'HumanFactors::RayTracing::EmbreeRaytracer']]],
+  ['intersectfordistances_129',['IntersectForDistances',['../class_human_factors_1_1_ray_tracing_1_1_embree_raytracer.html#a9b28c2746d7859db1ce70a87ab935063',1,'HumanFactors::RayTracing::EmbreeRaytracer']]],
+  ['intersectforpoint_130',['IntersectForPoint',['../class_human_factors_1_1_ray_tracing_1_1_embree_raytracer.html#afc149e5c713d0fcce5d142c82fd7e292',1,'HumanFactors.RayTracing.EmbreeRaytracer.IntersectForPoint(EmbreeBVH bvh, float x, float y, float z, float dx, float dy, float dz, float max_distance=-1)'],['../class_human_factors_1_1_ray_tracing_1_1_embree_raytracer.html#a2d6fd1eb3e172c59014d6b1b24a2c1c9',1,'HumanFactors.RayTracing.EmbreeRaytracer.IntersectForPoint(EmbreeBVH bvh, Vector3D origin, Vector3D direction, float max_distance=-1)']]],
+  ['intersectforpoints_131',['IntersectForPoints',['../class_human_factors_1_1_ray_tracing_1_1_embree_raytracer.html#ae3364703368c059a9e5bda35ca41492a',1,'HumanFactors::RayTracing::EmbreeRaytracer']]],
+  ['intersectoccluded_132',['IntersectOccluded',['../class_human_factors_1_1_ray_tracing_1_1_embree_raytracer.html#a910e0b4ba8e99cdc45a0df115c89ff15',1,'HumanFactors::RayTracing::EmbreeRaytracer']]],
+  ['invalid_5fcost_133',['INVALID_COST',['../namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987fa32bfda359f59c398a32f6b2b8b0c66b9',1,'HumanFactors::Exceptions']]],
+  ['invalid_5fmesh_134',['INVALID_MESH',['../namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987fa98bce53948ff66bc4f3402404b765981',1,'HumanFactors::Exceptions']]],
+  ['invalid_5fptr_135',['INVALID_PTR',['../namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987fa63b72f69c802a435b0bb87a2a0b1aab0',1,'HumanFactors::Exceptions']]],
+  ['invalidmeshexception_136',['InvalidMeshException',['../class_human_factors_1_1_exceptions_1_1_invalid_mesh_exception.html',1,'HumanFactors.Exceptions.InvalidMeshException'],['../class_human_factors_1_1_exceptions_1_1_invalid_mesh_exception.html#a1c0384223a4cdfcf6612e0d2f8013714',1,'HumanFactors.Exceptions.InvalidMeshException.InvalidMeshException()']]],
+  ['isfinite_137',['IsFinite',['../class_human_factors_1_1_extensions.html#a94c8adf0b80c8bb5700aee17d23e64f1',1,'HumanFactors::Extensions']]],
+  ['isinvalid_138',['IsInvalid',['../class_human_factors_1_1_native_utils_1_1_native_object.html#a33340c37b83300ec09f6fc7982d2fb70',1,'HumanFactors::NativeUtils::NativeObject']]],
+  ['isvalid_139',['IsValid',['../struct_human_factors_1_1_vector3_d.html#ad5ca9e5b9921fc94c5cbdb139a33cc54',1,'HumanFactors.Vector3D.IsValid()'],['../struct_human_factors_1_1_native_utils_1_1_c_vector_and_data.html#ad6bec7bcd679afd2ef978232595ebb40',1,'HumanFactors.NativeUtils.CVectorAndData.IsValid()']]]
 ];

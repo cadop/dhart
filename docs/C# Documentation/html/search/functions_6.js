@@ -1,4 +1,11 @@
 var searchData=
 [
-  ['meshinfo_162',['MeshInfo',['../class_human_factors_1_1_geometry_1_1_mesh_info.html#a7840f891fd3f7b38f64c5e1619ebc812',1,'HumanFactors.Geometry.MeshInfo.MeshInfo(IntPtr pointer, int size=0)'],['../class_human_factors_1_1_geometry_1_1_mesh_info.html#a3cbae27f830f86d6377332c295e04a53',1,'HumanFactors.Geometry.MeshInfo.MeshInfo(int[] indices, float[] vertices, string name=&quot;&quot;, int id=-1)']]]
+  ['intersectfordistance_398',['IntersectForDistance',['../class_human_factors_1_1_ray_tracing_1_1_embree_raytracer.html#a2bd31afa0ffb40b98a81ea47fc876be6',1,'HumanFactors::RayTracing::EmbreeRaytracer']]],
+  ['intersectfordistances_399',['IntersectForDistances',['../class_human_factors_1_1_ray_tracing_1_1_embree_raytracer.html#a9b28c2746d7859db1ce70a87ab935063',1,'HumanFactors::RayTracing::EmbreeRaytracer']]],
+  ['intersectforpoint_400',['IntersectForPoint',['../class_human_factors_1_1_ray_tracing_1_1_embree_raytracer.html#afc149e5c713d0fcce5d142c82fd7e292',1,'HumanFactors.RayTracing.EmbreeRaytracer.IntersectForPoint(EmbreeBVH bvh, float x, float y, float z, float dx, float dy, float dz, float max_distance=-1)'],['../class_human_factors_1_1_ray_tracing_1_1_embree_raytracer.html#a2d6fd1eb3e172c59014d6b1b24a2c1c9',1,'HumanFactors.RayTracing.EmbreeRaytracer.IntersectForPoint(EmbreeBVH bvh, Vector3D origin, Vector3D direction, float max_distance=-1)']]],
+  ['intersectforpoints_401',['IntersectForPoints',['../class_human_factors_1_1_ray_tracing_1_1_embree_raytracer.html#ae3364703368c059a9e5bda35ca41492a',1,'HumanFactors::RayTracing::EmbreeRaytracer']]],
+  ['intersectoccluded_402',['IntersectOccluded',['../class_human_factors_1_1_ray_tracing_1_1_embree_raytracer.html#a910e0b4ba8e99cdc45a0df115c89ff15',1,'HumanFactors::RayTracing::EmbreeRaytracer']]],
+  ['invalidmeshexception_403',['InvalidMeshException',['../class_human_factors_1_1_exceptions_1_1_invalid_mesh_exception.html#a1c0384223a4cdfcf6612e0d2f8013714',1,'HumanFactors::Exceptions::InvalidMeshException']]],
+  ['isfinite_404',['IsFinite',['../class_human_factors_1_1_extensions.html#a94c8adf0b80c8bb5700aee17d23e64f1',1,'HumanFactors::Extensions']]],
+  ['isvalid_405',['IsValid',['../struct_human_factors_1_1_vector3_d.html#ad5ca9e5b9921fc94c5cbdb139a33cc54',1,'HumanFactors.Vector3D.IsValid()'],['../struct_human_factors_1_1_native_utils_1_1_c_vector_and_data.html#ad6bec7bcd679afd2ef978232595ebb40',1,'HumanFactors.NativeUtils.CVectorAndData.IsValid()']]]
 ];

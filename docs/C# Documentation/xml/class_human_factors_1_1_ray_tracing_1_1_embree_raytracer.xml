@@ -1,0 +1,541 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.18">
+  <compounddef id="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer" kind="class" language="C#" prot="public">
+    <compoundname>HumanFactors::RayTracing::EmbreeRaytracer</compoundname>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1afc149e5c713d0fcce5d142c82fd7e292" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref></type>
+        <definition>static Vector3D HumanFactors.RayTracing.EmbreeRaytracer.IntersectForPoint</definition>
+        <argsstring>(EmbreeBVH bvh, float x, float y, float z, float dx, float dy, float dz, float max_distance=-1)</argsstring>
+        <name>IntersectForPoint</name>
+        <param>
+          <type><ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h" kindref="compound">EmbreeBVH</ref></type>
+          <declname>bvh</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>z</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>dx</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>dy</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>dz</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>max_distance</declname>
+          <defval>-1</defval>
+        </param>
+        <briefdescription>
+<para>Cast a single ray, and get a point in return if it intersects any geometry. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bvh</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>BVH of geometry to intersect. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>x component of the ray&apos;s origin point </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>y component of the ray&apos;s origin point </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>z</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>z component of the ray&apos;s origin point </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>x component of the ray&apos;s direction </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dy</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>y component of the ray&apos;s direction </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dz</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>z component of the ray&apos;s direction </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>max_distance</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum distance to consider for intersections. Set to -1 for infinite</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="remark"><para>Consider calling <ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1ae3364703368c059a9e5bda35ca41492a" kindref="member">IntersectForPoints</ref> when casting mutliple rays at once since it can make use of parallel processing to drastically reduce the time it takes to cast each ray.</para>
+</simplesect>
+<simplesect kind="return"><para>A <ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref> containing the hitpoint. If no hit was detected, the point will be invalid. This can easily be checked using <ref refid="struct_human_factors_1_1_vector3_d_1ad5ca9e5b9921fc94c5cbdb139a33cc54" kindref="member">Vector3D.IsValid</ref>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/raytracer/src/EmbreeRayTracer.cs" line="62" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1a2d6fd1eb3e172c59014d6b1b24a2c1c9" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref></type>
+        <definition>static Vector3D HumanFactors.RayTracing.EmbreeRaytracer.IntersectForPoint</definition>
+        <argsstring>(EmbreeBVH bvh, Vector3D origin, Vector3D direction, float max_distance=-1)</argsstring>
+        <name>IntersectForPoint</name>
+        <param>
+          <type><ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h" kindref="compound">EmbreeBVH</ref></type>
+          <declname>bvh</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref></type>
+          <declname>origin</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref></type>
+          <declname>direction</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>max_distance</declname>
+          <defval>-1</defval>
+        </param>
+        <briefdescription>
+<para>Cast a single ray, and get a point in return if it intersects any geometry. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bvh</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>BVH of geometry to intersect. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>origin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Origin point to cast the ray from. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>direction</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>direction to cast the ray in. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>max_distance</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum distance to consider for intersections.Set to -1 for infinite</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A <ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref> containing the hitpoint. If no hit was detected, the point will be invalid. This can easily be checked using <ref refid="struct_human_factors_1_1_vector3_d_1ad5ca9e5b9921fc94c5cbdb139a33cc54" kindref="member">Vector3D.IsValid</ref>.</para>
+</simplesect>
+This calls the other overload with the components of origin and direction.</para>
+<para><simplesect kind="remark"><para>Consider calling <ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1ae3364703368c059a9e5bda35ca41492a" kindref="member">IntersectForPoints</ref> when casting mutliple rays at once since it can make use of parallel processing to drastically reduce the time it takes to get the results of every ray. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/raytracer/src/EmbreeRayTracer.cs" line="95" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1ae3364703368c059a9e5bda35ca41492a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref>[]</type>
+        <definition>static Vector3D [] HumanFactors.RayTracing.EmbreeRaytracer.IntersectForPoints</definition>
+        <argsstring>(EmbreeBVH bvh, IEnumerable&lt; Vector3D &gt; origins, IEnumerable&lt; Vector3D &gt; directions, float max_distance)</argsstring>
+        <name>IntersectForPoints</name>
+        <param>
+          <type><ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h" kindref="compound">EmbreeBVH</ref></type>
+          <declname>bvh</declname>
+        </param>
+        <param>
+          <type>IEnumerable&lt; <ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref> &gt;</type>
+          <declname>origins</declname>
+        </param>
+        <param>
+          <type>IEnumerable&lt; <ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref> &gt;</type>
+          <declname>directions</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>max_distance</declname>
+        </param>
+        <briefdescription>
+<para>Cast multiple rays and recieve hitpoints in return. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bvh</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A valid BVH containing geometry to intersect with. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>origins</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A list of x,y,z coordinates to cast rays in. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>directions</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A list of x,y,z directions to fire in. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>max_distance</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum distance to consider for intersection.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>An array of <ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref> for the hitpoint of each ray casted in order. If a ray didn&apos;t intersect any geometry, then its point will be invalid, checkable using <ref refid="struct_human_factors_1_1_vector3_d_1ad5ca9e5b9921fc94c5cbdb139a33cc54" kindref="member">Vector3D.IsValid()</ref></para>
+</simplesect>
+Can be casted in 3 configurations: </para>
+<para><itemizedlist>
+<listitem>
+<para>Equal amount of directions/origins: Cast a ray for every pair of origin/direction in order. i.e. (origin[0], direction[0]), (origin[1], direction[1]), etc.  </para>
+</listitem>
+<listitem>
+<para>One direction, multiple origins: Fire a ray in the given direction from each origin point in origins.  </para>
+</listitem>
+<listitem>
+<para>One origin, multiple directions: Fire a ray from the origin point in each direction in directions.  </para>
+</listitem>
+</itemizedlist>
+</para>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>System.ArgumentException</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of directions and origins did not match any of the valid cases. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/raytracer/src/EmbreeRayTracer.cs" line="131" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1a2bd31afa0ffb40b98a81ea47fc876be6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_human_factors_1_1_ray_tracing_1_1_ray_result" kindref="compound">RayResult</ref></type>
+        <definition>static RayResult HumanFactors.RayTracing.EmbreeRaytracer.IntersectForDistance</definition>
+        <argsstring>(EmbreeBVH bvh, Vector3D origin, Vector3D direction, float max_distance)</argsstring>
+        <name>IntersectForDistance</name>
+        <param>
+          <type><ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h" kindref="compound">EmbreeBVH</ref></type>
+          <declname>bvh</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref></type>
+          <declname>origin</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref></type>
+          <declname>direction</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>max_distance</declname>
+        </param>
+        <briefdescription>
+<para>Cast a single ray and get the distance to its hit and the meshID if it hit anything. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bvh</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A valid BVH containing the geometry to intersect with. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>origin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>x,y,z coordinates for the ray&apos;s origin point. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>direction</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>x,y,z coordinates for the direction for the ray to be casted in. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>max_distance</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum distance to consider for intersection. Set to -1 for infinite.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="remark"><para>This can be faster than <ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1ae3364703368c059a9e5bda35ca41492a" kindref="member">IntersectForPoints</ref>, as the data returned is lighter. If you only need the distance or meshID, this function is recommended.</para>
+</simplesect>
+<simplesect kind="return"><para>A <ref refid="struct_human_factors_1_1_ray_tracing_1_1_ray_result" kindref="compound">RayResult</ref> containing the distance to the hitpoint and meshid it hit. If the distance is equal to -1, then the ray did not intersect any geometry. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/raytracer/src/EmbreeRayTracer.cs" line="155" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1a9b28c2746d7859db1ce70a87ab935063" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_human_factors_1_1_ray_tracing_1_1_ray_results" kindref="compound">RayResults</ref></type>
+        <definition>static RayResults HumanFactors.RayTracing.EmbreeRaytracer.IntersectForDistances</definition>
+        <argsstring>(EmbreeBVH bvh, IEnumerable&lt; Vector3D &gt; origins, IEnumerable&lt; Vector3D &gt; directions, float max_distance)</argsstring>
+        <name>IntersectForDistances</name>
+        <param>
+          <type><ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h" kindref="compound">EmbreeBVH</ref></type>
+          <declname>bvh</declname>
+        </param>
+        <param>
+          <type>IEnumerable&lt; <ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref> &gt;</type>
+          <declname>origins</declname>
+        </param>
+        <param>
+          <type>IEnumerable&lt; <ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref> &gt;</type>
+          <declname>directions</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>max_distance</declname>
+        </param>
+        <briefdescription>
+<para>Cast multiple rays and recieve the distance and meshid of geometry intersected by each in return. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bvh</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A valid BVH containing geometry to intersect with. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>origins</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A list of x, y, z coordinates to cast rays in. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>directions</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A list of x, y, z directions to fire in. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>max_distance</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum distance to consider for intersection.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>An array of <ref refid="class_human_factors_1_1_ray_tracing_1_1_ray_results" kindref="compound">RayResults</ref> for the hitpoint of each ray casted in order. If a ray didn&apos;t intersect any geometry, then its distance and meshid will be -1.</para>
+</simplesect>
+Can be casted in 3 configurations: </para>
+<para><itemizedlist>
+<listitem>
+<para>Equal amount of directions/origins: Cast a ray for every pair of origin/direction in order.i.e. (origin[0], direction[0]), (origin[1], direction[1]), etc.  </para>
+</listitem>
+<listitem>
+<para>One direction, multiple origins: Cast a ray in the given direction from each origin point in origins.  </para>
+</listitem>
+<listitem>
+<para>One origin, multiple directions: Cast a ray from the origin point in each direction in directions  </para>
+</listitem>
+</itemizedlist>
+</para>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>System.ArgumentException</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of directions and origins did not match any of the valid cases. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/raytracer/src/EmbreeRayTracer.cs" line="195" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1a910e0b4ba8e99cdc45a0df115c89ff15" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool[]</type>
+        <definition>static bool [] HumanFactors.RayTracing.EmbreeRaytracer.IntersectOccluded</definition>
+        <argsstring>(EmbreeBVH bvh, IEnumerable&lt; Vector3D &gt; origin, IEnumerable&lt; Vector3D &gt; direction, float max_distance)</argsstring>
+        <name>IntersectOccluded</name>
+        <param>
+          <type><ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h" kindref="compound">EmbreeBVH</ref></type>
+          <declname>bvh</declname>
+        </param>
+        <param>
+          <type>IEnumerable&lt; <ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref> &gt;</type>
+          <declname>origin</declname>
+        </param>
+        <param>
+          <type>IEnumerable&lt; <ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref> &gt;</type>
+          <declname>direction</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>max_distance</declname>
+        </param>
+        <briefdescription>
+<para>Determine if any geometry occludes a point from a direction. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bvh</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A valid Embree BVH. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>origin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>One or more origins. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>direction</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>One or more directions. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>max_distance</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum distance that a ray can travel. Any hits beyond this point are not counted.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>An array of true or false values indicating hits or misses respectively.</para>
+</simplesect>
+Can be casted in 3 configurations: </para>
+<para><itemizedlist>
+<listitem>
+<para>Equal amount of directions/origins: Cast a ray for every pair of origin/direction in order.i.e. (origin[0], direction[0]), (origin[1], direction[1]), etc.  </para>
+</listitem>
+<listitem>
+<para>One direction, multiple origins: Cast a ray in the given direction from each origin point in origins.  </para>
+</listitem>
+<listitem>
+<para>One origin, multiple directions: Cast a ray from the origin point in each direction in directions  </para>
+</listitem>
+</itemizedlist>
+</para>
+<para><simplesect kind="remark"><para>Occlusion rays are the fastest raycasting function, however are only capable of returning or not they hit anything. This can be useful for line of sight checks. Will execute in parallel if multiple origins/directions are supplied. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/raytracer/src/EmbreeRayTracer.cs" line="236" column="20"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Cast rays with Intel&apos;s Embree raytracing library. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="remark"><para>All functions in this class first require the creation of an <ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h" kindref="compound">EmbreeBVH</ref> with valid mesh geometry.</para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="class_human_factors_1_1_geometry_1_1_mesh_info" kindref="compound">Geometry.MeshInfo</ref> for details on converting a mesh to a format that <ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref> can interpret </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h" kindref="compound">EmbreeBVH</ref> for details on generating a BVH from geometry. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="src/Csharp/packages/raytracer/src/EmbreeRayTracer.cs" line="39" column="19" bodyfile="src/Csharp/packages/raytracer/src/EmbreeRayTracer.cs" bodystart="40" bodyend="242"/>
+    <listofallmembers>
+      <member refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1a2bd31afa0ffb40b98a81ea47fc876be6" prot="public" virt="non-virtual"><scope>HumanFactors::RayTracing::EmbreeRaytracer</scope><name>IntersectForDistance</name></member>
+      <member refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1a9b28c2746d7859db1ce70a87ab935063" prot="public" virt="non-virtual"><scope>HumanFactors::RayTracing::EmbreeRaytracer</scope><name>IntersectForDistances</name></member>
+      <member refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1afc149e5c713d0fcce5d142c82fd7e292" prot="public" virt="non-virtual"><scope>HumanFactors::RayTracing::EmbreeRaytracer</scope><name>IntersectForPoint</name></member>
+      <member refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1a2d6fd1eb3e172c59014d6b1b24a2c1c9" prot="public" virt="non-virtual"><scope>HumanFactors::RayTracing::EmbreeRaytracer</scope><name>IntersectForPoint</name></member>
+      <member refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1ae3364703368c059a9e5bda35ca41492a" prot="public" virt="non-virtual"><scope>HumanFactors::RayTracing::EmbreeRaytracer</scope><name>IntersectForPoints</name></member>
+      <member refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1a910e0b4ba8e99cdc45a0df115c89ff15" prot="public" virt="non-virtual"><scope>HumanFactors::RayTracing::EmbreeRaytracer</scope><name>IntersectOccluded</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

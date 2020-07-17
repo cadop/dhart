@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.18">
+  <compounddef id="namespace_human_factors_1_1_native_utils" kind="namespace" language="C#">
+    <compoundname>HumanFactors::NativeUtils</compoundname>
+    <innerclass refid="struct_human_factors_1_1_native_utils_1_1_c_vector_and_data" prot="package">HumanFactors::NativeUtils::CVectorAndData</innerclass>
+    <innerclass refid="class_human_factors_1_1_native_utils_1_1_helper_functions" prot="public">HumanFactors::NativeUtils::HelperFunctions</innerclass>
+    <innerclass refid="class_human_factors_1_1_native_utils_1_1_native_array" prot="public">HumanFactors::NativeUtils::NativeArray</innerclass>
+    <innerclass refid="class_human_factors_1_1_native_utils_1_1_native_array2_d" prot="public">HumanFactors::NativeUtils::NativeArray2D</innerclass>
+    <innerclass refid="class_human_factors_1_1_native_utils_1_1_native_constants" prot="package">HumanFactors::NativeUtils::NativeConstants</innerclass>
+    <innerclass refid="class_human_factors_1_1_native_utils_1_1_native_object" prot="public">HumanFactors::NativeUtils::NativeObject</innerclass>
+    <innernamespace refid="namespace_human_factors_1_1_native_utils_1_1_common_native_arrays">HumanFactors::NativeUtils::CommonNativeArrays</innernamespace>
+    <briefdescription>
+<para>A set of utilities and common functions that assist in communicating with native code. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="remark"><para>The aim of this namespace is to allow an end user to interact with objects in native memory without ever having to write code with the unsafe keyword, or manually manage the memory of an object. Interacting with these objects should be as intuitive as interacting with standard C# types, without the risk of an unexpected crash or memory leak.</para>
+</simplesect>
+</para>
+<internal><para>When extending this codebase, any functionality that has potential for reuse in accessing native code should be written here. If you are managing native memory, you sohuld be using or inheriting native object to manage its lifetime since the implementation of nativeobject gaurantees performance and safety.</para>
+<para><verbatim>\warning
+When extending this namespace make sure to throughly test for memory leaks or crashes.
+
+\see NativeObject for more details on managing the lifetime of objects in native memory. 
+</verbatim> </para>
+</internal>
+    </detaileddescription>
+    <location file="src/Csharp/packages/base/src/NativeCollections.cs" line="17" column="1"/>
+  </compounddef>
+</doxygen>

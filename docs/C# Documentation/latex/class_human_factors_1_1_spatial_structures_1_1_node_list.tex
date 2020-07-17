@@ -2,29 +2,110 @@
 \label{class_human_factors_1_1_spatial_structures_1_1_node_list}\index{HumanFactors.SpatialStructures.NodeList@{HumanFactors.SpatialStructures.NodeList}}
 
 
-A list of nodes from a graph in unmanaged memory.  
+An array of Nodes directly from a graph in unmanaged memory.  
 
 
-Inheritance diagram for Human\+Factors.\+Spatial\+Structures.\+Node\+List\+:\begin{figure}[H]
+
+
+Inheritance diagram for Human\+Factors.\+Spatial\+Structures.\+Node\+List\+:
+\nopagebreak
+\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=2.000000cm]{class_human_factors_1_1_spatial_structures_1_1_node_list}
+\includegraphics[width=241pt]{class_human_factors_1_1_spatial_structures_1_1_node_list__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Human\+Factors.\+Spatial\+Structures.\+Node\+List\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=241pt]{class_human_factors_1_1_spatial_structures_1_1_node_list__coll__graph}
 \end{center}
 \end{figure}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_node_list_a6ea3d1eb61f626b02bdb0ee56eea4f50}\label{class_human_factors_1_1_spatial_structures_1_1_node_list_a6ea3d1eb61f626b02bdb0ee56eea4f50}} 
-override bool {\bfseries Release\+Handle} ()
-\end{DoxyCompactItemize}
+override bool \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_node_list_a6ea3d1eb61f626b02bdb0ee56eea4f50}{Release\+Handle}} ()
+\begin{DoxyCompactList}\small\item\em Free the native memory managed by this class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Package Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_node_list_a7f359e67cb5f55b8c4652ed87c3b919f}{Node\+List}} (\mbox{\hyperlink{struct_human_factors_1_1_native_utils_1_1_c_vector_and_data}{C\+Vector\+And\+Data}} in\+\_\+vector)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_node_list}{Node\+List}} \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-A list of nodes from a graph in unmanaged memory. 
+An array of Nodes directly from a graph in unmanaged memory. 
 
+Definition at line 47 of file Node.\+cs.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_node_list_a7f359e67cb5f55b8c4652ed87c3b919f}\label{class_human_factors_1_1_spatial_structures_1_1_node_list_a7f359e67cb5f55b8c4652ed87c3b919f}} 
+\index{HumanFactors.SpatialStructures.NodeList@{HumanFactors.SpatialStructures.NodeList}!NodeList@{NodeList}}
+\index{NodeList@{NodeList}!HumanFactors.SpatialStructures.NodeList@{HumanFactors.SpatialStructures.NodeList}}
+\doxysubsubsection{\texorpdfstring{NodeList()}{NodeList()}}
+{\footnotesize\ttfamily Human\+Factors.\+Spatial\+Structures.\+Node\+List.\+Node\+List (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_human_factors_1_1_native_utils_1_1_c_vector_and_data}{C\+Vector\+And\+Data}}}]{in\+\_\+vector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [package]}}
+
+
+
+Initializes a new instance of the \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_node_list}{Node\+List}} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em in\+\_\+vector} & The vector to create this nodelist from.\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 53 of file Node.\+cs.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_node_list_a6ea3d1eb61f626b02bdb0ee56eea4f50}\label{class_human_factors_1_1_spatial_structures_1_1_node_list_a6ea3d1eb61f626b02bdb0ee56eea4f50}} 
+\index{HumanFactors.SpatialStructures.NodeList@{HumanFactors.SpatialStructures.NodeList}!ReleaseHandle@{ReleaseHandle}}
+\index{ReleaseHandle@{ReleaseHandle}!HumanFactors.SpatialStructures.NodeList@{HumanFactors.SpatialStructures.NodeList}}
+\doxysubsubsection{\texorpdfstring{ReleaseHandle()}{ReleaseHandle()}}
+{\footnotesize\ttfamily override bool Human\+Factors.\+Spatial\+Structures.\+Node\+List.\+Release\+Handle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Free the native memory managed by this class. 
+
+\begin{DoxyNote}{Note}
+the garbage collector will handle this automatically 
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+Do not attempt to use this class after freeing it! 
+\end{DoxyWarning}
+\begin{DoxyReturn}{Returns}
+True. This is guaranteed to execute properly. ~\newline
+ 
+\end{DoxyReturn}
+
+
+Definition at line 62 of file Node.\+cs.
+
+
+
+References Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+C\+\_\+\+Destroy\+Node\+Vector().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_human_factors_1_1_spatial_structures_1_1_node_list_a6ea3d1eb61f626b02bdb0ee56eea4f50_cgraph}
+\end{center}
+\end{figure}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-src/\+Csharp/packages/spatialstructures/src/Node.\+cs\end{DoxyCompactItemize}
+src/\+Csharp/packages/spatialstructures/src/\mbox{\hyperlink{_node_8cs}{Node.\+cs}}\end{DoxyCompactItemize}

@@ -158,13 +158,13 @@ Creating a Plane</h2>
 <div class="line">      2, 3, 0</div>
 <div class="line">    };</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// Generate a BVH from the MeshInfo instance</span></div>
+<div class="line">    <span class="comment">// Construct a meshinfo instance for the plane</span></div>
 <div class="line">    MeshInfo Plane = <span class="keyword">new</span> MeshInfo(plane_indices, plane_vertices);</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// Construct a meshinfo instance for the plane</span></div>
+<div class="line">    <span class="comment">// Generate a BVH from the MeshInfo instance</span></div>
 <div class="line">    EmbreeBVH bvh = <span class="keyword">new</span> EmbreeBVH(Plane);</div>
 <div class="line">}</div>
-</div><!-- fragment --><p><a href="walkthroughs/unity/2_raycast_at_plane/creating_a_plane.png">Image in Visual Studio</a></p>
+</div><!-- fragment --><p><img src="creating_a_plane.png" alt="" class="inline" title="Image in Visual Studio"/>   </p>
 <p>With the BVH created, we're ready to call the Raytracer and cast a ray.</p>
 <h2><a class="anchor" id="autotoc_md10"></a>
 Casting a Ray</h2>
@@ -178,7 +178,7 @@ Casting a Ray</h2>
 <li>The distance from the ray's origin to the point where it intersected the mesh</li>
 <li>A boolean true/false for whether the ray intersected the mesh at any point.</li>
 </ol>
-<p>For this guide we will use [IntersectForPoint]() to get the point where the ray intersects the mesh. Starting on line 30 call the EmbreeRayTracer's <b>IntersectForPoint</b> function with the bvh, origin and direction as arguments.</p>
+<p>For this guide we will use [IntersectForPoint]() to get the point where the ray intersects the mesh. Starting on line 35 call the EmbreeRayTracer's <b>IntersectForPoint</b> function with the bvh, origin and direction as arguments.</p>
 <div class="fragment"><div class="line"><span class="comment">// Cast the ray, store the hitpoint.</span></div>
 <div class="line">Vector3D intersection_point = EmbreeRaytracer.IntersectForPoint(bvh, origin, direction);</div>
 </div><!-- fragment --><p>Finally, log the point of intersection to Unity's console using <code>Debug.Log()</code> so we can view the results.</p>
@@ -202,7 +202,7 @@ Casting a Ray</h2>
 <div class="line">    <span class="stringliteral">&quot;,&quot;</span> + intersection_point.y +</div>
 <div class="line">    <span class="stringliteral">&quot;,&quot;</span> + intersection_point.z +</div>
 <div class="line"><span class="stringliteral">&quot;)&quot;</span>);</div>
-</div><!-- fragment --><p><a href="walkthroughs/unity/2_raycast_at_plane/casting_a_ray.png">Image of our Start() function up until this point</a></p>
+</div><!-- fragment --><p><img src="casting_a_ray.png" alt="" class="inline" title="Image of our Start() function up until this point"/>   </p>
 <h2><a class="anchor" id="autotoc_md11"></a>
 Wrapping Up</h2>
 <p>Here is the final script we've been building in this tutorial.</p>
@@ -230,10 +230,10 @@ Wrapping Up</h2>
 <div class="line">          2, 3, 0</div>
 <div class="line">        };</div>
 <div class="line"> </div>
-<div class="line">        <span class="comment">// Generate a BVH from the MeshInfo instance</span></div>
+<div class="line">        <span class="comment">// Construct a meshinfo instance for the plane</span></div>
 <div class="line">        MeshInfo Plane = <span class="keyword">new</span> MeshInfo(plane_indices, plane_vertices);</div>
 <div class="line"> </div>
-<div class="line">        <span class="comment">// Construct a meshinfo instance for the plane</span></div>
+<div class="line">        <span class="comment">// Generate a BVH from the MeshInfo instance</span></div>
 <div class="line">        EmbreeBVH bvh = <span class="keyword">new</span> EmbreeBVH(Plane);</div>
 <div class="line"> </div>
 <div class="line">        <span class="comment">// Define origin and direction</span></div>
@@ -306,9 +306,9 @@ Conclusion</h1>
 <p>In this tutorial we've successfully created a plane from an array of vertices and triangle indexes, then casted a ray at it, then found the point where the ray and the plane intersected. Through this we've gained some experience using Visual Studio with Unity and became more familiar with the Editor's UI. In the next tutorial we will build upon this experience to cover a core part of the <a class="el" href="namespace_human_factors.html" title="Automated analysis of the built environent">HumanFactors</a> Library: The <a class="el" href="_generating_a_graph.html">Graph Generator</a>. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
-<div class="ttc" id="anamespace_human_factors_1_1_ray_tracing_html"><div class="ttname"><a href="namespace_human_factors_1_1_ray_tracing.html">HumanFactors.RayTracing</a></div><div class="ttdef"><b>Definition:</b> EmbreeBVH.cs:7</div></div>
-<div class="ttc" id="anamespace_human_factors_html"><div class="ttname"><a href="namespace_human_factors.html">HumanFactors</a></div><div class="ttdoc">Automated analysis of the built environent</div><div class="ttdef"><b>Definition:</b> CommonTypes.cs:9</div></div>
-<div class="ttc" id="anamespace_human_factors_1_1_geometry_html"><div class="ttname"><a href="namespace_human_factors_1_1_geometry.html">HumanFactors.Geometry</a></div><div class="ttdef"><b>Definition:</b> CommonRotations.cs:4</div></div>
+<div class="ttc" id="anamespace_human_factors_1_1_ray_tracing_html"><div class="ttname"><a href="namespace_human_factors_1_1_ray_tracing.html">HumanFactors.RayTracing</a></div><div class="ttdoc">Cast rays to determine if and where they intersect geometry.</div><div class="ttdef"><b>Definition:</b> <a href="_embree_b_v_h_8cs_source.html#l00006">EmbreeBVH.cs:7</a></div></div>
+<div class="ttc" id="anamespace_human_factors_html"><div class="ttname"><a href="namespace_human_factors.html">HumanFactors</a></div><div class="ttdoc">Automated analysis of the built environent</div><div class="ttdef"><b>Definition:</b> <a href="_common_types_8cs_source.html#l00008">CommonTypes.cs:9</a></div></div>
+<div class="ttc" id="anamespace_human_factors_1_1_geometry_html"><div class="ttname"><a href="namespace_human_factors_1_1_geometry.html">HumanFactors.Geometry</a></div><div class="ttdoc">Manipulate and load geometry from disk.</div><div class="ttdef"><b>Definition:</b> <a href="_common_rotations_8cs_source.html#l00003">CommonRotations.cs:4</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

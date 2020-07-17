@@ -1,0 +1,181 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.18">
+  <compounddef id="class_human_factors_1_1_native_utils_1_1_helper_functions" kind="class" language="C#" prot="public">
+    <compoundname>HumanFactors::NativeUtils::HelperFunctions</compoundname>
+      <sectiondef kind="package-static-func">
+      <memberdef kind="function" id="class_human_factors_1_1_native_utils_1_1_helper_functions_1a47b9b1bc5f33efee88cd73afbda2d2e1" prot="package" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void HumanFactors.NativeUtils.HelperFunctions.MarshalUnmananagedArray2Struct&lt; T &gt;</definition>
+        <argsstring>(IntPtr unmanagedArray, int length, out T[] mangagedArray)</argsstring>
+        <name>MarshalUnmananagedArray2Struct&lt; T &gt;</name>
+        <param>
+          <type>IntPtr</type>
+          <declname>unmanagedArray</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>length</declname>
+        </param>
+        <param>
+          <type>out T[]</type>
+          <declname>mangagedArray</declname>
+        </param>
+        <briefdescription>
+<para>Copy an array of structs from unmanaged memory into managed memory </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of struct to copy </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>unmanagedArray</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the array in unmanaged memory. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of elements in the unmanaged array. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mangagedArray</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>An output parameter for the managed array to write to. This will be resized.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The new array of structs in managed memory. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/base/src/NativeUtils.cs" line="96" column="25" bodyfile="src/Csharp/packages/base/src/NativeUtils.cs" bodystart="96" bodyend="108"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_human_factors_1_1_native_utils_1_1_helper_functions_1a1b8660057551684c95da0edd711293e6" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>float[]</type>
+        <definition>static float [] HumanFactors.NativeUtils.HelperFunctions.FlattenVectorArray</definition>
+        <argsstring>(IEnumerable&lt; Vector3D &gt; vectors)</argsstring>
+        <name>FlattenVectorArray</name>
+        <param>
+          <type>IEnumerable&lt; <ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref> &gt;</type>
+          <declname>vectors</declname>
+        </param>
+        <briefdescription>
+<para>Convert a vector array into an array of floats. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>vectors</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The array of vectors to convert </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>An array of floats 3x as big as the array of vectors.</para>
+</simplesect>
+</para>
+<internal><para><simplesect kind="remark"><para>Useful for preparing for Pinvoke </para>
+</simplesect>
+</para>
+</internal>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/base/src/NativeUtils.cs" line="120" column="29" bodyfile="src/Csharp/packages/base/src/NativeUtils.cs" bodystart="120" bodyend="134"/>
+        <referencedby refid="class_human_factors_1_1_visibility_graph_1_1_native_methods_1a1d143831fb37b4a2195d70a94cb3d977" compoundref="_visibility_graph_native_8cs" startline="18" endline="31">HumanFactors.VisibilityGraph.NativeMethods.C_AllToAllVisibilityGraph</referencedby>
+        <referencedby refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1ab43791c6e75a4273e51c33db1ada2638" compoundref="_ray_tracer_native_8cs" startline="120" endline="145">HumanFactors.RayTracing.NativeMethods.C_FireOcclusionRays</referencedby>
+        <referencedby refid="class_human_factors_1_1_visibility_graph_1_1_native_methods_1ad47df2f1b644b87ecd8b4c99676ff8c1" compoundref="_visibility_graph_native_8cs" startline="33" endline="44">HumanFactors.VisibilityGraph.NativeMethods.C_GroupToGroupVisibilityGraph</referencedby>
+        <referencedby refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1a678fc6a9e4fd7c2a083940dbea2083cf" compoundref="_ray_tracer_native_8cs" startline="89" endline="118">HumanFactors.RayTracing.NativeMethods.C_IntersectRays</referencedby>
+        <referencedby refid="class_human_factors_1_1_view_analysis_1_1_native_methods_1a240266ca032ba807f024712fdd1cabb3" compoundref="_view_analysis_native_8cs" startline="19" endline="51">HumanFactors.ViewAnalysis.NativeMethods.C_SphericalViewAnalysisAggregate</referencedby>
+        <referencedby refid="class_human_factors_1_1_view_analysis_1_1_native_methods_1a46cd6e55e9f8ed843878eaa8465eca65" compoundref="_view_analysis_native_8cs" startline="53" endline="85">HumanFactors.ViewAnalysis.NativeMethods.C_SphericalViewAnalysisNoAggregate</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_native_utils_1_1_helper_functions_1ac871336ffa2bbfd33523a93ba600acb0" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref>[]</type>
+        <definition>static Vector3D [] HumanFactors.NativeUtils.HelperFunctions.FloatArrayToVectorArray</definition>
+        <argsstring>(float[] float_array, bool[] result_array)</argsstring>
+        <name>FloatArrayToVectorArray</name>
+        <param>
+          <type>float[]</type>
+          <declname>float_array</declname>
+        </param>
+        <param>
+          <type>bool[]</type>
+          <declname>result_array</declname>
+        </param>
+        <briefdescription>
+<para>Convert a flat array of floats into a vector of points where result_array is true. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>float_array</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The array of floats. Every 3 values should correspond to a single <ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref> </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result_array</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Array of booleans where if false the <ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref> at this index will be set to null. Otherwise, it will be converted from the float array.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>An array of <ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref> where every 3 floats in float_array is a single vector3D.</para>
+</simplesect>
+<simplesect kind="remark"><para>This function is used frequently internally to handle results of ray intersections.</para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>ArgumentException</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of elements in result_array is not equal to the number of elements in float_array / 3 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/base/src/NativeUtils.cs" line="154" column="32" bodyfile="src/Csharp/packages/base/src/NativeUtils.cs" bodystart="154" bodyend="176"/>
+        <referencedby refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1ad44bad6cc8dca86d8cae05353e165a8e" compoundref="_ray_tracer_native_8cs" startline="52" endline="87">HumanFactors.RayTracing.NativeMethods.C_IntersectPoints</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Contains some functions useful for converting data for interop. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="remark"><para>These functions are frequently called internally in multiple <ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref> namespaces. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="src/Csharp/packages/base/src/NativeUtils.cs" line="88" column="19" bodyfile="src/Csharp/packages/base/src/NativeUtils.cs" bodystart="89" bodyend="177"/>
+    <listofallmembers>
+      <member refid="class_human_factors_1_1_native_utils_1_1_helper_functions_1a1b8660057551684c95da0edd711293e6" prot="public" virt="non-virtual"><scope>HumanFactors::NativeUtils::HelperFunctions</scope><name>FlattenVectorArray</name></member>
+      <member refid="class_human_factors_1_1_native_utils_1_1_helper_functions_1ac871336ffa2bbfd33523a93ba600acb0" prot="public" virt="non-virtual"><scope>HumanFactors::NativeUtils::HelperFunctions</scope><name>FloatArrayToVectorArray</name></member>
+      <member refid="class_human_factors_1_1_native_utils_1_1_helper_functions_1a47b9b1bc5f33efee88cd73afbda2d2e1" prot="package" virt="non-virtual"><scope>HumanFactors::NativeUtils::HelperFunctions</scope><name>MarshalUnmananagedArray2Struct&lt; T &gt;</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

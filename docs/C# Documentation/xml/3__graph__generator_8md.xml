@@ -1,0 +1,278 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.18">
+  <compounddef id="3__graph__generator_8md" kind="file" language="Markdown">
+    <compoundname>3_graph_generator.md</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline></codeline>
+<codeline><highlight class="normal">#<sp/>Using<sp/>the<sp/>Graph<sp/>Generator<sp/>{#GeneratingAGraph}</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Previous<sp/>Tutorial:<sp/>[Project<sp/>Setup](@ref<sp/>UnityProjectSetup)</highlight></codeline>
+<codeline><highlight class="normal">|</highlight></codeline>
+<codeline><highlight class="normal">Next<sp/>Tutorial:<sp/>[Passing<sp/>a<sp/>Mesh<sp/>From<sp/>Unity<sp/>to<sp/>HumanFactors](@ref<sp/>MeshFromUnity)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">[TOC]</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Intro</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>tutorial<sp/>picks<sp/>up<sp/>from<sp/>where<sp/>[Tutorial<sp/>1:<sp/>Unity<sp/>Project<sp/>Setup](@ref<sp/>UnityProjectSetup)<sp/>ended.<sp/>If<sp/>you<sp/>are<sp/>just<sp/>beginning<sp/>here,<sp/>then<sp/>you<sp/>can<sp/>download<sp/>the<sp/>Unity<sp/>project<sp/>from<sp/>the<sp/>bottom<sp/>of<sp/>tutorial<sp/>1.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">In<sp/>this<sp/>tutorial<sp/>we<sp/>will<sp/>cover<sp/>the<sp/>following:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">1.<sp/>Calling<sp/>the<sp/>GraphGenerator<sp/>with<sp/>a<sp/>BVH,<sp/>spacing,<sp/>and<sp/>a<sp/>start<sp/>point.</highlight></codeline>
+<codeline><highlight class="normal">2.<sp/>Reading<sp/>nodes<sp/>from<sp/>a<sp/>graph<sp/>after<sp/>it<sp/>has<sp/>been<sp/>generated.</highlight></codeline>
+<codeline><highlight class="normal">3.<sp/>Handling<sp/>cases<sp/>where<sp/>the<sp/>GraphGenerator<sp/>could<sp/>not<sp/>generate<sp/>a<sp/>graph.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Conceptual<sp/>Overview</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">To<sp/>put<sp/>it<sp/>simply,<sp/>the<sp/>**Graph<sp/>Generator**<sp/>maps<sp/>out<sp/>&quot;accessible&quot;<sp/>space<sp/>on<sp/>a<sp/>model<sp/>from<sp/>a<sp/>given<sp/>starting<sp/>point.<sp/>As<sp/>the<sp/>name<sp/>implies,<sp/>this<sp/>map<sp/>of<sp/>the<sp/>space<sp/>is<sp/>stored<sp/>as<sp/>a<sp/>series<sp/>of<sp/>nodes<sp/>and<sp/>edges<sp/>in<sp/>a<sp/>**Graph**.<sp/>Each<sp/>node<sp/>represents<sp/>a<sp/>point<sp/>in<sp/>space<sp/>that<sp/>a<sp/>human<sp/>can<sp/>occupy,<sp/>and<sp/>each<sp/>edge<sp/>between<sp/>nodes<sp/>indicates<sp/>that<sp/>a<sp/>human<sp/>can<sp/>traverse<sp/>from<sp/>one<sp/>node<sp/>to<sp/>another<sp/>node.<sp/>The<sp/>Graph<sp/>Generator<sp/>is<sp/>a<sp/>powerful<sp/>tool<sp/>for<sp/>analyzing<sp/>space,<sp/>since<sp/>the<sp/>graph<sp/>or<sp/>nodes<sp/>it<sp/>outputs<sp/>can<sp/>be<sp/>used<sp/>as<sp/>input<sp/>to<sp/>all<sp/>the<sp/>analysis<sp/>methods<sp/>offered<sp/>by<sp/>HumanFactors.<sp/>This<sp/>allows<sp/>the<sp/>user<sp/>to<sp/>go<sp/>straight<sp/>from<sp/>modifying<sp/>a<sp/>model<sp/>or<sp/>scene,<sp/>to<sp/>analyzing<sp/>it<sp/>with<sp/>minimal<sp/>effort.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Simple<sp/>Graph<sp/>Generation</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">For<sp/>now,<sp/>we<sp/>will<sp/>begin<sp/>with<sp/>the<sp/>minimum<sp/>required<sp/>settings<sp/>to<sp/>run<sp/>the<sp/>Graph<sp/>Generator<sp/>then<sp/>work<sp/>our<sp/>way<sp/>up<sp/>to<sp/>examples<sp/>that<sp/>make<sp/>use<sp/>of<sp/>the<sp/>optional<sp/>settings.<sp/>To<sp/>generate<sp/>a<sp/>graph<sp/>at<sp/>minimum,<sp/>the<sp/>following<sp/>arguments<sp/>are<sp/>required:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">1.<sp/>A<sp/>BVH<sp/>containing<sp/>the<sp/>mesh<sp/>you<sp/>want<sp/>to<sp/>use<sp/>for<sp/>graph<sp/>generation.</highlight></codeline>
+<codeline><highlight class="normal">2.<sp/>A<sp/>point<sp/>to<sp/>start<sp/>graph<sp/>generation<sp/>at.</highlight></codeline>
+<codeline><highlight class="normal">3.<sp/>The<sp/>spacing<sp/>between<sp/>nodes.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![HFExampleScriptBlank](walkthroughs/unity/2_raycast_at_plane/blank_new_behaviour_script.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**3.1**<sp/>*Blank<sp/>HFExampleScript.cs*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">To<sp/>begin:<sp/>open<sp/>the<sp/>blank<sp/>HFExample<sp/>Script<sp/>that<sp/>we<sp/>created<sp/>in<sp/>the<sp/>project<sp/>setup<sp/>by<sp/>double<sp/>clicking<sp/>on<sp/>it<sp/>in<sp/>the<sp/>Unity<sp/>editor<sp/>if<sp/>it<sp/>isn&apos;t<sp/>open<sp/>already.<sp/><sp/>You<sp/>should<sp/>see<sp/>a<sp/>blank<sp/>page<sp/>like<sp/>the<sp/>above.<sp/>If<sp/>you&apos;re<sp/>coming<sp/>from<sp/>a<sp/>previous<sp/>script,<sp/>please<sp/>clear<sp/>it<sp/>so<sp/>it<sp/>matches<sp/>this.<sp/></highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Using<sp/>Declarations</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Using<sp/>Declarations](walkthroughs/unity/3_graph_generator/using_declarations.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**3.2**<sp/>*Using<sp/>declarations<sp/>for<sp/>this<sp/>tutorial*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">To<sp/>get<sp/>started,<sp/>we<sp/>will<sp/>once<sp/>again<sp/>set<sp/>up<sp/>our<sp/>using<sp/>declarations<sp/>to<sp/>import<sp/>the<sp/>functionality<sp/>we<sp/>need,<sp/>starting<sp/>on<sp/>line<sp/>3<sp/>of<sp/>our<sp/>blank<sp/>script.<sp/></highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```{.cs}</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>HumanFactors;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>HumanFactors.Geometry;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>HumanFactors.SpatialStructures;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>HumanFactors.GraphGenerator;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>HumanFactors.RayTracing;</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Creating<sp/>the<sp/>Plane</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Internally,<sp/>the<sp/>graph<sp/>uses<sp/>the<sp/>*EmbreeRayTracer*<sp/>which<sp/>requires<sp/>a<sp/>BVH,<sp/>so<sp/>we<sp/>can<sp/>follow<sp/>the<sp/>process<sp/>as<sp/>the<sp/>[Project<sp/>2A](@ref<sp/>UsingTheRayTracer)<sp/>to<sp/>create<sp/>a<sp/>plane,<sp/>then<sp/>generate<sp/>a<sp/>BVH<sp/>from<sp/>it.<sp/>If<sp/>you<sp/>want<sp/>a<sp/>more<sp/>in-depth<sp/>explanation<sp/>of<sp/>this<sp/>code,<sp/>please<sp/>look<sp/>at<sp/>the<sp/>previous<sp/>tutorial<sp/>if<sp/>you<sp/>want<sp/>more<sp/>information<sp/>about<sp/>this<sp/>code.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Add<sp/>the<sp/>following<sp/>code<sp/>in<sp/>the<sp/>body<sp/>of<sp/>the<sp/>Start<sp/>method<sp/>on<sp/>line<sp/>13:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```{.cs}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Create<sp/>the<sp/>plane&apos;s<sp/>vertex<sp/>and<sp/>index<sp/>arrays</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>float[]<sp/>plane_vertices<sp/>=<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-10f,<sp/>10f,<sp/>0f,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-10f,<sp/>-10f,<sp/>0f,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>10f,<sp/>10f,<sp/>0f,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>10f,<sp/>-10f,<sp/>0f</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int[]<sp/>plane_indices<sp/>=<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>3,<sp/>1,<sp/>0,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>2,<sp/>3,<sp/>0</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Send<sp/>them<sp/>to<sp/>HumanFactors</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MeshInfo<sp/>Plane<sp/>=<sp/>new<sp/>MeshInfo(plane_indices,<sp/>plane_vertices);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Generate<sp/>a<sp/>BVH<sp/>for<sp/>the<sp/>RayTracer</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>EmbreeBVH<sp/>bvh<sp/>=<sp/>new<sp/>EmbreeBVH(Plane);</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Picture<sp/>of<sp/>the<sp/>start<sp/>method<sp/>at<sp/>this<sp/>point](walkthroughs/unity/3_graph_generator/creating_the_plane.PNG)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Generating<sp/>the<sp/>Graph</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Now<sp/>that<sp/>we<sp/>have<sp/>a<sp/>BVH,<sp/>let&apos;s<sp/>generate<sp/>a<sp/>graph<sp/>on<sp/>it.<sp/>In<sp/>the<sp/>code<sp/>below,<sp/>we<sp/>will<sp/>define<sp/>a<sp/>starting<sp/>point<sp/>for<sp/>the<sp/>graph,<sp/>then<sp/>the<sp/>spacing<sp/>between<sp/>each<sp/>node.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">We&apos;ll<sp/>place<sp/>our<sp/>start<sp/>point<sp/>1<sp/>meter<sp/>above<sp/>the<sp/>origin<sp/>of<sp/>the<sp/>scene<sp/>(0,0,1).<sp/>Starting<sp/>directly<sp/>at<sp/>the<sp/>origin,<sp/>(0,0,0),<sp/>would<sp/>put<sp/>the<sp/>start<sp/>point<sp/>inside<sp/>of<sp/>the<sp/>plane<sp/>we&apos;re<sp/>using<sp/>for<sp/>the<sp/>ground<sp/>causing<sp/>the<sp/>initial<sp/>ground<sp/>check<sp/>to<sp/>fail.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```{.cs}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vector3D<sp/>start_point<sp/>=<sp/>new<sp/>Vector3D(0,<sp/>0,<sp/>1);</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">We&apos;ll<sp/>use<sp/>a<sp/>spacing<sp/>of<sp/>one<sp/>meter<sp/>in<sp/>each<sp/>direction,<sp/>so<sp/>each<sp/>node<sp/>in<sp/>our<sp/>graph<sp/>will<sp/>be<sp/>at<sp/>maximum<sp/>one<sp/>meter<sp/>apart.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```{.cs}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vector3D<sp/>spacing<sp/>=<sp/>new<sp/>Vector3D(1,<sp/>1,<sp/>1);</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Finally,<sp/>we<sp/>will<sp/>call<sp/>the<sp/>GraphGenerator<sp/>with<sp/>these<sp/>arguments.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```{.cs}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Generate<sp/>the<sp/>Graph</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Graph<sp/>G<sp/>=<sp/>GraphGenerator.GenerateGraph(bvh,<sp/>start_point,<sp/>spacing);</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">All<sp/>of<sp/>that<sp/>together<sp/>is:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```{.cs}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Set<sp/>Start<sp/>Point<sp/>and<sp/>Spacing</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vector3D<sp/>start_point<sp/>=<sp/>new<sp/>Vector3D(0,<sp/>0,<sp/>1);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vector3D<sp/>spacing<sp/>=<sp/>new<sp/>Vector3D(1,<sp/>1,<sp/>1);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Generate<sp/>the<sp/>graph</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Graph<sp/>G<sp/>=<sp/>GraphGenerator.GenerateGraph(bvh,<sp/>start_point,<sp/>spacing);</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Picture<sp/>of<sp/>entire<sp/>Start<sp/>method<sp/>until<sp/>this<sp/>point.](walkthroughs/unity/3_graph_generator/generating_the_graph.PNG)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Retrieving<sp/>a<sp/>list<sp/>of<sp/>nodes</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Our<sp/>graph<sp/>G<sp/>now<sp/>contains<sp/>a<sp/>graph<sp/>of<sp/>the<sp/>accessible<sp/>space<sp/>on<sp/>the<sp/>plane<sp/>generated<sp/>using<sp/>the<sp/>settings<sp/>we<sp/>passed<sp/>as<sp/>arguments.<sp/>To<sp/>verify<sp/>that<sp/>our<sp/>results<sp/>are<sp/>correct,<sp/>we<sp/>will<sp/>get<sp/>a<sp/>list<sp/>of<sp/>nodes<sp/>from<sp/>the<sp/>graph,<sp/>then<sp/>print<sp/>them<sp/>to<sp/>the<sp/>unity<sp/>console.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Enter<sp/>the<sp/>following<sp/>code<sp/>at<sp/>the<sp/>bottom<sp/>of<sp/>the<sp/>start<sp/>method:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```{.cs}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Get<sp/>a<sp/>list<sp/>of<sp/>nodes<sp/>from<sp/>the<sp/>graph<sp/>and<sp/>print<sp/>them.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NodeList<sp/>nodes<sp/>=<sp/>G.getNodes();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Debug.Log(nodes);</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Picture<sp/>of<sp/>entire<sp/>Start<sp/>method<sp/>Until<sp/>this<sp/>Point](walkthroughs/unity/3_graph_generator/print_nodes.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Save<sp/>and<sp/>Test</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Here<sp/>is<sp/>the<sp/>full<sp/>script<sp/>we&apos;ve<sp/>created<sp/>from<sp/>this<sp/>demo.<sp/>Make<sp/>sure<sp/>yours<sp/>matches<sp/>it<sp/>before<sp/>moving<sp/>on<sp/>to<sp/>testing.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```{.cs}</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>System.Collections;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>System.Collections.Generic;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>UnityEngine;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>HumanFactors;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>HumanFactors.SpatialStructures;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>HumanFactors.GraphGenerator;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>HumanFactors.RayTracing;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>HumanFactors.Geometry;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">public<sp/>class<sp/>HFExampleScript<sp/>:<sp/>MonoBehaviour</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Start<sp/>is<sp/>called<sp/>before<sp/>the<sp/>first<sp/>frame<sp/>update</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>void<sp/>Start()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Create<sp/>an<sp/>array<sp/>of<sp/>a<sp/>plane&apos;s<sp/>vertices<sp/>and<sp/>indices</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>float[]<sp/>plane_vertices<sp/>=<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-10f,<sp/>10f,<sp/>0f,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-10f,<sp/>-10f,<sp/>0f,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>10f,<sp/>10f,<sp/>0f,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>10f,<sp/>-10f,<sp/>0f</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int[]<sp/>plane_indices<sp/>=<sp/>{<sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>3,<sp/>1,<sp/>0,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>2,<sp/>3,<sp/>0<sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Send<sp/>them<sp/>to<sp/>HumanFactors</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MeshInfo<sp/>Plane<sp/>=<sp/>new<sp/>MeshInfo(plane_indices,<sp/>plane_vertices);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Generate<sp/>a<sp/>BVH<sp/>for<sp/>the<sp/>RayTracer</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>EmbreeBVH<sp/>bvh<sp/>=<sp/>new<sp/>EmbreeBVH(Plane);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Set<sp/>Options<sp/>for<sp/>the<sp/>Graph<sp/>Generator</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vector3D<sp/>start_point<sp/>=<sp/>new<sp/>Vector3D(0,<sp/>0,<sp/>1);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vector3D<sp/>spacing<sp/>=<sp/>new<sp/>Vector3D(1,<sp/>1,<sp/>1);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Generate<sp/>the<sp/>Graph</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Graph<sp/>G<sp/>=<sp/>GraphGenerator.GenerateGraph(bvh,<sp/>start_point,<sp/>spacing);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Get<sp/>a<sp/>list<sp/>of<sp/>nodes<sp/>from<sp/>the<sp/>graph<sp/>and<sp/>print<sp/>them.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NodeList<sp/>nodes<sp/>=<sp/>G.getNodes();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Debug.Log(nodes);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>//<sp/>Update<sp/>is<sp/>called<sp/>once<sp/>per<sp/>frame</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>void<sp/>Update()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Once<sp/>you&apos;ve<sp/>confirmed<sp/>that<sp/>your<sp/>script<sp/>matches<sp/>this<sp/>code,<sp/>**save**<sp/>your<sp/>script,<sp/>minimize<sp/>Visual<sp/>Studio,<sp/>then<sp/>switch<sp/>back<sp/>to<sp/>the<sp/>Unity<sp/>Editor.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Attach<sp/>script<sp/>and<sp/>test](walkthroughs/unity/2_raycast_at_plane/drag_into_camera.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**3.3**<sp/>*Dragging<sp/>HFExampleScript<sp/>onto<sp/>the<sp/>Main<sp/>Camera<sp/>as<sp/>a<sp/>component.*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>process<sp/>for<sp/>testing<sp/>this<sp/>script<sp/>is<sp/>identical<sp/>to<sp/>the<sp/>process<sp/>in<sp/>[The<sp/>Raytracer<sp/>Tutorial](@ref<sp/>UsingTheRaytracer).<sp/>Attach<sp/>the<sp/>script<sp/>to<sp/>the<sp/>main<sp/>camera,<sp/>then<sp/>press<sp/>the<sp/>play<sp/>button<sp/>and<sp/>inspect<sp/>your<sp/>output.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Switch<sp/>To<sp/>the<sp/>Console](walkthroughs/unity/3_graph_generator/click_on_console.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**3.4**<sp/>*How<sp/>to<sp/>view<sp/>the<sp/>Console<sp/>Tab*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Like<sp/>in<sp/>the<sp/>previous<sp/>tutorial,<sp/>the<sp/>output<sp/>is<sp/>at<sp/>the<sp/>bottom<sp/>of<sp/>the<sp/>screen,<sp/>but<sp/>it<sp/>doesn&apos;t<sp/>fit<sp/>in<sp/>on<sp/>one<sp/>line,<sp/>so<sp/>it&apos;s<sp/>cut<sp/>off.<sp/>To<sp/>get<sp/>a<sp/>better<sp/>view,<sp/>click<sp/>on<sp/>the<sp/>output<sp/>itself,<sp/>or<sp/>click<sp/>on<sp/>the<sp/>console<sp/>tab<sp/>circled<sp/>in<sp/>Figure<sp/>3.4<sp/>to<sp/>view<sp/>the<sp/>console.<sp/>The<sp/>console<sp/>contains<sp/>a<sp/>history<sp/>of<sp/>outputs,<sp/>as<sp/>well<sp/>as<sp/>the<sp/>option<sp/>to<sp/>click<sp/>on<sp/>any<sp/>output<sp/>message<sp/>to<sp/>get<sp/>more<sp/>information.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![View<sp/>Console](walkthroughs/unity/3_graph_generator/console_view.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**3.5**<sp/>*Highlighted<sp/>Graph<sp/>Output<sp/>and<sp/>how<sp/>to<sp/>switch<sp/>back<sp/>to<sp/>the<sp/>assets<sp/>window*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Once<sp/>the<sp/>console<sp/>tab<sp/>is<sp/>open,<sp/>click<sp/>on<sp/>the<sp/>message<sp/>containing<sp/>the<sp/>graph<sp/>generator&apos;s<sp/>output,<sp/>highlighted<sp/>in<sp/>blue<sp/>in<sp/>Figure<sp/>3.5,<sp/>for<sp/>a<sp/>more<sp/>detailed<sp/>view.<sp/>Like<sp/>in<sp/>Figure<sp/>3.5,<sp/>the<sp/>highlighted<sp/>text<sp/>should<sp/>read:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">[(0.000,0.000,0.000),<sp/>(-1.000,-1.000,0.000),<sp/>(-1.000,0.000,0.000),<sp/>(-1.000,1.000,0.000),<sp/>(0.000,-1.000,0.000),<sp/>.<sp/>.<sp/>.<sp/>(10.000,7.000,0.000),<sp/>(10.000,8.000,0.000),<sp/>(10.000,9.000,0.000),<sp/>(10.000,10.000,0.000)]</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&gt;<sp/>**Note:**<sp/><sp/>this<sp/>is<sp/>not<sp/>the<sp/>full<sp/>list<sp/>of<sp/>nodes.<sp/>The<sp/>list<sp/>has<sp/>been<sp/>truncated<sp/>due<sp/>to<sp/>the<sp/>size<sp/>of<sp/>the<sp/>output.<sp/>To<sp/>view<sp/>every<sp/>node,<sp/>you<sp/>must<sp/>print<sp/>them<sp/>in<sp/>a<sp/>loop.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Confirm<sp/>your<sp/>results<sp/>match,<sp/>then<sp/>switch<sp/>back<sp/>to<sp/>the<sp/>previous<sp/>view<sp/>by<sp/>clicking<sp/>on<sp/>the<sp/>Project<sp/>tab<sp/>circled<sp/>in<sp/>red<sp/>in<sp/>Figure<sp/>3.5.<sp/>After<sp/>that,<sp/>exit<sp/>playmode<sp/>by<sp/>clicking<sp/>on<sp/>the<sp/>blue<sp/>play<sp/>button<sp/>at<sp/>the<sp/>top<sp/>of<sp/>the<sp/>screen.<sp/>If<sp/>you&apos;ve<sp/>reached<sp/>this<sp/>point,<sp/>then<sp/>you<sp/>have<sp/>successfully<sp/>generated<sp/>a<sp/>Graph<sp/>using<sp/>Human<sp/>Factors<sp/>and<sp/>have<sp/>completed<sp/>this<sp/>part<sp/>of<sp/>the<sp/>tutorial.<sp/>Next<sp/>we<sp/>will<sp/>cover<sp/>cases<sp/>where<sp/>the<sp/>graph<sp/>generator<sp/>will<sp/>be<sp/>unable<sp/>to<sp/>generate<sp/>a<sp/>graph,<sp/>and<sp/>how<sp/>to<sp/>handle<sp/>if<sp/>a<sp/>graph<sp/>could<sp/>not<sp/>be<sp/>generated.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Handling<sp/>cases<sp/>where<sp/>a<sp/>Graph<sp/>could<sp/>not<sp/>be<sp/>generated</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">We&apos;ve<sp/>covered<sp/>situations<sp/>where<sp/>we<sp/>know<sp/>the<sp/>GraphGenerator<sp/>will<sp/>generate<sp/>a<sp/>graph,<sp/>however<sp/>it&apos;s<sp/>important<sp/>to<sp/>know<sp/>what<sp/>happens<sp/>in<sp/>situations<sp/>where<sp/>it<sp/>is<sp/>unknown<sp/>if<sp/>a<sp/>graph<sp/>can<sp/>be<sp/>generated<sp/>because<sp/>we&apos;re<sp/>taking<sp/>user<sp/>input,<sp/>operating<sp/>on<sp/>a<sp/>new<sp/>model,<sp/>or<sp/>making<sp/>changes<sp/>to<sp/>the<sp/>geometry<sp/>we&apos;re<sp/>generating<sp/>the<sp/>graph<sp/>on.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/>A<sp/>Graph<sp/>can<sp/>fail<sp/>to<sp/>generate<sp/>if<sp/>at<sp/>least<sp/>one<sp/>of<sp/>the<sp/>two<sp/>cases<sp/>is<sp/>true:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">1.<sp/>The<sp/>initial<sp/>ground<sp/>check<sp/>didn&apos;t<sp/>intersect<sp/>with<sp/>any<sp/>geometry,<sp/>usually<sp/>means<sp/>the<sp/>start<sp/>point<sp/>wasn&apos;t<sp/>over<sp/>the<sp/>ground.</highlight></codeline>
+<codeline><highlight class="normal">2.<sp/>The<sp/>Graph<sp/>Generator<sp/>couldn&apos;t<sp/>generate<sp/>any<sp/>nodes<sp/>after<sp/>the<sp/>initial<sp/>ground<sp/>check.<sp/>Some<sp/>examples<sp/>of<sp/>this<sp/>are.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>The<sp/>ground<sp/>check<sp/>was<sp/>in<sp/>a<sp/>space<sp/>too<sp/>narrow<sp/>to<sp/>generate<sp/>any<sp/>extra<sp/>nodes<sp/>given<sp/>the<sp/>current<sp/>spacing</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>The<sp/>start<sp/>point<sp/>was<sp/>on<sp/>a<sp/>slope<sp/>too<sp/>steep<sp/>for<sp/>the<sp/>upslope/downslope<sp/>to<sp/>traverse<sp/>up<sp/>or<sp/>down.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>-<sp/>The<sp/>start<sp/>point<sp/>is<sp/>in<sp/>a<sp/>wall,<sp/>making<sp/>it<sp/>impossible<sp/>to<sp/>generate<sp/>any<sp/>nodes<sp/>around<sp/>it.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>tutorial<sp/>will<sp/>cover<sp/>safely<sp/>handling<sp/>cases<sp/>where<sp/>graphs<sp/>could<sp/>not<sp/>be<sp/>generated<sp/>by<sp/>checking<sp/>the<sp/>return<sp/>value<sp/>of<sp/>the<sp/>graph<sp/>generator.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Checking<sp/>for<sp/>success</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">If<sp/>the<sp/>Graph<sp/>Generator<sp/>failed<sp/>due<sp/>to<sp/>one<sp/>of<sp/>the<sp/>two<sp/>cases<sp/>listed<sp/>above,<sp/>a<sp/>null<sp/>value<sp/>will<sp/>be<sp/>returned<sp/>instead<sp/>of<sp/>a<sp/>graph.<sp/>To<sp/>catch<sp/>when<sp/>this<sp/>happens,<sp/>let&apos;s<sp/>add<sp/>a<sp/>null<sp/>check<sp/>just<sp/>after<sp/>the<sp/>graph<sp/>is<sp/>generated<sp/>on<sp/>*Line<sp/>41*.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```{.cs}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Check<sp/>if<sp/>the<sp/>graph<sp/>generator<sp/>succeeded</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(G<sp/>is<sp/>null)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Debug.Log(&quot;The<sp/>Graph<sp/>failed<sp/>to<sp/>generate.&quot;);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Now,<sp/>if<sp/>the<sp/>graph<sp/>fails<sp/>to<sp/>generate,<sp/><sp/>our<sp/>code<sp/>will<sp/>print<sp/>a<sp/>clear<sp/>error<sp/>message<sp/>and<sp/>immediately<sp/>stop<sp/>executing<sp/>the<sp/>script.<sp/>If<sp/>we<sp/>did<sp/>not<sp/>have<sp/>this<sp/>check<sp/>and<sp/>our<sp/>graph<sp/>did<sp/>fail<sp/>to<sp/>generate,<sp/>then<sp/>we<sp/>would<sp/>get<sp/>a<sp/>confusing<sp/>Null<sp/>Reference<sp/>Exception<sp/>later<sp/>when<sp/>interacting<sp/>with<sp/>the<sp/>graph.<sp/><sp/></highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Testing</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">To<sp/>test<sp/>that<sp/>our<sp/>null<sp/>check<sp/>is<sp/>successful,<sp/>we&apos;ll<sp/>go<sp/>to<sp/>*line<sp/>34*<sp/>and<sp/>change<sp/>our<sp/>start<sp/>point<sp/>to<sp/>be<sp/>at<sp/>(200,<sp/>0,<sp/>1)<sp/>instead<sp/>of<sp/>(0,0,1):<sp/>`Vector3D<sp/>start_point<sp/>=<sp/>new<sp/>Vector3D(200,<sp/>0,<sp/>1);`<sp/>This<sp/>is<sp/>far,<sp/>far<sp/>beyond<sp/>where<sp/>our<sp/>plane<sp/>is<sp/>and<sp/>should<sp/>result<sp/>in<sp/>case<sp/>1:<sp/>the<sp/>initial<sp/>ground<sp/>check<sp/>failing<sp/>to<sp/>find<sp/>any<sp/>valid<sp/>ground.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Picture<sp/>of<sp/>the<sp/>full<sp/>Start()<sp/>method<sp/>for<sp/>this<sp/>test.](walkthroughs/unity/3_graph_generator/checking_for_success.PNG)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Since<sp/>the<sp/>camera<sp/>is<sp/>already<sp/>setup,<sp/>all<sp/>we<sp/>need<sp/>to<sp/>do<sp/>is<sp/>enter<sp/>playmode<sp/>to<sp/>test<sp/>this.<sp/>Make<sp/>sure<sp/>your<sp/>code<sp/>matches<sp/>the<sp/>picture,<sp/>**save**<sp/>the<sp/>file,<sp/>minimize<sp/>Visual<sp/>Studio,<sp/>open<sp/>the<sp/>Unity<sp/>editor,<sp/>then<sp/>press<sp/>the<sp/>play<sp/>button.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Failure](walkthroughs/unity/3_graph_generator/failure.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**3.5**<sp/>*Our<sp/>error<sp/>message<sp/>printed<sp/>after<sp/>the<sp/>graph<sp/>failed<sp/>to<sp/>generate*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">If<sp/>you<sp/>did<sp/>this<sp/>correctly,<sp/>then<sp/>the<sp/>error<sp/>message<sp/>we<sp/>wrote<sp/>earlier<sp/>should<sp/>appear<sp/>instead<sp/>of<sp/>the<sp/>output<sp/>from<sp/>the<sp/>previous<sp/>section.<sp/>If<sp/>you<sp/>received<sp/>this<sp/>result,<sp/>then<sp/>you<sp/>now<sp/>know<sp/>how<sp/>to<sp/>handle<sp/>cases<sp/>where<sp/>the<sp/>graph<sp/>generator<sp/>could<sp/>not<sp/>generate<sp/>a<sp/>graph.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Conclusion</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Here<sp/>is<sp/>a<sp/>link<sp/>the<sp/>full<sp/>project<sp/>created<sp/>in<sp/>this<sp/>guide:<sp/>[Full<sp/>Project](Tutorial%203%20-%20Graph%20Generator.zip)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">In<sp/>this<sp/>tutorial<sp/>we<sp/>successfully<sp/>generated<sp/>a<sp/>graph<sp/>from<sp/>a<sp/>bvh,<sp/>start<sp/>point,<sp/>and<sp/>spacing.<sp/>We<sp/>also<sp/>handled<sp/>a<sp/>case<sp/>where<sp/>a<sp/>graph<sp/>was<sp/>unable<sp/>to<sp/>be<sp/>generated,<sp/>and<sp/>wrote<sp/>a<sp/>custom<sp/>error<sp/>message<sp/>to<sp/>be<sp/>printed<sp/>instead<sp/>of<sp/>throwing<sp/>a<sp/>null<sp/>reference<sp/>exception.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">In<sp/>the<sp/>next<sp/>tutorial,<sp/>[Reading<sp/>Meshes<sp/>From<sp/>Unity](@ref<sp/>MeshFromUnity),<sp/>we<sp/>will<sp/>use<sp/>geometry<sp/>from<sp/>the<sp/>Unity<sp/>scene<sp/>to<sp/>generate<sp/>a<sp/>graph,<sp/>instead<sp/>of<sp/>manually<sp/>creatng<sp/>our<sp/>own<sp/>plane.</highlight></codeline>
+    </programlisting>
+    <location file="src/Csharp/docs/markdown/3_graph_generator.md"/>
+  </compounddef>
+</doxygen>

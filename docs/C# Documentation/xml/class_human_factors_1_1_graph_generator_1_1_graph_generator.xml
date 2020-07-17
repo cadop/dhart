@@ -1,0 +1,186 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.18">
+  <compounddef id="class_human_factors_1_1_graph_generator_1_1_graph_generator" kind="class" language="C#" prot="public">
+    <compoundname>HumanFactors::GraphGenerator::GraphGenerator</compoundname>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_human_factors_1_1_graph_generator_1_1_graph_generator_1a2672814edcde623d71233353fe6e0d2f" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_human_factors_1_1_spatial_structures_1_1_graph" kindref="compound">Graph</ref></type>
+        <definition>static Graph HumanFactors.GraphGenerator.GraphGenerator.GenerateGraph</definition>
+        <argsstring>(EmbreeBVH bvh, Vector3D start_point, Vector3D spacing, int max_nodes=-1, float up_step=0.2f, float up_slope=20, float down_step=0.2f, float down_slope=20, int max_step_connections=1, int core_count=-1)</argsstring>
+        <name>GenerateGraph</name>
+        <param>
+          <type><ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h" kindref="compound">EmbreeBVH</ref></type>
+          <declname>bvh</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref></type>
+          <declname>start_point</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref></type>
+          <declname>spacing</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>max_nodes</declname>
+          <defval>-1</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>up_step</declname>
+          <defval>0.2f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>up_slope</declname>
+          <defval>20</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>down_step</declname>
+          <defval>0.2f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>down_slope</declname>
+          <defval>20</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>max_step_connections</declname>
+          <defval>1</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>core_count</declname>
+          <defval>-1</defval>
+        </param>
+        <briefdescription>
+<para>Generate a graph of accessible space with the given settings. If no graph can be generated, null will be returned. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bvh</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A valid BVH to conduct the graph generation on. <ref refid="namespace_human_factors_1_1_geometry" kindref="compound">Geometry</ref> must be Z-Up. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>start_point</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The starting point for the graph generator. If this isn&apos;t above solid ground, no nodes will be generated.</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>spacing</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Space between nodes. Lower values will yield more nodes for a higher resolution graph. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>max_nodes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The maximum amount of nodes to generate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>up_step</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum height of a step the graph can traverse. Any steps higher this will be considered inaccessible. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>up_slope</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum upward slope the graph can traverse in degrees. Any slopes steeper than this will be considered inaccessible. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>down_step</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum step down the graph can traverse. Any steps steeper than this will be considered inaccessible.</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>down_slope</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The maximum downward slope the graph can traverse. Any slopes steeper than this will be considered inaccessible.</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>max_step_connections</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Multiplier for number of children to generate for each node. Increasing this value will increase the number of edges in the graph, and as a result the amount of memory the algorithm requires.</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>core_count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of cores to use. -1 will use all available cores, and 0 will run a serialized version of the algorithm.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The resulting graph or, If no nodes were generated, null.</para>
+</simplesect>
+<simplesect kind="note"><para>All parameters relating to distances are in meters, and all angles are in degrees. </para>
+</simplesect>
+<simplesect kind="note"><para><ref refid="namespace_human_factors_1_1_geometry" kindref="compound">Geometry</ref> MUST be Z-UP in order for this to work.</para>
+</simplesect>
+<programlisting><codeline><highlight class="normal">MeshInfo<sp/>Mesh<sp/>=<sp/>OBJLoader.LoadOBJ(&quot;plane.obj&quot;,<sp/>CommonRotations.Yup_To_Zup);</highlight></codeline>
+<codeline><highlight class="normal">EmbreeBVH<sp/>BVH<sp/>=<sp/>new<sp/>EmbreeBVH(Mesh);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Vector3D<sp/>start_point<sp/>=<sp/>new<sp/>Vector3D(0,<sp/>9000,<sp/>1);</highlight></codeline>
+<codeline><highlight class="normal">Vector3D<sp/>spacing<sp/>=<sp/>new<sp/>Vector3D(1,<sp/>1,<sp/>1);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/>//<sp/>A<sp/>standard<sp/>graph<sp/>with<sp/>a<sp/>spacing<sp/>of<sp/>1<sp/>meter<sp/>on<sp/>each<sp/>side<sp/>with<sp/>a<sp/>maximum<sp/>of<sp/>100<sp/>nodes</highlight></codeline>
+<codeline><highlight class="normal">Graph<sp/>G<sp/>=<sp/>HumanFactors.GraphGenerator.GraphGenerator.GenerateGraph(BVH,<sp/>start_point,<sp/>spacing,<sp/>100);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/>//<sp/>A<sp/>graph<sp/>that<sp/>cannot<sp/>traverse<sp/>stairs</highlight></codeline>
+<codeline><highlight class="normal">Graph<sp/>G<sp/>=<sp/>HumanFactors.GraphGenerator.GraphGenerator.GenerateGraph(BVH,<sp/>start_point,<sp/>spacing,<sp/>100,<sp/>up_step:0,<sp/>downstep:0);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>A<sp/>graph<sp/>that<sp/>is<sp/>able<sp/>to<sp/>traverse<sp/>up<sp/>30<sp/>degree<sp/>slopes,<sp/>but<sp/>can<sp/>only<sp/>traverse<sp/>down<sp/>10</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>degree<sp/>slopes</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>Graph<sp/>G<sp/>=<sp/>HumanFactors.GraphGenerator.GraphGenerator.GenerateGraph(BVH,<sp/>start_point,<sp/>spacing,<sp/>100,<sp/>up_slope:30,<sp/>down_slope:10);</highlight></codeline>
+</programlisting> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/graphgenerator/src/GraphGenerator.cs" line="83" column="29" bodyfile="src/Csharp/packages/graphgenerator/src/GraphGenerator.cs" bodystart="83" bodyend="113"/>
+        <references refid="class_human_factors_1_1_graph_generator_1_1_native_methods_1afac242a53a5c7b653d3dd26eff268928" compoundref="_graph_generator_native_8cs" startline="13" endline="50">HumanFactors.GraphGenerator.NativeMethods.C_GenerateGraph</references>
+        <references refid="class_human_factors_1_1_native_utils_1_1_native_object_1aa58c089e79cb4acc260755a41952d3d6" compoundref="_pointer_holder_8cs" startline="49" endline="49">HumanFactors.NativeUtils.NativeObject.Pointer</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Generate a graph of accessible space on a mesh. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="remark"><para>Use the graph generator to quickly map out accessible space in an environment for other analysis methods without needing to manually place nodes. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="src/Csharp/packages/graphgenerator/src/GraphGenerator.cs" line="32" column="15" bodyfile="src/Csharp/packages/graphgenerator/src/GraphGenerator.cs" bodystart="33" bodyend="114"/>
+    <listofallmembers>
+      <member refid="class_human_factors_1_1_graph_generator_1_1_graph_generator_1a2672814edcde623d71233353fe6e0d2f" prot="public" virt="non-virtual"><scope>HumanFactors::GraphGenerator::GraphGenerator</scope><name>GenerateGraph</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

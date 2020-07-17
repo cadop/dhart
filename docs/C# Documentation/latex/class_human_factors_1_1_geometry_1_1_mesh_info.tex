@@ -2,36 +2,76 @@
 \label{class_human_factors_1_1_geometry_1_1_mesh_info}\index{HumanFactors.Geometry.MeshInfo@{HumanFactors.Geometry.MeshInfo}}
 
 
-Wrapper for a mesh in unmanaged memory.  
+A collection of vertices and indices representing geometry.  
 
 
-Inheritance diagram for Human\+Factors.\+Geometry.\+Mesh\+Info\+:\begin{figure}[H]
+
+
+Inheritance diagram for Human\+Factors.\+Geometry.\+Mesh\+Info\+:
+\nopagebreak
+\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=3.000000cm]{class_human_factors_1_1_geometry_1_1_mesh_info}
+\includegraphics[width=248pt]{class_human_factors_1_1_geometry_1_1_mesh_info__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Human\+Factors.\+Geometry.\+Mesh\+Info\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=248pt]{class_human_factors_1_1_geometry_1_1_mesh_info__coll__graph}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_mesh_info_a7840f891fd3f7b38f64c5e1619ebc812}{Mesh\+Info}} (Int\+Ptr pointer, int size=0)
-\begin{DoxyCompactList}\small\item\em Create a new meshinfo instance from the given pointer. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_mesh_info_a3cbae27f830f86d6377332c295e04a53}{Mesh\+Info}} (int\mbox{[}$\,$\mbox{]} indices, float\mbox{[}$\,$\mbox{]} vertices, string name=\char`\"{}\char`\"{}, int id=-\/1)
-\begin{DoxyCompactList}\small\item\em Create a new instance of \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_mesh_info}{Mesh\+Info}} from an array of vertices and triangle indices. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Create an instance of \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_mesh_info}{Mesh\+Info}} from an array of vertices and triangle indices. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_mesh_info_a3f9bd73c9c82e777bb083439d457b8ad}{Rotate\+Mesh}} (float xrot, float yrot, float zrot)
-\begin{DoxyCompactList}\small\item\em Rotates this mesh by the desired magnitude. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Rotate this mesh by the desired magnitude. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_mesh_info_a62f20076e25f8f2c23c9ca473a98ed9d}{Rotate\+Mesh}} (\mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}} rotation)
 \begin{DoxyCompactList}\small\item\em Rotate this mesh by the desired magnitude. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 override bool \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_mesh_info_a9ed5e9129b511932a34c79ead954007e}{Release\+Handle}} ()
-\begin{DoxyCompactList}\small\item\em Executes the code required to delete the mesh \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Manually delete this mesh in Unmanaged memory. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Package Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_mesh_info_a7840f891fd3f7b38f64c5e1619ebc812}{Mesh\+Info}} (Int\+Ptr pointer, int size=0)
+\begin{DoxyCompactList}\small\item\em Create a new meshinfo instance from the given pointer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_mesh_info_ab5359e337ca952f01134eeef7a4c0cb9}{Calculate\+Presure}} ()
+\begin{DoxyCompactList}\small\item\em Calculates the mesh\textquotesingle{}s pressure. Unimplemented for now. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-Wrapper for a mesh in unmanaged memory. 
+A collection of vertices and indices representing geometry. 
+
+
+
+Stores a reference to mesh geometry in native memory. Internally, meshes are represented as a 3 by X matrix of vertices and a 3 by X matrix for indices. In the above image, the face list and vertex list are what\textquotesingle{}s held in \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_mesh_info}{Mesh\+Info}}\textquotesingle{}s Index and Vertex arrays respectively.
+
+\begin{DoxyInvariant}{Invariant}
+Will always hold a valid mesh.
+\end{DoxyInvariant}
+\begin{DoxyRemark}{Remarks}
+Eigen is used to manage all matricies and perform quick transformations such as Rotate\+Mesh. More details on Eigen are available here\+: \href{https://eigen.tuxfamily.org/dox/group__Geometry__Module.html}{\texttt{ https\+://eigen.\+tuxfamily.\+org/dox/group\+\_\+\+\_\+\+Geometry\+\_\+\+\_\+\+Module.\+html}}
+\end{DoxyRemark}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000003}{Todo}}]Support getting the name of a mesh from the O\+BJ. 
+
+Support transforming by a matrix. \end{DoxyRefDesc}
+
+
+Definition at line 46 of file Mesh\+Info.\+cs.
 
 
 
@@ -40,7 +80,7 @@ Wrapper for a mesh in unmanaged memory.
 \index{HumanFactors.Geometry.MeshInfo@{HumanFactors.Geometry.MeshInfo}!MeshInfo@{MeshInfo}}
 \index{MeshInfo@{MeshInfo}!HumanFactors.Geometry.MeshInfo@{HumanFactors.Geometry.MeshInfo}}
 \doxysubsubsection{\texorpdfstring{MeshInfo()}{MeshInfo()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily Human\+Factors.\+Geometry.\+Mesh\+Info.\+Mesh\+Info (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{pointer,  }\item[{int}]{size = {\ttfamily 0} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily Human\+Factors.\+Geometry.\+Mesh\+Info.\+Mesh\+Info (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{pointer,  }\item[{int}]{size = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [package]}}
 
 
 
@@ -48,12 +88,19 @@ Create a new meshinfo instance from the given pointer.
 
 
 \begin{DoxyParams}{Parameters}
-{\em pointer} & Pointer to an existing meshinfo instance in unmanaged memory. \\
+{\em pointer} & Pointer to an existing meshinfo instance in unmanaged memory\\
 \hline
 \end{DoxyParams}
+Just a call back to the base functionality of nativeobject.
+
+\begin{DoxyRemark}{Remarks}
+This shouldn\textquotesingle{}t be called directly unless pointer is gauranteed to point to a valid mesh 
+\end{DoxyRemark}
 
 
-This shouldn\textquotesingle{}t be called directly unless pointer is gauranteed to point to a valid mesh in unmanaged memory. \mbox{\Hypertarget{class_human_factors_1_1_geometry_1_1_mesh_info_a3cbae27f830f86d6377332c295e04a53}\label{class_human_factors_1_1_geometry_1_1_mesh_info_a3cbae27f830f86d6377332c295e04a53}} 
+Definition at line 92 of file Mesh\+Info.\+cs.
+
+\mbox{\Hypertarget{class_human_factors_1_1_geometry_1_1_mesh_info_a3cbae27f830f86d6377332c295e04a53}\label{class_human_factors_1_1_geometry_1_1_mesh_info_a3cbae27f830f86d6377332c295e04a53}} 
 \index{HumanFactors.Geometry.MeshInfo@{HumanFactors.Geometry.MeshInfo}!MeshInfo@{MeshInfo}}
 \index{MeshInfo@{MeshInfo}!HumanFactors.Geometry.MeshInfo@{HumanFactors.Geometry.MeshInfo}}
 \doxysubsubsection{\texorpdfstring{MeshInfo()}{MeshInfo()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
@@ -61,27 +108,47 @@ This shouldn\textquotesingle{}t be called directly unless pointer is gauranteed 
 
 
 
-Create a new instance of \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_mesh_info}{Mesh\+Info}} from an array of vertices and triangle indices. 
+Create an instance of \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_mesh_info}{Mesh\+Info}} from an array of vertices and triangle indices. 
 
 
 \begin{DoxyParams}{Parameters}
 {\em indices} & An array of indices for the triangles in the mesh. Each integer should correspond to 3 values in {\itshape vertices} , and every 3 integers should represent a complete triangle for the mesh. \\
 \hline
-{\em vertices} & Vertices of the mesh. Each 3 floats represent the X,Y, and Z of a point in space. \\
+{\em vertices} & Vertices of the mesh. Each 3 floats represent the X,Y, and Z of a point in space \\
 \hline
 {\em name} & The name of the mesh. Unused for now. \\
 \hline
-{\em id} & The unique identifier for this mesh. If -\/1, this will automatically be set \\
+{\em id} & The unique identifier for this mesh. If -\/1, this will automatically be set\\
 \hline
 \end{DoxyParams}
 
 \begin{DoxyExceptions}{Exceptions}
-{\em \mbox{\hyperlink{class_human_factors_1_1_exceptions_1_1_invalid_mesh_exception}{Human\+Factors.\+Exceptions.\+Invalid\+Mesh\+Exception}}} & The input {\itshape indices}  and {\itshape vertices}  result in an invalid mesh. \\
+{\em \mbox{\hyperlink{class_human_factors_1_1_exceptions_1_1_invalid_mesh_exception}{Human\+Factors.\+Exceptions.\+Invalid\+Mesh\+Exception}}} & The input indices and vertices result in an invalid mesh. \\
 \hline
 \end{DoxyExceptions}
 
 
+Definition at line 111 of file Mesh\+Info.\+cs.
+
+
+
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_human_factors_1_1_geometry_1_1_mesh_info_ab5359e337ca952f01134eeef7a4c0cb9}\label{class_human_factors_1_1_geometry_1_1_mesh_info_ab5359e337ca952f01134eeef7a4c0cb9}} 
+\index{HumanFactors.Geometry.MeshInfo@{HumanFactors.Geometry.MeshInfo}!CalculatePresure@{CalculatePresure}}
+\index{CalculatePresure@{CalculatePresure}!HumanFactors.Geometry.MeshInfo@{HumanFactors.Geometry.MeshInfo}}
+\doxysubsubsection{\texorpdfstring{CalculatePresure()}{CalculatePresure()}}
+{\footnotesize\ttfamily static int Human\+Factors.\+Geometry.\+Mesh\+Info.\+Calculate\+Presure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Calculates the mesh\textquotesingle{}s pressure. Unimplemented for now. 
+
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000004}{Todo}}]Make a function in C++ to calculate the size of indices/vertices so the amount of pressure to exert on the GC can properly be calculated. \end{DoxyRefDesc}
+
+
+Definition at line 55 of file Mesh\+Info.\+cs.
+
 \mbox{\Hypertarget{class_human_factors_1_1_geometry_1_1_mesh_info_a9ed5e9129b511932a34c79ead954007e}\label{class_human_factors_1_1_geometry_1_1_mesh_info_a9ed5e9129b511932a34c79ead954007e}} 
 \index{HumanFactors.Geometry.MeshInfo@{HumanFactors.Geometry.MeshInfo}!ReleaseHandle@{ReleaseHandle}}
 \index{ReleaseHandle@{ReleaseHandle}!HumanFactors.Geometry.MeshInfo@{HumanFactors.Geometry.MeshInfo}}
@@ -90,11 +157,33 @@ Create a new instance of \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_m
 
 
 
-Executes the code required to delete the mesh 
+Manually delete this mesh in Unmanaged memory. 
 
+\begin{DoxyRemark}{Remarks}
+This is called automatically when the class is garbage collected, so don\textquotesingle{}t worry about needing to manually call this. It may be advantageous to deallocate large meshes at specific times for specialized purposes where the garbage collector deleting a large mesh will cause noticable lag.
+\end{DoxyRemark}
 \begin{DoxyReturn}{Returns}
-true if the handle is released successfully; otherwise, in the event of a catastrophic failure, false. In this case, it generates a release\+Handle\+Failed M\+DA Managed Debugging Assistant. 
+True if the handle is released successfully; otherwise, in the event of a catastrophic failure, false. In this case, it generates a release\+Handle\+Failed M\+DA Managed Debugging Assistant.
 \end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+This deletes the mesh in unmanaged memory! Don\textquotesingle{}t try to use this class again after calling this function! 
+\end{DoxyWarning}
+
+
+Definition at line 76 of file Mesh\+Info.\+cs.
+
+
+
+References Human\+Factors.\+Geometry.\+Native\+Methods.\+Destroy\+Mesh\+Info(), and Human\+Factors.\+Native\+Utils.\+Native\+Object.\+Pointer.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_human_factors_1_1_geometry_1_1_mesh_info_a9ed5e9129b511932a34c79ead954007e_cgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{class_human_factors_1_1_geometry_1_1_mesh_info_a3f9bd73c9c82e777bb083439d457b8ad}\label{class_human_factors_1_1_geometry_1_1_mesh_info_a3f9bd73c9c82e777bb083439d457b8ad}} 
 \index{HumanFactors.Geometry.MeshInfo@{HumanFactors.Geometry.MeshInfo}!RotateMesh@{RotateMesh}}
 \index{RotateMesh@{RotateMesh}!HumanFactors.Geometry.MeshInfo@{HumanFactors.Geometry.MeshInfo}}
@@ -103,17 +192,20 @@ true if the handle is released successfully; otherwise, in the event of a catast
 
 
 
-Rotates this mesh by the desired magnitude. 
+Rotate this mesh by the desired magnitude. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em xrot} & Degrees to rotate the mesh on the z axis. \\
+{\em xrot} & Pitch to rotate by in degrees. \\
 \hline
-{\em yrot} & Degrees to rotate the mesh on the y axis. \\
+{\em yrot} & Yaw to rotate by in degrees. \\
 \hline
-{\em zrot} & Degrees to rotate the mesh on the z axis. \\
+{\em zrot} & Roll to rotate by in degrees.\\
 \hline
 \end{DoxyParams}
+\begin{DoxyRemark}{Remarks}
+See the other overload for this function for use with \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_common_rotations}{Common\+Rotations}}. 
+\end{DoxyRemark}
 \mbox{\Hypertarget{class_human_factors_1_1_geometry_1_1_mesh_info_a62f20076e25f8f2c23c9ca473a98ed9d}\label{class_human_factors_1_1_geometry_1_1_mesh_info_a62f20076e25f8f2c23c9ca473a98ed9d}} 
 \index{HumanFactors.Geometry.MeshInfo@{HumanFactors.Geometry.MeshInfo}!RotateMesh@{RotateMesh}}
 \index{RotateMesh@{RotateMesh}!HumanFactors.Geometry.MeshInfo@{HumanFactors.Geometry.MeshInfo}}
@@ -126,11 +218,14 @@ Rotate this mesh by the desired magnitude.
 
 
 \begin{DoxyParams}{Parameters}
-{\em rotation} & How far to rotate the mesh on the X,Y, and Z, axises in degrees. \\
+{\em rotation} & How far to rotate the mesh on the X,Y, and Z, axises in degrees.\\
 \hline
 \end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_common_rotations}{Common\+Rotations}} for commonly used rotations such as Yup to Zup. 
+\end{DoxySeeAlso}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-src/\+Csharp/packages/geometry/src/Mesh\+Info.\+cs\end{DoxyCompactItemize}
+src/\+Csharp/packages/geometry/src/\mbox{\hyperlink{_mesh_info_8cs}{Mesh\+Info.\+cs}}\end{DoxyCompactItemize}

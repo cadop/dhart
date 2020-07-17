@@ -1,0 +1,262 @@
+\hypertarget{class_human_factors_1_1_pathfinding_1_1_shortest_path}{}\doxysection{Human\+Factors.\+Pathfinding.\+Shortest\+Path Class Reference}
+\label{class_human_factors_1_1_pathfinding_1_1_shortest_path}\index{HumanFactors.Pathfinding.ShortestPath@{HumanFactors.Pathfinding.ShortestPath}}
+
+
+Functions for finding the shortest path between two nodes in a graph.  
+
+
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_path}{Path}} \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_shortest_path_ab4bd85d84d83a30601a190f583e097ac}{Dijkstra\+Shortest\+Path}} (\mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}} graph, int start\+\_\+id, int end\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Perform Dijkstra\textquotesingle{}s shortest path algorithm to find a path between two nodes. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_path}{Path}} \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_shortest_path_a7ca51d84089c860860ad7fb2fd717f61}{Dijkstra\+Shortest\+Path}} (\mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}} graph, \mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}} start\+\_\+node, \mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}} end\+\_\+node)
+\begin{DoxyCompactList}\small\item\em Perform Dijkstra\textquotesingle{}s shortest path algorithm to find a path between two nodes. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_path}{Path}}\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_shortest_path_ac63e41c1bc4310f6e64993c30d4a0fe5}{Dijkstra\+Shortest\+Path\+Multi}} (\mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}} graph, int\mbox{[}$\,$\mbox{]} start\+\_\+ids, int\mbox{[}$\,$\mbox{]} end\+\_\+ids)
+\begin{DoxyCompactList}\small\item\em Find the shortest paths between each pair of start\+\_\+id and end\+\_\+id in order. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_path}{Path}}\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_shortest_path_a82d7192b92262f014d7d94ff1e898afc}{Dijkstra\+Shortest\+Path\+Multi}} (\mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}} graph, I\+Enumerable$<$ \mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}} $>$ start\+\_\+nodes, I\+Enumerable$<$ \mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}} $>$ end\+\_\+nodes)
+\begin{DoxyCompactList}\small\item\em Find the shortest paths between each pair of start\+\_\+id and end\+\_\+id in order. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Functions for finding the shortest path between two nodes in a graph. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_shortest_path}{Shortest\+Path}} for generating a single path between two nodes. 
+
+\mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_shortest_path_ab4bd85d84d83a30601a190f583e097ac}{Dijkstra\+Shortest\+Path}} for generating multiple paths at once. 
+\end{DoxySeeAlso}
+
+
+Definition at line 32 of file Shortest\+Path.\+cs.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_human_factors_1_1_pathfinding_1_1_shortest_path_ab4bd85d84d83a30601a190f583e097ac}\label{class_human_factors_1_1_pathfinding_1_1_shortest_path_ab4bd85d84d83a30601a190f583e097ac}} 
+\index{HumanFactors.Pathfinding.ShortestPath@{HumanFactors.Pathfinding.ShortestPath}!DijkstraShortestPath@{DijkstraShortestPath}}
+\index{DijkstraShortestPath@{DijkstraShortestPath}!HumanFactors.Pathfinding.ShortestPath@{HumanFactors.Pathfinding.ShortestPath}}
+\doxysubsubsection{\texorpdfstring{DijkstraShortestPath()}{DijkstraShortestPath()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_path}{Path}} Human\+Factors.\+Pathfinding.\+Shortest\+Path.\+Dijkstra\+Shortest\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}}}]{graph,  }\item[{int}]{start\+\_\+id,  }\item[{int}]{end\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Perform Dijkstra\textquotesingle{}s shortest path algorithm to find a path between two nodes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & The graph to conduct the search on. \\
+\hline
+{\em start\+\_\+id} & The ID of the node to start at. \\
+\hline
+{\em end\+\_\+id} & The ID of the node to find a path to.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A path from {\itshape start\+\_\+id}  to {\itshape end\+\_\+id}  ~\newline
+
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Index\+Out\+Of\+Range\+Exception} & {\itshape start\+\_\+id}  or {\itshape end\+\_\+id}  are not the ids of any nodes in the graph.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_shortest_path_ac63e41c1bc4310f6e64993c30d4a0fe5}{Dijkstra\+Shortest\+Path\+Multi}} for efficently generating multiple paths in parallel. 
+\end{DoxySeeAlso}
+
+
+Definition at line 48 of file Shortest\+Path.\+cs.
+
+
+
+References Human\+Factors.\+Pathfinding.\+Native\+Methods.\+C\+\_\+\+Create\+Path(), Human\+Factors.\+Native\+Utils.\+Native\+Object.\+Pointer, and Human\+Factors.\+Native\+Utils.\+C\+Vector\+And\+Data.\+size.
+
+
+
+Referenced by Human\+Factors.\+Pathfinding.\+Shortest\+Path.\+Dijkstra\+Shortest\+Path().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_human_factors_1_1_pathfinding_1_1_shortest_path_ab4bd85d84d83a30601a190f583e097ac_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_human_factors_1_1_pathfinding_1_1_shortest_path_ab4bd85d84d83a30601a190f583e097ac_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_human_factors_1_1_pathfinding_1_1_shortest_path_a7ca51d84089c860860ad7fb2fd717f61}\label{class_human_factors_1_1_pathfinding_1_1_shortest_path_a7ca51d84089c860860ad7fb2fd717f61}} 
+\index{HumanFactors.Pathfinding.ShortestPath@{HumanFactors.Pathfinding.ShortestPath}!DijkstraShortestPath@{DijkstraShortestPath}}
+\index{DijkstraShortestPath@{DijkstraShortestPath}!HumanFactors.Pathfinding.ShortestPath@{HumanFactors.Pathfinding.ShortestPath}}
+\doxysubsubsection{\texorpdfstring{DijkstraShortestPath()}{DijkstraShortestPath()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_path}{Path}} Human\+Factors.\+Pathfinding.\+Shortest\+Path.\+Dijkstra\+Shortest\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}}}]{graph,  }\item[{\mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}}}]{start\+\_\+node,  }\item[{\mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}}}]{end\+\_\+node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Perform Dijkstra\textquotesingle{}s shortest path algorithm to find a path between two nodes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & The graph to conduct the search on. \\
+\hline
+{\em start\+\_\+node} & The X,Y,Z of a node in the graph node to start at. \\
+\hline
+{\em end\+\_\+node} & The X,Y,Z of a node in the graph node to end at.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A path from start\+\_\+node to end\+\_\+node.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Index\+Out\+Of\+Range\+Exception} & start\+\_\+node or end\+\_\+node don\textquotesingle{}t exist in the graph.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyRemark}{Remarks}
+Gets the start id and end of both nodes, then calls the ID overload.
+\end{DoxyRemark}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_shortest_path_ac63e41c1bc4310f6e64993c30d4a0fe5}{Dijkstra\+Shortest\+Path\+Multi}} for efficently generating multiple paths in parallel. 
+\end{DoxySeeAlso}
+
+
+Definition at line 72 of file Shortest\+Path.\+cs.
+
+
+
+References Human\+Factors.\+Pathfinding.\+Shortest\+Path.\+Dijkstra\+Shortest\+Path(), and Human\+Factors.\+Spatial\+Structures.\+Graph.\+Get\+Node\+I\+D().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_human_factors_1_1_pathfinding_1_1_shortest_path_a7ca51d84089c860860ad7fb2fd717f61_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_human_factors_1_1_pathfinding_1_1_shortest_path_a82d7192b92262f014d7d94ff1e898afc}\label{class_human_factors_1_1_pathfinding_1_1_shortest_path_a82d7192b92262f014d7d94ff1e898afc}} 
+\index{HumanFactors.Pathfinding.ShortestPath@{HumanFactors.Pathfinding.ShortestPath}!DijkstraShortestPathMulti@{DijkstraShortestPathMulti}}
+\index{DijkstraShortestPathMulti@{DijkstraShortestPathMulti}!HumanFactors.Pathfinding.ShortestPath@{HumanFactors.Pathfinding.ShortestPath}}
+\doxysubsubsection{\texorpdfstring{DijkstraShortestPathMulti()}{DijkstraShortestPathMulti()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_path}{Path}} \mbox{[}$\,$\mbox{]} Human\+Factors.\+Pathfinding.\+Shortest\+Path.\+Dijkstra\+Shortest\+Path\+Multi (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}}}]{graph,  }\item[{I\+Enumerable$<$ \mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}} $>$}]{start\+\_\+nodes,  }\item[{I\+Enumerable$<$ \mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}} $>$}]{end\+\_\+nodes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Find the shortest paths between each pair of start\+\_\+id and end\+\_\+id in order. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & The graph to generate paths in. \\
+\hline
+{\em start\+\_\+nodes} & Locations of the start points to generate paths from. \\
+\hline
+{\em end\+\_\+nodes} & Locations of the end nodes to generate paths to.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A list of paths in order from start\+\_\+ids to end\+\_\+ids. If a path could not be generated by a set of points, then the path at that location will be null.
+\end{DoxyReturn}
+Determines the I\+Ds of nodes, then calls the other overload. Uses all available cores for parallel calculation.
+
+\begin{DoxyPrecond}{Precondition}
+1) The length of start\+\_\+ids must match the length of end\+\_\+ids. 
+
+2) Each node in start\+\_\+nodes and end\+\_\+nodes must contain the x,y,z position of an existing node in graph
+\end{DoxyPrecond}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em System.\+Argument\+Exception} & Length of start\+\_\+ids didn\textquotesingle{}t equal length of end\+\_\+ids \\
+\hline
+{\em Index\+Out\+Of\+Range\+Exception} & One or more of the start or end ids do not exist in {\itshape graph} . \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 135 of file Shortest\+Path.\+cs.
+
+
+
+References Human\+Factors.\+Pathfinding.\+Shortest\+Path.\+Dijkstra\+Shortest\+Path\+Multi().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_human_factors_1_1_pathfinding_1_1_shortest_path_a82d7192b92262f014d7d94ff1e898afc_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_human_factors_1_1_pathfinding_1_1_shortest_path_ac63e41c1bc4310f6e64993c30d4a0fe5}\label{class_human_factors_1_1_pathfinding_1_1_shortest_path_ac63e41c1bc4310f6e64993c30d4a0fe5}} 
+\index{HumanFactors.Pathfinding.ShortestPath@{HumanFactors.Pathfinding.ShortestPath}!DijkstraShortestPathMulti@{DijkstraShortestPathMulti}}
+\index{DijkstraShortestPathMulti@{DijkstraShortestPathMulti}!HumanFactors.Pathfinding.ShortestPath@{HumanFactors.Pathfinding.ShortestPath}}
+\doxysubsubsection{\texorpdfstring{DijkstraShortestPathMulti()}{DijkstraShortestPathMulti()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_path}{Path}} \mbox{[}$\,$\mbox{]} Human\+Factors.\+Pathfinding.\+Shortest\+Path.\+Dijkstra\+Shortest\+Path\+Multi (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}}}]{graph,  }\item[{int\mbox{[}$\,$\mbox{]}}]{start\+\_\+ids,  }\item[{int\mbox{[}$\,$\mbox{]}}]{end\+\_\+ids }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Find the shortest paths between each pair of start\+\_\+id and end\+\_\+id in order. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & The graph to generate paths in. \\
+\hline
+{\em start\+\_\+ids} & Ids for the start points to generate paths from. \\
+\hline
+{\em end\+\_\+ids} & Ids for the end points to generate paths to\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A list of paths in order from start\+\_\+ids to end\+\_\+ids. If a path could not be generated by a set of points, then the path at that location will be null.
+\end{DoxyReturn}
+Uses all available cores for parallel calculation.
+
+\begin{DoxyPrecond}{Precondition}
+The length of start\+\_\+ids must match the length of end\+\_\+ids.
+\end{DoxyPrecond}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em System.\+Argument\+Exception} & Length of start\+\_\+ids didn\textquotesingle{}t equal length of end\+\_\+ids \\
+\hline
+{\em Index\+Out\+Of\+Range\+Exception} & One or more of the start or end ids do not exist in {\itshape graph} . \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 98 of file Shortest\+Path.\+cs.
+
+
+
+References Human\+Factors.\+Pathfinding.\+Native\+Methods.\+C\+\_\+\+Create\+Paths(), and Human\+Factors.\+Native\+Utils.\+Native\+Object.\+Pointer.
+
+
+
+Referenced by Human\+Factors.\+Pathfinding.\+Shortest\+Path.\+Dijkstra\+Shortest\+Path\+Multi().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_human_factors_1_1_pathfinding_1_1_shortest_path_ac63e41c1bc4310f6e64993c30d4a0fe5_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_human_factors_1_1_pathfinding_1_1_shortest_path_ac63e41c1bc4310f6e64993c30d4a0fe5_icgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Csharp/packages/pathfinding/src/\mbox{\hyperlink{_shortest_path_8cs}{Shortest\+Path.\+cs}}\end{DoxyCompactItemize}

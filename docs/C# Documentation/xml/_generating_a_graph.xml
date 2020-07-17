@@ -1,0 +1,262 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.18">
+  <compounddef id="_generating_a_graph" kind="page">
+    <compoundname>GeneratingAGraph</compoundname>
+    <title>Using the Graph Generator</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Previous Tutorial: <ref refid="_unity_project_setup" kindref="compound">Project Setup</ref> | Next Tutorial: <ref refid="_mesh_from_unity" kindref="compound">Passing a Mesh From Unity to HumanFactors</ref></para>
+<sect1 id="_generating_a_graph_1autotoc_md16">
+<title>Intro</title>
+<para>This tutorial picks up from where <ref refid="_unity_project_setup" kindref="compound">Tutorial 1: Unity Project Setup</ref> ended. If you are just beginning here, then you can download the Unity project from the bottom of tutorial 1.</para>
+<para>In this tutorial we will cover the following:</para>
+<para><orderedlist>
+<listitem><para>Calling the GraphGenerator with a BVH, spacing, and a start point.</para>
+</listitem><listitem><para>Reading nodes from a graph after it has been generated.</para>
+</listitem><listitem><para>Handling cases where the GraphGenerator could not generate a graph.</para>
+</listitem></orderedlist>
+</para>
+<sect2 id="_generating_a_graph_1autotoc_md17">
+<title>Conceptual Overview</title>
+<para>To put it simply, the <bold>Graph Generator</bold> maps out &quot;accessible&quot; space on a model from a given starting point. As the name implies, this map of the space is stored as a series of nodes and edges in a <bold>Graph</bold>. Each node represents a point in space that a human can occupy, and each edge between nodes indicates that a human can traverse from one node to another node. The Graph Generator is a powerful tool for analyzing space, since the graph or nodes it outputs can be used as input to all the analysis methods offered by <ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>. This allows the user to go straight from modifying a model or scene, to analyzing it with minimal effort.</para>
+</sect2>
+</sect1>
+<sect1 id="_generating_a_graph_1autotoc_md18">
+<title>Simple Graph Generation</title>
+<para>For now, we will begin with the minimum required settings to run the Graph Generator then work our way up to examples that make use of the optional settings. To generate a graph at minimum, the following arguments are required:</para>
+<para><orderedlist>
+<listitem><para>A BVH containing the mesh you want to use for graph generation.</para>
+</listitem><listitem><para>A point to start graph generation at.</para>
+</listitem><listitem><para>The spacing between nodes.</para>
+</listitem></orderedlist>
+</para>
+<para><image type="html" name="blank_new_behaviour_script.png" inline="yes">HFExampleScriptBlank</image>
+ <image type="latex" name="blank_new_behaviour_script.png" inline="yes">HFExampleScriptBlank</image>
+ <image type="rtf" name="blank_new_behaviour_script.png" inline="yes">HFExampleScriptBlank</image>
+ <image type="docbook" name="blank_new_behaviour_script.png" inline="yes">HFExampleScriptBlank</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>3.1</bold> <emphasis>Blank HFExampleScript.cs</emphasis></para>
+<para>To begin: open the blank HFExample Script that we created in the project setup by double clicking on it in the Unity editor if it isn&apos;t open already. You should see a blank page like the above. If you&apos;re coming from a previous script, please clear it so it matches this.</para>
+<sect2 id="_generating_a_graph_1autotoc_md19">
+<title>Using Declarations</title>
+<para><image type="html" name="using_declarations.png" inline="yes">Using Declarations</image>
+ <image type="latex" name="using_declarations.png" inline="yes">Using Declarations</image>
+ <image type="rtf" name="using_declarations.png" inline="yes">Using Declarations</image>
+ <image type="docbook" name="using_declarations.png" inline="yes">Using Declarations</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>3.2</bold> <emphasis>Using declarations for this tutorial</emphasis></para>
+<para>To get started, we will once again set up our using declarations to import the functionality we need, starting on line 3 of our blank script.</para>
+<para><programlisting filename=".cs"><codeline><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.<ref refid="namespace_human_factors_1_1_geometry" kindref="compound">Geometry</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.<ref refid="namespace_human_factors_1_1_spatial_structures" kindref="compound">SpatialStructures</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.<ref refid="namespace_human_factors_1_1_graph_generator" kindref="compound">GraphGenerator</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.<ref refid="namespace_human_factors_1_1_ray_tracing" kindref="compound">RayTracing</ref>;</highlight></codeline>
+</programlisting></para>
+</sect2>
+<sect2 id="_generating_a_graph_1autotoc_md20">
+<title>Creating the Plane</title>
+<para>Internally, the graph uses the <emphasis>EmbreeRayTracer</emphasis> which requires a BVH, so we can follow the process as the Project 2A to create a plane, then generate a BVH from it. If you want a more in-depth explanation of this code, please look at the previous tutorial if you want more information about this code.</para>
+<para>Add the following code in the body of the Start method on line 13:</para>
+<para><programlisting filename=".cs"><codeline><highlight class="comment">//<sp/>Create<sp/>the<sp/>plane&apos;s<sp/>vertex<sp/>and<sp/>index<sp/>arrays</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">[]<sp/>plane_vertices<sp/>=<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>-10f,<sp/>10f,<sp/>0f,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>-10f,<sp/>-10f,<sp/>0f,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/>10f,<sp/>10f,<sp/>0f,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/>10f,<sp/>-10f,<sp/>0f</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">[]<sp/>plane_indices<sp/>=<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>3,<sp/>1,<sp/>0,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>2,<sp/>3,<sp/>0</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Send<sp/>them<sp/>to<sp/>HumanFactors</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">MeshInfo<sp/>Plane<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>MeshInfo(plane_indices,<sp/>plane_vertices);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Generate<sp/>a<sp/>BVH<sp/>for<sp/>the<sp/>RayTracer</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">EmbreeBVH<sp/>bvh<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>EmbreeBVH(Plane);</highlight></codeline>
+</programlisting></para>
+<para><image type="html" name="creating_the_plane.PNG" inline="yes">Picture of the start method at this point</image>
+ <image type="latex" name="creating_the_plane.PNG" inline="yes">Picture of the start method at this point</image>
+ <image type="rtf" name="creating_the_plane.PNG" inline="yes">Picture of the start method at this point</image>
+ <image type="docbook" name="creating_the_plane.PNG" inline="yes">Picture of the start method at this point</image>
+</para>
+</sect2>
+<sect2 id="_generating_a_graph_1autotoc_md21">
+<title>Generating the Graph</title>
+<para>Now that we have a BVH, let&apos;s generate a graph on it. In the code below, we will define a starting point for the graph, then the spacing between each node.</para>
+<para>We&apos;ll place our start point 1 meter above the origin of the scene (0,0,1). Starting directly at the origin, (0,0,0), would put the start point inside of the plane we&apos;re using for the ground causing the initial ground check to fail.</para>
+<para><programlisting filename=".cs"><codeline><highlight class="normal">Vector3D<sp/>start_point<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(0,<sp/>0,<sp/>1);</highlight></codeline>
+</programlisting></para>
+<para>We&apos;ll use a spacing of one meter in each direction, so each node in our graph will be at maximum one meter apart.</para>
+<para><programlisting filename=".cs"><codeline><highlight class="normal">Vector3D<sp/>spacing<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(1,<sp/>1,<sp/>1);</highlight></codeline>
+</programlisting></para>
+<para>Finally, we will call the GraphGenerator with these arguments.</para>
+<para><programlisting filename=".cs"><codeline><highlight class="comment">//<sp/>Generate<sp/>the<sp/>Graph</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">Graph<sp/>G<sp/>=<sp/>GraphGenerator.GenerateGraph(bvh,<sp/>start_point,<sp/>spacing);</highlight></codeline>
+</programlisting></para>
+<para>All of that together is:</para>
+<para><programlisting filename=".cs"><codeline><highlight class="comment">//<sp/>Set<sp/>Start<sp/>Point<sp/>and<sp/>Spacing</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">Vector3D<sp/>start_point<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(0,<sp/>0,<sp/>1);</highlight></codeline>
+<codeline><highlight class="normal">Vector3D<sp/>spacing<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(1,<sp/>1,<sp/>1);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Generate<sp/>the<sp/>graph</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">Graph<sp/>G<sp/>=<sp/>GraphGenerator.GenerateGraph(bvh,<sp/>start_point,<sp/>spacing);</highlight></codeline>
+</programlisting></para>
+<para><image type="html" name="generating_the_graph.PNG" inline="yes">Picture of entire Start method until this point.</image>
+ <image type="latex" name="generating_the_graph.PNG" inline="yes">Picture of entire Start method until this point.</image>
+ <image type="rtf" name="generating_the_graph.PNG" inline="yes">Picture of entire Start method until this point.</image>
+ <image type="docbook" name="generating_the_graph.PNG" inline="yes">Picture of entire Start method until this point.</image>
+</para>
+</sect2>
+<sect2 id="_generating_a_graph_1autotoc_md22">
+<title>Retrieving a list of nodes</title>
+<para>Our graph G now contains a graph of the accessible space on the plane generated using the settings we passed as arguments. To verify that our results are correct, we will get a list of nodes from the graph, then print them to the unity console.</para>
+<para>Enter the following code at the bottom of the start method:</para>
+<para><programlisting filename=".cs"><codeline><highlight class="comment">//<sp/>Get<sp/>a<sp/>list<sp/>of<sp/>nodes<sp/>from<sp/>the<sp/>graph<sp/>and<sp/>print<sp/>them.</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">NodeList<sp/>nodes<sp/>=<sp/>G.getNodes();</highlight></codeline>
+<codeline><highlight class="normal">Debug.Log(nodes);</highlight></codeline>
+</programlisting></para>
+<para><image type="html" name="print_nodes.png" inline="yes">Picture of entire Start method Until this Point</image>
+ <image type="latex" name="print_nodes.png" inline="yes">Picture of entire Start method Until this Point</image>
+ <image type="rtf" name="print_nodes.png" inline="yes">Picture of entire Start method Until this Point</image>
+ <image type="docbook" name="print_nodes.png" inline="yes">Picture of entire Start method Until this Point</image>
+</para>
+</sect2>
+<sect2 id="_generating_a_graph_1autotoc_md23">
+<title>Save and Test</title>
+<para>Here is the full script we&apos;ve created from this demo. Make sure yours matches it before moving on to testing.</para>
+<para><programlisting filename=".cs"><codeline><highlight class="keyword">using</highlight><highlight class="normal"><sp/>System.Collections;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>System.Collections.Generic;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>UnityEngine;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.<ref refid="namespace_human_factors_1_1_spatial_structures" kindref="compound">SpatialStructures</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.<ref refid="namespace_human_factors_1_1_graph_generator" kindref="compound">GraphGenerator</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.<ref refid="namespace_human_factors_1_1_ray_tracing" kindref="compound">RayTracing</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.<ref refid="namespace_human_factors_1_1_geometry" kindref="compound">Geometry</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">HFExampleScript<sp/>:<sp/>MonoBehaviour</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Start<sp/>is<sp/>called<sp/>before<sp/>the<sp/>first<sp/>frame<sp/>update</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Start()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Create<sp/>an<sp/>array<sp/>of<sp/>a<sp/>plane&apos;s<sp/>vertices<sp/>and<sp/>indices</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">[]<sp/>plane_vertices<sp/>=<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-10f,<sp/>10f,<sp/>0f,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-10f,<sp/>-10f,<sp/>0f,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>10f,<sp/>10f,<sp/>0f,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>10f,<sp/>-10f,<sp/>0f</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">[]<sp/>plane_indices<sp/>=<sp/>{<sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>3,<sp/>1,<sp/>0,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>2,<sp/>3,<sp/>0<sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Send<sp/>them<sp/>to<sp/>HumanFactors</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MeshInfo<sp/>Plane<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>MeshInfo(plane_indices,<sp/>plane_vertices);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Generate<sp/>a<sp/>BVH<sp/>for<sp/>the<sp/>RayTracer</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>EmbreeBVH<sp/>bvh<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>EmbreeBVH(Plane);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Set<sp/>Options<sp/>for<sp/>the<sp/>Graph<sp/>Generator</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vector3D<sp/>start_point<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(0,<sp/>0,<sp/>1);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vector3D<sp/>spacing<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(1,<sp/>1,<sp/>1);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Generate<sp/>the<sp/>Graph</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Graph<sp/>G<sp/>=<sp/>GraphGenerator.GenerateGraph(bvh,<sp/>start_point,<sp/>spacing);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Get<sp/>a<sp/>list<sp/>of<sp/>nodes<sp/>from<sp/>the<sp/>graph<sp/>and<sp/>print<sp/>them.</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NodeList<sp/>nodes<sp/>=<sp/>G.getNodes();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Debug.Log(nodes);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Update<sp/>is<sp/>called<sp/>once<sp/>per<sp/>frame</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Update()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+<para>Once you&apos;ve confirmed that your script matches this code, <bold>save</bold> your script, minimize Visual Studio, then switch back to the Unity Editor.</para>
+<para><image type="html" name="drag_into_camera.png" inline="yes">Attach script and test</image>
+ <image type="latex" name="drag_into_camera.png" inline="yes">Attach script and test</image>
+ <image type="rtf" name="drag_into_camera.png" inline="yes">Attach script and test</image>
+ <image type="docbook" name="drag_into_camera.png" inline="yes">Attach script and test</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>3.3</bold> <emphasis>Dragging HFExampleScript onto the Main Camera as a component.</emphasis></para>
+<para>The process for testing this script is identical to the process in <ref refid="_using_the_raytracer" kindref="compound">The Raytracer Tutorial</ref>. Attach the script to the main camera, then press the play button and inspect your output.</para>
+<para><image type="html" name="click_on_console.png" inline="yes">Switch To the Console</image>
+ <image type="latex" name="click_on_console.png" inline="yes">Switch To the Console</image>
+ <image type="rtf" name="click_on_console.png" inline="yes">Switch To the Console</image>
+ <image type="docbook" name="click_on_console.png" inline="yes">Switch To the Console</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>3.4</bold> <emphasis>How to view the Console Tab</emphasis></para>
+<para>Like in the previous tutorial, the output is at the bottom of the screen, but it doesn&apos;t fit in on one line, so it&apos;s cut off. To get a better view, click on the output itself, or click on the console tab circled in Figure 3.4 to view the console. The console contains a history of outputs, as well as the option to click on any output message to get more information.</para>
+<para><image type="html" name="console_view.png" inline="yes">View Console</image>
+ <image type="latex" name="console_view.png" inline="yes">View Console</image>
+ <image type="rtf" name="console_view.png" inline="yes">View Console</image>
+ <image type="docbook" name="console_view.png" inline="yes">View Console</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>3.5</bold> <emphasis>Highlighted Graph Output and how to switch back to the assets window</emphasis></para>
+<para>Once the console tab is open, click on the message containing the graph generator&apos;s output, highlighted in blue in Figure 3.5, for a more detailed view. Like in Figure 3.5, the highlighted text should read:</para>
+<para><programlisting><codeline><highlight class="normal">[(0.000,0.000,0.000),<sp/>(-1.000,-1.000,0.000),<sp/>(-1.000,0.000,0.000),<sp/>(-1.000,1.000,0.000),<sp/>(0.000,-1.000,0.000),<sp/>.<sp/>.<sp/>.<sp/>(10.000,7.000,0.000),<sp/>(10.000,8.000,0.000),<sp/>(10.000,9.000,0.000),<sp/>(10.000,10.000,0.000)]</highlight></codeline>
+</programlisting></para>
+<para><blockquote><para><bold>Note:</bold> this is not the full list of nodes. The list has been truncated due to the size of the output. To view every node, you must print them in a loop. </para>
+</blockquote></para>
+<para>Confirm your results match, then switch back to the previous view by clicking on the Project tab circled in red in Figure 3.5. After that, exit playmode by clicking on the blue play button at the top of the screen. If you&apos;ve reached this point, then you have successfully generated a Graph using Human Factors and have completed this part of the tutorial. Next we will cover cases where the graph generator will be unable to generate a graph, and how to handle if a graph could not be generated.</para>
+</sect2>
+</sect1>
+<sect1 id="_generating_a_graph_1autotoc_md24">
+<title>Handling cases where a Graph could not be generated</title>
+<para>We&apos;ve covered situations where we know the GraphGenerator will generate a graph, however it&apos;s important to know what happens in situations where it is unknown if a graph can be generated because we&apos;re taking user input, operating on a new model, or making changes to the geometry we&apos;re generating the graph on.</para>
+<para>A Graph can fail to generate if at least one of the two cases is true:</para>
+<para><orderedlist>
+<listitem><para>The initial ground check didn&apos;t intersect with any geometry, usually means the start point wasn&apos;t over the ground.</para>
+</listitem><listitem><para>The Graph Generator couldn&apos;t generate any nodes after the initial ground check. Some examples of this are.<itemizedlist>
+<listitem><para>The ground check was in a space too narrow to generate any extra nodes given the current spacing</para>
+</listitem><listitem><para>The start point was on a slope too steep for the upslope/downslope to traverse up or down.</para>
+</listitem><listitem><para>The start point is in a wall, making it impossible to generate any nodes around it.</para>
+</listitem></itemizedlist>
+</para>
+</listitem></orderedlist>
+</para>
+<para>This tutorial will cover safely handling cases where graphs could not be generated by checking the return value of the graph generator.</para>
+<sect2 id="_generating_a_graph_1autotoc_md25">
+<title>Checking for success</title>
+<para>If the Graph Generator failed due to one of the two cases listed above, a null value will be returned instead of a graph. To catch when this happens, let&apos;s add a null check just after the graph is generated on <emphasis>Line 41</emphasis>.</para>
+<para><programlisting filename=".cs"><codeline><highlight class="comment">//<sp/>Check<sp/>if<sp/>the<sp/>graph<sp/>generator<sp/>succeeded</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(G<sp/>is<sp/></highlight><highlight class="keyword">null</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>Debug.Log(</highlight><highlight class="stringliteral">&quot;The<sp/>Graph<sp/>failed<sp/>to<sp/>generate.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+<para>Now, if the graph fails to generate, our code will print a clear error message and immediately stop executing the script. If we did not have this check and our graph did fail to generate, then we would get a confusing Null Reference Exception later when interacting with the graph. <linebreak/>
+</para>
+</sect2>
+<sect2 id="_generating_a_graph_1autotoc_md26">
+<title>Testing</title>
+<para>To test that our null check is successful, we&apos;ll go to <emphasis>line 34</emphasis> and change our start point to be at (200, 0, 1) instead of (0,0,1): <computeroutput>Vector3D start_point = new Vector3D(200, 0, 1);</computeroutput> This is far, far beyond where our plane is and should result in case 1: the initial ground check failing to find any valid ground.</para>
+<para><image type="html" name="checking_for_success.PNG" inline="yes">Picture of the full Start() method for this test.</image>
+ <image type="latex" name="checking_for_success.PNG" inline="yes">Picture of the full Start() method for this test.</image>
+ <image type="rtf" name="checking_for_success.PNG" inline="yes">Picture of the full Start() method for this test.</image>
+ <image type="docbook" name="checking_for_success.PNG" inline="yes">Picture of the full Start() method for this test.</image>
+</para>
+<para>Since the camera is already setup, all we need to do is enter playmode to test this. Make sure your code matches the picture, <bold>save</bold> the file, minimize Visual Studio, open the Unity editor, then press the play button.</para>
+<para><image type="html" name="failure.png" inline="yes">Failure</image>
+ <image type="latex" name="failure.png" inline="yes">Failure</image>
+ <image type="rtf" name="failure.png" inline="yes">Failure</image>
+ <image type="docbook" name="failure.png" inline="yes">Failure</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>3.5</bold> <emphasis>Our error message printed after the graph failed to generate</emphasis></para>
+<para>If you did this correctly, then the error message we wrote earlier should appear instead of the output from the previous section. If you received this result, then you now know how to handle cases where the graph generator could not generate a graph.</para>
+</sect2>
+</sect1>
+<sect1 id="_generating_a_graph_1autotoc_md27">
+<title>Conclusion</title>
+<para>Here is a link the full project created in this guide: <ulink url="Tutorial%203%20-%20Graph%20Generator.zip">Full Project</ulink></para>
+<para>In this tutorial we successfully generated a graph from a bvh, start point, and spacing. We also handled a case where a graph was unable to be generated, and wrote a custom error message to be printed instead of throwing a null reference exception.</para>
+<para>In the next tutorial, <ref refid="_mesh_from_unity" kindref="compound">Reading Meshes From Unity</ref>, we will use geometry from the Unity scene to generate a graph, instead of manually creatng our own plane. </para>
+</sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

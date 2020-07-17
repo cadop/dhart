@@ -1,0 +1,412 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.18">
+  <compounddef id="class_human_factors_1_1_spatial_structures_1_1_graph" kind="class" language="C#" prot="public">
+    <compoundname>HumanFactors::SpatialStructures::Graph</compoundname>
+    <basecompoundref refid="class_human_factors_1_1_native_utils_1_1_native_object" prot="public" virt="non-virtual">HumanFactors.NativeUtils.NativeObject</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_human_factors_1_1_spatial_structures_1_1_graph_1a0e139b5c04daaa9e4bd3bf9cb3ee9722" prot="private" static="no" mutable="no">
+        <type><ref refid="struct_human_factors_1_1_spatial_structures_1_1_c_s_r_info" kindref="compound">CSRInfo</ref></type>
+        <definition>CSRInfo HumanFactors.SpatialStructures.Graph.CSRPointers</definition>
+        <argsstring></argsstring>
+        <name>CSRPointers</name>
+        <briefdescription>
+<para>This graph&apos;s CSR pointers. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="52" column="25" bodyfile="src/Csharp/packages/spatialstructures/src/Graph.cs" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="package-func">
+      <memberdef kind="function" id="class_human_factors_1_1_spatial_structures_1_1_graph_1aa613f3162fe49e35e155cd2418a0fa46" prot="package" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>HumanFactors.SpatialStructures.Graph.Graph</definition>
+        <argsstring>(IntPtr GraphPtr)</argsstring>
+        <name>Graph</name>
+        <param>
+          <type>IntPtr</type>
+          <declname>GraphPtr</declname>
+        </param>
+        <briefdescription>
+<para>Wrap a graph that already exists in unmanaged memory. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>GraphPtr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the grpah in unmanaged memory </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="56" column="18" bodyfile="src/Csharp/packages/spatialstructures/src/Graph.cs" bodystart="56" bodyend="56"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_human_factors_1_1_spatial_structures_1_1_graph_1a01855a86f49d22301651cf7098ee8967" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>HumanFactors.SpatialStructures.Graph.Graph</definition>
+        <argsstring>()</argsstring>
+        <name>Graph</name>
+        <briefdescription>
+<para>Construct a new empty graph in unmanaged memory. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="59" column="16" bodyfile="src/Csharp/packages/spatialstructures/src/Graph.cs" bodystart="59" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_spatial_structures_1_1_graph_1aca7ba30268e827c93387794ed05e3d7d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void HumanFactors.SpatialStructures.Graph.AddEdge</definition>
+        <argsstring>(Vector3D parent, Vector3D child, float cost)</argsstring>
+        <name>AddEdge</name>
+        <param>
+          <type><ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref></type>
+          <declname>parent</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref></type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>cost</declname>
+        </param>
+        <briefdescription>
+<para>Create a new edge between parent and child with cost. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>parent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The X,Y,Z location for the parent node. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>child</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>x,y,z location for the child </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cost</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>cost for parent to child </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+<para><simplesect kind="post"><para>1) If the X,Y,Z position of either parent or child does not exist in the graph then a ID location will be assigned to it. </para>
+</simplesect>
+<simplesect kind="post"><para>2) Existing representations of the this graph&apos;s CSR will be invalidated.</para>
+</simplesect>
+<simplesect kind="warning"><para>1) If an edge between parent and child already exists, this will overwrite that edge. </para>
+</simplesect>
+<simplesect kind="warning"><para>2) Calling this function will invalidate any existing CSRPtrs returned from the graph. Make sure to call CompressToCSR again continuing to access it. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="81" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_spatial_structures_1_1_graph_1ae044c0d713259fb18f4275aec5c8129a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void HumanFactors.SpatialStructures.Graph.AddEdge</definition>
+        <argsstring>(int parent_id, int child_id, float cost)</argsstring>
+        <name>AddEdge</name>
+        <param>
+          <type>int</type>
+          <declname>parent_id</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>child_id</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>cost</declname>
+        </param>
+        <briefdescription>
+<para>Create a new edge between parent and child with cost. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>parent_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The ID of the parent node. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>child_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The ID of the child node. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cost</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>cost from parent to child.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="post"><para>1) If the ID of either parent or child does not exist in the graph then it will be created. </para>
+</simplesect>
+<simplesect kind="post"><para>2) Existing representations of the this graph&apos;s CSR will be invalidated.</para>
+</simplesect>
+<simplesect kind="warning"><para>1) If an edge between parent and child already exists, this will overwrite that edge. </para>
+</simplesect>
+<simplesect kind="warning"><para>2) Calling this function will invalidate any existing CSRPtrs returned from the graph. Make sure to call CompressToCSR again continuing to access it. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="103" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_spatial_structures_1_1_graph_1a6b2aeaa562da06bec0d23aaabb2ba74d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_human_factors_1_1_spatial_structures_1_1_node_list" kindref="compound">NodeList</ref></type>
+        <definition>NodeList HumanFactors.SpatialStructures.Graph.getNodes</definition>
+        <argsstring>()</argsstring>
+        <name>getNodes</name>
+        <briefdescription>
+<para>Garray containing the graph&apos;s current nodes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>An array of the graph&apos;s current nodes ordered by ID. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="108" column="25"/>
+        <referencedby refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a2d25a3d3158187875f0726844a4bf360" compoundref="_graph_8cs" startline="145" endline="151">HumanFactors.SpatialStructures.Graph.AggregateEdgeCosts</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_spatial_structures_1_1_graph_1a3a7db212124a9375862004a3a7691805" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void HumanFactors.SpatialStructures.Graph.CompressToCSR</definition>
+        <argsstring>()</argsstring>
+        <name>CompressToCSR</name>
+        <briefdescription>
+<para>Compress the graph, and get pointers to a CSR representation of it. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="remark"><para>The CSR pointers can be mapped to after retrieved from C++ using spans.</para>
+</simplesect>
+<simplesect kind="see"><para>CSRPtrs for more info on the CSR type and how to access it. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="118" column="21" bodyfile="src/Csharp/packages/spatialstructures/src/Graph.cs" bodystart="118" bodyend="121"/>
+        <references refid="class_human_factors_1_1_spatial_structures_1_1_native_methods_1afcfe59fc55ebfc796a8baeed3f011a42" compoundref="_spatial_structures_native_8cs" startline="87" endline="100">HumanFactors.SpatialStructures.NativeMethods.C_GetCSRPointers</references>
+        <referencedby refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a2d25a3d3158187875f0726844a4bf360" compoundref="_graph_8cs" startline="145" endline="151">HumanFactors.SpatialStructures.Graph.AggregateEdgeCosts</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_spatial_structures_1_1_graph_1a2d25a3d3158187875f0726844a4bf360" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_human_factors_1_1_native_utils_1_1_common_native_arrays_1_1_managed_float_array" kindref="compound">ManagedFloatArray</ref></type>
+        <definition>ManagedFloatArray HumanFactors.SpatialStructures.Graph.AggregateEdgeCosts</definition>
+        <argsstring>(GraphEdgeAggregation type, bool directed=true)</argsstring>
+        <name>AggregateEdgeCosts</name>
+        <param>
+          <type><ref refid="namespace_human_factors_1_1_spatial_structures_1abd405fa41da0f9a771d547aa47b6e1a0" kindref="member">GraphEdgeAggregation</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>directed</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>Summarize the edgecosts of every node in the graph. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of aggregation method to use.</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>directed</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Whether or not the graph is directed. If set to true then each nodes&apos;s score will only consider incomning edges. Otherwise, each node&apos;s score will consider both outgoing and incoming edges.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>An array of scores, in which each element corresponds to a node in the graph sorted by ID.</para>
+</simplesect>
+<simplesect kind="warning"><para>This will compress the graph if it is not compressed already. If any edges were added between lat call to CompressToCSR and now, then any active CSRPtrs will be invalidated.</para>
+</simplesect>
+<simplesect kind="remark"><para>The order of the scores returned bythis function match the order of the scores returned from <ref refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a6b2aeaa562da06bec0d23aaabb2ba74d" kindref="member">Graph.getNodes</ref>. This can be especially useful for summarizing the results of a <ref refid="namespace_human_factors_1_1_visibility_graph" kindref="compound">VisibilityGraph</ref>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="145" column="34" bodyfile="src/Csharp/packages/spatialstructures/src/Graph.cs" bodystart="145" bodyend="151"/>
+        <references refid="class_human_factors_1_1_spatial_structures_1_1_native_methods_1a53457f89d46804e798d806c0ba4b0940" compoundref="_spatial_structures_native_8cs" startline="119" endline="128">HumanFactors.SpatialStructures.NativeMethods.C_AggregateEdgeCosts</references>
+        <references refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a3a7db212124a9375862004a3a7691805" compoundref="_graph_8cs" startline="118" endline="121">HumanFactors.SpatialStructures.Graph.CompressToCSR</references>
+        <references refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a6b2aeaa562da06bec0d23aaabb2ba74d">HumanFactors.SpatialStructures.Graph.getNodes</references>
+        <references refid="struct_human_factors_1_1_native_utils_1_1_c_vector_and_data_1a8bcdb7b4516a15f5b905ebcd33a55e6c" compoundref="_native_utils_8cs" startline="38">HumanFactors.NativeUtils.CVectorAndData.size</references>
+        <references refid="class_human_factors_1_1_native_utils_1_1_native_array_1a08f9370818434ce452d8113466c8a0f0" compoundref="_pointer_holder_8cs" startline="194" endline="194">HumanFactors.NativeUtils.NativeArray&lt; T &gt;.size</references>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_spatial_structures_1_1_graph_1abe9106fd9584269e1291702aa401f6ac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int HumanFactors.SpatialStructures.Graph.GetNodeID</definition>
+        <argsstring>(Vector3D node)</argsstring>
+        <name>GetNodeID</name>
+        <param>
+          <type><ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref></type>
+          <declname>node</declname>
+        </param>
+        <briefdescription>
+<para>Gets the ID of a node in the graph. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>node</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The X,Y,Z position of a node to get the ID for.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The ID of the node, or -1 if the node isn&apos;t in the graph. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="160" column="20"/>
+        <referencedby refid="class_human_factors_1_1_pathfinding_1_1_shortest_path_1a7ca51d84089c860860ad7fb2fd717f61" compoundref="_shortest_path_8cs" startline="72" endline="78">HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="class_human_factors_1_1_spatial_structures_1_1_graph_1a274f89b6ee5b5e22fe566e96de49461a" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>override bool</type>
+        <definition>override bool HumanFactors.SpatialStructures.Graph.ReleaseHandle</definition>
+        <argsstring>()</argsstring>
+        <name>ReleaseHandle</name>
+        <briefdescription>
+<para>Free the native memory managed by this class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>the garbage collector will handle this automatically </para>
+</simplesect>
+<simplesect kind="warning"><para>Do not attempt to use this class after freeing it! </para>
+</simplesect>
+<simplesect kind="return"><para>True. This is guaranteed to execute properly. <linebreak/>
+ </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="168" column="33" bodyfile="src/Csharp/packages/spatialstructures/src/Graph.cs" bodystart="168" bodyend="172"/>
+        <references refid="class_human_factors_1_1_spatial_structures_1_1_native_methods_1a464f503116478fbb7eb9baeb2ef45aac">HumanFactors.SpatialStructures.NativeMethods.C_DestroyGraph</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A graph representing connections between points in space. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Every <ref refid="struct_human_factors_1_1_spatial_structures_1_1_node" kindref="compound">Node</ref> in the graph contains an X,Y,Z coordinate which can be used to represent a specific point in space. This graph internally is stored as a CSR for space efficency. Nodes are stored in a hashmap containing X,Y, and Z coordinates, allowing for quick indexing of s specific nodes by location alone.</para>
+<para><simplesect kind="invariant"><para>1) The CSR maintained by this graph will always be valid. </para>
+</simplesect>
+<simplesect kind="invariant"><para>2) Every unique unique node in the graph will be assigned a unique id. A <ref refid="struct_human_factors_1_1_spatial_structures_1_1_node" kindref="compound">Node</ref> is considered unique if it has an X,Y,Z location that is not within 0.0001 units of any other node in the graph.</para>
+</simplesect>
+</para>
+<internal><para><xrefsect id="todo_1_todo000010"><xreftitle>Todo</xreftitle><xrefdescription><para>Functions to access edges in the graph like numpy. Users shouldn&apos;t have to use unsafe functions to get the edges of a node from the CSR. </para>
+</xrefdescription></xrefsect></para>
+<para><simplesect kind="see"><para><ref refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a3a7db212124a9375862004a3a7691805" kindref="member">CompressToCSR</ref> to get a CSR representation of the graph. </para>
+</simplesect>
+</para>
+</internal>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>NativeObject</label>
+        <link refid="class_human_factors_1_1_native_utils_1_1_native_object"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>HumanFactors.SpatialStructures.Graph</label>
+        <link refid="class_human_factors_1_1_spatial_structures_1_1_graph"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SafeHandle</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>HumanFactors.SpatialStructures.CSRInfo</label>
+        <link refid="struct_human_factors_1_1_spatial_structures_1_1_c_s_r_info"/>
+      </node>
+      <node id="2">
+        <label>NativeObject</label>
+        <link refid="class_human_factors_1_1_native_utils_1_1_native_object"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>HumanFactors.SpatialStructures.Graph</label>
+        <link refid="class_human_factors_1_1_spatial_structures_1_1_graph"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>CSRPointers</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>SafeHandle</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="49" column="11" bodyfile="src/Csharp/packages/spatialstructures/src/Graph.cs" bodystart="50" bodyend="173"/>
+    <listofallmembers>
+      <member refid="class_human_factors_1_1_spatial_structures_1_1_graph_1aca7ba30268e827c93387794ed05e3d7d" prot="public" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>AddEdge</name></member>
+      <member refid="class_human_factors_1_1_spatial_structures_1_1_graph_1ae044c0d713259fb18f4275aec5c8129a" prot="public" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>AddEdge</name></member>
+      <member refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a2d25a3d3158187875f0726844a4bf360" prot="public" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>AggregateEdgeCosts</name></member>
+      <member refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a3a7db212124a9375862004a3a7691805" prot="public" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>CompressToCSR</name></member>
+      <member refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a0e139b5c04daaa9e4bd3bf9cb3ee9722" prot="private" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>CSRPointers</name></member>
+      <member refid="class_human_factors_1_1_spatial_structures_1_1_graph_1abe9106fd9584269e1291702aa401f6ac" prot="public" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>GetNodeID</name></member>
+      <member refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a6b2aeaa562da06bec0d23aaabb2ba74d" prot="public" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>getNodes</name></member>
+      <member refid="class_human_factors_1_1_spatial_structures_1_1_graph_1aa613f3162fe49e35e155cd2418a0fa46" prot="package" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>Graph</name></member>
+      <member refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a01855a86f49d22301651cf7098ee8967" prot="public" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>Graph</name></member>
+      <member refid="class_human_factors_1_1_native_utils_1_1_native_object_1a33340c37b83300ec09f6fc7982d2fb70" prot="public" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>IsInvalid</name></member>
+      <member refid="class_human_factors_1_1_native_utils_1_1_native_object_1ae7f34573598d48a9ef666b96895c7201" prot="public" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>NativeObject</name></member>
+      <member refid="class_human_factors_1_1_native_utils_1_1_native_object_1aa58c089e79cb4acc260755a41952d3d6" prot="package" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>Pointer</name></member>
+      <member refid="class_human_factors_1_1_native_utils_1_1_native_object_1a46b2320d66a2b0405024db48f376b72c" prot="public" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>pressure</name></member>
+      <member refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a274f89b6ee5b5e22fe566e96de49461a" prot="protected" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>ReleaseHandle</name></member>
+      <member refid="class_human_factors_1_1_native_utils_1_1_native_object_1a062ff788763ba2ad52a7c20000c8ecd8" prot="private" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>~NativeObject</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

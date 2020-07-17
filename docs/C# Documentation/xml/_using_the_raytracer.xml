@@ -1,0 +1,320 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.18">
+  <compounddef id="_using_the_raytracer" kind="page">
+    <compoundname>UsingTheRaytracer</compoundname>
+    <title>Using the RayTracer</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Previous Tutorial: <ref refid="_unity_project_setup" kindref="compound">Project Setup</ref> | Next Tutorial: <ref refid="_generating_a_graph" kindref="compound">Graph Generator</ref></para>
+<sect1 id="_using_the_raytracer_1autotoc_md6">
+<title>Intro</title>
+<para>Now that we know the <ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref> library can be referenced by our new Unity Project, let&apos;s check to see that it&apos;s working by writing a simple script that utilizes the Raytracer. Ray intersections are used internally by many of the analysis methods in <ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>, and can be an extremely useful tool for analyzing space. In this tutorial we will write a script that performs the following when playmode is entered:</para>
+<para><orderedlist>
+<listitem><para>Create a Plane in <ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref> from vertices and triangle indices.</para>
+</listitem><listitem><para>Cast a ray at the plane.</para>
+</listitem><listitem><para>Print the point where the ray intersected the plane.</para>
+</listitem></orderedlist>
+</para>
+<para>This tutorial assumes that you&apos;ve completed the first tutorial, since we will be using the project created in it as a base, and building upon concepts first established there. If you want to start here, you can download the full Unity project at the end of the previous tutorial.</para>
+<para>Now, let&apos;s begin writing our script.</para>
+</sect1>
+<sect1 id="_using_the_raytracer_1autotoc_md7">
+<title>Writing the Script</title>
+<para><image type="html" name="blank_new_behaviour_script.png" inline="yes">HFExampleScriptBlank</image>
+ <image type="latex" name="blank_new_behaviour_script.png" inline="yes">HFExampleScriptBlank</image>
+ <image type="rtf" name="blank_new_behaviour_script.png" inline="yes">HFExampleScriptBlank</image>
+ <image type="docbook" name="blank_new_behaviour_script.png" inline="yes">HFExampleScriptBlank</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>2.1</bold>: <emphasis>A Blank MonoBehavior Script</emphasis></para>
+<para>In the Visual Studio window we opened in the last tutorial, look at the contents of HFExampleScript.cs. The contents should match that of Figure 2.1. Once you&apos;re sure of this, it&apos;s time to start filling it in.</para>
+<para><blockquote><para><bold>NOTE</bold>: Remember, if you ever exit out of Visual Studio, you can always reopen it by double clicking a script in the assets window of the unity editor. </para>
+</blockquote></para>
+<sect2 id="_using_the_raytracer_1autotoc_md8">
+<title>Using Declarations</title>
+<para>Before getting into the logic of the script itself, we will add using declarations for the namespaces in <ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref> that we plan to reference.</para>
+<para>Add the following lines to the top of the script starting at line 4.</para>
+<para><programlisting filename=".cs"><codeline><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.<ref refid="namespace_human_factors_1_1_ray_tracing" kindref="compound">RayTracing</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.<ref refid="namespace_human_factors_1_1_geometry" kindref="compound">Geometry</ref>;</highlight></codeline>
+</programlisting></para>
+<para><image type="html" name="add_using_delcarations.png" inline="yes">HFExampleScript Usings</image>
+ <image type="latex" name="add_using_delcarations.png" inline="yes">HFExampleScript Usings</image>
+ <image type="rtf" name="add_using_delcarations.png" inline="yes">HFExampleScript Usings</image>
+ <image type="docbook" name="add_using_delcarations.png" inline="yes">HFExampleScript Usings</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>2.2</bold>: <emphasis>The Using declarations required for this script</emphasis></para>
+<para>Lines, 1-6 of your code should match Figure 2.2.</para>
+<para><blockquote><para><bold>NOTE:</bold> While editing your code, you may notice the colored bar to the left between the line numbers and the code itself. This bar displays the changes you&apos;ve made to the current document. When you make unsaved changes, the bar will appear and be colored yellow, then once you save it will turn green. </para>
+</blockquote></para>
+<para><image type="html" name="body_of_start.png" inline="yes">Body Of Start</image>
+ <image type="latex" name="body_of_start.png" inline="yes">Body Of Start</image>
+ <image type="rtf" name="body_of_start.png" inline="yes">Body Of Start</image>
+ <image type="docbook" name="body_of_start.png" inline="yes">Body Of Start</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>2.3</bold>: <emphasis>The body of the Start method highlighted</emphasis></para>
+<para>With using declarations in place, we&apos;ll be writing the rest of our code in the body of the <computeroutput>Start()</computeroutput> method beginning on line 13 (highlighted in yellow in Figure 2.3).</para>
+</sect2>
+<sect2 id="_using_the_raytracer_1autotoc_md9">
+<title>Creating a Plane</title>
+<para>Now we will create a plane for our ray to intersect. Every mesh is, at minimum, comprised of two arrays:</para>
+<para><orderedlist>
+<listitem><para>An array of floats containing the (x,y,z) location of every vertex in the mesh.</para>
+</listitem><listitem><para>An array of integers containing the indices for each triangle or &quot;face&quot; of the mesh.</para>
+</listitem></orderedlist>
+</para>
+<para>A plane is comprised of four vertices, and two triangles. Here are the vertex and index arrays for a 10x10 plane on the xy plane.</para>
+<para><programlisting filename=".cs"><codeline><highlight class="comment">//<sp/>Create<sp/>arrays<sp/>for<sp/>the<sp/>plane&apos;s<sp/>vertices<sp/>and<sp/>indices</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">[]<sp/>plane_vertices<sp/>=<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>-10f,<sp/>10f,<sp/>0f,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>-10f,<sp/>-10f,<sp/>0f,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/>10f,<sp/>10f,<sp/>0f,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/>10f,<sp/>-10f,<sp/>0f</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">[]<sp/>plane_indices<sp/>=<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>3,<sp/>1,<sp/>0,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>2,<sp/>3,<sp/>0</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+</programlisting></para>
+<para>In the index and vertex array, every 3 elements represent a separate triangle or vertex respectively. So, the first vertex is at location (-10,10,0) and the first triangle is comprised of the fourth, second, and first vertices. For more information on what both arrays mean, see out the [MeshInfo Documentation]().</para>
+<para><bold>TODO</bold>: Replace the empty links with links to our documentation.</para>
+<para>We will use these arrays to construct a new <emphasis>MeshInfo</emphasis> object in <ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>. Call the MeshInfo constructor with the two arrays we defined above as arguments.</para>
+<para><programlisting filename=".cs"><codeline><highlight class="comment">//<sp/>Construct<sp/>a<sp/>meshinfo<sp/>instance<sp/>for<sp/>the<sp/>plane</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">MeshInfo<sp/>Plane<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>MeshInfo(plane_indices,<sp/>plane_vertices);</highlight></codeline>
+</programlisting></para>
+<para>Before we can use this geometry with the Raytracer, we must first generate a Bounding Volume Hierarchy, or BVH using the geometry as input. In short, a BVH is an accelerated data structure that drastically reduces the time required to perform ray intersections. You can read more about the BVH in its dedicated article [Bounding Volume Hierarchy]().</para>
+<para>To generate a BVH from an instance of MeshInfo, call the BVH constructor with the MeshInfo instance as an argument.</para>
+<para><programlisting filename=".cs"><codeline><highlight class="comment">//<sp/>Generate<sp/>a<sp/>BVH<sp/>from<sp/>the<sp/>MeshInfo<sp/>instance</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">EmbreeBVH<sp/>bvh<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>EmbreeBVH(Plane);</highlight></codeline>
+</programlisting></para>
+<para>At this point, your start function should match the following code:</para>
+<para><programlisting filename=".cs"><codeline><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Start()</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Create<sp/>arrays<sp/>for<sp/>the<sp/>plane&apos;s<sp/>vertices<sp/>and<sp/>indices</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">[]<sp/>plane_vertices<sp/>=<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-10f,<sp/>10f,<sp/>0f,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-10f,<sp/>-10f,<sp/>0f,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>10f,<sp/>10f,<sp/>0f,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>10f,<sp/>-10f,<sp/>0f</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">[]<sp/>plane_indices<sp/>=<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>3,<sp/>1,<sp/>0,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>2,<sp/>3,<sp/>0</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Construct<sp/>a<sp/>meshinfo<sp/>instance<sp/>for<sp/>the<sp/>plane</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>MeshInfo<sp/>Plane<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>MeshInfo(plane_indices,<sp/>plane_vertices);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Generate<sp/>a<sp/>BVH<sp/>from<sp/>the<sp/>MeshInfo<sp/>instance</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>EmbreeBVH<sp/>bvh<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>EmbreeBVH(Plane);</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+<para><image type="html" name="creating_a_plane.png" inline="yes">Image in Visual Studio</image>
+ <image type="latex" name="creating_a_plane.png" inline="yes">Image in Visual Studio</image>
+ <image type="rtf" name="creating_a_plane.png" inline="yes">Image in Visual Studio</image>
+ <image type="docbook" name="creating_a_plane.png" inline="yes">Image in Visual Studio</image>
+</para>
+<para>With the BVH created, we&apos;re ready to call the Raytracer and cast a ray.</para>
+</sect2>
+<sect2 id="_using_the_raytracer_1autotoc_md10">
+<title>Casting a Ray</title>
+<para>We&apos;ll put the origin point of the ray at (1,0,1) and cast it in the direction (0,0,-1). This should intersect with the plane we defined earlier at the point (1,0,0). In the start method, just below the line we create the BVH, define an origin point and a direction for the ray.</para>
+<para><programlisting filename=".cs"><codeline><highlight class="comment">//<sp/>Define<sp/>origin<sp/>and<sp/>direction</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">Vector3D<sp/>origin<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(1,<sp/>0,<sp/>1);</highlight></codeline>
+<codeline><highlight class="normal">Vector3D<sp/>direction<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(0,<sp/>0,<sp/>-1);</highlight></codeline>
+</programlisting></para>
+<para>Depending on which function you call, the EmbreeRaytracer can return 3 different types of information:</para>
+<para><orderedlist>
+<listitem><para>The coordinates where a ray intersected the mesh.</para>
+</listitem><listitem><para>The distance from the ray&apos;s origin to the point where it intersected the mesh</para>
+</listitem><listitem><para>A boolean true/false for whether the ray intersected the mesh at any point.</para>
+</listitem></orderedlist>
+</para>
+<para>For this guide we will use [IntersectForPoint]() to get the point where the ray intersects the mesh. Starting on line 35 call the EmbreeRayTracer&apos;s <bold>IntersectForPoint</bold> function with the bvh, origin and direction as arguments.</para>
+<para><programlisting filename=".cs"><codeline><highlight class="comment">//<sp/>Cast<sp/>the<sp/>ray,<sp/>store<sp/>the<sp/>hitpoint.</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">Vector3D<sp/>intersection_point<sp/>=<sp/>EmbreeRaytracer.IntersectForPoint(bvh,<sp/>origin,<sp/>direction);</highlight></codeline>
+</programlisting></para>
+<para>Finally, log the point of intersection to Unity&apos;s console using <computeroutput>Debug.Log()</computeroutput> so we can view the results.</para>
+<para><programlisting filename=".cs"><codeline><highlight class="comment">//<sp/>Print<sp/>the<sp/>x,<sp/>y,<sp/>and<sp/>z<sp/>components<sp/>of<sp/>the<sp/>intersection<sp/>point</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">Debug.Log(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;(&quot;</highlight><highlight class="normal"><sp/>+<sp/>intersection_point.x<sp/>+</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;,&quot;</highlight><highlight class="normal"><sp/>+<sp/>intersection_point.y<sp/>+</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;,&quot;</highlight><highlight class="normal"><sp/>+<sp/>intersection_point.z<sp/>+</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="stringliteral">&quot;)&quot;</highlight><highlight class="normal">);</highlight></codeline>
+</programlisting></para>
+<para>Here&apos;s all of that together:</para>
+<para><programlisting filename=".cs"><codeline><highlight class="comment">//<sp/>Define<sp/>origin<sp/>and<sp/>direction</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">Vector3D<sp/>origin<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(1,<sp/>0,<sp/>1);</highlight></codeline>
+<codeline><highlight class="normal">Vector3D<sp/>direction<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(0,<sp/>0,<sp/>-1);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Cast<sp/>the<sp/>ray,<sp/>store<sp/>the<sp/>hitpoint</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">Vector3D<sp/>intersection_point<sp/>=<sp/>EmbreeRaytracer.IntersectForPoint(bvh,<sp/>origin,<sp/>direction);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Print<sp/>the<sp/>x,<sp/>y,<sp/>and<sp/>z<sp/>components<sp/>of<sp/>the<sp/>intersection_point</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">Debug.Log(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;(&quot;</highlight><highlight class="normal"><sp/>+<sp/>intersection_point.x<sp/>+</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;,&quot;</highlight><highlight class="normal"><sp/>+<sp/>intersection_point.y<sp/>+</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;,&quot;</highlight><highlight class="normal"><sp/>+<sp/>intersection_point.z<sp/>+</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="stringliteral">&quot;)&quot;</highlight><highlight class="normal">);</highlight></codeline>
+</programlisting></para>
+<para><image type="html" name="casting_a_ray.png" inline="yes">Image of our Start() function up until this point</image>
+ <image type="latex" name="casting_a_ray.png" inline="yes">Image of our Start() function up until this point</image>
+ <image type="rtf" name="casting_a_ray.png" inline="yes">Image of our Start() function up until this point</image>
+ <image type="docbook" name="casting_a_ray.png" inline="yes">Image of our Start() function up until this point</image>
+</para>
+</sect2>
+<sect2 id="_using_the_raytracer_1autotoc_md11">
+<title>Wrapping Up</title>
+<para>Here is the final script we&apos;ve been building in this tutorial.</para>
+<para><programlisting filename=".cs"><codeline><highlight class="keyword">using</highlight><highlight class="normal"><sp/>System.Collections;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>System.Collections.Generic;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>UnityEngine;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.<ref refid="namespace_human_factors_1_1_ray_tracing" kindref="compound">RayTracing</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.<ref refid="namespace_human_factors_1_1_geometry" kindref="compound">Geometry</ref>;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">HFExampleScript<sp/>:<sp/>MonoBehaviour</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Start<sp/>is<sp/>called<sp/>before<sp/>the<sp/>first<sp/>frame<sp/>update</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Start()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Create<sp/>arrays<sp/>for<sp/>the<sp/>plane&apos;s<sp/>vertices<sp/>and<sp/>indices</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">[]<sp/>plane_vertices<sp/>=<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-10f,<sp/>10f,<sp/>0f,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-10f,<sp/>-10f,<sp/>0f,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>10f,<sp/>10f,<sp/>0f,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>10f,<sp/>-10f,<sp/>0f</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">[]<sp/>plane_indices<sp/>=<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>3,<sp/>1,<sp/>0,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>2,<sp/>3,<sp/>0</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Construct<sp/>a<sp/>meshinfo<sp/>instance<sp/>for<sp/>the<sp/>plane</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MeshInfo<sp/>Plane<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>MeshInfo(plane_indices,<sp/>plane_vertices);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Generate<sp/>a<sp/>BVH<sp/>from<sp/>the<sp/>MeshInfo<sp/>instance</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>EmbreeBVH<sp/>bvh<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>EmbreeBVH(Plane);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Define<sp/>origin<sp/>and<sp/>direction</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vector3D<sp/>origin<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(1,<sp/>0,<sp/>1);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vector3D<sp/>direction<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(0,<sp/>0,<sp/>-1);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Cast<sp/>the<sp/>ray,<sp/>store<sp/>the<sp/>hitpoint</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vector3D<sp/>intersection_point<sp/>=<sp/>EmbreeRaytracer.IntersectForPoint(bvh,<sp/>origin,<sp/>direction);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Print<sp/>the<sp/>x,<sp/>y,<sp/>and<sp/>z<sp/>components<sp/>of<sp/>the<sp/>intersection_point</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Debug.Log(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;(&quot;</highlight><highlight class="normal"><sp/>+<sp/>intersection_point.x<sp/>+</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;,&quot;</highlight><highlight class="normal"><sp/>+<sp/>intersection_point.y<sp/>+</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;,&quot;</highlight><highlight class="normal"><sp/>+<sp/>intersection_point.z<sp/>+</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;)&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Update<sp/>is<sp/>called<sp/>once<sp/>per<sp/>frame</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Update()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+<para>Once you&apos;ve verified your code matches, <emphasis><bold>make sure to save the script by clicking File then Save in the top menu or pressing Ctrl + S on your keyboard.</bold></emphasis> Unity will NOT be able to use the script unless you save it. If you&apos;re unsure, the bar on the left-hand side between your code and the line numbers should be solid green, and the title of your assembly should not have an asterisk next to it.</para>
+<para><image type="html" name="saved_vs_unsaved.png" inline="yes">Add Using HumanFactors</image>
+ <image type="latex" name="saved_vs_unsaved.png" inline="yes">Add Using HumanFactors</image>
+ <image type="rtf" name="saved_vs_unsaved.png" inline="yes">Add Using HumanFactors</image>
+ <image type="docbook" name="saved_vs_unsaved.png" inline="yes">Add Using HumanFactors</image>
+</para>
+</sect2>
+</sect1>
+<sect1 id="_using_the_raytracer_1autotoc_md12">
+<title>Testing</title>
+<para>Now that we have a usable script, we need to attach it to some game object in order to run it. Let&apos;s minimize the Visual Studio window and go back to the Unity Editor.</para>
+<sect2 id="_using_the_raytracer_1autotoc_md13">
+<title>Adding the script to the camera</title>
+<para><image type="html" name="drag_into_camera.png" inline="yes">Drag HFExampleScript.cs Into Camera</image>
+ <image type="latex" name="drag_into_camera.png" inline="yes">Drag HFExampleScript.cs Into Camera</image>
+ <image type="rtf" name="drag_into_camera.png" inline="yes">Drag HFExampleScript.cs Into Camera</image>
+ <image type="docbook" name="drag_into_camera.png" inline="yes">Drag HFExampleScript.cs Into Camera</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>2.4</bold> <emphasis>Adding HFExampleScript to the camera as a component</emphasis></para>
+<para>In the Unity window drag <emphasis>HFExampleScript.cs</emphasis> to <emphasis>Main Camera</emphasis> in the scene hierarchy like shown in Figure 2.4. After doing this, it may appear as if nothing happened, but by dragging HFExampleScript over the camera you&apos;ve added HFExampleScript to the camera as a component.</para>
+<para><image type="html" name="camera_in_sidebar.png" inline="yes">Look At Camera In Sidebar</image>
+ <image type="latex" name="camera_in_sidebar.png" inline="yes">Look At Camera In Sidebar</image>
+ <image type="rtf" name="camera_in_sidebar.png" inline="yes">Look At Camera In Sidebar</image>
+ <image type="docbook" name="camera_in_sidebar.png" inline="yes">Look At Camera In Sidebar</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>2.5</bold> <emphasis>Viewing the components of the Main Camera</emphasis></para>
+<para>You can verify that the script has been added to the camera by left clicking the camera in the scene hierarchy and looking at its components in the Inspector on the right sidebar. At the bottom of the Inspector you should see a header for HF Example Script like the one highlighted in Figure 2.5. Once you&apos;ve made sure it exists, you can click on an empty space in the scene view to deselect the camera.</para>
+<para><blockquote><para><bold>NOTE</bold>: If you don&apos;t see the inspector in the right sidebar, you can enable it by selecting Window &gt; General &gt; Inspector from the top menubar. <image type="html" name="re_open_inspector.png" inline="yes">Re-Open Inspector</image>
+ <image type="latex" name="re_open_inspector.png" inline="yes">Re-Open Inspector</image>
+ <image type="rtf" name="re_open_inspector.png" inline="yes">Re-Open Inspector</image>
+ <image type="docbook" name="re_open_inspector.png" inline="yes">Re-Open Inspector</image>
+</para>
+<para></para>
+</blockquote></para>
+<para><blockquote><para><bold>NOTE</bold>: If you notice multiple copies of the script in the Inspector, you can remove duplicates by left clicking on the rightmost side of header for the duplicate components&apos; headers, then clicking <emphasis>Remove Component</emphasis>. &gt;<image type="html" name="remove_extra_component.png" inline="yes">Remove Extra Component</image>
+ <image type="latex" name="remove_extra_component.png" inline="yes">Remove Extra Component</image>
+ <image type="rtf" name="remove_extra_component.png" inline="yes">Remove Extra Component</image>
+ <image type="docbook" name="remove_extra_component.png" inline="yes">Remove Extra Component</image>
+</para>
+<para></para>
+</blockquote></para>
+</sect2>
+<sect2 id="_using_the_raytracer_1autotoc_md14">
+<title>Executing the Script</title>
+<para>Now that we&apos;ve set <emphasis>HFExampleScript</emphasis> as a component of the <emphasis>Main Camera</emphasis>, its <computeroutput>Start()</computeroutput> function containing our code will run when the editor enters play mode.</para>
+<para><image type="html" name="play_mode_button.png" inline="yes">Look At Camera In Sidebar</image>
+ <image type="latex" name="play_mode_button.png" inline="yes">Look At Camera In Sidebar</image>
+ <image type="rtf" name="play_mode_button.png" inline="yes">Look At Camera In Sidebar</image>
+ <image type="docbook" name="play_mode_button.png" inline="yes">Look At Camera In Sidebar</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>2.6</bold> <emphasis>Circled play button in editor window</emphasis></para>
+<para>To enter playmode, press the play button located at the top center of your screen, circled in red in Figure 2.6. Once clicked, you will enter play mode, indicated by the play button turning blue.</para>
+<para><blockquote><para><bold>NOTE:</bold> If when entering play mode, the game window becomes full screen like below, that means you have the <emphasis>Maximize On Play</emphasis> option enabled. You can disable it by pressing the <emphasis>Maximize On Play</emphasis> button circled in red below. For this tutorial series, we will leave this option off since it hides the console. &gt;<image type="html" name="playmode_maximize_on_play.png" inline="yes">Circled Maximize On Play Button</image>
+ <image type="latex" name="playmode_maximize_on_play.png" inline="yes">Circled Maximize On Play Button</image>
+ <image type="rtf" name="playmode_maximize_on_play.png" inline="yes">Circled Maximize On Play Button</image>
+ <image type="docbook" name="playmode_maximize_on_play.png" inline="yes">Circled Maximize On Play Button</image>
+</para>
+<para></para>
+</blockquote></para>
+<para><image type="html" name="console_show_meshinfo.png" inline="yes">Add Using HumanFactors</image>
+ <image type="latex" name="console_show_meshinfo.png" inline="yes">Add Using HumanFactors</image>
+ <image type="rtf" name="console_show_meshinfo.png" inline="yes">Add Using HumanFactors</image>
+ <image type="docbook" name="console_show_meshinfo.png" inline="yes">Add Using HumanFactors</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>2.7A</bold> <emphasis>Intersection Results in play mode.</emphasis></para>
+<para><image type="html" name="ExpectedOutput.png" inline="yes">Console Output</image>
+ <image type="latex" name="ExpectedOutput.png" inline="yes">Console Output</image>
+ <image type="rtf" name="ExpectedOutput.png" inline="yes">Console Output</image>
+ <image type="docbook" name="ExpectedOutput.png" inline="yes">Console Output</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>2.7B</bold> <emphasis>Results from 2.7A magnified</emphasis></para>
+<para>If everything went right, after entering play mode the console located at the bottom of your editor&apos;s window should show <computeroutput>(1,0,0)</computeroutput>, which is the exact point where the ray intersected the plane. Figure 2.7B is a magnified version of the console&apos;s output enclosed by the red box shown in 2.7A.</para>
+<para><blockquote><para><bold>NOTE</bold>: If you see no output at all, that means your version of Unity has log messages disabled. To enable log messages click on the Console tab just above the assets window to open the console. <image type="html" name="click_console_tab.png" inline="yes">Change To Console</image>
+ <image type="latex" name="click_console_tab.png" inline="yes">Change To Console</image>
+ <image type="rtf" name="click_console_tab.png" inline="yes">Change To Console</image>
+ <image type="docbook" name="click_console_tab.png" inline="yes">Change To Console</image>
+</para>
+<para>After this, you should notice the three buttons in the top right of the console window. The Left most button with an exclamation point in a speech bubble should be greyed out. Click on this button to enable log messages. <image type="html" name="click_to_enable_log_messages.png" inline="yes">Enable Log Messages</image>
+ <image type="latex" name="click_to_enable_log_messages.png" inline="yes">Enable Log Messages</image>
+ <image type="rtf" name="click_to_enable_log_messages.png" inline="yes">Enable Log Messages</image>
+ <image type="docbook" name="click_to_enable_log_messages.png" inline="yes">Enable Log Messages</image>
+</para>
+<para>You will see your output in the space where the assets tab occupied, instead of the bottom bar. You can switch back to the assets window by clicking the project tab to the left of the console tab. <image type="html" name="enabled_log_messages.png" inline="yes">Back to Assets</image>
+ <image type="latex" name="enabled_log_messages.png" inline="yes">Back to Assets</image>
+ <image type="rtf" name="enabled_log_messages.png" inline="yes">Back to Assets</image>
+ <image type="docbook" name="enabled_log_messages.png" inline="yes">Back to Assets</image>
+</para>
+<para>Future calls to <computeroutput>Debug.Log()</computeroutput> will appear at the bottom of the screen like shown in Figure 2.4. </para>
+</blockquote></para>
+<para>If your console&apos;s output matches, then you&apos;ve successfully completed this tutorial. You can press the play button again to exit playmode.</para>
+</sect2>
+</sect1>
+<sect1 id="_using_the_raytracer_1autotoc_md15">
+<title>Conclusion</title>
+<para>Full project Link: <ulink url="Tutorial%202%20-%20Unity%20Project.zip">Tutorial 2: Casting a Ray at A Plane</ulink></para>
+<para>In this tutorial we&apos;ve successfully created a plane from an array of vertices and triangle indexes, then casted a ray at it, then found the point where the ray and the plane intersected. Through this we&apos;ve gained some experience using Visual Studio with Unity and became more familiar with the Editor&apos;s UI. In the next tutorial we will build upon this experience to cover a core part of the <ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref> Library: The <ref refid="_generating_a_graph" kindref="compound">Graph Generator</ref>. </para>
+</sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>
