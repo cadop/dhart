@@ -1,20 +1,24 @@
 using HumanFactors.NativeUtils;
 
-using HumanFactors.NativeUtils;
-
 using System;
 using System.Runtime.InteropServices;
 
 namespace HumanFactors.RayTracing
 {
-    /// <summary>
-    /// Contains distance and mesh_id. Used for returning large amounts of results from the raytracer
-    /// </summary>
+    /*!
+        \brief MeshID and Distance for a casted ray. 
+        
+        \remarks Used for returning large amounts of results from the raytracer.
+
+        \internal 
+            \todo Function .checkhit that returns false if in_distance or in_mesh_id are true
+        \internal
+    */
     [StructLayout(LayoutKind.Sequential)]
     public struct RayResult
     {
-        public float distance;
-        public Int32 mesh_id;
+        public float distance; ///< Distance from origin to the point of intersection. -1 if missed.
+        public Int32 mesh_id; ///< ID of the mesh intersected. -1 if missed.
 
         internal RayResult(float in_distance, int in_mesh_id)
         {
@@ -23,20 +27,19 @@ namespace HumanFactors.RayTracing
         }
     }
 
-    /// <summary>
-    /// An array of rayresults pointed to in unmanaged memory
-    /// </summary>
+    /// \brief An array of RayResults stored in unmanaged memory
     public class RayResults : NativeArray<RayResult>
     {
-        private static readonly int size_multi = 8;
-        /// <summary>
-        /// Initializes a new instance of <see cref="RayResults"/>.
-        /// </summary>
-        /// <param name="in_ptr">Info needed to wrap the managed array.</param>
-        internal RayResults(CVectorAndData in_ptr) : base(in_ptr)
-        {
-        }
+        /// \brief Initializes a new instance of <see cref="RayResults"/>.
+        /// \param in_ptr Info needed to wrap the managed array.
+        internal RayResults(CVectorAndData in_ptr) : base(in_ptr) {}
 
+        /*!
+         \brief Free the me 
+         \note the garbage collector will handle this automatically
+         \warning Do not attempt to use this class after freeing it!
+         \returns True. This is guaranteed to execute properly.  
+        */
         protected override bool ReleaseHandle()
         {
             NativeMethods.C_DestroyRayResults(handle);

@@ -21,7 +21,7 @@ namespace HumanFactors.NativeUtils
     /// usage of the name "vector" here corresponds to the C++ Standard Library's std::vector
     /// object, not the 3D vector described in <see cref="Vector3D" />
     /// </remarks>
-    public struct CVectorAndData
+    internal struct CVectorAndData
     {
         /// <summary>
         /// Pointer to vector's data in C++. This is what .array maps the span to.
@@ -67,10 +67,10 @@ namespace HumanFactors.NativeUtils
         public bool IsValid() => (size > 0 && data != IntPtr.Zero && vector != IntPtr.Zero);
     }
 
-    /// <summary>
-    /// Holds global information relevant to interop.
-    /// </summary>
-    public static class NativeConstants
+    /*! 
+        \brief Holds global information relevant to interop.
+    */
+    internal static class NativeConstants
     {
         /// <summary>
         /// Relative path to the humanfactors DLL.
@@ -78,9 +78,13 @@ namespace HumanFactors.NativeUtils
         public const string DLLPath = "HumanFactors.dll";
     }
 
-    /// <summary>
-    /// Contains some functions useful for interop.
-    /// </summary>
+    /*!
+        \brief Contains some functions useful for converting data for interop.
+        
+        \remarks
+        These functions are frequently called internally in multiple HumanFactors
+        namespaces. 
+    */
     public static class HelperFunctions
     {
         /// <summary> Copy an array of structs from unmanaged memory into managed memory </summary>
@@ -89,7 +93,7 @@ namespace HumanFactors.NativeUtils
         /// <param name="length"> Number of elements in the unmanaged array. </param>
         /// <param name="mangagedArray"> An output parameter for the managed array to write to. This will be resized.</param>
         /// <returns> The new array of structs in managed memory. </returns>
-        public static void MarshalUnmananagedArray2Struct<T>(IntPtr unmanagedArray, int length, out T[] mangagedArray) where T : struct
+        internal static void MarshalUnmananagedArray2Struct<T>(IntPtr unmanagedArray, int length, out T[] mangagedArray) where T : struct
         {
             var size = Marshal.SizeOf(typeof(T));
             mangagedArray = new T[length];
@@ -103,11 +107,16 @@ namespace HumanFactors.NativeUtils
             }
         }
 
-        /// <summary>
-        /// Flatten a given vector array into an array of floats. Useful for preparing for Pinvoke
-        /// </summary>
-        /// <param name="vectors">The array of vectors to flatten</param>
-        /// <returns>An array of floats 3x as big as the array of vectors. </returns>
+        /*! 
+            \brief Convert a  vector array into an array of floats. 
+            
+            \param vectors The array of vectors to convert
+            \returns An array of floats 3x as big as the array of vectors.
+            
+            \internal
+                \remarks Useful for preparing for Pinvoke
+            \endinternal
+        */
         public static float[] FlattenVectorArray(IEnumerable<Vector3D> vectors)
         {
             float[] out_array = new float[vectors.Count() * 3];
@@ -124,23 +133,24 @@ namespace HumanFactors.NativeUtils
             return out_array;
         }
 
-        /// <summary>
-        /// Convert a flat array of floats into a vector of points where <paramref
-        /// name="float_array" /> is true
-        /// </summary>
-        /// <param name="float_array">
-        /// The array of floats. Every 3 values should correspond to a single Vector3D
-        /// </param>
-        /// <param name="result_array">
-        /// Length must be equal to the length of <paramref name="float_array" /> / 3. If the <c>
-        /// false </c> then the Vector3D at this index will be set to null. Otherwise, it will be
-        /// converted from the float array.
-        /// </param>
-        /// <returns> An array of Vector3D </returns>
-        /// <exception cref="ArgumentException">
-        /// The number of elements in <paramref name="result_array" /> is not equal to the number of
-        /// elements in <paramref name="float_array" />/3
-        /// </exception>
+        /*! 
+            \brief Convert a flat array of floats into a vector of points where result_array is true
+            
+            \param float_array
+            The array of floats. Every 3 values should correspond to a single Vector3D
+            \param result_array
+            Array of booleans where if false the Vector3D at this index will be set to null. 
+            Otherwise, it will be converted from the float array.
+           
+            \returns An array of Vector3D where every 3 floats in float_array is a single vector3D.
+            
+            \remarks 
+            This function is used frequently internally to handle results of ray intersections.
+
+            \throws ArgumentException
+            The number of elements in result_array is not equal to the number of
+            elements in float_array / 3
+       */
         public static Vector3D[] FloatArrayToVectorArray(float[] float_array, bool[] result_array)
         {
             int size = float_array.Length / 3;

@@ -26,11 +26,14 @@ namespace HumanFactors.Pathfinding
         /// <summary>
         /// Initializes a new path from a pointer to a path in unmanaged memory.
         /// </summary>
-        public Path(CVectorAndData ptrs) : base(ptrs) { }
+        internal Path(CVectorAndData ptrs) : base(ptrs) { }
 
-        /// <summary>
-        /// Free the path in unmanaged memory. 
-        /// </summary>
+        /*!
+			 \brief Free the native memory managed by this class. 
+			 \note the garbage collector will handle this automatically
+			 \warning Do not attempt to use this class after freeing it!
+			 \returns True. This is guaranteed to execute properly.  
+        */
         protected override bool ReleaseHandle()
         {
             NativeMethods.C_DestroyPath(handle);

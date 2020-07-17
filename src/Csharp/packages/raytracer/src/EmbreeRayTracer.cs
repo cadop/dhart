@@ -7,165 +7,237 @@ using System.Linq.Expressions;
 using System.Runtime.InteropServices;
 using System.Runtime.Remoting.Messaging;
 
+/*!
+    \brief Cast rays to determine if and where they intersect geometry.
+
+    \details
+    The basics of raytracing entail casting a ray from an origin point in a
+    specific direction and determining whether or not it intersects with a
+    set of geometry. Certain functions can even determine where the intersection
+    occured. Generally, every RayTracer will contain a set of geometry and provide
+    functions for casting rays from an origin point in a specific direciton. Some
+    generate an accelerated structure from geometry called a Bounding Volume
+    Hierarchy, or BVH. A BVH can drastically decrease the time it takes to
+    calculate ray intersections, but can be more complicated to manage compared
+    to standard buffers of geometry.
+
+    \see EmbreeRaytracer for an implementation of a raytracer using Intel's Embree Library as a backend.
+ */
+
 namespace HumanFactors.RayTracing
 {
+    /*!
+        \brief Cast rays with Intel's Embree raytracing library.
 
-    /// <summary> A wrapper for Intel's Embree raytracing library. </summary>
+        \remarks
+        All functions in this class first require the creation of an EmbreeBVH with valid mesh geometry.
+
+        \see Geometry.MeshInfo for details on converting a mesh to a format that HumanFactors can interpret
+        \see EmbreeBVH for details on generating a BVH from geometry.
+    */
+
     public static class EmbreeRaytracer
-    {
-        /// <summary>
-        /// Fire a single ray, and get a point in return if it intersects. If it misses, an invalid
-        /// point is returned.
-        /// </summary>
-        /// <param name="bvh"> Geometry to intersect. </param>
-        /// <param name="x"> Origin X component </param>
-        /// <param name="y"> Origin Y component </param>
-        /// <param name="z"> Origin Z component </param>
-        /// <param name="dx"> Direction X component </param>
-        /// <param name="dy"> Direction Y component </param>
-        /// <param name="dz"> Direction Z component </param>
-        /// <param name="max_distance">
-        /// Maximum distance to consider for intersections. Set to -1 for infinite
-        /// </param>
-        /// <returns>
-        /// A Vector3D containing the hitpoint. If no hit was detected, the point will be invalid.
-        /// This can easily be checked using Vector3D's <see cref="Vector3D.IsValid()" />
-        /// </returns>
-        public static Vector3D IntersectForPoint(
-            EmbreeBVH bvh,
-            float x,
-            float y,
-            float z,
-            float dx,
-            float dy,
-            float dz,
-            float max_distance = -1
-        ) => NativeMethods.C_IntesectPoint(bvh.Pointer, x, y, z, dx, dy, dz, max_distance);
+	{
+		/*!
+            \brief Cast a single ray, and get a point in return if it intersects any geometry.
 
-        /// <summary>
-        /// Fire a single ray from origin in direction, and get the hitpoint if it intersects.
-        /// </summary>
-        /// <param name="bvh"> An embree bvh containing the geometry to intersect with </param>
-        /// <param name="origin"> x,y,z location where the ray is fired from </param>
-        /// <param name="direction"> x,y,z direction for the ray to be fired in </param>
-        /// <param name="max_distance"> Maximum distance to consider for intersection </param>
-        /// <returns>
-        /// <returns> A vector of <see cref="Vector3D" /> for the hitpoint of each ray fired. If a
-        /// ray didn't hit, its point will be invalid, checkable using <see
-        /// cref="Vector3D.IsValid()" />. </returns>
-        /// </returns>
-        public static Vector3D IntersectForPoint(EmbreeBVH bvh, Vector3D origin, Vector3D direction, float max_distance = -1)
-            => IntersectForPoint(bvh, origin.x, origin.y, origin.z, direction.x, direction.y, direction.z, max_distance);
+            \param bvh BVH of geometry to intersect.
+            \param x x component of the ray's origin point
+            \param y y component of the ray's origin point
+            \param z z component of the ray's origin point
+            \param dx x component of the ray's direction
+            \param dy y component of the ray's direction
+            \param dz z component of the ray's direction
+            \param max_distance Maximum distance to consider for intersections. Set to -1 for infinite
 
-        /// <summary> Fire multiple rays and recieve hitpoints in return. </summary>
-        /// <param name="bvh"> Geometry to intersect with. </param>
-        /// <param name="origins"> A list of x,y,z coordinates to fire rays from. </param>
-        /// <param name="directions"> A list of x,y,z directions to fire in. </param>
-        /// <param name="max_distance"> Maximum distance to consider for intersection. </param>
-        /// <returns>
-        /// A vector of <see cref="Vector3D" /> for the hitpoint of each ray fired. If a ray didn't
-        /// hit, its point will be invalid, checkable using <see cref="Vector3D.IsValid()" />.
-        /// </returns>
-        /// <remarks>
-        /// <para> Can be fired in 3 configurations: </para>
-        /// <list type="bullet">
-        /// <item>
-        /// <font color="#2a2a2a"> Equal amount of directions/origins: Fire a ray for every pair of
-        /// origin/direction in order. i.e. (origin[0], direction[0]), (origin[1], direction[1]) </font>
-        /// </item>
-        /// <item>
-        /// <font color="#2a2a2a"> One direction, multiple origins: Fire a ray in the given
-        /// direction from each origin point in origins. </font>
-        /// </item>
-        /// <item>
-        /// <font color="#2a2a2a"> One origin, multiple directions: Fire a ray from the origin point
-        /// in each direction in directions </font>
-        /// </item>
-        /// </list>
-        /// </remarks>
-        /// <exception cref="System.ArgumentException">
-        /// Length of <paramref name="directions" /> and <paramref name="origins" /> did not match
-        /// any of the valid cases.
-        /// </exception>
-        public static Vector3D[] IntersectForPoints(
-            EmbreeBVH bvh,
-            IEnumerable<Vector3D> origins,
-            IEnumerable<Vector3D> directions,
-            float max_distance
-        ) => NativeMethods.C_IntersectPoints(bvh.Pointer, origins, directions, max_distance);
+            \remarks
+            Consider calling \link IntersectForPoints \endlink when casting mutliple rays at once since it can
+            make use of parallel processing to drastically reduce the time it takes to cast each ray.
 
-        /// <summary>
-        /// Fire a single ray and get the distance to its hit and the meshID if it hit anything. If
-        /// it missed, then distance will be -1.
-        /// </summary>
-        /// <param name="bvh"> An embree bvh containing the geometry to intersect with </param>
-        /// <param name="origin"> x,y,z locations where is fired from </param>
-        /// <param name="direction"> x,y,z direction for the ray to be fired in </param>
-        /// <param name="max_distance"> Maximum distance to consider for intersection </param>
-        /// <returns>
-        /// A <see cref="RayResult" /> with a distance to the hitpoint and meshid it hit. If the
-        /// distance is equal to -1, then the ray missed
-        /// </returns>
-        public static RayResult IntersectForDistance(
-            EmbreeBVH bvh,
-            Vector3D origin,
-            Vector3D direction,
-            float max_distance
-        ) => NativeMethods.C_IntersectRay(bvh.Pointer, origin, direction, max_distance);
+            \returns
+            A Vector3D containing the hitpoint. If no hit was detected, the point will be invalid.
+            This can easily be checked using Vector3D.IsValid.
+        */
 
-        /// <summary> Fire multiple rays for distance and meshid. </summary>
-        /// <param name="bvh">
-        /// An <see cref="EmbreeBVH" /> containing the geometry to intersect with.
-        /// </param>
-        /// <param name="origins"> x,y,z locations where rays are fired from. </param>
-        /// <param name="directions"> x,y,z direction for the ray to be fired in. </param>
-        /// <param name="max_distance"> Maximum distance to consider for intersection. </param>
-        /// <returns>
-        /// <see cref="RayResults" /> for every ray fired in order. Rays that missed will have a
-        /// distance and meshid of -1.
-        /// </returns>
-        /// <remarks>
-        /// <para> Can be fired in 3 configurations: </para>
-        /// <list type="bullet">
-        /// <item>
-        /// <font color="#2a2a2a"> Equal amount of directions/origins: Fire a ray for every pair of
-        /// origin/direction in order. i.e. (origin[0], direction[0]), (origin[1], direction[1]). </font>
-        /// </item>
-        /// <item>
-        /// <font color="#2a2a2a"> One direction, multiple origins: Fire a ray in the given
-        /// direction from each origin point in origins. </font>
-        /// </item>
-        /// <item>
-        /// <font color="#2a2a2a"> One origin, multiple directions: Fire a ray from the origin point
-        /// in each direction in directions. </font>
-        /// </item>
-        /// </list>
-        /// </remarks>
-        public static RayResults IntersectForDistances(
-            EmbreeBVH bvh,
-            IEnumerable<Vector3D> origins,
-            IEnumerable<Vector3D> directions,
-            float max_distance
-        ) => new RayResults(NativeMethods.C_IntersectRays(bvh.Pointer, origins, directions, max_distance));
+		public static Vector3D IntersectForPoint(
+			EmbreeBVH bvh,
+			float x,
+			float y,
+			float z,
+			float dx,
+			float dy,
+			float dz,
+			float max_distance = -1
+		) => NativeMethods.C_IntesectPoint(bvh.Pointer, x, y, z, dx, dy, dz, max_distance);
 
-        /// <summary>
-        /// Fire one or more occlusion rays in C++. Occlusion rays are faster than standard rays,
-        /// however are only capable of returning or not they hit anything.
-        /// </summary>
-        /// <param name="bvh"> A valid Embree BVH. </param>
-        /// <param name="origin"> One or more origins. </param>
-        /// <param name="direction"> One or more directions. </param>
-        /// <param name="max_distance">
-        /// Maximum distance that a ray can travel. Any hits beyond this point are not counted.
-        /// </param>
-        /// <returns>
-        /// An array of <c> true </c> or <c> false </c> values indicating hits or misses respectively.
-        /// </returns>
-        public static bool[] IntersectOccluded(
-            EmbreeBVH bvh,
-            IEnumerable<Vector3D> origin,
-            IEnumerable<Vector3D> direction,
-            float max_distance
-        ) => NativeMethods.C_FireOcclusionRays(bvh.Pointer, origin, direction, max_distance);
-    }
+		/*!
+            \brief Cast a single ray, and get a point in return if it intersects any geometry.
+
+            \param bvh BVH of geometry to intersect.
+            \param origin Origin point to cast the ray from.
+            \param direction direction to cast the ray in.
+            \param max_distance Maximum distance to consider for intersections.Set to -1 for infinite
+
+            \returns
+            A Vector3D containing the hitpoint. If no hit was detected, the point will be invalid.
+            This can easily be checked using Vector3D.IsValid.
+
+            \details
+            This calls the other overload with the components of origin and direction.
+
+            \remarks
+            Consider calling \link IntersectForPoints \endlink when casting mutliple rays at once since it can
+            make use of parallel processing to drastically reduce the time it takes to get the
+            results of every ray.
+
+        */
+
+		public static Vector3D IntersectForPoint(EmbreeBVH bvh, Vector3D origin, Vector3D direction, float max_distance = -1)
+			=> IntersectForPoint(bvh, origin.x, origin.y, origin.z, direction.x, direction.y, direction.z, max_distance);
+
+		/*!
+            \brief Cast multiple rays and recieve hitpoints in return.
+
+            \param bvh  A valid BVH containing geometry to intersect with.
+            \param origins A list of x,y,z coordinates to cast rays in.
+            \param directions A list of x,y,z directions to fire in.
+            \param max_distance Maximum distance to consider for intersection.
+
+            \returns
+            An array of Vector3D for the hitpoint of each ray casted in order. If a ray didn't intersect any
+            geometry, then its point will be invalid, checkable using Vector3D.IsValid()
+
+            \details
+            Can be casted in 3 configurations: </para>
+            <list type="bullet">
+            <item>
+            Equal amount of directions/origins: Cast a ray for every pair of
+            origin/direction in order. i.e. (origin[0], direction[0]), (origin[1], direction[1]), etc.
+            </item>
+            <item>
+            One direction, multiple origins: Fire a ray in the given
+            direction from each origin point in origins.
+            </item>
+            <item>
+             One origin, multiple directions: Fire a ray from the origin point
+            in each direction in directions.
+            </item>
+            </list>
+
+            \throws System.ArgumentException
+            Length of directions and origins did not match any of the valid cases.
+        */
+
+		public static Vector3D[] IntersectForPoints(
+			EmbreeBVH bvh,
+			IEnumerable<Vector3D> origins,
+			IEnumerable<Vector3D> directions,
+			float max_distance
+		) => NativeMethods.C_IntersectPoints(bvh.Pointer, origins, directions, max_distance);
+
+		/*!
+            \brief Cast a single ray and get the distance to its hit and the meshID if it hit anything
+
+            \param bvh A valid BVH containing the geometry to intersect with.
+            \param origin x,y,z coordinates for the ray's origin point.
+            \param direction x,y,z coordinates for the direction for the ray to be casted in.
+            \param max_distance Maximum distance to consider for intersection. Set to -1 for infinite.
+
+            \remarks
+            This can be faster than \link IntersectForPoints \endlink,  as the data returned is lighter. If you only need
+            the distance or meshID, this function is recommended.
+
+            \returns
+            A RayResult containing the distance to the hitpoint and meshid it hit. If the
+            distance is equal to -1, then the ray did not intersect any geometry.
+        */
+
+		public static RayResult IntersectForDistance(
+			EmbreeBVH bvh,
+			Vector3D origin,
+			Vector3D direction,
+			float max_distance
+		) => NativeMethods.C_IntersectRay(bvh.Pointer, origin, direction, max_distance);
+
+		/*!
+            \brief Cast multiple rays and recieve the distance and meshid of geometry intersected by each in return.
+
+            \param bvh  A valid BVH containing geometry to intersect with.
+            \param origins A list of x, y, z coordinates to cast rays in.
+            \param directions A list of x, y, z directions to fire in.
+            \param max_distance Maximum distance to consider for intersection.
+
+            \returns
+            An array of RayResults for the hitpoint of each ray casted in order. If a ray didn't intersect any
+            geometry, then its distance and meshid will be -1.
+
+            \details
+            Can be casted in 3 configurations: </para>
+            <list type = "bullet">
+            <item>
+            Equal amount of directions/origins: Cast a ray for every pair of
+            origin/direction in order.i.e. (origin[0], direction[0]), (origin[1], direction[1]), etc.
+            </item>
+            <item>
+            One direction, multiple origins: Cast a ray in the given
+            direction from each origin point in origins.
+            </item>
+            <item>
+             One origin, multiple directions: Cast a ray from the origin point
+            in each direction in directions
+            </item>
+            </list>
+
+            \throws System.ArgumentException
+            Length of directions and origins did not match any of the valid cases.
+        */
+
+		public static RayResults IntersectForDistances(
+			EmbreeBVH bvh,
+			IEnumerable<Vector3D> origins,
+			IEnumerable<Vector3D> directions,
+			float max_distance
+		) => new RayResults(NativeMethods.C_IntersectRays(bvh.Pointer, origins, directions, max_distance));
+
+		/*!
+            \brief Determine if any geometry occludes a point from a direction.
+
+            \param bvh A valid Embree BVH.
+            \param origin One or more origins.
+            \param direction One or more directions.
+            \param max_distance Maximum distance that a ray can travel. Any hits beyond this point are not counted.
+
+            \returns An array of true or false values indicating hits or misses respectively.
+
+            \details
+            Can be casted in 3 configurations:
+            </para>
+            <list type = "bullet" >
+            <item>
+            Equal amount of directions/origins: Cast a ray for every pair of
+            origin/direction in order.i.e. (origin[0], direction[0]), (origin[1], direction[1]), etc.
+            </item>
+            <item>
+            One direction, multiple origins: Cast a ray in the given
+            direction from each origin point in origins.
+            </item>
+            <item>
+             One origin, multiple directions: Cast a ray from the origin point
+            in each direction in directions
+            </item>
+            </list>
+
+            \remarks
+            Occlusion rays are the fastest raycasting function, however are only capable of returning or
+            not they hit anything. This can be useful for line of sight checks. Will execute in parallel
+            if multiple origins/directions are supplied.
+        */
+
+		public static bool[] IntersectOccluded(
+			EmbreeBVH bvh,
+			IEnumerable<Vector3D> origin,
+			IEnumerable<Vector3D> direction,
+			float max_distance
+		) => NativeMethods.C_FireOcclusionRays(bvh.Pointer, origin, direction, max_distance);
+	}
 }

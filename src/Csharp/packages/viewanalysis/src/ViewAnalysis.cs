@@ -8,22 +8,32 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Runtime.InteropServices;
 
+/*! \brief Analyze the view from from points in the environment
+
+    \details
+    View analysis is based on taking the perspective of an observer in the environemnt
+    from the human scale, then using raycasting to evaluate what is visible to them.
+    All rays casted are distributed equally in a sphere around the observer, ensuring equal
+    coverage. The observer's vertical field of view can be limited to only cast rays
+    within a certain angle above and below their eye level.
+
+    \see ViewAnalysis for all ViewAnalysis functions.
+    \see HumanFactors.RayTracing for details on raycasting. 
+*/
 namespace HumanFactors.ViewAnalysis
 {
-    /// <summary>
-    /// The type of aggregation method to use for <see
-    /// cref="ViewAnalysis.ViewAnalysisAggregate(EmbreeBVH, IEnumerable{Vector3D}, int, float,
-    /// float, float, ViewAggregateType)" />.
-    /// </summary>
+    /*! 
+        \brief The type of aggregation method to use for ViewAnalysis.ViewAnalysisAggregate
+    */
     public enum ViewAggregateType
     {
-        /// <summary> The number of rays that hit an object. </summary>
+        /// <summary> Count the number of rays that intersected any geometry. </summary>
         COUNT = 0,
 
-        /// <summary> The sum of distances from the origin to each hitpoint. </summary>
+        /// <summary> Add the distance from the observer to the point of intersection for all rays casted </summary>
         SUM = 1,
 
-        /// <summary> The average of the distance from the origin to each hit point. </summary>
+        /// <summary>  Average the distance from the origin to each point of intersection. </summary>
         AVERAGE = 2,
 
         /// <summary> The maximum distance from the origin to any hitpoint. </summary>
@@ -33,38 +43,37 @@ namespace HumanFactors.ViewAnalysis
         MIN = 4
     }
 
-    /// <summary> Contains functions for performing view analysis. </summary>
+    /*!
+        \brief Functions for analyzing the view of an observer in an environment at human scale.
+        
+        \note All of these functions internally use a raytracer, so a HumanFactors.RayTracing.EmbreeBVH is required.
+    */
     public static class ViewAnalysis
     {
-        /// <summary> Conduct view analysis and aggregate the results for each node. </summary>
-        /// <param name="bvh"> The Geometry to intersect with. </param>
-        /// <param name="nodes"> Points to perform view analysis from. </param>
-        /// <param name="ray_count">
-        /// Number of rays to fire. Higher values provide more accurate analysis, but increase the runtime.
-        /// </param>
-        /// <param name="upward_fov">
-        /// Maximum angle in degrees above the viewer's eye level that is considered.
-        /// </param>
-        /// <param name="downward_fov">
-        /// Maximum angle in degrees below the viewer's eye level that is considered.
-        /// </param>
-        /// <param name="height">
-        /// Height of the observer. Nodes are offset this distance from the ground before analysis
-        /// is performed
-        /// </param>
-        /// <param name="type">
-        /// How the distances for all hits should be aggregated. See <see cref="ViewAggregateType"
-        /// /> for a list of all types and what they do.
-        /// </param>
-        /// <returns>
-        /// An ordered array of floats corresponding to the score for each node in nodes.
-        /// </returns>
-        /// <remarks>
-        /// This function is much lighter in memory than <see
-        /// cref="ViewAnalysis.ViewAnalysisStandard(EmbreeBVH, IEnumerable{Vector3D}, int, float,
-        /// float, float)" /> since all operations are done in place on single floats. Use this as a
-        /// faster alternative if the scores are all that's needed.
-        /// </remarks>
+        /*! 
+            \brief  Conduct view analysis and aggregate the results for each node.
+            
+            \param bvh the Geometry to intersect with.
+            \param nodes Observer locations to perform view analysis from.
+            \param  ray_count Number of rays to fire. Higher values provide more 
+                    accurate analysis, but increase the runtime of this function
+            \param upward_fov Maximum angle in degrees above the viewer's eye level that is considered.
+            \param downward_fov Maximum angle in degrees below the viewer's eye level that is considered.
+            \param height Height of the observer. Nodes are offset this distance from the 
+                    ground before the analysis is performed.
+            \param type How the distances for all hits should be aggregated. See \link ViewAggregateType \endlink
+                        for a list of all aggregation methods.
+            
+            \return An ordered array of floats corresponding to the aggregated score for each node in nodes.
+            
+            \details 
+            The rays for each node will be casted in parallel using all available cores on the host's machine.
+            
+            \remarks 
+            This function is much lighter in memory than \link ViewAnalysisStandard \endlink since all
+            operations are done in place on single floats. Use this as a faster alternative 
+            if the scores of nodes are all that's needed.
+        */
         public static ManagedFloatArray ViewAnalysisAggregate(
             EmbreeBVH bvh,
             IEnumerable<Vector3D> nodes,
@@ -83,32 +92,37 @@ namespace HumanFactors.ViewAnalysis
                     type
                 ));
 
-        /// <summary> Conduct view analysis and get the results for each ray hit. </summary>
-        /// <param name="bvh"> The Geometry to intersect with. </param>
-        /// <param name="nodes"> Points to perform view analysis from. </param>
-        /// <param name="ray_count">
-        /// Number of rays to fire. Higher values provide more accurate analysis, but increase the runtime.
-        /// </param>
-        /// <param name="upward_fov">
-        /// Maximum angle in degrees above the viewer's eye level that is considered.
-        /// </param>
-        /// <param name="downward_fov">
-        /// Maximum angle in degrees below the viewer's eye level that is considered.
-        /// </param>
-        /// <param name="height">
-        /// Height of the observer. Nodes are offset this distance from the ground before analysis
-        /// is performed.
-        /// </param>
-        /// <returns>
-        /// A 2 dimensional array of results for each node and each ray fired. For example, every
-        /// ray for node one is located at row 1, and the results for node 2 are located at row 2.
-        /// </returns>
-        /// <remarks>
-        /// Note that the number of rays fired may exactly match <paramref name="ray_count" />
-        /// depending on the provided field of view restrictions. The hitpoints for each ray in the
-        /// returned array can be determined using the directions from <see
-        /// cref="SphericallyDistributeRays(int, float, float)" />.
-        /// </remarks>
+        /*!
+            \brief Conduct View Analysis and access the results of every ray casted for every node.
+            
+            \param bvh Geometry to intersect with.
+            \param nodes Observer locations to perform view analysis from.
+            \param ray_count Number of rays to fire.Higher values provide more
+                   accurate analysis, but increase the runtime and memory consumption
+                   of this function.
+            \param upward_fov Maximum angle in degrees above the viewer's eye level that is considered.
+            \param downward_fov Maximum angle in degrees below the viewer's eye level that is considered.
+            \param height Height of the observer. Nodes are offset this distance from the
+                   ground before the analysis is performed.
+            
+            \return
+            A `nodes.Count()` by `num_rays` 2 dimensional array of results for each node and each ray casted. 
+            For example, every ray for node one is located at row 1, and the results for every ray casted
+            from node 2 are located at row 2. 
+        
+            \details 
+            The rays for each node will be casted in parallel using all available cores on the host's machine.
+            
+            \warning
+            The number of rays casted may not exactly match ray_count depending on the provided 
+            field of view restrictions. 
+
+            \note 
+            The hitpoints for each ray in the returned array can be determined using the directions
+            SphericallyDistributeRays() with the same fov and ray_count parameters. Failures to
+            intersect geometry will return -1.
+            
+            */
         public static ResultArray ViewAnalysisStandard(
             EmbreeBVH bvh,
             IEnumerable<Vector3D> nodes,
@@ -125,11 +139,24 @@ namespace HumanFactors.ViewAnalysis
                     height
                 ));
 
-        /// <summary> Distribute directions equally in a sphere. </summary>
-        /// <param name="num_rays"> The number of rays to generate. </param>
-        /// <param name="upward_fov"> Maximum angle in degrees upwards to generate . </param>
-        /// <param name="downward_fov"> Maximum angle in degrees downwards to generate. </param>
-        /// <returns> An array of equally distributed directions. </returns>
+        /*!
+            \brief Distribute a set of points equally on a unit sphere.
+
+            \param num_rays The number of points to distribute.
+            \param upward_fov Maximum angle above the sphere to generate points in degrees,
+            \param downward_fov Maximum angle in degrees downwards to generate.
+            
+            \returns An array of equally distributed points on a unit sphere.
+
+            \warning
+            The number of rays casted may not exactly match ray_count depending on the provided 
+            field of view restrictions. 
+
+            \note 
+            This is the same function used internally by view analysis to equally distribute
+            ray directions. 
+
+        */
         public static DirectionArray SphericallyDistributeRays(
             int num_rays,
             float upward_fov = 50f
