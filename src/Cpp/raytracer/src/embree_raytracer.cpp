@@ -202,20 +202,16 @@ namespace HF::RayTracer {
 		if (hit.hit.geomID == RTC_INVALID_GEOMETRY_ID || (mesh_id > -1 && hit.hit.geomID != mesh_id)) return false;
 		
 		// If the ray did hit, update the node position by translating the distance along the directions
-		else {
+		// This REQUIRES a normalized vector
+		else 
+		{
+			// Translate the point along the direction vector 
 			x = x + (dx * hit.ray.tfar);
 			y = y + (dy * hit.ray.tfar);
 			z = z + (dz * hit.ray.tfar);
+
 			return true;
 		}
-		/*
-		else {
-			x = x + (dx * hit.ray.tfar);
-			y = y + (dy * hit.ray.tfar);
-			z = z + (dz * hit.ray.tfar);
-			return true;
-		}
-		*/
 	}
 
 	std::vector<char> EmbreeRayTracer::FireRays(
