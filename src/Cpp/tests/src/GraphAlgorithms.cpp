@@ -8,6 +8,7 @@
 #include <graph.h>
 #include <edge.h>
 #include <node.h>
+#include <Constants.h>
 
 #include "analysis_C.h"
 #include "graph.h"
@@ -17,7 +18,7 @@ namespace HF {
 	TEST(_GraphAlgorithm, BasicGenerator) {
 		//auto mesh = Geometry::LoadMeshObjects("plane.obj");
 		auto mesh = Geometry::LoadMeshObjects("energy_blob_zup.obj");
-
+		/*
 		std::vector<float> mesh_verts = mesh[0].getRawVertices();
 		std::vector<std::array<float, 3>> mesh_arr = mesh[0].GetVertsAsArrays();
 
@@ -31,7 +32,9 @@ namespace HF {
 
 		std::cout << "First 3 Raw vertices: " << mesh_verts_rot[0] << ", " << mesh_verts_rot[1] << ", " << mesh_verts_rot[2] << std::endl;
 		std::cout << "First 3 vertices in array: " << mesh_arr_rot[0] << std::endl;
-		
+		*/
+
+
 		/*
 		Before Rot, First 3 Raw vertices: -20.0794, -18.9406, -8.27922e-07
 		Before Rot, First 3 vertices in array: (20.1406,18.8423,8.23625e-07)
@@ -46,7 +49,7 @@ namespace HF {
 
 		auto g = GG.BuildNetwork(
 			std::array<float, 3>{-22.4280376, -12.856843, 5.4826779},
-			std::array<float, 3>{10.0f, 10.0f, 70.0f},
+			std::array<double, 3>{10.0, 10.0, 70.0},
 			50,
 			10,
 			40,
@@ -58,18 +61,6 @@ namespace HF {
 		printf("Graph size %i\n", g.size());
 		g.Compress();
 		ASSERT_EQ(g.size(), 29);
-
-		/* Python Ground Truth
-			Start = [-22.4280376, -12.856843, 5.4826779]
-			Spacing = [10,10,70]
-			max nodes = 50
-			Upstep = 10
-			Up slope = 40
-			Downstep = 10
-			Downslope = 1
-			max connections out = 2
-		*/
-
 	}
 
 }
