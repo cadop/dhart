@@ -1,0 +1,185 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.18">
+  <compounddef id="class_human_factors_1_1_geometry_1_1_o_b_j_loader" kind="class" language="C#" prot="public">
+    <compoundname>HumanFactors::Geometry::OBJLoader</compoundname>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_human_factors_1_1_geometry_1_1_o_b_j_loader_1a098857909670796a533833086d753fb2" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_human_factors_1_1_geometry_1_1_mesh_info" kindref="compound">MeshInfo</ref></type>
+        <definition>static MeshInfo HumanFactors.Geometry.OBJLoader.LoadOBJ</definition>
+        <argsstring>(string path, float xrot=0, float yrot=0, float zrot=0)</argsstring>
+        <name>LoadOBJ</name>
+        <param>
+          <type>string</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>xrot</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>yrot</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>zrot</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>Load an obj from the OBJ file at the given filepath. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Path to a valid OBJ file. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>xrot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Degrees to rotate the mesh on the x axis. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>yrot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Degrees to rotate the mesh on the y axis. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>zrot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Degrees to rotate the mesh on the z axis.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>An instance of <ref refid="class_human_factors_1_1_geometry_1_1_mesh_info" kindref="compound">MeshInfo</ref> containing the mesh loaded from the OBJ at path.</para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>System.IO.FileNotFoundException</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>No file was found at path. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="class_human_factors_1_1_exceptions_1_1_invalid_mesh_exception" kindref="compound">HumanFactors.Exceptions.InvalidMeshException</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The file at the path did not represent a valid OBJ.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="remark"><para>Use the other overload if you want to use a CommonRotation on the mesh.</para>
+</simplesect>
+</para>
+<internal><para><xrefsect id="todo_1_todo000005"><xreftitle>Todo</xreftitle><xrefdescription><para>Support group type </para>
+<para>Support multiple meshes </para>
+</xrefdescription></xrefsect></para>
+<para><programlisting><codeline><highlight class="normal">//<sp/>Loading<sp/>a<sp/>mesh<sp/>from<sp/>plane.obj<sp/>with<sp/>no<sp/>rotation.</highlight></codeline>
+<codeline><highlight class="normal">MeshInfo<sp/>MI<sp/>=<sp/>OBJLoader.LoadOBJ(&quot;plane.obj&quot;);</highlight></codeline>
+</programlisting> </para>
+</internal>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/geometry/src/OBJLoader.cs" line="41" column="32" bodyfile="src/Csharp/packages/geometry/src/OBJLoader.cs" bodystart="41" bodyend="45"/>
+        <references refid="class_human_factors_1_1_geometry_1_1_native_methods_1a9eeec91b00cb0221c59ebedeac8dcd63" compoundref="_geometry_native_8cs" startline="36" endline="46">HumanFactors.Geometry.NativeMethods.C_LoadOBJ</references>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_geometry_1_1_o_b_j_loader_1a3901e6fb42296a1ace65f52aefb83ff3" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_human_factors_1_1_geometry_1_1_mesh_info" kindref="compound">MeshInfo</ref></type>
+        <definition>static MeshInfo HumanFactors.Geometry.OBJLoader.LoadOBJ</definition>
+        <argsstring>(string path, Vector3D rotation)</argsstring>
+        <name>LoadOBJ</name>
+        <param>
+          <type>string</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref></type>
+          <declname>rotation</declname>
+        </param>
+        <briefdescription>
+<para>Load an obj from the OBJ file at the given filepath. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Path to a valid OBJ file. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Degrees to rotate the mesh in the x,y, and z direction after loading.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>An instance of <ref refid="class_human_factors_1_1_geometry_1_1_mesh_info" kindref="compound">MeshInfo</ref> containing the mesh loaded from the OBJ at path.</para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>System.IO.FileNotFoundException</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>No file was found at path. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="class_human_factors_1_1_exceptions_1_1_invalid_mesh_exception" kindref="compound">HumanFactors.Exceptions.InvalidMeshException</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The file at the path did not represent a valid OBJ.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="remark"><para>The rotation parameter can be used with the rotations in <ref refid="class_human_factors_1_1_geometry_1_1_common_rotations" kindref="compound">CommonRotations</ref> to easily perform common rotations on meshes. This is useful if you&apos;re loading a mesh that is Y-up and you need to convert it to Z-up for use in the GraohGenerator.</para>
+</simplesect>
+</para>
+<internal><para><xrefsect id="todo_1_todo000006"><xreftitle>Todo</xreftitle><xrefdescription><para>Support group type </para>
+<para>Support multiple meshes </para>
+</xrefdescription></xrefsect></para>
+<para><programlisting><codeline><highlight class="normal">//<sp/>Loading<sp/>a<sp/>mesh<sp/>from<sp/>plane.obj<sp/>with<sp/>no<sp/>rotation.</highlight></codeline>
+<codeline><highlight class="normal">MeshInfo<sp/>MI<sp/>=<sp/>OBJLoader.LoadOBJ(&quot;plane.obj&quot;);</highlight></codeline>
+</programlisting> </para>
+</internal>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/geometry/src/OBJLoader.cs" line="74" column="24"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Load mesh geometry from OBJ files on disk. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="remark"><para>Internally is doing the same work as calling <ref refid="class_human_factors_1_1_geometry_1_1_mesh_info" kindref="compound">MeshInfo</ref>&apos;s constructor, so loaders for other filetypes can be created. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="src/Csharp/packages/geometry/src/OBJLoader.cs" line="12" column="19" bodyfile="src/Csharp/packages/geometry/src/OBJLoader.cs" bodystart="13" bodyend="75"/>
+    <listofallmembers>
+      <member refid="class_human_factors_1_1_geometry_1_1_o_b_j_loader_1a098857909670796a533833086d753fb2" prot="public" virt="non-virtual"><scope>HumanFactors::Geometry::OBJLoader</scope><name>LoadOBJ</name></member>
+      <member refid="class_human_factors_1_1_geometry_1_1_o_b_j_loader_1a3901e6fb42296a1ace65f52aefb83ff3" prot="public" virt="non-virtual"><scope>HumanFactors::Geometry::OBJLoader</scope><name>LoadOBJ</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

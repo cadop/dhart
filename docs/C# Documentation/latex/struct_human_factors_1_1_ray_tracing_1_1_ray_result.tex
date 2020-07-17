@@ -2,25 +2,81 @@
 \label{struct_human_factors_1_1_ray_tracing_1_1_ray_result}\index{HumanFactors.RayTracing.RayResult@{HumanFactors.RayTracing.RayResult}}
 
 
-Contains distance and mesh\+\_\+id. Used for returning large amounts of results from the raytracer  
+Mesh\+ID and Distance for a casted ray.  
 
 
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{struct_human_factors_1_1_ray_tracing_1_1_ray_result_adf3eb5cc80f3153a2d777f88710397cf}\label{struct_human_factors_1_1_ray_tracing_1_1_ray_result_adf3eb5cc80f3153a2d777f88710397cf}} 
-float {\bfseries distance}
+float \mbox{\hyperlink{struct_human_factors_1_1_ray_tracing_1_1_ray_result_adf3eb5cc80f3153a2d777f88710397cf}{distance}}
+\begin{DoxyCompactList}\small\item\em Distance from origin to the point of intersection. -\/1 if missed. \end{DoxyCompactList}\item 
+Int32 \mbox{\hyperlink{struct_human_factors_1_1_ray_tracing_1_1_ray_result_a9f9d840fe8a986df68e3d30faf8241ec}{mesh\+\_\+id}}
+\begin{DoxyCompactList}\small\item\em ID of the mesh intersected. -\/1 if missed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Package Functions}
+\begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{struct_human_factors_1_1_ray_tracing_1_1_ray_result_a9f9d840fe8a986df68e3d30faf8241ec}\label{struct_human_factors_1_1_ray_tracing_1_1_ray_result_a9f9d840fe8a986df68e3d30faf8241ec}} 
-Int32 {\bfseries mesh\+\_\+id}
+\mbox{\hyperlink{struct_human_factors_1_1_ray_tracing_1_1_ray_result_a9cc88d0a4de2fed0c9c17e9d5878f54e}{Ray\+Result}} (float in\+\_\+distance, int in\+\_\+mesh\+\_\+id)
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Contains distance and mesh\+\_\+id. Used for returning large amounts of results from the raytracer 
+Mesh\+ID and Distance for a casted ray. 
+
+\begin{DoxyRemark}{Remarks}
+Used for returning large amounts of results from the raytracer.
+\end{DoxyRemark}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000009}{Todo}}]Function .checkhit that returns false if in\+\_\+distance or in\+\_\+mesh\+\_\+id are true \end{DoxyRefDesc}
+
+
+Definition at line 18 of file Ray\+Result\+Structs.\+cs.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{struct_human_factors_1_1_ray_tracing_1_1_ray_result_a9cc88d0a4de2fed0c9c17e9d5878f54e}\label{struct_human_factors_1_1_ray_tracing_1_1_ray_result_a9cc88d0a4de2fed0c9c17e9d5878f54e}} 
+\index{HumanFactors.RayTracing.RayResult@{HumanFactors.RayTracing.RayResult}!RayResult@{RayResult}}
+\index{RayResult@{RayResult}!HumanFactors.RayTracing.RayResult@{HumanFactors.RayTracing.RayResult}}
+\doxysubsubsection{\texorpdfstring{RayResult()}{RayResult()}}
+{\footnotesize\ttfamily Human\+Factors.\+Ray\+Tracing.\+Ray\+Result.\+Ray\+Result (\begin{DoxyParamCaption}\item[{float}]{in\+\_\+distance,  }\item[{int}]{in\+\_\+mesh\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [package]}}
+
+
+
+Definition at line 23 of file Ray\+Result\+Structs.\+cs.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{struct_human_factors_1_1_ray_tracing_1_1_ray_result_adf3eb5cc80f3153a2d777f88710397cf}\label{struct_human_factors_1_1_ray_tracing_1_1_ray_result_adf3eb5cc80f3153a2d777f88710397cf}} 
+\index{HumanFactors.RayTracing.RayResult@{HumanFactors.RayTracing.RayResult}!distance@{distance}}
+\index{distance@{distance}!HumanFactors.RayTracing.RayResult@{HumanFactors.RayTracing.RayResult}}
+\doxysubsubsection{\texorpdfstring{distance}{distance}}
+{\footnotesize\ttfamily float Human\+Factors.\+Ray\+Tracing.\+Ray\+Result.\+distance}
+
+
+
+Distance from origin to the point of intersection. -\/1 if missed. 
+
+
+
+Definition at line 20 of file Ray\+Result\+Structs.\+cs.
+
+\mbox{\Hypertarget{struct_human_factors_1_1_ray_tracing_1_1_ray_result_a9f9d840fe8a986df68e3d30faf8241ec}\label{struct_human_factors_1_1_ray_tracing_1_1_ray_result_a9f9d840fe8a986df68e3d30faf8241ec}} 
+\index{HumanFactors.RayTracing.RayResult@{HumanFactors.RayTracing.RayResult}!mesh\_id@{mesh\_id}}
+\index{mesh\_id@{mesh\_id}!HumanFactors.RayTracing.RayResult@{HumanFactors.RayTracing.RayResult}}
+\doxysubsubsection{\texorpdfstring{mesh\_id}{mesh\_id}}
+{\footnotesize\ttfamily Int32 Human\+Factors.\+Ray\+Tracing.\+Ray\+Result.\+mesh\+\_\+id}
+
+
+
+ID of the mesh intersected. -\/1 if missed. 
+
+
+
+Definition at line 21 of file Ray\+Result\+Structs.\+cs.
 
 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-src/\+Csharp/packages/raytracer/src/Ray\+Result\+Structs.\+cs\end{DoxyCompactItemize}
+src/\+Csharp/packages/raytracer/src/\mbox{\hyperlink{_ray_result_structs_8cs}{Ray\+Result\+Structs.\+cs}}\end{DoxyCompactItemize}

@@ -2,13 +2,27 @@
 \label{class_human_factors_1_1_spatial_structures_1_1_graph}\index{HumanFactors.SpatialStructures.Graph@{HumanFactors.SpatialStructures.Graph}}
 
 
-Holds a graph in unmanaged memory as a C\+SR.  
+A graph representing connections between points in space.  
 
 
-Inheritance diagram for Human\+Factors.\+Spatial\+Structures.\+Graph\+:\begin{figure}[H]
+
+
+Inheritance diagram for Human\+Factors.\+Spatial\+Structures.\+Graph\+:
+\nopagebreak
+\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=3.000000cm]{class_human_factors_1_1_spatial_structures_1_1_graph}
+\includegraphics[width=241pt]{class_human_factors_1_1_spatial_structures_1_1_graph__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Human\+Factors.\+Spatial\+Structures.\+Graph\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=330pt]{class_human_factors_1_1_spatial_structures_1_1_graph__coll__graph}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
@@ -17,46 +31,96 @@ Inheritance diagram for Human\+Factors.\+Spatial\+Structures.\+Graph\+:\begin{fi
 \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a01855a86f49d22301651cf7098ee8967}{Graph}} ()
 \begin{DoxyCompactList}\small\item\em Construct a new empty graph in unmanaged memory. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_aca7ba30268e827c93387794ed05e3d7d}{Add\+Edge}} (\mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}} parent, \mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}} child, float cost)
-\begin{DoxyCompactList}\small\item\em Add a new edge to the graph \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Create a new edge between parent and child with cost. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_ae044c0d713259fb18f4275aec5c8129a}{Add\+Edge}} (int parent\+\_\+id, int child\+\_\+id, float cost)
-\begin{DoxyCompactList}\small\item\em Add a new edge to the graph \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Create a new edge between parent and child with cost. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_node_list}{Node\+List}} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a6b2aeaa562da06bec0d23aaabb2ba74d}{get\+Nodes}} ()
-\begin{DoxyCompactList}\small\item\em Get an array of of the graph\textquotesingle{}s current nodes \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Garray containing the graph\textquotesingle{}s current nodes. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a3a7db212124a9375862004a3a7691805}{Compress\+To\+C\+SR}} ()
 \begin{DoxyCompactList}\small\item\em Compress the graph, and get pointers to a C\+SR representation of it. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_human_factors_1_1_native_utils_1_1_common_native_arrays_1_1_managed_float_array}{Managed\+Float\+Array}} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a2d25a3d3158187875f0726844a4bf360}{Aggregate\+Edge\+Costs}} (\mbox{\hyperlink{namespace_human_factors_1_1_spatial_structures_abd405fa41da0f9a771d547aa47b6e1a0}{Graph\+Edge\+Aggregation}} type, bool directed=true)
-\begin{DoxyCompactList}\small\item\em Summarize the edgecosts for every node in the graph. This will compress the graph if not compressed already. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Summarize the edgecosts of every node in the graph. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_abe9106fd9584269e1291702aa401f6ac}{Get\+Node\+ID}} (\mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}} node)
 \begin{DoxyCompactList}\small\item\em Gets the ID of a node in the graph. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Public Attributes}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+override bool \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a274f89b6ee5b5e22fe566e96de49461a}{Release\+Handle}} ()
+\begin{DoxyCompactList}\small\item\em Free the native memory managed by this class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Package Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_aa613f3162fe49e35e155cd2418a0fa46}{Graph}} (Int\+Ptr Graph\+Ptr)
+\begin{DoxyCompactList}\small\item\em Wrap a graph that already exists in unmanaged memory. 
+\begin{DoxyParams}{Parameters}
+{\em Graph\+Ptr} & Pointer to the grpah in unmanaged memory \\
+\hline
+\end{DoxyParams}
+\end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{struct_human_factors_1_1_spatial_structures_1_1_c_s_r_info}{C\+S\+R\+Info}} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a0e139b5c04daaa9e4bd3bf9cb3ee9722}{C\+S\+R\+Pointers}}
 \begin{DoxyCompactList}\small\item\em This graph\textquotesingle{}s C\+SR pointers. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Protected Member Functions}
-\begin{DoxyCompactItemize}
-\item 
-\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_graph_a274f89b6ee5b5e22fe566e96de49461a}\label{class_human_factors_1_1_spatial_structures_1_1_graph_a274f89b6ee5b5e22fe566e96de49461a}} 
-override bool {\bfseries Release\+Handle} ()
-\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
-Holds a graph in unmanaged memory as a C\+SR. 
+A graph representing connections between points in space. 
+
+Every \mbox{\hyperlink{struct_human_factors_1_1_spatial_structures_1_1_node}{Node}} in the graph contains an X,Y,Z coordinate which can be used to represent a specific point in space. This graph internally is stored as a C\+SR for space efficency. Nodes are stored in a hashmap containing X,Y, and Z coordinates, allowing for quick indexing of s specific nodes by location alone.
+
+\begin{DoxyInvariant}{Invariant}
+1) The C\+SR maintained by this graph will always be valid. 
+
+2) Every unique unique node in the graph will be assigned a unique id. A \mbox{\hyperlink{struct_human_factors_1_1_spatial_structures_1_1_node}{Node}} is considered unique if it has an X,Y,Z location that is not within 0.\+0001 units of any other node in the graph.
+\end{DoxyInvariant}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000010}{Todo}}]Functions to access edges in the graph like numpy. Users shouldn\textquotesingle{}t have to use unsafe functions to get the edges of a node from the C\+SR. \end{DoxyRefDesc}
+
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a3a7db212124a9375862004a3a7691805}{Compress\+To\+C\+SR}} to get a C\+SR representation of the graph. 
+\end{DoxySeeAlso}
+
+
+Definition at line 49 of file Graph.\+cs.
 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_graph_aa613f3162fe49e35e155cd2418a0fa46}\label{class_human_factors_1_1_spatial_structures_1_1_graph_aa613f3162fe49e35e155cd2418a0fa46}} 
+\index{HumanFactors.SpatialStructures.Graph@{HumanFactors.SpatialStructures.Graph}!Graph@{Graph}}
+\index{Graph@{Graph}!HumanFactors.SpatialStructures.Graph@{HumanFactors.SpatialStructures.Graph}}
+\doxysubsubsection{\texorpdfstring{Graph()}{Graph()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Human\+Factors.\+Spatial\+Structures.\+Graph.\+Graph (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{Graph\+Ptr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [package]}}
+
+
+
+Wrap a graph that already exists in unmanaged memory. 
+\begin{DoxyParams}{Parameters}
+{\em Graph\+Ptr} & Pointer to the grpah in unmanaged memory \\
+\hline
+\end{DoxyParams}
+
+
+
+
+Definition at line 56 of file Graph.\+cs.
+
 \mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_graph_a01855a86f49d22301651cf7098ee8967}\label{class_human_factors_1_1_spatial_structures_1_1_graph_a01855a86f49d22301651cf7098ee8967}} 
 \index{HumanFactors.SpatialStructures.Graph@{HumanFactors.SpatialStructures.Graph}!Graph@{Graph}}
 \index{Graph@{Graph}!HumanFactors.SpatialStructures.Graph@{HumanFactors.SpatialStructures.Graph}}
-\doxysubsubsection{\texorpdfstring{Graph()}{Graph()}}
+\doxysubsubsection{\texorpdfstring{Graph()}{Graph()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily Human\+Factors.\+Spatial\+Structures.\+Graph.\+Graph (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
 Construct a new empty graph in unmanaged memory. 
+
+
+
+Definition at line 59 of file Graph.\+cs.
 
 
 
@@ -69,17 +133,27 @@ Construct a new empty graph in unmanaged memory.
 
 
 
-Add a new edge to the graph 
+Create a new edge between parent and child with cost. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em parent\+\_\+id} & ID of the parent node \\
+{\em parent\+\_\+id} & The ID of the parent node. \\
 \hline
-{\em child\+\_\+id} & ID of the child node \\
+{\em child\+\_\+id} & The ID of the child node. \\
 \hline
-{\em cost} & cost for parent to child \\
+{\em cost} & cost from parent to child.\\
 \hline
 \end{DoxyParams}
+\begin{DoxyPostcond}{Postcondition}
+1) If the ID of either parent or child does not exist in the graph then it will be created. 
+
+2) Existing representations of the this graph\textquotesingle{}s C\+SR will be invalidated.
+\end{DoxyPostcond}
+\begin{DoxyWarning}{Warning}
+1) If an edge between parent and child already exists, this will overwrite that edge. 
+
+2) Calling this function will invalidate any existing C\+S\+R\+Ptrs returned from the graph. Make sure to call Compress\+To\+C\+SR again continuing to access it. 
+\end{DoxyWarning}
 \mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_graph_aca7ba30268e827c93387794ed05e3d7d}\label{class_human_factors_1_1_spatial_structures_1_1_graph_aca7ba30268e827c93387794ed05e3d7d}} 
 \index{HumanFactors.SpatialStructures.Graph@{HumanFactors.SpatialStructures.Graph}!AddEdge@{AddEdge}}
 \index{AddEdge@{AddEdge}!HumanFactors.SpatialStructures.Graph@{HumanFactors.SpatialStructures.Graph}}
@@ -88,17 +162,29 @@ Add a new edge to the graph
 
 
 
-Add a new edge to the graph 
+Create a new edge between parent and child with cost. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em parent} & x,y,z location for the parent \\
+{\em parent} & The X,Y,Z location for the parent node. \\
 \hline
 {\em child} & x,y,z location for the child \\
 \hline
 {\em cost} & cost for parent to child \\
 \hline
 \end{DoxyParams}
+
+
+\begin{DoxyPostcond}{Postcondition}
+1) If the X,Y,Z position of either parent or child does not exist in the graph then a ID location will be assigned to it. 
+
+2) Existing representations of the this graph\textquotesingle{}s C\+SR will be invalidated.
+\end{DoxyPostcond}
+\begin{DoxyWarning}{Warning}
+1) If an edge between parent and child already exists, this will overwrite that edge. 
+
+2) Calling this function will invalidate any existing C\+S\+R\+Ptrs returned from the graph. Make sure to call Compress\+To\+C\+SR again continuing to access it. 
+\end{DoxyWarning}
 \mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_graph_a2d25a3d3158187875f0726844a4bf360}\label{class_human_factors_1_1_spatial_structures_1_1_graph_a2d25a3d3158187875f0726844a4bf360}} 
 \index{HumanFactors.SpatialStructures.Graph@{HumanFactors.SpatialStructures.Graph}!AggregateEdgeCosts@{AggregateEdgeCosts}}
 \index{AggregateEdgeCosts@{AggregateEdgeCosts}!HumanFactors.SpatialStructures.Graph@{HumanFactors.SpatialStructures.Graph}}
@@ -107,18 +193,40 @@ Add a new edge to the graph
 
 
 
-Summarize the edgecosts for every node in the graph. This will compress the graph if not compressed already. 
+Summarize the edgecosts of every node in the graph. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em type} & \\
+{\em type} & The type of aggregation method to use.\\
 \hline
-{\em directed} & Whether or not the graph is directed. If set to {\ttfamily true} each nodes\textquotesingle{}s score will only consider incomning edges. Otherwise, each node\textquotesingle{}s score will consider outgoing and incoming edges. \\
+{\em directed} & Whether or not the graph is directed. If set to true then each nodes\textquotesingle{}s score will only consider incomning edges. Otherwise, each node\textquotesingle{}s score will consider both outgoing and incoming edges.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-An array of scores, in which each element corresponds to a node in the graph sorted by ID. 
+An array of scores, in which each element corresponds to a node in the graph sorted by ID.
 \end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+This will compress the graph if it is not compressed already. If any edges were added between lat call to Compress\+To\+C\+SR and now, then any active C\+S\+R\+Ptrs will be invalidated.
+\end{DoxyWarning}
+\begin{DoxyRemark}{Remarks}
+The order of the scores returned bythis function match the order of the scores returned from \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a6b2aeaa562da06bec0d23aaabb2ba74d}{Graph.\+get\+Nodes}}. This can be especially useful for summarizing the results of a \mbox{\hyperlink{namespace_human_factors_1_1_visibility_graph}{Visibility\+Graph}}. 
+\end{DoxyRemark}
+
+
+Definition at line 145 of file Graph.\+cs.
+
+
+
+References Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+C\+\_\+\+Aggregate\+Edge\+Costs(), Human\+Factors.\+Spatial\+Structures.\+Graph.\+Compress\+To\+C\+S\+R(), Human\+Factors.\+Spatial\+Structures.\+Graph.\+get\+Nodes(), Human\+Factors.\+Native\+Utils.\+C\+Vector\+And\+Data.\+size, and Human\+Factors.\+Native\+Utils.\+Native\+Array$<$ T $>$.\+size.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_human_factors_1_1_spatial_structures_1_1_graph_a2d25a3d3158187875f0726844a4bf360_cgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_graph_a3a7db212124a9375862004a3a7691805}\label{class_human_factors_1_1_spatial_structures_1_1_graph_a3a7db212124a9375862004a3a7691805}} 
 \index{HumanFactors.SpatialStructures.Graph@{HumanFactors.SpatialStructures.Graph}!CompressToCSR@{CompressToCSR}}
 \index{CompressToCSR@{CompressToCSR}!HumanFactors.SpatialStructures.Graph@{HumanFactors.SpatialStructures.Graph}}
@@ -129,7 +237,41 @@ An array of scores, in which each element corresponds to a node in the graph sor
 
 Compress the graph, and get pointers to a C\+SR representation of it. 
 
-The C\+SR pointers can be mapped to after retrieved from C++ using Span$<$\+T$>$. \mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_graph_abe9106fd9584269e1291702aa401f6ac}\label{class_human_factors_1_1_spatial_structures_1_1_graph_abe9106fd9584269e1291702aa401f6ac}} 
+\begin{DoxyRemark}{Remarks}
+The C\+SR pointers can be mapped to after retrieved from C++ using spans.
+\end{DoxyRemark}
+\begin{DoxySeeAlso}{See also}
+C\+S\+R\+Ptrs for more info on the C\+SR type and how to access it. 
+\end{DoxySeeAlso}
+
+
+Definition at line 118 of file Graph.\+cs.
+
+
+
+References Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+C\+\_\+\+Get\+C\+S\+R\+Pointers().
+
+
+
+Referenced by Human\+Factors.\+Spatial\+Structures.\+Graph.\+Aggregate\+Edge\+Costs().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_human_factors_1_1_spatial_structures_1_1_graph_a3a7db212124a9375862004a3a7691805_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_human_factors_1_1_spatial_structures_1_1_graph_a3a7db212124a9375862004a3a7691805_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_graph_abe9106fd9584269e1291702aa401f6ac}\label{class_human_factors_1_1_spatial_structures_1_1_graph_abe9106fd9584269e1291702aa401f6ac}} 
 \index{HumanFactors.SpatialStructures.Graph@{HumanFactors.SpatialStructures.Graph}!GetNodeID@{GetNodeID}}
 \index{GetNodeID@{GetNodeID}!HumanFactors.SpatialStructures.Graph@{HumanFactors.SpatialStructures.Graph}}
 \doxysubsubsection{\texorpdfstring{GetNodeID()}{GetNodeID()}}
@@ -141,12 +283,24 @@ Gets the ID of a node in the graph.
 
 
 \begin{DoxyParams}{Parameters}
-{\em node} & The node to get the ID for.\\
+{\em node} & The X,Y,Z position of a node to get the ID for.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-The ID of the node, or -\/1 if the node isn\textquotesingle{}t in the graph.
+The ID of the node, or -\/1 if the node isn\textquotesingle{}t in the graph. 
 \end{DoxyReturn}
+
+
+Referenced by Human\+Factors.\+Pathfinding.\+Shortest\+Path.\+Dijkstra\+Shortest\+Path().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_human_factors_1_1_spatial_structures_1_1_graph_abe9106fd9584269e1291702aa401f6ac_icgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_graph_a6b2aeaa562da06bec0d23aaabb2ba74d}\label{class_human_factors_1_1_spatial_structures_1_1_graph_a6b2aeaa562da06bec0d23aaabb2ba74d}} 
 \index{HumanFactors.SpatialStructures.Graph@{HumanFactors.SpatialStructures.Graph}!getNodes@{getNodes}}
 \index{getNodes@{getNodes}!HumanFactors.SpatialStructures.Graph@{HumanFactors.SpatialStructures.Graph}}
@@ -155,11 +309,59 @@ The ID of the node, or -\/1 if the node isn\textquotesingle{}t in the graph.
 
 
 
-Get an array of of the graph\textquotesingle{}s current nodes 
+Garray containing the graph\textquotesingle{}s current nodes. 
 
 \begin{DoxyReturn}{Returns}
-An array of the graph\textquotesingle{}s nodes. 
+An array of the graph\textquotesingle{}s current nodes ordered by ID. 
 \end{DoxyReturn}
+
+
+Referenced by Human\+Factors.\+Spatial\+Structures.\+Graph.\+Aggregate\+Edge\+Costs().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_human_factors_1_1_spatial_structures_1_1_graph_a6b2aeaa562da06bec0d23aaabb2ba74d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_graph_a274f89b6ee5b5e22fe566e96de49461a}\label{class_human_factors_1_1_spatial_structures_1_1_graph_a274f89b6ee5b5e22fe566e96de49461a}} 
+\index{HumanFactors.SpatialStructures.Graph@{HumanFactors.SpatialStructures.Graph}!ReleaseHandle@{ReleaseHandle}}
+\index{ReleaseHandle@{ReleaseHandle}!HumanFactors.SpatialStructures.Graph@{HumanFactors.SpatialStructures.Graph}}
+\doxysubsubsection{\texorpdfstring{ReleaseHandle()}{ReleaseHandle()}}
+{\footnotesize\ttfamily override bool Human\+Factors.\+Spatial\+Structures.\+Graph.\+Release\+Handle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Free the native memory managed by this class. 
+
+\begin{DoxyNote}{Note}
+the garbage collector will handle this automatically 
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+Do not attempt to use this class after freeing it! 
+\end{DoxyWarning}
+\begin{DoxyReturn}{Returns}
+True. This is guaranteed to execute properly. ~\newline
+ 
+\end{DoxyReturn}
+
+
+Definition at line 168 of file Graph.\+cs.
+
+
+
+References Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+C\+\_\+\+Destroy\+Graph().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_human_factors_1_1_spatial_structures_1_1_graph_a274f89b6ee5b5e22fe566e96de49461a_cgraph}
+\end{center}
+\end{figure}
 
 
 \doxysubsection{Member Data Documentation}
@@ -167,7 +369,7 @@ An array of the graph\textquotesingle{}s nodes.
 \index{HumanFactors.SpatialStructures.Graph@{HumanFactors.SpatialStructures.Graph}!CSRPointers@{CSRPointers}}
 \index{CSRPointers@{CSRPointers}!HumanFactors.SpatialStructures.Graph@{HumanFactors.SpatialStructures.Graph}}
 \doxysubsubsection{\texorpdfstring{CSRPointers}{CSRPointers}}
-{\footnotesize\ttfamily \mbox{\hyperlink{struct_human_factors_1_1_spatial_structures_1_1_c_s_r_info}{C\+S\+R\+Info}} Human\+Factors.\+Spatial\+Structures.\+Graph.\+C\+S\+R\+Pointers}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_human_factors_1_1_spatial_structures_1_1_c_s_r_info}{C\+S\+R\+Info}} Human\+Factors.\+Spatial\+Structures.\+Graph.\+C\+S\+R\+Pointers\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
@@ -175,6 +377,10 @@ This graph\textquotesingle{}s C\+SR pointers.
 
 
 
+Definition at line 52 of file Graph.\+cs.
+
+
+
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-src/\+Csharp/packages/spatialstructures/src/Graph.\+cs\end{DoxyCompactItemize}
+src/\+Csharp/packages/spatialstructures/src/\mbox{\hyperlink{_graph_8cs}{Graph.\+cs}}\end{DoxyCompactItemize}

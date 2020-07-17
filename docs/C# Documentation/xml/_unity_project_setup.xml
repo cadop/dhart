@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.18">
+  <compounddef id="_unity_project_setup" kind="page">
+    <compoundname>UnityProjectSetup</compoundname>
+    <title>Setting Up a Unity Project for Human Factors</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Next Tutorial: <ref refid="_using_the_raytracer" kindref="compound">Using The Raytracer</ref> OR <ref refid="_generating_a_graph" kindref="compound">Generating A Graph</ref></para>
+<sect1 id="_unity_project_setup_1autotoc_md0">
+<title>Before we begin</title>
+<para>In this guide we will cover the following:</para>
+<para><itemizedlist>
+<listitem><para>Creating a new Unity project.</para>
+</listitem><listitem><para>Importing <ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref> to a Unity project.</para>
+</listitem><listitem><para>Verifying that a Unity project code can reference <ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.</para>
+</listitem></itemizedlist>
+</para>
+<sect2 id="_unity_project_setup_1autotoc_md1">
+<title>Prerequisites</title>
+<para><itemizedlist>
+<listitem><para>An installation of <ulink url="https://unity3d.com/get-unity/download">Unity</ulink>. This tutorial has been tested with Unity 2019.3f, but should work from 2018.3 on.</para>
+</listitem><listitem><para>An installation of Visual Studio with Unity integration. Instructions for installing Unity with support for Visual Studio or adding VisualStudio support to an existing installation of Unity are available <ulink url="https://docs.microsoft.com/en-us/visualstudio/cross-platform/getting-started-with-visual-studio-tools-for-unity?view=vs-2019">here</ulink>.</para>
+</listitem><listitem><para>A copy of the <ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref> release built with support for C#. The <computeroutput>bin</computeroutput> folder of the release should contain the following files:<orderedlist>
+<listitem><para>embree3.dll</para>
+</listitem><listitem><para>HumanFactors.dll</para>
+</listitem><listitem><para>HumanFactorsCSharp.dll</para>
+</listitem><listitem><para>msvcp140.dll</para>
+</listitem><listitem><para>System.Buffers.dll</para>
+</listitem><listitem><para>System.Memory.dll</para>
+</listitem><listitem><para>System.Runtime.CompilerServices.Unsafe.dll</para>
+</listitem><listitem><para>tbb.dll</para>
+</listitem><listitem><para>vcomp140.dll</para>
+</listitem><listitem><para>vcruntime140.dll</para>
+</listitem><listitem><para>vcruntime140_1.dll</para>
+</listitem></orderedlist>
+</para>
+</listitem></itemizedlist>
+</para>
+</sect2>
+</sect1>
+<sect1 id="_unity_project_setup_1autotoc_md2">
+<title>Creating a new project</title>
+<para><image type="html" name="UnityNew.PNG" inline="yes">Image</image>
+ <image type="latex" name="UnityNew.PNG" inline="yes">Image</image>
+ <image type="rtf" name="UnityNew.PNG" inline="yes">Image</image>
+ <image type="docbook" name="UnityNew.PNG" inline="yes">Image</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>1.1</bold>: <emphasis>Creating a new project in the Unity Hub</emphasis></para>
+<para>To begin, open the Unity Hub then click the <emphasis>NEW</emphasis> button to create a new project.</para>
+<para><image type="html" name="unity_choose_project_type.png" inline="yes">Choose Project Type</image>
+ <image type="latex" name="unity_choose_project_type.png" inline="yes">Choose Project Type</image>
+ <image type="rtf" name="unity_choose_project_type.png" inline="yes">Choose Project Type</image>
+ <image type="docbook" name="unity_choose_project_type.png" inline="yes">Choose Project Type</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>1.2</bold>: <emphasis>The Create a Project Dialog</emphasis></para>
+<para>Select your desired project type, directory, and project name. For the sake of this tutorial, we will be using the <emphasis>3D</emphasis> project type and naming our project <emphasis>HumanFactorsUnitySetup</emphasis>, but you can name your project whatever you want. When done with this, press the <emphasis>Create</emphasis> button to create the project and wait while Unity imports all the necessary files.</para>
+<para><image type="html" name="blank_unity_scene.PNG" inline="yes">Empty Unity Scene</image>
+ <image type="latex" name="blank_unity_scene.PNG" inline="yes">Empty Unity Scene</image>
+ <image type="rtf" name="blank_unity_scene.PNG" inline="yes">Empty Unity Scene</image>
+ <image type="docbook" name="blank_unity_scene.PNG" inline="yes">Empty Unity Scene</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>1.3</bold>: <emphasis>An empty Unity scene</emphasis></para>
+<para>Upon completion you should be greeted by an empty Unity scene.</para>
+</sect1>
+<sect1 id="_unity_project_setup_1autotoc_md3">
+<title>Importing the Human Factors Library</title>
+<para>Now that we have created a blank project, we need to import the <ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref> binaries as assets so Unity can see and interface with them.</para>
+<para><image type="html" name="bin_to_assets.png" inline="yes">Moving the bin folder into the assets directory</image>
+ <image type="latex" name="bin_to_assets.png" inline="yes">Moving the bin folder into the assets directory</image>
+ <image type="rtf" name="bin_to_assets.png" inline="yes">Moving the bin folder into the assets directory</image>
+ <image type="docbook" name="bin_to_assets.png" inline="yes">Moving the bin folder into the assets directory</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>1.4</bold>: <emphasis>Dragging the <ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref> bin folder into the Unity Project</emphasis></para>
+<para>If the <ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref> release package is zipped, unzip the contents to another location before copying it or you will get an error when trying to import it. Once you have the files, as shown in Figure 1.4, drag the <computeroutput>bin</computeroutput> folder from the location you extracted the release to into the Unity Editor&apos;s assets window. Once you&apos;ve done this, Unity should display the <emphasis>bin</emphasis> folder alongside the existing <emphasis>Scenes</emphasis> folder.</para>
+<para><blockquote><para><bold>NOTE</bold>: If you accidentally drag the bin folder into the <emphasis>Scenes</emphasis> folder or anywhere else that would cause two copies of the same dll to exist at the same time, delete any duplicates before proceding. Multiple copies of the same DLL will cause conflicts and may result in Unity being unable to load it in the future steps. You&apos;ll know this has happened if you see the following error <lsquo/>Multiple plugins with the same name &apos;humanfactors<rsquo/> (found at &apos;Assets/Scenes/bin/HumanFactors.dll&apos; and &apos;Assets/bin/HumanFactors.dll&apos;)...` at the bottom of the screen. &gt;<image type="html" name="duplicate_dll_error.png" inline="yes">Duplicate DLL Error</image>
+ <image type="latex" name="duplicate_dll_error.png" inline="yes">Duplicate DLL Error</image>
+ <image type="rtf" name="duplicate_dll_error.png" inline="yes">Duplicate DLL Error</image>
+ <image type="docbook" name="duplicate_dll_error.png" inline="yes">Duplicate DLL Error</image>
+</para>
+<para>&gt;<image type="html" name="delete.png" inline="yes">Delete Image</image>
+ <image type="latex" name="delete.png" inline="yes">Delete Image</image>
+ <image type="rtf" name="delete.png" inline="yes">Delete Image</image>
+ <image type="docbook" name="delete.png" inline="yes">Delete Image</image>
+</para>
+<para></para>
+</blockquote></para>
+</sect1>
+<sect1 id="_unity_project_setup_1autotoc_md4">
+<title>Verifying Unity can reference HumanFactors</title>
+<para>The binaries have been added to our project as assets, but let&apos;s make sure Unity is able to reference them in code. To verify that Unity can reference the <ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref> binaries, we&apos;re going to create a new script and look at its references. If we did everything correctly, Unity should automatically have added HumanFactorsCSharp as a reference.</para>
+<para><image type="html" name="create_new_script.png" inline="yes">Creating a new C# script</image>
+ <image type="latex" name="create_new_script.png" inline="yes">Creating a new C# script</image>
+ <image type="rtf" name="create_new_script.png" inline="yes">Creating a new C# script</image>
+ <image type="docbook" name="create_new_script.png" inline="yes">Creating a new C# script</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>1.5</bold>: <emphasis>Creating a new C# Script</emphasis></para>
+<para>To create a new script, right click on a blank space in the assets window, hover over <emphasis>Create</emphasis>, then click <emphasis>C# Script</emphasis>.</para>
+<para><image type="html" name="rename_script.png" inline="yes">Don&apos;t click anything! Rename the script</image>
+ <image type="latex" name="rename_script.png" inline="yes">Don&apos;t click anything! Rename the script</image>
+ <image type="rtf" name="rename_script.png" inline="yes">Don&apos;t click anything! Rename the script</image>
+ <image type="docbook" name="rename_script.png" inline="yes">Don&apos;t click anything! Rename the script</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>1.6</bold>: <emphasis>Renaming a new script</emphasis></para>
+<para>Looking in the assets window, you should notice a new script file next to Scenes directory titled NewBehaviourScript.cs by default, and the name of it is highlighted in blue indicatign that you can rename it. Rename the script to HFExampleScript.cs.</para>
+<para><blockquote><para><bold>NOTE:</bold> If you didn&apos;t name the file properly you can change the name of the script by right clicking on it and clicking <emphasis>Rename</emphasis>. This won&apos;t change the name of the class that the script contains however, so be prepared to change that when we open it. &gt;<image type="html" name="walkthroughs/unity/1_project_setup" inline="yes">/../2_raycast_at_plane/rename_dialog.png &quot;Rename Dialog&quot;</image>
+ <image type="latex" name="walkthroughs/unity/1_project_setup" inline="yes">/../2_raycast_at_plane/rename_dialog.png &quot;Rename Dialog&quot;</image>
+ <image type="rtf" name="walkthroughs/unity/1_project_setup" inline="yes">/../2_raycast_at_plane/rename_dialog.png &quot;Rename Dialog&quot;</image>
+ <image type="docbook" name="walkthroughs/unity/1_project_setup" inline="yes">/../2_raycast_at_plane/rename_dialog.png &quot;Rename Dialog&quot;</image>
+</para>
+<para></para>
+</blockquote></para>
+<para><image type="html" name="double_click_on_script.png" inline="yes">Double Click On Script</image>
+ <image type="latex" name="double_click_on_script.png" inline="yes">Double Click On Script</image>
+ <image type="rtf" name="double_click_on_script.png" inline="yes">Double Click On Script</image>
+ <image type="docbook" name="double_click_on_script.png" inline="yes">Double Click On Script</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>1.7</bold>: <emphasis>HFExampleScript.cs in the assets window</emphasis></para>
+<para>Now that we have our new script, double click on it to open Visual studio.</para>
+<para><image type="html" name="visual_studio_human_factors_reference.png" inline="yes">HumanFactors referenced by your project</image>
+ <image type="latex" name="visual_studio_human_factors_reference.png" inline="yes">HumanFactors referenced by your project</image>
+ <image type="rtf" name="visual_studio_human_factors_reference.png" inline="yes">HumanFactors referenced by your project</image>
+ <image type="docbook" name="visual_studio_human_factors_reference.png" inline="yes">HumanFactors referenced by your project</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>1.8</bold>: <emphasis>Viewing the references of a project in Visual Studio</emphasis></para>
+<para>In Visual Studio, navigate to the <emphasis>Solution Explorer</emphasis> then expand the drop downs for your solution, Assembly-C-Sharp, and References. If everything was done correctly, you should see <ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref> C# under the references for your project, as shown in Figure 1.8.</para>
+<para><blockquote><para><bold>NOTE</bold>: If Mono-Develop appears instead of Visual Studio, then your installation of Unity is not set up to support Visual Studio. You can follow the above instructions from prerequisites to fix this. </para>
+</blockquote></para>
+<para><blockquote><para><bold>NOTE</bold>: If you renamed the file earlier, then your class&apos;s name may not match the name of the class in Figure 1.8. To fix this, just replace the class&apos;s name with <computeroutput>HFExampleScript.cs</computeroutput> on line 5.</para>
+<para><image type="html" name="walkthroughs/unity/1_project_setup" inline="yes">/../2_raycast_at_plane/change_class_name.png &quot;Change Class name&quot;</image>
+ <image type="latex" name="walkthroughs/unity/1_project_setup" inline="yes">/../2_raycast_at_plane/change_class_name.png &quot;Change Class name&quot;</image>
+ <image type="rtf" name="walkthroughs/unity/1_project_setup" inline="yes">/../2_raycast_at_plane/change_class_name.png &quot;Change Class name&quot;</image>
+ <image type="docbook" name="walkthroughs/unity/1_project_setup" inline="yes">/../2_raycast_at_plane/change_class_name.png &quot;Change Class name&quot;</image>
+</para>
+<para></para>
+</blockquote></para>
+<para><blockquote><para><bold>NOTE:</bold> Your version of Visual Studio may use the light theme by default like pictured below. This is purely visual and will not have any impact on this tutorial. <image type="html" name="light_visual_studio.png" inline="yes">Light Theme</image>
+ <image type="latex" name="light_visual_studio.png" inline="yes">Light Theme</image>
+ <image type="rtf" name="light_visual_studio.png" inline="yes">Light Theme</image>
+ <image type="docbook" name="light_visual_studio.png" inline="yes">Light Theme</image>
+</para>
+<para></para>
+</blockquote></para>
+<para>If you see <ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref> in your project&apos;s references, then you&apos;ve successfully imported the <ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref> library and are ready to start using the <ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref> library.</para>
+</sect1>
+<sect1 id="_unity_project_setup_1autotoc_md5">
+<title>Conclusion</title>
+<para>Below is a link to the unity project created in this tutorial.</para>
+<para><ulink url="Tutorial%201-%20Unity%20Project.zip">Tutorial 1: Unity Project Setup</ulink></para>
+<para>In this tutorial, we went through the process of creating unity project and adding the Analysis toolkit to the project. In the following tutorials, we will use this basis for using the modules that come with the Analysis toolkit.</para>
+<para>In the next tutorial: <ref refid="_using_the_raytracer" kindref="compound">Using the Raytracer</ref> we will use <ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref> to create a plane, cast a ray at it, then get the point where the ray intersected the plane. </para>
+</sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.18">
+  <compounddef id="namespace_human_factors_1_1_view_analysis" kind="namespace" language="C#">
+    <compoundname>HumanFactors::ViewAnalysis</compoundname>
+    <innerclass refid="class_human_factors_1_1_view_analysis_1_1_direction_array" prot="public">HumanFactors::ViewAnalysis::DirectionArray</innerclass>
+    <innerclass refid="class_human_factors_1_1_view_analysis_1_1_native_methods" prot="package">HumanFactors::ViewAnalysis::NativeMethods</innerclass>
+    <innerclass refid="class_human_factors_1_1_view_analysis_1_1_result_array" prot="public">HumanFactors::ViewAnalysis::ResultArray</innerclass>
+    <innerclass refid="class_human_factors_1_1_view_analysis_1_1_view_analysis" prot="public">HumanFactors::ViewAnalysis::ViewAnalysis</innerclass>
+    <innerclass refid="struct_human_factors_1_1_view_analysis_1_1_view_analysis_result" prot="public">HumanFactors::ViewAnalysis::ViewAnalysisResult</innerclass>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="namespace_human_factors_1_1_view_analysis_1ae24b8f5d9783a270e51183ff2eca765c" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>ViewAggregateType</name>
+        <enumvalue id="namespace_human_factors_1_1_view_analysis_1ae24b8f5d9783a270e51183ff2eca765ca4905ac9d6a22bdfc1ae096094ce6248d" prot="public">
+          <name>COUNT</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+<para>Count the number of rays that intersected any geometry. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_human_factors_1_1_view_analysis_1ae24b8f5d9783a270e51183ff2eca765ca6970bdc2201030b9c03fbdcf3973858a" prot="public">
+          <name>SUM</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+<para>Add the distance from the observer to the point of intersection for all rays casted </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_human_factors_1_1_view_analysis_1ae24b8f5d9783a270e51183ff2eca765ca16de38737a9f8366e9b2042b4e9b6290" prot="public">
+          <name>AVERAGE</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+<para>Average the distance from the origin to each point of intersection. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_human_factors_1_1_view_analysis_1ae24b8f5d9783a270e51183ff2eca765ca26a4b44a837bf97b972628509912b4a5" prot="public">
+          <name>MAX</name>
+          <initializer>= 3</initializer>
+          <briefdescription>
+<para>The maximum distance from the origin to any hitpoint. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespace_human_factors_1_1_view_analysis_1ae24b8f5d9783a270e51183ff2eca765cace31e2a082d17e038fcc6e3006166653" prot="public">
+          <name>MIN</name>
+          <initializer>= 4</initializer>
+          <briefdescription>
+<para>The minimum distance from the origin to any hitpoint. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>The type of aggregation method to use for ViewAnalysis.ViewAnalysisAggregate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/viewanalysis/src/ViewAnalysis.cs" line="28" column="11" bodyfile="src/Csharp/packages/viewanalysis/src/ViewAnalysis.cs" bodystart="29" bodyend="44"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Analyze the view from from points in the environment. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>View analysis is based on taking the perspective of an observer in the environemnt from the human scale, then using raycasting to evaluate what is visible to them. All rays casted are distributed equally in a sphere around the observer, ensuring equal coverage. The observer&apos;s vertical field of view can be limited to only cast rays within a certain angle above and below their eye level.</para>
+<para><simplesect kind="see"><para><ref refid="class_human_factors_1_1_view_analysis_1_1_view_analysis" kindref="compound">ViewAnalysis</ref> for all <ref refid="class_human_factors_1_1_view_analysis_1_1_view_analysis" kindref="compound">ViewAnalysis</ref> functions. </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="namespace_human_factors_1_1_ray_tracing" kindref="compound">HumanFactors.RayTracing</ref> for details on raycasting. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="src/Csharp/packages/viewanalysis/src/ViewAnalysis.cs" line="23" column="1"/>
+  </compounddef>
+</doxygen>

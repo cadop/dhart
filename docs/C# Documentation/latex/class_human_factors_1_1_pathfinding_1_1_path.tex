@@ -5,22 +5,36 @@
 A collection of node ids and costs representing a path. Holds \mbox{\hyperlink{struct_human_factors_1_1_pathfinding_1_1_path_member}{Path\+Member}}s.  
 
 
-Inheritance diagram for Human\+Factors.\+Pathfinding.\+Path\+:\begin{figure}[H]
+
+
+Inheritance diagram for Human\+Factors.\+Pathfinding.\+Path\+:
+\nopagebreak
+\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=2.000000cm]{class_human_factors_1_1_pathfinding_1_1_path}
+\includegraphics[width=235pt]{class_human_factors_1_1_pathfinding_1_1_path__inherit__graph}
 \end{center}
 \end{figure}
-\doxysubsection*{Public Member Functions}
-\begin{DoxyCompactItemize}
-\item 
-\mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_path_a8fbcf9f3d7e9a42182671ce6a94b2148}{Path}} (\mbox{\hyperlink{struct_human_factors_1_1_native_utils_1_1_c_vector_and_data}{C\+Vector\+And\+Data}} \mbox{\hyperlink{class_human_factors_1_1_native_utils_1_1_native_array_a53f1d544231f6a628bb83b982afcb4d5}{ptrs}})
-\begin{DoxyCompactList}\small\item\em Initializes a new path from a pointer to a path in unmanaged memory. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+Collaboration diagram for Human\+Factors.\+Pathfinding.\+Path\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=235pt]{class_human_factors_1_1_pathfinding_1_1_path__coll__graph}
+\end{center}
+\end{figure}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 override bool \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_path_a979e48954fe6d869827b855cdc39d060}{Release\+Handle}} ()
-\begin{DoxyCompactList}\small\item\em Free the path in unmanaged memory. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Free the native memory managed by this class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Package Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_path_a8fbcf9f3d7e9a42182671ce6a94b2148}{Path}} (\mbox{\hyperlink{struct_human_factors_1_1_native_utils_1_1_c_vector_and_data}{C\+Vector\+And\+Data}} \mbox{\hyperlink{class_human_factors_1_1_native_utils_1_1_native_array_a53f1d544231f6a628bb83b982afcb4d5}{ptrs}})
+\begin{DoxyCompactList}\small\item\em Initializes a new path from a pointer to a path in unmanaged memory. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
@@ -29,16 +43,24 @@ A collection of node ids and costs representing a path. Holds \mbox{\hyperlink{s
 
 
 
+Definition at line 24 of file Path.\+cs.
+
+
+
 \doxysubsection{Constructor \& Destructor Documentation}
 \mbox{\Hypertarget{class_human_factors_1_1_pathfinding_1_1_path_a8fbcf9f3d7e9a42182671ce6a94b2148}\label{class_human_factors_1_1_pathfinding_1_1_path_a8fbcf9f3d7e9a42182671ce6a94b2148}} 
 \index{HumanFactors.Pathfinding.Path@{HumanFactors.Pathfinding.Path}!Path@{Path}}
 \index{Path@{Path}!HumanFactors.Pathfinding.Path@{HumanFactors.Pathfinding.Path}}
 \doxysubsubsection{\texorpdfstring{Path()}{Path()}}
-{\footnotesize\ttfamily Human\+Factors.\+Pathfinding.\+Path.\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_human_factors_1_1_native_utils_1_1_c_vector_and_data}{C\+Vector\+And\+Data}}}]{ptrs }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily Human\+Factors.\+Pathfinding.\+Path.\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_human_factors_1_1_native_utils_1_1_c_vector_and_data}{C\+Vector\+And\+Data}}}]{ptrs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [package]}}
 
 
 
 Initializes a new path from a pointer to a path in unmanaged memory. 
+
+
+
+Definition at line 29 of file Path.\+cs.
 
 
 
@@ -51,10 +73,36 @@ Initializes a new path from a pointer to a path in unmanaged memory.
 
 
 
-Free the path in unmanaged memory. 
+Free the native memory managed by this class. 
 
+\begin{DoxyNote}{Note}
+the garbage collector will handle this automatically 
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+Do not attempt to use this class after freeing it! 
+\end{DoxyWarning}
+\begin{DoxyReturn}{Returns}
+True. This is guaranteed to execute properly. ~\newline
+ 
+\end{DoxyReturn}
+
+
+Definition at line 37 of file Path.\+cs.
+
+
+
+References Human\+Factors.\+Pathfinding.\+Native\+Methods.\+C\+\_\+\+Destroy\+Path().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_human_factors_1_1_pathfinding_1_1_path_a979e48954fe6d869827b855cdc39d060_cgraph}
+\end{center}
+\end{figure}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-src/\+Csharp/packages/pathfinding/src/Path.\+cs\end{DoxyCompactItemize}
+src/\+Csharp/packages/pathfinding/src/\mbox{\hyperlink{_path_8cs}{Path.\+cs}}\end{DoxyCompactItemize}

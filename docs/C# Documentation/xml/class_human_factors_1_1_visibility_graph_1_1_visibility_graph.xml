@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.18">
+  <compounddef id="class_human_factors_1_1_visibility_graph_1_1_visibility_graph" kind="class" language="C#" prot="public">
+    <compoundname>HumanFactors::VisibilityGraph::VisibilityGraph</compoundname>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_human_factors_1_1_visibility_graph_1_1_visibility_graph_1a6b9e6d59435543aebc5a42beea7e916d" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_human_factors_1_1_spatial_structures_1_1_graph" kindref="compound">Graph</ref></type>
+        <definition>static Graph HumanFactors.VisibilityGraph.VisibilityGraph.GenerateAllToAll</definition>
+        <argsstring>(EmbreeBVH bvh, IEnumerable&lt; Vector3D &gt; nodes, float height=1.7f, bool directed=true)</argsstring>
+        <name>GenerateAllToAll</name>
+        <param>
+          <type><ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h" kindref="compound">EmbreeBVH</ref></type>
+          <declname>bvh</declname>
+        </param>
+        <param>
+          <type>IEnumerable&lt; <ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref> &gt;</type>
+          <declname>nodes</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>height</declname>
+          <defval>1.7f</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>directed</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>Create a visibility graph from every node to every node in nodes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bvh</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The BVH to intersect with. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nodes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The nodes to use in the visibility graph. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>height</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The height to offset each node from the ground. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>directed</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if set to true generate a directed graph, otherwise generate an undirected graph.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A Graph where each node is a node in nodes, and each edge represents a clear line of sight between the parent and child node. Any nodes that clip into geometry when offset by height will not be considered for any edge connections and will always have no outgoing or incoming edges.</para>
+</simplesect>
+<simplesect kind="attention"><para>When directed is true. Edges between nodes will only be stored in the edges of the node with the lower ID. To store the edge in the edge array of both nodes use false but be warned, it will take longer to execute and take up more memory. Read the following section for more info.</para>
+</simplesect>
+<simplesect kind="par"><title>Directed vs Undirected </title><para>For the sake of this function, an undirected visibility graph describes a graph where edge is only stored in the graph for the node with the lowest ID. For example, The first node will check for edges from itself to every node in the set, node 2 will check for edges from itself to every other node except for the first node, node 3 will check every node except for the first and second. In contrast, a directed graph will check every node against every other node in the graph regardless of ID. In most cases you will want to use the undirected algorithm, as it only performs n(n+1)/2 operations vs the directed&apos;s n^2 operations.</para>
+</simplesect>
+<simplesect kind="warning"><para>Graphs output by this function CANNOT be modified.</para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a2d25a3d3158187875f0726844a4bf360" kindref="member">SpatialStructures.Graph.AggregateEdgeCosts</ref> for a way to easily summarize the results of a visibility graph. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/visibilitygraph/src/VisibilityGraph.cs" line="66" column="29" bodyfile="src/Csharp/packages/visibilitygraph/src/VisibilityGraph.cs" bodystart="66" bodyend="71"/>
+        <references refid="class_human_factors_1_1_visibility_graph_1_1_native_methods_1a1d143831fb37b4a2195d70a94cb3d977" compoundref="_visibility_graph_native_8cs" startline="18" endline="31">HumanFactors.VisibilityGraph.NativeMethods.C_AllToAllVisibilityGraph</references>
+        <references refid="class_human_factors_1_1_native_utils_1_1_native_object_1aa58c089e79cb4acc260755a41952d3d6" compoundref="_pointer_holder_8cs" startline="49" endline="49">HumanFactors.NativeUtils.NativeObject.Pointer</references>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_visibility_graph_1_1_visibility_graph_1aebd2e16352a8e5a9920dffe809ed911d" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_human_factors_1_1_spatial_structures_1_1_graph" kindref="compound">Graph</ref></type>
+        <definition>static Graph HumanFactors.VisibilityGraph.VisibilityGraph.GenerateGroupToGroup</definition>
+        <argsstring>(EmbreeBVH bvh, IEnumerable&lt; Vector3D &gt; group_a, IEnumerable&lt; Vector3D &gt; group_b, float height=1.7f)</argsstring>
+        <name>GenerateGroupToGroup</name>
+        <param>
+          <type><ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h" kindref="compound">EmbreeBVH</ref></type>
+          <declname>bvh</declname>
+        </param>
+        <param>
+          <type>IEnumerable&lt; <ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref> &gt;</type>
+          <declname>group_a</declname>
+        </param>
+        <param>
+          <type>IEnumerable&lt; <ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref> &gt;</type>
+          <declname>group_b</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>height</declname>
+          <defval>1.7f</defval>
+        </param>
+        <briefdescription>
+<para>Generate a directed visibility graph from nodes in <computeroutput>group_a</computeroutput> to the nodes in <computeroutput>group_b.</computeroutput> </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bvh</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The geometry to use for generating the visibility graph. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>group_a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The nodes to cast rays from. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>group_b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The nodes to cast rays to. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>height</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The height to offset nodes from the ground.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A graph contanining the visibility graph. Since a new graph is created, all nodes will be assigned ids for access within it. First every node in group_a will be assigned ids in order, then all nodes in <computeroutput>group_b</computeroutput> will be assigned ids in order. Nodes in <computeroutput>group_a</computeroutput> will be assigned IDs before those in <computeroutput>group_b</computeroutput>. All edges will be from nodes in <computeroutput>group_a</computeroutput> to nodes in <computeroutput>group_b</computeroutput>. Any nodes that clip into geometry when offset by height will not be considered for any edge connections and will always have no outgoing or incoming edges.</para>
+</simplesect>
+<simplesect kind="pre"><para>No nodes in <computeroutput>group_a</computeroutput> also exist in <computeroutput>group_b</computeroutput> and vice versa.</para>
+</simplesect>
+<simplesect kind="attention"><para>Any nodes that clip into geometry when offset by <computeroutput>height</computeroutput> will not be considered for any edge connections.</para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="class_human_factors_1_1_visibility_graph_1_1_visibility_graph_1a6b9e6d59435543aebc5a42beea7e916d" kindref="member">GenerateAllToAll</ref> to generate a graph from every node to every other node. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/visibilitygraph/src/VisibilityGraph.cs" line="96" column="29" bodyfile="src/Csharp/packages/visibilitygraph/src/VisibilityGraph.cs" bodystart="96" bodyend="106"/>
+        <references refid="class_human_factors_1_1_visibility_graph_1_1_native_methods_1ad47df2f1b644b87ecd8b4c99676ff8c1" compoundref="_visibility_graph_native_8cs" startline="33" endline="44">HumanFactors.VisibilityGraph.NativeMethods.C_GroupToGroupVisibilityGraph</references>
+        <references refid="class_human_factors_1_1_native_utils_1_1_native_object_1aa58c089e79cb4acc260755a41952d3d6" compoundref="_pointer_holder_8cs" startline="49" endline="49">HumanFactors.NativeUtils.NativeObject.Pointer</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Contains all methods for generating Visibility Graphs. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Csharp/packages/visibilitygraph/src/VisibilityGraph.cs" line="32" column="19" bodyfile="src/Csharp/packages/visibilitygraph/src/VisibilityGraph.cs" bodystart="33" bodyend="107"/>
+    <listofallmembers>
+      <member refid="class_human_factors_1_1_visibility_graph_1_1_visibility_graph_1a6b9e6d59435543aebc5a42beea7e916d" prot="public" virt="non-virtual"><scope>HumanFactors::VisibilityGraph::VisibilityGraph</scope><name>GenerateAllToAll</name></member>
+      <member refid="class_human_factors_1_1_visibility_graph_1_1_visibility_graph_1aebd2e16352a8e5a9920dffe809ed911d" prot="public" virt="non-virtual"><scope>HumanFactors::VisibilityGraph::VisibilityGraph</scope><name>GenerateGroupToGroup</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

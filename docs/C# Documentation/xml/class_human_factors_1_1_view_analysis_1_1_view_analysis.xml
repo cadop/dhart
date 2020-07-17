@@ -1,0 +1,289 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.18">
+  <compounddef id="class_human_factors_1_1_view_analysis_1_1_view_analysis" kind="class" language="C#" prot="public">
+    <compoundname>HumanFactors::ViewAnalysis::ViewAnalysis</compoundname>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_human_factors_1_1_view_analysis_1_1_view_analysis_1a1cdb30c740e2efd5a1a01ef633c734ac" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_human_factors_1_1_native_utils_1_1_common_native_arrays_1_1_managed_float_array" kindref="compound">ManagedFloatArray</ref></type>
+        <definition>static ManagedFloatArray HumanFactors.ViewAnalysis.ViewAnalysis.ViewAnalysisAggregate</definition>
+        <argsstring>(EmbreeBVH bvh, IEnumerable&lt; Vector3D &gt; nodes, int ray_count, float upward_fov=50.0f, float downward_fov=70.0f, float height=1.7f, ViewAggregateType type=ViewAggregateType.AVERAGE)</argsstring>
+        <name>ViewAnalysisAggregate</name>
+        <param>
+          <type><ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h" kindref="compound">EmbreeBVH</ref></type>
+          <declname>bvh</declname>
+        </param>
+        <param>
+          <type>IEnumerable&lt; <ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref> &gt;</type>
+          <declname>nodes</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ray_count</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>upward_fov</declname>
+          <defval>50.0f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>downward_fov</declname>
+          <defval>70.0f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>height</declname>
+          <defval>1.7f</defval>
+        </param>
+        <param>
+          <type><ref refid="namespace_human_factors_1_1_view_analysis_1ae24b8f5d9783a270e51183ff2eca765c" kindref="member">ViewAggregateType</ref></type>
+          <declname>type</declname>
+          <defval><ref refid="namespace_human_factors_1_1_view_analysis_1ae24b8f5d9783a270e51183ff2eca765ca16de38737a9f8366e9b2042b4e9b6290" kindref="member">ViewAggregateType.AVERAGE</ref></defval>
+        </param>
+        <briefdescription>
+<para>Conduct view analysis and aggregate the results for each node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bvh</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the <ref refid="namespace_human_factors_1_1_geometry" kindref="compound">Geometry</ref> to intersect with. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nodes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Observer locations to perform view analysis from. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ray_count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of rays to fire. Higher values provide more accurate analysis, but increase the runtime of this function </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>upward_fov</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum angle in degrees above the viewer&apos;s eye level that is considered. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>downward_fov</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum angle in degrees below the viewer&apos;s eye level that is considered. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>height</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of the observer. Nodes are offset this distance from the ground before the analysis is performed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>How the distances for all hits should be aggregated. See <ref refid="namespace_human_factors_1_1_view_analysis_1ae24b8f5d9783a270e51183ff2eca765c" kindref="member">ViewAggregateType</ref> for a list of all aggregation methods.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>An ordered array of floats corresponding to the aggregated score for each node in nodes.</para>
+</simplesect>
+The rays for each node will be casted in parallel using all available cores on the host&apos;s machine.</para>
+<para><simplesect kind="remark"><para>This function is much lighter in memory than <ref refid="class_human_factors_1_1_view_analysis_1_1_view_analysis_1aec86f6a5bbc392de04357465994bab39" kindref="member">ViewAnalysisStandard</ref> since all operations are done in place on single floats. Use this as a faster alternative if the scores of nodes are all that&apos;s needed. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/viewanalysis/src/ViewAnalysis.cs" line="77" column="41"/>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_view_analysis_1_1_view_analysis_1aec86f6a5bbc392de04357465994bab39" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_human_factors_1_1_view_analysis_1_1_result_array" kindref="compound">ResultArray</ref></type>
+        <definition>static ResultArray HumanFactors.ViewAnalysis.ViewAnalysis.ViewAnalysisStandard</definition>
+        <argsstring>(EmbreeBVH bvh, IEnumerable&lt; Vector3D &gt; nodes, int ray_count, float upward_fov=50.0f, float downward_fov=70.0f, float height=1.7f)</argsstring>
+        <name>ViewAnalysisStandard</name>
+        <param>
+          <type><ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h" kindref="compound">EmbreeBVH</ref></type>
+          <declname>bvh</declname>
+        </param>
+        <param>
+          <type>IEnumerable&lt; <ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref> &gt;</type>
+          <declname>nodes</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ray_count</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>upward_fov</declname>
+          <defval>50.0f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>downward_fov</declname>
+          <defval>70.0f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>height</declname>
+          <defval>1.7f</defval>
+        </param>
+        <briefdescription>
+<para>Conduct View Analysis and access the results of every ray casted for every node. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bvh</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="namespace_human_factors_1_1_geometry" kindref="compound">Geometry</ref> to intersect with. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nodes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Observer locations to perform view analysis from. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ray_count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of rays to fire.Higher values provide more accurate analysis, but increase the runtime and memory consumption of this function. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>upward_fov</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum angle in degrees above the viewer&apos;s eye level that is considered. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>downward_fov</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum angle in degrees below the viewer&apos;s eye level that is considered. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>height</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Height of the observer. Nodes are offset this distance from the ground before the analysis is performed.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A <computeroutput>nodes.Count()</computeroutput> by <computeroutput>num_rays</computeroutput> 2 dimensional array of results for each node and each ray casted. For example, every ray for node one is located at row 1, and the results for every ray casted from node 2 are located at row 2.</para>
+</simplesect>
+The rays for each node will be casted in parallel using all available cores on the host&apos;s machine.</para>
+<para><simplesect kind="warning"><para>The number of rays casted may not exactly match ray_count depending on the provided field of view restrictions.</para>
+</simplesect>
+<simplesect kind="note"><para>The hitpoints for each ray in the returned array can be determined using the directions <ref refid="class_human_factors_1_1_view_analysis_1_1_view_analysis_1abc1d51bdf752a4fa36af012e90cc8acb" kindref="member">SphericallyDistributeRays()</ref> with the same fov and ray_count parameters. Failures to intersect geometry will return -1. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/viewanalysis/src/ViewAnalysis.cs" line="126" column="35"/>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_view_analysis_1_1_view_analysis_1abc1d51bdf752a4fa36af012e90cc8acb" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="class_human_factors_1_1_view_analysis_1_1_direction_array" kindref="compound">DirectionArray</ref></type>
+        <definition>static DirectionArray HumanFactors.ViewAnalysis.ViewAnalysis.SphericallyDistributeRays</definition>
+        <argsstring>(int num_rays, float upward_fov=50f, float downward_fov=70f)</argsstring>
+        <name>SphericallyDistributeRays</name>
+        <param>
+          <type>int</type>
+          <declname>num_rays</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>upward_fov</declname>
+          <defval>50f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>downward_fov</declname>
+          <defval>70f</defval>
+        </param>
+        <briefdescription>
+<para>Distribute a set of points equally on a unit sphere. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>num_rays</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of points to distribute. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>upward_fov</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum angle above the sphere to generate points in degrees, </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>downward_fov</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum angle in degrees downwards to generate.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>An array of equally distributed points on a unit sphere.</para>
+</simplesect>
+<simplesect kind="warning"><para>The number of rays casted may not exactly match ray_count depending on the provided field of view restrictions.</para>
+</simplesect>
+<simplesect kind="note"><para>This is the same function used internally by view analysis to equally distribute ray directions. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/viewanalysis/src/ViewAnalysis.cs" line="160" column="38"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Functions for analyzing the view of an observer in an environment at human scale. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="note"><para>All of these functions internally use a raytracer, so a <ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h" kindref="compound">HumanFactors.RayTracing.EmbreeBVH</ref> is required. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="src/Csharp/packages/viewanalysis/src/ViewAnalysis.cs" line="51" column="19" bodyfile="src/Csharp/packages/viewanalysis/src/ViewAnalysis.cs" bodystart="52" bodyend="165"/>
+    <listofallmembers>
+      <member refid="class_human_factors_1_1_view_analysis_1_1_view_analysis_1abc1d51bdf752a4fa36af012e90cc8acb" prot="public" virt="non-virtual"><scope>HumanFactors::ViewAnalysis::ViewAnalysis</scope><name>SphericallyDistributeRays</name></member>
+      <member refid="class_human_factors_1_1_view_analysis_1_1_view_analysis_1a1cdb30c740e2efd5a1a01ef633c734ac" prot="public" virt="non-virtual"><scope>HumanFactors::ViewAnalysis::ViewAnalysis</scope><name>ViewAnalysisAggregate</name></member>
+      <member refid="class_human_factors_1_1_view_analysis_1_1_view_analysis_1aec86f6a5bbc392de04357465994bab39" prot="public" virt="non-virtual"><scope>HumanFactors::ViewAnalysis::ViewAnalysis</scope><name>ViewAnalysisStandard</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

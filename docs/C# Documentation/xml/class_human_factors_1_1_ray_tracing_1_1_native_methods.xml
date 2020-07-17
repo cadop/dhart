@@ -1,0 +1,692 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.18">
+  <compounddef id="class_human_factors_1_1_ray_tracing_1_1_native_methods" kind="class" language="C#" prot="package">
+    <compoundname>HumanFactors::RayTracing::NativeMethods</compoundname>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="class_human_factors_1_1_ray_tracing_1_1_native_methods_1a33bff83220385d71991474bc36512cdb" prot="private" static="yes" mutable="no">
+        <type>const string</type>
+        <definition>const string HumanFactors.RayTracing.NativeMethods.dllpath</definition>
+        <argsstring></argsstring>
+        <name>dllpath</name>
+        <initializer>= NativeConstants.DLLPath</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/raytracer/src/RayTracerNative.cs" line="19" column="30" bodyfile="src/Csharp/packages/raytracer/src/RayTracerNative.cs" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="package-static-func">
+      <memberdef kind="function" id="class_human_factors_1_1_ray_tracing_1_1_native_methods_1a5b70660f05d759a53218b07efe07090b" prot="package" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>IntPtr</type>
+        <definition>static IntPtr HumanFactors.RayTracing.NativeMethods.C_ConstructRaytracer</definition>
+        <argsstring>(IntPtr mesh_info_ptr)</argsstring>
+        <name>C_ConstructRaytracer</name>
+        <param>
+          <type>IntPtr</type>
+          <declname>mesh_info_ptr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/raytracer/src/RayTracerNative.cs" line="21" column="32" bodyfile="src/Csharp/packages/raytracer/src/RayTracerNative.cs" bodystart="21" bodyend="31"/>
+        <references refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1ae4b3f2b9a36d2610b522c1252c3169c9">HumanFactors.RayTracing.NativeMethods.CreateRaytracer</references>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_ray_tracing_1_1_native_methods_1ae8a837406264a061a4ea79b2eed426d6" prot="package" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref></type>
+        <definition>static Vector3D HumanFactors.RayTracing.NativeMethods.C_IntesectPoint</definition>
+        <argsstring>(IntPtr rt_ptr, float x, float y, float z, float dx, float dy, float dz, float max_distance=-1)</argsstring>
+        <name>C_IntesectPoint</name>
+        <param>
+          <type>IntPtr</type>
+          <declname>rt_ptr</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>z</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>dx</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>dy</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>dz</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>max_distance</declname>
+          <defval>-1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/raytracer/src/RayTracerNative.cs" line="33" column="34" bodyfile="src/Csharp/packages/raytracer/src/RayTracerNative.cs" bodystart="33" bodyend="40"/>
+        <references refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1a985126efaaf8c95d6fb49425a8b6443c">HumanFactors.RayTracing.NativeMethods.FireRay</references>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_ray_tracing_1_1_native_methods_1ad44bad6cc8dca86d8cae05353e165a8e" prot="package" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref>[]</type>
+        <definition>static Vector3D [] HumanFactors.RayTracing.NativeMethods.C_IntersectPoints</definition>
+        <argsstring>(IntPtr ert, IEnumerable&lt; Vector3D &gt; origins, IEnumerable&lt; Vector3D &gt; directions, float max_distance)</argsstring>
+        <name>C_IntersectPoints</name>
+        <param>
+          <type>IntPtr</type>
+          <declname>ert</declname>
+        </param>
+        <param>
+          <type>IEnumerable&lt; <ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref> &gt;</type>
+          <declname>origins</declname>
+        </param>
+        <param>
+          <type>IEnumerable&lt; <ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref> &gt;</type>
+          <declname>directions</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>max_distance</declname>
+        </param>
+        <briefdescription>
+<para>cs the intersect points. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ert</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The ert.</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>origins</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The origins.</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>directions</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The directions.</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>max_distance</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The maximum distance.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>System.ArgumentException</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Arguments did not match one of the predefined cases!</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>System.Exception</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Multiple rays failed to fire</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/raytracer/src/RayTracerNative.cs" line="52" column="34" bodyfile="src/Csharp/packages/raytracer/src/RayTracerNative.cs" bodystart="52" bodyend="87"/>
+        <references refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1a44c2b1d55dda3a993d0411f66f2d0c5f">HumanFactors.RayTracing.NativeMethods.FireMultipleDirectionsOneOrigin</references>
+        <references refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1a57f4977fd19a6ee72c4ab34dd563c8d7">HumanFactors.RayTracing.NativeMethods.FireMultipleOriginsOneDirection</references>
+        <references refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1a5d6e9fc666bf29b2ac9bf3fe75c074db">HumanFactors.RayTracing.NativeMethods.FireMultipleRays</references>
+        <references refid="class_human_factors_1_1_native_utils_1_1_helper_functions_1ac871336ffa2bbfd33523a93ba600acb0" compoundref="_native_utils_8cs" startline="154" endline="176">HumanFactors.NativeUtils.HelperFunctions.FloatArrayToVectorArray</references>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_ray_tracing_1_1_native_methods_1a678fc6a9e4fd7c2a083940dbea2083cf" prot="package" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_human_factors_1_1_native_utils_1_1_c_vector_and_data" kindref="compound">CVectorAndData</ref></type>
+        <definition>static CVectorAndData HumanFactors.RayTracing.NativeMethods.C_IntersectRays</definition>
+        <argsstring>(IntPtr ray_tracer, IEnumerable&lt; Vector3D &gt; origins, IEnumerable&lt; Vector3D &gt; directions, float max_distance)</argsstring>
+        <name>C_IntersectRays</name>
+        <param>
+          <type>IntPtr</type>
+          <declname>ray_tracer</declname>
+        </param>
+        <param>
+          <type>IEnumerable&lt; <ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref> &gt;</type>
+          <declname>origins</declname>
+        </param>
+        <param>
+          <type>IEnumerable&lt; <ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref> &gt;</type>
+          <declname>directions</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>max_distance</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/raytracer/src/RayTracerNative.cs" line="89" column="40" bodyfile="src/Csharp/packages/raytracer/src/RayTracerNative.cs" bodystart="89" bodyend="118"/>
+        <references refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1a96c75fac4a3d2e1804cab2f4dbddc868">HumanFactors.RayTracing.NativeMethods.FireRaysDistance</references>
+        <references refid="class_human_factors_1_1_native_utils_1_1_helper_functions_1a1b8660057551684c95da0edd711293e6" compoundref="_native_utils_8cs" startline="120" endline="134">HumanFactors.NativeUtils.HelperFunctions.FlattenVectorArray</references>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_ray_tracing_1_1_native_methods_1ab43791c6e75a4273e51c33db1ada2638" prot="package" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool[]</type>
+        <definition>static bool [] HumanFactors.RayTracing.NativeMethods.C_FireOcclusionRays</definition>
+        <argsstring>(IntPtr rt_ptr, IEnumerable&lt; Vector3D &gt; origins, IEnumerable&lt; Vector3D &gt; directions, float max_distance)</argsstring>
+        <name>C_FireOcclusionRays</name>
+        <param>
+          <type>IntPtr</type>
+          <declname>rt_ptr</declname>
+        </param>
+        <param>
+          <type>IEnumerable&lt; <ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref> &gt;</type>
+          <declname>origins</declname>
+        </param>
+        <param>
+          <type>IEnumerable&lt; <ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref> &gt;</type>
+          <declname>directions</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>max_distance</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/raytracer/src/RayTracerNative.cs" line="120" column="30" bodyfile="src/Csharp/packages/raytracer/src/RayTracerNative.cs" bodystart="120" bodyend="145"/>
+        <references refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1af942902fcb3b3fb189e0384da3791a12">HumanFactors.RayTracing.NativeMethods.FireOcclusionRays</references>
+        <references refid="class_human_factors_1_1_native_utils_1_1_helper_functions_1a1b8660057551684c95da0edd711293e6" compoundref="_native_utils_8cs" startline="120" endline="134">HumanFactors.NativeUtils.HelperFunctions.FlattenVectorArray</references>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_ray_tracing_1_1_native_methods_1ab66c33ca01db97ccb4e391dcefb4b8d4" prot="package" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_human_factors_1_1_ray_tracing_1_1_ray_result" kindref="compound">RayResult</ref></type>
+        <definition>static RayResult HumanFactors.RayTracing.NativeMethods.C_IntersectRay</definition>
+        <argsstring>(IntPtr rt_ptr, Vector3D origin, Vector3D direction, float max_distance)</argsstring>
+        <name>C_IntersectRay</name>
+        <param>
+          <type>IntPtr</type>
+          <declname>rt_ptr</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref></type>
+          <declname>origin</declname>
+        </param>
+        <param>
+          <type><ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref></type>
+          <declname>direction</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>max_distance</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/raytracer/src/RayTracerNative.cs" line="147" column="35" bodyfile="src/Csharp/packages/raytracer/src/RayTracerNative.cs" bodystart="147" bodyend="162"/>
+        <references refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1a3107158dd3e14f505acc8adde2903801">HumanFactors.RayTracing.NativeMethods.FireSingleRayDistance</references>
+        <references refid="struct_human_factors_1_1_vector3_d_1a1113b06e4bc74c2ef7f4fb35446f2a11" compoundref="_common_types_8cs" startline="41">HumanFactors.Vector3D.x</references>
+        <references refid="struct_human_factors_1_1_vector3_d_1a99cfb2d4db44be124ade92faa825cdd1" compoundref="_common_types_8cs" startline="42">HumanFactors.Vector3D.y</references>
+        <references refid="struct_human_factors_1_1_vector3_d_1ac8fb1423e902a5b760b43769bfbf240c" compoundref="_common_types_8cs" startline="43">HumanFactors.Vector3D.z</references>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_ray_tracing_1_1_native_methods_1aeb49b62a21e0c3c115748f3fad2d0525" prot="package" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void HumanFactors.RayTracing.NativeMethods.C_DestroyRayTracer</definition>
+        <argsstring>(IntPtr rt_ptr)</argsstring>
+        <name>C_DestroyRayTracer</name>
+        <param>
+          <type>IntPtr</type>
+          <declname>rt_ptr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/raytracer/src/RayTracerNative.cs" line="164" column="30"/>
+        <referencedby refid="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_1a9ece3f96ea62288bb7875ac37e037303" compoundref="_embree_b_v_h_8cs" startline="51" endline="55">HumanFactors.RayTracing.EmbreeBVH.ReleaseHandle</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_ray_tracing_1_1_native_methods_1aee1bf4cc1b76021bc4559a04eceb7acb" prot="package" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void HumanFactors.RayTracing.NativeMethods.C_DestroyRayResults</definition>
+        <argsstring>(IntPtr ray_ptr)</argsstring>
+        <name>C_DestroyRayResults</name>
+        <param>
+          <type>IntPtr</type>
+          <declname>ray_ptr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/raytracer/src/RayTracerNative.cs" line="166" column="30"/>
+        <referencedby refid="class_human_factors_1_1_ray_tracing_1_1_ray_results_1ac53020df1bc190e306f45b487d60ec57" compoundref="_ray_result_structs_8cs" startline="43" endline="47">HumanFactors.RayTracing.RayResults.ReleaseHandle</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_human_factors_1_1_ray_tracing_1_1_native_methods_1ae4b3f2b9a36d2610b522c1252c3169c9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespace_human_factors_1_1_exceptions_1a8a5123945956ef2d754b5420be18987f" kindref="member">HF_STATUS</ref></type>
+        <definition>static HF_STATUS HumanFactors.RayTracing.NativeMethods.CreateRaytracer</definition>
+        <argsstring>(IntPtr mesh, ref IntPtr out_raytracer)</argsstring>
+        <name>CreateRaytracer</name>
+        <param>
+          <type>IntPtr</type>
+          <declname>mesh</declname>
+        </param>
+        <param>
+          <type>ref IntPtr</type>
+          <declname>out_raytracer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/raytracer/src/RayTracerNative.cs" line="169" column="41"/>
+        <referencedby refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1a5b70660f05d759a53218b07efe07090b" compoundref="_ray_tracer_native_8cs" startline="21" endline="31">HumanFactors.RayTracing.NativeMethods.C_ConstructRaytracer</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_ray_tracing_1_1_native_methods_1a985126efaaf8c95d6fb49425a8b6443c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespace_human_factors_1_1_exceptions_1a8a5123945956ef2d754b5420be18987f" kindref="member">HF_STATUS</ref></type>
+        <definition>static HF_STATUS HumanFactors.RayTracing.NativeMethods.FireRay</definition>
+        <argsstring>(IntPtr ert, ref float x, ref float y, ref float z, float dx, float dy, float dz, float max_distance, ref bool result)</argsstring>
+        <name>FireRay</name>
+        <param>
+          <type>IntPtr</type>
+          <declname>ert</declname>
+        </param>
+        <param>
+          <type>ref float</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>ref float</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>ref float</type>
+          <declname>z</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>dx</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>dy</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>dz</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>max_distance</declname>
+        </param>
+        <param>
+          <type>ref bool</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/raytracer/src/RayTracerNative.cs" line="175" column="41"/>
+        <referencedby refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1ae8a837406264a061a4ea79b2eed426d6" compoundref="_ray_tracer_native_8cs" startline="33" endline="40">HumanFactors.RayTracing.NativeMethods.C_IntesectPoint</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_ray_tracing_1_1_native_methods_1a3107158dd3e14f505acc8adde2903801" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespace_human_factors_1_1_exceptions_1a8a5123945956ef2d754b5420be18987f" kindref="member">HF_STATUS</ref></type>
+        <definition>static HF_STATUS HumanFactors.RayTracing.NativeMethods.FireSingleRayDistance</definition>
+        <argsstring>(IntPtr ert, [In] float[] origin, [In] float[] direction, float max_distance, ref float out_distance, ref int out_meshid)</argsstring>
+        <name>FireSingleRayDistance</name>
+        <param>
+          <type>IntPtr</type>
+          <declname>ert</declname>
+        </param>
+        <param>
+          <attributes>[In]</attributes>
+          <type>float[]</type>
+          <declname>origin</declname>
+        </param>
+        <param>
+          <attributes>[In]</attributes>
+          <type>float[]</type>
+          <declname>direction</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>max_distance</declname>
+        </param>
+        <param>
+          <type>ref float</type>
+          <declname>out_distance</declname>
+        </param>
+        <param>
+          <type>ref int</type>
+          <declname>out_meshid</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/raytracer/src/RayTracerNative.cs" line="188" column="41"/>
+        <referencedby refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1ab66c33ca01db97ccb4e391dcefb4b8d4" compoundref="_ray_tracer_native_8cs" startline="147" endline="162">HumanFactors.RayTracing.NativeMethods.C_IntersectRay</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_ray_tracing_1_1_native_methods_1a5d6e9fc666bf29b2ac9bf3fe75c074db" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespace_human_factors_1_1_exceptions_1a8a5123945956ef2d754b5420be18987f" kindref="member">HF_STATUS</ref></type>
+        <definition>static HF_STATUS HumanFactors.RayTracing.NativeMethods.FireMultipleRays</definition>
+        <argsstring>(IntPtr ert, [In, Out] float[] origins, float[] directions, int size, float max_distance, [MarshalAs(UnmanagedType.LPArray, ArraySubType=UnmanagedType.I1)][Out]bool[] result_array)</argsstring>
+        <name>FireMultipleRays</name>
+        <param>
+          <type>IntPtr</type>
+          <declname>ert</declname>
+        </param>
+        <param>
+          <attributes>[In, Out]</attributes>
+          <type>float[]</type>
+          <declname>origins</declname>
+        </param>
+        <param>
+          <type>float[]</type>
+          <declname>directions</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>max_distance</declname>
+        </param>
+        <param>
+          <attributes>[Out]</attributes>
+          <type>bool[]</type>
+          <declname>result_array</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/raytracer/src/RayTracerNative.cs" line="198" column="41"/>
+        <referencedby refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1ad44bad6cc8dca86d8cae05353e165a8e" compoundref="_ray_tracer_native_8cs" startline="52" endline="87">HumanFactors.RayTracing.NativeMethods.C_IntersectPoints</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_ray_tracing_1_1_native_methods_1a44c2b1d55dda3a993d0411f66f2d0c5f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespace_human_factors_1_1_exceptions_1a8a5123945956ef2d754b5420be18987f" kindref="member">HF_STATUS</ref></type>
+        <definition>static HF_STATUS HumanFactors.RayTracing.NativeMethods.FireMultipleDirectionsOneOrigin</definition>
+        <argsstring>(IntPtr bvh, [In] float[] origin, [In] float[] directions, int size, float max_distance, [MarshalAs(UnmanagedType.LPArray, ArraySubType=UnmanagedType.I1)][Out] bool[] result_array)</argsstring>
+        <name>FireMultipleDirectionsOneOrigin</name>
+        <param>
+          <type>IntPtr</type>
+          <declname>bvh</declname>
+        </param>
+        <param>
+          <attributes>[In]</attributes>
+          <type>float[]</type>
+          <declname>origin</declname>
+        </param>
+        <param>
+          <attributes>[In]</attributes>
+          <type>float[]</type>
+          <declname>directions</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>max_distance</declname>
+        </param>
+        <param>
+          <attributes>[Out]</attributes>
+          <type>bool[]</type>
+          <declname>result_array</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/raytracer/src/RayTracerNative.cs" line="209" column="41"/>
+        <referencedby refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1ad44bad6cc8dca86d8cae05353e165a8e" compoundref="_ray_tracer_native_8cs" startline="52" endline="87">HumanFactors.RayTracing.NativeMethods.C_IntersectPoints</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_ray_tracing_1_1_native_methods_1a57f4977fd19a6ee72c4ab34dd563c8d7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespace_human_factors_1_1_exceptions_1a8a5123945956ef2d754b5420be18987f" kindref="member">HF_STATUS</ref></type>
+        <definition>static HF_STATUS HumanFactors.RayTracing.NativeMethods.FireMultipleOriginsOneDirection</definition>
+        <argsstring>(IntPtr bvh, [In] float[] origin, [In] float[] directions, int size, float max_distance, [MarshalAs(UnmanagedType.LPArray, ArraySubType=UnmanagedType.I1)][Out] bool[] result_array)</argsstring>
+        <name>FireMultipleOriginsOneDirection</name>
+        <param>
+          <type>IntPtr</type>
+          <declname>bvh</declname>
+        </param>
+        <param>
+          <attributes>[In]</attributes>
+          <type>float[]</type>
+          <declname>origin</declname>
+        </param>
+        <param>
+          <attributes>[In]</attributes>
+          <type>float[]</type>
+          <declname>directions</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>max_distance</declname>
+        </param>
+        <param>
+          <attributes>[Out]</attributes>
+          <type>bool[]</type>
+          <declname>result_array</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/raytracer/src/RayTracerNative.cs" line="220" column="41"/>
+        <referencedby refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1ad44bad6cc8dca86d8cae05353e165a8e" compoundref="_ray_tracer_native_8cs" startline="52" endline="87">HumanFactors.RayTracing.NativeMethods.C_IntersectPoints</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_ray_tracing_1_1_native_methods_1af942902fcb3b3fb189e0384da3791a12" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespace_human_factors_1_1_exceptions_1a8a5123945956ef2d754b5420be18987f" kindref="member">HF_STATUS</ref></type>
+        <definition>static HF_STATUS HumanFactors.RayTracing.NativeMethods.FireOcclusionRays</definition>
+        <argsstring>(IntPtr bvh, [In] float[] origins, [In] float[] directions, int origin_size, int direction_size, float max_distance, [MarshalAs(UnmanagedType.LPArray, ArraySubType=UnmanagedType.I1)][Out] bool[] result_array)</argsstring>
+        <name>FireOcclusionRays</name>
+        <param>
+          <type>IntPtr</type>
+          <declname>bvh</declname>
+        </param>
+        <param>
+          <attributes>[In]</attributes>
+          <type>float[]</type>
+          <declname>origins</declname>
+        </param>
+        <param>
+          <attributes>[In]</attributes>
+          <type>float[]</type>
+          <declname>directions</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>origin_size</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>direction_size</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>max_distance</declname>
+        </param>
+        <param>
+          <attributes>[Out]</attributes>
+          <type>bool[]</type>
+          <declname>result_array</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/raytracer/src/RayTracerNative.cs" line="231" column="41"/>
+        <referencedby refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1ab43791c6e75a4273e51c33db1ada2638" compoundref="_ray_tracer_native_8cs" startline="120" endline="145">HumanFactors.RayTracing.NativeMethods.C_FireOcclusionRays</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_ray_tracing_1_1_native_methods_1a71cd22d057375a51038f525365bf1dbb" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespace_human_factors_1_1_exceptions_1a8a5123945956ef2d754b5420be18987f" kindref="member">HF_STATUS</ref></type>
+        <definition>static HF_STATUS HumanFactors.RayTracing.NativeMethods.DestroyRayTracer</definition>
+        <argsstring>(IntPtr MeshPointer)</argsstring>
+        <name>DestroyRayTracer</name>
+        <param>
+          <type>IntPtr</type>
+          <declname>MeshPointer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/raytracer/src/RayTracerNative.cs" line="243" column="41"/>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_ray_tracing_1_1_native_methods_1af4c1e1622cc5b1ba34cb23ade3436fb6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespace_human_factors_1_1_exceptions_1a8a5123945956ef2d754b5420be18987f" kindref="member">HF_STATUS</ref></type>
+        <definition>static HF_STATUS HumanFactors.RayTracing.NativeMethods.DestroyRayResultVector</definition>
+        <argsstring>(IntPtr analysis)</argsstring>
+        <name>DestroyRayResultVector</name>
+        <param>
+          <type>IntPtr</type>
+          <declname>analysis</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/raytracer/src/RayTracerNative.cs" line="246" column="41"/>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_ray_tracing_1_1_native_methods_1a96c75fac4a3d2e1804cab2f4dbddc868" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespace_human_factors_1_1_exceptions_1a8a5123945956ef2d754b5420be18987f" kindref="member">HF_STATUS</ref></type>
+        <definition>static HF_STATUS HumanFactors.RayTracing.NativeMethods.FireRaysDistance</definition>
+        <argsstring>(IntPtr ert, [In] float[] origins, int num_origins, [In] float[] directions, int num_directions, ref IntPtr out_results, ref IntPtr out_data)</argsstring>
+        <name>FireRaysDistance</name>
+        <param>
+          <type>IntPtr</type>
+          <declname>ert</declname>
+        </param>
+        <param>
+          <attributes>[In]</attributes>
+          <type>float[]</type>
+          <declname>origins</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>num_origins</declname>
+        </param>
+        <param>
+          <attributes>[In]</attributes>
+          <type>float[]</type>
+          <declname>directions</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>num_directions</declname>
+        </param>
+        <param>
+          <type>ref IntPtr</type>
+          <declname>out_results</declname>
+        </param>
+        <param>
+          <type>ref IntPtr</type>
+          <declname>out_data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/raytracer/src/RayTracerNative.cs" line="249" column="41"/>
+        <referencedby refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1a678fc6a9e4fd7c2a083940dbea2083cf" compoundref="_ray_tracer_native_8cs" startline="89" endline="118">HumanFactors.RayTracing.NativeMethods.C_IntersectRays</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/Csharp/packages/raytracer/src/RayTracerNative.cs" line="17" column="21" bodyfile="src/Csharp/packages/raytracer/src/RayTracerNative.cs" bodystart="18" bodyend="258"/>
+    <listofallmembers>
+      <member refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1a5b70660f05d759a53218b07efe07090b" prot="package" virt="non-virtual"><scope>HumanFactors::RayTracing::NativeMethods</scope><name>C_ConstructRaytracer</name></member>
+      <member refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1aee1bf4cc1b76021bc4559a04eceb7acb" prot="package" virt="non-virtual"><scope>HumanFactors::RayTracing::NativeMethods</scope><name>C_DestroyRayResults</name></member>
+      <member refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1aeb49b62a21e0c3c115748f3fad2d0525" prot="package" virt="non-virtual"><scope>HumanFactors::RayTracing::NativeMethods</scope><name>C_DestroyRayTracer</name></member>
+      <member refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1ab43791c6e75a4273e51c33db1ada2638" prot="package" virt="non-virtual"><scope>HumanFactors::RayTracing::NativeMethods</scope><name>C_FireOcclusionRays</name></member>
+      <member refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1ad44bad6cc8dca86d8cae05353e165a8e" prot="package" virt="non-virtual"><scope>HumanFactors::RayTracing::NativeMethods</scope><name>C_IntersectPoints</name></member>
+      <member refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1ab66c33ca01db97ccb4e391dcefb4b8d4" prot="package" virt="non-virtual"><scope>HumanFactors::RayTracing::NativeMethods</scope><name>C_IntersectRay</name></member>
+      <member refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1a678fc6a9e4fd7c2a083940dbea2083cf" prot="package" virt="non-virtual"><scope>HumanFactors::RayTracing::NativeMethods</scope><name>C_IntersectRays</name></member>
+      <member refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1ae8a837406264a061a4ea79b2eed426d6" prot="package" virt="non-virtual"><scope>HumanFactors::RayTracing::NativeMethods</scope><name>C_IntesectPoint</name></member>
+      <member refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1ae4b3f2b9a36d2610b522c1252c3169c9" prot="private" virt="non-virtual"><scope>HumanFactors::RayTracing::NativeMethods</scope><name>CreateRaytracer</name></member>
+      <member refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1af4c1e1622cc5b1ba34cb23ade3436fb6" prot="private" virt="non-virtual"><scope>HumanFactors::RayTracing::NativeMethods</scope><name>DestroyRayResultVector</name></member>
+      <member refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1a71cd22d057375a51038f525365bf1dbb" prot="private" virt="non-virtual"><scope>HumanFactors::RayTracing::NativeMethods</scope><name>DestroyRayTracer</name></member>
+      <member refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1a33bff83220385d71991474bc36512cdb" prot="private" virt="non-virtual"><scope>HumanFactors::RayTracing::NativeMethods</scope><name>dllpath</name></member>
+      <member refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1a44c2b1d55dda3a993d0411f66f2d0c5f" prot="private" virt="non-virtual"><scope>HumanFactors::RayTracing::NativeMethods</scope><name>FireMultipleDirectionsOneOrigin</name></member>
+      <member refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1a57f4977fd19a6ee72c4ab34dd563c8d7" prot="private" virt="non-virtual"><scope>HumanFactors::RayTracing::NativeMethods</scope><name>FireMultipleOriginsOneDirection</name></member>
+      <member refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1a5d6e9fc666bf29b2ac9bf3fe75c074db" prot="private" virt="non-virtual"><scope>HumanFactors::RayTracing::NativeMethods</scope><name>FireMultipleRays</name></member>
+      <member refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1af942902fcb3b3fb189e0384da3791a12" prot="private" virt="non-virtual"><scope>HumanFactors::RayTracing::NativeMethods</scope><name>FireOcclusionRays</name></member>
+      <member refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1a985126efaaf8c95d6fb49425a8b6443c" prot="private" virt="non-virtual"><scope>HumanFactors::RayTracing::NativeMethods</scope><name>FireRay</name></member>
+      <member refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1a96c75fac4a3d2e1804cab2f4dbddc868" prot="private" virt="non-virtual"><scope>HumanFactors::RayTracing::NativeMethods</scope><name>FireRaysDistance</name></member>
+      <member refid="class_human_factors_1_1_ray_tracing_1_1_native_methods_1a3107158dd3e14f505acc8adde2903801" prot="private" virt="non-virtual"><scope>HumanFactors::RayTracing::NativeMethods</scope><name>FireSingleRayDistance</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

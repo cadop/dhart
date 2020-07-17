@@ -1,0 +1,173 @@
+\hypertarget{class_human_factors_1_1_visibility_graph_1_1_native_methods}{}\doxysection{Human\+Factors.\+Visibility\+Graph.\+Native\+Methods Class Reference}
+\label{class_human_factors_1_1_visibility_graph_1_1_native_methods}\index{HumanFactors.VisibilityGraph.NativeMethods@{HumanFactors.VisibilityGraph.NativeMethods}}
+\doxysubsection*{Static Package Functions}
+\begin{DoxyCompactItemize}
+\item 
+static Int\+Ptr \mbox{\hyperlink{class_human_factors_1_1_visibility_graph_1_1_native_methods_a1d143831fb37b4a2195d70a94cb3d977}{C\+\_\+\+All\+To\+All\+Visibility\+Graph}} (Int\+Ptr bvh, I\+Enumerable$<$ \mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}} $>$ nodes, float height, bool directed=false)
+\item 
+static Int\+Ptr \mbox{\hyperlink{class_human_factors_1_1_visibility_graph_1_1_native_methods_ad47df2f1b644b87ecd8b4c99676ff8c1}{C\+\_\+\+Group\+To\+Group\+Visibility\+Graph}} (Int\+Ptr bvh, I\+Enumerable$<$ \mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}} $>$ group\+\_\+a, I\+Enumerable$<$ \mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}} $>$ group\+\_\+b, float height)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \mbox{\hyperlink{class_human_factors_1_1_visibility_graph_1_1_native_methods_aef47a7e91c6886fd55b4c7075c763826}{Create\+Visibility\+Graph\+All\+To\+All}} (Int\+Ptr ert, \mbox{[}In\mbox{]} float\mbox{[}$\,$\mbox{]} nodes, int num\+\_\+nodes, ref Int\+Ptr out\+\_\+graph, float height)
+\item 
+static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \mbox{\hyperlink{class_human_factors_1_1_visibility_graph_1_1_native_methods_ade1cf7191ccdb49e0fe4f54340bf6c30}{Create\+Visibility\+Graph\+All\+To\+All\+Undirected}} (Int\+Ptr ert, \mbox{[}In\mbox{]} float\mbox{[}$\,$\mbox{]} nodes, int num\+\_\+nodes, ref Int\+Ptr out\+\_\+graph, float height)
+\item 
+static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \mbox{\hyperlink{class_human_factors_1_1_visibility_graph_1_1_native_methods_a2e8bfe5708d0278729f15bcf7e7c0f2e}{Create\+Visibility\+Graph\+Group\+To\+Group}} (Int\+Ptr ert, \mbox{[}In\mbox{]} float\mbox{[}$\,$\mbox{]} group\+\_\+a, int size\+\_\+a, \mbox{[}In\mbox{]} float\mbox{[}$\,$\mbox{]} group\+\_\+b, int size\+\_\+b, ref Int\+Ptr out\+\_\+graph, float height)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const string \mbox{\hyperlink{class_human_factors_1_1_visibility_graph_1_1_native_methods_a143473ee4f6439a1f0bf0756350ef353}{dllpath}} = Native\+Constants.\+D\+L\+L\+Path
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 14 of file Visibility\+Graph\+Native.\+cs.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_human_factors_1_1_visibility_graph_1_1_native_methods_a1d143831fb37b4a2195d70a94cb3d977}\label{class_human_factors_1_1_visibility_graph_1_1_native_methods_a1d143831fb37b4a2195d70a94cb3d977}} 
+\index{HumanFactors.VisibilityGraph.NativeMethods@{HumanFactors.VisibilityGraph.NativeMethods}!C\_AllToAllVisibilityGraph@{C\_AllToAllVisibilityGraph}}
+\index{C\_AllToAllVisibilityGraph@{C\_AllToAllVisibilityGraph}!HumanFactors.VisibilityGraph.NativeMethods@{HumanFactors.VisibilityGraph.NativeMethods}}
+\doxysubsubsection{\texorpdfstring{C\_AllToAllVisibilityGraph()}{C\_AllToAllVisibilityGraph()}}
+{\footnotesize\ttfamily static Int\+Ptr Human\+Factors.\+Visibility\+Graph.\+Native\+Methods.\+C\+\_\+\+All\+To\+All\+Visibility\+Graph (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{bvh,  }\item[{I\+Enumerable$<$ \mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}} $>$}]{nodes,  }\item[{float}]{height,  }\item[{bool}]{directed = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [package]}}
+
+
+
+Definition at line 18 of file Visibility\+Graph\+Native.\+cs.
+
+
+
+References Human\+Factors.\+Visibility\+Graph.\+Native\+Methods.\+Create\+Visibility\+Graph\+All\+To\+All(), Human\+Factors.\+Visibility\+Graph.\+Native\+Methods.\+Create\+Visibility\+Graph\+All\+To\+All\+Undirected(), and Human\+Factors.\+Native\+Utils.\+Helper\+Functions.\+Flatten\+Vector\+Array().
+
+
+
+Referenced by Human\+Factors.\+Visibility\+Graph.\+Visibility\+Graph.\+Generate\+All\+To\+All().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_human_factors_1_1_visibility_graph_1_1_native_methods_a1d143831fb37b4a2195d70a94cb3d977_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_human_factors_1_1_visibility_graph_1_1_native_methods_a1d143831fb37b4a2195d70a94cb3d977_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_human_factors_1_1_visibility_graph_1_1_native_methods_ad47df2f1b644b87ecd8b4c99676ff8c1}\label{class_human_factors_1_1_visibility_graph_1_1_native_methods_ad47df2f1b644b87ecd8b4c99676ff8c1}} 
+\index{HumanFactors.VisibilityGraph.NativeMethods@{HumanFactors.VisibilityGraph.NativeMethods}!C\_GroupToGroupVisibilityGraph@{C\_GroupToGroupVisibilityGraph}}
+\index{C\_GroupToGroupVisibilityGraph@{C\_GroupToGroupVisibilityGraph}!HumanFactors.VisibilityGraph.NativeMethods@{HumanFactors.VisibilityGraph.NativeMethods}}
+\doxysubsubsection{\texorpdfstring{C\_GroupToGroupVisibilityGraph()}{C\_GroupToGroupVisibilityGraph()}}
+{\footnotesize\ttfamily static Int\+Ptr Human\+Factors.\+Visibility\+Graph.\+Native\+Methods.\+C\+\_\+\+Group\+To\+Group\+Visibility\+Graph (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{bvh,  }\item[{I\+Enumerable$<$ \mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}} $>$}]{group\+\_\+a,  }\item[{I\+Enumerable$<$ \mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}} $>$}]{group\+\_\+b,  }\item[{float}]{height }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [package]}}
+
+
+
+Definition at line 33 of file Visibility\+Graph\+Native.\+cs.
+
+
+
+References Human\+Factors.\+Visibility\+Graph.\+Native\+Methods.\+Create\+Visibility\+Graph\+Group\+To\+Group(), and Human\+Factors.\+Native\+Utils.\+Helper\+Functions.\+Flatten\+Vector\+Array().
+
+
+
+Referenced by Human\+Factors.\+Visibility\+Graph.\+Visibility\+Graph.\+Generate\+Group\+To\+Group().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_human_factors_1_1_visibility_graph_1_1_native_methods_ad47df2f1b644b87ecd8b4c99676ff8c1_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_human_factors_1_1_visibility_graph_1_1_native_methods_ad47df2f1b644b87ecd8b4c99676ff8c1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_human_factors_1_1_visibility_graph_1_1_native_methods_aef47a7e91c6886fd55b4c7075c763826}\label{class_human_factors_1_1_visibility_graph_1_1_native_methods_aef47a7e91c6886fd55b4c7075c763826}} 
+\index{HumanFactors.VisibilityGraph.NativeMethods@{HumanFactors.VisibilityGraph.NativeMethods}!CreateVisibilityGraphAllToAll@{CreateVisibilityGraphAllToAll}}
+\index{CreateVisibilityGraphAllToAll@{CreateVisibilityGraphAllToAll}!HumanFactors.VisibilityGraph.NativeMethods@{HumanFactors.VisibilityGraph.NativeMethods}}
+\doxysubsubsection{\texorpdfstring{CreateVisibilityGraphAllToAll()}{CreateVisibilityGraphAllToAll()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} Human\+Factors.\+Visibility\+Graph.\+Native\+Methods.\+Create\+Visibility\+Graph\+All\+To\+All (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{ert,  }\item[{\mbox{[}\+In\mbox{]} float\mbox{[}$\,$\mbox{]}}]{nodes,  }\item[{int}]{num\+\_\+nodes,  }\item[{ref Int\+Ptr}]{out\+\_\+graph,  }\item[{float}]{height }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by Human\+Factors.\+Visibility\+Graph.\+Native\+Methods.\+C\+\_\+\+All\+To\+All\+Visibility\+Graph().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_human_factors_1_1_visibility_graph_1_1_native_methods_aef47a7e91c6886fd55b4c7075c763826_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_human_factors_1_1_visibility_graph_1_1_native_methods_ade1cf7191ccdb49e0fe4f54340bf6c30}\label{class_human_factors_1_1_visibility_graph_1_1_native_methods_ade1cf7191ccdb49e0fe4f54340bf6c30}} 
+\index{HumanFactors.VisibilityGraph.NativeMethods@{HumanFactors.VisibilityGraph.NativeMethods}!CreateVisibilityGraphAllToAllUndirected@{CreateVisibilityGraphAllToAllUndirected}}
+\index{CreateVisibilityGraphAllToAllUndirected@{CreateVisibilityGraphAllToAllUndirected}!HumanFactors.VisibilityGraph.NativeMethods@{HumanFactors.VisibilityGraph.NativeMethods}}
+\doxysubsubsection{\texorpdfstring{CreateVisibilityGraphAllToAllUndirected()}{CreateVisibilityGraphAllToAllUndirected()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} Human\+Factors.\+Visibility\+Graph.\+Native\+Methods.\+Create\+Visibility\+Graph\+All\+To\+All\+Undirected (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{ert,  }\item[{\mbox{[}\+In\mbox{]} float\mbox{[}$\,$\mbox{]}}]{nodes,  }\item[{int}]{num\+\_\+nodes,  }\item[{ref Int\+Ptr}]{out\+\_\+graph,  }\item[{float}]{height }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by Human\+Factors.\+Visibility\+Graph.\+Native\+Methods.\+C\+\_\+\+All\+To\+All\+Visibility\+Graph().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_human_factors_1_1_visibility_graph_1_1_native_methods_ade1cf7191ccdb49e0fe4f54340bf6c30_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_human_factors_1_1_visibility_graph_1_1_native_methods_a2e8bfe5708d0278729f15bcf7e7c0f2e}\label{class_human_factors_1_1_visibility_graph_1_1_native_methods_a2e8bfe5708d0278729f15bcf7e7c0f2e}} 
+\index{HumanFactors.VisibilityGraph.NativeMethods@{HumanFactors.VisibilityGraph.NativeMethods}!CreateVisibilityGraphGroupToGroup@{CreateVisibilityGraphGroupToGroup}}
+\index{CreateVisibilityGraphGroupToGroup@{CreateVisibilityGraphGroupToGroup}!HumanFactors.VisibilityGraph.NativeMethods@{HumanFactors.VisibilityGraph.NativeMethods}}
+\doxysubsubsection{\texorpdfstring{CreateVisibilityGraphGroupToGroup()}{CreateVisibilityGraphGroupToGroup()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} Human\+Factors.\+Visibility\+Graph.\+Native\+Methods.\+Create\+Visibility\+Graph\+Group\+To\+Group (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{ert,  }\item[{\mbox{[}\+In\mbox{]} float\mbox{[}$\,$\mbox{]}}]{group\+\_\+a,  }\item[{int}]{size\+\_\+a,  }\item[{\mbox{[}\+In\mbox{]} float\mbox{[}$\,$\mbox{]}}]{group\+\_\+b,  }\item[{int}]{size\+\_\+b,  }\item[{ref Int\+Ptr}]{out\+\_\+graph,  }\item[{float}]{height }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by Human\+Factors.\+Visibility\+Graph.\+Native\+Methods.\+C\+\_\+\+Group\+To\+Group\+Visibility\+Graph().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_human_factors_1_1_visibility_graph_1_1_native_methods_a2e8bfe5708d0278729f15bcf7e7c0f2e_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_human_factors_1_1_visibility_graph_1_1_native_methods_a143473ee4f6439a1f0bf0756350ef353}\label{class_human_factors_1_1_visibility_graph_1_1_native_methods_a143473ee4f6439a1f0bf0756350ef353}} 
+\index{HumanFactors.VisibilityGraph.NativeMethods@{HumanFactors.VisibilityGraph.NativeMethods}!dllpath@{dllpath}}
+\index{dllpath@{dllpath}!HumanFactors.VisibilityGraph.NativeMethods@{HumanFactors.VisibilityGraph.NativeMethods}}
+\doxysubsubsection{\texorpdfstring{dllpath}{dllpath}}
+{\footnotesize\ttfamily const string Human\+Factors.\+Visibility\+Graph.\+Native\+Methods.\+dllpath = Native\+Constants.\+D\+L\+L\+Path\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Definition at line 16 of file Visibility\+Graph\+Native.\+cs.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Csharp/packages/visibilitygraph/src/\mbox{\hyperlink{_visibility_graph_native_8cs}{Visibility\+Graph\+Native.\+cs}}\end{DoxyCompactItemize}

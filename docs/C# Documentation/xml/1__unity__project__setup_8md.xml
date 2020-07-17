@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.18">
+  <compounddef id="1__unity__project__setup_8md" kind="file" language="Markdown">
+    <compoundname>1_unity_project_setup.md</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline></codeline>
+<codeline><highlight class="normal">#<sp/>Setting<sp/>Up<sp/>a<sp/>Unity<sp/>Project<sp/>for<sp/>Human<sp/>Factors<sp/>{#UnityProjectSetup}</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Next<sp/>Tutorial:<sp/>[Using<sp/>The<sp/>Raytracer](@ref<sp/>UsingTheRaytracer)<sp/>OR<sp/>[Generating<sp/>A<sp/>Graph](@ref<sp/>GeneratingAGraph)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">[TOC]</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Before<sp/>we<sp/>begin</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">In<sp/>this<sp/>guide<sp/>we<sp/>will<sp/>cover<sp/>the<sp/>following:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>Creating<sp/>a<sp/>new<sp/>Unity<sp/>project.</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Importing<sp/>HumanFactors<sp/>to<sp/>a<sp/>Unity<sp/>project.</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>Verifying<sp/>that<sp/>a<sp/>Unity<sp/>project<sp/>code<sp/>can<sp/>reference<sp/>HumanFactors.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Prerequisites</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>An<sp/>installation<sp/>of<sp/>[Unity](https://unity3d.com/get-unity/download).<sp/>This<sp/>tutorial<sp/>has<sp/>been<sp/>tested<sp/>with<sp/>Unity<sp/>2019.3f,<sp/>but<sp/>should<sp/>work<sp/>from<sp/>2018.3<sp/>on.</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>An<sp/>installation<sp/>of<sp/>Visual<sp/>Studio<sp/>with<sp/>Unity<sp/>integration.<sp/>Instructions<sp/>for<sp/>installing<sp/>Unity<sp/>with<sp/>support<sp/>for<sp/>Visual<sp/>Studio<sp/>or<sp/>adding<sp/>VisualStudio<sp/>support<sp/>to<sp/>an<sp/>existing<sp/>installation<sp/>of<sp/>Unity<sp/>are<sp/>available<sp/>[here](https://docs.microsoft.com/en-us/visualstudio/cross-platform/getting-started-with-visual-studio-tools-for-unity?view=vs-2019).</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>A<sp/>copy<sp/>of<sp/>the<sp/>HumanFactors<sp/>release<sp/>built<sp/>with<sp/>support<sp/>for<sp/>C#.<sp/>The<sp/>`bin`<sp/>folder<sp/>of<sp/>the<sp/>release<sp/>should<sp/>contain<sp/>the<sp/>following<sp/>files:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>1.<sp/>embree3.dll</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>2.<sp/>HumanFactors.dll</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>3.<sp/>HumanFactorsCSharp.dll</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>4.<sp/>msvcp140.dll</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>5.<sp/>System.Buffers.dll</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>6.<sp/>System.Memory.dll</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>7.<sp/>System.Runtime.CompilerServices.Unsafe.dll</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>8.<sp/>tbb.dll</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>9.<sp/>vcomp140.dll</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>10.<sp/>vcruntime140.dll</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>11.<sp/>vcruntime140_1.dll</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Creating<sp/>a<sp/>new<sp/>project</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Image](walkthroughs/unity/1_project_setup/UnityNew.PNG)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**1.1**:<sp/>*Creating<sp/>a<sp/>new<sp/>project<sp/>in<sp/>the<sp/>Unity<sp/>Hub*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">To<sp/>begin,<sp/>open<sp/>the<sp/>Unity<sp/>Hub<sp/>then<sp/>click<sp/>the<sp/>*NEW*<sp/>button<sp/>to<sp/>create<sp/>a<sp/>new<sp/>project.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Choose<sp/>Project<sp/>Type](walkthroughs/unity/1_project_setup/unity_choose_project_type.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**1.2**:<sp/>*The<sp/>Create<sp/>a<sp/>Project<sp/>Dialog*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Select<sp/>your<sp/>desired<sp/>project<sp/>type,<sp/>directory,<sp/>and<sp/>project<sp/>name.<sp/>For<sp/>the<sp/>sake<sp/>of<sp/>this<sp/>tutorial,<sp/>we<sp/>will<sp/>be<sp/>using<sp/>the<sp/>*3D*<sp/>project<sp/>type<sp/>and<sp/>naming<sp/>our<sp/>project<sp/>*HumanFactorsUnitySetup*,<sp/>but<sp/>you<sp/>can<sp/>name<sp/>your<sp/>project<sp/>whatever<sp/>you<sp/>want.<sp/>When<sp/>done<sp/>with<sp/>this,<sp/>press<sp/>the<sp/>*Create*<sp/>button<sp/>to<sp/>create<sp/>the<sp/>project<sp/>and<sp/>wait<sp/>while<sp/>Unity<sp/>imports<sp/>all<sp/>the<sp/>necessary<sp/>files.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Empty<sp/>Unity<sp/>Scene](walkthroughs/unity/1_project_setup/blank_unity_scene.PNG)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**1.3**:<sp/>*An<sp/>empty<sp/>Unity<sp/>scene*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Upon<sp/>completion<sp/>you<sp/>should<sp/>be<sp/>greeted<sp/>by<sp/>an<sp/>empty<sp/>Unity<sp/>scene.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Importing<sp/>the<sp/>Human<sp/>Factors<sp/>Library</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Now<sp/>that<sp/>we<sp/>have<sp/>created<sp/>a<sp/>blank<sp/>project,<sp/>we<sp/>need<sp/>to<sp/>import<sp/>the<sp/>HumanFactors<sp/>binaries<sp/>as<sp/>assets<sp/>so<sp/>Unity<sp/>can<sp/>see<sp/>and<sp/>interface<sp/>with<sp/>them.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Moving<sp/>the<sp/>bin<sp/>folder<sp/>into<sp/>the<sp/>assets<sp/>directory](walkthroughs/unity/1_project_setup/bin_to_assets.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**1.4**:<sp/>*Dragging<sp/>the<sp/>HumanFactors<sp/>bin<sp/>folder<sp/>into<sp/>the<sp/>Unity<sp/>Project*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">If<sp/>the<sp/>HumanFactors<sp/>release<sp/>package<sp/>is<sp/>zipped,<sp/>unzip<sp/>the<sp/>contents<sp/>to<sp/>another<sp/>location<sp/>before<sp/>copying<sp/>it<sp/>or<sp/><sp/>you<sp/>will<sp/>get<sp/>an<sp/>error<sp/>when<sp/>trying<sp/>to<sp/>import<sp/>it.<sp/><sp/>Once<sp/>you<sp/>have<sp/>the<sp/>files,<sp/>as<sp/>shown<sp/>in<sp/>Figure<sp/>1.4,<sp/>drag<sp/>the<sp/>`bin`<sp/>folder<sp/>from<sp/>the<sp/>location<sp/>you<sp/>extracted<sp/>the<sp/>release<sp/>to<sp/>into<sp/>the<sp/>Unity<sp/>Editor&apos;s<sp/>assets<sp/>window.<sp/>Once<sp/>you&apos;ve<sp/>done<sp/>this,<sp/>Unity<sp/>should<sp/>display<sp/>the<sp/>*bin*<sp/>folder<sp/>alongside<sp/>the<sp/>existing<sp/>*Scenes*<sp/>folder.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&gt;<sp/>**NOTE**:<sp/>If<sp/>you<sp/>accidentally<sp/>drag<sp/>the<sp/>bin<sp/>folder<sp/>into<sp/>the<sp/>*Scenes*<sp/>folder<sp/>or<sp/>anywhere<sp/>else<sp/>that<sp/>would<sp/>cause<sp/>two<sp/>copies<sp/>of<sp/>the<sp/>same<sp/>dll<sp/>to<sp/>exist<sp/>at<sp/>the<sp/>same<sp/>time,<sp/>delete<sp/>any<sp/>duplicates<sp/>before<sp/>proceding.<sp/>Multiple<sp/>copies<sp/>of<sp/>the<sp/>same<sp/>DLL<sp/>will<sp/>cause<sp/>conflicts<sp/>and<sp/>may<sp/>result<sp/>in<sp/>Unity<sp/>being<sp/>unable<sp/>to<sp/>load<sp/>it<sp/>in<sp/>the<sp/>future<sp/>steps.<sp/>You&apos;ll<sp/>know<sp/>this<sp/>has<sp/>happened<sp/>if<sp/>you<sp/>see<sp/>the<sp/>following<sp/>error<sp/>`Multiple<sp/>plugins<sp/>with<sp/>the<sp/>same<sp/>name<sp/>&apos;humanfactors&apos;<sp/>(found<sp/>at<sp/>&apos;Assets/Scenes/bin/HumanFactors.dll&apos;<sp/>and<sp/>&apos;Assets/bin/HumanFactors.dll&apos;)...`<sp/>at<sp/>the<sp/>bottom<sp/>of<sp/>the<sp/>screen.</highlight></codeline>
+<codeline><highlight class="normal">&gt;![Duplicate<sp/>DLL<sp/>Error](walkthroughs/unity/1_project_setup/duplicate_dll_error.png)</highlight></codeline>
+<codeline><highlight class="normal">&gt;![Delete<sp/>Image](walkthroughs/unity/1_project_setup/delete.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Verifying<sp/>Unity<sp/>can<sp/>reference<sp/>HumanFactors</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>binaries<sp/>have<sp/>been<sp/>added<sp/>to<sp/>our<sp/>project<sp/>as<sp/>assets,<sp/>but<sp/>let&apos;s<sp/>make<sp/>sure<sp/>Unity<sp/>is<sp/>able<sp/>to<sp/>reference<sp/>them<sp/>in<sp/>code.<sp/>To<sp/>verify<sp/>that<sp/>Unity<sp/>can<sp/>reference<sp/>the<sp/>HumanFactors<sp/>binaries,<sp/>we&apos;re<sp/>going<sp/>to<sp/>create<sp/>a<sp/>new<sp/>script<sp/>and<sp/>look<sp/>at<sp/>its<sp/>references.<sp/>If<sp/>we<sp/>did<sp/>everything<sp/>correctly,<sp/>Unity<sp/>should<sp/>automatically<sp/>have<sp/>added<sp/>HumanFactorsCSharp<sp/>as<sp/>a<sp/>reference.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Creating<sp/>a<sp/>new<sp/>C#<sp/>script](walkthroughs/unity/1_project_setup/create_new_script.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**1.5**:<sp/>*Creating<sp/>a<sp/>new<sp/>C#<sp/>Script*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">To<sp/>create<sp/>a<sp/>new<sp/>script,<sp/>right<sp/>click<sp/>on<sp/>a<sp/>blank<sp/>space<sp/>in<sp/>the<sp/>assets<sp/>window,<sp/>hover<sp/>over<sp/>*Create*,<sp/>then<sp/>click<sp/>*C#<sp/>Script*.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Don&apos;t<sp/>click<sp/>anything!<sp/>Rename<sp/>the<sp/>script](walkthroughs/unity/2_raycast_at_plane/rename_script.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/><sp/>**1.6**:<sp/>*Renaming<sp/>a<sp/>new<sp/>script*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Looking<sp/>in<sp/>the<sp/>assets<sp/>window,<sp/>you<sp/>should<sp/>notice<sp/>a<sp/>new<sp/>script<sp/>file<sp/>next<sp/>to<sp/>Scenes<sp/>directory<sp/>titled<sp/>NewBehaviourScript.cs<sp/>by<sp/>default,<sp/>and<sp/>the<sp/>name<sp/>of<sp/>it<sp/>is<sp/>highlighted<sp/>in<sp/>blue<sp/>indicatign<sp/>that<sp/>you<sp/>can<sp/>rename<sp/>it.<sp/>Rename<sp/>the<sp/>script<sp/>to<sp/>HFExampleScript.cs.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&gt;<sp/>**NOTE:**<sp/>If<sp/>you<sp/>didn&apos;t<sp/>name<sp/>the<sp/>file<sp/>properly<sp/>you<sp/>can<sp/>change<sp/>the<sp/>name<sp/>of<sp/>the<sp/>script<sp/>by<sp/>right<sp/>clicking<sp/>on<sp/>it<sp/>and<sp/>clicking<sp/>*Rename*.<sp/>This<sp/>won&apos;t<sp/>change<sp/>the<sp/>name<sp/>of<sp/>the<sp/>class<sp/>that<sp/>the<sp/>script<sp/>contains<sp/>however,<sp/>so<sp/>be<sp/>prepared<sp/>to<sp/>change<sp/>that<sp/>when<sp/>we<sp/>open<sp/>it.<sp/></highlight></codeline>
+<codeline><highlight class="normal">&gt;![Rename<sp/>Dialog](walkthroughs/unity/1_project_setup/../2_raycast_at_plane/rename_dialog.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Double<sp/>Click<sp/>On<sp/>Script](walkthroughs/unity/1_project_setup/double_click_on_script.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**1.7**:<sp/>*HFExampleScript.cs<sp/>in<sp/>the<sp/>assets<sp/>window*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Now<sp/>that<sp/>we<sp/>have<sp/>our<sp/>new<sp/>script,<sp/>double<sp/>click<sp/>on<sp/>it<sp/>to<sp/>open<sp/>Visual<sp/>studio.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![HumanFactors<sp/>referenced<sp/>by<sp/>your<sp/>project](walkthroughs/unity/1_project_setup/visual_studio_human_factors_reference.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**1.8**:<sp/>*Viewing<sp/>the<sp/>references<sp/>of<sp/>a<sp/>project<sp/>in<sp/>Visual<sp/>Studio*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">In<sp/>Visual<sp/>Studio,<sp/>navigate<sp/>to<sp/>the<sp/>*Solution<sp/>Explorer*<sp/>then<sp/>expand<sp/>the<sp/>drop<sp/>downs<sp/>for<sp/>your<sp/>solution,<sp/>Assembly-C-Sharp,<sp/>and<sp/>References.<sp/>If<sp/>everything<sp/>was<sp/>done<sp/>correctly,<sp/>you<sp/>should<sp/>see<sp/>HumanFactors<sp/>C#<sp/>under<sp/>the<sp/>references<sp/>for<sp/>your<sp/>project,<sp/>as<sp/>shown<sp/>in<sp/>Figure<sp/>1.8.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&gt;<sp/>**NOTE**:<sp/>If<sp/>Mono-Develop<sp/>appears<sp/>instead<sp/>of<sp/>Visual<sp/>Studio,<sp/>then<sp/>your<sp/>installation<sp/>of<sp/>Unity<sp/>is<sp/>not<sp/>set<sp/>up<sp/>to<sp/>support<sp/>Visual<sp/>Studio.<sp/>You<sp/>can<sp/>follow<sp/>the<sp/>above<sp/>instructions<sp/>from<sp/>prerequisites<sp/>to<sp/>fix<sp/>this.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&gt;<sp/>**NOTE**:<sp/>If<sp/>you<sp/>renamed<sp/>the<sp/>file<sp/>earlier,<sp/>then<sp/>your<sp/>class&apos;s<sp/>name<sp/>may<sp/>not<sp/>match<sp/>the<sp/>name<sp/>of<sp/>the<sp/>class<sp/>in<sp/>Figure<sp/>1.8.<sp/>To<sp/>fix<sp/>this,<sp/>just<sp/>replace<sp/>the<sp/>class&apos;s<sp/>name<sp/>with<sp/>`HFExampleScript.cs`<sp/>on<sp/>line<sp/>5.</highlight></codeline>
+<codeline><highlight class="normal">&gt;<sp/></highlight></codeline>
+<codeline><highlight class="normal">&gt;<sp/>![Change<sp/>Class<sp/>name](walkthroughs/unity/1_project_setup/../2_raycast_at_plane/change_class_name.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&gt;<sp/>**NOTE:**<sp/>Your<sp/>version<sp/>of<sp/>Visual<sp/>Studio<sp/>may<sp/>use<sp/>the<sp/>light<sp/>theme<sp/>by<sp/>default<sp/>like<sp/>pictured<sp/>below.<sp/>This<sp/>is<sp/>purely<sp/>visual<sp/>and<sp/>will<sp/>not<sp/>have<sp/>any<sp/>impact<sp/>on<sp/>this<sp/>tutorial.</highlight></codeline>
+<codeline><highlight class="normal">&gt;<sp/>![Light<sp/>Theme](walkthroughs/unity/1_project_setup/light_visual_studio.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">If<sp/>you<sp/>see<sp/>HumanFactors<sp/>in<sp/>your<sp/>project&apos;s<sp/>references,<sp/>then<sp/>you&apos;ve<sp/>successfully<sp/>imported<sp/>the<sp/>HumanFactors<sp/>library<sp/>and<sp/>are<sp/>ready<sp/>to<sp/>start<sp/>using<sp/>the<sp/>HumanFactors<sp/>library.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Conclusion</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Below<sp/>is<sp/>a<sp/>link<sp/>to<sp/>the<sp/>unity<sp/>project<sp/>created<sp/>in<sp/>this<sp/>tutorial.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">[Tutorial<sp/>1:<sp/>Unity<sp/>Project<sp/>Setup](Tutorial%201-%20Unity%20Project.zip)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">In<sp/>this<sp/>tutorial,<sp/>we<sp/>went<sp/>through<sp/>the<sp/>process<sp/>of<sp/>creating<sp/>unity<sp/>project<sp/>and<sp/>adding<sp/>the<sp/>Analysis<sp/>toolkit<sp/>to<sp/>the<sp/>project.<sp/>In<sp/>the<sp/>following<sp/>tutorials,<sp/>we<sp/>will<sp/>use<sp/>this<sp/>basis<sp/>for<sp/>using<sp/>the<sp/>modules<sp/>that<sp/>come<sp/>with<sp/>the<sp/>Analysis<sp/>toolkit.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">In<sp/>the<sp/>next<sp/>tutorial:<sp/>[Using<sp/>the<sp/>Raytracer](@ref<sp/>UsingTheRaytracer)<sp/>we<sp/>will<sp/>use<sp/>HumanFactors<sp/>to<sp/>create<sp/>a<sp/>plane,<sp/>cast<sp/>a<sp/>ray<sp/>at<sp/>it,<sp/>then<sp/>get<sp/>the<sp/>point<sp/>where<sp/>the<sp/>ray<sp/>intersected<sp/>the<sp/>plane.</highlight></codeline>
+    </programlisting>
+    <location file="src/Csharp/docs/markdown/1_unity_project_setup.md"/>
+  </compounddef>
+</doxygen>

@@ -106,7 +106,7 @@ Simple Graph Generation</h1>
 </ol>
 <p><img src="blank_new_behaviour_script.png" alt="" class="inline" title="HFExampleScriptBlank"/>   </p>
 <p><em>Figure</em> <b>3.1</b> <em>Blank HFExampleScript.cs</em></p>
-<p>To begin: open the blank HFExample Script that we created in the project setup by double clicking on it in the Unity editor if it isn't open already.</p>
+<p>To begin: open the blank HFExample Script that we created in the project setup by double clicking on it in the Unity editor if it isn't open already. You should see a blank page like the above. If you're coming from a previous script, please clear it so it matches this.</p>
 <h2><a class="anchor" id="autotoc_md19"></a>
 Using Declarations</h2>
 <p><img src="using_declarations.png" alt="" class="inline" title="Using Declarations"/>   </p>
@@ -138,7 +138,7 @@ Creating the Plane</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Generate a BVH for the RayTracer</span></div>
 <div class="line">EmbreeBVH bvh = <span class="keyword">new</span> EmbreeBVH(Plane);</div>
-</div><!-- fragment --><p><a href="walkthroughs/unity/3_graph_generator/creating_the_plane.PNG">Picture of the start method at this point</a></p>
+</div><!-- fragment --><p><img src="creating_the_plane.PNG" alt="" class="inline" title="Picture of the start method at this point"/>   </p>
 <h2><a class="anchor" id="autotoc_md21"></a>
 Generating the Graph</h2>
 <p>Now that we have a BVH, let's generate a graph on it. In the code below, we will define a starting point for the graph, then the spacing between each node.</p>
@@ -156,7 +156,7 @@ Generating the Graph</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Generate the graph</span></div>
 <div class="line">Graph G = GraphGenerator.GenerateGraph(bvh, start_point, spacing);</div>
-</div><!-- fragment --><p><a href="walkthroughs/unity/3_graph_generator/generating_the_graph.PNG">Picture of entire Start method until this point.</a></p>
+</div><!-- fragment --><p><img src="generating_the_graph.PNG" alt="" class="inline" title="Picture of entire Start method until this point."/>   </p>
 <h2><a class="anchor" id="autotoc_md22"></a>
 Retrieving a list of nodes</h2>
 <p>Our graph G now contains a graph of the accessible space on the plane generated using the settings we passed as arguments. To verify that our results are correct, we will get a list of nodes from the graph, then print them to the unity console.</p>
@@ -164,7 +164,7 @@ Retrieving a list of nodes</h2>
 <div class="fragment"><div class="line"><span class="comment">// Get a list of nodes from the graph and print them.</span></div>
 <div class="line">NodeList nodes = G.getNodes();</div>
 <div class="line">Debug.Log(nodes);</div>
-</div><!-- fragment --><p><a href="walkthroughs/unity/3_graph_generator/print_nodes.png">Picture of entire Start method Until this Point</a></p>
+</div><!-- fragment --><p><img src="print_nodes.png" alt="" class="inline" title="Picture of entire Start method Until this Point"/>   </p>
 <h2><a class="anchor" id="autotoc_md23"></a>
 Save and Test</h2>
 <p>Here is the full script we've created from this demo. Make sure yours matches it before moving on to testing.</p>
@@ -201,18 +201,11 @@ Save and Test</h2>
 <div class="line">        EmbreeBVH bvh = <span class="keyword">new</span> EmbreeBVH(Plane);</div>
 <div class="line"> </div>
 <div class="line">        <span class="comment">// Set Options for the Graph Generator</span></div>
-<div class="line">        Vector3D start_point = <span class="keyword">new</span> Vector3D(0, 0, 1); <span class="comment">// The point to start graph generation</span></div>
-<div class="line">        Vector3D spacing = <span class="keyword">new</span> Vector3D(1, 1, 1); <span class="comment">// The spacing between each node</span></div>
+<div class="line">        Vector3D start_point = <span class="keyword">new</span> Vector3D(0, 0, 1);</div>
+<div class="line">        Vector3D spacing = <span class="keyword">new</span> Vector3D(1, 1, 1);</div>
 <div class="line"> </div>
 <div class="line">        <span class="comment">// Generate the Graph</span></div>
 <div class="line">        Graph G = GraphGenerator.GenerateGraph(bvh, start_point, spacing);</div>
-<div class="line"> </div>
-<div class="line">        <span class="comment">// Check if the graph generator succeeded</span></div>
-<div class="line">        <span class="keywordflow">if</span> (G is <span class="keyword">null</span>)</div>
-<div class="line">        {</div>
-<div class="line">            Debug.Log(<span class="stringliteral">&quot;The Graph failed to generate.&quot;</span>);</div>
-<div class="line">            <span class="keywordflow">return</span>;</div>
-<div class="line">        }</div>
 <div class="line"> </div>
 <div class="line">        <span class="comment">// Get a list of nodes from the graph and print them.</span></div>
 <div class="line">        NodeList nodes = G.getNodes();</div>
@@ -267,7 +260,7 @@ Checking for success</h2>
 <h2><a class="anchor" id="autotoc_md26"></a>
 Testing</h2>
 <p>To test that our null check is successful, we'll go to <em>line 34</em> and change our start point to be at (200, 0, 1) instead of (0,0,1): <code>Vector3D start_point = new Vector3D(200, 0, 1);</code> This is far, far beyond where our plane is and should result in case 1: the initial ground check failing to find any valid ground.</p>
-<p><a href="walkthroughs/unity/3_graph_generator/checking_for_success.PNG">Picture of the full Start() method for this test.</a></p>
+<p><img src="checking_for_success.PNG" alt="" class="inline" title="Picture of the full Start() method for this test."/>   </p>
 <p>Since the camera is already setup, all we need to do is enter playmode to test this. Make sure your code matches the picture, <b>save</b> the file, minimize Visual Studio, open the Unity editor, then press the play button.</p>
 <p><img src="failure.png" alt="" class="inline" title="Failure"/>   </p>
 <p><em>Figure</em> <b>3.5</b> <em>Our error message printed after the graph failed to generate</em></p>
@@ -276,14 +269,14 @@ Testing</h2>
 Conclusion</h1>
 <p>Here is a link the full project created in this guide: <a href="Tutorial%203%20-%20Graph%20Generator.zip">Full Project</a></p>
 <p>In this tutorial we successfully generated a graph from a bvh, start point, and spacing. We also handled a case where a graph was unable to be generated, and wrote a custom error message to be printed instead of throwing a null reference exception.</p>
-<p>In the next tutorial, Reading Meshes From Unity, we will use geometry from the Unity scene to generate a graph, instead of manually creatng our own plane. </p>
+<p>In the next tutorial, <a class="el" href="_mesh_from_unity.html">Reading Meshes From Unity</a>, we will use geometry from the Unity scene to generate a graph, instead of manually creatng our own plane. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
-<div class="ttc" id="anamespace_human_factors_1_1_ray_tracing_html"><div class="ttname"><a href="namespace_human_factors_1_1_ray_tracing.html">HumanFactors.RayTracing</a></div><div class="ttdef"><b>Definition:</b> EmbreeBVH.cs:7</div></div>
-<div class="ttc" id="anamespace_human_factors_1_1_graph_generator_html"><div class="ttname"><a href="namespace_human_factors_1_1_graph_generator.html">HumanFactors.GraphGenerator</a></div><div class="ttdef"><b>Definition:</b> GraphGenerator.cs:6</div></div>
-<div class="ttc" id="anamespace_human_factors_1_1_spatial_structures_html"><div class="ttname"><a href="namespace_human_factors_1_1_spatial_structures.html">HumanFactors.SpatialStructures</a></div><div class="ttdef"><b>Definition:</b> Graph.cs:6</div></div>
-<div class="ttc" id="anamespace_human_factors_html"><div class="ttname"><a href="namespace_human_factors.html">HumanFactors</a></div><div class="ttdoc">Automated analysis of the built environent</div><div class="ttdef"><b>Definition:</b> CommonTypes.cs:9</div></div>
-<div class="ttc" id="anamespace_human_factors_1_1_geometry_html"><div class="ttname"><a href="namespace_human_factors_1_1_geometry.html">HumanFactors.Geometry</a></div><div class="ttdef"><b>Definition:</b> CommonRotations.cs:4</div></div>
+<div class="ttc" id="anamespace_human_factors_1_1_ray_tracing_html"><div class="ttname"><a href="namespace_human_factors_1_1_ray_tracing.html">HumanFactors.RayTracing</a></div><div class="ttdoc">Cast rays to determine if and where they intersect geometry.</div><div class="ttdef"><b>Definition:</b> <a href="_embree_b_v_h_8cs_source.html#l00006">EmbreeBVH.cs:7</a></div></div>
+<div class="ttc" id="anamespace_human_factors_1_1_graph_generator_html"><div class="ttname"><a href="namespace_human_factors_1_1_graph_generator.html">HumanFactors.GraphGenerator</a></div><div class="ttdoc">Generate a graph of accessible space from a given start point.</div><div class="ttdef"><b>Definition:</b> <a href="_graph_generator_8cs_source.html#l00023">GraphGenerator.cs:24</a></div></div>
+<div class="ttc" id="anamespace_human_factors_1_1_spatial_structures_html"><div class="ttname"><a href="namespace_human_factors_1_1_spatial_structures.html">HumanFactors.SpatialStructures</a></div><div class="ttdoc">Standard fundamental data structures for representing space used throughout HumanFactors.</div><div class="ttdef"><b>Definition:</b> <a href="_graph_8cs_source.html#l00014">Graph.cs:15</a></div></div>
+<div class="ttc" id="anamespace_human_factors_html"><div class="ttname"><a href="namespace_human_factors.html">HumanFactors</a></div><div class="ttdoc">Automated analysis of the built environent</div><div class="ttdef"><b>Definition:</b> <a href="_common_types_8cs_source.html#l00008">CommonTypes.cs:9</a></div></div>
+<div class="ttc" id="anamespace_human_factors_1_1_geometry_html"><div class="ttname"><a href="namespace_human_factors_1_1_geometry.html">HumanFactors.Geometry</a></div><div class="ttdoc">Manipulate and load geometry from disk.</div><div class="ttdef"><b>Definition:</b> <a href="_common_rotations_8cs_source.html#l00003">CommonRotations.cs:4</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
