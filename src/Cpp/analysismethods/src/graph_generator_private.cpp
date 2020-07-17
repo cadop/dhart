@@ -482,9 +482,6 @@ namespace HF::GraphGenerator {
 		int id = -1.0f;
 		bool res = false;
 		
-		// Round the z value before raycast to assist with uniformity of embree output
-		// position[2] = roundhf(position[2]); Was not needed, leaving here for potential use in future. 
-		
 		// Switch Geometry based on hitflag
 		switch (flag) {
 		case HIT_FLAG::FLOORS: // Both are the same for now. Waiting on obstacle support
