@@ -40,11 +40,20 @@ def LoadOBJ(
     Example:
         Load plane.obj from a folder titled "Example Models" but fail because that file doesn't exist
         
+        >>> import humanfactorspy
         >>> from humanfactorspy.geometry import LoadOBJ
-        >>> MI = LoadOBJ("Example Models/plane.obj")
+        >>> obj = humanfactorspy.get_sample_model("not_real.obj")
+        >>> MI = LoadOBJ(obj)
         Traceback (most recent call last):
         ...
         humanfactorspy.Exceptions.FileNotFoundException
+
+        >>> import humanfactorspy
+        >>> from humanfactorspy.geometry import LoadOBJ
+        >>> obj = humanfactorspy.get_sample_model("plane.obj")
+        >>> MI = LoadOBJ(obj)
+        >>> MI 
+        <humanfactorspy.geometry.mesh_info.MeshInfo object at ...>
 
 
     """

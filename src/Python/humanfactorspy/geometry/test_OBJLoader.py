@@ -7,14 +7,11 @@ import itertools
 from humanfactorspy.Exceptions import InvalidOBJException, FileNotFoundException
 from humanfactorspy.geometry import MeshInfo, LoadOBJ, OBJGroupType, CommonRotations
 
+import humanfactorspy
 
 # ---- TESTING CONSTANTS ----
-good_mesh_path = "Example Models\\sponza.obj"
-good_mesh_paths = ["Example Models\\sponza.obj", "Example Models\\sibenik.obj"]
-bad_mesh_paths = ["BadMeshTHatDoesntExist", "Example Models\\sibenik.obj"]
+good_mesh_path = humanfactorspy.get_sample_model("sponza.obj")
 bad_mesh_path = "MeshPathThatDoesntExist"
-good_db_path = "sql\\Database.db"
-bad_db_path = good_mesh_path
 
 
 def test_GoodMesh():
