@@ -13,6 +13,7 @@ Contents
    install.rst
    start.rst
    code.rst
+   api.rst
    
 Indices and tables
 ==================
