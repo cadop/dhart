@@ -135,7 +135,9 @@ namespace HF::GraphGenerator {
 		/// </param>
 		/// <returns> True on hit, false otherwise. </returns>
 		/*!
-			\post If true is returned, position contains the point where the casted ray intersected geometry.
+			\post 
+			If true is returned, position is updated to contain the point where the 
+			casted ray intersected geometry.
 
 			\exception std::exception if HIT_FLAG isn't a valid value.
 		*/
