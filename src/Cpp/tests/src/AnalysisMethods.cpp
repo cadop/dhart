@@ -103,7 +103,7 @@ namespace HF {
 
 		auto g = GG.BuildNetwork(
 			std::array<float, 3>{0, 0, 0.5},
-			std::array<float, 3>{0.02f, 0.02f, 0.02f},
+			std::array<double, 3>{0.02, 0.02, 0.02},
 			1000,
 			1,
 			1,
@@ -258,7 +258,7 @@ TEST(Performance, GraphGenerator) {
 	// Set Graph generator settings
 	auto ray_tracer = CreateRTWithPlane();
 	std::array<float, 3> start{ 0,0,0 };
-	std::array<float, 3> spacing{ 0.05,0.05,0.05 };
+	std::array<double, 3> spacing{ 0.05,0.05,0.05 };
 	float up_step = 1;
 	float down_step = 1;
 	float up_slope = 30;
