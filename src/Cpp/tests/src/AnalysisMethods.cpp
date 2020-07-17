@@ -44,7 +44,8 @@ namespace HF {
 	
 		auto g = GG.BuildNetwork(
 			std::array<float, 3>{0, 0, 0.5},
-			std::array<float, 3>{0.02f, 0.02f, 0.02f},
+			//std::array<float, 3>{0.02f, 0.02f, 0.02f},
+			std::array<double, 3>{0.02, 0.02, 0.02},
 			1000,
 			1,
 			1,
@@ -57,7 +58,6 @@ namespace HF {
 		ASSERT_GT(g.size(), 0);
 	}
 
-
 	TEST(_GraphGenerator, DuplicateNodes) {
 		auto mesh = Geometry::LoadMeshObjects("energy_blob.obj");
 
@@ -67,7 +67,8 @@ namespace HF {
 		// Generate the graph 
 		auto g = GG.BuildNetwork(
 			std::array<float, 3>{-22.4280376, -12.856843, 5.4826779},
-			std::array<float, 3>{10.0f, 10.0f, 70.0f},
+			//std::array<float, 3>{10.0f, 10.0f, 70.0f},
+			std::array<double, 3>{10.0, 10.0, 70.0},
 			50,
 			10,
 			40,
