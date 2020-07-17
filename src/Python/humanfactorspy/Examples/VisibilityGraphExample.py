@@ -3,7 +3,9 @@ from humanfactorspy.geometry import LoadOBJ, CommonRotations
 from humanfactorspy.raytracer import EmbreeBVH
 from humanfactorspy.visibilitygraph import VisibilityGraphAllToAll
 
-obj_path = "H:\\HumanMetrics\\Codebase\\HumanFactors\\out\\install\\x64-Debug\\Example Models\\plane.obj"
+import humanfactorspy
+
+obj_path = humanfactorspy.get_sample_model("plane.obj")
 loaded_obj = LoadOBJ(obj_path, rotation=CommonRotations.Yup_to_Zup)
 bvh = EmbreeBVH(loaded_obj)
 
