@@ -181,6 +181,23 @@ namespace GraphTests {
 	}
 }
 
+TEST(_Rounding, addition_error)
+{
+	// define values as floats
+	float start = 6.78400040f;
+	float adder = 70.0f;
+
+	// add floats and store as float 
+	float combined = start + adder;
+
+	// define same as doubles
+	double start_d = 6.78400040;
+	double adder_d = 70.0;
+
+	// add doubles and cast to float
+	float combined_double = (float)(start_d + adder_d);
+}
+
 TEST(_Rounding, Equality) {
 
 	float f1 = 3.28399992f;
