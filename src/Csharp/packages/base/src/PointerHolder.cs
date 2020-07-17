@@ -130,10 +130,13 @@ namespace HumanFactors.NativeUtils
 
 
         /*!
-            \brief Return a string representation of all elements in this array, truncating it if necessary
+            \brief Get a string representation of this array. 
 
             \todo 
             Optional toggle for truncation, and modifiable truncation threshold.
+            
+            \returns
+            Return a string representation of all elements in this array, truncating it if necessary.
 
         */
         unsafe public override string ToString()

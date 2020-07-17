@@ -116,11 +116,11 @@ namespace HumanFactors.RayTracing
             </item>
             <item>
             One direction, multiple origins: Fire a ray in the given
-            direction from each origin point in origins. </font>
+            direction from each origin point in origins.
             </item>
             <item>
              One origin, multiple directions: Fire a ray from the origin point
-            in each direction in directions </font>
+            in each direction in directions.
             </item>
             </list>
 
@@ -144,7 +144,7 @@ namespace HumanFactors.RayTracing
             \param max_distance Maximum distance to consider for intersection. Set to -1 for infinite.
 
             \remarks
-            This can be faster than  \link IntersectForPoints,\endlink as the data returned is lighter. If you only need
+            This can be faster than \link IntersectForPoints \endlink,  as the data returned is lighter. If you only need
             the distance or meshID, this function is recommended.
 
             \returns
@@ -173,18 +173,18 @@ namespace HumanFactors.RayTracing
 
             \details
             Can be casted in 3 configurations: </para>
-            <list type = "bullet" >
+            <list type = "bullet">
             <item>
             Equal amount of directions/origins: Cast a ray for every pair of
             origin/direction in order.i.e. (origin[0], direction[0]), (origin[1], direction[1]), etc.
             </item>
             <item>
             One direction, multiple origins: Cast a ray in the given
-            direction from each origin point in origins. </font>
+            direction from each origin point in origins.
             </item>
             <item>
              One origin, multiple directions: Cast a ray from the origin point
-            in each direction in directions</font>
+            in each direction in directions
             </item>
             </list>
 
@@ -203,7 +203,7 @@ namespace HumanFactors.RayTracing
             \brief Determine if any geometry occludes a point from a direction.
 
             \param bvh A valid Embree BVH.
-            \param origins One or more origins.
+            \param origin One or more origins.
             \param direction One or more directions.
             \param max_distance Maximum distance that a ray can travel. Any hits beyond this point are not counted.
 
@@ -219,11 +219,11 @@ namespace HumanFactors.RayTracing
             </item>
             <item>
             One direction, multiple origins: Cast a ray in the given
-            direction from each origin point in origins. </font>
+            direction from each origin point in origins.
             </item>
             <item>
              One origin, multiple directions: Cast a ray from the origin point
-            in each direction in directions</font>
+            in each direction in directions
             </item>
             </list>
 

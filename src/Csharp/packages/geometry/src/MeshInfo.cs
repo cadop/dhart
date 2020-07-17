@@ -103,7 +103,7 @@ namespace HumanFactors.Geometry
             triangle for the mesh.
             \param vertices Vertices of the mesh. Each 3 floats represent the X,Y, and Z of a point in space
             \param name The name of the mesh. Unused for now.
-            \param The unique identifier for this mesh. If -1, this will automatically be set
+            \param id The unique identifier for this mesh. If -1, this will automatically be set
 
             \throws HumanFactors.Exceptions.InvalidMeshException
             The input indices and vertices result in an invalid mesh.
@@ -116,9 +116,9 @@ namespace HumanFactors.Geometry
 		/*!
             \brief Rotate this mesh by the desired magnitude.
 
-            \param rotx Pitch to rotate by in degrees.
-		    \param roty Yaw to rotate by in degrees.
-	        \param rotz Roll to rotate by in degrees.
+            \param xrot Pitch to rotate by in degrees.
+		    \param yrot Yaw to rotate by in degrees.
+	        \param zrot Roll to rotate by in degrees.
 
             \remarks
             See the other overload for this function for use with CommonRotations.

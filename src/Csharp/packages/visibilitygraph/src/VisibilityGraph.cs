@@ -35,7 +35,7 @@ namespace HumanFactors.VisibilityGraph
             \brief Create a visibility graph from every node to every node in nodes.
 
             \param bvh The BVH to intersect with.
-            \paam nodes The nodes to use in the visibility graph.
+            \param nodes The nodes to use in the visibility graph.
             \param height The height to offset each node from the ground. 
             \param directed  if set to true generate a directed graph, otherwise generate an undirected graph.
 

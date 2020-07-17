@@ -83,9 +83,9 @@ namespace HumanFactors.SpatialStructures
         /*!
             \brief Create a new edge between parent and child with cost.
             
-            \param parent The ID of the parent node.
-            \param child  The ID of the child node. 
-            \param cost cost from parent to child</param>
+            \param parent_id The ID of the parent node.
+            \param child_id The ID of the child node. 
+            \param cost cost from parent to child.
 
             \post
             1) If the ID of either parent or child does not exist in the graph

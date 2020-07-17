@@ -6,11 +6,11 @@ using System.Runtime.Remoting.Messaging;
 namespace HumanFactors.RayTracing
 {
     /*!
-        \brief A Bounding Volume Hierarchy for the \link EmbreeRayTracer \endlink.
+        \brief A Bounding Volume Hierarchy for the \link EmbreeRaytracer \endlink.
             
         \details
         Upon calling the constructor for this class, a Bounding Volume Hierarchy is generated 
-        for the \link EmbreeRaytracer \endlink. Without this structure, the raytracer cannot be used.
+        for the \link RayTracing.EmbreeRaytracer \endlink. Without this structure, the raytracer cannot be used.
 
         \remarks
         A more detailed description of Embree's BVH is available in intel's paper:

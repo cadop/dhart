@@ -15,7 +15,7 @@ namespace HumanFactors
     {
         /*!
             \brief Check if this float is finite. 
-            \param The float to check.
+            \param s The float to check.
             \returns true if this float is finite; otherwise, false.
             \details A float is finite if it is not equal to NAN, positive infinity, or negative infinity.
         */
