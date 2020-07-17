@@ -119,6 +119,9 @@ namespace HF::GraphGenerator {
 		// Only crawl geom if start collides
 		if (CheckStart(start)) 
 		{
+			// Truncate the start location z value after the raycast
+			start[2] = trunchf(start[2]);
+
 			// The start position should be valid, so add it as the first part of the queue
 			q.push(start);
 
@@ -165,11 +168,10 @@ namespace HF::GraphGenerator {
 
 			// Add the user-defined spacing to the x and y components of the parent.
 			// Then round the result.
-			//NOTE: It may not be necessary to round x and y here if it is rounded when moving the node
-			//		 or has come in as a rounded value.
 			const float x = roundhf(parent[0] + (i * GG.spacing[0]));
 			const float y = roundhf(parent[1] + (j * GG.spacing[1]));
-			const float z = roundhf(parent[2] + GG.spacing[2]);
+			// Round the z value to a lower precision assuming it helps embree
+			const float z = roundhf(parent[2] + GG.spacing[2], 10000.0f, 0.0001f);
 
 			// Add these new values as a node in the out_children list
 			out_children.emplace_back(Node(x, y, z));
@@ -238,9 +240,11 @@ namespace HF::GraphGenerator {
 			// Check if a ray intersects a mesh
 			if (CheckRay(child, down))
 			{
-                // round the z component of the child node after it has been modified
-				// to account for the error in the ray intersection
-				child[2] = roundhf(child[2]);
+				// Round the childs z value as it comes from a ray intersection 
+				// NOTE: If the x and y values need to be rounded here, there is an issue with the raycast changing this value 
+				// This MUST match or be lower precision than the first time the value is rounded, otherwise it is using garbage values
+				child[2] = roundhf(child[2], 1000.0f, 0.001f); 
+
 				// TODO: this is a premature check and should be moved to the original calling function
 				//      after the step type check since upstep and downstep are parameters for stepping and not slope
 
@@ -262,15 +266,15 @@ namespace HF::GraphGenerator {
 		auto node2 = child;
 
 		// Offset them from the ground slightly
-		node1[2] += 0.001f;
-		node2[2] += 0.001f;
+		node1[2] += GROUND_OFFSET;
+		node2[2] += GROUND_OFFSET;
 
 		// See if there's a direct line of sight between parent and child
 		if (!OcclusionCheck(node1, node2)) {
 
 			// If there is a direct line of sight, and they're on the same plane
 			// then there is no step. 
-			if (abs(node1.z - node2.z) < 0.001f) return STEP::NONE;
+			if (abs(node1.z - node2.z) < GROUND_OFFSET) return STEP::NONE;
 
 			// Check if we can traverse the slope from parent to child.
 			else if (isUpSlope(parent, child)) return STEP::NONE;
@@ -286,14 +290,14 @@ namespace HF::GraphGenerator {
 			// If parent is higher than child, then offset child downwards
 			if (node1[2] > node2[2]) {
 				node1[2] = node1[2] + GG.downstep;
-				node2[2] = node2[2] + 0.001f;
+				node2[2] = node2[2] + GROUND_OFFSET;
 				s = STEP::DOWN;
 			}
 
 			// If parent is lower than child, offset child upwards by upstep
 			else if (node1[2] < node2[2]) {
 				node1[2] = node1[2] + GG.upstep;
-				node2[2] = node2[2] + 0.001f;
+				node2[2] = node2[2] + GROUND_OFFSET;
 				s = STEP::UP;
 			}
 
@@ -301,7 +305,7 @@ namespace HF::GraphGenerator {
 			// if the obstacle can be stepped over.
 			else if (node1[2] == node2[2]) {
 				node1[2] = node1[2] + GG.upstep;
-				node2[2] = node2[2] + 0.001f;
+				node2[2] = node2[2] + GROUND_OFFSET;
 				s = STEP::OVER;
 			}
 
@@ -454,6 +458,9 @@ namespace HF::GraphGenerator {
 
 	bool GraphGeneratorPrivate::CheckRay(v3& position, const v3& direction, HIT_FLAG flag)
 	{
+		// Round the z value before raycast to assist with uniformity of embree output
+		//position[2] = roundhf(position[2], 1000.0f, 0.001f);
+
 		// Switch Geometry based on hitflag
 		switch (flag) {
 		case HIT_FLAG::FLOORS: // Both are the same for now. Waiting on obstacle support
@@ -470,6 +477,10 @@ namespace HF::GraphGenerator {
 
 	bool GraphGeneratorPrivate::CheckRay(Node& position, const v3& direction, HIT_FLAG flag) 
 	{
+		// Round the z value before raycast to assist with uniformity of embree output
+		//position[2] = roundhf(position[2], 1000.0f, 0.001f);
+
+		bool hit_result;
 
 		// Switch Geometry based on hitflag
 		switch (flag) 
@@ -477,29 +488,35 @@ namespace HF::GraphGenerator {
 			// Floors and Obstacles are identical for now.
 			case HIT_FLAG::FLOORS:
 			case HIT_FLAG::OBSTACLES:
-				return GG.ray_tracer.FireRay(
-					position[0],
-					position[1],
-					position[2],
-					direction[0],
-					direction[1],
-					direction[2],
-					-1.0f,
-					GG.walkable_surfaces);
+				// Store the result of the ray intersection
+				hit_result = GG.ray_tracer.FireRay(position[0],position[1],position[2],
+													direction[0],direction[1],direction[2],
+													-1.0f, GG.walkable_surfaces);
 				break;
 
 			case HIT_FLAG::BOTH:
-				return GG.ray_tracer.FireRay(
-					position[0],
-					position[1],
-					position[2],
-					direction[0],
-					direction[1],
-					direction[2]);
+				hit_result = GG.ray_tracer.FireRay(position[0],position[1],position[2],
+													direction[0],direction[1],direction[2]);
+				break;
 
 			default:
 				throw std::exception("Invalid CheckRay flag");
+		} // End Switch
+
+		// If the ray hit
+		if (hit_result)
+		{
+			// Truncate the Z value before leaving this function
+			// This is for clarity, since the node was already modified
+			position[2] = trunchf(position[2]);
 		}
+
+		// Otherwise ray didn't hit, return False
+		else
+		{
+			return false;
+		}
+
 	}
 
 	inline void GraphGeneratorPrivate::ComputerParent(
