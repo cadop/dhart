@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>humanfactorspy.spatialstructures.Graph &mdash; Human Metrics 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="Human Metrics 0.0.1 documentation" href="../index.html" >
+    <link rel="up" title="humanfactorspy.spatialstructures" href="humanfactorspy.spatialstructures.html" >
+    <link rel="next" title="humanfactorspy.spatialstructures.Graph.AddEdgeToGraph" href="humanfactorspy.spatialstructures.Graph.AddEdgeToGraph.html" >
+    <link rel="prev" title="humanfactorspy.spatialstructures.Edge" href="humanfactorspy.spatialstructures.Edge.html" > 
+  </head>
+  <body>
+
+  <div class="container">
+    <div class="header">
+    </div>
+  </div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="http://">Git</a></li>
+	
+        <li class="active"><a href="../index.html">Human Metrics 0.0.1 documentation</a></li>
+	
+          <li class="active"><a href="../code.html" >Code Reference</a></li>
+          <li class="active"><a href="humanfactorspy.spatialstructures.html" accesskey="U">humanfactorspy.spatialstructures</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="humanfactorspy.spatialstructures.Graph.AddEdgeToGraph.html" title="humanfactorspy.spatialstructures.Graph.AddEdgeToGraph"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="humanfactorspy.spatialstructures.Edge.html" title="humanfactorspy.spatialstructures.Edge"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="humanfactorspy-spatialstructures-graph">
+<h1>humanfactorspy.spatialstructures.Graph<a class="headerlink" href="#humanfactorspy-spatialstructures-graph" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="humanfactorspy.spatialstructures.Graph">
+<em class="property">class </em><code class="descclassname">humanfactorspy.spatialstructures.</code><code class="descname">Graph</code><span class="sig-paren">(</span><em><span class="n">graph_ptr</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" title="(in Python v3.8)">ctypes.c_void_p</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/cadop/HumanMetrics/blob/master/Codebase/HumanFactors/humanfactorspy/..\build\Python\humanfactorspy\spatialstructures\graph.py#L31-L168"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#humanfactorspy.spatialstructures.Graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for the human factors graph in C++</p>
+<p>Provides a view of the graph through a numpy csr and manages its
+lifetime.</p>
+<dl class="py attribute">
+<dt id="humanfactorspy.spatialstructures.Graph.csr">
+<code class="descname">csr</code><a class="headerlink" href="#humanfactorspy.spatialstructures.Graph.csr" title="Permalink to this definition">¶</a></dt>
+<dd><p>csr pointing to the underlying graph in C++.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="humanfactorspy.spatialstructures.Graph.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em><span class="n">graph_ptr</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" title="(in Python v3.8)">ctypes.c_void_p</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/cadop/HumanMetrics/blob/master/Codebase/HumanFactors/humanfactorspy/..\build\Python\humanfactorspy\spatialstructures\graph.py#L47-L52"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#humanfactorspy.spatialstructures.Graph.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new graph wrapper object from a graph pointer</p>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils align-default">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="humanfactorspy.spatialstructures.Graph.AddEdgeToGraph.html#humanfactorspy.spatialstructures.Graph.AddEdgeToGraph" title="humanfactorspy.spatialstructures.Graph.AddEdgeToGraph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AddEdgeToGraph</span></code></a>(parent,&nbsp;child,&nbsp;score)</td>
+<td>Add a new edge to the graph from parent to child with the given cost</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="humanfactorspy.spatialstructures.Graph.AggregateEdgeCosts.html#humanfactorspy.spatialstructures.Graph.AggregateEdgeCosts" title="humanfactorspy.spatialstructures.Graph.AggregateEdgeCosts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AggregateEdgeCosts</span></code></a>(ct,&nbsp;directed)</td>
+<td>Get an aggregated score for every node in the graph based on its edges</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="humanfactorspy.spatialstructures.Graph.Clear.html#humanfactorspy.spatialstructures.Graph.Clear" title="humanfactorspy.spatialstructures.Graph.Clear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Clear</span></code></a>()</td>
+<td>Clear all edges/nodes from the graph</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="humanfactorspy.spatialstructures.Graph.CompressToCSR.html#humanfactorspy.spatialstructures.Graph.CompressToCSR" title="humanfactorspy.spatialstructures.Graph.CompressToCSR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CompressToCSR</span></code></a>()</td>
+<td>Compress the graph if needed then return a reference as a CSR matrix</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="humanfactorspy.spatialstructures.Graph.ConvertToLists.html#humanfactorspy.spatialstructures.Graph.ConvertToLists" title="humanfactorspy.spatialstructures.Graph.ConvertToLists"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ConvertToLists</span></code></a>([just_nodes])</td>
+<td>Convert the CSR to a list of nodes and tuples, useful for serialization</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="humanfactorspy.spatialstructures.Graph.GetNodeID.html#humanfactorspy.spatialstructures.Graph.GetNodeID" title="humanfactorspy.spatialstructures.Graph.GetNodeID"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetNodeID</span></code></a>(node)</td>
+<td>Get the id of a node in the graph</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="humanfactorspy.spatialstructures.Graph.getNodes.html#humanfactorspy.spatialstructures.Graph.getNodes" title="humanfactorspy.spatialstructures.Graph.getNodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getNodes</span></code></a>()</td>
+<td>Get a list of nodes from the graph as a nodelist</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils align-default">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">graph_ptr</span></code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="humanfactorspy.spatialstructures.Edge.html"
+                        title="previous chapter">humanfactorspy.spatialstructures.Edge</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="humanfactorspy.spatialstructures.Graph.AddEdgeToGraph.html"
+                        title="next chapter">humanfactorspy.spatialstructures.Graph.AddEdgeToGraph</a></p>
+
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.1.2.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

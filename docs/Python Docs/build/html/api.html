@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>Internal API Documentation &mdash; Human Metrics 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" type="text/css" href="_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="_static/css/spc-extend.css">
+    <link rel="stylesheet" href="_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="genindex.html" >
+    <link rel="search" title="Search" href="search.html" >
+    <link rel="top" title="Human Metrics 0.0.1 documentation" href="index.html" >
+    <link rel="prev" title="humanfactorspy.visibilitygraph.VisibilityGraphUndirectedAllToAll" href="generated/humanfactorspy.visibilitygraph.VisibilityGraphUndirectedAllToAll.html" > 
+  </head>
+  <body>
+
+  <div class="container">
+    <div class="header">
+    </div>
+  </div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="http://">Git</a></li>
+	
+        <li class="active"><a href="index.html">Human Metrics 0.0.1 documentation</a></li>
+	 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="generated/humanfactorspy.visibilitygraph.VisibilityGraphUndirectedAllToAll.html" title="humanfactorspy.visibilitygraph.VisibilityGraphUndirectedAllToAll"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="internal-api-documentation">
+<h1>Internal API Documentation<a class="headerlink" href="#internal-api-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="api-overview">
+<h2>API Overview<a class="headerlink" href="#api-overview" title="Permalink to this headline">¶</a></h2>
+<p>The API differs from the general code reference as it is only internal methods used for
+communicating between the core .dll and the python interface.</p>
+<p>Nothing here should be called by a user. This is only for developer reference.</p>
+</div>
+<div class="section" id="native-functions">
+<h2>Native Functions<a class="headerlink" href="#native-functions" title="Permalink to this headline">¶</a></h2>
+<p class="rubric">Human Factors Package</p>
+<span class="target" id="module-humanfactorspy.common_native_functions"></span><dl class="py function">
+<dt id="humanfactorspy.common_native_functions.ConvertPointsToArray">
+<code class="descclassname">humanfactorspy.common_native_functions.</code><code class="descname">ConvertPointsToArray</code><span class="sig-paren">(</span><em><span class="n">points</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>Tuple<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">]</span><span class="p">, </span>Iterable<span class="p">[</span>Tuple<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">]</span><span class="p">]</span><span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_float" title="(in Python v3.8)">ctypes.c_float</a><a class="reference external" href="https://github.com/cadop/HumanMetrics/blob/master/Codebase/HumanFactors/humanfactorspy/..\build\Python\humanfactorspy\common_native_functions.py#L38-L54"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#humanfactorspy.common_native_functions.ConvertPointsToArray" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a list of floats to a flat c-style array</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="humanfactorspy.common_native_functions.GetStringPtr">
+<code class="descclassname">humanfactorspy.common_native_functions.</code><code class="descname">GetStringPtr</code><span class="sig-paren">(</span><em><span class="n">string</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_char_p" title="(in Python v3.8)">ctypes.c_char_p</a><a class="reference external" href="https://github.com/cadop/HumanMetrics/blob/master/Codebase/HumanFactors/humanfactorspy/..\build\Python\humanfactorspy\common_native_functions.py#L31-L35"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#humanfactorspy.common_native_functions.GetStringPtr" title="Permalink to this definition">¶</a></dt>
+<dd><p>A quick and consistent way to convert strings into c-strings for C++</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="humanfactorspy.common_native_functions.getDLLHandle">
+<code class="descclassname">humanfactorspy.common_native_functions.</code><code class="descname">getDLLHandle</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.CDLL" title="(in Python v3.8)">ctypes.CDLL</a><a class="reference external" href="https://github.com/cadop/HumanMetrics/blob/master/Codebase/HumanFactors/humanfactorspy/..\build\Python\humanfactorspy\common_native_functions.py#L14-L28"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#humanfactorspy.common_native_functions.getDLLHandle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a reference to the C++ DLL</p>
+</dd></dl>
+
+<p class="rubric">Graph Generator</p>
+<span class="target" id="module-humanfactorspy.graphgenerator.graph_generator_native_functions"></span><dl class="py function">
+<dt id="humanfactorspy.graphgenerator.graph_generator_native_functions.GenerateGraph">
+<code class="descclassname">humanfactorspy.graphgenerator.graph_generator_native_functions.</code><code class="descname">GenerateGraph</code><span class="sig-paren">(</span><em><span class="n">rt_ptr</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" title="(in Python v3.8)">ctypes.c_void_p</a></span></em>, <em><span class="n">start_point</span></em>, <em><span class="n">spacing</span></em>, <em><span class="n">max_nodes</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></span></em>, <em><span class="n">up_step</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></span></em>, <em><span class="n">up_slope</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></span></em>, <em><span class="n">down_step</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></span></em>, <em><span class="n">down_slope</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></span></em>, <em><span class="n">max_step_connections</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></span></em>, <em><span class="n">cores</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></span> <span class="o">=</span> <span class="default_value">- 1</span></em><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" title="(in Python v3.8)">ctypes.c_void_p</a><span class="p">]</span><a class="reference external" href="https://github.com/cadop/HumanMetrics/blob/master/Codebase/HumanFactors/humanfactorspy/..\build\Python\humanfactorspy\graphgenerator\graph_generator_native_functions.py#L14-L63"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#humanfactorspy.graphgenerator.graph_generator_native_functions.GenerateGraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate the graph in C++ with a raytracer from CreateRaytracer</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">If the graph creation was successful, return a pointer to the graph.
+Otherwise, return None.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p class="rubric">Geometry</p>
+<span class="target" id="module-humanfactorspy.geometry.meshinfo_native_functions"></span><dl class="py function">
+<dt id="humanfactorspy.geometry.meshinfo_native_functions.CreateMesh">
+<code class="descclassname">humanfactorspy.geometry.meshinfo_native_functions.</code><code class="descname">CreateMesh</code><span class="sig-paren">(</span><em><span class="n">indices</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">]</span></span></em>, <em><span class="n">vertices</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">]</span></span></em>, <em><span class="n">name</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em>, <em><span class="n">id</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" title="(in Python v3.8)">ctypes.c_void_p</a><a class="reference external" href="https://github.com/cadop/HumanMetrics/blob/master/Codebase/HumanFactors/humanfactorspy/..\build\Python\humanfactorspy\geometry\meshinfo_native_functions.py#L46-L87"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#humanfactorspy.geometry.meshinfo_native_functions.CreateMesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pass mesh data to C++ as a list of indices and vertices</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>indices</strong> – A list of indices with each 3 representing a triangle. Must be a multiple of 3</li>
+<li><strong>vertices</strong> – A list of vertices, with each 3 floats representing a unique vertex</li>
+<li><strong>name</strong> – The name of the mesh internally</li>
+<li><strong>id</strong> – The mesh’s ID</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A pointer to a valid MeshInfo object in c++</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="py function">
+<dt id="humanfactorspy.geometry.meshinfo_native_functions.CreateOBJ">
+<code class="descclassname">humanfactorspy.geometry.meshinfo_native_functions.</code><code class="descname">CreateOBJ</code><span class="sig-paren">(</span><em><span class="n">obj_file_path</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em>, <em><span class="n">group_type</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></span> <span class="o">=</span> <span class="default_value">0</span></em>, <em><span class="n">rotation</span><span class="p">:</span> <span class="n">Tuple<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">0, 0, 0</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" title="(in Python v3.8)">ctypes.c_void_p</a><a class="reference external" href="https://github.com/cadop/HumanMetrics/blob/master/Codebase/HumanFactors/humanfactorspy/..\build\Python\humanfactorspy\geometry\meshinfo_native_functions.py#L13-L43"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#humanfactorspy.geometry.meshinfo_native_functions.CreateOBJ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read an obj from the given file path in C++ and return a pointer to it.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><strong>InvalidOBJException</strong> – OBJ fails to load from the given filepath</li>
+<li><strong>FileNotFoundException</strong> – No file exists at the given filepath</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="py function">
+<dt id="humanfactorspy.geometry.meshinfo_native_functions.DestroyMeshInfo">
+<code class="descclassname">humanfactorspy.geometry.meshinfo_native_functions.</code><code class="descname">DestroyMeshInfo</code><span class="sig-paren">(</span><em><span class="n">mesh_info_ptr</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" title="(in Python v3.8)">ctypes.c_void_p</a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/cadop/HumanMetrics/blob/master/Codebase/HumanFactors/humanfactorspy/..\build\Python\humanfactorspy\geometry\meshinfo_native_functions.py#L95-L97"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#humanfactorspy.geometry.meshinfo_native_functions.DestroyMeshInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call the destructor for MeshInfo</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Internal API Documentation</a><ul>
+<li><a class="reference internal" href="#api-overview">API Overview</a></li>
+<li><a class="reference internal" href="#native-functions">Native Functions</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="generated/humanfactorspy.visibilitygraph.VisibilityGraphUndirectedAllToAll.html"
+                        title="previous chapter">humanfactorspy.visibilitygraph.VisibilityGraphUndirectedAllToAll</a></p>
+
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.1.2.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>
