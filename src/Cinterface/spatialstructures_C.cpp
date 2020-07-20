@@ -1,3 +1,4 @@
+#include "cost_algorithms.h"
 #include <spatialstructures_C.h>
 #include <HFExceptions.h>
 #include <graph.h>
@@ -267,6 +268,26 @@ C_INTERFACE ClearAttributeType(HF::SpatialStructures::Graph* g, const char* s) {
 		// Does not hurt to check if s is non-null
 		g->ClearNodeAttributes(std::string(s));
 	}
+
+	return OK;
+}
+
+
+C_INTERFACE CalculateAndStoreCrossSlope(HF::SpatialStructures::Graph* g) {
+	// Collecting cross slope data for all parent nodes.
+
+	// In std::vector<std::vector<IntEdge>> Graph::CalculateCrossSlope(Graph& g),
+	// std::vector<IntEdge> Graph::CalculateCrossSlope(Subgraph& sg)
+	// is called for all Subgraph in g.
+
+	// result is a std::vector<std::vector<IntEdge>>
+	auto result = HF::SpatialStructures::CostAlgorithms::CalculateCrossSlope(*g);
+
+	// Now passing result, a std::vector<std::vector<IntEdge>> to Graph::AddEdges.
+	// The result container will be ordered by parent id.
+
+	// TODO: implement void Graph::AddEdges(std::vector<std::vector<IntEdge>>& edges);
+	g->AddEdges(result);
 
 	return OK;
 }
