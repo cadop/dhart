@@ -327,19 +327,19 @@ namespace HF::SpatialStructures {
 		else {
 			
 			// See if we need to reallocate.
-			ResizeIfNeeded(std::max(parent_id, child_id));
+			ResizeIfNeeded();
 			edge_matrix.insert(parent_id, child_id) = cost;
 		}
 	}
 
-	void Graph::ResizeIfNeeded(int new_size)
+	void Graph::ResizeIfNeeded()
 	{
-		new_size += 1; // You need 1 more column/row than max capacity. 
+		const int num_nodes = ordered_nodes.size() + 1; // You need 1 more column/row than max capacity. 
 
-		if (new_size > edge_matrix.rows())
-			edge_matrix.conservativeResize(new_size, new_size);
+		if (num_nodes > edge_matrix.rows())
+			edge_matrix.conservativeResize(num_nodes, num_nodes);
 
-		assert(new_size <= edge_matrix.rows() && new_size <= edge_matrix.cols());
+		assert(num_nodes <= edge_matrix.rows() && num_nodes <= edge_matrix.cols());
 	}
 
 	bool Graph::HasEdge(int parent, int child, bool undirected) const {
@@ -362,7 +362,7 @@ namespace HF::SpatialStructures {
 		return HasEdge(parent_id, child_id, undirected);
 	}
 
-	int Graph::getOrAssignID(const Node& input_node)
+	inline int Graph::getOrAssignID(const Node& input_node)
 	{
 		// If it's already in the hashmap, then just return the existing ID
 		if (hasKey(input_node))
