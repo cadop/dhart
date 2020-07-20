@@ -1,3 +1,4 @@
+#include "cost_algorithms.h"
 #include <spatialstructures_C.h>
 #include <HFExceptions.h>
 #include <graph.h>
@@ -7,6 +8,7 @@
 #include <iostream>
 
 using HF::SpatialStructures::Graph;
+using HF::SpatialStructures::Subgraph;
 using HF::SpatialStructures::Node;
 using HF::SpatialStructures::Edge;
 using namespace HF::Exceptions;
@@ -18,11 +20,11 @@ C_INTERFACE  GetAllNodesFromGraph(const Graph* graph, vector<Node>** out_vector_
 		return HF_STATUS::INVALID_PTR;
 
 	try {
-		
+
 		std::vector<Node>* nodes = new vector<Node>();
 		auto i = (*graph);
 		*nodes = graph->Nodes();
-			
+
 		*out_data_ptr = nodes->data();
 		*out_vector_ptr = nodes;
 		return OK;
@@ -31,7 +33,7 @@ C_INTERFACE  GetAllNodesFromGraph(const Graph* graph, vector<Node>** out_vector_
 	return GENERIC_ERROR;
 }
 C_INTERFACE GetSizeOfNodeVector(
-	const vector<Node>* node_list, 
+	const vector<Node>* node_list,
 	int* out_size
 ) {
 	*out_size = node_list->size();
@@ -39,7 +41,7 @@ C_INTERFACE GetSizeOfNodeVector(
 }
 
 C_INTERFACE GetSizeOfEdgeVector(
-	const vector<Edge>* edge_list, 
+	const vector<Edge>* edge_list,
 	int* out_size
 ){
 	*out_size = edge_list->size();
@@ -114,11 +116,11 @@ C_INTERFACE GetCSRPointers(
 	*out_nnz = CSR.nnz;
 	*out_num_rows = CSR.rows;
 	*out_num_cols = CSR.cols;
-	
+
 	*out_data_ptr = CSR.data;
 	*out_inner_indices_ptr = CSR.inner_indices;
 	*out_outer_indices_ptr = CSR.outer_indices;
-	
+
 	return OK;
 }
 
@@ -127,7 +129,7 @@ C_INTERFACE GetNodeID(
 	const float * point,
 	int* out_id
 ) {
-	
+
 	Node node(point[0], point[1], point[2]);
 	*out_id = graph->getID(node);
 	return OK;
