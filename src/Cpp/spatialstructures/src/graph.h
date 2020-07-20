@@ -329,8 +329,8 @@ namespace HF::SpatialStructures {
 
 	private:
 		std::vector<Node> ordered_nodes;				///< A list of nodes contained by the graph.
-		std::vector<int> id_to_nodes;					///< Maps ids to indexes in ordered_nodes.
-		robin_hood::unordered_map<Node, int> idmap;		///< Maps a list of X,Y,Z positions to ids
+		robin_hood::unordered_map<int, int> id_to_ordered_node; ///< Maps ids to indexes in ordered_nodes.
+		robin_hood::unordered_map<Node, int> idmap;		///< Maps a list of X,Y,Z positions to positions in ordered_nodes
 		Eigen::SparseMatrix<float, 1> edge_matrix;		///< The underlying CSR containing edge nformation.
 		int next_id = 0;								///< The id for the next unique node.
 		std::vector<Eigen::Triplet<float>> triplets;	///< Edges to be converted to a CSR when Graph::Compress() is called.
@@ -348,7 +348,7 @@ namespace HF::SpatialStructures {
 			then the node node will and its new id will be added to idmap. If the node has already been 
 			assigned an ID, then the ID will be returned directly from idmap. 
 
-			\param input_node Node to retrieve and potentially assign a new ID for. 
+			\param input_node Node to retrieve and potentially assign a new ID for. 
 			\returns The ID of input_node. 
 
 			\code
@@ -356,7 +356,7 @@ namespace HF::SpatialStructures {
 			\endcode
 		*/
 		/// \snippet spatialstructures\src\graph.cpp GetOrAssignID_Node
-		int getOrAssignID(const Node& input_node);
+		int getOrAssignID(const Node & input_node);
 
 		/*!
 			\brief Add an ID to the graph if it doesn't exist already.
@@ -389,6 +389,15 @@ namespace HF::SpatialStructures {
 
 		/*! \brief Resize the array if needed. */
 		void ResizeIfNeeded();
+
+		/*! \brief check if an ID has already been assigned.*/
+		bool hasKey(int id) const;
+
+		/*! \brief Get the index of node `n` in ordered_nodes.*/
+		int GetIndex(const Node & n) const;
+
+		/*! \brief Get the index of the node with id `id` in ordered_nodes.*/
+		int GetIndex(const int id) const;
 	
 	public:
 		/*!

@@ -18,6 +18,7 @@ using namespace Eigen;
 using std::vector;
 using std::string;
 
+
 namespace HF::SpatialStructures {
 
 		/*!
@@ -61,7 +62,7 @@ namespace HF::SpatialStructures {
 	}
 
 
-	int Graph::size() const { return id_to_nodes.size(); }
+	int Graph::size() const { return ordered_nodes.size(); }
 
 	int Graph::getID(const Node& node) const
 	{
@@ -92,7 +93,7 @@ namespace HF::SpatialStructures {
 	}
 
 
-	Node Graph::NodeFromID(int id) const { return ordered_nodes[id]; }
+	Node Graph::NodeFromID(int id) const { return ordered_nodes[id_to_ordered_node.at(id)];}
 
 	std::vector<Node> Graph::Nodes() const {
 		return ordered_nodes;
@@ -248,12 +249,12 @@ namespace HF::SpatialStructures {
 
 	const std::vector<Edge> Graph::operator[](const Node& n) const
 	{
-		// Get the parent id at N. This will throw if n doesn't exist in the hashmap
-		int parent_id = idmap.at(n);
-		std::vector<Edge> out_edges;
+		// Get the row of this node
+		const int row = GetIndex(n);
 
 		// Iterate through the row of n and add add all values to the output array
-		for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, parent_id); it; ++it) {
+		std::vector<Edge> out_edges;
+		for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, row); it; ++it) {
 			auto value = it.value();
 			auto col = it.col();
 
@@ -309,11 +310,15 @@ namespace HF::SpatialStructures {
 
 	bool Graph::checkForEdge(int parent, int child) const {
 		// ![CheckForEdge]
+		
+		// Get the index for parent and child
+		const int parent_index = GetIndex(parent);
+		const int child_index = GetIndex(child);
 
 		// Iterate through parent's row to see if it has child.
-		for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, parent); it; ++it)
-			if (it.col() == child) return true;
-
+		for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, parent_index); it; ++it)
+			if (it.col() == child_index) return true;
+		
 		// If we've gotten to this point, then the child doesn't exist in parent's row
 		return false;
 		// ![CheckForEdge]
@@ -321,14 +326,17 @@ namespace HF::SpatialStructures {
 
 	void Graph::AddOrUpdateEdgeCost(int parent_id, int child_id, float cost)
 	{
+		const int parent_index = GetIndex(parent_id);
+		const int child_index = GetIndex(child_id);
+
 		// Use coeffref if the cost already exists to avoid duplicate allocations
-		if (HasEdge(parent_id, child_id))
-			edge_matrix.coeffRef(parent_id, child_id) = cost;
+		if (HasEdge(parent_index, child_index))
+			edge_matrix.coeffRef(parent_index, child_index) = cost;
 		else {
 			
 			// See if we need to reallocate.
 			ResizeIfNeeded();
-			edge_matrix.insert(parent_id, child_id) = cost;
+			edge_matrix.insert(parent_index, child_index) = cost;
 		}
 	}
 
@@ -340,6 +348,21 @@ namespace HF::SpatialStructures {
 			edge_matrix.conservativeResize(num_nodes, num_nodes);
 
 		assert(num_nodes <= edge_matrix.rows() && num_nodes <= edge_matrix.cols());
+	}
+
+	inline bool Graph::hasKey(int id) const
+	{
+		return (id_to_ordered_node.count(id) == 1);
+	}
+
+	int Graph::GetIndex(const Node& n) const
+	{
+		return id_to_ordered_node.at(idmap.at(n));
+	}
+
+	int Graph::GetIndex(const int id) const
+	{
+		return id_to_ordered_node.at(id);
 	}
 
 	bool Graph::HasEdge(int parent, int child, bool undirected) const {
@@ -355,9 +378,9 @@ namespace HF::SpatialStructures {
 		if (!hasKey(parent) || !hasKey(child)) return false;
 
 		// Get the id of both parent and child.
-		int parent_id = idmap.at(parent);
-		int child_id = idmap.at(child);
-
+		int parent_id = getID(parent);
+		int child_id = getID(child);
+		
 		// Call integer overload.
 		return HasEdge(parent_id, child_id, undirected);
 	}
@@ -374,10 +397,10 @@ namespace HF::SpatialStructures {
 			ordered_nodes.push_back(input_node);
 
 			// Add this id to the id_to_nodes array
-			id_to_nodes.push_back(ordered_nodes.size() - 1);
+			id_to_ordered_node[next_id] = (ordered_nodes.size() - 1);
 
 			//Assign the Id in this node's ID parameter
-			ordered_nodes[next_id].id = next_id;
+			ordered_nodes[id_to_ordered_node[next_id]].id = next_id;
 
 			// Increment next_id
 			next_id++;
@@ -389,15 +412,21 @@ namespace HF::SpatialStructures {
 
 	int Graph::getOrAssignID(int input_int)
 	{
-		// If it's already in our id list, then just return it
-		if (std::find(this->id_to_nodes.begin(), this->id_to_nodes.end(), input_int)
-			!= this->id_to_nodes.end())
-			return input_int;
-		else {
+		// If this ID isn't in our list, add it, and create an empty node in ordered
+		// nodes to take up space.
+		if (!hasKey(input_int))
+		{
+			// Add an empty node to ordered_nodes
 			ordered_nodes.push_back(Node());
+			
+			// Set the id of the empty node
 			ordered_nodes.back().id = input_int;
-			id_to_nodes.push_back(ordered_nodes.size() - 1);
+
+			// Add this id to the map as being at the back of ordered_nodes
+			id_to_ordered_node[input_int] = ordered_nodes.size() - 1;
 		}
+
+		return input_int;
 	}
 
 	Graph::Graph(
@@ -408,9 +437,8 @@ namespace HF::SpatialStructures {
 		// Generate an array with the size of every column from the size of the edges array
 		assert(edges.size() == distances.size());
 		vector<int> sizes(edges.size());
-		for (int i = 0; i < edges.size(); i++) {
+		for (int i = 0; i < edges.size(); i++)
 			sizes[i] = edges[i].size();
-		}
 
 		// Create the graph then reserve these sizes
 		edge_matrix.resize(edges.size(),  edges.size());
@@ -497,7 +525,7 @@ namespace HF::SpatialStructures {
 
 		// Other graph representations should be cleared too
 		ordered_nodes.clear();
-		id_to_nodes.clear();
+		id_to_ordered_node.clear();
 		idmap.clear();
 	}
 	

@@ -140,6 +140,20 @@ namespace GraphTests {
 		assert(g.hasKey(N3));
 	}
 
+	TEST(_Graph, IntAndNode) {
+		Graph g;
+		HF::SpatialStructures::Node N1(1, 1, 2);
+		HF::SpatialStructures::Node N2(2, 3, 4, 5);
+		HF::SpatialStructures::Node N3(11, 22, 140);
+
+		g.addEdge(N1, N2, 33);
+		g.addEdge(4, 3, 33);
+
+		g.NodeFromID(4);
+
+	}
+
+
 	bool Contains(const std::vector<int>& domain, int target) {
 		for (int suspect : domain) {
 			if (suspect == target)
