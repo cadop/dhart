@@ -1,9 +1,9 @@
 ///
-/// \file	graph.cpp 
+/// \file	graph.cpp
 /// \brief	Contains implementation for the <see cref="HF::SpatialStructures::Graph">Graph</see> class
 ///
-/// \author	TBA 
-/// \date	06 Jun 2020 
+/// \author	TBA
+/// \date	06 Jun 2020
 
 /// \todo Forward declares for eigen.
 
@@ -33,8 +33,8 @@ namespace HF::SpatialStructures {
 	{
 
 		// The graph must be compressed for this to work
-		Compress(); 
-		
+		Compress();
+
 		// Construct CSRPtr with the required info from edge_matrix.
 		CSRPtrs out_csr{
 			static_cast<int>(edge_matrix.nonZeros()),
@@ -59,7 +59,7 @@ namespace HF::SpatialStructures {
 	vector<Edge> Graph::GetUndirectedEdges(const Node & n) const {
 		// Get the ID of n
 		int node_id = getID(n);
-		
+
 		// If N is not in the graph, return an empty array.
 		if (node_id < 0) return vector<Edge>();
 
@@ -68,16 +68,16 @@ namespace HF::SpatialStructures {
 
 		// Iterate through every other node
 		for (int i = 0; i < size(); i++) {
-			
+
 			// Don't look in this node's edge array
 			if (i == node_id) continue;
-			
+
 			// See if this edge
 			if (HasEdge(i, node_id)) {
 				float cost = edge_matrix.coeff(i, node_id);
 				Node child_node = NodeFromID(i);
 				Edge edge(child_node, cost);
-				
+
 				out_edges.push_back(edge);
 			}
 		}
@@ -93,7 +93,7 @@ namespace HF::SpatialStructures {
 
 		// Preallocate an array of edge sets
 		vector<EdgeSet> out_edges(this->size());
-		
+
 		// Iterate through every row in the csr
 		for (int k = 0; k < edge_matrix.outerSize(); ++k) {
 			auto& edgeset = out_edges[k];
@@ -116,16 +116,16 @@ namespace HF::SpatialStructures {
 	/// <param name="new_value"> Value to aggregate into out_total. </param>
 	/// <param name="agg_type"> Aggregation method to use. </param>
 	/// <param name="count"> Number of elements. Incremented with each call. </param>
-	/*! 
+	/*!
 
 		\exception std::out_of_range agg_type doesn't exist in COST_AGGREgATE
-		
+
 		\remarks
 		This is similar to the function from ViewAnalysis but will increment
 		count with each call.
-		
+
 		\see COST_AGGREGATE for more information on each aggregate type.
-	
+
 	*/
 	inline void Aggregate(float& out_total, float new_value, const COST_AGGREGATE agg_type, int & count)
 	{
@@ -164,10 +164,10 @@ namespace HF::SpatialStructures {
 		// If directed is true, then we only need the values in a node's row to calculate it's score.
 		if (directed)
 			for (int k = 0; k < edge_matrix.outerSize(); ++k) {
-				
+
 				// Sum all values in the row for node k
 				float sum = edge_matrix.row(k).sum();
-				
+
 				// Get the count of non_zeros for node k
 				int count = edge_matrix.row(k).nonZeros();
 
@@ -255,11 +255,11 @@ namespace HF::SpatialStructures {
 
 	bool Graph::checkForEdge(int parent, int child) const {
 		// ![CheckForEdge]
-		
+
 		// Iterate through parent's row to see if it has child.
 		for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, parent); it; ++it)
 			if (it.col() == child) return true;
-		
+
 		// If we've gotten to this point, then the child doesn't exist in parent's row
 		return false;
 		// ![CheckForEdge]
@@ -280,7 +280,7 @@ namespace HF::SpatialStructures {
 		// Get the id of both parent and child.
 		int parent_id = idmap.at(parent);
 		int child_id = idmap.at(child);
-		
+
 		// Call integer overload.
 		return HasEdge(parent_id, child_id, undirected);
 	}
@@ -290,7 +290,7 @@ namespace HF::SpatialStructures {
 		// If it's already in the hashmap, then just return the existing ID
 		if (hasKey(input_node))
 			return getID(input_node);
-		
+
 		else {
 			// Set the id in the hashmap, and add the node to nodes
 			idmap[input_node] = next_id;
@@ -314,7 +314,7 @@ namespace HF::SpatialStructures {
 	{
 		// If it's already in our id list, then just return it
 		if (std::find(this->id_to_nodes.begin(), this->id_to_nodes.end(), input_int)
-			!= this->id_to_nodes.end()) 
+			!= this->id_to_nodes.end())
 			return input_int;
 		else {
 			ordered_nodes.push_back(Node());
@@ -348,7 +348,7 @@ namespace HF::SpatialStructures {
 			// Get the row out of the edges array
 			const auto & row = edges[row_num];
 			for (int i = 0; i < row.size(); i++) {
-				
+
 				// Get the column and distance from the row and distance array
 				float dist = distances[row_num][i];
 				int col_num = row[i];
@@ -381,7 +381,7 @@ namespace HF::SpatialStructures {
 
 		// Preallocate output array
 		std::vector <std::array<float, 3> > out_nodes(n);
-		
+
 		// Assign x,y,z for every node in nodes.
 		for (int i = 0; i < n; i++) {
 			out_nodes[i][0] = N[i].x;
@@ -396,17 +396,17 @@ namespace HF::SpatialStructures {
 
 		// Only do this if the graph needs compression.
 		if (needs_compression) {
-		
+
 			// Calculate the highest ID for all nodes in the triplet array.
 			int max_id = std::max_element(
-				this->ordered_nodes.begin(), 
+				this->ordered_nodes.begin(),
 				this->ordered_nodes.end()
 			)[0].id + 1;
 
 			// Resize the edge matrix and insert nodes
 			edge_matrix.resize(max_id, max_id);
 			edge_matrix.setFromTriplets(triplets.begin(), triplets.end());
-			
+
 			// Mark this graph as not requiring compression
 			needs_compression = false;
 		}
@@ -422,5 +422,38 @@ namespace HF::SpatialStructures {
 		ordered_nodes.clear();
 		id_to_nodes.clear();
 		idmap.clear();
+	}
+
+	void Graph::AddEdges(std::vector<std::vector<IntEdge>>& edges) {
+
+	}
+
+	void Graph::AddEdges(std::vector<std::vector<EdgeSet>>& edges) {
+
+	}
+
+	std::vector<Node> Graph::GetChildren(const Node& n) const {
+		std::vector<Node> children;
+
+		auto edges = (*this)[n];
+
+		for (auto e : edges) {
+			children.push_back(e.child);
+		}
+
+		return children;
+	}
+
+	std::vector<Node> Graph::GetChildren(const int parent_id) {
+		return GetChildren(NodeFromID(parent_id));
+	}
+
+	Subgraph Graph::GetSubgraph(Node& parent_node) {
+		return Subgraph{ parent_node, (*this)[parent_node] };
+	}
+
+	Subgraph Graph::GetSubgraph(int parent_id) {
+		Node parent_node = ordered_nodes[parent_id];
+		return Subgraph{ parent_node, (*this)[parent_node] };
 	}
 }
