@@ -317,7 +317,8 @@ namespace HF::SpatialStructures {
 		
 		\details
 		Internally, this object uses Eigen (https://eigen.tuxfamily.org/dox/group__TutorialSparse.html)
-		to store and maintain a CSR matrix.
+		to store and maintain a CSR matrix. The CSR is always stored as a n by n sparse matrix where
+		n is the number of nodes in ordered_nodes.
 
 		\invariant
 			Every node in the graph will have a Unique ID with no repeats
@@ -382,6 +383,12 @@ namespace HF::SpatialStructures {
 		*/
 		/// \snippet spatialstructures\src\graph.cpp CheckForEdge
 		bool checkForEdge(int parent, int child) const;
+
+		/*! \brief add a new edge cost to the graph or update if if a cost already exists.*/
+		void AddOrUpdateEdgeCost(int parent_id, int child_id, float cost);
+
+		/*! \brief Resize the array if needed. */
+		void ResizeIfNeeded(int new_size);
 	
 	public:
 		/*!

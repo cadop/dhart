@@ -266,13 +266,21 @@ namespace HF::SpatialStructures {
 	void Graph::addEdge(const Node& parent, const Node& child, float score)
 	{
 		// ![GetOrAssignID_Node]
-		needs_compression = true;
+		//needs_compression = true;
 
+		// Get parent/child ids
 		int parent_id = getOrAssignID(parent);
 		int child_id = getOrAssignID(child);
-		triplets.emplace_back(
-			Eigen::Triplet<float>(parent_id, child_id, score)
-		);
+	
+		// Add or update the edge cost if this is compressed
+		if (!needs_compression)
+			AddOrUpdateEdgeCost(parent_id, child_id, score);
+		
+		// Add to triplet list otherwise
+		else
+			triplets.emplace_back(
+				Eigen::Triplet<float>(parent_id, child_id, score)
+			);
 		// ![GetOrAssignID_Node]
 	}
 
@@ -281,7 +289,7 @@ namespace HF::SpatialStructures {
 		// ![GetOrAssignID_int]
 
 		// This will require that the graph is recompressed
-		needs_compression = true;
+		//needs_compression = true;
 
 		// If the parent or child id is larger than next_id, set next_id to parent or child ID.
 		next_id = std::max(child_id, std::max(parent_id, next_id));
@@ -290,8 +298,12 @@ namespace HF::SpatialStructures {
 		getOrAssignID(child_id);
 		getOrAssignID(parent_id);
 
+		if (!needs_compression)
+			AddOrUpdateEdgeCost(parent_id, child_id, score);
 		// Add this to the list of triplets.
-		triplets.emplace_back(Eigen::Triplet<float>(parent_id, child_id, score));
+		else
+			triplets.emplace_back(Eigen::Triplet<float>(parent_id, child_id, score));
+		
 		// ![GetOrAssignID_int]
 	}
 
@@ -305,6 +317,29 @@ namespace HF::SpatialStructures {
 		// If we've gotten to this point, then the child doesn't exist in parent's row
 		return false;
 		// ![CheckForEdge]
+	}
+
+	void Graph::AddOrUpdateEdgeCost(int parent_id, int child_id, float cost)
+	{
+		// Use coeffref if the cost already exists to avoid duplicate allocations
+		if (HasEdge(parent_id, child_id))
+			edge_matrix.coeffRef(parent_id, child_id) = cost;
+		else {
+			
+			// See if we need to reallocate.
+			ResizeIfNeeded(std::max(parent_id, child_id));
+			edge_matrix.insert(parent_id, child_id) = cost;
+		}
+	}
+
+	void Graph::ResizeIfNeeded(int new_size)
+	{
+		new_size += 1; // You need 1 more column/row than max capacity. 
+
+		if (new_size > edge_matrix.rows())
+			edge_matrix.conservativeResize(new_size, new_size);
+
+		assert(new_size <= edge_matrix.rows() && new_size <= edge_matrix.cols());
 	}
 
 	bool Graph::HasEdge(int parent, int child, bool undirected) const {
