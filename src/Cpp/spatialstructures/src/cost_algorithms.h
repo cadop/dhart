@@ -363,6 +363,14 @@ namespace HF::SpatialStructures::CostAlgorithms {
 		\endcode
 	*/
 	std::vector<std::vector<EdgeSet>> CalculateEnergyExpenditure(Graph& g);
+
+	/*
+		\summary Calculates the slope between two nodes 
+		\param parent A Node
+		\param child A Node
+		\returns A double of the Angle
+	*/
+	double CalculateSlope(Node& parent, Node& child);
 }
 
 #endif /// COST_ALGORITHMS_H
