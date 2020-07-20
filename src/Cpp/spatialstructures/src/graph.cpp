@@ -12,9 +12,11 @@
 #include <math.h>
 #include <Constants.h>
 #include <assert.h>
+#include <HFExceptions.h>
 
 using namespace Eigen;
 using std::vector;
+using std::string;
 
 namespace HF::SpatialStructures {
 
@@ -462,6 +464,27 @@ namespace HF::SpatialStructures {
 		ordered_nodes.clear();
 		id_to_nodes.clear();
 		idmap.clear();
+	}
+	
+	void Graph::AddEdges(const vector<vector<EdgeSet>>& edges, const string& cost_name)
+	{
+		throw HF::Exceptions::NotImplemented();
+	}
+
+	vector<EdgeSet> Graph::GetEdges(const string& cost_name) const
+	{
+		throw HF::Exceptions::NotImplemented();
+		return std::vector<EdgeSet>();
+	}
+
+	void Graph::addEdge(const Node& parent, const Node& child, float score, const string& cost_type)
+	{
+		throw HF::Exceptions::NotImplemented();
+	}
+
+	void Graph::AddEdges(const vector<vector<IntEdge>>& edges, const string& cost_name)
+	{
+		throw HF::Exceptions::NotImplemented();
 	}
 
 	void Graph::AddEdges(std::vector<std::vector<IntEdge>>& edges) {

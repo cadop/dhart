@@ -9,6 +9,7 @@
 
 
 using namespace HF::SpatialStructures;
+using std::vector;
 namespace GraphTests {
     TEST(_Graph, Creation) {
         HF::SpatialStructures::Graph g;
@@ -147,6 +148,7 @@ namespace GraphTests {
 		return false;
 	}
 
+
 	TEST(_Graph, GetEdges) {
 		HF::SpatialStructures::Node N1(1, 1, 2);
 		HF::SpatialStructures::Node N2(2, 3, 4);
@@ -180,6 +182,32 @@ namespace GraphTests {
 		}
 
 	}
+}
+
+TEST(_Graph, AddEdgesToNewCost) {
+
+	// Create two nodes
+	HF::SpatialStructures::Node N1(1, 1, 2);
+	HF::SpatialStructures::Node N2(2, 3, 4);
+
+	// Create a graph, add edges, then compress
+	Graph g;
+	g.addEdge(N1, N2, 0.39);
+	g.addEdge(N1, N2, 0.54, "TestCost");
+	g.Compress();
+
+	// Get both edge sets
+	auto default_edges =  g.GetEdges();
+	auto testcost_edges =  g.GetEdges("TestCost");
+
+	// Assert that the edges we defined exist in both seperate arrays.
+	ASSERT_EQ(default_edges[0].children.size(), 1);
+	ASSERT_EQ(default_edges[0].children[0].child, 1);
+	ASSERT_EQ(default_edges[0].children[0].weight, 0.39);
+
+	ASSERT_EQ(testcost_edges[0].children.size(), 1);
+	ASSERT_EQ(testcost_edges[0].children[0].child, 1);
+	ASSERT_EQ(testcost_edges[0].children[0].weight, 0.54);
 }
 
 TEST(_Rounding, addition_error)

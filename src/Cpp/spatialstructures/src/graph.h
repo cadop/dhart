@@ -1337,5 +1337,46 @@ namespace HF::SpatialStructures {
 			\endcode
 		*/
 		void ClearNodeAttributes(std::string name);
+		/*!
+			\brief Add multiple edges to the Graph.
+			\param edges An array of arrays of edges to be added to the graph ordered by node.
+			\param string cost_name Cost array to add the edges to. 
+
+			\todo Example
+			\code
+			\endcode
+		*/
+		void AddEdges(const std::vector<std::vector<IntEdge>>& edges, const std::string & cost_name);
+
+		/*!
+			\summary TODO summary
+			\param edges
+
+			\todo Example
+			\code
+			\endcode
+		*/
+		void AddEdges(const std::vector<std::vector<EdgeSet>>& edges, const std::string & cost_name);
+
+		/*!
+			\brief Get the edges of a specfic cost type
+			\param cost_name The name of the cost to get edges for
+			\returns An edge set for the edges of `cost_name`
+
+			\exception HF::Exceptions::NoCost The cost at `cost_name` didn't exist in the graph
+		*/
+		std::vector<EdgeSet> GetEdges(const std::string & cost_name) const;
+
+		/*!
+			\brief Add a new edge to the graph
+			
+			\param parent Parent node of the edge.
+			\param child Child node of the edge.
+			\param score Cost of traversing from aprent to child.
+			\param cost_type The name of the cost to add this edge to. 
+			
+			\details If the cost doesn't exist in the graph, a new cost_type will be allocated for it. 
+		*/
+		void addEdge(const Node& parent, const Node& child, float score, const std::string &  cost_type );
 	};
 }
