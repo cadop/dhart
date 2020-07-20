@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>humanfactorspy.pathfinding.DijkstraShortestPath &mdash; Human Metrics 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="Human Metrics 0.0.1 documentation" href="../index.html" >
+    <link rel="up" title="humanfactorspy.pathfinding" href="humanfactorspy.pathfinding.html" >
+    <link rel="next" title="humanfactorspy.raytracer" href="humanfactorspy.raytracer.html" >
+    <link rel="prev" title="humanfactorspy.pathfinding.PathMemberStruct" href="humanfactorspy.pathfinding.PathMemberStruct.html" > 
+  </head>
+  <body>
+
+  <div class="container">
+    <div class="header">
+    </div>
+  </div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="http://">Git</a></li>
+	
+        <li class="active"><a href="../index.html">Human Metrics 0.0.1 documentation</a></li>
+	
+          <li class="active"><a href="../code.html" >Code Reference</a></li>
+          <li class="active"><a href="humanfactorspy.pathfinding.html" accesskey="U">humanfactorspy.pathfinding</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="humanfactorspy.raytracer.html" title="humanfactorspy.raytracer"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="humanfactorspy.pathfinding.PathMemberStruct.html" title="humanfactorspy.pathfinding.PathMemberStruct"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="humanfactorspy-pathfinding-dijkstrashortestpath">
+<h1>humanfactorspy.pathfinding.DijkstraShortestPath<a class="headerlink" href="#humanfactorspy-pathfinding-dijkstrashortestpath" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="humanfactorspy.pathfinding.DijkstraShortestPath">
+<code class="descclassname">humanfactorspy.pathfinding.</code><code class="descname">DijkstraShortestPath</code><span class="sig-paren">(</span><em><span class="n">graph</span><span class="p">:</span> <span class="n">humanfactorspy.spatialstructures.graph.Graph</span></em>, <em><span class="n">start</span><span class="p">:</span> <span class="n">List<span class="p">[</span>Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">, </span>Tuple<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">]</span><span class="p">]</span><span class="p">]</span></span></em>, <em><span class="n">end</span><span class="p">:</span> <span class="n">List<span class="p">[</span>Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">, </span>Tuple<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">]</span><span class="p">]</span><span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span>Union<span class="p">[</span>List<span class="p">[</span>Optional<span class="p">[</span>humanfactorspy.pathfinding.path.Path<span class="p">]</span><span class="p">]</span><span class="p">, </span>humanfactorspy.pathfinding.path.Path<span class="p">]</span><span class="p">]</span><a class="reference external" href="https://github.com/cadop/HumanMetrics/blob/master/Codebase/HumanFactors/humanfactorspy/..\build\Python\humanfactorspy\pathfinding\shortest_path.py#L28-L120"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#humanfactorspy.pathfinding.DijkstraShortestPath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the shortest path from start to end using Dijkstra’s shortest path algorithm</p>
+<p>Accepts a list of starting / ending points or single starting/ending
+points.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>Graph</strong> – A valid C++ Graph</li>
+<li><strong>start</strong> – one or more Starting Node IDs</li>
+<li><strong>end</strong> – one or more Ending Node IDs</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p>if multiple start/end ids were passed
+Union[Path, None]: One start or end point was passed</p>
+<p>If a path cannot be found to connect a start and end point that
+path will be returned as None.</p>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">List[Union[path, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)">None</a>]]</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<p>Creating a graph, adding edges to it, then generating a path from node 0 to 3.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">humanfactorspy.pathfinding</span> <span class="kn">import</span> <span class="n">DijkstraShortestPath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">humanfactorspy.spatialstructures</span> <span class="kn">import</span> <span class="n">Graph</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">AddEdgeToGraph</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">AddEdgeToGraph</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">AddEdgeToGraph</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">AddEdgeToGraph</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">csr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">CompressToCSR</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SP</span> <span class="o">=</span> <span class="n">DijkstraShortestPath</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">SP</span><span class="p">)</span>
+<span class="go">[(50., 0) (10., 2) ( 0., 3)]</span>
+</pre></div>
+</div>
+<p>The same, but creating multiple paths.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">humanfactorspy.pathfinding</span> <span class="kn">import</span> <span class="n">DijkstraShortestPath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">humanfactorspy.spatialstructures</span> <span class="kn">import</span> <span class="n">Graph</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">AddEdgeToGraph</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">AddEdgeToGraph</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">AddEdgeToGraph</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">AddEdgeToGraph</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">csr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">CompressToCSR</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SP</span> <span class="o">=</span> <span class="n">DijkstraShortestPath</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">SP</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="go">[(10., 1) ( 0., 3)]</span>
+<span class="go">[(10., 1) ( 0., 3)]</span>
+<span class="go">[(10., 1) ( 0., 3)]</span>
+<span class="go">[(10., 1) ( 0., 3)]</span>
+<span class="go">[(10., 1) ( 0., 3)]</span>
+<span class="go">[(10., 1) ( 0., 3)]</span>
+<span class="go">[(10., 1) ( 0., 3)]</span>
+<span class="go">[(10., 1) ( 0., 3)]</span>
+<span class="go">[(10., 1) ( 0., 3)]</span>
+<span class="go">[(10., 1) ( 0., 3)]</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><strong>humanfactorspy.Exceptions.</strong> – Start or End did not exist in
+    the given graph OR start/end lists did not match in size.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="humanfactorspy.pathfinding.PathMemberStruct.html"
+                        title="previous chapter">humanfactorspy.pathfinding.PathMemberStruct</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="humanfactorspy.raytracer.html"
+                        title="next chapter">humanfactorspy.raytracer</a></p>
+
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.1.2.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>
