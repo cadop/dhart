@@ -72,6 +72,10 @@ namespace HF::SpatialStructures {
 			return -1;
 	}
 
+	int Graph::GetIDFromIndex(int index) const {
+		return ordered_nodes.at(index).id;
+	}
+
 	CSRPtrs Graph::GetCSRPointers()
 	{
 
@@ -138,16 +142,18 @@ namespace HF::SpatialStructures {
 		vector<EdgeSet> out_edges(this->size());
 
 		// Iterate through every row in the csr
-		for (int k = 0; k < edge_matrix.outerSize(); ++k) {
-			auto& edgeset = out_edges[k];
-			edgeset.parent = k;
+		for (int node_index = 0; node_index < this->size(); ++node_index) {
+			const int node_id = GetIDFromIndex(node_index);
+
+			auto& edgeset = out_edges[node_id];
+			edgeset.parent = node_id;
 
 			// Iterate every column in the row.
-			for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, k); it; ++it)
+			for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, node_index); it; ++it)
 			{
 				// Add to array of edgesets
 				float cost = it.value();
-				int child = it.col();
+				int child = GetIDFromIndex(it.col());
 				edgeset.children.push_back(IntEdge{ child, cost });
 			}
 		}
@@ -206,8 +212,8 @@ namespace HF::SpatialStructures {
 
 		// If directed is true, then we only need the values in a node's row to calculate it's score.
 		if (directed)
-			for (int k = 0; k < edge_matrix.outerSize(); ++k) {
-
+			for (int k = 0; k < this->size(); ++k) {
+				
 				// Sum all values in the row for node k
 				float sum = edge_matrix.row(k).sum();
 
@@ -228,7 +234,7 @@ namespace HF::SpatialStructures {
 			vector<int> count(this->size(), 0);
 
 			// Iterate through every node in the graph
-			for (int k = 0; k < edge_matrix.outerSize(); ++k) {
+			for (int k = 0; k < this->size(); ++k) {
 
 				// Iterate through every edge for the node at column k
 				for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, k); it; ++it)
@@ -267,21 +273,16 @@ namespace HF::SpatialStructures {
 	void Graph::addEdge(const Node& parent, const Node& child, float score)
 	{
 		// ![GetOrAssignID_Node]
-		//needs_compression = true;
 
 		// Get parent/child ids
 		int parent_id = getOrAssignID(parent);
 		int child_id = getOrAssignID(child);
 	
-		// Add or update the edge cost if this is compressed
+		// If this is already compressed, update the CSR, otherwise add it to the list of triplets.
 		if (!needs_compression)
-			AddOrUpdateEdgeCost(parent_id, child_id, score);
-		
-		// Add to triplet list otherwise
+			CSRAddOrUpdateEdge(parent_id, child_id, score);
 		else
-			triplets.emplace_back(
-				Eigen::Triplet<float>(parent_id, child_id, score)
-			);
+			TripletsAddOrUpdateEdge(parent_id, child_id, score);
 		// ![GetOrAssignID_Node]
 	}
 
@@ -289,22 +290,16 @@ namespace HF::SpatialStructures {
 	{
 		// ![GetOrAssignID_int]
 
-		// This will require that the graph is recompressed
-		//needs_compression = true;
-
-		// If the parent or child id is larger than next_id, set next_id to parent or child ID.
-		next_id = std::max(child_id, std::max(parent_id, next_id));
-
 		// Store these Ids in the hashmap if they don't exist already.
 		getOrAssignID(child_id);
 		getOrAssignID(parent_id);
 
+		// If this is already compressed, update the CSR, otherwise add it to the list of triplets.
 		if (!needs_compression)
-			AddOrUpdateEdgeCost(parent_id, child_id, score);
-		// Add this to the list of triplets.
+			CSRAddOrUpdateEdge(parent_id, child_id, score);
 		else
-			triplets.emplace_back(Eigen::Triplet<float>(parent_id, child_id, score));
-		
+			TripletsAddOrUpdateEdge(parent_id, child_id, score);
+
 		// ![GetOrAssignID_int]
 	}
 
@@ -324,7 +319,7 @@ namespace HF::SpatialStructures {
 		// ![CheckForEdge]
 	}
 
-	void Graph::AddOrUpdateEdgeCost(int parent_id, int child_id, float cost)
+	void Graph::CSRAddOrUpdateEdge(int parent_id, int child_id, float cost)
 	{
 		const int parent_index = GetIndex(parent_id);
 		const int child_index = GetIndex(child_id);
@@ -333,11 +328,17 @@ namespace HF::SpatialStructures {
 		if (HasEdge(parent_index, child_index))
 			edge_matrix.coeffRef(parent_index, child_index) = cost;
 		else {
-			
-			// See if we need to reallocate.
+			// Reallocate if we must, then insert. 
 			ResizeIfNeeded();
 			edge_matrix.insert(parent_index, child_index) = cost;
 		}
+	}
+
+	void Graph::TripletsAddOrUpdateEdge(int parent_id, int child_id, float cost) {
+		const int parent_index = GetIndex(parent_id);
+		const int child_index = GetIndex(child_id);
+
+		triplets.emplace_back(Eigen::Triplet<float>(parent_index, child_index, cost));
 	}
 
 	void Graph::ResizeIfNeeded()
@@ -501,15 +502,14 @@ namespace HF::SpatialStructures {
 
 		// Only do this if the graph needs compression.
 		if (needs_compression) {
+		
+			// Note that the matrix must have atleast one extra row/column
+			int array_size = ordered_nodes.size() + 1;
+			
+			// Resize the edge matrix
+			ResizeIfNeeded();
 
-			// Calculate the highest ID for all nodes in the triplet array.
-			int max_id = std::max_element(
-				this->ordered_nodes.begin(),
-				this->ordered_nodes.end()
-			)[0].id + 1;
-
-			// Resize the edge matrix and insert nodes
-			edge_matrix.resize(max_id, max_id);
+			// Set the edge matrix from triplets.
 			edge_matrix.setFromTriplets(triplets.begin(), triplets.end());
 
 			// Mark this graph as not requiring compression

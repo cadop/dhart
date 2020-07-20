@@ -384,8 +384,11 @@ namespace HF::SpatialStructures {
 		/// \snippet spatialstructures\src\graph.cpp CheckForEdge
 		bool checkForEdge(int parent, int child) const;
 
-		/*! \brief add a new edge cost to the graph or update if if a cost already exists.*/
-		void AddOrUpdateEdgeCost(int parent_id, int child_id, float cost);
+		/*! \brief Add a new edge cost to the CSR or update if if a cost already exists.*/
+		void CSRAddOrUpdateEdge(int parent_id, int child_id, float cost);
+
+		/*! \brief Add a new edge to the triplets list. */
+		void TripletsAddOrUpdateEdge(int parent_id, int child_id, float cost);
 
 		/*! \brief Resize the array if needed. */
 		void ResizeIfNeeded();
@@ -398,6 +401,9 @@ namespace HF::SpatialStructures {
 
 		/*! \brief Get the index of the node with id `id` in ordered_nodes.*/
 		int GetIndex(const int id) const;
+
+		/*! \brief Get the ID of a node from its index in the CSR.*/
+		int GetIDFromIndex(int index) const;
 	
 	public:
 		/*!
