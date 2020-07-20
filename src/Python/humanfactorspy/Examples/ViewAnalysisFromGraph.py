@@ -4,6 +4,8 @@ In this example we generate a graph.
 
 .. testcode::
 
+    import numpy
+
     from humanfactorspy.geometry import LoadOBJ, CommonRotations
     from humanfactorspy.raytracer import EmbreeBVH
     from humanfactorspy.graphgenerator import GenerateGraph
@@ -21,21 +23,28 @@ In this example we generate a graph.
     spacing = (0.5, 0.5, 0.5)
     max_nodes = 500
 
+    graph = None
     graph = GenerateGraph(bvh, start_point, spacing, max_nodes, cores=-1)
+
+    if graph is None:
+        print("No graph generated!")
+        exit()
 
     csr_graph = graph.CompressToCSR()
     nodes = graph.getNodes()
 
-    print(len(nodes))
-    print(nodes[0:3])
+    view_analysis = SphericalViewAnalysisAggregate(bvh, nodes, 10000, 1.7, agg_type=AggregationType.SUM)
 
+    for va in view_analysis.array:
+        print(round(va, 5))
 
 .. testoutput:: 
 
-    594
-    [(-1. , -6. ,  0., 0, 0) (-1.5, -6.5, -0., 0, 1) (-1.5, -6. , -0., 0, 2)]
+
 
 """
+
+import numpy
 
 from humanfactorspy.geometry import LoadOBJ, CommonRotations
 from humanfactorspy.raytracer import EmbreeBVH
@@ -54,10 +63,17 @@ start_point = (-1, -6, 1623.976928)
 spacing = (0.5, 0.5, 0.5)
 max_nodes = 500
 
+graph = None
 graph = GenerateGraph(bvh, start_point, spacing, max_nodes, cores=-1)
+
+if graph is None:
+    print("No graph generated!")
+    exit()
 
 csr_graph = graph.CompressToCSR()
 nodes = graph.getNodes()
 
-print(len(nodes))
-print(nodes[0:3])
+view_analysis = SphericalViewAnalysisAggregate(bvh, nodes, 10000, 1.7, agg_type=AggregationType.SUM)
+
+for va in view_analysis.array:
+    print(round(va, 5))
