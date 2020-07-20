@@ -164,3 +164,22 @@ C_INTERFACE DestroyGraph(Graph* graph_to_destroy)
 	if (graph_to_destroy) delete graph_to_destroy;
 	return OK;
 }
+
+C_INTERFACE CalculateAndStoreEnergyExpenditure(HF::SpatialStructures::Graph* g) {
+	// Collecting energy expenditure data for all parent nodes.
+
+	// In std::vector<std::vector<EdgeSet>> Graph::CalculateEnergyExpenditure(Graph& g),
+	// std::vector<EdgeSet> Graph::CalculateEnergyExpenditure(Subgraph& sg)
+	// is called for all Subgraph in g.
+
+	// result is a std::vector<std::vector<EdgeSet>>
+	auto result = HF::SpatialStructures::CostAlgorithms::CalculateEnergyExpenditure(*g);
+
+	// Now passing result, a std::vector<std::vector<EdgeSet>> to Graph::AddEdges.
+	// The result container will be ordered by parent id.
+
+	// TODO: implement void Graph::AddEdges(std::vector<std::vector<EdgeSet>>& edges);
+	g->AddEdges(result);
+
+	return OK;
+}

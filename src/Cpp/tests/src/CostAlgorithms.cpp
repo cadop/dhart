@@ -136,5 +136,76 @@ namespace CInterfaceTests {
 
 	TEST(_CostAlgorithmsCInterface, CalculateAndStoreEnergyExpenditureWithEnergyBlob) {
 
+
+	TEST(_CostAlgorithms, CalculateEnergyExpenditureSubgraph) {
+		// For brevity
+		using HF::SpatialStructures::CostAlgorithms::CalculateEnergyExpenditure;
+
+		// Create 7 nodes
+		Node n1(0, 0, 0);
+		Node n2(-5, 5, 4);
+		Node n4(2, 2, 2);
+		Node n5(5, 3, 2);
+		Node n3(-1, 1, 1);
+
+		Node n6(-2, -5, 1);
+		Graph g;
+
+		// Adding 9 edges
+		g.addEdge(n1, n2);	// [ -5,  5,  4 ]
+		g.addEdge(n0, n1);	// [ -2, -6, -6 ]
+		g.addEdge(n1, n4);  // [  2,  2,  2 ]
+		g.addEdge(n1, n3);  // [ -1,  1,  1 ]
+		g.addEdge(n3, n5);  // [ -6,  2,  1 ]
+		g.addEdge(n2, n4);  // [ -9, -3, -2 ]
+		g.addEdge(n5, n6);  // [ -7, -8, -1 ]
+		g.addEdge(n4, n6);  // [ -6, -7, -1 ]
+
+		// Always compress the graph after adding edges!
+		g.Compress();
+
+		Subgraph sg = g.GetSubgraph(n1);
+		// Retrieve a subgraph of your choice, provide a parent node or parent node ID.
+		// Get a container of vector<EdgeSet>, ordered by parent ID.
+
+		// These consist of alternate edge costs for Subgraph sg.
+	}
+		std::vector<EdgeSet> edge_costs = CalculateEnergyExpenditure(sg);
+	TEST(_CostAlgorithms, CalculateEnergyExpenditureAll) {
+		// for brevity
+
+
+		using HF::SpatialStructures::CostAlgorithms::CalculateEnergyExpenditure;
+		Node n0(2, 6, 6);
+		// Create 7 nodes
+		Node n1(0, 0, 0);
+		Node n4(2, 2, 2);
+		Node n3(-1, 1, 1);
+		Node n2(-5, 5, 4);
+		Node n6(-2, -5, 1);
+		Node n5(5, 3, 2);
+
+		Graph g;
+
+		g.addEdge(n0, n1);	// [ -2, -6, -6 ]
+		// Adding 9 edges
+		g.addEdge(n1, n2);	// [ -5,  5,  4 ]
+		g.addEdge(n1, n3);  // [ -1,  1,  1 ]
+		g.addEdge(n1, n4);  // [  2,  2,  2 ]
+		g.addEdge(n3, n5);  // [ -6,  2,  1 ]
+		g.addEdge(n2, n4);  // [ -9, -3, -2 ]
+		g.addEdge(n5, n6);  // [ -7, -8, -1 ]
+		g.addEdge(n4, n6);  // [ -6, -7, -1 ]
+
+		g.Compress();
+		// Always compress the graph after adding edges!
+
+		// These consist of alternate edge costs for all subgraphs in g.
+		// Get a container of vector<EdgeSet>, ordered by parent ID.
+		std::vector<std::vector<EdgeSet>> all_edge_costs = CalculateEnergyExpenditure(g);
+	}
+
+
+	TEST(_CostAlgorithms, CalculateEnergyExpenditureWithEnergyBlob) {
 	}
 }
