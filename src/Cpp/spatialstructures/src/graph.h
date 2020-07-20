@@ -388,7 +388,7 @@ namespace HF::SpatialStructures {
 		void AddOrUpdateEdgeCost(int parent_id, int child_id, float cost);
 
 		/*! \brief Resize the array if needed. */
-		void ResizeIfNeeded(int new_size);
+		void ResizeIfNeeded();
 	
 	public:
 		/*!
