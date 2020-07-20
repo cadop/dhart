@@ -9,6 +9,7 @@
 
 #include <exception>
 #include <cstring>
+#include <stdexcept>
 
 /*!
 	\brief Custom exceptions and error codes used interally by HumanFactors.
@@ -73,6 +74,13 @@ namespace HF::Exceptions{
 		{
 			return "C++ Exception";
 		}
+	};
+
+	/* \brief This functionality has not been implemented yet. */
+	class NotImplemented : public std::logic_error
+	{
+	public:
+		NotImplemented() : std::logic_error("Function not yet implemented") { };
 	};
 }
 
