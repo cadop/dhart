@@ -7,8 +7,6 @@
 
 /// \todo Forward declares for eigen.
 
-#include "graph.h"
-
 #include <Graph.h>
 #include <algorithm>
 #include <math.h>
@@ -19,6 +17,48 @@ using namespace Eigen;
 using std::vector;
 
 namespace HF::SpatialStructures {
+
+		/*!
+		\summary Determines if a std::string is a floating-point value, i.e. '3.1415', '2.718', or is not -- i.e. '192.168.1.1', 'a_string'
+		\param value The std::string to assess, as to whether it is a floating-point value or not
+		\returns True, if value is determined to be a floating-point number, false otherwise
+
+		\remarks A 'floating-point type', as defined by this function,
+				 begins with zero or more integers in succession (but no alphas/symbols), then a decimal point ('.'),
+				 followed by one or more integers in succession (absolutely no alphas/symbols).
+				 Any input value that does not adhere to this specification will be denoted as a string type.
+
+		\code
+
+			std::string str_0 = "3.1415";
+			std::string str_1 = ".1415";
+			std::string str_2 = "192.168.1.1";
+			std::string str_3 = "pthread.h";
+
+			bool result_0 = is_floating_type(str_0);	// true
+			bool result_1 = is_floating_type(str_1);	// true
+			bool result_2 = is_floating_type(str_2);	// false
+			bool result_3 = is_floating_type(str_3);	// false
+		\endcode
+	*/
+	bool is_floating_type(std::string value);
+
+	inline bool is_floating_type(std::string value) {
+		bool result = false;
+		char* ptr = nullptr;
+
+		std::strtof(value.c_str(), &ptr);
+
+		if (*ptr == '\0') {
+			char* next = nullptr;
+			std::strtof(value.c_str(), &next);
+			result = *next == '\0';
+		}
+
+		return result;
+	}
+
+
 	int Graph::size() const { return id_to_nodes.size(); }
 
 	int Graph::getID(const Node& node) const
@@ -455,5 +495,178 @@ namespace HF::SpatialStructures {
 	Subgraph Graph::GetSubgraph(int parent_id) {
 		Node parent_node = ordered_nodes[parent_id];
 		return Subgraph{ parent_node, (*this)[parent_node] };
+	}
+
+	void Graph::AddNodeAttribute(int id, std::string attribute, std::string score) {
+		const auto node = NodeFromID(id);
+		bool node_not_found = hasKey(node);
+
+		if (node_not_found) {
+			// Check to see if a node with id exists in the graph.
+			// If not, return.
+			return;
+		}
+
+		/* // requires #include <algorithm>, but not working?
+		std::string lower_cased =
+			std::transform(attribute.begin(), attribute.end(),
+				[](unsigned char c) { return std::tolower(c); }
+		);
+		*/
+		std::string lower_cased = attribute;
+
+		// Retrieve an iterator to the [node attribute : NodeAttributeValueMap]
+		// that corresponds with attribute
+		auto node_attr_map_it = node_attr_map.find(lower_cased);
+
+		if (node_attr_map_it == node_attr_map.end()) {
+			// If the attribute type does not exist...create it.
+			node_attr_map[lower_cased] = NodeAttributeValueMap();
+
+			// Update this iterator so it can be used in the next code block
+			node_attr_map_it = node_attr_map.find(lower_cased);
+		}
+
+		// We now have the NodeAttributeValueMap for the desired attribute.
+		// A NodeAttributeValueMap stores buckets of [node id : node attribute value as string]
+		NodeAttributeValueMap& node_attr_value_map = node_attr_map_it->second;
+
+		// Need to see if id exists as a key within node_attr_value_map
+		// This will give us the position of a bucket containing:
+		// [node id : node attribute value as string]
+		auto node_attr_value_map_it = node_attr_value_map.find(id);
+
+		if (node_attr_value_map_it == node_attr_value_map.end()) {
+			// If the node id provided does not exist in the value map...add it.
+			node_attr_value_map[id] = score;
+
+			// Update this iterator so it can be used in the next code block
+			node_attr_value_map_it = node_attr_value_map.find(id);
+		}
+
+		// Should be the same as the id parameter passed in.
+		const int found_id = node_attr_value_map_it->first;
+
+		// Will be used to assess whether it is floating point, or not
+		std::string found_attr_value = node_attr_value_map_it->second;
+
+		// Let's determine the data type of score:
+		bool score_is_floating_pt = is_floating_type(score);
+
+		// Let's determine the data type of found_attr_value:
+		bool attr_is_floating_pt = is_floating_type(found_attr_value);
+
+		/*
+			Need to determine if found_attr_value is
+				- a string
+				- a floating point value
+
+			and if the data type for score matches that of found_attr_value
+		*/
+		if (attr_is_floating_pt) {
+			// if the current attribute value is floating point...
+			if (score_is_floating_pt) {
+				// Ok - data type matched.
+				node_attr_value_map_it->second = score;
+			}
+			else {
+				// error?
+			}
+		}
+		else {
+			// if the current attribute value is not floating point...
+			if (score_is_floating_pt) {
+				// error?
+			}
+			else {
+				// Ok - data type matched
+				node_attr_value_map_it->second = score;
+			}
+		}
+	}
+
+	void Graph::AddNodeAttributes(std::vector<int> id, std::string name, std::vector<std::string> scores) {
+		// If size of id container and size of scores container are not in alignment,
+		// we return.
+		if (id.size() != scores.size()) {
+			return;
+		}
+
+		auto scores_iterator = scores.begin();
+
+		for (int node_id : id) {
+			// We can call AddNodeAttribute for each node_id in id.
+			// If the attribute type name does not exist,
+			// it will be created with the first invocation of AddNodeAttribute.
+			AddNodeAttribute(node_id, name, *(scores_iterator++));
+		}
+	}
+
+	std::vector<std::string> Graph::GetNodeAttributes(std::string attribute) const {
+		std::vector<std::string> attributes;
+
+		/* // requires #include <algorithm>, but not working?
+		std::string lower_cased =
+			std::transform(attribute.begin(), attribute.end(),
+				[](unsigned char c) { return std::tolower(c); }
+		);
+		*/
+		std::string lower_cased = attribute;
+
+		auto node_attr_map_it = node_attr_map.find(lower_cased);
+
+		if (node_attr_map_it == node_attr_map.end()) {
+			// If the attribute does not exist...
+			// return an empty container.
+			return attributes;
+		}
+
+		// We now have the NodeAttributeValueMap for the desired attribute.
+		// A NodeAttributeValueMap stores buckets of [node id : node attribute value as string]
+		NodeAttributeValueMap node_attr_value_map = node_attr_map_it->second;
+
+		for (auto& bucket : node_attr_value_map) {
+			// For all buckets in the node_attr_value_map,
+			// extract the attribute (attr) and append it to attributes
+			std::string attr = bucket.second;
+			attributes.push_back(attr);
+		}
+
+		// Return all attr found
+		return attributes;
+	}
+
+	void Graph::ClearNodeAttributes(std::string name) {
+		/* // requires #include <algorithm>, but not working?
+		std::string lower_cased =
+			std::transform(attribute.begin(), attribute.end(),
+				[](unsigned char c) { return std::tolower(c); }
+		);
+		*/
+		std::string lower_cased = name;
+
+		auto node_attr_map_it = node_attr_map.find(lower_cased);
+
+		if (node_attr_map_it == node_attr_map.end()) {
+			// If the attribute name does not exist,
+			// return.
+			return;
+		}
+
+		// Note that a node_attr_map is a
+		// unordered_map<std::string, NodeAttributeValueMap>
+		// where the key is attribute type name, like "cross slope",
+		// and the value is a hashmap, as described below:
+		///
+		// A NodeAttributeValueMap is a
+		// unordered_map<int, std::string>
+		// where the key is a node id,
+		// and the value is an attribute value, in the form of a string.
+		//
+		// What is being cleared is the
+		// NodeAttributeValueMap that is mapped to name.
+		// The attribute name is still a key in node_attr_map,
+		// but has no value -- which is the NodeAttributeValueMap instance.
+		node_attr_map[name].clear();
 	}
 }

@@ -5,7 +5,8 @@
 #include <edge.h>
 #include <constants.h>
 
-#include "spatialstructures_C.h"
+#include <spatialstructures_C.h>
+
 
 using namespace HF::SpatialStructures;
 namespace GraphTests {
@@ -776,17 +777,17 @@ namespace PathExampleTests {
 
 namespace GraphExampleTests {
 	TEST(_csrptrs, AreValid) {
-		std::unique_ptr<float[]> data(new float[16]);
-		std::unique_ptr<int[]> outer_indices(new int[16]);
-		std::unique_ptr<int[]> inner_indices(new int[16]);
+		 std::unique_ptr<float[]> data(new float[16]);
+		 std::unique_ptr<int[]> outer_indices(new int[16]);
+		 std::unique_ptr<int[]> inner_indices(new int[16]);
 
-		float* p_data = data.get();
-		int* p_outer_indices = outer_indices.get();
-		int* p_inner_indices = inner_indices.get();
+		 float* p_data = data.get();
+		 int* p_outer_indices = outer_indices.get();
+		 int* p_inner_indices = inner_indices.get();
 
-		HF::SpatialStructures::CSRPtrs csr = { 16, 16, 16, p_data, p_outer_indices, p_inner_indices };
+		 HF::SpatialStructures::CSRPtrs csr = { 16, 16, 16, p_data, p_outer_indices, p_inner_indices };
 
-		bool validity = csr.AreValid();	// validity == true, since all pointer fields are non-null
+		 bool validity = csr.AreValid();	// validity == true, since all pointer fields are non-null
 
 		ASSERT_TRUE(validity);
 	}
@@ -1358,9 +1359,132 @@ namespace GraphExampleTests {
 		// TODO example - code commented out in graph.cpp
 	}
 
-	///
-	///	The following are tests for the code samples for HF::SpatialStructures::Constants
-	///
+	TEST(_graph, GenerateEnergy) {
+		// TODO example - code commented out in graph.cpp
+	}
+
+	TEST(_graph, AddNodeAttribute) {
+		Graph g;
+		g.addEdge(0, 1, 1);
+		g.addEdge(0, 2, 1);
+		g.addEdge(1, 3, 1);
+		g.addEdge(1, 4, 1);
+		g.addEdge(2, 4, 1);
+		g.addEdge(3, 5, 1);
+		g.addEdge(3, 6, 1);
+		g.addEdge(4, 5, 1);
+		g.addEdge(5, 6, 1);
+		g.addEdge(5, 7, 1);
+		g.addEdge(5, 8, 1);
+		g.addEdge(4, 8, 1);
+		g.addEdge(6, 7, 1);
+		g.addEdge(7, 8, 1);
+
+		g.AddNodeAttribute(0, "cross slope", "5.1");
+		g.AddNodeAttribute(1, "cross slope", "24.1");
+		g.AddNodeAttribute(2, "default", "9");
+		g.AddNodeAttribute(3, "cross slope", "7.1");
+
+		auto attrs = g.GetNodeAttributes("cross slope");
+		ASSERT_TRUE(attrs.size() == 3);
+
+		for (auto a : attrs) {
+			std::cout << "attribute: " << a << std::endl;
+		}
+	}
+
+	TEST(_graph, AddNodeAttributes) {
+		Graph g;
+		g.addEdge(0, 1, 1);
+		g.addEdge(0, 2, 1);
+		g.addEdge(1, 3, 1);
+		g.addEdge(1, 4, 1);
+		g.addEdge(2, 4, 1);
+		g.addEdge(3, 5, 1);
+		g.addEdge(3, 6, 1);
+		g.addEdge(4, 5, 1);
+		g.addEdge(5, 6, 1);
+		g.addEdge(5, 7, 1);
+		g.addEdge(5, 8, 1);
+		g.addEdge(4, 8, 1);
+		g.addEdge(6, 7, 1);
+		g.addEdge(7, 8, 1);
+
+		std::vector<int> ids{ 1, 3, 5, 7 };
+		std::string attr_type = "cross slope";
+		std::vector<std::string> scores{ "1.4", "2.0", "2.8", "4.0" };
+
+		g.AddNodeAttributes(ids, attr_type, scores);
+
+		auto attrs = g.GetNodeAttributes(attr_type);
+		ASSERT_TRUE(attrs.size() == 4);
+	}
+
+	TEST(_graph, GetNodeAttributes) {
+		Graph g;
+		g.addEdge(0, 1, 1);
+		g.addEdge(0, 2, 1);
+		g.addEdge(1, 3, 1);
+		g.addEdge(1, 4, 1);
+		g.addEdge(2, 4, 1);
+		g.addEdge(3, 5, 1);
+		g.addEdge(3, 6, 1);
+		g.addEdge(4, 5, 1);
+		g.addEdge(5, 6, 1);
+		g.addEdge(5, 7, 1);
+		g.addEdge(5, 8, 1);
+		g.addEdge(4, 8, 1);
+		g.addEdge(6, 7, 1);
+		g.addEdge(7, 8, 1);
+
+		g.AddNodeAttribute(0, "cross slope", "5.1");
+		g.AddNodeAttribute(1, "cross slope", "24.1");
+		g.AddNodeAttribute(2, "default", "9");
+		g.AddNodeAttribute(3, "cross slope", "7.1");
+
+		auto attrs = g.GetNodeAttributes("cross slope");
+		ASSERT_TRUE(attrs.size() == 3);
+
+		for (auto a : attrs) {
+			std::cout << "attribute: " << a << std::endl;
+		}
+	}
+
+	TEST(_graph, ClearNodeAttributes) {
+		Graph g;
+		g.addEdge(0, 1, 1);
+		g.addEdge(0, 2, 1);
+		g.addEdge(1, 3, 1);
+		g.addEdge(1, 4, 1);
+		g.addEdge(2, 4, 1);
+		g.addEdge(3, 5, 1);
+		g.addEdge(3, 6, 1);
+		g.addEdge(4, 5, 1);
+		g.addEdge(5, 6, 1);
+		g.addEdge(5, 7, 1);
+		g.addEdge(5, 8, 1);
+		g.addEdge(4, 8, 1);
+		g.addEdge(6, 7, 1);
+		g.addEdge(7, 8, 1);
+
+		g.AddNodeAttribute(0, "cross slope", "5.1");
+		g.AddNodeAttribute(1, "cross slope", "24.1");
+		g.AddNodeAttribute(2, "default", "9");
+		g.AddNodeAttribute(3, "cross slope", "7.1");
+
+		auto attrs = g.GetNodeAttributes("cross slope");
+		ASSERT_TRUE(attrs.size() == 3);
+
+		for (auto a : attrs) {
+			std::cout << "attribute: " << a << std::endl;
+		}
+
+		g.ClearNodeAttributes("cross slope");
+
+		attrs = g.GetNodeAttributes("cross slope");
+		ASSERT_TRUE(attrs.empty());
+	}
+}
 
 	namespace ConstantsExampleTests {
 		TEST(_functions, RoundHF) {
@@ -1372,7 +1496,126 @@ namespace GraphExampleTests {
 		}
 	}
 
-	namespace CInterfaceTests {
+namespace CInterfaceTests {
+	TEST(_graphCInterface, AddNodeAttributes) {
+		Graph g;
+		g.addEdge(0, 1, 1);
+		g.addEdge(0, 2, 1);
+		g.addEdge(1, 3, 1);
+		g.addEdge(1, 4, 1);
+		g.addEdge(2, 4, 1);
+		g.addEdge(3, 5, 1);
+		g.addEdge(3, 6, 1);
+		g.addEdge(4, 5, 1);
+		g.addEdge(5, 6, 1);
+		g.addEdge(5, 7, 1);
+		g.addEdge(5, 8, 1);
+		g.addEdge(4, 8, 1);
+		g.addEdge(6, 7, 1);
+		g.addEdge(7, 8, 1);
+
+		std::vector<int> ids{ 1, 3, 5, 7 };
+		std::string attr_type = "cross slope";
+		const char* scores[4] = { "1.4", "2.0", "2.8", "4.0" };
+
+		AddNodeAttributes(&g, ids.data(), attr_type.c_str(), scores, ids.size());
+
+		ASSERT_TRUE(g.GetNodeAttributes(attr_type).size() == 4);
+	}
+
+	TEST(_graphCInterface, GetNodeAttributes) {
+		Graph g;
+		g.addEdge(0, 1, 1);
+		g.addEdge(0, 2, 1);
+		g.addEdge(1, 3, 1);
+		g.addEdge(1, 4, 1);
+		g.addEdge(2, 4, 1);
+		g.addEdge(3, 5, 1);
+		g.addEdge(3, 6, 1);
+		g.addEdge(4, 5, 1);
+		g.addEdge(5, 6, 1);
+		g.addEdge(5, 7, 1);
+		g.addEdge(5, 8, 1);
+		g.addEdge(4, 8, 1);
+		g.addEdge(6, 7, 1);
+		g.addEdge(7, 8, 1);
+
+		std::vector<int> ids{ 1, 3, 5, 7 };
+		std::string attr_type = "cross slope";
+		const char* scores[4] = { "1.4", "2.0", "2.8", "4.0" };
+
+		AddNodeAttributes(&g, ids.data(), attr_type.c_str(), scores, ids.size());
+
+		char** scores_out = new char* [ids.size()];
+		int scores_out_size = 0;
+		GetNodeAttributes(&g, attr_type.c_str(), &scores_out, &scores_out_size);
+
+		ASSERT_TRUE(scores_out_size == 4);
+
+		DeleteScoreArray(&scores_out, scores_out_size);
+	}
+
+	TEST(_graphCInterface, DeleteScoreArray) {
+		Graph g;
+		g.addEdge(0, 1, 1);
+		g.addEdge(0, 2, 1);
+		g.addEdge(1, 3, 1);
+		g.addEdge(1, 4, 1);
+		g.addEdge(2, 4, 1);
+		g.addEdge(3, 5, 1);
+		g.addEdge(3, 6, 1);
+		g.addEdge(4, 5, 1);
+		g.addEdge(5, 6, 1);
+		g.addEdge(5, 7, 1);
+		g.addEdge(5, 8, 1);
+		g.addEdge(4, 8, 1);
+		g.addEdge(6, 7, 1);
+		g.addEdge(7, 8, 1);
+
+		std::vector<int> ids{ 1, 3, 5, 7 };
+		std::string attr_type = "cross slope";
+		const char* scores[4] = { "1.4", "2.0", "2.8", "4.0" };
+
+		AddNodeAttributes(&g, ids.data(), attr_type.c_str(), scores, ids.size());
+
+		char** scores_out = new char* [ids.size()];
+		int scores_out_size = 0;
+		GetNodeAttributes(&g, attr_type.c_str(), &scores_out, &scores_out_size);
+
+		ASSERT_TRUE(scores_out_size == 4);
+
+		DeleteScoreArray(&scores_out, scores_out_size);
+
+		ASSERT_TRUE(scores_out == nullptr);
+	}
+
+	TEST(_graphCInterface, ClearAttributeType) {
+		Graph g;
+		g.addEdge(0, 1, 1);
+		g.addEdge(0, 2, 1);
+		g.addEdge(1, 3, 1);
+		g.addEdge(1, 4, 1);
+		g.addEdge(2, 4, 1);
+		g.addEdge(3, 5, 1);
+		g.addEdge(3, 6, 1);
+		g.addEdge(4, 5, 1);
+		g.addEdge(5, 6, 1);
+		g.addEdge(5, 7, 1);
+		g.addEdge(5, 8, 1);
+		g.addEdge(4, 8, 1);
+		g.addEdge(6, 7, 1);
+		g.addEdge(7, 8, 1);
+
+		std::vector<int> ids{ 1, 3, 5, 7 };
+		std::string attr_type = "cross slope";
+		const char* scores[4] = { "1.4", "2.0", "2.8", "4.0" };
+
+		AddNodeAttributes(&g, ids.data(), attr_type.c_str(), scores, ids.size());
+
+		ClearAttributeType(&g, attr_type.c_str());
+
+		ASSERT_TRUE(g.GetNodeAttributes(attr_type).empty());
+	}
 
 		TEST(_NodeCInterface, GetAllNodesFromGraph) {
 			// Requires #include "graph.h"
@@ -1697,4 +1940,3 @@ namespace GraphExampleTests {
 			DestroyGraph(g);
 		}
 	}
-}
