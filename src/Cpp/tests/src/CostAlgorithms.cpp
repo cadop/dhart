@@ -8,7 +8,7 @@
 
 using namespace HF::SpatialStructures;
 
-namespace CostAlgorithmsTests {
+
 namespace CostAlgorithmsTests {
 	TEST(_CostAlgorithms, to_radians) {
 		// Requires #include "cost_algorithms.h"
@@ -130,8 +130,39 @@ namespace CostAlgorithmsTests {
 		// - the edge formed by n1 and n2
 		// - the edge formed by n1 and n3
 	}
+
+	TEST(_CostAlgorithms, Slope)
+	{
+		Node n1(1.5,1.5,1);
+		Node n2(2.5, 2.5, 0);
+
+		float slope = HF::SpatialStructures::CostAlgorithms::CalculateSlope(n1, n2);
+		ASSERT_NEAR(slope, -35.2, 0.1);
+
+		Node n3(0, 0, 0);
+		Node n4(0, 0, 1);
+
+		slope = HF::SpatialStructures::CostAlgorithms::CalculateSlope(n3, n4);
+		ASSERT_NEAR(slope, 90, 0.001);
+
+		Node n5(0, 0, 0);
+		Node n6(1, 0, 1);
+
+		slope = HF::SpatialStructures::CostAlgorithms::CalculateSlope(n5, n6);
+		ASSERT_NEAR(slope, 45, 0.001);
+
+		Node n7(0, 0, 0);
+		Node n8(1, 0, -1);
+
+		slope = HF::SpatialStructures::CostAlgorithms::CalculateSlope(n7, n8);
+		ASSERT_NEAR(slope, -45, 0.001);
+
+
+	}
+
 }
 
+/*
 namespace CInterfaceTests {
 
 	TEST(_CostAlgorithmsCInterface, CalculateAndStoreEnergyExpenditureWithEnergyBlob) {
@@ -209,3 +240,4 @@ namespace CInterfaceTests {
 	TEST(_CostAlgorithms, CalculateEnergyExpenditureWithEnergyBlob) {
 	}
 }
+*/
