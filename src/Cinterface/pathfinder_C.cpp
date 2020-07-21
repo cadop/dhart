@@ -78,8 +78,34 @@ C_INTERFACE CreatePathCostType(
 	HF::SpatialStructures::PathMember** out_data,
 	const char* cost_name
 ) {
+	// Get a boost graph from *g
+	std::unique_ptr<BoostGraph, BoostGraphDeleter> bg;
+	
+	try {
+		// If cost_name is not a valid cost type in *g,
+		// std::out_of_range is thrown by Graph::GetEdges
+		bg = CreateBoostGraph(*g, std::string(cost_name));
+	}
+	catch (std::out_of_range) {
+		// should really be HF::Exceptions::HF_STATUS::NO_COST
+		// but we do not have that yet. Will be left to issue #24.
+		return HF::Exceptions::HF_STATUS::GENERIC_ERROR;
+	}
 
-	return HF::Exceptions::HF_STATUS::OK;
+	Path* P = new Path();
+
+	*P = FindPath(bg.get(), start, end);
+
+	if (!P->empty()) {
+		*out_path = P;
+		*out_data = P->GetPMPointer();
+		*out_size = P->size();
+		return HF::Exceptions::HF_STATUS::OK;
+	}
+	else {
+		delete P;
+		return HF::Exceptions::HF_STATUS::NO_PATH;
+	}
 }
 
 C_INTERFACE CreatePathsCostType(
@@ -92,7 +118,31 @@ C_INTERFACE CreatePathsCostType(
 	int num_paths,
 	const char* cost_name) {
 
+	vector<int> starts(start, start + num_paths);
+	vector<int> ends(end, end + num_paths);
 
+	// Get a boost graph from *g
+	std::unique_ptr<BoostGraph, BoostGraphDeleter> bg;
+	
+	try {
+		// If cost_name is not a valid cost type in *g,
+		// std::out_of_range is thrown by Graph::GetEdges
+		bg = CreateBoostGraph(*g, std::string(cost_name));
+	}
+	catch (std::out_of_range) {
+		// should really be HF::Exceptions::HF_STATUS::NO_COST
+		// but we do not have that yet. Will be left to issue #24.
+		return HF::Exceptions::HF_STATUS::GENERIC_ERROR;
+	}
+
+	InsertPathsIntoArray(
+		bg.get(),
+		starts,
+		ends,
+		out_path_ptr_holder,
+		out_path_member_ptr_holder,
+		out_sizes
+	);
 
 	return HF::Exceptions::HF_STATUS::OK;
 }

@@ -162,7 +162,35 @@ namespace HF {
 			\throw HF::Exceptions::NoCost if cost_name does not exist as a cost type in g
 
 			\code
-				// TODO example
+				// be sure to #include "path_finder.h", #include "boost_graph.h",
+				// #include "node.h", and #include "graph.h"
+
+				// For this example, we must have a BoostGraph instance to use with BoostGraphDeleter.
+				// In order to create a BoostGraph, we must first create a Graph instance first.
+				// We must prepare the nodes, their edges, and the weights (distances) of each edge.
+
+				// Create the nodes
+				HF::SpatialStructures::Node node_0(1.0f, 1.0f, 2.0f);
+				HF::SpatialStructures::Node node_1(2.0f, 3.0f, 4.0f, 5);
+				HF::SpatialStructures::Node node_2(11.0f, 22.0f, 140.0f);
+
+				// Create a container (vector) of nodes
+				std::vector<HF::SpatialStructures::Node> nodes = { node_0, node_1, node_2 };
+
+				// Create matrices for edges and distances, edges.size() == distances().size()
+				std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
+				std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
+
+				// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
+				HF::SpatialStructures::Graph graph(edges, distances, nodes);
+
+				// Now we can create a smart pointer to a BoostGraph
+				// Note the type of boostGraph - it is a
+				//		std::unique_ptr<HF::Pathfinding::BoostGraph, HF::Pathfinding::BoostGraphDeleter>.
+				// Use the auto keyword for type inference, or your choice of using statements/typedef to make
+				// the use of the type described above easier.
+				std::string desired_cost_type = "cross_slope";
+				auto boostGraph = HF::Pathfinding::CreateBoostGraph(graph, desired_cost_type);
 			\endcode
 		*/
 		std::unique_ptr<BoostGraph, BoostGraphDeleter> CreateBoostGraph(const HF::SpatialStructures::Graph& g, const std::string cost_name);
