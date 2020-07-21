@@ -710,7 +710,7 @@ namespace HF::SpatialStructures {
 		///
 		/// Private data member 
 		///     robin_hood::unordered_map<string, SparseMatrix<float, 1>> cost_value_map
-		/// is needed in Graph. (Graph::cost_value_map)
+		/// is needed in Graph. (Graph::cost_type_map)
 		///
 		
 		// Throw if we're not compressed since this is a const function and compressing the graph
