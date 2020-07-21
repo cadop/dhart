@@ -301,19 +301,13 @@ namespace HF::SpatialStructures {
 		\brief A set of edge costs for a graph.
 	
 		\details
-		The bare infomration necessary to handle an eigen matrix. Relies on data from the graph it's contained
-		by.
-
+		Arrays that can be swapped in and out of the array's indices.
 	*/
-	struct EdgeCostSet {
+	class EdgeCostSet {
+	private:
+		std::vector<float> costs; ///< Array of costs to be used like eigen's internal indices array.
+	
 	public:
-		Eigen::SparseMatrix<float, 1> edge_matrix;
-		
-		std::vector<Eigen::Triplet<float>> triplets;	///< Edges to be converted to a CSR when Graph::Compress() is called.
-		bool needs_compression = true;					///< If true, the CSR is inaccurate and requires compression.
-		
-		CSRPtrs GetCSRPointers();
-
 		/*! \brief Empty constructor.*/
 		EdgeCostSet() {};
 
@@ -321,16 +315,22 @@ namespace HF::SpatialStructures {
 		inline EdgeCostSet(int size) { this->ResizeIfNeeded(size); }
 		
 		/*! \brief Get the size of this edge matrix*/
-		inline int size() const { return this->edge_matrix.rows(); };
+		inline int size() const { return this->costs.size(); };
 
 		/*! \brief Resize this edge matrix if needed*/
 		inline void ResizeIfNeeded(int new_size) {
 			if (this->size() < new_size)
-				this->edge_matrix.resize(new_size, new_size);
+				this->costs.resize(new_size);
 		};
 
 		/*! \brief Clear this edge cost set. */
-		inline void Clear(){ }
+		inline void Clear() { this->costs.clear(); }
+
+		/*! \brief index internal */
+		inline float operator[](int i) { return this->costs[i]; }
+
+		/*! \brief Get the pointer to the start of this array. */
+		inline float* GetPtr() { return this->costs.data(); }
 	};
 
 	/*! \brief A Graph of nodes connected by edges that supports both integers and HF::SpatialStructures::Node.
@@ -432,33 +432,36 @@ namespace HF::SpatialStructures {
 
 
 		/*! \brief Check if we have this edge matrix already defined. */
-		bool HasEdgeMatrix(std::string key);
+		bool HasCostArray(std::string key);
 
 
 		/*! \brief Get a reference to the edge matrix at the given key.
 			\exception std::out::of::range if the key doesn't exist.
 		*/
-		EdgeMatrix& GetEdgeMatrix(const std::string& key);
+		EdgeCostSet& GetCostArray(const std::string& key);
 
 		/*! \brief Get a reference to the edge matrix, or create a new one.*/
-		EdgeMatrix & GetOrCreateEdgeMatrix(const std::string & name);
+		EdgeCostSet & GetOrCreateCostType(const std::string & name);
 
 		/*! \brief Create a new edge matrix.*/
-		EdgeMatrix & CreateEdgeMatrix(const std::string & name);
+		EdgeCostSet & CreateCostArray(const std::string & name);
 
 		/*! \brief Change the active edge matrix.*/
-		EdgeMatrix & GetDefaultEdgeMatrix();
+		EdgeCostSet & GetDefaultCostArray();
 
 		/*! \brief Get a reference to the edge matrix at the given key.
 			\exception std::out::of::range if the key doesn't exist.
 		*/
-		const EdgeMatrix & GetEdgeMatrix(const std::string& key) const;
+		const EdgeCostSet & GetCostArray(const std::string& key) const;
 
 		/*! \brief Change the active edge matrix.*/
-		const EdgeMatrix& GetDefaultEdgeMatrix() const;
+		const EdgeCostSet& GetDefaultCostArray() const;
 		
 		/*! \brief check if this name is asking for the default. */
 		bool IsDefaultName(const std::string& name);
+
+		/*! \brief Get the index of the cost at parent/child. */
+		int ValueArrayIndex(int parent_id, int child_id) const;
 
 	public:
 		/*!
