@@ -75,54 +75,62 @@ namespace HF::SpatialStructures {
 		throw HF::Exceptions::NotImplemented();
 	}
 
-	EdgeMatrix & Graph::GetEdgeMatrix(const string & key) 
+	EdgeCostSet & Graph::GetCostArray(const string & key) 
 	{
-		return const_cast<EdgeMatrix &>(GetEdgeMatrix(key));
+		return const_cast<EdgeCostSet &>(GetCostArray(key));
 	}
 
-	bool Graph::HasEdgeMatrix(string key) {
+	bool Graph::HasCostArray(string key) {
 		return (edge_cost_maps.count(key) > 0);
 	}
 
-	EdgeMatrix & Graph::GetOrCreateEdgeMatrix(const std::string& name)
+	EdgeCostSet & Graph::GetOrCreateCostType(const std::string& name)
 	{
 		if (this->IsDefaultName(name)) 
-			return GetDefaultEdgeMatrix();
-		else if (this->HasEdgeMatrix(name))
-			return this->GetEdgeMatrix(name);
+			return GetDefaultCostArray();
+		else if (this->HasCostArray(name))
+			return this->GetCostArray(name);
 		else
-			return this->CreateEdgeMatrix(name);
+			return this->CreateCostArray(name);
 	}
 
-	EdgeMatrix & Graph::CreateEdgeMatrix(const std::string & name)
+	EdgeCostSet & Graph::CreateCostArray(const std::string & name)
 	{
-		assert(!this->HasEdgeMatrix(name));
+		assert(!this->HasCostArray(name));
 
 		// Create a new edge cost set and insert it into the hashmap. Return the edge matrix.
 		edge_cost_maps.insert({ name, EdgeCostSet(this->size()) });
 
 		// Get and return it
-		return GetEdgeMatrix(name);
+		return GetCostArray(name);
 	}
 
-	EdgeMatrix& Graph::GetDefaultEdgeMatrix()
+	EdgeCostSet& Graph::GetDefaultCostArray()
 	{
-		return const_cast<EdgeMatrix&>(GetDefaultEdgeMatrix());
+		return const_cast<EdgeCostSet&>(GetDefaultCostArray());
 	}
 
-	const EdgeMatrix& Graph::GetEdgeMatrix(const std::string& key) const
+	const EdgeCostSet& Graph::GetCostArray(const std::string& key) const
 	{
-		return (edge_cost_maps.at(key).edge_matrix);
+		return (edge_cost_maps.at(key));
 	}
 
-	const EdgeMatrix& Graph::GetDefaultEdgeMatrix() const
+	const EdgeCostSet& Graph::GetDefaultCostArray() const
 	{
-		return this->GetEdgeMatrix(this->default_cost);
+		return this->GetCostArray(this->default_cost);
 	}
 
 	bool Graph::IsDefaultName(const std::string& name)
 	{
 		return (name.empty());
+	}
+
+	int Graph::ValueArrayIndex(int parent_id, int child_id) const
+	{
+		const auto outer_index_ptr = edge_matrix.outerIndexPtr();
+		const auto inner_index_ptr = edge_matrix.innerIndexPtr();
+
+		return inner_index_ptr[outer_index_ptr[parent_id]];
 	}
 
 	CSRPtrs Graph::GetCSRPointers(const std::string & cost_type)
