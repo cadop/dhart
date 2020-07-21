@@ -61,7 +61,6 @@ namespace HF::SpatialStructures {
 		return result;
 	}
 
-
 	int Graph::size() const { return ordered_nodes.size(); }
 
 	int Graph::getID(const Node& node) const
@@ -76,21 +75,72 @@ namespace HF::SpatialStructures {
 		return ordered_nodes.at(index).id;
 	}
 
-	CSRPtrs Graph::GetCSRPointers()
+	EdgeMatrix & Graph::GetEdgeMatrix(const string & key) 
 	{
+		return const_cast<EdgeMatrix &>(GetEdgeMatrix(key));
+	}
+
+	bool Graph::HasEdgeMatrix(string key) {
+		return (edge_cost_maps.count(key) > 0);
+	}
+
+	EdgeMatrix & Graph::GetOrCreateEdgeMatrix(const std::string& name)
+	{
+		if (this->IsDefaultName(name)) 
+			return GetDefaultEdgeMatrix();
+		else if (this->HasEdgeMatrix(name))
+			return this->GetEdgeMatrix(name);
+		else
+			return this->CreateEdgeMatrix(name);
+	}
+
+	EdgeMatrix & Graph::CreateEdgeMatrix(const std::string & name)
+	{
+		assert(!this->HasEdgeMatrix(name));
+
+		// Create a new edge cost set and insert it into the hashmap. Return the edge matrix.
+		edge_cost_maps.insert({ name, EdgeCostSet(this->size()) });
+
+		// Get and return it
+		return GetEdgeMatrix(name);
+	}
+
+	EdgeMatrix& Graph::GetDefaultEdgeMatrix()
+	{
+		return const_cast<EdgeMatrix&>(GetDefaultEdgeMatrix());
+	}
+
+	const EdgeMatrix& Graph::GetEdgeMatrix(const std::string& key) const
+	{
+		return (edge_cost_maps.at(key).edge_matrix);
+	}
+
+	const EdgeMatrix& Graph::GetDefaultEdgeMatrix() const
+	{
+		return this->GetEdgeMatrix(this->default_cost);
+	}
+
+	bool Graph::IsDefaultName(const std::string& name)
+	{
+		return (name.empty());
+	}
+
+	CSRPtrs Graph::GetCSRPointers(const std::string & cost_type)
+	{
+		EdgeMatrix & matrix = GetEdgeMatrix(cost_type);
 
 		// The graph must be compressed for this to work
 		Compress();
 
 		// Construct CSRPtr with the required info from edge_matrix.
 		CSRPtrs out_csr{
-			static_cast<int>(edge_matrix.nonZeros()),
-			static_cast<int>(edge_matrix.rows()),
-			static_cast<int>(edge_matrix.cols()),
+			static_cast<int>(matrix.nonZeros()),
+			static_cast<int>(matrix.rows()),
+			static_cast<int>(matrix.cols()),
 
-			edge_matrix.valuePtr(),
-			edge_matrix.outerIndexPtr(),
-			edge_matrix.innerIndexPtr()
+			matrix.valuePtr(),
+			matrix.outerIndexPtr(),
+			matrix.innerIndexPtr()
 		};
 
 		return out_csr;
@@ -104,6 +154,8 @@ namespace HF::SpatialStructures {
 	}
 
 	vector<Edge> Graph::GetUndirectedEdges(const Node & n) const {
+		const EdgeMatrix& edge_matrix = this->GetEdgeMatrix("");
+
 		// Get the ID of n
 		int node_id = getID(n);
 
@@ -133,6 +185,8 @@ namespace HF::SpatialStructures {
 
 	std::vector<EdgeSet> Graph::GetEdges() const
 	{
+		const EdgeMatrix & edge_matrix = GetEdgeMatrix("");
+
 		// Throw if we're not compressed since this is a const function and compressing the graph
 		// will make it non-const
 		if (this->needs_compression)
@@ -204,6 +258,7 @@ namespace HF::SpatialStructures {
 
 	std::vector<float> Graph::AggregateGraph(COST_AGGREGATE agg_type, bool directed) const
 	{
+		auto edge_matrix = this->GetEdgeMatrix("");
 		// This won't work if the graph isn't compressed.
 		if (this->needs_compression) throw std::exception("The graph must be compressed!");
 
@@ -255,6 +310,8 @@ namespace HF::SpatialStructures {
 
 	const std::vector<Edge> Graph::operator[](const Node& n) const
 	{
+		auto edge_matrix = GetDefaultEdgeMatrix();
+
 		// Get the row of this node
 		const int row = GetIndex(n);
 
@@ -305,7 +362,8 @@ namespace HF::SpatialStructures {
 
 	bool Graph::checkForEdge(int parent, int child) const {
 		// ![CheckForEdge]
-		
+		const auto& edge_matrix = GetEdgeMatrix("");
+
 		// Get the index for parent and child
 		const int parent_index = GetIndex(parent);
 		const int child_index = GetIndex(child);
@@ -345,10 +403,12 @@ namespace HF::SpatialStructures {
 	{
 		const int num_nodes = ordered_nodes.size() + 1; // You need 1 more column/row than max capacity. 
 
-		if (num_nodes > edge_matrix.rows())
-			edge_matrix.conservativeResize(num_nodes, num_nodes);
+		for (auto it = edge_cost_maps.begin(); it != edge_cost_maps.end(); ++it) {
+			const auto& cost_set = it->second;
+			it->second.ResizeIfNeeded(num_nodes);
 
-		assert(num_nodes <= edge_matrix.rows() && num_nodes <= edge_matrix.cols());
+			assert(num_nodes <= cost_set.edge_matrix.rows() && num_nodes <= cost_set.edge_matrix.cols());
+		}
 	}
 
 	inline bool Graph::hasKey(int id) const
@@ -371,6 +431,8 @@ namespace HF::SpatialStructures {
 	}
 
 	bool Graph::HasEdge(const Node& parent, const Node& child, const bool undirected) const {
+		const auto& edge_matrix = this->GetEdgeMatrix("");
+
 		// Throw if the graph isn't compresesed.
 		if (!edge_matrix.isCompressed())
 			throw std::exception("Can't get this for uncompressed matrix!");
@@ -433,8 +495,13 @@ namespace HF::SpatialStructures {
 	Graph::Graph(
 		const vector<vector<int>>& edges,
 		const vector<vector<float>> & distances,
-		const vector<Node> & Nodes
+		const vector<Node> & Nodes,
+		const std::string & default_cost
 	) {
+
+		this->default_cost = default_cost;
+		auto & edge_matrix = this->CreateEdgeMatrix(default_cost);
+
 		// Generate an array with the size of every column from the size of the edges array
 		assert(edges.size() == distances.size());
 		vector<int> sizes(edges.size());
@@ -468,6 +535,12 @@ namespace HF::SpatialStructures {
 		edge_matrix.makeCompressed();
 		//assert(edge_matrix.nonZeros() > 0);
 		needs_compression = false;
+	}
+
+	Graph::Graph(const std::string & default_cost_name)
+	{
+		// Assign default cost type, and create an edge matrix.
+		this->default_cost = default_cost_name;
 	}
 
 	bool Graph::HasEdge(const std::array<float, 3>& parent, const std::array<float, 3>& child, bool undirected) const {
@@ -555,7 +628,6 @@ namespace HF::SpatialStructures {
 	}
 
 	void Graph::AddEdges(std::vector<std::vector<EdgeSet>>& edges) {
-
 	}
 
 	std::vector<Node> Graph::GetChildren(const Node& n) const {

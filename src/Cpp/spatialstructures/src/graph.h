@@ -16,6 +16,8 @@ namespace Eigen {
 }
 
 namespace HF::SpatialStructures {
+
+	using EdgeMatrix = Eigen::SparseMatrix<float, 1>;
 	/*! \brief Methods of aggregating the costs for edges for each node in the graph. 
 	
 	\see Graph.AggregateGraph() for details on how to use this enum.
@@ -295,6 +297,42 @@ namespace HF::SpatialStructures {
 		std::vector<Edge> m_edges;			///< The edges that extend from m_parent
 	};
 
+	/*!
+		\brief A set of edge costs for a graph.
+	
+		\details
+		The bare infomration necessary to handle an eigen matrix. Relies on data from the graph it's contained
+		by.
+
+	*/
+	struct EdgeCostSet {
+	public:
+		Eigen::SparseMatrix<float, 1> edge_matrix;
+		
+		std::vector<Eigen::Triplet<float>> triplets;	///< Edges to be converted to a CSR when Graph::Compress() is called.
+		bool needs_compression = true;					///< If true, the CSR is inaccurate and requires compression.
+		
+		CSRPtrs GetCSRPointers();
+
+		/*! \brief Empty constructor.*/
+		EdgeCostSet() {};
+
+		/*! \brief Create an edge cost set and allocate a specific size.*/
+		inline EdgeCostSet(int size) { this->ResizeIfNeeded(size); }
+		
+		/*! \brief Get the size of this edge matrix*/
+		inline int size() const { return this->edge_matrix.rows(); };
+
+		/*! \brief Resize this edge matrix if needed*/
+		inline void ResizeIfNeeded(int new_size) {
+			if (this->size() < new_size)
+				this->edge_matrix.resize(new_size, new_size);
+		};
+
+		/*! \brief Clear this edge cost set. */
+		inline void Clear(){ }
+	};
+
 	/*! \brief A Graph of nodes connected by edges that supports both integers and HF::SpatialStructures::Node.
 		
 		\details
@@ -310,15 +348,23 @@ namespace HF::SpatialStructures {
 		using NodeAttributeValueMap = robin_hood::unordered_map<int, std::string>;
 
 	private:
+		int next_id = 0;								///< The id for the next unique node.
 		std::vector<Node> ordered_nodes;				///< A list of nodes contained by the graph.
+		
 		robin_hood::unordered_map<int, int> id_to_ordered_node; ///< Maps ids to indexes in ordered_nodes.
 		robin_hood::unordered_map<Node, int> idmap;		///< Maps a list of X,Y,Z positions to positions in ordered_nodes
-		Eigen::SparseMatrix<float, 1> edge_matrix;		///< The underlying CSR containing edge nformation.
-		int next_id = 0;								///< The id for the next unique node.
+		
 		std::vector<Eigen::Triplet<float>> triplets;	///< Edges to be converted to a CSR when Graph::Compress() is called.
 		bool needs_compression = true;					///< If true, the CSR is inaccurate and requires compression.
 
 		robin_hood::unordered_map<std::string, NodeAttributeValueMap> node_attr_map; ///< Node attribute type : Map of node id to node attribute
+
+		
+		std::string active_cost_type;								///< The active edge matrix to use for the graph
+		EdgeMatrix edge_matrix;		///< The underlying CSR containing edge information.
+		
+		std::string default_cost = "Distance";
+		robin_hood::unordered_map<std::string, EdgeCostSet> edge_cost_maps;
 
 		/// <summary>
 		/// Get the unique ID for this x, y, z position, assigning it an new one if it doesn't
@@ -386,7 +432,37 @@ namespace HF::SpatialStructures {
 
 		/*! \brief Get the ID of a node from its index in the CSR.*/
 		int GetIDFromIndex(int index) const;
-	
+
+
+		/*! \brief Check if we have this edge matrix already defined. */
+		bool HasEdgeMatrix(std::string key);
+
+
+		/*! \brief Get a reference to the edge matrix at the given key.
+			\exception std::out::of::range if the key doesn't exist.
+		*/
+		EdgeMatrix& GetEdgeMatrix(const std::string& key);
+
+		/*! \brief Get a reference to the edge matrix, or create a new one.*/
+		EdgeMatrix & GetOrCreateEdgeMatrix(const std::string & name);
+
+		/*! \brief Create a new edge matrix.*/
+		EdgeMatrix & CreateEdgeMatrix(const std::string & name);
+
+		/*! \brief Change the active edge matrix.*/
+		EdgeMatrix & GetDefaultEdgeMatrix();
+
+		/*! \brief Get a reference to the edge matrix at the given key.
+			\exception std::out::of::range if the key doesn't exist.
+		*/
+		const EdgeMatrix & GetEdgeMatrix(const std::string& key) const;
+
+		/*! \brief Change the active edge matrix.*/
+		const EdgeMatrix& GetDefaultEdgeMatrix() const;
+		
+		/*! \brief check if this name is asking for the default. */
+		bool IsDefaultName(const std::string& name);
+
 	public:
 		/*!
 		 \brief Construct a graph from a list of nodes, edges, and distances. 
@@ -394,6 +470,7 @@ namespace HF::SpatialStructures {
 		 \param edges Ordered array of arrays of edges for each node in nodes.
 		 \param distances Ordered array of distance from parent to child for each edge in edges.
 		 \param Nodes Ordered array of nodes to act as a parent to all children in it's array in edges.
+		 \param default_cost Default cost of the graph. This is the name of the first used cost.
 
 		\details Preallocates the matrix it in element by element and compresses it. 
 
@@ -437,9 +514,10 @@ namespace HF::SpatialStructures {
 		\endcode
 		*/
 		Graph(
-			const std::vector<std::vector<int>> & edges, 
-			const std::vector<std::vector<float>> & distances, 
-			const std::vector<Node> & Nodes
+			const std::vector<std::vector<int>>& edges,
+			const std::vector<std::vector<float>>& distances,
+			const std::vector<Node>& Nodes,
+			const std::string& default_cost = "Distance"
 		);
 
 		/*! \brief Construct an empty graph.
@@ -459,7 +537,7 @@ namespace HF::SpatialStructures {
 														// It lacks vertices and edges.
 			\endcode
 		*/
-		Graph() {};
+		Graph(const std::string & default_cost_name = "Distance");
 
 		/*! \brief Determine if the graph has an edge from parent to child.
 		
@@ -1163,7 +1241,7 @@ namespace HF::SpatialStructures {
 
 			\see CSRPtrs.AreValid() for checking if the return value represents a valid CSR.
 		*/
-		CSRPtrs GetCSRPointers();
+		CSRPtrs GetCSRPointers(const std::string & cost_type = "");
 
 		/// <summary> Retrieve the node that corresponds to id. </summary>
 		/// <param name="id"> The ID of the node to get. </param>
@@ -1223,7 +1301,7 @@ namespace HF::SpatialStructures {
 				HF::SpatialStructures::Graph graph(edges, distances, nodes);
 		
 				// If we want to remove all nodes and edges from graph, we may do so with Clear:
-				graph.Clear();						// edge_matrix is zeroed out, buffer is squeezed,
+				graph.Clear();						// active_edge_matrix is zeroed out, buffer is squeezed,
 													// triplets are also cleared, and
 													// needs_compression == true
 			\endcode
