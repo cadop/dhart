@@ -88,7 +88,9 @@ namespace HF::SpatialStructures {
 				// TODO example
 			\endcode
 		*/
-		float* data_begin() const;
+		inline float* CSRPtrs::data_begin() const {
+			return data ? data : nullptr;
+		}
 		
 		/// <summary> Returns the address of one-past the last element within the data buffer</summary>
 		/// <returns> The address of one-past the last element within the data buffer</returns>
@@ -101,7 +103,13 @@ namespace HF::SpatialStructures {
 				// TODO example
 			/endcode
 		*/
-		float* data_end() const;
+		inline float* CSRPtrs::data_end() const {
+			if (nnz > 0) {
+				return data ? data + nnz : nullptr;
+			}
+
+			return nullptr;
+		}
 
 		/// <summary> Returns the base address of the inner_indices buffer</summary>
 		/// <returns> The base address of the inner_indices buffer</returns>
@@ -114,7 +122,10 @@ namespace HF::SpatialStructures {
 				// TODO example
 			\endcode
 		*/
-		int* inner_begin() const;
+
+		inline int* CSRPtrs::inner_begin() const {
+			return inner_indices ? inner_indices : nullptr;
+		}
 
 		/// <summary> Returns the address of one-past the last element within the inner_indices buffer</summary>
 		/// <returns> The address of one-past the last element within the inner_indices buffer</summary>
@@ -127,7 +138,14 @@ namespace HF::SpatialStructures {
 				// TODO example
 			\endcode
 		*/
-		int* inner_end() const;
+
+		inline int* CSRPtrs::inner_end() const {
+			if (nnz > 0) {
+				return inner_indices ? inner_indices + nnz : nullptr;
+			}
+
+			return nullptr;
+		}
 
 		/// <summary> Returns the base address of the outer_indices buffer</summary>
 		/// <returns> The base address of the outer_indices buffer</returns>
@@ -140,8 +158,10 @@ namespace HF::SpatialStructures {
 				// TODO example
 			\endcode
 		*/
-		int* outer_begin() const;
-		
+		inline int* CSRPtrs::outer_begin() const {
+			return outer_indices ? outer_indices : nullptr;
+		}
+
 		/// <summary> Returns the address of one-past the last element within the outer_indices buffer</summary>
 		/// <returns> The address of one-past the last element within the outer_indices buffer</returns>
 
@@ -153,7 +173,13 @@ namespace HF::SpatialStructures {
 				// TODO example
 			\endcode
 		*/
-		int* outer_end() const;
+		inline int* CSRPtrs::outer_end() const {
+			if (rows > 0) {
+				return outer_indices ? outer_indices + rows : nullptr;
+			}
+
+			return nullptr;
+		}
 
 		/// <summary> Returns the address of the first non-zero element of row_number within the CSR data buffer</summary>
 		/// <param name="row_number">The desired row number to access within the CSR</param>
@@ -167,7 +193,17 @@ namespace HF::SpatialStructures {
 				// TODO example
 			\endcode
 		*/
-		float* row_begin(int row_number) const;
+		inline float* CSRPtrs::row_begin(int row_number) const {
+			float* begin = nullptr;
+
+			if (data && rows > 0) {
+				if (row_number >= 0 && row_number < rows) {
+					begin = data + outer_indices[row_number];
+				}
+			}
+
+			return begin;
+		}
 
 		/// <summary> Returns the address of the first non-zero element of row_number + 1, i.e. the base address of the next row within the CSR data buffer</summary>
 		/// <param name="row_number">The desired row number for the CSR such that the address returned is the address pointing to the beginning element for the subsequent row</param>
@@ -181,7 +217,21 @@ namespace HF::SpatialStructures {
 				// TODO example
 			\endcode
 		*/
-		float* row_end(int row_number) const;
+		inline float* CSRPtrs::row_end(int row_number) const {
+			float* end = nullptr;
+			const int next_row = row_number + 1;
+
+			if (data && rows > 0) {
+				if (next_row > 0 && next_row < rows) {
+					end = data + outer_indices[next_row];
+				}
+				else if (next_row > 0 && next_row == rows) {
+					end = data_end();
+				}
+			}
+
+			return end;
+		}
 
 		/// <summary> Returns the address of the element that determines the column where the first non-zero value begins within row_number</summary>
 		/// <param name="row_number">The desired row number for the CSR such that the address returned is of the value that dictates where the first non-zero value begins within row_number</param>
@@ -195,7 +245,18 @@ namespace HF::SpatialStructures {
 				// TODO example
 			\endcode
 		*/
-		int* col_begin(int row_number) const;
+
+		inline int* CSRPtrs::col_begin(int row_number) const {
+			int* begin = nullptr;
+
+			if (inner_indices && outer_indices) {
+				if (row_number >= 0 && row_number < rows) {
+					begin = inner_indices + outer_indices[row_number];
+				}
+			}
+
+			return begin;
+		}
 
 		/// <summary> Returns the address of the element that denotes the end of a 'subarray' within inner_indices </summary>
 		/// <param name="row_number">The desired row number for the CSR such that the address returned is one-past the last value for a 'subarray' within inner_indices</param>
@@ -209,100 +270,21 @@ namespace HF::SpatialStructures {
 				// TODO example
 			\endcode
 		*/
-		int* col_end(int row_number) const;
+		inline int* CSRPtrs::col_end(int row_number) const {
+			int* end = nullptr;
+			const int next_row = row_number + 1;
+
+			if (inner_indices && outer_indices) {
+				if (next_row > 0 && next_row < rows) {
+					end = inner_indices + outer_indices[next_row];
+				}
+				else if (next_row > 0 && next_row == rows) {
+					end = inner_end();
+				}
+			}
+			return end;
+		}	
 	};
-
-	inline float* CSRPtrs::data_begin() const {
-		return data ? data : nullptr;
-	}
-
-	inline float* CSRPtrs::data_end() const {
-		if (nnz > 0) {
-			return data ? data + nnz : nullptr;
-		}
-
-		return nullptr;
-	}
-
-	inline int* CSRPtrs::inner_begin() const {
-		return inner_indices ? inner_indices : nullptr;
-	}
-
-	inline int* CSRPtrs::inner_end() const {
-		if (nnz > 0) {
-			return inner_indices ? inner_indices + nnz : nullptr;
-		}
-		
-		return nullptr;
-	}
-
-	inline int* CSRPtrs::outer_begin() const {
-		return outer_indices ? outer_indices : nullptr;
-	}
-
-	inline int* CSRPtrs::outer_end() const {
-		if (rows > 0) {
-			return outer_indices ? outer_indices + rows : nullptr;
-		}
-		
-		return nullptr;
-	}
-
-	inline float* CSRPtrs::row_begin(int row_number) const {
-		float* begin = nullptr;
-
-		if (data && rows > 0) {
-			if (row_number >= 0 && row_number < rows) {
-				begin = data + outer_indices[row_number];
-			}
-		}
-		
-		return begin;
-	}
-
-	inline float* CSRPtrs::row_end(int row_number) const {
-		float* end = nullptr;
-		const int next_row = row_number + 1;
-
-		if (data && rows > 0) {
-			if (next_row > 0 && next_row < rows) {
-				end = data + outer_indices[next_row];
-			}
-			else if (next_row > 0 && next_row == rows) {
-				end = data_end();
-			}
-		}
-
-		return end;
-	}
-
-	inline int* CSRPtrs::col_begin(int row_number) const {
-		int* begin = nullptr;
-
-		if (inner_indices && outer_indices) {
-			if (row_number >= 0 && row_number < rows) {
-				begin = inner_indices + outer_indices[row_number];
-			}
-		}
-
-		return begin;
-	}
-
-	inline int* CSRPtrs::col_end(int row_number) const {
-		int* end = nullptr;
-		const int next_row = row_number + 1;
-
-		if (inner_indices && outer_indices) {
-			if (next_row > 0 && next_row < rows) {
-				end = inner_indices + outer_indices[next_row];
-			}
-			else if (next_row > 0 && next_row == rows) {
-				end = inner_end();
-			}
-		}
-
-		return end;
-	}
 
 	/*!
 		\brief A Subgraph consists of a parent Node m_parent and a container of Edge m_edges such that all Edge in m_edges
