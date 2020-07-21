@@ -777,6 +777,7 @@ namespace PathExampleTests {
 
 namespace GraphExampleTests {
 	TEST(_csrptrs, AreValid) {
+
 		 std::unique_ptr<float[]> data(new float[16]);
 		 std::unique_ptr<int[]> outer_indices(new int[16]);
 		 std::unique_ptr<int[]> inner_indices(new int[16]);
@@ -1355,12 +1356,18 @@ namespace GraphExampleTests {
 		}
 	}
 
-	TEST(_graph, GenerateCrossSlope) {
-		// TODO example - code commented out in graph.cpp
-	}
+	///
+	///	The following are tests for the code samples for HF::SpatialStructures::Constants
+	///
 
-	TEST(_graph, GenerateEnergy) {
-		// TODO example - code commented out in graph.cpp
+	namespace ConstantsExampleTests {
+		TEST(_functions, RoundHF) {
+			// std::round from the cmath library is used in roundhf.
+			// Precision is to the nearest ten-thousandth
+			const float my_pi = 3.141592653589793238462643383279502884197169399375105820974944592307816406286;
+			float rounded = HF::SpatialStructures::roundhf(my_pi);	// 	rounded == 3.1416
+			//std::cout << rounded << std::endl;
+		}
 	}
 
 	TEST(_graph, AddNodeAttribute) {
