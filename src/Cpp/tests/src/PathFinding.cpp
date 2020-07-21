@@ -660,7 +660,7 @@ namespace CInterfaceTests {
 
 		// Use CreatePathCostType, be sure to use the .c_str() method if using a std::string for desired_cost_type
 		CreatePathCostType(&g, 0, 4, &out_size, &out_path, &out_path_member, desired_cost_type.c_str());
-
+		
 		// Use out_path, out_path_member
 
 		// Remember to free resources when finished
