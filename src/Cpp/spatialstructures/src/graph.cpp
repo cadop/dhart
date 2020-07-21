@@ -77,10 +77,10 @@ namespace HF::SpatialStructures {
 
 	EdgeCostSet & Graph::GetCostArray(const string & key) 
 	{
-		return const_cast<EdgeCostSet &>(GetCostArray(key));
+		return (edge_cost_maps.at(key));
 	}
 
-	bool Graph::HasCostArray(string key) {
+	bool Graph::HasCostArray(string key) const {
 		return (edge_cost_maps.count(key) > 0);
 	}
 
@@ -110,12 +110,7 @@ namespace HF::SpatialStructures {
 		return (edge_cost_maps.at(key));
 	}
 
-	const EdgeCostSet& Graph::GetDefaultCostArray() const
-	{
-		return this->GetCostArray(this->default_cost);
-	}
-
-	bool Graph::IsDefaultName(const std::string& name)
+	bool Graph::IsDefaultName(const string & name) const
 	{
 		return (name.empty());
 	}
@@ -363,11 +358,7 @@ namespace HF::SpatialStructures {
 		int child_id = getOrAssignID(child);
 	
 		// If this is already compressed, update the CSR, otherwise add it to the list of triplets.
-		if (!needs_compression)
-			CSRAddOrUpdateEdge(parent_id, child_id, score);
-		else
-			TripletsAddOrUpdateEdge(parent_id, child_id, score);
-
+		InsertOrUpdateEdge(parent_id, child_id, score, cost_type);
 		// ![GetOrAssignID_Node]
 	}
 
@@ -379,12 +370,8 @@ namespace HF::SpatialStructures {
 		getOrAssignID(child_id);
 		getOrAssignID(parent_id);
 
-		// If this is already compressed, update the CSR, otherwise add it to the list of triplets.
-		if (!needs_compression)
-			CSRAddOrUpdateEdge(parent_id, child_id, score);
-		else
-			TripletsAddOrUpdateEdge(parent_id, child_id, score);
-
+		InsertOrUpdateEdge(parent_id, child_id, score, cost_type);
+		
 		// ![GetOrAssignID_int]
 	}
 
@@ -623,14 +610,39 @@ namespace HF::SpatialStructures {
 			throw NotImplemented();
 
 		auto cost_set = GetOrCreateCostType(cost_name);
-		
-		
 	}
 
-	vector<EdgeSet> Graph::GetEdges(const string& cost_name) const
+	vector<EdgeSet> Graph::GetEdges(const string & cost_name) const
 	{
-		throw HF::Exceptions::NotImplemented();
-		return std::vector<EdgeSet>();
+		// Call the other function if they're asking for the default.
+		if (this->IsDefaultName(cost_name))
+			return GetEdges();
+
+		// Preallocate an array of edge sets
+		vector<EdgeSet> out_edges(this->size());
+
+		// Get the asked for cost set
+		const auto& cost_set = this->GetCostArray(cost_name);
+		
+		// Iterate through every row in the csr
+		for (int parent_index = 0; parent_index < this->size(); ++parent_index) {
+
+			auto& edgeset = out_edges[parent_index];
+			edgeset.parent = parent_index;
+
+			// Iterate every column in the row.
+			for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, parent_index); it; ++it)
+			{
+				// Add to array of edgesets
+				int child_index = it.col();
+				
+				int cost_index = this->ValueArrayIndex(parent_index, child_index);
+				float cost = cost_set[cost_index];
+				
+				edgeset.children.push_back(IntEdge{ child_index, cost });
+			}
+		}
+		return out_edges;
 	}
 
 	void Graph::AddEdges(const vector<vector<IntEdge>>& edges, const string& cost_name)
