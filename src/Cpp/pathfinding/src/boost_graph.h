@@ -210,12 +210,13 @@ namespace HF {
 			BoostGraph(const HF::SpatialStructures::Graph& graph);
 
 			/*!
-				\brief TODO brief
-				\param g TODO g
-				\param cost_name TODO cost_name
+				\brief		A graph usable with the BoostGraphLibrary, using a cost type string
+				
+				\param	g			Graph to create a graph in Boost from
+				\param	cost_name	A cost type string denoting edge type, i.e. "cross slope", "energy expenditure", etc.
 
-				\throw HF::Exceptions::NoCost if cost_name does not exist as a cost type in *this
-				\note HF::Exceptions::NoCost not implemented yet.
+				\throw		HF::Exceptions::NoCost if cost_name does not exist as a cost type in *this
+				\note		HF::Exceptions::NoCost not implemented yet.
 
 				\code
 					// be sure to #include "boost_graph.h", #include "node.h", #include "graph.h", and #include <vector>
