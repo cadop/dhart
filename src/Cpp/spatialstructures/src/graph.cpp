@@ -61,7 +61,7 @@ namespace HF::SpatialStructures {
 		return result;
 	}
 
-	int Graph::size() const { return next_id; }
+	int Graph::size() const { return ordered_nodes.size(); }
 
 	int Graph::getID(const Node& node) const
 	{
@@ -404,7 +404,11 @@ namespace HF::SpatialStructures {
 
 	inline bool Graph::hasKey(int id) const
 	{
-		return (id < next_id);
+		// The only way to search for an ID now is brute force
+		for (int i = 0; i < ordered_nodes.size(); i++)
+			if (ordered_nodes[i].id == id) return true;
+		
+		return false;
 	}
 
 	int Graph::GetIndex(const Node& n) const
@@ -461,7 +465,7 @@ namespace HF::SpatialStructures {
 		{
 			// Add an empty node to ordered_nodes
 			ordered_nodes.push_back(Node());
-			
+		
 			// Set the id of the empty node
 			ordered_nodes.back().id = input_int;
 
