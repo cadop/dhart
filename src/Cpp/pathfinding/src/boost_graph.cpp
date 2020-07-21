@@ -59,5 +59,16 @@ namespace HF::Pathfinding {
 		d.resize(n);
 	}
 
+	BoostGraph::BoostGraph(const HF::SpatialStructures::Graph& g, const std::string cost_name)
+	{
+		///
+		/// Needs std::vector<std::string> Graph::GetCostTypes() const;
+		///		To get all cost types for *this
+		///
+		/// Needs struct HF::Exceptions::NoCost
+		///		To be thrown if a cost type string not found in GetCostTypes()
+		///
+	}
+
 	BoostGraph::~BoostGraph() = default;
 }

@@ -69,6 +69,34 @@ C_INTERFACE CreatePaths(
 	return HF::Exceptions::HF_STATUS::OK;
 }
 
+C_INTERFACE CreatePathCostType(
+	const HF::SpatialStructures::Graph* g,
+	int start,
+	int end,
+	int* out_size,
+	HF::SpatialStructures::Path** out_path,
+	HF::SpatialStructures::PathMember** out_data,
+	const char* cost_name
+) {
+
+	return HF::Exceptions::HF_STATUS::OK;
+}
+
+C_INTERFACE CreatePathsCostType(
+	const HF::SpatialStructures::Graph* g,
+	const int* start,
+	const int* end,
+	HF::SpatialStructures::Path** out_path_ptr_holder,
+	HF::SpatialStructures::PathMember** out_path_member_ptr_holder,
+	int* out_sizes,
+	int num_paths,
+	const char* cost_name) {
+
+
+
+	return HF::Exceptions::HF_STATUS::OK;
+}
+
 /// <summary>
 /// Get the size of a path
 /// </summary>

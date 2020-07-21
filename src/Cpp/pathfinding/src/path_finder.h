@@ -8,6 +8,7 @@
 
 #include <memory>
 #include <vector>
+#include <string>
 
 namespace HF {
 	// Forward declares so we don't need to include these in the header.
@@ -153,6 +154,19 @@ namespace HF {
 		*/
 		std::unique_ptr<BoostGraph,BoostGraphDeleter> CreateBoostGraph(const HF::SpatialStructures::Graph & g);
 		
+		/*!
+			\brief Create a new boost graph from a HF::SpatialStructures::Graph, using a cost type cost_name
+			\param g The graph to create a BoostGraph frrom
+			\param cost_name The Edge cost type (i.e. "cross slope", "energy expenditure", etc.)
+			\returns A unique_ptr to point to the new BoostGraph created from the HFGraph.
+			\throw HF::Exceptions::NoCost if cost_name does not exist as a cost type in g
+
+			\code
+				// TODO example
+			\endcode
+		*/
+		std::unique_ptr<BoostGraph, BoostGraphDeleter> CreateBoostGraph(const HF::SpatialStructures::Graph& g, const std::string cost_name);
+
 		/// <summary> Find a path between points A and B using Dijkstra's Shortest Path algorithm. </summary>
 		/// <param name="bg"> The boost graph containing edges/nodes. </param>
 		/// <param name="start_id"> ID of the starting node. </param>

@@ -669,4 +669,14 @@ namespace HF::SpatialStructures {
 		// but has no value -- which is the NodeAttributeValueMap instance.
 		node_attr_map[name].clear();
 	}
+
+	std::vector<EdgeSet> Graph::GetEdges(const std::string& cost_name) const {
+		std::vector<EdgeSet> result;
+
+		///
+		/// TODO implementation
+		///
+
+		return result;
+	}
 }

@@ -117,6 +117,12 @@ TEST(_boostGraph, Constructor) {
 	HF::Pathfinding::BoostGraph bg(graph);
 }
 
+TEST(_boostGraph, ConstructorCostName) {
+	///
+	/// TODO test BoostGraph::BoostGraph(const string cost_name)
+	///
+}
+
 TEST(_boostGraph, Destructor) {
 	// be sure to #include "boost_graph.h", #include "node.h", #include "graph.h", and #include <vector>
 
@@ -236,6 +242,12 @@ TEST(_pathFinding, CreateBoostGraph) {
 	// Use the auto keyword for type inference, or your choice of using statements/typedef to make
 	// the use of the type described above easier.
 	auto boostGraph = HF::Pathfinding::CreateBoostGraph(graph);
+}
+
+TEST(_pathFinding, CreateBoostGraphCostName) {
+	///
+	/// TODO test unique_ptr<BoostGraph, BoostGraphDeleter> CreateBoostGraph(const Graph& g, const string cost_name);
+	///
 }
 
 
@@ -577,6 +589,42 @@ namespace CInterfaceTests {
 			delete[MAX_SIZE] out_sizes;
 			out_sizes = nullptr;
 		}
+	}
+
+	TEST(_PathFinderCInterface, CreatePathCostType) {
+		/*
+			TODO test
+
+			C_INTERFACE CreatePathCostType(
+				const HF::SpatialStructures::Graph* g,
+				int start,
+				int end,
+				int* out_size,
+				HF::SpatialStructures::Path** out_path,
+				HF::SpatialStructures::PathMember** out_data,
+				const char *cost_name
+			);
+		*/
+
+
+
+	}
+
+	TEST(_PathFinderCInterface, CreatePathsCostType) {
+		/*
+			TODO test
+
+			C_INTERFACE CreatePathsCostType(
+				const HF::SpatialStructures::Graph* g,
+				const int* start,
+				const int* end,
+				HF::SpatialStructures::Path** out_path_ptr_holder,
+				HF::SpatialStructures::PathMember** out_path_member_ptr_holder,
+				int* out_sizes,
+				int num_paths,
+				const char* cost_name);
+			);
+		*/
 	}
 
 	TEST(_PathfinderCInterface, GetPathInfo) {

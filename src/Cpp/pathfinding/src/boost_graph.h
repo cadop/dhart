@@ -209,6 +209,20 @@ namespace HF {
 			*/
 			BoostGraph(const HF::SpatialStructures::Graph& graph);
 
+			/*!
+				\brief TODO brief
+				\param g TODO g
+				\param cost_name TODO cost_name
+
+				\throw HF::Exceptions::NoCost if cost_name does not exist as a cost type in *this
+				\note HF::Exceptions::NoCost not implemented yet.
+
+				\code
+					// TODO example
+				\endcode
+			*/
+			BoostGraph(const HF::SpatialStructures::Graph& g, const std::string cost_name);
+
 			/// <summary> Explicit Destructor required for BoostGraphDeleter to work in path_finder.h. </summary>
 			/*!
 

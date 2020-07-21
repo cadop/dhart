@@ -1337,5 +1337,16 @@ namespace HF::SpatialStructures {
 			\endcode
 		*/
 		void ClearNodeAttributes(std::string name);
+
+		/*!
+			\brief TODO brief
+			\param cost_name TODO cost_name
+			\returns TODO returns
+
+			\code
+				// TODO example
+			\endcode
+		*/
+		std::vector<EdgeSet> Graph::GetEdges(const std::string& cost_name) const;
 	};
 }

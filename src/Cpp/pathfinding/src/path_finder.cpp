@@ -267,6 +267,10 @@ namespace HF::Pathfinding {
 		return std::unique_ptr<BoostGraph, BoostGraphDeleter>(new BoostGraph(g));
 	}
 
+	std::unique_ptr<BoostGraph, BoostGraphDeleter> CreateBoostGraph(const HF::SpatialStructures::Graph& g, const std::string cost_name) {
+		return std::unique_ptr<BoostGraph, BoostGraphDeleter>(new BoostGraph(g, cost_name));
+	}
+
 	void BoostGraphDeleter::operator()(BoostGraph* bg) const {
 		delete bg;
 	}
