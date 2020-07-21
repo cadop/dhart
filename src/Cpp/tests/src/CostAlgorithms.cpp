@@ -262,6 +262,9 @@ namespace CostAlgorithmsTests {
 		// - the edge formed by n1 and n3
 	}
 
+}
+
+namespace CInterfaceTests {
 	TEST(_CostAlgorithmsCInterface, CalculateAndStoreCrossSlope) {
 		// Create 7 nodes
 		Node n0(2, 6, 6);
