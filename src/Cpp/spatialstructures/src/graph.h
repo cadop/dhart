@@ -327,7 +327,7 @@ namespace HF::SpatialStructures {
 		inline void Clear() { this->costs.clear(); }
 
 		/*! \brief index internal */
-		inline float operator[](int i) { return this->costs[i]; }
+		inline float & operator[](int i) { return this->costs[i]; }
 
 		/*! \brief Get the pointer to the start of this array. */
 		inline float* GetPtr() { return this->costs.data(); }
@@ -446,9 +446,6 @@ namespace HF::SpatialStructures {
 		/*! \brief Create a new edge matrix.*/
 		EdgeCostSet & CreateCostArray(const std::string & name);
 
-		/*! \brief Change the active edge matrix.*/
-		EdgeCostSet & GetDefaultCostArray();
-
 		/*! \brief Get a reference to the edge matrix at the given key.
 			\exception std::out::of::range if the key doesn't exist.
 		*/
@@ -462,6 +459,15 @@ namespace HF::SpatialStructures {
 
 		/*! \brief Get the index of the cost at parent/child. */
 		int ValueArrayIndex(int parent_id, int child_id) const;
+
+		/*! \brief Add an edge to a cost set.*/
+		void InsertEdgeIntoCostSet(int parent_id, int child_id, float score, EdgeCostSet& cost_set);
+
+		/*! \brief Insert edges from an edge set into a cost set*/
+		void InsertEdgesIntoCostSet(EdgeCostSet& cost_set, const std::vector<EdgeSet> & es);
+		
+		/*! \brief Insert an edge into the default cost array or a new cost array.*/
+		void InsertOrUpdateEdge(int parent_id, int child_id, float score, const std::string & cost_type);
 
 	public:
 		/*!
@@ -920,7 +926,7 @@ namespace HF::SpatialStructures {
 				graph.addEdge(n_parent, n_child);	// default score is 1.0f
 			\endcode
 		*/
-		void addEdge(const Node& parent, const Node& child, float score = 1.0f);
+		void addEdge(const Node& parent, const Node& child, float score = 1.0f, const std::string & cost_type = "");
 
 		/// <summary> Add a new edge to the graph from parent to child. </summary>
 		/// <param name="parent"> Parent node of the edge. </param>
@@ -971,7 +977,7 @@ namespace HF::SpatialStructures {
 				graph.Compress();
 			\endcode
 		*/
-		void addEdge(int parent_id, int child_id, float score);
+		void addEdge(int parent_id, int child_id, float score, const std::string & cost_type = "");
 
 		/// <summary> Determine if n exists in the graph. </summary>
 		/// <param name="n"> Node to look for. </param>
@@ -1448,17 +1454,5 @@ namespace HF::SpatialStructures {
 			\exception HF::Exceptions::NoCost The cost at `cost_name` didn't exist in the graph
 		*/
 		std::vector<EdgeSet> GetEdges(const std::string & cost_name) const;
-
-		/*!
-			\brief Add a new edge to the graph
-			
-			\param parent Parent node of the edge.
-			\param child Child node of the edge.
-			\param score Cost of traversing from aprent to child.
-			\param cost_type The name of the cost to add this edge to. 
-			
-			\details If the cost doesn't exist in the graph, a new cost_type will be allocated for it. 
-		*/
-		void addEdge(const Node& parent, const Node& child, float score, const std::string &  cost_type );
 	};
 }
