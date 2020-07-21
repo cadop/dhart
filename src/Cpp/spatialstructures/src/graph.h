@@ -328,6 +328,8 @@ namespace HF::SpatialStructures {
 
 		/*! \brief index internal */
 		inline float & operator[](int i) { return this->costs[i]; }
+		
+		inline float operator[](int i) const { return this->costs[i]; }
 
 		/*! \brief Get the pointer to the start of this array. */
 		inline float* GetPtr() { return this->costs.data(); }
@@ -432,8 +434,7 @@ namespace HF::SpatialStructures {
 
 
 		/*! \brief Check if we have this edge matrix already defined. */
-		bool HasCostArray(std::string key);
-
+		bool HasCostArray(std::string key) const;
 
 		/*! \brief Get a reference to the edge matrix at the given key.
 			\exception std::out::of::range if the key doesn't exist.
@@ -455,7 +456,7 @@ namespace HF::SpatialStructures {
 		const EdgeCostSet& GetDefaultCostArray() const;
 		
 		/*! \brief check if this name is asking for the default. */
-		bool IsDefaultName(const std::string& name);
+		bool IsDefaultName(const std::string& name) const;
 
 		/*! \brief Get the index of the cost at parent/child. */
 		int ValueArrayIndex(int parent_id, int child_id) const;
@@ -502,7 +503,7 @@ namespace HF::SpatialStructures {
 
 		\code
 			// be sure to #include "graph.h"
-	
+	aa
 			// Create the nodes
 			HF::SpatialStructures::Node node_0(1.0f, 1.0f, 2.0f);
 			HF::SpatialStructures::Node node_1(2.0f, 3.0f, 4.0f, 5);

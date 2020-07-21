@@ -198,7 +198,10 @@ namespace GraphTests {
 	}
 }
 
-TEST(_Graph, AddEdgesToNewCost) {
+// Assert that adding a new edge
+// 1) Doesn't interfere with existing edges
+// 2) Properly stores its own cost
+TEST(_Graph, AddEdgeToNewCost) {
 
 	// Create two nodes
 	HF::SpatialStructures::Node N1(1, 1, 2);
@@ -206,10 +209,10 @@ TEST(_Graph, AddEdgesToNewCost) {
 
 	// Create a graph, add edges, then compress
 	Graph g;
-	g.addEdge(N1, N2, 0.39);
-	g.addEdge(N1, N2, 0.54, "TestCost");
 	g.Compress();
-
+	g.addEdge(N1, N2, 0.39f);
+	g.addEdge(N1, N2, 0.54f, "TestCost");
+	
 	// Get both edge sets
 	auto default_edges =  g.GetEdges();
 	auto testcost_edges =  g.GetEdges("TestCost");
@@ -217,11 +220,11 @@ TEST(_Graph, AddEdgesToNewCost) {
 	// Assert that the edges we defined exist in both seperate arrays.
 	ASSERT_EQ(default_edges[0].children.size(), 1);
 	ASSERT_EQ(default_edges[0].children[0].child, 1);
-	ASSERT_EQ(default_edges[0].children[0].weight, 0.39);
+	ASSERT_EQ(default_edges[0].children[0].weight, 0.39f);
 
 	ASSERT_EQ(testcost_edges[0].children.size(), 1);
 	ASSERT_EQ(testcost_edges[0].children[0].child, 1);
-	ASSERT_EQ(testcost_edges[0].children[0].weight, 0.54);
+	ASSERT_EQ(testcost_edges[0].children[0].weight, 0.54f);
 }
 
 TEST(_Rounding, addition_error)
