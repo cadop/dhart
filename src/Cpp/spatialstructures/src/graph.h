@@ -336,6 +336,14 @@ namespace HF::SpatialStructures {
 		bool needs_compression = true;					///< If true, the CSR is inaccurate and requires compression.
 
 		robin_hood::unordered_map<std::string, NodeAttributeValueMap> node_attr_map; ///< Node attribute type : Map of node id to node attribute
+		
+		///
+		/// Mapping of [edge cost type : CSR with edge cost type]
+		/// To be implemented within issue #24, 'Multiple Costs for the Graph'
+		/// In an effort to prevent a possible merge conflict, this line below
+		/// and any code using this private field will be commented out.
+		///
+		///robin_hood::unordered_map<std::string, Eigen::SparseMatrix<float, 1>> cost_type_map;
 
 		/// <summary>
 		/// Get the unique ID for this x, y, z position, assigning it an new one if it doesn't
@@ -1332,11 +1340,24 @@ namespace HF::SpatialStructures {
 		/// <param name="name">The attribute that will be cleared from this graph's internal hashmap</param>
 
 		/*!
+			\brief
+			\param name
+
 			\code
 				// TODO example
 			\endcode
 		*/
 		void ClearNodeAttributes(std::string name);
+
+		/*!
+			\brief
+			\returns
+
+			\code
+				// TODO example
+			\endcode
+		*/
+		std::vector<std::string> GetCostTypes() const;
 
 		/*!
 			\brief TODO brief

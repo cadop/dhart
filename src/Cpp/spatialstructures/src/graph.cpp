@@ -12,6 +12,7 @@
 #include <math.h>
 #include <Constants.h>
 #include <assert.h>
+#include <iostream>
 
 using namespace Eigen;
 using std::vector;
@@ -670,13 +671,90 @@ namespace HF::SpatialStructures {
 		node_attr_map[name].clear();
 	}
 
-	std::vector<EdgeSet> Graph::GetEdges(const std::string& cost_name) const {
-		std::vector<EdgeSet> result;
+	std::vector<std::string> Graph::GetCostTypes() const {
+		std::vector<std::string> result;
 
 		///
-		/// TODO implementation
+		/// Possible implementation
+		/// Will need a private field in Graph, like this:
+		/// robin_hood::unordered_map<std::string, Eigen::SparseMatrix<float, 1>> cost_type_map;
 		///
+
+		/*!
+		///
+		/// For all pairs in cost_type_map
+		///     Append key (a string) to result
+		///
+		for (auto& p : cost_type_map) {
+			result.push_back(p.first);
+		}
+		*/
 
 		return result;
+	}
+
+	std::vector<EdgeSet> Graph::GetEdges(const std::string& cost_name) const {
+		///
+		/// Temporary implementation (a placeholder)
+		/// For now, will call no-arg version of Graph::GetEdges
+		///
+		std::vector<EdgeSet> out_edges = GetEdges();
+		return out_edges;
+
+		/*
+
+		///
+		/// Possible implementation, derived from 
+		///     vector<EdgeSet> Graph::GetEdges() 
+		/// (cannot test yet)
+		///
+		/// Private data member 
+		///     robin_hood::unordered_map<string, SparseMatrix<float, 1>> cost_value_map
+		/// is needed in Graph. (Graph::cost_value_map)
+		///
+		
+		// Throw if we're not compressed since this is a const function and compressing the graph
+		// will make it non-const
+		if (this->needs_compression) {
+			// TODO: a specific exception type from HF::Exceptions
+			throw std::exception("The graph must be compressed!");
+		}
+
+		// Preallocate an array of edge sets
+		std::vector<EdgeSet> out_edges(this->size());
+
+		// Variable to store the CSR mapped at cost type cost_name
+		Eigen::SparseMatrix<float, 1> edge_matrix_typed;
+
+		try {
+			// Attempt to retrieve the CSR with cost type cost_name
+			edge_matrix_typed = cost_type_map.at(cost_name);
+		}
+		catch (std::out_of_range) {
+			// If there is no CSR mapped to cost_name, catch the exception thrown.
+			std::cerr << "No Eigen::SparseMatrix<float, 1> for key " << cost_name << std::endl;
+			std::cerr << "The key '" << cost_name << "' does not exist in Graph::cost_type_map." << std::endl;
+
+			return out_edges;
+		}
+
+		// Iterate through every row in the csr
+		for (int k = 0; k < edge_matrix_typed.outerSize(); ++k) {
+			auto& edgeset = out_edges[k];
+			edgeset.parent = k;
+
+			// Iterate every column in the row.
+			for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix_typed, k); it; ++it) {
+				// Add to array of edgesets
+				float cost = it.value();
+				int child = it.col();
+
+				edgeset.children.push_back(IntEdge{ child, cost });
+			}
+		}
+
+		return out_edges;
+		
+		*/
 	}
 }
