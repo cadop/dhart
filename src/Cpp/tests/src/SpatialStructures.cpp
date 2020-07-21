@@ -1368,7 +1368,7 @@ namespace GraphExampleTests {
 
 		// Note that NodeFromID ceases to work if the id argument provided does not exist as an ID among
 		// the nodes within graph
-		ASSERT_TRUE(node_from_id.id == desired_node_id);
+		ASSERT_EQ(node_from_id.id, desired_node_id);
 	}
 
 	TEST(_graph, Clear) {
@@ -1389,7 +1389,7 @@ namespace GraphExampleTests {
 		HF::SpatialStructures::Graph graph(edges, distances, nodes);
 
 		// If we want to remove all nodes and edges from graph, we may do so with Clear:
-		graph.Clear();						// edge_matrix is zeroed out, buffer is squeezed,
+		graph.Clear();						// active_edge_matrix is zeroed out, buffer is squeezed,
 											// triplets are also cleared, and needs_compression == true
 
 		auto v = graph.NodesAsFloat3();
