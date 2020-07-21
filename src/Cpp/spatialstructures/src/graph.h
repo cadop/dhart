@@ -324,6 +324,8 @@ namespace HF::SpatialStructures {
 
 	*/
 	class Graph {
+		using NodeAttributeValueMap = robin_hood::unordered_map<int, std::string>;
+
 	private:
 		std::vector<Node> ordered_nodes;				///< A list of nodes contained by the graph.
 		std::vector<int> id_to_nodes;					///< Maps ids to indexes in ordered_nodes.
@@ -332,6 +334,8 @@ namespace HF::SpatialStructures {
 		int next_id = 0;								///< The id for the next unique node.
 		std::vector<Eigen::Triplet<float>> triplets;	///< Edges to be converted to a CSR when Graph::Compress() is called.
 		bool needs_compression = true;					///< If true, the CSR is inaccurate and requires compression.
+
+		robin_hood::unordered_map<std::string, NodeAttributeValueMap> node_attr_map; ///< Node attribute type : Map of node id to node attribute
 
 		/// <summary>
 		/// Get the unique ID for this x, y, z position, assigning it an new one if it doesn't
@@ -1286,5 +1290,52 @@ namespace HF::SpatialStructures {
 		*/
 		Subgraph GetSubgraph(int parent_id);
 
+		/// <summary> Add an attribute to the node at id </summary>
+		/// <param name="id">The ID of the node that will receive attribute</param>
+		/// <param name="attribute">The attribute that the node at ID will receive</param>
+		/// <param name="score">The weight, or distance that extends from the node at id</param>
+
+		/*!
+			\code
+				// TODO example
+			\endcode
+		*/
+		void AddNodeAttribute(int id, std::string attribute, std::string score);
+
+		/// <summary> Add an attribute to the node at id. 
+		/// If the node at id already has a score for the attribute at name, 
+		/// then existing score should be overwritten</summary>
+		/// <param name="id">The container of IDs from which nodes will be retrieved and given attributes</param>
+		/// <param name="name">The attribute that each node will receive</param>
+		/// <param name="scores">The container of score, ordered by the container of node IDs</param>
+
+		/*!
+			\code
+				// TODO example
+			\endcode
+		*/
+		void AddNodeAttributes(std::vector<int> id, std::string name, std::vector<std::string> scores);
+
+		/// <summary> Get the score for the given attribute of every node in the graph.
+		/// Nodes that do not have a score for this attribute should return an empty string for this array.</summary>
+		/// <param name="attribute">The attribute from which a container of scores will be obtained</param>
+		/// <returns>A container of score, each in the form of a std::string, obtained from attribute</returns>
+
+		/*!
+			\code
+				// TODO example
+			\endcode
+		*/
+		std::vector<std::string> GetNodeAttributes(std::string attribute) const;
+
+		/// <summary> Clears the attribute at name and all of its contents from the internal hashmap</summary>
+		/// <param name="name">The attribute that will be cleared from this graph's internal hashmap</param>
+
+		/*!
+			\code
+				// TODO example
+			\endcode
+		*/
+		void ClearNodeAttributes(std::string name);
 	};
 }

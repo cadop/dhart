@@ -281,6 +281,92 @@ namespace HF::SpatialStructures::CostAlgorithms {
 
 		return perpendicular_edges;
 	}
+
+	/*!
+		\summary Calculates cross slope for this subgraph (a parent node and all edges by this parent)
+		\param sg A Subgraph type, which consists of a Node (parent node) and a std::vector<Edge> (all edges by this parent)
+		\returns A container of IntEdge
+
+		\code
+			// for brevity
+			using HF::SpatialStructures::CostAlgorithms::CalculateCrossSlope;
+
+			// Create 7 nodes
+			Node n0(2, 6, 6);
+			Node n1(0, 0, 0);
+			Node n2(-5, 5, 4);
+			Node n3(-1, 1, 1);
+			Node n4(2, 2, 2);
+			Node n5(5, 3, 2);
+			Node n6(-2, -5, 1);
+
+			Graph g;
+
+			// Adding 9 edges
+			g.addEdge(n0, n1);	// [ -2, -6, -6 ]
+			g.addEdge(n1, n2);	// [ -5,  5,  4 ]
+			g.addEdge(n1, n3);  // [ -1,  1,  1 ]
+			g.addEdge(n1, n4);  // [  2,  2,  2 ]
+			g.addEdge(n2, n4);  // [ -9, -3, -2 ]
+			g.addEdge(n3, n5);  // [ -6,  2,  1 ]
+			g.addEdge(n5, n6);  // [ -7, -8, -1 ]
+			g.addEdge(n4, n6);  // [ -6, -7, -1 ]
+
+			// Always compress the graph after adding edges!
+			g.Compress();
+
+			// Retrieve a subgraph of your choice, provide a parent node or parent node ID.
+			Subgraph sg = g.GetSubgraph(n1);
+
+			// Get a container of vector<IntEdge>, ordered by parent ID.
+			// These consist of alternate edge costs for Subgraph sg.
+			std::vector<IntEdge> edge_costs = CalculateCrossSlope(sg);
+		\endcode
+	*/
+	std::vector<IntEdge> CalculateCrossSlope(Subgraph& sg);
+
+	/*!
+		\summary Calculates cross slope for all subgraphs in Graph g
+		\param g The Graph to calculate cross slopes with
+		\returns A container of vector<IntEdge>, ordered by parent node ID
+
+		\code
+			// for brevity
+			using HF::SpatialStructures::CostAlgorithms::CalculateCrossSlope;
+
+			// Create 7 nodes
+			Node n0(0, 0, 0);
+			Node n1(1, 3, 5);
+			Node n2(3, -1, 2);
+			Node n3(1, 2, 1);
+			Node n4(4, 5, 7);
+			Node n5(5, 3, 2);
+			Node n6(-2, -5, 1);
+
+			Graph g;
+
+			// Adding 9 edges
+			g.addEdge(n0, n1);
+			g.addEdge(n1, n2);
+			g.addEdge(n1, n3);
+			g.addEdge(n1, n4);
+			g.addEdge(n2, n4);
+			g.addEdge(n3, n5);
+			g.addEdge(n5, n6);
+			g.addEdge(n4, n6);
+
+			// Always compress the graph after adding edges!
+			g.Compress();
+
+			// Get a container of vector<IntEdge>, ordered by parent ID.
+			// These consist of alternate edge costs for all subgraphs in g.
+			std::vector<std::vector<IntEdge>> all_edge_costs = CalculateCrossSlope(g);
+		\endcode
+	*/
+	std::vector<std::vector<IntEdge>> CalculateCrossSlope(Graph& g);
+
+
+	
 	/*!
 		\summary Calculate energy expenditure for this subgraph (a parent node and all edges by this parent)
 		\param sg A subgraph type which consists of a Node (parent node) and a std::vector<Edge> (all edges by this parent)

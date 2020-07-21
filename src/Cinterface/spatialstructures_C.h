@@ -549,6 +549,46 @@ C_INTERFACE DestroyGraph(
 	HF::SpatialStructures::Graph* graph_to_destroy
 );
 
+/*!
+	\summary Calculates cross slope for all subgraphs in *g
+	\param g The address of a Graph
+	\returns HF::STATUS::OK on completion
+
+	\code
+		// Requires #include "graph.h"
+
+		// Create 7 nodes
+		Node n0(0, 0, 0);
+		Node n1(1, 3, 5);
+		Node n2(3, -1, 2);
+		Node n3(1, 2, 1);
+		Node n4(4, 5, 7);
+		Node n5(5, 3, 2);
+		Node n6(-2, -5, 1);
+
+		Graph g;
+
+		// Adding 9 edges
+		g.addEdge(n0, n1);
+		g.addEdge(n1, n2);
+		g.addEdge(n1, n3);
+		g.addEdge(n1, n4);
+		g.addEdge(n2, n4);
+		g.addEdge(n3, n5);
+		g.addEdge(n5, n6);
+		g.addEdge(n4, n6);
+
+		// Always compress the graph after adding edges!
+		g.Compress();
+
+		// Within CalculateAndStoreCrossSlope,
+		// std::vector<std::vector<IntEdge>> CostAlgorithms::CalculateAndStoreCrossSlope(Graph& g)
+		// will be called, along with a call to the member function
+		// void Graph::AddEdges(std::vector<std::vector<IntEdge>>& edges).
+		CalculateAndStoreCrossSlope(&g);
+	\endcode
+*/
+C_INTERFACE CalculateAndStoreCrossSlope(HF::SpatialStructures::Graph* g);
 
 /*!
 	\summary Calculates energy expenditure for all subgraphs in *g
@@ -590,4 +630,105 @@ C_INTERFACE DestroyGraph(
 	\endcode
 */
 C_INTERFACE CalculateAndStoreEnergyExpenditure(HF::SpatialStructures::Graph* g);
+
+/// <summary> Add a new node attribute in the graph for the node at id.
+/// Returns an error code if the specified node doesn't exist in the graph.
+/// score and ids both point to arrays allocated by the caller which should be
+/// able to be passed to AddNodeAttributes.</summary>
+/// <param name="g">The graph that will receive attributes</param>
+/// <param name="ids">Array of int, allocated by caller, represents node IDs</param>
+/// <param name="attribute">The attribute to add to the graph</param>
+/// <param name="scores">Array of (char *), allocated by caller</param>
+/// <param name="num_nodes">Block count of scores</param>
+/// <returns> HF_STATUS::OK on completion </returns>
+/*!
+	\code
+		
+	\endcode
+*/
+C_INTERFACE AddNodeAttributes(HF::SpatialStructures::Graph* g, const int* ids, const char* attribute, const char** scores, int num_nodes);
+
+/// <summary> Attribute should be the name of the attribute to get from the graph.
+/// Memory shall be allocated in *out_scores to hold the char arrays.
+/// out_scores is a pointer to an array of pointers to char arrays, which will be allocated by the caller.
+/// The caller must call DeleteScores to deallocate these node scores.
+/// out_score_size should be updated to the length of the score array.</summary>
+/// <param name="g">The graph that will be used to retrieve attributes</param>
+/// <param name="attribute">The attribute to retrieve from g</param>
+/// <param name="out_scores">Pointer to array of pointers to char arrays, allocated by the caller</param>
+/// <param name="out_score_size">Keeps track of the length of the out_scores buffer, updated as needed</param>
+/// <returns> HF_STATUS::OK on completion </returns>
+/*!
+	\code
+
+	\endcode
+*/
+C_INTERFACE GetNodeAttributes(const HF::SpatialStructures::Graph* g, const char* attribute, char*** out_scores, int* out_score_size);
+
+/// <summary> Free the memory of every char array in scores_to_delete.
+/// The length of each contained char array should be determined by using strlen on the given array
+/// unless they are not delimited.</summary>
+/// <param name="scores_to_delete">Pointer to array of pointers to char arrays, allocated by caller</param>
+/// <param name="num_char_arrays">Block count of scores_to_delete</param>
+/// <returns> HF_STATUS::OK on completion </returns>
+
+/*!
+	\code
+
+	\endcode
+*/
+C_INTERFACE DeleteScoreArray(char*** scores_to_delete, int num_char_arrays);
+
+/// <summary> Deletes the contents of that attribute type in the graph </summary>
+/// <param name="g"> The graph from which attributes of type s will be delete</param>
+/// <param name="s"> The attribute to be cleared from within g</param>
+/// <returns> HF_STATUS::OK on completion </returns>
+
+/*!
+	\code
+
+	\endcode
+*/
+C_INTERFACE ClearAttributeType(HF::SpatialStructures::Graph* g, const char* s);
+
 /**@}*/
+/*!
+	\summary Calculates cross slope for all subgraphs in *g
+	\param g The address of a Graph
+	\returns HF::STATUS::OK on completion
+
+	\code
+		// Requires #include "graph.h"
+
+		// Create 7 nodes
+		Node n0(0, 0, 0);
+		Node n1(1, 3, 5);
+		Node n2(3, -1, 2);
+		Node n3(1, 2, 1);
+		Node n4(4, 5, 7);
+		Node n5(5, 3, 2);
+		Node n6(-2, -5, 1);
+
+		Graph g;
+
+		// Adding 9 edges
+		g.addEdge(n0, n1);
+		g.addEdge(n1, n2);
+		g.addEdge(n1, n3);
+		g.addEdge(n1, n4);
+		g.addEdge(n2, n4);
+		g.addEdge(n3, n5);
+		g.addEdge(n5, n6);
+		g.addEdge(n4, n6);
+
+		// Always compress the graph after adding edges!
+		g.Compress();
+
+		// Within CalculateAndStoreCrossSlope,
+		// std::vector<std::vector<IntEdge>> CostAlgorithms::CalculateAndStoreCrossSlope(Graph& g)
+		// will be called, along with a call to the member function
+		// void Graph::AddEdges(std::vector<std::vector<IntEdge>>& edges).
+		CalculateAndStoreCrossSlope(&g);
+	\endcode
+*/
+C_INTERFACE CalculateAndStoreCrossSlope(HF::SpatialStructures::Graph* g);

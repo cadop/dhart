@@ -32,8 +32,9 @@ release = '0.0.1'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.imgmath', 'sphinx.ext.napoleon', #change napoleon to numpydoc if using numpy
-              'sphinx.ext.intersphinx', 'sphinx.ext.coverage',
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest', 'sphinx.ext.imgmath', 
+              'sphinx.ext.napoleon', #change napoleon to numpydoc if using numpy
+              'sphinx.ext.intersphinx', 'sphinx.ext.coverage','matplotlib.sphinxext.mathmpl',
               'sphinx.ext.autosummary', 'matplotlib.sphinxext.plot_directive',
               'sphinx.ext.doctest']
 
