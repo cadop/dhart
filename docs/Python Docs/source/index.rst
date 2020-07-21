@@ -1,4 +1,3 @@
-
 ==========================================================
 Human Factors: Automated analysis of the built environment
 ==========================================================
@@ -6,6 +5,7 @@ Human Factors: Automated analysis of the built environment
 Contents
 ========
 
+To get started from the very beginning with this package, please follow the installation guide below.
 
 .. toctree::
    :maxdepth: 2
