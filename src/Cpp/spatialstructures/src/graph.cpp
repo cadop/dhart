@@ -17,7 +17,7 @@
 using namespace Eigen;
 using std::vector;
 using std::string;
-
+using namespace HF::Exceptions;
 
 namespace HF::SpatialStructures {
 
@@ -61,7 +61,7 @@ namespace HF::SpatialStructures {
 		return result;
 	}
 
-	int Graph::size() const { return ordered_nodes.size(); }
+	int Graph::size() const { return next_id; }
 
 	int Graph::getID(const Node& node) const
 	{
@@ -72,7 +72,7 @@ namespace HF::SpatialStructures {
 	}
 
 	int Graph::GetIDFromIndex(int index) const {
-		return ordered_nodes.at(index).id;
+		throw HF::Exceptions::NotImplemented();
 	}
 
 	EdgeMatrix & Graph::GetEdgeMatrix(const string & key) 
@@ -127,34 +127,31 @@ namespace HF::SpatialStructures {
 
 	CSRPtrs Graph::GetCSRPointers(const std::string & cost_type)
 	{
-		EdgeMatrix & matrix = GetEdgeMatrix(cost_type);
-
 		// The graph must be compressed for this to work
 		Compress();
 
 		// Construct CSRPtr with the required info from edge_matrix.
 		CSRPtrs out_csr{
-			static_cast<int>(matrix.nonZeros()),
-			static_cast<int>(matrix.rows()),
-			static_cast<int>(matrix.cols()),
+			static_cast<int>(edge_matrix.nonZeros()),
+			static_cast<int>(edge_matrix.rows()),
+			static_cast<int>(edge_matrix.cols()),
 
-			matrix.valuePtr(),
-			matrix.outerIndexPtr(),
-			matrix.innerIndexPtr()
+			edge_matrix.valuePtr(),
+			edge_matrix.outerIndexPtr(),
+			edge_matrix.innerIndexPtr()
 		};
 
 		return out_csr;
 	}
 
 
-	Node Graph::NodeFromID(int id) const { return ordered_nodes[id_to_ordered_node.at(id)];}
+	Node Graph::NodeFromID(int id) const { return ordered_nodes.at(id);}
 
 	std::vector<Node> Graph::Nodes() const {
 		return ordered_nodes;
 	}
 
 	vector<Edge> Graph::GetUndirectedEdges(const Node & n) const {
-		const EdgeMatrix& edge_matrix = this->GetEdgeMatrix("");
 
 		// Get the ID of n
 		int node_id = getID(n);
@@ -185,7 +182,6 @@ namespace HF::SpatialStructures {
 
 	std::vector<EdgeSet> Graph::GetEdges() const
 	{
-		const EdgeMatrix & edge_matrix = GetEdgeMatrix("");
 
 		// Throw if we're not compressed since this is a const function and compressing the graph
 		// will make it non-const
@@ -197,7 +193,7 @@ namespace HF::SpatialStructures {
 
 		// Iterate through every row in the csr
 		for (int node_index = 0; node_index < this->size(); ++node_index) {
-			const int node_id = GetIDFromIndex(node_index);
+			const int node_id = node_index;
 
 			auto& edgeset = out_edges[node_id];
 			edgeset.parent = node_id;
@@ -207,7 +203,7 @@ namespace HF::SpatialStructures {
 			{
 				// Add to array of edgesets
 				float cost = it.value();
-				int child = GetIDFromIndex(it.col());
+				int child =it.col();
 				edgeset.children.push_back(IntEdge{ child, cost });
 			}
 		}
@@ -258,7 +254,6 @@ namespace HF::SpatialStructures {
 
 	std::vector<float> Graph::AggregateGraph(COST_AGGREGATE agg_type, bool directed) const
 	{
-		auto edge_matrix = this->GetEdgeMatrix("");
 		// This won't work if the graph isn't compressed.
 		if (this->needs_compression) throw std::exception("The graph must be compressed!");
 
@@ -310,7 +305,6 @@ namespace HF::SpatialStructures {
 
 	const std::vector<Edge> Graph::operator[](const Node& n) const
 	{
-		auto edge_matrix = GetDefaultEdgeMatrix();
 
 		// Get the row of this node
 		const int row = GetIndex(n);
@@ -362,11 +356,10 @@ namespace HF::SpatialStructures {
 
 	bool Graph::checkForEdge(int parent, int child) const {
 		// ![CheckForEdge]
-		const auto& edge_matrix = GetEdgeMatrix("");
-
+		
 		// Get the index for parent and child
-		const int parent_index = GetIndex(parent);
-		const int child_index = GetIndex(child);
+		const int parent_index = parent;
+		const int child_index = child;
 
 		// Iterate through parent's row to see if it has child.
 		for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, parent_index); it; ++it)
@@ -379,8 +372,8 @@ namespace HF::SpatialStructures {
 
 	void Graph::CSRAddOrUpdateEdge(int parent_id, int child_id, float cost)
 	{
-		const int parent_index = GetIndex(parent_id);
-		const int child_index = GetIndex(child_id);
+		const int parent_index = parent_id;
+		const int child_index = child_id;
 
 		// Use coeffref if the cost already exists to avoid duplicate allocations
 		if (HasEdge(parent_index, child_index))
@@ -393,37 +386,30 @@ namespace HF::SpatialStructures {
 	}
 
 	void Graph::TripletsAddOrUpdateEdge(int parent_id, int child_id, float cost) {
-		const int parent_index = GetIndex(parent_id);
-		const int child_index = GetIndex(child_id);
+		const int parent_index = parent_id;
+		const int child_index = child_id;
 
 		triplets.emplace_back(Eigen::Triplet<float>(parent_index, child_index, cost));
 	}
 
 	void Graph::ResizeIfNeeded()
 	{
-		const int num_nodes = ordered_nodes.size() + 1; // You need 1 more column/row than max capacity. 
+		const int num_nodes = size()+1; // You need 1 more column/row than max capacity. 
 
-		for (auto it = edge_cost_maps.begin(); it != edge_cost_maps.end(); ++it) {
-			const auto& cost_set = it->second;
-			it->second.ResizeIfNeeded(num_nodes);
+		if (num_nodes > edge_matrix.rows())
+			edge_matrix.conservativeResize(num_nodes, num_nodes);
 
-			assert(num_nodes <= cost_set.edge_matrix.rows() && num_nodes <= cost_set.edge_matrix.cols());
-		}
+		assert(num_nodes <= edge_matrix.rows() && num_nodes <= edge_matrix.cols());
 	}
 
 	inline bool Graph::hasKey(int id) const
 	{
-		return (id_to_ordered_node.count(id) == 1);
+		return (id < next_id);
 	}
 
 	int Graph::GetIndex(const Node& n) const
 	{
-		return id_to_ordered_node.at(idmap.at(n));
-	}
-
-	int Graph::GetIndex(const int id) const
-	{
-		return id_to_ordered_node.at(id);
+		return (getID(n));
 	}
 
 	bool Graph::HasEdge(int parent, int child, bool undirected) const {
@@ -431,7 +417,6 @@ namespace HF::SpatialStructures {
 	}
 
 	bool Graph::HasEdge(const Node& parent, const Node& child, const bool undirected) const {
-		const auto& edge_matrix = this->GetEdgeMatrix("");
 
 		// Throw if the graph isn't compresesed.
 		if (!edge_matrix.isCompressed())
@@ -458,13 +443,8 @@ namespace HF::SpatialStructures {
 			// Set the id in the hashmap, and add the node to nodes
 			idmap[input_node] = next_id;
 			ordered_nodes.push_back(input_node);
-
-			// Add this id to the id_to_nodes array
-			id_to_ordered_node[next_id] = (ordered_nodes.size() - 1);
-
-			//Assign the Id in this node's ID parameter
-			ordered_nodes[id_to_ordered_node[next_id]].id = next_id;
-
+			
+			ordered_nodes.back().id = next_id;
 			// Increment next_id
 			next_id++;
 
@@ -485,8 +465,7 @@ namespace HF::SpatialStructures {
 			// Set the id of the empty node
 			ordered_nodes.back().id = input_int;
 
-			// Add this id to the map as being at the back of ordered_nodes
-			id_to_ordered_node[input_int] = ordered_nodes.size() - 1;
+			this->next_id = std::max(input_int, this->next_id);
 		}
 
 		return input_int;
@@ -500,8 +479,7 @@ namespace HF::SpatialStructures {
 	) {
 
 		this->default_cost = default_cost;
-		auto & edge_matrix = this->CreateEdgeMatrix(default_cost);
-
+		
 		// Generate an array with the size of every column from the size of the edges array
 		assert(edges.size() == distances.size());
 		vector<int> sizes(edges.size());
@@ -577,7 +555,7 @@ namespace HF::SpatialStructures {
 		if (needs_compression) {
 		
 			// Note that the matrix must have atleast one extra row/column
-			int array_size = ordered_nodes.size() + 1;
+			int array_size = this->size() + 1;
 			
 			// Resize the edge matrix
 			ResizeIfNeeded();
@@ -598,7 +576,6 @@ namespace HF::SpatialStructures {
 
 		// Other graph representations should be cleared too
 		ordered_nodes.clear();
-		id_to_ordered_node.clear();
 		idmap.clear();
 	}
 	
