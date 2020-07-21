@@ -86,9 +86,9 @@ namespace HF::SpatialStructures {
 
 	EdgeCostSet & Graph::GetOrCreateCostType(const std::string& name)
 	{
-		if (this->IsDefaultName(name)) 
-			return GetDefaultCostArray();
-		else if (this->HasCostArray(name))
+		assert(!this->IsDefaultName(name));
+
+		if(this->HasCostArray(name))
 			return this->GetCostArray(name);
 		else
 			return this->CreateCostArray(name);
@@ -103,11 +103,6 @@ namespace HF::SpatialStructures {
 
 		// Get and return it
 		return GetCostArray(name);
-	}
-
-	EdgeCostSet& Graph::GetDefaultCostArray()
-	{
-		return const_cast<EdgeCostSet&>(GetDefaultCostArray());
 	}
 
 	const EdgeCostSet& Graph::GetCostArray(const std::string& key) const
@@ -133,6 +128,26 @@ namespace HF::SpatialStructures {
 		return inner_index_ptr[outer_index_ptr[parent_id]];
 	}
 
+	void Graph::InsertEdgeIntoCostSet(int parent_id, int child_id, float cost, EdgeCostSet& cost_set) {
+		const int value_index = ValueArrayIndex(parent_id, child_id);
+		cost_set[value_index] = cost;
+	}
+
+	void Graph::InsertEdgesIntoCostSet(EdgeCostSet& cost_set, const std::vector<EdgeSet>& es)
+	{
+		for (const auto & edge_set : es)
+		{
+			const int parent_id = edge_set.parent;
+			for (const auto& edge : edge_set.children) {
+				
+				const int child_id = edge.child;
+				const int cost = edge.weight;
+				
+				InsertEdgeIntoCostSet(parent_id, child_id, cost, cost_set);
+			}
+		}
+	}
+
 	CSRPtrs Graph::GetCSRPointers(const std::string & cost_type)
 	{
 		// The graph must be compressed for this to work
@@ -151,7 +166,6 @@ namespace HF::SpatialStructures {
 
 		return out_csr;
 	}
-
 
 	Node Graph::NodeFromID(int id) const { return ordered_nodes.at(id);}
 
@@ -329,10 +343,21 @@ namespace HF::SpatialStructures {
 		return out_edges;
 	}
 
-	void Graph::addEdge(const Node& parent, const Node& child, float score)
+	void Graph::InsertOrUpdateEdge(int parent_id, int child_id, float score, const string& cost_type) {
+		if (IsDefaultName(cost_type)) {
+			if (this->needs_compression)
+				TripletsAddOrUpdateEdge(parent_id, child_id, score);
+			else
+				CSRAddOrUpdateEdge(parent_id, child_id, score);
+		}
+		else
+			InsertEdgeIntoCostSet(parent_id, child_id, score, GetOrCreateCostType(cost_type));
+	}
+
+	void Graph::addEdge(const Node& parent, const Node& child, float score, const string & cost_type)
 	{
 		// ![GetOrAssignID_Node]
-
+		
 		// Get parent/child ids
 		int parent_id = getOrAssignID(parent);
 		int child_id = getOrAssignID(child);
@@ -342,10 +367,11 @@ namespace HF::SpatialStructures {
 			CSRAddOrUpdateEdge(parent_id, child_id, score);
 		else
 			TripletsAddOrUpdateEdge(parent_id, child_id, score);
+
 		// ![GetOrAssignID_Node]
 	}
 
-	void Graph::addEdge(int parent_id, int child_id, float score)
+	void Graph::addEdge(int parent_id, int child_id, float score, const string & cost_type)
 	{
 		// ![GetOrAssignID_int]
 
@@ -593,18 +619,18 @@ namespace HF::SpatialStructures {
 	
 	void Graph::AddEdges(const vector<vector<EdgeSet>>& edges, const string& cost_name)
 	{
-		throw HF::Exceptions::NotImplemented();
+		if (this->IsDefaultName(cost_name))
+			throw NotImplemented();
+
+		auto cost_set = GetOrCreateCostType(cost_name);
+		
+		
 	}
 
 	vector<EdgeSet> Graph::GetEdges(const string& cost_name) const
 	{
 		throw HF::Exceptions::NotImplemented();
 		return std::vector<EdgeSet>();
-	}
-
-	void Graph::addEdge(const Node& parent, const Node& child, float score, const string& cost_type)
-	{
-		throw HF::Exceptions::NotImplemented();
 	}
 
 	void Graph::AddEdges(const vector<vector<IntEdge>>& edges, const string& cost_name)
