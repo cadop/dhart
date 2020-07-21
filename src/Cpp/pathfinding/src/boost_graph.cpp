@@ -17,6 +17,16 @@ using HF::SpatialStructures::Node;
 using std::vector;
 
 namespace HF::Pathfinding {
+
+	inline int GetMaxNodeID(const vector<Node> & nodes) {
+		int max_int = -1;
+
+		for (const auto& node : nodes)
+			max_int = std::max(node.id, max_int);
+		
+		return max_int;
+	}
+
 	BoostGraph::BoostGraph(const HF::SpatialStructures::Graph& graphg)
 	{
 
@@ -47,7 +57,7 @@ namespace HF::Pathfinding {
 		}
 
 		// Calculate the maximum id held by the graph.
-		unsigned int max_node = graphg.Nodes()[num_nodes - 1].id + 1;
+		unsigned int max_node = GetMaxNodeID(graphg.Nodes()) + 1;
 
 		// Create the boost graph from the two input arrays
 		g = graph_t(boost::edges_are_unsorted, edges.begin(), edges.end(), weights.begin(), max_node);
