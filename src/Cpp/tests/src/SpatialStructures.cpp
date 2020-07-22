@@ -330,6 +330,40 @@ TEST(_Graph, DefaultNameChange) {
 	}
 }
 
+
+
+TEST(_Graph, AlternateCSR) {
+	
+	// Add filler edges to the graph as a base set of edges
+	Graph g;
+	g.Compress();
+	vector<EdgeSet> filler_edges{
+		{0, { {0, 9999.0f}, {1, 9999.0f}, {2, 9999.0f} }},
+		{1, { {0, 9999.0f}, {1, 9999.0f}, {2, 9999.0f} }},
+		{2, { {0, 9999.0f}, {1, 9999.0f }, {2, 9999.0f} }}
+	};
+	g.AddEdges(filler_edges);
+
+	// Add actual edges we want to test with
+	vector<EdgeSet> Edges{
+		{0, { {0,0.00f}, {1,0.01f},	{2,0.02f} }},
+		{1, { {0,0.10f}, {1,0.11f},	{2,0.12f} }},
+		{2, { {0,0.20f}, { 1,0.21f }, { 2,0.22f} }}
+	};
+	g.AddEdges(Edges, "AltCost");
+
+	// Ensure they're different, and the sum equates to what we would expect
+	CSRPtrs stand_csrptrs = g.GetCSRPointers();
+	auto alt_csrptrs = g.GetCSRPointers("AltCost");
+	const int num_nnz = stand_csrptrs.nnz;
+
+	vector<float> stand_values(stand_csrptrs.data, stand_csrptrs.data + num_nnz);
+	vector<float>  alt_values(alt_csrptrs.data, alt_csrptrs.data + num_nnz);
+
+	ASSERT_FALSE(std::equal(stand_values.begin(), stand_values.end(), alt_values.begin()));
+}
+
+
 TEST(_Rounding, addition_error)
 {
 	// define values as floats
