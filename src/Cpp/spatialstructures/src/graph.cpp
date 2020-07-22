@@ -126,7 +126,7 @@ namespace HF::SpatialStructures {
 
 	bool Graph::IsDefaultName(const string & name) const
 	{
-		return (name.empty());
+		return (name.empty() || (name == this->default_cost));
 	}
 	
 	int Graph::ValueArrayIndex(int parent_id, int child_id) const
@@ -149,8 +149,7 @@ namespace HF::SpatialStructures {
 		
 		// Throw if we the search hit the end of the bounds
 		if (itr == search_end_ptr)
-				throw std::out_of_range("Edge doesn't exist in the value array");
-		
+			return -1;
 		// Find the distance between the pointer we found earlier and the
 		// start of the values array
 		else {
@@ -161,6 +160,10 @@ namespace HF::SpatialStructures {
 
 	void Graph::InsertEdgeIntoCostSet(int parent_id, int child_id, float cost, EdgeCostSet& cost_set) {
 		const int value_index = ValueArrayIndex(parent_id, child_id);
+
+		if (value_index < 0)
+			throw std::out_of_range("Tried to insert into edge that doesn't exist in default graph. ");
+	
 		cost_set[value_index] = cost;
 	}
 
@@ -382,7 +385,16 @@ namespace HF::SpatialStructures {
 				CSRAddOrUpdateEdge(parent_id, child_id, score);
 		}
 		else
-			InsertEdgeIntoCostSet(parent_id, child_id, score, GetOrCreateCostType(cost_type));
+			if (this->needs_compression)
+				throw std::exception("Graph wasn't compressed!");
+			else
+				InsertEdgeIntoCostSet(parent_id, child_id, score, GetOrCreateCostType(cost_type));
+	}
+
+	float Graph::GetCostForSet(const EdgeCostSet & set, int parent_id, int child_id) const
+	{
+		const int index = ValueArrayIndex(parent_id, child_id);
+		return set[index];
 	}
 
 	void Graph::addEdge(const Node& parent, const Node& child, float score, const string & cost_type)
@@ -483,11 +495,27 @@ namespace HF::SpatialStructures {
 		return (getID(n));
 	}
 
-	bool Graph::HasEdge(int parent, int child, bool undirected) const {
-		return (checkForEdge(parent, child) || (undirected && checkForEdge(child, parent)));
+	bool Graph::HasEdge(int parent, int child, bool undirected, const string & cost_type) const {
+		// Check if these IDS even exist in the graph.
+		if (!this->hasKey(parent) || !this->hasKey(child)) return false;
+
+		// If this is the default name, check for the cost in the base CSR
+		else if (IsDefaultName(cost_type))
+			return (checkForEdge(parent, child) || (undirected && checkForEdge(child, parent)));
+		
+		// If this isn't the default name, then get it from the cost set it's asking for
+		else {
+			// If this doesn't have the cost array defined before, return
+			if (!this->HasCostArray(cost_type)) return false;
+
+			// Otherwise get the cost array and try to find it. 
+			const auto& cost_array = GetCostArray(cost_type);
+			const auto cost = GetCostForSet(cost_array, parent, child);
+			return !isnan(cost);
+		}
 	}
 
-	bool Graph::HasEdge(const Node& parent, const Node& child, const bool undirected) const {
+	bool Graph::HasEdge(const Node& parent, const Node& child, const bool undirected, const string cost_type) const {
 
 		// Throw if the graph isn't compresesed.
 		if (!edge_matrix.isCompressed())

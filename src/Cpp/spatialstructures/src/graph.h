@@ -319,8 +319,17 @@ namespace HF::SpatialStructures {
 
 		/*! \brief Resize this edge matrix if needed*/
 		inline void ResizeIfNeeded(int new_size) {
+
+			const int old_size = this->size();
 			if (this->size() < new_size)
+			{
+				// resize the cost array
 				this->costs.resize(new_size);
+
+				// fill new values with NAN
+				const auto start_offset = costs.begin() + old_size;
+				std::fill(start_offset, costs.end(), NAN);
+			}
 		};
 
 		/*! \brief Clear this edge cost set. */
@@ -450,7 +459,6 @@ namespace HF::SpatialStructures {
 		/*! \brief Get the ID of a node from its index in the CSR.*/
 		int GetIDFromIndex(int index) const;
 
-
 		/*! \brief Check if we have this edge matrix already defined. */
 		bool HasCostArray(std::string key) const;
 
@@ -470,9 +478,6 @@ namespace HF::SpatialStructures {
 		*/
 		const EdgeCostSet & GetCostArray(const std::string& key) const;
 
-		/*! \brief Change the active edge matrix.*/
-		const EdgeCostSet& GetDefaultCostArray() const;
-		
 		/*! \brief check if this name is asking for the default. */
 		bool IsDefaultName(const std::string& name) const;
 
@@ -487,6 +492,9 @@ namespace HF::SpatialStructures {
 		
 		/*! \brief Insert an edge into the default cost array or a new cost array.*/
 		void InsertOrUpdateEdge(int parent_id, int child_id, float score, const std::string & cost_type);
+
+		/*! \brief Get a cost for a specific edge in an edgeset*/
+		float GetCostForSet(const EdgeCostSet & set, int parent_id, int child_id) const;
 
 	public:
 		/*!
@@ -644,7 +652,12 @@ namespace HF::SpatialStructures {
 				bool has_edge = graph.HasEdge(node_1, node_2, true);
 			\endcode
 		*/
-		bool HasEdge(const Node& parent, const Node& child, const bool undirected = false) const;
+		bool HasEdge(
+			const Node& parent, 
+			const Node& child, 
+			const bool undirected = false, 
+			const std::string cost_type = ""
+		) const;
 		
 		/* \brief Determine if the graph has an edge from parent to child.
 
@@ -679,7 +692,7 @@ namespace HF::SpatialStructures {
 				bool has_edge = graph.HasEdge(0, 1, true);
 			\endcode
 		*/
-		bool HasEdge(int parent, int child, bool undirected = false) const;
+		bool HasEdge(int parent, int child, bool undirected = false, const std::string & cost_type = "") const;
 
 		/// <summary> Get a list of nodes from the graph sorted by ID. </summary>
 		/// <returns> A sorted vector of nodes. </returns>
