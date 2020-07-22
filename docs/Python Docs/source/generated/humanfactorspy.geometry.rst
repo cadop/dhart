@@ -30,6 +30,8 @@ humanfactorspy.geometry
     
     ConstructPlane
     
+    Flatten
+    
     LoadOBJ
     
 

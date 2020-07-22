@@ -26,6 +26,8 @@ humanfactorspy.pathfinding
 .. autosummary::
     :toctree: .
     
+    ConvertNodesToIds
+    
     DijkstraShortestPath
     
 

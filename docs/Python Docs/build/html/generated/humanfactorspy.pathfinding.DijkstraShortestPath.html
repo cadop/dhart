@@ -30,7 +30,7 @@
     <link rel="top" title="Human Metrics 0.0.1 documentation" href="../index.html" >
     <link rel="up" title="humanfactorspy.pathfinding" href="humanfactorspy.pathfinding.html" >
     <link rel="next" title="humanfactorspy.raytracer" href="humanfactorspy.raytracer.html" >
-    <link rel="prev" title="humanfactorspy.pathfinding.PathMemberStruct" href="humanfactorspy.pathfinding.PathMemberStruct.html" > 
+    <link rel="prev" title="humanfactorspy.pathfinding.ConvertNodesToIds" href="humanfactorspy.pathfinding.ConvertNodesToIds.html" > 
   </head>
   <body>
 
@@ -67,7 +67,7 @@
            accesskey="N">next</a>
       </li>
       <li class="active">
-        <a href="humanfactorspy.pathfinding.PathMemberStruct.html" title="humanfactorspy.pathfinding.PathMemberStruct"
+        <a href="humanfactorspy.pathfinding.ConvertNodesToIds.html" title="humanfactorspy.pathfinding.ConvertNodesToIds"
            accesskey="P">previous</a>
       </li>
     </ul>
@@ -87,7 +87,7 @@
 <h1>humanfactorspy.pathfinding.DijkstraShortestPath<a class="headerlink" href="#humanfactorspy-pathfinding-dijkstrashortestpath" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt id="humanfactorspy.pathfinding.DijkstraShortestPath">
-<code class="descclassname">humanfactorspy.pathfinding.</code><code class="descname">DijkstraShortestPath</code><span class="sig-paren">(</span><em><span class="n">graph</span><span class="p">:</span> <span class="n">humanfactorspy.spatialstructures.graph.Graph</span></em>, <em><span class="n">start</span><span class="p">:</span> <span class="n">List<span class="p">[</span>Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">, </span>Tuple<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">]</span><span class="p">]</span><span class="p">]</span></span></em>, <em><span class="n">end</span><span class="p">:</span> <span class="n">List<span class="p">[</span>Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">, </span>Tuple<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">]</span><span class="p">]</span><span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span>Union<span class="p">[</span>List<span class="p">[</span>Optional<span class="p">[</span>humanfactorspy.pathfinding.path.Path<span class="p">]</span><span class="p">]</span><span class="p">, </span>humanfactorspy.pathfinding.path.Path<span class="p">]</span><span class="p">]</span><a class="reference external" href="https://github.com/cadop/HumanMetrics/blob/master/Codebase/HumanFactors/humanfactorspy/..\build\Python\humanfactorspy\pathfinding\shortest_path.py#L28-L120"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#humanfactorspy.pathfinding.DijkstraShortestPath" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">humanfactorspy.pathfinding.</code><code class="descname">DijkstraShortestPath</code><span class="sig-paren">(</span><em><span class="n">graph</span><span class="p">:</span> <span class="n">humanfactorspy.spatialstructures.graph.Graph</span></em>, <em><span class="n">start</span><span class="p">:</span> <span class="n">List<span class="p">[</span>Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">, </span>Tuple<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">]</span><span class="p">]</span><span class="p">]</span></span></em>, <em><span class="n">end</span><span class="p">:</span> <span class="n">List<span class="p">[</span>Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">, </span>Tuple<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">]</span><span class="p">]</span><span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span>Union<span class="p">[</span>List<span class="p">[</span>Optional<span class="p">[</span>humanfactorspy.pathfinding.path.Path<span class="p">]</span><span class="p">]</span><span class="p">, </span>humanfactorspy.pathfinding.path.Path<span class="p">]</span><span class="p">]</span><a class="reference external" href="https://github.com/cadop/HumanMetrics/blob/master/Codebase/HumanFactors/humanfactorspy/..\build\Python\humanfactorspy\pathfinding\shortest_path.py#L30-L124"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#humanfactorspy.pathfinding.DijkstraShortestPath" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find the shortest path from start to end using Dijkstra’s shortest path algorithm</p>
 <p>Accepts a list of starting / ending points or single starting/ending
 points.</p>
@@ -109,7 +109,11 @@ path will be returned as None.</p>
 </p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">List[Union[path, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)">None</a>]]</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">List[Union[path, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)">None</a>]]</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>humanfactorspy.Exceptions.</strong> – Start or End did not exist in
+    the given graph OR start/end lists did not match in size.</p>
 </td>
 </tr>
 </tbody>
@@ -161,15 +165,6 @@ path will be returned as None.</p>
 <span class="go">[(10., 1) ( 0., 3)]</span>
 </pre></div>
 </div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><strong>humanfactorspy.Exceptions.</strong> – Start or End did not exist in
-    the given graph OR start/end lists did not match in size.</td>
-</tr>
-</tbody>
-</table>
 </dd></dl>
 
 </div>
@@ -181,8 +176,8 @@ path will be returned as None.</p>
       <div class="spc-rightsidebar span3">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="humanfactorspy.pathfinding.PathMemberStruct.html"
-                        title="previous chapter">humanfactorspy.pathfinding.PathMemberStruct</a></p>
+  <p class="topless"><a href="humanfactorspy.pathfinding.ConvertNodesToIds.html"
+                        title="previous chapter">humanfactorspy.pathfinding.ConvertNodesToIds</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="humanfactorspy.raytracer.html"
                         title="next chapter">humanfactorspy.raytracer</a></p>
