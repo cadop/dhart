@@ -214,10 +214,9 @@ namespace HumanFactors.SpatialStructures
                 CostAlgorithms.CalculateAndStoreCrossSlope(g);
             \endcode
          */
-        public static void CalculateAndSioreCrossSlope(Graph g)
+        public static void CalculateAndStoreCrossSlope(Graph g)
         {
             NativeMethods.C_CalculateAndStoreCrossSlope(g.Pointer);
         }
- 
     }
 }
