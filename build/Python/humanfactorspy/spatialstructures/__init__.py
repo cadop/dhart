@@ -10,6 +10,10 @@ in space or just a set of IDs.
 """ 
 
 
-from .graph import Graph
-from .node import NodeStruct, NodeList
-from .edge import Edge
+# from .graph import Graph
+# from .node import NodeStruct, NodeList
+# from .edge import Edge
+
+from .graph import *
+from .node import *
+from .edge import *

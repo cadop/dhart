@@ -141,6 +141,7 @@ def test_SingleOcclusionRays():
 
 
 def test_FireRayDistance():
+    import numpy
     plane = LoadOBJ(humanfactorspy.get_sample_model("plane.obj"), rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(plane)
     origin = (0, 0, 1)
