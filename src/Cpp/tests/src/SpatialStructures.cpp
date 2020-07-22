@@ -10,6 +10,8 @@
 
 using namespace HF::SpatialStructures;
 using std::vector;
+using std::string;
+
 namespace GraphTests {
     TEST(_Graph, Creation) {
         HF::SpatialStructures::Graph g;
@@ -72,6 +74,21 @@ namespace GraphTests {
         g.Compress();
         ASSERT_FALSE(g.HasEdge(N1, N1));
     }
+
+	TEST(_Graph, HasEdgeMulti) {
+
+		string alt_cost = "alternate";
+
+		Graph g;
+		g.Compress();
+		g.addEdge(1, 2, 39);
+		g.addEdge(1, 2, 54, alt_cost);
+
+
+		ASSERT_TRUE(g.HasEdge(1, 2, false, alt_cost));
+		ASSERT_FALSE(g.HasEdge(1, 11, false, alt_cost));
+		ASSERT_FALSE(g.HasEdge(1, 2, false, "NotSeenCost"));
+	}
 
 	TEST(_Graph, AggregateCosts) {
 		HF::SpatialStructures::Graph g;
@@ -230,27 +247,17 @@ TEST(_Graph, AddEdgeToNewCost) {
 
 // Assert that the above test holds for adding multiple edges.
 TEST(_Graph, MultipleNewCostDoesntAffectDefault) {
-	// Create two nodes
-	HF::SpatialStructures::Node N1(1, 1, 1);
-	HF::SpatialStructures::Node N2(2, 2, 2);
-	HF::SpatialStructures::Node N3(3, 3, 3);
-	HF::SpatialStructures::Node N4(4, 4, 4);
-
+	
 	vector<IntEdge> StandardEdges = {
-		{0,0.10f},
-		{1,0.11f},
-		{2,0.12f}
+		{0,0.10f}, {1,0.11f}, {2,0.12f}
 	};
 	EdgeSet StandSet(3, StandardEdges);
 	vector<IntEdge> AltCostEdges = {
-		{0,0.20f},
-		{1,0.21f},
-		{2,0.22f}
+		{0,0.20f}, {1,0.21f}, {2,0.22f}
 	};
 	EdgeSet AltSet(3, AltCostEdges);
 	
 	Graph g;
-
 	g.Compress();
 	g.AddEdges(StandSet);
 	g.AddEdges(AltSet, "TestCost");
@@ -299,6 +306,27 @@ TEST(_Graph, AddMultipleEdgeSetsToNewCost) {
 
 	// Compare the result of the graph's output with our own edges
 	CompareVectorsOfEdgeSets(Edges, g.GetEdges("AltCost"));
+}
+
+TEST(_Graph, DefaultNameChange) {
+	const std::string default_name = "DefaultTestName";
+
+	Graph g(default_name);
+	g.Compress();
+	g.addEdge(0, 1, 100, default_name);
+	ASSERT_TRUE(g.HasEdge(0, 1));
+
+	// If this throws here, that means we're not adding
+	// to the default cost type
+	try {
+		g.addEdge(0, 2, 100, "Non-Default-Name");
+	}
+	catch (std::out_of_range) {
+		GTEST_SUCCEED();
+	}
+	catch (...){
+		GTEST_FAIL("Other exception occured.");
+	}
 }
 
 TEST(_Rounding, addition_error)
