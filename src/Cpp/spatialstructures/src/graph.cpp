@@ -394,7 +394,10 @@ namespace HF::SpatialStructures {
 	float Graph::GetCostForSet(const EdgeCostSet & set, int parent_id, int child_id) const
 	{
 		const int index = ValueArrayIndex(parent_id, child_id);
-		return set[index];
+		if (index < 0) 
+			return NAN;
+		else
+			return set[index];
 	}
 
 	void Graph::addEdge(const Node& parent, const Node& child, float score, const string & cost_type)
@@ -511,7 +514,12 @@ namespace HF::SpatialStructures {
 			// Otherwise get the cost array and try to find it. 
 			const auto& cost_array = GetCostArray(cost_type);
 			const auto cost = GetCostForSet(cost_array, parent, child);
-			return !isnan(cost);
+
+			// If undirected is specified, call this fucntion again from parent to child
+			// with undirected set to false.
+			bool check_undirected = undirected ? HasEdge(child, parent, false, cost_type) : false;
+
+			return !isnan(cost) || check_undirected;
 		}
 	}
 
