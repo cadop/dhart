@@ -110,6 +110,38 @@ namespace HumanFactors.Tests.SpatialStructures
             // Calculate and store edge type in g: cross slope
             CostAlgorithms.CalculateAndStoreCrossSlope(g);
         }
+
+        [TestMethod]
+        public void CalculateAndStoreEnergyExpenditure()
+        {
+            // Create the graph
+            Graph g = new Graph();
+
+            // Create 7 nodes
+            Vector3D n0 = new Vector3D(0, 0, 0);
+            Vector3D n1 = new Vector3D(0, 0, 1);
+            Vector3D n2 = new Vector3D(5, 5, 4);
+            Vector3D n3 = new Vector3D(2, 2, 2);
+            Vector3D n4 = new Vector3D(5, 3, 2);
+            Vector3D n5 = new Vector3D(6, 6, 7);
+            Vector3D n6 = new Vector3D(2, 5, 1);
+
+            // Add 9 edges
+            g.AddEdge(n0, n1, 0);
+            g.AddEdge(n1, n2, 0);
+            g.AddEdge(n1, n3, 0);
+            g.AddEdge(n1, n4, 0);
+            g.AddEdge(n3, n5, 0);
+            g.AddEdge(n4, n2, 0);
+            g.AddEdge(n6, n4, 0);
+            g.AddEdge(n6, n5, 0);
+
+            // Always compress the graph after adding edges!
+            g.CompressToCSR();
+
+            // Calculate and store edge type in g: energy expenditure
+            CostAlgorithms.CalculateAndStoreEnergyExpenditure(g);
+        }
     }
 }
  

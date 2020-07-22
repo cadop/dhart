@@ -378,32 +378,32 @@ namespace HF::SpatialStructures::CostAlgorithms {
 
 			// Create 7 nodes
 			Node n0(0, 0, 0);
-			Node n1(1, 3, 5);
-			Node n2(3, -1, 2);
-			Node n3(1, 2, 1);
-			Node n4(4, 5, 7);
-			Node n5(5, 3, 2);
-			Node n6(-2, -5, 1);
+			Node n1(0, 0, 1);
+			Node n2(5, 5, 4);
+			Node n3(2, 2, 2);
+			Node n4(5, 3, 2);
+			Node n5(6, 6, 7);
+			Node n6(2, 5, 1);
 
 			Graph g;
 
-			// Adding 9 edges
+			// Adding 8 edges
 			g.addEdge(n0, n1);
 			g.addEdge(n1, n2);
 			g.addEdge(n1, n3);
 			g.addEdge(n1, n4);
-			g.addEdge(n2, n4);
 			g.addEdge(n3, n5);
-			g.addEdge(n5, n6);
-			g.addEdge(n4, n6);
+			g.addEdge(n4, n2);
+			g.addEdge(n6, n4);
+			g.addEdge(n6, n5);
 
 			// Always compress the graph after adding edges!
 			g.Compress();
 
-			// Retrieve a subgraph of your choice, provide a parent node or parent node ID.
 			Subgraph sg = g.GetSubgraph(n1);
-
+			// Retrieve a subgraph of your choice, provide a parent node or parent node ID.
 			// Get a container of vector<EdgeSet>, ordered by parent ID.
+
 			// These consist of alternate edge costs for Subgraph sg.
 			std::vector<EdgeSet> edge_costs = CalculateEnergyExpenditure(sg);
 		\endcode
@@ -417,34 +417,34 @@ namespace HF::SpatialStructures::CostAlgorithms {
 
 		\code
 			// for brevity
-			using HF::SpatialStructures::CostAlgorithms::CalculateEnergyExpenditure;
 
+			using HF::SpatialStructures::CostAlgorithms::CalculateEnergyExpenditure;
 			// Create 7 nodes
 			Node n0(0, 0, 0);
-			Node n1(1, 3, 5);
-			Node n2(3, -1, 2);
-			Node n3(1, 2, 1);
-			Node n4(4, 5, 7);
-			Node n5(5, 3, 2);
-			Node n6(-2, -5, 1);
+			Node n1(0, 0, 1);
+			Node n2(5, 5, 4);
+			Node n3(2, 2, 2);
+			Node n4(5, 3, 2);
+			Node n5(6, 6, 7);
+			Node n6(2, 5, 1);
 
 			Graph g;
 
-			// Adding 9 edges
+			// Adding 8 edges
 			g.addEdge(n0, n1);
 			g.addEdge(n1, n2);
 			g.addEdge(n1, n3);
 			g.addEdge(n1, n4);
-			g.addEdge(n2, n4);
 			g.addEdge(n3, n5);
-			g.addEdge(n5, n6);
-			g.addEdge(n4, n6);
+			g.addEdge(n4, n2);
+			g.addEdge(n6, n4);
+			g.addEdge(n6, n5);
 
 			// Always compress the graph after adding edges!
 			g.Compress();
 
-			// Get a container of vector<EdgeSet>, ordered by parent ID.
 			// These consist of alternate edge costs for all subgraphs in g.
+			// Get a container of vector<EdgeSet>, ordered by parent ID.
 			std::vector<std::vector<EdgeSet>> all_edge_costs = CalculateEnergyExpenditure(g);
 		\endcode
 	*/

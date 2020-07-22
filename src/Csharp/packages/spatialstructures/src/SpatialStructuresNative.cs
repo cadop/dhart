@@ -134,7 +134,9 @@ namespace HumanFactors.SpatialStructures
         internal static void C_CompressGraph(IntPtr graph) => Compress(graph);
 
         internal static void C_CalculateAndStoreCrossSlope(IntPtr graph) => CalculateAndStoreCrossSlope(graph);
-        
+
+        internal static void C_CalculateAndStoreEnergyExpenditure(IntPtr graph) => CalculateAndStoreEnergyExpenditure(graph);
+
         internal static float C_FloatFromC()
         {
             float float_to_modify = 0.0f;
@@ -236,6 +238,9 @@ namespace HumanFactors.SpatialStructures
 
         [DllImport(NativeConstants.DLLPath)]
         private static extern HF_STATUS CalculateAndStoreCrossSlope(IntPtr graph_pointer);
+
+        [DllImport(NativeConstants.DLLPath)]
+        private static extern HF_STATUS CalculateAndStoreEnergyExpenditure(IntPtr graph_pointer);
 
         [DllImport(NativeConstants.DLLPath)]
         private static extern HF_STATUS ExampleFloat(ref float out_float);

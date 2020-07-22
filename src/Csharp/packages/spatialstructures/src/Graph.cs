@@ -218,5 +218,46 @@ namespace HumanFactors.SpatialStructures
         {
             NativeMethods.C_CalculateAndStoreCrossSlope(g.Pointer);
         }
+
+
+        /*!
+            \brief  Calculates and stores energy expenditure for all subgraphs in g
+            \param  g   The operand graph
+
+            \code
+		        // Requires #include "graph.h"
+
+		        // Create 7 nodes
+		        Node n0(0, 0, 0);
+		        Node n1(0, 0, 1);
+		        Node n2(5, 5, 4);
+		        Node n3(2, 2, 2);
+		        Node n4(5, 3, 2);
+		        Node n5(6, 6, 7);
+		        Node n6(2, 5, 1);
+
+		        Graph g;
+
+		        // Adding 8 edges
+		        g.addEdge(n0, n1);
+		        g.addEdge(n1, n2);
+		        g.addEdge(n1, n3);
+		        g.addEdge(n1, n4);
+		        g.addEdge(n3, n5);
+		        g.addEdge(n4, n2);
+		        g.addEdge(n6, n4);
+		        g.addEdge(n6, n5);
+
+		        // Always compress the graph after adding edges!
+		        g.Compress();
+
+                // Calculate and store edge type in g: energy expenditure
+		        CalculateAndStoreEnergyExpenditure(&g);
+            \endcode
+         */
+        public static void CalculateAndStoreEnergyExpenditure(Graph g)
+        {
+            NativeMethods.C_CalculateAndStoreEnergyExpenditure(g.Pointer);
+        }
     }
 }
