@@ -497,7 +497,7 @@ namespace HF::SpatialStructures {
 		float GetCostForSet(const EdgeCostSet & set, int parent_id, int child_id) const;
 
 		/*! \brief Get the edges for the given node. */
-		std::vector<Edge> EdgesForNode(int parent_id, bool undirected = false, const std::string & cost_type = "") const;
+		std::vector<Edge> GetEdgesForNode(int parent_id, bool undirected = false, const std::string & cost_type = "") const;
 
 	public:
 		/*!
