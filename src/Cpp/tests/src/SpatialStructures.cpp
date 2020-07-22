@@ -86,6 +86,7 @@ namespace GraphTests {
 
 
 		ASSERT_TRUE(g.HasEdge(1, 2, false, alt_cost));
+		ASSERT_TRUE(g.HasEdge(2, 1, true, alt_cost));
 		ASSERT_FALSE(g.HasEdge(1, 11, false, alt_cost));
 		ASSERT_FALSE(g.HasEdge(1, 2, false, "NotSeenCost"));
 	}
