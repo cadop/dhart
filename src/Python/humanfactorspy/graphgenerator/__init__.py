@@ -11,4 +11,5 @@ of the other analysis types within Human Factors.
 
 """
 
-from .graph_generator import GenerateGraph
+# from .graph_generator import GenerateGraph
+from .graph_generator import *

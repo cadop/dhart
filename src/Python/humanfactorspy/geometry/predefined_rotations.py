@@ -1,3 +1,6 @@
+__all__ = ['CommonRotations']
+
+
 class CommonRotations:
     """ Holds several predefined rotations that may be useful
     

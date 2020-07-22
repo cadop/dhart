@@ -5,6 +5,7 @@ from typing import *
 import numpy
 from humanfactorspy.spatialstructures import Graph
 
+__all__ = ['ConvertNodesToIds','DijkstraShortestPath']
 
 def ConvertNodesToIds(graph: Graph, nodes: List[Union[Tuple, int]]):
     """ Get ids for nodes in graph. Raises exception if nodes can't be found 
@@ -13,6 +14,7 @@ def ConvertNodesToIds(graph: Graph, nodes: List[Union[Tuple, int]]):
     ignore them.
     
     """
+
     if not isinstance(nodes, List):
         nodes = [nodes]
 
@@ -29,7 +31,7 @@ def DijkstraShortestPath(
     graph: Graph,
     start: List[Union[int, Tuple[float, float, float]]],
     end: List[Union[int, Tuple[float, float, float]]],
-) -> Union[List[Union[Path, None]], Union[Path, None]]:
+    ) -> Union[List[Union[Path, None]], Union[Path, None]]:
     """ Find the shortest path from start to end using Dijkstra's shortest path algorithm
     
     Accepts a list of starting / ending points or single starting/ending
