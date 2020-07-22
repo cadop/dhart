@@ -191,20 +191,39 @@ C_INTERFACE CreatePaths(
 						HF_STATUS::NO_COST is cost_name is not a valid cost type name
 
 	\code
-		// Requires #include "pathfinder_C.h", #include "graph.h", #include "path.h", #include "path_finder.h"
+		// be sure to #include "boost_graph.h", #include "node.h", #include "graph.h", and #include <vector>
 
-		// Create a Graph g, and compress it.
-		HF::SpatialStructures::Graph g;
-		g.addEdge(0, 1, 1);
-		g.addEdge(0, 2, 2);
-		g.addEdge(1, 3, 3);
-		g.addEdge(2, 4, 1);
-		g.addEdge(3, 4, 5);
-		g.Compress();
+		// for brevity
+		using HF::SpatialStructures::Node;
+		using HF::SpatialStructures::Graph;
+		using HF::Pathfinding::BoostGraph;
+		using HF::SpatialStructures::CostAlgorithms::CalculateEnergyExpenditure;
 
-		// Create a boostGraph from g
+		// Create the nodes
+		Node node_0(1.0f, 1.0f, 2.0f);
+		Node node_1(2.0f, 3.0f, 4.0f);
+		Node node_2(11.0f, 22.0f, 140.0f);
+		Node node_3(62.9f, 39.1f, 18.0f);
+		Node node_4(19.5f, 27.1f, 29.9f);
+
+		// Create a graph. No nodes/edges for now.
+		Graph graph;
+
+		// Add edges. These will have the default edge values, forming the default graph.
+		graph.addEdge(node_0, node_1, 1);
+		graph.addEdge(node_0, node_2, 2.5);
+		graph.addEdge(node_1, node_3, 54.0);
+		graph.addEdge(node_2, node_4, 39.0);
+		graph.addEdge(node_3, node_4, 1.2);
+
+		// Always compress the graph after adding edges!
+		graph.Compress();
+
+		// Retrieve a Subgraph, parent node ID 0 -- of alternate edge costs.
+		// Add these alternate edges to graph.
 		std::string desired_cost_type = "cross slope";
-		auto boostGraph = HF::Pathfinding::CreateBoostGraph(g, desired_cost_type);
+		auto edge_set = CalculateEnergyExpenditure(graph.GetSubgraph(0));
+		graph.AddEdges(edge_set, desired_cost_type);
 
 		// Prepare parameters for CreatePath
 		HF::SpatialStructures::Path* out_path = nullptr;
@@ -212,9 +231,11 @@ C_INTERFACE CreatePaths(
 		int out_size = -1;
 
 		// Use CreatePathCostType, be sure to use the .c_str() method if using a std::string for desired_cost_type
-		CreatePathCostType(&g, 0, 4, &out_size, &out_path, &out_path_member, desired_cost_type.c_str());
+		CreatePathCostType(&graph, 0, 4, &out_size, &out_path, &out_path_member, desired_cost_type.c_str());
 
-		// Use out_path, out_path_member
+		///
+		/// Use out_path, out_path_member
+		///
 
 		// Remember to free resources when finished
 		DestroyPath(out_path);
@@ -259,20 +280,40 @@ C_INTERFACE CreatePathCostType(
 	\code
 		// Requires #include "pathfinder_C.h", #include "graph.h", #include "path.h", #include "path_finder.h"
 
-		HF::SpatialStructures::Graph g;
-		g.addEdge(0, 1, 1);
-		g.addEdge(0, 2, 2);
-		g.addEdge(1, 3, 3);
-		g.addEdge(2, 4, 1);
-		g.addEdge(3, 4, 5);
-		g.Compress();
+		// for brevity
+		using HF::SpatialStructures::Node;
+		using HF::SpatialStructures::Graph;
+		using HF::Pathfinding::BoostGraph;
+		using HF::SpatialStructures::CostAlgorithms::CalculateEnergyExpenditure;
+
+		// Create the nodes
+		Node node_0(1.0f, 1.0f, 2.0f);
+		Node node_1(2.0f, 3.0f, 4.0f);
+		Node node_2(11.0f, 22.0f, 14.0f);
+		Node node_3(62.9f, 39.1f, 18.0f);
+		Node node_4(99.5f, 47.1f, 29.9f);
+
+		// Create a graph. No nodes/edges for now.
+		Graph graph;
+
+		// Add edges. These will have the default edge values, forming the default graph.
+		graph.addEdge(node_0, node_1, 1);
+		graph.addEdge(node_0, node_2, 2.5);
+		graph.addEdge(node_1, node_3, 54.0);
+		graph.addEdge(node_2, node_4, 39.0);
+		graph.addEdge(node_3, node_4, 1.2);
+
+		// Always compress the graph after adding edges!
+		graph.Compress();
+
+		// Retrieve a Subgraph, parent node ID 0 -- of alternate edge costs.
+		// Add these alternate edges to graph.
+		std::string desired_cost_type = "cross slope";
+		auto edge_set = CalculateEnergyExpenditure(graph);
+		graph.AddEdges(edge_set, desired_cost_type);
 
 		// Maximum amount of paths to search
 		const int MAX_SIZE = 2;
-
-		// Create a Graph g, and compress it
-		std::string desired_cost_type = "cross slope";
-		auto boostGraph = HF::Pathfinding::CreateBoostGraph(g, desired_cost_type);
 
 		// We want to find the shortest paths from 0 to 3, and 0 to 4.
 		int start_nodes[] = { 0, 0 };
@@ -287,7 +328,11 @@ C_INTERFACE CreatePathCostType(
 		int* out_sizes = new int[MAX_SIZE];
 
 		// Use CreatePathsCostType, be sure to use the .c_str() method if using a std::string for desired_cost_type
-		CreatePathsCostType(&g, start_nodes, end_nodes, out_path, out_path_member, out_sizes, MAX_SIZE, desired_cost_type.c_str());
+		CreatePathsCostType(&graph, start_nodes, end_nodes, out_path, out_path_member, out_sizes, MAX_SIZE, desired_cost_type.c_str());
+
+		///
+		/// Use out_path, out_path_member
+		///
 
 		///
 		/// Resource cleanup
