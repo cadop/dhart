@@ -44,9 +44,9 @@ namespace HF::SpatialStructures {
 		int rows;	///< Number of rows in this CSR.
 		int cols;	///< Number of columns in this CSR.
 
-		float* data;			///< Pointer to the CSR's data array.
-		int* outer_indices;		///< Pointer to the CSR's outer indices array. 
-		int* inner_indices;		///< Pointer to the CSR's inner indices array.
+		float* data;			///< Stores the coefficient values of the non-zeros.
+		int* outer_indices;		///< Stores for each column (resp. row) the index of the first non-zero in the previous two arrays.
+		int* inner_indices;		///< Stores the row (resp. column) indices of the non-zeros.
 
 		/// <summary> Verify the CSR referenced by this instance is valid. </summary>
 		/// <returns>
@@ -367,6 +367,24 @@ namespace HF::SpatialStructures {
 		
 		std::string default_cost = "Distance";
 		robin_hood::unordered_map<std::string, EdgeCostSet> edge_cost_maps;
+
+
+		/*!\brief Indicates that the graph has cost arrays.
+		
+		   \details
+		   If this is true, and the graph compresses again, then all cost arrays will be wrecked. 
+		   An exception should be thrown in the case this happens, because this is misuse.
+		*/
+		bool has_cost_arrays = false;
+
+		/*! 
+			\brief Determines whether or not the graph is using integer nodes.
+
+			\details
+			This causes the graph to spend more time finding the maximum node ID, since it's not
+			gauranteed edges will be added in order.
+		*/
+		bool using_int_nodes = false; 
 
 		/// <summary>
 		/// Get the unique ID for this x, y, z position, assigning it an new one if it doesn't
@@ -1106,6 +1124,8 @@ namespace HF::SpatialStructures {
 		*/
 		int size() const;
 
+		int MaxID() const;
+
 		/// <summary> Retrieve the ID for node in this graph. </summary>
 		/// <returns> The ID assigned to this node. -1 if it was not yet added to the graph </returns>
 		/*!
@@ -1315,26 +1335,6 @@ namespace HF::SpatialStructures {
 		*/
 		void Clear();
 
-		/*!
-			\summary TODO summary
-			\param edges
-			
-			\code
-				// TODO example
-			\endcode
-		*/
-		void AddEdges(std::vector<std::vector<IntEdge>>& edges);
-
-		/*!
-			\summary TODO summary
-			\param edges
-
-			\code
-				// TODO example
-			\endcode
-		*/
-		void AddEdges(std::vector<std::vector<EdgeSet>>& edges);
-
 		/// <summary> Retrieve n's child nodes - n is a parent node </summary>
 		/// <param name="n">The parent node from which child nodes will be derived</summary>
 		/// <returns>A container of child nodes that form edges that extend from parent node n</returns>
@@ -1426,27 +1426,15 @@ namespace HF::SpatialStructures {
 			\endcode
 		*/
 		void ClearNodeAttributes(std::string name);
-		/*!
-			\brief Add multiple edges to the Graph.
-			\param edges An array of arrays of edges to be added to the graph ordered by node.
-			\param string cost_name Cost array to add the edges to. 
-
-			\todo Example
-			\code
-			\endcode
-		*/
-		void AddEdges(const std::vector<std::vector<IntEdge>>& edges, const std::string & cost_name);
 
 		/*!
-			\summary TODO summary
-			\param edges
-
-			\todo Example
-			\code
-			\endcode
+			\brief Add multiple edges to the graph.
 		*/
-		void AddEdges(const std::vector<std::vector<EdgeSet>>& edges, const std::string & cost_name);
-
+		void AddEdges(const EdgeSet& edges, const std::string & cost_name = "");
+		
+		/*! \brief Add an array of edges to the graph.*/
+		void AddEdges(const std::vector<EdgeSet>& edges, const std::string& cost_name = "");
+		
 		/*!
 			\brief Get the edges of a specfic cost type
 			\param cost_name The name of the cost to get edges for
