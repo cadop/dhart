@@ -182,10 +182,13 @@ namespace HF::SpatialStructures {
 		}
 	}
 
-	CSRPtrs Graph::GetCSRPointers(const std::string & cost_type)
+	CSRPtrs Graph::GetCSRPointers(const string & cost_type)
 	{
+		const bool default_cost = this->IsDefaultName(cost_type);
+
 		// The graph must be compressed for this to work
-		Compress();
+		if (default_cost)
+			Compress();
 
 		// Construct CSRPtr with the required info from edge_matrix.
 		CSRPtrs out_csr{
@@ -197,6 +200,12 @@ namespace HF::SpatialStructures {
 			edge_matrix.outerIndexPtr(),
 			edge_matrix.innerIndexPtr()
 		};
+
+		if (!default_cost)
+		{
+			EdgeCostSet & cost_set = this->GetCostArray(cost_type);
+			out_csr.data = cost_set.GetPtr();
+		}
 
 		return out_csr;
 	}
