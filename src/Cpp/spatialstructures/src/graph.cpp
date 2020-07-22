@@ -402,16 +402,35 @@ namespace HF::SpatialStructures {
 	{
 		// Get the row of this node
 		const int row = parent_id;
+		const bool default_name = this->IsDefaultName(cost_type);
+
+		std::vector<Edge> out_edges;
 
 		// Iterate through the row of n and add add all values to the output array
-		std::vector<Edge> out_edges;
-		for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, row); it; ++it) {
-			auto value = it.value();
-			auto col = it.col();
+		if (!undirected) {
+			if (default_name) {
+				for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, row); it; ++it) {
+					const auto col = it.col();
+					float value = it.value();
 
-			out_edges.emplace_back(Edge(NodeFromID(col), value));
+					out_edges.emplace_back(Edge(NodeFromID(col), value));
+				}
+			}
+			else {
+				const auto & cost_set = this->GetCostArray(cost_type);
+				std::vector<Edge> out_edges;
+				for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, row); it; ++it) {
+					const auto col = it.col();
+					auto value = GetCostForSet(cost_set, row, col);
+
+					out_edges.emplace_back(Edge(NodeFromID(col), value));
+				}
+				return out_edges;
+			}
 		}
-
+		else if (undirected)
+			throw NotImplemented(); // This function is complicated enough for now. 
+	
 		return out_edges;
 	}
 
