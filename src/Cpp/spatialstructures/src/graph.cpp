@@ -63,6 +63,15 @@ namespace HF::SpatialStructures {
 
 	int Graph::size() const { return ordered_nodes.size(); }
 
+	int Graph::MaxID() const { 
+		int max_id = -1;
+
+		for (const auto& node : ordered_nodes)
+			max_id = std::max(node.id, max_id);
+
+		return max_id;
+	}
+
 	int Graph::getID(const Node& node) const
 	{
 		if (hasKey(node))
@@ -98,8 +107,13 @@ namespace HF::SpatialStructures {
 	{
 		assert(!this->HasCostArray(name));
 
-		// Create a new edge cost set and insert it into the hashmap. Return the edge matrix.
-		edge_cost_maps.insert({ name, EdgeCostSet(this->size()) });
+		// the size of the cost array must be large enough to hold all nonzeros
+		// for this specific CSR
+		const int nnz = edge_matrix.nonZeros();
+
+		// Create a new cost set large enough to hold all non-zeros in the graph
+		// then insert it into the hashmap.
+		edge_cost_maps.insert({ name, EdgeCostSet(nnz) });
 
 		// Get and return it
 		return GetCostArray(name);
@@ -114,13 +128,35 @@ namespace HF::SpatialStructures {
 	{
 		return (name.empty());
 	}
-
+	
 	int Graph::ValueArrayIndex(int parent_id, int child_id) const
 	{
+		// Get the inner and outer index array pointers
 		const auto outer_index_ptr = edge_matrix.outerIndexPtr();
 		const auto inner_index_ptr = edge_matrix.innerIndexPtr();
+	
+		// Now we must search for this value in the CSR.
+		// Get the bounds for our search
+		const int search_start_index = outer_index_ptr[parent_id];
+		const int search_end_index = outer_index_ptr[parent_id + 1];
+		
+		// Get a pointer to the start and end of our search bounds.
+		const int* search_start_ptr = inner_index_ptr + search_start_index;
+		const int* search_end_ptr = inner_index_ptr + search_end_index;
 
-		return inner_index_ptr[outer_index_ptr[parent_id]];
+		// Use an iterator to find a pointer to the value in memory
+		auto itr = std::find(search_start_ptr, search_end_ptr, child_id);
+		
+		// Throw if we the search hit the end of the bounds
+		if (itr == search_end_ptr)
+				throw std::out_of_range("Edge doesn't exist in the value array");
+		
+		// Find the distance between the pointer we found earlier and the
+		// start of the values array
+		else {
+			int index =  std::distance(inner_index_ptr, itr);
+			return index;
+		}
 	}
 
 	void Graph::InsertEdgeIntoCostSet(int parent_id, int child_id, float cost, EdgeCostSet& cost_set) {
@@ -415,8 +451,18 @@ namespace HF::SpatialStructures {
 
 	void Graph::ResizeIfNeeded()
 	{
-		const int num_nodes = size()+1; // You need 1 more column/row than max capacity. 
+		int num_nodes = -1;
 
+		// Find the maximum ID in the graph if using Int Nodes
+		if (using_int_nodes)
+			num_nodes = MaxID();
+		else
+			num_nodes = size();
+
+		// You need one more row/col than capacity
+		num_nodes += 1;
+
+		// If the edge matrix can't fit this many nodes, expand it.
 		if (num_nodes > edge_matrix.rows())
 			edge_matrix.conservativeResize(num_nodes, num_nodes);
 
@@ -484,6 +530,11 @@ namespace HF::SpatialStructures {
 		// nodes to take up space.
 		if (!hasKey(input_int))
 		{
+			// If we're adding a new key that's an integer
+			// ordered_nodes is no longer gauranteed to be
+			// in order and we must tell the graph this.
+			this->using_int_nodes = true;
+
 			// Add an empty node to ordered_nodes
 			ordered_nodes.push_back(Node());
 		
@@ -604,13 +655,23 @@ namespace HF::SpatialStructures {
 		idmap.clear();
 	}
 	
-	void Graph::AddEdges(const vector<vector<EdgeSet>>& edges, const string& cost_name)
+	void Graph::AddEdges(const vector<EdgeSet>& edges, const string& cost_name)
 	{
-		if (this->IsDefaultName(cost_name))
-			throw NotImplemented();
-
-		auto cost_set = GetOrCreateCostType(cost_name);
+		for (const auto& set : edges)
+			AddEdges(set, cost_name);
 	}
+
+	void Graph::AddEdges(const EdgeSet & edges, const string& cost_name) {
+		const auto parent = edges.parent;
+		
+		if (this->IsDefaultName(cost_name))
+			for (const auto& edge : edges.children)
+				this->addEdge(parent, edge.child, edge.weight);
+		else
+			for (const auto& edge : edges.children)
+				this->addEdge(parent, edge.child, edge.weight, cost_name);
+	}
+
 
 	vector<EdgeSet> Graph::GetEdges(const string & cost_name) const
 	{
@@ -643,18 +704,6 @@ namespace HF::SpatialStructures {
 			}
 		}
 		return out_edges;
-	}
-
-	void Graph::AddEdges(const vector<vector<IntEdge>>& edges, const string& cost_name)
-	{
-		throw HF::Exceptions::NotImplemented();
-	}
-
-	void Graph::AddEdges(std::vector<std::vector<IntEdge>>& edges) {
-
-	}
-
-	void Graph::AddEdges(std::vector<std::vector<EdgeSet>>& edges) {
 	}
 
 	std::vector<Node> Graph::GetChildren(const Node& n) const {
