@@ -34,4 +34,6 @@ humanfactorspy.raytracer
     
     IntersectOccluded
     
+    isValidBVH
+    
 
