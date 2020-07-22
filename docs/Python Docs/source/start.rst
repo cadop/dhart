@@ -10,6 +10,7 @@ In this section, a few simple examples are given to ensure the installation is w
 
    examples/raycast.rst
    examples/graph_generator.rst
+   examples/path_planning.rst
    examples/view_analysis.rst
    examples/visibility_graph.rst
 
