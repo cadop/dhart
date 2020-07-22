@@ -728,6 +728,7 @@ namespace HF::SpatialStructures {
 		idmap.clear();
 
 		// Clear all cost arrays
+		// Clear all cost arrays.
 		for (auto& cost_map : edge_cost_maps)
 			cost_map.second.Clear();
 	}
@@ -795,15 +796,15 @@ namespace HF::SpatialStructures {
 		return children;
 	}
 
-	std::vector<Node> Graph::GetChildren(const int parent_id) {
+	std::vector<Node> Graph::GetChildren(const int parent_id) const {
 		return GetChildren(NodeFromID(parent_id));
 	}
 
-	Subgraph Graph::GetSubgraph(Node& parent_node) {
+	Subgraph Graph::GetSubgraph(const Node & parent_node) const {
 		return Subgraph{ parent_node, (*this)[parent_node] };
 	}
 
-	Subgraph Graph::GetSubgraph(int parent_id) {
+	Subgraph Graph::GetSubgraph(int parent_id) const {
 		Node parent_node = ordered_nodes[parent_id];
 		return Subgraph{ parent_node, (*this)[parent_node] };
 	}

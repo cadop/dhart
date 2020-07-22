@@ -1371,7 +1371,7 @@ namespace HF::SpatialStructures {
 				// TODO example
 			\endcode
 		*/
-		std::vector<Node> GetChildren(const int parent_id);
+		std::vector<Node> GetChildren(const int parent_id) const;
 
 		/*!
 			\summary Retrieves a Subgraph using a Node
@@ -1382,7 +1382,7 @@ namespace HF::SpatialStructures {
 				// TODO example
 			\endcode
 		*/
-		Subgraph GetSubgraph(Node& parent_node);
+		Subgraph GetSubgraph(const Node & parent_node) const;
 	
 		/*!
 			\summary	Retrieves a Subgraph using a parent node ID
@@ -1393,7 +1393,7 @@ namespace HF::SpatialStructures {
 				// TODO example
 			\endcode
 		*/
-		Subgraph GetSubgraph(int parent_id);
+		Subgraph GetSubgraph(int parent_id) const;
 
 		/// <summary> Add an attribute to the node at id </summary>
 		/// <param name="id">The ID of the node that will receive attribute</param>
