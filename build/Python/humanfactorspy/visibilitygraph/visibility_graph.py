@@ -5,6 +5,7 @@ from humanfactorspy.spatialstructures import Graph
 
 from . import visibility_graph_native_functions
 
+__all__ = ['VisibilityGraphAllToAll','VisibilityGraphUndirectedAllToAll','VisibilityGraphGroupToGroup']
 
 def VisibilityGraphAllToAll(
     bvh: EmbreeBVH, nodes: List[Tuple[float, float, float]], height: float

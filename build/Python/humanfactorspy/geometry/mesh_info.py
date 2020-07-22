@@ -8,6 +8,7 @@ from typing import *
 Contains the MeshInfo Type.
 """
 
+__all__ = ['Flatten','MeshInfo','ConstructPlane']
 
 def Flatten(list_of_objects: List[Tuple[Any]]) -> List[Any]:
     """ Flatten a list of list of tuples """

@@ -12,4 +12,5 @@ visibility is.
 """
 
 
-from .visibility_graph import VisibilityGraphAllToAll, VisibilityGraphUndirectedAllToAll, VisibilityGraphGroupToGroup
+# from .visibility_graph import VisibilityGraphAllToAll, VisibilityGraphUndirectedAllToAll, VisibilityGraphGroupToGroup
+from .visibility_graph import *

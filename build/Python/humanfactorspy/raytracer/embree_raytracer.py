@@ -6,6 +6,7 @@ from humanfactorspy.raytracer import EmbreeBVH
 import humanfactorspy.raytracer.raytracer_native_functions as raytracer_native_functions
 from humanfactorspy.native_numpy_like import NativeNumpyLike
 
+__all__ = ['ResultStruct','RayResultList','isValidBVH','Intersect','IntersectForPoint','IntersectOccluded']
 
 class ResultStruct(ctypes.Structure):
     """ A struct of results containing distance, and meshid 

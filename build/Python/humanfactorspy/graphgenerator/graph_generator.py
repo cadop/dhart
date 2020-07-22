@@ -1,4 +1,4 @@
-""" 
+""" The graph generator maps accessible locations.
 
 """
 
@@ -9,6 +9,7 @@ from humanfactorspy.spatialstructures import Graph
 from . import graph_generator_native_functions
 from humanfactorspy.raytracer import EmbreeBVH
 
+__all__ = ['GenerateGraph']
 
 def GenerateGraph(
     bvh: EmbreeBVH,

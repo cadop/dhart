@@ -3,6 +3,8 @@ import ctypes
 from . import pathfinder_native_functions
 
 
+__all__ = ['PathMemberStruct','Path']
+
 class PathMemberStruct(ctypes.Structure):
     """ A node in a path. Contains the cost to the next node and an ID """
 

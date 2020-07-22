@@ -3,6 +3,7 @@ from humanfactorspy.geometry import MeshInfo
 from typing import *
 from ctypes import c_void_p
 
+__all__ = ['EmbreeBVH']
 
 class EmbreeBVH(object):
     """ An acceelerated datastructure optimized for high performane ray intersections
@@ -11,6 +12,7 @@ class EmbreeBVH(object):
         A BVH is an accelerated data structure that's used for high performance
         ray intersections. All functions that ustilize the embree ray tracer
         require the mesh first to be converted to this format. 
+
     """
 
     pointer: Union[None, c_void_p] = None  # Pointer to the underlying c-object
@@ -31,6 +33,7 @@ class EmbreeBVH(object):
             >>> BVH = EmbreeBVH(MI)
 
         """
+
         self.pointer = raytracer_native_functions.CreateRayTracer(
             geometry._MeshInfo__internal_ptr
         )

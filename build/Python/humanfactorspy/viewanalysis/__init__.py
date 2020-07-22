@@ -9,5 +9,8 @@ can be drawn about how much visual variety there is from a given viewpoint.
 """
 
 
-from .view_analysis import SphericalViewAnalysis, SphericalViewAnalysisAggregate, AggregationType, SphericallyDistributeRays
-from .view_analysis_scores import ViewAnalysisAggregates, ViewAnalysisDirections
+# from .view_analysis import SphericalViewAnalysis, SphericalViewAnalysisAggregate, AggregationType, SphericallyDistributeRays
+# from .view_analysis_scores import ViewAnalysisAggregates, ViewAnalysisDirections
+
+from .view_analysis import *
+from .view_analysis_scores import *
