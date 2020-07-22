@@ -4,10 +4,7 @@ from typing import *
 
 from humanfactorspy.common_native_functions import getDLLHandle
 
-HFPython: Union[
-    None, CDLL
-] = None  # The C++ DLL that contains all functionality we need
-
+HFPython: Union[None, CDLL] = None  # The C++ DLL that contains all functionality we need
 
 HFPython = getDLLHandle()
 
@@ -20,14 +17,14 @@ def C_SphericalViewAnalysisAggregate(
     height: float,
     agg_type: int,
     upper_fov=50,
-    lower_fov=70,
-) -> Tuple[int, c_void_p, c_void_p]:
+    lower_fov=70) -> Tuple[int, c_void_p, c_void_p]:
     """ Conduct view analysis in C++
 
     Returns:
         int: Size of the vector created
         c_void_p: Pointer to the score vector itself
         c_void_p: Pointer to the data of the pointer
+
     """
 
     score_data_ptr = pointer(c_void_p(0))
@@ -51,27 +48,19 @@ def C_SphericalViewAnalysisAggregate(
     return (vector_size.value, score_vector_ptr, score_data_ptr)
 
 
-def C_SphericalViewAnalysis(
-    bvh: c_void_p,
-    nodes: c_void_p,
-    node_count: int,
-    ray_count: int,
-    height: float,
-    upper_fov=50,
-    lower_fov=70,
-) -> Tuple[c_void_p, c_void_p]:
+def C_SphericalViewAnalysis(bvh: c_void_p, nodes: c_void_p, node_count: int,
+                            ray_count: int, height: float, upper_fov=50, lower_fov=70
+                            ) -> Tuple[c_void_p, c_void_p]:
     """ Perform view analysis and get the result of each raycast individually
 
     This function fires node_count * ray_count rays
 
     Returns:
         c_void_p: Points to a ViewAnalysisResult vector.
-        c_void_p: Points to the vector's underlying data.  The vector is laid out
-            contiguously with shape (node_count, ray_count). Within each element in 
-            this array is a float for distance, and an int for meshid
+        c_void_p: Points to the vector's underlying data. The vector is laid out contiguously with shape (node_count, ray_count). Within each element in this array is a float for distance, and an int for meshid
     Raises:
-        HF.Exceptions.OutOfMemoryException: The number of rays/nodes was too large to
-            fit in a C++ vector
+        HF.Exceptions.OutOfMemoryException: The number of rays/nodes was too large to fit in a C++ vector
+
     """
 
     result_data_ptr = pointer(c_void_p(0))

@@ -89,6 +89,7 @@ or if you have multiple versions:
 then enter:
 
 ``>>> import humanfactorspy``
+
 ``>>> humanfactorspy.get_sample_model()``
 
 You should see the output being a path to your virtual environment folder:

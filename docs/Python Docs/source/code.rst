@@ -2,12 +2,12 @@
 Code Reference
 ==============
 
-Overview
---------
-Modules of the Human Factors package. 
 
 Modules
--------
+=======
+
+Modules of the Human Factors package. 
+
 
 .. currentmodule:: humanfactorspy
 
@@ -23,3 +23,8 @@ Modules
    visibilitygraph
    
 
+Main Module Methods
+-------------------
+
+.. automodule:: humanfactorspy
+   :members:

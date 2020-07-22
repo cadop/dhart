@@ -5,6 +5,7 @@ from . import spatial_structures_native_functions
 from humanfactorspy.native_numpy_like import NativeNumpyLike
 from typing import Tuple
 
+__all__ = ['NodeStruct','NodeList','CreateListOfNodeStructs']
 
 class NodeStruct(ctypes.Structure):
     """ A point in space """
