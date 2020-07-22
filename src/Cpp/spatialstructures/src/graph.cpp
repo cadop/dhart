@@ -216,8 +216,8 @@ namespace HF::SpatialStructures {
 		return ordered_nodes;
 	}
 
-	vector<Edge> Graph::GetUndirectedEdges(const Node & n) const {
-
+	vector<Edge> Graph::GetUndirectedEdges(const Node & n, const std::string & cost_type) const {
+		
 		// Get the ID of n
 		int node_id = getID(n);
 
@@ -227,19 +227,21 @@ namespace HF::SpatialStructures {
 		// Get the directed edges for this node from calling operator[]
 		vector<Edge> out_edges = (*this)[n];
 
-		// Iterate through every other node
-		for (int i = 0; i < size(); i++) {
+		if (this->IsDefaultName(cost_type)) {
+			// Iterate through every other node
+			for (int i = 0; i < size(); i++) {
 
-			// Don't look in this node's edge array
-			if (i == node_id) continue;
+				// Don't look in this node's edge array
+				if (i == node_id) continue;
 
-			// See if this edge
-			if (HasEdge(i, node_id)) {
-				float cost = edge_matrix.coeff(i, node_id);
-				Node child_node = NodeFromID(i);
-				Edge edge(child_node, cost);
+				// See if this edge
+				if (HasEdge(i, node_id)) {
+					float cost = edge_matrix.coeff(i, node_id);
+					Node child_node = NodeFromID(i);
+					Edge edge(child_node, cost);
 
-				out_edges.push_back(edge);
+					out_edges.push_back(edge);
+				}
 			}
 		}
 		return out_edges;
@@ -370,20 +372,7 @@ namespace HF::SpatialStructures {
 
 	const std::vector<Edge> Graph::operator[](const Node& n) const
 	{
-
-		// Get the row of this node
-		const int row = GetIndex(n);
-
-		// Iterate through the row of n and add add all values to the output array
-		std::vector<Edge> out_edges;
-		for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, row); it; ++it) {
-			auto value = it.value();
-			auto col = it.col();
-
-			out_edges.emplace_back(Edge(NodeFromID(col), value));
-		}
-
-		return out_edges;
+		return GetEdgesForNode(this->getID(n));
 	}
 
 	void Graph::InsertOrUpdateEdge(int parent_id, int child_id, float score, const string& cost_type) {
@@ -407,6 +396,23 @@ namespace HF::SpatialStructures {
 			return NAN;
 		else
 			return set[index];
+	}
+
+	vector<Edge> Graph::GetEdgesForNode(int parent_id, bool undirected, const string & cost_type) const
+	{
+		// Get the row of this node
+		const int row = parent_id;
+
+		// Iterate through the row of n and add add all values to the output array
+		std::vector<Edge> out_edges;
+		for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, row); it; ++it) {
+			auto value = it.value();
+			auto col = it.col();
+
+			out_edges.emplace_back(Edge(NodeFromID(col), value));
+		}
+
+		return out_edges;
 	}
 
 	void Graph::addEdge(const Node& parent, const Node& child, float score, const string & cost_type)
@@ -674,7 +680,10 @@ namespace HF::SpatialStructures {
 
 		// Only do this if the graph needs compression.
 		if (needs_compression) {
-		
+
+			// If this has cost arrays then we never should have come here
+			assert(!this->has_cost_arrays); 
+
 			// Note that the matrix must have atleast one extra row/column
 			int array_size = this->size() + 1;
 			

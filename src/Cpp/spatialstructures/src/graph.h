@@ -496,6 +496,9 @@ namespace HF::SpatialStructures {
 		/*! \brief Get a cost for a specific edge in an edgeset*/
 		float GetCostForSet(const EdgeCostSet & set, int parent_id, int child_id) const;
 
+		/*! \brief Get the edges for the given node. */
+		std::vector<Edge> EdgesForNode(int parent_id, bool undirected = false, const std::string & cost_type = "") const;
+
 	public:
 		/*!
 		 \brief Construct a graph from a list of nodes, edges, and distances. 
@@ -765,7 +768,7 @@ namespace HF::SpatialStructures {
 				std::vector<HF::SpatialStructures::Edge> undirected_edges = graph.GetUndirectedEdges(get_nodes[index]);
 			\endcode
 		*/
-		std::vector<Edge> GetUndirectedEdges(const Node & N) const;
+		std::vector<Edge> GetUndirectedEdges(const Node & N, const std::string & cost_type = "") const;
 	
 		/// <summary> Get every in the given graph as IDs. </summary>
 		/// <returns>
