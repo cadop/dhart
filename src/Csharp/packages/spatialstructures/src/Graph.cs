@@ -285,6 +285,71 @@ namespace HumanFactors.SpatialStructures
             NativeMethods.C_DestroyGraph(handle);
             return true;
         }
+        
+        /*!
+            \brief  Add an attribute to the node at id
+            
+            \param  id          The ID of the node that will receive attribute
+            \param  attribute   The attribute that the node at ID will receive
+            \param  score       The weight, or distance that extends from the node at id, as a string
+
+            \code
+                // TODO example
+            \endcode
+         */
+        public void AddNodeAttribute(int id, string attribute, string score)
+        {
+  
+        }
+
+        /*! 
+            \brief  Add attribute to all node in ids, with their respective score in scores
+
+            \param  ids         A container of node IDs to receive attribute
+            \param  attribute   The attribute that each node in ids will receive
+            \param  scores      A container of weights, or distances that extend from each node in ids, as strings
+
+            \code
+                // TODO example
+            \endcode
+        */
+        public void AddNodeAttributes(int[] ids, string attribute, ManagedCharPtrArray scores)
+        {
+
+        }
+
+        /*! 
+            \brief  Get all score by the attribute name, attribute
+
+            \param  attribute   The desired attribute belonging to a set of nodes
+
+            \return A container of attributes, as strings
+
+            \code
+                // TODO example
+            \endcode
+        */
+        public ManagedCharPtrArray GetNodeAttributes(string attribute)
+        {
+            ManagedCharPtrArray result = null;
+
+
+            return result;
+        }
+
+        /*!
+            \brief  Clears attributes by string attribute and all of the scores 
+
+            \param  attribute   The desired attribute to purge from the graph
+
+            \code
+                // TODO example
+            \endcode
+         */
+        public void ClearNodeAttributes(string attribute)
+        {
+
+        }
     }
 
 

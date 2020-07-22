@@ -324,6 +324,28 @@ namespace HumanFactors.Tests.SpatialStructures
                 Assert.Fail("Key wasn't created in the dictionary!");
             }
         }
+        [TestMethod]
+        public void AddNodeAttribute()
+        {
+
+        }
+
+        [TestMethod]
+        public void AddNodeAttributes()
+        {
+
+        }
+
+        [TestMethod]
+        public void GetNodeAttributes()
+        {
+
+        }
+
+        public void ClearNodeAttributes()
+        {
+
+        }
     }
 }
  
