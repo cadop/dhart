@@ -47,6 +47,10 @@ def DijkstraShortestPath(
         If a path cannot be found to connect a start and end point that
         path will be returned as None.
 
+    Raises:
+        humanfactorspy.Exceptions.: Start or End did not exist in 
+            the given graph OR start/end lists did not match in size.
+
     Example:
         Creating a graph, adding edges to it, then generating a path from node 0 to 3.
         
@@ -90,9 +94,7 @@ def DijkstraShortestPath(
         [(10., 1) ( 0., 3)]
         [(10., 1) ( 0., 3)]
 
-    Raises:
-        humanfactorspy.Exceptions.: Start or End did not exist in 
-            the given graph OR start/end lists did not match in size.
+
     """
 
     graph.CompressToCSR()
