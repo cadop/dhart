@@ -726,6 +726,10 @@ namespace HF::SpatialStructures {
 		// Other graph representations should be cleared too
 		ordered_nodes.clear();
 		idmap.clear();
+
+		// Clear all cost arrays
+		for (auto& cost_map : edge_cost_maps)
+			cost_map.second.Clear();
 	}
 	
 	void Graph::AddEdges(const vector<EdgeSet>& edges, const string& cost_name)

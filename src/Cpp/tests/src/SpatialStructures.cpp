@@ -330,7 +330,23 @@ TEST(_Graph, DefaultNameChange) {
 	}
 }
 
+TEST(_Graph, ClearMulti) {
+	const std::string alternate_name = "DefaultTestName";
 
+	Graph g;
+	g.Compress();
+	g.addEdge(0, 1, 100);
+
+	g.addEdge(0, 1, 150, alternate_name);
+	ASSERT_TRUE(g.HasEdge(0, 1, false, alternate_name));
+	
+	g.Clear();
+	ASSERT_FALSE(g.HasEdge(0, 1, false, alternate_name));
+
+	g.addEdge(0, 1, 150);
+	ASSERT_FALSE(g.HasEdge(0, 1, false, alternate_name));
+
+}
 
 TEST(_Graph, AlternateCSR) {
 	
