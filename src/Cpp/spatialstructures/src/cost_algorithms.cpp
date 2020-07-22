@@ -88,7 +88,7 @@ namespace HF::SpatialStructures::CostAlgorithms {
 		
 	}
 
-	std::vector<EdgeSet> CalculateEnergyExpenditure(Subgraph& sg) {
+	EdgeSet CalculateEnergyExpenditure(const Subgraph& sg) {
 		// Energy expenditure data will be stored here and returned from this function.
 		std::vector<EdgeSet> edge_set;
 
@@ -147,18 +147,17 @@ namespace HF::SpatialStructures::CostAlgorithms {
 		}
 		
 		EdgeSet es = { parent_node.id, children };
-		edge_set.push_back(es);
 
-		return edge_set;
+		return es;
 	}
 
-	std::vector<std::vector<EdgeSet>> CalculateEnergyExpenditure(Graph& g) {
+	std::vector<EdgeSet> CalculateEnergyExpenditure(const Graph& g) {
 		// Retrieve all nodes from g so we can obtain subgraphs.
 		std::vector<Node> nodes = g.Nodes();
 
 		// The result container will always be, at most, the node count of g.
 		// We can preallocate this memory so we do not have to resize during the loop below.
-		std::vector<std::vector<EdgeSet>> result(nodes.size());
+		std::vector<EdgeSet> result(nodes.size());
 		auto it_result = result.begin();
 
 		for (Node parent_node : nodes) {
@@ -169,7 +168,7 @@ namespace HF::SpatialStructures::CostAlgorithms {
 
 			// Call CalculateEnergyExpenditure using the returned Subgraph,
 			// get a vector<EdgeSet> back
-			std::vector<EdgeSet> energy_expenditures = CalculateEnergyExpenditure(sg);
+			EdgeSet energy_expenditures = CalculateEnergyExpenditure(sg);
 
 			// Dereference it_result, assign it to the energy_expenditures container,
 			// then advance it_result (std::vector<std::vector<EdgeSet>>::iterator)
@@ -179,7 +178,7 @@ namespace HF::SpatialStructures::CostAlgorithms {
 		return result;
 	}
 
-	std::vector<IntEdge> CalculateCrossSlope(Subgraph& sg) {
+	std::vector<IntEdge> CalculateCrossSlope(const Subgraph& sg) {
 		// All cross slope data for Subgraph sg will be stored here 
 		// and returned from this function.
 		std::vector<IntEdge> result;
@@ -273,7 +272,7 @@ namespace HF::SpatialStructures::CostAlgorithms {
 		return result;
 	}
 
-	std::vector<std::vector<IntEdge>> CalculateCrossSlope(Graph& g) {
+	std::vector<std::vector<IntEdge>> CalculateCrossSlope(const Graph& g) {
 		// Retrieve all nodes from g so we can obtain subgraphs.
 		std::vector<Node> nodes = g.Nodes();
 
