@@ -127,6 +127,7 @@ TEST(_boostGraph, ConstructorCostName) {
 	using HF::Pathfinding::BoostGraph;
 	using HF::SpatialStructures::CostAlgorithms::CalculateEnergyExpenditure;
 
+
 	// Create the nodes
 	Node node_0(1.0f, 1.0f, 2.0f);
 	Node node_1(2.0f, 3.0f, 4.0f, 5);
@@ -146,7 +147,7 @@ TEST(_boostGraph, ConstructorCostName) {
 
 	// Retrieve a Subgraph, parent node ID 0 -- of alternate edge costs.
 	// Add these alternate edges to graph.
-	const auto desired_cost_type = "cross slope";
+	std::string desired_cost_type = "cross slope";
 	auto edge_set = CalculateEnergyExpenditure(graph.GetSubgraph(0));
 	graph.AddEdges(edge_set, desired_cost_type);
 
@@ -276,34 +277,39 @@ TEST(_pathFinding, CreateBoostGraph) {
 }
 
 TEST(_pathFinding, CreateBoostGraphCostName) {
-	// be sure to #include "path_finder.h", #include "boost_graph.h",
-	// #include "node.h", and #include "graph.h"
+	// be sure to #include "boost_graph.h", #include "node.h", #include "graph.h", and #include <vector>
 
-	// For this example, we must have a BoostGraph instance to use with BoostGraphDeleter.
-	// In order to create a BoostGraph, we must first create a Graph instance first.
-	// We must prepare the nodes, their edges, and the weights (distances) of each edge.
+	// for brevity
+	using HF::SpatialStructures::Node;
+	using HF::SpatialStructures::Graph;
+	using HF::Pathfinding::BoostGraph;
+	using HF::SpatialStructures::CostAlgorithms::CalculateEnergyExpenditure;
+
 
 	// Create the nodes
-	HF::SpatialStructures::Node node_0(1.0f, 1.0f, 2.0f);
-	HF::SpatialStructures::Node node_1(2.0f, 3.0f, 4.0f, 5);
-	HF::SpatialStructures::Node node_2(11.0f, 22.0f, 140.0f);
+	Node node_0(1.0f, 1.0f, 2.0f);
+	Node node_1(2.0f, 3.0f, 4.0f, 5);
+	Node node_2(11.0f, 22.0f, 140.0f);
 
-	// Create a container (vector) of nodes
-	std::vector<HF::SpatialStructures::Node> nodes = { node_0, node_1, node_2 };
+	// Create a graph. No nodes/edges for now.
+	Graph graph;
 
-	// Create matrices for edges and distances, edges.size() == distances().size()
-	std::vector<std::vector<int>> edges = { { 1, 2 }, { 2 }, { 1 } };
-	std::vector<std::vector<float>> distances = { { 1.0f, 2.5f }, { 54.0f }, { 39.0f } };
+	// Add edges. These will have the default edge values, forming the default graph.
+	graph.addEdge(node_0, node_1, 1);
+	graph.addEdge(node_0, node_2, 2.5);
+	graph.addEdge(node_1, node_2, 54.0);
+	graph.addEdge(node_2, node_1, 39.0);
 
-	// Now you can create a Graph - note that nodes, edges, and distances are passed by reference
-	HF::SpatialStructures::Graph graph(edges, distances, nodes);
+	// Always compress the graph after adding edges!
+	graph.Compress();
 
-	// Now we can create a smart pointer to a BoostGraph
-	// Note the type of boostGraph - it is a
-	//		std::unique_ptr<HF::Pathfinding::BoostGraph, HF::Pathfinding::BoostGraphDeleter>.
-	// Use the auto keyword for type inference, or your choice of using statements/typedef to make
-	// the use of the type described above easier.
-	std::string desired_cost_type = "cross_slope";
+	// Retrieve a Subgraph, parent node ID 0 -- of alternate edge costs.
+	// Add these alternate edges to graph.
+	std::string desired_cost_type = "cross slope";
+	auto edge_set = CalculateEnergyExpenditure(graph.GetSubgraph(0));
+	graph.AddEdges(edge_set, desired_cost_type);
+
+	// Creating a BoostGraph smart pointer (std::unique_ptr<BoostGraph, BoostGraphDeleter>)
 	auto boostGraph = HF::Pathfinding::CreateBoostGraph(graph, desired_cost_type);
 }
 
