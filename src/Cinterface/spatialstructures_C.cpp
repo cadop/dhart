@@ -14,6 +14,12 @@ using HF::SpatialStructures::Edge;
 using namespace HF::Exceptions;
 using std::vector;
 
+C_INTERFACE ExampleFloat(float* out_float)
+{
+	*out_float = 3.14151;
+	return OK;
+}
+
 C_INTERFACE  GetAllNodesFromGraph(const Graph* graph, vector<Node>** out_vector_ptr, Node** out_data_ptr)
 {
 	if (!graph)

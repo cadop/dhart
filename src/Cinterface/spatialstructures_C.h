@@ -14,6 +14,8 @@ namespace HF {
 	}				 // defined these as classes (V) instead of structs (U)
 }
 
+C_INTERFACE ExampleFloat(float* out_float);
+
 /**
 * @defgroup SpatialStructures
 * Contains the Graph and Node datatypes.
