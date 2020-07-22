@@ -137,20 +137,6 @@ namespace HumanFactors.SpatialStructures
 
         internal static void C_CalculateAndStoreEnergyExpenditure(IntPtr graph) => CalculateAndStoreEnergyExpenditure(graph);
 
-        internal static float C_FloatFromC()
-        {
-            float float_to_modify = 0.0f;
-
-            HF_STATUS result = ExampleFloat(ref float_to_modify);
-
-            if (result != HF_STATUS.OK)
-            {
-                throw new Exception();
-            }
-
-            return float_to_modify;
-        }
-
         [DllImport(NativeConstants.DLLPath)]
         private static extern HF_STATUS GetNodes(
             IntPtr graph,
@@ -241,9 +227,5 @@ namespace HumanFactors.SpatialStructures
 
         [DllImport(NativeConstants.DLLPath)]
         private static extern HF_STATUS CalculateAndStoreEnergyExpenditure(IntPtr graph_pointer);
-
-        [DllImport(NativeConstants.DLLPath)]
-        private static extern HF_STATUS ExampleFloat(ref float out_float);
-        
     }
 }

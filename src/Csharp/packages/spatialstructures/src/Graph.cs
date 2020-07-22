@@ -174,12 +174,6 @@ namespace HumanFactors.SpatialStructures
 
     public static class CostAlgorithms
     {
-        public static float FloatFromC()
-        {
-            return NativeMethods.C_FloatFromC();
-        }
-
-
         /*!
             \brief  Calculates and stores cross slope for all subgraphs in g
             \param  g   The operand Graph
@@ -218,7 +212,6 @@ namespace HumanFactors.SpatialStructures
         {
             NativeMethods.C_CalculateAndStoreCrossSlope(g.Pointer);
         }
-
 
         /*!
             \brief  Calculates and stores energy expenditure for all subgraphs in g
