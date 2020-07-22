@@ -306,7 +306,7 @@ C_INTERFACE CalculateAndStoreCrossSlope(HF::SpatialStructures::Graph* g) {
 	// The result container will be ordered by parent id.
 
 	// TODO: implement void Graph::AddEdges(std::vector<std::vector<IntEdge>>& edges);
-	g->AddEdges(result);
+	//g->AddEdges(result);
 
 	return OK;
 }
