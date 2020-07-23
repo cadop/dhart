@@ -299,7 +299,7 @@ namespace HumanFactors.SpatialStructures
          */
         public void AddNodeAttribute(int id, string attribute, string score)
         {
-  
+            
         }
 
         /*! 
@@ -313,7 +313,7 @@ namespace HumanFactors.SpatialStructures
                 // TODO example
             \endcode
         */
-        public void AddNodeAttributes(int[] ids, string attribute, ManagedCharPtrArray scores)
+        public void AddNodeAttributes(int[] ids, string attribute, string[] scores)
         {
 
         }
@@ -329,10 +329,11 @@ namespace HumanFactors.SpatialStructures
                 // TODO example
             \endcode
         */
-        public ManagedCharPtrArray GetNodeAttributes(string attribute)
+        public string[] GetNodeAttributes(string attribute)
         {
-            ManagedCharPtrArray result = null;
-
+            const int temp = 16;
+            string[] result = new string[temp];
+            // Just temporary
 
             return result;
         }
