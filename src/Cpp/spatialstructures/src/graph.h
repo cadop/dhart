@@ -502,6 +502,9 @@ namespace HF::SpatialStructures {
 		/*! \brief Get the edges for the given node. */
 		std::vector<Edge> GetEdgesForNode(int parent_id, bool undirected = false, const std::string & cost_type = "") const;
 
+		/*! \brief Construct a temp matrix for the specific cost type. */
+		TempMatrix MapCostMatrix(const std::string& cost_type) const;
+
 	public:
 		/*!
 		 \brief Construct a graph from a list of nodes, edges, and distances. 

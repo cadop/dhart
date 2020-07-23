@@ -53,6 +53,23 @@ namespace GraphTests {
         ASSERT_EQ(g[N2].size(), 0);
     }
 
+	TEST(_Graph, GetUndirectedEdgesMulti) {
+		HF::SpatialStructures::Graph g;
+
+		HF::SpatialStructures::Node N1(39, 39, 39);
+		HF::SpatialStructures::Node N2(54, 54, 54);
+
+		g.addEdge(N1, N2, 100);
+		g.Compress();
+		g.addEdge(N1, N2, 200, "AltCost");
+
+		// Assert that getting it for this cost gets the proper values
+		const auto undirected_edges = g.GetUndirectedEdges(N2, "AltCost");
+		ASSERT_EQ(undirected_edges[0].score, 200);
+		ASSERT_EQ(undirected_edges[0].child, N1);
+	}
+
+
     TEST(_Graph, HasEdgeTrue) {
         HF::SpatialStructures::Graph g;
 

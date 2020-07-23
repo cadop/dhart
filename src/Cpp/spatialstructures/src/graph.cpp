@@ -22,46 +22,46 @@ using namespace HF::Exceptions;
 
 namespace HF::SpatialStructures {
 
-		/*! \brief Constructs a mapped CSR that's identical to `g`, with the values arrays of `ca`. */
-		inline TempMatrix CreateMappedCSR(const EdgeMatrix& g, const EdgeCostSet & ca ) {
-			
-			const Map<const SparseMatrix<float, 1>> m(
-				static_cast<int>(g.rows()),
-				static_cast<int>(g.cols()),
-				static_cast<int>(g.nonZeros()),
-				static_cast<const int*>(g.outerIndexPtr()),
-				static_cast<const int*>(g.innerIndexPtr()),
-				//static_cast<const float*>(g.valuePtr()),
-				static_cast<const float*>(ca.GetPtr()),
-				static_cast<const int*>(g.innerNonZeroPtr())
-			);
+	/*! \brief Constructs a mapped CSR that's identical to `g`, with the values arrays of `ca`. */
+	inline TempMatrix CreateMappedCSR(const EdgeMatrix& g, const EdgeCostSet& ca) {
 
-			return m;
-		}
+		const Map<const SparseMatrix<float, 1>> m(
+			static_cast<int>(g.rows()),
+			static_cast<int>(g.cols()),
+			static_cast<int>(g.nonZeros()),
+			static_cast<const int*>(g.outerIndexPtr()),
+			static_cast<const int*>(g.innerIndexPtr()),
+			//static_cast<const float*>(g.valuePtr()),
+			static_cast<const float*>(ca.GetPtr()),
+			static_cast<const int*>(g.innerNonZeroPtr())
+		);
 
-		/*!
-		\summary Determines if a std::string is a floating-point value, i.e. '3.1415', '2.718', or is not -- i.e. '192.168.1.1', 'a_string'
-		\param value The std::string to assess, as to whether it is a floating-point value or not
-		\returns True, if value is determined to be a floating-point number, false otherwise
+		return m;
+	}
 
-		\remarks A 'floating-point type', as defined by this function,
-				 begins with zero or more integers in succession (but no alphas/symbols), then a decimal point ('.'),
-				 followed by one or more integers in succession (absolutely no alphas/symbols).
-				 Any input value that does not adhere to this specification will be denoted as a string type.
+	/*!
+	\summary Determines if a std::string is a floating-point value, i.e. '3.1415', '2.718', or is not -- i.e. '192.168.1.1', 'a_string'
+	\param value The std::string to assess, as to whether it is a floating-point value or not
+	\returns True, if value is determined to be a floating-point number, false otherwise
 
-		\code
+	\remarks A 'floating-point type', as defined by this function,
+			 begins with zero or more integers in succession (but no alphas/symbols), then a decimal point ('.'),
+			 followed by one or more integers in succession (absolutely no alphas/symbols).
+			 Any input value that does not adhere to this specification will be denoted as a string type.
 
-			std::string str_0 = "3.1415";
-			std::string str_1 = ".1415";
-			std::string str_2 = "192.168.1.1";
-			std::string str_3 = "pthread.h";
+	\code
 
-			bool result_0 = is_floating_type(str_0);	// true
-			bool result_1 = is_floating_type(str_1);	// true
-			bool result_2 = is_floating_type(str_2);	// false
-			bool result_3 = is_floating_type(str_3);	// false
-		\endcode
-	*/
+		std::string str_0 = "3.1415";
+		std::string str_1 = ".1415";
+		std::string str_2 = "192.168.1.1";
+		std::string str_3 = "pthread.h";
+
+		bool result_0 = is_floating_type(str_0);	// true
+		bool result_1 = is_floating_type(str_1);	// true
+		bool result_2 = is_floating_type(str_2);	// false
+		bool result_3 = is_floating_type(str_3);	// false
+	\endcode
+*/
 	bool is_floating_type(std::string value);
 
 	inline bool is_floating_type(std::string value) {
@@ -81,7 +81,7 @@ namespace HF::SpatialStructures {
 
 	int Graph::size() const { return ordered_nodes.size(); }
 
-	int Graph::MaxID() const { 
+	int Graph::MaxID() const {
 		int max_id = -1;
 
 		for (const auto& node : ordered_nodes)
@@ -102,7 +102,7 @@ namespace HF::SpatialStructures {
 		throw HF::Exceptions::NotImplemented();
 	}
 
-	EdgeCostSet & Graph::GetCostArray(const string & key) 
+	EdgeCostSet& Graph::GetCostArray(const string& key)
 	{
 		return (edge_cost_maps.at(key));
 	}
@@ -111,17 +111,17 @@ namespace HF::SpatialStructures {
 		return (edge_cost_maps.count(key) > 0);
 	}
 
-	EdgeCostSet & Graph::GetOrCreateCostType(const std::string& name)
+	EdgeCostSet& Graph::GetOrCreateCostType(const std::string& name)
 	{
 		assert(!this->IsDefaultName(name));
 
-		if(this->HasCostArray(name))
+		if (this->HasCostArray(name))
 			return this->GetCostArray(name);
 		else
 			return this->CreateCostArray(name);
 	}
 
-	EdgeCostSet & Graph::CreateCostArray(const std::string & name)
+	EdgeCostSet& Graph::CreateCostArray(const std::string& name)
 	{
 		assert(!this->HasCostArray(name));
 
@@ -142,36 +142,36 @@ namespace HF::SpatialStructures {
 		return (edge_cost_maps.at(key));
 	}
 
-	bool Graph::IsDefaultName(const string & name) const
+	bool Graph::IsDefaultName(const string& name) const
 	{
 		return (name.empty() || (name == this->default_cost));
 	}
-	
+
 	int Graph::ValueArrayIndex(int parent_id, int child_id) const
 	{
 		// Get the inner and outer index array pointers
 		const auto outer_index_ptr = edge_matrix.outerIndexPtr();
 		const auto inner_index_ptr = edge_matrix.innerIndexPtr();
-	
+
 		// Now we must search for this value in the CSR.
 		// Get the bounds for our search
 		const int search_start_index = outer_index_ptr[parent_id];
 		const int search_end_index = outer_index_ptr[parent_id + 1];
-		
+
 		// Get a pointer to the start and end of our search bounds.
 		const int* search_start_ptr = inner_index_ptr + search_start_index;
 		const int* search_end_ptr = inner_index_ptr + search_end_index;
 
 		// Use an iterator to find a pointer to the value in memory
 		auto itr = std::find(search_start_ptr, search_end_ptr, child_id);
-		
+
 		// Throw if we the search hit the end of the bounds
 		if (itr == search_end_ptr)
 			return -1;
 		// Find the distance between the pointer we found earlier and the
 		// start of the values array
 		else {
-			int index =  std::distance(inner_index_ptr, itr);
+			int index = std::distance(inner_index_ptr, itr);
 			return index;
 		}
 	}
@@ -181,26 +181,26 @@ namespace HF::SpatialStructures {
 
 		if (value_index < 0)
 			throw std::out_of_range("Tried to insert into edge that doesn't exist in default graph. ");
-	
+
 		cost_set[value_index] = cost;
 	}
 
 	void Graph::InsertEdgesIntoCostSet(EdgeCostSet& cost_set, const std::vector<EdgeSet>& es)
 	{
-		for (const auto & edge_set : es)
+		for (const auto& edge_set : es)
 		{
 			const int parent_id = edge_set.parent;
 			for (const auto& edge : edge_set.children) {
-				
+
 				const int child_id = edge.child;
 				const int cost = edge.weight;
-				
+
 				InsertEdgeIntoCostSet(parent_id, child_id, cost, cost_set);
 			}
 		}
 	}
 
-	CSRPtrs Graph::GetCSRPointers(const string & cost_type)
+	CSRPtrs Graph::GetCSRPointers(const string& cost_type)
 	{
 		const bool default_cost = this->IsDefaultName(cost_type);
 
@@ -221,48 +221,49 @@ namespace HF::SpatialStructures {
 
 		if (!default_cost)
 		{
-			EdgeCostSet & cost_set = this->GetCostArray(cost_type);
+			EdgeCostSet& cost_set = this->GetCostArray(cost_type);
 			out_csr.data = cost_set.GetPtr();
 		}
 
 		return out_csr;
 	}
 
-	Node Graph::NodeFromID(int id) const { return ordered_nodes.at(id);}
+	Node Graph::NodeFromID(int id) const { return ordered_nodes.at(id); }
 
 	std::vector<Node> Graph::Nodes() const {
 		return ordered_nodes;
 	}
 
-	vector<Edge> Graph::GetUndirectedEdges(const Node & n, const std::string & cost_type) const {
-		
-		// Get the ID of n
-		int node_id = getID(n);
+	template<typename csr>
+	inline vector<Edge> IMPL_UndirectedEdges(const csr& edge_matrix, const int parent_id, const Graph * g) {
 
 		// If N is not in the graph, return an empty array.
+		const int node_id = parent_id;
 		if (node_id < 0) return vector<Edge>();
 
 		// Get the directed edges for this node from calling operator[]
-		vector<Edge> out_edges = (*this)[n];
+		vector<Edge> out_edges;
 
-		if (this->IsDefaultName(cost_type)) {
-			// Iterate through every other node
-			for (int i = 0; i < size(); i++) {
+		// Iterate through every other node
+		for (int i = 0; i < edge_matrix.rows(); i++) {
 
-				// Don't look in this node's edge array
-				if (i == node_id) continue;
+			// Don't look in this node's edge array
+			if (i == node_id) continue;
 
-				// See if this edge
-				if (HasEdge(i, node_id)) {
-					float cost = edge_matrix.coeff(i, node_id);
-					Node child_node = NodeFromID(i);
-					Edge edge(child_node, cost);
+			// See if this edge
+			if (edge_matrix.coeff(i, node_id) != 0) {
+				float cost = edge_matrix.coeff(i, node_id);
+				Node child_node = g->NodeFromID(i);
+				Edge edge{ child_node, cost };
 
-					out_edges.push_back(edge);
-				}
+				out_edges.push_back(edge);
 			}
 		}
 		return out_edges;
+	}
+
+	vector<Edge> Graph::GetUndirectedEdges(const Node& n, const std::string& cost_type) const {
+		return this->GetEdgesForNode(getID(n),  true, cost_type);
 	}
 
 	std::vector<EdgeSet> Graph::GetEdges() const
@@ -443,34 +444,60 @@ namespace HF::SpatialStructures {
 		const int row = parent_id;
 		const bool default_name = this->IsDefaultName(cost_type);
 
-		std::vector<Edge> out_edges;
+		std::vector<Edge> outgoing_edges;
 
-		// Iterate through the row of n and add add all values to the output array
-		if (!undirected) {
-			if (default_name) {
-				for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, row); it; ++it) {
-					const auto col = it.col();
-					float value = it.value();
+		// Get all of the outgoing edges by iterating through the array if it's the default
+		if (default_name) {
+			for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, row); it; ++it) {
+				const auto col = it.col();
+				float value = it.value();
 
-					out_edges.emplace_back(Edge(NodeFromID(col), value));
-				}
-			}
-			else {
-				const auto & cost_set = this->GetCostArray(cost_type);
-				std::vector<Edge> out_edges;
-				for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, row); it; ++it) {
-					const auto col = it.col();
-					auto value = GetCostForSet(cost_set, row, col);
-
-					out_edges.emplace_back(Edge(NodeFromID(col), value));
-				}
-				return out_edges;
+				outgoing_edges.emplace_back(Edge(NodeFromID(col), value));
 			}
 		}
-		else if (undirected)
-			throw NotImplemented(); // This function is complicated enough for now. 
+		// If using a custom cost, use our own indexing function instead of getting the value from the iterator
+		else {
+			const auto & cost_set = this->GetCostArray(cost_type);
+			std::vector<Edge> out_edges;
+			for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, row); it; ++it) {
+				const auto col = it.col();
+				auto value = GetCostForSet(cost_set, row, col);
+
+				outgoing_edges.emplace_back(Edge(NodeFromID(col), value));
+			}
+		}
 	
-		return out_edges;
+		// If this is undirected, we'll need to get a list of incoming edges as well.
+		if (undirected) {
+			vector<Edge> incoming_edges;
+			
+			// Default name uses the default edge_matrix member
+			if (default_name)
+				incoming_edges = IMPL_UndirectedEdges(this->edge_matrix, parent_id, this);
+		
+			// If we're using a custom type, map a CSR to it and use that instead
+			else 
+				incoming_edges = IMPL_UndirectedEdges(this->MapCostMatrix(cost_type), parent_id, this);
+
+			// Combine the incoming and outgoing edges
+			vector<Edge> incoming_and_outgoing(incoming_edges.size() + outgoing_edges.size());
+
+			// Move the contents of outgoing and incoming into this output array, then return it
+			std::move(outgoing_edges.begin(), outgoing_edges.end(), incoming_and_outgoing.begin());
+			std::move(incoming_edges.begin(), incoming_edges.end(), incoming_and_outgoing.begin() + outgoing_edges.size());
+			
+			return incoming_and_outgoing;
+		}
+		else 
+			return outgoing_edges;
+
+	}
+
+	TempMatrix Graph::MapCostMatrix(const std::string& cost_type) const
+	{
+		const EdgeCostSet& cost_array = this->GetCostArray(cost_type);
+		const TempMatrix cost_matrix = CreateMappedCSR(this->edge_matrix, cost_array);
+		return cost_matrix;
 	}
 
 	void Graph::addEdge(const Node& parent, const Node& child, float score, const string & cost_type)
