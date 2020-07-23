@@ -1448,6 +1448,15 @@ namespace HF::SpatialStructures {
 		*/
 		int size() const;
 
+		/*! 
+			\brief Calculate the maximum ID of any node in the graph.
+			
+			\returns The maximum ID of any node ing the graph.
+
+			\note This shouldn't be needed often, as unless this graph has integer edges,
+			nodes will always be stored in order. 
+		
+		*/
 		int MaxID() const;
 
 		/// <summary>

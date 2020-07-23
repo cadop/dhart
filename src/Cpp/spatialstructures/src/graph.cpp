@@ -22,7 +22,14 @@ using namespace HF::Exceptions;
 
 namespace HF::SpatialStructures {
 
-	/*! \brief Constructs a mapped CSR that's identical to `g`, with the values arrays of `ca`. */
+	/*! \brief Constructs a mapped CSR that's identical to `g`, with the values arrays of `ca`.
+		
+		\param g Edge matrix to map to
+		\param ca EdgeCostSet to use the value arrays of
+
+		\returns a TempMatrix mapped to the inner and outer indices of `g`, and the values array of `ca`
+	
+	*/
 	inline TempMatrix CreateMappedCSR(const EdgeMatrix& g, const EdgeCostSet& ca) {
 
 		const Map<const SparseMatrix<float, 1>> m(
@@ -92,8 +99,13 @@ namespace HF::SpatialStructures {
 
 	int Graph::getID(const Node& node) const
 	{
+		// First check if we have this node
 		if (hasKey(node))
+
+			// If so, return its id
 			return idmap.at(node);
+
+		// If not, return -1
 		else
 			return -1;
 	}
@@ -261,6 +273,23 @@ namespace HF::SpatialStructures {
 		return ordered_nodes;
 	}
 
+	/*!
+		\brief Retrieve the outgoing edges of a node. 
+
+
+		\tparam csr A CSR that can be accessed by Eigen. 
+		\param edge_matrix EdgeMatrix to use for the costs of each edge
+		\param parent_id ID of the node to get incoming edges of
+		\param g Graph containing edge_matrix. Used to get the Nodes of children ids.
+
+		\returns An array of all edges going to parent_id with the cost used in cost_type. 
+
+		\par Time Complexity O(n)
+		Checks every other node for an edge to n.
+
+		\remarks
+		This can be slow since it needs to check if every other node in the graph has an edge to parent_id.
+	*/
 	template<typename csr>
 	inline vector<Edge> IMPL_UndirectedEdges(const csr& edge_matrix, const int parent_id, const Graph * g) {
 
@@ -277,12 +306,17 @@ namespace HF::SpatialStructures {
 			// Don't look in this node's edge array
 			if (i == node_id) continue;
 
-			// See if this edge
+			// See if there's an edge between I and node_id
 			if (edge_matrix.coeff(i, node_id) != 0) {
-				float cost = edge_matrix.coeff(i, node_id);
-				Node child_node = g->NodeFromID(i);
-				Edge edge{ child_node, cost };
 
+				// if so, get its cost
+				float cost = edge_matrix.coeff(i, node_id);
+				
+				// Get the node belonging to the child's id
+				Node child_node = g->NodeFromID(i);
+
+				// Construct a new edge and push it back into ot_edges
+				Edge edge{ child_node, cost };
 				out_edges.push_back(edge);
 			}
 		}
@@ -290,6 +324,7 @@ namespace HF::SpatialStructures {
 	}
 
 	vector<Edge> Graph::GetUndirectedEdges(const Node& n, const std::string& cost_type) const {
+		// call GetEdgesForNode, since it already handles this. 
 		return this->GetEdgesForNode(getID(n),  true, cost_type);
 	}
 
@@ -364,6 +399,28 @@ namespace HF::SpatialStructures {
 		assert((out_total == 0 || isnormal(out_total)));
 		return;
 	}
+
+	/*!
+		\brief  Summarize the costs of every outgoing edge for every node in the graph.
+	
+		\tparam csr A Valid Eigen CSR matrix. 
+		\param agg_type Type of aggregation to use.
+		\param num_nodes the number of nodes in the graph.
+		\param directed If true, include both incoming and outgoing edges for calculating a node's score.
+		\param csr_matrix the CSR matrix to use for the costs of every edge in the graph
+
+		\returns An ordered list of scores for agg_type on each node in the graph.
+
+		\remarks Useful for getting scores from the VisibilityGraph.
+
+		\par Time Complexity
+		If undirected: `O(k)` where k is the total number of edges in the graph.\n
+		If directed: `O(n)` where n is the total number of nodes in the graph.
+
+		\see COST_AGGREGATE to see a list of supported aggregation types.
+		\code
+			// be sure to #include "graph.h"
+	*/
 
 	template<typename csr>
 	std::vector<float> Impl_AggregateGraph(COST_AGGREGATE agg_type, int num_nodes, bool directed, const csr & edge_matrix) {
