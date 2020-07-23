@@ -1456,5 +1456,8 @@ namespace HF::SpatialStructures {
 			\exception HF::Exceptions::NoCost The cost at `cost_name` didn't exist in the graph
 		*/
 		std::vector<EdgeSet> GetEdges(const std::string & cost_name) const;
+
+		/*! \brief Return a list of all cost types used by the graph*/
+		std::vector<std::string> GetCostTypes() const;
 	};
 }

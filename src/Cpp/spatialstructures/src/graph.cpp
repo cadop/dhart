@@ -823,6 +823,18 @@ namespace HF::SpatialStructures {
 		return out_edges;
 	}
 
+	vector<std::string> Graph::GetCostTypes() const
+	{
+		vector<string> cost_types;
+		
+		// Iterate through the dictionary, adding the key of each
+		// cost type into the output array
+		for (const auto & it : this->edge_cost_maps)
+			cost_types.push_back(it.first);
+
+		return cost_types;
+	}
+
 	std::vector<Node> Graph::GetChildren(const Node& n) const {
 		std::vector<Node> children;
 

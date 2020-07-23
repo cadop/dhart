@@ -116,6 +116,37 @@ namespace GraphTests {
 		ASSERT_EQ(g.AggregateGraph(COST_AGGREGATE::SUM, true, "TestCost")[0], 39);
 		ASSERT_EQ(g.AggregateGraph(COST_AGGREGATE::SUM, true, "TestCost")[1], 0);
 	}
+
+	TEST(_Graph, GetCostTypes) {
+		// Create the graph in some nodes
+		Graph g;
+		Node N1(39, 39, 39);
+		Node N2(54, 54, 54);
+
+		// Add an edge to the graph
+		g.Compress();
+		g.addEdge(N1, N2, 30);
+		
+		// First assert that this can be called before costs have been added
+		auto costs_before_added = g.GetCostTypes();
+		ASSERT_EQ(costs_before_added.size(), 0);
+		
+		// Then add an edge with an alternate cost type to effectively create this new cost
+		g.addEdge(N1, N2, 39, "TestCost");
+		
+		// Get cost types from the graph
+		const auto costs = g.GetCostTypes();
+
+		// Check that the size of the returned costtypes is what we think it should be
+		ASSERT_EQ(costs.size(), 1);
+
+		// See if we can find the cost in the set of returned cost types.
+		ASSERT_TRUE(std::find(costs.begin(), costs.end(), "TestCost") != costs.end());
+		
+		// See that we don't find a cost that doesn't exist
+		ASSERT_TRUE(std::find(costs.begin(), costs.end(), "CostThatDoesn'tExist") == costs.end());
+	}
+
     TEST(_Graph, SizeEqualsNumberOfNodes) {
         HF::SpatialStructures::Graph g;
 
