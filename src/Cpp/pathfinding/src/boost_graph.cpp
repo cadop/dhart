@@ -19,19 +19,19 @@ using std::vector;
 namespace HF::Pathfinding {
 
 
-	BoostGraph::BoostGraph(const HF::SpatialStructures::Graph& graphg)
+	BoostGraph::BoostGraph(const HF::SpatialStructures::Graph& graph)
 	{
 
 		// Allocate a vector of integers with an element for every node in
 		// nodes.
-		int num_nodes = graphg.size();
+		int num_nodes = graph.size();
 		vector<int> nodes(num_nodes);
 
 		std::vector<pair> edges;
 		std::vector<Edge_Cost> weights;
 
 		// Iterate through every edgeset in the graph
-		auto edge_sets = graphg.GetEdges();
+		auto edge_sets = graph.GetEdges();
 
 		for (const auto& edgeset : edge_sets) {
 			const int parent_id = edgeset.parent;
@@ -49,7 +49,7 @@ namespace HF::Pathfinding {
 		}
 
 		// Calculate the maximum id held by the graph.
-		unsigned int max_node = graphg.MaxID() + 1;
+		unsigned int max_node = graph.MaxID() + 1;
 
 		// Create the boost graph from the two input arrays
 		g = graph_t(boost::edges_are_unsorted, edges.begin(), edges.end(), weights.begin(), max_node);
@@ -61,27 +61,40 @@ namespace HF::Pathfinding {
 		d.resize(n);
 	}
 
-	BoostGraph::BoostGraph(const HF::SpatialStructures::Graph& graphg, const std::string cost_name)
+	BoostGraph::BoostGraph(const HF::SpatialStructures::Graph& graph, const std::string cost_name)
 	{
-		///
-		/// Nearly the same implementation as that of the other constructor
-		///
+		
+		/*
+			This constructor shares a similar implementation to
+				BoostGraph::BoostGraph(const HF::SpatialStructures::Graph& graph)
+			(constructor with no cost_name parameter),
+
+			with the only difference at line 97:
+				auto edge_sets = graph.GetEdges(cost_name);
+
+			We call an overload of Graph::GetEdges here, which accepts const string& cost_name.
+			The constructor with no cost_name parameter has the corresponding line:
+				auto edge_sets = graph.GetEdges();
+
+			The vector<EdgeSet> that will be retrieved is dependent on the cost_name string provided.
+		*/
 
 		// Allocate a vector of integers with an element for every node in
 		// nodes.
-		int num_nodes = graphg.size();
+		int num_nodes = graph.size();
 		vector<int> nodes(num_nodes);
 
 		std::vector<pair> edges;
 		std::vector<Edge_Cost> weights;
 
-		/// Iterate through every edgeset in the graph with cost type cost_name
-		///
-		/// The planned implementation for 
-		///     Graph::GetEdges(string cost_name) 
-		/// will throw std::out_of_range
-		/// if cost_name is not a valid cost name in graphg.
-		auto edge_sets = graphg.GetEdges(cost_name);
+		/*
+			Iterate through every edgeset in the graph with cost type cost_name.
+			Note the following:
+			    Graph::GetEdges(const string& cost_name) 
+			will throw std::out_of_range
+			if cost_name is not a valid cost name in graphg.
+		*/
+		auto edge_sets = graph.GetEdges(cost_name);
 
 		for (const auto& edgeset : edge_sets) {
 			const int parent_id = edgeset.parent;
@@ -99,7 +112,7 @@ namespace HF::Pathfinding {
 		}
 
 		// Calculate the maximum id held by the graph.
-		unsigned int max_node = graphg.Nodes()[num_nodes - 1].id + 1;
+		unsigned int max_node = graph.Nodes()[num_nodes - 1].id + 1;
 
 		// Create the boost graph from the two input arrays
 		g = graph_t(boost::edges_are_unsorted, edges.begin(), edges.end(), weights.begin(), max_node);

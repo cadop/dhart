@@ -210,9 +210,16 @@ namespace HF {
 			BoostGraph(const HF::SpatialStructures::Graph& graph);
 
 			/*!
-				\brief		A graph usable with the BoostGraphLibrary, using a cost type string
+				\brief		Construct a BoostGraph using a SpatialStructures::Graph, a cost type string, cost_name
+
+				\details
+				This constructor for BoostGraph shares a similar implementation to that of BoostGraph(const HF::SpatialStructures::Graph& graph),
+				but uses the parameter graph to call an overload of Graph::GetEdges, which accepts a cost type string (as opposed to no arguments at all)
+				-- in order to retrieve a vector<EdgeSet> that will be associated with the given cost type string.
+
+				\see		BoostGraph(const HF::SpatialStructures::Graph& graph) for more information on BoostGraph construction
 				
-				\param	g			Graph to create a graph in Boost from
+				\param	graph		Graph to create a graph in Boost from
 				\param	cost_name	A cost type string denoting edge type, i.e. "cross slope", "energy expenditure", etc.
 
 				\throw		HF::Exceptions::NoCost if cost_name does not exist as a cost type in *this
@@ -254,7 +261,7 @@ namespace HF {
 					HF::Pathfinding::BoostGraph bg(graph, desired_cost_type);
 				\endcode
 			*/
-			BoostGraph(const HF::SpatialStructures::Graph& g, const std::string cost_name);
+			BoostGraph(const HF::SpatialStructures::Graph& graph, const std::string cost_name);
 
 			/// <summary> Explicit Destructor required for BoostGraphDeleter to work in path_finder.h. </summary>
 			/*!
