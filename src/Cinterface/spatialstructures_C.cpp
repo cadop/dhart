@@ -137,8 +137,20 @@ C_INTERFACE AddEdgeFromNodes(
 	return OK;
 }
 
-C_INTERFACE AddEdgeFromNodeIDs(Graph * graph, int parent_id, int child_id, float score) {
-	graph->addEdge(parent_id, child_id, score);
+C_INTERFACE AddEdgeFromNodeIDs(Graph * graph, int parent_id, int child_id, float score, const char * cost_type) {
+	if (!parse_string(cost_type))
+		return NO_COST;
+
+	try {
+		graph->addEdge(parent_id, child_id, score, std::string(cost_type));
+	}
+	catch (std::logic_error) {
+		return NOT_COMPRESSED;
+	}
+	catch (std::out_of_range) {
+		return OUT_OF_RANGE;
+	}
+
 	return OK;
 }
 

@@ -263,9 +263,14 @@ C_INTERFACE AddEdgeFromNodes(
 /// <param name="parent"> The parent's id in the graph. </param>
 /// <param name="child"> The child's id in the graph. </param>
 /// <param name="score"> The cost from parent to child. </param>
-/// <param name="returns"> HF_STATUS::OK on completion. </param>
 
 /*!
+
+	\param cost_type The type of cost to add this edge to.
+	\returns STATUS::OK on completion. 
+	\returns STATUS::NOT_COMPRESSED if an alternate cost was added without first compressing the graph
+	\returns STATUS::NO_COST The given cost string was invalid. 
+
 	\code
 		// Requires #include "graph.h"
 
@@ -292,7 +297,8 @@ C_INTERFACE AddEdgeFromNodeIDs(
 	HF::SpatialStructures::Graph* graph,
 	int parent_id,
 	int child_id,
-	float score
+	float score,
+	const char * cost_type
 );
 
 /// <summary>

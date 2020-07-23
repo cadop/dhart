@@ -2051,7 +2051,7 @@ namespace CInterfaceTests {
 			const int id1 = 1;
 			const float distance = 3;
 
-			AddEdgeFromNodeIDs(g, id0, id1, distance);
+			AddEdgeFromNodeIDs(g, id0, id1, distance, "");
 
 			// Release memory for g after use
 			DestroyGraph(g);
