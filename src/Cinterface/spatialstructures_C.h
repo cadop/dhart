@@ -68,7 +68,7 @@ C_INTERFACE GetAllNodesFromGraph(
 	HF::SpatialStructures::Node** out_data_ptr
 );
 
-// DOn't document this because it's not ready yet.
+
 C_INTERFACE GetEdgesForNode(
 	const HF::SpatialStructures::Graph* graph,
 	const HF::SpatialStructures::Node* Node,
@@ -118,9 +118,13 @@ C_INTERFACE GetSizeOfEdgeVector(
 /// </param>
 /// <param name="out_vector_ptr"> Output parameter for the vector. </param>
 /// <param name="out_vector_ptr"> Output parameter for the vector's held data. </param>
-/// <returns> HF_STATUS::OK if successful. If the graph wasn't valid HF_STATUS::NO_GRAPH. </returns>
-
 /*!
+
+	\param cost_type Type of cost to use for the graph.
+	\returns HF_STATUS::OK if successful.
+	\returns HF::Exceptions::STATUS::NO_GRAPH if the graph wasn't valid 
+	\returns HF::Exceptions::STATUS::NOT_COMPRESSED if the graph wasn't compressed.
+
 	\code
 		// Requires #include "graph.h"
 
@@ -158,6 +162,7 @@ C_INTERFACE AggregateCosts(
 	const HF::SpatialStructures::Graph* graph,
 	int agg,
 	bool directed,
+	const char* cost_type,
 	std::vector<float>** out_vector_ptr,
 	float** out_data_ptr
 );
@@ -206,11 +211,19 @@ C_INTERFACE CreateGraph(
 /// A 3 element float array containing the x, y, and z coordinate of the child node,
 /// </param>
 /// <param name="score"> The cost from parent to child </param>
-/// <returns>
-/// HF_STATUS::OK on success. HF_STATUS::INVALID_PTR on an invalidparent or child node.
-/// </returns>
-
 /*!
+	\param cost_type Type of cost to add the edge to 
+
+	\returns HF::Exceptions::HF_STATUS::OK on success.
+	\returns HF::Exceptions::HF_STATUS::INVALID_PTR on an invalidparent or child node
+	\returns HF::Exceptions::HF_STATUS::NOT_COMPRESSED Tried to add an edge to an alternate cost type
+	when the graph wasn't compressed
+	\returns HF::Exceptions::OUT_OF_RANGE Tried to add an edge to an alternate cost that didn't already
+	exist in the default graph.
+
+	\pre cost_type MUST be a valid delimited char array. If the entire program crashes when this is called,
+	this is why. 
+	
 	\code
 		// Requires #include "graph.h"
 
@@ -238,7 +251,8 @@ C_INTERFACE AddEdgeFromNodes(
 	HF::SpatialStructures::Graph* graph,
 	const float* parent,
 	const float* child,
-	float score
+	float score,
+	const char * cost_type
 );
 
 /// <summary>

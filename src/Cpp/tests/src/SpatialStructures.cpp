@@ -1928,12 +1928,12 @@ namespace CInterfaceTests {
 			float n1[] = { 0, 1, 2 };
 			float n2[] = { 0, 1, 3 };
 
-			AddEdgeFromNodes(g, n0, n1, 1);
-			AddEdgeFromNodes(g, n0, n2, 2);
-			AddEdgeFromNodes(g, n1, n0, 3);
-			AddEdgeFromNodes(g, n1, n2, 4);
-			AddEdgeFromNodes(g, n2, n0, 5);
-			AddEdgeFromNodes(g, n2, n1, 6);
+			AddEdgeFromNodes(g, n0, n1, 1,"\0");
+			AddEdgeFromNodes(g, n0, n2, 2,"\0");
+			AddEdgeFromNodes(g, n1, n0, 3,"\0");
+			AddEdgeFromNodes(g, n1, n2, 4,"\0");
+			AddEdgeFromNodes(g, n2, n0, 5,"\0");
+			AddEdgeFromNodes(g, n2, n1, 6,"\0");
 
 			auto out_vec = new std::vector<HF::SpatialStructures::Node>;
 			HF::SpatialStructures::Node* out_data = nullptr;
@@ -1976,18 +1976,18 @@ namespace CInterfaceTests {
 			float n1[] = { 0, 1, 2 };
 			float n2[] = { 0, 1, 3 };
 
-			AddEdgeFromNodes(g, n0, n1, 1);
-			AddEdgeFromNodes(g, n0, n2, 2);
-			AddEdgeFromNodes(g, n1, n0, 3);
-			AddEdgeFromNodes(g, n1, n2, 4);
-			AddEdgeFromNodes(g, n2, n0, 5);
-			AddEdgeFromNodes(g, n2, n1, 6);
+			AddEdgeFromNodes(g, n0, n1, 1,"\0");
+			AddEdgeFromNodes(g, n0, n2, 2,"\0");
+			AddEdgeFromNodes(g, n1, n0, 3,"\0");
+			AddEdgeFromNodes(g, n1, n2, 4,"\0");
+			AddEdgeFromNodes(g, n2, n0, 5,"\0");
+			AddEdgeFromNodes(g, n2, n1, 6,"\0");
 
 			std::vector<float>* out_vector = nullptr;
 			float* out_data = nullptr;
 
 			int aggregation_type = 0;
-			AggregateCosts(g, aggregation_type, false, &out_vector, &out_data);
+			AggregateCosts(g, aggregation_type, false,"\0", &out_vector, &out_data);
 
 			DestroyGraph(g);
 		}
@@ -2028,7 +2028,7 @@ namespace CInterfaceTests {
 			float n1[] = { 0, 1, 2 };
 			const float distance = 3;
 
-			AddEdgeFromNodes(g, n0, n1, distance);
+			AddEdgeFromNodes(g, n0, n1, distance,"\0");
 
 			// Release memory for g after use
 			DestroyGraph(g);
@@ -2074,12 +2074,12 @@ namespace CInterfaceTests {
 			float n1[] = { 0, 1, 2 };
 			float n2[] = { 0, 1, 3 };
 
-			AddEdgeFromNodes(g, n0, n1, 1);
-			AddEdgeFromNodes(g, n0, n2, 2);
-			AddEdgeFromNodes(g, n1, n0, 3);
-			AddEdgeFromNodes(g, n1, n2, 4);
-			AddEdgeFromNodes(g, n2, n0, 5);
-			AddEdgeFromNodes(g, n2, n1, 6);
+			AddEdgeFromNodes(g, n0, n1, 1,"\0");
+			AddEdgeFromNodes(g, n0, n2, 2,"\0");
+			AddEdgeFromNodes(g, n1, n0, 3,"\0");
+			AddEdgeFromNodes(g, n1, n2, 4,"\0");
+			AddEdgeFromNodes(g, n2, n0, 5,"\0");
+			AddEdgeFromNodes(g, n2, n1, 6,"\0");
 
 			Compress(g);
 
@@ -2112,7 +2112,7 @@ namespace CInterfaceTests {
 			float n1[] = { 0, 1, 2 };
 			const float distance = 3;
 
-			AddEdgeFromNodes(g, n0, n1, distance);
+			AddEdgeFromNodes(g, n0, n1, distance,"\0");
 
 			float point[] = { 0, 1, 2 };
 			int result_id = -1;
@@ -2140,12 +2140,12 @@ namespace CInterfaceTests {
 			float n1[] = { 0, 1, 2 };
 			float n2[] = { 0, 1, 3 };
 
-			AddEdgeFromNodes(g, n0, n1, 1);
-			AddEdgeFromNodes(g, n0, n2, 2);
-			AddEdgeFromNodes(g, n1, n0, 3);
-			AddEdgeFromNodes(g, n1, n2, 4);
-			AddEdgeFromNodes(g, n2, n0, 5);
-			AddEdgeFromNodes(g, n2, n1, 6);
+			AddEdgeFromNodes(g, n0, n1, 1,"\0");
+			AddEdgeFromNodes(g, n0, n2, 2,"\0");
+			AddEdgeFromNodes(g, n1, n0, 3,"\0");
+			AddEdgeFromNodes(g, n1, n2, 4,"\0");
+			AddEdgeFromNodes(g, n2, n0, 5,"\0");
+			AddEdgeFromNodes(g, n2, n1, 6,"\0");
 
 			Compress(g);
 
@@ -2174,7 +2174,7 @@ namespace CInterfaceTests {
 			float n1[] = { 0, 1, 2 };
 			const float distance = 3;
 
-			AddEdgeFromNodes(g, n0, n1, distance);
+			AddEdgeFromNodes(g, n0, n1, distance,"\0");
 
 			ClearGraph(g);
 

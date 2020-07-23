@@ -1268,6 +1268,9 @@ namespace HF::SpatialStructures {
 		/// Cost of traversing from aprent to child.
 		/// </param>
 		/*!
+
+			\param cost_type Type of cost to add this edge to 
+			
 			\details
 			If the parent or child ids don't exist in the dictionary, they will be added.
 
@@ -1281,6 +1284,10 @@ namespace HF::SpatialStructures {
 			(Note: if an edge exists between parent_id and child_id,
 			the score value will be added to the existing score value for the edge
 			formed by parent_id and child_id).
+
+			\throws std::logic_error Tried to add an edge to an alternate cost type when the graph isnt compressed
+			\throws std::out_of_range Tried to add an edge to an alternate cost type when it
+			hasn't been added to the default graph
 
 			\todo How should this signal that the graph can't have edges added to it? Or how do
 			we add edges to an existing graph quickly without adding to its edge list?

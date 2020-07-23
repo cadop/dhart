@@ -14,6 +14,20 @@ using HF::SpatialStructures::Edge;
 using namespace HF::Exceptions;
 using std::vector;
 
+
+inline bool parse_string(const char * c) {
+	if (!c) return false;
+
+	try {
+		std::string test_string(c);
+	}
+	catch (...) {
+		return false;
+	}
+
+	return true;
+}
+
 C_INTERFACE  GetAllNodesFromGraph(const Graph* graph, vector<Node>** out_vector_ptr, Node** out_data_ptr)
 {
 	if (!graph)
@@ -52,16 +66,28 @@ C_INTERFACE AggregateCosts(
 	const Graph* graph,
 	int agg,
 	bool directed,
+	const char* cost_type,
 	std::vector<float>** out_vector_ptr,
 	float** out_data_ptr
 ) {
+
+	if (!parse_string(cost_type))
+		return NO_COST;
+
 	try {
+		std::string cost_string(cost_type);
 		*out_vector_ptr = new std::vector<float>();
-		**out_vector_ptr = graph->AggregateGraph(static_cast<HF::SpatialStructures::COST_AGGREGATE>(agg), directed);
+		**out_vector_ptr = graph->AggregateGraph(static_cast<HF::SpatialStructures::COST_AGGREGATE>(agg), directed, cost_string);
 		*out_data_ptr = (**out_vector_ptr).data();
 	}
+	catch (HF::Exceptions::NoCost) {
+		return NO_COST; // Cost doesn't exist
+	}
+	catch (std::logic_error) {
+		return NOT_COMPRESSED; // Graph isn't compressed
+	}
 	catch (std::exception & e){
-		return NO_GRAPH;
+		return NO_GRAPH; // Graph likely doesn't exist
 	}
 	return OK;
 }
@@ -81,9 +107,15 @@ C_INTERFACE AddEdgeFromNodes(
 	Graph* graph,
 	const float* parent,
 	const float* child,
-	float score
+	float score,
+	const char* cost_type
 ){
 	Node parent_node, child_node;
+
+	if (!parse_string(cost_type))
+		return NO_COST;
+
+	std::string cost_name(cost_type);
 	try {
 		parent_node = Node(parent[0], parent[1], parent[2]);
 		child_node = Node(child[0], child[1], child[2]);
@@ -93,7 +125,15 @@ C_INTERFACE AddEdgeFromNodes(
 		return HF::Exceptions::INVALID_PTR;
 	}
 
-	graph->addEdge(parent_node, child_node, score);
+	try {
+		graph->addEdge(parent_node, child_node, score, cost_name);
+	}
+	catch (std::logic_error){
+		return NOT_COMPRESSED;
+	}
+	catch (std::out_of_range) {
+		return OUT_OF_RANGE;
+	}
 	return OK;
 }
 
