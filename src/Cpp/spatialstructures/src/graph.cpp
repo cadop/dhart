@@ -851,13 +851,13 @@ namespace HF::SpatialStructures {
 		return GetChildren(NodeFromID(parent_id));
 	}
 
-	Subgraph Graph::GetSubgraph(const Node & parent_node) const {
-		return Subgraph{ parent_node, (*this)[parent_node] };
+	Subgraph Graph::GetSubgraph(const Node & parent_node, const string & cost_type) const {
+		return this->GetSubgraph(this->getID(parent_node), cost_type);
 	}
 
-	Subgraph Graph::GetSubgraph(int parent_id) const {
+	Subgraph Graph::GetSubgraph(int parent_id, const string & cost_type) const {
 		Node parent_node = ordered_nodes[parent_id];
-		return Subgraph{ parent_node, (*this)[parent_node] };
+		return Subgraph{ parent_node, this->GetEdgesForNode(parent_id, false, cost_type) };
 	}
 
 	void Graph::AddNodeAttribute(int id, std::string attribute, std::string score) {

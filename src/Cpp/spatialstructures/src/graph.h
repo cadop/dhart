@@ -1379,7 +1379,7 @@ namespace HF::SpatialStructures {
 				// TODO example
 			\endcode
 		*/
-		Subgraph GetSubgraph(const Node & parent_node) const;
+		Subgraph GetSubgraph(const Node & parent_node, const std::string & cost_type = "") const;
 	
 		/*!
 			\summary	Retrieves a Subgraph using a parent node ID
@@ -1390,7 +1390,7 @@ namespace HF::SpatialStructures {
 				// TODO example
 			\endcode
 		*/
-		Subgraph GetSubgraph(int parent_id) const;
+		Subgraph GetSubgraph(int parent_id, const std::string & cost_type = "") const;
 
 		/// <summary> Add an attribute to the node at id </summary>
 		/// <param name="id">The ID of the node that will receive attribute</param>

@@ -321,6 +321,34 @@ TEST(_Graph, MultipleNewCostDoesntAffectDefault) {
 	ASSERT_EQ(testcost_edges[3].children[0].weight, 0.2f);
 }
 
+TEST(_Graph, GetSubGraphMulti) {
+
+	vector<IntEdge> StandardEdges = {
+		{0,0.10f}, {1,0.11f}, {2,0.12f}
+	};
+	EdgeSet StandSet(3, StandardEdges);
+	vector<IntEdge> AltCostEdges = {
+		{0,0.20f}, {1,0.21f}, {2,0.22f}
+	};
+	EdgeSet AltSet(3, AltCostEdges);
+
+	Graph g;
+	g.Compress();
+	g.AddEdges(StandSet);
+	g.AddEdges(AltSet, "TestCost");
+
+	// Get both edge sets
+	auto default_edges = g.GetEdges();
+	auto testcost_edges = g.GetEdges("TestCost");
+
+	auto sg = g.GetSubgraph(3, "TestCost");
+
+	ASSERT_EQ(sg.m_edges.size(), 3);
+	ASSERT_EQ(sg.m_edges[1].score, 0.21f);
+	ASSERT_EQ(sg.m_edges[2].score, 0.22f);
+
+
+}
 
 inline void CompareVectorsOfEdgeSets(const vector<EdgeSet> & E1, const vector<EdgeSet> & E2){
 	ASSERT_EQ(E1.size(), E2.size());
