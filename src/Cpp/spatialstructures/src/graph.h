@@ -18,6 +18,8 @@ namespace Eigen {
 namespace HF::SpatialStructures {
 
 	using EdgeMatrix = Eigen::SparseMatrix<float, 1>;
+	using TempMatrix = Eigen::Map<const EdgeMatrix>;
+
 	/*! \brief Methods of aggregating the costs for edges for each node in the graph. 
 	
 	\see Graph.AggregateGraph() for details on how to use this enum.
@@ -342,6 +344,7 @@ namespace HF::SpatialStructures {
 
 		/*! \brief Get the pointer to the start of this array. */
 		inline float* GetPtr() { return this->costs.data(); }
+		inline const float* GetPtr() const { return this->costs.data(); }
 	};
 
 	/*! \brief A Graph of nodes connected by edges that supports both integers and HF::SpatialStructures::Node.
@@ -862,13 +865,7 @@ namespace HF::SpatialStructures {
 				std::vector<float> aggregate_graph = graph.AggregateGraph(aggregate, true);	
 			\endcode
 		*/
-		std::vector<float> AggregateGraph(COST_AGGREGATE agg_type, bool directed=true) const;
-
-		/// <summary> Get a list of all edges from Node n. </summary>
-		/// <param name="n"> Parent of all edges to retrieve. </param>
-		/// <returns> An array of edges from node n. </returns>
-		/// <exception cref="std::outofrange"> n does not exist in the graph. </exception>
-
+		std::vector<float> AggregateGraph(COST_AGGREGATE agg_type, bool directed = true, const std::string & cost_type = "") const;
 		/*!
 			\todo Should this just return an empty list instead of throwing?
 			\code

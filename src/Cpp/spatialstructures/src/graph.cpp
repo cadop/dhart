@@ -13,6 +13,7 @@
 #include <Constants.h>
 #include <assert.h>
 #include <HFExceptions.h>
+#include <numeric>
 
 using namespace Eigen;
 using std::vector;
@@ -20,6 +21,23 @@ using std::string;
 using namespace HF::Exceptions;
 
 namespace HF::SpatialStructures {
+
+		/*! \brief Constructs a mapped CSR that's identical to `g`, with the values arrays of `ca`. */
+		inline TempMatrix CreateMappedCSR(const EdgeMatrix& g, const EdgeCostSet & ca ) {
+			
+			const Map<const SparseMatrix<float, 1>> m(
+				static_cast<int>(g.rows()),
+				static_cast<int>(g.cols()),
+				static_cast<int>(g.nonZeros()),
+				static_cast<const int*>(g.outerIndexPtr()),
+				static_cast<const int*>(g.innerIndexPtr()),
+				//static_cast<const float*>(g.valuePtr()),
+				static_cast<const float*>(ca.GetPtr()),
+				static_cast<const int*>(g.innerNonZeroPtr())
+			);
+
+			return m;
+		}
 
 		/*!
 		\summary Determines if a std::string is a floating-point value, i.e. '3.1415', '2.718', or is not -- i.e. '192.168.1.1', 'a_string'
@@ -319,20 +337,18 @@ namespace HF::SpatialStructures {
 		return;
 	}
 
-	std::vector<float> Graph::AggregateGraph(COST_AGGREGATE agg_type, bool directed) const
-	{
-		// This won't work if the graph isn't compressed.
-		if (this->needs_compression) throw std::exception("The graph must be compressed!");
-
+	template<typename csr>
+	std::vector<float> Impl_AggregateGraph(COST_AGGREGATE agg_type, int num_nodes, bool directed, const csr & edge_matrix) {
+		
 		// Create an array of floats filled with zeros.
-		vector<float> out_costs(this->size(), 0);
+		vector<float> out_costs(num_nodes, 0);
 
 		// If directed is true, then we only need the values in a node's row to calculate it's score.
 		if (directed)
-			for (int k = 0; k < this->size(); ++k) {
-				
+			for (int k = 0; k < num_nodes; ++k) {
+
 				// Sum all values in the row for node k
-				float sum = edge_matrix.row(k).sum();
+				const float sum = edge_matrix.row(k).sum();
 
 				// Get the count of non_zeros for node k
 				int count = edge_matrix.row(k).nonZeros();
@@ -348,13 +364,13 @@ namespace HF::SpatialStructures {
 		// count towards its score.
 		else {
 			// We need to keep track of count per node as well for this algorithm
-			vector<int> count(this->size(), 0);
+			vector<int> count(num_nodes, 0);
 
 			// Iterate through every node in the graph
-			for (int k = 0; k < this->size(); ++k) {
+			for (int k = 0; k < num_nodes; ++k) {
 
 				// Iterate through every edge for the node at column k
-				for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, k); it; ++it)
+				for (csr::InnerIterator it(edge_matrix, k); it; ++it)
 				{
 					// Get values from the iterator for this row/col.
 					float cost = it.value();
@@ -368,6 +384,29 @@ namespace HF::SpatialStructures {
 			}
 		}
 		return out_costs;
+	}
+
+	std::vector<float> Graph::AggregateGraph(COST_AGGREGATE agg_type, bool directed, const string& cost_type) const
+	{
+		// This won't work if the graph isn't compressed.
+		if (this->needs_compression) throw std::exception("The graph must be compressed!");
+	
+		// Determine if this is the default cost. 
+		const bool default_cost = this->IsDefaultName(cost_type);
+
+		// If this isn't the default cost, map to the cost array. 
+		if (!default_cost) {
+
+			// Get the cost array and create a mapped CSR from it
+			const EdgeCostSet & cost_array = this->GetCostArray(cost_type);
+			const TempMatrix cost_matrix= CreateMappedCSR(this->edge_matrix, cost_array);
+
+			// Call the implementation of aggregate graph with this template
+			return Impl_AggregateGraph(agg_type, this->size(), directed, cost_matrix);
+		}
+		else
+			// If this is the default cost, just call AggregateGraph with the default CSR
+			return (Impl_AggregateGraph(agg_type, this->size(), directed, this->edge_matrix));
 	}
 
 	const std::vector<Edge> Graph::operator[](const Node& n) const

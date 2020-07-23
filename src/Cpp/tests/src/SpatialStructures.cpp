@@ -103,6 +103,19 @@ namespace GraphTests {
 		ASSERT_EQ(g.AggregateGraph(COST_AGGREGATE::SUM)[1], 0);
 	}
 
+	TEST(_Graph, AggregateCostsMulti) {
+		HF::SpatialStructures::Graph g;
+
+		HF::SpatialStructures::Node N1(39, 39, 39);
+		HF::SpatialStructures::Node N2(54, 54, 54);
+
+		g.Compress();
+		g.addEdge(N1, N2, 30);
+		g.addEdge(N1, N2, 39, "TestCost");
+	
+		ASSERT_EQ(g.AggregateGraph(COST_AGGREGATE::SUM, true, "TestCost")[0], 39);
+		ASSERT_EQ(g.AggregateGraph(COST_AGGREGATE::SUM, true, "TestCost")[1], 0);
+	}
     TEST(_Graph, SizeEqualsNumberOfNodes) {
         HF::SpatialStructures::Graph g;
 
