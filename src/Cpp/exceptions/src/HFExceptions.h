@@ -86,9 +86,15 @@ namespace HF::Exceptions{
 	/*! \brief Thrown when a dependency is missing such as Embree. */
 	struct NoCost : public std::exception
 	{
+		std::string cost_type;
+		NoCost(const std::string& cost_name) {
+			cost_type = cost_name;
+		}
+
 		const char* what() const throw ()
 		{
-			return "Cost type doesn't exist in the graph";
+			std::string new_str = cost_type + "Doesn't exist in the graph!";
+			return new_str.c_str();
 		}
 	};
 

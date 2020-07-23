@@ -98,12 +98,13 @@ namespace HF::SpatialStructures {
 			return -1;
 	}
 
-	int Graph::GetIDFromIndex(int index) const {
-		throw HF::Exceptions::NotImplemented();
-	}
-
 	EdgeCostSet& Graph::GetCostArray(const string& key)
 	{
+		// If this is the default key, then you're missing a check
+		// somewhere. 
+		assert(!IsDefaultName(key));
+
+		// Return the cost map at key.
 		return (edge_cost_maps.at(key));
 	}
 
@@ -113,16 +114,23 @@ namespace HF::SpatialStructures {
 
 	EdgeCostSet& Graph::GetOrCreateCostType(const std::string& name)
 	{
-		assert(!this->IsDefaultName(name));
+		// If this is the default name, then we must throw
+		if (this->IsDefaultName(name))
+			throw std::logic_error("Tried to create cost array with the graph's default name");
 
+		// If we already have this cost array, return a reference to it
 		if (this->HasCostArray(name))
 			return this->GetCostArray(name);
+
+		// Otherwise create a new one then return a reference to it. 
 		else
 			return this->CreateCostArray(name);
 	}
 
 	EdgeCostSet& Graph::CreateCostArray(const std::string& name)
 	{
+		// If you manage to throw this, something is wrong with
+		// CheckCostArray
 		assert(!this->HasCostArray(name));
 
 		// the size of the cost array must be large enough to hold all nonzeros
@@ -139,21 +147,27 @@ namespace HF::SpatialStructures {
 
 	const EdgeCostSet& Graph::GetCostArray(const std::string& key) const
 	{
+		// Ensure that we throw our custom exception if this key doesn't exist
+		if (!this->HasCostArray(key)) 
+			throw NoCost(key.c_str());
+		
+		// Get the cost from the cost map
 		return (edge_cost_maps.at(key));
 	}
 
 	bool Graph::IsDefaultName(const string& name) const
 	{
+		// Check if the name is empty "" or it matches our default
+		// cost member.
 		return (name.empty() || (name == this->default_cost));
 	}
 
 	int Graph::ValueArrayIndex(int parent_id, int child_id) const
 	{
-		// Get the inner and outer index array pointers
+		// Get the inner and outer index array pointers of the CSR
 		const auto outer_index_ptr = edge_matrix.outerIndexPtr();
 		const auto inner_index_ptr = edge_matrix.innerIndexPtr();
 
-		// Now we must search for this value in the CSR.
 		// Get the bounds for our search
 		const int search_start_index = outer_index_ptr[parent_id];
 		const int search_end_index = outer_index_ptr[parent_id + 1];
@@ -165,7 +179,9 @@ namespace HF::SpatialStructures {
 		// Use an iterator to find a pointer to the value in memory
 		auto itr = std::find(search_start_ptr, search_end_ptr, child_id);
 
-		// Throw if we the search hit the end of the bounds
+		// Return if we hit the end of our search bounds, indicating that the
+		// edge doesn't exist.
+
 		if (itr == search_end_ptr)
 			return -1;
 		// Find the distance between the pointer we found earlier and the
@@ -177,24 +193,33 @@ namespace HF::SpatialStructures {
 	}
 
 	void Graph::InsertEdgeIntoCostSet(int parent_id, int child_id, float cost, EdgeCostSet& cost_set) {
+		// Get the index of the edge between parent_id and child_id in the values array
 		const int value_index = ValueArrayIndex(parent_id, child_id);
 
+		// If the index is < 0 that means this edge doesn't exist and we must throw
 		if (value_index < 0)
 			throw std::out_of_range("Tried to insert into edge that doesn't exist in default graph. ");
 
+		// otherwise write this to the cost set.
 		cost_set[value_index] = cost;
 	}
 
 	void Graph::InsertEdgesIntoCostSet(EdgeCostSet& cost_set, const std::vector<EdgeSet>& es)
 	{
+		// Iterate through every edgeset in es
 		for (const auto& edge_set : es)
 		{
+			// Get the parent of this specific edge set
 			const int parent_id = edge_set.parent;
+			
+			// Iterate through every edge in this edge set. 
 			for (const auto& edge : edge_set.children) {
 
+				// Get the child id and cost of this edge
 				const int child_id = edge.child;
 				const int cost = edge.weight;
 
+				// Insert this edge into cost_set
 				InsertEdgeIntoCostSet(parent_id, child_id, cost, cost_set);
 			}
 		}
@@ -219,6 +244,8 @@ namespace HF::SpatialStructures {
 			edge_matrix.innerIndexPtr()
 		};
 
+		// If this isn't the default cost, replace the pointer with
+		// the pointer of the given cost array. 
 		if (!default_cost)
 		{
 			EdgeCostSet& cost_set = this->GetCostArray(cost_type);
@@ -416,6 +443,8 @@ namespace HF::SpatialStructures {
 	}
 
 	void Graph::InsertOrUpdateEdge(int parent_id, int child_id, float score, const string& cost_type) {
+
+		// If this is the default graph, we don't need to worry aobut 
 		if (IsDefaultName(cost_type)) {
 			if (this->needs_compression)
 				TripletsAddOrUpdateEdge(parent_id, child_id, score);
@@ -423,17 +452,26 @@ namespace HF::SpatialStructures {
 				CSRAddOrUpdateEdge(parent_id, child_id, score);
 		}
 		else
+			// Can't add to an alternate cost if the graph isn't compressed
 			if (this->needs_compression)
-				throw std::exception("Graph wasn't compressed!");
+				throw std::logic_error("Tried to add an edge to an alternate cost type while uncompressed!");
+			
+			// Add the cost to the cost type pointed to by cost_type
 			else
 				InsertEdgeIntoCostSet(parent_id, child_id, score, GetOrCreateCostType(cost_type));
 	}
 
 	float Graph::GetCostForSet(const EdgeCostSet & set, int parent_id, int child_id) const
 	{
+		// Get the index for the cost of the edge between parent_id and child_id
 		const int index = ValueArrayIndex(parent_id, child_id);
+
+		// If the index is <0, the edge doesn't exist.
+		// We represent non-existant edges as NAN
 		if (index < 0) 
 			return NAN;
+
+		// Othrwise, return the value at this index in set
 		else
 			return set[index];
 	}
@@ -461,7 +499,7 @@ namespace HF::SpatialStructures {
 			std::vector<Edge> out_edges;
 			for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, row); it; ++it) {
 				const auto col = it.col();
-				auto value = GetCostForSet(cost_set, row, col);
+				auto value = this->GetCostForSet(cost_set, row, col);
 
 				outgoing_edges.emplace_back(Edge(NodeFromID(col), value));
 			}
@@ -558,10 +596,9 @@ namespace HF::SpatialStructures {
 	}
 
 	void Graph::TripletsAddOrUpdateEdge(int parent_id, int child_id, float cost) {
-		const int parent_index = parent_id;
-		const int child_index = child_id;
 
-		triplets.emplace_back(Eigen::Triplet<float>(parent_index, child_index, cost));
+		// Add this edge to the list of triplets.
+		triplets.emplace_back(Eigen::Triplet<float>(parent_id, child_id, cost));
 	}
 
 	void Graph::ResizeIfNeeded()
@@ -579,6 +616,8 @@ namespace HF::SpatialStructures {
 
 		// If the edge matrix can't fit this many nodes, expand it.
 		if (num_nodes > edge_matrix.rows())
+
+			// Conservative resize preserves all of the values in the graph
 			edge_matrix.conservativeResize(num_nodes, num_nodes);
 
 		assert(num_nodes <= edge_matrix.rows() && num_nodes <= edge_matrix.cols());
@@ -591,11 +630,6 @@ namespace HF::SpatialStructures {
 			if (ordered_nodes[i].id == id) return true;
 		
 		return false;
-	}
-
-	int Graph::GetIndex(const Node& n) const
-	{
-		return (getID(n));
 	}
 
 	bool Graph::HasEdge(int parent, int child, bool undirected, const string & cost_type) const {
