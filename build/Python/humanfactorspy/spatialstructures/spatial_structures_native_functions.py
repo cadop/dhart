@@ -19,8 +19,7 @@ def SizeOfNodeVector(node_vector_ptr: c_void_p) -> int:
 
 def GetEdgesForNode(
     graph_ptr: c_void_p, node_ptr: c_void_p
-    ) -> Tuple[c_void_p, c_void_p]:
-
+) -> Tuple[c_void_p, c_void_p]:
     """ *** UNIMPLEMENTED *** 
     
     Get a list of nodes from a graph that belong to the specified node
@@ -31,8 +30,7 @@ def C_AggregateEdgeCosts(
     graph_ptr: c_void_p,
     aggregate_type: int,
     directed: bool
-    ) -> c_void_p:
-
+) -> c_void_p:
     vector_ptr = c_void_p(0)
     data_ptr = c_void_p(0)
 
@@ -87,8 +85,7 @@ def C_AddEdgeFromNodes(
     parent: Tuple[float, float, float],
     child: Tuple[float, float, float],
     score: float,
-    ) -> None:
-
+) -> None:
     """ Add a new edge to the graph """
 
     parent_ptr = ConvertPointsToArray(parent)
@@ -99,8 +96,7 @@ def C_AddEdgeFromNodes(
 
 def C_AddEdgeFromNodeIDs(
     graph_ptr: c_void_p, parent_id: int, child_id: int, score: float
-    ) -> None:
-    
+) -> None:
     HFPython.AddEdgeFromNodeIDs(
         graph_ptr, c_int(parent_id), c_int(child_id), c_float(score)
     )
@@ -108,7 +104,7 @@ def C_AddEdgeFromNodeIDs(
 
 def C_GetCSRPtrs(
     graph_ptr: c_void_p,
-    ) -> Tuple[int, int, int, c_void_p, c_void_p, c_void_p]:
+) -> Tuple[int, int, int, c_void_p, c_void_p, c_void_p]:
     """ Get the information necessary to map a numpy CSR to the C++ graph
         
     Returns:
