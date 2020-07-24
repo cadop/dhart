@@ -86,6 +86,43 @@ namespace HF::SpatialStructures {
 		return result;
 	}
 
+	template<typename csr>
+	inline float IMPL_GetCost(const csr & c, int parent, int child) {
+
+		// Get the inner and outer index array pointers of the CSR
+		const auto outer_index_ptr = c.outerIndexPtr();
+		const auto inner_index_ptr = c.innerIndexPtr();
+
+		return IMPL_ValueArrayIndex(parent, child, outer_index_ptr, inner_index_ptr);
+
+	}
+
+	float Graph::GetCost(int parent_id, int child_id, const std::string & cost_type) const{
+		if (this->needs_compression)
+			throw std::logic_error("Graph must be compressed to read costs using getcost");
+
+		if (IsDefaultName(cost_type)) {
+			const int index = IMPL_GetCost(this->edge_matrix, parent_id, child_id);
+			if (index < 0 ) return NAN;
+			else return this->edge_matrix.valuePtr()[index];
+		}
+		else
+			return GetCostForSet(this->GetCostArray(cost_type), parent_id, child_id);
+	}
+
+	void Graph::ClearCostArrays(const std::string& cost_name)
+	{
+		// Delete them all if this is the default name
+		if (this->IsDefaultName(cost_name))
+			edge_cost_maps.clear();
+		else if (!this->HasCostArray(cost_name))
+			throw NoCost("Tried to delete a cost that doesn't already exist!");
+
+		else
+			edge_cost_maps.erase(cost_name);
+
+	}
+
 	int Graph::size() const { return ordered_nodes.size(); }
 
 	int Graph::MaxID() const {
@@ -145,6 +182,9 @@ namespace HF::SpatialStructures {
 		// CheckCostArray
 		assert(!this->HasCostArray(name));
 
+		if (this->size() < 1)
+			throw std::logic_error("Tried to add a cost to a graph with 0 nodes");
+
 		// the size of the cost array must be large enough to hold all nonzeros
 		// for this specific CSR
 		const int nnz = edge_matrix.nonZeros();
@@ -174,12 +214,12 @@ namespace HF::SpatialStructures {
 		return (name.empty() || (name == this->default_cost));
 	}
 
-	int Graph::ValueArrayIndex(int parent_id, int child_id) const
-	{
-		// Get the inner and outer index array pointers of the CSR
-		const auto outer_index_ptr = edge_matrix.outerIndexPtr();
-		const auto inner_index_ptr = edge_matrix.innerIndexPtr();
-
+	int IMPL_ValueArrayIndex(
+		int parent_id,
+		int child_id,
+		const int* outer_index_ptr,
+		const int* inner_index_ptr
+	) {
 		// Get the bounds for our search
 		const int search_start_index = outer_index_ptr[parent_id];
 		const int search_end_index = outer_index_ptr[parent_id + 1];
@@ -202,11 +242,21 @@ namespace HF::SpatialStructures {
 			int index = std::distance(inner_index_ptr, itr);
 			return index;
 		}
+
+	}
+
+	int Graph::FindValueArrayIndex(int parent_id, int child_id) const
+	{
+		// Get the inner and outer index array pointers of the CSR
+		const auto outer_index_ptr = edge_matrix.outerIndexPtr();
+		const auto inner_index_ptr = edge_matrix.innerIndexPtr();
+			
+		return IMPL_ValueArrayIndex(parent_id, child_id, outer_index_ptr, inner_index_ptr);
 	}
 
 	void Graph::InsertEdgeIntoCostSet(int parent_id, int child_id, float cost, EdgeCostSet& cost_set) {
 		// Get the index of the edge between parent_id and child_id in the values array
-		const int value_index = ValueArrayIndex(parent_id, child_id);
+		const int value_index = FindValueArrayIndex(parent_id, child_id);
 
 		// If the index is < 0 that means this edge doesn't exist and we must throw
 		if (value_index < 0)
@@ -515,13 +565,36 @@ namespace HF::SpatialStructures {
 			
 			// Add the cost to the cost type pointed to by cost_type
 			else
-				InsertEdgeIntoCostSet(parent_id, child_id, score, GetOrCreateCostType(cost_type));
+			{
+				// Determine whether or not this cost type exists
+				const bool new_cost_array = !HasCostArray(cost_type);
+				
+				// Create a new cost array or get a reference to an existing one
+				auto& cost_set = GetOrCreateCostType(cost_type);
+
+				// Try to add an edge. We need to ensure we maintain the graph's invariants
+				// in the case that this throws.
+				try {
+					InsertEdgeIntoCostSet(parent_id, child_id, score, cost_set);
+				}
+				catch(const std::out_of_range & e){
+
+					// If this is a new cost array, and we threw that would leave it in an invalid
+					// state which will cause problems later. Remove this half baked cost array 
+					// before returning from this exception.
+					if (new_cost_array)
+						this->ClearCostArrays(cost_type);
+					
+					// Rethrow here so callers know we failed to complete
+					throw e;
+				}
+			}
 	}
 
 	float Graph::GetCostForSet(const EdgeCostSet & set, int parent_id, int child_id) const
 	{
 		// Get the index for the cost of the edge between parent_id and child_id
-		const int index = ValueArrayIndex(parent_id, child_id);
+		const int index = FindValueArrayIndex(parent_id, child_id);
 
 		// If the index is <0, the edge doesn't exist.
 		// We represent non-existant edges as NAN
@@ -932,7 +1005,7 @@ namespace HF::SpatialStructures {
 				// Add to array of edgesets
 				int child_index = it.col();
 				
-				int cost_index = this->ValueArrayIndex(parent_index, child_index);
+				int cost_index = this->FindValueArrayIndex(parent_index, child_index);
 				float cost = cost_set[cost_index];
 				
 				edgeset.children.push_back(IntEdge{ child_index, cost });

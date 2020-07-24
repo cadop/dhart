@@ -433,6 +433,7 @@ namespace HF::SpatialStructures {
 			\returns a pointer to the value of this EdgeCostSet's internal costs array
 		*/
 		inline const float* GetPtr() const { return this->costs.data(); }
+
 	};
 
 	/*! \brief A Graph of nodes connected by edges that supports both integers and HF::SpatialStructures::Node.
@@ -685,7 +686,7 @@ namespace HF::SpatialStructures {
 
 			\pre `parent_id` is a valid node in the graph.
 		*/
-		int ValueArrayIndex(int parent_id, int child_id) const;
+		int FindValueArrayIndex(int parent_id, int child_id) const;
 
 		/*!
 			\brief Add an edge to a cost set between parent_id and child_id.
@@ -1859,5 +1860,11 @@ namespace HF::SpatialStructures {
 			the default cost array).
 		*/
 		std::vector<std::string> GetCostTypes() const;
+		
+		/*! \brief get the cost from parent_id to child_id in the given cost_type.*/
+		float GetCost(int parent_id, int child_id, const std::string& cost_type = "") const;
+
+		/*! \brief Clear one or more cost arrays from the graph. */
+		void ClearCostArrays(const std::string & cost_name = "");
 	};
 }
