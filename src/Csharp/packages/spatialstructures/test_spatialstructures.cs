@@ -26,6 +26,15 @@ namespace HumanFactors.Tests.SpatialStructures
         }
 
         [TestMethod]
+        public void AddEdgeFromV3WithCosts()
+        {
+            Graph G = new Graph();
+            G.AddEdge(new Vector3D(0, 0, 2), new Vector3D(0, 0, 1), 39);
+            G.CompressToCSR();
+            G.AddEdge(new Vector3D(0, 0, 2), new Vector3D(0, 0, 1), 100, "Not Default Cost");
+        }
+
+        [TestMethod]
         public void GetCSRPointers()
         {
             Graph G = new Graph();
@@ -60,8 +69,8 @@ namespace HumanFactors.Tests.SpatialStructures
 
             var scores = G.AggregateEdgeCosts(GraphEdgeAggregation.SUM);
             var score_arr = scores.array;
-            Assert.AreEqual(score_arr[0], 39);
-            Assert.AreEqual(score_arr[1], 0);
+            Assert.AreEqual(39, score_arr[0]);
+            Assert.AreEqual(0, score_arr[1]);
         }
 
         [TestMethod]

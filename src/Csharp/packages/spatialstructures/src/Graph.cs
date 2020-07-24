@@ -63,7 +63,8 @@ namespace HumanFactors.SpatialStructures
             
             \param parent The X,Y,Z location for the parent node.
             \param child x,y,z location for the child 
-            \param cost cost for parent to child </param>
+            \param cost cost for parent to child 
+            \param cost_type The type of cost to add the edge to. 
 
             \post
             1) If the X,Y,Z position of either parent or child does not exist in the graph
@@ -78,8 +79,8 @@ namespace HumanFactors.SpatialStructures
             returned from the graph. Make sure to call CompressToCSR again continuing
             to access it.
         */
-        public void AddEdge(Vector3D parent, Vector3D child, float cost)
-            => NativeMethods.C_AddEdge(handle, parent, child, cost);
+        public void AddEdge(Vector3D parent, Vector3D child, float cost, string cost_type = "")
+            => NativeMethods.C_AddEdge(handle, parent, child, cost, cost_type);
         /*!
             \brief Create a new edge between parent and child with cost.
             
@@ -100,8 +101,8 @@ namespace HumanFactors.SpatialStructures
             returned from the graph. Make sure to call CompressToCSR again continuing
             to access it.
         */
-        public void AddEdge(int parent_id, int child_id, float cost)
-            => NativeMethods.C_AddEdge(handle, parent_id, child_id, cost);
+        public void AddEdge(int parent_id, int child_id, float cost, string cost_type = "")
+            => NativeMethods.C_AddEdge(handle, parent_id, child_id, cost, cost_type);
 
         /// \brief Garray containing the graph's current nodes.
         /// \returns An array of the graph's current nodes ordered by ID.
@@ -110,12 +111,15 @@ namespace HumanFactors.SpatialStructures
         /*! 
             \brief Compress the graph, and get pointers to a CSR representation of it.
 
+            \param cost_type Change the type of cost that's carried in the CSR's 
+            values array. 
+
             \remarks 
             The CSR pointers can be mapped to after retrieved from C++ using spans.
 
             \see CSRPtrs for more info on the CSR type and how to access it.
         */
-        public void CompressToCSR()
+        public void CompressToCSR(string cost_type = "")
         {
             this.CSRPointers = NativeMethods.C_GetCSRPointers(handle);
         }
@@ -142,10 +146,10 @@ namespace HumanFactors.SpatialStructures
             The order of the scores returned bythis function match the order of the scores returned from
             Graph.getNodes. This can be especially useful for summarizing the results of a VisibilityGraph.
         */
-        public ManagedFloatArray AggregateEdgeCosts(GraphEdgeAggregation type, bool directed = true)
+        public ManagedFloatArray AggregateEdgeCosts(GraphEdgeAggregation type, bool directed = true, string cost_type = "")
         {
             this.CompressToCSR();
-            CVectorAndData cvad = NativeMethods.C_AggregateEdgeCosts(handle, directed, type);
+            CVectorAndData cvad = NativeMethods.C_AggregateEdgeCosts(handle, directed, type, cost_type);
             cvad.size = getNodes().size;
             return new ManagedFloatArray(cvad);
         }
