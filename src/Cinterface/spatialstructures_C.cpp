@@ -62,6 +62,34 @@ C_INTERFACE GetSizeOfEdgeVector(
 	return OK;
 }
 
+C_INTERFACE GetEdgeCost(
+	const Graph* g, 
+	int parent,
+	int child,
+	const char* cost_type,
+	float* out_float
+) {
+
+	try {
+		*out_float = g->GetCost(parent, child, std::string(cost_type));
+		if (!std::isfinite(*out_float)) *out_float = -1.0f;
+	}
+	catch (HF::Exceptions::NoCost)
+	{
+		return NO_COST;
+	}
+	catch (std::logic_error)
+	{
+		return NOT_COMPRESSED;
+	}
+	catch (...)
+	{
+		return GENERIC_ERROR;
+	}
+	return OK;
+
+}
+
 C_INTERFACE AggregateCosts(
 	const Graph* graph,
 	int agg,
@@ -87,7 +115,7 @@ C_INTERFACE AggregateCosts(
 		return NOT_COMPRESSED; // Graph isn't compressed
 	}
 	catch (std::exception & e){
-		return NO_GRAPH; // Graph likely doesn't exist
+		return GENERIC_ERROR; // Graph likely doesn't exist, but something else is funky. 
 	}
 	return OK;
 }

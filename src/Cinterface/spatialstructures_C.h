@@ -68,7 +68,6 @@ C_INTERFACE GetAllNodesFromGraph(
 	HF::SpatialStructures::Node** out_data_ptr
 );
 
-
 C_INTERFACE GetEdgesForNode(
 	const HF::SpatialStructures::Graph* graph,
 	const HF::SpatialStructures::Node* Node,
@@ -110,6 +109,33 @@ C_INTERFACE GetSizeOfEdgeVector(
 	int* out_size
 );
 
+
+/*! 
+	\brief Get the cost of traversing from `parent` to `child`
+	
+	\param parent ID of the node being traversed from.
+	\param child ID of the node being traversed to.
+	\param cost_type name of the cost type to get the cost from
+	\param out_float Output parameter for the cost of traversing from parent to child
+
+	\pre g is a valid graph.
+
+	\post 
+	`out_float` is updated with the cost of traversing from parent to child. If no
+	edge exists between parent and child, -1 will be inserted into out_float.
+
+	\returns HF_STATUS::OK on success
+	\returns HF_STATUS::NO_COST if there was no cost with cost_name
+*/
+C_INTERFACE GetEdgeCost(
+	const HF::SpatialStructures::Graph * g,
+	int parent,
+	int child,
+	const char * cost_type,
+	float* out_float
+);
+
+
 /// <summary> Get an ordered array of costs for each node aggregatted by the desired method. </summary>
 /// <param name="graph"> Graph to aggregare edges from. </param>
 /// <param name="agg"> Aggregation type to use. </param>
@@ -122,7 +148,6 @@ C_INTERFACE GetSizeOfEdgeVector(
 
 	\param cost_type Type of cost to use for the graph.
 	\returns HF_STATUS::OK if successful.
-	\returns HF::Exceptions::STATUS::NO_GRAPH if the graph wasn't valid 
 	\returns HF::Exceptions::STATUS::NOT_COMPRESSED if the graph wasn't compressed.
 
 	\code
