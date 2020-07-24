@@ -276,8 +276,7 @@ C_INTERFACE CalculateAndStoreEnergyExpenditure(HF::SpatialStructures::Graph* g) 
 	// Now passing result, a std::vector<std::vector<EdgeSet>> to Graph::AddEdges.
 	// The result container will be ordered by parent id.
 
-	// TODO: implement void Graph::AddEdges(std::vector<std::vector<EdgeSet>>& edges);
-	g->AddEdges(result);
+	g->AddEdges(result, "EnergyExpenditure");
 
 	return OK;
 }

@@ -123,7 +123,7 @@ namespace HumanFactors.SpatialStructures
             if (res == HF_STATUS.NO_COST)
                 throw new KeyNotFoundException("Cost " + cost_type + " could not be found in the graph");
             else if (res != HF_STATUS.OK)
-                throw new Exception("Failed to get CSRPtrs");
+                Debug.Assert(false); // Programmer error! Handle whatever error code was returned here!
            
 
             return new CSRInfo(nnz, cols, rows, data, outer_indices, inner_indices);
