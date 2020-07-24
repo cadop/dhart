@@ -269,4 +269,86 @@ namespace HumanFactors.SpatialStructures
             return true;
         }
     }
+
+    public static class CostAlgorithms
+    {
+        /*!
+            \brief  Calculates and stores cross slope for all subgraphs in g
+            \param  g   The operand Graph
+
+            \code
+                // Create the graph
+                Graph g = new Graph();
+
+                // Create 7 nodes
+                Vector3D n0 = new Vector3D(2, 6, 6);
+                Vector3D n1 = new Vector3D(0, 0, 0);
+                Vector3D n2 = new Vector3D(-5, 5, 4);
+                Vector3D n3 = new Vector3D(-1, 1, 1);
+                Vector3D n4 = new Vector3D(2, 2, 2);
+                Vector3D n5 = new Vector3D(5, 3, 2);
+                Vector3D n6 = new Vector3D(-2, -5, 1);
+
+                // Add 9 edges
+                g.AddEdge(n0, n1, 0); // [ -2, -6, -6 ]
+                g.AddEdge(n1, n2, 0); // [ -5,  5,  4 ]
+                g.AddEdge(n1, n3, 0); // [ -1,  1,  1 ]
+                g.AddEdge(n1, n4, 0); // [  2,  2,  2 ]
+                g.AddEdge(n2, n4, 0); // [ -9, -3, -2 ]
+                g.AddEdge(n3, n5, 0); // [ -6,  2,  1 ]
+                g.AddEdge(n5, n6, 0); // [ -7, -8, -1 ]
+                g.AddEdge(n4, n6, 0); // [ -6, -7, -1 ]
+
+                // Compress the graph after adding edges
+                g.CompressToCSR();
+
+                // Calculate and store edge type in g: cross slope
+                CostAlgorithms.CalculateAndStoreCrossSlope(g);
+            \endcode
+         */
+        public static void CalculateAndStoreCrossSlope(Graph g)
+        {
+            NativeMethods.C_CalculateAndStoreCrossSlope(g.Pointer);
+        }
+
+        /*!
+            \brief  Calculates and stores energy expenditure for all subgraphs in g
+            \param  g   The operand graph
+
+            \code
+		        // Requires #include "graph.h"
+
+		        // Create 7 nodes
+		        Node n0(0, 0, 0);
+		        Node n1(0, 0, 1);
+		        Node n2(5, 5, 4);
+		        Node n3(2, 2, 2);
+		        Node n4(5, 3, 2);
+		        Node n5(6, 6, 7);
+		        Node n6(2, 5, 1);
+
+		        Graph g;
+
+		        // Adding 8 edges
+		        g.addEdge(n0, n1);
+		        g.addEdge(n1, n2);
+		        g.addEdge(n1, n3);
+		        g.addEdge(n1, n4);
+		        g.addEdge(n3, n5);
+		        g.addEdge(n4, n2);
+		        g.addEdge(n6, n4);
+		        g.addEdge(n6, n5);
+
+		        // Always compress the graph after adding edges!
+		        g.Compress();
+
+                // Calculate and store edge type in g: energy expenditure
+		        CalculateAndStoreEnergyExpenditure(&g);
+            \endcode
+         */
+        public static void CalculateAndStoreEnergyExpenditure(Graph g)
+        {
+            NativeMethods.C_CalculateAndStoreEnergyExpenditure(g.Pointer);
+        }
+    }
 }

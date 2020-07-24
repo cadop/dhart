@@ -217,5 +217,73 @@ namespace HumanFactors.Tests.SpatialStructures
             Assert.AreEqual(100, g.GetCost(0, 1, cost_type), "The alternate cost cannot be read");
         }
 
+
+        [TestMethod]
+        public void CalculateAndStoreCrossSlope()
+        {
+            // Create the graph
+            Graph g = new Graph();
+
+            // Create 7 nodes
+            Vector3D n0 = new Vector3D(2, 6, 6);
+            Vector3D n1 = new Vector3D(0, 0, 0);
+            Vector3D n2 = new Vector3D(-5, 5, 4);
+            Vector3D n3 = new Vector3D(-1, 1, 1);
+            Vector3D n4 = new Vector3D(2, 2, 2);
+            Vector3D n5 = new Vector3D(5, 3, 2);
+            Vector3D n6 = new Vector3D(-2, -5, 1);
+
+            // Add 9 edges
+            g.AddEdge(n0, n1, 0); // [ -2, -6, -6 ]
+            g.AddEdge(n1, n2, 0); // [ -5,  5,  4 ]
+            g.AddEdge(n1, n3, 0); // [ -1,  1,  1 ]
+            g.AddEdge(n1, n4, 0); // [  2,  2,  2 ]
+            g.AddEdge(n2, n4, 0); // [ -9, -3, -2 ]
+            g.AddEdge(n3, n5, 0); // [ -6,  2,  1 ]
+            g.AddEdge(n5, n6, 0); // [ -7, -8, -1 ]
+            g.AddEdge(n4, n6, 0); // [ -6, -7, -1 ]
+
+            // Compress the graph after adding edges
+            g.CompressToCSR();
+
+            // Calculate and store edge type in g: cross slope
+            CostAlgorithms.CalculateAndStoreCrossSlope(g);
+        }
+
+        [TestMethod]
+        public void CalculateAndStoreEnergyExpenditure()
+        {
+            // Create the graph
+            Graph g = new Graph();
+
+            // Create 7 nodes
+            Vector3D n0 = new Vector3D(0, 0, 0);
+            Vector3D n1 = new Vector3D(0, 0, 1);
+            Vector3D n2 = new Vector3D(5, 5, 4);
+            Vector3D n3 = new Vector3D(2, 2, 2);
+            Vector3D n4 = new Vector3D(5, 3, 2);
+            Vector3D n5 = new Vector3D(6, 6, 7);
+            Vector3D n6 = new Vector3D(2, 5, 1);
+
+            // Add 9 edges
+            g.AddEdge(n0, n1, 1);
+            g.AddEdge(n1, n2, 1);
+            g.AddEdge(n1, n3, 1);
+            g.AddEdge(n1, n4, 1);
+            g.AddEdge(n3, n5, 1);
+            g.AddEdge(n4, n2, 1);
+            g.AddEdge(n6, n4, 1);
+            g.AddEdge(n6, n5, 1);
+
+            // Always compress the graph after adding edges!
+            g.CompressToCSR();
+
+            // Calculate and store edge type in g: energy expenditure
+            CostAlgorithms.CalculateAndStoreEnergyExpenditure(g);
+
+            // Assert that the graph has new edges in it.
+
+        }
     }
 }
+ 
