@@ -336,9 +336,13 @@ C_INTERFACE AddEdgeFromNodeIDs(
 /// <param name="out_data_ptr"> Pointer to the graph's data array. </param>
 /// <param name="out_inner_indices_ptr"> Pointer to the graph's inner indices array. </param>
 /// <param name="out_inner_indices_ptr"> Pointer to the graph's outer indices array. </param>
-/// <returns> HF_STATUS::OK on completion. </returns>
 
 /*!
+	\param cost_type Cost type to compress the CSR with.
+
+	\returns HF_STATUS::OK on success.
+	\returns HF_STATUS::NO_COST if the asked for cost doesn't exist.
+
 	\code
 		// Requires #include "graph.h"
 
@@ -384,7 +388,8 @@ C_INTERFACE GetCSRPointers(
 	int* out_num_cols,
 	float** out_data_ptr,
 	int** out_inner_indices_ptr,
-	int** out_outer_indices_ptr
+	int** out_outer_indices_ptr,
+	const char* cost_type
 );
 
 /// <summary>

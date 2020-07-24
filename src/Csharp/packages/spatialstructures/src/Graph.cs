@@ -119,9 +119,10 @@ namespace HumanFactors.SpatialStructures
 
             \see CSRPtrs for more info on the CSR type and how to access it.
         */
-        public void CompressToCSR(string cost_type = "")
+        public CSRInfo CompressToCSR(string cost_type = "")
         {
-            this.CSRPointers = NativeMethods.C_GetCSRPointers(handle);
+            this.CSRPointers = NativeMethods.C_GetCSRPointers(handle, cost_type);
+            return this.CSRPointers;
         }
 
         /*! 

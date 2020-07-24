@@ -6,6 +6,7 @@ using HumanFactors.Exceptions;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System;
 
 namespace HumanFactors.Tests.SpatialStructures
 {
@@ -69,8 +70,42 @@ namespace HumanFactors.Tests.SpatialStructures
         {
             Graph G = new Graph();
             G.AddEdge(new Vector3D(0,0,2), new Vector3D(0,0,1), 39);
-            G.CompressToCSR();
+            var csr = G.CompressToCSR();
 
+            // Assert that all pointers aren't null, and that the CSR
+            // has the correct ammount of non-zeros, rows, and columns in it
+            Assert.AreNotEqual(IntPtr.Zero, csr.inner_indices);
+            Assert.AreNotEqual(IntPtr.Zero, csr.outer_indices);
+            Assert.AreNotEqual(IntPtr.Zero, csr.data);
+            Assert.AreEqual(1, csr.nnz);  // Should be 1 nnz since there is 1 edge
+            Assert.AreEqual(3, csr.cols); // Should be 3 cols since there are 2 nodes an an empty column
+            Assert.AreEqual(3, csr.rows); // Should be 3 rows isnce there are 2 nodes and an empty column
+        }
+
+        [TestMethod]
+        public void GetCSRPointersForAltCost()
+        {
+            Graph G = new Graph();
+
+            G.AddEdge(1, 2, 39);
+            var default_ptrs =  G.CompressToCSR();
+
+            G.AddEdge(1, 2, 54, "ALT");
+            var alt_ptrs = G.CompressToCSR("ALT");
+            
+            // Assert that all pointers aren't null, and that the CSR
+            // has the correct ammount of non-zeros, rows, and columns in it
+            Assert.AreEqual(default_ptrs.inner_indices, alt_ptrs.inner_indices);
+            Assert.AreEqual(default_ptrs.outer_indices, alt_ptrs.outer_indices);
+            Assert.AreNotEqual(default_ptrs.data, alt_ptrs.data, "Same value array returned for default and alt CSRs");
+            Assert.AreEqual(1, alt_ptrs.nnz);  // Should be 1 nnz since there is 1 edge
+            Assert.AreEqual(3, alt_ptrs.cols); // Should be 3 cols since there are 2 nodes an an empty column
+            Assert.AreEqual(3, alt_ptrs.rows); // Should be 3 rows isnce there are 2 nodes and an empty column
+
+
+            // Assert that NO_COST is thrown when csrptrs with an invalid cost
+            try{ var csr_bad = G.CompressToCSR("NotACalidCost"); }
+            catch { }
         }
         
         [TestMethod]

@@ -2089,7 +2089,16 @@ namespace CInterfaceTests {
 
 			// Retrieve the CSR from the graph
 			CSRPtrs csr;
-			GetCSRPointers(g, &csr.nnz, &csr.rows, &csr.cols, &csr.data, &csr.inner_indices, &csr.outer_indices);
+			GetCSRPointers(
+				g, 
+				&csr.nnz,
+				&csr.rows, 
+				&csr.cols,
+				&csr.data, 
+				&csr.inner_indices,
+				&csr.outer_indices,
+				""
+			);
 
 			// Release memory for g after use
 			DestroyGraph(g);

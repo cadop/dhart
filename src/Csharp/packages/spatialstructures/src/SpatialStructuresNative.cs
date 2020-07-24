@@ -101,17 +101,30 @@ namespace HumanFactors.SpatialStructures
             return return_int;
         }
 
-        internal static CSRInfo C_GetCSRPointers(IntPtr graph_ptr)
+        internal static CSRInfo C_GetCSRPointers(IntPtr graph_ptr, string cost_type)
         {
             IntPtr data = new IntPtr();
             IntPtr outer_indices = new IntPtr();
             IntPtr inner_indices = new IntPtr();
             int nnz = 0; int cols = 0; int rows = 0;
 
-            HF_STATUS res = GetCSRPointers(graph_ptr, ref nnz, ref rows, ref cols, ref data, ref outer_indices, ref inner_indices);
 
-            if (res != HF_STATUS.OK)
+            HF_STATUS res = GetCSRPointers(
+                graph_ptr,
+                ref nnz,
+                ref rows,
+                ref cols,
+                ref data,
+                ref outer_indices,
+                ref inner_indices,
+                cost_type
+            );
+
+            if (res == HF_STATUS.NO_COST)
+                throw new KeyNotFoundException("Cost " + cost_type + " could not be found in the graph");
+            else if (res != HF_STATUS.OK)
                 throw new Exception("Failed to get CSRPtrs");
+           
 
             return new CSRInfo(nnz, cols, rows, data, outer_indices, inner_indices);
         }
@@ -207,7 +220,8 @@ namespace HumanFactors.SpatialStructures
             ref int out_num_cols,
             ref IntPtr out_data_ptr,
             ref IntPtr out_inner_indices_ptr,
-            ref IntPtr out_outer_indices_ptr
+            ref IntPtr out_outer_indices_ptr,
+            string cost_type
         );
 
         [DllImport(NativeConstants.DLLPath)]

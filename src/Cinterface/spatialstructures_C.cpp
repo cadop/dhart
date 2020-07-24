@@ -189,19 +189,27 @@ C_INTERFACE GetCSRPointers(
 	int* out_num_cols,
 	float** out_data_ptr,
 	int ** out_inner_indices_ptr,
-	int ** out_outer_indices_ptr
+	int ** out_outer_indices_ptr,
+	const char * cost_type
 ) {
-	auto CSR = graph->GetCSRPointers();
+	try {
+		auto CSR = graph->GetCSRPointers(std::string(cost_type));
+		*out_nnz = CSR.nnz;
+		*out_num_rows = CSR.rows;
+		*out_num_cols = CSR.cols;
 
-	*out_nnz = CSR.nnz;
-	*out_num_rows = CSR.rows;
-	*out_num_cols = CSR.cols;
+		*out_data_ptr = CSR.data;
+		*out_inner_indices_ptr = CSR.inner_indices;
+		*out_outer_indices_ptr = CSR.outer_indices;
 
-	*out_data_ptr = CSR.data;
-	*out_inner_indices_ptr = CSR.inner_indices;
-	*out_outer_indices_ptr = CSR.outer_indices;
-
-	return OK;
+		return OK;
+	}
+	catch (NoCost) {
+		return NO_COST;
+	}
+	catch (...) {
+		return GENERIC_ERROR;
+	}
 }
 
 C_INTERFACE GetNodeID(
