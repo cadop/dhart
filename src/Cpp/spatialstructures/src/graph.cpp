@@ -969,6 +969,17 @@ namespace HF::SpatialStructures {
 			AddEdges(set, cost_name);
 	}
 
+
+	void Graph::AddEdges(const vector<vector<IntEdge>> & edges, const std::string & cost_type) {
+		// Each outer vector represents a parent;
+		for (int parent = 0; parent < edges.size(); parent++)
+		{
+			const auto& outgoing_edges = edges[parent];
+			for (const auto& edge : outgoing_edges)
+				this->addEdge(parent, edge.child, edge.weight, cost_type);
+		}
+	}
+
 	void Graph::AddEdges(const EdgeSet & edges, const string& cost_name) {
 		const auto parent = edges.parent;
 		

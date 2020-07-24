@@ -18,7 +18,7 @@ namespace Eigen {
 
 namespace HF::SpatialStructures {
 	using EdgeMatrix = Eigen::SparseMatrix<float, 1>; ///< The type of matrix the graph uses internally
-	using TempMatrix = Eigen::Map<const EdgeMatrix>; ///< A mapped matrix of EdgeMatrix. Only owns pointers to memory. 
+	using TempMatrix = Eigen::Map<const EdgeMatrix>;  ///< A mapped matrix of EdgeMatrix. Only owns pointers to memory. 
 
 	/*! \brief Methods of aggregating the costs for edges for each node in the graph.
 
@@ -443,8 +443,18 @@ namespace HF::SpatialStructures {
 		to store and maintain a CSR matrix. The CSR is always stored as a n by n sparse matrix where
 		n is the number of nodes in ordered_nodes.
 
-		\invariant
-			Every node in the graph will have a Unique ID with no repeats
+		\par Cost Types
+		This Graph is capable of holding multiple cost types for any of it's edges.
+		Each cost type has a distinct key as it's name, such as "CrossSlope" or
+		"EnergyExpenditure". Upon creation, the graph is assigned a default cost
+		type, `Distance` which can be accessed explicitly by the key "Distance" or
+		leaving the cost_type field blank. Alternate costs have corresponding edges
+		in the default cost set, but different costs to traverse from the parent
+		to the child node.
+
+		\invariant 1) Every node in the graph will have a Unique ID with no repeats
+		\invariant 2) Any edge cost set will be a valid replacement for CSR's values
+		array. 
 
 	*/
 	class Graph {
@@ -1831,14 +1841,6 @@ namespace HF::SpatialStructures {
 			\throws std::out_of_range Trying to add an edge to an alternate cost type when it hasn't already
 			been added to the default graph2) If adding an alternate edge to the graph, the graph must already be compressed
 
-			\throws std::logic_error Trying to add an edge to an alternate cost type when it's not compressed
-			\throws std::out_of_range Trying to add an edge to an alternate cost type when it hasn't already
-			been added to the default graph2) If adding an alternate edge to the graph, the graph must already be compressed
-
-			\throws std::logic_error Trying to add an edge to an alternate cost type when it's not compressed
-			\throws std::out_of_range Trying to add an edge to an alternate cost type when it hasn't already
-			been added to the default graph
-
 		*/
 		void AddEdges(const EdgeSet& edges, const std::string& cost_name = "");
 
@@ -1861,10 +1863,51 @@ namespace HF::SpatialStructures {
 		*/
 		std::vector<std::string> GetCostTypes() const;
 		
-		/*! \brief get the cost from parent_id to child_id in the given cost_type.*/
+		/*! 
+		
+			\brief get the cost from parent_id to child_id in the given cost_type.
+			
+			\param parent_id Node that's being traversed from.
+			\param child_id Node that's being traversed to.
+			\param cost_type Type of cost to get for this edge. If blank, the graph's
+			default cost type will be used. 
+
+			\returns The cost of traversing from `parent_id` to `child_id` for `cost_type`. 
+
+			\pre cost_type must be the name of a cost that already exists in the graph,
+			or blank. 
+		*/
 		float GetCost(int parent_id, int child_id, const std::string& cost_type = "") const;
 
-		/*! \brief Clear one or more cost arrays from the graph. */
+		/*! \brief Add a set of intedges to the graph.
+		
+			\param edges An ordered vector of vectors in which each outer vector holds
+			a vector of edges for the node at the ID of that index. For example the 
+			vector at index 0 would hold a vector of intedges for the node at ID 0.a
+
+			\param cost_type The type of cost to add these edges to. If this cost type
+			does not yet exist, then it will be created.
+
+			\pre 1) If adding edges to an alternate cost type, the edges must already have
+			been added to the default graph.
+			\pre 2) If adding an alternate edge to the graph, the graph must already be compressed
+
+			\throws std::logic_error Trying to add an edge to an alternate cost type when it's not compressed
+			\throws std::out_of_range Trying to add an edge to an alternate cost type when it hasn't already
+			been added to the default graph2) If adding an alternate edge to the graph, the graph must already be compressed
+		*/
+		void Graph::AddEdges(const std::vector<std::vector<IntEdge>>& edges, const std::string& cost_type);
+
+		/*!
+			\brief Clear one or more cost arrays from the graph.
+			
+			\param cost_name Name of the cost array to clear. If equal to the default
+			cost of this graph or empty string, will clear all existing cost arrays
+			(except for the default)
+
+			\throws NoCost if the costname specified not match either the default cost or any other
+			cost type held by the graph.
+		*/
 		void ClearCostArrays(const std::string & cost_name = "");
 	};
 }
