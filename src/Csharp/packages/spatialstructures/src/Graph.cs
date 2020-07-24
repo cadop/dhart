@@ -154,6 +154,15 @@ namespace HumanFactors.SpatialStructures
             return new ManagedFloatArray(cvad);
         }
 
+
+        /*!
+            \brief Get the cost of traversing between parent and child
+        */
+        public float GetCost(int parent, int child, string cost_type = "")
+        {
+            return NativeMethods.C_GetEdgeCost(this.Pointer, parent, child, cost_type);
+        }
+
         /*! 
             \brief Gets the ID of a node in the graph.
             

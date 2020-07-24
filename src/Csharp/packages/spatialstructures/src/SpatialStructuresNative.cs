@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization.Formatters;
 using System.Diagnostics;
+using System.Collections;
 
 namespace HumanFactors.SpatialStructures
 {
@@ -82,11 +83,10 @@ namespace HumanFactors.SpatialStructures
                 case HF_STATUS.OK:
                     return;
                 case HF_STATUS.NOT_COMPRESSED:
-                    throw new InvalidOperationException("Tried to add an edge to an alternate cost before the graph was compressed!");
+                    throw new LogicError("Tried to add an edge to an alternate cost before the graph was compressed!");
                 case HF_STATUS.OUT_OF_RANGE:
                     throw new InvalidCostOperation("Tried to add an alternate cost to an edge that doesn't already" +
                         "exist in the default cost set!");
-
             }
         }
 
@@ -147,7 +147,7 @@ namespace HumanFactors.SpatialStructures
                 case HF_STATUS.OK:
                     break;
                 case HF_STATUS.NOT_COMPRESSED:
-                    throw new InvalidOperationException("The graph wasn't compressed.");
+                    throw new LogicError("The graph wasn't compressed.");
                 case HF_STATUS.NO_COST:
                     throw new KeyNotFoundException("The cost type '" + cost_type + "' did not exist already in the graph");
                 default:
@@ -158,6 +158,26 @@ namespace HumanFactors.SpatialStructures
             }
 
             return out_ptrs;
+        }
+
+        internal static float C_GetEdgeCost(IntPtr graph_ptr, int parent, int child, string cost_type)
+        {
+           float out_float = -1;
+           HF_STATUS res = GetEdgeCost(graph_ptr, parent, child, cost_type, ref out_float);
+
+            switch (res){
+                case HF_STATUS.OK:
+                    break;
+                case HF_STATUS.NOT_COMPRESSED:
+                    throw new LogicError("The graph must be compressed to read edge costs");
+                case HF_STATUS.NO_COST:
+                    throw new KeyNotFoundException("The cost " + cost_type + " was not found in the graph.");
+                default:
+                    Debug.Assert(false, "Humanfactors is returning an error code that is not being handled");
+                    break;
+            }
+
+            return out_float;
         }
 
         internal static void C_DestroyNodeVector(IntPtr node_ptr) => DestroyNodes(node_ptr);
@@ -253,5 +273,14 @@ namespace HumanFactors.SpatialStructures
 
         [DllImport(NativeConstants.DLLPath)]
         private static extern HF_STATUS DestroyFloatVector(IntPtr float_vector);
+
+        [DllImport(NativeConstants.DLLPath)]
+        private static extern HF_STATUS GetEdgeCost(
+            IntPtr graph_ptr,
+            int parent_id,
+            int child_id,
+            string cost_type,
+            ref float out_float
+        );
     }
 }

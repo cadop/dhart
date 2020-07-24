@@ -111,4 +111,10 @@ namespace HumanFactors.Exceptions
     {
         public InvalidCostOperation(string message) : base(message) { }
     }
+
+    /*! \brief There was some logical error with what the user was trying to perform. */
+    public class LogicError : System.ApplicationException
+    {
+        public LogicError(string message) : base(message) { }
+    }
 }

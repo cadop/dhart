@@ -1,6 +1,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using HumanFactors.SpatialStructures;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using HumanFactors.Exceptions;
+using System.Collections.Generic;
 
 namespace HumanFactors.Tests.SpatialStructures
 {
@@ -85,6 +88,65 @@ namespace HumanFactors.Tests.SpatialStructures
             Assert.IsTrue(g.GetNodeID(node1) >= 0);
             Assert.IsTrue(g.GetNodeID(node2) >= 0);
             Assert.IsTrue(g.GetNodeID(node4) < 0);
+        }
+
+        [TestMethod]
+        public void GetEdgeCost()
+        {
+            Graph g = new Graph();
+            
+            g.AddEdge(0, 1, 100);
+
+            try {
+                g.GetCost(0, 1);
+            }
+            catch (HumanFactors.Exceptions.LogicError) {
+            }
+
+            g.CompressToCSR();
+            Assert.AreEqual(-1, g.GetCost(1, 2));
+            Assert.AreEqual(100, g.GetCost(0, 1));
+        }
+
+        [TestMethod]
+        public void GetEdgeCostMulti()
+        {
+            Graph g = new Graph();
+            string cost_type = "TestCost";
+
+            // This should throw because the user is trying
+            // to add a cost type to a graph that isn't compressed
+            try { g.AddEdge(0, 1, 39, cost_type);}
+            catch (LogicError) {}
+            
+            g.CompressToCSR();
+
+            // This should throw an exception since the edge
+			// doesn't already exist in the graph for the default cost_type.
+            try { g.AddEdge(0, 1, 39, cost_type);}
+            catch (LogicError) {}
+
+            // Add the edge for the default cost type
+            g.AddEdge(0, 1, 54);
+
+            // Assert that this edge doesn't exist for this alternate cost type
+            try { g.GetCost(1, 2, cost_type); }
+            catch (KeyNotFoundException) { };
+
+
+            // Add the edge for the alternate cost type
+            g.AddEdge(0, 1, 100, cost_type);
+
+            Assert.AreEqual(-1, g.GetCost(0, 2, cost_type),
+                "A cost that doesn't exist for this type returns something other than -1." 
+           );
+            
+            // Assert that the default graph is still readable
+            Assert.AreEqual(54, g.GetCost(0, 1), 
+                "Adding another cost modified the cost in the default graph.");
+            
+            // Assert that the non-default cost is still readable
+            Assert.AreEqual(100, g.GetCost(0, 1, cost_type), "The alternate cost cannot be read");
         }
 
     }
