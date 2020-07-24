@@ -21,7 +21,6 @@ humanfactorspy.spatialstructures.Graph
             ~Graph.ConvertToLists
             ~Graph.GetNodeID
             ~Graph.getNodes
-            ~Graph.get_node_points
    
    
 
