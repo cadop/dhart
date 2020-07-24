@@ -84,11 +84,16 @@ namespace HF::SpatialStructures::CostAlgorithms {
 
 		double slope = to_degrees(res) * direc;
 
+		// This will catch nan, infinity, and negative infinity.
+		// All of these values would break the calculation.
+		if (!std::isfinite(slope))
+			slope = 0;
+
 		return slope;
 		
 	}
 
-	std::vector<EdgeSet> CalculateEnergyExpenditure(Subgraph& sg) {
+	EdgeSet CalculateEnergyExpenditure(const Subgraph& sg) {
 		// Energy expenditure data will be stored here and returned from this function.
 		std::vector<EdgeSet> edge_set;
 
@@ -105,8 +110,8 @@ namespace HF::SpatialStructures::CostAlgorithms {
 			// Retrieve vector components of the vector formed by
 			// parent_node and link_a
 
-			auto dir = parent_node.directionTo(link_a.child);
-			auto magnitude = parent_node.distanceTo(link_a.child);
+			const auto dir = parent_node.directionTo(link_a.child);
+			const auto magnitude = parent_node.distanceTo(link_a.child);
 
 			//
 			//	Angle formula in R3 is:
@@ -124,16 +129,19 @@ namespace HF::SpatialStructures::CostAlgorithms {
 			//auto angle = angle_y_axis;
 			//auto slope = std::clamp(std::tanf(angle), -0.4f, -0.4f);
 
-			double slope = CalculateSlope(parent_node, link_a.child);
+			const double slope = CalculateSlope(parent_node, link_a.child);
+			
+			const double g = std::clamp(std::tan(to_radians(slope)), -0.4, 0.4);
 
 			auto e = 280.5
-				* (std::pow(slope, 5)) - 58.7
-				* (std::pow(slope, 4)) - 76.8
-				* (std::pow(slope, 3)) + 51.9
-				* (std::pow(slope, 2)) + 19.6
-				* (slope) + 2.5;
+				* (std::pow(g, 5)) - 58.7
+				* (std::pow(g, 4)) - 76.8
+				* (std::pow(g, 3)) + 51.9
+				* (std::pow(g, 2)) + 19.6
+				* (g) + 2.5;
 
-			assert(e > 0);
+			// You cannot gain energy. This indicates a programmer error. 
+			assert(e >= 0);
 
 			// Calculate the new score/distance for the IntEdge
 			auto expenditure = e * magnitude;
@@ -147,18 +155,17 @@ namespace HF::SpatialStructures::CostAlgorithms {
 		}
 		
 		EdgeSet es = { parent_node.id, children };
-		edge_set.push_back(es);
 
-		return edge_set;
+		return es;
 	}
 
-	std::vector<std::vector<EdgeSet>> CalculateEnergyExpenditure(Graph& g) {
+	std::vector<EdgeSet> CalculateEnergyExpenditure(const Graph& g) {
 		// Retrieve all nodes from g so we can obtain subgraphs.
 		std::vector<Node> nodes = g.Nodes();
 
 		// The result container will always be, at most, the node count of g.
 		// We can preallocate this memory so we do not have to resize during the loop below.
-		std::vector<std::vector<EdgeSet>> result(nodes.size());
+		std::vector<EdgeSet> result(nodes.size());
 		auto it_result = result.begin();
 
 		for (Node parent_node : nodes) {
@@ -169,7 +176,7 @@ namespace HF::SpatialStructures::CostAlgorithms {
 
 			// Call CalculateEnergyExpenditure using the returned Subgraph,
 			// get a vector<EdgeSet> back
-			std::vector<EdgeSet> energy_expenditures = CalculateEnergyExpenditure(sg);
+			EdgeSet energy_expenditures = CalculateEnergyExpenditure(sg);
 
 			// Dereference it_result, assign it to the energy_expenditures container,
 			// then advance it_result (std::vector<std::vector<EdgeSet>>::iterator)
@@ -179,7 +186,7 @@ namespace HF::SpatialStructures::CostAlgorithms {
 		return result;
 	}
 
-	std::vector<IntEdge> CalculateCrossSlope(Subgraph& sg) {
+	std::vector<IntEdge> CalculateCrossSlope(const Subgraph& sg) {
 		// All cross slope data for Subgraph sg will be stored here 
 		// and returned from this function.
 		std::vector<IntEdge> result;
@@ -273,7 +280,7 @@ namespace HF::SpatialStructures::CostAlgorithms {
 		return result;
 	}
 
-	std::vector<std::vector<IntEdge>> CalculateCrossSlope(Graph& g) {
+	std::vector<std::vector<IntEdge>> CalculateCrossSlope(const Graph& g) {
 		// Retrieve all nodes from g so we can obtain subgraphs.
 		std::vector<Node> nodes = g.Nodes();
 

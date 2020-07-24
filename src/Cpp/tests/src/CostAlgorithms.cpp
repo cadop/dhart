@@ -325,15 +325,18 @@ namespace CInterfaceTests {
 		slope = HF::SpatialStructures::CostAlgorithms::CalculateSlope(n7, n8);
 		ASSERT_NEAR(slope, -45, 0.001);
 
+		// Give the same node twice to ensure that
+		// zero is returned instead of nan.
+		Node nan_check(0, 0, 0);
 
+		ASSERT_EQ(HF::SpatialStructures::CostAlgorithms::CalculateSlope(nan_check, nan_check), 0.0);
 	}
 
 
-/*
 namespace CInterfaceTests {
 
 	TEST(_CostAlgorithmsCInterface, CalculateAndStoreEnergyExpenditureWithEnergyBlob) {
-
+	}
 
 	TEST(_CostAlgorithms, CalculateEnergyExpenditureSubgraph) {
 		// For brevity
@@ -351,7 +354,7 @@ namespace CInterfaceTests {
 
 		// Adding 9 edges
 		g.addEdge(n1, n2);	// [ -5,  5,  4 ]
-		g.addEdge(n0, n1);	// [ -2, -6, -6 ]
+		g.addEdge(n1, n1);	// [ -2, -6, -6 ]
 		g.addEdge(n1, n4);  // [  2,  2,  2 ]
 		g.addEdge(n1, n3);  // [ -1,  1,  1 ]
 		g.addEdge(n3, n5);  // [ -6,  2,  1 ]
@@ -367,8 +370,8 @@ namespace CInterfaceTests {
 		// Get a container of vector<EdgeSet>, ordered by parent ID.
 
 		// These consist of alternate edge costs for Subgraph sg.
+		EdgeSet edge_costs = CalculateEnergyExpenditure(sg);
 	}
-		std::vector<EdgeSet> edge_costs = CalculateEnergyExpenditure(sg);
 	TEST(_CostAlgorithms, CalculateEnergyExpenditureAll) {
 		// for brevity
 
@@ -400,11 +403,10 @@ namespace CInterfaceTests {
 
 		// These consist of alternate edge costs for all subgraphs in g.
 		// Get a container of vector<EdgeSet>, ordered by parent ID.
-		std::vector<std::vector<EdgeSet>> all_edge_costs = CalculateEnergyExpenditure(g);
+		auto all_edge_costs = CalculateEnergyExpenditure(g);
 	}
 
 
 	TEST(_CostAlgorithms, CalculateEnergyExpenditureWithEnergyBlob) {
 	}
 }
-*/

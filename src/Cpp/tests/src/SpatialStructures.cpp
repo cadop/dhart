@@ -9,6 +9,9 @@
 
 
 using namespace HF::SpatialStructures;
+using std::vector;
+using std::string;
+
 namespace GraphTests {
     TEST(_Graph, Creation) {
         HF::SpatialStructures::Graph g;
@@ -50,6 +53,23 @@ namespace GraphTests {
         ASSERT_EQ(g[N2].size(), 0);
     }
 
+	TEST(_Graph, GetUndirectedEdgesMulti) {
+		HF::SpatialStructures::Graph g;
+
+		HF::SpatialStructures::Node N1(39, 39, 39);
+		HF::SpatialStructures::Node N2(54, 54, 54);
+
+		g.addEdge(N1, N2, 100);
+		g.Compress();
+		g.addEdge(N1, N2, 200, "AltCost");
+
+		// Assert that getting it for this cost gets the proper values
+		const auto undirected_edges = g.GetUndirectedEdges(N2, "AltCost");
+		ASSERT_EQ(undirected_edges[0].score, 200);
+		ASSERT_EQ(undirected_edges[0].child, N1);
+	}
+
+
     TEST(_Graph, HasEdgeTrue) {
         HF::SpatialStructures::Graph g;
 
@@ -72,6 +92,22 @@ namespace GraphTests {
         ASSERT_FALSE(g.HasEdge(N1, N1));
     }
 
+	TEST(_Graph, HasEdgeMulti) {
+
+		string alt_cost = "alternate";
+
+		Graph g;
+		g.Compress();
+		g.addEdge(1, 2, 39);
+		g.addEdge(1, 2, 54, alt_cost);
+
+
+		ASSERT_TRUE(g.HasEdge(1, 2, false, alt_cost));
+		ASSERT_TRUE(g.HasEdge(2, 1, true, alt_cost));
+		ASSERT_FALSE(g.HasEdge(1, 11, false, alt_cost));
+		ASSERT_FALSE(g.HasEdge(1, 2, false, "NotSeenCost"));
+	}
+
 	TEST(_Graph, AggregateCosts) {
 		HF::SpatialStructures::Graph g;
 
@@ -82,6 +118,50 @@ namespace GraphTests {
 		g.Compress();
 		ASSERT_EQ(g.AggregateGraph(COST_AGGREGATE::SUM)[0], 30);
 		ASSERT_EQ(g.AggregateGraph(COST_AGGREGATE::SUM)[1], 0);
+	}
+
+	TEST(_Graph, AggregateCostsMulti) {
+		HF::SpatialStructures::Graph g;
+
+		HF::SpatialStructures::Node N1(39, 39, 39);
+		HF::SpatialStructures::Node N2(54, 54, 54);
+
+		g.Compress();
+		g.addEdge(N1, N2, 30);
+		g.addEdge(N1, N2, 39, "TestCost");
+	
+		ASSERT_EQ(g.AggregateGraph(COST_AGGREGATE::SUM, true, "TestCost")[0], 39);
+		ASSERT_EQ(g.AggregateGraph(COST_AGGREGATE::SUM, true, "TestCost")[1], 0);
+	}
+
+	TEST(_Graph, GetCostTypes) {
+		// Create the graph in some nodes
+		Graph g;
+		Node N1(39, 39, 39);
+		Node N2(54, 54, 54);
+
+		// Add an edge to the graph
+		g.Compress();
+		g.addEdge(N1, N2, 30);
+		
+		// First assert that this can be called before costs have been added
+		auto costs_before_added = g.GetCostTypes();
+		ASSERT_EQ(costs_before_added.size(), 0);
+		
+		// Then add an edge with an alternate cost type to effectively create this new cost
+		g.addEdge(N1, N2, 39, "TestCost");
+		
+		// Get cost types from the graph
+		const auto costs = g.GetCostTypes();
+
+		// Check that the size of the returned costtypes is what we think it should be
+		ASSERT_EQ(costs.size(), 1);
+
+		// See if we can find the cost in the set of returned cost types.
+		ASSERT_TRUE(std::find(costs.begin(), costs.end(), "TestCost") != costs.end());
+		
+		// See that we don't find a cost that doesn't exist
+		ASSERT_TRUE(std::find(costs.begin(), costs.end(), "CostThatDoesn'tExist") == costs.end());
 	}
 
     TEST(_Graph, SizeEqualsNumberOfNodes) {
@@ -139,6 +219,21 @@ namespace GraphTests {
 		assert(g.hasKey(N3));
 	}
 
+	/* This is an example of a test case that the current graph can't handle
+	TEST(_Graph, IntAndNode) {
+		Graph g;
+		HF::SpatialStructures::Node N1(1, 1, 2);
+		HF::SpatialStructures::Node N2(2, 3, 4, 5);
+		HF::SpatialStructures::Node N3(11, 22, 140);
+
+		g.addEdge(N1, N2, 33);
+		g.addEdge(4, 3, 33);
+
+		g.NodeFromID(4);
+
+	}
+	*/
+
 	bool Contains(const std::vector<int>& domain, int target) {
 		for (int suspect : domain) {
 			if (suspect == target)
@@ -146,6 +241,7 @@ namespace GraphTests {
 		}
 		return false;
 	}
+
 
 	TEST(_Graph, GetEdges) {
 		HF::SpatialStructures::Node N1(1, 1, 2);
@@ -181,6 +277,197 @@ namespace GraphTests {
 
 	}
 }
+
+// Assert that adding a new edge
+// 1) Doesn't interfere with existing edges
+// 2) Properly stores its own cost
+TEST(_Graph, AddEdgeToNewCost) {
+
+	// Create two nodes
+	HF::SpatialStructures::Node N1(1, 1, 2);
+	HF::SpatialStructures::Node N2(2, 3, 4);
+
+	// Create a graph, add edges, then compress
+	Graph g;
+	g.Compress();
+	g.addEdge(N1, N2, 0.39f);
+	g.addEdge(N1, N2, 0.54f, "TestCost");
+	
+	// Get both edge sets
+	auto default_edges =  g.GetEdges();
+	auto testcost_edges =  g.GetEdges("TestCost");
+
+	// Assert that the edges we defined exist in both seperate arrays.
+	ASSERT_EQ(default_edges[0].children.size(), 1);
+	ASSERT_EQ(default_edges[0].children[0].child, 1);
+	ASSERT_EQ(default_edges[0].children[0].weight, 0.39f);
+
+	ASSERT_EQ(testcost_edges[0].children.size(), 1);
+	ASSERT_EQ(testcost_edges[0].children[0].child, 1);
+	ASSERT_EQ(testcost_edges[0].children[0].weight, 0.54f);
+}
+
+// Assert that the above test holds for adding multiple edges.
+TEST(_Graph, MultipleNewCostDoesntAffectDefault) {
+	
+	vector<IntEdge> StandardEdges = {
+		{0,0.10f}, {1,0.11f}, {2,0.12f}
+	};
+	EdgeSet StandSet(3, StandardEdges);
+	vector<IntEdge> AltCostEdges = {
+		{0,0.20f}, {1,0.21f}, {2,0.22f}
+	};
+	EdgeSet AltSet(3, AltCostEdges);
+	
+	Graph g;
+	g.Compress();
+	g.AddEdges(StandSet);
+	g.AddEdges(AltSet, "TestCost");
+
+	// Get both edge sets
+	auto default_edges =  g.GetEdges();
+	auto testcost_edges =  g.GetEdges("TestCost");
+
+	// Assert that the edges we defined exist in both seperate arrays.
+	ASSERT_EQ(default_edges[3].children.size(), 3);
+	ASSERT_EQ(default_edges[3].children[0].child, 0);
+	ASSERT_EQ(default_edges[3].children[0].weight, 0.1f);
+
+	ASSERT_EQ(testcost_edges[3].children.size(), 3);
+	ASSERT_EQ(testcost_edges[3].children[0].child, 0);
+	ASSERT_EQ(testcost_edges[3].children[0].weight, 0.2f);
+}
+
+TEST(_Graph, GetSubGraphMulti) {
+
+	vector<IntEdge> StandardEdges = {
+		{0,0.10f}, {1,0.11f}, {2,0.12f}
+	};
+	EdgeSet StandSet(3, StandardEdges);
+	vector<IntEdge> AltCostEdges = {
+		{0,0.20f}, {1,0.21f}, {2,0.22f}
+	};
+	EdgeSet AltSet(3, AltCostEdges);
+
+	Graph g;
+	g.Compress();
+	g.AddEdges(StandSet);
+	g.AddEdges(AltSet, "TestCost");
+
+	// Get both edge sets
+	auto default_edges = g.GetEdges();
+	auto testcost_edges = g.GetEdges("TestCost");
+
+	auto sg = g.GetSubgraph(3, "TestCost");
+
+	ASSERT_EQ(sg.m_edges.size(), 3);
+	ASSERT_EQ(sg.m_edges[1].score, 0.21f);
+	ASSERT_EQ(sg.m_edges[2].score, 0.22f);
+
+
+}
+
+inline void CompareVectorsOfEdgeSets(const vector<EdgeSet> & E1, const vector<EdgeSet> & E2){
+	ASSERT_EQ(E1.size(), E2.size());
+
+	for (int i = 0; i < E1.size(); i++)
+		ASSERT_EQ(E1[i], E2[i]);
+}
+
+TEST(_Graph, AddMultipleEdgeSetsToNewCost) {
+	Graph g;
+	
+	// Add filler edges to the graph as a base set of edges
+	g.Compress();
+	vector<EdgeSet> filler_edges{
+		{0, { {0, 9999.0f}, {1, 9999.0f}, {2, 9999.0f} }},
+		{1, { {0, 9999.0f}, {1, 9999.0f}, {2, 9999.0f} }},
+		{2, { {0, 9999.0f}, {1, 9999.0f }, {2, 9999.0f} }}
+	};
+	g.AddEdges(filler_edges);
+
+	// Add actual edges we want to test with
+	vector<EdgeSet> Edges{
+		{0, { {0,0.00f}, {1,0.01f},	{2,0.02f} }},
+		{1, { {0,0.10f}, {1,0.11f},	{2,0.12f} }},
+		{2, { {0,0.20f}, { 1,0.21f }, { 2,0.22f} }}
+	};
+	g.AddEdges(Edges, "AltCost");
+
+	// Compare the result of the graph's output with our own edges
+	CompareVectorsOfEdgeSets(Edges, g.GetEdges("AltCost"));
+}
+
+TEST(_Graph, DefaultNameChange) {
+	const std::string default_name = "DefaultTestName";
+
+	Graph g(default_name);
+	g.Compress();
+	g.addEdge(0, 1, 100, default_name);
+	ASSERT_TRUE(g.HasEdge(0, 1));
+
+	// If this throws here, that means we're not adding
+	// to the default cost type
+	try {
+		g.addEdge(0, 2, 100, "Non-Default-Name");
+	}
+	catch (std::out_of_range) {
+		GTEST_SUCCEED();
+	}
+	catch (...){
+		GTEST_FAIL("Other exception occured.");
+	}
+}
+
+TEST(_Graph, ClearMulti) {
+	const std::string alternate_name = "DefaultTestName";
+
+	Graph g;
+	g.Compress();
+	g.addEdge(0, 1, 100);
+
+	g.addEdge(0, 1, 150, alternate_name);
+	ASSERT_TRUE(g.HasEdge(0, 1, false, alternate_name));
+	
+	g.Clear();
+	ASSERT_FALSE(g.HasEdge(0, 1, false, alternate_name));
+
+	g.addEdge(0, 1, 150);
+	ASSERT_FALSE(g.HasEdge(0, 1, false, alternate_name));
+
+}
+
+TEST(_Graph, AlternateCSR) {
+	
+	// Add filler edges to the graph as a base set of edges
+	Graph g;
+	g.Compress();
+	vector<EdgeSet> filler_edges{
+		{0, { {0, 9999.0f}, {1, 9999.0f}, {2, 9999.0f} }},
+		{1, { {0, 9999.0f}, {1, 9999.0f}, {2, 9999.0f} }},
+		{2, { {0, 9999.0f}, {1, 9999.0f }, {2, 9999.0f} }}
+	};
+	g.AddEdges(filler_edges);
+
+	// Add actual edges we want to test with
+	vector<EdgeSet> Edges{
+		{0, { {0,0.00f}, {1,0.01f},	{2,0.02f} }},
+		{1, { {0,0.10f}, {1,0.11f},	{2,0.12f} }},
+		{2, { {0,0.20f}, { 1,0.21f }, { 2,0.22f} }}
+	};
+	g.AddEdges(Edges, "AltCost");
+
+	// Ensure they're different, and the sum equates to what we would expect
+	CSRPtrs stand_csrptrs = g.GetCSRPointers();
+	auto alt_csrptrs = g.GetCSRPointers("AltCost");
+	const int num_nnz = stand_csrptrs.nnz;
+
+	vector<float> stand_values(stand_csrptrs.data, stand_csrptrs.data + num_nnz);
+	vector<float>  alt_values(alt_csrptrs.data, alt_csrptrs.data + num_nnz);
+
+	ASSERT_FALSE(std::equal(stand_values.begin(), stand_values.end(), alt_values.begin()));
+}
+
 
 TEST(_Rounding, addition_error)
 {
@@ -1326,7 +1613,7 @@ namespace GraphExampleTests {
 
 		// Note that NodeFromID ceases to work if the id argument provided does not exist as an ID among
 		// the nodes within graph
-		ASSERT_TRUE(node_from_id.id == desired_node_id);
+		ASSERT_EQ(node_from_id.id, desired_node_id);
 	}
 
 	TEST(_graph, Clear) {
@@ -1347,7 +1634,7 @@ namespace GraphExampleTests {
 		HF::SpatialStructures::Graph graph(edges, distances, nodes);
 
 		// If we want to remove all nodes and edges from graph, we may do so with Clear:
-		graph.Clear();						// edge_matrix is zeroed out, buffer is squeezed,
+		graph.Clear();						// active_edge_matrix is zeroed out, buffer is squeezed,
 											// triplets are also cleared, and needs_compression == true
 
 		auto v = graph.NodesAsFloat3();
@@ -1641,12 +1928,12 @@ namespace CInterfaceTests {
 			float n1[] = { 0, 1, 2 };
 			float n2[] = { 0, 1, 3 };
 
-			AddEdgeFromNodes(g, n0, n1, 1);
-			AddEdgeFromNodes(g, n0, n2, 2);
-			AddEdgeFromNodes(g, n1, n0, 3);
-			AddEdgeFromNodes(g, n1, n2, 4);
-			AddEdgeFromNodes(g, n2, n0, 5);
-			AddEdgeFromNodes(g, n2, n1, 6);
+			AddEdgeFromNodes(g, n0, n1, 1,"\0");
+			AddEdgeFromNodes(g, n0, n2, 2,"\0");
+			AddEdgeFromNodes(g, n1, n0, 3,"\0");
+			AddEdgeFromNodes(g, n1, n2, 4,"\0");
+			AddEdgeFromNodes(g, n2, n0, 5,"\0");
+			AddEdgeFromNodes(g, n2, n1, 6,"\0");
 
 			auto out_vec = new std::vector<HF::SpatialStructures::Node>;
 			HF::SpatialStructures::Node* out_data = nullptr;
@@ -1689,18 +1976,18 @@ namespace CInterfaceTests {
 			float n1[] = { 0, 1, 2 };
 			float n2[] = { 0, 1, 3 };
 
-			AddEdgeFromNodes(g, n0, n1, 1);
-			AddEdgeFromNodes(g, n0, n2, 2);
-			AddEdgeFromNodes(g, n1, n0, 3);
-			AddEdgeFromNodes(g, n1, n2, 4);
-			AddEdgeFromNodes(g, n2, n0, 5);
-			AddEdgeFromNodes(g, n2, n1, 6);
+			AddEdgeFromNodes(g, n0, n1, 1,"\0");
+			AddEdgeFromNodes(g, n0, n2, 2,"\0");
+			AddEdgeFromNodes(g, n1, n0, 3,"\0");
+			AddEdgeFromNodes(g, n1, n2, 4,"\0");
+			AddEdgeFromNodes(g, n2, n0, 5,"\0");
+			AddEdgeFromNodes(g, n2, n1, 6,"\0");
 
 			std::vector<float>* out_vector = nullptr;
 			float* out_data = nullptr;
 
 			int aggregation_type = 0;
-			AggregateCosts(g, aggregation_type, false, &out_vector, &out_data);
+			AggregateCosts(g, aggregation_type, false,"\0", &out_vector, &out_data);
 
 			DestroyGraph(g);
 		}
@@ -1741,7 +2028,7 @@ namespace CInterfaceTests {
 			float n1[] = { 0, 1, 2 };
 			const float distance = 3;
 
-			AddEdgeFromNodes(g, n0, n1, distance);
+			AddEdgeFromNodes(g, n0, n1, distance,"\0");
 
 			// Release memory for g after use
 			DestroyGraph(g);
@@ -1764,7 +2051,7 @@ namespace CInterfaceTests {
 			const int id1 = 1;
 			const float distance = 3;
 
-			AddEdgeFromNodeIDs(g, id0, id1, distance);
+			AddEdgeFromNodeIDs(g, id0, id1, distance, "");
 
 			// Release memory for g after use
 			DestroyGraph(g);
@@ -1787,12 +2074,12 @@ namespace CInterfaceTests {
 			float n1[] = { 0, 1, 2 };
 			float n2[] = { 0, 1, 3 };
 
-			AddEdgeFromNodes(g, n0, n1, 1);
-			AddEdgeFromNodes(g, n0, n2, 2);
-			AddEdgeFromNodes(g, n1, n0, 3);
-			AddEdgeFromNodes(g, n1, n2, 4);
-			AddEdgeFromNodes(g, n2, n0, 5);
-			AddEdgeFromNodes(g, n2, n1, 6);
+			AddEdgeFromNodes(g, n0, n1, 1,"\0");
+			AddEdgeFromNodes(g, n0, n2, 2,"\0");
+			AddEdgeFromNodes(g, n1, n0, 3,"\0");
+			AddEdgeFromNodes(g, n1, n2, 4,"\0");
+			AddEdgeFromNodes(g, n2, n0, 5,"\0");
+			AddEdgeFromNodes(g, n2, n1, 6,"\0");
 
 			Compress(g);
 
@@ -1802,7 +2089,16 @@ namespace CInterfaceTests {
 
 			// Retrieve the CSR from the graph
 			CSRPtrs csr;
-			GetCSRPointers(g, &csr.nnz, &csr.rows, &csr.cols, &csr.data, &csr.inner_indices, &csr.outer_indices);
+			GetCSRPointers(
+				g, 
+				&csr.nnz,
+				&csr.rows, 
+				&csr.cols,
+				&csr.data, 
+				&csr.inner_indices,
+				&csr.outer_indices,
+				""
+			);
 
 			// Release memory for g after use
 			DestroyGraph(g);
@@ -1825,7 +2121,7 @@ namespace CInterfaceTests {
 			float n1[] = { 0, 1, 2 };
 			const float distance = 3;
 
-			AddEdgeFromNodes(g, n0, n1, distance);
+			AddEdgeFromNodes(g, n0, n1, distance,"\0");
 
 			float point[] = { 0, 1, 2 };
 			int result_id = -1;
@@ -1853,12 +2149,12 @@ namespace CInterfaceTests {
 			float n1[] = { 0, 1, 2 };
 			float n2[] = { 0, 1, 3 };
 
-			AddEdgeFromNodes(g, n0, n1, 1);
-			AddEdgeFromNodes(g, n0, n2, 2);
-			AddEdgeFromNodes(g, n1, n0, 3);
-			AddEdgeFromNodes(g, n1, n2, 4);
-			AddEdgeFromNodes(g, n2, n0, 5);
-			AddEdgeFromNodes(g, n2, n1, 6);
+			AddEdgeFromNodes(g, n0, n1, 1,"\0");
+			AddEdgeFromNodes(g, n0, n2, 2,"\0");
+			AddEdgeFromNodes(g, n1, n0, 3,"\0");
+			AddEdgeFromNodes(g, n1, n2, 4,"\0");
+			AddEdgeFromNodes(g, n2, n0, 5,"\0");
+			AddEdgeFromNodes(g, n2, n1, 6,"\0");
 
 			Compress(g);
 
@@ -1887,9 +2183,9 @@ namespace CInterfaceTests {
 			float n1[] = { 0, 1, 2 };
 			const float distance = 3;
 
-			AddEdgeFromNodes(g, n0, n1, distance);
+			AddEdgeFromNodes(g, n0, n1, distance,"\0");
 
-			ClearGraph(g);
+			ClearGraph(g, "");
 
 			// Release memory for g after use
 			DestroyGraph(g);

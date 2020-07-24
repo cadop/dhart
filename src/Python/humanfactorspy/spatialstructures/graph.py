@@ -53,12 +53,19 @@ class Graph:
         else:
             self.graph_ptr = graph_ptr
 
-    def CompressToCSR(self) -> csr_matrix:
+    def CompressToCSR(self, cost_type: str='') -> csr_matrix:
         """ Compress the graph if needed then return a reference as a CSR matrix
+
+        Parameters:
+            cost_type : str, optional
+                The cost type to use for constructing the CSR. Defaults to empty string.
 
             Returns:
                 A scipy csr matrix
+
         """
+        # convert string to bytes
+        cost_type = cost_type.encode('utf-8')
         (
             nnz,
             row_count,
@@ -66,7 +73,7 @@ class Graph:
             data_ptr,
             inner_indices_ptr,
             outer_indices_ptr,
-        ) = spatial_structures_native_functions.C_GetCSRPtrs(self.graph_ptr)
+        ) = spatial_structures_native_functions.C_GetCSRPtrs(self.graph_ptr, cost_type)
 
         self.nnz = nnz
         self.row_count = row_count
@@ -108,7 +115,8 @@ class Graph:
         parent: Union[Tuple[float, float, float], NodeStruct, int],
         child: Union[Tuple[float, float, float], NodeStruct, int],
         score: float,
-    ) -> None:
+        cost_type: str='',
+        ) -> None:
         """ Add a new edge to the graph from parent to child with the given cost
 
         NOTE: 
@@ -122,13 +130,16 @@ class Graph:
             cost: the cost from parent to child
         """
 
+        # convert string to bytes
+        cost_type = cost_type.encode('utf-8')
+
         if isinstance(parent, int) and isinstance(child, int):
             spatial_structures_native_functions.C_AddEdgeFromNodeIDs(
-                self.graph_ptr, parent, child, score
+                self.graph_ptr, parent, child, score, cost_type
             )
         else:
             spatial_structures_native_functions.C_AddEdgeFromNodes(
-                self.graph_ptr, parent, child, score
+                self.graph_ptr, parent, child, score, cost_type
             )
 
     def getNodes(self) -> NodeList:
@@ -195,12 +206,15 @@ class Graph:
 
         return nodes, edges
 
-    def AggregateEdgeCosts(self, ct: CostAggregationType, directed: bool) -> EdgeSumArray:
+    def AggregateEdgeCosts(self, ct: CostAggregationType, directed: bool, cost_type: str='') -> EdgeSumArray:
         """ Get an aggregated score for every node in the graph based on
          its edges"""
 
+        # convert string to bytes
+        cost_type = cost_type.encode('utf-8')
+
         vector_ptr, data_ptr = spatial_structures_native_functions.C_AggregateEdgeCosts(
-            self.graph_ptr, ct, directed
+            self.graph_ptr, ct, directed, cost_type
         )
         return EdgeSumArray(vector_ptr, data_ptr, len(self.getNodes()))
 

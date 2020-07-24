@@ -1,4 +1,5 @@
 using System.IO;
+using System.Runtime.Hosting;
 
 /*! 
     \brief Custom exceptions thrown by HumanFactors Internally
@@ -87,13 +88,33 @@ namespace HumanFactors.Exceptions
         /// No path could be found between the start and endpoints given. Used exclusively for pathfinding.
         /// </summary>
         NO_PATH = -11,
+
+        /*! \brief There is no cost with the given name associated with the graph */
+        NO_COST = -12,
+
+        /*! \brief The graph has not been compressed! */
+        NOT_COMPRESSED = -13
+
+
     };
 
     /*! \brief The file passed was not an obj file, or was an invalid obj file */
-    public class InvalidMeshException : System.Exception
+    public class InvalidMeshException : System.ApplicationException
     {
         /// <summary>Initializes a new instance of the <see cref="InvalidMeshException" /> class.</summary>
         /// <param name="message">The message that describes the error.</param>
         public InvalidMeshException(string message) : base(message) { }
+    }
+
+    /*! \brief Tried to add an alternate cost to an edge without meeting the preconditions. */
+    public class InvalidCostOperation : System.ApplicationException
+    {
+        public InvalidCostOperation(string message) : base(message) { }
+    }
+
+    /*! \brief There was some logical error with what the user was trying to perform. */
+    public class LogicError : System.ApplicationException
+    {
+        public LogicError(string message) : base(message) { }
     }
 }

@@ -48,6 +48,9 @@ namespace HF {
 				\endcode
 			*/
 			Edge(const Node& Child, float Score = 0, STEP Step_Type = NONE);
+
+			/*! \brief Default Constructor*/
+			Edge() {};
 		};
 
 
@@ -55,6 +58,16 @@ namespace HF {
 		struct IntEdge {
 			int child;      ///< Identifier of child node
 			float weight;	///< Cost to traverse to child. 
+
+
+			inline bool operator==(const IntEdge& IE2) const {
+				return (
+					this->child == IE2.child
+					&& abs(this->weight - IE2.weight) < 0.0001
+				);
+			}
+
+			inline bool operator!=(const IntEdge& IE2) const { return !(this->operator==(IE2)); }
 		};
 
 		/// <summary> A collection of edges and a parent. </summary>
@@ -66,6 +79,42 @@ namespace HF {
 		struct EdgeSet {
 			int parent;						///< Identifier of parent node
 			std::vector<IntEdge> children;	///< vector of IntEdge (children)
+
+			/*! \brief Empty Constructor*/
+			EdgeSet() { parent = -1; };
+
+
+			/*!\brief Construct an edge set with a list of int edges and a parent*/
+			inline EdgeSet(int parent, const std::vector<IntEdge>& edges) {
+				this->AddEdges(edges);
+				this->parent = parent;
+			}
+
+			/*! \brief Get the number of children in this edgeset. */
+			inline int size() const { return children.size(); }
+
+			/*! \brief Add a set of edges to the array of children. */
+			inline void AddEdges(const std::vector<IntEdge> & edges) {
+				// If we have no edges, just overwrite our existing array
+				if (children.size() == 0)
+					children = edges;
+				// Otherwise resize and copy in
+				else {
+					children.resize(children.size() + edges.size());
+					std::copy(edges.begin(), edges.end(), children.begin() + children.size());
+				}
+			}
+
+			/*! \brief Check the equality of two edge sets.*/
+			inline bool operator==(const EdgeSet & ES2) const {
+				if (this->parent != ES2.parent) return false;
+				if (this->children.size() != ES2.children.size()) return false;
+				
+				for (int i = 0; i < this->children.size(); i++)
+					if (this->children[i] != ES2.children[i])
+						return false;
+				return true;
+			}
 		};
 	}
 }

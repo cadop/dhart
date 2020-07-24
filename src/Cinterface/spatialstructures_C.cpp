@@ -14,6 +14,20 @@ using HF::SpatialStructures::Edge;
 using namespace HF::Exceptions;
 using std::vector;
 
+
+inline bool parse_string(const char * c) {
+	if (!c) return false;
+
+	try {
+		std::string test_string(c);
+	}
+	catch (...) {
+		return false;
+	}
+
+	return true;
+}
+
 C_INTERFACE  GetAllNodesFromGraph(const Graph* graph, vector<Node>** out_vector_ptr, Node** out_data_ptr)
 {
 	if (!graph)
@@ -48,20 +62,60 @@ C_INTERFACE GetSizeOfEdgeVector(
 	return OK;
 }
 
+C_INTERFACE GetEdgeCost(
+	const Graph* g, 
+	int parent,
+	int child,
+	const char* cost_type,
+	float* out_float
+) {
+
+	try {
+		*out_float = g->GetCost(parent, child, std::string(cost_type));
+		if (!std::isfinite(*out_float)) *out_float = -1.0f;
+	}
+	catch (HF::Exceptions::NoCost)
+	{
+		return NO_COST;
+	}
+	catch (std::logic_error)
+	{
+		return NOT_COMPRESSED;
+	}
+	catch (...)
+	{
+		return GENERIC_ERROR;
+	}
+	return OK;
+
+}
+
 C_INTERFACE AggregateCosts(
 	const Graph* graph,
 	int agg,
 	bool directed,
+	const char* cost_type,
 	std::vector<float>** out_vector_ptr,
 	float** out_data_ptr
 ) {
+
+	if (!parse_string(cost_type))
+		return NO_COST;
+
 	try {
+		std::string cost_string(cost_type);
 		*out_vector_ptr = new std::vector<float>();
-		**out_vector_ptr = graph->AggregateGraph(static_cast<HF::SpatialStructures::COST_AGGREGATE>(agg), directed);
+		**out_vector_ptr = graph->AggregateGraph(static_cast<HF::SpatialStructures::COST_AGGREGATE>(agg), directed, cost_string);
 		*out_data_ptr = (**out_vector_ptr).data();
 	}
+	catch (HF::Exceptions::NoCost) {
+		return NO_COST; // Cost doesn't exist
+	}
+	catch (std::logic_error) {
+		return NOT_COMPRESSED; // Graph isn't compressed
+	}
 	catch (std::exception & e){
-		return NO_GRAPH;
+		return GENERIC_ERROR; // Graph likely doesn't exist, but something else is funky. 
 	}
 	return OK;
 }
@@ -81,9 +135,15 @@ C_INTERFACE AddEdgeFromNodes(
 	Graph* graph,
 	const float* parent,
 	const float* child,
-	float score
+	float score,
+	const char* cost_type
 ){
 	Node parent_node, child_node;
+
+	if (!parse_string(cost_type))
+		return NO_COST;
+
+	std::string cost_name(cost_type);
 	try {
 		parent_node = Node(parent[0], parent[1], parent[2]);
 		child_node = Node(child[0], child[1], child[2]);
@@ -93,12 +153,32 @@ C_INTERFACE AddEdgeFromNodes(
 		return HF::Exceptions::INVALID_PTR;
 	}
 
-	graph->addEdge(parent_node, child_node, score);
+	try {
+		graph->addEdge(parent_node, child_node, score, cost_name);
+	}
+	catch (std::logic_error){
+		return NOT_COMPRESSED;
+	}
+	catch (std::out_of_range) {
+		return OUT_OF_RANGE;
+	}
 	return OK;
 }
 
-C_INTERFACE AddEdgeFromNodeIDs(Graph * graph, int parent_id, int child_id, float score) {
-	graph->addEdge(parent_id, child_id, score);
+C_INTERFACE AddEdgeFromNodeIDs(Graph * graph, int parent_id, int child_id, float score, const char * cost_type) {
+	if (!parse_string(cost_type))
+		return NO_COST;
+
+	try {
+		graph->addEdge(parent_id, child_id, score, std::string(cost_type));
+	}
+	catch (std::logic_error) {
+		return NOT_COMPRESSED;
+	}
+	catch (std::out_of_range) {
+		return OUT_OF_RANGE;
+	}
+
 	return OK;
 }
 
@@ -109,19 +189,27 @@ C_INTERFACE GetCSRPointers(
 	int* out_num_cols,
 	float** out_data_ptr,
 	int ** out_inner_indices_ptr,
-	int ** out_outer_indices_ptr
+	int ** out_outer_indices_ptr,
+	const char * cost_type
 ) {
-	auto CSR = graph->GetCSRPointers();
+	try {
+		auto CSR = graph->GetCSRPointers(std::string(cost_type));
+		*out_nnz = CSR.nnz;
+		*out_num_rows = CSR.rows;
+		*out_num_cols = CSR.cols;
 
-	*out_nnz = CSR.nnz;
-	*out_num_rows = CSR.rows;
-	*out_num_cols = CSR.cols;
+		*out_data_ptr = CSR.data;
+		*out_inner_indices_ptr = CSR.inner_indices;
+		*out_outer_indices_ptr = CSR.outer_indices;
 
-	*out_data_ptr = CSR.data;
-	*out_inner_indices_ptr = CSR.inner_indices;
-	*out_outer_indices_ptr = CSR.outer_indices;
-
-	return OK;
+		return OK;
+	}
+	catch (NoCost) {
+		return NO_COST;
+	}
+	catch (...) {
+		return GENERIC_ERROR;
+	}
 }
 
 C_INTERFACE GetNodeID(
@@ -141,10 +229,20 @@ C_INTERFACE Compress(Graph* graph)
 	return OK;
 }
 
-C_INTERFACE ClearGraph(HF::SpatialStructures::Graph* graph)
+C_INTERFACE ClearGraph(HF::SpatialStructures::Graph* graph, const char* cost_type)
 {
-	graph->Clear();
+	std::string cost_name(cost_type);
+
+	if (!cost_name.empty())
+		graph->Clear();
+	else {
+		try { graph->ClearCostArrays(cost_name); }
+		catch (NoCost) {
+			return NO_COST;
+		}
+	}
 	return OK;
+
 }
 
 C_INTERFACE DestroyNodes(vector<Node>* nodelist_to_destroy)
@@ -306,7 +404,7 @@ C_INTERFACE CalculateAndStoreCrossSlope(HF::SpatialStructures::Graph* g) {
 	// The result container will be ordered by parent id.
 
 	// TODO: implement void Graph::AddEdges(std::vector<std::vector<IntEdge>>& edges);
-	g->AddEdges(result);
+	g->AddEdges(result, "CrossSlope");
 
 	return OK;
 }

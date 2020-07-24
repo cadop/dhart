@@ -12,35 +12,63 @@
 #include <math.h>
 #include <Constants.h>
 #include <assert.h>
+#include <HFExceptions.h>
+#include <numeric>
 
 using namespace Eigen;
 using std::vector;
+using std::string;
+using namespace HF::Exceptions;
 
 namespace HF::SpatialStructures {
 
-		/*!
-		\summary Determines if a std::string is a floating-point value, i.e. '3.1415', '2.718', or is not -- i.e. '192.168.1.1', 'a_string'
-		\param value The std::string to assess, as to whether it is a floating-point value or not
-		\returns True, if value is determined to be a floating-point number, false otherwise
+	/*! \brief Constructs a mapped CSR that's identical to `g`, with the values arrays of `ca`.
+		
+		\param g Edge matrix to map to
+		\param ca EdgeCostSet to use the value arrays of
 
-		\remarks A 'floating-point type', as defined by this function,
-				 begins with zero or more integers in succession (but no alphas/symbols), then a decimal point ('.'),
-				 followed by one or more integers in succession (absolutely no alphas/symbols).
-				 Any input value that does not adhere to this specification will be denoted as a string type.
-
-		\code
-
-			std::string str_0 = "3.1415";
-			std::string str_1 = ".1415";
-			std::string str_2 = "192.168.1.1";
-			std::string str_3 = "pthread.h";
-
-			bool result_0 = is_floating_type(str_0);	// true
-			bool result_1 = is_floating_type(str_1);	// true
-			bool result_2 = is_floating_type(str_2);	// false
-			bool result_3 = is_floating_type(str_3);	// false
-		\endcode
+		\returns a TempMatrix mapped to the inner and outer indices of `g`, and the values array of `ca`
+	
 	*/
+	inline TempMatrix CreateMappedCSR(const EdgeMatrix& g, const EdgeCostSet& ca) {
+
+		const Map<const SparseMatrix<float, 1>> m(
+			static_cast<int>(g.rows()),
+			static_cast<int>(g.cols()),
+			static_cast<int>(g.nonZeros()),
+			static_cast<const int*>(g.outerIndexPtr()),
+			static_cast<const int*>(g.innerIndexPtr()),
+			//static_cast<const float*>(g.valuePtr()),
+			static_cast<const float*>(ca.GetPtr()),
+			static_cast<const int*>(g.innerNonZeroPtr())
+		);
+
+		return m;
+	}
+
+	/*!
+	\summary Determines if a std::string is a floating-point value, i.e. '3.1415', '2.718', or is not -- i.e. '192.168.1.1', 'a_string'
+	\param value The std::string to assess, as to whether it is a floating-point value or not
+	\returns True, if value is determined to be a floating-point number, false otherwise
+
+	\remarks A 'floating-point type', as defined by this function,
+			 begins with zero or more integers in succession (but no alphas/symbols), then a decimal point ('.'),
+			 followed by one or more integers in succession (absolutely no alphas/symbols).
+			 Any input value that does not adhere to this specification will be denoted as a string type.
+
+	\code
+
+		std::string str_0 = "3.1415";
+		std::string str_1 = ".1415";
+		std::string str_2 = "192.168.1.1";
+		std::string str_3 = "pthread.h";
+
+		bool result_0 = is_floating_type(str_0);	// true
+		bool result_1 = is_floating_type(str_1);	// true
+		bool result_2 = is_floating_type(str_2);	// false
+		bool result_3 = is_floating_type(str_3);	// false
+	\endcode
+*/
 	bool is_floating_type(std::string value);
 
 	inline bool is_floating_type(std::string value) {
@@ -58,22 +86,214 @@ namespace HF::SpatialStructures {
 		return result;
 	}
 
+	template<typename csr>
+	inline float IMPL_GetCost(const csr & c, int parent, int child) {
 
-	int Graph::size() const { return id_to_nodes.size(); }
+		// Get the inner and outer index array pointers of the CSR
+		const auto outer_index_ptr = c.outerIndexPtr();
+		const auto inner_index_ptr = c.innerIndexPtr();
+
+		return IMPL_ValueArrayIndex(parent, child, outer_index_ptr, inner_index_ptr);
+
+	}
+
+	float Graph::GetCost(int parent_id, int child_id, const std::string & cost_type) const{
+		if (this->needs_compression)
+			throw std::logic_error("Graph must be compressed to read costs using getcost");
+
+		if (IsDefaultName(cost_type)) {
+			const int index = IMPL_GetCost(this->edge_matrix, parent_id, child_id);
+			if (index < 0 ) return NAN;
+			else return this->edge_matrix.valuePtr()[index];
+		}
+		else
+			return GetCostForSet(this->GetCostArray(cost_type), parent_id, child_id);
+	}
+
+	void Graph::ClearCostArrays(const std::string& cost_name)
+	{
+		// Delete them all if this is the default name
+		if (this->IsDefaultName(cost_name))
+			edge_cost_maps.clear();
+		else if (!this->HasCostArray(cost_name))
+			throw NoCost("Tried to delete a cost that doesn't already exist!");
+
+		else
+			edge_cost_maps.erase(cost_name);
+
+	}
+
+	int Graph::size() const { return ordered_nodes.size(); }
+
+	int Graph::MaxID() const {
+		int max_id = -1;
+
+		for (const auto& node : ordered_nodes)
+			max_id = std::max(node.id, max_id);
+
+		return max_id;
+	}
 
 	int Graph::getID(const Node& node) const
 	{
+		// First check if we have this node
 		if (hasKey(node))
+
+			// If so, return its id
 			return idmap.at(node);
+
+		// If not, return -1
 		else
 			return -1;
 	}
 
-	CSRPtrs Graph::GetCSRPointers()
+	EdgeCostSet& Graph::GetCostArray(const string& key)
 	{
+		// If this is the default key, then you're missing a check
+		// somewhere. 
+		assert(!IsDefaultName(key));
+
+		// Return the cost map at key.
+		return (edge_cost_maps.at(key));
+	}
+
+	bool Graph::HasCostArray(string key) const {
+		return (edge_cost_maps.count(key) > 0);
+	}
+
+	EdgeCostSet& Graph::GetOrCreateCostType(const std::string& name)
+	{
+		// If this is the default name, then we must throw
+		if (this->IsDefaultName(name))
+			throw std::logic_error("Tried to create cost array with the graph's default name");
+
+		// If we already have this cost array, return a reference to it
+		if (this->HasCostArray(name))
+			return this->GetCostArray(name);
+
+		// Otherwise create a new one then return a reference to it. 
+		else
+			return this->CreateCostArray(name);
+	}
+
+	EdgeCostSet& Graph::CreateCostArray(const std::string& name)
+	{
+		// If you manage to throw this, something is wrong with
+		// CheckCostArray
+		assert(!this->HasCostArray(name));
+
+		if (this->size() < 1)
+			throw std::logic_error("Tried to add a cost to a graph with 0 nodes");
+
+		// the size of the cost array must be large enough to hold all nonzeros
+		// for this specific CSR
+		const int nnz = edge_matrix.nonZeros();
+
+		// Create a new cost set large enough to hold all non-zeros in the graph
+		// then insert it into the hashmap.
+		edge_cost_maps.insert({ name, EdgeCostSet(nnz) });
+
+		// Get and return it
+		return GetCostArray(name);
+	}
+
+	const EdgeCostSet& Graph::GetCostArray(const std::string& key) const
+	{
+		// Ensure that we throw our custom exception if this key doesn't exist
+		if (!this->HasCostArray(key)) 
+			throw NoCost(key.c_str());
+		
+		// Get the cost from the cost map
+		return (edge_cost_maps.at(key));
+	}
+
+	bool Graph::IsDefaultName(const string& name) const
+	{
+		// Check if the name is empty "" or it matches our default
+		// cost member.
+		return (name.empty() || (name == this->default_cost));
+	}
+
+	int IMPL_ValueArrayIndex(
+		int parent_id,
+		int child_id,
+		const int* outer_index_ptr,
+		const int* inner_index_ptr
+	) {
+		// Get the bounds for our search
+		const int search_start_index = outer_index_ptr[parent_id];
+		const int search_end_index = outer_index_ptr[parent_id + 1];
+
+		// Get a pointer to the start and end of our search bounds.
+		const int* search_start_ptr = inner_index_ptr + search_start_index;
+		const int* search_end_ptr = inner_index_ptr + search_end_index;
+
+		// Use an iterator to find a pointer to the value in memory
+		auto itr = std::find(search_start_ptr, search_end_ptr, child_id);
+
+		// Return if we hit the end of our search bounds, indicating that the
+		// edge doesn't exist.
+
+		if (itr == search_end_ptr)
+			return -1;
+		// Find the distance between the pointer we found earlier and the
+		// start of the values array
+		else {
+			int index = std::distance(inner_index_ptr, itr);
+			return index;
+		}
+
+	}
+
+	int Graph::FindValueArrayIndex(int parent_id, int child_id) const
+	{
+		// Get the inner and outer index array pointers of the CSR
+		const auto outer_index_ptr = edge_matrix.outerIndexPtr();
+		const auto inner_index_ptr = edge_matrix.innerIndexPtr();
+			
+		return IMPL_ValueArrayIndex(parent_id, child_id, outer_index_ptr, inner_index_ptr);
+	}
+
+	void Graph::InsertEdgeIntoCostSet(int parent_id, int child_id, float cost, EdgeCostSet& cost_set) {
+		// Get the index of the edge between parent_id and child_id in the values array
+		const int value_index = FindValueArrayIndex(parent_id, child_id);
+
+		// If the index is < 0 that means this edge doesn't exist and we must throw
+		if (value_index < 0)
+			throw std::out_of_range("Tried to insert into edge that doesn't exist in default graph. ");
+
+		// otherwise write this to the cost set.
+		cost_set[value_index] = cost;
+	}
+
+	void Graph::InsertEdgesIntoCostSet(EdgeCostSet& cost_set, const std::vector<EdgeSet>& es)
+	{
+		// Iterate through every edgeset in es
+		for (const auto& edge_set : es)
+		{
+			// Get the parent of this specific edge set
+			const int parent_id = edge_set.parent;
+			
+			// Iterate through every edge in this edge set. 
+			for (const auto& edge : edge_set.children) {
+
+				// Get the child id and cost of this edge
+				const int child_id = edge.child;
+				const int cost = edge.weight;
+
+				// Insert this edge into cost_set
+				InsertEdgeIntoCostSet(parent_id, child_id, cost, cost_set);
+			}
+		}
+	}
+
+	CSRPtrs Graph::GetCSRPointers(const string& cost_type)
+	{
+		const bool default_cost = this->IsDefaultName(cost_type);
 
 		// The graph must be compressed for this to work
-		Compress();
+		if (default_cost)
+			Compress();
 
 		// Construct CSRPtr with the required info from edge_matrix.
 		CSRPtrs out_csr{
@@ -86,46 +306,81 @@ namespace HF::SpatialStructures {
 			edge_matrix.innerIndexPtr()
 		};
 
+		// If this isn't the default cost, replace the pointer with
+		// the pointer of the given cost array. 
+		if (!default_cost)
+		{
+			EdgeCostSet& cost_set = this->GetCostArray(cost_type);
+			out_csr.data = cost_set.GetPtr();
+		}
+
 		return out_csr;
 	}
 
-
-	Node Graph::NodeFromID(int id) const { return ordered_nodes[id]; }
+	Node Graph::NodeFromID(int id) const { return ordered_nodes.at(id); }
 
 	std::vector<Node> Graph::Nodes() const {
 		return ordered_nodes;
 	}
 
-	vector<Edge> Graph::GetUndirectedEdges(const Node & n) const {
-		// Get the ID of n
-		int node_id = getID(n);
+	/*!
+		\brief Retrieve the outgoing edges of a node. 
+
+
+		\tparam csr A CSR that can be accessed by Eigen. 
+		\param edge_matrix EdgeMatrix to use for the costs of each edge
+		\param parent_id ID of the node to get incoming edges of
+		\param g Graph containing edge_matrix. Used to get the Nodes of children ids.
+
+		\returns An array of all edges going to parent_id with the cost used in cost_type. 
+
+		\par Time Complexity O(n)
+		Checks every other node for an edge to n.
+
+		\remarks
+		This can be slow since it needs to check if every other node in the graph has an edge to parent_id.
+	*/
+	template<typename csr>
+	inline vector<Edge> IMPL_UndirectedEdges(const csr& edge_matrix, const int parent_id, const Graph * g) {
 
 		// If N is not in the graph, return an empty array.
+		const int node_id = parent_id;
 		if (node_id < 0) return vector<Edge>();
 
 		// Get the directed edges for this node from calling operator[]
-		vector<Edge> out_edges = (*this)[n];
+		vector<Edge> out_edges;
 
 		// Iterate through every other node
-		for (int i = 0; i < size(); i++) {
+		for (int i = 0; i < edge_matrix.rows(); i++) {
 
 			// Don't look in this node's edge array
 			if (i == node_id) continue;
 
-			// See if this edge
-			if (HasEdge(i, node_id)) {
-				float cost = edge_matrix.coeff(i, node_id);
-				Node child_node = NodeFromID(i);
-				Edge edge(child_node, cost);
+			// See if there's an edge between I and node_id
+			if (edge_matrix.coeff(i, node_id) != 0) {
 
+				// if so, get its cost
+				float cost = edge_matrix.coeff(i, node_id);
+				
+				// Get the node belonging to the child's id
+				Node child_node = g->NodeFromID(i);
+
+				// Construct a new edge and push it back into ot_edges
+				Edge edge{ child_node, cost };
 				out_edges.push_back(edge);
 			}
 		}
 		return out_edges;
 	}
 
+	vector<Edge> Graph::GetUndirectedEdges(const Node& n, const std::string& cost_type) const {
+		// call GetEdgesForNode, since it already handles this. 
+		return this->GetEdgesForNode(getID(n),  true, cost_type);
+	}
+
 	std::vector<EdgeSet> Graph::GetEdges() const
 	{
+
 		// Throw if we're not compressed since this is a const function and compressing the graph
 		// will make it non-const
 		if (this->needs_compression)
@@ -135,16 +390,18 @@ namespace HF::SpatialStructures {
 		vector<EdgeSet> out_edges(this->size());
 
 		// Iterate through every row in the csr
-		for (int k = 0; k < edge_matrix.outerSize(); ++k) {
-			auto& edgeset = out_edges[k];
-			edgeset.parent = k;
+		for (int node_index = 0; node_index < this->size(); ++node_index) {
+			const int node_id = node_index;
+
+			auto& edgeset = out_edges[node_id];
+			edgeset.parent = node_id;
 
 			// Iterate every column in the row.
-			for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, k); it; ++it)
+			for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, node_index); it; ++it)
 			{
 				// Add to array of edgesets
 				float cost = it.value();
-				int child = it.col();
+				int child =it.col();
 				edgeset.children.push_back(IntEdge{ child, cost });
 			}
 		}
@@ -193,20 +450,40 @@ namespace HF::SpatialStructures {
 		return;
 	}
 
-	std::vector<float> Graph::AggregateGraph(COST_AGGREGATE agg_type, bool directed) const
-	{
-		// This won't work if the graph isn't compressed.
-		if (this->needs_compression) throw std::exception("The graph must be compressed!");
+	/*!
+		\brief  Summarize the costs of every outgoing edge for every node in the graph.
+	
+		\tparam csr A Valid Eigen CSR matrix. 
+		\param agg_type Type of aggregation to use.
+		\param num_nodes the number of nodes in the graph.
+		\param directed If true, include both incoming and outgoing edges for calculating a node's score.
+		\param csr_matrix the CSR matrix to use for the costs of every edge in the graph
 
+		\returns An ordered list of scores for agg_type on each node in the graph.
+
+		\remarks Useful for getting scores from the VisibilityGraph.
+
+		\par Time Complexity
+		If undirected: `O(k)` where k is the total number of edges in the graph.\n
+		If directed: `O(n)` where n is the total number of nodes in the graph.
+
+		\see COST_AGGREGATE to see a list of supported aggregation types.
+		\code
+			// be sure to #include "graph.h"
+	*/
+
+	template<typename csr>
+	std::vector<float> Impl_AggregateGraph(COST_AGGREGATE agg_type, int num_nodes, bool directed, const csr & edge_matrix) {
+		
 		// Create an array of floats filled with zeros.
-		vector<float> out_costs(this->size(), 0);
+		vector<float> out_costs(num_nodes, 0);
 
 		// If directed is true, then we only need the values in a node's row to calculate it's score.
 		if (directed)
-			for (int k = 0; k < edge_matrix.outerSize(); ++k) {
+			for (int k = 0; k < num_nodes; ++k) {
 
 				// Sum all values in the row for node k
-				float sum = edge_matrix.row(k).sum();
+				const float sum = edge_matrix.row(k).sum();
 
 				// Get the count of non_zeros for node k
 				int count = edge_matrix.row(k).nonZeros();
@@ -222,13 +499,13 @@ namespace HF::SpatialStructures {
 		// count towards its score.
 		else {
 			// We need to keep track of count per node as well for this algorithm
-			vector<int> count(this->size(), 0);
+			vector<int> count(num_nodes, 0);
 
 			// Iterate through every node in the graph
-			for (int k = 0; k < edge_matrix.outerSize(); ++k) {
+			for (int k = 0; k < num_nodes; ++k) {
 
 				// Iterate through every edge for the node at column k
-				for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, k); it; ++it)
+				for (csr::InnerIterator it(edge_matrix, k); it; ++it)
 				{
 					// Get values from the iterator for this row/col.
 					float cost = it.value();
@@ -244,72 +521,274 @@ namespace HF::SpatialStructures {
 		return out_costs;
 	}
 
+	std::vector<float> Graph::AggregateGraph(COST_AGGREGATE agg_type, bool directed, const string& cost_type) const
+	{
+		// This won't work if the graph isn't compressed.
+		if (this->needs_compression) throw std::exception("The graph must be compressed!");
+	
+		// Determine if this is the default cost. 
+		const bool default_cost = this->IsDefaultName(cost_type);
+
+		// If this isn't the default cost, map to the cost array. 
+		if (!default_cost) {
+
+			// Get the cost array and create a mapped CSR from it
+			const EdgeCostSet & cost_array = this->GetCostArray(cost_type);
+			const TempMatrix cost_matrix= CreateMappedCSR(this->edge_matrix, cost_array);
+
+			// Call the implementation of aggregate graph with this template
+			return Impl_AggregateGraph(agg_type, this->size(), directed, cost_matrix);
+		}
+		else
+			// If this is the default cost, just call AggregateGraph with the default CSR
+			return (Impl_AggregateGraph(agg_type, this->size(), directed, this->edge_matrix));
+	}
+
 	const std::vector<Edge> Graph::operator[](const Node& n) const
 	{
-		// Get the parent id at N. This will throw if n doesn't exist in the hashmap
-		int parent_id = idmap.at(n);
-		std::vector<Edge> out_edges;
-
-		// Iterate through the row of n and add add all values to the output array
-		for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, parent_id); it; ++it) {
-			auto value = it.value();
-			auto col = it.col();
-
-			out_edges.emplace_back(Edge(NodeFromID(col), value));
-		}
-
-		return out_edges;
+		return GetEdgesForNode(this->getID(n));
 	}
 
-	void Graph::addEdge(const Node& parent, const Node& child, float score)
+	void Graph::InsertOrUpdateEdge(int parent_id, int child_id, float score, const string& cost_type) {
+
+		// If this is the default graph, we don't need to worry aobut 
+		if (IsDefaultName(cost_type)) {
+			if (this->needs_compression)
+				TripletsAddOrUpdateEdge(parent_id, child_id, score);
+			else
+				CSRAddOrUpdateEdge(parent_id, child_id, score);
+		}
+		else
+			// Can't add to an alternate cost if the graph isn't compressed
+			if (this->needs_compression)
+				throw std::logic_error("Tried to add an edge to an alternate cost type while uncompressed!");
+			
+			// Add the cost to the cost type pointed to by cost_type
+			else
+			{
+				// Determine whether or not this cost type exists
+				const bool new_cost_array = !HasCostArray(cost_type);
+				
+				// Create a new cost array or get a reference to an existing one
+				auto& cost_set = GetOrCreateCostType(cost_type);
+
+				// Try to add an edge. We need to ensure we maintain the graph's invariants
+				// in the case that this throws.
+				try {
+					InsertEdgeIntoCostSet(parent_id, child_id, score, cost_set);
+				}
+				catch(const std::out_of_range & e){
+
+					// If this is a new cost array, and we threw that would leave it in an invalid
+					// state which will cause problems later. Remove this half baked cost array 
+					// before returning from this exception.
+					if (new_cost_array)
+						this->ClearCostArrays(cost_type);
+					
+					// Rethrow here so callers know we failed to complete
+					throw e;
+				}
+			}
+	}
+
+	float Graph::GetCostForSet(const EdgeCostSet & set, int parent_id, int child_id) const
+	{
+		// Get the index for the cost of the edge between parent_id and child_id
+		const int index = FindValueArrayIndex(parent_id, child_id);
+
+		// If the index is <0, the edge doesn't exist.
+		// We represent non-existant edges as NAN
+		if (index < 0) 
+			return NAN;
+
+		// Othrwise, return the value at this index in set
+		else
+			return set[index];
+	}
+
+	vector<Edge> Graph::GetEdgesForNode(int parent_id, bool undirected, const string & cost_type) const
+	{
+		// Get the row of this node
+		const int row = parent_id;
+		const bool default_name = this->IsDefaultName(cost_type);
+
+		std::vector<Edge> outgoing_edges;
+
+		// Get all of the outgoing edges by iterating through the array if it's the default
+		if (default_name) {
+			for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, row); it; ++it) {
+				const auto col = it.col();
+				float value = it.value();
+
+				outgoing_edges.emplace_back(Edge(NodeFromID(col), value));
+			}
+		}
+		// If using a custom cost, use our own indexing function instead of getting the value from the iterator
+		else {
+			const auto & cost_set = this->GetCostArray(cost_type);
+			std::vector<Edge> out_edges;
+			for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, row); it; ++it) {
+				const auto col = it.col();
+				auto value = this->GetCostForSet(cost_set, row, col);
+
+				outgoing_edges.emplace_back(Edge(NodeFromID(col), value));
+			}
+		}
+	
+		// If this is undirected, we'll need to get a list of incoming edges as well.
+		if (undirected) {
+			vector<Edge> incoming_edges;
+			
+			// Default name uses the default edge_matrix member
+			if (default_name)
+				incoming_edges = IMPL_UndirectedEdges(this->edge_matrix, parent_id, this);
+		
+			// If we're using a custom type, map a CSR to it and use that instead
+			else 
+				incoming_edges = IMPL_UndirectedEdges(this->MapCostMatrix(cost_type), parent_id, this);
+
+			// Combine the incoming and outgoing edges
+			vector<Edge> incoming_and_outgoing(incoming_edges.size() + outgoing_edges.size());
+
+			// Move the contents of outgoing and incoming into this output array, then return it
+			std::move(outgoing_edges.begin(), outgoing_edges.end(), incoming_and_outgoing.begin());
+			std::move(incoming_edges.begin(), incoming_edges.end(), incoming_and_outgoing.begin() + outgoing_edges.size());
+			
+			return incoming_and_outgoing;
+		}
+		else 
+			return outgoing_edges;
+
+	}
+
+	TempMatrix Graph::MapCostMatrix(const std::string& cost_type) const
+	{
+		const EdgeCostSet& cost_array = this->GetCostArray(cost_type);
+		const TempMatrix cost_matrix = CreateMappedCSR(this->edge_matrix, cost_array);
+		return cost_matrix;
+	}
+
+	void Graph::addEdge(const Node& parent, const Node& child, float score, const string & cost_type)
 	{
 		// ![GetOrAssignID_Node]
-		needs_compression = true;
-
+		
+		// Get parent/child ids
 		int parent_id = getOrAssignID(parent);
 		int child_id = getOrAssignID(child);
-		triplets.emplace_back(
-			Eigen::Triplet<float>(parent_id, child_id, score)
-		);
+	
+		// If this is already compressed, update the CSR, otherwise add it to the list of triplets.
+		InsertOrUpdateEdge(parent_id, child_id, score, cost_type);
 		// ![GetOrAssignID_Node]
 	}
 
-	void Graph::addEdge(int parent_id, int child_id, float score)
+	void Graph::addEdge(int parent_id, int child_id, float score, const string & cost_type)
 	{
 		// ![GetOrAssignID_int]
-
-		// This will require that the graph is recompressed
-		needs_compression = true;
-
-		// If the parent or child id is larger than next_id, set next_id to parent or child ID.
-		next_id = std::max(child_id, std::max(parent_id, next_id));
 
 		// Store these Ids in the hashmap if they don't exist already.
 		getOrAssignID(child_id);
 		getOrAssignID(parent_id);
 
-		// Add this to the list of triplets.
-		triplets.emplace_back(Eigen::Triplet<float>(parent_id, child_id, score));
+		InsertOrUpdateEdge(parent_id, child_id, score, cost_type);
+		
 		// ![GetOrAssignID_int]
 	}
 
 	bool Graph::checkForEdge(int parent, int child) const {
 		// ![CheckForEdge]
+		
+		// Get the index for parent and child
+		const int parent_index = parent;
+		const int child_index = child;
 
 		// Iterate through parent's row to see if it has child.
-		for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, parent); it; ++it)
-			if (it.col() == child) return true;
-
+		for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, parent_index); it; ++it)
+			if (it.col() == child_index) return true;
+		
 		// If we've gotten to this point, then the child doesn't exist in parent's row
 		return false;
 		// ![CheckForEdge]
 	}
 
-	bool Graph::HasEdge(int parent, int child, bool undirected) const {
-		return (checkForEdge(parent, child) || (undirected && checkForEdge(child, parent)));
+	void Graph::CSRAddOrUpdateEdge(int parent_id, int child_id, float cost)
+	{
+		const int parent_index = parent_id;
+		const int child_index = child_id;
+
+		// Use coeffref if the cost already exists to avoid duplicate allocations
+		if (HasEdge(parent_index, child_index))
+			edge_matrix.coeffRef(parent_index, child_index) = cost;
+		else {
+			// Reallocate if we must, then insert. 
+			ResizeIfNeeded();
+			edge_matrix.insert(parent_index, child_index) = cost;
+		}
 	}
 
-	bool Graph::HasEdge(const Node& parent, const Node& child, const bool undirected) const {
+	void Graph::TripletsAddOrUpdateEdge(int parent_id, int child_id, float cost) {
+
+		// Add this edge to the list of triplets.
+		triplets.emplace_back(Eigen::Triplet<float>(parent_id, child_id, cost));
+	}
+
+	void Graph::ResizeIfNeeded()
+	{
+		int num_nodes = -1;
+
+		// Find the maximum ID in the graph if using Int Nodes
+		if (using_int_nodes)
+			num_nodes = MaxID();
+		else
+			num_nodes = size();
+
+		// You need one more row/col than capacity
+		num_nodes += 1;
+
+		// If the edge matrix can't fit this many nodes, expand it.
+		if (num_nodes > edge_matrix.rows())
+
+			// Conservative resize preserves all of the values in the graph
+			edge_matrix.conservativeResize(num_nodes, num_nodes);
+
+		assert(num_nodes <= edge_matrix.rows() && num_nodes <= edge_matrix.cols());
+	}
+
+	inline bool Graph::hasKey(int id) const
+	{
+		// The only way to search for an ID now is brute force
+		for (int i = 0; i < ordered_nodes.size(); i++)
+			if (ordered_nodes[i].id == id) return true;
+		
+		return false;
+	}
+
+	bool Graph::HasEdge(int parent, int child, bool undirected, const string & cost_type) const {
+		// Check if these IDS even exist in the graph.
+		if (!this->hasKey(parent) || !this->hasKey(child)) return false;
+
+		// If this is the default name, check for the cost in the base CSR
+		else if (IsDefaultName(cost_type))
+			return (checkForEdge(parent, child) || (undirected && checkForEdge(child, parent)));
+		
+		// If this isn't the default name, then get it from the cost set it's asking for
+		else {
+			// If this doesn't have the cost array defined before, return
+			if (!this->HasCostArray(cost_type)) return false;
+
+			// Otherwise get the cost array and try to find it. 
+			const auto& cost_array = GetCostArray(cost_type);
+			const auto cost = GetCostForSet(cost_array, parent, child);
+
+			// If undirected is specified, call this fucntion again from parent to child
+			// with undirected set to false.
+			bool check_undirected = undirected ? HasEdge(child, parent, false, cost_type) : false;
+
+			return !isnan(cost) || check_undirected;
+		}
+	}
+
+	bool Graph::HasEdge(const Node& parent, const Node& child, const bool undirected, const string cost_type) const {
+
 		// Throw if the graph isn't compresesed.
 		if (!edge_matrix.isCompressed())
 			throw std::exception("Can't get this for uncompressed matrix!");
@@ -318,14 +797,14 @@ namespace HF::SpatialStructures {
 		if (!hasKey(parent) || !hasKey(child)) return false;
 
 		// Get the id of both parent and child.
-		int parent_id = idmap.at(parent);
-		int child_id = idmap.at(child);
-
+		int parent_id = getID(parent);
+		int child_id = getID(child);
+		
 		// Call integer overload.
 		return HasEdge(parent_id, child_id, undirected);
 	}
 
-	int Graph::getOrAssignID(const Node& input_node)
+	inline int Graph::getOrAssignID(const Node& input_node)
 	{
 		// If it's already in the hashmap, then just return the existing ID
 		if (hasKey(input_node))
@@ -335,13 +814,8 @@ namespace HF::SpatialStructures {
 			// Set the id in the hashmap, and add the node to nodes
 			idmap[input_node] = next_id;
 			ordered_nodes.push_back(input_node);
-
-			// Add this id to the id_to_nodes array
-			id_to_nodes.push_back(ordered_nodes.size() - 1);
-
-			//Assign the Id in this node's ID parameter
-			ordered_nodes[next_id].id = next_id;
-
+			
+			ordered_nodes.back().id = next_id;
 			// Increment next_id
 			next_id++;
 
@@ -352,28 +826,41 @@ namespace HF::SpatialStructures {
 
 	int Graph::getOrAssignID(int input_int)
 	{
-		// If it's already in our id list, then just return it
-		if (std::find(this->id_to_nodes.begin(), this->id_to_nodes.end(), input_int)
-			!= this->id_to_nodes.end())
-			return input_int;
-		else {
+		// If this ID isn't in our list, add it, and create an empty node in ordered
+		// nodes to take up space.
+		if (!hasKey(input_int))
+		{
+			// If we're adding a new key that's an integer
+			// ordered_nodes is no longer gauranteed to be
+			// in order and we must tell the graph this.
+			this->using_int_nodes = true;
+
+			// Add an empty node to ordered_nodes
 			ordered_nodes.push_back(Node());
+		
+			// Set the id of the empty node
 			ordered_nodes.back().id = input_int;
-			id_to_nodes.push_back(ordered_nodes.size() - 1);
+
+			this->next_id = std::max(input_int, this->next_id);
 		}
+
+		return input_int;
 	}
 
 	Graph::Graph(
 		const vector<vector<int>>& edges,
 		const vector<vector<float>> & distances,
-		const vector<Node> & Nodes
+		const vector<Node> & Nodes,
+		const std::string & default_cost
 	) {
+
+		this->default_cost = default_cost;
+		
 		// Generate an array with the size of every column from the size of the edges array
 		assert(edges.size() == distances.size());
 		vector<int> sizes(edges.size());
-		for (int i = 0; i < edges.size(); i++) {
+		for (int i = 0; i < edges.size(); i++)
 			sizes[i] = edges[i].size();
-		}
 
 		// Create the graph then reserve these sizes
 		edge_matrix.resize(edges.size(),  edges.size());
@@ -402,6 +889,12 @@ namespace HF::SpatialStructures {
 		edge_matrix.makeCompressed();
 		//assert(edge_matrix.nonZeros() > 0);
 		needs_compression = false;
+	}
+
+	Graph::Graph(const std::string & default_cost_name)
+	{
+		// Assign default cost type, and create an edge matrix.
+		this->default_cost = default_cost_name;
 	}
 
 	bool Graph::HasEdge(const std::array<float, 3>& parent, const std::array<float, 3>& child, bool undirected) const {
@@ -437,14 +930,16 @@ namespace HF::SpatialStructures {
 		// Only do this if the graph needs compression.
 		if (needs_compression) {
 
-			// Calculate the highest ID for all nodes in the triplet array.
-			int max_id = std::max_element(
-				this->ordered_nodes.begin(),
-				this->ordered_nodes.end()
-			)[0].id + 1;
+			// If this has cost arrays then we never should have come here
+			assert(!this->has_cost_arrays); 
 
-			// Resize the edge matrix and insert nodes
-			edge_matrix.resize(max_id, max_id);
+			// Note that the matrix must have atleast one extra row/column
+			int array_size = this->size() + 1;
+			
+			// Resize the edge matrix
+			ResizeIfNeeded();
+
+			// Set the edge matrix from triplets.
 			edge_matrix.setFromTriplets(triplets.begin(), triplets.end());
 
 			// Mark this graph as not requiring compression
@@ -460,16 +955,86 @@ namespace HF::SpatialStructures {
 
 		// Other graph representations should be cleared too
 		ordered_nodes.clear();
-		id_to_nodes.clear();
 		idmap.clear();
+
+		// Clear all cost arrays
+		// Clear all cost arrays.
+		for (auto& cost_map : edge_cost_maps)
+			cost_map.second.Clear();
+	}
+	
+	void Graph::AddEdges(const vector<EdgeSet>& edges, const string& cost_name)
+	{
+		for (const auto& set : edges)
+			AddEdges(set, cost_name);
 	}
 
-	void Graph::AddEdges(std::vector<std::vector<IntEdge>>& edges) {
 
+	void Graph::AddEdges(const vector<vector<IntEdge>> & edges, const std::string & cost_type) {
+		// Each outer vector represents a parent;
+		for (int parent = 0; parent < edges.size(); parent++)
+		{
+			const auto& outgoing_edges = edges[parent];
+			for (const auto& edge : outgoing_edges)
+				this->addEdge(parent, edge.child, edge.weight, cost_type);
+		}
 	}
 
-	void Graph::AddEdges(std::vector<std::vector<EdgeSet>>& edges) {
+	void Graph::AddEdges(const EdgeSet & edges, const string& cost_name) {
+		const auto parent = edges.parent;
+		
+		if (this->IsDefaultName(cost_name))
+			for (const auto& edge : edges.children)
+				this->addEdge(parent, edge.child, edge.weight);
+		else
+			for (const auto& edge : edges.children)
+				this->addEdge(parent, edge.child, edge.weight, cost_name);
+	}
 
+
+	vector<EdgeSet> Graph::GetEdges(const string & cost_name) const
+	{
+		// Call the other function if they're asking for the default.
+		if (this->IsDefaultName(cost_name))
+			return GetEdges();
+
+		// Preallocate an array of edge sets
+		vector<EdgeSet> out_edges(this->size());
+
+		// Get the asked for cost set
+		const auto& cost_set = this->GetCostArray(cost_name);
+		
+		// Iterate through every row in the csr
+		for (int parent_index = 0; parent_index < this->size(); ++parent_index) {
+
+			auto& edgeset = out_edges[parent_index];
+			edgeset.parent = parent_index;
+
+			// Iterate every column in the row.
+			for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, parent_index); it; ++it)
+			{
+				// Add to array of edgesets
+				int child_index = it.col();
+				
+				int cost_index = this->FindValueArrayIndex(parent_index, child_index);
+				float cost = cost_set[cost_index];
+				
+				edgeset.children.push_back(IntEdge{ child_index, cost });
+			}
+		}
+		return out_edges;
+	}
+
+	vector<std::string> Graph::GetCostTypes() const
+	{
+		vector<string> cost_types;
+		
+		// Iterate through the dictionary, adding the key of each
+		// cost type into the output array
+		for (const auto & it : this->edge_cost_maps)
+			cost_types.push_back(it.first);
+
+		return cost_types;
 	}
 
 	std::vector<Node> Graph::GetChildren(const Node& n) const {
@@ -484,17 +1049,17 @@ namespace HF::SpatialStructures {
 		return children;
 	}
 
-	std::vector<Node> Graph::GetChildren(const int parent_id) {
+	std::vector<Node> Graph::GetChildren(const int parent_id) const {
 		return GetChildren(NodeFromID(parent_id));
 	}
 
-	Subgraph Graph::GetSubgraph(Node& parent_node) {
-		return Subgraph{ parent_node, (*this)[parent_node] };
+	Subgraph Graph::GetSubgraph(const Node & parent_node, const string & cost_type) const {
+		return this->GetSubgraph(this->getID(parent_node), cost_type);
 	}
 
-	Subgraph Graph::GetSubgraph(int parent_id) {
+	Subgraph Graph::GetSubgraph(int parent_id, const string & cost_type) const {
 		Node parent_node = ordered_nodes[parent_id];
-		return Subgraph{ parent_node, (*this)[parent_node] };
+		return Subgraph{ parent_node, this->GetEdgesForNode(parent_id, false, cost_type) };
 	}
 
 	void Graph::AddNodeAttribute(int id, std::string attribute, std::string score) {

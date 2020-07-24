@@ -20,7 +20,7 @@ namespace HF::SpatialStructures {
 	struct EdgeSet;
 	struct IntEdge;
 	class Graph;
-	class Subgraph;
+	struct Subgraph;
 }
 
 namespace HF::SpatialStructures::CostAlgorithms {
@@ -323,7 +323,7 @@ namespace HF::SpatialStructures::CostAlgorithms {
 			std::vector<IntEdge> edge_costs = CalculateCrossSlope(sg);
 		\endcode
 	*/
-	std::vector<IntEdge> CalculateCrossSlope(Subgraph& sg);
+	std::vector<IntEdge> CalculateCrossSlope(const Subgraph& sg);
 
 	/*!
 		\summary Calculates cross slope for all subgraphs in Graph g
@@ -363,7 +363,7 @@ namespace HF::SpatialStructures::CostAlgorithms {
 			std::vector<std::vector<IntEdge>> all_edge_costs = CalculateCrossSlope(g);
 		\endcode
 	*/
-	std::vector<std::vector<IntEdge>> CalculateCrossSlope(Graph& g);
+	std::vector<std::vector<IntEdge>> CalculateCrossSlope(const Graph& g);
 
 
 	
@@ -408,7 +408,7 @@ namespace HF::SpatialStructures::CostAlgorithms {
 			std::vector<EdgeSet> edge_costs = CalculateEnergyExpenditure(sg);
 		\endcode
 	*/
-	std::vector<EdgeSet> CalculateEnergyExpenditure(Subgraph& sg);
+	EdgeSet CalculateEnergyExpenditure(const Subgraph& sg);
 
 	/*!
 		\summary Calculates energy expenditure for all subgraphs in Graph g
@@ -448,7 +448,7 @@ namespace HF::SpatialStructures::CostAlgorithms {
 			std::vector<std::vector<EdgeSet>> all_edge_costs = CalculateEnergyExpenditure(g);
 		\endcode
 	*/
-	std::vector<std::vector<EdgeSet>> CalculateEnergyExpenditure(Graph& g);
+	std::vector<EdgeSet> CalculateEnergyExpenditure(const Graph& g);
 
 	/*
 		\summary Calculates the slope between two nodes 
