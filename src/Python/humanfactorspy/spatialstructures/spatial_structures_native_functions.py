@@ -17,31 +17,36 @@ def SizeOfNodeVector(node_vector_ptr: c_void_p) -> int:
     return size.value
 
 
-def GetEdgesForNode(
-    graph_ptr: c_void_p, node_ptr: c_void_p
-) -> Tuple[c_void_p, c_void_p]:
+def GetEdgesForNode(graph_ptr: c_void_p, node_ptr: c_void_p) -> Tuple[c_void_p, c_void_p]:
     """ *** UNIMPLEMENTED *** 
     
     Get a list of nodes from a graph that belong to the specified node
     """
     pass
 
-def C_AggregateEdgeCosts(
-    graph_ptr: c_void_p,
-    aggregate_type: int,
-    directed: bool
-) -> c_void_p:
+def C_AggregateEdgeCosts(graph_ptr: c_void_p, aggregate_type: int, directed: bool, cost_type: str='') -> c_void_p:
+    """
+    Aggregates edge costs
+
+    Notes
+    -----
+
+    Calls `C_INTERFACE AggregateCosts`
+
+    """
+
+    # convert string to bytes
+    cost_type = cost_type.encode('utf-8')
+
+    # Pointers to store results
     vector_ptr = c_void_p(0)
     data_ptr = c_void_p(0)
 
-    HFPython.AggregateCosts(
-        graph_ptr,
-        c_int(aggregate_type),
-        c_bool(directed),
-        byref(vector_ptr),
-        byref(data_ptr)
-    )
+    # Call to C interface
+    HFPython.AggregateCosts(graph_ptr, c_int(aggregate_type), c_bool(directed), 
+                            c_char_p(cost_type), byref(vector_ptr), byref(data_ptr))
 
+    # Return result pointers
     return vector_ptr, data_ptr
 
 
@@ -85,28 +90,46 @@ def C_AddEdgeFromNodes(
     parent: Tuple[float, float, float],
     child: Tuple[float, float, float],
     score: float,
-) -> None:
+    cost_type: str='',
+    ) -> None:
     """ Add a new edge to the graph """
+
+    # convert string to bytes
+    cost_type = cost_type.encode('utf-8')
 
     parent_ptr = ConvertPointsToArray(parent)
     child_ptr = ConvertPointsToArray(child)
 
-    HFPython.AddEdgeFromNodes(graph_ptr, parent_ptr, child_ptr, c_float(score))
+    HFPython.AddEdgeFromNodes(graph_ptr, parent_ptr, child_ptr, c_float(score), c_char_p(cost_type))
 
 
-def C_AddEdgeFromNodeIDs(
-    graph_ptr: c_void_p, parent_id: int, child_id: int, score: float
-) -> None:
-    HFPython.AddEdgeFromNodeIDs(
-        graph_ptr, c_int(parent_id), c_int(child_id), c_float(score)
-    )
+def C_AddEdgeFromNodeIDs(graph_ptr: c_void_p, parent_id: int, child_id: int, score: float, cost_type: str='') -> None:
+    """
+    Adds edge to graph from a node ID
+
+    Returns: 
+        None
+
+    """
+
+    # convert string to bytes
+    cost_type = cost_type.encode('utf-8')
+
+    HFPython.AddEdgeFromNodeIDs(graph_ptr, c_int(parent_id), c_int(child_id),
+                                c_float(score), c_char_p(cost_type) )
 
 
-def C_GetCSRPtrs(
-    graph_ptr: c_void_p,
-) -> Tuple[int, int, int, c_void_p, c_void_p, c_void_p]:
+def C_GetCSRPtrs(graph_ptr: c_void_p, cost_type: str='') -> Tuple[int, int, int, c_void_p, c_void_p, c_void_p]:
     """ Get the information necessary to map a numpy CSR to the C++ graph
-        
+    
+    Parameters:
+
+    graph_ptr : c_void_p
+        a pointer to the graph object
+    
+    cost_type : str, optional
+        The cost type to use for constructing the CSR. Defaults to empty string.
+
     Returns:
         int: Number of non-zeros for the csr
         int: Number of rows in the graph
@@ -115,6 +138,10 @@ def C_GetCSRPtrs(
         c_void_p: Pointer to the inner_indices of the graph
         c_void_p: Pointer to the outer_indices of the graph
     """
+
+    # convert string to bytes
+    cost_type = cost_type.encode('utf-8')
+
     nnz = c_int(0)
     num_cols = c_int(0)
     num_rows = c_int(0)
@@ -131,7 +158,8 @@ def C_GetCSRPtrs(
         byref(data_ptr),
         byref(inner_indices_ptr),
         byref(outer_indices_ptr),
-    )
+        c_char_p(cost_type),
+        )
 
     return (
         nnz.value,
@@ -140,7 +168,7 @@ def C_GetCSRPtrs(
         data_ptr,
         inner_indices_ptr,
         outer_indices_ptr,
-    )
+        )
 
 
 def C_GetNodeID(graph_ptr: c_void_p, node: Tuple[float, float, float]) -> int:
@@ -156,8 +184,16 @@ def C_Compress(graph_ptr: c_void_p) -> None:
     HFPython.Compress(graph_ptr)
 
 
-def C_ClearGraph(graph_ptr: c_void_p) -> None:
-    HFPython.ClearGraph(graph_ptr)
+def C_ClearGraph(graph_ptr: c_void_p, cost_type: str='') -> None:
+    """
+    Clear graph of a given cost type
+    
+    """
+
+    # convert string to bytes
+    cost_type = cost_type.encode('utf-8')
+
+    HFPython.ClearGraph(graph_ptr, c_char_p(cost_type))
 
 
 ### Destructors
