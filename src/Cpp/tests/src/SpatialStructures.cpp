@@ -2185,7 +2185,7 @@ namespace CInterfaceTests {
 
 			AddEdgeFromNodes(g, n0, n1, distance,"\0");
 
-			ClearGraph(g);
+			ClearGraph(g, "");
 
 			// Release memory for g after use
 			DestroyGraph(g);

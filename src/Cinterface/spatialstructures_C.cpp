@@ -229,10 +229,20 @@ C_INTERFACE Compress(Graph* graph)
 	return OK;
 }
 
-C_INTERFACE ClearGraph(HF::SpatialStructures::Graph* graph)
+C_INTERFACE ClearGraph(HF::SpatialStructures::Graph* graph, const char* cost_type)
 {
-	graph->Clear();
+	std::string cost_name(cost_type);
+
+	if (!cost_name.empty())
+		graph->Clear();
+	else {
+		try { graph->ClearCostArrays(cost_name); }
+		catch (NoCost) {
+			return NO_COST;
+		}
+	}
 	return OK;
+
 }
 
 C_INTERFACE DestroyNodes(vector<Node>* nodelist_to_destroy)

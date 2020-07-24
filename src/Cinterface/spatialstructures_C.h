@@ -486,11 +486,16 @@ C_INTERFACE Compress(
 	HF::SpatialStructures::Graph* graph
 );
 
-/// <summary> Clear the nodes/edges for the given graph. </summary>
+/// <summary> Clear the nodes/edges for the given graph. Or clear a specific cost type.</summary>
 /// <param name="graph"> Graph to clear nodes from. </param>
-/// <returns> HF_STATUS::OK on completion. </returns>
 
 /*!
+	
+	\param cost_type If blank, delete the graph, otherwise only clear the cost at this type.
+
+	\returns HF_STATUS::OK if the operation succeeded
+	\returns HF_STATUS::NO_COST if a cost was specified and it couldn't be found.
+
 	\code
 		// Requires #include "graph.h"
 
@@ -517,7 +522,8 @@ C_INTERFACE Compress(
 	\endcode
 */
 C_INTERFACE ClearGraph(
-	HF::SpatialStructures::Graph* graph
+	HF::SpatialStructures::Graph* graph,
+	const char* cost_type
 );
 
 /// <summary> Delete the vector of nodes at the given pointer. </summary>
