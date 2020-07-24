@@ -4,6 +4,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using HumanFactors.Exceptions;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace HumanFactors.Tests.SpatialStructures
 {
@@ -20,21 +22,46 @@ namespace HumanFactors.Tests.SpatialStructures
         {
             Graph G = new Graph();
             G.AddEdge(0, 1, 39);
+            G.CompressToCSR();
+            Assert.AreEqual(39, G.GetCost(0, 1),
+                "Edge failed to be added through ids"    
+            );
         }
         [TestMethod]
         public void AddEdgeFromV3()
         {
             Graph G = new Graph();
             G.AddEdge(new Vector3D(0,0,2), new Vector3D(0,0,1), 39);
+
+            G.CompressToCSR();
+            Assert.AreEqual(39, G.GetCost(0, 1),
+                "Edge failed to be added through vectors"
+            );
         }
 
         [TestMethod]
         public void AddEdgeFromV3WithCosts()
         {
+
+            // Create nodes
+            Vector3D node0 = new Vector3D(0, 0, 1);
+            Vector3D node1 = new Vector3D(0, 0, 2);
+            
+            // Create graph, compress, add edge
             Graph G = new Graph();
-            G.AddEdge(new Vector3D(0, 0, 2), new Vector3D(0, 0, 1), 39);
+            G.AddEdge(node0, node1, 39);
             G.CompressToCSR();
-            G.AddEdge(new Vector3D(0, 0, 2), new Vector3D(0, 0, 1), 100, "Not Default Cost");
+
+            // Add an edge between the alternate costs
+            G.AddEdge(node0, node1, 54, "AltCost");
+
+            // get the ids for both nodes
+            int id_0 = G.GetNodeID(node0);
+            int id_1 = G.GetNodeID(node1);
+
+            Assert.AreEqual(54, G.GetCost(id_0, id_1, "AltCost"),
+                "Adding an edge with vector3Ds causes the alt cost to not save"
+            );
         }
 
         [TestMethod]
@@ -43,6 +70,7 @@ namespace HumanFactors.Tests.SpatialStructures
             Graph G = new Graph();
             G.AddEdge(new Vector3D(0,0,2), new Vector3D(0,0,1), 39);
             G.CompressToCSR();
+
         }
         
         [TestMethod]
@@ -97,15 +125,20 @@ namespace HumanFactors.Tests.SpatialStructures
             
             g.AddEdge(0, 1, 100);
 
-            try {
-                g.GetCost(0, 1);
-            }
-            catch (HumanFactors.Exceptions.LogicError) {
-            }
+            // This must be throw a logicerror if uncompressed
+            // And trying to read edges
+            try { g.GetCost(0, 1); }
+            catch (HumanFactors.Exceptions.LogicError) {}
 
+            // Compress to the CSR 
             g.CompressToCSR();
-            Assert.AreEqual(-1, g.GetCost(1, 2));
-            Assert.AreEqual(100, g.GetCost(0, 1));
+
+            Assert.AreEqual(-1, g.GetCost(1, 2),
+                "Edge that does not exist doesn't return -1 as a cost"
+            );
+            Assert.AreEqual(100, g.GetCost(0, 1),
+                "Newly created edge for default cost type doesn't appear for getedge"
+            );
         }
 
         [TestMethod]
