@@ -24,6 +24,10 @@ def GenerateGraph(
     cores : int = -1
 ) -> Union[Graph, None]:
     """Generate a graph of accessible space. If no graph can be generated, null will be returned. 
+    
+    Notes:
+        The graph generator guarantees the order of nodes in the array to correspond 
+        with the id. This may not be true if the graph is post-modified through adding edges. 
 
     Args:
         bvh (EmbreeBVH): Geometry to use for graph generation. The mesh used
