@@ -47,6 +47,8 @@ namespace HF::Exceptions{
 		INVALID_PTR = -9,		///< One or more of the given pointers didn't lead to anything.
 		OUT_OF_RANGE = -10,     ///< Tried to reference something not in the given container.
 		NO_PATH = -11,			///< There is no path between the start and end points.
+		NO_COST = -12,			///< There is no cost with the given name in the given graph
+		NOT_COMPRESSED = -13,	///< Graph wasn't compressed!
 	};
 
 	/*! \brief Thrown when desired file is not found */
@@ -86,9 +88,15 @@ namespace HF::Exceptions{
 	/*! \brief Thrown when a dependency is missing such as Embree. */
 	struct NoCost : public std::exception
 	{
+		std::string cost_type;
+		NoCost(const std::string& cost_name) {
+			cost_type = cost_name;
+		}
+
 		const char* what() const throw ()
 		{
-			return "Cost type doesn't exist in the graph";
+			std::string new_str = cost_type + "Doesn't exist in the graph!";
+			return new_str.c_str();
 		}
 	};
 

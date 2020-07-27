@@ -4,6 +4,7 @@ from enum import IntEnum as Enum
 from . import meshinfo_native_functions
 from . import MeshInfo
 
+__all__ = ['OBJGroupType','LoadOBJ']
 
 class OBJGroupType(Enum):
     """ Different methods to seperate several meshes from a single OBJ """

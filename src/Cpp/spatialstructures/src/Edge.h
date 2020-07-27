@@ -48,6 +48,9 @@ namespace HF {
 				\endcode
 			*/
 			Edge(const Node& Child, float Score = 0, STEP Step_Type = NONE);
+
+			/*! \brief Default Constructor*/
+			Edge() {};
 		};
 
 

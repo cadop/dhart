@@ -28,9 +28,9 @@
     <link rel="index" title="Index" href="../genindex.html" >
     <link rel="search" title="Search" href="../search.html" >
     <link rel="top" title="Human Metrics 0.0.1 documentation" href="../index.html" >
-    <link rel="up" title="Getting Started" href="../start.html" >
-    <link rel="next" title="Calculating Spatial View" href="view_analysis.html" >
-    <link rel="prev" title="Ray Casting" href="raycast.html" > 
+    <link rel="up" title="Examples" href="../examples.html" >
+    <link rel="next" title="Generate a Graph" href="graph/generating.html" >
+    <link rel="prev" title="Examples" href="../examples.html" > 
   </head>
   <body>
 
@@ -52,7 +52,7 @@
 	
         <li class="active"><a href="../index.html">Human Metrics 0.0.1 documentation</a></li>
 	
-          <li class="active"><a href="../start.html" accesskey="U">Getting Started</a></li> 
+          <li class="active"><a href="../examples.html" accesskey="U">Examples</a></li> 
     </ul>
               
               
@@ -62,11 +62,11 @@
            accesskey="I">index</a>
       </li>
       <li class="active">
-        <a href="view_analysis.html" title="Calculating Spatial View"
+        <a href="graph/generating.html" title="Generate a Graph"
            accesskey="N">next</a>
       </li>
       <li class="active">
-        <a href="raycast.html" title="Ray Casting"
+        <a href="../examples.html" title="Examples"
            accesskey="P">previous</a>
       </li>
     </ul>
@@ -82,38 +82,21 @@
         <div class="bodywrapper">
           <div class="body" id="spc-section-body">
             
-  <div class="section" id="module-humanfactorspy.Examples.GraphGeneratorExample">
-<span id="generating-a-graph"></span><h1>Generating a Graph<a class="headerlink" href="#module-humanfactorspy.Examples.GraphGeneratorExample" title="Permalink to this headline">¶</a></h1>
-<p>In this example we generate a graph.</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">humanfactorspy.geometry</span> <span class="kn">import</span> <span class="n">LoadOBJ</span><span class="p">,</span> <span class="n">CommonRotations</span>
-<span class="kn">from</span> <span class="nn">humanfactorspy.raytracer</span> <span class="kn">import</span> <span class="n">EmbreeBVH</span>
-<span class="kn">from</span> <span class="nn">humanfactorspy.graphgenerator</span> <span class="kn">import</span> <span class="n">GenerateGraph</span>
-<span class="kn">from</span> <span class="nn">humanfactorspy.viewanalysis</span> <span class="kn">import</span> <span class="n">SphericalViewAnalysisAggregate</span><span class="p">,</span> <span class="n">AggregationType</span>
-
-<span class="kn">import</span> <span class="nn">humanfactorspy</span>
-
-<span class="n">obj_path</span> <span class="o">=</span> <span class="n">humanfactorspy</span><span class="o">.</span><span class="n">get_sample_model</span><span class="p">(</span><span class="s2">&quot;plane.obj&quot;</span><span class="p">)</span>
-
-<span class="n">obj</span> <span class="o">=</span> <span class="n">LoadOBJ</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="n">CommonRotations</span><span class="o">.</span><span class="n">Yup_to_Zup</span><span class="p">)</span>
-<span class="n">bvh</span> <span class="o">=</span> <span class="n">EmbreeBVH</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
-
-<span class="n">start_point</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mf">1623.976928</span><span class="p">)</span>
-
-<span class="n">spacing</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
-<span class="n">max_nodes</span> <span class="o">=</span> <span class="mi">500</span>
-
-<span class="n">graph</span> <span class="o">=</span> <span class="n">GenerateGraph</span><span class="p">(</span><span class="n">bvh</span><span class="p">,</span> <span class="n">start_point</span><span class="p">,</span> <span class="n">spacing</span><span class="p">,</span> <span class="n">max_nodes</span><span class="p">,</span> <span class="n">cores</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="n">csr_graph</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">CompressToCSR</span><span class="p">()</span>
-<span class="n">nodes</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">getNodes</span><span class="p">()</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
-</pre></div>
+  <div class="section" id="generating-a-graph">
+<h1>Generating a Graph<a class="headerlink" href="#generating-a-graph" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="graph/generating.html">Generate a Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graph/get_csr.html">Get a CSR of the Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graph/visualize.html">Visualize the Graph</a></li>
+</ul>
 </div>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>594
-[(-1. , -6. ,  0., 0, 0) (-1.5, -6.5, -0., 0, 1) (-1.5, -6. , -0., 0, 2)]
-</pre></div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">These examples use methods found in the following modules:
+<a class="reference internal" href="../generated/humanfactorspy.graphgenerator.html#module-humanfactorspy.graphgenerator" title="humanfactorspy.graphgenerator"><code class="xref py py-mod docutils literal notranslate"><span class="pre">humanfactorspy.graphgenerator</span></code></a>,
+<a class="reference internal" href="../generated/humanfactorspy.geometry.html#module-humanfactorspy.geometry" title="humanfactorspy.geometry"><code class="xref py py-mod docutils literal notranslate"><span class="pre">humanfactorspy.geometry</span></code></a>,
+<a class="reference internal" href="../generated/humanfactorspy.raytracer.html#module-humanfactorspy.raytracer" title="humanfactorspy.raytracer"><code class="xref py py-mod docutils literal notranslate"><span class="pre">humanfactorspy.raytracer</span></code></a></p>
 </div>
 </div>
 
@@ -124,11 +107,11 @@
       <div class="spc-rightsidebar span3">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="raycast.html"
-                        title="previous chapter">Ray Casting</a></p>
+  <p class="topless"><a href="../examples.html"
+                        title="previous chapter">Examples</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="view_analysis.html"
-                        title="next chapter">Calculating Spatial View</a></p>
+  <p class="topless"><a href="graph/generating.html"
+                        title="next chapter">Generate a Graph</a></p>
 
         </div>
       </div>

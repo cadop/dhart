@@ -5,6 +5,7 @@ from typing import *
 import numpy
 from humanfactorspy.spatialstructures import Graph
 
+__all__ = ['ConvertNodesToIds','DijkstraShortestPath']
 
 def ConvertNodesToIds(graph: Graph, nodes: List[Union[Tuple, int]]):
     """ Get ids for nodes in graph. Raises exception if nodes can't be found 
@@ -13,6 +14,7 @@ def ConvertNodesToIds(graph: Graph, nodes: List[Union[Tuple, int]]):
     ignore them.
     
     """
+
     if not isinstance(nodes, List):
         nodes = [nodes]
 
@@ -29,7 +31,7 @@ def DijkstraShortestPath(
     graph: Graph,
     start: List[Union[int, Tuple[float, float, float]]],
     end: List[Union[int, Tuple[float, float, float]]],
-) -> Union[List[Union[Path, None]], Union[Path, None]]:
+    ) -> Union[List[Union[Path, None]], Union[Path, None]]:
     """ Find the shortest path from start to end using Dijkstra's shortest path algorithm
     
     Accepts a list of starting / ending points or single starting/ending
@@ -46,6 +48,10 @@ def DijkstraShortestPath(
 
         If a path cannot be found to connect a start and end point that
         path will be returned as None.
+
+    Raises:
+        humanfactorspy.Exceptions.: Start or End did not exist in 
+            the given graph OR start/end lists did not match in size.
 
     Example:
         Creating a graph, adding edges to it, then generating a path from node 0 to 3.
@@ -90,9 +96,7 @@ def DijkstraShortestPath(
         [(10., 1) ( 0., 3)]
         [(10., 1) ( 0., 3)]
 
-    Raises:
-        humanfactorspy.Exceptions.: Start or End did not exist in 
-            the given graph OR start/end lists did not match in size.
+
     """
 
     graph.CompressToCSR()

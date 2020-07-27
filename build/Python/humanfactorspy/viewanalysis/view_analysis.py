@@ -9,6 +9,7 @@ from humanfactorspy.raytracer import EmbreeBVH, RayResultList
 from . import viewanalysis_native_functions
 from .view_analysis_scores import ViewAnalysisAggregates, ViewAnalysisDirections
 
+__all__ = ['AggregationType','SphericalViewAnalysisAggregate','SphericalViewAnalysis','SphericallyDistributeRays']
 
 class AggregationType(Enum):
     """ Aggregation method to use for view analysis """

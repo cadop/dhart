@@ -13,7 +13,11 @@ humanfactorspy.spatialstructures
 .. autosummary::
     :toctree: .
     
+    CostAggregationType
+    
     Edge
+    
+    EdgeSumArray
     
     Graph
     
@@ -23,4 +27,13 @@ humanfactorspy.spatialstructures
     
 
 
+
+
+.. rubric:: Functions
+
+.. autosummary::
+    :toctree: .
+    
+    CreateListOfNodeStructs
+    
 

@@ -325,7 +325,11 @@ namespace CInterfaceTests {
 		slope = HF::SpatialStructures::CostAlgorithms::CalculateSlope(n7, n8);
 		ASSERT_NEAR(slope, -45, 0.001);
 
+		// Give the same node twice to ensure that
+		// zero is returned instead of nan.
+		Node nan_check(0, 0, 0);
 
+		ASSERT_EQ(HF::SpatialStructures::CostAlgorithms::CalculateSlope(nan_check, nan_check), 0.0);
 	}
 
 

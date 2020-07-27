@@ -12,6 +12,7 @@ To get started from the very beginning with this package, please follow the inst
    
    install.rst
    start.rst
+   examples.rst
    code.rst
    api.rst
    

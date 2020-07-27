@@ -5,6 +5,7 @@ from . import spatial_structures_native_functions
 from humanfactorspy.native_numpy_like import NativeNumpyLike
 from typing import Tuple
 
+__all__ = ['NodeStruct','NodeList','CreateListOfNodeStructs']
 
 class NodeStruct(ctypes.Structure):
     """ A point in space """
@@ -32,14 +33,8 @@ class NodeList(NativeNumpyLike):
             data_ptr: a pointer to the underlying data of that vector
         """
         # Map numpy array to the vector's underlying data
-        node_array_size = spatial_structures_native_functions.SizeOfNodeVector(
-            vector_ptr
-        )
-        super().__init__(
-            vector_ptr,
-            data_ptr,
-            node_array_size,
-        )
+        node_array_size = spatial_structures_native_functions.SizeOfNodeVector(vector_ptr)
+        super().__init__(vector_ptr, data_ptr, node_array_size)
 
 
 def CreateListOfNodeStructs(points: Tuple[float, float, float]) -> numpy.array:

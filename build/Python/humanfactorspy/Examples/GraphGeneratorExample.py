@@ -7,7 +7,6 @@ In this example we generate a graph.
     from humanfactorspy.geometry import LoadOBJ, CommonRotations
     from humanfactorspy.raytracer import EmbreeBVH
     from humanfactorspy.graphgenerator import GenerateGraph
-    from humanfactorspy.viewanalysis import SphericalViewAnalysisAggregate, AggregationType
 
     import humanfactorspy
 
@@ -40,7 +39,6 @@ In this example we generate a graph.
 from humanfactorspy.geometry import LoadOBJ, CommonRotations
 from humanfactorspy.raytracer import EmbreeBVH
 from humanfactorspy.graphgenerator import GenerateGraph
-from humanfactorspy.viewanalysis import SphericalViewAnalysisAggregate, AggregationType
 
 import humanfactorspy
 

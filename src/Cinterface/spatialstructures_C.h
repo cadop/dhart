@@ -68,7 +68,6 @@ C_INTERFACE GetAllNodesFromGraph(
 	HF::SpatialStructures::Node** out_data_ptr
 );
 
-// DOn't document this because it's not ready yet.
 C_INTERFACE GetEdgesForNode(
 	const HF::SpatialStructures::Graph* graph,
 	const HF::SpatialStructures::Node* Node,
@@ -110,6 +109,33 @@ C_INTERFACE GetSizeOfEdgeVector(
 	int* out_size
 );
 
+
+/*! 
+	\brief Get the cost of traversing from `parent` to `child`
+	
+	\param parent ID of the node being traversed from.
+	\param child ID of the node being traversed to.
+	\param cost_type name of the cost type to get the cost from
+	\param out_float Output parameter for the cost of traversing from parent to child
+
+	\pre g is a valid graph.
+
+	\post 
+	`out_float` is updated with the cost of traversing from parent to child. If no
+	edge exists between parent and child, -1 will be inserted into out_float.
+
+	\returns HF_STATUS::OK on success
+	\returns HF_STATUS::NO_COST if there was no cost with cost_name
+*/
+C_INTERFACE GetEdgeCost(
+	const HF::SpatialStructures::Graph * g,
+	int parent,
+	int child,
+	const char * cost_type,
+	float* out_float
+);
+
+
 /// <summary> Get an ordered array of costs for each node aggregatted by the desired method. </summary>
 /// <param name="graph"> Graph to aggregare edges from. </param>
 /// <param name="agg"> Aggregation type to use. </param>
@@ -118,9 +144,12 @@ C_INTERFACE GetSizeOfEdgeVector(
 /// </param>
 /// <param name="out_vector_ptr"> Output parameter for the vector. </param>
 /// <param name="out_vector_ptr"> Output parameter for the vector's held data. </param>
-/// <returns> HF_STATUS::OK if successful. If the graph wasn't valid HF_STATUS::NO_GRAPH. </returns>
-
 /*!
+
+	\param cost_type Type of cost to use for the graph.
+	\returns HF_STATUS::OK if successful.
+	\returns HF::Exceptions::STATUS::NOT_COMPRESSED if the graph wasn't compressed.
+
 	\code
 		// Requires #include "graph.h"
 
@@ -158,6 +187,7 @@ C_INTERFACE AggregateCosts(
 	const HF::SpatialStructures::Graph* graph,
 	int agg,
 	bool directed,
+	const char* cost_type,
 	std::vector<float>** out_vector_ptr,
 	float** out_data_ptr
 );
@@ -206,11 +236,19 @@ C_INTERFACE CreateGraph(
 /// A 3 element float array containing the x, y, and z coordinate of the child node,
 /// </param>
 /// <param name="score"> The cost from parent to child </param>
-/// <returns>
-/// HF_STATUS::OK on success. HF_STATUS::INVALID_PTR on an invalidparent or child node.
-/// </returns>
-
 /*!
+	\param cost_type Type of cost to add the edge to 
+
+	\returns HF::Exceptions::HF_STATUS::OK on success.
+	\returns HF::Exceptions::HF_STATUS::INVALID_PTR on an invalidparent or child node
+	\returns HF::Exceptions::HF_STATUS::NOT_COMPRESSED Tried to add an edge to an alternate cost type
+	when the graph wasn't compressed
+	\returns HF::Exceptions::OUT_OF_RANGE Tried to add an edge to an alternate cost that didn't already
+	exist in the default graph.
+
+	\pre cost_type MUST be a valid delimited char array. If the entire program crashes when this is called,
+	this is why. 
+	
 	\code
 		// Requires #include "graph.h"
 
@@ -238,7 +276,8 @@ C_INTERFACE AddEdgeFromNodes(
 	HF::SpatialStructures::Graph* graph,
 	const float* parent,
 	const float* child,
-	float score
+	float score,
+	const char * cost_type
 );
 
 /// <summary>
@@ -249,9 +288,14 @@ C_INTERFACE AddEdgeFromNodes(
 /// <param name="parent"> The parent's id in the graph. </param>
 /// <param name="child"> The child's id in the graph. </param>
 /// <param name="score"> The cost from parent to child. </param>
-/// <param name="returns"> HF_STATUS::OK on completion. </param>
 
 /*!
+
+	\param cost_type The type of cost to add this edge to.
+	\returns STATUS::OK on completion. 
+	\returns STATUS::NOT_COMPRESSED if an alternate cost was added without first compressing the graph
+	\returns STATUS::NO_COST The given cost string was invalid. 
+
 	\code
 		// Requires #include "graph.h"
 
@@ -278,7 +322,8 @@ C_INTERFACE AddEdgeFromNodeIDs(
 	HF::SpatialStructures::Graph* graph,
 	int parent_id,
 	int child_id,
-	float score
+	float score,
+	const char * cost_type
 );
 
 /// <summary>
@@ -291,9 +336,13 @@ C_INTERFACE AddEdgeFromNodeIDs(
 /// <param name="out_data_ptr"> Pointer to the graph's data array. </param>
 /// <param name="out_inner_indices_ptr"> Pointer to the graph's inner indices array. </param>
 /// <param name="out_inner_indices_ptr"> Pointer to the graph's outer indices array. </param>
-/// <returns> HF_STATUS::OK on completion. </returns>
 
 /*!
+	\param cost_type Cost type to compress the CSR with.
+
+	\returns HF_STATUS::OK on success.
+	\returns HF_STATUS::NO_COST if the asked for cost doesn't exist.
+
 	\code
 		// Requires #include "graph.h"
 
@@ -339,7 +388,8 @@ C_INTERFACE GetCSRPointers(
 	int* out_num_cols,
 	float** out_data_ptr,
 	int** out_inner_indices_ptr,
-	int** out_outer_indices_ptr
+	int** out_outer_indices_ptr,
+	const char* cost_type
 );
 
 /// <summary>
@@ -436,11 +486,16 @@ C_INTERFACE Compress(
 	HF::SpatialStructures::Graph* graph
 );
 
-/// <summary> Clear the nodes/edges for the given graph. </summary>
+/// <summary> Clear the nodes/edges for the given graph. Or clear a specific cost type.</summary>
 /// <param name="graph"> Graph to clear nodes from. </param>
-/// <returns> HF_STATUS::OK on completion. </returns>
 
 /*!
+	
+	\param cost_type If blank, delete the graph, otherwise only clear the cost at this type.
+
+	\returns HF_STATUS::OK if the operation succeeded
+	\returns HF_STATUS::NO_COST if a cost was specified and it couldn't be found.
+
 	\code
 		// Requires #include "graph.h"
 
@@ -467,7 +522,8 @@ C_INTERFACE Compress(
 	\endcode
 */
 C_INTERFACE ClearGraph(
-	HF::SpatialStructures::Graph* graph
+	HF::SpatialStructures::Graph* graph,
+	const char* cost_type
 );
 
 /// <summary> Delete the vector of nodes at the given pointer. </summary>

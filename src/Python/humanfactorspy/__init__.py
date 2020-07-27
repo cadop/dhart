@@ -1,7 +1,7 @@
 import os
 from os.path import dirname as up
 
-all = ['get_sample_model']
+__all__ = ['get_sample_model']
 
 # This should be in a function
 directory = os.path.join(os.path.dirname(os.path.realpath(__file__)) ,"bin" )

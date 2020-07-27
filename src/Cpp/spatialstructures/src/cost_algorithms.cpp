@@ -84,6 +84,11 @@ namespace HF::SpatialStructures::CostAlgorithms {
 
 		double slope = to_degrees(res) * direc;
 
+		// This will catch nan, infinity, and negative infinity.
+		// All of these values would break the calculation.
+		if (!std::isfinite(slope))
+			slope = 0;
+
 		return slope;
 		
 	}
@@ -105,8 +110,8 @@ namespace HF::SpatialStructures::CostAlgorithms {
 			// Retrieve vector components of the vector formed by
 			// parent_node and link_a
 
-			auto dir = parent_node.directionTo(link_a.child);
-			auto magnitude = parent_node.distanceTo(link_a.child);
+			const auto dir = parent_node.directionTo(link_a.child);
+			const auto magnitude = parent_node.distanceTo(link_a.child);
 
 			//
 			//	Angle formula in R3 is:
@@ -124,16 +129,19 @@ namespace HF::SpatialStructures::CostAlgorithms {
 			//auto angle = angle_y_axis;
 			//auto slope = std::clamp(std::tanf(angle), -0.4f, -0.4f);
 
-			double slope = CalculateSlope(parent_node, link_a.child);
+			const double slope = CalculateSlope(parent_node, link_a.child);
+			
+			const double g = std::clamp(std::tan(to_radians(slope)), -0.4, 0.4);
 
 			auto e = 280.5
-				* (std::pow(slope, 5)) - 58.7
-				* (std::pow(slope, 4)) - 76.8
-				* (std::pow(slope, 3)) + 51.9
-				* (std::pow(slope, 2)) + 19.6
-				* (slope) + 2.5;
+				* (std::pow(g, 5)) - 58.7
+				* (std::pow(g, 4)) - 76.8
+				* (std::pow(g, 3)) + 51.9
+				* (std::pow(g, 2)) + 19.6
+				* (g) + 2.5;
 
-			assert(e > 0);
+			// You cannot gain energy. This indicates a programmer error. 
+			assert(e >= 0);
 
 			// Calculate the new score/distance for the IntEdge
 			auto expenditure = e * magnitude;

@@ -1,5 +1,6 @@
 import ctypes
 import numpy
+from numpy.lib import recfunctions as rfn
 from scipy.sparse import csr_matrix
 from ctypes import c_float, c_int, c_void_p
 from typing import *
@@ -9,6 +10,7 @@ from humanfactorspy.native_numpy_like import NativeNumpyLike
 from .node import NodeStruct, NodeList
 from . import spatial_structures_native_functions
 
+__all__ = ['CostAggregationType','EdgeSumArray','Graph']
 
 class CostAggregationType(IntEnum):
     SUM = 0
@@ -130,9 +132,50 @@ class Graph:
             )
 
     def getNodes(self) -> NodeList:
-        """ Get a list of nodes from the graph as a nodelist """
+        """ Get a list of nodes from the graph as a nodelist 
+
+        The graph generator guarantees the order of nodes in the array to correspond 
+        with the id. However, if the graph used to call this method is post-modified
+        for example, by adding edges manually, this may not hold true. 
+
+        """
+
         ret = spatial_structures_native_functions.GetNodesFromGraph(self.graph_ptr)
         return NodeList(ret[0], ret[1])
+
+    def get_node_points(self):
+        """
+        Get the nodes of the graph as xyz values in a numpy array by defining the array name
+        view to be used as the x,y,z values. It uses the `structured_to_unstructured` 
+        method of numpy to perform the conversion.
+
+        Parameters
+        ----------
+
+        None
+
+        Returns
+        -------
+
+        ndarray[n x 3]
+            where n is the number of nodes in the graph and 3 is an x,y,z point
+
+        Examples
+        --------
+
+        >>> 
+        >>> 
+
+        """
+
+        # first get the nodes
+        nodes = self.getNodes()
+        # extract the array names of the xyz values
+        node_xyz = nodes.array[['x','y','z']]
+        # convert to an unstructured array to be seen like normal numpy array
+        xyz_array = rfn.structured_to_unstructured(node_xyz)
+
+        return node_point_array
 
     def Clear(self):
         """ Clear all edges/nodes from the graph """
@@ -152,9 +195,7 @@ class Graph:
 
         return nodes, edges
 
-    def AggregateEdgeCosts(
-        self, ct: CostAggregationType, directed: bool
-    ) -> EdgeSumArray:
+    def AggregateEdgeCosts(self, ct: CostAggregationType, directed: bool) -> EdgeSumArray:
         """ Get an aggregated score for every node in the graph based on
          its edges"""
 

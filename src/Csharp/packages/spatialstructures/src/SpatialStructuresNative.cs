@@ -1,9 +1,12 @@
 ﻿using HumanFactors.Exceptions;
 using HumanFactors.NativeUtils;
 using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization.Formatters;
+using System.Diagnostics;
+using System.Collections;
 
 namespace HumanFactors.SpatialStructures
 {
@@ -62,15 +65,29 @@ namespace HumanFactors.SpatialStructures
             return out_ptr;
         }
 
-        internal static void C_AddEdge(IntPtr graph_ptr, int parent_id, int child_id, float score)
-            => AddEdgeFromNodeIDs(graph_ptr, parent_id, child_id, score);
+        internal static void C_AddEdge(IntPtr graph_ptr, int parent_id, int child_id, float score, string cost_type)
+            => AddEdgeFromNodeIDs(graph_ptr, parent_id, child_id, score, cost_type);
 
-        internal static void C_AddEdge(IntPtr graph_ptr, Vector3D parent, Vector3D child, float cost)
+        internal static void C_AddEdge(IntPtr graph_ptr, Vector3D parent, Vector3D child, float cost, string cost_type)
         {
+            // Convert parent and child to arrays
             var parent_arr = parent.ToArray();
             var child_arr = child.ToArray();
 
-            AddEdgeFromNodes(graph_ptr, parent_arr, child_arr, cost);
+            // Try to add them to the graph
+            HF_STATUS stat = AddEdgeFromNodes(graph_ptr, parent_arr, child_arr, cost, cost_type);
+
+            // Handle error codes
+            switch (stat)
+            {
+                case HF_STATUS.OK:
+                    return;
+                case HF_STATUS.NOT_COMPRESSED:
+                    throw new LogicError("Tried to add an edge to an alternate cost before the graph was compressed!");
+                case HF_STATUS.OUT_OF_RANGE:
+                    throw new InvalidCostOperation("Tried to add an alternate cost to an edge that doesn't already" +
+                        "exist in the default cost set!");
+            }
         }
 
         internal static void C_DestroyGraph(IntPtr graph_ptr) => DestroyGraph(graph_ptr);
@@ -84,17 +101,30 @@ namespace HumanFactors.SpatialStructures
             return return_int;
         }
 
-        internal static CSRInfo C_GetCSRPointers(IntPtr graph_ptr)
+        internal static CSRInfo C_GetCSRPointers(IntPtr graph_ptr, string cost_type)
         {
             IntPtr data = new IntPtr();
             IntPtr outer_indices = new IntPtr();
             IntPtr inner_indices = new IntPtr();
             int nnz = 0; int cols = 0; int rows = 0;
 
-            HF_STATUS res = GetCSRPointers(graph_ptr, ref nnz, ref rows, ref cols, ref data, ref outer_indices, ref inner_indices);
 
-            if (res != HF_STATUS.OK)
-                throw new Exception("Failed to get CSRPtrs");
+            HF_STATUS res = GetCSRPointers(
+                graph_ptr,
+                ref nnz,
+                ref rows,
+                ref cols,
+                ref data,
+                ref outer_indices,
+                ref inner_indices,
+                cost_type
+            );
+
+            if (res == HF_STATUS.NO_COST)
+                throw new KeyNotFoundException("Cost " + cost_type + " could not be found in the graph");
+            else if (res != HF_STATUS.OK)
+                Debug.Assert(false); // Programmer error! Handle whatever error code was returned here!
+           
 
             return new CSRInfo(nnz, cols, rows, data, outer_indices, inner_indices);
         }
@@ -116,15 +146,51 @@ namespace HumanFactors.SpatialStructures
             return new CVectorAndData(data_ptr, vector_ptr, size);
         }
 
-        internal static CVectorAndData C_AggregateEdgeCosts(IntPtr graph_ptr, bool directed, GraphEdgeAggregation agg_type)
+        internal static CVectorAndData C_AggregateEdgeCosts(IntPtr graph_ptr, bool directed, GraphEdgeAggregation agg_type, string cost_type)
         {
             CVectorAndData out_ptrs = new CVectorAndData();
 
-            var res = AggregateCosts(graph_ptr, agg_type, directed, ref out_ptrs.vector, ref out_ptrs.data);
-            if (res != HF_STATUS.OK)
-                throw new Exception("Aggregation");
+            var res = AggregateCosts(graph_ptr, agg_type, directed, cost_type, ref out_ptrs.vector, ref out_ptrs.data);
+
+            Debug.Assert(res != HF_STATUS.GENERIC_ERROR);  // An exception that wasn't given an error code was caught by C++
+            Debug.Assert(res != HF_STATUS.NOT_COMPRESSED); // The graph wasn't compressed before calling this function.
+                                                           // Ensure callers aren't allowed to make this happen.
+            switch (res)
+            {
+                case HF_STATUS.OK:
+                    break;
+                case HF_STATUS.NOT_COMPRESSED:
+                    throw new LogicError("The graph wasn't compressed.");
+                case HF_STATUS.NO_COST:
+                    throw new KeyNotFoundException("The cost type '" + cost_type + "' did not exist already in the graph");
+                default:
+                    Debug.Assert(false); // There's an error code being returned that
+                                         // isn't accounted for. All outputs from C++ should be handled
+                                         // by explicit asserts or new exceptions.
+                    break;
+            }
 
             return out_ptrs;
+        }
+
+        internal static float C_GetEdgeCost(IntPtr graph_ptr, int parent, int child, string cost_type)
+        {
+           float out_float = -1;
+           HF_STATUS res = GetEdgeCost(graph_ptr, parent, child, cost_type, ref out_float);
+
+            switch (res){
+                case HF_STATUS.OK:
+                    break;
+                case HF_STATUS.NOT_COMPRESSED:
+                    throw new LogicError("The graph must be compressed to read edge costs");
+                case HF_STATUS.NO_COST:
+                    throw new KeyNotFoundException("The cost " + cost_type + " was not found in the graph.");
+                default:
+                    Debug.Assert(false, "Humanfactors is returning an error code that is not being handled");
+                    break;
+            }
+
+            return out_float;
         }
 
         internal static void C_DestroyNodeVector(IntPtr node_ptr) => DestroyNodes(node_ptr);
@@ -132,6 +198,10 @@ namespace HumanFactors.SpatialStructures
         internal static void C_DestroyFloatVector(IntPtr float_vector) => DestroyFloatVector(float_vector);
 
         internal static void C_CompressGraph(IntPtr graph) => Compress(graph);
+
+        internal static void C_CalculateAndStoreCrossSlope(IntPtr graph) => CalculateAndStoreCrossSlope(graph);
+
+        internal static void C_CalculateAndStoreEnergyExpenditure(IntPtr graph) => CalculateAndStoreEnergyExpenditure(graph);
 
         [DllImport(NativeConstants.DLLPath)]
         private static extern HF_STATUS GetNodes(
@@ -154,7 +224,8 @@ namespace HumanFactors.SpatialStructures
             ref int out_num_cols,
             ref IntPtr out_data_ptr,
             ref IntPtr out_inner_indices_ptr,
-            ref IntPtr out_outer_indices_ptr
+            ref IntPtr out_outer_indices_ptr,
+            string cost_type
         );
 
         [DllImport(NativeConstants.DLLPath)]
@@ -165,6 +236,7 @@ namespace HumanFactors.SpatialStructures
             IntPtr graph,
             GraphEdgeAggregation agg,
             bool directed,
+            string cost_type,
             ref IntPtr out_vector_ptr,
             ref IntPtr out_data_ptr
         );
@@ -177,7 +249,8 @@ namespace HumanFactors.SpatialStructures
             IntPtr Graph,
             [In] float[] parent,
             [In] float[] child,
-            float score
+            float score,
+            string cost_type
         );
 
         [DllImport(NativeConstants.DLLPath)]
@@ -185,7 +258,8 @@ namespace HumanFactors.SpatialStructures
             IntPtr Graph,
             int parent,
             int child,
-            float score
+            float score,
+            string cost_type
         );
 
         [DllImport(NativeConstants.DLLPath)]
@@ -217,5 +291,20 @@ namespace HumanFactors.SpatialStructures
 
         [DllImport(NativeConstants.DLLPath)]
         private static extern HF_STATUS DestroyFloatVector(IntPtr float_vector);
+
+        [DllImport(NativeConstants.DLLPath)]
+        private static extern HF_STATUS GetEdgeCost(
+            IntPtr graph_ptr,
+            int parent_id,
+            int child_id,
+            string cost_type,
+            ref float out_float
+        );
+
+        [DllImport(NativeConstants.DLLPath)]
+        private static extern HF_STATUS CalculateAndStoreCrossSlope(IntPtr graph_pointer);
+
+        [DllImport(NativeConstants.DLLPath)]
+        private static extern HF_STATUS CalculateAndStoreEnergyExpenditure(IntPtr graph_pointer);
     }
 }
