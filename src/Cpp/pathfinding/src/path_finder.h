@@ -329,7 +329,7 @@ namespace HF {
 			\param out_path_members Location for the pathmember pointer array will be created. All path member
 			pointers will point to the PathMembers of the Path in paths at the same location. Paths that could not
 			be generated will be left as null pointers. 
-			\param out_sizes Output raw_array of integers that will cntain the length of every path in path_members.
+			\param out_sizes Output raw_array of integers that will contain the length of every path in path_members.
 			Paths that could not be generated will be left with a length of zero.
 			
 			\pre
