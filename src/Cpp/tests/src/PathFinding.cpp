@@ -16,6 +16,7 @@
 
 #include "pathfinder_C.h"
 #include "cost_algorithms.h"
+#include "spatialstructures_C.h"
 
 using namespace HF::SpatialStructures;
 using namespace HF::Pathfinding;
@@ -580,7 +581,7 @@ namespace CInterfaceTests {
 		HF::SpatialStructures::PathMember* out_path_member = nullptr;
 		int out_size = -1;
 
-		CreatePath(&g, 0, 4, &out_size, &out_path, &out_path_member);
+		CreatePath(&g, 0, 4, "\0", &out_size, &out_path, &out_path_member);
 
 		// Use out_path, out_path_member
 
@@ -621,7 +622,7 @@ namespace CInterfaceTests {
 		int* out_sizes = new int[MAX_SIZE];
 
 		// Use CreatePaths
-		CreatePaths(&g, start_nodes, end_nodes, out_path, out_path_member, out_sizes, MAX_SIZE);
+		CreatePaths(&g, start_nodes, end_nodes, "\0", out_path, out_path_member, out_sizes, MAX_SIZE);
 
 		///
 		/// Resource cleanup
@@ -685,7 +686,7 @@ namespace CInterfaceTests {
 
 		// Retrieve a Subgraph, parent node ID 0 -- of alternate edge costs.
 		// Add these alternate edges to graph.
-		std::string desired_cost_type = "cross slope";
+		std::string desired_cost_type = AlgorithmCostTitle(COST_ALG_KEY::CROSS_SLOPE);
 		auto edge_set = CalculateEnergyExpenditure(graph.GetSubgraph(0));
 		graph.AddEdges(edge_set, desired_cost_type);
 
@@ -695,7 +696,7 @@ namespace CInterfaceTests {
 		int out_size = -1;
 
 		// Use CreatePathCostType, be sure to use the .c_str() method if using a std::string for desired_cost_type
-		CreatePathCostType(&graph, 0, 4, &out_size, &out_path, &out_path_member, desired_cost_type.c_str());
+		CreatePath(&graph, 0, 4, desired_cost_type.c_str(), &out_size, &out_path, &out_path_member);
 		
 		///
 		/// Use out_path, out_path_member
@@ -739,7 +740,7 @@ namespace CInterfaceTests {
 
 		// Retrieve a Subgraph, parent node ID 0 -- of alternate edge costs.
 		// Add these alternate edges to graph.
-		std::string desired_cost_type = "cross slope";
+		std::string desired_cost_type = AlgorithmCostTitle(COST_ALG_KEY::CROSS_SLOPE);
 		auto edge_set = CalculateEnergyExpenditure(graph);
 		graph.AddEdges(edge_set, desired_cost_type);
 
@@ -759,7 +760,7 @@ namespace CInterfaceTests {
 		int* out_sizes = new int[MAX_SIZE];
 
 		// Use CreatePathsCostType, be sure to use the .c_str() method if using a std::string for desired_cost_type
-		CreatePathsCostType(&graph, start_nodes, end_nodes, out_path, out_path_member, out_sizes, MAX_SIZE, desired_cost_type.c_str());
+		CreatePaths(&graph, start_nodes, end_nodes, desired_cost_type.c_str(), out_path, out_path_member, out_sizes, MAX_SIZE);
 
 		///
 		/// Use out_path, out_path_member
@@ -817,7 +818,7 @@ namespace CInterfaceTests {
 		HF::SpatialStructures::PathMember* out_path_member = nullptr;
 		int out_size = -1;
 
-		CreatePath(&g, 0, 4, &out_size, &out_path, &out_path_member);
+		CreatePath(&g, 0, 4, "\0", &out_size, &out_path, &out_path_member);
 
 		// Get out_path's info, store results in out_path_member and out_size
 		GetPathInfo(out_path, &out_path_member, &out_size);
@@ -848,7 +849,7 @@ namespace CInterfaceTests {
 		HF::SpatialStructures::PathMember* out_path_member = nullptr;
 		int out_size = -1;
 
-		CreatePath(&g, 0, 4, &out_size, &out_path, &out_path_member);
+		CreatePath(&g, 0, 4,"\0", &out_size, &out_path, &out_path_member);
 
 		// Use out_path, out_path_member
 

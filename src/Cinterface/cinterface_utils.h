@@ -1,6 +1,9 @@
 #include <vector>
 #include <array>
 
+#ifndef HF_SPATIAL_STRUCTURES
+#define HF_SPATIAL_STRUCTURES
+
 /*!
 	\brief Perform human scale analysis on 3D environments.
 
@@ -94,7 +97,9 @@ C_INTERFACE DestroyFloatVector(std::vector<float>* float_vector);
 	\endcode
 */
 template <typename T>
-void DeleteRawPtr(T * ptr ) {
+inline void DeleteRawPtr(T * ptr ) {
 	if (ptr)
 		delete ptr;
 }
+
+#endif
