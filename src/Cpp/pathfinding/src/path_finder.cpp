@@ -263,22 +263,9 @@ namespace HF::Pathfinding {
 		}
 	}
 
-	std::unique_ptr<BoostGraph, BoostGraphDeleter> CreateBoostGraph(const HF::SpatialStructures::Graph& g) {
-		return std::unique_ptr<BoostGraph, BoostGraphDeleter>(new BoostGraph(g));
-	}
-
-	std::unique_ptr<BoostGraph, BoostGraphDeleter> CreateBoostGraph(const HF::SpatialStructures::Graph& g, const std::string cost_name) {
-		/*
-			We construct and return a smart pointer (std::unique_ptr<BoostGraph, BoostGraphDeleter>) to a BoostGraph.
-			The constructor used in the unique_ptr instantiation,
-				BoostGraph::BoostGraph(const Graph& graph, const string& cost_name)
-			is the version that accepts an edge cost type string, titled cost_name.
-
-			The second parameter, BoostGraphDeleter, is required by unique_ptr 
-			to properly release the memory for BoostGraph when the unique_ptr instance
-			goes out of scope.
-		*/
-		return std::unique_ptr<BoostGraph, BoostGraphDeleter>(new BoostGraph(g, cost_name));
+	std::unique_ptr<BoostGraph, BoostGraphDeleter> CreateBoostGraph(const Graph& g, const std::string & cost_type) {
+		// Construct a new boost graph using g, then wrap it in a unique pointer. 
+		return std::unique_ptr<BoostGraph, BoostGraphDeleter>(new BoostGraph(g, cost_type));
 	}
 
 	void BoostGraphDeleter::operator()(BoostGraph* bg) const {

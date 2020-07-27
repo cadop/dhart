@@ -110,15 +110,24 @@ namespace HF {
 			\brief Create a new boost graph from a HF::SpatialStructures:Graph 
 		
 			\param g The graph to create a BoostGraph from
+			\param cost_type The name of the cost set in `graph` that will be used to construct this boost graph
+							 Leaving this as blank will use the cost type the graph was constructed with.
+
 			\returns A unique_ptr to point to the new BoostGraph created from the HFGraph.
 			
+			\pre 1) If `cost_type` is specified, and is not an empty string, then `cost_type` must be the key
+			of an already created cost in `graph`.
+			\pre 2) `graph` must be compressed.
+		
 			\remarks
 			This returns a pointer since it insulates the caller from needing to import Boost, which
 			is extremely useful for the C_Interface since its clients will not need to use boost at
 			all and it doesn't need to go through the trouble of compiling all of the boost library
 			(again). A unique pointer was chosen here so the caller doesn't need to worry about
 			manually deleting the returned boost graph at a later point. 
-
+			
+			\throws HF::Exceptions::NoCost if `cost_type` was not left blank and no cost type with the key `cost_type`
+					exists in `graph`.
 			
 			\code
 				// be sure to #include "path_finder.h", #include "boost_graph.h", #include "node.h",
@@ -152,54 +161,11 @@ namespace HF {
 				auto boostGraph = CreateBoostGraph(graph);
 			\endcode
 		*/
-		std::unique_ptr<BoostGraph,BoostGraphDeleter> CreateBoostGraph(const HF::SpatialStructures::Graph & g);
+		std::unique_ptr<BoostGraph,BoostGraphDeleter> CreateBoostGraph(
+			const HF::SpatialStructures::Graph & g,
+			const std::string & cost_type = ""
+		);
 		
-		/*!
-			\brief Create a new boost graph from a HF::SpatialStructures::Graph, using a cost type cost_name
-			\param g The graph to create a BoostGraph frrom
-			\param cost_name The Edge cost type (i.e. "cross slope", "energy expenditure", etc.)
-			\returns A unique_ptr to point to the new BoostGraph created from the HFGraph.
-			\throw HF::Exceptions::NoCost if cost_name does not exist as a cost type in g
-
-			\code
-				// be sure to #include "boost_graph.h", #include "node.h", #include "graph.h", and #include <vector>
-
-				// for brevity
-				using HF::SpatialStructures::Node;
-				using HF::SpatialStructures::Graph;
-				using HF::Pathfinding::BoostGraph;
-				using HF::SpatialStructures::CostAlgorithms::CalculateEnergyExpenditure;
-
-
-				// Create the nodes
-				Node node_0(1.0f, 1.0f, 2.0f);
-				Node node_1(2.0f, 3.0f, 4.0f, 5);
-				Node node_2(11.0f, 22.0f, 140.0f);
-
-				// Create a graph. No nodes/edges for now.
-				Graph graph;
-
-				// Add edges. These will have the default edge values, forming the default graph.
-				graph.addEdge(node_0, node_1, 1);
-				graph.addEdge(node_0, node_2, 2.5);
-				graph.addEdge(node_1, node_2, 54.0);
-				graph.addEdge(node_2, node_1, 39.0);
-
-				// Always compress the graph after adding edges!
-				graph.Compress();
-
-				// Retrieve a Subgraph, parent node ID 0 -- of alternate edge costs.
-				// Add these alternate edges to graph.
-				std::string desired_cost_type = "cross slope";
-				auto edge_set = CalculateEnergyExpenditure(graph.GetSubgraph(0));
-				graph.AddEdges(edge_set, desired_cost_type);
-
-				// Creating a BoostGraph smart pointer (std::unique_ptr<BoostGraph, BoostGraphDeleter>)
-				auto boostGraph = HF::Pathfinding::CreateBoostGraph(graph, desired_cost_type);
-			\endcode
-		*/
-		std::unique_ptr<BoostGraph, BoostGraphDeleter> CreateBoostGraph(const HF::SpatialStructures::Graph& g, const std::string cost_name);
-
 		/// <summary> Find a path between points A and B using Dijkstra's Shortest Path algorithm. </summary>
 		/// <param name="bg"> The boost graph containing edges/nodes. </param>
 		/// <param name="start_id"> ID of the starting node. </param>

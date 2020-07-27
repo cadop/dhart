@@ -143,18 +143,19 @@ namespace HF {
 
 		/*!
 			\brief A graph usable with the BoostGraphLibrary.
-
+			
 			\details
 			Contains a CSR in boost created from a graph in HumanFactors. This is necessary
 			for using any of the BoostGraphLibrary functions.
+
+			\invariant
+			This class will always carry a valid boost graph. 
 
 			\remarks
 			None of the memebers of this class should need to be modified after the class is created.
 			This is  intended to be a pseudo-wrapper to make the HF::SpatialStructures::Graph usable with boost. 
 			You can read more about the boost graph libary in the official boost documentation:
 			https://www.boost.org/doc/libs/1_73_0/libs/graph/doc/quick_tour.html
-
-			\remarks
 			 Boost's graphs can be difficult to use due to the extensive use of templates. This limits
 			 their usage outside of the HF::Pathfinder, so there aren't any functions to interact with the boost graph
 			 after creation.
@@ -173,13 +174,18 @@ namespace HF {
 				\param graph Graph to create a graph in boost from. 
 				\param cost_type The name of the cost set in `graph` that will be used to construct this boost graph
 								 Leaving this as blank will use the cost type the graph was constructed with.
+
 				\details 
 				Every edge and node in the graph is used to create a graph in Boost. This will also allocate space
 				equal to the number of nodes in g for this class's p and d arrays for use in FindPath as an 
 				optimization.
 
-				\invariant
-				This class will always carry a valid boost graph. 
+				\pre 1) If `cost_type` is specified, and is not an empty string, then `cost_type` must be the key
+				of an already created cost in `graph`. 
+				\pre 2) `graph` must be compressed.
+
+				\throws HF::Exceptions::NoCost if `cost_type` was not left blank and no cost type with the key `cost_type`
+				exists in `graph`.
 
 				\code{.cpp}
 					// be sure to #include "boost_graph.h", #include "node.h", #include "graph.h",
