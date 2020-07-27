@@ -52,8 +52,6 @@ namespace HumanFactors.Pathfinding {
                 out_ptrs.data = IntPtr.Zero;
                 out_ptrs.vector = IntPtr.Zero;
             }
-            else if (res == HF_STATUS.OUT_OF_RANGE) // This is never returned for now, but it may be useful.
-                throw new IndexOutOfRangeException("Start or end points were not in the graph");
             else if (res == HF_STATUS.NO_COST) // Cost type doesn't exist in the graph
                 throw new KeyNotFoundException("cost_type " + cost_type + " is not the valid key of a cost in the graph");
             else
@@ -90,6 +88,9 @@ namespace HumanFactors.Pathfinding {
                 path_sizes,
                 size
             );
+
+            if (res == HF_STATUS.NO_COST)
+                throw new KeyNotFoundException("Cost Type (" + cost_type + ") could not be found in the graph");
 
             // Read through results and fill out CVectorsAndDatas
             CVectorAndData[] out_cvads = new CVectorAndData[size];

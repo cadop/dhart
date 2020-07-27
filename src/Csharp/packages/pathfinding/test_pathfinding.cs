@@ -177,7 +177,7 @@ namespace HumanFactors.Tests.Pathfinding
 
 
         [TestMethod]
-        public void MultipleShortestPathsNodes_cost()
+        public void MultipleShortestPaths_cost()
         {
             string test_cost = "test";
 
@@ -208,19 +208,24 @@ namespace HumanFactors.Tests.Pathfinding
 
             // Assert that no cost is found if I try to create
             // A path with a cost type that doesn't exist
-            try
-            {
-                HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath(
-                    g, node0, node3, "CostThatDoesn'tExist"
-                );
-            }
-            catch (KeyNotFoundException) { };
 
             Vector3D[] start_array = { node0, node0, node0, node0, node0, node0 };
             Vector3D[] end_array = { node3, node3, node3, node3, node3, node3 };
             int[] start_int_array = {ids[0], ids[0], ids[0], ids[0], ids[0], ids[0] };
             int[] end_int_array = {ids[3], ids[3], ids[3], ids[3], ids[3], ids[3] };
-            
+
+            // Ensure we throw if we give it a bad cost type
+            bool did_throw = false;
+            try
+            {
+                HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti(
+                    g, start_array, end_array, "CostThatDoesn'tExist"
+                );
+            }
+            catch (KeyNotFoundException) { did_throw = true; };
+
+            Assert.IsTrue(did_throw, "Giving the pathfinder an invalid cost type didn't throw an exception.");
+
             // Position Overload
             var short_paths = HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti(
                 g, 
