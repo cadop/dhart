@@ -128,7 +128,6 @@ C_INTERFACE CreatePath(
 	when it is deleted.
 
 	\code
-		// be sure to #include "boost_graph.h", #include "node.h", #include "graph.h", and #include <vector>
 
 		// for brevity
 		using HF::SpatialStructures::Node;
@@ -158,7 +157,7 @@ C_INTERFACE CreatePath(
 
 		// Retrieve a Subgraph, parent node ID 0 -- of alternate edge costs.
 		// Add these alternate edges to graph.
-		std::string desired_cost_type = "cross slope";
+		std::string desired_cost_type = AlgorithmCostTitle(COST_ALG_KEY::CROSS_SLOPE);
 		auto edge_set = CalculateEnergyExpenditure(graph.GetSubgraph(0));
 		graph.AddEdges(edge_set, desired_cost_type);
 
@@ -168,8 +167,8 @@ C_INTERFACE CreatePath(
 		int out_size = -1;
 
 		// Use CreatePathCostType, be sure to use the .c_str() method if using a std::string for desired_cost_type
-		CreatePathCostType(&graph, 0, 4, &out_size, &out_path, &out_path_member, desired_cost_type.c_str());
-
+		CreatePath(&graph, 0, 4, desired_cost_type.c_str(), &out_size, &out_path, &out_path_member);
+		
 		///
 		/// Use out_path, out_path_member
 		///
