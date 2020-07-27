@@ -126,6 +126,7 @@ namespace HumanFactors.Pathfinding
 
             \pre The length of start_ids must match the length of end_ids.
 
+
             \throws System.ArgumentException Length of start_ids didn't equal length of end_ids
             \throws IndexOutOfRangeException One or more of the start or end ids do not exist in <paramref name="graph" />.
             \throws KeyNotFoundException `cost_type` wasn't left as blank, and didn't
@@ -171,6 +172,8 @@ namespace HumanFactors.Pathfinding
 
             \pre 1) The length of `start_ids` must match the length of `end_ids`.
             \pre 2) Each node in `start_nodes` and end_nodes must contain the x,y,z position of an existing node in `graph`
+            \pre 3) If `cost_type` is not left as the default, then it must be the name of a valid cost already
+            defined in `graph`.
 
             \throws System.ArgumentException Length of `start_ids` didn't equal length of `end_ids`
             \throws IndexOutOfRangeException One or more of the start or end ids do not exist in <paramref name="graph" />.
@@ -178,8 +181,12 @@ namespace HumanFactors.Pathfinding
                      refer to the name of any cost that already exists in `graph`.
 
         */
-        public static Path[] DijkstraShortestPathMulti(Graph graph, IEnumerable<Vector3D> start_nodes, IEnumerable<Vector3D> end_nodes)
-        {
+        public static Path[] DijkstraShortestPathMulti(
+            Graph graph,
+            IEnumerable<Vector3D> start_nodes,
+            IEnumerable<Vector3D> end_nodes,
+            string cost_type = ""
+        ) {
             if (start_nodes.Count() != end_nodes.Count())
                 throw new ArgumentException("Length of start_nodes didn't equal length of end_nodes");
 
@@ -195,7 +202,7 @@ namespace HumanFactors.Pathfinding
                 i++;
             }
 
-            return DijkstraShortestPathMulti(graph, start_ids, end_ids);
+            return DijkstraShortestPathMulti(graph, start_ids, end_ids, cost_type);
         }
 
     }

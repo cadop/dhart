@@ -174,5 +174,83 @@ namespace HumanFactors.Tests.Pathfinding
                 Assert.AreEqual(arr[1].id, ids[2]);
             }
         }
+
+
+        [TestMethod]
+        public void MultipleShortestPathsNodes_cost()
+        {
+            string test_cost = "test";
+
+            Graph g = new Graph();
+            Vector3D node0 = new Vector3D(0, 0, 1);
+            Vector3D node1 = new Vector3D(0, 0, 2);
+            Vector3D node2 = new Vector3D(0, 0, 3);
+            Vector3D node3 = new Vector3D(0, 0, 4);
+
+            g.AddEdge(node0, node0, 0);
+            g.AddEdge(node0, node2, 0);
+            g.AddEdge(node1, node3, 0);
+            g.AddEdge(node2, node3, 0);
+            g.CompressToCSR();
+
+            // Ids assigned to these nodes by the graph.
+            int[] ids = {
+                g.GetNodeID(node0),
+                g.GetNodeID(node1),
+                g.GetNodeID(node2),
+                g.GetNodeID(node3)
+            };
+           
+            g.AddEdge(node0, node0, 100, test_cost);
+            g.AddEdge(node0, node2, 50, test_cost);
+            g.AddEdge(node1, node3, 10, test_cost);
+            g.AddEdge(node2, node3, 10, test_cost);
+
+            // Assert that no cost is found if I try to create
+            // A path with a cost type that doesn't exist
+            try
+            {
+                HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath(
+                    g, node0, node3, "CostThatDoesn'tExist"
+                );
+            }
+            catch (KeyNotFoundException) { };
+
+            Vector3D[] start_array = { node0, node0, node0, node0, node0, node0 };
+            Vector3D[] end_array = { node3, node3, node3, node3, node3, node3 };
+            int[] start_int_array = {ids[0], ids[0], ids[0], ids[0], ids[0], ids[0] };
+            int[] end_int_array = {ids[3], ids[3], ids[3], ids[3], ids[3], ids[3] };
+            
+            // Position Overload
+            var short_paths = HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti(
+                g, 
+                start_array, 
+                end_array, 
+                test_cost
+            );
+            // ID Overload
+            var short_int_paths = HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti(
+                g, 
+                start_int_array, 
+                end_int_array, 
+                test_cost
+            );
+
+            // Assert that every path matches our expectations
+            for( int i = 0; i < short_paths.Length; i++)
+            {
+                Span<PathMember> arr = short_paths[i].array;
+
+                Assert.AreEqual(arr[0].cost_to_next, 50);
+                Assert.AreEqual(arr[0].id, ids[0]);
+
+                Assert.AreEqual(arr[1].cost_to_next, 10);
+                Assert.AreEqual(arr[1].id, ids[2]);
+
+
+                // Assert that this path equals the integer version
+                Assert.IsTrue(short_paths[i].Equals(short_int_paths[i]));
+            }
+        }
     }
 }
