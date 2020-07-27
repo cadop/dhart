@@ -19,7 +19,9 @@ class HF_STATUS(Enum):
     OUT_OF_RANGE = (
         -10
     )  # The requested datapoint was out of the bounds of the given structure
-    NO_PATH = -11  # No path was returned from the pathfinding operation
+    NO_PATH = -11  # No path was returned from the pathfinding ooperation
+    NO_COST = -12  # The given cost could not be found.
+    NOT_COMPRESSED = -13  # The graph needed to be compressed and it wasn't
 
 
 class HFException(Exception):
