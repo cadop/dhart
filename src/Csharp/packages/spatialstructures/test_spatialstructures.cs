@@ -327,7 +327,18 @@ namespace HumanFactors.Tests.SpatialStructures
         [TestMethod]
         public void AddNodeAttribute()
         {
+            Graph g = new Graph();
 
+            g.AddEdge(0, 1, 150);
+            g.AddEdge(0, 2, 100);
+
+            g.AddNodeAttribute(2, "Attr", "200");
+            g.AddNodeAttribute(1, "Attr", "100");
+            g.AddNodeAttribute(0, "Attr", "0");
+
+            var attr = g.GetNodeAttributes("Attr");
+            Assert.AreEqual(3, attr.Length);
+            Assert.AreEqual(attr[1], "100");
         }
 
         [TestMethod]

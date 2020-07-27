@@ -300,6 +300,7 @@ namespace HumanFactors.SpatialStructures
         public void AddNodeAttribute(int id, string attribute, string score)
         {
             
+            throw new NotImplementedException();
         }
 
         /*! 
@@ -315,6 +316,7 @@ namespace HumanFactors.SpatialStructures
         */
         public void AddNodeAttributes(int[] ids, string attribute, string[] scores)
         {
+            throw new NotImplementedException();
 
         }
 
@@ -331,11 +333,7 @@ namespace HumanFactors.SpatialStructures
         */
         public string[] GetNodeAttributes(string attribute)
         {
-            const int temp = 16;
-            string[] result = new string[temp];
-            // Just temporary
-
-            return result;
+            throw new NotImplementedException();
         }
 
         /*!
@@ -349,7 +347,7 @@ namespace HumanFactors.SpatialStructures
          */
         public void ClearNodeAttributes(string attribute)
         {
-
+            throw new NotImplementedException();
         }
     }
 
