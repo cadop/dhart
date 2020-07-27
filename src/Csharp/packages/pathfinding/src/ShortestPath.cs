@@ -55,7 +55,6 @@ namespace HumanFactors.Pathfinding
             \pre 2) If `cost_type` is not left as the default, then it must be the name of a valid cost already
             defined in `graph`.
 
-            \throws IndexOutOfRangeException `start_id` or `end_id` don't exist in the graph.
             \throws KeyNotFoundException `cost_type` wasn't left as blank, and didn't
             refer to the name of any cost that already exists in the graph.
 
@@ -88,7 +87,6 @@ namespace HumanFactors.Pathfinding
 
             \remarks Gets the start id and end of both nodes, then calls the ID overload. 
             
-            \throws IndexOutOfRangeException start_node or end_node don't exist in the graph.
             \throws KeyNotFoundException `cost_type` wasn't left as blank, and didn't
             refer to the name of any cost that already exists in the graph.
 
@@ -126,9 +124,7 @@ namespace HumanFactors.Pathfinding
 
             \pre The length of start_ids must match the length of end_ids.
 
-
             \throws System.ArgumentException Length of start_ids didn't equal length of end_ids
-            \throws IndexOutOfRangeException One or more of the start or end ids do not exist in <paramref name="graph" />.
             \throws KeyNotFoundException `cost_type` wasn't left as blank, and didn't
             refer to the name of any cost that already exists in the graph.
         */
@@ -176,7 +172,6 @@ namespace HumanFactors.Pathfinding
             defined in `graph`.
 
             \throws System.ArgumentException Length of `start_ids` didn't equal length of `end_ids`
-            \throws IndexOutOfRangeException One or more of the start or end ids do not exist in <paramref name="graph" />.
             \throws KeyNotFoundException `cost_type` wasn't left as blank, and didn't
                      refer to the name of any cost that already exists in `graph`.
 
