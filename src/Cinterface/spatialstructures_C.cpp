@@ -276,7 +276,7 @@ C_INTERFACE CalculateAndStoreEnergyExpenditure(HF::SpatialStructures::Graph* g) 
 	// Now passing result, a std::vector<std::vector<EdgeSet>> to Graph::AddEdges.
 	// The result container will be ordered by parent id.
 
-	g->AddEdges(result, "EnergyExpenditure");
+	g->AddEdges(result, AlgorithmCostTitle(COST_ALG_KEY::ENERGY_EXPENDITURE));
 
 	return OK;
 }
@@ -403,7 +403,7 @@ C_INTERFACE CalculateAndStoreCrossSlope(HF::SpatialStructures::Graph* g) {
 	// The result container will be ordered by parent id.
 
 	// TODO: implement void Graph::AddEdges(std::vector<std::vector<IntEdge>>& edges);
-	g->AddEdges(result, "CrossSlope");
+	g->AddEdges(result, AlgorithmCostTitle(COST_ALG_KEY::CROSS_SLOPE));
 
 	return OK;
 }

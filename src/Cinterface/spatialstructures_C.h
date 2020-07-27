@@ -14,6 +14,23 @@ namespace HF {
 	}				 // defined these as classes (V) instead of structs (U)
 }
 
+
+/*! \brief Indexes of keys for costs returned from calling CalculateAndStore functions. */
+const enum COST_ALG_KEY {
+	CROSS_SLOPE, /*! \brief Cost created by CalculateAndStoreCrossSlope. */
+	ENERGY_EXPENDITURE /*! \brief Cost created by CalculateAndStoreEnergyExpenditure. */
+};
+
+/*! \brief Keys of costs for calling CreateAndStore functions.  */
+const std::vector<std::string> Key_To_Costs{
+	"CrossSlope",
+	"EnergyExpenditure"
+};
+
+/*! \brief Get the cost algorithm title from it's associated enum. */
+inline std::string AlgorithmCostTitle(COST_ALG_KEY key) {
+	return Key_To_Costs[key];
+}
 /**
 * @defgroup SpatialStructures
 * Contains the Graph and Node datatypes.
@@ -647,7 +664,8 @@ C_INTERFACE DestroyGraph(
 C_INTERFACE CalculateAndStoreCrossSlope(HF::SpatialStructures::Graph* g);
 
 /*!
-	\summary Calculates energy expenditure for all subgraphs in *g
+	\summary Calculates energy expenditure for all subgraphs in *g and stores them in the graph
+			 at AlgorithmCostTitle(ALG_COST_KEY::EnergyExpenditure)
 	\param g The address of a Graph
 	\returns HF::STATUS::OK on completion
 
@@ -749,7 +767,8 @@ C_INTERFACE ClearAttributeType(HF::SpatialStructures::Graph* g, const char* s);
 
 /**@}*/
 /*!
-	\summary Calculates cross slope for all subgraphs in *g
+	\summary Calculates cross slope for all subgraphs in *g and stores them 
+			 at AlgorithmCostTitle(ALG_COST_KEY::CROSS_SLOPE)
 	\param g The address of a Graph
 	\returns HF::STATUS::OK on completion
 
