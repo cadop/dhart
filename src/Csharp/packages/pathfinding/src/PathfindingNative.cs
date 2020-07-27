@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
+using System.Diagnostics;
 
 namespace HumanFactors.Pathfinding {
     internal static class NativeMethods{
@@ -42,7 +43,10 @@ namespace HumanFactors.Pathfinding {
 
             // If NO_PATH is returned, that means no path exists from start to end
             // so make sure our output reflects this.
-            if (res == HF_STATUS.NO_PATH)
+
+            if (res == HF_STATUS.OK)
+                return out_ptrs;
+            else if (res == HF_STATUS.NO_PATH)
             {
                 out_ptrs.size = -1;
                 out_ptrs.data = IntPtr.Zero;
@@ -52,7 +56,8 @@ namespace HumanFactors.Pathfinding {
                 throw new IndexOutOfRangeException("Start or end points were not in the graph");
             else if (res == HF_STATUS.NO_COST) // Cost type doesn't exist in the graph
                 throw new KeyNotFoundException("cost_type " + cost_type + " is not the valid key of a cost in the graph");
-
+            else
+                Debug.Assert(false);
             return out_ptrs;
         }
 

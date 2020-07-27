@@ -4,6 +4,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
+using HumanFactors.Pathfinding;
+using System.Collections.Generic;
 
 namespace HumanFactors.Tests.Pathfinding
 {
@@ -88,6 +90,50 @@ namespace HumanFactors.Tests.Pathfinding
 
             Assert.AreEqual(arr[1].cost_to_next, 10);
             Assert.AreEqual(arr[1].id, ids[2]);
+        }
+
+        [TestMethod]
+        public void ShortestPath_Cost()
+        {
+            string test_cost = "test";
+            // Create a new graph with nodes and edges 
+            Graph g = new Graph();
+            Vector3D node0 = new Vector3D(0, 0, 1);
+            Vector3D node1 = new Vector3D(0, 0, 2);
+            Vector3D node2 = new Vector3D(0, 0, 3);
+            Vector3D node3 = new Vector3D(0, 0, 4);
+            g.AddEdge(node0, node0, 100);
+            g.AddEdge(node0, node2, 50);
+            g.AddEdge(node1, node3, 10);
+            g.AddEdge(node2, node3, 10);
+
+            // Assert that no cost is found if I try to create
+            // A path with a cost type that doesn't exist
+            try { 
+                HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath(
+                    g, node0, node3, "CostThatDoesn'tExist"        
+                ); 
+            }
+            catch (KeyNotFoundException) { };
+
+            // Compress the graph and add nodes to the alternate cost
+            g.CompressToCSR();
+            g.AddEdge(node0, node0, 100, test_cost);
+            g.AddEdge(node0, node2, 50, test_cost);
+            g.AddEdge(node1, node3, 10, test_cost);
+            g.AddEdge(node2, node3, 10, test_cost);
+
+            HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath(
+                g, node0, node3, test_cost
+            );
+            
+            // create a path using the default cost, and a custom cost
+            var sp = HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath(g, node0, node3);
+            var sp_cost = HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath(g, node0, node3, test_cost);
+
+            // Assert that the path was created successfully, and that it is equal to the default cost
+            Assert.IsTrue(sp_cost != null, "Path with a custom cost type couldn't be created.");
+            Assert.IsTrue(sp.Equals(sp_cost), "Paths with custom cost types do not equal paths with default cost types");
         }
 
         [TestMethod]
