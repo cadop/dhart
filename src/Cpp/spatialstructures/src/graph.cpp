@@ -704,10 +704,6 @@ namespace HF::SpatialStructures {
 		const int parent_index = parent;
 		const int child_index = child;
 
-		// Get the index for parent and child
-		const int parent_index = parent;
-		const int child_index = child;
-
 		// Iterate through parent's row to see if it has child.
 		for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, parent_index); it; ++it)
 			if (it.col() == child_index) return true;
