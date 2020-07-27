@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System;
+using System.Security.Cryptography;
 
 namespace HumanFactors.Tests.SpatialStructures
 {
@@ -25,14 +26,14 @@ namespace HumanFactors.Tests.SpatialStructures
             G.AddEdge(0, 1, 39);
             G.CompressToCSR();
             Assert.AreEqual(39, G.GetCost(0, 1),
-                "Edge failed to be added through ids"    
+                "Edge failed to be added through ids"
             );
         }
         [TestMethod]
         public void AddEdgeFromV3()
         {
             Graph G = new Graph();
-            G.AddEdge(new Vector3D(0,0,2), new Vector3D(0,0,1), 39);
+            G.AddEdge(new Vector3D(0, 0, 2), new Vector3D(0, 0, 1), 39);
 
             G.CompressToCSR();
             Assert.AreEqual(39, G.GetCost(0, 1),
@@ -47,7 +48,7 @@ namespace HumanFactors.Tests.SpatialStructures
             // Create nodes
             Vector3D node0 = new Vector3D(0, 0, 1);
             Vector3D node1 = new Vector3D(0, 0, 2);
-            
+
             // Create graph, compress, add edge
             Graph G = new Graph();
             G.AddEdge(node0, node1, 39);
@@ -69,7 +70,7 @@ namespace HumanFactors.Tests.SpatialStructures
         public void GetCSRPointers()
         {
             Graph G = new Graph();
-            G.AddEdge(new Vector3D(0,0,2), new Vector3D(0,0,1), 39);
+            G.AddEdge(new Vector3D(0, 0, 2), new Vector3D(0, 0, 1), 39);
             var csr = G.CompressToCSR();
 
             // Assert that all pointers aren't null, and that the CSR
@@ -88,11 +89,11 @@ namespace HumanFactors.Tests.SpatialStructures
             Graph G = new Graph();
 
             G.AddEdge(1, 2, 39);
-            var default_ptrs =  G.CompressToCSR();
+            var default_ptrs = G.CompressToCSR();
 
             G.AddEdge(1, 2, 54, "ALT");
             var alt_ptrs = G.CompressToCSR("ALT");
-            
+
             // Assert that all pointers aren't null, and that the CSR
             // has the correct ammount of non-zeros, rows, and columns in it
             Assert.AreEqual(default_ptrs.inner_indices, alt_ptrs.inner_indices);
@@ -104,15 +105,15 @@ namespace HumanFactors.Tests.SpatialStructures
 
 
             // Assert that NO_COST is thrown when csrptrs with an invalid cost
-            try{ var csr_bad = G.CompressToCSR("NotACalidCost"); }
-            catch { }
+            try { var csr_bad = G.CompressToCSR("NotACalidCost"); }
+            catch(KeyNotFoundException) { }
         }
-        
+
         [TestMethod]
         public void GetNodes()
         {
             Graph G = new Graph();
-            G.AddEdge(new Vector3D(0,0,2), new Vector3D(0,0,1), 39);
+            G.AddEdge(new Vector3D(0, 0, 2), new Vector3D(0, 0, 1), 39);
 
             var nodes = G.getNodes();
             Assert.IsTrue(nodes.size == 2);
@@ -131,7 +132,7 @@ namespace HumanFactors.Tests.SpatialStructures
         public void AggregateNodes()
         {
             Graph G = new Graph();
-            G.AddEdge(new Vector3D(0,0,2), new Vector3D(0,0,1), 39);
+            G.AddEdge(new Vector3D(0, 0, 2), new Vector3D(0, 0, 1), 39);
 
             var scores = G.AggregateEdgeCosts(GraphEdgeAggregation.SUM);
             var score_arr = scores.array;
@@ -157,13 +158,13 @@ namespace HumanFactors.Tests.SpatialStructures
         public void GetEdgeCost()
         {
             Graph g = new Graph();
-            
+
             g.AddEdge(0, 1, 100);
 
             // This must be throw a logicerror if uncompressed
             // And trying to read edges
             try { g.GetCost(0, 1); }
-            catch (HumanFactors.Exceptions.LogicError) {}
+            catch (HumanFactors.Exceptions.LogicError) { }
 
             // Compress to the CSR 
             g.CompressToCSR();
@@ -184,15 +185,15 @@ namespace HumanFactors.Tests.SpatialStructures
 
             // This should throw because the user is trying
             // to add a cost type to a graph that isn't compressed
-            try { g.AddEdge(0, 1, 39, cost_type);}
-            catch (LogicError) {}
-            
+            try { g.AddEdge(0, 1, 39, cost_type); }
+            catch (LogicError) { }
+
             g.CompressToCSR();
 
             // This should throw an exception since the edge
-			// doesn't already exist in the graph for the default cost_type.
-            try { g.AddEdge(0, 1, 39, cost_type);}
-            catch (LogicError) {}
+            // doesn't already exist in the graph for the default cost_type.
+            try { g.AddEdge(0, 1, 39, cost_type); }
+            catch (LogicError) { }
 
             // Add the edge for the default cost type
             g.AddEdge(0, 1, 54);
@@ -206,16 +207,123 @@ namespace HumanFactors.Tests.SpatialStructures
             g.AddEdge(0, 1, 100, cost_type);
 
             Assert.AreEqual(-1, g.GetCost(0, 2, cost_type),
-                "A cost that doesn't exist for this type returns something other than -1." 
+                "A cost that doesn't exist for this type returns something other than -1."
            );
-            
+
             // Assert that the default graph is still readable
-            Assert.AreEqual(54, g.GetCost(0, 1), 
+            Assert.AreEqual(54, g.GetCost(0, 1),
                 "Adding another cost modified the cost in the default graph.");
-            
+
             // Assert that the non-default cost is still readable
             Assert.AreEqual(100, g.GetCost(0, 1, cost_type), "The alternate cost cannot be read");
         }
 
+
+        [TestMethod]
+        unsafe public void CalculateAndStoreCrossSlope()
+        {
+            // Create the graph
+            Graph g = new Graph();
+
+            // Create 7 nodes
+            Vector3D n0 = new Vector3D(2, 6, 6);
+            Vector3D n1 = new Vector3D(0, 0, 0);
+            Vector3D n2 = new Vector3D(-5, 5, 4);
+            Vector3D n3 = new Vector3D(-1, 1, 1);
+            Vector3D n4 = new Vector3D(2, 2, 2);
+            Vector3D n5 = new Vector3D(5, 3, 2);
+            Vector3D n6 = new Vector3D(-2, -5, 1);
+
+            // Add 9 edges
+            g.AddEdge(n0, n1, 0); // [ -2, -6, -6 ]
+            g.AddEdge(n1, n2, 0); // [ -5,  5,  4 ]
+            g.AddEdge(n1, n3, 0); // [ -1,  1,  1 ]
+            g.AddEdge(n1, n4, 0); // [  2,  2,  2 ]
+            g.AddEdge(n2, n4, 0); // [ -9, -3, -2 ]
+            g.AddEdge(n3, n5, 0); // [ -6,  2,  1 ]
+            g.AddEdge(n5, n6, 0); // [ -7, -8, -1 ]
+            g.AddEdge(n4, n6, 0); // [ -6, -7, -1 ]
+
+            // Compress the graph after adding edges
+            // Always compress the graph after adding edges!
+            var def_csr = g.CompressToCSR();
+            // Calculate and store edge type in g: cross slope
+            CostAlgorithms.CalculateAndStoreCrossSlope(g);
+            // Assert that the graph has new edges in it.
+            try
+            {
+                CSRInfo csr = g.CompressToCSR(CostAlgorithmNames.CROSS_SLOPE);
+
+                Assert.AreEqual(def_csr.inner_indices, csr.inner_indices);
+                Assert.AreEqual(def_csr.outer_indices, csr.outer_indices);
+                Assert.AreNotEqual(def_csr.data, csr.data);
+
+                Span<float> arr = new Span<float>(csr.data.ToPointer(), csr.nnz);
+
+                for (int i = 0; i < arr.Length; i++)
+                    Debug.Write(arr[i].ToString() + ", ");
+
+                Debug.WriteLine("");
+            }
+            catch (KeyNotFoundException)
+            {
+                Assert.Fail("Key wasn't created in the dictionary!");
+            }
+        }
+
+        [TestMethod]
+        unsafe public void  CalculateAndStoreEnergyExpenditure()
+        {
+            // Create the graph
+            Graph g = new Graph();
+
+            // Create 7 nodes
+            Vector3D n0 = new Vector3D(0, 0, 0);
+            Vector3D n1 = new Vector3D(0, 0, 1);
+            Vector3D n2 = new Vector3D(5, 5, 4);
+            Vector3D n3 = new Vector3D(2, 2, 2);
+            Vector3D n4 = new Vector3D(5, 3, 2);
+            Vector3D n5 = new Vector3D(6, 6, 7);
+            Vector3D n6 = new Vector3D(2, 5, 1);
+
+            // Add 9 edges
+            g.AddEdge(n0, n1, 1);
+            g.AddEdge(n1, n2, 1);
+            g.AddEdge(n1, n3, 1);
+            g.AddEdge(n1, n4, 1);
+            g.AddEdge(n3, n5, 1);
+            g.AddEdge(n4, n2, 1);
+            g.AddEdge(n6, n4, 1);
+            g.AddEdge(n6, n5, 1);
+
+            // Always compress the graph after adding edges!
+            var def_csr = g.CompressToCSR();
+
+            // Calculate and store edge type in g: energy expenditure
+            CostAlgorithms.CalculateAndStoreEnergyExpenditure(g);
+
+            // Assert that the graph has new edges in it.
+            try
+            {
+                CSRInfo csr = g.CompressToCSR(CostAlgorithmNames.ENERGY_EXPENDITURE);
+
+                Assert.AreEqual(def_csr.inner_indices, csr.inner_indices);
+                Assert.AreEqual(def_csr.outer_indices, csr.outer_indices);
+                Assert.AreNotEqual(def_csr.data, csr.data);
+
+
+                Span<float> arr = new Span<float>(csr.data.ToPointer(), csr.nnz);
+
+                for (int i = 0; i < arr.Length; i++)
+                    Debug.Write(arr[i].ToString() + ", ");
+
+                Debug.WriteLine("");
+            }
+            catch (KeyNotFoundException)
+            {
+                Assert.Fail("Key wasn't created in the dictionary!");
+            }
+        }
     }
 }
+ 

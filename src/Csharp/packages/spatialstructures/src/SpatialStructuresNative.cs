@@ -123,7 +123,7 @@ namespace HumanFactors.SpatialStructures
             if (res == HF_STATUS.NO_COST)
                 throw new KeyNotFoundException("Cost " + cost_type + " could not be found in the graph");
             else if (res != HF_STATUS.OK)
-                throw new Exception("Failed to get CSRPtrs");
+                Debug.Assert(false); // Programmer error! Handle whatever error code was returned here!
            
 
             return new CSRInfo(nnz, cols, rows, data, outer_indices, inner_indices);
@@ -198,6 +198,10 @@ namespace HumanFactors.SpatialStructures
         internal static void C_DestroyFloatVector(IntPtr float_vector) => DestroyFloatVector(float_vector);
 
         internal static void C_CompressGraph(IntPtr graph) => Compress(graph);
+
+        internal static void C_CalculateAndStoreCrossSlope(IntPtr graph) => CalculateAndStoreCrossSlope(graph);
+
+        internal static void C_CalculateAndStoreEnergyExpenditure(IntPtr graph) => CalculateAndStoreEnergyExpenditure(graph);
 
         [DllImport(NativeConstants.DLLPath)]
         private static extern HF_STATUS GetNodes(
@@ -296,5 +300,11 @@ namespace HumanFactors.SpatialStructures
             string cost_type,
             ref float out_float
         );
+
+        [DllImport(NativeConstants.DLLPath)]
+        private static extern HF_STATUS CalculateAndStoreCrossSlope(IntPtr graph_pointer);
+
+        [DllImport(NativeConstants.DLLPath)]
+        private static extern HF_STATUS CalculateAndStoreEnergyExpenditure(IntPtr graph_pointer);
     }
 }

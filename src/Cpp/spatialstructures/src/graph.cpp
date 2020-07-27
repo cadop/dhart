@@ -153,6 +153,9 @@ namespace HF::SpatialStructures {
 		// somewhere. 
 		assert(!IsDefaultName(key));
 
+		if (!this->HasCostArray(key)) 
+			throw NoCost("Tried to access a key that doesn't exist in the cost_arrays");
+
 		// Return the cost map at key.
 		return (edge_cost_maps.at(key));
 	}
