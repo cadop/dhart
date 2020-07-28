@@ -16,6 +16,16 @@ namespace HumanFactors.Pathfinding
         /// The ID of this node
         /// </summary>
         public int id;
+
+        public bool Equals(PathMember PM2)
+        {
+            return (this.id == PM2.id && this.cost_to_next == PM2.cost_to_next);
+        }
+
+        public override string ToString() 
+        {
+            return "(" + this.id.ToString() + ", " + this.cost_to_next.ToString() + ")";
+        }
     }
 
     /// <summary>

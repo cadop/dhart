@@ -15,6 +15,8 @@
 #include <path.h>
 
 #include "pathfinder_C.h"
+#include "cost_algorithms.h"
+#include "spatialstructures_C.h"
 
 using namespace HF::SpatialStructures;
 using namespace HF::Pathfinding;
@@ -115,6 +117,43 @@ TEST(_boostGraph, Constructor) {
 
 	// Passing Graph graph to BoostGraph bg, by reference
 	HF::Pathfinding::BoostGraph bg(graph);
+}
+
+TEST(_boostGraph, ConstructorCostName) {
+	// be sure to #include "boost_graph.h", #include "node.h", #include "graph.h", and #include <vector>
+
+	// for brevity
+	using HF::SpatialStructures::Node;
+	using HF::SpatialStructures::Graph;
+	using HF::Pathfinding::BoostGraph;
+	using HF::SpatialStructures::CostAlgorithms::CalculateEnergyExpenditure;
+
+
+	// Create the nodes
+	Node node_0(1.0f, 1.0f, 2.0f);
+	Node node_1(2.0f, 3.0f, 4.0f, 5);
+	Node node_2(11.0f, 22.0f, 140.0f);
+
+	// Create a graph. No nodes/edges for now.
+	Graph graph;
+
+	// Add edges. These will have the default edge values, forming the default graph.
+	graph.addEdge(node_0, node_1, 1);
+	graph.addEdge(node_0, node_2, 2.5);
+	graph.addEdge(node_1, node_2, 54.0);
+	graph.addEdge(node_2, node_1, 39.0);
+
+	// Always compress the graph after adding edges!
+	graph.Compress();
+
+	// Retrieve a Subgraph, parent node ID 0 -- of alternate edge costs.
+	// Add these alternate edges to graph.
+	std::string desired_cost_type = "cross slope";
+	auto edge_set = CalculateEnergyExpenditure(graph.GetSubgraph(0));
+	graph.AddEdges(edge_set, desired_cost_type);
+
+	// Creating a BoostGraph.
+	HF::Pathfinding::BoostGraph bg(graph, desired_cost_type);
 }
 
 TEST(_boostGraph, Destructor) {
@@ -236,6 +275,43 @@ TEST(_pathFinding, CreateBoostGraph) {
 	// Use the auto keyword for type inference, or your choice of using statements/typedef to make
 	// the use of the type described above easier.
 	auto boostGraph = HF::Pathfinding::CreateBoostGraph(graph);
+}
+
+TEST(_pathFinding, CreateBoostGraphCostName) {
+	// be sure to #include "boost_graph.h", #include "node.h", #include "graph.h", and #include <vector>
+
+	// for brevity
+	using HF::SpatialStructures::Node;
+	using HF::SpatialStructures::Graph;
+	using HF::Pathfinding::BoostGraph;
+	using HF::SpatialStructures::CostAlgorithms::CalculateEnergyExpenditure;
+
+
+	// Create the nodes
+	Node node_0(1.0f, 1.0f, 2.0f);
+	Node node_1(2.0f, 3.0f, 4.0f, 5);
+	Node node_2(11.0f, 22.0f, 140.0f);
+
+	// Create a graph. No nodes/edges for now.
+	Graph graph;
+
+	// Add edges. These will have the default edge values, forming the default graph.
+	graph.addEdge(node_0, node_1, 1);
+	graph.addEdge(node_0, node_2, 2.5);
+	graph.addEdge(node_1, node_2, 54.0);
+	graph.addEdge(node_2, node_1, 39.0);
+
+	// Always compress the graph after adding edges!
+	graph.Compress();
+
+	// Retrieve a Subgraph, parent node ID 0 -- of alternate edge costs.
+	// Add these alternate edges to graph.
+	std::string desired_cost_type = "cross slope";
+	auto edge_set = CalculateEnergyExpenditure(graph.GetSubgraph(0));
+	graph.AddEdges(edge_set, desired_cost_type);
+
+	// Creating a BoostGraph smart pointer (std::unique_ptr<BoostGraph, BoostGraphDeleter>)
+	auto boostGraph = HF::Pathfinding::CreateBoostGraph(graph, desired_cost_type);
 }
 
 
@@ -505,7 +581,7 @@ namespace CInterfaceTests {
 		HF::SpatialStructures::PathMember* out_path_member = nullptr;
 		int out_size = -1;
 
-		CreatePath(&g, 0, 4, &out_size, &out_path, &out_path_member);
+		CreatePath(&g, 0, 4, "\0", &out_size, &out_path, &out_path_member);
 
 		// Use out_path, out_path_member
 
@@ -546,7 +622,149 @@ namespace CInterfaceTests {
 		int* out_sizes = new int[MAX_SIZE];
 
 		// Use CreatePaths
-		CreatePaths(&g, start_nodes, end_nodes, out_path, out_path_member, out_sizes, MAX_SIZE);
+		CreatePaths(&g, start_nodes, end_nodes, "\0", out_path, out_path_member, out_sizes, MAX_SIZE);
+
+		///
+		/// Resource cleanup
+		///
+
+		for (int i = 0; i < MAX_SIZE; i++) {
+			if (out_path[i]) {
+				// Release memory for all pointers in out_path
+				DestroyPath(out_path[i]);
+				out_path[i] = nullptr;
+			}
+		}
+
+		if (out_path) {
+			// Release memory for pointer to out_path buffer
+			delete[MAX_SIZE] out_path;
+			out_path = nullptr;
+		}
+
+		if (out_path_member) {
+			// Release memory for pointers to out_path_member buffer
+			delete[MAX_SIZE] out_path_member;
+			out_path_member = nullptr;
+		}
+
+		if (out_sizes) {
+			// Release memory for pointer to out_sizes buffer
+			delete[MAX_SIZE] out_sizes;
+			out_sizes = nullptr;
+		}
+	}
+
+	TEST(_PathfinderCInterface, CreatePathCostType) {
+		// be sure to #include "boost_graph.h", #include "node.h", #include "graph.h", and #include <vector>
+
+		// for brevity
+		using HF::SpatialStructures::Node;
+		using HF::SpatialStructures::Graph;
+		using HF::Pathfinding::BoostGraph;
+		using HF::SpatialStructures::CostAlgorithms::CalculateEnergyExpenditure;
+
+		// Create the nodes
+		Node node_0(1.0f, 1.0f, 2.0f);
+		Node node_1(2.0f, 3.0f, 4.0f);
+		Node node_2(11.0f, 22.0f, 140.0f);
+		Node node_3(62.9f, 39.1f, 18.0f);
+		Node node_4(19.5f, 27.1f, 29.9f);
+
+		// Create a graph. No nodes/edges for now.
+		Graph graph;
+
+		// Add edges. These will have the default edge values, forming the default graph.
+		graph.addEdge(node_0, node_1, 1);
+		graph.addEdge(node_0, node_2, 2.5);
+		graph.addEdge(node_1, node_3, 54.0);
+		graph.addEdge(node_2, node_4, 39.0);
+		graph.addEdge(node_3, node_4, 1.2);
+
+		// Always compress the graph after adding edges!
+		graph.Compress();
+
+		// Retrieve a Subgraph, parent node ID 0 -- of alternate edge costs.
+		// Add these alternate edges to graph.
+		std::string desired_cost_type = AlgorithmCostTitle(COST_ALG_KEY::CROSS_SLOPE);
+		auto edge_set = CalculateEnergyExpenditure(graph.GetSubgraph(0));
+		graph.AddEdges(edge_set, desired_cost_type);
+
+		// Prepare parameters for CreatePath
+		HF::SpatialStructures::Path* out_path = nullptr;
+		HF::SpatialStructures::PathMember* out_path_member = nullptr;
+		int out_size = -1;
+
+		// Use CreatePathCostType, be sure to use the .c_str() method if using a std::string for desired_cost_type
+		CreatePath(&graph, 0, 4, desired_cost_type.c_str(), &out_size, &out_path, &out_path_member);
+		
+		///
+		/// Use out_path, out_path_member
+		///
+
+		// Remember to free resources when finished
+		DestroyPath(out_path);
+
+		// At this point, out_path_member has also been destroyed, so we set this to nullptr
+		out_path_member = nullptr;
+	}
+
+	TEST(_PathfinderCInterface, CreatePathsCostType) {
+		// Requires #include "pathfinder_C.h", #include "graph.h", #include "path.h", #include "path_finder.h"
+
+		// for brevity
+		using HF::SpatialStructures::Node;
+		using HF::SpatialStructures::Graph;
+		using HF::Pathfinding::BoostGraph;
+		using HF::SpatialStructures::CostAlgorithms::CalculateEnergyExpenditure;
+
+		// Create the nodes
+		Node node_0(1.0f, 1.0f, 2.0f);
+		Node node_1(2.0f, 3.0f, 4.0f);
+		Node node_2(11.0f, 22.0f, 14.0f);
+		Node node_3(62.9f, 39.1f, 18.0f);
+		Node node_4(99.5f, 47.1f, 29.9f);
+
+		// Create a graph. No nodes/edges for now.
+		Graph graph;
+
+		// Add edges. These will have the default edge values, forming the default graph.
+		graph.addEdge(node_0, node_1, 1);
+		graph.addEdge(node_0, node_2, 2.5);
+		graph.addEdge(node_1, node_3, 54.0);
+		graph.addEdge(node_2, node_4, 39.0);
+		graph.addEdge(node_3, node_4, 1.2);
+
+		// Always compress the graph after adding edges!
+		graph.Compress();
+
+		// Retrieve a Subgraph, parent node ID 0 -- of alternate edge costs.
+		// Add these alternate edges to graph.
+		std::string desired_cost_type = AlgorithmCostTitle(COST_ALG_KEY::CROSS_SLOPE);
+		auto edge_set = CalculateEnergyExpenditure(graph);
+		graph.AddEdges(edge_set, desired_cost_type);
+
+		// Maximum amount of paths to search
+		const int MAX_SIZE = 2;
+
+		// We want to find the shortest paths from 0 to 3, and 0 to 4.
+		int start_nodes[] = { 0, 0 };
+		int end_nodes[] = { 3, 4 };
+
+		// Create dynamically-allocated arrays of pointers to Path
+		// Create dynamically-allocated arrays of pointers to PathMember		
+		HF::SpatialStructures::Path** out_path = new HF::SpatialStructures::Path * [MAX_SIZE];
+		HF::SpatialStructures::PathMember** out_path_member = new HF::SpatialStructures::PathMember * [MAX_SIZE];
+
+		// Sizes of paths generated by CreatePaths. Sizes of 0 mean that a path was unable to be generated.
+		int* out_sizes = new int[MAX_SIZE];
+
+		// Use CreatePathsCostType, be sure to use the .c_str() method if using a std::string for desired_cost_type
+		CreatePaths(&graph, start_nodes, end_nodes, desired_cost_type.c_str(), out_path, out_path_member, out_sizes, MAX_SIZE);
+
+		///
+		/// Use out_path, out_path_member
+		///
 
 		///
 		/// Resource cleanup
@@ -600,7 +818,7 @@ namespace CInterfaceTests {
 		HF::SpatialStructures::PathMember* out_path_member = nullptr;
 		int out_size = -1;
 
-		CreatePath(&g, 0, 4, &out_size, &out_path, &out_path_member);
+		CreatePath(&g, 0, 4, "\0", &out_size, &out_path, &out_path_member);
 
 		// Get out_path's info, store results in out_path_member and out_size
 		GetPathInfo(out_path, &out_path_member, &out_size);
@@ -631,7 +849,7 @@ namespace CInterfaceTests {
 		HF::SpatialStructures::PathMember* out_path_member = nullptr;
 		int out_size = -1;
 
-		CreatePath(&g, 0, 4, &out_size, &out_path, &out_path_member);
+		CreatePath(&g, 0, 4,"\0", &out_size, &out_path, &out_path_member);
 
 		// Use out_path, out_path_member
 

@@ -8,6 +8,7 @@
 
 #include <memory>
 #include <vector>
+#include <string>
 
 namespace HF {
 	// Forward declares so we don't need to include these in the header.
@@ -109,15 +110,24 @@ namespace HF {
 			\brief Create a new boost graph from a HF::SpatialStructures:Graph 
 		
 			\param g The graph to create a BoostGraph from
+			\param cost_type The name of the cost set in `graph` that will be used to construct this boost graph
+							 Leaving this as blank will use the cost type the graph was constructed with.
+
 			\returns A unique_ptr to point to the new BoostGraph created from the HFGraph.
 			
+			\pre 1) If `cost_type` is specified, and is not an empty string, then `cost_type` must be the key
+			of an already created cost in `graph`.
+			\pre 2) `graph` must be compressed.
+		
 			\remarks
 			This returns a pointer since it insulates the caller from needing to import Boost, which
 			is extremely useful for the C_Interface since its clients will not need to use boost at
 			all and it doesn't need to go through the trouble of compiling all of the boost library
 			(again). A unique pointer was chosen here so the caller doesn't need to worry about
 			manually deleting the returned boost graph at a later point. 
-
+			
+			\throws HF::Exceptions::NoCost if `cost_type` was not left blank and no cost type with the key `cost_type`
+					exists in `graph`.
 			
 			\code
 				// be sure to #include "path_finder.h", #include "boost_graph.h", #include "node.h",
@@ -151,7 +161,10 @@ namespace HF {
 				auto boostGraph = CreateBoostGraph(graph);
 			\endcode
 		*/
-		std::unique_ptr<BoostGraph,BoostGraphDeleter> CreateBoostGraph(const HF::SpatialStructures::Graph & g);
+		std::unique_ptr<BoostGraph,BoostGraphDeleter> CreateBoostGraph(
+			const HF::SpatialStructures::Graph & g,
+			const std::string & cost_type = ""
+		);
 		
 		/// <summary> Find a path between points A and B using Dijkstra's Shortest Path algorithm. </summary>
 		/// <param name="bg"> The boost graph containing edges/nodes. </param>
@@ -316,7 +329,7 @@ namespace HF {
 			\param out_path_members Location for the pathmember pointer array will be created. All path member
 			pointers will point to the PathMembers of the Path in paths at the same location. Paths that could not
 			be generated will be left as null pointers. 
-			\param out_sizes Output raw_array of integers that will cntain the length of every path in path_members.
+			\param out_sizes Output raw_array of integers that will contain the length of every path in path_members.
 			Paths that could not be generated will be left with a length of zero.
 			
 			\pre

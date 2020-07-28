@@ -184,10 +184,24 @@ namespace HumanFactors.NativeUtils
             return managed_array;
         }
 
+        public bool Equals(NativeArray<T> arr2)
+        {
+            var this_span = this.array;
+            var that_span = arr2.array;
+
+            // Check that their lengths are equal
+            if (this_span.Length != that_span.Length) return false;
+
+            // check that each member is equal
+            for (int i = 0; i < this_span.Length; i++)
+                if (!this_span[i].Equals(that_span[i])) return false;
+
+            return true;
+        }
         /*! 
             \brief Data and vector pointers. Used for the construction of new spans and the freeing of
             resources when this object is finalized.
-        */    
+        */
         internal CVectorAndData ptrs;
 
         /// \brief The number of elements in the array.

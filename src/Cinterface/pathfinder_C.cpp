@@ -17,26 +17,48 @@ using HF::SpatialStructures::Path;
 using HF::SpatialStructures::PathMember;
 using namespace HF::Pathfinding;
 
+
 C_INTERFACE CreatePath(
-	const Graph* g,
+	const HF::SpatialStructures::Graph* g,
 	int start,
 	int end,
+	const char * cost_type,
 	int* out_size,
-	Path** out_path,
-	PathMember** out_data
+	HF::SpatialStructures::Path** out_path,
+	HF::SpatialStructures::PathMember** out_data
 ) {
-	// Get a boost graph from this graph
-	auto bg = CreateBoostGraph(*g);
+	// Get a boost graph from *g
+	std::unique_ptr<BoostGraph, BoostGraphDeleter> bg;
+	
+	try {
+		// If cost_name is not a valid cost type in *g,
+		// HF::Exceptions::NoCost is thrown by Graph::GetEdges
+		bg = CreateBoostGraph(*g, std::string(cost_type));
+	}
+	catch (HF::Exceptions::NoCost) {
+		return HF::Exceptions::HF_STATUS::NO_COST;
+	}
+	catch (...) { // Ensure that we catch other potential issues
+		return HF::Exceptions::GENERIC_ERROR;
+	}
+
+	
+	// Allocate a new empty path
 	Path* P = new Path();
 
+	// Generate a path using the boost graph we just created.
 	*P = FindPath(bg.get(), start, end);
 
+	// If P isn't empty, set our output pointer to it
 	if (!P->empty()) {
 		*out_path = P;
 		*out_data = P->GetPMPointer();
 		*out_size = P->size();
 		return HF::Exceptions::HF_STATUS::OK;
 	}
+
+	// Otherwise, free the memory for it and signal that no path
+	// could be found
 	else {
 		delete P;
 		return HF::Exceptions::HF_STATUS::NO_PATH;
@@ -44,19 +66,35 @@ C_INTERFACE CreatePath(
 }
 
 C_INTERFACE CreatePaths(
-	const Graph* g,
+	const HF::SpatialStructures::Graph* g,
 	const int* start,
 	const int* end,
-	Path** out_path_ptr_holder,
-	PathMember** out_path_member_ptr_holder,
+	const char* cost_type,
+	HF::SpatialStructures::Path** out_path_ptr_holder,
+	HF::SpatialStructures::PathMember** out_path_member_ptr_holder,
 	int* out_sizes,
 	int num_paths
 ) {
+
 	vector<int> starts(start, start + num_paths);
 	vector<int> ends(end, end + num_paths);
 
-	auto bg = CreateBoostGraph(*g);
+	// Get a boost graph from *g
+	std::unique_ptr<BoostGraph, BoostGraphDeleter> bg;
+	
+	try {
+		// If cost_name is not a valid cost type in *g,
+		// std::out_of_range is thrown by Graph::GetEdges
+		bg = CreateBoostGraph(*g, std::string(cost_type));
+	}
+	catch (HF::Exceptions::NoCost) {
+		return HF::Exceptions::HF_STATUS::NO_COST;
+	}
+	catch (...) {
+		return HF::Exceptions::HF_STATUS::GENERIC_ERROR;
+	}
 
+	// Find all the asked for paths
 	InsertPathsIntoArray(
 		bg.get(),
 		starts,

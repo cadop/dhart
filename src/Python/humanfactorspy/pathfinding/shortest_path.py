@@ -5,20 +5,36 @@ from typing import *
 import numpy
 from humanfactorspy.spatialstructures import Graph
 
-__all__ = ['ConvertNodesToIds','DijkstraShortestPath']
+__all__ = ["ConvertNodesToIds", "DijkstraShortestPath"]
 
-def ConvertNodesToIds(graph: Graph, nodes: List[Union[Tuple, int]]):
+
+def ConvertNodesToIds(graph: Graph, nodes: List[Union[Tuple, int]]) -> List[int]:
     """ Get ids for nodes in graph. Raises exception if nodes can't be found 
     
     If integers are encountered, ignore them. If scalars are given,
     ignore them.
+
+    Args:
+        Graph: Graph to use for getting IDs from nodes
+        nodes: Nodes to get the ids of. If any node in nodes already
+            is an ID, then it's ignored. 
+
+    Returns:
+        A list of ids for every node in nodes
     
+    Raises:
+        OutOfRangeException: One or more of the nodes in nodes did not match
+            a valid node in Graph. 
     """
 
+    # If nodes is a single element, make it a list.
     if not isinstance(nodes, List):
         nodes = [nodes]
 
+    # Iterate through every member nodes
     for node in nodes:
+
+        # If this element isn't an int, then we must convert it to one
         if not (isinstance(node, int) or numpy.issubdtype(node, numpy.integer)):
             node = graph.GetNodeID(node)
             if node < 0:
@@ -31,7 +47,8 @@ def DijkstraShortestPath(
     graph: Graph,
     start: List[Union[int, Tuple[float, float, float]]],
     end: List[Union[int, Tuple[float, float, float]]],
-    ) -> Union[List[Union[Path, None]], Union[Path, None]]:
+    cost_type: str = "",
+) -> Union[List[Union[Path, None]], Union[Path, None]]:
     """ Find the shortest path from start to end using Dijkstra's shortest path algorithm
     
     Accepts a list of starting / ending points or single starting/ending
@@ -41,6 +58,9 @@ def DijkstraShortestPath(
         Graph: A valid C++ Graph
         start: one or more Starting Node IDs
         end: one or more Ending Node IDs 
+        cost_type: Which cost to use for path generation. If no cost type is specified,
+                then the graph's default cost type will be used. If a cost type is specified
+                then it must already exist in the graph.
     
     Returns:
         List[Union[path, None]]: if multiple start/end ids were passed
@@ -48,10 +68,21 @@ def DijkstraShortestPath(
 
         If a path cannot be found to connect a start and end point that
         path will be returned as None.
+    
+    Preconditions:
+        1) If using multiple paths, The length of start_ids must match
+           the length of end_ids. 
+        2) Each node in start_nodes and end_nodes must contain the x,y,z
+           position (or id) of an existing node in graph
+        3) If cost_type is not left as the default, then it must be the name
+             of a valid cost already defined in graph.
 
     Raises:
-        humanfactorspy.Exceptions.: Start or End did not exist in 
+        humanfactorspy.Exceptions.Exception: Start or End did not exist in 
             the given graph OR start/end lists did not match in size.
+        KeyError: cost_type wasn't blank and did not point to an already defined
+            cost in the graph
+
 
     Example:
         Creating a graph, adding edges to it, then generating a path from node 0 to 3.
@@ -99,25 +130,35 @@ def DijkstraShortestPath(
 
     """
 
+    # Compress the graph if it isn't already.
     graph.CompressToCSR()
-
-    start = ConvertNodesToIds(graph, start)
-    end = ConvertNodesToIds(graph, end)
-
-    if len(start) != len(end):
-        raise Exception("Start and End arrays didn't match in size!")
 
     # Convert tuples to ints if it matters and throw if those nodes
     # don't actually exist in the graph
+    start = ConvertNodesToIds(graph, start)
+    end = ConvertNodesToIds(graph, end)
+
+    # Throw if the caller violates our pre condition
+    if len(start) != len(end):
+        raise Exception("Start and End arrays didn't match in size!")
+
+    # If we're only generating a single path, then call the single path function
     if len(start) == 1:
         res = pathfinder_native_functions.C_FindPath(graph.graph_ptr, start[0], end[0])
-        if res:
+
+        # Check if a path could be found between start and end
+        if res:  # If so, wrap the pointers in a python Path
             path_ptr, data_ptr, size = res
             return Path(path_ptr, data_ptr, size)
-        else:
+        else:  # If not return null
             return None
+
+    # If multiple paths are going to be generated, then call the multiple path
+    # function
     else:
         res = pathfinder_native_functions.C_FindPaths(graph.graph_ptr, start, end)
+
+        # Wrap values that weren't null in python paths
         out_paths = [
             Path(result[0], result[1], result[2]) if result else None for result in res
         ]

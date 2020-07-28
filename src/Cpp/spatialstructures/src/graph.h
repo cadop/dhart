@@ -512,7 +512,7 @@ namespace HF::SpatialStructures {
 			\endcode
 		*/
 		/// \snippet spatialstructures\src\graph.cpp GetOrAssignID_Node
-		int getOrAssignID(const Node& input_node);
+		int getOrAssignID(const Node & input_node);
 
 		/*!
 			\brief Add an ID to the graph if it doesn't exist already.
@@ -1818,6 +1818,9 @@ namespace HF::SpatialStructures {
 		/// </param>
 
 		/*!
+			\brief
+			\param name
+
 			\code
 				// TODO example
 			\endcode

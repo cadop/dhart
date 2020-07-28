@@ -356,8 +356,8 @@ namespace HF::SpatialStructures {
 		// Iterate through every other node
 		for (int i = 0; i < edge_matrix.rows(); i++) {
 
-			// Don't look in this node's edge array
-			if (i == node_id) continue;
+				// Don't look in this node's edge array
+				if (i == node_id) continue;
 
 			// See if there's an edge between I and node_id
 			if (edge_matrix.coeff(i, node_id) != 0) {

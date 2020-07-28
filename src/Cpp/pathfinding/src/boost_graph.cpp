@@ -15,24 +15,29 @@
 using HF::SpatialStructures::Graph;
 using HF::SpatialStructures::Node;
 using std::vector;
+using std::string;
 
 namespace HF::Pathfinding {
 
 
-	BoostGraph::BoostGraph(const HF::SpatialStructures::Graph& graphg)
+	BoostGraph::BoostGraph(const Graph& graph, const string & cost_type)
 	{
 
 		// Allocate a vector of integers with an element for every node in
 		// nodes.
-		int num_nodes = graphg.size();
+		int num_nodes = graph.size();
 		vector<int> nodes(num_nodes);
 
 		std::vector<pair> edges;
 		std::vector<Edge_Cost> weights;
 
-		// Iterate through every edgeset in the graph
-		auto edge_sets = graphg.GetEdges();
+		// Get a set of all edges from the graph with the passed cost type.
+		// This will return the set of costs that the graph was constructed
+		// with in the case that no cost_type was specified.
+		auto edge_sets = graph.GetEdges(cost_type);
 
+		// Iterate through every set of edges to convert them 
+		// to a format usable with Boost
 		for (const auto& edgeset : edge_sets) {
 			const int parent_id = edgeset.parent;
 
@@ -49,7 +54,7 @@ namespace HF::Pathfinding {
 		}
 
 		// Calculate the maximum id held by the graph.
-		unsigned int max_node = graphg.MaxID() + 1;
+		unsigned int max_node = graph.MaxID() + 1;
 
 		// Create the boost graph from the two input arrays
 		g = graph_t(boost::edges_are_unsorted, edges.begin(), edges.end(), weights.begin(), max_node);

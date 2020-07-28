@@ -1778,6 +1778,19 @@ namespace GraphExampleTests {
 		attrs = g.GetNodeAttributes("cross slope");
 		ASSERT_TRUE(attrs.empty());
 	}
+
+	TEST(_graph, GetEdgesCostName) {
+		///
+		/// TODO test std::vector<EdgeSet> Graph::GetEdges(const string& cost_name);
+		///
+
+		///
+		/// Requires methods from #24, Multiple Costs for the Graph
+		/// in order to properly test this.
+		///
+		/// (i.e. Adding edges to a graph with a desired cost type)
+		///
+	}
 }
 
 	namespace ConstantsExampleTests {
