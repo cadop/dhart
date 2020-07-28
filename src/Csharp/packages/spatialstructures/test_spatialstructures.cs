@@ -341,7 +341,11 @@ namespace HumanFactors.Tests.SpatialStructures
 
             // Get scores for this attribute from the graph
             var attr = g.GetNodeAttributes("Attr");
-            
+
+            // Print results
+            foreach (var attribute in attr)
+                Debug.WriteLine(attribute);
+
             // Assert that the scores meet our expectations
             Assert.AreEqual(4, attr.Length);
             Assert.AreEqual(attr[0], "0");
@@ -371,9 +375,13 @@ namespace HumanFactors.Tests.SpatialStructures
             // Get scores for this attribute from the graph
             var attr = g.GetNodeAttributes("Attr");
 
+            foreach (var attribute in attr)
+                Debug.WriteLine(attribute);
+
             // Assert that the scores meet our expectations
             Assert.AreEqual(3, attr.Length);
             Assert.AreEqual(attr[1], "100");
+
         }
 
         [TestMethod]
@@ -397,9 +405,10 @@ namespace HumanFactors.Tests.SpatialStructures
 
             // Now try to delete
             g.ClearNodeAttributes("Attr");
-
             // check that this is truly gone
             var node_attrs = g.GetNodeAttributes("Attr");
+            Debug.WriteLine(node_attrs.Length);
+
             foreach (var node_attr in node_attrs)
                 Assert.AreEqual("", node_attr, "Clear didn't clear all node attributes");
         }
