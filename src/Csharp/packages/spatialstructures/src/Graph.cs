@@ -366,7 +366,7 @@ namespace HumanFactors.SpatialStructures
          */
         public void ClearNodeAttributes(string attribute)
         {
-            throw new NotImplementedException();
+            NativeMethods.C_ClearAttributeType(this.Pointer, attribute);
         }
     }
 

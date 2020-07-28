@@ -203,7 +203,6 @@ namespace HumanFactors.SpatialStructures
 
         internal unsafe static string[] C_GetNodeAttributes(IntPtr graph_ptr, string attribute, int num_nodes)
         {
-            
             // Set up arrays to fulfil precondition
             IntPtr[] str_arr = new IntPtr[num_nodes];
             int size = -1;
@@ -211,20 +210,20 @@ namespace HumanFactors.SpatialStructures
             // Get the attributes for the node
             var res = GetNodeAttributes(graph_ptr, attribute, str_arr, ref size);
             Debug.Assert(res == HF_STATUS.OK, "Something went wrong when trying to read attributes for " + attribute);
-            Debug.Assert(size == num_nodes && num_nodes == str_arr.Length, "The size of the output array didn't match our input!");
 
-            // Cast pointers in str_arr to char arrays, then convert to strings
+            // Return an empty array if the size is 0, indicating the attribute doesn't exist
+            if (size == 0)
+                return new string[0];
+
+            // Convert each pointer into a string using marshal
             string[] out_strings = new string[size];
-            for (int i = 0; i < size; i++) {
-                var ptr = str_arr[i];
-
-                var char_arr = (char*)ptr;
-                out_strings[i] = Marshal.PtrToStringAnsi(ptr);
-            }
+            for (int i = 0; i < size; i++)
+                out_strings[i] = Marshal.PtrToStringAnsi(str_arr[i]);
 
             // Finally, deallocate the native memory that was allocated to return the string array
             DeleteScoreArray(str_arr, size);
 
+            // return output array
             return out_strings;
         }
 
@@ -238,6 +237,7 @@ namespace HumanFactors.SpatialStructures
 
         internal static void C_CalculateAndStoreEnergyExpenditure(IntPtr graph) => CalculateAndStoreEnergyExpenditure(graph);
 
+        internal static void C_ClearAttributeType(IntPtr graph, string attribute_name) => ClearAttributeType(graph, attribute_name);
 
         [DllImport(NativeConstants.DLLPath)]
         private static extern HF_STATUS GetNodes(
@@ -366,6 +366,12 @@ namespace HumanFactors.SpatialStructures
 			string attribute,
 			IntPtr[] out_scores, // Don't say that this uses strings because it'll break marshalling behavior
 			ref int out_score_size
+		);
+
+        [DllImport(NativeConstants.DLLPath)]
+        private static extern HF_STATUS ClearAttributeType(
+			IntPtr g,
+			string attribute
 		);
     }
 }

@@ -347,11 +347,13 @@ namespace HumanFactors.Tests.SpatialStructures
             Assert.AreEqual(attr[0], "0");
             Assert.AreEqual(attr[1], "100");
             Assert.AreEqual(attr[2], "200");
+
+            // And that this is the empty string
             Assert.AreEqual(attr[3], "");
         }
 
         [TestMethod]
-        public void AddNodeAttributes()
+        public void AddMultipleNodeAttributes()
         {
 
             // Create a graph and add two edges to create nodes
@@ -372,6 +374,34 @@ namespace HumanFactors.Tests.SpatialStructures
             // Assert that the scores meet our expectations
             Assert.AreEqual(3, attr.Length);
             Assert.AreEqual(attr[1], "100");
+        }
+
+        [TestMethod]
+        public void ClearAttr()
+        {
+
+            // Create a graph and add two edges to create nodes
+            Graph g = new Graph();
+            g.AddEdge(0, 1, 150);
+            g.AddEdge(0, 2, 100);
+
+            // Create arrays for ids and scores
+            int[] ids = { 0, 1, 2 };
+            string[] scores = { "0", "100", "200" };
+
+            // Add them to the graph
+            g.AddNodeAttribute("Attr", ids, scores);
+
+            // Get scores for this attribute from the graph
+            var attr = g.GetNodeAttributes("Attr");
+
+            // Now try to delete
+            g.ClearNodeAttributes("Attr");
+
+            // check that this is truly gone
+            var node_attrs = g.GetNodeAttributes("Attr");
+            foreach (var node_attr in node_attrs)
+                Assert.AreEqual("", node_attr, "Clear didn't clear all node attributes");
         }
 
         [TestMethod]
