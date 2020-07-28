@@ -1805,30 +1805,27 @@ namespace GraphExampleTests {
 	}
 
 namespace CInterfaceTests {
-	TEST(_graphCInterface, AddNodeAttributes) {
-		Graph g;
-		g.addEdge(0, 1, 1);
-		g.addEdge(0, 2, 1);
-		g.addEdge(1, 3, 1);
-		g.addEdge(1, 4, 1);
-		g.addEdge(2, 4, 1);
-		g.addEdge(3, 5, 1);
-		g.addEdge(3, 6, 1);
-		g.addEdge(4, 5, 1);
-		g.addEdge(5, 6, 1);
-		g.addEdge(5, 7, 1);
-		g.addEdge(5, 8, 1);
-		g.addEdge(4, 8, 1);
-		g.addEdge(6, 7, 1);
-		g.addEdge(7, 8, 1);
 
+	// Verify that some attributes can be added. Doesn't verify any more than GetNodeAttributes.
+	// Perhaps this should just be checking that it returns a success in the case that it's
+	// preconditions are fulfilled.
+	TEST(_graphCInterface, AddNodeAttributes) {
+		// Create a graph
+		Graph g;
+		g.addEdge(0, 1, 1);	g.addEdge(0, 2, 1);	g.addEdge(1, 3, 1);	g.addEdge(1, 4, 1);
+		g.addEdge(2, 4, 1);	g.addEdge(3, 5, 1);	g.addEdge(3, 6, 1);	g.addEdge(4, 5, 1);
+		g.addEdge(5, 6, 1);	g.addEdge(5, 7, 1);	g.addEdge(5, 8, 1);	g.addEdge(4, 8, 1);
+		g.addEdge(6, 7, 1);	g.addEdge(7, 8, 1);
+
+
+		// Add some node attributes
 		std::vector<int> ids{ 1, 3, 5, 7 };
 		std::string attr_type = "cross slope";
 		const char* scores[4] = { "1.4", "2.0", "2.8", "4.0" };
-
 		AddNodeAttributes(&g, ids.data(), attr_type.c_str(), scores, ids.size());
 
-		ASSERT_TRUE(g.GetNodeAttributes(attr_type).size() == 4);
+		// Assert that atleast that many attributes were added
+		ASSERT_TRUE(g.GetNodeAttributes(attr_type).size() == g.size());
 	}
 
 	// Verify that the contents of GetNodeAttributes matches the input to AddNodeAttributes
@@ -1915,7 +1912,7 @@ namespace CInterfaceTests {
 
 		AddNodeAttributes(&g, ids.data(), attr_type.c_str(), scores, ids.size());
 
-		char** scores_out = new char* [ids.size()];
+		char** scores_out = new char* [g.size()];
 		int scores_out_size = 0;
 		GetNodeAttributes(&g, attr_type.c_str(), &scores_out, &scores_out_size);
 
