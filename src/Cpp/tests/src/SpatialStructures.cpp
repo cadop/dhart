@@ -4,13 +4,14 @@
 #include <node.h>
 #include <edge.h>
 #include <constants.h>
-
+#include <HFExceptions.h>
 #include <spatialstructures_C.h>
 
 
 using namespace HF::SpatialStructures;
 using std::vector;
 using std::string;
+using HF::Exceptions::HF_STATUS;
 
 namespace GraphTests {
     TEST(_Graph, Creation) {
@@ -1878,33 +1879,35 @@ namespace CInterfaceTests {
 			auto itr = std::find(ids.begin(), ids.end(), i); 
 			if (itr != ids.end())
 			{
+				// Get the index of the id in the scores array so we
+				// can compare use it to get our input score at that
+				// index as well.
 				int index = std::distance(ids.begin(), itr);
+
+
+				// Failures at either this or the assert below it could indicate
+				// problems in AddNodeAttributes as well 
 				ASSERT_EQ(scores[index], score);
 			}
-			else //Otherwise ensure it's the empty string
-				ASSERT_EQ("", score);
+			else
+				ASSERT_EQ("", score); 
+
 		}
 
+		// Deallocate the contents of scores_out by calling C_Interface function, then
+		// deallocate scores_out since we're the ones who allocated that with new. 
 		DeleteScoreArray(&scores_out, scores_out_size);
 		delete[] scores_out;
 	}
 
+	// Verify that deallocating the scores array doesn't corrupt the heap. 
+	// The other test cases cover things like Adding and getting node attributes.
 	TEST(_graphCInterface, DeleteScoreArray) {
 		Graph g;
-		g.addEdge(0, 1, 1);
-		g.addEdge(0, 2, 1);
-		g.addEdge(1, 3, 1);
-		g.addEdge(1, 4, 1);
-		g.addEdge(2, 4, 1);
-		g.addEdge(3, 5, 1);
-		g.addEdge(3, 6, 1);
-		g.addEdge(4, 5, 1);
-		g.addEdge(5, 6, 1);
-		g.addEdge(5, 7, 1);
-		g.addEdge(5, 8, 1);
-		g.addEdge(4, 8, 1);
-		g.addEdge(6, 7, 1);
-		g.addEdge(7, 8, 1);
+		g.addEdge(0, 1, 1); g.addEdge(0, 2, 1);	g.addEdge(1, 3, 1);	g.addEdge(1, 4, 1);
+		g.addEdge(2, 4, 1);	g.addEdge(3, 5, 1);	g.addEdge(3, 6, 1);	g.addEdge(4, 5, 1);
+		g.addEdge(5, 6, 1);	g.addEdge(5, 7, 1);	g.addEdge(5, 8, 1);	g.addEdge(4, 8, 1);
+		g.addEdge(6, 7, 1);	g.addEdge(7, 8, 1);
 
 		std::vector<int> ids{ 1, 3, 5, 7 };
 		std::string attr_type = "cross slope";
@@ -1916,38 +1919,33 @@ namespace CInterfaceTests {
 		int scores_out_size = 0;
 		GetNodeAttributes(&g, attr_type.c_str(), &scores_out, &scores_out_size);
 
-		//ASSERT_EQ(sc.size() = score);
-
 		DeleteScoreArray(&scores_out, scores_out_size);
 		delete[] scores_out;
 	}
 
 	TEST(_graphCInterface, ClearAttributeType) {
+		// Create a graph and add some edges.
 		Graph g;
-		g.addEdge(0, 1, 1);
-		g.addEdge(0, 2, 1);
-		g.addEdge(1, 3, 1);
-		g.addEdge(1, 4, 1);
-		g.addEdge(2, 4, 1);
-		g.addEdge(3, 5, 1);
-		g.addEdge(3, 6, 1);
-		g.addEdge(4, 5, 1);
-		g.addEdge(5, 6, 1);
-		g.addEdge(5, 7, 1);
-		g.addEdge(5, 8, 1);
-		g.addEdge(4, 8, 1);
-		g.addEdge(6, 7, 1);
-		g.addEdge(7, 8, 1);
+		g.addEdge(0, 1, 1);	g.addEdge(0, 2, 1);	g.addEdge(1, 3, 1);	g.addEdge(1, 4, 1);
+		g.addEdge(2, 4, 1);	g.addEdge(3, 5, 1);	g.addEdge(3, 6, 1);	g.addEdge(4, 5, 1);
+		g.addEdge(5, 6, 1);	g.addEdge(5, 7, 1);	g.addEdge(5, 8, 1);	g.addEdge(4, 8, 1);
+		g.addEdge(6, 7, 1);	g.addEdge(7, 8, 1);
 
+		// Create score arrays, then assign them to the graph
 		std::vector<int> ids{ 1, 3, 5, 7 };
 		std::string attr_type = "cross slope";
 		const char* scores[4] = { "1.4", "2.0", "2.8", "4.0" };
-
 		AddNodeAttributes(&g, ids.data(), attr_type.c_str(), scores, ids.size());
 
-		ClearAttributeType(&g, attr_type.c_str());
+		// Clear the attribute type and capture the error code
+		auto res = ClearAttributeType(&g, attr_type.c_str());
+		
+		// Assert that the error code is successful, since we're meeting all of
+		// the function's preconditions
+		ASSERT_EQ(HF_STATUS::OK, res);
 
-		ASSERT_TRUE(g.GetNodeAttributes(attr_type).empty());
+		// Assert that the attribute type is actually deleted
+		ASSERT_EQ(g.GetNodeAttributes(attr_type).size(), 0);
 	}
 
 		TEST(_NodeCInterface, GetAllNodesFromGraph) {

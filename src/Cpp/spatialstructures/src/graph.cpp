@@ -1207,30 +1207,16 @@ namespace HF::SpatialStructures {
 				[](unsigned char c) { return std::tolower(c); }
 		);
 		*/
-		std::string lower_cased = name;
+		//	std::string lower_cased = name;
 
-		auto node_attr_map_it = node_attr_map.find(lower_cased);
+		// Check if we have this name in our dictionary. Only try to delete
+		// it if it already exists.
+		if (node_attr_map.count(name) > 0) {
 
-		if (node_attr_map_it == node_attr_map.end()) {
-			// If the attribute name does not exist,
-			// return.
-			return;
+			// Erase the key from the dictionary, implicitly freeing the object
+			// it contains.
+			node_attr_map.erase(name);
 		}
 
-		// Note that a node_attr_map is a
-		// unordered_map<std::string, NodeAttributeValueMap>
-		// where the key is attribute type name, like "cross slope",
-		// and the value is a hashmap, as described below:
-		///
-		// A NodeAttributeValueMap is a
-		// unordered_map<int, std::string>
-		// where the key is a node id,
-		// and the value is an attribute value, in the form of a string.
-		//
-		// What is being cleared is the
-		// NodeAttributeValueMap that is mapped to name.
-		// The attribute name is still a key in node_attr_map,
-		// but has no value -- which is the NodeAttributeValueMap instance.
-		node_attr_map[name].clear();
 	}
 }

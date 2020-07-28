@@ -350,9 +350,12 @@ C_INTERFACE ClearAttributeType(HF::SpatialStructures::Graph* g, const char* s) {
 	if (s) {
 		// Does not hurt to check if s is non-null
 		g->ClearNodeAttributes(std::string(s));
+		return OK;
 	}
+	// Inform the caller that they gave us a null pointer
+	else
+		return INVALID_PTR;
 
-	return OK;
 }
 
 
