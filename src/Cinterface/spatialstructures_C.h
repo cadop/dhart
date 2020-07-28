@@ -705,22 +705,36 @@ C_INTERFACE CalculateAndStoreCrossSlope(HF::SpatialStructures::Graph* g);
 */
 C_INTERFACE CalculateAndStoreEnergyExpenditure(HF::SpatialStructures::Graph* g);
 
-/// <summary> Add a new node attribute in the graph for the node at id.
-/// Returns an error code if the specified node doesn't exist in the graph.
-/// score and ids both point to arrays allocated by the caller which should be
-/// able to be passed to AddNodeAttributes.</summary>
-/// <param name="g">The graph that will receive attributes</param>
-/// <param name="ids">Array of int, allocated by caller, represents node IDs</param>
-/// <param name="attribute">The attribute to add to the graph</param>
-/// <param name="scores">Array of (char *), allocated by caller</param>
-/// <param name="num_nodes">Block count of scores</param>
-/// <returns> HF_STATUS::OK on completion </returns>
 /*!
+	\brief Add a new node attribute in the graph for the node at id.
+
+	\param g Graph to add attributes to 
+	\param ids Ids of nodes to add attributes to
+	\param attribute The name of the attribute to add the scores to. 
+	\param scores an ordered array of null terminated char arrays that correspond
+				  to the score of the ID in ids at the same index. 
+	\param num_nodes Length of both the ids and scores arrays
+
+	\returns HF_STATUS::OK on completion. Note that this does not gauranttee that some or all
+	of the node attributes have been added
+
+	\detail 
+	For any id in ids, if said ID doesn't already exist in the graph, then it and its cost will
+	silently be ignored without error.
+
+	\pre Ids and Scores arrays must be the same length
+	
 	\code
 		
 	\endcode
 */
-C_INTERFACE AddNodeAttributes(HF::SpatialStructures::Graph* g, const int* ids, const char* attribute, const char** scores, int num_nodes);
+C_INTERFACE AddNodeAttributes(
+	HF::SpatialStructures::Graph* g,
+	const int* ids,
+	const char* attribute,
+	const char** scores, 
+	int num_nodes
+);
 
 /// <summary> Attribute should be the name of the attribute to get from the graph.
 /// Memory shall be allocated in *out_scores to hold the char arrays.

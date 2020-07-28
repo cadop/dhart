@@ -1069,11 +1069,10 @@ namespace HF::SpatialStructures {
 		const auto node = NodeFromID(id);
 		bool node_not_found = hasKey(node);
 
-		if (node_not_found) {
-			// Check to see if a node with id exists in the graph.
-			// If not, return.
+		// This usually would be an error but we're going to eat it for now, since multiple nodes
+		// may be being added. Proper error handling should erase all changes. 
+		if (node_not_found)
 			return;
-		}
 
 		/* // requires #include <algorithm>, but not working?
 		std::string lower_cased =
@@ -1153,12 +1152,15 @@ namespace HF::SpatialStructures {
 		}
 	}
 
-	void Graph::AddNodeAttributes(std::vector<int> id, std::string name, std::vector<std::string> scores) {
+	void Graph::AddNodeAttributes(
+		const vector<int> & id, 
+		const string & name,
+		const vector<string> & scores
+	) {
 		// If size of id container and size of scores container are not in alignment,
-		// we return.
-		if (id.size() != scores.size()) {
-			return;
-		}
+		// throw, since our precondition was violated
+		if (id.size() != scores.size())
+			throw std::logic_error("Tried to pass id and string arrays that are different lengths");
 
 		auto scores_iterator = scores.begin();
 

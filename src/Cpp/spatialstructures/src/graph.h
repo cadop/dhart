@@ -1786,11 +1786,14 @@ namespace HF::SpatialStructures {
 		/// </param>
 
 		/*!
+			\pre The length of ids, and the length of scores must be equal 
+			\throws std::logic_error The length of scores and the length of ID do not match.
+
 			\code
 				// TODO example
 			\endcode
 		*/
-		void AddNodeAttributes(std::vector<int> id, std::string name, std::vector<std::string> scores);
+		void AddNodeAttributes(const std::vector<int> & id, const std::string &  name, const std::vector<std::string> & scores);
 
 		/// <summary>
 		/// Get the score for the given attribute of every node in the graph. Nodes that do not have

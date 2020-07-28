@@ -281,8 +281,13 @@ C_INTERFACE CalculateAndStoreEnergyExpenditure(HF::SpatialStructures::Graph* g) 
 
 	return OK;
 }
-C_INTERFACE AddNodeAttributes(HF::SpatialStructures::Graph* g, const int* ids, 
-							 const char* attribute, const char** scores, int num_nodes) {
+C_INTERFACE AddNodeAttributes(
+	Graph* g,
+	const int* ids,
+	const char* attribute,
+	const char** scores,
+	int num_nodes
+) {
 	
 	// It is easy to convert raw pointers that are known to point to buffers/arrays
 	// to a std::vector.
@@ -295,7 +300,15 @@ C_INTERFACE AddNodeAttributes(HF::SpatialStructures::Graph* g, const int* ids,
 
 	// If it turns out that v_ids and v_scores have different sizes,
 	// AddNodeAttributes will discover this.
-	g->AddNodeAttributes(v_ids, std::string(attribute), v_scores);
+	try {
+		g->AddNodeAttributes(v_ids, std::string(attribute), v_scores);
+	}
+	catch (std::logic_error) {
+		//return HF_STATUS::OUT_OF_RANGE;
+		assert(false); // This is purely due to programmer error. The top of this function should
+					   // ONLY read num_nodes elements from either array, and this exception will
+					   // only throw if the length of scores and ids is different
+	}
 
 	return OK;
 }
