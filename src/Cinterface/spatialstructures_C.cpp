@@ -390,3 +390,8 @@ C_INTERFACE CalculateAndStoreCrossSlope(HF::SpatialStructures::Graph* g) {
 
 	return OK;
 }
+
+C_INTERFACE GetSizeOfGraph(const Graph * g, int * out_size) {
+	*out_size = g->size();
+	return OK;
+}

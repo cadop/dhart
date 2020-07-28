@@ -62,6 +62,16 @@ namespace HumanFactors.SpatialStructures
         leaving the cost_type field blank. Alternate costs have corresponding edges 
         in the default cost set, but different costs to traverse from the parent 
         to the child node. 
+
+        \par NodeAttributes
+        The graph is able to store an arbitrary amount of information about the nodes
+        it contains as strings. Similar to alternate cost types, node attributes are
+        each have a distinct key as their name, but instead of conatining information
+        about edges in the graph, node attributes contain information about nodes.
+        Unlike the cost algorithms in edgecosts,  right now there is no functionality 
+        within HumanFactors that populates the node attributes of the graph with any
+        kind of metric, however the methods to add and clear node attributes are
+        made available so you are free to add your own node attributes. 
         
         \invariant 1) The CSR maintained by this graph will always be valid. 
         \invariant
@@ -236,7 +246,7 @@ namespace HumanFactors.SpatialStructures
         ) {
             this.CompressToCSR();
             CVectorAndData cvad = NativeMethods.C_AggregateEdgeCosts(handle, directed, type, cost_type);
-            cvad.size = getNodes().size;
+            cvad.size = this.NumNodes();
             return new ManagedFloatArray(cvad);
         }
 
@@ -291,14 +301,13 @@ namespace HumanFactors.SpatialStructures
         }
         
         /*!
-            \brief  Add an attribute to the node at id
+            \brief  Define a node attribute for the node at id. 
             
             \param  id          The ID of the node that will receive attribute
-            \param  attribute   The attribute that the node at ID will receive
-            \param  score       The weight, or distance that extends from the node at id, as a string
+            \param  attribute   The name of the attribute to use. 
+            \param  score       The score for `attribute` to store for this node. 
 
             \code
-                // TODO example
             \endcode
          */
         public void AddNodeAttribute(int id, string attribute, string score)
@@ -314,10 +323,8 @@ namespace HumanFactors.SpatialStructures
             \param  attribute   Name of the attribute to assigns cores to for each node in `ids`
             \param  scores      Ordered ids of scores to add to the node at the id in `ids` at the same index
 
-            \pre the length of ids and scores must match. 
+            \pre the length of `ids` and `scores` must match
 
-
-            \throws 
             \code
                 // TODO example
             \endcode
@@ -340,11 +347,18 @@ namespace HumanFactors.SpatialStructures
         }
 
         /*! 
-            \brief  Get all score by the attribute name, attribute
+            \brief  Get the score of every node for a given attribute.
 
-            \param  attribute   The desired attribute belonging to a set of nodes
+            \param  attribute The unique name of the attribute type to get from the graph fopr every node
 
-            \return A container of attributes, as strings
+            \returns 
+            If an attribute with the name of `attribute`, type was found in the graph, then an array of scores
+            for each node is returned in order of ID. For example, the score of the node with id 10 would be stored
+            at index 10, id 12 stored at index 12, etc. Nodes without scores for `attribute` will have empty
+            strings at their indexes. 
+            
+            \returns
+            If `attribute` didn't exist in the graph, then an empty array of strings will be returned. 
 
             \code
                 // TODO example
@@ -352,13 +366,13 @@ namespace HumanFactors.SpatialStructures
         */
         public string[] GetNodeAttributes(string attribute)
         {
-            return NativeMethods.C_GetNodeAttributes(Pointer, attribute, this.getNodes().size);
+            return NativeMethods.C_GetNodeAttributes(Pointer, attribute, this.NumNodes());
         }
 
         /*!
             \brief Clear an attribute and all of its scores from the graph.
 
-            \param  attribute The attribute to clear from the graph
+            \param  attribute The unique key of the attribute to clear from the graph.
 
             \code
                 // TODO example
@@ -368,6 +382,16 @@ namespace HumanFactors.SpatialStructures
         {
             NativeMethods.C_ClearAttributeType(this.Pointer, attribute);
         }
+
+        /*!
+            \brief Get the number of nodes in this graph
+            \returns The number of currently defined nodes in this graph
+
+            \remarks
+            This is used multiple times intenrally to get thesize of the graph without
+            needing to get its nodes. 
+       */
+        public int NumNodes() => NativeMethods.C_GetGraphSize(this.Pointer);
     }
 
 

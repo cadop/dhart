@@ -207,7 +207,7 @@ namespace HumanFactors.SpatialStructures
             IntPtr[] str_arr = new IntPtr[num_nodes];
             int size = -1;
             
-            // Get the attributes for the node
+            // Get the attributes for the nodes in this graph
             var res = GetNodeAttributes(graph_ptr, attribute, str_arr, ref size);
             Debug.Assert(res == HF_STATUS.OK, "Something went wrong when trying to read attributes for " + attribute);
 
@@ -225,6 +225,16 @@ namespace HumanFactors.SpatialStructures
 
             // return output array
             return out_strings;
+        }
+
+        internal static int C_GetGraphSize(IntPtr graph_ptr)
+        {
+            int out_size = -1;
+            var res = GetSizeOfGraph(graph_ptr, ref out_size);
+
+
+            return out_size;
+
         }
 
         internal static void C_DestroyNodeVector(IntPtr node_ptr) => DestroyNodes(node_ptr);
@@ -373,5 +383,12 @@ namespace HumanFactors.SpatialStructures
 			IntPtr g,
 			string attribute
 		);
+
+        [DllImport(NativeConstants.DLLPath)]
+        private static extern HF_STATUS GetSizeOfGraph
+        (
+            IntPtr graph_ptr,
+            ref int out_size
+        );
     }
 }

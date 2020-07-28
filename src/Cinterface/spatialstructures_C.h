@@ -826,3 +826,13 @@ C_INTERFACE ClearAttributeType(HF::SpatialStructures::Graph* g, const char* s);
 	\endcode
 */
 C_INTERFACE CalculateAndStoreCrossSlope(HF::SpatialStructures::Graph* g);
+
+/*!
+	\brief Get the number of nodes in a graph
+	
+	\param g Pointer to the graph to get the size of 
+	\param out_size location where the size of the graph will be written
+	
+	\return HF::OK on completion
+*/
+C_INTERFACE GetSizeOfGraph(const HF::SpatialStructures::Graph* g, int* out_size);
