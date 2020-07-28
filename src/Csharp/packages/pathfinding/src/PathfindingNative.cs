@@ -112,6 +112,47 @@ namespace HumanFactors.Pathfinding {
             return out_cvads;
 
         }
+        internal static CVectorAndData[] C_AllToAllPaths(IntPtr graph_ptr, int graph_size, string cost_type)
+        {
+            int num_paths = graph_size ^ 2;
+            IntPtr[] data = new IntPtr[num_paths];
+            IntPtr[] vectors = new IntPtr[num_paths];
+            int size = num_paths;
+            int[] path_sizes = new int[size];
+
+            // Call the Native funciton
+            HF_STATUS res = CreateAllToAllPaths(
+                graph_ptr,
+                cost_type,
+                vectors,
+                data,
+                path_sizes,
+                size
+            );
+
+            if (res == HF_STATUS.NO_COST)
+                throw new KeyNotFoundException("Cost Type (" + cost_type + ") could not be found in the graph");
+
+            // Read through results and fill out CVectorsAndDatas
+            CVectorAndData[] out_cvads = new CVectorAndData[size];
+            for (int i = 0; i < size; i++)
+            {
+                IntPtr data_ptr = data[i];
+                IntPtr vector_ptr = vectors[i];
+                int node_count = path_sizes[i];
+
+                // If the count of this path is 0, that means no path could be found
+                // and both of its pointers are null, so don't try to access them at all
+                if (node_count > 0)
+                    out_cvads[i] = new CVectorAndData(data_ptr, vector_ptr, node_count);
+                // An empty CVectorAndData is our signal for a failed path.
+                else
+                    out_cvads[i] = new CVectorAndData();
+
+            }
+            return out_cvads;
+
+        }
 
         /// <summary>
         /// Destroy an existing path object. 
@@ -142,5 +183,16 @@ namespace HumanFactors.Pathfinding {
             [Out] int[] out_sizes,
             int num_paths
         );
+
+        [DllImport(dll_path)]
+        private static extern HF_STATUS CreateAllToAllPaths(
+            IntPtr graph_ptr,
+            string cost_type,
+            [Out] IntPtr[] out_path_ptr_holder,
+            [Out] IntPtr[] out_path_member_ptr_holder,
+            [Out] int[] out_sizes,
+            int num_paths
+        );
+
     }
 }

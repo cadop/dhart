@@ -6,6 +6,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using HumanFactors.Pathfinding;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace HumanFactors.Tests.Pathfinding
 {
@@ -109,10 +110,11 @@ namespace HumanFactors.Tests.Pathfinding
 
             // Assert that no cost is found if I try to create
             // A path with a cost type that doesn't exist
-            try { 
+            try
+            {
                 HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath(
-                    g, node0, node3, "CostThatDoesn'tExist"        
-                ); 
+                    g, node0, node3, "CostThatDoesn'tExist"
+                );
             }
             catch (KeyNotFoundException) { };
 
@@ -126,7 +128,7 @@ namespace HumanFactors.Tests.Pathfinding
             HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath(
                 g, node0, node3, test_cost
             );
-            
+
             // create a path using the default cost, and a custom cost
             var sp = HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath(g, node0, node3);
             var sp_cost = HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath(g, node0, node3, test_cost);
@@ -159,7 +161,7 @@ namespace HumanFactors.Tests.Pathfinding
                 g.GetNodeID(node3)
             };
 
-            Vector3D[] start_array = { node0, node0, node0, node0, node0, node0};
+            Vector3D[] start_array = { node0, node0, node0, node0, node0, node0 };
             Vector3D[] end_array = { node3, node3, node3, node3, node3, node3 };
 
             var short_paths = HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti(g, start_array, end_array);
@@ -200,7 +202,7 @@ namespace HumanFactors.Tests.Pathfinding
                 g.GetNodeID(node2),
                 g.GetNodeID(node3)
             };
-           
+
             g.AddEdge(node0, node0, 100, test_cost);
             g.AddEdge(node0, node2, 50, test_cost);
             g.AddEdge(node1, node3, 10, test_cost);
@@ -211,8 +213,8 @@ namespace HumanFactors.Tests.Pathfinding
 
             Vector3D[] start_array = { node0, node0, node0, node0, node0, node0 };
             Vector3D[] end_array = { node3, node3, node3, node3, node3, node3 };
-            int[] start_int_array = {ids[0], ids[0], ids[0], ids[0], ids[0], ids[0] };
-            int[] end_int_array = {ids[3], ids[3], ids[3], ids[3], ids[3], ids[3] };
+            int[] start_int_array = { ids[0], ids[0], ids[0], ids[0], ids[0], ids[0] };
+            int[] end_int_array = { ids[3], ids[3], ids[3], ids[3], ids[3], ids[3] };
 
             // Ensure we throw if we give it a bad cost type
             bool did_throw = false;
@@ -228,21 +230,21 @@ namespace HumanFactors.Tests.Pathfinding
 
             // Position Overload
             var short_paths = HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti(
-                g, 
-                start_array, 
-                end_array, 
+                g,
+                start_array,
+                end_array,
                 test_cost
             );
             // ID Overload
             var short_int_paths = HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti(
-                g, 
-                start_int_array, 
-                end_int_array, 
+                g,
+                start_int_array,
+                end_int_array,
                 test_cost
             );
 
             // Assert that every path matches our expectations
-            for( int i = 0; i < short_paths.Length; i++)
+            for (int i = 0; i < short_paths.Length; i++)
             {
                 Span<PathMember> arr = short_paths[i].array;
 
@@ -257,5 +259,36 @@ namespace HumanFactors.Tests.Pathfinding
                 Assert.IsTrue(short_paths[i].Equals(short_int_paths[i]));
             }
         }
+
+
+        [TestMethod]
+        public void AllToAll()
+        {
+
+            Graph g = new Graph();
+            Vector3D node0 = new Vector3D(0, 0, 1);
+            Vector3D node1 = new Vector3D(0, 0, 2);
+            Vector3D node2 = new Vector3D(0, 0, 3);
+            Vector3D node3 = new Vector3D(0, 0, 4);
+
+            g.AddEdge(node0, node0, 0);
+            g.AddEdge(node0, node2, 0);
+            g.AddEdge(node1, node3, 0);
+            g.AddEdge(node2, node3, 0);
+            g.CompressToCSR();
+
+            // Ids assigned to these nodes by the graph.
+            int[] ids = {
+                g.GetNodeID(node0),
+                g.GetNodeID(node1),
+                g.GetNodeID(node2),
+                g.GetNodeID(node3)
+            };
+
+            var paths = HumanFactors.Pathfinding.ShortestPath.DijkstraAllToAll(g);
+
+            Assert.Equals(g.getNodes().size ^ 2, paths.Count());
+
+        }
     }
-}
+    }
