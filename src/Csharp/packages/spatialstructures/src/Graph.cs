@@ -388,7 +388,7 @@ namespace HumanFactors.SpatialStructures
             \returns The number of currently defined nodes in this graph
 
             \remarks
-            This is used multiple times intenrally to get thesize of the graph without
+            This is used multiple times internally to get the size of the graph without
             needing to get its nodes. 
        */
         public int NumNodes() => NativeMethods.C_GetGraphSize(this.Pointer);

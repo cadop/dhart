@@ -1681,7 +1681,7 @@ namespace GraphExampleTests {
 		g.AddNodeAttribute(3, "cross slope", "7.1");
 
 		auto attrs = g.GetNodeAttributes("cross slope");
-		ASSERT_TRUE(attrs.size() == 3);
+		ASSERT_TRUE(attrs.size() == g.size());
 
 		for (auto a : attrs) {
 			std::cout << "attribute: " << a << std::endl;
@@ -1712,25 +1712,16 @@ namespace GraphExampleTests {
 		g.AddNodeAttributes(ids, attr_type, scores);
 
 		auto attrs = g.GetNodeAttributes(attr_type);
-		ASSERT_TRUE(attrs.size() == 4);
+		ASSERT_TRUE(attrs.size() == g.size());
 	}
 
 	TEST(_graph, GetNodeAttributes) {
 		Graph g;
-		g.addEdge(0, 1, 1);
-		g.addEdge(0, 2, 1);
-		g.addEdge(1, 3, 1);
-		g.addEdge(1, 4, 1);
-		g.addEdge(2, 4, 1);
-		g.addEdge(3, 5, 1);
-		g.addEdge(3, 6, 1);
-		g.addEdge(4, 5, 1);
-		g.addEdge(5, 6, 1);
-		g.addEdge(5, 7, 1);
-		g.addEdge(5, 8, 1);
-		g.addEdge(4, 8, 1);
-		g.addEdge(6, 7, 1);
-		g.addEdge(7, 8, 1);
+		g.addEdge(0, 1, 1); g.addEdge(0, 2, 1);	g.addEdge(1, 3, 1);	g.addEdge(1, 4, 1);
+		g.addEdge(2, 4, 1);	g.addEdge(3, 5, 1);	g.addEdge(3, 6, 1);	g.addEdge(4, 5, 1);
+		g.addEdge(5, 6, 1);	g.addEdge(5, 7, 1);	g.addEdge(5, 8, 1);	g.addEdge(4, 8, 1);
+		g.addEdge(6, 7, 1);	g.addEdge(7, 8, 1);
+
 
 		g.AddNodeAttribute(0, "cross slope", "5.1");
 		g.AddNodeAttribute(1, "cross slope", "24.1");
@@ -1738,7 +1729,7 @@ namespace GraphExampleTests {
 		g.AddNodeAttribute(3, "cross slope", "7.1");
 
 		auto attrs = g.GetNodeAttributes("cross slope");
-		ASSERT_TRUE(attrs.size() == 3);
+		ASSERT_TRUE(attrs.size() == g.size());
 
 		for (auto a : attrs) {
 			std::cout << "attribute: " << a << std::endl;
@@ -1747,20 +1738,10 @@ namespace GraphExampleTests {
 
 	TEST(_graph, ClearNodeAttributes) {
 		Graph g;
-		g.addEdge(0, 1, 1);
-		g.addEdge(0, 2, 1);
-		g.addEdge(1, 3, 1);
-		g.addEdge(1, 4, 1);
-		g.addEdge(2, 4, 1);
-		g.addEdge(3, 5, 1);
-		g.addEdge(3, 6, 1);
-		g.addEdge(4, 5, 1);
-		g.addEdge(5, 6, 1);
-		g.addEdge(5, 7, 1);
-		g.addEdge(5, 8, 1);
-		g.addEdge(4, 8, 1);
-		g.addEdge(6, 7, 1);
-		g.addEdge(7, 8, 1);
+		g.addEdge(0, 1, 1);	g.addEdge(0, 2, 1);	g.addEdge(1, 3, 1);	g.addEdge(1, 4, 1);
+		g.addEdge(2, 4, 1);	g.addEdge(3, 5, 1);	g.addEdge(3, 6, 1);	g.addEdge(4, 5, 1);
+		g.addEdge(5, 6, 1);	g.addEdge(5, 7, 1);	g.addEdge(5, 8, 1);	g.addEdge(4, 8, 1);
+		g.addEdge(6, 7, 1);	g.addEdge(7, 8, 1);
 
 		g.AddNodeAttribute(0, "cross slope", "5.1");
 		g.AddNodeAttribute(1, "cross slope", "24.1");
@@ -1768,7 +1749,7 @@ namespace GraphExampleTests {
 		g.AddNodeAttribute(3, "cross slope", "7.1");
 
 		auto attrs = g.GetNodeAttributes("cross slope");
-		ASSERT_TRUE(attrs.size() == 3);
+		ASSERT_TRUE(attrs.size() == g.size());
 
 		for (auto a : attrs) {
 			std::cout << "attribute: " << a << std::endl;
