@@ -1853,12 +1853,34 @@ namespace CInterfaceTests {
 
 		AddNodeAttributes(&g, ids.data(), attr_type.c_str(), scores, ids.size());
 
+		// Allocate an array of char arrays to meet the preconditions of GetNodeAttributes
 		char** scores_out = new char* [g.size()];
 		int scores_out_size = 0;
+
+		// By the postconditions of GetNodeAttributes, this should update scores_out,
+		// and scores_out_size with the variables we need
 		GetNodeAttributes(&g, attr_type.c_str(), &scores_out, &scores_out_size);
 
 		// Assert that the size of the output array matches the number of nodes in the graph
-	//	ASSERT_EQ(g.size(), scores_out_size);
+		ASSERT_EQ(g.size(), scores_out_size);
+
+		// Assert that we can get the scores from this array
+		for (int i = 0; i < scores_out_size; i++)
+		{
+			// Convert score at this index to a string
+			string score = scores_out[i];
+
+			// If it's in our input array, ensure that the score at this value
+			// matches the one we passed
+			auto itr = std::find(ids.begin(), ids.end(), i); 
+			if (itr != ids.end())
+			{
+				int index = std::distance(ids.begin(), itr);
+				ASSERT_EQ(scores[index], score);
+			}
+			else //Otherwise ensure it's the empty string
+				ASSERT_EQ("", score);
+		}
 
 		DeleteScoreArray(&scores_out, scores_out_size);
 		delete[] scores_out;

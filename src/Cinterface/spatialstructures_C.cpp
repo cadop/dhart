@@ -315,7 +315,8 @@ C_INTERFACE GetNodeAttributes(const HF::SpatialStructures::Graph* g, const char*
 		const char* cstr = v_str.c_str();
 		
 		// Allocate space in the output array for this string 
-		const int string_length = v_str.size();
+		const int string_length = v_str.size() + 1; //NOTE: This must be +1 since the null terminator doesn't count
+													// towards the string's overall length
 		(*out_scores)[i] = new char[string_length];
 
 		// Copy the contents of c_str into the output array
