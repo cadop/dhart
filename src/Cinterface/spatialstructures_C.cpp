@@ -333,7 +333,7 @@ C_INTERFACE GetNodeAttributes(const HF::SpatialStructures::Graph* g, const char*
 		out_scores[i] = new char[string_length];
 
 		// Copy the contents of c_str into the output array
-		std::strncpy(out_scores[i], cstr, string_length);
+		std::memcpy(out_scores[i], cstr, string_length);
 	}
 
 	// Update the *out_score_size value, which corresponds to v_attrs.size().
@@ -346,8 +346,11 @@ C_INTERFACE GetNodeAttributes(const HF::SpatialStructures::Graph* g, const char*
 }
 
 C_INTERFACE DeleteScoreArray(char** scores_to_delete, int num_char_arrays) {
+	// If it's null, then just ignore it
 	if (scores_to_delete) {
-	
+
+		// iterate through every char chara array in scores_to_delete.
+		// The heap knows how big these arrays are. 
 		for (int i = 0; i < num_char_arrays; i++) {
 			char* score_string = scores_to_delete[i];
 			delete[](score_string); // Explictly delete the char array at victim
