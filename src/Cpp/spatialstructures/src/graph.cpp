@@ -1170,38 +1170,34 @@ namespace HF::SpatialStructures {
 		}
 	}
 
-	std::vector<std::string> Graph::GetNodeAttributes(std::string attribute) const {
-		std::vector<std::string> attributes;
+	vector<string> Graph::GetNodeAttributes(string attribute) const {
 
-		/* // requires #include <algorithm>, but not working?
-		std::string lower_cased =
-			std::transform(attribute.begin(), attribute.end(),
-				[](unsigned char c) { return std::tolower(c); }
-		);
-		*/
-		std::string lower_cased = attribute;
+		// Return an empty array if this attribute doesn't exist
+		if (node_attr_map.count(attribute) < 1) return vector<string>();
+	
+		// Get the attribute map for attribute now that we know it exists
+		const auto& attr_map = node_attr_map.at(attribute);
 
-		auto node_attr_map_it = node_attr_map.find(lower_cased);
+		// Preallocate output array with empty strings. We'll only be modifying
+		// the indexes that have scores assigned to them, and leaving the rest
+		// as empty strings
+		const int num_nodes = ordered_nodes.size();
+		vector<string> out_attributes(ordered_nodes.size(), "");
 
-		if (node_attr_map_it == node_attr_map.end()) {
-			// If the attribute does not exist...
-			// return an empty container.
-			return attributes;
+		// Iterate through attribute map to assign scores for the nodes
+		// that have them
+		for (const auto& it : attr_map)
+		{
+			// Get the id and score of this element in the hashmap
+			const int id = it.first;
+			const string& score = it.second;
+
+			// Copy it to the index of the node's ID in our output array
+			out_attributes[id] = score;
 		}
 
-		// We now have the NodeAttributeValueMap for the desired attribute.
-		// A NodeAttributeValueMap stores buckets of [node id : node attribute value as string]
-		NodeAttributeValueMap node_attr_value_map = node_attr_map_it->second;
-
-		for (auto& bucket : node_attr_value_map) {
-			// For all buckets in the node_attr_value_map,
-			// extract the attribute (attr) and append it to attributes
-			std::string attr = bucket.second;
-			attributes.push_back(attr);
-		}
-
-		// Return all attr found
-		return attributes;
+		// Return all found attributes
+		return out_attributes;
 	}
 
 	void Graph::ClearNodeAttributes(std::string name) {
