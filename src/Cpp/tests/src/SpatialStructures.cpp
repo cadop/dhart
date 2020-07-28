@@ -1830,27 +1830,23 @@ namespace CInterfaceTests {
 		ASSERT_TRUE(g.GetNodeAttributes(attr_type).size() == 4);
 	}
 
+	// Verify that the contents of GetNodeAttributes matches the input to AddNodeAttributes
+	// For the C-Interface. Issues here can also indicate heap corruption and malformed strings
 	TEST(_graphCInterface, GetNodeAttributes) {
-		Graph g;
-		g.addEdge(0, 1, 1);
-		g.addEdge(0, 2, 1);
-		g.addEdge(1, 3, 1);
-		g.addEdge(1, 4, 1);
-		g.addEdge(2, 4, 1);
-		g.addEdge(3, 5, 1);
-		g.addEdge(3, 6, 1);
-		g.addEdge(4, 5, 1);
-		g.addEdge(5, 6, 1);
-		g.addEdge(5, 7, 1);
-		g.addEdge(5, 8, 1);
-		g.addEdge(4, 8, 1);
-		g.addEdge(6, 7, 1);
-		g.addEdge(7, 8, 1);
 
-		std::vector<int> ids{ 1, 3, 5, 7 };
-		std::string attr_type = "cross slope";
+		// Create a graph and add edges
+		Graph g;
+		g.addEdge(0, 1, 1); g.addEdge(0, 2, 1); g.addEdge(1, 3, 1); g.addEdge(1, 4, 1);
+		g.addEdge(2, 4, 1); g.addEdge(3, 5, 1); g.addEdge(3, 6, 1); g.addEdge(4, 5, 1);
+		g.addEdge(5, 6, 1); g.addEdge(5, 7, 1); g.addEdge(5, 8, 1); g.addEdge(4, 8, 1);
+		g.addEdge(6, 7, 1);	g.addEdge(7, 8, 1);
+
+		// Create a vector of node IDs and their corresponding values for our attribute
+		vector<int> ids{ 1, 3, 5, 7 };
+		string attr_type = "cross slope";
 		const char* scores[4] = { "1.4", "2.0", "2.8", "4.0" };
 
+		// Add node attributes to the graph
 		AddNodeAttributes(&g, ids.data(), attr_type.c_str(), scores, ids.size());
 
 		// Allocate an array of char arrays to meet the preconditions of GetNodeAttributes
@@ -1867,9 +1863,16 @@ namespace CInterfaceTests {
 		// Assert that we can get the scores from this array
 		for (int i = 0; i < scores_out_size; i++)
 		{
-			// Convert score at this index to a string
+			// Convert score at this index to a string. 
 			string score = scores_out[i];
 
+			// If this fails, the char array doesn't have a null terminator, which caused
+			// the constructor of std::string to run into adjacent memory until it found
+			// a null terminator elsewhere. Several string functions rely on the
+			// char array having a null terminator, so ensure it's being copied
+			// over properly by GetNodeAttributes()!
+			ASSERT_TRUE(score.length() == 3 || score.length() == 0); 
+			
 			// If it's in our input array, ensure that the score at this value
 			// matches the one we passed
 			auto itr = std::find(ids.begin(), ids.end(), i); 
