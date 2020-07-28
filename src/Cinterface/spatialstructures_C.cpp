@@ -13,6 +13,7 @@ using HF::SpatialStructures::Node;
 using HF::SpatialStructures::Edge;
 using namespace HF::Exceptions;
 using std::vector;
+using std::string;
 
 
 inline bool parse_string(const char * c) {
@@ -302,51 +303,23 @@ C_INTERFACE AddNodeAttributes(HF::SpatialStructures::Graph* g, const int* ids,
 C_INTERFACE GetNodeAttributes(const HF::SpatialStructures::Graph* g, const char* attribute, 
 							  char*** out_scores, int* out_score_size) {
 
-	std::vector<std::string> v_attrs = g->GetNodeAttributes(std::string(attribute));
+	// Get the node attributes from tthe graph at attribute
+	vector<string> v_attrs = g->GetNodeAttributes(std::string(attribute));
+	
+	// Iterate through each returned string and copy it into
+	// the output array
+	for (int i = 0; i < v_attrs.size(); i++){
 
-	// Caller creates a char **scores variable.
-	// char **scores = new char*[max_size];
-	// int score_size;
-	//
-	// Graph g; // assume this graph is ready
-	// 
-	// They will invoke this code: 
-	// GetNodeAttributes(&g, "attr name", &scores, &score_size);
-	//
-	// In this function:
-	// dereference out_scores, like this: (*out_scores)
-	//
-	// each (*out_scores)[i] will point to newly allocated memory.
-	// (*out_scores)[i] = new char[std::strlen(attr_str_size)];
-	//
-	// std::strncpy((*out_scores)[i], src_str, attr_str_size);
-	// (*out_scores)[i][attr_str_size - 1] = '\0';
-
-	int i = 0;
-	for (auto v_str : v_attrs) {
-		// Get the c-string from the current v_str in the loop.
+		// Get the string and its corresponding c_string
+		const string& v_str = v_attrs[i];
 		const char* cstr = v_str.c_str();
+		
+		// Allocate space in the output array for this string 
+		const int string_length = v_str.size();
+		(*out_scores)[i] = new char[string_length];
 
-		// Derive the length of the c-string using strlen
-		size_t attr_str_size = std::strlen(cstr);
-
-		// out_scores is the address of a (char **); (the address to a buffer of string)
-		// a (char **) is a pointer to a buffer of (char *). (a buffer of string)
-		// a (char *) is a pointer to a buffer of char. (a string)
-		// (*out_scores) is a char **, and its memory was already allocated by the caller.
-		//
-		// For each (*out_scores)[i], we will use operator new to dynamically allocate memory.
-		(*out_scores)[i] = new char[attr_str_size];
-
-		// (*out_scores)[i] is an empty buffer, so we copy the c-string
-		// to (*out_scores)[i]. We make sure to null-terminate this buffer.
-		std::strncpy((*out_scores)[i], cstr, attr_str_size);
-		(*out_scores)[attr_str_size - 1] = '\0';
-
-		// We increment i, so that we allocate memory for the next (char *), or string
-		// in the iteration. v_str, the std::string, will be updated automatically
-		// by virtue of the for-each loop as we iterate over v_attrs.
-		++i;
+		// Copy the contents of c_str into the output array
+		std::strncpy((*out_scores)[i], cstr, string_length);
 	}
 
 	// Update the *out_score_size value, which corresponds to v_attrs.size().
@@ -360,22 +333,15 @@ C_INTERFACE GetNodeAttributes(const HF::SpatialStructures::Graph* g, const char*
 
 C_INTERFACE DeleteScoreArray(char*** scores_to_delete, int num_char_arrays) {
 	if (scores_to_delete) {
-		// If scores_to_delete is non-null...
+	
+		// dereference the first pointer to get to the array
+		char** char_array_array = *scores_to_delete;
 
-		char** curr = (*scores_to_delete);
-		char** end = (*scores_to_delete) + num_char_arrays;
-
-		while (curr < end) {
-			char** victim = curr;
-			++curr;
-
-			delete* victim;
-			*victim = nullptr;	// eliminate dangling pointer
+		for (int i = 0; i < num_char_arrays; i++) {
+			char* score_string = char_array_array[i];
+			delete[](score_string); // Explictly delete the char array at victim
 		}
-
-		*scores_to_delete = nullptr; // eliminate dangling pointer
 	}
-
 	return OK;
 }
 
