@@ -751,7 +751,12 @@ C_INTERFACE AddNodeAttributes(
 
 	\endcode
 */
-C_INTERFACE GetNodeAttributes(const HF::SpatialStructures::Graph* g, const char* attribute, char*** out_scores, int* out_score_size);
+C_INTERFACE GetNodeAttributes(
+	const HF::SpatialStructures::Graph* g,
+	const char* attribute,
+	char** out_scores,
+	int* out_score_size
+);
 
 /// <summary> Free the memory of every char array in scores_to_delete.
 /// The length of each contained char array should be determined by using strlen on the given array
@@ -765,7 +770,7 @@ C_INTERFACE GetNodeAttributes(const HF::SpatialStructures::Graph* g, const char*
 
 	\endcode
 */
-C_INTERFACE DeleteScoreArray(char*** scores_to_delete, int num_char_arrays);
+C_INTERFACE DeleteScoreArray(char** scores_to_delete, int num_char_arrays);
 
 /// <summary> Deletes the contents of that attribute type in the graph </summary>
 /// <param name="g"> The graph from which attributes of type s will be delete</param>

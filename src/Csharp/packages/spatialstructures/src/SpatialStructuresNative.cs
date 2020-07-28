@@ -193,6 +193,41 @@ namespace HumanFactors.SpatialStructures
             return out_float;
         }
 
+        internal static void C_AddNodeAttributes(IntPtr graph_ptr, string attribute, int[] ids, string[] scores)
+        {
+            // Call native function
+            var res = AddNodeAttributes(graph_ptr, ids, attribute, scores, scores.Length);
+
+            Debug.Assert(res == HF_STATUS.OK, "Native code returned an error code when adding attributes to the graph");
+        }
+
+        internal unsafe static string[] C_GetNodeAttributes(IntPtr graph_ptr, string attribute, int num_nodes)
+        {
+            
+            // Set up arrays to fulfil precondition
+            IntPtr[] str_arr = new IntPtr[num_nodes];
+            int size = -1;
+            
+            // Get the attributes for the node
+            var res = GetNodeAttributes(graph_ptr, attribute, str_arr, ref size);
+            Debug.Assert(res == HF_STATUS.OK, "Something went wrong when trying to read attributes for " + attribute);
+            Debug.Assert(size == num_nodes && num_nodes == str_arr.Length, "The size of the output array didn't match our input!");
+
+            // Cast pointers in str_arr to char arrays, then convert to strings
+            string[] out_strings = new string[size];
+            for (int i = 0; i < size; i++) {
+                var ptr = str_arr[i];
+
+                var char_arr = (char*)ptr;
+                out_strings[i] = Marshal.PtrToStringAnsi(ptr);
+            }
+
+            // Finally, deallocate the native memory that was allocated to return the string array
+            DeleteScoreArray(str_arr, size);
+
+            return out_strings;
+        }
+
         internal static void C_DestroyNodeVector(IntPtr node_ptr) => DestroyNodes(node_ptr);
 
         internal static void C_DestroyFloatVector(IntPtr float_vector) => DestroyFloatVector(float_vector);
@@ -203,12 +238,15 @@ namespace HumanFactors.SpatialStructures
 
         internal static void C_CalculateAndStoreEnergyExpenditure(IntPtr graph) => CalculateAndStoreEnergyExpenditure(graph);
 
+
         [DllImport(NativeConstants.DLLPath)]
         private static extern HF_STATUS GetNodes(
             IntPtr graph,
             ref IntPtr out_vector_ptr,
             ref IntPtr out_data_ptr
         );
+
+
 
         [DllImport(NativeConstants.DLLPath)]
         private static extern HF_STATUS GetSizeOfNodeVector(
@@ -306,5 +344,28 @@ namespace HumanFactors.SpatialStructures
 
         [DllImport(NativeConstants.DLLPath)]
         private static extern HF_STATUS CalculateAndStoreEnergyExpenditure(IntPtr graph_pointer);
+
+        [DllImport(NativeConstants.DLLPath)]
+        private static extern HF_STATUS AddNodeAttributes(
+            IntPtr g,
+            int[] ids,
+            string attribute,
+            string[] scores,
+            int num_nodes
+        );
+
+        [DllImport(NativeConstants.DLLPath)]
+        private unsafe static extern HF_STATUS DeleteScoreArray(
+			IntPtr[] scores_to_delete,
+			int num_char_arrays
+		);
+
+        [DllImport(NativeConstants.DLLPath)]
+        private static extern HF_STATUS GetNodeAttributes(
+			IntPtr g,
+			string attribute,
+			IntPtr[] out_scores, // Don't say that this uses strings because it'll break marshalling behavior
+			ref int out_score_size
+		);
     }
 }

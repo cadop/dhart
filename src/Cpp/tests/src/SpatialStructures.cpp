@@ -1853,7 +1853,7 @@ namespace CInterfaceTests {
 
 		// By the postconditions of GetNodeAttributes, this should update scores_out,
 		// and scores_out_size with the variables we need
-		GetNodeAttributes(&g, attr_type.c_str(), &scores_out, &scores_out_size);
+		GetNodeAttributes(&g, attr_type.c_str(), scores_out, &scores_out_size);
 
 		// Assert that the size of the output array matches the number of nodes in the graph
 		ASSERT_EQ(g.size(), scores_out_size);
@@ -1893,7 +1893,7 @@ namespace CInterfaceTests {
 
 		// Deallocate the contents of scores_out by calling C_Interface function, then
 		// deallocate scores_out since we're the ones who allocated that with new. 
-		DeleteScoreArray(&scores_out, scores_out_size);
+		DeleteScoreArray(scores_out, scores_out_size);
 		delete[] scores_out;
 	}
 
@@ -1914,9 +1914,9 @@ namespace CInterfaceTests {
 
 		char** scores_out = new char* [g.size()];
 		int scores_out_size = 0;
-		GetNodeAttributes(&g, attr_type.c_str(), &scores_out, &scores_out_size);
+		GetNodeAttributes(&g, attr_type.c_str(), scores_out, &scores_out_size);
 
-		DeleteScoreArray(&scores_out, scores_out_size);
+		DeleteScoreArray(scores_out, scores_out_size);
 		delete[] scores_out;
 	}
 

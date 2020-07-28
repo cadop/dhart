@@ -1,6 +1,10 @@
 using HumanFactors.NativeUtils;
 using HumanFactors.NativeUtils.CommonNativeArrays;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
 
 /*!
     \brief Standard fundamental data structures for representing space used throughout HumanFactors. 
@@ -299,25 +303,40 @@ namespace HumanFactors.SpatialStructures
          */
         public void AddNodeAttribute(int id, string attribute, string score)
         {
-            
-            throw new NotImplementedException();
+            // call the other overload with these as lists.
+            AddNodeAttribute(attribute, new int[] { id }, new string[] { score });
         }
 
         /*! 
             \brief  Add attribute to all node in ids, with their respective score in scores
 
-            \param  ids         A container of node IDs to receive attribute
-            \param  attribute   The attribute that each node in ids will receive
-            \param  scores      A container of weights, or distances that extend from each node in ids, as strings
+            \param  ids         IDs of nodes to assign scores to for `attribute`
+            \param  attribute   Name of the attribute to assigns cores to for each node in `ids`
+            \param  scores      Ordered ids of scores to add to the node at the id in `ids` at the same index
 
+            \pre the length of ids and scores must match. 
+
+
+            \throws 
             \code
                 // TODO example
             \endcode
         */
-        public void AddNodeAttributes(int[] ids, string attribute, string[] scores)
+        public void AddNodeAttribute(string attribute, IEnumerable<int> ids, IEnumerable<string> scores)
         {
-            throw new NotImplementedException();
+            // Ensure we're keeping our precondition. The length of these
+            // must match for proper behavior
+            if (ids.Count() != scores.Count())
+                throw new ArgumentException("The length of scores" + ids.Count().ToString() + "did not match" +
+                    "the length of scores " + scores.Count().ToString());
 
+            // Call into native code
+            SpatialStructures.NativeMethods.C_AddNodeAttributes(
+                this.Pointer,
+                attribute,
+                ids.ToArray(),
+                scores.ToArray()
+            ); ;
         }
 
         /*! 
@@ -333,13 +352,13 @@ namespace HumanFactors.SpatialStructures
         */
         public string[] GetNodeAttributes(string attribute)
         {
-            throw new NotImplementedException();
+            return NativeMethods.C_GetNodeAttributes(Pointer, attribute, this.getNodes().size);
         }
 
         /*!
-            \brief  Clears attributes by string attribute and all of the scores 
+            \brief Clear an attribute and all of its scores from the graph.
 
-            \param  attribute   The desired attribute to purge from the graph
+            \param  attribute The attribute to clear from the graph
 
             \code
                 // TODO example

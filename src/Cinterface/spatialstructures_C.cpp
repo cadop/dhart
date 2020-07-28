@@ -314,7 +314,7 @@ C_INTERFACE AddNodeAttributes(
 }
 
 C_INTERFACE GetNodeAttributes(const HF::SpatialStructures::Graph* g, const char* attribute, 
-							  char*** out_scores, int* out_score_size) {
+							  char** out_scores, int* out_score_size) {
 
 	// Get the node attributes from tthe graph at attribute
 	vector<string> v_attrs = g->GetNodeAttributes(std::string(attribute));
@@ -330,10 +330,10 @@ C_INTERFACE GetNodeAttributes(const HF::SpatialStructures::Graph* g, const char*
 		// Allocate space in the output array for this string 
 		const int string_length = v_str.size() + 1; //NOTE: This must be +1 since the null terminator doesn't count
 													// towards the string's overall length
-		(*out_scores)[i] = new char[string_length];
+		out_scores[i] = new char[string_length];
 
 		// Copy the contents of c_str into the output array
-		std::strncpy((*out_scores)[i], cstr, string_length);
+		std::strncpy(out_scores[i], cstr, string_length);
 	}
 
 	// Update the *out_score_size value, which corresponds to v_attrs.size().
@@ -345,14 +345,11 @@ C_INTERFACE GetNodeAttributes(const HF::SpatialStructures::Graph* g, const char*
 	return OK;
 }
 
-C_INTERFACE DeleteScoreArray(char*** scores_to_delete, int num_char_arrays) {
+C_INTERFACE DeleteScoreArray(char** scores_to_delete, int num_char_arrays) {
 	if (scores_to_delete) {
 	
-		// dereference the first pointer to get to the array
-		char** char_array_array = *scores_to_delete;
-
 		for (int i = 0; i < num_char_arrays; i++) {
-			char* score_string = char_array_array[i];
+			char* score_string = scores_to_delete[i];
 			delete[](score_string); // Explictly delete the char array at victim
 		}
 	}
