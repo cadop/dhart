@@ -4,9 +4,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
-using HumanFactors.Pathfinding;
 using System.Collections.Generic;
 using System.Linq;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 namespace HumanFactors.Tests.Pathfinding
 {
@@ -271,24 +272,42 @@ namespace HumanFactors.Tests.Pathfinding
             Vector3D node2 = new Vector3D(0, 0, 3);
             Vector3D node3 = new Vector3D(0, 0, 4);
 
-            g.AddEdge(node0, node0, 0);
             g.AddEdge(node0, node2, 0);
-            g.AddEdge(node1, node3, 0);
-            g.AddEdge(node2, node3, 0);
+            g.AddEdge(node1, node3, 10);
+            g.AddEdge(node2, node3, 20);
             g.CompressToCSR();
 
             // Ids assigned to these nodes by the graph.
             int[] ids = {
-                g.GetNodeID(node0),
-                g.GetNodeID(node1),
-                g.GetNodeID(node2),
-                g.GetNodeID(node3)
-            };
+                    g.GetNodeID(node0),
+                    g.GetNodeID(node1),
+                    g.GetNodeID(node2),
+                    g.GetNodeID(node3)
+                };
 
             var paths = HumanFactors.Pathfinding.ShortestPath.DijkstraAllToAll(g);
 
-            Assert.Equals(g.getNodes().size ^ 2, paths.Count());
+            // Assert that the paths are the same length
+            Assert.AreEqual(g.NumNodes() * g.NumNodes(), paths.Count());
 
+
+            Assert.AreEqual(0, paths[1][0].id);
+            Assert.AreEqual(1, paths[1][1].id);
+            
+            Assert.AreEqual(0, paths[3][0].id);
+            Assert.AreEqual(1, paths[3][1].id);
+            Assert.AreEqual(3, paths[3][2].id);
+            
+
+            for (int i = 0; i < paths.Count(); i++)
+            {
+                HumanFactors.Pathfinding.Path path = paths[i];
+                string path_string = "";
+                if (path != null)
+                    path_string = paths[i].ToString();
+            
+                Debug.WriteLine(i.ToString() + ": " + path_string);
+            }
         }
-    }
+        }
     }

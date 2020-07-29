@@ -114,7 +114,7 @@ namespace HumanFactors.Pathfinding {
         }
         internal static CVectorAndData[] C_AllToAllPaths(IntPtr graph_ptr, int graph_size, string cost_type)
         {
-            int num_paths = graph_size ^ 2;
+            int num_paths = graph_size * graph_size;
             IntPtr[] data = new IntPtr[num_paths];
             IntPtr[] vectors = new IntPtr[num_paths];
             int size = num_paths;

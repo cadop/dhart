@@ -199,9 +199,11 @@ namespace HumanFactors.Pathfinding
 
             return DijkstraShortestPathMulti(graph, start_ids, end_ids, cost_type);
         }
+
+
         public static Path[] DijkstraAllToAll(Graph g, string cost_type = "")
         {
-            var cvads = NativeMethods.C_AllToAllPaths(g.Pointer, g.getNodes().size, cost_type);
+            var cvads = NativeMethods.C_AllToAllPaths(g.Pointer, g.NumNodes(), cost_type);
             
             Path[] paths = new Path[cvads.Length];
             for (int i = 0; i < cvads.Length; i++)
