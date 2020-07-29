@@ -182,5 +182,33 @@ def test_AddingAndReadingCostTypes():
         g.AddEdgeToGraph(1, 0, 10, test_cost)
 
 
+def test_ClearCost():
+    """ Ensures that a cost_type can be cleared by calling Clear 
+    """
 
+    # Create a graph, add some edges, then compress it
+    g = Graph()
+    g.AddEdgeToGraph(0, 1, 100)
+    g.AddEdgeToGraph(0, 2, 50)
+    g.AddEdgeToGraph(1, 2, 20)
+    g.CompressToCSR()
 
+    # Add some edges to an alternate cost
+    test_cost = "Test"
+    g.AddEdgeToGraph(0, 1, 1, test_cost)
+    g.AddEdgeToGraph(0, 2, 1, test_cost)
+    g.AddEdgeToGraph(1, 2, 1, test_cost)
+
+    # Clear this alternate cost from the graph
+    g.Clear(test_cost)
+    
+    # Ensure that the graph still exists
+    assert(g.GetEdgeCost(0,1) == 100)
+
+    print("MMMMEN")
+    print(g.CompressToCSR())
+
+    # If we try to get the cost of one of it's edges
+    # we should get a no_cost exception
+    with pytest.raises(KeyError):
+        g.GetEdgeCost(0, 1, test_cost)

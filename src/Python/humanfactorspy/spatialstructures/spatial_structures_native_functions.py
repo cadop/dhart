@@ -138,6 +138,7 @@ def C_AddEdgeFromNodes(
             + f"type {cost_type} without first creating an edge between them"
             + "in the graph's default cost set.")
     else:
+        print("Unexpected error code: " + error_code)
         assert(
             False,
             "There's some error that's not being handled either in C++ or"
@@ -187,6 +188,7 @@ def C_AddEdgeFromNodeIDs(
             + " cost type {cost_type} without first creating an edge between"
             + "them in the graph's default cost set.")
     elif error_code == HF_STATUS.GENERIC_ERROR:
+        print("Unexpected error code: " + error_code)
         assert(False)  # Something is happening in C++ that isn't being
         # handled by python, or should never happen at all
 
@@ -256,6 +258,7 @@ def C_GetCSRPtrs(
         # Anything else indicates an unexpected exception in C++
         # Check the C_Interface to see if there's some case that's not being
         # handled here or there.
+        print("Unexpected error code: " + error_code)
         assert(False)
 
 def C_GetNodeID(graph_ptr: c_void_p, node: Tuple[float, float, float]) -> int:
@@ -313,6 +316,7 @@ def C_GetEdgeCost(
             f"Tried to get the cost of non-existant cost type: {cost_type}")
     else:
         # Indicates programmer error either here or in the cinterface
+        print("Unexpected error code: " + error_code)
         assert(False)  
 
 
@@ -325,11 +329,18 @@ def C_ClearGraph(graph_ptr: c_void_p, cost_type: str='') -> None:
     Clear graph of a given cost type
 
     """
+    cost_type_ptr = GetStringPtr(cost_type)
 
-    # convert string to bytes
-    cost_type = cost_type.encode('utf-8')
-
-    HFPython.ClearGraph(graph_ptr, c_char_p(cost_type))
+    error_code = HFPython.ClearGraph(graph_ptr, cost_type_ptr)
+    
+    if error_code == HF_STATUS.OK:
+        return
+    elif error_code == HF_STATUS.NO_COST:
+        raise KeyError(f"Tried to clear non-existant cost {cost_type} from a"
+        + " graph")
+    else:
+        print("Unexpected error code: " + error_code)
+        assert(False) # There's some unhandled problem with C++ 
 
 
 ### Destructors

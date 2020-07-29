@@ -253,9 +253,20 @@ class Graph:
 
         return node_point_array
 
-    def Clear(self):
-        """ Clear all edges/nodes from the graph """
-        spatial_structures_native_functions.C_ClearGraph(self.graph_ptr)
+    def Clear(self, cost_type : str = ""):
+        """ Clear all edges/nodes from the graph or a specific cost type
+        
+        Args:
+            cost_type : str, optional
+                If left as the empty string, clear all nodes/edges from the
+                graph. Otherwise, clear edges from the specified cost type.
+
+        Raises:
+            KeyError:
+                Tried to clear a cost type that didn't exist in the graph.
+        
+        """
+        spatial_structures_native_functions.C_ClearGraph(self.graph_ptr, cost_type)
 
     def ConvertToLists(self, just_nodes = False) -> Tuple[List[Tuple], List[Tuple]]:
         """ Convert the CSR to a list of nodes and tuples, useful for serialization """
