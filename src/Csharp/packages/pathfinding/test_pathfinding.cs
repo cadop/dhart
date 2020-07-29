@@ -4,8 +4,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
-using HumanFactors.Pathfinding;
 using System.Collections.Generic;
+using System.Linq;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 namespace HumanFactors.Tests.Pathfinding
 {
@@ -109,10 +111,11 @@ namespace HumanFactors.Tests.Pathfinding
 
             // Assert that no cost is found if I try to create
             // A path with a cost type that doesn't exist
-            try { 
+            try
+            {
                 HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath(
-                    g, node0, node3, "CostThatDoesn'tExist"        
-                ); 
+                    g, node0, node3, "CostThatDoesn'tExist"
+                );
             }
             catch (KeyNotFoundException) { };
 
@@ -126,7 +129,7 @@ namespace HumanFactors.Tests.Pathfinding
             HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath(
                 g, node0, node3, test_cost
             );
-            
+
             // create a path using the default cost, and a custom cost
             var sp = HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath(g, node0, node3);
             var sp_cost = HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath(g, node0, node3, test_cost);
@@ -159,7 +162,7 @@ namespace HumanFactors.Tests.Pathfinding
                 g.GetNodeID(node3)
             };
 
-            Vector3D[] start_array = { node0, node0, node0, node0, node0, node0};
+            Vector3D[] start_array = { node0, node0, node0, node0, node0, node0 };
             Vector3D[] end_array = { node3, node3, node3, node3, node3, node3 };
 
             var short_paths = HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti(g, start_array, end_array);
@@ -200,7 +203,7 @@ namespace HumanFactors.Tests.Pathfinding
                 g.GetNodeID(node2),
                 g.GetNodeID(node3)
             };
-           
+
             g.AddEdge(node0, node0, 100, test_cost);
             g.AddEdge(node0, node2, 50, test_cost);
             g.AddEdge(node1, node3, 10, test_cost);
@@ -211,8 +214,8 @@ namespace HumanFactors.Tests.Pathfinding
 
             Vector3D[] start_array = { node0, node0, node0, node0, node0, node0 };
             Vector3D[] end_array = { node3, node3, node3, node3, node3, node3 };
-            int[] start_int_array = {ids[0], ids[0], ids[0], ids[0], ids[0], ids[0] };
-            int[] end_int_array = {ids[3], ids[3], ids[3], ids[3], ids[3], ids[3] };
+            int[] start_int_array = { ids[0], ids[0], ids[0], ids[0], ids[0], ids[0] };
+            int[] end_int_array = { ids[3], ids[3], ids[3], ids[3], ids[3], ids[3] };
 
             // Ensure we throw if we give it a bad cost type
             bool did_throw = false;
@@ -228,21 +231,21 @@ namespace HumanFactors.Tests.Pathfinding
 
             // Position Overload
             var short_paths = HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti(
-                g, 
-                start_array, 
-                end_array, 
+                g,
+                start_array,
+                end_array,
                 test_cost
             );
             // ID Overload
             var short_int_paths = HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti(
-                g, 
-                start_int_array, 
-                end_int_array, 
+                g,
+                start_int_array,
+                end_int_array,
                 test_cost
             );
 
             // Assert that every path matches our expectations
-            for( int i = 0; i < short_paths.Length; i++)
+            for (int i = 0; i < short_paths.Length; i++)
             {
                 Span<PathMember> arr = short_paths[i].array;
 
@@ -252,10 +255,60 @@ namespace HumanFactors.Tests.Pathfinding
                 Assert.AreEqual(arr[1].cost_to_next, 10);
                 Assert.AreEqual(arr[1].id, ids[2]);
 
-
                 // Assert that this path equals the integer version
                 Assert.IsTrue(short_paths[i].Equals(short_int_paths[i]));
             }
         }
+
+
+        [TestMethod]
+        public void AllToAll()
+        {
+            // Create and compress graph
+            Graph g = new Graph();
+            Vector3D node0 = new Vector3D(0, 0, 1); Vector3D node1 = new Vector3D(0, 0, 2);
+            Vector3D node2 = new Vector3D(0, 0, 3); Vector3D node3 = new Vector3D(0, 0, 4);
+            g.AddEdge(node0, node2, 0);
+            g.AddEdge(node1, node3, 10);
+            g.AddEdge(node2, node3, 20);
+            g.CompressToCSR();
+
+            // Ensure we throw the proper exception when specified cost type doesn't exist
+            // in the graph.
+            bool threw_except = false;
+            try
+            {
+                HumanFactors.Pathfinding.ShortestPath.DijkstraAllToAll(g, "nonexistantcost");
+            }
+            catch (KeyNotFoundException) { threw_except = true; }
+            Assert.IsTrue(threw_except, "Doesn't throw the proper exception when specified cost doesn't exist");
+
+            // Calculate all to all paths on g.
+            var paths = HumanFactors.Pathfinding.ShortestPath.DijkstraAllToAll(g);
+
+            // The number of paths created should be equal to the amount of nodes in the
+            // graph squared (for now).
+            Assert.AreEqual(g.NumNodes() * g.NumNodes(), paths.Count());
+
+            // Check specific path members to see if they match our expected output
+            Assert.AreEqual(0, paths[1][0].id);
+            Assert.AreEqual(1, paths[1][1].id);
+            Assert.AreEqual(0, paths[3][0].id);
+            Assert.AreEqual(1, paths[3][1].id);
+            Assert.AreEqual(3, paths[3][2].id);
+            
+            // Print the contents of every path
+            for (int i = 0; i < paths.Count(); i++)
+            {
+                HumanFactors.Pathfinding.Path path = paths[i];
+                
+                // Print the empty string if null.
+                string path_string = "-------";
+                if (path != null)
+                    path_string = paths[i].ToString();
+            
+                Debug.WriteLine(i.ToString() + ": " + path_string);
+            }
+        }
+        }
     }
-}

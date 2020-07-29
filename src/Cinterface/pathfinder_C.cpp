@@ -15,6 +15,7 @@ using std::vector;
 using HF::SpatialStructures::Graph;
 using HF::SpatialStructures::Path;
 using HF::SpatialStructures::PathMember;
+using HF::Exceptions::HF_STATUS;
 using namespace HF::Pathfinding;
 
 
@@ -135,14 +136,33 @@ C_INTERFACE DestroyPath(Path* path_to_destroy) {
 
 C_INTERFACE CreateAllToAllPaths(
 	const HF::SpatialStructures::Graph* g,
+	const char* cost_type,
 	HF::SpatialStructures::Path** out_path_ptr_holder,
 	HF::SpatialStructures::PathMember** out_path_member_ptr_holder,
 	int* out_sizes,
 	int num_paths
 ) {
 
-	auto bg = CreateBoostGraph(*g);
-	InsertAllToAllPathsIntoArray(bg.get(), out_path_ptr_holder, out_path_member_ptr_holder, out_sizes);
+	// Create a string from cost_type
+	std::string cost(cost_type);
 
-	return HF::Exceptions::OK;
+	try {
+		// Create a boost graph with the cost type
+		auto bg = CreateBoostGraph(*g, cost_type);
+
+		// Generate paths
+		InsertAllToAllPathsIntoArray(bg.get(), out_path_ptr_holder, out_path_member_ptr_holder, out_sizes);
+		
+		// Return OK
+		return HF_STATUS::OK;
+	}
+
+	// Handle the case that the cost type doesn't exist
+	catch (HF::Exceptions::NoCost){
+		return HF_STATUS::NO_COST;
+	}
+
+	// IF we get here something went wrong.
+	return HF_STATUS::GENERIC_ERROR;
+	
 }

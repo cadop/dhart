@@ -78,9 +78,10 @@ target_compile_options(HumanFactorsCSharp PRIVATE "/unsafe")
 		RUNTIME DESTINATION bin
 )
 
+# Set up test assembly
 add_library(hfcsharptest)
 target_sources(hfcsharptest PRIVATE	${test_sources})
-
+target_compile_options(hfcsharptest PRIVATE "/unsafe") # Must be compiled with unsafe
 set_target_properties(
 		hfcsharptest
 		PROPERTIES
@@ -89,6 +90,7 @@ set_target_properties(
 		VS_DOTNET_TARGET_FRAMEWORK_VERSION "v4.5.1"
 		VS_DOTNET_REFERENCES "${test_references}"
 )
+
 install(TARGETS hfcsharptest EXPORT hfcsharptest RUNTIME DESTINATION bin)
 
 
