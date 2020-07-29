@@ -2,9 +2,11 @@ import pytest
 import unittest
 import os
 
+import numpy
+
 from humanfactorspy.geometry import LoadOBJ, CommonRotations
 from humanfactorspy.raytracer import embree_raytracer, EmbreeBVH
-from humanfactorspy.spatialstructures import NodeList, NodeStruct, Graph
+from humanfactorspy.spatialstructures import NodeList, NodeStruct, Graph, CostAggregationType
 from humanfactorspy.Exceptions import LogicError, InvalidCostOperation
 import humanfactorspy.spatialstructures.node as NodeFunctions
 
@@ -74,6 +76,38 @@ def test_CreateNodes():
         assert node[0] == np_node[0]
         assert node[1] == np_node[1]
         assert node[2] == np_node[2]
+
+
+def test_AggregateCostType():
+    """ Test aggregating the edges of a graph using an alternate
+    cost type """
+
+    # Create a graph, add some edges, then compress it
+    g = Graph()
+    g.AddEdgeToGraph(0, 1, 100)
+    g.AddEdgeToGraph(0, 2, 50)
+    g.AddEdgeToGraph(1, 2, 20)
+    g.CompressToCSR()
+
+    # Add some edges for an alternate cost
+    test_cost = "Test"
+    g.AddEdgeToGraph(0, 1, 1, test_cost)
+    g.AddEdgeToGraph(0, 2, 1, test_cost)
+    g.AddEdgeToGraph(1, 2, 1, test_cost)
+
+    # Aggregate the edges of both the default
+    # and alternate costs
+    ct = CostAggregationType.SUM
+    default_aggregated = g.AggregateEdgeCosts(ct, True)
+    alt_aggregated = g.AggregateEdgeCosts(ct, True, test_cost)
+
+    # Get arrays and convert to list
+    default_arr = list(default_aggregated.array)
+    alt_arr = list(alt_aggregated.array)
+
+    # Compare them to expectations
+    assert(default_arr == [150, 20, 0])
+    assert(alt_arr == [2, 1, 0])
 
 def test_GetCSRCost():
     """ Tests getting a CSR with an alternate cost type """

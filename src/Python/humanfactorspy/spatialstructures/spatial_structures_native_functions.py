@@ -25,7 +25,12 @@ def GetEdgesForNode(graph_ptr: c_void_p, node_ptr: c_void_p) -> Tuple[c_void_p, 
     """
     pass
 
-def C_AggregateEdgeCosts(graph_ptr: c_void_p, aggregate_type: int, directed: bool, cost_type: c_char_p) -> c_void_p:
+
+def C_AggregateEdgeCosts(
+        graph_ptr: c_void_p,
+        aggregate_type: int,
+        directed: bool,
+        cost_type: str) -> c_void_p:
     """
     Aggregates edge costs
 
@@ -39,13 +44,28 @@ def C_AggregateEdgeCosts(graph_ptr: c_void_p, aggregate_type: int, directed: boo
     # Pointers to store results
     vector_ptr = c_void_p(0)
     data_ptr = c_void_p(0)
+    cost_type_ptr = GetStringPtr(cost_type)
 
     # Call to C interface
-    HFPython.AggregateCosts(graph_ptr, c_int(aggregate_type), c_bool(directed), 
-                            cost_type, byref(vector_ptr), byref(data_ptr))
+    error_code = HFPython.AggregateCosts(
+        graph_ptr,
+        c_int(aggregate_type),
+        c_bool(directed),
+        cost_type_ptr,
+        byref(vector_ptr),
+        byref(data_ptr)
+    )
 
-    # Return result pointers
-    return vector_ptr, data_ptr
+    # Check error code
+    if error_code == HF_STATUS.OK:
+        # Return result pointers
+        return vector_ptr, data_ptr
+    elif error_code == HF_STATUS.NO_COST:
+        # Throw if they try to use a cost type that doesn't exist
+        raise KeyError(f"Tried to aggregate the edges of non existant "
+                       + f"cost type {cost_type}")
+    else:
+        assert(False)  # Never should get here, this is a programmer error
 
 
 def GetNodesFromGraph(graph_ptr: c_void_p) -> Tuple[c_void_p, c_void_p]:

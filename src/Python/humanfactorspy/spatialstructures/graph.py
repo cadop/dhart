@@ -277,7 +277,28 @@ class Graph:
             directed: bool,
             cost_type: str = "") -> EdgeSumArray:
         """ Get an aggregated score for every node in the graph based on
-         its edges"""
+            its edges.
+
+        Parameters:
+            ct : CostAggregationType
+                Aggregation method to use for summarizing edge costs. See
+                CostAggregationType for more information
+            directed : bool
+                If false, only consider outgoing edges of each node. If true,
+                consider outgoing and incoming edges.
+            cost_type : str
+                Name of the cost set to use for aggregation. If left as blank,
+                will use the default cost of the graph.
+
+        Returns:
+            An array of floats containing  aggregated cost score for each node 
+            in the graph ordered by node ID.
+        
+        Raises:
+            KeyError:
+                cost_type wasn't set to an empty string or the key of any
+                cost type in the graph.
+         """
 
         vector_ptr, data_ptr = spatial_structures_native_functions.C_AggregateEdgeCosts(
             self.graph_ptr, ct, directed, cost_type)
