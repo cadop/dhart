@@ -235,10 +235,15 @@ C_INTERFACE ClearGraph(HF::SpatialStructures::Graph* graph, const char* cost_typ
 {
 	std::string cost_name(cost_type);
 
-	if (!cost_name.empty())
+	// If trying to delete the default cost type, clear everything
+	if (cost_name.empty())
 		graph->Clear();
+
+	// Otherwise, only clear the cost type that's specified by cost name
 	else {
 		try { graph->ClearCostArrays(cost_name); }
+		
+		// Catch it if it throws due to not having a valid cost. 
 		catch (NoCost) {
 			return NO_COST;
 		}
