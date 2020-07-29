@@ -392,6 +392,7 @@ C_INTERFACE DestroyPath(HF::SpatialStructures::Path* path_to_destroy);
 */
 C_INTERFACE CreateAllToAllPaths(
 	const HF::SpatialStructures::Graph* g,
+	const char * cost_type,
 	HF::SpatialStructures::Path** out_path_ptr_holder,
 	HF::SpatialStructures::PathMember** out_path_member_ptr_holder,
 	int* out_sizes,
