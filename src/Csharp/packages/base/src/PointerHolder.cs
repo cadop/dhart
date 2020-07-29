@@ -184,6 +184,21 @@ namespace HumanFactors.NativeUtils
             return managed_array;
         }
 
+        /*! \brief Get the element at location i */
+        public unsafe T this[int key]
+        {
+            get
+            {
+                // Perform bounds checking so we don't crash
+                if (key < 0 || key >= this.size)
+                    throw new ArgumentOutOfRangeException("Key " + key + " was out of range of the array's bounds!");
+                else
+                    return this.array[key]; // there may be a better way to do this, but can't use a generic
+                                            // type with pointers.
+            }
+        }
+
+
         public bool Equals(NativeArray<T> arr2)
         {
             var this_span = this.array;
