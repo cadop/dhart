@@ -1,6 +1,10 @@
 using HumanFactors.NativeUtils;
 using HumanFactors.NativeUtils.CommonNativeArrays;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
 
 /*!
     \brief Standard fundamental data structures for representing space used throughout HumanFactors. 
@@ -58,6 +62,16 @@ namespace HumanFactors.SpatialStructures
         leaving the cost_type field blank. Alternate costs have corresponding edges 
         in the default cost set, but different costs to traverse from the parent 
         to the child node. 
+
+        \par NodeAttributes
+        The graph is able to store an arbitrary amount of information about the nodes
+        it contains as strings. Similar to alternate cost types, node attributes are
+        each have a distinct key as their name, but instead of conatining information
+        about edges in the graph, node attributes contain information about nodes.
+        Unlike the cost algorithms in edgecosts,  right now there is no functionality 
+        within HumanFactors that populates the node attributes of the graph with any
+        kind of metric, however the methods to add and clear node attributes are
+        made available so you are free to add your own node attributes. 
         
         \invariant 1) The CSR maintained by this graph will always be valid. 
         \invariant
@@ -232,7 +246,7 @@ namespace HumanFactors.SpatialStructures
         ) {
             this.CompressToCSR();
             CVectorAndData cvad = NativeMethods.C_AggregateEdgeCosts(handle, directed, type, cost_type);
-            cvad.size = getNodes().size;
+            cvad.size = this.NumNodes();
             return new ManagedFloatArray(cvad);
         }
 
@@ -285,6 +299,162 @@ namespace HumanFactors.SpatialStructures
             NativeMethods.C_DestroyGraph(handle);
             return true;
         }
+
+        /*!
+            \brief  Define a node attribute for the node at id. 
+            
+            \param  id          The ID of the node that will receive attribute.
+            \param  attribute   The name of the attribute to use. 
+            \param  score       The score for `attribute` to store for this node. 
+
+            \par Example
+            \code
+                // Create a graph and add two edges to create nodes
+				Graph g = new Graph();
+				g.AddEdge(0, 1, 150);
+				g.AddEdge(0, 2, 100);
+				g.AddEdge(0, 3, 2);
+
+				// Add node attributes to the graph for the nodes
+				// we just created
+				g.AddNodeAttribute(2, "Attr", "200");
+				g.AddNodeAttribute(1, "Attr", "100");
+				g.AddNodeAttribute(0, "Attr", "0");
+
+				// Get scores for this attribute from the graph
+				var attr = g.GetNodeAttributes("Attr");
+
+				// Print results
+				foreach (var attribute in attr)
+					Debug.WriteLine(attribute);
+            \endcode
+            `>>> 0`\n
+            `>>> 100`\n
+            `>>> 200`\n
+         */
+        public void AddNodeAttribute(int id, string attribute, string score)
+        {
+            // call the other overload with these as lists.
+            AddNodeAttribute(attribute, new int[] { id }, new string[] { score });
+        }
+
+        /*! 
+            \brief  Add attribute to all node in ids, with their respective score in scores
+
+            \param  ids         IDs of nodes to assign scores to for `attribute`
+            \param  attribute   Name of the attribute to assigns cores to for each node in `ids`
+            \param  scores      Ordered ids of scores to add to the node at the id in `ids` at the same index
+
+            \pre the length of `ids` and `scores` must match
+
+            \par Example
+            \code
+			    // Create a graph and add two edges to create nodes
+				Graph g = new Graph();
+				g.AddEdge(0, 1, 150);
+				g.AddEdge(0, 2, 100);
+
+				// Create arrays for ids and scores
+				int[] ids = { 0, 1, 2 };
+				string[] scores = { "0", "100", "200" };
+
+				// Add them to the graph
+				g.AddNodeAttribute("Attr", ids, scores);
+
+				// Get scores for this attribute from the graph
+				var attr = g.GetNodeAttributes("Attr");
+
+				foreach (var attribute in attr)
+					Debug.WriteLine(attribute);
+            \endcode
+
+            `>>> 0`\n
+            `>>> 100`\n
+            `>>> 200`\n
+        */
+        public void AddNodeAttribute(string attribute, IEnumerable<int> ids, IEnumerable<string> scores)
+        {
+            // Ensure we're keeping our precondition. The length of these
+            // must match for proper behavior
+            if (ids.Count() != scores.Count())
+                throw new ArgumentException("The length of scores" + ids.Count().ToString() + "did not match" +
+                    "the length of scores " + scores.Count().ToString());
+
+            // Call into native code
+            SpatialStructures.NativeMethods.C_AddNodeAttributes(
+                this.Pointer,
+                attribute,
+                ids.ToArray(),
+                scores.ToArray()
+            ); ;
+        }
+
+        /*! 
+            \brief  Get the score of every node for a given attribute.
+
+            \param  attribute The unique name of the attribute type to get from the graph fopr every node
+
+            \returns 
+            If an attribute with the name of `attribute`, type was found in the graph, then an array of scores
+            for each node is returned in order of ID. For example, the score of the node with id 10 would be stored
+            at index 10, id 12 stored at index 12, etc. Nodes without scores for `attribute` will have empty
+            strings at their indexes. 
+            
+            \returns
+            If `attribute` didn't exist in the graph, then an empty array of strings will be returned. 
+
+            \code
+                // TODO example
+            \endcode
+        */
+        public string[] GetNodeAttributes(string attribute)
+        {
+            return NativeMethods.C_GetNodeAttributes(Pointer, attribute, this.NumNodes());
+        }
+
+        /*!
+            \brief Clear an attribute and all of its scores from the graph.
+
+            \param  attribute The unique key of the attribute to clear from the graph.
+            
+            \par Example
+            \code
+				// Create a graph and add two edges to create nodes
+				Graph g = new Graph();
+				g.AddEdge(0, 1, 150);
+				g.AddEdge(0, 2, 100);
+
+				// Create arrays for ids and scores
+				int[] ids = { 0, 1, 2 };
+				string[] scores = { "0", "100", "200" };
+
+				// Add them to the graph
+				g.AddNodeAttribute("Attr", ids, scores);
+
+				// Now try to delete
+				g.ClearNodeAttributes("Attr");
+
+				// check that this is truly gone
+				var node_attrs = g.GetNodeAttributes("Attr");
+                Debug.WriteLine(node_attrs.size());
+            \endcode
+            `>>> 0`
+            
+         */
+        public void ClearNodeAttributes(string attribute)
+        {
+            NativeMethods.C_ClearAttributeType(this.Pointer, attribute);
+        }
+
+        /*!
+            \brief Get the number of nodes in this graph
+            \returns The number of currently defined nodes in this graph
+
+            \remarks
+            This is used multiple times internally to get the size of the graph without
+            needing to get its nodes. 
+       */
+        public int NumNodes() => NativeMethods.C_GetGraphSize(this.Pointer);
     }
 
 
