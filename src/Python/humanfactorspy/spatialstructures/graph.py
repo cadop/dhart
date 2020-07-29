@@ -31,10 +31,23 @@ class EdgeSumArray(NativeNumpyLike):
 
 
 class Graph:
-    """ A wrapper for the human factors graph in C++
+    """ A graph representing connections between points in space.
 
-    Provides a view of the graph through a numpy csr and manages its 
-    lifetime.
+    Every Node in the graph contains a set of  X,Y,Z coordinates which can be
+    used to represent a specific point in space. This graph internally is 
+    stored as a Sparse Matrix for space efficency. Nodes are stored in a 
+    hashmap containing X,Y, and Z coordinates, allowing for quick indexing
+    of specific nodes by location alone. Access to this graph's internal
+    CSR is available through Graph.CompressToCSR().
+
+    Cost Types:
+        This Graph is capable of holding multiple cost types for any of it's 
+        edges. Each cost type has a distinct key as it's name, such as 
+        "CrossSlope" or "EnergyExpenditure". Upon creation, the graph is 
+        assigned a default cost type, Distance which can be accessed explicitly 
+        by the key "Distance" or leaving the cost_type field blank. Alternate 
+        costs have corresponding edges in the default cost set, but different 
+        costs to traverse from the parent to the child node.
 
     Attributes:
         csr: csr pointing to the underlying graph in C++.
@@ -62,10 +75,9 @@ class Graph:
 
             Returns:
                 A scipy csr matrix
-
         """
-        # convert string to bytes
-        cost_type = cost_type.encode('utf-8')
+
+        # Get the CSR matrix from native code
         (
             nnz,
             row_count,
@@ -75,6 +87,7 @@ class Graph:
             outer_indices_ptr,
         ) = spatial_structures_native_functions.C_GetCSRPtrs(self.graph_ptr, cost_type)
 
+        # Update this class's internal attributes
         self.nnz = nnz
         self.row_count = row_count
         self.col_count = col_count
@@ -83,6 +96,7 @@ class Graph:
         outer_nparr_pointer = ctypes.cast(outer_indices_ptr, ctypes.POINTER(c_int))
         inner_nparr_pointer = ctypes.cast(inner_indices_ptr, ctypes.POINTER(c_int))
 
+        # Map numpy arrays to pointers in native memory
         self.__data_array = numpy.ctypeslib.as_array(data_nparr_pointer, shape=(nnz,))
         self.__outer__indices_array = numpy.ctypeslib.as_array(
             outer_nparr_pointer, shape=(row_count + 1,)
@@ -91,6 +105,7 @@ class Graph:
             inner_nparr_pointer, shape=(nnz,)
         )
 
+        # Map a numpy CSR to this CSR
         self.csr = csr_matrix(
             (
                 self.__data_array,
@@ -100,6 +115,8 @@ class Graph:
             (row_count, col_count),
             copy=False,
         )
+
+        # Return a reference to the caller
         return self.csr
 
     def GetNodeID(self, node: Tuple[float, float, float]) -> int:
@@ -114,32 +131,59 @@ class Graph:
         self,
         parent: Union[Tuple[float, float, float], NodeStruct, int],
         child: Union[Tuple[float, float, float], NodeStruct, int],
-        score: float,
-        cost_type: str='',
-        ) -> None:
+        cost: float,
+        cost_type: str = ""
+    ) -> None:
         """ Add a new edge to the graph from parent to child with the given cost
 
-        NOTE: 
-            1) This will invalidate the current CSR representation of the graph
-            2) Not supported for visibility graphs
-
         Args:
-            parent: Either a node with values for x,y, and z, or an integer representing a node ID
-            child: Where the edge from parent is going to. Must be the same type of parent
-                i.e. if parent is an int, then the child must also be an int
+            parent: Either a node with values for x,y, and z, or an integer
+            representing a node ID
+            child: Where the edge from parent is going to. Must be the same type
+            of parent i.e. if parent is an int, then the child must also be an 
+            int
             cost: the cost from parent to child
-        """
+            cost_type: The type of cost to add this edge to. If left blank or 
+            as the empty string then the edge will be added to the 
+            graph's default cost set.
+        
+        Pre Conditions:
+            1) If cost_type is not left blank, then the edge from parent to 
+               child must already exist in the graph for its default cost type.
+            2) If adding costs to an alternate cost type, then the graph must
+               already be compressed
 
-        # convert string to bytes
-        cost_type = cost_type.encode('utf-8')
+        Post Conditions:
+            1) If parent or child doesn't exist in the graph as nodes, they will 
+               be added
+            2) If cost_type doesn't already exist in the graph it will be 
+               created
+
+      .. note::
+          The graph offers some basic functionality to add edges and nodes but 
+          it's main use is to provide access to the output of the GraphGenerator
+          and VisibilityGraph. If adding edges or alternate cost types please
+          make sure to read the documentation for these functions and that 
+          all preconditions are followed.
+
+      .. warning::
+            1) Once any edges have been added to the graph as an alternate cost 
+               type, new edges are no longer able to be created.
+            2) While this function can be called with integers for both paren
+               and child id, doing so is not recommended unless you are
+               sure that both ids already exist in the graph. If an ID is added
+               that does not already exist in the graph, it will cause certain
+               functions to behave incorrectly. This was mostly implemented
+               for the sake of testing.
+        """
 
         if isinstance(parent, int) and isinstance(child, int):
             spatial_structures_native_functions.C_AddEdgeFromNodeIDs(
-                self.graph_ptr, parent, child, score, cost_type
+                self.graph_ptr, parent, child, cost, cost_type
             )
         else:
             spatial_structures_native_functions.C_AddEdgeFromNodes(
-                self.graph_ptr, parent, child, score, cost_type
+                self.graph_ptr, parent, child, cost, cost_type
             )
 
     def getNodes(self) -> NodeList:
@@ -206,18 +250,26 @@ class Graph:
 
         return nodes, edges
 
-    def AggregateEdgeCosts(self, ct: CostAggregationType, directed: bool, cost_type: str='') -> EdgeSumArray:
+    def AggregateEdgeCosts(
+            self,
+            ct: CostAggregationType,
+            directed: bool,
+            cost_type: str = "") -> EdgeSumArray:
         """ Get an aggregated score for every node in the graph based on
          its edges"""
 
-        # convert string to bytes
-        cost_type = cost_type.encode('utf-8')
-
         vector_ptr, data_ptr = spatial_structures_native_functions.C_AggregateEdgeCosts(
-            self.graph_ptr, ct, directed, cost_type
-        )
+            self.graph_ptr, ct, directed, cost_type)
         return EdgeSumArray(vector_ptr, data_ptr, len(self.getNodes()))
 
     def __del__(self):
         if self.graph_ptr:
             spatial_structures_native_functions.DestroyGraph(self.graph_ptr)
+
+    def GetEdgeCost(self, parent: int, child: int, cost_type: str = ""):
+        return spatial_structures_native_functions.C_GetEdgeCost(
+            self.graph_ptr,
+            parent,
+            child,
+            cost_type
+            )

@@ -72,3 +72,30 @@ def test_CreateNodes():
         assert node[0] == np_node[0]
         assert node[1] == np_node[1]
         assert node[2] == np_node[2]
+
+def test_GetCSRCost():
+    pass
+
+def test_GetCost():
+   
+    # Create a graph, add an edge, then compress it
+    g = Graph()
+    g.AddEdgeToGraph(0,1,100)
+    g.CompressToCSR()
+
+    # Get the cost from the edge
+    cost_from_graph = g.GetEdgeCost(0,1)
+
+    # Assert this edge cost equals what we specified above
+    assert(cost_from_graph == 100)
+    pass
+
+def test_AddEdgeWithCostType():
+    # Create Graph
+    g = Graph()
+
+    # Add initial edges to default cost type
+    g.AddEdgeToGraph(0, 1, 100)
+    g.AddEdgeToGraph(1,2,200)
+
+    # 

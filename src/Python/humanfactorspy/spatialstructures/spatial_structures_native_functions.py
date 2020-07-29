@@ -5,6 +5,7 @@ from typing import *
 from humanfactorspy.common_native_functions import (
     getDLLHandle,
     ConvertPointsToArray,
+    GetStringPtr
 )
 
 HFPython = getDLLHandle()
@@ -97,20 +98,50 @@ def C_AddEdgeFromNodes(
     HFPython.AddEdgeFromNodes(graph_ptr, parent_ptr, child_ptr, c_float(score), cost_type)
 
 
-def C_AddEdgeFromNodeIDs(graph_ptr: c_void_p, parent_id: int, child_id: int, score: float, cost_type: c_char_p) -> None:
+def C_AddEdgeFromNodeIDs(
+    graph_ptr: c_void_p,
+    parent_id: int,
+    child_id: int,
+    score: float,
+    cost_type: str
+) -> None:
     """
     Adds edge to graph from a node ID
 
-    Returns: 
+    Returns:
         None
 
     """
 
-    HFPython.AddEdgeFromNodeIDs(graph_ptr, c_int(parent_id), c_int(child_id),
-                                c_float(score), cost_type )
+    # Get a pointer to cost_type
+    string_ptr = GetStringPtr(cost_type)
+
+    # Try to add the edge to the graph
+    error_code = HFPython.AddEdgeFromNodeIDs(
+        graph_ptr,
+        c_int(parent_id),
+        c_int(child_id),
+        c_float(score),
+        string_ptr
+        )
+
+    # Check error code.
+    if error_code == HF_STATUS.OK:
+        # On success return
+        return
+    elif error_code == HF_STATUS.NO_COST:
+        raise KeyError(
+            message=f"Tried to add an edge to cost type ({cost_type}) that" +
+            "didn't already exist in the graph"
+            )
+    elif error_code == HF_STATUS.GENERIC_ERROR:
+        assert(False)  # Something is happening in C++ that isn't being
+        # handled by python, or should never happen at all
 
 
-def C_GetCSRPtrs(graph_ptr: c_void_p, cost_type: c_char_p) -> Tuple[int, int, int, c_void_p, c_void_p, c_void_p]:
+def C_GetCSRPtrs(
+    graph_ptr: c_void_p,
+    cost_type: str) -> Tuple[int, int, int, c_void_p, c_void_p, c_void_p]:
     """ Get the information necessary to map a numpy CSR to the C++ graph
     
     Parameters:
@@ -130,15 +161,20 @@ def C_GetCSRPtrs(graph_ptr: c_void_p, cost_type: c_char_p) -> Tuple[int, int, in
         c_void_p: Pointer to the outer_indices of the graph
     """
 
+    # Define out variables. These will be updated when the native function
+    # is called
     nnz = c_int(0)
     num_cols = c_int(0)
     num_rows = c_int(0)
-
     data_ptr = c_void_p(0)
     inner_indices_ptr = c_void_p(0)
     outer_indices_ptr = c_void_p(0)
 
-    HFPython.GetCSRPointers(
+    # Convert cost type to a c_string
+    cost_type_ptr = GetStringPtr(cost_type)
+
+    # Get the CSR pointers and capture the error code
+    res = HFPython.GetCSRPointers(
         graph_ptr,
         byref(nnz),
         byref(num_rows),
@@ -146,18 +182,29 @@ def C_GetCSRPtrs(graph_ptr: c_void_p, cost_type: c_char_p) -> Tuple[int, int, in
         byref(data_ptr),
         byref(inner_indices_ptr),
         byref(outer_indices_ptr),
-        cost_type,
+        cost_type_ptr,
         )
 
-    return (
-        nnz.value,
-        num_rows.value,
-        num_cols.value,
-        data_ptr,
-        inner_indices_ptr,
-        outer_indices_ptr,
-        )
-
+    # Check the error code to see if we need to throw
+    if res == HF_STATUS.OK:
+        # OK means that things executed successfully so return
+        return (
+            nnz.value,
+            num_rows.value,
+            num_cols.value,
+            data_ptr,
+            inner_indices_ptr,
+            outer_indices_ptr,
+            )
+    elif res == HF_STATUS.NO_COST:
+        # No cost indicates that the cost didn't exist
+        raise KeyError(
+            f"Tried to get costs of nonexistant edge cost type {cost_type}")
+    else:
+        # Anything else indicates an unexpected exception in C++
+        # Check the C_Interface to see if there's some case that's not being
+        # handled here or there.
+        assert(False)
 
 def C_GetNodeID(graph_ptr: c_void_p, node: Tuple[float, float, float]) -> int:
     """ Get the id of node for the graph at graph_ptr """
@@ -166,6 +213,55 @@ def C_GetNodeID(graph_ptr: c_void_p, node: Tuple[float, float, float]) -> int:
     HFPython.GetNodeID(graph_ptr, node_ptr, byref(return_int))
 
     return return_int
+
+
+def C_GetEdgeCost(
+        graph_ptr: c_void_p,
+        parent: int,
+        child: int,
+        cost_type: str):
+    """ Get the cost of an edge in the graph
+
+    Args:
+        graph_ptr: pointer to the graph to get the cost from
+        parent: parent of the edge
+        child: child of the edge
+        cost_type: cost type to get the edge cost from. If left as the empty
+                   string, use the graph's default cost type.
+
+    Returns:
+        The cost from parent to child if the cost exists, otherwise returns
+        -1 if the cost doesn't exist.
+    """
+
+    # Define a float to serve as our output variable
+    out_cost = c_float(0)
+
+    # Get a pointer to cost_type
+    cost_type_ptr = GetStringPtr(cost_type)
+
+    # Execute the function and caputre the error code. If the error code
+    # is HF_STATUS.OK then out_cost will be updated with the cost of
+    # parent to child
+    error_code = HFPython.GetEdgeCost(
+        graph_ptr,
+        c_int(parent),
+        c_int(child),
+        cost_type_ptr,
+        byref(out_cost)
+    )
+
+    # Check error code
+    if error_code == HF_STATUS.OK:
+        # Return if the function executed correctly
+        return out_cost.value
+    elif error_code == HF_STATUS.NO_COST:
+        # Throw if the cost doeesn't exist
+        raise KeyError(
+            f"Tried to get the cost of non-existant cost type: {cost_type}")
+    else:
+        # Indicates programmer error either here or in the cinterface
+        assert(False)  
 
 
 def C_Compress(graph_ptr: c_void_p) -> None:
