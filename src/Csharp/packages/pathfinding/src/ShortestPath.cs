@@ -201,13 +201,38 @@ namespace HumanFactors.Pathfinding
         }
 
 
+        /*! 
+            \brief Generate a path from every node in the graph to every other node in a graph.
+        
+            \param g The graph to generate paths in. 
+            \param cost_type Type of cost to use for path generation. If left blank will use the
+                              default cost of the graph
+             
+            \returns 
+            An array of paths with a length equal to the number of nodes in `g` squared. Paths will
+            be returned in order starting with all paths from node 0, then all paths from node 1, etc.
+            If a path could not be generated between a set of nodes, then path at that index will be null.
+
+            \pre If `cost_type` is not left as the default, then it must be the name of a valid cost already
+            defined in `graph`.
+
+            \throws KeyNotFoundException `cost_type` wasn't left as blank, and didn't
+                     refer to the name of any cost that already exists in `graph`.
+        */
         public static Path[] DijkstraAllToAll(Graph g, string cost_type = "")
         {
+            // Generate paths in native code
             var cvads = NativeMethods.C_AllToAllPaths(g.Pointer, g.NumNodes(), cost_type);
             
+            // Create an array of paths and only copy over the paths that have a length
+            // greater than one.
             Path[] paths = new Path[cvads.Length];
             for (int i = 0; i < cvads.Length; i++)
             {
+                
+                // If the validity check fails, then no path 
+                // could be found between these nodes and we must
+                // set the path in to null in our output
                 if (cvads[i].IsValid())
                     paths[i] = new Path(cvads[i]);
                 else

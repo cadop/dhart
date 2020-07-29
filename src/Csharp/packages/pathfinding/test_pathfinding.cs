@@ -255,7 +255,6 @@ namespace HumanFactors.Tests.Pathfinding
                 Assert.AreEqual(arr[1].cost_to_next, 10);
                 Assert.AreEqual(arr[1].id, ids[2]);
 
-
                 // Assert that this path equals the integer version
                 Assert.IsTrue(short_paths[i].Equals(short_int_paths[i]));
             }
@@ -265,44 +264,36 @@ namespace HumanFactors.Tests.Pathfinding
         [TestMethod]
         public void AllToAll()
         {
-
+            // Create and compress graph
             Graph g = new Graph();
-            Vector3D node0 = new Vector3D(0, 0, 1);
-            Vector3D node1 = new Vector3D(0, 0, 2);
-            Vector3D node2 = new Vector3D(0, 0, 3);
-            Vector3D node3 = new Vector3D(0, 0, 4);
-
+            Vector3D node0 = new Vector3D(0, 0, 1); Vector3D node1 = new Vector3D(0, 0, 2);
+            Vector3D node2 = new Vector3D(0, 0, 3); Vector3D node3 = new Vector3D(0, 0, 4);
             g.AddEdge(node0, node2, 0);
             g.AddEdge(node1, node3, 10);
             g.AddEdge(node2, node3, 20);
             g.CompressToCSR();
 
-            // Ids assigned to these nodes by the graph.
-            int[] ids = {
-                    g.GetNodeID(node0),
-                    g.GetNodeID(node1),
-                    g.GetNodeID(node2),
-                    g.GetNodeID(node3)
-                };
-
+            // Calculate all to all paths on g.
             var paths = HumanFactors.Pathfinding.ShortestPath.DijkstraAllToAll(g);
 
-            // Assert that the paths are the same length
+            // The number of paths created should be equal to the amount of nodes in the
+            // graph squared (for now).
             Assert.AreEqual(g.NumNodes() * g.NumNodes(), paths.Count());
 
-
+            // Check specific path members to see if they match our expected output
             Assert.AreEqual(0, paths[1][0].id);
             Assert.AreEqual(1, paths[1][1].id);
-            
             Assert.AreEqual(0, paths[3][0].id);
             Assert.AreEqual(1, paths[3][1].id);
             Assert.AreEqual(3, paths[3][2].id);
             
-
+            // Print the contents of every path
             for (int i = 0; i < paths.Count(); i++)
             {
                 HumanFactors.Pathfinding.Path path = paths[i];
-                string path_string = "";
+                
+                // Print the empty string if null.
+                string path_string = "-------";
                 if (path != null)
                     path_string = paths[i].ToString();
             
