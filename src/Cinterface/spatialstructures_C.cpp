@@ -157,12 +157,13 @@ C_INTERFACE AddEdgeFromNodes(
 	try {
 		graph->addEdge(parent_node, child_node, score, cost_name);
 	}
-	catch (std::logic_error){
-		return NOT_COMPRESSED;
-	}
 	catch (std::out_of_range) {
 		return OUT_OF_RANGE;
 	}
+	catch (std::logic_error){
+		return NOT_COMPRESSED;
+	}
+
 	return OK;
 }
 
@@ -173,11 +174,11 @@ C_INTERFACE AddEdgeFromNodeIDs(Graph * graph, int parent_id, int child_id, float
 	try {
 		graph->addEdge(parent_id, child_id, score, std::string(cost_type));
 	}
-	catch (std::logic_error) {
-		return NOT_COMPRESSED;
-	}
 	catch (std::out_of_range) {
 		return OUT_OF_RANGE;
+	}
+	catch (std::logic_error) {
+		return NOT_COMPRESSED;
 	}
 
 	return OK;
