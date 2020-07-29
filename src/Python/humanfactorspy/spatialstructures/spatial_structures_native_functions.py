@@ -88,14 +88,40 @@ def C_AddEdgeFromNodes(
     parent: Tuple[float, float, float],
     child: Tuple[float, float, float],
     score: float,
-    cost_type: c_char_p,
-    ) -> None:
+    cost_type: str,
+) -> None:
     """ Add a new edge to the graph """
 
+    # Convert to types usable in C
     parent_ptr = ConvertPointsToArray(parent)
     child_ptr = ConvertPointsToArray(child)
+    str_ptr = GetStringPtr(cost_type)
 
-    HFPython.AddEdgeFromNodes(graph_ptr, parent_ptr, child_ptr, c_float(score), cost_type)
+    # Call to native code and capture the error code
+    error_code = HFPython.AddEdgeFromNodes(
+        graph_ptr,
+        parent_ptr,
+        child_ptr,
+        c_float(score),
+        cost_type
+    )
+
+    # Throw if the error code demands it
+    if error_code == HF_STATUS.OK:
+        return
+    elif error_code == HF_STATUS.NOT_COMPRESSED:
+        raise LogicError(
+            message="The graph wasn't compressed before adding an alternate edge ")
+    elif error_code == HF_STATUS.OUT_OF_RANGE:
+        raise InvalidCostOperation(
+            f"Tried to add an edge from {parent} to child to alternate cost"
+            + f"type {cost_type} without first creating an edge between them"
+            + "in the graph's default cost set.")
+    else:
+        assert(
+            False,
+            "There's some error that's not being handled either in C++ or"
+            + "in python.")
 
 
 def C_AddEdgeFromNodeIDs(
@@ -112,7 +138,6 @@ def C_AddEdgeFromNodeIDs(
         None
 
     """
-
     # Get a pointer to cost_type
     string_ptr = GetStringPtr(cost_type)
 
@@ -123,17 +148,24 @@ def C_AddEdgeFromNodeIDs(
         c_int(child_id),
         c_float(score),
         string_ptr
-        )
+    )
 
     # Check error code.
     if error_code == HF_STATUS.OK:
         # On success return
         return
-    elif error_code == HF_STATUS.NO_COST:
-        raise KeyError(
-            message=f"Tried to add an edge to cost type ({cost_type}) that" +
-            "didn't already exist in the graph"
-            )
+    elif error_code == HF_STATUS.NOT_COMPRESSED:
+        # Can't add alternate costs to an uncompressed graph
+        raise LogicError(
+            "Tried to add an alternate cost type to the graph before" +
+            "compressing it")
+    elif error_code == HF_STATUS.OUT_OF_RANGE:
+        # Tried to add an edge to an alternate cost type
+        # that didn't exist
+        raise InvalidCostOperation(
+            f"Tried to add an edge from {parent_id} to {child_id} to alternate"
+            + " cost type {cost_type} without first creating an edge between"
+            + "them in the graph's default cost set.")
     elif error_code == HF_STATUS.GENERIC_ERROR:
         assert(False)  # Something is happening in C++ that isn't being
         # handled by python, or should never happen at all

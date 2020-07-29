@@ -66,7 +66,7 @@ class Graph:
         else:
             self.graph_ptr = graph_ptr
 
-    def CompressToCSR(self, cost_type: str='') -> csr_matrix:
+    def CompressToCSR(self, cost_type : str = "") -> csr_matrix:
         """ Compress the graph if needed then return a reference as a CSR matrix
 
         Parameters:

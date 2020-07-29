@@ -5,7 +5,9 @@ import os
 from humanfactorspy.geometry import LoadOBJ, CommonRotations
 from humanfactorspy.raytracer import embree_raytracer, EmbreeBVH
 from humanfactorspy.spatialstructures import NodeList, NodeStruct, Graph
+from humanfactorspy.Exceptions import LogicError, InvalidCostOperation
 import humanfactorspy.spatialstructures.node as NodeFunctions
+
 
 # from humanfactorspy.graphgenerator.graph_generator import GenerateGraph
 # Setup
@@ -76,26 +78,42 @@ def test_CreateNodes():
 def test_GetCSRCost():
     pass
 
+
 def test_GetCost():
-   
     # Create a graph, add an edge, then compress it
     g = Graph()
-    g.AddEdgeToGraph(0,1,100)
+    g.AddEdgeToGraph(0, 1, 100)
     g.CompressToCSR()
 
     # Get the cost from the edge
-    cost_from_graph = g.GetEdgeCost(0,1)
+    cost_from_graph = g.GetEdgeCost(0, 1)
 
     # Assert this edge cost equals what we specified above
     assert(cost_from_graph == 100)
-    pass
+
 
 def test_AddEdgeWithCostType():
     # Create Graph
     g = Graph()
 
-    # Add initial edges to default cost type
+    # Add initial edges to default cost type and compress
     g.AddEdgeToGraph(0, 1, 100)
-    g.AddEdgeToGraph(1,2,200)
+    g.AddEdgeToGraph(1, 2, 200)
+    g.CompressToCSR()
 
-    # 
+    # Add edges to the graph for this new cost type
+    test_cost = "Test"
+    g.AddEdgeToGraph(0, 1, 250, test_cost)
+    g.AddEdgeToGraph(1, 2, 251, test_cost)
+
+    g.CompressToCSR()
+    # Assert that the edges added succssfully
+    assert(g.GetEdgeCost(0, 1, test_cost) == 250)
+    assert(g.GetEdgeCost(1, 2, test_cost) == 251)
+
+    # Ensure we throw if our precondition was violated
+    with pytest.raises(InvalidCostOperation):
+        g.AddEdgeToGraph(1, 0, 10, test_cost)
+
+
+
