@@ -537,7 +537,7 @@ TEST(_pathFinding, InsertPathsIntoArray) {
 */
 
 namespace CInterfaceTests {
-	TEST(_PathfinderCInterface, CreatePath) {
+	TEST(C_Pathfinder, CreatePath) {
 		// Requires #include "pathfinder_C.h", #include "graph.h", #include "path.h", #include "path_finder.h"
 
 		// Create a Graph g, and compress it.
@@ -568,7 +568,7 @@ namespace CInterfaceTests {
 		out_path_member = nullptr;
 	}
 
-	TEST(_PathfinderCInterface, CreatePaths) {
+	TEST(C_Pathfinder, CreatePaths) {
 		// Requires #include "pathfinder_C.h", #include "graph.h", #include "path.h", #include "path_finder.h"
 
 		HF::SpatialStructures::Graph g;
@@ -631,7 +631,7 @@ namespace CInterfaceTests {
 		}
 	}
 
-	TEST(_PathfinderCInterface, CreatePathCostType) {
+	TEST(C_Pathfinder, CreatePathCostType) {
 		// be sure to #include "boost_graph.h", #include "node.h", #include "graph.h", and #include <vector>
 
 		// for brevity
@@ -685,7 +685,7 @@ namespace CInterfaceTests {
 		out_path_member = nullptr;
 	}
 
-	TEST(_PathfinderCInterface, CreatePathsCostType) {
+	TEST(C_Pathfinder, CreatePathsCostType) {
 		// Requires #include "pathfinder_C.h", #include "graph.h", #include "path.h", #include "path_finder.h"
 
 		// for brevity
@@ -773,7 +773,7 @@ namespace CInterfaceTests {
 		}
 	}
 
-	TEST(_PathfinderCInterface, GetPathInfo) {
+	TEST(C_Pathfinder, GetPathInfo) {
 		// Requires #include "pathfinder_C.h", #include "path.h"
 
 		// Requires #include "pathfinder_C.h", #include "graph.h", #include "path.h", #include "path_finder.h"
@@ -806,7 +806,7 @@ namespace CInterfaceTests {
 		out_path_member = nullptr;
 	}
 
-	TEST(_PathfinderCInterface, DestroyPath) {
+	TEST(C_Pathfinder, DestroyPath) {
 		// Requires #include "pathfinder_C.h", #include "graph.h", #include "path.h", #include "path_finder.h"
 
 		// Create a Graph g, and compress it.
@@ -836,7 +836,7 @@ namespace CInterfaceTests {
 		out_path_member = nullptr;
 	}
 
-	TEST(_PathfinderCInterface, CreateAllToAllPaths) {
+	TEST(C_Pathfinder, CreateAllToAllPaths) {
 		HF::SpatialStructures::Graph g;
 
 		// Add the edges
