@@ -99,6 +99,13 @@ def test_AddEdgeWithCostType():
     # Add initial edges to default cost type and compress
     g.AddEdgeToGraph(0, 1, 100)
     g.AddEdgeToGraph(1, 2, 200)
+
+    # Ensure that we catch callers trying to add alternate costs
+    # to sets of edges before compressing the graph
+    with pytest.raises(LogicError):
+        g.AddEdgeToGraph(0, 1, 250, "cost")
+
+    # Compress the graph
     g.CompressToCSR()
 
     # Add edges to the graph for this new cost type
@@ -106,7 +113,6 @@ def test_AddEdgeWithCostType():
     g.AddEdgeToGraph(0, 1, 250, test_cost)
     g.AddEdgeToGraph(1, 2, 251, test_cost)
 
-    g.CompressToCSR()
     # Assert that the edges added succssfully
     assert(g.GetEdgeCost(0, 1, test_cost) == 250)
     assert(g.GetEdgeCost(1, 2, test_cost) == 251)
@@ -114,6 +120,7 @@ def test_AddEdgeWithCostType():
     # Ensure we throw if our precondition was violated
     with pytest.raises(InvalidCostOperation):
         g.AddEdgeToGraph(1, 0, 10, test_cost)
+
 
 
 

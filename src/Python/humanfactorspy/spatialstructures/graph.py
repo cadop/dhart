@@ -157,7 +157,14 @@ class Graph:
             1) If parent or child doesn't exist in the graph as nodes, they will 
                be added
             2) If cost_type doesn't already exist in the graph it will be 
-               created
+               createda
+        
+        Raises:
+            humanfactorspy.Exceptions.LogicError:
+                Tried to add an alternate cost type to an uncompressed graph
+            humanfactorspy.Exceptions.InvalidCostOperation:
+                Tried to add an alternate cost tot he graph with an edge
+                that didn't first exist in the graph's default cost set
 
       .. note::
           The graph offers some basic functionality to add edges and nodes but 
