@@ -380,31 +380,6 @@ TEST(_pathFinding, FindPaths) {
 		std::cout << p.node << std::endl;
 	}
 }
-
-TEST(_pathFinding, FindAllPaths) {
-	// NOTE: HF::Pathfinding::FindAllPaths is not implemented yet.
-
-	// be sure to #include "path_finder.h", #include "boost_graph.h", and #include "graph.h"
-
-	// Create a Graph g, and compress it.
-	HF::SpatialStructures::Graph g;
-	g.addEdge(0, 1, 1);
-	g.addEdge(0, 2, 2);
-	g.addEdge(1, 3, 3);
-	g.addEdge(2, 4, 1);
-	g.addEdge(3, 4, 5);
-	g.Compress();
-
-	// Create a boostGraph from g
-	auto boostGraph = HF::Pathfinding::CreateBoostGraph(g);
-
-	// Cannot test this just yet -- FindAllPaths is yet to be implemented
-	// Get the path from node (id 0) to node (id 4)
-	// auto all_paths = HF::Pathfinding::FindAllPaths(boostGraph.get(), 0, 4);
-
-	// all_paths will contain all shortest paths for [node 0, node 4]
-}
-
 TEST(_pathFinding, InsertAllToAllPathsIntoArray) {
 	HF::SpatialStructures::Graph g;
 
@@ -464,7 +439,7 @@ TEST(_pathFinding, InsertAllToAllPathsIntoArray) {
 		}
 	}
 
-	InsertAllToAllPathsIntoArray(bg.get(), out_paths, out_path_member, sizes);
+	InsertAllToAllPathsIntoArray(bg.get(),  out_paths, out_path_member, sizes);
 
 	for (int i = 0; i < path_count; i++) {
 		if (out_paths[i]) {
@@ -503,6 +478,7 @@ TEST(_pathFinding, InsertAllToAllPathsIntoArray) {
 				out_paths[i] = nullptr;
 			}
 		}
+		delete[] out_paths;
 	}
 }
 
@@ -919,7 +895,7 @@ namespace CInterfaceTests {
 			}
 		}
 
-		CreateAllToAllPaths(&g, out_paths, out_path_member, sizes, path_count);
+		CreateAllToAllPaths(&g, "",  out_paths, out_path_member, sizes, path_count);
 
 		for (int i = 0; i < path_count; i++) {
 			if (out_paths[i]) {
@@ -958,6 +934,7 @@ namespace CInterfaceTests {
 					out_paths[i] = nullptr;
 				}
 			}
+			delete[] out_paths;
 		}
 	}
 }
