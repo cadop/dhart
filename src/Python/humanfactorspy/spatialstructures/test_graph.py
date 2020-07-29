@@ -76,10 +76,33 @@ def test_CreateNodes():
         assert node[2] == np_node[2]
 
 def test_GetCSRCost():
-    pass
+    """ Tests getting a CSR with an alternate cost type """
+    
+    # Create a graph, add an edge, then compress it
+    g = Graph()
+    g.AddEdgeToGraph(0, 1, 100)
+    g.CompressToCSR()
 
+    # Ensure that trying to get a csr from cost type
+    # before it is defined will throw
+    with pytest.raises(KeyError):
+        g.CompressToCSR("Test")
+
+    # Add an alternate cost to the graph
+    test_cost = "Test"
+    g.AddEdgeToGraph(0, 1, 150, test_cost)
+
+    # Get the CSR for the default cost and the test cost
+    default_csr = g.CompressToCSR()
+    cost_csr = g.CompressToCSR(test_cost)
+
+    # Ensure both have proper values for their assigned cost
+    print(cost_csr[0])
+    assert(cost_csr[0].getcol(1) == 150)
+    assert(default_csr[0].getcol(1) == 100)
 
 def test_GetCost():
+    """ Tests that getting a cost from the graph is accurate """
     # Create a graph, add an edge, then compress it
     g = Graph()
     g.AddEdgeToGraph(0, 1, 100)
@@ -92,7 +115,10 @@ def test_GetCost():
     assert(cost_from_graph == 100)
 
 
-def test_AddEdgeWithCostType():
+def test_AddingAndReadingCostTypes():
+    """ Tests that alternate cost types can be added and read. Also ensures
+    that error cases are handled and thrown."""
+
     # Create Graph
     g = Graph()
 

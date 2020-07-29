@@ -69,12 +69,26 @@ class Graph:
     def CompressToCSR(self, cost_type : str = "") -> csr_matrix:
         """ Compress the graph if needed then return a reference as a CSR matrix
 
+        If the graph is already compressed, this does no work in native code,
+        and just returns the CSR.
+
         Parameters:
             cost_type : str, optional
-                The cost type to use for constructing the CSR. Defaults to empty string.
+                The cost type to use for constructing the CSR. Defaults to empty string. If left as default, the graph's default cost type will 
+                be used
 
-            Returns:
-                A scipy csr matrix
+        Returns:
+            A scipy csr matrix mapped to the underlying CSR of this graph
+            in native code.
+
+        Pre Condition:
+            If cost_type isn't the default, it must be the key of an already
+            existing cost type in the graph
+        
+        Raises:
+            KeyError: 
+            cost_type wasn't the default cost and didn't match the name of any
+            existing cost in the graph.
         """
 
         # Get the CSR matrix from native code
