@@ -273,6 +273,16 @@ namespace HumanFactors.Tests.Pathfinding
             g.AddEdge(node2, node3, 20);
             g.CompressToCSR();
 
+            // Ensure we throw the proper exception when specified cost type doesn't exist
+            // in the graph.
+            bool threw_except = false;
+            try
+            {
+                HumanFactors.Pathfinding.ShortestPath.DijkstraAllToAll(g, "nonexistantcost");
+            }
+            catch (KeyNotFoundException) { threw_except = true; }
+            Assert.IsTrue(threw_except, "Doesn't throw the proper exception when specified cost doesn't exist");
+
             // Calculate all to all paths on g.
             var paths = HumanFactors.Pathfinding.ShortestPath.DijkstraAllToAll(g);
 
