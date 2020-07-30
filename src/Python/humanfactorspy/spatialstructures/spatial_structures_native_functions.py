@@ -342,6 +342,19 @@ def C_ClearGraph(graph_ptr: c_void_p, cost_type: str='') -> None:
         print("Unexpected error code: " + error_code)
         assert(False) # There's some unhandled problem with C++ 
 
+def C_NumNodes(graph_ptr : c_void_p) -> int:
+    """ Get the number of nodes in the graph """
+
+    out_size = c_int(0)
+
+    # Calling this will update out_size with the number of nodes
+    # in the graph
+    error_code = HFPython.GetSizeOfGraph(graph_ptr, byref(out_size))
+
+    # In docs, this only returns OK.
+    assert(error_code == HF_STATUS.OK)
+
+    return out_size.value
 
 ### Destructors
 

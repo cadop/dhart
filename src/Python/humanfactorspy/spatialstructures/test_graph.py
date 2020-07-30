@@ -205,10 +205,27 @@ def test_ClearCost():
     # Ensure that the graph still exists
     assert(g.GetEdgeCost(0,1) == 100)
 
-    print("MMMMEN")
-    print(g.CompressToCSR())
-
     # If we try to get the cost of one of it's edges
     # we should get a no_cost exception
     with pytest.raises(KeyError):
         g.GetEdgeCost(0, 1, test_cost)
+
+def test_NumNodesEqualsLengthOfNodes():
+    """ Asserts that the number returned by numnodes actually matches
+        the length of the graph's nodes array """
+    
+    # Create graph and dd some edges
+    g = Graph()
+    g.AddEdgeToGraph(0, 1, 100)
+    g.AddEdgeToGraph(0, 2, 50)
+    g.AddEdgeToGraph(1, 2, 20)
+    g.CompressToCSR()
+
+
+    # Get the nodes and num nodes
+    nodes = g.getNodes().array
+    num_nodes = g.NumNodes()
+
+    # Assert that they are equal
+    assert(len(nodes) == num_nodes)
+

@@ -151,15 +151,10 @@ class Graph:
         """ Add a new edge to the graph from parent to child with the given cost
 
         Args:
-            parent: Either a node with values for x,y, and z, or an integer
-            representing a node ID
-            child: Where the edge from parent is going to. Must be the same type
-            of parent i.e. if parent is an int, then the child must also be an 
-            int
-            cost: the cost from parent to child
-            cost_type: The type of cost to add this edge to. If left blank or 
-            as the empty string then the edge will be added to the 
-            graph's default cost set.
+            parent : Either a node with values for x,y, and z, or an integer representing a node ID
+            child : Where the edge from parent is going to. Must be the same type of parent i.e. if parent is an int, then the child must also be an int
+            cost : the cost from parent to child
+            cost_type : The type of cost to add this edge to. If left blank or as the empty string then the edge will be added to the graph's default cost set.
         
         Pre Conditions:
             1) If cost_type is not left blank, then the edge from parent to 
@@ -180,14 +175,14 @@ class Graph:
                 Tried to add an alternate cost tot he graph with an edge
                 that didn't first exist in the graph's default cost set
 
-      .. note::
+        Note:
           The graph offers some basic functionality to add edges and nodes but 
           it's main use is to provide access to the output of the GraphGenerator
           and VisibilityGraph. If adding edges or alternate cost types please
           make sure to read the documentation for these functions and that 
           all preconditions are followed.
 
-      .. warning::
+        Warning:
             1) Once any edges have been added to the graph as an alternate cost 
                type, new edges are no longer able to be created.
             2) While this function can be called with integers for both paren
@@ -255,7 +250,7 @@ class Graph:
 
     def Clear(self, cost_type : str = ""):
         """ Clear all edges/nodes from the graph or a specific cost type
-        
+            
         Args:
             cost_type : str, optional
                 If left as the empty string, clear all nodes/edges from the
@@ -319,10 +314,25 @@ class Graph:
         if self.graph_ptr:
             spatial_structures_native_functions.DestroyGraph(self.graph_ptr)
 
-    def GetEdgeCost(self, parent: int, child: int, cost_type: str = ""):
+    def GetEdgeCost(self, parent: int, child: int, cost_type: str = "") -> float:
+        """ Get the cost from parent to child for a specific cost type
+
+        Args:
+            parent (int): Node the edge is from
+            child (int):  Node the edge is to 
+            cost_type (str, optional): Cost type to get the cost from. If left blank will use the graph's default cost type. 
+
+        Returns:
+            float : The cost of traversing from parent to child. Will be -1 if no edge exists
+        """
+
         return spatial_structures_native_functions.C_GetEdgeCost(
             self.graph_ptr,
             parent,
             child,
             cost_type
             )
+
+    def NumNodes(self) -> int:
+        """Get the number of nodes in the graph."""
+        return spatial_structures_native_functions.C_NumNodes(self.graph_ptr)
