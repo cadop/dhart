@@ -150,23 +150,11 @@ Static Public Member Functions</h2></td></tr>
 <dl class="section attention"><dt>Attention</dt><dd>When directed is true. Edges between nodes will only be stored in the edges of the node with the lower ID. To store the edge in the edge array of both nodes use false but be warned, it will take longer to execute and take up more memory. Read the following section for more info.</dd></dl>
 <dl class="section user"><dt>Directed vs Undirected </dt><dd>For the sake of this function, an undirected visibility graph describes a graph where edge is only stored in the graph for the node with the lowest ID. For example, The first node will check for edges from itself to every node in the set, node 2 will check for edges from itself to every other node except for the first node, node 3 will check every node except for the first and second. In contrast, a directed graph will check every node against every other node in the graph regardless of ID. In most cases you will want to use the undirected algorithm, as it only performs n(n+1)/2 operations vs the directed's n^2 operations.</dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>Graphs output by this function CANNOT be modified.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a2d25a3d3158187875f0726844a4bf360" title="Summarize the edgecosts of every node in the graph.">SpatialStructures.Graph.AggregateEdgeCosts</a> for a way to easily summarize the results of a visibility graph. </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a45a2d5b16092f8389210dc47f722a539" title="Summarize the edgecosts of every node in the graph.">SpatialStructures.Graph.AggregateEdgeCosts</a> for a way to easily summarize the results of a visibility graph. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="_visibility_graph_8cs_source.html#l00066">66</a> of file <a class="el" href="_visibility_graph_8cs_source.html">VisibilityGraph.cs</a>.</p>
 
 <p class="reference">References <a class="el" href="_visibility_graph_native_8cs_source.html#l00018">HumanFactors.VisibilityGraph.NativeMethods.C_AllToAllVisibilityGraph()</a>, and <a class="el" href="_pointer_holder_8cs_source.html#l00049">HumanFactors.NativeUtils.NativeObject.Pointer</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_human_factors_1_1_visibility_graph_1_1_visibility_graph_a6b9e6d59435543aebc5a42beea7e916d_cgraph.png" border="0" usemap="#class_human_factors_1_1_visibility_graph_1_1_visibility_graph_a6b9e6d59435543aebc5a42beea7e916d_cgraph" alt=""/></div>
-<map name="class_human_factors_1_1_visibility_graph_1_1_visibility_graph_a6b9e6d59435543aebc5a42beea7e916d_cgraph" id="class_human_factors_1_1_visibility_graph_1_1_visibility_graph_a6b9e6d59435543aebc5a42beea7e916d_cgraph">
-<area shape="rect" title="Create a visibility graph from every node to every node in nodes." alt="" coords="5,93,212,134"/>
-<area shape="rect" href="class_human_factors_1_1_visibility_graph_1_1_native_methods.html#a1d143831fb37b4a2195d70a94cb3d977" title=" " alt="" coords="260,93,515,134"/>
-<area shape="rect" href="class_human_factors_1_1_visibility_graph_1_1_native_methods.html#aef47a7e91c6886fd55b4c7075c763826" title=" " alt="" coords="563,5,796,61"/>
-<area shape="rect" href="class_human_factors_1_1_visibility_graph_1_1_native_methods.html#ade1cf7191ccdb49e0fe4f54340bf6c30" title=" " alt="" coords="563,85,796,141"/>
-<area shape="rect" href="class_human_factors_1_1_native_utils_1_1_helper_functions.html#a1b8660057551684c95da0edd711293e6" title="Convert a vector array into an array of floats." alt="" coords="565,166,794,207"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -234,17 +222,6 @@ Here is the call graph for this function:</div>
 <p class="definition">Definition at line <a class="el" href="_visibility_graph_8cs_source.html#l00096">96</a> of file <a class="el" href="_visibility_graph_8cs_source.html">VisibilityGraph.cs</a>.</p>
 
 <p class="reference">References <a class="el" href="_visibility_graph_native_8cs_source.html#l00033">HumanFactors.VisibilityGraph.NativeMethods.C_GroupToGroupVisibilityGraph()</a>, and <a class="el" href="_pointer_holder_8cs_source.html#l00049">HumanFactors.NativeUtils.NativeObject.Pointer</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_human_factors_1_1_visibility_graph_1_1_visibility_graph_aebd2e16352a8e5a9920dffe809ed911d_cgraph.png" border="0" usemap="#class_human_factors_1_1_visibility_graph_1_1_visibility_graph_aebd2e16352a8e5a9920dffe809ed911d_cgraph" alt=""/></div>
-<map name="class_human_factors_1_1_visibility_graph_1_1_visibility_graph_aebd2e16352a8e5a9920dffe809ed911d_cgraph" id="class_human_factors_1_1_visibility_graph_1_1_visibility_graph_aebd2e16352a8e5a9920dffe809ed911d_cgraph">
-<area shape="rect" title="Generate a directed visibility graph from nodes in group_a to the nodes in group_b." alt="" coords="5,50,252,91"/>
-<area shape="rect" href="class_human_factors_1_1_visibility_graph_1_1_native_methods.html#ad47df2f1b644b87ecd8b4c99676ff8c1" title=" " alt="" coords="300,50,595,91"/>
-<area shape="rect" href="class_human_factors_1_1_visibility_graph_1_1_native_methods.html#a2e8bfe5708d0278729f15bcf7e7c0f2e" title=" " alt="" coords="643,5,876,61"/>
-<area shape="rect" href="class_human_factors_1_1_native_utils_1_1_helper_functions.html#a1b8660057551684c95da0edd711293e6" title="Convert a vector array into an array of floats." alt="" coords="645,86,874,127"/>
-</map>
-</div>
 
 </div>
 </div>
