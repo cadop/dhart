@@ -194,17 +194,17 @@ def C_AddEdgeFromNodeIDs(
 
 
 def C_GetCSRPtrs(
-    graph_ptr: c_void_p,
-    cost_type: str) -> Tuple[int, int, int, c_void_p, c_void_p, c_void_p]:
+        graph_ptr: c_void_p,
+        cost_type: str) -> Tuple[int, int, int, c_void_p, c_void_p, c_void_p]:
     """ Get the information necessary to map a numpy CSR to the C++ graph
-    
+
     Parameters:
 
     graph_ptr : c_void_p
         a pointer to the graph object
-    
+
     cost_type : c_char_p
-        The cost type to use for constructing the CSR. 
+        The cost type to use for constructing the CSR.
 
     Returns:
         int: Number of non-zeros for the csr
@@ -237,7 +237,7 @@ def C_GetCSRPtrs(
         byref(inner_indices_ptr),
         byref(outer_indices_ptr),
         cost_type_ptr,
-        )
+    )
 
     # Check the error code to see if we need to throw
     if res == HF_STATUS.OK:
@@ -249,7 +249,7 @@ def C_GetCSRPtrs(
             data_ptr,
             inner_indices_ptr,
             outer_indices_ptr,
-            )
+        )
     elif res == HF_STATUS.NO_COST:
         # No cost indicates that the cost didn't exist
         raise KeyError(
@@ -260,6 +260,7 @@ def C_GetCSRPtrs(
         # handled here or there.
         print("Unexpected error code: " + error_code)
         assert(False)
+
 
 def C_GetNodeID(graph_ptr: c_void_p, node: Tuple[float, float, float]) -> int:
     """ Get the id of node for the graph at graph_ptr """
@@ -317,14 +318,14 @@ def C_GetEdgeCost(
     else:
         # Indicates programmer error either here or in the cinterface
         print("Unexpected error code: " + error_code)
-        assert(False)  
+        assert(False)
 
 
 def C_Compress(graph_ptr: c_void_p) -> None:
     HFPython.Compress(graph_ptr)
 
 
-def C_ClearGraph(graph_ptr: c_void_p, cost_type: str='') -> None:
+def C_ClearGraph(graph_ptr: c_void_p, cost_type: str = '') -> None:
     """
     Clear graph of a given cost type
 
@@ -332,17 +333,18 @@ def C_ClearGraph(graph_ptr: c_void_p, cost_type: str='') -> None:
     cost_type_ptr = GetStringPtr(cost_type)
 
     error_code = HFPython.ClearGraph(graph_ptr, cost_type_ptr)
-    
+
     if error_code == HF_STATUS.OK:
         return
     elif error_code == HF_STATUS.NO_COST:
         raise KeyError(f"Tried to clear non-existant cost {cost_type} from a"
-        + " graph")
+                       + " graph")
     else:
         print("Unexpected error code: " + error_code)
-        assert(False) # There's some unhandled problem with C++ 
+        assert(False)  # There's some unhandled problem with C++
 
-def C_NumNodes(graph_ptr : c_void_p) -> int:
+
+def C_NumNodes(graph_ptr: c_void_p) -> int:
     """ Get the number of nodes in the graph """
 
     out_size = c_int(0)
