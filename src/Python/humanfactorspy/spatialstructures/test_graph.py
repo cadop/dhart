@@ -37,12 +37,30 @@ def SimpleGraphWithCosts() -> Graph:
     g.CompressToCSR()
 
     # Add some edges for an alternate cost
-    test_cost = "Test"
     g.AddEdgeToGraph(0, 1, 1, test_cost)
     g.AddEdgeToGraph(0, 2, 1, test_cost)
     g.AddEdgeToGraph(1, 2, 1, test_cost)
 
     return g
+
+@pytest.fixture
+def SimpleXYZGraph() -> Graph:
+
+    """Simplegraph, but with nodes at x,y,z locations instead of integers"""
+    nodes = [
+        [0,0,1],
+        [0,0,2],
+        [0,0,3]
+    ]
+    
+    g = Graph()
+    g.AddEdgeToGraph(nodes[0], nodes[1], 100)
+    g.AddEdgeToGraph(nodes[0], nodes[2], 50)
+    g.AddEdgeToGraph(nodes[1], nodes[2], 20)
+    g.CompressToCSR()
+    return g
+
+test_cost = "Test"
 
 def test_CreateGraphAndNodes():
     nodes = [(1, 2, 3), (2, 3, 4), (19, 2, 3)]
@@ -233,11 +251,11 @@ def test_NumNodesEqualsLengthOfNodes(SimpleGraph):
     assert(len(nodes) == num_nodes)
 
 
-def test_StoresCrossSlope(SimpleGraph):
+def test_StoresCrossSlope(SimpleXYZGraph):
     """ Ensure cross slope  is being added to the graph once CrossSlope is called """
 
     # Create a test graph
-    g = CreateSimpleGraph()
+    g = SimpleXYZGraph
 
     # Calculate cross slope for it
     cost_algorithms.CalculateCrossSlope(g)
@@ -247,18 +265,21 @@ def test_StoresCrossSlope(SimpleGraph):
 
     # Print the CSR of it
     csr = g.CompressToCSR(key)
+    print("========= CROSS SLOPE ============")
     print(csr)
 
 
-def test_StoresEnergyExpenditure(SimpleGraph):
+def test_StoresEnergyExpenditure(SimpleXYZGraph):
     """ Ensure energy expenditure is being added to the graph once EnergyExpenditure  is called """
 
     # Calculate cross slope for it
-    cost_algorithms.CalculateCrossSlope(SimpleGraph)
+    cost_algorithms.CalculateEnergyExpenditure(SimpleXYZGraph)
 
     # Get the cross algorithm key for it
     key = cost_algorithms.CostAlgorithmKeys.ENERGY_EXPENDITURE
 
     # Print the CSR of it
-    csr = SimpleGraph.CompressToCSR(key)
+    csr = SimpleXYZGraph.CompressToCSR(key)
+   
+    print("========= ENERGY EXPENDITURE ============")
     print(csr)
