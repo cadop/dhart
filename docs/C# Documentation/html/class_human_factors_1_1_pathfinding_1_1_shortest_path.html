@@ -78,29 +78,92 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:ab4bd85d84d83a30601a190f583e097ac"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_human_factors_1_1_pathfinding_1_1_path.html">Path</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#ab4bd85d84d83a30601a190f583e097ac">DijkstraShortestPath</a> (<a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html">Graph</a> graph, int start_id, int end_id)</td></tr>
-<tr class="memdesc:ab4bd85d84d83a30601a190f583e097ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform Dijkstra's shortest path algorithm to find a path between two nodes.  <a href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#ab4bd85d84d83a30601a190f583e097ac">More...</a><br /></td></tr>
-<tr class="separator:ab4bd85d84d83a30601a190f583e097ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ca51d84089c860860ad7fb2fd717f61"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_human_factors_1_1_pathfinding_1_1_path.html">Path</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#a7ca51d84089c860860ad7fb2fd717f61">DijkstraShortestPath</a> (<a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html">Graph</a> graph, <a class="el" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> start_node, <a class="el" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> end_node)</td></tr>
-<tr class="memdesc:a7ca51d84089c860860ad7fb2fd717f61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform Dijkstra's shortest path algorithm to find a path between two nodes.  <a href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#a7ca51d84089c860860ad7fb2fd717f61">More...</a><br /></td></tr>
-<tr class="separator:a7ca51d84089c860860ad7fb2fd717f61"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac63e41c1bc4310f6e64993c30d4a0fe5"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_human_factors_1_1_pathfinding_1_1_path.html">Path</a>[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#ac63e41c1bc4310f6e64993c30d4a0fe5">DijkstraShortestPathMulti</a> (<a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html">Graph</a> graph, int[] start_ids, int[] end_ids)</td></tr>
-<tr class="memdesc:ac63e41c1bc4310f6e64993c30d4a0fe5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the shortest paths between each pair of start_id and end_id in order.  <a href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#ac63e41c1bc4310f6e64993c30d4a0fe5">More...</a><br /></td></tr>
-<tr class="separator:ac63e41c1bc4310f6e64993c30d4a0fe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a82d7192b92262f014d7d94ff1e898afc"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_human_factors_1_1_pathfinding_1_1_path.html">Path</a>[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#a82d7192b92262f014d7d94ff1e898afc">DijkstraShortestPathMulti</a> (<a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html">Graph</a> graph, IEnumerable&lt; <a class="el" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> &gt; start_nodes, IEnumerable&lt; <a class="el" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> &gt; end_nodes)</td></tr>
-<tr class="memdesc:a82d7192b92262f014d7d94ff1e898afc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the shortest paths between each pair of start_id and end_id in order.  <a href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#a82d7192b92262f014d7d94ff1e898afc">More...</a><br /></td></tr>
-<tr class="separator:a82d7192b92262f014d7d94ff1e898afc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc3fbf31af391a4ce9efd911c0c74fee"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_human_factors_1_1_pathfinding_1_1_path.html">Path</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#adc3fbf31af391a4ce9efd911c0c74fee">DijkstraShortestPath</a> (<a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html">Graph</a> graph, int start_id, int end_id, string cost_type=&quot;&quot;)</td></tr>
+<tr class="memdesc:adc3fbf31af391a4ce9efd911c0c74fee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform Dijkstra's shortest path algorithm to find a path between two nodes.  <a href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#adc3fbf31af391a4ce9efd911c0c74fee">More...</a><br /></td></tr>
+<tr class="separator:adc3fbf31af391a4ce9efd911c0c74fee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a394c96543ad621b2e5d98554153d74b4"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_human_factors_1_1_pathfinding_1_1_path.html">Path</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#a394c96543ad621b2e5d98554153d74b4">DijkstraShortestPath</a> (<a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html">Graph</a> graph, <a class="el" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> start_node, <a class="el" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> end_node, string cost_type=&quot;&quot;)</td></tr>
+<tr class="memdesc:a394c96543ad621b2e5d98554153d74b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform Dijkstra's shortest path algorithm to find a path between two nodes.  <a href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#a394c96543ad621b2e5d98554153d74b4">More...</a><br /></td></tr>
+<tr class="separator:a394c96543ad621b2e5d98554153d74b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7f58f298125194e33d6c69ed4797442"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_human_factors_1_1_pathfinding_1_1_path.html">Path</a>[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#ab7f58f298125194e33d6c69ed4797442">DijkstraShortestPathMulti</a> (<a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html">Graph</a> graph, int[] start_ids, int[] end_ids, string cost_type=&quot;&quot;)</td></tr>
+<tr class="memdesc:ab7f58f298125194e33d6c69ed4797442"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the shortest paths between each pair of start_id and end_id in order.  <a href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#ab7f58f298125194e33d6c69ed4797442">More...</a><br /></td></tr>
+<tr class="separator:ab7f58f298125194e33d6c69ed4797442"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fb6fc6aff938136f7f9de42e5d8e5bc"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_human_factors_1_1_pathfinding_1_1_path.html">Path</a>[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#a9fb6fc6aff938136f7f9de42e5d8e5bc">DijkstraShortestPathMulti</a> (<a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html">Graph</a> graph, IEnumerable&lt; <a class="el" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> &gt; start_nodes, IEnumerable&lt; <a class="el" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> &gt; end_nodes, string cost_type=&quot;&quot;)</td></tr>
+<tr class="memdesc:a9fb6fc6aff938136f7f9de42e5d8e5bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the shortest paths between each pair of start_id and end_id in order.  <a href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#a9fb6fc6aff938136f7f9de42e5d8e5bc">More...</a><br /></td></tr>
+<tr class="separator:a9fb6fc6aff938136f7f9de42e5d8e5bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ede2597cc17a4f1a130741b0163bbab"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_human_factors_1_1_pathfinding_1_1_path.html">Path</a>[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#a3ede2597cc17a4f1a130741b0163bbab">DijkstraAllToAll</a> (<a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html">Graph</a> g, string cost_type=&quot;&quot;)</td></tr>
+<tr class="memdesc:a3ede2597cc17a4f1a130741b0163bbab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a path from every node in the graph to every other node in a graph.  <a href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#a3ede2597cc17a4f1a130741b0163bbab">More...</a><br /></td></tr>
+<tr class="separator:a3ede2597cc17a4f1a130741b0163bbab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Functions for finding the shortest path between two nodes in a graph. </p>
+<dl class="section remark"><dt>Remarks</dt><dd>The shortest path functions will use Dijkstra's algorithm to find the shortest path between one or more nodes in a Graph. Since the graph can hold multiple costs for each contained edge, the type of cost used in this calculation can be specified for each function. This allows for paths to be generated using costs generated by the CostAlgorithms in <a class="el" href="namespace_human_factors_1_1_spatial_structures.html" title="Standard fundamental data structures for representing space used throughout HumanFactors.">SpatialStructures</a> such as cross slope, or energy expenditure.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html" title="Functions for finding the shortest path between two nodes in a graph.">ShortestPath</a> for generating a single path between two nodes. </dd>
 <dd>
-<a class="el" href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#ab4bd85d84d83a30601a190f583e097ac" title="Perform Dijkstra&#39;s shortest path algorithm to find a path between two nodes.">DijkstraShortestPath</a> for generating multiple paths at once. </dd></dl>
+<a class="el" href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#adc3fbf31af391a4ce9efd911c0c74fee" title="Perform Dijkstra&#39;s shortest path algorithm to find a path between two nodes.">DijkstraShortestPath</a> for generating multiple paths at once. </dd>
+<dd>
+<a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html" title="A graph representing connections between points in space.">SpatialStructures.Graph</a> for more information on how it stores multiple costs. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_shortest_path_8cs_source.html#l00032">32</a> of file <a class="el" href="_shortest_path_8cs_source.html">ShortestPath.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shortest_path_8cs_source.html#l00040">40</a> of file <a class="el" href="_shortest_path_8cs_source.html">ShortestPath.cs</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="ab4bd85d84d83a30601a190f583e097ac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab4bd85d84d83a30601a190f583e097ac">&#9670;&nbsp;</a></span>DijkstraShortestPath() <span class="overload">[1/2]</span></h2>
+<a id="a3ede2597cc17a4f1a130741b0163bbab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ede2597cc17a4f1a130741b0163bbab">&#9670;&nbsp;</a></span>DijkstraAllToAll()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_human_factors_1_1_pathfinding_1_1_path.html">Path</a> [] HumanFactors.Pathfinding.ShortestPath.DijkstraAllToAll </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html">Graph</a>&#160;</td>
+          <td class="paramname"><em>g</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>cost_type</em> = <code>&quot;&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Generate a path from every node in the graph to every other node in a graph. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">g</td><td>The graph to generate paths in. </td></tr>
+    <tr><td class="paramname">cost_type</td><td>Type of cost to use for path generation. If left blank will use the default cost of the graph</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An array of paths with a length equal to the number of nodes in <code>g</code> squared. Paths will be returned in order starting with all paths from node 0, then all paths from node 1, etc. If a path could not be generated between a set of nodes, then path at that index will be null.</dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>If <code>cost_type</code> is not left as the default, then it must be the name of a valid cost already defined in <code>graph</code>.</dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">KeyNotFoundException</td><td><code>cost_type</code> wasn't left as blank, and didn't refer to the name of any cost that already exists in <code>graph</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_shortest_path_8cs_source.html#l00222">222</a> of file <a class="el" href="_shortest_path_8cs_source.html">ShortestPath.cs</a>.</p>
+
+<p class="reference">References <a class="el" href="_pathfinding_native_8cs_source.html#l00115">HumanFactors.Pathfinding.NativeMethods.C_AllToAllPaths()</a>, <a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a1a40fc2bab18a5adf42fb7a49ca6ddb9">HumanFactors.SpatialStructures.Graph.NumNodes()</a>, and <a class="el" href="_pointer_holder_8cs_source.html#l00049">HumanFactors.NativeUtils.NativeObject.Pointer</a>.</p>
+
+</div>
+</div>
+<a id="adc3fbf31af391a4ce9efd911c0c74fee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc3fbf31af391a4ce9efd911c0c74fee">&#9670;&nbsp;</a></span>DijkstraShortestPath() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -124,7 +187,13 @@ Static Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>end_id</em>&#160;</td>
+          <td class="paramname"><em>end_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>cost_type</em> = <code>&quot;&quot;</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -144,49 +213,33 @@ Static Public Member Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">graph</td><td>The graph to conduct the search on. </td></tr>
     <tr><td class="paramname">start_id</td><td>The ID of the node to start at. </td></tr>
-    <tr><td class="paramname">end_id</td><td>The ID of the node to find a path to.</td></tr>
+    <tr><td class="paramname">end_id</td><td>The ID of the node to find a path to. </td></tr>
+    <tr><td class="paramname">cost_type</td><td>The type of cost to use for generating the path. If left blank, will use the cost that the graph was created with. In the case of the graph generator, the default cost is distance.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A path from <em>start_id</em>  to <em>end_id</em>  <br  />
-</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The shortest path from start_node to end_node or null if no path could be found.</dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>1) <code>start_id</code> and <code>end_id</code> must be the X,Y,Z position of nodes that already exist in <code>graph</code>. </dd>
+<dd>
+2) If <code>cost_type</code> is not left as the default, then it must be the name of a valid cost already defined in <code>graph</code>.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">IndexOutOfRangeException</td><td><em>start_id</em>  or <em>end_id</em>  are not the ids of any nodes in the graph.</td></tr>
+    <tr><td class="paramname">KeyNotFoundException</td><td><code>cost_type</code> wasn't left as blank, and didn't refer to the name of any cost that already exists in the graph.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#ac63e41c1bc4310f6e64993c30d4a0fe5" title="Find the shortest paths between each pair of start_id and end_id in order.">DijkstraShortestPathMulti</a> for efficently generating multiple paths in parallel. </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#ab7f58f298125194e33d6c69ed4797442" title="Find the shortest paths between each pair of start_id and end_id in order.">DijkstraShortestPathMulti</a> for efficently generating multiple paths in parallel. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_shortest_path_8cs_source.html#l00048">48</a> of file <a class="el" href="_shortest_path_8cs_source.html">ShortestPath.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shortest_path_8cs_source.html#l00063">63</a> of file <a class="el" href="_shortest_path_8cs_source.html">ShortestPath.cs</a>.</p>
 
-<p class="reference">References <a class="el" href="_pathfinding_native_8cs_source.html#l00026">HumanFactors.Pathfinding.NativeMethods.C_CreatePath()</a>, <a class="el" href="_pointer_holder_8cs_source.html#l00049">HumanFactors.NativeUtils.NativeObject.Pointer</a>, and <a class="el" href="_native_utils_8cs_source.html#l00038">HumanFactors.NativeUtils.CVectorAndData.size</a>.</p>
+<p class="reference">References <a class="el" href="_pathfinding_native_8cs_source.html#l00027">HumanFactors.Pathfinding.NativeMethods.C_CreatePath()</a>, <a class="el" href="_pointer_holder_8cs_source.html#l00049">HumanFactors.NativeUtils.NativeObject.Pointer</a>, and <a class="el" href="_native_utils_8cs_source.html#l00038">HumanFactors.NativeUtils.CVectorAndData.size</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_shortest_path_8cs_source.html#l00072">HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_human_factors_1_1_pathfinding_1_1_shortest_path_ab4bd85d84d83a30601a190f583e097ac_cgraph.png" border="0" usemap="#class_human_factors_1_1_pathfinding_1_1_shortest_path_ab4bd85d84d83a30601a190f583e097ac_cgraph" alt=""/></div>
-<map name="class_human_factors_1_1_pathfinding_1_1_shortest_path_ab4bd85d84d83a30601a190f583e097ac_cgraph" id="class_human_factors_1_1_pathfinding_1_1_shortest_path_ab4bd85d84d83a30601a190f583e097ac_cgraph">
-<area shape="rect" title="Perform Dijkstra&#39;s shortest path algorithm to find a path between two nodes." alt="" coords="5,5,228,47"/>
-<area shape="rect" href="class_human_factors_1_1_pathfinding_1_1_native_methods.html#ad6c05846f5dc7ed531abb7d3ac9ebe1b" title="Generate a path from start to end." alt="" coords="276,5,468,47"/>
-<area shape="rect" href="class_human_factors_1_1_pathfinding_1_1_native_methods.html#acf23678ab15e9f9862a4fe7752214d0d" title=" " alt="" coords="516,5,695,47"/>
-</map>
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_human_factors_1_1_pathfinding_1_1_shortest_path_ab4bd85d84d83a30601a190f583e097ac_icgraph.png" border="0" usemap="#class_human_factors_1_1_pathfinding_1_1_shortest_path_ab4bd85d84d83a30601a190f583e097ac_icgraph" alt=""/></div>
-<map name="class_human_factors_1_1_pathfinding_1_1_shortest_path_ab4bd85d84d83a30601a190f583e097ac_icgraph" id="class_human_factors_1_1_pathfinding_1_1_shortest_path_ab4bd85d84d83a30601a190f583e097ac_icgraph">
-<area shape="rect" title="Perform Dijkstra&#39;s shortest path algorithm to find a path between two nodes." alt="" coords="276,5,499,47"/>
-<area shape="rect" href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#a7ca51d84089c860860ad7fb2fd717f61" title="Perform Dijkstra&#39;s shortest path algorithm to find a path between two nodes." alt="" coords="5,5,228,47"/>
-</map>
-</div>
+<p class="reference">Referenced by <a class="el" href="_shortest_path_8cs_source.html#l00096">HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath()</a>.</p>
 
 </div>
 </div>
-<a id="a7ca51d84089c860860ad7fb2fd717f61"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7ca51d84089c860860ad7fb2fd717f61">&#9670;&nbsp;</a></span>DijkstraShortestPath() <span class="overload">[2/2]</span></h2>
+<a id="a394c96543ad621b2e5d98554153d74b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a394c96543ad621b2e5d98554153d74b4">&#9670;&nbsp;</a></span>DijkstraShortestPath() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -210,7 +263,13 @@ Here is the caller graph for this function:</div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a>&#160;</td>
-          <td class="paramname"><em>end_node</em>&#160;</td>
+          <td class="paramname"><em>end_node</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>cost_type</em> = <code>&quot;&quot;</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -230,40 +289,32 @@ Here is the caller graph for this function:</div>
   <table class="params">
     <tr><td class="paramname">graph</td><td>The graph to conduct the search on. </td></tr>
     <tr><td class="paramname">start_node</td><td>The X,Y,Z of a node in the graph node to start at. </td></tr>
-    <tr><td class="paramname">end_node</td><td>The X,Y,Z of a node in the graph node to end at.</td></tr>
+    <tr><td class="paramname">end_node</td><td>The X,Y,Z of a node in the graph node to end at. </td></tr>
+    <tr><td class="paramname">cost_type</td><td>The type of cost to use for generating the path. If left blank, will use the cost that the graph was created with. In the case of the graph generator, the default cost is distance.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A path from start_node to end_node.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The shortest path from start_node to end_node or null if no path could be found.</dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>1) <code>start_node</code> and <code>end_node</code> must be the X,Y,Z position of nodes that already exist in <code>graph</code>. </dd>
+<dd>
+2) If <code>cost_type</code> is not left as the default, then it must be the name of a valid cost already defined in <code>graph</code>.</dd></dl>
+<dl class="section remark"><dt>Remarks</dt><dd>Gets the start id and end of both nodes, then calls the ID overload.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">IndexOutOfRangeException</td><td>start_node or end_node don't exist in the graph.</td></tr>
+    <tr><td class="paramname">KeyNotFoundException</td><td><code>cost_type</code> wasn't left as blank, and didn't refer to the name of any cost that already exists in the graph.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section remark"><dt>Remarks</dt><dd>Gets the start id and end of both nodes, then calls the ID overload.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#ac63e41c1bc4310f6e64993c30d4a0fe5" title="Find the shortest paths between each pair of start_id and end_id in order.">DijkstraShortestPathMulti</a> for efficently generating multiple paths in parallel. </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#ab7f58f298125194e33d6c69ed4797442" title="Find the shortest paths between each pair of start_id and end_id in order.">DijkstraShortestPathMulti</a> for efficently generating multiple paths in parallel. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_shortest_path_8cs_source.html#l00072">72</a> of file <a class="el" href="_shortest_path_8cs_source.html">ShortestPath.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shortest_path_8cs_source.html#l00096">96</a> of file <a class="el" href="_shortest_path_8cs_source.html">ShortestPath.cs</a>.</p>
 
-<p class="reference">References <a class="el" href="_shortest_path_8cs_source.html#l00048">HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath()</a>, and <a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#abe9106fd9584269e1291702aa401f6ac">HumanFactors.SpatialStructures.Graph.GetNodeID()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_human_factors_1_1_pathfinding_1_1_shortest_path_a7ca51d84089c860860ad7fb2fd717f61_cgraph.png" border="0" usemap="#class_human_factors_1_1_pathfinding_1_1_shortest_path_a7ca51d84089c860860ad7fb2fd717f61_cgraph" alt=""/></div>
-<map name="class_human_factors_1_1_pathfinding_1_1_shortest_path_a7ca51d84089c860860ad7fb2fd717f61_cgraph" id="class_human_factors_1_1_pathfinding_1_1_shortest_path_a7ca51d84089c860860ad7fb2fd717f61_cgraph">
-<area shape="rect" title="Perform Dijkstra&#39;s shortest path algorithm to find a path between two nodes." alt="" coords="5,39,228,80"/>
-<area shape="rect" href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#ab4bd85d84d83a30601a190f583e097ac" title="Perform Dijkstra&#39;s shortest path algorithm to find a path between two nodes." alt="" coords="276,5,499,47"/>
-<area shape="rect" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#abe9106fd9584269e1291702aa401f6ac" title="Gets the ID of a node in the graph." alt="" coords="280,71,495,112"/>
-<area shape="rect" href="class_human_factors_1_1_pathfinding_1_1_native_methods.html#ad6c05846f5dc7ed531abb7d3ac9ebe1b" title="Generate a path from start to end." alt="" coords="547,5,739,47"/>
-<area shape="rect" href="class_human_factors_1_1_pathfinding_1_1_native_methods.html#acf23678ab15e9f9862a4fe7752214d0d" title=" " alt="" coords="787,5,965,47"/>
-</map>
-</div>
+<p class="reference">References <a class="el" href="_shortest_path_8cs_source.html#l00063">HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath()</a>, and <a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#abe9106fd9584269e1291702aa401f6ac">HumanFactors.SpatialStructures.Graph.GetNodeID()</a>.</p>
 
 </div>
 </div>
-<a id="a82d7192b92262f014d7d94ff1e898afc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a82d7192b92262f014d7d94ff1e898afc">&#9670;&nbsp;</a></span>DijkstraShortestPathMulti() <span class="overload">[1/2]</span></h2>
+<a id="a9fb6fc6aff938136f7f9de42e5d8e5bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fb6fc6aff938136f7f9de42e5d8e5bc">&#9670;&nbsp;</a></span>DijkstraShortestPathMulti() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -287,7 +338,13 @@ Here is the call graph for this function:</div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">IEnumerable&lt; <a class="el" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> &gt;&#160;</td>
-          <td class="paramname"><em>end_nodes</em>&#160;</td>
+          <td class="paramname"><em>end_nodes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>cost_type</em> = <code>&quot;&quot;</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -307,42 +364,34 @@ Here is the call graph for this function:</div>
   <table class="params">
     <tr><td class="paramname">graph</td><td>The graph to generate paths in. </td></tr>
     <tr><td class="paramname">start_nodes</td><td>Locations of the start points to generate paths from. </td></tr>
-    <tr><td class="paramname">end_nodes</td><td>Locations of the end nodes to generate paths to.</td></tr>
+    <tr><td class="paramname">end_nodes</td><td>Locations of the end nodes to generate paths to. </td></tr>
+    <tr><td class="paramname">cost_type</td><td>The type of cost to use for generating the path. If left blank, will use the cost that the graph was created with. In the case of the graph generator, the default cost is distance.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A list of paths in order from start_ids to end_ids. If a path could not be generated by a set of points, then the path at that location will be null.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A list of paths in order from <code>start_ids</code> to <code>end_ids</code>. If a path could not be generated by a set of points, then the path at that location will be null.</dd></dl>
 <p>Determines the IDs of nodes, then calls the other overload. Uses all available cores for parallel calculation.</p>
-<dl class="section pre"><dt>Precondition</dt><dd>1) The length of start_ids must match the length of end_ids. </dd>
+<dl class="section pre"><dt>Precondition</dt><dd>1) The length of <code>start_ids</code> must match the length of <code>end_ids</code>. </dd>
 <dd>
-2) Each node in start_nodes and end_nodes must contain the x,y,z position of an existing node in graph</dd></dl>
+2) Each node in <code>start_nodes</code> and end_nodes must contain the x,y,z position of an existing node in <code>graph</code> </dd>
+<dd>
+3) If <code>cost_type</code> is not left as the default, then it must be the name of a valid cost already defined in <code>graph</code>.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">System.ArgumentException</td><td>Length of start_ids didn't equal length of end_ids </td></tr>
-    <tr><td class="paramname">IndexOutOfRangeException</td><td>One or more of the start or end ids do not exist in <em>graph</em> . </td></tr>
+    <tr><td class="paramname">System.ArgumentException</td><td>Length of <code>start_ids</code> didn't equal length of <code>end_ids</code> </td></tr>
+    <tr><td class="paramname">KeyNotFoundException</td><td><code>cost_type</code> wasn't left as blank, and didn't refer to the name of any cost that already exists in <code>graph</code>. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_shortest_path_8cs_source.html#l00135">135</a> of file <a class="el" href="_shortest_path_8cs_source.html">ShortestPath.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shortest_path_8cs_source.html#l00179">179</a> of file <a class="el" href="_shortest_path_8cs_source.html">ShortestPath.cs</a>.</p>
 
-<p class="reference">References <a class="el" href="_shortest_path_8cs_source.html#l00098">HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_human_factors_1_1_pathfinding_1_1_shortest_path_a82d7192b92262f014d7d94ff1e898afc_cgraph.png" border="0" usemap="#class_human_factors_1_1_pathfinding_1_1_shortest_path_a82d7192b92262f014d7d94ff1e898afc_cgraph" alt=""/></div>
-<map name="class_human_factors_1_1_pathfinding_1_1_shortest_path_a82d7192b92262f014d7d94ff1e898afc_cgraph" id="class_human_factors_1_1_pathfinding_1_1_shortest_path_a82d7192b92262f014d7d94ff1e898afc_cgraph">
-<area shape="rect" title="Find the shortest paths between each pair of start_id and end_id in order." alt="" coords="5,5,256,47"/>
-<area shape="rect" href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#ac63e41c1bc4310f6e64993c30d4a0fe5" title="Find the shortest paths between each pair of start_id and end_id in order." alt="" coords="304,5,555,47"/>
-<area shape="rect" href="class_human_factors_1_1_pathfinding_1_1_native_methods.html#a13d7f289f9366b7c7f9c4b90916f74e4" title="Generate a path from start to end." alt="" coords="603,5,801,47"/>
-<area shape="rect" href="class_human_factors_1_1_pathfinding_1_1_native_methods.html#a44d6763edb3913ed69920ba051b30c19" title=" " alt="" coords="849,5,1032,47"/>
-</map>
-</div>
+<p class="reference">References <a class="el" href="_shortest_path_8cs_source.html#l00131">HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti()</a>.</p>
 
 </div>
 </div>
-<a id="ac63e41c1bc4310f6e64993c30d4a0fe5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac63e41c1bc4310f6e64993c30d4a0fe5">&#9670;&nbsp;</a></span>DijkstraShortestPathMulti() <span class="overload">[2/2]</span></h2>
+<a id="ab7f58f298125194e33d6c69ed4797442"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7f58f298125194e33d6c69ed4797442">&#9670;&nbsp;</a></span>DijkstraShortestPathMulti() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -366,7 +415,13 @@ Here is the call graph for this function:</div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int[]&#160;</td>
-          <td class="paramname"><em>end_ids</em>&#160;</td>
+          <td class="paramname"><em>end_ids</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>cost_type</em> = <code>&quot;&quot;</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -386,45 +441,32 @@ Here is the call graph for this function:</div>
   <table class="params">
     <tr><td class="paramname">graph</td><td>The graph to generate paths in. </td></tr>
     <tr><td class="paramname">start_ids</td><td>Ids for the start points to generate paths from. </td></tr>
-    <tr><td class="paramname">end_ids</td><td>Ids for the end points to generate paths to</td></tr>
+    <tr><td class="paramname">end_ids</td><td>Ids for the end points to generate paths to </td></tr>
+    <tr><td class="paramname">cost_type</td><td>The type of cost to use for generating the path. If left blank, will use the cost that the graph was created with. In the case of the graph generator, the default cost is distance.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A list of paths in order from start_ids to end_ids. If a path could not be generated by a set of points, then the path at that location will be null.</dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>1) The length of start_ids must match the length of end_ids. </dd>
+<dd>
+2) Every ID in <code>start_ids</code> and <code>end_ids</code> must be the ID of some node in <code>graph</code>. </dd>
+<dd>
+3) If <code>cost_type</code> is not left as the default, then it must be the name of a valid cost already defined in <code>graph</code>.</dd></dl>
 <p>Uses all available cores for parallel calculation.</p>
 <dl class="section pre"><dt>Precondition</dt><dd>The length of start_ids must match the length of end_ids.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">System.ArgumentException</td><td>Length of start_ids didn't equal length of end_ids </td></tr>
-    <tr><td class="paramname">IndexOutOfRangeException</td><td>One or more of the start or end ids do not exist in <em>graph</em> . </td></tr>
+    <tr><td class="paramname">KeyNotFoundException</td><td><code>cost_type</code> wasn't left as blank, and didn't refer to the name of any cost that already exists in the graph. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_shortest_path_8cs_source.html#l00098">98</a> of file <a class="el" href="_shortest_path_8cs_source.html">ShortestPath.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shortest_path_8cs_source.html#l00131">131</a> of file <a class="el" href="_shortest_path_8cs_source.html">ShortestPath.cs</a>.</p>
 
-<p class="reference">References <a class="el" href="_pathfinding_native_8cs_source.html#l00048">HumanFactors.Pathfinding.NativeMethods.C_CreatePaths()</a>, and <a class="el" href="_pointer_holder_8cs_source.html#l00049">HumanFactors.NativeUtils.NativeObject.Pointer</a>.</p>
+<p class="reference">References <a class="el" href="_pathfinding_native_8cs_source.html#l00067">HumanFactors.Pathfinding.NativeMethods.C_CreatePaths()</a>, and <a class="el" href="_pointer_holder_8cs_source.html#l00049">HumanFactors.NativeUtils.NativeObject.Pointer</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_shortest_path_8cs_source.html#l00135">HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_human_factors_1_1_pathfinding_1_1_shortest_path_ac63e41c1bc4310f6e64993c30d4a0fe5_cgraph.png" border="0" usemap="#class_human_factors_1_1_pathfinding_1_1_shortest_path_ac63e41c1bc4310f6e64993c30d4a0fe5_cgraph" alt=""/></div>
-<map name="class_human_factors_1_1_pathfinding_1_1_shortest_path_ac63e41c1bc4310f6e64993c30d4a0fe5_cgraph" id="class_human_factors_1_1_pathfinding_1_1_shortest_path_ac63e41c1bc4310f6e64993c30d4a0fe5_cgraph">
-<area shape="rect" title="Find the shortest paths between each pair of start_id and end_id in order." alt="" coords="5,5,256,47"/>
-<area shape="rect" href="class_human_factors_1_1_pathfinding_1_1_native_methods.html#a13d7f289f9366b7c7f9c4b90916f74e4" title="Generate a path from start to end." alt="" coords="304,5,503,47"/>
-<area shape="rect" href="class_human_factors_1_1_pathfinding_1_1_native_methods.html#a44d6763edb3913ed69920ba051b30c19" title=" " alt="" coords="551,5,733,47"/>
-</map>
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_human_factors_1_1_pathfinding_1_1_shortest_path_ac63e41c1bc4310f6e64993c30d4a0fe5_icgraph.png" border="0" usemap="#class_human_factors_1_1_pathfinding_1_1_shortest_path_ac63e41c1bc4310f6e64993c30d4a0fe5_icgraph" alt=""/></div>
-<map name="class_human_factors_1_1_pathfinding_1_1_shortest_path_ac63e41c1bc4310f6e64993c30d4a0fe5_icgraph" id="class_human_factors_1_1_pathfinding_1_1_shortest_path_ac63e41c1bc4310f6e64993c30d4a0fe5_icgraph">
-<area shape="rect" title="Find the shortest paths between each pair of start_id and end_id in order." alt="" coords="304,5,555,47"/>
-<area shape="rect" href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#a82d7192b92262f014d7d94ff1e898afc" title="Find the shortest paths between each pair of start_id and end_id in order." alt="" coords="5,5,256,47"/>
-</map>
-</div>
+<p class="reference">Referenced by <a class="el" href="_shortest_path_8cs_source.html#l00179">HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti()</a>.</p>
 
 </div>
 </div>

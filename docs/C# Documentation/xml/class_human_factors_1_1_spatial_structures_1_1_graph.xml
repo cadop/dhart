@@ -16,7 +16,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="52" column="25" bodyfile="src/Csharp/packages/spatialstructures/src/Graph.cs" bodystart="52" bodyend="-1"/>
+        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="98" column="25" bodyfile="src/Csharp/packages/spatialstructures/src/Graph.cs" bodystart="98" bodyend="-1"/>
+        <referencedby refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a84a7286932920179d90a63cfd8ada207" compoundref="_graph_8cs" startline="207" endline="211">HumanFactors.SpatialStructures.Graph.CompressToCSR</referencedby>
       </memberdef>
       </sectiondef>
       <sectiondef kind="package-func">
@@ -45,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="56" column="18" bodyfile="src/Csharp/packages/spatialstructures/src/Graph.cs" bodystart="56" bodyend="56"/>
+        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="102" column="18" bodyfile="src/Csharp/packages/spatialstructures/src/Graph.cs" bodystart="102" bodyend="102"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -61,12 +62,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="59" column="16" bodyfile="src/Csharp/packages/spatialstructures/src/Graph.cs" bodystart="59" bodyend="59"/>
+        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="105" column="16" bodyfile="src/Csharp/packages/spatialstructures/src/Graph.cs" bodystart="105" bodyend="105"/>
       </memberdef>
-      <memberdef kind="function" id="class_human_factors_1_1_spatial_structures_1_1_graph_1aca7ba30268e827c93387794ed05e3d7d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="class_human_factors_1_1_spatial_structures_1_1_graph_1a24d42bc60412118b8eab54d137cabf36" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void HumanFactors.SpatialStructures.Graph.AddEdge</definition>
-        <argsstring>(Vector3D parent, Vector3D child, float cost)</argsstring>
+        <argsstring>(Vector3D parent, Vector3D child, float cost, string cost_type=&quot;&quot;)</argsstring>
         <name>AddEdge</name>
         <param>
           <type><ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref></type>
@@ -79,6 +80,11 @@
         <param>
           <type>float</type>
           <declname>cost</declname>
+        </param>
+        <param>
+          <type>string</type>
+          <declname>cost_type</declname>
+          <defval>&quot;&quot;</defval>
         </param>
         <briefdescription>
 <para>Create a new edge between parent and child with cost. </para>
@@ -108,12 +114,45 @@
 <para>cost for parent to child </para>
 </parameterdescription>
 </parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cost_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of cost to add the edge to.</para>
+</parameterdescription>
+</parameteritem>
 </parameterlist>
-</para>
-<para><simplesect kind="post"><para>1) If the X,Y,Z position of either parent or child does not exist in the graph then a ID location will be assigned to it. </para>
+\Attention This overload is meant for debugging. There are many issues that can occur with adding integers to the graph that don&apos;t already have nodes assigned. Instead use the overload of this function deals with vector 3.</para>
+<para><simplesect kind="pre"><para>1) If adding edges to a new cost type, the graph has been compressed by calling <ref refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a84a7286932920179d90a63cfd8ada207" kindref="member">CompressToCSR()</ref>. </para>
 </simplesect>
-<simplesect kind="post"><para>2) Existing representations of the this graph&apos;s CSR will be invalidated.</para>
+<simplesect kind="pre"><para>2) If adding a cost to a type that isn&apos;t the default cost type, the edge must already exist in the default cost type. </para>
 </simplesect>
+<simplesect kind="pre"><para>3) If the graph has already been compressed and alternate costs exist, then both <computeroutput>parent</computeroutput> and <computeroutput>child</computeroutput> already exist in the graph.</para>
+</simplesect>
+<simplesect kind="post"><para>1) If the ID of either parent or child does not exist in the graph then New IDs will be assigned to them. </para>
+</simplesect>
+<simplesect kind="post"><para>2) Existing representations of the this graph&apos;s CSR will be invalidated. </para>
+</simplesect>
+<simplesect kind="post"><para>3) If <computeroutput>cost_type</computeroutput> is not blank, and does not refer to the default cost type or any other cost that already exists in the graph, a new cost type will be created.</para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>LogicError</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>tried to add an alternate cost to the graph before it was compressed </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>InvalidCostOperation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tried to add an alternate cost that doesn&apos;t exist in the graph&apos;s default cost type.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
 <simplesect kind="warning"><para>1) If an edge between parent and child already exists, this will overwrite that edge. </para>
 </simplesect>
 <simplesect kind="warning"><para>2) Calling this function will invalidate any existing CSRPtrs returned from the graph. Make sure to call CompressToCSR again continuing to access it. </para>
@@ -122,12 +161,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="81" column="21"/>
+        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="147" column="21"/>
       </memberdef>
-      <memberdef kind="function" id="class_human_factors_1_1_spatial_structures_1_1_graph_1ae044c0d713259fb18f4275aec5c8129a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="class_human_factors_1_1_spatial_structures_1_1_graph_1ad4effbecd5ea2998b87425bd52e33f58" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void HumanFactors.SpatialStructures.Graph.AddEdge</definition>
-        <argsstring>(int parent_id, int child_id, float cost)</argsstring>
+        <argsstring>(int parent_id, int child_id, float cost, string cost_type=&quot;&quot;)</argsstring>
         <name>AddEdge</name>
         <param>
           <type>int</type>
@@ -140,6 +179,11 @@
         <param>
           <type>float</type>
           <declname>cost</declname>
+        </param>
+        <param>
+          <type>string</type>
+          <declname>cost_type</declname>
+          <defval>&quot;&quot;</defval>
         </param>
         <briefdescription>
 <para>Create a new edge between parent and child with cost. </para>
@@ -166,14 +210,47 @@
 <parametername>cost</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>cost from parent to child.</para>
+<para>cost from parent to child. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cost_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of cost to add this edge to. If left blank will add the edge to the graph&apos;s default cost type.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="post"><para>1) If the ID of either parent or child does not exist in the graph then it will be created. </para>
+<simplesect kind="pre"><para>1) If adding edges to a new cost type, the graph must first be compressed by calling <ref refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a84a7286932920179d90a63cfd8ada207" kindref="member">CompressToCSR()</ref> </para>
 </simplesect>
-<simplesect kind="post"><para>2) Existing representations of the this graph&apos;s CSR will be invalidated.</para>
+<simplesect kind="pre"><para>2) If adding a cost to a type that isn&apos;t the default cost type, the edge must already exist in the default cost type. </para>
 </simplesect>
+<simplesect kind="pre"><para>3) If the graph has already been compressed and alternate costs exist, then both <computeroutput>parent</computeroutput> and <computeroutput>child</computeroutput> already exist in the graph.</para>
+</simplesect>
+<simplesect kind="post"><para>1) If the ID of either parent or child does not exist in the graph then New IDs will be assigned to them. </para>
+</simplesect>
+<simplesect kind="post"><para>2) Existing representations of the this graph&apos;s CSR will be invalidated. </para>
+</simplesect>
+<simplesect kind="post"><para>3) If <computeroutput>cost_type</computeroutput> is not blank, and does not refer to the default cost type or any other cost that already exists in the graph, a new cost type will be created.</para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>LogicError</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>tried to add an alternate cost to the graph before it was compressed </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>InvalidCostOperation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tried to add an alternate cost that doesn&apos;t exist in the graph&apos;s default cost type.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
 <simplesect kind="warning"><para>1) If an edge between parent and child already exists, this will overwrite that edge. </para>
 </simplesect>
 <simplesect kind="warning"><para>2) Calling this function will invalidate any existing CSRPtrs returned from the graph. Make sure to call CompressToCSR again continuing to access it. </para>
@@ -182,7 +259,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="103" column="21"/>
+        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="184" column="21"/>
       </memberdef>
       <memberdef kind="function" id="class_human_factors_1_1_spatial_structures_1_1_graph_1a6b2aeaa562da06bec0d23aaabb2ba74d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="class_human_factors_1_1_spatial_structures_1_1_node_list" kindref="compound">NodeList</ref></type>
@@ -199,34 +276,57 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="108" column="25"/>
-        <referencedby refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a2d25a3d3158187875f0726844a4bf360" compoundref="_graph_8cs" startline="145" endline="151">HumanFactors.SpatialStructures.Graph.AggregateEdgeCosts</referencedby>
+        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="189" column="25"/>
       </memberdef>
-      <memberdef kind="function" id="class_human_factors_1_1_spatial_structures_1_1_graph_1a3a7db212124a9375862004a3a7691805" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>void</type>
-        <definition>void HumanFactors.SpatialStructures.Graph.CompressToCSR</definition>
-        <argsstring>()</argsstring>
+      <memberdef kind="function" id="class_human_factors_1_1_spatial_structures_1_1_graph_1a84a7286932920179d90a63cfd8ada207" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_human_factors_1_1_spatial_structures_1_1_c_s_r_info" kindref="compound">CSRInfo</ref></type>
+        <definition>CSRInfo HumanFactors.SpatialStructures.Graph.CompressToCSR</definition>
+        <argsstring>(string cost_type=&quot;&quot;)</argsstring>
         <name>CompressToCSR</name>
+        <param>
+          <type>string</type>
+          <declname>cost_type</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
         <briefdescription>
-<para>Compress the graph, and get pointers to a CSR representation of it. </para>
+<para>Compress the graph into a CSR representation, and get pointers to it. </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="remark"><para>The CSR pointers can be mapped to after retrieved from C++ using spans.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cost_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Change the type of cost that&apos;s carried in the CSR&apos;s values array. If left blank, will use the graph&apos;s default cost type.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="remark"><para>The CSR pointers can be mapped to after retrieved from C++ using spans, or can be copied out of managed memory.</para>
 </simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>KeyNotFoundException</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>cost_type</computeroutput> is not blank, the name of the graph&apos;s default cost type, or the name of any already defined cost type in the graph.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
 <simplesect kind="see"><para>CSRPtrs for more info on the CSR type and how to access it. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="118" column="21" bodyfile="src/Csharp/packages/spatialstructures/src/Graph.cs" bodystart="118" bodyend="121"/>
-        <references refid="class_human_factors_1_1_spatial_structures_1_1_native_methods_1afcfe59fc55ebfc796a8baeed3f011a42" compoundref="_spatial_structures_native_8cs" startline="87" endline="100">HumanFactors.SpatialStructures.NativeMethods.C_GetCSRPointers</references>
-        <referencedby refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a2d25a3d3158187875f0726844a4bf360" compoundref="_graph_8cs" startline="145" endline="151">HumanFactors.SpatialStructures.Graph.AggregateEdgeCosts</referencedby>
+        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="207" column="24" bodyfile="src/Csharp/packages/spatialstructures/src/Graph.cs" bodystart="207" bodyend="211"/>
+        <references refid="class_human_factors_1_1_spatial_structures_1_1_native_methods_1a6ed59ccf6ca4b02b79b12b724afddce9" compoundref="_spatial_structures_native_8cs" startline="104" endline="130">HumanFactors.SpatialStructures.NativeMethods.C_GetCSRPointers</references>
+        <references refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a0e139b5c04daaa9e4bd3bf9cb3ee9722" compoundref="_graph_8cs" startline="98">HumanFactors.SpatialStructures.Graph.CSRPointers</references>
+        <referencedby refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a45a2d5b16092f8389210dc47f722a539" compoundref="_graph_8cs" startline="242" endline="251">HumanFactors.SpatialStructures.Graph.AggregateEdgeCosts</referencedby>
       </memberdef>
-      <memberdef kind="function" id="class_human_factors_1_1_spatial_structures_1_1_graph_1a2d25a3d3158187875f0726844a4bf360" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="class_human_factors_1_1_spatial_structures_1_1_graph_1a45a2d5b16092f8389210dc47f722a539" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="class_human_factors_1_1_native_utils_1_1_common_native_arrays_1_1_managed_float_array" kindref="compound">ManagedFloatArray</ref></type>
         <definition>ManagedFloatArray HumanFactors.SpatialStructures.Graph.AggregateEdgeCosts</definition>
-        <argsstring>(GraphEdgeAggregation type, bool directed=true)</argsstring>
+        <argsstring>(GraphEdgeAggregation type, bool directed=true, string cost_type=&quot;&quot;)</argsstring>
         <name>AggregateEdgeCosts</name>
         <param>
           <type><ref refid="namespace_human_factors_1_1_spatial_structures_1abd405fa41da0f9a771d547aa47b6e1a0" kindref="member">GraphEdgeAggregation</ref></type>
@@ -236,6 +336,11 @@
           <type>bool</type>
           <declname>directed</declname>
           <defval>true</defval>
+        </param>
+        <param>
+          <type>string</type>
+          <declname>cost_type</declname>
+          <defval>&quot;&quot;</defval>
         </param>
         <briefdescription>
 <para>Summarize the edgecosts of every node in the graph. </para>
@@ -257,9 +362,28 @@
 <para>Whether or not the graph is directed. If set to true then each nodes&apos;s score will only consider incomning edges. Otherwise, each node&apos;s score will consider both outgoing and incoming edges.</para>
 </parameterdescription>
 </parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cost_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of cost to use for aggregating the edges.</para>
+</parameterdescription>
+</parameteritem>
 </parameterlist>
 <simplesect kind="return"><para>An array of scores, in which each element corresponds to a node in the graph sorted by ID.</para>
 </simplesect>
+<simplesect kind="pre"><para>If not left blank, cost_type must point to a valid cost in the graph.</para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>KeyNotFoundException</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cost specified didn&apos;t match the default cost, or any other cost type defined in the graph.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
 <simplesect kind="warning"><para>This will compress the graph if it is not compressed already. If any edges were added between lat call to CompressToCSR and now, then any active CSRPtrs will be invalidated.</para>
 </simplesect>
 <simplesect kind="remark"><para>The order of the scores returned bythis function match the order of the scores returned from <ref refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a6b2aeaa562da06bec0d23aaabb2ba74d" kindref="member">Graph.getNodes</ref>. This can be especially useful for summarizing the results of a <ref refid="namespace_human_factors_1_1_visibility_graph" kindref="compound">VisibilityGraph</ref>. </para>
@@ -268,12 +392,91 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="145" column="34" bodyfile="src/Csharp/packages/spatialstructures/src/Graph.cs" bodystart="145" bodyend="151"/>
-        <references refid="class_human_factors_1_1_spatial_structures_1_1_native_methods_1a53457f89d46804e798d806c0ba4b0940" compoundref="_spatial_structures_native_8cs" startline="119" endline="128">HumanFactors.SpatialStructures.NativeMethods.C_AggregateEdgeCosts</references>
-        <references refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a3a7db212124a9375862004a3a7691805" compoundref="_graph_8cs" startline="118" endline="121">HumanFactors.SpatialStructures.Graph.CompressToCSR</references>
-        <references refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a6b2aeaa562da06bec0d23aaabb2ba74d">HumanFactors.SpatialStructures.Graph.getNodes</references>
+        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="242" column="34" bodyfile="src/Csharp/packages/spatialstructures/src/Graph.cs" bodystart="242" bodyend="251"/>
+        <references refid="class_human_factors_1_1_spatial_structures_1_1_native_methods_1a30608108f5adb70a2e28167a41921770" compoundref="_spatial_structures_native_8cs" startline="149" endline="174">HumanFactors.SpatialStructures.NativeMethods.C_AggregateEdgeCosts</references>
+        <references refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a84a7286932920179d90a63cfd8ada207" compoundref="_graph_8cs" startline="207" endline="211">HumanFactors.SpatialStructures.Graph.CompressToCSR</references>
+        <references refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a1a40fc2bab18a5adf42fb7a49ca6ddb9">HumanFactors.SpatialStructures.Graph.NumNodes</references>
         <references refid="struct_human_factors_1_1_native_utils_1_1_c_vector_and_data_1a8bcdb7b4516a15f5b905ebcd33a55e6c" compoundref="_native_utils_8cs" startline="38">HumanFactors.NativeUtils.CVectorAndData.size</references>
-        <references refid="class_human_factors_1_1_native_utils_1_1_native_array_1a08f9370818434ce452d8113466c8a0f0" compoundref="_pointer_holder_8cs" startline="194" endline="194">HumanFactors.NativeUtils.NativeArray&lt; T &gt;.size</references>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_spatial_structures_1_1_graph_1abde89644defe692bffea19e3c3aebf8a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float HumanFactors.SpatialStructures.Graph.GetCost</definition>
+        <argsstring>(int parent, int child, string cost_type=&quot;&quot;)</argsstring>
+        <name>GetCost</name>
+        <param>
+          <type>int</type>
+          <declname>parent</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>string</type>
+          <declname>cost_type</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+<para>Get the cost of traversing between <computeroutput>parent</computeroutput> and <computeroutput>child</computeroutput> </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>parent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="struct_human_factors_1_1_spatial_structures_1_1_node" kindref="compound">Node</ref> that&apos;s being traversed from </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>child</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="struct_human_factors_1_1_spatial_structures_1_1_node" kindref="compound">Node</ref> that&apos;s being traversed to </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cost_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The cost type to retrieve. If blank, the graph&apos;s default cost will be used.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The cost of traversing from <computeroutput>parent</computeroutput> to <computeroutput>child</computeroutput>.</para>
+</simplesect>
+<simplesect kind="pre"><para>1) cost_type must be the name of a cost that already exists in the graph, or blank. </para>
+</simplesect>
+<simplesect kind="pre"><para>2) The graph must first have been compressed using <ref refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a84a7286932920179d90a63cfd8ada207" kindref="member">Graph.CompressToCSR()</ref>.</para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>LogicError</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The graph wasn&apos;t compressed before calling this function. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>KeyNotFoundExeption</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The cost_type specified was not the default cost, blank, or the name of any cost that currently belongs to the graph.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>This is not a high performance function, since each index into the CSR requires an indexing operation. If multiple values are required, it is suggested to iterate through the pointers from <ref refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a84a7286932920179d90a63cfd8ada207" kindref="member">Graph.CompressToCSR()</ref>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="277" column="22" bodyfile="src/Csharp/packages/spatialstructures/src/Graph.cs" bodystart="277" bodyend="280"/>
+        <references refid="class_human_factors_1_1_spatial_structures_1_1_native_methods_1a182becf6bcb9045968fd8c04f12e64f8" compoundref="_spatial_structures_native_8cs" startline="176" endline="194">HumanFactors.SpatialStructures.NativeMethods.C_GetEdgeCost</references>
+        <references refid="class_human_factors_1_1_native_utils_1_1_native_object_1aa58c089e79cb4acc260755a41952d3d6" compoundref="_pointer_holder_8cs" startline="49" endline="49">HumanFactors.NativeUtils.NativeObject.Pointer</references>
       </memberdef>
       <memberdef kind="function" id="class_human_factors_1_1_spatial_structures_1_1_graph_1abe9106fd9584269e1291702aa401f6ac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>int</type>
@@ -303,8 +506,268 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="160" column="20"/>
-        <referencedby refid="class_human_factors_1_1_pathfinding_1_1_shortest_path_1a7ca51d84089c860860ad7fb2fd717f61" compoundref="_shortest_path_8cs" startline="72" endline="78">HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath</referencedby>
+        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="289" column="20"/>
+        <referencedby refid="class_human_factors_1_1_pathfinding_1_1_shortest_path_1a394c96543ad621b2e5d98554153d74b4" compoundref="_shortest_path_8cs" startline="96" endline="102">HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_spatial_structures_1_1_graph_1a4092cfc4260762e5b18127e3dbbe770e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void HumanFactors.SpatialStructures.Graph.AddNodeAttribute</definition>
+        <argsstring>(int id, string attribute, string score)</argsstring>
+        <name>AddNodeAttribute</name>
+        <param>
+          <type>int</type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type>string</type>
+          <declname>attribute</declname>
+        </param>
+        <param>
+          <type>string</type>
+          <declname>score</declname>
+        </param>
+        <briefdescription>
+<para>Define a node attribute for the node at id. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The ID of the node that will receive attribute. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>attribute</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name of the attribute to use. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>score</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The score for <computeroutput>attribute</computeroutput> to store for this node.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Example</title><para><programlisting><codeline><highlight class="normal">//<sp/>Create<sp/>a<sp/>graph<sp/>and<sp/>add<sp/>two<sp/>edges<sp/>to<sp/>create<sp/>nodes</highlight></codeline>
+<codeline><highlight class="normal">Graph<sp/>g<sp/>=<sp/>new<sp/>Graph();</highlight></codeline>
+<codeline><highlight class="normal">g.AddEdge(0,<sp/>1,<sp/>150);</highlight></codeline>
+<codeline><highlight class="normal">g.AddEdge(0,<sp/>2,<sp/>100);</highlight></codeline>
+<codeline><highlight class="normal">g.AddEdge(0,<sp/>3,<sp/>2);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Add<sp/>node<sp/>attributes<sp/>to<sp/>the<sp/>graph<sp/>for<sp/>the<sp/>nodes</highlight></codeline>
+<codeline><highlight class="normal">//<sp/>we<sp/>just<sp/>created</highlight></codeline>
+<codeline><highlight class="normal">g.AddNodeAttribute(2,<sp/>&quot;Attr&quot;,<sp/>&quot;200&quot;);</highlight></codeline>
+<codeline><highlight class="normal">g.AddNodeAttribute(1,<sp/>&quot;Attr&quot;,<sp/>&quot;100&quot;);</highlight></codeline>
+<codeline><highlight class="normal">g.AddNodeAttribute(0,<sp/>&quot;Attr&quot;,<sp/>&quot;0&quot;);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Get<sp/>scores<sp/>for<sp/>this<sp/>attribute<sp/>from<sp/>the<sp/>graph</highlight></codeline>
+<codeline><highlight class="normal">var<sp/>attr<sp/>=<sp/>g.GetNodeAttributes(&quot;Attr&quot;);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Print<sp/>results</highlight></codeline>
+<codeline><highlight class="normal">foreach<sp/>(var<sp/>attribute<sp/>in<sp/>attr)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>Debug.WriteLine(attribute);</highlight></codeline>
+</programlisting> <computeroutput>&gt;&gt;&gt; 0</computeroutput><linebreak/>
+<computeroutput>&gt;&gt;&gt; 100</computeroutput><linebreak/>
+<computeroutput>&gt;&gt;&gt; 200</computeroutput><linebreak/>
+</para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="335" column="21" bodyfile="src/Csharp/packages/spatialstructures/src/Graph.cs" bodystart="335" bodyend="339"/>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_spatial_structures_1_1_graph_1a4cf45189fef35fbd24aa74a9f51adafc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void HumanFactors.SpatialStructures.Graph.AddNodeAttribute</definition>
+        <argsstring>(string attribute, IEnumerable&lt; int &gt; ids, IEnumerable&lt; string &gt; scores)</argsstring>
+        <name>AddNodeAttribute</name>
+        <param>
+          <type>string</type>
+          <declname>attribute</declname>
+        </param>
+        <param>
+          <type>IEnumerable&lt; int &gt;</type>
+          <declname>ids</declname>
+        </param>
+        <param>
+          <type>IEnumerable&lt; string &gt;</type>
+          <declname>scores</declname>
+        </param>
+        <briefdescription>
+<para>Add attribute to all node in ids, with their respective score in scores. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ids</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>IDs of nodes to assign scores to for <computeroutput>attribute</computeroutput> </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>attribute</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name of the attribute to assigns cores to for each node in <computeroutput>ids</computeroutput> </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>scores</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ordered ids of scores to add to the node at the id in <computeroutput>ids</computeroutput> at the same index</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="pre"><para>the length of <computeroutput>ids</computeroutput> and <computeroutput>scores</computeroutput> must match</para>
+</simplesect>
+<simplesect kind="par"><title>Example</title><para><programlisting><codeline><highlight class="normal">//<sp/>Create<sp/>a<sp/>graph<sp/>and<sp/>add<sp/>two<sp/>edges<sp/>to<sp/>create<sp/>nodes</highlight></codeline>
+<codeline><highlight class="normal">Graph<sp/>g<sp/>=<sp/>new<sp/>Graph();</highlight></codeline>
+<codeline><highlight class="normal">g.AddEdge(0,<sp/>1,<sp/>150);</highlight></codeline>
+<codeline><highlight class="normal">g.AddEdge(0,<sp/>2,<sp/>100);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Create<sp/>arrays<sp/>for<sp/>ids<sp/>and<sp/>scores</highlight></codeline>
+<codeline><highlight class="normal">int[]<sp/>ids<sp/>=<sp/>{<sp/>0,<sp/>1,<sp/>2<sp/>};</highlight></codeline>
+<codeline><highlight class="normal">string[]<sp/>scores<sp/>=<sp/>{<sp/>&quot;0&quot;,<sp/>&quot;100&quot;,<sp/>&quot;200&quot;<sp/>};</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Add<sp/>them<sp/>to<sp/>the<sp/>graph</highlight></codeline>
+<codeline><highlight class="normal">g.AddNodeAttribute(&quot;Attr&quot;,<sp/>ids,<sp/>scores);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Get<sp/>scores<sp/>for<sp/>this<sp/>attribute<sp/>from<sp/>the<sp/>graph</highlight></codeline>
+<codeline><highlight class="normal">var<sp/>attr<sp/>=<sp/>g.GetNodeAttributes(&quot;Attr&quot;);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">foreach<sp/>(var<sp/>attribute<sp/>in<sp/>attr)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>Debug.WriteLine(attribute);</highlight></codeline>
+</programlisting></para>
+</simplesect>
+<computeroutput>&gt;&gt;&gt; 0</computeroutput><linebreak/>
+<computeroutput>&gt;&gt;&gt; 100</computeroutput><linebreak/>
+<computeroutput>&gt;&gt;&gt; 200</computeroutput><linebreak/>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="375" column="21" bodyfile="src/Csharp/packages/spatialstructures/src/Graph.cs" bodystart="375" bodyend="390"/>
+        <references refid="class_human_factors_1_1_native_utils_1_1_native_object_1aa58c089e79cb4acc260755a41952d3d6" compoundref="_pointer_holder_8cs" startline="49" endline="49">HumanFactors.NativeUtils.NativeObject.Pointer</references>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_spatial_structures_1_1_graph_1a78c22c3af8aea1a7b873a61fcc8aa935" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>string[]</type>
+        <definition>string [] HumanFactors.SpatialStructures.Graph.GetNodeAttributes</definition>
+        <argsstring>(string attribute)</argsstring>
+        <name>GetNodeAttributes</name>
+        <param>
+          <type>string</type>
+          <declname>attribute</declname>
+        </param>
+        <briefdescription>
+<para>Get the score of every node for a given attribute. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>attribute</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The unique name of the attribute type to get from the graph fopr every node</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>If an attribute with the name of <computeroutput>attribute</computeroutput>, type was found in the graph, then an array of scores for each node is returned in order of ID. For example, the score of the node with id 10 would be stored at index 10, id 12 stored at index 12, etc. Nodes without scores for <computeroutput>attribute</computeroutput> will have empty strings at their indexes.</para>
+</simplesect>
+<simplesect kind="return"><para>If <computeroutput>attribute</computeroutput> didn&apos;t exist in the graph, then an empty array of strings will be returned.</para>
+</simplesect>
+<programlisting><codeline><highlight class="normal">//<sp/>TODO<sp/>example</highlight></codeline>
+</programlisting> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="410" column="23" bodyfile="src/Csharp/packages/spatialstructures/src/Graph.cs" bodystart="410" bodyend="413"/>
+        <references refid="class_human_factors_1_1_spatial_structures_1_1_native_methods_1aca85eef5976c0f0f2710e8dba6484322" compoundref="_spatial_structures_native_8cs" startline="204" endline="228">HumanFactors.SpatialStructures.NativeMethods.C_GetNodeAttributes</references>
+        <references refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a1a40fc2bab18a5adf42fb7a49ca6ddb9">HumanFactors.SpatialStructures.Graph.NumNodes</references>
+        <references refid="class_human_factors_1_1_native_utils_1_1_native_object_1aa58c089e79cb4acc260755a41952d3d6" compoundref="_pointer_holder_8cs" startline="49" endline="49">HumanFactors.NativeUtils.NativeObject.Pointer</references>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_spatial_structures_1_1_graph_1a0ec380a14ed15e54db8f423a0af0c0d4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void HumanFactors.SpatialStructures.Graph.ClearNodeAttributes</definition>
+        <argsstring>(string attribute)</argsstring>
+        <name>ClearNodeAttributes</name>
+        <param>
+          <type>string</type>
+          <declname>attribute</declname>
+        </param>
+        <briefdescription>
+<para>Clear an attribute and all of its scores from the graph. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>attribute</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The unique key of the attribute to clear from the graph.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="par"><title>Example</title><para><programlisting><codeline><highlight class="normal">//<sp/>Create<sp/>a<sp/>graph<sp/>and<sp/>add<sp/>two<sp/>edges<sp/>to<sp/>create<sp/>nodes</highlight></codeline>
+<codeline><highlight class="normal">Graph<sp/>g<sp/>=<sp/>new<sp/>Graph();</highlight></codeline>
+<codeline><highlight class="normal">g.AddEdge(0,<sp/>1,<sp/>150);</highlight></codeline>
+<codeline><highlight class="normal">g.AddEdge(0,<sp/>2,<sp/>100);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Create<sp/>arrays<sp/>for<sp/>ids<sp/>and<sp/>scores</highlight></codeline>
+<codeline><highlight class="normal">int[]<sp/>ids<sp/>=<sp/>{<sp/>0,<sp/>1,<sp/>2<sp/>};</highlight></codeline>
+<codeline><highlight class="normal">string[]<sp/>scores<sp/>=<sp/>{<sp/>&quot;0&quot;,<sp/>&quot;100&quot;,<sp/>&quot;200&quot;<sp/>};</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Add<sp/>them<sp/>to<sp/>the<sp/>graph</highlight></codeline>
+<codeline><highlight class="normal">g.AddNodeAttribute(&quot;Attr&quot;,<sp/>ids,<sp/>scores);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Now<sp/>try<sp/>to<sp/>delete</highlight></codeline>
+<codeline><highlight class="normal">g.ClearNodeAttributes(&quot;Attr&quot;);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>check<sp/>that<sp/>this<sp/>is<sp/>truly<sp/>gone</highlight></codeline>
+<codeline><highlight class="normal">var<sp/>node_attrs<sp/>=<sp/>g.GetNodeAttributes(&quot;Attr&quot;);</highlight></codeline>
+<codeline><highlight class="normal">Debug.WriteLine(node_attrs.size());</highlight></codeline>
+</programlisting> <computeroutput>&gt;&gt;&gt; 0</computeroutput> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="444" column="21" bodyfile="src/Csharp/packages/spatialstructures/src/Graph.cs" bodystart="444" bodyend="447"/>
+        <references refid="class_human_factors_1_1_spatial_structures_1_1_native_methods_1a0eb7a8a8273141b1415a1f9fe95933b5">HumanFactors.SpatialStructures.NativeMethods.C_ClearAttributeType</references>
+        <references refid="class_human_factors_1_1_native_utils_1_1_native_object_1aa58c089e79cb4acc260755a41952d3d6" compoundref="_pointer_holder_8cs" startline="49" endline="49">HumanFactors.NativeUtils.NativeObject.Pointer</references>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_spatial_structures_1_1_graph_1a1a40fc2bab18a5adf42fb7a49ca6ddb9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int HumanFactors.SpatialStructures.Graph.NumNodes</definition>
+        <argsstring>()</argsstring>
+        <name>NumNodes</name>
+        <briefdescription>
+<para>Get the number of nodes in this graph. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The number of currently defined nodes in this graph</para>
+</simplesect>
+<simplesect kind="remark"><para>This is used multiple times internally to get the size of the graph without needing to get its nodes. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="457" column="20"/>
+        <referencedby refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a45a2d5b16092f8389210dc47f722a539" compoundref="_graph_8cs" startline="242" endline="251">HumanFactors.SpatialStructures.Graph.AggregateEdgeCosts</referencedby>
+        <referencedby refid="class_human_factors_1_1_pathfinding_1_1_shortest_path_1a3ede2597cc17a4f1a130741b0163bbab" compoundref="_shortest_path_8cs" startline="222" endline="242">HumanFactors.Pathfinding.ShortestPath.DijkstraAllToAll</referencedby>
+        <referencedby refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a78c22c3af8aea1a7b873a61fcc8aa935" compoundref="_graph_8cs" startline="410" endline="413">HumanFactors.SpatialStructures.Graph.GetNodeAttributes</referencedby>
       </memberdef>
       </sectiondef>
       <sectiondef kind="protected-func">
@@ -328,7 +791,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="168" column="33" bodyfile="src/Csharp/packages/spatialstructures/src/Graph.cs" bodystart="168" bodyend="172"/>
+        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="297" column="33" bodyfile="src/Csharp/packages/spatialstructures/src/Graph.cs" bodystart="297" bodyend="301"/>
         <references refid="class_human_factors_1_1_spatial_structures_1_1_native_methods_1a464f503116478fbb7eb9baeb2ef45aac">HumanFactors.SpatialStructures.NativeMethods.C_DestroyGraph</references>
       </memberdef>
       </sectiondef>
@@ -336,15 +799,21 @@
 <para>A graph representing connections between points in space. </para>
     </briefdescription>
     <detaileddescription>
-<para>Every <ref refid="struct_human_factors_1_1_spatial_structures_1_1_node" kindref="compound">Node</ref> in the graph contains an X,Y,Z coordinate which can be used to represent a specific point in space. This graph internally is stored as a CSR for space efficency. Nodes are stored in a hashmap containing X,Y, and Z coordinates, allowing for quick indexing of s specific nodes by location alone.</para>
-<para><simplesect kind="invariant"><para>1) The CSR maintained by this graph will always be valid. </para>
+<para>Every <ref refid="struct_human_factors_1_1_spatial_structures_1_1_node" kindref="compound">Node</ref> in the graph contains an X,Y,Z coordinate which can be used to represent a specific point in space. This graph internally is stored as a Sparse Matrix for space efficency. Nodes are stored in a hashmap containing X,Y, and Z coordinates, allowing for quick indexing of specific nodes by location alone. Access to this graph&apos;s internal CSR is available through <ref refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a84a7286932920179d90a63cfd8ada207" kindref="member">Graph.CompressToCSR()</ref>.</para>
+<para><simplesect kind="par"><title>Cost Types</title><para>This <ref refid="class_human_factors_1_1_spatial_structures_1_1_graph" kindref="compound">Graph</ref> is capable of holding multiple cost types for any of it&apos;s edges. Each cost type has a distinct key as it&apos;s name, such as &quot;CrossSlope&quot; or &quot;EnergyExpenditure&quot;. Upon creation, the graph is assigned a default cost type, <computeroutput>Distance</computeroutput> which can be accessed explicitly by the key &quot;Distance&quot; or leaving the cost_type field blank. Alternate costs have corresponding edges in the default cost set, but different costs to traverse from the parent to the child node.</para>
+</simplesect>
+<simplesect kind="par"><title>NodeAttributes</title><para>The graph is able to store an arbitrary amount of information about the nodes it contains as strings. Similar to alternate cost types, node attributes are each have a distinct key as their name, but instead of conatining information about edges in the graph, node attributes contain information about nodes. Unlike the cost algorithms in edgecosts, right now there is no functionality within <ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref> that populates the node attributes of the graph with any kind of metric, however the methods to add and clear node attributes are made available so you are free to add your own node attributes.</para>
+</simplesect>
+<simplesect kind="invariant"><para>1) The CSR maintained by this graph will always be valid. </para>
 </simplesect>
 <simplesect kind="invariant"><para>2) Every unique unique node in the graph will be assigned a unique id. A <ref refid="struct_human_factors_1_1_spatial_structures_1_1_node" kindref="compound">Node</ref> is considered unique if it has an X,Y,Z location that is not within 0.0001 units of any other node in the graph.</para>
+</simplesect>
+<simplesect kind="note"><para>The graph offers some basic functionality to add edges and nodes but it&apos;s main use is to provide access to the output of the <ref refid="namespace_human_factors_1_1_graph_generator" kindref="compound">GraphGenerator</ref> and <ref refid="namespace_human_factors_1_1_visibility_graph" kindref="compound">VisibilityGraph</ref>. If adding edges or alternate cost types please make sure to read the documentation for these functions and that all preconditions are followed.</para>
 </simplesect>
 </para>
 <internal><para><xrefsect id="todo_1_todo000010"><xreftitle>Todo</xreftitle><xrefdescription><para>Functions to access edges in the graph like numpy. Users shouldn&apos;t have to use unsafe functions to get the edges of a node from the CSR. </para>
 </xrefdescription></xrefsect></para>
-<para><simplesect kind="see"><para><ref refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a3a7db212124a9375862004a3a7691805" kindref="member">CompressToCSR</ref> to get a CSR representation of the graph. </para>
+<para><simplesect kind="see"><para><ref refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a84a7286932920179d90a63cfd8ada207" kindref="member">CompressToCSR</ref> to get a CSR representation of the graph. </para>
 </simplesect>
 </para>
 </internal>
@@ -364,17 +833,37 @@
       </node>
       <node id="3">
         <label>SafeHandle</label>
+        <link refid="class_safe_handle"/>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="4">
+      <node id="6">
         <label>HumanFactors.SpatialStructures.CSRInfo</label>
         <link refid="struct_human_factors_1_1_spatial_structures_1_1_c_s_r_info"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>cols</edgelabel>
+          <edgelabel>nnz</edgelabel>
+          <edgelabel>rows</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>outer_indices</edgelabel>
+          <edgelabel>data</edgelabel>
+          <edgelabel>inner_indices</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>IntPtr</label>
       </node>
       <node id="2">
         <label>NativeObject</label>
         <link refid="class_human_factors_1_1_native_utils_1_1_native_object"/>
         <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>IsInvalid</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pressure</edgelabel>
         </childnode>
       </node>
       <node id="1">
@@ -382,27 +871,40 @@
         <link refid="class_human_factors_1_1_spatial_structures_1_1_graph"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
-        <childnode refid="4" relation="usage">
+        <childnode refid="6" relation="usage">
           <edgelabel>CSRPointers</edgelabel>
         </childnode>
       </node>
+      <node id="5">
+        <label>int</label>
+      </node>
       <node id="3">
         <label>SafeHandle</label>
+        <link refid="class_safe_handle"/>
+      </node>
+      <node id="4">
+        <label>override bool</label>
       </node>
     </collaborationgraph>
-    <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="49" column="11" bodyfile="src/Csharp/packages/spatialstructures/src/Graph.cs" bodystart="50" bodyend="173"/>
+    <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="95" column="11" bodyfile="src/Csharp/packages/spatialstructures/src/Graph.cs" bodystart="96" bodyend="458"/>
     <listofallmembers>
-      <member refid="class_human_factors_1_1_spatial_structures_1_1_graph_1aca7ba30268e827c93387794ed05e3d7d" prot="public" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>AddEdge</name></member>
-      <member refid="class_human_factors_1_1_spatial_structures_1_1_graph_1ae044c0d713259fb18f4275aec5c8129a" prot="public" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>AddEdge</name></member>
-      <member refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a2d25a3d3158187875f0726844a4bf360" prot="public" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>AggregateEdgeCosts</name></member>
-      <member refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a3a7db212124a9375862004a3a7691805" prot="public" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>CompressToCSR</name></member>
+      <member refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a24d42bc60412118b8eab54d137cabf36" prot="public" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>AddEdge</name></member>
+      <member refid="class_human_factors_1_1_spatial_structures_1_1_graph_1ad4effbecd5ea2998b87425bd52e33f58" prot="public" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>AddEdge</name></member>
+      <member refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a4092cfc4260762e5b18127e3dbbe770e" prot="public" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>AddNodeAttribute</name></member>
+      <member refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a4cf45189fef35fbd24aa74a9f51adafc" prot="public" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>AddNodeAttribute</name></member>
+      <member refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a45a2d5b16092f8389210dc47f722a539" prot="public" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>AggregateEdgeCosts</name></member>
+      <member refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a0ec380a14ed15e54db8f423a0af0c0d4" prot="public" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>ClearNodeAttributes</name></member>
+      <member refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a84a7286932920179d90a63cfd8ada207" prot="public" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>CompressToCSR</name></member>
       <member refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a0e139b5c04daaa9e4bd3bf9cb3ee9722" prot="private" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>CSRPointers</name></member>
+      <member refid="class_human_factors_1_1_spatial_structures_1_1_graph_1abde89644defe692bffea19e3c3aebf8a" prot="public" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>GetCost</name></member>
+      <member refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a78c22c3af8aea1a7b873a61fcc8aa935" prot="public" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>GetNodeAttributes</name></member>
       <member refid="class_human_factors_1_1_spatial_structures_1_1_graph_1abe9106fd9584269e1291702aa401f6ac" prot="public" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>GetNodeID</name></member>
       <member refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a6b2aeaa562da06bec0d23aaabb2ba74d" prot="public" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>getNodes</name></member>
       <member refid="class_human_factors_1_1_spatial_structures_1_1_graph_1aa613f3162fe49e35e155cd2418a0fa46" prot="package" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>Graph</name></member>
       <member refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a01855a86f49d22301651cf7098ee8967" prot="public" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>Graph</name></member>
       <member refid="class_human_factors_1_1_native_utils_1_1_native_object_1a33340c37b83300ec09f6fc7982d2fb70" prot="public" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>IsInvalid</name></member>
       <member refid="class_human_factors_1_1_native_utils_1_1_native_object_1ae7f34573598d48a9ef666b96895c7201" prot="public" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>NativeObject</name></member>
+      <member refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a1a40fc2bab18a5adf42fb7a49ca6ddb9" prot="public" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>NumNodes</name></member>
       <member refid="class_human_factors_1_1_native_utils_1_1_native_object_1aa58c089e79cb4acc260755a41952d3d6" prot="package" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>Pointer</name></member>
       <member refid="class_human_factors_1_1_native_utils_1_1_native_object_1a46b2320d66a2b0405024db48f376b72c" prot="public" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>pressure</name></member>
       <member refid="class_human_factors_1_1_spatial_structures_1_1_graph_1a274f89b6ee5b5e22fe566e96de49461a" prot="protected" virt="non-virtual"><scope>HumanFactors::SpatialStructures::Graph</scope><name>ReleaseHandle</name></member>

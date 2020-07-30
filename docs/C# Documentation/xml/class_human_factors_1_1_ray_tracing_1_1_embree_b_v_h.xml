@@ -102,6 +102,7 @@
       </node>
       <node id="3">
         <label>SafeHandle</label>
+        <link refid="class_safe_handle"/>
       </node>
     </inheritancegraph>
     <collaborationgraph>
@@ -111,14 +112,27 @@
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
+      <node id="5">
+        <label>int</label>
+      </node>
       <node id="2">
         <label>HumanFactors::NativeUtils::NativeObject</label>
         <link refid="class_human_factors_1_1_native_utils_1_1_native_object"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>IsInvalid</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pressure</edgelabel>
+        </childnode>
       </node>
       <node id="3">
         <label>SafeHandle</label>
+        <link refid="class_safe_handle"/>
+      </node>
+      <node id="4">
+        <label>override bool</label>
       </node>
     </collaborationgraph>
     <location file="src/Csharp/packages/raytracer/src/EmbreeBVH.cs" line="30" column="11" bodyfile="src/Csharp/packages/raytracer/src/EmbreeBVH.cs" bodystart="31" bodyend="56"/>

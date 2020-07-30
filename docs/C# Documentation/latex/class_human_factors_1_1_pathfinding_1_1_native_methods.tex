@@ -3,10 +3,12 @@
 \doxysubsection*{Static Package Functions}
 \begin{DoxyCompactItemize}
 \item 
-static \mbox{\hyperlink{struct_human_factors_1_1_native_utils_1_1_c_vector_and_data}{C\+Vector\+And\+Data}} \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_native_methods_ad6c05846f5dc7ed531abb7d3ac9ebe1b}{C\+\_\+\+Create\+Path}} (Int\+Ptr graph\+\_\+ptr, int start, int end)
+static \mbox{\hyperlink{struct_human_factors_1_1_native_utils_1_1_c_vector_and_data}{C\+Vector\+And\+Data}} \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_native_methods_a000ba4e4cf47dc3eff4c6ecbd61354ab}{C\+\_\+\+Create\+Path}} (Int\+Ptr graph\+\_\+ptr, int start, int end, string cost\+\_\+type)
 \begin{DoxyCompactList}\small\item\em Generate a path from start to end. \end{DoxyCompactList}\item 
-static \mbox{\hyperlink{struct_human_factors_1_1_native_utils_1_1_c_vector_and_data}{C\+Vector\+And\+Data}}\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_native_methods_a13d7f289f9366b7c7f9c4b90916f74e4}{C\+\_\+\+Create\+Paths}} (Int\+Ptr graph\+\_\+ptr, I\+Enumerable$<$ int $>$ start, I\+Enumerable$<$ int $>$ end)
+static \mbox{\hyperlink{struct_human_factors_1_1_native_utils_1_1_c_vector_and_data}{C\+Vector\+And\+Data}}\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_native_methods_a1b79d24699fd670918524395024e9777}{C\+\_\+\+Create\+Paths}} (Int\+Ptr graph\+\_\+ptr, I\+Enumerable$<$ int $>$ start, I\+Enumerable$<$ int $>$ end, string cost\+\_\+type)
 \begin{DoxyCompactList}\small\item\em Generate a path from start to end. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{struct_human_factors_1_1_native_utils_1_1_c_vector_and_data}{C\+Vector\+And\+Data}}\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_native_methods_aacec0c6d617c78c505944142d6bd4c4b}{C\+\_\+\+All\+To\+All\+Paths}} (Int\+Ptr graph\+\_\+ptr, int graph\+\_\+size, string cost\+\_\+type)
+\item 
 static void \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_native_methods_ac4db653ce2270e68c7ea18192f41c9f7}{C\+\_\+\+Destroy\+Path}} (Int\+Ptr path\+\_\+ptr)
 \begin{DoxyCompactList}\small\item\em Destroy an existing path object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
@@ -14,9 +16,11 @@ static void \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_native_meth
 \item 
 static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_native_methods_a6f4e5a5b6ac997653d300eb31f1cc780}{Destroy\+Path}} (Int\+Ptr path\+\_\+ptr)
 \item 
-static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_native_methods_acf23678ab15e9f9862a4fe7752214d0d}{Create\+Path}} (Int\+Ptr graph\+\_\+ptr, int start, int end, ref int out\+\_\+size, ref Int\+Ptr out\+\_\+path, ref Int\+Ptr out\+\_\+data)
+static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_native_methods_aad3740f1d798a3bc25ede5b9c47f3cf1}{Create\+Path}} (Int\+Ptr graph\+\_\+ptr, int start, int end, string cost\+\_\+type, ref int out\+\_\+size, ref Int\+Ptr out\+\_\+path, ref Int\+Ptr out\+\_\+data)
 \item 
-static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_native_methods_a44d6763edb3913ed69920ba051b30c19}{Create\+Paths}} (Int\+Ptr graph\+\_\+ptr, \mbox{[}In\mbox{]} int\mbox{[}$\,$\mbox{]} start, \mbox{[}In\mbox{]} int\mbox{[}$\,$\mbox{]} end, \mbox{[}Out\mbox{]} Int\+Ptr\mbox{[}$\,$\mbox{]} out\+\_\+path\+\_\+ptr\+\_\+holder, \mbox{[}Out\mbox{]} Int\+Ptr\mbox{[}$\,$\mbox{]} out\+\_\+path\+\_\+member\+\_\+ptr\+\_\+holder, \mbox{[}Out\mbox{]} int\mbox{[}$\,$\mbox{]} out\+\_\+sizes, int num\+\_\+paths)
+static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_native_methods_a4c51a6d9191bd802e1d66c5bedd0ee07}{Create\+Paths}} (Int\+Ptr graph\+\_\+ptr, \mbox{[}In\mbox{]} int\mbox{[}$\,$\mbox{]} start, \mbox{[}In\mbox{]} int\mbox{[}$\,$\mbox{]} end, string cost\+\_\+type, \mbox{[}Out\mbox{]} Int\+Ptr\mbox{[}$\,$\mbox{]} out\+\_\+path\+\_\+ptr\+\_\+holder, \mbox{[}Out\mbox{]} Int\+Ptr\mbox{[}$\,$\mbox{]} out\+\_\+path\+\_\+member\+\_\+ptr\+\_\+holder, \mbox{[}Out\mbox{]} int\mbox{[}$\,$\mbox{]} out\+\_\+sizes, int num\+\_\+paths)
+\item 
+static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_native_methods_ac65e2c836245c0d6c6a1fab3bc61f1a4}{Create\+All\+To\+All\+Paths}} (Int\+Ptr graph\+\_\+ptr, string cost\+\_\+type, \mbox{[}Out\mbox{]} Int\+Ptr\mbox{[}$\,$\mbox{]} out\+\_\+path\+\_\+ptr\+\_\+holder, \mbox{[}Out\mbox{]} Int\+Ptr\mbox{[}$\,$\mbox{]} out\+\_\+path\+\_\+member\+\_\+ptr\+\_\+holder, \mbox{[}Out\mbox{]} int\mbox{[}$\,$\mbox{]} out\+\_\+sizes, int num\+\_\+paths)
 \end{DoxyCompactItemize}
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
@@ -28,16 +32,34 @@ const string \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_native_met
 \doxysubsection{Detailed Description}
 
 
-Definition at line 16 of file Pathfinding\+Native.\+cs.
+Definition at line 17 of file Pathfinding\+Native.\+cs.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_human_factors_1_1_pathfinding_1_1_native_methods_ad6c05846f5dc7ed531abb7d3ac9ebe1b}\label{class_human_factors_1_1_pathfinding_1_1_native_methods_ad6c05846f5dc7ed531abb7d3ac9ebe1b}} 
+\mbox{\Hypertarget{class_human_factors_1_1_pathfinding_1_1_native_methods_aacec0c6d617c78c505944142d6bd4c4b}\label{class_human_factors_1_1_pathfinding_1_1_native_methods_aacec0c6d617c78c505944142d6bd4c4b}} 
+\index{HumanFactors.Pathfinding.NativeMethods@{HumanFactors.Pathfinding.NativeMethods}!C\_AllToAllPaths@{C\_AllToAllPaths}}
+\index{C\_AllToAllPaths@{C\_AllToAllPaths}!HumanFactors.Pathfinding.NativeMethods@{HumanFactors.Pathfinding.NativeMethods}}
+\doxysubsubsection{\texorpdfstring{C\_AllToAllPaths()}{C\_AllToAllPaths()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{struct_human_factors_1_1_native_utils_1_1_c_vector_and_data}{C\+Vector\+And\+Data}} \mbox{[}$\,$\mbox{]} Human\+Factors.\+Pathfinding.\+Native\+Methods.\+C\+\_\+\+All\+To\+All\+Paths (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{graph\+\_\+ptr,  }\item[{int}]{graph\+\_\+size,  }\item[{string}]{cost\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [package]}}
+
+
+
+Definition at line 115 of file Pathfinding\+Native.\+cs.
+
+
+
+References Human\+Factors.\+Pathfinding.\+Native\+Methods.\+Create\+All\+To\+All\+Paths().
+
+
+
+Referenced by Human\+Factors.\+Pathfinding.\+Shortest\+Path.\+Dijkstra\+All\+To\+All().
+
+\mbox{\Hypertarget{class_human_factors_1_1_pathfinding_1_1_native_methods_a000ba4e4cf47dc3eff4c6ecbd61354ab}\label{class_human_factors_1_1_pathfinding_1_1_native_methods_a000ba4e4cf47dc3eff4c6ecbd61354ab}} 
 \index{HumanFactors.Pathfinding.NativeMethods@{HumanFactors.Pathfinding.NativeMethods}!C\_CreatePath@{C\_CreatePath}}
 \index{C\_CreatePath@{C\_CreatePath}!HumanFactors.Pathfinding.NativeMethods@{HumanFactors.Pathfinding.NativeMethods}}
 \doxysubsubsection{\texorpdfstring{C\_CreatePath()}{C\_CreatePath()}}
-{\footnotesize\ttfamily static \mbox{\hyperlink{struct_human_factors_1_1_native_utils_1_1_c_vector_and_data}{C\+Vector\+And\+Data}} Human\+Factors.\+Pathfinding.\+Native\+Methods.\+C\+\_\+\+Create\+Path (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{graph\+\_\+ptr,  }\item[{int}]{start,  }\item[{int}]{end }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [package]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{struct_human_factors_1_1_native_utils_1_1_c_vector_and_data}{C\+Vector\+And\+Data}} Human\+Factors.\+Pathfinding.\+Native\+Methods.\+C\+\_\+\+Create\+Path (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{graph\+\_\+ptr,  }\item[{int}]{start,  }\item[{int}]{end,  }\item[{string}]{cost\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [package]}}
 
 
 
@@ -53,7 +75,7 @@ A C\+Vector\+And\+Data to the generated path.
 \end{DoxyExceptions}
 
 
-Definition at line 26 of file Pathfinding\+Native.\+cs.
+Definition at line 27 of file Pathfinding\+Native.\+cs.
 
 
 
@@ -63,27 +85,11 @@ References Human\+Factors.\+Pathfinding.\+Native\+Methods.\+Create\+Path(), Huma
 
 Referenced by Human\+Factors.\+Pathfinding.\+Shortest\+Path.\+Dijkstra\+Shortest\+Path().
 
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_human_factors_1_1_pathfinding_1_1_native_methods_ad6c05846f5dc7ed531abb7d3ac9ebe1b_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_human_factors_1_1_pathfinding_1_1_native_methods_ad6c05846f5dc7ed531abb7d3ac9ebe1b_icgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{class_human_factors_1_1_pathfinding_1_1_native_methods_a13d7f289f9366b7c7f9c4b90916f74e4}\label{class_human_factors_1_1_pathfinding_1_1_native_methods_a13d7f289f9366b7c7f9c4b90916f74e4}} 
+\mbox{\Hypertarget{class_human_factors_1_1_pathfinding_1_1_native_methods_a1b79d24699fd670918524395024e9777}\label{class_human_factors_1_1_pathfinding_1_1_native_methods_a1b79d24699fd670918524395024e9777}} 
 \index{HumanFactors.Pathfinding.NativeMethods@{HumanFactors.Pathfinding.NativeMethods}!C\_CreatePaths@{C\_CreatePaths}}
 \index{C\_CreatePaths@{C\_CreatePaths}!HumanFactors.Pathfinding.NativeMethods@{HumanFactors.Pathfinding.NativeMethods}}
 \doxysubsubsection{\texorpdfstring{C\_CreatePaths()}{C\_CreatePaths()}}
-{\footnotesize\ttfamily static \mbox{\hyperlink{struct_human_factors_1_1_native_utils_1_1_c_vector_and_data}{C\+Vector\+And\+Data}} \mbox{[}$\,$\mbox{]} Human\+Factors.\+Pathfinding.\+Native\+Methods.\+C\+\_\+\+Create\+Paths (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{graph\+\_\+ptr,  }\item[{I\+Enumerable$<$ int $>$}]{start,  }\item[{I\+Enumerable$<$ int $>$}]{end }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [package]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{struct_human_factors_1_1_native_utils_1_1_c_vector_and_data}{C\+Vector\+And\+Data}} \mbox{[}$\,$\mbox{]} Human\+Factors.\+Pathfinding.\+Native\+Methods.\+C\+\_\+\+Create\+Paths (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{graph\+\_\+ptr,  }\item[{I\+Enumerable$<$ int $>$}]{start,  }\item[{I\+Enumerable$<$ int $>$}]{end,  }\item[{string}]{cost\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [package]}}
 
 
 
@@ -99,7 +105,7 @@ An array of C\+Vector\+And\+Data to the generated paths.
 \end{DoxyExceptions}
 
 
-Definition at line 48 of file Pathfinding\+Native.\+cs.
+Definition at line 67 of file Pathfinding\+Native.\+cs.
 
 
 
@@ -109,22 +115,6 @@ References Human\+Factors.\+Pathfinding.\+Native\+Methods.\+Create\+Paths().
 
 Referenced by Human\+Factors.\+Pathfinding.\+Shortest\+Path.\+Dijkstra\+Shortest\+Path\+Multi().
 
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_human_factors_1_1_pathfinding_1_1_native_methods_a13d7f289f9366b7c7f9c4b90916f74e4_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_human_factors_1_1_pathfinding_1_1_native_methods_a13d7f289f9366b7c7f9c4b90916f74e4_icgraph}
-\end{center}
-\end{figure}
 \mbox{\Hypertarget{class_human_factors_1_1_pathfinding_1_1_native_methods_ac4db653ce2270e68c7ea18192f41c9f7}\label{class_human_factors_1_1_pathfinding_1_1_native_methods_ac4db653ce2270e68c7ea18192f41c9f7}} 
 \index{HumanFactors.Pathfinding.NativeMethods@{HumanFactors.Pathfinding.NativeMethods}!C\_DestroyPath@{C\_DestroyPath}}
 \index{C\_DestroyPath@{C\_DestroyPath}!HumanFactors.Pathfinding.NativeMethods@{HumanFactors.Pathfinding.NativeMethods}}
@@ -139,50 +129,36 @@ Destroy an existing path object.
 
 Referenced by Human\+Factors.\+Pathfinding.\+Path.\+Release\+Handle().
 
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_human_factors_1_1_pathfinding_1_1_native_methods_ac4db653ce2270e68c7ea18192f41c9f7_icgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{class_human_factors_1_1_pathfinding_1_1_native_methods_acf23678ab15e9f9862a4fe7752214d0d}\label{class_human_factors_1_1_pathfinding_1_1_native_methods_acf23678ab15e9f9862a4fe7752214d0d}} 
+\mbox{\Hypertarget{class_human_factors_1_1_pathfinding_1_1_native_methods_ac65e2c836245c0d6c6a1fab3bc61f1a4}\label{class_human_factors_1_1_pathfinding_1_1_native_methods_ac65e2c836245c0d6c6a1fab3bc61f1a4}} 
+\index{HumanFactors.Pathfinding.NativeMethods@{HumanFactors.Pathfinding.NativeMethods}!CreateAllToAllPaths@{CreateAllToAllPaths}}
+\index{CreateAllToAllPaths@{CreateAllToAllPaths}!HumanFactors.Pathfinding.NativeMethods@{HumanFactors.Pathfinding.NativeMethods}}
+\doxysubsubsection{\texorpdfstring{CreateAllToAllPaths()}{CreateAllToAllPaths()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} Human\+Factors.\+Pathfinding.\+Native\+Methods.\+Create\+All\+To\+All\+Paths (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{graph\+\_\+ptr,  }\item[{string}]{cost\+\_\+type,  }\item[{\mbox{[}\+Out\mbox{]} Int\+Ptr\mbox{[}$\,$\mbox{]}}]{out\+\_\+path\+\_\+ptr\+\_\+holder,  }\item[{\mbox{[}\+Out\mbox{]} Int\+Ptr\mbox{[}$\,$\mbox{]}}]{out\+\_\+path\+\_\+member\+\_\+ptr\+\_\+holder,  }\item[{\mbox{[}\+Out\mbox{]} int\mbox{[}$\,$\mbox{]}}]{out\+\_\+sizes,  }\item[{int}]{num\+\_\+paths }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by Human\+Factors.\+Pathfinding.\+Native\+Methods.\+C\+\_\+\+All\+To\+All\+Paths().
+
+\mbox{\Hypertarget{class_human_factors_1_1_pathfinding_1_1_native_methods_aad3740f1d798a3bc25ede5b9c47f3cf1}\label{class_human_factors_1_1_pathfinding_1_1_native_methods_aad3740f1d798a3bc25ede5b9c47f3cf1}} 
 \index{HumanFactors.Pathfinding.NativeMethods@{HumanFactors.Pathfinding.NativeMethods}!CreatePath@{CreatePath}}
 \index{CreatePath@{CreatePath}!HumanFactors.Pathfinding.NativeMethods@{HumanFactors.Pathfinding.NativeMethods}}
 \doxysubsubsection{\texorpdfstring{CreatePath()}{CreatePath()}}
-{\footnotesize\ttfamily static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} Human\+Factors.\+Pathfinding.\+Native\+Methods.\+Create\+Path (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{graph\+\_\+ptr,  }\item[{int}]{start,  }\item[{int}]{end,  }\item[{ref int}]{out\+\_\+size,  }\item[{ref Int\+Ptr}]{out\+\_\+path,  }\item[{ref Int\+Ptr}]{out\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} Human\+Factors.\+Pathfinding.\+Native\+Methods.\+Create\+Path (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{graph\+\_\+ptr,  }\item[{int}]{start,  }\item[{int}]{end,  }\item[{string}]{cost\+\_\+type,  }\item[{ref int}]{out\+\_\+size,  }\item[{ref Int\+Ptr}]{out\+\_\+path,  }\item[{ref Int\+Ptr}]{out\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
 Referenced by Human\+Factors.\+Pathfinding.\+Native\+Methods.\+C\+\_\+\+Create\+Path().
 
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_human_factors_1_1_pathfinding_1_1_native_methods_acf23678ab15e9f9862a4fe7752214d0d_icgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{class_human_factors_1_1_pathfinding_1_1_native_methods_a44d6763edb3913ed69920ba051b30c19}\label{class_human_factors_1_1_pathfinding_1_1_native_methods_a44d6763edb3913ed69920ba051b30c19}} 
+\mbox{\Hypertarget{class_human_factors_1_1_pathfinding_1_1_native_methods_a4c51a6d9191bd802e1d66c5bedd0ee07}\label{class_human_factors_1_1_pathfinding_1_1_native_methods_a4c51a6d9191bd802e1d66c5bedd0ee07}} 
 \index{HumanFactors.Pathfinding.NativeMethods@{HumanFactors.Pathfinding.NativeMethods}!CreatePaths@{CreatePaths}}
 \index{CreatePaths@{CreatePaths}!HumanFactors.Pathfinding.NativeMethods@{HumanFactors.Pathfinding.NativeMethods}}
 \doxysubsubsection{\texorpdfstring{CreatePaths()}{CreatePaths()}}
-{\footnotesize\ttfamily static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} Human\+Factors.\+Pathfinding.\+Native\+Methods.\+Create\+Paths (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{graph\+\_\+ptr,  }\item[{\mbox{[}\+In\mbox{]} int\mbox{[}$\,$\mbox{]}}]{start,  }\item[{\mbox{[}\+In\mbox{]} int\mbox{[}$\,$\mbox{]}}]{end,  }\item[{\mbox{[}\+Out\mbox{]} Int\+Ptr\mbox{[}$\,$\mbox{]}}]{out\+\_\+path\+\_\+ptr\+\_\+holder,  }\item[{\mbox{[}\+Out\mbox{]} Int\+Ptr\mbox{[}$\,$\mbox{]}}]{out\+\_\+path\+\_\+member\+\_\+ptr\+\_\+holder,  }\item[{\mbox{[}\+Out\mbox{]} int\mbox{[}$\,$\mbox{]}}]{out\+\_\+sizes,  }\item[{int}]{num\+\_\+paths }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} Human\+Factors.\+Pathfinding.\+Native\+Methods.\+Create\+Paths (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{graph\+\_\+ptr,  }\item[{\mbox{[}\+In\mbox{]} int\mbox{[}$\,$\mbox{]}}]{start,  }\item[{\mbox{[}\+In\mbox{]} int\mbox{[}$\,$\mbox{]}}]{end,  }\item[{string}]{cost\+\_\+type,  }\item[{\mbox{[}\+Out\mbox{]} Int\+Ptr\mbox{[}$\,$\mbox{]}}]{out\+\_\+path\+\_\+ptr\+\_\+holder,  }\item[{\mbox{[}\+Out\mbox{]} Int\+Ptr\mbox{[}$\,$\mbox{]}}]{out\+\_\+path\+\_\+member\+\_\+ptr\+\_\+holder,  }\item[{\mbox{[}\+Out\mbox{]} int\mbox{[}$\,$\mbox{]}}]{out\+\_\+sizes,  }\item[{int}]{num\+\_\+paths }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
 Referenced by Human\+Factors.\+Pathfinding.\+Native\+Methods.\+C\+\_\+\+Create\+Paths().
 
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_human_factors_1_1_pathfinding_1_1_native_methods_a44d6763edb3913ed69920ba051b30c19_icgraph}
-\end{center}
-\end{figure}
 \mbox{\Hypertarget{class_human_factors_1_1_pathfinding_1_1_native_methods_a6f4e5a5b6ac997653d300eb31f1cc780}\label{class_human_factors_1_1_pathfinding_1_1_native_methods_a6f4e5a5b6ac997653d300eb31f1cc780}} 
 \index{HumanFactors.Pathfinding.NativeMethods@{HumanFactors.Pathfinding.NativeMethods}!DestroyPath@{DestroyPath}}
 \index{DestroyPath@{DestroyPath}!HumanFactors.Pathfinding.NativeMethods@{HumanFactors.Pathfinding.NativeMethods}}
@@ -200,7 +176,7 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 18 of file Pathfinding\+Native.\+cs.
+Definition at line 19 of file Pathfinding\+Native.\+cs.
 
 
 

@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['safehandle_141',['SafeHandle',['../class_safe_handle.html',1,'']]],
-  ['shortestpath_142',['ShortestPath',['../class_human_factors_1_1_pathfinding_1_1_shortest_path.html',1,'HumanFactors::Pathfinding']]]
+  ['rayresult_161',['RayResult',['../struct_human_factors_1_1_ray_tracing_1_1_ray_result.html',1,'HumanFactors::RayTracing']]],
+  ['rayresults_162',['RayResults',['../class_human_factors_1_1_ray_tracing_1_1_ray_results.html',1,'HumanFactors::RayTracing']]],
+  ['resultarray_163',['ResultArray',['../class_human_factors_1_1_view_analysis_1_1_result_array.html',1,'HumanFactors::ViewAnalysis']]]
 ];
