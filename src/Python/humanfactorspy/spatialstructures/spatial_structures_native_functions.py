@@ -109,7 +109,7 @@ def C_AddEdgeFromNodes(
     child: Tuple[float, float, float],
     score: float,
     cost_type: str,
-) -> None:
+    ) -> None:
     """ Add a new edge to the graph """
 
     # Convert to types usable in C
