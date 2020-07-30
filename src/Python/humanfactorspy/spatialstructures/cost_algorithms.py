@@ -7,6 +7,8 @@ A set of algorithms to calculate new cost types for Graphs
 from .graph import Graph
 from .spatial_structures_native_functions import C_CalculateAndStoreCrossSlope, C_CalculateAndStoreEnergyExpenditure
 
+__all__ = ['CostAlgorithmKeys', 'CalculateEnergyExpenditure', 'CalculateCrossSlope']
+
 class CostAlgorithmKeys():
     """ Contains the keys for each cost algorithm in Cost Algorithms """
     CROSS_SLOPE = "CrossSlope"
