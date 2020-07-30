@@ -178,4 +178,7 @@ def test_AllToAllPaths(PathTestGraphAlternateCosts):
             expected_path = DijkstraShortestPath(g, parent, child)
 
             # Assert equality
-            assert(expected_path == actual_path)
+            if expected_path is None:
+                assert(expected_path == actual_path)
+            else:
+                assert(list(expected_path.array) == list(actual_path.array))

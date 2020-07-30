@@ -171,7 +171,7 @@ def DijkstraShortestPath(
 def DijkstraFindAllShortestPaths(
     graph: Graph,
     cost_type: str = "",
-    ) -> Union[List[Union[Path, None]], Union[Path, None]]:
+    ) -> List[Union[Path, None]]:
     """ Find the shortest path between every possible combination of nodes 
         in a graph.
 
@@ -198,4 +198,17 @@ def DijkstraFindAllShortestPaths(
         KeyError: cost_type wasn't blank and did not point to an already defined
             cost in the graph
     """
-    raise NotImplementedError()
+
+    # Call out to native code and get results
+    all_results = pathfinder_native_functions.C_FindAllPaths(
+        graph.graph_ptr,
+        graph.NumNodes(),
+        cost_type
+    )
+
+    # Wrap values that weren't null in python paths
+    out_paths = [Path(result[0], result[1], result[2])
+                 if result else None for result in all_results]
+
+    return out_paths
+
