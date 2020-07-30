@@ -16,14 +16,32 @@ import humanfactorspy.spatialstructures.cost_algorithms as cost_algorithms
 # of any test function to pass the return of this function to it.
 # This can drastically cut down on code size, to get to the logic
 # that matters. 
-@pytest.fixture 
-def SimpleGraph()->Graph:
+@pytest.fixture
+def SimpleGraph() -> Graph:
     """ Create a simple graph with 3 nodes """
     g = Graph()
     g.AddEdgeToGraph(0, 1, 100)
     g.AddEdgeToGraph(0, 2, 50)
     g.AddEdgeToGraph(1, 2, 20)
     g.CompressToCSR()
+    return g
+
+
+@pytest.fixture
+def SimpleGraphWithCosts() -> Graph:
+    # Create a graph, add some edges, then compress it
+    g = Graph()
+    g.AddEdgeToGraph(0, 1, 100)
+    g.AddEdgeToGraph(0, 2, 50)
+    g.AddEdgeToGraph(1, 2, 20)
+    g.CompressToCSR()
+
+    # Add some edges for an alternate cost
+    test_cost = "Test"
+    g.AddEdgeToGraph(0, 1, 1, test_cost)
+    g.AddEdgeToGraph(0, 2, 1, test_cost)
+    g.AddEdgeToGraph(1, 2, 1, test_cost)
+
     return g
 
 def test_CreateGraphAndNodes():
@@ -91,22 +109,11 @@ def test_CreateNodes():
         assert node[2] == np_node[2]
 
 
-def test_AggregateCostType():
+def test_AggregateCostType(SimpleGraphWithCosts):
     """ Test aggregating the edges of a graph using an alternate
     cost type """
 
-    # Create a graph, add some edges, then compress it
-    g = Graph()
-    g.AddEdgeToGraph(0, 1, 100)
-    g.AddEdgeToGraph(0, 2, 50)
-    g.AddEdgeToGraph(1, 2, 20)
-    g.CompressToCSR()
-
-    # Add some edges for an alternate cost
-    test_cost = "Test"
-    g.AddEdgeToGraph(0, 1, 1, test_cost)
-    g.AddEdgeToGraph(0, 2, 1, test_cost)
-    g.AddEdgeToGraph(1, 2, 1, test_cost)
+    g = SimpleGraphWithCosts
 
     # Aggregate the edges of both the default
     # and alternate costs
@@ -195,45 +202,28 @@ def test_AddingAndReadingCostTypes():
         g.AddEdgeToGraph(1, 0, 10, test_cost)
 
 
-def test_ClearCost():
-    """ Ensures that a cost_type can be cleared by calling Clear 
+def test_ClearCost(SimpleGraphWithCosts):
+    """ Ensures that a cost_type can be cleared by calling Clear
     """
-
-    # Create a graph, add some edges, then compress it
-    g = Graph()
-    g.AddEdgeToGraph(0, 1, 100)
-    g.AddEdgeToGraph(0, 2, 50)
-    g.AddEdgeToGraph(1, 2, 20)
-    g.CompressToCSR()
-
-    # Add some edges to an alternate cost
-    test_cost = "Test"
-    g.AddEdgeToGraph(0, 1, 1, test_cost)
-    g.AddEdgeToGraph(0, 2, 1, test_cost)
-    g.AddEdgeToGraph(1, 2, 1, test_cost)
+    g = SimpleGraphWithCosts
 
     # Clear this alternate cost from the graph
     g.Clear(test_cost)
-    
+
     # Ensure that the graph still exists
-    assert(g.GetEdgeCost(0,1) == 100)
+    assert(g.GetEdgeCost(0, 1) == 100)
 
     # If we try to get the cost of one of it's edges
     # we should get a no_cost exception
     with pytest.raises(KeyError):
         g.GetEdgeCost(0, 1, test_cost)
 
-def test_NumNodesEqualsLengthOfNodes():
+
+def test_NumNodesEqualsLengthOfNodes(SimpleGraph):
     """ Asserts that the number returned by numnodes actually matches
         the length of the graph's nodes array """
-    
-    # Create graph and dd some edges
-    g = Graph()
-    g.AddEdgeToGraph(0, 1, 100)
-    g.AddEdgeToGraph(0, 2, 50)
-    g.AddEdgeToGraph(1, 2, 20)
-    g.CompressToCSR()
 
+    g = SimpleGraph
 
     # Get the nodes and num nodes
     nodes = g.getNodes().array
@@ -242,16 +232,10 @@ def test_NumNodesEqualsLengthOfNodes():
     # Assert that they are equal
     assert(len(nodes) == num_nodes)
 
-def test_StoresEnergyExpenditure():
-    """ Ensure energy expenditure is being added to the graph once CostAlgorithms.CalculateEnergyExpenditure is called """
-
-    # Create a new graph 
-
-    pass
 
 def test_StoresCrossSlope(SimpleGraph):
     """ Ensure cross slope  is being added to the graph once CrossSlope is called """
-    
+
     # Create a test graph
     g = CreateSimpleGraph()
 
@@ -266,14 +250,14 @@ def test_StoresCrossSlope(SimpleGraph):
     print(csr)
 
 
-def test_StoresCrossSlope(SimpleGraph):
+def test_StoresEnergyExpenditure(SimpleGraph):
     """ Ensure energy expenditure is being added to the graph once EnergyExpenditure  is called """
 
     # Calculate cross slope for it
     cost_algorithms.CalculateCrossSlope(SimpleGraph)
 
     # Get the cross algorithm key for it
-    key = cost_algorithms.CostAlgorithmKeys.CROSS_SLOPE
+    key = cost_algorithms.CostAlgorithmKeys.ENERGY_EXPENDITURE
 
     # Print the CSR of it
     csr = SimpleGraph.CompressToCSR(key)
