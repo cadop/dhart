@@ -13,7 +13,7 @@ HFPython = getDLLHandle()
 
 def C_FindPath(
     graph_ptr: c_void_p, start: int, end: int, cost_type: str = ""
-) -> Union[Tuple[c_void_p, c_void_p, int], None]:
+    ) -> Union[Tuple[c_void_p, c_void_p, int], None]:
     """ Find a path in C++ from start to end 
     
     Args:
@@ -74,7 +74,7 @@ def C_FindPath(
 
 def C_FindPaths(
     graph_ptr: c_void_p, start: List[int], end: List[int], cost_type: str = ""
-) -> List[Tuple[c_void_p, c_void_p, int]]:
+    ) -> List[Tuple[c_void_p, c_void_p, int]]:
     """ Find multiple paths in C++ from start to end
     
     Args:
@@ -135,6 +135,66 @@ def C_FindPaths(
     # Return results
     return out_tuples
 
+
+def C_FindAllPaths(
+    graph_ptr: c_void_p,
+    num_nodes: int,
+    cost_type: str
+    ) -> List[Union[Tuple[c_void_p, c_void_p, int], None]]:
+    """ Find a path between every node in the graph
+
+    Args:
+        graph_ptr: A pointer to a valid graph
+        num_nodes : The number of nodes in the graph
+        cost_type: The type of cost to use from the graph.
+            If left blank, will use the cost that the
+            graph was generated with. 
+
+    Returns:
+        c_void_p: Pointer to the Path object in C++
+        c_void_p: Pointer to the Path's data in C++
+        int: The size of the generated path
+        OR
+        None: If there was no path between A and B
+
+    Raises:
+        KeyError: cost_type didn't exist already in the graph
+    """
+    
+    # This will generate about num_nodes^2 paths
+    num_paths = num_nodes * num_nodes
+
+    # Cinterface function
+    path_sizes_type = c_int * num_paths
+    c_path_num = c_int(num_paths)
+    cost_str = GetStringPtr(cost_type)
+    c_sizes = path_sizes_type()
+    path_ptrs = (c_void_p * num_paths)()
+    data_ptrs = (c_void_p * num_paths)()
+
+    # Call into native code
+    res = HFPython.CreateAllToAllPaths(
+        graph_ptr,
+        cost_str,
+        byref(path_ptrs),
+        byref(data_ptrs),
+        byref(c_sizes),
+        c_path_num,
+    )
+
+    # If NO_COST is returned then we asked for a cost that
+    # that the graph didn't have
+    if res == HF_STATUS.NO_COST:
+        raise KeyError(f"Tried to generate a path with non-existant cost {cost_type}.")
+
+    # Read outputs. Replace paths that couldn't be generated
+    # with None in the output array
+    out_tuples = [
+        out_tuple if out_tuple[2] != 0 else None
+        for out_tuple in zip(path_ptrs, data_ptrs, c_sizes)
+    ]
+
+    return out_tuples
 
 def C_DestroyPath(path_ptr: c_void_p) -> None:
     """ Delete a path in C++"""
