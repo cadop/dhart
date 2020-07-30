@@ -39,7 +39,7 @@ def ConvertPointsToArray(
     points: Union[Tuple[float, float, float], Iterable[Tuple[float, float, float]]]
 ) -> c_float:
     """ Convert a list of floats to a flat c-style array """
-    if isinstance(points, tuple):
+    if isinstance(points, (tuple, list)):
         point_arr_type = c_float * 3
         point_arr = point_arr_type()
         point_arr[0] = points[0]
