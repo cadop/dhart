@@ -9,10 +9,23 @@ from humanfactorspy.raytracer import embree_raytracer, EmbreeBVH
 from humanfactorspy.spatialstructures import NodeList, NodeStruct, Graph, CostAggregationType
 from humanfactorspy.Exceptions import LogicError, InvalidCostOperation
 import humanfactorspy.spatialstructures.node as NodeFunctions
+import humanfactorspy.spatialstructures.cost_algorithms as cost_algorithms
 
 
-# from humanfactorspy.graphgenerator.graph_generator import GenerateGraph
-# Setup
+# This is a pytest fixture!  You can add SimpleGraph to the arguments
+# of any test function to pass the return of this function to it.
+# This can drastically cut down on code size, to get to the logic
+# that matters. 
+@pytest.fixture 
+def SimpleGraph()->Graph:
+    """ Create a simple graph with 3 nodes """
+    g = Graph()
+    g.AddEdgeToGraph(0, 1, 100)
+    g.AddEdgeToGraph(0, 2, 50)
+    g.AddEdgeToGraph(1, 2, 20)
+    g.CompressToCSR()
+    return g
+
 def test_CreateGraphAndNodes():
     nodes = [(1, 2, 3), (2, 3, 4), (19, 2, 3)]
 
@@ -229,3 +242,39 @@ def test_NumNodesEqualsLengthOfNodes():
     # Assert that they are equal
     assert(len(nodes) == num_nodes)
 
+def test_StoresEnergyExpenditure():
+    """ Ensure energy expenditure is being added to the graph once CostAlgorithms.CalculateEnergyExpenditure is called """
+
+    # Create a new graph 
+
+    pass
+
+def test_StoresCrossSlope(SimpleGraph):
+    """ Ensure cross slope  is being added to the graph once CrossSlope is called """
+    
+    # Create a test graph
+    g = CreateSimpleGraph()
+
+    # Calculate cross slope for it
+    cost_algorithms.CalculateCrossSlope(g)
+
+    # Get the cross algorithm key for it
+    key = cost_algorithms.CostAlgorithmKeys.CROSS_SLOPE
+
+    # Print the CSR of it
+    csr = g.CompressToCSR(key)
+    print(csr)
+
+
+def test_StoresCrossSlope(SimpleGraph):
+    """ Ensure energy expenditure is being added to the graph once EnergyExpenditure  is called """
+
+    # Calculate cross slope for it
+    cost_algorithms.CalculateCrossSlope(SimpleGraph)
+
+    # Get the cross algorithm key for it
+    key = cost_algorithms.CostAlgorithmKeys.CROSS_SLOPE
+
+    # Print the CSR of it
+    csr = SimpleGraph.CompressToCSR(key)
+    print(csr)
