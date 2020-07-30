@@ -148,37 +148,51 @@ def test_MultipleShortestPathAltCost(PathTestGraphAlternateCosts):
             assert correct_path[i][1] == SP[i][1]
 
 
+def AssertValidityOfAllToAllPaths(
+    g,
+    all_paths,
+    cost_type=""
+    ):
+    """ Checks if a set of all to all paths is equivalent
+        to paths that were generated one by one """
+
+    num_nodes = g.NumNodes()
+
+    # Iterate through every path in the list, using the number of nodes
+    # to determine the position of a path from it's start and end nodes
+    for start in range(0, num_nodes):
+        for end in range(0, num_nodes):
+
+            # Calculate the index and get the path from start to end
+            path_index = num_nodes * start + end
+            actual_path = all_paths[path_index]
+
+            # Calculate the expected shortest path using the single method
+            expected_path = DijkstraShortestPath(g, start, end, cost_type)
+
+            # Assert equality
+            if expected_path is None:
+                assert(actual_path is None)
+            else:  # If they're not null, compare their members
+                assert(list(expected_path.array) == list(actual_path.array))
+
+
 def test_AllToAllPaths(PathTestGraphAlternateCosts):
     """ Assert that the results from all to all equal the actua
         shortest paths between each set of nodes. """
 
     g = PathTestGraphAlternateCosts
 
-    # Get the result of all paths
+    # Assert that this will throw a key error 
+    with pytest.raises(KeyError):
+        DijkstraFindAllShortestPaths(g, "CostDontExist")
+
+    # Get the result of all paths then check them against
+    # the single path result
     all_paths = DijkstraFindAllShortestPaths(g)
+    AssertValidityOfAllToAllPaths(g, all_paths)
 
-    # Compare results to the results of finding a path
-    # using the single path method
-    num_nodes = g.NumNodes()
+    # Now do the same for an alternate cost
+    all_alt_paths = DijkstraFindAllShortestPaths(g, test_cost)
+    AssertValidityOfAllToAllPaths(g, all_alt_paths, test_cost)
 
-    for parent in range(0, num_nodes):
-
-        # Each parent will have a path to every other node in the
-        # graph, so it's paths will be num_nodes * parent to
-        # num_nodes * parent + num_nodes
-        offset = num_nodes * parent + num_nodes
-
-        for child in range(0, num_nodes):
-
-            # Get the path at this index
-            path_index = num_nodes * parent + child
-            actual_path = all_paths[path_index]
-
-            # Calculate the expected shortest path using the single method
-            expected_path = DijkstraShortestPath(g, parent, child)
-
-            # Assert equality
-            if expected_path is None:
-                assert(expected_path == actual_path)
-            else:
-                assert(list(expected_path.array) == list(actual_path.array))

@@ -135,10 +135,14 @@ def C_FindPaths(
     # Return results
     return out_tuples
 
-def C_FindAllPaths(graph_ptr : c_void_p, num_nodes: int, cost_type: str
-    )-> List[Union[Tuple[c_void_p, c_void_p, int]], None]:
+
+def C_FindAllPaths(
+    graph_ptr: c_void_p,
+    num_nodes: int,
+    cost_type: str
+    ) -> List[Union[Tuple[c_void_p, c_void_p, int], None]]:
     """ Find a path between every node in the graph
-    
+
     Args:
         graph_ptr: A pointer to a valid graph
         num_nodes : The number of nodes in the graph
