@@ -41,7 +41,7 @@ def GetStringPtr(string: str) -> c_char_p:
 
 def ConvertPointsToArray(
     points: Union[Tuple[float, float, float], Iterable[Tuple[float, float, float]]]
-) -> c_float:
+    ) -> c_float:
     """ Convert a list of floats to a flat c-style array """
     # If it's a tuple or list of floats, just do the one
     if (
