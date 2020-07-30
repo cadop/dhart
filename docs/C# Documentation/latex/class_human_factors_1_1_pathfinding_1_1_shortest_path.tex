@@ -8,36 +8,79 @@ Functions for finding the shortest path between two nodes in a graph.
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_path}{Path}} \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_shortest_path_ab4bd85d84d83a30601a190f583e097ac}{Dijkstra\+Shortest\+Path}} (\mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}} graph, int start\+\_\+id, int end\+\_\+id)
+static \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_path}{Path}} \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_shortest_path_adc3fbf31af391a4ce9efd911c0c74fee}{Dijkstra\+Shortest\+Path}} (\mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}} graph, int start\+\_\+id, int end\+\_\+id, string cost\+\_\+type=\char`\"{}\char`\"{})
 \begin{DoxyCompactList}\small\item\em Perform Dijkstra\textquotesingle{}s shortest path algorithm to find a path between two nodes. \end{DoxyCompactList}\item 
-static \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_path}{Path}} \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_shortest_path_a7ca51d84089c860860ad7fb2fd717f61}{Dijkstra\+Shortest\+Path}} (\mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}} graph, \mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}} start\+\_\+node, \mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}} end\+\_\+node)
+static \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_path}{Path}} \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_shortest_path_a394c96543ad621b2e5d98554153d74b4}{Dijkstra\+Shortest\+Path}} (\mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}} graph, \mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}} start\+\_\+node, \mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}} end\+\_\+node, string cost\+\_\+type=\char`\"{}\char`\"{})
 \begin{DoxyCompactList}\small\item\em Perform Dijkstra\textquotesingle{}s shortest path algorithm to find a path between two nodes. \end{DoxyCompactList}\item 
-static \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_path}{Path}}\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_shortest_path_ac63e41c1bc4310f6e64993c30d4a0fe5}{Dijkstra\+Shortest\+Path\+Multi}} (\mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}} graph, int\mbox{[}$\,$\mbox{]} start\+\_\+ids, int\mbox{[}$\,$\mbox{]} end\+\_\+ids)
+static \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_path}{Path}}\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_shortest_path_ab7f58f298125194e33d6c69ed4797442}{Dijkstra\+Shortest\+Path\+Multi}} (\mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}} graph, int\mbox{[}$\,$\mbox{]} start\+\_\+ids, int\mbox{[}$\,$\mbox{]} end\+\_\+ids, string cost\+\_\+type=\char`\"{}\char`\"{})
 \begin{DoxyCompactList}\small\item\em Find the shortest paths between each pair of start\+\_\+id and end\+\_\+id in order. \end{DoxyCompactList}\item 
-static \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_path}{Path}}\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_shortest_path_a82d7192b92262f014d7d94ff1e898afc}{Dijkstra\+Shortest\+Path\+Multi}} (\mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}} graph, I\+Enumerable$<$ \mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}} $>$ start\+\_\+nodes, I\+Enumerable$<$ \mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}} $>$ end\+\_\+nodes)
-\begin{DoxyCompactList}\small\item\em Find the shortest paths between each pair of start\+\_\+id and end\+\_\+id in order. \end{DoxyCompactList}\end{DoxyCompactItemize}
+static \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_path}{Path}}\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_shortest_path_a9fb6fc6aff938136f7f9de42e5d8e5bc}{Dijkstra\+Shortest\+Path\+Multi}} (\mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}} graph, I\+Enumerable$<$ \mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}} $>$ start\+\_\+nodes, I\+Enumerable$<$ \mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}} $>$ end\+\_\+nodes, string cost\+\_\+type=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Find the shortest paths between each pair of start\+\_\+id and end\+\_\+id in order. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_path}{Path}}\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_shortest_path_a3ede2597cc17a4f1a130741b0163bbab}{Dijkstra\+All\+To\+All}} (\mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}} g, string cost\+\_\+type=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Generate a path from every node in the graph to every other node in a graph. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Functions for finding the shortest path between two nodes in a graph. 
 
+\begin{DoxyRemark}{Remarks}
+The shortest path functions will use Dijkstra\textquotesingle{}s algorithm to find the shortest path between one or more nodes in a Graph. Since the graph can hold multiple costs for each contained edge, the type of cost used in this calculation can be specified for each function. This allows for paths to be generated using costs generated by the Cost\+Algorithms in \mbox{\hyperlink{namespace_human_factors_1_1_spatial_structures}{Spatial\+Structures}} such as cross slope, or energy expenditure.
+\end{DoxyRemark}
 \begin{DoxySeeAlso}{See also}
 \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_shortest_path}{Shortest\+Path}} for generating a single path between two nodes. 
 
-\mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_shortest_path_ab4bd85d84d83a30601a190f583e097ac}{Dijkstra\+Shortest\+Path}} for generating multiple paths at once. 
+\mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_shortest_path_adc3fbf31af391a4ce9efd911c0c74fee}{Dijkstra\+Shortest\+Path}} for generating multiple paths at once. 
+
+\mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Spatial\+Structures.\+Graph}} for more information on how it stores multiple costs. 
 \end{DoxySeeAlso}
 
 
-Definition at line 32 of file Shortest\+Path.\+cs.
+Definition at line 40 of file Shortest\+Path.\+cs.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_human_factors_1_1_pathfinding_1_1_shortest_path_ab4bd85d84d83a30601a190f583e097ac}\label{class_human_factors_1_1_pathfinding_1_1_shortest_path_ab4bd85d84d83a30601a190f583e097ac}} 
+\mbox{\Hypertarget{class_human_factors_1_1_pathfinding_1_1_shortest_path_a3ede2597cc17a4f1a130741b0163bbab}\label{class_human_factors_1_1_pathfinding_1_1_shortest_path_a3ede2597cc17a4f1a130741b0163bbab}} 
+\index{HumanFactors.Pathfinding.ShortestPath@{HumanFactors.Pathfinding.ShortestPath}!DijkstraAllToAll@{DijkstraAllToAll}}
+\index{DijkstraAllToAll@{DijkstraAllToAll}!HumanFactors.Pathfinding.ShortestPath@{HumanFactors.Pathfinding.ShortestPath}}
+\doxysubsubsection{\texorpdfstring{DijkstraAllToAll()}{DijkstraAllToAll()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_path}{Path}} \mbox{[}$\,$\mbox{]} Human\+Factors.\+Pathfinding.\+Shortest\+Path.\+Dijkstra\+All\+To\+All (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}}}]{g,  }\item[{string}]{cost\+\_\+type = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Generate a path from every node in the graph to every other node in a graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph to generate paths in. \\
+\hline
+{\em cost\+\_\+type} & Type of cost to use for path generation. If left blank will use the default cost of the graph\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An array of paths with a length equal to the number of nodes in {\ttfamily g} squared. Paths will be returned in order starting with all paths from node 0, then all paths from node 1, etc. If a path could not be generated between a set of nodes, then path at that index will be null.
+\end{DoxyReturn}
+\begin{DoxyPrecond}{Precondition}
+If {\ttfamily cost\+\_\+type} is not left as the default, then it must be the name of a valid cost already defined in {\ttfamily graph}.
+\end{DoxyPrecond}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Key\+Not\+Found\+Exception} & {\ttfamily cost\+\_\+type} wasn\textquotesingle{}t left as blank, and didn\textquotesingle{}t refer to the name of any cost that already exists in {\ttfamily graph}. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 222 of file Shortest\+Path.\+cs.
+
+
+
+References Human\+Factors.\+Pathfinding.\+Native\+Methods.\+C\+\_\+\+All\+To\+All\+Paths(), Human\+Factors.\+Spatial\+Structures.\+Graph.\+Num\+Nodes(), and Human\+Factors.\+Native\+Utils.\+Native\+Object.\+Pointer.
+
+\mbox{\Hypertarget{class_human_factors_1_1_pathfinding_1_1_shortest_path_adc3fbf31af391a4ce9efd911c0c74fee}\label{class_human_factors_1_1_pathfinding_1_1_shortest_path_adc3fbf31af391a4ce9efd911c0c74fee}} 
 \index{HumanFactors.Pathfinding.ShortestPath@{HumanFactors.Pathfinding.ShortestPath}!DijkstraShortestPath@{DijkstraShortestPath}}
 \index{DijkstraShortestPath@{DijkstraShortestPath}!HumanFactors.Pathfinding.ShortestPath@{HumanFactors.Pathfinding.ShortestPath}}
 \doxysubsubsection{\texorpdfstring{DijkstraShortestPath()}{DijkstraShortestPath()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily static \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_path}{Path}} Human\+Factors.\+Pathfinding.\+Shortest\+Path.\+Dijkstra\+Shortest\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}}}]{graph,  }\item[{int}]{start\+\_\+id,  }\item[{int}]{end\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_path}{Path}} Human\+Factors.\+Pathfinding.\+Shortest\+Path.\+Dijkstra\+Shortest\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}}}]{graph,  }\item[{int}]{start\+\_\+id,  }\item[{int}]{end\+\_\+id,  }\item[{string}]{cost\+\_\+type = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -49,24 +92,30 @@ Perform Dijkstra\textquotesingle{}s shortest path algorithm to find a path betwe
 \hline
 {\em start\+\_\+id} & The ID of the node to start at. \\
 \hline
-{\em end\+\_\+id} & The ID of the node to find a path to.\\
+{\em end\+\_\+id} & The ID of the node to find a path to. \\
+\hline
+{\em cost\+\_\+type} & The type of cost to use for generating the path. If left blank, will use the cost that the graph was created with. In the case of the graph generator, the default cost is distance.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-A path from {\itshape start\+\_\+id}  to {\itshape end\+\_\+id}  ~\newline
-
+The shortest path from start\+\_\+node to end\+\_\+node or null if no path could be found.
 \end{DoxyReturn}
+\begin{DoxyPrecond}{Precondition}
+1) {\ttfamily start\+\_\+id} and {\ttfamily end\+\_\+id} must be the X,Y,Z position of nodes that already exist in {\ttfamily graph}. 
+
+2) If {\ttfamily cost\+\_\+type} is not left as the default, then it must be the name of a valid cost already defined in {\ttfamily graph}.
+\end{DoxyPrecond}
 
 \begin{DoxyExceptions}{Exceptions}
-{\em Index\+Out\+Of\+Range\+Exception} & {\itshape start\+\_\+id}  or {\itshape end\+\_\+id}  are not the ids of any nodes in the graph.\\
+{\em Key\+Not\+Found\+Exception} & {\ttfamily cost\+\_\+type} wasn\textquotesingle{}t left as blank, and didn\textquotesingle{}t refer to the name of any cost that already exists in the graph.\\
 \hline
 \end{DoxyExceptions}
 \begin{DoxySeeAlso}{See also}
-\mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_shortest_path_ac63e41c1bc4310f6e64993c30d4a0fe5}{Dijkstra\+Shortest\+Path\+Multi}} for efficently generating multiple paths in parallel. 
+\mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_shortest_path_ab7f58f298125194e33d6c69ed4797442}{Dijkstra\+Shortest\+Path\+Multi}} for efficently generating multiple paths in parallel. 
 \end{DoxySeeAlso}
 
 
-Definition at line 48 of file Shortest\+Path.\+cs.
+Definition at line 63 of file Shortest\+Path.\+cs.
 
 
 
@@ -76,27 +125,11 @@ References Human\+Factors.\+Pathfinding.\+Native\+Methods.\+C\+\_\+\+Create\+Pat
 
 Referenced by Human\+Factors.\+Pathfinding.\+Shortest\+Path.\+Dijkstra\+Shortest\+Path().
 
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_human_factors_1_1_pathfinding_1_1_shortest_path_ab4bd85d84d83a30601a190f583e097ac_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_human_factors_1_1_pathfinding_1_1_shortest_path_ab4bd85d84d83a30601a190f583e097ac_icgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{class_human_factors_1_1_pathfinding_1_1_shortest_path_a7ca51d84089c860860ad7fb2fd717f61}\label{class_human_factors_1_1_pathfinding_1_1_shortest_path_a7ca51d84089c860860ad7fb2fd717f61}} 
+\mbox{\Hypertarget{class_human_factors_1_1_pathfinding_1_1_shortest_path_a394c96543ad621b2e5d98554153d74b4}\label{class_human_factors_1_1_pathfinding_1_1_shortest_path_a394c96543ad621b2e5d98554153d74b4}} 
 \index{HumanFactors.Pathfinding.ShortestPath@{HumanFactors.Pathfinding.ShortestPath}!DijkstraShortestPath@{DijkstraShortestPath}}
 \index{DijkstraShortestPath@{DijkstraShortestPath}!HumanFactors.Pathfinding.ShortestPath@{HumanFactors.Pathfinding.ShortestPath}}
 \doxysubsubsection{\texorpdfstring{DijkstraShortestPath()}{DijkstraShortestPath()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily static \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_path}{Path}} Human\+Factors.\+Pathfinding.\+Shortest\+Path.\+Dijkstra\+Shortest\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}}}]{graph,  }\item[{\mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}}}]{start\+\_\+node,  }\item[{\mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}}}]{end\+\_\+node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_path}{Path}} Human\+Factors.\+Pathfinding.\+Shortest\+Path.\+Dijkstra\+Shortest\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}}}]{graph,  }\item[{\mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}}}]{start\+\_\+node,  }\item[{\mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}}}]{end\+\_\+node,  }\item[{string}]{cost\+\_\+type = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -108,44 +141,43 @@ Perform Dijkstra\textquotesingle{}s shortest path algorithm to find a path betwe
 \hline
 {\em start\+\_\+node} & The X,Y,Z of a node in the graph node to start at. \\
 \hline
-{\em end\+\_\+node} & The X,Y,Z of a node in the graph node to end at.\\
+{\em end\+\_\+node} & The X,Y,Z of a node in the graph node to end at. \\
+\hline
+{\em cost\+\_\+type} & The type of cost to use for generating the path. If left blank, will use the cost that the graph was created with. In the case of the graph generator, the default cost is distance.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-A path from start\+\_\+node to end\+\_\+node.
+The shortest path from start\+\_\+node to end\+\_\+node or null if no path could be found.
 \end{DoxyReturn}
+\begin{DoxyPrecond}{Precondition}
+1) {\ttfamily start\+\_\+node} and {\ttfamily end\+\_\+node} must be the X,Y,Z position of nodes that already exist in {\ttfamily graph}. 
 
-\begin{DoxyExceptions}{Exceptions}
-{\em Index\+Out\+Of\+Range\+Exception} & start\+\_\+node or end\+\_\+node don\textquotesingle{}t exist in the graph.\\
-\hline
-\end{DoxyExceptions}
+2) If {\ttfamily cost\+\_\+type} is not left as the default, then it must be the name of a valid cost already defined in {\ttfamily graph}.
+\end{DoxyPrecond}
 \begin{DoxyRemark}{Remarks}
 Gets the start id and end of both nodes, then calls the ID overload.
 \end{DoxyRemark}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Key\+Not\+Found\+Exception} & {\ttfamily cost\+\_\+type} wasn\textquotesingle{}t left as blank, and didn\textquotesingle{}t refer to the name of any cost that already exists in the graph.\\
+\hline
+\end{DoxyExceptions}
 \begin{DoxySeeAlso}{See also}
-\mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_shortest_path_ac63e41c1bc4310f6e64993c30d4a0fe5}{Dijkstra\+Shortest\+Path\+Multi}} for efficently generating multiple paths in parallel. 
+\mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_shortest_path_ab7f58f298125194e33d6c69ed4797442}{Dijkstra\+Shortest\+Path\+Multi}} for efficently generating multiple paths in parallel. 
 \end{DoxySeeAlso}
 
 
-Definition at line 72 of file Shortest\+Path.\+cs.
+Definition at line 96 of file Shortest\+Path.\+cs.
 
 
 
 References Human\+Factors.\+Pathfinding.\+Shortest\+Path.\+Dijkstra\+Shortest\+Path(), and Human\+Factors.\+Spatial\+Structures.\+Graph.\+Get\+Node\+I\+D().
 
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_human_factors_1_1_pathfinding_1_1_shortest_path_a7ca51d84089c860860ad7fb2fd717f61_cgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{class_human_factors_1_1_pathfinding_1_1_shortest_path_a82d7192b92262f014d7d94ff1e898afc}\label{class_human_factors_1_1_pathfinding_1_1_shortest_path_a82d7192b92262f014d7d94ff1e898afc}} 
+\mbox{\Hypertarget{class_human_factors_1_1_pathfinding_1_1_shortest_path_a9fb6fc6aff938136f7f9de42e5d8e5bc}\label{class_human_factors_1_1_pathfinding_1_1_shortest_path_a9fb6fc6aff938136f7f9de42e5d8e5bc}} 
 \index{HumanFactors.Pathfinding.ShortestPath@{HumanFactors.Pathfinding.ShortestPath}!DijkstraShortestPathMulti@{DijkstraShortestPathMulti}}
 \index{DijkstraShortestPathMulti@{DijkstraShortestPathMulti}!HumanFactors.Pathfinding.ShortestPath@{HumanFactors.Pathfinding.ShortestPath}}
 \doxysubsubsection{\texorpdfstring{DijkstraShortestPathMulti()}{DijkstraShortestPathMulti()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily static \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_path}{Path}} \mbox{[}$\,$\mbox{]} Human\+Factors.\+Pathfinding.\+Shortest\+Path.\+Dijkstra\+Shortest\+Path\+Multi (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}}}]{graph,  }\item[{I\+Enumerable$<$ \mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}} $>$}]{start\+\_\+nodes,  }\item[{I\+Enumerable$<$ \mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}} $>$}]{end\+\_\+nodes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_path}{Path}} \mbox{[}$\,$\mbox{]} Human\+Factors.\+Pathfinding.\+Shortest\+Path.\+Dijkstra\+Shortest\+Path\+Multi (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}}}]{graph,  }\item[{I\+Enumerable$<$ \mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}} $>$}]{start\+\_\+nodes,  }\item[{I\+Enumerable$<$ \mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}} $>$}]{end\+\_\+nodes,  }\item[{string}]{cost\+\_\+type = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -157,47 +189,43 @@ Find the shortest paths between each pair of start\+\_\+id and end\+\_\+id in or
 \hline
 {\em start\+\_\+nodes} & Locations of the start points to generate paths from. \\
 \hline
-{\em end\+\_\+nodes} & Locations of the end nodes to generate paths to.\\
+{\em end\+\_\+nodes} & Locations of the end nodes to generate paths to. \\
+\hline
+{\em cost\+\_\+type} & The type of cost to use for generating the path. If left blank, will use the cost that the graph was created with. In the case of the graph generator, the default cost is distance.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-A list of paths in order from start\+\_\+ids to end\+\_\+ids. If a path could not be generated by a set of points, then the path at that location will be null.
+A list of paths in order from {\ttfamily start\+\_\+ids} to {\ttfamily end\+\_\+ids}. If a path could not be generated by a set of points, then the path at that location will be null.
 \end{DoxyReturn}
 Determines the I\+Ds of nodes, then calls the other overload. Uses all available cores for parallel calculation.
 
 \begin{DoxyPrecond}{Precondition}
-1) The length of start\+\_\+ids must match the length of end\+\_\+ids. 
+1) The length of {\ttfamily start\+\_\+ids} must match the length of {\ttfamily end\+\_\+ids}. 
 
-2) Each node in start\+\_\+nodes and end\+\_\+nodes must contain the x,y,z position of an existing node in graph
+2) Each node in {\ttfamily start\+\_\+nodes} and end\+\_\+nodes must contain the x,y,z position of an existing node in {\ttfamily graph} 
+
+3) If {\ttfamily cost\+\_\+type} is not left as the default, then it must be the name of a valid cost already defined in {\ttfamily graph}.
 \end{DoxyPrecond}
 
 \begin{DoxyExceptions}{Exceptions}
-{\em System.\+Argument\+Exception} & Length of start\+\_\+ids didn\textquotesingle{}t equal length of end\+\_\+ids \\
+{\em System.\+Argument\+Exception} & Length of {\ttfamily start\+\_\+ids} didn\textquotesingle{}t equal length of {\ttfamily end\+\_\+ids} \\
 \hline
-{\em Index\+Out\+Of\+Range\+Exception} & One or more of the start or end ids do not exist in {\itshape graph} . \\
+{\em Key\+Not\+Found\+Exception} & {\ttfamily cost\+\_\+type} wasn\textquotesingle{}t left as blank, and didn\textquotesingle{}t refer to the name of any cost that already exists in {\ttfamily graph}. \\
 \hline
 \end{DoxyExceptions}
 
 
-Definition at line 135 of file Shortest\+Path.\+cs.
+Definition at line 179 of file Shortest\+Path.\+cs.
 
 
 
 References Human\+Factors.\+Pathfinding.\+Shortest\+Path.\+Dijkstra\+Shortest\+Path\+Multi().
 
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_human_factors_1_1_pathfinding_1_1_shortest_path_a82d7192b92262f014d7d94ff1e898afc_cgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{class_human_factors_1_1_pathfinding_1_1_shortest_path_ac63e41c1bc4310f6e64993c30d4a0fe5}\label{class_human_factors_1_1_pathfinding_1_1_shortest_path_ac63e41c1bc4310f6e64993c30d4a0fe5}} 
+\mbox{\Hypertarget{class_human_factors_1_1_pathfinding_1_1_shortest_path_ab7f58f298125194e33d6c69ed4797442}\label{class_human_factors_1_1_pathfinding_1_1_shortest_path_ab7f58f298125194e33d6c69ed4797442}} 
 \index{HumanFactors.Pathfinding.ShortestPath@{HumanFactors.Pathfinding.ShortestPath}!DijkstraShortestPathMulti@{DijkstraShortestPathMulti}}
 \index{DijkstraShortestPathMulti@{DijkstraShortestPathMulti}!HumanFactors.Pathfinding.ShortestPath@{HumanFactors.Pathfinding.ShortestPath}}
 \doxysubsubsection{\texorpdfstring{DijkstraShortestPathMulti()}{DijkstraShortestPathMulti()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily static \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_path}{Path}} \mbox{[}$\,$\mbox{]} Human\+Factors.\+Pathfinding.\+Shortest\+Path.\+Dijkstra\+Shortest\+Path\+Multi (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}}}]{graph,  }\item[{int\mbox{[}$\,$\mbox{]}}]{start\+\_\+ids,  }\item[{int\mbox{[}$\,$\mbox{]}}]{end\+\_\+ids }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_human_factors_1_1_pathfinding_1_1_path}{Path}} \mbox{[}$\,$\mbox{]} Human\+Factors.\+Pathfinding.\+Shortest\+Path.\+Dijkstra\+Shortest\+Path\+Multi (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}}}]{graph,  }\item[{int\mbox{[}$\,$\mbox{]}}]{start\+\_\+ids,  }\item[{int\mbox{[}$\,$\mbox{]}}]{end\+\_\+ids,  }\item[{string}]{cost\+\_\+type = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -209,12 +237,21 @@ Find the shortest paths between each pair of start\+\_\+id and end\+\_\+id in or
 \hline
 {\em start\+\_\+ids} & Ids for the start points to generate paths from. \\
 \hline
-{\em end\+\_\+ids} & Ids for the end points to generate paths to\\
+{\em end\+\_\+ids} & Ids for the end points to generate paths to \\
+\hline
+{\em cost\+\_\+type} & The type of cost to use for generating the path. If left blank, will use the cost that the graph was created with. In the case of the graph generator, the default cost is distance.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 A list of paths in order from start\+\_\+ids to end\+\_\+ids. If a path could not be generated by a set of points, then the path at that location will be null.
 \end{DoxyReturn}
+\begin{DoxyPrecond}{Precondition}
+1) The length of start\+\_\+ids must match the length of end\+\_\+ids. 
+
+2) Every ID in {\ttfamily start\+\_\+ids} and {\ttfamily end\+\_\+ids} must be the ID of some node in {\ttfamily graph}. 
+
+3) If {\ttfamily cost\+\_\+type} is not left as the default, then it must be the name of a valid cost already defined in {\ttfamily graph}.
+\end{DoxyPrecond}
 Uses all available cores for parallel calculation.
 
 \begin{DoxyPrecond}{Precondition}
@@ -224,12 +261,12 @@ The length of start\+\_\+ids must match the length of end\+\_\+ids.
 \begin{DoxyExceptions}{Exceptions}
 {\em System.\+Argument\+Exception} & Length of start\+\_\+ids didn\textquotesingle{}t equal length of end\+\_\+ids \\
 \hline
-{\em Index\+Out\+Of\+Range\+Exception} & One or more of the start or end ids do not exist in {\itshape graph} . \\
+{\em Key\+Not\+Found\+Exception} & {\ttfamily cost\+\_\+type} wasn\textquotesingle{}t left as blank, and didn\textquotesingle{}t refer to the name of any cost that already exists in the graph. \\
 \hline
 \end{DoxyExceptions}
 
 
-Definition at line 98 of file Shortest\+Path.\+cs.
+Definition at line 131 of file Shortest\+Path.\+cs.
 
 
 
@@ -239,22 +276,6 @@ References Human\+Factors.\+Pathfinding.\+Native\+Methods.\+C\+\_\+\+Create\+Pat
 
 Referenced by Human\+Factors.\+Pathfinding.\+Shortest\+Path.\+Dijkstra\+Shortest\+Path\+Multi().
 
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_human_factors_1_1_pathfinding_1_1_shortest_path_ac63e41c1bc4310f6e64993c30d4a0fe5_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_human_factors_1_1_pathfinding_1_1_shortest_path_ac63e41c1bc4310f6e64993c30d4a0fe5_icgraph}
-\end{center}
-\end{figure}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

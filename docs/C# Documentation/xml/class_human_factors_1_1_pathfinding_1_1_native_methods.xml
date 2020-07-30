@@ -15,14 +15,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/Csharp/packages/pathfinding/src/PathfindingNative.cs" line="18" column="22" bodyfile="src/Csharp/packages/pathfinding/src/PathfindingNative.cs" bodystart="18" bodyend="-1"/>
+        <location file="src/Csharp/packages/pathfinding/src/PathfindingNative.cs" line="19" column="22" bodyfile="src/Csharp/packages/pathfinding/src/PathfindingNative.cs" bodystart="19" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="package-static-func">
-      <memberdef kind="function" id="class_human_factors_1_1_pathfinding_1_1_native_methods_1ad6c05846f5dc7ed531abb7d3ac9ebe1b" prot="package" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="class_human_factors_1_1_pathfinding_1_1_native_methods_1a000ba4e4cf47dc3eff4c6ecbd61354ab" prot="package" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="struct_human_factors_1_1_native_utils_1_1_c_vector_and_data" kindref="compound">CVectorAndData</ref></type>
         <definition>static CVectorAndData HumanFactors.Pathfinding.NativeMethods.C_CreatePath</definition>
-        <argsstring>(IntPtr graph_ptr, int start, int end)</argsstring>
+        <argsstring>(IntPtr graph_ptr, int start, int end, string cost_type)</argsstring>
         <name>C_CreatePath</name>
         <param>
           <type>IntPtr</type>
@@ -35,6 +35,10 @@
         <param>
           <type>int</type>
           <declname>end</declname>
+        </param>
+        <param>
+          <type>string</type>
+          <declname>cost_type</declname>
         </param>
         <briefdescription>
 <para>Generate a path from start to end. </para>
@@ -55,17 +59,17 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/Csharp/packages/pathfinding/src/PathfindingNative.cs" line="26" column="40" bodyfile="src/Csharp/packages/pathfinding/src/PathfindingNative.cs" bodystart="26" bodyend="41"/>
-        <references refid="class_human_factors_1_1_pathfinding_1_1_native_methods_1acf23678ab15e9f9862a4fe7752214d0d">HumanFactors.Pathfinding.NativeMethods.CreatePath</references>
+        <location file="src/Csharp/packages/pathfinding/src/PathfindingNative.cs" line="27" column="40" bodyfile="src/Csharp/packages/pathfinding/src/PathfindingNative.cs" bodystart="27" bodyend="60"/>
+        <references refid="class_human_factors_1_1_pathfinding_1_1_native_methods_1aad3740f1d798a3bc25ede5b9c47f3cf1">HumanFactors.Pathfinding.NativeMethods.CreatePath</references>
         <references refid="struct_human_factors_1_1_native_utils_1_1_c_vector_and_data_1a2e2620c94a9931a5edea5a9881f4419c" compoundref="_native_utils_8cs" startline="29">HumanFactors.NativeUtils.CVectorAndData.data</references>
         <references refid="struct_human_factors_1_1_native_utils_1_1_c_vector_and_data_1a8bcdb7b4516a15f5b905ebcd33a55e6c" compoundref="_native_utils_8cs" startline="38">HumanFactors.NativeUtils.CVectorAndData.size</references>
         <references refid="struct_human_factors_1_1_native_utils_1_1_c_vector_and_data_1ad393baf2b8451a96e5335b0ee2ec68fc" compoundref="_native_utils_8cs" startline="33">HumanFactors.NativeUtils.CVectorAndData.vector</references>
-        <referencedby refid="class_human_factors_1_1_pathfinding_1_1_shortest_path_1ab4bd85d84d83a30601a190f583e097ac" compoundref="_shortest_path_8cs" startline="48" endline="55">HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath</referencedby>
+        <referencedby refid="class_human_factors_1_1_pathfinding_1_1_shortest_path_1adc3fbf31af391a4ce9efd911c0c74fee" compoundref="_shortest_path_8cs" startline="63" endline="70">HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath</referencedby>
       </memberdef>
-      <memberdef kind="function" id="class_human_factors_1_1_pathfinding_1_1_native_methods_1a13d7f289f9366b7c7f9c4b90916f74e4" prot="package" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="class_human_factors_1_1_pathfinding_1_1_native_methods_1a1b79d24699fd670918524395024e9777" prot="package" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="struct_human_factors_1_1_native_utils_1_1_c_vector_and_data" kindref="compound">CVectorAndData</ref>[]</type>
         <definition>static CVectorAndData [] HumanFactors.Pathfinding.NativeMethods.C_CreatePaths</definition>
-        <argsstring>(IntPtr graph_ptr, IEnumerable&lt; int &gt; start, IEnumerable&lt; int &gt; end)</argsstring>
+        <argsstring>(IntPtr graph_ptr, IEnumerable&lt; int &gt; start, IEnumerable&lt; int &gt; end, string cost_type)</argsstring>
         <name>C_CreatePaths</name>
         <param>
           <type>IntPtr</type>
@@ -78,6 +82,10 @@
         <param>
           <type>IEnumerable&lt; int &gt;</type>
           <declname>end</declname>
+        </param>
+        <param>
+          <type>string</type>
+          <declname>cost_type</declname>
         </param>
         <briefdescription>
 <para>Generate a path from start to end. </para>
@@ -98,9 +106,36 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/Csharp/packages/pathfinding/src/PathfindingNative.cs" line="48" column="40" bodyfile="src/Csharp/packages/pathfinding/src/PathfindingNative.cs" bodystart="48" bodyend="72"/>
-        <references refid="class_human_factors_1_1_pathfinding_1_1_native_methods_1a44d6763edb3913ed69920ba051b30c19">HumanFactors.Pathfinding.NativeMethods.CreatePaths</references>
-        <referencedby refid="class_human_factors_1_1_pathfinding_1_1_shortest_path_1ac63e41c1bc4310f6e64993c30d4a0fe5" compoundref="_shortest_path_8cs" startline="98" endline="114">HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti</referencedby>
+        <location file="src/Csharp/packages/pathfinding/src/PathfindingNative.cs" line="67" column="40" bodyfile="src/Csharp/packages/pathfinding/src/PathfindingNative.cs" bodystart="67" bodyend="114"/>
+        <references refid="class_human_factors_1_1_pathfinding_1_1_native_methods_1a4c51a6d9191bd802e1d66c5bedd0ee07">HumanFactors.Pathfinding.NativeMethods.CreatePaths</references>
+        <referencedby refid="class_human_factors_1_1_pathfinding_1_1_shortest_path_1ab7f58f298125194e33d6c69ed4797442" compoundref="_shortest_path_8cs" startline="131" endline="151">HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_pathfinding_1_1_native_methods_1aacec0c6d617c78c505944142d6bd4c4b" prot="package" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_human_factors_1_1_native_utils_1_1_c_vector_and_data" kindref="compound">CVectorAndData</ref>[]</type>
+        <definition>static CVectorAndData [] HumanFactors.Pathfinding.NativeMethods.C_AllToAllPaths</definition>
+        <argsstring>(IntPtr graph_ptr, int graph_size, string cost_type)</argsstring>
+        <name>C_AllToAllPaths</name>
+        <param>
+          <type>IntPtr</type>
+          <declname>graph_ptr</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>graph_size</declname>
+        </param>
+        <param>
+          <type>string</type>
+          <declname>cost_type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/pathfinding/src/PathfindingNative.cs" line="115" column="40" bodyfile="src/Csharp/packages/pathfinding/src/PathfindingNative.cs" bodystart="115" bodyend="158"/>
+        <references refid="class_human_factors_1_1_pathfinding_1_1_native_methods_1ac65e2c836245c0d6c6a1fab3bc61f1a4">HumanFactors.Pathfinding.NativeMethods.CreateAllToAllPaths</references>
+        <referencedby refid="class_human_factors_1_1_pathfinding_1_1_shortest_path_1a3ede2597cc17a4f1a130741b0163bbab" compoundref="_shortest_path_8cs" startline="222" endline="242">HumanFactors.Pathfinding.ShortestPath.DijkstraAllToAll</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_human_factors_1_1_pathfinding_1_1_native_methods_1ac4db653ce2270e68c7ea18192f41c9f7" prot="package" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -118,8 +153,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/Csharp/packages/pathfinding/src/PathfindingNative.cs" line="77" column="30"/>
-        <referencedby refid="class_human_factors_1_1_pathfinding_1_1_path_1a979e48954fe6d869827b855cdc39d060" compoundref="_path_8cs" startline="37" endline="41">HumanFactors.Pathfinding.Path.ReleaseHandle</referencedby>
+        <location file="src/Csharp/packages/pathfinding/src/PathfindingNative.cs" line="163" column="30"/>
+        <referencedby refid="class_human_factors_1_1_pathfinding_1_1_path_1a979e48954fe6d869827b855cdc39d060" compoundref="_path_8cs" startline="47" endline="51">HumanFactors.Pathfinding.Path.ReleaseHandle</referencedby>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -138,12 +173,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/Csharp/packages/pathfinding/src/PathfindingNative.cs" line="80" column="41"/>
+        <location file="src/Csharp/packages/pathfinding/src/PathfindingNative.cs" line="166" column="41"/>
       </memberdef>
-      <memberdef kind="function" id="class_human_factors_1_1_pathfinding_1_1_native_methods_1acf23678ab15e9f9862a4fe7752214d0d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="class_human_factors_1_1_pathfinding_1_1_native_methods_1aad3740f1d798a3bc25ede5b9c47f3cf1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="namespace_human_factors_1_1_exceptions_1a8a5123945956ef2d754b5420be18987f" kindref="member">HF_STATUS</ref></type>
         <definition>static HF_STATUS HumanFactors.Pathfinding.NativeMethods.CreatePath</definition>
-        <argsstring>(IntPtr graph_ptr, int start, int end, ref int out_size, ref IntPtr out_path, ref IntPtr out_data)</argsstring>
+        <argsstring>(IntPtr graph_ptr, int start, int end, string cost_type, ref int out_size, ref IntPtr out_path, ref IntPtr out_data)</argsstring>
         <name>CreatePath</name>
         <param>
           <type>IntPtr</type>
@@ -156,6 +191,10 @@
         <param>
           <type>int</type>
           <declname>end</declname>
+        </param>
+        <param>
+          <type>string</type>
+          <declname>cost_type</declname>
         </param>
         <param>
           <type>ref int</type>
@@ -175,13 +214,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/Csharp/packages/pathfinding/src/PathfindingNative.cs" line="82" column="41"/>
-        <referencedby refid="class_human_factors_1_1_pathfinding_1_1_native_methods_1ad6c05846f5dc7ed531abb7d3ac9ebe1b" compoundref="_pathfinding_native_8cs" startline="26" endline="41">HumanFactors.Pathfinding.NativeMethods.C_CreatePath</referencedby>
+        <location file="src/Csharp/packages/pathfinding/src/PathfindingNative.cs" line="168" column="41"/>
+        <referencedby refid="class_human_factors_1_1_pathfinding_1_1_native_methods_1a000ba4e4cf47dc3eff4c6ecbd61354ab" compoundref="_pathfinding_native_8cs" startline="27" endline="60">HumanFactors.Pathfinding.NativeMethods.C_CreatePath</referencedby>
       </memberdef>
-      <memberdef kind="function" id="class_human_factors_1_1_pathfinding_1_1_native_methods_1a44d6763edb3913ed69920ba051b30c19" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="class_human_factors_1_1_pathfinding_1_1_native_methods_1a4c51a6d9191bd802e1d66c5bedd0ee07" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="namespace_human_factors_1_1_exceptions_1a8a5123945956ef2d754b5420be18987f" kindref="member">HF_STATUS</ref></type>
         <definition>static HF_STATUS HumanFactors.Pathfinding.NativeMethods.CreatePaths</definition>
-        <argsstring>(IntPtr graph_ptr, [In] int[] start, [In] int[] end, [Out] IntPtr[] out_path_ptr_holder, [Out] IntPtr[] out_path_member_ptr_holder, [Out] int[] out_sizes, int num_paths)</argsstring>
+        <argsstring>(IntPtr graph_ptr, [In] int[] start, [In] int[] end, string cost_type, [Out] IntPtr[] out_path_ptr_holder, [Out] IntPtr[] out_path_member_ptr_holder, [Out] int[] out_sizes, int num_paths)</argsstring>
         <name>CreatePaths</name>
         <param>
           <type>IntPtr</type>
@@ -196,6 +235,10 @@
           <attributes>[In]</attributes>
           <type>int[]</type>
           <declname>end</declname>
+        </param>
+        <param>
+          <type>string</type>
+          <declname>cost_type</declname>
         </param>
         <param>
           <attributes>[Out]</attributes>
@@ -222,21 +265,76 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/Csharp/packages/pathfinding/src/PathfindingNative.cs" line="92" column="41"/>
-        <referencedby refid="class_human_factors_1_1_pathfinding_1_1_native_methods_1a13d7f289f9366b7c7f9c4b90916f74e4" compoundref="_pathfinding_native_8cs" startline="48" endline="72">HumanFactors.Pathfinding.NativeMethods.C_CreatePaths</referencedby>
+        <location file="src/Csharp/packages/pathfinding/src/PathfindingNative.cs" line="179" column="41"/>
+        <referencedby refid="class_human_factors_1_1_pathfinding_1_1_native_methods_1a1b79d24699fd670918524395024e9777" compoundref="_pathfinding_native_8cs" startline="67" endline="114">HumanFactors.Pathfinding.NativeMethods.C_CreatePaths</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_pathfinding_1_1_native_methods_1ac65e2c836245c0d6c6a1fab3bc61f1a4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespace_human_factors_1_1_exceptions_1a8a5123945956ef2d754b5420be18987f" kindref="member">HF_STATUS</ref></type>
+        <definition>static HF_STATUS HumanFactors.Pathfinding.NativeMethods.CreateAllToAllPaths</definition>
+        <argsstring>(IntPtr graph_ptr, string cost_type, [Out] IntPtr[] out_path_ptr_holder, [Out] IntPtr[] out_path_member_ptr_holder, [Out] int[] out_sizes, int num_paths)</argsstring>
+        <name>CreateAllToAllPaths</name>
+        <param>
+          <type>IntPtr</type>
+          <declname>graph_ptr</declname>
+        </param>
+        <param>
+          <type>string</type>
+          <declname>cost_type</declname>
+        </param>
+        <param>
+          <attributes>[Out]</attributes>
+          <type>IntPtr[]</type>
+          <declname>out_path_ptr_holder</declname>
+        </param>
+        <param>
+          <attributes>[Out]</attributes>
+          <type>IntPtr[]</type>
+          <declname>out_path_member_ptr_holder</declname>
+        </param>
+        <param>
+          <attributes>[Out]</attributes>
+          <type>int[]</type>
+          <declname>out_sizes</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>num_paths</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/pathfinding/src/PathfindingNative.cs" line="191" column="41"/>
+        <referencedby refid="class_human_factors_1_1_pathfinding_1_1_native_methods_1aacec0c6d617c78c505944142d6bd4c4b" compoundref="_pathfinding_native_8cs" startline="115" endline="158">HumanFactors.Pathfinding.NativeMethods.C_AllToAllPaths</referencedby>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="src/Csharp/packages/pathfinding/src/PathfindingNative.cs" line="16" column="21" bodyfile="src/Csharp/packages/pathfinding/src/PathfindingNative.cs" bodystart="16" bodyend="101"/>
+    <collaborationgraph>
+      <node id="1">
+        <label>HumanFactors.Pathfinding.NativeMethods</label>
+        <link refid="class_human_factors_1_1_pathfinding_1_1_native_methods"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>dll_path</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>const string</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/Csharp/packages/pathfinding/src/PathfindingNative.cs" line="17" column="21" bodyfile="src/Csharp/packages/pathfinding/src/PathfindingNative.cs" bodystart="17" bodyend="200"/>
     <listofallmembers>
-      <member refid="class_human_factors_1_1_pathfinding_1_1_native_methods_1ad6c05846f5dc7ed531abb7d3ac9ebe1b" prot="package" virt="non-virtual"><scope>HumanFactors::Pathfinding::NativeMethods</scope><name>C_CreatePath</name></member>
-      <member refid="class_human_factors_1_1_pathfinding_1_1_native_methods_1a13d7f289f9366b7c7f9c4b90916f74e4" prot="package" virt="non-virtual"><scope>HumanFactors::Pathfinding::NativeMethods</scope><name>C_CreatePaths</name></member>
+      <member refid="class_human_factors_1_1_pathfinding_1_1_native_methods_1aacec0c6d617c78c505944142d6bd4c4b" prot="package" virt="non-virtual"><scope>HumanFactors::Pathfinding::NativeMethods</scope><name>C_AllToAllPaths</name></member>
+      <member refid="class_human_factors_1_1_pathfinding_1_1_native_methods_1a000ba4e4cf47dc3eff4c6ecbd61354ab" prot="package" virt="non-virtual"><scope>HumanFactors::Pathfinding::NativeMethods</scope><name>C_CreatePath</name></member>
+      <member refid="class_human_factors_1_1_pathfinding_1_1_native_methods_1a1b79d24699fd670918524395024e9777" prot="package" virt="non-virtual"><scope>HumanFactors::Pathfinding::NativeMethods</scope><name>C_CreatePaths</name></member>
       <member refid="class_human_factors_1_1_pathfinding_1_1_native_methods_1ac4db653ce2270e68c7ea18192f41c9f7" prot="package" virt="non-virtual"><scope>HumanFactors::Pathfinding::NativeMethods</scope><name>C_DestroyPath</name></member>
-      <member refid="class_human_factors_1_1_pathfinding_1_1_native_methods_1acf23678ab15e9f9862a4fe7752214d0d" prot="private" virt="non-virtual"><scope>HumanFactors::Pathfinding::NativeMethods</scope><name>CreatePath</name></member>
-      <member refid="class_human_factors_1_1_pathfinding_1_1_native_methods_1a44d6763edb3913ed69920ba051b30c19" prot="private" virt="non-virtual"><scope>HumanFactors::Pathfinding::NativeMethods</scope><name>CreatePaths</name></member>
+      <member refid="class_human_factors_1_1_pathfinding_1_1_native_methods_1ac65e2c836245c0d6c6a1fab3bc61f1a4" prot="private" virt="non-virtual"><scope>HumanFactors::Pathfinding::NativeMethods</scope><name>CreateAllToAllPaths</name></member>
+      <member refid="class_human_factors_1_1_pathfinding_1_1_native_methods_1aad3740f1d798a3bc25ede5b9c47f3cf1" prot="private" virt="non-virtual"><scope>HumanFactors::Pathfinding::NativeMethods</scope><name>CreatePath</name></member>
+      <member refid="class_human_factors_1_1_pathfinding_1_1_native_methods_1a4c51a6d9191bd802e1d66c5bedd0ee07" prot="private" virt="non-virtual"><scope>HumanFactors::Pathfinding::NativeMethods</scope><name>CreatePaths</name></member>
       <member refid="class_human_factors_1_1_pathfinding_1_1_native_methods_1a6f4e5a5b6ac997653d300eb31f1cc780" prot="private" virt="non-virtual"><scope>HumanFactors::Pathfinding::NativeMethods</scope><name>DestroyPath</name></member>
       <member refid="class_human_factors_1_1_pathfinding_1_1_native_methods_1a51f7de453f64fc42e30832a3f39eddb2" prot="private" virt="non-virtual"><scope>HumanFactors::Pathfinding::NativeMethods</scope><name>dll_path</name></member>
     </listofallmembers>

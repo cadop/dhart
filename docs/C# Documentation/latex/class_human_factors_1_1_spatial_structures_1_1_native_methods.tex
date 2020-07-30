@@ -5,25 +5,39 @@
 \item 
 static Int\+Ptr \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_a4a286e64568492c9e0199fb3a8b51182}{C\+\_\+\+Create\+Graph}} ()
 \item 
-static void \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_ad7722cbc079fcf9e4495b79b08d218a2}{C\+\_\+\+Add\+Edge}} (Int\+Ptr graph\+\_\+ptr, int parent\+\_\+id, int child\+\_\+id, float score)
+static void \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_a3bf6ac31ce8601e106bc60d654354a38}{C\+\_\+\+Add\+Edge}} (Int\+Ptr graph\+\_\+ptr, int parent\+\_\+id, int child\+\_\+id, float score, string cost\+\_\+type)
 \item 
-static void \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_a144e9bd1d6f5f38ebf06b3b95a022882}{C\+\_\+\+Add\+Edge}} (Int\+Ptr graph\+\_\+ptr, \mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}} parent, \mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}} child, float cost)
+static void \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_a73587e3a5dc74f61ef11f1585a7c864a}{C\+\_\+\+Add\+Edge}} (Int\+Ptr graph\+\_\+ptr, \mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}} parent, \mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}} child, float cost, string cost\+\_\+type)
 \item 
 static void \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_a464f503116478fbb7eb9baeb2ef45aac}{C\+\_\+\+Destroy\+Graph}} (Int\+Ptr graph\+\_\+ptr)
 \item 
 static int \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_a68e058036911bb82800f422627523259}{C\+\_\+\+Get\+Node\+ID}} (Int\+Ptr graph\+\_\+ptr, float x, float y, float z)
 \item 
-static \mbox{\hyperlink{struct_human_factors_1_1_spatial_structures_1_1_c_s_r_info}{C\+S\+R\+Info}} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_afcfe59fc55ebfc796a8baeed3f011a42}{C\+\_\+\+Get\+C\+S\+R\+Pointers}} (Int\+Ptr graph\+\_\+ptr)
+static \mbox{\hyperlink{struct_human_factors_1_1_spatial_structures_1_1_c_s_r_info}{C\+S\+R\+Info}} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_a6ed59ccf6ca4b02b79b12b724afddce9}{C\+\_\+\+Get\+C\+S\+R\+Pointers}} (Int\+Ptr graph\+\_\+ptr, string cost\+\_\+type)
 \item 
 static \mbox{\hyperlink{struct_human_factors_1_1_native_utils_1_1_c_vector_and_data}{C\+Vector\+And\+Data}} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_a020dc5849f92921ab948b4788534f857}{C\+\_\+\+Get\+Nodes}} (Int\+Ptr graph\+\_\+ptr)
 \item 
-static \mbox{\hyperlink{struct_human_factors_1_1_native_utils_1_1_c_vector_and_data}{C\+Vector\+And\+Data}} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_a53457f89d46804e798d806c0ba4b0940}{C\+\_\+\+Aggregate\+Edge\+Costs}} (Int\+Ptr graph\+\_\+ptr, bool directed, \mbox{\hyperlink{namespace_human_factors_1_1_spatial_structures_abd405fa41da0f9a771d547aa47b6e1a0}{Graph\+Edge\+Aggregation}} agg\+\_\+type)
+static \mbox{\hyperlink{struct_human_factors_1_1_native_utils_1_1_c_vector_and_data}{C\+Vector\+And\+Data}} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_a30608108f5adb70a2e28167a41921770}{C\+\_\+\+Aggregate\+Edge\+Costs}} (Int\+Ptr graph\+\_\+ptr, bool directed, \mbox{\hyperlink{namespace_human_factors_1_1_spatial_structures_abd405fa41da0f9a771d547aa47b6e1a0}{Graph\+Edge\+Aggregation}} agg\+\_\+type, string cost\+\_\+type)
+\item 
+static float \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_a182becf6bcb9045968fd8c04f12e64f8}{C\+\_\+\+Get\+Edge\+Cost}} (Int\+Ptr graph\+\_\+ptr, int parent, int child, string cost\+\_\+type)
+\item 
+static void \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_a24fec3dbf61e5b96919a57ca7f959af0}{C\+\_\+\+Add\+Node\+Attributes}} (Int\+Ptr graph\+\_\+ptr, string attribute, int\mbox{[}$\,$\mbox{]} ids, string\mbox{[}$\,$\mbox{]} scores)
+\item 
+static unsafe string\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_aca85eef5976c0f0f2710e8dba6484322}{C\+\_\+\+Get\+Node\+Attributes}} (Int\+Ptr graph\+\_\+ptr, string attribute, int num\+\_\+nodes)
+\item 
+static int \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_aa70dd1817ef11d81c5fa288c1e9f43cd}{C\+\_\+\+Get\+Graph\+Size}} (Int\+Ptr graph\+\_\+ptr)
 \item 
 static void \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_afe213312fd154b66623c2a8e01194d02}{C\+\_\+\+Destroy\+Node\+Vector}} (Int\+Ptr node\+\_\+ptr)
 \item 
 static void \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_afd337d4bb4fc2befed3620f4327d0911}{C\+\_\+\+Destroy\+Float\+Vector}} (Int\+Ptr float\+\_\+vector)
 \item 
 static void \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_a15c93881f9d3eae1318815c1c3ce72cb}{C\+\_\+\+Compress\+Graph}} (Int\+Ptr graph)
+\item 
+static void \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_a53cdfc6b5bd734778aba74cc5d77068a}{C\+\_\+\+Calculate\+And\+Store\+Cross\+Slope}} (Int\+Ptr graph)
+\item 
+static void \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_ae644f232b287f87fb95f4e4d7f2cea48}{C\+\_\+\+Calculate\+And\+Store\+Energy\+Expenditure}} (Int\+Ptr graph)
+\item 
+static void \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_a0eb7a8a8273141b1415a1f9fe95933b5}{C\+\_\+\+Clear\+Attribute\+Type}} (Int\+Ptr graph, string attribute\+\_\+name)
 \end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
@@ -32,17 +46,17 @@ static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d
 \item 
 static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_a62d91b3fdab22aa4433ab7ef9593a83e}{Get\+Size\+Of\+Node\+Vector}} (Int\+Ptr node\+\_\+vector, ref int out\+\_\+size)
 \item 
-static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_aa6018c8beb6f49bb1f0b4708821b171b}{Get\+C\+S\+R\+Pointers}} (Int\+Ptr \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}}, ref int out\+\_\+nnz, ref int out\+\_\+num\+\_\+rows, ref int out\+\_\+num\+\_\+cols, ref Int\+Ptr out\+\_\+data\+\_\+ptr, ref Int\+Ptr out\+\_\+inner\+\_\+indices\+\_\+ptr, ref Int\+Ptr out\+\_\+outer\+\_\+indices\+\_\+ptr)
+static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_a89e694675c5103650eaec1fff04704ad}{Get\+C\+S\+R\+Pointers}} (Int\+Ptr \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}}, ref int out\+\_\+nnz, ref int out\+\_\+num\+\_\+rows, ref int out\+\_\+num\+\_\+cols, ref Int\+Ptr out\+\_\+data\+\_\+ptr, ref Int\+Ptr out\+\_\+inner\+\_\+indices\+\_\+ptr, ref Int\+Ptr out\+\_\+outer\+\_\+indices\+\_\+ptr, string cost\+\_\+type)
 \item 
 static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_a47e5889843a07d9a40de5306a7a7baa2}{Compress}} (Int\+Ptr graph)
 \item 
-static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_afaea6a45bea0b0ffd66576af90c9a498}{Aggregate\+Costs}} (Int\+Ptr graph, \mbox{\hyperlink{namespace_human_factors_1_1_spatial_structures_abd405fa41da0f9a771d547aa47b6e1a0}{Graph\+Edge\+Aggregation}} agg, bool directed, ref Int\+Ptr out\+\_\+vector\+\_\+ptr, ref Int\+Ptr out\+\_\+data\+\_\+ptr)
+static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_a42ce115b8049b84bc9caacbca6c8e2d3}{Aggregate\+Costs}} (Int\+Ptr graph, \mbox{\hyperlink{namespace_human_factors_1_1_spatial_structures_abd405fa41da0f9a771d547aa47b6e1a0}{Graph\+Edge\+Aggregation}} agg, bool directed, string cost\+\_\+type, ref Int\+Ptr out\+\_\+vector\+\_\+ptr, ref Int\+Ptr out\+\_\+data\+\_\+ptr)
 \item 
 static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_a864c65d6ddcad8d724221ee78666179b}{Get\+Node\+ID}} (Int\+Ptr graph, \mbox{[}In\mbox{]} float\mbox{[}$\,$\mbox{]} point, ref int out\+\_\+id)
 \item 
-static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_a5555a9a356a5b78ef5141ca2c7c77371}{Add\+Edge\+From\+Nodes}} (Int\+Ptr \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}}, \mbox{[}In\mbox{]} float\mbox{[}$\,$\mbox{]} parent, \mbox{[}In\mbox{]} float\mbox{[}$\,$\mbox{]} child, float score)
+static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_a7b752bd22e0baadd7d364f82e1f834df}{Add\+Edge\+From\+Nodes}} (Int\+Ptr \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}}, \mbox{[}In\mbox{]} float\mbox{[}$\,$\mbox{]} parent, \mbox{[}In\mbox{]} float\mbox{[}$\,$\mbox{]} child, float score, string cost\+\_\+type)
 \item 
-static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_a4c5fb4526a15f976e99a47cfcc3db2f1}{Add\+Edge\+From\+Node\+I\+Ds}} (Int\+Ptr \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}}, int parent, int child, float score)
+static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_a34626bec3399cac234d555c987cb4329}{Add\+Edge\+From\+Node\+I\+Ds}} (Int\+Ptr \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Graph}}, int parent, int child, float score, string cost\+\_\+type)
 \item 
 static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_aa4fe8a28d0825c0f097070abb43ef714}{Aggregate\+Costs}} (Int\+Ptr graph, int agg, bool directed, ref Int\+Ptr out\+\_\+vector\+\_\+ptr, ref Int\+Ptr out\+\_\+float\+\_\+ptr)
 \item 
@@ -55,102 +69,118 @@ static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d
 static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_a467bedf56bd6572f0a5d38041b5f6716}{Destroy\+Nodes}} (Int\+Ptr list\+\_\+to\+\_\+destroy)
 \item 
 static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_a3783c9fa4caeb9247e85cbb47418ecd5}{Destroy\+Float\+Vector}} (Int\+Ptr float\+\_\+vector)
+\item 
+static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_a721ec402a4fc2cdf8741fd12f1c281a0}{Get\+Edge\+Cost}} (Int\+Ptr graph\+\_\+ptr, int parent\+\_\+id, int child\+\_\+id, string cost\+\_\+type, ref float out\+\_\+float)
+\item 
+static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_ad010aa1e47fcdfd4d6ea8a0008ccfdf8}{Calculate\+And\+Store\+Cross\+Slope}} (Int\+Ptr graph\+\_\+pointer)
+\item 
+static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_a8ce6747b92f155585c76b3c7d9e2ea5b}{Calculate\+And\+Store\+Energy\+Expenditure}} (Int\+Ptr graph\+\_\+pointer)
+\item 
+static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_a2bdc763781166a3854dec41725269809}{Add\+Node\+Attributes}} (Int\+Ptr g, int\mbox{[}$\,$\mbox{]} ids, string attribute, string\mbox{[}$\,$\mbox{]} scores, int num\+\_\+nodes)
+\item 
+static unsafe \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_abe0b96b89772ddb71118987097232cdb}{Delete\+Score\+Array}} (Int\+Ptr\mbox{[}$\,$\mbox{]} scores\+\_\+to\+\_\+delete, int num\+\_\+char\+\_\+arrays)
+\item 
+static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_a13612cdf5d7b679428f21b136f464488}{Get\+Node\+Attributes}} (Int\+Ptr g, string attribute, Int\+Ptr\mbox{[}$\,$\mbox{]} out\+\_\+scores, ref int out\+\_\+score\+\_\+size)
+\item 
+static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_a35329030dd4698af0b3eb321a01bbf22}{Clear\+Attribute\+Type}} (Int\+Ptr g, string attribute)
+\item 
+static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_native_methods_a4e6416eb21c85546c6b054a573484b0f}{Get\+Size\+Of\+Graph}} (Int\+Ptr graph\+\_\+ptr, ref int out\+\_\+size)
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 
 
-Definition at line 51 of file Spatial\+Structures\+Native.\+cs.
+Definition at line 54 of file Spatial\+Structures\+Native.\+cs.
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_a4c5fb4526a15f976e99a47cfcc3db2f1}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_a4c5fb4526a15f976e99a47cfcc3db2f1}} 
+\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_a34626bec3399cac234d555c987cb4329}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_a34626bec3399cac234d555c987cb4329}} 
 \index{HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}!AddEdgeFromNodeIDs@{AddEdgeFromNodeIDs}}
 \index{AddEdgeFromNodeIDs@{AddEdgeFromNodeIDs}!HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}}
 \doxysubsubsection{\texorpdfstring{AddEdgeFromNodeIDs()}{AddEdgeFromNodeIDs()}}
-{\footnotesize\ttfamily static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+Add\+Edge\+From\+Node\+I\+Ds (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{Graph,  }\item[{int}]{parent,  }\item[{int}]{child,  }\item[{float}]{score }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+Add\+Edge\+From\+Node\+I\+Ds (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{Graph,  }\item[{int}]{parent,  }\item[{int}]{child,  }\item[{float}]{score,  }\item[{string}]{cost\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
-\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_a5555a9a356a5b78ef5141ca2c7c77371}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_a5555a9a356a5b78ef5141ca2c7c77371}} 
+\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_a7b752bd22e0baadd7d364f82e1f834df}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_a7b752bd22e0baadd7d364f82e1f834df}} 
 \index{HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}!AddEdgeFromNodes@{AddEdgeFromNodes}}
 \index{AddEdgeFromNodes@{AddEdgeFromNodes}!HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}}
 \doxysubsubsection{\texorpdfstring{AddEdgeFromNodes()}{AddEdgeFromNodes()}}
-{\footnotesize\ttfamily static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+Add\+Edge\+From\+Nodes (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{Graph,  }\item[{\mbox{[}\+In\mbox{]} float\mbox{[}$\,$\mbox{]}}]{parent,  }\item[{\mbox{[}\+In\mbox{]} float\mbox{[}$\,$\mbox{]}}]{child,  }\item[{float}]{score }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+Add\+Edge\+From\+Nodes (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{Graph,  }\item[{\mbox{[}\+In\mbox{]} float\mbox{[}$\,$\mbox{]}}]{parent,  }\item[{\mbox{[}\+In\mbox{]} float\mbox{[}$\,$\mbox{]}}]{child,  }\item[{float}]{score,  }\item[{string}]{cost\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
 Referenced by Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+C\+\_\+\+Add\+Edge().
 
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_human_factors_1_1_spatial_structures_1_1_native_methods_a5555a9a356a5b78ef5141ca2c7c77371_icgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_afaea6a45bea0b0ffd66576af90c9a498}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_afaea6a45bea0b0ffd66576af90c9a498}} 
+\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_a2bdc763781166a3854dec41725269809}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_a2bdc763781166a3854dec41725269809}} 
+\index{HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}!AddNodeAttributes@{AddNodeAttributes}}
+\index{AddNodeAttributes@{AddNodeAttributes}!HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}}
+\doxysubsubsection{\texorpdfstring{AddNodeAttributes()}{AddNodeAttributes()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+Add\+Node\+Attributes (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{g,  }\item[{int\mbox{[}$\,$\mbox{]}}]{ids,  }\item[{string}]{attribute,  }\item[{string\mbox{[}$\,$\mbox{]}}]{scores,  }\item[{int}]{num\+\_\+nodes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+C\+\_\+\+Add\+Node\+Attributes().
+
+\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_a42ce115b8049b84bc9caacbca6c8e2d3}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_a42ce115b8049b84bc9caacbca6c8e2d3}} 
 \index{HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}!AggregateCosts@{AggregateCosts}}
 \index{AggregateCosts@{AggregateCosts}!HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}}
 \doxysubsubsection{\texorpdfstring{AggregateCosts()}{AggregateCosts()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+Aggregate\+Costs (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{graph,  }\item[{\mbox{\hyperlink{namespace_human_factors_1_1_spatial_structures_abd405fa41da0f9a771d547aa47b6e1a0}{Graph\+Edge\+Aggregation}}}]{agg,  }\item[{bool}]{directed,  }\item[{ref Int\+Ptr}]{out\+\_\+vector\+\_\+ptr,  }\item[{ref Int\+Ptr}]{out\+\_\+data\+\_\+ptr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+Aggregate\+Costs (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{graph,  }\item[{\mbox{\hyperlink{namespace_human_factors_1_1_spatial_structures_abd405fa41da0f9a771d547aa47b6e1a0}{Graph\+Edge\+Aggregation}}}]{agg,  }\item[{bool}]{directed,  }\item[{string}]{cost\+\_\+type,  }\item[{ref Int\+Ptr}]{out\+\_\+vector\+\_\+ptr,  }\item[{ref Int\+Ptr}]{out\+\_\+data\+\_\+ptr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
 Referenced by Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+C\+\_\+\+Aggregate\+Edge\+Costs().
 
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_human_factors_1_1_spatial_structures_1_1_native_methods_afaea6a45bea0b0ffd66576af90c9a498_icgraph}
-\end{center}
-\end{figure}
 \mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_aa4fe8a28d0825c0f097070abb43ef714}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_aa4fe8a28d0825c0f097070abb43ef714}} 
 \index{HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}!AggregateCosts@{AggregateCosts}}
 \index{AggregateCosts@{AggregateCosts}!HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}}
 \doxysubsubsection{\texorpdfstring{AggregateCosts()}{AggregateCosts()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+Aggregate\+Costs (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{graph,  }\item[{int}]{agg,  }\item[{bool}]{directed,  }\item[{ref Int\+Ptr}]{out\+\_\+vector\+\_\+ptr,  }\item[{ref Int\+Ptr}]{out\+\_\+float\+\_\+ptr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
-\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_ad7722cbc079fcf9e4495b79b08d218a2}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_ad7722cbc079fcf9e4495b79b08d218a2}} 
+\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_a3bf6ac31ce8601e106bc60d654354a38}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_a3bf6ac31ce8601e106bc60d654354a38}} 
 \index{HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}!C\_AddEdge@{C\_AddEdge}}
 \index{C\_AddEdge@{C\_AddEdge}!HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}}
 \doxysubsubsection{\texorpdfstring{C\_AddEdge()}{C\_AddEdge()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily static void Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+C\+\_\+\+Add\+Edge (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{graph\+\_\+ptr,  }\item[{int}]{parent\+\_\+id,  }\item[{int}]{child\+\_\+id,  }\item[{float}]{score }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [package]}}
+{\footnotesize\ttfamily static void Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+C\+\_\+\+Add\+Edge (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{graph\+\_\+ptr,  }\item[{int}]{parent\+\_\+id,  }\item[{int}]{child\+\_\+id,  }\item[{float}]{score,  }\item[{string}]{cost\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [package]}}
 
-\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_a144e9bd1d6f5f38ebf06b3b95a022882}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_a144e9bd1d6f5f38ebf06b3b95a022882}} 
+\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_a73587e3a5dc74f61ef11f1585a7c864a}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_a73587e3a5dc74f61ef11f1585a7c864a}} 
 \index{HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}!C\_AddEdge@{C\_AddEdge}}
 \index{C\_AddEdge@{C\_AddEdge}!HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}}
 \doxysubsubsection{\texorpdfstring{C\_AddEdge()}{C\_AddEdge()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily static void Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+C\+\_\+\+Add\+Edge (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{graph\+\_\+ptr,  }\item[{\mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}}}]{parent,  }\item[{\mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}}}]{child,  }\item[{float}]{cost }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [package]}}
+{\footnotesize\ttfamily static void Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+C\+\_\+\+Add\+Edge (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{graph\+\_\+ptr,  }\item[{\mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}}}]{parent,  }\item[{\mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}}}]{child,  }\item[{float}]{cost,  }\item[{string}]{cost\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [package]}}
 
 
 
-Definition at line 68 of file Spatial\+Structures\+Native.\+cs.
+Definition at line 71 of file Spatial\+Structures\+Native.\+cs.
 
 
 
 References Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+Add\+Edge\+From\+Nodes(), and Human\+Factors.\+Vector3\+D.\+To\+Array().
 
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_human_factors_1_1_spatial_structures_1_1_native_methods_a144e9bd1d6f5f38ebf06b3b95a022882_cgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_a53457f89d46804e798d806c0ba4b0940}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_a53457f89d46804e798d806c0ba4b0940}} 
+\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_a24fec3dbf61e5b96919a57ca7f959af0}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_a24fec3dbf61e5b96919a57ca7f959af0}} 
+\index{HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}!C\_AddNodeAttributes@{C\_AddNodeAttributes}}
+\index{C\_AddNodeAttributes@{C\_AddNodeAttributes}!HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}}
+\doxysubsubsection{\texorpdfstring{C\_AddNodeAttributes()}{C\_AddNodeAttributes()}}
+{\footnotesize\ttfamily static void Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+C\+\_\+\+Add\+Node\+Attributes (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{graph\+\_\+ptr,  }\item[{string}]{attribute,  }\item[{int\mbox{[}$\,$\mbox{]}}]{ids,  }\item[{string\mbox{[}$\,$\mbox{]}}]{scores }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [package]}}
+
+
+
+Definition at line 196 of file Spatial\+Structures\+Native.\+cs.
+
+
+
+References Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+Add\+Node\+Attributes().
+
+\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_a30608108f5adb70a2e28167a41921770}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_a30608108f5adb70a2e28167a41921770}} 
 \index{HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}!C\_AggregateEdgeCosts@{C\_AggregateEdgeCosts}}
 \index{C\_AggregateEdgeCosts@{C\_AggregateEdgeCosts}!HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}}
 \doxysubsubsection{\texorpdfstring{C\_AggregateEdgeCosts()}{C\_AggregateEdgeCosts()}}
-{\footnotesize\ttfamily static \mbox{\hyperlink{struct_human_factors_1_1_native_utils_1_1_c_vector_and_data}{C\+Vector\+And\+Data}} Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+C\+\_\+\+Aggregate\+Edge\+Costs (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{graph\+\_\+ptr,  }\item[{bool}]{directed,  }\item[{\mbox{\hyperlink{namespace_human_factors_1_1_spatial_structures_abd405fa41da0f9a771d547aa47b6e1a0}{Graph\+Edge\+Aggregation}}}]{agg\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [package]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{struct_human_factors_1_1_native_utils_1_1_c_vector_and_data}{C\+Vector\+And\+Data}} Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+C\+\_\+\+Aggregate\+Edge\+Costs (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{graph\+\_\+ptr,  }\item[{bool}]{directed,  }\item[{\mbox{\hyperlink{namespace_human_factors_1_1_spatial_structures_abd405fa41da0f9a771d547aa47b6e1a0}{Graph\+Edge\+Aggregation}}}]{agg\+\_\+type,  }\item[{string}]{cost\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [package]}}
 
 
 
-Definition at line 119 of file Spatial\+Structures\+Native.\+cs.
+Definition at line 149 of file Spatial\+Structures\+Native.\+cs.
 
 
 
@@ -160,22 +190,36 @@ References Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+Aggregate\+C
 
 Referenced by Human\+Factors.\+Spatial\+Structures.\+Graph.\+Aggregate\+Edge\+Costs().
 
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_human_factors_1_1_spatial_structures_1_1_native_methods_a53457f89d46804e798d806c0ba4b0940_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_human_factors_1_1_spatial_structures_1_1_native_methods_a53457f89d46804e798d806c0ba4b0940_icgraph}
-\end{center}
-\end{figure}
+\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_a53cdfc6b5bd734778aba74cc5d77068a}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_a53cdfc6b5bd734778aba74cc5d77068a}} 
+\index{HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}!C\_CalculateAndStoreCrossSlope@{C\_CalculateAndStoreCrossSlope}}
+\index{C\_CalculateAndStoreCrossSlope@{C\_CalculateAndStoreCrossSlope}!HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}}
+\doxysubsubsection{\texorpdfstring{C\_CalculateAndStoreCrossSlope()}{C\_CalculateAndStoreCrossSlope()}}
+{\footnotesize\ttfamily static void Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+C\+\_\+\+Calculate\+And\+Store\+Cross\+Slope (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{graph }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [package]}}
+
+
+
+Referenced by Human\+Factors.\+Spatial\+Structures.\+Cost\+Algorithms.\+Calculate\+And\+Store\+Cross\+Slope().
+
+\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_ae644f232b287f87fb95f4e4d7f2cea48}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_ae644f232b287f87fb95f4e4d7f2cea48}} 
+\index{HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}!C\_CalculateAndStoreEnergyExpenditure@{C\_CalculateAndStoreEnergyExpenditure}}
+\index{C\_CalculateAndStoreEnergyExpenditure@{C\_CalculateAndStoreEnergyExpenditure}!HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}}
+\doxysubsubsection{\texorpdfstring{C\_CalculateAndStoreEnergyExpenditure()}{C\_CalculateAndStoreEnergyExpenditure()}}
+{\footnotesize\ttfamily static void Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+C\+\_\+\+Calculate\+And\+Store\+Energy\+Expenditure (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{graph }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [package]}}
+
+
+
+Referenced by Human\+Factors.\+Spatial\+Structures.\+Cost\+Algorithms.\+Calculate\+And\+Store\+Energy\+Expenditure().
+
+\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_a0eb7a8a8273141b1415a1f9fe95933b5}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_a0eb7a8a8273141b1415a1f9fe95933b5}} 
+\index{HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}!C\_ClearAttributeType@{C\_ClearAttributeType}}
+\index{C\_ClearAttributeType@{C\_ClearAttributeType}!HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}}
+\doxysubsubsection{\texorpdfstring{C\_ClearAttributeType()}{C\_ClearAttributeType()}}
+{\footnotesize\ttfamily static void Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+C\+\_\+\+Clear\+Attribute\+Type (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{graph,  }\item[{string}]{attribute\+\_\+name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [package]}}
+
+
+
+Referenced by Human\+Factors.\+Spatial\+Structures.\+Graph.\+Clear\+Node\+Attributes().
+
 \mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_a15c93881f9d3eae1318815c1c3ce72cb}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_a15c93881f9d3eae1318815c1c3ce72cb}} 
 \index{HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}!C\_CompressGraph@{C\_CompressGraph}}
 \index{C\_CompressGraph@{C\_CompressGraph}!HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}}
@@ -190,20 +234,12 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 53 of file Spatial\+Structures\+Native.\+cs.
+Definition at line 56 of file Spatial\+Structures\+Native.\+cs.
 
 
 
 References Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+Create\+Graph().
 
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_human_factors_1_1_spatial_structures_1_1_native_methods_a4a286e64568492c9e0199fb3a8b51182_cgraph}
-\end{center}
-\end{figure}
 \mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_afd337d4bb4fc2befed3620f4327d0911}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_afd337d4bb4fc2befed3620f4327d0911}} 
 \index{HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}!C\_DestroyFloatVector@{C\_DestroyFloatVector}}
 \index{C\_DestroyFloatVector@{C\_DestroyFloatVector}!HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}}
@@ -220,14 +256,6 @@ Here is the call graph for this function\+:
 
 Referenced by Human\+Factors.\+Spatial\+Structures.\+Graph.\+Release\+Handle().
 
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_human_factors_1_1_spatial_structures_1_1_native_methods_a464f503116478fbb7eb9baeb2ef45aac_icgraph}
-\end{center}
-\end{figure}
 \mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_afe213312fd154b66623c2a8e01194d02}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_afe213312fd154b66623c2a8e01194d02}} 
 \index{HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}!C\_DestroyNodeVector@{C\_DestroyNodeVector}}
 \index{C\_DestroyNodeVector@{C\_DestroyNodeVector}!HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}}
@@ -238,23 +266,15 @@ Here is the caller graph for this function\+:
 
 Referenced by Human\+Factors.\+Spatial\+Structures.\+Node\+List.\+Release\+Handle().
 
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_human_factors_1_1_spatial_structures_1_1_native_methods_afe213312fd154b66623c2a8e01194d02_icgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_afcfe59fc55ebfc796a8baeed3f011a42}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_afcfe59fc55ebfc796a8baeed3f011a42}} 
+\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_a6ed59ccf6ca4b02b79b12b724afddce9}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_a6ed59ccf6ca4b02b79b12b724afddce9}} 
 \index{HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}!C\_GetCSRPointers@{C\_GetCSRPointers}}
 \index{C\_GetCSRPointers@{C\_GetCSRPointers}!HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}}
 \doxysubsubsection{\texorpdfstring{C\_GetCSRPointers()}{C\_GetCSRPointers()}}
-{\footnotesize\ttfamily static \mbox{\hyperlink{struct_human_factors_1_1_spatial_structures_1_1_c_s_r_info}{C\+S\+R\+Info}} Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+C\+\_\+\+Get\+C\+S\+R\+Pointers (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{graph\+\_\+ptr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [package]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{struct_human_factors_1_1_spatial_structures_1_1_c_s_r_info}{C\+S\+R\+Info}} Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+C\+\_\+\+Get\+C\+S\+R\+Pointers (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{graph\+\_\+ptr,  }\item[{string}]{cost\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [package]}}
 
 
 
-Definition at line 87 of file Spatial\+Structures\+Native.\+cs.
+Definition at line 104 of file Spatial\+Structures\+Native.\+cs.
 
 
 
@@ -264,22 +284,56 @@ References Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+Get\+C\+S\+R
 
 Referenced by Human\+Factors.\+Spatial\+Structures.\+Graph.\+Compress\+To\+C\+S\+R().
 
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_human_factors_1_1_spatial_structures_1_1_native_methods_afcfe59fc55ebfc796a8baeed3f011a42_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_human_factors_1_1_spatial_structures_1_1_native_methods_afcfe59fc55ebfc796a8baeed3f011a42_icgraph}
-\end{center}
-\end{figure}
+\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_a182becf6bcb9045968fd8c04f12e64f8}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_a182becf6bcb9045968fd8c04f12e64f8}} 
+\index{HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}!C\_GetEdgeCost@{C\_GetEdgeCost}}
+\index{C\_GetEdgeCost@{C\_GetEdgeCost}!HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}}
+\doxysubsubsection{\texorpdfstring{C\_GetEdgeCost()}{C\_GetEdgeCost()}}
+{\footnotesize\ttfamily static float Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+C\+\_\+\+Get\+Edge\+Cost (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{graph\+\_\+ptr,  }\item[{int}]{parent,  }\item[{int}]{child,  }\item[{string}]{cost\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [package]}}
+
+
+
+Definition at line 176 of file Spatial\+Structures\+Native.\+cs.
+
+
+
+References Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+Get\+Edge\+Cost().
+
+
+
+Referenced by Human\+Factors.\+Spatial\+Structures.\+Graph.\+Get\+Cost().
+
+\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_aa70dd1817ef11d81c5fa288c1e9f43cd}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_aa70dd1817ef11d81c5fa288c1e9f43cd}} 
+\index{HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}!C\_GetGraphSize@{C\_GetGraphSize}}
+\index{C\_GetGraphSize@{C\_GetGraphSize}!HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}}
+\doxysubsubsection{\texorpdfstring{C\_GetGraphSize()}{C\_GetGraphSize()}}
+{\footnotesize\ttfamily static int Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+C\+\_\+\+Get\+Graph\+Size (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{graph\+\_\+ptr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [package]}}
+
+
+
+Definition at line 230 of file Spatial\+Structures\+Native.\+cs.
+
+
+
+References Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+Get\+Size\+Of\+Graph().
+
+\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_aca85eef5976c0f0f2710e8dba6484322}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_aca85eef5976c0f0f2710e8dba6484322}} 
+\index{HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}!C\_GetNodeAttributes@{C\_GetNodeAttributes}}
+\index{C\_GetNodeAttributes@{C\_GetNodeAttributes}!HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}}
+\doxysubsubsection{\texorpdfstring{C\_GetNodeAttributes()}{C\_GetNodeAttributes()}}
+{\footnotesize\ttfamily static unsafe string \mbox{[}$\,$\mbox{]} Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+C\+\_\+\+Get\+Node\+Attributes (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{graph\+\_\+ptr,  }\item[{string}]{attribute,  }\item[{int}]{num\+\_\+nodes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [package]}}
+
+
+
+Definition at line 204 of file Spatial\+Structures\+Native.\+cs.
+
+
+
+References Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+Delete\+Score\+Array(), and Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+Get\+Node\+Attributes().
+
+
+
+Referenced by Human\+Factors.\+Spatial\+Structures.\+Graph.\+Get\+Node\+Attributes().
+
 \mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_a68e058036911bb82800f422627523259}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_a68e058036911bb82800f422627523259}} 
 \index{HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}!C\_GetNodeID@{C\_GetNodeID}}
 \index{C\_GetNodeID@{C\_GetNodeID}!HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}}
@@ -288,20 +342,12 @@ Here is the caller graph for this function\+:
 
 
 
-Definition at line 78 of file Spatial\+Structures\+Native.\+cs.
+Definition at line 95 of file Spatial\+Structures\+Native.\+cs.
 
 
 
 References Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+Get\+Node\+I\+D().
 
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_human_factors_1_1_spatial_structures_1_1_native_methods_a68e058036911bb82800f422627523259_cgraph}
-\end{center}
-\end{figure}
 \mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_a020dc5849f92921ab948b4788534f857}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_a020dc5849f92921ab948b4788534f857}} 
 \index{HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}!C\_GetNodes@{C\_GetNodes}}
 \index{C\_GetNodes@{C\_GetNodes}!HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}}
@@ -310,20 +356,30 @@ Here is the call graph for this function\+:
 
 
 
-Definition at line 102 of file Spatial\+Structures\+Native.\+cs.
+Definition at line 132 of file Spatial\+Structures\+Native.\+cs.
 
 
 
 References Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+Get\+All\+Nodes\+From\+Graph(), and Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+Get\+Size\+Of\+Node\+Vector().
 
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_human_factors_1_1_spatial_structures_1_1_native_methods_a020dc5849f92921ab948b4788534f857_cgraph}
-\end{center}
-\end{figure}
+\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_ad010aa1e47fcdfd4d6ea8a0008ccfdf8}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_ad010aa1e47fcdfd4d6ea8a0008ccfdf8}} 
+\index{HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}!CalculateAndStoreCrossSlope@{CalculateAndStoreCrossSlope}}
+\index{CalculateAndStoreCrossSlope@{CalculateAndStoreCrossSlope}!HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}}
+\doxysubsubsection{\texorpdfstring{CalculateAndStoreCrossSlope()}{CalculateAndStoreCrossSlope()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+Calculate\+And\+Store\+Cross\+Slope (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{graph\+\_\+pointer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_a8ce6747b92f155585c76b3c7d9e2ea5b}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_a8ce6747b92f155585c76b3c7d9e2ea5b}} 
+\index{HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}!CalculateAndStoreEnergyExpenditure@{CalculateAndStoreEnergyExpenditure}}
+\index{CalculateAndStoreEnergyExpenditure@{CalculateAndStoreEnergyExpenditure}!HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}}
+\doxysubsubsection{\texorpdfstring{CalculateAndStoreEnergyExpenditure()}{CalculateAndStoreEnergyExpenditure()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+Calculate\+And\+Store\+Energy\+Expenditure (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{graph\+\_\+pointer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_a35329030dd4698af0b3eb321a01bbf22}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_a35329030dd4698af0b3eb321a01bbf22}} 
+\index{HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}!ClearAttributeType@{ClearAttributeType}}
+\index{ClearAttributeType@{ClearAttributeType}!HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}}
+\doxysubsubsection{\texorpdfstring{ClearAttributeType()}{ClearAttributeType()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+Clear\+Attribute\+Type (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{g,  }\item[{string}]{attribute }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
 \mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_a47e5889843a07d9a40de5306a7a7baa2}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_a47e5889843a07d9a40de5306a7a7baa2}} 
 \index{HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}!Compress@{Compress}}
 \index{Compress@{Compress}!HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}}
@@ -340,14 +396,16 @@ Here is the call graph for this function\+:
 
 Referenced by Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+C\+\_\+\+Create\+Graph().
 
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_human_factors_1_1_spatial_structures_1_1_native_methods_aa07e72a9157eba0bdf38d77a6e5b66ce_icgraph}
-\end{center}
-\end{figure}
+\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_abe0b96b89772ddb71118987097232cdb}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_abe0b96b89772ddb71118987097232cdb}} 
+\index{HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}!DeleteScoreArray@{DeleteScoreArray}}
+\index{DeleteScoreArray@{DeleteScoreArray}!HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}}
+\doxysubsubsection{\texorpdfstring{DeleteScoreArray()}{DeleteScoreArray()}}
+{\footnotesize\ttfamily static unsafe \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+Delete\+Score\+Array (\begin{DoxyParamCaption}\item[{Int\+Ptr\mbox{[}$\,$\mbox{]}}]{scores\+\_\+to\+\_\+delete,  }\item[{int}]{num\+\_\+char\+\_\+arrays }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+C\+\_\+\+Get\+Node\+Attributes().
+
 \mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_a3783c9fa4caeb9247e85cbb47418ecd5}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_a3783c9fa4caeb9247e85cbb47418ecd5}} 
 \index{HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}!DestroyFloatVector@{DestroyFloatVector}}
 \index{DestroyFloatVector@{DestroyFloatVector}!HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}}
@@ -376,32 +434,36 @@ Here is the caller graph for this function\+:
 
 Referenced by Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+C\+\_\+\+Get\+Nodes().
 
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_human_factors_1_1_spatial_structures_1_1_native_methods_ad72eefdfc5dfd587e0ddbe98295debf0_icgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_aa6018c8beb6f49bb1f0b4708821b171b}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_aa6018c8beb6f49bb1f0b4708821b171b}} 
+\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_a89e694675c5103650eaec1fff04704ad}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_a89e694675c5103650eaec1fff04704ad}} 
 \index{HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}!GetCSRPointers@{GetCSRPointers}}
 \index{GetCSRPointers@{GetCSRPointers}!HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}}
 \doxysubsubsection{\texorpdfstring{GetCSRPointers()}{GetCSRPointers()}}
-{\footnotesize\ttfamily static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+Get\+C\+S\+R\+Pointers (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{Graph,  }\item[{ref int}]{out\+\_\+nnz,  }\item[{ref int}]{out\+\_\+num\+\_\+rows,  }\item[{ref int}]{out\+\_\+num\+\_\+cols,  }\item[{ref Int\+Ptr}]{out\+\_\+data\+\_\+ptr,  }\item[{ref Int\+Ptr}]{out\+\_\+inner\+\_\+indices\+\_\+ptr,  }\item[{ref Int\+Ptr}]{out\+\_\+outer\+\_\+indices\+\_\+ptr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+Get\+C\+S\+R\+Pointers (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{Graph,  }\item[{ref int}]{out\+\_\+nnz,  }\item[{ref int}]{out\+\_\+num\+\_\+rows,  }\item[{ref int}]{out\+\_\+num\+\_\+cols,  }\item[{ref Int\+Ptr}]{out\+\_\+data\+\_\+ptr,  }\item[{ref Int\+Ptr}]{out\+\_\+inner\+\_\+indices\+\_\+ptr,  }\item[{ref Int\+Ptr}]{out\+\_\+outer\+\_\+indices\+\_\+ptr,  }\item[{string}]{cost\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
 Referenced by Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+C\+\_\+\+Get\+C\+S\+R\+Pointers().
 
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_human_factors_1_1_spatial_structures_1_1_native_methods_aa6018c8beb6f49bb1f0b4708821b171b_icgraph}
-\end{center}
-\end{figure}
+\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_a721ec402a4fc2cdf8741fd12f1c281a0}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_a721ec402a4fc2cdf8741fd12f1c281a0}} 
+\index{HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}!GetEdgeCost@{GetEdgeCost}}
+\index{GetEdgeCost@{GetEdgeCost}!HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}}
+\doxysubsubsection{\texorpdfstring{GetEdgeCost()}{GetEdgeCost()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+Get\+Edge\+Cost (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{graph\+\_\+ptr,  }\item[{int}]{parent\+\_\+id,  }\item[{int}]{child\+\_\+id,  }\item[{string}]{cost\+\_\+type,  }\item[{ref float}]{out\+\_\+float }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+C\+\_\+\+Get\+Edge\+Cost().
+
+\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_a13612cdf5d7b679428f21b136f464488}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_a13612cdf5d7b679428f21b136f464488}} 
+\index{HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}!GetNodeAttributes@{GetNodeAttributes}}
+\index{GetNodeAttributes@{GetNodeAttributes}!HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}}
+\doxysubsubsection{\texorpdfstring{GetNodeAttributes()}{GetNodeAttributes()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+Get\+Node\+Attributes (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{g,  }\item[{string}]{attribute,  }\item[{Int\+Ptr\mbox{[}$\,$\mbox{]}}]{out\+\_\+scores,  }\item[{ref int}]{out\+\_\+score\+\_\+size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+C\+\_\+\+Get\+Node\+Attributes().
+
 \mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_a864c65d6ddcad8d724221ee78666179b}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_a864c65d6ddcad8d724221ee78666179b}} 
 \index{HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}!GetNodeID@{GetNodeID}}
 \index{GetNodeID@{GetNodeID}!HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}}
@@ -412,19 +474,21 @@ Here is the caller graph for this function\+:
 
 Referenced by Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+C\+\_\+\+Get\+Node\+I\+D().
 
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_human_factors_1_1_spatial_structures_1_1_native_methods_a864c65d6ddcad8d724221ee78666179b_icgraph}
-\end{center}
-\end{figure}
 \mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_ae7466167fbc99e4f6372b267a3387c7d}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_ae7466167fbc99e4f6372b267a3387c7d}} 
 \index{HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}!GetNodes@{GetNodes}}
 \index{GetNodes@{GetNodes}!HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}}
 \doxysubsubsection{\texorpdfstring{GetNodes()}{GetNodes()}}
 {\footnotesize\ttfamily static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+Get\+Nodes (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{graph,  }\item[{ref Int\+Ptr}]{out\+\_\+vector\+\_\+ptr,  }\item[{ref Int\+Ptr}]{out\+\_\+data\+\_\+ptr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_a4e6416eb21c85546c6b054a573484b0f}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_a4e6416eb21c85546c6b054a573484b0f}} 
+\index{HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}!GetSizeOfGraph@{GetSizeOfGraph}}
+\index{GetSizeOfGraph@{GetSizeOfGraph}!HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}}
+\doxysubsubsection{\texorpdfstring{GetSizeOfGraph()}{GetSizeOfGraph()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{namespace_human_factors_1_1_exceptions_a8a5123945956ef2d754b5420be18987f}{H\+F\+\_\+\+S\+T\+A\+T\+US}} Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+Get\+Size\+Of\+Graph (\begin{DoxyParamCaption}\item[{Int\+Ptr}]{graph\+\_\+ptr,  }\item[{ref int}]{out\+\_\+size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Referenced by Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+C\+\_\+\+Get\+Graph\+Size().
 
 \mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_native_methods_a62d91b3fdab22aa4433ab7ef9593a83e}\label{class_human_factors_1_1_spatial_structures_1_1_native_methods_a62d91b3fdab22aa4433ab7ef9593a83e}} 
 \index{HumanFactors.SpatialStructures.NativeMethods@{HumanFactors.SpatialStructures.NativeMethods}!GetSizeOfNodeVector@{GetSizeOfNodeVector}}
@@ -436,14 +500,6 @@ Here is the caller graph for this function\+:
 
 Referenced by Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+C\+\_\+\+Get\+Nodes().
 
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_human_factors_1_1_spatial_structures_1_1_native_methods_a62d91b3fdab22aa4433ab7ef9593a83e_icgraph}
-\end{center}
-\end{figure}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
