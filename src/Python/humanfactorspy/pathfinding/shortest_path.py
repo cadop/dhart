@@ -63,13 +63,13 @@ def DijkstraShortestPath(
             then it must already exist in the graph.
     
     Returns:
+        
         List[Union[path, None]]:
-            if multiple start/end ids were passed
+            if multiple start/end ids were passed.If a path cannot be found to
+            connect a start and end point that path will be set as None.
         Union[Path, None]:
-             One start or end point was passed
-
-        If a path cannot be found to connect a start and end point that
-        path will be returned as None.
+             One start or end point was passed, return the single path or none
+             if no path could be found between start and end.
     
     Preconditions:
         1) If using multiple paths, The length of start_ids must match
@@ -186,9 +186,6 @@ def DijkstraFindAllShortestPaths(
             Of a path from every node to every other node in the graph in order
             of start point then end point. If a specific path could not be 
             generated, then it will be set to None.
-
-        If a path cannot be found to connect a start and end point that
-        path will be returned as None.
     
     Precondition:
         If cost_type is not left as the default, then it must be the name
