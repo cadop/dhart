@@ -41,6 +41,8 @@ class InvalidOBJException(HFException):
 
 class FileNotFoundException(HFException):
     """ The file at the given path given file was not found """
+    def __init__(self, message = ""):
+        super().__init__(message)
 
 
 class OutOfRangeException(HFException):
