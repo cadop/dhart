@@ -5,7 +5,7 @@ from typing import *
 import numpy
 from humanfactorspy.spatialstructures import Graph
 
-__all__ = ["ConvertNodesToIds", "DijkstraShortestPath"]
+__all__ = ["ConvertNodesToIds", "DijkstraShortestPath", "DijkstraFindAllShortestPaths"]
 
 
 def ConvertNodesToIds(graph: Graph, nodes: List[Union[Tuple, int]]) -> List[int]:
@@ -48,7 +48,7 @@ def DijkstraShortestPath(
     start: List[Union[int, Tuple[float, float, float]]],
     end: List[Union[int, Tuple[float, float, float]]],
     cost_type: str = "",
-) -> Union[List[Union[Path, None]], Union[Path, None]]:
+    ) -> Union[List[Union[Path, None]], Union[Path, None]]:
     """ Find the shortest path from start to end using Dijkstra's shortest path algorithm
     
     Accepts a list of starting / ending points or single starting/ending
@@ -166,3 +166,36 @@ def DijkstraShortestPath(
         out_paths = [Path(result[0], result[1], result[2])
                      if result else None for result in res]
         return out_paths
+
+
+def DijkstraFindAllShortestPaths(
+    graph: Graph,
+    cost_type: str = "",
+    ) -> Union[List[Union[Path, None]], Union[Path, None]]:
+    """ Find the shortest path between every possible combination of nodes 
+        in a graph.
+
+    Args:
+        Graph : The graph to generate paths in. 
+        cost_type : Which cost to use for path generation. If no cost type is specified,
+            then the graph's default cost type will be used. If a cost type is specified
+            then it must already exist in the graph.
+    
+    Returns:
+        List[Union[path, None]]:
+            Of a path from every node to every other node in the graph in order
+            of start point then end point. If a specific path could not be 
+            generated, then it will be set to None.
+
+        If a path cannot be found to connect a start and end point that
+        path will be returned as None.
+    
+    Precondition:
+        If cost_type is not left as the default, then it must be the name
+        of a valid cost already defined in graph.
+
+    Raises:
+        KeyError: cost_type wasn't blank and did not point to an already defined
+            cost in the graph
+    """
+    raise NotImplementedError()

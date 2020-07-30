@@ -1,6 +1,6 @@
 import pytest
 
-from humanfactorspy.pathfinding import DijkstraShortestPath
+from humanfactorspy.pathfinding import DijkstraShortestPath, DijkstraFindAllShortestPaths 
 from humanfactorspy.spatialstructures import Graph
 
 test_cost = "Test"
@@ -146,3 +146,36 @@ def test_MultipleShortestPathAltCost(PathTestGraphAlternateCosts):
         for i in range(0, len(correct_path)):
             assert correct_path[i][0] == SP[i][0]
             assert correct_path[i][1] == SP[i][1]
+
+
+def test_AllToAllPaths(PathTestGraphAlternateCosts):
+    """ Assert that the results from all to all equal the actua
+        shortest paths between each set of nodes. """
+
+    g = PathTestGraphAlternateCosts
+
+    # Get the result of all paths
+    all_paths = DijkstraFindAllShortestPaths(g)
+
+    # Compare results to the results of finding a path
+    # using the single path method
+    num_nodes = g.NumNodes()
+
+    for parent in range(0, num_nodes):
+
+        # Each parent will have a path to every other node in the
+        # graph, so it's paths will be num_nodes * parent to
+        # num_nodes * parent + num_nodes
+        offset = num_nodes * parent + num_nodes
+
+        for child in range(0, num_nodes):
+
+            # Get the path at this index
+            path_index = num_nodes * parent + child
+            actual_path = all_paths[path_index]
+
+            # Calculate the expected shortest path using the single method
+            expected_path = DijkstraShortestPath(g, parent, child)
+
+            # Assert equality
+            assert(expected_path == actual_path)
