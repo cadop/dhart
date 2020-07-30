@@ -172,36 +172,130 @@ def DijkstraFindAllShortestPaths(
     graph: Graph,
     cost_type: str = "",
     ) -> List[Union[Path, None]]:
-    """ Find the shortest path between every possible combination of nodes 
-        in a graph.
-
-    Args:
-        Graph : The graph to generate paths in. 
-        cost_type : Which cost to use for path generation. If no cost type is specified,
-            then the graph's default cost type will be used. If a cost type is specified
-            then it must already exist in the graph.
+    """ Find All Pairs Shortest Path
     
-    Returns:
-        List[Union[path, None]]:
-            Of a path from every node to every other node in the graph in order
-            of start point then end point. If a specific path could not be 
-            generated, then it will be set to None.
-    
-    Precondition:
-        If cost_type is not left as the default, then it must be the name
-        of a valid cost already defined in graph.
+    Find the shortest path between every possible combination of nodes 
+    in a graph.
 
-    Raises:
-        KeyError: cost_type wasn't blank and did not point to an already defined
-            cost in the graph
+    Parameters
+    ----------
+
+    Graph : The graph to generate paths in. 
+    cost_type : Which cost to use for path generation. If no cost type is specified,
+        then the graph's default cost type will be used. If a cost type is specified
+        then it must already exist in the graph.
+    
+    Returns
+    -------
+
+    List[Union[path, None]]:
+        Of a path from every node to every other node in the graph in order
+        of start point then end point. If a specific path could not be 
+        generated, then it will be set to None.
+    
+    Precondition
+    ------------
+
+    If cost_type is not left as the default, then it must be the name
+    of a valid cost already defined in graph.
+
+    Raises
+    ------
+
+    KeyError: cost_type wasn't blank and did not point to an already defined
+        cost in the graph
+
+    Examples
+    --------
+
+    >>> from humanfactorspy.pathfinding import DijkstraShortestPath, DijkstraFindAllShortestPaths
+    >>> from humanfactorspy.spatialstructures import Graph
+    >>> import numpy as np
+    >>> 
+    >>> g = Graph()
+    >>> g.AddEdgeToGraph(0, 1, 100)
+    >>> g.AddEdgeToGraph(0, 2, 50)
+    >>> g.AddEdgeToGraph(1, 3, 10)
+    >>> g.AddEdgeToGraph(2, 1, 10)
+    >>> g.AddEdgeToGraph(3, 4, 10)
+    >>> g.AddEdgeToGraph(4, 1, 10)
+    >>> g.AddEdgeToGraph(4, 2, 10)
+    >>> g.AddEdgeToGraph(2, 4, 10)
+    >>> csr = g.CompressToCSR()
+    >>> 
+    >>> # Size of G
+    >>> g_size = len(g.getNodes())
+    >>> 
+    >>> # Get APSP
+    >>> SP = DijkstraFindAllShortestPaths(g)
+    >>> 
+    >>> # Reshape APSP result to nxn of graph size
+    >>> apsp_mat = np.reshape(SP, (g_size,g_size))
+    >>> 
+    >>> for i, row in enumerate(apsp_mat):
+    ...     print('Paths from node: ',i)
+    ...     for j, path in enumerate(row):
+    ...         if path is not None:
+    ...             print('To node: ',j, ' = ', path['id'])
+    ...         else: 
+    ...             print('To node: ',j, ' =   ')
+    ... # doctest: +NORMALIZE_WHITESPACE
+    Paths from node:  0
+    To node:  0  =   
+    To node:  1  =  [0 2 1]
+    To node:  2  =  [0 2]
+    To node:  3  =  [0 2 1 3]
+    To node:  4  =  [0 2 4]
+    Paths from node:  1
+    To node:  0  =   
+    To node:  1  =   
+    To node:  2  =  [1 3 4 2]
+    To node:  3  =  [1 3]
+    To node:  4  =  [1 3 4]
+    Paths from node:  2
+    To node:  0  =   
+    To node:  1  =  [2 1]
+    To node:  2  =   
+    To node:  3  =  [2 1 3]
+    To node:  4  =  [2 4]
+    Paths from node:  3
+    To node:  0  =   
+    To node:  1  =  [3 4 1]
+    To node:  2  =  [3 4 2]
+    To node:  3  =   
+    To node:  4  =  [3 4]
+    Paths from node:  4
+    To node:  0  =   
+    To node:  1  =  [4 1]
+    To node:  2  =  [4 2]
+    To node:  3  =  [4 1 3]
+    To node:  4  =   
+
+    >>> # Convert to a distance matrix
+    >>> # Create an empty array the size of the graph
+    >>> # Then set distance to infinity if there is no path
+    >>> # and 0 if it is the distance to itself
+    >>> dst = np.empty((g_size,g_size))
+    >>> for i, path in enumerate(SP):
+    ...     if path is None: 
+    ...         if int(i/g_size) == i%g_size: dist = 0
+    ...         else: dist = np.inf
+    ...     else: dist = np.sum(path['cost_to_next'])
+    ...     dst[int(i/g_size)][i%g_size] = dist
+    >>> 
+    >>> print(dst)
+    [[ 0. 60. 50. 70. 60.]
+     [inf  0. 30. 10. 20.]
+     [inf 10.  0. 20. 10.]
+     [inf 20. 20.  0. 10.]
+     [inf 10. 10. 20.  0.]]
+
     """
 
     # Call out to native code and get results
-    all_results = pathfinder_native_functions.C_FindAllPaths(
-        graph.graph_ptr,
-        graph.NumNodes(),
-        cost_type
-    )
+    all_results = pathfinder_native_functions.C_FindAllPaths(graph.graph_ptr,
+                                                             graph.NumNodes(),
+                                                             cost_type)
 
     # Wrap values that weren't null in python paths
     out_paths = [Path(result[0], result[1], result[2])
