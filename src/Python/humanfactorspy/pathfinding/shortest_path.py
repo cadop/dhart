@@ -55,16 +55,18 @@ def DijkstraShortestPath(
     points. 
 
     Args:
-        Graph: A valid C++ Graph
-        start: one or more Starting Node IDs
-        end: one or more Ending Node IDs 
-        cost_type: Which cost to use for path generation. If no cost type is specified,
-                then the graph's default cost type will be used. If a cost type is specified
-                then it must already exist in the graph.
+        Graph : A valid C++ Graph
+        start : one or more Starting Node IDs
+        end : one or more Ending Node IDs 
+        cost_type : Which cost to use for path generation. If no cost type is specified,
+            then the graph's default cost type will be used. If a cost type is specified
+            then it must already exist in the graph.
     
     Returns:
-        List[Union[path, None]]: if multiple start/end ids were passed
-        Union[Path, None]: One start or end point was passed
+        List[Union[path, None]]:
+            if multiple start/end ids were passed
+        Union[Path, None]:
+             One start or end point was passed
 
         If a path cannot be found to connect a start and end point that
         path will be returned as None.
@@ -75,11 +77,10 @@ def DijkstraShortestPath(
         2) Each node in start_nodes and end_nodes must contain the x,y,z
            position (or id) of an existing node in graph
         3) If cost_type is not left as the default, then it must be the name
-             of a valid cost already defined in graph.
+           of a valid cost already defined in graph.
 
     Raises:
-        humanfactorspy.Exceptions.Exception: Start or End did not exist in 
-            the given graph OR start/end lists did not match in size.
+        ValueError: Length of start and end arrays did not match
         KeyError: cost_type wasn't blank and did not point to an already defined
             cost in the graph
 
@@ -140,11 +141,13 @@ def DijkstraShortestPath(
 
     # Throw if the caller violates our pre condition
     if len(start) != len(end):
-        raise Exception("Start and End arrays didn't match in size!")
+        raise ValueError(f"Length of start array ({len(start)}) did not match length of end array {len(end)}!")
 
-    # If we're only generating a single path, then call the single path function
+    # If we're only generating a single path, then call the single path
+    # function
     if len(start) == 1:
-        res = pathfinder_native_functions.C_FindPath(graph.graph_ptr, start[0], end[0])
+        res = pathfinder_native_functions.C_FindPath(
+            graph.graph_ptr, start[0], end[0], cost_type)
 
         # Check if a path could be found between start and end
         if res:  # If so, wrap the pointers in a python Path
@@ -156,10 +159,10 @@ def DijkstraShortestPath(
     # If multiple paths are going to be generated, then call the multiple path
     # function
     else:
-        res = pathfinder_native_functions.C_FindPaths(graph.graph_ptr, start, end)
+        res = pathfinder_native_functions.C_FindPaths(
+            graph.graph_ptr, start, end, cost_type)
 
         # Wrap values that weren't null in python paths
-        out_paths = [
-            Path(result[0], result[1], result[2]) if result else None for result in res
-        ]
+        out_paths = [Path(result[0], result[1], result[2])
+                     if result else None for result in res]
         return out_paths

@@ -311,10 +311,7 @@ class Graph:
     def get_closest_points():
         """ Get the closest point in the graph to the input set of points
 
-        Todo
-        ----
-
-        Implement this
+        TODO Implement this
 
         """
 
