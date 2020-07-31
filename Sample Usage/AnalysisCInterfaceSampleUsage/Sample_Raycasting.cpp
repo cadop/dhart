@@ -30,13 +30,6 @@ namespace CInterfaceTests {
 }
 
 /*!
-	\brief	Forward declaration CInterfaceTests::raycasting
-*/
-namespace CInterfaceTests {
-	void raycasting(HINSTANCE dll_hf);
-}
-
-/*!
 	\brief	Forward declaration for HF::Geometry::MeshInfo
 */
 namespace HF::Geometry {
