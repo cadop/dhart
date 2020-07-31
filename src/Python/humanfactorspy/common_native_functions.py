@@ -82,3 +82,26 @@ def ConvertIntsToArray(ints: Iterable[int]) -> c_int:
         int_arr[i] = ints[i]
 
     return int_arr
+
+
+def convert_strings_to_array(strings: List[str]) -> c_char_p:
+    """ Convert a list of strings to an array of char arrays
+
+    Args:
+        strings (List[str]): Strings to convert
+
+    Returns:
+        c_char_p: A list of char arrays equal in length to the input list of
+        strings
+    """
+    num_strings = len(strings)
+
+    # Define type
+    arr_type = c_char_p * num_strings
+    string_arr = arr_type()
+
+    # Convert and insert every string in the input
+    for i in range(0, num_strings):
+        string_arr[i] = GetStringPtr(strings[i])
+    
+    return string_arr

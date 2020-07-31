@@ -50,6 +50,17 @@ class Graph:
         costs have corresponding edges in the default cost set, but different 
         costs to traverse from the parent to the child node.
 
+    Node Attributes:
+        The graph is able to store an arbitrary amount of information about the 
+        nodes it contains as strings. Similar to alternate cost types, node 
+        attributes are each have a distinct key as their name, but instead of 
+        conatining information about edges in the graph, node attributes contain 
+        information about nodes. Unlike the cost algorithms in edgecosts, right 
+        now there is no functionality within HumanFactors that populates the
+        node attributes of the graph with any kind of metric, however the 
+        methods to add and clear node attributes are made available so you are 
+        free to add your own node attributes.
+
     Attributes:
         csr: csr pointing to the underlying graph in C++.
     """
@@ -309,9 +320,10 @@ class Graph:
         return closest_nodes
 
     def get_closest_points():
-        """ Get the closest point in the graph to the input set of points
+        """ 
+            Get the closest point in the graph to the input set of points
 
-        TODO Implement this
+            to bne done Implement this
 
         """
 
@@ -453,3 +465,124 @@ class Graph:
     def NumNodes(self) -> int:
         """Get the number of nodes in the graph."""
         return spatial_structures_native_functions.C_NumNodes(self.graph_ptr)
+
+    def add_node_attributes(
+        self, attribute: str, ids: Union[int, List[int]], scores: Union[str, List[Any]],
+        ) -> None:
+        """ Add attributes to one or more nodes
+        
+        Args:
+            attribute : Unique key of the attribute to assign scores for
+            ids : Node IDS in the graph to assign attributes to
+            scores : Scores to assign to the ids at the same index
+        
+        Preconditions:
+            1) IDs in ids must already belong to nodes in the graph
+            2) The length of scores and ids must match
+
+        Raises:
+            ValueError : the length of ids and scores did not match
+        
+        Example:
+            Add node attributes to a graph
+
+           >>> from humanfactorspy.spatialstructures import Graph
+           >>> # Create a simple graph with 3 nodes
+           >>> g = Graph()
+           >>> g.AddEdgeToGraph(0, 1, 100)
+           >>> g.AddEdgeToGraph(0, 2, 50)
+           >>> g.AddEdgeToGraph(1, 2, 20)
+           >>> csr = g.CompressToCSR()
+
+           >>> # Add node attributes to the simple graph
+           >>> attr = "Test"
+           >>> ids = [0, 1, 2]
+           >>> scores = ["zero", "one", "two"]
+           >>> g.add_node_attributes(attr, ids, scores)
+
+           >>> # To ensure that they've been added properly we will call
+           >>> # get_node_attributes.
+           >>> g.get_node_attributes(attr)
+           ['zero', 'one', 'two']
+
+        """
+        # Just send it to C++
+        spatial_structures_native_functions.c_add_node_attributes(
+            self.graph_ptr, attribute, ids, scores
+        )
+
+    def get_node_attributes(self, attribute: str) -> List[str]:
+        """ Get scores of every node for a specific attribute
+
+        Args:
+            attribute : The unique key of the attribute to get scores for
+
+        Returns:
+            A list of strings representing the score of every node in the
+            graph for attribute in order of ID. If attribute does not exist
+            in the graph, then None is returned. For nodes that have never
+            been assigned a score for a specific attribute, the score at
+            the index of their ID will be None.
+
+
+        Example:
+            Create a graph, add some nodes, assign some attributes to its nodes
+            then read them from the graph
+           
+           >>> from humanfactorspy.spatialstructures import Graph
+           >>> # Create a simple graph with 3 nodes
+           >>> g = Graph()
+           >>> g.AddEdgeToGraph(0, 1, 100)
+           >>> g.AddEdgeToGraph(0, 2, 50)
+           >>> g.AddEdgeToGraph(1, 2, 20)
+           >>> csr = g.CompressToCSR()
+
+           >>> # Add node attributes to the simple graph
+           >>> attr = "Test"
+           >>> ids = [0, 1, 2]
+           >>> scores = ["zero", "one", "two"]
+           >>> g.add_node_attributes(attr, ids, scores)
+           
+           
+           >>> # Get attribute scores from the graph
+           >>> g.get_node_attributes(attr)
+           ['zero', 'one', 'two']
+        """
+
+        return spatial_structures_native_functions.c_get_node_attributes(
+            self.graph_ptr, attribute, self.NumNodes()
+        )
+
+    def clear_node_attribute(self, attribute: str):
+        """ Clear a node attribute and all of its scores from the graph
+
+        Args:
+            attribute : The unique key of the attribute to delete from the graph
+        
+        Example:
+            Adding an attribute, then clearing it from the graph
+           >>> from humanfactorspy.spatialstructures import Graph
+           >>> # Create a simple graph with 3 nodes
+           >>> g = Graph()
+           >>> g.AddEdgeToGraph(0, 1, 100)
+           >>> g.AddEdgeToGraph(0, 2, 50)
+           >>> g.AddEdgeToGraph(1, 2, 20)
+           >>> csr = g.CompressToCSR()
+
+           >>> # Add node attributes to the simple graph
+           >>> attr = "Test"
+           >>> ids = [0, 1, 2]
+           >>> scores = ["zero", "one", "two"]
+           >>> g.add_node_attributes(attr, ids, scores)
+           
+           >>> # Clear the attribute
+           >>> g.clear_node_attribute(attr)
+
+           >>> # Get attribute scores from the graph
+           >>> g.get_node_attributes(attr)
+           []
+        
+        """
+        spatial_structures_native_functions.c_clear_node_attribute(
+            self.graph_ptr, attribute
+        )

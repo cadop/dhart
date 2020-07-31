@@ -5,6 +5,8 @@ from typing import *
 from humanfactorspy.common_native_functions import (
     getDLLHandle,
     ConvertPointsToArray,
+    ConvertIntsToArray,
+    convert_strings_to_array,
     GetStringPtr
 )
 
@@ -139,10 +141,9 @@ def C_AddEdgeFromNodes(
             + "in the graph's default cost set.")
     else:
         print("Unexpected error code: " + error_code)
-        assert(
-            False,
-            "There's some error that's not being handled either in C++ or"
-            + "in python.")
+        assert False
+        # There's some error that's not being handled either in C++ or 
+        # in python.
 
 
 def C_AddEdgeFromNodeIDs(
@@ -358,13 +359,124 @@ def C_NumNodes(graph_ptr: c_void_p) -> int:
 
     return out_size.value
 
+
 def C_CalculateAndStoreEnergyExpenditure(graph_ptr : c_void_p):
     error_code = HFPython.CalculateAndStoreEnergyExpenditure(graph_ptr)
-    assert(error_code == HF_STATUS.OK, "CalculateAndStoreEnergyexpenditure  only should return OK. Something must have changed in the C++ code that hasn't been updated in python. ")
+    assert(error_code == HF_STATUS.OK)
+    # CalculateAndStoreEnergyexpenditure  only should return OK. 
+    # Something must have changed in the C++ code that hasn't been updated in
+    # python.
+
 
 def C_CalculateAndStoreCrossSlope(graph_ptr : c_void_p):
     error_code = HFPython.CalculateAndStoreCrossSlope(graph_ptr)
-    assert(error_code == HF_STATUS.OK, "CalculateAndStoreCrossSlope  only should return OK. Something must have changed in the C++ code that hasn't been updated in python. ")
+    assert error_code == HF_STATUS.OK
+    # CalculateAndStoreCrossSlope  only should return OK. Something must have 
+    # changed in the C++ code that hasn't been updated in python.
+
+
+def c_get_node_attributes(
+    graph_ptr: c_void_p, attr: str, num_nodes: int
+    ) -> Union[List[str], List[None]]:
+    """ Get node attributes from a grpah in  C++
+
+    Args:
+        graph_ptr : Pointer to the graph to get attributes from.
+        attr : Unique key of the attribute to get
+        num_nodes : number of nodes in the graph
+
+    Returns:
+        A list of strings containing the score for every node in the graph
+        ordered by ID. If the attribute could not be found in the graph, an
+        empty list will be returned instead
+
+    """
+
+    # Define variables to meet preconditions
+    attr_ptr = GetStringPtr(attr)
+    out_score_type = c_char_p * num_nodes
+    out_scores = out_score_type()
+    out_scores_size = c_int(0)
+
+    # Call into the function in C++. This will update
+    # out_scores and out_scores_size
+    error_code = HFPython.GetNodeAttributes(
+        graph_ptr, attr_ptr, byref(out_scores), byref(out_scores_size)
+    )
+
+    # This function shouldn't return anything other than OK
+    assert error_code == HF_STATUS.OK
+
+    # Return an empty list if size is zero
+    if out_scores_size.value == 0:
+        return []
+
+    # Read strings out of pointer and append them to our output
+    out_strings = []
+    for i in range(0, num_nodes):
+
+        # .value of a charp reads the string
+        score = out_scores[i].decode("utf-8")
+        out_strings.append(score)
+
+    # Deallocate the memory of the strings in C++
+    HFPython.DeleteScoreArray(out_scores, out_scores_size)
+
+    # Return output
+    return out_strings
+
+
+def c_add_node_attributes(
+    graph_ptr: c_void_p, attr: str, ids: List[int], scores: List[str]
+    ) -> None:
+    """ Assign or update scores for nodes for a specific attribute
+
+    Args:
+        graph_ptr : Pointer to the graph to add scores to
+        attr : Unique key of the attribute to add scores to. If this an 
+        attribute with this keydoesn't exist then it will be created.
+        ids : An array of ids of nodes to assign scores to 
+        scores : An ordered array of scores where each score is to be assigned 
+        to the id in ids at the same index.
+
+    """
+
+    # Convert to CTypes
+    id_arr = ConvertIntsToArray(ids)
+    score_arr = convert_strings_to_array(scores)
+    attribute_ptr = GetStringPtr(attr)
+    num_nodes = c_int(len(ids))
+
+    # Call native function
+    error_code = HFPython.AddNodeAttributes(
+        graph_ptr, id_arr, attribute_ptr, score_arr, num_nodes
+    )
+
+    # Error code should only be OK
+    assert error_code == HF_STATUS.OK
+
+    return
+
+
+def c_clear_node_attribute(graph_ptr: c_void_p, attr: str) -> None:
+    """ Clear a node attribute and all of its scores from a graphj
+
+    Args:
+        graph_ptr : Graph to clear the attribute from.
+        attr : Attribute to clear from the graph
+
+    """
+
+    # Convert score_ptr to a char array
+    score_ptr = GetStringPtr(attr)
+
+    # Call native C++ function
+    error_code = HFPython.ClearAttributeType(graph_ptr, score_ptr)
+
+    # Check Error Code
+    assert error_code == HF_STATUS.OK  # This should only return OK
+
+    return
 
 ### Destructors
 

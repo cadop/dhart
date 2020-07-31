@@ -283,3 +283,36 @@ def test_StoresEnergyExpenditure(SimpleXYZGraph):
    
     print("========= ENERGY EXPENDITURE ============")
     print(csr)
+
+
+def test_AddNodeAttribute(SimpleGraph):
+
+    # Add node attributes to the simple graph
+    attr = "Test"
+    ids = [0, 1, 2]
+    scores = ["zero", "one", "two"]
+    SimpleGraph.add_node_attributes(attr, ids, scores)
+
+    # Get attribute scores from the graph
+    out_attrs = SimpleGraph.get_node_attributes(attr)
+
+    # Assert it's equal to our input array
+    assert out_attrs == scores
+
+
+def test_ClearNodeAttributes(SimpleGraph):
+
+    # Add node attributes to the simple graph
+    attr = "Test"
+    ids = [0, 1, 2]
+    scores = ["zero", "one", "two"]
+    SimpleGraph.add_node_attributes(attr, ids, scores)
+
+    # Clear the attribute
+    SimpleGraph.clear_node_attribute(attr)
+
+    # Assert that getting the node attribute now
+    # returns an empty list, indicating that the
+    # attribute doesn't exist
+    cleared_attr = SimpleGraph.get_node_attributes(attr)
+    assert cleared_attr == []
