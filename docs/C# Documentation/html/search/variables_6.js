@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['pressure_446',['pressure',['../class_human_factors_1_1_native_utils_1_1_native_object.html#a46b2320d66a2b0405024db48f376b72c',1,'HumanFactors::NativeUtils::NativeObject']]],
-  ['ptrs_447',['ptrs',['../class_human_factors_1_1_native_utils_1_1_native_array.html#a53f1d544231f6a628bb83b982afcb4d5',1,'HumanFactors::NativeUtils::NativeArray']]]
+  ['outer_5findices_517',['outer_indices',['../struct_human_factors_1_1_spatial_structures_1_1_c_s_r_info.html#ac3a5f4ced2491642314a284b4cff4be4',1,'HumanFactors::SpatialStructures::CSRInfo']]]
 ];

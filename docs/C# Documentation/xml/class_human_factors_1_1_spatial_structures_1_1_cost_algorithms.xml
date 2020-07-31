@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.18">
+  <compounddef id="class_human_factors_1_1_spatial_structures_1_1_cost_algorithms" kind="class" language="C#" prot="public">
+    <compoundname>HumanFactors::SpatialStructures::CostAlgorithms</compoundname>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_human_factors_1_1_spatial_structures_1_1_cost_algorithms_1a06095a84f8d2bc09ffc447a6d8241865" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void HumanFactors.SpatialStructures.CostAlgorithms.CalculateAndStoreCrossSlope</definition>
+        <argsstring>(Graph g)</argsstring>
+        <name>CalculateAndStoreCrossSlope</name>
+        <param>
+          <type><ref refid="class_human_factors_1_1_spatial_structures_1_1_graph" kindref="compound">Graph</ref></type>
+          <declname>g</declname>
+        </param>
+        <briefdescription>
+<para>Calculate the cross slope for every edge in a graph and store it as a new cost type within the graph. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>g</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The graph of nodes and edges to calculate this score for.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="post"><para>The results of the cross slope between every edge in <computeroutput>g</computeroutput> is stored within g as an alternate cost accessible with CostAlgorithmNames.CrossSlope.</para>
+</simplesect>
+<programlisting><codeline><highlight class="normal">//<sp/>Create<sp/>the<sp/>graph</highlight></codeline>
+<codeline><highlight class="normal">Graph<sp/>g<sp/>=<sp/>new<sp/>Graph();</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Create<sp/>7<sp/>nodes</highlight></codeline>
+<codeline><highlight class="normal">Vector3D<sp/>n0<sp/>=<sp/>new<sp/>Vector3D(2,<sp/>6,<sp/>6);</highlight></codeline>
+<codeline><highlight class="normal">Vector3D<sp/>n1<sp/>=<sp/>new<sp/>Vector3D(0,<sp/>0,<sp/>0);</highlight></codeline>
+<codeline><highlight class="normal">Vector3D<sp/>n2<sp/>=<sp/>new<sp/>Vector3D(-5,<sp/>5,<sp/>4);</highlight></codeline>
+<codeline><highlight class="normal">Vector3D<sp/>n3<sp/>=<sp/>new<sp/>Vector3D(-1,<sp/>1,<sp/>1);</highlight></codeline>
+<codeline><highlight class="normal">Vector3D<sp/>n4<sp/>=<sp/>new<sp/>Vector3D(2,<sp/>2,<sp/>2);</highlight></codeline>
+<codeline><highlight class="normal">Vector3D<sp/>n5<sp/>=<sp/>new<sp/>Vector3D(5,<sp/>3,<sp/>2);</highlight></codeline>
+<codeline><highlight class="normal">Vector3D<sp/>n6<sp/>=<sp/>new<sp/>Vector3D(-2,<sp/>-5,<sp/>1);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Add<sp/>9<sp/>edges</highlight></codeline>
+<codeline><highlight class="normal">g.AddEdge(n0,<sp/>n1,<sp/>0);<sp/>//<sp/>[<sp/>-2,<sp/>-6,<sp/>-6<sp/>]</highlight></codeline>
+<codeline><highlight class="normal">g.AddEdge(n1,<sp/>n2,<sp/>0);<sp/>//<sp/>[<sp/>-5,<sp/><sp/>5,<sp/><sp/>4<sp/>]</highlight></codeline>
+<codeline><highlight class="normal">g.AddEdge(n1,<sp/>n3,<sp/>0);<sp/>//<sp/>[<sp/>-1,<sp/><sp/>1,<sp/><sp/>1<sp/>]</highlight></codeline>
+<codeline><highlight class="normal">g.AddEdge(n1,<sp/>n4,<sp/>0);<sp/>//<sp/>[<sp/><sp/>2,<sp/><sp/>2,<sp/><sp/>2<sp/>]</highlight></codeline>
+<codeline><highlight class="normal">g.AddEdge(n2,<sp/>n4,<sp/>0);<sp/>//<sp/>[<sp/>-9,<sp/>-3,<sp/>-2<sp/>]</highlight></codeline>
+<codeline><highlight class="normal">g.AddEdge(n3,<sp/>n5,<sp/>0);<sp/>//<sp/>[<sp/>-6,<sp/><sp/>2,<sp/><sp/>1<sp/>]</highlight></codeline>
+<codeline><highlight class="normal">g.AddEdge(n5,<sp/>n6,<sp/>0);<sp/>//<sp/>[<sp/>-7,<sp/>-8,<sp/>-1<sp/>]</highlight></codeline>
+<codeline><highlight class="normal">g.AddEdge(n4,<sp/>n6,<sp/>0);<sp/>//<sp/>[<sp/>-6,<sp/>-7,<sp/>-1<sp/>]</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Compress<sp/>the<sp/>graph<sp/>after<sp/>adding<sp/>edges</highlight></codeline>
+<codeline><highlight class="normal">g.CompressToCSR();</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Calculate<sp/>and<sp/>store<sp/>edge<sp/>type<sp/>in<sp/>g:<sp/>cross<sp/>slope</highlight></codeline>
+<codeline><highlight class="normal">CostAlgorithms.CalculateAndStoreCrossSlope(g);</highlight></codeline>
+</programlisting> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="513" column="28" bodyfile="src/Csharp/packages/spatialstructures/src/Graph.cs" bodystart="513" bodyend="516"/>
+        <references refid="class_human_factors_1_1_spatial_structures_1_1_native_methods_1a53cdfc6b5bd734778aba74cc5d77068a">HumanFactors.SpatialStructures.NativeMethods.C_CalculateAndStoreCrossSlope</references>
+        <references refid="class_human_factors_1_1_native_utils_1_1_native_object_1aa58c089e79cb4acc260755a41952d3d6" compoundref="_pointer_holder_8cs" startline="49" endline="49">HumanFactors.NativeUtils.NativeObject.Pointer</references>
+      </memberdef>
+      <memberdef kind="function" id="class_human_factors_1_1_spatial_structures_1_1_cost_algorithms_1abc3e72806a517518dc8d40c96e818939" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void HumanFactors.SpatialStructures.CostAlgorithms.CalculateAndStoreEnergyExpenditure</definition>
+        <argsstring>(Graph g)</argsstring>
+        <name>CalculateAndStoreEnergyExpenditure</name>
+        <param>
+          <type><ref refid="class_human_factors_1_1_spatial_structures_1_1_graph" kindref="compound">Graph</ref></type>
+          <declname>g</declname>
+        </param>
+        <briefdescription>
+<para>Calculate the energy expenditure for every edge in a graph and store it as a new cost type within the graph. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>g</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The graph of nodes and edges to calculate this score for.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="post"><para>The results of the cross slope between every edge in <computeroutput>g</computeroutput> is stored within g as an alternate cost accessible with CostAlgorithmNames.EnergyExpenditure</para>
+</simplesect>
+<programlisting><codeline><highlight class="normal">//<sp/>Requires<sp/>#include<sp/>&quot;graph.h&quot;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Create<sp/>7<sp/>nodes</highlight></codeline>
+<codeline><highlight class="normal">Node<sp/>n0(0,<sp/>0,<sp/>0);</highlight></codeline>
+<codeline><highlight class="normal">Node<sp/>n1(0,<sp/>0,<sp/>1);</highlight></codeline>
+<codeline><highlight class="normal">Node<sp/>n2(5,<sp/>5,<sp/>4);</highlight></codeline>
+<codeline><highlight class="normal">Node<sp/>n3(2,<sp/>2,<sp/>2);</highlight></codeline>
+<codeline><highlight class="normal">Node<sp/>n4(5,<sp/>3,<sp/>2);</highlight></codeline>
+<codeline><highlight class="normal">Node<sp/>n5(6,<sp/>6,<sp/>7);</highlight></codeline>
+<codeline><highlight class="normal">Node<sp/>n6(2,<sp/>5,<sp/>1);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Graph<sp/>g;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Adding<sp/>8<sp/>edges</highlight></codeline>
+<codeline><highlight class="normal">g.addEdge(n0,<sp/>n1);</highlight></codeline>
+<codeline><highlight class="normal">g.addEdge(n1,<sp/>n2);</highlight></codeline>
+<codeline><highlight class="normal">g.addEdge(n1,<sp/>n3);</highlight></codeline>
+<codeline><highlight class="normal">g.addEdge(n1,<sp/>n4);</highlight></codeline>
+<codeline><highlight class="normal">g.addEdge(n3,<sp/>n5);</highlight></codeline>
+<codeline><highlight class="normal">g.addEdge(n4,<sp/>n2);</highlight></codeline>
+<codeline><highlight class="normal">g.addEdge(n6,<sp/>n4);</highlight></codeline>
+<codeline><highlight class="normal">g.addEdge(n6,<sp/>n5);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Always<sp/>compress<sp/>the<sp/>graph<sp/>after<sp/>adding<sp/>edges!</highlight></codeline>
+<codeline><highlight class="normal">g.Compress();</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">//<sp/>Calculate<sp/>and<sp/>store<sp/>edge<sp/>type<sp/>in<sp/>g:<sp/>energy<sp/>expenditure</highlight></codeline>
+<codeline><highlight class="normal">CalculateAndStoreEnergyExpenditure(&amp;g);</highlight></codeline>
+</programlisting> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="558" column="28" bodyfile="src/Csharp/packages/spatialstructures/src/Graph.cs" bodystart="558" bodyend="561"/>
+        <references refid="class_human_factors_1_1_spatial_structures_1_1_native_methods_1ae644f232b287f87fb95f4e4d7f2cea48">HumanFactors.SpatialStructures.NativeMethods.C_CalculateAndStoreEnergyExpenditure</references>
+        <references refid="class_human_factors_1_1_native_utils_1_1_native_object_1aa58c089e79cb4acc260755a41952d3d6" compoundref="_pointer_holder_8cs" startline="49" endline="49">HumanFactors.NativeUtils.NativeObject.Pointer</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Several cost algorithms that generate alternate costs for edges in a <ref refid="class_human_factors_1_1_spatial_structures_1_1_graph" kindref="compound">Graph</ref>. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>All algorithms in this class behave in a similar manner. They all accept a graph, perform some calculation then store their results as an alternate set of costs in the graph. The names used as keys to access each specific cost in the graph are available in the static <ref refid="class_human_factors_1_1_spatial_structures_1_1_cost_algorithm_names" kindref="compound">CostAlgorithmNames</ref> class.</para>
+<para><simplesect kind="see"><para><ref refid="class_human_factors_1_1_spatial_structures_1_1_graph" kindref="compound">Graph</ref> for more information about how alternate costs can be used. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="src/Csharp/packages/spatialstructures/src/Graph.cs" line="472" column="19" bodyfile="src/Csharp/packages/spatialstructures/src/Graph.cs" bodystart="473" bodyend="562"/>
+    <listofallmembers>
+      <member refid="class_human_factors_1_1_spatial_structures_1_1_cost_algorithms_1a06095a84f8d2bc09ffc447a6d8241865" prot="public" virt="non-virtual"><scope>HumanFactors::SpatialStructures::CostAlgorithms</scope><name>CalculateAndStoreCrossSlope</name></member>
+      <member refid="class_human_factors_1_1_spatial_structures_1_1_cost_algorithms_1abc3e72806a517518dc8d40c96e818939" prot="public" virt="non-virtual"><scope>HumanFactors::SpatialStructures::CostAlgorithms</scope><name>CalculateAndStoreEnergyExpenditure</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['size_449',['size',['../struct_human_factors_1_1_native_utils_1_1_c_vector_and_data.html#a8bcdb7b4516a15f5b905ebcd33a55e6c',1,'HumanFactors::NativeUtils::CVectorAndData']]],
-  ['size2_450',['size2',['../struct_human_factors_1_1_native_utils_1_1_c_vector_and_data.html#a61aa9b3a71220fd8e726c9610cdab5cb',1,'HumanFactors::NativeUtils::CVectorAndData']]]
+  ['rows_520',['rows',['../struct_human_factors_1_1_spatial_structures_1_1_c_s_r_info.html#ac04b6031724adf665ddaec491590b358',1,'HumanFactors::SpatialStructures::CSRInfo']]]
 ];

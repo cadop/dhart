@@ -34,7 +34,23 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/Csharp/CMakeLists.txt" line="75" column="1" bodyfile="src/Csharp/CMakeLists.txt" bodystart="75" bodyend="82"/>
+        <location file="src/Csharp/CMakeLists.txt" line="75" column="1" bodyfile="src/Csharp/CMakeLists.txt" bodystart="75" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="_c_make_lists_8txt_1ad04c227fa09eed37db1eb7e2fa7781d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>target_compile_options</definition>
+        <argsstring>(hfcsharptest PRIVATE &quot;/unsafe&quot;) set_target_properties(hfcsharptest PROPERTIES VS_GLOBAL_PROJECT_TYPES &quot;</argsstring>
+        <name>target_compile_options</name>
+        <param>
+          <type>hfcsharptest PRIVATE &quot;/unsafe&quot;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/Csharp/CMakeLists.txt" line="84" column="1" bodyfile="src/Csharp/CMakeLists.txt" bodystart="84" bodyend="88"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -122,20 +138,22 @@
 <codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RUNTIME<sp/>DESTINATION<sp/>bin</highlight></codeline>
 <codeline lineno="79"><highlight class="normal">)</highlight></codeline>
 <codeline lineno="80"><highlight class="normal"></highlight></codeline>
-<codeline lineno="81"><highlight class="normal">add_library(hfcsharptest)</highlight></codeline>
-<codeline lineno="82"><highlight class="normal">target_sources(hfcsharptest<sp/>PRIVATE<sp/>${test_sources})</highlight></codeline>
-<codeline lineno="83"><highlight class="normal"></highlight></codeline>
-<codeline lineno="84"><highlight class="normal">set_target_properties(</highlight></codeline>
-<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>hfcsharptest</highlight></codeline>
-<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PROPERTIES</highlight></codeline>
-<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VS_GLOBAL_PROJECT_TYPES<sp/></highlight><highlight class="stringliteral">&quot;{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>VS_GLOBAL_PROJECT_TYPES<sp/></highlight><highlight class="stringliteral">&quot;{d902c041-2bf7-4fa0-afd7-2a09df2dbb7a}&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VS_DOTNET_TARGET_FRAMEWORK_VERSION<sp/></highlight><highlight class="stringliteral">&quot;v4.5.1&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VS_DOTNET_REFERENCES<sp/></highlight><highlight class="stringliteral">&quot;${test_references}&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="91"><highlight class="normal">)</highlight></codeline>
-<codeline lineno="92"><highlight class="normal">install(TARGETS<sp/>hfcsharptest<sp/>EXPORT<sp/>hfcsharptest<sp/>RUNTIME<sp/>DESTINATION<sp/>bin)</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/>Set<sp/>up<sp/>test<sp/>assembly</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal">add_library(hfcsharptest)</highlight></codeline>
+<codeline lineno="83"><highlight class="normal">target_sources(hfcsharptest<sp/>PRIVATE<sp/>${test_sources})</highlight></codeline>
+<codeline lineno="84" refid="_c_make_lists_8txt_1ad04c227fa09eed37db1eb7e2fa7781d4" refkind="member"><highlight class="normal"><ref refid="_c_make_lists_8txt_1ad72b062535ef87f94bd350d26e12b9b3" kindref="member">target_compile_options</ref>(hfcsharptest<sp/>PRIVATE<sp/></highlight><highlight class="stringliteral">&quot;/unsafe&quot;</highlight><highlight class="normal">)<sp/>#<sp/>Must<sp/>be<sp/>compiled<sp/>with<sp/>unsafe</highlight></codeline>
+<codeline lineno="85"><highlight class="normal">set_target_properties(</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>hfcsharptest</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PROPERTIES</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VS_GLOBAL_PROJECT_TYPES<sp/></highlight><highlight class="stringliteral">&quot;{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>#<sp/>VS_GLOBAL_PROJECT_TYPES<sp/></highlight><highlight class="stringliteral">&quot;{d902c041-2bf7-4fa0-afd7-2a09df2dbb7a}&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VS_DOTNET_TARGET_FRAMEWORK_VERSION<sp/></highlight><highlight class="stringliteral">&quot;v4.5.1&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VS_DOTNET_REFERENCES<sp/></highlight><highlight class="stringliteral">&quot;${test_references}&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal">)</highlight></codeline>
 <codeline lineno="93"><highlight class="normal"></highlight></codeline>
-<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal">install(TARGETS<sp/>hfcsharptest<sp/>EXPORT<sp/>hfcsharptest<sp/>RUNTIME<sp/>DESTINATION<sp/>bin)</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="src/Csharp/CMakeLists.txt"/>
   </compounddef>

@@ -5,7 +5,7 @@ from typing import *
 import numpy
 from humanfactorspy.spatialstructures import Graph
 
-__all__ = ["ConvertNodesToIds", "DijkstraShortestPath"]
+__all__ = ["ConvertNodesToIds", "DijkstraShortestPath", "DijkstraFindAllShortestPaths"]
 
 
 def ConvertNodesToIds(graph: Graph, nodes: List[Union[Tuple, int]]) -> List[int]:
@@ -48,26 +48,28 @@ def DijkstraShortestPath(
     start: List[Union[int, Tuple[float, float, float]]],
     end: List[Union[int, Tuple[float, float, float]]],
     cost_type: str = "",
-) -> Union[List[Union[Path, None]], Union[Path, None]]:
+    ) -> Union[List[Union[Path, None]], Union[Path, None]]:
     """ Find the shortest path from start to end using Dijkstra's shortest path algorithm
     
     Accepts a list of starting / ending points or single starting/ending
     points. 
 
     Args:
-        Graph: A valid C++ Graph
-        start: one or more Starting Node IDs
-        end: one or more Ending Node IDs 
-        cost_type: Which cost to use for path generation. If no cost type is specified,
-                then the graph's default cost type will be used. If a cost type is specified
-                then it must already exist in the graph.
+        Graph : A valid C++ Graph
+        start : one or more Starting Node IDs
+        end : one or more Ending Node IDs 
+        cost_type : Which cost to use for path generation. If no cost type is specified,
+            then the graph's default cost type will be used. If a cost type is specified
+            then it must already exist in the graph.
     
     Returns:
-        List[Union[path, None]]: if multiple start/end ids were passed
-        Union[Path, None]: One start or end point was passed
-
-        If a path cannot be found to connect a start and end point that
-        path will be returned as None.
+        
+        List[Union[path, None]]:
+            if multiple start/end ids were passed.If a path cannot be found to
+            connect a start and end point that path will be set as None.
+        Union[Path, None]:
+             One start or end point was passed, return the single path or none
+             if no path could be found between start and end.
     
     Preconditions:
         1) If using multiple paths, The length of start_ids must match
@@ -75,11 +77,10 @@ def DijkstraShortestPath(
         2) Each node in start_nodes and end_nodes must contain the x,y,z
            position (or id) of an existing node in graph
         3) If cost_type is not left as the default, then it must be the name
-             of a valid cost already defined in graph.
+           of a valid cost already defined in graph.
 
     Raises:
-        humanfactorspy.Exceptions.Exception: Start or End did not exist in 
-            the given graph OR start/end lists did not match in size.
+        ValueError: Length of start and end arrays did not match
         KeyError: cost_type wasn't blank and did not point to an already defined
             cost in the graph
 
@@ -128,6 +129,59 @@ def DijkstraShortestPath(
         [(10., 1) ( 0., 3)]
 
 
+    Example:
+       Creating a graph then calculating an alternate cost type
+       and generating a path on it.
+        
+       >>> from humanfactorspy import get_sample_model
+       >>> from humanfactorspy.geometry.obj_loader import LoadOBJ
+       >>> from humanfactorspy.graphgenerator import GenerateGraph
+       >>> from humanfactorspy.pathfinding import DijkstraShortestPath
+       >>> from humanfactorspy.raytracer import EmbreeBVH
+       >>> from humanfactorspy.spatialstructures.cost_algorithms import (
+       ...    CalculateEnergyExpenditure, CostAlgorithmKeys)
+
+       >>> # Load the energy blob and create a BVH from it
+       >>> energy_blob_path = get_sample_model("energy_blob_zup.obj")
+       >>> energy_blob_mesh = LoadOBJ(energy_blob_path)
+       >>> bvh = EmbreeBVH(energy_blob_mesh)
+
+       >>> # Define graph generator parameters
+       >>> start_point = (-30, 0, 20)
+       >>> spacing = (1, 1, 10)
+       >>> max_nodes = 10000
+       >>> up_step, down_step = 5, 5
+       >>> up_slope, down_slope = 60, 60
+       >>> max_step_connections = 1
+
+       >>> # Generate a graph on it
+       >>> g = GenerateGraph(bvh, start_point, spacing, max_nodes,
+       ...                 up_step, up_slope, down_step, down_slope,
+       ...                 max_step_connections, cores=-1)
+
+       >>> # Compress the graph
+       >>> csr = g.CompressToCSR()
+
+       >>> # Generate an alternate cost type and store it in the graph
+       >>> CalculateEnergyExpenditure(g)
+
+       >>> # Generate a path using the energy expenditure cost and 
+       >>> # distance (the default)
+       >>> start_point = 1
+       >>> end_point = 150
+       >>> energy_expend_key = CostAlgorithmKeys.ENERGY_EXPENDITURE
+       >>> distance_path = DijkstraShortestPath(g, start_point, end_point)
+       >>> energy_path = DijkstraShortestPath(
+       ...     g, start_point, end_point, energy_expend_key)
+       
+       >>> # Print both paths
+       >>> print("Distance Path:", distance_path.array)
+       Distance Path: [(1.000002 ,   1) (0.9999999,  12) (1.       ,  26) (1.0000005,  43)
+        (1.0000019,  64) (1.0000081,  89) (1.4148979, 118) (0.       , 150)]
+       
+       >>> print("Energy Path:", energy_path.array)
+       Energy Path: [(2.4610138,   1) (2.5      ,  12) (2.5      ,  26) (2.4804544,  43)
+        (2.461011 ,  64) (2.4224558,  89) (2.7486944, 118) (0.       , 150)]
     """
 
     # Compress the graph if it isn't already.
@@ -140,11 +194,13 @@ def DijkstraShortestPath(
 
     # Throw if the caller violates our pre condition
     if len(start) != len(end):
-        raise Exception("Start and End arrays didn't match in size!")
+        raise ValueError(f"Length of start array ({len(start)}) did not match length of end array {len(end)}!")
 
-    # If we're only generating a single path, then call the single path function
+    # If we're only generating a single path, then call the single path
+    # function
     if len(start) == 1:
-        res = pathfinder_native_functions.C_FindPath(graph.graph_ptr, start[0], end[0])
+        res = pathfinder_native_functions.C_FindPath(
+            graph.graph_ptr, start[0], end[0], cost_type)
 
         # Check if a path could be found between start and end
         if res:  # If so, wrap the pointers in a python Path
@@ -156,10 +212,147 @@ def DijkstraShortestPath(
     # If multiple paths are going to be generated, then call the multiple path
     # function
     else:
-        res = pathfinder_native_functions.C_FindPaths(graph.graph_ptr, start, end)
+        res = pathfinder_native_functions.C_FindPaths(
+            graph.graph_ptr, start, end, cost_type)
 
         # Wrap values that weren't null in python paths
-        out_paths = [
-            Path(result[0], result[1], result[2]) if result else None for result in res
-        ]
+        out_paths = [Path(result[0], result[1], result[2])
+                     if result else None for result in res]
         return out_paths
+
+
+def DijkstraFindAllShortestPaths(
+    graph: Graph,
+    cost_type: str = "",
+    ) -> List[Union[Path, None]]:
+    """ Find All Pairs Shortest Path
+    
+    Find the shortest path between every possible combination of nodes 
+    in a graph.
+
+    Parameters
+    ----------
+
+    Graph : The graph to generate paths in. 
+    cost_type : Which cost to use for path generation. If no cost type is specified,
+        then the graph's default cost type will be used. If a cost type is specified
+        then it must already exist in the graph.
+    
+    Returns
+    -------
+
+    List[Union[path, None]]:
+        Of a path from every node to every other node in the graph in order
+        of start point then end point. If a specific path could not be 
+        generated, then it will be set to None.
+    
+    Precondition
+    ------------
+
+    If cost_type is not left as the default, then it must be the name
+    of a valid cost already defined in graph.
+
+    Raises
+    ------
+
+    KeyError: cost_type wasn't blank and did not point to an already defined
+        cost in the graph
+
+    Examples
+    --------
+
+    >>> from humanfactorspy.pathfinding import DijkstraShortestPath, DijkstraFindAllShortestPaths
+    >>> from humanfactorspy.spatialstructures import Graph
+    >>> import numpy as np
+    >>> 
+    >>> g = Graph()
+    >>> g.AddEdgeToGraph(0, 1, 100)
+    >>> g.AddEdgeToGraph(0, 2, 50)
+    >>> g.AddEdgeToGraph(1, 3, 10)
+    >>> g.AddEdgeToGraph(2, 1, 10)
+    >>> g.AddEdgeToGraph(3, 4, 10)
+    >>> g.AddEdgeToGraph(4, 1, 10)
+    >>> g.AddEdgeToGraph(4, 2, 10)
+    >>> g.AddEdgeToGraph(2, 4, 10)
+    >>> csr = g.CompressToCSR()
+    >>> 
+    >>> # Size of G
+    >>> g_size = len(g.getNodes())
+    >>> 
+    >>> # Get APSP
+    >>> SP = DijkstraFindAllShortestPaths(g)
+    >>> 
+    >>> # Reshape APSP result to nxn of graph size
+    >>> apsp_mat = np.reshape(SP, (g_size,g_size))
+    >>> 
+    >>> for i, row in enumerate(apsp_mat):
+    ...     print('Paths from node: ',i)
+    ...     for j, path in enumerate(row):
+    ...         if path is not None:
+    ...             print('To node: ',j, ' = ', path['id'])
+    ...         else: 
+    ...             print('To node: ',j, ' =   ')
+    ... # doctest: +NORMALIZE_WHITESPACE
+    Paths from node:  0
+    To node:  0  =   
+    To node:  1  =  [0 2 1]
+    To node:  2  =  [0 2]
+    To node:  3  =  [0 2 1 3]
+    To node:  4  =  [0 2 4]
+    Paths from node:  1
+    To node:  0  =   
+    To node:  1  =   
+    To node:  2  =  [1 3 4 2]
+    To node:  3  =  [1 3]
+    To node:  4  =  [1 3 4]
+    Paths from node:  2
+    To node:  0  =   
+    To node:  1  =  [2 1]
+    To node:  2  =   
+    To node:  3  =  [2 1 3]
+    To node:  4  =  [2 4]
+    Paths from node:  3
+    To node:  0  =   
+    To node:  1  =  [3 4 1]
+    To node:  2  =  [3 4 2]
+    To node:  3  =   
+    To node:  4  =  [3 4]
+    Paths from node:  4
+    To node:  0  =   
+    To node:  1  =  [4 1]
+    To node:  2  =  [4 2]
+    To node:  3  =  [4 1 3]
+    To node:  4  =   
+
+    >>> # Convert to a distance matrix
+    >>> # Create an empty array the size of the graph
+    >>> # Then set distance to infinity if there is no path
+    >>> # and 0 if it is the distance to itself
+    >>> dst = np.empty((g_size,g_size))
+    >>> for i, path in enumerate(SP):
+    ...     if path is None: 
+    ...         if int(i/g_size) == i%g_size: dist = 0
+    ...         else: dist = np.inf
+    ...     else: dist = np.sum(path['cost_to_next'])
+    ...     dst[int(i/g_size)][i%g_size] = dist
+    >>> 
+    >>> print(dst)
+    [[ 0. 60. 50. 70. 60.]
+     [inf  0. 30. 10. 20.]
+     [inf 10.  0. 20. 10.]
+     [inf 20. 20.  0. 10.]
+     [inf 10. 10. 20.  0.]]
+
+    """
+
+    # Call out to native code and get results
+    all_results = pathfinder_native_functions.C_FindAllPaths(graph.graph_ptr,
+                                                             graph.NumNodes(),
+                                                             cost_type)
+
+    # Wrap values that weren't null in python paths
+    out_paths = [Path(result[0], result[1], result[2])
+                 if result else None for result in all_results]
+
+    return out_paths
+
