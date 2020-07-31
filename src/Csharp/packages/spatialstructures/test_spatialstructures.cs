@@ -25,12 +25,10 @@ namespace HumanFactors.Tests.SpatialStructures
 
             // Compress the graph before using it 
             g.CompressToCSR();
-
             //! [Example_CreateSampleGraph]
-           
+
             return g;
         }
-
 
         [TestMethod]
         public void CreateEmptyGraph()
@@ -124,7 +122,7 @@ namespace HumanFactors.Tests.SpatialStructures
 
             // Assert that NO_COST is thrown when csrptrs with an invalid cost
             try { var csr_bad = G.CompressToCSR("NotACalidCost"); }
-            catch(KeyNotFoundException) { }
+            catch (KeyNotFoundException) { }
         }
 
         [TestMethod]
@@ -156,24 +154,47 @@ namespace HumanFactors.Tests.SpatialStructures
             var score_arr = scores.array;
             Debug.WriteLine(scores);
             //! [Example_AggregateEdgeCosts]
-           
+
             Assert.AreEqual(150, score_arr[0]);
             Assert.AreEqual(20, score_arr[1]);
-            Assert.AreEqual(0, score_arr[1]);
+            Assert.AreEqual(0, score_arr[2]);
         }
 
         [TestMethod]
         public void GetIDFromNode()
         {
-            Graph g = new Graph();
-            Vector3D node1 = new Vector3D(0, 0, 1);
-            Vector3D node2 = new Vector3D(0, 0, 2);
-            Vector3D node4 = new Vector3D(0, 0, 39);
-            g.AddEdge(node1, node2, 10);
+            //! [EX_GetNodeID_1]
 
+            // Create a graph
+            Graph g = new Graph();
+
+            // Create two nodes
+            Vector3D node0 = new Vector3D(0, 0, 1);
+            Vector3D node1 = new Vector3D(0, 0, 2);
+
+            // Add an edge between them to add them to the graph
+            g.AddEdge(node0, node1, 10);
+
+            // Get their IDs from the graph
+            int node_0_id = g.GetNodeID(node0);
+            int node_1_id = g.GetNodeID(node1);
+
+            // Print results
+            Debug.WriteLine(node_0_id);
+            Debug.WriteLine(node_1_id);
+            //! [EX_GetNodeID_1]
+
+            //! [EX_GetNodeID_2]
+            // Create a third node and try to get it's id
+            Vector3D node2 = new Vector3D(0, 0, 3);
+            int node_2_id = g.GetNodeID(node2);
+
+            Debug.WriteLine(node_2_id);
+            //! [EX_GetNodeID_2]
+
+            Assert.IsTrue(g.GetNodeID(node0) >= 0);
             Assert.IsTrue(g.GetNodeID(node1) >= 0);
-            Assert.IsTrue(g.GetNodeID(node2) >= 0);
-            Assert.IsTrue(g.GetNodeID(node4) < 0);
+            Assert.IsTrue(g.GetNodeID(node2) < 0);
         }
 
         [TestMethod]
@@ -294,7 +315,7 @@ namespace HumanFactors.Tests.SpatialStructures
         }
 
         [TestMethod]
-        unsafe public void  CalculateAndStoreEnergyExpenditure()
+        unsafe public void CalculateAndStoreEnergyExpenditure()
         {
             // Create the graph
             Graph g = new Graph();
@@ -350,10 +371,9 @@ namespace HumanFactors.Tests.SpatialStructures
         public void AddNodeAttribute()
         {
             // Create a graph and add two edges to create nodes
-            Graph g = new Graph();
-            g.AddEdge(0, 1, 150);
-            g.AddEdge(0, 2, 100);
-            g.AddEdge(0, 3, 2);
+            Graph g = CreateSampleGraph();
+
+            //! [EX_AddNodeAttribute]
 
             // Add node attributes to the graph for the nodes
             // we just created
@@ -364,15 +384,32 @@ namespace HumanFactors.Tests.SpatialStructures
             // Get scores for this attribute from the graph
             var attr = g.GetNodeAttributes("Attr");
 
-            // Print results
-            foreach (var attribute in attr)
-                Debug.WriteLine(attribute);
+            // Print all results
+            foreach (string score in attr)
+                Debug.Write(score + ", ");
+            Debug.WriteLine("");
+
+            //! [EX_AddNodeAttribute]
 
             // Assert that the scores meet our expectations
-            Assert.AreEqual(4, attr.Length);
+            Assert.AreEqual(3, attr.Length);
             Assert.AreEqual(attr[0], "0");
             Assert.AreEqual(attr[1], "100");
             Assert.AreEqual(attr[2], "200");
+
+            //! [EX_AddNodeAttribute_2]
+            // Add another node to the graph
+            g.AddEdge(0, 4, 50);
+
+            // Get the attributes again to update our list
+            attr = g.GetNodeAttributes("Attr");
+
+            // Print all results. Note how 4 is the empty string since it was not
+            // Assigned a score for ATTR since it was added to the graph
+            foreach (string score in attr)
+                Debug.Write(score + ", ");
+
+            //! [EX_AddNodeAttribute_2]
 
             // And that this is the empty string
             Assert.AreEqual(attr[3], "");
@@ -436,13 +473,19 @@ namespace HumanFactors.Tests.SpatialStructures
         }
 
         [TestMethod]
-        public void GetNodeAttributes()
+        public void NumNodesCorrectSize()
         {
+            Graph g = CreateSampleGraph();
+            // ![EX_NumNodes]
 
-        }
+            // Get the number of nodes in g
+            int number_of_nodes = g.NumNodes();
 
-        public void ClearNodeAttributes()
-        {
+            // Print 
+            Debug.WriteLine(number_of_nodes);
+
+            // ![EX_NumNodes]
+            Assert.AreEqual(3, number_of_nodes);
 
         }
     }

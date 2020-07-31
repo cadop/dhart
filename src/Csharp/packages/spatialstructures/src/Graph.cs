@@ -279,6 +279,11 @@ namespace HumanFactors.SpatialStructures
             an indexing operation. If multiple values are required, it is suggested to iterate through
             the pointers from Graph.CompressToCSR().
 
+            \par Example
+            \snippet spatialstructures\examples_spatialstructures.cs Example_GetCost
+            ```100```
+           
+
         */
         public float GetCost(int parent, int child, string cost_type = "")
         {
@@ -291,6 +296,14 @@ namespace HumanFactors.SpatialStructures
             \param node The X,Y,Z position of a node to get the ID for.
 
             \returns The ID of the node, or -1 if the node isn't in the graph.
+
+            \par Examples
+            \snippet spatialstructures\test_spatialstructures.cs  EX_GetNodeID_1
+            `0`\n
+            `1`\n
+            \snippet spatialstructures\test_spatialstructures.cs  EX_GetNodeID_2
+            `-1`
+            
         */
         public int GetNodeID(Vector3D node) => NativeMethods.C_GetNodeID(handle, node.x, node.y, node.z);
 
@@ -409,9 +422,13 @@ namespace HumanFactors.SpatialStructures
             \returns
             If `attribute` didn't exist in the graph, then an empty array of strings will be returned. 
 
-            \code
-                // TODO example
-            \endcode
+            \par Example
+            \snippet spatialstructures\test_spatialstructures.cs Example_CreateSampleGraph
+            \snippet spatialstructures\test_spatialstructures.cs EX_AddNodeAttribute
+            `0, 100, 200,`
+            \snippet spatialstructures\test_spatialstructures.cs EX_AddNodeAttribute_2
+            `0, 100, 200, ,`
+
         */
         public string[] GetNodeAttributes(string attribute)
         {
@@ -458,8 +475,13 @@ namespace HumanFactors.SpatialStructures
 
             \remarks
             This is used multiple times internally to get the size of the graph without
-            needing to get its nodes. 
-       */
+            needing to get its nodes.
+
+            \par Example
+            \snippet spatialstructures\test_spatialstructures.cs Example_CreateSampleGraph
+            \snippet spatialstructures\test_spatialstructures.cs EX_NumNodes
+            `3`
+        */
         public int NumNodes() => NativeMethods.C_GetGraphSize(this.Pointer);
     }
 

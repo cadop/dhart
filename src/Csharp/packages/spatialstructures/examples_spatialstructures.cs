@@ -70,5 +70,23 @@ namespace Humanfctors.Examples
 			//! [Generating Multiple Paths Using an alternate cost]
 		}
 
+		[TestMethod]
+		public void GetEdgeCostExample()
+		{
+			//! [Example_GetCost]
+			// Create a graph and add an edge
+			Graph g = new Graph();
+			g.AddEdge(0, 1, 100);
+
+			// Compress the graph so we can read the edge
+			g.CompressToCSR();
+
+			// Retrieve the cost that we just added using GetCost
+			float cost_in_graph = g.GetCost(0, 1);
+			Debug.WriteLine(cost_in_graph);
+			//! [Example_GetCost]
+
+			Assert.AreEqual(100, cost_in_graph);
+		}
 	}
 }
