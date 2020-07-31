@@ -16,6 +16,7 @@ namespace Humanfctors.Examples
 		[TestMethod]
 		public void GeneratePathsWithCostAlgorithms()
 		{
+			//! [Generating Multiple Paths Using an alternate cost]
 			// Load the OBJ from ddisk
 			var blob = OBJLoader.LoadOBJ("ExampleModels/energy_blob_zup.obj");
 
@@ -57,7 +58,7 @@ namespace Humanfctors.Examples
 			string energy_key = CostAlgorithmNames.ENERGY_EXPENDITURE;
 
 			// Generate a graph using the alternate cost type, then generate one using the graph's
-			// defgault cost type, distance. 
+			// default cost type, distance. 
 			int start_id = 1;
 			int end_id = 105;
 			var energy_path = ShortestPath.DijkstraShortestPath(graph, start_id, end_id, energy_key);
@@ -66,6 +67,7 @@ namespace Humanfctors.Examples
 			// Print paths to output. 
 			Debug.WriteLine(distance_path);
 			Debug.WriteLine(energy_path);
+			//! [Generating Multiple Paths Using an alternate cost]
 		}
 
 	}

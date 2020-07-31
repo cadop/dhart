@@ -90,8 +90,15 @@ namespace HumanFactors.Pathfinding
             \throws KeyNotFoundException `cost_type` wasn't left as blank, and didn't
             refer to the name of any cost that already exists in the graph.
 
-
             \see DijkstraShortestPathMulti for efficently generating multiple paths in parallel.
+
+            \par Example
+            \snippet spatialstructures\examples_spatialstructures.cs Generating Multiple Paths Using an alternate cost
+
+            ```
+            [(1, 1.415028), (12, 1.417536), (26, 1.417887), (39, 1.418485), (50, 1.000265), (63, 1.000128), (80, 1.000098), (105, 0)]
+            [(1, 4.559175), (12, 5.759251), (26, 5.889585), (39, 6.100943), (50, 2.978094), (63, 2.826927), (80, 2.784634), (105, 0)]
+            ```
         */
         public static Path DijkstraShortestPath(Graph graph, Vector3D start_node, Vector3D end_node, string cost_type = "")
         {
@@ -174,7 +181,6 @@ namespace HumanFactors.Pathfinding
             \throws System.ArgumentException Length of `start_ids` didn't equal length of `end_ids`
             \throws KeyNotFoundException `cost_type` wasn't left as blank, and didn't
                      refer to the name of any cost that already exists in `graph`.
-
         */
         public static Path[] DijkstraShortestPathMulti(
             Graph graph,
