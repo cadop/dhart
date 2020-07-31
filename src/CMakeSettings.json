@@ -1,146 +1,156 @@
 ﻿{
-  "configurations": [
-    {
-      "name": "x64-Debug",
-      "generator": "Visual Studio 16 2019 Win64",
-      "configurationType": "Debug",
-      "inheritEnvironments": [ "msvc_x64_x64" ],
-      "buildRoot": "${projectDir}\\out\\build\\${name}",
-      "installRoot": "${projectDir}\\out\\install\\${name}",
-      "cmakeCommandArgs": "",
-      "buildCommandArgs": "",
-      "ctestCommandArgs": "",
-      "variables": [
-        {
-          "name": "HumanFactors_Config",
-          "value": "All",
-          "type": "STRING"
-        },
-        {
-          "name": "HumanFactors_EnableTests",
-          "value": "True",
-          "type": "BOOL"
-        }
-      ]
-    },
-    {
-      "name": "x64-Release",
-      "generator": "Visual Studio 16 2019 Win64",
-      "configurationType": "Release",
-      "buildRoot": "${projectDir}\\out\\build\\${name}",
-      "installRoot": "${projectDir}\\out\\install\\${name}",
-      "cmakeCommandArgs": "",
-      "buildCommandArgs": "",
-      "ctestCommandArgs": "",
-      "inheritEnvironments": [ "msvc_x64_x64" ],
-      "variables": [
-        {
-          "name": "HumanFactors_Config",
-          "value": "All",
-          "type": "STRING"
-        },
-        {
-          "name": "HumanFactors_EnableTests",
-          "value": "true",
-          "type": "BOOL"
-        },
-        {
-          "name": "CMAKE_BUILD_TYPE",
-          "value": "Release",
-          "type": "STRING"
-        },
-        {
-          "name": "HumanFactors_EnableCSharp",
-          "value": "True",
-          "type": "BOOL"
-        },
-        {
-          "name": "HumanFactors_EnablePython",
-          "value": "true",
-          "type": "BOOL"
-        }
-      ]
-    },
-    {
-      "name": "x64-Release-Python",
-      "generator": "Visual Studio 16 2019 Win64",
-      "configurationType": "Release",
-      "buildRoot": "${projectDir}\\out\\build\\${name}",
-      "installRoot": "${projectDir}\\..\\build\\Python",
-      "cmakeCommandArgs": "",
-      "buildCommandArgs": "",
-      "ctestCommandArgs": "",
-      "inheritEnvironments": [ "msvc_x64_x64" ],
-      "variables": [
-        {
-          "name": "HumanFactors_Config",
-          "value": "All",
-          "type": "STRING"
-        },
-        {
-          "name": "HumanFactors_EnableTests",
-          "value": "False",
-          "type": "BOOL"
-        },
-        {
-          "name": "CMAKE_BUILD_TYPE",
-          "value": "Release",
-          "type": "STRING"
-        },
-        {
-          "name": "HumanFactors_EnablePython",
-          "value": "True",
-          "type": "BOOL"
-        },
-        {
-          "name": "HumanFactors_EnableCSharp",
-          "value": "False",
-          "type": "BOOL"
-        },
-        {
-          "name": "INSTALL_GTEST",
-          "value": "False",
-          "type": "BOOL"
-        }
-      ]
-    },
-    {
-      "name": "x64-Release-CSharp",
-      "generator": "Visual Studio 16 2019 Win64",
-      "configurationType": "Release",
-      "buildRoot": "${projectDir}\\out\\build\\${name}",
-      "installRoot": "${projectDir}\\..\\build\\C#",
-      "cmakeCommandArgs": "",
-      "buildCommandArgs": "",
-      "ctestCommandArgs": "",
-      "inheritEnvironments": [ "msvc_x64_x64" ],
-      "variables": [
-        {
-          "name": "HumanFactors_Config",
-          "value": "All",
-          "type": "STRING"
-        },
-        {
-          "name": "HumanFactors_EnableTests",
-          "value": "true",
-          "type": "BOOL"
-        },
-        {
-          "name": "CMAKE_BUILD_TYPE",
-          "value": "Release",
-          "type": "STRING"
-        },
-        {
-          "name": "HumanFactors_EnableCSharp",
-          "value": "True",
-          "type": "BOOL"
-        },
-        {
-          "name": "HumanFactors_EnablePython",
-          "value": "False",
-          "type": "BOOL"
-        }
-      ]
-    }
-  ]
+	"configurations": [
+		{
+			"name": "x64-Debug",
+			"generator": "Visual Studio 16 2019 Win64",
+			"configurationType": "Debug",
+			"inheritEnvironments": [ "msvc_x64_x64" ],
+			"buildRoot": "${projectDir}\\out\\build\\${name}",
+			"installRoot": "${projectDir}\\out\\install\\${name}",
+			"cmakeCommandArgs": "",
+			"buildCommandArgs": "",
+			"ctestCommandArgs": "",
+			"variables": [
+				{
+					"name": "HumanFactors_Config",
+					"value": "All",
+					"type": "STRING"
+				},
+				{
+					"name": "HumanFactors_EnableTests",
+					"value": "False",
+					"type": "BOOL"
+				},
+				{
+					"name": "INSTALL_GTEST",
+					"value": "False",
+					"type": "BOOL"
+				},
+				{
+					"name": "HumanFactors_EnableCSharp",
+					"value": "False",
+					"type": "BOOL"
+				}
+			]
+		},
+		{
+			"name": "x64-Release",
+			"generator": "Visual Studio 16 2019 Win64",
+			"configurationType": "Release",
+			"buildRoot": "${projectDir}\\out\\build\\${name}",
+			"installRoot": "${projectDir}\\out\\install\\${name}",
+			"cmakeCommandArgs": "",
+			"buildCommandArgs": "",
+			"ctestCommandArgs": "",
+			"inheritEnvironments": [ "msvc_x64_x64" ],
+			"variables": [
+				{
+					"name": "HumanFactors_Config",
+					"value": "All",
+					"type": "STRING"
+				},
+				{
+					"name": "HumanFactors_EnableTests",
+					"value": "true",
+					"type": "BOOL"
+				},
+				{
+					"name": "CMAKE_BUILD_TYPE",
+					"value": "Release",
+					"type": "STRING"
+				},
+				{
+					"name": "HumanFactors_EnableCSharp",
+					"value": "True",
+					"type": "BOOL"
+				},
+				{
+					"name": "HumanFactors_EnablePython",
+					"value": "true",
+					"type": "BOOL"
+				}
+			]
+		},
+		{
+			"name": "x64-Release-Python",
+			"generator": "Visual Studio 16 2019 Win64",
+			"configurationType": "Release",
+			"buildRoot": "${projectDir}\\out\\build\\${name}",
+			"installRoot": "${projectDir}\\..\\build\\Python",
+			"cmakeCommandArgs": "",
+			"buildCommandArgs": "",
+			"ctestCommandArgs": "",
+			"inheritEnvironments": [ "msvc_x64_x64" ],
+			"variables": [
+				{
+					"name": "HumanFactors_Config",
+					"value": "All",
+					"type": "STRING"
+				},
+				{
+					"name": "HumanFactors_EnableTests",
+					"value": "False",
+					"type": "BOOL"
+				},
+				{
+					"name": "CMAKE_BUILD_TYPE",
+					"value": "Release",
+					"type": "STRING"
+				},
+				{
+					"name": "HumanFactors_EnablePython",
+					"value": "True",
+					"type": "BOOL"
+				},
+				{
+					"name": "HumanFactors_EnableCSharp",
+					"value": "False",
+					"type": "BOOL"
+				},
+				{
+					"name": "INSTALL_GTEST",
+					"value": "False",
+					"type": "BOOL"
+				}
+			]
+		},
+		{
+			"name": "x64-Release-CSharp",
+			"generator": "Visual Studio 16 2019 Win64",
+			"configurationType": "Release",
+			"buildRoot": "${projectDir}\\out\\build\\${name}",
+			"installRoot": "${projectDir}\\..\\build\\C#",
+			"cmakeCommandArgs": "",
+			"buildCommandArgs": "",
+			"ctestCommandArgs": "",
+			"inheritEnvironments": [ "msvc_x64_x64" ],
+			"variables": [
+				{
+					"name": "HumanFactors_Config",
+					"value": "All",
+					"type": "STRING"
+				},
+				{
+					"name": "HumanFactors_EnableTests",
+					"value": "true",
+					"type": "BOOL"
+				},
+				{
+					"name": "CMAKE_BUILD_TYPE",
+					"value": "Release",
+					"type": "STRING"
+				},
+				{
+					"name": "HumanFactors_EnableCSharp",
+					"value": "True",
+					"type": "BOOL"
+				},
+				{
+					"name": "HumanFactors_EnablePython",
+					"value": "False",
+					"type": "BOOL"
+				}
+			]
+		}
+	]
 }
