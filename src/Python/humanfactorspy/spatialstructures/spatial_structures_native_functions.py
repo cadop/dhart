@@ -366,6 +366,55 @@ def C_CalculateAndStoreCrossSlope(graph_ptr : c_void_p):
     error_code = HFPython.CalculateAndStoreCrossSlope(graph_ptr)
     assert(error_code == HF_STATUS.OK, "CalculateAndStoreCrossSlope  only should return OK. Something must have changed in the C++ code that hasn't been updated in python. ")
 
+
+def c_get_node_attributes(
+    graph_ptr: c_void_p, attr: str
+    ) -> Union[List[str], List[None]]:
+    """ Get node attributes from a grpah in  C++
+
+    Args:
+        graph_ptr : Pointer to the graph to get attributes from.
+        attr : Unique key of the attribute to get
+
+    Returns:
+        A list of strings containing the score for every node in the graph
+        ordered by ID. If the attribute could not be found in the graph, an
+        empty list will be returned instead
+
+    """
+    raise NotImplementedError()
+
+
+def c_add_node_attributes(
+    graph_ptr: c_void_p, attr: str, ids: List[int], scores: List[str]
+    ) -> None:
+    """ Assign or update scores for nodes for a specific attribute
+
+    Args:
+        graph_ptr : Pointer to the graph to add scores to
+        attr : Unique key of the attribute to add scores to. If this an 
+        attribute with this keydoesn't exist then it will be created.
+        ids : An array of ids of nodes to assign scores to 
+        scores : An ordered array of scores where each score is to be assigned 
+        to the id in ids at the same index.
+
+    """
+    raise NotImplementedError()
+
+
+def c_clear_node_attribute(
+    graph_ptr: c_void_p, attr: str, ids: List[int], scores: List[str]
+    ) -> None:
+    """ Clear a node attribute and all of its scores from a graphj
+
+    Args:
+        graph_ptr : Graph to clear the attribute from.
+        attr : Attribute to clear from the graph
+
+    """
+    raise NotImplementedError()
+
+
 ### Destructors
 
 def C_DeleteFloatArray(float_ptr: c_void_p):
