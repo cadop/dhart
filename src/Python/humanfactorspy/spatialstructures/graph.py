@@ -499,6 +499,12 @@ class Graph:
            >>> ids = [0, 1, 2]
            >>> scores = ["zero", "one", "two"]
            >>> g.add_node_attributes(attr, ids, scores)
+
+           >>> # To ensure that they've been added properly we will call
+           >>> # get_node_attributes.
+           >>> g.get_node_attributes(attr)
+           ['zero', 'one', 'two']
+
         """
         # Just send it to C++
         spatial_structures_native_functions.c_add_node_attributes(
