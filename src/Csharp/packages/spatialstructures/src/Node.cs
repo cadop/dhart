@@ -39,6 +39,11 @@ namespace HumanFactors.SpatialStructures
         /// The ID of this node.
         /// </summary>
         public int id;
+
+        public override string ToString()
+        {
+            return String.Format("({0}, {1}, {2})", x, y, z);
+        }
     }
 
     /*! 

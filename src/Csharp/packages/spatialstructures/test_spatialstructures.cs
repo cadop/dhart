@@ -38,9 +38,21 @@ namespace HumanFactors.Tests.SpatialStructures
         [TestMethod]
         public void AddEdgeFromID()
         {
+            //! [EX_AddEdge_ID]
+            
+            // Create a graph, add an edge then compress it
             Graph G = new Graph();
             G.AddEdge(0, 1, 39);
             G.CompressToCSR();
+
+            // Get this cost from the edge
+            float cost_from_graph = G.GetCost(0, 1);
+
+            // Print the retrieved cost
+            Debug.WriteLine(cost_from_graph);
+
+            //! [EX_AddEdge_ID]
+            
             Assert.AreEqual(39, G.GetCost(0, 1),
                 "Edge failed to be added through ids"
             );
@@ -102,12 +114,21 @@ namespace HumanFactors.Tests.SpatialStructures
         [TestMethod]
         public void GetCSRPointersForAltCost()
         {
+            //! [EX_CompressToCSR]           
+            // Create a graph
             Graph G = new Graph();
 
+            // Add an edge
             G.AddEdge(1, 2, 39);
+            
+            // Compress the graph to a CSR
             var default_ptrs = G.CompressToCSR();
+            
+            // Print the CSR
+            Debug.Write(default_ptrs);
+            //! [EX_CompressToCSR]           
 
-            G.AddEdge(1, 2, 54, "ALT");
+           G.AddEdge(1, 2, 54, "ALT");
             var alt_ptrs = G.CompressToCSR("ALT");
 
             // Assert that all pointers aren't null, and that the CSR
@@ -128,10 +149,22 @@ namespace HumanFactors.Tests.SpatialStructures
         [TestMethod]
         public void GetNodes()
         {
+            // ! [EX_GetNodes]
+            
+            // Create a graph
             Graph G = new Graph();
+
+            // Insert an edge between two nodes. This will effectively add the
+            // nodes to the graph
             G.AddEdge(new Vector3D(0, 0, 2), new Vector3D(0, 0, 1), 39);
 
+            // Get the nodes by calling G.getNodes();
             var nodes = G.getNodes();
+            
+            // Print the nodes
+            Debug.WriteLine(nodes);
+
+            // ! [EX_GetNodes]
             Assert.IsTrue(nodes.size == 2);
         }
         [TestMethod]

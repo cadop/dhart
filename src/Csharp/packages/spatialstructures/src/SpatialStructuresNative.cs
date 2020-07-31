@@ -49,6 +49,17 @@ namespace HumanFactors.SpatialStructures
             this.outer_indices = outer_indices;
             this.inner_indices = inner_indices;
         }
+
+        public override string ToString()
+        {
+            string out_string = "(";
+            out_string += "nnz: " + nnz.ToString() + ", ";
+            out_string += "rows: " + rows.ToString() + ", ";
+            out_string += "cols: " + cols.ToString();
+            out_string += ")";
+
+            return out_string;
+        }
     }
 
     internal static class NativeMethods
