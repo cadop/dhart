@@ -1,14 +1,33 @@
 /*!
-    \file		test_raycasting.cpp
-    \brief		Source file for Ray Casting sample usage
+    \file		Sample_Raycasting.cpp
+    \brief		Driver source file for testing functionality of the Ray casting functions
 
     \author		Gem Aludino
     \date		31 Jul 2020
 */
 #include <iostream>
 #include <vector>
-
+#include <thread>
 #include <Windows.h>
+
+/*!
+    \brief  Namespace for sample usage function prototypes
+
+    \details
+    All implementation for these sample usage functions
+    will be defined in separate .cpp driver source files
+    (one driver source file per function prototype/example)
+*/
+namespace CInterfaceTests {
+    /*
+        Relative paths to .dll files
+    */
+    const wchar_t path_tbb[27] = L"..\\x64-Release\\bin\\tbb.dll";
+    const wchar_t path_embree3[31] = L"..\\x64-Release\\bin\\embree3.dll";
+    const wchar_t path_humanfactors[36] = L"..\\x64-Release\\bin\\HumanFactors.dll";
+
+    void raycasting(HINSTANCE dll_hf);
+}
 
 /*!
 	\brief	Forward declaration CInterfaceTests::raycasting
@@ -29,6 +48,104 @@ namespace HF::Geometry {
 */
 namespace HF::RayTracer {
 	class EmbreeRayTracer;
+}
+
+/*!
+    \brief  Program execution begins and ends here.
+
+    \param  argc    Argument count
+    \param  argv    Command line arguments
+
+    \return         0 on success, else failure.
+*/
+int main(int argc, const char *argv[]) {
+    /*
+        The following DLLs must be loaded in this order:
+            - tbb.dll
+            - embree3.dll
+            - HumanFactors.dll
+
+        If the DLLs are not loaded in this order,
+        HumanFactors.dll will fail to load!
+    */
+
+    /*
+        Load tbb.dll first.
+    */
+    HINSTANCE dll_tbb = LoadLibrary(CInterfaceTests::path_tbb);
+    
+    if (dll_tbb == nullptr) {
+        std::cerr << "Unable to load " << "tbb.dll" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    else {
+        std::cout << "Loaded successfully: " << "tbb.dll" << std::endl;
+    }
+
+    /*
+        embree3.dll depends on tbb.dll.
+    */
+    HINSTANCE dll_embree3 = LoadLibrary(CInterfaceTests::path_embree3);
+
+    if (dll_embree3 == nullptr) {
+        std::cerr << "Unable to load " << "embree3.dll" << std::endl;
+        
+        FreeLibrary(dll_tbb);
+        exit(EXIT_FAILURE);
+    }
+    else {
+        std::cout << "Loaded successfully: " << "embree3.dll" << std::endl;
+    }
+
+    /*
+        HumanFactors.dll depends on both tbb.dll and embree3.dll.
+    */
+    HINSTANCE dll_humanfactors = LoadLibrary(CInterfaceTests::path_humanfactors);
+
+    if (dll_humanfactors == nullptr) {
+        std::cerr << "Unable to load " << "HumanFactors.dll" << std::endl;
+
+        FreeLibrary(dll_embree3);
+        FreeLibrary(dll_tbb);
+
+        exit(EXIT_FAILURE);
+    }
+    else {
+        std::cout << "Loaded successfully: " << "HumanFactors.dll" << std::endl;
+
+		///
+		///	Ray casting test.
+		///	End status of 1 means OK.
+		///
+        CInterfaceTests::raycasting(dll_humanfactors);
+
+        /*
+            When stepping through the debugger, the statement below is not required --
+            but when running the executable, FreeLibrary(dll_humanfactors) throws an exception.
+            By putting the current thread to sleep for 250 ms, dll_humanfactors can be freed.
+
+            Solution was described here:
+            https://forums.ni.com/t5/Instrument-Control-GPIB-Serial/Why-does-FreeLibrary-sometimes-crash/m-p/128079/highlight/true?profile.language=en#M7393
+        */
+		std::this_thread::sleep_for(std::chrono::milliseconds(250));
+
+		///
+		/// Free libraries in order of creation
+		///
+        if (FreeLibrary(dll_humanfactors)) {
+            std::cout << "Freed successfully: " << "HumanFactors.dll" << std::endl;
+        }
+
+        if (FreeLibrary(dll_embree3)) {
+            std::cout << "Freed successfully: " << "embree3.dll" << std::endl;
+        }
+
+        if (FreeLibrary(dll_tbb)) {
+            std::cout << "Freed successfully: " << "tbb.dll" << std::endl;
+        }
+    }
+
+    return EXIT_SUCCESS;
 }
 
 /*!
@@ -78,7 +195,7 @@ void CInterfaceTests::raycasting(HINSTANCE dll_hf) {
 	typedef int (*p_FireRay)(HF::RayTracer::EmbreeRayTracer* ert, float& x, float& y, float& z, float dx, float dy, float dz, float max_distance, bool& result);
 	typedef int (*p_FireSingleRayDistance)(HF::RayTracer::EmbreeRayTracer*, const float*, const float*, const float, float*, int*);
 	typedef int (*p_FireOcclusionRays)(HF::RayTracer::EmbreeRayTracer*, const float*, const float*, int, int, float, bool*);
-	typedef int (*p_DestroyRayTracer)(HF::RayTracer::EmbreeRayTracer *);
+	typedef int (*p_DestroyRayTracer)(HF::RayTracer::EmbreeRayTracer*);
 	typedef int (*p_DestroyMeshInfo)(std::vector<HF::Geometry::MeshInfo>*);
 
 	// Create pointers-to-functions addressed at the procedures defined in dll_hf, by using GetProcAddress()
@@ -102,7 +219,7 @@ void CInterfaceTests::raycasting(HINSTANCE dll_hf) {
 	// Get model path
 
 	// This is a relative path to your obj file.
-	const std::string obj_path_str = "..\\Example Models\\plane.obj";
+	const std::string obj_path_str = "plane.obj";
 
 	// Size of obj file string (character count)
 	const int obj_length = static_cast<int>(obj_path_str.size());
