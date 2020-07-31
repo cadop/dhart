@@ -6,6 +6,7 @@
     \date		31 Jul 2020
 */
 #include <iostream>
+#include <thread>
 #include <Windows.h>
 
 /*!
@@ -89,6 +90,7 @@ int main(int argc, const char *argv[]) {
 
         FreeLibrary(dll_embree3);
         FreeLibrary(dll_tbb);
+
         exit(EXIT_FAILURE);
     }
     else {
@@ -115,17 +117,23 @@ int main(int argc, const char *argv[]) {
         CInterfaceTests::create_visibility_graph(dll_humanfactors);
         */
 
+        ///
+        /// Free libraries in order of creation
+        ///
+
         /*
-            Free all libraries in reverse order of creation
+            When stepping through the debugger, the statement below is not required --
+            but when running the executable, FreeLibrary(dll_humanfactors) throws an exception.
+            By putting the current thread to sleep for 250 ms, dll_humanfactors can be freed.
+
+            Solution was described here:
+            https://forums.ni.com/t5/Instrument-Control-GPIB-Serial/Why-does-FreeLibrary-sometimes-crash/m-p/128079/highlight/true?profile.language=en#M7393
         */
-        /*
-        // This throws an exception when the executable is run,
-        // but when stepping through the debugger -- this statement runs okay.
-        // Need to fix this.
+        std::this_thread::sleep_for(std::chrono::milliseconds(250));
+
         if (FreeLibrary(dll_humanfactors)) {
             std::cout << "Freed successfully: " << "HumanFactors.dll" << std::endl;
         }
-        */
 
         if (FreeLibrary(dll_embree3)) {
             std::cout << "Freed successfully: " << "embree3.dll" << std::endl;
