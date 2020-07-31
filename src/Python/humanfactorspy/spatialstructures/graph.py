@@ -486,6 +486,7 @@ class Graph:
         Example:
             Add node attributes to a graph
 
+           >>> from humanfactorspy.spatialstructures import Graph
            >>> # Create a simple graph with 3 nodes
            >>> g = Graph()
            >>> g.AddEdgeToGraph(0, 1, 100)
@@ -519,8 +520,10 @@ class Graph:
 
 
         Example:
-            Create a graph, add some nodes, then assign attributes to them
+            Create a graph, add some nodes, assign some attributes to its nodes
+            then read them from the graph
            
+           >>> from humanfactorspy.spatialstructures import Graph
            >>> # Create a simple graph with 3 nodes
            >>> g = Graph()
            >>> g.AddEdgeToGraph(0, 1, 100)
@@ -552,7 +555,7 @@ class Graph:
         
         Example:
             Adding an attribute, then clearing it from the graph
-
+           >>> from humanfactorspy.spatialstructures import Graph
            >>> # Create a simple graph with 3 nodes
            >>> g = Graph()
            >>> g.AddEdgeToGraph(0, 1, 100)
