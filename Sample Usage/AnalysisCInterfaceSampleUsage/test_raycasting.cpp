@@ -240,5 +240,11 @@ void CInterfaceTests::raycasting(HINSTANCE dll_hf) {
 	}
 
 	std::cout << "\nEnd status: " << status << std::endl;
+	if (status == 1) {
+		std::cout << "[OK]" << std::endl;
+	}
+	else {
+		std::cout << "[Error occurred]" << std::endl;
+	}
 	std::cout << "\n--- End Example ---\n" << std::endl;
 }

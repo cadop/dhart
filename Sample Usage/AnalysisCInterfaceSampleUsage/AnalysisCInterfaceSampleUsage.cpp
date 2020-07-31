@@ -18,6 +18,13 @@
     (one source file per function prototype/example)
 */
 namespace CInterfaceTests {
+    /*
+        Relative paths to .dll files
+    */
+    const wchar_t path_tbb[27] = L"..\\x64-Release\\bin\\tbb.dll";
+    const wchar_t path_embree3[31] = L"..\\x64-Release\\bin\\embree3.dll";
+    const wchar_t path_humanfactors[36] = L"..\\x64-Release\\bin\\HumanFactors.dll";
+
     void raycasting(HINSTANCE dll_hf);
     /*
     // These prototypes be uncommented 
@@ -55,38 +62,38 @@ int main(int argc, const char *argv[]) {
     /*
         Load tbb.dll first.
     */
-    HINSTANCE dll_tbb = LoadLibrary(L"..\\x64-Release\\bin\\tbb.dll");
+    HINSTANCE dll_tbb = LoadLibrary(CInterfaceTests::path_tbb);
     
     if (dll_tbb == nullptr) {
-        std::cerr << "Unable to load " << "..\\x64-Release\\bin\\tbb.dll" << std::endl;
+        std::cerr << "Unable to load " << "tbb.dll" << std::endl;
         exit(EXIT_FAILURE);
     }
     else {
-        std::cout << "Loaded successfully: " << "..\\x64-Release\\bin\\tbb.dll" << std::endl;
+        std::cout << "Loaded successfully: " << "tbb.dll" << std::endl;
     }
 
     /*
         embree3.dll depends on tbb.dll.
     */
-    HINSTANCE dll_embree3 = LoadLibrary(L"..\\x64-Release\\bin\\embree3.dll");
+    HINSTANCE dll_embree3 = LoadLibrary(CInterfaceTests::path_embree3);
 
     if (dll_embree3 == nullptr) {
-        std::cerr << "Unable to load " << "..\\x64-Release\\bin\\embree3.dll" << std::endl;
+        std::cerr << "Unable to load " << "embree3.dll" << std::endl;
         
         FreeLibrary(dll_tbb);
         exit(EXIT_FAILURE);
     }
     else {
-        std::cout << "Loaded successfully: " << "..\\x64-Release\\bin\\embree3.dll" << std::endl;
+        std::cout << "Loaded successfully: " << "embree3.dll" << std::endl;
     }
 
     /*
         HumanFactors.dll depends on both tbb.dll and embree3.dll.
     */
-    HINSTANCE dll_humanfactors = LoadLibrary(L"..\\x64-Release\\bin\\HumanFactors.dll");
+    HINSTANCE dll_humanfactors = LoadLibrary(CInterfaceTests::path_humanfactors);
 
     if (dll_humanfactors == nullptr) {
-        std::cerr << "Unable to load " << "..\\x64-Release\\bin\\HumanFactors.dll" << std::endl;
+        std::cerr << "Unable to load " << "HumanFactors.dll" << std::endl;
 
         FreeLibrary(dll_embree3);
         FreeLibrary(dll_tbb);
@@ -94,7 +101,7 @@ int main(int argc, const char *argv[]) {
         exit(EXIT_FAILURE);
     }
     else {
-        std::cout << "Loaded successfully: " << "..\\x64-Release\\bin\\HumanFactors.dll" << std::endl;
+        std::cout << "Loaded successfully: " << "HumanFactors.dll" << std::endl;
 
         /*
             Run all tests here.
