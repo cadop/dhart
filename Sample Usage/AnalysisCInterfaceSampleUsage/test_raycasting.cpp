@@ -47,6 +47,16 @@ namespace HF::RayTracer {
 		FireOcclusionRays - raytracer_C.h
 		DestroyRaytracer - raytracer_C.h
 		DestroyMeshInfo - objloader_C.h
+
+	Required forward-declarations:
+	------------------------------
+		namespace HF::Geometry {
+			class MeshInfo;
+		}
+
+		namespace HF::RayTracer {
+			class EmbreeRayTracer;
+		}
 */
 void CInterfaceTests::raycasting(HINSTANCE dll_hf) {
 	///

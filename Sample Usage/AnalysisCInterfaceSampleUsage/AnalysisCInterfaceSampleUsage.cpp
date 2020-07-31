@@ -6,20 +6,7 @@
     \date		31 Jul 2020
 */
 #include <iostream>
-
 #include <Windows.h>
-
-#ifndef C_INTERFACE
-#define C_INTERFACE extern "C" __declspec(dllexport) int
-#endif /* C_INTERFACE */
-
-#define DLL_RELATIVE_PATH  ".\\x64-Release\\bin\\HumanFactors.dll"
-
-/*
-using HRESULT = (CALLBACK * LPFNDLLFUNC1)(DWORD, UINT*);
-
-HRESULT LoadAndCallSomeFunction(DWORD dwParam1, UINT* puParam2);
-*/
 
 /*!
     \brief  Namespace for sample usage function prototypes
@@ -45,6 +32,14 @@ namespace CInterfaceTests {
     */
 }
 
+/*!
+    \brief  Program execution begins and ends here.
+
+    \param  argc    Argument count
+    \param  argv    Command line arguments
+
+    \return         0 on success, else failure.
+*/
 int main(int argc, const char *argv[]) {
     /*
         The following DLLs must be loaded in this order:
@@ -124,10 +119,10 @@ int main(int argc, const char *argv[]) {
             Free all libraries in reverse order of creation
         */
         /*
+        // This throws an exception when the executable is run,
+        // but when stepping through the debugger -- this statement runs okay.
+        // Need to fix this.
         if (FreeLibrary(dll_humanfactors)) {
-            // This throws an exception when the executable is run,
-            // but when stepping through the debugger -- this statement runs okay.
-            // Need to fix this.
             std::cout << "Freed successfully: " << "HumanFactors.dll" << std::endl;
         }
         */
