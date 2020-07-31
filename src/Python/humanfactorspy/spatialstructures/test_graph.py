@@ -294,10 +294,10 @@ def test_AddNodeAttribute(SimpleGraph):
     SimpleGraph.add_node_attributes(attr, ids, scores)
 
     # Get attribute scores from the graph
-    SimpleGraph.get_node_attributes(attr)
+    out_attrs = SimpleGraph.get_node_attributes(attr)
 
     # Assert it's equal to our input array
-    assert ids == scores
+    assert out_attrs == scores
 
 
 def test_ClearNodeAttributes(SimpleGraph):

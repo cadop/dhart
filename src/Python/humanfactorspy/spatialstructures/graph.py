@@ -504,7 +504,7 @@ class Graph:
         """
 
         return spatial_structures_native_functions.c_get_node_attributes(
-            self.graph_ptr, attribute
+            self.graph_ptr, attribute, self.NumNodes()
         )
 
     def clear_node_attribute(self, attribute: str):
