@@ -14,6 +14,24 @@ namespace HumanFactors.Tests.SpatialStructures
     [TestClass]
     public class TestGraph
     {
+        private Graph CreateSampleGraph()
+        {
+            //! [Example_CreateSampleGraph]
+            // Create a new graph and add some edges
+            Graph g = new Graph();
+            g.AddEdge(0, 1, 100);
+            g.AddEdge(0, 2, 50);
+            g.AddEdge(1, 2, 20);
+
+            // Compress the graph before using it 
+            g.CompressToCSR();
+
+            //! [Example_CreateSampleGraph]
+           
+            return g;
+        }
+
+
         [TestMethod]
         public void CreateEmptyGraph()
         {
@@ -131,12 +149,16 @@ namespace HumanFactors.Tests.SpatialStructures
         [TestMethod]
         public void AggregateNodes()
         {
-            Graph G = new Graph();
-            G.AddEdge(new Vector3D(0, 0, 2), new Vector3D(0, 0, 1), 39);
+            var g = this.CreateSampleGraph();
 
-            var scores = G.AggregateEdgeCosts(GraphEdgeAggregation.SUM);
+            //! [Example_AggregateEdgeCosts]
+            var scores = g.AggregateEdgeCosts(GraphEdgeAggregation.SUM);
             var score_arr = scores.array;
-            Assert.AreEqual(39, score_arr[0]);
+            Debug.WriteLine(scores);
+            //! [Example_AggregateEdgeCosts]
+           
+            Assert.AreEqual(150, score_arr[0]);
+            Assert.AreEqual(20, score_arr[1]);
             Assert.AreEqual(0, score_arr[1]);
         }
 

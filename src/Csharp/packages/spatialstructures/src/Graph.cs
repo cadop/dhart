@@ -238,6 +238,12 @@ namespace HumanFactors.SpatialStructures
             \remarks
             The order of the scores returned bythis function match the order of the scores returned from
             Graph.getNodes. This can be especially useful for summarizing the results of a VisibilityGraph.
+
+            \par Example
+            \snippet spatialstructures\test_spatialstructures.cs Example_CreateSampleGraph
+
+            \snippet spatialstructures\test_spatialstructures.cs Example_AggregateEdgeCosts
+            ```[150, 20, 0]```
         */
         public ManagedFloatArray AggregateEdgeCosts(
             GraphEdgeAggregation type,
