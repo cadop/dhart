@@ -5,4 +5,6 @@ set(sources ${sources}
 )
 set(test_sources ${test_sources}
 	${CMAKE_CURRENT_LIST_DIR}/test_spatialstructures.cs
+	${CMAKE_CURRENT_LIST_DIR}/examples_spatialstructures.cs
+
 )
