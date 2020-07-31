@@ -467,10 +467,7 @@ class Graph:
         return spatial_structures_native_functions.C_NumNodes(self.graph_ptr)
 
     def add_node_attributes(
-        self,
-        attribute : str,
-        ids : Union[int, List[int]],
-        scores : Union[str, List[Any]],
+        self, attribute: str, ids: Union[int, List[int]], scores: Union[str, List[Any]],
         ) -> None:
         """ Add attributes to one or more nodes
         
@@ -487,9 +484,12 @@ class Graph:
             ValueError : the length of ids and scores did not match
         
         """
-        raise NotImplementedError()
+        # Just send it to C++
+        spatial_structures_native_functions.c_add_node_attributes(
+            self.graph_ptr, attribute, ids, scores
+        )
 
-    def get_node_attributes(self, attribute : str) -> List[str]:
+    def get_node_attributes(self, attribute: str) -> List[str]:
         """ Get scores of every node for a specific attribute
 
         Args:
@@ -502,16 +502,17 @@ class Graph:
             been assigned a score for a specific attribute, the score at
             the index of their ID will be None.
         """
-        raise NotImplementedError()
-    
-    def clear_node_attribute(self, attribute : str):
+
+        return spatial_structures_native_functions.c_get_node_attributes(
+            self.graph_ptr, attribute
+        )
+
+    def clear_node_attribute(self, attribute: str):
         """ Clear a node attribute and all of its scores from the graph
 
         Args:
             attribute : The unique key of the attribute to delete from the graph
         """
-        raise NotImplementedError()        
-
-
-
-
+        spatial_structures_native_functions.c_clear_node_attribute(
+            self.graph_ptr, attribute
+        )
