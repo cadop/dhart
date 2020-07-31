@@ -466,7 +466,7 @@ class Graph:
         """Get the number of nodes in the graph."""
         return spatial_structures_native_functions.C_NumNodes(self.graph_ptr)
 
-    def AddNodeAttributes(
+    def add_node_attributes(
         self,
         attribute : str,
         ids : Union[int, List[int]],
@@ -489,7 +489,7 @@ class Graph:
         """
         raise NotImplementedError()
 
-    def GetNodeAttributes(self, attribute : str) -> List[str]:
+    def get_node_attributes(self, attribute : str) -> List[str]:
         """ Get scores of every node for a specific attribute
 
         Args:
@@ -504,7 +504,7 @@ class Graph:
         """
         raise NotImplementedError()
     
-    def ClearNodeAttribute(self, attribute : str):
+    def clear_node_attribute(self, attribute : str):
         """ Clear a node attribute and all of its scores from the graph
 
         Args:
