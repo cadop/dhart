@@ -10,14 +10,23 @@
 
 #include <Windows.h>
 
+/*!
+	\brief	Forward declaration CInterfaceTests::raycasting
+*/
 namespace CInterfaceTests {
 	void raycasting(HINSTANCE dll_hf);
 }
 
+/*!
+	\brief	Forward declaration for HF::Geometry::MeshInfo
+*/
 namespace HF::Geometry {
 	class MeshInfo;
 }
 
+/*!
+	\brief	Forward declaration for HF::RayTracer::EmbreeRayTracer
+*/
 namespace HF::RayTracer {
 	class EmbreeRayTracer;
 }
@@ -48,7 +57,7 @@ namespace HF::RayTracer {
 		DestroyRaytracer - raytracer_C.h
 		DestroyMeshInfo - objloader_C.h
 
-	Required forward-declarations:
+	Required forward declarations:
 	------------------------------
 		namespace HF::Geometry {
 			class MeshInfo;
