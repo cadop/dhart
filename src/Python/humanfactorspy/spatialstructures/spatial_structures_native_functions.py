@@ -141,10 +141,9 @@ def C_AddEdgeFromNodes(
             + "in the graph's default cost set.")
     else:
         print("Unexpected error code: " + error_code)
-        assert(
-            False,
-            "There's some error that's not being handled either in C++ or"
-            + "in python.")
+        assert False
+        # There's some error that's not being handled either in C++ or 
+        # in python.
 
 
 def C_AddEdgeFromNodeIDs(
@@ -360,13 +359,20 @@ def C_NumNodes(graph_ptr: c_void_p) -> int:
 
     return out_size.value
 
+
 def C_CalculateAndStoreEnergyExpenditure(graph_ptr : c_void_p):
     error_code = HFPython.CalculateAndStoreEnergyExpenditure(graph_ptr)
-    assert(error_code == HF_STATUS.OK, "CalculateAndStoreEnergyexpenditure  only should return OK. Something must have changed in the C++ code that hasn't been updated in python. ")
+    assert(error_code == HF_STATUS.OK)
+    # CalculateAndStoreEnergyexpenditure  only should return OK. 
+    # Something must have changed in the C++ code that hasn't been updated in
+    # python.
+
 
 def C_CalculateAndStoreCrossSlope(graph_ptr : c_void_p):
     error_code = HFPython.CalculateAndStoreCrossSlope(graph_ptr)
-    assert(error_code == HF_STATUS.OK, "CalculateAndStoreCrossSlope  only should return OK. Something must have changed in the C++ code that hasn't been updated in python. ")
+    assert error_code == HF_STATUS.OK
+    # CalculateAndStoreCrossSlope  only should return OK. Something must have 
+    # changed in the C++ code that hasn't been updated in python.
 
 
 def c_get_node_attributes(

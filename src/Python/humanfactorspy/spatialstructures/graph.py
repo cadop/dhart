@@ -483,6 +483,21 @@ class Graph:
         Raises:
             ValueError : the length of ids and scores did not match
         
+        Example:
+            Add node attributes to a graph
+
+           >>> # Create a simple graph with 3 nodes
+           >>> g = Graph()
+           >>> g.AddEdgeToGraph(0, 1, 100)
+           >>> g.AddEdgeToGraph(0, 2, 50)
+           >>> g.AddEdgeToGraph(1, 2, 20)
+           >>> csr = g.CompressToCSR()
+
+           >>> # Add node attributes to the simple graph
+           >>> attr = "Test"
+           >>> ids = [0, 1, 2]
+           >>> scores = ["zero", "one", "two"]
+           >>> g.add_node_attributes(attr, ids, scores)
         """
         # Just send it to C++
         spatial_structures_native_functions.c_add_node_attributes(
@@ -501,6 +516,28 @@ class Graph:
             in the graph, then None is returned. For nodes that have never
             been assigned a score for a specific attribute, the score at
             the index of their ID will be None.
+
+
+        Example:
+            Create a graph, add some nodes, then assign attributes to them
+           
+           >>> # Create a simple graph with 3 nodes
+           >>> g = Graph()
+           >>> g.AddEdgeToGraph(0, 1, 100)
+           >>> g.AddEdgeToGraph(0, 2, 50)
+           >>> g.AddEdgeToGraph(1, 2, 20)
+           >>> csr = g.CompressToCSR()
+
+           >>> # Add node attributes to the simple graph
+           >>> attr = "Test"
+           >>> ids = [0, 1, 2]
+           >>> scores = ["zero", "one", "two"]
+           >>> g.add_node_attributes(attr, ids, scores)
+           
+           
+           >>> # Get attribute scores from the graph
+           >>> g.get_node_attributes(attr)
+           ['zero', 'one', 'two']
         """
 
         return spatial_structures_native_functions.c_get_node_attributes(
@@ -512,6 +549,30 @@ class Graph:
 
         Args:
             attribute : The unique key of the attribute to delete from the graph
+        
+        Example:
+            Adding an attribute, then clearing it from the graph
+
+           >>> # Create a simple graph with 3 nodes
+           >>> g = Graph()
+           >>> g.AddEdgeToGraph(0, 1, 100)
+           >>> g.AddEdgeToGraph(0, 2, 50)
+           >>> g.AddEdgeToGraph(1, 2, 20)
+           >>> csr = g.CompressToCSR()
+
+           >>> # Add node attributes to the simple graph
+           >>> attr = "Test"
+           >>> ids = [0, 1, 2]
+           >>> scores = ["zero", "one", "two"]
+           >>> g.add_node_attributes(attr, ids, scores)
+           
+           >>> # Clear the attribute
+           >>> g.clear_node_attribute(attr)
+
+           >>> # Get attribute scores from the graph
+           >>> g.get_node_attributes(attr)
+           []
+        
         """
         spatial_structures_native_functions.c_clear_node_attribute(
             self.graph_ptr, attribute
