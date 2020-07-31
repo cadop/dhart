@@ -56,6 +56,9 @@ int main(int argc, const char *argv[]) {
         HumanFactors.dll will fail to load!
     */
 
+    /*
+        Load tbb.dll first.
+    */
     HINSTANCE dll_tbb = LoadLibrary(L"..\\x64-Release\\bin\\tbb.dll");
     
     if (dll_tbb == nullptr) {
@@ -66,20 +69,31 @@ int main(int argc, const char *argv[]) {
         std::cout << "Loaded successfully: " << "..\\x64-Release\\bin\\tbb.dll" << std::endl;
     }
 
+    /*
+        embree3.dll depends on tbb.dll.
+    */
     HINSTANCE dll_embree3 = LoadLibrary(L"..\\x64-Release\\bin\\embree3.dll");
 
     if (dll_embree3 == nullptr) {
         std::cerr << "Unable to load " << "..\\x64-Release\\bin\\embree3.dll" << std::endl;
+        
+        FreeLibrary(dll_tbb);
         exit(EXIT_FAILURE);
     }
     else {
         std::cout << "Loaded successfully: " << "..\\x64-Release\\bin\\embree3.dll" << std::endl;
     }
 
+    /*
+        HumanFactors.dll depends on both tbb.dll and embree3.dll.
+    */
     HINSTANCE dll_humanfactors = LoadLibrary(L"..\\x64-Release\\bin\\HumanFactors.dll");
 
     if (dll_humanfactors == nullptr) {
         std::cerr << "Unable to load " << "..\\x64-Release\\bin\\HumanFactors.dll" << std::endl;
+
+        FreeLibrary(dll_embree3);
+        FreeLibrary(dll_tbb);
         exit(EXIT_FAILURE);
     }
     else {
@@ -89,6 +103,8 @@ int main(int argc, const char *argv[]) {
             Run all tests here.
             Pass HINSTANCE dll_humanfactors to the test function.
             Each test function will have its own .cpp source file.
+
+            End status of 1 means OK.
         */
         CInterfaceTests::raycasting(dll_humanfactors);
         /*
@@ -103,15 +119,27 @@ int main(int argc, const char *argv[]) {
         CInterfaceTests::calculating_spatial_view(dll_humanfactors);
         CInterfaceTests::create_visibility_graph(dll_humanfactors);
         */
+
+        /*
+            Free all libraries in reverse order of creation
+        */
+        /*
+        if (FreeLibrary(dll_humanfactors)) {
+            // This throws an exception when the executable is run,
+            // but when stepping through the debugger -- this statement runs okay.
+            // Need to fix this.
+            std::cout << "Freed successfully: " << "HumanFactors.dll" << std::endl;
+        }
+        */
+
+        if (FreeLibrary(dll_embree3)) {
+            std::cout << "Freed successfully: " << "embree3.dll" << std::endl;
+        }
+
+        if (FreeLibrary(dll_tbb)) {
+            std::cout << "Freed successfully: " << "tbb.dll" << std::endl;
+        }
     }
 
-
-    /*
-        Free all libraries in reverse order of creation
-    */
-    FreeLibrary(dll_humanfactors);
-    FreeLibrary(dll_embree3);
-    FreeLibrary(dll_tbb);
-    
     return EXIT_SUCCESS;
 }
