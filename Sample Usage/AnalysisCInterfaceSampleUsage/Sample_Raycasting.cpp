@@ -242,8 +242,6 @@ void CInterfaceTests::raycasting(HINSTANCE dll_hf) {
 
 	if (status != 1) {
 		// All C Interface functions return a status code.
-		// Should an error occur, we can interpret the error code via code_to_str
-		// when reading stderr.
 		// Error!
 		std::cerr << "Error at LoadOBJ, code: " << status << std::endl;
 	}
