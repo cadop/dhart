@@ -440,13 +440,13 @@ namespace HF::SpatialStructures {
 			out_total = count;
 			break;
 		case COST_AGGREGATE::SUM:
-				out_total += new_value;
+			out_total += new_value;
 			break;
 		case COST_AGGREGATE::AVERAGE: {
-			// Ensure the number of elements isn't zero.
-			int n = std::max(count - 1, 1);
+			// If this is zero this function won't work. 
+			if (count == 0) count = 1;
 
-			out_total = (n * (out_total)+new_value) / std::max(count, 1);
+			out_total = out_total + (new_value - out_total) / count;
 			count++;
 			break;
 		}
