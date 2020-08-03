@@ -104,5 +104,10 @@ namespace HumanFactors
             \see Single.IsFinite() for more information on how this is calculated.        
         */    
         public bool IsValid() => x.IsFinite() && y.IsFinite() && z.IsFinite();
-   };
+
+        public override string ToString()
+        {
+            return String.Format("({0}, {1}, {2})", x, y, z);
+        }
+    };
 }
