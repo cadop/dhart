@@ -40,10 +40,10 @@ namespace HumanFactors.SpatialStructures
         /// </summary>
         public int id;
 
-        public override string ToString()
-        {
-            return String.Format("({0}, {1}, {2})", x, y, z);
-        }
+        public override string ToString() => String.Format("({0}, {1}, {2})", x, y, z);
+
+        /*! \brief Create a vector3D with this node's X,Y and Z coordinates. */
+        public Vector3D ToVector3D() => new Vector3D(x, y, z);
     }
 
     /*! 
