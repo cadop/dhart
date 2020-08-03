@@ -62,6 +62,12 @@ namespace HumanFactors.VisibilityGraph
             \warning Graphs output by this function CANNOT be modified.
 
             \see SpatialStructures.Graph.AggregateEdgeCosts for a way to easily summarize the results of a visibility graph.
+
+            \par Example
+
+            \snippet visibilitygraph\test_visibilitygraph.cs CreateBVHAndDefineNodes
+            \snippet visibilitygraph\test_visibilitygraph.cs EX_DirectedVisibilityGraph
+
        */
         public static Graph GenerateAllToAll(EmbreeBVH bvh, IEnumerable<Vector3D> nodes, float height = 1.7f, bool directed = true)
         {
@@ -92,6 +98,12 @@ namespace HumanFactors.VisibilityGraph
             Any nodes that clip into geometry when offset by `height` will not be considered for any edge connections.
             
             \see GenerateAllToAll to generate a graph from every node to every other node. 
+
+            
+            \par Example
+
+            \snippet visibilitygraph\test_visibilitygraph.cs CreateBVHAndDefineNodes
+            \snippet visibilitygraph\test_visibilitygraph.cs EX_GroupToGroup
         */
         public static Graph GenerateGroupToGroup(
             EmbreeBVH bvh,
