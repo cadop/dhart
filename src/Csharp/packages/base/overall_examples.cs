@@ -12,7 +12,7 @@ using System.Text.RegularExpressions;
 namespace Humanfctors.Examples
 {
 	[TestClass]
-	public class SpatialExamples
+	public class OverallExamples
 	{
 		/*! \brief Compares two strings ignoring whitespace. */
 		public void CompareOutputToExpected(string expected, string actual)
