@@ -431,7 +431,7 @@ namespace HF::SpatialStructures {
 	{
 		switch (agg_type) {
 		case COST_AGGREGATE::COUNT:
-			if (new_value > 0) count++;
+			if (new_value > 0 && out_total != 0) count++;
 			out_total = count;
 			break;
 		case COST_AGGREGATE::SUM:
