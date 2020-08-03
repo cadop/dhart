@@ -1,4 +1,5 @@
 using HumanFactors.NativeUtils;
+using System;
 
 namespace HumanFactors.Pathfinding
 {
@@ -22,10 +23,7 @@ namespace HumanFactors.Pathfinding
             return (this.id == PM2.id && this.cost_to_next == PM2.cost_to_next);
         }
 
-        public override string ToString() 
-        {
-            return "(" + this.id.ToString() + ", " + this.cost_to_next.ToString() + ")";
-        }
+        public override string ToString() => String.Format("({0}, {1:0.###})", id, cost_to_next);
     }
 
     /// <summary>
