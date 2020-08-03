@@ -5,6 +5,7 @@ using HumanFactors.RayTracing;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Dynamic;
 using System.Runtime.InteropServices;
 
@@ -18,6 +19,11 @@ namespace HumanFactors.ViewAnalysis
         float distance;
         /// \brief The ID of the intersected mesh. -1 if the ray didn't intersect any geometry.
         int meshid;
+
+        public override string ToString()
+        {
+            return String.Format("[{0:0.###}, {1}]", distance, meshid);
+        }
     }
     
     /*! 
