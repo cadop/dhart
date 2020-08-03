@@ -7,12 +7,22 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using HumanFactors;
 using System.Diagnostics;
 using System;
+using System.Text.RegularExpressions;
 
 namespace Humanfctors.Examples
 {
 	[TestClass]
 	public class SpatialExamples
 	{
+		/*! \brief Compares two strings ignoring whitespace. */
+		public void CompareOutputToExpected(string expected, string actual)
+		{
+			string normalized_expected = Regex.Replace(expected, @"\s", "");
+			string normalized_actual = Regex.Replace(actual, @"\s", "");
+
+			Assert.AreEqual(normalized_expected, normalized_actual);
+		}
+
 		public Graph GenerateExampleGraph()
 		{
 			//! [EX_PathFinding_Graph]
@@ -104,8 +114,14 @@ namespace Humanfctors.Examples
 			// Print paths to output. 
 			Debug.WriteLine(distance_path);
 			Debug.WriteLine(energy_path);
-			
+
 			//! [EX_Pathfinding_Print]
+
+			string expected_distance = "[(105, 1.421), (32, 1.007), (6, 1.005), (4, 1.001), (1, 0)]";
+			string expected_energy = "[(1, 4.559), (12, 5.759), (26, 5.89), (39, 6.101), (50, 2.978), (63, 2.827), (80, 2.785), (105, 0)]";
+
+			CompareOutputToExpected(expected_distance, distance_path.ToString());
+			CompareOutputToExpected(expected_energy, energy_path.ToString());
 		}
 
 		[TestMethod]
@@ -126,18 +142,29 @@ namespace Humanfctors.Examples
 			Path[] energy_path = ShortestPath.DijkstraShortestPathMulti(graph, start_ids, end_ids, energy_key);
 			Path[] distance_path = ShortestPath.DijkstraShortestPathMulti(graph, start_ids, end_ids);
 
+			string output = "";
+
 			// Print out every pair of paths
 			for (int i = 0; i < start_ids.Length; i++)
 			{
-				Debug.WriteLine(
-					String.Format("{0} to {1} Energy  : {2}", start_ids[i], end_ids[i], energy_path[i])
-				);
-				Debug.WriteLine(
-					String.Format("{0} to {1} Distance: {2}", start_ids[i], end_ids[i], distance_path[i])
-				);
+				output += String.Format("{0} to {1} Energy  : {2}", start_ids[i], end_ids[i], energy_path[i]) + "\n";
+				output += String.Format("{0} to {1} Distance: {2}", start_ids[i], end_ids[i], distance_path[i]) + "\n";
 			}
 
+			Debug.WriteLine(output);
+
 			//! [EX_MultiPathFinding]
+
+			string expected_output = @"1 to 101 Energy  : [(1, 2.461), (11, 2.5), (24, 2.5), (36, 4.491), (47, 5.402), (60, 5.302), (77, 5.129), (101, 0)]
+			1 to 101 Distance: [(1, 1), (11, 1), (24, 1), (36, 1.415), (47, 1.417), (60, 1.416), (77, 1.416), (101, 0)]
+			2 to 102 Energy  : [(2, 2.5), (1, 2.461), (11, 2.5), (24, 4.536), (37, 5.528), (48, 5.452), (61, 5.605), (78, 5.837), (102, 0)]
+			2 to 102 Distance: [(2, 1), (1, 1), (11, 1), (24, 1.415), (37, 1.417), (48, 1.417), (61, 1.417), (78, 1.418), (102, 0)]
+			3 to 103 Energy  : [(3, 2.52), (2, 2.5), (1, 4.559), (12, 2.48), (25, 5.708), (38, 5.656), (49, 5.916), (62, 6.644), (79, 5.08), (103, 0)]
+			3 to 103 Distance: [(3, 1), (2, 1), (1, 1.415), (12, 1), (25, 1.417), (38, 1.417), (49, 1.418), (62, 1.42), (79, 1.416), (103, 0)]
+			4 to 104 Energy  : [(4, 2.48), (12, 5.759), (26, 5.89), (39, 6.101), (50, 7.008), (64, 5.863), (83, 3.827), (104, 0)]
+			4 to 104 Distance: [(4, 1), (12, 1.418), (26, 1.418), (39, 1.418), (50, 1.421), (64, 1.418), (83, 1.002), (104, 0)]";
+
+			CompareOutputToExpected(expected_output, output);
 
 		}
 
@@ -145,6 +172,8 @@ namespace Humanfctors.Examples
 		public void DijkstraShortestPathMultiNodes()
 		{
 			var graph = GenerateExampleGraph();
+
+			String output = "";
 
 			//! [EX_MultiPathFinding_Nodes]
 
@@ -175,16 +204,26 @@ namespace Humanfctors.Examples
 			// Print out every pair of paths
 			for (int i = 0; i < start_nodes.Length; i++)
 			{
-				Debug.WriteLine(
-					String.Format("{0} to {1} Energy  : {2}", start_nodes[i], end_nodes[i], energy_path[i])
-				);
-				Debug.WriteLine(
-					String.Format("{0} to {1} Distance: {2}", start_nodes[i], end_nodes[i], distance_path[i])
-				);
+				output += String.Format("{0} to {1} Energy  : {2}", start_nodes[i], end_nodes[i], energy_path[i]) + "\n";
+				output +=
+					String.Format("{0} to {1} Distance: {2}", start_nodes[i], end_nodes[i], distance_path[i]) + "\n";
 			}
 
+			Debug.WriteLine(output);
 			//! [EX_MultiPathFinding_Nodes]
 
+			// Compare this output to the expected output
+
+			string expected_output = @"(-30, 0, 1.068) to (-27, -8, 1.295) Energy  : [(0, 2.48), (4, 2.48), (12, 2.48), (25, 2.461), (37, 2.461), (47, 5.402), (60, 5.302), (77, 5.129), (101, 0)]
+			(-30, 0, 1.068) to (-27, -8, 1.295) Distance: [(0, 1), (4, 1), (12, 1), (25, 1), (37, 1), (47, 1.417), (60, 1.416), (77, 1.416), (101, 0)]
+			(-31, -1, 1.018) to (-26, -8, 1.427) Energy  : [(1, 2.461), (11, 2.5), (24, 4.536), (37, 5.528), (48, 5.452), (61, 5.605), (78, 5.837), (102, 0)]
+			(-31, -1, 1.018) to (-26, -8, 1.427) Distance: [(1, 1), (11, 1), (24, 1.415), (37, 1.417), (48, 1.417), (61, 1.417), (78, 1.418), (102, 0)]
+			(-31, 0, 1.018) to (-25, -8, 1.556) Energy  : [(2, 2.5), (1, 4.559), (12, 2.48), (25, 5.708), (38, 5.656), (49, 5.916), (62, 6.644), (79, 5.08), (103, 0)]
+			(-31, 0, 1.018) to (-25, -8, 1.556) Distance: [(2, 1), (1, 1.415), (12, 1), (25, 1.417), (38, 1.417), (49, 1.418), (62, 1.42), (79, 1.416), (103, 0)]
+			(-31, 1, 1.017) to (-25, -6, 1.678) Energy  : [(3, 2.52), (2, 2.5), (1, 4.559), (12, 5.759), (26, 5.89), (39, 6.101), (50, 7.008), (64, 5.863), (83, 3.827), (104, 0)]
+			(-31, 1, 1.017) to (-25, -6, 1.678) Distance: [(3, 1), (2, 1), (1, 1.415), (12, 1.418), (26, 1.418), (39, 1.418), (50, 1.421), (64, 1.418), (83, 1.002), (104, 0)]";
+			
+			CompareOutputToExpected(expected_output, output);
 		}
 
 		[TestMethod]
@@ -195,6 +234,7 @@ namespace Humanfctors.Examples
 			// Create a graph and add some edges
 			Graph g = new Graph();
 
+			// Create nodes and add edges to the graph
 			Vector3D[] Nodes =
 			{
 				new Vector3D(0,0,1),
@@ -216,6 +256,8 @@ namespace Humanfctors.Examples
 			// Generate all paths for this graph
 			var paths = ShortestPath.DijkstraAllToAll(g);
 
+			string output = "";
+
 			// Iterate through the return values to print the path from every node to every other node
 			int num_nodes = g.NumNodes();
 			for (int start_id = 0; start_id < num_nodes; start_id++)
@@ -231,13 +273,32 @@ namespace Humanfctors.Examples
 
 					// Only print the path if it was able to be found
 					if (start_to_end != null)
-						Debug.WriteLine(String.Format("{0} -> {1} : {2}", start_id, end_id, start_to_end));
+						output += String.Format("{0} -> {1} : {2}", start_id, end_id, start_to_end) + "\n";
 					else
-						Debug.WriteLine(String.Format("{0} -> {1} : {2}", start_id, end_id, "[None]"));
+						output += String.Format("{0} -> {1} : {2}", start_id, end_id, "[None]") + "\n";
 				}
 			}
-			
+
+			// Print output
+			Debug.WriteLine(output);
+
 			//! [EX_Pathfinding_AllToAll]
+
+			string expected_output = @"0 -> 1 : [(0, 10), (1, 0)]
+			0 -> 2 : [(0, 10), (1, 15), (2, 0)]
+			0 -> 3 : [(0, 30), (3, 0)]
+			1 -> 0 : [None]
+			1 -> 2 : [(1, 15), (2, 0)]
+			1 -> 3 : [(1, 15), (2, 5), (3, 0)]
+			2 -> 0 : [None]
+			2 -> 1 : [(2, 5), (3, 15), (1, 0)]
+			2 -> 3 : [(2, 5), (3, 0)]
+			3 -> 0 : [None]
+			3 -> 1 : [(3, 15), (1, 0)]
+			3 -> 2 : [(3, 15), (1, 15), (2, 0)]";
+
+			// Compare output to expected
+			CompareOutputToExpected(expected_output, output);
 		}
 
 		[TestMethod]
