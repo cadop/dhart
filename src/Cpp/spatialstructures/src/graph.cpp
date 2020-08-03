@@ -431,7 +431,12 @@ namespace HF::SpatialStructures {
 	{
 		switch (agg_type) {
 		case COST_AGGREGATE::COUNT:
-			if (new_value > 0 && out_total != 0) count++;
+
+			// Only increment count if newvalue is equal to zero.
+			// In the case that out_total is zero and count is greater than zero,
+			// multiple new elements have been added, and we must not increment
+			if (new_value > 0 && !(out_total == 0 && count > 0)) 
+				count++; 
 			out_total = count;
 			break;
 		case COST_AGGREGATE::SUM:

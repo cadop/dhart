@@ -155,6 +155,36 @@ namespace GraphTests {
 		EXPECT_EQ(counts[2], 0);
 	}
 
+	TEST(_Graph, AggregateCosts_Undirected_Sum) {
+
+		auto g = CreateTestAggregateGraph();
+
+		auto sums = g.AggregateGraph(COST_AGGREGATE::SUM, false);
+
+		EXPECT_EQ(sums[0], 90);
+		EXPECT_EQ(sums[1], 45);
+		EXPECT_EQ(sums[2], 45);
+	}
+
+	TEST(_Graph, AggregateCosts_Undirected_Average) {
+		auto g = CreateTestAggregateGraph();
+
+		auto averages = g.AggregateGraph(COST_AGGREGATE::AVERAGE, false);
+
+		EXPECT_NEAR(averages[0], 30.0f, 0.0001f);
+		EXPECT_NEAR(averages[1], 22.5f, 0.0001f);
+		EXPECT_NEAR(averages[2], 45.0f, 0.0001f);
+	}
+
+	TEST(_Graph, AggregateCosts_Undirected_Count) {
+		auto g = CreateTestAggregateGraph();
+
+		auto counts = g.AggregateGraph(COST_AGGREGATE::COUNT, false);
+
+		EXPECT_EQ(counts[0], 3);
+		EXPECT_EQ(counts[1], 2);
+		EXPECT_EQ(counts[2], 1);
+	}
 	TEST(_Graph, AggregateCostsMulti) {
 		HF::SpatialStructures::Graph g;
 
