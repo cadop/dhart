@@ -143,6 +143,11 @@ namespace HumanFactors.SpatialStructures
             2) Calling this function will invalidate any existing CSRPtrs
             returned from the graph. Make sure to call CompressToCSR again continuing
             to access it.
+
+            \par Example
+            \snippet spatialstructures\test_spatialstructures.cs EX_AddEdge_V3
+            `39`
+
         */
         public void AddEdge(Vector3D parent, Vector3D child, float cost, string cost_type = "")
             => NativeMethods.C_AddEdge(handle, parent, child, cost, cost_type);
@@ -188,7 +193,7 @@ namespace HumanFactors.SpatialStructures
         public void AddEdge(int parent_id, int child_id, float cost, string cost_type = "")
             => NativeMethods.C_AddEdge(handle, parent_id, child_id, cost, cost_type);
 
-        /// \brief Garray containing the graph's current nodes.
+        /// \brief Get an array containing the graph's current nodes.
         /// \returns An array of the graph's current nodes ordered by ID.
         /*!
             \par Example

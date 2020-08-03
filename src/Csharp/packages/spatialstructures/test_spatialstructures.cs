@@ -60,10 +60,21 @@ namespace HumanFactors.Tests.SpatialStructures
         [TestMethod]
         public void AddEdgeFromV3()
         {
+            //! [EX_AddEdge_V3]
+
+            // Create a new Graph, add an edge then compress it
             Graph G = new Graph();
             G.AddEdge(new Vector3D(0, 0, 2), new Vector3D(0, 0, 1), 39);
-
             G.CompressToCSR();
+
+            // Get the cost form the edge we just added to ensure it exists
+            float cost_from_graph = G.GetCost(0, 1);
+
+            // Print the retrieved cost
+            Debug.WriteLine(cost_from_graph);
+
+            //! [EX_AddEdge_V3]
+            
             Assert.AreEqual(39, G.GetCost(0, 1),
                 "Edge failed to be added through vectors"
             );
