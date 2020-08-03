@@ -107,7 +107,7 @@ namespace HumanFactors
 
         public override string ToString()
         {
-            return String.Format("({0}, {1}, {2})", x, y, z);
+            return String.Format("({0:0.###}, {1:0.###}, {2:0.###})", x, y, z);
         }
     };
 }
