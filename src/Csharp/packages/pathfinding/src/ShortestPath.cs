@@ -59,6 +59,17 @@ namespace HumanFactors.Pathfinding
             refer to the name of any cost that already exists in the graph.
 
             \see DijkstraShortestPathMulti for efficently generating multiple paths in parallel.
+            
+            \par Example
+            \snippet spatialstructures\examples_spatialstructures.cs EX_PathFinding_Graph
+            \snippet spatialstructures\examples_spatialstructures.cs EX_Pathfinding_Setup
+            \snippet spatialstructures\examples_spatialstructures.cs EX_Pathfinding_IDS
+            \snippet spatialstructures\examples_spatialstructures.cs EX_Pathfinding_Print
+
+            ```
+            [(1, 1.415028), (12, 1.417536), (26, 1.417887), (39, 1.418485), (50, 1.000265), (63, 1.000128), (80, 1.000098), (105, 0)]
+            [(1, 4.559175), (12, 5.759251), (26, 5.889585), (39, 6.100943), (50, 2.978094), (63, 2.826927), (80, 2.784634), (105, 0)]
+            ```
         */
         public static Path DijkstraShortestPath(Graph graph, int start_id, int end_id, string cost_type = "")
         {
@@ -93,7 +104,10 @@ namespace HumanFactors.Pathfinding
             \see DijkstraShortestPathMulti for efficently generating multiple paths in parallel.
 
             \par Example
-            \snippet spatialstructures\examples_spatialstructures.cs Generating Multiple Paths Using an alternate cost
+            \snippet spatialstructures\examples_spatialstructures.cs EX_PathFinding_Graph
+            \snippet spatialstructures\examples_spatialstructures.cs EX_Pathfinding_Setup
+            \snippet spatialstructures\examples_spatialstructures.cs EX_Pathfinding_Nodes
+            \snippet spatialstructures\examples_spatialstructures.cs EX_Pathfinding_Print
 
             ```
             [(1, 1.415028), (12, 1.417536), (26, 1.417887), (39, 1.418485), (50, 1.000265), (63, 1.000128), (80, 1.000098), (105, 0)]
@@ -134,6 +148,21 @@ namespace HumanFactors.Pathfinding
             \throws System.ArgumentException Length of start_ids didn't equal length of end_ids
             \throws KeyNotFoundException `cost_type` wasn't left as blank, and didn't
             refer to the name of any cost that already exists in the graph.
+            
+            \par Example
+            \snippet spatialstructures\examples_spatialstructures.cs EX_PathFinding_Graph
+            \snippet spatialstructures\examples_spatialstructures.cs EX_MultiPathFinding
+
+            ```
+            1 to 101 Energy  : [(1, 2.461), (11, 2.5), (24, 2.5), (36, 4.491), (47, 5.402), (60, 5.302), (77, 5.129), (101, 0)]
+			1 to 101 Distance: [(1, 1), (11, 1), (24, 1), (36, 1.415), (47, 1.417), (60, 1.416), (77, 1.416), (101, 0)]
+			2 to 102 Energy  : [(2, 2.5), (1, 2.461), (11, 2.5), (24, 4.536), (37, 5.528), (48, 5.452), (61, 5.605), (78, 5.837), (102, 0)]
+			2 to 102 Distance: [(2, 1), (1, 1), (11, 1), (24, 1.415), (37, 1.417), (48, 1.417), (61, 1.417), (78, 1.418), (102, 0)]
+			3 to 103 Energy  : [(3, 2.52), (2, 2.5), (1, 4.559), (12, 2.48), (25, 5.708), (38, 5.656), (49, 5.916), (62, 6.644), (79, 5.08), (103, 0)]
+			3 to 103 Distance: [(3, 1), (2, 1), (1, 1.415), (12, 1), (25, 1.417), (38, 1.417), (49, 1.418), (62, 1.42), (79, 1.416), (103, 0)]
+			4 to 104 Energy  : [(4, 2.48), (12, 5.759), (26, 5.89), (39, 6.101), (50, 7.008), (64, 5.863), (83, 3.827), (104, 0)]
+			4 to 104 Distance: [(4, 1), (12, 1.418), (26, 1.418), (39, 1.418), (50, 1.421), (64, 1.418), (83, 1.002), (104, 0)]
+            ```
         */
         public static Path[] DijkstraShortestPathMulti(
             Graph graph, 
@@ -181,6 +210,21 @@ namespace HumanFactors.Pathfinding
             \throws System.ArgumentException Length of `start_ids` didn't equal length of `end_ids`
             \throws KeyNotFoundException `cost_type` wasn't left as blank, and didn't
                      refer to the name of any cost that already exists in `graph`.
+
+            \par Example
+            \snippet spatialstructures\examples_spatialstructures.cs EX_PathFinding_Graph
+            \snippet spatialstructures\examples_spatialstructures.cs EX_MultiPathFinding_Nodes
+
+            ```
+			(-30, 0, 1.068) to (-27, -8, 1.295) Energy  : [(0, 2.48), (4, 2.48), (12, 2.48), (25, 2.461), (37, 2.461), (47, 5.402), (60, 5.302), (77, 5.129), (101, 0)]
+			(-30, 0, 1.068) to (-27, -8, 1.295) Distance: [(0, 1), (4, 1), (12, 1), (25, 1), (37, 1), (47, 1.417), (60, 1.416), (77, 1.416), (101, 0)]
+			(-31, -1, 1.018) to (-26, -8, 1.427) Energy  : [(1, 2.461), (11, 2.5), (24, 4.536), (37, 5.528), (48, 5.452), (61, 5.605), (78, 5.837), (102, 0)]
+			(-31, -1, 1.018) to (-26, -8, 1.427) Distance: [(1, 1), (11, 1), (24, 1.415), (37, 1.417), (48, 1.417), (61, 1.417), (78, 1.418), (102, 0)]
+			(-31, 0, 1.018) to (-25, -8, 1.556) Energy  : [(2, 2.5), (1, 4.559), (12, 2.48), (25, 5.708), (38, 5.656), (49, 5.916), (62, 6.644), (79, 5.08), (103, 0)]
+			(-31, 0, 1.018) to (-25, -8, 1.556) Distance: [(2, 1), (1, 1.415), (12, 1), (25, 1.417), (38, 1.417), (49, 1.418), (62, 1.42), (79, 1.416), (103, 0)]
+			(-31, 1, 1.017) to (-25, -6, 1.678) Energy  : [(3, 2.52), (2, 2.5), (1, 4.559), (12, 5.759), (26, 5.89), (39, 6.101), (50, 7.008), (64, 5.863), (83, 3.827), (104, 0)]
+			(-31, 1, 1.017) to (-25, -6, 1.678) Distance: [(3, 1), (2, 1), (1, 1.415), (12, 1.418), (26, 1.418), (39, 1.418), (50, 1.421), (64, 1.418), (83, 1.002), (104, 0)]
+           ```
         */
         public static Path[] DijkstraShortestPathMulti(
             Graph graph,
@@ -224,6 +268,24 @@ namespace HumanFactors.Pathfinding
 
             \throws KeyNotFoundException `cost_type` wasn't left as blank, and didn't
                      refer to the name of any cost that already exists in `graph`.
+
+            \par Example
+            \snippet spatialstructures\examples_spatialstructures.cs EX_Pathfinding_AllToAll
+
+            ```
+            0 -> 1 : [(0, 10), (1, 0)]
+			0 -> 2 : [(0, 10), (1, 15), (2, 0)]
+			0 -> 3 : [(0, 30), (3, 0)]
+			1 -> 0 : [None]
+			1 -> 2 : [(1, 15), (2, 0)]
+			1 -> 3 : [(1, 15), (2, 5), (3, 0)]
+			2 -> 0 : [None]
+			2 -> 1 : [(2, 5), (3, 15), (1, 0)]
+			2 -> 3 : [(2, 5), (3, 0)]
+			3 -> 0 : [None]
+			3 -> 1 : [(3, 15), (1, 0)]
+			3 -> 2 : [(3, 15), (1, 15), (2, 0)]
+           ```
         */
         public static Path[] DijkstraAllToAll(Graph g, string cost_type = "")
         {
