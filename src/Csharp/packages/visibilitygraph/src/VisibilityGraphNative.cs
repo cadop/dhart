@@ -36,7 +36,7 @@ namespace HumanFactors.VisibilityGraph {
             var flat_group_a = HelperFunctions.FlattenVectorArray(group_a);
             var flat_group_b = HelperFunctions.FlattenVectorArray(group_b);
             
-            HF_STATUS res = CreateVisibilityGraphGroupToGroup(bvh, flat_group_a, flat_group_a.Length, flat_group_b, flat_group_b.Length, ref out_ptr, height);
+            HF_STATUS res = CreateVisibilityGraphGroupToGroup(bvh, flat_group_a, flat_group_a.Length/3, flat_group_b, flat_group_b.Length/3, ref out_ptr, height);
 
             if (res == HF_STATUS.NO_GRAPH) return IntPtr.Zero;
 
