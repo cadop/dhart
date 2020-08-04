@@ -39,6 +39,9 @@ namespace HumanFactors.RayTracing
             \internal
                 \todo Add missing dependency exception
             \endinternal
+
+            \par Example
+            \snippet raytracer\test_raytracer.cs EX_BVH_CSTOR
        */
         public EmbreeBVH(MeshInfo MI) : base(NativeMethods.C_ConstructRaytracer(MI.DangerousGetHandle()), MI.pressure) { }
 

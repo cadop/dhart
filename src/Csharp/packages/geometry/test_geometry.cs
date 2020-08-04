@@ -1,3 +1,4 @@
+using HumanFactors.Geometry;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Diagnostics;
@@ -48,21 +49,48 @@ namespace HumanFactors.Tests.Geometry
         [TestMethod]
         public void DirectMeshTransfer()
         {
-            // This is taken directly from the plane OBJ
-            float[] vertices = { -20.079360961914062f, 0.0f, 18.940643310546875f, -20.079360961914062f, 0.0f, -18.842348098754883f, 20.140586853027344f, 0.0f, 18.940643310546875f, 20.140586853027344f, 0.0f, -18.842348098754883f };
-            int[] indices = { 3, 1, 0, 2, 3, 0 };
+            //! [EX_MeshInfoCstor]
+            // These vertices/indices are directly taken from the plane OBJ in example models.
+            // Every 3 floats represent the x,y,z locations for a seperate vertex. It takes only
+            // 4 vertices to make a plane. 
+            float[] vertices = { 
+                -20.079360961914062f, 0.0f, 18.940643310546875f,
+                -20.079360961914062f, 0.0f, -18.842348098754883f,
+                20.140586853027344f, 0.0f, 18.940643310546875f, 
+                20.140586853027344f, 0.0f, -18.842348098754883f 
+            };
 
+            // Every 3 ints represent the indexes of vertices for a seperate triangle. 
+            int[] indices = { 
+                3, 1, 0, 
+                2, 3, 0 
+            };
+
+            // Construct a new meshinfo instance with these elements
             HumanFactors.Geometry.MeshInfo Mesh = new HumanFactors.Geometry.MeshInfo(indices, vertices);
+            //! [EX_MeshInfoCstor]
         }
         [TestMethod]
         public void MeshRotate()
         {
-            // This is taken directly from the plane OBJ
             float[] vertices = { -20.079360961914062f, 0.0f, 18.940643310546875f, -20.079360961914062f, 0.0f, -18.842348098754883f, 20.140586853027344f, 0.0f, 18.940643310546875f, 20.140586853027344f, 0.0f, -18.842348098754883f };
             int[] indices = { 3, 1, 0, 2, 3, 0 };
 
             HumanFactors.Geometry.MeshInfo Mesh = new HumanFactors.Geometry.MeshInfo(indices, vertices);
+
+            //! [EX_RotateMesh_Common]
+
+            // Rotate the mesh using a common rotation to convert it from yup to zup
+            Mesh.RotateMesh(CommonRotations.Yup_To_Zup);
+
+            //! [EX_RotateMesh_Common]
+
+            //! [EX_RotateMesh_xyz]
+
+            // Rotate the mesh 90 degrees around the X axis
             Mesh.RotateMesh(90, 0, 0);
+
+            //! [EX_RotateMesh_xyz]
         }
     }
 }

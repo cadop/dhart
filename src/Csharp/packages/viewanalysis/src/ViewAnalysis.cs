@@ -73,6 +73,12 @@ namespace HumanFactors.ViewAnalysis
             This function is much lighter in memory than \link ViewAnalysisStandard \endlink since all
             operations are done in place on single floats. Use this as a faster alternative 
             if the scores of nodes are all that's needed.
+
+            \par Examples
+
+            \snippet viewanalysis\test_viewanalysis.cs EX_GetBVH
+            \snippet viewanalysis\test_viewanalysis.cs EX_ViewAnalysisAggregate
+            `[480, 451, 428]`
         */
         public static ManagedFloatArray ViewAnalysisAggregate(
             EmbreeBVH bvh,
@@ -122,7 +128,16 @@ namespace HumanFactors.ViewAnalysis
             SphericallyDistributeRays() with the same fov and ray_count parameters. Failures to
             intersect geometry will return -1.
             
-            */
+            \par Example
+            \snippet viewanalysis\test_viewanalysis.cs EX_GetBVH
+            \snippet viewanalysis\test_viewanalysis.cs EX_ViewAnalysisStandard
+
+            ```
+            (0, 0, 1): ([-1, -1], [5.292, 0], [-1, -1], [-1, -1], [3.098, 0], [5.407, 0], [13.07, 0], [-1, -1], [3.529, 0], [-1, -1])
+            (1, 1, 1): ([-1, -1], [5.292, 0], [-1, -1], [-1, -1], [3.098, 0], [5.407, 0], [13.07, 0], [-1, -1], [3.529, 0], [-1, -1])
+            (0, 0, 3): ([-1, -1], [9.211, 0], [-1, -1], [-1, -1], [5.394, 0], [9.413, 0], [-1, -1], [-1, -1], [6.144, 0], [-1, -1])
+            ```
+             */
         public static ResultArray ViewAnalysisStandard(
             EmbreeBVH bvh,
             IEnumerable<Vector3D> nodes,
@@ -149,13 +164,16 @@ namespace HumanFactors.ViewAnalysis
             \returns An array of equally distributed points on a unit sphere.
 
             \warning
-            The number of rays casted may not exactly match ray_count depending on the provided 
+            The number of rays casted may not exactly match `ray_count` depending on the provided 
             field of view restrictions. 
 
             \note 
             This is the same function used internally by view analysis to equally distribute
             ray directions. 
 
+            \par Example
+            \snippet viewanalysis\test_viewanalysis.cs EX_SphericallyDistributeRays 
+            `[0, -1, 0, -0.2650034, -0.8181818, . . . -0.7649929, 0.4396428, 0.8181818, 0.3705303]`
         */
         public static DirectionArray SphericallyDistributeRays(
             int num_rays,

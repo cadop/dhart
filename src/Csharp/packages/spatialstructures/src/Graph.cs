@@ -113,7 +113,7 @@ namespace HumanFactors.SpatialStructures
             \param cost_type The type of cost to add the edge to. 
 
 
-            \Attention
+            \attention
             This overload is meant for debugging. There are many issues that can occur with
             adding integers to the graph that don't already have nodes assigned. Instead
             use the overload of this function deals with vector 3.
@@ -143,6 +143,11 @@ namespace HumanFactors.SpatialStructures
             2) Calling this function will invalidate any existing CSRPtrs
             returned from the graph. Make sure to call CompressToCSR again continuing
             to access it.
+
+            \par Example
+            \snippet spatialstructures\test_spatialstructures.cs EX_AddEdge_V3
+            `39`
+
         */
         public void AddEdge(Vector3D parent, Vector3D child, float cost, string cost_type = "")
             => NativeMethods.C_AddEdge(handle, parent, child, cost, cost_type);
@@ -180,12 +185,21 @@ namespace HumanFactors.SpatialStructures
             2) Calling this function will invalidate any existing CSRPtrs
             returned from the graph. Make sure to call CompressToCSR again continuing
             to access it.
+
+            \par Example
+            \snippet spatialstructures\test_spatialstructures.cs EX_AddEdge_ID
+            `39`
         */
         public void AddEdge(int parent_id, int child_id, float cost, string cost_type = "")
             => NativeMethods.C_AddEdge(handle, parent_id, child_id, cost, cost_type);
 
-        /// \brief Garray containing the graph's current nodes.
+        /// \brief Get an array containing the graph's current nodes.
         /// \returns An array of the graph's current nodes ordered by ID.
+        /*!
+            \par Example
+            \snippet spatialstructures\test_spatialstructures.cs EX_GetNodes
+            `[(0, 0, 2), (0, 0, 1)]`
+        */
         public NodeList getNodes() => new NodeList(NativeMethods.C_GetNodes(handle));
 
         /*! 
@@ -203,6 +217,10 @@ namespace HumanFactors.SpatialStructures
             the graph.
 
             \see CSRPtrs for more info on the CSR type and how to access it.
+
+            \par Example
+            \snippet spatialstructures\test_spatialstructures.cs EX_CompressToCSR
+            `(nnz: 1, rows: 3, cols: 3)`
         */
         public CSRInfo CompressToCSR(string cost_type = "")
         {
@@ -238,6 +256,12 @@ namespace HumanFactors.SpatialStructures
             \remarks
             The order of the scores returned bythis function match the order of the scores returned from
             Graph.getNodes. This can be especially useful for summarizing the results of a VisibilityGraph.
+
+            \par Example
+            \snippet spatialstructures\test_spatialstructures.cs Example_CreateSampleGraph
+
+            \snippet spatialstructures\test_spatialstructures.cs Example_AggregateEdgeCosts
+            `[150, 20, 0]`
         */
         public ManagedFloatArray AggregateEdgeCosts(
             GraphEdgeAggregation type,
@@ -273,6 +297,10 @@ namespace HumanFactors.SpatialStructures
             an indexing operation. If multiple values are required, it is suggested to iterate through
             the pointers from Graph.CompressToCSR().
 
+            \par Example
+            \snippet spatialstructures\examples_spatialstructures.cs Example_GetCost
+            `100`
+
         */
         public float GetCost(int parent, int child, string cost_type = "")
         {
@@ -285,6 +313,14 @@ namespace HumanFactors.SpatialStructures
             \param node The X,Y,Z position of a node to get the ID for.
 
             \returns The ID of the node, or -1 if the node isn't in the graph.
+
+            \par Examples
+            \snippet spatialstructures\test_spatialstructures.cs  EX_GetNodeID_1
+            `0`\n
+            `1`\n
+            \snippet spatialstructures\test_spatialstructures.cs  EX_GetNodeID_2
+            `-1`
+            
         */
         public int GetNodeID(Vector3D node) => NativeMethods.C_GetNodeID(handle, node.x, node.y, node.z);
 
@@ -303,9 +339,9 @@ namespace HumanFactors.SpatialStructures
         /*!
             \brief  Define a node attribute for the node at id. 
             
-            \param  id          The ID of the node that will receive attribute.
-            \param  attribute   The name of the attribute to use. 
-            \param  score       The score for `attribute` to store for this node. 
+            \param id          The ID of the node that will receive attribute.
+            \param attribute   The name of the attribute to use. 
+            \param score       The score for `attribute` to store for this node. 
 
             \par Example
             \code
@@ -390,9 +426,9 @@ namespace HumanFactors.SpatialStructures
         }
 
         /*! 
-            \brief  Get the score of every node for a given attribute.
+            \brief Get the score of every node for a given attribute.
 
-            \param  attribute The unique name of the attribute type to get from the graph fopr every node
+            \param attribute The unique name of the attribute type to get from the graph fopr every node
 
             \returns 
             If an attribute with the name of `attribute`, type was found in the graph, then an array of scores
@@ -403,9 +439,13 @@ namespace HumanFactors.SpatialStructures
             \returns
             If `attribute` didn't exist in the graph, then an empty array of strings will be returned. 
 
-            \code
-                // TODO example
-            \endcode
+            \par Example
+            \snippet spatialstructures\test_spatialstructures.cs Example_CreateSampleGraph
+            \snippet spatialstructures\test_spatialstructures.cs EX_AddNodeAttribute
+            `0, 100, 200,`
+            \snippet spatialstructures\test_spatialstructures.cs EX_AddNodeAttribute_2
+            `0, 100, 200, ,`
+
         */
         public string[] GetNodeAttributes(string attribute)
         {
@@ -452,8 +492,13 @@ namespace HumanFactors.SpatialStructures
 
             \remarks
             This is used multiple times internally to get the size of the graph without
-            needing to get its nodes. 
-       */
+            needing to get its nodes.
+
+            \par Example
+            \snippet spatialstructures\test_spatialstructures.cs Example_CreateSampleGraph
+            \snippet spatialstructures\test_spatialstructures.cs EX_NumNodes
+            `3`
+        */
         public int NumNodes() => NativeMethods.C_GetGraphSize(this.Pointer);
     }
 

@@ -87,6 +87,8 @@ namespace HumanFactors.Geometry
             \details Just a call back to the base functionality of nativeobject. 
 
             \remarks This shouldn't be called directly unless pointer is gauranteed to point to a valid mesh
+
+
         */
 
         internal MeshInfo(IntPtr pointer, int size = 0) : base(pointer, size)
@@ -106,13 +108,17 @@ namespace HumanFactors.Geometry
 
             \throws HumanFactors.Exceptions.InvalidMeshException
             The input indices and vertices result in an invalid mesh.
+
+            \par Example
+            \snippet geometry\test_geometry.cs EX_MeshInfoCstor
+
         */
 
         public MeshInfo(int[] indices, float[] vertices, string name = "", int id = -1) :
 			base(NativeMethods.C_StoreMesh(vertices, indices, name, id), (vertices.Length * 4) + (indices.Length * 4))
 		{ }
 
-		/*!
+        /*!
             \brief Rotate this mesh by the desired magnitude.
 
             \param xrot Pitch to rotate by in degrees.
@@ -121,17 +127,26 @@ namespace HumanFactors.Geometry
 
             \remarks
             See the other overload for this function for use with CommonRotations.
+
+            
+            \par Example
+            \snippet geometry\test_geometry.cs EX_MeshInfoCstor
+            \snippet geometry\test_geometry.cs EX_RotateMesh
         */
 
-		public void RotateMesh(float xrot, float yrot, float zrot) => NativeMethods.C_RotateMesh(handle, xrot, yrot, zrot);
+        public void RotateMesh(float xrot, float yrot, float zrot) => NativeMethods.C_RotateMesh(handle, xrot, yrot, zrot);
 
-		/*!
+        /*!
             \brief Rotate this mesh by the desired magnitude. </summary>
             \param rotation How far to rotate the mesh on the X,Y, and Z, axises in degrees.
 
             \see CommonRotations for commonly used rotations such as Yup to Zup.
+
+            \par Example
+            \snippet geometry\test_geometry.cs EX_MeshInfoCstor
+            \snippet geometry\test_geometry.cs EX_RotateMesh_Common
         */
 
-		public void RotateMesh(Vector3D rotation) => NativeMethods.C_RotateMesh(handle, rotation.x, rotation.y, rotation.z);
+        public void RotateMesh(Vector3D rotation) => NativeMethods.C_RotateMesh(handle, rotation.x, rotation.y, rotation.z);
 	}
 }

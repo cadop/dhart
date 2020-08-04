@@ -1,6 +1,7 @@
 using HumanFactors.NativeUtils;
 
 using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 namespace HumanFactors.RayTracing
@@ -25,6 +26,11 @@ namespace HumanFactors.RayTracing
             this.distance = in_distance;
             this.mesh_id = in_mesh_id;
         }
+        public override string ToString()
+        {
+            return String.Format("[{0:0.###},{1}]", distance, mesh_id);
+        }
+
     }
 
     /// \brief An array of RayResults stored in unmanaged memory
@@ -45,5 +51,6 @@ namespace HumanFactors.RayTracing
             NativeMethods.C_DestroyRayResults(handle);
             return true;
         }
+
     }
 }

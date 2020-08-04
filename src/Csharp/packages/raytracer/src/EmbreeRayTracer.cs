@@ -38,7 +38,7 @@ namespace HumanFactors.RayTracing
 
     public static class EmbreeRaytracer
 	{
-		/*!
+        /*!
             \brief Cast a single ray, and get a point in return if it intersects any geometry.
 
             \param bvh BVH of geometry to intersect.
@@ -57,9 +57,17 @@ namespace HumanFactors.RayTracing
             \returns
             A Vector3D containing the hitpoint. If no hit was detected, the point will be invalid.
             This can easily be checked using Vector3D.IsValid.
+
+            \par Example
+            \snippet raytracer\test_raytracer.cs EX_BVH_CSTOR
+            \snippet raytracer\test_raytracer.cs EX_IntForPointSingle
+            `(0, 0, 0)`
+            \snippet raytracer\test_raytracer.cs EX_IntForPointSingle_2
+            `(NaN, NaN, NaN)`
+
         */
 
-		public static Vector3D IntersectForPoint(
+        public static Vector3D IntersectForPoint(
 			EmbreeBVH bvh,
 			float x,
 			float y,
@@ -70,7 +78,7 @@ namespace HumanFactors.RayTracing
 			float max_distance = -1
 		) => NativeMethods.C_IntesectPoint(bvh.Pointer, x, y, z, dx, dy, dz, max_distance);
 
-		/*!
+        /*!
             \brief Cast a single ray, and get a point in return if it intersects any geometry.
 
             \param bvh BVH of geometry to intersect.
@@ -89,13 +97,20 @@ namespace HumanFactors.RayTracing
             Consider calling \link IntersectForPoints \endlink when casting mutliple rays at once since it can
             make use of parallel processing to drastically reduce the time it takes to get the
             results of every ray.
+            
+            \par Example
+            \snippet raytracer\test_raytracer.cs EX_BVH_CSTOR
+            \snippet raytracer\test_raytracer.cs EX_IntForPointSinglexyz
+            `(0, 0, 0)`
+            \snippet raytracer\test_raytracer.cs EX_IntForPointSinglexyz_2
+            `(NaN, NaN, NaN)`
 
         */
 
-		public static Vector3D IntersectForPoint(EmbreeBVH bvh, Vector3D origin, Vector3D direction, float max_distance = -1)
+        public static Vector3D IntersectForPoint(EmbreeBVH bvh, Vector3D origin, Vector3D direction, float max_distance = -1)
 			=> IntersectForPoint(bvh, origin.x, origin.y, origin.z, direction.x, direction.y, direction.z, max_distance);
 
-		/*!
+        /*!
             \brief Cast multiple rays and recieve hitpoints in return.
 
             \param bvh  A valid BVH containing geometry to intersect with.
@@ -126,16 +141,27 @@ namespace HumanFactors.RayTracing
 
             \throws System.ArgumentException
             Length of directions and origins did not match any of the valid cases.
+
+            \par Example
+            \snippet raytracer\test_raytracer.cs EX_BVH_CSTOR
+            \snippet raytracer\test_raytracer.cs EX_FireRayMultiplePoints
+            ```
+            Origin: (0, 0, 1), Intersection: (0, 0, 0)
+			Origin: (0, 1, 1), Intersection: (0, 1, 0)
+			Origin: (0, 2, 1), Intersection: (0, 2, 0)
+			Origin: (0, 3, 1), Intersection: (0, 3, 0)
+			Origin: (0, 4, 1), Intersection: (0, 4, 0)
+            ```
         */
 
-		public static Vector3D[] IntersectForPoints(
+        public static Vector3D[] IntersectForPoints(
 			EmbreeBVH bvh,
 			IEnumerable<Vector3D> origins,
 			IEnumerable<Vector3D> directions,
-			float max_distance
+			float max_distance = -1
 		) => NativeMethods.C_IntersectPoints(bvh.Pointer, origins, directions, max_distance);
 
-		/*!
+        /*!
             \brief Cast a single ray and get the distance to its hit and the meshID if it hit anything
 
             \param bvh A valid BVH containing the geometry to intersect with.
@@ -150,16 +176,21 @@ namespace HumanFactors.RayTracing
             \returns
             A RayResult containing the distance to the hitpoint and meshid it hit. If the
             distance is equal to -1, then the ray did not intersect any geometry.
+
+            \par Example
+            \snippet raytracer\test_raytracer.cs EX_BVH_CSTOR
+            \snippet raytracer\test_raytracer.cs EX_IntersectForDistance
+            `[1,0]`
         */
 
-		public static RayResult IntersectForDistance(
+        public static RayResult IntersectForDistance(
 			EmbreeBVH bvh,
 			Vector3D origin,
 			Vector3D direction,
-			float max_distance
+			float max_distance = -1
 		) => NativeMethods.C_IntersectRay(bvh.Pointer, origin, direction, max_distance);
 
-		/*!
+        /*!
             \brief Cast multiple rays and recieve the distance and meshid of geometry intersected by each in return.
 
             \param bvh  A valid BVH containing geometry to intersect with.
@@ -190,16 +221,27 @@ namespace HumanFactors.RayTracing
 
             \throws System.ArgumentException
             Length of directions and origins did not match any of the valid cases.
+            \par Example
+            \snippet raytracer\test_raytracer.cs EX_BVH_CSTOR
+            \snippet raytracer\test_raytracer.cs EX_IntersectForDistances
+            ```
+            Origin: (0, 0, 0), Result: [-1,-1]
+			Origin: (0, 0, 1), Result: [1,0]
+			Origin: (0, 0, 2), Result: [2,0]
+			Origin: (0, 0, 3), Result: [3,0]
+			Origin: (0, 0, 4), Result: [4,0]
+			Origin: (0, 0, 5), Result: [5,0]
+            ```
         */
 
-		public static RayResults IntersectForDistances(
+        public static RayResults IntersectForDistances(
 			EmbreeBVH bvh,
 			IEnumerable<Vector3D> origins,
 			IEnumerable<Vector3D> directions,
-			float max_distance
+			float max_distance = -1
 		) => new RayResults(NativeMethods.C_IntersectRays(bvh.Pointer, origins, directions, max_distance));
 
-		/*!
+        /*!
             \brief Determine if any geometry occludes a point from a direction.
 
             \param bvh A valid Embree BVH.
@@ -231,13 +273,18 @@ namespace HumanFactors.RayTracing
             Occlusion rays are the fastest raycasting function, however are only capable of returning or
             not they hit anything. This can be useful for line of sight checks. Will execute in parallel
             if multiple origins/directions are supplied.
+           
+            \par Example
+            \snippet raytracer\test_raytracer.cs EX_BVH_CSTOR
+            \snippet raytracer\test_raytracer.cs EX_Occlusion
+            `Ray 1: True, Ray 2 : False`
         */
 
-		public static bool[] IntersectOccluded(
+        public static bool[] IntersectOccluded(
 			EmbreeBVH bvh,
 			IEnumerable<Vector3D> origin,
 			IEnumerable<Vector3D> direction,
-			float max_distance
+			float max_distance = -1
 		) => NativeMethods.C_FireOcclusionRays(bvh.Pointer, origin, direction, max_distance);
 	}
 }
