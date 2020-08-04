@@ -6,13 +6,20 @@
 	\date		04 Aug 2020
 */
 #pragma once
+
 #include <vector>
 #include <array>
 
 /*!
-	All examples for each function assume the following code has been run:
-
-	Using the HumanFactors DLL by explicit loading:
+	All examples for each function assume the following code has been run.
+	
+	This code block shows how to load the HumanFactors DLL explicitly --
+	you should only run this code once in your program.
+	
+	- Load the DLLs, in the order specified in the example below
+	- Obtain pointers to the functions you want to call in the HumanFactors DLL
+	- Call the desired functions via the function pointers
+	- When finished with the HumanFactors DLL, free all DLLs loaded (in reverse order of loading)
 
 	\code
 		// Requires #include <Windows.h>
@@ -72,14 +79,20 @@
 			std::cout << "Loaded successfully: " << "HumanFactors.dll" << std::endl;
 
 			//
-			//	Now you are ready to run code for an example.
-			//	HINSTANCE dll_hf will be used within each example.
+			//	At this point, you must obtain pointers to the functions you want to use/call
+			//	within the HumanFactors DLL. Each example will outline the process
+			//	for doing this.
+			//
+			//	After obtaining the pointers to the functions you want to call,
+			//	you are now ready to call the desired functions and run code for your example.
 			//
 
 			std::this_thread::sleep_for(std::chrono::milliseconds(250));
 
 			//
-			//	Free libraries in order of creation
+			//	Free libraries in order of creation.
+			//	Only free the libraries once you are sure you are done using the functions within them,
+			//	or else you will have to load them again.
 			//
 			if (FreeLibrary(dll_hf)) {
 				std::cout << "Freed successfully: " << "HumanFactors.dll" << std::endl;
@@ -151,7 +164,7 @@ struct RayResult {
 				HF_STATUS::GENERIC_ERROR if <paramref name="mesh" /> is null.
 
 	\code
-		// The usage of the variable dll_humanfactors (type HINSTANCE)
+		// The usage of the variable dll_hf (type HINSTANCE)
 		// is described at the top of this file.
 
 		// The following code is required before running the example below:
@@ -167,6 +180,8 @@ struct RayResult {
 		auto CreateRaytracer = (p_CreateRaytracer)GetProcAddress(dll_hf, "CreateRaytracer");
 		auto DestroyRayTracer = (p_DestroyRayTracer)GetProcAddress(dll_hf, "DestroyRayTracer");
 		auto DestroyMeshInfo = (p_DestroyMeshInfo)GetProcAddress(dll_hf, "DestroyMeshInfo");
+
+		// You are now ready to call the functions above.
 	\endcode
 
 	\code
