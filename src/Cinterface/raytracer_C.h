@@ -850,26 +850,115 @@ C_INTERFACE FireMultipleRays(HF::RayTracer::EmbreeRayTracer* ert, float* origins
 		\link DestroyMeshInfo \endlink <br>
 
 	\code
-		// The usage of the variable dll_hf (type HINSTANCE)
-		// is described at the top of this file.
+		// Status code variable, value returned by C Interface functions
+		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
+		int status = 0;
 
-		// The following code is required before running the example below:
+		// Get model path
+		// This is a relative path to your obj file.
+		const std::string obj_path_str = "plane.obj";
 
-		//
-		// TODO function typedefs
-		//
+		// Size of obj file string (character count)
+		const int obj_length = static_cast<int>(obj_path_str.size());
 
-		//
-		// TODO get pointers-to-functions via GetProcAddress
-		//
+		// This will point to memory on free store.
+		// The memory will be allocated inside the LoadOBJ function,
+		// and it must be freed using DestroyMeshInfo.
+		std::vector<HF::Geometry::MeshInfo>* loaded_obj = nullptr;
 
-		// You are now ready to call the functions above.
-	\endcode
+		// Load mesh
+		// The array rot will rotate the mesh 90 degrees with respect to the x-axis,
+		// i.e. makes the mesh 'z-up'.
+		//
+		// Notice that we pass the address of the loaded_obj pointer
+		// to LoadOBJ. We do not want to pass loaded_obj by value, but by address --
+		// so that we can dereference it and assign it to the address of (pointer to)
+		// the free store memory allocated within LoadOBJ.
+		const float rot[] = { 90.0f, 0.0f, 0.0f };	// Y up to Z up
+		status = LoadOBJ(obj_path_str.c_str(), obj_length, rot[0], rot[1], rot[2], &loaded_obj);
 
-	\code
+		if (status != 1) {
+			// All C Interface functions return a status code.
+			// Error!
+			std::cerr << "Error at LoadOBJ, code: " << status << std::endl;
+		}
+
+		// Create BVH
+
+		// We now declare a pointer to EmbreeRayTracer, named bvh.
+		// Note that we pass the address of this pointer to CreateRaytracer.
 		//
-		// TODO example
-		//
+		// Note also that we pass the (vector<MeshInfo> *), loaded_obj, to CreateRaytracer -- by value.
+		// This is okay, because CreateRaytracer is not assigning loaded_obj any new addresses,
+		// it is only interested in accessing the pointee.
+		HF::RayTracer::EmbreeRayTracer* bvh = nullptr;
+		status = CreateRaytracer(loaded_obj, &bvh);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
+		}
+
+		// Define points to start rays
+		// These are Cartesian coordinates.
+		float p1[] = { 0.0f, 0.0f, 2.0f, 0.0f, 0.0f, 3.0f, 0.0f, 0.0f, 4.0f };
+		const int size_p1 = 9;
+		const int count_points = size_p1 / 3;
+
+		// Define one direction to cast rays
+		// These are vector components, not Cartesian coordinates.
+		const float dir[] = { 0.0f, 0.0f, -1.0f };
+		const int size_dir = 3;
+		const int count_dir = size_dir / 3;
+
+		// Maximum distance a ray can travel and still hit a target
+		const int max_distance = -1;
+
+		// If a given ray i hits a target (dir[i] is a vector extending from p1[i]),
+		// results[i] will be set true. Otherwise, results[i] will be set false.
+
+		// count_points rays will be fired, from the coordinates described at the array p1.
+		// results[i] is true if a ray fired from p1[i], p1[i + 1], p1[i + 2] via direction dir
+		// makes a hit.
+		bool results[count_points];
+
+		// results will be mutated by FireMultipleOriginsOneDirection.
+		status = FireMultipleOriginsOneDirection(bvh, p1, dir, count_points, max_distance, results);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at FireMultipleDirectionsOneOrigin, code: " << status << std::endl;
+		}
+
+		///
+		/// Review results:
+		///
+		for (int i = 0, k = 0; i < count_points; i++, k += 3) {
+			std::string label = results[i] ? "hit" : "miss";
+
+			std::cout << "result[" << i << "]: " << label << std::endl;
+			std::cout << "[" << dir[0] << ", " << dir[1] << ", " << dir[2]
+				<< "], from point [" << p1[k] << ", " << p1[k + 1] << ", " << p1[k + 2] << "]"
+				<< std::endl;
+		}
+
+		///
+		/// Memory resource cleanup.
+		///
+
+		// destroy raytracer
+		status = DestroyRayTracer(bvh);
+
+		if (status != 1) {
+			std::cerr << "Error at DestroyRayTracer, code: " << status << std::endl;
+		}
+
+		// destroy vector<MeshInfo>
+		status = DestroyMeshInfo(loaded_obj);
+
+		if (status != 1) {
+			std::cerr << "Error at DestroyMeshInfo, code: " << status << std::endl;
+		}
 	\endcode
 */
 C_INTERFACE FireMultipleOriginsOneDirection(HF::RayTracer::EmbreeRayTracer* ert, float* origins, const float* direction, int size, float max_distance, bool* result_array);
@@ -901,9 +990,110 @@ C_INTERFACE FireMultipleOriginsOneDirection(HF::RayTracer::EmbreeRayTracer* ert,
 		\link DestroyMeshInfo \endlink <br>
 
 	\code
+		// Status code variable, value returned by C Interface functions
+		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
+		int status = 0;
+
+		// Get model path
+		// This is a relative path to your obj file.
+		const std::string obj_path_str = "plane.obj";
+
+		// Size of obj file string (character count)
+		const int obj_length = static_cast<int>(obj_path_str.size());
+
+		// This will point to memory on free store.
+		// The memory will be allocated inside the LoadOBJ function,
+		// and it must be freed using DestroyMeshInfo.
+		std::vector<HF::Geometry::MeshInfo>* loaded_obj = nullptr;
+
+		// Load mesh
+		// The array rot will rotate the mesh 90 degrees with respect to the x-axis,
+		// i.e. makes the mesh 'z-up'.
 		//
-		// TODO example
+		// Notice that we pass the address of the loaded_obj pointer
+		// to LoadOBJ. We do not want to pass loaded_obj by value, but by address --
+		// so that we can dereference it and assign it to the address of (pointer to)
+		// the free store memory allocated within LoadOBJ.
+		const float rot[] = { 90.0f, 0.0f, 0.0f };	// Y up to Z up
+		status = LoadOBJ(obj_path_str.c_str(), obj_length, rot[0], rot[1], rot[2], &loaded_obj);
+
+		if (status != 1) {
+			// All C Interface functions return a status code.
+			// Error!
+			std::cerr << "Error at LoadOBJ, code: " << status << std::endl;
+		}
+
+		// Create BVH
+
+		// We now declare a pointer to EmbreeRayTracer, named bvh.
+		// Note that we pass the address of this pointer to CreateRaytracer.
 		//
+		// Note also that we pass the (vector<MeshInfo> *), loaded_obj, to CreateRaytracer -- by value.
+		// This is okay, because CreateRaytracer is not assigning loaded_obj any new addresses,
+		// it is only interested in accessing the pointee.
+		HF::RayTracer::EmbreeRayTracer* bvh = nullptr;
+		status = CreateRaytracer(loaded_obj, &bvh);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
+		}
+
+		// Define point to start ray
+		// These are Cartesian coordinates.
+		const float p1[] = { 0.0f, 0.0f, 2.0f };
+
+		// Define directions to cast rays
+		// These are vector components, not Cartesian coordinates.
+		float dir[] = { 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, -2.0f, 0.0f, 0.0f, -3.0f };
+		const int size_dir = 9;
+		const int count_dir = size_dir / 3;
+
+		const int max_distance = -1;
+
+		// If a given ray i hits a target (dir[i] is a vector extending from points[i]),
+		// results[i] will be set true. Otherwise, results[i] will be set false.
+		bool results[count_dir];
+
+		// dir, and results will be mutated by FireMultipleDirectionsOneOrigin.
+		// if results[i] is true, representing a hit,
+		// dir[i], dir[i + 1], dir[i + 2] represents a hit point.
+		status = FireMultipleDirectionsOneOrigin(bvh, p1, dir, count_dir, max_distance, results);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at FireMultipleDirectionsOneOrigin, code: " << status << std::endl;
+		}
+
+		///
+		/// Review results:
+		///
+		for (int i = 0, k = 0; i < count_dir; i++, k += 3) {
+			std::string label = results[i] ? "hit" : "miss";
+
+			std::cout << "result[" << i << "]: " << label << std::endl;
+			std::cout << "[" << dir[0] << ", " << dir[1] << ", " << dir[2]
+				<< "], direction [" << dir[k] << ", " << dir[k + 1] << ", " << dir[k + 2] << "]"
+				<< std::endl;
+		}
+
+		///
+		/// Memory resource cleanup.
+		///
+
+		// destroy raytracer
+		status = DestroyRayTracer(bvh);
+
+		if (status != 1) {
+			std::cerr << "Error at DestroyRayTracer, code: " << status << std::endl;
+		}
+
+		// destroy vector<MeshInfo>
+		status = DestroyMeshInfo(loaded_obj);
+
+		if (status != 1) {
+			std::cerr << "Error at DestroyMeshInfo, code: " << status << std::endl;
+		}
 	\endcode
 */
 C_INTERFACE FireMultipleDirectionsOneOrigin(HF::RayTracer::EmbreeRayTracer* ert, const float* origin, float* directions, int size, float max_distance, bool* result_array);
