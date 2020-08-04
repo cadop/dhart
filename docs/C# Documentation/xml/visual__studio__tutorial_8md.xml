@@ -1,0 +1,205 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.18">
+  <compounddef id="visual__studio__tutorial_8md" kind="file" language="Markdown">
+    <compoundname>visual_studio_tutorial.md</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>Using<sp/>the<sp/>C#<sp/>DLL<sp/>in<sp/>a<sp/>Visual<sp/>Studio<sp/>Project<sp/>{#VSTutorial}</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">[TOC]</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Intro</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">In<sp/>this<sp/>tutorial<sp/>we<sp/>will<sp/>cover<sp/>the<sp/>process<sp/>of<sp/>creating<sp/>a<sp/>new<sp/>Visual<sp/>Studio<sp/>project<sp/>that<sp/>references<sp/>the<sp/>HumanFactors<sp/>C#<sp/>interface.<sp/>We<sp/>will<sp/>also<sp/>walk<sp/>through<sp/>the<sp/>steps<sp/>of<sp/>adding<sp/>non-C#<sp/>dependencies<sp/>such<sp/>as<sp/>`HumanFactors.dll`<sp/>to<sp/>your<sp/>project,<sp/>as<sp/>this<sp/>is<sp/>required<sp/>for<sp/>the<sp/>produced<sp/>program<sp/>to<sp/>run<sp/>at<sp/>all.<sp/>After<sp/>this<sp/>tutorial<sp/>is<sp/>completed<sp/>you<sp/>should<sp/>have<sp/>a<sp/>project<sp/>that<sp/>is<sp/>able<sp/>to<sp/>reference<sp/>HumanFactors&apos;<sp/>C#<sp/>interface<sp/>and<sp/>automatically<sp/>copy<sp/>it<sp/>and<sp/>its<sp/>dependencies<sp/>to<sp/>the<sp/>output<sp/>folder<sp/>when<sp/>the<sp/>project<sp/>is<sp/>built.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Prerequisites</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Ensure<sp/>that<sp/>you<sp/>have<sp/>the<sp/>following<sp/>prerequisites<sp/>before<sp/>continuing.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">1.<sp/>The<sp/>latest<sp/>copy<sp/>of<sp/>the<sp/>C#<sp/>Human<sp/>Factors<sp/>Release</highlight></codeline>
+<codeline><highlight class="normal">2.<sp/>A<sp/>copy<sp/>of<sp/>Visual<sp/>Studio.<sp/>Version<sp/>should<sp/>not<sp/>matter,<sp/>but<sp/>for<sp/>this<sp/>tutorial<sp/>I<sp/>will<sp/>be<sp/>using<sp/>VisualStudio<sp/>2019</highlight></codeline>
+<codeline><highlight class="normal">3.<sp/>The<sp/>necessary<sp/>prerequisites<sp/>for<sp/>developing<sp/>C#<sp/>projects<sp/>in<sp/>Visual<sp/>Studio.<sp/><sp/></highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Creating<sp/>the<sp/>project</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Visual<sp/>Studio<sp/>Splash<sp/>Screen](walkthroughs/VisualStudio/splash_screen.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**1.1**:<sp/>*Visual<sp/>studio<sp/>splash<sp/>screen.<sp/>Circled:<sp/>Create<sp/>a<sp/>new<sp/>project<sp/>button*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">First,<sp/>Open<sp/>Visual<sp/>Studio.<sp/>You<sp/>should<sp/>be<sp/>greeted<sp/>by<sp/>the<sp/>splash<sp/>screen<sp/>shown<sp/>in<sp/>Figure<sp/>1.1<sp/>or<sp/>a<sp/>similar<sp/>screen<sp/>if<sp/>you&apos;re<sp/>using<sp/>a<sp/>different<sp/>version<sp/>of<sp/>Visual<sp/>Studio.<sp/>Click<sp/>on<sp/>the<sp/>button<sp/>titled<sp/>*Create<sp/>a<sp/>New<sp/>Project*<sp/>to<sp/>create<sp/>a<sp/>new<sp/>project.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Visual<sp/>Studio<sp/>Create<sp/>A<sp/>New<sp/>Project](walkthroughs/VisualStudio/create_project_csharp.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**1.2**:<sp/>*Create<sp/>A<sp/>New<sp/>Project<sp/>Menu*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Upon<sp/>clicking<sp/>Create<sp/>A<sp/>New<sp/>Project<sp/>you<sp/>should<sp/>see<sp/>the<sp/>create<sp/>a<sp/>new<sp/>project<sp/>dialog<sp/>line<sp/>in<sp/>.<sp/>Note<sp/>that<sp/>the<sp/>menu<sp/>options<sp/>shown<sp/>here<sp/>may<sp/>be<sp/>different<sp/>than<sp/>yours<sp/>depending<sp/>on<sp/>what<sp/>Visual<sp/>Studio<sp/>extensions<sp/>you<sp/>have<sp/>installed.<sp/>We<sp/>want<sp/>to<sp/>create<sp/>a<sp/>new<sp/>C#<sp/>Library,<sp/>so<sp/>we<sp/>want<sp/>to<sp/>filter<sp/>these<sp/>options<sp/>to<sp/>only<sp/>include<sp/>options<sp/>for<sp/>C#.<sp/>Click<sp/>on<sp/>the<sp/>`All<sp/>Languages`<sp/>drop<sp/>down,<sp/>then<sp/>select<sp/>`C#`<sp/>as<sp/>shown<sp/>in<sp/>Figure<sp/>1.2.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![.NetFramework<sp/>](walkthroughs/VisualStudio/net_framework_project.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**1.3**:<sp/>*Create<sp/>a<sp/>.NET<sp/>Class<sp/>Library*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Once<sp/>you&apos;ve<sp/>clicked<sp/>C#<sp/>the<sp/>menu<sp/>should<sp/>be<sp/>filtered<sp/>to<sp/>only<sp/>contain<sp/>C#<sp/>project<sp/>types.<sp/>Just<sp/>as<sp/>before,<sp/>your<sp/>list<sp/>may<sp/>not<sp/>exactly<sp/>match<sp/>the<sp/>one<sp/>shown<sp/>here<sp/>depending<sp/>on<sp/>the<sp/>Visual<sp/>Studio<sp/>extensions<sp/>you<sp/>have<sp/>installed.<sp/>The<sp/>one<sp/>we&apos;re<sp/>looking<sp/>for<sp/>is<sp/>the<sp/>**Class<sp/>Library<sp/>(.Net<sp/>Framework)**<sp/>circled<sp/>in<sp/>Figure<sp/>1.3.<sp/>If<sp/>you<sp/>do<sp/>not<sp/>see<sp/>this<sp/>option,<sp/>scroll<sp/>up<sp/>or<sp/>down<sp/>to<sp/>find<sp/>it.<sp/>Click<sp/>**Class<sp/>Library<sp/>(.Net<sp/>Framework)**<sp/>to<sp/>create<sp/>the<sp/>project.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">&gt;<sp/>NOTE:<sp/>The<sp/>processes<sp/>described<sp/>in<sp/>this<sp/>tutorial,<sp/>will<sp/>also<sp/>work<sp/>with<sp/>other<sp/>types<sp/>of<sp/>projects<sp/>such<sp/>as<sp/>command<sp/>line<sp/>projects,<sp/>or<sp/>other<sp/>executables.<sp/>Feel<sp/>free<sp/>to<sp/>use<sp/>one<sp/>of<sp/>these<sp/>other<sp/>types<sp/>of<sp/>projects<sp/>instead<sp/>for<sp/>this<sp/>tutorial.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![ConFigure<sp/>Dialog](walkthroughs/VisualStudio/framework4.5.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**1.4**:<sp/>*ConFigure<sp/>Dialog*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">In<sp/>the<sp/>conFigure<sp/>dialog,<sp/>you&apos;re<sp/>able<sp/>to<sp/>change<sp/>the<sp/>name,<sp/>location<sp/>and<sp/>framework<sp/>version<sp/>of<sp/>your<sp/>assembly.<sp/>For<sp/>this<sp/>demonstration<sp/>we&apos;ll<sp/>be<sp/>using<sp/>the<sp/>version<sp/>of<sp/>the<sp/>.net<sp/>framework<sp/>that<sp/>HumanFactorsCSharp<sp/>was<sp/>built<sp/>with,<sp/>**Framework<sp/>version<sp/>4.5**.<sp/>Change<sp/>the<sp/>framework<sp/>version<sp/>to<sp/>4.5<sp/>by<sp/>using<sp/>the<sp/>dropdown<sp/>menu<sp/>circled<sp/>in<sp/>cyan<sp/>in<sp/>Figure<sp/>1.4.<sp/>We&apos;ll<sp/>be<sp/>leaving<sp/>the<sp/>rest<sp/>of<sp/>the<sp/>options<sp/>as<sp/>their<sp/>defaults<sp/>for<sp/>this<sp/>example,<sp/>but<sp/>feel<sp/>free<sp/>to<sp/>change<sp/>the<sp/>name<sp/>and<sp/>location<sp/>of<sp/>the<sp/>project.<sp/>Once<sp/>you&apos;re<sp/>ready,<sp/>click<sp/>the<sp/>Create<sp/>button<sp/>circled<sp/>in<sp/>red<sp/>at<sp/>the<sp/>bottom<sp/>right<sp/>corner<sp/>of<sp/>the<sp/>dialog<sp/>to<sp/>create<sp/>the<sp/>project.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Blank<sp/>Project](walkthroughs/VisualStudio/visual_studio_blank_project.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**1.5**:<sp/>*Blank<sp/>Project*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">After<sp/>pressing<sp/>create,<sp/>Visual<sp/>Studio<sp/>display<sp/>a<sp/>window<sp/>for<sp/>your<sp/>new<sp/>blank<sp/>project.<sp/>Now<sp/>we&apos;re<sp/>ready<sp/>to<sp/>move<sp/>on<sp/>to<sp/>adding<sp/>the<sp/>DLL.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Adding<sp/>A<sp/>Reference<sp/>To<sp/>Human<sp/>Factors</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Before<sp/>we<sp/>move<sp/>on<sp/>to<sp/>writing<sp/>the<sp/>example<sp/>program,<sp/>we<sp/>must<sp/>first<sp/>add<sp/>HumanFactors<sp/>C#<sp/>DLL<sp/>as<sp/>a<sp/>reference.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Add<sp/>Reference<sp/>Menu<sp/>](walkthroughs/VisualStudio/right_click_class_library.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**2.1**:<sp/>*Menu<sp/>to<sp/>add<sp/>a<sp/>reference*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">In<sp/>the<sp/>*Solution<sp/>Explorer*<sp/>on<sp/>the<sp/>right<sp/>hand<sp/>side<sp/>of<sp/>the<sp/>window,<sp/>right<sp/>click<sp/>on<sp/>the<sp/>item<sp/>with<sp/>the<sp/>name<sp/>of<sp/>your<sp/>current<sp/>solution,<sp/>hover<sp/>over<sp/>the<sp/>Add<sp/>option,<sp/>then<sp/>click<sp/><sp/>Reference<sp/>as<sp/>shown<sp/>in<sp/>Figure<sp/>2.1.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Add<sp/>Reference<sp/>dialog<sp/>](walkthroughs/VisualStudio/add_reference_dialog.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**2.2**:<sp/>*Add<sp/>Reference<sp/>Dialog*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">A<sp/>new<sp/>window<sp/>should<sp/>open<sp/>similar<sp/>to<sp/>the<sp/>one<sp/>shown<sp/>in<sp/>Figure<sp/>2.2,<sp/>however<sp/>the<sp/>contents<sp/>of<sp/>the<sp/>window<sp/>will<sp/>differ<sp/>depending<sp/>on<sp/>what<sp/>other<sp/>C#<sp/>projects<sp/>you<sp/>have<sp/>previously<sp/>built<sp/>with<sp/>Visual<sp/>Studio,<sp/>or<sp/>DLLs<sp/>you&apos;ve<sp/>previously<sp/>added<sp/>references<sp/>to<sp/>in<sp/>the<sp/>past.<sp/>Click<sp/>the<sp/>Browse<sp/>button<sp/>circled<sp/>in<sp/>red<sp/>in<sp/>Figure<sp/>2.2<sp/>at<sp/>the<sp/>bottom<sp/>right<sp/>corner<sp/>of<sp/>the<sp/>dialog.<sp/>This<sp/>should<sp/>open<sp/>a<sp/>file<sp/>explorer<sp/>window.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Navigate<sp/>to<sp/>HumanFactors<sp/>DLL](walkthroughs/VisualStudio/bin_of_humanfactors.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**2.3**:<sp/>*Human<sp/>Factors<sp/>Bin<sp/>Folder*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">In<sp/>the<sp/>file<sp/>explorer,<sp/>navigate<sp/>to<sp/>the<sp/>bin<sp/>directory<sp/>in<sp/>which<sp/>you&apos;ve<sp/>installed<sp/>Human<sp/>Factors.<sp/>Select<sp/>all<sp/>the<sp/>files<sp/>in<sp/>the<sp/>bin<sp/>directory,<sp/>then<sp/>click<sp/>the<sp/>add<sp/>button<sp/>at<sp/>the<sp/>bottom<sp/>right<sp/>of<sp/>the<sp/>window<sp/>to<sp/>add<sp/>them<sp/>to<sp/>the<sp/>menu.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![References<sp/>Added](walkthroughs/VisualStudio/references_added.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**2.4**:<sp/>*References<sp/>added<sp/>to<sp/>the<sp/>solution,<sp/>indicated<sp/>by<sp/>a<sp/>checkbox*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![References<sp/>Added](walkthroughs/VisualStudio/references_added.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">If<sp/>you<sp/>completed<sp/>the<sp/>last<sp/>step<sp/>successfully,<sp/>then<sp/>you<sp/>should<sp/>be<sp/>able<sp/>to<sp/>see<sp/>all<sp/>of<sp/>the<sp/>added<sp/>DLLS<sp/>checked<sp/>off<sp/>in<sp/>the<sp/>Reference<sp/>Manager<sp/>like<sp/>in<sp/>Figure<sp/>2.4.<sp/>From<sp/>this<sp/>list,<sp/>only<sp/>some<sp/>of<sp/>the<sp/>items<sp/>are<sp/>C#<sp/>DLLs,<sp/>so<sp/>only<sp/>leave<sp/>the<sp/>deselect<sp/>every<sp/>one<sp/>of<sp/>the<sp/>references<sp/>except<sp/>for<sp/>`HumanFactorsCSharp.dll`,<sp/>`System.Memory.dll`,<sp/>`System.Runtime.CompilerServices.Unsafe.dll`,<sp/>and<sp/>`System.Buffers.dll`.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Subset<sp/>of<sp/>References](walkthroughs/VisualStudio/csharp_references.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**2.5**:<sp/>*Only<sp/>required<sp/>references<sp/>checked<sp/>off*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Once<sp/>you&apos;ve<sp/>unchecked<sp/>the<sp/>unneeded<sp/>references,<sp/>you<sp/>can<sp/>finish<sp/>the<sp/>process<sp/>of<sp/>add<sp/>these<sp/>references<sp/>to<sp/>the<sp/>project<sp/>by<sp/>clicking<sp/>the<sp/>add<sp/>button<sp/>at<sp/>the<sp/>bottom<sp/>right<sp/>of<sp/>the<sp/>reference<sp/>manager<sp/>window.<sp/>This<sp/>will<sp/>close<sp/>the<sp/>window<sp/>and<sp/>bring<sp/>you<sp/>back<sp/>to<sp/>your<sp/>blank<sp/>project.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![References<sp/>Dropdown<sp/>Circled](walkthroughs/VisualStudio/references_tab_circled.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**2.6**:<sp/>*References<sp/>Tab<sp/>Circled*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">For<sp/>additional<sp/>verification<sp/>that<sp/>this<sp/>worked,<sp/>click<sp/>the<sp/>dropdown<sp/>arrow<sp/>in<sp/>the<sp/>solution<sp/>explorer<sp/>next<sp/>to<sp/>References,<sp/>circled<sp/>in<sp/>red<sp/>in<sp/>Figure<sp/>2.6.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![References<sp/>Highlighted<sp/>in<sp/>dropdown](walkthroughs/VisualStudio/highlighted_references.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**2.7**:<sp/>*New<sp/>References<sp/>in<sp/>dropdown.*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Upon<sp/>clicking<sp/>this<sp/>drop<sp/>down,<sp/>all<sp/>of<sp/>the<sp/>references<sp/>to<sp/>this<sp/>project<sp/>will<sp/>be<sp/>displayed.<sp/>In<sp/>this<sp/>list<sp/>you<sp/>should<sp/>be<sp/>able<sp/>to<sp/>see<sp/>the<sp/>references<sp/>we<sp/>added<sp/>earlier.<sp/>These<sp/>references<sp/>are<sp/>highlighted<sp/>in<sp/>Figure<sp/>2.7.<sp/>If<sp/>you<sp/>can<sp/>see<sp/>these<sp/>references<sp/>in<sp/>the<sp/>list,<sp/>then<sp/>you<sp/>have<sp/>completed<sp/>this<sp/>step<sp/>correctly,<sp/>and<sp/>are<sp/>ready<sp/>to<sp/>move<sp/>onto<sp/>the<sp/>next<sp/>step<sp/>of<sp/>this<sp/>tutorial.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Adding<sp/>Native<sp/>Dependencies</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">We<sp/>added<sp/>the<sp/>C#<sp/>components<sp/>of<sp/>human<sp/>factors<sp/>to<sp/>the<sp/>project<sp/>as<sp/>libraries,<sp/>however<sp/>we<sp/>also<sp/>need<sp/>to<sp/>ensure<sp/>that<sp/>those<sp/>DLLs<sp/>that<sp/>we<sp/>unchecked<sp/>are<sp/>part<sp/>of<sp/>our<sp/>project<sp/>as<sp/>well.<sp/>While<sp/>these<sp/>libraries<sp/>can&apos;t<sp/>be<sp/>loaded<sp/>as<sp/>dependencies<sp/>like<sp/>C#<sp/>libraries<sp/>can,<sp/>they<sp/>can<sp/>still<sp/>be<sp/>managed<sp/>by<sp/>our<sp/>project,<sp/>and<sp/>most<sp/>importantly<sp/>copied<sp/>to<sp/>the<sp/>correct<sp/>directories<sp/>when<sp/>the<sp/>project<sp/>is<sp/>built.<sp/>If<sp/>the<sp/>native<sp/>libraries<sp/>are<sp/>not<sp/>placed<sp/>alongside<sp/>the<sp/>C#<sp/>library,<sp/>then<sp/>HumanFactors<sp/>will<sp/>not<sp/>run<sp/>once<sp/>the<sp/>project<sp/>is<sp/>built.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Add<sp/>Existing<sp/>Item](walkthroughs/VisualStudio/add_existing_item.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**3.1**:<sp/>*Add<sp/>Existing<sp/>Item<sp/>in<sp/>Dropdown*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">To<sp/>add<sp/>a<sp/>file<sp/>to<sp/>your<sp/>project,<sp/>right<sp/>click<sp/>on<sp/>the<sp/>project<sp/>in<sp/>the<sp/>solution<sp/>explorer<sp/>window,<sp/>then<sp/>hover<sp/>over<sp/>add<sp/>and<sp/>click<sp/>*Existing<sp/>Item*<sp/>as<sp/>shown<sp/>in<sp/>Figure<sp/>3.1.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Upon<sp/>clicking<sp/>on<sp/>the<sp/>Add<sp/>existing<sp/>item<sp/>option<sp/>another<sp/>file<sp/>explorer<sp/>window<sp/>will<sp/>open.<sp/>Navigate<sp/>back<sp/>to<sp/>the<sp/><sp/>bin<sp/>directory<sp/>of<sp/>humanfactors.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![All<sp/>Files](walkthroughs/VisualStudio/all_files.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**3.2**:<sp/>*Circled:<sp/>All<sp/>Files<sp/>option*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Upon<sp/>reaching<sp/>the<sp/>folder<sp/>you<sp/>may<sp/>notice<sp/>the<sp/>folder<sp/>is<sp/>now<sp/>empty.<sp/>like<sp/>in<sp/>Figure<sp/>3.2<sp/>This<sp/>is<sp/>because<sp/>by<sp/>default,<sp/>Visual<sp/>Studio<sp/>only<sp/>displays<sp/>visual<sp/>C#<sp/>files<sp/>in<sp/>this<sp/>dialog.<sp/>To<sp/>see<sp/>other<sp/>file<sp/>types,<sp/>you<sp/>must<sp/>click<sp/>the<sp/>drop<sp/>down<sp/>at<sp/>the<sp/>bottom<sp/>right<sp/>of<sp/>the<sp/>window<sp/>above<sp/>the<sp/>Add<sp/>button<sp/>and<sp/>select<sp/>`All<sp/>Files<sp/>(*.*)`<sp/>circled<sp/>in<sp/>red.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Non<sp/>Csharp<sp/>Depends](walkthroughs/VisualStudio/non_csharp_depends.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**3.3**:<sp/>*Highlighted:<sp/>Native<sp/>DLLs<sp/>to<sp/>add<sp/>to<sp/>the<sp/>project*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/>This<sp/>should<sp/>disable<sp/>the<sp/>default<sp/>filetype<sp/>filter<sp/>and<sp/>allow<sp/>you<sp/>to<sp/>see<sp/>the<sp/>DLLS<sp/>like<sp/>in<sp/>Figure<sp/>3.3.<sp/>Highlight<sp/>all<sp/>of<sp/>the<sp/>native<sp/>DLLS<sp/>that<sp/>we<sp/>didn&apos;t<sp/>leave<sp/>checked<sp/>off<sp/>in<sp/>the<sp/>previous<sp/>section.<sp/>These<sp/>are<sp/>highlighted<sp/>in<sp/>Figure<sp/>3.2.<sp/>Once<sp/>these<sp/>are<sp/>selected,<sp/>press<sp/>the<sp/>`Add`<sp/>button<sp/>at<sp/>the<sp/>bottom<sp/>right<sp/>of<sp/>the<sp/>window<sp/>to<sp/>add<sp/>them<sp/>to<sp/>the<sp/>project.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Solution<sp/>Explorer<sp/>Files](walkthroughs/VisualStudio/sltn_explorer_deps.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**3.4**:<sp/>*Highlighted:<sp/>Native<sp/>DLLS*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">After<sp/>the<sp/>file<sp/>explorer<sp/>closes,<sp/>go<sp/>to<sp/>the<sp/>solution<sp/>explorer<sp/>and<sp/>scroll<sp/>down<sp/>until<sp/>you<sp/>see<sp/>the<sp/>newly<sp/>added<sp/>DLLS<sp/>highlighted<sp/>in<sp/>Figure<sp/>3.4.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Native<sp/>Dependencies<sp/>in<sp/>the<sp/>project](walkthroughs/VisualStudio/sltn_explorer_deps.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**3.5**:<sp/>*Highlighted:<sp/>Native<sp/>DLLS<sp/>in<sp/>the<sp/>project*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Select<sp/>all<sp/>of<sp/>these<sp/>DLLS<sp/>and<sp/>right<sp/>click<sp/>on<sp/>them<sp/>then<sp/>click<sp/>Properties<sp/>circled<sp/>in<sp/>red<sp/>in<sp/>Figure<sp/>3.5.<sp/>This<sp/>may<sp/>not<sp/>have<sp/>an<sp/>immediately<sp/>visible<sp/>effect,<sp/>like<sp/>in<sp/>the<sp/>case<sp/>of<sp/>my<sp/>Visual<sp/>Studio<sp/>configuration<sp/>here.<sp/>If<sp/>you,<sp/>like<sp/>me,<sp/>have<sp/>the<sp/>properties<sp/>pane,<sp/>resize<sp/>it<sp/>by<sp/>dragging<sp/>it&apos;s<sp/>border<sp/>upwards.<sp/>The<sp/>position<sp/>of<sp/>this<sp/>pane<sp/>will<sp/>differ<sp/>between<sp/>versions<sp/>of<sp/>Visual<sp/>Studio<sp/>and<sp/>personal<sp/>preferences.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Solution<sp/>Explorer<sp/>Files](walkthroughs/VisualStudio/properties_pane.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**3.6**:<sp/>*Properties<sp/>Pane*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Once<sp/>the<sp/>properties<sp/>pane<sp/>is<sp/>visible<sp/>(outlined<sp/>in<sp/>cyan<sp/>in<sp/>Figure<sp/>3.6)<sp/>click<sp/>on<sp/>the<sp/>item<sp/>that<sp/>says<sp/>`Do<sp/>not<sp/>copy`,<sp/>circled<sp/>in<sp/>red<sp/>in<sp/>the<sp/>properties<sp/>window.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Changing<sp/>Do<sp/>not<sp/>copy<sp/>to<sp/>Copy<sp/>If<sp/>Newer](walkthroughs/VisualStudio/copy_if_newer.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**3.7**:<sp/>*Changing<sp/>Do<sp/>Not<sp/>Copy<sp/>to<sp/>Copy<sp/>If<sp/>Newer*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Once<sp/>you<sp/>click<sp/>on<sp/>`Do<sp/>Not<sp/>Copy`<sp/>you<sp/>should<sp/>see<sp/>a<sp/>drop<sp/>down<sp/>appear<sp/>to<sp/>the<sp/>right.<sp/>Click<sp/>on<sp/>the<sp/>downward<sp/>arrow<sp/>to<sp/>expand<sp/>it<sp/>then<sp/>select<sp/>`Copy<sp/>If<sp/>Newer`<sp/>like<sp/>in<sp/>Figure<sp/>3.7.<sp/>Upon<sp/>clicking<sp/>this<sp/>the<sp/>option<sp/>should<sp/>also<sp/>change<sp/>to<sp/>`Copy<sp/>if<sp/>Newer`.<sp/>Now<sp/>upon<sp/>building<sp/>the<sp/>program,<sp/>these<sp/>files<sp/>should<sp/>be<sp/>copied<sp/>to<sp/>the<sp/>output<sp/>directory<sp/>alongside<sp/>your<sp/>library<sp/>and<sp/>all<sp/>of<sp/>the<sp/>C#<sp/>references.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Testing<sp/>the<sp/>output</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">With<sp/>everything<sp/>set<sp/>up<sp/>correctly,<sp/>we<sp/>should<sp/>now<sp/>be<sp/>able<sp/>to<sp/>demonstrate<sp/>that<sp/>this<sp/>process<sp/>works.<sp/>The<sp/>goal<sp/>is<sp/>to<sp/>ensure<sp/>Visual<sp/>Studio<sp/>can<sp/>see<sp/>the<sp/>referenced<sp/>C#<sp/>code,<sp/>and<sp/>that<sp/>it<sp/>copies<sp/>all<sp/>of<sp/>the<sp/>dependencies<sp/>to<sp/>the<sp/>output<sp/>directory<sp/>once<sp/>the<sp/>project<sp/>is<sp/>built.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">under<sp/>the<sp/>line<sp/>`using<sp/>System.Threading.Tasks`<sp/>enter<sp/>the<sp/>following<sp/>using<sp/>declarations.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```<sp/>C#</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>HumanFactors;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>Humanfactors.SpatialStructures;</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Then<sp/>in<sp/>the<sp/>body<sp/>of<sp/>the<sp/>default<sp/>class<sp/>`Class<sp/>1`<sp/>Enter<sp/>the<sp/>following<sp/>line.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```<sp/>C#</highlight></codeline>
+<codeline><highlight class="normal">Graph<sp/>G<sp/>=<sp/>new<sp/>Graph();</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Build<sp/>Solution](walkthroughs/VisualStudio/graph_code.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**4.1**:<sp/>*Added<sp/>Example<sp/>Code*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Once<sp/>you&apos;ve<sp/>done<sp/>this<sp/>your<sp/>code<sp/>should<sp/>look<sp/>like<sp/>Figure<sp/>4.1</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Build<sp/>Solution](walkthroughs/VisualStudio/build_solution.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**4.2**:<sp/>*Building<sp/>the<sp/>project*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">After<sp/>verifying<sp/>that<sp/>your<sp/>code<sp/>matches<sp/>Figure<sp/>4.1,<sp/>In<sp/>the<sp/>top<sp/>bar<sp/>of<sp/>Visual<sp/>Studio<sp/>click<sp/>Build<sp/>and<sp/>then<sp/>click<sp/>Build<sp/>Solution.<sp/>This<sp/>will<sp/>compile<sp/>the<sp/>C#<sp/>code<sp/>we<sp/>have<sp/>written<sp/>into<sp/>a<sp/>DLL<sp/>and<sp/>put<sp/>it<sp/>in<sp/>the<sp/>output<sp/>directory<sp/>alongside<sp/>all<sp/>of<sp/>the<sp/>required<sp/>dependencies.<sp/>We<sp/>will<sp/>now<sp/>navigate<sp/>to<sp/>the<sp/>output<sp/>folder<sp/>to<sp/>ensure<sp/>this<sp/>is<sp/>true.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Open<sp/>in<sp/>FileExplorer](walkthroughs/VisualStudio/open_in_file_explorer.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**4.3**<sp/>:<sp/>*Open<sp/>in<sp/>file<sp/>explorer*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Right<sp/>click<sp/>on<sp/>your<sp/>project<sp/>in<sp/>the<sp/>solution<sp/>explorer,<sp/>and<sp/>click<sp/>open<sp/>in<sp/>File<sp/>Explorer.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Solution<sp/>in<sp/>FileExplorer](walkthroughs/VisualStudio/solution_in_file_explorer.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**4.4**<sp/>:<sp/>*Solution<sp/>in<sp/>file<sp/>explorer*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>should<sp/>open<sp/>an<sp/>instance<sp/>of<sp/>the<sp/>file<sp/>explorer<sp/>at<sp/>the<sp/>root<sp/>of<sp/>your<sp/>project<sp/>like<sp/>in<sp/>Figure<sp/>4.4.<sp/>From<sp/>here,<sp/>navigate<sp/>into<sp/>the<sp/>`bin`<sp/>then<sp/>`Debug`<sp/>folders.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Contents<sp/>of<sp/>the<sp/>debug<sp/>folder](walkthroughs/VisualStudio/bin_debug.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**4.5**<sp/>:<sp/>*Contents<sp/>of<sp/>the<sp/>Debug<sp/>Folder*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Once<sp/>there,<sp/>you<sp/>should<sp/>be<sp/>looking<sp/>at<sp/>the<sp/>output<sp/>of<sp/>your<sp/>program.<sp/>Verify<sp/>that<sp/>all<sp/>of<sp/>the<sp/>C#<sp/>and<sp/>non-C#<sp/>DLLs<sp/>that<sp/>we&apos;ve<sp/>added<sp/>have<sp/>been<sp/>copied<sp/>over<sp/>successfully.<sp/>If<sp/>your<sp/>folder&apos;s<sp/>contents<sp/>match<sp/>that<sp/>of<sp/>Figure<sp/>4.5<sp/>then<sp/>you&apos;ve<sp/>successfully<sp/>completed<sp/>this<sp/>tutorial.</highlight></codeline>
+    </programlisting>
+    <location file="src/Csharp/docs/markdown/visual_studio_tutorial.md"/>
+  </compounddef>
+</doxygen>

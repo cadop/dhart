@@ -196,7 +196,7 @@ Figure 1.1: Meshinfo Internals</div></div>
 <p>Just a call back to the base functionality of nativeobject.</p>
 <dl class="section remark"><dt>Remarks</dt><dd>This shouldn't be called directly unless pointer is gauranteed to point to a valid mesh </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_mesh_info_8cs_source.html#l00092">92</a> of file <a class="el" href="_mesh_info_8cs_source.html">MeshInfo.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mesh_info_8cs_source.html#l00094">94</a> of file <a class="el" href="_mesh_info_8cs_source.html">MeshInfo.cs</a>.</p>
 
 </div>
 </div>
@@ -250,12 +250,31 @@ Figure 1.1: Meshinfo Internals</div></div>
 </dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_human_factors_1_1_exceptions_1_1_invalid_mesh_exception.html" title="The file passed was not an obj file, or was an invalid obj file.">HumanFactors.Exceptions.InvalidMeshException</a></td><td>The input indices and vertices result in an invalid mesh. </td></tr>
+    <tr><td class="paramname"><a class="el" href="class_human_factors_1_1_exceptions_1_1_invalid_mesh_exception.html" title="The file passed was not an obj file, or was an invalid obj file.">HumanFactors.Exceptions.InvalidMeshException</a></td><td>The input indices and vertices result in an invalid mesh.</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line">            <span class="comment">// These vertices/indices are directly taken from the plane OBJ in example models.</span></div>
+<div class="line">            <span class="comment">// Every 3 floats represent the x,y,z locations for a seperate vertex. It takes only</span></div>
+<div class="line">            <span class="comment">// 4 vertices to make a plane. </span></div>
+<div class="line">            <span class="keywordtype">float</span>[] vertices = { </div>
+<div class="line">                -20.079360961914062f, 0.0f, 18.940643310546875f,</div>
+<div class="line">                -20.079360961914062f, 0.0f, -18.842348098754883f,</div>
+<div class="line">                20.140586853027344f, 0.0f, 18.940643310546875f, </div>
+<div class="line">                20.140586853027344f, 0.0f, -18.842348098754883f </div>
+<div class="line">            };</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Every 3 ints represent the indexes of vertices for a seperate triangle. </span></div>
+<div class="line">            <span class="keywordtype">int</span>[] indices = { </div>
+<div class="line">                3, 1, 0, </div>
+<div class="line">                2, 3, 0 </div>
+<div class="line">            };</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Construct a new meshinfo instance with these elements</span></div>
+<div class="line">            <a class="code" href="namespace_human_factors.html">HumanFactors</a>.<a class="code" href="namespace_human_factors_1_1_geometry.html">Geometry</a>.<a class="code" href="class_human_factors_1_1_geometry_1_1_mesh_info.html">MeshInfo</a> Mesh = <span class="keyword">new</span> <a class="code" href="namespace_human_factors.html">HumanFactors</a>.<a class="code" href="namespace_human_factors_1_1_geometry.html">Geometry</a>.<a class="code" href="class_human_factors_1_1_geometry_1_1_mesh_info.html">MeshInfo</a>(indices, vertices);</div>
+</div><!-- fragment --></dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_mesh_info_8cs_source.html#l00111">111</a> of file <a class="el" href="_mesh_info_8cs_source.html">MeshInfo.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_mesh_info_8cs_source.html#l00117">117</a> of file <a class="el" href="_mesh_info_8cs_source.html">MeshInfo.cs</a>.</p>
 
 </div>
 </div>
@@ -365,7 +384,26 @@ Figure 1.1: Meshinfo Internals</div></div>
   </table>
   </dd>
 </dl>
-<dl class="section remark"><dt>Remarks</dt><dd>See the other overload for this function for use with <a class="el" href="class_human_factors_1_1_geometry_1_1_common_rotations.html" title="A collection of rotations that are frequently useful in HumanFactors.">CommonRotations</a>. </dd></dl>
+<dl class="section remark"><dt>Remarks</dt><dd>See the other overload for this function for use with <a class="el" href="class_human_factors_1_1_geometry_1_1_common_rotations.html" title="A collection of rotations that are frequently useful in HumanFactors.">CommonRotations</a>.</dd></dl>
+<dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line">            <span class="comment">// These vertices/indices are directly taken from the plane OBJ in example models.</span></div>
+<div class="line">            <span class="comment">// Every 3 floats represent the x,y,z locations for a seperate vertex. It takes only</span></div>
+<div class="line">            <span class="comment">// 4 vertices to make a plane. </span></div>
+<div class="line">            <span class="keywordtype">float</span>[] vertices = { </div>
+<div class="line">                -20.079360961914062f, 0.0f, 18.940643310546875f,</div>
+<div class="line">                -20.079360961914062f, 0.0f, -18.842348098754883f,</div>
+<div class="line">                20.140586853027344f, 0.0f, 18.940643310546875f, </div>
+<div class="line">                20.140586853027344f, 0.0f, -18.842348098754883f </div>
+<div class="line">            };</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Every 3 ints represent the indexes of vertices for a seperate triangle. </span></div>
+<div class="line">            <span class="keywordtype">int</span>[] indices = { </div>
+<div class="line">                3, 1, 0, </div>
+<div class="line">                2, 3, 0 </div>
+<div class="line">            };</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Construct a new meshinfo instance with these elements</span></div>
+<div class="line">            <a class="code" href="namespace_human_factors.html">HumanFactors</a>.<a class="code" href="namespace_human_factors_1_1_geometry.html">Geometry</a>.<a class="code" href="class_human_factors_1_1_geometry_1_1_mesh_info.html">MeshInfo</a> Mesh = <span class="keyword">new</span> <a class="code" href="namespace_human_factors.html">HumanFactors</a>.<a class="code" href="namespace_human_factors_1_1_geometry.html">Geometry</a>.<a class="code" href="class_human_factors_1_1_geometry_1_1_mesh_info.html">MeshInfo</a>(indices, vertices);</div>
+</div><!-- fragment --><div class="fragment"></div><!-- fragment --></dd></dl>
 
 </div>
 </div>
@@ -392,7 +430,30 @@ Figure 1.1: Meshinfo Internals</div></div>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_human_factors_1_1_geometry_1_1_common_rotations.html" title="A collection of rotations that are frequently useful in HumanFactors.">CommonRotations</a> for commonly used rotations such as Yup to Zup. </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_human_factors_1_1_geometry_1_1_common_rotations.html" title="A collection of rotations that are frequently useful in HumanFactors.">CommonRotations</a> for commonly used rotations such as Yup to Zup.</dd></dl>
+<dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line">            <span class="comment">// These vertices/indices are directly taken from the plane OBJ in example models.</span></div>
+<div class="line">            <span class="comment">// Every 3 floats represent the x,y,z locations for a seperate vertex. It takes only</span></div>
+<div class="line">            <span class="comment">// 4 vertices to make a plane. </span></div>
+<div class="line">            <span class="keywordtype">float</span>[] vertices = { </div>
+<div class="line">                -20.079360961914062f, 0.0f, 18.940643310546875f,</div>
+<div class="line">                -20.079360961914062f, 0.0f, -18.842348098754883f,</div>
+<div class="line">                20.140586853027344f, 0.0f, 18.940643310546875f, </div>
+<div class="line">                20.140586853027344f, 0.0f, -18.842348098754883f </div>
+<div class="line">            };</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Every 3 ints represent the indexes of vertices for a seperate triangle. </span></div>
+<div class="line">            <span class="keywordtype">int</span>[] indices = { </div>
+<div class="line">                3, 1, 0, </div>
+<div class="line">                2, 3, 0 </div>
+<div class="line">            };</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Construct a new meshinfo instance with these elements</span></div>
+<div class="line">            <a class="code" href="namespace_human_factors.html">HumanFactors</a>.<a class="code" href="namespace_human_factors_1_1_geometry.html">Geometry</a>.<a class="code" href="class_human_factors_1_1_geometry_1_1_mesh_info.html">MeshInfo</a> Mesh = <span class="keyword">new</span> <a class="code" href="namespace_human_factors.html">HumanFactors</a>.<a class="code" href="namespace_human_factors_1_1_geometry.html">Geometry</a>.<a class="code" href="class_human_factors_1_1_geometry_1_1_mesh_info.html">MeshInfo</a>(indices, vertices);</div>
+</div><!-- fragment --><div class="fragment"><div class="line"> </div>
+<div class="line">            <span class="comment">// Rotate the mesh using a common rotation to convert it from yup to zup</span></div>
+<div class="line">            Mesh.RotateMesh(CommonRotations.Yup_To_Zup);</div>
+<div class="line"> </div>
+</div><!-- fragment --></dd></dl>
 
 </div>
 </div>
@@ -400,6 +461,9 @@ Figure 1.1: Meshinfo Internals</div></div>
 <li>src/Csharp/packages/geometry/src/<a class="el" href="_mesh_info_8cs_source.html">MeshInfo.cs</a></li>
 </ul>
 </div><!-- contents -->
+<div class="ttc" id="anamespace_human_factors_html"><div class="ttname"><a href="namespace_human_factors.html">HumanFactors</a></div><div class="ttdoc">Automated analysis of the built environent</div><div class="ttdef"><b>Definition:</b> <a href="_common_types_8cs_source.html#l00008">CommonTypes.cs:9</a></div></div>
+<div class="ttc" id="aclass_human_factors_1_1_geometry_1_1_mesh_info_html"><div class="ttname"><a href="class_human_factors_1_1_geometry_1_1_mesh_info.html">HumanFactors.Geometry.MeshInfo</a></div><div class="ttdoc">A collection of vertices and indices representing geometry.</div><div class="ttdef"><b>Definition:</b> <a href="_mesh_info_8cs_source.html#l00046">MeshInfo.cs:47</a></div></div>
+<div class="ttc" id="anamespace_human_factors_1_1_geometry_html"><div class="ttname"><a href="namespace_human_factors_1_1_geometry.html">HumanFactors.Geometry</a></div><div class="ttdoc">Manipulate and load geometry from disk.</div><div class="ttdef"><b>Definition:</b> <a href="_common_rotations_8cs_source.html#l00003">CommonRotations.cs:4</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

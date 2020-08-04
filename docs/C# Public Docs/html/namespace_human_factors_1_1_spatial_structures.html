@@ -90,9 +90,9 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html">Graph</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A graph representing connections between points in space.  <a href="class_human_factors_1_1_spatial_structures_1_1_graph.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:struct_human_factors_1_1_spatial_structures_1_1_node"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_human_factors_1_1_spatial_structures.html#struct_human_factors_1_1_spatial_structures_1_1_node">Node</a></td></tr>
-<tr class="memdesc:struct_human_factors_1_1_spatial_structures_1_1_node"><td class="mdescLeft">&#160;</td><td class="mdescRight">A point in space.  <a href="namespace_human_factors_1_1_spatial_structures.html#struct_human_factors_1_1_spatial_structures_1_1_node">More...</a><br /></td></tr>
-<tr class="separator:struct_human_factors_1_1_spatial_structures_1_1_node"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_human_factors_1_1_spatial_structures_1_1_node.html">Node</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A point in space.  <a href="struct_human_factors_1_1_spatial_structures_1_1_node.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_spatial_structures_1_1_node_list.html">NodeList</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">An array of Nodes directly from a graph in unmanaged memory.  <a href="class_human_factors_1_1_spatial_structures_1_1_node_list.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -109,57 +109,7 @@ Enumerations</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Standard fundamental data structures for representing space used throughout <a class="el" href="namespace_human_factors.html" title="Automated analysis of the built environent">HumanFactors</a>. </p>
 <dl class="section remark"><dt>Remarks</dt><dd>The datatypes in the <a class="el" href="namespace_human_factors_1_1_spatial_structures.html" title="Standard fundamental data structures for representing space used throughout HumanFactors.">SpatialStructures</a> namespace are used throughout the <a class="el" href="namespace_human_factors.html" title="Automated analysis of the built environent">HumanFactors</a>. For example, the <a class="el" href="namespace_human_factors_1_1_graph_generator.html" title="Generate a graph of accessible space from a given start point.">GraphGenerator</a> and <a class="el" href="namespace_human_factors_1_1_visibility_graph.html" title="Evaluate visibility between a set of points.">VisibilityGraph</a> both produce a <a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html" title="A graph representing connections between points in space.">Graph</a> as output, allowing for the code to manage the <a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html" title="A graph representing connections between points in space.">Graph</a>'s internal CSR to be centralized in a single location. </dd></dl>
-</div><hr/><h2 class="groupheader">Class Documentation</h2>
-<a name="struct_human_factors_1_1_spatial_structures_1_1_node" id="struct_human_factors_1_1_spatial_structures_1_1_node"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#struct_human_factors_1_1_spatial_structures_1_1_node">&#9670;&nbsp;</a></span>HumanFactors::SpatialStructures::Node</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">struct HumanFactors::SpatialStructures::Node</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<div class="textblock"><p>A point in space. </p>
-<dl class="section remark"><dt>Remarks</dt><dd>Used internally by the graph generator. </dd></dl>
-</div><table class="fieldtable">
-<tr><th colspan="3">Class Members</th></tr>
-<tr><td class="fieldtype">
-<a id="a624ea209367282f5c06182e44ab34446"></a>int</td>
-<td class="fieldname">
-id</td>
-<td class="fielddoc">
-The ID of this node. </td></tr>
-<tr><td class="fieldtype">
-<a id="ac46e0068829054a3ea734507ce540a72"></a>short</td>
-<td class="fieldname">
-type</td>
-<td class="fielddoc">
-Unused. </td></tr>
-<tr><td class="fieldtype">
-<a id="adae488bbb66b00f49519f6ce2673d703"></a>float</td>
-<td class="fieldname">
-x</td>
-<td class="fielddoc">
-The X coordinate. </td></tr>
-<tr><td class="fieldtype">
-<a id="a5a0e5c46f6d26c26de77f5866cc643ae"></a>float</td>
-<td class="fieldname">
-y</td>
-<td class="fielddoc">
-The Y coordinate. </td></tr>
-<tr><td class="fieldtype">
-<a id="adcdc5f80adcf09d90c6d05ab95e95661"></a>float</td>
-<td class="fieldname">
-z</td>
-<td class="fielddoc">
-The Z coordinate </td></tr>
-</table>
-
-</div>
-</div>
-<h2 class="groupheader">Enumeration Type Documentation</h2>
+</div><h2 class="groupheader">Enumeration Type Documentation</h2>
 <a id="abd405fa41da0f9a771d547aa47b6e1a0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abd405fa41da0f9a771d547aa47b6e1a0">&#9670;&nbsp;</a></span>GraphEdgeAggregation</h2>
 
@@ -196,7 +146,7 @@ The Z coordinate </td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jul 30 2020 10:34:52 for Analysis by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Aug 4 2020 16:39:03 for Analysis by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

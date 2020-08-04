@@ -1,0 +1,224 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.18">
+  <compounddef id="_v_s_tutorial" kind="page">
+    <compoundname>VSTutorial</compoundname>
+    <title>Using the C# DLL in a Visual Studio Project</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="_v_s_tutorial_1autotoc_md50">
+<title>Intro</title>
+<para>In this tutorial we will cover the process of creating a new Visual Studio project that references the <ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref> C# interface. We will also walk through the steps of adding non-C# dependencies such as <computeroutput>HumanFactors.dll</computeroutput> to your project, as this is required for the produced program to run at all. After this tutorial is completed you should have a project that is able to reference <ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>&apos; C# interface and automatically copy it and its dependencies to the output folder when the project is built.</para>
+<sect2 id="_v_s_tutorial_1autotoc_md51">
+<title>Prerequisites</title>
+<para>Ensure that you have the following prerequisites before continuing.</para>
+<para><orderedlist>
+<listitem><para>The latest copy of the C# Human Factors Release</para>
+</listitem><listitem><para>A copy of Visual Studio. Version should not matter, but for this tutorial I will be using VisualStudio 2019</para>
+</listitem><listitem><para>The necessary prerequisites for developing C# projects in Visual Studio. <linebreak/>
+</para>
+</listitem></orderedlist>
+</para>
+</sect2>
+</sect1>
+<sect1 id="_v_s_tutorial_1autotoc_md52">
+<title>Creating the project</title>
+<para><image type="html" name="splash_screen.png" inline="yes">Visual Studio Splash Screen</image>
+ <image type="latex" name="splash_screen.png" inline="yes">Visual Studio Splash Screen</image>
+ <image type="rtf" name="splash_screen.png" inline="yes">Visual Studio Splash Screen</image>
+ <image type="docbook" name="splash_screen.png" inline="yes">Visual Studio Splash Screen</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>1.1</bold>: <emphasis>Visual studio splash screen. Circled: Create a new project button</emphasis></para>
+<para>First, Open Visual Studio. You should be greeted by the splash screen shown in Figure 1.1 or a similar screen if you&apos;re using a different version of Visual Studio. Click on the button titled <emphasis>Create a New Project</emphasis> to create a new project.</para>
+<para><image type="html" name="create_project_csharp.png" inline="yes">Visual Studio Create A New Project</image>
+ <image type="latex" name="create_project_csharp.png" inline="yes">Visual Studio Create A New Project</image>
+ <image type="rtf" name="create_project_csharp.png" inline="yes">Visual Studio Create A New Project</image>
+ <image type="docbook" name="create_project_csharp.png" inline="yes">Visual Studio Create A New Project</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>1.2</bold>: <emphasis>Create A New Project Menu</emphasis></para>
+<para>Upon clicking Create A New Project you should see the create a new project dialog line in . Note that the menu options shown here may be different than yours depending on what Visual Studio extensions you have installed. We want to create a new C# Library, so we want to filter these options to only include options for C#. Click on the <computeroutput>All Languages</computeroutput> drop down, then select <computeroutput>C#</computeroutput> as shown in Figure 1.2.</para>
+<para><image type="html" name="net_framework_project.png" inline="yes">.NetFramework </image>
+ <image type="latex" name="net_framework_project.png" inline="yes">.NetFramework </image>
+ <image type="rtf" name="net_framework_project.png" inline="yes">.NetFramework </image>
+ <image type="docbook" name="net_framework_project.png" inline="yes">.NetFramework </image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>1.3</bold>: <emphasis>Create a .NET Class Library</emphasis></para>
+<para>Once you&apos;ve clicked C# the menu should be filtered to only contain C# project types. Just as before, your list may not exactly match the one shown here depending on the Visual Studio extensions you have installed. The one we&apos;re looking for is the <bold>Class Library (.Net Framework)</bold> circled in Figure 1.3. If you do not see this option, scroll up or down to find it. Click <bold>Class Library (.Net Framework)</bold> to create the project.</para>
+<para><blockquote><para>NOTE: The processes described in this tutorial, will also work with other types of projects such as command line projects, or other executables. Feel free to use one of these other types of projects instead for this tutorial. </para>
+</blockquote></para>
+<para><image type="html" name="framework4.5.png" inline="yes">ConFigure Dialog</image>
+ <image type="latex" name="framework4.5.png" inline="yes">ConFigure Dialog</image>
+ <image type="rtf" name="framework4.5.png" inline="yes">ConFigure Dialog</image>
+ <image type="docbook" name="framework4.5.png" inline="yes">ConFigure Dialog</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>1.4</bold>: <emphasis>ConFigure Dialog</emphasis></para>
+<para>In the conFigure dialog, you&apos;re able to change the name, location and framework version of your assembly. For this demonstration we&apos;ll be using the version of the .net framework that HumanFactorsCSharp was built with, <bold>Framework version 4.5</bold>. Change the framework version to 4.5 by using the dropdown menu circled in cyan in Figure 1.4. We&apos;ll be leaving the rest of the options as their defaults for this example, but feel free to change the name and location of the project. Once you&apos;re ready, click the Create button circled in red at the bottom right corner of the dialog to create the project.</para>
+<para><image type="html" name="visual_studio_blank_project.png" inline="yes">Blank Project</image>
+ <image type="latex" name="visual_studio_blank_project.png" inline="yes">Blank Project</image>
+ <image type="rtf" name="visual_studio_blank_project.png" inline="yes">Blank Project</image>
+ <image type="docbook" name="visual_studio_blank_project.png" inline="yes">Blank Project</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>1.5</bold>: <emphasis>Blank Project</emphasis></para>
+<para>After pressing create, Visual Studio display a window for your new blank project. Now we&apos;re ready to move on to adding the DLL.</para>
+</sect1>
+<sect1 id="_v_s_tutorial_1autotoc_md53">
+<title>Adding A Reference To Human Factors</title>
+<para>Before we move on to writing the example program, we must first add <ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref> C# DLL as a reference.</para>
+<para><image type="html" name="right_click_class_library.png" inline="yes">Add Reference Menu </image>
+ <image type="latex" name="right_click_class_library.png" inline="yes">Add Reference Menu </image>
+ <image type="rtf" name="right_click_class_library.png" inline="yes">Add Reference Menu </image>
+ <image type="docbook" name="right_click_class_library.png" inline="yes">Add Reference Menu </image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>2.1</bold>: <emphasis>Menu to add a reference</emphasis></para>
+<para>In the <emphasis>Solution Explorer</emphasis> on the right hand side of the window, right click on the item with the name of your current solution, hover over the Add option, then click Reference as shown in Figure 2.1.</para>
+<para><image type="html" name="add_reference_dialog.png" inline="yes">Add Reference dialog </image>
+ <image type="latex" name="add_reference_dialog.png" inline="yes">Add Reference dialog </image>
+ <image type="rtf" name="add_reference_dialog.png" inline="yes">Add Reference dialog </image>
+ <image type="docbook" name="add_reference_dialog.png" inline="yes">Add Reference dialog </image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>2.2</bold>: <emphasis>Add Reference Dialog</emphasis></para>
+<para>A new window should open similar to the one shown in Figure 2.2, however the contents of the window will differ depending on what other C# projects you have previously built with Visual Studio, or DLLs you&apos;ve previously added references to in the past. Click the Browse button circled in red in Figure 2.2 at the bottom right corner of the dialog. This should open a file explorer window.</para>
+<para><image type="html" name="bin_of_humanfactors.png" inline="yes">Navigate to HumanFactors DLL</image>
+ <image type="latex" name="bin_of_humanfactors.png" inline="yes">Navigate to HumanFactors DLL</image>
+ <image type="rtf" name="bin_of_humanfactors.png" inline="yes">Navigate to HumanFactors DLL</image>
+ <image type="docbook" name="bin_of_humanfactors.png" inline="yes">Navigate to HumanFactors DLL</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>2.3</bold>: <emphasis>Human Factors Bin Folder</emphasis></para>
+<para>In the file explorer, navigate to the bin directory in which you&apos;ve installed Human Factors. Select all the files in the bin directory, then click the add button at the bottom right of the window to add them to the menu.</para>
+<para><image type="html" name="references_added.png" inline="yes">References Added</image>
+ <image type="latex" name="references_added.png" inline="yes">References Added</image>
+ <image type="rtf" name="references_added.png" inline="yes">References Added</image>
+ <image type="docbook" name="references_added.png" inline="yes">References Added</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>2.4</bold>: <emphasis>References added to the solution, indicated by a checkbox</emphasis></para>
+<para><image type="html" name="references_added.png" inline="yes">References Added</image>
+ <image type="latex" name="references_added.png" inline="yes">References Added</image>
+ <image type="rtf" name="references_added.png" inline="yes">References Added</image>
+ <image type="docbook" name="references_added.png" inline="yes">References Added</image>
+</para>
+<para>If you completed the last step successfully, then you should be able to see all of the added DLLS checked off in the Reference Manager like in Figure 2.4. From this list, only some of the items are C# DLLs, so only leave the deselect every one of the references except for <computeroutput>HumanFactorsCSharp.dll</computeroutput>, <computeroutput>System.Memory.dll</computeroutput>, <computeroutput>System.Runtime.CompilerServices.Unsafe.dll</computeroutput>, and <computeroutput>System.Buffers.dll</computeroutput>.</para>
+<para><image type="html" name="csharp_references.png" inline="yes">Subset of References</image>
+ <image type="latex" name="csharp_references.png" inline="yes">Subset of References</image>
+ <image type="rtf" name="csharp_references.png" inline="yes">Subset of References</image>
+ <image type="docbook" name="csharp_references.png" inline="yes">Subset of References</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>2.5</bold>: <emphasis>Only required references checked off</emphasis></para>
+<para>Once you&apos;ve unchecked the unneeded references, you can finish the process of add these references to the project by clicking the add button at the bottom right of the reference manager window. This will close the window and bring you back to your blank project.</para>
+<para><image type="html" name="references_tab_circled.png" inline="yes">References Dropdown Circled</image>
+ <image type="latex" name="references_tab_circled.png" inline="yes">References Dropdown Circled</image>
+ <image type="rtf" name="references_tab_circled.png" inline="yes">References Dropdown Circled</image>
+ <image type="docbook" name="references_tab_circled.png" inline="yes">References Dropdown Circled</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>2.6</bold>: <emphasis>References Tab Circled</emphasis></para>
+<para>For additional verification that this worked, click the dropdown arrow in the solution explorer next to References, circled in red in Figure 2.6.</para>
+<para><image type="html" name="highlighted_references.png" inline="yes">References Highlighted in dropdown</image>
+ <image type="latex" name="highlighted_references.png" inline="yes">References Highlighted in dropdown</image>
+ <image type="rtf" name="highlighted_references.png" inline="yes">References Highlighted in dropdown</image>
+ <image type="docbook" name="highlighted_references.png" inline="yes">References Highlighted in dropdown</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>2.7</bold>: <emphasis>New References in dropdown.</emphasis></para>
+<para>Upon clicking this drop down, all of the references to this project will be displayed. In this list you should be able to see the references we added earlier. These references are highlighted in Figure 2.7. If you can see these references in the list, then you have completed this step correctly, and are ready to move onto the next step of this tutorial.</para>
+</sect1>
+<sect1 id="_v_s_tutorial_1autotoc_md54">
+<title>Adding Native Dependencies</title>
+<para>We added the C# components of human factors to the project as libraries, however we also need to ensure that those DLLs that we unchecked are part of our project as well. While these libraries can&apos;t be loaded as dependencies like C# libraries can, they can still be managed by our project, and most importantly copied to the correct directories when the project is built. If the native libraries are not placed alongside the C# library, then <ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref> will not run once the project is built.</para>
+<para><image type="html" name="add_existing_item.png" inline="yes">Add Existing Item</image>
+ <image type="latex" name="add_existing_item.png" inline="yes">Add Existing Item</image>
+ <image type="rtf" name="add_existing_item.png" inline="yes">Add Existing Item</image>
+ <image type="docbook" name="add_existing_item.png" inline="yes">Add Existing Item</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>3.1</bold>: <emphasis>Add Existing Item in Dropdown</emphasis></para>
+<para>To add a file to your project, right click on the project in the solution explorer window, then hover over add and click <emphasis>Existing Item</emphasis> as shown in Figure 3.1.</para>
+<para>Upon clicking on the Add existing item option another file explorer window will open. Navigate back to the bin directory of humanfactors.</para>
+<para><image type="html" name="all_files.png" inline="yes">All Files</image>
+ <image type="latex" name="all_files.png" inline="yes">All Files</image>
+ <image type="rtf" name="all_files.png" inline="yes">All Files</image>
+ <image type="docbook" name="all_files.png" inline="yes">All Files</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>3.2</bold>: <emphasis>Circled: All Files option</emphasis></para>
+<para>Upon reaching the folder you may notice the folder is now empty. like in Figure 3.2 This is because by default, Visual Studio only displays visual C# files in this dialog. To see other file types, you must click the drop down at the bottom right of the window above the Add button and select <computeroutput>All Files (*.*)</computeroutput> circled in red.</para>
+<para><image type="html" name="non_csharp_depends.png" inline="yes">Non Csharp Depends</image>
+ <image type="latex" name="non_csharp_depends.png" inline="yes">Non Csharp Depends</image>
+ <image type="rtf" name="non_csharp_depends.png" inline="yes">Non Csharp Depends</image>
+ <image type="docbook" name="non_csharp_depends.png" inline="yes">Non Csharp Depends</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>3.3</bold>: <emphasis>Highlighted: Native DLLs to add to the project</emphasis></para>
+<para>This should disable the default filetype filter and allow you to see the DLLS like in Figure 3.3. Highlight all of the native DLLS that we didn&apos;t leave checked off in the previous section. These are highlighted in Figure 3.2. Once these are selected, press the <computeroutput>Add</computeroutput> button at the bottom right of the window to add them to the project.</para>
+<para><image type="html" name="sltn_explorer_deps.png" inline="yes">Solution Explorer Files</image>
+ <image type="latex" name="sltn_explorer_deps.png" inline="yes">Solution Explorer Files</image>
+ <image type="rtf" name="sltn_explorer_deps.png" inline="yes">Solution Explorer Files</image>
+ <image type="docbook" name="sltn_explorer_deps.png" inline="yes">Solution Explorer Files</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>3.4</bold>: <emphasis>Highlighted: Native DLLS</emphasis></para>
+<para>After the file explorer closes, go to the solution explorer and scroll down until you see the newly added DLLS highlighted in Figure 3.4.</para>
+<para><image type="html" name="sltn_explorer_deps.png" inline="yes">Native Dependencies in the project</image>
+ <image type="latex" name="sltn_explorer_deps.png" inline="yes">Native Dependencies in the project</image>
+ <image type="rtf" name="sltn_explorer_deps.png" inline="yes">Native Dependencies in the project</image>
+ <image type="docbook" name="sltn_explorer_deps.png" inline="yes">Native Dependencies in the project</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>3.5</bold>: <emphasis>Highlighted: Native DLLS in the project</emphasis></para>
+<para>Select all of these DLLS and right click on them then click Properties circled in red in Figure 3.5. This may not have an immediately visible effect, like in the case of my Visual Studio configuration here. If you, like me, have the properties pane, resize it by dragging it&apos;s border upwards. The position of this pane will differ between versions of Visual Studio and personal preferences.</para>
+<para><image type="html" name="properties_pane.png" inline="yes">Solution Explorer Files</image>
+ <image type="latex" name="properties_pane.png" inline="yes">Solution Explorer Files</image>
+ <image type="rtf" name="properties_pane.png" inline="yes">Solution Explorer Files</image>
+ <image type="docbook" name="properties_pane.png" inline="yes">Solution Explorer Files</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>3.6</bold>: <emphasis>Properties Pane</emphasis></para>
+<para>Once the properties pane is visible (outlined in cyan in Figure 3.6) click on the item that says <computeroutput>Do not copy</computeroutput>, circled in red in the properties window.</para>
+<para><image type="html" name="copy_if_newer.png" inline="yes">Changing Do not copy to Copy If Newer</image>
+ <image type="latex" name="copy_if_newer.png" inline="yes">Changing Do not copy to Copy If Newer</image>
+ <image type="rtf" name="copy_if_newer.png" inline="yes">Changing Do not copy to Copy If Newer</image>
+ <image type="docbook" name="copy_if_newer.png" inline="yes">Changing Do not copy to Copy If Newer</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>3.7</bold>: <emphasis>Changing Do Not Copy to Copy If Newer</emphasis></para>
+<para>Once you click on <computeroutput>Do Not Copy</computeroutput> you should see a drop down appear to the right. Click on the downward arrow to expand it then select <computeroutput>Copy If Newer</computeroutput> like in Figure 3.7. Upon clicking this the option should also change to <computeroutput>Copy if Newer</computeroutput>. Now upon building the program, these files should be copied to the output directory alongside your library and all of the C# references.</para>
+</sect1>
+<sect1 id="_v_s_tutorial_1autotoc_md55">
+<title>Testing the output</title>
+<para>With everything set up correctly, we should now be able to demonstrate that this process works. The goal is to ensure Visual Studio can see the referenced C# code, and that it copies all of the dependencies to the output directory once the project is built.</para>
+<para>under the line <computeroutput>using System.Threading.Tasks</computeroutput> enter the following using declarations.</para>
+<para><programlisting><codeline><highlight class="normal">using<sp/>HumanFactors;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>Humanfactors.SpatialStructures;</highlight></codeline>
+</programlisting></para>
+<para>Then in the body of the default class <computeroutput>Class 1</computeroutput> Enter the following line.</para>
+<para><programlisting><codeline><highlight class="normal">Graph<sp/>G<sp/>=<sp/>new<sp/>Graph();</highlight></codeline>
+</programlisting></para>
+<para><image type="html" name="graph_code.png" inline="yes">Build Solution</image>
+ <image type="latex" name="graph_code.png" inline="yes">Build Solution</image>
+ <image type="rtf" name="graph_code.png" inline="yes">Build Solution</image>
+ <image type="docbook" name="graph_code.png" inline="yes">Build Solution</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>4.1</bold>: <emphasis>Added Example Code</emphasis></para>
+<para>Once you&apos;ve done this your code should look like Figure 4.1</para>
+<para><image type="html" name="build_solution.png" inline="yes">Build Solution</image>
+ <image type="latex" name="build_solution.png" inline="yes">Build Solution</image>
+ <image type="rtf" name="build_solution.png" inline="yes">Build Solution</image>
+ <image type="docbook" name="build_solution.png" inline="yes">Build Solution</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>4.2</bold>: <emphasis>Building the project</emphasis></para>
+<para>After verifying that your code matches Figure 4.1, In the top bar of Visual Studio click Build and then click Build Solution. This will compile the C# code we have written into a DLL and put it in the output directory alongside all of the required dependencies. We will now navigate to the output folder to ensure this is true.</para>
+<para><image type="html" name="open_in_file_explorer.png" inline="yes">Open in FileExplorer</image>
+ <image type="latex" name="open_in_file_explorer.png" inline="yes">Open in FileExplorer</image>
+ <image type="rtf" name="open_in_file_explorer.png" inline="yes">Open in FileExplorer</image>
+ <image type="docbook" name="open_in_file_explorer.png" inline="yes">Open in FileExplorer</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>4.3</bold> : <emphasis>Open in file explorer</emphasis></para>
+<para>Right click on your project in the solution explorer, and click open in File Explorer.</para>
+<para><image type="html" name="solution_in_file_explorer.png" inline="yes">Solution in FileExplorer</image>
+ <image type="latex" name="solution_in_file_explorer.png" inline="yes">Solution in FileExplorer</image>
+ <image type="rtf" name="solution_in_file_explorer.png" inline="yes">Solution in FileExplorer</image>
+ <image type="docbook" name="solution_in_file_explorer.png" inline="yes">Solution in FileExplorer</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>4.4</bold> : <emphasis>Solution in file explorer</emphasis></para>
+<para>This should open an instance of the file explorer at the root of your project like in Figure 4.4. From here, navigate into the <computeroutput>bin</computeroutput> then <computeroutput>Debug</computeroutput> folders.</para>
+<para><image type="html" name="bin_debug.png" inline="yes">Contents of the debug folder</image>
+ <image type="latex" name="bin_debug.png" inline="yes">Contents of the debug folder</image>
+ <image type="rtf" name="bin_debug.png" inline="yes">Contents of the debug folder</image>
+ <image type="docbook" name="bin_debug.png" inline="yes">Contents of the debug folder</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>4.5</bold> : <emphasis>Contents of the Debug Folder</emphasis></para>
+<para>Once there, you should be looking at the output of your program. Verify that all of the C# and non-C# DLLs that we&apos;ve added have been copied over successfully. If your folder&apos;s contents match that of Figure 4.5 then you&apos;ve successfully completed this tutorial. </para>
+</sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>
