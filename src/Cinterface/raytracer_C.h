@@ -1,3 +1,10 @@
+/*!
+	\file		raytracer_C.h
+	\brief		C Interface header file for Raytracer functionality
+
+	\author		TBA
+	\date		04 Aug 2020
+*/
 #pragma once
 #include <vector>
 #include <array>
