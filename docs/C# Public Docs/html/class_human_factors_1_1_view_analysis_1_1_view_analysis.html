@@ -142,8 +142,16 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>An array of equally distributed points on a unit sphere.</dd></dl>
-<dl class="section warning"><dt>Warning</dt><dd>The number of rays casted may not exactly match ray_count depending on the provided field of view restrictions.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>This is the same function used internally by view analysis to equally distribute ray directions. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>The number of rays casted may not exactly match <code>ray_count</code> depending on the provided field of view restrictions.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This is the same function used internally by view analysis to equally distribute ray directions.</dd></dl>
+<dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line"> </div>
+<div class="line">            <span class="comment">// Equally distribute 10 rays</span></div>
+<div class="line">            var results = <a class="code" href="namespace_human_factors.html">HumanFactors</a>.<a class="code" href="namespace_human_factors_1_1_view_analysis.html">ViewAnalysis</a>.<a class="code" href="class_human_factors_1_1_view_analysis_1_1_view_analysis.html">ViewAnalysis</a>.<a class="code" href="class_human_factors_1_1_view_analysis_1_1_view_analysis.html#abc1d51bdf752a4fa36af012e90cc8acb">SphericallyDistributeRays</a>(10);</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Print results</span></div>
+<div class="line">            Debug.WriteLine(results);</div>
+<div class="line"> </div>
+</div><!-- fragment --><code>[0, -1, 0, -0.2650034, -0.8181818, . . . -0.7649929, 0.4396428, 0.8181818, 0.3705303]</code> </dd></dl>
 
 </div>
 </div>
@@ -226,7 +234,41 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>An ordered array of floats corresponding to the aggregated score for each node in nodes.</dd></dl>
 <p>The rays for each node will be casted in parallel using all available cores on the host's machine.</p>
-<dl class="section remark"><dt>Remarks</dt><dd>This function is much lighter in memory than <a class="el" href="class_human_factors_1_1_view_analysis_1_1_view_analysis.html#aec86f6a5bbc392de04357465994bab39">ViewAnalysisStandard</a> since all operations are done in place on single floats. Use this as a faster alternative if the scores of nodes are all that's needed. </dd></dl>
+<dl class="section remark"><dt>Remarks</dt><dd>This function is much lighter in memory than <a class="el" href="class_human_factors_1_1_view_analysis_1_1_view_analysis.html#aec86f6a5bbc392de04357465994bab39">ViewAnalysisStandard</a> since all operations are done in place on single floats. Use this as a faster alternative if the scores of nodes are all that's needed.</dd></dl>
+<dl class="section user"><dt>Examples</dt><dd></dd></dl>
+<div class="fragment"><div class="line">            <span class="comment">// Load the plane .obj from example models, and rotate it from y-up to z-up</span></div>
+<div class="line">            <span class="keywordtype">string</span> mesh_path = <span class="stringliteral">&quot;ExampleModels/plane.obj&quot;</span>;</div>
+<div class="line">            MeshInfo OBJ = OBJLoader.LoadOBJ(mesh_path, CommonRotations.Zup_To_Yup);</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Create a BVH from the plane</span></div>
+<div class="line">            EmbreeBVH bvh = <span class="keyword">new</span> EmbreeBVH(OBJ);</div>
+<div class="line"> </div>
+<div class="line">            Vector3D Point = <span class="keyword">new</span> Vector3D(0, 0, 0);</div>
+<div class="line">            Vector3D[] nodes = { Point };</div>
+<div class="line">            <span class="keywordtype">int</span> num_rays = 1000;</div>
+<div class="line"> </div>
+</div><!-- fragment --><div class="fragment"><div class="line"> </div>
+<div class="line">            <span class="comment">// Define the nodes to evaluate</span></div>
+<div class="line">            Vector3D[] nodes = {</div>
+<div class="line">                <span class="keyword">new</span> Vector3D(0,0,1),</div>
+<div class="line">                <span class="keyword">new</span> Vector3D(0,0,2),</div>
+<div class="line">                <span class="keyword">new</span> Vector3D(0,0,3)</div>
+<div class="line">            };</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Set maximum number of rays, then conduct analysis</span></div>
+<div class="line">            <span class="keywordtype">int</span> num_rays = 1000;</div>
+<div class="line">            ManagedFloatArray results = <a class="code" href="namespace_human_factors.html">HumanFactors</a>.<a class="code" href="namespace_human_factors_1_1_view_analysis.html">ViewAnalysis</a>.<a class="code" href="class_human_factors_1_1_view_analysis_1_1_view_analysis.html">ViewAnalysis</a>.<a class="code" href="class_human_factors_1_1_view_analysis_1_1_view_analysis.html#a1cdb30c740e2efd5a1a01ef633c734ac">ViewAnalysisAggregate</a>(</div>
+<div class="line">                bvh,</div>
+<div class="line">                nodes,</div>
+<div class="line">                num_rays,</div>
+<div class="line">                type:<a class="code" href="namespace_human_factors_1_1_view_analysis.html#ae24b8f5d9783a270e51183ff2eca765c">ViewAggregateType</a>.COUNT</div>
+<div class="line">            );</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Print results. The number of rays should get lower with each element, since each node</span></div>
+<div class="line">            <span class="comment">// is further away from the plane than the last</span></div>
+<div class="line">            Debug.WriteLine(results);</div>
+<div class="line"> </div>
+</div><!-- fragment --><p><code>[480, 451, 428]</code> </p>
 
 </div>
 </div>
@@ -303,7 +345,57 @@ Static Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>A <code>nodes.Count()</code> by <code>num_rays</code> 2 dimensional array of results for each node and each ray casted. For example, every ray for node one is located at row 1, and the results for every ray casted from node 2 are located at row 2.</dd></dl>
 <p>The rays for each node will be casted in parallel using all available cores on the host's machine.</p>
 <dl class="section warning"><dt>Warning</dt><dd>The number of rays casted may not exactly match ray_count depending on the provided field of view restrictions.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>The hitpoints for each ray in the returned array can be determined using the directions <a class="el" href="class_human_factors_1_1_view_analysis_1_1_view_analysis.html#abc1d51bdf752a4fa36af012e90cc8acb" title="Distribute a set of points equally on a unit sphere.">SphericallyDistributeRays()</a> with the same fov and ray_count parameters. Failures to intersect geometry will return -1. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The hitpoints for each ray in the returned array can be determined using the directions <a class="el" href="class_human_factors_1_1_view_analysis_1_1_view_analysis.html#abc1d51bdf752a4fa36af012e90cc8acb" title="Distribute a set of points equally on a unit sphere.">SphericallyDistributeRays()</a> with the same fov and ray_count parameters. Failures to intersect geometry will return -1.</dd></dl>
+<dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line">            <span class="comment">// Load the plane .obj from example models, and rotate it from y-up to z-up</span></div>
+<div class="line">            <span class="keywordtype">string</span> mesh_path = <span class="stringliteral">&quot;ExampleModels/plane.obj&quot;</span>;</div>
+<div class="line">            MeshInfo OBJ = OBJLoader.LoadOBJ(mesh_path, CommonRotations.Zup_To_Yup);</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Create a BVH from the plane</span></div>
+<div class="line">            EmbreeBVH bvh = <span class="keyword">new</span> EmbreeBVH(OBJ);</div>
+<div class="line"> </div>
+<div class="line">            Vector3D Point = <span class="keyword">new</span> Vector3D(0, 0, 0);</div>
+<div class="line">            Vector3D[] nodes = { Point };</div>
+<div class="line">            <span class="keywordtype">int</span> num_rays = 1000;</div>
+<div class="line"> </div>
+</div><!-- fragment --><div class="fragment"><div class="line">            <span class="comment">// Define the nodes to evaluate</span></div>
+<div class="line">            Vector3D[] nodes = {</div>
+<div class="line">                <span class="keyword">new</span> Vector3D(0,0,1),</div>
+<div class="line">                <span class="keyword">new</span> Vector3D(1,1,1),</div>
+<div class="line">                <span class="keyword">new</span> Vector3D(0,0,3)</div>
+<div class="line">            };</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Set maximum number of rays, then conduct analysis</span></div>
+<div class="line">            <span class="keywordtype">int</span> num_rays = 10;</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Conduct view analysis and get all the results</span></div>
+<div class="line">            var results = <a class="code" href="namespace_human_factors.html">HumanFactors</a>.<a class="code" href="namespace_human_factors_1_1_view_analysis.html">ViewAnalysis</a>.<a class="code" href="class_human_factors_1_1_view_analysis_1_1_view_analysis.html">ViewAnalysis</a>.<a class="code" href="class_human_factors_1_1_view_analysis_1_1_view_analysis.html#aec86f6a5bbc392de04357465994bab39">ViewAnalysisStandard</a>(bvh, nodes, num_rays);</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Iterate through every node and print the results</span></div>
+<div class="line">            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> node_index = 0; node_index &lt; nodes.Length; node_index++)</div>
+<div class="line">            {</div>
+<div class="line">                var node = nodes[node_index];</div>
+<div class="line">                <span class="keywordtype">string</span> print = node.ToString() + <span class="stringliteral">&quot;: (&quot;</span>;</div>
+<div class="line">                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> ray_index = 0; ray_index &lt; num_rays; ray_index++)</div>
+<div class="line">                {</div>
+<div class="line">                    <span class="comment">// Get the result for the current node at the current ray</span></div>
+<div class="line">                    var result = results[node_index][ray_index];</div>
+<div class="line">                    print += result.ToString();</div>
+<div class="line"> </div>
+<div class="line">                    <span class="comment">// Add a comma if it isn&#39;t the last element</span></div>
+<div class="line">                    <span class="keywordflow">if</span> (ray_index != num_rays - 1)</div>
+<div class="line">                        print += <span class="stringliteral">&quot;, &quot;</span>;</div>
+<div class="line">                    <span class="keywordflow">else</span></div>
+<div class="line">                        print += <span class="stringliteral">&quot;)&quot;</span>;</div>
+<div class="line">                }</div>
+<div class="line">                <span class="comment">// Print the line</span></div>
+<div class="line">                Debug.WriteLine(print);</div>
+<div class="line">                    </div>
+<div class="line">            }</div>
+<div class="line"> </div>
+</div><!-- fragment --> <div class="fragment"><div class="line">(0, 0, 1): ([-1, -1], [5.292, 0], [-1, -1], [-1, -1], [3.098, 0], [5.407, 0], [13.07, 0], [-1, -1], [3.529, 0], [-1, -1])</div>
+<div class="line">(1, 1, 1): ([-1, -1], [5.292, 0], [-1, -1], [-1, -1], [3.098, 0], [5.407, 0], [13.07, 0], [-1, -1], [3.529, 0], [-1, -1])</div>
+<div class="line">(0, 0, 3): ([-1, -1], [9.211, 0], [-1, -1], [-1, -1], [5.394, 0], [9.413, 0], [-1, -1], [-1, -1], [6.144, 0], [-1, -1])</div>
+</div><!-- fragment --> </dd></dl>
 
 </div>
 </div>
@@ -311,9 +403,16 @@ Static Public Member Functions</h2></td></tr>
 <li>src/Csharp/packages/viewanalysis/src/ViewAnalysis.cs</li>
 </ul>
 </div><!-- contents -->
+<div class="ttc" id="aclass_human_factors_1_1_view_analysis_1_1_view_analysis_html_a1cdb30c740e2efd5a1a01ef633c734ac"><div class="ttname"><a href="class_human_factors_1_1_view_analysis_1_1_view_analysis.html#a1cdb30c740e2efd5a1a01ef633c734ac">HumanFactors.ViewAnalysis.ViewAnalysis.ViewAnalysisAggregate</a></div><div class="ttdeci">static ManagedFloatArray ViewAnalysisAggregate(EmbreeBVH bvh, IEnumerable&lt; Vector3D &gt; nodes, int ray_count, float upward_fov=50.0f, float downward_fov=70.0f, float height=1.7f, ViewAggregateType type=ViewAggregateType.AVERAGE)</div><div class="ttdoc">Conduct view analysis and aggregate the results for each node.</div></div>
+<div class="ttc" id="aclass_human_factors_1_1_view_analysis_1_1_view_analysis_html_abc1d51bdf752a4fa36af012e90cc8acb"><div class="ttname"><a href="class_human_factors_1_1_view_analysis_1_1_view_analysis.html#abc1d51bdf752a4fa36af012e90cc8acb">HumanFactors.ViewAnalysis.ViewAnalysis.SphericallyDistributeRays</a></div><div class="ttdeci">static DirectionArray SphericallyDistributeRays(int num_rays, float upward_fov=50f, float downward_fov=70f)</div><div class="ttdoc">Distribute a set of points equally on a unit sphere.</div></div>
+<div class="ttc" id="anamespace_human_factors_1_1_view_analysis_html_ae24b8f5d9783a270e51183ff2eca765c"><div class="ttname"><a href="namespace_human_factors_1_1_view_analysis.html#ae24b8f5d9783a270e51183ff2eca765c">HumanFactors.ViewAnalysis.ViewAggregateType</a></div><div class="ttdeci">ViewAggregateType</div><div class="ttdoc">The type of aggregation method to use for ViewAnalysis.ViewAnalysisAggregate.</div><div class="ttdef"><b>Definition:</b> ViewAnalysis.cs:29</div></div>
+<div class="ttc" id="anamespace_human_factors_html"><div class="ttname"><a href="namespace_human_factors.html">HumanFactors</a></div><div class="ttdoc">Automated analysis of the built environent</div><div class="ttdef"><b>Definition:</b> CommonTypes.cs:9</div></div>
+<div class="ttc" id="aclass_human_factors_1_1_view_analysis_1_1_view_analysis_html"><div class="ttname"><a href="class_human_factors_1_1_view_analysis_1_1_view_analysis.html">HumanFactors.ViewAnalysis.ViewAnalysis</a></div><div class="ttdoc">Functions for analyzing the view of an observer in an environment at human scale.</div><div class="ttdef"><b>Definition:</b> ViewAnalysis.cs:52</div></div>
+<div class="ttc" id="aclass_human_factors_1_1_view_analysis_1_1_view_analysis_html_aec86f6a5bbc392de04357465994bab39"><div class="ttname"><a href="class_human_factors_1_1_view_analysis_1_1_view_analysis.html#aec86f6a5bbc392de04357465994bab39">HumanFactors.ViewAnalysis.ViewAnalysis.ViewAnalysisStandard</a></div><div class="ttdeci">static ResultArray ViewAnalysisStandard(EmbreeBVH bvh, IEnumerable&lt; Vector3D &gt; nodes, int ray_count, float upward_fov=50.0f, float downward_fov=70.0f, float height=1.7f)</div><div class="ttdoc">Conduct View Analysis and access the results of every ray casted for every node.</div></div>
+<div class="ttc" id="anamespace_human_factors_1_1_view_analysis_html"><div class="ttname"><a href="namespace_human_factors_1_1_view_analysis.html">HumanFactors.ViewAnalysis</a></div><div class="ttdoc">Analyze the view from from points in the environment.</div><div class="ttdef"><b>Definition:</b> ViewAnalysis.cs:24</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jul 30 2020 10:34:52 for Analysis by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Aug 4 2020 16:39:03 for Analysis by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

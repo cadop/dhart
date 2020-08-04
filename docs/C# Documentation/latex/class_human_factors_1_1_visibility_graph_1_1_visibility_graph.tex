@@ -56,11 +56,42 @@ For the sake of this function, an undirected visibility graph describes a graph 
 Graphs output by this function C\+A\+N\+N\+OT be modified.
 \end{DoxyWarning}
 \begin{DoxySeeAlso}{See also}
-\mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a45a2d5b16092f8389210dc47f722a539}{Spatial\+Structures.\+Graph.\+Aggregate\+Edge\+Costs}} for a way to easily summarize the results of a visibility graph. 
+\mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a45a2d5b16092f8389210dc47f722a539}{Spatial\+Structures.\+Graph.\+Aggregate\+Edge\+Costs}} for a way to easily summarize the results of a visibility graph.
 \end{DoxySeeAlso}
+\begin{DoxyParagraph}{Example}
 
+\end{DoxyParagraph}
 
-Definition at line 66 of file Visibility\+Graph.\+cs.
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{            \textcolor{comment}{// Load the example plane and convert it to z-\/up}}
+\DoxyCodeLine{            MeshInfo MI = (OBJLoader.LoadOBJ(\textcolor{stringliteral}{"ExampleModels/plane.obj"}, CommonRotations.Yup\_To\_Zup));}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Construct a BVH from this mesh}}
+\DoxyCodeLine{            EmbreeBVH bvh = \textcolor{keyword}{new} EmbreeBVH(MI);}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Define all nodes and put them into an array,}}
+\DoxyCodeLine{            Vector3D Point1 = \textcolor{keyword}{new} Vector3D(0, 0, 0);}
+\DoxyCodeLine{            Vector3D Point2 = \textcolor{keyword}{new} Vector3D(0, 1, 0);}
+\DoxyCodeLine{            Vector3D Point3 = \textcolor{keyword}{new} Vector3D(1, 0, 0);}
+\DoxyCodeLine{            Vector3D Point4 = \textcolor{keyword}{new} Vector3D(1, 0, -\/4); \textcolor{comment}{// Node 4 is beneath the plane so it should have no connections}}
+\DoxyCodeLine{            Vector3D[] nodes = \{ Point1, Point2, Point3, Point4 \};}
+\end{DoxyCodeInclude}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{            }
+\DoxyCodeLine{            \textcolor{comment}{// Create a visibility from every node to every other node}}
+\DoxyCodeLine{            Graph G = \mbox{\hyperlink{namespace_human_factors}{HumanFactors}}.\mbox{\hyperlink{namespace_human_factors_1_1_visibility_graph}{VisibilityGraph}}.\mbox{\hyperlink{class_human_factors_1_1_visibility_graph_1_1_visibility_graph}{VisibilityGraph}}.\mbox{\hyperlink{class_human_factors_1_1_visibility_graph_1_1_visibility_graph_a6b9e6d59435543aebc5a42beea7e916d}{GenerateAllToAll}}(bvh, nodes);}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Aggregate the graph's edges to get the total distance from this node to all of its edges}}
+\DoxyCodeLine{            var results = G.AggregateEdgeCosts(\mbox{\hyperlink{namespace_human_factors_1_1_spatial_structures_abd405fa41da0f9a771d547aa47b6e1a0}{GraphEdgeAggregation}}.SUM);}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Print output}}
+\DoxyCodeLine{            Debug.WriteLine(results);}
+\DoxyCodeLine{}
+\end{DoxyCodeInclude}
+{\ttfamily \mbox{[}2, 2.\+414214, 2.\+414214, 0\mbox{]}} 
+
+Definition at line 73 of file Visibility\+Graph.\+cs.
 
 
 
@@ -97,11 +128,45 @@ No nodes in {\ttfamily group\+\_\+a} also exist in {\ttfamily group\+\_\+b} and 
 Any nodes that clip into geometry when offset by {\ttfamily height} will not be considered for any edge connections.
 \end{DoxyAttention}
 \begin{DoxySeeAlso}{See also}
-\mbox{\hyperlink{class_human_factors_1_1_visibility_graph_1_1_visibility_graph_a6b9e6d59435543aebc5a42beea7e916d}{Generate\+All\+To\+All}} to generate a graph from every node to every other node. 
+\mbox{\hyperlink{class_human_factors_1_1_visibility_graph_1_1_visibility_graph_a6b9e6d59435543aebc5a42beea7e916d}{Generate\+All\+To\+All}} to generate a graph from every node to every other node.
 \end{DoxySeeAlso}
+\begin{DoxyParagraph}{Example}
 
+\end{DoxyParagraph}
 
-Definition at line 96 of file Visibility\+Graph.\+cs.
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{            \textcolor{comment}{// Load the example plane and convert it to z-\/up}}
+\DoxyCodeLine{            MeshInfo MI = (OBJLoader.LoadOBJ(\textcolor{stringliteral}{"ExampleModels/plane.obj"}, CommonRotations.Yup\_To\_Zup));}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Construct a BVH from this mesh}}
+\DoxyCodeLine{            EmbreeBVH bvh = \textcolor{keyword}{new} EmbreeBVH(MI);}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Define all nodes and put them into an array,}}
+\DoxyCodeLine{            Vector3D Point1 = \textcolor{keyword}{new} Vector3D(0, 0, 0);}
+\DoxyCodeLine{            Vector3D Point2 = \textcolor{keyword}{new} Vector3D(0, 1, 0);}
+\DoxyCodeLine{            Vector3D Point3 = \textcolor{keyword}{new} Vector3D(1, 0, 0);}
+\DoxyCodeLine{            Vector3D Point4 = \textcolor{keyword}{new} Vector3D(1, 0, -\/4); \textcolor{comment}{// Node 4 is beneath the plane so it should have no connections}}
+\DoxyCodeLine{            Vector3D[] nodes = \{ Point1, Point2, Point3, Point4 \};}
+\end{DoxyCodeInclude}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Define two groups of nodes}}
+\DoxyCodeLine{            Vector3D[] group\_a = \{ Point1, Point2 \};}
+\DoxyCodeLine{            Vector3D[] group\_b = \{ Point3, Point4 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Generate a visibility graph from group A to group B}}
+\DoxyCodeLine{            Graph G = \mbox{\hyperlink{namespace_human_factors}{HumanFactors}}.\mbox{\hyperlink{namespace_human_factors_1_1_visibility_graph}{VisibilityGraph}}.\mbox{\hyperlink{class_human_factors_1_1_visibility_graph_1_1_visibility_graph}{VisibilityGraph}}.\mbox{\hyperlink{class_human_factors_1_1_visibility_graph_1_1_visibility_graph_aebd2e16352a8e5a9920dffe809ed911d}{GenerateGroupToGroup}}(bvh, group\_a, group\_b);}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Print the results}}
+\DoxyCodeLine{            var results = G.AggregateEdgeCosts(\mbox{\hyperlink{namespace_human_factors_1_1_spatial_structures_abd405fa41da0f9a771d547aa47b6e1a0}{GraphEdgeAggregation}}.SUM);}
+\DoxyCodeLine{}
+\DoxyCodeLine{            Debug.WriteLine(\textcolor{stringliteral}{"[\{0\}, \{1\}, \{2\}, \{3\}]"}, results[0], results[1], results[2], results[3]);}
+\DoxyCodeLine{}
+\end{DoxyCodeInclude}
+ {\ttfamily 1, 1.\+414214, 0, 0} 
+
+Definition at line 111 of file Visibility\+Graph.\+cs.
 
 
 
