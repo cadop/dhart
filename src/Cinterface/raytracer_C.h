@@ -4,6 +4,104 @@
 
 	\author		TBA
 	\date		04 Aug 2020
+
+	\details
+	All examples for each function assume the following code has been run.
+
+	This code block shows how to load the HumanFactors DLL explicitly --
+	you should only run this code once in your program.
+
+	- Load the DLLs, in the order specified in the example below
+	- Obtain pointers to the functions you want to call in the HumanFactors DLL
+	- Call the desired functions via the function pointers
+	- When finished with the HumanFactors DLL, free all DLLs loaded (in reverse order of loading)
+
+	\code
+		// Requires #include <Windows.h>
+
+		// Load the following DLLs in this order:
+		// tbb.dll, embree3.dll, HumanFactors.dll
+		// If the DLLs are not loaded in this order,
+		// HumanFactors.dll will fail to load!
+
+		// Provide a relative path to the DLLs.
+		const wchar_t path_tbb[27] = L"..\\x64-Release\\bin\\tbb.dll";
+		const wchar_t path_embree3[31] = L"..\\x64-Release\\bin\\embree3.dll";
+		const wchar_t path_humanfactors[36] = L"..\\x64-Release\\bin\\HumanFactors.dll";
+
+		//
+		//	Load tbb.dll first
+		//
+		HINSTANCE dll_tbb = LoadLibrary(path_tbb);
+
+		if (dll_tbb == nullptr) {
+			std::cerr << "Unable to load " << "tbb.dll" << std::endl;
+			exit(EXIT_FAILURE);
+		}
+		else {
+			std::cout << "Loaded successfully: " << "tbb.dll" << std::endl;
+		}
+
+		//
+		//	embree3.dll depends on tbb.dll
+		//
+		HINSTANCE dll_embree3 = LoadLibrary(path_embree3);
+
+		if (dll_embree3 == nullptr) {
+			std::cerr << "Unable to load " << "embree3.dll" << std::endl;
+
+			FreeLibrary(dll_tbb);
+			exit(EXIT_FAILURE);
+		}
+		else {
+			std::cout << "Loaded successfully: " << "embree3.dll" << std::endl;
+		}
+
+		//
+		//	HumanFactors.dll depends on both tbb.dll and embree3.dll.
+		//
+		HINSTANCE dll_hf = LoadLibrary(path_humanfactors);
+
+		if (dll_hf == nullptr) {
+			std::cerr << "Unable to load " << "HumanFactors.dll" << std::endl;
+
+			FreeLibrary(dll_embree3);
+			FreeLibrary(dll_tbb);
+
+			exit(EXIT_FAILURE);
+		}
+		else {
+			std::cout << "Loaded successfully: " << "HumanFactors.dll" << std::endl;
+
+			//
+			//	At this point, you must obtain pointers to the functions you want to use/call
+			//	within the HumanFactors DLL. Each example will outline the process
+			//	for doing this.
+			//
+			//	After obtaining the pointers to the functions you want to call,
+			//	you are now ready to call the desired functions and run code for your example.
+			//
+
+			std::this_thread::sleep_for(std::chrono::milliseconds(250));
+
+			//
+			//	Free libraries in order of creation.
+			//	Only free the libraries once you are sure you are done using the functions within them,
+			//	or else you will have to load them again.
+			//
+			if (FreeLibrary(dll_hf)) {
+				std::cout << "Freed successfully: " << "HumanFactors.dll" << std::endl;
+			}
+
+			if (FreeLibrary(dll_embree3)) {
+				std::cout << "Freed successfully: " << "embree3.dll" << std::endl;
+			}
+
+			if (FreeLibrary(dll_tbb)) {
+				std::cout << "Freed successfully: " << "tbb.dll" << std::endl;
+			}
+		}
+	\endcode
 */
 #pragma once
 
@@ -11,6 +109,7 @@
 #include <array>
 
 /*!
+	\details
 	All examples for each function assume the following code has been run.
 	
 	This code block shows how to load the HumanFactors DLL explicitly --
