@@ -67,6 +67,7 @@ namespace HumanFactors.VisibilityGraph
 
             \snippet visibilitygraph\test_visibilitygraph.cs CreateBVHAndDefineNodes
             \snippet visibilitygraph\test_visibilitygraph.cs EX_DirectedVisibilityGraph
+            `[2, 2.414214, 2.414214, 0]`
 
        */
         public static Graph GenerateAllToAll(EmbreeBVH bvh, IEnumerable<Vector3D> nodes, float height = 1.7f, bool directed = true)
@@ -104,6 +105,8 @@ namespace HumanFactors.VisibilityGraph
 
             \snippet visibilitygraph\test_visibilitygraph.cs CreateBVHAndDefineNodes
             \snippet visibilitygraph\test_visibilitygraph.cs EX_GroupToGroup
+
+            `1, 1.414214, 0, 0`
         */
         public static Graph GenerateGroupToGroup(
             EmbreeBVH bvh,

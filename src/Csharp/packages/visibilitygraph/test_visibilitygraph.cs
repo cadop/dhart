@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace HumanFactors.Tests.VisibilityGraph
@@ -13,6 +14,8 @@ namespace HumanFactors.Tests.VisibilityGraph
     [TestClass]
     public class VisibilityGraphTest
     {
+        private bool IsNear(float actual, float expected) => Math.Abs(actual - expected) < 0.001f;
+
         private const string good_mesh_path = "ExampleModels/plane.obj";
         private static Vector3D Point1 = new Vector3D(0, 0, 0);
         private static Vector3D Point2 = new Vector3D(0, 1, 0);
@@ -75,10 +78,19 @@ namespace HumanFactors.Tests.VisibilityGraph
             Graph G = HumanFactors.VisibilityGraph.VisibilityGraph.GenerateAllToAll(bvh, nodes);
 
             // Aggregate the graph's edges to get the total distance from this node to all of its edges
-            Debug.WriteLine(G.AggregateEdgeCosts(GraphEdgeAggregation.SUM));
+            var results = G.AggregateEdgeCosts(GraphEdgeAggregation.SUM);
+
+            // Print output
+            Debug.WriteLine(results);
 
             //! [EX_DirectedVisibilityGraph]
             Assert.IsTrue(IsValidGraph(G));
+
+            // Check outputs against expectations
+            Assert.IsTrue(IsNear(2.0f, results[0]));
+            Assert.IsTrue(IsNear(2.4142f, results[1]));
+            Assert.IsTrue(IsNear(2.4142f, results[2]));
+            Assert.IsTrue(IsNear(0, results[3]));
         }
 
         [TestMethod]
@@ -106,10 +118,18 @@ namespace HumanFactors.Tests.VisibilityGraph
             // Print the results
             var results = G.AggregateEdgeCosts(GraphEdgeAggregation.SUM);
 
-            Debug.WriteLine("{0}, {1}, {2}, {3}", results[0], results[1], results[2], results[3]);
+            Debug.WriteLine("[{0}, {1}, {2}, {3}]", results[0], results[1], results[2], results[3]);
 
             //! [EX_GroupToGroup]
+            
+            // Assert this is a valid graph
             Assert.IsTrue(IsValidGraph(G));
+
+            // Check outputs against expectations
+            Assert.IsTrue(IsNear(1.0f, results[0]));
+            Assert.IsTrue(IsNear(1.4142f, results[1]));
+            Assert.IsTrue(IsNear(0, results[2]));
+            Assert.IsTrue(IsNear(0, results[3]));
         }
     }
 }
