@@ -26,21 +26,22 @@ namespace HF {
 * Perform efficient ray intersections using Intel's Embree Library.
 * @{
 */
-/// <summary>
-/// The result of firing a ray at an object. Contains distance to the hitpoint and the ID of the mesh.
-/// </summary>
+/*!
+	\brief	The result of firing a ray at an object. Contains distance to the hitpoint and the ID of the mesh.
+*/
 struct RayResult {
 	float distance = -1;
 	int meshid = -1;
 
-	/// <summary>
-	/// Update this result based on the ray intesection. Similar structures can be created to
-	/// support different sethit methods.
-	/// </summary>
-	/// <param name="node"> Not used for this structure. </param>
-	/// <param name="direction"> Not used for this structure. </param>
-	/// <param name="dist"> Distance from node to the hit_point. </param>
-	/// <param name="mid"> ID of the hit mesh. </param>
+	/*!
+		\brief	Update this result based on the ray intersection. Similar structures can be created
+				to support different sethit functions.
+
+		\param	node		Not used for this structure
+		\param	direction	Not used for this structure
+		\param	dist		Distance from node to the hit_point
+		\param	mid			ID of the hit mesh
+	*/
 	template <typename N, typename V>
 	void SetHit(const N& node, const V& direction, float dist, int mid) {
 		distance = dist;
