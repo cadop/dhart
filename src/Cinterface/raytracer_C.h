@@ -108,106 +108,6 @@
 #include <vector>
 #include <array>
 
-/*!
-	\details
-	All examples for each function assume the following code has been run.
-	
-	This code block shows how to load the HumanFactors DLL explicitly --
-	you should only run this code once in your program.
-	
-	- Load the DLLs, in the order specified in the example below
-	- Obtain pointers to the functions you want to call in the HumanFactors DLL
-	- Call the desired functions via the function pointers
-	- When finished with the HumanFactors DLL, free all DLLs loaded (in reverse order of loading)
-
-	\code
-		// Requires #include <Windows.h>
-
-		// Load the following DLLs in this order:
-		// tbb.dll, embree3.dll, HumanFactors.dll
-		// If the DLLs are not loaded in this order,
-		// HumanFactors.dll will fail to load!
-
-		// Provide a relative path to the DLLs.
-		const wchar_t path_tbb[27] = L"..\\x64-Release\\bin\\tbb.dll";
-		const wchar_t path_embree3[31] = L"..\\x64-Release\\bin\\embree3.dll";
-		const wchar_t path_humanfactors[36] = L"..\\x64-Release\\bin\\HumanFactors.dll";
-
-		//
-		//	Load tbb.dll first
-		//
-		HINSTANCE dll_tbb = LoadLibrary(path_tbb);
-
-		if (dll_tbb == nullptr) {
-			std::cerr << "Unable to load " << "tbb.dll" << std::endl;
-			exit(EXIT_FAILURE);
-		}
-		else {
-			std::cout << "Loaded successfully: " << "tbb.dll" << std::endl;
-		}
-
-		//
-		//	embree3.dll depends on tbb.dll
-		//
-		HINSTANCE dll_embree3 = LoadLibrary(path_embree3);
-
-		if (dll_embree3 == nullptr) {
-			std::cerr << "Unable to load " << "embree3.dll" << std::endl;
-
-			FreeLibrary(dll_tbb);
-			exit(EXIT_FAILURE);
-		}
-		else {
-			std::cout << "Loaded successfully: " << "embree3.dll" << std::endl;
-		}
-
-		//
-		//	HumanFactors.dll depends on both tbb.dll and embree3.dll.
-		//
-		HINSTANCE dll_hf = LoadLibrary(path_humanfactors);
-
-		if (dll_hf == nullptr) {
-			std::cerr << "Unable to load " << "HumanFactors.dll" << std::endl;
-
-			FreeLibrary(dll_embree3);
-			FreeLibrary(dll_tbb);
-
-			exit(EXIT_FAILURE);
-		}
-		else {
-			std::cout << "Loaded successfully: " << "HumanFactors.dll" << std::endl;
-
-			//
-			//	At this point, you must obtain pointers to the functions you want to use/call
-			//	within the HumanFactors DLL. Each example will outline the process
-			//	for doing this.
-			//
-			//	After obtaining the pointers to the functions you want to call,
-			//	you are now ready to call the desired functions and run code for your example.
-			//
-
-			std::this_thread::sleep_for(std::chrono::milliseconds(250));
-
-			//
-			//	Free libraries in order of creation.
-			//	Only free the libraries once you are sure you are done using the functions within them,
-			//	or else you will have to load them again.
-			//
-			if (FreeLibrary(dll_hf)) {
-				std::cout << "Freed successfully: " << "HumanFactors.dll" << std::endl;
-			}
-
-			if (FreeLibrary(dll_embree3)) {
-				std::cout << "Freed successfully: " << "embree3.dll" << std::endl;
-			}
-
-			if (FreeLibrary(dll_tbb)) {
-				std::cout << "Freed successfully: " << "tbb.dll" << std::endl;
-			}
-		}
-	\endcode
-*/
-
 namespace HF {
 	namespace RayTracer {
 		class MeshInfo;
@@ -356,7 +256,87 @@ C_INTERFACE CreateRaytracer(std::vector<HF::Geometry::MeshInfo>* mesh, HF::RayTr
 	\returns	HF::OK on completion.
 
 	\code
-		// TODO example
+		// The usage of the variable dll_hf (type HINSTANCE)
+		// is described at the top of this file.
+
+		// The following code is required before running the example below:
+
+		// typedefs for brevity of syntax
+		typedef int (*p_LoadOBJ)(const char*, int, float, float, float, std::vector<HF::Geometry::MeshInfo>**);
+		typedef int (*p_CreateRaytracer)(std::vector<HF::Geometry::MeshInfo>*, HF::RayTracer::EmbreeRayTracer**);
+		typedef int (*p_DestroyRayTracer)(HF::RayTracer::EmbreeRayTracer*);
+		typedef int (*p_DestroyMeshInfo)(std::vector<HF::Geometry::MeshInfo>*);
+
+		// Create pointers-to-functions addressed at the procedures defined in dll_hf, by using GetProcAddress()
+		auto LoadOBJ = (p_LoadOBJ)GetProcAddress(dll_hf, "LoadOBJ");
+		auto CreateRaytracer = (p_CreateRaytracer)GetProcAddress(dll_hf, "CreateRaytracer");
+		auto DestroyRayTracer = (p_DestroyRayTracer)GetProcAddress(dll_hf, "DestroyRayTracer");
+		auto DestroyMeshInfo = (p_DestroyMeshInfo)GetProcAddress(dll_hf, "DestroyMeshInfo");
+
+		// You are now ready to call the functions above.
+	\endcode
+
+	\code
+		// Get model path
+		// This is a relative path to your obj file.
+		const std::string obj_path_str = "plane.obj";
+
+		// Size of obj file string (character count)
+		const int obj_length = static_cast<int>(obj_path_str.size());
+
+		// This will point to memory on free store.
+		// The memory will be allocated inside the LoadOBJ function,
+		// and it must be freed using DestroyMeshInfo.
+		std::vector<HF::Geometry::MeshInfo>* loaded_obj = nullptr;
+
+		// Load mesh
+		// The array rot will rotate the mesh 90 degrees with respect to the x-axis,
+		// i.e. makes the mesh 'z-up'.
+		//
+		// Notice that we pass the address of the loaded_obj pointer
+		// to LoadOBJ. We do not want to pass loaded_obj by value, but by address --
+		// so that we can dereference it and assign it to the address of (pointer to)
+		// the free store memory allocated within LoadOBJ.
+		const float rot[] = { 90.0f, 0.0f, 0.0f };	// Y up to Z up
+		status = LoadOBJ(obj_path_str.c_str(), obj_length, rot[0], rot[1], rot[2], &loaded_obj);
+
+		if (status != 1) {
+			// All C Interface functions return a status code.
+			// Error!
+			std::cerr << "Error at LoadOBJ, code: " << status << std::endl;
+		}
+
+		// Create BVH
+		// We now declare a pointer to EmbreeRayTracer, named bvh.
+		// Note that we pass the address of this pointer to CreateRaytracer.
+		//
+		// Note also that we pass the (vector<MeshInfo> *), loaded_obj, to CreateRaytracer -- by value.
+		// This is okay, because CreateRaytracer is not assigning loaded_obj any new addresses,
+		// it is only interested in accessing the pointee.
+		HF::RayTracer::EmbreeRayTracer* bvh = nullptr;
+		status = CreateRaytracer(loaded_obj, &bvh);
+
+		///
+		///	Use bvh
+		///
+
+		///
+		/// Memory resource cleanup.
+		///
+
+		// destroy raytracer
+		status = DestroyRayTracer(bvh);
+
+		if (status != 1) {
+			std::cerr << "Error at DestroyRayTracer, code: " << status << std::endl;
+		}
+
+		// destroy vector<MeshInfo>
+		status = DestroyMeshInfo(loaded_obj);
+
+		if (status != 1) {
+			std::cerr << "Error at DestroyMeshInfo, code: " << status << std::endl;
+		}
 	\endcode
 */
 C_INTERFACE DestroyRayTracer(HF::RayTracer::EmbreeRayTracer* rt_to_destroy);
@@ -409,7 +389,26 @@ C_INTERFACE DestroyRayTracer(HF::RayTracer::EmbreeRayTracer* rt_to_destroy);
 	</list>
 
 	\code
+		// The usage of the variable dll_hf (type HINSTANCE)
+		// is described at the top of this file.
+
+		// The following code is required before running the example below:
+
+		//
+		// TODO function typedefs
+		//
+		
+		//
+		// TODO get pointers-to-functions via GetProcAddress
+		//
+
+		// You are now ready to call the functions above.
+	\endcode
+
+	\code
+		//
 		// TODO example
+		//
 	\endcode
 */
 C_INTERFACE FireRaysDistance(
@@ -441,7 +440,26 @@ C_INTERFACE FireRaysDistance(
 	\returns	HF_STATUS::OK on success
 
 	\code
+		// The usage of the variable dll_hf (type HINSTANCE)
+		// is described at the top of this file.
+
+		// The following code is required before running the example below:
+
+		//
+		// TODO function typedefs
+		//
+
+		//
+		// TODO get pointers-to-functions via GetProcAddress
+		//
+
+		// You are now ready to call the functions above.
+	\endcode
+
+	\code
+		//
 		// TODO example
+		//
 	\endcode
 */
 C_INTERFACE FireSingleRayDistance(
@@ -493,7 +511,26 @@ C_INTERFACE FireRay(HF::RayTracer::EmbreeRayTracer* ert, float& x, float& y, flo
 	\returns	HF_STATUS::OK on completion.
 
 	\code
+		// The usage of the variable dll_hf (type HINSTANCE)
+		// is described at the top of this file.
+
+		// The following code is required before running the example below:
+
+		//
+		// TODO function typedefs
+		//
+
+		//
+		// TODO get pointers-to-functions via GetProcAddress
+		//
+
+		// You are now ready to call the functions above.
+	\endcode
+
+	\code
+		//
 		// TODO example
+		//
 	\endcode
 */
 C_INTERFACE FireMultipleRays(HF::RayTracer::EmbreeRayTracer* ert, float* origins, const float* directions, int size, float max_distance, bool* result_array);
@@ -513,7 +550,26 @@ C_INTERFACE FireMultipleRays(HF::RayTracer::EmbreeRayTracer* ert, float* origins
 	\returns	HF_STATUS::OK on completion.
 
 	\code
+		// The usage of the variable dll_hf (type HINSTANCE)
+		// is described at the top of this file.
+
+		// The following code is required before running the example below:
+
+		//
+		// TODO function typedefs
+		//
+
+		//
+		// TODO get pointers-to-functions via GetProcAddress
+		//
+
+		// You are now ready to call the functions above.
+	\endcode
+
+	\code
+		//
 		// TODO example
+		//
 	\endcode
 */
 C_INTERFACE FireMultipleOriginsOneDirection(HF::RayTracer::EmbreeRayTracer* ert, float* origins, const float* direction, int size, float max_distance, bool* result_array);
@@ -534,7 +590,26 @@ C_INTERFACE FireMultipleOriginsOneDirection(HF::RayTracer::EmbreeRayTracer* ert,
 	\param	returns			HF_STATUS::OK on completion.
 
 	\code
+		// The usage of the variable dll_hf (type HINSTANCE)
+		// is described at the top of this file.
+
+		// The following code is required before running the example below:
+
+		//
+		// TODO function typedefs
+		//
+
+		//
+		// TODO get pointers-to-functions via GetProcAddress
+		//
+
+		// You are now ready to call the functions above.
+	\endcode
+
+	\code
+		//
 		// TODO example
+		//
 	\endcode
 */
 C_INTERFACE FireMultipleDirectionsOneOrigin(HF::RayTracer::EmbreeRayTracer* ert, const float* origin, float* directions, int size, float max_distance, bool* result_array);
@@ -561,7 +636,26 @@ C_INTERFACE FireMultipleDirectionsOneOrigin(HF::RayTracer::EmbreeRayTracer* ert,
 				they hit something or not. This makes them good for line of sight checks.
 
 	\code
+		// The usage of the variable dll_hf (type HINSTANCE)
+		// is described at the top of this file.
+
+		// The following code is required before running the example below:
+
+		//
+		// TODO function typedefs
+		//
+
+		//
+		// TODO get pointers-to-functions via GetProcAddress
+		//
+
+		// You are now ready to call the functions above.
+	\endcode
+
+	\code
+		//
 		// TODO example
+		//
 	\endcode
 */
 C_INTERFACE FireOcclusionRays(
@@ -582,7 +676,26 @@ C_INTERFACE FireOcclusionRays(
 	\returns	HF_STATUS::OK on completion
 
 	\code
+		// The usage of the variable dll_hf (type HINSTANCE)
+		// is described at the top of this file.
+
+		// The following code is required before running the example below:
+
+		//
+		// TODO function typedefs
+		//
+
+		//
+		// TODO get pointers-to-functions via GetProcAddress
+		//
+
+		// You are now ready to call the functions above.
+	\endcode
+
+	\code
+		//
 		// TODO example
+		//
 	\endcode
 */
 C_INTERFACE DestroyRayResultVector(
