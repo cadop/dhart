@@ -431,17 +431,22 @@ namespace HF::SpatialStructures {
 	{
 		switch (agg_type) {
 		case COST_AGGREGATE::COUNT:
-			if (new_value > 0) count++;
+
+			// Only increment count if newvalue is equal to zero.
+			// In the case that out_total is zero and count is greater than zero,
+			// multiple new elements have been added, and we must not increment
+			if (new_value > 0 && !(out_total == 0 && count > 0)) 
+				count++; 
 			out_total = count;
 			break;
 		case COST_AGGREGATE::SUM:
-				out_total += new_value;
+			out_total += new_value;
 			break;
 		case COST_AGGREGATE::AVERAGE: {
-			// Ensure the number of elements isn't zero.
-			int n = std::max(count - 1, 1);
+			// If this is zero this function won't work. 
+			if (count == 0) count = 1;
 
-			out_total = (n * (out_total)+new_value) / std::max(count, 1);
+			out_total = out_total + (new_value - out_total) / count;
 			count++;
 			break;
 		}

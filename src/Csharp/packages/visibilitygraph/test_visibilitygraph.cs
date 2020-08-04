@@ -4,6 +4,7 @@ using HumanFactors.SpatialStructures;
 using HumanFactors.VisibilityGraph;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 
@@ -28,15 +29,29 @@ namespace HumanFactors.Tests.VisibilityGraph
             return bvh;
         }
 
-        private bool IsValidGraph(Graph G)
-        {
-            if (G == null) return false;
+		private bool IsValidGraph(Graph G)
+		{
+			if (G == null) return false;
 
-            var nodes = G.getNodes();
-            return nodes.array.Length > 0;
-        }
+			var nodes = G.getNodes();
 
-        [TestMethod]
+			// If the graph has no nodes, something is wrong
+			if (!(nodes.array.Length > 0))
+				return false;
+
+			//  Check that all the nodes are finite
+			for (int i = 0; i < nodes.size; i++)
+			{
+				var n = nodes[i];
+				if (!n.x.IsFinite() || !n.y.IsFinite() || !n.z.IsFinite())
+					return false;
+			}
+
+			return true;
+
+		}
+
+		[TestMethod]
         public void Directed()
         {
             var bvh = GetBVH();
