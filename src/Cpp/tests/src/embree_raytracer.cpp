@@ -41,7 +41,7 @@ inline float Distance(const array<float, 3>& p1, const array<float, 3>& p2) {
 		pow(p1[0] - p2[0], 2)
 		+ pow(p1[1] - p2[1], 2)
 		+ pow(p1[2] - p2[2], 2)
-	);
+	); 
 }
 
 TEST(_EmbreeRayTracer, HashAlgorithm) {
@@ -748,4 +748,46 @@ TEST(Performance, EmbreeRaytracer) {
 	}
 	
 	PrintTrials(watches, raycount, "rays");
+}
+
+namespace CInterfaceTests {
+	TEST(_raytracer_CInterface, CreateRaytracer) {
+
+	}
+
+	TEST(_raytracer_CInterface, DestroyRaytracer) {
+
+	}
+
+	TEST(_raytracer_CInterface, FireRaysDistance) {
+
+	}
+
+	TEST(_raytracer_CInterface, FireSingleRayDistance) {
+
+	}
+
+	TEST(_raytracer_CInterface, FireRay) {
+
+	}
+
+	TEST(_raytracer_CInterface, FireMultipleRays) {
+
+	}
+
+	TEST(_raytracer_CInterface, FireMultipleOriginsOneDirection) {
+
+	}
+
+	TEST(_raytracer_CInterface, FireMultipleDirectionsOneOrigin) {
+
+	}
+
+	TEST(_raytracer_CInterface, FireOcclusionRays) {
+
+	}
+
+	TEST(_raytracer_CInterface, DestroyRayResultVector) {
+
+	}
 }
