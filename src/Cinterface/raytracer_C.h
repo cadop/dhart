@@ -341,13 +341,13 @@ C_INTERFACE DestroyRayTracer(HF::RayTracer::EmbreeRayTracer* rt_to_destroy);
 			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
 		}
 
-		// Define points for rays
+		// Define points for rays. Every three array members constitutes one point.
 		// These are Cartesian coordinates.
 		float points[] = { 0.0f, 0.0f, 2.0f, 0.0f, 0.0f, 3.0f, 0.0, 0.0, 4.0f };
 		const int size_points = 9;
 		const int count_points = size_points / 3;
 
-		// Define directions for casting rays
+		// Define directions for casting rays. Every three array members constitutes 
 		// These are vector components, not Cartesian coordinates.
 		float dir[] = { 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, -2.0f, 0.0f, 0.0f, -3.0f };
 		const int size_dir = 9;
@@ -501,11 +501,11 @@ C_INTERFACE FireRaysDistance(
 			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
 		}
 
-		// Define point to start ray
+		// Define point to start ray.
 		// These are Cartesian coordinates.
 		float p1[] = { 0.0f, 0.0f, 2.0f };
 
-		// Define direction to cast ray
+		// Define direction to cast ray.
 		// These are vector components, not Cartesian coordinates.
 		float dir[] = { 0.0f, 0.0f, -1.0f };
 
@@ -629,11 +629,11 @@ C_INTERFACE FireSingleRayDistance(
 			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
 		}
 
-		// Define point to start ray
+		// Define point to start ray.
 		// These are Cartesian coordinates.
 		float p1[] = { 0.0f, 0.0f, 2.0f };
 
-		// Define direction to cast ray
+		// Define direction to cast ray.
 		// These are vector components, not Cartesian coordinates.
 		float dir[] = { 0.0f, 0.0f, -1.0f };
 
@@ -761,13 +761,13 @@ C_INTERFACE FireRay(HF::RayTracer::EmbreeRayTracer* ert, float& x, float& y, flo
 			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
 		}
 
-		// Define points for rays
+		// Define points for rays. Every three array members constitutes one point.
 		// These are Cartesian coordinates.
 		float points[] = { 0.0f, 0.0f, 2.0f, 0.0f, 0.0f, 3.0f, 0.0, 0.0, 4.0f };
 		const int size_points = 9;
 		const int count_points = size_points / 3;
 
-		// Define directions for casting rays
+		// Define directions for casting rays. Every three array members constitutes one direction.
 		// These are vector components, not Cartesian coordinates.
 		float dir[] = { 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, -2.0f, 0.0f, 0.0f, -3.0f };
 		const int size_dir = 9;
@@ -899,13 +899,13 @@ C_INTERFACE FireMultipleRays(HF::RayTracer::EmbreeRayTracer* ert, float* origins
 			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
 		}
 
-		// Define points to start rays
+		// Define points to start rays. Every three array members constitutes one point.
 		// These are Cartesian coordinates.
 		float p1[] = { 0.0f, 0.0f, 2.0f, 0.0f, 0.0f, 3.0f, 0.0f, 0.0f, 4.0f };
 		const int size_p1 = 9;
 		const int count_points = size_p1 / 3;
 
-		// Define one direction to cast rays
+		// Define one direction to cast rays. Every three array members constitutes one direction.
 		// These are vector components, not Cartesian coordinates.
 		const float dir[] = { 0.0f, 0.0f, -1.0f };
 		const int size_dir = 3;
@@ -918,7 +918,7 @@ C_INTERFACE FireMultipleRays(HF::RayTracer::EmbreeRayTracer* ert, float* origins
 		// results[i] will be set true. Otherwise, results[i] will be set false.
 
 		// count_points rays will be fired, from the coordinates described at the array p1.
-		// results[i] is true if a ray fired from p1[i], p1[i + 1], p1[i + 2] via direction dir
+		// results[i] is true if a ray fired from origin point {p1[i], p1[i + 1], p1[i + 2]} via direction dir
 		// makes a hit.
 		bool results[count_points];
 
@@ -930,9 +930,9 @@ C_INTERFACE FireMultipleRays(HF::RayTracer::EmbreeRayTracer* ert, float* origins
 			std::cerr << "Error at FireMultipleDirectionsOneOrigin, code: " << status << std::endl;
 		}
 
-		///
-		/// Review results:
-		///
+		//
+		//	Review results:
+		//
 		for (int i = 0, k = 0; i < count_points; i++, k += 3) {
 			std::string label = results[i] ? "hit" : "miss";
 
@@ -942,9 +942,9 @@ C_INTERFACE FireMultipleRays(HF::RayTracer::EmbreeRayTracer* ert, float* origins
 				<< std::endl;
 		}
 
-		///
-		/// Memory resource cleanup.
-		///
+		//
+		// Memory resource cleanup.
+		//
 
 		// destroy raytracer
 		status = DestroyRayTracer(bvh);
@@ -1039,19 +1039,21 @@ C_INTERFACE FireMultipleOriginsOneDirection(HF::RayTracer::EmbreeRayTracer* ert,
 			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
 		}
 
-		// Define point to start ray
+		// Define point to start ray. Every three array members constitutes one point.
 		// These are Cartesian coordinates.
 		const float p1[] = { 0.0f, 0.0f, 2.0f };
 
-		// Define directions to cast rays
+		// Define directions to cast rays. Every three array members consitutes one direction.
 		// These are vector components, not Cartesian coordinates.
 		float dir[] = { 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, -2.0f, 0.0f, 0.0f, -3.0f };
 		const int size_dir = 9;
 		const int count_dir = size_dir / 3;
 
+		// Maximum distance a ray can travel and still hit its target.
 		const int max_distance = -1;
 
-		// If a given ray i hits a target (dir[i] is a vector extending from points[i]),
+		// If a given ray i hits a target 
+		// (dir[i] is the x component of a vector extending from points[i]),
 		// results[i] will be set true. Otherwise, results[i] will be set false.
 		bool results[count_dir];
 
@@ -1065,9 +1067,9 @@ C_INTERFACE FireMultipleOriginsOneDirection(HF::RayTracer::EmbreeRayTracer* ert,
 			std::cerr << "Error at FireMultipleDirectionsOneOrigin, code: " << status << std::endl;
 		}
 
-		///
-		/// Review results:
-		///
+		//
+		// Review results:
+		//
 		for (int i = 0, k = 0; i < count_dir; i++, k += 3) {
 			std::string label = results[i] ? "hit" : "miss";
 
@@ -1077,9 +1079,9 @@ C_INTERFACE FireMultipleOriginsOneDirection(HF::RayTracer::EmbreeRayTracer* ert,
 				<< std::endl;
 		}
 
-		///
-		/// Memory resource cleanup.
-		///
+		//
+		// Memory resource cleanup.
+		//
 
 		// destroy raytracer
 		status = DestroyRayTracer(bvh);
@@ -1180,7 +1182,7 @@ C_INTERFACE FireMultipleDirectionsOneOrigin(HF::RayTracer::EmbreeRayTracer* ert,
 			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
 		}
 
-		// Define point to start ray
+		// Define point to start ray.
 		// These are Cartesian coordinates.
 		const int size_p1_occl = 3;
 		const float p1_occl[size_p1_occl] = { 0.0f, 0.0f, 2.0f };
@@ -1188,7 +1190,8 @@ C_INTERFACE FireMultipleDirectionsOneOrigin(HF::RayTracer::EmbreeRayTracer* ert,
 		// count_origin represents how many sets of origin coordinates we are dealing with.
 		const int count_origin = size_p1_occl / 3;
 
-		// All of the direction coordinates, inline, one after another.
+		// All of the direction components, inline, one after another. These are vector components.
+		// Every three array members constitutes one direction.
 		const int size_dir_occl = 9;
 		const float dir_occl[size_dir_occl] = { 0.0f, 0.0f, -1.0, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f };
 
@@ -1306,13 +1309,13 @@ C_INTERFACE FireOcclusionRays(
 			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
 		}
 
-		// Define points for rays
+		// Define points for rays. Every three array members constitutes one point.
 		// These are Cartesian coordinates.
 		float points[] = { 0.0f, 0.0f, 2.0f, 0.0f, 0.0f, 3.0f, 0.0, 0.0, 4.0f };
 		const int size_points = 9;
 		const int count_points = size_points / 3;
 
-		// Define directions for casting rays
+		// Define directions for casting rays. Every three array members constitutes one direction.
 		// These are vector components, not Cartesian coordinates.
 		float dir[] = { 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, -2.0f, 0.0f, 0.0f, -3.0f };
 		const int size_dir = 9;
