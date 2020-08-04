@@ -402,21 +402,144 @@ C_INTERFACE DestroyRayTracer(HF::RayTracer::EmbreeRayTracer* rt_to_destroy);
 
 		// The following code is required before running the example below:
 
-		//
-		// TODO function typedefs
-		//
-		
-		//
-		// TODO get pointers-to-functions via GetProcAddress
-		//
+		// typedefs for brevity of syntax
+		typedef int (*p_LoadOBJ)(const char*, int, float, float, float, std::vector<HF::Geometry::MeshInfo>**);
+		typedef int (*p_CreateRaytracer)(std::vector<HF::Geometry::MeshInfo>*, HF::RayTracer::EmbreeRayTracer**);
+		typedef int (*p_FireRaysDistance)(HF::RayTracer::EmbreeRayTracer*, float*, int, float*, int, std::vector<RayResult>**, RayResult**);
+		typedef int (*p_DestroyRayResultVector)(RayResult *);
+		typedef int (*p_DestroyRayTracer)(HF::RayTracer::EmbreeRayTracer*);
+		typedef int (*p_DestroyMeshInfo)(std::vector<HF::Geometry::MeshInfo>*);
+
+		// Create pointers-to-functions addressed at the procedures defined in dll_hf, by using GetProcAddress()
+		auto LoadOBJ = (p_LoadOBJ)GetProcAddress(dll_hf, "LoadOBJ");
+		auto CreateRaytracer = (p_CreateRaytracer)GetProcAddress(dll_hf, "CreateRaytracer");
+		auto FireRaysDistance = (p_FireRaysDistance)GetProcAddress(dll_hf, "FireRaysDistance");
+		auto DestroyRayResultVector = (p_DestroyRayResultVector)GetProcAddress(dll_hf, "DestroyRayResultVector");
+		auto DestroyRayTracer = (p_DestroyRayTracer)GetProcAddress(dll_hf, "DestroyRayTracer");
+		auto DestroyMeshInfo = (p_DestroyMeshInfo)GetProcAddress(dll_hf, "DestroyMeshInfo");
 
 		// You are now ready to call the functions above.
 	\endcode
 
 	\code
+		// Status code variable, value returned by C Interface functions
+		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
+		int status = 0;
+
+		// Get model path
+		// This is a relative path to your obj file.
+		const std::string obj_path_str = "plane.obj";
+
+		// Size of obj file string (character count)
+		const int obj_length = static_cast<int>(obj_path_str.size());
+
+		// This will point to memory on free store.
+		// The memory will be allocated inside the LoadOBJ function,
+		// and it must be freed using DestroyMeshInfo.
+		std::vector<HF::Geometry::MeshInfo>* loaded_obj = nullptr;
+
+		// Load mesh
+		// The array rot will rotate the mesh 90 degrees with respect to the x-axis,
+		// i.e. makes the mesh 'z-up'.
 		//
-		// TODO example
+		// Notice that we pass the address of the loaded_obj pointer
+		// to LoadOBJ. We do not want to pass loaded_obj by value, but by address --
+		// so that we can dereference it and assign it to the address of (pointer to)
+		// the free store memory allocated within LoadOBJ.
+		const float rot[] = { 90.0f, 0.0f, 0.0f };	// Y up to Z up
+		status = LoadOBJ(obj_path_str.c_str(), obj_length, rot[0], rot[1], rot[2], &loaded_obj);
+
+		if (status != 1) {
+			// All C Interface functions return a status code.
+			// Error!
+			std::cerr << "Error at LoadOBJ, code: " << status << std::endl;
+		}
+
+		// Create BVH
+
+		// We now declare a pointer to EmbreeRayTracer, named bvh.
+		// Note that we pass the address of this pointer to CreateRaytracer.
 		//
+		// Note also that we pass the (vector<MeshInfo> *), loaded_obj, to CreateRaytracer -- by value.
+		// This is okay, because CreateRaytracer is not assigning loaded_obj any new addresses,
+		// it is only interested in accessing the pointee.
+		HF::RayTracer::EmbreeRayTracer* bvh = nullptr;
+		status = CreateRaytracer(loaded_obj, &bvh);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
+		}
+
+		// Define points for rays
+		// These are Cartesian coordinates.
+		float points[] = { 0.0f, 0.0f, 2.0f, 0.0f, 0.0f, 3.0f, 0.0, 0.0, 4.0f };
+		const int size_points = 9;
+		const int count_points = size_points / 3;
+
+		// Define directions for casting rays
+		// These are vector components, not Cartesian coordinates.
+		float dir[] = { 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, -2.0f, 0.0f, 0.0f, -3.0f };
+		const int size_dir = 9;
+		const int count_dir = 3;
+
+		// Declare a pointer to vector<RayResult>.
+		// FireRaysDistance will allocate memory for this pointer,
+		// we must call DestroyRayResultVector on ray_result when we are done with it.
+		// ray_result_data will refer to the address of (*ray_result)'s internal buffer.
+		// As such, we do NOT call operator delete on ray_result_data.
+		std::vector<RayResult>* ray_result = nullptr;
+		RayResult* ray_result_data = nullptr;
+
+		status = FireRaysDistance(bvh, points, count_points, dir, count_dir, &ray_result, &ray_result_data);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at FireRaysDistance, code: " << status << std::endl;
+		}
+
+		///
+		/// Iterate over *(ray_result) and output its contents
+		///
+		auto it = ray_result->begin();
+
+		std::cout << "Ray result: [";
+		while (it < ray_result->end()) {
+			auto rr = *(it++);
+			std::cout <<
+				"{Distance: " << rr.distance << "\n" << "Mesh ID: " << rr.meshid
+				<< "}";
+
+			if (it < ray_result->end()) {
+				std::cout << ", ";
+			}
+		}
+		std::cout << "]" << std::endl;
+
+		///
+		/// Memory resource cleanup.
+		///
+
+		// destroy vector<RayResult>
+		status = DestroyRayResultVector(ray_result);
+
+		if (status != 1) {
+			std::cerr << "Error at DestroyRayResultVector, code: " << status << std::endl;
+		}
+
+		// destroy raytracer
+		status = DestroyRayTracer(bvh);
+
+		if (status != 1) {
+			std::cerr << "Error at DestroyRayTracer, code: " << status << std::endl;
+		}
+
+		// destroy vector<MeshInfo>
+		status = DestroyMeshInfo(loaded_obj);
+
+		if (status != 1) {
+			std::cerr << "Error at DestroyMeshInfo, code: " << status << std::endl;
+		}
 	\endcode
 */
 C_INTERFACE FireRaysDistance(
@@ -726,7 +849,7 @@ C_INTERFACE FireRay(HF::RayTracer::EmbreeRayTracer* ert, float& x, float& y, flo
 	\param	size			Number of points and directions, equal to the total number of floats in one array / 3.			
 	\param	max_distance	Maximum distance a ray can travel and still hit a target. Any hits beyond this point will not be recorded.
 
-	\param	result_array	Output parameter conatining an ordered list of booleans set to true if the their rays hit, and
+	\param	result_array	Output parameter containing an ordered list of booleans set to true if the their rays hit, and
 							false if their rays did not.
 
 	\returns	HF_STATUS::OK on completion.
@@ -737,21 +860,132 @@ C_INTERFACE FireRay(HF::RayTracer::EmbreeRayTracer* ert, float& x, float& y, flo
 
 		// The following code is required before running the example below:
 
-		//
-		// TODO function typedefs
-		//
+		// typedefs for brevity of syntax
+		typedef int (*p_LoadOBJ)(const char*, int, float, float, float, std::vector<HF::Geometry::MeshInfo>**);
+		typedef int (*p_CreateRaytracer)(std::vector<HF::Geometry::MeshInfo>*, HF::RayTracer::EmbreeRayTracer**);
+		typedef int (*p_FireMultipleRays)(HF::RayTracer::EmbreeRayTracer*, float*, const float*, int, float, bool*);
+		typedef int (*p_DestroyRayTracer)(HF::RayTracer::EmbreeRayTracer*);
+		typedef int (*p_DestroyMeshInfo)(std::vector<HF::Geometry::MeshInfo>*);
 
-		//
-		// TODO get pointers-to-functions via GetProcAddress
-		//
+		// Create pointers-to-functions addressed at the procedures defined in dll_hf, by using GetProcAddress()
+		auto LoadOBJ = (p_LoadOBJ)GetProcAddress(dll_hf, "LoadOBJ");
+		auto CreateRaytracer = (p_CreateRaytracer)GetProcAddress(dll_hf, "CreateRaytracer");
+		auto FireMultipleRays = (p_FireMultipleRays)GetProcAddress(dll_hf, "FireMultipleRays");
+		auto DestroyRayTracer = (p_DestroyRayTracer)GetProcAddress(dll_hf, "DestroyRayTracer");
+		auto DestroyMeshInfo = (p_DestroyMeshInfo)GetProcAddress(dll_hf, "DestroyMeshInfo");
 
 		// You are now ready to call the functions above.
 	\endcode
 
 	\code
+		// Status code variable, value returned by C Interface functions
+		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
+		int status = 0;
+
+		// Get model path
+		// This is a relative path to your obj file.
+		const std::string obj_path_str = "plane.obj";
+
+		// Size of obj file string (character count)
+		const int obj_length = static_cast<int>(obj_path_str.size());
+
+		// This will point to memory on free store.
+		// The memory will be allocated inside the LoadOBJ function,
+		// and it must be freed using DestroyMeshInfo.
+		std::vector<HF::Geometry::MeshInfo>* loaded_obj = nullptr;
+
+		// Load mesh
+		// The array rot will rotate the mesh 90 degrees with respect to the x-axis,
+		// i.e. makes the mesh 'z-up'.
 		//
-		// TODO example
+		// Notice that we pass the address of the loaded_obj pointer
+		// to LoadOBJ. We do not want to pass loaded_obj by value, but by address --
+		// so that we can dereference it and assign it to the address of (pointer to)
+		// the free store memory allocated within LoadOBJ.
+		const float rot[] = { 90.0f, 0.0f, 0.0f };	// Y up to Z up
+		status = LoadOBJ(obj_path_str.c_str(), obj_length, rot[0], rot[1], rot[2], &loaded_obj);
+
+		if (status != 1) {
+			// All C Interface functions return a status code.
+			// Error!
+			std::cerr << "Error at LoadOBJ, code: " << status << std::endl;
+		}
+
+		// Create BVH
+
+		// We now declare a pointer to EmbreeRayTracer, named bvh.
+		// Note that we pass the address of this pointer to CreateRaytracer.
 		//
+		// Note also that we pass the (vector<MeshInfo> *), loaded_obj, to CreateRaytracer -- by value.
+		// This is okay, because CreateRaytracer is not assigning loaded_obj any new addresses,
+		// it is only interested in accessing the pointee.
+		HF::RayTracer::EmbreeRayTracer* bvh = nullptr;
+		status = CreateRaytracer(loaded_obj, &bvh);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
+		}
+
+		// Define points for rays
+		// These are Cartesian coordinates.
+		float points[] = { 0.0f, 0.0f, 2.0f, 0.0f, 0.0f, 3.0f, 0.0, 0.0, 4.0f };
+		const int size_points = 9;
+		const int count_points = size_points / 3;
+
+		// Define directions for casting rays
+		// These are vector components, not Cartesian coordinates.
+		float dir[] = { 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, -2.0f, 0.0f, 0.0f, -3.0f };
+		const int size_dir = 9;
+		const int count_dir = 3;
+
+		// Maximum distance a ray can travel and still hit its target.
+		const int max_distance = -1;
+
+		// If a given ray i hits a target (dir[i] is a vector extending from points[i]),
+		// results[i] will be set true. Otherwise, results[i] will be set false.
+		bool results[count_dir];
+
+		status = FireMultipleRays(bvh, points, dir, count_points, max_distance, results);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at FireMultipleRays, code: " << status << std::endl;
+		}
+
+		///
+		/// Review results:
+		///
+		for (int i = 0, k = 0; i < count_dir; i++, k += 3) {
+			std::string label = results[i] ? "hit" : "miss";
+
+			std::cout << "result[" << i << "]: " << label << std::endl;
+			std::cout << "[" << points[k] << ", " << points[k + 1] << ", " << points[k + 2]
+				<< "], direction [" << dir[k] << ", " << dir[k + 1] << ", " << dir[k + 2] << "]"
+				<< std::endl;
+		}
+
+		///
+		/// Memory resource cleanup.
+		///
+
+		if (status != 1) {
+			std::cerr << "Error at DestroyRayResultVector, code: " << status << std::endl;
+		}
+
+		// destroy raytracer
+		status = DestroyRayTracer(bvh);
+
+		if (status != 1) {
+			std::cerr << "Error at DestroyRayTracer, code: " << status << std::endl;
+		}
+
+		// destroy vector<MeshInfo>
+		status = DestroyMeshInfo(loaded_obj);
+
+		if (status != 1) {
+			std::cerr << "Error at DestroyMeshInfo, code: " << status << std::endl;
+		}
 	\endcode
 */
 C_INTERFACE FireMultipleRays(HF::RayTracer::EmbreeRayTracer* ert, float* origins, const float* directions, int size, float max_distance, bool* result_array);
