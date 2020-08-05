@@ -31,6 +31,9 @@ namespace HF {
 	\param	yrot		Degrees to rotate the mesh about the y axis. 0.0f would mean no rotation about the y axis.
 	\param	zrot		Degrees to rotate the mesh about the z axis. 0.0f would mean no rotation about the z axis.
 
+	\param	out_list	Address of a (vector<MeshInfo> *); will be dereferenced and assigned the address of memory on the free store.
+						When out_list is passed to this function, *(out_list) should point to nullptr.
+
 	\returns			HF_STATUS::OK, if the file described by obj_path was loaded successfully
 						HF_STATUS::NOT_FOUND, if obj_path is an invalid/non-existent path
 						HF_STATUS::INVALID_OBJ, if obj_path does not represent a valid .obj file
@@ -83,7 +86,8 @@ C_INTERFACE LoadOBJ(
 
 	\param		out_info		Address of a vector<MeshInfo> *; the address of a pointer to a container of MeshInfo.
 								StoreMesh will allocate memory for *(out_info), the caller must call DestroyMeshInfo
-								on *(out_info) when finished with its resources.
+								on *(out_info) when finished with its resources. *(out_info) should point to nullptr
+								when out_info is passed to this function.
 
 	\param		indices			An array of indices for the triangles within the mesh.
 								Each member in this array is an integer that corresponds to a set of 3 vertex coordinates, { x, y, z }.
@@ -137,11 +141,12 @@ C_INTERFACE StoreMesh(
 /*!
 	\brief			Rotate an existing mesh (MeshInfo)
 
-	\param	xrot	Degrees to rotate the mesh about the x axis. 0.0f would mean no rotation about the x axis.
-	\param	yrot	Degrees to rotate the mesh about the y axis. 0.0f would mean no rotation about the y axis.
-	\param	zrot	Degrees to rotate the mesh about the z axis. 0.0f would mean no rotation about the z axis.
+	\param	mesh_to_rotate	An operand vector<MeshInfo> * that addresses memory allocated by LoadOBJ or StoreMesh
+	\param	xrot			Degrees to rotate the mesh about the x axis. 0.0f would mean no rotation about the x axis.
+	\param	yrot			Degrees to rotate the mesh about the y axis. 0.0f would mean no rotation about the y axis.
+	\param	zrot			Degrees to rotate the mesh about the z axis. 0.0f would mean no rotation about the z axis.
 
-	\returns		HF_STATUS::OK on return
+	\returns			HF_STATUS::OK on return
 
 	Required forward-declarations for the example below:<br>
 		\link HF::Geometry::MeshInfo \endlink <br>
