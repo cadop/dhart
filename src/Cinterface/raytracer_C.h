@@ -130,18 +130,18 @@ C_INTERFACE DestroyRayTracer(HF::RayTracer::EmbreeRayTracer* rt_to_destroy);
 	<list type="bullet">
 	
 	<item>
-	<font color="#2a2a2a"> Equal amount of directions/origins: Fire a ray for every pair of
-	origin/direction in order. i.e. (origin[0], direction[0]), (origin[1], direction[1]). </font>
+	Equal amount of directions/origins: Fire a ray for every pair of
+	origin/direction in order. i.e. (origin[0], direction[0]), (origin[1], direction[1]).
 	</item>
 
 	<item>
-	<font color="#2a2a2a"> One direction, multiple origins: Fire a ray in the given direction from
-	each origin point in origins. </font>
+	One direction, multiple origins: Fire a ray in the given direction from
+	each origin point in origins.
 	</item>
 	
 	<item>
-	<font color="#2a2a2a"> One origin, multiple directions: Fire a ray from the origin point in each
-	direction in directions. </font>
+	One origin, multiple directions: Fire a ray from the origin point in each
+	direction in directions.
 	</item>
 	
 	</list>
