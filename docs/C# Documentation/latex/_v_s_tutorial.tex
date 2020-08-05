@@ -211,7 +211,7 @@ Once the properties pane is visible (outlined in cyan in Figure 3.\+6) click on 
 
 {\itshape Figure} {\bfseries{3.\+7}}\+: {\itshape Changing Do Not Copy to Copy If Newer}
 
-Once you click on {\ttfamily Do Not Copy} you should see a drop down appear to the right. Click on the downward arrow to expand it then select {\ttfamily Copy If Newer} like in Figure 3.\+7. Upon clicking this the option should also change to {\ttfamily Copy if Newer}. Now upon building the program, these files should be copied to the output directory alongside your library and all of the C\# references.\hypertarget{_v_s_tutorial_autotoc_md55}{}\doxysection{Testing the output}\label{_v_s_tutorial_autotoc_md55}
+Once you click on {\ttfamily Do Not Copy} you should see a drop down appear to the right. Click on the downward arrow to expand it then select {\ttfamily Copy If Newer} like in Figure 3.\+7. Upon clicking this the option should also change to {\ttfamily Copy if Newer}. Now upon building the program, these files should be copied to the output directory alongside your library and all of the C\# references.\hypertarget{_v_s_tutorial_autotoc_md55}{}\doxysection{Ensuring Files are Properly Placed in the Output Directory}\label{_v_s_tutorial_autotoc_md55}
 With everything set up correctly, we should now be able to demonstrate that this process works. The goal is to ensure Visual Studio can see the referenced C\# code, and that it copies all of the dependencies to the output directory once the project is built.
 
 under the line {\ttfamily using System.\+Threading.\+Tasks} enter the following using declarations.
@@ -279,4 +279,288 @@ This should open an instance of the file explorer at the root of your project li
 
 {\itshape Figure} {\bfseries{4.\+5}} \+: {\itshape Contents of the Debug Folder}
 
-Once there, you should be looking at the output of your program. Verify that all of the C\# and non-\/C\# D\+L\+Ls that we\textquotesingle{}ve added have been copied over successfully. If your folder\textquotesingle{}s contents match that of Figure 4.\+5 then you\textquotesingle{}ve successfully completed this tutorial. 
+Once there, you should be looking at the output of your program. Verify that all of the C\# and non-\/C\# D\+L\+Ls that we\textquotesingle{}ve added have been copied over successfully. Now that this is the case, we\textquotesingle{}re ready to move onto testing that this D\+LL works.\hypertarget{_v_s_tutorial_autotoc_md56}{}\doxysection{Testing the Interface}\label{_v_s_tutorial_autotoc_md56}
+To demonstrate this D\+LL is functional, we will attempt to load the mesh data of an obj file from disk. In this tutorial I will be using a simple plane titled {\ttfamily plane.\+obj} however, this should work with any O\+BJ file so pick one of your own that you\textquotesingle{}d like to use with \mbox{\hyperlink{namespace_human_factors}{Human\+Factors}}.\hypertarget{_v_s_tutorial_autotoc_md57}{}\doxysubsection{Create a Console Project}\label{_v_s_tutorial_autotoc_md57}
+Since we created a C\# library, we cannot run it in order to produce output. In order to test our library, we will create a second project that links with our library to execute some of its code.
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{add_new_project.png}%Add new project menu console
+\end{DoxyInlineImage}
+  
+
+{\itshape Figure} {\bfseries{5.\+1.\+1}} \+: {\itshape Add new project menu}
+
+To add a new project right click on the solution in the solution explorer, hover over add, then click {\ttfamily New Project} as shown in Figure 5.\+1.\+1.
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{add_new_project_console.png}%Add new Project dialog console
+\end{DoxyInlineImage}
+  
+
+{\itshape Figure} {\bfseries{5.\+1.\+2}} \+: {\itshape New Project Dialog}
+
+Like in the previous time we used this dialog, the contents of your new project screen may not match this tutorial\textquotesingle{}s due to differences in what Visual Studio extensions you have installed. Scroll down until you see {\ttfamily Console app (.N\+ET Framework)}, circled in red in Figure 5.\+1.\+2. Click on this option, then click on the Next button in the bottom right, circled in cyan in Figure 5.\+1.\+2.
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{create_project_console.png}%Con\+Figure new project dialog console
+\end{DoxyInlineImage}
+  
+
+{\itshape Figure} {\bfseries{5.\+1.\+3}} \+: {\itshape New Project Dialog}
+
+After clicking next you\textquotesingle{}ll be brought to the con\+Figure screen. Nothing should need to be changed here, so just click the create button in the bottom right.
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{blank_console_project.png}%Blank console project
+\end{DoxyInlineImage}
+  
+
+{\itshape Figure} {\bfseries{5.\+1.\+4}} \+: {\itshape Blank console project}
+
+After that is complete, you should be brought back to Visual Studio with the new console project in your solution explorer (highlighted in 5.\+1.\+4). IF this is the case then we\textquotesingle{}re ready to move onto writing to code to load an obj file.\hypertarget{_v_s_tutorial_autotoc_md58}{}\doxysubsection{Writing Sample Code}\label{_v_s_tutorial_autotoc_md58}
+Now that we have a console project that we can execute, we\textquotesingle{}ll go back to our library and write the code necessary to load an obj file.
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{blank_console_project.png}%Blank console project
+\end{DoxyInlineImage}
+  
+
+{\itshape Figure} {\bfseries{5.\+2.\+1}} \+: {\itshape Blank console project}
+
+Go back to the .cs file we made in the previous section and double click on it to open it. In this fill we will modify Class1 to be static, then give it a function titled {\ttfamily Sample\+Load\+O\+B\+J()}.
+
+Before moving further, add the lines {\ttfamily using \mbox{\hyperlink{namespace_human_factors_1_1_geometry}{Human\+Factors.\+Geometry}};} and {\ttfamily using System.\+Diagnostics;} to your block of using declarations. After adding that line, add the word {\ttfamily static} after the word {\ttfamily public} on line 12. This will make it so we don\textquotesingle{}t need to instantiate a new instance of the class in order to run the function we want. After doing this, the editor will show an error with the code we wrote previously. Delete the body of that function, leaving the space between the open and closing braces of Class1 empty.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{using System;}
+\DoxyCodeLine{using System.Collections.Generic;}
+\DoxyCodeLine{using System.Linq;}
+\DoxyCodeLine{using System.Text;}
+\DoxyCodeLine{using System.Threading.Tasks;}
+\DoxyCodeLine{}
+\DoxyCodeLine{using HumanFactors;}
+\DoxyCodeLine{using HumanFactors.SpatialStructures;}
+\DoxyCodeLine{using HumanFactors.Geometry;}
+\DoxyCodeLine{using System.Diagnostics;}
+\DoxyCodeLine{}
+\DoxyCodeLine{namespace ClassLibrary1}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    public static class Class1}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{class_library_1_blank.png}%Blank console project
+\end{DoxyInlineImage}
+  
+
+{\itshape Figure} {\bfseries{5.\+2.\+2}} \+: {\itshape Blank console project}
+
+At the end of this process, the entire file should contain only the above code, also shown as a picture in Figure 5.\+2.\+2. Now with the body of the class empty we will add a new function {\ttfamily public static void Sample\+Load\+O\+B\+J()}. Write the following into your editor in the body of Class1\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{using System;}
+\DoxyCodeLine{using System.Collections.Generic;}
+\DoxyCodeLine{using System.Linq;}
+\DoxyCodeLine{using System.Text;}
+\DoxyCodeLine{using System.Threading.Tasks;}
+\DoxyCodeLine{}
+\DoxyCodeLine{using HumanFactors;}
+\DoxyCodeLine{using HumanFactors.SpatialStructures;}
+\DoxyCodeLine{using HumanFactors.Geometry;}
+\DoxyCodeLine{using System.Diagnostics;}
+\DoxyCodeLine{}
+\DoxyCodeLine{namespace ClassLibrary1}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    public static class Class1}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        public static void SampleOBJ()}
+\DoxyCodeLine{        \{}
+\DoxyCodeLine{            // Change the path here to the full path to your own OBJ file. }
+\DoxyCodeLine{            string obj\_path = "X:/models/plane.obj";}
+\DoxyCodeLine{}
+\DoxyCodeLine{            // Load the OBj file from disk.}
+\DoxyCodeLine{            MeshInfo m = OBJLoader.LoadOBJ(obj\_path);}
+\DoxyCodeLine{}
+\DoxyCodeLine{            // Write it to console}
+\DoxyCodeLine{            Debug.WriteLine(m);}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{obj_loader.png}%ObJ Loader Code
+\end{DoxyInlineImage}
+  
+
+{\itshape Figure} {\bfseries{5.\+2.\+3}} \+: {\itshape Full code with obj sample loader.}
+
+Make sure your code matches before progressing.
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{build_solution_console.png}%ObJ Loader Code
+\end{DoxyInlineImage}
+  
+
+{\itshape Figure} {\bfseries{5.\+2.\+4}} \+: {\itshape Building Solution}
+
+Once you\textquotesingle{}re sure your code matches, build the project by going to build $>$ build solution. This should build without errors. If this is the case, you have added the sample code successfully and are ready to write the command line application to call it.\hypertarget{_v_s_tutorial_autotoc_md59}{}\doxysubsection{Adding a reference to the library from the Console App}\label{_v_s_tutorial_autotoc_md59}
+In this section we will add the necessary code to the command line application to call the code we just wrote. Despite being in the same solution, we need to explicitly add a reference from Console\+App1 to Class\+Library1 before we can use the code from it.
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{change_to_program.cs.png}%Change to program.cs
+\end{DoxyInlineImage}
+  
+
+{\itshape Figure} {\bfseries{5.\+3.\+1}} \+: {\itshape Change to Program.\+cs}
+
+Go to the solution explorer and click on Program.\+cs under the Console\+App1 Project as shown in Figure 5.\+3.\+1.
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{program_1_blank.png}%Program.cs blank
+\end{DoxyInlineImage}
+  
+
+{\itshape Figure} {\bfseries{5.\+3.\+2}} \+: {\itshape Program.\+cs Blank}
+
+Before we can reference the other project, we must first add a reference to it, similar to how we added a reference to the humanfactors.\+dll in the second section of this tutorial.
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{add_reference_console_app_1.png}%Add reference Console\+App1
+\end{DoxyInlineImage}
+  
+
+{\itshape Figure} {\bfseries{5.\+3.\+3}} \+: {\itshape Add reference menu for Console\+App1}
+
+Right click on Console\+App1 in the solution explorer, hover over Add then C\+Lick {\ttfamily Add Reference} like shown in Figure 5.\+3.\+3.
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{projects_add_console.png}%Go To Projects Tab
+\end{DoxyInlineImage}
+  
+
+{\itshape Figure} {\bfseries{5.\+3.\+4}} \+: {\itshape Circled\+: Projects tab in the reference manager}
+
+Doing so will open the reference manager. For this case, we want to add a reference to another project, not an external D\+LL, so we\textquotesingle{}ll need to go to the projects tab in the left sidebar, circled in Figure 5.\+3.\+4.
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{reference_manager_projects.png}%Check off Class\+Library1
+\end{DoxyInlineImage}
+  
+
+{\itshape Figure} {\bfseries{5.\+3.\+5}} \+: {\itshape Reference Manager Projects Section}
+
+Now, in the projects tab, check off Class Library 1 to mark it as a reference and click the OK button in the bottom right corner of the reference manager.
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{class_library_1_referenced.png}%Referenced Class\+Library1
+\end{DoxyInlineImage}
+  
+
+{\itshape Figure} {\bfseries{5.\+3.\+6}} \+: {\itshape Highlighted\+: Class Library 1 in in the references of Console\+App1}
+
+After pressing OK, you should see Class\+Library1 in the references of Console\+App1 like highlighted in Figure 5.\+3.\+6. If you see this, then you\textquotesingle{}re ready to move on to writing the code for the command line application.\hypertarget{_v_s_tutorial_autotoc_md60}{}\doxysubsection{Writing And Executing the Command Line Application}\label{_v_s_tutorial_autotoc_md60}
+Now that the console project can reference our library, we will write some code to call the example function we defined.
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{program_1_blank.png}%Blank Console Code
+\end{DoxyInlineImage}
+  
+
+{\itshape Figure} {\bfseries{5.\+4.\+1}} \+: {\itshape Default contents of program.\+cs}
+
+You should still have the code from Program.\+cs open like in Figure 5.\+4.\+1. From here we\textquotesingle{}re going to add the following line to the {\ttfamily static void Main()} function\+:
+
+{\ttfamily Class\+Library1.\+Class1.\+Sample\+O\+B\+J();}
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{main_class1.png}%Main of Program.cs
+\end{DoxyInlineImage}
+  
+
+{\itshape Figure} {\bfseries{5.\+4.\+2}} \+: {\itshape Default contents of program.\+cs}
+
+After doing this your code should look like this. Once again, build your solution, and ensure that it builds successfully. This is all the code that is required to test this tutorial and we are ready to test it.
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{debug_section_circled.png}%Debug section circled
+\end{DoxyInlineImage}
+  
+
+{\itshape Figure} {\bfseries{5.\+4.\+3}} \+: {\itshape Debug Toolbar Circled}
+
+Look at the debug toolbar right of your Visual Studio window, circled in Figure 5.\+4.\+3. You press the {\ttfamily Start} button to debug your program, however the option may default to Class\+Library1 instead of Console\+App1. To solve this, click on the dropdown that says Class\+Library1 and change it to Console\+App1 like in Figure 5.\+4.\+3. There is one more step before we can run the program, and that is to ensure that both Console\+App1 and Class\+Library1 are built as 64 bit applications.
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{console_app_1_properties.png}%Console App1 Properties Menu
+\end{DoxyInlineImage}
+  
+
+{\itshape Figure} {\bfseries{5.\+4.\+4}} \+: {\itshape Console\+App1 Properties Menu}
+
+Right click on Console\+App1 in the solution explorer and click Properties, like in Figure 5.\+4.\+4.
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{console_app_1_properties_tab.png}%Console App1 Properties Window
+\end{DoxyInlineImage}
+  
+
+{\itshape Figure} {\bfseries{5.\+4.\+5}} \+: {\itshape Console\+App1 Properties Tab}
+
+Now you should be brought to console app 1\textquotesingle{}s properties like in Figure 5.\+4.\+5. Here you can see that the option {\ttfamily Prefer 32 bit} is checked. We want to disable this option by unchecking the checkbox and changing Platform Target to x64.
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{change_to_64bit.png}%Console App1 Properties Window With 64 Bit
+\end{DoxyInlineImage}
+  
+
+{\itshape Figure} {\bfseries{5.\+4.\+6}} \+: {\itshape Console\+App1 Properties Tab}
+
+Once you\textquotesingle{}ve done this, the window should match that of Figure 5.\+4.\+6. Once you\textquotesingle{}re sure of this press {\ttfamily Ctrl + S} to save the changes, then press the X next to the console app 1 tab, circled in red. Ensure there is no asterisk next to the name of the tab before doing this, as that indicates unsaved changes. Once closed this will return you to the program.\+cs window. {\itshape Repeat this process for Class\+Library 1 to ensure that it is also 64 bit before proceeding.}
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{click_start.png}%Click Start Button
+\end{DoxyInlineImage}
+  
+
+{\itshape Figure} {\bfseries{5.\+4.\+7}} \+: {\itshape Circled Start button}
+
+Now finally, click the start button circled in Figure 5.\+4.\+7 to test the program.
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{successful_output.png}%Successful Output
+\end{DoxyInlineImage}
+  
+
+{\itshape Figure} {\bfseries{5.\+4.\+8}} \+: {\itshape Successful Output Highlighted}
+
+Upon clicking start, you should see a console window appear briefly, then close. Look in the output at the bottom of your Visual Studio window. You should see the line Human\+Factors.\+Geometry.\+Meshinfo. IF this is the case then you have successfully created a project using Humanfactors to load an obj from disk. 

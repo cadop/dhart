@@ -178,6 +178,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Every <a class="el" href="struct_human_factors_1_1_spatial_structures_1_1_node.html" title="A point in space.">Node</a> in the graph contains an X,Y,Z coordinate which can be used to represent a specific point in space. This graph internally is stored as a Sparse Matrix for space efficency. Nodes are stored in a hashmap containing X,Y, and Z coordinates, allowing for quick indexing of specific nodes by location alone. Access to this graph's internal CSR is available through <a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a84a7286932920179d90a63cfd8ada207" title="Compress the graph into a CSR representation, and get pointers to it.">Graph.CompressToCSR()</a>.</p>
 <dl class="section user"><dt>Cost Types</dt><dd>This <a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html" title="A graph representing connections between points in space.">Graph</a> is capable of holding multiple cost types for any of it's edges. Each cost type has a distinct key as it's name, such as "CrossSlope" or "EnergyExpenditure". Upon creation, the graph is assigned a default cost type, <code>Distance</code> which can be accessed explicitly by the key "Distance" or leaving the cost_type field blank. Alternate costs have corresponding edges in the default cost set, but different costs to traverse from the parent to the child node.</dd></dl>
 <dl class="section user"><dt>NodeAttributes</dt><dd>The graph is able to store an arbitrary amount of information about the nodes it contains as strings. Similar to alternate cost types, node attributes are each have a distinct key as their name, but instead of conatining information about edges in the graph, node attributes contain information about nodes. Unlike the cost algorithms in edgecosts, right now there is no functionality within <a class="el" href="namespace_human_factors.html" title="Automated analysis of the built environent">HumanFactors</a> that populates the node attributes of the graph with any kind of metric, however the methods to add and clear node attributes are made available so you are free to add your own node attributes.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>To get the XYZ coordinates of a node from it's ID, use the ID as an index into the graph's nodes array returned by <a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a6b2aeaa562da06bec0d23aaabb2ba74d" title="Get an array containing the graph&#39;s current nodes.">getNodes()</a>; For example, if you want to get the node with an ID of 1 from the graph, you'd access the element at index 1 in the nodes array.</dd></dl>
 <dl class="section invariant"><dt>Invariant</dt><dd>1) The CSR maintained by this graph will always be valid. </dd>
 <dd>
 2) Every unique unique node in the graph will be assigned a unique id. A <a class="el" href="struct_human_factors_1_1_spatial_structures_1_1_node.html" title="A point in space.">Node</a> is considered unique if it has an X,Y,Z location that is not within 0.0001 units of any other node in the graph.</dd></dl>
@@ -185,7 +186,7 @@ Additional Inherited Members</h2></td></tr>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000010">Todo:</a></b></dt><dd>Functions to access edges in the graph like numpy. Users shouldn't have to use unsafe functions to get the edges of a node from the CSR. </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a84a7286932920179d90a63cfd8ada207" title="Compress the graph into a CSR representation, and get pointers to it.">CompressToCSR</a> to get a CSR representation of the graph. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_graph_8cs_source.html#l00095">95</a> of file <a class="el" href="_graph_8cs_source.html">Graph.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_graph_8cs_source.html#l00101">101</a> of file <a class="el" href="_graph_8cs_source.html">Graph.cs</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa613f3162fe49e35e155cd2418a0fa46"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa613f3162fe49e35e155cd2418a0fa46">&#9670;&nbsp;</a></span>Graph() <span class="overload">[1/2]</span></h2>
@@ -219,7 +220,7 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 </p>
 
-<p class="definition">Definition at line <a class="el" href="_graph_8cs_source.html#l00102">102</a> of file <a class="el" href="_graph_8cs_source.html">Graph.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_graph_8cs_source.html#l00108">108</a> of file <a class="el" href="_graph_8cs_source.html">Graph.cs</a>.</p>
 
 </div>
 </div>
@@ -240,7 +241,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Construct a new empty graph in unmanaged memory. </p>
 
-<p class="definition">Definition at line <a class="el" href="_graph_8cs_source.html#l00105">105</a> of file <a class="el" href="_graph_8cs_source.html">Graph.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_graph_8cs_source.html#l00111">111</a> of file <a class="el" href="_graph_8cs_source.html">Graph.cs</a>.</p>
 
 </div>
 </div>
@@ -480,7 +481,7 @@ Additional Inherited Members</h2></td></tr>
 <code>&gt;&gt;&gt; 200</code><br  />
 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_graph_8cs_source.html#l00371">371</a> of file <a class="el" href="_graph_8cs_source.html">Graph.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_graph_8cs_source.html#l00377">377</a> of file <a class="el" href="_graph_8cs_source.html">Graph.cs</a>.</p>
 
 </div>
 </div>
@@ -549,7 +550,7 @@ Additional Inherited Members</h2></td></tr>
 <code>&gt;&gt;&gt; 200</code><br  />
 </p>
 
-<p class="definition">Definition at line <a class="el" href="_graph_8cs_source.html#l00411">411</a> of file <a class="el" href="_graph_8cs_source.html">Graph.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_graph_8cs_source.html#l00417">417</a> of file <a class="el" href="_graph_8cs_source.html">Graph.cs</a>.</p>
 
 <p class="reference">References <a class="el" href="_pointer_holder_8cs_source.html#l00049">HumanFactors.NativeUtils.NativeObject.Pointer</a>.</p>
 
@@ -619,9 +620,9 @@ Additional Inherited Members</h2></td></tr>
 <div class="line">            Debug.WriteLine(scores);</div>
 </div><!-- fragment --><code>[150, 20, 0]</code> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_graph_8cs_source.html#l00266">266</a> of file <a class="el" href="_graph_8cs_source.html">Graph.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_graph_8cs_source.html#l00272">272</a> of file <a class="el" href="_graph_8cs_source.html">Graph.cs</a>.</p>
 
-<p class="reference">References <a class="el" href="_spatial_structures_native_8cs_source.html#l00160">HumanFactors.SpatialStructures.NativeMethods.C_AggregateEdgeCosts()</a>, <a class="el" href="_graph_8cs_source.html#l00225">HumanFactors.SpatialStructures.Graph.CompressToCSR()</a>, <a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a1a40fc2bab18a5adf42fb7a49ca6ddb9">HumanFactors.SpatialStructures.Graph.NumNodes()</a>, and <a class="el" href="_native_utils_8cs_source.html#l00038">HumanFactors.NativeUtils.CVectorAndData.size</a>.</p>
+<p class="reference">References <a class="el" href="_spatial_structures_native_8cs_source.html#l00160">HumanFactors.SpatialStructures.NativeMethods.C_AggregateEdgeCosts()</a>, <a class="el" href="_graph_8cs_source.html#l00231">HumanFactors.SpatialStructures.Graph.CompressToCSR()</a>, <a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a1a40fc2bab18a5adf42fb7a49ca6ddb9">HumanFactors.SpatialStructures.Graph.NumNodes()</a>, and <a class="el" href="_native_utils_8cs_source.html#l00038">HumanFactors.NativeUtils.CVectorAndData.size</a>.</p>
 
 </div>
 </div>
@@ -668,7 +669,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="line">Debug.WriteLine(node_attrs.size());</div>
 </div><!-- fragment --> <code>&gt;&gt;&gt; 0</code> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_graph_8cs_source.html#l00484">484</a> of file <a class="el" href="_graph_8cs_source.html">Graph.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_graph_8cs_source.html#l00490">490</a> of file <a class="el" href="_graph_8cs_source.html">Graph.cs</a>.</p>
 
 <p class="reference">References <a class="el" href="class_human_factors_1_1_spatial_structures_1_1_native_methods.html#a0eb7a8a8273141b1415a1f9fe95933b5">HumanFactors.SpatialStructures.NativeMethods.C_ClearAttributeType()</a>, and <a class="el" href="_pointer_holder_8cs_source.html#l00049">HumanFactors.NativeUtils.NativeObject.Pointer</a>.</p>
 
@@ -718,11 +719,11 @@ Additional Inherited Members</h2></td></tr>
 <div class="line">            Debug.Write(default_ptrs);</div>
 </div><!-- fragment --><code>(nnz: 1, rows: 3, cols: 3)</code> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_graph_8cs_source.html#l00225">225</a> of file <a class="el" href="_graph_8cs_source.html">Graph.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_graph_8cs_source.html#l00231">231</a> of file <a class="el" href="_graph_8cs_source.html">Graph.cs</a>.</p>
 
-<p class="reference">References <a class="el" href="_spatial_structures_native_8cs_source.html#l00115">HumanFactors.SpatialStructures.NativeMethods.C_GetCSRPointers()</a>, and <a class="el" href="_graph_8cs_source.html#l00098">HumanFactors.SpatialStructures.Graph.CSRPointers</a>.</p>
+<p class="reference">References <a class="el" href="_spatial_structures_native_8cs_source.html#l00115">HumanFactors.SpatialStructures.NativeMethods.C_GetCSRPointers()</a>, and <a class="el" href="_graph_8cs_source.html#l00104">HumanFactors.SpatialStructures.Graph.CSRPointers</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_graph_8cs_source.html#l00266">HumanFactors.SpatialStructures.Graph.AggregateEdgeCosts()</a>, <a class="el" href="overall__examples_8cs_source.html#l00230">Humanfctors.Examples.OverallExamples.GenerateAllToAll()</a>, <a class="el" href="overall__examples_8cs_source.html#l00026">Humanfctors.Examples.OverallExamples.GenerateExampleGraph()</a>, and <a class="el" href="overall__examples_8cs_source.html#l00305">Humanfctors.Examples.OverallExamples.GetEdgeCostExample()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_graph_8cs_source.html#l00272">HumanFactors.SpatialStructures.Graph.AggregateEdgeCosts()</a>, <a class="el" href="overall__examples_8cs_source.html#l00230">Humanfctors.Examples.OverallExamples.GenerateAllToAll()</a>, <a class="el" href="overall__examples_8cs_source.html#l00026">Humanfctors.Examples.OverallExamples.GenerateExampleGraph()</a>, and <a class="el" href="overall__examples_8cs_source.html#l00305">Humanfctors.Examples.OverallExamples.GetEdgeCostExample()</a>.</p>
 
 </div>
 </div>
@@ -781,7 +782,7 @@ Additional Inherited Members</h2></td></tr>
 <dl class="section note"><dt>Note</dt><dd>This is not a high performance function, since each index into the CSR requires an indexing operation. If multiple values are required, it is suggested to iterate through the pointers from <a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a84a7286932920179d90a63cfd8ada207" title="Compress the graph into a CSR representation, and get pointers to it.">Graph.CompressToCSR()</a>.</dd></dl>
 <dl class="section user"><dt>Example</dt><dd><div class="fragment"></div><!-- fragment --><code>100</code> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_graph_8cs_source.html#l00305">305</a> of file <a class="el" href="_graph_8cs_source.html">Graph.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_graph_8cs_source.html#l00311">311</a> of file <a class="el" href="_graph_8cs_source.html">Graph.cs</a>.</p>
 
 <p class="reference">References <a class="el" href="_spatial_structures_native_8cs_source.html#l00187">HumanFactors.SpatialStructures.NativeMethods.C_GetEdgeCost()</a>, and <a class="el" href="_pointer_holder_8cs_source.html#l00049">HumanFactors.NativeUtils.NativeObject.Pointer</a>.</p>
 
@@ -851,7 +852,7 @@ If <code>attribute</code> didn't exist in the graph, then an empty array of stri
 <div class="line"> </div>
 </div><!-- fragment --><code>0, 100, 200, ,</code> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_graph_8cs_source.html#l00450">450</a> of file <a class="el" href="_graph_8cs_source.html">Graph.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_graph_8cs_source.html#l00456">456</a> of file <a class="el" href="_graph_8cs_source.html">Graph.cs</a>.</p>
 
 <p class="reference">References <a class="el" href="_spatial_structures_native_8cs_source.html#l00215">HumanFactors.SpatialStructures.NativeMethods.C_GetNodeAttributes()</a>, <a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a1a40fc2bab18a5adf42fb7a49ca6ddb9">HumanFactors.SpatialStructures.Graph.NumNodes()</a>, and <a class="el" href="_pointer_holder_8cs_source.html#l00049">HumanFactors.NativeUtils.NativeObject.Pointer</a>.</p>
 
@@ -982,7 +983,7 @@ If <code>attribute</code> didn't exist in the graph, then an empty array of stri
 <div class="line"> </div>
 </div><!-- fragment --><code>3</code> </dd></dl>
 
-<p class="reference">Referenced by <a class="el" href="_graph_8cs_source.html#l00266">HumanFactors.SpatialStructures.Graph.AggregateEdgeCosts()</a>, <a class="el" href="_shortest_path_8cs_source.html#l00290">HumanFactors.Pathfinding.ShortestPath.DijkstraAllToAll()</a>, <a class="el" href="overall__examples_8cs_source.html#l00230">Humanfctors.Examples.OverallExamples.GenerateAllToAll()</a>, and <a class="el" href="_graph_8cs_source.html#l00450">HumanFactors.SpatialStructures.Graph.GetNodeAttributes()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_graph_8cs_source.html#l00272">HumanFactors.SpatialStructures.Graph.AggregateEdgeCosts()</a>, <a class="el" href="_shortest_path_8cs_source.html#l00290">HumanFactors.Pathfinding.ShortestPath.DijkstraAllToAll()</a>, <a class="el" href="overall__examples_8cs_source.html#l00230">Humanfctors.Examples.OverallExamples.GenerateAllToAll()</a>, and <a class="el" href="_graph_8cs_source.html#l00456">HumanFactors.SpatialStructures.Graph.GetNodeAttributes()</a>.</p>
 
 </div>
 </div>
@@ -1015,7 +1016,7 @@ If <code>attribute</code> didn't exist in the graph, then an empty array of stri
 <dl class="section return"><dt>Returns</dt><dd>True. This is guaranteed to execute properly. <br  />
  </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_graph_8cs_source.html#l00333">333</a> of file <a class="el" href="_graph_8cs_source.html">Graph.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_graph_8cs_source.html#l00339">339</a> of file <a class="el" href="_graph_8cs_source.html">Graph.cs</a>.</p>
 
 <p class="reference">References <a class="el" href="class_human_factors_1_1_spatial_structures_1_1_native_methods.html#a464f503116478fbb7eb9baeb2ef45aac">HumanFactors.SpatialStructures.NativeMethods.C_DestroyGraph()</a>.</p>
 
@@ -1044,9 +1045,9 @@ If <code>attribute</code> didn't exist in the graph, then an empty array of stri
 
 <p>This graph's CSR pointers. </p>
 
-<p class="definition">Definition at line <a class="el" href="_graph_8cs_source.html#l00098">98</a> of file <a class="el" href="_graph_8cs_source.html">Graph.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_graph_8cs_source.html#l00104">104</a> of file <a class="el" href="_graph_8cs_source.html">Graph.cs</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_graph_8cs_source.html#l00225">HumanFactors.SpatialStructures.Graph.CompressToCSR()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_graph_8cs_source.html#l00231">HumanFactors.SpatialStructures.Graph.CompressToCSR()</a>.</p>
 
 </div>
 </div>
@@ -1054,7 +1055,7 @@ If <code>attribute</code> didn't exist in the graph, then an empty array of stri
 <li>src/Csharp/packages/spatialstructures/src/<a class="el" href="_graph_8cs_source.html">Graph.cs</a></li>
 </ul>
 </div><!-- contents -->
-<div class="ttc" id="aclass_human_factors_1_1_spatial_structures_1_1_graph_html_a01855a86f49d22301651cf7098ee8967"><div class="ttname"><a href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a01855a86f49d22301651cf7098ee8967">HumanFactors.SpatialStructures.Graph.Graph</a></div><div class="ttdeci">Graph()</div><div class="ttdoc">Construct a new empty graph in unmanaged memory.</div><div class="ttdef"><b>Definition:</b> <a href="_graph_8cs_source.html#l00105">Graph.cs:105</a></div></div>
+<div class="ttc" id="aclass_human_factors_1_1_spatial_structures_1_1_graph_html_a01855a86f49d22301651cf7098ee8967"><div class="ttname"><a href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a01855a86f49d22301651cf7098ee8967">HumanFactors.SpatialStructures.Graph.Graph</a></div><div class="ttdeci">Graph()</div><div class="ttdoc">Construct a new empty graph in unmanaged memory.</div><div class="ttdef"><b>Definition:</b> <a href="_graph_8cs_source.html#l00111">Graph.cs:111</a></div></div>
 <div class="ttc" id="anamespace_human_factors_1_1_spatial_structures_html_abd405fa41da0f9a771d547aa47b6e1a0"><div class="ttname"><a href="namespace_human_factors_1_1_spatial_structures.html#abd405fa41da0f9a771d547aa47b6e1a0">HumanFactors.SpatialStructures.GraphEdgeAggregation</a></div><div class="ttdeci">GraphEdgeAggregation</div><div class="ttdoc">Methods for aggregating edge costs per node from the graph.</div><div class="ttdef"><b>Definition:</b> <a href="_graph_8cs_source.html#l00022">Graph.cs:23</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
