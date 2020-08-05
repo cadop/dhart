@@ -144,7 +144,7 @@ C_INTERFACE DestroyRayTracer(HF::RayTracer::EmbreeRayTracer* rt_to_destroy);
 		\link HF::Geometry::MeshInfo \endlink <br>
 		\link HF::RayTracer::EmbreeRayTracer \endlink <br>
 
-	Required definitions for the types outlined below are required:<br>
+	Required definitions for the example below:<br>
 		\link RayResult \link <br>
 
 	Functions called in the example below:<br>
