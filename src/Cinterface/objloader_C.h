@@ -1,3 +1,11 @@
+/*!
+	\file		objloader_C.h
+	\brief		Header file for functions related to loading/storing an OBJ file (a mesh)
+
+	\author		TBA
+	\date		05 Aug 2020
+*/
+
 #include <vector>
 
 #define C_INTERFACE extern "C" __declspec(dllexport) int
@@ -200,4 +208,3 @@ C_INTERFACE RotateMesh(
 C_INTERFACE DestroyMeshInfo(std::vector<HF::Geometry::MeshInfo>* mesh_to_destroy);
 
 /**@}*/
-
