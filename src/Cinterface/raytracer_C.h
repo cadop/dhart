@@ -42,10 +42,6 @@ struct RayResult {
 		\param	direction	Not used for this structure
 		\param	dist		Distance from node to the hit_point
 		\param	mid			ID of the hit mesh
-
-		\code
-			// TODO example
-		\endcode
 	*/
 	template <typename N, typename V>
 	void SetHit(const N& node, const V& direction, float dist, int mid) {
@@ -53,7 +49,6 @@ struct RayResult {
 		meshid = mid;
 	}
 };
-
 
 /*!
 	\brief		 Create a new raytracer using several meshes.
@@ -123,26 +118,25 @@ C_INTERFACE DestroyRayTracer(HF::RayTracer::EmbreeRayTracer* rt_to_destroy);
 	\returns  HF_STATUS::OK on completion. 
 			  HF::GENERIC_ERROR if the input parameters didn't meet at least one of the required cases below.
 
-
 	\remarks
 	<para> Can be fired in 3 configurations: </para>
 	
 	<list type="bullet">
 	
-	<item>
-	Equal amount of directions/origins: Fire a ray for every pair of
-	origin/direction in order. i.e. (origin[0], direction[0]), (origin[1], direction[1]).
-	</item>
+		<item>
+		Equal amount of directions/origins: Fire a ray for every pair of
+		origin/direction in order. i.e. (origin[0], direction[0]), (origin[1], direction[1]).
+		</item>
 
-	<item>
-	One direction, multiple origins: Fire a ray in the given direction from
-	each origin point in origins.
-	</item>
+		<item>
+		One direction, multiple origins: Fire a ray in the given direction from
+		each origin point in origins.
+		</item>
 	
-	<item>
-	One origin, multiple directions: Fire a ray from the origin point in each
-	direction in directions.
-	</item>
+		<item>
+		One origin, multiple directions: Fire a ray from the origin point in each
+		direction in directions.
+		</item>
 	
 	</list>
 
