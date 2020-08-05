@@ -36,29 +36,7 @@ namespace HF {
 						HF_STATUS::INVALID_OBJ, if obj_path does not represent a valid .obj file
 						HF_STATUS::GENERIC_ERROR, if the input described at obj_path was empty
 
-	\code
-		// Requires #include "objloader_C.h", #include "meshinfo.h", #include "objloader.h"
-
-		// Prepare parameters for LoadOBJ
-
-		// relative path begins where EXE file is located if file_path is not a path to a
-		// valid OBJ file, HF::Exceptions::FileNotFound is thrown
-		std::string file_path = "big_teapot.obj";
-
-		const int obj_length = file_path.size();
-
-		const float x_rot = 30;
-		const float y_rot = 20;
-		const float z_rot = 55;
-
-		std::vector<HF::Geometry::MeshInfo>* info = nullptr;
-
-		// Call LoadOBJ
-		LoadOBJ(file_path.c_str(), obj_length, x_rot, y_rot, z_rot, &info);
-
-		// Release memory for info once finished with it
-		DestroyMeshInfo(info);
-	\endcode
+	\snippet tests\src\objloader_cinterface.cpp snippet_LoadOBJ
 
 	\remarks
 		<b>Memory management:</b><br>
@@ -118,31 +96,7 @@ C_INTERFACE LoadOBJ(
 	\returns					HF_STATUS::OK, if the mesh was loaded successfully
 								HF_STATUS::INVALID_OBJ if the values in indices and/or vertices did not create a valid mesh
 
-	\code
-		// Requires #include "objloader_C.h", #include "meshinfo.h"
-
-		// Prepare parameters for StoreMesh
-		std::vector<HF::Geometry::MeshInfo>* info = nullptr;
-
-		int mesh_indices[] = { 0, 1, 2 };
-		const int mesh_num_indices = 3;
-		float mesh_vertices[] = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
-		const int mesh_num_vertices = 9;
-
-		std::string mesh_name = "This mesh";
-		const int mesh_id = 0;
-
-		// Call StoreMesh
-		if (StoreMesh(&info, mesh_indices, mesh_num_indices, mesh_vertices, mesh_num_vertices, mesh_name.c_str(), mesh_id)) {
-			std::cout << "StoreMesh successful" << std::endl;
-		}
-		else {
-			std::cout << "StoreMesh unsuccessful" << std::endl;
-		}
-
-		// Release memory for info once finished with it
-		DestroyMeshInfo(info);
-	\endcode
+	\snippet tests\src\objloader_cinterface.cpp snippet_StoreMesh
 
 	\remarks
 		<b>Memory management:</b><br>
@@ -175,44 +129,7 @@ C_INTERFACE StoreMesh(
 
 	\returns		HF_STATUS::OK on return
 
-	\code
-		// Requires #include "objloader_C.h", #include "meshinfo.h"
-
-		// Prepare parameters for StoreMesh
-		std::vector<HF::Geometry::MeshInfo>* info = nullptr;
-
-		int mesh_indices[] = { 0, 1, 2 };
-		const int mesh_num_indices = 3;
-		float mesh_vertices[] = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
-		const int mesh_num_vertices = 9;
-
-		std::string mesh_name = "This mesh";
-		const int mesh_id = 0;
-
-		// Call StoreMesh
-		if (StoreMesh(&info, mesh_indices, mesh_num_indices, mesh_vertices, mesh_num_vertices, mesh_name.c_str(), mesh_id)) {
-			std::cout << "StoreMesh successful" << std::endl;
-		}
-		else {
-			std::cout << "StoreMesh unsuccessful" << std::endl;
-		}
-
-		// Prepare desired rotation values
-		const float x_rot = 10;
-		const float y_rot = 10;
-		const float z_rot = 20;
-
-		// Call RotateMesh
-		if (RotateMesh(info, x_rot, y_rot, z_rot)) {
-			std::cout << "RotateMesh successful" << std::endl;
-		}
-		else {
-			std::cout << "RotateMesh unsuccessful" << std::endl;
-		}
-
-		// Release memory for info once finished with it
-		DestroyMeshInfo(info);
-	\endcode
+	\snippet tests\src\objloader_cinterface.cpp snippet_RotateMesh
 
 	\remarks
 		This function calls HF::Geometry::MeshInfo::PerformRotation,
@@ -230,12 +147,6 @@ C_INTERFACE RotateMesh(
 	float zrot
 );
 
-
-/// <summary>
-/// Delete all instances of mesh info in the given vector
-/// </summary>
-/// <param name="mesh_to_destroy"> The mesh info to destroy. </param>
-
 /*!
 	\brief		Destroy the memory addressed by mesh_to_destroy, which was allocated by either LoadOBJ or StoreMesh
 	
@@ -243,34 +154,7 @@ C_INTERFACE RotateMesh(
 
 	\returns	HF_STATUS::OK on return
 
-	\code
-		// Requires #include "objloader_C.h", #include "meshinfo.h"
-
-		// Prepare parameters for LoadOBJ
-
-		// relative path begins where EXE file is located if file_path is not a path to a
-		// valid OBJ file, HF::Exceptions::FileNotFound is thrown
-		std::string file_path = "big_teapot.obj";
-
-		const int obj_length = file_path.size();
-
-		const float x_rot = 30;
-		const float y_rot = 20;
-		const float z_rot = 55;
-
-		std::vector<HF::Geometry::MeshInfo>* info = nullptr;
-
-		// Call LoadOBJ
-		if (LoadOBJ(file_path.c_str(), obj_length, x_rot, y_rot, z_rot, &info)) {
-			std::cout << "LoadOBJ successful" << std::endl;
-		}
-		else {
-			std::cout << "LoadOBJ unsuccessful" << std::endl;
-		}
-
-		// Release memory for info once finished with it
-		DestroyMeshInfo(info);
-	\endcode
+	\snippet tests\src\objloader_cinterface.cpp snippet_DestroyMeshInfo
 
 	\remarks
 		<b>Memory management:</b><br>

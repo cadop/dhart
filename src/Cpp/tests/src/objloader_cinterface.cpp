@@ -12,6 +12,7 @@
 
 namespace CInterfaceTests {
 	TEST(_objloader_CInterface, LoadOBJ) {
+		//! [snippet_LoadOBJ]
 		// Requires #include "objloader_C.h", #include "meshinfo.h"
 
 		// Prepare parameters for LoadOBJ
@@ -38,9 +39,11 @@ namespace CInterfaceTests {
 
 		// Release memory for info once finished with it
 		DestroyMeshInfo(info);
+		//! [snippet_LoadOBJ]
 	}
 
 	TEST(_objloader_CInterface, StoreMesh) {
+		//! [snippet_StoreMesh]
 		// Requires #include "objloader_C.h", #include "meshinfo.h"
 
 		// Prepare parameters for StoreMesh
@@ -64,9 +67,11 @@ namespace CInterfaceTests {
 
 		// Release memory for info once finished with it
 		DestroyMeshInfo(info);
+		//! [snippet_StoreMesh]
 	}
 
 	TEST(_objloader_CInterface, RotateMesh) {
+		//! [snippet_RotateMesh]
 		// Requires #include "objloader_C.h", #include "meshinfo.h"
 
 		// Prepare parameters for StoreMesh
@@ -103,9 +108,11 @@ namespace CInterfaceTests {
 
 		// Release memory for info once finished with it
 		DestroyMeshInfo(info);
+		//! [snippet_RotateMesh]
 	}
 
 	TEST(_objloader_CInterface, DestroyMeshInfo) {
+		//! [snippet_DestroyMeshInfo]
 		// Requires #include "objloader_C.h", #include "meshinfo.h"
 
 		// Prepare parameters for LoadOBJ
@@ -132,5 +139,6 @@ namespace CInterfaceTests {
 
 		// Release memory for info once finished with it
 		DestroyMeshInfo(info);
+		//! [snippet_DestroyMeshInfo]
 	}
 }
