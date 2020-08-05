@@ -72,6 +72,12 @@ namespace HumanFactors.SpatialStructures
         within HumanFactors that populates the node attributes of the graph with any
         kind of metric, however the methods to add and clear node attributes are
         made available so you are free to add your own node attributes. 
+
+        \note 
+        To get the XYZ coordinates of a node from it's ID, use the ID as an index
+        into the graph's nodes array returned by getNodes(); For example, if you want
+        to get the node with an ID of 1 from the graph, you'd access the element at
+        index 1 in the nodes array. 
         
         \invariant 1) The CSR maintained by this graph will always be valid. 
         \invariant
