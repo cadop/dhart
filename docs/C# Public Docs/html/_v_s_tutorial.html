@@ -72,7 +72,13 @@ $(function() {
 <li class="level1"><a href="#autotoc_md52">Creating the project</a></li>
 <li class="level1"><a href="#autotoc_md53">Adding A Reference To Human Factors</a></li>
 <li class="level1"><a href="#autotoc_md54">Adding Native Dependencies</a></li>
-<li class="level1"><a href="#autotoc_md55">Testing the output</a></li>
+<li class="level1"><a href="#autotoc_md55">Ensuring Files are Properly Placed in the Output Directory</a></li>
+<li class="level1"><a href="#autotoc_md56">Testing the Interface</a><ul><li class="level2"><a href="#autotoc_md57">Create a Console Project</a></li>
+<li class="level2"><a href="#autotoc_md58">Writing Sample Code</a></li>
+<li class="level2"><a href="#autotoc_md59">Adding a reference to the library from the Console App</a></li>
+<li class="level2"><a href="#autotoc_md60">Writing And Executing the Command Line Application</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="textblock"><h1><a class="anchor" id="autotoc_md50"></a>
@@ -158,7 +164,7 @@ Adding Native Dependencies</h1>
 <p><em>Figure</em> <b>3.7</b>: <em>Changing Do Not Copy to Copy If Newer</em></p>
 <p>Once you click on <code>Do Not Copy</code> you should see a drop down appear to the right. Click on the downward arrow to expand it then select <code>Copy If Newer</code> like in Figure 3.7. Upon clicking this the option should also change to <code>Copy if Newer</code>. Now upon building the program, these files should be copied to the output directory alongside your library and all of the C# references.</p>
 <h1><a class="anchor" id="autotoc_md55"></a>
-Testing the output</h1>
+Ensuring Files are Properly Placed in the Output Directory</h1>
 <p>With everything set up correctly, we should now be able to demonstrate that this process works. The goal is to ensure Visual Studio can see the referenced C# code, and that it copies all of the dependencies to the output directory once the project is built.</p>
 <p>under the line <code>using System.Threading.Tasks</code> enter the following using declarations.</p>
 <div class="fragment"><div class="line">using HumanFactors;</div>
@@ -179,12 +185,140 @@ Testing the output</h1>
 <p>This should open an instance of the file explorer at the root of your project like in Figure 4.4. From here, navigate into the <code>bin</code> then <code>Debug</code> folders.</p>
 <p><img src="bin_debug.png" alt="" class="inline" title="Contents of the debug folder"/>   </p>
 <p><em>Figure</em> <b>4.5</b> : <em>Contents of the Debug Folder</em></p>
-<p>Once there, you should be looking at the output of your program. Verify that all of the C# and non-C# DLLs that we've added have been copied over successfully. If your folder's contents match that of Figure 4.5 then you've successfully completed this tutorial. </p>
+<p>Once there, you should be looking at the output of your program. Verify that all of the C# and non-C# DLLs that we've added have been copied over successfully. Now that this is the case, we're ready to move onto testing that this DLL works.</p>
+<h1><a class="anchor" id="autotoc_md56"></a>
+Testing the Interface</h1>
+<p>To demonstrate this DLL is functional, we will attempt to load the mesh data of an obj file from disk. In this tutorial I will be using a simple plane titled <code>plane.obj</code> however, this should work with any OBJ file so pick one of your own that you'd like to use with <a class="el" href="namespace_human_factors.html" title="Automated analysis of the built environent">HumanFactors</a>.</p>
+<h2><a class="anchor" id="autotoc_md57"></a>
+Create a Console Project</h2>
+<p>Since we created a C# library, we cannot run it in order to produce output. In order to test our library, we will create a second project that links with our library to execute some of its code.</p>
+<p><img src="add_new_project.png" alt="" class="inline" title="Add new project menu console"/>   </p>
+<p><em>Figure</em> <b>5.1.1</b> : <em>Add new project menu</em></p>
+<p>To add a new project right click on the solution in the solution explorer, hover over add, then click <code>New Project</code> as shown in Figure 5.1.1.</p>
+<p><img src="add_new_project_console.png" alt="" class="inline" title="Add new Project dialog console"/>   </p>
+<p><em>Figure</em> <b>5.1.2</b> : <em>New Project Dialog</em></p>
+<p>Like in the previous time we used this dialog, the contents of your new project screen may not match this tutorial's due to differences in what Visual Studio extensions you have installed. Scroll down until you see <code>Console app (.NET Framework)</code>, circled in red in Figure 5.1.2. Click on this option, then click on the Next button in the bottom right, circled in cyan in Figure 5.1.2.</p>
+<p><img src="create_project_console.png" alt="" class="inline" title="ConFigure new project dialog console"/>   </p>
+<p><em>Figure</em> <b>5.1.3</b> : <em>New Project Dialog</em></p>
+<p>After clicking next you'll be brought to the conFigure screen. Nothing should need to be changed here, so just click the create button in the bottom right.</p>
+<p><img src="blank_console_project.png" alt="" class="inline" title="Blank console project"/>   </p>
+<p><em>Figure</em> <b>5.1.4</b> : <em>Blank console project</em></p>
+<p>After that is complete, you should be brought back to Visual Studio with the new console project in your solution explorer (highlighted in 5.1.4). IF this is the case then we're ready to move onto writing to code to load an obj file.</p>
+<h2><a class="anchor" id="autotoc_md58"></a>
+Writing Sample Code</h2>
+<p>Now that we have a console project that we can execute, we'll go back to our library and write the code necessary to load an obj file.</p>
+<p><img src="blank_console_project.png" alt="" class="inline" title="Blank console project"/>   </p>
+<p><em>Figure</em> <b>5.2.1</b> : <em>Blank console project</em></p>
+<p>Go back to the .cs file we made in the previous section and double click on it to open it. In this fill we will modify Class1 to be static, then give it a function titled <code>SampleLoadOBJ()</code>.</p>
+<p>Before moving further, add the lines <code>using <a class="el" href="namespace_human_factors_1_1_geometry.html" title="Manipulate and load geometry from disk.">HumanFactors.Geometry</a>;</code> and <code>using System.Diagnostics;</code> to your block of using declarations. After adding that line, add the word <code>static</code> after the word <code>public</code> on line 12. This will make it so we don't need to instantiate a new instance of the class in order to run the function we want. After doing this, the editor will show an error with the code we wrote previously. Delete the body of that function, leaving the space between the open and closing braces of Class1 empty.</p>
+<div class="fragment"><div class="line">using System;</div>
+<div class="line">using System.Collections.Generic;</div>
+<div class="line">using System.Linq;</div>
+<div class="line">using System.Text;</div>
+<div class="line">using System.Threading.Tasks;</div>
+<div class="line"> </div>
+<div class="line">using HumanFactors;</div>
+<div class="line">using HumanFactors.SpatialStructures;</div>
+<div class="line">using HumanFactors.Geometry;</div>
+<div class="line">using System.Diagnostics;</div>
+<div class="line"> </div>
+<div class="line">namespace ClassLibrary1</div>
+<div class="line">{</div>
+<div class="line">    public static class Class1</div>
+<div class="line">    {</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+</div><!-- fragment --><p><img src="class_library_1_blank.png" alt="" class="inline" title="Blank console project"/>   </p>
+<p><em>Figure</em> <b>5.2.2</b> : <em>Blank console project</em></p>
+<p>At the end of this process, the entire file should contain only the above code, also shown as a picture in Figure 5.2.2. Now with the body of the class empty we will add a new function <code>public static void SampleLoadOBJ()</code>. Write the following into your editor in the body of Class1:</p>
+<div class="fragment"><div class="line">using System;</div>
+<div class="line">using System.Collections.Generic;</div>
+<div class="line">using System.Linq;</div>
+<div class="line">using System.Text;</div>
+<div class="line">using System.Threading.Tasks;</div>
+<div class="line"> </div>
+<div class="line">using HumanFactors;</div>
+<div class="line">using HumanFactors.SpatialStructures;</div>
+<div class="line">using HumanFactors.Geometry;</div>
+<div class="line">using System.Diagnostics;</div>
+<div class="line"> </div>
+<div class="line">namespace ClassLibrary1</div>
+<div class="line">{</div>
+<div class="line">    public static class Class1</div>
+<div class="line">    {</div>
+<div class="line">        public static void SampleOBJ()</div>
+<div class="line">        {</div>
+<div class="line">            // Change the path here to the full path to your own OBJ file. </div>
+<div class="line">            string obj_path = &quot;X:/models/plane.obj&quot;;</div>
+<div class="line"> </div>
+<div class="line">            // Load the OBj file from disk.</div>
+<div class="line">            MeshInfo m = OBJLoader.LoadOBJ(obj_path);</div>
+<div class="line"> </div>
+<div class="line">            // Write it to console</div>
+<div class="line">            Debug.WriteLine(m);</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+</div><!-- fragment --><p><img src="obj_loader.png" alt="" class="inline" title="ObJ Loader Code"/>   </p>
+<p><em>Figure</em> <b>5.2.3</b> : <em>Full code with obj sample loader.</em></p>
+<p>Make sure your code matches before progressing.</p>
+<p><img src="build_solution_console.png" alt="" class="inline" title="ObJ Loader Code"/>   </p>
+<p><em>Figure</em> <b>5.2.4</b> : <em>Building Solution</em></p>
+<p>Once you're sure your code matches, build the project by going to build &gt; build solution. This should build without errors. If this is the case, you have added the sample code successfully and are ready to write the command line application to call it.</p>
+<h2><a class="anchor" id="autotoc_md59"></a>
+Adding a reference to the library from the Console App</h2>
+<p>In this section we will add the necessary code to the command line application to call the code we just wrote. Despite being in the same solution, we need to explicitly add a reference from ConsoleApp1 to ClassLibrary1 before we can use the code from it.</p>
+<p><img src="change_to_program.cs.png" alt="" class="inline" title="Change to program.cs"/>   </p>
+<p><em>Figure</em> <b>5.3.1</b> : <em>Change to Program.cs</em></p>
+<p>Go to the solution explorer and click on Program.cs under the ConsoleApp1 Project as shown in Figure 5.3.1.</p>
+<p><img src="program_1_blank.png" alt="" class="inline" title="Program.cs blank"/>   </p>
+<p><em>Figure</em> <b>5.3.2</b> : <em>Program.cs Blank</em></p>
+<p>Before we can reference the other project, we must first add a reference to it, similar to how we added a reference to the humanfactors.dll in the second section of this tutorial.</p>
+<p><img src="add_reference_console_app_1.png" alt="" class="inline" title="Add reference ConsoleApp1"/>   </p>
+<p><em>Figure</em> <b>5.3.3</b> : <em>Add reference menu for ConsoleApp1</em></p>
+<p>Right click on ConsoleApp1 in the solution explorer, hover over Add then CLick <code>Add Reference</code> like shown in Figure 5.3.3.</p>
+<p><img src="projects_add_console.png" alt="" class="inline" title="Go To Projects Tab"/>   </p>
+<p><em>Figure</em> <b>5.3.4</b> : <em>Circled: Projects tab in the reference manager</em></p>
+<p>Doing so will open the reference manager. For this case, we want to add a reference to another project, not an external DLL, so we'll need to go to the projects tab in the left sidebar, circled in Figure 5.3.4.</p>
+<p><img src="reference_manager_projects.png" alt="" class="inline" title="Check off ClassLibrary1"/>   </p>
+<p><em>Figure</em> <b>5.3.5</b> : <em>Reference Manager Projects Section</em></p>
+<p>Now, in the projects tab, check off Class Library 1 to mark it as a reference and click the OK button in the bottom right corner of the reference manager.</p>
+<p><img src="class_library_1_referenced.png" alt="" class="inline" title="Referenced ClassLibrary1"/>   </p>
+<p><em>Figure</em> <b>5.3.6</b> : <em>Highlighted: Class Library 1 in in the references of ConsoleApp1</em></p>
+<p>After pressing OK, you should see ClassLibrary1 in the references of ConsoleApp1 like highlighted in Figure 5.3.6. If you see this, then you're ready to move on to writing the code for the command line application.</p>
+<h2><a class="anchor" id="autotoc_md60"></a>
+Writing And Executing the Command Line Application</h2>
+<p>Now that the console project can reference our library, we will write some code to call the example function we defined.</p>
+<p><img src="program_1_blank.png" alt="" class="inline" title="Blank Console Code"/>   </p>
+<p><em>Figure</em> <b>5.4.1</b> : <em>Default contents of program.cs</em></p>
+<p>You should still have the code from Program.cs open like in Figure 5.4.1. From here we're going to add the following line to the <code>static void Main()</code> function:</p>
+<p><code>ClassLibrary1.Class1.SampleOBJ();</code></p>
+<p><img src="main_class1.png" alt="" class="inline" title="Main of Program.cs"/>   </p>
+<p><em>Figure</em> <b>5.4.2</b> : <em>Default contents of program.cs</em></p>
+<p>After doing this your code should look like this. Once again, build your solution, and ensure that it builds successfully. This is all the code that is required to test this tutorial and we are ready to test it.</p>
+<p><img src="debug_section_circled.png" alt="" class="inline" title="Debug section circled"/>   </p>
+<p><em>Figure</em> <b>5.4.3</b> : <em>Debug Toolbar Circled</em></p>
+<p>Look at the debug toolbar right of your Visual Studio window, circled in Figure 5.4.3. You press the <code>Start</code> button to debug your program, however the option may default to ClassLibrary1 instead of ConsoleApp1. To solve this, click on the dropdown that says ClassLibrary1 and change it to ConsoleApp1 like in Figure 5.4.3. There is one more step before we can run the program, and that is to ensure that both ConsoleApp1 and ClassLibrary1 are built as 64 bit applications.</p>
+<p><img src="console_app_1_properties.png" alt="" class="inline" title="Console App1 Properties Menu"/>   </p>
+<p><em>Figure</em> <b>5.4.4</b> : <em>ConsoleApp1 Properties Menu</em></p>
+<p>Right click on ConsoleApp1 in the solution explorer and click Properties, like in Figure 5.4.4.</p>
+<p><img src="console_app_1_properties_tab.png" alt="" class="inline" title="Console App1 Properties Window"/>   </p>
+<p><em>Figure</em> <b>5.4.5</b> : <em>ConsoleApp1 Properties Tab</em></p>
+<p>Now you should be brought to console app 1's properties like in Figure 5.4.5. Here you can see that the option <code>Prefer 32 bit</code> is checked. We want to disable this option by unchecking the checkbox and changing Platform Target to x64.</p>
+<p><img src="change_to_64bit.png" alt="" class="inline" title="Console App1 Properties Window With 64 Bit"/>   </p>
+<p><em>Figure</em> <b>5.4.6</b> : <em>ConsoleApp1 Properties Tab</em></p>
+<p>Once you've done this, the window should match that of Figure 5.4.6. Once you're sure of this press <code>Ctrl + S</code> to save the changes, then press the X next to the console app 1 tab, circled in red. Ensure there is no asterisk next to the name of the tab before doing this, as that indicates unsaved changes. Once closed this will return you to the program.cs window. <em>Repeat this process for ClassLibrary 1 to ensure that it is also 64 bit before proceeding.</em></p>
+<p><img src="click_start.png" alt="" class="inline" title="Click Start Button"/>   </p>
+<p><em>Figure</em> <b>5.4.7</b> : <em>Circled Start button</em></p>
+<p>Now finally, click the start button circled in Figure 5.4.7 to test the program.</p>
+<p><img src="successful_output.png" alt="" class="inline" title="Successful Output"/>   </p>
+<p><em>Figure</em> <b>5.4.8</b> : <em>Successful Output Highlighted</em></p>
+<p>Upon clicking start, you should see a console window appear briefly, then close. Look in the output at the bottom of your Visual Studio window. You should see the line HumanFactors.Geometry.Meshinfo. IF this is the case then you have successfully created a project using Humanfactors to load an obj from disk. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Aug 4 2020 16:39:03 for Analysis by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Aug 5 2020 12:07:25 for Analysis by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

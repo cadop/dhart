@@ -153,7 +153,7 @@
 <codeline></codeline>
 <codeline><highlight class="normal">Once<sp/>you<sp/>click<sp/>on<sp/>`Do<sp/>Not<sp/>Copy`<sp/>you<sp/>should<sp/>see<sp/>a<sp/>drop<sp/>down<sp/>appear<sp/>to<sp/>the<sp/>right.<sp/>Click<sp/>on<sp/>the<sp/>downward<sp/>arrow<sp/>to<sp/>expand<sp/>it<sp/>then<sp/>select<sp/>`Copy<sp/>If<sp/>Newer`<sp/>like<sp/>in<sp/>Figure<sp/>3.7.<sp/>Upon<sp/>clicking<sp/>this<sp/>the<sp/>option<sp/>should<sp/>also<sp/>change<sp/>to<sp/>`Copy<sp/>if<sp/>Newer`.<sp/>Now<sp/>upon<sp/>building<sp/>the<sp/>program,<sp/>these<sp/>files<sp/>should<sp/>be<sp/>copied<sp/>to<sp/>the<sp/>output<sp/>directory<sp/>alongside<sp/>your<sp/>library<sp/>and<sp/>all<sp/>of<sp/>the<sp/>C#<sp/>references.</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">##<sp/>Testing<sp/>the<sp/>output</highlight></codeline>
+<codeline><highlight class="normal">##<sp/>Ensuring<sp/>Files<sp/>are<sp/>Properly<sp/>Placed<sp/>in<sp/>the<sp/>Output<sp/>Directory</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">With<sp/>everything<sp/>set<sp/>up<sp/>correctly,<sp/>we<sp/>should<sp/>now<sp/>be<sp/>able<sp/>to<sp/>demonstrate<sp/>that<sp/>this<sp/>process<sp/>works.<sp/>The<sp/>goal<sp/>is<sp/>to<sp/>ensure<sp/>Visual<sp/>Studio<sp/>can<sp/>see<sp/>the<sp/>referenced<sp/>C#<sp/>code,<sp/>and<sp/>that<sp/>it<sp/>copies<sp/>all<sp/>of<sp/>the<sp/>dependencies<sp/>to<sp/>the<sp/>output<sp/>directory<sp/>once<sp/>the<sp/>project<sp/>is<sp/>built.</highlight></codeline>
 <codeline></codeline>
@@ -198,7 +198,215 @@
 <codeline></codeline>
 <codeline><highlight class="normal">*Figure*<sp/>**4.5**<sp/>:<sp/>*Contents<sp/>of<sp/>the<sp/>Debug<sp/>Folder*</highlight></codeline>
 <codeline></codeline>
-<codeline><highlight class="normal">Once<sp/>there,<sp/>you<sp/>should<sp/>be<sp/>looking<sp/>at<sp/>the<sp/>output<sp/>of<sp/>your<sp/>program.<sp/>Verify<sp/>that<sp/>all<sp/>of<sp/>the<sp/>C#<sp/>and<sp/>non-C#<sp/>DLLs<sp/>that<sp/>we&apos;ve<sp/>added<sp/>have<sp/>been<sp/>copied<sp/>over<sp/>successfully.<sp/>If<sp/>your<sp/>folder&apos;s<sp/>contents<sp/>match<sp/>that<sp/>of<sp/>Figure<sp/>4.5<sp/>then<sp/>you&apos;ve<sp/>successfully<sp/>completed<sp/>this<sp/>tutorial.</highlight></codeline>
+<codeline><highlight class="normal">Once<sp/>there,<sp/>you<sp/>should<sp/>be<sp/>looking<sp/>at<sp/>the<sp/>output<sp/>of<sp/>your<sp/>program.<sp/>Verify<sp/>that<sp/>all<sp/>of<sp/>the<sp/>C#<sp/>and<sp/>non-C#<sp/>DLLs<sp/>that<sp/>we&apos;ve<sp/>added<sp/>have<sp/>been<sp/>copied<sp/>over<sp/>successfully.<sp/>Now<sp/>that<sp/>this<sp/>is<sp/>the<sp/>case,<sp/>we&apos;re<sp/>ready<sp/>to<sp/>move<sp/>onto<sp/>testing<sp/>that<sp/>this<sp/>DLL<sp/>works.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Testing<sp/>the<sp/>Interface</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">To<sp/>demonstrate<sp/>this<sp/>DLL<sp/>is<sp/>functional,<sp/>we<sp/>will<sp/>attempt<sp/>to<sp/>load<sp/>the<sp/>mesh<sp/>data<sp/>of<sp/>an<sp/>obj<sp/>file<sp/>from<sp/>disk.<sp/>In<sp/>this<sp/>tutorial<sp/>I<sp/>will<sp/>be<sp/>using<sp/>a<sp/>simple<sp/>plane<sp/>titled<sp/>`plane.obj`<sp/>however,<sp/>this<sp/>should<sp/>work<sp/>with<sp/>any<sp/>OBJ<sp/>file<sp/>so<sp/>pick<sp/>one<sp/>of<sp/>your<sp/>own<sp/>that<sp/>you&apos;d<sp/>like<sp/>to<sp/>use<sp/>with<sp/>HumanFactors.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Create<sp/>a<sp/>Console<sp/>Project</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Since<sp/>we<sp/>created<sp/>a<sp/>C#<sp/>library,<sp/>we<sp/>cannot<sp/>run<sp/>it<sp/>in<sp/>order<sp/>to<sp/>produce<sp/>output.<sp/>In<sp/>order<sp/>to<sp/>test<sp/>our<sp/>library,<sp/>we<sp/>will<sp/>create<sp/>a<sp/>second<sp/>project<sp/>that<sp/>links<sp/>with<sp/>our<sp/>library<sp/>to<sp/>execute<sp/>some<sp/>of<sp/>its<sp/>code.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Add<sp/>new<sp/>project<sp/>menu<sp/>console](walkthroughs/VisualStudio/add_new_project.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**5.1.1**<sp/>:<sp/>*Add<sp/>new<sp/>project<sp/>menu*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">To<sp/>add<sp/>a<sp/>new<sp/>project<sp/>right<sp/>click<sp/>on<sp/>the<sp/>solution<sp/>in<sp/>the<sp/>solution<sp/>explorer,<sp/>hover<sp/>over<sp/>add,<sp/>then<sp/>click<sp/>`New<sp/>Project`<sp/>as<sp/>shown<sp/>in<sp/>Figure<sp/>5.1.1.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Add<sp/>new<sp/>Project<sp/>dialog<sp/>console](walkthroughs/VisualStudio/add_new_project_console.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**5.1.2**<sp/>:<sp/>*New<sp/>Project<sp/>Dialog*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Like<sp/>in<sp/>the<sp/>previous<sp/>time<sp/>we<sp/>used<sp/>this<sp/>dialog,<sp/>the<sp/>contents<sp/>of<sp/>your<sp/>new<sp/>project<sp/>screen<sp/>may<sp/>not<sp/>match<sp/>this<sp/>tutorial&apos;s<sp/>due<sp/>to<sp/>differences<sp/>in<sp/>what<sp/>Visual<sp/>Studio<sp/>extensions<sp/>you<sp/>have<sp/>installed.<sp/>Scroll<sp/>down<sp/>until<sp/>you<sp/>see<sp/>`Console<sp/>app<sp/>(.NET<sp/>Framework)`,<sp/>circled<sp/>in<sp/>red<sp/>in<sp/>Figure<sp/>5.1.2.<sp/>Click<sp/>on<sp/>this<sp/>option,<sp/>then<sp/>click<sp/>on<sp/>the<sp/>Next<sp/>button<sp/>in<sp/>the<sp/>bottom<sp/>right,<sp/>circled<sp/>in<sp/>cyan<sp/>in<sp/>Figure<sp/>5.1.2.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![ConFigure<sp/>new<sp/>project<sp/>dialog<sp/>console](walkthroughs/VisualStudio/create_project_console.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**5.1.3**<sp/>:<sp/>*New<sp/>Project<sp/>Dialog*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">After<sp/>clicking<sp/>next<sp/>you&apos;ll<sp/>be<sp/>brought<sp/>to<sp/>the<sp/>conFigure<sp/>screen.<sp/>Nothing<sp/>should<sp/>need<sp/>to<sp/>be<sp/>changed<sp/>here,<sp/>so<sp/>just<sp/>click<sp/>the<sp/>create<sp/>button<sp/>in<sp/>the<sp/>bottom<sp/>right.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Blank<sp/>console<sp/>project](walkthroughs/VisualStudio/blank_console_project.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**5.1.4**<sp/>:<sp/>*Blank<sp/>console<sp/>project*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">After<sp/>that<sp/>is<sp/>complete,<sp/>you<sp/>should<sp/>be<sp/>brought<sp/>back<sp/>to<sp/>Visual<sp/>Studio<sp/>with<sp/>the<sp/>new<sp/>console<sp/>project<sp/>in<sp/>your<sp/>solution<sp/>explorer<sp/>(highlighted<sp/>in<sp/>5.1.4).<sp/>IF<sp/>this<sp/>is<sp/>the<sp/>case<sp/>then<sp/>we&apos;re<sp/>ready<sp/>to<sp/>move<sp/>onto<sp/>writing<sp/>to<sp/>code<sp/>to<sp/>load<sp/>an<sp/>obj<sp/>file.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Writing<sp/>Sample<sp/>Code</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Now<sp/>that<sp/>we<sp/>have<sp/>a<sp/>console<sp/>project<sp/>that<sp/>we<sp/>can<sp/>execute,<sp/>we&apos;ll<sp/>go<sp/>back<sp/>to<sp/>our<sp/>library<sp/>and<sp/>write<sp/>the<sp/>code<sp/>necessary<sp/>to<sp/>load<sp/>an<sp/>obj<sp/>file.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Blank<sp/>console<sp/>project](walkthroughs/VisualStudio/blank_console_project.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**5.2.1**<sp/>:<sp/>*Blank<sp/>console<sp/>project*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Go<sp/>back<sp/>to<sp/>the<sp/>.cs<sp/>file<sp/>we<sp/>made<sp/>in<sp/>the<sp/>previous<sp/>section<sp/>and<sp/>double<sp/>click<sp/>on<sp/>it<sp/>to<sp/>open<sp/>it.<sp/>In<sp/>this<sp/>fill<sp/>we<sp/>will<sp/>modify<sp/>Class1<sp/>to<sp/>be<sp/>static,<sp/>then<sp/>give<sp/>it<sp/>a<sp/>function<sp/>titled<sp/>`SampleLoadOBJ()`.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Before<sp/>moving<sp/>further,<sp/>add<sp/>the<sp/>lines<sp/>`using<sp/>HumanFactors.Geometry;`<sp/>and<sp/>`using<sp/>System.Diagnostics;`<sp/>to<sp/>your<sp/>block<sp/>of<sp/>using<sp/>declarations.<sp/><sp/>After<sp/>adding<sp/>that<sp/>line,<sp/>add<sp/>the<sp/>word<sp/>`static`<sp/>after<sp/>the<sp/>word<sp/>`public`<sp/>on<sp/>line<sp/>12.<sp/>This<sp/>will<sp/>make<sp/>it<sp/>so<sp/>we<sp/>don&apos;t<sp/>need<sp/>to<sp/>instantiate<sp/>a<sp/>new<sp/>instance<sp/>of<sp/>the<sp/>class<sp/>in<sp/>order<sp/>to<sp/>run<sp/>the<sp/>function<sp/>we<sp/>want.<sp/>After<sp/>doing<sp/>this,<sp/>the<sp/>editor<sp/>will<sp/>show<sp/>an<sp/>error<sp/>with<sp/>the<sp/>code<sp/>we<sp/>wrote<sp/>previously.<sp/>Delete<sp/>the<sp/>body<sp/>of<sp/>that<sp/>function,<sp/>leaving<sp/>the<sp/>space<sp/>between<sp/>the<sp/>open<sp/>and<sp/>closing<sp/>braces<sp/>of<sp/>Class1<sp/>empty.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```<sp/>C#</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>System;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>System.Collections.Generic;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>System.Linq;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>System.Text;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>System.Threading.Tasks;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">using<sp/>HumanFactors;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>HumanFactors.SpatialStructures;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>HumanFactors.Geometry;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>System.Diagnostics;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">namespace<sp/>ClassLibrary1</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>public<sp/>static<sp/>class<sp/>Class1</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Blank<sp/>console<sp/>project](walkthroughs/VisualStudio/class_library_1_blank.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**5.2.2**<sp/>:<sp/>*Blank<sp/>console<sp/>project*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">At<sp/>the<sp/>end<sp/>of<sp/>this<sp/>process,<sp/>the<sp/>entire<sp/>file<sp/>should<sp/>contain<sp/>only<sp/>the<sp/>above<sp/>code,<sp/>also<sp/>shown<sp/>as<sp/>a<sp/>picture<sp/>in<sp/>Figure<sp/>5.2.2.<sp/>Now<sp/>with<sp/>the<sp/>body<sp/>of<sp/>the<sp/>class<sp/>empty<sp/>we<sp/>will<sp/>add<sp/>a<sp/>new<sp/>function<sp/>`public<sp/>static<sp/>void<sp/>SampleLoadOBJ()`.<sp/>Write<sp/>the<sp/>following<sp/>into<sp/>your<sp/>editor<sp/>in<sp/>the<sp/>body<sp/>of<sp/>Class1:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```<sp/>C#</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>System;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>System.Collections.Generic;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>System.Linq;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>System.Text;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>System.Threading.Tasks;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">using<sp/>HumanFactors;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>HumanFactors.SpatialStructures;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>HumanFactors.Geometry;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>System.Diagnostics;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">namespace<sp/>ClassLibrary1</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>public<sp/>static<sp/>class<sp/>Class1</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>public<sp/>static<sp/>void<sp/>SampleOBJ()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Change<sp/>the<sp/>path<sp/>here<sp/>to<sp/>the<sp/>full<sp/>path<sp/>to<sp/>your<sp/>own<sp/>OBJ<sp/>file.<sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>string<sp/>obj_path<sp/>=<sp/>&quot;X:/models/plane.obj&quot;;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Load<sp/>the<sp/>OBj<sp/>file<sp/>from<sp/>disk.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MeshInfo<sp/>m<sp/>=<sp/>OBJLoader.LoadOBJ(obj_path);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Write<sp/>it<sp/>to<sp/>console</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Debug.WriteLine(m);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![ObJ<sp/>Loader<sp/>Code](walkthroughs/VisualStudio/obj_loader.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**5.2.3**<sp/>:<sp/>*Full<sp/>code<sp/>with<sp/>obj<sp/>sample<sp/>loader.*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Make<sp/>sure<sp/>your<sp/>code<sp/>matches<sp/>before<sp/>progressing.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![ObJ<sp/>Loader<sp/>Code](walkthroughs/VisualStudio/build_solution_console.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**5.2.4**<sp/>:<sp/>*Building<sp/>Solution*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Once<sp/>you&apos;re<sp/>sure<sp/>your<sp/>code<sp/>matches,<sp/>build<sp/>the<sp/>project<sp/>by<sp/>going<sp/>to<sp/>build<sp/>&gt;<sp/>build<sp/>solution.<sp/>This<sp/>should<sp/>build<sp/>without<sp/>errors.<sp/>If<sp/>this<sp/>is<sp/>the<sp/>case,<sp/>you<sp/>have<sp/>added<sp/>the<sp/>sample<sp/>code<sp/>successfully<sp/>and<sp/>are<sp/>ready<sp/>to<sp/>write<sp/>the<sp/>command<sp/>line<sp/>application<sp/>to<sp/>call<sp/>it.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Adding<sp/>a<sp/>reference<sp/>to<sp/>the<sp/>library<sp/>from<sp/>the<sp/>Console<sp/>App</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">In<sp/>this<sp/>section<sp/>we<sp/>will<sp/>add<sp/>the<sp/>necessary<sp/>code<sp/>to<sp/>the<sp/>command<sp/>line<sp/>application<sp/>to<sp/>call<sp/>the<sp/>code<sp/>we<sp/>just<sp/>wrote.<sp/>Despite<sp/>being<sp/>in<sp/>the<sp/>same<sp/>solution,<sp/>we<sp/>need<sp/>to<sp/>explicitly<sp/>add<sp/>a<sp/>reference<sp/>from<sp/>ConsoleApp1<sp/>to<sp/>ClassLibrary1<sp/>before<sp/>we<sp/>can<sp/>use<sp/>the<sp/>code<sp/>from<sp/>it.<sp/></highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Change<sp/>to<sp/>program.cs](walkthroughs/VisualStudio/change_to_program.cs.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**5.3.1**<sp/>:<sp/>*Change<sp/>to<sp/>Program.cs*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Go<sp/>to<sp/>the<sp/>solution<sp/>explorer<sp/>and<sp/>click<sp/>on<sp/>Program.cs<sp/>under<sp/>the<sp/>ConsoleApp1<sp/>Project<sp/>as<sp/>shown<sp/>in<sp/>Figure<sp/>5.3.1.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Program.cs<sp/>blank](walkthroughs/VisualStudio/program_1_blank.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**5.3.2**<sp/>:<sp/>*Program.cs<sp/>Blank*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Before<sp/>we<sp/>can<sp/>reference<sp/>the<sp/>other<sp/>project,<sp/>we<sp/>must<sp/>first<sp/>add<sp/>a<sp/>reference<sp/>to<sp/>it,<sp/>similar<sp/>to<sp/>how<sp/>we<sp/>added<sp/>a<sp/>reference<sp/>to<sp/>the<sp/>humanfactors.dll<sp/>in<sp/>the<sp/>second<sp/>section<sp/>of<sp/>this<sp/>tutorial.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Add<sp/>reference<sp/>ConsoleApp1](walkthroughs/VisualStudio/add_reference_console_app_1.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**5.3.3**<sp/>:<sp/>*Add<sp/>reference<sp/>menu<sp/>for<sp/>ConsoleApp1*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Right<sp/>click<sp/>on<sp/><sp/>ConsoleApp1<sp/>in<sp/>the<sp/>solution<sp/>explorer,<sp/>hover<sp/>over<sp/>Add<sp/>then<sp/>CLick<sp/>`Add<sp/>Reference`<sp/>like<sp/>shown<sp/>in<sp/>Figure<sp/>5.3.3.<sp/></highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Go<sp/>To<sp/>Projects<sp/>Tab](walkthroughs/VisualStudio/projects_add_console.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**5.3.4**<sp/>:<sp/>*Circled:<sp/>Projects<sp/>tab<sp/>in<sp/>the<sp/>reference<sp/>manager*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Doing<sp/>so<sp/>will<sp/>open<sp/>the<sp/>reference<sp/>manager.<sp/>For<sp/>this<sp/>case,<sp/>we<sp/>want<sp/>to<sp/>add<sp/>a<sp/>reference<sp/>to<sp/>another<sp/>project,<sp/>not<sp/>an<sp/>external<sp/>DLL,<sp/>so<sp/>we&apos;ll<sp/>need<sp/>to<sp/>go<sp/>to<sp/>the<sp/>projects<sp/>tab<sp/>in<sp/>the<sp/>left<sp/>sidebar,<sp/>circled<sp/>in<sp/>Figure<sp/>5.3.4.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Check<sp/>off<sp/>ClassLibrary1](walkthroughs/VisualStudio/reference_manager_projects.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**5.3.5**<sp/>:<sp/>*Reference<sp/>Manager<sp/>Projects<sp/>Section*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Now,<sp/>in<sp/>the<sp/>projects<sp/>tab,<sp/>check<sp/>off<sp/>Class<sp/>Library<sp/>1<sp/>to<sp/>mark<sp/>it<sp/>as<sp/>a<sp/>reference<sp/>and<sp/>click<sp/>the<sp/>OK<sp/>button<sp/>in<sp/>the<sp/>bottom<sp/>right<sp/>corner<sp/>of<sp/>the<sp/>reference<sp/>manager.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Referenced<sp/>ClassLibrary1](walkthroughs/VisualStudio/class_library_1_referenced.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**5.3.6**<sp/>:<sp/>*Highlighted:<sp/>Class<sp/>Library<sp/>1<sp/>in<sp/>in<sp/>the<sp/>references<sp/>of<sp/>ConsoleApp1*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">After<sp/>pressing<sp/>OK,<sp/>you<sp/>should<sp/>see<sp/>ClassLibrary1<sp/>in<sp/>the<sp/>references<sp/>of<sp/>ConsoleApp1<sp/>like<sp/>highlighted<sp/>in<sp/>Figure<sp/>5.3.6.<sp/>If<sp/>you<sp/>see<sp/>this,<sp/>then<sp/>you&apos;re<sp/>ready<sp/>to<sp/>move<sp/>on<sp/>to<sp/>writing<sp/>the<sp/>code<sp/>for<sp/>the<sp/>command<sp/>line<sp/>application.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Writing<sp/>And<sp/>Executing<sp/>the<sp/>Command<sp/>Line<sp/>Application</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Now<sp/>that<sp/>the<sp/>console<sp/>project<sp/>can<sp/>reference<sp/>our<sp/>library,<sp/>we<sp/>will<sp/>write<sp/>some<sp/>code<sp/>to<sp/>call<sp/>the<sp/>example<sp/>function<sp/>we<sp/>defined.<sp/></highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Blank<sp/>Console<sp/>Code](walkthroughs/VisualStudio/program_1_blank.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**5.4.1**<sp/>:<sp/>*Default<sp/>contents<sp/>of<sp/>program.cs*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">You<sp/>should<sp/>still<sp/>have<sp/>the<sp/>code<sp/>from<sp/>Program.cs<sp/>open<sp/>like<sp/>in<sp/>Figure<sp/>5.4.1.<sp/><sp/>From<sp/>here<sp/>we&apos;re<sp/>going<sp/>to<sp/>add<sp/>the<sp/>following<sp/>line<sp/>to<sp/>the<sp/>`static<sp/>void<sp/>Main()`<sp/>function:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```ClassLibrary1.Class1.SampleOBJ();```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Main<sp/>of<sp/>Program.cs](walkthroughs/VisualStudio/main_class1.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**5.4.2**<sp/>:<sp/>*Default<sp/>contents<sp/>of<sp/>program.cs*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">After<sp/>doing<sp/>this<sp/>your<sp/>code<sp/>should<sp/>look<sp/>like<sp/>this.<sp/>Once<sp/>again,<sp/>build<sp/>your<sp/>solution,<sp/>and<sp/>ensure<sp/>that<sp/>it<sp/>builds<sp/>successfully.<sp/>This<sp/>is<sp/>all<sp/>the<sp/>code<sp/>that<sp/>is<sp/>required<sp/>to<sp/>test<sp/>this<sp/>tutorial<sp/>and<sp/>we<sp/>are<sp/>ready<sp/>to<sp/>test<sp/>it.<sp/></highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Debug<sp/>section<sp/>circled](walkthroughs/VisualStudio/debug_section_circled.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**5.4.3**<sp/>:<sp/>*Debug<sp/>Toolbar<sp/>Circled*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Look<sp/>at<sp/>the<sp/>debug<sp/>toolbar<sp/>right<sp/>of<sp/>your<sp/>Visual<sp/>Studio<sp/>window,<sp/>circled<sp/>in<sp/>Figure<sp/>5.4.3.<sp/>You<sp/>press<sp/>the<sp/>`Start`<sp/>button<sp/>to<sp/>debug<sp/>your<sp/>program,<sp/>however<sp/>the<sp/>option<sp/>may<sp/>default<sp/>to<sp/>ClassLibrary1<sp/>instead<sp/>of<sp/>ConsoleApp1.<sp/>To<sp/>solve<sp/>this,<sp/>click<sp/>on<sp/>the<sp/>dropdown<sp/>that<sp/>says<sp/>ClassLibrary1<sp/>and<sp/>change<sp/>it<sp/>to<sp/>ConsoleApp1<sp/>like<sp/>in<sp/>Figure<sp/>5.4.3.<sp/>There<sp/>is<sp/>one<sp/>more<sp/>step<sp/>before<sp/>we<sp/>can<sp/>run<sp/>the<sp/>program,<sp/>and<sp/>that<sp/>is<sp/>to<sp/>ensure<sp/>that<sp/>both<sp/>ConsoleApp1<sp/>and<sp/>ClassLibrary1<sp/>are<sp/>built<sp/>as<sp/>64<sp/>bit<sp/>applications.</highlight></codeline>
+<codeline></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Console<sp/>App1<sp/>Properties<sp/>Menu](walkthroughs/VisualStudio/console_app_1_properties.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**5.4.4**<sp/>:<sp/>*ConsoleApp1<sp/>Properties<sp/>Menu*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Right<sp/>click<sp/>on<sp/>ConsoleApp1<sp/>in<sp/>the<sp/>solution<sp/>explorer<sp/>and<sp/>click<sp/>Properties,<sp/>like<sp/>in<sp/>Figure<sp/>5.4.4.<sp/></highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Console<sp/>App1<sp/>Properties<sp/>Window](walkthroughs/VisualStudio/console_app_1_properties_tab.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**5.4.5**<sp/>:<sp/>*ConsoleApp1<sp/>Properties<sp/>Tab*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Now<sp/>you<sp/>should<sp/>be<sp/>brought<sp/>to<sp/>console<sp/>app<sp/>1&apos;s<sp/>properties<sp/>like<sp/>in<sp/>Figure<sp/>5.4.5.<sp/>Here<sp/>you<sp/>can<sp/>see<sp/>that<sp/>the<sp/>option<sp/>`Prefer<sp/>32<sp/>bit`<sp/>is<sp/>checked.<sp/>We<sp/>want<sp/>to<sp/>disable<sp/>this<sp/>option<sp/>by<sp/>unchecking<sp/>the<sp/>checkbox<sp/>and<sp/>changing<sp/>Platform<sp/>Target<sp/>to<sp/>x64.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Console<sp/>App1<sp/>Properties<sp/>Window<sp/>With<sp/>64<sp/>Bit](walkthroughs/VisualStudio/change_to_64bit.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**5.4.6**<sp/>:<sp/>*ConsoleApp1<sp/>Properties<sp/>Tab*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Once<sp/>you&apos;ve<sp/>done<sp/>this,<sp/>the<sp/>window<sp/>should<sp/>match<sp/>that<sp/>of<sp/>Figure<sp/>5.4.6.<sp/>Once<sp/>you&apos;re<sp/>sure<sp/>of<sp/>this<sp/>press<sp/>`Ctrl<sp/>+<sp/>S`<sp/>to<sp/>save<sp/>the<sp/>changes,<sp/>then<sp/>press<sp/>the<sp/>X<sp/>next<sp/>to<sp/>the<sp/>console<sp/>app<sp/>1<sp/>tab,<sp/>circled<sp/>in<sp/>red.<sp/>Ensure<sp/>there<sp/>is<sp/>no<sp/>asterisk<sp/>next<sp/>to<sp/>the<sp/>name<sp/>of<sp/>the<sp/>tab<sp/>before<sp/>doing<sp/>this,<sp/>as<sp/>that<sp/>indicates<sp/>unsaved<sp/>changes.<sp/>Once<sp/>closed<sp/>this<sp/>will<sp/>return<sp/>you<sp/>to<sp/>the<sp/>program.cs<sp/>window.<sp/>*Repeat<sp/>this<sp/>process<sp/>for<sp/>ClassLibrary<sp/>1<sp/>to<sp/>ensure<sp/>that<sp/>it<sp/>is<sp/>also<sp/>64<sp/>bit<sp/>before<sp/>proceeding.*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Click<sp/>Start<sp/>Button](walkthroughs/VisualStudio/click_start.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**5.4.7**<sp/>:<sp/>*Circled<sp/>Start<sp/>button*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Now<sp/>finally,<sp/>click<sp/>the<sp/>start<sp/>button<sp/>circled<sp/>in<sp/>Figure<sp/>5.4.7<sp/>to<sp/>test<sp/>the<sp/>program.<sp/></highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![Successful<sp/>Output](walkthroughs/VisualStudio/successful_output.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*Figure*<sp/>**5.4.8**<sp/>:<sp/>*Successful<sp/>Output<sp/>Highlighted*</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Upon<sp/>clicking<sp/>start,<sp/>you<sp/>should<sp/>see<sp/>a<sp/>console<sp/>window<sp/>appear<sp/>briefly,<sp/>then<sp/>close.<sp/>Look<sp/>in<sp/>the<sp/>output<sp/>at<sp/>the<sp/>bottom<sp/>of<sp/>your<sp/>Visual<sp/>Studio<sp/>window.<sp/>You<sp/>should<sp/>see<sp/>the<sp/>line<sp/>HumanFactors.Geometry.Meshinfo.<sp/>IF<sp/>this<sp/>is<sp/>the<sp/>case<sp/>then<sp/>you<sp/>have<sp/>successfully<sp/>created<sp/>a<sp/>project<sp/>using<sp/>Humanfactors<sp/>to<sp/>load<sp/>an<sp/>obj<sp/>from<sp/>disk.<sp/></highlight></codeline>
     </programlisting>
     <location file="src/Csharp/docs/markdown/visual_studio_tutorial.md"/>
   </compounddef>

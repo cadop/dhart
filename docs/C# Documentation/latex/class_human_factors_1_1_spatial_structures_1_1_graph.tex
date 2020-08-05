@@ -74,6 +74,9 @@ This \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Grap
 \begin{DoxyParagraph}{Node\+Attributes}
 The graph is able to store an arbitrary amount of information about the nodes it contains as strings. Similar to alternate cost types, node attributes are each have a distinct key as their name, but instead of conatining information about edges in the graph, node attributes contain information about nodes. Unlike the cost algorithms in edgecosts, right now there is no functionality within \mbox{\hyperlink{namespace_human_factors}{Human\+Factors}} that populates the node attributes of the graph with any kind of metric, however the methods to add and clear node attributes are made available so you are free to add your own node attributes.
 \end{DoxyParagraph}
+\begin{DoxyNote}{Note}
+To get the X\+YZ coordinates of a node from it\textquotesingle{}s ID, use the ID as an index into the graph\textquotesingle{}s nodes array returned by \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a6b2aeaa562da06bec0d23aaabb2ba74d}{get\+Nodes()}}; For example, if you want to get the node with an ID of 1 from the graph, you\textquotesingle{}d access the element at index 1 in the nodes array.
+\end{DoxyNote}
 \begin{DoxyInvariant}{Invariant}
 1) The C\+SR maintained by this graph will always be valid. 
 
@@ -91,7 +94,7 @@ The graph offers some basic functionality to add edges and nodes but it\textquot
 \end{DoxySeeAlso}
 
 
-Definition at line 95 of file Graph.\+cs.
+Definition at line 101 of file Graph.\+cs.
 
 
 
@@ -113,7 +116,7 @@ Wrap a graph that already exists in unmanaged memory.
 
 
 
-Definition at line 102 of file Graph.\+cs.
+Definition at line 108 of file Graph.\+cs.
 
 \mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_graph_a01855a86f49d22301651cf7098ee8967}\label{class_human_factors_1_1_spatial_structures_1_1_graph_a01855a86f49d22301651cf7098ee8967}} 
 \index{HumanFactors.SpatialStructures.Graph@{HumanFactors.SpatialStructures.Graph}!Graph@{Graph}}
@@ -127,7 +130,7 @@ Construct a new empty graph in unmanaged memory.
 
 
 
-Definition at line 105 of file Graph.\+cs.
+Definition at line 111 of file Graph.\+cs.
 
 
 
@@ -317,7 +320,7 @@ Define a node attribute for the node at id.
 \end{DoxyParagraph}
 
 
-Definition at line 371 of file Graph.\+cs.
+Definition at line 377 of file Graph.\+cs.
 
 \mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_graph_a4cf45189fef35fbd24aa74a9f51adafc}\label{class_human_factors_1_1_spatial_structures_1_1_graph_a4cf45189fef35fbd24aa74a9f51adafc}} 
 \index{HumanFactors.SpatialStructures.Graph@{HumanFactors.SpatialStructures.Graph}!AddNodeAttribute@{AddNodeAttribute}}
@@ -369,7 +372,7 @@ the length of {\ttfamily ids} and {\ttfamily scores} must match
 {\ttfamily $>$$>$$>$ 200}~\newline
 
 
-Definition at line 411 of file Graph.\+cs.
+Definition at line 417 of file Graph.\+cs.
 
 
 
@@ -433,7 +436,7 @@ The order of the scores returned bythis function match the order of the scores r
 \end{DoxyParagraph}
 
 
-Definition at line 266 of file Graph.\+cs.
+Definition at line 272 of file Graph.\+cs.
 
 
 
@@ -480,7 +483,7 @@ Clear an attribute and all of its scores from the graph.
 \end{DoxyParagraph}
 
 
-Definition at line 484 of file Graph.\+cs.
+Definition at line 490 of file Graph.\+cs.
 
 
 
@@ -531,7 +534,7 @@ C\+S\+R\+Ptrs for more info on the C\+SR type and how to access it.
 \end{DoxyParagraph}
 
 
-Definition at line 225 of file Graph.\+cs.
+Definition at line 231 of file Graph.\+cs.
 
 
 
@@ -586,7 +589,7 @@ This is not a high performance function, since each index into the C\+SR require
 \end{DoxyParagraph}
 
 
-Definition at line 305 of file Graph.\+cs.
+Definition at line 311 of file Graph.\+cs.
 
 
 
@@ -664,7 +667,7 @@ If {\ttfamily attribute} didn\textquotesingle{}t exist in the graph, then an emp
 \end{DoxyParagraph}
 
 
-Definition at line 450 of file Graph.\+cs.
+Definition at line 456 of file Graph.\+cs.
 
 
 
@@ -825,7 +828,7 @@ True. This is guaranteed to execute properly. ~\newline
 \end{DoxyReturn}
 
 
-Definition at line 333 of file Graph.\+cs.
+Definition at line 339 of file Graph.\+cs.
 
 
 
@@ -846,7 +849,7 @@ This graph\textquotesingle{}s C\+SR pointers.
 
 
 
-Definition at line 98 of file Graph.\+cs.
+Definition at line 104 of file Graph.\+cs.
 
 
 

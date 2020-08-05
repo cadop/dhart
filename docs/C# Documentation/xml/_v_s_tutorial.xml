@@ -174,7 +174,7 @@
 <para>Once you click on <computeroutput>Do Not Copy</computeroutput> you should see a drop down appear to the right. Click on the downward arrow to expand it then select <computeroutput>Copy If Newer</computeroutput> like in Figure 3.7. Upon clicking this the option should also change to <computeroutput>Copy if Newer</computeroutput>. Now upon building the program, these files should be copied to the output directory alongside your library and all of the C# references.</para>
 </sect1>
 <sect1 id="_v_s_tutorial_1autotoc_md55">
-<title>Testing the output</title>
+<title>Ensuring Files are Properly Placed in the Output Directory</title>
 <para>With everything set up correctly, we should now be able to demonstrate that this process works. The goal is to ensure Visual Studio can see the referenced C# code, and that it copies all of the dependencies to the output directory once the project is built.</para>
 <para>under the line <computeroutput>using System.Threading.Tasks</computeroutput> enter the following using declarations.</para>
 <para><programlisting><codeline><highlight class="normal">using<sp/>HumanFactors;</highlight></codeline>
@@ -217,7 +217,230 @@
  <image type="docbook" name="bin_debug.png" inline="yes">Contents of the debug folder</image>
 </para>
 <para><emphasis>Figure</emphasis> <bold>4.5</bold> : <emphasis>Contents of the Debug Folder</emphasis></para>
-<para>Once there, you should be looking at the output of your program. Verify that all of the C# and non-C# DLLs that we&apos;ve added have been copied over successfully. If your folder&apos;s contents match that of Figure 4.5 then you&apos;ve successfully completed this tutorial. </para>
+<para>Once there, you should be looking at the output of your program. Verify that all of the C# and non-C# DLLs that we&apos;ve added have been copied over successfully. Now that this is the case, we&apos;re ready to move onto testing that this DLL works.</para>
+</sect1>
+<sect1 id="_v_s_tutorial_1autotoc_md56">
+<title>Testing the Interface</title>
+<para>To demonstrate this DLL is functional, we will attempt to load the mesh data of an obj file from disk. In this tutorial I will be using a simple plane titled <computeroutput>plane.obj</computeroutput> however, this should work with any OBJ file so pick one of your own that you&apos;d like to use with <ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.</para>
+<sect2 id="_v_s_tutorial_1autotoc_md57">
+<title>Create a Console Project</title>
+<para>Since we created a C# library, we cannot run it in order to produce output. In order to test our library, we will create a second project that links with our library to execute some of its code.</para>
+<para><image type="html" name="add_new_project.png" inline="yes">Add new project menu console</image>
+ <image type="latex" name="add_new_project.png" inline="yes">Add new project menu console</image>
+ <image type="rtf" name="add_new_project.png" inline="yes">Add new project menu console</image>
+ <image type="docbook" name="add_new_project.png" inline="yes">Add new project menu console</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>5.1.1</bold> : <emphasis>Add new project menu</emphasis></para>
+<para>To add a new project right click on the solution in the solution explorer, hover over add, then click <computeroutput>New Project</computeroutput> as shown in Figure 5.1.1.</para>
+<para><image type="html" name="add_new_project_console.png" inline="yes">Add new Project dialog console</image>
+ <image type="latex" name="add_new_project_console.png" inline="yes">Add new Project dialog console</image>
+ <image type="rtf" name="add_new_project_console.png" inline="yes">Add new Project dialog console</image>
+ <image type="docbook" name="add_new_project_console.png" inline="yes">Add new Project dialog console</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>5.1.2</bold> : <emphasis>New Project Dialog</emphasis></para>
+<para>Like in the previous time we used this dialog, the contents of your new project screen may not match this tutorial&apos;s due to differences in what Visual Studio extensions you have installed. Scroll down until you see <computeroutput>Console app (.NET Framework)</computeroutput>, circled in red in Figure 5.1.2. Click on this option, then click on the Next button in the bottom right, circled in cyan in Figure 5.1.2.</para>
+<para><image type="html" name="create_project_console.png" inline="yes">ConFigure new project dialog console</image>
+ <image type="latex" name="create_project_console.png" inline="yes">ConFigure new project dialog console</image>
+ <image type="rtf" name="create_project_console.png" inline="yes">ConFigure new project dialog console</image>
+ <image type="docbook" name="create_project_console.png" inline="yes">ConFigure new project dialog console</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>5.1.3</bold> : <emphasis>New Project Dialog</emphasis></para>
+<para>After clicking next you&apos;ll be brought to the conFigure screen. Nothing should need to be changed here, so just click the create button in the bottom right.</para>
+<para><image type="html" name="blank_console_project.png" inline="yes">Blank console project</image>
+ <image type="latex" name="blank_console_project.png" inline="yes">Blank console project</image>
+ <image type="rtf" name="blank_console_project.png" inline="yes">Blank console project</image>
+ <image type="docbook" name="blank_console_project.png" inline="yes">Blank console project</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>5.1.4</bold> : <emphasis>Blank console project</emphasis></para>
+<para>After that is complete, you should be brought back to Visual Studio with the new console project in your solution explorer (highlighted in 5.1.4). IF this is the case then we&apos;re ready to move onto writing to code to load an obj file.</para>
+</sect2>
+<sect2 id="_v_s_tutorial_1autotoc_md58">
+<title>Writing Sample Code</title>
+<para>Now that we have a console project that we can execute, we&apos;ll go back to our library and write the code necessary to load an obj file.</para>
+<para><image type="html" name="blank_console_project.png" inline="yes">Blank console project</image>
+ <image type="latex" name="blank_console_project.png" inline="yes">Blank console project</image>
+ <image type="rtf" name="blank_console_project.png" inline="yes">Blank console project</image>
+ <image type="docbook" name="blank_console_project.png" inline="yes">Blank console project</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>5.2.1</bold> : <emphasis>Blank console project</emphasis></para>
+<para>Go back to the .cs file we made in the previous section and double click on it to open it. In this fill we will modify Class1 to be static, then give it a function titled <computeroutput>SampleLoadOBJ()</computeroutput>.</para>
+<para>Before moving further, add the lines <computeroutput>using <ref refid="namespace_human_factors_1_1_geometry" kindref="compound">HumanFactors.Geometry</ref>;</computeroutput> and <computeroutput>using System.Diagnostics;</computeroutput> to your block of using declarations. After adding that line, add the word <computeroutput>static</computeroutput> after the word <computeroutput>public</computeroutput> on line 12. This will make it so we don&apos;t need to instantiate a new instance of the class in order to run the function we want. After doing this, the editor will show an error with the code we wrote previously. Delete the body of that function, leaving the space between the open and closing braces of Class1 empty.</para>
+<para><programlisting><codeline><highlight class="normal">using<sp/>System;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>System.Collections.Generic;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>System.Linq;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>System.Text;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>System.Threading.Tasks;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">using<sp/>HumanFactors;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>HumanFactors.SpatialStructures;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>HumanFactors.Geometry;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>System.Diagnostics;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">namespace<sp/>ClassLibrary1</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>public<sp/>static<sp/>class<sp/>Class1</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+<para><image type="html" name="class_library_1_blank.png" inline="yes">Blank console project</image>
+ <image type="latex" name="class_library_1_blank.png" inline="yes">Blank console project</image>
+ <image type="rtf" name="class_library_1_blank.png" inline="yes">Blank console project</image>
+ <image type="docbook" name="class_library_1_blank.png" inline="yes">Blank console project</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>5.2.2</bold> : <emphasis>Blank console project</emphasis></para>
+<para>At the end of this process, the entire file should contain only the above code, also shown as a picture in Figure 5.2.2. Now with the body of the class empty we will add a new function <computeroutput>public static void SampleLoadOBJ()</computeroutput>. Write the following into your editor in the body of Class1:</para>
+<para><programlisting><codeline><highlight class="normal">using<sp/>System;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>System.Collections.Generic;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>System.Linq;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>System.Text;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>System.Threading.Tasks;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">using<sp/>HumanFactors;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>HumanFactors.SpatialStructures;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>HumanFactors.Geometry;</highlight></codeline>
+<codeline><highlight class="normal">using<sp/>System.Diagnostics;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">namespace<sp/>ClassLibrary1</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>public<sp/>static<sp/>class<sp/>Class1</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>public<sp/>static<sp/>void<sp/>SampleOBJ()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Change<sp/>the<sp/>path<sp/>here<sp/>to<sp/>the<sp/>full<sp/>path<sp/>to<sp/>your<sp/>own<sp/>OBJ<sp/>file.<sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>string<sp/>obj_path<sp/>=<sp/>&quot;X:/models/plane.obj&quot;;</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Load<sp/>the<sp/>OBj<sp/>file<sp/>from<sp/>disk.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MeshInfo<sp/>m<sp/>=<sp/>OBJLoader.LoadOBJ(obj_path);</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Write<sp/>it<sp/>to<sp/>console</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Debug.WriteLine(m);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+<para><image type="html" name="obj_loader.png" inline="yes">ObJ Loader Code</image>
+ <image type="latex" name="obj_loader.png" inline="yes">ObJ Loader Code</image>
+ <image type="rtf" name="obj_loader.png" inline="yes">ObJ Loader Code</image>
+ <image type="docbook" name="obj_loader.png" inline="yes">ObJ Loader Code</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>5.2.3</bold> : <emphasis>Full code with obj sample loader.</emphasis></para>
+<para>Make sure your code matches before progressing.</para>
+<para><image type="html" name="build_solution_console.png" inline="yes">ObJ Loader Code</image>
+ <image type="latex" name="build_solution_console.png" inline="yes">ObJ Loader Code</image>
+ <image type="rtf" name="build_solution_console.png" inline="yes">ObJ Loader Code</image>
+ <image type="docbook" name="build_solution_console.png" inline="yes">ObJ Loader Code</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>5.2.4</bold> : <emphasis>Building Solution</emphasis></para>
+<para>Once you&apos;re sure your code matches, build the project by going to build &gt; build solution. This should build without errors. If this is the case, you have added the sample code successfully and are ready to write the command line application to call it.</para>
+</sect2>
+<sect2 id="_v_s_tutorial_1autotoc_md59">
+<title>Adding a reference to the library from the Console App</title>
+<para>In this section we will add the necessary code to the command line application to call the code we just wrote. Despite being in the same solution, we need to explicitly add a reference from ConsoleApp1 to ClassLibrary1 before we can use the code from it.</para>
+<para><image type="html" name="change_to_program.cs.png" inline="yes">Change to program.cs</image>
+ <image type="latex" name="change_to_program.cs.png" inline="yes">Change to program.cs</image>
+ <image type="rtf" name="change_to_program.cs.png" inline="yes">Change to program.cs</image>
+ <image type="docbook" name="change_to_program.cs.png" inline="yes">Change to program.cs</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>5.3.1</bold> : <emphasis>Change to Program.cs</emphasis></para>
+<para>Go to the solution explorer and click on Program.cs under the ConsoleApp1 Project as shown in Figure 5.3.1.</para>
+<para><image type="html" name="program_1_blank.png" inline="yes">Program.cs blank</image>
+ <image type="latex" name="program_1_blank.png" inline="yes">Program.cs blank</image>
+ <image type="rtf" name="program_1_blank.png" inline="yes">Program.cs blank</image>
+ <image type="docbook" name="program_1_blank.png" inline="yes">Program.cs blank</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>5.3.2</bold> : <emphasis>Program.cs Blank</emphasis></para>
+<para>Before we can reference the other project, we must first add a reference to it, similar to how we added a reference to the humanfactors.dll in the second section of this tutorial.</para>
+<para><image type="html" name="add_reference_console_app_1.png" inline="yes">Add reference ConsoleApp1</image>
+ <image type="latex" name="add_reference_console_app_1.png" inline="yes">Add reference ConsoleApp1</image>
+ <image type="rtf" name="add_reference_console_app_1.png" inline="yes">Add reference ConsoleApp1</image>
+ <image type="docbook" name="add_reference_console_app_1.png" inline="yes">Add reference ConsoleApp1</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>5.3.3</bold> : <emphasis>Add reference menu for ConsoleApp1</emphasis></para>
+<para>Right click on ConsoleApp1 in the solution explorer, hover over Add then CLick <computeroutput>Add Reference</computeroutput> like shown in Figure 5.3.3.</para>
+<para><image type="html" name="projects_add_console.png" inline="yes">Go To Projects Tab</image>
+ <image type="latex" name="projects_add_console.png" inline="yes">Go To Projects Tab</image>
+ <image type="rtf" name="projects_add_console.png" inline="yes">Go To Projects Tab</image>
+ <image type="docbook" name="projects_add_console.png" inline="yes">Go To Projects Tab</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>5.3.4</bold> : <emphasis>Circled: Projects tab in the reference manager</emphasis></para>
+<para>Doing so will open the reference manager. For this case, we want to add a reference to another project, not an external DLL, so we&apos;ll need to go to the projects tab in the left sidebar, circled in Figure 5.3.4.</para>
+<para><image type="html" name="reference_manager_projects.png" inline="yes">Check off ClassLibrary1</image>
+ <image type="latex" name="reference_manager_projects.png" inline="yes">Check off ClassLibrary1</image>
+ <image type="rtf" name="reference_manager_projects.png" inline="yes">Check off ClassLibrary1</image>
+ <image type="docbook" name="reference_manager_projects.png" inline="yes">Check off ClassLibrary1</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>5.3.5</bold> : <emphasis>Reference Manager Projects Section</emphasis></para>
+<para>Now, in the projects tab, check off Class Library 1 to mark it as a reference and click the OK button in the bottom right corner of the reference manager.</para>
+<para><image type="html" name="class_library_1_referenced.png" inline="yes">Referenced ClassLibrary1</image>
+ <image type="latex" name="class_library_1_referenced.png" inline="yes">Referenced ClassLibrary1</image>
+ <image type="rtf" name="class_library_1_referenced.png" inline="yes">Referenced ClassLibrary1</image>
+ <image type="docbook" name="class_library_1_referenced.png" inline="yes">Referenced ClassLibrary1</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>5.3.6</bold> : <emphasis>Highlighted: Class Library 1 in in the references of ConsoleApp1</emphasis></para>
+<para>After pressing OK, you should see ClassLibrary1 in the references of ConsoleApp1 like highlighted in Figure 5.3.6. If you see this, then you&apos;re ready to move on to writing the code for the command line application.</para>
+</sect2>
+<sect2 id="_v_s_tutorial_1autotoc_md60">
+<title>Writing And Executing the Command Line Application</title>
+<para>Now that the console project can reference our library, we will write some code to call the example function we defined.</para>
+<para><image type="html" name="program_1_blank.png" inline="yes">Blank Console Code</image>
+ <image type="latex" name="program_1_blank.png" inline="yes">Blank Console Code</image>
+ <image type="rtf" name="program_1_blank.png" inline="yes">Blank Console Code</image>
+ <image type="docbook" name="program_1_blank.png" inline="yes">Blank Console Code</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>5.4.1</bold> : <emphasis>Default contents of program.cs</emphasis></para>
+<para>You should still have the code from Program.cs open like in Figure 5.4.1. From here we&apos;re going to add the following line to the <computeroutput>static void Main()</computeroutput> function:</para>
+<para><computeroutput>ClassLibrary1.Class1.SampleOBJ();</computeroutput></para>
+<para><image type="html" name="main_class1.png" inline="yes">Main of Program.cs</image>
+ <image type="latex" name="main_class1.png" inline="yes">Main of Program.cs</image>
+ <image type="rtf" name="main_class1.png" inline="yes">Main of Program.cs</image>
+ <image type="docbook" name="main_class1.png" inline="yes">Main of Program.cs</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>5.4.2</bold> : <emphasis>Default contents of program.cs</emphasis></para>
+<para>After doing this your code should look like this. Once again, build your solution, and ensure that it builds successfully. This is all the code that is required to test this tutorial and we are ready to test it.</para>
+<para><image type="html" name="debug_section_circled.png" inline="yes">Debug section circled</image>
+ <image type="latex" name="debug_section_circled.png" inline="yes">Debug section circled</image>
+ <image type="rtf" name="debug_section_circled.png" inline="yes">Debug section circled</image>
+ <image type="docbook" name="debug_section_circled.png" inline="yes">Debug section circled</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>5.4.3</bold> : <emphasis>Debug Toolbar Circled</emphasis></para>
+<para>Look at the debug toolbar right of your Visual Studio window, circled in Figure 5.4.3. You press the <computeroutput>Start</computeroutput> button to debug your program, however the option may default to ClassLibrary1 instead of ConsoleApp1. To solve this, click on the dropdown that says ClassLibrary1 and change it to ConsoleApp1 like in Figure 5.4.3. There is one more step before we can run the program, and that is to ensure that both ConsoleApp1 and ClassLibrary1 are built as 64 bit applications.</para>
+<para><image type="html" name="console_app_1_properties.png" inline="yes">Console App1 Properties Menu</image>
+ <image type="latex" name="console_app_1_properties.png" inline="yes">Console App1 Properties Menu</image>
+ <image type="rtf" name="console_app_1_properties.png" inline="yes">Console App1 Properties Menu</image>
+ <image type="docbook" name="console_app_1_properties.png" inline="yes">Console App1 Properties Menu</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>5.4.4</bold> : <emphasis>ConsoleApp1 Properties Menu</emphasis></para>
+<para>Right click on ConsoleApp1 in the solution explorer and click Properties, like in Figure 5.4.4.</para>
+<para><image type="html" name="console_app_1_properties_tab.png" inline="yes">Console App1 Properties Window</image>
+ <image type="latex" name="console_app_1_properties_tab.png" inline="yes">Console App1 Properties Window</image>
+ <image type="rtf" name="console_app_1_properties_tab.png" inline="yes">Console App1 Properties Window</image>
+ <image type="docbook" name="console_app_1_properties_tab.png" inline="yes">Console App1 Properties Window</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>5.4.5</bold> : <emphasis>ConsoleApp1 Properties Tab</emphasis></para>
+<para>Now you should be brought to console app 1&apos;s properties like in Figure 5.4.5. Here you can see that the option <computeroutput>Prefer 32 bit</computeroutput> is checked. We want to disable this option by unchecking the checkbox and changing Platform Target to x64.</para>
+<para><image type="html" name="change_to_64bit.png" inline="yes">Console App1 Properties Window With 64 Bit</image>
+ <image type="latex" name="change_to_64bit.png" inline="yes">Console App1 Properties Window With 64 Bit</image>
+ <image type="rtf" name="change_to_64bit.png" inline="yes">Console App1 Properties Window With 64 Bit</image>
+ <image type="docbook" name="change_to_64bit.png" inline="yes">Console App1 Properties Window With 64 Bit</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>5.4.6</bold> : <emphasis>ConsoleApp1 Properties Tab</emphasis></para>
+<para>Once you&apos;ve done this, the window should match that of Figure 5.4.6. Once you&apos;re sure of this press <computeroutput>Ctrl + S</computeroutput> to save the changes, then press the X next to the console app 1 tab, circled in red. Ensure there is no asterisk next to the name of the tab before doing this, as that indicates unsaved changes. Once closed this will return you to the program.cs window. <emphasis>Repeat this process for ClassLibrary 1 to ensure that it is also 64 bit before proceeding.</emphasis></para>
+<para><image type="html" name="click_start.png" inline="yes">Click Start Button</image>
+ <image type="latex" name="click_start.png" inline="yes">Click Start Button</image>
+ <image type="rtf" name="click_start.png" inline="yes">Click Start Button</image>
+ <image type="docbook" name="click_start.png" inline="yes">Click Start Button</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>5.4.7</bold> : <emphasis>Circled Start button</emphasis></para>
+<para>Now finally, click the start button circled in Figure 5.4.7 to test the program.</para>
+<para><image type="html" name="successful_output.png" inline="yes">Successful Output</image>
+ <image type="latex" name="successful_output.png" inline="yes">Successful Output</image>
+ <image type="rtf" name="successful_output.png" inline="yes">Successful Output</image>
+ <image type="docbook" name="successful_output.png" inline="yes">Successful Output</image>
+</para>
+<para><emphasis>Figure</emphasis> <bold>5.4.8</bold> : <emphasis>Successful Output Highlighted</emphasis></para>
+<para>Upon clicking start, you should see a console window appear briefly, then close. Look in the output at the bottom of your Visual Studio window. You should see the line HumanFactors.Geometry.Meshinfo. IF this is the case then you have successfully created a project using Humanfactors to load an obj from disk. </para>
+</sect2>
 </sect1>
     </detaileddescription>
   </compounddef>
