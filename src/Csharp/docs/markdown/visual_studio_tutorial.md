@@ -144,7 +144,7 @@ Once the properties pane is visible (outlined in cyan in Figure 3.6) click on th
 
 Once you click on `Do Not Copy` you should see a drop down appear to the right. Click on the downward arrow to expand it then select `Copy If Newer` like in Figure 3.7. Upon clicking this the option should also change to `Copy if Newer`. Now upon building the program, these files should be copied to the output directory alongside your library and all of the C# references.
 
-## Testing the output
+## Ensuring Files are Properly Placed in the Output Directory
 
 With everything set up correctly, we should now be able to demonstrate that this process works. The goal is to ensure Visual Studio can see the referenced C# code, and that it copies all of the dependencies to the output directory once the project is built.
 
@@ -189,4 +189,212 @@ This should open an instance of the file explorer at the root of your project li
 
 *Figure* **4.5** : *Contents of the Debug Folder*
 
-Once there, you should be looking at the output of your program. Verify that all of the C# and non-C# DLLs that we've added have been copied over successfully. If your folder's contents match that of Figure 4.5 then you've successfully completed this tutorial.
+Once there, you should be looking at the output of your program. Verify that all of the C# and non-C# DLLs that we've added have been copied over successfully. Now that this is the case, we're ready to move onto testing that this DLL works.
+
+## Testing the Interface
+
+To demonstrate this DLL is functional, we will attempt to load the mesh data of an obj file from disk. In this tutorial I will be using a simple plane titled `plane.obj` however, this should work with any OBJ file so pick one of your own that you'd like to use with HumanFactors.
+
+### Create a Console Project
+
+Since we created a C# library, we cannot run it in order to produce output. In order to test our library, we will create a second project that links with our library to execute some of its code.
+
+![Add new project menu console](walkthroughs/VisualStudio/add_new_project.png)
+
+*Figure* **5.1.1** : *Add new project menu*
+
+To add a new project right click on the solution in the solution explorer, hover over add, then click `New Project` as shown in Figure 5.1.1.
+
+![Add new Project dialog console](walkthroughs/VisualStudio/add_new_project_console.png)
+
+*Figure* **5.1.2** : *New Project Dialog*
+
+Like in the previous time we used this dialog, the contents of your new project screen may not match this tutorial's due to differences in what Visual Studio extensions you have installed. Scroll down until you see `Console app (.NET Framework)`, circled in red in Figure 5.1.2. Click on this option, then click on the Next button in the bottom right, circled in cyan in Figure 5.1.2.
+
+![ConFigure new project dialog console](walkthroughs/VisualStudio/create_project_console.png)
+
+*Figure* **5.1.3** : *New Project Dialog*
+
+After clicking next you'll be brought to the conFigure screen. Nothing should need to be changed here, so just click the create button in the bottom right.
+
+![Blank console project](walkthroughs/VisualStudio/blank_console_project.png)
+
+*Figure* **5.1.4** : *Blank console project*
+
+After that is complete, you should be brought back to Visual Studio with the new console project in your solution explorer (highlighted in 5.1.4). IF this is the case then we're ready to move onto writing to code to load an obj file.
+
+### Writing Sample Code
+
+Now that we have a console project that we can execute, we'll go back to our library and write the code necessary to load an obj file.
+
+![Blank console project](walkthroughs/VisualStudio/blank_console_project.png)
+
+*Figure* **5.2.1** : *Blank console project*
+
+Go back to the .cs file we made in the previous section and double click on it to open it. In this fill we will modify Class1 to be static, then give it a function titled `SampleLoadOBJ()`.
+
+Before moving further, add the lines `using HumanFactors.Geometry;` and `using System.Diagnostics;` to your block of using declarations.  After adding that line, add the word `static` after the word `public` on line 12. This will make it so we don't need to instantiate a new instance of the class in order to run the function we want. After doing this, the editor will show an error with the code we wrote previously. Delete the body of that function, leaving the space between the open and closing braces of Class1 empty.
+
+``` C#
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using HumanFactors;
+using HumanFactors.SpatialStructures;
+using HumanFactors.Geometry;
+using System.Diagnostics;
+
+namespace ClassLibrary1
+{
+    public static class Class1
+    {
+    }
+}
+```
+
+![Blank console project](walkthroughs/VisualStudio/class_library_1_blank.png)
+
+*Figure* **5.2.2** : *Blank console project*
+
+At the end of this process, the entire file should contain only the above code, also shown as a picture in Figure 5.2.2. Now with the body of the class empty we will add a new function `public static void SampleLoadOBJ()`. Write the following into your editor in the body of Class1:
+
+``` C#
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using HumanFactors;
+using HumanFactors.SpatialStructures;
+using HumanFactors.Geometry;
+using System.Diagnostics;
+
+namespace ClassLibrary1
+{
+    public static class Class1
+    {
+        public static void SampleOBJ()
+        {
+            // Change the path here to the full path to your own OBJ file. 
+            string obj_path = "X:/models/plane.obj";
+
+            // Load the OBj file from disk.
+            MeshInfo m = OBJLoader.LoadOBJ(obj_path);
+
+            // Write it to console
+            Debug.WriteLine(m);
+        }
+    }
+}
+```
+
+![ObJ Loader Code](walkthroughs/VisualStudio/obj_loader.png)
+
+*Figure* **5.2.3** : *Full code with obj sample loader.*
+
+Make sure your code matches before progressing.
+
+![ObJ Loader Code](walkthroughs/VisualStudio/build_solution_console.png)
+
+*Figure* **5.2.4** : *Building Solution*
+
+Once you're sure your code matches, build the project by going to build > build solution. This should build without errors. If this is the case, you have added the sample code successfully and are ready to write the command line application to call it.
+
+### Adding a reference to the library from the Console App
+
+In this section we will add the necessary code to the command line application to call the code we just wrote. Despite being in the same solution, we need to explicitly add a reference from ConsoleApp1 to ClassLibrary1 before we can use the code from it. 
+
+![Change to program.cs](walkthroughs/VisualStudio/change_to_program.cs.png)
+
+*Figure* **5.3.1** : *Change to Program.cs*
+
+Go to the solution explorer and click on Program.cs under the ConsoleApp1 Project as shown in Figure 5.3.1.
+
+![Program.cs blank](walkthroughs/VisualStudio/program_1_blank.png)
+
+*Figure* **5.3.2** : *Program.cs Blank*
+
+Before we can reference the other project, we must first add a reference to it, similar to how we added a reference to the humanfactors.dll in the second section of this tutorial.
+
+![Add reference ConsoleApp1](walkthroughs/VisualStudio/add_reference_console_app_1.png)
+
+*Figure* **5.3.3** : *Add reference menu for ConsoleApp1*
+
+Right click on  ConsoleApp1 in the solution explorer, hover over Add then CLick `Add Reference` like shown in Figure 5.3.3. 
+
+![Go To Projects Tab](walkthroughs/VisualStudio/projects_add_console.png)
+
+*Figure* **5.3.4** : *Circled: Projects tab in the reference manager*
+
+Doing so will open the reference manager. For this case, we want to add a reference to another project, not an external DLL, so we'll need to go to the projects tab in the left sidebar, circled in Figure 5.3.4.
+
+![Check off ClassLibrary1](walkthroughs/VisualStudio/reference_manager_projects.png)
+
+*Figure* **5.3.5** : *Reference Manager Projects Section*
+
+Now, in the projects tab, check off Class Library 1 to mark it as a reference and click the OK button in the bottom right corner of the reference manager.
+
+![Referenced ClassLibrary1](walkthroughs/VisualStudio/class_library_1_referenced.png)
+
+*Figure* **5.3.6** : *Highlighted: Class Library 1 in in the references of ConsoleApp1*
+
+After pressing OK, you should see ClassLibrary1 in the references of ConsoleApp1 like highlighted in Figure 5.3.6. If you see this, then you're ready to move on to writing the code for the command line application.
+
+### Writing And Executing the Command Line Application
+
+Now that the console project can reference our library, we will write some code to call the example function we defined. 
+
+![Blank Console Code](walkthroughs/VisualStudio/program_1_blank.png)
+
+*Figure* **5.4.1** : *Default contents of program.cs*
+
+You should still have the code from Program.cs open like in Figure 5.4.1.  From here we're going to add the following line to the `static void Main()` function:
+
+```ClassLibrary1.Class1.SampleOBJ();```
+
+![Main of Program.cs](walkthroughs/VisualStudio/main_class1.png)
+
+*Figure* **5.4.2** : *Default contents of program.cs*
+
+After doing this your code should look like this. Once again, build your solution, and ensure that it builds successfully. This is all the code that is required to test this tutorial and we are ready to test it. 
+
+![Debug section circled](walkthroughs/VisualStudio/debug_section_circled.png)
+
+*Figure* **5.4.3** : *Debug Toolbar Circled*
+
+Look at the debug toolbar right of your Visual Studio window, circled in Figure 5.4.3. You press the `Start` button to debug your program, however the option may default to ClassLibrary1 instead of ConsoleApp1. To solve this, click on the dropdown that says ClassLibrary1 and change it to ConsoleApp1 like in Figure 5.4.3. There is one more step before we can run the program, and that is to ensure that both ConsoleApp1 and ClassLibrary1 are built as 64 bit applications.
+
+
+![Console App1 Properties Menu](walkthroughs/VisualStudio/console_app_1_properties.png)
+
+*Figure* **5.4.4** : *ConsoleApp1 Properties Menu*
+
+Right click on ConsoleApp1 in the solution explorer and click Properties, like in Figure 5.4.4. 
+
+![Console App1 Properties Window](walkthroughs/VisualStudio/console_app_1_properties_tab.png)
+
+*Figure* **5.4.5** : *ConsoleApp1 Properties Tab*
+
+Now you should be brought to console app 1's properties like in Figure 5.4.5. Here you can see that the option `Prefer 32 bit` is checked. We want to disable this option by unchecking the checkbox and changing Platform Target to x64.
+
+![Console App1 Properties Window With 64 Bit](walkthroughs/VisualStudio/change_to_64bit.png)
+
+*Figure* **5.4.6** : *ConsoleApp1 Properties Tab*
+
+Once you've done this, the window should match that of Figure 5.4.6. Once you're sure of this press `Ctrl + S` to save the changes, then press the X next to the console app 1 tab, circled in red. Ensure there is no asterisk next to the name of the tab before doing this, as that indicates unsaved changes. Once closed this will return you to the program.cs window. *Repeat this process for ClassLibrary 1 to ensure that it is also 64 bit before proceeding.*
+
+![Click Start Button](walkthroughs/VisualStudio/click_start.png)
+
+*Figure* **5.4.7** : *Circled Start button*
+
+Now finally, click the start button circled in Figure 5.4.7 to test the program. 
+
+![Successful Output](walkthroughs/VisualStudio/successful_output.png)
+
+*Figure* **5.4.8** : *Successful Output Highlighted*
+
+Upon clicking start, you should see a console window appear briefly, then close. Look in the output at the bottom of your Visual Studio window. You should see the line HumanFactors.Geometry.Meshinfo. IF this is the case then you have successfully created a project using Humanfactors to load an obj from disk. 
