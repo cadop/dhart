@@ -58,6 +58,45 @@ namespace HF {
 		ASSERT_GT(g.size(), 0);
 	}
 
+	TEST(_GraphGenerator, DuplicateNodes2) {
+		auto mesh = Geometry::LoadMeshObjects("energy_blob_zup.obj");
+
+		RayTracer::EmbreeRayTracer rt(mesh);
+		auto GG = GraphGenerator::GraphGenerator(rt, 0);
+
+		// Generate the graph 
+		auto g = GG.BuildNetwork(
+			std::array<float, 3>{-30, 0, 20},
+			std::array<double, 3>{2, 2, 180},
+			5000,
+			30,
+			60,
+			70,
+			60,
+			2
+		);
+
+		
+		// Assert that the distance from this node to every other node in the graph is > than rounding precision
+		const auto nodes = g.Nodes();
+		for (const auto& node : nodes) {
+
+			int close_to_nodes = 0;
+			for (const auto& node2 : nodes)
+			{
+				// Check if this node closer to node2 than rounding_precision would allow
+				if (node.distanceTo(node2) <0.001)
+				{
+					close_to_nodes++;
+				}
+				// If it's closer to two nodes (itself and one more) then it's not being rounded
+				ASSERT_LT(close_to_nodes, 2);
+			}
+		}
+		// The Graph size should be 875 in this test
+		ASSERT_EQ(g.size(), 875);
+	}
+
 	TEST(_GraphGenerator, DuplicateNodes) {
 		auto mesh = Geometry::LoadMeshObjects("energy_blob.obj");
 
