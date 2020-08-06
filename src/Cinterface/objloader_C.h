@@ -69,8 +69,9 @@ namespace HF {
 		rotation_matrix is a local variable in PerformRotation,<br>
 		and verts is a private field within HF::Geometry::MeshInfo.<br>
 		<br>
-		These assertion statements may evaluate false (which will halting execution)<br>
-		if NANs (not-a-number) or infinity values were created.<br>
+		These assertion statements may evaluate false (which will halt execution)<br>
+		if NANs (not-a-number) or infinity values were created<br>
+		from the xrot, yrot, or zrot values passed to this function.<br>
 */
 C_INTERFACE LoadOBJ(
 	const char* obj_path,
@@ -164,8 +165,12 @@ C_INTERFACE StoreMesh(
 
 		\snippet objloader\src\meshinfo.cpp snippet_objloader_assert
 
-		rotation_matrix is a local variable in PerformRotation, and verts is a private field within HF::Geometry::MeshInfo.
-		These assertion statements may evaluate false (which will halting execution) if NANs (not-a-number) or infinity values were created.
+		rotation_matrix is a local variable in PerformRotation,<br>
+		and verts is a private field within HF::Geometry::MeshInfo.<br>
+		<br>
+		These assertion statements may evaluate false (which will halt execution)<br>
+		if NANs (not-a-number) or infinity values were created<br>
+		from the xrot, yrot, or zrot values passed to this function.<br>
 */
 C_INTERFACE RotateMesh(
 	std::vector<HF::Geometry::MeshInfo>* mesh_to_rotate,
