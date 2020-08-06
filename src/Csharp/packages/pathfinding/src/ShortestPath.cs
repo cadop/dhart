@@ -23,7 +23,7 @@ using System.Security.Cryptography.X509Certificates;
 namespace HumanFactors.Pathfinding
 {
 
-    /*!
+	/*!
         \brief Functions for finding the shortest path between two nodes in a graph.
 
         \remarks
@@ -36,10 +36,19 @@ namespace HumanFactors.Pathfinding
         \see ShortestPath for generating a single path between two nodes.
         \see DijkstraShortestPath for generating multiple paths at once. 
         \see SpatialStructures.Graph for more information on how it stores multiple costs.
-    */
-    public static class ShortestPath{
 
-        /*!
+        \internal
+        \note There are several functions that check the output of a C++ path function then insert
+              null values where paths couldn't be generated into an output array, and create C# path
+              wrappers for paths that could be generated. this could be consolidated in a single
+              function, instead of scattered throughout the code. 
+        \endinternal
+
+    */
+	public static class ShortestPath
+	{
+
+		/*!
             \brief Perform Dijkstra's shortest path algorithm to find a path between two nodes.
             
             \param graph The graph to conduct the search on.
@@ -61,26 +70,31 @@ namespace HumanFactors.Pathfinding
             \see DijkstraShortestPathMulti for efficently generating multiple paths in parallel.
             
             \par Example
-            \snippet spatialstructures\examples_spatialstructures.cs EX_PathFinding_Graph
-            \snippet spatialstructures\examples_spatialstructures.cs EX_Pathfinding_Setup
-            \snippet spatialstructures\examples_spatialstructures.cs EX_Pathfinding_IDS
-            \snippet spatialstructures\examples_spatialstructures.cs EX_Pathfinding_Print
+            \snippet base\overall_examples.cs EX_PathFinding_Graph
+            \snippet base\overall_examples.cs EX_Pathfinding_Setup
+            \snippet base\overall_examples.cs EX_Pathfinding_IDS
+            \snippet base\overall_examples.cs EX_Pathfinding_Print
 
             ```
             [(1, 1.415028), (12, 1.417536), (26, 1.417887), (39, 1.418485), (50, 1.000265), (63, 1.000128), (80, 1.000098), (105, 0)]
             [(1, 4.559175), (12, 5.759251), (26, 5.889585), (39, 6.100943), (50, 2.978094), (63, 2.826927), (80, 2.784634), (105, 0)]
             ```
         */
-        public static Path DijkstraShortestPath(Graph graph, int start_id, int end_id, string cost_type = "")
-        {
-            CVectorAndData cvad = NativeMethods.C_CreatePath(graph.Pointer, start_id, end_id, cost_type);
-            if (cvad.size <= 0)
-                return null;
-            else
-                return new Path(cvad);
-        }
+		public static Path DijkstraShortestPath(Graph graph, int start_id, int end_id, string cost_type = "")
+		{
+			// Get CVectorAndData from native code
+			CVectorAndData cvad = NativeMethods.C_CreatePath(graph.Pointer, start_id, end_id, cost_type);
 
-        /*!
+			// If the path is invalid, that means that no path could be found between start and end
+			// so return a null value. 
+			if (!cvad.IsValid())
+				return null;
+			// Otherwise construct a new path with this CVectorAndData
+			else
+				return new Path(cvad);
+		}
+
+		/*!
             \brief Perform Dijkstra's shortest path algorithm to find a path between two nodes.
             
             \param graph The graph to conduct the search on.
@@ -104,25 +118,27 @@ namespace HumanFactors.Pathfinding
             \see DijkstraShortestPathMulti for efficently generating multiple paths in parallel.
 
             \par Example
-            \snippet spatialstructures\examples_spatialstructures.cs EX_PathFinding_Graph
-            \snippet spatialstructures\examples_spatialstructures.cs EX_Pathfinding_Setup
-            \snippet spatialstructures\examples_spatialstructures.cs EX_Pathfinding_Nodes
-            \snippet spatialstructures\examples_spatialstructures.cs EX_Pathfinding_Print
+            \snippet base\overall_examples.cs EX_PathFinding_Graph
+            \snippet base\overall_examples.cs EX_Pathfinding_Setup
+            \snippet base\overall_examples.cs EX_Pathfinding_Nodes
+            \snippet base\overall_examples.cs EX_Pathfinding_Print
 
             ```
             [(1, 1.415028), (12, 1.417536), (26, 1.417887), (39, 1.418485), (50, 1.000265), (63, 1.000128), (80, 1.000098), (105, 0)]
             [(1, 4.559175), (12, 5.759251), (26, 5.889585), (39, 6.100943), (50, 2.978094), (63, 2.826927), (80, 2.784634), (105, 0)]
             ```
         */
-        public static Path DijkstraShortestPath(Graph graph, Vector3D start_node, Vector3D end_node, string cost_type = "")
-        {
-            int parent_id = graph.GetNodeID(start_node);
-            int child_id = graph.GetNodeID(end_node);
+		public static Path DijkstraShortestPath(Graph graph, Vector3D start_node, Vector3D end_node, string cost_type = "")
+		{
+			// Get the parent and child of the node with this ID
+			int parent_id = graph.GetNodeID(start_node);
+			int child_id = graph.GetNodeID(end_node);
 
-            return DijkstraShortestPath(graph, parent_id, child_id, cost_type);
-        }
+			// Call the other overload for node IDs
+			return DijkstraShortestPath(graph, parent_id, child_id, cost_type);
+		}
 
-        /*! 
+		/*! 
             \brief Find the shortest paths between each pair of start_id and end_id in order. 
             
             \param graph The graph to generate paths in.
@@ -150,8 +166,8 @@ namespace HumanFactors.Pathfinding
             refer to the name of any cost that already exists in the graph.
             
             \par Example
-            \snippet spatialstructures\examples_spatialstructures.cs EX_PathFinding_Graph
-            \snippet spatialstructures\examples_spatialstructures.cs EX_MultiPathFinding
+            \snippet base\overall_examples.cs EX_PathFinding_Graph
+            \snippet base\overall_examples.cs EX_MultiPathFinding
 
             ```
             1 to 101 Energy  : [(1, 2.461), (11, 2.5), (24, 2.5), (36, 4.491), (47, 5.402), (60, 5.302), (77, 5.129), (101, 0)]
@@ -164,29 +180,43 @@ namespace HumanFactors.Pathfinding
 			4 to 104 Distance: [(4, 1), (12, 1.418), (26, 1.418), (39, 1.418), (50, 1.421), (64, 1.418), (83, 1.002), (104, 0)]
             ```
         */
-        public static Path[] DijkstraShortestPathMulti(
-            Graph graph, 
-            int[] start_ids,
-            int[] end_ids,
-            string cost_type = ""
-        ){
-            if (start_ids.Length != end_ids.Length) 
-                throw new ArgumentException("Length of start_ids didn't equal length of end_ids");
+		public static Path[] DijkstraShortestPathMulti(
+			Graph graph,
+			int[] start_ids,
+			int[] end_ids,
+			string cost_type = ""
+		)
+		{
+			// If our precondition fails, throw
+			if (start_ids.Length != end_ids.Length)
+				throw new ArgumentException("Length of start_ids didn't equal length of end_ids");
 
-            CVectorAndData[] cvads = NativeMethods.C_CreatePaths(graph.Pointer, start_ids, end_ids, cost_type);
-            Path[] paths = new Path[start_ids.Length];
-            for(int i = 0; i < cvads.Length; i++)
-            {
-                if (cvads[i].IsValid())
-                    paths[i] = new Path(cvads[i]);
-                else
-                    paths[i] = null;
-            }
+			// Call the native function to generate cvectors and data
+			CVectorAndData[] cvads = NativeMethods.C_CreatePaths(graph.Pointer, start_ids, end_ids, cost_type);
 
-            return paths;
-        }
+			// Create an array of paths to hold all paths created by the call to native code.
+			Path[] paths = new Path[start_ids.Length];
 
-        /*! 
+			// Iterate through each CVectorAndData in the returned array
+			int size = start_ids.Length;
+			for (int i = 0; i < size; i++)
+			{
+
+				// If this path is valid, then jsut 
+				if (cvads[i].IsValid())
+					paths[i] = new Path(cvads[i]);
+
+				// If this CVectorAndData isn't valid that indicates a path
+				// couldn't be created between the start and end node at this 
+				// position, insert a null element at this index.
+				else
+					paths[i] = null;
+			}
+
+			return paths;
+		}
+
+		/*! 
             \brief Find the shortest paths between each pair of start_id and end_id in order. 
             
             \param graph The graph to generate paths in.
@@ -212,8 +242,8 @@ namespace HumanFactors.Pathfinding
                      refer to the name of any cost that already exists in `graph`.
 
             \par Example
-            \snippet spatialstructures\examples_spatialstructures.cs EX_PathFinding_Graph
-            \snippet spatialstructures\examples_spatialstructures.cs EX_MultiPathFinding_Nodes
+            \snippet base\overall_examples.cs EX_PathFinding_Graph
+            \snippet base\overall_examples.cs EX_MultiPathFinding_Nodes
 
             ```
 			(-30, 0, 1.068) to (-27, -8, 1.295) Energy  : [(0, 2.48), (4, 2.48), (12, 2.48), (25, 2.461), (37, 2.461), (47, 5.402), (60, 5.302), (77, 5.129), (101, 0)]
@@ -226,32 +256,48 @@ namespace HumanFactors.Pathfinding
 			(-31, 1, 1.017) to (-25, -6, 1.678) Distance: [(3, 1), (2, 1), (1, 1.415), (12, 1.418), (26, 1.418), (39, 1.418), (50, 1.421), (64, 1.418), (83, 1.002), (104, 0)]
            ```
         */
-        public static Path[] DijkstraShortestPathMulti(
-            Graph graph,
-            IEnumerable<Vector3D> start_nodes,
-            IEnumerable<Vector3D> end_nodes,
-            string cost_type = ""
-        ) {
-            if (start_nodes.Count() != end_nodes.Count())
-                throw new ArgumentException("Length of start_nodes didn't equal length of end_nodes");
+		public static Path[] DijkstraShortestPathMulti(
+			Graph graph,
+			IEnumerable<Vector3D> start_nodes,
+			IEnumerable<Vector3D> end_nodes,
+			string cost_type = ""
+		)
+		{
+			// If the size of start and end nodes differ, then return false
+			if (start_nodes.Count() != end_nodes.Count())
+				throw new ArgumentException("Length of start_nodes didn't equal length of end_nodes");
 
-            int size = start_nodes.Count();
-            int[] start_ids = new int[size];
-            int[] end_ids = new int[size];
+			// Create ID arrays
+			int size = start_nodes.Count();
+			int[] start_ids = new int[size];
+			int[] end_ids = new int[size];
 
-            int i = 0;
-            foreach (var start_end in start_nodes.Zip(end_nodes, (start, end) => new Tuple<Vector3D, Vector3D>(start, end)))
-            {
-                start_ids[i] = graph.GetNodeID(start_end.Item1);
-                end_ids[i] = graph.GetNodeID(start_end.Item2);
-                i++;
-            }
+			// Get the IDS of every start and end node using a foreach loop here. 
+			// Note: that foreach is slightly faster than int loops due to .net optimizations. This
+			// may not matter much for this function, but it's an example
+			// of how some procedures can be sped up. 
 
-            return DijkstraShortestPathMulti(graph, start_ids, end_ids, cost_type);
-        }
+			/*! 
+                \internal
+                \note The process of finding IDS may fit better in the graph itself through an overload on 
+                      Get ID instead of being implemented here. 
+                \endinternal
+            */
+			int i = 0;
+			foreach (var start_end in start_nodes.Zip(end_nodes, (start, end) => new Tuple<Vector3D, Vector3D>(start, end)))
+			{
+				// Insert these elements into start_ids and end_ids at index i
+				start_ids[i] = graph.GetNodeID(start_end.Item1);
+				end_ids[i] = graph.GetNodeID(start_end.Item2);
+				i++;
+			}
+
+			// Return the results of the ID overload.
+			return DijkstraShortestPathMulti(graph, start_ids, end_ids, cost_type);
+		}
 
 
-        /*! 
+		/*! 
             \brief Generate a path from every node in the graph to every other node in a graph.
         
             \param g The graph to generate paths in. 
@@ -270,7 +316,7 @@ namespace HumanFactors.Pathfinding
                      refer to the name of any cost that already exists in `graph`.
 
             \par Example
-            \snippet spatialstructures\examples_spatialstructures.cs EX_Pathfinding_AllToAll
+            \snippet base\overall_examples.cs EX_Pathfinding_AllToAll
 
             ```
             0 -> 1 : [(0, 10), (1, 0)]
@@ -287,26 +333,27 @@ namespace HumanFactors.Pathfinding
 			3 -> 2 : [(3, 15), (1, 15), (2, 0)]
            ```
         */
-        public static Path[] DijkstraAllToAll(Graph g, string cost_type = "")
-        {
-            // Generate paths in native code
-            var cvads = NativeMethods.C_AllToAllPaths(g.Pointer, g.NumNodes(), cost_type);
-            
-            // Create an array of paths and only copy over the paths that have a length
-            // greater than one.
-            Path[] paths = new Path[cvads.Length];
-            for (int i = 0; i < cvads.Length; i++)
-            {
-                
-                // If the validity check fails, then no path 
-                // could be found between these nodes and we must
-                // set the path in to null in our output
-                if (cvads[i].IsValid())
-                    paths[i] = new Path(cvads[i]);
-                else
-                    paths[i] = null;
-            }
-            return paths;
-        }
-    }
+		public static Path[] DijkstraAllToAll(Graph g, string cost_type = "")
+		{
+			// Generate paths in native code
+			var cvads = NativeMethods.C_AllToAllPaths(g.Pointer, g.NumNodes(), cost_type);
+
+			// Create an array of paths and only copy over the paths that have a length
+			// greater than one.
+			Path[] paths = new Path[cvads.Length];
+			for (int i = 0; i < cvads.Length; i++)
+			{
+
+				if (cvads[i].IsValid())
+					paths[i] = new Path(cvads[i]);
+
+				// If the validity check fails, then no path 
+				// could be found between these nodes and we must
+				// set the path in to null in our output
+				else
+					paths[i] = null;
+			}
+			return paths;
+		}
+	}
 }
