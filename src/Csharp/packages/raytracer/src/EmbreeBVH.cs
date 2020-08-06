@@ -38,6 +38,14 @@ namespace HumanFactors.RayTracing
 
             \internal
                 \todo Add missing dependency exception
+
+                \par What this object represents in C++
+                In C++ the Raytracer is the object that handles the construction
+                and destruction of Embree's BVH. This abstraction was made for
+                the sake of clarity for the interfaces, and should not have much
+                of an impact on the behavior of this class, but this information
+                may be useful for debugging in C++ or NativeMethods.
+                
             \endinternal
 
             \par Example
