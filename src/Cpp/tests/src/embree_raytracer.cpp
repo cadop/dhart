@@ -142,14 +142,41 @@ TEST(_EmbreeRayTracer, HitPointsAreAccurate) {
 	}
 }
 
+TEST(_EmbreeRayTracer, RayTolerance) {
+	std::string plane_path = "energy_blob_zup.obj";
+	int scale = 100;
+	auto geom = HF::Geometry::LoadMeshObjects(plane_path, HF::Geometry::ONLY_FILE, false, scale);
+	auto k = HF::RayTracer::EmbreeRayTracer(geom);
+
+	// All of these rays should hit since the origin is inside of the teapot
+	//std::vector<std::array<float, 3>> origins = {{-30.01,0,50.0},{-30.01,0,50.1},{-30.01,0,85.01311}};
+	std::vector<std::array<float, 3>> origins = { {-30.01f * scale, 0.0f, 50.0f     * scale},
+												  {-30.01f * scale, 0.0f, 150.1521f * scale},
+												  {-30.01f * scale, 0.0f, 85.01311f * scale} };
+
+	const std::array<float, 3> direction{ 0,0,-1 };
+	float height = NAN;
+	for (auto& origin : origins) {
+		k.FireRay(origin, direction);
+		height = origin[2];
+		// 1.06882095
+		// 1.06833649
+
+		// Scaled
+		// 10.6832886
+		// 10.6833191
+		// 10.6832275
+	}
+}
+
 // Fire a large volume of rays to assert that we don't have any issues with race conditions.
 TEST(_EmbreeRayTracer, DeterministicResults) {
 	// Create plane
 	const std::vector<float> plane_vertices{
-		-10.0f, 10.0f, 0.0f,
-		-10.0f, -10.0f, 0.0f,
-		10.0f, 10.0f, 0.0f,
-		10.0f, -10.0f, 0.0f,
+		-10.0f, 10.0f, 1.1f,
+		-10.0f, -10.0f, 1.1f,
+		10.0f, 10.0f, 1.1f,
+		10.0f, -10.0f, 1.1f,
 	};
 	const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
@@ -166,7 +193,7 @@ TEST(_EmbreeRayTracer, DeterministicResults) {
 
 		// Go Create direction/origin arrays
 		std::vector<std::array<float, 3>> directions(num_rays, std::array<float, 3>{0, 0, -1});
-		std::vector<std::array<float, 3>> origins(num_rays, std::array<float, 3>{0, 0, 1});
+		std::vector<std::array<float, 3>> origins(num_rays, std::array<float, 3>{0, 0, 2.10000001});
 		
 		// Fire rays in parallel
 		auto results = ert.FireRays(origins, directions);
@@ -174,12 +201,13 @@ TEST(_EmbreeRayTracer, DeterministicResults) {
 		// Check the result of each ray
 		for (int i = 0; i < num_rays; i++) {
 			// Mark this in test explorer
-			float dist = Distance(origins[i], std::array<float, 3>{0, 0, 0});
+			float dist = Distance(origins[i], std::array<float, 3>{0, 0, 1.1});
 
 			// This ray is incorrect if it's distance is greater than our threshold or it 
 			// doesn't intersect the ground. 
-			if (!results[i] || Distance(origins[i], std::array<float, 3>{0, 0, 0}) > 0.0001)
+			if (!results[i] || Distance(origins[i], std::array<float, 3>{0, 0, 1.1}) > 0.00001)
 			{
+				ASSERT_EQ(fails, 0);
 				std::cerr << "FAILED] Trial: " << k << " Ray: " << i 
 				<< " Result: "  << results[i] << " Distance: " << dist << std::endl;
 				fails++;
