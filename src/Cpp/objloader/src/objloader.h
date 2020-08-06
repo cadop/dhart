@@ -64,6 +64,7 @@ namespace HF::Geometry{
 	/// <param name="gm"> Method for dividing the mesh into subobjects. </param>
 	/// <param name="change_coords"> Rotate the mesh from Y-up to Z-up. </param>
 	/// <returns> A vector of meshinfo from the file at path. </returns>
+	/// \param scale Scaling factor to use for the imported mesh
 	/*!
 		\exception HF::Exceptions::InvalidOBJ The file at path was not a valid OBJ file.
 		\exception HF::Exceptions::FileNotFound No file could be found at path.
@@ -96,7 +97,8 @@ namespace HF::Geometry{
 	std::vector<MeshInfo> LoadMeshObjects(
 		std::string path,
 		GROUP_METHOD gm = ONLY_FILE,
-		bool change_coords = false
+		bool change_coords = false,
+		int scale = 1
 	);
 
 	/// <summary> Create MeshInfo instances from the OBJ files in path. </summary>
@@ -104,6 +106,7 @@ namespace HF::Geometry{
 	/// <param name="gm"> Method for dividing the mesh into subobjects. </param>
 	/// <param name="change_coords"> Rotate the mesh from Y-up to Z-up. </param>
 	/// <returns> A vector of meshinfo loaded from the files at path. </returns>
+	/// \param scale Scaling factor to use for the imported mesh
 	/*!
 
 		\exception HF::Exceptions::InvalidOBJ One or more of the files in paths was not a valid OBJ file.
@@ -139,7 +142,8 @@ namespace HF::Geometry{
 	std::vector<MeshInfo> LoadMeshObjects(
 		std::vector<std::string>& path,
 		GROUP_METHOD gm = ONLY_FILE,
-		bool change_coords = false
+		bool change_coords = false,
+		int scale = 1
 	);
 
 	/*!

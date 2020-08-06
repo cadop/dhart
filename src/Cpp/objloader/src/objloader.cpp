@@ -30,7 +30,7 @@ namespace HF::Geometry {
 		{"sibenik", "sibenik.obj" },
 	};
 	
-	vector<MeshInfo> LoadMeshObjects(std::string path, GROUP_METHOD gm, bool change_coords)
+	vector<MeshInfo> LoadMeshObjects(std::string path, GROUP_METHOD gm, bool change_coords, int scale)
 	{
 		// First, attempt to load the obj
 		tinyobj::ObjReader objloader;
@@ -64,7 +64,17 @@ namespace HF::Geometry {
 			// A single mesh will just need to have its index arrays combined
 			int id = 0;
 			std::string name = "EntireFile";
-			const vector<float>& vertexes = static_cast<vector<float>>(verts);
+			
+			// Must be included in the other method types. It's not clear why the float conversion 
+			// wasn't done above with the attributes.vertices
+			auto vert_array = static_cast<vector<float>>(verts);
+			auto vert_scaled = vert_array;
+			// Multiply each element of array by the user defined scale value (default of 1 which does not change vertex)
+			std::transform(vert_array.begin(), vert_array.end(), vert_scaled.begin(),[&](float i) { return i * scale; });
+			// assign the float vector to the scaled method
+			const vector<float>& vertexes = vert_scaled;
+
+
 			vector<int> indices;
 
 			// Count total indexes
@@ -235,12 +245,12 @@ namespace HF::Geometry {
 		return test_model_paths.at(key);
 	}
 
-	vector<MeshInfo> LoadMeshObjects(vector<std::string>& path, GROUP_METHOD gm, bool change_coords)
+	vector<MeshInfo> LoadMeshObjects(vector<std::string>& path, GROUP_METHOD gm, bool change_coords, int scale)
 	{
 		// Create a vector of vectors and gather all individual results
 		vector<vector<MeshInfo>> MeshObjects(path.size());
 		for (int i = 0; i < path.size(); i++)
-			MeshObjects[i] = LoadMeshObjects(path[i], gm, change_coords);
+			MeshObjects[i] = LoadMeshObjects(path[i], gm, change_coords, scale);
 
 		// Compress all vectors into a single mesh and reassign meshid.
 		vector<MeshInfo> MI;
