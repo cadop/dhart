@@ -66,7 +66,7 @@ namespace CInterfaceTests {
 	}
 
 	TEST(_objloader_CInterface, StoreMesh) {
-		//! [snippet_StoreMesh]
+		//! [snippet_StoreMesh_setup]
 		// Status code variable, value returned by C Interface functions
 		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
 		int status = 0;
@@ -96,7 +96,9 @@ namespace CInterfaceTests {
 		// Give the mesh a name, and an ID.
 		const auto mesh_name = "This mesh";
 		const int mesh_id = 0;
+		//! [snippet_StoreMesh_setup]
 
+		//! [snippet_StoreMesh_call]
 		// This will point to memory on free store.
 		// The memory will be allocated inside the StoreMesh function,
 		// and it must be freed using DestroyMeshInfo.
@@ -111,7 +113,7 @@ namespace CInterfaceTests {
 		if (status != 1) {
 			std::cerr << "Error at StoreMesh, code: " << status << std::endl;
 		}
-		//! [snippet_StoreMesh]
+		//! [snippet_StoreMesh_call]
 
 		//
 		// Memory management
@@ -127,7 +129,6 @@ namespace CInterfaceTests {
 	}
 
 	TEST(_objloader_CInterface, RotateMesh) {
-		//! [snippet_RotateMesh]
 		// Status code variable, value returned by C Interface functions
 		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
 		int status = 0;
@@ -172,7 +173,7 @@ namespace CInterfaceTests {
 		if (status != 1) {
 			std::cerr << "Error at StoreMesh, code: " << status << std::endl;
 		}
-
+		//! [snippet_RotateMesh]
 		// Prepare the desired rotation values.
 		// A value of 0.0f means no rotation about the given axis.
 		const float x_rot = 90.0f;
@@ -185,7 +186,7 @@ namespace CInterfaceTests {
 		if (status != 1) {
 			std::cerr << "Error at RotateMesh, code: " << status << std::endl;
 		}
-
+		//! [snippet_RotateMesh]
 		//
 		// Memory management
 		//
@@ -197,8 +198,6 @@ namespace CInterfaceTests {
 		if (status != 1) {
 			std::cerr << "Error at DestroyMeshInfo, code: " << status << std::endl;
 		}
-
-		//! [snippet_RotateMesh]
 	}
 
 	TEST(_objloader_CInterface, DestroyMeshInfo) {

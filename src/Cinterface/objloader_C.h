@@ -88,6 +88,18 @@ namespace HF {
 	the <b>mesh</b> (vector<\link HF::Geometry::MeshInfo \endlink> *).</b><br>
 	Every example for each function should be followed up by the 'teardown' code described above.
 
+	\section notes_perform_rotation Notes on MeshInfo::PerformRotation
+		\link LoadOBJ \endlink and \link RotateMesh \endlink both call<br>
+		HF::Geometry::MeshInfo::PerformRotation, which contains the following:<br>
+
+		\snippet objloader\src\meshinfo.cpp snippet_objloader_assert
+
+		<b>rotation_matrix</b> is a local variable in \link PerformRotation \endlink,<br>
+		and <b>verts</b> is a private field within HF::Geometry::MeshInfo.<br>
+		<br>
+		These assertion statements may evaluate false (which will halt execution)<br>
+		if NANs (not-a-number) or infinity values were created<br>
+		from the xrot, yrot, or zrot values passed to this function.
 	@{	
 */
 
@@ -100,7 +112,7 @@ namespace HF {
 	\param	yrot		Degrees to rotate the mesh about the y axis. 0.0f would mean no rotation about the y axis.
 	\param	zrot		Degrees to rotate the mesh about the z axis. 0.0f would mean no rotation about the z axis.
 
-	\param	out_list	Address of a (vector<MeshInfo> *); will be dereferenced and assigned the address of memory on the free store.
+	\param	out_list	Address of a (vector<\link HF::Geometry::MeshInfo \endlink> *); will be dereferenced and assigned the address of memory on the free store.
 						When out_list is passed to this function, *(out_list) should point to nullptr.
 
 	\returns			HF_STATUS::OK, if the file described by obj_path was loaded successfully
@@ -108,21 +120,7 @@ namespace HF {
 						HF_STATUS::INVALID_OBJ, if obj_path does not represent a valid .obj file
 						HF_STATUS::GENERIC_ERROR, if the input described at obj_path was empty
 
-	\see \ref mesh_setup (how to create a mesh)
-
-	\remarks
-		<b>Assertion statement:</b><br>
-		This function calls HF::Geometry::MeshInfo::PerformRotation,<br>
-		which contains the following:<br>
-		
-		\snippet objloader\src\meshinfo.cpp snippet_objloader_assert
-
-		<b>rotation_matrix</b> is a local variable in \link PerformRotation \endlink,<br>
-		and <b>verts</b> is a private field within HF::Geometry::MeshInfo.<br>
-		<br>
-		These assertion statements may evaluate false (which will halt execution)<br>
-		if NANs (not-a-number) or infinity values were created<br>
-		from the xrot, yrot, or zrot values passed to this function.<br>
+	\see \ref mesh_setup (how to create a mesh), \ref notes_perform_rotation (assertion statement)
 */
 C_INTERFACE LoadOBJ(
 	const char* obj_path,
@@ -134,10 +132,10 @@ C_INTERFACE LoadOBJ(
 );
 
 /*!
-	\brief		Store a mesh from Python as a container of MeshInfo - the operand container, out_info, will have one mesh inside it
+	\brief		Store a mesh from Python as a container of \link HF::Geometry::MeshInfo \endlink - the operand container, out_info, will have one mesh inside it
 
-	\param		out_info		Address of a vector<MeshInfo> *; the address of a pointer to a container of MeshInfo.
-								StoreMesh will allocate memory for *(out_info), the caller must call DestroyMeshInfo
+	\param		out_info		Address of a vector<\link HF::Geometry::MeshInfo \endlink> *; the address of a pointer to a container of \link HF::Geometry::MeshInfo \endlink.
+								\link StoreMesh \endlink will allocate memory for *(out_info), the caller must call \link DestroyMeshInfo \endlink
 								on *(out_info) when finished with its resources. *(out_info) should point to nullptr
 								when out_info is passed to this function.
 
@@ -161,7 +159,11 @@ C_INTERFACE LoadOBJ(
 
 	\see \ref mesh_teardown (how to destroy a mesh)
 
-	\snippet tests\src\objloader_cinterface.cpp snippet_StoreMesh
+	First, we must prepare the values for the mesh to store.
+	\snippet tests\src\objloader_cinterface.cpp snippet_StoreMesh_setup
+
+	We are now ready to call <b>StoreMesh</b>.
+	\snippet tests\src\objloader_cinterface.cpp snippet_StoreMesh_call
 */
 C_INTERFACE StoreMesh(
 	std::vector<HF::Geometry::MeshInfo>** out_info,
@@ -174,31 +176,18 @@ C_INTERFACE StoreMesh(
 );
 
 /*!
-	\brief			Rotate an existing mesh (MeshInfo)
+	\brief			Rotate an existing mesh (\link HF::Geometry::MeshInfo \endlink)
 
-	\param	mesh_to_rotate	An operand vector<MeshInfo> * that addresses memory allocated by LoadOBJ or StoreMesh
+	\param	mesh_to_rotate	An operand vector<\link HF::Geometry::MeshInfo \endlink> * that addresses memory allocated by \link LoadOBJ \endlink or \link StoreMesh \endlink
 	\param	xrot			Degrees to rotate the mesh about the x axis. 0.0f would mean no rotation about the x axis.
 	\param	yrot			Degrees to rotate the mesh about the y axis. 0.0f would mean no rotation about the y axis.
 	\param	zrot			Degrees to rotate the mesh about the z axis. 0.0f would mean no rotation about the z axis.
 
 	\returns			HF_STATUS::OK on return
 
-	\see \ref mesh_setup (how to create a mesh), \ref mesh_teardown (how to destroy a mesh)
+	\see \ref mesh_setup (how to create a mesh), StoreMesh (creating a mesh from arrays), \ref mesh_teardown (how to destroy a mesh), \ref notes_perform_rotation (assertion statement)
 
 	\snippet tests\src\objloader_cinterface.cpp snippet_RotateMesh
-
-	\remarks
-		This function calls HF::Geometry::MeshInfo::PerformRotation,
-		which contains the following:
-
-		\snippet objloader\src\meshinfo.cpp snippet_objloader_assert
-
-		rotation_matrix is a local variable in PerformRotation,<br>
-		and verts is a private field within HF::Geometry::MeshInfo.<br>
-		<br>
-		These assertion statements may evaluate false (which will halt execution)<br>
-		if NANs (not-a-number) or infinity values were created<br>
-		from the xrot, yrot, or zrot values passed to this function.<br>
 */
 C_INTERFACE RotateMesh(
 	std::vector<HF::Geometry::MeshInfo>* mesh_to_rotate,
@@ -208,9 +197,9 @@ C_INTERFACE RotateMesh(
 );
 
 /*!
-	\brief		Destroy the memory addressed by mesh_to_destroy, which was allocated by either LoadOBJ or StoreMesh
+	\brief		Destroy the memory addressed by mesh_to_destroy, which was allocated by either \link LoadOBJ \endlink or \link StoreMesh \endlink
 	
-	\param		mesh_to_destroy		The vector<MeshInfo> * whose memory will be released
+	\param		mesh_to_destroy		The vector<\link HF::Geometry::MeshInfo \endlink> * whose memory will be released
 
 	\returns	HF_STATUS::OK on return
 
