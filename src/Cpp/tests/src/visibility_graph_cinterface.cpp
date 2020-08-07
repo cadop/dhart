@@ -11,14 +11,20 @@
 
 namespace CInterfaceTests {
 	TEST(_visibility_graph_cinterface, CreateVisibilityGraphAllToAll) {
-
+		//! [snippet_VisibilityGraph_CreateVisibilityGraphAllToAll]
+		// TODO snippet
+		//! [snippet_VisibilityGraph_CreateVisibilityGraphAllToAll]
 	}
 
 	TEST(_visibility_graph_cinterface, CreateVisibilityGraphAllToAllUndirected) {
-
+		//! [snippet_VisibilityGraph_CreateVisibilityGraphAllToAllUndirected]
+		// TODO snippet
+		//! [snippet_VisibilityGraph_CreateVisibilityGraphAllToAllUndirected]
 	}
 
 	TEST(_visibility_graph_cinterface, CreateVisibilityGraphGroupToGroup) {
-
+		//! [snippet_VisibilityGraph_CreateVisibilityGraphGroupToGroup]
+		// TODO snippet
+		//! [snippet_VisibilityGraph_CreateVisibilityGraphGroupToGroup]
 	}
 }

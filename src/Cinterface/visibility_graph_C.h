@@ -44,6 +44,8 @@ namespace HF {
 	\param		height		How far to offset nodes from the ground.
 
 	\returns	HF_STATUS::OK on completion
+
+	\snippet	tests\src\visibility_graph_cinterface.cpp snippet_VisibilityGraph_CreateVisibilityGraphAllToAll
 */
 C_INTERFACE CreateVisibilityGraphAllToAll(
 	HF::RayTracer::EmbreeRayTracer* ert,
@@ -74,6 +76,8 @@ C_INTERFACE CreateVisibilityGraphAllToAll(
 	\param		cores		CPU core count. A value of (-1) means to use all available cores on the system.
 
 	\returns	HF_STATUS::OK on completion
+
+	\snippet	tests\src\visibility_graph_cinterface.cpp snippet_VisibilityGraph_CreateVisibilityGraphAllToAllUndirected
 */
 C_INTERFACE CreateVisibilityGraphAllToAllUndirected(
 	HF::RayTracer::EmbreeRayTracer* ert,
@@ -109,6 +113,8 @@ C_INTERFACE CreateVisibilityGraphAllToAllUndirected(
 	\param		height		How far to offset nodes from the ground.
 
 	\returns	HF_STATUS::OK on completion
+
+	\snippet	tests\src\visibility_graph_cinterface.cpp snippet_VisibilityGraph_CreateVisibilityGraphGroupToGroup
 */
 C_INTERFACE CreateVisibilityGraphGroupToGroup(
 	HF::RayTracer::EmbreeRayTracer* ert,
