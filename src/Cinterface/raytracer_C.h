@@ -28,11 +28,12 @@ namespace HF {
 
 	@{
 
-	<b> Raytracer setup: </b><br>
+
+	\section raytracer_setup Raytracer setup
 	Every example below will be assumed to begin with this body of code;<br>
 	we will call it the 'setup':<br>
 
-	First, begin by loading the .OBJ file:<br>
+	First, begin by <b>loading the .OBJ file</b>:<br>
 	\code
 		// Status code variable, value returned by C Interface functions
 		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
@@ -68,7 +69,7 @@ namespace HF {
 		}
 	\endcode
 
-	Then, create the BVH:<br>
+	Then, <b>create the BVH</b>:<br>
 	\code
 		// Create BVH
 		// We now declare a pointer to EmbreeRayTracer, named bvh.
@@ -81,11 +82,11 @@ namespace HF {
 		status = CreateRaytracer(loaded_obj, &bvh);
 	\endcode
 
-	At this point, you are ready to use your BVH.<br>
+	At this point, <b>you are ready to use your BVH</b>.<br>
 	All examples below will assume you have already created a BVH from the .OBJ file provided.<br>
 	(all examples below begin with the setup code described above)
 	
-	<b> Raytracer teardown: </b><br>
+	\section raytracer_teardown Raytracer teardown
 	When you are finished with the BVH, you must then release its memory resources:<br>
 	\code
 		// destroy raytracer
@@ -106,8 +107,8 @@ namespace HF {
 		}
 	\endcode
 
-	The client is responsible for releasing the memory for<br>
-	the mesh (vector<MeshInfo> *) and the BVH (EmbreeRayTracer *).<br>
+	<b>The client is responsible for releasing the memory for<br>
+	the mesh (vector<\link HF::Geometry::MeshInfo \endlink> *) and the BVH (\link HF::RayTracer::EmbreeRayTracer \endlink *).</b><br>
 	Every example for each function should be followed up by the 'teardown' code described above.
 */
 
@@ -143,7 +144,7 @@ struct RayResult {
 	\returns	HF_STATUS::MISSING_DEPEND if Embree's dll couldn't be found. 
 				HF_STATUS::GENERIC_ERROR if <paramref name="mesh"/> is null.
 
-	\see	Raytracer setup, Raytracer teardown
+	\see	\ref raytracer_setup, \ref raytracer_teardown
 */
 C_INTERFACE CreateRaytracer(std::vector<HF::Geometry::MeshInfo>* mesh, HF::RayTracer::EmbreeRayTracer** out_raytracer);
 
@@ -154,7 +155,7 @@ C_INTERFACE CreateRaytracer(std::vector<HF::Geometry::MeshInfo>* mesh, HF::RayTr
 	
 	\returns	HF::OK on completion.
 
-	\see	Raytracer setup, Raytracer teardown
+	\see	\ref raytracer_setup, \ref raytracer_teardown
 */
 C_INTERFACE DestroyRayTracer(HF::RayTracer::EmbreeRayTracer* rt_to_destroy);
 
@@ -166,7 +167,7 @@ C_INTERFACE DestroyRayTracer(HF::RayTracer::EmbreeRayTracer* rt_to_destroy);
 	\param	origins			An array of origin points to fire rays from. Should be an array of floats with every 3 floats
 							representing a new origin point.
 
-	\param	num_origins		The number of points in origins. NOTE: This should be equal to the length of origins/3, since
+	\param	num_origins		The number of points in origins. NOTE: This should be equal to the length of origins / 3, since
 							every 3 floats in origins equals a single point.
 
 	\param	directions		An array of directions points to fire rays from. 
@@ -206,7 +207,7 @@ C_INTERFACE DestroyRayTracer(HF::RayTracer::EmbreeRayTracer* rt_to_destroy);
 
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireRaysDistance
 
-	\see Raytracer setup, Raytracer teardown
+	\see \ref raytracer_setup, \ref raytracer_teardown
 */
 C_INTERFACE FireRaysDistance(
 	HF::RayTracer::EmbreeRayTracer* ert,
@@ -219,7 +220,7 @@ C_INTERFACE FireRaysDistance(
 );
 
 /*!
-	\brief		Fire a single ray and get the distance to its hit and the meshID if it hit anything. 
+	\brief		Fire a single ray and get the distance to its hit and the mesh ID if it hit anything. 
 				If it missed, then distance and meshid will both be -1.
 
 	\param	ert		The ray tracer to fire from.
@@ -238,7 +239,7 @@ C_INTERFACE FireRaysDistance(
 
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireSingleRayDistance
 
-	\see Raytracer setup, Raytracer teardown
+	\see \ref raytracer_setup, \ref raytracer_teardown
 */
 C_INTERFACE FireSingleRayDistance(
 	HF::RayTracer::EmbreeRayTracer* ert,
@@ -266,7 +267,7 @@ C_INTERFACE FireSingleRayDistance(
 
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireRay
 
-	\see Raytracer setup, Raytracer teardown
+	\see \ref raytracer_setup, \ref raytracer_teardown
 */
 C_INTERFACE FireRay(HF::RayTracer::EmbreeRayTracer* ert, float& x, float& y, float& z, float dx, float dy, float dz, float max_distance, bool& result);
 
@@ -290,7 +291,7 @@ C_INTERFACE FireRay(HF::RayTracer::EmbreeRayTracer* ert, float& x, float& y, flo
 
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireMultipleRays
 
-	\see Raytracer setup, Raytracer teardown
+	\see \ref raytracer_setup, \ref raytracer_teardown
 */
 C_INTERFACE FireMultipleRays(HF::RayTracer::EmbreeRayTracer* ert, float* origins, const float* directions, int size, float max_distance, bool* result_array);
 
@@ -310,7 +311,7 @@ C_INTERFACE FireMultipleRays(HF::RayTracer::EmbreeRayTracer* ert, float* origins
 
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireMultipleOriginsOneDirection
 
-	\see Raytracer setup, Raytracer teardown
+	\see \ref raytracer_setup, \ref raytracer_teardown
 */
 C_INTERFACE FireMultipleOriginsOneDirection(HF::RayTracer::EmbreeRayTracer* ert, float* origins, const float* direction, int size, float max_distance, bool* result_array);
 
@@ -321,7 +322,7 @@ C_INTERFACE FireMultipleOriginsOneDirection(HF::RayTracer::EmbreeRayTracer* ert,
 	\param	origin			An array of 3 floats representing the X, Y, and Z coordinates of the origin to fire from respectively
 
 	\param	directions		A list of floats representing directions, with each 3 floats representing one direction. If a
-							ray fired in a direction resulted in a hit, that directionwill be overwritten to the hitpoint.
+							ray fired in a direction resulted in a hit, that direction will be overwritten to the hitpoint.
 
 	\param	size			Number of points and directions, equal to the total number of floats in one array / 3
 	\param	max_distance	Maximum distance a ray can travel and still hit a target
@@ -331,7 +332,7 @@ C_INTERFACE FireMultipleOriginsOneDirection(HF::RayTracer::EmbreeRayTracer* ert,
 
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireMultipleDirectionsOneOrigin
 
-	\see Raytracer setup, Raytracer teardown
+	\see \ref raytracer_setup, \ref raytracer_teardown
 */
 C_INTERFACE FireMultipleDirectionsOneOrigin(HF::RayTracer::EmbreeRayTracer* ert, const float* origin, float* directions, int size, float max_distance, bool* result_array);
 
@@ -346,7 +347,7 @@ C_INTERFACE FireMultipleDirectionsOneOrigin(HF::RayTracer::EmbreeRayTracer* ert,
 							so this should equal the length of the origin array/3. This must match direction_size or be equal to one.
 
 	\param	direction_size	How many directions are included. Note that a single direction is 3 floats, so this should equal
-							the length of the origin array/3. This must match origin_size or be equal to one.
+							the length of the origin array / 3. This must match origin_size or be equal to one.
 
 	\param	max_distance		Maximum distance a ray can travel and still hit a target.
 	\param	result_array		Output array booleans
@@ -358,7 +359,7 @@ C_INTERFACE FireMultipleDirectionsOneOrigin(HF::RayTracer::EmbreeRayTracer* ert,
 
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireOcclusionRays
 
-	\see Raytracer setup, Raytracer teardown
+	\see \ref raytracer_setup, \ref raytracer_teardown
 */
 C_INTERFACE FireOcclusionRays(
 	HF::RayTracer::EmbreeRayTracer* ert,
@@ -379,7 +380,7 @@ C_INTERFACE FireOcclusionRays(
 
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_DestroyRayResultVector
 
-	\see Raytracer setup, Raytracer teardown, FireRaysDistance
+	\see \ref raytracer_setup, \ref raytracer_teardown, FireRaysDistance
 */
 C_INTERFACE DestroyRayResultVector(
 	std::vector<RayResult>* analysis
