@@ -97,7 +97,7 @@ namespace HF {
 		}
 	\endcode
 
-	After destroying the BVH, you must also do the same for the (vector<MeshInfo> *) used by LoadOBJ.
+	After destroying the BVH, you must also do the same for the (vector<\link HF::Geometry::MeshInfo \endlink> *) used by LoadOBJ.
 	\code
 		// destroy vector<MeshInfo>
 		status = DestroyMeshInfo(loaded_obj);

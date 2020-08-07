@@ -553,15 +553,11 @@ namespace CInterfaceTests {
 				<< "], direction [" << dir[k] << ", " << dir[k + 1] << ", " << dir[k + 2] << "]"
 				<< std::endl;
 		}
-
+		//! [snippet_FireMultipleRays]
 		//
 		// Memory resource cleanup.
 		//
 
-		if (status != 1) {
-			std::cerr << "Error at DestroyRayResultVector, code: " << status << std::endl;
-		}
-		//! [snippet_FireMultipleRays]
 		// destroy raytracer
 		status = DestroyRayTracer(bvh);
 
