@@ -12,7 +12,6 @@
 
 namespace CInterfaceTests {
 	TEST(_raytracer_CInterface, CreateRaytracer) {
-		//! [snippet_CreateRayTracer]
 		// Status code variable, value returned by C Interface functions
 		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
 		int status = 0;
@@ -56,6 +55,10 @@ namespace CInterfaceTests {
 		HF::RayTracer::EmbreeRayTracer* bvh = nullptr;
 		status = CreateRaytracer(loaded_obj, &bvh);
 
+		if (status != -1) {
+			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
+		}
+
 		//
 		//	Use bvh
 		//
@@ -77,11 +80,9 @@ namespace CInterfaceTests {
 		if (status != 1) {
 			std::cerr << "Error at DestroyMeshInfo, code: " << status << std::endl;
 		}
-		//! [snippet_CreateRayTracer]
 	}
 
 	TEST(_raytracer_CInterface, DestroyRaytracer) {
-		//! [snippet_DestroyRayTracer]
 		// Status code variable, value returned by C Interface functions
 		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
 		int status = 0;
@@ -133,12 +134,14 @@ namespace CInterfaceTests {
 		// Memory resource cleanup.
 		//
 
+		//! [snippet_DestroyRayTracer]
 		// destroy raytracer
 		status = DestroyRayTracer(bvh);
 
 		if (status != 1) {
 			std::cerr << "Error at DestroyRayTracer, code: " << status << std::endl;
 		}
+		//! [snippet_DestroyRayTracer]
 
 		// destroy vector<MeshInfo>
 		status = DestroyMeshInfo(loaded_obj);
@@ -146,11 +149,9 @@ namespace CInterfaceTests {
 		if (status != 1) {
 			std::cerr << "Error at DestroyMeshInfo, code: " << status << std::endl;
 		}
-		//! [snippet_DestroyRayTracer]
 	}
 
 	TEST(_raytracer_CInterface, FireRaysDistance) {
-		//! [snippet_FireRaysDistance]
 		// Status code variable, value returned by C Interface functions
 		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
 		int status = 0;
@@ -199,7 +200,7 @@ namespace CInterfaceTests {
 			// Error!
 			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
 		}
-
+		//! [snippet_FireRaysDistance]
 		// Define points for rays
 		// These are Cartesian coordinates.
 		float points[] = { 0.0f, 0.0f, 2.0f, 0.0f, 0.0f, 3.0f, 0.0, 0.0, 4.0f };
@@ -255,7 +256,7 @@ namespace CInterfaceTests {
 		if (status != 1) {
 			std::cerr << "Error at DestroyRayResultVector, code: " << status << std::endl;
 		}
-
+		//! [snippet_FireRaysDistance]
 		// destroy raytracer
 		status = DestroyRayTracer(bvh);
 
@@ -269,11 +270,9 @@ namespace CInterfaceTests {
 		if (status != 1) {
 			std::cerr << "Error at DestroyMeshInfo, code: " << status << std::endl;
 		}
-		//! [snippet_FireRaysDistance]
 	}
 
 	TEST(_raytracer_CInterface, FireSingleRayDistance) {
-		//! [snippet_FireSingleRayDistance]
 		// Status code variable, value returned by C Interface functions
 		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
 		int status = 0;
@@ -322,7 +321,7 @@ namespace CInterfaceTests {
 			// Error!
 			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
 		}
-
+		//! [snippet_FireSingleRayDistance]
 		// Define point to start ray
 		// These are Cartesian coordinates.
 		float p1[] = { 0.0f, 0.0f, 2.0f };
@@ -346,7 +345,7 @@ namespace CInterfaceTests {
 		}
 
 		std::cout << "Distance is " << distance << ", " << "meshid is " << mesh_id << std::endl;
-
+		//! [snippet_FireSingleRayDistance]
 		//
 		// Memory resource cleanup.
 		//
@@ -364,11 +363,9 @@ namespace CInterfaceTests {
 		if (status != 1) {
 			std::cerr << "Error at DestroyMeshInfo, code: " << status << std::endl;
 		}
-		//! [snippet_FireSingleRayDistance]
 	}
 
 	TEST(_raytracer_CInterface, FireRay) {
-		//! [snippet_FireRay]
 		// Status code variable, value returned by C Interface functions
 		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
 		int status = 0;
@@ -417,7 +414,7 @@ namespace CInterfaceTests {
 			// Error!
 			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
 		}
-
+		//! [snippet_FireRay]
 		// Define point to start ray
 		// These are Cartesian coordinates.
 		float p1[] = { 0.0f, 0.0f, 2.0f };
@@ -449,7 +446,7 @@ namespace CInterfaceTests {
 		else {
 			std::cout << "Hit point: " << "(miss)" << std::endl;
 		}
-
+		//! [snippet_FireRay]
 		//
 		// Memory resource cleanup.
 		//
@@ -467,11 +464,9 @@ namespace CInterfaceTests {
 		if (status != 1) {
 			std::cerr << "Error at DestroyMeshInfo, code: " << status << std::endl;
 		}
-		//! [snippet_FireRay]
 	}
 
 	TEST(_raytracer_CInterface, FireMultipleRays) {
-		//! [snippet_FireMultipleRays]
 		// Status code variable, value returned by C Interface functions
 		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
 		int status = 0;
@@ -520,7 +515,7 @@ namespace CInterfaceTests {
 			// Error!
 			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
 		}
-
+		//! [snippet_FireMultipleRays]
 		// Define points for rays
 		// These are Cartesian coordinates.
 		float points[] = { 0.0f, 0.0f, 2.0f, 0.0f, 0.0f, 3.0f, 0.0, 0.0, 4.0f };
@@ -566,7 +561,7 @@ namespace CInterfaceTests {
 		if (status != 1) {
 			std::cerr << "Error at DestroyRayResultVector, code: " << status << std::endl;
 		}
-
+		//! [snippet_FireMultipleRays]
 		// destroy raytracer
 		status = DestroyRayTracer(bvh);
 
@@ -580,11 +575,9 @@ namespace CInterfaceTests {
 		if (status != 1) {
 			std::cerr << "Error at DestroyMeshInfo, code: " << status << std::endl;
 		}
-		//! [snippet_FireMultipleRays]
 	}
 
 	TEST(_raytracer_CInterface, FireMultipleOriginsOneDirection) {
-		//! [snippet_FireMultipleOriginsOneDirection]
 		// Status code variable, value returned by C Interface functions
 		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
 		int status = 0;
@@ -633,7 +626,7 @@ namespace CInterfaceTests {
 			// Error!
 			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
 		}
-
+		//! [snippet_FireMultipleOriginsOneDirection]
 		// Define points to start rays
 		// These are Cartesian coordinates.
 		float p1[] = { 0.0f, 0.0f, 2.0f, 0.0f, 0.0f, 3.0f, 0.0f, 0.0f, 4.0f };
@@ -676,7 +669,7 @@ namespace CInterfaceTests {
 				<< "], from point [" << p1[k] << ", " << p1[k + 1] << ", " << p1[k + 2] << "]"
 				<< std::endl;
 		}
-
+		//! [snippet_FireMultipleOriginsOneDirection]
 		//
 		// Memory resource cleanup.
 		//
@@ -694,11 +687,9 @@ namespace CInterfaceTests {
 		if (status != 1) {
 			std::cerr << "Error at DestroyMeshInfo, code: " << status << std::endl;
 		}
-		//! [snippet_FireMultipleOriginsOneDirection]
 	}
 
 	TEST(_raytracer_CInterface, FireMultipleDirectionsOneOrigin) {
-		//! [snippet_FireMultipleDirectionsOneOrigin]
 		// Status code variable, value returned by C Interface functions
 		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
 		int status = 0;
@@ -747,7 +738,7 @@ namespace CInterfaceTests {
 			// Error!
 			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
 		}
-
+		//! [snippet_FireMultipleDirectionsOneOrigin]
 		// Define point to start ray
 		// These are Cartesian coordinates.
 		const float p1[] = { 0.0f, 0.0f, 2.0f };
@@ -785,7 +776,7 @@ namespace CInterfaceTests {
 				<< "], direction [" << dir[k] << ", " << dir[k + 1] << ", " << dir[k + 2] << "]"
 				<< std::endl;
 		}
-
+		//! [snippet_FireMultipleDirectionsOneOrigin]
 		//
 		// Memory resource cleanup.
 		//
@@ -803,11 +794,9 @@ namespace CInterfaceTests {
 		if (status != 1) {
 			std::cerr << "Error at DestroyMeshInfo, code: " << status << std::endl;
 		}
-		//! [snippet_FireMultipleDirectionsOneOrigin]
 	}
 
 	TEST(_raytracer_CInterface, FireOcclusionRays) {
-		//! [snippet_FireOcclusionRays]
 		// Status code variable, value returned by C Interface functions
 		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
 		int status = 0;
@@ -856,7 +845,7 @@ namespace CInterfaceTests {
 			// Error!
 			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
 		}
-
+		//! [snippet_FireOcclusionRays]
 		// Define point to start ray
 		// These are Cartesian coordinates.
 		const int size_p1_occl = 3;
@@ -884,7 +873,7 @@ namespace CInterfaceTests {
 
 		bool does_occlude = results[0];
 		std::cout << "Does the ray connect? " << (does_occlude ? std::string("True") : std::string("False")) << std::endl;
-
+		//! [snippet_FireOcclusionRays]
 		//
 		// Memory resource cleanup.
 		//
@@ -902,11 +891,9 @@ namespace CInterfaceTests {
 		if (status != 1) {
 			std::cerr << "Error at DestroyMeshInfo, code: " << status << std::endl;
 		}
-		//! [snippet_FireOcclusionRays]
 	}
 
 	TEST(_raytracer_CInterface, DestroyRayResultVector) {
-		//! [snippet_DestroyRayResultVector]
 		// Status code variable, value returned by C Interface functions
 		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
 		int status = 0;
@@ -982,7 +969,7 @@ namespace CInterfaceTests {
 			// Error!
 			std::cerr << "Error at FireRaysDistance, code: " << status << std::endl;
 		}
-
+		//! [snippet_DestroyRayResultVector]
 		//
 		// Memory resource cleanup.
 		//
@@ -993,7 +980,7 @@ namespace CInterfaceTests {
 		if (status != 1) {
 			std::cerr << "Error at DestroyRayResultVector, code: " << status << std::endl;
 		}
-
+		//! [snippet_DestroyRayResultVector]
 		// destroy raytracer
 		status = DestroyRayTracer(bvh);
 
@@ -1007,6 +994,5 @@ namespace CInterfaceTests {
 		if (status != 1) {
 			std::cerr << "Error at DestroyMeshInfo, code: " << status << std::endl;
 		}
-		//! [snippet_DestroyRayResultVector]
 	}
 }
