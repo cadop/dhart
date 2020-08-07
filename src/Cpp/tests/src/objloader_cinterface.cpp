@@ -11,7 +11,7 @@
 
 namespace CInterfaceTests {
 	TEST(_objloader_CInterface, LoadOBJ) {
-		//! [snippet_LoadOBJ]
+		//! [snippet_LoadOBJ_prep_path]
 		// Status code variable, value returned by C Interface functions
 		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
 		int status = 0;
@@ -22,7 +22,9 @@ namespace CInterfaceTests {
 
 		// Size of obj file string (character count)
 		const int obj_length = static_cast<int>(obj_path_str.size());
+		//! [snippet_LoadOBJ_prep_path]
 
+		//! [snippet_LoadOBJ_load_mesh]
 		// This will point to memory on free store.
 		// The memory will be allocated inside the LoadOBJ function,
 		// and it must be freed using DestroyMeshInfo.
@@ -48,6 +50,7 @@ namespace CInterfaceTests {
 		//
 		// loaded_obj contains the mesh.
 		//
+		//! [snippet_LoadOBJ_load_mesh]
 
 		//
 		// Memory management
@@ -108,6 +111,7 @@ namespace CInterfaceTests {
 		if (status != 1) {
 			std::cerr << "Error at StoreMesh, code: " << status << std::endl;
 		}
+		//! [snippet_StoreMesh]
 
 		//
 		// Memory management
@@ -120,8 +124,6 @@ namespace CInterfaceTests {
 		if (status != 1) {
 			std::cerr << "Error at DestroyMeshInfo, code: " << status << std::endl;
 		}
-
-		//! [snippet_StoreMesh]
 	}
 
 	TEST(_objloader_CInterface, RotateMesh) {

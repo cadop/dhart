@@ -16,10 +16,79 @@ namespace HF {
 	}
 }
 
-/**
-* @defgroup Geometry
-* Read and manipulate meshes.
-* @{
+/*!
+	\defgroup	Geometry
+	Read and manipulate meshes
+	
+	\section mesh_setup Mesh setup
+	First, we prepare the relative path to the <b>mesh</b>. (.obj file)
+
+	\code
+		// Status code variable, value returned by C Interface functions
+		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
+		int status = 0;
+
+		// Get model path
+		// This is a relative path to your obj file.
+		const std::string obj_path_str = "plane.obj";
+
+		// Size of obj file string (character count)
+		const int obj_length = static_cast<int>(obj_path_str.size());
+	\endcode
+
+	Then, we prepare a pointer to a vector<\link HF::Geometry::MeshInfo \endlink>.<br>
+
+	\code
+		// This will point to memory on free store.
+		// The memory will be allocated inside the LoadOBJ function,
+		// and it must be freed using DestroyMeshInfo.
+		std::vector<HF::Geometry::MeshInfo>* loaded_obj = nullptr;
+	\endcode
+
+	We pass the address of this pointer to \link LoadOBJ \endlink .
+
+	\code
+		// Load mesh
+		// The array rot will rotate the mesh 90 degrees with respect to the x-axis,
+		// i.e. makes the mesh 'z-up'.
+		//
+		// Notice that we pass the address of the loaded_obj pointer
+		// to LoadOBJ. We do not want to pass loaded_obj by value, but by address --
+		// so that we can dereference it and assign it to the address of (pointer to)
+		// the free store memory allocated within LoadOBJ.
+		const float rot[] = { 90.0f, 0.0f, 0.0f };	// Y up to Z up
+		status = LoadOBJ(obj_path_str.c_str(), obj_length, rot[0], rot[1], rot[2], &loaded_obj);
+
+		if (status != 1) {
+			// All C Interface functions return a status code.
+			// Error!
+			std::cerr << "Error at LoadOBJ, code: " << status << std::endl;
+		}
+
+		//
+		// loaded_obj contains the mesh.
+		//
+	\endcode
+
+	<b>loaded_obj</b> points to the loaded mesh.
+
+	\section mesh_teardown Mesh teardown
+	When you are finished with the <b>mesh</b>, you must then its memory resources:<br>
+
+	\code
+		// destroy vector<MeshInfo>
+		status = DestroyMeshInfo(loaded_obj);
+
+		if (status != 1) {
+			std::cerr << "Error at DestroyMeshInfo, code: " << status << std::endl;
+		}
+	\endcode
+
+	<b>The client is responsible for releasing the memory for<br>
+	the <b>mesh</b> (vector<\link HF::Geometry::MeshInfo \endlink> *).</b><br>
+	Every example for each function should be followed up by the 'teardown' code described above.
+
+	@{	
 */
 
 /*!
@@ -39,28 +108,17 @@ namespace HF {
 						HF_STATUS::INVALID_OBJ, if obj_path does not represent a valid .obj file
 						HF_STATUS::GENERIC_ERROR, if the input described at obj_path was empty
 
-	\snippet tests\src\objloader_cinterface.cpp snippet_LoadOBJ
+	\see \ref mesh_setup (how to create a mesh)
 
 	\remarks
-		<b>Memory management:</b><br>
-		info, a (vector<MeshInfo> *), points to nullptr upon initialization,<br>
-		because the memory that it will address will be allocated by StoreMesh.<br>
-		<br>
-		Within its definition, LoadOBJ will allocate memory for info by receiving its address as a parameter,<br>
-		a (vector<MeshInfo> **), and dereference it so that info will then point<br>
-		to a block of memory large enough for a (vector<MeshInfo>).<br>
-		<br>
-		Therefore, it will be the caller's responsibilty to call DestroyMeshInfo(info) (call DestroyMeshInfo on info),<br>
-		so that the memory that info points to can be released.<br>
-		<br>
 		<b>Assertion statement:</b><br>
 		This function calls HF::Geometry::MeshInfo::PerformRotation,<br>
 		which contains the following:<br>
 		
 		\snippet objloader\src\meshinfo.cpp snippet_objloader_assert
 
-		rotation_matrix is a local variable in PerformRotation,<br>
-		and verts is a private field within HF::Geometry::MeshInfo.<br>
+		<b>rotation_matrix</b> is a local variable in \link PerformRotation \endlink,<br>
+		and <b>verts</b> is a private field within HF::Geometry::MeshInfo.<br>
 		<br>
 		These assertion statements may evaluate false (which will halt execution)<br>
 		if NANs (not-a-number) or infinity values were created<br>
@@ -101,19 +159,9 @@ C_INTERFACE LoadOBJ(
 	\returns					HF_STATUS::OK, if the mesh was loaded successfully
 								HF_STATUS::INVALID_OBJ if the values in indices and/or vertices did not create a valid mesh
 
-	\snippet tests\src\objloader_cinterface.cpp snippet_StoreMesh
+	\see \ref mesh_teardown (how to destroy a mesh)
 
-	\remarks
-		<b>Memory management:</b><br>
-		info, a (vector<MeshInfo> *), points to nullptr upon initialization,<br>
-		because the memory that it will address will be allocated by StoreMesh.<br>
-		<br>
-		Within its definition, StoreMesh will allocate memory for info by receiving its address as a parameter,<br>
-		a (vector<MeshInfo> **), and dereference it so that info will then point<br>
-		to a block of memory large enough for a (vector<MeshInfo>).<br>
-		<br>
-		Therefore, it will be the caller's responsibilty to call DestroyMeshInfo(info) (call DestroyMeshInfo on info),<br>
-		so that the memory that info points to can be released.
+	\snippet tests\src\objloader_cinterface.cpp snippet_StoreMesh
 */
 C_INTERFACE StoreMesh(
 	std::vector<HF::Geometry::MeshInfo>** out_info,
@@ -134,6 +182,8 @@ C_INTERFACE StoreMesh(
 	\param	zrot			Degrees to rotate the mesh about the z axis. 0.0f would mean no rotation about the z axis.
 
 	\returns			HF_STATUS::OK on return
+
+	\see \ref mesh_setup (how to create a mesh), \ref mesh_teardown (how to destroy a mesh)
 
 	\snippet tests\src\objloader_cinterface.cpp snippet_RotateMesh
 
@@ -164,14 +214,7 @@ C_INTERFACE RotateMesh(
 
 	\returns	HF_STATUS::OK on return
 
-	\snippet tests\src\objloader_cinterface.cpp snippet_DestroyMeshInfo
-
-	\remarks
-		<b>Memory management:</b><br>
-		For every call to LoadOBJ or StoreMesh<br>
-		(which accepts the address of a vector<MeshInfo> * as a parameter),<br>
-		a call to DestroyMeshInfo must accompany it<br>
-		when the memory addressed by the vector<MeshInfo> * is no longer needed.
+	\see \ref mesh_setup (how to create a mesh), \ref mesh_teardown (how to destroy a mesh)
 */
 C_INTERFACE DestroyMeshInfo(std::vector<HF::Geometry::MeshInfo>* mesh_to_destroy);
 
