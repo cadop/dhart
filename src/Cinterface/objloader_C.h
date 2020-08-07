@@ -39,13 +39,6 @@ namespace HF {
 						HF_STATUS::INVALID_OBJ, if obj_path does not represent a valid .obj file
 						HF_STATUS::GENERIC_ERROR, if the input described at obj_path was empty
 
-	Required forward-declarations for the example below:<br>
-		\link HF::Geometry::MeshInfo \endlink <br>
-
-	Functions called in the example below:<br>
-		\link LoadOBJ \endlink <br>
-		\link DestroyMeshInfo \endlink <br>
-
 	\snippet tests\src\objloader_cinterface.cpp snippet_LoadOBJ
 
 	\remarks
@@ -108,13 +101,6 @@ C_INTERFACE LoadOBJ(
 	\returns					HF_STATUS::OK, if the mesh was loaded successfully
 								HF_STATUS::INVALID_OBJ if the values in indices and/or vertices did not create a valid mesh
 
-	Required forward-declarations for the example below:<br>
-		\link HF::Geometry::MeshInfo \endlink <br>
-
-	Functions called in the example below:<br>
-		\link StoreMesh \endlink <br>
-		\link DestroyMeshInfo \endlink <br>
-
 	\snippet tests\src\objloader_cinterface.cpp snippet_StoreMesh
 
 	\remarks
@@ -149,14 +135,6 @@ C_INTERFACE StoreMesh(
 
 	\returns			HF_STATUS::OK on return
 
-	Required forward-declarations for the example below:<br>
-		\link HF::Geometry::MeshInfo \endlink <br>
-
-	Functions called in the example below:<br>
-		\link StoreMesh \endlink <br>
-		\link RotateMesh \endlink <br>
-		\link DestroyMeshinfo \endlink <br>
-
 	\snippet tests\src\objloader_cinterface.cpp snippet_RotateMesh
 
 	\remarks
@@ -185,13 +163,6 @@ C_INTERFACE RotateMesh(
 	\param		mesh_to_destroy		The vector<MeshInfo> * whose memory will be released
 
 	\returns	HF_STATUS::OK on return
-
-	Required forward-declarations for the example below:<br>
-		\link HF::Geometry::MeshInfo \endlink <br>
-
-	Functions called in the example below:<br>
-		\link LoadOBJ \endlink <br>
-		\link DestroyMeshInfo \endlink <br>
 
 	\snippet tests\src\objloader_cinterface.cpp snippet_DestroyMeshInfo
 
