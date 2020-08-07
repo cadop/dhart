@@ -59,16 +59,6 @@ struct RayResult {
 	\returns	HF_STATUS::MISSING_DEPEND if Embree's dll couldn't be found. 
 				HF_STATUS::GENERIC_ERROR if <paramref name="mesh" /> is null.
 
-	Required forward-declarations for the example below:<br>
-		\link HF::Geometry::MeshInfo \endlink <br>
-		\link HF::RayTracer::EmbreeRayTracer \endlink <br>
-
-	Functions called in the example below:<br>
-		\link LoadOBJ \endlink <br>
-		\link CreateRaytracer \endlink <br>
-		\link DestroyRayTracer \endlink <br>
-		\link DestroyMeshInfo \endlink <br>
-
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_CreateRayTracer
 */
 C_INTERFACE CreateRaytracer(std::vector<HF::Geometry::MeshInfo>* mesh, HF::RayTracer::EmbreeRayTracer** out_raytracer);
@@ -79,16 +69,6 @@ C_INTERFACE CreateRaytracer(std::vector<HF::Geometry::MeshInfo>* mesh, HF::RayTr
 	\param	rt_to_destroy	Raytracer to destroy
 	
 	\returns	HF::OK on completion.
-
-	Required forward-declarations for the example below:<br>
-		\link HF::Geometry::MeshInfo \endlink <br>
-		\link HF::RayTracer::EmbreeRayTracer \endlink <br>
-
-	Functions called in the example below:<br>
-		\link LoadOBJ \endlink <br>
-		\link CreateRaytracer \endlink <br>
-		\link DestroyRayTracer \endlink <br>
-		\link DestroyMeshInfo \endlink <br>
 
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_DestroyRayTracer
 */
@@ -140,21 +120,6 @@ C_INTERFACE DestroyRayTracer(HF::RayTracer::EmbreeRayTracer* rt_to_destroy);
 	
 	</list>
 
-	Required forward-declarations for the example below:<br>
-		\link HF::Geometry::MeshInfo \endlink <br>
-		\link HF::RayTracer::EmbreeRayTracer \endlink <br>
-
-	Required definitions for the example below:<br>
-		\link RayResult \link <br>
-
-	Functions called in the example below:<br>
-		\link LoadOBJ \endlink <br>
-		\link CreateRaytracer \endlink <br>
-		\link FireRaysDistance \endlink <br>
-		\link DestroyRayResultVector \endlink <br>
-		\link DestroyRayTracer \endlink <br>
-		\link DestroyMeshInfo \endlink <br>
-
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireRaysDistance
 */
 C_INTERFACE FireRaysDistance(
@@ -185,17 +150,6 @@ C_INTERFACE FireRaysDistance(
 
 	\returns	HF_STATUS::OK on success
 
-	Required forward-declarations for the example below:<br>
-		\link HF::Geometry::MeshInfo \endlink <br>
-		\link HF::RayTracer::EmbreeRayTracer \endlink <br>
-
-	Functions called in the example below:<br>
-		\link LoadOBJ \endlink <br>
-		\link CreateRaytracer \endlink <br>
-		\link FireSingleRayDistance \endlink <br>
-		\link DestroyRayTracer \endlink <br>
-		\link DestroyMeshInfo \endlink <br>
-
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireSingleRayDistance
 */
 C_INTERFACE FireSingleRayDistance(
@@ -222,17 +176,6 @@ C_INTERFACE FireSingleRayDistance(
 
 	\returns	HF::OK on completion
 
-	Required forward-declarations for the example below:<br>
-		\link HF::Geometry::MeshInfo \endlink <br>
-		\link HF::RayTracer::EmbreeRayTracer \endlink <br>
-
-	Functions called in the example below:<br>
-		\link LoadOBJ \endlink <br>
-		\link CreateRaytracer \endlink <br>
-		\link FireRay \endlink <br>
-		\link DestroyRayTracer \endlink <br>
-		\link DestroyMeshInfo \endlink <br>
-
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireRay
 */
 C_INTERFACE FireRay(HF::RayTracer::EmbreeRayTracer* ert, float& x, float& y, float& z, float dx, float dy, float dz, float max_distance, bool& result);
@@ -255,17 +198,6 @@ C_INTERFACE FireRay(HF::RayTracer::EmbreeRayTracer* ert, float& x, float& y, flo
 
 	\returns	HF_STATUS::OK on completion.
 
-	Required forward-declarations for the example below:<br>
-		\link HF::Geometry::MeshInfo \endlink <br>
-		\link HF::RayTracer::EmbreeRayTracer \endlink <br>
-
-	Functions called in the example below:<br>
-		\link LoadOBJ \endlink <br>
-		\link CreateRaytracer \endlink <br>
-		\link FireMultipleRays \endlink <br>
-		\link DestroyRayTracer \endlink <br>
-		\link DestroyMeshInfo \endlink <br>
-
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireMultipleRays
 */
 C_INTERFACE FireMultipleRays(HF::RayTracer::EmbreeRayTracer* ert, float* origins, const float* directions, int size, float max_distance, bool* result_array);
@@ -283,17 +215,6 @@ C_INTERFACE FireMultipleRays(HF::RayTracer::EmbreeRayTracer* ert, float* origins
 					and false if their rays did not.
 
 	\returns	HF_STATUS::OK on completion.
-
-	Required forward-declarations for the example below:<br>
-		\link HF::Geometry::MeshInfo \endlink <br>
-		\link HF::RayTracer::EmbreeRayTracer \endlink <br>
-
-	Functions called in the example below:<br>
-		\link LoadOBJ \endlink <br>
-		\link CreateRaytracer \endlink <br>
-		\link FireMultipleOriginsOneDirection \endlink <br>
-		\link DestroyRayTracer \endlink <br>
-		\link DestroyMeshInfo \endlink <br>
 
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireMultipleOriginsOneDirection
 */
@@ -313,17 +234,6 @@ C_INTERFACE FireMultipleOriginsOneDirection(HF::RayTracer::EmbreeRayTracer* ert,
 	\param	result_array	Output parameter conatining an ordered list of booleans set to true if the their rays hit, and false if their rays did not.
 
 	\param	returns			HF_STATUS::OK on completion.
-
-	Required forward-declarations for the example below:<br>
-		\link HF::Geometry::MeshInfo \endlink <br>
-		\link HF::RayTracer::EmbreeRayTracer \endlink <br>
-
-	Functions called in the example below:<br>
-		\link LoadOBJ \endlink <br>
-		\link CreateRaytracer \endlink <br>
-		\link FireMultipleDirectionsOneOrigin \endlink <br>
-		\link DestroyRayTracer \endlink <br>
-		\link DestroyMeshInfo \endlink <br>
 
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireMultipleDirectionsOneOrigin
 */
@@ -350,17 +260,6 @@ C_INTERFACE FireMultipleDirectionsOneOrigin(HF::RayTracer::EmbreeRayTracer* ert,
 	\remarks	Occlusion rays are noticably faster than standard rays but are only capable of returning whether
 				they hit something or not. This makes them good for line of sight checks.
 
-	Required forward-declarations for the example below:<br>
-		\link HF::Geometry::MeshInfo \endlink <br>
-		\link HF::RayTracer::EmbreeRayTracer \endlink <br>
-
-	Functions called in the example below:<br>
-		\link LoadOBJ \endlink <br>
-		\link CreateRaytracer \endlink <br>
-		\link FireOcclusionRays \endlink <br>
-		\link DestroyRayTracer \endlink <br>
-		\link DestroyMeshInfo \endlink <br>
-
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireOcclusionRays
 */
 C_INTERFACE FireOcclusionRays(
@@ -379,19 +278,7 @@ C_INTERFACE FireOcclusionRays(
 	\param	analysis	The ray results to destroy
 
 	\returns	HF_STATUS::OK on completion
-
-	Required forward-declarations for the example below:<br>
-		\link HF::Geometry::MeshInfo \endlink <br>
-		\link HF::RayTracer::EmbreeRayTracer \endlink <br>
-
-	Functions called in the example below:<br>
-		\link LoadOBJ \endlink <br>
-		\link CreateRaytracer \endlink <br>
-		\link FireRaysDistance \endlink <br>
-		\link DestroyRayResultVector \endlink <br>
-		\link DestroyRayTracer \endlink <br>
-		\link DestroyMeshInfo \endlink <br>
-
+s
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_DestroyRayResultVector
 */
 C_INTERFACE DestroyRayResultVector(
