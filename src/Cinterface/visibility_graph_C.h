@@ -38,12 +38,14 @@ namespace HF {
 							This should be equal to (size of nodes / 3), 
 							since every three floats represents a single point.
 
-	\param		out_graph	Address of (HF::SpatialStructures::Graph *); address of a pointer to a HF::SpatialStructures::Graph.
-							*(out_graph) will point to memory allocated by CreateVisibilityGraphAllToAll.
+	\param		out_graph	Address of (\link HF::SpatialStructures::Graph \endlink *); address of a pointer to a \link HF::SpatialStructures::Graph \endlink.
+							*(out_graph) will point to memory allocated by \link CreateVisibilityGraphAllToAll \endlink.
 
 	\param		height		How far to offset nodes from the ground.
 
 	\returns	HF_STATUS::OK on completion
+
+	\see		\ref raytracer_setup (How to create a BVH), \ref raytracer_teardown (How to destroy a BVH)
 
 	\snippet	tests\src\visibility_graph_cinterface.cpp snippet_VisibilityGraph_CreateVisibilityGraphAllToAll
 */
@@ -68,14 +70,16 @@ C_INTERFACE CreateVisibilityGraphAllToAll(
 							This should be equal to (size of nodes / 3),
 							since every three floats represents a single point.
 
-	\param		out_graph	Address of (HF::SpatialStructures::Graph *); address of a pointer to a HF::SpatialStructures::Graph.
-							*(out_graph) will point to memory allocated by CreateVisibilityGraphAllToAllUndirected.
+	\param		out_graph	Address of (\link HF::SpatialStructures::Graph \endlink *); address of a pointer to a \link HF::SpatialStructures::Graph \endlink.
+							*(out_graph) will point to memory allocated by \link CreateVisibilityGraphAllToAllUndirected \endlink.
 
 	\param		height		How far to offset nodes from the ground.
 
 	\param		cores		CPU core count. A value of (-1) means to use all available cores on the system.
 
 	\returns	HF_STATUS::OK on completion
+
+	\see		\ref raytracer_setup (How to create a BVH), \ref raytracer_teardown (How to destroy a BVH)
 
 	\snippet	tests\src\visibility_graph_cinterface.cpp snippet_VisibilityGraph_CreateVisibilityGraphAllToAllUndirected
 */
@@ -107,12 +111,14 @@ C_INTERFACE CreateVisibilityGraphAllToAllUndirected(
 							This should be equal to (size of group_b / 3),
 							since every three floats represents a single point.
 
-	\param		out_graph	Address of (HF::SpatialStructures::Graph *); address of a pointer to a HF::SpatialStructures::Graph.
-							*(out_graph) will point to memory allocated by CreateVisibilityGraphGroupToGroup.
+	\param		out_graph	Address of (\link HF::SpatialStructures::Graph \endlink *); address of a pointer to a \link HF::SpatialStructures::Graph \endlink.
+							*(out_graph) will point to memory allocated by \link CreateVisibilityGraphGroupToGroup \endlink.
 
 	\param		height		How far to offset nodes from the ground.
 
 	\returns	HF_STATUS::OK on completion
+
+	\see		\ref raytracer_setup (How to create a BVH), \ref raytracer_teardown (How to destroy a BVH)
 
 	\snippet	tests\src\visibility_graph_cinterface.cpp snippet_VisibilityGraph_CreateVisibilityGraphGroupToGroup
 */
