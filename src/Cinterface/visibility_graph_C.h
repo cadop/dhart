@@ -47,7 +47,28 @@ namespace HF {
 
 	\see		\ref raytracer_setup (How to create a BVH), \ref raytracer_teardown (How to destroy a BVH)
 
-	\snippet	tests\src\visibility_graph_cinterface.cpp snippet_VisibilityGraph_CreateVisibilityGraphAllToAll
+	You must first <b>load an .obj file</b> and <b>create a BVH</b> first.<br>
+	Begin by reviewing the example at \ref raytracer_setup before proceeding below.
+
+	First, set up the parameters for the visibility graph.
+
+	\snippet	tests\src\visibility_graph_cinterface.cpp snippet_VisibilityGraph_CreateVisibilityGraphAllToAll_setup
+
+	Now we are ready to call \link CreateVisibilityGraphAllToAll \endlink .
+
+	\snippet	tests\src\visibility_graph_cinterface.cpp snippet_VisibilityGraph_CreateVisibilityGraphAllToAll_call
+
+	Very important: <b>after generating/adding edges to a graph -- it must be compressed.</b>
+
+	\snippet	tests\src\visibility_graph_cinterface.cpp snippet_VisibilityGraph_CreateVisibilityGraphAllToAll_compress
+
+	You are now ready to use the visibility graph. After use, its resources must be <b>relinquished</b>:
+
+	\snippet	tests\src\visibility_graph_cinterface.cpp snippet_VisibilityGraph_CreateVisibilityGraphAllToAll_destroy
+
+	From here, please review the example at \ref raytracer_teardown for instructions<br>
+	on how to free the remainder of the resources used by the visibility graph -- <br>
+	which are the (vector<\link HF::Geometry::MeshInfo \endlink> *) and (\link HF::Raytracer::EmbreeRayTracer \endlink *) instances.
 */
 C_INTERFACE CreateVisibilityGraphAllToAll(
 	HF::RayTracer::EmbreeRayTracer* ert,
