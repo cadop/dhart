@@ -463,9 +463,51 @@ void CInterfaceTests::visualize_graph(HINSTANCE dll_hf) {
 	}
 
 	//
-	// TODO: Plot the graph of the nodes in the x/y plane
+	// Output all points of the graph to the console.
 	//
-	std::cout << "TODO: output image of graph nodes in x/y plane" << std::endl;
+	// Each point will use elements from the x, y, and z containers.
+	// Each point outputs as '{x[i], y[i], z[i]}'.
+	// i ranges from 0...N - 1, such that N == node_vector_size.
+	// (Containers x, y, z, and node_vector all have the same element count.)
+	//
+	// A set of graph points will begin with a '[' --
+	// it will end with a ']'.
+	//
+	// The output will be as follows:
+	//
+	// [ {x[0], y[0], z[0]}, {x[1], y[1], z[1]}, {x[2], y[2], z[2]},
+	// ..., {x[N - 1], y[N - 1], z[N - 1]} ]
+	//
+	// Every point, save the last, will be followed by a ', '.
+	// Every set of three points, save the last set,
+	// will be followed by a newline after the last ', ' of that set.
+	//
+
+	// Set iterators it_x, it_z, it_z to their base addresses.
+	it_x = x.begin();
+	it_y = y.begin();
+	it_z = z.begin();
+
+	int i = 0;	// We will print every three points on a single line, then line break.
+
+	std::cout << "[ ";
+
+	for (HF::SpatialStructures::Node n : *node_vector) {
+		std::cout << "{" << *(it_x++) << ", "
+			<< *(it_y++) << ", " << *(it_z++)
+			<< "}";
+
+		if (i < node_vector_size - 1) {
+			std::cout << ", ";
+			++i;
+		}
+
+		if (i % 3 == 0) {
+			std::cout << std::endl;
+		}
+	}
+
+	std::cout << " ]" << std::endl;
 
 	///
 	/// Memory resource cleanup.
