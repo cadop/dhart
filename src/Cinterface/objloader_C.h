@@ -97,9 +97,9 @@ namespace HF {
 		<b>rotation_matrix</b> is a local variable in \link PerformRotation \endlink,<br>
 		and <b>verts</b> is a private field within HF::Geometry::MeshInfo.<br>
 		<br>
-		These assertion statements may evaluate false (which will halt execution)<br>
+		These assertion statements may evaluate <b>false</b> (<b>which will halt execution</b>)<br>
 		if NANs (not-a-number) or infinity values were created<br>
-		from the xrot, yrot, or zrot values passed to this function.
+		from the <b>xrot</b>, <b>yrot</b>, or <b>zrot</b> values passed to \link LoadOBJ \endlink or \link RotateMesh \endlink.
 	@{	
 */
 
