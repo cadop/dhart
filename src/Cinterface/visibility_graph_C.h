@@ -1,3 +1,10 @@
+/*!
+	\file		visibility_graph_C.h
+	\brief		Header file for functions related to creating a visibility graph
+
+	\author		TBA
+	\date		07 Aug 2020
+*/
 #include <cinterface_utils.h>
 #include <raytracer_c.h>
 
@@ -11,25 +18,33 @@ namespace HF {
 	}
 }
 
-/**
-* @defgroup VisibilityGraph
-Determine which points are visibile from other points in space.
-* @{
+/*!
+	\defgroup	VisibilityGraph
+	Determine which points are visible from other points in space.
+
+	@{
 */
 
-/// <summary> Create a new directed visibility graph between all nodes in nodes. </summary>
-/// <param name="ert"> The raytracer to fire rays from. </param>
-/// <param name="nodes">
-/// Nodes to use in generating the visibility graph. Every 3 floats should represent a single point
-/// </param>
-/// <param name="num_nodes">
-/// Nodes to use in generating the visibility graph. Should be equal to a the length of nodes/3
-/// since every 3 floats represents a single point.
-/// </param>
-/// <param name="nodes"> Nodes to use in generating the visibility graph. </param>
-/// <param name="out_graph"> Output parameter for the completed graph. </param>
-/// <param name="height"> How far to offset nodes from the ground. </param>
-/// <returns> HS_STATUS::OK on completion. </returns>
+/*!
+	\brief		Create a new directed visibility graph between all nodes in parameter nodes.
+	
+	\param		ert			The raytracer to fire rays from
+
+	\param		nodes		Coordinates of nodes to use in generating the visibility graph.
+							Every three floats (every three members in nodes) 
+							should represent a single node (point) {x, y, z}
+
+	\param		num_nodes	Amount of nodes (points) that will be used to generate the visibility graph.
+							This should be equal to (size of nodes / 3), 
+							since every three floats represents a single point.
+
+	\param		out_graph	Address of (HF::SpatialStructures::Graph *); address of a pointer to a HF::SpatialStructures::Graph.
+							*(out_graph) will point to memory allocated by CreateVisibilityGraphAllToAll.
+
+	\param		height		How far to offset nodes from the ground.
+
+	\returns	HF_STATUS::OK on completion
+*/
 C_INTERFACE CreateVisibilityGraphAllToAll(
 	HF::RayTracer::EmbreeRayTracer* ert,
 	const float* nodes,
@@ -38,19 +53,28 @@ C_INTERFACE CreateVisibilityGraphAllToAll(
 	float height
 );
 
-/// <summary> Create a new undirected visibility graph between all nodes in nodes. </summary>
-/// <param name="ert"> The raytracer to fire rays from. </param>
-/// <param name="nodes">
-/// Nodes to use in generating the visibility graph. Every 3 floats should represent a single point
-/// </param>
-/// <param name="num_nodes">
-/// Nodes to use in generating the visibility graph. Should be equal to a the length of nodes/3
-/// since every 3 floats represents a single point.
-/// </param>
-/// <param name="nodes"> Nodes to use in generating the visibility graph. </param>
-/// <param name="out_graph"> Output parameter for the completed graph. </param>
-/// <param name="height"> How far to offset nodes from the ground. </param>
-/// <returns> HS_STATUS::OK on completion. </returns>
+/*!
+	\brief		Create a new undirected visibility graph between all nodes in nodes.
+
+	\param		ert			The raytracer to fire rays from
+
+	\param		nodes		Coordinates of nodes to use in generating the visibility graph.
+							Every three floats (every three members in nodes)
+							should represent a single node (point) {x, y, z}
+
+	\param		num_nodes	Amount of nodes (points) that will be used to generate the visibility graph.
+							This should be equal to (size of nodes / 3),
+							since every three floats represents a single point.
+
+	\param		out_graph	Address of (HF::SpatialStructures::Graph *); address of a pointer to a HF::SpatialStructures::Graph.
+							*(out_graph) will point to memory allocated by CreateVisibilityGraphAllToAllUndirected.
+
+	\param		height		How far to offset nodes from the ground.
+
+	\param		cores		CPU core count. A value of (-1) means to use all available cores on the system.
+
+	\returns	HF_STATUS::OK on completion
+*/
 C_INTERFACE CreateVisibilityGraphAllToAllUndirected(
 	HF::RayTracer::EmbreeRayTracer* ert,
 	const float* nodes,
@@ -60,21 +84,32 @@ C_INTERFACE CreateVisibilityGraphAllToAllUndirected(
 	const int cores
 );
 
-/// <summary> Create a new visibility from the nodes in group_a to the nodes in group_b. </summary>
-/// <param name="ert"> The raytracer to fire rays from. </param>
-/// <param name="group_a"> Nodes to fire from. Every 3 floats should represent a single point. </param>
-/// <param name="size_a">
-/// Number of nodes in group_a. Should be equal to a the length of group_a/3 since every 3 floats
-/// represents a single point.
-/// </param>
-/// <param name="group_b"> Nodes to fire to. Every 3 floats should represent a single point. </param>
-/// <param name="size_b">
-/// Number of nodes in group_b. Should be equal to a the length of group_b/3 since every 3 floats
-/// represents a single point.
-/// </param>
-/// <param name="out_graph"> Output parameter for the completed graph. </param>
-/// <param name="height"> How far to offset nodes from the ground. </param>
-/// <returns> HS_STATUS::OK on completion. </returns>
+/*!
+	\brief		Create a new visibility graph from the nodes in group_a, into the nodes of group_b.
+
+	\param		ert			The raytracer to fire rays from
+
+	\param		group_a		Coordinates of nodes to fire rays from. (source node coordinates)
+							Every three floats (every three members in nodes)
+							should represent a single node (point) {x, y, z}
+
+	\param		size_a		Amount of nodes (points) in group_a.
+							This should be equal to (size of group_a / 3),
+							since every three floats represents a single point.
+
+	\param		group_b		Coordinates of nodes to fire rays at. (destination node coordinates)
+
+	\param		size_b		Amount of nodes (points) in group_b.
+							This should be equal to (size of group_b / 3),
+							since every three floats represents a single point.
+
+	\param		out_graph	Address of (HF::SpatialStructures::Graph *); address of a pointer to a HF::SpatialStructures::Graph.
+							*(out_graph) will point to memory allocated by CreateVisibilityGraphGroupToGroup.
+
+	\param		height		How far to offset nodes from the ground.
+
+	\returns	HF_STATUS::OK on completion
+*/
 C_INTERFACE CreateVisibilityGraphGroupToGroup(
 	HF::RayTracer::EmbreeRayTracer* ert,
 	const float* group_a,
