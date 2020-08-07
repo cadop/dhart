@@ -144,7 +144,7 @@ struct RayResult {
 	\returns	HF_STATUS::MISSING_DEPEND if Embree's dll couldn't be found. 
 				HF_STATUS::GENERIC_ERROR if <paramref name="mesh"/> is null.
 
-	\see	\ref raytracer_setup, \ref raytracer_teardown
+	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
 */
 C_INTERFACE CreateRaytracer(std::vector<HF::Geometry::MeshInfo>* mesh, HF::RayTracer::EmbreeRayTracer** out_raytracer);
 
@@ -155,7 +155,7 @@ C_INTERFACE CreateRaytracer(std::vector<HF::Geometry::MeshInfo>* mesh, HF::RayTr
 	
 	\returns	HF::OK on completion.
 
-	\see	\ref raytracer_setup, \ref raytracer_teardown
+	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
 */
 C_INTERFACE DestroyRayTracer(HF::RayTracer::EmbreeRayTracer* rt_to_destroy);
 
@@ -207,7 +207,7 @@ C_INTERFACE DestroyRayTracer(HF::RayTracer::EmbreeRayTracer* rt_to_destroy);
 
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireRaysDistance
 
-	\see \ref raytracer_setup, \ref raytracer_teardown
+	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
 */
 C_INTERFACE FireRaysDistance(
 	HF::RayTracer::EmbreeRayTracer* ert,
@@ -239,7 +239,7 @@ C_INTERFACE FireRaysDistance(
 
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireSingleRayDistance
 
-	\see \ref raytracer_setup, \ref raytracer_teardown
+	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
 */
 C_INTERFACE FireSingleRayDistance(
 	HF::RayTracer::EmbreeRayTracer* ert,
@@ -267,7 +267,7 @@ C_INTERFACE FireSingleRayDistance(
 
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireRay
 
-	\see \ref raytracer_setup, \ref raytracer_teardown
+	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
 */
 C_INTERFACE FireRay(HF::RayTracer::EmbreeRayTracer* ert, float& x, float& y, float& z, float dx, float dy, float dz, float max_distance, bool& result);
 
@@ -291,7 +291,7 @@ C_INTERFACE FireRay(HF::RayTracer::EmbreeRayTracer* ert, float& x, float& y, flo
 
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireMultipleRays
 
-	\see \ref raytracer_setup, \ref raytracer_teardown
+	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
 */
 C_INTERFACE FireMultipleRays(HF::RayTracer::EmbreeRayTracer* ert, float* origins, const float* directions, int size, float max_distance, bool* result_array);
 
@@ -311,7 +311,7 @@ C_INTERFACE FireMultipleRays(HF::RayTracer::EmbreeRayTracer* ert, float* origins
 
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireMultipleOriginsOneDirection
 
-	\see \ref raytracer_setup, \ref raytracer_teardown
+	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
 */
 C_INTERFACE FireMultipleOriginsOneDirection(HF::RayTracer::EmbreeRayTracer* ert, float* origins, const float* direction, int size, float max_distance, bool* result_array);
 
@@ -332,7 +332,7 @@ C_INTERFACE FireMultipleOriginsOneDirection(HF::RayTracer::EmbreeRayTracer* ert,
 
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireMultipleDirectionsOneOrigin
 
-	\see \ref raytracer_setup, \ref raytracer_teardown
+	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
 */
 C_INTERFACE FireMultipleDirectionsOneOrigin(HF::RayTracer::EmbreeRayTracer* ert, const float* origin, float* directions, int size, float max_distance, bool* result_array);
 
@@ -359,7 +359,7 @@ C_INTERFACE FireMultipleDirectionsOneOrigin(HF::RayTracer::EmbreeRayTracer* ert,
 
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireOcclusionRays
 
-	\see \ref raytracer_setup, \ref raytracer_teardown
+	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
 */
 C_INTERFACE FireOcclusionRays(
 	HF::RayTracer::EmbreeRayTracer* ert,
@@ -380,7 +380,7 @@ C_INTERFACE FireOcclusionRays(
 
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_DestroyRayResultVector
 
-	\see \ref raytracer_setup, \ref raytracer_teardown, FireRaysDistance
+	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH), FireRaysDistance
 */
 C_INTERFACE DestroyRayResultVector(
 	std::vector<RayResult>* analysis
