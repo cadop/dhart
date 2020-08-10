@@ -88,9 +88,37 @@
 <h1>humanfactorspy.spatialstructures.Graph.AggregateEdgeCosts<a class="headerlink" href="#humanfactorspy-spatialstructures-graph-aggregateedgecosts" title="Permalink to this headline">¶</a></h1>
 <dl class="py method">
 <dt id="humanfactorspy.spatialstructures.Graph.AggregateEdgeCosts">
-<code class="descclassname">Graph.</code><code class="descname">AggregateEdgeCosts</code><span class="sig-paren">(</span><em><span class="n">ct</span><span class="p">:</span> <span class="n">humanfactorspy.spatialstructures.graph.CostAggregationType</span></em>, <em><span class="n">directed</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span></em>, <em><span class="n">cost_type</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">''</span></em><span class="sig-paren">)</span> &#x2192; humanfactorspy.spatialstructures.graph.EdgeSumArray<a class="reference external" href="https://github.com/cadop/HumanMetrics/blob/master/Codebase/HumanFactors/humanfactorspy/..\build\Python\humanfactorspy\spatialstructures\graph.py#L209-L219"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#humanfactorspy.spatialstructures.Graph.AggregateEdgeCosts" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get an aggregated score for every node in the graph based on
-its edges</p>
+<code class="descclassname">Graph.</code><code class="descname">AggregateEdgeCosts</code><span class="sig-paren">(</span><em><span class="n">ct</span><span class="p">:</span> <span class="n">humanfactorspy.spatialstructures.graph.CostAggregationType</span></em>, <em><span class="n">directed</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span></em>, <em><span class="n">cost_type</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">''</span></em><span class="sig-paren">)</span> &#x2192; humanfactorspy.spatialstructures.graph.EdgeSumArray<a class="reference external" href="https://github.com/cadop/HumanMetrics/blob/master/Codebase/HumanFactors/humanfactorspy/..\build\Python\humanfactorspy\spatialstructures\graph.py#L409-L440"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#humanfactorspy.spatialstructures.Graph.AggregateEdgeCosts" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Get an aggregated score for every node in the graph based on</dt><dd>its edges.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>ct</strong> – CostAggregationType
+Aggregation method to use for summarizing edge costs. See
+CostAggregationType for more information</li>
+<li><strong>directed</strong> – bool
+If false, only consider outgoing edges of each node. If true,
+consider outgoing and incoming edges.</li>
+<li><strong>cost_type</strong> – str
+Name of the cost set to use for aggregation. If left as blank,
+will use the default cost of the graph.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">An array of floats containing  aggregated cost score for each node
+in the graph ordered by node ID.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.8)"><strong>KeyError</strong></a> – cost_type wasn’t set to an empty string or the key of any
+    cost type in the graph.</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>
