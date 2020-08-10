@@ -236,9 +236,11 @@ TEST(_nanoRayTracer, nanoRayPerformance) {
 	accel = nanoRT_BVH(mesh);
 
 	nanoRT_Data nanoRTdata(mesh);
+	nanoRTdata.ray.org[2] = 50;
+	nanoRTdata.ray.dir[2] = -1;
 
 	// Number of trials is based on number of elements here
-	vector<int> raycount = {100};
+	vector<int> raycount = {0};
 	const int num_trials = raycount.size();
 
 	// Create Watches
@@ -246,41 +248,40 @@ TEST(_nanoRayTracer, nanoRayPerformance) {
 
 	auto& watch = watches[0];
 	watch.StartClock();
+	double dist_sum = 0; // Sum of hits to make sure loop is not optimized away
 	// Do it in a loop for checking performance
-	for (int i = -100; i < 100; i++) {
-		for (int j = -100; j < 100; j++) {
+	for (float i = -100; i < 100; i++) {
+		for (float j = -100; j < 100; j++) {
 			nanoRTdata.ray.org[0] = i * 0.01;
 			nanoRTdata.ray.org[1] = j * 0.01;
 			// We pass it our custom class that contains a built-in hit point member that will be modified in place
 			bool hit = nanoRT_Intersect(mesh, accel, nanoRTdata);
-
-			if (hit) {
-				//std::cout << hit << " Dist: " << nanoRTdata.hit.t << std::endl;
-			}
+			dist_sum += nanoRTdata.point[2];
 			raycount[0]++;
 		}
 	}
 	watch.StopClock();
 	PrintTrials(watches, raycount, "rays with nanoRT");
+	std::cout <<" Total distance of rays: " << dist_sum << std::endl;
 }
 
 // end [nanoRT]
 
 TEST(_EmbreeRayTracer, EmbreeRayPerformance) {
 	std::string plane_path = "energy_blob_zup.obj";
-	int scale = 100;
+	int scale = 1;
 	auto geom = HF::Geometry::LoadMeshObjects(plane_path, HF::Geometry::ONLY_FILE, false, scale);
 	auto k = HF::RayTracer::EmbreeRayTracer(geom);
 
 	// All of these rays should hit since the origin is inside of the teapot
 	//std::vector<std::array<float, 3>> origins = {{-30.01,0,50.0},{-30.01,0,50.1},{-30.01,0,85.01311}};
-	std::array<float, 3> origin = { 0.0f, 0.0f, 0.0f };
+	std::array<float, 3> origin = { 0.0f, 0.0f, 50.0f };
 
 	const std::array<float, 3> direction{ 0,0,-1 };
 	float height = NAN;
 
 	// Number of trials is based on number of elements here
-	vector<int> raycount = { 100 };
+	vector<int> raycount = {0};
 	const int num_trials = raycount.size();
 
 	// Create Watches
@@ -288,20 +289,22 @@ TEST(_EmbreeRayTracer, EmbreeRayPerformance) {
 
 	auto& watch = watches[0];
 	watch.StartClock();
+	double dist_sum = 0; // Sum of hits to make sure loop is not optimized away
 	// Do it in a loop for checking performance
-	for (int i = -100; i < 100; i++) {
-		for (int j = -100; j < 100; j++) {
+	for (float i = -100; i < 100; i++) {
+		for (float j = -100; j < 100; j++) {
 			origin[0] = i * 0.01;
 			origin[1] = j * 0.01;
 			// We pass it our custom class that contains a built-in hit point member that will be modified in place
 			k.FireRay(origin, direction);
-			height = origin[2];
+			dist_sum += origin[2];
 
 			raycount[0]++;
 		}
 	}
 	watch.StopClock();
 	PrintTrials(watches, raycount, "rays with embree");
+	std::cout << " Total distance of rays: " << dist_sum << std::endl;
 }
 
 
