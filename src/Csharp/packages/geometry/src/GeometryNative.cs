@@ -13,95 +13,129 @@ using System.ComponentModel;
 namespace HumanFactors.Geometry
 {
 
-    /// <summary>
-    /// Native methods for the Geometry namespace
-    /// </summary>
-    internal static class NativeMethods
-    {
+	/*! \brief Native methods for the Geometry namespace */
+	internal static class NativeMethods
+	{
 
-        /// <summary>
-        /// Path to the HumanFactors dll copied from <see cref="NativeConstants"/>.
-        /// </summary>
-        const string dllpath = NativeConstants.DLLPath;
+		/// <summary>
+		/// Path to the HumanFactors dll copied from <see cref="NativeConstants"/>.
+		/// </summary>
+		const string dllpath = NativeConstants.DLLPath;
 
-        /// <summary>
-        /// Attempt to load the OBJ at the given filepath. If a rotation is specifed, the obj will be rotated after
-        /// it is loaded.
-        /// </summary>
-        /// <param name="obj_path">Filepath for the obj to load</param>
-        /// <param name="xrot"> Degrees to rotate the mesh on the z axis. </param>
-        /// <param name="yrot"> Degrees to rotate the mesh on the y axis.</param>
-        /// <param name="zrot"> Degrees to rotate the mesh on the z axis. </param>
-        /// <returns> A pointer to a valid instance of meshinfo from C++ </returns>
-        internal static IntPtr C_LoadOBJ(string obj_path, float xrot, float yrot, float zrot)
-        {
-            IntPtr out_ptr = new IntPtr();
-            HF_STATUS res = LoadOBJ(obj_path, obj_path.Length, xrot, yrot, zrot, ref out_ptr);
-            if (res == HF_STATUS.NOT_FOUND)
-                throw new FileNotFoundException(obj_path + " did not lead to any file");
-            else if (res == HF_STATUS.INVALID_MESH)
-                throw new InvalidMeshException(obj_path + " did not lead to an obj file, or the obj file was invalid!");
+		/*!
+            \brief Load an obj file from the given filepath into a MeshInfo object in native memory.
             
-            return out_ptr;
-        }
+            \param obj_path Path to tthe obj file to load
+            \param xrot Degrees to rotate the mesh on the x axis.
+            \param yrot Degrees to rotate the mesh on the y axis.
+            \param zrot Degrees to rotate the mesh on the z axis.
+            
+            \returns A pointer to the a instance of MeshInfo in native memory containing the mesh at `path`.
 
-        /// <summary>
-        /// Store a mesh in managed memory.
-        /// </summary>
-        /// <returns>A pointer to the mesh in unmanaged memory</returns>
-        /// <exception cref="InvalidMeshException">That did not represent a valid mesh</exception>
-        internal static IntPtr C_StoreMesh(IEnumerable<float> vertices, IEnumerable<int> indices, string name, int id)
-        {
-            var vert_array = vertices.ToArray<float>();
-            var ind_array = indices.ToArray<int>();
-            int num_verts = vertices.Count();
-            int num_inds = indices.Count();
-            IntPtr out_ptr = new IntPtr();
+            \throws System.IO.FileNotFoundException No file was found at `path`.
+			\throws HumanFactors.Exceptions.InvalidMeshException The file at `path` did not represent a valid OBJ.
+       */
+		internal static IntPtr C_LoadOBJ(string obj_path, float xrot, float yrot, float zrot)
+		{
+			// Create a pointer as an output parameter
+			IntPtr out_ptr = new IntPtr();
 
-            HF_STATUS res = StoreMesh(ref out_ptr, ind_array, num_inds, vert_array, num_verts, name, id);
+			// Call the function in C++ and capture the error code
+			HF_STATUS res = LoadOBJ(obj_path, obj_path.Length, xrot, yrot, zrot, ref out_ptr);
 
-            if (res == HF_STATUS.INVALID_MESH)
-                throw new InvalidMeshException("That did not represent a valid mesh");
+			// If the file was not found, throw the standard file not found exception
+			if (res == HF_STATUS.NOT_FOUND)
+				throw new FileNotFoundException(obj_path + " did not lead to any file");
 
-            return out_ptr;
-        }
+			// If the file at the filepath didn't represent a valid OBJ model, throw InvalidMesh Exception
+			else if (res == HF_STATUS.INVALID_MESH)
+				throw new InvalidMeshException(obj_path + " did not lead to an obj file, or the obj file was invalid!");
 
-        /// <summary>
-        /// Rotate this mesh in C++
-        /// </summary>
-        internal static void C_RotateMesh(IntPtr mesh, float xrot, float yrot, float zrot) => RotateMesh(mesh, xrot, yrot, zrot);
+			// Return the pointer 
+			return out_ptr;
+		}
 
-        /// <summary>
-        /// Loads an OBJ file into meshinfo at the given instance 
-        /// </summary>
-        [DllImport(dllpath, CharSet = CharSet.Ansi)]
-        private static extern HF_STATUS LoadOBJ(
-            string obj_paths,
-            int length,
-            float yrot,
-            float xrot,
-            float zrot,
-            ref IntPtr out_mesh_info
-        );
 
-        
-        [DllImport(dllpath, CharSet = CharSet.Ansi)]
-        internal static extern HF_STATUS StoreMesh(
-            ref IntPtr out_info,
-            [In] int[] indices,
-            int num_indices,
-            [In] float[] vertices,
-            int num_vertices,
-            string name,
-            int id
-        );
+		/*!
+            \brief Construct an instance of meshinfo in native memory.
 
-         [DllImport(dllpath, CharSet = CharSet.Ansi)]
-        internal static extern HF_STATUS DestroyMeshInfo(
-            IntPtr MeshToDestroy
-        );
+            \param indices
+            An array of indices for the triangles in the mesh. Each integer should correspond to 3
+            values in <paramref name="vertices" />, and every 3 integers should represent a complete
+            triangle for the mesh.
+            \param vertices Vertices of the mesh. Each 3 floats represent the X,Y, and Z of a point in space
+            \param name The name of the mesh. Unused for now.
+            \param id The unique identifier for this mesh. If -1, this will automatically be set
+            
+            \returns 
+            A pointer to a new MeshInfo object in unmanaged memory, constructed with `vertices
+            and `indices`.
 
-        [DllImport(dllpath, CharSet = CharSet.Ansi)]
-        internal static extern HF_STATUS RotateMesh(IntPtr Meshinfo, float xrot, float yrot, float zrot);
-    }
+            \throws HumanFactors.Exceptions.InvalidMeshException The input indices and vertices result in an invalid mesh.
+        */
+		internal static IntPtr C_StoreMesh(IEnumerable<float> vertices, IEnumerable<int> indices, string name, int id)
+		{
+
+			// Convert IEnumerables to arrays
+			var vert_array = vertices.ToArray<float>();
+			var ind_array = indices.ToArray<int>();
+
+			// Get the size of both arrays
+			int num_verts = vertices.Count();
+			int num_inds = indices.Count();
+
+			// Create a pointer to use as a reference parameter
+			IntPtr out_ptr = new IntPtr();
+
+			// Call the native funciton 
+			HF_STATUS res = StoreMesh(ref out_ptr, ind_array, num_inds, vert_array, num_verts, name, id);
+
+			// If the error code indicates this mesh is invalid, throw an exception
+			if (res == HF_STATUS.INVALID_MESH)
+				throw new InvalidMeshException("That did not represent a valid mesh");
+
+			return out_ptr;
+		}
+
+		/*! 
+            \brief Rotate an instance of MeshInfo
+           
+            \param mesh Pointer to a MeshInfo object in native memory.
+            \param xrot Degrees to rotate `mesh` on the x axis
+            \param yrot Degrees to rotate `mesh` on the y axis
+            \param zrot Degrees to rotate `mesh` on the z axis
+
+            \post The mesh pointed to by `mesh` will be rotated as specified by `xrot`, `yrot` and `zrot`.
+        */
+		internal static void C_RotateMesh(IntPtr mesh, float xrot, float yrot, float zrot) => RotateMesh(mesh, xrot, yrot, zrot);
+
+		[DllImport(dllpath, CharSet = CharSet.Ansi)]
+		private static extern HF_STATUS LoadOBJ(
+			string obj_paths,
+			int length,
+			float yrot,
+			float xrot,
+			float zrot,
+			ref IntPtr out_mesh_info
+		);
+
+		[DllImport(dllpath, CharSet = CharSet.Ansi)]
+		internal static extern HF_STATUS StoreMesh(
+			ref IntPtr out_info,
+			[In] int[] indices,
+			int num_indices,
+			[In] float[] vertices,
+			int num_vertices,
+			string name,
+			int id
+		);
+
+		[DllImport(dllpath, CharSet = CharSet.Ansi)]
+		internal static extern HF_STATUS DestroyMeshInfo(
+		   IntPtr MeshToDestroy
+	   );
+
+		[DllImport(dllpath, CharSet = CharSet.Ansi)]
+		internal static extern HF_STATUS RotateMesh(IntPtr Meshinfo, float xrot, float yrot, float zrot);
+	}
 }
