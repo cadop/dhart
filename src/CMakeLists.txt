@@ -114,6 +114,7 @@ set(PYTHON_MODULES  #Folders in the python directory that need to be copied over
 
 set(PYTHON_FILES # Files to be placed in the python root directory
 		${PYTHON_PACKAGE_DIR}/humanfactorspy/common_native_functions.py
+		${PYTHON_PACKAGE_DIR}/humanfactorspy/utils.py
 		${PYTHON_PACKAGE_DIR}/humanfactorspy/native_collections.py
 		${PYTHON_PACKAGE_DIR}/humanfactorspy/Exceptions.py
 		${PYTHON_PACKAGE_DIR}/humanfactorspy/native_numpy_like.py
