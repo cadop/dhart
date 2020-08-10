@@ -297,7 +297,7 @@ namespace HumanFactors.Pathfinding
 		}
 
 
-		/*! 
+        /*! 
             \brief Generate a path from every node in the graph to every other node in a graph.
         
             \param g The graph to generate paths in. 
@@ -333,27 +333,91 @@ namespace HumanFactors.Pathfinding
 			3 -> 2 : [(3, 15), (1, 15), (2, 0)]
            ```
         */
-		public static Path[] DijkstraAllToAll(Graph g, string cost_type = "")
+        public static Path[] DijkstraAllToAll(Graph g, string cost_type = "")
+        {
+            // Generate paths in native code
+            var cvads = NativeMethods.C_AllToAllPaths(g.Pointer, g.NumNodes(), cost_type);
+
+            // Create an array of paths and only copy over the paths that have a length
+            // greater than one.
+            Path[] paths = new Path[cvads.Length];
+            for (int i = 0; i < cvads.Length; i++)
+            {
+
+                if (cvads[i].IsValid())
+                    paths[i] = new Path(cvads[i]);
+
+                // If the validity check fails, then no path 
+                // could be found between these nodes and we must
+                // set the path in to null in our output
+                else
+                    paths[i] = null;
+            }
+            return paths;
+        }
+
+		/*! \brief Calculate Predecessor and Distance Matricies for a graph 
+         
+            \param g Graph to calculate predeessor and distance matricies for
+            \param out_dist Output parameter for the distance matrix
+            \param out_predecessor Output parameter for the predecessor matrix.
+            \param cost_type Type of cost to use for the distance and predecessor
+                             matricies. If left blank will use the default cost of 
+                             the graph.
+
+            \throws KeyNotFoundException If cost_type isn't left to the default, and
+                                         does not match the key of any cost that already
+                                         exists in the graph.
+        
+
+            \post out_dist and out_predecessor are updated to contain the distance and predecessor
+            matricies for `g`.
+
+            \internal
+            \note
+            This SHOULD by all means be returning a tuple, as it would allow for 
+            returning multiple parameters without needing to resort to ou tparameters
+            however, that support isn't actually built into the language, but instead
+            is accessible through a nuget package from microsoft like Span. This is 
+            not enough of a case to add another DLL that we need to ship with, so 
+            i'm doing output parameters.
+
+            \endinternal
+
+            \par Example
+            \snippet pathfinding\test_pathfinding.cs EX_CreateDistPred
+            `[0, 15, 10, NaN, 0, NaN, NaN, 5, 0]`\n
+            `[0, 2, 0, -1, 1, -1, -1, 2, 2]`
+        */
+		public static void GeneratePredecessorAndDistanceMatricies(
+			Graph g,
+			out UnmanagedFloatArray2D out_dist,
+			out UnmanagedIntArray2D out_predecessor,
+			string cost_type = ""
+		)
 		{
-			// Generate paths in native code
-			var cvads = NativeMethods.C_AllToAllPaths(g.Pointer, g.NumNodes(), cost_type);
+			// Define output parameters
+			CVectorAndData predecessor_ptrs = new CVectorAndData();
+			CVectorAndData distance_ptrs = new CVectorAndData();
 
-			// Create an array of paths and only copy over the paths that have a length
-			// greater than one.
-			Path[] paths = new Path[cvads.Length];
-			for (int i = 0; i < cvads.Length; i++)
-			{
+			// Set both both sets of pointers' sizes to the correct sizes
+			int num_nodes = g.NumNodes();
+			predecessor_ptrs.size = num_nodes; distance_ptrs.size = num_nodes;
+			predecessor_ptrs.size2 = num_nodes; distance_ptrs.size2 = num_nodes;
 
-				if (cvads[i].IsValid())
-					paths[i] = new Path(cvads[i]);
+			// Call NativeMethods. This will update the output parameters
+			// for distance and predecessor 
+			NativeMethods.C_GeneratePredecessorAndDistanceMatricies(
+				g.Pointer,
+				ref distance_ptrs,
+				ref predecessor_ptrs,
+				cost_type
+			);
 
-				// If the validity check fails, then no path 
-				// could be found between these nodes and we must
-				// set the path in to null in our output
-				else
-					paths[i] = null;
-			}
-			return paths;
+			// Update output parameters 
+			out_dist = new UnmanagedFloatArray2D(distance_ptrs);
+			out_predecessor = new UnmanagedIntArray2D(predecessor_ptrs);
 		}
 	}
+
 }

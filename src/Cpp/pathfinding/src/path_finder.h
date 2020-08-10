@@ -9,6 +9,8 @@
 #include <memory>
 #include <vector>
 #include <string>
+#include <cassert>
+#include <iostream>
 
 namespace HF {
 	// Forward declares so we don't need to include these in the header.
@@ -395,7 +397,88 @@ namespace HF {
 			int* out_sizes
 		);
 
+		/*! \brief Holds and maintains a distance and predecessor matrix
+		
+			\remarks
+			This is mostly used for the implementation of GenerateDistanceAndPredecessor. 
 
+			\warning
+			This object does NOT delete it's internal arrays upon destruction. It's the owner's
+			responsibility to do this!
+		*/
+		struct DistanceAndPredecessor{
+			std::vector<float>* dist;
+			std::vector<int>* pred;
+
+			int size = 0; ///< Number of rows and colums
+
+			/*! 
+				\brief Create and allocate a pair of distance and predecessor arrays. 
+				
+				\param size Number of rows and columns. Size of each array will be this to the power of 2
+
+				All arrays will be initialized with NAN as their default values
+
+			*/
+			inline DistanceAndPredecessor(int size) {
+				
+				// Preallocate enough space in both arrays to hold n^2 values
+				int arr_count = pow(size, 2);
+				dist = new std::vector<float>(arr_count, -1);
+				pred = new std::vector<int>(arr_count, -1);
+
+				this->size = size;
+			}
+
+			/*! \brief Get a pointer to the beginning of the ith row of the distance array
+				
+				\param i Index of the row to get. 
+
+				\returns a pointer to the beginning of row i.
+			*/
+			inline float * GetRowOfDist(int i) {
+				// Check bounds in debug mode
+				assert(i >= 0 && i < size);
+
+				return dist->data() + (i * size);
+			}
+
+
+			/*! \brief Get a pointer to the beginning of the ith row of the predecessor array
+				
+				\param i Index of the row to get. 
+
+				\returns a pointer to the beginning of row i.
+			*/
+			inline int * GetRowOfPred(int i) {
+				// Check bounds in debug mode
+				assert(i >= 0 && i < size);
+
+				return pred->data() + (i * size);
+			}
+		};
+			
+		/*!
+			\brief Generate the distance and predecessor matricies for a specific boost graph.
+
+			\param bg Boost graph to generate the matricies from
+
+			\returns A DistanceAndPredecessor containing pointers to the new distance and predecessor matricies 
+
+			\warning 
+			It is up to the caller to deallocate both arrays. This is mostly for the C_Interface, and as such ignores
+			the safety that most other functions adhere to. It is the caller's responsibility to deallocate both arrays
+			from this function. 
+
+			\par Example
+			\snippet tests\src\Pathfinding.cpp EX_DistPred
+			\snippet tests\src\Pathfinding.cpp EX_DistPred_2
+			`[0.000000, 10.000000, 5.000000, 10.000000, 0.000000, 15.000000, -1.000000, -1.000000, 0.000000]`\n
+			`[0, 0, 0, 1, 1, 0, -1, -1, 2]`
+		
+		*/
+		DistanceAndPredecessor GenerateDistanceAndPred(const BoostGraph& bg);
+			
 		/*!
 			\brief A special version of FindPaths optimized for the C_Interface, such that all paths possible
 				   from each node to every other node are generated.
@@ -532,4 +615,48 @@ namespace HF {
 		*/
 		void InsertAllToAllPathsIntoArray(BoostGraph* bg, HF::SpatialStructures::Path** out_paths, HF::SpatialStructures::PathMember** out_path_members, int* out_sizes);
 	}
+}
+
+/*! \brief An overload to print HF::Pathfinding::DistanceAndPredecessor when passed to cout .*/
+inline std::ostream & operator<<(std::ostream& os, HF::Pathfinding::DistanceAndPredecessor & dist_pred) {
+	const int num_nodes = dist_pred.size;
+
+	// create strings to add to
+	std::string dist_string = "[";
+	std::string pred_string = "[";
+
+
+	// Iterate through every row
+	for (int row = 0; row < num_nodes; row++) {
+
+		// Get pointers to beginning and end of both matricies
+		const float* dist_row = dist_pred.GetRowOfDist(row);
+		const int* pred_row = dist_pred.GetRowOfPred(row);
+
+		// Iterate through every column in this row
+		for (int col = 0; col < num_nodes; col++) {
+			
+			// Get values from matricies
+			const float dist_value = dist_row[col];
+			const int pred_value = pred_row[col];
+
+			// Convert values to strings
+			dist_string += std::to_string(dist_value);
+			pred_string += std::to_string(pred_value);
+
+			// Don't print a comma if this is the last element
+			if (!(row == num_nodes-1 && col == num_nodes-1)) {
+				dist_string += ", ";
+				pred_string += ", ";
+			}
+		}
+	}
+
+	// cap off both strings
+	dist_string += "]";
+	pred_string += "]";
+
+	// Print dist then predecessor
+	os << dist_string << std::endl << pred_string;
+	return os;
 }
