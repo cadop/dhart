@@ -1,3 +1,4 @@
+#pragma once
 ///
 ///	\file		objloader.h
 /// \brief		Contains definitions for the <see cref="HF::Geometry">Geometry</see> namespace
@@ -10,6 +11,7 @@
 
 #include <vector>
 #include <string>
+#include "meshinfo.h"
 
 /*!
 	\brief 
@@ -26,6 +28,15 @@
 
 */
 namespace Eigen {}
+
+
+
+// [nanoRT]
+namespace HF::nanoGeom {
+	bool LoadObj(Mesh& mesh, const char* filename);
+}
+// end [nanoRT]
+
 
 
 /*!

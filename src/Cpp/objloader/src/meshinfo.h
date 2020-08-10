@@ -1,3 +1,4 @@
+#pragma once
 ///
 ///	\file		meshinfo.h
 /// \brief		Contains definitions for the <see cref = "HF::Geometry::MeshInfo">MeshInfo</see> class
@@ -10,6 +11,23 @@
 
 //#define EIGEN_DONT_ALIGN_STATICALLY
 //#define EIGEN_DONT_VECTORIZE
+
+// [nanoRT]
+namespace HF::nanoGeom {
+	typedef struct {
+		size_t num_vertices;
+		size_t num_faces;
+		double* vertices;              /// [xyz] * num_vertices
+		double* facevarying_normals;   /// [xyz] * 3(triangle) * num_faces
+		double* facevarying_tangents;  /// [xyz] * 3(triangle) * num_faces
+		double* facevarying_binormals; /// [xyz] * 3(triangle) * num_faces
+		double* facevarying_uvs;       /// [xyz] * 3(triangle) * num_faces
+		double* facevarying_vertex_colors;   /// [xyz] * 3(triangle) * num_faces
+		unsigned int* faces;         /// triangle x num_faces
+		unsigned int* material_ids;   /// index x num_faces
+	} Mesh;
+}
+// end [nanoRT]
 
 namespace std {
 	/// <summary> Combine the hash of value into seed. </summary>

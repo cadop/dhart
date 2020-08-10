@@ -20,6 +20,91 @@ using std::vector;
 using std::array;
 using std::string;
 
+
+// [nanoRT]
+namespace HF::nanoGeom {
+
+	bool LoadObj(Mesh& mesh, const char* filename) {
+		// Need to have mesh.vertices, mesh.faces, mesh.num_faces
+
+		tinyobj::attrib_t attrib;
+		std::vector<tinyobj::shape_t> shapes;
+		std::vector<tinyobj::material_t> materials;
+
+		std::string warn;
+		std::string err;
+
+		bool ret = tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err, filename);
+
+		// Check for errors in the loading
+		if (!err.empty()) {
+			std::cerr << " Loading: " << err << std::endl;
+		}
+		if (!ret) {
+			exit(1);
+		}
+
+		// Get the number of faces (likely number of triangles)
+		size_t num_faces = 0;
+		// Loop over shapes
+		for (size_t s = 0; s < shapes.size(); s++)
+		{
+			// Increment the number of faces by getting the size of the indices and dividing by 3 (number of verts per face)
+			// Must be triangles for this calculation to make sense (I think)
+			num_faces += shapes[s].mesh.indices.size() / 3;
+		}
+
+		// Set the number of vertices by finding the total size of the vertex array and dividing by 3 (number of axis in point: x,y,z)
+		size_t num_vertices = attrib.vertices.size() / 3;
+		mesh.num_faces = num_faces;
+		mesh.num_vertices = num_vertices;
+		// Set a new array of doubles to the size of the number of vertices times 3 (number of axis in point)
+		mesh.vertices = new double[num_vertices * 3];
+		// Set a new array of doubles to the size of the number of faces times 3 (number of verts per face)
+		// While this is called faces, its really the indices
+		mesh.faces = new unsigned int[num_faces * 3];
+
+		// Loop over shapes
+		for (size_t s = 0; s < shapes.size(); s++)
+		{
+			// Loop over faces(polygon)
+			size_t index_offset = 0;
+			for (size_t f = 0; f < shapes[s].mesh.num_face_vertices.size(); f++)
+			{
+				int fv = shapes[s].mesh.num_face_vertices[f];
+
+				// Loop over vertices in the face.
+				for (size_t v = 0; v < fv; v++)
+				{
+					// extract the index of the start of the mesh indices
+					tinyobj::index_t idx = shapes[s].mesh.indices[index_offset + v];
+					// Assign the xyz values from the flat array
+					tinyobj::real_t vx = attrib.vertices[3 * idx.vertex_index + 0];
+					tinyobj::real_t vy = attrib.vertices[3 * idx.vertex_index + 1];
+					tinyobj::real_t vz = attrib.vertices[3 * idx.vertex_index + 2];
+
+					// set vertices to the mesh data object
+					// This could probably all be done in one step with the above 3 lines
+					mesh.vertices[3 * idx.vertex_index + 0] = vx;
+					mesh.vertices[3 * idx.vertex_index + 1] = vy;
+					mesh.vertices[3 * idx.vertex_index + 2] = vz;
+				}
+				index_offset += fv;
+			}
+
+			// Loop through the mesh indices and assign each vertices index to the face index
+			for (size_t vi = 0; vi < shapes[s].mesh.indices.size(); vi++)
+			{
+				// This should make it clearer that this really is the mesh indices despite the name "faces"
+				mesh.faces[vi] = shapes[s].mesh.indices[vi].vertex_index;
+			}
+		}
+		return true;
+	}
+
+}
+// end [nanoRT]
+
 namespace HF::Geometry {
 
 	static robin_hood::unordered_map<string, string> test_model_paths{
