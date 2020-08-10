@@ -359,14 +359,14 @@ def DijkstraFindAllShortestPaths(
     return out_paths
 
 
-def calculate_distance_and_predecessor(
-    graph: Graph, cost_type: str = ""
+def calculate_distance_and_predecessor(graph: Graph, cost_type: str = ""
     ) -> Tuple[FloatArray2D, IntArray2D]:
     """ Calculate distance and predecessor matricies for a graph in C++
+
     Args:
         graph : Graph to generate predecessor/distance matricies from
         cost_type : Type of cost to use to generate distance and predecessor
-                    matricies. Uses graph's default cost type if left blank
+                   matricies. Uses graph's default cost type if left blank
 
     Raises:
         KeyError : cost_type wasn't left blank, and didn't already exist in the
