@@ -61,6 +61,7 @@ namespace {
 
 } // namespace
 
+
 // Derive our own class from the triangle intersector so we can store some extra data
 class nanoRT_Data :
     public nanort::TriangleIntersector<double, nanort::TriangleIntersection<double> > {
@@ -77,25 +78,25 @@ public:
     nanort::TriangleIntersection<double> hit;
     // Add a distance attribute to store intersection distance
     double dist = -1;
-    double point[3] = {-1,-1,-1};
+    double point[3] = { -1,-1,-1 };
 
     // Set initialization of class by passing a mesh to create a nanort::TriangleIntersector
     nanoRT_Data(HF::nanoGeom::Mesh mesh) : nanort::TriangleIntersector<double, nanort::TriangleIntersection<double> >(mesh.vertices, mesh.faces, sizeof(double) * 3)
     {
         // Set the mesh data
-        nanoRT_Data::mesh = mesh;
+        this->mesh = mesh;
 
         // Setup a no hit (for safety)
         hit.u = -1;
         hit.v = -1;
         hit.t = -1;
         hit.prim_id = -1;
-        
+
         // Setup the ray
         // Set origin of ray
-        nanoRT_Data::ray.org[0] = 0.0;
-        nanoRT_Data::ray.org[1] = 0.0;
-        nanoRT_Data::ray.org[2] = 0.0;
+        this->ray.org[0] = 0.0;
+        this->ray.org[1] = 0.0;
+        this->ray.org[2] = 0.0;
 
         // Define direction of ray
         // Must be normalized to work properly
@@ -103,26 +104,26 @@ public:
         // Custom double vector implementation with overloads
         // not needed in basic test but later could be useful for node additions etc. 
         //double3 dir(0,0,0); 
-        //nanoRT_Data::ray.dir[0] = dir[0];
-        //nanoRT_Data::ray.dir[1] = dir[1];
-        //nanoRT_Data::ray.dir[2] = dir[2];
+        //this->ray.dir[0] = dir[0];
+        //this->ray.dir[1] = dir[1];
+        //this->ray.dir[2] = dir[2];
 
-        nanoRT_Data::ray.dir[0] = 0.0;
-        nanoRT_Data::ray.dir[1] = 0.0;
-        nanoRT_Data::ray.dir[2] = 0.0;
+        this->ray.dir[0] = 0.0;
+        this->ray.dir[1] = 0.0;
+        this->ray.dir[2] = 0.0;
 
         // Set max and min location 
-        nanoRT_Data::ray.min_t = 0.0f;
-        nanoRT_Data::ray.max_t = 20000.0f;
+        this->ray.min_t = 0.0f;
+        this->ray.max_t = 20000.0f;
     }
 
     // Destructor
     ~nanoRT_Data() {
-        std::cout << "destroyed" << std::endl;
-        // Mesh data was constructed with new, maybe it needs to be deleted here?
+        // Mesh data was constructed with new, delete here
+        delete[] this->mesh.vertices;
+        delete[] this->mesh.faces;
+        std::cout << "Destroyed" << std::endl;
     }
-
-
 };
 
 namespace HF::nanoGeom {
