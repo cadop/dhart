@@ -47,6 +47,9 @@ namespace CInterfaceTests {
 			// Error!
 			std::cerr << "Error at LoadOBJ, code: " << status << std::endl;
 		}
+		else {
+			std::cout << "LoadOBJ loaded mesh successfully into loaded_obj at address " << loaded_obj << ", code: " << status << std::endl;
+		}
 
 		// Create BVH
 		// We now declare a pointer to EmbreeRayTracer, named bvh.
@@ -60,6 +63,9 @@ namespace CInterfaceTests {
 
 		if (status != 1) {
 			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "CreateRaytracer created EmbreeRayTracer successfully into bvh at address " << bvh << ", code: " << status << std::endl;
 		}
 
 		//! [snippet_VisibilityGraph_CreateVisibilityGraphAllToAll_setup]
@@ -230,6 +236,9 @@ namespace CInterfaceTests {
 			// Error!
 			std::cerr << "Error at LoadOBJ, code: " << status << std::endl;
 		}
+		else {
+			std::cout << "LoadOBJ loaded mesh successfully into loaded_obj at address " << loaded_obj << ", code: " << status << std::endl;
+		}
 
 		// Create BVH
 		// We now declare a pointer to EmbreeRayTracer, named bvh.
@@ -243,6 +252,9 @@ namespace CInterfaceTests {
 
 		if (status != 1) {
 			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "CreateRaytracer created EmbreeRayTracer successfully into bvh at address " << bvh << ", code: " << status << std::endl;
 		}
 
 		//! [snippet_VisibilityGraph_CreateVisibilityGraphAllToAllUndirected_setup]
@@ -416,6 +428,9 @@ namespace CInterfaceTests {
 			// Error!
 			std::cerr << "Error at LoadOBJ, code: " << status << std::endl;
 		}
+		else {
+			std::cout << "LoadOBJ loaded mesh successfully into loaded_obj at address " << loaded_obj << ", code: " << status << std::endl;
+		}
 
 		// Create BVH
 		// We now declare a pointer to EmbreeRayTracer, named bvh.
@@ -429,6 +444,9 @@ namespace CInterfaceTests {
 
 		if (status != 1) {
 			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "CreateRaytracer created EmbreeRayTracer successfully into bvh at address " << bvh << ", code: " << status << std::endl;
 		}
 
 		//! [snippet_VisibilityGraph_CreateVisibilityGraphGroupToGroup_setup]

@@ -72,6 +72,8 @@ namespace HF {
 	on how to free the remainder of the resources used by the visibility graph -- <br>
 	which are the (vector<\link HF::Geometry::MeshInfo \endlink> *) and (\link HF::Raytracer::EmbreeRayTracer \endlink *) instances.
 
+	`>>> LoadOBJ loaded mesh successfully into loaded_obj at address 0000014ECADE5200, code: 1`\n
+	`>>> CreateRaytracer created EmbreeRayTracer successfully into bvh at address 0000014ECAD825A0, code: 1`\n
 	`>>> (0, 2)          2.23607`\n
 	`>>> (2, 0)          2.23607`\n
 */
@@ -132,6 +134,8 @@ C_INTERFACE CreateVisibilityGraphAllToAll(
 	on how to free the remainder of the resources used by the visibility graph -- <br>
 	which are the (vector<\link HF::Geometry::MeshInfo \endlink> *) and (\link HF::Raytracer::EmbreeRayTracer \endlink *) instances.
 
+	`>>> LoadOBJ loaded mesh successfully into loaded_obj at address 0000014ECADE5140, code: 1`\n
+	`>>> CreateRaytracer created EmbreeRayTracer successfully into bvh at address 0000014ECAD82AA0, code: 1`\n
 	`>>> (0, 2)          2.23607`\n
 */
 C_INTERFACE CreateVisibilityGraphAllToAllUndirected(
@@ -196,6 +200,8 @@ C_INTERFACE CreateVisibilityGraphAllToAllUndirected(
 	on how to free the remainder of the resources used by the visibility graph -- <br>
 	which are the (vector<\link HF::Geometry::MeshInfo \endlink> *) and (\link HF::Raytracer::EmbreeRayTracer \endlink *) instances.
 
+	`>>> LoadOBJ loaded mesh successfully into loaded_obj at address 0000014ECADE4C60, code: 1`\n
+	`>>> CreateRaytracer created EmbreeRayTracer successfully into bvh at address 0000014ECAD82320, code: 1`\n
 	`>>> (0, 3)          17.3205`\n
 	`>>> (0, 4)          14.1774`\n
 	`>>> (0, 5)          18.0278`\n
