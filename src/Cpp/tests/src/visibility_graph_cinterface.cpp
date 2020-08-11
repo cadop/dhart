@@ -11,6 +11,8 @@
 #include "spatialstructures_C.h"
 #include "visibility_graph_C.h"
 
+#include "graph.h"
+
 namespace CInterfaceTests {
 	TEST(_visibility_graph_cinterface, CreateVisibilityGraphAllToAll) {
 		// Status code variable, value returned by C Interface functions
@@ -104,6 +106,69 @@ namespace CInterfaceTests {
 		// VG, the visibility graph, is now ready for use.
 		//
 		//! [snippet_VisibilityGraph_CreateVisibilityGraphAllToAll_compress]
+
+		//! [snippet_VisibilityGraph_CreateVisibilityGraphAllToAll_output_0]
+		// Retrieve CSR representation of graph
+		HF::SpatialStructures::CSRPtrs csr;
+
+		// The parameter default name refers to an alternate edge cost type.
+		// An empty string means we are using the default cost type
+		// (the costs that the graph was created with),
+		// but alternate edge costs could also be 'CrossSlope' or 'EnergyExpenditure', etc.
+		const char* default_name = "";
+
+		status = GetCSRPointers(VG,
+			&csr.nnz, &csr.rows, &csr.cols,
+			&csr.data, &csr.inner_indices, &csr.outer_indices,
+			default_name);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at GetCSRPointers, code: " << status << std::endl;
+		}
+		//! [snippet_VisibilityGraph_CreateVisibilityGraphAllToAll_output_0]
+
+		//! [snippet_VisibilityGraph_CreateVisibilityGraphAllToAll_output_1]
+		//
+		// Setting up a CSR 'iterator'
+		//
+		float* curr = csr.data;					// address of current position within edge data
+		float* data_end = csr.data + csr.nnz;	// address of one-past the last element within edge data
+
+		int* inner = csr.inner_indices;			// address of current position within child node id buffer (column value)
+		int row = 0;							// value denoting the current parent node id (row number)
+
+		while (curr < data_end) {
+			// While edge data remains...
+
+			// Note the current position within the edge data buffer.
+			// This is the address that denotes the beginning of a row.
+			float* row_begin = curr;
+
+			// If we are at the last row index,
+			// row_end is data_end -- else,
+			// row_end is the address of the next row's (row + 1) initial value.
+			float* row_end =
+				(row == csr.rows - 1)
+				? data_end : csr.data + csr.outer_indices[row + 1];
+
+			while (curr < row_end) {
+				// While curr is not at the end of the current row...
+
+				// row is the parent node id
+				// *inner is the child node id
+				// *curr is the edge value between parent node id and child node id
+				std::cout << "(" << row << ", " << *inner << ")"
+					<< "\t\t" << *curr << std::endl;
+
+				++inner;	// advance the address of inner (child node id buffer)
+				++curr;		// advance the address of curr (edge data buffer)
+			}
+
+			++row;	// advance the row value (parent node id)
+		}
+		//! [snippet_VisibilityGraph_CreateVisibilityGraphAllToAll_output_1]
+
 		//! [snippet_VisibilityGraph_CreateVisibilityGraphAllToAll_destroy]
 		// destroy VG (visibility graph)
 		status = DestroyGraph(VG);
@@ -227,6 +292,68 @@ namespace CInterfaceTests {
 		// VG, the visibility graph, is now ready for use.
 		//
 		//! [snippet_VisibilityGraph_CreateVisibilityGraphAllToAllUndirected_compress]
+
+		//! [snippet_VisibilityGraph_CreateVisibilityGraphAllToAllUndirected_output_0]
+		// Retrieve CSR representation of graph
+		HF::SpatialStructures::CSRPtrs csr;
+
+		// The parameter default name refers to an alternate edge cost type.
+		// An empty string means we are using the default cost type
+		// (the costs that the graph was created with),
+		// but alternate edge costs could also be 'CrossSlope' or 'EnergyExpenditure', etc.
+		const char* default_name = "";
+
+		status = GetCSRPointers(VG,
+			&csr.nnz, &csr.rows, &csr.cols,
+			&csr.data, &csr.inner_indices, &csr.outer_indices,
+			default_name);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at GetCSRPointers, code: " << status << std::endl;
+		}
+		//! [snippet_VisibilityGraph_CreateVisibilityGraphAllToAllUndirected_output_0]
+
+		//! [snippet_VisibilityGraph_CreateVisibilityGraphAllToAllUndirected_output_1]
+		//
+		// Setting up a CSR 'iterator'
+		//
+		float* curr = csr.data;					// address of current position within edge data
+		float* data_end = csr.data + csr.nnz;	// address of one-past the last element within edge data
+
+		int* inner = csr.inner_indices;			// address of current position within child node id buffer (column value)
+		int row = 0;							// value denoting the current parent node id (row number)
+
+		while (curr < data_end) {
+			// While edge data remains...
+
+			// Note the current position within the edge data buffer.
+			// This is the address that denotes the beginning of a row.
+			float* row_begin = curr;
+
+			// If we are at the last row index,
+			// row_end is data_end -- else,
+			// row_end is the address of the next row's (row + 1) initial value.
+			float* row_end =
+				(row == csr.rows - 1)
+				? data_end : csr.data + csr.outer_indices[row + 1];
+
+			while (curr < row_end) {
+				// While curr is not at the end of the current row...
+
+				// row is the parent node id
+				// *inner is the child node id
+				// *curr is the edge value between parent node id and child node id
+				std::cout << "(" << row << ", " << *inner << ")"
+					<< "\t\t" << *curr << std::endl;
+
+				++inner;	// advance the address of inner (child node id buffer)
+				++curr;		// advance the address of curr (edge data buffer)
+			}
+
+			++row;	// advance the row value (parent node id)
+		}
+		//! [snippet_VisibilityGraph_CreateVisibilityGraphAllToAllUndirected_output_1]
 
 		//! [snippet_VisibilityGraph_CreateVisibilityGraphAllToAllUndirected_destroy]
 		// destroy VG (visibility graph)
@@ -354,6 +481,68 @@ namespace CInterfaceTests {
 			std::cerr << "Error at Compress, code: " << status << std::endl;
 		}
 		//! [snippet_VisibilityGraph_CreateVisibilityGraphGroupToGroup_compress]
+
+		//! [snippet_VisibilityGraph_CreateVisibilityGraphGroupToGroup_output_0]
+		// Retrieve CSR representation of graph
+		HF::SpatialStructures::CSRPtrs csr;
+
+		// The parameter default name refers to an alternate edge cost type.
+		// An empty string means we are using the default cost type
+		// (the costs that the graph was created with),
+		// but alternate edge costs could also be 'CrossSlope' or 'EnergyExpenditure', etc.
+		const char* default_name = "";
+
+		status = GetCSRPointers(VG,
+			&csr.nnz, &csr.rows, &csr.cols,
+			&csr.data, &csr.inner_indices, &csr.outer_indices,
+			default_name);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at GetCSRPointers, code: " << status << std::endl;
+		}
+		//! [snippet_VisibilityGraph_CreateVisibilityGraphGroupToGroup_output_0]
+
+		//! [snippet_VisibilityGraph_CreateVisibilityGraphGroupToGroup_output_1]
+		//
+		// Setting up a CSR 'iterator'
+		//
+		float* curr = csr.data;					// address of current position within edge data
+		float* data_end = csr.data + csr.nnz;	// address of one-past the last element within edge data
+
+		int* inner = csr.inner_indices;			// address of current position within child node id buffer (column value)
+		int row = 0;							// value denoting the current parent node id (row number)
+
+		while (curr < data_end) {
+			// While edge data remains...
+
+			// Note the current position within the edge data buffer.
+			// This is the address that denotes the beginning of a row.
+			float* row_begin = curr;
+
+			// If we are at the last row index,
+			// row_end is data_end -- else,
+			// row_end is the address of the next row's (row + 1) initial value.
+			float* row_end =
+				(row == csr.rows - 1)
+				? data_end : csr.data + csr.outer_indices[row + 1];
+
+			while (curr < row_end) {
+				// While curr is not at the end of the current row...
+
+				// row is the parent node id
+				// *inner is the child node id
+				// *curr is the edge value between parent node id and child node id
+				std::cout << "(" << row << ", " << *inner << ")"
+					<< "\t\t" << *curr << std::endl;
+
+				++inner;	// advance the address of inner (child node id buffer)
+				++curr;		// advance the address of curr (edge data buffer)
+			}
+
+			++row;	// advance the row value (parent node id)
+		}
+		//! [snippet_VisibilityGraph_CreateVisibilityGraphGroupToGroup_output_1]
 
 		//! [snippet_VisibilityGraph_CreateVisibilityGraphGroupToGroup_destroy]
 		// destroy VG (visibility graph)

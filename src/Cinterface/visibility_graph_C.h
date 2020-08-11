@@ -59,12 +59,21 @@ namespace HF {
 	Very important: <b>after generating/adding edges to a graph -- it must be compressed.</b>
 	\snippet	tests\src\visibility_graph_cinterface.cpp snippet_VisibilityGraph_CreateVisibilityGraphAllToAll_compress
 
-	You are now ready to use the visibility graph. After use, its resources must be <b>relinquished</b>:
+	You are now ready to use the visibility graph. Start by retrieving the <b>CSR representation</b> of the graph:<br>
+	\snippet	tests\src\visibility_graph_cinterface.cpp snippet_VisibilityGraph_CreateVisibilityGraphAllToAll_output_0
+
+	Set up the <b>pointers</b> required to iterate over the CSR. Then <b>output the CSR to the console</b>:<br>
+	\snippet	tests\src\visibility_graph_cinterface.cpp snippet_VisibilityGraph_CreateVisibilityGraphAllToAll_output_1
+
+	After use, the visibility graph resources must be <b>relinquished</b>:
 	\snippet	tests\src\visibility_graph_cinterface.cpp snippet_VisibilityGraph_CreateVisibilityGraphAllToAll_destroy
 
 	From here, please review the example at \ref raytracer_teardown for instructions<br>
 	on how to free the remainder of the resources used by the visibility graph -- <br>
 	which are the (vector<\link HF::Geometry::MeshInfo \endlink> *) and (\link HF::Raytracer::EmbreeRayTracer \endlink *) instances.
+
+	`>>> (0, 2)          2.23607`\n
+	`>>> (2, 0)          2.23607`\n
 */
 C_INTERFACE CreateVisibilityGraphAllToAll(
 	HF::RayTracer::EmbreeRayTracer* ert,
@@ -110,12 +119,20 @@ C_INTERFACE CreateVisibilityGraphAllToAll(
 	Very important: <b>after generating/adding edges to a graph -- it must be compressed.</b>
 	\snippet	tests\src\visibility_graph_cinterface.cpp snippet_VisibilityGraph_CreateVisibilityGraphAllToAllUndirected_compress
 
-	You are now ready to use the visibility graph. After use, its resources must be <b>relinquished</b>:
+	You are now ready to use the visibility graph. Start by retrieving the <b>CSR representation</b> of the graph:<br>
+	\snippet	tests\src\visibility_graph_cinterface.cpp snippet_VisibilityGraph_CreateVisibilityGraphAllToAllUndirected_output_0
+
+	Set up the <b>pointers</b> required to iterate over the CSR. Then <b>output the CSR to the console</b>:<br>
+	\snippet	tests\src\visibility_graph_cinterface.cpp snippet_VisibilityGraph_CreateVisibilityGraphAllToAllUndirected_output_1
+
+	After use, the visibility graph resources must be <b>relinquished</b>:
 	\snippet	tests\src\visibility_graph_cinterface.cpp snippet_VisibilityGraph_CreateVisibilityGraphAllToAllUndirected_destroy
 
 	From here, please review the example at \ref raytracer_teardown for instructions<br>
 	on how to free the remainder of the resources used by the visibility graph -- <br>
 	which are the (vector<\link HF::Geometry::MeshInfo \endlink> *) and (\link HF::Raytracer::EmbreeRayTracer \endlink *) instances.
+
+	`>>> (0, 2)          2.23607`\n
 */
 C_INTERFACE CreateVisibilityGraphAllToAllUndirected(
 	HF::RayTracer::EmbreeRayTracer* ert,
@@ -166,12 +183,25 @@ C_INTERFACE CreateVisibilityGraphAllToAllUndirected(
 	Very important: <b>after generating/adding edges to a graph -- it must be compressed.</b>
 	\snippet	tests\src\visibility_graph_cinterface.cpp snippet_VisibilityGraph_CreateVisibilityGraphGroupToGroup_compress
 
-	You are now ready to use the visibility graph. After use, its resources must be <b>relinquished</b>:
+	You are now ready to use the visibility graph. Start by retrieving the <b>CSR representation</b> of the graph:<br>
+	\snippet	tests\src\visibility_graph_cinterface.cpp snippet_VisibilityGraph_CreateVisibilityGraphGroupToGroup_output_0
+
+	Set up the <b>pointers</b> required to iterate over the CSR. Then <b>output the CSR to the console</b>:<br>
+	\snippet	tests\src\visibility_graph_cinterface.cpp snippet_VisibilityGraph_CreateVisibilityGraphGroupToGroup_output_1
+
+	After use, the visibility graph resources must be <b>relinquished</b>:
 	\snippet	tests\src\visibility_graph_cinterface.cpp snippet_VisibilityGraph_CreateVisibilityGraphGroupToGroup_destroy
 
 	From here, please review the example at \ref raytracer_teardown for instructions<br>
 	on how to free the remainder of the resources used by the visibility graph -- <br>
 	which are the (vector<\link HF::Geometry::MeshInfo \endlink> *) and (\link HF::Raytracer::EmbreeRayTracer \endlink *) instances.
+
+	`>>> (0, 3)          17.3205`\n
+	`>>> (0, 4)          14.1774`\n
+	`>>> (0, 5)          18.0278`\n
+	`>>> (2, 3)          16.8819`\n
+	`>>> (2, 4)          12.8062`\n
+	`>>> (2, 5)          17.3205`\n
 */
 C_INTERFACE CreateVisibilityGraphGroupToGroup(
 	HF::RayTracer::EmbreeRayTracer* ert,
