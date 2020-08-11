@@ -226,7 +226,9 @@ TEST(_nanoRayTracer, nanoRayTolerance) {
 
 TEST(_nanoRayTracer, nanoRayPerformance) {
 
-	std::string objFilename = "energy_blob_zup.obj";
+	//std::string objFilename = "energy_blob_zup.obj"; // 3k ray/ms
+	std::string objFilename = "Weston_Analysis_z-up.obj"; // 580 ray/ms
+	//std::string objFilename = "Weston_3copies.obj"; // 153 ray/ms // set z to 600
 
 	// Basic setup of nanoRT interface
 	bool ret = false;
@@ -236,7 +238,7 @@ TEST(_nanoRayTracer, nanoRayPerformance) {
 	accel = nanoRT_BVH(mesh);
 
 	nanoRT_Data nanoRTdata(mesh);
-	nanoRTdata.ray.org[2] = 50;
+	nanoRTdata.ray.org[2] = 600;
 	nanoRTdata.ray.dir[2] = -1;
 
 	// Number of trials is based on number of elements here
@@ -250,8 +252,8 @@ TEST(_nanoRayTracer, nanoRayPerformance) {
 	watch.StartClock();
 	double dist_sum = 0; // Sum of hits to make sure loop is not optimized away
 	// Do it in a loop for checking performance
-	for (float i = -100; i < 100; i++) {
-		for (float j = -100; j < 100; j++) {
+	for (float i = -300; i < 300; i++) {
+		for (float j = -300; j < 300; j++) {
 			nanoRTdata.ray.org[0] = i * 0.01;
 			nanoRTdata.ray.org[1] = j * 0.01;
 			// We pass it our custom class that contains a built-in hit point member that will be modified in place
@@ -268,14 +270,16 @@ TEST(_nanoRayTracer, nanoRayPerformance) {
 // end [nanoRT]
 
 TEST(_EmbreeRayTracer, EmbreeRayPerformance) {
-	std::string plane_path = "energy_blob_zup.obj";
+	//std::string objFilename = "energy_blob_zup.obj"; // 13k ray/ms
+	std::string objFilename = "Weston_Analysis_z-up.obj"; // 5k ray/ms // set z to 600
+	//std::string objFilename = "Weston_3copies.obj"; // 2.5k ray/ms
 	int scale = 1;
-	auto geom = HF::Geometry::LoadMeshObjects(plane_path, HF::Geometry::ONLY_FILE, false, scale);
+	auto geom = HF::Geometry::LoadMeshObjects(objFilename, HF::Geometry::ONLY_FILE, false, scale);
 	auto k = HF::RayTracer::EmbreeRayTracer(geom);
 
 	// All of these rays should hit since the origin is inside of the teapot
 	//std::vector<std::array<float, 3>> origins = {{-30.01,0,50.0},{-30.01,0,50.1},{-30.01,0,85.01311}};
-	std::array<float, 3> origin = { 0.0f, 0.0f, 50.0f };
+	std::array<float, 3> origin = { 0.0f, 0.0f, 600.0f };
 
 	const std::array<float, 3> direction{ 0,0,-1 };
 	float height = NAN;
@@ -291,8 +295,8 @@ TEST(_EmbreeRayTracer, EmbreeRayPerformance) {
 	watch.StartClock();
 	double dist_sum = 0; // Sum of hits to make sure loop is not optimized away
 	// Do it in a loop for checking performance
-	for (float i = -100; i < 100; i++) {
-		for (float j = -100; j < 100; j++) {
+	for (float i = -300; i < 300; i++) {
+		for (float j = -300; j < 300; j++) {
 			origin[0] = i * 0.01;
 			origin[1] = j * 0.01;
 			// We pass it our custom class that contains a built-in hit point member that will be modified in place
