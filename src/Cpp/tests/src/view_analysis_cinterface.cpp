@@ -338,7 +338,154 @@ namespace CInterfaceTests {
 	}
 
 	TEST(_view_analysis_cinterface, SphericalViewAnalysisNoAggregate) {
+		// Status code variable
+		// Determines if a C Interface function ran OK, or returned an error code.
+		int status = 1;
 
+		// Get model path
+
+		// This is a relative path to your obj file.
+		const std::string obj_path_str = "plane.obj";
+
+		// Size of obj file string (character count)
+		const int obj_length = static_cast<int>(obj_path_str.size());
+
+		// This will point to memory on free store.
+		// The memory will be allocated inside the LoadOBJ function,
+		// and it must be freed using DestroyMeshInfo.
+		std::vector<HF::Geometry::MeshInfo>* loaded_obj = nullptr;
+
+		// Load mesh
+		// The array rot will rotate the mesh 90 degrees with respect to the x-axis,
+		// i.e. makes the mesh 'z-up'.
+		//
+		// Notice that we pass the address of the loaded_obj pointer
+		// to LoadOBJ. We do not want to pass loaded_obj by value, but by address --
+		// so that we can dereference it and assign it to the address of (pointer to)
+		// the free store memory allocated within LoadOBJ.
+		const float rot[] = { 90.0f, 0.0f, 0.0f };	// Y up to Z up
+		status = LoadOBJ(obj_path_str.c_str(), obj_length, rot[0], rot[1], rot[2], &loaded_obj);
+
+		if (status != 1) {
+			// All C Interface functions return a status code.
+			// Should an error occur, we can interpret the error code via code_to_str
+			// when reading stderr.
+			// Error!
+			std::cerr << "Error at LoadOBJ, code: " << status << std::endl;
+		}
+
+		// Create BVH
+
+		// We now declare a pointer to EmbreeRayTracer, named bvh.
+		// Note that we pass the address of this pointer to CreateRaytracer.
+		//
+		// Note also that we pass the (vector<MeshInfo> *), loaded_obj, to CreateRaytracer -- by value.
+		// This is okay, because CreateRaytracer is not assigning loaded_obj any new addresses,
+		// it is only interested in accessing the pointee.
+		HF::RayTracer::EmbreeRayTracer* bvh = nullptr;
+		status = CreateRaytracer(loaded_obj, &bvh);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
+		}
+
+		//! [snippet_view_analysis_SphericalViewAnalysisNoAggregate_setup_0]
+		// Preparing the parameters for SphericalViewAnalysisNoAggregate
+
+		// Define point to start ray
+		// These are Cartesian coordinates.
+		std::array<Node, 1> p1{ Node(0.0f, 0.0f, 2.0f) };
+
+		// Define direction to cast ray
+		// These are vector components, not Cartesian coordinates.
+		float dir[] = { 0.0f, 0.0f, -1.0f };
+
+		// This is a container of nodes to be analyzed.
+		// SphericalViewAnalysisNoAggregate accepts a (Node *) parameter,
+		// so a raw stack-allocated array will suffice.
+		//
+		// This may also be a pointer to a heap-allocated buffer
+		// (which is owned by a vector<Node>, accessed via the vector<Node>::data() method).
+		//
+		// ...or, it can be a pointer to memory allocated by the caller via operator new[node_count]
+		// (if this route is taken, be sure to release the memory with operator delete[] after use)
+
+		const int node_count = p1.size();	// should be the element count in nodes
+		int ray_count = 1000;				// will be mutated by SphericalViewAnalysisNoAggregate
+		const float height = 1.7f;			// height to offset nodes from the ground, in meters
+		const float upward_fov = 50.0f;		// default parameter is 50.0f in Python code
+		const float downward_fov = 70.0f;	// default parameter is 70.0f in Python code
+		//! [snippet_view_analysis_SphericalViewAnalysisNoAggregate_setup_0]
+
+		//! [snippet_view_analysis_SphericalViewAnalysisNoAggregate_setup_1]
+		// Declare a pointer to vector<RayResult>, named results.
+		// This pointer will point to memory on the free store,
+		// allocated within SphericalViewAnalysisNoAggregate.
+		//
+		// results_data will point to the underlying buffer within *results,
+		// which will be assigned inside SphericalViewAnalysisNoAggregate.
+		//
+		// Note that we must call operator delete on results when we are finished with it.
+		std::vector<RayResult>* results = nullptr;
+		RayResult* results_data = nullptr;
+		//! [snippet_view_analysis_SphericalViewAnalysisNoAggregate_setup_1]
+
+		//! [snippet_view_analysis_SphericalViewAnalysisNoAggregate]
+		// Conducting a view analysis on the node at position p1.
+		status = SphericalViewAnalysisNoAggregate(bvh,
+			p1.data(), node_count, &ray_count,
+			upward_fov, downward_fov, height,
+			&results, &results_data);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at SphericalViewAnalysisNoAggregate, code: " << status << std::endl;
+		}
+		//! [snippet_view_analysis_SphericalViewAnalysisNoAggregate]
+
+		//! [snippet_view_analysis_SphericalViewAnalysisNoAggregate_results]
+		// Print results vector (vector<RayResult>)
+		const int start_range = 15;
+		const int end_range = 20;
+
+		std::cout << "[";
+		for (int i = start_range; i < end_range; i++) {
+			auto result = (*results)[i];
+
+			std::cout << "(" << result.distance << ", " << result.meshid << ")";
+
+			if (i < end_range - 1) {
+				std::cout << ", ";
+			}
+		}
+		std::cout << "]" << std::endl;
+		//! [snippet_view_analysis_SphericalViewAnalysisNoAggregate_results]
+
+		//! [snippet_view_analysis_SphericalViewAnalysisNoAggregate_destroy]
+		//
+		// Memory resource cleanup.
+		//
+
+		// destroy vector<RayResult>
+		if (results) {
+			delete results;
+		}
+		//! [snippet_view_analysis_SphericalViewAnalysisNoAggregate_destroy]
+
+		// destroy raytracer
+		status = DestroyRayTracer(bvh);
+
+		if (status != 1) {
+			std::cerr << "Error at DestroyRayTracer, code: " << status << std::endl;
+		}
+
+		// destroy vector<MeshInfo>
+		status = DestroyMeshInfo(loaded_obj);
+
+		if (status != 1) {
+			std::cerr << "Error at DestroyMeshInfo, code: " << status << std::endl;
+		}
 	}
 
 	TEST(_view_analysis_cinterface, SphericalViewAnalysisNoAggregateFlat) {

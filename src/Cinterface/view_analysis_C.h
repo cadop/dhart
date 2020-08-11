@@ -86,24 +86,19 @@ enum class AGGREGATE_TYPE {
 	\par Example Code
 
 	First, set up the parameters for the view analysis.
-
 	\snippet tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphereicalViewAnalysisAggregate_setup_0
 
 	Now you must prepare a pointer to a std::vector<float>, where the <b>aggregation results</b> will be stored.<br>
 	You must also select the aggregate type.
-
 	\snippet tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphereicalViewAnalysisAggregate_setup_1
 
 	Now we are ready to call \link SphereicalViewAnalysisAggregate \endlink .
-
 	\snippet tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphereicalViewAnalysisAggregate
 
 	We can output the contents of the <b>aggregate results vector</b> to <b>stdout</b> .
-
 	\snippet tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphereicalViewAnalysisAggregate_results
 
 	After using the view analysis results, its resources must be <b>relinquished</b> .
-
 	\snippet tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphereicalViewAnalysisAggregate_destroy
 
 	From here, please review the example at \ref raytracer_teardown for instructions<br>
@@ -171,24 +166,19 @@ C_INTERFACE SphereicalViewAnalysisAggregate(
 	\par Example
 
 	First, set up the parameters for the view analysis.
-	
 	\snippet tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphericalViewAnalysisAggregateFlat_setup_0
 
 	Now you must prepare a pointer to a std::vector<float>, where the <b>aggregation results</b> will be stored.<br>
 	You must also select the aggregate type.
-
 	\snippet tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphericalViewAnalysisAggregateFlat_setup_1
 
-	Now we are ready to call \link SphericalViewAnalysisFlat \endlink .
-
+	Now we are ready to call \link SphericalViewAnalysisAggregateFlat \endlink .
 	\snippet tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphericalViewAnalysisAggregateFlat
 
 	We can output the contents of the <b>aggregate results vector</b> to <b>stdout</b>.
-
 	\snippet tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphericalViewAnalysisAggregateFlat_results
 
 	After using the view analysis results, its resources must be <b>relinquished</b>.
-
 	\snippet tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphericalViewAnalysisAggregateFlat_destroy
 
 	From here, please review the example at \ref raytracer_teardown for instructions<br>
@@ -242,92 +232,36 @@ C_INTERFACE SphereicalViewAnalysisAggregateFlat(
 	\post 2) out_results_ptr points to a valid array of scores.
 	\post 3) max_rays is updated to the number of rays casted in the view analysis.
 
+	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
+
 	\see SphericalDistribute to get the direction of every ray casted by this function. Can be useful
 	to determine the point of intersection for every ray casted.
 
 	\par Example
-	\code
-		// Create Plane
-		const std::vector<float> plane_vertices{
-			-10.0f, 10.0f, 0.0f,
-			-10.0f, -10.0f, 0.0f,
-			10.0f, 10.0f, 0.0f,
-			10.0f, -10.0f, 0.0f,
-		};
-		const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
-		// Create and allocate a new instacnce of meshinfo
-		std::vector<MeshInfo>* MI;
-		auto MIR = StoreMesh(
-			&MI,
-			plane_indices.data(),
-			plane_indices.size(),
-			plane_vertices.data(),
-			plane_vertices.data(),
-			plane_vertices.size(),
-			"",
-			0
-		);
+	You must <b>load an .obj file</b> and <b>create a BVH</b> first.<br>
+	Begin by reviewing the example at \ref raytracer_setup before proceeding below.
 
-		// Create a new raytracer
-		EmbreeRayTracer* ert;
-		CreateRaytracer(MI, &ert);
+	First, set up the parameters for the view analysis.
+	\snippet tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphericalViewAnalysisNoAggregate_setup_0
 
-		// Create Nodes
-		std::vector<Node> nodes = {
-			Node(0,0,1),
-			Node(0,0,2),
-			Node(0,0,3),
-		};
+	Now you must prepare a pointer to a std::vector<\link RayResult \endlink>.<br>
+	View analysis results will be stored at the memory addressed by this pointer.
+	\snippet tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphericalViewAnalysisNoAggregate_setup_1
 
-		// Set values for arguments
-		int max_rays = 10;
-		float up_fov = 90;
-		float down_fov = 90;
-		float height = 1.7f;
-		AGGREGATE_TYPE AT = AGGREGATE_TYPE::AVERAGE;
+	Now we are ready to call \link SphericalViewAnalysisNoAggregate \endlink .
+	\snippet tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphericalViewAnalysisNoAggregate
 
-		std::vector<RayResult>* results;
-		RayResult* results_ptr;
+	We can output the contents of the <b>aggregate results vector</b> to <b>stdout</b>.
+	\snippet tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphericalViewAnalysisNoAggregate_results
 
-		// Run View Analysis
-		auto result = SphericalViewAnalysisNoAggregate(
-			ert,
-			nodes.data(),
-			nodes.size(),
-			&max_rays,
-			up_fov,
-			down_fov,
-			height,
-			&results,
-			&results_ptr
-		);
+	After using the view analysis results, its resources must be <b>relinquished</b>.
+	\snippet tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphericalViewAnalysisNoAggregate_destroy
 
-		// print Results
-		std::cerr << "Num Rays: " << max_rays << std::endl;
-		for (int i = 0; i < nodes.size(); i++) {
-			std::cerr << "Node " << i << ": ";
-			for (int k = 0; k < results->size()/3; k++) {
-				int os = max_rays * i;
-				std::cerr << "(" << results_ptr[k + os].meshid
-					<< ", " << results_ptr[k + os].distance << "), ";
-			}
-			std::cerr << std::endl;
-		}
+	From here, please review the example at \ref raytracer_teardown for instructions<br>
+	on how to free the remainder of the resources used for the view analysis --<br>
+	which are the (vector<\link HF::Geometry::MeshInfo \endlink> *) and (\link HF::Raytracer::EmbreeRayTracer \endlink *) instances.
 
-		std::cerr << std::endl;
-
-		// Deallocate Memory
-		DestroyRayResultVector(results);
-		DestroyMeshInfo(MI);
-		DestroyRayTracer(ert);
-		
-	\endcode
-
-	`>>> Num Rays: 10`\n
-	`>>> Node 0: (-1, -1), (0, 5.07072), (-1, -1), (-1, -1), (0, 3.04248), (-1, -1), (0, 5.4959), (-1, -1), (-1, -1), (0, 4.53763),`\n
-	`>>> Node 1: (-1, -1), (0, 6.94876), (-1, -1), (-1, -1), (0, 4.16932), (-1, -1), (0, 7.53142), (-1, -1), (-1, -1), (0, 6.21823),`\n
-	`>>> Node 2: (-1, -1), (0, 8.82681), (-1, -1), (-1, -1), (0, 5.29616), (-1, -1), (0, 9.56693), (-1, -1), (-1, -1), (0, 7.89883),`\n
 */
 C_INTERFACE SphericalViewAnalysisNoAggregate(
 	HF::RayTracer::EmbreeRayTracer* ERT,
@@ -378,35 +312,30 @@ C_INTERFACE SphericalViewAnalysisNoAggregate(
 	\post 2) out_scores_ptr cpoints to a valid array of scores.
 	\post 3) max_rays is updated to the number of rays casted in the view analysis.
 
+	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
+
 	\see SphericalDistribute to get the direction of every ray casted by this function. Can be useful
 	to determine the point of intersection for every ray casted.
 
 	\par Example
 
-	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
-
 	You must <b>load an .obj file</b> and <b>create a BVH</b> first.<br>
 	Begin by reviewing the example at \ref raytracer_setup before proceeding below.
 
 	First, set up the parameters for the view analysis.
-
 	\snippet tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphericalViewAnalysisNoAggregateFlat_setup_0
 
 	Now you must prepare a pointer to a std::vector<\link RayResult \endlink>.<br>
 	View analysis results will be stored at the memory addressed by this pointer. 
-
 	\snippet tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphericalViewAnalysisNoAggregateFlat_setup_1
 
 	We are now ready to call \link SphericalViewAnalysisNoAggregateFlat \endlink.
-
 	\snippet tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphericalViewAnalysisNoAggregateFlat
 
 	We can output the contents of the <b>results vector</b> to <b>stdout</b>.
-
 	\snippet tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphericalViewAnalysisNoAggregateFlat_results
 
 	After using the view analysis results, its resources must be <b>relinquished</b>.
-
 	\snippet tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphericalViewAnalysisNoAggregateFlat_destroy
 
 	From here, please review the example at \ref raytracer_teardown for instructions<br>
@@ -456,7 +385,6 @@ C_INTERFACE SphericalViewAnalysisNoAggregateFlat(
 
 	\par Example
 	\code
-
 		// Set arguments
 		int num_rays = 10;
 		std::vector<float>* out_float;
