@@ -104,6 +104,8 @@ enum class AGGREGATE_TYPE {
 	From here, please review the example at \ref raytracer_teardown for instructions<br>
 	on how to free the remainder of the resources used for the view analysis --<br>
 	which are the (vector<\link HF::Geometry::MeshInfo \endlink> *) and (\link HF::Raytracer::EmbreeRayTracer \endlink *) instances.
+
+	`>>> [7.43102, 0, 0]`\n
 */
 C_INTERFACE SphereicalViewAnalysisAggregate(
 	HF::RayTracer::EmbreeRayTracer* ERT,
@@ -184,6 +186,8 @@ C_INTERFACE SphereicalViewAnalysisAggregate(
 	From here, please review the example at \ref raytracer_teardown for instructions<br>
 	on how to free the remainder of the resources used for the view analysis --<br>
 	which are the (vector<\link HF::Geometry::MeshInfo \endlink> *) and (\link HF::Raytracer::EmbreeRayTracer \endlink *) instances.
+
+	`>>> [7.43102]`\n
 */
 C_INTERFACE SphereicalViewAnalysisAggregateFlat(
 	HF::RayTracer::EmbreeRayTracer* ERT,
@@ -262,6 +266,7 @@ C_INTERFACE SphereicalViewAnalysisAggregateFlat(
 	on how to free the remainder of the resources used for the view analysis --<br>
 	which are the (vector<\link HF::Geometry::MeshInfo \endlink> *) and (\link HF::Raytracer::EmbreeRayTracer \endlink *) instances.
 
+	`>>> [(-1, -1), (-1, -1), (15.8334, 0), (-1, -1), (-1, -1)]`\n
 */
 C_INTERFACE SphericalViewAnalysisNoAggregate(
 	HF::RayTracer::EmbreeRayTracer* ERT,
@@ -341,6 +346,8 @@ C_INTERFACE SphericalViewAnalysisNoAggregate(
 	From here, please review the example at \ref raytracer_teardown for instructions<br>
 	on how to free the remainder of the resources used for the view analysis --<br>
 	which are the (vector<\link HF::Geometry::MeshInfo \endlink> *) and (\link HF::Raytracer::EmbreeRayTracer \endlink *) instances.
+
+	`>>> [(-1, -1), (-1, -1), (15.8334, 0), (-1, -1), (-1, -1)]`\n
 */
 C_INTERFACE SphericalViewAnalysisNoAggregateFlat(
 	HF::RayTracer::EmbreeRayTracer* ERT,
