@@ -9,22 +9,26 @@
 #include "gtest/gtest.h"
 #include "objloader_C.h"
 
+#include <filesystem>
+
 namespace CInterfaceTests {
-	TEST(_objloader_CInterface, LoadOBJ) {
-		//! [snippet_LoadOBJ_prep_path]
+	TEST(_objloader_cinterface, LoadOBJ) {
 		// Status code variable, value returned by C Interface functions
 		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
 		int status = 0;
 
 		// Get model path
 		// This is a relative path to your obj file.
-		const std::string obj_path_str = "plane.obj";
+		const std::string obj_path_str = "fplane.obj";
+
+		//
+		// gtest: Does the file at obj_path_str exist?
+		//
+		ASSERT_TRUE(std::filesystem::exists(obj_path_str));
 
 		// Size of obj file string (character count)
 		const int obj_length = static_cast<int>(obj_path_str.size());
-		//! [snippet_LoadOBJ_prep_path]
 
-		//! [snippet_LoadOBJ_load_mesh]
 		// This will point to memory on free store.
 		// The memory will be allocated inside the LoadOBJ function,
 		// and it must be freed using DestroyMeshInfo.
@@ -41,6 +45,28 @@ namespace CInterfaceTests {
 		const float rot[] = { 90.0f, 0.0f, 0.0f };	// Y up to Z up
 		status = LoadOBJ(obj_path_str.c_str(), obj_length, rot[0], rot[1], rot[2], &loaded_obj);
 
+		//
+		// Test the following:
+		// - status; could be the following
+		//		NOT_FOUND = -1, if HF::Exceptions::FileNotFound thrown due to invalid file path
+		//		INVALID_OBJ = -2, if HF::Exceptions::InvalidOBJ thrown due to invalid .obj file
+		//		GENERIC_ERROR = 0, if any other exception thrown
+		//		OK = 1, operation successful
+		//
+		// - ensure that loaded_obj != nullptr, which would mean that status == 1 (OK)
+		//
+
+		//
+		// gtest: Is status == HF_STATUS::OK? (LoadOBJ ran successfully)
+		//
+		ASSERT_EQ(status, 1);					// status of 1 is HF::Exceptions::HF_STATUS::OK
+
+		//
+		// gtest: Is loaded_obj non-null?
+		//		  (if loaded_obj == nullptr, it was never assigned the address of a vector<MeshInfo>)
+		//
+		ASSERT_TRUE(loaded_obj != nullptr);		// if loaded_obj non-null, mesh was loaded successfully
+
 		if (status != 1) {
 			// All C Interface functions return a status code.
 			// Error!
@@ -49,8 +75,8 @@ namespace CInterfaceTests {
 
 		//
 		// loaded_obj contains the mesh.
+		// It is now ready for use.
 		//
-		//! [snippet_LoadOBJ_load_mesh]
 
 		//
 		// Memory management
@@ -62,7 +88,6 @@ namespace CInterfaceTests {
 		if (status != 1) {
 			std::cerr << "Error at DestroyMeshInfo, code: " << status << std::endl;
 		}
-		//! [snippet_LoadOBJ]
 	}
 
 	TEST(_objloader_CInterface, StoreMesh) {
