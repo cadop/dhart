@@ -44,6 +44,9 @@ namespace CInterfaceTests {
 			// Error!
 			std::cerr << "Error at LoadOBJ, code: " << status << std::endl;
 		}
+		else {
+			std::cout << "LoadOBJ loaded mesh successfully into loaded_obj at address " << loaded_obj << ", code: " << status << std::endl;
+		}
 
 		// Create BVH
 		// We now declare a pointer to EmbreeRayTracer, named bvh.
@@ -55,8 +58,11 @@ namespace CInterfaceTests {
 		HF::RayTracer::EmbreeRayTracer* bvh = nullptr;
 		status = CreateRaytracer(loaded_obj, &bvh);
 
-		if (status != -1) {
+		if (status != 1) {
 			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "CreateRaytracer created EmbreeRayTracer successfully into bvh at address " << bvh << ", code: " << status << std::endl;
 		}
 
 		//
@@ -72,7 +78,7 @@ namespace CInterfaceTests {
 
 		if (status != 1) {
 			std::cerr << "Error at DestroyRayTracer, code: " << status << std::endl;
-		}
+		} 
 
 		// destroy vector<MeshInfo>
 		status = DestroyMeshInfo(loaded_obj);
@@ -115,6 +121,9 @@ namespace CInterfaceTests {
 			// Error!
 			std::cerr << "Error at LoadOBJ, code: " << status << std::endl;
 		}
+		else {
+			std::cout << "LoadOBJ loaded mesh successfully into loaded_obj at address " << loaded_obj << ", code: " << status << std::endl;
+		}
 
 		// Create BVH
 		// We now declare a pointer to EmbreeRayTracer, named bvh.
@@ -125,6 +134,13 @@ namespace CInterfaceTests {
 		// it is only interested in accessing the pointee.
 		HF::RayTracer::EmbreeRayTracer* bvh = nullptr;
 		status = CreateRaytracer(loaded_obj, &bvh);
+
+		if (status != 1) {
+			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "CreateRaytracer created EmbreeRayTracer successfully into bvh at address " << bvh << ", code: " << status << std::endl;
+		}
 
 		//
 		//	Use bvh
@@ -184,9 +200,11 @@ namespace CInterfaceTests {
 			// Error!
 			std::cerr << "Error at LoadOBJ, code: " << status << std::endl;
 		}
+		else {
+			std::cout << "LoadOBJ loaded mesh successfully into loaded_obj at address " << loaded_obj << ", code: " << status << std::endl;
+		}
 
 		// Create BVH
-
 		// We now declare a pointer to EmbreeRayTracer, named bvh.
 		// Note that we pass the address of this pointer to CreateRaytracer.
 		//
@@ -197,9 +215,12 @@ namespace CInterfaceTests {
 		status = CreateRaytracer(loaded_obj, &bvh);
 
 		if (status != 1) {
-			// Error!
 			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
 		}
+		else {
+			std::cout << "CreateRaytracer created EmbreeRayTracer successfully into bvh at address " << bvh << ", code: " << status << std::endl;
+		}
+
 		//! [snippet_FireRaysDistance]
 		// Define points for rays
 		// These are Cartesian coordinates.
@@ -305,9 +326,11 @@ namespace CInterfaceTests {
 			// Error!
 			std::cerr << "Error at LoadOBJ, code: " << status << std::endl;
 		}
+		else {
+			std::cout << "LoadOBJ loaded mesh successfully into loaded_obj at address " << loaded_obj << ", code: " << status << std::endl;
+		}
 
 		// Create BVH
-
 		// We now declare a pointer to EmbreeRayTracer, named bvh.
 		// Note that we pass the address of this pointer to CreateRaytracer.
 		//
@@ -318,9 +341,12 @@ namespace CInterfaceTests {
 		status = CreateRaytracer(loaded_obj, &bvh);
 
 		if (status != 1) {
-			// Error!
 			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
 		}
+		else {
+			std::cout << "CreateRaytracer created EmbreeRayTracer successfully into bvh at address " << bvh << ", code: " << status << std::endl;
+		}
+
 		//! [snippet_FireSingleRayDistance]
 		// Define point to start ray
 		// These are Cartesian coordinates.
@@ -398,9 +424,11 @@ namespace CInterfaceTests {
 			// Error!
 			std::cerr << "Error at LoadOBJ, code: " << status << std::endl;
 		}
+		else {
+			std::cout << "LoadOBJ loaded mesh successfully into loaded_obj at address " << loaded_obj << ", code: " << status << std::endl;
+		}
 
 		// Create BVH
-
 		// We now declare a pointer to EmbreeRayTracer, named bvh.
 		// Note that we pass the address of this pointer to CreateRaytracer.
 		//
@@ -411,9 +439,12 @@ namespace CInterfaceTests {
 		status = CreateRaytracer(loaded_obj, &bvh);
 
 		if (status != 1) {
-			// Error!
 			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
 		}
+		else {
+			std::cout << "CreateRaytracer created EmbreeRayTracer successfully into bvh at address " << bvh << ", code: " << status << std::endl;
+		}
+
 		//! [snippet_FireRay]
 		// Define point to start ray
 		// These are Cartesian coordinates.
@@ -499,9 +530,11 @@ namespace CInterfaceTests {
 			// Error!
 			std::cerr << "Error at LoadOBJ, code: " << status << std::endl;
 		}
+		else {
+			std::cout << "LoadOBJ loaded mesh successfully into loaded_obj at address " << loaded_obj << ", code: " << status << std::endl;
+		}
 
 		// Create BVH
-
 		// We now declare a pointer to EmbreeRayTracer, named bvh.
 		// Note that we pass the address of this pointer to CreateRaytracer.
 		//
@@ -512,9 +545,12 @@ namespace CInterfaceTests {
 		status = CreateRaytracer(loaded_obj, &bvh);
 
 		if (status != 1) {
-			// Error!
 			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
 		}
+		else {
+			std::cout << "CreateRaytracer created EmbreeRayTracer successfully into bvh at address " << bvh << ", code: " << status << std::endl;
+		}
+
 		//! [snippet_FireMultipleRays]
 		// Define points for rays
 		// These are Cartesian coordinates.
@@ -606,9 +642,11 @@ namespace CInterfaceTests {
 			// Error!
 			std::cerr << "Error at LoadOBJ, code: " << status << std::endl;
 		}
+		else {
+			std::cout << "LoadOBJ loaded mesh successfully into loaded_obj at address " << loaded_obj << ", code: " << status << std::endl;
+		}
 
 		// Create BVH
-
 		// We now declare a pointer to EmbreeRayTracer, named bvh.
 		// Note that we pass the address of this pointer to CreateRaytracer.
 		//
@@ -619,9 +657,12 @@ namespace CInterfaceTests {
 		status = CreateRaytracer(loaded_obj, &bvh);
 
 		if (status != 1) {
-			// Error!
 			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
 		}
+		else {
+			std::cout << "CreateRaytracer created EmbreeRayTracer successfully into bvh at address " << bvh << ", code: " << status << std::endl;
+		}
+
 		//! [snippet_FireMultipleOriginsOneDirection]
 		// Define points to start rays
 		// These are Cartesian coordinates.
@@ -718,9 +759,11 @@ namespace CInterfaceTests {
 			// Error!
 			std::cerr << "Error at LoadOBJ, code: " << status << std::endl;
 		}
+		else {
+			std::cout << "LoadOBJ loaded mesh successfully into loaded_obj at address " << loaded_obj << ", code: " << status << std::endl;
+		}
 
 		// Create BVH
-
 		// We now declare a pointer to EmbreeRayTracer, named bvh.
 		// Note that we pass the address of this pointer to CreateRaytracer.
 		//
@@ -731,9 +774,12 @@ namespace CInterfaceTests {
 		status = CreateRaytracer(loaded_obj, &bvh);
 
 		if (status != 1) {
-			// Error!
 			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
 		}
+		else {
+			std::cout << "CreateRaytracer created EmbreeRayTracer successfully into bvh at address " << bvh << ", code: " << status << std::endl;
+		}
+
 		//! [snippet_FireMultipleDirectionsOneOrigin]
 		// Define point to start ray
 		// These are Cartesian coordinates.
@@ -825,9 +871,11 @@ namespace CInterfaceTests {
 			// Error!
 			std::cerr << "Error at LoadOBJ, code: " << status << std::endl;
 		}
+		else {
+			std::cout << "LoadOBJ loaded mesh successfully into loaded_obj at address " << loaded_obj << ", code: " << status << std::endl;
+		}
 
 		// Create BVH
-
 		// We now declare a pointer to EmbreeRayTracer, named bvh.
 		// Note that we pass the address of this pointer to CreateRaytracer.
 		//
@@ -838,9 +886,12 @@ namespace CInterfaceTests {
 		status = CreateRaytracer(loaded_obj, &bvh);
 
 		if (status != 1) {
-			// Error!
 			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
 		}
+		else {
+			std::cout << "CreateRaytracer created EmbreeRayTracer successfully into bvh at address " << bvh << ", code: " << status << std::endl;
+		}
+
 		//! [snippet_FireOcclusionRays]
 		// Define point to start ray
 		// These are Cartesian coordinates.
@@ -915,16 +966,18 @@ namespace CInterfaceTests {
 		// so that we can dereference it and assign it to the address of (pointer to)
 		// the free store memory allocated within LoadOBJ.
 		const float rot[] = { 90.0f, 0.0f, 0.0f };	// Y up to Z up
-		status = LoadOBJ(obj_path_str.c_str(), obj_length, rot[0], rot[1], rot[2], &loaded_obj);
 
+		status = LoadOBJ(obj_path_str.c_str(), obj_length, rot[0], rot[1], rot[2], &loaded_obj);
 		if (status != 1) {
 			// All C Interface functions return a status code.
 			// Error!
 			std::cerr << "Error at LoadOBJ, code: " << status << std::endl;
 		}
+		else {
+			std::cout << "LoadOBJ loaded mesh successfully into loaded_obj at address " << loaded_obj << ", code: " << status << std::endl;
+		}
 
 		// Create BVH
-
 		// We now declare a pointer to EmbreeRayTracer, named bvh.
 		// Note that we pass the address of this pointer to CreateRaytracer.
 		//
@@ -935,9 +988,12 @@ namespace CInterfaceTests {
 		status = CreateRaytracer(loaded_obj, &bvh);
 
 		if (status != 1) {
-			// Error!
 			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
 		}
+		else {
+			std::cout << "CreateRaytracer created EmbreeRayTracer successfully into bvh at address " << bvh << ", code: " << status << std::endl;
+		}
+
 
 		// Define points for rays
 		// These are Cartesian coordinates.

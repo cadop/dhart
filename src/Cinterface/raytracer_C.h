@@ -34,6 +34,7 @@ namespace HF {
 	we will call it the 'setup':<br>
 
 	First, begin by <b>loading the .OBJ file</b>:<br>
+
 	\code
 		// Status code variable, value returned by C Interface functions
 		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
@@ -67,6 +68,9 @@ namespace HF {
 			// Error!
 			std::cerr << "Error at LoadOBJ, code: " << status << std::endl;
 		}
+		else {
+			std::cout << "LoadOBJ loaded mesh successfully into loaded_obj at address " << loaded_obj << ", code: " << status << std::endl;
+		}
 	\endcode
 
 	Then, <b>create the BVH</b>:<br>
@@ -80,6 +84,13 @@ namespace HF {
 		// it is only interested in accessing the pointee.
 		HF::RayTracer::EmbreeRayTracer* bvh = nullptr;
 		status = CreateRaytracer(loaded_obj, &bvh);
+
+		if (status != -1) {
+			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "CreateRaytracer created EmbreeRayTracer successfully into bvh at address " << bvh << ", code: " << status << std::endl;
+		}
 	\endcode
 
 	At this point, <b>you are ready to use your BVH</b>.<br>
@@ -107,6 +118,10 @@ namespace HF {
 		}
 	\endcode
 
+	`>>> LoadOBJ loaded mesh successfully into loaded_obj at address 0000019C4EA752E0, code: 1`\n
+	`>>> CreateRaytracer created EmbreeRayTracer successfully into bvh at address 0000019C4EA12820, code: 1`\n
+
+	<br>
 	<b>The client is responsible for releasing the memory for<br>
 	the mesh (vector<\link HF::Geometry::MeshInfo \endlink> *) and the BVH (\link HF::RayTracer::EmbreeRayTracer \endlink *).</b><br>
 	Every example for each function should be followed up by the 'teardown' code described above.
@@ -209,6 +224,8 @@ C_INTERFACE DestroyRayTracer(HF::RayTracer::EmbreeRayTracer* rt_to_destroy);
 
 	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
 
+	`>>> LoadOBJ loaded mesh successfully into loaded_obj at address 0000019C4EA752E0, code: 1`\n
+	`>>> CreateRaytracer created EmbreeRayTracer successfully into bvh at address 0000019C4EA12280, code: 1`\n
 	`>>> Ray result: [{Distance: 2`\n
 	`>>> Mesh ID: 0}, {Distance: 1.5`\n
 	`>>> Mesh ID: 0}, {Distance: 1.33333`\n
@@ -246,6 +263,8 @@ C_INTERFACE FireRaysDistance(
 
 	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
 
+	`>>> LoadOBJ loaded mesh successfully into loaded_obj at address 0000019C4EA3FCB0, code: 1`\n
+	`>>> CreateRaytracer created EmbreeRayTracer successfully into bvh at address 0000019C4EA12820, code: 1`\n
 	`>>> Distance is 2, meshid is 0`\n
 */
 C_INTERFACE FireSingleRayDistance(
@@ -276,6 +295,8 @@ C_INTERFACE FireSingleRayDistance(
 
 	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
 
+	`>>> LoadOBJ loaded mesh successfully into loaded_obj at address 0000019E906599A0, code: 1`\n
+	`>>> CreateRaytracer created EmbreeRayTracer successfully into bvh at address 0000019E86D22BE0, code: 1`\n
 	`>>> Hit point: [0, 0, 0]`\n
 */
 C_INTERFACE FireRay(HF::RayTracer::EmbreeRayTracer* ert, float& x, float& y, float& z, float dx, float dy, float dz, float max_distance, bool& result);
@@ -302,6 +323,8 @@ C_INTERFACE FireRay(HF::RayTracer::EmbreeRayTracer* ert, float& x, float& y, flo
 
 	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
 
+	`>>> LoadOBJ loaded mesh successfully into loaded_obj at address 0000019E906596A0, code: 1`\n
+	`>>> CreateRaytracer created EmbreeRayTracer successfully into bvh at address 0000019E86D22500, code: 1`\n
 	`>>> result[0]: hit`\n
 	`>>> [0, 0, 0], direction [0, 0, -1]`\n
 	`>>> result[1]: hit`\n
@@ -329,6 +352,8 @@ C_INTERFACE FireMultipleRays(HF::RayTracer::EmbreeRayTracer* ert, float* origins
 
 	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
 
+	`>>> LoadOBJ loaded mesh successfully into loaded_obj at address 0000019E90659220, code: 1`\n
+	`>>> CreateRaytracer created EmbreeRayTracer successfully into bvh at address 0000019E86D22BE0, code: 1`\n
 	`>>> result[0]: hit`\n
 	`>>> [0, 0, -1], from point [0, 0, 0]`\n
 	`>>> result[1]: hit`\n
@@ -357,6 +382,8 @@ C_INTERFACE FireMultipleOriginsOneDirection(HF::RayTracer::EmbreeRayTracer* ert,
 
 	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
 
+	`>>> LoadOBJ loaded mesh successfully into loaded_obj at address 0000019E906587A0, code: 1`\n
+	`>>> CreateRaytracer created EmbreeRayTracer successfully into bvh at address 0000019E86D22500, code: 1`\n
 	`>>> result[0]: hit`\n
 	`>>> [0, 0, 0], direction [0, 0, 0]`\n
 	`>>> result[1]: hit`\n
@@ -391,6 +418,8 @@ C_INTERFACE FireMultipleDirectionsOneOrigin(HF::RayTracer::EmbreeRayTracer* ert,
 
 	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
 
+	`>>> LoadOBJ loaded mesh successfully into loaded_obj at address 0000019E90658440, code: 1`\n
+	`>>> CreateRaytracer created EmbreeRayTracer successfully into bvh at address 0000019E86D22BE0, code: 1`\n
 	`>>> Using multidirection, single origin`\n
 	`>>> Does the ray connect? True`\n
 */
