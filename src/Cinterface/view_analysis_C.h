@@ -42,19 +42,19 @@ enum class AGGREGATE_TYPE {
 	\brief	Conduct view analysis, then aggregate the results
 
 	\param	ERT				Raytracer containing the geometry to use for ray intersections.
-	\param	node_ptr		observer points for the view analysis.
-	\param	node_size		number of nodes in the array pointed to by node_ptr
+	\param	node_ptr		Observer points for the view analysis.
+	\param	node_size		Number of nodes in the array pointed to by node_ptr.
 
-	\param	max_rays		number of rays to cast for each node in node_ptr. 
-							Note that this may fire fewer rays than max_rays depending on fov restrictions.
+	\param	max_rays		Number of rays to cast for each node in node_ptr. 
+							Note that this may fire fewer rays than max_rays, depending on FOV restrictions.
 
 	\param	upward_fov		Maximum degrees upward from the viewer's eye level to consider.
 	\param	downward_fov	Maximum degrees downward from the viewer's eye level to consider. 
-	\param	height			Height to offset nodes from the ground (+Z direction)
-	\param	AT				Type of aggregation method to use
-	\param	out_scores		Output parameter for node scores
-	\param	out_scores_ptr	pointer to the data of out_scores
-	\param	out_scores_size	Size of output scores_ptr
+	\param	height			Height to offset nodes from the ground (+Z direction).
+	\param	AT				Type of aggregation method to use.
+	\param	out_scores		Output parameter for node scores.
+	\param	out_scores_ptr	Pointer to the data of out_scores.
+	\param	out_scores_size	Size of output_scores_ptr.
 
 	\returns HF::Status::OK on completion.
 
@@ -66,7 +66,7 @@ enum class AGGREGATE_TYPE {
 	\pre 2) node_ptr contains a valid array of nodes with length equal to node_size
 	\pre 3) out_scores, out_scores_ptr, and out_score_size are not null
 
-	\post 1) out_scores contains a pointer  to score for every node in nodes in order
+	\post 1) out_scores contains a pointer to score for every node in nodes in order
 	\post 2) out_scores_ptr cpoints to a valid array of scores
 	\post 3) out_scores_size is updated to the length of the data held by out_scores_ptr
 
@@ -170,19 +170,19 @@ C_INTERFACE SphereicalViewAnalysisAggregate(
 	\brief	Conduct view analysis, and aggregate the results.
 
 	\param	ERT				Raytracer containing the geometry to use for ray intersections.
-	\param	node_ptr		Observer points for the view analysis. Each 3 floats represent the x,y,z of a new node.
-	\param	node_size		number of nodes in the array pointed to by node_ptr
+	\param	node_ptr		Observer points for the view analysis. Each 3 floats represent the {x, y, z} of a new node.
+	\param	node_size		Number of nodes in the array pointed to by node_ptr.
 
-	\param	max_rays		number of rays to cast for each node in node_ptr. 
+	\param	max_rays		Number of rays to cast for each node in node_ptr. 
 							Note that this may fire fewer rays than max_rays depending on fov restrictions.
 
 	\param	upward_fov		Maximum degrees upward from the viewer's eye level to consider.
 	\param	downward_fov	Maximum degrees downward from the viewer's eye level to consider.
-	\param	height			Height to offset nodes from the ground (+Z direction)
-	\param	AT				Type of aggregation method to use
-	\param	out_scores		Output parameter for node scores
-	\param	out_scores_ptr	pointer to the data of out_scores
-	\param	out_scores_size	number of elements of output scores_ptr
+	\param	height			Height to offset nodes from the ground (+Z direction).
+	\param	AT				Type of aggregation method to use.
+	\param	out_scores		Output parameter for node scores.
+	\param	out_scores_ptr	Pointer to the data of out_scores.
+	\param	out_scores_size	Size of out_scores_ptr.
 	
 	\return HF::OK on completion.
 
@@ -205,81 +205,37 @@ C_INTERFACE SphereicalViewAnalysisAggregate(
 
 	\todo Is there any situation where out_scores_size is smaller than node_size?
 
+	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
+
+	You must <b>load an .obj file</b> and <b>create a BVH</b> first.<br>
+	Begin by reviewing the example at \ref raytracer_setup before proceeding below.
+
 	\par Example
-	\code
-		// Create Plane
-		const std::vector<float> plane_vertices{
-			-10.0f, 10.0f, 0.0f,
-			-10.0f, -10.0f, 0.0f,
-			10.0f, 10.0f, 0.0f,
-			10.0f, -10.0f, 0.0f,
-		};
-		const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
-		// Create and allocate a new instacnce of meshinfo
-		std::vector<MeshInfo>* MI;
-		auto MIR = StoreMesh(
-			&MI,
-			plane_indices.data(),
-			plane_indices.size(),
-			plane_vertices.data(),
-			plane_vertices.size(),
-			"",
-			0
-		);
+	First, set up the parameters for the view analysis.
+	
+	\snippet tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphericalViewAnalysisAggregateFlat_setup_0
 
-		// Create a new raytracer
-		EmbreeRayTracer* ert;
-		CreateRaytracer(MI, &ert);
+	Now you must prepare a pointer to a std::vector<float>, where the <b>aggregation results</b> will be stored.<br>
+	You must also select the aggregate type.
 
-		// Create Nodes
-		std::vector<float> nodes = {
-			0,0,1,
-			0,0,2,
-			0,0,3,
-		};
+	\snippet tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphericalViewAnalysisAggregateFlat_setup_1
 
-		// Set values for arguments
-		float max_rays = 10000;
-		float up_fov = 90;
-		float down_fov = 90;
-		float height = 1.7f;
-		AGGREGATE_TYPE AT = AGGREGATE_TYPE::AVERAGE;
+	Now we are ready to call \link SphericalViewAnalysisFlat \endlink .
 
-		std::vector<float>* scores;
-		float* scores_ptr;
-		int scores_size;
+	\snippet tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphericalViewAnalysisAggregateFlat
 
-		// Run View Analysis
-		auto result = SphereicalViewAnalysisAggregateFlat(
-			ert,
-			nodes.data(),
-			nodes.size()/3,
-			max_rays,
-			up_fov,
-			down_fov,
-			height,
-			AT,
-			&scores,
-			&scores_ptr,
-			&scores_size
-		);
+	We can output the contents of the <b>aggregate results vector</b> to <b>stdout</b>.
 
-		// print Results
-		for (int i = 0; i < scores->size(); i++)
-			std::cerr << (*scores)[i] << std::endl;
+	\snippet tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphericalViewAnalysisAggregateFlat_results
 
-		// Deallocate Memory
-		DestroyFloatVector(scores);
-		DestroyMeshInfo(MI);
-		DestroyRayTracer(ert);
+	After using the view analysis results, its resources must be <b>relinquished</b>.
 
-	\endcode
+	\snippet tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphericalViewAnalysisAggregateFlat_destroy
 
-	`>>> 4.28035`\n
-	`>>> 5.2776`\n
-	`>>> 6.23221`\n
-
+	From here, please review the example at \ref raytracer_teardown for instructions<br>
+	on how to free the remainder of the resources used for the view analysis --<br>
+	which are the (vector<\link HF::Geometry::MeshInfo \endlink> *) and (\link HF::Raytracer::EmbreeRayTracer \endlink *) instances.
 */
 C_INTERFACE SphereicalViewAnalysisAggregateFlat(
 	HF::RayTracer::EmbreeRayTracer* ERT,
@@ -299,10 +255,10 @@ C_INTERFACE SphereicalViewAnalysisAggregateFlat(
 	\brief	Perform view analysis, then get the distance and meshid for each individual ray casted.
 
 	\param	ERT				Raytracer containing the geometry to use for ray intersections.
-	\param	node_ptr		observer points for the view analysis.
-	\param	node_size		number of nodes in the array pointed to by node_ptr
+	\param	node_ptr		Observer points for the view analysis.
+	\param	node_size		Number of nodes in the array pointed to by node_ptr.
 
-	\param	max_rays		number of rays to cast for each node in node_ptr. 
+	\param	max_rays		Number of rays to cast for each node in node_ptr. 
 							This will be updated with the actual number of rays casted upon completion. 
 
 	\param	upward_fov		Maximum degrees upward from the viewer's eye level to consider.
@@ -468,87 +424,36 @@ C_INTERFACE SphericalViewAnalysisNoAggregate(
 	to determine the point of intersection for every ray casted.
 
 	\par Example
-	\code 
-		// Create Plane
-		const std::vector<float> plane_vertices{
-			-10.0f, 10.0f, 0.0f,
-			-10.0f, -10.0f, 0.0f,
-			10.0f, 10.0f, 0.0f,
-			10.0f, -10.0f, 0.0f,
-		};
-		const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
-		// Create and allocate a new instacnce of meshinfo
-		std::vector<MeshInfo>* MI;
-		auto MIR = StoreMesh(
-			&MI,
-			plane_indices.data(),
-			plane_indices.size(),
-			plane_vertices.data(),
-			plane_vertices.size(),
-			"",
-			0
-		);
+	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
 
-		// Create a new raytracer
-		EmbreeRayTracer* ert;
-		CreateRaytracer(MI, &ert);
+	You must <b>load an .obj file</b> and <b>create a BVH</b> first.<br>
+	Begin by reviewing the example at \ref raytracer_setup before proceeding below.
 
-		// Create Nodes
-		std::vector<float> nodes = {
-			0,0,1,
-			0,0,2,
-			0,0,3,
-		};
+	First, set up the parameters for the view analysis.
 
-		// Set values for arguments
-		int max_rays = 10;
-		float up_fov = 90;
-		float down_fov = 90;
-		float height = 1.7f;
-		AGGREGATE_TYPE AT = AGGREGATE_TYPE::AVERAGE;
+	\snippet tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphericalViewAnalysisNoAggregateFlat_setup_0
 
-		std::vector<RayResult>* results;
-		RayResult * results_ptr;
+	Now you must prepare a pointer to a std::vector<\link RayResult \endlink>.<br>
+	View analysis results will be stored at the memory addressed by this pointer. 
 
-		// Run View Analysis
-		auto result = SphericalViewAnalysisNoAggregateFlat(
-			ert,
-			nodes.data(),
-			nodes.size() / 3,
-			&max_rays,
-			up_fov,
-			down_fov,
-			height,
-			&results,
-			&results_ptr
-		);
+	\snippet tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphericalViewAnalysisNoAggregateFlat_setup_1
 
-		// print Results
-		std::cerr << "Num Rays: " << max_rays << std::endl;
-		for (int i = 0; i < nodes.size() / 3; i++) {
-			std::cerr << "Node " << i << ": ";
-			for (int k = 0; k < results->size() / 3; k++) {
-				int os = max_rays * i;
-				std::cerr << "(" << results_ptr[k+os].meshid
-				<< ", " << results_ptr[k+os].distance << "), ";
-			}
-			std::cerr << std::endl;
-		}
+	We are now ready to call \link SphericalViewAnalysisNoAggregateFlat \endlink.
 
-		std::cerr << std::endl;
+	\snippet tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphericalViewAnalysisNoAggregateFlat
 
-		// Deallocate Memory
-		DestroyRayResultVector(results);
-		DestroyMeshInfo(MI);
-		DestroyRayTracer(ert);
-	\endcode
+	We can output the contents of the <b>results vector</b> to <b>stdout</b>.
 
-	`>>> Num Rays: 10`\n
-	`>>> Node 0: (-1, -1), (0, 5.07072), (-1, -1), (-1, -1), (0, 3.04248), (-1, -1), (0, 5.4959), (-1, -1), (-1, -1), (0, 4.53763),`\n
-	`>>> Node 1: (-1, -1), (0, 6.94876), (-1, -1), (-1, -1), (0, 4.16932), (-1, -1), (0, 7.53142), (-1, -1), (-1, -1), (0, 6.21823),`\n
-	`>>> Node 2: (-1, -1), (0, 8.82681), (-1, -1), (-1, -1), (0, 5.29616), (-1, -1), (0, 9.56693), (-1, -1), (-1, -1), (0, 7.89883),`\n
+	\snippet tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphericalViewAnalysisNoAggregateFlat_results
 
+	After using the view analysis results, its resources must be <b>relinquished</b>.
+
+	\snippet tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphericalViewAnalysisNoAggregateFlat_destroy
+
+	From here, please review the example at \ref raytracer_teardown for instructions<br>
+	on how to free the remainder of the resources used for the view analysis --<br>
+	which are the (vector<\link HF::Geometry::MeshInfo \endlink> *) and (\link HF::Raytracer::EmbreeRayTracer \endlink *) instances.
 */
 C_INTERFACE SphericalViewAnalysisNoAggregateFlat(
 	HF::RayTracer::EmbreeRayTracer* ERT,
