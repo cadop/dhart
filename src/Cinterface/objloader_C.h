@@ -73,7 +73,7 @@ namespace HF {
 	<b>loaded_obj</b> points to the loaded mesh.
 
 	\section mesh_teardown Mesh teardown
-	When you are finished with the <b>mesh</b>, you must then its memory resources:<br>
+	When you are finished with the <b>mesh</b>, you must then <b>relinquish</b> its memory resources:<br>
 
 	\code
 		// destroy vector<MeshInfo>
