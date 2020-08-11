@@ -19,7 +19,7 @@ namespace CInterfaceTests {
 
 		// Get model path
 		// This is a relative path to your obj file.
-		const std::string obj_path_str = "fplane.obj";
+		const std::string obj_path_str = "plane.obj";
 
 		//
 		// gtest: Does the file at obj_path_str exist?
