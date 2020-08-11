@@ -138,14 +138,27 @@ namespace CInterfaceTests {
 		if (status != 1) {
 			std::cerr << "Error at StoreMesh, code: " << status << std::endl;
 		}
+		
+		//
+		// Verify that the mesh, at info (vector<MeshInfo> *),
+		// was stored properly by StoreMesh.
+		//
+		if (info == nullptr) {
+			std::cerr << "Mesh was not stored properly." << std::endl;
+		}
+		else {
+			std::cout << "The mesh was stored properly at address " << info << "." << std::endl;
+		}
 		//! [snippet_StoreMesh_call]
 
 		//
 		// Memory management
 		//
 		
+		//
 		// All calls to LoadOBJ or StoreMesh must be followed up with a call to DestroyMeshInfo
-		// by the client.
+		// by the client. DestroyMeshInfo will check if info is non-null before attempting to free its resources.
+		//
 		status = DestroyMeshInfo(info);
 
 		if (status != 1) {
@@ -216,8 +229,10 @@ namespace CInterfaceTests {
 		// Memory management
 		//
 
+		//
 		// All calls to LoadOBJ or StoreMesh must be followed up with a call to DestroyMeshInfo
-		// by the client.
+		// by the client. DestroyMeshInfo will check if info is non-null before attempting to free its resources.
+		//
 		status = DestroyMeshInfo(info);
 
 		if (status != 1) {
@@ -268,7 +283,10 @@ namespace CInterfaceTests {
 		// Memory management
 		//
 
-		// destroy vector<MeshInfo>
+		//
+		// All calls to LoadOBJ or StoreMesh must be followed up with a call to DestroyMeshInfo
+		// by the client. DestroyMeshInfo will check if info is non-null before attempting to free its resources.
+		//
 		status = DestroyMeshInfo(loaded_obj);
 
 		if (status != 1) {
