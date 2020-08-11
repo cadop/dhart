@@ -105,6 +105,8 @@ enum class AGGREGATE_TYPE {
 	on how to free the remainder of the resources used for the view analysis --<br>
 	which are the (vector<\link HF::Geometry::MeshInfo \endlink> *) and (\link HF::Raytracer::EmbreeRayTracer \endlink *) instances.
 
+	`>>> LoadOBJ loaded mesh successfully into loaded_obj at address 00000293CC9C8650, code: 1`\n
+	`>>> CreateRaytracer created EmbreeRayTracer successfully into bvh at address 00000293C3012D20, code: 1`\n
 	`>>> [7.43102, 0, 0]`\n
 */
 C_INTERFACE SphereicalViewAnalysisAggregate(
@@ -187,6 +189,8 @@ C_INTERFACE SphereicalViewAnalysisAggregate(
 	on how to free the remainder of the resources used for the view analysis --<br>
 	which are the (vector<\link HF::Geometry::MeshInfo \endlink> *) and (\link HF::Raytracer::EmbreeRayTracer \endlink *) instances.
 
+	`>>> LoadOBJ loaded mesh successfully into loaded_obj at address 00000293CC9C84D0, code: 1`\n
+	`>>> CreateRaytracer created EmbreeRayTracer successfully into bvh at address 00000293C3012D20, code: 1`\n
 	`>>> [7.43102]`\n
 */
 C_INTERFACE SphereicalViewAnalysisAggregateFlat(
@@ -266,6 +270,8 @@ C_INTERFACE SphereicalViewAnalysisAggregateFlat(
 	on how to free the remainder of the resources used for the view analysis --<br>
 	which are the (vector<\link HF::Geometry::MeshInfo \endlink> *) and (\link HF::Raytracer::EmbreeRayTracer \endlink *) instances.
 
+	`>>> LoadOBJ loaded mesh successfully into loaded_obj at address 00000293CC9C84D0, code: 1`\n
+	`>>> CreateRaytracer created EmbreeRayTracer successfully into bvh at address 00000293C3012500, code: 1`\n
 	`>>> [(-1, -1), (-1, -1), (15.8334, 0), (-1, -1), (-1, -1)]`\n
 */
 C_INTERFACE SphericalViewAnalysisNoAggregate(
@@ -347,6 +353,8 @@ C_INTERFACE SphericalViewAnalysisNoAggregate(
 	on how to free the remainder of the resources used for the view analysis --<br>
 	which are the (vector<\link HF::Geometry::MeshInfo \endlink> *) and (\link HF::Raytracer::EmbreeRayTracer \endlink *) instances.
 
+	`>>> LoadOBJ loaded mesh successfully into loaded_obj at address 00000293CC9C8290, code: 1`\n
+	`>>> CreateRaytracer created EmbreeRayTracer successfully into bvh at address 00000293C3012D20, code: 1`\n
 	`>>> [(-1, -1), (-1, -1), (15.8334, 0), (-1, -1), (-1, -1)]`\n
 */
 C_INTERFACE SphericalViewAnalysisNoAggregateFlat(
@@ -391,38 +399,18 @@ C_INTERFACE SphericalViewAnalysisNoAggregateFlat(
 	the original number depending on the limitations specified by upward and downward fov.
 
 	\par Example
-	\code
-		// Set arguments
-		int num_rays = 10;
-		std::vector<float>* out_float;
-		float* out_float_data;
-		float up_fov = 90.0f;
-		float down_fov = 90.0f;
+	
+	Begin by <b>initializing</b> input values:<br>
+	\snippet	tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphericalDistribute_setup
 
-		// Call function
-		auto status = SphericalDistribute(
-			&num_rays,
-			&out_float,
-			&out_float_data,
-			up_fov,
-			down_fov
-		);
+	We are now ready to call \link SphericalDistribute \endlink .
+	\snippet	tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphericalDistribute
 
-		// Print results
-		std::cerr << "Number of rays: " << num_rays << std::endl;
-		for (int i = 0; i < num_rays; i++) {
-			int os = i * 3;
+	Let's output the result, stored in <b>out_float_data</b> (you can also access <b>*out_float</b>).
+	\snippet	tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphericalDistribute_output
 
-			std::cerr << "("
-				<< out_float_data[os] << ", "
-				<< out_float_data[os+1] << ", "
-				<< out_float_data[os+2] << ")"
-				<< std::endl;
-		}
-
-		// Deallocate Memory
-		DestroyFloatVector(out_float);
-	\endcode
+	Make sure to destroy the resources addressed by <b>out_float</b> when you are finished with it.
+	\snippet	tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphericalDistribute_destroy
 
 	`>>> Number of rays: 10`\n
 	`>>> (-0, -1, 0)`\n

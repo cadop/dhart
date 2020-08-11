@@ -50,14 +50,14 @@ namespace CInterfaceTests {
 
 		if (status != 1) {
 			// All C Interface functions return a status code.
-			// Should an error occur, we can interpret the error code via code_to_str
-			// when reading stderr.
 			// Error!
 			std::cerr << "Error at LoadOBJ, code: " << status << std::endl;
 		}
+		else {
+			std::cout << "LoadOBJ loaded mesh successfully into loaded_obj at address " << loaded_obj << ", code: " << status << std::endl;
+		}
 
 		// Create BVH
-
 		// We now declare a pointer to EmbreeRayTracer, named bvh.
 		// Note that we pass the address of this pointer to CreateRaytracer.
 		//
@@ -68,9 +68,12 @@ namespace CInterfaceTests {
 		status = CreateRaytracer(loaded_obj, &bvh);
 
 		if (status != 1) {
-			// Error!
 			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
 		}
+		else {
+			std::cout << "CreateRaytracer created EmbreeRayTracer successfully into bvh at address " << bvh << ", code: " << status << std::endl;
+		}
+
 
 		//! [snippet_view_analysis_SphereicalViewAnalysisAggregate_setup_0]
 		// Preparing the parameters for SphereicalViewAnalysisAggregate
@@ -209,14 +212,14 @@ namespace CInterfaceTests {
 
 		if (status != 1) {
 			// All C Interface functions return a status code.
-			// Should an error occur, we can interpret the error code via code_to_str
-			// when reading stderr.
 			// Error!
 			std::cerr << "Error at LoadOBJ, code: " << status << std::endl;
 		}
+		else {
+			std::cout << "LoadOBJ loaded mesh successfully into loaded_obj at address " << loaded_obj << ", code: " << status << std::endl;
+		}
 
 		// Create BVH
-
 		// We now declare a pointer to EmbreeRayTracer, named bvh.
 		// Note that we pass the address of this pointer to CreateRaytracer.
 		//
@@ -227,8 +230,10 @@ namespace CInterfaceTests {
 		status = CreateRaytracer(loaded_obj, &bvh);
 
 		if (status != 1) {
-			// Error!
 			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "CreateRaytracer created EmbreeRayTracer successfully into bvh at address " << bvh << ", code: " << status << std::endl;
 		}
 
 		//! [snippet_view_analysis_SphericalViewAnalysisAggregateFlat_setup_0]
@@ -368,14 +373,14 @@ namespace CInterfaceTests {
 
 		if (status != 1) {
 			// All C Interface functions return a status code.
-			// Should an error occur, we can interpret the error code via code_to_str
-			// when reading stderr.
 			// Error!
 			std::cerr << "Error at LoadOBJ, code: " << status << std::endl;
 		}
+		else {
+			std::cout << "LoadOBJ loaded mesh successfully into loaded_obj at address " << loaded_obj << ", code: " << status << std::endl;
+		}
 
 		// Create BVH
-
 		// We now declare a pointer to EmbreeRayTracer, named bvh.
 		// Note that we pass the address of this pointer to CreateRaytracer.
 		//
@@ -386,8 +391,10 @@ namespace CInterfaceTests {
 		status = CreateRaytracer(loaded_obj, &bvh);
 
 		if (status != 1) {
-			// Error!
 			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "CreateRaytracer created EmbreeRayTracer successfully into bvh at address " << bvh << ", code: " << status << std::endl;
 		}
 
 		//! [snippet_view_analysis_SphericalViewAnalysisNoAggregate_setup_0]
@@ -519,14 +526,14 @@ namespace CInterfaceTests {
 
 		if (status != 1) {
 			// All C Interface functions return a status code.
-			// Should an error occur, we can interpret the error code via code_to_str
-			// when reading stderr.
 			// Error!
 			std::cerr << "Error at LoadOBJ, code: " << status << std::endl;
 		}
+		else {
+			std::cout << "LoadOBJ loaded mesh successfully into loaded_obj at address " << loaded_obj << ", code: " << status << std::endl;
+		}
 
 		// Create BVH
-
 		// We now declare a pointer to EmbreeRayTracer, named bvh.
 		// Note that we pass the address of this pointer to CreateRaytracer.
 		//
@@ -537,8 +544,10 @@ namespace CInterfaceTests {
 		status = CreateRaytracer(loaded_obj, &bvh);
 
 		if (status != 1) {
-			// Error!
 			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "CreateRaytracer created EmbreeRayTracer successfully into bvh at address " << bvh << ", code: " << status << std::endl;
 		}
 
 		//! [snippet_view_analysis_SphericalViewAnalysisNoAggregateFlat_setup_0]
@@ -640,7 +649,56 @@ namespace CInterfaceTests {
 	}
 
 	TEST(_view_analysis_cinterface, SphericalDistribute) {
+		//! [snippet_view_analysis_SphericalDistribute_setup]
+		//
+		// Set arguments
+		//
+		int num_rays = 10;							// number of points to distribute
+		std::vector<float>* out_float = nullptr;	// output parameter for points generated
+		float* out_float_data;						// pointer to buffer within *out_float
+		float up_fov = 90.0f;						// max degrees upward from viewer's eye level to consider
+		float down_fov = 90.0f;						// max degrees downward from viewer's eye level to consider
+		//! [snippet_view_analysis_SphericalDistribute_setup]
 
+		//! [snippet_view_analysis_SphericalDistribute]
+		//
+		// Call function
+		//
+		auto status = SphericalDistribute(
+			&num_rays,
+			&out_float,
+			&out_float_data,
+			up_fov,
+			down_fov
+		);
+
+		if (status != 1) {
+			std::cerr << "Error at SphericalDistribute, code: " << status << std::endl;
+		}
+		//! [snippet_view_analysis_SphericalDistribute]
+
+		//! [snippet_view_analysis_SphericalDistribute_output]
+		//
+		// Print results
+		//
+		std::cout << "Number of rays: " << num_rays << std::endl;
+		for (int i = 0; i < num_rays; i++) {
+			int os = i * 3;
+
+			std::cout << "("
+				<< out_float_data[os] << ", "
+				<< out_float_data[os + 1] << ", "
+				<< out_float_data[os + 2] << ")"
+				<< std::endl;
+		}
+		//! [snippet_view_analysis_SphericalDistribute_output]
+
+		//! [snippet_view_analysis_SphericalDistribute_destroy]
+		//
+		// Deallocate Memory
+		//
+		DestroyFloatVector(out_float);
+		//! [snippet_view_analysis_SphericalDistribute_destroy]
 	}
 
 	TEST(C_ViewAnalysisCInterface, SphericalViewAnalysisAggregate) {
