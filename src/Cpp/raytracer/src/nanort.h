@@ -1,4 +1,3 @@
-#pragma once
 //
 // NanoRT, single header only modern ray tracing kernel.
 //
@@ -33,8 +32,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+#pragma once
+
 #ifndef NANORT_H_
 #define NANORT_H_
+
+#undef min
+#undef max
 
 #include <algorithm>
 #include <cassert>
@@ -48,6 +52,8 @@ THE SOFTWARE.
 #include <queue>
 #include <string>
 #include <vector>
+
+
 
 // compiler macros
 //
@@ -476,7 +482,7 @@ namespace nanort {
     public:
         Ray()
             : min_t(static_cast<T>(0.0)),
-            max_t( (std::numeric_limits<T>::max)()), // this is modified from original as it wraps numeric_limits in paranthesis to avoid windows macro
+            max_t( std::numeric_limits<T>::max()), // this is modified from original as it wraps numeric_limits in paranthesis to avoid windows macro
             type(RAY_TYPE_NONE) {
             org[0] = static_cast<T>(0.0);
             org[1] = static_cast<T>(0.0);
