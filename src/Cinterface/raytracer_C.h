@@ -208,6 +208,11 @@ C_INTERFACE DestroyRayTracer(HF::RayTracer::EmbreeRayTracer* rt_to_destroy);
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireRaysDistance
 
 	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
+
+	`>>> Ray result: [{Distance: 2`\n
+	`>>> Mesh ID: 0}, {Distance: 1.5`\n
+	`>>> Mesh ID: 0}, {Distance: 1.33333`\n
+	`>>> Mesh ID: 0}]`\n
 */
 C_INTERFACE FireRaysDistance(
 	HF::RayTracer::EmbreeRayTracer* ert,
@@ -240,6 +245,8 @@ C_INTERFACE FireRaysDistance(
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireSingleRayDistance
 
 	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
+
+	`>>> Distance is 2, meshid is 0`\n
 */
 C_INTERFACE FireSingleRayDistance(
 	HF::RayTracer::EmbreeRayTracer* ert,
@@ -268,6 +275,8 @@ C_INTERFACE FireSingleRayDistance(
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireRay
 
 	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
+
+	`>>> Hit point: [0, 0, 0]`\n
 */
 C_INTERFACE FireRay(HF::RayTracer::EmbreeRayTracer* ert, float& x, float& y, float& z, float dx, float dy, float dz, float max_distance, bool& result);
 
@@ -292,6 +301,13 @@ C_INTERFACE FireRay(HF::RayTracer::EmbreeRayTracer* ert, float& x, float& y, flo
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireMultipleRays
 
 	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
+
+	`>>> result[0]: hit`\n
+	`>>> [0, 0, 0], direction [0, 0, -1]`\n
+	`>>> result[1]: hit`\n
+	`>>> [0, 0, -2.38419e-07], direction [0, 0, -2]`\n
+	`>>> result[2]: hit`\n
+	`>>> [0, 0, 2.38419e-07], direction [0, 0, -3]`\n
 */
 C_INTERFACE FireMultipleRays(HF::RayTracer::EmbreeRayTracer* ert, float* origins, const float* directions, int size, float max_distance, bool* result_array);
 
@@ -312,6 +328,13 @@ C_INTERFACE FireMultipleRays(HF::RayTracer::EmbreeRayTracer* ert, float* origins
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireMultipleOriginsOneDirection
 
 	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
+
+	`>>> result[0]: hit`\n
+	`>>> [0, 0, -1], from point [0, 0, 0]`\n
+	`>>> result[1]: hit`\n
+	`>>> [0, 0, -1], from point [0, 0, -2.38419e-07]`\n 
+	`>>> result[2]: hit`\n
+	`>>> [0, 0, -1], from point [0, 0, 0]`\n
 */
 C_INTERFACE FireMultipleOriginsOneDirection(HF::RayTracer::EmbreeRayTracer* ert, float* origins, const float* direction, int size, float max_distance, bool* result_array);
 
@@ -333,6 +356,13 @@ C_INTERFACE FireMultipleOriginsOneDirection(HF::RayTracer::EmbreeRayTracer* ert,
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireMultipleDirectionsOneOrigin
 
 	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
+
+	`>>> result[0]: hit`\n
+	`>>> [0, 0, 0], direction [0, 0, 0]`\n
+	`>>> result[1]: hit`\n
+	`>>> [0, 0, 0], direction [0, 0, 0]`\n
+	`>>> result[2]: hit`\n
+	`>>> [0, 0, 0], direction [0, 0, 1.19209e-07]`\n
 */
 C_INTERFACE FireMultipleDirectionsOneOrigin(HF::RayTracer::EmbreeRayTracer* ert, const float* origin, float* directions, int size, float max_distance, bool* result_array);
 
@@ -360,6 +390,9 @@ C_INTERFACE FireMultipleDirectionsOneOrigin(HF::RayTracer::EmbreeRayTracer* ert,
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireOcclusionRays
 
 	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
+
+	`>>> Using multidirection, single origin`\n
+	`>>> Does the ray connect? True`\n
 */
 C_INTERFACE FireOcclusionRays(
 	HF::RayTracer::EmbreeRayTracer* ert,
