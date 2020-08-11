@@ -164,6 +164,8 @@ C_INTERFACE LoadOBJ(
 
 	We are now ready to call <b>StoreMesh</b>.
 	\snippet tests\src\objloader_cinterface.cpp snippet_StoreMesh_call
+
+	`>>> The mesh was stored properly at address 0000029C6317BEB0.`\n
 */
 C_INTERFACE StoreMesh(
 	std::vector<HF::Geometry::MeshInfo>** out_info,
