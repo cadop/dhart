@@ -1,6 +1,15 @@
+/*!
+	\file		view_analysis_C.h
+	\brief		Header file for conducting view analysis via the C Interface
+
+	\author		TBA
+	\date		11 Aug 2020
+*/
+
 #include <cinterface_utils.h>
 #include <vector>
 #include <raytracer_C.h>
+
 #define C_INTERFACE extern "C" __declspec(dllexport) int
 
 namespace HF {
@@ -9,40 +18,43 @@ namespace HF {
 		class Graph;
 	}
 }
-/// <summary> How to aggregate edges the results of view analysis </summary>
-enum class AGGREGATE_TYPE {
-	/// <summary> Number of rays that hit. </summary>
-	COUNT = 0,
-	/// <summary> Sum of distances from the origin to each of its hitpoints. </summary>
-	SUM = 1,
-	/// <summary> Average distance of origin to its hit points. </summary>
-	AVERAGE = 2,
-	/// <summary> Maximum distance from origin to its hit points. </summary>
-	MAX = 3,
-	/// <summary> Minimum distance from origin to its hit points. </summary>
-	MIN = 4
-};
+
 /*!
-* @defgroup ViewAnalysis
-Analyze the view from from points in the environment.
-* @{
+	\enum		AGGREGATE_TYPE
+	\brief		Determines how to aggregate edges from the results of view analysis
+*/
+enum class AGGREGATE_TYPE {
+	COUNT = 0,		///< Number of rays that hit.
+	SUM = 1,		///< Sum of distances from the origin to each of its hit points.
+	AVERAGE = 2,	///< Average distance of origin to its hit points.
+	MAX = 3,		///< Maximum distance from origin to its hit points.
+	MIN = 4			///< Minimum distance from origin to its hit points.
+};
+
+/*!
+	\defgroup		ViewAnalysis
+	Analyze the view from points in the environment.
+
+	@{
 */
 
 /*!
-	\brief Conduct ViewAnalysis then aggregate the results
+	\brief	Conduct view analysis, then aggregate the results
 
-	\param ERT Raytracer containing the geometry to use for ray intersections.
-	\param node_ptr observer points for the view analysis.
-	\param node_size number of nodes in the array pointed to by node_ptr
-	\param max_rays number of rays to cast for each node in node_ptr. Note that this may 
-	fire fewer rays than max_rays depending on fov restrictions.
-	\param upward_fov Maximum degrees upward from the viewer's eye level to consider.
-	\param downward_fov Maximum degrees downward from the viewer's eye level to consider. 
-	\param height Height to offset nodes from the ground (+Z direction)
-	\param AT Type of aggregation method to use
-	\param out_scores Output parameter for node scores
-	\param out_scores_ptr pointer to the data of out_scores
-	\param out_scores_size of output scores_ptr
+	\param	ERT				Raytracer containing the geometry to use for ray intersections.
+	\param	node_ptr		observer points for the view analysis.
+	\param	node_size		number of nodes in the array pointed to by node_ptr
+
+	\param	max_rays		number of rays to cast for each node in node_ptr. 
+							Note that this may fire fewer rays than max_rays depending on fov restrictions.
+
+	\param	upward_fov		Maximum degrees upward from the viewer's eye level to consider.
+	\param	downward_fov	Maximum degrees downward from the viewer's eye level to consider. 
+	\param	height			Height to offset nodes from the ground (+Z direction)
+	\param	AT				Type of aggregation method to use
+	\param	out_scores		Output parameter for node scores
+	\param	out_scores_ptr	pointer to the data of out_scores
+	\param	out_scores_size	Size of output scores_ptr
 
 	\returns HF::Status::OK on completion.
 
@@ -62,6 +74,7 @@ Analyze the view from from points in the environment.
 	
 	\see \link SphericalViewAnalysis \endlink for an algorithm that returns the results of every ray casted instead
 	of aggregating the results.
+
 	\see \link SphericalViewAnalysisAggregateFlat \endlink for a function that works on a flat array of floats instead
 	of an array of nodes.
 
@@ -154,20 +167,22 @@ C_INTERFACE SphereicalViewAnalysisAggregate(
 );
 
 /*!
-	\brief Conduct view analysis and aggregate the results.
+	\brief	Conduct view analysis, and aggregate the results.
 
-	\param ERT Raytracer containing the geometry to use for ray intersections.
-	\param node_ptr Observer points for the view analysis. Each 3 floats represent the x,y,z of a new node.
-	\param node_size number of nodes in the array pointed to by node_ptr
-	\param max_rays number of rays to cast for each node in node_ptr. Note that this may
-	fire fewer rays than max_rays depending on fov restrictions.
-	\param upward_fov Maximum degrees upward from the viewer's eye level to consider.
-	\param downward_fov Maximum degrees downward from the viewer's eye level to consider.
-	\param height Height to offset nodes from the ground (+Z direction)
-	\param AT Type of aggregation method to use
-	\param out_scores Output parameter for node scores
-	\param out_scores_ptr pointer to the data of out_scores
-	\param out_scores_size number of elements of output scores_ptr
+	\param	ERT				Raytracer containing the geometry to use for ray intersections.
+	\param	node_ptr		Observer points for the view analysis. Each 3 floats represent the x,y,z of a new node.
+	\param	node_size		number of nodes in the array pointed to by node_ptr
+
+	\param	max_rays		number of rays to cast for each node in node_ptr. 
+							Note that this may fire fewer rays than max_rays depending on fov restrictions.
+
+	\param	upward_fov		Maximum degrees upward from the viewer's eye level to consider.
+	\param	downward_fov	Maximum degrees downward from the viewer's eye level to consider.
+	\param	height			Height to offset nodes from the ground (+Z direction)
+	\param	AT				Type of aggregation method to use
+	\param	out_scores		Output parameter for node scores
+	\param	out_scores_ptr	pointer to the data of out_scores
+	\param	out_scores_size	number of elements of output scores_ptr
 	
 	\return HF::OK on completion.
 
@@ -281,18 +296,20 @@ C_INTERFACE SphereicalViewAnalysisAggregateFlat(
 );
 
 /*!
-	\brief Perform view analysis and get the distance and meshid for each individual ray casted.
+	\brief	Perform view analysis, then get the distance and meshid for each individual ray casted.
 
-	\param ERT Raytracer containing the geometry to use for ray intersections.
-	\param node_ptr observer points for the view analysis.
-	\param node_size number of nodes in the array pointed to by node_ptr
-	\param max_rays number of rays to cast for each node in node_ptr. This will be updated
-	with the actual number of rays casted upon completion. 
-	\param upward_fov Maximum degrees upward from the viewer's eye level to consider.
-	\param downward_fov Maximum degrees downward from the viewer's eye level to consider.
-	\param height Height to offset nodes from the ground (+Z direction).
-	\param out_results Pointer to the vector containing the results of every ray casted.
-	\param out_results_ptr Pointer to the data of out_results.
+	\param	ERT				Raytracer containing the geometry to use for ray intersections.
+	\param	node_ptr		observer points for the view analysis.
+	\param	node_size		number of nodes in the array pointed to by node_ptr
+
+	\param	max_rays		number of rays to cast for each node in node_ptr. 
+							This will be updated with the actual number of rays casted upon completion. 
+
+	\param	upward_fov		Maximum degrees upward from the viewer's eye level to consider.
+	\param	downward_fov	Maximum degrees downward from the viewer's eye level to consider.
+	\param	height			Height to offset nodes from the ground (+Z direction).
+	\param	out_results		Pointer to the vector containing the results of every ray casted.
+	\param	out_results_ptr	Pointer to the data of out_results.
 
 	\returns HF::OK on completion.
 
@@ -411,20 +428,24 @@ C_INTERFACE SphericalViewAnalysisNoAggregate(
 );
 
 /*!
-	\brief Perform view analysis and get the distance and meshid for each individual ray casted.
+	\brief	Perform view analysis, and get the distance and meshid for each individual ray casted.
 
-	\param ERT Raytracer containing the geometry to use for ray intersections.
-	\param node_ptr observer points for the view analysis. Every 3 elements represents the 
-	x,y,z coordinates of a new point. 
-	\param node_size number of nodes in the array pointed to by node_ptr. Should be equal
-	to the length of the array contained by node_ptr * 3.
-	\param max_rays number of rays to cast for each node in node_ptr. This will be updated
-	with the actual number of rays casted upon completion.
-	\param upward_fov Maximum degrees upward from the viewer's eye level to consider.
-	\param downward_fov Maximum degrees downward from the viewer's eye level to consider.
-	\param height Height to offset nodes from the ground (+Z direction).
-	\param out_results Pointer to the vector containing the results of every ray casted.
-	\param out_results_ptr Pointer to the data of out_results.
+	\param	ERT				Raytracer containing the geometry to use for ray intersections.
+
+	\param	node_ptr		observer points for the view analysis. 
+							Every 3 elements represents the x,y,z coordinates of a new point.
+
+	\param	node_size		number of nodes in the array pointed to by node_ptr. 
+							Should be equal to the length of the array contained by node_ptr * 3.
+
+	\param	max_rays		number of rays to cast for each node in node_ptr. 
+							This will be updated with the actual number of rays casted upon completion.
+
+	\param	upward_fov		Maximum degrees upward from the viewer's eye level to consider.
+	\param	downward_fov	Maximum degrees downward from the viewer's eye level to consider.
+	\param	height			Height to offset nodes from the ground (+Z direction).
+	\param	out_results		Pointer to the vector containing the results of every ray casted.
+	\param	out_results_ptr	Pointer to the data of out_results.
 
 	\returns HF::OK on completion.
 
@@ -542,14 +563,16 @@ C_INTERFACE SphericalViewAnalysisNoAggregateFlat(
 );
 
 /*!
-	\brief Equally distribute points around a unit sphere.
+	\brief	Equally distribute points around a unit sphere.
 
-	\param num_rays Number of points to distribute.
-	\param out_direction_vector Output parameter for points generated. Every 3 floats
-	represents a new point.
-	\param out_direction_data pointer to the data of out_direction_vector
-	\param upward_fov Maximum degrees upward from the viewer's eye level to consider.
-	\param downward_fov Maximum degrees downward from the viewer's eye level to consider.
+	\param	num_rays				Number of points to distribute.
+
+	\param	out_direction_vector	Output parameter for points generated. 
+									Every 3 floats represents a new point.
+
+	\param	out_direction_data		pointer to the data of out_direction_vector
+	\param	upward_fov				Maximum degrees upward from the viewer's eye level to consider.
+	\param	downward_fov			Maximum degrees downward from the viewer's eye level to consider.
 
 	\returns HF::OK on completion.
 	
@@ -562,7 +585,9 @@ C_INTERFACE SphericalViewAnalysisNoAggregateFlat(
 	the directions each ray will be casted in. 
 
 	\pre out_direction_vector and out_direction_data must not be null, but the pointers they hold can be null.
+	
 	\post 1) The pointer pointed to by out_direction_vector contains a vector of directions.
+
 	\post 2) num_rays contains the number of points distributed by this function. This may be more or less than
 	the original number depending on the limitations specified by upward and downward fov.
 
