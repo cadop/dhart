@@ -4,8 +4,10 @@ from humanfactorspy.Exceptions import OutOfRangeException
 from typing import *
 import numpy
 from humanfactorspy.spatialstructures import Graph
+from humanfactorspy.native_collections import FloatArray2D, IntArray2D
 
-__all__ = ["ConvertNodesToIds", "DijkstraShortestPath", "DijkstraFindAllShortestPaths"]
+__all__ = ["ConvertNodesToIds", "DijkstraShortestPath", 
+           "DijkstraFindAllShortestPaths", "calculate_distance_and_predecessor"]
 
 
 def ConvertNodesToIds(graph: Graph, nodes: List[Union[Tuple, int]]) -> List[int]:
@@ -356,3 +358,63 @@ def DijkstraFindAllShortestPaths(
 
     return out_paths
 
+
+def calculate_distance_and_predecessor(graph: Graph, cost_type: str = ""
+    ) -> Tuple[FloatArray2D, IntArray2D]:
+    """ Calculate distance and predecessor matricies for a graph in C++
+
+    Args:
+        graph : Graph to generate predecessor/distance matricies from
+        cost_type : Type of cost to use to generate distance and predecessor
+                   matricies. Uses graph's default cost type if left blank
+
+    Raises:
+        KeyError : cost_type wasn't left blank, and didn't already exist in the
+                   graph.
+
+    Returns:
+        The Distance and Predecessor matricies for graph.
+
+    Examples:
+        Create the predecessor and distance matricies for a graph
+
+        >>> from humanfactorspy.pathfinding import calculate_distance_and_predecessor
+        >>> from humanfactorspy.spatialstructures import Graph
+
+        >>> # Create a graph, add some nodes and edges, then compress
+        >>> g = Graph()
+        >>> nodes = [(1, 2, 3), (4, 5, 6), (7, 8, 9), (10, 1, 2)]
+        >>> g.AddEdgeToGraph(nodes[1], nodes[2], 20)
+        >>> g.AddEdgeToGraph(nodes[0], nodes[2], 5)
+        >>> g.AddEdgeToGraph(nodes[1], nodes[0], 10)
+        >>> csr = g.CompressToCSR()
+        >>> # Calculate distance/predecessor matrix
+        >>> distance_matrix, predecessor_matrix = calculate_distance_and_predecessor(g)
+        >>> print(distance_matrix)
+        [[ 0. 15. 10.]
+         [-1.  0. -1.]
+         [-1.  5.  0.]]
+        >>> print(predecessor_matrix)
+        [[ 0  2  0]
+         [-1  1 -1]
+         [-1  2  2]]
+
+    """
+
+    # Get pointers to arrays back from native code
+    (dist_vector,
+        dist_data,
+        pred_vector,
+        pred_data,
+     ) = pathfinder_native_functions.c_calculate_distance_and_predecessor(
+        graph.graph_ptr, cost_type
+    )
+
+    # Get the size of the graph
+    num_nodes = graph.NumNodes()
+
+    # Wrap in NativeNumpyLikes
+    dist_matrix = FloatArray2D(dist_vector, dist_data, (num_nodes, num_nodes))
+    pred_matrix = IntArray2D(pred_vector, pred_data, (num_nodes, num_nodes))
+
+    return (dist_matrix, pred_matrix)
