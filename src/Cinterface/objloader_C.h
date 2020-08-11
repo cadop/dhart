@@ -84,6 +84,9 @@ namespace HF {
 		}
 	\endcode
 
+	`>>> LoadOBJ loaded mesh successfully into loaded_obj at address 000001DBFADFAF50, code: 1`\n
+
+	<br>
 	<b>The client is responsible for releasing the memory for<br>
 	the <b>mesh</b> (vector<\link HF::Geometry::MeshInfo \endlink> *).</b><br>
 	Every example for each function should be followed up by the 'teardown' code described above.

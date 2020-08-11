@@ -72,6 +72,9 @@ namespace CInterfaceTests {
 			// Error!
 			std::cerr << "Error at LoadOBJ, code: " << status << std::endl;
 		}
+		else {
+			std::cout << "LoadOBJ loaded mesh successfully into loaded_obj at address " << loaded_obj << ", code: " << status << std::endl;
+		}
 
 		//
 		// loaded_obj contains the mesh.
@@ -273,6 +276,9 @@ namespace CInterfaceTests {
 			// All C Interface functions return a status code.
 			// Error!
 			std::cerr << "Error at LoadOBJ, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "LoadOBJ loaded mesh successfully into loaded_obj at address " << loaded_obj << ", code: " << status << std::endl;
 		}
 
 		//
