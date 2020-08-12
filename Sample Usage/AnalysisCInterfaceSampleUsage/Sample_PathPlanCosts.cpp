@@ -186,52 +186,49 @@ std::vector<HF::SpatialStructures::Node> CInterfaceTests::get_closest_nodes(cons
 	float graph_node[3] = { node_vector_it->x, node_vector_it->y, node_vector_it->z };
 	float saved_distance = euclidean_distance<dimension, floating_precision>(comparison_node, graph_node);
 
-	// We do not need to compare/recalculate the distance between the first node in the graph,
-	// and the first comparison node, so we advance node_vector_it.
-	++node_vector_it;
-
 	while (p_desired_it < p_desired.end()) {
+		// While we have nodes to compare with the graph nodes...
+
 		// This is the current comparison node we are iterating over.
 		float comparison_node[3] = { p_desired_it->x, p_desired_it->y, p_desired_it->z };
 
-		// If this is the first iteration of the top level while-loop:
-		// Calculate the distance between the second node in the graph and the first comparison node.
-		//
-		// For every iteration after:
-		// Calculate the distance between the first node in the graph and the nth comparison node.
-		saved_distance = euclidean_distance<dimension, floating_precision>(comparison_node, graph_node);
+		// Will be compared with the calculated_distance per iteration,
+		// and is updated to be calcuated_distance whenever calcuated_distance < saved_distance.
+		// Prior to the inner loop, saved_distance is the distance between comparsion_node
+		// and the first node of the graph. (first node in node_vector)
+		float saved_distance = euclidean_distance<dimension, floating_precision>(comparison_node, graph_node);
 
 		while (node_vector_it < node_vector.end()) {
-			// This is the current node in the graph we are iterating over.
-			float graph_node[3] = { node_vector_it->x, node_vector_it->y, node_vector_it->z };
+			// While we are still traversing the graph nodes...
 
-			// Compute distance between graph node and comparison node.
-			float calculated_distance = euclidean_distance<dimension, floating_precision>(comparison_node, graph_node);
+			if (p_desired_it->id != node_vector_it->id) {
+				// This is the current node in the graph we are iterating over.
+				float graph_node[3] = { node_vector_it->x, node_vector_it->y, node_vector_it->z };
 
-			// If distance computed is less than the current shortest distance cached,
-			// (and the current graph node is not the current comparison node) --
-			// we reassign a new shortest distance for the parameter node,
-			// as well as the ID of the closest node.
-			//
-			// The closest node to p_desired[index] is closest_nodes[index].
-			//
-			if ((calculated_distance < saved_distance) && p_desired_it->id != node_vector_it->id) {
-				saved_distance = calculated_distance;
-				*closest_nodes_it = *node_vector_it;
+				// Compute distance between graph node and comparison node.
+				float calculated_distance = euclidean_distance<dimension, floating_precision>(comparison_node, graph_node);
+
+				// If distance computed is less than the current shortest distance cached,
+				// (and the current graph node is not the current comparison node) --
+				// we reassign a new shortest distance for the parameter node,
+				// as well as the ID of the closest node.
+				//
+				// The closest node to p_desired[index] is closest_nodes[index].
+				if (calculated_distance < saved_distance) {
+					saved_distance = calculated_distance;
+
+					// Update the closest node at closest_nodes_it
+					// with the node at node_vector_it.
+					*closest_nodes_it = *node_vector_it;
+				}
 			}
 
 			++node_vector_it;
 		}
 
 		// Reset the graph node iterator to the beginning,
-		// prepare for another comparison.
+		// prepare for the next comparison node.
 		node_vector_it = node_vector.begin();
-
-		// Reinitialize graph_node so that the distance between the next comparison node
-		// and the first node in the graph is calculated.
-		graph_node[0] = node_vector_it->x;
-		graph_node[1] = node_vector_it->y;
-		graph_node[2] = node_vector_it->z;
 
 		// These are incremented one after another,
 		// because we want to store the closest node 
