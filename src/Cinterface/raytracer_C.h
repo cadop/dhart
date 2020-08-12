@@ -5,7 +5,9 @@
 	\author		TBA
 	\date		04 Aug 2020
 */
-#pragma once
+
+#ifndef RAYTRACER_C_H
+#define RAYTRACER_C_H
 
 #include <vector>
 #include <array>
@@ -27,8 +29,6 @@ namespace HF {
 	Perform efficient ray intersections using Intel's Embree Library.
 
 	@{
-
-
 	\section raytracer_setup Raytracer setup
 	Every example below will be assumed to begin with this body of code;<br>
 	we will call it the 'setup':<br>
@@ -449,3 +449,5 @@ C_INTERFACE DestroyRayResultVector(
 );
 
 /**@}*/
+
+#endif /* RAYTRACER_C_H */
