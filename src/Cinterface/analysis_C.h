@@ -66,50 +66,38 @@ namespace HF {
 	\returns	\link HF_STATUS::OK \endlink if graph creation was successful.
 				\link HF_STATUS::NO_GRAPH \endlink if \link GenerateGraph \endlink failed to generate a graph with more than a single node.
 
-	\code
-		// Requires #include "analysis_C.h", #include "embree_raytracer.h", #include "graph.h"
+	\see		\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
 
-		// Create a container of coordinates
-		std::vector<std::array<float, 3>> directions = {
-			{0, 0, 1},
-			{0, 1, 0},
-			{1, 0, 0},
-			{-1, 0, 0},
-			{0, -1, 0},
-			{0, 0, -1},
-		};
+	You must <b>load an .obj file</b> and <b>create a BVH</b> first.<br>
+	Begin by reviewing the example at \ref raytracer_setup before proceeding below.
 
-		// Create the EmbreeRayTracer
-		auto ert = HF::RayTracer::EmbreeRayTracer(directions);
+	First, determine the <b>start point</b>, <b>spacing of nodes for each axis</b>, and <b>maximum nodes to generate</b>.<br>
+	\snippet tests\src\analysis_C_cinterface.cpp snippet_analysis_cinterface_GenerateGraph_setup_0
 
-		// Have a pointer to Graph ready
-		HF::SpatialStructures::Graph* g = nullptr;
+	Then, determine the remainder of the values required by \link GenerateGraph \endlink before calling it.<br>
+	\snippet tests\src\analysis_C_cinterface.cpp snippet_analysis_cinterface_GenerateGraph
 
-		// Prepare parameters
-		float start[] = { 0, 0, 0 };
-		float spacing[] = { 1, 1, 1 };
-		const int max_nodes = 6;
-		const float up_step = 1.5;
-		const float up_slope = 1.0;
-		const float down_step = 2.0;
-		const float down_slope = 0.5;
-		const int maximum_step_connections = 2;
-		const int cores = 4;
+	<b>Very important!</b> <b>Compress the graph</b> after generating a graph or adding edges.<br>
+	\snippet tests\src\analysis_C_cinterface.cpp snippet_analysis_cinterface_GenerateGraph_compress
 
-		if (GenerateGraph(&ert, start, spacing, max_nodes, up_step, up_slope, down_step, down_slope, maximum_step_connections, cores, &g)) {
-			std::cout << "GenerateGraph successful" << std::endl;
-		}
-		else {
-			std::cout << "GenerateGraph failed" << std::endl;
-		}
+	To output the graph to the console, we must <b>retrieve its nodes</b>.<br>
+	\snippet tests\src\analysis_C_cinterface.cpp snippet_analysis_cinterface_GenerateGraph_GetNodes
 
-		// Free memory resources once finished with Graph
-		if (g) {
-			delete g;
-			g = nullptr;
-		}
-	\endcode
+	We are now ready to <b>output</b> the generated graph to the <b>console</b>.<br>
+	\snippet tests\src\analysis_C_cinterface.cpp snippet_analysis_cinterface_GenerateGraph_output
 
+	When we are finished, we must destroy <b>node_vector</b> and <b>graph</b>.<br>
+	\snippet tests\src\analysis_C_cinterface.cpp snippet_analysis_cinterface_GenerateGraph_destroy
+
+	From here, please review the example at \ref raytracer_teardown for instructions<br>
+	on how to free the remainder of the resources used by the graph --<br>
+	which are the (vector<\link HF::Geometry::MeshInfo \endlink> *) and (\link HF::Raytracer::EmbreeRayTracer \endlink *) instances.
+
+	<br>
+	`>>> LoadOBJ loaded mesh successfully into loaded_obj at address 000002468EEBBEB0, code: 1`\n
+	`>>> CreateRaytracer created EmbreeRayTracer successfully into bvh at address 00000246849C59B0, code: 1`\n
+	`>>> Node count: 594`\n
+	`>>> [(-1, -6, 0, 0) (-1.5, -6.5, -0, 1) (-1.5, -6, -0, 2)]`\n
 */
 C_INTERFACE GenerateGraph(
 	HF::RayTracer::EmbreeRayTracer* ray_tracer,
