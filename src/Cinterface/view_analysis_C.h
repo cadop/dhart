@@ -6,6 +6,9 @@
 	\date		11 Aug 2020
 */
 
+#ifndef VIEW_ANALYSIS_C_H
+#define VIEW_ANALYSIS_C_H
+
 #include <cinterface_utils.h>
 #include <vector>
 #include <raytracer_C.h>
@@ -434,3 +437,5 @@ C_INTERFACE SphericalDistribute(
 );
 
 /**@}*/
+
+#endif /* VIEW_ANALYSIS_C_H */
