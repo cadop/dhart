@@ -85,7 +85,7 @@ struct HF::SpatialStructures::Path {
 };
 
 /*!
-	\brief	Required definition, 
+	\brief	Required definition,
 			represents indices of keys for costs returned from calling CalculateAndStoreEnergyExpenditure
 */
 const enum COST_ALG_KEY { CROSS_SLOPE, ENERGY_EXPENDITURE };
@@ -96,8 +96,8 @@ const enum COST_ALG_KEY { CROSS_SLOPE, ENERGY_EXPENDITURE };
 */
 const std::vector<std::string> Key_To_Costs{ "CrossSlope", "EnergyExpenditure" };
 
-/*! 
-	\brief	Get the cost algorithm title from it's associated enum. 
+/*!
+	\brief	Get the cost algorithm title from it's associated enum.
 */
 inline std::string AlgorithmCostTitle(COST_ALG_KEY key) {
 	return Key_To_Costs[key];
@@ -141,102 +141,108 @@ float_precision euclidean_distance(float_precision point_a[], float_precision po
 
 namespace CInterfaceTests {
 	using HF::SpatialStructures::Node;
-	using HF::SpatialStructures::Graph;
 
-	/*!
-		\brief		Returns a container of the closest node(s) to every node in graph G.
-
-		\param	node_vector		The operand graph (in the form of a node vector) to determine closest nodes
-
-		\param	p_desired		Nodes to compare with nodes in node_vector
-
-		\returns	A vector<Node> with the same node count as that of nodes -
-					of nodes in g that are closest to the nodes in vector nodes
-	*/
 	template <size_t dimension, typename floating_precision = float>
-	std::vector<Node> get_closest_nodes(const std::vector<Node>& node_vector, const std::vector<Node>& p_desired) {
-		int status = 0;
+	std::vector<Node> get_closest_nodes(const std::vector<Node>& node_vector, const std::vector<Node>& p_desired);
+}
 
-		// Closest nodes to the nodes in g (compared with parameter vector<Node> nodes)
-		// will be stored here.
-		std::vector<Node> closest_nodes(p_desired.size());
-		auto closest_nodes_it = closest_nodes.begin();
+/*!
+	\brief		Returns a container of the closest node(s) to every node in graph G.
 
-		// Via node_vector, 
-		// - find the node closest to p_desired[0], output that node ID
-		// - find the node closest to p_desired[1], output that node ID
-		// Output nodes are stored (and will come from) closest_nodes
+	\param	node_vector		The operand graph (in the form of a node vector) to determine closest nodes
 
-		// Create an iterator from node_vector. Starts at the first node at node_vector
-		auto node_vector_it = node_vector.begin();
+	\param	p_desired		Nodes to compare with nodes in node_vector
 
-		// Create an iterator from p_desired. Starts at the first node at p_desired.
-		auto p_desired_it = p_desired.begin();
+	\returns	A vector<Node> with the same node count as that of nodes -
+				of nodes in g that are closest to the nodes in vector nodes
+*/
+template <size_t dimension, typename floating_precision = float>
+std::vector<HF::SpatialStructures::Node> CInterfaceTests::get_closest_nodes(const std::vector<HF::SpatialStructures::Node>& node_vector,
+	const std::vector<HF::SpatialStructures::Node>& p_desired) {
+	using HF::SpatialStructures::Node;
 
-		// Convert the node at *p_desired to an array of float. Represents coordinates.
+	int status = 0;
+
+	// Closest nodes to the nodes in g (compared with parameter vector<Node> nodes)
+	// will be stored here.
+	std::vector<Node> closest_nodes(p_desired.size());
+	auto closest_nodes_it = closest_nodes.begin();
+
+	// Via node_vector, 
+	// - find the node closest to p_desired[0], output that node ID
+	// - find the node closest to p_desired[1], output that node ID
+	// Output nodes are stored (and will come from) closest_nodes
+
+	// Create an iterator from node_vector. Starts at the first node at node_vector
+	auto node_vector_it = node_vector.begin();
+
+	// Create an iterator from p_desired. Starts at the first node at p_desired.
+	auto p_desired_it = p_desired.begin();
+
+	// Convert the node at *p_desired to an array of float. Represents coordinates.
+	float comparison_node[3] = { p_desired_it->x, p_desired_it->y, p_desired_it->z };
+
+	// Compute the distance between the first node in the graph and the first comparison node.
+	float graph_node[3] = { node_vector_it->x, node_vector_it->y, node_vector_it->z };
+	float saved_distance = euclidean_distance<dimension, floating_precision>(comparison_node, graph_node);
+
+	// We do not need to compare/recalculate the distance between the first node in the graph,
+	// and the first comparison node, so we advance node_vector_it.
+	++node_vector_it;
+
+	while (p_desired_it < p_desired.end()) {
+		// This is the current comparison node we are iterating over.
 		float comparison_node[3] = { p_desired_it->x, p_desired_it->y, p_desired_it->z };
 
-		// Compute the distance between the first node in the graph and the first comparison node.
-		float graph_node[3] = { node_vector_it->x, node_vector_it->y, node_vector_it->z };
-		float saved_distance = euclidean_distance<dimension, floating_precision>(comparison_node, graph_node);
+		// If this is the first iteration of the top level while-loop:
+		// Calculate the distance between the second node in the graph and the first comparison node.
+		//
+		// For every iteration after:
+		// Calculate the distance between the first node in the graph and the nth comparison node.
+		saved_distance = euclidean_distance<dimension, floating_precision>(comparison_node, graph_node);
 
-		// We do not need to compare/recalculate the distance between the first node in the graph,
-		// and the first comparison node, so we advance node_vector_it.
-		++node_vector_it;
+		while (node_vector_it < node_vector.end()) {
+			// This is the current node in the graph we are iterating over.
+			float graph_node[3] = { node_vector_it->x, node_vector_it->y, node_vector_it->z };
 
-		while (p_desired_it < p_desired.end()) {
-			// This is the current comparison node we are iterating over.
-			float comparison_node[3] = { p_desired_it->x, p_desired_it->y, p_desired_it->z };
+			// Compute distance between graph node and comparison node.
+			float calculated_distance = euclidean_distance<dimension, floating_precision>(comparison_node, graph_node);
 
-			// If this is the first iteration of the top level while-loop:
-			// Calculate the distance between the second node in the graph and the first comparison node.
+			// If distance computed is less than the current shortest distance cached,
+			// (and the current graph node is not the current comparison node) --
+			// we reassign a new shortest distance for the parameter node,
+			// as well as the ID of the closest node.
 			//
-			// For every iteration after:
-			// Calculate the distance between the first node in the graph and the nth comparison node.
-			saved_distance = euclidean_distance<dimension, floating_precision>(comparison_node, graph_node);
-
-			while (node_vector_it < node_vector.end()) {
-				// This is the current node in the graph we are iterating over.
-				float graph_node[3] = { node_vector_it->x, node_vector_it->y, node_vector_it->z };
-
-				// Compute distance between graph node and comparison node.
-				float calculated_distance = euclidean_distance<dimension, floating_precision>(comparison_node, graph_node);
-
-				// If distance computed is less than the current shortest distance cached,
-				// (and the current graph node is not the current comparison node) --
-				// we reassign a new shortest distance for the parameter node,
-				// as well as the ID of the closest node.
-				//
-				// The closest node to p_desired[index] is closest_nodes[index].
-				//
-				if ((calculated_distance < saved_distance) && p_desired_it->id != node_vector_it->id) {
-					saved_distance = calculated_distance;
-					*closest_nodes_it = *node_vector_it;
-				}
-
-				++node_vector_it;
+			// The closest node to p_desired[index] is closest_nodes[index].
+			//
+			if ((calculated_distance < saved_distance) && p_desired_it->id != node_vector_it->id) {
+				saved_distance = calculated_distance;
+				*closest_nodes_it = *node_vector_it;
 			}
 
-			// Reset the graph node iterator to the beginning,
-			// prepare for another comparison.
-			node_vector_it = node_vector.begin();
-
-			// Reinitialize graph_node so that the distance between the next comparison node
-			// and the first node in the graph is calculated.
-			graph_node[0] = node_vector_it->x;
-			graph_node[1] = node_vector_it->y;
-			graph_node[2] = node_vector_it->z;
-
-			// These are incremented one after another,
-			// because we want to store the closest node 
-			// for the current node at p_desired_it.
-			++closest_nodes_it;
-			++p_desired_it;
+			++node_vector_it;
 		}
 
-		return closest_nodes;
+		// Reset the graph node iterator to the beginning,
+		// prepare for another comparison.
+		node_vector_it = node_vector.begin();
+
+		// Reinitialize graph_node so that the distance between the next comparison node
+		// and the first node in the graph is calculated.
+		graph_node[0] = node_vector_it->x;
+		graph_node[1] = node_vector_it->y;
+		graph_node[2] = node_vector_it->z;
+
+		// These are incremented one after another,
+		// because we want to store the closest node 
+		// for the current node at p_desired_it.
+		++closest_nodes_it;
+		++p_desired_it;
 	}
+
+	return closest_nodes;
 }
+
 
 /*!
 	\brief  Program execution begins and ends here.
@@ -658,7 +664,7 @@ void CInterfaceTests::path_plan_costs(HINSTANCE dll_hf) {
 		std::cout << node.id << " ";
 	}
 	std::cout << "]" << std::endl;
-	
+
 	// Compare each node with every node in the graph to determine the closest node for each.
 	auto closest_nodes_all = CInterfaceTests::get_closest_nodes<2>(*node_vector, *node_vector);
 
@@ -671,10 +677,10 @@ void CInterfaceTests::path_plan_costs(HINSTANCE dll_hf) {
 	const int end_id = closest_nodes[1].id;
 
 	// empty string means to use the cost type that the graph was constructed with
-	const char* cost_type = "";			
+	const char* cost_type = "";
 
 	// Will be set to the size of the found path. Output value of 0 means no path was constructed.
-	int path_size = -1;					
+	int path_size = -1;
 
 	// If a path is found, path will address memory for a Path.
 	// DestroyPath must be called on path when finished with use.
@@ -695,7 +701,7 @@ void CInterfaceTests::path_plan_costs(HINSTANCE dll_hf) {
 	else {
 		if (path) {
 			std::cout << "CreatePath stored path successfully - path stored at address " << path << ", code: " << status << std::endl;
-		
+
 			// Get total path cost & output the result.
 			auto path_sum = 0.0f;
 			for (auto& member : path->members) { path_sum += member.cost; }
@@ -707,7 +713,7 @@ void CInterfaceTests::path_plan_costs(HINSTANCE dll_hf) {
 	// TODO: plot the graph.
 	// See Python documentation, "Path Plan with Different Costs" example
 	//
-	
+
 	// We don't need path anymore, so let's free the memory it addresses.
 	status = DestroyPath(path);
 
