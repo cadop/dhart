@@ -132,6 +132,104 @@ float_precision euclidean_distance(float_precision point_a[], float_precision po
 	return std::sqrt(sum);
 }
 
+namespace CInterfaceTests {
+	using HF::SpatialStructures::Node;
+	using HF::SpatialStructures::Graph;
+
+	/*!
+		\brief		Returns a container of the closest node(s) to every node in graph G.
+
+		\param	node_vector		The operand graph (in the form of a node vector) to determine closest nodes
+
+		\param	p_desired		Nodes to compare with nodes in node_vector
+
+		\returns	A vector<Node> with the same node count as that of nodes -
+					of nodes in g that are closest to the nodes in vector nodes
+	*/
+	template <size_t dimension, typename floating_precision = float>
+	std::vector<Node> get_closest_nodes(const std::vector<Node>& node_vector, const std::vector<Node>& p_desired) {
+		int status = 0;
+
+		// Closest nodes to the nodes in g (compared with parameter vector<Node> nodes)
+		// will be stored here.
+		std::vector<Node> closest_nodes(p_desired.size());
+		auto closest_nodes_it = closest_nodes.begin();
+
+		// Via node_vector, 
+		// - find the node closest to p_desired[0], output that node ID
+		// - find the node closest to p_desired[1], output that node ID
+		// Output nodes are stored (and will come from) closest_nodes
+
+		// Create an iterator from node_vector. Starts at the first node at node_vector
+		auto node_vector_it = node_vector.begin();
+
+		// Create an iterator from p_desired. Starts at the first node at p_desired.
+		auto p_desired_it = p_desired.begin();
+
+		// Convert the node at *p_desired to an array of float. Represents coordinates.
+		float comparison_node[3] = { p_desired_it->x, p_desired_it->y, p_desired_it->z };
+
+		// Compute the distance between the first node in the graph and the first comparison node.
+		float graph_node[3] = { node_vector_it->x, node_vector_it->y, node_vector_it->z };
+		float saved_distance = euclidean_distance<dimension, floating_precision>(comparison_node, graph_node);
+
+		// We do not need to compare/recalculate the distance between the first node in the graph,
+		// and the first comparison node, so we advance node_vector_it.
+		++node_vector_it;
+
+		while (p_desired_it < p_desired.end()) {
+			// This is the current comparison node we are iterating over.
+			float comparison_node[3] = { p_desired_it->x, p_desired_it->y, p_desired_it->z };
+
+			// If this is the first iteration of the top level while-loop:
+			// Calculate the distance between the second node in the graph and the first comparison node.
+			//
+			// For every iteration after:
+			// Calculate the distance between the first node in the graph and the nth comparison node.
+			saved_distance = euclidean_distance<dimension, floating_precision>(comparison_node, graph_node);
+
+			while (node_vector_it < node_vector.end()) {
+				// This is the current node in the graph we are iterating over.
+				float graph_node[3] = { node_vector_it->x, node_vector_it->y, node_vector_it->z };
+
+				// Compute distance between graph node and comparison node.
+				float calculated_distance = euclidean_distance<dimension, floating_precision>(comparison_node, graph_node);
+
+				// If distance computed is less than the current shortest distance cached,
+				// we reassign a new shortest distance for the parameter node,
+				// as well as the ID of the closest node.
+				//
+				// The closest node to p_desired[index] is closest_nodes[index].
+				//
+				if (calculated_distance < saved_distance) {
+					saved_distance = calculated_distance;
+					*closest_nodes_it = *node_vector_it;
+				}
+
+				++node_vector_it;
+			}
+
+			// Reset the graph node iterator to the beginning,
+			// prepare for another comparison.
+			node_vector_it = node_vector.begin();
+
+			// Reinitialize graph_node so that the distance between the next comparison node
+			// and the first node in the graph is calculated.
+			graph_node[0] = node_vector_it->x;
+			graph_node[1] = node_vector_it->y;
+			graph_node[2] = node_vector_it->z;
+
+			// These are incremented one after another,
+			// because we want to store the closest node 
+			// for the current node at p_desired_it.
+			++closest_nodes_it;
+			++p_desired_it;
+		}
+
+		return closest_nodes;
+	}
+}
+
 /*!
 	\brief  Program execution begins and ends here.
 
@@ -537,63 +635,18 @@ void CInterfaceTests::path_plan_costs(HINSTANCE dll_hf) {
 	// - find the node closest to p_desired[1], output that node ID
 	// Output nodes are stored (and will come from) closest_nodes
 
-	// We are looking find the closest node for two nodes.
-	const int count_to_find_closest = 2;
-
 	// Start, end point is {x, y}, so size of inner array is 2.
-	float p_desired[count_to_find_closest][2] = { {-30.0f, 0.0f}, {30.0f, 0.0f} };
-	
-	// Create an iterator from node_vector. Starts at the first node at node_vector
-	auto node_vector_it = node_vector->begin();
+	HF::SpatialStructures::Node n0 = { -30.0f, 0.0f };
+	HF::SpatialStructures::Node n1 = { 30.0f, 0.0f };
+	auto p_desired = std::vector<HF::SpatialStructures::Node>{ n0, n1 };
 
-	// Convert the node at *node_vector_it to a 2D array of float. Represents (x, y) coordinates.
-	float arr_node[2] = { node_vector_it->x, node_vector_it->y };
-
-	// Compute distances from operand node(s) to first node in node_vector.
-	float distance_p0 = euclidean_distance<2>(p_desired[0], arr_node);
-	float distance_p1 = euclidean_distance<2>(p_desired[1], arr_node);
-
-	// IDs of the closest nodes to the nodes in p_desired will be stored here.
-	std::array<int, count_to_find_closest> closest_nodes;
-
-	// Initialize closest node IDs to ID of first node in node_vector.
-	closest_nodes[0] = node_vector_it->id;
-	closest_nodes[1] = node_vector_it->id;
-
-	// Increment iterator so we do not deal with the first node in node_vector.
-	++node_vector_it;
-
-	while (node_vector_it < node_vector->end()) {
-		// This is the current node we are iterating over.
-		float arr_node[2] = { node_vector_it->x, node_vector_it->y };
-
-		// Compute distance from parameter node(s) and current node in iteration.
-		float distance_curr_p0 = euclidean_distance<2>(p_desired[0], arr_node);
-		float distance_curr_p1 = euclidean_distance<2>(p_desired[1], arr_node);
-
-		//
-		// If distance computed is less than the current shortest distance cached,
-		// we reassign a new shortest distance for the parameter node,
-		// as well as the ID of the closest node.
-		//
-		// The closest node to p_desired[index] is closest_nodes[index].
-		//
-		if (distance_curr_p0 < distance_p0) {
-			distance_p0 = distance_curr_p0;
-			closest_nodes[0] = node_vector_it->id;
-		}
-
-		if (distance_curr_p1 < distance_p1) {
-			distance_p1 = distance_curr_p1;
-			closest_nodes[1] = node_vector_it->id;
-		}
-
-		++node_vector_it;
-	}
+	// Get the nodes that are closest to the nodes in p_desired from *node_vector (which is from *graph) 
+	std::vector<HF::SpatialStructures::Node> closest_nodes 
+		= CInterfaceTests::get_closest_nodes<2>(*node_vector, p_desired);
 
 	std::cout << "Closest Node:\t[ ";
-	for (auto node_id : closest_nodes) {
-		std::cout << node_id << " ";
+	for (auto node : closest_nodes) {
+		std::cout << node.id << " ";
 	}
 	std::cout << "]" << std::endl;
 
