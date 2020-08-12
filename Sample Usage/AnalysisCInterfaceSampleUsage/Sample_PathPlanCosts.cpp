@@ -243,7 +243,6 @@ std::vector<HF::SpatialStructures::Node> CInterfaceTests::get_closest_nodes(cons
 	return closest_nodes;
 }
 
-
 /*!
 	\brief  Program execution begins and ends here.
 
