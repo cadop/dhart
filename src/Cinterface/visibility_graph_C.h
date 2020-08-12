@@ -5,6 +5,10 @@
 	\author		TBA
 	\date		07 Aug 2020
 */
+
+#ifndef VISIBILITY_GRAPH_C_H
+#define VISIBILITY_GRAPH_C_H
+
 #include <cinterface_utils.h>
 #include <raytracer_c.h>
 
@@ -220,3 +224,5 @@ C_INTERFACE CreateVisibilityGraphGroupToGroup(
 );
 
 /**@}*/
+
+#endif /* VISIBILITY_GRAPH_C_H */
