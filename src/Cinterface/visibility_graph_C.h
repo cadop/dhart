@@ -47,7 +47,7 @@ namespace HF {
 
 	\see		\ref raytracer_setup (How to create a BVH), \ref raytracer_teardown (How to destroy a BVH)
 
-	You must first <b>load an .obj file</b> and <b>create a BVH</b> first.<br>
+	You must <b>load an .obj file</b> and <b>create a BVH</b> first.<br>
 	Begin by reviewing the example at \ref raytracer_setup before proceeding below.
 
 	First, set up the parameters for the visibility graph.
@@ -109,7 +109,7 @@ C_INTERFACE CreateVisibilityGraphAllToAll(
 
 	\see		\ref raytracer_setup (How to create a BVH), \ref raytracer_teardown (How to destroy a BVH)
 
-	You must first <b>load an .obj file</b> and <b>create a BVH</b> first.<br>
+	You must <b>load an .obj file</b> and <b>create a BVH</b> first.<br>
 	Begin by reviewing the example at \ref raytracer_setup before proceeding below.
 
 	First, set up the parameters for the visibility graph.
@@ -175,7 +175,7 @@ C_INTERFACE CreateVisibilityGraphAllToAllUndirected(
 
 	\see		\ref raytracer_setup (How to create a BVH), \ref raytracer_teardown (How to destroy a BVH)
 
-	You must first <b>load an .obj file</b> and <b>create a BVH</b> first.<br>
+	You must <b>load an .obj file</b> and <b>create a BVH</b> first.<br>
 	Begin by reviewing the example at \ref raytracer_setup before proceeding below.
 
 	First, set up the parameters for the visibility graph.
