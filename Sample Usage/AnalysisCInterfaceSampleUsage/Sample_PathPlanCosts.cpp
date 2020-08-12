@@ -96,6 +96,13 @@ const enum COST_ALG_KEY { CROSS_SLOPE, ENERGY_EXPENDITURE };
 */
 const std::vector<std::string> Key_To_Costs{ "CrossSlope", "EnergyExpenditure" };
 
+/*! 
+	\brief	Get the cost algorithm title from it's associated enum. 
+*/
+inline std::string AlgorithmCostTitle(COST_ALG_KEY key) {
+	return Key_To_Costs[key];
+}
+
 /*!
 	\summary Determines the distance between two points, point_a and point_b
 	@tparam dimension of a real coordinate space R^n, where n is dimension, an integral value (i.e. R^2 is 2D, R^3 is 3D)
@@ -587,7 +594,7 @@ void CInterfaceTests::path_plan_costs(HINSTANCE dll_hf) {
 		std::cerr << "Error at GenerateGraph, code: " << status << std::endl;
 	}
 	else {
-		std::cout << "Generate graph ran successfully - graph stored at address " << graph << std::endl;
+		std::cout << "Generate graph ran successfully - graph stored at address " << graph << ", code: " << status << std::endl;
 	}
 
 	// Always compress the graph after generating a graph/adding new edges
@@ -638,11 +645,12 @@ void CInterfaceTests::path_plan_costs(HINSTANCE dll_hf) {
 	// Start, end point is {x, y}, so size of inner array is 2.
 	HF::SpatialStructures::Node n0 = { -30.0f, 0.0f };
 	HF::SpatialStructures::Node n1 = { 30.0f, 0.0f };
+
+	// Combine start and end points (nodes) into one container.
 	auto p_desired = std::vector<HF::SpatialStructures::Node>{ n0, n1 };
 
 	// Get the nodes that are closest to the nodes in p_desired from *node_vector (which is from *graph) 
-	std::vector<HF::SpatialStructures::Node> closest_nodes 
-		= CInterfaceTests::get_closest_nodes<2>(*node_vector, p_desired);
+	auto closest_nodes = CInterfaceTests::get_closest_nodes<2>(*node_vector, p_desired);
 
 	std::cout << "Closest Node:\t[ ";
 	for (auto node : closest_nodes) {
@@ -650,48 +658,106 @@ void CInterfaceTests::path_plan_costs(HINSTANCE dll_hf) {
 	}
 	std::cout << "]" << std::endl;
 
-	/*
-		from scipy.spatial.distance import cdist
-		closest_nodes_all = cdist(graph.get_node_points(), graph.get_node_points())
-		# >>>
+	//
+	// Call Dijkstra's Shortest Path Algorithm
+	//
 
-		# Define a start and end node to use for the path (from, to)
-		start_id, end_id = closest_nodes[0], closest_nodes[1]
-		# >>>
+	// Retrieve the IDs from the nodes closest to the nodes in p_desired.
+	const int start_id = closest_nodes[0].id;
+	const int end_id = closest_nodes[1].id;
 
-		# Call the shortest path
-		path = DijkstraShortestPath(graph, start_id, end_id)
-		# >>>
+	// empty string means to use the cost type that the graph was constructed with
+	const char* cost_type = "";			
 
-		# As the cost array is numpy, simple operations to sum the total cost can be calculated
-		path_sum = np.sum(path['cost_to_next'])
-		print('Total path cost: ', path_sum)
+	// Will be set to the size of the found path. Output value of 0 means no path was constructed.
+	int path_size = -1;					
 
-		# Total path cost:  62.02023
-	*/
+	// If a path is found, path will address memory for a Path.
+	// DestroyPath must be called on path when finished with use.
+	HF::SpatialStructures::Path* path = nullptr;
 
-	/*
-		# Get the x,y,z values of the nodes at the given path ids
-		path_xyz = np.take(nodes[['x','y','z']], path['id'])
-		# >>>
+	// Will address the underlying buffer of a member container within *path.
+	// When DestroyPath is called on path, path_data will no longer be valid.
+	// Likewise, if path remains null after attempting to create a path,
+	// path_data will also be null.
+	HF::SpatialStructures::PathMember* path_data = nullptr;
 
-		# Extract the xyz locations of the nodes
-		x_nodes, y_nodes, z_nodes = nodes['x'], nodes['y'], nodes['z']
-		# >>>
+	// Create a path.
+	status = CreatePath(graph, start_id, end_id, cost_type, &path_size, &path, &path_data);
 
-		# Extract the xyz locations of the path nodes
-		x_path, y_path, z_path = path_xyz['x'], path_xyz['y'], path_xyz['z']
-		# >>>
+	if (status != 1) {
+		std::cerr << "Error at CreatePath, code: " << status << std::endl;
+	}
+	else {
+		if (path) {
+			std::cout << "CreatePath stored path successfully - path stored at address " << path << ", code: " << status << std::endl;
+		
+			// Get total path cost & output the result.
+			auto path_sum = 0.0f;
+			for (auto& member : path->members) { path_sum += member.cost; }
+			std::cout << "Total path cost: " << path_sum << std::endl;
+		}
+	}
 
-		# Plot the graph
-		plt.scatter(x_nodes, y_nodes, c=z_nodes, alpha=0.5) # doctest: +SKIP
-		plt.plot(x_path,y_path, c="red", marker='.',linewidth=3) # doctest: +SKIP
-		plt.show() # doctest: +SKIP
-	*/
+	//
+	// TODO: plot the graph.
+	// See Python documentation, "Path Plan with Different Costs" example
+	//
+	
+	// We don't need path anymore, so let's free the memory it addresses.
+	status = DestroyPath(path);
+
+	if (status != 1) {
+		std::cerr << "Error at DestroyPath, code: " << status << std::endl;
+	}
+
+	// Calculate energy expenditure of the graph edges,
+	// which internally allows access to this weight.
+	status = CalculateAndStoreEnergyExpenditure(graph);
+
+	if (status != 1) {
+		std::cout << "Error at CalculateAndStoreEnergyExpenditure, code: " << status << std::endl;
+	}
+
+	// Get the cost type key.
+	auto energy_cost_key = COST_ALG_KEY::ENERGY_EXPENDITURE;
+
+	// Retrieve another path from the same graph, with energy expenditure as the cost type.
+	HF::SpatialStructures::Path* energy_path = nullptr;
+	HF::SpatialStructures::PathMember* energy_path_data = nullptr;
+
+	// Create a path; this time -- with energy expenditure as the cost type.
+	status = CreatePath(graph, start_id, end_id, AlgorithmCostTitle(energy_cost_key).c_str(), &path_size, &energy_path, &energy_path_data);
+
+	if (status != 1) {
+		std::cerr << "Error at CreatePath, code: " << status << std::endl;
+	}
+	else {
+		if (path) {
+			std::cout << "CreatePath stored path successfully - path stored at address " << energy_path << ", code: " << status << std::endl;
+
+			// Get total path cost & output the result.
+			auto path_sum = 0.0f;
+			for (auto& member : energy_path->members) { path_sum += member.cost; }
+			std::cout << "Total path cost: " << path_sum << std::endl;
+		}
+	}
+
+	//
+	// TODO: plot the graph.
+	// See Python documentation, "Path Plan with Different Costs" example
+	//
 
 	//
 	// Memory resource cleanup.
 	//
+
+	// destroy Path (energy_path)
+	status = DestroyPath(energy_path);
+
+	if (status != 1) {
+		std::cerr << "Error at DestroyPath, code: " << status << std::endl;
+	}
 
 	// destroy vector<Node>
 	status = DestroyNodes(node_vector);
@@ -699,11 +765,6 @@ void CInterfaceTests::path_plan_costs(HINSTANCE dll_hf) {
 	if (status != 1) {
 		std::cerr << "Error at DestroyNodes, code: " << status << std::endl;
 	}
-
-	// destroy Path
-	//
-	// TODO
-	//
 
 	// destroy graph
 	status = DestroyGraph(graph);
