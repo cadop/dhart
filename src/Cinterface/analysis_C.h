@@ -6,6 +6,9 @@
 	\date		11 Aug 2020
 */
 
+#ifndef ANALYSIS_C_H
+#define ANALYSIS_C_H
+
 #include <cinterface_utils.h>
 #include <vector>
 #include <array>
@@ -114,3 +117,5 @@ C_INTERFACE GenerateGraph(
 );
 
 /**@}*/
+
+#endif /* ANALYSIS_C_H */
