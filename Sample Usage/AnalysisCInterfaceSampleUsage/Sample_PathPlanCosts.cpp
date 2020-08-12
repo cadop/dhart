@@ -203,12 +203,13 @@ namespace CInterfaceTests {
 				float calculated_distance = euclidean_distance<dimension, floating_precision>(comparison_node, graph_node);
 
 				// If distance computed is less than the current shortest distance cached,
+				// (and the current graph node is not the current comparison node) --
 				// we reassign a new shortest distance for the parameter node,
 				// as well as the ID of the closest node.
 				//
 				// The closest node to p_desired[index] is closest_nodes[index].
 				//
-				if (calculated_distance < saved_distance) {
+				if ((calculated_distance < saved_distance) && p_desired_it->id != node_vector_it->id) {
 					saved_distance = calculated_distance;
 					*closest_nodes_it = *node_vector_it;
 				}
@@ -657,6 +658,9 @@ void CInterfaceTests::path_plan_costs(HINSTANCE dll_hf) {
 		std::cout << node.id << " ";
 	}
 	std::cout << "]" << std::endl;
+	
+	// Compare each node with every node in the graph to determine the closest node for each.
+	auto closest_nodes_all = CInterfaceTests::get_closest_nodes<2>(*node_vector, *node_vector);
 
 	//
 	// Call Dijkstra's Shortest Path Algorithm
