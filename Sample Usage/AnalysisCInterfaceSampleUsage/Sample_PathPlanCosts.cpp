@@ -290,9 +290,9 @@ int main(int argc, const char* argv[]) {
 	const std::vector<std::string> Key_To_Costs{ "CrossSlope", "EnergyExpenditure" };
 */
 void CInterfaceTests::path_plan_costs(HINSTANCE dll_hf) {
-	///
-	///	Load all functions from dll_hf to be used.
-	///
+	//
+	//	Load all functions from dll_hf to be used.
+	//
 
 	// typedefs for brevity of syntax
 	typedef int (*p_LoadOBJ)(const char*, int, float, float, float, std::vector<HF::Geometry::MeshInfo>**);
@@ -332,7 +332,7 @@ void CInterfaceTests::path_plan_costs(HINSTANCE dll_hf) {
 	auto CreateRaytracer = reinterpret_cast<p_CreateRaytracer>(GetProcAddress(dll_hf, "CreateRaytracer"));
 	auto GenerateGraph = reinterpret_cast<p_GenerateGraph>(GetProcAddress(dll_hf, "GenerateGraph"));
 	auto GetAllNodesFromGraph = reinterpret_cast<p_GetAllNodesFromGraph>(GetProcAddress(dll_hf, "GetAllNodesFromGraph"));
-	auto GetSizeOfNodeVector = reinterpret_cast<p_GetAllNodesFromGraph>(GetProcAddress(dll_hf, "GetSizeOfNodeVector"));
+	auto GetSizeOfNodeVector = reinterpret_cast<p_GetSizeOfNodeVector>(GetProcAddress(dll_hf, "GetSizeOfNodeVector"));
 	auto GetNodeID = reinterpret_cast<p_GetNodeID>(GetProcAddress(dll_hf, "GetNodeID"));
 	auto Compress = reinterpret_cast<p_Compress>(GetProcAddress(dll_hf, "Compress"));
 	auto CreatePath = reinterpret_cast<p_CreatePath>(GetProcAddress(dll_hf, "CreatePath"));
@@ -346,9 +346,9 @@ void CInterfaceTests::path_plan_costs(HINSTANCE dll_hf) {
 	auto DestroyRayTracer = reinterpret_cast<p_DestroyRayTracer>(GetProcAddress(dll_hf, "DestroyRayTracer"));
 	auto DestroyMeshInfo = reinterpret_cast<p_DestroyMeshInfo>(GetProcAddress(dll_hf, "DestroyMeshInfo"));
 
-	///
-	/// Example begins here
-	///
+	//
+	// Example begins here
+	//
 	std::cout << "\n--- Path Plan with Different Costs example ---\n" << std::endl;
 
 	// Status code variable, value returned by C Interface functions
@@ -356,7 +356,6 @@ void CInterfaceTests::path_plan_costs(HINSTANCE dll_hf) {
 	int status = 0;
 
 	// Get model path
-
 	// This is a relative path to your obj file.
 	const std::string obj_path_str = "energy_blob_zup.obj";
 
@@ -368,10 +367,7 @@ void CInterfaceTests::path_plan_costs(HINSTANCE dll_hf) {
 	// and it must be freed using DestroyMeshInfo.
 	std::vector<HF::Geometry::MeshInfo>* loaded_obj = nullptr;
 
-	// Load mesh
-	// The array rot will rotate the mesh 90 degrees with respect to the x-axis,
-	// i.e. makes the mesh 'z-up'.
-	//
+	// Load mesh.
 	// Notice that we pass the address of the loaded_obj pointer
 	// to LoadOBJ. We do not want to pass loaded_obj by value, but by address --
 	// so that we can dereference it and assign it to the address of (pointer to)
@@ -389,7 +385,6 @@ void CInterfaceTests::path_plan_costs(HINSTANCE dll_hf) {
 	}
 
 	// Create BVH
-
 	// We now declare a pointer to EmbreeRayTracer, named bvh.
 	// Note that we pass the address of this pointer to CreateRaytracer.
 	//
@@ -407,13 +402,170 @@ void CInterfaceTests::path_plan_costs(HINSTANCE dll_hf) {
 		std::cout << "CreateRaytracer created EmbreeRayTracer successfully into bvh at address " << bvh << ", code: " << status << std::endl;
 	}
 
-	///
-	/// TODO implementation
-	///
+	//
+	// Set the graph parameters
+	//
 
-	///
-	/// Memory resource cleanup.
-	///
+	// Define start point.
+	// These are Cartesian coordinates.
+	// If not above solid ground, no nodes will be generated.
+	const std::array<float, 3> start_point { -30.0f, 0.0f, 20.0f };
+
+	// Define spacing.
+	// This is the spacing between nodes, with respect to each axis.
+	// Lower values create more nodes, yielding a higher resolution graph.
+	const std::array<float, 3> spacing { 2.0f, 2.0f, 180.0f };
+
+	// Value of - 1 will generate infinitely many nodes.
+	// Final node count may be greater than this value.
+	const int max_nodes = 5000;
+
+	const int up_step = 30;					// Maximum step height the graph can traverse. 
+											// Steps steeper than this are considered to be inaccessible.
+
+	const int down_step = 70;				// Maximum step down the graph can traverse.
+											// Steps steeper than this are considered to be inaccessible.
+
+	const int up_slope = 60;				// Maximum upward slope the graph can traverse (in degrees).
+											// Slopes steeper than this are considered to be inaccessible.
+
+	const int down_slope = 60;				// Maximum downward slope the graph can traverse (in degrees).
+											// Slopes steeper than this are considered to be inaccessible.
+
+	const int max_step_connections = 1;		// Multiplier for number of children to generate for each node.
+											// Increasing this value increases the number of edges in the graph,
+											// therefore increasing the memory footprint of the algorithm overall.
+
+	const int core_count = -1;				// CPU core count. A value of (-1) will use all available cores.
+
+	// Generate graph.
+	// Notice that we pass the address of the graph pointer into GenerateGraph.
+	//
+	// GenerateGraph will assign the deferenced address to a pointer that points
+	// to memory on the free store. We will call DestroyGraph to release the memory resources later on.
+	HF::SpatialStructures::Graph* graph = nullptr;
+
+	status = GenerateGraph(bvh, start_point.data(), spacing.data(), max_nodes, 
+		                   up_step, down_step, up_slope, down_slope, 
+						   max_step_connections, core_count, &graph);
+
+	if (status != 1) {
+		std::cerr << "Error at GenerateGraph, code: " << status << std::endl;
+	}
+	else {
+		std::cout << "Generate graph ran successfully - graph stored at address " << graph << std::endl;
+	}
+
+	// Always compress the graph after generating a graph/adding new edges
+	status = Compress(graph);
+
+	if (status != 1) {
+		// Error!
+		std::cerr << "Error at Compress, code: " << status << std::endl;
+	}
+	
+	// Get nodes.
+	//
+	// The address of the local variable node_vector will be passed to GetAllNodesFromGraph;
+	// it will be dereferenced inside that function and assigned memory via operator new.
+	//
+	// We will have to call DestroyNodes on node_vector to properly release this memory.
+	// node_vector_data points to the internal buffer that resides within *(node_vector).
+	//
+	// When we call DestroyNodes, node_vector_data's memory will also be released.
+	std::vector<HF::SpatialStructures::Node>* node_vector = nullptr;
+	HF::SpatialStructures::Node* node_vector_data = nullptr;
+
+	status = GetAllNodesFromGraph(graph, &node_vector, &node_vector_data);
+
+	if (status != 1) {
+		// Error!
+		std::cerr << "Error at GetAllNodesFromGraph, code: " << status << std::endl;
+	}
+
+	// Get size of node vector
+	int node_vector_size = -1;
+	status = GetSizeOfNodeVector(node_vector, &node_vector_size);
+
+	if (status != 1) {
+		// Error!
+		std::cerr << "Error at GetSizeOfNodeVector code: " << status << std::endl;
+	}
+
+	// Print number of nodes in the graph
+	const int max_node = node_vector_size - 1;	// This is the max index of *node_vector
+	std::cout << "Graph Generated with " << node_vector_size << " nodes" << std::endl;
+
+	/*
+		# Define a start and end point in x,y
+		p_desired = np.array([[-30,0],[30,0]])
+		closest_nodes = graph.get_closest_nodes(p_desired,z=False)
+		print("Closest Node: ", closest_nodes)
+
+		# Closest Node:  [  0 795]
+	*/
+
+	/*
+		from scipy.spatial.distance import cdist
+		closest_nodes_all = cdist(graph.get_node_points(), graph.get_node_points())
+		# >>>
+
+		# Define a start and end node to use for the path (from, to)
+		start_id, end_id = closest_nodes[0], closest_nodes[1]
+		# >>>
+
+		# Call the shortest path
+		path = DijkstraShortestPath(graph, start_id, end_id)
+		# >>>
+
+		# As the cost array is numpy, simple operations to sum the total cost can be calculated
+		path_sum = np.sum(path['cost_to_next'])
+		print('Total path cost: ', path_sum)
+
+		# Total path cost:  62.02023
+	*/
+
+	/*
+		# Get the x,y,z values of the nodes at the given path ids
+		path_xyz = np.take(nodes[['x','y','z']], path['id'])
+		# >>>
+
+		# Extract the xyz locations of the nodes
+		x_nodes, y_nodes, z_nodes = nodes['x'], nodes['y'], nodes['z']
+		# >>>
+
+		# Extract the xyz locations of the path nodes
+		x_path, y_path, z_path = path_xyz['x'], path_xyz['y'], path_xyz['z']
+		# >>>
+
+		# Plot the graph
+		plt.scatter(x_nodes, y_nodes, c=z_nodes, alpha=0.5) # doctest: +SKIP
+		plt.plot(x_path,y_path, c="red", marker='.',linewidth=3) # doctest: +SKIP
+		plt.show() # doctest: +SKIP
+	*/
+
+	//
+	// Memory resource cleanup.
+	//
+
+	// destroy vector<Node>
+	status = DestroyNodes(node_vector);
+
+	if (status != 1) {
+		std::cerr << "Error at DestroyNodes, code: " << status << std::endl;
+	}
+
+	// destroy Path
+	//
+	// TODO
+	//
+
+	// destroy graph
+	status = DestroyGraph(graph);
+
+	if (status != 1) {
+		std::cerr << "Error at DestroyGraph, code: " << status << std::endl;
+	}
 
 	// destroy raytracer
 	status = DestroyRayTracer(bvh);
