@@ -1,3 +1,14 @@
+/*!
+	\file		pathfinder_C.h
+	\brief		Header file for C Interface pathfinding functionality
+
+	\author		TBA
+	\date		12 Aug 2020
+*/
+
+#ifndef PATHFINDER_C_H
+#define PATHFINDER_C_H
+
 #include <cinterface_utils.h>
 
 #define C_INTERFACE extern "C" __declspec(dllexport) int
@@ -7,10 +18,11 @@ namespace HF {
 	namespace Pathfinding { class BoostGraph; }
 }
 
-/**
-* @defgroup Pathfinding
-Find paths between differnt points in a graph.
-* @{
+/*!
+	\defgroup	Pathfinding
+	Find paths between different points in a graph.
+
+	@{
 */
 
 /*!
@@ -87,23 +99,28 @@ C_INTERFACE CreatePath(
 	HF::SpatialStructures::PathMember** out_data
 );
 
-
 /*!
 	\brief	 Find multiple shortest paths in paralllel.	
 	
 	\param	g			The graph to conduct the search on
+
 	\param	start		An array of ids for starting nodes.
 						Length must match that of end and all the IDS must belong to
 						nodes that already exist within the graph.
+
 	\param	end			An array of ids for ending nodes.
 						Length must match that of start and all the IDS must belong to
 						nodes that already exist within the graph.
+
 	\param	cost_name	The name of the cost type to use for generating paths. Leaving as an empty string
 						will use the default cost of `g`.
+
 	\param	out_size	An empty array of integers that will be updated to contain the length of every path in `path_members`.
 						Paths that could not be generated will be left with a length of zero.
+
 	\param	out_path	Location for the the path pointer array to be created. Paths that could not be
 						generated will be left as null pointers.
+
 	\param	out_data	Location for the pathmember pointer array to be created. All path member pointers will
 						point to the PathMembers of the Path in paths at the same index. Paths that could not
 						be generated will be left as null pointers. 
@@ -191,14 +208,16 @@ C_INTERFACE CreatePaths(
 	int num_paths
 );
 
-
-/// <summary> Get the size of a path and a pointer to its path members. </summary>
-/// <param name="p"> Pointer to the path to get information from. This can handle null values. </param>
-/// <param name="out_member_ptr"> Pointer to the path to get information from. Should not be null. </param>
-/// <param name="out_size"> The number of path members in the path. </param>
-/// <returns> HF_STATUS::NO_PATH if the path is not valid. HF_OK otherwise. </returns>
-
 /*!
+	\brief		Get the size of a path and a pointer to its path members
+
+	\param		p					Pointer to the path to get information from. This can handle null values.
+	\param		out_member_ptr		Pointer to the path to get information from. Should not be null.
+	\param		out_size			The number of path members in the path. (PathMember count within *p)
+
+	\returns	HF_STATUS::OK on success,
+				HF_STATUS::NO_PATH if the path *p is invalid
+
 	\code
 		// Requires #include "pathfinder_C.h", #include "path.h"
 
@@ -236,10 +255,13 @@ C_INTERFACE GetPathInfo(
 	int* out_size
 );
 
-/// <summary> Delete a path. </summary>
-/// <param name="path_to_destroy"> Pointer to the path to delete. </param>
-
 /*!
+	\brief		Delete a path.
+
+	\param		path_to_destroy		Pointer to the path to delete.
+
+	\returns	HF_STATUS::OK on return.
+
 	\code
 		// Requires #include "pathfinder_C.h", #include "graph.h", #include "path.h", #include "path_finder.h"
 
@@ -273,37 +295,40 @@ C_INTERFACE GetPathInfo(
 C_INTERFACE DestroyPath(HF::SpatialStructures::Path* path_to_destroy);
 
 /*!
-		\brief	 Find a path from every node in a graph to every other node
+	\brief	 Find a path from every node in a graph to every other node
 
-		\param	g			The graph to conduct the search on
-		nodes that already exist within the graph.
-		\param	cost_name	The name of the cost type to use for generating paths. Leaving as an empty string
-							will use the default cost of `g`.
-		\param	out_size	An empty array of integers that will be updated to contain the length of every path in `path_members`.
-							Paths that could not be generated will be left with a length of zero.
-		\param	out_path	Location for the the path pointer array to be created.Paths that could not be
-							generated will be left as null pointers.
-		\param	out_data	Location for the pathmember pointer array to be created.All path member pointers will
-							point to the PathMembers of the Path in paths at the same index.Paths that could not
-							be generated will be left as null pointers.
+	\param	g			The graph to conduct the search on nodes that already exist within the graph.
 
-		\returns	`HF_STATUS::OK` The completed successfully and all postconditions were fulfilled.
-		\returns	`HF_STATUS::NO_COST` `cost_name` is not a valid cost type name
+	\param	cost_name	The name of the cost type to use for generating paths. Leaving as an empty string
+						will use the default cost of `g`.
 
-		\pre If `cost_type` is specified, `cost_type` must be the the key of an already existing cost in `g`
+	\param	out_size	An empty array of integers that will be updated to contain the length of every path in `path_members`.
+						Paths that could not be generated will be left with a length of zero.
 
-		\post 1) `out_path_members` will point to a vector of pointers to vectors of PathMembers with an element for every path.
-				  Paths that could not be generated will be set to null pointers.
-		\post 2) `out_paths` will point to a vector of pointers to paths with an element for every path. Paths that could not
-			     be generated will be set to null pointers.
-		\post 3) `out_sizes` will point to an array of integers containing the size of every path in `out_paths`.
-				 Paths that could not be generated will have a size of 0.
+	\param	out_path	Location for the the path pointer array to be created.
+						Paths that could not be generated will be left as null pointers.
 
-		\warning
-		The caller is responsible for freeing all of the memory allocated in `out_paths`and `out_sizes`. The contents of
-		`out_path_members` will automatically be deleted when the path they belong to is deleted.Do not try
-		to manually delete `out_path_members` or the path that owns it will throw a null pointer exception
-		when it is deleted.
+	\param	out_data	Location for the pathmember pointer array to be created.
+						All path member pointers will point to the PathMembers of the Path in paths at the same index.
+						Paths that could not be generated will be left as null pointers.
+
+	\returns	`HF_STATUS::OK` The completed successfully and all postconditions were fulfilled.
+	\returns	`HF_STATUS::NO_COST` `cost_name` is not a valid cost type name
+
+	\pre If `cost_type` is specified, `cost_type` must be the the key of an already existing cost in `g`
+
+	\post 1) `out_path_members` will point to a vector of pointers to vectors of PathMembers with an element for every path.
+			 Paths that could not be generated will be set to null pointers.
+	\post 2) `out_paths` will point to a vector of pointers to paths with an element for every path. Paths that could not
+			 be generated will be set to null pointers.
+	\post 3) `out_sizes` will point to an array of integers containing the size of every path in `out_paths`.
+		     Paths that could not be generated will have a size of 0.
+
+	\warning
+	The caller is responsible for freeing all of the memory allocated in `out_paths`and `out_sizes`. 
+	The contents of `out_path_members` will automatically be deleted when the path they belong to is deleted.
+	Do not try to manually delete `out_path_members` or the path that owns it will throw 
+	a null pointer exception when it is deleted.
 
 */
 C_INTERFACE CreateAllToAllPaths(
@@ -316,41 +341,40 @@ C_INTERFACE CreateAllToAllPaths(
 );
 
 /*!
-		\brief	 Calculate the distance and predecessor matricies for a graph
+	\brief	 Calculate the distance and predecessor matricies for a graph
 
-		\param	g			The graph calculate the distance and predecessor matricies for
+	\param	g				The graph calculate the distance and predecessor matricies for
 		
-		\param	cost_name	The name of the cost type to use for generating paths. Leaving as an empty string
+	\param	cost_name		The name of the cost type to use for generating paths. Leaving as an empty string
 							will use the default cost of `g`.
-		\param out_dist_vector Pointer to be updated with a vector containing the distance matrix
-		\param out_dist_data Pointer to be updated with a pointer to the data contained by `out_dist_vector`
+
+	\param out_dist_vector	Pointer to be updated with a vector containing the distance matrix
+	\param out_dist_data	Pointer to be updated with a pointer to the data contained by `out_dist_vector`
 		
-		\param out_pred_vector Pointer to be updated with the vector containing the predecessor matrix.
-		\param out_pred_data Pointer to be updated with the data of `out_pred_vector`
+	\param out_pred_vector	Pointer to be updated with the vector containing the predecessor matrix.
+	\param out_pred_data	Pointer to be updated with the data of `out_pred_vector`
 
-		\returns `HF_STATUS::OK` If the function completed successfully.
-		\returns `HF_STATUS::NO_COST` If `cost type` was not the key of any existing cost type in the graph.
+	\returns `HF_STATUS::OK`		If the function completed successfully.
+	\returns `HF_STATUS::NO_COST`	If `cost type` was not the key of any existing cost type in the graph.
 
-		\post 1) `out_dist_vector` is updated to contain a pointer to the newly created distance matrix
-		\post 2) `out_dist_data` is updated to contain a pointer to the data of `out_dist_vector`
-		\post 3) `out_pred_vector` is updated to contain a pointer to the newly created predecessor matrix
-		\post 4) `out_pred_data` is updated to contain a pointer to the data of `out_pred_vector`
+	\post 1) `out_dist_vector` is updated to contain a pointer to the newly created distance matrix
+	\post 2) `out_dist_data` is updated to contain a pointer to the data of `out_dist_vector`
+	\post 3) `out_pred_vector` is updated to contain a pointer to the newly created predecessor matrix
+	\post 4) `out_pred_data` is updated to contain a pointer to the data of `out_pred_vector`
 
-		\warning
-		It is the caller's responsibility to deallocate the distance and predecessor matricies by calling 
-		DestroyIntVector and DestroyFloatVector. Failing to do so WILL leak memory. Do NOT attempt to delete
-		the data arrays, they will automatically be deleted when their vectors are deleted. 
+	\warning
+	It is the caller's responsibility to deallocate the distance and predecessor matricies by calling 
+	DestroyIntVector and DestroyFloatVector. Failing to do so WILL leak memory. Do NOT attempt to delete
+	the data arrays, they will automatically be deleted when their vectors are deleted. 
 
-		\see DestroyFloatVector
-		\see DestroyIntVector
+	\see DestroyFloatVector
+	\see DestroyIntVector
 
-		\par Example
-		\snippet tests\src\Pathfinding.cpp EX_DistPred_C
-		\snippet tests\src\Pathfinding.cpp EX_DistPred_C_2
-		`Distance Matrix: [0.000000, 10.000000, 5.000000, 10.000000, 0.000000, 15.000000, -1.000000, -1.000000, 0.000000]`\n
-		`Predecessor Matrix: [0, 0, 0, 1, 1, 0, -1, -1, 2]`
-		
-
+	\par Example
+	\snippet tests\src\Pathfinding.cpp EX_DistPred_C
+	\snippet tests\src\Pathfinding.cpp EX_DistPred_C_2
+	`Distance Matrix: [0.000000, 10.000000, 5.000000, 10.000000, 0.000000, 15.000000, -1.000000, -1.000000, 0.000000]`\n
+	`Predecessor Matrix: [0, 0, 0, 1, 1, 0, -1, -1, 2]`
 */
 C_INTERFACE CalculateDistanceAndPredecessor(
 	const HF::SpatialStructures::Graph* g,
@@ -361,5 +385,6 @@ C_INTERFACE CalculateDistanceAndPredecessor(
 	int** out_pred_data
 );
 	
-
 /**@}*/
+
+#endif /* PATHFINDER_C_H */
