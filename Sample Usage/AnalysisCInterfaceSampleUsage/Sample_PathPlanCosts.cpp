@@ -97,6 +97,42 @@ const enum COST_ALG_KEY { CROSS_SLOPE, ENERGY_EXPENDITURE };
 const std::vector<std::string> Key_To_Costs{ "CrossSlope", "EnergyExpenditure" };
 
 /*!
+	\summary Determines the distance between two points, point_a and point_b
+	@tparam dimension of a real coordinate space R^n, where n is dimension, an integral value (i.e. R^2 is 2D, R^3 is 3D)
+	@tparam float_precision a floating-point data type, i.e. float, double, long double, etc.
+	\param point_a The starting point of a line segment
+	\param point_b The ending point of a line segment
+	\returns The euclidean distance from point_a to point_b, by the specified dimension
+
+	\code
+		// Requires #include "cost_algorithms.h"
+
+		// for brevity;
+		using HF::SpatialStructures::CostAlgorithms::euclidean_distance;
+
+		// 2D coordinates, { x, y }
+		float pos_a[] = { 0, 0 };
+		float pos_b[] = { 4, 3 };
+
+		// There are two template parameters for euclidean_distance:
+		// - dimension (2 for 2D, 3 for 3D, etc)
+		// - float_precision (defaults to float if unspecified)
+		float distance = euclidean_distance<2>(pos_a, pos_b);	// 5.00000
+	\endcode
+*/
+template <size_t dimension, typename float_precision = float>
+float_precision euclidean_distance(float_precision point_a[], float_precision point_b[]) {
+	float_precision sum = 0;
+
+	for (size_t i = 0; i < dimension; i++) {
+		float_precision difference = point_b[i] - point_a[i];
+		sum += std::pow(difference, 2.0);
+	}
+
+	return std::sqrt(sum);
+}
+
+/*!
 	\brief  Program execution begins and ends here.
 
 	\param  argc    Argument count
@@ -337,7 +373,7 @@ void CInterfaceTests::path_plan_costs(HINSTANCE dll_hf) {
 	auto Compress = reinterpret_cast<p_Compress>(GetProcAddress(dll_hf, "Compress"));
 	auto CreatePath = reinterpret_cast<p_CreatePath>(GetProcAddress(dll_hf, "CreatePath"));
 
-	auto CalculateAndStoreEnergyExpenditure 
+	auto CalculateAndStoreEnergyExpenditure
 		= reinterpret_cast<p_CalculateAndStoreEnergyExpenditure>(GetProcAddress(dll_hf, "CalculateAndStoreEnergyExpenditure"));
 
 	auto DestroyPath = reinterpret_cast<p_DestroyPath>(GetProcAddress(dll_hf, "DestroyPath"));
@@ -409,12 +445,12 @@ void CInterfaceTests::path_plan_costs(HINSTANCE dll_hf) {
 	// Define start point.
 	// These are Cartesian coordinates.
 	// If not above solid ground, no nodes will be generated.
-	const std::array<float, 3> start_point { -30.0f, 0.0f, 20.0f };
+	const std::array<float, 3> start_point{ -30.0f, 0.0f, 20.0f };
 
 	// Define spacing.
 	// This is the spacing between nodes, with respect to each axis.
 	// Lower values create more nodes, yielding a higher resolution graph.
-	const std::array<float, 3> spacing { 2.0f, 2.0f, 180.0f };
+	const std::array<float, 3> spacing{ 2.0f, 2.0f, 180.0f };
 
 	// Value of - 1 will generate infinitely many nodes.
 	// Final node count may be greater than this value.
@@ -445,9 +481,9 @@ void CInterfaceTests::path_plan_costs(HINSTANCE dll_hf) {
 	// to memory on the free store. We will call DestroyGraph to release the memory resources later on.
 	HF::SpatialStructures::Graph* graph = nullptr;
 
-	status = GenerateGraph(bvh, start_point.data(), spacing.data(), max_nodes, 
-		                   up_step, down_step, up_slope, down_slope, 
-						   max_step_connections, core_count, &graph);
+	status = GenerateGraph(bvh, start_point.data(), spacing.data(), max_nodes,
+		up_step, down_step, up_slope, down_slope,
+		max_step_connections, core_count, &graph);
 
 	if (status != 1) {
 		std::cerr << "Error at GenerateGraph, code: " << status << std::endl;
@@ -463,7 +499,7 @@ void CInterfaceTests::path_plan_costs(HINSTANCE dll_hf) {
 		// Error!
 		std::cerr << "Error at Compress, code: " << status << std::endl;
 	}
-	
+
 	// Get nodes.
 	//
 	// The address of the local variable node_vector will be passed to GetAllNodesFromGraph;
@@ -496,14 +532,70 @@ void CInterfaceTests::path_plan_costs(HINSTANCE dll_hf) {
 	const int max_node = node_vector_size - 1;	// This is the max index of *node_vector
 	std::cout << "Graph Generated with " << node_vector_size << " nodes" << std::endl;
 
-	/*
-		# Define a start and end point in x,y
-		p_desired = np.array([[-30,0],[30,0]])
-		closest_nodes = graph.get_closest_nodes(p_desired,z=False)
-		print("Closest Node: ", closest_nodes)
+	// Via node_vector, 
+	// - find the node closest to p_desired[0], output that node ID
+	// - find the node closest to p_desired[1], output that node ID
+	// Output nodes are stored (and will come from) closest_nodes
 
-		# Closest Node:  [  0 795]
-	*/
+	// We are looking find the closest node for two nodes.
+	const int count_to_find_closest = 2;
+
+	// Start, end point is {x, y}, so size of inner array is 2.
+	float p_desired[count_to_find_closest][2] = { {-30.0f, 0.0f}, {30.0f, 0.0f} };
+	
+	// Create an iterator from node_vector. Starts at the first node at node_vector
+	auto node_vector_it = node_vector->begin();
+
+	// Convert the node at *node_vector_it to a 2D array of float. Represents (x, y) coordinates.
+	float arr_node[2] = { node_vector_it->x, node_vector_it->y };
+
+	// Compute distances from operand node(s) to first node in node_vector.
+	float distance_p0 = euclidean_distance<2>(p_desired[0], arr_node);
+	float distance_p1 = euclidean_distance<2>(p_desired[1], arr_node);
+
+	// IDs of the closest nodes to the nodes in p_desired will be stored here.
+	std::array<int, count_to_find_closest> closest_nodes;
+
+	// Initialize closest node IDs to ID of first node in node_vector.
+	closest_nodes[0] = node_vector_it->id;
+	closest_nodes[1] = node_vector_it->id;
+
+	// Increment iterator so we do not deal with the first node in node_vector.
+	++node_vector_it;
+
+	while (node_vector_it < node_vector->end()) {
+		// This is the current node we are iterating over.
+		float arr_node[2] = { node_vector_it->x, node_vector_it->y };
+
+		// Compute distance from parameter node(s) and current node in iteration.
+		float distance_curr_p0 = euclidean_distance<2>(p_desired[0], arr_node);
+		float distance_curr_p1 = euclidean_distance<2>(p_desired[1], arr_node);
+
+		//
+		// If distance computed is less than the current shortest distance cached,
+		// we reassign a new shortest distance for the parameter node,
+		// as well as the ID of the closest node.
+		//
+		// The closest node to p_desired[index] is closest_nodes[index].
+		//
+		if (distance_curr_p0 < distance_p0) {
+			distance_p0 = distance_curr_p0;
+			closest_nodes[0] = node_vector_it->id;
+		}
+
+		if (distance_curr_p1 < distance_p1) {
+			distance_p1 = distance_curr_p1;
+			closest_nodes[1] = node_vector_it->id;
+		}
+
+		++node_vector_it;
+	}
+
+	std::cout << "Closest Node:\t[ ";
+	for (auto node_id : closest_nodes) {
+		std::cout << node_id << " ";
+	}
+	std::cout << "]" << std::endl;
 
 	/*
 		from scipy.spatial.distance import cdist
