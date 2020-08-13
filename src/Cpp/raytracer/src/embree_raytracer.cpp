@@ -125,6 +125,58 @@ namespace HF::RayTracer {
 		}
 	}
 
+
+	inline Vector3D cross(const Vector3D& x, const Vector3D& y) {
+		return Vector3D{
+			x.y * y.z - y.y * x.z,
+			x.z * y.x - y.z * x.x,
+			x.x * y.y - y.x * x.y
+		};
+	}
+
+	inline double dot(const Vector3D& v1, const Vector3D& v2) {
+		return (v1.x * v2.x + v1.y * v2.y + v1.z * v2.z);
+	}
+
+	inline Vector3D InvertVector(const Vector3D& V) {
+		return Vector3D{ -V.x, -V.y, -V.z };
+	}
+
+	inline float RayTriangleIntersection(
+		const Vector3D& origin,
+		const Vector3D& direction,
+		const Vector3D& v1,
+		const Vector3D& v2,
+		const Vector3D& v3
+		) {
+
+		const double EPSILON = 0.0000001;
+		const Vector3D inverted_direction = direction;//InvertVector(direction);
+		
+		const Vector3D edge1 = v2 - v1;
+		const Vector3D edge2 = v3 - v1;
+		const Vector3D h = cross(inverted_direction, edge2);
+		const double a = dot(edge1, h);
+
+		// This ray is parallel to this triangle.
+		if (a > -EPSILON && a < EPSILON)
+			return -1;
+
+		const double f = 1.0 / a;
+		const Vector3D s = origin - v1;
+		const double u = f * dot(s, h);
+		if (u < 0.0 || u > 1.0)
+			return -1;
+
+		const Vector3D q = cross(s, edge1);
+		const double v = f * dot(direction, q);
+		if (v < 0.0 || u + v > 1.0)
+			return -1;
+
+		// At this stage we can compute t to find out where the intersection point is on the line.
+		return f * dot(edge2, q);
+	}
+
 	EmbreeRayTracer::EmbreeRayTracer(const std::vector<std::array<float, 3>>& geometry) {
 		device = rtcNewDevice("start_threads=1,set_affinity=1");
 		scene = rtcNewScene(device);
@@ -212,6 +264,82 @@ namespace HF::RayTracer {
 
 			return true;
 		}
+	}
+
+	inline Vector3D GetPointFromBuffer(int index, Vertex* buffer) {
+		return	Vector3D{buffer[index].x, buffer[index].y,buffer[index].z};
+	}
+
+	std::array<Vector3D, 3> EmbreeRayTracer::GetTriangle(int geomID, int primID)
+	{
+		Triangle* index_buffer = reinterpret_cast<Triangle*>(rtcGetGeometryBufferData(
+			rtcGetGeometry(this->scene, geomID),
+			RTCBufferType::RTC_BUFFER_TYPE_INDEX,
+			0
+		));
+
+		int x_index = index_buffer[primID].v0;
+		int y_index = index_buffer[primID].v1;
+		int z_index = index_buffer[primID].v2;
+
+		Vertex * vertex_buffer = reinterpret_cast<Vertex *>(rtcGetGeometryBufferData(
+			rtcGetGeometry(this->scene, geomID),
+			RTCBufferType::RTC_BUFFER_TYPE_VERTEX,
+			0
+		));
+
+		CheckState(this->device);
+
+		return std::array<Vector3D, 3>{
+				GetPointFromBuffer(x_index, vertex_buffer),
+				GetPointFromBuffer(y_index, vertex_buffer),
+				GetPointFromBuffer(z_index, vertex_buffer)
+		};
+	}
+
+	HitStruct EmbreeRayTracer::FirePreciseRay(
+		float x, float y, float z,
+		float dx, float dy, float dz,
+		float distance,	int mesh_id
+		)
+	{
+		// Define an Embree hit data type to store results
+		RTCRayHit hit;
+
+		// Use the referenced values of the x,y,z position as the ray origin
+		hit.ray.org_x = x; hit.ray.org_y = y; hit.ray.org_z = z;
+		// Define the directions 
+		hit.ray.dir_x = dx; hit.ray.dir_y = dy; hit.ray.dir_z = dz;
+
+		hit.ray.tnear = 0.0f; // The start of the ray segment
+		hit.ray.tfar = INFINITY; // The end of the ray segment
+		hit.ray.time = 0.0f; // Time of ray for motion blur, unrelated to our package
+
+		hit.hit.geomID = RTC_INVALID_GEOMETRY_ID;
+		hit.hit.primID = -1;
+
+		// Cast the ray and update the hitstruct
+		rtcIntersect1(scene, &context, &hit);
+
+		// If valid geometry was hit, and the geometry matches the caller's desired mesh
+		// (if specified) then update the hitpoint and return
+		if (hit.hit.geomID == RTC_INVALID_GEOMETRY_ID || (mesh_id > -1 && hit.hit.geomID != mesh_id)) return HitStruct();
+
+		unsigned int geom_id = hit.hit.geomID;
+		auto geometry = this->geometry[geom_id];
+
+		// Construct a Vector3D of the triangle
+		auto triangle = this->GetTriangle(geom_id, hit.hit.primID);
+		
+		float ray_distance = RayTriangleIntersection(
+			Vector3D{ x,y,z },
+			Vector3D{ dx,dy,dz },
+			triangle[0],
+			triangle[1],
+			triangle[2]
+		);
+
+		return HitStruct{ ray_distance, geom_id};
 	}
 
 	std::vector<char> EmbreeRayTracer::FireRays(

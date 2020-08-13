@@ -202,9 +202,9 @@ namespace HF {
 		RayTracer::EmbreeRayTracer rt(mesh);
 		auto GG = GraphGenerator::GraphGenerator(rt, 0);
 
-		constexpr double default_z_precision = 0.001f;
-		constexpr double default_ground_offset = 0.001f;
-		constexpr double default_spacing_precision = 0.0001f;
+		constexpr double default_z_precision = 0.0000001f;
+		constexpr double default_ground_offset = 0.0001f;
+		constexpr double default_spacing_precision = 0.00001f;
 
 		// Generate the graph 
 		auto g = GG.BuildNetwork(
@@ -223,7 +223,7 @@ namespace HF {
 
 
 		// Assert that the distance from this node to every other node in the graph is > than rounding precision
-		CheckForDuplicates(g);
+		CheckForDuplicates(g, 0.1f);
 		EXPECT_EQ(875, g.size());
 	}
 	TEST(_UniqueQueue, BlockRepeats) {

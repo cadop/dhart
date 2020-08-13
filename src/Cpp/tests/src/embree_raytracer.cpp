@@ -471,7 +471,7 @@ TEST(_EmbreeRayTracer, FireAnyRay) {
 	EmbreeRayTracer ert(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
 
 	// Create a vector of direction and origin arrays.
-	std::array<float, 3> origin{ 0,0,1 };
+	std::array<float, 3> origin{ 0,0.5,1 };
 	std::array<float, 3> direction{ 0,0,-1 };
 
 	bool res = false; float out_dist = -1; int out_id = -1;

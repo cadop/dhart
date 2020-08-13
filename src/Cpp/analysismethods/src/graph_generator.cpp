@@ -42,6 +42,7 @@ namespace HF::GraphGenerator{
 	}
 
 
+
 	SpatialStructures::Graph GraphGenerator::IMPL_BuildNetwork(
 		const real3& start_point,
 		const real3& Spacing,

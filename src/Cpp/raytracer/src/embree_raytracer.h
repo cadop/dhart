@@ -35,6 +35,19 @@ namespace HF::Geometry {
 	\see EmbreeRayTracer For an implementation of a raytracer using Intel's Embree library as a backend.
 */
 namespace HF::RayTracer {
+	struct Vector3D {
+		double x; double y; double z;
+
+		inline Vector3D operator-(const Vector3D& v2) const {
+			return Vector3D{
+				x - v2.x,
+				y - v2.y,
+				z - v2.z
+			};
+		}
+
+	};
+
 	/// <summary> A simple hit struct to carry all relevant information about hits. </summary>
 	struct HitStruct {
 		float distance = -1.0f;  ///< Distance from the origin point to the hit point. Set to -1 if no hit was recorded.
@@ -307,6 +320,13 @@ namespace HF::RayTracer {
 			float distance = -1,
 			int mesh_id = -1
 		);
+
+
+		std::array<Vector3D, 3> GetTriangle(int geomID, int primID);
+
+		HitStruct FirePreciseRay(float x, float y, float z, float dx, float dy, float dz, float distance, int mesh_id);
+
+		
 
 		/// <summary> Fire multiple rays and recieve hitpoints in return. </summary>
 		/// <param name="origins"> An array of x,y,z coordinates to fire rays from. </param>
@@ -923,9 +943,9 @@ namespace HF::RayTracer {
 			int& out_meshid,
 			float max_distance = -1.0f
 		) {
-			auto result = Intersect(
+			auto result = FirePreciseRay(
 				node[0], node[1], node[2],
-				direction[0], direction[1], direction[2], max_distance
+				direction[0], direction[1], direction[2], max_distance, -1
 			);
 
 			if (!result.DidHit()) return false;
@@ -935,6 +955,20 @@ namespace HF::RayTracer {
 				return true;
 			}
 		}
+
+		/*! \brief Cast a ray, and perform a triangle intersection for higher precision
+		template <typename N, typename V>
+		bool PreciseRayCast(
+			const N& node,
+			const V& direction,
+			float& out_distance,
+			int& out_meshid,
+			float max_distance = -1.0f
+			)
+		{
+			
+		}
+		*/
 
 		/// <summary>
 		/// Template for firing rays using array-like containers for the direction and origin.
