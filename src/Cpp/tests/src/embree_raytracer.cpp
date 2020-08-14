@@ -836,6 +836,7 @@ struct ModelAndStart {
 
 	ModelAndStart(std::array<float, 3> start_point, string model, bool flip_z = false) {
 
+		std::cout << "Loading " << model << std::endl;
 		std::vector<MeshInfo> MI = HF::Geometry::LoadMeshObjects(model, ONLY_FILE, flip_z);
 		for (auto& m : MI)
 		{
@@ -859,37 +860,52 @@ inline int count_hits(vector<HitStruct>& results) {
 	return hits;
 }
 
+void PrintDirections(const std::vector < std::array<float,3>> directions) {
+	for (const auto& direction : directions)
+		printf("(%f,%f,%f)", directions[0], directions[1], directions[2]);
+
+}
 // This will run once for every model and every raycount
 TEST(Performance, CustomTriangleIntersection) {
 
 	// Number of trials is based on number of elements here
 	const vector<int> raycount = {
-		100,
-		1000,
-		5000,
-		10000,
+		50000,
+		50000,
+		50000,
 		50000,
 		100000,
+		100000,
+		100000,
+		100000,
+		500000,
+		500000,
+		500000,
 		500000,
 		1000000,
-		5000000,
-		10000000
+		1000000
+	//	1000000,
+//		5000000,
+	//	5000000,
+	//	5000000,
+	//	10000000,
+	//	10000000
 	};
 
 	printf("Loading Models...\n");
 	vector<ModelAndStart> models = {
-		ModelAndStart({0,0,1},  "plane.obj", true),
+		ModelAndStart({0,0,3},  "plane.obj", true),
 		ModelAndStart({-4.711,1.651,-14.300},  "sibenik.obj", true),
-		ModelAndStart({-4.711,1.651,-14.300},  "sibenik_subdivided.obj", true),
-		ModelAndStart({0,0,1},  "sponza.obj", true),
+	//	ModelAndStart({-4.711,1.651,-14.300},  "sibenik_subdivided.obj", true),
+		ModelAndStart({0.007,-0.001,0.093},  "sponza.obj", true),
 		ModelAndStart({0,0,1},  "energy_blob_zup.obj"),
-		ModelAndStart({0,0,1},  "Weston_Analysis.obj"),
-		ModelAndStart({0,0,1},  "ButchersDenFinal.obj", true),
-		ModelAndStart({0,0,1},  "zs_abandonded_mall.obj", true),
-		ModelAndStart({0,0,1},  "zs_amsterdam.obj", true),
-		ModelAndStart({0,0,1},  "zs_comfy.obj", true),
-		ModelAndStart({0,0,1},  "dragon.obj", true),
-		ModelAndStart({0,0,1},  "mountain.obj", true)
+		ModelAndStart({833.093,546.809,288.125},  "Weston_Analysis.obj"),
+	//	ModelAndStart({2532.320,-19.040,45.696},  "ButchersDenFinal.obj", true),
+		//ModelAndStart({0,0,1},  "zs_abandonded_mall.obj", true),
+	//	ModelAndStart({0,0,1},  "zs_amsterdam.obj", true),
+	//	ModelAndStart({0,0,1},  "zs_comfy.obj", true),
+	//	ModelAndStart({0,0,1},  "dragon.obj", true),
+	//	ModelAndStart({44.218,-39.946,15.691},  "mountain.obj", true)
 	};
 
 	const int num_trials = raycount.size();
@@ -899,8 +915,11 @@ TEST(Performance, CustomTriangleIntersection) {
 
 	printf("GeneratingDirections...\n");
 	vector < vector<array<float, 3>>> directions;
-	for (int rc : raycount)
-		directions.push_back(HF::ViewAnalysis::FibbonacciDistributePoints(rc, 90.0f, 90.0f));
+	vector < vector<array<float, 3>>> origins;
+	for (int rc : raycount) {
+		directions.push_back(HF::ViewAnalysis::FibbonacciDistributePoints(rc));
+	}
+	PrintDirections(directions[1]);
 
 	vector<std::string> RowHeaders = {
 		"Trial Number",
@@ -950,17 +969,17 @@ TEST(Performance, CustomTriangleIntersection) {
 
 			// Conduct Precise Check
 			precise_watch.StartClock();
-			vector<HitStruct> precise_results = mas.PreciseERT.FireAnyRayParallel(origins, dirs, -1.0f, true);
+			vector<HitStruct> precise_results = mas.PreciseERT.FireAnyRayParallel(origins, dirs, -1.0f, true, false);
 			precise_watch.StopClock();
 
 			// Conduct standard check
 			standard_watch.StartClock();
-			vector<HitStruct> results = mas.StandardERT.FireAnyRayParallel(origins, dirs, -1.0f, false);
+			vector<HitStruct> results = mas.StandardERT.FireAnyRayParallel(origins, dirs, -1.0f, false, false);
 			standard_watch.StopClock();
 
 			
 			// Update output
-			output[0] = k++;
+			output[0] = std::to_string(k++);
 			output[2] = std::to_string(rc);
 			output[3] = std::to_string(count_hits(results));
 			output[4] = std::to_string(count_hits(precise_results));

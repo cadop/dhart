@@ -974,12 +974,13 @@ namespace HF::RayTracer {
 			const N & nodes,
 			const V & directions,
 			float max_distance = -1.0f,
-			bool force_precise = false)
+			const bool force_precise = false,
+			const bool use_parallel = false)
 		{
 			const int n= nodes.size();
 			std::vector<HitStruct> results (nodes.size());
 
-			#pragma omp parallel for schedule(dynamic)
+			#pragma omp parallel for schedule(dynamic) if (use_parallel)
 			for (int i = 0; i < n; i++) {// Use custom triangle intesection if required
 				const auto& node = nodes[i];
 				const auto& direction = directions[i];
