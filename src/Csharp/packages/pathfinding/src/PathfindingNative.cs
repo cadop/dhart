@@ -12,6 +12,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Diagnostics;
+using System.Security.Cryptography.X509Certificates;
 
 namespace HumanFactors.Pathfinding
 {
@@ -216,10 +217,54 @@ namespace HumanFactors.Pathfinding
 
 		}
 
+		/*! \brief Calculate Predecessor and Distance Matricies for a graph in C++
+         
+            \param graph_ptr Pointer to a graph to calculate predeessor and distance matricies for
+            \param out_dist Output parameter for the distance matrix
+            \param out_predecessor Output parameter for the predecessor matrix.
+            \param cost_type Type of cost to use for the distance and predecessor
+                             matricies. If left blank will use the default cost of 
+                             the graph.
+
+            \throws KeyNotFoundException If cost_type isn't left to the default, and
+                                         does not match the key of any cost that already
+                                         exists in the graph.
+        
+
+            \post out_dist and out_predecessor are updated to contain pointers to the distance predecessor
+            matricies for `g`.
+           */
+		public static void C_GeneratePredecessorAndDistanceMatricies(
+			IntPtr graph_ptr,
+			ref CVectorAndData out_dist,
+			ref CVectorAndData out_predecessor,
+			string cost_type
+		)
+		{
+			// Just call the C++ function, it should update everything else. 
+			HF_STATUS res = CalculateDistanceAndPredecessor(
+				graph_ptr,
+				cost_type,
+				ref out_dist.vector,
+				ref out_dist.data,
+				ref out_predecessor.vector,
+				ref out_predecessor.data
+			);
+
+			if (res == HF_STATUS.NO_COST)
+				throw new KeyNotFoundException("Cost type " + cost_type + " could not be found in the graph");
+
+			Debug.Assert(res == HF_STATUS.OK);
+
+
+			Debug.Assert(out_dist.data != IntPtr.Zero);
+			Debug.Assert(out_dist.vector != IntPtr.Zero);
+		}
+
 		/*! \brief Free the memory allocated by a path.
 			
 			\param path_ptr Pointer to the path to free.
-		*/ 
+		*/
 		internal static void C_DestroyPath(IntPtr path_ptr) => DestroyPath(path_ptr);
 
 		[DllImport(dll_path)]
@@ -255,6 +300,16 @@ namespace HumanFactors.Pathfinding
 			[Out] IntPtr[] out_path_member_ptr_holder,
 			[Out] int[] out_sizes,
 			int num_paths
+		);
+
+		[DllImport(dll_path)]
+		private static extern HF_STATUS CalculateDistanceAndPredecessor(
+			IntPtr g,
+			string cost_name,
+			ref IntPtr out_distance_vector,
+			ref IntPtr out_distance_data,
+			ref IntPtr out_pred_vector,
+			ref IntPtr out_pred_data
 		);
 
 	}

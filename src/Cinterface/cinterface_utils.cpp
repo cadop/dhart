@@ -30,3 +30,10 @@ C_INTERFACE DestroyFloatVector(std::vector<float>* float_vector)
 	return HF::Exceptions::HF_STATUS::OK;
 }
 
+C_INTERFACE DestroyIntVector(std::vector<int>* int_vector)
+{
+	DeleteRawPtr(int_vector);
+	return HF::Exceptions::HF_STATUS::OK;
+}
+
+

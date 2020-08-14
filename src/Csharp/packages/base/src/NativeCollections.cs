@@ -48,6 +48,46 @@ namespace HumanFactors.NativeUtils.CommonNativeArrays
 		protected override bool ReleaseHandle() => (HF_STATUS.OK == NativeMethods.DestroyScoreArray(handle));
 	}
 
+	/*! \brief A 2 dimensional array of integers in C++ */
+	public class UnmanagedIntArray2D : NativeArray2D<int>
+	{
+
+		/*! \brief Construct a new UnmanagedIntArray using pointer to a C++ */
+		internal UnmanagedIntArray2D(CVectorAndData ptrs) : base(ptrs) {	}
+
+		/*!
+			 \brief Free the native memory managed by this class. 
+			 \note the garbage collector will handle this automatically
+			 \warning Do not attempt to use this class after freeing it!
+			 \returns True. This is guaranteed to execute properly.  
+        */
+		protected override bool ReleaseHandle()
+		{
+			NativeMethods.DestroyIntVector(this.Pointer);
+			return true;
+		}
+	}
+	/*! \brief A 2 dimensional array of integers in C++ */
+	public class UnmanagedFloatArray2D : NativeArray2D<float>
+	{
+
+		/*! \brief Construct a new UnmanagedIntArray using pointer to a C++ */
+		internal UnmanagedFloatArray2D(CVectorAndData ptrs) : base(ptrs) { }
+
+		/*!
+			 \brief Free the native memory managed by this class. 
+			 \note the garbage collector will handle this automatically
+			 \warning Do not attempt to use this class after freeing it!
+			 \returns True. This is guaranteed to execute properly.  
+        */
+		protected override bool ReleaseHandle()
+		{
+			NativeMethods.DestroyFloatVector(this.Pointer);
+			return true;
+		}
+	}
+
+
 
 	/*! \brief Native methods for interacting with the objects in CommonNativeArrays. */
 	internal static class NativeMethods
@@ -59,5 +99,8 @@ namespace HumanFactors.NativeUtils.CommonNativeArrays
 
 		[DllImport(dll_path)]
 		internal static extern HF_STATUS DestroyScoreArray(IntPtr ptr);
+
+		[DllImport(dll_path)]
+		internal static extern HF_STATUS DestroyIntVector(IntPtr ptr);
 	}
 }

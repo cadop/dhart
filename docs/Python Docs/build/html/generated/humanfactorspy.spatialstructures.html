@@ -101,19 +101,22 @@ in space or just a set of IDs.</p>
 <tr class="row-odd"><td><a class="reference internal" href="humanfactorspy.spatialstructures.CostAggregationType.html#humanfactorspy.spatialstructures.CostAggregationType" title="humanfactorspy.spatialstructures.CostAggregationType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CostAggregationType</span></code></a>(value)</td>
 <td>An enumeration.</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="humanfactorspy.spatialstructures.Edge.html#humanfactorspy.spatialstructures.Edge" title="humanfactorspy.spatialstructures.Edge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Edge</span></code></a>()</td>
+<tr class="row-even"><td><a class="reference internal" href="humanfactorspy.spatialstructures.CostAlgorithmKeys.html#humanfactorspy.spatialstructures.CostAlgorithmKeys" title="humanfactorspy.spatialstructures.CostAlgorithmKeys"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CostAlgorithmKeys</span></code></a>()</td>
+<td>Contains the keys for each cost algorithm in Cost Algorithms</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="humanfactorspy.spatialstructures.Edge.html#humanfactorspy.spatialstructures.Edge" title="humanfactorspy.spatialstructures.Edge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Edge</span></code></a>()</td>
 <td>Unimplemented for now</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="humanfactorspy.spatialstructures.EdgeSumArray.html#humanfactorspy.spatialstructures.EdgeSumArray" title="humanfactorspy.spatialstructures.EdgeSumArray"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EdgeSumArray</span></code></a>(vector_ptr,&nbsp;data_ptr,&nbsp;size)</td>
+<tr class="row-even"><td><a class="reference internal" href="humanfactorspy.spatialstructures.EdgeSumArray.html#humanfactorspy.spatialstructures.EdgeSumArray" title="humanfactorspy.spatialstructures.EdgeSumArray"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EdgeSumArray</span></code></a>(vector_ptr,&nbsp;data_ptr,&nbsp;size)</td>
 <td>Contains the scores for every node based on edges</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="humanfactorspy.spatialstructures.Graph.html#humanfactorspy.spatialstructures.Graph" title="humanfactorspy.spatialstructures.Graph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Graph</span></code></a>(graph_ptr)</td>
-<td>A wrapper for the human factors graph in C++</td>
+<tr class="row-odd"><td><a class="reference internal" href="humanfactorspy.spatialstructures.Graph.html#humanfactorspy.spatialstructures.Graph" title="humanfactorspy.spatialstructures.Graph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Graph</span></code></a>(graph_ptr)</td>
+<td>A graph representing connections between points in space.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="humanfactorspy.spatialstructures.NodeList.html#humanfactorspy.spatialstructures.NodeList" title="humanfactorspy.spatialstructures.NodeList"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NodeList</span></code></a>(vector_ptr,&nbsp;data_ptr)</td>
+<tr class="row-even"><td><a class="reference internal" href="humanfactorspy.spatialstructures.NodeList.html#humanfactorspy.spatialstructures.NodeList" title="humanfactorspy.spatialstructures.NodeList"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NodeList</span></code></a>(vector_ptr,&nbsp;data_ptr)</td>
 <td>A list of node structs from C++</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="humanfactorspy.spatialstructures.NodeStruct.html#humanfactorspy.spatialstructures.NodeStruct" title="humanfactorspy.spatialstructures.NodeStruct"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NodeStruct</span></code></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="humanfactorspy.spatialstructures.NodeStruct.html#humanfactorspy.spatialstructures.NodeStruct" title="humanfactorspy.spatialstructures.NodeStruct"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NodeStruct</span></code></a></td>
 <td>A point in space</td>
 </tr>
 </tbody>
@@ -125,6 +128,12 @@ in space or just a set of IDs.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="humanfactorspy.spatialstructures.CalculateCrossSlope.html#humanfactorspy.spatialstructures.CalculateCrossSlope" title="humanfactorspy.spatialstructures.CalculateCrossSlope"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CalculateCrossSlope</span></code></a>(g)</td>
+<td>Calculate cross slope for every edge in a graph and store it as a new cost type.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="humanfactorspy.spatialstructures.CalculateEnergyExpenditure.html#humanfactorspy.spatialstructures.CalculateEnergyExpenditure" title="humanfactorspy.spatialstructures.CalculateEnergyExpenditure"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CalculateEnergyExpenditure</span></code></a>(g)</td>
+<td>Calculate EnergyExpenditure for every edge in a graph and store it as a new cost type.</td>
+</tr>
 <tr class="row-odd"><td><a class="reference internal" href="humanfactorspy.spatialstructures.CreateListOfNodeStructs.html#humanfactorspy.spatialstructures.CreateListOfNodeStructs" title="humanfactorspy.spatialstructures.CreateListOfNodeStructs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CreateListOfNodeStructs</span></code></a>(points)</td>
 <td>Create an array of NodeStructs from a list of tuples.</td>
 </tr>
