@@ -36,6 +36,55 @@ inline EmbreeRayTracer CreateRTWithPlane() {
 
 
 namespace HF {
+	void CheckForDuplicates(const HF::SpatialStructures::Graph& g, float precision = 0.0001f) {
+
+		// Get nodes from the graph
+		const auto nodes = g.Nodes();
+
+		// Setup variables
+		int duplicate_pairs = 0;
+		int duplicates_this_node = 0;
+		int duplicate_nodes = 0;
+
+		// Iterate through every node in the graph
+		for (const auto& node : nodes) {
+			--duplicate_pairs; // subrtact one because this node will be compared to itself atleast once
+			duplicates_this_node = 0;
+
+			// Iterate through every other node in the graph
+			for (const auto& node2 : nodes)
+			{
+				// Check if this node closer to node2 than our precision value
+				if (node.distanceTo(node2) < precision) {
+
+					// If it is, increment duplciate pairs
+					++duplicate_pairs;
+					++duplicates_this_node;
+
+					// If this has had 2 duplicates (itself and atleast one other node) then it is a duplicate and duplicates
+					// should be incremented
+					if (duplicates_this_node == 2)
+						duplicate_nodes++;
+				}
+			}
+		}
+
+
+		// Divide duplicate nodes by 2, since both duplicates would increment this counter
+		// and technically only one is the original
+		duplicate_nodes /= 2;
+		int total_pairs = g.size() * g.size() - 1;
+		float duplicate_node_percentage = (static_cast<float>(duplicate_nodes) / static_cast<float>(g.size())) * 100.00f;
+		float duplicate_pair_percentage = (static_cast<float>(duplicate_pairs) / static_cast<float>(g.size() * g.size())) * 100.00f;
+
+		// print to console	
+		std::cerr << duplicate_nodes << "/" << g.size() << "(" << duplicate_node_percentage << "\%) Duplicate Nodes" << std::endl;
+		std::cerr << duplicate_pairs << "/" << total_pairs << "(" << duplicate_pair_percentage << "\%) Duplicate Pairs" << std::endl;
+
+		// Fail if there are duplicate pairs
+		EXPECT_EQ(0, duplicate_pairs);
+	}
+
 
 	TEST(_GraphGenerator, GraphGeneratorParallel) {
 		auto mesh = Geometry::LoadMeshObjects("plane.obj", HF::Geometry::ONLY_FILE, true);
@@ -55,6 +104,7 @@ namespace HF {
 		);
 		printf("Graph size %i\n", g.size());
 		g.Compress();
+		CheckForDuplicates(g);
 		ASSERT_GT(g.size(), 0);
 	}
 
@@ -117,23 +167,9 @@ namespace HF {
 		);
 
 		ASSERT_GT(g.size(), 0);
-		// Assert that the distance from this node to every other node in the graph is > than rounding precision
-		const auto nodes = g.Nodes();
-		for (const auto& node : nodes) {
-			
-			int close_to_nodes = 0;
-			for (const auto& node2 : nodes)
-			{
-				// Check if this node closer to node2 than rounding_precision would allow
-				if (node.distanceTo(node2) < HF::SpatialStructures::ROUNDING_PRECISION)
-				{
-					close_to_nodes++;
-				}
-				// If it's closer to two nodes (itself and one more) then it's not being rounded
-				ASSERT_LT(close_to_nodes, 2);
-			}
-		}
+		CheckForDuplicates(g);
 	}
+
 
 	TEST(_GraphGenerator, GraphGeneratorSingle) {
 		auto mesh = Geometry::LoadMeshObjects("plane.obj", HF::Geometry::ONLY_FILE, true);
@@ -153,9 +189,81 @@ namespace HF {
 		);
 		printf("Graph size %i\n", g.size());
 		g.Compress();
+		CheckForDuplicates(g);
 		ASSERT_GT(g.size(), 0);
 	}
 
+/*
+	TEST(_GraphGenerator, DuplicateNodes2) {
+		auto mesh = Geometry::LoadMeshObjects("energy_blob_zup.obj");
+
+		RayTracer::EmbreeRayTracer rt(mesh);
+		auto GG = GraphGenerator::GraphGenerator(rt, 0);
+
+		// Generate the graph 
+		auto g = GG.BuildNetwork(
+			std::array<float, 3>{-30, 0, 20},
+			std::array<double, 3>{2, 2, 180},
+			5000,
+			30,
+			60,
+			70,
+			60,
+			2
+		);
+
+
+		// Assert that the distance from this node to every other node in the graph is > than rounding precision
+		const auto nodes = g.Nodes();
+		for (const auto& node : nodes) {
+
+			int close_to_nodes = 0;
+			for (const auto& node2 : nodes)
+			{
+				// Check if this node closer to node2 than rounding_precision would allow
+				if (node.distanceTo(node2) < 0.001)
+				{
+					close_to_nodes++;
+				}
+				// If it's closer to two nodes (itself and one more) then it's not being rounded
+				//ASSERT_LT(close_to_nodes, 2);
+			}
+		}
+		// The Graph size should be 875 in this test
+		ASSERT_EQ(g.size(), 875);
+	}
+	*/
+
+	TEST(_GraphGenerator, DuplicateNodes_2B) {
+		auto mesh = Geometry::LoadMeshObjects("energy_blob_zup.obj");
+
+		RayTracer::EmbreeRayTracer rt(mesh);
+		auto GG = GraphGenerator::GraphGenerator(rt, 0);
+
+		constexpr double default_z_precision = 0.001f;
+		constexpr double default_ground_offset = 0.001f;
+		constexpr double default_spacing_precision = 0.0001f;
+
+		// Generate the graph 
+		auto g = GG.BuildNetwork(
+			std::array<double, 3>{-30, 0, 20},
+			std::array<double, 3>{2, 2, 180},
+			1000,
+			30,
+			60,
+			70,
+			60,
+			2,
+			default_z_precision,
+			default_spacing_precision,
+			default_ground_offset
+		);
+
+
+		// Assert that the distance from this node to every other node in the graph is > than rounding precision
+		CheckForDuplicates(g);
+		EXPECT_EQ(875, g.size());
+	}
 	TEST(_UniqueQueue, BlockRepeats) {
 		HF::GraphGenerator::UniqueQueue q;
 		SpatialStructures::Node n1{ 1,2,3 };

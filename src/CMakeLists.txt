@@ -409,7 +409,8 @@ if(HumanFactors_EnableTests)
 					${C_TEST_DRIVER_DIR}/performance_testing.h
 					${C_TEST_DRIVER_DIR}/GraphAlgorithms.cpp
 					${C_TEST_DRIVER_DIR}/CostAlgorithms.cpp
-			)
+					${C_TEST_DRIVER_DIR}/GraphGenerator.cpp
+		)
 	elseif(${HumanFactors_Config} STREQUAL "RayTracer")
 		target_sources(
 			HFUnitTests
