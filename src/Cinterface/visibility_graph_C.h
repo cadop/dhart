@@ -49,12 +49,13 @@ namespace HF {
 
 	\returns	HF_STATUS::OK on completion
 
+	\see		\ref mesh_setup (How to create a mesh), \ref (How to destroy a mesh)
 	\see		\ref raytracer_setup (How to create a BVH), \ref raytracer_teardown (How to destroy a BVH)
 
-	You must <b>load an .obj file</b> and <b>create a BVH</b> first.<br>
-	Begin by reviewing the example at \ref raytracer_setup before proceeding below.
+	Begin by <b>loading an .obj file</b> (\ref mesh_setup).<br>
+	Then, <b>create a BVH</b> (\ref raytracer_setup) using the <b>mesh</b>.<br>
 
-	First, set up the parameters for the visibility graph.
+	Set up the parameters for the visibility graph.
 	\snippet	tests\src\visibility_graph_cinterface.cpp snippet_VisibilityGraph_CreateVisibilityGraphAllToAll_setup
 
 	Now we are ready to call \link CreateVisibilityGraphAllToAll \endlink .
@@ -113,10 +114,11 @@ C_INTERFACE CreateVisibilityGraphAllToAll(
 
 	\see		\ref raytracer_setup (How to create a BVH), \ref raytracer_teardown (How to destroy a BVH)
 
-	You must <b>load an .obj file</b> and <b>create a BVH</b> first.<br>
-	Begin by reviewing the example at \ref raytracer_setup before proceeding below.
+	\see		\ref mesh_setup (How to create a mesh), \ref (How to destroy a mesh)
+	\see		\ref raytracer_setup (How to create a BVH), \ref raytracer_teardown (How to destroy a BVH)
 
-	First, set up the parameters for the visibility graph.
+	Begin by <b>loading an .obj file</b> (\ref mesh_setup).<br>
+	Then, <b>create a BVH</b> (\ref raytracer_setup) using the <b>mesh</b>.<br>
 	\snippet	tests\src\visibility_graph_cinterface.cpp snippet_VisibilityGraph_CreateVisibilityGraphAllToAllUndirected_setup
 
 	Now we are ready to call \link CreateVisibilityGraphAllToAllUndirected \endlink .
@@ -177,12 +179,13 @@ C_INTERFACE CreateVisibilityGraphAllToAllUndirected(
 
 	\returns	HF_STATUS::OK on completion
 
+	\see		\ref mesh_setup (How to create a mesh), \ref (How to destroy a mesh)
 	\see		\ref raytracer_setup (How to create a BVH), \ref raytracer_teardown (How to destroy a BVH)
 
-	You must <b>load an .obj file</b> and <b>create a BVH</b> first.<br>
-	Begin by reviewing the example at \ref raytracer_setup before proceeding below.
+	Begin by <b>loading an .obj file</b> (\ref mesh_setup).<br>
+	Then, <b>create a BVH</b> (\ref raytracer_setup) using the <b>mesh</b>.<br>
 
-	First, set up the parameters for the visibility graph.
+	Set up the parameters for the visibility graph.
 	\snippet	tests\src\visibility_graph_cinterface.cpp snippet_VisibilityGraph_CreateVisibilityGraphGroupToGroup_setup
 
 	Now we are ready to call \link CreateVisibilityGraphGroupToGroup \endlink .
