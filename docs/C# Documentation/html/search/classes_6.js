@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['logicerror_287',['LogicError',['../class_human_factors_1_1_exceptions_1_1_logic_error.html',1,'HumanFactors::Exceptions']]]
+  ['logicerror_299',['LogicError',['../class_human_factors_1_1_exceptions_1_1_logic_error.html',1,'HumanFactors::Exceptions']]]
 ];

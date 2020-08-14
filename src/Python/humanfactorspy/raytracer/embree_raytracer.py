@@ -5,6 +5,7 @@ import numpy
 from humanfactorspy.raytracer import EmbreeBVH
 import humanfactorspy.raytracer.raytracer_native_functions as raytracer_native_functions
 from humanfactorspy.native_numpy_like import NativeNumpyLike
+from humanfactorspy.utils import is_point
 
 __all__ = ['ResultStruct','RayResultList','isValidBVH','Intersect','IntersectForPoint','IntersectOccluded']
 
@@ -79,8 +80,9 @@ def Intersect(
     origin: Union[Tuple[float, float, float], List[Tuple[float, float, float]]],
     direction: Union[Tuple[float, float, float], List[Tuple[float, float, float]]],
     max_distance: float = -1.0,
-) -> Union[numpy.array, Tuple[float, int]]:
-    """ Fire one or more rays to get distance to hit and mesh id
+    ) -> Union[numpy.array, Tuple[float, int]]:
+    """ Cast one or more rays to get the distance to their point of intersection
+    and the ID of the mesh they intersected.
     
     In situations where multiple rays are shot, rays will be fired in parallel. 
 
@@ -98,9 +100,10 @@ def Intersect(
         max_distance: the maximum distance tto still be considered a hit for the ray
     
     Returns:
-        Union[numpy.array, Tuple[float, int]]: If a single ray, then a tuple of float
-            for distance and an int for meshid. If multiple rays, return a numpy array of
-            RayResult structs. In all cases, a distance/meshid of -1 indicates a miss.
+        Union[RayResultList, Tuple[float, int]]: If a single ray, then a tuple of float
+            for distance and an int for meshid. If multiple rays are casted, an array of
+            RayResult structs is returned in a RayResult List. In all cases, a 
+            distance/meshid of -1 indicates a miss.
 
     Examples:
         Firing a single ray
@@ -148,26 +151,32 @@ def Intersect(
          ( 3.9999995 , 39)]
 
     """
-    if isinstance(origin, tuple) and isinstance(direction, tuple):
+    # Check if origin and direction can be used as points
+    origin_is_point = is_point(origin)
+    direction_is_point = is_point(direction)
+    
+    # If both are points, cast a single ray
+    if origin_is_point and direction_is_point: 
         return raytracer_native_functions.FireRaySingleDistance(
             bvh.pointer, origin, direction, max_distance
         )
 
     else:
-        # Determine size of result array
-        origin_size = 0
-        direction_size = 0
-        if isinstance(origin, list):
-            origin_size = len(origin)
-        if isinstance(direction, list):
-            direction_size = len(direction)
+        # Determine size of result array. This should be the largest
+        # out of the two arrays. 
+        origin_size = 0 if origin_is_point else len(origin)
+        direction_size = 0 if direction_is_point else len(direction)
         result_size = max(origin_size, direction_size)
+        
+        # If this is zero, then there's a problem with the above block
         assert result_size != 0
 
+        # Call native function
         vector_ptr, array_ptr = raytracer_native_functions.FireMultipleRaysDistance(
             bvh.pointer, origin, direction, max_distance
         )
 
+        # Construct RayResultList and return
         return RayResultList(vector_ptr, array_ptr, result_size, 1)
 
 

@@ -148,7 +148,31 @@ Static Public Member Functions</h2></td></tr>
 <dl class="section attention"><dt>Attention</dt><dd>When directed is true. Edges between nodes will only be stored in the edges of the node with the lower ID. To store the edge in the edge array of both nodes use false but be warned, it will take longer to execute and take up more memory. Read the following section for more info.</dd></dl>
 <dl class="section user"><dt>Directed vs Undirected </dt><dd>For the sake of this function, an undirected visibility graph describes a graph where edge is only stored in the graph for the node with the lowest ID. For example, The first node will check for edges from itself to every node in the set, node 2 will check for edges from itself to every other node except for the first node, node 3 will check every node except for the first and second. In contrast, a directed graph will check every node against every other node in the graph regardless of ID. In most cases you will want to use the undirected algorithm, as it only performs n(n+1)/2 operations vs the directed's n^2 operations.</dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>Graphs output by this function CANNOT be modified.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a45a2d5b16092f8389210dc47f722a539" title="Summarize the edgecosts of every node in the graph.">SpatialStructures.Graph.AggregateEdgeCosts</a> for a way to easily summarize the results of a visibility graph. </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a45a2d5b16092f8389210dc47f722a539" title="Summarize the edgecosts of every node in the graph.">SpatialStructures.Graph.AggregateEdgeCosts</a> for a way to easily summarize the results of a visibility graph.</dd></dl>
+<dl class="section user"><dt>Example</dt><dd></dd></dl>
+<div class="fragment"><div class="line">            <span class="comment">// Load the example plane and convert it to z-up</span></div>
+<div class="line">            MeshInfo MI = (OBJLoader.LoadOBJ(<span class="stringliteral">&quot;ExampleModels/plane.obj&quot;</span>, CommonRotations.Yup_To_Zup));</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Construct a BVH from this mesh</span></div>
+<div class="line">            EmbreeBVH bvh = <span class="keyword">new</span> EmbreeBVH(MI);</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Define all nodes and put them into an array,</span></div>
+<div class="line">            Vector3D Point1 = <span class="keyword">new</span> Vector3D(0, 0, 0);</div>
+<div class="line">            Vector3D Point2 = <span class="keyword">new</span> Vector3D(0, 1, 0);</div>
+<div class="line">            Vector3D Point3 = <span class="keyword">new</span> Vector3D(1, 0, 0);</div>
+<div class="line">            Vector3D Point4 = <span class="keyword">new</span> Vector3D(1, 0, -4); <span class="comment">// Node 4 is beneath the plane so it should have no connections</span></div>
+<div class="line">            Vector3D[] nodes = { Point1, Point2, Point3, Point4 };</div>
+</div><!-- fragment --><div class="fragment"><div class="line">            </div>
+<div class="line">            <span class="comment">// Create a visibility from every node to every other node</span></div>
+<div class="line">            Graph G = <a class="code" href="namespace_human_factors.html">HumanFactors</a>.<a class="code" href="namespace_human_factors_1_1_visibility_graph.html">VisibilityGraph</a>.<a class="code" href="class_human_factors_1_1_visibility_graph_1_1_visibility_graph.html">VisibilityGraph</a>.<a class="code" href="class_human_factors_1_1_visibility_graph_1_1_visibility_graph.html#a6b9e6d59435543aebc5a42beea7e916d">GenerateAllToAll</a>(bvh, nodes);</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Aggregate the graph&#39;s edges to get the total distance from this node to all of its edges</span></div>
+<div class="line">            var results = G.AggregateEdgeCosts(<a class="code" href="namespace_human_factors_1_1_spatial_structures.html#abd405fa41da0f9a771d547aa47b6e1a0">GraphEdgeAggregation</a>.SUM);</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Print output</span></div>
+<div class="line">            Debug.WriteLine(results);</div>
+<div class="line"> </div>
+</div><!-- fragment --><p><code>[2, 2.414214, 2.414214, 0]</code> </p>
 
 </div>
 </div>
@@ -211,7 +235,34 @@ Static Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>A graph contanining the visibility graph. Since a new graph is created, all nodes will be assigned ids for access within it. First every node in group_a will be assigned ids in order, then all nodes in <code>group_b</code> will be assigned ids in order. Nodes in <code>group_a</code> will be assigned IDs before those in <code>group_b</code>. All edges will be from nodes in <code>group_a</code> to nodes in <code>group_b</code>. Any nodes that clip into geometry when offset by height will not be considered for any edge connections and will always have no outgoing or incoming edges.</dd></dl>
 <dl class="section pre"><dt>Precondition</dt><dd>No nodes in <code>group_a</code> also exist in <code>group_b</code> and vice versa.</dd></dl>
 <dl class="section attention"><dt>Attention</dt><dd>Any nodes that clip into geometry when offset by <code>height</code> will not be considered for any edge connections.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_human_factors_1_1_visibility_graph_1_1_visibility_graph.html#a6b9e6d59435543aebc5a42beea7e916d" title="Create a visibility graph from every node to every node in nodes.">GenerateAllToAll</a> to generate a graph from every node to every other node. </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_human_factors_1_1_visibility_graph_1_1_visibility_graph.html#a6b9e6d59435543aebc5a42beea7e916d" title="Create a visibility graph from every node to every node in nodes.">GenerateAllToAll</a> to generate a graph from every node to every other node.</dd></dl>
+<dl class="section user"><dt>Example</dt><dd></dd></dl>
+<div class="fragment"><div class="line">            <span class="comment">// Load the example plane and convert it to z-up</span></div>
+<div class="line">            MeshInfo MI = (OBJLoader.LoadOBJ(<span class="stringliteral">&quot;ExampleModels/plane.obj&quot;</span>, CommonRotations.Yup_To_Zup));</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Construct a BVH from this mesh</span></div>
+<div class="line">            EmbreeBVH bvh = <span class="keyword">new</span> EmbreeBVH(MI);</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Define all nodes and put them into an array,</span></div>
+<div class="line">            Vector3D Point1 = <span class="keyword">new</span> Vector3D(0, 0, 0);</div>
+<div class="line">            Vector3D Point2 = <span class="keyword">new</span> Vector3D(0, 1, 0);</div>
+<div class="line">            Vector3D Point3 = <span class="keyword">new</span> Vector3D(1, 0, 0);</div>
+<div class="line">            Vector3D Point4 = <span class="keyword">new</span> Vector3D(1, 0, -4); <span class="comment">// Node 4 is beneath the plane so it should have no connections</span></div>
+<div class="line">            Vector3D[] nodes = { Point1, Point2, Point3, Point4 };</div>
+</div><!-- fragment --><div class="fragment"><div class="line"> </div>
+<div class="line">            <span class="comment">// Define two groups of nodes</span></div>
+<div class="line">            Vector3D[] group_a = { Point1, Point2 };</div>
+<div class="line">            Vector3D[] group_b = { Point3, Point4 };</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Generate a visibility graph from group A to group B</span></div>
+<div class="line">            Graph G = <a class="code" href="namespace_human_factors.html">HumanFactors</a>.<a class="code" href="namespace_human_factors_1_1_visibility_graph.html">VisibilityGraph</a>.<a class="code" href="class_human_factors_1_1_visibility_graph_1_1_visibility_graph.html">VisibilityGraph</a>.<a class="code" href="class_human_factors_1_1_visibility_graph_1_1_visibility_graph.html#aebd2e16352a8e5a9920dffe809ed911d">GenerateGroupToGroup</a>(bvh, group_a, group_b);</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Print the results</span></div>
+<div class="line">            var results = G.AggregateEdgeCosts(<a class="code" href="namespace_human_factors_1_1_spatial_structures.html#abd405fa41da0f9a771d547aa47b6e1a0">GraphEdgeAggregation</a>.SUM);</div>
+<div class="line"> </div>
+<div class="line">            Debug.WriteLine(<span class="stringliteral">&quot;[{0}, {1}, {2}, {3}]&quot;</span>, results[0], results[1], results[2], results[3]);</div>
+<div class="line"> </div>
+</div><!-- fragment --><p> <code>1, 1.414214, 0, 0</code> </p>
 
 </div>
 </div>
@@ -219,9 +270,15 @@ Static Public Member Functions</h2></td></tr>
 <li>src/Csharp/packages/visibilitygraph/src/VisibilityGraph.cs</li>
 </ul>
 </div><!-- contents -->
+<div class="ttc" id="aclass_human_factors_1_1_visibility_graph_1_1_visibility_graph_html_a6b9e6d59435543aebc5a42beea7e916d"><div class="ttname"><a href="class_human_factors_1_1_visibility_graph_1_1_visibility_graph.html#a6b9e6d59435543aebc5a42beea7e916d">HumanFactors.VisibilityGraph.VisibilityGraph.GenerateAllToAll</a></div><div class="ttdeci">static Graph GenerateAllToAll(EmbreeBVH bvh, IEnumerable&lt; Vector3D &gt; nodes, float height=1.7f, bool directed=true)</div><div class="ttdoc">Create a visibility graph from every node to every node in nodes.</div><div class="ttdef"><b>Definition:</b> VisibilityGraph.cs:73</div></div>
+<div class="ttc" id="anamespace_human_factors_html"><div class="ttname"><a href="namespace_human_factors.html">HumanFactors</a></div><div class="ttdoc">Automated analysis of the built environent</div><div class="ttdef"><b>Definition:</b> CommonTypes.cs:9</div></div>
+<div class="ttc" id="aclass_human_factors_1_1_visibility_graph_1_1_visibility_graph_html_aebd2e16352a8e5a9920dffe809ed911d"><div class="ttname"><a href="class_human_factors_1_1_visibility_graph_1_1_visibility_graph.html#aebd2e16352a8e5a9920dffe809ed911d">HumanFactors.VisibilityGraph.VisibilityGraph.GenerateGroupToGroup</a></div><div class="ttdeci">static Graph GenerateGroupToGroup(EmbreeBVH bvh, IEnumerable&lt; Vector3D &gt; group_a, IEnumerable&lt; Vector3D &gt; group_b, float height=1.7f)</div><div class="ttdoc">Generate a directed visibility graph from nodes in group_a to the nodes in group_b.</div><div class="ttdef"><b>Definition:</b> VisibilityGraph.cs:111</div></div>
+<div class="ttc" id="anamespace_human_factors_1_1_spatial_structures_html_abd405fa41da0f9a771d547aa47b6e1a0"><div class="ttname"><a href="namespace_human_factors_1_1_spatial_structures.html#abd405fa41da0f9a771d547aa47b6e1a0">HumanFactors.SpatialStructures.GraphEdgeAggregation</a></div><div class="ttdeci">GraphEdgeAggregation</div><div class="ttdoc">Methods for aggregating edge costs per node from the graph.</div><div class="ttdef"><b>Definition:</b> Graph.cs:23</div></div>
+<div class="ttc" id="aclass_human_factors_1_1_visibility_graph_1_1_visibility_graph_html"><div class="ttname"><a href="class_human_factors_1_1_visibility_graph_1_1_visibility_graph.html">HumanFactors.VisibilityGraph.VisibilityGraph</a></div><div class="ttdoc">Contains all methods for generating Visibility Graphs.</div><div class="ttdef"><b>Definition:</b> VisibilityGraph.cs:33</div></div>
+<div class="ttc" id="anamespace_human_factors_1_1_visibility_graph_html"><div class="ttname"><a href="namespace_human_factors_1_1_visibility_graph.html">HumanFactors.VisibilityGraph</a></div><div class="ttdoc">Evaluate visibility between a set of points.</div><div class="ttdef"><b>Definition:</b> VisibilityGraph.cs:30</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jul 30 2020 10:34:52 for Analysis by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Aug 5 2020 12:07:25 for Analysis by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

@@ -20,7 +20,7 @@ using System.Security.Cryptography;
 
 namespace HumanFactors.Geometry
 {
-    /*!
+	/*!
 		\brief A collection of vertices and indices representing geometry.
 
         \image html https://upload.wikimedia.org/wikipedia/commons/2/2d/Mesh_fv.jpg "Figure 1.1: Meshinfo Internals"
@@ -43,7 +43,7 @@ namespace HumanFactors.Geometry
         \endinternal
     */
 
-    public class MeshInfo : NativeUtils.NativeObject
+	public class MeshInfo : NativeUtils.NativeObject
 	{
 		/*!
             \brief Calculates the mesh's pressure. Unimplemented for now
@@ -79,23 +79,20 @@ namespace HumanFactors.Geometry
 			return true;
 		}
 
-        /*!
-            \brief Create a new meshinfo instance from the given pointer. </summary>
+		/*!
+            \brief Create a new meshinfo instance from the given pointer.
 
-            \param pointer Pointer to an existing meshinfo instance in unmanaged memory
-
+            \param pointer Pointer to an existing meshinfo instance in unmanaged memory.
+            \param size The size of this meshinfo in bytes. Leave at 0 to use default behavior.
+            
             \details Just a call back to the base functionality of nativeobject. 
 
             \remarks This shouldn't be called directly unless pointer is gauranteed to point to a valid mesh
-
-
         */
 
-        internal MeshInfo(IntPtr pointer, int size = 0) : base(pointer, size)
-        {
-        }
+		internal MeshInfo(IntPtr pointer, int size = 0) : base(pointer, size) { }
 
-        /*!
+		/*!
             \brief Create an instance of MeshInfo from an array of vertices and triangle indices.
 
             \param indices
@@ -114,11 +111,11 @@ namespace HumanFactors.Geometry
 
         */
 
-        public MeshInfo(int[] indices, float[] vertices, string name = "", int id = -1) :
+		public MeshInfo(int[] indices, float[] vertices, string name = "", int id = -1) :
 			base(NativeMethods.C_StoreMesh(vertices, indices, name, id), (vertices.Length * 4) + (indices.Length * 4))
 		{ }
 
-        /*!
+		/*!
             \brief Rotate this mesh by the desired magnitude.
 
             \param xrot Pitch to rotate by in degrees.
@@ -131,12 +128,12 @@ namespace HumanFactors.Geometry
             
             \par Example
             \snippet geometry\test_geometry.cs EX_MeshInfoCstor
-            \snippet geometry\test_geometry.cs EX_RotateMesh
+            \snippet geometry\test_geometry.cs EX_RotateMesh_xyz
         */
 
-        public void RotateMesh(float xrot, float yrot, float zrot) => NativeMethods.C_RotateMesh(handle, xrot, yrot, zrot);
+		public void RotateMesh(float xrot, float yrot, float zrot) => NativeMethods.C_RotateMesh(handle, xrot, yrot, zrot);
 
-        /*!
+		/*!
             \brief Rotate this mesh by the desired magnitude. </summary>
             \param rotation How far to rotate the mesh on the X,Y, and Z, axises in degrees.
 
@@ -147,6 +144,6 @@ namespace HumanFactors.Geometry
             \snippet geometry\test_geometry.cs EX_RotateMesh_Common
         */
 
-        public void RotateMesh(Vector3D rotation) => NativeMethods.C_RotateMesh(handle, rotation.x, rotation.y, rotation.z);
+		public void RotateMesh(Vector3D rotation) => NativeMethods.C_RotateMesh(handle, rotation.x, rotation.y, rotation.z);
 	}
 }

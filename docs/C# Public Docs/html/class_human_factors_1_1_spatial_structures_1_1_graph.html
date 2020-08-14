@@ -101,7 +101,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ad4effbecd5ea2998b87425bd52e33f58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new edge between parent and child with cost.  <a href="class_human_factors_1_1_spatial_structures_1_1_graph.html#ad4effbecd5ea2998b87425bd52e33f58">More...</a><br /></td></tr>
 <tr class="separator:ad4effbecd5ea2998b87425bd52e33f58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b2aeaa562da06bec0d23aaabb2ba74d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_human_factors_1_1_spatial_structures_1_1_node_list.html">NodeList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a6b2aeaa562da06bec0d23aaabb2ba74d">getNodes</a> ()</td></tr>
-<tr class="memdesc:a6b2aeaa562da06bec0d23aaabb2ba74d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Garray containing the graph's current nodes.  <a href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a6b2aeaa562da06bec0d23aaabb2ba74d">More...</a><br /></td></tr>
+<tr class="memdesc:a6b2aeaa562da06bec0d23aaabb2ba74d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an array containing the graph's current nodes.  <a href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a6b2aeaa562da06bec0d23aaabb2ba74d">More...</a><br /></td></tr>
 <tr class="separator:a6b2aeaa562da06bec0d23aaabb2ba74d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84a7286932920179d90a63cfd8ada207"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_human_factors_1_1_spatial_structures_1_1_c_s_r_info.html">CSRInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a84a7286932920179d90a63cfd8ada207">CompressToCSR</a> (string cost_type=&quot;&quot;)</td></tr>
 <tr class="memdesc:a84a7286932920179d90a63cfd8ada207"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compress the graph into a CSR representation, and get pointers to it.  <a href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a84a7286932920179d90a63cfd8ada207">More...</a><br /></td></tr>
@@ -154,12 +154,13 @@ override bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A graph representing connections between points in space. </p>
-<p>Every <a class="el" href="namespace_human_factors_1_1_spatial_structures.html#struct_human_factors_1_1_spatial_structures_1_1_node" title="A point in space.">Node</a> in the graph contains an X,Y,Z coordinate which can be used to represent a specific point in space. This graph internally is stored as a Sparse Matrix for space efficency. Nodes are stored in a hashmap containing X,Y, and Z coordinates, allowing for quick indexing of specific nodes by location alone. Access to this graph's internal CSR is available through <a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a84a7286932920179d90a63cfd8ada207" title="Compress the graph into a CSR representation, and get pointers to it.">Graph.CompressToCSR()</a>.</p>
+<p>Every <a class="el" href="struct_human_factors_1_1_spatial_structures_1_1_node.html" title="A point in space.">Node</a> in the graph contains an X,Y,Z coordinate which can be used to represent a specific point in space. This graph internally is stored as a Sparse Matrix for space efficency. Nodes are stored in a hashmap containing X,Y, and Z coordinates, allowing for quick indexing of specific nodes by location alone. Access to this graph's internal CSR is available through <a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a84a7286932920179d90a63cfd8ada207" title="Compress the graph into a CSR representation, and get pointers to it.">Graph.CompressToCSR()</a>.</p>
 <dl class="section user"><dt>Cost Types</dt><dd>This <a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html" title="A graph representing connections between points in space.">Graph</a> is capable of holding multiple cost types for any of it's edges. Each cost type has a distinct key as it's name, such as "CrossSlope" or "EnergyExpenditure". Upon creation, the graph is assigned a default cost type, <code>Distance</code> which can be accessed explicitly by the key "Distance" or leaving the cost_type field blank. Alternate costs have corresponding edges in the default cost set, but different costs to traverse from the parent to the child node.</dd></dl>
 <dl class="section user"><dt>NodeAttributes</dt><dd>The graph is able to store an arbitrary amount of information about the nodes it contains as strings. Similar to alternate cost types, node attributes are each have a distinct key as their name, but instead of conatining information about edges in the graph, node attributes contain information about nodes. Unlike the cost algorithms in edgecosts, right now there is no functionality within <a class="el" href="namespace_human_factors.html" title="Automated analysis of the built environent">HumanFactors</a> that populates the node attributes of the graph with any kind of metric, however the methods to add and clear node attributes are made available so you are free to add your own node attributes.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>To get the XYZ coordinates of a node from it's ID, use the ID as an index into the graph's nodes array returned by <a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a6b2aeaa562da06bec0d23aaabb2ba74d" title="Get an array containing the graph&#39;s current nodes.">getNodes()</a>; For example, if you want to get the node with an ID of 1 from the graph, you'd access the element at index 1 in the nodes array.</dd></dl>
 <dl class="section invariant"><dt>Invariant</dt><dd>1) The CSR maintained by this graph will always be valid. </dd>
 <dd>
-2) Every unique unique node in the graph will be assigned a unique id. A <a class="el" href="namespace_human_factors_1_1_spatial_structures.html#struct_human_factors_1_1_spatial_structures_1_1_node" title="A point in space.">Node</a> is considered unique if it has an X,Y,Z location that is not within 0.0001 units of any other node in the graph.</dd></dl>
+2) Every unique unique node in the graph will be assigned a unique id. A <a class="el" href="struct_human_factors_1_1_spatial_structures_1_1_node.html" title="A point in space.">Node</a> is considered unique if it has an X,Y,Z location that is not within 0.0001 units of any other node in the graph.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>The graph offers some basic functionality to add edges and nodes but it's main use is to provide access to the output of the <a class="el" href="namespace_human_factors_1_1_graph_generator.html" title="Generate a graph of accessible space from a given start point.">GraphGenerator</a> and <a class="el" href="namespace_human_factors_1_1_visibility_graph.html" title="Evaluate visibility between a set of points.">VisibilityGraph</a>. If adding edges or alternate cost types please make sure to read the documentation for these functions and that all preconditions are followed.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a84a7286932920179d90a63cfd8ada207" title="Compress the graph into a CSR representation, and get pointers to it.">CompressToCSR</a> to get a CSR representation of the graph. </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -250,7 +251,20 @@ override bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 </dl>
 <dl class="section warning"><dt>Warning</dt><dd>1) If an edge between parent and child already exists, this will overwrite that edge. </dd>
 <dd>
-2) Calling this function will invalidate any existing CSRPtrs returned from the graph. Make sure to call CompressToCSR again continuing to access it. </dd></dl>
+2) Calling this function will invalidate any existing CSRPtrs returned from the graph. Make sure to call CompressToCSR again continuing to access it.</dd></dl>
+<dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line">            </div>
+<div class="line">            <span class="comment">// Create a graph, add an edge then compress it</span></div>
+<div class="line">            <a class="code" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a01855a86f49d22301651cf7098ee8967">Graph</a> G = <span class="keyword">new</span> <a class="code" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a01855a86f49d22301651cf7098ee8967">Graph</a>();</div>
+<div class="line">            G.AddEdge(0, 1, 39);</div>
+<div class="line">            G.CompressToCSR();</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Get this cost from the edge</span></div>
+<div class="line">            <span class="keywordtype">float</span> cost_from_graph = G.GetCost(0, 1);</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Print the retrieved cost</span></div>
+<div class="line">            Debug.WriteLine(cost_from_graph);</div>
+<div class="line"> </div>
+</div><!-- fragment --><code>39</code> </dd></dl>
 
 </div>
 </div>
@@ -302,7 +316,7 @@ override bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
   </table>
   </dd>
 </dl>
-<p>\Attention This overload is meant for debugging. There are many issues that can occur with adding integers to the graph that don't already have nodes assigned. Instead use the overload of this function deals with vector 3.</p>
+<dl class="section attention"><dt>Attention</dt><dd>This overload is meant for debugging. There are many issues that can occur with adding integers to the graph that don't already have nodes assigned. Instead use the overload of this function deals with vector 3.</dd></dl>
 <dl class="section pre"><dt>Precondition</dt><dd>1) If adding edges to a new cost type, the graph has been compressed by calling <a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a84a7286932920179d90a63cfd8ada207" title="Compress the graph into a CSR representation, and get pointers to it.">CompressToCSR()</a>. </dd>
 <dd>
 2) If adding a cost to a type that isn't the default cost type, the edge must already exist in the default cost type. </dd>
@@ -322,7 +336,20 @@ override bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 </dl>
 <dl class="section warning"><dt>Warning</dt><dd>1) If an edge between parent and child already exists, this will overwrite that edge. </dd>
 <dd>
-2) Calling this function will invalidate any existing CSRPtrs returned from the graph. Make sure to call CompressToCSR again continuing to access it. </dd></dl>
+2) Calling this function will invalidate any existing CSRPtrs returned from the graph. Make sure to call CompressToCSR again continuing to access it.</dd></dl>
+<dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line"> </div>
+<div class="line">            <span class="comment">// Create a new Graph, add an edge then compress it</span></div>
+<div class="line">            <a class="code" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a01855a86f49d22301651cf7098ee8967">Graph</a> G = <span class="keyword">new</span> <a class="code" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a01855a86f49d22301651cf7098ee8967">Graph</a>();</div>
+<div class="line">            G.AddEdge(<span class="keyword">new</span> Vector3D(0, 0, 2), <span class="keyword">new</span> Vector3D(0, 0, 1), 39);</div>
+<div class="line">            G.CompressToCSR();</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Get the cost form the edge we just added to ensure it exists</span></div>
+<div class="line">            <span class="keywordtype">float</span> cost_from_graph = G.GetCost(0, 1);</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Print the retrieved cost</span></div>
+<div class="line">            Debug.WriteLine(cost_from_graph);</div>
+<div class="line"> </div>
+</div><!-- fragment --><code>39</code> </dd></dl>
 
 </div>
 </div>
@@ -509,7 +536,19 @@ override bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
   </dd>
 </dl>
 <dl class="section warning"><dt>Warning</dt><dd>This will compress the graph if it is not compressed already. If any edges were added between lat call to CompressToCSR and now, then any active CSRPtrs will be invalidated.</dd></dl>
-<dl class="section remark"><dt>Remarks</dt><dd>The order of the scores returned bythis function match the order of the scores returned from <a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a6b2aeaa562da06bec0d23aaabb2ba74d" title="Garray containing the graph&#39;s current nodes.">Graph.getNodes</a>. This can be especially useful for summarizing the results of a <a class="el" href="namespace_human_factors_1_1_visibility_graph.html" title="Evaluate visibility between a set of points.">VisibilityGraph</a>. </dd></dl>
+<dl class="section remark"><dt>Remarks</dt><dd>The order of the scores returned bythis function match the order of the scores returned from <a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a6b2aeaa562da06bec0d23aaabb2ba74d" title="Get an array containing the graph&#39;s current nodes.">Graph.getNodes</a>. This can be especially useful for summarizing the results of a <a class="el" href="namespace_human_factors_1_1_visibility_graph.html" title="Evaluate visibility between a set of points.">VisibilityGraph</a>.</dd></dl>
+<dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line">            <span class="comment">// Create a new graph and add some edges</span></div>
+<div class="line">            <a class="code" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a01855a86f49d22301651cf7098ee8967">Graph</a> g = <span class="keyword">new</span> <a class="code" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a01855a86f49d22301651cf7098ee8967">Graph</a>();</div>
+<div class="line">            g.AddEdge(0, 1, 100);</div>
+<div class="line">            g.AddEdge(0, 2, 50);</div>
+<div class="line">            g.AddEdge(1, 2, 20);</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Compress the graph before using it </span></div>
+<div class="line">            g.CompressToCSR();</div>
+</div><!-- fragment --> <div class="fragment"><div class="line">            var scores = g.AggregateEdgeCosts(<a class="code" href="namespace_human_factors_1_1_spatial_structures.html#abd405fa41da0f9a771d547aa47b6e1a0">GraphEdgeAggregation</a>.SUM);</div>
+<div class="line">            var score_arr = scores.array;</div>
+<div class="line">            Debug.WriteLine(scores);</div>
+</div><!-- fragment --><code>[150, 20, 0]</code> </dd></dl>
 
 <p class="reference">References <a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a84a7286932920179d90a63cfd8ada207">HumanFactors.SpatialStructures.Graph.CompressToCSR()</a>, and <a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a1a40fc2bab18a5adf42fb7a49ca6ddb9">HumanFactors.SpatialStructures.Graph.NumNodes()</a>.</p>
 
@@ -590,7 +629,19 @@ override bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See also</dt><dd>CSRPtrs for more info on the CSR type and how to access it. </dd></dl>
+<dl class="section see"><dt>See also</dt><dd>CSRPtrs for more info on the CSR type and how to access it.</dd></dl>
+<dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line">            <span class="comment">// Create a graph</span></div>
+<div class="line">            <a class="code" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a01855a86f49d22301651cf7098ee8967">Graph</a> G = <span class="keyword">new</span> <a class="code" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a01855a86f49d22301651cf7098ee8967">Graph</a>();</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Add an edge</span></div>
+<div class="line">            G.AddEdge(1, 2, 39);</div>
+<div class="line">            </div>
+<div class="line">            <span class="comment">// Compress the graph to a CSR</span></div>
+<div class="line">            var default_ptrs = G.CompressToCSR();</div>
+<div class="line">            </div>
+<div class="line">            <span class="comment">// Print the CSR</span></div>
+<div class="line">            Debug.Write(default_ptrs);</div>
+</div><!-- fragment --><code>(nnz: 1, rows: 3, cols: 3)</code> </dd></dl>
 
 <p class="reference">Referenced by <a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a45a2d5b16092f8389210dc47f722a539">HumanFactors.SpatialStructures.Graph.AggregateEdgeCosts()</a>.</p>
 
@@ -631,8 +682,8 @@ override bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 <p>Get the cost of traversing between <code>parent</code> and <code>child</code> </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">parent</td><td><a class="el" href="namespace_human_factors_1_1_spatial_structures.html#struct_human_factors_1_1_spatial_structures_1_1_node" title="A point in space.">Node</a> that's being traversed from </td></tr>
-    <tr><td class="paramname">child</td><td><a class="el" href="namespace_human_factors_1_1_spatial_structures.html#struct_human_factors_1_1_spatial_structures_1_1_node" title="A point in space.">Node</a> that's being traversed to </td></tr>
+    <tr><td class="paramname">parent</td><td><a class="el" href="struct_human_factors_1_1_spatial_structures_1_1_node.html" title="A point in space.">Node</a> that's being traversed from </td></tr>
+    <tr><td class="paramname">child</td><td><a class="el" href="struct_human_factors_1_1_spatial_structures_1_1_node.html" title="A point in space.">Node</a> that's being traversed to </td></tr>
     <tr><td class="paramname">cost_type</td><td>The cost type to retrieve. If blank, the graph's default cost will be used.</td></tr>
   </table>
   </dd>
@@ -648,7 +699,8 @@ override bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>This is not a high performance function, since each index into the CSR requires an indexing operation. If multiple values are required, it is suggested to iterate through the pointers from <a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a84a7286932920179d90a63cfd8ada207" title="Compress the graph into a CSR representation, and get pointers to it.">Graph.CompressToCSR()</a>. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This is not a high performance function, since each index into the CSR requires an indexing operation. If multiple values are required, it is suggested to iterate through the pointers from <a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a84a7286932920179d90a63cfd8ada207" title="Compress the graph into a CSR representation, and get pointers to it.">Graph.CompressToCSR()</a>.</dd></dl>
+<dl class="section user"><dt>Example</dt><dd><div class="fragment"></div><!-- fragment --><code>100</code> </dd></dl>
 
 </div>
 </div>
@@ -678,8 +730,42 @@ override bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 <dl class="section return"><dt>Returns</dt><dd>If an attribute with the name of <code>attribute</code>, type was found in the graph, then an array of scores for each node is returned in order of ID. For example, the score of the node with id 10 would be stored at index 10, id 12 stored at index 12, etc. Nodes without scores for <code>attribute</code> will have empty strings at their indexes.</dd>
 <dd>
 If <code>attribute</code> didn't exist in the graph, then an empty array of strings will be returned.</dd></dl>
-<div class="fragment"><div class="line"><span class="comment">// TODO example</span></div>
-</div><!-- fragment --> 
+<dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line">            <span class="comment">// Create a new graph and add some edges</span></div>
+<div class="line">            <a class="code" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a01855a86f49d22301651cf7098ee8967">Graph</a> g = <span class="keyword">new</span> <a class="code" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a01855a86f49d22301651cf7098ee8967">Graph</a>();</div>
+<div class="line">            g.AddEdge(0, 1, 100);</div>
+<div class="line">            g.AddEdge(0, 2, 50);</div>
+<div class="line">            g.AddEdge(1, 2, 20);</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Compress the graph before using it </span></div>
+<div class="line">            g.CompressToCSR();</div>
+</div><!-- fragment --><div class="fragment"><div class="line"> </div>
+<div class="line">            <span class="comment">// Add node attributes to the graph for the nodes</span></div>
+<div class="line">            <span class="comment">// we just created</span></div>
+<div class="line">            g.AddNodeAttribute(2, <span class="stringliteral">&quot;Attr&quot;</span>, <span class="stringliteral">&quot;200&quot;</span>);</div>
+<div class="line">            g.AddNodeAttribute(1, <span class="stringliteral">&quot;Attr&quot;</span>, <span class="stringliteral">&quot;100&quot;</span>);</div>
+<div class="line">            g.AddNodeAttribute(0, <span class="stringliteral">&quot;Attr&quot;</span>, <span class="stringliteral">&quot;0&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Get scores for this attribute from the graph</span></div>
+<div class="line">            var attr = g.GetNodeAttributes(<span class="stringliteral">&quot;Attr&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Print all results</span></div>
+<div class="line">            <span class="keywordflow">foreach</span> (<span class="keywordtype">string</span> score <span class="keywordflow">in</span> attr)</div>
+<div class="line">                Debug.Write(score + <span class="stringliteral">&quot;, &quot;</span>);</div>
+<div class="line">            Debug.WriteLine(<span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"> </div>
+</div><!-- fragment --><code>0, 100, 200,</code> <div class="fragment"><div class="line">            <span class="comment">// Add another node to the graph</span></div>
+<div class="line">            g.AddEdge(0, 4, 50);</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Get the attributes again to update our list</span></div>
+<div class="line">            attr = g.GetNodeAttributes(<span class="stringliteral">&quot;Attr&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Print all results. Note how 4 is the empty string since it was not</span></div>
+<div class="line">            <span class="comment">// Assigned a score for ATTR since it was added to the graph</span></div>
+<div class="line">            <span class="keywordflow">foreach</span> (<span class="keywordtype">string</span> score <span class="keywordflow">in</span> attr)</div>
+<div class="line">                Debug.Write(score + <span class="stringliteral">&quot;, &quot;</span>);</div>
+<div class="line"> </div>
+</div><!-- fragment --><code>0, 100, 200, ,</code> </dd></dl>
+
 <p class="reference">References <a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a1a40fc2bab18a5adf42fb7a49ca6ddb9">HumanFactors.SpatialStructures.Graph.NumNodes()</a>.</p>
 
 </div>
@@ -707,7 +793,33 @@ If <code>attribute</code> didn't exist in the graph, then an empty array of stri
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The ID of the node, or -1 if the node isn't in the graph. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The ID of the node, or -1 if the node isn't in the graph.</dd></dl>
+<dl class="section user"><dt>Examples</dt><dd><div class="fragment"><div class="line"> </div>
+<div class="line">            <span class="comment">// Create a graph</span></div>
+<div class="line">            <a class="code" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a01855a86f49d22301651cf7098ee8967">Graph</a> g = <span class="keyword">new</span> <a class="code" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a01855a86f49d22301651cf7098ee8967">Graph</a>();</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Create two nodes</span></div>
+<div class="line">            Vector3D node0 = <span class="keyword">new</span> Vector3D(0, 0, 1);</div>
+<div class="line">            Vector3D node1 = <span class="keyword">new</span> Vector3D(0, 0, 2);</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Add an edge between them to add them to the graph</span></div>
+<div class="line">            g.AddEdge(node0, node1, 10);</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Get their IDs from the graph</span></div>
+<div class="line">            <span class="keywordtype">int</span> node_0_id = g.GetNodeID(node0);</div>
+<div class="line">            <span class="keywordtype">int</span> node_1_id = g.GetNodeID(node1);</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Print results</span></div>
+<div class="line">            Debug.WriteLine(node_0_id);</div>
+<div class="line">            Debug.WriteLine(node_1_id);</div>
+</div><!-- fragment --><code>0</code><br  />
+<code>1</code><br  />
+<div class="fragment"><div class="line">            <span class="comment">// Create a third node and try to get it&#39;s id</span></div>
+<div class="line">            Vector3D node2 = <span class="keyword">new</span> Vector3D(0, 0, 3);</div>
+<div class="line">            <span class="keywordtype">int</span> node_2_id = g.GetNodeID(node2);</div>
+<div class="line"> </div>
+<div class="line">            Debug.WriteLine(node_2_id);</div>
+</div><!-- fragment --><code>-1</code> </dd></dl>
 
 <p class="reference">Referenced by <a class="el" href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#a394c96543ad621b2e5d98554153d74b4">HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath()</a>.</p>
 
@@ -728,8 +840,23 @@ If <code>attribute</code> didn't exist in the graph, then an empty array of stri
       </table>
 </div><div class="memdoc">
 
-<p>Garray containing the graph's current nodes. </p>
-<dl class="section return"><dt>Returns</dt><dd>An array of the graph's current nodes ordered by ID. </dd></dl>
+<p>Get an array containing the graph's current nodes. </p>
+<dl class="section return"><dt>Returns</dt><dd>An array of the graph's current nodes ordered by ID.</dd></dl>
+<dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line">            </div>
+<div class="line">            <span class="comment">// Create a graph</span></div>
+<div class="line">            <a class="code" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a01855a86f49d22301651cf7098ee8967">Graph</a> G = <span class="keyword">new</span> <a class="code" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a01855a86f49d22301651cf7098ee8967">Graph</a>();</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Insert an edge between two nodes. This will effectively add the</span></div>
+<div class="line">            <span class="comment">// nodes to the graph</span></div>
+<div class="line">            G.AddEdge(<span class="keyword">new</span> Vector3D(0, 0, 2), <span class="keyword">new</span> Vector3D(0, 0, 1), 39);</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Get the nodes by calling G.getNodes();</span></div>
+<div class="line">            var nodes = G.getNodes();</div>
+<div class="line">            </div>
+<div class="line">            <span class="comment">// Print the nodes</span></div>
+<div class="line">            Debug.WriteLine(nodes);</div>
+<div class="line"> </div>
+</div><!-- fragment --><code>[(0, 0, 2), (0, 0, 1)]</code> </dd></dl>
 
 </div>
 </div>
@@ -750,7 +877,23 @@ If <code>attribute</code> didn't exist in the graph, then an empty array of stri
 
 <p>Get the number of nodes in this graph. </p>
 <dl class="section return"><dt>Returns</dt><dd>The number of currently defined nodes in this graph</dd></dl>
-<dl class="section remark"><dt>Remarks</dt><dd>This is used multiple times internally to get the size of the graph without needing to get its nodes. </dd></dl>
+<dl class="section remark"><dt>Remarks</dt><dd>This is used multiple times internally to get the size of the graph without needing to get its nodes.</dd></dl>
+<dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line">            <span class="comment">// Create a new graph and add some edges</span></div>
+<div class="line">            <a class="code" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a01855a86f49d22301651cf7098ee8967">Graph</a> g = <span class="keyword">new</span> <a class="code" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a01855a86f49d22301651cf7098ee8967">Graph</a>();</div>
+<div class="line">            g.AddEdge(0, 1, 100);</div>
+<div class="line">            g.AddEdge(0, 2, 50);</div>
+<div class="line">            g.AddEdge(1, 2, 20);</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Compress the graph before using it </span></div>
+<div class="line">            g.CompressToCSR();</div>
+</div><!-- fragment --><div class="fragment"><div class="line"> </div>
+<div class="line">            <span class="comment">// Get the number of nodes in g</span></div>
+<div class="line">            <span class="keywordtype">int</span> number_of_nodes = g.NumNodes();</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Print </span></div>
+<div class="line">            Debug.WriteLine(number_of_nodes);</div>
+<div class="line"> </div>
+</div><!-- fragment --><code>3</code> </dd></dl>
 
 <p class="reference">Referenced by <a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a45a2d5b16092f8389210dc47f722a539">HumanFactors.SpatialStructures.Graph.AggregateEdgeCosts()</a>, <a class="el" href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#a3ede2597cc17a4f1a130741b0163bbab">HumanFactors.Pathfinding.ShortestPath.DijkstraAllToAll()</a>, and <a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a78c22c3af8aea1a7b873a61fcc8aa935">HumanFactors.SpatialStructures.Graph.GetNodeAttributes()</a>.</p>
 
@@ -791,10 +934,11 @@ If <code>attribute</code> didn't exist in the graph, then an empty array of stri
 <li>src/Csharp/packages/spatialstructures/src/Graph.cs</li>
 </ul>
 </div><!-- contents -->
-<div class="ttc" id="aclass_human_factors_1_1_spatial_structures_1_1_graph_html_a01855a86f49d22301651cf7098ee8967"><div class="ttname"><a href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a01855a86f49d22301651cf7098ee8967">HumanFactors.SpatialStructures.Graph.Graph</a></div><div class="ttdeci">Graph()</div><div class="ttdoc">Construct a new empty graph in unmanaged memory.</div><div class="ttdef"><b>Definition:</b> Graph.cs:105</div></div>
+<div class="ttc" id="aclass_human_factors_1_1_spatial_structures_1_1_graph_html_a01855a86f49d22301651cf7098ee8967"><div class="ttname"><a href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a01855a86f49d22301651cf7098ee8967">HumanFactors.SpatialStructures.Graph.Graph</a></div><div class="ttdeci">Graph()</div><div class="ttdoc">Construct a new empty graph in unmanaged memory.</div><div class="ttdef"><b>Definition:</b> Graph.cs:111</div></div>
+<div class="ttc" id="anamespace_human_factors_1_1_spatial_structures_html_abd405fa41da0f9a771d547aa47b6e1a0"><div class="ttname"><a href="namespace_human_factors_1_1_spatial_structures.html#abd405fa41da0f9a771d547aa47b6e1a0">HumanFactors.SpatialStructures.GraphEdgeAggregation</a></div><div class="ttdeci">GraphEdgeAggregation</div><div class="ttdoc">Methods for aggregating edge costs per node from the graph.</div><div class="ttdef"><b>Definition:</b> Graph.cs:23</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jul 30 2020 10:34:52 for Analysis by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Aug 5 2020 12:07:25 for Analysis by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

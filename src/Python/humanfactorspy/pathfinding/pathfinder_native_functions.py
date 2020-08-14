@@ -196,6 +196,57 @@ def C_FindAllPaths(
 
     return out_tuples
 
+
+def c_calculate_distance_and_predecessor(
+    graph_ptr: c_void_p, cost_type: str
+    ) -> Tuple[c_void_p, c_void_p, c_void_p, c_void_p]:
+    """ Calculate Distance and Predecessor arrays for a graph in C++ 
+
+    Args:
+        graph_ptr : Graph to generate predecessor/distance matricies from
+        cost_type : Type of cost to use to generate distance and predecessor
+                    matricies. Default if left blank.
+    Raises:
+        KeyError : cost_type wasn't left blank, and didn't already exist in the
+                   graph.
+    Returns:
+        In order, distance matrix's vector and data pointers, predecessor matrix's
+        data vector and data pointers. All returned arrays will be of length
+        equal to the number of nodes in g squared.
+
+
+
+    """ 
+
+    # Setup pointers to use as output parameters
+    dist_vector = c_void_p(0)
+    dist_data = c_void_p(0)
+    pred_vector = c_void_p(0)
+    pred_data = c_void_p(0)
+
+    # Call C++ function to update pointers
+    string_ptr = GetStringPtr(cost_type)
+    res = HFPython.CalculateDistanceAndPredecessor(
+        graph_ptr,
+        string_ptr,
+        byref(dist_vector),
+        byref(dist_data),
+        byref(pred_vector),
+        byref(pred_data)
+    )
+
+    # Check for key error
+    if (res == HF_STATUS.NO_COST):
+        raise KeyError(f"Cost Type {cost_type} was not the key to cost in the graph")
+    
+    # If this isn't OK, then something changed in C++ and it wasn't reflected
+    # here.
+    assert(res == HF_STATUS.OK)
+
+    return (dist_vector, dist_data, pred_vector, pred_data)
+
+
+
 def C_DestroyPath(path_ptr: c_void_p) -> None:
     """ Delete a path in C++"""
     try:  # Sometimes the pointers need tobe converted to c_void_p again.

@@ -17,3 +17,4 @@ in space or just a set of IDs.
 from .graph import *
 from .node import *
 from .edge import *
+from .cost_algorithms import *

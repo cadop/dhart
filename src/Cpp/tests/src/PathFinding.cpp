@@ -13,6 +13,7 @@
 #include <node.h>
 #include <edge.h>
 #include <path.h>
+#include <HFExceptions.h>
 
 #include "pathfinder_C.h"
 #include "cost_algorithms.h"
@@ -20,6 +21,7 @@
 
 using namespace HF::SpatialStructures;
 using namespace HF::Pathfinding;
+using std::vector;
 
 TEST(_Pathfinding, BoostGraphCreation) {
 
@@ -88,6 +90,161 @@ TEST(_Pathfinding, MultiplePaths) {
 
 	for (const auto& path : paths)
 		ASSERT_EQ(OP, path);
+}
+
+// A quick copy of the method to construct a path from a distnace
+// and predecessor matrix in the pathfinder with some modifications.
+// Using this to test distance and predecessor matricies. 
+inline Path QuickConstructPath(
+	int start,
+	int end,
+	const std::vector<int> &  pred,
+	const std::vector<float> & distances
+) {
+
+	// Create a new path and add the end point.
+	Path p;
+	p.AddNode(end, 0);
+
+	int current_node = end;
+	if (pred[current_node] == current_node) return Path{};
+
+	float last_cost = distances[current_node];
+
+	while (current_node != start) {
+		int next_node = pred[current_node];
+		float current_cost = distances[next_node];
+		float de_facto_cost = last_cost - current_cost;
+	
+		p.AddNode(next_node, de_facto_cost);
+		
+		last_cost = current_cost;
+		current_node = next_node;
+	}
+
+	// Flip the order of this since this algorithm generates it from end to start
+	p.Reverse();
+	return p;
+}
+
+/*! Ensures taht no runtime errors occur and the array if of the correct length.*/
+TEST(_Pathfinding, DistanceAndPredecessorMatrices) {
+
+	//! [EX_DistPred]
+
+	// Create a graph with some edges
+	Graph g;
+
+	vector<Node> nodes = {
+		Node(1,2,3), Node(4, 5, 6),
+		Node(7, 8, 9), Node(10, 1, 2)
+	};
+	g.addEdge(nodes[0], nodes[1], 10); g.addEdge(nodes[1], nodes[2], 20);
+	g.addEdge(nodes[0], nodes[2], 5); g.addEdge(nodes[1], nodes[0], 10);
+	g.Compress();
+
+	// Turn it into a boost graph
+	auto bg = CreateBoostGraph(g);
+
+	// Create distance/predecessor matricies from the boost graph
+	auto matricies = GenerateDistanceAndPred(*bg.get());
+
+	// print output
+	std::cerr << "DIST PRED " << g.size() << std::endl;
+	std::cerr << matricies << std::endl;
+	
+	// get matricies from the output
+	vector<float>* distance_matrix = matricies.dist;
+	vector<int>* predecessor_matrix = matricies.pred;
+
+	//! [EX_DistPred]
+
+	// Generate a path using both this predecessor/distance matrix
+	// and compare it to a standard path.
+	auto dist_pred_path = QuickConstructPath(0, 2, *predecessor_matrix, *distance_matrix);
+	auto actual_path = FindPath(bg.get(), 0, 2);
+
+	// Compare the path from distance and predecessor matricies, to the actual path
+	ASSERT_EQ(actual_path, dist_pred_path);
+
+	//! [EX_DistPred_2]
+
+	// Free them since it's our responsibility.
+	delete distance_matrix;
+	delete predecessor_matrix;
+	
+	//! [EX_DistPred_2]
+}
+
+
+// Performs the same task as the C++ DistanceAndPredecessor Matricies
+// using the C-Interface, then compares the results to the results
+// from using the C++ functions. 
+TEST(C_Pathfinder, DistanceAndPredecessorMatrices_C) {
+
+	//! [EX_DistPred_C]
+	// Create a graph
+	Graph * g;
+	CreateGraph(NULL, -1, &g);
+
+	// Create some nodes and add edges to the graph
+	vector<vector<float>> nodes = {
+		{1, 2, 3}, {4, 5, 6}, {7, 8, 9}, {10, 1, 2}
+	};
+	AddEdgeFromNodes(g, nodes[0].data(), nodes[1].data(), 10, "");
+	AddEdgeFromNodes(g, nodes[1].data(), nodes[2].data(), 20, "");
+	AddEdgeFromNodes(g, nodes[0].data(), nodes[2].data(), 5, "");
+	AddEdgeFromNodes(g, nodes[1].data(), nodes[0].data(), 10, "");
+	Compress(g);
+	
+	// Create output parameters
+	std::vector<float>* dist_vector; std::vector<int>* pred_vector;
+	float* dist_data; int* pred_data;
+
+	// Call into the new function
+	auto status = CalculateDistanceAndPredecessor(g,"", &dist_vector, &dist_data, &pred_vector, &pred_data);
+		
+	//! [EX_DistPred_C]
+	
+	ASSERT_EQ(HF::Exceptions::HF_STATUS::OK, status);
+	// Calculate the matricies using the C++ function, to ensure the results are identical
+	// Turn it into a boost graph
+	auto bg = CreateBoostGraph(*g);
+
+	// Create distance/predecessor matricies from the boost graph
+	auto matricies = GenerateDistanceAndPred(*bg.get());
+	auto cpp_pred = matricies.pred; auto cpp_dist = matricies.dist;
+	
+	// Compare to C-Interface  generated results
+	for (int i = 0; i < g->size() * g->size(); i++) {
+		
+		// Comparisons between nans will always fail, so handle this before
+		// doing the equality check. 
+		const bool cpp_dist_is_nan = isnan(cpp_dist->at(i));
+		const bool dist_is_nan = isnan(dist_vector->at(i));
+		if (cpp_dist_is_nan && dist_is_nan) continue;
+
+		ASSERT_EQ(cpp_pred->at(i), pred_vector->at(i));
+		ASSERT_EQ(cpp_dist->at(i), dist_vector->at(i));
+	}
+	delete matricies.dist;
+	delete matricies.pred;
+
+	//! [EX_DistPred_C_2]
+	
+	// Print both matricies
+	const int array_length = dist_vector->size();
+	std::cout << "Distance Matrix: [";
+	for (int i = 0; i < array_length; i++)
+		std::cout << dist_vector->at(i) << (i ==  array_length - 1 ? "]\r\nPredecessor Mattrix: [" : ", ");
+	for (int i = 0; i < array_length; i++)
+		std::cout << pred_vector->at(i) << (i == array_length - 1 ? "]\r\n" : ", ");
+
+	// Cleanup memory
+	DestroyIntVector(pred_vector);
+	DestroyFloatVector(dist_vector);
+
+	//! [EX_DistPred_C_2]
 }
 
 ///
