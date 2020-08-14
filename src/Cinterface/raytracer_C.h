@@ -179,10 +179,26 @@ C_INTERFACE DestroyRayTracer(HF::RayTracer::EmbreeRayTracer* rt_to_destroy);
 	
 	</list>
 
-	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireRaysDistance
-
 	\see	\ref mesh_setup (how to create a mesh), \ref mesh_teardown (how to destroy a mesh)
 	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
+
+	Begin by <b>loading an .obj file</b> (\ref mesh_setup).<br>
+	Then, <b>create a BVH</b> (\ref raytracer_setup) using the <b>mesh</b>.<br>
+
+	Define the <b>starting points</b> from where the ray will fire.<br>
+	Define the <b>vector components</b> of the <b>ray</b> that will be fired.<br>
+	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireRaysDistance_points_components
+
+	Prepare a <b>pointer</b> to std::vector<\link RayResult \endlink>, and a pointer to a \link RayResult \endlink .<br>
+	Then, invoke</b> \link FireRaysDistance \endlink .<br>
+	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireRaysDistance
+
+	We can <b>review the results</b> by outputting the contents of the <b>results container</b>:<br>
+	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireRaysDistance_results
+
+	From here, please review the example at \ref raytracer_teardown for instructions<br>
+	on how to free the remainder of the resources used in this example --<br>
+	which are the (vector<\link HF::Geometry::MeshInfo \endlink> *) and (\link HF::RayTracer::EmbreeRayTracer \endlink *) instances.
 
 	`>>> LoadOBJ loaded mesh successfully into loaded_obj at address 0000019C4EA752E0, code: 1`\n
 	`>>> CreateRaytracer created EmbreeRayTracer successfully into bvh at address 0000019C4EA12280, code: 1`\n
@@ -214,10 +230,28 @@ C_INTERFACE FireRaysDistance(
 
 	\returns	HF_STATUS::OK on success
 
-	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireSingleRayDistance
-
 	\see	\ref mesh_setup (how to create a mesh), \ref mesh_teardown (how to destroy a mesh)
 	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
+
+	Begin by <b>loading an .obj file</b> (\ref mesh_setup).<br>
+	Then, <b>create a BVH</b> (\ref raytracer_setup) using the <b>mesh</b>.<br>
+
+	Define the <b>starting points</b> from where the ray will fire.<br>
+	Define the <b>vector components</b> of the <b>ray</b> that will be fired.<br>
+	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireSingleRayDistance_points_dir
+
+	Define a <b>max_distance</b>.<br>
+	Also create variables <b>distance</b> and <b>mesh_id</b> and initialize them as shown.<br>
+	They will be mutated if a <b>hit</b> occurs.<br>
+	Then, <b>invoke</b> \link FireSingleRayDistance \endlink
+	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireSingleRayDistance
+
+	If <b>mesh_id</b> is not <b>-1</b>, and <b>distance</b> is not <b>-1</b>, a <b>hit</b> was made.<br>
+	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireSingleRayDistance_results
+
+	From here, please review the example at \ref raytracer_teardown for instructions<br>
+	on how to free the remainder of the resources used in this example --<br>
+	which are the (vector<\link HF::Geometry::MeshInfo \endlink> *) and (\link HF::RayTracer::EmbreeRayTracer \endlink *) instances.
 
 	`>>> LoadOBJ loaded mesh successfully into loaded_obj at address 0000019C4EA3FCB0, code: 1`\n
 	`>>> CreateRaytracer created EmbreeRayTracer successfully into bvh at address 0000019C4EA12820, code: 1`\n

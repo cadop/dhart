@@ -298,12 +298,19 @@ namespace CInterfaceTests {
 			std::cout << "CreateRaytracer created EmbreeRayTracer successfully into bvh at address " << bvh << ", code: " << status << std::endl;
 		}
 
-		//! [snippet_FireRaysDistance]
+		//! [snippet_FireRaysDistance_points_components]
 		// Define points for rays
 		// These are Cartesian coordinates.
 		std::array<float, 9> points{ 0.0f, 0.0f, 2.0f, 0.0f, 0.0f, 3.0f, 0.0, 0.0, 4.0f };
 		const int size_points = points.size();
 		const int count_points = size_points / 3;
+
+		// Define directions for casting rays
+		// These are vector components, not Cartesian coordinates.
+		std::array<float, 9> dir{ 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, -2.0f, 0.0f, 0.0f, -3.0f };
+		const int size_dir = dir.size();
+		const int count_dir = size_dir / 3;
+		//! [snippet_FireRaysDistance_points_components]
 
 		// size_points represents the member count of the array points.
 		// The member count must be a multiple of 3.
@@ -314,15 +321,18 @@ namespace CInterfaceTests {
 		// count_points should be a multiple of 3, or be 1 (meaning size_points == 3)
 		ASSERT_TRUE(count_points % 3 == 0 || count_points == 1);
 
-		// Define directions for casting rays
-		// These are vector components, not Cartesian coordinates.
-		std::array<float, 9> dir{ 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, -2.0f, 0.0f, 0.0f, -3.0f };
-		const int size_dir = dir.size();
-		const int count_dir = size_dir / 3;
-
 		// dir represents vector components in R3; the member count should be a multiple of 3.
 		ASSERT_TRUE(size_dir % 3 == 0);
 
+		// Valid input accepted by FireRaysDistance:
+		//		count_points == count_dir (one direction per origin)
+		//		count_points == 1 && count_directions > 1 (one origin, multiple directions)
+		//		count_points > 1 && count_directions == 1 (multiple origins, one direction)
+		// In this particular example, since we are firing one direction per origin, 
+		// we must ensure the following:
+		ASSERT_EQ(count_points, count_dir);
+
+		//! [snippet_FireRaysDistance]
 		// Declare a pointer to vector<RayResult>.
 		// FireRaysDistance will allocate memory for this pointer,
 		// we must call DestroyRayResultVector on ray_result when we are done with it.
@@ -331,16 +341,13 @@ namespace CInterfaceTests {
 		std::vector<RayResult>* ray_result = nullptr;
 		RayResult* ray_result_data = nullptr;
 
-		// Valid input accepted by FireRaysDistance:
-		//		count_points == count_dir (one direction per origin)
-		//		count_points == 1 && count_directions > 1 (one origin, multiple directions)
-		//		count_points > 1 && count_directions == 1 (multiple origins, one direction)
-
-		// In this particular example, since we are firing one direction per origin, 
-		// we must ensure the following:
-		ASSERT_EQ(count_points, count_dir);
-
 		status = FireRaysDistance(bvh, points.data(), count_points, dir.data(), count_dir, &ray_result, &ray_result_data);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at FireRaysDistance, code: " << status << std::endl;
+		}
+		//! [snippet_FireRaysDistance]
 
 		// If invalid values for count_points and count_dir are given to FireRaysDistance,
 		// ray_result will not be assigned a valid address -- which means ray_result_data,
@@ -348,17 +355,13 @@ namespace CInterfaceTests {
 		ASSERT_TRUE(ray_result != nullptr);
 		ASSERT_TRUE(ray_result_data != nullptr);
 
-		if (status != 1) {
-			// Error!
-			std::cerr << "Error at FireRaysDistance, code: " << status << std::endl;
-		}
-
 		// *ray_result should not be an empty container.
 		ASSERT_FALSE(ray_result->empty());
 
 		// ray_result->size() should be equal to the amount of rays that will be fired.
 		ASSERT_EQ(ray_result->size(), count_dir);
 
+		//! [snippet_FireRaysDistance_results]
 		//
 		// Iterate over *(ray_result) and output its contents
 		//
@@ -376,6 +379,7 @@ namespace CInterfaceTests {
 			}
 		}
 		std::cout << "]" << std::endl;
+		//! [snippet_FireRaysDistance_results]
 
 		//
 		// Memory resource cleanup.
@@ -482,42 +486,44 @@ namespace CInterfaceTests {
 			std::cout << "CreateRaytracer created EmbreeRayTracer successfully into bvh at address " << bvh << ", code: " << status << std::endl;
 		}
 
-		//! [snippet_FireSingleRayDistance]
+		//! [snippet_FireSingleRayDistance_points_dir]
 		// Define point to start ray
 		// These are Cartesian coordinates.
 		std::array<float, 3> p1 = { 0.0f, 0.0f, 2.0f };
 
-		// p1 should represent one point in R3; it should have three members.
-		ASSERT_TRUE(p1.size() == 3);
-
 		// Define direction to cast ray
 		// These are vector components, not Cartesian coordinates.
 		std::array<float, 3> dir = { 0.0f, 0.0f, -1.0f };
+		//! [snippet_FireSingleRayDistance_points_dir]
+
+		// p1 should represent one point in R3; it should have three members.
+		ASSERT_TRUE(p1.size() == 3);
 
 		// dir should represent vector components in R3; it should have three members
 		// since dir represents one vector.
 		ASSERT_TRUE(dir.size() == 3);
 
-		// Fire a ray for the hitpoint (Fire a ray, get a hit point back)
+		//! [snippet_FireSingleRayDistance]
 		float max_distance = -1;
-		bool did_hit = false;
-
-		// Fire a ray for the distance/meshid (Fire a ray, get a distance/mesh ID back)
 		float distance = 0.0f;
 		int mesh_id = -1;
+
+		// Fire a ray for the distance/meshid (Fire a ray, get a distance/mesh ID back)
 		status = FireSingleRayDistance(bvh, p1.data(), dir.data(), max_distance, &distance, &mesh_id);
 
 		if (status != 1) {
 			// Error!
 			std::cerr << "Error at FireSingleRayDistance, code: " << status << std::endl;
 		}
+		//! [snippet_FireSingleRayDistance]
 
 		// If mesh_id returns -1, this indicates a miss.
 		// This ray (based on parameters) is meant to hit.
 		ASSERT_NE(mesh_id, -1);
 
+		//! [snippet_FireSingleRayDistance_results]
 		std::cout << "Distance is " << distance << ", " << "meshid is " << mesh_id << std::endl;
-		//! [snippet_FireSingleRayDistance]
+		//! [snippet_FireSingleRayDistance_results]
 
 		//
 		// Memory resource cleanup.
