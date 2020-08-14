@@ -617,21 +617,23 @@ namespace CInterfaceTests {
 		//		loaded_obj->empty()
 		ASSERT_TRUE(bvh != nullptr);
 
-		//! [snippet_FireRay]
+		//! [snippet_FireRay_points_direction]
 		// Define point to start ray
 		// These are Cartesian coordinates.
 		std::array<float, 3> p1 { 0.0f, 0.0f, 2.0f };
 
-		// p1 represents a single point in R3. Member count should be 3.
-		ASSERT_TRUE(p1.size() == 3);
-
 		// Define direction to cast ray
 		// These are vector components, not Cartesian coordinates.
 		std::array<float, 3> dir { 0.0f, 0.0f, -1.0f };
+		//! [snippet_FireRay_points_direction]
+
+		// p1 represents a single point in R3. Member count should be 3.
+		ASSERT_TRUE(p1.size() == 3);
 
 		// dir represents a single vector (in component form) in R3. Member count should be 3.
 		ASSERT_TRUE(dir.size() == 3);
 
+		//! [snippet_FireRay_distance_hit_point]
 		// Fire a ray for the hitpoint (Fire a ray, get a hit point back)
 		float max_distance = -1;
 		bool did_hit = false;
@@ -642,10 +644,12 @@ namespace CInterfaceTests {
 		//
 		// We will know if a hit occurs if did_hit is set 'true' by FireRay.
 		std::array<float, 3> hit_point = { p1[0], p1[1], p1[2] };
+		//! [snippet_FireRay_distance_hit_point]
 
 		// hit_point represents a single point in R3. Member count should be 3.
 		ASSERT_TRUE(hit_point.size() == 3);
 
+		//! [snippet_FireRay]
 		status = FireRay(bvh, hit_point[0], hit_point[1], hit_point[2], dir[0], dir[1], dir[2], max_distance, did_hit);
 
 		if (status != 1) {
@@ -653,15 +657,17 @@ namespace CInterfaceTests {
 			std::cerr << "Error at FireRay, code: " << status << std::endl;
 		}
 
-		// Based on the parameters provided, the ray will hit its destination.
-		ASSERT_TRUE(did_hit);
-
 		if (did_hit) {
 			std::cout << "Hit point: " << "[" << hit_point[0] << ", " << hit_point[1] << ", " << hit_point[2] << "]" << std::endl;
 		}
 		else {
 			std::cout << "Hit point: " << "(miss)" << std::endl;
 		}
+		//! [snippet_FireRay]
+
+		// Based on the parameters provided, the ray will hit its destination.
+		ASSERT_TRUE(did_hit);
+
 		//! [snippet_FireRay]
 		//
 		// Memory resource cleanup.
