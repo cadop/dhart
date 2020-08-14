@@ -133,7 +133,7 @@ namespace CInterfaceTests {
 		// If the values in mesh_indices and/or mesh_vertices did not create a valid mesh,
 		// or the values size_indices and/or size_vertices are not in alignment with the arrays they represent
 		// (or not multiples of 3) -- an error will occur.
-		status = StoreMesh(&info, mesh_indices, size_indices, mesh_vertices, size_vertices, mesh_name, mesh_id);
+		status = StoreMesh(&info, mesh_indices.data(), size_indices, mesh_vertices.data(), size_vertices, mesh_name, mesh_id);
 
 		if (status != 1) {
 			std::cerr << "Error at StoreMesh, code: " << status << std::endl;
@@ -215,7 +215,7 @@ namespace CInterfaceTests {
 		// If the values in mesh_indices and/or mesh_vertices did not create a valid mesh,
 		// or the values size_indices and/or size_vertices are not in alignment with the arrays they represent
 		// (or not multiples of 3) -- an error will occur.
-		status = StoreMesh(&info, mesh_indices, size_indices, mesh_vertices, size_vertices, mesh_name, mesh_id);
+		status = StoreMesh(&info, mesh_indices.data(), size_indices, mesh_vertices.data(), size_vertices, mesh_name, mesh_id);
 
 		if (status != 1) {
 			std::cerr << "Error at StoreMesh, code: " << status << std::endl;
@@ -293,8 +293,8 @@ namespace CInterfaceTests {
 			std::cout << "LoadOBJ loaded mesh successfully into loaded_obj at address " << loaded_obj << ", code: " << status << std::endl;
 		}
 
-		// The invocation of StoreMesh should result in info pointing to a valid vector<MeshInfo>.
-		ASSERT_TRUE(info != nullptr);
+		// The invocation of StoreMesh should result in loaded_obj pointing to a valid vector<MeshInfo>.
+		ASSERT_TRUE(loaded_obj != nullptr);
 
 		//
 		// loaded_obj contains the mesh.
