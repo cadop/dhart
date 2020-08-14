@@ -24,9 +24,169 @@ namespace HF {
 
 	@{
 
-	\section path_setup Path setup
-	
-	\section path_teardown Path teardown
+	\section	mesh_setup_energy_blob Mesh setup (energy blob)
+	Begin by loading an .obj file:<br>
+
+	\code
+		// Status code variable, value returned by C Interface functions
+		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
+		int status = 0;
+
+		// Get model path
+		// This is a relative path to your obj file.
+		const std::string obj_path_str = "energy_blob_zup.obj";
+
+		// Size of obj file string (character count)
+		const int obj_length = static_cast<int>(obj_path_str.size());
+
+		// This will point to memory on free store.
+		// The memory will be allocated inside the LoadOBJ function,
+		// and it must be freed using DestroyMeshInfo.
+		std::vector<HF::Geometry::MeshInfo>* loaded_obj = nullptr;
+
+		// Load mesh.
+		// Notice that we pass the address of the loaded_obj pointer
+		// to LoadOBJ. We do not want to pass loaded_obj by value, but by address --
+		// so that we can dereference it and assign it to the address of (pointer to)
+		// the free store memory allocated within LoadOBJ.
+		const std::array<float, 3> rot { 0.0f, 0.0f, 0.0f };	// No rotation.
+		status = LoadOBJ(obj_path_str.c_str(), obj_length, rot[0], rot[1], rot[2], &loaded_obj);
+
+		if (status != 1) {
+			// All C Interface functions return a status code.
+			// Error!
+			std::cerr << "Error at LoadOBJ, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "LoadOBJ loaded mesh successfully into loaded_obj at address " << loaded_obj << ", code: " << status << std::endl;
+		}
+	\endcode
+
+	Then, review the example at \ref raytracer_setup (how to create a BVH).<br>
+
+	\section	generate_graph Graph generation
+	You will then generate a graph, using the BVH:<br>
+
+	\code
+		// Define start point.
+		// These are Cartesian coordinates.
+		// If not above solid ground, no nodes will be generated.
+		const std::array<float, 3> start_point{ -30.0f, 0.0f, 20.0f };
+
+		// Define spacing.
+		// This is the spacing between nodes, with respect to each axis.
+		// Lower values create more nodes, yielding a higher resolution graph.
+		const std::array<float, 3> spacing{ 2.0f, 2.0f, 180.0f };
+
+		// Value of - 1 will generate infinitely many nodes.
+		// Final node count may be greater than this value.
+		const int max_nodes = 5000;
+
+		const int up_step = 30;					// Maximum step height the graph can traverse.
+												// Steps steeper than this are considered to be inaccessible.
+
+		const int down_step = 70;				// Maximum step down the graph can traverse.
+												// Steps steeper than this are considered to be inaccessible.
+
+		const int up_slope = 60;				// Maximum upward slope the graph can traverse (in degrees).
+												// Slopes steeper than this are considered to be inaccessible.
+
+		const int down_slope = 60;				// Maximum downward slope the graph can traverse (in degrees).
+												// Slopes steeper than this are considered to be inaccessible.
+
+		const int max_step_connections = 1;		// Multiplier for number of children to generate for each node.
+												// Increasing this value increases the number of edges in the graph,
+												// therefore increasing the memory footprint of the algorithm overall.
+
+		const int core_count = -1;				// CPU core count. A value of (-1) will use all available cores.
+
+		// Generate graph.
+		// Notice that we pass the address of the graph pointer into GenerateGraph.
+		//
+		// GenerateGraph will assign the deferenced address to a pointer that points
+		// to memory on the free store. We will call DestroyGraph to release the memory resources later on.
+		HF::SpatialStructures::Graph* graph = nullptr;
+
+		status = GenerateGraph(bvh, start_point.data(), spacing.data(), max_nodes,
+			up_step, down_step, up_slope, down_slope,
+			max_step_connections, core_count, &graph);
+
+		if (status != 1) {
+			std::cerr << "Error at GenerateGraph, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "Generate graph ran successfully - graph stored at address " << graph << ", code: " << status << std::endl;
+		}
+
+		// Always compress the graph after generating a graph/adding new edges
+		status = Compress(graph);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at Compress, code: " << status << std::endl;
+		}
+	\endcode
+
+	\section get_all_nodes Get nodes from graph
+	You can retrieve the nodes from the generated graph like this:<br>
+
+	\code
+		// Get nodes.
+		//
+		// The address of the local variable node_vector will be passed to GetAllNodesFromGraph;
+		// it will be dereferenced inside that function and assigned memory via operator new.
+		//
+		// We will have to call DestroyNodes on node_vector to properly release this memory.
+		// node_vector_data points to the internal buffer that resides within *(node_vector).
+		//
+		// When we call DestroyNodes, node_vector_data's memory will also be released.
+		std::vector<HF::SpatialStructures::Node>* node_vector = nullptr;
+		HF::SpatialStructures::Node* node_vector_data = nullptr;
+
+		status = GetAllNodesFromGraph(graph, &node_vector, &node_vector_data);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at GetAllNodesFromGraph, code: " << status << std::endl;
+		}
+
+		// Get size of node vector
+		int node_vector_size = -1;
+		status = GetSizeOfNodeVector(node_vector, &node_vector_size);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at GetSizeOfNodeVector code: " << status << std::endl;
+		}
+
+		// Print number of nodes in the graph
+		const int max_node = node_vector_size - 1;	// This is the max index of *node_vector
+		std::cout << "Graph Generated with " << node_vector_size << " nodes" << std::endl;
+	\endcode
+
+	\section nodes_teardown Destroy nodes from graph
+	When you are finished with the graph node container, you must destroy it:<br>
+
+	\code
+		// destroy vector<Node>
+		status = DestroyNodes(node_vector);
+
+		if (status != 1) {
+			std::cerr << "Error at DestroyNodes, code: " << status << std::endl;
+		}
+	\endcode
+
+	\section graph_teardown Destroy graph
+	When you are finished with the graph, you must destroy it:<br>
+
+	\code
+		// destroy graph
+		status = DestroyGraph(graph);
+
+		if (status != 1) {
+			std::cerr << "Error at DestroyGraph, code: " << status << std::endl;
+		}
+	\endcode
 */
 
 /*!
@@ -61,9 +221,24 @@ namespace HF {
 	for its path members, so do not attempt to access its members after deletion. 
 
 	\see \ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
+	\see \ref generate_graph (how to generate a graph from a BVH)
+	\see \ref get_all_nodes (how to retrieve nodes from a graph)
 	\see \link DestroyPath \endlink for information on deleting the path after usage.
-
 	
+	Begin by reviewing the example at \ref raytracer_setup to load an .obj file (mesh), and create a BVH from the mesh.<br>
+	Then generate a graph (\ref generate_graph) from the BVH -- see \ref get_all_nodes on how to retrieve nodes from the graph.<br>
+
+	Let's find the nodes in the graph closest a set of chosen nodes:<br>
+	\snippet tests\src\pathfinder_C_cinterface.cpp snippet_CreatePath_setup
+
+	Now we are ready to create a path.<br>
+	\snippet tests\src\pathfinder_C_cinterface.cpp snippet_CreatePath
+
+	From here, please review the examples on how to destroy a path (\link DestroyPath \endlink),<br>
+	as well as how to destroy a vector<\link HF::SpatialStructures::Node \endlink> (\ref nodes_teardown),<br>
+	how to destroy a \link HF::SpatialStructures::Graph \endlink (\ref graph_teardown),<br>
+	how to destroy a \link HF::RayTracer::EmbreeRayTracer \endlink (\ref raytracer_teardown),<br>
+	and how to destroy a vector<\link HF::Geometry::MeshInfo \endlink> (\ref mesh_teardown).
 */
 C_INTERFACE CreatePath(
 	const HF::SpatialStructures::Graph* g,
