@@ -761,22 +761,23 @@ namespace CInterfaceTests {
 		//		loaded_obj->empty()
 		ASSERT_TRUE(bvh != nullptr);
 
-		//! [snippet_FireMultipleRays]
+		//! [snippet_FireMultipleRays_points_directions]
 		// Define points for rays
 		// These are Cartesian coordinates.
 		std::array<float, 9> points { 0.0f, 0.0f, 2.0f, 0.0f, 0.0f, 3.0f, 0.0, 0.0, 4.0f };
 		const int size_points = points.size();
 		const int count_points = size_points / 3;
 
-		// size_points represents the member count of the array points.
-		// The member count must be a multiple of 3.
-		ASSERT_TRUE(size_points % 3 == 0);
-
 		// Define directions for casting rays
 		// These are vector components, not Cartesian coordinates.
 		std::array<float, 9> dir { 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, -2.0f, 0.0f, 0.0f, -3.0f };
 		const int size_dir = dir.size();
 		const int count_dir = 3;
+		//! [snippet_FireMultipleRays_points_directions]
+
+		// size_points represents the member count of the array points.
+		// The member count must be a multiple of 3.
+		ASSERT_TRUE(size_points % 3 == 0);
 
 		// The value of count_dir is dependent upon size_dir --
 		// count_dir represents how many vectors we have.
@@ -784,6 +785,7 @@ namespace CInterfaceTests {
 		// and there should be one vector per point.
 		ASSERT_TRUE(count_dir % 3 == 0);
 
+		//! [snippet_FireMultipleRays]
 		// Maximum distance a ray can travel and still hit its target.
 		const int max_distance = -1;
 
@@ -793,6 +795,12 @@ namespace CInterfaceTests {
 
 		status = FireMultipleRays(bvh, points.data(), dir.data(), count_points, max_distance, results.data());
 
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at FireMultipleRays, code: " << status << std::endl;
+		}
+		//! [snippet_FireMultipleRays]
+
 		// results was initialized to be an empty container, 
 		// but it should not be empty after calling FireMultipleRays.
 		ASSERT_FALSE(results.empty());
@@ -800,11 +808,7 @@ namespace CInterfaceTests {
 		// results.size() should be equal to the amount of rays to fire.
 		ASSERT_EQ(results.size(), count_dir);
 
-		if (status != 1) {
-			// Error!
-			std::cerr << "Error at FireMultipleRays, code: " << status << std::endl;
-		}
-
+		//! [snippet_FireMultipleRays_results]
 		//
 		// Review results:
 		//
@@ -816,7 +820,8 @@ namespace CInterfaceTests {
 				<< "], direction [" << dir[k] << ", " << dir[k + 1] << ", " << dir[k + 2] << "]"
 				<< std::endl;
 		}
-		//! [snippet_FireMultipleRays]
+		//! [snippet_FireMultipleRays_results]
+
 		//
 		// Memory resource cleanup.
 		//
