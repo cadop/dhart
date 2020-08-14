@@ -514,8 +514,9 @@ namespace HF::RayTracer {
 		rtcInitIntersectContext(&context);
 	}
 
-	EmbreeRayTracer::EmbreeRayTracer(const EmbreeRayTracer& ERT2) :use_precise(ERT2.use_precise)
+	EmbreeRayTracer::EmbreeRayTracer(const EmbreeRayTracer& ERT2) 
 	{
+		this->use_precise = ERT2.use_precise;
 		device = ERT2.device;
 		context = ERT2.context;
 		scene = ERT2.scene;
@@ -651,6 +652,8 @@ namespace HF::RayTracer {
 
 	// Increment reference counters to prevent destruction when this thing goes out of scope
 	void EmbreeRayTracer::operator=(const EmbreeRayTracer& ERT2) {
+
+		this->use_precise = ERT2.use_precise;
 		device = ERT2.device;
 		context = ERT2.context;
 		scene = ERT2.scene;

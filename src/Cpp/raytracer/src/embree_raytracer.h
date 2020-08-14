@@ -977,14 +977,18 @@ namespace HF::RayTracer {
 			const bool force_precise = false,
 			const bool use_parallel = false)
 		{
-			const int n= nodes.size();
+			const int n = nodes.size();
+
+			// Only use precision if we have it already enabled, or force_precise is true
+			const bool activate_precise = (use_precise || force_precise);
+			
 			std::vector<HitStruct> results (nodes.size());
 
 			#pragma omp parallel for schedule(dynamic) if (use_parallel)
 			for (int i = 0; i < n; i++) {// Use custom triangle intesection if required
 				const auto& node = nodes[i];
 				const auto& direction = directions[i];
-				if (force_precise) {
+				if (activate_precise) {
 					results[i] = FirePreciseRay(
 						node[0], node[1], node[2],
 						direction[0], direction[1], direction[2], max_distance, -1
