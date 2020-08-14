@@ -9,6 +9,8 @@
 #include "gtest/gtest.h"
 #include "objloader_C.h"
 
+#include <array>
+
 #include <filesystem>
 
 namespace CInterfaceTests {
@@ -21,9 +23,6 @@ namespace CInterfaceTests {
 		// This is a relative path to your obj file.
 		const std::string obj_path_str = "plane.obj";
 
-		//
-		// gtest: Does the file at obj_path_str exist?
-		//
 		ASSERT_TRUE(std::filesystem::exists(obj_path_str));
 
 		// Size of obj file string (character count)
@@ -42,7 +41,7 @@ namespace CInterfaceTests {
 		// to LoadOBJ. We do not want to pass loaded_obj by value, but by address --
 		// so that we can dereference it and assign it to the address of (pointer to)
 		// the free store memory allocated within LoadOBJ.
-		const float rot[] = { 90.0f, 0.0f, 0.0f };	// Y up to Z up
+		const std::array<float, 3> rot { 90.0f, 0.0f, 0.0f };	// Y up to Z up
 		status = LoadOBJ(obj_path_str.c_str(), obj_length, rot[0], rot[1], rot[2], &loaded_obj);
 
 		//
@@ -56,15 +55,7 @@ namespace CInterfaceTests {
 		// - ensure that loaded_obj != nullptr, which would mean that status == 1 (OK)
 		//
 
-		//
-		// gtest: Is status == HF_STATUS::OK? (LoadOBJ ran successfully)
-		//
 		ASSERT_EQ(status, 1);					// status of 1 is HF::Exceptions::HF_STATUS::OK
-
-		//
-		// gtest: Is loaded_obj non-null?
-		//		  (if loaded_obj == nullptr, it was never assigned the address of a vector<MeshInfo>)
-		//
 		ASSERT_TRUE(loaded_obj != nullptr);		// if loaded_obj non-null, mesh was loaded successfully
 
 		if (status != 1) {
@@ -108,18 +99,24 @@ namespace CInterfaceTests {
 		// and size of mesh_indices % 3 == 0, that is to say --
 		// the member count of mesh_indices should be a multiple of 3.
 		// Every three members in mesh_indices constitutes a complete triangle for the mesh.
-		const int size_indices = 3;
-		const int mesh_indices[size_indices] = {   0,   1,   2 };
-		                                    // { v_0, v_1, v_2 };
+		const std::array<int, 3> mesh_indices { 0, 1, 2 };	// v_0, v_1, v_2
+		const int size_indices = static_cast<int>(mesh_indices.size());
 
 		// This is an array of vertex coordinates. 
 		// Every three members in mesh_vertices constitutes a vertex.
 		// Every nine members constitutes a complete triangle for the mesh.
 		// Size of mesh_vertices % 3 == 0, that is to say --
 		// the member count of mesh_vertices should be a multiple of 3.
-		const int size_vertices = 9;
-		const float mesh_vertices[size_vertices] = { 34.1f, 63.9f, 16.5f, 23.5f, 85.7f, 45.2f, 12.0f, 24.6f, 99.4f };
-		                                        // {  v_0x,  v_0y,  v_0z,  v_1x,  v_1y,  v_1z,  v_2x,  v_2y,  v_2z };
+		const std::array<float, 9> mesh_vertices { 34.1f, 63.9f, 16.5f, 23.5f, 85.7f, 45.2f, 12.0f, 24.6f, 99.4f };
+		                                      // {  v_0x,  v_0y,  v_0z,  v_1x,  v_1y,  v_1z,  v_2x,  v_2y,  v_2z };
+		const int size_vertices = static_cast<int>(mesh_vertices.size());
+
+		// size_vertices should be a multiple of 3,
+		// size_vertices should be a multiple of 3,
+		// and size_indices should divide size_vertices evenly.
+		ASSERT_TRUE(size_indices % 3 == 0);
+		ASSERT_TRUE(size_vertices % 3 == 0);
+		ASSERT_TRUE(size_vertices % size_indices == 0);
 
 		// Give the mesh a name, and an ID.
 		const auto mesh_name = "This mesh";
@@ -142,6 +139,9 @@ namespace CInterfaceTests {
 			std::cerr << "Error at StoreMesh, code: " << status << std::endl;
 		}
 		
+		// The invocation of StoreMesh should result in info pointing to a valid vector<MeshInfo>.
+		ASSERT_TRUE(info != nullptr);
+
 		//
 		// Verify that the mesh, at info (vector<MeshInfo> *),
 		// was stored properly by StoreMesh.
@@ -183,18 +183,24 @@ namespace CInterfaceTests {
 		// and size of mesh_indices % 3 == 0, that is to say --
 		// the member count of mesh_indices should be a multiple of 3.
 		// Every three members in mesh_indices constitutes a complete triangle for the mesh.
-		const int size_indices = 3;
-		const int mesh_indices[size_indices] = { 0,   1,   2 };
-		                                  // { v_0, v_1, v_2 };
+		const std::array<int, 3> mesh_indices{ 0, 1, 2 };	// v_0, v_1, v_2
+		const int size_indices = static_cast<int>(mesh_indices.size());
 
 		// This is an array of vertex coordinates. 
 		// Every three members in mesh_vertices constitutes a vertex.
 		// Every nine members constitutes a complete triangle for the mesh.
 		// Size of mesh_vertices % 3 == 0, that is to say --
 		// the member count of mesh_vertices should be a multiple of 3.
-		const int size_vertices = 9;
-		const float mesh_vertices[size_vertices] = { 34.1f, 63.9f, 16.5f, 23.5f, 85.7f, 45.2f, 12.0f, 24.6f, 99.4f };
-		                                        // {  v_0x,  v_0y,  v_0z,  v_1x,  v_1y,  v_1z,  v_2x,  v_2y,  v_2z };
+		const std::array<float, 9> mesh_vertices{ 34.1f, 63.9f, 16.5f, 23.5f, 85.7f, 45.2f, 12.0f, 24.6f, 99.4f };
+		// {  v_0x,  v_0y,  v_0z,  v_1x,  v_1y,  v_1z,  v_2x,  v_2y,  v_2z };
+		const int size_vertices = static_cast<int>(mesh_vertices.size());
+
+		// size_vertices should be a multiple of 3,
+		// size_vertices should be a multiple of 3,
+		// and size_indices should divide size_vertices evenly.
+		ASSERT_TRUE(size_indices % 3 == 0);
+		ASSERT_TRUE(size_vertices % 3 == 0);
+		ASSERT_TRUE(size_vertices % size_indices == 0);
 
 		// Give the mesh a name, and an ID.
 		const auto mesh_name = "This mesh";
@@ -214,6 +220,10 @@ namespace CInterfaceTests {
 		if (status != 1) {
 			std::cerr << "Error at StoreMesh, code: " << status << std::endl;
 		}
+		
+		// The invocation of StoreMesh should result in info pointing to a valid vector<MeshInfo>.
+		ASSERT_TRUE(info != nullptr);
+		
 		//! [snippet_RotateMesh]
 		// Prepare the desired rotation values.
 		// A value of 0.0f means no rotation about the given axis.
@@ -253,6 +263,8 @@ namespace CInterfaceTests {
 		// This is a relative path to your obj file.
 		const std::string obj_path_str = "plane.obj";
 
+		ASSERT_TRUE(std::filesystem::exists(obj_path_str));
+
 		// Size of obj file string (character count)
 		const int obj_length = static_cast<int>(obj_path_str.size());
 
@@ -269,7 +281,7 @@ namespace CInterfaceTests {
 		// to LoadOBJ. We do not want to pass loaded_obj by value, but by address --
 		// so that we can dereference it and assign it to the address of (pointer to)
 		// the free store memory allocated within LoadOBJ.
-		const float rot[] = { 90.0f, 0.0f, 0.0f };	// Y up to Z up
+		const std::array<float, 3> rot { 90.0f, 0.0f, 0.0f };	// Y up to Z up
 		status = LoadOBJ(obj_path_str.c_str(), obj_length, rot[0], rot[1], rot[2], &loaded_obj);
 
 		if (status != 1) {
@@ -280,6 +292,9 @@ namespace CInterfaceTests {
 		else {
 			std::cout << "LoadOBJ loaded mesh successfully into loaded_obj at address " << loaded_obj << ", code: " << status << std::endl;
 		}
+
+		// The invocation of StoreMesh should result in info pointing to a valid vector<MeshInfo>.
+		ASSERT_TRUE(info != nullptr);
 
 		//
 		// loaded_obj contains the mesh.
