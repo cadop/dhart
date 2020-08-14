@@ -139,6 +139,11 @@ namespace CInterfaceTests {
 		}
 		//! [snippet_view_analysis_SphereicalViewAnalysisAggregate]
 
+		// We must verify that aggregate_results is non-null after calling SphereicalViewAnalysisAggregate,
+		// and even if it is non-null, we must verify that it is not empty.
+		ASSERT_TRUE(aggregate_results != nullptr);
+		ASSERT_FALSE(aggregate_results->empty());
+
 		//! [snippet_view_analysis_SphereicalViewAnalysisAggregate_results]
 		// Print aggregate results vector (vector<float>)
 		std::cout << "[";
@@ -300,6 +305,11 @@ namespace CInterfaceTests {
 		}
 		//! [snippet_view_analysis_SphericalViewAnalysisAggregateFlat]
 
+		// We must verify that aggregate_results is non-null after calling SphereicalViewAnalysisAggregate,
+		// and even if it is non-null, we must verify that it is not empty.
+		ASSERT_TRUE(aggregate_results != nullptr);
+		ASSERT_FALSE(aggregate_results->empty());
+
 		//! [snippet_view_analysis_SphericalViewAnalysisAggregateFlat_results]
 		// Print aggregate results vector (vector<float>)
 		std::cout << "[";
@@ -450,6 +460,11 @@ namespace CInterfaceTests {
 			std::cerr << "Error at SphericalViewAnalysisNoAggregate, code: " << status << std::endl;
 		}
 		//! [snippet_view_analysis_SphericalViewAnalysisNoAggregate]
+
+		// We must verify that  results is non-null after calling SphereicalViewAnalysisNoAggregate,
+		// and even if it is non-null, we must verify that it is not empty.
+		ASSERT_TRUE(results != nullptr);
+		ASSERT_FALSE(results->empty());
 
 		//! [snippet_view_analysis_SphericalViewAnalysisNoAggregate_results]
 		// Print results vector (vector<RayResult>)
@@ -604,6 +619,11 @@ namespace CInterfaceTests {
 		}
 		//! [snippet_view_analysis_SphericalViewAnalysisNoAggregateFlat]
 
+		// We must verify that aggregate_results is non-null after calling SphereicalViewAnalysisNoAggregateFlat,
+		// and even if it is non-null, we must verify that it is not empty.
+		ASSERT_TRUE(results != nullptr);
+		ASSERT_FALSE(results->empty());
+
 		//! [snippet_view_analysis_SphericalViewAnalysisNoAggregateFlat_results]
 		// Print results vector (vector<RayResult>)
 		const int start_range = 15;
@@ -676,6 +696,12 @@ namespace CInterfaceTests {
 			std::cerr << "Error at SphericalDistribute, code: " << status << std::endl;
 		}
 		//! [snippet_view_analysis_SphericalDistribute]
+
+		// We must ensure that out_float points to a valid address after calling SphericalDistribute.
+		ASSERT_TRUE(out_float != nullptr);
+
+		// We must also ensure that *out_float is not empty.
+		ASSERT_FALSE(out_float->empty());
 
 		//! [snippet_view_analysis_SphericalDistribute_output]
 		//
