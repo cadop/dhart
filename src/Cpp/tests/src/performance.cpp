@@ -196,23 +196,21 @@ struct GraphGeneratorSettings {
 };
 
 // This will run once for every model and every raycount
-TEST(Performance, GraphGeneratorPerformancetest) {
+TEST(Performance, GraphGenerator_PrecisevsStandard) {
 	const std::string filename = "GraphGeneratorResults.csv";
 
 	// Number of trials is based on number of elements here
 	const vector<int> maxnodes = {
-		5000,
-		10000,
-		55555,
-		100000,
-		500000,
-		5000000
+		5000, 5000,	5000,
+		10000,	10000, 10000,
+		55555, 55555, 55555,
+		100000,	100000,	100000,
 	};
 
 	printf("Loading Models...\n");
 	vector<ModelAndStart> models = {
 		ModelAndStart({0,0,1},  "plane.obj", true),
-		ModelAndStart({-4.711,1.651,-14.300},  "sibenik.obj", true),
+//		ModelAndStart({-4.711,1.651,-15.300 },  "sibenik.obj", true),
 		//	ModelAndStart({-4.711,1.651,-14.300},  "sibenik_subdivided.obj", true),
 		ModelAndStart({0.007,-0.001,1},  "sponza.obj", true),
 		ModelAndStart({-22.4280376, -12.856843, 5.4826779},  "energy_blob_zup.obj"),
