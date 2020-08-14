@@ -306,10 +306,27 @@ C_INTERFACE FireMultipleRays(HF::RayTracer::EmbreeRayTracer* ert, float* origins
 
 	\returns	HF_STATUS::OK on completion.
 
-	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireMultipleOriginsOneDirection
-
 	\see	\ref mesh_setup (how to create a mesh), \ref mesh_teardown (how to destroy a mesh)
 	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
+
+	Begin by <b>loading an .obj file</b> (\ref mesh_setup).<br>
+	Then, <b>create a BVH</b> (\ref raytracer_setup) using the <b>mesh</b>.<br>
+
+	Define the <b>starting points</b> from where the ray will fire.<br>
+	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireMultipleOriginsOneDirection_start_point
+
+	Define the <b>vector components</b> of the <b>ray</b> that will be fired.<br>
+	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireMultipleOriginsOneDirection_direction
+
+	Define a <b>maximum distance value</b>, and a <b>container</b> to store the <b>ray collision results</b>.<br>
+	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireMultipleOriginsOneDirection
+
+	We can <b>review the results</b> by outputting the contents of the <b>results container</b>:<br>
+	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireMultipleOriginsOneDirection_results
+
+	From here, please review the example at \ref raytracer_teardown for instructions<br>
+	on how to free the remainder of the resources used in this example --<br>
+	which are the (vector<\link HF::Geometry::MeshInfo \endlink> *) and (\link HF::RayTracer::EmbreeRayTracer \endlink *) instances.
 
 	`>>> LoadOBJ loaded mesh successfully into loaded_obj at address 0000019E90659220, code: 1`\n
 	`>>> CreateRaytracer created EmbreeRayTracer successfully into bvh at address 0000019E86D22BE0, code: 1`\n

@@ -915,28 +915,33 @@ namespace CInterfaceTests {
 			std::cout << "CreateRaytracer created EmbreeRayTracer successfully into bvh at address " << bvh << ", code: " << status << std::endl;
 		}
 
-		//! [snippet_FireMultipleOriginsOneDirection]
+		//! [snippet_FireMultipleOriginsOneDirection_start_point]
 		// Define points to start rays
 		// These are Cartesian coordinates.
 		std::array<float, 9> p1 { 0.0f, 0.0f, 2.0f, 0.0f, 0.0f, 3.0f, 0.0f, 0.0f, 4.0f };
 		const int size_p1 = p1.size();
 		const int count_p1 = size_p1 / 3;
+		//! [snippet_FireMultipleOriginsOneDirection_start_point]
 
 		// size_p1 represents the member count of the array p1.
 		// Member count should be a multiple of 3.
 		ASSERT_TRUE(size_p1 % 3 == 0);
 
+		//! [snippet_FireMultipleOriginsOneDirection_direction]
 		// Define one direction to cast rays
 		// These are vector components, not Cartesian coordinates.
 		const std::array<float, 3> dir { 0.0f, 0.0f, -1.0f };
 		const int size_dir = dir.size();
 		const int count_dir = size_dir / 3;
+		//! [snippet_FireMultipleOriginsOneDirection_direction]
 
 		// size_dir represents the member count of the array dir.
 		// There should be one vector for every point, and since we need at least one triangle,
 		// and a triangle is composed of three points -- we should have at least 9 members in dir.
 		// Just as with size_points, if we have more than 9 members in dir, the member count must be a multiple of 3.
 		ASSERT_TRUE(size_p1 % 3 == 0);
+
+		//! [snippet_FireMultipleOriginsOneDirection]
 
 		// Maximum distance a ray can travel and still hit a target
 		const int max_distance = -1;
@@ -952,17 +957,20 @@ namespace CInterfaceTests {
 		// results will be mutated by FireMultipleOriginsOneDirection.
 		status = FireMultipleOriginsOneDirection(bvh, p1.data(), dir.data(), count_p1, max_distance, results.data());
 
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at FireMultipleDirectionsOneOrigin, code: " << status << std::endl;
+		}
+
+		//! [snippet_FireMultipleOriginsOneDirection]
+
 		// results should not be empty after calling FireMultipleOriginsOneDirection.
 		ASSERT_FALSE(results.empty());
 
 		// results.size() should be equal to the amount of rays to fire.
 		ASSERT_EQ(results.size(), count_p1);
 
-		if (status != 1) {
-			// Error!
-			std::cerr << "Error at FireMultipleDirectionsOneOrigin, code: " << status << std::endl;
-		}
-
+		//! [snippet_FireMultipleOriginsOneDirection_results]
 		//
 		// Review results:
 		//
@@ -974,7 +982,8 @@ namespace CInterfaceTests {
 				<< "], from point [" << p1[k] << ", " << p1[k + 1] << ", " << p1[k + 2] << "]"
 				<< std::endl;
 		}
-		//! [snippet_FireMultipleOriginsOneDirection]
+		//! [snippet_FireMultipleOriginsOneDirection_results]
+
 		//
 		// Memory resource cleanup.
 		//
