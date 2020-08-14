@@ -414,7 +414,7 @@ namespace HF::RayTracer {
 		hit.ray.org_x = x; hit.ray.org_y = y; hit.ray.org_z = z;
 		hit.ray.dir_x = dx; hit.ray.dir_y = dy; hit.ray.dir_z = dz;
 
-		hit.ray.tnear = 0.00001f;
+		hit.ray.tnear = 0.0f;
 		hit.ray.tfar = (max_distance > 0) ? max_distance : INFINITY;
 		hit.ray.time = 0.0f;
 
@@ -495,7 +495,9 @@ namespace HF::RayTracer {
 		return out_array;
 	}
 
-	EmbreeRayTracer::EmbreeRayTracer(std::vector<HF::Geometry::MeshInfo>& MI, bool use_precise_intersection) : use_precise(use_precise_intersection) {
+	EmbreeRayTracer::EmbreeRayTracer(std::vector<HF::Geometry::MeshInfo>& MI, bool use_precise_intersection){
+		this->use_precise = use_precise_intersection;
+
 		// Throw if MI's size is less than 0
 		if (MI.empty())
 		{

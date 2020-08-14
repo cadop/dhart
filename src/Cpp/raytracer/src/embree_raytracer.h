@@ -83,7 +83,7 @@ namespace HF::RayTracer {
 		/// Vertex buffer. Is used in multiple places but contents are dumped.
 		Vertex* Vertices;
 
-		const bool use_precise = false; ///< If true, use custom triangle intersection intersection instead of embree's
+		bool use_precise = false; ///< If true, use custom triangle intersection intersection instead of embree's
 
 		std::vector<RTCGeometry> geometry; //> A list of the geometry being used by RTCScene.
 
@@ -943,8 +943,8 @@ namespace HF::RayTracer {
 			const V& direction,
 			float& out_distance,
 			int& out_meshid,
-			float max_distance = -1.0f
-		) {
+			float max_distance = -1.0f)
+		{
 			HitStruct result;
 			
 			// Use custom triangle intesection if required
@@ -959,14 +959,46 @@ namespace HF::RayTracer {
 					direction[0], direction[1], direction[2], max_distance, -1
 				);
 
-
+			// If no intersection was found, return false
 			if (!result.DidHit()) return false;
 			else {
+				// otherwise update outputs then return true
 				out_distance = result.distance;
 				out_meshid = result.meshid;
 				return true;
 			}
 		}
+
+		template <typename N, typename V>
+		inline std::vector<HitStruct> FireAnyRayParallel(
+			const N & nodes,
+			const V & directions,
+			float max_distance = -1.0f,
+			bool force_precise = false)
+		{
+			const int n= nodes.size();
+			std::vector<HitStruct> results (nodes.size());
+
+			#pragma omp parallel for schedule(dynamic)
+			for (int i = 0; i < n; i++) {// Use custom triangle intesection if required
+				const auto& node = nodes[i];
+				const auto& direction = directions[i];
+				if (force_precise) {
+					results[i] = FirePreciseRay(
+						node[0], node[1], node[2],
+						direction[0], direction[1], direction[2], max_distance, -1
+					);
+				}
+
+				else
+					results[i] = Intersect(
+						node[0], node[1], node[2],
+						direction[0], direction[1], direction[2], max_distance, -1
+					);
+			}
+			return results;
+		}
+
 
 		/// <summary>
 		/// Template for firing rays using array-like containers for the direction and origin.

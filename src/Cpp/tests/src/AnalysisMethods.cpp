@@ -199,7 +199,7 @@ namespace HF {
 	TEST(_GraphGenerator, DuplicateNodes_2B) {
 		auto mesh = Geometry::LoadMeshObjects("energy_blob_zup.obj");
 
-		RayTracer::EmbreeRayTracer rt(mesh);
+		RayTracer::EmbreeRayTracer rt(mesh, true);
 		auto GG = GraphGenerator::GraphGenerator(rt, 0);
 
 		constexpr double default_z_precision = 0.0000001f;
