@@ -116,6 +116,7 @@ struct RayResult {
 	\returns	HF_STATUS::MISSING_DEPEND if Embree's dll couldn't be found. 
 				HF_STATUS::GENERIC_ERROR if <paramref name="mesh"/> is null.
 
+	\see	\ref mesh_setup (how to create a mesh), \ref mesh_teardown (how to destroy a mesh)
 	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
 */
 C_INTERFACE CreateRaytracer(std::vector<HF::Geometry::MeshInfo>* mesh, HF::RayTracer::EmbreeRayTracer** out_raytracer);
@@ -127,6 +128,7 @@ C_INTERFACE CreateRaytracer(std::vector<HF::Geometry::MeshInfo>* mesh, HF::RayTr
 	
 	\returns	HF::OK on completion.
 
+	\see	\ref mesh_setup (how to create a mesh), \ref mesh_teardown (how to destroy a mesh)
 	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
 */
 C_INTERFACE DestroyRayTracer(HF::RayTracer::EmbreeRayTracer* rt_to_destroy);
@@ -179,6 +181,7 @@ C_INTERFACE DestroyRayTracer(HF::RayTracer::EmbreeRayTracer* rt_to_destroy);
 
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireRaysDistance
 
+	\see	\ref mesh_setup (how to create a mesh), \ref mesh_teardown (how to destroy a mesh)
 	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
 
 	`>>> LoadOBJ loaded mesh successfully into loaded_obj at address 0000019C4EA752E0, code: 1`\n
@@ -202,22 +205,18 @@ C_INTERFACE FireRaysDistance(
 	\brief		Fire a single ray and get the distance to its hit and the mesh ID if it hit anything. 
 				If it missed, then distance and meshid will both be -1.
 
-	\param	ert		The ray tracer to fire from.
-
-	\param	origin	The origin point to fire from.
-
-	\param	direction	The direction to fire the ray in.
-
+	\param	ert				The ray tracer to fire from.
+	\param	origin			The origin point to fire from.
+	\param	direction		The direction to fire the ray in.
 	\param	max_distance	Maximum distance to record a hit within. Any hits beyond this distance will not be counted.
-
 	\param	out_distance	Out parameter for Distance to the hitpoint. Will be set to -1 if the ray didn't hit anything.
-
-	\param	out_meshid	Out parameter for the ID of the hit mesh. Will be set to -1 if the ray didn't hit anything.
+	\param	out_meshid		Out parameter for the ID of the hit mesh. Will be set to -1 if the ray didn't hit anything.
 
 	\returns	HF_STATUS::OK on success
 
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireSingleRayDistance
 
+	\see	\ref mesh_setup (how to create a mesh), \ref mesh_teardown (how to destroy a mesh)
 	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
 
 	`>>> LoadOBJ loaded mesh successfully into loaded_obj at address 0000019C4EA3FCB0, code: 1`\n
@@ -250,6 +249,7 @@ C_INTERFACE FireSingleRayDistance(
 
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireRay
 
+	\see	\ref mesh_setup (how to create a mesh), \ref mesh_teardown (how to destroy a mesh)
 	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
 
 	`>>> LoadOBJ loaded mesh successfully into loaded_obj at address 0000019E906599A0, code: 1`\n
@@ -278,6 +278,7 @@ C_INTERFACE FireRay(HF::RayTracer::EmbreeRayTracer* ert, float& x, float& y, flo
 
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireMultipleRays
 
+	\see	\ref mesh_setup (how to create a mesh), \ref mesh_teardown (how to destroy a mesh)
 	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
 
 	`>>> LoadOBJ loaded mesh successfully into loaded_obj at address 0000019E906596A0, code: 1`\n
@@ -307,6 +308,7 @@ C_INTERFACE FireMultipleRays(HF::RayTracer::EmbreeRayTracer* ert, float* origins
 
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireMultipleOriginsOneDirection
 
+	\see	\ref mesh_setup (how to create a mesh), \ref mesh_teardown (how to destroy a mesh)
 	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
 
 	`>>> LoadOBJ loaded mesh successfully into loaded_obj at address 0000019E90659220, code: 1`\n
@@ -337,6 +339,7 @@ C_INTERFACE FireMultipleOriginsOneDirection(HF::RayTracer::EmbreeRayTracer* ert,
 
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireMultipleDirectionsOneOrigin
 
+	\see	\ref mesh_setup (how to create a mesh), \ref mesh_teardown (how to destroy a mesh)
 	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
 
 	`>>> LoadOBJ loaded mesh successfully into loaded_obj at address 0000019E906587A0, code: 1`\n
@@ -363,8 +366,8 @@ C_INTERFACE FireMultipleDirectionsOneOrigin(HF::RayTracer::EmbreeRayTracer* ert,
 	\param	direction_size	How many directions are included. Note that a single direction is 3 floats, so this should equal
 							the length of the origin array / 3. This must match origin_size or be equal to one.
 
-	\param	max_distance		Maximum distance a ray can travel and still hit a target.
-	\param	result_array		Output array booleans
+	\param	max_distance	Maximum distance a ray can travel and still hit a target.
+	\param	result_array	Output array booleans
 
 	\returns		HF_STATUS::OK on completion
 
@@ -373,6 +376,7 @@ C_INTERFACE FireMultipleDirectionsOneOrigin(HF::RayTracer::EmbreeRayTracer* ert,
 
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireOcclusionRays
 
+	\see	\ref mesh_setup (how to create a mesh), \ref mesh_teardown (how to destroy a mesh)
 	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
 
 	`>>> LoadOBJ loaded mesh successfully into loaded_obj at address 0000019E90658440, code: 1`\n
@@ -399,6 +403,7 @@ C_INTERFACE FireOcclusionRays(
 
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_DestroyRayResultVector
 
+	\see	\ref mesh_setup (how to create a mesh), \ref mesh_teardown (how to destroy a mesh)
 	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH), FireRaysDistance
 */
 C_INTERFACE DestroyRayResultVector(
