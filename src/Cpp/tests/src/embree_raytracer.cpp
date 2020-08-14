@@ -74,6 +74,26 @@ TEST(_EmbreeRayTracer, Copy) {
 	rt2.FireOcclusionRay(std::array<float, 3>{1, 1, 1}, std::array<float, 3>{1, 1, 1});
 }
 
+TEST(_EmbreeRayTracer, EmbreeGarbageCollectCorrect) {
+
+	// Load teapot
+	std::string teapot_path = "teapot.obj";
+	auto geom = HF::Geometry::LoadMeshObjects(teapot_path, HF::Geometry::ONLY_FILE);
+
+	// Construct a raytracer
+	HF::RayTracer::EmbreeRayTracer * ERT = new HF::RayTracer::EmbreeRayTracer(geom);
+	
+	// Call copy constructor to create a new raytracer
+	HF::RayTracer::EmbreeRayTracer ERT2 = *ERT;
+
+	// Delete the original raytracer
+	delete ERT;
+
+	// Try to fire a ray. If this crashes, then it means the copy constructor isn't correctly incrementing the reference counter.
+	ERT2.FireOcclusionRay(std::array<float, 3>{1, 1, 1}, std::array<float, 3>{1, 1, 1});
+}
+
+
 TEST(_EmbreeRayTracer, OcclusionRays) {
 	std::string teapot_path = "big_teapot.obj";
 	auto geom = HF::Geometry::LoadMeshObjects(teapot_path, HF::Geometry::ONLY_FILE, true);
@@ -359,6 +379,51 @@ TEST(_EmbreeRayTracer, FireRayArrayOverload) {
 	ASSERT_FALSE(res);
 }
 
+/*
+#undef max
+TEST(Sanity, Precision) {
+
+	auto rt = CreateRTWithPlane();
+
+	int num_rays = 10000;
+	float max_height = 1000.0f;
+	auto obj_path = GetTestOBJPath("energy blob");
+	auto ray_tracer = EmbreeRayTracer(HF::Geometry::LoadMeshObjects(obj_path));
+
+	std::array<float, 3> start_point = { 7.587f, 3.890f, 12.276f };
+
+	float increment = max_height / static_cast<float>(num_rays);
+	std::vector<float> distances(num_rays);
+
+	const std::array<float, 3> down = { 0,0,-1 };
+
+	int out_mesh_id = -1;
+
+	std::ofstream myfile;
+	myfile.open("EmbreeRayTracerResults2.csv");
+	myfile << "trial" << "," << "height" << "," << "distance" << "," << "difference" << "," << "moved" << std::endl;
+
+	for (int i = 0; i < num_rays; i++) {
+		const float current_z_value = (increment * static_cast<float>(i)) + start_point[2];
+
+		std::array<float, 3> origin = { start_point[0], start_point[1], current_z_value };
+		ray_tracer.FireAnyRay(
+			origin,
+			down,
+			distances[i],
+			out_mesh_id
+		);
+
+		myfile << i << ","
+			<< current_z_value - start_point[2] << ","
+			<< distances[i] << ","
+			<< current_z_value - start_point[2] - distances[i] << ","
+			<< origin[2] + (down[2] * distances[i])
+			<< std::endl;
+	}
+	myfile.close();
+}
+*/
 TEST(_EmbreeRayTracer, Intersect) {
 	// Create Plane
 	const vector<float> plane_vertices{
