@@ -20,6 +20,9 @@ namespace CInterfaceTests {
 		// This is a relative path to your obj file.
 		const std::string obj_path_str = "plane.obj";
 
+		// User input should not be an empty string.
+		ASSERT_STRNE(obj_path_str.c_str(), "");
+
 		// Size of obj file string (character count)
 		const int obj_length = static_cast<int>(obj_path_str.size());
 
@@ -38,6 +41,16 @@ namespace CInterfaceTests {
 		// the free store memory allocated within LoadOBJ.
 		const float rot[] = { 90.0f, 0.0f, 0.0f };	// Y up to Z up
 		status = LoadOBJ(obj_path_str.c_str(), obj_length, rot[0], rot[1], rot[2], &loaded_obj);
+		
+		// If LoadOBJ assigns loaded_obj the address to a MeshInfo,
+		// loaded_obj should not be nullptr, which is what it was initialized to
+		// prior to calling LoadOBJ.
+		//
+		// loaded_obj will be nullptr if 
+		//		obj_length <= 0
+		//		LoadMeshObjects (called within LoadOBJ) throws an exception
+		// because loaded_obj will never be assigned a valid address.
+		ASSERT_TRUE(loaded_obj != nullptr);
 
 		if (status != 1) {
 			// All C Interface functions return a status code.
@@ -48,6 +61,9 @@ namespace CInterfaceTests {
 			std::cout << "LoadOBJ loaded mesh successfully into loaded_obj at address " << loaded_obj << ", code: " << status << std::endl;
 		}
 
+		// Even if loaded_obj is non-null, *loaded_obj should not be an empty container.
+		ASSERT_FALSE(loaded_obj->empty());
+	
 		// Create BVH
 		// We now declare a pointer to EmbreeRayTracer, named bvh.
 		// Note that we pass the address of this pointer to CreateRaytracer.
@@ -57,6 +73,15 @@ namespace CInterfaceTests {
 		// it is only interested in accessing the pointee.
 		HF::RayTracer::EmbreeRayTracer* bvh = nullptr;
 		status = CreateRaytracer(loaded_obj, &bvh);
+
+		// If CreateRaytracer assigns bvh the address to an EmbreeRayTracer,
+		// bvh should not be nullptr, which is what it was initialized to
+		// prior to calling LoadOBJ.
+		//
+		// bvh will be nullptr if
+		//		loaded_obj == nullptr (we check for this above)
+		//		loaded_obj->empty()
+		ASSERT_TRUE(bvh != nullptr);
 
 		if (status != 1) {
 			std::cerr << "Error at CreateRaytracer, code: " << status << std::endl;
