@@ -45,7 +45,7 @@ namespace CInterfaceTests {
 		// to LoadOBJ. We do not want to pass loaded_obj by value, but by address --
 		// so that we can dereference it and assign it to the address of (pointer to)
 		// the free store memory allocated within LoadOBJ.
-		const float rot[] = { 90.0f, 0.0f, 0.0f };	// Y up to Z up
+		const std::array<float, 3> rot { 90.0f, 0.0f, 0.0f };	// Y up to Z up
 		status = LoadOBJ(obj_path_str.c_str(), obj_length, rot[0], rot[1], rot[2], &loaded_obj);
 
 		if (status != 1) {
@@ -84,7 +84,7 @@ namespace CInterfaceTests {
 
 		// Define direction to cast ray
 		// These are vector components, not Cartesian coordinates.
-		float dir[] = { 0.0f, 0.0f, -1.0f };
+		std::array<float, 3> dir { 0.0f, 0.0f, -1.0f };
 
 		// This is a container of nodes to be analyzed.
 		// SphereicalViewAnalysisAggregate accepts a (Node *) parameter,
@@ -96,7 +96,7 @@ namespace CInterfaceTests {
 		// ...or, it can be a pointer to memory allocated by the caller via operator new[node_count]
 		// (if this route is taken, be sure to release the memory with operator delete[] after use)
 
-		const int node_count = p1.size();	// should be the element count in nodes
+		const int node_count = static_cast<int>(p1.size());	// should be the element count in nodes
 		int ray_count = 1000;				// will be mutated by SphereicalViewAnalysisAggregate
 		const float height = 1.7f;			// height to offset nodes from the ground, in meters
 		const float upward_fov = 50.0f;		// default parameter is 50.0f in Python code
@@ -207,7 +207,7 @@ namespace CInterfaceTests {
 		// to LoadOBJ. We do not want to pass loaded_obj by value, but by address --
 		// so that we can dereference it and assign it to the address of (pointer to)
 		// the free store memory allocated within LoadOBJ.
-		const float rot[] = { 90.0f, 0.0f, 0.0f };	// Y up to Z up
+		const std::array<float, 3> rot { 90.0f, 0.0f, 0.0f };	// Y up to Z up
 		status = LoadOBJ(obj_path_str.c_str(), obj_length, rot[0], rot[1], rot[2], &loaded_obj);
 
 		if (status != 1) {
@@ -241,11 +241,11 @@ namespace CInterfaceTests {
 
 		// Define point to start ray
 		// These are Cartesian coordinates.
-		float p1[] = { 0.0f, 0.0f, 2.0f };
+		std::array<float, 3> p1 { 0.0f, 0.0f, 2.0f };
 
 		// Define direction to cast ray
 		// These are vector components, not Cartesian coordinates.
-		float dir[] = { 0.0f, 0.0f, -1.0f };
+		std::array<float, 3> dir { 0.0f, 0.0f, -1.0f };
 
 		// This is a container of nodes to be analyzed.
 		// SphericalViewAnalysisAggregateFlat accepts a (Node *) parameter,
@@ -289,7 +289,7 @@ namespace CInterfaceTests {
 
 		//! [snippet_view_analysis_SphericalViewAnalysisAggregateFlat]
 		status = SphereicalViewAnalysisAggregateFlat(bvh,
-			p1, node_count, ray_count,
+			p1.data(), node_count, ray_count,
 			upward_fov, downward_fov, height,
 			agg_type,
 			&aggregate_results, &aggregate_results_data, &aggregate_results_size);
@@ -368,7 +368,7 @@ namespace CInterfaceTests {
 		// to LoadOBJ. We do not want to pass loaded_obj by value, but by address --
 		// so that we can dereference it and assign it to the address of (pointer to)
 		// the free store memory allocated within LoadOBJ.
-		const float rot[] = { 90.0f, 0.0f, 0.0f };	// Y up to Z up
+		const std::array<float, 3> rot { 90.0f, 0.0f, 0.0f };	// Y up to Z up
 		status = LoadOBJ(obj_path_str.c_str(), obj_length, rot[0], rot[1], rot[2], &loaded_obj);
 
 		if (status != 1) {
@@ -406,7 +406,7 @@ namespace CInterfaceTests {
 
 		// Define direction to cast ray
 		// These are vector components, not Cartesian coordinates.
-		float dir[] = { 0.0f, 0.0f, -1.0f };
+		std::array<float, 3> dir { 0.0f, 0.0f, -1.0f };
 
 		// This is a container of nodes to be analyzed.
 		// SphericalViewAnalysisNoAggregate accepts a (Node *) parameter,
@@ -418,7 +418,7 @@ namespace CInterfaceTests {
 		// ...or, it can be a pointer to memory allocated by the caller via operator new[node_count]
 		// (if this route is taken, be sure to release the memory with operator delete[] after use)
 
-		const int node_count = p1.size();	// should be the element count in nodes
+		const int node_count = static_cast<int>(p1.size());	// should be the element count in nodes
 		int ray_count = 1000;				// will be mutated by SphericalViewAnalysisNoAggregate
 		const float height = 1.7f;			// height to offset nodes from the ground, in meters
 		const float upward_fov = 50.0f;		// default parameter is 50.0f in Python code
@@ -521,7 +521,7 @@ namespace CInterfaceTests {
 		// to LoadOBJ. We do not want to pass loaded_obj by value, but by address --
 		// so that we can dereference it and assign it to the address of (pointer to)
 		// the free store memory allocated within LoadOBJ.
-		const float rot[] = { 90.0f, 0.0f, 0.0f };	// Y up to Z up
+		const std::array<float, 3> rot { 90.0f, 0.0f, 0.0f };	// Y up to Z up
 		status = LoadOBJ(obj_path_str.c_str(), obj_length, rot[0], rot[1], rot[2], &loaded_obj);
 
 		if (status != 1) {
@@ -555,11 +555,11 @@ namespace CInterfaceTests {
 
 		// Define point to start ray
 		// These are Cartesian coordinates.
-		float p1[] = { 0.0f, 0.0f, 2.0f };
+		std::array<float, 3> p1 { 0.0f, 0.0f, 2.0f };
 
 		// Define direction to cast ray
 		// These are vector components, not Cartesian coordinates.
-		float dir[] = { 0.0f, 0.0f, -1.0f };
+		std::array<float, 3> dir { 0.0f, 0.0f, -1.0f };
 
 		// This is a container of nodes to be analyzed.
 		// SphericalViewAnalysisNoAggregateFlat accepts a (Node *) parameter,
@@ -594,7 +594,7 @@ namespace CInterfaceTests {
 		//! [snippet_view_analysis_SphericalViewAnalysisNoAggregateFlat]
 		// Conducting a view analysis on the node at position p1.
 		status = SphericalViewAnalysisNoAggregateFlat(bvh,
-			p1, node_count, &ray_count,
+			p1.data(), node_count, &ray_count,
 			upward_fov, downward_fov, height,
 			&results, &results_data);
 
