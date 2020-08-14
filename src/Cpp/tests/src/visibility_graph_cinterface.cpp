@@ -13,6 +13,8 @@
 
 #include "graph.h"
 
+#include <array>
+
 namespace CInterfaceTests {
 	TEST(_visibility_graph_cinterface, CreateVisibilityGraphAllToAll) {
 		// Status code variable, value returned by C Interface functions
@@ -39,7 +41,7 @@ namespace CInterfaceTests {
 		// to LoadOBJ. We do not want to pass loaded_obj by value, but by address --
 		// so that we can dereference it and assign it to the address of (pointer to)
 		// the free store memory allocated within LoadOBJ.
-		const float rot[] = { 90.0f, 0.0f, 0.0f };	// Y up to Z up
+		const std::array<float, 3> rot { 90.0f, 0.0f, 0.0f };	// Y up to Z up
 		status = LoadOBJ(obj_path_str.c_str(), obj_length, rot[0], rot[1], rot[2], &loaded_obj);
 
 		if (status != 1) {
@@ -72,10 +74,10 @@ namespace CInterfaceTests {
 		// The model is a flat plane, so only nodes 0, 2 should connect.
 
 		// Every three floats should represent a single (x, y, z) point.
-		const float points[] = { 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, -10.0f, 0.0f, 2.0f, 0.0f };
+		const std::array<float, 9> points { 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, -10.0f, 0.0f, 2.0f, 0.0f };
 
 		// This should be the array element count within points.
-		const int points_size = 9;
+		const int points_size = static_cast<int>(points.size());
 
 		// Represents how far to offset nodes from the ground.
 		const float height = 1.7f;
@@ -92,7 +94,7 @@ namespace CInterfaceTests {
 		// to memory on the free store. We will call DestroyGraph to release the memory resources later on.
 		HF::SpatialStructures::Graph* VG = nullptr;
 
-		status = CreateVisibilityGraphAllToAll(bvh, points, points_count, &VG, height);
+		status = CreateVisibilityGraphAllToAll(bvh, points.data(), points_count, &VG, height);
 
 		if (status != 1) {
 			// Error!
@@ -228,7 +230,7 @@ namespace CInterfaceTests {
 		// to LoadOBJ. We do not want to pass loaded_obj by value, but by address --
 		// so that we can dereference it and assign it to the address of (pointer to)
 		// the free store memory allocated within LoadOBJ.
-		const float rot[] = { 90.0f, 0.0f, 0.0f };	// Y up to Z up
+		const std::array<float, 3> rot { 90.0f, 0.0f, 0.0f };	// Y up to Z up
 		status = LoadOBJ(obj_path_str.c_str(), obj_length, rot[0], rot[1], rot[2], &loaded_obj);
 
 		if (status != 1) {
@@ -261,10 +263,10 @@ namespace CInterfaceTests {
 		// The model is a flat plane, so only nodes 0, 2 should connect.
 
 		// Every three floats should represent a single (x, y, z) point.
-		const float points[] = { 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, -10.0f, 0.0f, 2.0f, 0.0f };
+		const std::array<float, 9> points { 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, -10.0f, 0.0f, 2.0f, 0.0f };
 
 		// This should be the array element count within points.
-		const int points_size = 9;
+		const int points_size = points.size();
 
 		// Represents how far to offset nodes from the ground.
 		const float height = 1.7f;
@@ -284,7 +286,7 @@ namespace CInterfaceTests {
 		// to memory on the free store. We will call DestroyGraph to release the memory resources later on.
 		HF::SpatialStructures::Graph* VG = nullptr;
 
-		status = CreateVisibilityGraphAllToAllUndirected(bvh, points, points_count, &VG, height, core_count);
+		status = CreateVisibilityGraphAllToAllUndirected(bvh, points.data(), points_count, &VG, height, core_count);
 
 		if (status != 1) {
 			// Error!
@@ -420,7 +422,7 @@ namespace CInterfaceTests {
 		// to LoadOBJ. We do not want to pass loaded_obj by value, but by address --
 		// so that we can dereference it and assign it to the address of (pointer to)
 		// the free store memory allocated within LoadOBJ.
-		const float rot[] = { 90.0f, 0.0f, 0.0f };	// Y up to Z up
+		const std::array<float, 3> rot { 90.0f, 0.0f, 0.0f };	// Y up to Z up
 		status = LoadOBJ(obj_path_str.c_str(), obj_length, rot[0], rot[1], rot[2], &loaded_obj);
 
 		if (status != 1) {
@@ -450,25 +452,25 @@ namespace CInterfaceTests {
 		}
 
 		//! [snippet_VisibilityGraph_CreateVisibilityGraphGroupToGroup_setup]
+		// The first coordinate array - the source node coordinates.
+		const std::array<float, 9> coords_a { 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, -10.0f, 0.0f, 2.0f, 0.0f };
+		
 		// Element count of the first coordinate array, 'coords_a'.
-		const int size_coords_a = 9;
+		const int size_coords_a = static_cast<int>(coords_a.size());
 
-		// Total count of nodes to be in coords_a. 
+		// Total count of nodes in coords_a. 
 		// Every three coordinates { x, y, z } represents a single node (point).
 		const int count_nodes_a = size_coords_a / 3;
 
-		// The first coordinate array - the source node coordinates.
-		const float coords_a[size_coords_a] = { 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, -10.0f, 0.0f, 2.0f, 0.0f };
-		
-		// Element count of the second coordinate array, 'coords_b'.
-		const int size_coords_b = 9;
+		// The second coordinates array - the destination node coordinates.
+		const std::array<float, 9> coords_b { 10.0f, 10.0f, 11.0f, 10.0f, 10.0f, 0.0f, 10.0f, 12.0f, 10.0f };
 
-		// Total count of nodes to be in coords_b.
+		// Element count of the second coordinate array, 'coords_b'.
+		const int size_coords_b = static_cast<int>(coords_b.size());
+
+		// Total count of nodes in coords_b.
 		// Every three coordinates { x, y, z } represents a single node (point).
 		const int count_nodes_b = size_coords_b / 3;
-
-		// The second coordinates array - the destination node coordinates.
-		const float coords_b[size_coords_b] = { 10.0f, 10.0f, 11.0f, 10.0f, 10.0f, 0.0f, 10.0f, 12.0f, 10.0f };
 
 		// Distance of node offset from the ground.
 		const float height = 1.7f;
@@ -482,7 +484,7 @@ namespace CInterfaceTests {
 		// to memory on the free store. We will call DestroyGraph to release the memory resources later on.
 		HF::SpatialStructures::Graph* VG = nullptr;
 
-		status = CreateVisibilityGraphGroupToGroup(bvh, coords_a, count_nodes_a, coords_b, count_nodes_b, &VG, height);
+		status = CreateVisibilityGraphGroupToGroup(bvh, coords_a.data(), count_nodes_a, coords_b.data(), count_nodes_b, &VG, height);
 
 		if (status != 1) {
 			// Error!
