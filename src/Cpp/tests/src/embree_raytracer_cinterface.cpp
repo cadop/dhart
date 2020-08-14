@@ -942,7 +942,6 @@ namespace CInterfaceTests {
 		ASSERT_TRUE(size_p1 % 3 == 0);
 
 		//! [snippet_FireMultipleOriginsOneDirection]
-
 		// Maximum distance a ray can travel and still hit a target
 		const int max_distance = -1;
 
@@ -1082,24 +1081,26 @@ namespace CInterfaceTests {
 		//		loaded_obj->empty()
 		ASSERT_TRUE(bvh != nullptr);
 
-		//! [snippet_FireMultipleDirectionsOneOrigin]
+		//! [snippet_FireMultipleDirectionsOneOrigin_start_point_direction]
 		// Define point to start ray
 		// These are Cartesian coordinates.
 		const std::array<float, 3> p1 { 0.0f, 0.0f, 2.0f };
-
-		// p1 represents a point in R3, the member count should be 3.
-		ASSERT_EQ(p1.size(), 3);
 
 		// Define directions to cast rays
 		// These are vector components, not Cartesian coordinates.
 		std::array<float, 9> dir { 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, -2.0f, 0.0f, 0.0f, -3.0f };
 		const int size_dir = dir.size();
 		const int count_dir = size_dir / 3;
+		//! [snippet_FireMultipleDirectionsOneOrigin_start_point_direction]
+
+		// p1 represents a point in R3, the member count should be 3.
+		ASSERT_EQ(p1.size(), 3);
 
 		// size_dir represents the member count of the array dir.
 		// It should be a multiple of 3.
 		ASSERT_TRUE(size_dir % 3 == 0);
 
+		//! [snippet_FireMultipleDirectionsOneOrigin]
 		const int max_distance = -1;
 
 		// If a given ray i hits a target (dir[i] is a vector extending from points[i]),
@@ -1111,17 +1112,19 @@ namespace CInterfaceTests {
 		// dir[i], dir[i + 1], dir[i + 2] represents a hit point.
 		status = FireMultipleDirectionsOneOrigin(bvh, p1.data(), dir.data(), count_dir, max_distance, results.data());
 
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at FireMultipleDirectionsOneOrigin, code: " << status << std::endl;
+		}
+		//! [snippet_FireMultipleDirectionsOneOrigin]
+
 		// results should not be an empty container after calling FireMultipleDirectionsOneOrigin.
 		ASSERT_FALSE(results.empty());
 
 		// results.size() should be equal to the amount of rays to fire.
 		ASSERT_EQ(results.size(), count_dir);
 
-		if (status != 1) {
-			// Error!
-			std::cerr << "Error at FireMultipleDirectionsOneOrigin, code: " << status << std::endl;
-		}
-
+		//!	[snippet_FireMultipleDirectionsOneOrigin_results]
 		//
 		// Review results:
 		//
@@ -1133,7 +1136,8 @@ namespace CInterfaceTests {
 				<< "], direction [" << dir[k] << ", " << dir[k + 1] << ", " << dir[k + 2] << "]"
 				<< std::endl;
 		}
-		//! [snippet_FireMultipleDirectionsOneOrigin]
+		//!	[snippet_FireMultipleDirectionsOneOrigin_results]
+
 		//
 		// Memory resource cleanup.
 		//
