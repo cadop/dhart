@@ -111,17 +111,17 @@ namespace CInterfaceTests {
 		                                      // {  v_0x,  v_0y,  v_0z,  v_1x,  v_1y,  v_1z,  v_2x,  v_2y,  v_2z };
 		const int size_vertices = static_cast<int>(mesh_vertices.size());
 
+		// Give the mesh a name, and an ID.
+		const auto mesh_name = "This mesh";
+		const int mesh_id = 0;
+		//! [snippet_StoreMesh_setup]
+
 		// size_vertices should be a multiple of 3,
 		// size_vertices should be a multiple of 3,
 		// and size_indices should divide size_vertices evenly.
 		ASSERT_TRUE(size_indices % 3 == 0);
 		ASSERT_TRUE(size_vertices % 3 == 0);
 		ASSERT_TRUE(size_vertices % size_indices == 0);
-
-		// Give the mesh a name, and an ID.
-		const auto mesh_name = "This mesh";
-		const int mesh_id = 0;
-		//! [snippet_StoreMesh_setup]
 
 		//! [snippet_StoreMesh_call]
 		// This will point to memory on free store.
@@ -139,9 +139,6 @@ namespace CInterfaceTests {
 			std::cerr << "Error at StoreMesh, code: " << status << std::endl;
 		}
 		
-		// The invocation of StoreMesh should result in info pointing to a valid vector<MeshInfo>.
-		ASSERT_TRUE(info != nullptr);
-
 		//
 		// Verify that the mesh, at info (vector<MeshInfo> *),
 		// was stored properly by StoreMesh.
@@ -153,6 +150,9 @@ namespace CInterfaceTests {
 			std::cout << "The mesh was stored properly at address " << info << "." << std::endl;
 		}
 		//! [snippet_StoreMesh_call]
+
+		// The invocation of StoreMesh should result in info pointing to a valid vector<MeshInfo>.
+		ASSERT_TRUE(info != nullptr);
 
 		//
 		// Memory management
