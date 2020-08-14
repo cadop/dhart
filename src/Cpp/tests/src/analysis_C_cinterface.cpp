@@ -14,6 +14,8 @@
 #include "spatialstructures_C.h"
 #include "node.h"
 
+#include <array>
+
 namespace CInterfaceTests {
 	TEST(_analysis_cinterface, GenerateGraph) {
 		// Status code variable, value returned by C Interface functions
@@ -41,7 +43,7 @@ namespace CInterfaceTests {
 		// to LoadOBJ. We do not want to pass loaded_obj by value, but by address --
 		// so that we can dereference it and assign it to the address of (pointer to)
 		// the free store memory allocated within LoadOBJ.
-		const float rot[] = { 90.0f, 0.0f, 0.0f };	// Y up to Z up
+		const std::array<float, 3> rot { 90.0f, 0.0f, 0.0f };	// Y up to Z up
 		status = LoadOBJ(obj_path_str.c_str(), obj_length, rot[0], rot[1], rot[2], &loaded_obj);
 
 		if (status != 1) {
@@ -73,15 +75,20 @@ namespace CInterfaceTests {
 		//! [snippet_analysis_cinterface_GenerateGraph_setup_0]
 		// Define start point.
 		// These are Cartesian coordinates.
-		float start_point[] = { -1.0f, -6.0f, 1623.976928f };
+		std::array<float, 3> start_point { -1.0f, -6.0f, 1623.976928f };
 
 		// Define spacing.
 		// This is the spacing between nodes, with respect to each axis.
-		float spacing[] = { 0.5f, 0.5f, 0.5f };
+		std::array<float, 3> spacing { 0.5f, 0.5f, 0.5f };
 
 		// Set max nodes.
 		const int max_nodes = 500;
 		//! [snippet_analysis_cinterface_GenerateGraph_setup_0]
+
+		// We are dealing with one start point, so the start_point container size must be 3.
+		// Likewise, the spacing container must also have a size of 3.
+		ASSERT_EQ(start_point.size(), 3);
+		ASSERT_EQ(spacing.size(), 3);
 
 		//! [snippet_analysis_cinterface_GenerateGraph]
 		// Generate graph.
@@ -100,7 +107,7 @@ namespace CInterfaceTests {
 		HF::SpatialStructures::Graph* graph = nullptr;
 
 		status = GenerateGraph(bvh,
-			start_point, spacing, max_nodes,
+			start_point.data(), spacing.data(), max_nodes,
 			up_step, up_slope,
 			down_step, down_slope,
 			maximum_step_connection,
@@ -112,6 +119,9 @@ namespace CInterfaceTests {
 			std::cerr << "Error at GenerateGraph, code: " << status << std::endl;
 		}
 		//! [snippet_analysis_cinterface_GenerateGraph]
+
+		// We must verify that GenerateGraph assigned graph a valid address to a Graph.
+		ASSERT_TRUE(graph != nullptr);
 
 		//! [snippet_analysis_cinterface_GenerateGraph_compress]
 		// Always compress the graph after generating a graph/adding new edges
@@ -154,6 +164,12 @@ namespace CInterfaceTests {
 		// Print number of nodes in the graph
 		std::cout << "Node count: " << node_vector_size << std::endl;
 		//! [snippet_analysis_cinterface_GenerateGraph_GetNodes]
+
+		// node_vector should not null if GetAllNodesFromGraph was successful.
+		ASSERT_TRUE(node_vector != nullptr);
+
+		// Even if node_vector is non-null, it should not be empty.
+		ASSERT_FALSE(node_vector->empty());
 
 		//! [snippet_analysis_cinterface_GenerateGraph_output]
 		// Output 3 of the nodes within *node_vector.
