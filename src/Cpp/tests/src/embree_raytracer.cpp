@@ -837,6 +837,7 @@ struct ModelAndStart {
 	ModelAndStart(std::array<float, 3> start_point, string model, bool flip_z = false) {
 
 		std::cout << "Loading " << model << std::endl;
+
 		std::vector<MeshInfo> MI = HF::Geometry::LoadMeshObjects(model, ONLY_FILE, flip_z);
 		for (auto& m : MI)
 		{
@@ -844,8 +845,8 @@ struct ModelAndStart {
 			triangles += m.NumTris();
 		}
 
-		StandardERT = EmbreeRayTracer(HF::Geometry::LoadMeshObjects(model), false);
-		PreciseERT = EmbreeRayTracer(HF::Geometry::LoadMeshObjects(model), true);
+		StandardERT = EmbreeRayTracer(MI, false);
+		PreciseERT = EmbreeRayTracer(MI,  true);
 		start = start_point;
 		model_name = model;
 	};
@@ -870,7 +871,7 @@ TEST(Performance, CustomTriangleIntersection) {
 
 	// Number of trials is based on number of elements here
 	const vector<int> raycount = {
-		50000,
+		1000000,
 		50000,
 		50000,
 		50000,
@@ -883,18 +884,18 @@ TEST(Performance, CustomTriangleIntersection) {
 		500000,
 		500000,
 		1000000,
-		1000000
-	//	1000000,
-//		5000000,
-	//	5000000,
-	//	5000000,
-	//	10000000,
-	//	10000000
+		1000000,
+		1000000,
+		5000000,
+		5000000,
+		5000000,
+		10000000,
+		10000000
 	};
 
 	printf("Loading Models...\n");
 	vector<ModelAndStart> models = {
-		ModelAndStart({0,0,3},  "plane.obj", true),
+		ModelAndStart({0,0,1},  "plane.obj", true),
 		ModelAndStart({-4.711,1.651,-14.300},  "sibenik.obj", true),
 	//	ModelAndStart({-4.711,1.651,-14.300},  "sibenik_subdivided.obj", true),
 		ModelAndStart({0.007,-0.001,0.093},  "sponza.obj", true),
@@ -917,9 +918,9 @@ TEST(Performance, CustomTriangleIntersection) {
 	vector < vector<array<float, 3>>> directions;
 	vector < vector<array<float, 3>>> origins;
 	for (int rc : raycount) {
-		directions.push_back(HF::ViewAnalysis::FibbonacciDistributePoints(rc));
+		directions.push_back(HF::ViewAnalysis::FibbonacciDistributePoints(rc, 90, 90));
 	}
-	PrintDirections(directions[1]);
+	//PrintDirections(directions[0]);
 
 	vector<std::string> RowHeaders = {
 		"Trial Number",
