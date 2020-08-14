@@ -307,7 +307,7 @@ namespace CInterfaceTests {
 
 		// size_points represents the member count of the array points.
 		// The member count must be a multiple of 3.
-		ASSERT_TRUE(size_points >= 9 && size_points % 3 == 0);
+		ASSERT_TRUE(size_points % 3 == 0);
 
 		// The value of count_points is dependent upon size_points -- 
 		// count_points represents how many actual points we have.
@@ -1242,8 +1242,9 @@ namespace CInterfaceTests {
 		// count_dir_occl represents how many sets of directions we are dealing with.
 		const int count_dir_occl = size_dir_occl / 3;
 
-		// dir_occl represents direction components in R3, size_dir_occl should be a multiple of 3.
-		ASSERT_TRUE(size_dir_occl % 3 == 0);
+		// dir_occl represents direction components in R3, size_dir_occl should be a multiple of 3 --
+		// or, if dir_occl has three members, count_dir_occl should be 1 (only one ray fired)
+		ASSERT_TRUE(size_dir_occl % 3 == 0 || (size_dir_occl == 3 && count_dir_occl == 1));
 
 		// The array results should be the amount of rays we are firing, i.e. the value of count_dir_occl.
 		std::array<bool, count_dir_occl> results;
