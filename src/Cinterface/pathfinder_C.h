@@ -228,10 +228,7 @@ namespace HF {
 	Begin by reviewing the example at \ref raytracer_setup to load an .obj file (mesh), and create a BVH from the mesh.<br>
 	Then generate a graph (\ref generate_graph) from the BVH -- see \ref get_all_nodes on how to retrieve nodes from the graph.<br>
 
-	Let's find the nodes in the graph closest a set of chosen nodes:<br>
-	\snippet tests\src\pathfinder_C_cinterface.cpp snippet_CreatePath_setup
-
-	Now we are ready to create a path.<br>
+	Now we are ready to create a path. We wil find the path from the first node to the last indexed node. <br>
 	\snippet tests\src\pathfinder_C_cinterface.cpp snippet_CreatePath
 
 	From here, please review the examples on how to destroy a path (\link DestroyPath \endlink),<br>
@@ -239,6 +236,13 @@ namespace HF {
 	how to destroy a \link HF::SpatialStructures::Graph \endlink (\ref graph_teardown),<br>
 	how to destroy a \link HF::RayTracer::EmbreeRayTracer \endlink (\ref raytracer_teardown),<br>
 	and how to destroy a vector<\link HF::Geometry::MeshInfo \endlink> (\ref mesh_teardown).
+
+	`>>> LoadOBJ loaded mesh successfully into loaded_obj at address 000001DF01EB9470, code: 1`\n
+	`>>> CreateRaytracer created EmbreeRayTracer successfully into bvh at address 000001DF01EB5100, code: 1`\n
+	`>>> Generate graph ran successfully - graph stored at address 000001DF0BCEDDA0, code: 1`\n
+	`>>> Graph Generated with 886 nodes`\n
+	`>>> CreatePath stored path successfully - path stored at address 000001DF01EB9590, code: 1`\n
+	`>>> Total path cost: 77.6772`\n
 */
 C_INTERFACE CreatePath(
 	const HF::SpatialStructures::Graph* g,
