@@ -86,6 +86,9 @@ namespace CInterfaceTests {
 		const int points_count = points_size / 3;
 		//! [snippet_VisibilityGraph_CreateVisibilityGraphAllToAll_setup]
 
+		// points_size should be a multiple of 3, since every three members represents one point.
+		ASSERT_TRUE(points_size % 3 == 0);
+
 		//! [snippet_VisibilityGraph_CreateVisibilityGraphAllToAll_call]
 		// Declare a pointer to Graph.
 		//
@@ -101,6 +104,9 @@ namespace CInterfaceTests {
 			std::cerr << "Error at CreateVisibilityGraphAllToAll, code: " << status << std::endl;
 		}
 		//! [snippet_VisibilityGraph_CreateVisibilityGraphAllToAll_call]
+
+		// Ensure that CreateVisibilityGraphAllToAll has VG pointing to a valid Graph
+		ASSERT_TRUE(VG != nullptr);
 
 		//! [snippet_VisibilityGraph_CreateVisibilityGraphAllToAll_compress]
 		// Always compress the graph after generating a graph/adding new edges
@@ -135,6 +141,14 @@ namespace CInterfaceTests {
 			std::cerr << "Error at GetCSRPointers, code: " << status << std::endl;
 		}
 		//! [snippet_VisibilityGraph_CreateVisibilityGraphAllToAll_output_0]
+
+		// We must ensure that the CSR was properly initialized by GetCSRPointers.
+		ASSERT_TRUE(csr.nnz > 0);
+		ASSERT_TRUE(csr.rows > 0);
+		ASSERT_TRUE(csr.cols > 0);
+		ASSERT_TRUE(csr.data != nullptr);
+		ASSERT_TRUE(csr.inner_indices != nullptr);
+		ASSERT_TRUE(csr.outer_indices != nullptr);
 
 		//! [snippet_VisibilityGraph_CreateVisibilityGraphAllToAll_output_1]
 		//
@@ -278,6 +292,9 @@ namespace CInterfaceTests {
 		const int core_count = -1;
 		//! [snippet_VisibilityGraph_CreateVisibilityGraphAllToAllUndirected_setup]
 
+		// points_size should be a multiple of 3, since every three members represents one point.
+		ASSERT_TRUE(points_size % 3 == 0);
+
 		//! [snippet_VisibilityGraph_CreateVisibilityGraphAllToAllUndirected_call]
 		// Declare a pointer to Graph.
 		//
@@ -293,6 +310,9 @@ namespace CInterfaceTests {
 			std::cerr << "Error at CreateVisibilityGraphAllToAllUndirected, code: " << status << std::endl;
 		}
 		//! [snippet_VisibilityGraph_CreateVisibilityGraphAllToAllUndirected_call]
+
+		// Ensure that CreateVisibilityGraphAllToAllUndirected has VG pointing to a valid Graph
+		ASSERT_TRUE(VG != nullptr);
 
 		//! [snippet_VisibilityGraph_CreateVisibilityGraphAllToAllUndirected_compress]
 		// Always compress the graph after generating a graph/adding new edges
@@ -327,6 +347,14 @@ namespace CInterfaceTests {
 			std::cerr << "Error at GetCSRPointers, code: " << status << std::endl;
 		}
 		//! [snippet_VisibilityGraph_CreateVisibilityGraphAllToAllUndirected_output_0]
+
+		// We must ensure that the CSR was properly initialized by GetCSRPointers.
+		ASSERT_TRUE(csr.nnz > 0);
+		ASSERT_TRUE(csr.rows > 0);
+		ASSERT_TRUE(csr.cols > 0);
+		ASSERT_TRUE(csr.data != nullptr);
+		ASSERT_TRUE(csr.inner_indices != nullptr);
+		ASSERT_TRUE(csr.outer_indices != nullptr);
 
 		//! [snippet_VisibilityGraph_CreateVisibilityGraphAllToAllUndirected_output_1]
 		//
@@ -476,6 +504,10 @@ namespace CInterfaceTests {
 		const float height = 1.7f;
 		//! [snippet_VisibilityGraph_CreateVisibilityGraphGroupToGroup_setup]
 
+		// Ensure that coords_a and coords_b are multiples of 3.
+		ASSERT_TRUE(size_coords_a % 3 == 0);
+		ASSERT_TRUE(size_coords_b % 3 == 0);
+
 		//! [snippet_VisibilityGraph_CreateVisibilityGraphGroupToGroup_call]
 		// Declare a pointer to Graph.
 		//
@@ -491,6 +523,9 @@ namespace CInterfaceTests {
 			std::cerr << "Error at CreateVisibilityGraphGroupToGroup, code: " << status << std::endl;
 		}
 		//! [snippet_VisibilityGraph_CreateVisibilityGraphGroupToGroup_call]
+
+		// Ensure that CreateVisibilityGraphGroupToGroup has VG pointing to a valid Graph
+		ASSERT_TRUE(VG != nullptr);
 
 		//! [snippet_VisibilityGraph_CreateVisibilityGraphGroupToGroup_compress]
 		// Always compress the graph after generating a graph/adding new edges
@@ -522,6 +557,14 @@ namespace CInterfaceTests {
 			std::cerr << "Error at GetCSRPointers, code: " << status << std::endl;
 		}
 		//! [snippet_VisibilityGraph_CreateVisibilityGraphGroupToGroup_output_0]
+
+		// We must ensure that the CSR was properly initialized by GetCSRPointers.
+		ASSERT_TRUE(csr.nnz > 0);
+		ASSERT_TRUE(csr.rows > 0);
+		ASSERT_TRUE(csr.cols > 0);
+		ASSERT_TRUE(csr.data != nullptr);
+		ASSERT_TRUE(csr.inner_indices != nullptr);
+		ASSERT_TRUE(csr.outer_indices != nullptr);
 
 		//! [snippet_VisibilityGraph_CreateVisibilityGraphGroupToGroup_output_1]
 		//
