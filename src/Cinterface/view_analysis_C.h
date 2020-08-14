@@ -75,6 +75,7 @@ enum class AGGREGATE_TYPE {
 
 	\todo Is there any situation where out_scores_size is smaller than node_size?
 
+	\see \ref mesh_setup (how to create a mesh), \ref mesh_teardown (how to destroy a mesh)
 	\see \ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
 
 	\see \link SphericalViewAnalysis \endlink for an algorithm that returns the results of every ray casted instead
@@ -83,12 +84,12 @@ enum class AGGREGATE_TYPE {
 	\see \link SphericalViewAnalysisAggregateFlat \endlink for a function that works on a flat array of floats instead
 	of an array of nodes.
 
-	You must <b>load an .obj file</b> and <b>create a BVH</b> first.<br>
-	Begin by reviewing the example at raytracer_setup before proceeding below.
+	Begin by <b>loading an .obj file</b> (\ref mesh_setup).<br>
+	Then, <b>create a BVH</b> (\ref raytracer_setup) using the <b>mesh</b>.<br>
 
 	\par Example Code
 
-	First, set up the parameters for the view analysis.
+	Set up the parameters for the view analysis.
 	\snippet tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphereicalViewAnalysisAggregate_setup_0
 
 	Now you must prepare a pointer to a std::vector<float>, where the <b>aggregation results</b> will be stored.<br>
@@ -165,14 +166,15 @@ C_INTERFACE SphereicalViewAnalysisAggregate(
 
 	\todo Is there any situation where out_scores_size is smaller than node_size?
 
+	\see	\ref mesh_setup (how to create a mesh), \ref mesh_teardown (how to destroy a mesh)
 	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
 
-	You must <b>load an .obj file</b> and <b>create a BVH</b> first.<br>
-	Begin by reviewing the example at \ref raytracer_setup before proceeding below.
+	Begin by <b>loading an .obj file</b> (\ref mesh_setup).<br>
+	Then, <b>create a BVH</b> (\ref raytracer_setup) using the <b>mesh</b>.<br>
 
 	\par Example
 
-	First, set up the parameters for the view analysis.
+	Set up the parameters for the view analysis.
 	\snippet tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphericalViewAnalysisAggregateFlat_setup_0
 
 	Now you must prepare a pointer to a std::vector<float>, where the <b>aggregation results</b> will be stored.<br>
@@ -243,6 +245,7 @@ C_INTERFACE SphereicalViewAnalysisAggregateFlat(
 	\post 2) out_results_ptr points to a valid array of scores.
 	\post 3) max_rays is updated to the number of rays casted in the view analysis.
 
+	\see	\ref mesh_setup (how to create a mesh), \ref mesh_teardown (how to destroy a mesh)
 	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
 
 	\see SphericalDistribute to get the direction of every ray casted by this function. Can be useful
@@ -250,10 +253,10 @@ C_INTERFACE SphereicalViewAnalysisAggregateFlat(
 
 	\par Example
 
-	You must <b>load an .obj file</b> and <b>create a BVH</b> first.<br>
-	Begin by reviewing the example at \ref raytracer_setup before proceeding below.
+	Begin by <b>loading an .obj file</b> (\ref mesh_setup).<br>
+	Then, <b>create a BVH</b> (\ref raytracer_setup) using the <b>mesh</b>.<br>
 
-	First, set up the parameters for the view analysis.
+	Set up the parameters for the view analysis.
 	\snippet tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphericalViewAnalysisNoAggregate_setup_0
 
 	Now you must prepare a pointer to a std::vector<\link RayResult \endlink>.<br>
@@ -326,6 +329,7 @@ C_INTERFACE SphericalViewAnalysisNoAggregate(
 	\post 2) out_scores_ptr cpoints to a valid array of scores.
 	\post 3) max_rays is updated to the number of rays casted in the view analysis.
 
+	\see	\ref mesh_setup (how to create a mesh), \ref mesh_teardown (how to destroy a mesh)
 	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
 
 	\see SphericalDistribute to get the direction of every ray casted by this function. Can be useful
@@ -333,10 +337,10 @@ C_INTERFACE SphericalViewAnalysisNoAggregate(
 
 	\par Example
 
-	You must <b>load an .obj file</b> and <b>create a BVH</b> first.<br>
-	Begin by reviewing the example at \ref raytracer_setup before proceeding below.
+	Begin by <b>loading an .obj file</b> (\ref mesh_setup).<br>
+	Then, <b>create a BVH</b> (\ref raytracer_setup) using the <b>mesh</b>.<br>
 
-	First, set up the parameters for the view analysis.
+	Set up the parameters for the view analysis.
 	\snippet tests\src\view_analysis_cinterface.cpp snippet_view_analysis_SphericalViewAnalysisNoAggregateFlat_setup_0
 
 	Now you must prepare a pointer to a std::vector<\link RayResult \endlink>.<br>
@@ -400,6 +404,9 @@ C_INTERFACE SphericalViewAnalysisNoAggregateFlat(
 
 	\post 2) num_rays contains the number of points distributed by this function. This may be more or less than
 	the original number depending on the limitations specified by upward and downward fov.
+
+	\see	\ref raytracer_teardown (how to destroy a BVH)
+	\see	\ref mesh_teardown (how to destroy a mesh)
 
 	\par Example
 	
