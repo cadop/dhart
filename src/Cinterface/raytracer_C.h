@@ -34,44 +34,7 @@ namespace HF {
 	we will call it the 'setup':<br>
 
 	First, begin by <b>loading the .OBJ file</b>:<br>
-
-	\code
-		// Status code variable, value returned by C Interface functions
-		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
-		int status = 0;
-
-		// Get model path
-		// This is a relative path to your obj file.
-		const std::string obj_path_str = "plane.obj";
-
-		// Size of obj file string (character count)
-		const int obj_length = static_cast<int>(obj_path_str.size());
-
-		// This will point to memory on free store.
-		// The memory will be allocated inside the LoadOBJ function,
-		// and it must be freed using DestroyMeshInfo.
-		std::vector<HF::Geometry::MeshInfo>* loaded_obj = nullptr;
-
-		// Load mesh
-		// The array rot will rotate the mesh 90 degrees with respect to the x-axis,
-		// i.e. makes the mesh 'z-up'.
-		//
-		// Notice that we pass the address of the loaded_obj pointer
-		// to LoadOBJ. We do not want to pass loaded_obj by value, but by address --
-		// so that we can dereference it and assign it to the address of (pointer to)
-		// the free store memory allocated within LoadOBJ.
-		const float rot[] = { 90.0f, 0.0f, 0.0f };	// Y up to Z up
-		status = LoadOBJ(obj_path_str.c_str(), obj_length, rot[0], rot[1], rot[2], &loaded_obj);
-
-		if (status != 1) {
-			// All C Interface functions return a status code.
-			// Error!
-			std::cerr << "Error at LoadOBJ, code: " << status << std::endl;
-		}
-		else {
-			std::cout << "LoadOBJ loaded mesh successfully into loaded_obj at address " << loaded_obj << ", code: " << status << std::endl;
-		}
-	\endcode
+	\ref mesh_setup (from \link objloader_C.h \endlink)
 
 	Then, <b>create the BVH</b>:<br>
 	\code
@@ -98,7 +61,7 @@ namespace HF {
 	(all examples below begin with the setup code described above)
 	
 	\section raytracer_teardown Raytracer teardown
-	When you are finished with the BVH, you must then release its memory resources:<br>
+	When you are finished with the BVH, you must then <b>release its memory resources</b>:<br>
 	\code
 		// destroy raytracer
 		status = DestroyRayTracer(bvh);
@@ -108,15 +71,9 @@ namespace HF {
 		}
 	\endcode
 
-	After destroying the BVH, you must also do the same for the (vector<\link HF::Geometry::MeshInfo \endlink> *) used by LoadOBJ.
-	\code
-		// destroy vector<MeshInfo>
-		status = DestroyMeshInfo(loaded_obj);
-
-		if (status != 1) {
-			std::cerr << "Error at DestroyMeshInfo, code: " << status << std::endl;
-		}
-	\endcode
+	After destroying the BVH,<br>
+	you must also do the same for the (vector<\link HF::Geometry::MeshInfo \endlink> *) used by LoadOBJ.<br>
+	\ref mesh_teardown (from \link objloader_C.h \endlink)
 
 	`>>> LoadOBJ loaded mesh successfully into loaded_obj at address 0000019C4EA752E0, code: 1`\n
 	`>>> CreateRaytracer created EmbreeRayTracer successfully into bvh at address 0000019C4EA12820, code: 1`\n
