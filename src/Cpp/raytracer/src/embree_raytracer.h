@@ -83,6 +83,8 @@ namespace HF::RayTracer {
 		/// Vertex buffer. Is used in multiple places but contents are dumped.
 		Vertex* Vertices;
 
+		const bool use_precise = false; ///< If true, use custom triangle intersection intersection instead of embree's
+
 		std::vector<RTCGeometry> geometry; //> A list of the geometry being used by RTCScene.
 
 	public:
@@ -127,7 +129,7 @@ namespace HF::RayTracer {
 				auto ert = EmbreeRayTracer(geom);
 			\endcode
 		*/
-		EmbreeRayTracer(std::vector<HF::Geometry::MeshInfo>& MI);
+		EmbreeRayTracer(std::vector<HF::Geometry::MeshInfo>& MI, bool use_precise_intersection = false);
 
 
 		/*! \brief Construct a raytracer using another raytracer.
@@ -943,10 +945,20 @@ namespace HF::RayTracer {
 			int& out_meshid,
 			float max_distance = -1.0f
 		) {
-			auto result = FirePreciseRay(
-				node[0], node[1], node[2],
-				direction[0], direction[1], direction[2], max_distance, -1
-			);
+			HitStruct result;
+			
+			// Use custom triangle intesection if required
+			if (use_precise)
+				result = FirePreciseRay(
+					node[0], node[1], node[2],
+					direction[0], direction[1], direction[2], max_distance, -1
+				);
+			else
+				result = Intersect(
+					node[0], node[1], node[2],
+					direction[0], direction[1], direction[2], max_distance, -1
+				);
+
 
 			if (!result.DidHit()) return false;
 			else {
@@ -955,20 +967,6 @@ namespace HF::RayTracer {
 				return true;
 			}
 		}
-
-		/*! \brief Cast a ray, and perform a triangle intersection for higher precision
-		template <typename N, typename V>
-		bool PreciseRayCast(
-			const N& node,
-			const V& direction,
-			float& out_distance,
-			int& out_meshid,
-			float max_distance = -1.0f
-			)
-		{
-			
-		}
-		*/
 
 		/// <summary>
 		/// Template for firing rays using array-like containers for the direction and origin.

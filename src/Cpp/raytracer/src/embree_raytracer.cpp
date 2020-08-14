@@ -495,7 +495,7 @@ namespace HF::RayTracer {
 		return out_array;
 	}
 
-	EmbreeRayTracer::EmbreeRayTracer(std::vector<HF::Geometry::MeshInfo>& MI) {
+	EmbreeRayTracer::EmbreeRayTracer(std::vector<HF::Geometry::MeshInfo>& MI, bool use_precise_intersection) : use_precise(use_precise_intersection) {
 		// Throw if MI's size is less than 0
 		if (MI.empty())
 		{
@@ -512,7 +512,7 @@ namespace HF::RayTracer {
 		rtcInitIntersectContext(&context);
 	}
 
-	EmbreeRayTracer::EmbreeRayTracer(const EmbreeRayTracer& ERT2)
+	EmbreeRayTracer::EmbreeRayTracer(const EmbreeRayTracer& ERT2) :use_precise(ERT2.use_precise)
 	{
 		device = ERT2.device;
 		context = ERT2.context;
