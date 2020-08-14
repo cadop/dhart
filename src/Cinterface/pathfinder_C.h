@@ -23,6 +23,10 @@ namespace HF {
 	Find paths between different points in a graph.
 
 	@{
+
+	\section path_setup Path setup
+	
+	\section path_teardown Path teardown
 */
 
 /*!
@@ -56,38 +60,10 @@ namespace HF {
 	if this function completes successfully. Freeing the memory for a path will also free the memory
 	for its path members, so do not attempt to access its members after deletion. 
 
-	\see DestroyPath for information on deleting the path after usage.
+	\see \ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
+	\see \link DestroyPath \endlink for information on deleting the path after usage.
 
-	\code
-		// Requires #include "pathfinder_C.h", #include "graph.h", #include "path.h", #include "path_finder.h"
-
-		// Create a Graph g, and compress it.
-		HF::SpatialStructures::Graph g;
-		g.addEdge(0, 1, 1);
-		g.addEdge(0, 2, 2);
-		g.addEdge(1, 3, 3);
-		g.addEdge(2, 4, 1);
-		g.addEdge(3, 4, 5);
-		g.Compress();
-
-		// Create a boostGraph from g
-		auto boostGraph = HF::Pathfinding::CreateBoostGraph(g);
-
-		// Prepare parameters for CreatePath
-		HF::SpatialStructures::Path* out_path = nullptr;
-		HF::SpatialStructures::PathMember* out_path_member = nullptr;
-		int out_size = -1;
-
-		CreatePath(&g, 0, 4, &out_size, &out_path, &out_path_member);
-
-		// Use out_path, out_path_member
-
-		// Remember to free resources when finished
-		DestroyPath(out_path);
-
-		// At this point, out_path_member has also been destroyed, so we set this to nullptr
-		out_path_member = nullptr;
-	\endcode
+	
 */
 C_INTERFACE CreatePath(
 	const HF::SpatialStructures::Graph* g,
@@ -144,58 +120,8 @@ C_INTERFACE CreatePath(
 	to manually delete `out_path_members` or the path that owns it will throw a null pointer exception
 	when it is deleted.
 
-	\code
-
-		// for brevity
-		using HF::SpatialStructures::Node;
-		using HF::SpatialStructures::Graph;
-		using HF::Pathfinding::BoostGraph;
-		using HF::SpatialStructures::CostAlgorithms::CalculateEnergyExpenditure;
-
-		// Create the nodes
-		Node node_0(1.0f, 1.0f, 2.0f);
-		Node node_1(2.0f, 3.0f, 4.0f);
-		Node node_2(11.0f, 22.0f, 140.0f);
-		Node node_3(62.9f, 39.1f, 18.0f);
-		Node node_4(19.5f, 27.1f, 29.9f);
-
-		// Create a graph. No nodes/edges for now.
-		Graph graph;
-
-		// Add edges. These will have the default edge values, forming the default graph.
-		graph.addEdge(node_0, node_1, 1);
-		graph.addEdge(node_0, node_2, 2.5);
-		graph.addEdge(node_1, node_3, 54.0);
-		graph.addEdge(node_2, node_4, 39.0);
-		graph.addEdge(node_3, node_4, 1.2);
-
-		// Always compress the graph after adding edges!
-		graph.Compress();
-
-		// Retrieve a Subgraph, parent node ID 0 -- of alternate edge costs.
-		// Add these alternate edges to graph.
-		std::string desired_cost_type = AlgorithmCostTitle(COST_ALG_KEY::CROSS_SLOPE);
-		auto edge_set = CalculateEnergyExpenditure(graph.GetSubgraph(0));
-		graph.AddEdges(edge_set, desired_cost_type);
-
-		// Prepare parameters for CreatePath
-		HF::SpatialStructures::Path* out_path = nullptr;
-		HF::SpatialStructures::PathMember* out_path_member = nullptr;
-		int out_size = -1;
-
-		// Use CreatePathCostType, be sure to use the .c_str() method if using a std::string for desired_cost_type
-		CreatePath(&graph, 0, 4, desired_cost_type.c_str(), &out_size, &out_path, &out_path_member);
-		
-		///
-		/// Use out_path, out_path_member
-		///
-
-		// Remember to free resources when finished
-		DestroyPath(out_path);
-
-		// At this point, out_path_member has also been destroyed, so we set this to nullptr
-		out_path_member = nullptr;
-	\endcode
+	\see \ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
+	\see \link DestroyPath \endlink for information on deleting the path after usage.
 */
 C_INTERFACE CreatePaths(
 	const HF::SpatialStructures::Graph* g,
@@ -217,37 +143,6 @@ C_INTERFACE CreatePaths(
 
 	\returns	HF_STATUS::OK on success,
 				HF_STATUS::NO_PATH if the path *p is invalid
-
-	\code
-		// Requires #include "pathfinder_C.h", #include "path.h"
-
-		// Create a Graph g, and compress it.
-		HF::SpatialStructures::Graph g;
-		g.addEdge(0, 1, 1);
-		g.addEdge(0, 2, 2);
-		g.addEdge(1, 3, 3);
-		g.addEdge(2, 4, 1);a
-		g.addEdge(3, 4, 5);
-		g.Compress();
-
-		// Create a boostGraph from g
-		auto boostGraph = HF::Pathfinding::CreateBoostGraph(g);
-
-		HF::SpatialStructures::Path* out_path = nullptr;
-		HF::SpatialStructures::PathMember* out_path_member = nullptr;
-		int out_size = -1;
-
-		CreatePath(&g, 0, 4, &out_size, &out_path, &out_path_member);
-
-		// Get p's info, store results in out_path_member and out_size
-		GetPathInfo(p, &out_path_member, &out_size);
-
-		// Remember to free resources when finished
-		DestroyPath(out_path);
-
-		// At this point, out_path_member has also been destroyed, so we set this to nullptr
-		out_path_member = nullptr;
-	\endcode
 */
 C_INTERFACE GetPathInfo(
 	HF::SpatialStructures::Path* p,
@@ -262,35 +157,8 @@ C_INTERFACE GetPathInfo(
 
 	\returns	HF_STATUS::OK on return.
 
-	\code
-		// Requires #include "pathfinder_C.h", #include "graph.h", #include "path.h", #include "path_finder.h"
-
-		// Create a Graph g, and compress it.
-		HF::SpatialStructures::Graph g;
-		g.addEdge(0, 1, 1);
-		g.addEdge(0, 2, 2);
-		g.addEdge(1, 3, 3);
-		g.addEdge(2, 4, 1);
-		g.addEdge(3, 4, 5);
-		g.Compress();
-
-		// Create a boostGraph from g
-		auto boostGraph = HF::Pathfinding::CreateBoostGraph(g);
-
-		HF::SpatialStructures::Path* out_path = nullptr;
-		HF::SpatialStructures::PathMember* out_path_member = nullptr;
-		int out_size = -1;
-
-		CreatePath(&g, 0, 4, &out_size, &out_path, &out_path_member);
-
-		// Use out_path, out_path_member
-
-		// Remember to free resources when finished
-		DestroyPath(out_path);
-
-		// At this point, out_path_member has also been destroyed, so we set this to nullptr
-		out_path_member = nullptr;
-	\endcode
+	\see \ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
+	\see \link DestroyPath \endlink for information on deleting the path after usage.
 */
 C_INTERFACE DestroyPath(HF::SpatialStructures::Path* path_to_destroy);
 
@@ -330,6 +198,8 @@ C_INTERFACE DestroyPath(HF::SpatialStructures::Path* path_to_destroy);
 	Do not try to manually delete `out_path_members` or the path that owns it will throw 
 	a null pointer exception when it is deleted.
 
+	\see \ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
+	\see \link DestroyPath \endlink for information on deleting the path after usage.
 */
 C_INTERFACE CreateAllToAllPaths(
 	const HF::SpatialStructures::Graph* g,
@@ -366,9 +236,11 @@ C_INTERFACE CreateAllToAllPaths(
 	It is the caller's responsibility to deallocate the distance and predecessor matricies by calling 
 	DestroyIntVector and DestroyFloatVector. Failing to do so WILL leak memory. Do NOT attempt to delete
 	the data arrays, they will automatically be deleted when their vectors are deleted. 
-
-	\see DestroyFloatVector
-	\see DestroyIntVector
+	
+	\see \ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
+	\see \link DestroyFloatVector \endlink
+	\see \link DestroyIntVector \endlink
+	\see \link DestroyPath \endlink for information on deleting the path after usage.
 
 	\par Example
 	\snippet tests\src\Pathfinding.cpp EX_DistPred_C
