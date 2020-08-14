@@ -1236,33 +1236,44 @@ namespace CInterfaceTests {
 		//		loaded_obj->empty()
 		ASSERT_TRUE(bvh != nullptr);
 
-		//! [snippet_FireOcclusionRays]
+		//! [snippet_FireOcclusionRays_start_point]
 		// Define point to start ray
 		// These are Cartesian coordinates.
 		const std::array<float, 3> p1_occl { 0.0f, 0.0f, 2.0f };
 		const int size_p1_occl = static_cast<int>(p1_occl.size());
 
+		// count_origin represents how many sets of origin coordinates we are dealing with.
+		const int count_origin = size_p1_occl / 3;
+		//! [snippet_FireOcclusionRays_start_point]
+
 		// p1_occl represents inline coordinates, in R3. size_p1_occl should be a multiple of 3.
 		ASSERT_TRUE(size_p1_occl % 3 == 0);
 
-		// count_origin represents how many sets of origin coordinates we are dealing with.
-		const int count_origin = size_p1_occl / 3;
-
+		//! [snippet_FireOcclusionRays_components]
 		// All of the direction components, inline, one after another.
 		const std::array<float, 9> dir_occl { 0.0f, 0.0f, -1.0, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f };
 		const int size_dir_occl = static_cast<int>(dir_occl.size());
 
 		// count_dir_occl represents how many sets of directions we are dealing with.
 		const int count_dir_occl = size_dir_occl / 3;
+		//! [snippet_FireOcclusionRays_components]
 
 		// dir_occl represents direction components in R3, size_dir_occl should be a multiple of 3 --
 		// or, if dir_occl has three members, count_dir_occl should be 1 (only one ray fired)
 		ASSERT_TRUE(size_dir_occl % 3 == 0 || (size_dir_occl == 3 && count_dir_occl == 1));
 
+		//! [snippet_FireOcclusionRays]
 		// The array results should be the amount of rays we are firing, i.e. the value of count_dir_occl.
 		std::array<bool, count_dir_occl> results;
 		float max_distance_occl = 9999.0f;
+
 		status = FireOcclusionRays(bvh, p1_occl.data(), dir_occl.data(), count_origin, count_dir_occl, max_distance_occl, results.data());
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at FireOcclusionRays, code: " << status << std::endl;
+		}
+		//! [snippet_FireOcclusionRays]
 
 		// results should not be empty after calling FireOcclusionRays.
 		ASSERT_FALSE(results.empty());
@@ -1270,14 +1281,10 @@ namespace CInterfaceTests {
 		// results.size() should be equal to the amount of occlusion rays to fire.
 		ASSERT_EQ(results.size(), count_dir_occl);
 
-		if (status != 1) {
-			// Error!
-			std::cerr << "Error at FireOcclusionRays, code: " << status << std::endl;
-		}
-
+		//! [snippet_FireOcclusionRays_result]
 		bool does_occlude = results[0];
 		std::cout << "Does the ray connect? " << (does_occlude ? std::string("True") : std::string("False")) << std::endl;
-		//! [snippet_FireOcclusionRays]
+		//! [snippet_FireOcclusionRays_result]
 
 		//
 		// Memory resource cleanup.
