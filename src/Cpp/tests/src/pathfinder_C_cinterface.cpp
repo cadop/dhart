@@ -8,19 +8,28 @@
 
 #include "gtest/gtest.h"
 
+#include <memory>
+
+#include <boost/graph/dijkstra_shortest_paths.hpp>
+#include <boost/graph/breadth_first_search.hpp>
+#include <boost/graph/dijkstra_shortest_paths_no_color_map.hpp>
+#include <boost/exception/exception.hpp>
+
+#include "path_finder.h"
+#include "objloader.h"
+#include "boost_graph.h"
+#include "graph.h"
+#include "node.h"
+#include "edge.h"
+#include "path.h"
+#include "HFExceptions.h"
+
+#include "analysis_C.h"
 #include "objloader_C.h"
 #include "raytracer_C.h"
 #include "pathfinder_C.h"
-#include "analysis_C.h"
-#include "spatialstructures_C.h"	// Required for AlgorithmCostTitle
-
-#include "path.h"					// Required for HF::SpatialStructures::Path, HF::SpatialStructures::PathMember
-#include "node.h"					// Required for HF::SpatialStructures::Node
-#include "graph.h"					// Required for HF::SpatialStructures::Graph
-#include "path_finder.h"			// Required for HF::Pathfinding::CreateBoostGraph
-#include "cost_algorithms.h"		// Required for CalculateEnergyExpenditure
-
-#include <array>
+#include "cost_algorithms.h"
+#include "spatialstructures_C.h"
 
 namespace CInterfaceTests {
 	TEST(_pathfinder_cinterface, CreatePath) {
@@ -275,23 +284,96 @@ namespace CInterfaceTests {
 	}
 
 	TEST(_pathfinder_cinterface, CreatePaths) {
-
+		//! [snippet_CreatePaths]
+		// TODO
+		//! [snippet_CreatePaths]
 	}
 
 	TEST(_pathfinder_cinterface, GetPathInfo) {
-
+		//! [snippet_GetPathInfo]
+		// TODO
+		//! [snippet_GetPathInfo]
 	}
 
 	TEST(_pathfinder_cinterface, DestroyPath) {
-
+		//! [snippet_DestroyPath]
+		// TODO
+		//! [snippet_DestroyPath]
 	}
 
 	TEST(_pathfinder_cinterface, CreateAllToAllPaths) {
-
+		//! [snippet_CreateAllToAllPaths]
+		// TODO
+		//! [snippet_CreateAllToAllPaths]
 	}
 
 	TEST(_pathfinder_cinterface, CalculateDistanceAndPredecessor) {
+		using std::vector;
+		using HF::SpatialStructures::Graph;
 
+		//! [EX_DistPred_C]
+		// Create a graph
+		Graph* g;
+		CreateGraph(NULL, -1, &g);
+
+		// Create some nodes and add edges to the graph
+		vector<vector<float>> nodes = {
+			{1, 2, 3}, {4, 5, 6}, {7, 8, 9}, {10, 1, 2}
+		};
+		AddEdgeFromNodes(g, nodes[0].data(), nodes[1].data(), 10, "");
+		AddEdgeFromNodes(g, nodes[1].data(), nodes[2].data(), 20, "");
+		AddEdgeFromNodes(g, nodes[0].data(), nodes[2].data(), 5, "");
+		AddEdgeFromNodes(g, nodes[1].data(), nodes[0].data(), 10, "");
+		Compress(g);
+
+		// Create output parameters
+		std::vector<float>* dist_vector; std::vector<int>* pred_vector;
+		float* dist_data; int* pred_data;
+
+		// Call into the new function
+		auto status = CalculateDistanceAndPredecessor(g, "", &dist_vector, &dist_data, &pred_vector, &pred_data);
+
+		//! [EX_DistPred_C]
+
+		ASSERT_EQ(HF::Exceptions::HF_STATUS::OK, status);
+		// Calculate the matricies using the C++ function, to ensure the results are identical
+		// Turn it into a boost graph
+		auto bg = HF::Pathfinding::CreateBoostGraph(*g);
+
+		// Create distance/predecessor matricies from the boost graph
+		auto matricies = HF::Pathfinding::GenerateDistanceAndPred(*bg.get());
+		auto cpp_pred = matricies.pred; auto cpp_dist = matricies.dist;
+
+		// Compare to C-Interface  generated results
+		for (int i = 0; i < g->size() * g->size(); i++) {
+
+			// Comparisons between nans will always fail, so handle this before
+			// doing the equality check. 
+			const bool cpp_dist_is_nan = isnan(cpp_dist->at(i));
+			const bool dist_is_nan = isnan(dist_vector->at(i));
+			if (cpp_dist_is_nan && dist_is_nan) continue;
+
+			ASSERT_EQ(cpp_pred->at(i), pred_vector->at(i));
+			ASSERT_EQ(cpp_dist->at(i), dist_vector->at(i));
+		}
+		delete matricies.dist;
+		delete matricies.pred;
+
+		//! [EX_DistPred_C_2]
+
+		// Print both matricies
+		const int array_length = dist_vector->size();
+		std::cout << "Distance Matrix: [";
+		for (int i = 0; i < array_length; i++)
+			std::cout << dist_vector->at(i) << (i == array_length - 1 ? "]\r\nPredecessor Mattrix: [" : ", ");
+		for (int i = 0; i < array_length; i++)
+			std::cout << pred_vector->at(i) << (i == array_length - 1 ? "]\r\n" : ", ");
+
+		// Cleanup memory
+		DestroyIntVector(pred_vector);
+		DestroyFloatVector(dist_vector);
+
+		//! [EX_DistPred_C_2]
 	}
 
 	TEST(C_Pathfinder, CreatePath) {
