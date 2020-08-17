@@ -1138,5 +1138,56 @@ namespace HF::RayTracer {
 		*/
 		~EmbreeRayTracer();
 	};
+
+	inline Vector3D cross(const Vector3D& x, const Vector3D& y) {
+		return Vector3D{
+			x.y * y.z - y.y * x.z,
+			x.z * y.x - y.z * x.x,
+			x.x * y.y - y.x * x.y
+		};
+	}
+
+	inline double dot(const Vector3D& v1, const Vector3D& v2) {
+		return (v1.x * v2.x + v1.y * v2.y + v1.z * v2.z);
+	}
+
+	inline Vector3D InvertVector(const Vector3D& V) {
+		return Vector3D{ -V.x, -V.y, -V.z };
+	}
+
+	inline double RayTriangleIntersection(
+		const Vector3D& origin,
+		const Vector3D& direction,
+		const Vector3D& v1,
+		const Vector3D& v2,
+		const Vector3D& v3
+	) {
+
+		const double EPSILON = 0.0000001;
+		const Vector3D inverted_direction = direction;//InvertVector(direction);
+
+		const Vector3D edge1 = v2 - v1;
+		const Vector3D edge2 = v3 - v1;
+		const Vector3D h = cross(inverted_direction, edge2);
+		const double a = dot(edge1, h);
+
+		// This ray is parallel to this triangle.
+		if (a > -EPSILON && a < EPSILON)
+			return -1;
+
+		const double f = 1.0 / a;
+		const Vector3D s = origin - v1;
+		const double u = f * dot(s, h);
+		if (u < 0.0 || u > 1.0)
+			return -1;
+
+		const Vector3D q = cross(s, edge1);
+		const double v = f * dot(direction, q);
+		if (v < 0.0 || u + v > 1.0)
+			return -1;
+
+		// At this stage we can compute t to find out where the intersection point is on the line.
+		return f * dot(edge2, q);
+	}
 }
 #endif

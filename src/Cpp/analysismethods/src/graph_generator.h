@@ -61,6 +61,10 @@ namespace HF::GraphGenerator {
 	using RayTracer = HF::RayTracer::EmbreeRayTracer; ///< Type of raytracer to be used internally.
 	using graph_edge = HF::SpatialStructures::Edge;   ///< Type of edge for the graph generator to use internally
 
+	constexpr real_t default_z_precision = 0.001;
+	constexpr real_t default_ground_offset = 0.01;
+	constexpr real_t default_spacing_precision = 0.00001;
+
 	using pair = std::pair<int, int>; ///< Type for Directions to be stored as
 
 	/*! \brief Cast an input value to real_t using static cast.
@@ -300,12 +304,11 @@ namespace HF::GraphGenerator {
 			down_slope_type DownSlope,
 			int max_step_connections,
 			int cores = -1,
-			z_precision_type node_z_precision = 0.01,
-			connect_offset_type  node_spacing_precision = 0.001,
-			spacing_precision_type ground_offset = 0.001
+			z_precision_type node_z_precision = 0.001,
+			connect_offset_type  node_spacing_precision = default_spacing_precision,
+			spacing_precision_type ground_offset = default_ground_offset
 		) {
 			assert(node_z_precision != 0);
-
 			return IMPL_BuildNetwork(
 				CastToReal3(start_point),
 				CastToReal3(Spacing),

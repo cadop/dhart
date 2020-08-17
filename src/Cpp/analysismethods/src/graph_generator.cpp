@@ -58,6 +58,15 @@ namespace HF::GraphGenerator{
 		real_t ground_offset)
 	{
 		
+
+		if (ground_offset < node_z_precision)
+		{
+			std::cerr << "Ground offset is less than z-precision. Setting node offset to Z-Precision." << std::endl;
+			ground_offset = node_z_precision;
+			//std::logic_error("Ground offset is less than Z-Precision");
+
+		}
+
 		// Store parameters in params
 		params.down_step = DownStep; params.up_step = UpStep;
 		params.up_slope = UpSlope;	params.down_slope = DownSlope;
