@@ -239,7 +239,7 @@ namespace HF::RayTracer {
 		// Define the directions 
 		hit.ray.dir_x = dx; hit.ray.dir_y = dy; hit.ray.dir_z = dz;
 
-		hit.ray.tnear = 0.0f; // The start of the ray segment
+		hit.ray.tnear = 0.00000001f; // The start of the ray segment
 		hit.ray.tfar = INFINITY; // The end of the ray segment
 		hit.ray.time = 0.0f; // Time of ray for motion blur, unrelated to our package
 
@@ -252,15 +252,34 @@ namespace HF::RayTracer {
 		// If valid geometry was hit, and the geometry matches the caller's desired mesh
 		// (if specified) then update the hitpoint and return
 		if (hit.hit.geomID == RTC_INVALID_GEOMETRY_ID || (mesh_id > -1 && hit.hit.geomID != mesh_id)) return false;
-		
+
+		auto distance_to_hit = hit.ray.tfar;
+
+		// Use precise intersection if this is specified
+		if (use_precise) {
+			unsigned int geom_id = hit.hit.geomID;
+			auto geometry = this->geometry[geom_id];
+
+			// Construct a Vector3D of the triangle
+			auto triangle = this->GetTriangle(geom_id, hit.hit.primID);
+
+			distance_to_hit = RayTriangleIntersection(
+				Vector3D{ x,y,z },
+				Vector3D{ dx,dy,dz },
+				triangle[0],
+				triangle[1],
+				triangle[2]
+			);
+		}
+
 		// If the ray did hit, update the node position by translating the distance along the directions
 		// This REQUIRES a normalized vector
 		else 
 		{
 			// Translate the point along the direction vector 
-			x = x + (dx * hit.ray.tfar);
-			y = y + (dy * hit.ray.tfar);
-			z = z + (dz * hit.ray.tfar);
+			x = x + (dx * distance_to_hit);
+			y = y + (dy * distance_to_hit);
+			z = z + (dz * distance_to_hit);
 
 			return true;
 		}
@@ -311,7 +330,7 @@ namespace HF::RayTracer {
 		// Define the directions 
 		hit.ray.dir_x = dx; hit.ray.dir_y = dy; hit.ray.dir_z = dz;
 
-		hit.ray.tnear = 0.0f; // The start of the ray segment
+		hit.ray.tnear = 0.00000001f; // The start of the ray segment
 		hit.ray.tfar = INFINITY; // The end of the ray segment
 		hit.ray.time = 0.0f; // Time of ray for motion blur, unrelated to our package
 
