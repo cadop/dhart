@@ -274,15 +274,12 @@ namespace HF::RayTracer {
 
 		// If the ray did hit, update the node position by translating the distance along the directions
 		// This REQUIRES a normalized vector
-		else 
-		{
-			// Translate the point along the direction vector 
-			x = x + (dx * distance_to_hit);
-			y = y + (dy * distance_to_hit);
-			z = z + (dz * distance_to_hit);
+		// Translate the point along the direction vector 
+		x = x + (dx * distance_to_hit);
+		y = y + (dy * distance_to_hit);
+		z = z + (dz * distance_to_hit);
 
-			return true;
-		}
+		return true;
 	}
 
 	inline Vector3D GetPointFromBuffer(int index, Vertex* buffer) {
