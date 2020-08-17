@@ -277,7 +277,7 @@ namespace HF::GraphGenerator {
 			\snippet tests\src\GraphGenerator.cpp EX_GraphGeneratorRayTracer
 			\snippet tests\src\GraphGenerator.cpp EX_BuildNetwork
 			\snippet tests\src\GraphGenerator.cpp EX_PrintGraph
-			`[(0, 0, 0),(-1, -1, -0),(-1, 0, 0),(-1, 1, 0),(0, -1, -0),(0, 1, 0),(1, -1, -0),(1, 0, 0),(1, 1, 0),(-2, -2, -0),(-2, -1, -0),(-2, 0, 0),(-1, -2, -0),(0, -2, -0),(-2, 1, 0),(-2, 2, 0),(-1, 2, 0),(0, 2, 0),(1, -2, -0)]`
+			`[(0, 0, -0),(-1, -1, -0),(-1, 0, -0),(-1, 1, -0),(0, -1, -0),(0, 1, -0),(1, -1, -0),(1, 0, -0),(1, 1, -0),(-2, -2, -0),(-2, -1, -0),(-2, 0, -0),(-1, -2, -0),(0, -2, -0),(-2, 1, -0),(-2, 2, 0),(-1, 2, 0),(0, 2, 0),(1, -2, -0)]`
 		*/
 		template <
 			typename node_type,
@@ -389,7 +389,7 @@ namespace HF::GraphGenerator {
 			\snippet tests\src\GraphGenerator.cpp EX_CrawlGeom
 			\snippet tests\src\GraphGenerator.cpp EX_CrawlGeom_Serial
 			\snippet tests\src\GraphGenerator.cpp EX_PrintGraph
-			`[(0, 1, 0),(-1, 0, 0),(-1, 1, 0),(-1, 2, 0),(0, 0, 0),(0, 2, 0),(1, 0, 0),(1, 1, 0),(1, 2, 0),(-2, -1, -0),(-2, 0, 0),(-2, 1, 0),(-1, -1, -0),(0, -1, -0),(-2, 2, 0),(-2, 3, 0),(-1, 3, 0),(0, 3, 0),(1, -1, -0)]`
+			`[(0, 2, 0),(-1, 1, -0),(-1, 2, 0),(-1, 3, 0),(0, 1, -0),(0, 3, 0),(1, 1, -0),(1, 2, 0),(1, 3, 0),(1, 0, -0),(0, -1, -0),(0, 0, -0),(1, -1, -0),(2, -1, -0),(2, 0, -0),(2, 1, -0),(2, 2, 0),(2, 3, 0),(-2, -1, -0),(-3, -2, -0),(-3, -1, -0),(-3, 0, -0),(-2, -2, -0),(-2, 0, -0),(-1, -2, -0),(-1, -1, -0),(-1, 0, -0)]`
 
 		*/
 		SpatialStructures::Graph CrawlGeom(UniqueQueue& todo);
@@ -409,7 +409,7 @@ namespace HF::GraphGenerator {
 			\snippet tests\src\GraphGenerator.cpp EX_CrawlGeom_Parallel
 			\snippet tests\src\GraphGenerator.cpp EX_PrintGraph
 
-			`[(0, 2, 0),(-1, 1, 0),(-1, 2, 0),(-1, 3, 0),(0, 1, 0),(0, 3, 0),(1, 1, 0),(1, 2, 0),(1, 3, 0),(1, 0, 0),(0, -1, -0),(0, 0, 0),(1, -1, -0),(2, -1, -0),(2, 0, 0),(2, 1, 0),(2, 2, 0),(2, 3, 0),(-2, -1, -0),(-3, -2, -0),(-3, -1, -0),(-3, 0, 0),(-2, -2, -0),(-2, 0, 0),(-1, -2, -0),(-1, -1, -0),(-1, 0, 0)]`
+			`[(0, 2, 0),(-1, 1, -0),(-1, 2, 0),(-1, 3, 0),(0, 1, -0),(0, 3, 0),(1, 1, -0),(1, 2, 0),(1, 3, 0),(1, 0, -0),(0, -1, -0),(0, 0, -0),(1, -1, -0),(2, -1, -0),(2, 0, -0),(2, 1, -0),(2, 2, 0),(2, 3, 0),(-2, -1, -0),(-3, -2, -0),(-3, -1, -0),(-3, 0, -0),(-2, -2, -0),(-2, 0, -0),(-1, -2, -0),(-1, -1, -0),(-1, 0, -0)]`
 		*/
 		SpatialStructures::Graph CrawlGeomParallel(UniqueQueue& todo);
 	};
@@ -499,7 +499,7 @@ namespace HF::GraphGenerator {
 		\par Example
 		\snippet tests\src\GraphGenerator.cpp EX_GraphGeneratorRayTracer
 		\snippet tests\src\GraphGenerator.cpp EX_CreateChildren
-		`[((0, 2, 0), 2.23607, 1),((2, 0, 0), 2.23607, 1)]`
+		`[((0, 2, 0), 2.23607, 1),((2, 0, -0), 2.23607, 1)]`
 	*/
 	std::vector<graph_edge> GetChildren(
 		const real3 & parent,
@@ -568,7 +568,7 @@ namespace HF::GraphGenerator {
 		\par Example
 		\snippet tests\src\GraphGenerator.cpp EX_GraphGeneratorRayTracer
 		\snippet tests\src\GraphGenerator.cpp EX_CheckChildren
-		`[(0, 2, 0),(1, 0, 0),(0, 1, 0),(2, 0, 0)]`
+		`[(0, 2, 0),(1, 0, -0),(0, 1, -0),(2, 0, -0)]`
 	*/
 	std::vector<real3> CheckChildren(
 		const real3& parent,
