@@ -33,6 +33,8 @@ namespace HumanFactors.RayTracing
             \brief Generate a BVH for an instance of MeshInfo. 
             
             \param MI Mesh to generate the BVH from. 
+            \param use_precise Increase the accuracy of all ray intersections at the
+                               cost of performance.
 
             \exception Exception Embree failed to create a BVH for the given mesh.
 
@@ -51,7 +53,8 @@ namespace HumanFactors.RayTracing
             \par Example
             \snippet raytracer\test_raytracer.cs EX_BVH_CSTOR
        */
-        public EmbreeBVH(MeshInfo MI) : base(NativeMethods.C_ConstructRaytracer(MI.DangerousGetHandle()), MI.pressure) { }
+        public EmbreeBVH(MeshInfo MI, bool use_precise = false) :
+            base(NativeMethods.C_ConstructRaytracer(MI.DangerousGetHandle(), use_precise), MI.pressure) { }
 
         /*!
 			 \brief Free the native memory managed by this class. 
