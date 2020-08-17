@@ -41,14 +41,17 @@ struct RayResult {
 	}
 };
 
-/// <summary> Create a new raytracer using several meshes. </summary>
-/// <param name="mesh"> The meshes to add to raytracer's BVH. </param>
-/// <param name="out_raytracer"> Output parameter for the new raytracer. </param>
-/// <returns>
-/// HF_STATUS::MISSING_DEPEND if Embree's dll couldn't be found. HF_STATUS::GENERIC_ERROR if
-/// <paramref name="mesh" /> is null.
-/// </returns>
-C_INTERFACE CreateRaytracer(std::vector<HF::Geometry::MeshInfo>* mesh, HF::RayTracer::EmbreeRayTracer** out_raytracer);
+/*! 
+	\brief Create a new raytracer using several meshes.
+
+	\param mesh The meshes to add to raytracer's BVH.
+	\param out_raytracer Output parameter for the new raytracer.
+	\param use_precise If true, use a more precise but slower method of triangle intersections.
+	
+	\returns HF_STATUS::MISSING_DEPEND if Embree's dll couldn't be found. 
+	\returns HF_STATUS::GENERIC_ERROR if `mesh` is null.
+*/
+C_INTERFACE CreateRaytracer(std::vector<HF::Geometry::MeshInfo>* mesh, HF::RayTracer::EmbreeRayTracer** out_raytracer, bool use_precise);
 
 /// <summary> Delete an existing raytracer. </summary>
 /// <param name="rt_to_destroy"> Raytracer to destroy. </param>

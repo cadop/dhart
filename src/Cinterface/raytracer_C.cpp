@@ -12,7 +12,7 @@ using HF::Geometry::MeshInfo;
 using namespace HF::Exceptions;
 //TODO: Use a template for this
 
-C_INTERFACE CreateRaytracer(vector<MeshInfo>* mesh, EmbreeRayTracer** out_raytracer)
+C_INTERFACE CreateRaytracer(vector<MeshInfo>* mesh, EmbreeRayTracer** out_raytracer, bool use_precise)
 {
 	// Throw if an invalid list was passed to us
 	if (!mesh) {
@@ -21,7 +21,7 @@ C_INTERFACE CreateRaytracer(vector<MeshInfo>* mesh, EmbreeRayTracer** out_raytra
 
 	try { // to create the raytracer
 		auto& meshes = *mesh;
-		*out_raytracer = new EmbreeRayTracer(meshes);
+		*out_raytracer = new EmbreeRayTracer(meshes, use_precise);
 		return OK;
 	}
 	// Thrown if Embree is missing
