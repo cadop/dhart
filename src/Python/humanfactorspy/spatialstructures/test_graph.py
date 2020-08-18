@@ -8,6 +8,7 @@ from humanfactorspy.geometry import LoadOBJ, CommonRotations
 from humanfactorspy.raytracer import embree_raytracer, EmbreeBVH
 from humanfactorspy.spatialstructures import NodeList, NodeStruct, Graph, CostAggregationType
 from humanfactorspy.Exceptions import LogicError, InvalidCostOperation
+from humanfactorspy.utils import is_point
 import humanfactorspy.spatialstructures.node as NodeFunctions
 import humanfactorspy.spatialstructures.cost_algorithms as cost_algorithms
 
@@ -316,3 +317,24 @@ def test_ClearNodeAttributes(SimpleGraph):
     # attribute doesn't exist
     cleared_attr = SimpleGraph.get_node_attributes(attr)
     assert cleared_attr == []
+
+def test_IsPoint():
+    # No square brackets operator
+    assert not is_point(1) 
+
+    # Has square brackets operator, but doesn't hold numbers
+    assert not is_point(["string", "string", "string"]) 
+    
+    # Has square brackets operator, but holds lists
+    assert not is_point([[1, 2, 3], [1, 2, 3], [1, 2, 3]])
+
+    # Has square brackets operator but only holds 2 elements
+    assert not is_point([1, 2])
+
+    # The following statments should all be 
+    # considered points
+    assert is_point([1, 2, 3])
+    assert is_point([1.0, 2.0, 2.5])
+    assert is_point((1, 2, 3))
+    assert is_point((1.0, 2.0, 3.0))
+ 

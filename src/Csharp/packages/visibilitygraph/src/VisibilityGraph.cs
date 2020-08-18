@@ -28,10 +28,10 @@ using System.Security.Cryptography.X509Certificates;
 */
 namespace HumanFactors.VisibilityGraph
 {
-    /// <summary> Contains all methods for generating Visibility Graphs.
-    public static class VisibilityGraph
-    {
-        /*!
+	/// <summary> Contains all methods for generating Visibility Graphs.
+	public static class VisibilityGraph
+	{
+		/*!
             \brief Create a visibility graph from every node to every node in nodes.
 
             \param bvh The BVH to intersect with.
@@ -70,14 +70,17 @@ namespace HumanFactors.VisibilityGraph
             `[2, 2.414214, 2.414214, 0]`
 
        */
-        public static Graph GenerateAllToAll(EmbreeBVH bvh, IEnumerable<Vector3D> nodes, float height = 1.7f, bool directed = true)
-        {
-            IntPtr potential_graph = NativeMethods.C_AllToAllVisibilityGraph(bvh.Pointer, nodes, height, directed);
-            if (potential_graph == IntPtr.Zero) return null;
-            else return new Graph(potential_graph);
-        }
+		public static Graph GenerateAllToAll(EmbreeBVH bvh, IEnumerable<Vector3D> nodes, float height = 1.7f, bool directed = true)
+		{
+			// Call the native function.
+			IntPtr potential_graph = NativeMethods.C_AllToAllVisibilityGraph(bvh.Pointer, nodes, height, directed);
 
-        /*!
+			// If it's null, return null, otherwise wrap it in a Graph. 
+			if (potential_graph == IntPtr.Zero) return null;
+			else return new Graph(potential_graph);
+		}
+
+		/*!
             \brief Generate a directed visibility graph from nodes in `group_a` to the nodes in `group_b.`
 
             \param bvh The geometry to use for generating the visibility graph.
@@ -108,16 +111,19 @@ namespace HumanFactors.VisibilityGraph
 
             `1, 1.414214, 0, 0`
         */
-        public static Graph GenerateGroupToGroup(
-            EmbreeBVH bvh,
-            IEnumerable<Vector3D> group_a,
-            IEnumerable<Vector3D> group_b,
-            float height = 1.7f
-        )
-        {
-            IntPtr potential_graph = NativeMethods.C_GroupToGroupVisibilityGraph(bvh.Pointer, group_a, group_b, height);
-            if (potential_graph == IntPtr.Zero) return null;
-            else return new Graph(potential_graph);
-        }
-    }
+		public static Graph GenerateGroupToGroup(
+			EmbreeBVH bvh,
+			IEnumerable<Vector3D> group_a,
+			IEnumerable<Vector3D> group_b,
+			float height = 1.7f
+		)
+		{
+			// Call the native function
+			IntPtr potential_graph = NativeMethods.C_GroupToGroupVisibilityGraph(bvh.Pointer, group_a, group_b, height);
+
+			// If it's null, return null, otherwise wrap it in a graph.
+			if (potential_graph == IntPtr.Zero) return null;
+			else return new Graph(potential_graph);
+		}
+	}
 }

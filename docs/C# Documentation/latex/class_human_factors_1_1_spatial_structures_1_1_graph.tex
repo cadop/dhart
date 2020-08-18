@@ -21,7 +21,7 @@ void \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a24d4
 void \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_ad4effbecd5ea2998b87425bd52e33f58}{Add\+Edge}} (int parent\+\_\+id, int child\+\_\+id, float cost, string cost\+\_\+type=\char`\"{}\char`\"{})
 \begin{DoxyCompactList}\small\item\em Create a new edge between parent and child with cost. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_node_list}{Node\+List}} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a6b2aeaa562da06bec0d23aaabb2ba74d}{get\+Nodes}} ()
-\begin{DoxyCompactList}\small\item\em Garray containing the graph\textquotesingle{}s current nodes. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Get an array containing the graph\textquotesingle{}s current nodes. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{struct_human_factors_1_1_spatial_structures_1_1_c_s_r_info}{C\+S\+R\+Info}} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a84a7286932920179d90a63cfd8ada207}{Compress\+To\+C\+SR}} (string cost\+\_\+type=\char`\"{}\char`\"{})
 \begin{DoxyCompactList}\small\item\em Compress the graph into a C\+SR representation, and get pointers to it. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_human_factors_1_1_native_utils_1_1_common_native_arrays_1_1_managed_float_array}{Managed\+Float\+Array}} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a45a2d5b16092f8389210dc47f722a539}{Aggregate\+Edge\+Costs}} (\mbox{\hyperlink{namespace_human_factors_1_1_spatial_structures_abd405fa41da0f9a771d547aa47b6e1a0}{Graph\+Edge\+Aggregation}} type, bool directed=true, string cost\+\_\+type=\char`\"{}\char`\"{})
@@ -74,6 +74,9 @@ This \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph}{Grap
 \begin{DoxyParagraph}{Node\+Attributes}
 The graph is able to store an arbitrary amount of information about the nodes it contains as strings. Similar to alternate cost types, node attributes are each have a distinct key as their name, but instead of conatining information about edges in the graph, node attributes contain information about nodes. Unlike the cost algorithms in edgecosts, right now there is no functionality within \mbox{\hyperlink{namespace_human_factors}{Human\+Factors}} that populates the node attributes of the graph with any kind of metric, however the methods to add and clear node attributes are made available so you are free to add your own node attributes.
 \end{DoxyParagraph}
+\begin{DoxyNote}{Note}
+To get the X\+YZ coordinates of a node from it\textquotesingle{}s ID, use the ID as an index into the graph\textquotesingle{}s nodes array returned by \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a6b2aeaa562da06bec0d23aaabb2ba74d}{get\+Nodes()}}; For example, if you want to get the node with an ID of 1 from the graph, you\textquotesingle{}d access the element at index 1 in the nodes array.
+\end{DoxyNote}
 \begin{DoxyInvariant}{Invariant}
 1) The C\+SR maintained by this graph will always be valid. 
 
@@ -91,7 +94,7 @@ The graph offers some basic functionality to add edges and nodes but it\textquot
 \end{DoxySeeAlso}
 
 
-Definition at line 95 of file Graph.\+cs.
+Definition at line 101 of file Graph.\+cs.
 
 
 
@@ -113,7 +116,7 @@ Wrap a graph that already exists in unmanaged memory.
 
 
 
-Definition at line 102 of file Graph.\+cs.
+Definition at line 108 of file Graph.\+cs.
 
 \mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_graph_a01855a86f49d22301651cf7098ee8967}\label{class_human_factors_1_1_spatial_structures_1_1_graph_a01855a86f49d22301651cf7098ee8967}} 
 \index{HumanFactors.SpatialStructures.Graph@{HumanFactors.SpatialStructures.Graph}!Graph@{Graph}}
@@ -127,7 +130,7 @@ Construct a new empty graph in unmanaged memory.
 
 
 
-Definition at line 105 of file Graph.\+cs.
+Definition at line 111 of file Graph.\+cs.
 
 
 
@@ -177,8 +180,26 @@ Create a new edge between parent and child with cost.
 \begin{DoxyWarning}{Warning}
 1) If an edge between parent and child already exists, this will overwrite that edge. 
 
-2) Calling this function will invalidate any existing C\+S\+R\+Ptrs returned from the graph. Make sure to call Compress\+To\+C\+SR again continuing to access it. 
+2) Calling this function will invalidate any existing C\+S\+R\+Ptrs returned from the graph. Make sure to call Compress\+To\+C\+SR again continuing to access it.
 \end{DoxyWarning}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{            }
+\DoxyCodeLine{            \textcolor{comment}{// Create a graph, add an edge then compress it}}
+\DoxyCodeLine{            \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a01855a86f49d22301651cf7098ee8967}{Graph}} G = \textcolor{keyword}{new} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a01855a86f49d22301651cf7098ee8967}{Graph}}();}
+\DoxyCodeLine{            G.AddEdge(0, 1, 39);}
+\DoxyCodeLine{            G.CompressToCSR();}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Get this cost from the edge}}
+\DoxyCodeLine{            \textcolor{keywordtype}{float} cost\_from\_graph = G.GetCost(0, 1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Print the retrieved cost}}
+\DoxyCodeLine{            Debug.WriteLine(cost\_from\_graph);}
+\DoxyCodeLine{}
+\end{DoxyCodeInclude}
+{\ttfamily 39} 
+\end{DoxyParagraph}
 \mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_graph_a24d42bc60412118b8eab54d137cabf36}\label{class_human_factors_1_1_spatial_structures_1_1_graph_a24d42bc60412118b8eab54d137cabf36}} 
 \index{HumanFactors.SpatialStructures.Graph@{HumanFactors.SpatialStructures.Graph}!AddEdge@{AddEdge}}
 \index{AddEdge@{AddEdge}!HumanFactors.SpatialStructures.Graph@{HumanFactors.SpatialStructures.Graph}}
@@ -200,8 +221,9 @@ Create a new edge between parent and child with cost.
 {\em cost\+\_\+type} & The type of cost to add the edge to.\\
 \hline
 \end{DoxyParams}
-\textbackslash{}\+Attention This overload is meant for debugging. There are many issues that can occur with adding integers to the graph that don\textquotesingle{}t already have nodes assigned. Instead use the overload of this function deals with vector 3.
-
+\begin{DoxyAttention}{Attention}
+This overload is meant for debugging. There are many issues that can occur with adding integers to the graph that don\textquotesingle{}t already have nodes assigned. Instead use the overload of this function deals with vector 3.
+\end{DoxyAttention}
 \begin{DoxyPrecond}{Precondition}
 1) If adding edges to a new cost type, the graph has been compressed by calling \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a84a7286932920179d90a63cfd8ada207}{Compress\+To\+C\+S\+R()}}. 
 
@@ -226,8 +248,30 @@ Create a new edge between parent and child with cost.
 \begin{DoxyWarning}{Warning}
 1) If an edge between parent and child already exists, this will overwrite that edge. 
 
-2) Calling this function will invalidate any existing C\+S\+R\+Ptrs returned from the graph. Make sure to call Compress\+To\+C\+SR again continuing to access it. 
+2) Calling this function will invalidate any existing C\+S\+R\+Ptrs returned from the graph. Make sure to call Compress\+To\+C\+SR again continuing to access it.
 \end{DoxyWarning}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Create a new Graph, add an edge then compress it}}
+\DoxyCodeLine{            \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a01855a86f49d22301651cf7098ee8967}{Graph}} G = \textcolor{keyword}{new} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a01855a86f49d22301651cf7098ee8967}{Graph}}();}
+\DoxyCodeLine{            G.AddEdge(\textcolor{keyword}{new} Vector3D(0, 0, 2), \textcolor{keyword}{new} Vector3D(0, 0, 1), 39);}
+\DoxyCodeLine{            G.CompressToCSR();}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Get the cost form the edge we just added to ensure it exists}}
+\DoxyCodeLine{            \textcolor{keywordtype}{float} cost\_from\_graph = G.GetCost(0, 1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Print the retrieved cost}}
+\DoxyCodeLine{            Debug.WriteLine(cost\_from\_graph);}
+\DoxyCodeLine{}
+\end{DoxyCodeInclude}
+{\ttfamily 39} 
+\end{DoxyParagraph}
+
+
+Referenced by Humanfctors.\+Examples.\+Overall\+Examples.\+Generate\+All\+To\+All(), and Humanfctors.\+Examples.\+Overall\+Examples.\+Get\+Edge\+Cost\+Example().
+
 \mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_graph_a4092cfc4260762e5b18127e3dbbe770e}\label{class_human_factors_1_1_spatial_structures_1_1_graph_a4092cfc4260762e5b18127e3dbbe770e}} 
 \index{HumanFactors.SpatialStructures.Graph@{HumanFactors.SpatialStructures.Graph}!AddNodeAttribute@{AddNodeAttribute}}
 \index{AddNodeAttribute@{AddNodeAttribute}!HumanFactors.SpatialStructures.Graph@{HumanFactors.SpatialStructures.Graph}}
@@ -276,7 +320,7 @@ Define a node attribute for the node at id.
 \end{DoxyParagraph}
 
 
-Definition at line 335 of file Graph.\+cs.
+Definition at line 377 of file Graph.\+cs.
 
 \mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_graph_a4cf45189fef35fbd24aa74a9f51adafc}\label{class_human_factors_1_1_spatial_structures_1_1_graph_a4cf45189fef35fbd24aa74a9f51adafc}} 
 \index{HumanFactors.SpatialStructures.Graph@{HumanFactors.SpatialStructures.Graph}!AddNodeAttribute@{AddNodeAttribute}}
@@ -328,7 +372,7 @@ the length of {\ttfamily ids} and {\ttfamily scores} must match
 {\ttfamily $>$$>$$>$ 200}~\newline
 
 
-Definition at line 375 of file Graph.\+cs.
+Definition at line 417 of file Graph.\+cs.
 
 
 
@@ -368,11 +412,31 @@ If not left blank, cost\+\_\+type must point to a valid cost in the graph.
 This will compress the graph if it is not compressed already. If any edges were added between lat call to Compress\+To\+C\+SR and now, then any active C\+S\+R\+Ptrs will be invalidated.
 \end{DoxyWarning}
 \begin{DoxyRemark}{Remarks}
-The order of the scores returned bythis function match the order of the scores returned from \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a6b2aeaa562da06bec0d23aaabb2ba74d}{Graph.\+get\+Nodes}}. This can be especially useful for summarizing the results of a \mbox{\hyperlink{namespace_human_factors_1_1_visibility_graph}{Visibility\+Graph}}. 
+The order of the scores returned bythis function match the order of the scores returned from \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a6b2aeaa562da06bec0d23aaabb2ba74d}{Graph.\+get\+Nodes}}. This can be especially useful for summarizing the results of a \mbox{\hyperlink{namespace_human_factors_1_1_visibility_graph}{Visibility\+Graph}}.
 \end{DoxyRemark}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{            \textcolor{comment}{// Create a new graph and add some edges}}
+\DoxyCodeLine{            \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a01855a86f49d22301651cf7098ee8967}{Graph}} g = \textcolor{keyword}{new} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a01855a86f49d22301651cf7098ee8967}{Graph}}();}
+\DoxyCodeLine{            g.AddEdge(0, 1, 100);}
+\DoxyCodeLine{            g.AddEdge(0, 2, 50);}
+\DoxyCodeLine{            g.AddEdge(1, 2, 20);}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Compress the graph before using it }}
+\DoxyCodeLine{            g.CompressToCSR();}
+\end{DoxyCodeInclude}
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{            var scores = g.AggregateEdgeCosts(\mbox{\hyperlink{namespace_human_factors_1_1_spatial_structures_abd405fa41da0f9a771d547aa47b6e1a0}{GraphEdgeAggregation}}.SUM);}
+\DoxyCodeLine{            var score\_arr = scores.array;}
+\DoxyCodeLine{            Debug.WriteLine(scores);}
+\end{DoxyCodeInclude}
+{\ttfamily \mbox{[}150, 20, 0\mbox{]}} 
+\end{DoxyParagraph}
 
 
-Definition at line 242 of file Graph.\+cs.
+Definition at line 272 of file Graph.\+cs.
 
 
 
@@ -419,7 +483,7 @@ Clear an attribute and all of its scores from the graph.
 \end{DoxyParagraph}
 
 
-Definition at line 444 of file Graph.\+cs.
+Definition at line 490 of file Graph.\+cs.
 
 
 
@@ -449,11 +513,28 @@ The C\+SR pointers can be mapped to after retrieved from C++ using spans, or can
 \hline
 \end{DoxyExceptions}
 \begin{DoxySeeAlso}{See also}
-C\+S\+R\+Ptrs for more info on the C\+SR type and how to access it. 
+C\+S\+R\+Ptrs for more info on the C\+SR type and how to access it.
 \end{DoxySeeAlso}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{            \textcolor{comment}{// Create a graph}}
+\DoxyCodeLine{            \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a01855a86f49d22301651cf7098ee8967}{Graph}} G = \textcolor{keyword}{new} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a01855a86f49d22301651cf7098ee8967}{Graph}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Add an edge}}
+\DoxyCodeLine{            G.AddEdge(1, 2, 39);}
+\DoxyCodeLine{            }
+\DoxyCodeLine{            \textcolor{comment}{// Compress the graph to a CSR}}
+\DoxyCodeLine{            var default\_ptrs = G.CompressToCSR();}
+\DoxyCodeLine{            }
+\DoxyCodeLine{            \textcolor{comment}{// Print the CSR}}
+\DoxyCodeLine{            Debug.Write(default\_ptrs);}
+\end{DoxyCodeInclude}
+{\ttfamily (nnz\+: 1, rows\+: 3, cols\+: 3)} 
+\end{DoxyParagraph}
 
 
-Definition at line 207 of file Graph.\+cs.
+Definition at line 231 of file Graph.\+cs.
 
 
 
@@ -461,7 +542,7 @@ References Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+C\+\_\+\+Get
 
 
 
-Referenced by Human\+Factors.\+Spatial\+Structures.\+Graph.\+Aggregate\+Edge\+Costs().
+Referenced by Human\+Factors.\+Spatial\+Structures.\+Graph.\+Aggregate\+Edge\+Costs(), Humanfctors.\+Examples.\+Overall\+Examples.\+Generate\+All\+To\+All(), Humanfctors.\+Examples.\+Overall\+Examples.\+Generate\+Example\+Graph(), and Humanfctors.\+Examples.\+Overall\+Examples.\+Get\+Edge\+Cost\+Example().
 
 \mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_graph_abde89644defe692bffea19e3c3aebf8a}\label{class_human_factors_1_1_spatial_structures_1_1_graph_abde89644defe692bffea19e3c3aebf8a}} 
 \index{HumanFactors.SpatialStructures.Graph@{HumanFactors.SpatialStructures.Graph}!GetCost@{GetCost}}
@@ -498,15 +579,25 @@ The cost of traversing from {\ttfamily parent} to {\ttfamily child}.
 \hline
 \end{DoxyExceptions}
 \begin{DoxyNote}{Note}
-This is not a high performance function, since each index into the C\+SR requires an indexing operation. If multiple values are required, it is suggested to iterate through the pointers from \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a84a7286932920179d90a63cfd8ada207}{Graph.\+Compress\+To\+C\+S\+R()}}. 
+This is not a high performance function, since each index into the C\+SR requires an indexing operation. If multiple values are required, it is suggested to iterate through the pointers from \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a84a7286932920179d90a63cfd8ada207}{Graph.\+Compress\+To\+C\+S\+R()}}.
 \end{DoxyNote}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+{\ttfamily 100} 
+\end{DoxyParagraph}
 
 
-Definition at line 277 of file Graph.\+cs.
+Definition at line 311 of file Graph.\+cs.
 
 
 
 References Human\+Factors.\+Spatial\+Structures.\+Native\+Methods.\+C\+\_\+\+Get\+Edge\+Cost(), and Human\+Factors.\+Native\+Utils.\+Native\+Object.\+Pointer.
+
+
+
+Referenced by Humanfctors.\+Examples.\+Overall\+Examples.\+Get\+Edge\+Cost\+Example().
 
 \mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_graph_a78c22c3af8aea1a7b873a61fcc8aa935}\label{class_human_factors_1_1_spatial_structures_1_1_graph_a78c22c3af8aea1a7b873a61fcc8aa935}} 
 \index{HumanFactors.SpatialStructures.Graph@{HumanFactors.SpatialStructures.Graph}!GetNodeAttributes@{GetNodeAttributes}}
@@ -528,13 +619,55 @@ If an attribute with the name of {\ttfamily attribute}, type was found in the gr
 
 If {\ttfamily attribute} didn\textquotesingle{}t exist in the graph, then an empty array of strings will be returned.
 \end{DoxyReturn}
+\begin{DoxyParagraph}{Example}
 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{comment}{// TODO example}}
-\end{DoxyCode}
- 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{            \textcolor{comment}{// Create a new graph and add some edges}}
+\DoxyCodeLine{            \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a01855a86f49d22301651cf7098ee8967}{Graph}} g = \textcolor{keyword}{new} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a01855a86f49d22301651cf7098ee8967}{Graph}}();}
+\DoxyCodeLine{            g.AddEdge(0, 1, 100);}
+\DoxyCodeLine{            g.AddEdge(0, 2, 50);}
+\DoxyCodeLine{            g.AddEdge(1, 2, 20);}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Compress the graph before using it }}
+\DoxyCodeLine{            g.CompressToCSR();}
+\end{DoxyCodeInclude}
 
-Definition at line 410 of file Graph.\+cs.
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Add node attributes to the graph for the nodes}}
+\DoxyCodeLine{            \textcolor{comment}{// we just created}}
+\DoxyCodeLine{            g.AddNodeAttribute(2, \textcolor{stringliteral}{"Attr"}, \textcolor{stringliteral}{"200"});}
+\DoxyCodeLine{            g.AddNodeAttribute(1, \textcolor{stringliteral}{"Attr"}, \textcolor{stringliteral}{"100"});}
+\DoxyCodeLine{            g.AddNodeAttribute(0, \textcolor{stringliteral}{"Attr"}, \textcolor{stringliteral}{"0"});}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Get scores for this attribute from the graph}}
+\DoxyCodeLine{            var attr = g.GetNodeAttributes(\textcolor{stringliteral}{"Attr"});}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Print all results}}
+\DoxyCodeLine{            \textcolor{keywordflow}{foreach} (\textcolor{keywordtype}{string} score \textcolor{keywordflow}{in} attr)}
+\DoxyCodeLine{                Debug.Write(score + \textcolor{stringliteral}{", "});}
+\DoxyCodeLine{            Debug.WriteLine(\textcolor{stringliteral}{""});}
+\DoxyCodeLine{}
+\end{DoxyCodeInclude}
+{\ttfamily 0, 100, 200,} 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{            \textcolor{comment}{// Add another node to the graph}}
+\DoxyCodeLine{            g.AddEdge(0, 4, 50);}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Get the attributes again to update our list}}
+\DoxyCodeLine{            attr = g.GetNodeAttributes(\textcolor{stringliteral}{"Attr"});}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Print all results. Note how 4 is the empty string since it was not}}
+\DoxyCodeLine{            \textcolor{comment}{// Assigned a score for ATTR since it was added to the graph}}
+\DoxyCodeLine{            \textcolor{keywordflow}{foreach} (\textcolor{keywordtype}{string} score \textcolor{keywordflow}{in} attr)}
+\DoxyCodeLine{                Debug.Write(score + \textcolor{stringliteral}{", "});}
+\DoxyCodeLine{}
+\end{DoxyCodeInclude}
+{\ttfamily 0, 100, 200, ,} 
+\end{DoxyParagraph}
+
+
+Definition at line 456 of file Graph.\+cs.
 
 
 
@@ -556,8 +689,42 @@ Gets the ID of a node in the graph.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-The ID of the node, or -\/1 if the node isn\textquotesingle{}t in the graph. 
+The ID of the node, or -\/1 if the node isn\textquotesingle{}t in the graph.
 \end{DoxyReturn}
+\begin{DoxyParagraph}{Examples}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Create a graph}}
+\DoxyCodeLine{            \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a01855a86f49d22301651cf7098ee8967}{Graph}} g = \textcolor{keyword}{new} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a01855a86f49d22301651cf7098ee8967}{Graph}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Create two nodes}}
+\DoxyCodeLine{            Vector3D node0 = \textcolor{keyword}{new} Vector3D(0, 0, 1);}
+\DoxyCodeLine{            Vector3D node1 = \textcolor{keyword}{new} Vector3D(0, 0, 2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Add an edge between them to add them to the graph}}
+\DoxyCodeLine{            g.AddEdge(node0, node1, 10);}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Get their IDs from the graph}}
+\DoxyCodeLine{            \textcolor{keywordtype}{int} node\_0\_id = g.GetNodeID(node0);}
+\DoxyCodeLine{            \textcolor{keywordtype}{int} node\_1\_id = g.GetNodeID(node1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Print results}}
+\DoxyCodeLine{            Debug.WriteLine(node\_0\_id);}
+\DoxyCodeLine{            Debug.WriteLine(node\_1\_id);}
+\end{DoxyCodeInclude}
+{\ttfamily 0}~\newline
+{\ttfamily 1}~\newline
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{            \textcolor{comment}{// Create a third node and try to get it's id}}
+\DoxyCodeLine{            Vector3D node2 = \textcolor{keyword}{new} Vector3D(0, 0, 3);}
+\DoxyCodeLine{            \textcolor{keywordtype}{int} node\_2\_id = g.GetNodeID(node2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{            Debug.WriteLine(node\_2\_id);}
+\end{DoxyCodeInclude}
+{\ttfamily -\/1} 
+\end{DoxyParagraph}
 
 
 Referenced by Human\+Factors.\+Pathfinding.\+Shortest\+Path.\+Dijkstra\+Shortest\+Path().
@@ -570,11 +737,31 @@ Referenced by Human\+Factors.\+Pathfinding.\+Shortest\+Path.\+Dijkstra\+Shortest
 
 
 
-Garray containing the graph\textquotesingle{}s current nodes. 
+Get an array containing the graph\textquotesingle{}s current nodes. 
 
 \begin{DoxyReturn}{Returns}
-An array of the graph\textquotesingle{}s current nodes ordered by ID. 
+An array of the graph\textquotesingle{}s current nodes ordered by ID.
 \end{DoxyReturn}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{            }
+\DoxyCodeLine{            \textcolor{comment}{// Create a graph}}
+\DoxyCodeLine{            \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a01855a86f49d22301651cf7098ee8967}{Graph}} G = \textcolor{keyword}{new} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a01855a86f49d22301651cf7098ee8967}{Graph}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Insert an edge between two nodes. This will effectively add the}}
+\DoxyCodeLine{            \textcolor{comment}{// nodes to the graph}}
+\DoxyCodeLine{            G.AddEdge(\textcolor{keyword}{new} Vector3D(0, 0, 2), \textcolor{keyword}{new} Vector3D(0, 0, 1), 39);}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Get the nodes by calling G.getNodes();}}
+\DoxyCodeLine{            var nodes = G.getNodes();}
+\DoxyCodeLine{            }
+\DoxyCodeLine{            \textcolor{comment}{// Print the nodes}}
+\DoxyCodeLine{            Debug.WriteLine(nodes);}
+\DoxyCodeLine{}
+\end{DoxyCodeInclude}
+{\ttfamily \mbox{[}(0, 0, 2), (0, 0, 1)\mbox{]}} 
+\end{DoxyParagraph}
 \mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_graph_a1a40fc2bab18a5adf42fb7a49ca6ddb9}\label{class_human_factors_1_1_spatial_structures_1_1_graph_a1a40fc2bab18a5adf42fb7a49ca6ddb9}} 
 \index{HumanFactors.SpatialStructures.Graph@{HumanFactors.SpatialStructures.Graph}!NumNodes@{NumNodes}}
 \index{NumNodes@{NumNodes}!HumanFactors.SpatialStructures.Graph@{HumanFactors.SpatialStructures.Graph}}
@@ -589,11 +776,35 @@ Get the number of nodes in this graph.
 The number of currently defined nodes in this graph
 \end{DoxyReturn}
 \begin{DoxyRemark}{Remarks}
-This is used multiple times internally to get the size of the graph without needing to get its nodes. 
+This is used multiple times internally to get the size of the graph without needing to get its nodes.
 \end{DoxyRemark}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{            \textcolor{comment}{// Create a new graph and add some edges}}
+\DoxyCodeLine{            \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a01855a86f49d22301651cf7098ee8967}{Graph}} g = \textcolor{keyword}{new} \mbox{\hyperlink{class_human_factors_1_1_spatial_structures_1_1_graph_a01855a86f49d22301651cf7098ee8967}{Graph}}();}
+\DoxyCodeLine{            g.AddEdge(0, 1, 100);}
+\DoxyCodeLine{            g.AddEdge(0, 2, 50);}
+\DoxyCodeLine{            g.AddEdge(1, 2, 20);}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Compress the graph before using it }}
+\DoxyCodeLine{            g.CompressToCSR();}
+\end{DoxyCodeInclude}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Get the number of nodes in g}}
+\DoxyCodeLine{            \textcolor{keywordtype}{int} number\_of\_nodes = g.NumNodes();}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Print }}
+\DoxyCodeLine{            Debug.WriteLine(number\_of\_nodes);}
+\DoxyCodeLine{}
+\end{DoxyCodeInclude}
+{\ttfamily 3} 
+\end{DoxyParagraph}
 
 
-Referenced by Human\+Factors.\+Spatial\+Structures.\+Graph.\+Aggregate\+Edge\+Costs(), Human\+Factors.\+Pathfinding.\+Shortest\+Path.\+Dijkstra\+All\+To\+All(), and Human\+Factors.\+Spatial\+Structures.\+Graph.\+Get\+Node\+Attributes().
+Referenced by Human\+Factors.\+Spatial\+Structures.\+Graph.\+Aggregate\+Edge\+Costs(), Human\+Factors.\+Pathfinding.\+Shortest\+Path.\+Dijkstra\+All\+To\+All(), Humanfctors.\+Examples.\+Overall\+Examples.\+Generate\+All\+To\+All(), and Human\+Factors.\+Spatial\+Structures.\+Graph.\+Get\+Node\+Attributes().
 
 \mbox{\Hypertarget{class_human_factors_1_1_spatial_structures_1_1_graph_a274f89b6ee5b5e22fe566e96de49461a}\label{class_human_factors_1_1_spatial_structures_1_1_graph_a274f89b6ee5b5e22fe566e96de49461a}} 
 \index{HumanFactors.SpatialStructures.Graph@{HumanFactors.SpatialStructures.Graph}!ReleaseHandle@{ReleaseHandle}}
@@ -617,7 +828,7 @@ True. This is guaranteed to execute properly. ~\newline
 \end{DoxyReturn}
 
 
-Definition at line 297 of file Graph.\+cs.
+Definition at line 339 of file Graph.\+cs.
 
 
 
@@ -638,7 +849,7 @@ This graph\textquotesingle{}s C\+SR pointers.
 
 
 
-Definition at line 98 of file Graph.\+cs.
+Definition at line 104 of file Graph.\+cs.
 
 
 
