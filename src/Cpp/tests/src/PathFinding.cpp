@@ -1030,13 +1030,15 @@ namespace CInterfaceTests {
 
 		CreateAllToAllPaths(&g, "", out_paths.data(), out_path_member.data(), sizes.data(), path_count);
 
-		for (int i = 0; i < path_count; i++) {
-			if (out_paths[i]) {
+		auto start_points_it = start_points.begin();
+		auto end_points_it = end_points.begin();
+
+		for (auto p : out_paths) {
+			if (p) {
 				// Always check if out_paths[i] is nonnull!
 				int total_cost = 0;
-				std::cout << "Path from " << start_points[i] << " to " << end_points[i] << std::endl;
+				std::cout << "Path from " << *(start_points_it++) << " to " << *(end_points_it++) << std::endl;
 
-				Path* p = out_paths[i];
 				for (auto m : p->members) {
 					total_cost += m.cost;
 					std::cout << "node ID: " << m.node << "\tcost " << m.cost << std::endl;
@@ -1055,5 +1057,98 @@ namespace CInterfaceTests {
 			p = nullptr;
 		}
 		//! [snippet_pathfinder_C_CreateAllToAllPaths]
+	
+		/*! [snippet_pathfinder_C_CreateAllToAllPaths_output]
+		Path from 0 to 1
+		node ID : 0      cost 1
+		node ID : 1      cost 0
+		Total cost : 1
+		--------------------------
+		Path from 0 to 2
+		node ID : 0      cost 2
+		node ID : 2      cost 0
+		Total cost : 2
+		--------------------------
+		Path from 0 to 3
+		node ID : 0      cost 1
+		node ID : 1      cost 3
+		node ID : 3      cost 0
+		Total cost : 4
+		--------------------------
+		Path from 0 to 4
+		node ID : 0      cost 1
+		node ID : 1      cost 4
+		node ID : 4      cost 0
+		Total cost : 5
+		--------------------------
+		Path from 0 to 5
+		node ID : 0      cost 1
+		node ID : 1      cost 3
+		node ID : 3      cost 5
+		node ID : 5      cost 0
+		Total cost : 9
+		--------------------------
+		Path from 0 to 6
+		node ID : 0      cost 1
+		node ID : 1      cost 4
+		node ID : 4      cost 3
+		node ID : 6      cost 0
+		Total cost : 8
+		--------------------------
+		Path from 1 to 3
+		node ID : 1      cost 3
+		node ID : 3      cost 0
+		Total cost : 3
+		--------------------------
+		Path from 1 to 4
+		node ID : 1      cost 4
+		node ID : 4      cost 0
+		Total cost : 4
+		--------------------------
+		Path from 1 to 5
+		node ID : 1      cost 3
+		node ID : 3      cost 5
+		node ID : 5      cost 0
+		Total cost : 8
+		--------------------------
+		Path from 1 to 6
+		node ID : 1      cost 4
+		node ID : 4      cost 3
+		node ID : 6      cost 0
+		Total cost : 7
+		--------------------------
+		Path from 2 to 4
+		node ID : 2      cost 4
+		node ID : 4      cost 0
+		Total cost : 4
+		--------------------------
+		Path from 2 to 6
+		node ID : 2      cost 4
+		node ID : 4      cost 3
+		node ID : 6      cost 0
+		Total cost : 7
+		--------------------------
+		Path from 3 to 5
+		node ID : 3      cost 5
+		node ID : 5      cost 0
+		Total cost : 5
+		--------------------------
+		Path from 3 to 6
+		node ID : 3      cost 5
+		node ID : 5      cost 1
+		node ID : 6      cost 0
+		Total cost : 6
+		--------------------------
+		Path from 4 to 6
+		node ID : 4      cost 3
+		node ID : 6      cost 0
+		Total cost : 3
+		--------------------------
+		Path from 5 to 6
+		node ID : 5      cost 1
+		node ID : 6      cost 0
+		Total cost : 1
+		--------------------------
+		[snippet_pathfinder_C_CreateAllToAllPaths_output] */
 	}
 }

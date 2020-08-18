@@ -436,7 +436,8 @@ C_INTERFACE DestroyPath(HF::SpatialStructures::Path* path_to_destroy);
 	Now we are ready to invoke \link CreateAllToAllPaths \endlink .
 	\snippet tests\src\PathFinding.cpp snippet_pathfinder_C_CreateAllToAllPaths
 
-	`>>> TODO output`\n
+	<br>
+	\snippet \tests\src\PathFinding.cpp snippet_pathfinder_C_CreateAllToAllPaths_output
 */
 C_INTERFACE CreateAllToAllPaths(
 	const HF::SpatialStructures::Graph* g,
