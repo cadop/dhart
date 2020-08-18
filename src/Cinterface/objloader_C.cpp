@@ -1,10 +1,3 @@
-/*!
-	\file		objloader_C.cpp
-	\brief		Source file for functions related to loading/storing an OBJ file (a mesh)
-
-	\author		TBA
-	\date		05 Aug 2020
-*/
 #include <objloader_C.h>
 #include <objloader.h>
 #include <meshinfo.h>
@@ -13,7 +6,6 @@
 #include <HFExceptions.h>
 #include <iostream>
 #include <cinterface_utils.h>
-
 using namespace HF::Geometry;
 using namespace HF::Exceptions;
 using std::vector;
@@ -26,7 +18,7 @@ C_INTERFACE LoadOBJ(
 	float zrot,
 	vector<MeshInfo>** out_list
 ) {
-	// Check precondition
+	//Check precondition
 	if (length <= 0) {
 		std::cerr << "Empty Input" << std::endl;
 		return HF_STATUS::GENERIC_ERROR;
@@ -72,7 +64,6 @@ C_INTERFACE StoreMesh(
 ) {
 	vector<float> vertex_array(vertices, vertices + num_vertices);
 	vector<int> index_array(indices, indices + num_indices);
-
 	std::string mesh_name(name);
 
 	try {
@@ -83,7 +74,6 @@ C_INTERFACE StoreMesh(
 	catch (HF::Exceptions::InvalidOBJ E) {
 		return HF::Exceptions::INVALID_OBJ;
 	}
-
 	return OK;
 }
 
@@ -91,7 +81,6 @@ C_INTERFACE RotateMesh(vector<MeshInfo>* mesh_to_rotate, float xrot, float yrot,
 {
 	for (auto & mesh : *mesh_to_rotate)
 		mesh.PerformRotation(xrot, yrot, zrot);
-
 	return HF_STATUS::OK;
 }
 
@@ -99,6 +88,5 @@ C_INTERFACE DestroyMeshInfo(vector<MeshInfo>* meshes_to_destroy)
 {
 	if (meshes_to_destroy)
 		delete meshes_to_destroy;
-
 	return OK;
 }
