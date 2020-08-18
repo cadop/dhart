@@ -45,6 +45,7 @@ namespace HF::RayTracer {
 				z - v2.z
 			};
 		}
+		// Scalar multiplication overload 
 		inline Vector3D operator*(const double&a) const {
 			return Vector3D{
 				a * x,
@@ -343,11 +344,7 @@ namespace HF::RayTracer {
 
 		std::array<Vector3D, 3> GetTriangle(int geomID, int primID);
 
-		HitStruct FirePreciseRay(double x, double y, double z, double dx, double dy, double dz, double distance, int mesh_id);
-		//template <typename real_t> 
-		//HitStructD<real_t> FirePreciseRayD(real_t x, real_t y, real_t z, real_t dx, real_t dy, real_t dz, real_t distance, int mesh_id);
-
-		
+		HitStruct FirePreciseRay(double x, double y, double z, double dx, double dy, double dz, double distance, int mesh_id);	
 
 		/// <summary> Fire multiple rays and recieve hitpoints in return. </summary>
 		/// <param name="origins"> An array of x,y,z coordinates to fire rays from. </param>
@@ -1005,12 +1002,11 @@ namespace HF::RayTracer {
 			int& out_meshid,
 			float max_distance = -1.0f)
 		{
-
 			// Use custom triangle intesection if required
 			if (use_precise)
 			{
-				HitStructD<double> result;
-				result = FirePreciseRayD<real_t>(
+				HitStructD<real_t> result;
+				result = PreciseRayIntersect<real_t>(
 					node[0], node[1], node[2],
 					direction[0], direction[1], direction[2], max_distance, -1
 				);
@@ -1039,10 +1035,11 @@ namespace HF::RayTracer {
 					return true;
 				}
 			}
+
 		}
 
 		template <typename real_t>
-		HitStructD<real_t> FirePreciseRayD(
+		HitStructD<real_t> PreciseRayIntersect(
 			real_t x, real_t y, real_t z,
 			real_t dx, real_t dy, real_t dz,
 			real_t distance, int mesh_id)
