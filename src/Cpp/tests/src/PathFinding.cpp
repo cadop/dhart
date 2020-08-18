@@ -726,6 +726,7 @@ namespace CInterfaceTests {
 	}
 
 	TEST(C_Pathfinder, CreatePaths) {
+		//! [snippet_pathfinder_C_CreatePaths]
 		// Requires #include "pathfinder_C.h", #include "graph.h", #include "path.h", #include "path_finder.h"
 
 		// for brevity
@@ -771,9 +772,11 @@ namespace CInterfaceTests {
 			DestroyPath(p);
 			p = nullptr;
 		}
+		//! [snippet_pathfinder_C_CreatePaths]
 	}
 
 	TEST(C_Pathfinder, CreatePathCostType) {
+		//! [snippet_pathfinder_C_CreatePathCostType]
 		// be sure to #include "boost_graph.h", #include "node.h", #include "graph.h", and #include <vector>
 
 		// for brevity
@@ -825,9 +828,11 @@ namespace CInterfaceTests {
 
 		// At this point, out_path_member has also been destroyed, so we set this to nullptr
 		out_path_member = nullptr;
+		//! [snippet_pathfinder_C_CreatePathCostType]
 	}
 
 	TEST(C_Pathfinder, CreatePathsCostType) {
+		//! [snippet_pathfinder_C_CreatePathsCostType]
 		// Requires #include "pathfinder_C.h", #include "graph.h", #include "path.h", #include "path_finder.h"
 
 		// for brevity
@@ -896,9 +901,11 @@ namespace CInterfaceTests {
 			DestroyPath(p);
 			p = nullptr;
 		}
+		//! [snippet_pathfinder_C_CreatePathsCostType]
 	}
 
 	TEST(C_Pathfinder, GetPathInfo) {
+		//! [snippet_pathfinder_C_GetPathInfo]
 		// Requires #include "pathfinder_C.h", #include "graph.h", #include "path.h", #include "path_finder.h"
 
 		// Create a Graph g, and compress it.
@@ -927,9 +934,11 @@ namespace CInterfaceTests {
 
 		// At this point, out_path_member has also been destroyed, so we set this to nullptr
 		out_path_member = nullptr;
+		//! [snippet_pathfinder_C_GetPathInfo]
 	}
 
 	TEST(C_Pathfinder, DestroyPath) {
+		//! [snippet_pathfinder_C_DestroyPath]
 		// Requires #include "pathfinder_C.h", #include "graph.h", #include "path.h", #include "path_finder.h"
 
 		// Create a Graph g, and compress it.
@@ -957,9 +966,11 @@ namespace CInterfaceTests {
 
 		// At this point, out_path_member has also been destroyed, so we set this to nullptr
 		out_path_member = nullptr;
+		//! [snippet_pathfinder_C_DestroyPath]
 	}
 
 	TEST(C_Pathfinder, CreateAllToAllPaths) {
+		//! [snippet_pathfinder_C_CreateAllToAllPaths]
 		HF::SpatialStructures::Graph g;
 
 		// Add the edges
@@ -1043,5 +1054,5 @@ namespace CInterfaceTests {
 			DestroyPath(p);
 			p = nullptr;
 		}
-	}
+		//! [snippet_pathfinder_C_CreateAllToAllPaths]
 }

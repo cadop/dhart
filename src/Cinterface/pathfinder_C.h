@@ -313,17 +313,13 @@ C_INTERFACE CreatePath(
 	\see \ref raytracer_teardown (how to destroy a BVH)
 	\see \ref mesh_teardown (how to destroy a mesh)
 
-	Begin by reviewing the example at \ref raytracer_setup to load an .obj file (mesh), and create a BVH from the mesh.<br>
-	Then generate a graph (\ref generate_graph) from the BVH -- see \ref get_all_nodes on how to retrieve nodes from the graph.<br>
+	No cost type:<br>
 
-	Now we are ready to invoke \link CreatePaths \endlink .
-	\snippet tests\src\pathfinder_C_cinterface.cpp snippet_CreatePaths
+	\snippet tests\src\PathFinding.cpp snippet_pathfinder_C_CreatePaths
 
-	From here, please review the examples on how to destroy a path (\link DestroyPath \endlink),<br>
-	as well as how to destroy a vector<\link HF::SpatialStructures::Node \endlink> (\ref nodes_teardown),<br>
-	how to destroy a \link HF::SpatialStructures::Graph \endlink (\ref graph_teardown),<br>
-	how to destroy a \link HF::RayTracer::EmbreeRayTracer \endlink (\ref raytracer_teardown),<br>
-	and how to destroy a vector<\link HF::Geometry::MeshInfo \endlink> (\ref mesh_teardown).
+	With a cost type:<br>
+
+	\snippet tests\src\PathFinding.cpp snippet_pathfinder_C_CreatePathsCostType
 
 	`>>> TODO output`\n
 */
@@ -358,17 +354,7 @@ C_INTERFACE CreatePaths(
 	\see \ref raytracer_teardown (how to destroy a BVH)
 	\see \ref mesh_teardown (how to destroy a mesh)
 
-	Begin by reviewing the example at \ref raytracer_setup to load an .obj file (mesh), and create a BVH from the mesh.<br>
-	Then generate a graph (\ref generate_graph) from the BVH -- see \ref get_all_nodes on how to retrieve nodes from the graph.<br>
-
-	Now we are ready to invoke \link GetPathInfo \endlink .
-	\snippet tests\src\pathfinder_C_cinterface.cpp snippet_GetPathInfo
-
-	From here, please review the examples on how to destroy a path (\link DestroyPath \endlink),<br>
-	as well as how to destroy a vector<\link HF::SpatialStructures::Node \endlink> (\ref nodes_teardown),<br>
-	how to destroy a \link HF::SpatialStructures::Graph \endlink (\ref graph_teardown),<br>
-	how to destroy a \link HF::RayTracer::EmbreeRayTracer \endlink (\ref raytracer_teardown),<br>
-	and how to destroy a vector<\link HF::Geometry::MeshInfo \endlink> (\ref mesh_teardown).
+	\snippet tests\src\PathFinding.cpp snippet_pathfinder_C_GetPathInfo
 
 	`>>> TODO output`\n
 */
@@ -395,17 +381,7 @@ C_INTERFACE GetPathInfo(
 	\see \ref raytracer_teardown (how to destroy a BVH)
 	\see \ref mesh_teardown (how to destroy a mesh)
 
-	Begin by reviewing the example at \ref raytracer_setup to load an .obj file (mesh), and create a BVH from the mesh.<br>
-	Then generate a graph (\ref generate_graph) from the BVH -- see \ref get_all_nodes on how to retrieve nodes from the graph.<br>
-
-	Now we are ready to invoke \link DestroyPath \endlink .
-	\snippet tests\src\pathfinder_C_cinterface.cpp snippet_DestroyPath
-
-	From here, please review the examples on how to destroy a path (\link DestroyPath \endlink),<br>
-	as well as how to destroy a vector<\link HF::SpatialStructures::Node \endlink> (\ref nodes_teardown),<br>
-	how to destroy a \link HF::SpatialStructures::Graph \endlink (\ref graph_teardown),<br>
-	how to destroy a \link HF::RayTracer::EmbreeRayTracer \endlink (\ref raytracer_teardown),<br>
-	and how to destroy a vector<\link HF::Geometry::MeshInfo \endlink> (\ref mesh_teardown).
+	\snippet tests\src\PathFinding.cpp snippet_pathfinder_C_DestroyPath
 
 	`>>> TODO output`\n
 */
@@ -457,17 +433,8 @@ C_INTERFACE DestroyPath(HF::SpatialStructures::Path* path_to_destroy);
 	\see \ref raytracer_teardown (how to destroy a BVH)
 	\see \ref mesh_teardown (how to destroy a mesh)
 
-	Begin by reviewing the example at \ref raytracer_setup to load an .obj file (mesh), and create a BVH from the mesh.<br>
-	Then generate a graph (\ref generate_graph) from the BVH -- see \ref get_all_nodes on how to retrieve nodes from the graph.<br>
-
 	Now we are ready to invoke \link CreateAllToAllPaths \endlink .
-	\snippet tests\src\pathfinder_C_cinterface.cpp snippet_CreateAllToAllPaths
-
-	From here, please review the examples on how to destroy a path (\link DestroyPath \endlink),<br>
-	as well as how to destroy a vector<\link HF::SpatialStructures::Node \endlink> (\ref nodes_teardown),<br>
-	how to destroy a \link HF::SpatialStructures::Graph \endlink (\ref graph_teardown),<br>
-	how to destroy a \link HF::RayTracer::EmbreeRayTracer \endlink (\ref raytracer_teardown),<br>
-	and how to destroy a vector<\link HF::Geometry::MeshInfo \endlink> (\ref mesh_teardown).
+	\snippet tests\src\PathFinding.cpp snippet_pathfinder_C_CreateAllToAllPaths
 
 	`>>> TODO output`\n
 */
@@ -515,20 +482,17 @@ C_INTERFACE CreateAllToAllPaths(
 	Begin by reviewing the example at \ref raytracer_setup to load an .obj file (mesh), and create a BVH from the mesh.<br>
 	Then generate a graph (\ref generate_graph) from the BVH -- see \ref get_all_nodes on how to retrieve nodes from the graph.<br>
 
-	Now we are ready to invoke \link CalculateDistanceAndPredecessor \endlink .
-	\snippet tests\src\pathfinder_C_cinterface.cpp snippet_CalculateDistanceAndPredecessor
-
 	\par Example
 
 	Create a graph, add some edges -- then invoke \link CalculateDistanceAndPredecessor \endlink <br>
-	\snippet tests\src\pathfinder_C_cinterface.cpp EX_DistPred_C
+	\snippet tests\src\PathFinding.cpp EX_DistPred_C
 	
 	Print the result:<br>
-	\snippet tests\src\pathfinder_C_cinterface.cpp EX_DistPred_C_2
+	\snippet tests\src\PathFinding.cpp EX_DistPred_C_2
 
 	<br>
-	`Distance Matrix: [0.000000, 10.000000, 5.000000, 10.000000, 0.000000, 15.000000, -1.000000, -1.000000, 0.000000]`\n
-	`Predecessor Matrix: [0, 0, 0, 1, 1, 0, -1, -1, 2]`
+	`>>> Distance Matrix: [0.000000, 10.000000, 5.000000, 10.000000, 0.000000, 15.000000, -1.000000, -1.000000, 0.000000]`\n
+	`>>> Predecessor Matrix: [0, 0, 0, 1, 1, 0, -1, -1, 2]\n`
 */
 C_INTERFACE CalculateDistanceAndPredecessor(
 	const HF::SpatialStructures::Graph* g,
