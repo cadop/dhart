@@ -818,7 +818,7 @@ namespace CInterfaceTests {
 
 		// Use CreatePathCostType, be sure to use the .c_str() method if using a std::string for desired_cost_type
 		CreatePath(&graph, 0, 4, desired_cost_type.c_str(), &out_size, &out_path, &out_path_member);
-		
+
 		///
 		/// Use out_path, out_path_member
 		///
@@ -957,7 +957,7 @@ namespace CInterfaceTests {
 		HF::SpatialStructures::PathMember* out_path_member = nullptr;
 		int out_size = -1;
 
-		CreatePath(&g, 0, 4,"\0", &out_size, &out_path, &out_path_member);
+		CreatePath(&g, 0, 4, "\0", &out_size, &out_path, &out_path_member);
 
 		// Use out_path, out_path_member
 
@@ -1028,7 +1028,7 @@ namespace CInterfaceTests {
 			}
 		}
 
-		CreateAllToAllPaths(&g, "",  out_paths.data(), out_path_member.data(), sizes.data(), path_count);
+		CreateAllToAllPaths(&g, "", out_paths.data(), out_path_member.data(), sizes.data(), path_count);
 
 		for (int i = 0; i < path_count; i++) {
 			if (out_paths[i]) {
@@ -1036,7 +1036,7 @@ namespace CInterfaceTests {
 				int total_cost = 0;
 				std::cout << "Path from " << start_points[i] << " to " << end_points[i] << std::endl;
 
-				Path *p = out_paths[i];
+				Path* p = out_paths[i];
 				for (auto m : p->members) {
 					total_cost += m.cost;
 					std::cout << "node ID: " << m.node << "\tcost " << m.cost << std::endl;
@@ -1055,4 +1055,5 @@ namespace CInterfaceTests {
 			p = nullptr;
 		}
 		//! [snippet_pathfinder_C_CreateAllToAllPaths]
+	}
 }
