@@ -891,7 +891,43 @@ namespace CInterfaceTests {
 		DestroyMeshInfo(info);
 	}
 
+	TEST(C_OBJLoader, GetMeshID) {
+		// Requires #include "objloader_C.h", #include "meshinfo.h"
+
+		// Prepare parameters for StoreMesh
+		MeshInfo* info = NULL;
+
+		auto res = StoreMesh(&info, mesh_indices, mesh_num_indices, mesh_vertices, mesh_num_vertices, mesh_name.c_str(), mesh_id);
+		ASSERT_EQ(HF_STATUS::OK, res);
+	
+		// call into C Interface and get the ID of this mesh
+		int id = 0;
+		GetMeshID(info, &id);
+		ASSERT_EQ(mesh_id, id);
+
+		// Release memory for info once finished with it
+		DestroyMeshInfo(info);
+	}
+
+	TEST(C_OBJLoader, GetName) {
+		// Requires #include "objloader_C.h", #include "meshinfo.h"
+
+		// Prepare parameters for StoreMesh
+		MeshInfo* info = NULL;
+
+		auto res = StoreMesh(&info, mesh_indices, mesh_num_indices, mesh_vertices, mesh_num_vertices, mesh_name.c_str(), mesh_id);
+		ASSERT_EQ(HF_STATUS::OK, res);
+
+		// call into C Interface and get the name of this mesh
+		char* out_name;
+		GetMeshName(info, &out_name);
+		ASSERT_EQ(mesh_name, std::string(out_name));
+
+		// Release memory for info once finished with it
+		DestroyMeshInfo(info);
+	}
 }
+
 	
 /*!
 	TEST(_OBJLoaderCInterface, DestroyMeshInfo) {

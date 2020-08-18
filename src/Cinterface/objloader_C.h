@@ -119,6 +119,35 @@ C_INTERFACE GetVertsAndTris(
 	int* num_vertices
 );
 
+/*! 
+	\brief Get the name of a mesh. 
+
+	\param MI Instance of MeshInfo to get the name of
+	\param out_name Pointer to the char array to write output to. This must be a valid pointer
+	
+	\returns `HF_STATUS::OK`
+	
+*/
+C_INTERFACE GetMeshName(
+	const HF::Geometry::MeshInfo* MI,
+	char** out_name
+);
+
+/*!
+	\brief Get the ID of a mesh
+
+	\param MI Instance of MeshInfo to get the name of
+	\param out_name Pointer to the char array to write output to. This must be a valid pointer
+
+	\returns `HF_STATUS::OK`
+
+*/
+C_INTERFACE GetMeshID(
+	const HF::Geometry::MeshInfo* MI,
+	int * out_id
+);
+
+
 /// <summary>
 /// Delete all instances of mesh info in the given vector
 /// </summary>

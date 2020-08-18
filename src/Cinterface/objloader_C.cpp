@@ -101,6 +101,24 @@ C_INTERFACE GetVertsAndTris(const MeshInfo * MI, int** index_out, int* num_trian
 	return HF_STATUS::OK;
 }
 
+C_INTERFACE GetMeshName(const HF::Geometry::MeshInfo* MI, char** out_name)
+{
+	auto name = MI->name;
+
+	int num_characters = name.size()+1; // Need extra space for null terminator
+	*out_name = new char[num_characters];
+	std::copy(name.c_str(), name.c_str() + num_characters, *out_name);
+
+	return HF_STATUS::OK;
+}
+
+C_INTERFACE GetMeshID(const HF::Geometry::MeshInfo* MI, int* out_id) {
+	*out_id = MI->meshid;
+	return HF_STATUS::OK;
+}
+
+
+
 C_INTERFACE DestroyMeshInfo(MeshInfo * mesh_to_destroy)
 {
 	DeleteRawPtr(mesh_to_destroy);
