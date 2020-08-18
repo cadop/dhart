@@ -50,46 +50,28 @@ C_INTERFACE LoadOBJ(
 	int * num_meshes
 );
 
-/// <summary>
-/// Store a mesh from python as meshinfo
-/// </summary>
-/// <param name="indices">An array of indices for the triangles in the mesh. Each integer should correspond to 3 values in vertices, and every 3 integers should represent a complete triangle for the mesh. </param>
-/// <param name="num_indices">Length of the indices array.</param>
-/// <param name="vertices"> Vertices of the mesh. Each 3 floats represent the X,Y, and Z of a point in space.</param>
-/// <param name="num_vertices">Length of the vertices array.</param>
-/// <param name="name">Desired name for the mesh</param>
-/// <param name="id">Desired ID for the mesh</param>
-/// <returns>HF_STATUS::OK if the mesh was loaded successfully. HF_STATUS::INVALID_OBJ if the given indices and vertices didn't create a valid mesh. </returns>
-
 /*!
+	\brief Store a mesh in a format usable with HumanFactors
+
+	\param out_info Output parameter to contain the new instance of meshinfo
+	\param indices An array of indices for the triangles in the mesh. Each integer should correspond to
+				3 values in vertices, and every 3 integers should represent a complete triangle for the mesh. 
+	\param vertices  Vertices of the mesh. Each 3 floats represent the X,Y, and Z of a point in space.
+	\param num_vertices Length of the vertices array
+	\param name Name of the mesh.
+	\param ID Id of the mesh.
+
+	\returns `HF_STATUS::OK` if the mesh was loaded successfully.
+	\returns `HF_STATUS::INVALID_OBJ` if the given indices and vertices arrays didn't create a valid mesh. 
+
+	\attention
+	Call DestroyMeshInfo when done with this instance of meshinfo to deallocate it, otherwise you risk leaking memory!
+	
 	\code
-		// Requires #include "objloader_C.h", #include "meshinfo.h"
-
-		// Prepare parameters for StoreMesh
-		std::vector<HF::Geometry::MeshInfo>* info = nullptr;
-
-		int mesh_indices[] = { 0, 1, 2 };
-		const int mesh_num_indices = 3;
-		float mesh_vertices[] = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
-		const int mesh_num_vertices = 9;
-
-		std::string mesh_name = "This mesh";
-		const int mesh_id = 0;
-
-		// Call StoreMesh
-		if (StoreMesh(&info, mesh_indices, mesh_num_indices, mesh_vertices, mesh_num_vertices, mesh_name.c_str(), mesh_id)) {
-			std::cout << "StoreMesh successful" << std::endl;
-		}
-		else {
-			std::cout << "StoreMesh unsuccessful" << std::endl;
-		}
-
-		// Release memory for info once finished with it
-		DestroyMeshInfo(info);
 	\endcode
 */
 C_INTERFACE StoreMesh(
-	std::vector<HF::Geometry::MeshInfo>** out_info,
+	HF::Geometry::MeshInfo ** out_info,
 	const int* indices,
 	int num_indices,
 	const float* vertices,

@@ -57,7 +57,7 @@ C_INTERFACE LoadOBJ(
 }
 
 C_INTERFACE StoreMesh(
-	vector<MeshInfo>** out_info,
+	MeshInfo ** out_info,
 	const int* indices,
 	int num_indices,
 	const float* vertices,
@@ -65,16 +65,17 @@ C_INTERFACE StoreMesh(
 	const char* name,
 	int id
 ) {
+	// Map vertex/index arrays and name
 	vector<float> vertex_array(vertices, vertices + num_vertices);
 	vector<int> index_array(indices, indices + num_indices);
 	std::string mesh_name(name);
 
+	// Try to load mesh
 	try {
-		vector<MeshInfo>* meshes = new vector<MeshInfo>();
-		meshes->push_back(MeshInfo(vertex_array, index_array, id, mesh_name));
-		*out_info = meshes;
+		*out_info = new MeshInfo(vertex_array, index_array, id, mesh_name);
 	}
 	catch (HF::Exceptions::InvalidOBJ E) {
+		// If the input wasn't correctly formed, or contained nans, then return an error code
 		return HF::Exceptions::INVALID_OBJ;
 	}
 	return OK;

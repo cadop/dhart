@@ -150,7 +150,7 @@ namespace HF::Geometry {
 		std::move(in_indexes.begin(), in_indexes.end(), indices.data());
 
 		meshid = id;
-		name = name;
+		this->name = name;
 	}
 
 	void MeshInfo::AddVerts(const vector<array<float, 3>>& in_vertices)

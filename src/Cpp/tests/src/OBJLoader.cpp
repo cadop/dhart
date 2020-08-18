@@ -9,6 +9,7 @@
 #define eigen_plain_assert
 using namespace HF::Geometry;
 using std::string;
+using HF::Exceptions::HF_STATUS;
 using std::vector;
 
 const std::string obj_directiory = "../../Models/";
@@ -807,33 +808,33 @@ namespace CInterfaceTests {
 		DestroyMeshInfoPtrArray(info);
 	}
 }
-/*!
-	TEST(_OBJLoaderCInterface, StoreMesh) {
+	TEST(C_OBJLoader, StoreMesh) {
 		// Requires #include "objloader_C.h", #include "meshinfo.h"
 		
-		// Prepare parameters for StoreMesh
-		std::vector<HF::Geometry::MeshInfo>* info = nullptr;
-
 		int mesh_indices[] = { 0, 1, 2 };
 		const int mesh_num_indices = 3;
 		float mesh_vertices[] = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
 		const int mesh_num_vertices = 9;
 
 		std::string mesh_name = "This mesh";
-		const int mesh_id = 0;
+		const int mesh_id = 39;
 
-		// Call StoreMesh
-		if (StoreMesh(&info, mesh_indices, mesh_num_indices, mesh_vertices, mesh_num_vertices, mesh_name.c_str(), mesh_id)) {
-			std::cout << "StoreMesh successful" << std::endl;
-		}
-		else {
-			std::cout << "StoreMesh unsuccessful" << std::endl;
-		}
+		MeshInfo* info = nullptr;
+
+		// Store these vertices in a mesh and verify it completes
+		auto res = StoreMesh(&info, mesh_indices, mesh_num_indices, mesh_vertices, mesh_num_vertices, mesh_name.c_str(), mesh_id);
+		ASSERT_EQ(HF_STATUS::OK, res);
+
+		// Assert that the mesh's name and ID match our inputs
+		ASSERT_EQ(mesh_name, info->name);
+		ASSERT_EQ(mesh_id, info->GetMeshID());
+
 
 		// Release memory for info once finished with it
 		DestroyMeshInfo(info);
 	}
 
+/*!
 	TEST(_OBJLoaderCInterface, RotateMesh) {
 		// Requires #include "objloader_C.h", #include "meshinfo.h"
 
