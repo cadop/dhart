@@ -411,6 +411,7 @@ if(HumanFactors_EnableTests)
 					${C_TEST_DRIVER_DIR}/CostAlgorithms.cpp
 					${C_TEST_DRIVER_DIR}/GraphGenerator.cpp
 					${C_TEST_DRIVER_DIR}/embree_raytracer_cinterface.cpp
+					${C_TEST_DRIVER_DIR}/objloader_cinterface.cpp
 					${C_TEST_DRIVER_DIR}/view_analysis_cinterface.cpp
 		)
 	elseif(${HumanFactors_Config} STREQUAL "RayTracer")
