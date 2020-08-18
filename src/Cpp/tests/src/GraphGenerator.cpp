@@ -116,7 +116,8 @@ TEST(_GraphGenerator, CrawlGeom) {
 	// Setup its params struct
 	GG.params.up_step = up_step; GG.params.down_step = down_step;
 	GG.params.up_slope = up_slope; GG.params.down_slope = down_slope;
-	GG.params.precision.ground_offset = 0.001; GG.params.precision.node_z = 0.01f;
+	GG.params.precision.ground_offset = 0.01; 
+	GG.params.precision.node_z = 0.001f;
 	GG.params.precision.node_spacing = 0.001;
 
 	// Assign it's spacing member, making sure to convert it to real3, the graph generator's
