@@ -271,6 +271,7 @@ TEST(_GraphGenerator, GeneratePotentialChildren) {
 	// Construct a GraphParams with the spacing filled out
 	HF::GraphGenerator::GraphParams gp;
 	gp.precision.node_spacing = 0.001f;
+	gp.precision.node_z = 0.001f;
 
 	// Call CreateDirecs
 	auto children = HF::GraphGenerator::GeneratePotentialChildren(parent, directions, spacing, gp);
