@@ -56,7 +56,7 @@ namespace HF::GraphGenerator {
 	class UniqueQueue;
 	struct optional_real3;
 
-	using real_t = float;							  ///< Internal decimal type of the graph generator
+	using real_t = double;							  ///< Internal decimal type of the graph generator
 	using real3 = std::array<real_t, 3>;			  ///< Type used for the standard coordinate set of the graph generator.
 	using RayTracer = HF::RayTracer::EmbreeRayTracer; ///< Type of raytracer to be used internally.
 	using graph_edge = HF::SpatialStructures::Edge;   ///< Type of edge for the graph generator to use internally
@@ -548,8 +548,8 @@ namespace HF::GraphGenerator {
 
 		\post Node's members at [0], [1], [2] been moved in `direction` by `dist` units.
 	*/
-	template<typename D, typename N>
-	inline void MoveNode(const float dist, const D& direction, N& node) {
+	template<typename A, typename D, typename N>
+	inline void MoveNode(const A& dist, const D& direction, N& node) {
 		node[0] += (direction[0] * dist);
 		node[1] += (direction[1] * dist);
 		node[2] += (direction[2] * dist);
