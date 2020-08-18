@@ -20,6 +20,7 @@
 namespace HF::RayTracer {
 
 	bool HitStruct::DidHit() const { return meshid != RTC_INVALID_GEOMETRY_ID; };
+	bool HitStructD<double>::DidHit() const { return meshid != RTC_INVALID_GEOMETRY_ID; };
 
 	/// <summary>
 	/// Check an embree device for errors.
@@ -261,11 +262,60 @@ namespace HF::RayTracer {
 		};
 	}
 
+	/*
+
+	template <typename real_t>
+	HitStructD<real_t> EmbreeRayTracer::FirePreciseRayD(
+		real_t x, real_t y, real_t z,
+		real_t dx, real_t dy, real_t dz,
+		real_t distance, int mesh_id)
+	{
+		// Define an Embree hit data type to store results
+		RTCRayHit hit;
+
+		// Use the referenced values of the x,y,z position as the ray origin
+		hit.ray.org_x = x; hit.ray.org_y = y; hit.ray.org_z = z;
+		// Define the directions 
+		hit.ray.dir_x = dx; hit.ray.dir_y = dy; hit.ray.dir_z = dz;
+
+		hit.ray.tnear = 0.00000001f; // The start of the ray segment
+		hit.ray.tfar = INFINITY; // The end of the ray segment
+		hit.ray.time = 0.0f; // Time of ray for motion blur, unrelated to our package
+
+		hit.hit.geomID = RTC_INVALID_GEOMETRY_ID;
+		hit.hit.primID = -1;
+
+		// Cast the ray and update the hitstruct
+		rtcIntersect1(scene, &context, &hit);
+
+		// If valid geometry was hit, and the geometry matches the caller's desired mesh
+		// (if specified) then update the hitpoint and return
+		if (hit.hit.geomID == RTC_INVALID_GEOMETRY_ID || (mesh_id > -1 && hit.hit.geomID != mesh_id)) return HitStructD<real_t>();
+
+		unsigned int geom_id = hit.hit.geomID;
+		auto geometry = this->geometry[geom_id];
+
+		// Construct a Vector3D of the triangle
+		auto triangle = this->GetTriangle(geom_id, hit.hit.primID);
+
+		// do some multiplications to scale it up before intersection, then back down on return 
+		double ray_distance = RayTriangleIntersection(
+			Vector3D{ x,y,z },
+			Vector3D{ dx,dy,dz },
+			triangle[0],
+			triangle[1],
+			triangle[2]
+		);
+
+		return HitStructD<real_t>{ ray_distance, geom_id };
+	}
+	*/
+
+
 	HitStruct EmbreeRayTracer::FirePreciseRay(
-		float x, float y, float z,
-		float dx, float dy, float dz,
-		float distance,	int mesh_id
-		)
+		double x, double y, double z,
+		double dx, double dy, double dz,
+		double distance,	int mesh_id)
 	{
 		// Define an Embree hit data type to store results
 		RTCRayHit hit;
@@ -295,14 +345,14 @@ namespace HF::RayTracer {
 		// Construct a Vector3D of the triangle
 		auto triangle = this->GetTriangle(geom_id, hit.hit.primID);
 		
-		float ray_distance = RayTriangleIntersection(
+		double ray_distanceD = RayTriangleIntersection(
 			Vector3D{ x,y,z },
 			Vector3D{ dx,dy,dz },
 			triangle[0],
 			triangle[1],
 			triangle[2]
 		);
-
+		float ray_distance = static_cast<float>(ray_distanceD);
 		return HitStruct{ ray_distance, geom_id};
 	}
 
@@ -633,4 +683,5 @@ namespace HF::RayTracer {
 		rtcReleaseScene(scene);
 		rtcReleaseDevice(device);
 	}
+
 }

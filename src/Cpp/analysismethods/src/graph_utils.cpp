@@ -115,7 +115,7 @@ namespace HF::GraphGenerator {
 		HIT_FLAG flag)
 	{
 		// Setup default params
-		float dist = -1.0f;
+		double dist = -1.0;
 		int id = -1.0f;
 		bool res = false;
 
@@ -123,10 +123,10 @@ namespace HF::GraphGenerator {
 		switch (flag) {
 		case HIT_FLAG::FLOORS: // Both are the same for now. Waiting on obstacle support
 		case HIT_FLAG::OBSTACLES:
-			res = ray_tracer.FireAnyRay(origin, direction, dist, id);
+			res = ray_tracer.FireAnyRayD(origin, direction, dist, id);
 			break;
 		case HIT_FLAG::BOTH:
-			res = ray_tracer.FireAnyRay(origin, direction, dist, id);
+			res = ray_tracer.FireAnyRayD(origin, direction, dist, id);
 			break;
 		default:
 			assert(false);
@@ -139,7 +139,7 @@ namespace HF::GraphGenerator {
 
 			// Move it in direction
 			MoveNode(dist, direction, *return_pt);
-
+			// double temp_diff = (origin[2]) - dist; // Sanity check for direction -1 to see influence of movenode arithmetic 
 			// Truncate the Z value before leaving this function
 			// This is for clarity, since the node was already modified
 			return_pt.pt[2] = trunchf_tmp<real_t>(return_pt.pt[2], node_z_tolerance);
@@ -232,6 +232,7 @@ namespace HF::GraphGenerator {
 		// Iterate through every child in the set of possible children
 		for (const auto& child : possible_children)
 		{
+
 			// Check if a ray intersects a mesh
 			optional_real3 potential_child = CheckRay(rt, child, down, GP.precision.node_z);
 			
@@ -367,7 +368,7 @@ namespace HF::GraphGenerator {
 			const real_t x = roundhf_tmp<real_t>(parent[0] + (x_offset * spacing[0]), GP.precision.node_spacing);
 			const real_t y = roundhf_tmp<real_t>(parent[1] + (y_offset * spacing[1]), GP.precision.node_spacing);
 			// Round the z value to a lower precision assuming it helps embree
-			const real_t z = roundhf_tmp<real_t>(parent[2] + spacing[2], GP.precision.node_spacing);
+			const real_t z = roundhf_tmp<real_t>(parent[2] + spacing[2], GP.precision.node_z);
 
 			// Add these new values as a node in the out_children list
 			out_children[i] = real3{ x, y, z };
