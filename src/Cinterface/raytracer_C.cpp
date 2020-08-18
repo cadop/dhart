@@ -1,10 +1,3 @@
-/*!
-	\file		raytracer_C.cpp
-	\brief		C Interface source file for Raytracer functionality
-
-	\author		TBA
-	\date		05 Aug 2020
-*/
 #include <raytracer_C.h>
 #include <iostream>
 
@@ -17,8 +10,7 @@ using std::vector;
 using HF::RayTracer::EmbreeRayTracer;
 using HF::Geometry::MeshInfo;
 using namespace HF::Exceptions;
-
-// TODO: Use a template for this
+//TODO: Use a template for this
 
 C_INTERFACE CreateRaytracer(vector<MeshInfo>* mesh, EmbreeRayTracer** out_raytracer)
 {
@@ -32,7 +24,6 @@ C_INTERFACE CreateRaytracer(vector<MeshInfo>* mesh, EmbreeRayTracer** out_raytra
 		*out_raytracer = new EmbreeRayTracer(meshes);
 		return OK;
 	}
-
 	// Thrown if Embree is missing
 	catch (const HF::Exceptions::MissingDependency & e) { return MISSING_DEPEND; }
 	return GENERIC_ERROR;
@@ -42,7 +33,6 @@ C_INTERFACE DestroyRayTracer(HF::RayTracer::EmbreeRayTracer* rt_to_destroy)
 {
 	if (rt_to_destroy)
 		delete rt_to_destroy;
-
 	return OK;
 }
 
@@ -74,9 +64,7 @@ C_INTERFACE FireRaysDistance(
 		ONE_DIRECTION,
 		MULTIPLE_RAY
 	};
-
 	FireType type;
-
 	if (num_origins == num_directions)
 		type = MULTIPLE_RAY;
 	else if (num_origins == 1 && num_directions > 1)
@@ -87,7 +75,6 @@ C_INTERFACE FireRaysDistance(
 		fprintf(stderr, "[C++] Invalid input. num_origins = %d, num_directions = %d\n", num_origins, num_directions);
 		return HF::Exceptions::GENERIC_ERROR;
 	}
-
 	std::vector<RayResult>* output_results;
 
 	switch (type) {
@@ -102,11 +89,9 @@ C_INTERFACE FireRaysDistance(
 		for (int i = 0; i < num_origins; i++) {
 			float out_distance = -1;
 			int out_id = -1;
-
 			if (ert->FireAnyRay(origin_pts[i], direction_pts[i], out_distance, out_id))
 				(*output_results)[i].SetHit(origin_pts[i], direction_pts[i], out_distance, out_id);
 		}
-
 		break;
 	}
 
@@ -116,15 +101,12 @@ C_INTERFACE FireRaysDistance(
 		auto direction_pts = ConvertRawFloatArrayToPoints(directions, num_directions);
 
 		output_results = new std::vector<RayResult>(num_origins);
-
-#pragma omp parallel for schedule(dynamic)
+	#pragma omp parallel for schedule(dynamic)
 		for (int i = 0; i < num_directions; i++) {
 			float out_distance = -1; int out_id = -1;
-
 			if (ert->FireAnyRay(origin, direction_pts[i], out_distance, out_id))
 				(*output_results)[i].SetHit(origin, direction_pts[i], out_distance, out_id);
 		}
-
 		break;
 	}
 	case ONE_DIRECTION:
@@ -133,22 +115,19 @@ C_INTERFACE FireRaysDistance(
 		auto origin_pts = ConvertRawFloatArrayToPoints(origins, num_origins);
 
 		output_results = new std::vector<RayResult>(num_origins);
-
-#pragma omp parallel for schedule(dynamic)
+	#pragma omp parallel for schedule(dynamic)
 		for (int i = 0; i < num_origins; i++) {
 			float out_distance = -1; int out_id = -1;
-
 			if (ert->FireAnyRay(origin_pts[i], direction, out_distance, out_id))
 				(*output_results)[i].SetHit(origin_pts[i], direction, out_distance, out_id);
-		}
 
+		}
 		break;
 	}
 	}
 	
 	*out_results = output_results;
 	*results_data = output_results->data();
-
 	return OK;
 }
 
@@ -175,18 +154,14 @@ C_INTERFACE FireMultipleRays(
 		{
 			const int offset = i * 3;
 			const auto& hit_point = origin_array[i];
-
 			origins[offset] = hit_point[0];
 			origins[offset + 1] = hit_point[1];
 			origins[offset + 2] = hit_point[2];
-
 			result_array[i] = true;
 		}
-		else {
+		else
 			result_array[i] = false;
-		}
 	}
-
 	return OK;
 }
 
@@ -201,18 +176,14 @@ C_INTERFACE FireMultipleOriginsOneDirection(EmbreeRayTracer* ert, float* origins
 		{
 			const int offset = i * 3;
 			const auto& hit_point = origin_array[i];
-
 			origins[offset] = hit_point[0];
 			origins[offset + 1] = hit_point[1];
 			origins[offset + 2] = hit_point[2];
-
 			result_array[i] = true;
 		}
-		else {
+		else
 			result_array[i] = false;
-		}
 	}
-
 	return OK;
 }
 
@@ -227,16 +198,13 @@ C_INTERFACE FireMultipleDirectionsOneOrigin(EmbreeRayTracer* ert, const float* o
 		{
 			const int offset = i * 3;
 			const auto& hit_point = dir_array[i];
-
 			directions[offset] = hit_point[0];
 			directions[offset + 1] = hit_point[1];
 			directions[offset + 2] = hit_point[2];
-
 			result_array[i] = true;
 		}
-		else {
+		else
 			result_array[i] = false;
-		}
 	}
 	return OK;
 }
@@ -245,7 +213,6 @@ C_INTERFACE FireOcclusionRays(EmbreeRayTracer* ert, const float* origins, const 
 {
 	auto origin_array = ConvertRawFloatArrayToPoints(origins, origin_size);
 	auto direction_array = ConvertRawFloatArrayToPoints(directions, direction_size);
-
 	const auto results = ert->FireOcclusionRays(origin_array, direction_array, max_distance, true);
 
 	std::copy(results.begin(), results.end(), result_array);
