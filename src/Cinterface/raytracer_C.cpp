@@ -37,6 +37,19 @@ C_INTERFACE CreateRaytracer(MeshInfo * meshes, int num_meshes, EmbreeRayTracer**
 	return GENERIC_ERROR;
 }
 
+C_INTERFACE AddMesh(HF::RayTracer::EmbreeRayTracer* ERT, HF::Geometry::MeshInfo* MI, int number_of_meshes)
+{
+	// Iterate through each input mesh, only committing the scene
+	// at the final mesh. 
+	for (int i = 0; i < number_of_meshes; i++) {
+		bool should_commit = (i == number_of_meshes - 1);
+	
+		ERT->InsertNewMesh(MI[i], should_commit);
+	}
+
+	return HF_STATUS::OK;
+}
+
 C_INTERFACE DestroyRayTracer(HF::RayTracer::EmbreeRayTracer* rt_to_destroy)
 {
 	if (rt_to_destroy)

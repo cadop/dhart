@@ -125,6 +125,22 @@ C_INTERFACE CreateRaytracer(
 );
 
 /*!
+	\brief Add a new mesh to a raytracer.
+
+	\param ERT raytracer toa dd the mesh to
+	\param MI MeshInfo to add to the raytracer. Will try to maintain IDs, however if there is a collision, then each
+			  MeshInfo will be updated to contain the ID assigned to it by the raytracer. 
+	\param number_of_meshes Number of meshes in `MI` and Ids in `preferred_ids`
+
+	\returns HF_STATUS::OK On completion
+*/
+C_INTERFACE AddMesh(
+	HF::RayTracer::EmbreeRayTracer* ERT,
+	HF::Geometry::MeshInfo* MI,
+	int number_of_meshes
+);
+
+/*!
 	\brief		Delete an existing raytracer.
 
 	\param	rt_to_destroy	Raytracer to destroy

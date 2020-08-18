@@ -826,7 +826,7 @@ TEST(Performance, EmbreeRaytracer) {
 namespace C_Interface{
 	using HF::Exceptions::HF_STATUS;
 
-	EmbreeRayTracer* ConstructTestRaytracer() {
+	MeshInfo * ConstructExamplePlane() {
 		// Define Parameters to construct plane
 		const std::vector<float> plane_vertices{
 			-10.0f, 10.0f, 0.0f,
@@ -841,14 +841,20 @@ namespace C_Interface{
 		// Store mesh and assert that it succeeds
 		HF::Geometry::MeshInfo* MI;
 		auto mesh_store_res = StoreMesh(
-			&MI, plane_indices.data(), 
+			&MI, plane_indices.data(),
 			plane_indices.size(),
 			plane_vertices.data(),
 			plane_vertices.size(),
-			name.c_str(), 
+			name.c_str(),
 			id
 		);
 		EXPECT_EQ(HF_STATUS::OK, mesh_store_res);
+		
+		return MI;
+	}
+
+	EmbreeRayTracer* ConstructTestRaytracer() {
+		MeshInfo * MI = ConstructExamplePlane();
 
 		// Create RayTracer from the meshinfo we just stored
 		EmbreeRayTracer* ray_tracer;
@@ -867,6 +873,28 @@ namespace C_Interface{
 		EmbreeRayTracer* rt = ConstructTestRaytracer();
 
 		// Destroy the raytracer
+		DestroyRayTracer(rt);
+	}
+
+	// If this crashes, then memory was corrupted by the construction of the raytracer.
+	TEST(C_EmbreeRayTracer, AddMesh) {
+		// Call the raytracer function
+		EmbreeRayTracer* rt = ConstructTestRaytracer();
+
+		// Construct another instance of MeshInfo, then rotate it
+		auto rotated_plane = ConstructExamplePlane();
+		rotated_plane->PerformRotation(0, -90, 0);
+
+		// Add it to the raytracer
+		int add_mesh_result = AddMesh(rt, rotated_plane, 1);
+		ASSERT_EQ(HF_STATUS::OK, add_mesh_result);
+
+		// If this was successful, the new mesh's ID should have been updated to 0 since
+		// it has the same id as another mesh, and embree is automatically assigning it. 
+		ASSERT_EQ(0, rotated_plane->GetMeshID());
+		
+		// Destroy the Plane and Raytracer
+		DestroyMeshInfo(rotated_plane);
 		DestroyRayTracer(rt);
 	}
 	
