@@ -7,6 +7,7 @@
 #include <cmath>
 
 #include "RayRequest.h"
+
 #include "performance_testing.h"
 
 using namespace HF::Geometry;
@@ -40,7 +41,7 @@ inline float Distance(const array<float, 3>& p1, const array<float, 3>& p2) {
 		pow(p1[0] - p2[0], 2)
 		+ pow(p1[1] - p2[1], 2)
 		+ pow(p1[2] - p2[2], 2)
-	); 
+	);
 }
 
 TEST(_EmbreeRayTracer, HashAlgorithm) {
