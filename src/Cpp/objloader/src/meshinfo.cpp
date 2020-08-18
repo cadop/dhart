@@ -29,7 +29,7 @@ namespace HF::Geometry {
 		VectorsToBuffers(vertices);
 
 		// Throw if a NAN was placed into the mesh. 
-		if (verts.hasNaN()) throw std::exception("NAN DETECTED ON INPUT");
+		if (verts.hasNaN()) throw HF::Exceptions::InvalidOBJ();
 	
 		meshid = id;
 		this->name = name;
