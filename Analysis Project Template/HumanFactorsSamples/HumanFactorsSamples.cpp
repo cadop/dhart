@@ -51,7 +51,7 @@ const std::string energy_blob_path_str = "..\\energy_blob_zup.obj";
 		here is how you would load the functions from the DLL:
 
 		\code
-			// Already forward-declared HF::Geometry::MeshInfo 
+			// Already forward-declared HF::Geometry::MeshInfo
 			// and HF::RayTracer::EmbreeRayTracer before main()
 
 			// Create typedefs
@@ -144,7 +144,7 @@ int main(int argc, const char* argv[]) {
 	// Free libraries in reverse order of creation.
 	//
 	std::this_thread::sleep_for(std::chrono::milliseconds(250));
-	
+
 	if (FreeLibrary(dll_humanfactors)) {
 		std::cout << "Freed successfully: " << "HumanFactors.dll" << std::endl;
 	}
@@ -156,6 +156,6 @@ int main(int argc, const char* argv[]) {
 	if (FreeLibrary(dll_tbb)) {
 		std::cout << "Freed successfully: " << "tbb.dll" << std::endl;
 	}
-	
+
 	return EXIT_SUCCESS;
 }

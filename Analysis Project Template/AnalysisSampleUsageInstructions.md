@@ -1,6 +1,48 @@
+<h2> Introduction </h2>
+
+This folder contains a sample HumanFactors project template,
+with a preconfigured Visual Studio solution (.sln) file and a Visual Studio project (.vcxproj) file. This project template will be used by every video tutorial/use case example, so that folder/project setup need not be endured by the end user.
+
+The Visual Studio project contains a source file with logic that will load the HumanFactors DLL (and its required dependencies). This is required before any functions can be called from the HumanFactors DLL.<br>
+
+The DLLs are included with this directory (in x64-Release/bin), along with sample .obj files that will be used by the examples to be demonstrated.
+
+If the end user chooses to create their own Human Factors solution/project,<br>
+without the use of this project template, the steps have been outlined below<br> 
+as to how this project folder structure was created.
+
+<h2> Adding the project template to Visual Studio </h2>
+
+Begin by opening HumanFactorsSamples.sln in<br> 
+Analysis\Analysis Project Template\HumanFactorsSamples\
+
+After opening the solution -- at the top of Visual Studio, navigate to<br>
+Project > Export Template
+
+Ensure that the 'Project Template' radio button is selected.<br>
+Ensure that 'HuamnFactorsSamples' is selected for<br>
+'From which project would you like to create a template?'
+
+Provide a description for 'Template description'.<br>
+Then, click 'Finish'.
+
+The template will be saved to:<br>
+[user folder]\Documents\Visual Studio 2019\My Exported Templates
+
+Whenever you want to create a new Visual Studio project with the HumanFactors DLL,<br> the code provided will already be defined to load the required DLLs.<br>
+Note that the project will assume that the DLLs are in Analysis Project Template\x64-Release\bin\.<br>
+
+The same is true for the .obj files -- the project assumes that the .obj files are in Analysis Project Template\.
+
 <h2> DIRECTORY SETUP/INSTALL HUMAN FACTORS </h2>
 
-Create a folder named 'Analysis Sample Usage' in your development directory of choice.
+<b> Note that the steps below are provided for reference only.<br>
+<br>
+If you choose to use the project template,<br>
+the steps below have already been completed for you,<br>
+-- you may skip the rest of this document if that is the case.</b>
+
+Create a folder named 'Analysis Project Template' in your development directory of choice.
 
 Open Visual Studio 2019 and open the Analysis repository.
 (Analysis/src). This will use the CMakeLists.txt file to work with the codebase within VS.
@@ -12,9 +54,9 @@ Analysis\src\out\install.
 After installing, navigate to
 Analysis\src\out\install.
 
-Copy the x64-Release folder into the 'Analysis Sample Usage' folder you made.
+Copy the x64-Release folder into the 'Analysis Project Template' folder you made.
 
-In Analysis Sample Usage\x64-Release, keep only the following files,
+In Analysis Project Template\x64-Release, keep only the following files,
 
 bin\embree3.dll
 bin\HumanFactors.dll
@@ -66,7 +108,7 @@ int main(int argc, const char *argv[]) {
 ```
 And hit F5 to verify that the project builds.
 
-<h2> DRIVER CODE SETUP </h2>
+<h2> SOURCE FILE SETUP </h2>
 
 At the top of HumanFactorsSamples.cpp,
 be sure the following headers are included:
@@ -92,10 +134,12 @@ const std::string plane_path_str = "..\\plane.obj";
 const std::string energy_blob_path_str = "..\\energy_blob_zup.obj";
 
 // Subroutine that will use the HumanFactors DLL.
-void HF_routine(HINSTANCE dll_hf).
+void HF_routine(HINSTANCE dll_hf) { }
 
-You may rename HF_routine to a name that best suits your purpose.
+You may rename HF_routine to a name that best suits your purpose/example.
 ```
+
+Now, clear out the main() function.
 
 In main(), we must load the following DLLs in this order:
 ```
@@ -148,8 +192,10 @@ if (dll_humanfactors == nullptr) {
 else {
     std::cout << "Loaded successfully: " << "HumanFactors.dll" << std::endl;
 }
+```
 
-Add a comment block that denotes where you will use the HumanFactors.dll.
+Your 'HF_routine' function (or whatever you had named this function)<br>
+is now ready to be called.
 
 ```
 //
@@ -162,6 +208,7 @@ After using dll_humanfactors, we must free each library in reverse order
 of initialization.
 
 Before we do that, we must sleep the current thread for 250ms.
+
 ```
 std::this_thread::sleep_for(std::chrono::milliseconds(250));
 ```
@@ -179,9 +226,10 @@ if (FreeLibrary(dll_embree3)) {
 if (FreeLibrary(dll_tbb)) {
     std::cout << "Freed successfully: " << "tbb.dll" << std::endl;
 }
+
+return EXIT_SUCCESS;
 ```
 
-You now have a visual studio project that is set up to use the HumanFactors DLL.
+You now have a Visual Studio project that is set up to use the HumanFactors DLL.
 Each use-case example will demonstrate how to use dll_humanfactors to load
-the functions required to do each example, but every use-case example will
-use this sample project created here.
+the functions required to do each example, but every use-case example will begin with the sample project template created here.
