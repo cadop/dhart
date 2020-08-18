@@ -20,7 +20,6 @@
 #include <boost/graph/breadth_first_search.hpp>
 #include <boost/graph/dijkstra_shortest_paths_no_color_map.hpp>
 #include <boost/exception/exception.hpp>
-#include <boost/math/special_functions/fpclassify.hpp>
 
 #include <boost_graph.h>
 #include <path.h>
@@ -262,59 +261,6 @@ namespace HF::Pathfinding {
 				out_paths[i] = nullptr;
 			}
 		}
-	}
-
-	DistanceAndPredecessor GenerateDistanceAndPred(const BoostGraph& bg)
-	{
-		const auto & g = bg.g;
-
-		// Generate distance and predecessor matricies
-		const int num_nodes = bg.p.size();
-		DistanceAndPredecessor out_distpred(num_nodes);
-		
-		// Iterate through every row in the array
-		#pragma omp parallel for schedule(dynamic)
-		for (int row = 0; row < num_nodes; row++) {
-	
-			// Get pointers to the beginning of the row for both matricies
-			float* dist_row_start = out_distpred.GetRowOfDist(row);
-			int* pred_row_start = out_distpred.GetRowOfPred(row);
-
-			// Give boost a reference to the array in distpred
-			auto pm = boost::predecessor_map(pred_row_start);
-
-			// Get the descriptor of the starting vertex
-			vertex_descriptor start_vertex = vertex(row, g);
-
-			// calculate the shortest path using the row of the distance and predecessor arrays.
-			// Boost should fill these when calculating the distance/predecessor matricies
-			dijkstra_shortest_paths_no_color_map(
-				g,
-				start_vertex,
-				pm.distance_map(dist_row_start).weight_map(boost::get(&Edge_Cost::weight, g))
-			);
-
-			// The documentation of boost kind of lies here. An infinite cost is not infinite,
-			// as their pseudo code would lead you to believe. Actually it's setting the value
-			// of the distance matrix for paths that can`t be created to the value
-			// of std::numeric_limits<float>::max. This should be a NAN for the sake of readability. 
-			for (int i = 0; i < num_nodes; i++)
-			{
-				float & dist_element = dist_row_start[i];
-				int & pred_element = pred_row_start[i];
-
-				// If the predecessor element is not not in the range of nodes,
-				// this is boost trying to signal to us that there is no connection
-				// between these nodes, so put a NAN there. 
-				if (dist_element == std::numeric_limits<float>::max()) {
-					pred_element = -1; // Ints have no way of representing NaN
-					dist_element = -1;
-				}
-			}
-		}
-
-		return out_distpred;
-		
 	}
 
 	std::unique_ptr<BoostGraph, BoostGraphDeleter> CreateBoostGraph(const Graph& g, const std::string & cost_type) {

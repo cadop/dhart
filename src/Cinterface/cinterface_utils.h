@@ -76,16 +76,6 @@ std::vector<std::array<int, 3>> ConvertRawIntArrayToPoints(const int* raw_array,
 */
 C_INTERFACE DestroyFloatVector(std::vector<float>* float_vector);
 
-
-/*! 
-	\brief Delete a vector of integers.
-	
-	\param int_vector A pointer to a vector of integers to delete.
-
-	\returns `HF_STATUS.OK` on completion.
-*/
-C_INTERFACE DestroyIntVector(std::vector<int>* int_vector);
-
 /// <summary>
 /// Delete some object pointed to by ptr
 /// </summary>

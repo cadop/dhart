@@ -19,15 +19,8 @@ humanfactorspy.spatialstructures.Graph
             ~Graph.Clear
             ~Graph.CompressToCSR
             ~Graph.ConvertToLists
-            ~Graph.GetEdgeCost
             ~Graph.GetNodeID
-            ~Graph.NumNodes
-            ~Graph.add_node_attributes
-            ~Graph.clear_node_attribute
             ~Graph.getNodes
-            ~Graph.get_closest_nodes
-            ~Graph.get_closest_points
-            ~Graph.get_node_attributes
             ~Graph.get_node_points
    
    

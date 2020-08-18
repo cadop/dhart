@@ -23,7 +23,7 @@ namespace HumanFactors.Geometry
 
             \throws System.IO.FileNotFoundException No file was found at  path.
 			\throws HumanFactors.Exceptions.InvalidMeshException
-			The file at the path was not a valid OBJ.
+			The file at the path did not represent a valid OBJ.
 			
             \remarks
             Use the other overload if you want to use a CommonRotation on the mesh. 

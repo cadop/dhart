@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
-using HumanFactors.NativeUtils.CommonNativeArrays;
 
 namespace HumanFactors.Tests.Pathfinding
 {
@@ -297,63 +296,19 @@ namespace HumanFactors.Tests.Pathfinding
             Assert.AreEqual(0, paths[3][0].id);
             Assert.AreEqual(1, paths[3][1].id);
             Assert.AreEqual(3, paths[3][2].id);
-
+            
             // Print the contents of every path
             for (int i = 0; i < paths.Count(); i++)
             {
                 HumanFactors.Pathfinding.Path path = paths[i];
-
+                
                 // Print the empty string if null.
                 string path_string = "-------";
                 if (path != null)
                     path_string = paths[i].ToString();
-
+            
                 Debug.WriteLine(i.ToString() + ": " + path_string);
             }
         }
-
-		[TestMethod]
-		public void CreateDistanceAndPredecessorMatricies()
-		{
-			//! [EX_CreateDistPred]
-			// Create a graph, add some edges and nodes
-			Graph g = new Graph();
-			Vector3D[] nodes =
-			{
-				new Vector3D(1,2,3),
-				new Vector3D(4, 5, 6),
-				new Vector3D(7, 8, 9),
-				new Vector3D(10, 1, 2)
-			};
-			g.AddEdge(nodes[1], nodes[2], 20);
-			g.AddEdge(nodes[0], nodes[2], 5);
-			g.AddEdge(nodes[1], nodes[0], 10);
-			_ = g.CompressToCSR();
-
-			// Get the predecessor and distance matricies
-			// back from native code
-			UnmanagedFloatArray2D dist_matrix = null;
-			UnmanagedIntArray2D pred_matrix = null;
-			HumanFactors.Pathfinding.ShortestPath.GeneratePredecessorAndDistanceMatricies(
-				g,
-				out dist_matrix,
-				out pred_matrix
-			);
-
-			// Print to console
-			Debug.WriteLine(dist_matrix);
-			Debug.WriteLine(pred_matrix);
-
-			//! [EX_CreateDistPred]
-
-			// Ensure the results match our expectations
-			string expected_distance = "[0, 15, 10, -1, 0, -1, -1, 5, 0]";
-			string expected_predecessor = "[0, 2, 0, -1, 1, -1, -1, 2, 2]";
-
-			Assert.AreEqual(expected_distance, dist_matrix.ToString());
-			Assert.AreEqual(expected_predecessor, pred_matrix.ToString());
-		}
-	}
-}
-
-
+        }
+    }

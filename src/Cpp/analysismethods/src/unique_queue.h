@@ -101,29 +101,6 @@ namespace HF::GraphGenerator {
 
 		*/
 		std::vector<SpatialStructures::Node> popMany(int max = -1);
-		/*! \brief Call push with any type of object
-		
-			\param p Node to add to the queue. 	
-
-			\returns False if the node wasn't added, true if it was.
-			
-			\details
-			If the node has a value of 1 in hashmap, then the node is ignored. If the node doesn't
-			already exist in the hashmap, the call to hashmap[p] will automatically create an entry
-			with a value of 0, indicating that the node hasn't been seen before.
-			
-
-		*/
-		template <typename arr_type>
-		inline bool PushAny(const arr_type& node) {
-			auto node_to_push = Node(
-				static_cast<float>(node[0]),
-				static_cast<float>(node[1]),
-				static_cast<float>(node[2])
-			);
-			
-			return this->push(node_to_push);
-		}
 	};
 }
 #endif

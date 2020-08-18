@@ -22,35 +22,35 @@ using System.Runtime.InteropServices;
 */
 namespace HumanFactors.ViewAnalysis
 {
-	/*! 
+    /*! 
         \brief The type of aggregation method to use for ViewAnalysis.ViewAnalysisAggregate
     */
-	public enum ViewAggregateType
-	{
-		/// <summary> Count the number of rays that intersected any geometry. </summary>
-		COUNT = 0,
+    public enum ViewAggregateType
+    {
+        /// <summary> Count the number of rays that intersected any geometry. </summary>
+        COUNT = 0,
 
-		/// <summary> Add the distance from the observer to the point of intersection for all rays casted </summary>
-		SUM = 1,
+        /// <summary> Add the distance from the observer to the point of intersection for all rays casted </summary>
+        SUM = 1,
 
-		/// <summary>  Average the distance from the origin to each point of intersection. </summary>
-		AVERAGE = 2,
+        /// <summary>  Average the distance from the origin to each point of intersection. </summary>
+        AVERAGE = 2,
 
-		/// <summary> The maximum distance from the origin to any hitpoint. </summary>
-		MAX = 3,
+        /// <summary> The maximum distance from the origin to any hitpoint. </summary>
+        MAX = 3,
 
-		/// <summary> The minimum distance from the origin to any hitpoint. </summary>
-		MIN = 4
-	}
+        /// <summary> The minimum distance from the origin to any hitpoint. </summary>
+        MIN = 4
+    }
 
-	/*!
+    /*!
         \brief Functions for analyzing the view of an observer in an environment at human scale.
         
         \note All of these functions internally use a raytracer, so a HumanFactors.RayTracing.EmbreeBVH is required.
     */
-	public static class ViewAnalysis
-	{
-		/*! 
+    public static class ViewAnalysis
+    {
+        /*! 
             \brief  Conduct view analysis and aggregate the results for each node.
             
             \param bvh the Geometry to intersect with.
@@ -80,25 +80,25 @@ namespace HumanFactors.ViewAnalysis
             \snippet viewanalysis\test_viewanalysis.cs EX_ViewAnalysisAggregate
             `[480, 451, 428]`
         */
-		public static ManagedFloatArray ViewAnalysisAggregate(
-			EmbreeBVH bvh,
-			IEnumerable<Vector3D> nodes,
-			int ray_count,
-			float upward_fov = 50.0f,
-			float downward_fov = 70.0f,
-			float height = 1.7f,
-			ViewAggregateType type = ViewAggregateType.AVERAGE)
-			=> new ManagedFloatArray(NativeMethods.C_SphericalViewAnalysisAggregate(
-					bvh.Pointer,
-					nodes,
-					ray_count,
-					upward_fov,
-					downward_fov,
-					height,
-					type
-				));
+        public static ManagedFloatArray ViewAnalysisAggregate(
+            EmbreeBVH bvh,
+            IEnumerable<Vector3D> nodes,
+            int ray_count,
+            float upward_fov = 50.0f,
+            float downward_fov = 70.0f,
+            float height = 1.7f,
+            ViewAggregateType type = ViewAggregateType.AVERAGE)
+            => new ManagedFloatArray(NativeMethods.C_SphericalViewAnalysisAggregate(
+                    bvh.Pointer,
+                    nodes,
+                    ray_count,
+                    upward_fov,
+                    downward_fov,
+                    height,
+                    type
+                ));
 
-		/*!
+        /*!
             \brief Conduct View Analysis and access the results of every ray casted for every node.
             
             \param bvh Geometry to intersect with.
@@ -138,23 +138,23 @@ namespace HumanFactors.ViewAnalysis
             (0, 0, 3): ([-1, -1], [9.211, 0], [-1, -1], [-1, -1], [5.394, 0], [9.413, 0], [-1, -1], [-1, -1], [6.144, 0], [-1, -1])
             ```
              */
-		public static ResultArray ViewAnalysisStandard(
-			EmbreeBVH bvh,
-			IEnumerable<Vector3D> nodes,
-			int ray_count,
-			float upward_fov = 50.0f,
-			float downward_fov = 70.0f,
-			float height = 1.7f)
-			=> new ResultArray(NativeMethods.C_SphericalViewAnalysisNoAggregate(
-					bvh.Pointer,
-					nodes,
-					ray_count,
-					upward_fov,
-					downward_fov,
-					height
-				));
+        public static ResultArray ViewAnalysisStandard(
+            EmbreeBVH bvh,
+            IEnumerable<Vector3D> nodes,
+            int ray_count,
+            float upward_fov = 50.0f,
+            float downward_fov = 70.0f,
+            float height = 1.7f)
+            => new ResultArray(NativeMethods.C_SphericalViewAnalysisNoAggregate(
+                    bvh.Pointer,
+                    nodes,
+                    ray_count,
+                    upward_fov,
+                    downward_fov,
+                    height
+                ));
 
-		/*!
+        /*!
             \brief Distribute a set of points equally on a unit sphere.
 
             \param num_rays The number of points to distribute.
@@ -175,10 +175,10 @@ namespace HumanFactors.ViewAnalysis
             \snippet viewanalysis\test_viewanalysis.cs EX_SphericallyDistributeRays 
             `[0, -1, 0, -0.2650034, -0.8181818, . . . -0.7649929, 0.4396428, 0.8181818, 0.3705303]`
         */
-		public static DirectionArray SphericallyDistributeRays(
-			int num_rays,
-			float upward_fov = 50f,
-		    float downward_fov = 70f
-		) => new DirectionArray(NativeMethods.SphericalDistribute(num_rays, upward_fov, downward_fov));
-	}
+        public static DirectionArray SphericallyDistributeRays(
+            int num_rays,
+            float upward_fov = 50f
+            , float downward_fov = 70f
+        ) => new DirectionArray(NativeMethods.SphericalDistribute(num_rays, upward_fov, downward_fov));
+    }
 }

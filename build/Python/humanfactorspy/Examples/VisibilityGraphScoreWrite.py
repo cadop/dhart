@@ -71,15 +71,5 @@ json_dict["vg_count"] = VG.AggregateEdgeCosts(CostAggregationType.COUNT, False).
 json_dict["vg_avg"] = VG.AggregateEdgeCosts(CostAggregationType.AVERAGE, False).array.tolist()
 
 print("Writing")
-json_dump = this_json.dumps(json_dict)
-write_string = "w"
-
-# Certain, faster json writers only deal in bytes so 
-# change our write type if needed
-if isinstance(json_dump, str):
-    write_string = "w"
-else:
-    write_string = "wb"
-
-with open("out_vg_score.json", write_string) as out_json:
-     out_json.write(json_dump)   
+with open("out_vg_score.json", "w") as out_json:
+    out_json.write(this_json.dumps(json_dict))

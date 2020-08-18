@@ -151,28 +151,6 @@ def test_FireRayDistance():
     assert result[0] != -1.0 and not numpy.isnan(result[0])
 
 
-def test_MultiRayDistancereturnType():
-    """ Tests if the return type of Intersect is as the
-        documentation states
-    """
-
-    # Setup raytracer
-    plane = LoadOBJ(
-        humanfactorspy.get_sample_model("plane.obj"),
-        rotation=CommonRotations.Yup_to_Zup,
-    )
-    bvh = EmbreeBVH(plane)
-
-    # Ensure these return types are tuples as the docs state
-    assert isinstance(Intersect(bvh, [0, 0, 1], [0, 0, -1]), tuple)
-    assert isinstance(Intersect(bvh, (0, 0, 1), (0, 0, -1)), tuple)
-    assert isinstance(Intersect(bvh, (0, 0, 1), [0, 0, -1]), tuple)
-
-    # Assert that these are lists as the docs state
-    assert isinstance(Intersect(bvh, [0, 0, 1], [(0, 0, -1)]), RayResultList)
-    assert isinstance(Intersect(bvh, [[0, 0, 1]], (0, 0, -1)), RayResultList)
-    assert isinstance(Intersect(bvh, [[0, 0, 1], [0, 0, 2]], (0, 0, -1)), RayResultList)
-
 def test_FireMultipleRayDistance():
     plane = LoadOBJ(humanfactorspy.get_sample_model("plane.obj"), rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(plane)

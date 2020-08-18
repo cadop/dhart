@@ -8,7 +8,8 @@ target_sources(
 		src/unique_queue.h
 		src/graph_generator.h
 		src/graph_generator.cpp
-		src/graph_utils.cpp
+		src/graph_generator_private.cpp
+		src/graph_generator_private.h
 	)
 target_link_libraries(
 	GraphGenerator

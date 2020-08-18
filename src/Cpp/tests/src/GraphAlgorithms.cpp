@@ -60,7 +60,7 @@ namespace HF {
 
 		printf("Graph size %i\n", g.size());
 		g.Compress();
-		ASSERT_EQ(29, g.size());
+		ASSERT_EQ(g.size(), 29);
 	}
 
 }

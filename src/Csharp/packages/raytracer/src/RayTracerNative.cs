@@ -14,431 +14,246 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace HumanFactors.RayTracing
 {
+    internal static class NativeMethods
+    {
+        private const string dllpath = NativeConstants.DLLPath;
 
-	/*! \param NativeMethods for the RayTracing namespace */
-	internal static class NativeMethods
-	{
-		// Path to the HumanFactors C++ DLL
-		private const string dllpath = NativeConstants.DLLPath;
+        internal static IntPtr C_ConstructRaytracer(IntPtr mesh_info_ptr)
+        {
+            IntPtr ret_ptr = new IntPtr();
+            HF_STATUS result = CreateRaytracer(mesh_info_ptr, ref ret_ptr);
 
-		/*!
-            \brief Create a Raytracer in C++
+            if (result == HF_STATUS.MISSING_DEPEND)
+                throw new Exception("Missing embree3.dll or tbb.dll");
+            else if (result != HF_STATUS.OK)
+                throw new Exception("Something went wrong during BVH construction");
+            else return ret_ptr;
+        }
 
-            \param mesh_info_ptr Pointer to a vector of MeshInfo in C++.
+        internal static Vector3D C_IntesectPoint(IntPtr rt_ptr, float x, float y, float z, float dx, float dy, float dz, float max_distance = -1)
+        {
+            bool did_hit = false;
+            _ = FireRay(rt_ptr, ref x, ref y, ref z, dx, dy, dz, max_distance, ref did_hit);
 
-            \returns
-            A Pointer to a raytracer containing a BVH constructed from the meshinfo
-            pointed to by `mesh_info_ptr`.
-                    
-            \see EmbreeBVH for more information about the abstraction between
-                           raytracers and BVHs.
-        */
-		internal static IntPtr C_ConstructRaytracer(IntPtr mesh_info_ptr)
-		{
+            if (did_hit) return new Vector3D(x, y, z);
+            else return new Vector3D(float.NaN, float.NaN, float.NaN);
+        }
 
-			// Create a new pointer to hold the output of this function
-			IntPtr ret_ptr = new IntPtr();
+        /// <summary>
+        /// cs the intersect points.
+        /// </summary>
+        /// <param name="ert">The ert.</param>
+        /// <param name="origins">The origins.</param>
+        /// <param name="directions">The directions.</param>
+        /// <param name="max_distance">The maximum distance.</param>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentException">Arguments did not match one of the predefined cases!</exception>
+        /// <exception cref="System.Exception">Multiple rays failed to fire</exception>
+        internal static Vector3D[] C_IntersectPoints(IntPtr ert, IEnumerable<Vector3D> origins, IEnumerable<Vector3D> directions, float max_distance)
+        {
+            float[] flat_origins = NativeUtils.HelperFunctions.FlattenVectorArray(origins);
+            float[] flat_dirs = NativeUtils.HelperFunctions.FlattenVectorArray(directions);
 
-			// Call the function in C++. If this succeeds, then the ret_ptr will be
-			// updated with a pointer to the new object
-			HF_STATUS result = CreateRaytracer(mesh_info_ptr, ref ret_ptr);
+            // Select C function to use based on number of origins/directions
+            int num_origins = origins.Count();
+            int num_directions = directions.Count();
+            HF_STATUS res = HF_STATUS.GENERIC_ERROR;
+            Vector3D[] out_points;
+            if (num_origins == num_directions)
+            {
+                bool[] result_array = new bool[num_origins];
+                res = FireMultipleRays(ert, flat_origins, flat_dirs, num_origins, max_distance, result_array);
+                out_points = HelperFunctions.FloatArrayToVectorArray(flat_origins, result_array);
+            }
+            else if (num_origins > num_directions && num_directions == 1)
+            {
+                bool[] result_array = new bool[num_origins];
+                res = FireMultipleOriginsOneDirection(ert, flat_origins, flat_dirs, num_origins, max_distance, result_array);
+                out_points = HelperFunctions.FloatArrayToVectorArray(flat_origins, result_array);
+            }
+            else if (num_directions > num_origins && num_origins == 1)
+            {
+                bool[] result_array = new bool[num_directions];
+                res = FireMultipleDirectionsOneOrigin(ert, flat_origins, flat_dirs, num_directions, max_distance, result_array);
+                out_points = HelperFunctions.FloatArrayToVectorArray(flat_dirs, result_array);
+            }
+            else
+                throw new ArgumentException("Arguments did not match one of the predefined cases!");
 
-			// Right now this is never thrown due to an unset compiler switch. This
-			// is a matter of changing a cmake option though, so it's here for when
-			// we set that up.
-			if (result == HF_STATUS.MISSING_DEPEND)
-				throw new Exception("Missing embree3.dll or tbb.dll");
+            if (res != HF_STATUS.OK)
+                throw new Exception("Multiple rays failed to fire");
 
-			// If it's not OK then something changed in the CInterface that wasn't reflected
-			// in C#. This is developer problem.
-			Debug.Assert(result == HF_STATUS.OK);
+            return out_points;
+        }
 
-			// Return the new pointer.
-			return ret_ptr;
-		}
+        internal static CVectorAndData C_IntersectRays(
+            IntPtr ray_tracer,
+            IEnumerable<Vector3D> origins,
+            IEnumerable<Vector3D> directions,
+            float max_distance
+        )
+        {
+            var flat_origins = HelperFunctions.FlattenVectorArray(origins);
+            var flat_directions = HelperFunctions.FlattenVectorArray(directions);
+            int num_origins = origins.Count();
+            int num_directions = directions.Count();
 
-		/*! 
-            \brief Cast a ray in C++ 
-           
-            \param rt_ptr The pointer to an existing raytracer
-            \param x x component of the ray's origin point
-            \param y y component of the ray's origin point
-            \param z z component of the ray's origin point
-            \param dx x component of the ray's direction
-            \param dy y component of the ray's direction
-            \param dz z component of the ray's direction
-            \param max_distance Maximum distance to consider for intersections. Set to -1 for infinite
+            IntPtr vector_ptr = new IntPtr();
+            IntPtr data_ptr = new IntPtr();
 
-            \returns
-            The point of intersection between the cast ray and the geometry
-            in `rt_ptr` could be found, and an invalid Vector3D if the ray 
-            didn't intersect any geometry.
+            HF_STATUS res = FireRaysDistance(
+                ray_tracer,
+                flat_origins,
+                num_origins,
+                flat_directions,
+                num_directions,
+                ref vector_ptr,
+                ref data_ptr
+            );
+
+            if (res != HF_STATUS.OK)
+                throw new Exception("RAYS FOR DISTANCE FAIL");
+
+            return new CVectorAndData(data_ptr, vector_ptr, origins.Count());
+        }
+
+        internal static bool[] C_FireOcclusionRays(
+            IntPtr rt_ptr,
+            IEnumerable<Vector3D> origins,
+            IEnumerable<Vector3D> directions,
+            float max_distance
+        ) {
+            int num_origins = origins.Count();
+            int num_directions = directions.Count();
+            int result_size = Math.Max(num_origins, num_directions);
             
-        */
-		internal static Vector3D C_IntersectPoint(
-			IntPtr rt_ptr,
-			float x,
-			float y,
-			float z,
-			float dx,
-			float dy,
-			float dz,
-			float max_distance = -1
-		)
-		{
-			// Create parameter to use as an output parameter
-			bool did_hit = false;
+            bool[] result_array = new bool[result_size];
+            float[] origin_array = HelperFunctions.FlattenVectorArray(origins);
+            float[] direction_array = HelperFunctions.FlattenVectorArray(directions);
 
-			// Call the C++ function to fire a ray
-			_ = FireRay(rt_ptr, ref x, ref y, ref z, dx, dy, dz, max_distance, ref did_hit);
+            HF_STATUS res = FireOcclusionRays(
+                rt_ptr,
+                origin_array,
+                direction_array,
+                num_origins,
+                num_directions,
+                max_distance,
+                result_array
+            );
 
-			// If it hit, return a new vector3d with it's coordinates
-			if (did_hit) return new Vector3D(x, y, z);
+            return result_array;
+        }
 
-			// otherwise return a vector3D of nans.
-			else return new Vector3D(float.NaN, float.NaN, float.NaN);
-		}
+        internal static RayResult C_IntersectRay(
+            IntPtr rt_ptr,
+            Vector3D origin,
+            Vector3D direction,
+            float max_distance
+        ){
+            float[] origin_arr = new float[3] { origin.x, origin.y, origin.z };
+            float[] direction_arr = new float[3] { direction.x, direction.y, direction.z };
 
-		/*! 
-            \brief Cast multiple rays at once in C++.
-            
-            \param ert Embree Raytracer to use for this call
-            \param origins Origins to cast rays from
-            \param directions Directions to cast rays in
-            \param max_distance The maximum distance.</param>
+            int out_meshid = 0;
+            float out_distance = 0.0f;
 
-            \details
-            Can be casted in 3 configurations: </para>
-            <list type = "bullet">
-            <item>
-            Equal amount of directions/origins: Cast a ray for every pair of
-            origin/direction in order.i.e. (origin[0], direction[0]), (origin[1], direction[1]), etc.
-            </item>
-            <item>
-            One direction, multiple origins: Cast a ray in the given
-            direction from each origin point in origins.
-            </item>
-            <item>
-             One origin, multiple directions: Cast a ray from the origin point
-            in each direction in directions
-            </item>
-            </list>
+            FireSingleRayDistance(rt_ptr, origin_arr, direction_arr, max_distance, ref out_distance, ref out_meshid);
 
-            \throws System.ArgumentException Arguments did not match one of the predefined cases!</exception>
-            \throws System.Exception Multiple rays failed to fire 
-        */
-		internal static Vector3D[] C_IntersectPoints(
-			IntPtr ert,
-			IEnumerable<Vector3D> origins,
-			IEnumerable<Vector3D> directions,
-			float max_distance
-		)
-		{
-			// Convert directions and origins to arrays. 
-			float[] flat_origins = NativeUtils.HelperFunctions.FlattenVectorArray(origins);
-			float[] flat_dirs = NativeUtils.HelperFunctions.FlattenVectorArray(directions);
+            return new RayResult(out_distance, out_meshid);
+        }
 
-			// Select C function to use based on number of origins/directions
-			int num_origins = origins.Count();
-			int num_directions = directions.Count();
+        internal static void C_DestroyRayTracer(IntPtr rt_ptr) => DestroyRayTracer(rt_ptr);
 
-			// Declare result here, since it needs to be written to later
-			HF_STATUS res = HF_STATUS.GENERIC_ERROR;
-			Vector3D[] out_points;
+        internal static void C_DestroyRayResults(IntPtr ray_ptr) => DestroyRayResultVector(ray_ptr);
 
-			// Depending on the configuration, this will call different functions in the 
-			// C-Interface. All accomplish the same thing: Call a function, interpret the results,
-			// capture the return code.
-			if (num_origins == num_directions)
-			{
-				bool[] result_array = new bool[num_origins];
-				res = FireMultipleRays(ert, flat_origins, flat_dirs, num_origins, max_distance, result_array);
-				out_points = HelperFunctions.FloatArrayToVectorArray(flat_origins, result_array);
-			}
-			else if (num_origins > num_directions && num_directions == 1)
-			{
-				bool[] result_array = new bool[num_origins];
-				res = FireMultipleOriginsOneDirection(ert, flat_origins, flat_dirs, num_origins, max_distance, result_array);
-				out_points = HelperFunctions.FloatArrayToVectorArray(flat_origins, result_array);
-			}
-			else if (num_directions > num_origins && num_origins == 1)
-			{
-				bool[] result_array = new bool[num_directions];
-				res = FireMultipleDirectionsOneOrigin(ert, flat_origins, flat_dirs, num_directions, max_distance, result_array);
-				out_points = HelperFunctions.FloatArrayToVectorArray(flat_dirs, result_array);
-			}
-			else // If it doesn't match any configuration, throw
-				throw new ArgumentException("Arguments did not match one of the predefined cases!");
+        [DllImport(dllpath)]
+        private static extern HF_STATUS CreateRaytracer(
+            IntPtr mesh,
+            ref IntPtr out_raytracer
+        );
 
-			// If this is ever not HF_STATUS.OK, then something changed in the C-Interface that wasn't reflected here.
-			if (res != HF_STATUS.OK) Debug.Assert(false);
+        [DllImport(dllpath)]
+        private static extern HF_STATUS FireRay(
+            IntPtr ert,
+            ref float x,
+            ref float y,
+            ref float z,
+            float dx,
+            float dy,
+            float dz,
+            float max_distance,
+            ref bool result
+        );
 
-			return out_points;
-		}
+        [DllImport(dllpath)]
+        private static extern HF_STATUS FireSingleRayDistance(
+            IntPtr ert,
+            [In] float[] origin,
+            [In] float[] direction,
+            float max_distance,
+            ref float out_distance,
+            ref int out_meshid
+        );
 
-		/*!
-            \brief Cast multiple rays in C++ then recieve the distance and meshid of geometry intersected
-                   by each in return.
-
-            \param ray_tracer A pointer to the raytracer to use for intersections
-            \param origins A list of x, y, z coordinates to cast rays in.
-            \param directions A list of x, y, z directions to fire in.
-            \param max_distance Maximum distance to consider for intersection.
-
-            \returns
-            A CVectorAndData containing the pointers to a C++ vector of RayRequests containing the results
-            of the raycasts conducted by the given arguments.
-
-            \details
-            Can be casted in 3 configurations: </para>
-            <list type = "bullet">
-            <item>
-            Equal amount of directions/origins: Cast a ray for every pair of
-            origin/direction in order.i.e. (origin[0], direction[0]), (origin[1], direction[1]), etc.
-            </item>
-            <item>
-            One direction, multiple origins: Cast a ray in the given
-            direction from each origin point in origins.
-            </item>
-            <item>
-             One origin, multiple directions: Cast a ray from the origin point
-            in each direction in directions
-            </item>
-            </list>
-
-            \throws System.ArgumentException
-            Length of directions and origins did not match any of the valid cases.
-        */
-		internal static CVectorAndData C_IntersectRays(
-			IntPtr ray_tracer,
-			IEnumerable<Vector3D> origins,
-			IEnumerable<Vector3D> directions,
-			float max_distance
-		)
-		{
-			var flat_origins = HelperFunctions.FlattenVectorArray(origins);
-			var flat_directions = HelperFunctions.FlattenVectorArray(directions);
-			int num_origins = origins.Count();
-			int num_directions = directions.Count();
-
-			IntPtr vector_ptr = new IntPtr();
-			IntPtr data_ptr = new IntPtr();
-
-			HF_STATUS res = FireRaysDistance(
-				ray_tracer,
-				flat_origins,
-				num_origins,
-				flat_directions,
-				num_directions,
-				ref vector_ptr,
-				ref data_ptr
-			);
-
-			if (res != HF_STATUS.OK)
-				throw new Exception("RAYS FOR DISTANCE FAIL");
-
-			return new CVectorAndData(data_ptr, vector_ptr, origins.Count());
-		}
-
-		/*!
-            \brief Cast occlusion rays in C++ using embree
-
-            \param rt_ptr A pointer to a valid raytracer in C++
-            \param origins One or more origins.
-            \param directions One or more directions.
-            \param max_distance Maximum distance that a ray can travel. Any hits beyond this point are not counted.
-
-            \returns An array of true or false values indicating hits or misses respectively.
-
-            \details
-            Can be casted in 3 configurations:
-            </para>
-            <list type = "bullet">
-            <item>
-            Equal amount of directions/origins: Cast a ray for every pair of
-            origin/direction in order.i.e. (origin[0], direction[0]), (origin[1], direction[1]), etc.
-            </item>
-            <item>
-            One direction, multiple origins: Cast a ray in the given
-            direction from each origin point in origins.
-            </item>
-            <item>
-             One origin, multiple directions: Cast a ray from the origin point
-            in each direction in directions
-            </item>
-            </list>
-        
-        */
-		internal static bool[] C_FireOcclusionRays(
-			IntPtr rt_ptr,
-			IEnumerable<Vector3D> origins,
-			IEnumerable<Vector3D> directions,
-			float max_distance
-		)
-		{
-
-			// Get the size of both arrays
-			int num_origins = origins.Count();
-			int num_directions = directions.Count();
-
-			// The number of results will be equal to the length
-			// of the lonest input
-			int result_size = Math.Max(num_origins, num_directions);
-
-			// Create output array and convert origin/directions to arrays
-			bool[] result_array = new bool[result_size];
-			float[] origin_array = HelperFunctions.FlattenVectorArray(origins);
-			float[] direction_array = HelperFunctions.FlattenVectorArray(directions);
-
-			// Call to C++ and get results. This will update the result array. 
-			HF_STATUS res = FireOcclusionRays(
-				rt_ptr,
-				origin_array,
-				direction_array,
-				num_origins,
-				num_directions,
-				max_distance,
-				result_array
-			);
-
-			// Return results
-			return result_array;
-		}
-
-		/*!
-            \brief Cast a single ray in C++ and get the distance/meshid of the intersection
-                   if it intersects anything. 
-
-            \param rt_ptr A pointer to a valid raytracer
-            \param origin Origin point of the ray to cast
-            \param direction Direction to cast the ray in
-            \param max_distance Maximum distance that a ray can travel. Any hits beyond this point are not counted.
-
-            \returns A RayResult containing the distance to the ray intersection and the ID of the mesh that
-            it intersected. If the ray didn't intersect anything, then both values will be set to -1.
-             
-       */
-		internal static RayResult C_IntersectRay(
-			IntPtr rt_ptr,
-			Vector3D origin,
-			Vector3D direction,
-			float max_distance
-		)
-		{
-			// Convert inputs to arrays
-			float[] origin_arr = new float[3] { origin.x, origin.y, origin.z };
-			float[] direction_arr = new float[3] { direction.x, direction.y, direction.z };
-
-			// Setup output parameters
-			int out_meshid = 0;
-			float out_distance = 0.0f;
-
-			// Cast the ray in C++. This will update out_distance, and out_meshid
-			FireSingleRayDistance(rt_ptr, origin_arr, direction_arr, max_distance, ref out_distance, ref out_meshid);
-
-			// Return the results
-			return new RayResult(out_distance, out_meshid);
-		}
-
-		/*! \brief Free the memory allocated by a raytracer in C++.
-            \param rt_ptr A pointer to an EmbreeRayTracer in C++
-        */
-		internal static void C_DestroyRayTracer(IntPtr rt_ptr) => DestroyRayTracer(rt_ptr);
-
-		/*! \brief Free the memory allocated by a vector of rayresults in C++.
-            \param ray_ptr A pointer to a vector of rayresults
-        */
-		internal static void C_DestroyRayResults(IntPtr ray_ptr) => DestroyRayResultVector(ray_ptr);
-
-		[DllImport(dllpath)]
-		private static extern HF_STATUS CreateRaytracer(
-			IntPtr mesh,
-			ref IntPtr out_raytracer
-		);
-
-		[DllImport(dllpath)]
-		private static extern HF_STATUS FireRay(
-			IntPtr ert,
-			ref float x,
-			ref float y,
-			ref float z,
-			float dx,
-			float dy,
-			float dz,
-			float max_distance,
-			ref bool result
-		);
-
-		[DllImport(dllpath)]
-		private static extern HF_STATUS FireSingleRayDistance(
-			IntPtr ert,
-			[In] float[] origin,
-			[In] float[] direction,
-			float max_distance,
-			ref float out_distance,
-			ref int out_meshid
-		);
-
-		[DllImport(dllpath, CharSet = CharSet.Ansi)]
-		private static extern HF_STATUS FireMultipleRays(
-			IntPtr ert,
-			[In, Out] float[] origins,
-			float[] directions,
-			int size,
-			float max_distance,
-			[MarshalAs(UnmanagedType.LPArray, ArraySubType=UnmanagedType.I1)] // C# Bools are 1byte, C++ bools are 4 byte
+        [DllImport(dllpath, CharSet = CharSet.Ansi)]
+        private static extern HF_STATUS FireMultipleRays(
+            IntPtr ert,
+            [In, Out] float[] origins,
+            float[] directions,
+            int size,
+            float max_distance,
+            [MarshalAs(UnmanagedType.LPArray, ArraySubType=UnmanagedType.I1)] // C# Bools are 1byte, C++ bools are 4 byte
             [Out]bool[] result_array                                          // Ensure this is checked for arrays or 1/4
-		);                                                                    // of the values will be garbage
+        );                                                                    // of the values will be garbage
 
-		[DllImport(dllpath)]
-		private static extern HF_STATUS FireMultipleDirectionsOneOrigin(
-			IntPtr bvh,
-			[In] float[] origin,
-			[In] float[] directions,
-			int size,
-			float max_distance,
-			[MarshalAs(UnmanagedType.LPArray, ArraySubType =UnmanagedType.I1)]
-			[Out] bool[] result_array
-		);
+        [DllImport(dllpath)]
+        private static extern HF_STATUS FireMultipleDirectionsOneOrigin(
+            IntPtr bvh,
+            [In] float[] origin,
+            [In] float[] directions,
+            int size,
+            float max_distance,
+            [MarshalAs(UnmanagedType.LPArray, ArraySubType =UnmanagedType.I1)]
+            [Out] bool[] result_array
+        );
 
-		[DllImport(dllpath)]
-		private static extern HF_STATUS FireMultipleOriginsOneDirection(
-			IntPtr bvh,
-			[In] float[] origin,
-			[In] float[] directions,
-			int size,
-			float max_distance,
-			[MarshalAs(UnmanagedType.LPArray, ArraySubType =UnmanagedType.I1)]
-			[Out] bool[] result_array
-		);
+        [DllImport(dllpath)]
+        private static extern HF_STATUS FireMultipleOriginsOneDirection(
+            IntPtr bvh,
+            [In] float[] origin,
+            [In] float[] directions,
+            int size,
+            float max_distance,
+            [MarshalAs(UnmanagedType.LPArray, ArraySubType =UnmanagedType.I1)]
+            [Out] bool[] result_array
+        );
+        
+        [DllImport(dllpath)]
+        private static extern HF_STATUS FireOcclusionRays(
+            IntPtr bvh,
+            [In] float[] origins,
+            [In] float[] directions,
+            int origin_size,
+            int direction_size,
+            float max_distance,
+            [MarshalAs(UnmanagedType.LPArray, ArraySubType =UnmanagedType.I1)]
+            [Out] bool[] result_array
+        );
+        
+        [DllImport(dllpath, CharSet = CharSet.Ansi)]
+        private static extern HF_STATUS DestroyRayTracer(IntPtr MeshPointer);
 
-		[DllImport(dllpath)]
-		private static extern HF_STATUS FireOcclusionRays(
-			IntPtr bvh,
-			[In] float[] origins,
-			[In] float[] directions,
-			int origin_size,
-			int direction_size,
-			float max_distance,
-			[MarshalAs(UnmanagedType.LPArray, ArraySubType =UnmanagedType.I1)]
-			[Out] bool[] result_array
-		);
+        [DllImport(dllpath)]
+        private static extern HF_STATUS DestroyRayResultVector(IntPtr analysis);
 
-		[DllImport(dllpath, CharSet = CharSet.Ansi)]
-		private static extern HF_STATUS DestroyRayTracer(IntPtr MeshPointer);
-
-		[DllImport(dllpath)]
-		private static extern HF_STATUS DestroyRayResultVector(IntPtr analysis);
-
-		[DllImport(dllpath)]
-		private static extern HF_STATUS FireRaysDistance(
-			IntPtr ert,
-			[In] float[] origins,
-			int num_origins,
-			[In] float[] directions,
-			int num_directions,
-			ref IntPtr out_results,
-			ref IntPtr out_data
-		);
-	}
+        [DllImport(dllpath)]
+        private static extern HF_STATUS FireRaysDistance(
+            IntPtr ert,
+            [In] float[] origins,
+            int num_origins,
+            [In] float[] directions,
+            int num_directions,
+            ref IntPtr out_results,
+            ref IntPtr out_data
+        );
+    }
 }

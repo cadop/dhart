@@ -1,7 +1,6 @@
 import pytest
-import numpy
 
-from humanfactorspy.pathfinding import DijkstraShortestPath, DijkstraFindAllShortestPaths, calculate_distance_and_predecessor
+from humanfactorspy.pathfinding import DijkstraShortestPath, DijkstraFindAllShortestPaths 
 from humanfactorspy.spatialstructures import Graph
 
 test_cost = "Test"
@@ -196,28 +195,4 @@ def test_AllToAllPaths(PathTestGraphAlternateCosts):
     # Now do the same for an alternate cost
     all_alt_paths = DijkstraFindAllShortestPaths(g, test_cost)
     AssertValidityOfAllToAllPaths(g, all_alt_paths, test_cost)
-
-
-def test_CalculateDistanceAndPredecessor():
-    # Create a graph, add some nodes and edges, then compress
-    g = Graph()
-
-    nodes = [(1, 2, 3), (4, 5, 6), (7, 8, 9), (10, 1, 2)]
-    g.AddEdgeToGraph(nodes[1], nodes[2], 20)
-    g.AddEdgeToGraph(nodes[0], nodes[2], 5)
-    g.AddEdgeToGraph(nodes[1], nodes[0], 10)
-
-    g.CompressToCSR()
-
-    # Calculate distance/predecessor matrix
-    distance_matrix, predecessor_matrix = calculate_distance_and_predecessor(g)
-
-    assert(distance_matrix[0][0] == 0)
-    assert(distance_matrix[1][0] == -1)
-
-
-    # Print output
-    print(distance_matrix)
-    print(predecessor_matrix)
-
 

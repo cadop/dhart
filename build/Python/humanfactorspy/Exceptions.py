@@ -19,15 +19,12 @@ class HF_STATUS(Enum):
     OUT_OF_RANGE = (
         -10
     )  # The requested datapoint was out of the bounds of the given structure
-    NO_PATH = -11  # No path was returned from the pathfinding ooperation
-    NO_COST = -12  # The given cost could not be found.
-    NOT_COMPRESSED = -13  # The graph needed to be compressed and it wasn't
+    NO_PATH = -11  # No path was returned from the pathfinding operation
 
 
 class HFException(Exception):
     """ Generic HumanFactorsException """
-    def __init__(self, message):
-        super().__init__(message)
+
 
 class InvalidOBJException(HFException):
     """ The provided An invalid OBJ file was specified.
@@ -35,35 +32,15 @@ class InvalidOBJException(HFException):
     This can be raised if the given filepath leads to a file that is not an
     OBJ file, the file is a malformed obj file.
     """
-    def __init__(self, message = ""):
-        super().__init__(message)
 
 
 class FileNotFoundException(HFException):
     """ The file at the given path given file was not found """
-    def __init__(self, message = ""):
-        super().__init__(message)
 
 
 class OutOfRangeException(HFException):
     """ The requested datapoint was out of the bounds of the given structure """
-    def __init__(self, message = ""):
-        super().__init__(message)
 
 
 class MissingDependencyException(HFException):
     """ One or more of the required dependencies for this operation were unable to be found """
-    def __init__(self, message = ""):
-        super().__init__(message)
-
-class LogicError(HFException):
-    """ A class was used improperly. """
-    def __init__(self, message = ""):
-        super().__init__(message)
-
-class InvalidCostOperation(HFException):
-    """ Tried to add an edge to a cost that didn't already exist in
-        the default cost set 
-    """
-    def __init__(self, message = ""):
-        super().__init__(message)

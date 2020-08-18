@@ -116,14 +116,6 @@ namespace HF::RayTracer {
 		*/
 		EmbreeRayTracer(std::vector<HF::Geometry::MeshInfo>& MI);
 
-
-		/*! \brief Construct a raytracer using another raytracer.
-		
-			\details Increments Embree's internal garbage collector to retain the scene and
-					 context. 
-		*/
-		EmbreeRayTracer(const EmbreeRayTracer& ERT2);
-
 		/// <summary>
 		/// Create a new Raytracer and generate its BVH from a flat array of vertices.
 		/// </summary>

@@ -105,9 +105,6 @@ namespace HumanFactors
         */    
         public bool IsValid() => x.IsFinite() && y.IsFinite() && z.IsFinite();
 
-        /*! \brief Construct a string representation of this vector's x, y, and z coordinates
-            \return A string representation of the x,y, and z coordinates of this vector. 
-        */
         public override string ToString()
         {
             return String.Format("({0:0.###}, {1:0.###}, {2:0.###})", x, y, z);

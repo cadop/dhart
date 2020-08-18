@@ -21,13 +21,12 @@ using System.Runtime.Remoting.Messaging;
     calculate ray intersections, but can be more complicated to manage compared
     to standard buffers of geometry.
 
-
     \see EmbreeRaytracer for an implementation of a raytracer using Intel's Embree Library as a backend.
  */
 
 namespace HumanFactors.RayTracing
 {
-	/*!
+    /*!
         \brief Cast rays with Intel's Embree raytracing library.
 
         \remarks
@@ -37,9 +36,9 @@ namespace HumanFactors.RayTracing
         \see EmbreeBVH for details on generating a BVH from geometry.
     */
 
-	public static class EmbreeRaytracer
+    public static class EmbreeRaytracer
 	{
-		/*!
+        /*!
             \brief Cast a single ray, and get a point in return if it intersects any geometry.
 
             \param bvh BVH of geometry to intersect.
@@ -68,7 +67,7 @@ namespace HumanFactors.RayTracing
 
         */
 
-		public static Vector3D IntersectForPoint(
+        public static Vector3D IntersectForPoint(
 			EmbreeBVH bvh,
 			float x,
 			float y,
@@ -77,9 +76,9 @@ namespace HumanFactors.RayTracing
 			float dy,
 			float dz,
 			float max_distance = -1
-		) => NativeMethods.C_IntersectPoint(bvh.Pointer, x, y, z, dx, dy, dz, max_distance);
+		) => NativeMethods.C_IntesectPoint(bvh.Pointer, x, y, z, dx, dy, dz, max_distance);
 
-		/*!
+        /*!
             \brief Cast a single ray, and get a point in return if it intersects any geometry.
 
             \param bvh BVH of geometry to intersect.
@@ -108,10 +107,10 @@ namespace HumanFactors.RayTracing
 
         */
 
-		public static Vector3D IntersectForPoint(EmbreeBVH bvh, Vector3D origin, Vector3D direction, float max_distance = -1)
+        public static Vector3D IntersectForPoint(EmbreeBVH bvh, Vector3D origin, Vector3D direction, float max_distance = -1)
 			=> IntersectForPoint(bvh, origin.x, origin.y, origin.z, direction.x, direction.y, direction.z, max_distance);
 
-		/*!
+        /*!
             \brief Cast multiple rays and recieve hitpoints in return.
 
             \param bvh  A valid BVH containing geometry to intersect with.
@@ -155,14 +154,14 @@ namespace HumanFactors.RayTracing
             ```
         */
 
-		public static Vector3D[] IntersectForPoints(
+        public static Vector3D[] IntersectForPoints(
 			EmbreeBVH bvh,
 			IEnumerable<Vector3D> origins,
 			IEnumerable<Vector3D> directions,
 			float max_distance = -1
 		) => NativeMethods.C_IntersectPoints(bvh.Pointer, origins, directions, max_distance);
 
-		/*!
+        /*!
             \brief Cast a single ray and get the distance to its hit and the meshID if it hit anything
 
             \param bvh A valid BVH containing the geometry to intersect with.
@@ -184,14 +183,14 @@ namespace HumanFactors.RayTracing
             `[1,0]`
         */
 
-		public static RayResult IntersectForDistance(
+        public static RayResult IntersectForDistance(
 			EmbreeBVH bvh,
 			Vector3D origin,
 			Vector3D direction,
 			float max_distance = -1
 		) => NativeMethods.C_IntersectRay(bvh.Pointer, origin, direction, max_distance);
 
-		/*!
+        /*!
             \brief Cast multiple rays and recieve the distance and meshid of geometry intersected by each in return.
 
             \param bvh  A valid BVH containing geometry to intersect with.
@@ -235,14 +234,14 @@ namespace HumanFactors.RayTracing
             ```
         */
 
-		public static RayResults IntersectForDistances(
+        public static RayResults IntersectForDistances(
 			EmbreeBVH bvh,
 			IEnumerable<Vector3D> origins,
 			IEnumerable<Vector3D> directions,
 			float max_distance = -1
 		) => new RayResults(NativeMethods.C_IntersectRays(bvh.Pointer, origins, directions, max_distance));
 
-		/*!
+        /*!
             \brief Determine if any geometry occludes a point from a direction.
 
             \param bvh A valid Embree BVH.
@@ -281,7 +280,7 @@ namespace HumanFactors.RayTracing
             `Ray 1: True, Ray 2 : False`
         */
 
-		public static bool[] IntersectOccluded(
+        public static bool[] IntersectOccluded(
 			EmbreeBVH bvh,
 			IEnumerable<Vector3D> origin,
 			IEnumerable<Vector3D> direction,

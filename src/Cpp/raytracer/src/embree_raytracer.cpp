@@ -384,17 +384,6 @@ namespace HF::RayTracer {
 		rtcInitIntersectContext(&context);
 	}
 
-	EmbreeRayTracer::EmbreeRayTracer(const EmbreeRayTracer& ERT2)
-	{
-		device = ERT2.device;
-		context = ERT2.context;
-		scene = ERT2.scene;
-		geometry = ERT2.geometry;
-
-		rtcRetainScene(scene);
-		rtcRetainDevice(device);
-	}
-
 	bool EmbreeRayTracer::FireOcclusionRay(float x, float y, float z, float dx, float dy, float dz, float distance, int mesh_id)
 	{
 		RTCRay ray;
@@ -528,7 +517,7 @@ namespace HF::RayTracer {
 
 		rtcRetainScene(scene);
 		rtcRetainDevice(device);
-		//for (auto g : geometry) rtcRetainGeometry(g);
+		//	for (auto g : geometry) rtcRetainGeometry(g);
 	}
 
 	EmbreeRayTracer::~EmbreeRayTracer() {

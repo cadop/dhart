@@ -11,7 +11,6 @@
 using std::unique_ptr;
 using std::make_unique;
 using std::vector;
-using std::string;
 
 using HF::SpatialStructures::Graph;
 using HF::SpatialStructures::Path;
@@ -166,33 +165,4 @@ C_INTERFACE CreateAllToAllPaths(
 	// IF we get here something went wrong.
 	return HF_STATUS::GENERIC_ERROR;
 	
-}
-
-C_INTERFACE CalculateDistanceAndPredecessor(
-	const Graph* g,
-	const char* cost_name,
-	vector<float>** out_dist_vector,
-	float** out_dist_data,
-	vector<int>** out_pred_vector,
-	int** out_pred_data
-) {
-
-	try {
-		//Try to create a boost graph from G and cost_type
-		auto bg = CreateBoostGraph(*g, string(cost_name));
-	
-		// Calculate Distance and predecessor matricies
-		DistanceAndPredecessor matricies = GenerateDistanceAndPred(*bg.get());
-
-		// Update Output
-		*out_dist_vector = matricies.dist;
-		*out_dist_data = matricies.dist->data();
-		*out_pred_vector = matricies.pred;
-		*out_pred_data = matricies.pred->data();
-	}
-	catch (HF::Exceptions::NoCost){
-		return HF_STATUS::NO_COST;
-	}
-
-	return HF_STATUS::OK;
 }

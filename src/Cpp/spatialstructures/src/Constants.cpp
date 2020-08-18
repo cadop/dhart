@@ -9,16 +9,13 @@
 #include <numeric>
 #include <cstdlib>
 #include <cmath>
-#include <cassert>
 
 float HF::SpatialStructures::roundhf(float f, float p, float r)
 {
-	assert(p > r);
-	return std::roundf(f * p) * r ;
+	return std::round(f * p) * r ;
 }
 
 float HF::SpatialStructures::trunchf(float f, float p, float r)
 {
-	assert(p > r);
 	return std::truncf(f * p) * r;
 }

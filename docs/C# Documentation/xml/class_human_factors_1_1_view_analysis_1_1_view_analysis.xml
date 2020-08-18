@@ -104,47 +104,13 @@
 <simplesect kind="return"><para>An ordered array of floats corresponding to the aggregated score for each node in nodes.</para>
 </simplesect>
 The rays for each node will be casted in parallel using all available cores on the host&apos;s machine.</para>
-<para><simplesect kind="remark"><para>This function is much lighter in memory than <ref refid="class_human_factors_1_1_view_analysis_1_1_view_analysis_1aec86f6a5bbc392de04357465994bab39" kindref="member">ViewAnalysisStandard</ref> since all operations are done in place on single floats. Use this as a faster alternative if the scores of nodes are all that&apos;s needed.</para>
+<para><simplesect kind="remark"><para>This function is much lighter in memory than <ref refid="class_human_factors_1_1_view_analysis_1_1_view_analysis_1aec86f6a5bbc392de04357465994bab39" kindref="member">ViewAnalysisStandard</ref> since all operations are done in place on single floats. Use this as a faster alternative if the scores of nodes are all that&apos;s needed. </para>
 </simplesect>
-<simplesect kind="par"><title>Examples</title><para></para>
-</simplesect>
-<programlisting filename="viewanalysis\test_viewanalysis.cs"><codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Load<sp/>the<sp/>plane<sp/>.obj<sp/>from<sp/>example<sp/>models,<sp/>and<sp/>rotate<sp/>it<sp/>from<sp/>y-up<sp/>to<sp/>z-up</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>mesh_path<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;ExampleModels/plane.obj&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MeshInfo<sp/>OBJ<sp/>=<sp/>OBJLoader.LoadOBJ(mesh_path,<sp/>CommonRotations.Zup_To_Yup);</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Create<sp/>a<sp/>BVH<sp/>from<sp/>the<sp/>plane</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>EmbreeBVH<sp/>bvh<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>EmbreeBVH(OBJ);</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vector3D<sp/>Point<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(0,<sp/>0,<sp/>0);</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vector3D[]<sp/>nodes<sp/>=<sp/>{<sp/>Point<sp/>};</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>num_rays<sp/>=<sp/>1000;</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-</programlisting><programlisting filename="viewanalysis\test_viewanalysis.cs"><codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Define<sp/>the<sp/>nodes<sp/>to<sp/>evaluate</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vector3D[]<sp/>nodes<sp/>=<sp/>{</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(0,0,1),</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(0,0,2),</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(0,0,3)</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Set<sp/>maximum<sp/>number<sp/>of<sp/>rays,<sp/>then<sp/>conduct<sp/>analysis</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>num_rays<sp/>=<sp/>1000;</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ManagedFloatArray<sp/>results<sp/>=<sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.<ref refid="namespace_human_factors_1_1_view_analysis" kindref="compound">ViewAnalysis</ref>.<ref refid="class_human_factors_1_1_view_analysis_1_1_view_analysis" kindref="compound">ViewAnalysis</ref>.<ref refid="class_human_factors_1_1_view_analysis_1_1_view_analysis_1a1cdb30c740e2efd5a1a01ef633c734ac" kindref="member">ViewAnalysisAggregate</ref>(</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bvh,</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>nodes,</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>num_rays,</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>type:<ref refid="namespace_human_factors_1_1_view_analysis_1ae24b8f5d9783a270e51183ff2eca765c" kindref="member">ViewAggregateType</ref>.COUNT</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>);</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Print<sp/>results.<sp/>The<sp/>number<sp/>of<sp/>rays<sp/>should<sp/>get<sp/>lower<sp/>with<sp/>each<sp/>element,<sp/>since<sp/>each<sp/>node</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>is<sp/>further<sp/>away<sp/>from<sp/>the<sp/>plane<sp/>than<sp/>the<sp/>last</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Debug.WriteLine(results);</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-</programlisting><computeroutput>[480, 451, 428]</computeroutput> </para>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/Csharp/packages/viewanalysis/src/ViewAnalysis.cs" line="83" column="41"/>
+        <location file="src/Csharp/packages/viewanalysis/src/ViewAnalysis.cs" line="77" column="41"/>
       </memberdef>
       <memberdef kind="function" id="class_human_factors_1_1_view_analysis_1_1_view_analysis_1aec86f6a5bbc392de04357465994bab39" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="class_human_factors_1_1_view_analysis_1_1_result_array" kindref="compound">ResultArray</ref></type>
@@ -236,64 +202,13 @@ The rays for each node will be casted in parallel using all available cores on t
 The rays for each node will be casted in parallel using all available cores on the host&apos;s machine.</para>
 <para><simplesect kind="warning"><para>The number of rays casted may not exactly match ray_count depending on the provided field of view restrictions.</para>
 </simplesect>
-<simplesect kind="note"><para>The hitpoints for each ray in the returned array can be determined using the directions <ref refid="class_human_factors_1_1_view_analysis_1_1_view_analysis_1abc1d51bdf752a4fa36af012e90cc8acb" kindref="member">SphericallyDistributeRays()</ref> with the same fov and ray_count parameters. Failures to intersect geometry will return -1.</para>
-</simplesect>
-<simplesect kind="par"><title>Example</title><para><programlisting filename="viewanalysis\test_viewanalysis.cs"><codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Load<sp/>the<sp/>plane<sp/>.obj<sp/>from<sp/>example<sp/>models,<sp/>and<sp/>rotate<sp/>it<sp/>from<sp/>y-up<sp/>to<sp/>z-up</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>mesh_path<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;ExampleModels/plane.obj&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MeshInfo<sp/>OBJ<sp/>=<sp/>OBJLoader.LoadOBJ(mesh_path,<sp/>CommonRotations.Zup_To_Yup);</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Create<sp/>a<sp/>BVH<sp/>from<sp/>the<sp/>plane</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>EmbreeBVH<sp/>bvh<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>EmbreeBVH(OBJ);</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vector3D<sp/>Point<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(0,<sp/>0,<sp/>0);</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vector3D[]<sp/>nodes<sp/>=<sp/>{<sp/>Point<sp/>};</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>num_rays<sp/>=<sp/>1000;</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-</programlisting><programlisting filename="viewanalysis\test_viewanalysis.cs"><codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Define<sp/>the<sp/>nodes<sp/>to<sp/>evaluate</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vector3D[]<sp/>nodes<sp/>=<sp/>{</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(0,0,1),</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(1,1,1),</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(0,0,3)</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Set<sp/>maximum<sp/>number<sp/>of<sp/>rays,<sp/>then<sp/>conduct<sp/>analysis</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>num_rays<sp/>=<sp/>10;</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Conduct<sp/>view<sp/>analysis<sp/>and<sp/>get<sp/>all<sp/>the<sp/>results</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>results<sp/>=<sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.<ref refid="namespace_human_factors_1_1_view_analysis" kindref="compound">ViewAnalysis</ref>.<ref refid="class_human_factors_1_1_view_analysis_1_1_view_analysis" kindref="compound">ViewAnalysis</ref>.<ref refid="class_human_factors_1_1_view_analysis_1_1_view_analysis_1aec86f6a5bbc392de04357465994bab39" kindref="member">ViewAnalysisStandard</ref>(bvh,<sp/>nodes,<sp/>num_rays);</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Iterate<sp/>through<sp/>every<sp/>node<sp/>and<sp/>print<sp/>the<sp/>results</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>node_index<sp/>=<sp/>0;<sp/>node_index<sp/>&lt;<sp/>nodes.Length;<sp/>node_index++)</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>node<sp/>=<sp/>nodes[node_index];</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>print<sp/>=<sp/>node.ToString()<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;:<sp/>(&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>ray_index<sp/>=<sp/>0;<sp/>ray_index<sp/>&lt;<sp/>num_rays;<sp/>ray_index++)</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Get<sp/>the<sp/>result<sp/>for<sp/>the<sp/>current<sp/>node<sp/>at<sp/>the<sp/>current<sp/>ray</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>result<sp/>=<sp/>results[node_index][ray_index];</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>print<sp/>+=<sp/>result.ToString();</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Add<sp/>a<sp/>comma<sp/>if<sp/>it<sp/>isn&apos;t<sp/>the<sp/>last<sp/>element</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(ray_index<sp/>!=<sp/>num_rays<sp/>-<sp/>1)</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>print<sp/>+=<sp/></highlight><highlight class="stringliteral">&quot;,<sp/>&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>print<sp/>+=<sp/></highlight><highlight class="stringliteral">&quot;)&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Print<sp/>the<sp/>line</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Debug.WriteLine(print);</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-</programlisting> <programlisting><codeline><highlight class="normal">(0,<sp/>0,<sp/>1):<sp/>([-1,<sp/>-1],<sp/>[5.292,<sp/>0],<sp/>[-1,<sp/>-1],<sp/>[-1,<sp/>-1],<sp/>[3.098,<sp/>0],<sp/>[5.407,<sp/>0],<sp/>[13.07,<sp/>0],<sp/>[-1,<sp/>-1],<sp/>[3.529,<sp/>0],<sp/>[-1,<sp/>-1])</highlight></codeline>
-<codeline><highlight class="normal">(1,<sp/>1,<sp/>1):<sp/>([-1,<sp/>-1],<sp/>[5.292,<sp/>0],<sp/>[-1,<sp/>-1],<sp/>[-1,<sp/>-1],<sp/>[3.098,<sp/>0],<sp/>[5.407,<sp/>0],<sp/>[13.07,<sp/>0],<sp/>[-1,<sp/>-1],<sp/>[3.529,<sp/>0],<sp/>[-1,<sp/>-1])</highlight></codeline>
-<codeline><highlight class="normal">(0,<sp/>0,<sp/>3):<sp/>([-1,<sp/>-1],<sp/>[9.211,<sp/>0],<sp/>[-1,<sp/>-1],<sp/>[-1,<sp/>-1],<sp/>[5.394,<sp/>0],<sp/>[9.413,<sp/>0],<sp/>[-1,<sp/>-1],<sp/>[-1,<sp/>-1],<sp/>[6.144,<sp/>0],<sp/>[-1,<sp/>-1])</highlight></codeline>
-</programlisting> </para>
+<simplesect kind="note"><para>The hitpoints for each ray in the returned array can be determined using the directions <ref refid="class_human_factors_1_1_view_analysis_1_1_view_analysis_1abc1d51bdf752a4fa36af012e90cc8acb" kindref="member">SphericallyDistributeRays()</ref> with the same fov and ray_count parameters. Failures to intersect geometry will return -1. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/Csharp/packages/viewanalysis/src/ViewAnalysis.cs" line="141" column="35"/>
+        <location file="src/Csharp/packages/viewanalysis/src/ViewAnalysis.cs" line="126" column="35"/>
       </memberdef>
       <memberdef kind="function" id="class_human_factors_1_1_view_analysis_1_1_view_analysis_1abc1d51bdf752a4fa36af012e90cc8acb" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="class_human_factors_1_1_view_analysis_1_1_direction_array" kindref="compound">DirectionArray</ref></type>
@@ -345,24 +260,15 @@ The rays for each node will be casted in parallel using all available cores on t
 </parameterlist>
 <simplesect kind="return"><para>An array of equally distributed points on a unit sphere.</para>
 </simplesect>
-<simplesect kind="warning"><para>The number of rays casted may not exactly match <computeroutput>ray_count</computeroutput> depending on the provided field of view restrictions.</para>
+<simplesect kind="warning"><para>The number of rays casted may not exactly match ray_count depending on the provided field of view restrictions.</para>
 </simplesect>
-<simplesect kind="note"><para>This is the same function used internally by view analysis to equally distribute ray directions.</para>
-</simplesect>
-<simplesect kind="par"><title>Example</title><para><programlisting filename="viewanalysis\test_viewanalysis.cs"><codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Equally<sp/>distribute<sp/>10<sp/>rays</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>var<sp/>results<sp/>=<sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.<ref refid="namespace_human_factors_1_1_view_analysis" kindref="compound">ViewAnalysis</ref>.<ref refid="class_human_factors_1_1_view_analysis_1_1_view_analysis" kindref="compound">ViewAnalysis</ref>.<ref refid="class_human_factors_1_1_view_analysis_1_1_view_analysis_1abc1d51bdf752a4fa36af012e90cc8acb" kindref="member">SphericallyDistributeRays</ref>(10);</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Print<sp/>results</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Debug.WriteLine(results);</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-</programlisting><computeroutput>[0, -1, 0, -0.2650034, -0.8181818, . . . -0.7649929, 0.4396428, 0.8181818, 0.3705303]</computeroutput> </para>
+<simplesect kind="note"><para>This is the same function used internally by view analysis to equally distribute ray directions. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/Csharp/packages/viewanalysis/src/ViewAnalysis.cs" line="178" column="38"/>
+        <location file="src/Csharp/packages/viewanalysis/src/ViewAnalysis.cs" line="160" column="38"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -373,7 +279,7 @@ The rays for each node will be casted in parallel using all available cores on t
 </simplesect>
 </para>
     </detaileddescription>
-    <location file="src/Csharp/packages/viewanalysis/src/ViewAnalysis.cs" line="51" column="19" bodyfile="src/Csharp/packages/viewanalysis/src/ViewAnalysis.cs" bodystart="52" bodyend="183"/>
+    <location file="src/Csharp/packages/viewanalysis/src/ViewAnalysis.cs" line="51" column="19" bodyfile="src/Csharp/packages/viewanalysis/src/ViewAnalysis.cs" bodystart="52" bodyend="165"/>
     <listofallmembers>
       <member refid="class_human_factors_1_1_view_analysis_1_1_view_analysis_1abc1d51bdf752a4fa36af012e90cc8acb" prot="public" virt="non-virtual"><scope>HumanFactors::ViewAnalysis::ViewAnalysis</scope><name>SphericallyDistributeRays</name></member>
       <member refid="class_human_factors_1_1_view_analysis_1_1_view_analysis_1a1cdb30c740e2efd5a1a01ef633c734ac" prot="public" virt="non-virtual"><scope>HumanFactors::ViewAnalysis::ViewAnalysis</scope><name>ViewAnalysisAggregate</name></member>

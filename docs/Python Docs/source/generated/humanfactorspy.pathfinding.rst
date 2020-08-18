@@ -28,10 +28,6 @@ humanfactorspy.pathfinding
     
     ConvertNodesToIds
     
-    DijkstraFindAllShortestPaths
-    
     DijkstraShortestPath
-    
-    calculate_distance_and_predecessor
     
 

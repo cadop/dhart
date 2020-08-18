@@ -81,7 +81,7 @@ Just a call back to the base functionality of nativeobject.</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/Csharp/packages/geometry/src/MeshInfo.cs" line="94" column="18" bodyfile="src/Csharp/packages/geometry/src/MeshInfo.cs" bodystart="94" bodyend="96"/>
+        <location file="src/Csharp/packages/geometry/src/MeshInfo.cs" line="92" column="18" bodyfile="src/Csharp/packages/geometry/src/MeshInfo.cs" bodystart="92" bodyend="94"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -150,35 +150,15 @@ Just a call back to the base functionality of nativeobject.</para>
 <parametername><ref refid="class_human_factors_1_1_exceptions_1_1_invalid_mesh_exception" kindref="compound">HumanFactors.Exceptions.InvalidMeshException</ref></parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The input indices and vertices result in an invalid mesh.</para>
+<para>The input indices and vertices result in an invalid mesh. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="par"><title>Example</title><para><programlisting filename="geometry\test_geometry.cs"><codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>These<sp/>vertices/indices<sp/>are<sp/>directly<sp/>taken<sp/>from<sp/>the<sp/>plane<sp/>OBJ<sp/>in<sp/>example<sp/>models.</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Every<sp/>3<sp/>floats<sp/>represent<sp/>the<sp/>x,y,z<sp/>locations<sp/>for<sp/>a<sp/>seperate<sp/>vertex.<sp/>It<sp/>takes<sp/>only</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>4<sp/>vertices<sp/>to<sp/>make<sp/>a<sp/>plane.<sp/></highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">[]<sp/>vertices<sp/>=<sp/>{<sp/></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-20.079360961914062f,<sp/>0.0f,<sp/>18.940643310546875f,</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-20.079360961914062f,<sp/>0.0f,<sp/>-18.842348098754883f,</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>20.140586853027344f,<sp/>0.0f,<sp/>18.940643310546875f,<sp/></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>20.140586853027344f,<sp/>0.0f,<sp/>-18.842348098754883f<sp/></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Every<sp/>3<sp/>ints<sp/>represent<sp/>the<sp/>indexes<sp/>of<sp/>vertices<sp/>for<sp/>a<sp/>seperate<sp/>triangle.<sp/></highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">[]<sp/>indices<sp/>=<sp/>{<sp/></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>3,<sp/>1,<sp/>0,<sp/></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>2,<sp/>3,<sp/>0<sp/></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Construct<sp/>a<sp/>new<sp/>meshinfo<sp/>instance<sp/>with<sp/>these<sp/>elements</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.<ref refid="namespace_human_factors_1_1_geometry" kindref="compound">Geometry</ref>.<ref refid="class_human_factors_1_1_geometry_1_1_mesh_info" kindref="compound">MeshInfo</ref><sp/>Mesh<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.<ref refid="namespace_human_factors_1_1_geometry" kindref="compound">Geometry</ref>.<ref refid="class_human_factors_1_1_geometry_1_1_mesh_info" kindref="compound">MeshInfo</ref>(indices,<sp/>vertices);</highlight></codeline>
-</programlisting></para>
-</simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/Csharp/packages/geometry/src/MeshInfo.cs" line="117" column="16" bodyfile="src/Csharp/packages/geometry/src/MeshInfo.cs" bodystart="117" bodyend="119"/>
+        <location file="src/Csharp/packages/geometry/src/MeshInfo.cs" line="111" column="16" bodyfile="src/Csharp/packages/geometry/src/MeshInfo.cs" bodystart="111" bodyend="113"/>
       </memberdef>
       <memberdef kind="function" id="class_human_factors_1_1_geometry_1_1_mesh_info_1a3f9bd73c9c82e777bb083439d457b8ad" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -226,33 +206,13 @@ Just a call back to the base functionality of nativeobject.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="remark"><para>See the other overload for this function for use with <ref refid="class_human_factors_1_1_geometry_1_1_common_rotations" kindref="compound">CommonRotations</ref>.</para>
-</simplesect>
-<simplesect kind="par"><title>Example</title><para><programlisting filename="geometry\test_geometry.cs"><codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>These<sp/>vertices/indices<sp/>are<sp/>directly<sp/>taken<sp/>from<sp/>the<sp/>plane<sp/>OBJ<sp/>in<sp/>example<sp/>models.</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Every<sp/>3<sp/>floats<sp/>represent<sp/>the<sp/>x,y,z<sp/>locations<sp/>for<sp/>a<sp/>seperate<sp/>vertex.<sp/>It<sp/>takes<sp/>only</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>4<sp/>vertices<sp/>to<sp/>make<sp/>a<sp/>plane.<sp/></highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">[]<sp/>vertices<sp/>=<sp/>{<sp/></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-20.079360961914062f,<sp/>0.0f,<sp/>18.940643310546875f,</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-20.079360961914062f,<sp/>0.0f,<sp/>-18.842348098754883f,</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>20.140586853027344f,<sp/>0.0f,<sp/>18.940643310546875f,<sp/></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>20.140586853027344f,<sp/>0.0f,<sp/>-18.842348098754883f<sp/></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Every<sp/>3<sp/>ints<sp/>represent<sp/>the<sp/>indexes<sp/>of<sp/>vertices<sp/>for<sp/>a<sp/>seperate<sp/>triangle.<sp/></highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">[]<sp/>indices<sp/>=<sp/>{<sp/></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>3,<sp/>1,<sp/>0,<sp/></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>2,<sp/>3,<sp/>0<sp/></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Construct<sp/>a<sp/>new<sp/>meshinfo<sp/>instance<sp/>with<sp/>these<sp/>elements</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.<ref refid="namespace_human_factors_1_1_geometry" kindref="compound">Geometry</ref>.<ref refid="class_human_factors_1_1_geometry_1_1_mesh_info" kindref="compound">MeshInfo</ref><sp/>Mesh<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.<ref refid="namespace_human_factors_1_1_geometry" kindref="compound">Geometry</ref>.<ref refid="class_human_factors_1_1_geometry_1_1_mesh_info" kindref="compound">MeshInfo</ref>(indices,<sp/>vertices);</highlight></codeline>
-</programlisting><programlisting filename="geometry\test_geometry.cs"></programlisting></para>
+<simplesect kind="remark"><para>See the other overload for this function for use with <ref refid="class_human_factors_1_1_geometry_1_1_common_rotations" kindref="compound">CommonRotations</ref>. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/Csharp/packages/geometry/src/MeshInfo.cs" line="137" column="21"/>
+        <location file="src/Csharp/packages/geometry/src/MeshInfo.cs" line="126" column="13"/>
       </memberdef>
       <memberdef kind="function" id="class_human_factors_1_1_geometry_1_1_mesh_info_1a62f20076e25f8f2c23c9ca473a98ed9d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -276,37 +236,13 @@ Just a call back to the base functionality of nativeobject.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="see"><para><ref refid="class_human_factors_1_1_geometry_1_1_common_rotations" kindref="compound">CommonRotations</ref> for commonly used rotations such as Yup to Zup.</para>
-</simplesect>
-<simplesect kind="par"><title>Example</title><para><programlisting filename="geometry\test_geometry.cs"><codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>These<sp/>vertices/indices<sp/>are<sp/>directly<sp/>taken<sp/>from<sp/>the<sp/>plane<sp/>OBJ<sp/>in<sp/>example<sp/>models.</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Every<sp/>3<sp/>floats<sp/>represent<sp/>the<sp/>x,y,z<sp/>locations<sp/>for<sp/>a<sp/>seperate<sp/>vertex.<sp/>It<sp/>takes<sp/>only</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>4<sp/>vertices<sp/>to<sp/>make<sp/>a<sp/>plane.<sp/></highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">[]<sp/>vertices<sp/>=<sp/>{<sp/></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-20.079360961914062f,<sp/>0.0f,<sp/>18.940643310546875f,</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-20.079360961914062f,<sp/>0.0f,<sp/>-18.842348098754883f,</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>20.140586853027344f,<sp/>0.0f,<sp/>18.940643310546875f,<sp/></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>20.140586853027344f,<sp/>0.0f,<sp/>-18.842348098754883f<sp/></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Every<sp/>3<sp/>ints<sp/>represent<sp/>the<sp/>indexes<sp/>of<sp/>vertices<sp/>for<sp/>a<sp/>seperate<sp/>triangle.<sp/></highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">[]<sp/>indices<sp/>=<sp/>{<sp/></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>3,<sp/>1,<sp/>0,<sp/></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>2,<sp/>3,<sp/>0<sp/></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Construct<sp/>a<sp/>new<sp/>meshinfo<sp/>instance<sp/>with<sp/>these<sp/>elements</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.<ref refid="namespace_human_factors_1_1_geometry" kindref="compound">Geometry</ref>.<ref refid="class_human_factors_1_1_geometry_1_1_mesh_info" kindref="compound">MeshInfo</ref><sp/>Mesh<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.<ref refid="namespace_human_factors_1_1_geometry" kindref="compound">Geometry</ref>.<ref refid="class_human_factors_1_1_geometry_1_1_mesh_info" kindref="compound">MeshInfo</ref>(indices,<sp/>vertices);</highlight></codeline>
-</programlisting><programlisting filename="geometry\test_geometry.cs"><codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Rotate<sp/>the<sp/>mesh<sp/>using<sp/>a<sp/>common<sp/>rotation<sp/>to<sp/>convert<sp/>it<sp/>from<sp/>yup<sp/>to<sp/>zup</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Mesh.RotateMesh(CommonRotations.Yup_To_Zup);</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-</programlisting></para>
+<simplesect kind="see"><para><ref refid="class_human_factors_1_1_geometry_1_1_common_rotations" kindref="compound">CommonRotations</ref> for commonly used rotations such as Yup to Zup. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/Csharp/packages/geometry/src/MeshInfo.cs" line="150" column="21"/>
+        <location file="src/Csharp/packages/geometry/src/MeshInfo.cs" line="135" column="13"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -374,7 +310,7 @@ Just a call back to the base functionality of nativeobject.</para>
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="src/Csharp/packages/geometry/src/MeshInfo.cs" line="46" column="11" bodyfile="src/Csharp/packages/geometry/src/MeshInfo.cs" bodystart="47" bodyend="151"/>
+    <location file="src/Csharp/packages/geometry/src/MeshInfo.cs" line="46" column="11" bodyfile="src/Csharp/packages/geometry/src/MeshInfo.cs" bodystart="47" bodyend="136"/>
     <listofallmembers>
       <member refid="class_human_factors_1_1_geometry_1_1_mesh_info_1ab5359e337ca952f01134eeef7a4c0cb9" prot="private" virt="non-virtual"><scope>HumanFactors::Geometry::MeshInfo</scope><name>CalculatePresure</name></member>
       <member refid="class_human_factors_1_1_native_utils_1_1_native_object_1a33340c37b83300ec09f6fc7982d2fb70" prot="public" virt="non-virtual"><scope>HumanFactors::Geometry::MeshInfo</scope><name>IsInvalid</name></member>

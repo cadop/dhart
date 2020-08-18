@@ -110,44 +110,15 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="remark"><para>Consider calling <ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1a97e8b50b5bbb182d12416e7638dad9e9" kindref="member">IntersectForPoints</ref> when casting mutliple rays at once since it can make use of parallel processing to drastically reduce the time it takes to cast each ray.</para>
+<simplesect kind="remark"><para>Consider calling <ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1ae3364703368c059a9e5bda35ca41492a" kindref="member">IntersectForPoints</ref> when casting mutliple rays at once since it can make use of parallel processing to drastically reduce the time it takes to cast each ray.</para>
 </simplesect>
-<simplesect kind="return"><para>A <ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref> containing the hitpoint. If no hit was detected, the point will be invalid. This can easily be checked using <ref refid="struct_human_factors_1_1_vector3_d_1ad5ca9e5b9921fc94c5cbdb139a33cc54" kindref="member">Vector3D.IsValid</ref>.</para>
-</simplesect>
-<simplesect kind="par"><title>Example</title><para><programlisting filename="raytracer\test_raytracer.cs"><codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Load<sp/>an<sp/>OBJ<sp/>from<sp/>a<sp/>filepath<sp/><sp/>into<sp/>a<sp/>new<sp/>meshinfo<sp/>instance</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>good_mesh_path<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;ExampleModels/plane.obj&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MeshInfo<sp/>Mesh<sp/>=<sp/>OBJLoader.LoadOBJ(good_mesh_path,<sp/>CommonRotations.Yup_To_Zup);</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Construct<sp/>a<sp/>BVH<sp/>from<sp/>the<sp/>mesh</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>EmbreeBVH<sp/>BVH<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>EmbreeBVH(Mesh);</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-</programlisting><programlisting filename="raytracer\test_raytracer.cs"><codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Define<sp/>an<sp/>origin<sp/>and<sp/>direction</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vector3D<sp/>origin<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(0,<sp/>0,<sp/>1);</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vector3D<sp/>direction<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(0,<sp/>0,<sp/>-1);</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Cast<sp/>a<sp/>ray<sp/>from<sp/>origin<sp/>an<sp/>direction<sp/>and<sp/>get<sp/>the<sp/>point</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vector3D<sp/>good_point<sp/>=<sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.<ref refid="namespace_human_factors_1_1_ray_tracing" kindref="compound">RayTracing</ref>.<ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer" kindref="compound">EmbreeRaytracer</ref>.<ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1afc149e5c713d0fcce5d142c82fd7e292" kindref="member">IntersectForPoint</ref>(BVH,<sp/>origin,<sp/>direction,<sp/>-1);</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Print<sp/>the<sp/>point</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Debug.WriteLine(good_point);</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-</programlisting><computeroutput>(0, 0, 0)</computeroutput> <programlisting filename="raytracer\test_raytracer.cs"><codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Do<sp/>the<sp/>same<sp/>in<sp/>a<sp/>direction<sp/>we<sp/>know<sp/>will<sp/>miss</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vector3D<sp/>bad_direction<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(0,<sp/>0,<sp/>1);</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vector3D<sp/>bad_point<sp/>=<sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.<ref refid="namespace_human_factors_1_1_ray_tracing" kindref="compound">RayTracing</ref>.<ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer" kindref="compound">EmbreeRaytracer</ref>.<ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1afc149e5c713d0fcce5d142c82fd7e292" kindref="member">IntersectForPoint</ref>(BVH,<sp/>origin,<sp/>bad_direction,<sp/>-1);</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Print<sp/>the<sp/>result<sp/>of<sp/>the<sp/>missed<sp/>ray</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Debug.WriteLine(bad_point);</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-</programlisting><computeroutput>(NaN, NaN, NaN)</computeroutput> </para>
+<simplesect kind="return"><para>A <ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref> containing the hitpoint. If no hit was detected, the point will be invalid. This can easily be checked using <ref refid="struct_human_factors_1_1_vector3_d_1ad5ca9e5b9921fc94c5cbdb139a33cc54" kindref="member">Vector3D.IsValid</ref>. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/Csharp/packages/raytracer/src/EmbreeRayTracer.cs" line="70" column="32"/>
+        <location file="src/Csharp/packages/raytracer/src/EmbreeRayTracer.cs" line="62" column="24"/>
       </memberdef>
       <memberdef kind="function" id="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1a2d6fd1eb3e172c59014d6b1b24a2c1c9" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref></type>
@@ -211,50 +182,18 @@
 <simplesect kind="return"><para>A <ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref> containing the hitpoint. If no hit was detected, the point will be invalid. This can easily be checked using <ref refid="struct_human_factors_1_1_vector3_d_1ad5ca9e5b9921fc94c5cbdb139a33cc54" kindref="member">Vector3D.IsValid</ref>.</para>
 </simplesect>
 This calls the other overload with the components of origin and direction.</para>
-<para><simplesect kind="remark"><para>Consider calling <ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1a97e8b50b5bbb182d12416e7638dad9e9" kindref="member">IntersectForPoints</ref> when casting mutliple rays at once since it can make use of parallel processing to drastically reduce the time it takes to get the results of every ray.</para>
-</simplesect>
-<simplesect kind="par"><title>Example</title><para><programlisting filename="raytracer\test_raytracer.cs"><codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Load<sp/>an<sp/>OBJ<sp/>from<sp/>a<sp/>filepath<sp/><sp/>into<sp/>a<sp/>new<sp/>meshinfo<sp/>instance</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>good_mesh_path<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;ExampleModels/plane.obj&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MeshInfo<sp/>Mesh<sp/>=<sp/>OBJLoader.LoadOBJ(good_mesh_path,<sp/>CommonRotations.Yup_To_Zup);</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Construct<sp/>a<sp/>BVH<sp/>from<sp/>the<sp/>mesh</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>EmbreeBVH<sp/>BVH<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>EmbreeBVH(Mesh);</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-</programlisting><programlisting filename="raytracer\test_raytracer.cs"><codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Define<sp/>the<sp/>X,Y,Z<sp/>coordinates<sp/>for<sp/>the<sp/>origin<sp/>and<sp/>direction</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>x<sp/>=<sp/>0;<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>y<sp/>=<sp/>0;<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z<sp/>=<sp/>1;</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>dx<sp/>=<sp/>0;<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>dy<sp/>=<sp/>0;<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>dz<sp/>=<sp/>-1;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Cast<sp/>a<sp/>ray<sp/>from<sp/>origin<sp/>an<sp/>direction<sp/>and<sp/>get<sp/>the<sp/>point</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vector3D<sp/>good_point<sp/>=<sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.<ref refid="namespace_human_factors_1_1_ray_tracing" kindref="compound">RayTracing</ref>.<ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer" kindref="compound">EmbreeRaytracer</ref>.<ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1afc149e5c713d0fcce5d142c82fd7e292" kindref="member">IntersectForPoint</ref>(</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BVH,<sp/>x,<sp/>y,<sp/>z,<sp/>dx,<sp/>dy,<sp/>dz,<sp/>-1</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>);</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Print<sp/>the<sp/>point</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Debug.WriteLine(good_point);</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-</programlisting><computeroutput>(0, 0, 0)</computeroutput> <programlisting filename="raytracer\test_raytracer.cs"><codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Do<sp/>the<sp/>same<sp/>in<sp/>a<sp/>direction<sp/>we<sp/>know<sp/>will<sp/>miss</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bad_dir_x<sp/>=<sp/>0;<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bad_dir_y<sp/>=<sp/>0;<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bad_dir_z<sp/>=<sp/>1;</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vector3D<sp/>bad_point<sp/>=<sp/><ref refid="namespace_human_factors" kindref="compound">HumanFactors</ref>.<ref refid="namespace_human_factors_1_1_ray_tracing" kindref="compound">RayTracing</ref>.<ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer" kindref="compound">EmbreeRaytracer</ref>.<ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1afc149e5c713d0fcce5d142c82fd7e292" kindref="member">IntersectForPoint</ref>(</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BVH,<sp/>x,<sp/>y,<sp/>z,<sp/>bad_dir_x,<sp/>bad_dir_y,<sp/>bad_dir_z,<sp/>-1</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>);</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Print<sp/>the<sp/>result<sp/>of<sp/>the<sp/>missed<sp/>ray</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Debug.WriteLine(bad_point);</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-</programlisting><computeroutput>(NaN, NaN, NaN)</computeroutput> </para>
+<para><simplesect kind="remark"><para>Consider calling <ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1ae3364703368c059a9e5bda35ca41492a" kindref="member">IntersectForPoints</ref> when casting mutliple rays at once since it can make use of parallel processing to drastically reduce the time it takes to get the results of every ray. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/Csharp/packages/raytracer/src/EmbreeRayTracer.cs" line="110" column="32"/>
+        <location file="src/Csharp/packages/raytracer/src/EmbreeRayTracer.cs" line="95" column="24"/>
       </memberdef>
-      <memberdef kind="function" id="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1a97e8b50b5bbb182d12416e7638dad9e9" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1ae3364703368c059a9e5bda35ca41492a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="struct_human_factors_1_1_vector3_d" kindref="compound">Vector3D</ref>[]</type>
         <definition>static Vector3D [] HumanFactors.RayTracing.EmbreeRaytracer.IntersectForPoints</definition>
-        <argsstring>(EmbreeBVH bvh, IEnumerable&lt; Vector3D &gt; origins, IEnumerable&lt; Vector3D &gt; directions, float max_distance=-1)</argsstring>
+        <argsstring>(EmbreeBVH bvh, IEnumerable&lt; Vector3D &gt; origins, IEnumerable&lt; Vector3D &gt; directions, float max_distance)</argsstring>
         <name>IntersectForPoints</name>
         <param>
           <type><ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h" kindref="compound">EmbreeBVH</ref></type>
@@ -271,7 +210,6 @@ This calls the other overload with the components of origin and direction.</para
         <param>
           <type>float</type>
           <declname>max_distance</declname>
-          <defval>-1</defval>
         </param>
         <briefdescription>
 <para>Cast multiple rays and recieve hitpoints in return. </para>
@@ -330,54 +268,20 @@ Can be casted in 3 configurations: </para>
 <parametername>System.ArgumentException</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Length of directions and origins did not match any of the valid cases.</para>
+<para>Length of directions and origins did not match any of the valid cases. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="par"><title>Example</title><para><programlisting filename="raytracer\test_raytracer.cs"><codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Load<sp/>an<sp/>OBJ<sp/>from<sp/>a<sp/>filepath<sp/><sp/>into<sp/>a<sp/>new<sp/>meshinfo<sp/>instance</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>good_mesh_path<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;ExampleModels/plane.obj&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MeshInfo<sp/>Mesh<sp/>=<sp/>OBJLoader.LoadOBJ(good_mesh_path,<sp/>CommonRotations.Yup_To_Zup);</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Construct<sp/>a<sp/>BVH<sp/>from<sp/>the<sp/>mesh</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>EmbreeBVH<sp/>BVH<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>EmbreeBVH(Mesh);</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-</programlisting><programlisting filename="raytracer\test_raytracer.cs"><codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>num_points<sp/>=<sp/>5;</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Create<sp/>and<sp/>fill<sp/>a<sp/>vector<sp/>of<sp/>origins<sp/>and<sp/>directions</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vector3D[]<sp/>origin_vector<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D[num_points];</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vector3D[]<sp/>direction_vector<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D[num_points];</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>num_points;<sp/>i++)</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>origin_vector[i]<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(0,<sp/>i,<sp/>1);</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>direction_vector[i]<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(0,<sp/>0,<sp/>-1);</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Cast<sp/>all<sp/>rays<sp/>in<sp/>a<sp/>single<sp/>call</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vector3D[]<sp/>results<sp/>=<sp/>EmbreeRaytracer.IntersectForPoints(BVH,<sp/>origin_vector,<sp/>direction_vector,<sp/>-1);</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Print<sp/>results</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>num_points;<sp/>i++)</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Debug.WriteLine(String.Format(</highlight><highlight class="stringliteral">&quot;Origin:<sp/>{0},<sp/>Intersection:<sp/>{1}&quot;</highlight><highlight class="normal">,<sp/>origin_vector[i],<sp/>results[i]));</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-</programlisting><programlisting><codeline><highlight class="normal">Origin:<sp/>(0,<sp/>0,<sp/>1),<sp/>Intersection:<sp/>(0,<sp/>0,<sp/>0)</highlight></codeline>
-<codeline><highlight class="normal">Origin:<sp/>(0,<sp/>1,<sp/>1),<sp/>Intersection:<sp/>(0,<sp/>1,<sp/>0)</highlight></codeline>
-<codeline><highlight class="normal">Origin:<sp/>(0,<sp/>2,<sp/>1),<sp/>Intersection:<sp/>(0,<sp/>2,<sp/>0)</highlight></codeline>
-<codeline><highlight class="normal">Origin:<sp/>(0,<sp/>3,<sp/>1),<sp/>Intersection:<sp/>(0,<sp/>3,<sp/>0)</highlight></codeline>
-<codeline><highlight class="normal">Origin:<sp/>(0,<sp/>4,<sp/>1),<sp/>Intersection:<sp/>(0,<sp/>4,<sp/>0)</highlight></codeline>
-</programlisting> </para>
-</simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/Csharp/packages/raytracer/src/EmbreeRayTracer.cs" line="157" column="32"/>
+        <location file="src/Csharp/packages/raytracer/src/EmbreeRayTracer.cs" line="131" column="24"/>
       </memberdef>
-      <memberdef kind="function" id="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1a929f4285ca85814545d3f0b30cc26048" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1a2bd31afa0ffb40b98a81ea47fc876be6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="struct_human_factors_1_1_ray_tracing_1_1_ray_result" kindref="compound">RayResult</ref></type>
         <definition>static RayResult HumanFactors.RayTracing.EmbreeRaytracer.IntersectForDistance</definition>
-        <argsstring>(EmbreeBVH bvh, Vector3D origin, Vector3D direction, float max_distance=-1)</argsstring>
+        <argsstring>(EmbreeBVH bvh, Vector3D origin, Vector3D direction, float max_distance)</argsstring>
         <name>IntersectForDistance</name>
         <param>
           <type><ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h" kindref="compound">EmbreeBVH</ref></type>
@@ -394,7 +298,6 @@ Can be casted in 3 configurations: </para>
         <param>
           <type>float</type>
           <declname>max_distance</declname>
-          <defval>-1</defval>
         </param>
         <briefdescription>
 <para>Cast a single ray and get the distance to its hit and the meshID if it hit anything. </para>
@@ -433,42 +336,20 @@ Can be casted in 3 configurations: </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="remark"><para>This can be faster than <ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1a97e8b50b5bbb182d12416e7638dad9e9" kindref="member">IntersectForPoints</ref>, as the data returned is lighter. If you only need the distance or meshID, this function is recommended.</para>
+<simplesect kind="remark"><para>This can be faster than <ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1ae3364703368c059a9e5bda35ca41492a" kindref="member">IntersectForPoints</ref>, as the data returned is lighter. If you only need the distance or meshID, this function is recommended.</para>
 </simplesect>
-<simplesect kind="return"><para>A <ref refid="struct_human_factors_1_1_ray_tracing_1_1_ray_result" kindref="compound">RayResult</ref> containing the distance to the hitpoint and meshid it hit. If the distance is equal to -1, then the ray did not intersect any geometry.</para>
-</simplesect>
-<simplesect kind="par"><title>Example</title><para><programlisting filename="raytracer\test_raytracer.cs"><codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Load<sp/>an<sp/>OBJ<sp/>from<sp/>a<sp/>filepath<sp/><sp/>into<sp/>a<sp/>new<sp/>meshinfo<sp/>instance</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>good_mesh_path<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;ExampleModels/plane.obj&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MeshInfo<sp/>Mesh<sp/>=<sp/>OBJLoader.LoadOBJ(good_mesh_path,<sp/>CommonRotations.Yup_To_Zup);</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Construct<sp/>a<sp/>BVH<sp/>from<sp/>the<sp/>mesh</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>EmbreeBVH<sp/>BVH<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>EmbreeBVH(Mesh);</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-</programlisting><programlisting filename="raytracer\test_raytracer.cs"><codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Create<sp/>origin<sp/>and<sp/>direction<sp/>to<sp/>cast<sp/>ray<sp/>straight<sp/>down<sp/>at<sp/>the<sp/>plane</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vector3D<sp/>origin<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(0,<sp/>0,<sp/>1);</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vector3D<sp/>direction<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(0,<sp/>0,<sp/>-1);</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Cast<sp/>ray<sp/>and<sp/>get<sp/>the<sp/>distance/MeshID</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RayResult<sp/>result<sp/>=<sp/>EmbreeRaytracer.IntersectForDistance(BVH,<sp/>origin,<sp/>direction);</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Print<sp/>the<sp/>distance/MeshID</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Debug.WriteLine(result);</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-</programlisting><computeroutput>[1,0]</computeroutput> </para>
+<simplesect kind="return"><para>A <ref refid="struct_human_factors_1_1_ray_tracing_1_1_ray_result" kindref="compound">RayResult</ref> containing the distance to the hitpoint and meshid it hit. If the distance is equal to -1, then the ray did not intersect any geometry. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/Csharp/packages/raytracer/src/EmbreeRayTracer.cs" line="186" column="33"/>
+        <location file="src/Csharp/packages/raytracer/src/EmbreeRayTracer.cs" line="155" column="25"/>
       </memberdef>
-      <memberdef kind="function" id="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1a04dd5147c6613ec137069bf2fdaa0e73" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1a9b28c2746d7859db1ce70a87ab935063" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="class_human_factors_1_1_ray_tracing_1_1_ray_results" kindref="compound">RayResults</ref></type>
         <definition>static RayResults HumanFactors.RayTracing.EmbreeRaytracer.IntersectForDistances</definition>
-        <argsstring>(EmbreeBVH bvh, IEnumerable&lt; Vector3D &gt; origins, IEnumerable&lt; Vector3D &gt; directions, float max_distance=-1)</argsstring>
+        <argsstring>(EmbreeBVH bvh, IEnumerable&lt; Vector3D &gt; origins, IEnumerable&lt; Vector3D &gt; directions, float max_distance)</argsstring>
         <name>IntersectForDistances</name>
         <param>
           <type><ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h" kindref="compound">EmbreeBVH</ref></type>
@@ -485,7 +366,6 @@ Can be casted in 3 configurations: </para>
         <param>
           <type>float</type>
           <declname>max_distance</declname>
-          <defval>-1</defval>
         </param>
         <briefdescription>
 <para>Cast multiple rays and recieve the distance and meshid of geometry intersected by each in return. </para>
@@ -548,51 +428,16 @@ Can be casted in 3 configurations: </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="par"><title>Example</title><para><programlisting filename="raytracer\test_raytracer.cs"><codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Load<sp/>an<sp/>OBJ<sp/>from<sp/>a<sp/>filepath<sp/><sp/>into<sp/>a<sp/>new<sp/>meshinfo<sp/>instance</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>good_mesh_path<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;ExampleModels/plane.obj&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MeshInfo<sp/>Mesh<sp/>=<sp/>OBJLoader.LoadOBJ(good_mesh_path,<sp/>CommonRotations.Yup_To_Zup);</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Construct<sp/>a<sp/>BVH<sp/>from<sp/>the<sp/>mesh</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>EmbreeBVH<sp/>BVH<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>EmbreeBVH(Mesh);</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-</programlisting><programlisting filename="raytracer\test_raytracer.cs"><codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Construct<sp/>origin/distance<sp/>arrays</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>num_rays<sp/>=<sp/>6;</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vector3D[]<sp/>origin_vector<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D[num_rays];</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vector3D[]<sp/>direction_vector<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D[num_rays];</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>num_rays;<sp/>i++)</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>origin_vector[i]<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(0,<sp/>0,<sp/>i);</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>direction_vector[i]<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(0,<sp/>0,<sp/>-1);</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Cast<sp/>rays<sp/>and<sp/>get<sp/>results</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RayResults<sp/>results<sp/>=<sp/>EmbreeRaytracer.IntersectForDistances(BVH,<sp/>origin_vector,<sp/>direction_vector);</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Print<sp/>Results.<sp/>The<sp/>distance<sp/>should<sp/>equal<sp/>the<sp/>origin&apos;s<sp/>z<sp/>value,<sp/>except<sp/>for<sp/>the<sp/>first<sp/>one,<sp/>which</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>should<sp/>miss<sp/>since<sp/>it&apos;s<sp/>inside<sp/>the<sp/>plane</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>num_rays;<sp/>i++)</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Debug.WriteLine(</highlight><highlight class="stringliteral">&quot;Origin:<sp/>{0},<sp/>Result:<sp/>{1}&quot;</highlight><highlight class="normal">,<sp/>origin_vector[i],<sp/>results[i]);</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-</programlisting><programlisting><codeline><highlight class="normal">Origin:<sp/>(0,<sp/>0,<sp/>0),<sp/>Result:<sp/>[-1,-1]</highlight></codeline>
-<codeline><highlight class="normal">Origin:<sp/>(0,<sp/>0,<sp/>1),<sp/>Result:<sp/>[1,0]</highlight></codeline>
-<codeline><highlight class="normal">Origin:<sp/>(0,<sp/>0,<sp/>2),<sp/>Result:<sp/>[2,0]</highlight></codeline>
-<codeline><highlight class="normal">Origin:<sp/>(0,<sp/>0,<sp/>3),<sp/>Result:<sp/>[3,0]</highlight></codeline>
-<codeline><highlight class="normal">Origin:<sp/>(0,<sp/>0,<sp/>4),<sp/>Result:<sp/>[4,0]</highlight></codeline>
-<codeline><highlight class="normal">Origin:<sp/>(0,<sp/>0,<sp/>5),<sp/>Result:<sp/>[5,0]</highlight></codeline>
-</programlisting> </para>
-</simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/Csharp/packages/raytracer/src/EmbreeRayTracer.cs" line="237" column="34"/>
+        <location file="src/Csharp/packages/raytracer/src/EmbreeRayTracer.cs" line="195" column="26"/>
       </memberdef>
-      <memberdef kind="function" id="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1a0d503f39da6389a369d58d4945388e33" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1a910e0b4ba8e99cdc45a0df115c89ff15" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool[]</type>
         <definition>static bool [] HumanFactors.RayTracing.EmbreeRaytracer.IntersectOccluded</definition>
-        <argsstring>(EmbreeBVH bvh, IEnumerable&lt; Vector3D &gt; origin, IEnumerable&lt; Vector3D &gt; direction, float max_distance=-1)</argsstring>
+        <argsstring>(EmbreeBVH bvh, IEnumerable&lt; Vector3D &gt; origin, IEnumerable&lt; Vector3D &gt; direction, float max_distance)</argsstring>
         <name>IntersectOccluded</name>
         <param>
           <type><ref refid="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h" kindref="compound">EmbreeBVH</ref></type>
@@ -609,7 +454,6 @@ Can be casted in 3 configurations: </para>
         <param>
           <type>float</type>
           <declname>max_distance</declname>
-          <defval>-1</defval>
         </param>
         <briefdescription>
 <para>Determine if any geometry occludes a point from a direction. </para>
@@ -663,34 +507,13 @@ Can be casted in 3 configurations: </para>
 </listitem>
 </itemizedlist>
 </para>
-<para><simplesect kind="remark"><para>Occlusion rays are the fastest raycasting function, however are only capable of returning or not they hit anything. This can be useful for line of sight checks. Will execute in parallel if multiple origins/directions are supplied.</para>
-</simplesect>
-<simplesect kind="par"><title>Example</title><para><programlisting filename="raytracer\test_raytracer.cs"><codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Load<sp/>an<sp/>OBJ<sp/>from<sp/>a<sp/>filepath<sp/><sp/>into<sp/>a<sp/>new<sp/>meshinfo<sp/>instance</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>good_mesh_path<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;ExampleModels/plane.obj&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MeshInfo<sp/>Mesh<sp/>=<sp/>OBJLoader.LoadOBJ(good_mesh_path,<sp/>CommonRotations.Yup_To_Zup);</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Construct<sp/>a<sp/>BVH<sp/>from<sp/>the<sp/>mesh</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>EmbreeBVH<sp/>BVH<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>EmbreeBVH(Mesh);</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-</programlisting><programlisting filename="raytracer\test_raytracer.cs"><codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Create<sp/>origin<sp/>and<sp/>direction<sp/>arrays</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vector3D[]<sp/>origins<sp/>=<sp/>{<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(0,<sp/>0,<sp/>1),<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(0,<sp/>0,<sp/>-1)<sp/>};</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Vector3D[]<sp/>directions<sp/>=<sp/>{<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(0,<sp/>0,<sp/>-1),<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>Vector3D(0,<sp/>0,<sp/>-1)<sp/>};</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Cast<sp/>a<sp/>ray<sp/>from<sp/>the<sp/>origin<sp/>and<sp/>direction<sp/>at<sp/>every<sp/>matching<sp/>index<sp/></highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal">[]<sp/>intersections<sp/>=<sp/>EmbreeRaytracer.IntersectOccluded(BVH,<sp/>origins,<sp/>directions,<sp/>-1);</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Print<sp/>the<sp/>results.<sp/>Ray<sp/>1<sp/>should<sp/>intersect<sp/>the<sp/>plane,<sp/>and<sp/>ray<sp/>2<sp/>should<sp/>miss<sp/>it.<sp/></highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Debug.WriteLine(String.Format(</highlight><highlight class="stringliteral">&quot;Ray<sp/>1:<sp/>{0},<sp/>Ray<sp/>2<sp/>:<sp/>{1}&quot;</highlight><highlight class="normal">,<sp/>intersections[0],<sp/>intersections[1]));</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-</programlisting><computeroutput>Ray 1: True, Ray 2 : False</computeroutput> </para>
+<para><simplesect kind="remark"><para>Occlusion rays are the fastest raycasting function, however are only capable of returning or not they hit anything. This can be useful for line of sight checks. Will execute in parallel if multiple origins/directions are supplied. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="src/Csharp/packages/raytracer/src/EmbreeRayTracer.cs" line="283" column="28"/>
+        <location file="src/Csharp/packages/raytracer/src/EmbreeRayTracer.cs" line="236" column="20"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -705,14 +528,14 @@ Can be casted in 3 configurations: </para>
 </simplesect>
 </para>
     </detaileddescription>
-    <location file="src/Csharp/packages/raytracer/src/EmbreeRayTracer.cs" line="39" column="19" bodyfile="src/Csharp/packages/raytracer/src/EmbreeRayTracer.cs" bodystart="40" bodyend="289"/>
+    <location file="src/Csharp/packages/raytracer/src/EmbreeRayTracer.cs" line="39" column="19" bodyfile="src/Csharp/packages/raytracer/src/EmbreeRayTracer.cs" bodystart="40" bodyend="242"/>
     <listofallmembers>
-      <member refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1a929f4285ca85814545d3f0b30cc26048" prot="public" virt="non-virtual"><scope>HumanFactors::RayTracing::EmbreeRaytracer</scope><name>IntersectForDistance</name></member>
-      <member refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1a04dd5147c6613ec137069bf2fdaa0e73" prot="public" virt="non-virtual"><scope>HumanFactors::RayTracing::EmbreeRaytracer</scope><name>IntersectForDistances</name></member>
+      <member refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1a2bd31afa0ffb40b98a81ea47fc876be6" prot="public" virt="non-virtual"><scope>HumanFactors::RayTracing::EmbreeRaytracer</scope><name>IntersectForDistance</name></member>
+      <member refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1a9b28c2746d7859db1ce70a87ab935063" prot="public" virt="non-virtual"><scope>HumanFactors::RayTracing::EmbreeRaytracer</scope><name>IntersectForDistances</name></member>
       <member refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1afc149e5c713d0fcce5d142c82fd7e292" prot="public" virt="non-virtual"><scope>HumanFactors::RayTracing::EmbreeRaytracer</scope><name>IntersectForPoint</name></member>
       <member refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1a2d6fd1eb3e172c59014d6b1b24a2c1c9" prot="public" virt="non-virtual"><scope>HumanFactors::RayTracing::EmbreeRaytracer</scope><name>IntersectForPoint</name></member>
-      <member refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1a97e8b50b5bbb182d12416e7638dad9e9" prot="public" virt="non-virtual"><scope>HumanFactors::RayTracing::EmbreeRaytracer</scope><name>IntersectForPoints</name></member>
-      <member refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1a0d503f39da6389a369d58d4945388e33" prot="public" virt="non-virtual"><scope>HumanFactors::RayTracing::EmbreeRaytracer</scope><name>IntersectOccluded</name></member>
+      <member refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1ae3364703368c059a9e5bda35ca41492a" prot="public" virt="non-virtual"><scope>HumanFactors::RayTracing::EmbreeRaytracer</scope><name>IntersectForPoints</name></member>
+      <member refid="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer_1a910e0b4ba8e99cdc45a0df115c89ff15" prot="public" virt="non-virtual"><scope>HumanFactors::RayTracing::EmbreeRaytracer</scope><name>IntersectOccluded</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

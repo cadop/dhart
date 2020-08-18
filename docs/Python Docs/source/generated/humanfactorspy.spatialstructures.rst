@@ -15,8 +15,6 @@ humanfactorspy.spatialstructures
     
     CostAggregationType
     
-    CostAlgorithmKeys
-    
     Edge
     
     EdgeSumArray
@@ -35,10 +33,6 @@ humanfactorspy.spatialstructures
 
 .. autosummary::
     :toctree: .
-    
-    CalculateCrossSlope
-    
-    CalculateEnergyExpenditure
     
     CreateListOfNodeStructs
     
