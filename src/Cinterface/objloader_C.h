@@ -1,3 +1,14 @@
+/*!
+	\file		objloader_C.h
+	\brief		Header file for functions related to loading/storing an OBJ file (a mesh)
+
+	\author		TBA
+	\date		05 Aug 2020
+*/
+
+#ifndef OBJLOADER_C_H
+#define OBJLOADER_C_H
+
 #include <vector>
 
 #define C_INTERFACE extern "C" __declspec(dllexport) int
@@ -8,47 +19,114 @@ namespace HF {
 	}
 }
 
-/**
-* @defgroup Geometry
-* Read and manipulate meshes.
-* @{
+/*!
+	\defgroup	Geometry
+	Read and manipulate meshes
+	
+	\section mesh_setup Mesh setup
+	First, we prepare the relative path to the <b>mesh</b>. (.obj file)
+
+	\code
+		// Status code variable, value returned by C Interface functions
+		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
+		int status = 0;
+
+		// Get model path
+		// This is a relative path to your obj file.
+		const std::string obj_path_str = "plane.obj";
+
+		// Size of obj file string (character count)
+		const int obj_length = static_cast<int>(obj_path_str.size());
+	\endcode
+
+	Then, we prepare a pointer to a vector<\link HF::Geometry::MeshInfo \endlink>.<br>
+
+	\code
+		// This will point to memory on free store.
+		// The memory will be allocated inside the LoadOBJ function,
+		// and it must be freed using DestroyMeshInfo.
+		std::vector<HF::Geometry::MeshInfo>* loaded_obj = nullptr;
+	\endcode
+
+	We pass the address of this pointer to \link LoadOBJ \endlink .
+
+	\code
+		// Load mesh
+		// The array rot will rotate the mesh 90 degrees with respect to the x-axis,
+		// i.e. makes the mesh 'z-up'.
+		//
+		// Notice that we pass the address of the loaded_obj pointer
+		// to LoadOBJ. We do not want to pass loaded_obj by value, but by address --
+		// so that we can dereference it and assign it to the address of (pointer to)
+		// the free store memory allocated within LoadOBJ.
+		const float rot[] = { 90.0f, 0.0f, 0.0f };	// Y up to Z up
+		status = LoadOBJ(obj_path_str.c_str(), obj_length, rot[0], rot[1], rot[2], &loaded_obj);
+
+		if (status != 1) {
+			// All C Interface functions return a status code.
+			// Error!
+			std::cerr << "Error at LoadOBJ, code: " << status << std::endl;
+		}
+
+		//
+		// loaded_obj contains the mesh.
+		//
+	\endcode
+
+	<b>loaded_obj</b> points to the loaded mesh.
+
+	\section mesh_teardown Mesh teardown
+	When you are finished with the <b>mesh</b>, you must then <b>relinquish</b> its memory resources:<br>
+
+	\code
+		// destroy vector<MeshInfo>
+		status = DestroyMeshInfo(loaded_obj);
+
+		if (status != 1) {
+			std::cerr << "Error at DestroyMeshInfo, code: " << status << std::endl;
+		}
+	\endcode
+
+	`>>> LoadOBJ loaded mesh successfully into loaded_obj at address 000001DBFADFAF50, code: 1`\n
+
+	<br>
+	<b>The client is responsible for releasing the memory for<br>
+	the <b>mesh</b> (vector<\link HF::Geometry::MeshInfo \endlink> *).</b><br>
+	Every example for each function should be followed up by the 'teardown' code described above.
+
+	\section notes_perform_rotation Notes on MeshInfo::PerformRotation
+		\link LoadOBJ \endlink and \link RotateMesh \endlink both call<br>
+		HF::Geometry::MeshInfo::PerformRotation, which contains the following:<br>
+
+		\snippet objloader\src\meshinfo.cpp snippet_objloader_assert
+
+		<b>rotation_matrix</b> is a local variable in \link PerformRotation \endlink,<br>
+		and <b>verts</b> is a private field within HF::Geometry::MeshInfo.<br>
+		<br>
+		These assertion statements may evaluate <b>false</b> (<b>which will halt execution</b>)<br>
+		if NANs (not-a-number) or infinity values were created<br>
+		from the <b>xrot</b>, <b>yrot</b>, or <b>zrot</b> values passed to \link LoadOBJ \endlink or \link RotateMesh \endlink.
+	@{	
 */
 
-/// <summary> Load an obj from the given path then rotate it by x,y, and z </summary>
-/// <param name="obj_path"> Path to an obj file to load. </param>
-/// <param name="length"> The number of characters int he path string </param>
-/// <param name="xrot"> Degrees to rotate the mesh on the x axis. </param>
-/// <param name="xrot"> Degrees to rotate the mesh on the y axis. </param>
-/// <param name="xrot"> Degrees to rotate the mesh on the z axis. </param>
-/// <returns>
-/// HF_STATUS::GENERIC_ERROR If the input was empty. HF_STATUS::INVALID_OBJ if the path didn't lead
-/// to a valid OBJ file, and HF_STATUS::NOT_FOUND if the file at the given path couldn't be found.
-/// </returns>
-
 /*!
-	\code
-		// Requires #include "objloader_C.h", #include "meshinfo.h", #include "objloader.h"
+	\brief				Load an obj from the given path, then rotate it about the x, y, and z axes.
 
-		// Prepare parameters for LoadOBJ
+	\param	obj_path	File path to an .obj file, relative to the project's working directory
+	\param	length		Character count of the obj_path string
+	\param	xrot		Degrees to rotate the mesh about the x axis. 0.0f would mean no rotation about the x axis.
+	\param	yrot		Degrees to rotate the mesh about the y axis. 0.0f would mean no rotation about the y axis.
+	\param	zrot		Degrees to rotate the mesh about the z axis. 0.0f would mean no rotation about the z axis.
 
-		// relative path begins where EXE file is located if file_path is not a path to a
-		// valid OBJ file, HF::Exceptions::FileNotFound is thrown
-		std::string file_path = "big_teapot.obj";
+	\param	out_list	Address of a (vector<\link HF::Geometry::MeshInfo \endlink> *); will be dereferenced and assigned the address of memory on the free store.
+						When out_list is passed to this function, *(out_list) should point to nullptr.
 
-		const int obj_length = file_path.size();
+	\returns			HF_STATUS::OK, if the file described by obj_path was loaded successfully
+						HF_STATUS::NOT_FOUND, if obj_path is an invalid/non-existent path
+						HF_STATUS::INVALID_OBJ, if obj_path does not represent a valid .obj file
+						HF_STATUS::GENERIC_ERROR, if the input described at obj_path was empty
 
-		const float x_rot = 30;
-		const float y_rot = 20;
-		const float z_rot = 55;
-
-		std::vector<HF::Geometry::MeshInfo>* info = nullptr;
-
-		// Call LoadOBJ
-		LoadOBJ(file_path.c_str(), obj_length, x_rot, y_rot, z_rot, &info);
-
-		// Release memory for info once finished with it
-		DestroyMeshInfo(info);
-	\endcode
+	\see \ref mesh_setup (how to create a mesh), \ref notes_perform_rotation (assertion statement)
 */
 C_INTERFACE LoadOBJ(
 	const char* obj_path,
@@ -59,43 +137,41 @@ C_INTERFACE LoadOBJ(
 	std::vector<HF::Geometry::MeshInfo>** out_list
 );
 
-/// <summary>
-/// Store a mesh from python as meshinfo
-/// </summary>
-/// <param name="indices">An array of indices for the triangles in the mesh. Each integer should correspond to 3 values in vertices, and every 3 integers should represent a complete triangle for the mesh. </param>
-/// <param name="num_indices">Length of the indices array.</param>
-/// <param name="vertices"> Vertices of the mesh. Each 3 floats represent the X,Y, and Z of a point in space.</param>
-/// <param name="num_vertices">Length of the vertices array.</param>
-/// <param name="name">Desired name for the mesh</param>
-/// <param name="id">Desired ID for the mesh</param>
-/// <returns>HF_STATUS::OK if the mesh was loaded successfully. HF_STATUS::INVALID_OBJ if the given indices and vertices didn't create a valid mesh. </returns>
-
 /*!
-	\code
-		// Requires #include "objloader_C.h", #include "meshinfo.h"
+	\brief		Store a mesh from Python as a container of \link HF::Geometry::MeshInfo \endlink - the operand container, out_info, will have one mesh inside it
 
-		// Prepare parameters for StoreMesh
-		std::vector<HF::Geometry::MeshInfo>* info = nullptr;
+	\param		out_info		Address of a vector<\link HF::Geometry::MeshInfo \endlink> *; the address of a pointer to a container of \link HF::Geometry::MeshInfo \endlink.
+								\link StoreMesh \endlink will allocate memory for *(out_info), the caller must call \link DestroyMeshInfo \endlink
+								on *(out_info) when finished with its resources. *(out_info) should point to nullptr
+								when out_info is passed to this function.
 
-		int mesh_indices[] = { 0, 1, 2 };
-		const int mesh_num_indices = 3;
-		float mesh_vertices[] = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
-		const int mesh_num_vertices = 9;
+	\param		indices			An array of indices for the triangles within the mesh.
+								Each member in this array is an integer that corresponds to a set of 3 vertex coordinates, { x, y, z }.
+								indices[0] represents { vertices[0], vertices[1], vertices[2] }
+								indices[1] represents { vertices[3], vertices[4], vertices[5] }, etc.
+								Every 3 array members in indices represents a complete triangle for the mesh.
 
-		std::string mesh_name = "This mesh";
-		const int mesh_id = 0;
+	\param		num_indices		Member count (size) of the indices array. This value should be (size of vertices / 3) && (num_indices % 3 == 0)
 
-		// Call StoreMesh
-		if (StoreMesh(&info, mesh_indices, mesh_num_indices, mesh_vertices, mesh_num_vertices, mesh_name.c_str(), mesh_id)) {
-			std::cout << "StoreMesh successful" << std::endl;
-		}
-		else {
-			std::cout << "StoreMesh unsuccessful" << std::endl;
-		}
+	\param		vertices		An array of vertex coordinates, which represents the location of a mesh.
+								Starting at i = 0, { vertices[i], vertices[i + 1], vertices[i + 2] } represents a point in space.
 
-		// Release memory for info once finished with it
-		DestroyMeshInfo(info);
-	\endcode
+	\param		num_vertices	Member count (size) of the vertices array. This value should be (size of indices * 3) && (num_vertices % 3 == 0)
+	\param		name			The desired name for the mesh (a human-readable identifier)
+	\param		id				The desired ID for the mesh (an integral value)
+	
+	\returns					HF_STATUS::OK, if the mesh was loaded successfully
+								HF_STATUS::INVALID_OBJ if the values in indices and/or vertices did not create a valid mesh
+
+	\see \ref mesh_teardown (how to destroy a mesh)
+
+	First, we must prepare the values for the mesh to store.
+	\snippet tests\src\objloader_cinterface.cpp snippet_StoreMesh_setup
+
+	We are now ready to call <b>StoreMesh</b>.
+	\snippet tests\src\objloader_cinterface.cpp snippet_StoreMesh_call
+
+	`>>> The mesh was stored properly at address 0000029C6317BEB0.`\n
 */
 C_INTERFACE StoreMesh(
 	std::vector<HF::Geometry::MeshInfo>** out_info,
@@ -107,52 +183,19 @@ C_INTERFACE StoreMesh(
 	int id
 );
 
-/// <summary>
-/// Rotate an existing mesh
-/// </summary>
-/// <param name="xrot"> Rotation around the x axis in degrees.</param>
-/// <param name="yrot"> Rotation around the y axis in degrees.</param>
-/// <param name="zrot"> Rotation around the z axis in degrees.</param>
-
 /*!
-	\code
-		// Requires #include "objloader_C.h", #include "meshinfo.h"
+	\brief			Rotate an existing mesh (\link HF::Geometry::MeshInfo \endlink)
 
-		// Prepare parameters for StoreMesh
-		std::vector<HF::Geometry::MeshInfo>* info = nullptr;
+	\param	mesh_to_rotate	An operand vector<\link HF::Geometry::MeshInfo \endlink> * that addresses memory allocated by \link LoadOBJ \endlink or \link StoreMesh \endlink
+	\param	xrot			Degrees to rotate the mesh about the x axis. 0.0f would mean no rotation about the x axis.
+	\param	yrot			Degrees to rotate the mesh about the y axis. 0.0f would mean no rotation about the y axis.
+	\param	zrot			Degrees to rotate the mesh about the z axis. 0.0f would mean no rotation about the z axis.
 
-		int mesh_indices[] = { 0, 1, 2 };
-		const int mesh_num_indices = 3;
-		float mesh_vertices[] = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
-		const int mesh_num_vertices = 9;
+	\returns			HF_STATUS::OK on return
 
-		std::string mesh_name = "This mesh";
-		const int mesh_id = 0;
+	\see \ref mesh_setup (how to create a mesh), StoreMesh (creating a mesh from arrays), \ref mesh_teardown (how to destroy a mesh), \ref notes_perform_rotation (assertion statement)
 
-		// Call StoreMesh
-		if (StoreMesh(&info, mesh_indices, mesh_num_indices, mesh_vertices, mesh_num_vertices, mesh_name.c_str(), mesh_id)) {
-			std::cout << "StoreMesh successful" << std::endl;
-		}
-		else {
-			std::cout << "StoreMesh unsuccessful" << std::endl;
-		}
-
-		// Prepare desired rotation values
-		const float x_rot = 10;
-		const float y_rot = 10;
-		const float z_rot = 20;
-
-		// Call RotateMesh
-		if (RotateMesh(info, x_rot, y_rot, z_rot)) {
-			std::cout << "RotateMesh successful" << std::endl;
-		}
-		else {
-			std::cout << "RotateMesh unsuccessful" << std::endl;
-		}
-
-		// Release memory for info once finished with it
-		DestroyMeshInfo(info);
-	\endcode
+	\snippet tests\src\objloader_cinterface.cpp snippet_RotateMesh
 */
 C_INTERFACE RotateMesh(
 	std::vector<HF::Geometry::MeshInfo>* mesh_to_rotate,
@@ -161,43 +204,17 @@ C_INTERFACE RotateMesh(
 	float zrot
 );
 
-
-/// <summary>
-/// Delete all instances of mesh info in the given vector
-/// </summary>
-/// <param name="mesh_to_destroy"> The mesh info to destroy. </param>
-
 /*!
-	\code
-		// Requires #include "objloader_C.h", #include "meshinfo.h"
+	\brief		Destroy the memory addressed by mesh_to_destroy, which was allocated by either \link LoadOBJ \endlink or \link StoreMesh \endlink
+	
+	\param		mesh_to_destroy		The vector<\link HF::Geometry::MeshInfo \endlink> * whose memory will be released
 
-		// Prepare parameters for LoadOBJ
+	\returns	HF_STATUS::OK on return
 
-		// relative path begins where EXE file is located if file_path is not a path to a
-		// valid OBJ file, HF::Exceptions::FileNotFound is thrown
-		std::string file_path = "big_teapot.obj";
-
-		const int obj_length = file_path.size();
-
-		const float x_rot = 30;
-		const float y_rot = 20;
-		const float z_rot = 55;
-
-		std::vector<HF::Geometry::MeshInfo>* info = nullptr;
-
-		// Call LoadOBJ
-		if (LoadOBJ(file_path.c_str(), obj_length, x_rot, y_rot, z_rot, &info)) {
-			std::cout << "LoadOBJ successful" << std::endl;
-		}
-		else {
-			std::cout << "LoadOBJ unsuccessful" << std::endl;
-		}
-
-		// Release memory for info once finished with it
-		DestroyMeshInfo(info);
-	\endcode
+	\see \ref mesh_setup (how to create a mesh), \ref mesh_teardown (how to destroy a mesh)
 */
 C_INTERFACE DestroyMeshInfo(std::vector<HF::Geometry::MeshInfo>* mesh_to_destroy);
 
 /**@}*/
 
+#endif /* OBJLOADER_C_H */
