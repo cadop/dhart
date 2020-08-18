@@ -767,13 +767,9 @@ namespace CInterfaceTests {
 		//
 		// Resource cleanup.
 		//
-
-		for (int i = 0; i < out_path.size(); i++) {
-			if (out_path[i]) {
-				// Release memory for all pointers in out_path
-				DestroyPath(out_path[i]);
-				out_path[i] = nullptr;
-			}
+		for (auto& p : out_path) {
+			DestroyPath(p);
+			p = nullptr;
 		}
 	}
 
@@ -896,19 +892,13 @@ namespace CInterfaceTests {
 		//
 		// Resource cleanup
 		//
-
-		for (int i = 0; i < out_path.size(); i++) {
-			if (out_path[i]) {
-				// Release memory for all pointers in out_path
-				DestroyPath(out_path[i]);
-				out_path[i] = nullptr;
-			}
+		for (auto& p : out_path) {
+			DestroyPath(p);
+			p = nullptr;
 		}
 	}
 
 	TEST(C_Pathfinder, GetPathInfo) {
-		// Requires #include "pathfinder_C.h", #include "path.h"
-
 		// Requires #include "pathfinder_C.h", #include "graph.h", #include "path.h", #include "path_finder.h"
 
 		// Create a Graph g, and compress it.
@@ -989,19 +979,17 @@ namespace CInterfaceTests {
 		auto bg = CreateBoostGraph(g);
 
 		// Total paths is node_count ^ 2
-		size_t node_count = g.Nodes().size();
-		size_t path_count = node_count * node_count;
+		const size_t node_count = g.Nodes().size();
+		const size_t path_count = node_count * node_count;
 
-		// Pointer to buffer of (Path *)
-		Path** out_paths = new Path * [path_count];
-		// out_paths[i...path_count - 1] will be alloc'ed by InsertPathsIntoArray
+		// Buffer of (Path *). Each Path * must be freed using DestroyPath.
+		std::vector<Path*> out_paths(path_count);
 
-		// Pointer to buffer of (PathMember *)
-		PathMember** out_path_member = new PathMember * [path_count];
-		// out_path_member[i...path_count - 1] points to out_paths[i...path_count - 1]->GetPMPointer();
+		// Buffer of (PathMember *). These pointers address the vector<PathMember> buffers in all *p in out_paths. 
+		std::vector<PathMember*> out_path_member(path_count);
 
 		// Pointer to buffer of (int)
-		int* sizes = new int[path_count];
+		std::vector<int> sizes(path_count);
 
 		//
 		// The two loops for start_points and end_points
@@ -1009,6 +997,7 @@ namespace CInterfaceTests {
 		//
 		int curr_id = 0;
 		std::vector<int> start_points(path_count);
+
 		// Populate the start points,
 		// size will be (node_count)^2
 		for (int i = 0; i < node_count; i++) {
@@ -1028,7 +1017,7 @@ namespace CInterfaceTests {
 			}
 		}
 
-		CreateAllToAllPaths(&g, "",  out_paths, out_path_member, sizes, path_count);
+		CreateAllToAllPaths(&g, "",  out_paths.data(), out_path_member.data(), sizes.data(), path_count);
 
 		for (int i = 0; i < path_count; i++) {
 			if (out_paths[i]) {
@@ -1036,8 +1025,8 @@ namespace CInterfaceTests {
 				int total_cost = 0;
 				std::cout << "Path from " << start_points[i] << " to " << end_points[i] << std::endl;
 
-				Path p = *out_paths[i];
-				for (auto m : p.members) {
+				Path *p = out_paths[i];
+				for (auto m : p->members) {
 					total_cost += m.cost;
 					std::cout << "node ID: " << m.node << "\tcost " << m.cost << std::endl;
 				}
@@ -1050,24 +1039,9 @@ namespace CInterfaceTests {
 		//
 		// Resource cleanup
 		//
-		if (sizes) {
-			delete[] sizes;
-			sizes = nullptr;
-		}
-
-		if (out_path_member) {
-			delete[] out_path_member;
-			out_path_member = nullptr;
-		}
-
-		if (out_paths) {
-			for (int i = 0; i < path_count; i++) {
-				if (out_paths[i]) {
-					delete out_paths[i];
-					out_paths[i] = nullptr;
-				}
-			}
-			delete[] out_paths;
+		for (auto& p : out_paths) {
+			DestroyPath(p);
+			p = nullptr;
 		}
 	}
 }
