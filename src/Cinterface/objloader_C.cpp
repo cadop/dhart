@@ -11,45 +11,48 @@ using namespace HF::Exceptions;
 using std::vector;
 
 C_INTERFACE LoadOBJ(
-	const char* obj_paths,
-	int length,
+	const char* obj_path,
+	HF::Geometry::GROUP_METHOD gm,
 	float xrot,
 	float yrot,
 	float zrot,
-	vector<MeshInfo>** out_list
+	MeshInfo *** out_data_array,
+	int* num_meshes
 ) {
-	//Check precondition
-	if (length <= 0) {
-		std::cerr << "Empty Input" << std::endl;
-		return HF_STATUS::GENERIC_ERROR;
-	}
-
 	// Copy marshalled char array into strings
-	std::string filepath = obj_paths;
-	vector<MeshInfo>* meshes = new vector<MeshInfo>();
+	std::string filepath(obj_path);
 
-	// Try to load the mesh
+	// Create a new array of meshinfo pointers
 	try {
-		*meshes = HF::Geometry::LoadMeshObjects(filepath, HF::Geometry::ONLY_FILE, false);
-		for (auto& mesh : *meshes)
+		// Try to load the mesh
+		auto loaded_objs = HF::Geometry::LoadMeshObjects(filepath, gm, false);
+	
+		// Rotate the meshes if necessary
+		*num_meshes = loaded_objs.size();
+		for (auto& mesh : loaded_objs)
 			mesh.PerformRotation(xrot, yrot, zrot);
-	}
+	
+		// Insert into output array (this should be an instance of copy elision.
+		MeshInfo ** data_array  = new MeshInfo*[*num_meshes];
+		for (int i = 0; i < *num_meshes; i++) {
+			data_array[i] = new MeshInfo(loaded_objs[i]);
+			assert(data_array[i]->GetMeshID() == loaded_objs[i].GetMeshID());
+		}
+		*out_data_array = data_array;
 
+		return HF_STATUS::OK;
+	}
 	catch (const HF::Exceptions::InvalidOBJ & e) {
-		delete meshes;
 		return HF_STATUS::INVALID_OBJ;
 	}
 	catch (const HF::Exceptions::FileNotFound & e) {
-		delete meshes;
 		return HF_STATUS::NOT_FOUND;
 	}
 	catch (...) {
 		std::cerr << "Generic Error" << std::endl;
-		delete meshes;
 		return HF_STATUS::GENERIC_ERROR;
 	}
 
-	*out_list = meshes;
 	return HF_STATUS::OK;
 }
 
@@ -84,9 +87,15 @@ C_INTERFACE RotateMesh(vector<MeshInfo>* mesh_to_rotate, float xrot, float yrot,
 	return HF_STATUS::OK;
 }
 
-C_INTERFACE DestroyMeshInfo(vector<MeshInfo>* meshes_to_destroy)
+C_INTERFACE DestroyMeshInfo(MeshInfo * mesh_to_destroy)
 {
-	if (meshes_to_destroy)
-		delete meshes_to_destroy;
+	DeleteRawPtr(mesh_to_destroy);
+	return OK;
+}
+
+C_INTERFACE DestroyMeshInfoPtrArray(MeshInfo** data_array)
+{
+	if (*data_array)
+		delete[] data_array;
 	return OK;
 }

@@ -5,6 +5,7 @@
 namespace HF {
 	namespace Geometry {
 		class MeshInfo;
+		enum GROUP_METHOD;
 	}
 }
 
@@ -14,49 +15,39 @@ namespace HF {
 * @{
 */
 
-/// <summary> Load an obj from the given path then rotate it by x,y, and z </summary>
-/// <param name="obj_path"> Path to an obj file to load. </param>
-/// <param name="length"> The number of characters int he path string </param>
-/// <param name="xrot"> Degrees to rotate the mesh on the x axis. </param>
-/// <param name="xrot"> Degrees to rotate the mesh on the y axis. </param>
-/// <param name="xrot"> Degrees to rotate the mesh on the z axis. </param>
-/// <returns>
-/// HF_STATUS::GENERIC_ERROR If the input was empty. HF_STATUS::INVALID_OBJ if the path didn't lead
-/// to a valid OBJ file, and HF_STATUS::NOT_FOUND if the file at the given path couldn't be found.
-/// </returns>
+/*! 
+	\brief Load an obj from the given path then rotate it by x,y, and z
+	
+	\param obj_path Filepath to the obj file to load. 
+	\param gm Method to use for dividing a single obj file into multiple meshes.
+	\param xrot Degrees to rotate the mesh on the x axis.
+	\param yrot Degrees to rotate the mesh on the y axis.
+	\param zrot Degrees to rotate the mesh on the z axis.
+	\param out_data_array Output parameter for a pointer to the new array of MeshInfo
+	\param num_meshes Output parameter for size of `out_data_array`
 
-/*!
+	\returns `HF_STATUS::OK` If the input was a valid mesh and the function completed successfully
+	\returns `HF_STATUS::GENERIC_ERROR` If the input was empty. 
+	\returns `HF_STATUS::INVALID_OBJ` if the path didn't lead to a valid OBJ file
+	\returns` HF_STATUS::NOT_FOUND` if the file at the given path couldn't be found.
+
+	\attention
+	Call DestroyMeshInfoPtrArray to deallocate out_data_array, and call DestroyMeshInfo on each
+	instance of MeshInfo to deallocate them individually. Failure to do any of this will result
+	in memory leaks. In the case that `HF_STATUS::OK` is not called, no memory is allocated,
+	and as such no memory must be deallocated.
+	
 	\code
-		// Requires #include "objloader_C.h", #include "meshinfo.h", #include "objloader.h"
-
-		// Prepare parameters for LoadOBJ
-
-		// relative path begins where EXE file is located if file_path is not a path to a
-		// valid OBJ file, HF::Exceptions::FileNotFound is thrown
-		std::string file_path = "big_teapot.obj";
-
-		const int obj_length = file_path.size();
-
-		const float x_rot = 30;
-		const float y_rot = 20;
-		const float z_rot = 55;
-
-		std::vector<HF::Geometry::MeshInfo>* info = nullptr;
-
-		// Call LoadOBJ
-		LoadOBJ(file_path.c_str(), obj_length, x_rot, y_rot, z_rot, &info);
-
-		// Release memory for info once finished with it
-		DestroyMeshInfo(info);
 	\endcode
 */
 C_INTERFACE LoadOBJ(
 	const char* obj_path,
-	int length,
+	HF::Geometry::GROUP_METHOD gm,
 	float xrot,
 	float yrot,
 	float zrot,
-	std::vector<HF::Geometry::MeshInfo>** out_list
+	HF::Geometry::MeshInfo *** out_data_array,
+	int * num_meshes
 );
 
 /// <summary>
@@ -197,7 +188,9 @@ C_INTERFACE RotateMesh(
 		DestroyMeshInfo(info);
 	\endcode
 */
-C_INTERFACE DestroyMeshInfo(std::vector<HF::Geometry::MeshInfo>* mesh_to_destroy);
+C_INTERFACE DestroyMeshInfo(HF::Geometry::MeshInfo * mesh_to_destroy);
+
+C_INTERFACE DestroyMeshInfoPtrArray(HF::Geometry::MeshInfo** data_array);
 
 /**@}*/
 

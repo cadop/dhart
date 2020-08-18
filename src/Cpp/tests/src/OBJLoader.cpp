@@ -193,9 +193,12 @@ TEST(_MeshInfo, CopyConstructorWorks) {
 	auto test_MI = HF::Geometry::LoadMeshObjects(test_paths, HF::Geometry::ONLY_FILE)[0];
 
 	auto copy_MI = test_MI;
-	auto copy2_MI = copy_MI;
-	copy2_MI.ConvertToRhinoCoordinates();
+	MeshInfo copy2_MI(copy_MI);
 
+	ASSERT_EQ(test_MI.GetMeshID(), copy_MI.GetMeshID());
+	ASSERT_EQ(test_MI.GetMeshID(), copy2_MI.GetMeshID());
+
+	copy2_MI.ConvertToRhinoCoordinates();
 	CompareMeshInfo(test_MI, copy_MI, "base", "copied");
 }
 
@@ -754,36 +757,57 @@ TEST(_meshInfo, OperatorIndex) {
 		<< vertex[2] << ")" << std::endl;
 }
 
+TEST(_MeshInfo, CopyOperator) {
+
+}
+
 namespace CInterfaceTests {
-	TEST(_OBJLoaderCInterface, LoadOBJ) {
-		// Requires #include "objloader_C.h", #include "meshinfo.h"
+	TEST(C_OBJLoader, LoadOBJ) {
+		// Requires #include "objloader_C.h"
 
 		// Prepare parameters for LoadOBJ
 
 		// relative path begins where EXE file is located if file_path is not a path to a
 		// valid OBJ file, HF::Exceptions::FileNotFound is thrown
-		std::string file_path = "big_teapot.obj";
-
-		const int obj_length = file_path.size();
+		std::string file_path = "sponza.obj";
 
 		const float x_rot = 30;
 		const float y_rot = 20;
 		const float z_rot = 55;
 
-		std::vector<HF::Geometry::MeshInfo>* info = nullptr;
+		MeshInfo** info = nullptr;
+		int num_meshes = 0;
 
 		// Call LoadOBJ
-		if (LoadOBJ(file_path.c_str(), obj_length, x_rot, y_rot, z_rot, &info)) {
-			std::cout << "LoadOBJ successful" << std::endl;
-		}
-		else {
-			std::cout << "LoadOBJ unsuccessful" << std::endl;
+		int res = LoadOBJ(file_path.c_str(), HF::Geometry::GROUP_METHOD::BY_GROUP, x_rot, y_rot, z_rot, &info, &num_meshes);
+		switch (res) {
+
+			// If it's ok, then the function completed and our pointers are updated
+		case (HF::Exceptions::HF_STATUS::OK):
+			ASSERT_NE(nullptr, info);
+			break;
+
+			// Any other error code doesn't allocate any memory, so we don't need to explicitly handle them.
+		default:
+			std::cerr << "OBJ Loading Unsuccessful" << std::endl;
+			return;
 		}
 
-		// Release memory for info once finished with it
-		DestroyMeshInfo(info);
+		// Print how many OBJs we loaded
+		printf("Loaded %i OBJs!\n", num_meshes);
+		for (int i = 0; i < num_meshes; i++) {
+			std::cout << i << ": " << info[i]->GetMeshID() << std::endl;
+			ASSERT_EQ(i, info[i]->GetMeshID());
+		}
+
+		// Free the memory for MeshInfo and the returned pointerarray
+		for (int i = 0; i < num_meshes; i++)
+			DestroyMeshInfo(info[i]);
+
+		DestroyMeshInfoPtrArray(info);
 	}
-
+}
+/*!
 	TEST(_OBJLoaderCInterface, StoreMesh) {
 		// Requires #include "objloader_C.h", #include "meshinfo.h"
 		
@@ -904,7 +928,7 @@ namespace CInterfaceTests {
 	}
 }
 
-
+*/
 /*!
 	\brief Tests how quickly the raytracer can load OBJ files.
 */
