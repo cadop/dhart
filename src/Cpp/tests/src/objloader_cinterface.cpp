@@ -14,7 +14,7 @@
 #include <filesystem>
 
 namespace CInterfaceTests {
-	TEST(_objloader_CInterface, LoadOBJ) {
+	TEST(_objloader_cinterface, LoadOBJ) {
 		// Status code variable, value returned by C Interface functions
 		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
 		int status = 0;
