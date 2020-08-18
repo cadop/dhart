@@ -7,7 +7,7 @@ set(C_INTERFACE_DIR "Cinterface")
 set(C_PACKAGE_DIR "Cpp")
 set(C_TEST_DRIVER_DIR "Cpp/tests/src")
 set(DEPENDENCY_BINARIES
-		"${CMAKE_SOURCE_DIR}/external/Embree/bin/tbb.dll"
+		"${CMAKE_SOURCE_DIR}/external/Embree/bin/tbb.dll" 
 		"${CMAKE_SOURCE_DIR}/external/Embree/bin/embree3.dll"
 		"${CMAKE_SOURCE_DIR}/external/Microsoft/cpp/Release/msvcp140.dll"
 		"${CMAKE_SOURCE_DIR}/external/Microsoft/cpp/Release/vcruntime140.dll"
@@ -41,7 +41,7 @@ set(project_name "HumanFactors")
 # Configuration options
 set_property(
 	CACHE HumanFactors_Config PROPERTY
-	STRINGS
+	STRINGS 
 		All
 		RayTracer
 		GraphGenerator
@@ -66,11 +66,11 @@ endif()
 # Change install path if specified
 
 #if (NOT HumanFactors_UseDefaultInstallPath)
-#	if (HumanFactors_EnablePython)
+#	if (HumanFactors_EnablePython) 
 #		set(LANGUAGE_SUPPORT_STRING ${LANGUAGE_SUPPORT_STRING}Python_)
 #	endif()
-#	if (HumanFactors_EnableCSharp)
-#		set(LANGUAGE_SUPPORT_STRING ${LANGUAGE_SUPPORT_STRING}CSharp_)
+#	if (HumanFactors_EnableCSharp) 
+#		set(LANGUAGE_SUPPORT_STRING ${LANGUAGE_SUPPORT_STRING}CSharp_) 
 #	endif()
 #
 #	set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/release/${LANGUAGE_SUPPORT_STRING}${HumanFactors_Config})
@@ -94,22 +94,22 @@ else()
 endif()
 
 
-# /$$$$$$                       /$$$$$$  /$$                                          /$$     /$$
-# /$$__  $$                     /$$__  $$|__/                                         | $$    |__/
-#| $$  \__/  /$$$$$$  /$$$$$$$ | $$  \__/ /$$  /$$$$$$  /$$   /$$  /$$$$$$  /$$$$$$  /$$$$$$   /$$  /$$$$$$  /$$$$$$$
+# /$$$$$$                       /$$$$$$  /$$                                          /$$     /$$                    
+# /$$__  $$                     /$$__  $$|__/                                         | $$    |__/                    
+#| $$  \__/  /$$$$$$  /$$$$$$$ | $$  \__/ /$$  /$$$$$$  /$$   /$$  /$$$$$$  /$$$$$$  /$$$$$$   /$$  /$$$$$$  /$$$$$$$ 
 #| $$       /$$__  $$| $$__  $$| $$$$    | $$ /$$__  $$| $$  | $$ /$$__  $$|____  $$|_  $$_/  | $$ /$$__  $$| $$__  $$
 #| $$      | $$  \ $$| $$  \ $$| $$_/    | $$| $$  \ $$| $$  | $$| $$  \__/ /$$$$$$$  | $$    | $$| $$  \ $$| $$  \ $$
 #| $$    $$| $$  | $$| $$  | $$| $$      | $$| $$  | $$| $$  | $$| $$      /$$__  $$  | $$ /$$| $$| $$  | $$| $$  | $$
 #|  $$$$$$/|  $$$$$$/| $$  | $$| $$      | $$|  $$$$$$$|  $$$$$$/| $$     |  $$$$$$$  |  $$$$/| $$|  $$$$$$/| $$  | $$
 # \______/  \______/ |__/  |__/|__/      |__/ \____  $$ \______/ |__/      \_______/   \___/  |__/ \______/ |__/  |__/
-#                                             /$$  \ $$
-#                                            |  $$$$$$/
-#                                             \______/
+#                                             /$$  \ $$                                                               
+#                                            |  $$$$$$/                                                               
+#                                             \______/                                                                
 
 # These are lists of the files that need to be installed based configuration
 set(PYTHON_MODULES  #Folders in the python directory that need to be copied over
-		"${PYTHON_PACKAGE_DIR}/humanfactorspy/Example Models"
-		"${PYTHON_PACKAGE_DIR}/humanfactorspy/Examples"
+		"${PYTHON_PACKAGE_DIR}/humanfactorspy/Example Models" 
+		"${PYTHON_PACKAGE_DIR}/humanfactorspy/Examples" 
 )
 
 set(PYTHON_FILES # Files to be placed in the python root directory
@@ -135,10 +135,10 @@ if(${HumanFactors_Config} STREQUAL "All")
 	add_subdirectory(${C_PACKAGE_DIR}/analysismethods)
 	add_subdirectory(${C_PACKAGE_DIR}/pathfinding)
 	target_link_libraries(
-		HumanFactors PRIVATE
+		HumanFactors PRIVATE 
 			EmbreeRayTracer
 			OBJLoader
-			SpatialStructures
+			SpatialStructures	
 			GraphGenerator
 			VisibilityGraph
 			ViewAnalysis
@@ -163,7 +163,7 @@ if(${HumanFactors_Config} STREQUAL "All")
 			${C_INTERFACE_DIR}/pathfinder_C.h
 	)
 	LIST (APPEND PYTHON_MODULES
-			${PYTHON_PACKAGE_DIR}/humanfactorspy/raytracer
+			${PYTHON_PACKAGE_DIR}/humanfactorspy/raytracer	
 			${PYTHON_PACKAGE_DIR}/humanfactorspy/spatialstructures
 			${PYTHON_PACKAGE_DIR}/humanfactorspy/geometry
 			${PYTHON_PACKAGE_DIR}/humanfactorspy/viewanalysis
@@ -178,8 +178,8 @@ elseif(${HumanFactors_Config} STREQUAL "RayTracer")
 	add_subdirectory(${C_PACKAGE_DIR}/objloader)
 
 	target_link_libraries(
-		HumanFactors
-		PRIVATE
+		HumanFactors 
+		PRIVATE 
 			EmbreeRayTracer
 			OBJLoader
 	)
@@ -204,7 +204,7 @@ elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
 	add_subdirectory(${C_PACKAGE_DIR}/spatialstructures)
 
 	target_link_libraries(
-		HumanFactors
+		HumanFactors 
 		PRIVATE
 			EmbreeRayTracer
 			OBJLoader
@@ -239,7 +239,7 @@ elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
 		add_subdirectory(${C_PACKAGE_DIR}/spatialstructures)
 
 		target_link_libraries(
-			HumanFactors
+			HumanFactors 
 			PRIVATE
 				EmbreeRayTracer
 				OBJLoader
@@ -264,7 +264,7 @@ elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
 				${PYTHON_PACKAGE_DIR}/humanfactorspy/spatialstructures
 				${PYTHON_PACKAGE_DIR}/humanfactorspy/viewanalysis
 		)
-
+	
 	elseif(${HumanFactors_Config} STREQUAL "VisibilityGraph")
 		message([STATUS] "Building Visibilitygraph")
 		add_subdirectory(${C_PACKAGE_DIR}/raytracer)
@@ -273,7 +273,7 @@ elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
 		add_subdirectory(${C_PACKAGE_DIR}/spatialstructures)
 
 		target_link_libraries(
-			HumanFactors
+			HumanFactors 
 			PRIVATE
 				EmbreeRayTracer
 				OBJLoader
@@ -299,13 +299,13 @@ elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
 				${PYTHON_PACKAGE_DIR}/humanfactorspy/spatialstructures
 				${PYTHON_PACKAGE_DIR}/humanfactorspy/VisibilityGraph
 		)
-
+		
 	elseif(${HumanFactors_Config} STREQUAL "Pathfinder")
 
 		add_subdirectory(${C_PACKAGE_DIR}/spatialstructures)
 		add_subdirectory(${C_PACKAGE_DIR}/pathfinding)
 		target_link_libraries(
-			HumanFactors
+			HumanFactors 
 			PRIVATE
 				SpatialStructures
 				Pathfinder
@@ -322,7 +322,7 @@ elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
 				${PYTHON_PACKAGE_DIR}/humanfactorspy/spatialstructures
 				${PYTHON_PACKAGE_DIR}/humanfactorspy/pathfinder
 		)
-
+	
 else()
 	message(FATAL_ERROR "That is not a valid configuration ${HumanFactors_Config}")
 endif()
@@ -331,15 +331,15 @@ endif()
 target_sources(HumanFactors PRIVATE ${HF_SOURCES})
 
 
-# /$$$$$$$$                   /$$
-#|__  $$__/                  | $$
+# /$$$$$$$$                   /$$             
+#|__  $$__/                  | $$             
 #   | $$  /$$$$$$   /$$$$$$$/$$$$$$   /$$$$$$$
 #   | $$ /$$__  $$ /$$_____/_  $$_/  /$$_____/
-#   | $$| $$$$$$$$|  $$$$$$  | $$   |  $$$$$$
+#   | $$| $$$$$$$$|  $$$$$$  | $$   |  $$$$$$ 
 #   | $$| $$_____/ \____  $$ | $$ /$$\____  $$
 #   | $$|  $$$$$$$ /$$$$$$$/ |  $$$$//$$$$$$$/
-#   |__/ \_______/|_______/   \___/ |_______/
-
+#   |__/ \_______/|_______/   \___/ |_______/ 
+                                            
 if(HumanFactors_EnableTests)
 	enable_testing()
 	include(GoogleTest)
@@ -394,7 +394,7 @@ if(HumanFactors_EnableTests)
 				VisibilityGraph
 				HFExceptions
 				Pathfinder
-		)
+		)			
 		target_sources(
 			HFUnitTests
 				PRIVATE
@@ -409,8 +409,8 @@ if(HumanFactors_EnableTests)
 					${C_TEST_DRIVER_DIR}/performance_testing.h
 					${C_TEST_DRIVER_DIR}/GraphAlgorithms.cpp
 					${C_TEST_DRIVER_DIR}/CostAlgorithms.cpp
-					${C_TEST_DRIVER_DIR}/objloader_cinterface.cpp
-			)
+					${C_TEST_DRIVER_DIR}/GraphGenerator.cpp
+		)
 	elseif(${HumanFactors_Config} STREQUAL "RayTracer")
 		target_sources(
 			HFUnitTests
@@ -425,11 +425,11 @@ if(HumanFactors_EnableTests)
 				${CMAKE_CURRENT_LIST_DIR}/src
 		)
 
-		target_link_libraries(HFUnitTests
-			PRIVATE
+		target_link_libraries(HFUnitTests 
+			PRIVATE 
 				gtest_main
 				OBJLoader
-				HFExceptions
+				HFExceptions 
 				EmbreeRayTracer
 			)
 	elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
@@ -544,7 +544,7 @@ if(HumanFactors_EnableTests)
 	)
 	add_custom_command(
 		TARGET HFUnitTests PRE_BUILD
-		COMMAND ${CMAKE_COMMAND} -E copy
+		COMMAND ${CMAKE_COMMAND} -E copy 
 		${DEPENDENCY_BINARIES}
 		$<TARGET_FILE_DIR:HFUnitTests>
 	)
@@ -621,13 +621,13 @@ if (HumanFactors_EnableCSharp)
 
 	add_custom_command(TARGET HumanFactors POST_BUILD
 		COMMAND ${CMAKE_COMMAND} -E copy_if_different
-			"${CMAKE_SOURCE_DIR}/external/Embree/bin/tbb.dll"
+			"${CMAKE_SOURCE_DIR}/external/Embree/bin/tbb.dll" 
 			"${CMAKE_CURRENT_BINARY_DIR}/CSharp/$<CONFIGURATION>/tbb.dll"
 	)
 
 	add_custom_command(TARGET HumanFactors POST_BUILD
 		COMMAND ${CMAKE_COMMAND} -E copy_if_different
-			"${CMAKE_SOURCE_DIR}/external/Embree/bin/embree3.dll"
+			"${CMAKE_SOURCE_DIR}/external/Embree/bin/embree3.dll" 
 			"${CMAKE_CURRENT_BINARY_DIR}/CSharp/$<CONFIGURATION>/embree3.dll"
 	)
 
