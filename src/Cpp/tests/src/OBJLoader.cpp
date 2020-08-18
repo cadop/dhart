@@ -796,7 +796,7 @@ namespace CInterfaceTests {
 		// Print how many OBJs we loaded
 		printf("Loaded %i OBJs!\n", num_meshes);
 		for (int i = 0; i < num_meshes; i++) {
-			std::cout << i << ": " << info[i]->GetMeshID() << std::endl;
+			std::cout << i << ": " << info[i]->GetMeshID() << " | " << info[i]->name << std::endl;
 			ASSERT_EQ(i, info[i]->GetMeshID());
 		}
 

@@ -32,7 +32,7 @@ namespace HF::Geometry {
 		if (verts.hasNaN()) throw std::exception("NAN DETECTED ON INPUT");
 	
 		meshid = id;
-		name = n;
+		this->name = name;
 	}
 
 	inline void MeshInfo::SetVert(int index, float x, float y, float z)

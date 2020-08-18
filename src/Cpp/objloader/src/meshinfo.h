@@ -81,11 +81,12 @@ namespace HF::Geometry {
 		\image html https://upload.wikimedia.org/wikipedia/commons/2/2d/Mesh_fv.jpg "MeshInfo"
 	*/
 	class MeshInfo {
-	private:
+	public:
 		int meshid;						///< Identifier for this mesh.
+		std::string name = "";			///< A human-readable title. 
+	private:
 		Eigen::Matrix3X<float> verts;	///< 3 by X matrix of vertices
 		Eigen::Matrix3X<int> indices;	///< 3 by X matrix of indices for triangles.
-		std::string name = "";			///< A human-readable title. 
 
 		/// <summary> Change the position of the vertex at index. </summary>
 		/// <param name="index"> Index of the vertex to change, </param>
