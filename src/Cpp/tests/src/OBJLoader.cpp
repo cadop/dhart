@@ -829,17 +829,15 @@ namespace CInterfaceTests {
 		ASSERT_EQ(mesh_name, info->name);
 		ASSERT_EQ(mesh_id, info->GetMeshID());
 
-
 		// Release memory for info once finished with it
 		DestroyMeshInfo(info);
 	}
 
-/*!
-	TEST(_OBJLoaderCInterface, RotateMesh) {
+	TEST(C_OBJLoader, RotateMesh) {
 		// Requires #include "objloader_C.h", #include "meshinfo.h"
 
 		// Prepare parameters for StoreMesh
-		std::vector<HF::Geometry::MeshInfo>* info = nullptr;
+		MeshInfo * info = NULL;
 
 		int mesh_indices[] = { 0, 1, 2 };
 		const int mesh_num_indices = 3;
@@ -849,31 +847,27 @@ namespace CInterfaceTests {
 		std::string mesh_name = "This mesh";
 		const int mesh_id = 0;
 
-		// Call StoreMesh
-		if (StoreMesh(&info, mesh_indices, mesh_num_indices, mesh_vertices, mesh_num_vertices, mesh_name.c_str(), mesh_id)) {
-			std::cout << "StoreMesh successful" << std::endl;
-		}
-		else {
-			std::cout << "StoreMesh unsuccessful" << std::endl;
-		}
-
+		auto res = StoreMesh(&info, mesh_indices, mesh_num_indices, mesh_vertices, mesh_num_vertices, mesh_name.c_str(), mesh_id);
+		ASSERT_EQ(HF_STATUS::OK, res);
+		
 		// Prepare desired rotation values
 		const float x_rot = 10;
 		const float y_rot = 10;
 		const float z_rot = 20;
 
-		// Call RotateMesh
-		if (RotateMesh(info, x_rot, y_rot, z_rot)) {
-			std::cout << "RotateMesh successful" << std::endl;
-		}
-		else {
-			std::cout << "RotateMesh unsuccessful" << std::endl;
-		}
+		// Rotate the mesh
+		RotateMesh(info, x_rot, y_rot, z_rot);
+
+		// Compare vertices. These should have been changed when this function is called.
+		auto verts = info->GetIndexedVertices();
+		for (int i = 0; i < verts.size(); i++)
+			ASSERT_NE(mesh_vertices[i], verts[i]);
 
 		// Release memory for info once finished with it
 		DestroyMeshInfo(info);
 	}
 	
+/*!
 	TEST(_OBJLoaderCInterface, DestroyMeshInfo) {
 		// Requires #include "objloader_C.h", #include "meshinfo.h"
 

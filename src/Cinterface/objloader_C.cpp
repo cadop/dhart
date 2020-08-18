@@ -81,10 +81,9 @@ C_INTERFACE StoreMesh(
 	return OK;
 }
 
-C_INTERFACE RotateMesh(vector<MeshInfo>* mesh_to_rotate, float xrot, float yrot, float zrot)
+C_INTERFACE RotateMesh(MeshInfo * mesh_to_rotate, float xrot, float yrot, float zrot)
 {
-	for (auto & mesh : *mesh_to_rotate)
-		mesh.PerformRotation(xrot, yrot, zrot);
+	mesh_to_rotate->PerformRotation(xrot, yrot, zrot);
 	return HF_STATUS::OK;
 }
 

@@ -80,55 +80,18 @@ C_INTERFACE StoreMesh(
 	int id
 );
 
-/// <summary>
-/// Rotate an existing mesh
-/// </summary>
-/// <param name="xrot"> Rotation around the x axis in degrees.</param>
-/// <param name="yrot"> Rotation around the y axis in degrees.</param>
-/// <param name="zrot"> Rotation around the z axis in degrees.</param>
-
 /*!
-	\code
-		// Requires #include "objloader_C.h", #include "meshinfo.h"
+	\brief Rotate a mesh.
+	
+	\param mesh_to_rotate A pointer to the mesh to rotate.
+	\param xrot Rotation around the x axis in degrees.
+	\param yrot Rotation around the y axis in degrees.
+	\param zrot Rotation around the z axis in degrees.
 
-		// Prepare parameters for StoreMesh
-		std::vector<HF::Geometry::MeshInfo>* info = nullptr;
-
-		int mesh_indices[] = { 0, 1, 2 };
-		const int mesh_num_indices = 3;
-		float mesh_vertices[] = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
-		const int mesh_num_vertices = 9;
-
-		std::string mesh_name = "This mesh";
-		const int mesh_id = 0;
-
-		// Call StoreMesh
-		if (StoreMesh(&info, mesh_indices, mesh_num_indices, mesh_vertices, mesh_num_vertices, mesh_name.c_str(), mesh_id)) {
-			std::cout << "StoreMesh successful" << std::endl;
-		}
-		else {
-			std::cout << "StoreMesh unsuccessful" << std::endl;
-		}
-
-		// Prepare desired rotation values
-		const float x_rot = 10;
-		const float y_rot = 10;
-		const float z_rot = 20;
-
-		// Call RotateMesh
-		if (RotateMesh(info, x_rot, y_rot, z_rot)) {
-			std::cout << "RotateMesh successful" << std::endl;
-		}
-		else {
-			std::cout << "RotateMesh unsuccessful" << std::endl;
-		}
-
-		// Release memory for info once finished with it
-		DestroyMeshInfo(info);
-	\endcode
+	\returns `HF_STATUS::OK`
 */
 C_INTERFACE RotateMesh(
-	std::vector<HF::Geometry::MeshInfo>* mesh_to_rotate,
+	HF::Geometry::MeshInfo * mesh_to_rotate,
 	float xrot,
 	float yrot,
 	float zrot
