@@ -1,5 +1,5 @@
 /*!
-	\file		embree_raytracer_cinterface.cpp
+	\file		embreeEX_raytracer_cinterface.cpp
 	\brief		Unit test source file for testing the functions declared in raytracer_C.h
 
 	\author		Gem Aludino
@@ -11,9 +11,9 @@
 
 #include "objloader_C.h"
 #include "raytracer_C.h"
-
+/*
 namespace CInterfaceTests {
-	TEST(_raytracer_CInterface, CreateRaytracer) {
+	TEST(EX_raytracer_cinterface, CreateRaytracer) {
 		// Status code variable, value returned by C Interface functions
 		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
 		int status = 0;
@@ -115,7 +115,7 @@ namespace CInterfaceTests {
 		}
 	}
 
-	TEST(_raytracer_CInterface, DestroyRaytracer) {
+	TEST(EX_raytracer_cinterface, DestroyRaytracer) {
 		// Status code variable, value returned by C Interface functions
 		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
 		int status = 0;
@@ -219,7 +219,7 @@ namespace CInterfaceTests {
 		}
 	}
 
-	TEST(_raytracer_CInterface, FireRaysDistance) {
+	TEST(EX_raytracer_cinterface, FireRaysDistance) {
 		// Status code variable, value returned by C Interface functions
 		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
 		int status = 0;
@@ -407,7 +407,7 @@ namespace CInterfaceTests {
 		}
 	}
 
-	TEST(_raytracer_CInterface, FireSingleRayDistance) {
+	TEST(EX_raytracer_cinterface, FireSingleRayDistance) {
 		// Status code variable, value returned by C Interface functions
 		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
 		int status = 0;
@@ -544,7 +544,7 @@ namespace CInterfaceTests {
 		}
 	}
 
-	TEST(_raytracer_CInterface, FireRay) {
+	TEST(EX_raytracer_cinterface, FireRay) {
 		// Status code variable, value returned by C Interface functions
 		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
 		int status = 0;
@@ -694,7 +694,7 @@ namespace CInterfaceTests {
 		}
 	}
 
-	TEST(_raytracer_CInterface, FireMultipleRays) {
+	TEST(EX_raytracer_cinterface, FireMultipleRays) {
 		// Status code variable, value returned by C Interface functions
 		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
 		int status = 0;
@@ -853,7 +853,7 @@ namespace CInterfaceTests {
 		}
 	}
 
-	TEST(_raytracer_CInterface, FireMultipleOriginsOneDirection) {
+	TEST(EX_raytracer_cinterface, FireMultipleOriginsOneDirection) {
 		// Status code variable, value returned by C Interface functions
 		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
 		int status = 0;
@@ -1019,7 +1019,7 @@ namespace CInterfaceTests {
 		}
 	}
 
-	TEST(_raytracer_CInterface, FireMultipleDirectionsOneOrigin) {
+	TEST(EX_raytracer_cinterface, FireMultipleDirectionsOneOrigin) {
 		// Status code variable, value returned by C Interface functions
 		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
 		int status = 0;
@@ -1174,7 +1174,7 @@ namespace CInterfaceTests {
 		}
 	}
 
-	TEST(_raytracer_CInterface, FireOcclusionRays) {
+	TEST(EX_raytracer_cinterface, FireOcclusionRays) {
 		// Status code variable, value returned by C Interface functions
 		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
 		int status = 0;
@@ -1322,7 +1322,7 @@ namespace CInterfaceTests {
 		}
 	}
 
-	TEST(_raytracer_CInterface, DestroyRayResultVector) {
+	TEST(EX_raytracer_cinterface, DestroyRayResultVector) {
 		// Status code variable, value returned by C Interface functions
 		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
 		int status = 0;
@@ -1486,3 +1486,4 @@ namespace CInterfaceTests {
 		}
 	}
 }
+*/
