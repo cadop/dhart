@@ -98,6 +98,27 @@ C_INTERFACE RotateMesh(
 );
 
 
+/*! 
+	\brief Get a pointer to and the size of a mesh's triangle and vertex arrays
+	
+	\param index_out Output parameter for a pointer to the mesh's vertex array
+	\param num_triangles Number of triangles in the index array. Every 3 indices is a new triangle, so this
+						is equal to the length of `index_out` divided by 3.
+	\param vertex_out Output parameter for a pointer to the mesh's index array.
+	\param num_vertices Number of vertices in the vertex array. Every 3 floats is a new vertex, so this
+						is equal to the length of `vertex_out` divided by 3.
+
+	\returns HF_STATUS::OK
+
+*/
+C_INTERFACE GetVertsAndTris(
+	const HF::Geometry::MeshInfo * MI,
+	int** index_out,
+	int* num_triangles,
+	float** vertex_out,
+	int* num_vertices
+);
+
 /// <summary>
 /// Delete all instances of mesh info in the given vector
 /// </summary>
@@ -134,6 +155,7 @@ C_INTERFACE RotateMesh(
 	\endcode
 */
 C_INTERFACE DestroyMeshInfo(HF::Geometry::MeshInfo * mesh_to_destroy);
+
 
 C_INTERFACE DestroyMeshInfoPtrArray(HF::Geometry::MeshInfo** data_array);
 

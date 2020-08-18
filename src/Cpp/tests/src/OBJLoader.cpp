@@ -762,7 +762,17 @@ TEST(_MeshInfo, CopyOperator) {
 
 }
 
+
+
 namespace CInterfaceTests {
+	int mesh_indices[] = { 0, 1, 2 };
+	const int mesh_num_indices = 3;
+	float mesh_vertices[] = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
+	const int mesh_num_vertices = 9;
+
+	std::string mesh_name = "This mesh";
+	const int mesh_id = 0;
+
 	TEST(C_OBJLoader, LoadOBJ) {
 		// Requires #include "objloader_C.h"
 
@@ -807,18 +817,8 @@ namespace CInterfaceTests {
 
 		DestroyMeshInfoPtrArray(info);
 	}
-}
 	TEST(C_OBJLoader, StoreMesh) {
 		// Requires #include "objloader_C.h", #include "meshinfo.h"
-		
-		int mesh_indices[] = { 0, 1, 2 };
-		const int mesh_num_indices = 3;
-		float mesh_vertices[] = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
-		const int mesh_num_vertices = 9;
-
-		std::string mesh_name = "This mesh";
-		const int mesh_id = 39;
-
 		MeshInfo* info = nullptr;
 
 		// Store these vertices in a mesh and verify it completes
@@ -832,20 +832,11 @@ namespace CInterfaceTests {
 		// Release memory for info once finished with it
 		DestroyMeshInfo(info);
 	}
-
 	TEST(C_OBJLoader, RotateMesh) {
 		// Requires #include "objloader_C.h", #include "meshinfo.h"
 
 		// Prepare parameters for StoreMesh
 		MeshInfo * info = NULL;
-
-		int mesh_indices[] = { 0, 1, 2 };
-		const int mesh_num_indices = 3;
-		float mesh_vertices[] = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
-		const int mesh_num_vertices = 9;
-
-		std::string mesh_name = "This mesh";
-		const int mesh_id = 0;
 
 		auto res = StoreMesh(&info, mesh_indices, mesh_num_indices, mesh_vertices, mesh_num_vertices, mesh_name.c_str(), mesh_id);
 		ASSERT_EQ(HF_STATUS::OK, res);
@@ -866,6 +857,41 @@ namespace CInterfaceTests {
 		// Release memory for info once finished with it
 		DestroyMeshInfo(info);
 	}
+
+	TEST(C_OBJLoader, GetVertsAndTris) {
+		// Requires #include "objloader_C.h", #include "meshinfo.h"
+
+		// Prepare parameters for StoreMesh
+		MeshInfo* info = NULL;
+
+		auto res = StoreMesh(&info, mesh_indices, mesh_num_indices, mesh_vertices, mesh_num_vertices, mesh_name.c_str(), mesh_id);
+		ASSERT_EQ(HF_STATUS::OK, res);
+
+		// Get vertices and triangles from the mesh
+		int* index_out = NULL;
+		int num_triangles = 0;
+		float* vertex_out = NULL;
+		int num_vertices = 0;
+
+		// Get the vertices and triangles of this mesh
+		res = GetVertsAndTris(info, &index_out, &num_triangles, &vertex_out, &num_vertices);
+		ASSERT_EQ(HF_STATUS::OK, res);
+
+
+		// Assert that the input matches the output
+		ASSERT_EQ(num_triangles * 3, mesh_num_indices);
+		ASSERT_EQ(num_vertices * 3, mesh_num_vertices);
+
+		for (int i = 0; i < num_vertices * 3; i++)
+			ASSERT_EQ(mesh_vertices[i], vertex_out[i]);
+		for (int i = 0; i < num_triangles; i++)
+			ASSERT_EQ(mesh_indices[i], index_out[i]);
+
+		// Release memory for info once finished with it
+		DestroyMeshInfo(info);
+	}
+
+}
 	
 /*!
 	TEST(_OBJLoaderCInterface, DestroyMeshInfo) {

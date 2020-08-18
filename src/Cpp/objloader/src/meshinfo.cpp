@@ -300,4 +300,22 @@ namespace HF::Geometry {
 		}
 		return true;
 	}
+
+	const array_and_size<int> MeshInfo::GetIndexPointer() const {
+		array_and_size<int> ret_array;
+
+		ret_array.size = indices.size();
+		ret_array.data = const_cast<int*>(indices.data());
+		
+		return ret_array;
+	}
+
+	const array_and_size<float> MeshInfo::GetVertexPointer() const {
+		array_and_size<float> ret_array;
+
+		ret_array.size = verts.size();
+		ret_array.data = const_cast<float*>(verts.data());
+
+		return ret_array;
+	}
 }

@@ -87,6 +87,20 @@ C_INTERFACE RotateMesh(MeshInfo * mesh_to_rotate, float xrot, float yrot, float 
 	return HF_STATUS::OK;
 }
 
+C_INTERFACE GetVertsAndTris(const MeshInfo * MI, int** index_out, int* num_triangles, float** vertex_out, int* num_vertices)
+{
+	auto mesh_vertices = MI->GetVertexPointer();
+	auto mesh_indices = MI->GetIndexPointer();
+
+	*vertex_out = mesh_vertices.data;
+	*num_vertices = mesh_vertices.size / 3;
+
+	*index_out = mesh_indices.data;
+	*num_triangles = mesh_indices.size / 3;
+
+	return HF_STATUS::OK;
+}
+
 C_INTERFACE DestroyMeshInfo(MeshInfo * mesh_to_destroy)
 {
 	DeleteRawPtr(mesh_to_destroy);
