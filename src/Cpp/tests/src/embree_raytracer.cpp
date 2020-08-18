@@ -250,7 +250,7 @@ TEST(_EmbreeRayTracer, FireRays) {
 	// Fire every ray. Results should all be true and be within a certain distance of zero;
 	auto results = ert.FireRays(origins, directions);
 
-	// Print results
+	// Print after_added_results
 	std::cerr << "[";
 	for (int i = 0; i < 10; i++) {
 		if (results[i])
@@ -297,7 +297,7 @@ TEST(_EmbreeRayTracer, FireOcclusionRays) {
 	// Fire every ray.
 	std::vector<char> results = ert.FireOcclusionRays(origins, directions);
 
-	// Iterate through all results to print them
+	// Iterate through all after_added_results to print them
 	std::cerr << "[";
 	for (int i = 0; i < 10; i++) {
 		// Print true if the ray intersected, false otherwise
@@ -896,6 +896,36 @@ namespace C_Interface{
 		// Destroy the Plane and Raytracer
 		DestroyMeshInfo(rotated_plane);
 		DestroyRayTracer(rt);
+	}
+
+	// Ensure that new meshes can actually be intersected
+	TEST(C_EmbreeRayTracer, NewMeshesCanBeIntersected) {
+		
+		// Create initial BVH, then define origins and directions
+		EmbreeRayTracer* rt = ConstructTestRaytracer();
+		std::vector<float> origins = { 1,1,1, 1,1,1};
+		std::vector<float> directions = {0,0,-1, 0,-1,0};
+		
+		// Cast both rays. Only one should intersect
+		bool * before_added_results = new bool[2];
+		int err_c = FireOcclusionRays(rt, origins.data(), directions.data(), 2, 2, -1, before_added_results);
+		EXPECT_NE(before_added_results[0], before_added_results[1]);
+
+		// Create a new rotated plane and add it to the BVH
+		auto rotated_plane = ConstructExamplePlane();
+		rotated_plane->PerformRotation(-90, 0, 0);
+		int add_mesh_result = AddMesh(rt, rotated_plane, 1);
+
+		// Cast both rays, and now ensure they both intersect
+		bool * after_added_results = new bool[2];
+		err_c = FireOcclusionRays(rt, origins.data(), directions.data(), 2, 2, -1, after_added_results);
+		EXPECT_EQ(after_added_results[0], after_added_results[1]);
+
+		// Destroy the Plane and Raytracer
+		DestroyMeshInfo(rotated_plane);
+		DestroyRayTracer(rt);
+		delete[] after_added_results;
+		delete[] before_added_results;
 	}
 	
 
