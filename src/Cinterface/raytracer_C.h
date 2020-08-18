@@ -14,7 +14,6 @@
 
 namespace HF {
 	namespace RayTracer {
-		class MeshInfo;
 		class EmbreeRayTracer;
 	}
 	namespace Geometry {
@@ -119,7 +118,11 @@ struct RayResult {
 	\see	\ref mesh_setup (how to create a mesh), \ref mesh_teardown (how to destroy a mesh)
 	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
 */
-C_INTERFACE CreateRaytracer(std::vector<HF::Geometry::MeshInfo>* mesh, HF::RayTracer::EmbreeRayTracer** out_raytracer);
+C_INTERFACE CreateRaytracer(
+	HF::Geometry::MeshInfo * meshes, 
+	int num_meshes,
+	HF::RayTracer::EmbreeRayTracer ** out_raytracer
+);
 
 /*!
 	\brief		Delete an existing raytracer.

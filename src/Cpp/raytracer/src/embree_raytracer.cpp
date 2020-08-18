@@ -372,9 +372,19 @@ namespace HF::RayTracer {
 		if (MI.empty())
 		{
 			std::cerr << "Embree Ray Tracer was passed an empty vector of mesh info!" << std::endl;
-			throw;
+			throw std::logic_error("Embree Ray Tracer was passed an empty vector of mesh info!");
 		}
 
+		device = rtcNewDevice("start_threads=1,set_affinity=1");
+		scene = rtcNewScene(device);
+		rtcSetSceneBuildQuality(scene, RTC_BUILD_QUALITY_HIGH);
+		rtcSetSceneFlags(scene, RTC_SCENE_FLAG_ROBUST);
+
+		InsertNewMesh(MI, true);
+		rtcInitIntersectContext(&context);
+	}
+
+	EmbreeRayTracer::EmbreeRayTracer(HF::Geometry::MeshInfo& MI) {
 		device = rtcNewDevice("start_threads=1,set_affinity=1");
 		scene = rtcNewScene(device);
 		rtcSetSceneBuildQuality(scene, RTC_BUILD_QUALITY_HIGH);

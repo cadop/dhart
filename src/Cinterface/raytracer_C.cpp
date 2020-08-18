@@ -12,20 +12,28 @@ using HF::Geometry::MeshInfo;
 using namespace HF::Exceptions;
 //TODO: Use a template for this
 
-C_INTERFACE CreateRaytracer(vector<MeshInfo>* mesh, EmbreeRayTracer** out_raytracer)
+C_INTERFACE CreateRaytracer(MeshInfo * meshes, int num_meshes, EmbreeRayTracer** out_raytracer)
 {
-	// Throw if an invalid list was passed to us
-	if (!mesh) {
-		return HF_STATUS::GENERIC_ERROR;
-	}
+	// Create the raytracer with the first mesh.
+	try {
 
-	try { // to create the raytracer
-		auto& meshes = *mesh;
-		*out_raytracer = new EmbreeRayTracer(meshes);
+		// Iterate through all of the meshes in our input and add
+		// them to the raytracer
+		*out_raytracer = new EmbreeRayTracer(meshes[0]);
+		for (int i = 1; i < num_meshes; i++) {
+			// Only commit to scene if this is the final mesh in the array
+			bool should_commit = (i == num_meshes - 1);
+		
+			(*out_raytracer)->InsertNewMesh(meshes[i], should_commit);
+		}
+
 		return OK;
 	}
 	// Thrown if Embree is missing
-	catch (const HF::Exceptions::MissingDependency & e) { return MISSING_DEPEND; }
+	catch (const HF::Exceptions::MissingDependency & e) { 
+		delete out_raytracer;
+		return MISSING_DEPEND; 
+	}
 	return GENERIC_ERROR;
 }
 

@@ -1,22 +1,30 @@
 #include <gtest/gtest.h>
-#include <meshinfo.h>
+
 #include <string>
 #include <objloader.h>
+#include <meshinfo.h>
 #include <embree_raytracer.h>
 #include <robin_hood.h>
 #include <cmath>
+#include <HFExceptions.h>
+
+#include <objloader_C.h>
+#include <raytracer_C.h>
+
 
 #include "RayRequest.h"
 
 #include "performance_testing.h"
 
-using namespace HF::Geometry;
 using namespace HF::RayTracer;
 using std::vector;
 using std::array;
 using std::string;
 using std::cerr;
 using std::endl;
+
+using HF::Geometry::MeshInfo;
+using namespace HF::Geometry;
 
 /// <summary>
 /// Create a new raytracer from a basic 10x10 plane centered on the origin.
@@ -813,4 +821,54 @@ TEST(Performance, EmbreeRaytracer) {
 	}
 	
 	PrintTrials(watches, raycount, "rays");
+}
+
+namespace C_Interface{
+	using HF::Exceptions::HF_STATUS;
+
+	EmbreeRayTracer* ConstructTestRaytracer() {
+		// Define Parameters to construct plane
+		const std::vector<float> plane_vertices{
+			-10.0f, 10.0f, 0.0f,
+			-10.0f, -10.0f, 0.0f,
+			10.0f, 10.0f, 0.0f,
+			10.0f, -10.0f, 0.0f,
+		};
+		const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
+		std::string name = "Test_Mesh";
+		int id = 39;
+
+		// Store mesh and assert that it succeeds
+		HF::Geometry::MeshInfo* MI;
+		auto mesh_store_res = StoreMesh(
+			&MI, plane_indices.data(), 
+			plane_indices.size(),
+			plane_vertices.data(),
+			plane_vertices.size(),
+			name.c_str(), 
+			id
+		);
+		EXPECT_EQ(HF_STATUS::OK, mesh_store_res);
+
+		// Create RayTracer from the meshinfo we just stored
+		EmbreeRayTracer* ray_tracer;
+		int raytracer_res = CreateRaytracer(MI, 1, &ray_tracer);
+		EXPECT_EQ(HF_STATUS::OK, raytracer_res);
+
+		// Delete the meshinfo to clean up
+		DestroyMeshInfo(MI);
+
+		return ray_tracer;
+	}
+
+	// If this crashes, then memory was corrupted by the construction of the raytracer.
+	TEST(C_EmbreeRayTracer, CreateRayTracer) {
+		// Call the raytracer function
+		EmbreeRayTracer* rt = ConstructTestRaytracer();
+
+		// Destroy the raytracer
+		DestroyRayTracer(rt);
+	}
+	
+
 }

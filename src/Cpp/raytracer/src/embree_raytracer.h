@@ -115,6 +115,8 @@ namespace HF::RayTracer {
 			\endcode
 		*/
 		EmbreeRayTracer(std::vector<HF::Geometry::MeshInfo>& MI);
+		
+		EmbreeRayTracer(HF::Geometry::MeshInfo & MI);
 
 
 		/*! \brief Construct a raytracer using another raytracer.
