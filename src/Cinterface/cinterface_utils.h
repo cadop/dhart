@@ -86,6 +86,8 @@ C_INTERFACE DestroyFloatVector(std::vector<float>* float_vector);
 */
 C_INTERFACE DestroyIntVector(std::vector<int>* int_vector);
 
+C_INTERFACE DestroyCharArray(char* char_array);
+
 /// <summary>
 /// Delete some object pointed to by ptr
 /// </summary>
