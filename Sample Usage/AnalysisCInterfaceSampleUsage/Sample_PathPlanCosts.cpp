@@ -11,6 +11,8 @@
 #include <thread>
 #include <Windows.h>
 
+#include <GLFW/glfw3.h>
+
 /*!
 	\brief  Namespace for sample usage function prototypes
 
@@ -64,17 +66,17 @@ namespace HF::SpatialStructures {
 	\brief	Required definition, represents a point in space - a vertex in a graph
 */
 struct HF::SpatialStructures::Node {
-	float x, y, z;
+	float x = 0.0f, y = 0.0f, z = 0.0f;
 	short type = HF::SpatialStructures::NODE_TYPE::GRAPH;
-	int id;
+	int id = 0;
 };
 
 /*!
 	\brief	Required definition, represents a 'stop' along the way of a path
 */
 struct HF::SpatialStructures::PathMember {
-	float cost;
-	int node;
+	float cost = 0.0f;
+	int node = 0;
 };
 
 /*!
@@ -88,7 +90,7 @@ struct HF::SpatialStructures::Path {
 	\brief	Required definition,
 			represents indices of keys for costs returned from calling CalculateAndStoreEnergyExpenditure
 */
-const enum COST_ALG_KEY { CROSS_SLOPE, ENERGY_EXPENDITURE };
+const enum class COST_ALG_KEY { CROSS_SLOPE, ENERGY_EXPENDITURE };
 
 /*!
 	\brief	Required definition,
@@ -100,7 +102,7 @@ const std::vector<std::string> Key_To_Costs{ "CrossSlope", "EnergyExpenditure" }
 	\brief	Get the cost algorithm title from it's associated enum.
 */
 inline std::string AlgorithmCostTitle(COST_ALG_KEY key) {
-	return Key_To_Costs[key];
+	return Key_To_Costs[static_cast<int>(key)];
 }
 
 /*!
@@ -133,7 +135,7 @@ float_precision euclidean_distance(float_precision point_a[], float_precision po
 
 	for (size_t i = 0; i < dimension; i++) {
 		float_precision difference = point_b[i] - point_a[i];
-		sum += std::pow(difference, 2.0);
+		sum += static_cast<float_precision>(std::pow(difference, 2.0));
 	}
 
 	return std::sqrt(sum);
@@ -156,7 +158,7 @@ namespace CInterfaceTests {
 	\returns	A vector<Node> with the same node count as that of nodes -
 				of nodes in g that are closest to the nodes in vector nodes
 */
-template <size_t dimension, typename floating_precision = float>
+template <size_t dimension, typename floating_precision>
 std::vector<HF::SpatialStructures::Node> CInterfaceTests::get_closest_nodes(const std::vector<HF::SpatialStructures::Node>& node_vector,
 	const std::vector<HF::SpatialStructures::Node>& p_desired) {
 	using HF::SpatialStructures::Node;
