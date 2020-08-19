@@ -119,8 +119,7 @@ struct RayResult {
 	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
 */
 C_INTERFACE CreateRaytracer(
-	HF::Geometry::MeshInfo * meshes, 
-	int num_meshes,
+	HF::Geometry::MeshInfo * mesh, 
 	HF::RayTracer::EmbreeRayTracer ** out_raytracer
 );
 

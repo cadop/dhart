@@ -110,7 +110,7 @@ namespace HumanFactors.Tests.Geometry
         {
             MeshInfo[] submeshes = OBJLoader.LoadOBJSubmeshes("ExampleModels/sponza.obj", GROUP_METHOD.BY_GROUP);
 
-            Assert.AreEqual(33, submeshes.Length);
+            Assert.AreEqual(33, submeshes.Length, "Number of submeshes didn't match the actual number of submeshes in sponza");
         }
 
         [TestMethod]

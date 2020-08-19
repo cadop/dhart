@@ -858,7 +858,7 @@ namespace C_Interface{
 
 		// Create RayTracer from the meshinfo we just stored
 		EmbreeRayTracer* ray_tracer;
-		int raytracer_res = CreateRaytracer(MI, 1, &ray_tracer);
+		int raytracer_res = CreateRaytracer(MI, &ray_tracer);
 		EXPECT_EQ(HF_STATUS::OK, raytracer_res);
 
 		// Delete the meshinfo to clean up
@@ -926,5 +926,20 @@ namespace C_Interface{
 		DestroyRayTracer(rt);
 		delete[] after_added_results;
 		delete[] before_added_results;
+	}
+
+	TEST(C_EmbreeRayTracer, ConstructionWithMultipleMeshes) {
+
+		HF::Geometry::MeshInfo ** MI;
+		int num_meshes = 0;
+		auto OBJs = LoadOBJ("sponza.obj", GROUP_METHOD::BY_GROUP, 0, 0, 0, &MI, &num_meshes);
+
+		EmbreeRayTracer* ERT;
+		CreateRaytracer(*MI, &ERT);
+
+		for (int i = 0; i < num_meshes; i++)
+			DestroyMeshInfo(MI[i]);
+		
+		DestroyRayTracer(ERT);
 	}
 }

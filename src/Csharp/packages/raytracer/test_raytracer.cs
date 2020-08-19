@@ -244,7 +244,7 @@ namespace HumanFactors.Tests.RayTracing
 
             var result_1 = results[0];
             foreach (var result in results)
-                Assert.IsTrue(result_1.DistanceTo(result) < 0.001);
+                Assert.AreEqual(0, result_1.DistanceTo(result), 0.0001, "Distance was greater than expected");
         }
 
         [TestMethod]

@@ -12,7 +12,31 @@ using HF::Geometry::MeshInfo;
 using namespace HF::Exceptions;
 //TODO: Use a template for this
 
-C_INTERFACE CreateRaytracer(MeshInfo * meshes, int num_meshes, EmbreeRayTracer** out_raytracer)
+C_INTERFACE CreateRaytracer(MeshInfo * mesh,EmbreeRayTracer** out_raytracer)
+{
+	// Create the raytracer with the first mesh.
+	try {
+
+		// Iterate through all of the meshes in our input and add
+		// them to the raytracer
+		*out_raytracer = new EmbreeRayTracer(*mesh);
+		return OK;
+	}
+	// Thrown if Embree is missing
+	catch (const HF::Exceptions::MissingDependency & e) { 
+		if (*out_raytracer != NULL)
+			delete *out_raytracer;
+		return MISSING_DEPEND; 
+	}
+	catch (const HF::Exceptions::InvalidOBJ & e) {
+		if (*out_raytracer != NULL)
+			delete *out_raytracer;
+		return INVALID_OBJ;
+	}
+	return GENERIC_ERROR;
+}
+
+C_INTERFACE CreateRaytracerMultiMesh(MeshInfo* meshes, int num_meshes, EmbreeRayTracer** out_raytracer)
 {
 	// Create the raytracer with the first mesh.
 	try {
@@ -23,19 +47,26 @@ C_INTERFACE CreateRaytracer(MeshInfo * meshes, int num_meshes, EmbreeRayTracer**
 		for (int i = 1; i < num_meshes; i++) {
 			// Only commit to scene if this is the final mesh in the array
 			bool should_commit = (i == num_meshes - 1);
-		
+
 			(*out_raytracer)->InsertNewMesh(meshes[i], should_commit);
 		}
 
 		return OK;
 	}
 	// Thrown if Embree is missing
-	catch (const HF::Exceptions::MissingDependency & e) { 
-		delete out_raytracer;
-		return MISSING_DEPEND; 
+	catch (const HF::Exceptions::MissingDependency& e) {
+		if (*out_raytracer != NULL)
+			delete* out_raytracer;
+		return MISSING_DEPEND;
+	}
+	catch (const HF::Exceptions::InvalidOBJ& e) {
+		if (*out_raytracer != NULL)
+			delete* out_raytracer;
+		return INVALID_OBJ;
 	}
 	return GENERIC_ERROR;
 }
+
 
 C_INTERFACE AddMesh(HF::RayTracer::EmbreeRayTracer* ERT, HF::Geometry::MeshInfo* MI, int number_of_meshes)
 {
