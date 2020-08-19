@@ -1,6 +1,7 @@
 using HumanFactors.NativeUtils;
 using System;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 
 /*!
@@ -52,19 +53,24 @@ namespace HumanFactors.Geometry
         public DependentNativeArray<float> vertices;
         public DependentNativeArray<int> indices;
 
-		/*!
-            \brief Calculates the mesh's pressure. Unimplemented for now
-            \todo
-            Make a function in C++ to calculate the size of indices/vertices so
-            the amount of pressure to exert on the GC can properly be calculated.
+        /*!
+            \brief Calculates the amount of pressure this mesh should exert on the GC.
+
+            \returns The approximate size of this mesh in bytes.
         */
-		private static int CalculatePresure()
+        public int CalculatePresure()
 		{
-			return -1; // We don't really know the pressure for this class
+            int num_verts = this.vertices.size;
+            int num_tris = this.indices.size;
+
+            int float_pressure = (sizeof(float) * num_verts * 3);
+            int int_pressure = (sizeof(float) * num_tris * 3);
+
+            return int_pressure + float_pressure;
 		}
 
-        /*! \brief Updates this mesh's name and ID with it's values from C++ */
-        private void UpdateIDAndName()
+        /*! \brief Updates this mesh's name, ID, and arrays with it's values from C++ */
+        private void UpdateIDNameAndArrays()
         {
             // Get ID and name
             this.id = NativeMethods.GetMeshID(this.Pointer);
@@ -111,7 +117,10 @@ namespace HumanFactors.Geometry
             \remarks This shouldn't be called directly unless pointer is gauranteed to point to a valid mesh
         */
 
-		internal MeshInfo(IntPtr pointer, int size = 0) : base(pointer, size) { UpdateIDAndName(); }
+		internal MeshInfo(IntPtr pointer, int size = 0) : base(pointer, size) {
+            UpdateIDNameAndArrays();
+            this.UpdatePressure(this.CalculatePresure());
+        }
 
 		/*!
             \brief Create an instance of MeshInfo from an array of vertices and triangle indices.
@@ -134,9 +143,12 @@ namespace HumanFactors.Geometry
 
 		public MeshInfo(int[] indices, float[] vertices, string name = "", int id = 0) :
 			base(NativeMethods.C_StoreMesh(vertices, indices, name, id), (vertices.Length * 4) + (indices.Length * 4))
-		{ UpdateIDAndName(); }
+		{ 
+            UpdateIDNameAndArrays();
+            this.UpdatePressure(this.CalculatePresure());
+        }
 
-		/*!
+        /*!
             \brief Rotate this mesh by the desired magnitude.
 
             \param xrot Pitch to rotate by in degrees.
@@ -152,7 +164,11 @@ namespace HumanFactors.Geometry
             \snippet geometry\test_geometry.cs EX_RotateMesh_xyz
         */
 
-		public void RotateMesh(float xrot, float yrot, float zrot) => NativeMethods.C_RotateMesh(handle, xrot, yrot, zrot);
+        public void RotateMesh(float xrot, float yrot, float zrot)
+        {
+            NativeMethods.C_RotateMesh(handle, xrot, yrot, zrot);
+            UpdateIDNameAndArrays();
+        }
 
 		/*!
             \brief Rotate this mesh by the desired magnitude. </summary>

@@ -96,6 +96,18 @@ namespace HumanFactors.NativeUtils
 		/*! \brief There is no way to invalidate this class without destroying it, so will always return false */
 		public override bool IsInvalid => false;
 
+        /*! \brief Update the pressure of this object.*/
+        public void UpdatePressure(int new_pressure)
+        {
+            if (new_pressure == this.pressure)
+                return;
+
+            if (this.pressure > 0)
+                GC.RemoveMemoryPressure(this.pressure);
+
+            GC.AddMemoryPressure(new_pressure);
+            this.pressure = new_pressure;
+        }
 
 		/// \brief Destroy this object and free the memory of the native object it contains.
 		~NativeObject()

@@ -53,6 +53,14 @@ namespace HumanFactors.RayTracing
        */
         public EmbreeBVH(MeshInfo MI) : base(NativeMethods.C_ConstructRaytracer(MI.DangerousGetHandle()), MI.pressure) { }
 
+        /*! \brief Gets the pointer of every meshinfo in an array of meshinfo. 
+           
+            \param MI Input Meshinfo to get the pointers for
+            
+            \returns An array of pointers for every instance of meshinfo in MI.
+
+            \remarks This is required for the constructor in which multiple meshes are taken in by the BVH. 
+        */
         private static IntPtr[] getMeshInfoPtrs(MeshInfo[] MI)
         {
             int num_ptrs = MI.Length;
@@ -63,7 +71,15 @@ namespace HumanFactors.RayTracing
 
             return ptrs;
         }
-        public EmbreeBVH(MeshInfo[] MI) : base(NativeMethods.C_ConstructRaytracer(getMeshInfoPtrs(MI)), -1) { }
+
+        public EmbreeBVH(MeshInfo[] MI) : base(NativeMethods.C_ConstructRaytracer(getMeshInfoPtrs(MI)), -1) {
+            int total_pressure = this.pressure;
+
+            foreach (var mesh in MI)
+                total_pressure += mesh.pressure;
+
+            this.UpdatePressure(total_pressure);
+        }
 
         /*!
 			 \brief Free the native memory managed by this class. 
