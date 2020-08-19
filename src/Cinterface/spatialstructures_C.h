@@ -1,3 +1,11 @@
+/*!
+	\file		spatialstructures_C.h
+	\brief		Header file related to manipulating nodes, edges, and graphs via CInterface
+
+	\author		TBA
+	\date		19 Aug 2020
+*/
+
 #include <cinterface_utils.h>
 #include <vector>
 #include <array>
@@ -14,39 +22,49 @@ namespace HF {
 	}				 // defined these as classes (V) instead of structs (U)
 }
 
-
-/*! \brief Indexes of keys for costs returned from calling CalculateAndStore functions. */
+/*!
+	\enum		COST_ALG_KEY
+	\brief		Indices of keys for costs returned from calling CalculateAndStore functions
+*/
 const enum COST_ALG_KEY {
 	CROSS_SLOPE, /*! \brief Cost created by CalculateAndStoreCrossSlope. */
 	ENERGY_EXPENDITURE /*! \brief Cost created by CalculateAndStoreEnergyExpenditure. */
 };
 
-/*! \brief Keys of costs for calling CreateAndStore functions.  */
+/*!
+	\brief	Keys of costs for calling CalculateAndStore functions
+*/
 const std::vector<std::string> Key_To_Costs{
 	"CrossSlope",
 	"EnergyExpenditure"
 };
 
-/*! \brief Get the cost algorithm title from it's associated enum. */
+/*!
+	\brief		Get the cost algorithm title (as std::string) 
+				from the COST_ALG_KEY enum member
+*/
 inline std::string AlgorithmCostTitle(COST_ALG_KEY key) {
 	return Key_To_Costs[key];
 }
-/**
-* @defgroup SpatialStructures
-* Contains the Graph and Node datatypes.
-* @{
-*/
-
-/// <summary> Get a vector of every node in the given graph pointer. </summary>
-/// <param name="graph"> Graph to retrieve nodes from. </param>
-/// <param name="out_vector_ptr"> Output parameter for the new vector. </param>
-/// <param name="out_data_ptr"> Output parameter for the vector's data. </param>
-/// <returns>
-/// HF_STATUS::INVALID_PTR if the given pointer was invalid. HF::GENERIC_ERROR if the graph is not
-/// valid. HF::OK if successful.
-/// </returns>
 
 /*!
+	\defgroup	SpatialStructures
+	Contains the Graph and Node data types.
+
+	@{
+*/
+
+/*!
+	\brief		Get a vector of every node in the given graph pointer
+	
+	\param		graph			Graph to retrieve nodes from
+	\param		out_vector_ptr	Output parameter for the new vector
+	\param		out_data_ptr	Output parameter for the vector's data
+	
+	\returns	HF_STATUS::INVALID_PTR if the given pointer was invalid.
+				HF_STATUS::GENERIC_ERROR if the graph is not valid.
+				HF_STATUS::OK if successful.
+
 	\code
 		// Requires #include "graph.h"
 
@@ -85,6 +103,17 @@ C_INTERFACE GetAllNodesFromGraph(
 	HF::SpatialStructures::Node** out_data_ptr
 );
 
+/*!
+	\brief		Get a vector of edges every node in the given graph pointer
+
+	\param		graph
+	\param		node
+	\param		out_vector_ptr
+	\param		out_edge_list_ptr
+	\param		out_edge_list_size
+
+	\returns
+*/
 C_INTERFACE GetEdgesForNode(
 	const HF::SpatialStructures::Graph* graph,
 	const HF::SpatialStructures::Node* Node,
@@ -93,12 +122,14 @@ C_INTERFACE GetEdgesForNode(
 	int* out_edge_list_size
 );
 
-/// <summary> Get the size of a node vector. </summary>
-/// <param name="node_list"> Node vector to get the size from. </param>
-/// <param name="out_size"> Size of the vector will be written to this int. </param>
-/// <returns> HF_STATUS::OK on completion. </returns>
-
 /*!
+	\brief		Get the size of a node vector
+
+	\param		node_list	Node vector to get the size from
+	\param		out_size	Size of the vector will be written to *out_size
+	
+	\returns	HF_STATUS::OK on completion.
+
 	\code
 		// Requires #include "node.h", #include <vector>
 
@@ -120,7 +151,16 @@ C_INTERFACE GetSizeOfNodeVector(
 	int* out_size
 );
 
-// This is never used. Don't include.
+/*!
+	\brief		Get the size of an edge vector
+
+	\param		edge_list	Edge vector to get the size from
+	\param		out_size	Size of the vector will be written to *out_size
+
+	\returns	HF_STATUS::OK on completion
+
+	\deprecated	This is never used. Do not include.
+*/
 C_INTERFACE GetSizeOfEdgeVector(
 	const std::vector<HF::SpatialStructures::Edge>* edge_list,
 	int* out_size
@@ -128,14 +168,15 @@ C_INTERFACE GetSizeOfEdgeVector(
 
 
 /*! 
-	\brief Get the cost of traversing from `parent` to `child`
+	\brief		Get the cost of traversing from `parent` to `child`
 	
-	\param parent ID of the node being traversed from.
-	\param child ID of the node being traversed to.
-	\param cost_type name of the cost type to get the cost from
-	\param out_float Output parameter for the cost of traversing from parent to child
+	\param	g			The graph to traverse
+	\param	parent		ID of the node being traversed from
+	\param	child		ID of the node being traversed to
+	\param	cost_type	name of the cost type to get the cost from
+	\param	out_float	Output parameter for the cost of traversing from parent to child
 
-	\pre g is a valid graph.
+	\pre		g is a valid graph.
 
 	\post 
 	`out_float` is updated with the cost of traversing from parent to child. If no
@@ -152,20 +193,22 @@ C_INTERFACE GetEdgeCost(
 	float* out_float
 );
 
-
-/// <summary> Get an ordered array of costs for each node aggregatted by the desired method. </summary>
-/// <param name="graph"> Graph to aggregare edges from. </param>
-/// <param name="agg"> Aggregation type to use. </param>
-/// <param name="directed">
-/// If true, only count outgoing edges for a node, otherwise count both outgoing and incoming edges.
-/// </param>
-/// <param name="out_vector_ptr"> Output parameter for the vector. </param>
-/// <param name="out_vector_ptr"> Output parameter for the vector's held data. </param>
 /*!
+	\brief		Get an ordered array of costs for each node 
+				aggregated by the desired function.
 
-	\param cost_type Type of cost to use for the graph.
-	\returns HF_STATUS::OK if successful.
-	\returns HF::Exceptions::STATUS::NOT_COMPRESSED if the graph wasn't compressed.
+	\param		graph		Graph to aggregate edges from
+	\param		agg			Aggregation type to use
+
+	\param		directed	If true, only consider edges for a node --
+							otherwise, consider both outgoing and incoming edges.
+
+	\param		cost_type	Node cost type string; type of cost to use for the graph
+	\param		out_vector_ptr	Output parameter for the vector
+	\param		out_data_ptr	Output parameter for the vector's internal buffer
+
+	\returns	HF_STATUS::OK if successful.
+	\returns	HF::Exceptions::STATUS::NOT_COMPRESSED if the graph wasn't compressed.
 
 	\code
 		// Requires #include "graph.h"
@@ -209,13 +252,15 @@ C_INTERFACE AggregateCosts(
 	float** out_data_ptr
 );
 
-/// <summary> Create a new empty graph. </summary>
-/// <param name="nodes"> Unused. </param>
-/// <param name="num_nodes"> Unused. </param>
-/// <param name="out_graph"> Output parameter to store the graph in. </param>
-/// <returns> HF_STATUS::OK on completion. </returns>
-
 /*!
+	\brief		Create a new empty graph
+
+	\param		nodes	(<b>unused parameter</b>) The node IDs to create nodes from
+	\param		num_nodes (<b>unused parameter</b>) Size of nodes array
+	\param		out_graph	Output parameter to store the graph in
+
+	\returns	HF_STATUS::OK on completion.
+
 	\code
 		// Requires #include "graph.h"
 
@@ -241,30 +286,34 @@ C_INTERFACE CreateGraph(
 	HF::SpatialStructures::Graph** out_graph
 );
 
-/// <summary>
-/// Add an edge between parent and child. If parent or child doesn't already exist in the graph,
-/// they will be added and automatically assigned new IDS.
-/// </summary>
-/// <param name="graph"> Graph to add the new edge to. </param>
-/// <param name="parent">
-/// A 3 element float array containing the x, y, and z coordinate of the parent node.
-/// </param>
-/// <param name="child">
-/// A 3 element float array containing the x, y, and z coordinate of the child node,
-/// </param>
-/// <param name="score"> The cost from parent to child </param>
 /*!
-	\param cost_type Type of cost to add the edge to 
+	\brief		Add an edge between parent and child.
+				If parent or child does not already exist in the graph,
+				they will be added and automatically assigned new IDs.
 
-	\returns HF::Exceptions::HF_STATUS::OK on success.
-	\returns HF::Exceptions::HF_STATUS::INVALID_PTR on an invalidparent or child node
-	\returns HF::Exceptions::HF_STATUS::NOT_COMPRESSED Tried to add an edge to an alternate cost type
-	when the graph wasn't compressed
-	\returns HF::Exceptions::OUT_OF_RANGE Tried to add an edge to an alternate cost that didn't already
-	exist in the default graph.
+	\param		graph		Graph to add the new edge to
 
-	\pre cost_type MUST be a valid delimited char array. If the entire program crashes when this is called,
-	this is why. 
+	\param		parent		A three-element array of float 
+							containing the x, y, and z coordinates of the parent node
+
+	\param		child		A three-element array of float
+							containing the x, y, and z coordinates of the child node.
+
+	\param		score		The edge cost from parent to child
+
+	\param		cost_type	Edge cost type
+
+	\returns HF_STATUS::OK on success.
+	\returns HF_STATUS::INVALID_PTR on an invalid parent or child node
+
+	\returns HF_STATUS::NOT_COMPRESSED Tried to add an edge to an alternate cost type
+									   when the graph wasn't compressed
+
+	\returns HF::Exceptions::OUT_OF_RANGE Tried to add an edge to an alternate cost 
+										  that didn't already exist in the default graph.
+
+	\pre cost_type MUST be a valid delimited char array. 
+				   If the entire program crashes when this is called, this is why. 
 	
 	\code
 		// Requires #include "graph.h"
@@ -297,20 +346,21 @@ C_INTERFACE AddEdgeFromNodes(
 	const char * cost_type
 );
 
-/// <summary>
-/// Create a new edge between parent_id and child_id. If these IDs don't yet exist in the graph they
-/// will be added.
-/// </summary>
-/// <param name="graph"> Graph to create the new edge in. </param>
-/// <param name="parent"> The parent's id in the graph. </param>
-/// <param name="child"> The child's id in the graph. </param>
-/// <param name="score"> The cost from parent to child. </param>
-
 /*!
+	\brief		Create a new edge between parent_id and child_id.
+				If these IDs do not exist in the graph, they will be added.
 
-	\param cost_type The type of cost to add this edge to.
+	\param		graph	Graph to create the new edge in
+	\param		parent	The parent's ID in the graph
+	\param		child	The child's ID in the graph
+	\param		score	The cost from parent to child.
+	\param		cost_type The type of cost to add this edge to.
+
 	\returns STATUS::OK on completion. 
-	\returns STATUS::NOT_COMPRESSED if an alternate cost was added without first compressing the graph
+
+	\returns STATUS::NOT_COMPRESSED if an alternate cost was added 
+								    without first compressing the graph
+
 	\returns STATUS::NO_COST The given cost string was invalid. 
 
 	\code
@@ -343,18 +393,16 @@ C_INTERFACE AddEdgeFromNodeIDs(
 	const char * cost_type
 );
 
-/// <summary>
-/// Retrieve all information for a graph's CSR representation. This will compress the graph if it
-/// was not yet already compressed.
-/// </summary>
-/// <param name="out_nnz"> Number of non-zeros contained within the graph. </param>
-/// <param name="out_num_rows"> Number of rows contained within the graph. </param>
-/// <param name="out_num_rows"> Number of columns contained within the graph. </param>
-/// <param name="out_data_ptr"> Pointer to the graph's data array. </param>
-/// <param name="out_inner_indices_ptr"> Pointer to the graph's inner indices array. </param>
-/// <param name="out_inner_indices_ptr"> Pointer to the graph's outer indices array. </param>
-
 /*!
+	\brief		Retrieve all information for a graph's CSR representation.
+				This will compress the graph if it was not already compressed.
+
+	\param		out_nnz			Number of non-zero values contained within the CSR
+	\param		out_num_rows	Number of rows contained within the CSR
+	\param		out_num_cols	Number of columns contained within the CSR
+	\param		out_data_ptr	Pointer to the CSR's data array
+	\param		out_inner_indices_ptr	Pointer to the graph's inner indices array (columns)
+	\param		out_outer_indices_ptr	Pointer to the graph's outer indices array (rpws)
 	\param cost_type Cost type to compress the CSR with.
 
 	\returns HF_STATUS::OK on success.
@@ -409,20 +457,22 @@ C_INTERFACE GetCSRPointers(
 	const char* cost_type
 );
 
-/// <summary>
-/// Get the id of the given node in the graph. If the node does not exist, <paramref name="out_id"
-/// /> will be set to -1.
-/// </summary>
-/// <param name="graph"> The graph to get the ID from. </param>
-/// <param name="point">
-/// A 3 float array containing the x,y, and z coordinates of the point to get the ID for.
-/// </param>
-/// <param name="out_id">
-/// Output parameter for the id. Set to -1 if that point couldn't be found in <paramref name="graph" />
-/// </param>
-/// <returns> HF_STATUS::OK on completion. </returns>
-
 /*!
+	\brief		Get the ID of the given node in the graph.
+				If the node does not exist,
+				<paramref name="out_id"/> will be set to -1.
+
+	\param		graph		The graph to get the ID from
+
+	\param		point		A three-element array of float containing the
+							x, y, and z coordinates of the point to get the ID for.
+
+	\param		out_id		Output parameter for the ID.
+							Set to -1 if <paramref name="point"> 
+							could not be found in <paramref name="graph"/>.
+
+	\returns	HF_STATUS::OK on completion.
+
 	\code
 		// Requires #include "graph.h"
 
@@ -457,14 +507,17 @@ C_INTERFACE GetNodeID(
 	int* out_id
 );
 
-/// <summary> Compress the given graph into a csr representation. </summary>
-/// <returns> HF_STATUS::OK on completion. </returns>
-/// <remarks>
-/// This will reduce the memory footprint of the graph, and invalidate all existing CSR
-/// representations of it. If the graph is already compressed, this will be a no-op.
-/// </remarks>
-
 /*!
+	\brief		Compress the given graph into a CSR representation.
+
+	\param		graph	The graph to compress into a CSR.
+
+	\returns	HF_STATUS::OK on completion.
+
+	\remarks	This will reduce the memory footprint of the graph,
+				and invalidate all existing CSR representation of it.
+				If the graph is already compressed, this function will be a no-op.
+
 	\code
 		// Requires #include "graph.h"
 
@@ -503,11 +556,13 @@ C_INTERFACE Compress(
 	HF::SpatialStructures::Graph* graph
 );
 
-/// <summary> Clear the nodes/edges for the given graph. Or clear a specific cost type.</summary>
-/// <param name="graph"> Graph to clear nodes from. </param>
-
 /*!
-	
+	\brief		Clear the nodes/edges for the given graph,
+				or clear a specific cost type.
+
+	\param		graph		Graph to clear nodes from
+	\param		cost_type	Edge cost type string (if clearing a specific cost type).
+
 	\param cost_type If blank, delete the graph, otherwise only clear the cost at this type.
 
 	\returns HF_STATUS::OK if the operation succeeded
@@ -543,11 +598,13 @@ C_INTERFACE ClearGraph(
 	const char* cost_type
 );
 
-/// <summary> Delete the vector of nodes at the given pointer. </summary>
-/// <param name="nodelist_to_destroy"> Vector of nodes to destroy. </param>
-/// <returns> HF_STATUS::OK on completion. </returns>
-
 /*!
+	\brief		Delete the vector of nodes at the given pointer
+
+	\param		nodelist_to_destroy		Vector of nodes to destroy
+
+	\returns	HF_STATUS::OK on completion.
+
 	\code
 		// Requires #include "node.h", #include <vector>
 
@@ -572,6 +629,12 @@ C_INTERFACE DestroyNodes(
 /// <returns> HF_STATUS::OK on completion. </returns>
 
 /*!
+	\brief		Delete the vector of edges at the given pointer.
+
+	\param		edgelist_to_destroy		Vector of nodes to destroy
+
+	\returns	HF_STATUS::OK on completion.
+
 	\code
 		// Requires #include "node.h", #include <vector>
 
@@ -594,11 +657,13 @@ C_INTERFACE DestroyEdges(
 	std::vector<HF::SpatialStructures::Edge>* edgelist_to_destroy
 );
 
-/// <summary> Delete a graph. </summary>
-/// <param name="graph_to_destroy"> Graph to delete. </param>
-/// <returns> HF_STATUS::OK on completion. </returns>
-
 /*!
+	\brief		Delete a graph.
+
+	\param		graph_to_destroy		Graph to delete
+
+	\returns	HF_STATUS::OK on completion
+
 	\code
 		// Requires #include "graph.h"
 
@@ -623,9 +688,10 @@ C_INTERFACE DestroyGraph(
 );
 
 /*!
-	\summary Calculates cross slope for all subgraphs in *g
-	\param g The address of a Graph
-	\returns HF::STATUS::OK on completion
+	\brief		Calculates cross slope for all subgraphs in *g
+	\param		g	The graph to calculate cross slope on
+
+	\returns	HF_STATUS::OK on completion
 
 	\code
 		// Requires #include "graph.h"
@@ -664,10 +730,12 @@ C_INTERFACE DestroyGraph(
 C_INTERFACE CalculateAndStoreCrossSlope(HF::SpatialStructures::Graph* g);
 
 /*!
-	\summary Calculates energy expenditure for all subgraphs in *g and stores them in the graph
-			 at AlgorithmCostTitle(ALG_COST_KEY::EnergyExpenditure)
-	\param g The address of a Graph
-	\returns HF::STATUS::OK on completion
+	\brief		Calculates energy expenditure for all subgraphs in *g 
+				and stores them in the graph at AlgorithmCostTitle(ALG_COST_KEY::EnergyExpenditure)
+
+	\param		g		The address of a Graph
+
+	\returns	HF_STATUS::OK on completion
 
 	\code
 		// Requires #include "graph.h"
@@ -706,26 +774,29 @@ C_INTERFACE CalculateAndStoreCrossSlope(HF::SpatialStructures::Graph* g);
 C_INTERFACE CalculateAndStoreEnergyExpenditure(HF::SpatialStructures::Graph* g);
 
 /*!
-	\brief Add a new node attribute in the graph for the node at id.
+	\brief	Add a new node attribute in the graph for the nodes at ids.
 
-	\param g Graph to add attributes to 
-	\param ids Ids of nodes to add attributes to
-	\param attribute The name of the attribute to add the scores to. 
-	\param scores an ordered array of null terminated char arrays that correspond
-				  to the score of the ID in ids at the same index. 
-	\param num_nodes Length of both the ids and scores arrays
+	\param		g			Graph to add attributes to 
+	\param		ids			IDs of nodes to add attributes to
+	\param		attribute	The name of the attribute to add the scores to.
 
-	\returns HF_STATUS::OK on completion. Note that this does not gauranttee that some or all
-	of the node attributes have been added
+	\param		scores		An ordered array of null terminated char arrays 
+							that correspond to the score of the ID in ids at the same index. 
+
+	\param		num_nodes	Length of both the ids and scores arrays
+
+	\returns	HF_STATUS::OK on completion. 
+				 Note that this does not guarantee that some 
+				or all of the node attributes have been added
 
 	\detail 
 	For any id in ids, if said ID doesn't already exist in the graph, then it and its cost will
 	silently be ignored without error.
 
-	\pre Ids and Scores arrays must be the same length
+	\pre	ids and scores arrays must be the same length
 	
 	\code
-		
+		// TODO example
 	\endcode
 */
 C_INTERFACE AddNodeAttributes(
@@ -736,19 +807,27 @@ C_INTERFACE AddNodeAttributes(
 	int num_nodes
 );
 
-/// <summary> Attribute should be the name of the attribute to get from the graph.
-/// Memory shall be allocated in *out_scores to hold the char arrays.
-/// out_scores is a pointer to an array of pointers to char arrays, which will be allocated by the caller.
-/// The caller must call DeleteScores to deallocate these node scores.
-/// out_score_size should be updated to the length of the score array.</summary>
-/// <param name="g">The graph that will be used to retrieve attributes</param>
-/// <param name="attribute">The attribute to retrieve from g</param>
-/// <param name="out_scores">Pointer to array of pointers to char arrays, allocated by the caller</param>
-/// <param name="out_score_size">Keeps track of the length of the out_scores buffer, updated as needed</param>
-/// <returns> HF_STATUS::OK on completion </returns>
 /*!
-	\code
+	\brief		Retrieve node attribute values from *g
 
+	\param		g			The graph that will be used to retrieve 
+							node attribute values from
+
+	\param		attribute		The node attribute type to retrieve from *g
+	\param		out_scores		Pointer to array of (char *), allocated by the caller
+	\param		out_score_size	Keeps track of the size of out_scores buffer, 
+								updated as required
+
+	\returns	HF_STATUS::OK on completion.
+
+	\details	Memory shall be allocated in *out_scores to hold the char arrays.
+				out_scores is a pointer to an array of (char *),
+				which will be allocated by the caller.
+				The caller must call DeleteScores to deallocate the memory addressed
+				by each pointer in out_scores.
+
+	\code
+		// TODO example
 	\endcode
 */
 C_INTERFACE GetNodeAttributes(
@@ -758,81 +837,46 @@ C_INTERFACE GetNodeAttributes(
 	int* out_score_size
 );
 
-/// <summary> Free the memory of every char array in scores_to_delete.
-/// The length of each contained char array should be determined by using strlen on the given array
-/// unless they are not delimited.</summary>
-/// <param name="scores_to_delete">Pointer to array of pointers to char arrays, allocated by caller</param>
-/// <param name="num_char_arrays">Block count of scores_to_delete</param>
-/// <returns> HF_STATUS::OK on completion </returns>
-
 /*!
-	\code
+	\brief		Free the memory of every (char *) in scores_to_delete.
 
+	\param		scores_to_delete	Pointer to array of (char *), allocate by the caller
+	\param		num_char_arrays		Block count of scores_to_delete
+
+	\returns	HF_STATUS::OK on completion
+
+	\code
+		// TODO example
 	\endcode
 */
 C_INTERFACE DeleteScoreArray(char** scores_to_delete, int num_char_arrays);
 
-/// <summary> Deletes the contents of that attribute type in the graph </summary>
-/// <param name="g"> The graph from which attributes of type s will be delete</param>
-/// <param name="s"> The attribute to be cleared from within g</param>
-/// <returns> HF_STATUS::OK on completion </returns>
-
 /*!
-	\code
+	\brief		Deletes the node attribute values of the type denoted by s, from graph *g
 
+	\param		g	The graph from which attributes of type s will be deleted
+	\param		s	The attribute value type to be cleared from within g
+
+	\returns	HF_STATUS::OK on completion
+
+	\code
+		// TODO example
 	\endcode
 */
 C_INTERFACE ClearAttributeType(HF::SpatialStructures::Graph* g, const char* s);
 
-/**@}*/
 /*!
-	\summary Calculates cross slope for all subgraphs in *g and stores them 
-			 at AlgorithmCostTitle(ALG_COST_KEY::CROSS_SLOPE)
-	\param g The address of a Graph
-	\returns HF::STATUS::OK on completion
+	\brief		Get the number of nodes in a graph
+
+	\param		g			Pointer to the graph to get the size of
+	\param		out_size	Location where the size of the graph will be written
+
+	\returns HF::OK on completion
 
 	\code
-		// Requires #include "graph.h"
-
-		// Create 7 nodes
-		Node n0(0, 0, 0);
-		Node n1(1, 3, 5);
-		Node n2(3, -1, 2);
-		Node n3(1, 2, 1);
-		Node n4(4, 5, 7);
-		Node n5(5, 3, 2);
-		Node n6(-2, -5, 1);
-
-		Graph g;
-
-		// Adding 9 edges
-		g.addEdge(n0, n1);
-		g.addEdge(n1, n2);
-		g.addEdge(n1, n3);
-		g.addEdge(n1, n4);
-		g.addEdge(n2, n4);
-		g.addEdge(n3, n5);
-		g.addEdge(n5, n6);
-		g.addEdge(n4, n6);
-
-		// Always compress the graph after adding edges!
-		g.Compress();
-
-		// Within CalculateAndStoreCrossSlope,
-		// std::vector<std::vector<IntEdge>> CostAlgorithms::CalculateAndStoreCrossSlope(Graph& g)
-		// will be called, along with a call to the member function
-		// void Graph::AddEdges(std::vector<std::vector<IntEdge>>& edges).
-		CalculateAndStoreCrossSlope(&g);
+		// TODO example
 	\endcode
 */
-C_INTERFACE CalculateAndStoreCrossSlope(HF::SpatialStructures::Graph* g);
-
-/*!
-	\brief Get the number of nodes in a graph
-	
-	\param g Pointer to the graph to get the size of 
-	\param out_size location where the size of the graph will be written
-	
-	\return HF::OK on completion
-*/
 C_INTERFACE GetSizeOfGraph(const HF::SpatialStructures::Graph* g, int* out_size);
+
+/**@}*/
