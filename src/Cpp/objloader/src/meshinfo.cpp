@@ -214,6 +214,7 @@ namespace HF::Geometry {
 		q.normalize();
 		Eigen::Matrix3f rotation_matrix = q.toRotationMatrix();
 
+		//! [snippet_objloader_assert]
 		// Assert that we didn't create any NANS or infinite values
 		assert(rotation_matrix.allFinite());
 
@@ -222,6 +223,7 @@ namespace HF::Geometry {
 
 		// Once again assert that we didn't create any nans or infinite numbers.
 		assert(verts.allFinite());
+		//! [snippet_objloader_assert]
 	}
 
 	int MeshInfo::GetMeshID() const { return meshid; }
