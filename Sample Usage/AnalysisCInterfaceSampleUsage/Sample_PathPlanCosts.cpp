@@ -161,6 +161,12 @@ std::vector<HF::SpatialStructures::Node> CInterfaceTests::get_closest_nodes(cons
 	const std::vector<HF::SpatialStructures::Node>& p_desired) {
 	using HF::SpatialStructures::Node;
 
+	// Via node_vector, 
+	// - find the node closest to p_desired[0], output that node ID
+	// - find the node closest to p_desired[1], output that node ID
+	// Output nodes are stored (and will come from) closest_nodes
+
+	// C Interface status code variable
 	int status = 0;
 
 	// Closest nodes to the nodes in g (compared with parameter vector<Node> nodes)
@@ -168,13 +174,9 @@ std::vector<HF::SpatialStructures::Node> CInterfaceTests::get_closest_nodes(cons
 	std::vector<Node> closest_nodes(p_desired.size());
 	auto closest_nodes_it = closest_nodes.begin();
 
-	// Via node_vector, 
-	// - find the node closest to p_desired[0], output that node ID
-	// - find the node closest to p_desired[1], output that node ID
-	// Output nodes are stored (and will come from) closest_nodes
-
 	// Create an iterator from node_vector. Starts at the first node at node_vector
 	auto node_vector_it = node_vector.begin();
+	const auto node_vector_begin = node_vector_it;	// We will use this repeatedly, so we'll save a method call.
 
 	// Create an iterator from p_desired. Starts at the first node at p_desired.
 	auto p_desired_it = p_desired.begin();
@@ -182,12 +184,19 @@ std::vector<HF::SpatialStructures::Node> CInterfaceTests::get_closest_nodes(cons
 	// Convert the node at *p_desired to an array of float. Represents coordinates.
 	float comparison_node[3] = { p_desired_it->x, p_desired_it->y, p_desired_it->z };
 
-	// Compute the distance between the first node in the graph and the first comparison node.
+	// Convert the node at *node_vector_it to an array of float. Represents coordinates.
 	float graph_node[3] = { node_vector_it->x, node_vector_it->y, node_vector_it->z };
+
+	// Compute the distance between the first node in the graph and the first comparison node.
 	float saved_distance = euclidean_distance<dimension, floating_precision>(comparison_node, graph_node);
 
 	while (p_desired_it < p_desired.end()) {
 		// While we have nodes to compare with the graph nodes...
+
+		// Initialize graph node to the first node in the graph.
+		graph_node[0] = node_vector_begin->x;
+		graph_node[1] = node_vector_begin->y;
+		graph_node[2] = node_vector_begin->z;
 
 		// This is the current comparison node we are iterating over.
 		float comparison_node[3] = { p_desired_it->x, p_desired_it->y, p_desired_it->z };
@@ -196,14 +205,15 @@ std::vector<HF::SpatialStructures::Node> CInterfaceTests::get_closest_nodes(cons
 		// and is updated to be calcuated_distance whenever calcuated_distance < saved_distance.
 		// Prior to the inner loop, saved_distance is the distance between comparsion_node
 		// and the first node of the graph. (first node in node_vector)
-		float saved_distance = euclidean_distance<dimension, floating_precision>(comparison_node, graph_node);
+		saved_distance = euclidean_distance<dimension, floating_precision>(comparison_node, graph_node);
 
 		while (node_vector_it < node_vector.end()) {
 			// While we are still traversing the graph nodes...
 
 			if (p_desired_it->id != node_vector_it->id) {
-				// This is the current node in the graph we are iterating over.
-				float graph_node[3] = { node_vector_it->x, node_vector_it->y, node_vector_it->z };
+				graph_node[0] = node_vector_it->x;
+				graph_node[1] = node_vector_it->y;
+				graph_node[2] = node_vector_it->z;
 
 				// Compute distance between graph node and comparison node.
 				float calculated_distance = euclidean_distance<dimension, floating_precision>(comparison_node, graph_node);
@@ -228,7 +238,7 @@ std::vector<HF::SpatialStructures::Node> CInterfaceTests::get_closest_nodes(cons
 
 		// Reset the graph node iterator to the beginning,
 		// prepare for the next comparison node.
-		node_vector_it = node_vector.begin();
+		node_vector_it = node_vector_begin;
 
 		// These are incremented one after another,
 		// because we want to store the closest node 
@@ -656,7 +666,7 @@ void CInterfaceTests::path_plan_costs(HINSTANCE dll_hf) {
 	auto closest_nodes = CInterfaceTests::get_closest_nodes<2>(*node_vector, p_desired);
 
 	std::cout << "Closest Node:\t[ ";
-	for (auto node : closest_nodes) {
+	for (auto &node : closest_nodes) {
 		std::cout << node.id << " ";
 	}
 	std::cout << "]" << std::endl;
@@ -748,11 +758,6 @@ void CInterfaceTests::path_plan_costs(HINSTANCE dll_hf) {
 			std::cout << "Total path cost: " << path_sum << std::endl;
 		}
 	}
-
-	//
-	// TODO: plot the graph.
-	// See Python documentation, "Path Plan with Different Costs" example
-	//
 
 	//
 	// Memory resource cleanup.
