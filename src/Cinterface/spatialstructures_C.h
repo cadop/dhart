@@ -76,6 +76,27 @@ inline std::string AlgorithmCostTitle(COST_ALG_KEY key) {
 	Contains the Graph and Node data types.
 
 	@{
+
+	Although graphs can be generated (see \ref generate_graph),<br>
+	they can <b>also be created by objects instantiated or obtained by the user</b>.
+
+	\section	graph_setup				Graph setup
+	TODO Graph setup
+
+	\section	graph_add_edge_from_nodes		Adding edges from nodes
+	TODO Adding edges from nodes
+
+	\section	graph_add_edge_from_node_ids	Adding edges from node IDs
+	TODO Adding edges from node IDs
+
+	\section	graph_compress	Compressing the graph
+	TODO Compressing the graph
+
+	\section	graph_get_csr_pointers	Retrieve a CSR of the graph
+	TODO Retrieve a CSR of the graph
+
+	When you are finished with the graph, be sure to destroy it.<br>
+	(see \ref graph_teardown)
 */
 
 /*!
