@@ -81,6 +81,28 @@ namespace HumanFactors.RayTracing
             this.UpdatePressure(total_pressure);
         }
 
+        public void AddMesh(MeshInfo MI)
+        {
+            // Add the mesh to the BVH
+            NativeMethods.C_AddMesh(this.Pointer, new IntPtr[] { MI.Pointer });
+
+            // Increase the pressure we're exerting on the GC
+            int new_pressure = this.pressure + MI.pressure;
+            this.UpdatePressure(new_pressure);
+        }
+
+        public void AddMesh(MeshInfo[] MI)
+        {
+            // Add the mesh to the bvh
+            NativeMethods.C_AddMesh(this.Pointer, getMeshInfoPtrs(MI));
+
+            // Update the pressure we're exerting on the GC
+            int total_pressure = this.pressure;
+            foreach (var mesh in MI)
+                total_pressure += mesh.pressure;
+            this.UpdatePressure(total_pressure);
+        }
+
         /*!
 			 \brief Free the native memory managed by this class. 
 			 \note the garbage collector will handle this automatically

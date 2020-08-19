@@ -79,6 +79,9 @@ namespace HumanFactors.RayTracing
 			// Return the new pointer.
 			return ret_ptr;
 		}
+
+		internal static void C_AddMesh(IntPtr rt, IntPtr[] Meshes) => AddMeshes(rt, Meshes, Meshes.Length);
+		
 		/*! 
             \brief Cast a ray in C++ 
            
@@ -385,6 +388,13 @@ namespace HumanFactors.RayTracing
 			ref IntPtr out_raytracer
 		);	
 
+		[DllImport(dllpath)]
+		private static extern HF_STATUS AddMeshes(
+			IntPtr ray_tracer,
+			IntPtr[] meshes,
+			int num_meshes
+		);	
+		
 		[DllImport(dllpath)]
 		private static extern HF_STATUS FireRay(
 			IntPtr ert,

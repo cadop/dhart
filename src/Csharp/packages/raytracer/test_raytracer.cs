@@ -45,6 +45,29 @@ namespace HumanFactors.Tests.RayTracing
             Assert.IsTrue(pt.IsValid());
         }
 
+        [TestMethod]
+        public void AddMeshes()
+        {
+            // Load a lot of submeshes from sponza
+            var MeshInfos = OBJLoader.LoadOBJSubmeshes("ExampleModels/sponza.obj", GROUP_METHOD.BY_GROUP);
+            var Plane = OBJLoader.LoadOBJ("ExampleModels/plane.obj");
+            
+            // Construc ta BVH from the plane
+            EmbreeBVH bvh = new EmbreeBVH(Plane);
+
+            // Add meshes to the meshinfo
+            bvh.AddMesh(MeshInfos);
+
+            // Cast a ray straight downwards, and ensure it intersects.
+            // If the point is false, then the bvh was created incorrectly
+            Vector3D origin = new Vector3D(0, 0, 1);
+            Vector3D direction = new Vector3D(0, 0, -1);
+            var pt = EmbreeRaytracer.IntersectForPoint(bvh, origin, direction);
+
+            Assert.IsTrue(pt.IsValid());
+
+        }
+
     }
 
     [TestClass]
