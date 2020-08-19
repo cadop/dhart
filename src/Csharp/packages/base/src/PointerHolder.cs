@@ -340,4 +340,23 @@ namespace HumanFactors.NativeUtils
 		unsafe internal NativeArray2D(CVectorAndData ptrs) : base(ptrs, ptrs.size * ptrs.size2) { }
 	}
 
+    /*! 
+		\brief A native array 2D that doesn't require destruction.
+
+		\remarks
+		Use this for arrays that don't need to be destructed, but instead are destroyed by some other means.
+		An example of this is the vertex and index arrays for an instance of MeshInfo, in which both are destroyed
+		when the meshinfo is destroyed. 
+    */
+    public class DependentNativeArray<T> : NativeArray2D<T> where T : unmanaged
+    {
+
+        internal DependentNativeArray(IntPtr data, int length, int width)
+            : base(new CVectorAndData(data, IntPtr.Zero, length, width)) { }
+
+
+        /*!\brief Doesn't do anything since it's managed by it's parent MeshInfo */
+        protected override bool ReleaseHandle() => true;
+    }
+
 }

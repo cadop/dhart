@@ -22,19 +22,6 @@ using System.Security.Cryptography;
 
 namespace HumanFactors.Geometry
 {
-    /*! 
-        \brief A native array 2D that doesn't require destruction 
-    */
-    public class DependentNativeArray<T> : NativeArray2D<T>  where T : unmanaged{
-
-        internal DependentNativeArray(IntPtr data, int length, int width) 
-            : base(new CVectorAndData(data, IntPtr.Zero, length, width)) {}
-
-
-        /*!\brief Doesn't do anything since it's managed by it's parent MeshInfo */
-        protected override bool ReleaseHandle() => true;
-    }
-
 	/*!
 		\brief A collection of vertices and indices representing geometry.
 
