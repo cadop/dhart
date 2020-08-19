@@ -930,12 +930,21 @@ namespace C_Interface{
 
 	TEST(C_EmbreeRayTracer, ConstructionWithMultipleMeshes) {
 
+		// Load meshes
 		HF::Geometry::MeshInfo ** MI;
 		int num_meshes = 0;
 		auto OBJs = LoadOBJ("sponza.obj", GROUP_METHOD::BY_GROUP, 0, 0, 0, &MI, &num_meshes);
 
+		// Create Raytracer
 		EmbreeRayTracer* ERT;
-		CreateRaytracer(*MI, &ERT);
+		CreateRaytracerMultiMesh(MI, num_meshes,  &ERT);
+	
+		// Cast a ray at the ground and ensure it connects
+		float x = 0; float y = 0; float z = 1;
+		int dx = 0; int dy = 0; int dz = -1;
+		bool res = false;
+		FireRay(ERT, x, y, z, dx, dy, dz, -1, res);
+		ASSERT_TRUE(res);
 
 		for (int i = 0; i < num_meshes; i++)
 			DestroyMeshInfo(MI[i]);

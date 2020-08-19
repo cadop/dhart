@@ -59,7 +59,25 @@ namespace HumanFactors.RayTracing
 
 		internal static IntPtr C_ConstructRaytracer(IntPtr[] mesh_info_ptr)
 		{
-			throw new NotImplementedException();
+			// Create a new pointer to hold the output of this function
+			IntPtr ret_ptr = new IntPtr();
+
+			// Call the function in C++. If this succeeds, then the ret_ptr will be
+			// updated with a pointer to the new object
+			HF_STATUS result = CreateRaytracerMultiMesh(mesh_info_ptr, mesh_info_ptr.Length, ref ret_ptr);
+
+			// Right now this is never thrown due to an unset compiler switch. This
+			// is a matter of changing a cmake option though, so it's here for when
+			// we set that up.
+			if (result == HF_STATUS.MISSING_DEPEND)
+				throw new Exception("Missing embree3.dll or tbb.dll");
+
+			// If it's not OK then something changed in the CInterface that wasn't reflected
+			// in C#. This is developer problem.
+			Debug.Assert(result == HF_STATUS.OK);
+
+			// Return the new pointer.
+			return ret_ptr;
 		}
 		/*! 
             \brief Cast a ray in C++ 
@@ -359,6 +377,13 @@ namespace HumanFactors.RayTracing
 			IntPtr mesh,
 			ref IntPtr out_raytracer
 		);
+
+		[DllImport(dllpath)]
+		private static extern HF_STATUS CreateRaytracerMultiMesh(
+			IntPtr[] meshes,
+			int num_meshes,
+			ref IntPtr out_raytracer
+		);	
 
 		[DllImport(dllpath)]
 		private static extern HF_STATUS FireRay(

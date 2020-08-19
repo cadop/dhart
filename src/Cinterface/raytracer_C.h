@@ -124,6 +124,23 @@ C_INTERFACE CreateRaytracer(
 );
 
 /*!
+	\brief		 Create a new raytracer using several meshes.
+
+	\param	mesh			The meshes to add to raytracer's BVH.
+	\param num_meshes	Number of meshes in meshes
+	\param	out_raytracer	Output parameter for the new raytracer.
+
+	\returns	HF_STATUS::MISSING_DEPEND if Embree's dll couldn't be found.
+				HF_STATUS::GENERIC_ERROR if `mesh` is null.
+*/
+C_INTERFACE CreateRaytracerMultiMesh(
+	HF::Geometry::MeshInfo** meshes,
+	int num_meshes,
+	HF::RayTracer::EmbreeRayTracer** out_raytracer
+);
+
+
+/*!
 	\brief Add a new mesh to a raytracer.
 
 	\param ERT raytracer toa dd the mesh to

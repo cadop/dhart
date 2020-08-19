@@ -53,6 +53,18 @@ namespace HumanFactors.RayTracing
        */
         public EmbreeBVH(MeshInfo MI) : base(NativeMethods.C_ConstructRaytracer(MI.DangerousGetHandle()), MI.pressure) { }
 
+        private static IntPtr[] getMeshInfoPtrs(MeshInfo[] MI)
+        {
+            int num_ptrs = MI.Length;
+            IntPtr[] ptrs = new IntPtr[num_ptrs];
+
+            for (int i = 0; i < num_ptrs; i++)
+                ptrs[i] = MI[i].Pointer;
+
+            return ptrs;
+        }
+        public EmbreeBVH(MeshInfo[] MI) : base(NativeMethods.C_ConstructRaytracer(getMeshInfoPtrs(MI)), -1) { }
+
         /*!
 			 \brief Free the native memory managed by this class. 
 			 \note the garbage collector will handle this automatically

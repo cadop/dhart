@@ -26,6 +26,25 @@ namespace HumanFactors.Tests.RayTracing
 
             //! [EX_BVH_CSTOR]
         }
+
+        [TestMethod]
+        public void CreateWithMultipleMeshes(){
+            
+            // Load a lot of submeshes from sponza
+            var MeshInfos = OBJLoader.LoadOBJSubmeshes("ExampleModels/sponza.obj", GROUP_METHOD.BY_GROUP);
+            
+            // Create a BVH for these meshes. If this crashes, then there's an issue we care about
+            EmbreeBVH bvh = new EmbreeBVH(MeshInfos);
+
+            // Cast a ray straight downwards, and ensure it intersects.
+            // If the point is false, then the bvh was created incorrectly
+            Vector3D origin = new Vector3D(0, 0, 1);
+            Vector3D direction = new Vector3D(0, 0, -1);
+            var pt = EmbreeRaytracer.IntersectForPoint(bvh, origin, direction);
+
+            Assert.IsTrue(pt.IsValid());
+        }
+
     }
 
     [TestClass]

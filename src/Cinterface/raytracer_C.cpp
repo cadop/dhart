@@ -36,19 +36,19 @@ C_INTERFACE CreateRaytracer(MeshInfo * mesh,EmbreeRayTracer** out_raytracer)
 	return GENERIC_ERROR;
 }
 
-C_INTERFACE CreateRaytracerMultiMesh(MeshInfo* meshes, int num_meshes, EmbreeRayTracer** out_raytracer)
+C_INTERFACE CreateRaytracerMultiMesh(MeshInfo** meshes, int num_meshes, EmbreeRayTracer** out_raytracer)
 {
 	// Create the raytracer with the first mesh.
+	*out_raytracer = new EmbreeRayTracer();
 	try {
 
 		// Iterate through all of the meshes in our input and add
 		// them to the raytracer
-		*out_raytracer = new EmbreeRayTracer(meshes[0]);
-		for (int i = 1; i < num_meshes; i++) {
+		for (int i = 0; i < num_meshes; i++) {
 			// Only commit to scene if this is the final mesh in the array
 			bool should_commit = (i == num_meshes - 1);
 
-			(*out_raytracer)->InsertNewMesh(meshes[i], should_commit);
+			(*out_raytracer)->InsertNewMesh(*(meshes[i]), should_commit);
 		}
 
 		return OK;
