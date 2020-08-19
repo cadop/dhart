@@ -10,6 +10,11 @@
 #include <vector>
 #include <array>
 
+/*!
+	\define		C_INTERFACE
+	\brief		Specifies C linkage for functions defined in the C Interface.
+				Used for exporting C Interface functions from the Human Factors DLL.
+*/
 #define C_INTERFACE extern "C" __declspec(dllexport) int
 
 namespace HF {
@@ -36,6 +41,7 @@ const enum COST_ALG_KEY {
 };
 
 /*!
+	\var	Key_To_Costs
 	\brief	Keys of costs for calling CalculateAndStore functions
 */
 const std::vector<std::string> Key_To_Costs {
@@ -47,10 +53,19 @@ const std::vector<std::string> Key_To_Costs {
 	\brief		Get the cost algorithm title (as std::string) 
 				from the COST_ALG_KEY enum member
 
-	\param		key		Enum member representing algorithm cost type:
-						COST_ALG_KEY::CROSS_SLOPE
-						COST_ALG_KEY::ENERGY_EXPENDITURE
+	\param		key		Enum member representing algorithm cost type:<br>
+						\link COST_ALG_KEY::CROSS_SLOPE \endlink <br>
+						\link COST_ALG_KEY::ENERGY_EXPENDITURE \endlink<br>
 						are valid parameters.
+
+	\return		A human-readable string representation of key.
+
+	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_AlgorithmCostTitle
+
+	<br>
+	\verbatim
+	Cost type: CrossSlope
+	\endverbatim
 */
 inline std::string AlgorithmCostTitle(COST_ALG_KEY key) {
 	return Key_To_Costs[key];
@@ -75,6 +90,11 @@ inline std::string AlgorithmCostTitle(COST_ALG_KEY key) {
 				HF_STATUS::OK if successful.
 
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_GetAllNodesFromGraph
+
+	<br>
+	\verbatim
+	TODO output
+	\endverbatim
 */
 C_INTERFACE GetAllNodesFromGraph(
 	const HF::SpatialStructures::Graph* graph,
@@ -92,6 +112,13 @@ C_INTERFACE GetAllNodesFromGraph(
 	\param		out_edge_list_size	Will store out_vector_ptr->size()
 
 	\returns	HF_STATUS::OK on completion.
+
+	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_GetEdgesForNode
+
+	<br>
+	\verbatim
+	TODO output
+	\endverbatim
 */
 C_INTERFACE GetEdgesForNode(
 	const HF::SpatialStructures::Graph* graph,
@@ -110,6 +137,11 @@ C_INTERFACE GetEdgesForNode(
 	\returns	HF_STATUS::OK on completion.
 
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_GetSizeOfNodeVector
+
+	<br>
+	\verbatim
+	TODO output
+	\endverbatim
 */
 C_INTERFACE GetSizeOfNodeVector(
 	const std::vector<HF::SpatialStructures::Node>* node_list,
@@ -127,6 +159,11 @@ C_INTERFACE GetSizeOfNodeVector(
 	\deprecated	This is never used. Do not include.
 
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_GetSizeOfEdgeVector
+
+	<br>
+	\verbatim
+	TODO output
+	\endverbatim
 */
 C_INTERFACE GetSizeOfEdgeVector(
 	const std::vector<HF::SpatialStructures::Edge>* edge_list,
@@ -153,6 +190,11 @@ C_INTERFACE GetSizeOfEdgeVector(
 	\returns HF_STATUS::NO_COST if there was no cost with cost_name
 
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_GetEdgeCost
+
+	<br>
+	\verbatim
+	TODO output
+	\endverbatim
 */
 C_INTERFACE GetEdgeCost(
 	const HF::SpatialStructures::Graph * g,
@@ -180,6 +222,11 @@ C_INTERFACE GetEdgeCost(
 	\returns	HF::Exceptions::STATUS::NOT_COMPRESSED if the graph wasn't compressed.
 
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_AggregateCosts
+
+	<br>
+	\verbatim
+	TODO output
+	\endverbatim
 */
 C_INTERFACE AggregateCosts(
 	const HF::SpatialStructures::Graph* graph,
@@ -200,6 +247,11 @@ C_INTERFACE AggregateCosts(
 	\returns	HF_STATUS::OK on completion.
 
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_CreateGraph
+
+	<br>
+	\verbatim
+	TODO output
+	\endverbatim
 */
 C_INTERFACE CreateGraph(
 	const float* nodes,
@@ -237,6 +289,11 @@ C_INTERFACE CreateGraph(
 				   If the entire program crashes when this is called, this is why. 
 
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_AddEdgeFromNodes
+
+	<br>
+	\verbatim
+	TODO output
+	\endverbatim
 */
 C_INTERFACE AddEdgeFromNodes(
 	HF::SpatialStructures::Graph* graph,
@@ -264,6 +321,11 @@ C_INTERFACE AddEdgeFromNodes(
 	\returns STATUS::NO_COST The given cost string was invalid. 
 
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_AddEdgeFromNodeIDs
+
+	<br>
+	\verbatim
+	TODO output
+	\endverbatim
 */
 C_INTERFACE AddEdgeFromNodeIDs(
 	HF::SpatialStructures::Graph* graph,
@@ -289,6 +351,11 @@ C_INTERFACE AddEdgeFromNodeIDs(
 	\returns	HF_STATUS::NO_COST if the asked for cost doesn't exist.
 
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_GetCSRPointers
+
+	<br>
+	\verbatim
+	TODO output
+	\endverbatim
 */
 C_INTERFACE GetCSRPointers(
 	HF::SpatialStructures::Graph* graph,
@@ -318,6 +385,11 @@ C_INTERFACE GetCSRPointers(
 	\returns	HF_STATUS::OK on completion.
 
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_GetNodeID
+
+	<br>
+	\verbatim
+	TODO output
+	\endverbatim
 */
 C_INTERFACE GetNodeID(
 	HF::SpatialStructures::Graph* graph,
@@ -337,6 +409,11 @@ C_INTERFACE GetNodeID(
 				If the graph is already compressed, this function will be a no-op.
 
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_Compress
+
+	<br>
+	\verbatim
+	TODO output
+	\endverbatim
 */
 C_INTERFACE Compress(
 	HF::SpatialStructures::Graph* graph
@@ -355,6 +432,11 @@ C_INTERFACE Compress(
 	\returns HF_STATUS::NO_COST if a cost was specified and it couldn't be found.
 
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_ClearGraph
+
+	<br>
+	\verbatim
+	TODO output
+	\endverbatim
 */
 C_INTERFACE ClearGraph(
 	HF::SpatialStructures::Graph* graph,
@@ -369,6 +451,11 @@ C_INTERFACE ClearGraph(
 	\returns	HF_STATUS::OK on completion.
 
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_DestroyNodes
+
+	<br>
+	\verbatim
+	TODO output
+	\endverbatim
 */
 C_INTERFACE DestroyNodes(
 	std::vector<HF::SpatialStructures::Node>* nodelist_to_destroy
@@ -382,6 +469,11 @@ C_INTERFACE DestroyNodes(
 	\returns	HF_STATUS::OK on completion.
 
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_DestroyEdges
+
+	<br>
+	\verbatim
+	TODO output
+	\endverbatim
 */
 C_INTERFACE DestroyEdges(
 	std::vector<HF::SpatialStructures::Edge>* edgelist_to_destroy
@@ -395,6 +487,11 @@ C_INTERFACE DestroyEdges(
 	\returns	HF_STATUS::OK on completion
 
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_DestroyGraph
+
+	<br>
+	\verbatim
+	TODO output
+	\endverbatim
 */
 C_INTERFACE DestroyGraph(
 	HF::SpatialStructures::Graph* graph_to_destroy
@@ -407,6 +504,11 @@ C_INTERFACE DestroyGraph(
 	\returns	HF_STATUS::OK on completion
 
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_CalculateAndStoreCrossSlope
+
+	<br>
+	\verbatim
+	TODO output
+	\endverbatim
 */
 C_INTERFACE CalculateAndStoreCrossSlope(HF::SpatialStructures::Graph* g);
 
@@ -419,6 +521,11 @@ C_INTERFACE CalculateAndStoreCrossSlope(HF::SpatialStructures::Graph* g);
 	\returns	HF_STATUS::OK on completion
 
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_CalculateAndStoreEnergyExpenditure
+
+	<br>
+	\verbatim
+	TODO output
+	\endverbatim
 */
 C_INTERFACE CalculateAndStoreEnergyExpenditure(HF::SpatialStructures::Graph* g);
 
@@ -445,6 +552,11 @@ C_INTERFACE CalculateAndStoreEnergyExpenditure(HF::SpatialStructures::Graph* g);
 	\pre	ids and scores arrays must be the same length
 	
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_AddNodeAttributes
+
+	<br>
+	\verbatim
+	TODO output
+	\endverbatim
 */
 C_INTERFACE AddNodeAttributes(
 	HF::SpatialStructures::Graph* g,
@@ -474,6 +586,11 @@ C_INTERFACE AddNodeAttributes(
 				by each pointer in out_scores.
 
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_GetNodeAttributes
+
+	<br>
+	\verbatim
+	TODO output
+	\endverbatim
 */
 C_INTERFACE GetNodeAttributes(
 	const HF::SpatialStructures::Graph* g,
@@ -491,6 +608,11 @@ C_INTERFACE GetNodeAttributes(
 	\returns	HF_STATUS::OK on completion
 
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_DeleteScoreArray
+
+	<br>
+	\verbatim
+	TODO output
+	\endverbatim
 */
 C_INTERFACE DeleteScoreArray(char** scores_to_delete, int num_char_arrays);
 
@@ -503,6 +625,11 @@ C_INTERFACE DeleteScoreArray(char** scores_to_delete, int num_char_arrays);
 	\returns	HF_STATUS::OK on completion
 
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_ClearAttributeType
+
+	<br>
+	\verbatim
+	TODO output
+	\endverbatim
 */
 C_INTERFACE ClearAttributeType(HF::SpatialStructures::Graph* g, const char* s);
 
@@ -515,6 +642,11 @@ C_INTERFACE ClearAttributeType(HF::SpatialStructures::Graph* g, const char* s);
 	\returns	HF_STATUS::OK on completion
 
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_GetSizeOfGraph
+
+	<br>
+	\verbatim
+	TODO output
+	\endverbatim
 */
 C_INTERFACE GetSizeOfGraph(const HF::SpatialStructures::Graph* g, int* out_size);
 

@@ -17,7 +17,14 @@
 namespace CInterfaceTests {
 	TEST(_spatialstructures_cinterface, AlgorithmCostTitle) {
 		//! [snippet_spatialstructuresC_AlgorithmCostTitle]
-		// TODO example
+		// In the enum COST_ALG_KEY, there are two members:
+		// COST_ALG_KEY::CROSS_SLOPE, and COST_ALG_KEY::ENERGY_EXPENDITURE.
+
+		// If we want a string representation of COST_ALG_KEY::CROSS_SLOPE,
+		// we invoke AlgorithmCostTitle:
+
+		auto cost_str = AlgorithmCostTitle(COST_ALG_KEY::CROSS_SLOPE);
+		std::cout << "Cost type: " << cost_str << std::endl;
 		//! [snippet_spatialstructuresC_AlgorithmCostTitle]
 	}
 
