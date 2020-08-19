@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.CodeDom;
 using System.ComponentModel;
+using System.Diagnostics;
 
 namespace HumanFactors.Geometry
 {
@@ -52,13 +53,44 @@ namespace HumanFactors.Geometry
 			else if (res == HF_STATUS.INVALID_MESH)
 				throw new InvalidMeshException(obj_path + " did not lead to an obj file, or the obj file was invalid!");
 
+			// Iterate through the returned pointer array, and marshall each of it's pointers
+			// into managed memory
 			IntPtr[] out_ptrs = new IntPtr[num_meshes];
 			for (int i = 0; i < num_meshes; i++)
 				out_ptrs[i] = Marshal.ReadIntPtr(out_ptr, i);
+
+			// Free the memory allocated by C++ for the pointer array
 			DestroyMeshInfoPtrArray(out_ptr);	
 		
-			// Cast to pointer array
+			// Return managed pointer array
 			return out_ptrs;
+		}
+
+		internal static int GetMeshID(IntPtr mesh_ptr)
+		{
+			// Create an output parameter then call the native function
+			int out_int = -1;
+			GetMeshID(mesh_ptr, ref out_int);
+
+			// Assert it's different then return
+			Debug.Assert(out_int != -1, "out_int didn't get updated");
+			return out_int;
+		}
+
+		internal static string GetMeshName(IntPtr mesh_ptr)
+		{
+			// Create an output parameter then call the native function
+			IntPtr out_string = new IntPtr();
+			GetMeshName(mesh_ptr, ref out_string);
+
+			// Copy the string into managed memory. If it's corrupted in some way
+			// then that will be reflected in a crash here
+			String ManagedString = Marshal.PtrToStringAnsi(out_string);
+
+			// Free the char array allocated by C++ now that we have the string
+			DestroyCharArray(out_string);
+
+			return ManagedString;
 		}
 
 		/*!
@@ -146,5 +178,15 @@ namespace HumanFactors.Geometry
 
 		[DllImport(dllpath, CharSet = CharSet.Ansi)]
 		internal static extern HF_STATUS DestroyMeshInfoPtrArray(IntPtr data_array);
+
+		[DllImport(dllpath, CharSet = CharSet.Ansi)]
+		internal static extern HF_STATUS GetMeshName(IntPtr MeshInfo, ref IntPtr out_name);
+
+		[DllImport(dllpath, CharSet = CharSet.Ansi)]
+		internal static extern HF_STATUS GetMeshID(IntPtr MeshInfo, ref int out_id);
+
+		[DllImport(dllpath, CharSet = CharSet.Ansi)]
+		internal static extern HF_STATUS DestroyCharArray(IntPtr char_array);
+
 	}
 }

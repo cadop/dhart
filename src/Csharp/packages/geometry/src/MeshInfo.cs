@@ -45,17 +45,26 @@ namespace HumanFactors.Geometry
 
 	public class MeshInfo : NativeUtils.NativeObject
 	{
+        public int id = -1; ///< ID of the mesh. 
+        public string name = ""; ///< Name of the mesh
+
 		/*!
             \brief Calculates the mesh's pressure. Unimplemented for now
             \todo
             Make a function in C++ to calculate the size of indices/vertices so
             the amount of pressure to exert on the GC can properly be calculated.
         */
-
 		private static int CalculatePresure()
 		{
 			return -1; // We don't really know the pressure for this class
 		}
+
+        /*! \brief Updates this mesh's name and ID with it's values from C++ */
+        private void UpdateIDAndName()
+        {
+            this.id = NativeMethods.GetMeshID(this.Pointer);
+            this.name = NativeMethods.GetMeshName(this.Pointer);
+        }
 
 		/*!
             \brief Manually delete this mesh in Unmanaged memory.
@@ -90,7 +99,7 @@ namespace HumanFactors.Geometry
             \remarks This shouldn't be called directly unless pointer is gauranteed to point to a valid mesh
         */
 
-		internal MeshInfo(IntPtr pointer, int size = 0) : base(pointer, size) { }
+		internal MeshInfo(IntPtr pointer, int size = 0) : base(pointer, size) { UpdateIDAndName(); }
 
 		/*!
             \brief Create an instance of MeshInfo from an array of vertices and triangle indices.
@@ -113,7 +122,7 @@ namespace HumanFactors.Geometry
 
 		public MeshInfo(int[] indices, float[] vertices, string name = "", int id = -1) :
 			base(NativeMethods.C_StoreMesh(vertices, indices, name, id), (vertices.Length * 4) + (indices.Length * 4))
-		{ }
+		{ UpdateIDAndName(); }
 
 		/*!
             \brief Rotate this mesh by the desired magnitude.

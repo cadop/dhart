@@ -10,6 +10,8 @@ namespace HumanFactors.Tests.Geometry
     public class OBJLoading
     {
         private TestContext testContextInstance;
+        float[] global_vertices = { -20.079360961914062f, 0.0f, 18.940643310546875f, -20.079360961914062f, 0.0f, -18.842348098754883f, 20.140586853027344f, 0.0f, 18.940643310546875f, 20.140586853027344f, 0.0f, -18.842348098754883f };
+        int[] global_indices = { 3, 1, 0, 2, 3, 0 };
 
         /// <summary>
         ///  Gets or sets the test context which provides
@@ -100,6 +102,17 @@ namespace HumanFactors.Tests.Geometry
             MeshInfo[] submeshes = OBJLoader.LoadOBJSubmeshes("ExampleModels/sponza.obj", GROUP_METHOD.BY_GROUP);
 
             Assert.AreEqual(33, submeshes.Length);
+        }
+
+        [TestMethod]
+        public void NameAndIDAreSet()
+        {
+            string test_name = "MeshName";
+            int test_id = 39;
+            MeshInfo MI = new MeshInfo(global_indices, global_vertices, test_name, test_id);
+
+            Assert.AreEqual(test_name, MI.name);
+            Assert.AreEqual(test_id, MI.id);
         }
     }
 }
