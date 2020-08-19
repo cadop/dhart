@@ -565,7 +565,6 @@ namespace CInterfaceTests {
 		ClearGraph(g, cost_type);
 
 		// The graph will now have a node count of 0.
-
 		//! [snippet_spatialstructuresC_ClearGraph]
 		// Destroy graph
 		status = DestroyGraph(g);
@@ -807,32 +806,185 @@ namespace CInterfaceTests {
 	}
 
 	TEST(_spatialstructures_cinterface, AddNodeAttributes) {
+		// Status code variable, value returned by C Interface functions
+		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
+		int status = 0;
+
+		// Declare a pointer to Graph.
+		// This will point to memory on the free store;
+		// it will be allocated within CreateGraph.
+		// It is the caller's responsibility to call DestroyGraph on g.
+		HF::SpatialStructures::Graph* g = nullptr;
+
+		// The first two parameters are unused, according to documentation.
+		status = CreateGraph(nullptr, -1, &g);
+
 		//! [snippet_spatialstructuresC_AddNodeAttributes]
-		// TODO example
+		// We do not need edge cost type now.
+		const char* cost_type = "";
+
+		// Add edges by node IDs.
+		AddEdgeFromNodeIDs(g, 0, 1, 1, cost_type);	
+		AddEdgeFromNodeIDs(g, 0, 2, 1, cost_type);	
+		AddEdgeFromNodeIDs(g, 1, 3, 1, cost_type);	
+		AddEdgeFromNodeIDs(g, 1, 4, 1, cost_type);
+		AddEdgeFromNodeIDs(g, 2, 4, 1, cost_type);
+		AddEdgeFromNodeIDs(g, 3, 5, 1, cost_type);	
+		AddEdgeFromNodeIDs(g, 3, 6, 1, cost_type);	
+		AddEdgeFromNodeIDs(g, 4, 5, 1, cost_type);
+		AddEdgeFromNodeIDs(g, 5, 6, 1, cost_type);	
+		AddEdgeFromNodeIDs(g, 5, 7, 1, cost_type);	
+		AddEdgeFromNodeIDs(g, 5, 8, 1, cost_type);	
+		AddEdgeFromNodeIDs(g, 4, 8, 1, cost_type);
+		AddEdgeFromNodeIDs(g, 6, 7, 1, cost_type);	
+		AddEdgeFromNodeIDs(g, 7, 8, 1, cost_type);
+
+		// Add some node attributes
+		std::vector<int> ids{ 1, 3, 5, 7 };
+		std::string attr_type = "cross slope";
+		const char* scores[4] = { "1.4", "2.0", "2.8", "4.0" };
+
+		AddNodeAttributes(g, ids.data(), attr_type.c_str(), scores, ids.size());
 		//! [snippet_spatialstructuresC_AddNodeAttributes]
+		// Destroy graph
+		status = DestroyGraph(g);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at DestroyGraph, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "DestroyGraph ran successfully on address " << g << ", code: " << status << std::endl;
+		}
 	}
 
 	TEST(_spatialstructures_cinterface, GetNodeAttributes) {
 		//! [snippet_spatialstructuresC_GetNodeAttributes]
-		// TODO example
+		// Create a graph and add edges
+		HF::SpatialStructures::Graph g;
+		g.addEdge(0, 1, 1); g.addEdge(0, 2, 1); g.addEdge(1, 3, 1); g.addEdge(1, 4, 1);
+		g.addEdge(2, 4, 1); g.addEdge(3, 5, 1); g.addEdge(3, 6, 1); g.addEdge(4, 5, 1);
+		g.addEdge(5, 6, 1); g.addEdge(5, 7, 1); g.addEdge(5, 8, 1); g.addEdge(4, 8, 1);
+		g.addEdge(6, 7, 1);	g.addEdge(7, 8, 1);
+
+		// Create a vector of node IDs and their corresponding values for our attribute
+		std::vector<int> ids{ 1, 3, 5, 7 };
+		std::string attr_type = "cross slope";
+		const char* scores[4] = { "1.4", "2.0", "2.8", "4.0" };
+
+		// Add node attributes to the graph
+		AddNodeAttributes(&g, ids.data(), attr_type.c_str(), scores, ids.size());
+
+		// Allocate an array of char arrays to meet the preconditions of GetNodeAttributes
+		char** scores_out = new char* [g.size()];
+		int scores_out_size = 0;
+
+		// By the postconditions of GetNodeAttributes, this should update scores_out,
+		// and scores_out_size with the variables we need
+		GetNodeAttributes(&g, attr_type.c_str(), scores_out, &scores_out_size);
+
+		// Assert that we can get the scores from this array
+		for (int i = 0; i < scores_out_size; i++)
+		{
+			// Convert score at this index to a string. 
+			std::string score = scores_out[i];
+
+			// If it's in our input array, ensure that the score at this value
+			// matches the one we passed
+			auto itr = std::find(ids.begin(), ids.end(), i);
+			if (itr != ids.end())
+			{
+				// Get the index of the id in the scores array so we
+				// can compare use it to get our input score at that
+				// index as well.
+				int index = std::distance(ids.begin(), itr);
+			}
+
+		}
+		
+		// Resource cleanup
+		DeleteScoreArray(scores_out, g.size());
 		//! [snippet_spatialstructuresC_GetNodeAttributes]
 	}
 
 	TEST(_spatialstructures_cinterface, DeleteScoreArray) {
 		//! [snippet_spatialstructuresC_DeleteScoreArray]
-		// TODO example
+
 		//! [snippet_spatialstructuresC_DeleteScoreArray]
 	}
 
 	TEST(_spatialstructures_cinterface, ClearAttributeType) {
 		//! [snippet_spatialstructuresC_ClearAttributeType]
-		// TODO example
+		// Create a graph and add some edges.
+		HF::SpatialStructures::Graph g;
+		g.addEdge(0, 1, 1);	g.addEdge(0, 2, 1);	g.addEdge(1, 3, 1);	g.addEdge(1, 4, 1);
+		g.addEdge(2, 4, 1);	g.addEdge(3, 5, 1);	g.addEdge(3, 6, 1);	g.addEdge(4, 5, 1);
+		g.addEdge(5, 6, 1);	g.addEdge(5, 7, 1);	g.addEdge(5, 8, 1);	g.addEdge(4, 8, 1);
+		g.addEdge(6, 7, 1);	g.addEdge(7, 8, 1);
+
+		// Create score arrays, then assign them to the graph
+		std::vector<int> ids{ 1, 3, 5, 7 };
+		std::string attr_type = "cross slope";
+		const char* scores[4] = { "1.4", "2.0", "2.8", "4.0" };
+		AddNodeAttributes(&g, ids.data(), attr_type.c_str(), scores, ids.size());
+
+		// Clear the attribute type and capture the error code
+		auto res = ClearAttributeType(&g, attr_type.c_str());
 		//! [snippet_spatialstructuresC_ClearAttributeType]
 	}
 
 	TEST(_spatialstructures_cinterface, GetSizeOfGraph) {
+		// Status code variable, value returned by C Interface functions
+		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
+		int status = 0;
+
+		// Declare a pointer to Graph.
+		// This will point to memory on the free store;
+		// it will be allocated within CreateGraph.
+		// It is the caller's responsibility to call DestroyGraph on g.
+		HF::SpatialStructures::Graph* g = nullptr;
+
+		// The first two parameters are unused, according to documentation.
+		status = CreateGraph(nullptr, -1, &g);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at CreateGraph, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "CreateGraph ran successfully, graph is at address " << g << ", code: " << status << std::endl;
+		}
+
 		//! [snippet_spatialstructuresC_GetSizeOfGraph]
-		// TODO example
+		// Create three nodes in the form of { x, y, z } coordinates.
+		std::array<float, 3> n0{ 0, 0, 0 };
+		std::array<float, 3> n1{ 0, 1, 2 };
+		std::array<float, 3> n2{ 0, 1, 3 };
+
+		// We do not need a specific cost type now. Leave this as an empty string.
+		const char* cost_type = "";
+
+		status = AddEdgeFromNodes(g, n0.data(), n1.data(), 1, cost_type);
+		status = AddEdgeFromNodes(g, n0.data(), n2.data(), 2, cost_type);
+		status = AddEdgeFromNodes(g, n1.data(), n0.data(), 3, cost_type);
+		status = AddEdgeFromNodes(g, n1.data(), n2.data(), 4, cost_type);
+		status = AddEdgeFromNodes(g, n2.data(), n0.data(), 5, cost_type);
+		status = AddEdgeFromNodes(g, n2.data(), n1.data(), 6, cost_type);
+
+		int graph_size = -1;
+		status = GetSizeOfGraph(g, &graph_size);
+
+		// graph_size will have the node count (graph size)
 		//! [snippet_spatialstructuresC_GetSizeOfGraph]
+		// Destroy graph
+		status = DestroyGraph(g);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at DestroyGraph, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "DestroyGraph ran successfully on address " << g << ", code: " << status << std::endl;
+		}
 	}
 }

@@ -233,11 +233,6 @@ inline std::string AlgorithmCostTitle(COST_ALG_KEY key) {
 
 	Finally, when you are finished with the graph,<br>
 	it must be destroyed. (\ref graph_teardown)
-
-	<br>
-	\verbatim
-	TODO output
-	\endverbatim
 */
 C_INTERFACE GetAllNodesFromGraph(
 	const HF::SpatialStructures::Graph* graph,
@@ -277,11 +272,6 @@ C_INTERFACE GetAllNodesFromGraph(
 
 	Finally, when you are finished with the graph,<br>
 	it must be destroyed. (\ref graph_teardown)
-
-	<br>
-	\verbatim
-	TODO output
-	\endverbatim
 */
 C_INTERFACE GetEdgesForNode(
 	const HF::SpatialStructures::Graph* graph,
@@ -320,11 +310,6 @@ C_INTERFACE GetEdgesForNode(
 
 	Finally, when you are finished with the graph,<br>
 	it must be destroyed. (\ref graph_teardown)
-
-	<br>
-	\verbatim
-	TODO output
-	\endverbatim
 */
 C_INTERFACE GetSizeOfNodeVector(
 	const std::vector<HF::SpatialStructures::Node>* node_list,
@@ -362,11 +347,6 @@ C_INTERFACE GetSizeOfNodeVector(
 
 	Finally, when you are finished with the graph,<br>
 	it must be destroyed. (\ref graph_teardown)
-
-	<br>
-	\verbatim
-	TODO output
-	\endverbatim
 */
 C_INTERFACE GetSizeOfEdgeVector(
 	const std::vector<HF::SpatialStructures::Edge>* edge_list,
@@ -409,11 +389,6 @@ C_INTERFACE GetSizeOfEdgeVector(
 
 	Finally, when you are finished with the graph,<br>
 	it must be destroyed. (\ref graph_teardown)
-
-	<br>
-	\verbatim
-	TODO output
-	\endverbatim
 */
 C_INTERFACE GetEdgeCost(
 	const HF::SpatialStructures::Graph * g,
@@ -457,11 +432,6 @@ C_INTERFACE GetEdgeCost(
 
 	Finally, when you are finished with the graph,<br>
 	it must be destroyed. (\ref graph_teardown)
-
-	<br>
-	\verbatim
-	TODO output
-	\endverbatim
 */
 C_INTERFACE AggregateCosts(
 	const HF::SpatialStructures::Graph* graph,
@@ -628,11 +598,6 @@ C_INTERFACE GetCSRPointers(
 
 	Finally, when you are finished with the graph,<br>
 	it must be destroyed. (\ref graph_teardown)
-
-	<br>
-	\verbatim
-	TODO output
-	\endverbatim
 */
 C_INTERFACE GetNodeID(
 	HF::SpatialStructures::Graph* graph,
@@ -689,11 +654,6 @@ C_INTERFACE Compress(
 
 	Finally, when you are finished with the graph,<br>
 	it must be destroyed. (\ref graph_teardown)
-
-	<br>
-	\verbatim
-	TODO output
-	\endverbatim
 */
 C_INTERFACE ClearGraph(
 	HF::SpatialStructures::Graph* graph,
@@ -763,11 +723,6 @@ C_INTERFACE DestroyGraph(
 
 	Finally, when you are finished with the graph,<br>
 	it must be destroyed. (\ref graph_teardown)
-
-	<br>
-	\verbatim
-	TODO output
-	\endverbatim
 */
 C_INTERFACE CalculateAndStoreCrossSlope(HF::SpatialStructures::Graph* g);
 
@@ -797,11 +752,6 @@ C_INTERFACE CalculateAndStoreCrossSlope(HF::SpatialStructures::Graph* g);
 
 	Finally, when you are finished with the graph,<br>
 	it must be destroyed. (\ref graph_teardown)
-
-	<br>
-	\verbatim
-	TODO output
-	\endverbatim
 */
 C_INTERFACE CalculateAndStoreEnergyExpenditure(HF::SpatialStructures::Graph* g);
 
@@ -845,11 +795,6 @@ C_INTERFACE CalculateAndStoreEnergyExpenditure(HF::SpatialStructures::Graph* g);
 
 	Finally, when you are finished with the graph,<br>
 	it must be destroyed. (\ref graph_teardown)
-
-	<br>
-	\verbatim
-	TODO output
-	\endverbatim
 */
 C_INTERFACE AddNodeAttributes(
 	HF::SpatialStructures::Graph* g,
@@ -897,11 +842,6 @@ C_INTERFACE AddNodeAttributes(
 
 	Finally, when you are finished with the graph,<br>
 	it must be destroyed. (\ref graph_teardown)
-
-	<br>
-	\verbatim
-	TODO output
-	\endverbatim
 */
 C_INTERFACE GetNodeAttributes(
 	const HF::SpatialStructures::Graph* g,
@@ -917,13 +857,8 @@ C_INTERFACE GetNodeAttributes(
 	\param		num_char_arrays		Block count of scores_to_delete
 
 	\returns	\link HF_STATUS::OK \endlink on completion
-
-	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_DeleteScoreArray
-
-	<br>
-	\verbatim
-	TODO output
-	\endverbatim
+	
+	\see		\link GetNodeAttributes \endlink on using DeleteScoreArray
 */
 C_INTERFACE DeleteScoreArray(char** scores_to_delete, int num_char_arrays);
 
@@ -955,11 +890,6 @@ C_INTERFACE DeleteScoreArray(char** scores_to_delete, int num_char_arrays);
 
 	Finally, when you are finished with the graph,<br>
 	it must be destroyed. (\ref graph_teardown)
-
-	<br>
-	\verbatim
-	TODO output
-	\endverbatim
 */
 C_INTERFACE ClearAttributeType(HF::SpatialStructures::Graph* g, const char* s);
 
@@ -988,11 +918,6 @@ C_INTERFACE ClearAttributeType(HF::SpatialStructures::Graph* g, const char* s);
 
 	Finally, when you are finished with the graph,<br>
 	it must be destroyed. (\ref graph_teardown)
-
-	<br>
-	\verbatim
-	TODO output
-	\endverbatim
 */
 C_INTERFACE GetSizeOfGraph(const HF::SpatialStructures::Graph* g, int* out_size);
 
