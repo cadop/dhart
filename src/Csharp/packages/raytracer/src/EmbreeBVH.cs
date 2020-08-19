@@ -72,6 +72,10 @@ namespace HumanFactors.RayTracing
             return ptrs;
         }
 
+        /*! \brief Construct a BVH from an array of meshes
+          
+            \params MI Meshes to build the BVH from. 
+        */
         public EmbreeBVH(MeshInfo[] MI) : base(NativeMethods.C_ConstructRaytracer(getMeshInfoPtrs(MI)), -1) {
             int total_pressure = this.pressure;
 
@@ -81,25 +85,59 @@ namespace HumanFactors.RayTracing
             this.UpdatePressure(total_pressure);
         }
 
+
+        /*! \brief Add a new mesh to the BVH.
+                
+            \param MI Meshinfo to add to this bvh. The ID of this MeshInfo
+                      will be updated if that ID is already occupied by another
+                      mesh in the BVH. 
+
+            \internal
+				\details 
+					This will icnrease the BVH's pressure on the garbage collector
+					equal to the combined pressure of all meshes in MI. 
+
+            \endinternal
+        */
         public void AddMesh(MeshInfo MI)
         {
             // Add the mesh to the BVH
             NativeMethods.C_AddMesh(this.Pointer, new IntPtr[] { MI.Pointer });
 
+            // Force this mesh to udpate it's id incase it changed
+            // when inserted into the BVH
+            MI.UpdateIDNameAndArrays();
+           
             // Increase the pressure we're exerting on the GC
             int new_pressure = this.pressure + MI.pressure;
             this.UpdatePressure(new_pressure);
+
         }
 
+        /*! \brief Add new meshes to this BVH.
+                
+            \param MI Array of MeshInfo to add to this BVH. The ID of each meshinfo
+                   will be updated to match the ID assigned by this bvh. 
+
+            \internal
+				\details 
+					This will icnrease the BVH's pressure on the garbage collector
+					equal to the combined pressure of all meshes in MI. 
+            \endinternal
+        */
         public void AddMesh(MeshInfo[] MI)
         {
             // Add the mesh to the bvh
             NativeMethods.C_AddMesh(this.Pointer, getMeshInfoPtrs(MI));
 
-            // Update the pressure we're exerting on the GC
+            // Update the pressure we're exerting on the GC and 
+            // force these meshes to get their IDs back from the BVH
             int total_pressure = this.pressure;
             foreach (var mesh in MI)
+            {
+                mesh.UpdateIDNameAndArrays();
                 total_pressure += mesh.pressure;
+            }
             this.UpdatePressure(total_pressure);
         }
 

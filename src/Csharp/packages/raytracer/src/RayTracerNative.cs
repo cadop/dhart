@@ -24,7 +24,7 @@ namespace HumanFactors.RayTracing
 		/*!
             \brief Create a Raytracer in C++
 
-            \param mesh_info_ptr Pointer to a vector of MeshInfo in C++.
+            \param mesh_info_ptr Pointer to an instance of MeshInfo in C++.
 
             \returns
             A Pointer to a raytracer containing a BVH constructed from the meshinfo
@@ -57,6 +57,18 @@ namespace HumanFactors.RayTracing
 			return ret_ptr;
 		}
 
+		/*!
+			\brief Create a Raytracer in C++
+
+			\param mesh_info_ptr arrays of pointers to a MeshInfo in C++.
+
+			\returns
+			A Pointer to a raytracer containing a BVH constructed from the meshinfo
+			pointed to by `mesh_info_ptr`.
+
+			\see EmbreeBVH for more information about the abstraction between
+						   raytracers and BVHs.
+		*/
 		internal static IntPtr C_ConstructRaytracer(IntPtr[] mesh_info_ptr)
 		{
 			// Create a new pointer to hold the output of this function

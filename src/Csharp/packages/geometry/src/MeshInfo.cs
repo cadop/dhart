@@ -70,7 +70,7 @@ namespace HumanFactors.Geometry
 		}
 
         /*! \brief Updates this mesh's name, ID, and arrays with it's values from C++ */
-        private void UpdateIDNameAndArrays()
+        internal void UpdateIDNameAndArrays()
         {
             // Get ID and name
             this.id = NativeMethods.GetMeshID(this.Pointer);
@@ -142,7 +142,7 @@ namespace HumanFactors.Geometry
         */
 
 		public MeshInfo(int[] indices, float[] vertices, string name = "", int id = 0) :
-			base(NativeMethods.C_StoreMesh(vertices, indices, name, id), (vertices.Length * 4) + (indices.Length * 4))
+			base(NativeMethods.C_StoreMesh(vertices, indices, name, id))
 		{ 
             UpdateIDNameAndArrays();
             this.UpdatePressure(this.CalculatePresure());

@@ -64,7 +64,7 @@ namespace HumanFactors.Tests.RayTracing
             Vector3D direction = new Vector3D(0, 0, -1);
             var pt = EmbreeRaytracer.IntersectForPoint(bvh, origin, direction);
 
-            Assert.IsTrue(pt.IsValid());
+            Assert.IsTrue(pt.IsValid(), "After adding a mesh, certain rays no longer intersect");
 
         }
 

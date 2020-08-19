@@ -75,6 +75,10 @@ namespace HumanFactors.Geometry
 			return out_ptrs;
 		}
 
+		/*! \brief Get the ID of an instance of MeshInfo in c++.
+			\param mesh_ptr Mesh to get the ID of
+			\returns the ID of the mesh in native memory
+		*/
 		internal static int GetMeshID(IntPtr mesh_ptr)
 		{
 			// Create an output parameter then call the native function
@@ -86,6 +90,11 @@ namespace HumanFactors.Geometry
 			return out_int;
 		}
 
+
+		/*! \brief Get the name of an instance of MeshInfo in c++.
+			\param mesh_ptr Mesh to get the Name of
+			\returns the Name of the mesh in native memory
+		*/
 		internal static string GetMeshName(IntPtr mesh_ptr)
 		{
 			// Create an output parameter then call the native function
@@ -143,6 +152,10 @@ namespace HumanFactors.Geometry
 			return out_ptr;
 		}
 
+		/*! \brief Get pointers to the vertex and index arrays of a mesh in C++
+			\param MI the mesh to get the vertex and index arrays of.
+			\returns POinters and sizes of the index and verted arrays of `MI`.
+		*/
 		internal static TrisAndVertsReturn C_GetTrisAndVerts(IntPtr MI)
 		{
 			TrisAndVertsReturn ret = new TrisAndVertsReturn();
