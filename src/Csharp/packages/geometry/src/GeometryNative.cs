@@ -61,7 +61,6 @@ namespace HumanFactors.Geometry
 			return out_ptrs;
 		}
 
-
 		/*!
             \brief Construct an instance of meshinfo in native memory.
 

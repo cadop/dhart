@@ -31,7 +31,6 @@ namespace HumanFactors.Geometry
 			\param xrot Degrees to rotate the mesh on the x axis.
 			\param yrot Degrees to rotate the mesh on the y axis.
 			\param zrot Degrees to rotate the mesh on the z axis.
-			\param GroupMethod Method of grouping different parts of the OBJ
 			
 			\returns An instance of MeshInfo containing the mesh loaded from the OBJ at path.
 
@@ -57,6 +56,51 @@ namespace HumanFactors.Geometry
             var mesh_ptr = NativeMethods.C_LoadOBJ(path, xrot, yrot, zrot, GROUP_METHOD.ONLY_FILE);
             return new MeshInfo(mesh_ptr[0]);
 		}
+
+		/*!
+			\brief Load an obj from the OBJ file at the given filepath.
+
+			\param path Path to a valid OBJ file.
+			\param xrot Degrees to rotate the mesh on the x axis.
+			\param yrot Degrees to rotate the mesh on the y axis.
+			\param zrot Degrees to rotate the mesh on the z axis.
+			\param GroupMethod Method of grouping different parts of the OBJ
+
+			\returns All submeshes in the obj file at `path` grouped by `gm`
+
+			\throws System.IO.FileNotFoundException No file was found at  path.
+			\throws HumanFactors.Exceptions.InvalidMeshException
+			The file at the path was not a valid OBJ.
+
+			\remarks
+			Use the other overload if you want to use a CommonRotation on the mesh. 
+
+			\internal 
+				\todo Support group type
+				\todo Support multiple meshes
+			\endinternal
+
+			\see GROUP_METHOD to see the different ways of grouping the different geometry in a .obj file
+			\code
+				// Loading a mesh from plane.obj with no rotation.
+				MeshInfo MI = OBJLoader.LoadOBJ("plane.obj");
+			\endcode
+		*/
+		public static MeshInfo[] LoadOBJSubmeshes(string path, GROUP_METHOD gm, float xrot = 0, float yrot = 0, float zrot = 0)
+        {
+			// Load from native memory
+            IntPtr[] mesh_ptrs = NativeMethods.C_LoadOBJ(path, xrot, yrot, zrot, gm);
+
+			// Iterate through each submesh and create new MeshInfo objects for each.
+			int num_meshes = mesh_ptrs.Length;
+			MeshInfo[] return_meshes = new MeshInfo[num_meshes];
+			for (int i = 0; i < num_meshes; i++)
+				return_meshes[i] = new MeshInfo(mesh_ptrs[i]);
+
+			return return_meshes;
+		}
+
+
 
 		public static MeshInfo[] LoadOBJs(string path, float xrot = 0, float yrot = 0, float zrot = 0, GROUP_METHOD gm = GROUP_METHOD.ONLY_FILE)
 		{

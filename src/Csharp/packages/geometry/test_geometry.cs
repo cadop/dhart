@@ -2,6 +2,7 @@ using HumanFactors.Geometry;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace HumanFactors.Tests.Geometry
 {
@@ -91,6 +92,14 @@ namespace HumanFactors.Tests.Geometry
             Mesh.RotateMesh(90, 0, 0);
 
             //! [EX_RotateMesh_xyz]
+        }
+        
+        [TestMethod]
+        public void CorrectNumberOfSubmeshes()
+        {
+            MeshInfo[] submeshes = OBJLoader.LoadOBJSubmeshes("ExampleModels/sponza.obj", GROUP_METHOD.BY_GROUP);
+
+            Assert.AreEqual(33, submeshes.Length);
         }
     }
 }
