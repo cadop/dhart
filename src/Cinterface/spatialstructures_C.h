@@ -77,34 +77,128 @@ inline std::string AlgorithmCostTitle(COST_ALG_KEY key) {
 
 	@{
 
+	\section graph_manipulation Graph Manipulation
+
 	Although graphs can be generated (see \ref generate_graph),<br>
 	they can <b>also be created by objects instantiated or obtained by the user</b>.
 
-	\section	graph_setup				Graph setup
-	TODO Graph setup
+	\subsection	graph_setup				Graph setup
+	Call \link CreateGraph \endlink :
+	\code
+		// Status code variable, value returned by C Interface functions
+		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
+		int status = 0;
 
-	\section	graph_add_edge_from_nodes		Adding edges from nodes
-	TODO Adding edges from nodes
+		// Declare a pointer to Graph.
+		// This will point to memory on the free store;
+		// it will be allocated within CreateGraph.
+		// It is the caller's responsibility to call DestroyGraph on g.
+		HF::SpatialStructures::Graph* g = nullptr;
 
-	\section	graph_add_edge_from_node_ids	Adding edges from node IDs
-	TODO Adding edges from node IDs
+		// The first two parameters are unused, according to documentation.
+		status = CreateGraph(nullptr, -1, &g);
 
-	\section	graph_compress	Compressing the graph
-	TODO Compressing the graph
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at CreateGraph, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "CreateGraph ran successfully, graph is at address " << g << ", code: " << status << std::endl;
+		}
+	\endcode
 
-	\section	graph_get_csr_pointers	Retrieve a CSR of the graph
-	TODO Retrieve a CSR of the graph
+	\subsection	graph_add_edge_from_nodes		Adding edges from nodes
+	Call \link AddEdgeFromNodes \endlink :
+	\code
+		// Create three nodes, in the form of { x, y, z } coordinates
+		std::array<float, 3> n0 { 0, 0, 0 };
+		std::array<float, 3> n1 { 0, 1, 2 };
+		std::array<float, 3> n2 { 0, 1, 3 };
+
+		// Leave cost_type blank. We do not need a specific cost type now.
+		const char* cost_type = "";
+
+		status = AddEdgeFromNodes(g, n0.data(), n1.data(), 1, cost_type);
+		status = AddEdgeFromNodes(g, n0.data(), n2.data(), 2, cost_type);
+		status = AddEdgeFromNodes(g, n1.data(), n0.data(), 3, cost_type);
+		status = AddEdgeFromNodes(g, n1.data(), n2.data(), 4, cost_type);
+		status = AddEdgeFromNodes(g, n2.data(), n0.data(), 5, cost_type);
+	\endcode
+
+
+	\subsection	graph_add_edge_from_node_ids	Adding edges from node IDs
+	Call \link AddEdgeFromNodeIds \endlink :
+	\code
+		const int node_id_0 = 2;
+		const int node_id_1 = 1;
+		const float edge_weight = 5;
+
+		const char* cost_type = "";
+
+		status = AddEdgeFromNodeIDs(g, node_id_0, node_id_1, edge_weight, cost_type);
+	\endcode
+
+	\subsection	graph_compress	Compressing the graph
+	\code
+		status = Compress(g);
+	\endcode
+
+	\subsection	graph_get_csr_pointers	Retrieve a CSR of the graph
+	Call \link GetCSRPointers \endlink :
+	\code
+		// Retrieve the CSR from the graph
+		HF::SpatialStructures::CSRPtrs csr;
+		status = GetCSRPointers(g, &csr.nnz, &csr.rows, &csr.cols, &csr.data, &csr.inner_indices, &csr.outer_indices, cost_type);
+
+		// data = { 1, 2, 3, 4, 5, 6 }
+		// r = { 0, 2, 4 }
+		// c = { 1, 2, 0, 2, 0, 1 }
+
+		if (status != 1) {
+			std::cerr << "Error at GetCSRPointers, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "GetCSRPointers ran successfully on graph addressed at " << g << ", code: " << status << std::endl;
+		}
+	\endcode
 
 	<br>
 	When you are finished with a graph, be sure to destroy it.<br>
 	(see \ref graph_teardown)
 	<br>
 
-	\section	node_vector_teardown		Destroying a vector of node
-	TODO Destroying a vector of node
+	\section destroy_node_edge_containers Destroying containers returned by graph operations
 
-	\section	edge_vector_teardown		Destroying a vector of edge
-	TODO Destroying a vector of edge
+	Graph operations deal in std::vector<\link HF::SpatialStructures::Node \endlink> *<br>
+	and std::vector<\link HF::SpatialStructures::Edge \endlink> *.
+
+	\subsection	node_vector_teardown		Destroying a vector of node
+	Call \link DestroyNodes \endlink :
+	\code
+		// Destroy vector<Node>
+		status = DestroyNodes(node_vec);
+
+		if (status != 1) {
+			std::cerr << "Error at DestroyNodes, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "DestroyNodes ran successfully on address " << node_vec << ", code: " << status << std::endl;
+		}
+	\endcode
+
+	\subsection	edge_vector_teardown		Destroying a vector of edge
+	Call \link DestroyEdges \endlink :
+	\code
+		// Destroy vector<Edge>
+		status = DestroyEdges(edge_vec);
+
+		if (status != 1) {
+			std::cerr << "Error at DestroyEdges, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "DestroyEdges ran successfully on address " << edge_vec << ", code: " << status << std::endl;
+		}
+	\endcode
 */
 
 /*!
@@ -114,9 +208,9 @@ inline std::string AlgorithmCostTitle(COST_ALG_KEY key) {
 	\param		out_vector_ptr	Output parameter for the new vector
 	\param		out_data_ptr	Output parameter for the vector's data
 	
-	\returns	HF_STATUS::INVALID_PTR if the given pointer was invalid.
-				HF_STATUS::GENERIC_ERROR if the graph is not valid.
-				HF_STATUS::OK if successful.
+	\returns	\link HF_STATUS::INVALID_PTR \endlink if the given pointer was invalid.
+				\link HF_STATUS::GENERIC_ERROR \endlink if the graph is not valid.
+				\link HF_STATUS::OK \endlink if successful.
 
 	\see \ref graph_setup (how to create a graph)
 	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
@@ -160,7 +254,7 @@ C_INTERFACE GetAllNodesFromGraph(
 	\param		out_edge_list_ptr	Address of pointer to *out_vector_ptr's internal buffer
 	\param		out_edge_list_size	Will store out_vector_ptr->size()
 
-	\returns	HF_STATUS::OK on completion.
+	\returns	\link HF_STATUS::OK \endlink on completion.
 
 	\see \ref graph_setup (how to create a graph)
 	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
@@ -203,7 +297,7 @@ C_INTERFACE GetEdgesForNode(
 	\param		node_list	Node vector to get the size from
 	\param		out_size	Size of the vector will be written to *out_size
 	
-	\returns	HF_STATUS::OK on completion.
+	\returns	\link HF_STATUS::OK \endlink on completion.
 
 	\see \ref graph_setup (how to create a graph)
 	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
@@ -243,7 +337,7 @@ C_INTERFACE GetSizeOfNodeVector(
 	\param		edge_list	Edge vector to get the size from
 	\param		out_size	Size of the vector will be written to *out_size
 
-	\returns	HF_STATUS::OK on completion
+	\returns	\link HF_STATUS::OK \endlink on completion
 
 	\deprecated	This is never used. Do not include.
 
@@ -295,8 +389,8 @@ C_INTERFACE GetSizeOfEdgeVector(
 	`out_float` is updated with the cost of traversing from parent to child. If no
 	edge exists between parent and child, -1 will be inserted into out_float.
 
-	\returns HF_STATUS::OK on success
-	\returns HF_STATUS::NO_COST if there was no cost with cost_name
+	\returns \link HF_STATUS::OK \endlink on success
+	\returns \link HF_STATUS::NO_COST \endlink if there was no cost with cost_name
 
 	\see \ref graph_setup (how to create a graph)
 	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
@@ -343,8 +437,8 @@ C_INTERFACE GetEdgeCost(
 	\param		out_vector_ptr	Output parameter for the vector
 	\param		out_data_ptr	Output parameter for the vector's internal buffer
 
-	\returns	HF_STATUS::OK if successful.
-	\returns	HF::Exceptions::STATUS::NOT_COMPRESSED if the graph wasn't compressed.
+	\returns	\link HF_STATUS::OK \endlink if successful.
+	\returns	\link HF_STATUS::NOT_COMPRESSED \endlink if the graph wasn't compressed.
 
 	\see \ref graph_setup (how to create a graph)
 	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
@@ -385,7 +479,7 @@ C_INTERFACE AggregateCosts(
 	\param		num_nodes (<b>unused parameter</b>) Size of nodes array
 	\param		out_graph	Output parameter to store the graph in
 
-	\returns	HF_STATUS::OK on completion.
+	\returns	\link HF_STATUS::OK \endlink on completion.
 
 	\see \ref graph_setup (how to create a graph)
 	\see \ref graph_compress (how to compress a graph)
@@ -414,13 +508,14 @@ C_INTERFACE CreateGraph(
 
 	\param		cost_type	Edge cost type
 
-	\returns HF_STATUS::OK on success.
-	\returns HF_STATUS::INVALID_PTR on an invalid parent or child node
+	\returns \link HF_STATUS::OK \endlink on success.
 
-	\returns HF_STATUS::NOT_COMPRESSED Tried to add an edge to an alternate cost type
-									   when the graph wasn't compressed
+	\returns \link HF_STATUS::INVALID_PTR \endlink on an invalid parent or child node.
 
-	\returns HF::Exceptions::OUT_OF_RANGE Tried to add an edge to an alternate cost 
+	\returns \link HF_STATUS::NOT_COMPRESSED \endlink Tried to add an edge to an alternate cost type
+									   when the graph wasn't compressed.
+
+	\returns \link HF_STATUS::OUT_OF_RANGE \endlink Tried to add an edge to an alternate cost 
 										  that didn't already exist in the default graph.
 
 	\pre cost_type MUST be a valid delimited char array. 
@@ -449,12 +544,12 @@ C_INTERFACE AddEdgeFromNodes(
 	\param		score		The cost from parent to child.
 	\param		cost_type	The type of cost to add this edge to.
 
-	\returns STATUS::OK on completion. 
+	\returns \link HF_STATUS::OK \endlink on completion. 
 
-	\returns STATUS::NOT_COMPRESSED if an alternate cost was added 
+	\returns \link HF_STATUS::NOT_COMPRESSED \endlink if an alternate cost was added 
 								    without first compressing the graph
 
-	\returns STATUS::NO_COST The given cost string was invalid. 
+	\returns \link HF_STATUS::NO_COST \endlink The given cost string was invalid. 
 
 	\see \ref graph_setup (how to create a graph)
 	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
@@ -481,8 +576,8 @@ C_INTERFACE AddEdgeFromNodeIDs(
 	\param		out_outer_indices_ptr	Pointer to the graph's outer indices array (rpws)
 	\param		cost_type		Cost type to compress the CSR with.
 
-	\returns	HF_STATUS::OK on success.
-	\returns	HF_STATUS::NO_COST if the asked for cost doesn't exist.
+	\returns	\link HF_STATUS::OK \endlink on success.
+	\returns	\link HF_STATUS::NO_COST \endlink if the asked for cost doesn't exist.
 
 	\see \ref graph_setup (how to create a graph)
 	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
@@ -516,7 +611,7 @@ C_INTERFACE GetCSRPointers(
 							Set to -1 if <paramref name="point"> 
 							could not be found in <paramref name="graph"/>.
 
-	\returns	HF_STATUS::OK on completion.
+	\returns	\link HF_STATUS::OK \endlink on completion.
 
 	\see \ref graph_setup (how to create a graph)
 	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
@@ -550,7 +645,7 @@ C_INTERFACE GetNodeID(
 
 	\param		graph	The graph to compress into a CSR.
 
-	\returns	HF_STATUS::OK on completion.
+	\returns	\link HF_STATUS::OK \endlink on completion.
 
 	\remarks	This will reduce the memory footprint of the graph,
 				and invalidate all existing CSR representation of it.
@@ -575,8 +670,8 @@ C_INTERFACE Compress(
 
 	\param cost_type If blank, delete the graph, otherwise only clear the cost at this type.
 
-	\returns HF_STATUS::OK if the operation succeeded
-	\returns HF_STATUS::NO_COST if a cost was specified and it couldn't be found.
+	\returns \link HF_STATUS::OK \endlink if the operation succeeded
+	\returns \link HF_STATUS::NO_COST \endlink if a cost was specified and it couldn't be found.
 
 	\see \ref graph_setup (how to create a graph)
 	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
@@ -610,7 +705,7 @@ C_INTERFACE ClearGraph(
 
 	\param		nodelist_to_destroy		Vector of nodes to destroy
 
-	\returns	HF_STATUS::OK on completion.
+	\returns	\link HF_STATUS::OK \endlink on completion.
 
 	\see \ref node_vector_teardown (how to destroy a vector of node)
 */
@@ -623,7 +718,7 @@ C_INTERFACE DestroyNodes(
 
 	\param		edgelist_to_destroy		Vector of nodes to destroy
 
-	\returns	HF_STATUS::OK on completion.
+	\returns	\link HF_STATUS::OK \endlink on completion.
 
 	\see \ref edge_vector_teardown (how to destroy a vector of edge)
 */
@@ -636,7 +731,7 @@ C_INTERFACE DestroyEdges(
 
 	\param		graph_to_destroy		Graph to delete
 
-	\returns	HF_STATUS::OK on completion
+	\returns	\link HF_STATUS::OK \endlink on completion
 
 	\see \ref graph_teardown (how to destroy a graph)
 */
@@ -648,7 +743,7 @@ C_INTERFACE DestroyGraph(
 	\brief		Calculates cross slope for all subgraphs in *g
 	\param		g	The graph to calculate cross slope on
 
-	\returns	HF_STATUS::OK on completion
+	\returns	\link HF_STATUS::OK \endlink on completion
 
 	Begin by reviewing the example at \ref graph_setup to create a graph.<br>
 
@@ -682,7 +777,7 @@ C_INTERFACE CalculateAndStoreCrossSlope(HF::SpatialStructures::Graph* g);
 
 	\param		g		The address of a Graph
 
-	\returns	HF_STATUS::OK on completion
+	\returns	\link HF_STATUS::OK \endlink on completion
 
 	Begin by reviewing the example at \ref graph_setup to create a graph.<br>
 
@@ -722,11 +817,11 @@ C_INTERFACE CalculateAndStoreEnergyExpenditure(HF::SpatialStructures::Graph* g);
 
 	\param		num_nodes	Length of both the ids and scores arrays
 
-	\returns	HF_STATUS::OK on completion. 
+	\returns	\link HF_STATUS::OK \endlink on completion. 
 				 Note that this does not guarantee that some 
 				or all of the node attributes have been added
 
-	\detail 
+	\details
 	For any id in ids, if said ID doesn't already exist in the graph, then it and its cost will
 	silently be ignored without error.
 
@@ -775,7 +870,7 @@ C_INTERFACE AddNodeAttributes(
 	\param		out_score_size	Keeps track of the size of out_scores buffer, 
 								updated as required
 
-	\returns	HF_STATUS::OK on completion.
+	\returns	\link HF_STATUS::OK \endlink on completion.
 
 	\details	Memory shall be allocated in *out_scores to hold the char arrays.
 				out_scores is a pointer to an array of (char *),
@@ -821,7 +916,7 @@ C_INTERFACE GetNodeAttributes(
 	\param		scores_to_delete	Pointer to array of (char *), allocate by the caller
 	\param		num_char_arrays		Block count of scores_to_delete
 
-	\returns	HF_STATUS::OK on completion
+	\returns	\link HF_STATUS::OK \endlink on completion
 
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_DeleteScoreArray
 
@@ -838,7 +933,7 @@ C_INTERFACE DeleteScoreArray(char** scores_to_delete, int num_char_arrays);
 	\param		g	The graph from which attributes of type s will be deleted
 	\param		s	The attribute value type to be cleared from within g
 
-	\returns	HF_STATUS::OK on completion
+	\returns	\link HF_STATUS::OK \endlink on completion
 
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_ClearAttributeType
 
@@ -874,7 +969,7 @@ C_INTERFACE ClearAttributeType(HF::SpatialStructures::Graph* g, const char* s);
 	\param		g			Pointer to the graph to get the size of
 	\param		out_size	Location where the size of the graph will be written
 
-	\returns	HF_STATUS::OK on completion
+	\returns	\link HF_STATUS::OK \endlink on completion
 
 	\see \ref graph_setup (how to create a graph)
 	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)

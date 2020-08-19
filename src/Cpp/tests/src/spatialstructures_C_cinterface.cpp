@@ -29,39 +29,63 @@ namespace CInterfaceTests {
 	}
 
 	TEST(_spatialstructures_cinterface, GetAllNodesFromGraph) {
-		//! [snippet_spatialstructuresC_GetAllNodesFromGraph]
-		// Requires #include "graph.h"
+		// Status code variable, value returned by C Interface functions
+		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
+		int status = 0;
 
+		// Declare a pointer to Graph.
+		// This will point to memory on the free store;
+		// it will be allocated within CreateGraph.
+		// It is the caller's responsibility to call DestroyGraph on g.
 		HF::SpatialStructures::Graph* g = nullptr;
 
-		// parameters nodes and num_nodes are unused, according to documentation
-		if (CreateGraph(nullptr, -1, &g)) {
-			std::cout << "Graph creation successful";
+		// The first two parameters are unused, according to documentation.
+		status = CreateGraph(nullptr, -1, &g);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at CreateGraph, code: " << status << std::endl;
 		}
 		else {
-			std::cout << "Graph creation failed" << std::endl;
+			std::cout << "CreateGraph ran successfully, graph is at address " << g << ", code: " << status << std::endl;
 		}
+		//! [snippet_spatialstructuresC_GetAllNodesFromGraph]
+		// Create three nodes, in the form of { x, y, z } coordinates
+		std::array<float, 3> n0 { 0, 0, 0 };
+		std::array<float, 3> n1 { 0, 1, 2 };
+		std::array<float, 3> n2 { 0, 1, 3 };
 
-		float n0[] = { 0, 0, 0 };
-		float n1[] = { 0, 1, 2 };
-		float n2[] = { 0, 1, 3 };
-
+		// Leave cost_type blank. We do not need a specific cost type now.
 		const char* cost_type = "";
 
-		AddEdgeFromNodes(g, n0, n1, 1, cost_type);
-		AddEdgeFromNodes(g, n0, n2, 2, cost_type);
-		AddEdgeFromNodes(g, n1, n0, 3, cost_type);
-		AddEdgeFromNodes(g, n1, n2, 4, cost_type);
-		AddEdgeFromNodes(g, n2, n0, 5, cost_type);
-		AddEdgeFromNodes(g, n2, n1, 6, cost_type);
+		status = AddEdgeFromNodes(g, n0.data(), n1.data(), 1, cost_type);
+		status = AddEdgeFromNodes(g, n0.data(), n2.data(), 2, cost_type);
+		status = AddEdgeFromNodes(g, n1.data(), n0.data(), 3, cost_type);
+		status = AddEdgeFromNodes(g, n1.data(), n2.data(), 4, cost_type);
+		status = AddEdgeFromNodes(g, n2.data(), n0.data(), 5, cost_type);
+		status = AddEdgeFromNodes(g, n2.data(), n1.data(), 6, cost_type);
 
-		auto out_vec = new std::vector<HF::SpatialStructures::Node>;
+		// GetNodesFromGraph will allocate memory for out_vec.
+		// out_data will point to *out_vec's internal buffer.
+		std::vector<HF::SpatialStructures::Node>* out_vec = nullptr;
 		HF::SpatialStructures::Node* out_data = nullptr;
 
-		GetAllNodesFromGraph(g, &out_vec, &out_data);
-
-		DestroyGraph(g);
+		status = GetAllNodesFromGraph(g, &out_vec, &out_data);
+		
+		// Destroy vector<Node>
+		status = DestroyNodes(out_vec);
+		
 		//! [snippet_spatialstructuresC_GetAllNodesFromGraph]
+		// Destroy graph
+		status = DestroyGraph(g);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at DestroyGraph, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "DestroyGraph ran successfully on address " << g << ", code: " << status << std::endl;
+		}
 	}
 
 	TEST(_spatialstructures_cinterface, GetEdgesForNode) {
@@ -74,6 +98,13 @@ namespace CInterfaceTests {
 		//! [snippet_spatialstructuresC_GetSizeOfNodeVector]
 		// Requires #include "node.h", #include <vector>
 
+		// Status code variable, value returned by C Interface functions
+		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
+		int status = 0;
+
+		// Since GetSizeOfNodeVector only operators on a vector<Node>,
+		// we can construct from free nodes and put them into a container.
+		// GetSizeOfNodeVector will return the size of *node_vec below.
 		HF::SpatialStructures::Node n0(0, 0, 0);
 		HF::SpatialStructures::Node n1(0, 1, 1);
 		HF::SpatialStructures::Node n2(0, 1, 2);
@@ -82,10 +113,19 @@ namespace CInterfaceTests {
 		std::vector<HF::SpatialStructures::Node>* node_vec = new std::vector<HF::SpatialStructures::Node>{ n0, n1, n2, n3 };
 
 		int node_vec_size = -1;
-		GetSizeOfNodeVector(node_vec, &node_vec_size);
+		status = GetSizeOfNodeVector(node_vec, &node_vec_size);
 
-		DestroyNodes(node_vec);
+		// node_vec_size will have the size of *node_vec.
 		//! [snippet_spatialstructuresC_GetSizeOfNodeVector]
+		// Destroy vector<Node>
+		status = DestroyNodes(node_vec);
+
+		if (status != 1) {
+			std::cerr << "Error at DestroyNodes, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "DestroyNodes ran successfully on address " << node_vec << ", code: " << status << std::endl;
+		}
 	}
 
 	TEST(_spatialstructures_cinterface, GetSizeOfEdgeVector) {
@@ -101,259 +141,451 @@ namespace CInterfaceTests {
 	}
 
 	TEST(_spatialstructures_cinterface, AggregateCosts) {
-		//! [snippet_spatialstructuresC_AggregateCosts]
-		// Requires #include "graph.h"
+		// Status code variable, value returned by C Interface functions
+		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
+		int status = 0;
 
+		// Declare a pointer to Graph.
+		// This will point to memory on the free store;
+		// it will be allocated within CreateGraph.
+		// It is the caller's responsibility to call DestroyGraph on g.
 		HF::SpatialStructures::Graph* g = nullptr;
 
-		// parameters nodes and num_nodes are unused, according to documentation
-		if (CreateGraph(nullptr, -1, &g)) {
-			std::cout << "Graph creation successful";
+		// The first two parameters are unused, according to documentation.
+		status = CreateGraph(nullptr, -1, &g);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at CreateGraph, code: " << status << std::endl;
 		}
 		else {
-			std::cout << "Graph creation failed" << std::endl;
+			std::cout << "CreateGraph ran successfully, graph is at address " << g << ", code: " << status << std::endl;
 		}
 
-		float n0[] = { 0, 0, 0 };
-		float n1[] = { 0, 1, 2 };
-		float n2[] = { 0, 1, 3 };
+		//! [snippet_spatialstructuresC_AggregateCosts]
+		// Create three nodes in the form of { x, y, z } coordinates.
+		std::array<float, 3> n0 { 0, 0, 0 };
+		std::array<float, 3> n1 { 0, 1, 2 };
+		std::array<float, 3> n2 { 0, 1, 3 };
 
+		// We do not need a specific cost type now. Leave this as an empty string.
 		const char* cost_type = "";
 
-		AddEdgeFromNodes(g, n0, n1, 1, cost_type);
-		AddEdgeFromNodes(g, n0, n2, 2, cost_type);
-		AddEdgeFromNodes(g, n1, n0, 3, cost_type);
-		AddEdgeFromNodes(g, n1, n2, 4, cost_type);
-		AddEdgeFromNodes(g, n2, n0, 5, cost_type);
-		AddEdgeFromNodes(g, n2, n1, 6, cost_type);
+		status = AddEdgeFromNodes(g, n0.data(), n1.data(), 1, cost_type);
+		status = AddEdgeFromNodes(g, n0.data(), n2.data(), 2, cost_type);
+		status = AddEdgeFromNodes(g, n1.data(), n0.data(), 3, cost_type);
+		status = AddEdgeFromNodes(g, n1.data(), n2.data(), 4, cost_type);
+		status = AddEdgeFromNodes(g, n2.data(), n0.data(), 5, cost_type);
+		status = AddEdgeFromNodes(g, n2.data(), n1.data(), 6, cost_type);
 
+		// AggregateCosts will allocate memory for out_vector.
+		// out_data will point to *out_vector's internal buffer.
 		std::vector<float>* out_vector = nullptr;
 		float* out_data = nullptr;
-
 		int aggregation_type = 0;
-		AggregateCosts(g, aggregation_type, false, cost_type, &out_vector, &out_data);
 
-		DestroyGraph(g);
+		status = AggregateCosts(g, 
+								aggregation_type, false, 
+								cost_type, 
+								&out_vector, &out_data);
+
+		// Destroy vector<float>
+		status = DestroyFloatVector(out_vector);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at DestroyFloatVector, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "DestroyFloatVector ran successfully on address " << g << ", code: " << status << std::endl;
+		}
 		//! [snippet_spatialstructuresC_AggregateCosts]
+
+		// Destroy graph
+		status = DestroyGraph(g);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at DestroyGraph, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "DestroyGraph ran successfully on address " << g << ", code: " << status << std::endl;
+		}
 	}
 
 	TEST(_spatialstructures_cinterface, CreateGraph) {
 		//! [snippet_spatialstructuresC_CreateGraph]
-			// Requires #include "graph.h"
+		// Requires #include "graph.h"
 
+		// Status code variable, value returned by C Interface functions
+		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
+		int status = 0;
+
+		// Declare a pointer to Graph.
+		// This will point to memory on the free store;
+		// it will be allocated within CreateGraph.
+		// It is the caller's responsibility to call DestroyGraph on g.
 		HF::SpatialStructures::Graph* g = nullptr;
 
-		// parameters nodes and num_nodes are unused, according to documentation
-		if (CreateGraph(nullptr, -1, &g)) {
-			std::cout << "Graph creation successful";
+		// The first two parameters are unused, according to documentation.
+		status = CreateGraph(nullptr, -1, &g);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at CreateGraph, code: " << status << std::endl;
 		}
 		else {
-			std::cout << "Graph creation failed" << std::endl;
+			std::cout << "CreateGraph ran successfully, graph is at address " << g << ", code: " << status << std::endl;
 		}
 
+		//
 		// use Graph
-
-		// Release memory for g after use
-		DestroyGraph(g);
+		//
 		//! [snippet_spatialstructuresC_CreateGraph]
+		// Destroy graph
+		status = DestroyGraph(g);
+		
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at DestroyGraph, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "DestroyGraph ran successfully on address " << g << ", code: " << status << std::endl;
+		}
 	}
 
 	TEST(_spatialstructures_cinterface, AddEdgeFromNodes) {
-		//! [snippet_spatialstructuresC_AddEdgeFromNodes]
-		// Requires #include "graph.h"
+		// Status code variable, value returned by C Interface functions
+		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
+		int status = 0;
 
+		// Declare a pointer to Graph.
+		// This will point to memory on the free store;
+		// it will be allocated within CreateGraph.
+		// It is the caller's responsibility to call DestroyGraph on g.
 		HF::SpatialStructures::Graph* g = nullptr;
 
-		// parameters nodes and num_nodes are unused, according to documentation
-		if (CreateGraph(nullptr, -1, &g)) {
-			std::cout << "Graph creation successful";
+		// The first two parameters are unused, according to documentation.
+		status = CreateGraph(nullptr, -1, &g);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at CreateGraph, code: " << status << std::endl;
 		}
 		else {
-			std::cout << "Graph creation failed" << std::endl;
+			std::cout << "CreateGraph ran successfully, graph is at address " << g << ", code: " << status << std::endl;
 		}
 
-		float n0[] = { 0, 0, 0 };
-		float n1[] = { 0, 1, 2 };
-		const float distance = 3;
+		//! [snippet_spatialstructuresC_AddEdgeFromNodes]
+		// Create two nodes, in the form of coordinates
+		std::array<float, 3> n0 = { 0, 0, 0 };
+		std::array<float, 3> n1 = { 0, 1, 2 };
 
+		// Define an edge weight
+		const float edge_weight = 3;
+
+		// Define a cost type.
 		const char* cost_type = "";
 
-		AddEdgeFromNodes(g, n0, n1, distance, cost_type);
+		status = AddEdgeFromNodes(g, n0.data(), n1.data(), edge_weight, cost_type);
 
-		// Release memory for g after use
-		DestroyGraph(g);
 		//! [snippet_spatialstructuresC_AddEdgeFromNodes]
+		// Destroy graph
+		status = DestroyGraph(g);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at DestroyGraph, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "DestroyGraph ran successfully on address " << g << ", code: " << status << std::endl;
+		}
 	}
 
 	TEST(_spatialstructures_cinterface, AddEdgeFromNodeIDs) {
-		//! [snippet_spatialstructuresC_AddEdgeFromNodeIDs]
-		// Requires #include "graph.h"
+		// Status code variable, value returned by C Interface functions
+		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
+		int status = 0;
 
+		// Declare a pointer to Graph.
+		// This will point to memory on the free store;
+		// it will be allocated within CreateGraph.
+		// It is the caller's responsibility to call DestroyGraph on g.
 		HF::SpatialStructures::Graph* g = nullptr;
 
-		// parameters nodes and num_nodes are unused, according to documentation
-		if (CreateGraph(nullptr, -1, &g)) {
-			std::cout << "Graph creation successful";
+		// The first two parameters are unused, according to documentation.
+		status = CreateGraph(nullptr, -1, &g);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at CreateGraph, code: " << status << std::endl;
 		}
 		else {
-			std::cout << "Graph creation failed" << std::endl;
+			std::cout << "CreateGraph ran successfully, graph is at address " << g << ", code: " << status << std::endl;
 		}
-		const int id0 = 0;
-		const int id1 = 1;
-		const float distance = 3;
+
+		//! [snippet_spatialstructuresC_AddEdgeFromNodeIDs]
+		const int node_id_0 = 0;
+		const int node_id_1 = 1;
+		const float edge_weight = 3;
 
 		const char* cost_type = "";
 
-		AddEdgeFromNodeIDs(g, id0, id1, distance, cost_type);
-
-		// Release memory for g after use
-		DestroyGraph(g);
+		status = AddEdgeFromNodeIDs(g, node_id_0, node_id_1, edge_weight, cost_type);
 		//! [snippet_spatialstructuresC_AddEdgeFromNodeIDs]
+
+		// Destroy graph
+		status = DestroyGraph(g);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at DestroyGraph, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "DestroyGraph ran successfully on address " << g << ", code: " << status << std::endl;
+		}
 	}
 
 	TEST(_spatialstructures_cinterface, GetCSRPointers) {
-		//! [snippet_spatialstructuresC_GetCSRPointers]
-		// Requires #include "graph.h"
+		// Status code variable, value returned by C Interface functions
+		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
+		int status = 0;
 
+		// Declare a pointer to Graph.
+		// This will point to memory on the free store;
+		// it will be allocated within CreateGraph.
+		// It is the caller's responsibility to call DestroyGraph on g.
 		HF::SpatialStructures::Graph* g = nullptr;
 
-		// parameters nodes and num_nodes are unused, according to documentation
-		if (CreateGraph(nullptr, -1, &g)) {
-			std::cout << "Graph creation successful";
+		// The first two parameters are unused, according to documentation.
+		status = CreateGraph(nullptr, -1, &g);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at CreateGraph, code: " << status << std::endl;
 		}
 		else {
-			std::cout << "Graph creation failed" << std::endl;
+			std::cout << "CreateGraph ran successfully, graph is at address " << g << ", code: " << status << std::endl;
 		}
 
-		float n0[] = { 0, 0, 0 };
-		float n1[] = { 0, 1, 2 };
-		float n2[] = { 0, 1, 3 };
+		//! [snippet_spatialstructuresC_GetCSRPointers]
+		// Create three nodes in the form of { x, y, z } coordinates.
+		std::array<float, 3> n0 { 0, 0, 0 };
+		std::array<float, 3> n1 { 0, 1, 2 };
+		std::array<float, 3> n2 { 0, 1, 3 };
 
 		const char* cost_type = "";
 
-		AddEdgeFromNodes(g, n0, n1, 1, cost_type);
-		AddEdgeFromNodes(g, n0, n2, 2, cost_type);
-		AddEdgeFromNodes(g, n1, n0, 3, cost_type);
-		AddEdgeFromNodes(g, n1, n2, 4, cost_type);
-		AddEdgeFromNodes(g, n2, n0, 5, cost_type);
-		AddEdgeFromNodes(g, n2, n1, 6, cost_type);
+		status = AddEdgeFromNodes(g, n0.data(), n1.data(), 1, cost_type);
+		status = AddEdgeFromNodes(g, n0.data(), n2.data(), 2, cost_type);
+		status = AddEdgeFromNodes(g, n1.data(), n0.data(), 3, cost_type);
+		status = AddEdgeFromNodes(g, n1.data(), n2.data(), 4, cost_type);
+		status = AddEdgeFromNodes(g, n2.data(), n0.data(), 5, cost_type);
+		status = AddEdgeFromNodes(g, n2.data(), n1.data(), 6, cost_type);
 
-		Compress(g);
+		status = Compress(g);
 
-		// data = { 1, 2, 3, 4, 5, 6 }
-		// r = { 0, 2, 4 }
-		// c = { 1, 2, 0, 2, 0, 1 }
+		if (status != 1) {
+			std::cerr << "Error at Compress, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "Compress ran successfully on graph addressed at " << g << ", code: " << status << std::endl;
+		}
 
 		// Retrieve the CSR from the graph
 		HF::SpatialStructures::CSRPtrs csr;
-		GetCSRPointers(g, &csr.nnz, &csr.rows, &csr.cols, &csr.data, &csr.inner_indices, &csr.outer_indices, cost_type);
-
-		// Release memory for g after use
-		DestroyGraph(g);
-		//! [snippet_spatialstructuresC_GetCSRPointers]
-	}
-
-	TEST(_spatialstructures_cinterface, GetNodeID) {
-		//! [snippet_spatialstructuresC_GetNodeID]
-			// Requires #include "graph.h"
-
-		HF::SpatialStructures::Graph* g = nullptr;
-
-		// parameters nodes and num_nodes are unused, according to documentation
-		if (CreateGraph(nullptr, -1, &g)) {
-			std::cout << "Graph creation successful";
-		}
-		else {
-			std::cout << "Graph creation failed" << std::endl;
-		}
-
-		float n0[] = { 0, 0, 0 };
-		float n1[] = { 0, 1, 2 };
-		const float distance = 3;
-
-		const char* cost_type = "";
-
-		AddEdgeFromNodes(g, n0, n1, distance, cost_type);
-
-		float point[] = { 0, 1, 2 };
-		int result_id = -1;
-
-		GetNodeID(g, point, &result_id);
-
-		// Release memory fo
-		//! [snippet_spatialstructuresC_GetNodeID]
-	}
-
-	TEST(_spatialstructures_cinterface, Compress) {
-		//! [snippet_spatialstructuresC_Compress]
-			// Requires #include "graph.h"
-
-		HF::SpatialStructures::Graph* g = nullptr;
-
-		// parameters nodes and num_nodes are unused, according to documentation
-		if (CreateGraph(nullptr, -1, &g)) {
-			std::cout << "Graph creation successful";
-		}
-		else {
-			std::cout << "Graph creation failed" << std::endl;
-		}
-
-		float n0[] = { 0, 0, 0 };
-		float n1[] = { 0, 1, 2 };
-		float n2[] = { 0, 1, 3 };
-
-		const char* cost_type = "";
-
-		AddEdgeFromNodes(g, n0, n1, 1, cost_type);
-		AddEdgeFromNodes(g, n0, n2, 2, cost_type);
-		AddEdgeFromNodes(g, n1, n0, 3, cost_type);
-		AddEdgeFromNodes(g, n1, n2, 4, cost_type);
-		AddEdgeFromNodes(g, n2, n0, 5, cost_type);
-		AddEdgeFromNodes(g, n2, n1, 6, cost_type);
-
-		Compress(g);
+		status = GetCSRPointers(g, &csr.nnz, &csr.rows, &csr.cols, &csr.data, &csr.inner_indices, &csr.outer_indices, cost_type);
 
 		// data = { 1, 2, 3, 4, 5, 6 }
 		// r = { 0, 2, 4 }
 		// c = { 1, 2, 0, 2, 0, 1 }
 
-		// Release memory for g after use
-		DestroyGraph(g);
+		if (status != 1) {
+			std::cerr << "Error at GetCSRPointers, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "GetCSRPointers ran successfully on graph addressed at " << g << ", code: " << status << std::endl;
+		}
+		//! [snippet_spatialstructuresC_GetCSRPointers]
+
+		// Destroy graph
+		status = DestroyGraph(g);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at DestroyGraph, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "DestroyGraph ran successfully on address " << g << ", code: " << status << std::endl;
+		}
+	}
+
+	TEST(_spatialstructures_cinterface, GetNodeID) {
+		// Status code variable, value returned by C Interface functions
+		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
+		int status = 0;
+
+		// Declare a pointer to Graph.
+		// This will point to memory on the free store;
+		// it will be allocated within CreateGraph.
+		// It is the caller's responsibility to call DestroyGraph on g.
+		HF::SpatialStructures::Graph* g = nullptr;
+
+		// The first two parameters are unused, according to documentation.
+		status = CreateGraph(nullptr, -1, &g);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at CreateGraph, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "CreateGraph ran successfully, graph is at address " << g << ", code: " << status << std::endl;
+		}
+
+		//! [snippet_spatialstructuresC_GetNodeID]
+		// Create two nodes in the form of { x, y, z } coordinates.
+		std::array<float, 3> n0 { 0, 0, 0 };
+		std::array<float, 3> n1 { 0, 1, 2 };
+
+		const float edge_weight = 3;
+		const char* cost_type = "";
+
+		status = AddEdgeFromNodes(g, n0.data(), n1.data(), edge_weight, cost_type);
+
+		// Determine the coordinates of the node whose ID you want to retrieve. result_id will store the retrieved ID.
+		std::array<float, 3> point { 0, 1, 2 };
+		int result_id = -1;
+
+		status = GetNodeID(g, point.data(), &result_id);
+
+		//! [snippet_spatialstructuresC_GetNodeID]
+		// Destroy graph
+		status = DestroyGraph(g);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at DestroyGraph, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "DestroyGraph ran successfully on address " << g << ", code: " << status << std::endl;
+		}
+	}
+
+	TEST(_spatialstructures_cinterface, Compress) {
+		// Status code variable, value returned by C Interface functions
+		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
+		int status = 0;
+
+		// Declare a pointer to Graph.
+		// This will point to memory on the free store;
+		// it will be allocated within CreateGraph.
+		// It is the caller's responsibility to call DestroyGraph on g.
+		HF::SpatialStructures::Graph* g = nullptr;
+
+		// The first two parameters are unused, according to documentation.
+		status = CreateGraph(nullptr, -1, &g);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at CreateGraph, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "CreateGraph ran successfully, graph is at address " << g << ", code: " << status << std::endl;
+		}
+
+		//! [snippet_spatialstructuresC_Compress]
+		// Create three nodes in the form of { x, y, z } coordinates.
+		std::array<float, 3> n0{ 0, 0, 0 };
+		std::array<float, 3> n1{ 0, 1, 2 };
+		std::array<float, 3> n2{ 0, 1, 3 };
+
+		// We do not need to mind the cost type for now.
+		const char* cost_type = "";
+
+		status = AddEdgeFromNodes(g, n0.data(), n1.data(), 1, cost_type);
+		status = AddEdgeFromNodes(g, n0.data(), n2.data(), 2, cost_type);
+		status = AddEdgeFromNodes(g, n1.data(), n0.data(), 3, cost_type);
+		status = AddEdgeFromNodes(g, n1.data(), n2.data(), 4, cost_type);
+		status = AddEdgeFromNodes(g, n2.data(), n0.data(), 5, cost_type);
+		status = AddEdgeFromNodes(g, n2.data(), n1.data(), 6, cost_type);
+
+		// Any time edges are added to a graph, the graph must be compressed.
+		Compress(g);
+
+		// data = { 1, 2, 3, 4, 5, 6 }
+		// rows = { 0, 2, 4 }
+		// columns = { 1, 2, 0, 2, 0, 1 }
+		//! [snippet_spatialstructuresC_Compress]
+
+		// Destroy graph
+		status = DestroyGraph(g);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at DestroyGraph, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "DestroyGraph ran successfully on address " << g << ", code: " << status << std::endl;
+		}
 		//! [snippet_spatialstructuresC_Compress]
 	}
 
 	TEST(_spatialstructures_cinterface, ClearGraph) {
-		//! [snippet_spatialstructuresC_ClearGraph]
-		// Requires #include "graph.h"
+		// Status code variable, value returned by C Interface functions
+		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
+		int status = 0;
 
+		// Declare a pointer to Graph.
+		// This will point to memory on the free store;
+		// it will be allocated within CreateGraph.
+		// It is the caller's responsibility to call DestroyGraph on g.
 		HF::SpatialStructures::Graph* g = nullptr;
 
-		// parameters nodes and num_nodes are unused, according to documentation
-		if (CreateGraph(nullptr, -1, &g)) {
-			std::cout << "Graph creation successful";
+		// The first two parameters are unused, according to documentation.
+		status = CreateGraph(nullptr, -1, &g);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at CreateGraph, code: " << status << std::endl;
 		}
 		else {
-			std::cout << "Graph creation failed" << std::endl;
+			std::cout << "CreateGraph ran successfully, graph is at address " << g << ", code: " << status << std::endl;
 		}
 
-		float n0[] = { 0, 0, 0 };
-		float n1[] = { 0, 1, 2 };
-		const float distance = 3;
+		//! [snippet_spatialstructuresC_ClearGraph]
+		// Create two nodes in the form of { x, y, z } coordinates.
+		std::array<float, 3> n0{ 0, 0, 0 };
+		std::array<float, 3> n1{ 0, 1, 2 };
 
+		const float edge_weight = 3;
 		const char* cost_type = "";
 
-		AddEdgeFromNodes(g, n0, n1, distance, cost_type);
+		AddEdgeFromNodes(g, n0.data(), n1.data(), edge_weight, cost_type);
 
 		ClearGraph(g, cost_type);
 
-		// Release memory for g after use
-		DestroyGraph(g);
+		// The graph will now have a node count of 0.
+
 		//! [snippet_spatialstructuresC_ClearGraph]
+		// Destroy graph
+		status = DestroyGraph(g);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at DestroyGraph, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "DestroyGraph ran successfully on address " << g << ", code: " << status << std::endl;
+		}
 	}
 
 	TEST(_spatialstructures_cinterface, DestroyNodes) {
 		//! [snippet_spatialstructuresC_DestroyNodes]
 		// Requires #include "node.h", #include <vector>
+
+		// Status code variable, value returned by C Interface functions
+		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
+		int status = 0;
 
 		HF::SpatialStructures::Node n0(0, 0, 0);
 		HF::SpatialStructures::Node n1(0, 1, 1);
@@ -364,13 +596,25 @@ namespace CInterfaceTests {
 
 		// Use node_vec
 
-		DestroyNodes(node_vec);
+		// Destroy vector<Node>
+		status = DestroyNodes(node_vec);
+
+		if (status != 1) {
+			std::cerr << "Error at DestroyNodes, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "DestroyNodes ran successfully on address " << node_vec << ", code: " << status << std::endl;
+		}
 		//! [snippet_spatialstructuresC_DestroyNodes]
 	}
 
 	TEST(_spatialstructures_cinterface, DestroyEdges) {
 		//! [snippet_spatialstructuresC_DestroyEdges]
 		// Requires #include "node.h", #include <vector>
+
+		// Status code variable, value returned by C Interface functions
+		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
+		int status = 0;
 
 		HF::SpatialStructures::Node n0(0, 0, 0);
 		HF::SpatialStructures::Node n1(0, 1, 1);
@@ -384,101 +628,182 @@ namespace CInterfaceTests {
 
 		// Use edge_vec
 
-		DestroyEdges(edge_vec);
+		// Destroy vector<Edge>
+		status = DestroyEdges(edge_vec);
+
+		if (status != 1) {
+			std::cerr << "Error at DestroyEdges, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "DestroyEdges ran successfully on address " << edge_vec << ", code: " << status << std::endl;
+		}
 		//! [snippet_spatialstructuresC_DestroyEdges]
 	}
 
 	TEST(_spatialstructures_cinterface, DestroyGraph) {
 		//! [snippet_spatialstructuresC_DestroyGraph]
-		// Requires #include "graph.h"
+		// Status code variable, value returned by C Interface functions
+		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
+		int status = 0;
 
+		// Declare a pointer to Graph.
+		// This will point to memory on the free store;
+		// it will be allocated within CreateGraph.
+		// It is the caller's responsibility to call DestroyGraph on g.
 		HF::SpatialStructures::Graph* g = nullptr;
 
-		// parameters nodes and num_nodes are unused, according to documentation
-		if (CreateGraph(nullptr, -1, &g)) {
-			std::cout << "Graph creation successful";
+		// The first two parameters are unused, according to documentation.
+		status = CreateGraph(nullptr, -1, &g);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at CreateGraph, code: " << status << std::endl;
 		}
 		else {
-			std::cout << "Graph creation failed" << std::endl;
+			std::cout << "CreateGraph ran successfully, graph is at address " << g << ", code: " << status << std::endl;
 		}
 
 		// use Graph
 
-		// Release memory for g after use
-		DestroyGraph(g);
+		// Destroy graph
+		status = DestroyGraph(g);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at DestroyGraph, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "DestroyGraph ran successfully on address " << g << ", code: " << status << std::endl;
+		}
 		//! [snippet_spatialstructuresC_DestroyGraph]
 	}
 
 	TEST(_spatialstructures_cinterface, CalculateAndStoreCrossSlope) {
-		//! [snippet_spatialstructuresC_CalculateAndStoreCrossSlope]
 		// Requires #include "graph.h"
 
-		// Create 7 nodes
-		HF::SpatialStructures::Node n0(0, 0, 0);
-		HF::SpatialStructures::Node n1(1, 3, 5);
-		HF::SpatialStructures::Node n2(3, -1, 2);
-		HF::SpatialStructures::Node n3(1, 2, 1);
-		HF::SpatialStructures::Node n4(4, 5, 7);
-		HF::SpatialStructures::Node n5(5, 3, 2);
-		HF::SpatialStructures::Node n6(-2, -5, 1);
+		// Status code variable, value returned by C Interface functions
+		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
+		int status = 0;
 
-		HF::SpatialStructures::Graph g;
+		// Declare a pointer to Graph.
+		// This will point to memory on the free store;
+		// it will be allocated within CreateGraph.
+		// It is the caller's responsibility to call DestroyGraph on g.
+		HF::SpatialStructures::Graph* g = nullptr;
 
-		// Adding 9 edges
-		g.addEdge(n0, n1);
-		g.addEdge(n1, n2);
-		g.addEdge(n1, n3);
-		g.addEdge(n1, n4);
-		g.addEdge(n2, n4);
-		g.addEdge(n3, n5);
-		g.addEdge(n5, n6);
-		g.addEdge(n4, n6);
+		// The first two parameters are unused, according to documentation.
+		status = CreateGraph(nullptr, -1, &g);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at CreateGraph, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "CreateGraph ran successfully, graph is at address " << g << ", code: " << status << std::endl;
+		}
+
+		//! [snippet_spatialstructuresC_CalculateAndStoreCrossSlope]
+		// Create 7 nodes, in the form of {x, y, z}
+		std::array<float, 3> n0{ 0, 0, 0 };
+		std::array<float, 3> n1{ 1, 3, 5 };
+		std::array<float, 3> n2{ 3, -1, 2 };
+		std::array<float, 3> n3{ 1, 2, 1 };
+		std::array<float, 3> n4{ 4, 5, 7 };
+		std::array<float, 3> n5{ 5, 3, 2 };
+		std::array<float, 3> n6{ -2, -5, 1 };
+
+		// Retrieve the cost type string
+		const char* cost_type = AlgorithmCostTitle(COST_ALG_KEY::CROSS_SLOPE).c_str();
+
+		AddEdgeFromNodes(g, n0.data(), n1.data(), 0, cost_type);
+		AddEdgeFromNodes(g, n1.data(), n2.data(), 0, cost_type);
+		AddEdgeFromNodes(g, n1.data(), n3.data(), 0, cost_type);
+		AddEdgeFromNodes(g, n1.data(), n4.data(), 0, cost_type);
+		AddEdgeFromNodes(g, n2.data(), n4.data(), 0, cost_type);
+		AddEdgeFromNodes(g, n3.data(), n5.data(), 0, cost_type);
+		AddEdgeFromNodes(g, n5.data(), n6.data(), 0, cost_type);
+		AddEdgeFromNodes(g, n4.data(), n6.data(), 0, cost_type);
 
 		// Always compress the graph after adding edges!
-		g.Compress();
+		status = Compress(g);
 
-		// Within CalculateAndStoreCrossSlope,
-		// std::vector<std::vector<IntEdge>> CostAlgorithms::CalculateAndStoreCrossSlope(Graph& g)
-		// will be called, along with a call to the member function
-		// void Graph::AddEdges(std::vector<std::vector<IntEdge>>& edges).
-		CalculateAndStoreCrossSlope(&g);
+		// Cross Slope will be calculated and stored within edges
+		CalculateAndStoreCrossSlope(g);
 		//! [snippet_spatialstructuresC_CalculateAndStoreCrossSlope]
+		// Destroy graph
+		status = DestroyGraph(g);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at DestroyGraph, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "DestroyGraph ran successfully on address " << g << ", code: " << status << std::endl;
+		}
 	}
 
 	TEST(_spatialstructures_cinterface, CalculateAndStoreEnergyExpenditure) {
-		//! [snippet_spatialstructuresC_CalculateAndStoreEnergyExpenditure]
 		// Requires #include "graph.h"
 
-		// Create 7 nodes
-		HF::SpatialStructures::Node n0(0, 0, 0);
-		HF::SpatialStructures::Node n1(1, 3, 5);
-		HF::SpatialStructures::Node n2(3, -1, 2);
-		HF::SpatialStructures::Node n3(1, 2, 1);
-		HF::SpatialStructures::Node n4(4, 5, 7);
-		HF::SpatialStructures::Node n5(5, 3, 2);
-		HF::SpatialStructures::Node n6(-2, -5, 1);
+		// Status code variable, value returned by C Interface functions
+		// See documentation for HF::Exceptions::HF_STATUS for error code definitions.
+		int status = 0;
 
-		HF::SpatialStructures::Graph g;
+		// Declare a pointer to Graph.
+		// This will point to memory on the free store;
+		// it will be allocated within CreateGraph.
+		// It is the caller's responsibility to call DestroyGraph on g.
+		HF::SpatialStructures::Graph* g = nullptr;
 
-		// Adding 9 edges
-		g.addEdge(n0, n1);
-		g.addEdge(n1, n2);
-		g.addEdge(n1, n3);
-		g.addEdge(n1, n4);
-		g.addEdge(n2, n4);
-		g.addEdge(n3, n5);
-		g.addEdge(n5, n6);
-		g.addEdge(n4, n6);
+		// The first two parameters are unused, according to documentation.
+		status = CreateGraph(nullptr, -1, &g);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at CreateGraph, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "CreateGraph ran successfully, graph is at address " << g << ", code: " << status << std::endl;
+		}
+
+		//! [snippet_spatialstructuresC_CalculateAndStoreEnergyExpenditure]
+		// Create 7 nodes, in the form of {x, y, z}
+		std::array<float, 3> n0{ 0, 0, 0 };
+		std::array<float, 3> n1{ 1, 3, 5 };
+		std::array<float, 3> n2{ 3, -1, 2 };
+		std::array<float, 3> n3{ 1, 2, 1 };
+		std::array<float, 3> n4{ 4, 5, 7 };
+		std::array<float, 3> n5{ 5, 3, 2 };
+		std::array<float, 3> n6{ -2, -5, 1 };
+
+		// Retrieve the cost type string
+		const char* cost_type = AlgorithmCostTitle(COST_ALG_KEY::CROSS_SLOPE).c_str();
+
+		AddEdgeFromNodes(g, n0.data(), n1.data(), 0, cost_type);
+		AddEdgeFromNodes(g, n1.data(), n2.data(), 0, cost_type);
+		AddEdgeFromNodes(g, n1.data(), n3.data(), 0, cost_type);
+		AddEdgeFromNodes(g, n1.data(), n4.data(), 0, cost_type);
+		AddEdgeFromNodes(g, n2.data(), n4.data(), 0, cost_type);
+		AddEdgeFromNodes(g, n3.data(), n5.data(), 0, cost_type);
+		AddEdgeFromNodes(g, n5.data(), n6.data(), 0, cost_type);
+		AddEdgeFromNodes(g, n4.data(), n6.data(), 0, cost_type);
 
 		// Always compress the graph after adding edges!
-		g.Compress();
+		status = Compress(g);
 
-		// Within CalculateAndStoreEnergyExpenditure,
-		// std::vector<std::vector<EdgeSet>> CostAlgorithms::CalculateAndStoreEnergyExpenditure(Graph& g)
-		// will be called, along with a call to the member function
-		// void Graph::AddEdges(std::vector<std::vector<EdgeSet>>& edges).
-		CalculateAndStoreEnergyExpenditure(&g);
+		// Energy Expenditure will be calculated and stored within edges
+		CalculateAndStoreEnergyExpenditure(g);
 		//! [snippet_spatialstructuresC_CalculateAndStoreEnergyExpenditure]
+		// Destroy graph
+		status = DestroyGraph(g);
+
+		if (status != 1) {
+			// Error!
+			std::cerr << "Error at DestroyGraph, code: " << status << std::endl;
+		}
+		else {
+			std::cout << "DestroyGraph ran successfully on address " << g << ", code: " << status << std::endl;
+		}
 	}
 
 	TEST(_spatialstructures_cinterface, AddNodeAttributes) {
