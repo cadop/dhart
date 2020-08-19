@@ -95,8 +95,16 @@ inline std::string AlgorithmCostTitle(COST_ALG_KEY key) {
 	\section	graph_get_csr_pointers	Retrieve a CSR of the graph
 	TODO Retrieve a CSR of the graph
 
-	When you are finished with the graph, be sure to destroy it.<br>
+	<br>
+	When you are finished with a graph, be sure to destroy it.<br>
 	(see \ref graph_teardown)
+	<br>
+
+	\section	node_vector_teardown		Destroying a vector of node
+	TODO Destroying a vector of node
+
+	\section	edge_vector_teardown		Destroying a vector of edge
+	TODO Destroying a vector of edge
 */
 
 /*!
@@ -110,7 +118,27 @@ inline std::string AlgorithmCostTitle(COST_ALG_KEY key) {
 				HF_STATUS::GENERIC_ERROR if the graph is not valid.
 				HF_STATUS::OK if successful.
 
+	\see \ref graph_setup (how to create a graph)
+	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
+	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
+	\see \ref graph_compress (how to compress a graph after adding/removing edges)
+	\see \ref node_vector_teardown (how to destroy a vector of node)
+	\see \ref graph_teardown (how to destroy a graph)
+
+	Begin by reviewing the example at \ref graph_setup to create a graph.<br>
+
+	You may add edges to the graph using nodes (\ref graph_add_edge_from_nodes)<br>
+	or alternative, you may provide node IDs (\ref graph_add_edge_from_node_IDs).<br>
+	
+	Be sure to compress the graph (\ref graph_compress) every time you add/remove edges.<br>
+
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_GetAllNodesFromGraph
+	
+	When you are finished with the node vector,<br>
+	it must be destroyed. (\ref node_vector_teardown)
+
+	Finally, when you are finished with the graph,<br>
+	it must be destroyed. (\ref graph_teardown)
 
 	<br>
 	\verbatim
@@ -134,7 +162,27 @@ C_INTERFACE GetAllNodesFromGraph(
 
 	\returns	HF_STATUS::OK on completion.
 
+	\see \ref graph_setup (how to create a graph)
+	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
+	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
+	\see \ref graph_compress (how to compress a graph after adding/removing edges)
+	\see \ref edge_vector_teardown (how to destroy a vector of edge)
+	\see \ref graph_teardown (how to destroy a graph)
+
+	Begin by reviewing the example at \ref graph_setup to create a graph.<br>
+
+	You may add edges to the graph using nodes (\ref graph_add_edge_from_nodes)<br>
+	or alternative, you may provide node IDs (\ref graph_add_edge_from_node_IDs).<br>
+
+	Be sure to compress the graph (\ref graph_compress) every time you add/remove edges.<br>
+
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_GetEdgesForNode
+
+	When you are finished with the edge vector,<br>
+	it must be destroyed. (\ref edge_vector_teardown)
+
+	Finally, when you are finished with the graph,<br>
+	it must be destroyed. (\ref graph_teardown)
 
 	<br>
 	\verbatim
@@ -157,7 +205,27 @@ C_INTERFACE GetEdgesForNode(
 	
 	\returns	HF_STATUS::OK on completion.
 
+	\see \ref graph_setup (how to create a graph)
+	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
+	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
+	\see \ref graph_compress (how to compress a graph after adding/removing edges)
+	\see \ref node_vector_teardown (how to destroy a vector of node)
+	\see \ref graph_teardown (how to destroy a graph)
+
+	Begin by reviewing the example at \ref graph_setup to create a graph.<br>
+
+	You may add edges to the graph using nodes (\ref graph_add_edge_from_nodes)<br>
+	or alternative, you may provide node IDs (\ref graph_add_edge_from_node_IDs).<br>
+
+	Be sure to compress the graph (\ref graph_compress) every time you add/remove edges.<br>
+
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_GetSizeOfNodeVector
+
+	When you are finished with the node vector,<br>
+	it must be destroyed. (\ref node_vector_teardown)
+
+	Finally, when you are finished with the graph,<br>
+	it must be destroyed. (\ref graph_teardown)
 
 	<br>
 	\verbatim
@@ -179,7 +247,27 @@ C_INTERFACE GetSizeOfNodeVector(
 
 	\deprecated	This is never used. Do not include.
 
+	\see \ref graph_setup (how to create a graph)
+	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
+	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
+	\see \ref graph_compress (how to compress a graph after adding/removing edges)
+	\see \ref edge_vector_teardown (how to destroy a vector of edge)
+	\see \ref graph_teardown (how to destroy a graph)
+
+	Begin by reviewing the example at \ref graph_setup to create a graph.<br>
+
+	You may add edges to the graph using nodes (\ref graph_add_edge_from_nodes)<br>
+	or alternative, you may provide node IDs (\ref graph_add_edge_from_node_IDs).<br>
+
+	Be sure to compress the graph (\ref graph_compress) every time you add/remove edges.<br>
+
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_GetSizeOfEdgeVector
+
+	When you are finished with the edge vector,<br>
+	it must be destroyed. (\ref edge_vector_teardown)
+
+	Finally, when you are finished with the graph,<br>
+	it must be destroyed. (\ref graph_teardown)
 
 	<br>
 	\verbatim
@@ -210,7 +298,23 @@ C_INTERFACE GetSizeOfEdgeVector(
 	\returns HF_STATUS::OK on success
 	\returns HF_STATUS::NO_COST if there was no cost with cost_name
 
+	\see \ref graph_setup (how to create a graph)
+	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
+	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
+	\see \ref graph_compress (how to compress a graph after adding/removing edges)
+	\see \ref graph_teardown (how to destroy a graph)
+
+	Begin by reviewing the example at \ref graph_setup to create a graph.<br>
+
+	You may add edges to the graph using nodes (\ref graph_add_edge_from_nodes)<br>
+	or alternative, you may provide node IDs (\ref graph_add_edge_from_node_IDs).<br>
+
+	Be sure to compress the graph (\ref graph_compress) every time you add/remove edges.<br>
+
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_GetEdgeCost
+
+	Finally, when you are finished with the graph,<br>
+	it must be destroyed. (\ref graph_teardown)
 
 	<br>
 	\verbatim
@@ -242,7 +346,23 @@ C_INTERFACE GetEdgeCost(
 	\returns	HF_STATUS::OK if successful.
 	\returns	HF::Exceptions::STATUS::NOT_COMPRESSED if the graph wasn't compressed.
 
+	\see \ref graph_setup (how to create a graph)
+	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
+	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
+	\see \ref graph_compress (how to compress a graph after adding/removing edges)
+	\see \ref graph_teardown (how to destroy a graph)
+
+	Begin by reviewing the example at \ref graph_setup to create a graph.<br>
+
+	You may add edges to the graph using nodes (\ref graph_add_edge_from_nodes)<br>
+	or alternative, you may provide node IDs (\ref graph_add_edge_from_node_IDs).<br>
+
+	Be sure to compress the graph (\ref graph_compress) every time you add/remove edges.<br>
+
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_AggregateCosts
+
+	Finally, when you are finished with the graph,<br>
+	it must be destroyed. (\ref graph_teardown)
 
 	<br>
 	\verbatim
@@ -270,15 +390,6 @@ C_INTERFACE AggregateCosts(
 	\see \ref graph_setup (how to create a graph)
 	\see \ref graph_compress (how to compress a graph)
 	\see \ref graph_teardown (how to destroy a graph)
-	
-	If you see this, remove this snippet
-	when the graph_setup section is done!
-	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_CreateGraph
-
-	<br>
-	\verbatim
-	TODO output
-	\endverbatim
 */
 C_INTERFACE CreateGraph(
 	const float* nodes,
@@ -319,15 +430,6 @@ C_INTERFACE CreateGraph(
 	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
 	\see \ref graph_compress (how to compress a graph after adding/removing edges)
 	\see \ref graph_teardown (how to destroy a graph)
-
-	If you see this snippet, remove it
-	when the graph_add_edge_from_nodes section is done!
-	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_AddEdgeFromNodes
-
-	<br>
-	\verbatim
-	TODO output
-	\endverbatim
 */
 C_INTERFACE AddEdgeFromNodes(
 	HF::SpatialStructures::Graph* graph,
@@ -358,15 +460,6 @@ C_INTERFACE AddEdgeFromNodes(
 	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
 	\see \ref graph_compress (how to compress a graph after adding/removing edges)
 	\see \ref graph_teardown (how to destroy a graph)
-
-	If you see this snippet, remove it
-	when the graph_add_edge_from_node_ids section is done!
-	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_AddEdgeFromNodeIDs
-
-	<br>
-	\verbatim
-	TODO output
-	\endverbatim
 */
 C_INTERFACE AddEdgeFromNodeIDs(
 	HF::SpatialStructures::Graph* graph,
@@ -397,15 +490,6 @@ C_INTERFACE AddEdgeFromNodeIDs(
 	\see \ref graph_compress (how to compress a graph after adding/removing edges)
 	\see \ref graph_get_csr_pointers (how to retrieve a CSR representation of a graph)
 	\see \ref graph_teardown (how to destroy a graph)
-
-	If you see this snippet, remove it
-	when the graph_get_csr_pointers section is done!
-	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_GetCSRPointers
-
-	<br>
-	\verbatim
-	TODO output
-	\endverbatim
 */
 C_INTERFACE GetCSRPointers(
 	HF::SpatialStructures::Graph* graph,
@@ -440,7 +524,15 @@ C_INTERFACE GetCSRPointers(
 	\see \ref graph_compress (how to compress a graph after adding/removing edges)
 	\see \ref graph_teardown (how to destroy a graph)
 
+	Begin by reviewing the example at \ref graph_setup to create a graph.<br>
+
+	You may add edges to the graph using nodes (\ref graph_add_edge_from_nodes)<br>
+	or alternative, you may provide node IDs (\ref graph_add_edge_from_node_IDs).<br>
+
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_GetNodeID
+
+	Finally, when you are finished with the graph,<br>
+	it must be destroyed. (\ref graph_teardown)
 
 	<br>
 	\verbatim
@@ -469,15 +561,6 @@ C_INTERFACE GetNodeID(
 	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
 	\see \ref graph_compress (how to compress a graph after adding/removing edges)
 	\see \ref graph_teardown (how to destroy a graph)
-
-	If you see this snippet, remove it
-	when the graph_compress section is done!
-	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_Compress
-
-	<br>
-	\verbatim
-	TODO output
-	\endverbatim
 */
 C_INTERFACE Compress(
 	HF::SpatialStructures::Graph* graph
@@ -499,9 +582,18 @@ C_INTERFACE Compress(
 	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
 	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
 	\see \ref graph_compress (how to compress a graph after adding/removing edges)
+	\see \ref graph_get_csr_pointers (how to retrieve a CSR representation of a graph)
 	\see \ref graph_teardown (how to destroy a graph)
 
+	Begin by reviewing the example at \ref graph_setup to create a graph.<br>
+
+	You may add edges to the graph using nodes (\ref graph_add_edge_from_nodes)<br>
+	or alternative, you may provide node IDs (\ref graph_add_edge_from_node_IDs).<br>
+
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_ClearGraph
+
+	Finally, when you are finished with the graph,<br>
+	it must be destroyed. (\ref graph_teardown)
 
 	<br>
 	\verbatim
@@ -520,12 +612,7 @@ C_INTERFACE ClearGraph(
 
 	\returns	HF_STATUS::OK on completion.
 
-	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_DestroyNodes
-
-	<br>
-	\verbatim
-	TODO output
-	\endverbatim
+	\see \ref node_vector_teardown (how to destroy a vector of node)
 */
 C_INTERFACE DestroyNodes(
 	std::vector<HF::SpatialStructures::Node>* nodelist_to_destroy
@@ -538,12 +625,7 @@ C_INTERFACE DestroyNodes(
 
 	\returns	HF_STATUS::OK on completion.
 
-	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_DestroyEdges
-
-	<br>
-	\verbatim
-	TODO output
-	\endverbatim
+	\see \ref edge_vector_teardown (how to destroy a vector of edge)
 */
 C_INTERFACE DestroyEdges(
 	std::vector<HF::SpatialStructures::Edge>* edgelist_to_destroy
@@ -556,16 +638,7 @@ C_INTERFACE DestroyEdges(
 
 	\returns	HF_STATUS::OK on completion
 
-	\see \ref graph_setup (how to create a graph)
-	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
-	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
-	\see \ref graph_compress (how to compress a graph after adding/removing edges)
 	\see \ref graph_teardown (how to destroy a graph)
-
-	<br>
-	\verbatim
-	TODO output
-	\endverbatim
 */
 C_INTERFACE DestroyGraph(
 	HF::SpatialStructures::Graph* graph_to_destroy
@@ -577,6 +650,13 @@ C_INTERFACE DestroyGraph(
 
 	\returns	HF_STATUS::OK on completion
 
+	Begin by reviewing the example at \ref graph_setup to create a graph.<br>
+
+	You may add edges to the graph using nodes (\ref graph_add_edge_from_nodes)<br>
+	or alternative, you may provide node IDs (\ref graph_add_edge_from_node_IDs).<br>
+
+	Be sure to compress the graph (\ref graph_compress) every time you add/remove edges.<br>
+
 	\see \ref graph_setup (how to create a graph)
 	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
 	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
@@ -585,6 +665,9 @@ C_INTERFACE DestroyGraph(
 	\see \ref graph_teardown (how to destroy a graph)
 
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_CalculateAndStoreCrossSlope
+
+	Finally, when you are finished with the graph,<br>
+	it must be destroyed. (\ref graph_teardown)
 
 	<br>
 	\verbatim
@@ -601,6 +684,13 @@ C_INTERFACE CalculateAndStoreCrossSlope(HF::SpatialStructures::Graph* g);
 
 	\returns	HF_STATUS::OK on completion
 
+	Begin by reviewing the example at \ref graph_setup to create a graph.<br>
+
+	You may add edges to the graph using nodes (\ref graph_add_edge_from_nodes)<br>
+	or alternative, you may provide node IDs (\ref graph_add_edge_from_node_IDs).<br>
+
+	Be sure to compress the graph (\ref graph_compress) every time you add/remove edges.<br>
+
 	\see \ref graph_setup (how to create a graph)
 	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
 	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
@@ -609,6 +699,9 @@ C_INTERFACE CalculateAndStoreCrossSlope(HF::SpatialStructures::Graph* g);
 	\see \ref graph_teardown (how to destroy a graph)
 
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_CalculateAndStoreEnergyExpenditure
+
+	Finally, when you are finished with the graph,<br>
+	it must be destroyed. (\ref graph_teardown)
 
 	<br>
 	\verbatim
@@ -646,7 +739,17 @@ C_INTERFACE CalculateAndStoreEnergyExpenditure(HF::SpatialStructures::Graph* g);
 	\see \ref graph_get_csr_pointers (how to retrieve a CSR representation of a graph)
 	\see \ref graph_teardown (how to destroy a graph)
 
+	Begin by reviewing the example at \ref graph_setup to create a graph.<br>
+
+	You may add edges to the graph using nodes (\ref graph_add_edge_from_nodes)<br>
+	or alternative, you may provide node IDs (\ref graph_add_edge_from_node_IDs).<br>
+
+	Be sure to compress the graph (\ref graph_compress) every time you add/remove edges.<br>
+
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_AddNodeAttributes
+
+	Finally, when you are finished with the graph,<br>
+	it must be destroyed. (\ref graph_teardown)
 
 	<br>
 	\verbatim
@@ -685,9 +788,20 @@ C_INTERFACE AddNodeAttributes(
 	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
 	\see \ref graph_compress (how to compress a graph after adding/removing edges)
 	\see \ref graph_get_csr_pointers (how to retrieve a CSR representation of a graph)
+	\see \link AddNodeAttributes \endlink (how to add node attributes)
 	\see \ref graph_teardown (how to destroy a graph)
 
+	Begin by reviewing the example at \ref graph_setup to create a graph.<br>
+
+	You may add edges to the graph using nodes (\ref graph_add_edge_from_nodes)<br>
+	or alternative, you may provide node IDs (\ref graph_add_edge_from_node_IDs).<br>
+
+	Be sure to compress the graph (\ref graph_compress) every time you add/remove edges.<br>
+
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_GetNodeAttributes
+
+	Finally, when you are finished with the graph,<br>
+	it must be destroyed. (\ref graph_teardown)
 
 	<br>
 	\verbatim
@@ -733,7 +847,19 @@ C_INTERFACE DeleteScoreArray(char** scores_to_delete, int num_char_arrays);
 	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
 	\see \ref graph_compress (how to compress a graph after adding/removing edges)
 	\see \ref graph_get_csr_pointers (how to retrieve a CSR representation of a graph)
+	\see \link AddNodeAttributes \endlink (how to add node attributes)
+	\see link GetNodeAttributes \endlink (how to retrieve node attributes)
 	\see \ref graph_teardown (how to destroy a graph)
+
+	Begin by reviewing the example at \ref graph_setup to create a graph.<br>
+
+	You may add edges to the graph using nodes (\ref graph_add_edge_from_nodes)<br>
+	or alternative, you may provide node IDs (\ref graph_add_edge_from_node_IDs).<br>
+
+	Be sure to compress the graph (\ref graph_compress) every time you add/remove edges.<br>
+
+	Finally, when you are finished with the graph,<br>
+	it must be destroyed. (\ref graph_teardown)
 
 	<br>
 	\verbatim
@@ -750,14 +876,23 @@ C_INTERFACE ClearAttributeType(HF::SpatialStructures::Graph* g, const char* s);
 
 	\returns	HF_STATUS::OK on completion
 
-	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_GetSizeOfGraph
-
 	\see \ref graph_setup (how to create a graph)
 	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
 	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
 	\see \ref graph_compress (how to compress a graph after adding/removing edges)
 	\see \ref graph_get_csr_pointers (how to retrieve a CSR representation of a graph)
 	\see \ref graph_teardown (how to destroy a graph)
+
+	Begin by reviewing the example at \ref graph_setup to create a graph.<br>
+
+	You may add edges to the graph using nodes (\ref graph_add_edge_from_nodes)<br>
+	or alternative, you may provide node IDs (\ref graph_add_edge_from_node_IDs).<br>
+
+	Be sure to compress the graph (\ref graph_compress) every time you add/remove edges.<br>
+	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_GetSizeOfGraph
+
+	Finally, when you are finished with the graph,<br>
+	it must be destroyed. (\ref graph_teardown)
 
 	<br>
 	\verbatim
