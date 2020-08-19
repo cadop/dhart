@@ -74,7 +74,6 @@ namespace CInterfaceTests {
 		
 		// Destroy vector<Node>
 		status = DestroyNodes(out_vec);
-		
 		//! [snippet_spatialstructuresC_GetAllNodesFromGraph]
 		// Destroy graph
 		status = DestroyGraph(g);
@@ -457,7 +456,6 @@ namespace CInterfaceTests {
 		int result_id = -1;
 
 		status = GetNodeID(g, point.data(), &result_id);
-
 		//! [snippet_spatialstructuresC_GetNodeID]
 		// Destroy graph
 		status = DestroyGraph(g);
