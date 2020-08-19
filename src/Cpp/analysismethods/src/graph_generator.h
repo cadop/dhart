@@ -61,7 +61,7 @@ namespace HF::GraphGenerator {
 	using RayTracer = HF::RayTracer::EmbreeRayTracer; ///< Type of raytracer to be used internally.
 	using graph_edge = HF::SpatialStructures::Edge;   ///< Type of edge for the graph generator to use internally
 
-	constexpr real_t default_z_precision = 0.001;
+	constexpr real_t default_z_precision = 0.0001;
 	constexpr real_t default_ground_offset = 0.01;
 	constexpr real_t default_spacing_precision = 0.00001;
 
