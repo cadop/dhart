@@ -35,13 +35,14 @@ namespace HumanFactors.Geometry
             \throws System.IO.FileNotFoundException No file was found at `path`.
 			\throws HumanFactors.Exceptions.InvalidMeshException The file at `path` did not represent a valid OBJ.
        */
-		internal static IntPtr C_LoadOBJ(string obj_path, float xrot, float yrot, float zrot)
+		internal static IntPtr[] C_LoadOBJ(string obj_path, float xrot, float yrot, float zrot, GROUP_METHOD gm)
 		{
 			// Create a pointer as an output parameter
 			IntPtr out_ptr = new IntPtr();
 
 			// Call the function in C++ and capture the error code
-			HF_STATUS res = LoadOBJ(obj_path, obj_path.Length, xrot, yrot, zrot, ref out_ptr);
+			int num_meshes = 0;
+			HF_STATUS res = LoadOBJ(obj_path, (int)gm, xrot, yrot, zrot, ref out_ptr, ref num_meshes);
 
 			// If the file was not found, throw the standard file not found exception
 			if (res == HF_STATUS.NOT_FOUND)
@@ -51,8 +52,13 @@ namespace HumanFactors.Geometry
 			else if (res == HF_STATUS.INVALID_MESH)
 				throw new InvalidMeshException(obj_path + " did not lead to an obj file, or the obj file was invalid!");
 
-			// Return the pointer 
-			return out_ptr;
+			IntPtr[] out_ptrs = new IntPtr[num_meshes];
+			for (int i = 0; i < num_meshes; i++)
+				out_ptrs[i] = Marshal.ReadIntPtr(out_ptr, i);
+			DestroyMeshInfoPtrArray(out_ptr);	
+		
+			// Cast to pointer array
+			return out_ptrs;
 		}
 
 
@@ -112,11 +118,12 @@ namespace HumanFactors.Geometry
 		[DllImport(dllpath, CharSet = CharSet.Ansi)]
 		private static extern HF_STATUS LoadOBJ(
 			string obj_paths,
-			int length,
+			int group_method,
 			float yrot,
 			float xrot,
 			float zrot,
-			ref IntPtr out_mesh_info
+			ref IntPtr out_mesh_info,
+			ref int num_meshes
 		);
 
 		[DllImport(dllpath, CharSet = CharSet.Ansi)]
@@ -137,5 +144,8 @@ namespace HumanFactors.Geometry
 
 		[DllImport(dllpath, CharSet = CharSet.Ansi)]
 		internal static extern HF_STATUS RotateMesh(IntPtr Meshinfo, float xrot, float yrot, float zrot);
+
+		[DllImport(dllpath, CharSet = CharSet.Ansi)]
+		internal static extern HF_STATUS DestroyMeshInfoPtrArray(IntPtr data_array);
 	}
 }
