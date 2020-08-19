@@ -265,8 +265,6 @@ C_INTERFACE GetAllNodesFromGraph(
 
 	Be sure to compress the graph (\ref graph_compress) every time you add/remove edges.<br>
 
-	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_GetEdgesForNode
-
 	When you are finished with the edge vector,<br>
 	it must be destroyed. (\ref edge_vector_teardown)
 
@@ -325,28 +323,6 @@ C_INTERFACE GetSizeOfNodeVector(
 	\returns	\link HF_STATUS::OK \endlink on completion
 
 	\deprecated	This is never used. Do not include.
-
-	\see \ref graph_setup (how to create a graph)
-	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
-	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
-	\see \ref graph_compress (how to compress a graph after adding/removing edges)
-	\see \ref edge_vector_teardown (how to destroy a vector of edge)
-	\see \ref graph_teardown (how to destroy a graph)
-
-	Begin by reviewing the example at \ref graph_setup to create a graph.<br>
-
-	You may add edges to the graph using nodes (\ref graph_add_edge_from_nodes)<br>
-	or alternative, you may provide node IDs (\ref graph_add_edge_from_node_IDs).<br>
-
-	Be sure to compress the graph (\ref graph_compress) every time you add/remove edges.<br>
-
-	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_GetSizeOfEdgeVector
-
-	When you are finished with the edge vector,<br>
-	it must be destroyed. (\ref edge_vector_teardown)
-
-	Finally, when you are finished with the graph,<br>
-	it must be destroyed. (\ref graph_teardown)
 */
 C_INTERFACE GetSizeOfEdgeVector(
 	const std::vector<HF::SpatialStructures::Edge>* edge_list,
@@ -384,8 +360,6 @@ C_INTERFACE GetSizeOfEdgeVector(
 	or alternative, you may provide node IDs (\ref graph_add_edge_from_node_IDs).<br>
 
 	Be sure to compress the graph (\ref graph_compress) every time you add/remove edges.<br>
-
-	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_GetEdgeCost
 
 	Finally, when you are finished with the graph,<br>
 	it must be destroyed. (\ref graph_teardown)
