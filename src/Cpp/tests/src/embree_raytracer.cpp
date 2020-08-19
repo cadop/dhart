@@ -927,6 +927,4 @@ namespace C_Interface{
 		delete[] after_added_results;
 		delete[] before_added_results;
 	}
-	
-
 }

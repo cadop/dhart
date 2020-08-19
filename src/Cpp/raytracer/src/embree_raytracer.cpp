@@ -145,7 +145,7 @@ namespace HF::RayTracer {
 	}
 
 	void EmbreeRayTracer::SetupScene() {
-		device = rtcNewDevice("start_threads=1,set_affinity=1");
+		device = rtcNewDevice("");
 		scene = rtcNewScene(device);
 		rtcSetSceneBuildQuality(scene, RTC_BUILD_QUALITY_HIGH);
 		rtcSetSceneFlags(scene, RTC_SCENE_FLAG_ROBUST);
@@ -155,11 +155,13 @@ namespace HF::RayTracer {
 
 	EmbreeRayTracer::EmbreeRayTracer(const EmbreeRayTracer& ERT2)
 	{
+		// Copy over pointers to relevant embree objects
 		device = ERT2.device;
 		context = ERT2.context;
 		scene = ERT2.scene;
 		geometry = ERT2.geometry;
 
+		// Increment embree's internal refrence counter.
 		rtcRetainScene(scene);
 		rtcRetainDevice(device);
 	}
@@ -176,7 +178,6 @@ namespace HF::RayTracer {
 			// Don't know the specific error that will be raised here (Documentation just states some error code)
 			if (error != RTCError::RTC_ERROR_NONE)
 				return TryToAddByID(geom);
-
 		}
 		else
 			return rtcAttachGeometry(scene, geom);
@@ -215,12 +216,15 @@ namespace HF::RayTracer {
 		if (Commit)
 			rtcCommitScene(scene);
 
+		// Return False if it's id didn't need to be changed, true otherwise.
 		return (added_id == ID);
 	}
 
 	RTCGeometry EmbreeRayTracer::InsertGeometryFromBuffers(vector<Triangle>& tris, vector<Vertex>& verts) {
-		// Create embree buffers
+		// Create new geometry object
 		RTCGeometry geom = rtcNewGeometry(device, RTC_GEOMETRY_TYPE_TRIANGLE);
+
+		// Allocate it's triangle and index buffers in embree
 		triangles = static_cast<Triangle*>(
 			rtcSetNewGeometryBuffer(
 				geom,
@@ -242,10 +246,14 @@ namespace HF::RayTracer {
 			)
 			);
 
-		// Move data into embree buffers
+		// Move data from input tris/verts into buffers
 		std::move(tris.begin(), tris.end(), triangles);
 		std::move(verts.begin(), verts.end(), Vertices);
+
+		// Add a reference to this geometry to internal array of geometry.
 		geometry.push_back(geom);
+		
+		// Commit this geometry to finalize the process then return
 		rtcCommitGeometry(geom);
 
 		return geom;
