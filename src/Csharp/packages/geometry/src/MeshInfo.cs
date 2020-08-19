@@ -1,4 +1,6 @@
+using HumanFactors.NativeUtils;
 using System;
+using System.Reflection;
 using System.Security.Cryptography;
 
 /*!
@@ -20,6 +22,19 @@ using System.Security.Cryptography;
 
 namespace HumanFactors.Geometry
 {
+    /*! 
+        \brief A native array 2D that doesn't require destruction 
+    */
+    public class DependentNativeArray<T> : NativeArray2D<T>  where T : unmanaged{
+
+        internal DependentNativeArray(IntPtr data, int length, int width) 
+            : base(new CVectorAndData(data, IntPtr.Zero, length, width)) {}
+
+
+        /*!\brief Doesn't do anything since it's managed by it's parent MeshInfo */
+        protected override bool ReleaseHandle() => true;
+    }
+
 	/*!
 		\brief A collection of vertices and indices representing geometry.
 
@@ -47,6 +62,8 @@ namespace HumanFactors.Geometry
 	{
         public int id = -1; ///< ID of the mesh. 
         public string name = ""; ///< Name of the mesh
+        public DependentNativeArray<float> vertices;
+        public DependentNativeArray<int> indices;
 
 		/*!
             \brief Calculates the mesh's pressure. Unimplemented for now
@@ -62,8 +79,16 @@ namespace HumanFactors.Geometry
         /*! \brief Updates this mesh's name and ID with it's values from C++ */
         private void UpdateIDAndName()
         {
+            // Get ID and name
             this.id = NativeMethods.GetMeshID(this.Pointer);
             this.name = NativeMethods.GetMeshName(this.Pointer);
+
+            // Pointers and size of verts and tris arrays
+            var verts_and_tris = NativeMethods.C_GetTrisAndVerts(this.Pointer);
+
+            // Store these locally
+            this.vertices = new DependentNativeArray<float>(verts_and_tris.vert_ptr, verts_and_tris.verts, 3);
+            this.indices = new DependentNativeArray<int>(verts_and_tris.tri_ptr, verts_and_tris.tris, 3);
         }
 
 		/*!
@@ -120,7 +145,7 @@ namespace HumanFactors.Geometry
 
         */
 
-		public MeshInfo(int[] indices, float[] vertices, string name = "", int id = -1) :
+		public MeshInfo(int[] indices, float[] vertices, string name = "", int id = 0) :
 			base(NativeMethods.C_StoreMesh(vertices, indices, name, id), (vertices.Length * 4) + (indices.Length * 4))
 		{ UpdateIDAndName(); }
 

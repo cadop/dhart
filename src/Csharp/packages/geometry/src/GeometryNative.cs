@@ -17,6 +17,13 @@ namespace HumanFactors.Geometry
 	/*! \brief Native methods for the Geometry namespace */
 	internal static class NativeMethods
 	{
+			public struct TrisAndVertsReturn {
+			public IntPtr tri_ptr;
+			public IntPtr vert_ptr;
+			public int tris;
+			public int verts;
+		}
+
 
 		/// <summary>
 		/// Path to the HumanFactors dll copied from <see cref="NativeConstants"/>.
@@ -56,8 +63,10 @@ namespace HumanFactors.Geometry
 			// Iterate through the returned pointer array, and marshall each of it's pointers
 			// into managed memory
 			IntPtr[] out_ptrs = new IntPtr[num_meshes];
-			for (int i = 0; i < num_meshes; i++)
-				out_ptrs[i] = Marshal.ReadIntPtr(out_ptr, i);
+			//for (int i = 0; i < num_meshes; i++)
+			//	out_ptrs[i] = Marshal.ReadIntPtr(out_ptr, i * sizeof(IntPtr));
+
+			Marshal.Copy(out_ptr, out_ptrs, 0, num_meshes);
 
 			// Free the memory allocated by C++ for the pointer array
 			DestroyMeshInfoPtrArray(out_ptr);	
@@ -134,6 +143,15 @@ namespace HumanFactors.Geometry
 			return out_ptr;
 		}
 
+		internal static TrisAndVertsReturn C_GetTrisAndVerts(IntPtr MI)
+		{
+			TrisAndVertsReturn ret = new TrisAndVertsReturn();
+
+			GetVertsAndTris(MI, ref ret.tri_ptr, ref ret.tris, ref ret.vert_ptr, ref ret.verts);
+
+			return ret;
+		}
+
 		/*! 
             \brief Rotate an instance of MeshInfo
            
@@ -184,6 +202,9 @@ namespace HumanFactors.Geometry
 
 		[DllImport(dllpath, CharSet = CharSet.Ansi)]
 		internal static extern HF_STATUS GetMeshID(IntPtr MeshInfo, ref int out_id);
+
+		[DllImport(dllpath, CharSet = CharSet.Ansi)]
+		internal static extern HF_STATUS GetVertsAndTris(IntPtr MI, ref IntPtr index_out, ref int num_triangles, ref IntPtr vertex_out, ref int num_vertices);
 
 		[DllImport(dllpath, CharSet = CharSet.Ansi)]
 		internal static extern HF_STATUS DestroyCharArray(IntPtr char_array);

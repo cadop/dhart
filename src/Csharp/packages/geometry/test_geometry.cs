@@ -10,8 +10,17 @@ namespace HumanFactors.Tests.Geometry
     public class OBJLoading
     {
         private TestContext testContextInstance;
-        float[] global_vertices = { -20.079360961914062f, 0.0f, 18.940643310546875f, -20.079360961914062f, 0.0f, -18.842348098754883f, 20.140586853027344f, 0.0f, 18.940643310546875f, 20.140586853027344f, 0.0f, -18.842348098754883f };
-        int[] global_indices = { 3, 1, 0, 2, 3, 0 };
+        float[] global_vertices = {
+            -20.079360961914062f, 0.0f, 18.940643310546875f,
+            -20.079360961914062f, 0.0f, -18.842348098754883f,
+            20.140586853027344f, 0.0f, 18.940643310546875f,
+            20.140586853027344f, 0.0f, -18.842348098754883f 
+        };
+
+        int[] global_indices = { 
+            3, 1, 0,
+            2, 3, 0
+        };
 
         /// <summary>
         ///  Gets or sets the test context which provides
@@ -97,7 +106,7 @@ namespace HumanFactors.Tests.Geometry
         }
         
         [TestMethod]
-        public void CorrectNumberOfSubmeshes()
+        public void NumberOfSubmeshesLoadedIsCorrect()
         {
             MeshInfo[] submeshes = OBJLoader.LoadOBJSubmeshes("ExampleModels/sponza.obj", GROUP_METHOD.BY_GROUP);
 
@@ -113,6 +122,27 @@ namespace HumanFactors.Tests.Geometry
 
             Assert.AreEqual(test_name, MI.name);
             Assert.AreEqual(test_id, MI.id);
+        }
+
+        [TestMethod]
+        public void VertsAndTrisMatchInput()
+        {
+            // Construct mesh
+            MeshInfo Mesh = new MeshInfo(global_indices, global_vertices);
+
+            // get verts and indices as arrays. 
+            var flat_verts = Mesh.vertices.array;
+            var flat_indices = Mesh.indices.array;
+
+            // Assert that the returned length is equal
+            Assert.AreEqual(global_vertices.Length, flat_verts.Length);
+            Assert.AreEqual(global_indices.Length, flat_indices.Length);
+
+            // Assert that both arrays have the same contents as their inputs
+            for (int i = 0; i < flat_verts.Length; i++)
+                Assert.AreEqual(flat_verts[i], global_vertices[i]);
+            for (int i = 0; i < flat_indices.Length; i++)
+                Assert.AreEqual(flat_indices[i], global_indices[i]);
         }
     }
 }
