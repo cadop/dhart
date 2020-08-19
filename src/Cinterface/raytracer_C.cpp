@@ -68,15 +68,22 @@ C_INTERFACE CreateRaytracerMultiMesh(MeshInfo** meshes, int num_meshes, EmbreeRa
 }
 
 
-C_INTERFACE AddMesh(HF::RayTracer::EmbreeRayTracer* ERT, HF::Geometry::MeshInfo* MI, int number_of_meshes)
+C_INTERFACE AddMeshes(HF::RayTracer::EmbreeRayTracer* ERT, HF::Geometry::MeshInfo ** MI, int number_of_meshes)
 {
 	// Iterate through each input mesh, only committing the scene
 	// at the final mesh. 
 	for (int i = 0; i < number_of_meshes; i++) {
 		bool should_commit = (i == number_of_meshes - 1);
 	
-		ERT->InsertNewMesh(MI[i], should_commit);
+		ERT->InsertNewMesh(*(MI[i]), should_commit);
 	}
+
+	return HF_STATUS::OK;
+}
+
+C_INTERFACE AddMesh(HF::RayTracer::EmbreeRayTracer* ERT, HF::Geometry::MeshInfo* MI)
+{
+	ERT->InsertNewMesh(*MI, true);
 
 	return HF_STATUS::OK;
 }

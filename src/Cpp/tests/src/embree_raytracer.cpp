@@ -886,7 +886,7 @@ namespace C_Interface{
 		rotated_plane->PerformRotation(0, -90, 0);
 
 		// Add it to the raytracer
-		int add_mesh_result = AddMesh(rt, rotated_plane, 1);
+		int add_mesh_result = AddMesh(rt, rotated_plane);
 		ASSERT_EQ(HF_STATUS::OK, add_mesh_result);
 
 		// If this was successful, the new mesh's ID should have been updated to 0 since
@@ -914,7 +914,7 @@ namespace C_Interface{
 		// Create a new rotated plane and add it to the BVH
 		auto rotated_plane = ConstructExamplePlane();
 		rotated_plane->PerformRotation(-90, 0, 0);
-		int add_mesh_result = AddMesh(rt, rotated_plane, 1);
+		int add_mesh_result = AddMesh(rt, rotated_plane);
 
 		// Cast both rays, and now ensure they both intersect
 		bool * after_added_results = new bool[2];
@@ -931,14 +931,14 @@ namespace C_Interface{
 	TEST(C_EmbreeRayTracer, ConstructionWithMultipleMeshes) {
 
 		// Load meshes
-		HF::Geometry::MeshInfo ** MI;
+		HF::Geometry::MeshInfo** MI;
 		int num_meshes = 0;
 		auto OBJs = LoadOBJ("sponza.obj", GROUP_METHOD::BY_GROUP, 0, 0, 0, &MI, &num_meshes);
 
 		// Create Raytracer
 		EmbreeRayTracer* ERT;
-		CreateRaytracerMultiMesh(MI, num_meshes,  &ERT);
-	
+		CreateRaytracerMultiMesh(MI, num_meshes, &ERT);
+
 		// Cast a ray at the ground and ensure it connects
 		float x = 0; float y = 0; float z = 1;
 		int dx = 0; int dy = 0; int dz = -1;
@@ -948,7 +948,34 @@ namespace C_Interface{
 
 		for (int i = 0; i < num_meshes; i++)
 			DestroyMeshInfo(MI[i]);
+
+		DestroyRayTracer(ERT);
+	}
+
+	// This will crash if things are done improperly. 
+	TEST(C_EmbreeRayTracer, AdditionWithMultipleMeshes) {
+
+		// Get a basic raytracer
+		EmbreeRayTracer* ERT = ConstructTestRaytracer();
 		
+		// load every group in sponza
+		HF::Geometry::MeshInfo** MI;
+		int num_meshes = 0;
+		auto OBJs = LoadOBJ("sponza.obj", GROUP_METHOD::BY_GROUP, 0, 0, 0, &MI, &num_meshes);
+
+		// Add meshes to the basic raytracer
+		AddMeshes(ERT, MI, num_meshes);
+
+		// Cast a ray at the ground and ensure it connects
+		float x = 0; float y = 0; float z = 1;
+		int dx = 0; int dy = 0; int dz = -1;
+		bool res = false;
+		FireRay(ERT, x, y, z, dx, dy, dz, -1, res);
+		ASSERT_TRUE(res);
+
+		// Clean up every meshinfo and Raytracer
+		for (int i = 0; i < num_meshes; i++)
+			DestroyMeshInfo(MI[i]);
 		DestroyRayTracer(ERT);
 	}
 }
