@@ -267,6 +267,12 @@ C_INTERFACE AggregateCosts(
 
 	\returns	HF_STATUS::OK on completion.
 
+	\see \ref graph_setup (how to create a graph)
+	\see \ref graph_compress (how to compress a graph)
+	\see \ref graph_teardown (how to destroy a graph)
+	
+	If you see this, remove this snippet
+	when the graph_setup section is done!
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_CreateGraph
 
 	<br>
@@ -309,6 +315,13 @@ C_INTERFACE CreateGraph(
 	\pre cost_type MUST be a valid delimited char array. 
 				   If the entire program crashes when this is called, this is why. 
 
+	\see \ref graph_setup (how to create a graph)
+	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
+	\see \ref graph_compress (how to compress a graph after adding/removing edges)
+	\see \ref graph_teardown (how to destroy a graph)
+
+	If you see this snippet, remove it
+	when the graph_add_edge_from_nodes section is done!
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_AddEdgeFromNodes
 
 	<br>
@@ -341,6 +354,13 @@ C_INTERFACE AddEdgeFromNodes(
 
 	\returns STATUS::NO_COST The given cost string was invalid. 
 
+	\see \ref graph_setup (how to create a graph)
+	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
+	\see \ref graph_compress (how to compress a graph after adding/removing edges)
+	\see \ref graph_teardown (how to destroy a graph)
+
+	If you see this snippet, remove it
+	when the graph_add_edge_from_node_ids section is done!
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_AddEdgeFromNodeIDs
 
 	<br>
@@ -371,6 +391,15 @@ C_INTERFACE AddEdgeFromNodeIDs(
 	\returns	HF_STATUS::OK on success.
 	\returns	HF_STATUS::NO_COST if the asked for cost doesn't exist.
 
+	\see \ref graph_setup (how to create a graph)
+	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
+	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
+	\see \ref graph_compress (how to compress a graph after adding/removing edges)
+	\see \ref graph_get_csr_pointers (how to retrieve a CSR representation of a graph)
+	\see \ref graph_teardown (how to destroy a graph)
+
+	If you see this snippet, remove it
+	when the graph_get_csr_pointers section is done!
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_GetCSRPointers
 
 	<br>
@@ -405,6 +434,12 @@ C_INTERFACE GetCSRPointers(
 
 	\returns	HF_STATUS::OK on completion.
 
+	\see \ref graph_setup (how to create a graph)
+	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
+	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
+	\see \ref graph_compress (how to compress a graph after adding/removing edges)
+	\see \ref graph_teardown (how to destroy a graph)
+
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_GetNodeID
 
 	<br>
@@ -429,6 +464,14 @@ C_INTERFACE GetNodeID(
 				and invalidate all existing CSR representation of it.
 				If the graph is already compressed, this function will be a no-op.
 
+	\see \ref graph_setup (how to create a graph)
+	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
+	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
+	\see \ref graph_compress (how to compress a graph after adding/removing edges)
+	\see \ref graph_teardown (how to destroy a graph)
+
+	If you see this snippet, remove it
+	when the graph_compress section is done!
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_Compress
 
 	<br>
@@ -451,6 +494,12 @@ C_INTERFACE Compress(
 
 	\returns HF_STATUS::OK if the operation succeeded
 	\returns HF_STATUS::NO_COST if a cost was specified and it couldn't be found.
+
+	\see \ref graph_setup (how to create a graph)
+	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
+	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
+	\see \ref graph_compress (how to compress a graph after adding/removing edges)
+	\see \ref graph_teardown (how to destroy a graph)
 
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_ClearGraph
 
@@ -507,7 +556,11 @@ C_INTERFACE DestroyEdges(
 
 	\returns	HF_STATUS::OK on completion
 
-	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_DestroyGraph
+	\see \ref graph_setup (how to create a graph)
+	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
+	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
+	\see \ref graph_compress (how to compress a graph after adding/removing edges)
+	\see \ref graph_teardown (how to destroy a graph)
 
 	<br>
 	\verbatim
@@ -523,6 +576,13 @@ C_INTERFACE DestroyGraph(
 	\param		g	The graph to calculate cross slope on
 
 	\returns	HF_STATUS::OK on completion
+
+	\see \ref graph_setup (how to create a graph)
+	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
+	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
+	\see \ref graph_compress (how to compress a graph after adding/removing edges)
+	\see \ref graph_get_csr_pointers (how to retrieve a CSR representation of a graph)
+	\see \ref graph_teardown (how to destroy a graph)
 
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_CalculateAndStoreCrossSlope
 
@@ -540,6 +600,13 @@ C_INTERFACE CalculateAndStoreCrossSlope(HF::SpatialStructures::Graph* g);
 	\param		g		The address of a Graph
 
 	\returns	HF_STATUS::OK on completion
+
+	\see \ref graph_setup (how to create a graph)
+	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
+	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
+	\see \ref graph_compress (how to compress a graph after adding/removing edges)
+	\see \ref graph_get_csr_pointers (how to retrieve a CSR representation of a graph)
+	\see \ref graph_teardown (how to destroy a graph)
 
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_CalculateAndStoreEnergyExpenditure
 
@@ -572,6 +639,13 @@ C_INTERFACE CalculateAndStoreEnergyExpenditure(HF::SpatialStructures::Graph* g);
 
 	\pre	ids and scores arrays must be the same length
 	
+	\see \ref graph_setup (how to create a graph)
+	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
+	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
+	\see \ref graph_compress (how to compress a graph after adding/removing edges)
+	\see \ref graph_get_csr_pointers (how to retrieve a CSR representation of a graph)
+	\see \ref graph_teardown (how to destroy a graph)
+
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_AddNodeAttributes
 
 	<br>
@@ -605,6 +679,13 @@ C_INTERFACE AddNodeAttributes(
 				which will be allocated by the caller.
 				The caller must call DeleteScores to deallocate the memory addressed
 				by each pointer in out_scores.
+
+	\see \ref graph_setup (how to create a graph)
+	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
+	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
+	\see \ref graph_compress (how to compress a graph after adding/removing edges)
+	\see \ref graph_get_csr_pointers (how to retrieve a CSR representation of a graph)
+	\see \ref graph_teardown (how to destroy a graph)
 
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_GetNodeAttributes
 
@@ -647,6 +728,13 @@ C_INTERFACE DeleteScoreArray(char** scores_to_delete, int num_char_arrays);
 
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_ClearAttributeType
 
+	\see \ref graph_setup (how to create a graph)
+	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
+	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
+	\see \ref graph_compress (how to compress a graph after adding/removing edges)
+	\see \ref graph_get_csr_pointers (how to retrieve a CSR representation of a graph)
+	\see \ref graph_teardown (how to destroy a graph)
+
 	<br>
 	\verbatim
 	TODO output
@@ -663,6 +751,13 @@ C_INTERFACE ClearAttributeType(HF::SpatialStructures::Graph* g, const char* s);
 	\returns	HF_STATUS::OK on completion
 
 	\snippet tests\src\spatialstructures_C_cinterface.cpp snippet_spatialstructuresC_GetSizeOfGraph
+
+	\see \ref graph_setup (how to create a graph)
+	\see \ref graph_add_edge_from_nodes (how to add edges to a graph using nodes)
+	\see \ref graph_add_edge_from_node_ids (how to add edges to a graph using node IDs)
+	\see \ref graph_compress (how to compress a graph after adding/removing edges)
+	\see \ref graph_get_csr_pointers (how to retrieve a CSR representation of a graph)
+	\see \ref graph_teardown (how to destroy a graph)
 
 	<br>
 	\verbatim
