@@ -416,6 +416,7 @@ if(HumanFactors_EnableTests)
 					${C_TEST_DRIVER_DIR}/pathfinder_C_cinterface.cpp
 					${C_TEST_DRIVER_DIR}/view_analysis_cinterface.cpp
 					${C_TEST_DRIVER_DIR}/visibility_graph_cinterface.cpp
+					${C_TEST_DRIVER_DIR}/spatialstructures_C_cinterface.cpp
 		)
 	elseif(${HumanFactors_Config} STREQUAL "RayTracer")
 		target_sources(
