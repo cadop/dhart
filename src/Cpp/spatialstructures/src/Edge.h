@@ -61,9 +61,7 @@ namespace HF {
 
 
 			inline bool operator==(const IntEdge& IE2) const {
-				return (
-					this->child == IE2.child
-					&& abs(this->weight - IE2.weight) < 0.0001
+				return ( (this->child == IE2.child && abs(this->weight - IE2.weight) < 0.0001 ) // \todo resolve this constant for edge tolerance?
 				);
 			}
 
