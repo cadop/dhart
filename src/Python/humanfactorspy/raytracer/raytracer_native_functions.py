@@ -305,6 +305,16 @@ def FireMultipleRaysDistance(
     return (vector_ptr, array_ptr)
 
 
+def C_AddMeshes(bvh_ptr: c_void_p, mesh_ptrs : List[c_void_p]):
+    # Create a ctypes array of pointers and insert thes epointersj
+    num_meshes = len(mesh_ptrs)
+    pointer_array = (c_void_p * num_meshes)()
+    for i in range(0, num_meshes):
+        pointer_array[i] = mesh_ptrs[i]
+
+    # Call C++ function to add the meshinfos
+    HFPython.AddMeshes(bvh_ptr, pointer_array, c_int(num_meshes))
+
 
 
 def DestroyRayTracer(rt_ptr: c_void_p):

@@ -200,3 +200,13 @@ def test_BVHConstructionWithMultipleMeshes():
 
     objs = LoadOBJ(humanfactorspy.get_sample_model("sponza.obj"), group_type=1)
     bvh = EmbreeBVH(objs)
+
+def test_addmeshestobvh():
+    base_obj = LoadOBJ(humanfactorspy.get_sample_model("plane.obj"), group_type=1)
+    objs_to_add = LoadOBJ(humanfactorspy.get_sample_model("sponza.obj"), group_type=1)
+    single_obj = LoadOBJ(humanfactorspy.get_sample_model("teapot.obj"), group_type=1)
+    
+    BVH = EmbreeBVH(base_obj)
+
+    BVH.AddMesh(single_obj)
+    BVH.AddMesh(objs_to_add)

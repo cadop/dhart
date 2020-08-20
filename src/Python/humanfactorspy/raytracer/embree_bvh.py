@@ -42,6 +42,26 @@ class EmbreeBVH(object):
             pointers
         )
 
+    def AddMesh(self, mesh : Union[MeshInfo, List[MeshInfo]]):
+        """ Add a new mesh to the embreeraytracer """
+        
+        # If it's a list, construct a list of pointers, otherwise
+        # create a list containing only a pointer to the single mesh
+        if isinstance(mesh, list):
+            pointers = [m._MeshInfo__internal_ptr for m in mesh] 
+        else:
+            pointers = [mesh._MeshInfo__internal_ptr]
+
+        # Add the meshes in c++
+        raytracer_native_functions.C_AddMeshes(self.pointer, pointers)
+
+        # Update params from C++ in the case that the ID of any mesh changed.
+        if isinstance(mesh, list):
+            for m in mesh:
+                m.SetupVertAndIndexArrays()
+        else:
+            mesh.SetupVertAndIndexArrays()
+
 
     def __del__(self):
         if self.pointer != 0:
