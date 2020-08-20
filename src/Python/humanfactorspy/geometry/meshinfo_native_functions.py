@@ -13,12 +13,20 @@ HFPython = getDLLHandle()
 def CreateOBJ(
     obj_file_path: str,
     group_type: int = 0,
-    rotation: Tuple[float, float, float] = (0, 0, 0)) -> c_void_p:
-    """ Read an obj from the given file path in C++ and return a pointer to it.
-    
+    rotation: Tuple[float, float, float] = (0, 0, 0)) -> Union[c_void_p, List[c_void_p]]:
+    """Read an OBJ from a file on disk. 
+
+    Args:
+        obj_file_path (str): Path to the obj file on dik
+        group_type (int, optional): Method of dividing the OBJ into submeshes. 
+        rotation (Tuple[float, float, float], optional): Magnitude to rotate the mesh on the x,y,z axis
+
     Raises:
         InvalidOBJException: OBJ fails to load from the given filepath
-        FileNotFoundException: No file exists at the given filepath
+        FileNotFoundException: No file exists at the given filepat
+
+    Returns:
+        Union[c_void_p, List[c_void_p]]: A pointer to one isntance of meshinfo if only one was created, or a list of pointers for each submesh in the OBJ at path 
     """
     # Setup output parameters
     mesh_info_ptr = c_void_p()
@@ -35,15 +43,13 @@ def CreateOBJ(
         byref(num_meshes)
     )
 
-    # Check ErrorCode
-    if error_code == HF_STATUS.OK:
-        pass
-    elif error_code == HF_STATUS.INVALID_OBJ:
+
+    if error_code == HF_STATUS.INVALID_OBJ:
         raise InvalidOBJException
     elif error_code == HF_STATUS.NOT_FOUND:  
         raise FileNotFoundException
-    elif error_code == HF_STATUS.GENERIC_ERROR:
-        raise HFException
+
+    assert(error_code == HF_STATUS.OK)
 
     # Cast to a pointer of c_void_p, then insert all values into
     # a python list
@@ -124,7 +130,16 @@ def C_GetMeshID(mesh_ptr : c_void_p) -> int:
 
     return mesh_id.value
 
-def C_GetMeshVertsAndTris(mesh_ptr) -> Tuple[c_void_p, int, c_void_p, int]:
+def C_GetMeshVertsAndTris(mesh_ptr: c_void_p) -> Tuple[c_void_p, int, c_void_p, int]:
+    """Get pointers to the vertex and triangle arrays of a meshinfo object
+
+    Args:
+        mesh_ptr (c_void_p): A pointer to the instance of meshinfo to get the vertex
+        and triangle arrays of. 
+
+    Returns:
+        Tuple[c_void_p, int, c_void_p, int]: A pointer to the mesh's index array, the number of indicies contained within the mesh, a pointer to the vertex array of the mesh, and the number of vertices contained in the mesh respectively
+    """
     index_ptr = c_void_p(0)
     num_triangles = c_int(0)
     vertex_ptr = c_void_p(0)

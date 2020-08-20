@@ -21,7 +21,7 @@ class EmbreeBVH(object):
         """ Create a new BVH from an existing mesh 
 
         Args:
-            geometry: The mesh to create the BVH from. 
+            geometry: The mesh or meshes to create the BVH from. 
         
         Example:
             Creating a BVH from a plane object
@@ -43,8 +43,16 @@ class EmbreeBVH(object):
         )
 
     def AddMesh(self, mesh : Union[MeshInfo, List[MeshInfo]]):
-        """ Add a new mesh to the embreeraytracer """
-        
+        """Add one or more new meshes to the BVH
+
+        Args:
+            mesh (Union[MeshInfo, List[MeshInfo]]): One or more instances of meshinfo to be added to the BVH.
+
+        Note:
+            The IDs of each mesh will be updated to new values
+            in the case that they collide with the id of any 
+            exiting meshes already in the BVH. 
+        """
         # If it's a list, construct a list of pointers, otherwise
         # create a list containing only a pointer to the single mesh
         if isinstance(mesh, list):

@@ -17,7 +17,7 @@ def LoadOBJ(
     path: str,
     group_type: OBJGroupType = 0,
     rotation: Tuple[float, float, float] = (0, 0, 0),
-) -> MeshInfo:
+) -> Union[MeshInfo, List[MeshInfo]]:
     """ Load an obj file from the given path. 
     
     Args:
@@ -29,8 +29,9 @@ def LoadOBJ(
     
     Returns:
         MeshInfo: A new meshinfo object containing a the vertices and triangles
-            for the obj in path.
-   
+            for the obj in path. If group_type is not ONLY_FILE, a list of meshes
+            may be returned if submeshes are found. 
+            
     Raises:
         humanfactorspy.Exceptions.InvalidOBJException: The OBJ at path
             either did not exist or could not be loaded
