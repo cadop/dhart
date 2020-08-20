@@ -13,7 +13,7 @@ from humanfactorspy.geometry import LoadOBJ
 from humanfactorspy.raytracer import EmbreeBVH
 import humanfactorspy
 
-def get_bvh(obj_path):
+def get_bvh(obj_path,use_precise=False):
     """ Get the BVH for a obj
 
     """
@@ -21,7 +21,7 @@ def get_bvh(obj_path):
     # Load mesh
     loaded_obj = LoadOBJ(obj_path)
     # Create BVH
-    bvh = EmbreeBVH(loaded_obj)
+    bvh = EmbreeBVH(loaded_obj,use_precise)
 
     return bvh
 
