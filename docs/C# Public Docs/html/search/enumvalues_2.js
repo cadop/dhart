@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['max_253',['MAX',['../namespace_human_factors_1_1_view_analysis.html#ae24b8f5d9783a270e51183ff2eca765ca26a4b44a837bf97b972628509912b4a5',1,'HumanFactors::ViewAnalysis']]],
-  ['min_254',['MIN',['../namespace_human_factors_1_1_view_analysis.html#ae24b8f5d9783a270e51183ff2eca765cace31e2a082d17e038fcc6e3006166653',1,'HumanFactors::ViewAnalysis']]]
+  ['count_288',['COUNT',['../namespace_human_factors_1_1_spatial_structures.html#abd405fa41da0f9a771d547aa47b6e1a0a4905ac9d6a22bdfc1ae096094ce6248d',1,'HumanFactors.SpatialStructures.COUNT()'],['../namespace_human_factors_1_1_view_analysis.html#ae24b8f5d9783a270e51183ff2eca765ca4905ac9d6a22bdfc1ae096094ce6248d',1,'HumanFactors.ViewAnalysis.COUNT()']]]
 ];
