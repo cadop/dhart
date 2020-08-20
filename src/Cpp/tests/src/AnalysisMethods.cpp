@@ -196,6 +196,39 @@ namespace HF {
 	}
 	*/
 
+
+	TEST(_GraphGenerator, DuplicateNodes_Weston) {
+		auto mesh = Geometry::LoadMeshObjects("Weston_meshed_no-ngon.obj");
+
+		RayTracer::EmbreeRayTracer rt(mesh, true);
+		auto GG = GraphGenerator::GraphGenerator(rt, 0);
+
+		double default_z_precision = 0.01;
+		double default_ground_offset = 0.01;
+		double default_spacing_precision = 0.00001;
+
+		// Generate the graph 
+		auto g = GG.BuildNetwork(
+			std::array<double, 3>{-1,-6, 660},
+			std::array<double, 3>{20, 20, 70},
+			50000,
+			20,
+			40,
+			20,
+			1,
+			1,
+			1,
+			default_z_precision,
+			default_spacing_precision,
+			default_ground_offset
+		);
+
+		// Assert that the distance from this node to every other node in the graph is > than rounding precision
+		CheckForDuplicates(g, 0.1f);
+		EXPECT_EQ(29992, g.size());
+	}
+
+
 	TEST(_GraphGenerator, DuplicateNodes_2B) {
 		auto mesh = Geometry::LoadMeshObjects("energy_blob_zup.obj");
 
