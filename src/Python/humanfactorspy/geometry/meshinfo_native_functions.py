@@ -10,43 +10,6 @@ from typing import *
 
 HFPython = getDLLHandle()
 
-
-def CreateOBJ(
-    obj_file_path: str,
-    group_type: int = 0,
-    rotation: Tuple[float, float, float] = (0, 0, 0),
-) -> c_void_p:
-    """ Read an obj from the given file path in C++ and return a pointer to it.
-    
-    Raises:
-        InvalidOBJException: OBJ fails to load from the given filepath
-        FileNotFoundException: No file exists at the given filepath
-    """
-    # Setup output parameters
-    mesh_info_ptr = c_void_p()
-    num_meshes = c_int(0)
-
-    # Call the function and capture the error code
-    error_code = HFPython.LoadOBJ(
-        GetStringPtr(obj_file_path),
-        0,
-        c_float(rotation[0]),
-        c_float(rotation[1]),
-        c_float(rotation[2]),
-        byref(mesh_info_ptr),
-        byref(num_meshes)
-    )
-
-    # Check ErrorCode
-    if error_code == HF_STATUS.OK:
-        pass
-    elif error_code == HF_STATUS.INVALID_OBJ:
-        raise InvalidOBJException
-    elif error_code == HF_STATUS.NOT_FOUND:  
-        raise FileNotFoundException
-    elif error_code == HF_STATUS.GENERIC_ERROR:
-        raise HFException
-
 def CreateOBJ(
     obj_file_path: str,
     group_type: int = 0,
@@ -141,6 +104,38 @@ def CreateMesh(
 def C_RotateMesh(mesh_ptr: c_void_p, rotation: Tuple[float, float, float]) -> None:
     HFPython.RotateMesh(mesh_ptr, c_float(rotation[0]), c_float(rotation[1]), c_float(rotation[2]))
     return
+
+def C_GetMeshName(mesh_ptr : c_void_p) ->str:
+    out_str = c_void_p(0)
+
+    HFPython.GetMeshName(mesh_ptr, byref(out_str))
+
+    str_ptr = c_char_p(out_str.value)
+    out_name = str_ptr.value.decode("utf-8")
+
+    HFPython.DestroyCharArray(out_str)
+
+    return out_name
+
+def C_GetMeshID(mesh_ptr : c_void_p) -> int:
+
+    mesh_id = c_int(0)
+    HFPython.GetMeshID(mesh_ptr, byref(mesh_id))
+
+    return mesh_id.value
+
+def C_GetMeshVertsAndTris(mesh_ptr) -> Tuple[c_void_p, int, c_void_p, int]:
+    index_ptr = c_void_p(0)
+    num_triangles = c_int(0)
+    vertex_ptr = c_void_p(0)
+    num_vertices = c_int(0)
+
+    HFPython.GetVertsAndTris(
+        mesh_ptr, byref(index_ptr), byref(num_triangles), byref(vertex_ptr), byref(num_vertices)
+    )
+
+    return (index_ptr, num_triangles.value, vertex_ptr, num_vertices.value)
+
 
 
 def DestroyMeshInfo(mesh_info_ptr: c_void_p):

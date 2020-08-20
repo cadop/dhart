@@ -31,12 +31,18 @@ def test_LoadMultipleMeshes():
     for mesh in meshes:
         mesh.Rotate((90,0,0))
 
-def test_LoadFromVertices():
+def test_LoadFromVerticesEqualsOBJ():
+    # Get mesh data from pywavefront
     scene = pywavefront.Wavefront(good_mesh_path, collect_faces=True)
     vertices = scene.vertices
     meshes = scene.mesh_list
     indices = list(itertools.chain.from_iterable([mesh.faces for mesh in meshes]))
+
+    # Insert into MeshInfo object
     MI = MeshInfo(indices, vertices, "TestMesh", 39)
+
+    assert(MI.id == 39)
+    assert(MI.name == "TestMesh")
 
 def test_rotation():
     mesh = LoadOBJ(good_mesh_path)

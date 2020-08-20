@@ -1,4 +1,5 @@
 import ctypes
+import numpy
 from humanfactorspy.geometry import meshinfo_native_functions
 import itertools
 from typing import *
@@ -21,7 +22,6 @@ class MeshInfo(object):
     MeshInfo is required in order to create Embree BVhs
     
     """
-
     def __init__(
         self,
         indices_or_pointer: Union[
@@ -75,6 +75,31 @@ class MeshInfo(object):
                 indices_or_pointer, vertices, name, id
             )
 
+        # Setup vertex and triangle arrays
+        self.SetupVertAndIndexArrays()
+
+    def SetupVertAndIndexArrays(self):
+        """ Update name, id, and vert/index arrays from C++
+        """
+        # Get name and ID from C++
+        self.name = meshinfo_native_functions.C_GetMeshName(self.__internal_ptr)
+        self.id = meshinfo_native_functions.C_GetMeshID(self.__internal_ptr)
+
+        # Get ptrs to and the size of vertex and triangle arrays
+        (
+            triangle_ptr,
+            num_tris,
+            vertex_ptr,
+            num_verts,
+        ) = meshinfo_native_functions.C_GetMeshVertsAndTris(self.__internal_ptr)
+
+        # Map to numpy arrays
+        tri_arr_ptr = ctypes.cast(triangle_ptr, ctypes.POINTER(ctypes.c_int))
+        self.indices = numpy.ctypeslib.as_array(tri_arr_ptr, shape=(num_tris, 3))
+
+        vert_arr_ptr = ctypes.cast(vertex_ptr, ctypes.POINTER(ctypes.c_float))
+        self.vertices = numpy.ctypeslib.as_array(vert_arr_ptr, shape=(num_verts, 3))
+
     def Rotate(self, rotation: Tuple[float, float, float]) -> None:
         """ Rotate this mesh by the given rotation
 
@@ -83,6 +108,7 @@ class MeshInfo(object):
         """
         if not isinstance(rotation, (tuple, list)):
             raise TypeError("rotation was not of the correct type")
+
         meshinfo_native_functions.C_RotateMesh(self.__internal_ptr, rotation)
 
     def __del__(self):
