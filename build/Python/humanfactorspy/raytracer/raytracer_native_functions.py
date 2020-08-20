@@ -9,7 +9,7 @@ from typing import *
 HFPython = getDLLHandle()
 
 
-def CreateRayTracer(mesh_info_ptr: c_void_p) -> c_void_p:
+def CreateRayTracer(mesh_info_ptr: c_void_p, use_precise: bool) -> c_void_p:
     """ Create a raytracer from a pointer to valid meshinfo previously created by CreateOBJ
 
     Raises:
@@ -19,7 +19,7 @@ def CreateRayTracer(mesh_info_ptr: c_void_p) -> c_void_p:
     """
     rt_ptr = c_void_p(0)
 
-    error_code = HFPython.CreateRaytracer(mesh_info_ptr, byref(rt_ptr))
+    error_code = HFPython.CreateRaytracer(mesh_info_ptr, byref(rt_ptr), use_precise)
 
     if error_code == HF_STATUS.OK:
         pass
