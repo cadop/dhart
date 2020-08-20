@@ -14,6 +14,7 @@ except:
 
 import mathUtils as mu
 import time
+import math
 
 from humanfactorspy.raytracer import (EmbreeBVH,Intersect,
                                         IntersectForPoint,
@@ -32,7 +33,7 @@ def cast_ray(geom, p1, dir, pos=False ):
 
     dist, _ = Intersect(geom, (p1[0], p1[1], p1[2]), (dir[0], dir[1], dir[2]), -1)
     
-    return dist 
+    return mu.trunc(dist) 
 
 
 def rhinoRayMod(geom,p1,direc):
