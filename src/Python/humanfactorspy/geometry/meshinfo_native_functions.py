@@ -111,20 +111,42 @@ def C_RotateMesh(mesh_ptr: c_void_p, rotation: Tuple[float, float, float]) -> No
     HFPython.RotateMesh(mesh_ptr, c_float(rotation[0]), c_float(rotation[1]), c_float(rotation[2]))
     return
 
-def C_GetMeshName(mesh_ptr : c_void_p) ->str:
-    out_str = c_void_p(0)
 
+def C_GetMeshName(mesh_ptr : c_void_p) ->str:
+    """Get the nme of a mesh from C++
+
+    Args:
+        mesh_ptr (c_void_p): A pointer to the meshinfo tor read from in native code
+
+    Returns:
+        str: The name of the mesh in C++ 
+    """
+    
+    # Create a pointer for the output string, then call the C++ code
+    # to update it
+    out_str = c_void_p(0)
     HFPython.GetMeshName(mesh_ptr, byref(out_str))
 
+    # Cast the string pointer to a char array
     str_ptr = c_char_p(out_str.value)
+    
+    # Decode the char array to get a python string
     out_name = str_ptr.value.decode("utf-8")
 
+    # Deallocate the char array in C++
     HFPython.DestroyCharArray(out_str)
 
     return out_name
 
 def C_GetMeshID(mesh_ptr : c_void_p) -> int:
+    """ Get the ID of an instance of meshinfo in C++
 
+    Args:
+        mesh_ptr (c_void_p): Pointer to the mesh to get the ID from in C++
+
+    Returns:
+        int: [description]
+    """
     mesh_id = c_int(0)
     HFPython.GetMeshID(mesh_ptr, byref(mesh_id))
 

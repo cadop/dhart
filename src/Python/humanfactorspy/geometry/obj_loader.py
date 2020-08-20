@@ -1,4 +1,4 @@
-from typing import Tuple
+from typing import Tuple, Union, List
 from enum import IntEnum
 
 from . import meshinfo_native_functions
@@ -31,7 +31,7 @@ def LoadOBJ(
         MeshInfo: A new meshinfo object containing a the vertices and triangles
             for the obj in path. If group_type is not ONLY_FILE, a list of meshes
             may be returned if submeshes are found. 
-            
+
     Raises:
         humanfactorspy.Exceptions.InvalidOBJException: The OBJ at path
             either did not exist or could not be loaded
