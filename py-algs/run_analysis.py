@@ -69,7 +69,6 @@ def rounding_tests():
 
 def run():
 
-    geom_bvh = gu.get_bvh('models/Weston_meshed_no-ngon.obj', True)
 
     # start_location = (-30,0,20)
     start_location = (-1,-6,660)
@@ -96,9 +95,7 @@ def run():
                 'downstep': downstep, 'upslope':upslope, 'downslope': downslope, 'cross_slope':cross_slope ,
                 'width': width, 'max_connection': max_connection, 'max_nodes' : max_nodes  }
     
-    #geom_bvh = gu.get_bvh('models/energy_blob_zup.obj')
     geom_bvh = gu.get_bvh('models/Weston_meshed_no-ngon.obj', True)
-    #geom_bvh = gu.get_bvh('models/Weston_Analysis_z-up.obj')
 
     s = time.time()
     graph = gc.buildNetwork(start_location,geom_bvh,graphParams)
