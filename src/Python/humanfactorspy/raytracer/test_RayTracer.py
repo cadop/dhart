@@ -194,3 +194,9 @@ def test_FireMultipleRayDistance():
         mesh_id = res[1]
         distance = res[0]
         assert mesh_id >= 0 and distance >= 1
+
+
+def test_BVHConstructionWithMultipleMeshes():
+
+    objs = LoadOBJ(humanfactorspy.get_sample_model("sponza.obj"), group_type=1)
+    bvh = EmbreeBVH(objs)

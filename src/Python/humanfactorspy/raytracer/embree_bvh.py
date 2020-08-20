@@ -17,7 +17,7 @@ class EmbreeBVH(object):
 
     pointer: Union[None, c_void_p] = None  # Pointer to the underlying c-object
 
-    def __init__(self, geometry: MeshInfo):
+    def __init__(self, geometry: Union[MeshInfo, List[MeshInfo]]):
         """ Create a new BVH from an existing mesh 
 
         Args:
@@ -33,10 +33,15 @@ class EmbreeBVH(object):
             >>> BVH = EmbreeBVH(MI)
 
         """
-
+        
+        if isinstance(geometry, List):
+            pointers = [mesh._MeshInfo__internal_ptr for mesh in geometry]
+        else:
+            pointers = geometry._MeshInfo__internal_ptr
         self.pointer = raytracer_native_functions.CreateRayTracer(
-            geometry._MeshInfo__internal_ptr
+            pointers
         )
+
 
     def __del__(self):
         if self.pointer != 0:

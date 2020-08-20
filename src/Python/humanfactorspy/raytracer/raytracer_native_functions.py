@@ -9,7 +9,7 @@ from typing import *
 HFPython = getDLLHandle()
 
 
-def CreateRayTracer(mesh_info_ptr: c_void_p) -> c_void_p:
+def CreateRayTracer(mesh_info_ptr: Union[c_void_p, List[c_void_p]]) -> Union[c_void_p, List[c_void_p]]:
     """ Create a raytracer from a pointer to valid meshinfo previously created by CreateOBJ
 
     Raises:
@@ -19,8 +19,25 @@ def CreateRayTracer(mesh_info_ptr: c_void_p) -> c_void_p:
     """
     rt_ptr = c_void_p(0)
 
-    error_code = HFPython.CreateRaytracer(mesh_info_ptr, byref(rt_ptr))
+    # If this isn't a list, only call the function for a single value
+    if (not isinstance(mesh_info_ptr, list)):
+        error_code = HFPython.CreateRaytracer(mesh_info_ptr, byref(rt_ptr))
 
+    # If this is a list, call the multi-mesh version
+    else:
+        
+        # Create an array of c_void_p and fill it with values from input array
+        num_ptrs = len(mesh_info_ptr)
+        meshinfo_ptrs = (c_void_p * len(mesh_info_ptr))()
+        for i in range(0, num_ptrs):
+            meshinfo_ptrs[i] = mesh_info_ptr[i]
+
+        # Create the raytracer
+        error_code = HFPython.CreateRaytracerMultiMesh(
+            meshinfo_ptrs, num_ptrs, byref(rt_ptr)
+        )
+
+    # Check Error Codes
     if error_code == HF_STATUS.OK:
         pass
     elif error_code == HF_STATUS.MISSING_DEPEND:
@@ -28,8 +45,8 @@ def CreateRayTracer(mesh_info_ptr: c_void_p) -> c_void_p:
     elif error_code == HF_STATUS.GENERIC_ERROR:
         raise HFException
 
+    # Return raytracer
     return rt_ptr
-
 
 def FireRay(
     rt_ptr: c_void_p,
@@ -286,6 +303,8 @@ def FireMultipleRaysDistance(
         raise Exception("Invalid input")
 
     return (vector_ptr, array_ptr)
+
+
 
 
 def DestroyRayTracer(rt_ptr: c_void_p):
