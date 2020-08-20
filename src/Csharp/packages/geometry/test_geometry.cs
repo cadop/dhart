@@ -108,8 +108,16 @@ namespace HumanFactors.Tests.Geometry
         [TestMethod]
         public void NumberOfSubmeshesLoadedIsCorrect()
         {
+            //! [EX_LoadSubmeshes]
+            
+            // Load submeshes
             MeshInfo[] submeshes = OBJLoader.LoadOBJSubmeshes("ExampleModels/sponza.obj", GROUP_METHOD.BY_GROUP);
 
+            // Print the first five
+            for(int i = 0; i < 5; i++)
+                Debug.WriteLine(submeshes[i]);
+
+            //! [EX_LoadSubmeshes]
             Assert.AreEqual(33, submeshes.Length, "Number of submeshes didn't match the actual number of submeshes in sponza");
         }
 
@@ -130,9 +138,15 @@ namespace HumanFactors.Tests.Geometry
             // Construct mesh
             MeshInfo Mesh = new MeshInfo(global_indices, global_vertices);
 
+
+
             // get verts and indices as arrays. 
             var flat_verts = Mesh.vertices.array;
             var flat_indices = Mesh.indices.array;
+
+            // Print to console
+            Debug.WriteLine(Mesh.vertices);
+            Debug.WriteLine(Mesh.indices);
 
             // Assert that the returned length is equal
             Assert.AreEqual(global_vertices.Length, flat_verts.Length);

@@ -48,24 +48,41 @@ namespace HumanFactors.Tests.RayTracing
         [TestMethod]
         public void AddMeshes()
         {
+            // ![EX_AddMesh]
+
             // Load a lot of submeshes from sponza
             var MeshInfos = OBJLoader.LoadOBJSubmeshes("ExampleModels/sponza.obj", GROUP_METHOD.BY_GROUP);
             var Plane = OBJLoader.LoadOBJ("ExampleModels/plane.obj");
             
-            // Construc ta BVH from the plane
+            // Construct a BVH from the plane
             EmbreeBVH bvh = new EmbreeBVH(Plane);
+           
+            // Cast rays and print the results
+            Debug.WriteLine("--- Just Plane---");
+            Vector3D[] origins = { new Vector3D(1, 1, 1), new Vector3D(1, 1, 1) };
+            Vector3D[] directions = { new Vector3D(0, 0, -1), new Vector3D(0, -1, 0) };
+            bool[] results = EmbreeRaytracer.IntersectOccluded(bvh, origins, directions);
 
-            // Add meshes to the meshinfo
+            string out_str = directions[0].ToString() + (results[0] ? "Intersected" : "Did not Intersect") + "\n";
+            out_str += directions[1].ToString() + (results[1] ? "Intersected" : "Did not Intersect");
+            Debug.WriteLine(out_str);
+            
+            // Add meshes to the BVH
             bvh.AddMesh(MeshInfos);
 
-            // Cast a ray straight downwards, and ensure it intersects.
-            // If the point is false, then the bvh was created incorrectly
-            Vector3D origin = new Vector3D(0, 0, 1);
-            Vector3D direction = new Vector3D(0, 0, -1);
-            var pt = EmbreeRaytracer.IntersectForPoint(bvh, origin, direction);
+            // Cast rays again and see if the second ray connects
+            Debug.WriteLine("--- After Addition---");
+            bool[] post_addition_results = EmbreeRaytracer.IntersectOccluded(bvh, origins, directions);
+            string post_addition_out_str = directions[0].ToString() + (post_addition_results[0] ? "Intersected" : "Did not Intersect") + "\n";
+            post_addition_out_str += directions[1].ToString() + (post_addition_results[1] ? "Intersected" : "Did not Intersect");
 
-            Assert.IsTrue(pt.IsValid(), "After adding a mesh, certain rays no longer intersect");
+            Debug.WriteLine(post_addition_out_str);
 
+            // ![EX_AddMesh]
+            Assert.IsFalse(results[0]);
+            Assert.IsTrue(results[1]);
+            Assert.IsTrue(post_addition_results[0]);
+            Assert.IsTrue(post_addition_results[1]);
         }
 
     }

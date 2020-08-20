@@ -34,21 +34,17 @@ namespace HumanFactors.Geometry
 			
 			\returns An instance of MeshInfo containing the mesh loaded from the OBJ at path.
 
-            \throws System.IO.FileNotFoundException No file was found at  path.
+            \throws System.IO.FileNotFoundException No file was found at path.
 			\throws HumanFactors.Exceptions.InvalidMeshException
 			The file at the path was not a valid OBJ.
 			
             \remarks
             Use the other overload if you want to use a CommonRotation on the mesh. 
 
-			\internal 
-				\todo Support group type
-				\todo Support multiple meshes
-			\endinternal
-
 			\code
 				// Loading a mesh from plane.obj with no rotation.
 				MeshInfo MI = OBJLoader.LoadOBJ("plane.obj");
+
 			\endcode
         */
         public static MeshInfo LoadOBJ(string path, float xrot = 0, float yrot = 0, float zrot = 0)
@@ -71,19 +67,21 @@ namespace HumanFactors.Geometry
 			\throws System.IO.FileNotFoundException No file was found at  path.
 			\throws HumanFactors.Exceptions.InvalidMeshException
 			The file at the path was not a valid OBJ.
-
-			\remarks
-			Use the other overload if you want to use a CommonRotation on the mesh. 
-
-			\internal 
-				\todo Support group type
-				\todo Support multiple meshes
-			\endinternal
-
+			
 			\see GROUP_METHOD to see the different ways of grouping the different geometry in a .obj file
+
+			\par Example
+
+			\snippet geometry\test_geometry.cs EX_LoadSubmeshes
+
+			```
+			Name: arcs_floor, ID: 0, Verts: 150, Triangles: 192
+			Name: arcs_03, ID: 1, Verts: 750, Triangles: 1344
+			Name: object32, ID: 2, Verts: 3190, Triangles: 4784
+			Name: object31, ID: 3, Verts: 3454, Triangles: 5264
+			Name: pillar_cor, ID: 4, Verts: 3478, Triangles: 5312
+			```
 			\code
-				// Loading a mesh from plane.obj with no rotation.
-				MeshInfo MI = OBJLoader.LoadOBJ("plane.obj");
 			\endcode
 		*/
 		public static MeshInfo[] LoadOBJSubmeshes(string path, GROUP_METHOD gm, float xrot = 0, float yrot = 0, float zrot = 0)
@@ -99,18 +97,6 @@ namespace HumanFactors.Geometry
 
 			return return_meshes;
 		}
-
-
-
-		public static MeshInfo[] LoadOBJs(string path, float xrot = 0, float yrot = 0, float zrot = 0, GROUP_METHOD gm = GROUP_METHOD.ONLY_FILE)
-		{
-			IntPtr[] mesh_ptrs = NativeMethods.C_LoadOBJ(path, xrot, yrot, zrot, gm);
-			MeshInfo[] Infos = new MeshInfo[mesh_ptrs.Length];
-			for (int i = 0; i < mesh_ptrs.Length; i++)
-				new MeshInfo(mesh_ptrs[i]);
-			return Infos;
-		}
-
 
 		/*!
             \brief Load an obj from the OBJ file at the given filepath.
@@ -129,9 +115,6 @@ namespace HumanFactors.Geometry
 			perform common rotations on meshes. This is useful if you're loading a mesh that is
 			Y-up and you need to convert it to Z-up for use in the GraohGenerator. 
 		
-			\internal 
-				\todo Support group type
-				\todo Support multiple meshes
 			\endinternal
 
 			\code

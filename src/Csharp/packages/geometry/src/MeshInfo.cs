@@ -138,7 +138,6 @@ namespace HumanFactors.Geometry
 
             \par Example
             \snippet geometry\test_geometry.cs EX_MeshInfoCstor
-
         */
 
 		public MeshInfo(int[] indices, float[] vertices, string name = "", int id = 0) :
@@ -158,7 +157,6 @@ namespace HumanFactors.Geometry
             \remarks
             See the other overload for this function for use with CommonRotations.
 
-            
             \par Example
             \snippet geometry\test_geometry.cs EX_MeshInfoCstor
             \snippet geometry\test_geometry.cs EX_RotateMesh_xyz
@@ -180,7 +178,11 @@ namespace HumanFactors.Geometry
             \snippet geometry\test_geometry.cs EX_MeshInfoCstor
             \snippet geometry\test_geometry.cs EX_RotateMesh_Common
         */
-
 		public void RotateMesh(Vector3D rotation) => NativeMethods.C_RotateMesh(handle, rotation.x, rotation.y, rotation.z);
-	}
+
+        public override String ToString()
+        {
+            return "Name: " + this.name + ", ID: " + id.ToString() + ", Verts: " + vertices.size.ToString() + ", Triangles: " + (this.indices.size.ToString());
+        }
+    }
 }

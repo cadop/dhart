@@ -98,6 +98,19 @@ namespace HumanFactors.RayTracing
 					equal to the combined pressure of all meshes in MI. 
 
             \endinternal
+
+            \par Example
+            Demonstrating that the BVH changes after the addition of new meshes.
+
+            \snippet raytracer\test_raytracer.cs EX_AddMesh
+            ```
+             --- Just Plane---
+			(0, 0, -1)Did not Intersect
+			(0, -1, 0)Intersected
+			--- After Addition---
+			(0, 0, -1)Intersected
+			(0, -1, 0)Intersected
+            ```
         */
         public void AddMesh(MeshInfo MI)
         {
@@ -114,17 +127,32 @@ namespace HumanFactors.RayTracing
 
         }
 
-        /*! \brief Add new meshes to this BVH.
-                
-            \param MI Array of MeshInfo to add to this BVH. The ID of each meshinfo
-                   will be updated to match the ID assigned by this bvh. 
+        /*! \brief Multiple new meshes to the BVH.
 
-            \internal
-				\details 
-					This will icnrease the BVH's pressure on the garbage collector
-					equal to the combined pressure of all meshes in MI. 
-            \endinternal
-        */
+		  \param MI Meshinfo to add to this bvh. The ID of this MeshInfo
+					will be updated if that ID is already occupied by another
+					mesh in the BVH. 
+
+		  \internal
+			  \details 
+				  This will icnrease the BVH's pressure on the garbage collector
+				  equal to the combined pressure of all meshes in MI. 
+
+		  \endinternal
+
+		  \par Example
+		  Demonstrating that the BVH changes after the addition of new meshes.
+
+		  \snippet raytracer\test_raytracer.cs EX_AddMesh
+		  ```
+		   --- Just Plane---
+		  (0, 0, -1)Did not Intersect
+		  (0, -1, 0)Intersected
+		  --- After Addition---
+		  (0, 0, -1)Intersected
+		  (0, -1, 0)Intersected
+		  ```
+	  */
         public void AddMesh(MeshInfo[] MI)
         {
             // Add the mesh to the bvh
