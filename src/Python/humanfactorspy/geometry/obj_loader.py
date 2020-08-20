@@ -59,4 +59,9 @@ def LoadOBJ(
     """
 
     mesh_ptr = meshinfo_native_functions.CreateOBJ(path, group_type, rotation)
-    return MeshInfo(mesh_ptr)
+
+    # Check return type. If multiple meshes were reutrned, then make a list
+    if (not isinstance(mesh_ptr, list)):
+        return MeshInfo(mesh_ptr)
+    else:
+        return [MeshInfo(ptr) for ptr in mesh_ptr]

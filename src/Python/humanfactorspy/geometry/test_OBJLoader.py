@@ -24,6 +24,12 @@ def test_BadMesh():
     with pytest.raises(FileNotFoundException):
         hfc = LoadOBJ(bad_mesh_path)
 
+def test_LoadMultipleMeshes():
+    meshes = LoadOBJ(good_mesh_path, OBJGroupType.BY_GROUP)
+
+    # This should crash if the meshes weren't loaded correctly
+    for mesh in meshes:
+        mesh.Rotate((90,0,0))
 
 def test_LoadFromVertices():
     scene = pywavefront.Wavefront(good_mesh_path, collect_faces=True)
