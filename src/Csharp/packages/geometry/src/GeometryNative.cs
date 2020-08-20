@@ -17,7 +17,7 @@ namespace HumanFactors.Geometry
 	/*! \brief Native methods for the Geometry namespace */
 	internal static class NativeMethods
 	{
-			public struct TrisAndVertsReturn {
+		internal struct TrisAndVertsReturn {
 			public IntPtr tri_ptr;
 			public IntPtr vert_ptr;
 			public int tris;

@@ -10,9 +10,9 @@ namespace HumanFactors.Geometry
 	
 	*/
 	public enum GROUP_METHOD{
-		ONLY_FILE = 0,
-		BY_GROUP = 1,
-		BY_MATERIAL = 2
+		ONLY_FILE = 0, ///< Don't group submeshes. Return the entire file as a single MeshInfo.
+		BY_GROUP = 1, ///< Create a seperate meshinfo for every obj group in the file.
+		BY_MATERIAL = 2 ///< Create a seperate meshinfo for every material in the file. Requires the .mtl to be located next to the OBJ upon loading. If a .mtl could not be found, ONLY_FILE is used as a fallback.
 	}
 
     /*! 
@@ -57,10 +57,10 @@ namespace HumanFactors.Geometry
 			\brief Load an obj from the OBJ file at the given filepath.
 
 			\param path Path to a valid OBJ file.
+			\param gm Method of grouping the OBJ into submeshes
 			\param xrot Degrees to rotate the mesh on the x axis.
 			\param yrot Degrees to rotate the mesh on the y axis.
 			\param zrot Degrees to rotate the mesh on the z axis.
-			\param GroupMethod Method of grouping different parts of the OBJ
 
 			\returns All submeshes in the obj file at `path` grouped by `gm`
 
@@ -71,7 +71,6 @@ namespace HumanFactors.Geometry
 			\see GROUP_METHOD to see the different ways of grouping the different geometry in a .obj file
 
 			\par Example
-
 			\snippet geometry\test_geometry.cs EX_LoadSubmeshes
 
 			```

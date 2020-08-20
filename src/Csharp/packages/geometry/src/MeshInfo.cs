@@ -50,8 +50,8 @@ namespace HumanFactors.Geometry
 	{
         public int id = -1; ///< ID of the mesh. 
         public string name = ""; ///< Name of the mesh
-        public DependentNativeArray<float> vertices;
-        public DependentNativeArray<int> indices;
+        public DependentNativeArray<float> vertices; ///< An array of all the coordinates for every vertex in the mesh
+        public DependentNativeArray<int> indices; ///< An array of the indices for every triangle in the mesh
 
         /*!
             \brief Calculates the amount of pressure this mesh should exert on the GC.
