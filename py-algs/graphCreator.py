@@ -37,8 +37,8 @@ def check_floor(parent,child,geom,graphParams):
     else:
         # This is where the child is actually defined as it is the intersection
         #  point with the floor
-        nodePos = child[0],child[1],round(child[2]-res,1)
-
+        nodePos = child[0],child[1],mu.trailing_round(child[2]-res,2)
+        
         if (parent[2]-nodePos[2]) > graphParams.get('downstep'):#downstep_limit:
             return None
         #if the child is higher than the parent
@@ -56,7 +56,7 @@ def check_start(child,geom):
         return None    
         
     else:
-        nodePos = child[0],child[1],round(child[2]-res,1) #should match check_floor tolerance
+        nodePos = child[0],child[1],mu.trailing_round(child[2]-res,2) #should match check_floor tolerance
         return nodePos      
 
 def checkConnection(parent,child,testPnt,geom,obstacles,graphParams):    
@@ -116,8 +116,8 @@ def checkConnection(parent,child,testPnt,geom,obstacles,graphParams):
 
         node1 = list(parent)
         node2 = list(child)
-        node1[2] += 0.01
-        node2[2] += 0.01
+        node1[2] += graphParams.get('ground_offset')
+        node2[2] += graphParams.get('ground_offset')
 
         #check if there is a direct connection
         if  isConnected(node1,node2): 
@@ -142,7 +142,7 @@ def checkConnection(parent,child,testPnt,geom,obstacles,graphParams):
             node1 = list(child)
             node1[2] += graphParams.get('downstep')
             node2 = list(parent)
-            node2[2]+= 0.01 #add small amount to not be on ground mesh
+            node2[2]+= graphParams.get('ground_offset') #add small amount to not be on ground mesh
             step = 3
             
         elif parent[2] < child[2]:
@@ -150,7 +150,7 @@ def checkConnection(parent,child,testPnt,geom,obstacles,graphParams):
             node1 = list(parent)
             node1[2] += graphParams.get('upstep')
             node2 = list(child)
-            node2[2] += 0.01 #add small amount to not be on ground mesh
+            node2[2] += graphParams.get('ground_offset') #add small amount to not be on ground mesh
             step = 2
             
         elif parent[2] == child[2]:
@@ -158,7 +158,7 @@ def checkConnection(parent,child,testPnt,geom,obstacles,graphParams):
             node1 = list(parent)
             node1[2] += graphParams.get('upstep')
             node2 = list(child)
-            node2[2] += 0.01 #add small amount to not be on ground mesh
+            node2[2] += graphParams.get('ground_offset') #add small amount to not be on ground mesh
             step = 4
 
         ## if true, return it is a step
@@ -253,9 +253,9 @@ def buildGraph(To_Do,graphParams, geometry_bvh,graph):
             for direc in directions:
                 i,j = direc
                 #Offset the child from the parent                         
-                child = [ round( (parent[0] + (i* x_offset ) ) ,8),
-                          round( (parent[1] + (j* y_offset ) ) ,8),
-                          round(  parent[2] +     height       ,8) ]
+                child = [ round( (parent[0] + (i* x_offset) ) ,8),
+                          round( (parent[1] + (j* y_offset) ) ,8),
+                          round(  parent[2] +     height      ,8) ]
 
                 possible_children.append(child) # Make a list of the possible children
             return possible_children
@@ -325,7 +325,7 @@ def buildGraph(To_Do,graphParams, geometry_bvh,graph):
   
 def buildNetwork(start_location, geometry_bvh, graphParams): 
 
-    start_location= (start_location[0],start_location[1], start_location[2]+graphParams.get('height') )
+    start_location= (start_location[0], start_location[1], start_location[2]+graphParams.get('height') )
     #Round off the number so Rhino doesn't have too many issues?
     start_location = (round(start_location[0],8),
                       round(start_location[1],8),
@@ -333,6 +333,8 @@ def buildNetwork(start_location, geometry_bvh, graphParams):
 
     start_location = check_start(start_location,geometry_bvh)
     print('starting node location: ',start_location)
+
+    graphParams['ground_offset'] = 0.01
 
     graph = defaultdict(list)
 
