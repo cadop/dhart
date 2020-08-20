@@ -334,8 +334,6 @@ def buildNetwork(start_location, geometry_bvh, graphParams):
     start_location = check_start(start_location,geometry_bvh)
     print('starting node location: ',start_location)
 
-    graphParams['ground_offset'] = 0.01
-
     graph = defaultdict(list)
 
     return buildGraph([start_location],graphParams, geometry_bvh, graph=graph)

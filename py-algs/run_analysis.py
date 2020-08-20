@@ -95,6 +95,8 @@ def run():
                 'downstep': downstep, 'upslope':upslope, 'downslope': downslope, 'cross_slope':cross_slope ,
                 'width': width, 'max_connection': max_connection, 'max_nodes' : max_nodes  }
     
+    graphParams['ground_offset'] = 0.01
+
     geom_bvh = gu.get_bvh('models/Weston_meshed_no-ngon.obj', True)
 
     s = time.time()
