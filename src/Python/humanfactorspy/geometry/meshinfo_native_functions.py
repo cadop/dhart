@@ -1,4 +1,5 @@
 from ctypes import *
+import ctypes
 from humanfactorspy.Exceptions import *
 from humanfactorspy.common_native_functions import (
     getDLLHandle,
@@ -21,27 +22,77 @@ def CreateOBJ(
         InvalidOBJException: OBJ fails to load from the given filepath
         FileNotFoundException: No file exists at the given filepath
     """
-    mesh_info_ptr = c_void_p(0)
+    # Setup output parameters
+    mesh_info_ptr = c_void_p()
+    num_meshes = c_int(0)
+
+    # Call the function and capture the error code
     error_code = HFPython.LoadOBJ(
         GetStringPtr(obj_file_path),
-        len(obj_file_path),
+        0,
         c_float(rotation[0]),
         c_float(rotation[1]),
         c_float(rotation[2]),
         byref(mesh_info_ptr),
+        byref(num_meshes)
     )
 
+    # Check ErrorCode
     if error_code == HF_STATUS.OK:
         pass
     elif error_code == HF_STATUS.INVALID_OBJ:
         raise InvalidOBJException
-    elif error_code == HF_STATUS.NOT_FOUND:  # soon to be own exception
+    elif error_code == HF_STATUS.NOT_FOUND:  
         raise FileNotFoundException
     elif error_code == HF_STATUS.GENERIC_ERROR:
         raise HFException
 
-    return mesh_info_ptr
+def CreateOBJ(
+    obj_file_path: str,
+    group_type: int = 0,
+    rotation: Tuple[float, float, float] = (0, 0, 0)) -> c_void_p:
+    """ Read an obj from the given file path in C++ and return a pointer to it.
+    
+    Raises:
+        InvalidOBJException: OBJ fails to load from the given filepath
+        FileNotFoundException: No file exists at the given filepath
+    """
+    # Setup output parameters
+    mesh_info_ptr = c_void_p()
+    num_meshes = c_int(0)
 
+    # Call the function and capture the error code
+    error_code = HFPython.LoadOBJ(
+        GetStringPtr(obj_file_path),
+        c_int(group_type),
+        c_float(rotation[0]),
+        c_float(rotation[1]),
+        c_float(rotation[2]),
+        byref(mesh_info_ptr),
+        byref(num_meshes)
+    )
+
+    # Check ErrorCode
+    if error_code == HF_STATUS.OK:
+        pass
+    elif error_code == HF_STATUS.INVALID_OBJ:
+        raise InvalidOBJException
+    elif error_code == HF_STATUS.NOT_FOUND:  
+        raise FileNotFoundException
+    elif error_code == HF_STATUS.GENERIC_ERROR:
+        raise HFException
+
+    # Cast to a pointer of c_void_p, then insert all values into
+    # a python list
+    mi_array = ctypes.cast(mesh_info_ptr, ctypes.POINTER(c_void_p))
+    return_ptrs = [c_void_p(mi_array[i]) for i in range(0, num_meshes.value)]
+
+    # Clean up the pointer array now that we've gotten what we need
+    # from it
+    HFPython.DestroyMeshInfoPtrArray(mesh_info_ptr)
+
+    # Return only one value if only one mesh was returned
+    return return_ptrs[0] if num_meshes.value == 1 else return_ptrs
 
 def CreateMesh(
     indices: List[int], vertices: List[float], name: str, id: int

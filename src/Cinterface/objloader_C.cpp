@@ -83,7 +83,11 @@ C_INTERFACE StoreMesh(
 
 C_INTERFACE RotateMesh(MeshInfo * mesh_to_rotate, float xrot, float yrot, float zrot)
 {
+	if (mesh_to_rotate->meshid < 0)
+		return HF_STATUS::INVALID_OBJ;
+
 	mesh_to_rotate->PerformRotation(xrot, yrot, zrot);
+
 	return HF_STATUS::OK;
 }
 

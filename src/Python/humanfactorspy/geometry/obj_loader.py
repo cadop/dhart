@@ -1,14 +1,13 @@
 from typing import Tuple
-from enum import IntEnum as Enum
+from enum import IntEnum
 
 from . import meshinfo_native_functions
 from . import MeshInfo
 
 __all__ = ['OBJGroupType','LoadOBJ']
 
-class OBJGroupType(Enum):
+class OBJGroupType(IntEnum):
     """ Different methods to seperate several meshes from a single OBJ """
-
     ONLY_FILE = 0  # Assign the same ID to all geometry in this file
     BY_GROUP = 1  # Assign different OBJ groups, different OBJs
     BY_MATERIAL = 2  # Seperate geometry based on material
@@ -16,7 +15,7 @@ class OBJGroupType(Enum):
 
 def LoadOBJ(
     path: str,
-    group_type: OBJGroupType = OBJGroupType.ONLY_FILE,
+    group_type: OBJGroupType = 0,
     rotation: Tuple[float, float, float] = (0, 0, 0),
 ) -> MeshInfo:
     """ Load an obj file from the given path. 
@@ -59,5 +58,5 @@ def LoadOBJ(
 
     """
 
-    mesh_ptr = meshinfo_native_functions.CreateOBJ(path, OBJGroupType, rotation)
+    mesh_ptr = meshinfo_native_functions.CreateOBJ(path, group_type, rotation)
     return MeshInfo(mesh_ptr)
