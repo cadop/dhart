@@ -4,6 +4,34 @@ from itertools import permutations as perm
 from itertools import combinations as combi
 from itertools import product as prod
 
+def normal_round(n,d=0):
+    n= n* (10**d)
+    if n - math.floor(n) < 0.5:
+        return math.floor(n) / (10**d)
+    return math.ceil(n) / (10**d)
+
+def trailing_round(x,d=0):
+    s = str(x)
+    if '.' not in s: return x
+    s_int,s_float = s.split('.')
+    i_len = len(s_int) # length of integer
+    f_len = len(s_float) # length of float 
+    precision = f_len - d # number of digits to remove from end
+    for i in range(precision):
+        x = normal_round(x,f_len-(i+1))
+    return x
+
+def trunc(x, p=6):
+    """
+    Truncate a value to the number of digits
+    """
+    s = str(x)
+    s_len = len(s)-1 # length without decimal
+    if s_len <=p: return x # if the number is within the allowed precision
+    if '.' in s: x = float(s[0:p+1])
+    else: x = int(s[0:p])
+    return x
+
 def dst(p1,p2):
     return math.sqrt( (p1[0]-p2[0])**2 + (p1[1]-p2[1])**2 + (p1[2]-p2[2])**2 )
     
