@@ -300,9 +300,9 @@ namespace HF::GraphGenerator {
 			down_slope_type DownSlope,
 			int max_step_connections,
 			int cores = -1,
-			z_precision_type node_z_precision = 0.01,
-			connect_offset_type  node_spacing_precision = 0.001,
-			spacing_precision_type ground_offset = 0.001
+			z_precision_type node_z_precision = 0.001,
+			connect_offset_type  node_spacing_precision = 0.0001,
+			spacing_precision_type ground_offset = 0.01
 		) {
 			assert(node_z_precision != 0);
 
