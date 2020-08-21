@@ -1,56 +1,38 @@
-Results of doctest builder run on 2020-08-10 11:01:37
+Results of doctest builder run on 2020-08-21 16:33:59
 =====================================================
-
-Document: generated/humanfactorspy.visibilitygraph.VisibilityGraphGroupToGroup
-------------------------------------------------------------------------------
-1 items passed all tests:
-  11 tests in default
-11 tests in 1 items.
-11 passed and 0 failed.
-Test passed.
-
-Document: generated/humanfactorspy.raytracer.IntersectOccluded
---------------------------------------------------------------
-1 items passed all tests:
-   8 tests in default
-8 tests in 1 items.
-8 passed and 0 failed.
-Test passed.
-
-Document: generated/humanfactorspy.geometry.LoadOBJ
----------------------------------------------------
-1 items passed all tests:
-   9 tests in default
-9 tests in 1 items.
-9 passed and 0 failed.
-Test passed.
 
 Document: examples/path/visualize
 ---------------------------------
-1 items passed all tests:
-  42 tests in default
+**********************************************************************
+File "examples\path\visualize.rst", line 73, in default
+Failed example:
+    print('Total path cost: ', path_sum)
+Expected:
+    Total path cost:  62.035995
+Got:
+    Total path cost:  62.035835
+**********************************************************************
+File "examples\path\visualize.rst", line 30, in default
+Failed example:
+    print("Closest Node: ", closest_nodes)
+Expected:
+    Closest Node:  [   0 2614]
+Got:
+    Closest Node:  [   0 2598]
+**********************************************************************
+File "examples\path\visualize.rst", line 42, in default
+Failed example:
+    print('Total path cost: ', path_sum)
+Expected:
+    Total path cost:  81.42913
+Got:
+    Total path cost:  81.42925
+**********************************************************************
+1 items had failures:
+   3 of  42 in default
 42 tests in 1 items.
-42 passed and 0 failed.
-Test passed.
-
-Document: generated/humanfactorspy.viewanalysis.SphericalViewAnalysis
----------------------------------------------------------------------
-1 items passed all tests:
-  10 tests in default
-10 tests in 1 items.
-10 passed and 0 failed.
-Test passed.
-
-Document: generated/humanfactorspy.spatialstructures.Graph.get_node_points
---------------------------------------------------------------------------
-
-Document: generated/humanfactorspy.pathfinding.DijkstraShortestPath
--------------------------------------------------------------------
-1 items passed all tests:
-  45 tests in default
-45 tests in 1 items.
-45 passed and 0 failed.
-Test passed.
+39 passed and 3 failed.
+***Test Failed*** 3 failures.
 
 Document: examples/raycast
 --------------------------
@@ -60,28 +42,20 @@ Document: examples/raycast
 1 passed and 0 failed.
 Test passed.
 
-Document: generated/humanfactorspy.spatialstructures.Graph.get_node_attributes
-------------------------------------------------------------------------------
+Document: generated/humanfactorspy.spatialstructures.Graph.clear_node_attribute
+-------------------------------------------------------------------------------
 1 items passed all tests:
-  11 tests in default
-11 tests in 1 items.
-11 passed and 0 failed.
+  12 tests in default
+12 tests in 1 items.
+12 passed and 0 failed.
 Test passed.
 
-Document: examples/path/multi_cost
-----------------------------------
+Document: examples/path/search
+------------------------------
 1 items passed all tests:
-  40 tests in default
-40 tests in 1 items.
-40 passed and 0 failed.
-Test passed.
-
-Document: generated/humanfactorspy.graphgenerator.GenerateGraph
----------------------------------------------------------------
-1 items passed all tests:
-  18 tests in default
-18 tests in 1 items.
-18 passed and 0 failed.
+  31 tests in default
+31 tests in 1 items.
+31 passed and 0 failed.
 Test passed.
 
 Document: examples/graph/get_csr
@@ -92,28 +66,91 @@ Document: examples/graph/get_csr
 1 passed and 0 failed.
 Test passed.
 
-Document: generated/humanfactorspy.raytracer.IntersectForPoint
---------------------------------------------------------------
+Document: generated/humanfactorspy.spatialstructures.Graph.add_node_attributes
+------------------------------------------------------------------------------
 1 items passed all tests:
-   7 tests in default
-7 tests in 1 items.
-7 passed and 0 failed.
+  11 tests in default
+11 tests in 1 items.
+11 passed and 0 failed.
 Test passed.
 
-Document: generated/humanfactorspy.pathfinding.DijkstraFindAllShortestPaths
----------------------------------------------------------------------------
+Document: generated/humanfactorspy.spatialstructures.Graph.get_node_points
+--------------------------------------------------------------------------
+
+Document: examples/path/multi_cost
+----------------------------------
+**********************************************************************
+File "examples\path\multi_cost.rst", line 41, in default
+Failed example:
+    print(f"Graph Generated with {len(nodes.array)} nodes")
+Expected:
+    Graph Generated with 886 nodes
+Got:
+    Graph Generated with 891 nodes
+**********************************************************************
+File "examples\path\multi_cost.rst", line 48, in default
+Failed example:
+    print("Closest Node: ", closest_nodes)
+Expected:
+    Closest Node:  [  0 795]
+Got:
+    Closest Node:  [  0 801]
+**********************************************************************
+File "examples\path\multi_cost.rst", line 70, in default
+Failed example:
+    print('Total path cost: ', path_sum)
+Expected:
+    Total path cost:  62.02023
+Got:
+    Total path cost:  62.020184
+**********************************************************************
+File "examples\path\multi_cost.rst", line 29, in default
+Failed example:
+    print('Total path cost: ', path_sum)
+Expected:
+    Total path cost:  377.05716
+Got:
+    Total path cost:  377.04623
+**********************************************************************
+1 items had failures:
+   4 of  40 in default
+40 tests in 1 items.
+36 passed and 4 failed.
+***Test Failed*** 4 failures.
+
+Document: generated/humanfactorspy.visibilitygraph.VisibilityGraphUndirectedAllToAll
+------------------------------------------------------------------------------------
 1 items passed all tests:
-  20 tests in default
-20 tests in 1 items.
-20 passed and 0 failed.
+  11 tests in default
+11 tests in 1 items.
+11 passed and 0 failed.
 Test passed.
 
 Document: generated/humanfactorspy.raytracer.Intersect
 ------------------------------------------------------
-1 items passed all tests:
-  22 tests in default
+**********************************************************************
+File "..\..\..\build\Python\humanfactorspy\raytracer\embree_raytracer.py", line ?, in default
+Failed example:
+    print(hit_point)
+Expected:
+    [(-1.        , -1) ( 0.99999994, 39) ( 1.9999999 , 39) ( 2.9999998 , 39)
+     ( 3.9999995 , 39)]
+Got:
+    [(-1.        , -1) ( 0.99999994, 39) ( 1.9999999 , 39) ( 3.        , 39)
+     ( 3.9999995 , 39)]
+**********************************************************************
+1 items had failures:
+   1 of  22 in default
 22 tests in 1 items.
-22 passed and 0 failed.
+21 passed and 1 failed.
+***Test Failed*** 1 failures.
+
+Document: generated/humanfactorspy.raytracer.IntersectOccluded
+--------------------------------------------------------------
+1 items passed all tests:
+   8 tests in default
+8 tests in 1 items.
+8 passed and 0 failed.
 Test passed.
 
 Document: examples/view_analysis
@@ -124,6 +161,119 @@ Document: examples/view_analysis
 1 passed and 0 failed.
 Test passed.
 
+Document: generated/humanfactorspy.viewanalysis.SphericalViewAnalysisAggregate
+------------------------------------------------------------------------------
+1 items passed all tests:
+  20 tests in default
+20 tests in 1 items.
+20 passed and 0 failed.
+Test passed.
+
+Document: generated/humanfactorspy.raytracer.IntersectForPoint
+--------------------------------------------------------------
+1 items passed all tests:
+   7 tests in default
+7 tests in 1 items.
+7 passed and 0 failed.
+Test passed.
+
+Document: generated/humanfactorspy.geometry.MeshInfo
+----------------------------------------------------
+1 items passed all tests:
+   4 tests in default
+4 tests in 1 items.
+4 passed and 0 failed.
+Test passed.
+
+Document: generated/humanfactorspy.pathfinding.DijkstraFindAllShortestPaths
+---------------------------------------------------------------------------
+1 items passed all tests:
+  20 tests in default
+20 tests in 1 items.
+20 passed and 0 failed.
+Test passed.
+
+Document: generated/humanfactorspy.visibilitygraph.VisibilityGraphGroupToGroup
+------------------------------------------------------------------------------
+1 items passed all tests:
+  11 tests in default
+11 tests in 1 items.
+11 passed and 0 failed.
+Test passed.
+
+Document: generated/humanfactorspy.spatialstructures.Graph.get_closest_nodes
+----------------------------------------------------------------------------
+**********************************************************************
+File "..\..\..\build\Python\humanfactorspy\spatialstructures\graph.py", line ?, in default
+Failed example:
+    print("Closest Node: ", closest_node)
+Expected:
+    Closest Node:  1795
+Got:
+    Closest Node:  2399
+**********************************************************************
+File "..\..\..\build\Python\humanfactorspy\spatialstructures\graph.py", line ?, in default
+Failed example:
+    print("Closest Node: ", closest_node)
+Expected:
+    Closest Node:  [1795 2513]
+Got:
+    Closest Node:  [2399 2428]
+**********************************************************************
+File "..\..\..\build\Python\humanfactorspy\spatialstructures\graph.py", line ?, in default
+Failed example:
+    print("Closest Node: ", closest_node)
+Expected:
+    Closest Node:  1796
+Got:
+    Closest Node:  2400
+**********************************************************************
+File "..\..\..\build\Python\humanfactorspy\spatialstructures\graph.py", line ?, in default
+Failed example:
+    print("Closest Node: ", closest_node)
+Expected:
+    Closest Node:  [1796 2513]
+Got:
+    Closest Node:  [2400 2428]
+**********************************************************************
+1 items had failures:
+   4 of  20 in default
+20 tests in 1 items.
+16 passed and 4 failed.
+***Test Failed*** 4 failures.
+
+Document: generated/humanfactorspy.viewanalysis.SphericalViewAnalysis
+---------------------------------------------------------------------
+1 items passed all tests:
+  10 tests in default
+10 tests in 1 items.
+10 passed and 0 failed.
+Test passed.
+
+Document: examples/visibility_graph
+-----------------------------------
+1 items passed all tests:
+   1 tests in default
+1 tests in 1 items.
+1 passed and 0 failed.
+Test passed.
+
+Document: generated/humanfactorspy.raytracer.EmbreeBVH
+------------------------------------------------------
+1 items passed all tests:
+   4 tests in default
+4 tests in 1 items.
+4 passed and 0 failed.
+Test passed.
+
+Document: generated/humanfactorspy.geometry.LoadOBJ
+---------------------------------------------------
+1 items passed all tests:
+   9 tests in default
+9 tests in 1 items.
+9 passed and 0 failed.
+Test passed.
+
 Document: generated/humanfactorspy.visibilitygraph.VisibilityGraphAllToAll
 --------------------------------------------------------------------------
 1 items passed all tests:
@@ -132,15 +282,93 @@ Document: generated/humanfactorspy.visibilitygraph.VisibilityGraphAllToAll
 11 passed and 0 failed.
 Test passed.
 
-Document: generated/humanfactorspy.visibilitygraph.VisibilityGraphUndirectedAllToAll
-------------------------------------------------------------------------------------
+Document: generated/humanfactorspy.viewanalysis.SphericallyDistributeRays
+-------------------------------------------------------------------------
 1 items passed all tests:
-  11 tests in default
-11 tests in 1 items.
-11 passed and 0 failed.
+   2 tests in default
+2 tests in 1 items.
+2 passed and 0 failed.
 Test passed.
 
-Document: generated/humanfactorspy.spatialstructures.Graph.add_node_attributes
+Document: examples/graph/generating
+-----------------------------------
+**********************************************************************
+File "..\..\..\build\Python\humanfactorspy\Examples\GraphGeneratorExample.py", line ?, in default
+Failed example:
+    from humanfactorspy.geometry import LoadOBJ, CommonRotations
+    from humanfactorspy.raytracer import EmbreeBVH
+    from humanfactorspy.graphgenerator import GenerateGraph
+
+    import humanfactorspy
+
+    obj_path = humanfactorspy.get_sample_model("plane.obj")
+
+    obj = LoadOBJ(obj_path, rotation=CommonRotations.Yup_to_Zup)
+    bvh = EmbreeBVH(obj)
+
+    start_point = (-1, -6, 1623.976928)
+
+    spacing = (0.5, 0.5, 0.5)
+    max_nodes = 500
+
+    graph = GenerateGraph(bvh, start_point, spacing, max_nodes, cores=-1)
+
+    csr_graph = graph.CompressToCSR()
+    nodes = graph.getNodes()
+
+    print(len(nodes))
+    print(nodes[0:3])
+Expected:
+    594
+    [(-1. , -6. ,  0., 0, 0) (-1.5, -6.5, -0., 0, 1) (-1.5, -6. , -0., 0, 2)]
+Got:
+    594
+    [(-1. , -6. , -0., 0, 0) (-1.5, -6.5, -0., 0, 1) (-1.5, -6. , -0., 0, 2)]
+**********************************************************************
+1 items had failures:
+   1 of   1 in default
+1 tests in 1 items.
+0 passed and 1 failed.
+***Test Failed*** 1 failures.
+
+Document: generated/humanfactorspy.graphgenerator.GenerateGraph
+---------------------------------------------------------------
+1 items passed all tests:
+  18 tests in default
+18 tests in 1 items.
+18 passed and 0 failed.
+Test passed.
+
+Document: generated/humanfactorspy.pathfinding.DijkstraShortestPath
+-------------------------------------------------------------------
+**********************************************************************
+File "..\..\..\build\Python\humanfactorspy\pathfinding\shortest_path.py", line ?, in default
+Failed example:
+    print("Distance Path:", distance_path.array)
+Expected:
+    Distance Path: [(1.000002 ,   1) (0.9999999,  12) (1.       ,  26) (1.0000005,  43)
+     (1.0000019,  64) (1.0000081,  89) (1.4148979, 118) (0.       , 150)]
+Got:
+    Distance Path: [(1.0000005,   1) (1.       ,  12) (1.       ,  26) (1.0000005,  43)
+     (1.0000048,  64) (1.0000048,  89) (1.4148979, 118) (0.       , 150)]
+**********************************************************************
+File "..\..\..\build\Python\humanfactorspy\pathfinding\shortest_path.py", line ?, in default
+Failed example:
+    print("Energy Path:", energy_path.array)
+Expected:
+    Energy Path: [(2.4610138,   1) (2.5      ,  12) (2.5      ,  26) (2.4804544,  43)
+     (2.461011 ,  64) (2.4224558,  89) (2.7486944, 118) (0.       , 150)]
+Got:
+    Energy Path: [(2.4804523,   1) (2.5000002,  12) (2.5      ,  26) (2.4804544,  43)
+     (2.441679 ,  64) (2.441679 ,  89) (2.7486954, 118) (0.       , 150)]
+**********************************************************************
+1 items had failures:
+   2 of  45 in default
+45 tests in 1 items.
+43 passed and 2 failed.
+***Test Failed*** 2 failures.
+
+Document: generated/humanfactorspy.spatialstructures.Graph.get_node_attributes
 ------------------------------------------------------------------------------
 1 items passed all tests:
   11 tests in default
@@ -156,81 +384,9 @@ Document: generated/humanfactorspy.pathfinding.calculate_distance_and_predecesso
 11 passed and 0 failed.
 Test passed.
 
-Document: examples/graph/generating
------------------------------------
-1 items passed all tests:
-   1 tests in default
-1 tests in 1 items.
-1 passed and 0 failed.
-Test passed.
-
-Document: generated/humanfactorspy.geometry.MeshInfo
-----------------------------------------------------
-1 items passed all tests:
-   4 tests in default
-4 tests in 1 items.
-4 passed and 0 failed.
-Test passed.
-
-Document: examples/visibility_graph
------------------------------------
-1 items passed all tests:
-   1 tests in default
-1 tests in 1 items.
-1 passed and 0 failed.
-Test passed.
-
-Document: generated/humanfactorspy.viewanalysis.SphericalViewAnalysisAggregate
-------------------------------------------------------------------------------
-1 items passed all tests:
-  20 tests in default
-20 tests in 1 items.
-20 passed and 0 failed.
-Test passed.
-
-Document: generated/humanfactorspy.raytracer.EmbreeBVH
-------------------------------------------------------
-1 items passed all tests:
-   4 tests in default
-4 tests in 1 items.
-4 passed and 0 failed.
-Test passed.
-
-Document: examples/path/search
-------------------------------
-1 items passed all tests:
-  31 tests in default
-31 tests in 1 items.
-31 passed and 0 failed.
-Test passed.
-
-Document: generated/humanfactorspy.spatialstructures.Graph.get_closest_nodes
-----------------------------------------------------------------------------
-1 items passed all tests:
-  20 tests in default
-20 tests in 1 items.
-20 passed and 0 failed.
-Test passed.
-
-Document: generated/humanfactorspy.spatialstructures.Graph.clear_node_attribute
--------------------------------------------------------------------------------
-1 items passed all tests:
-  12 tests in default
-12 tests in 1 items.
-12 passed and 0 failed.
-Test passed.
-
-Document: generated/humanfactorspy.viewanalysis.SphericallyDistributeRays
--------------------------------------------------------------------------
-1 items passed all tests:
-   2 tests in default
-2 tests in 1 items.
-2 passed and 0 failed.
-Test passed.
-
 Doctest summary
 ===============
   385 tests
-    0 failures in tests
+   15 failures in tests
     0 failures in setup code
     0 failures in cleanup code

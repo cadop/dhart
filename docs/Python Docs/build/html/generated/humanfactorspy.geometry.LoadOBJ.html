@@ -87,7 +87,7 @@
 <h1>humanfactorspy.geometry.LoadOBJ<a class="headerlink" href="#humanfactorspy-geometry-loadobj" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt id="humanfactorspy.geometry.LoadOBJ">
-<code class="descclassname">humanfactorspy.geometry.</code><code class="descname">LoadOBJ</code><span class="sig-paren">(</span><em>path: str</em>, <em>group_type: humanfactorspy.geometry.obj_loader.OBJGroupType = &lt;OBJGroupType.ONLY_FILE: 0&gt;</em>, <em>rotation: Tuple[float</em>, <em>float</em>, <em>float] = (0</em>, <em>0</em>, <em>0)</em><span class="sig-paren">)</span> &#x2192; humanfactorspy.geometry.mesh_info.MeshInfo<a class="reference external" href="https://github.com/cadop/HumanMetrics/blob/master/Codebase/HumanFactors/humanfactorspy/..\build\Python\humanfactorspy\geometry\obj_loader.py#L17-L63"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#humanfactorspy.geometry.LoadOBJ" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">humanfactorspy.geometry.</code><code class="descname">LoadOBJ</code><span class="sig-paren">(</span><em><span class="n">path</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em>, <em><span class="n">group_type</span><span class="p">:</span> <span class="n">humanfactorspy.geometry.obj_loader.OBJGroupType</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em><span class="n">rotation</span><span class="p">:</span> <span class="n">Tuple<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">0, 0, 0</span></em><span class="sig-paren">)</span> &#x2192; Union<span class="p">[</span>humanfactorspy.geometry.mesh_info.MeshInfo<span class="p">, </span>List<span class="p">[</span>humanfactorspy.geometry.mesh_info.MeshInfo<span class="p">]</span><span class="p">]</span><a class="reference external" href="https://github.com/cadop/HumanMetrics/blob/master/Codebase/HumanFactors/humanfactorspy/..\build\Python\humanfactorspy\geometry\obj_loader.py#L16-L68"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#humanfactorspy.geometry.LoadOBJ" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load an obj file from the given path.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -103,7 +103,8 @@ Useful for converting models from Y-Up to Z-Up.</li>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
-<dt>A new meshinfo object containing a the vertices and triangles</dt><dd><p>for the obj in path.</p>
+<dt>A new meshinfo object containing a the vertices and triangles</dt><dd><p>for the obj in path. If group_type is not ONLY_FILE, a list of meshes
+may be returned if submeshes are found.</p>
 </dd>
 </dl>
 </p>
