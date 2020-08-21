@@ -14,6 +14,7 @@ humanfactorspy.raytracer.EmbreeBVH
    .. autosummary::
        :toctree: .
        
+            ~EmbreeBVH.AddMesh
    
    
 

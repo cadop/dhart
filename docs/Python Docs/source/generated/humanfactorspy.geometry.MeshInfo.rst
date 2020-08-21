@@ -15,6 +15,7 @@ humanfactorspy.geometry.MeshInfo
        :toctree: .
        
             ~MeshInfo.Rotate
+            ~MeshInfo.SetupVertAndIndexArrays
    
    
 
