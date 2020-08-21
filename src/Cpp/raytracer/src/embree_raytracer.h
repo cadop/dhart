@@ -55,6 +55,12 @@ namespace HF::RayTracer {
 		}
 	};
 
+	//*! \brief Determine whether this mesh did or did not intersect */
+	bool DidIntersect(int mesh_id);
+
+	/*! \brief Get the precise distance from a ray intersection */
+	double PerformPreciseIntersection(RTCHit & hit);
+
 	/// <summary> A simple hit struct to carry all relevant information about hits. </summary>
 	struct HitStruct {
 		float distance = -1.0f;  ///< Distance from the origin point to the hit point. Set to -1 if no hit was recorded.
@@ -62,7 +68,9 @@ namespace HF::RayTracer {
 
 		/// <summary> Determine whether or not this hitstruct contains a hit. </summary>
 		/// <returns> True if the point hit, false if it did not </returns>
-		bool DidHit() const;
+		inline bool DidHit() const {
+			return DidIntersect(this->meshid);
+		}
 	};
 
 	/// <summary> A simple hit struct to carry all relevant information about hits as doubles. </summary>
@@ -73,10 +81,12 @@ namespace HF::RayTracer {
 
 		/// <summary> Determine whether or not this hitstruct contains a hit. </summary>
 		/// <returns> True if the point hit, false if it did not </returns>
-		bool DidHit() const;
+		inline bool DidHit() const {
+			return DidIntersect(this->meshid);
+		}
 	};
 
-	struct FullRayRequest;
+	struct RayRequest;
 	struct Vertex;
 	struct Triangle;
 
@@ -104,6 +114,28 @@ namespace HF::RayTracer {
 		bool use_precise = false; ///< If true, use custom triangle intersection intersection instead of embree's
 
 		std::vector<RTCGeometry> geometry; //> A list of the geometry being used by RTCScene.
+
+	private:
+		/*! \brief Performs all the necessary operations to set up the scene.
+
+			\details
+			1) Creates device
+			2) Creates the scene using device
+			3) Sets the build quality of the scene
+			4) Sets scene flags
+			5) Inits Intersect context
+
+
+			\remarks
+			Any changes to the internal settings of embree should be handled here. I.E. Enforcing
+			That all bvh's used be of robust quality, assigning a custom context, etc.
+
+		*/
+		void SetupScene();
+
+		/*!\brief Commit geometry and attach it to the scene. */
+		int InsertGeom(RTCGeometry& geom, int id = -1);
+
 
 	public:
 		/// <summary>Create an EmbreeRayTracer with no arguments</summary>
@@ -173,27 +205,10 @@ namespace HF::RayTracer {
 			\returns Committed Geometry containing the specified triangles and vertices.
 		
 		*/
-		RTCGeometry InsertGeometryFromBuffers(std::vector<Triangle>& tris, std::vector<Vertex>& verts);
+		RTCGeometry ConstructGeometryFromBuffers(std::vector<Triangle>& tris, std::vector<Vertex>& verts);
 		
-		/*! \brief Performs all the necessary operations to set up the scene.
-		
-			\details
-			1) Creates device
-			2) Creates the scene using device
-			3) Sets the build quality of the scene
-			4) Sets scene flags
-			5) Inits Intersect context
 
 
-			\remarks
-			Any changes to the internal settings of embree should be handled here. I.E. Enforcing
-			That all bvh's used be of robust quality, assigning a custom context, etc.
-
-		*/
-		void SetupScene();
-
-		/*!\brief Commit geometry and attach it to the scene. */
-		int TryToAddByID(RTCGeometry & geom, int id = -1);
 
 		/// <summary>
 		/// Create a new Raytracer and generate its BVH from a flat array of vertices.
@@ -764,6 +779,8 @@ namespace HF::RayTracer {
 			int mesh_id = -1
 		);
 
+		bool InternalIntersect(float x, float y, float z, float dx, float dy, float dz, float distance, int mesh_id);
+
 		/// <summary> Add a new mesh to this raytracer's BVH with the specified ID. </summary>
 		/// <param name="Mesh"> A vector of 3d points composing the mesh </param>
 		/// <param name="ID"> the id of the mesh </param>
@@ -864,7 +881,7 @@ namespace HF::RayTracer {
 
 			`>>>Mesh insertion okay`\n
 		*/
-		bool EmbreeRayTracer::InsertNewMesh(HF::Geometry::MeshInfo& Mesh, bool Commit);
+		bool InsertNewMesh(HF::Geometry::MeshInfo& Mesh, bool Commit);
 
 		/// <summary> Add several new meshes to the BVH. </summary>
 		/// <param name="Meshes"> A vector of meshinfo to each be added as a seperate mesh. </param>

@@ -17,10 +17,54 @@
 #include <RayRequest.h>
 #include <HFExceptions.h>
 
-namespace HF::RayTracer {
+using std::vector;
 
-	bool HitStruct::DidHit() const { return meshid != RTC_INVALID_GEOMETRY_ID; };
-	bool HitStructD<double>::DidHit() const { return meshid != RTC_INVALID_GEOMETRY_ID; };
+namespace HF::RayTracer {
+	template <typename numeric, typename numeric2, typename dist_type = float>
+	inline RTCRayHit ConstructHit(
+		numeric x, numeric y, numeric z,
+		numeric2 dx, numeric2 dy, numeric2 dz,
+		dist_type distance = -1.0f, int mesh_id = -1) 
+	{
+		// Define an Embree hit data type to store results
+		RTCRayHit hit;
+
+		// Use the referenced values of the x,y,z position as the ray origin
+		hit.ray.org_x = x; hit.ray.org_y = y; hit.ray.org_z = z;
+		// Define the directions 
+		hit.ray.dir_x = dx; hit.ray.dir_y = dy; hit.ray.dir_z = dz;
+
+		hit.ray.tnear = 0.00000001f; // The start of the ray segment
+		hit.ray.tfar = distance > 0 ? distance : INFINITY; // The end of the ray segment
+		hit.ray.time = 0.0f; // Time of ray for motion blur, unrelated to our package
+
+		hit.hit.geomID = RTC_INVALID_GEOMETRY_ID;
+		hit.hit.primID = -1;
+
+		return hit;
+	}
+
+	template <typename numeric, typename numeric2, typename dist_type = float>
+	inline RTCRay ConstructRay(
+		numeric x, numeric y, numeric z,
+		numeric2 dx, numeric2 dy, numeric2 dz,
+		dist_type distance = -1.0f, int mesh_id = -1)
+	{
+		RTCRay ray;
+		ray.org_x = x; ray.org_y = y; ray.org_z = z;
+		ray.dir_x = dx; ray.dir_y = dy; ray.dir_z = dz;
+
+		ray.tnear = 0.0001f;
+		ray.tfar = distance > 0 ? distance : INFINITY;
+		ray.time = 0.0f;
+		ray.flags = 0;
+			
+		return ray;
+	}
+
+	bool DidIntersect(int mesh_id) {
+		return  mesh_id != RTC_INVALID_GEOMETRY_ID;
+	}
 
 	/// <summary>
 	/// Check an embree device for errors.
@@ -82,7 +126,6 @@ namespace HF::RayTracer {
 				}
 				ids[k] = current_id;
 			}
-
 			// Store new triangle in the triangle buffer.
 			Tribuffer.emplace_back(Triangle{ ids[0], ids[1], ids[2] });
 		}
@@ -171,7 +214,7 @@ namespace HF::RayTracer {
 		rtcRetainDevice(device);
 	}
 
-	int EmbreeRayTracer::TryToAddByID(RTCGeometry& geom, int id)
+	int EmbreeRayTracer::InsertGeom(RTCGeometry& geom, int id)
 	{
 		if (id >= 0) {
 			rtcAttachGeometryByID(scene, geom, id);
@@ -182,25 +225,23 @@ namespace HF::RayTracer {
 
 			// Don't know the specific error that will be raised here (Documentation just states some error code)
 			if (error != RTCError::RTC_ERROR_NONE)
-				return TryToAddByID(geom);
+				return InsertGeom(geom);
 		}
-		else
-			return rtcAttachGeometry(scene, geom);
+	
+		return static_cast<int>(rtcAttachGeometry(scene, geom));
 	}
 
 	EmbreeRayTracer::EmbreeRayTracer(const std::vector<std::array<float, 3>>& geometry) {
 		SetupScene();
 
-		for (auto geom : geometry) {
-			// Set Setup buffers
-			std::vector<Triangle> tris;
-			std::vector<Vertex> verts;
-			vectorsToBuffers(geometry, tris, verts);
+		// Set Setup buffers
+		std::vector<Triangle> tris;
+		std::vector<Vertex> verts;
+		vectorsToBuffers(geometry, tris, verts);
 
-			RTCGeometry geom = InsertGeometryFromBuffers(tris, verts);
-			// Cast to triangle/vertex structs so we can operate on them.  This trick is from the embree tutorial
-			TryToAddByID(geom);
-		}
+		RTCGeometry inserted_geom = ConstructGeometryFromBuffers(tris, verts);
+		// Cast to triangle/vertex structs so we can operate on them.  This trick is from the embree tutorial
+		InsertGeom(inserted_geom);
 
 		rtcCommitScene(scene);
 	}
@@ -212,10 +253,10 @@ namespace HF::RayTracer {
 		vectorsToBuffers(Mesh, tris, verts);
 
 		// Add the geometry to embree as a geometry object
-		auto geom = InsertGeometryFromBuffers(tris, verts);
+		auto geom = ConstructGeometryFromBuffers(tris, verts);
 
 		// Add the geometry by ID
-		int added_id = TryToAddByID(geom);
+		int added_id = InsertGeom(geom);
 
 		// Commit the scene if specified
 		if (Commit)
@@ -225,7 +266,7 @@ namespace HF::RayTracer {
 		return (added_id == ID);
 	}
 
-	RTCGeometry EmbreeRayTracer::InsertGeometryFromBuffers(vector<Triangle>& tris, vector<Vertex>& verts) {
+	RTCGeometry EmbreeRayTracer::ConstructGeometryFromBuffers(vector<Triangle>& tris, vector<Vertex>& verts) {
 		// Create new geometry object
 		RTCGeometry geom = rtcNewGeometry(device, RTC_GEOMETRY_TYPE_TRIANGLE);
 
@@ -275,10 +316,10 @@ namespace HF::RayTracer {
 		buffersToStructs(vertices, indices, verts, tris);
 
 		// Construct geometry using embree
-		auto geom = InsertGeometryFromBuffers(tris, verts);
+		auto geom = ConstructGeometryFromBuffers(tris, verts);
 
 		// Add the Mesh to the scene and update it's ID
-		Mesh.meshid = TryToAddByID(geom, Mesh.meshid);
+		Mesh.meshid = InsertGeom(geom, Mesh.meshid);
 
 		// commit if specified
 		if (Commit)
@@ -319,20 +360,7 @@ namespace HF::RayTracer {
 			float distance,
 			int mesh_id) 
 	{
-		// Define an Embree hit data type to store results
-		RTCRayHit hit;
-
-		// Use the referenced values of the x,y,z position as the ray origin
-		hit.ray.org_x = x; hit.ray.org_y = y; hit.ray.org_z = z;
-		// Define the directions 
-		hit.ray.dir_x = dx; hit.ray.dir_y = dy; hit.ray.dir_z = dz;
-
-		hit.ray.tnear = 0.00000001f; // The start of the ray segment
-		hit.ray.tfar = INFINITY; // The end of the ray segment
-		hit.ray.time = 0.0f; // Time of ray for motion blur, unrelated to our package
-
-		hit.hit.geomID = RTC_INVALID_GEOMETRY_ID;
-		hit.hit.primID = -1;
+		auto hit = ConstructHit(x, y, z, dx, dy, dz, distance, mesh_id);
 
 		rtcIntersect1(scene, &context, &hit);
 
@@ -346,7 +374,6 @@ namespace HF::RayTracer {
 		// Use precise intersection if this is specified
 		if (use_precise) {
 			unsigned int geom_id = hit.hit.geomID;
-			auto geometry = this->geometry[geom_id];
 
 			// Construct a Vector3D of the triangle
 			auto triangle = this->GetTriangle(geom_id, hit.hit.primID);
@@ -407,19 +434,7 @@ namespace HF::RayTracer {
 		double distance,	int mesh_id)
 	{
 		// Define an Embree hit data type to store results
-		RTCRayHit hit;
-
-		// Use the referenced values of the x,y,z position as the ray origin
-		hit.ray.org_x = x; hit.ray.org_y = y; hit.ray.org_z = z;
-		// Define the directions 
-		hit.ray.dir_x = dx; hit.ray.dir_y = dy; hit.ray.dir_z = dz;
-
-		hit.ray.tnear = 0.00000001f; // The start of the ray segment
-		hit.ray.tfar = INFINITY; // The end of the ray segment
-		hit.ray.time = 0.0f; // Time of ray for motion blur, unrelated to our package
-
-		hit.hit.geomID = RTC_INVALID_GEOMETRY_ID;
-		hit.hit.primID = -1;
+		auto hit = ConstructHit(x, y, z, dx, dy, dz);
 
 		// Cast the ray and update the hitstruct
 		rtcIntersect1(scene, &context, &hit);
@@ -429,7 +444,6 @@ namespace HF::RayTracer {
 		if (hit.hit.geomID == RTC_INVALID_GEOMETRY_ID || (mesh_id > -1 && hit.hit.geomID != mesh_id)) return HitStruct();
 
 		unsigned int geom_id = hit.hit.geomID;
-		auto geometry = this->geometry[geom_id];
 
 		// Construct a Vector3D of the triangle
 		auto triangle = this->GetTriangle(geom_id, hit.hit.primID);
@@ -513,16 +527,7 @@ namespace HF::RayTracer {
 		float dx, float dy, float dz,
 		float max_distance, int mesh_id
 	) {
-		RTCRayHit hit;
-		hit.ray.org_x = x; hit.ray.org_y = y; hit.ray.org_z = z;
-		hit.ray.dir_x = dx; hit.ray.dir_y = dy; hit.ray.dir_z = dz;
-
-		hit.ray.tnear = 0.0f;
-		hit.ray.tfar = (max_distance > 0) ? max_distance : INFINITY;
-		hit.ray.time = 0.0f;
-
-		hit.hit.geomID = RTC_INVALID_GEOMETRY_ID;
-		hit.hit.primID = -1;
+		RTCRayHit hit = ConstructHit(x, y, z, dx, dy, dz);
 
 		rtcIntersect1(scene, &context, &hit);
 
@@ -543,7 +548,7 @@ namespace HF::RayTracer {
 		float max_distance, bool use_parallel)
 	{
 		std::vector<char> out_array;
-		int cores = std::thread::hardware_concurrency();
+		int cores = static_cast<int> (std::thread::hardware_concurrency());
 		if (origins.size() < cores || directions.size() < cores)
 			// Don't use more cores than there are rays. This caused a hard to find bug earlier.
 			// Doesn't seem to happen with the other ray types. (race condition?)
@@ -600,17 +605,8 @@ namespace HF::RayTracer {
 
 	bool EmbreeRayTracer::FireOcclusionRay(float x, float y, float z, float dx, float dy, float dz, float distance, int mesh_id)
 	{
-		RTCRay ray;
-		ray.org_x = x; ray.org_y = y; ray.org_z = z;
-		ray.dir_x = dx; ray.dir_y = dy; ray.dir_z = dz;
-
-		ray.tnear = 0.0001f;
-		ray.tfar = distance > 0 ? distance : INFINITY;
-		ray.time = 0.0f;
-		ray.flags = 0;
-
+		auto ray = ConstructRay(x, y, z, dx, dy, dz);
 		rtcOccluded1(scene, &context, &ray);
-
 		return ray.tfar == -INFINITY;
 	}
 
@@ -625,11 +621,9 @@ namespace HF::RayTracer {
 
 		rtcRetainScene(scene);
 		rtcRetainDevice(device);
-		//for (auto g : geometry) rtcRetainGeometry(g);
 	}
 
 	EmbreeRayTracer::~EmbreeRayTracer() {
-		//for (auto& g : geometry) rtcReleaseGeometry(g);
 		rtcReleaseScene(scene);
 		rtcReleaseDevice(device);
 	}
