@@ -99,9 +99,6 @@ namespace HF::GraphGenerator{
 			// Overwrite start with the checked start point
 			start = *checked_start;
 
-			// Truncate the start location z value after the raycast
-			//start[2] = trunchf_tmp<real_t>(start[2], params.precision.node_z);
-
 			// add it to the to-do list
 			to_do_list.PushAny(start);
 
