@@ -86,7 +86,7 @@ namespace HF::GraphGenerator{
 		real3 start = real3{
 		  roundhf_tmp<real_t>(start_point[0], params.precision.node_spacing),
 		  roundhf_tmp<real_t>(start_point[1], params.precision.node_spacing),
-		  roundhf_tmp<real_t>(start_point[2], params.precision.node_spacing) 
+		  roundhf_tmp<real_t>(start_point[2], params.precision.node_z) 
 		};
 
 		// Define a queue to use for determining what nodes need to be checked
@@ -100,7 +100,7 @@ namespace HF::GraphGenerator{
 			start = *checked_start;
 
 			// Truncate the start location z value after the raycast
-			start[2] = trunchf_tmp<real_t>(start[2], params.precision.node_z);
+			//start[2] = trunchf_tmp<real_t>(start[2], params.precision.node_z);
 
 			// add it to the to-do list
 			to_do_list.PushAny(start);
