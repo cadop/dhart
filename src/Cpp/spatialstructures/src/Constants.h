@@ -70,10 +70,10 @@ namespace HF {
 		 \param precision Number of digits to round to
 
 		*/
-		template <typename real_t>
-		real_t roundhf_tail(real_t f, int precision)
+		template <typename numeric_type>
+		numeric_type roundhf_tail(numeric_type f, int precision)
 		{
-			double r = 0; // final rounded value
+			numeric_type r = 0; // final rounded value
 			int precision_2 = precision * 10; // the precision one more than the one we are interested in
 			r = std::round(f * precision_2);
 			r = std::round(r * 0.1); // Move decimal one over and round again
