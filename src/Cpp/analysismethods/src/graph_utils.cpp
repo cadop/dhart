@@ -311,7 +311,10 @@ namespace HF::GraphGenerator {
 			// If parent is higher than child, the check is to go downstairs
 			// Since the child is lower, raise the child height by the downstep limit
 			// to be checked for a connection
-			if (node1[2] > node2[2]) {
+			if (parent[2] > child[2]) 
+			{
+				node1 = child;
+				node2 = parent;
 				node1[2] = node1[2] + params.down_step;
 				node2[2] = node2[2] + GROUND_OFFSET;
 				s = STEP::DOWN;
@@ -320,7 +323,10 @@ namespace HF::GraphGenerator {
 			// If parent is lower than child, the check is to go upstairs
 			// Since the child is lower, raise the child height by the upstep limit
 			// to be checked for a connection
-			else if (node1[2] < node2[2]) {
+			else if (node1[2] < node2[2]) 
+			{
+				node1 = parent;
+				node2 = child;
 				node1[2] = node1[2] + params.up_step;
 				node2[2] = node2[2] + GROUND_OFFSET;
 				s = STEP::UP;
@@ -328,7 +334,10 @@ namespace HF::GraphGenerator {
 
 			// If they're on an equal plane then offset by upstep to see
 			// if the obstacle can be stepped over.
-			else if (node1[2] == node2[2]) {
+			else if (node1[2] == node2[2]) 
+			{
+				node1 = parent;
+				node2 = child;
 				node1[2] = node1[2] + params.up_step;
 				node2[2] = node2[2] + GROUND_OFFSET;
 				s = STEP::OVER;
