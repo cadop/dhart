@@ -3,6 +3,7 @@ from humanfactorspy.raytracer import EmbreeBVH
 from humanfactorspy.graphgenerator import GenerateGraph
 
 import humanfactorspy
+import time
 
 # Try to load ujson since it's really fast. Otherwise use normal json
 try:
@@ -18,15 +19,19 @@ bvh = EmbreeBVH(obj,True)
 
 start_point = (-1, -6, 660)
 # start_point = (2519,614,660)
-spacing = (20, 20, 70)
-max_nodes = 50000
+# start_point = (919,374,577+5)
 
+spacing = (10, 10, 70)
+max_nodes = 500000
+
+s = time.time()
 graph = GenerateGraph(bvh, start_point, spacing, max_nodes, 
                         up_step=20, down_step=20, up_slope=40,
                         down_slope= 1, max_step_connections=1, cores=4)
 
 csr_graph = graph.CompressToCSR()
 nodes = graph.getNodes()
+print('Graph Time: ', time.time() - s)
 
 print(len(nodes))
 print(nodes[0:3])
@@ -38,7 +43,7 @@ print("Converting to lists")
 nodes, edges = graph.ConvertToLists()
 print(f"Nodes: {len(nodes)}, Edges:{len(edges)}")
 
-
+ 
 print("Writing to JSON at", json_out_path)
 json_dict = {}
 json_dict["nodes"] = nodes
