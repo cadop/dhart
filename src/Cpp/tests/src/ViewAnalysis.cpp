@@ -288,7 +288,7 @@ TEST(C_ViewAnalysisCInterface, SphericalViewAnalysisAggregate) {
 
 	// Create a new raytracer
 	EmbreeRayTracer* ert;
-	CreateRaytracer(MI, &ert);
+	CreateRaytracer(MI, &ert, false);
 
 	// Create Nodes
 	std::vector<Node> nodes = {
@@ -360,7 +360,7 @@ TEST(C_ViewAnalysisCInterface, SphericalViewAnalysisAggregateFlat) {
 
 	// Create a new raytracer
 	EmbreeRayTracer* ert;
-	CreateRaytracer(MI, &ert);
+	CreateRaytracer(MI, &ert, false);
 
 	// Create Nodes
 	std::vector<float> nodes = {
@@ -463,7 +463,7 @@ TEST(C_ViewAnalysisCInterface, SphericalViewAnalysisNoAggregateFlat) {
 
 	// Create a new raytracer
 	EmbreeRayTracer* ert;
-	CreateRaytracer(MI, &ert);
+	CreateRaytracer(MI, &ert, false);
 
 	// Create Nodes
 	std::vector<float> nodes = {
@@ -540,7 +540,7 @@ TEST(C_ViewAnalysisCInterface, SphericalViewAnalysisNoAggregate) {
 
 	// Create a new raytracer
 	EmbreeRayTracer* ert;
-	CreateRaytracer(MI, &ert);
+	CreateRaytracer(MI, &ert, false);
 
 	// Create Nodes
 	std::vector<Node> nodes = {

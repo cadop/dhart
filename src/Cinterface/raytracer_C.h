@@ -111,6 +111,7 @@ struct RayResult {
 
 	\param	mesh			The meshes to add to raytracer's BVH. 
 	\param	out_raytracer	Output parameter for the new raytracer.
+	\param use_precise If true, use a more precise but slower method of triangle intersections
 	
 	\returns	HF_STATUS::MISSING_DEPEND if Embree's dll couldn't be found. 
 				HF_STATUS::GENERIC_ERROR if <paramref name="mesh"/> is null.
@@ -120,7 +121,8 @@ struct RayResult {
 */
 C_INTERFACE CreateRaytracer(
 	HF::Geometry::MeshInfo * mesh, 
-	HF::RayTracer::EmbreeRayTracer ** out_raytracer
+	HF::RayTracer::EmbreeRayTracer ** out_raytracer,
+	bool use_precise
 );
 
 /*!
@@ -136,7 +138,8 @@ C_INTERFACE CreateRaytracer(
 C_INTERFACE CreateRaytracerMultiMesh(
 	HF::Geometry::MeshInfo** meshes,
 	int num_meshes,
-	HF::RayTracer::EmbreeRayTracer** out_raytracer
+	HF::RayTracer::EmbreeRayTracer** out_raytracer,
+	bool use_precise
 );
 
 
@@ -573,6 +576,8 @@ C_INTERFACE FireOcclusionRays(
 C_INTERFACE DestroyRayResultVector(
 	std::vector<RayResult>* analysis
 );
+
+C_INTERFACE PreciseIntersection(HF::RayTracer::EmbreeRayTracer* RT, double x, double y, double z, double dx, double dy, double dz, double * out_distance);
 
 /**@}*/
 

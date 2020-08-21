@@ -12,7 +12,7 @@ using HF::Geometry::MeshInfo;
 using namespace HF::Exceptions;
 //TODO: Use a template for this
 
-C_INTERFACE CreateRaytracer(MeshInfo * mesh,EmbreeRayTracer** out_raytracer)
+C_INTERFACE CreateRaytracer(MeshInfo * mesh, EmbreeRayTracer** out_raytracer, bool use_precise)
 {
 	// Create the raytracer with the first mesh.
 	try {
@@ -36,10 +36,10 @@ C_INTERFACE CreateRaytracer(MeshInfo * mesh,EmbreeRayTracer** out_raytracer)
 	return GENERIC_ERROR;
 }
 
-C_INTERFACE CreateRaytracerMultiMesh(MeshInfo** meshes, int num_meshes, EmbreeRayTracer** out_raytracer)
+C_INTERFACE CreateRaytracerMultiMesh(MeshInfo** meshes, int num_meshes, EmbreeRayTracer** out_raytracer, bool use_precise)
 {
 	// Create the raytracer with the first mesh.
-	*out_raytracer = new EmbreeRayTracer();
+	*out_raytracer = new EmbreeRayTracer(use_precise);
 	try {
 
 		// Iterate through all of the meshes in our input and add
@@ -280,5 +280,24 @@ C_INTERFACE FireOcclusionRays(EmbreeRayTracer* ert, const float* origins, const 
 
 C_INTERFACE DestroyRayResultVector(std::vector<RayResult>* var) {
 	DeleteRawPtr(var);
+	return OK;
+}
+
+C_INTERFACE PreciseIntersection(
+	HF::RayTracer::EmbreeRayTracer* RT,
+	double x,
+	double y,
+	double z, 
+	double dx,
+	double dy, 
+	double dz, 
+	double * out_distance)
+{
+
+	*out_distance = -1.0;
+	HF::RayTracer::HitStructD<double> hs = RT->PreciseRayIntersect(x, y, z, dx, dy, dz, -1.0, -1);
+	
+	*out_distance = hs.distance;
+
 	return OK;
 }

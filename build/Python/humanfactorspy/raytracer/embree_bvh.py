@@ -17,11 +17,12 @@ class EmbreeBVH(object):
 
     pointer: Union[None, c_void_p] = None  # Pointer to the underlying c-object
 
-    def __init__(self, geometry: MeshInfo):
+    def __init__(self, geometry: MeshInfo, use_precise : bool = False):
         """ Create a new BVH from an existing mesh 
 
         Args:
             geometry: The mesh to create the BVH from. 
+            use_precise : Use a more precise, but slower ray intersection function
         
         Example:
             Creating a BVH from a plane object
@@ -35,7 +36,7 @@ class EmbreeBVH(object):
         """
 
         self.pointer = raytracer_native_functions.CreateRayTracer(
-            geometry._MeshInfo__internal_ptr
+            geometry._MeshInfo__internal_ptr, use_precise
         )
 
     def __del__(self):

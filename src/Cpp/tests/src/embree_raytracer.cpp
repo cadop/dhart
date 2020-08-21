@@ -6,6 +6,9 @@
 #include <embree_raytracer.h>
 #include <robin_hood.h>
 #include <cmath>
+#include <iostream>
+#include <fstream>
+#include <view_analysis.h>
 #include <HFExceptions.h>
 
 #include <objloader_C.h>
@@ -50,6 +53,37 @@ inline float Distance(const array<float, 3>& p1, const array<float, 3>& p2) {
 		+ pow(p1[1] - p2[1], 2)
 		+ pow(p1[2] - p2[2], 2)
 	);
+}
+
+TEST(_Precision, RayTracerConnsistency) {
+	Vector3D v1 = { -32.331123352050781f, -1.3735970258712769f, 0.95155197381973267f };
+	Vector3D v2 = { -29.791582107543945f, -1.3735970258712769f, 1.0780044794082642f };
+	Vector3D v3 = { -29.791582107543945f, 0.36193764209747314f, 1.0795189142227173f };
+
+	Vector3D origin = { -30, 0, 20 };
+	Vector3D direction = { 0,0,-1 };
+
+	printf("height,distance,difference,hash\n");
+	for (int i = 0; i < 1000; i++) {
+
+		origin.z += (static_cast<double>(i) * 0.1);
+	
+		double res = RayTriangleIntersection(
+			origin,
+			direction,
+			v1,
+			v2,
+			v3
+		);
+
+		double distance = res - origin.z;
+		double dist_trunc = std::trunc(distance * 1000000) * 0.0000001;
+		float dist_float = static_cast<float>(dist_trunc);
+
+		//printf("%d,%0.10f,%0.10f, %0.10f, %0.20f, %u\n", i, res, distance, dist_trunc, dist_float, std::hash<double>()(dist_trunc));
+		printf("%d,%0.10f,%0.10f, %0.10f, %a, %u, %u\n", i, res, distance, dist_trunc, dist_float, std::hash<double>()(dist_trunc), std::hash<float>()(dist_float));
+	}
+
 }
 
 TEST(_EmbreeRayTracer, HashAlgorithm) {
@@ -479,7 +513,7 @@ TEST(_EmbreeRayTracer, FireAnyRay) {
 	EmbreeRayTracer ert(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
 
 	// Create a vector of direction and origin arrays.
-	std::array<float, 3> origin{ 0,0,1 };
+	std::array<float, 3> origin{ 0,0.5,1 };
 	std::array<float, 3> direction{ 0,0,-1 };
 
 	bool res = false; float out_dist = -1; int out_id = -1;
@@ -858,7 +892,7 @@ namespace C_Interface{
 
 		// Create RayTracer from the meshinfo we just stored
 		EmbreeRayTracer* ray_tracer;
-		int raytracer_res = CreateRaytracer(MI, &ray_tracer);
+		int raytracer_res = CreateRaytracer(MI, &ray_tracer, false);
 		EXPECT_EQ(HF_STATUS::OK, raytracer_res);
 
 		// Delete the meshinfo to clean up
@@ -937,7 +971,7 @@ namespace C_Interface{
 
 		// Create Raytracer
 		EmbreeRayTracer* ERT;
-		CreateRaytracerMultiMesh(MI, num_meshes, &ERT);
+		CreateRaytracerMultiMesh(MI, num_meshes, &ERT, false);
 
 		// Cast a ray at the ground and ensure it connects
 		float x = 0; float y = 0; float z = 1;

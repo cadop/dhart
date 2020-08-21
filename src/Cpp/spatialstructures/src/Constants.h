@@ -59,6 +59,30 @@ namespace HF {
 		float trunchf(float f, float p = 1000.0, float r = 0.001);
 
 		/*!
+		 \brief round a number twice, once at the precision+1, and again at the precision
+		 This method is to fix cases in which the precision to round to is 4, and the following number is 9.
+		 
+		 \notes It may also be more simply solved by adding some small epsilon before rounding
+
+		 \tparam real_t Type of number to round. Can be float, double, or long double.
+
+		 \param f Value to round.
+		 \param precision Number of digits to round to
+
+		*/
+		template <typename numeric_type>
+		numeric_type roundhf_tail(numeric_type f, int precision)
+		{
+			numeric_type r = 0; // final rounded value
+			int precision_2 = precision * 10; // the precision one more than the one we are interested in
+			r = std::round(f * precision_2);
+			r = std::round(r * 0.1); // Move decimal one over and round again
+			r = r / precision;
+
+			return r;
+		}
+
+		/*!
 			\brief round a number to the nearest precision defined globally. The global values
 				   can be overridden with optional parameters p and r.  If r is 0.01, p must be 100.0, meaning
 				   there should be one more 0 between the decimal.
@@ -92,7 +116,7 @@ namespace HF {
 		*/
 		template <typename desired_type, typename numeric_type>
 		inline constexpr desired_type roundhf_tmp(numeric_type f,	numeric_type p) {
-			return roundhf(static_cast<desired_type>(f), DivideBy1<desired_type>(p), static_cast<desired_type>(p));
+			return roundhf_tmp(static_cast<desired_type>(f), DivideBy1<desired_type>(p), static_cast<desired_type>(p));
 		}
 
 		/*!
@@ -107,7 +131,7 @@ namespace HF {
 			\returns `f` rounded at ROUNDING_PRECISION.
 		*/		template <typename desired_type, typename numeric_type>
 		inline constexpr desired_type roundhf_tmp(numeric_type f) {
-			return roundhf(
+			return roundhf_tmp(
 				static_cast<desired_type>(f),
 				DivideBy1<desired_type>(ROUNDING_PRECISION),
 				static_cast<desired_type>(ROUNDING_PRECISION)
@@ -148,7 +172,7 @@ namespace HF {
 		*/
 		template <typename desired_type, typename numeric_type>
 		inline constexpr desired_type trunchf_tmp(numeric_type f, numeric_type p) {
-			return trunchf(static_cast<desired_type>(f), DivideBy1<desired_type>(p), static_cast<desired_type>(p));
+			return trunchf_tmp(static_cast<desired_type>(f), DivideBy1<desired_type>(p), static_cast<desired_type>(p));
 		}
 		/*!
 			\brief  Truncate a number to the nearest value not greater than itself at a specific precision.
@@ -163,7 +187,7 @@ namespace HF {
 		*/
 		template <typename desired_type, typename numeric_type>
 		inline constexpr desired_type trunchf_tmp(numeric_type f) {
-			return trunchf(
+			return trunchf_tmp(
 				static_cast<desired_type>(f),
 				DivideBy1<desired_type>(ROUNDING_PRECISION),
 				static_cast<desired_type>(ROUNDING_PRECISION)
@@ -184,6 +208,7 @@ namespace HF {
 		inline constexpr desired_type DivideBy1(numeric_type n) {
 			return static_cast<desired_type>(1) /static_cast<desired_type>(n);
 		}
+
 
 	}
 }

@@ -35,9 +35,40 @@ namespace HF::Geometry {
 	\see EmbreeRayTracer For an implementation of a raytracer using Intel's Embree library as a backend.
 */
 namespace HF::RayTracer {
+	struct Vector3D {
+		double x; double y; double z;
+
+		inline Vector3D operator-(const Vector3D& v2) const {
+			return Vector3D{
+				x - v2.x,
+				y - v2.y,
+				z - v2.z
+			};
+		}
+		// Scalar multiplication overload 
+		inline Vector3D operator*(const double&a) const {
+			return Vector3D{
+				a * x,
+				a * y,
+				a * z
+			};
+		}
+	};
+
 	/// <summary> A simple hit struct to carry all relevant information about hits. </summary>
 	struct HitStruct {
 		float distance = -1.0f;  ///< Distance from the origin point to the hit point. Set to -1 if no hit was recorded.
+		unsigned int meshid = -1; ///< The ID of the hit mesh. Set to -1 if no hit was recorded
+
+		/// <summary> Determine whether or not this hitstruct contains a hit. </summary>
+		/// <returns> True if the point hit, false if it did not </returns>
+		bool DidHit() const;
+	};
+
+	/// <summary> A simple hit struct to carry all relevant information about hits as doubles. </summary>
+	template <typename real_t>
+	struct HitStructD {
+		real_t distance = -1.0;  ///< Distance from the origin point to the hit point. Set to -1 if no hit was recorded.
 		unsigned int meshid = -1; ///< The ID of the hit mesh. Set to -1 if no hit was recorded
 
 		/// <summary> Determine whether or not this hitstruct contains a hit. </summary>
@@ -70,6 +101,8 @@ namespace HF::RayTracer {
 		/// Vertex buffer. Is used in multiple places but contents are dumped.
 		Vertex* Vertices;
 
+		bool use_precise = false; ///< If true, use custom triangle intersection intersection instead of embree's
+
 		std::vector<RTCGeometry> geometry; //> A list of the geometry being used by RTCScene.
 
 	public:
@@ -86,7 +119,7 @@ namespace HF::RayTracer {
 				EmbreeRayTracer ert;
 			\endcode
 		*/
-		EmbreeRayTracer();
+		EmbreeRayTracer(bool use_precise = false);
 
 		/// <summary> Create a new EmbreeRayTracer and add a single mesh to the scene. </summary>
 		/// <param name="MI"> The mesh to use for scene construction. </param>
@@ -114,14 +147,14 @@ namespace HF::RayTracer {
 				auto ert = EmbreeRayTracer(geom);
 			\endcode
 		*/
-		EmbreeRayTracer(std::vector<HF::Geometry::MeshInfo>& MI);
+		EmbreeRayTracer(std::vector<HF::Geometry::MeshInfo>& MI, bool use_precise_intersection = false);
 
 		/*! 
 			\brief Construct the raytracer using only a single mesh
 			
 			\param MI MeshInfo instance to create the BVH with.
 		*/
-		EmbreeRayTracer(HF::Geometry::MeshInfo & MI);
+		EmbreeRayTracer(HF::Geometry::MeshInfo& MI, bool use_precise = false);
 
 
 		/*! \brief Construct a raytracer using another raytracer.
@@ -345,6 +378,11 @@ namespace HF::RayTracer {
 			float distance = -1,
 			int mesh_id = -1
 		);
+
+
+		std::array<Vector3D, 3> GetTriangle(int geomID, int primID);
+
+		HitStruct FirePreciseRay(double x, double y, double z, double dx, double dy, double dz, double distance, int mesh_id);	
 
 		/// <summary> Fire multiple rays and recieve hitpoints in return. </summary>
 		/// <param name="origins"> An array of x,y,z coordinates to fire rays from. </param>
@@ -959,20 +997,167 @@ namespace HF::RayTracer {
 			const V& direction,
 			float& out_distance,
 			int& out_meshid,
-			float max_distance = -1.0f
-		) {
-			auto result = Intersect(
-				node[0], node[1], node[2],
-				direction[0], direction[1], direction[2], max_distance
-			);
-
+			float max_distance = -1.0f)
+		{
+			HitStruct result;
+			// Use custom triangle intesection if required
+			if (use_precise)
+			{
+				//HitStructD resultD;
+				result = FirePreciseRay(
+					node[0], node[1], node[2],
+					direction[0], direction[1], direction[2], max_distance, -1
+				);
+				/*
+				// Convert to float
+				if (!resultD.DidHit()) return false;
+				result.distance = resultD.distance;
+				result.meshid = resultD.meshid;
+				*/
+			}
+			else
+			{
+				result = Intersect(
+					node[0], node[1], node[2],
+					direction[0], direction[1], direction[2], max_distance, -1
+				);
+			}
+			// If no intersection was found, return false
 			if (!result.DidHit()) return false;
 			else {
+				// otherwise update outputs then return true
 				out_distance = result.distance;
 				out_meshid = result.meshid;
 				return true;
 			}
 		}
+
+		template <typename N, typename V, typename real_t>
+		bool FireAnyRayD(
+			const N& node,
+			const V& direction,
+			real_t& out_distance,
+			int& out_meshid,
+			float max_distance = -1.0f)
+		{
+			// Use custom triangle intesection if required
+			if (use_precise)
+			{
+				HitStructD<real_t> result;
+				result = PreciseRayIntersect<real_t>(
+					node[0], node[1], node[2],
+					direction[0], direction[1], direction[2], max_distance, -1
+				);
+				// If no intersection was found, return false
+				if (!result.DidHit()) return false;
+				else {
+					// otherwise update outputs then return true
+					out_distance = result.distance;
+					out_meshid = result.meshid;
+					return true;
+				}
+			}
+			else
+			{
+				HitStruct result;
+				result = Intersect(
+					node[0], node[1], node[2],
+					direction[0], direction[1], direction[2], max_distance, -1
+				);
+				// If no intersection was found, return false
+				if (!result.DidHit()) return false;
+				else {
+					// otherwise update outputs then return true
+					out_distance = result.distance;
+					out_meshid = result.meshid;
+					return true;
+				}
+			}
+
+		}
+
+		
+		template <typename real_t>
+		HitStructD<real_t> PreciseRayIntersect(
+			real_t x, real_t y, real_t z,
+			real_t dx, real_t dy, real_t dz,
+			real_t distance = -1, int mesh_id = -1)
+		{
+			// Define an Embree hit data type to store results
+			RTCRayHit hit;
+
+			// Use the referenced values of the x,y,z position as the ray origin
+			hit.ray.org_x = x; hit.ray.org_y = y; hit.ray.org_z = z;
+			// Define the directions 
+			hit.ray.dir_x = dx; hit.ray.dir_y = dy; hit.ray.dir_z = dz;
+
+			hit.ray.tnear = 0.00000001f; // The start of the ray segment
+			hit.ray.tfar = INFINITY; // The end of the ray segment
+			hit.ray.time = 0.0f; // Time of ray for motion blur, unrelated to our package
+
+			hit.hit.geomID = RTC_INVALID_GEOMETRY_ID;
+			hit.hit.primID = -1;
+
+			// Cast the ray and update the hitstruct
+			rtcIntersect1(scene, &context, &hit);
+
+			// If valid geometry was hit, and the geometry matches the caller's desired mesh
+			// (if specified) then update the hitpoint and return
+			if (hit.hit.geomID == RTC_INVALID_GEOMETRY_ID || (mesh_id > -1 && hit.hit.geomID != mesh_id)) return HitStructD<real_t>();
+
+			unsigned int geom_id = hit.hit.geomID;
+			auto geometry = this->geometry[geom_id];
+
+			// Construct a Vector3D of the triangle
+			auto triangle = this->GetTriangle(geom_id, hit.hit.primID);
+
+			// do some multiplications to scale it up before intersection, then back down on return 
+			double ray_distance = RayTriangleIntersection(
+				Vector3D{ x,y,z },
+				Vector3D{ dx,dy,dz },
+				triangle[0],
+				triangle[1],
+				triangle[2]
+			);
+
+			return HitStructD<real_t>{ ray_distance, geom_id };
+		}
+
+		template <typename N, typename V>
+		inline std::vector<HitStruct> FireAnyRayParallel(
+			const N & nodes,
+			const V & directions,
+			float max_distance = -1.0f,
+			const bool force_precise = false,
+			const bool use_parallel = false)
+		{
+			const int n = nodes.size();
+
+			// Only use precision if we have it already enabled, or force_precise is true
+			const bool activate_precise = (use_precise || force_precise);
+			
+			std::vector<HitStruct> results (nodes.size());
+
+			#pragma omp parallel for schedule(dynamic) if (use_parallel)
+			for (int i = 0; i < n; i++) {// Use custom triangle intesection if required
+				const auto& node = nodes[i];
+				const auto& direction = directions[i];
+				if (activate_precise) {
+					results[i] = FirePreciseRay(
+						node[0], node[1], node[2],
+						direction[0], direction[1], direction[2], max_distance, -1
+					);
+				}
+
+				else
+					results[i] = Intersect(
+						node[0], node[1], node[2],
+						direction[0], direction[1], direction[2], max_distance, -1
+					);
+			}
+			return results;
+		}
+
 
 		/// <summary>
 		/// Template for firing rays using array-like containers for the direction and origin.
@@ -1107,5 +1292,57 @@ namespace HF::RayTracer {
 		*/
 		~EmbreeRayTracer();
 	};
+
+	inline Vector3D cross(const Vector3D& x, const Vector3D& y) {
+		return Vector3D{
+			x.y * y.z - y.y * x.z,
+			x.z * y.x - y.z * x.x,
+			x.x * y.y - y.x * x.y
+		};
+	}
+
+	inline double dot(const Vector3D& v1, const Vector3D& v2) {
+		return (v1.x * v2.x + v1.y * v2.y + v1.z * v2.z);
+	}
+
+	inline Vector3D InvertVector(const Vector3D& V) {
+		return Vector3D{ -V.x, -V.y, -V.z };
+	}
+
+	inline double RayTriangleIntersection(
+		const Vector3D& origin,
+		const Vector3D& direction,
+		const Vector3D& v1,
+		const Vector3D& v2,
+		const Vector3D& v3)
+	{
+
+		const double EPSILON = 0.0000001;
+		const Vector3D inverted_direction = direction;//InvertVector(direction);
+
+		const Vector3D edge1 = v2 - v1;
+		const Vector3D edge2 = v3 - v1;
+		const Vector3D h = cross(inverted_direction, edge2);
+		const double a = dot(edge1, h);
+
+		// This ray is parallel to this triangle.
+		if (a > -EPSILON && a < EPSILON)
+			return -1;
+
+		const double f = 1.0 / a;
+		const Vector3D s = origin - v1;
+		const double u = f * dot(s, h);
+		if (u < 0.0 || u > 1.0)
+			return -1;
+
+		const Vector3D q = cross(s, edge1);
+		const double v = f * dot(direction, q);
+		if (v < 0.0 || u + v > 1.0)
+			return -1;
+
+		// At this stage we can compute t to find out where the intersection point is on the line.
+		double t_hit = f* dot(edge2, q);
+		return t_hit;
+	}
 }
 #endif

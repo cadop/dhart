@@ -85,7 +85,7 @@ TEST(_GraphGenerator, BuildNetwork) {
 	auto out_str = PrintGraph(g);
 
 	// Compare output against expected output
-	std::string expected_output = "[(0, 0, 0),(-1, -1, -0),(-1, 0, 0),(-1, 1, 0),(0, -1, -0),(0, 1, 0),(1, -1, -0),(1, 0, 0),(1, 1, 0),(-2, -2, -0),(-2, -1, -0),(-2, 0, 0),(-1, -2, -0),(0, -2, -0),(-2, 1, 0),(-2, 2, 0),(-1, 2, 0),(0, 2, 0),(1, -2, -0)]";
+	std::string expected_output = "[(0, 0, -0),(-1, -1, -0),(-1, 0, -0),(-1, 1, 0),(0, -1, -0),(0, 1, 0),(1, -1, -0),(1, 0, -0),(1, 1, 0),(-2, -2, -0),(-2, -1, -0),(-2, 0, -0),(-1, -2, -0),(0, -2, -0),(-2, 1, 0),(-2, 2, 0),(-1, 2, 0),(0, 2, 0),(1, -2, -0)]";
 	ASSERT_EQ(expected_output, out_str.str());
 }
 
@@ -116,7 +116,8 @@ TEST(_GraphGenerator, CrawlGeom) {
 	// Setup its params struct
 	GG.params.up_step = up_step; GG.params.down_step = down_step;
 	GG.params.up_slope = up_slope; GG.params.down_slope = down_slope;
-	GG.params.precision.ground_offset = 0.001; GG.params.precision.node_z = 0.01f;
+	GG.params.precision.ground_offset = 0.01; 
+	GG.params.precision.node_z = 0.001f;
 	GG.params.precision.node_spacing = 0.001;
 
 	// Assign it's spacing member, making sure to convert it to real3, the graph generator's
@@ -130,7 +131,7 @@ TEST(_GraphGenerator, CrawlGeom) {
 	//! [EX_CrawlGeom]
 	
 	// Define Expected Output
-	std::string expected_output = "[(0, 1, 0),(-1, 0, 0),(-1, 1, 0),(-1, 2, 0),(0, 0, 0),(0, 2, 0),(1, 0, 0),(1, 1, 0),(1, 2, 0),(-2, -1, -0),(-2, 0, 0),(-2, 1, 0),(-1, -1, -0),(0, -1, -0),(-2, 2, 0),(-2, 3, 0),(-1, 3, 0),(0, 3, 0),(1, -1, -0)]";
+	std::string expected_output = "[(0, 1, 0),(-1, 0, -0),(-1, 1, 0),(-1, 2, 0),(0, 0, -0),(0, 2, 0),(1, 0, -0),(1, 1, 0),(1, 2, 0),(-2, -1, -0),(-2, 0, -0),(-2, 1, 0),(-1, -1, -0),(0, -1, -0),(-2, 2, 0),(-2, 3, 0),(-1, 3, 0),(0, 3, 0),(1, -1, -0)]";
 	
 	//! [EX_CrawlGeom_Serial]
 	
@@ -151,7 +152,7 @@ TEST(_GraphGenerator, CrawlGeom) {
 	//! [EX_CrawlGeom_Parallel]
 
 	// CheckParallel
-	std::string expected_parallel = "[(0, 2, 0),(-1, 1, 0),(-1, 2, 0),(-1, 3, 0),(0, 1, 0),(0, 3, 0),(1, 1, 0),(1, 2, 0),(1, 3, 0),(1, 0, 0),(0, -1, -0),(0, 0, 0),(1, -1, -0),(2, -1, -0),(2, 0, 0),(2, 1, 0),(2, 2, 0),(2, 3, 0),(-2, -1, -0),(-3, -2, -0),(-3, -1, -0),(-3, 0, 0),(-2, -2, -0),(-2, 0, 0),(-1, -2, -0),(-1, -1, -0),(-1, 0, 0)]";
+	std::string expected_parallel = "[(0, 2, 0),(-1, 1, 0),(-1, 2, 0),(-1, 3, 0),(0, 1, 0),(0, 3, 0),(1, 1, 0),(1, 2, 0),(1, 3, 0),(1, 0, -0),(0, -1, -0),(0, 0, -0),(1, -1, -0),(2, -1, -0),(2, 0, -0),(2, 1, 0),(2, 2, 0),(2, 3, 0),(-2, -1, -0),(-3, -2, -0),(-3, -1, -0),(-3, 0, -0),(-2, -2, -0),(-2, 0, -0),(-1, -2, -0),(-1, -1, -0),(-1, 0, -0)]";
 	auto parallel_out_str = PrintGraph(g);
 	ASSERT_EQ(expected_parallel, parallel_out_str.str());
 }
@@ -271,6 +272,7 @@ TEST(_GraphGenerator, GeneratePotentialChildren) {
 	// Construct a GraphParams with the spacing filled out
 	HF::GraphGenerator::GraphParams gp;
 	gp.precision.node_spacing = 0.001f;
+	gp.precision.node_z = 0.001f;
 
 	// Call CreateDirecs
 	auto children = HF::GraphGenerator::GeneratePotentialChildren(parent, directions, spacing, gp);
@@ -328,7 +330,7 @@ TEST(_GraphGenerator, GetChildren) {
 
 	ASSERT_LT(0, edges.size());
 
-	std::string expected_output = "[((0, 2, 0), 2.23607, 1),((2, 0, 0), 2.23607, 1)]";
+	std::string expected_output = "[((0, 2, 0), 2.23607, 1),((2, 0, -0), 2.23607, 1)]";
 	ASSERT_EQ(expected_output, out_str.str());
 }
 
@@ -366,7 +368,7 @@ TEST(_GraphGenerator, CheckChildren) {
 
 	//! [EX_CheckChildren]
 
-	std::string expected_output = "[(0, 2, 0),(1, 0, 0),(0, 1, 0),(2, 0, 0)]";
+	std::string expected_output = "[(0, 2, 0),(1, 0, -0),(0, 1, 0),(2, 0, -0)]";
 	ASSERT_EQ(expected_output, out_str.str());
 }
 

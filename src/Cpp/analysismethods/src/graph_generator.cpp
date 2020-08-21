@@ -42,6 +42,7 @@ namespace HF::GraphGenerator{
 	}
 
 
+
 	SpatialStructures::Graph GraphGenerator::IMPL_BuildNetwork(
 		const real3& start_point,
 		const real3& Spacing,
@@ -57,6 +58,15 @@ namespace HF::GraphGenerator{
 		real_t ground_offset)
 	{
 		
+
+		if (ground_offset < node_z_precision)
+		{
+			std::cerr << "Ground offset is less than z-precision. Setting node offset to Z-Precision." << std::endl;
+			ground_offset = node_z_precision;
+			//std::logic_error("Ground offset is less than Z-Precision");
+
+		}
+
 		// Store parameters in params
 		params.down_step = DownStep; params.up_step = UpStep;
 		params.up_slope = UpSlope;	params.down_slope = DownSlope;
@@ -76,7 +86,7 @@ namespace HF::GraphGenerator{
 		real3 start = real3{
 		  roundhf_tmp<real_t>(start_point[0], params.precision.node_spacing),
 		  roundhf_tmp<real_t>(start_point[1], params.precision.node_spacing),
-		  roundhf_tmp<real_t>(start_point[2], params.precision.node_spacing) 
+		  roundhf_tmp<real_t>(start_point[2], params.precision.node_z) 
 		};
 
 		// Define a queue to use for determining what nodes need to be checked
@@ -88,9 +98,6 @@ namespace HF::GraphGenerator{
 		{
 			// Overwrite start with the checked start point
 			start = *checked_start;
-
-			// Truncate the start location z value after the raycast
-			start[2] = trunchf_tmp<real_t>(start[2], params.precision.node_z);
 
 			// add it to the to-do list
 			to_do_list.PushAny(start);

@@ -20,6 +20,7 @@
 namespace HF::RayTracer {
 
 	bool HitStruct::DidHit() const { return meshid != RTC_INVALID_GEOMETRY_ID; };
+	bool HitStructD<double>::DidHit() const { return meshid != RTC_INVALID_GEOMETRY_ID; };
 
 	/// <summary>
 	/// Check an embree device for errors.
@@ -124,13 +125,16 @@ namespace HF::RayTracer {
 		}
 	}
 
-	EmbreeRayTracer::EmbreeRayTracer()
+	EmbreeRayTracer::EmbreeRayTracer(bool use_precise)
 	{
+		this->use_precise = false;
 		SetupScene();
 	}
 
-	EmbreeRayTracer::EmbreeRayTracer(std::vector<HF::Geometry::MeshInfo>& MI) {
+	EmbreeRayTracer::EmbreeRayTracer(std::vector<HF::Geometry::MeshInfo>& MI, bool use_precise) {
 		// Throw if MI's size is less than 0
+		this->use_precise = true;
+
 		if (MI.empty())
 			throw std::logic_error("Embree Ray Tracer was passed an empty vector of mesh info!");
 
@@ -139,8 +143,9 @@ namespace HF::RayTracer {
 		InsertNewMesh(MI, true);
 	}
 
-	EmbreeRayTracer::EmbreeRayTracer(HF::Geometry::MeshInfo& MI) {
+	EmbreeRayTracer::EmbreeRayTracer(HF::Geometry::MeshInfo& MI, bool use_precise) {
 		SetupScene();
+		this->use_precise = use_precise;
 		InsertNewMesh(MI, true);
 	}
 
@@ -322,7 +327,7 @@ namespace HF::RayTracer {
 		// Define the directions 
 		hit.ray.dir_x = dx; hit.ray.dir_y = dy; hit.ray.dir_z = dz;
 
-		hit.ray.tnear = 0.0f; // The start of the ray segment
+		hit.ray.tnear = 0.00000001f; // The start of the ray segment
 		hit.ray.tfar = INFINITY; // The end of the ray segment
 		hit.ray.time = 0.0f; // Time of ray for motion blur, unrelated to our package
 
@@ -335,18 +340,109 @@ namespace HF::RayTracer {
 		// If valid geometry was hit, and the geometry matches the caller's desired mesh
 		// (if specified) then update the hitpoint and return
 		if (hit.hit.geomID == RTC_INVALID_GEOMETRY_ID || (mesh_id > -1 && hit.hit.geomID != mesh_id)) return false;
-		
+
+		auto distance_to_hit = hit.ray.tfar;
+
+		// Use precise intersection if this is specified
+		if (use_precise) {
+			unsigned int geom_id = hit.hit.geomID;
+			auto geometry = this->geometry[geom_id];
+
+			// Construct a Vector3D of the triangle
+			auto triangle = this->GetTriangle(geom_id, hit.hit.primID);
+
+			distance_to_hit = RayTriangleIntersection(
+				Vector3D{ x,y,z },
+				Vector3D{ dx,dy,dz },
+				triangle[0],
+				triangle[1],
+				triangle[2]
+			);
+		}
+
 		// If the ray did hit, update the node position by translating the distance along the directions
 		// This REQUIRES a normalized vector
-		else 
-		{
-			// Translate the point along the direction vector 
-			x = x + (dx * hit.ray.tfar);
-			y = y + (dy * hit.ray.tfar);
-			z = z + (dz * hit.ray.tfar);
+		// Translate the point along the direction vector 
+		x = x + (dx * distance_to_hit);
+		y = y + (dy * distance_to_hit);
+		z = z + (dz * distance_to_hit);
 
-			return true;
-		}
+		return true;
+	}
+
+	inline Vector3D GetPointFromBuffer(int index, Vertex* buffer) {
+		return	Vector3D{buffer[index].x, buffer[index].y,buffer[index].z};
+	}
+
+	std::array<Vector3D, 3> EmbreeRayTracer::GetTriangle(int geomID, int primID)
+	{
+		Triangle* index_buffer = reinterpret_cast<Triangle*>(rtcGetGeometryBufferData(
+			rtcGetGeometry(this->scene, geomID),
+			RTCBufferType::RTC_BUFFER_TYPE_INDEX,
+			0
+		));
+
+		int x_index = index_buffer[primID].v0;
+		int y_index = index_buffer[primID].v1;
+		int z_index = index_buffer[primID].v2;
+
+		Vertex * vertex_buffer = reinterpret_cast<Vertex *>(rtcGetGeometryBufferData(
+			rtcGetGeometry(this->scene, geomID),
+			RTCBufferType::RTC_BUFFER_TYPE_VERTEX,
+			0
+		));
+
+		CheckState(this->device);
+
+		return std::array<Vector3D, 3>{
+				GetPointFromBuffer(x_index, vertex_buffer),
+				GetPointFromBuffer(y_index, vertex_buffer),
+				GetPointFromBuffer(z_index, vertex_buffer)
+		};
+	}
+
+	HitStruct EmbreeRayTracer::FirePreciseRay(
+		double x, double y, double z,
+		double dx, double dy, double dz,
+		double distance,	int mesh_id)
+	{
+		// Define an Embree hit data type to store results
+		RTCRayHit hit;
+
+		// Use the referenced values of the x,y,z position as the ray origin
+		hit.ray.org_x = x; hit.ray.org_y = y; hit.ray.org_z = z;
+		// Define the directions 
+		hit.ray.dir_x = dx; hit.ray.dir_y = dy; hit.ray.dir_z = dz;
+
+		hit.ray.tnear = 0.00000001f; // The start of the ray segment
+		hit.ray.tfar = INFINITY; // The end of the ray segment
+		hit.ray.time = 0.0f; // Time of ray for motion blur, unrelated to our package
+
+		hit.hit.geomID = RTC_INVALID_GEOMETRY_ID;
+		hit.hit.primID = -1;
+
+		// Cast the ray and update the hitstruct
+		rtcIntersect1(scene, &context, &hit);
+
+		// If valid geometry was hit, and the geometry matches the caller's desired mesh
+		// (if specified) then update the hitpoint and return
+		if (hit.hit.geomID == RTC_INVALID_GEOMETRY_ID || (mesh_id > -1 && hit.hit.geomID != mesh_id)) return HitStruct();
+
+		unsigned int geom_id = hit.hit.geomID;
+		auto geometry = this->geometry[geom_id];
+
+		// Construct a Vector3D of the triangle
+		auto triangle = this->GetTriangle(geom_id, hit.hit.primID);
+		
+		double ray_distanceD = RayTriangleIntersection(
+			Vector3D{ x,y,z },
+			Vector3D{ dx,dy,dz },
+			triangle[0],
+			triangle[1],
+			triangle[2]
+		);
+		float ray_distance = static_cast<float>(ray_distanceD);
+		return HitStruct{ ray_distance, geom_id};
 	}
 
 	std::vector<char> EmbreeRayTracer::FireRays(
@@ -421,7 +517,7 @@ namespace HF::RayTracer {
 		hit.ray.org_x = x; hit.ray.org_y = y; hit.ray.org_z = z;
 		hit.ray.dir_x = dx; hit.ray.dir_y = dy; hit.ray.dir_z = dz;
 
-		hit.ray.tnear = 0.00001f;
+		hit.ray.tnear = 0.0f;
 		hit.ray.tfar = (max_distance > 0) ? max_distance : INFINITY;
 		hit.ray.time = 0.0f;
 
@@ -430,7 +526,7 @@ namespace HF::RayTracer {
 
 		rtcIntersect1(scene, &context, &hit);
 
-		return HitStruct{ hit.ray.tfar, hit.hit.geomID };
+		return HitStruct { hit.ray.tfar, hit.hit.geomID };
 	}
 
 	bool EmbreeRayTracer::FireOcclusionRay(
@@ -502,7 +598,6 @@ namespace HF::RayTracer {
 		return out_array;
 	}
 
-
 	bool EmbreeRayTracer::FireOcclusionRay(float x, float y, float z, float dx, float dy, float dz, float distance, int mesh_id)
 	{
 		RTCRay ray;
@@ -521,6 +616,8 @@ namespace HF::RayTracer {
 
 	// Increment reference counters to prevent destruction when this thing goes out of scope
 	void EmbreeRayTracer::operator=(const EmbreeRayTracer& ERT2) {
+
+		this->use_precise = ERT2.use_precise;
 		device = ERT2.device;
 		context = ERT2.context;
 		scene = ERT2.scene;
@@ -536,4 +633,5 @@ namespace HF::RayTracer {
 		rtcReleaseScene(scene);
 		rtcReleaseDevice(device);
 	}
+
 }

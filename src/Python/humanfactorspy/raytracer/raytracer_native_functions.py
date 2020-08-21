@@ -9,11 +9,12 @@ from typing import *
 HFPython = getDLLHandle()
 
 
-def CreateRayTracer(mesh_info_ptr: Union[c_void_p, List[c_void_p]]) -> c_void_p:
-    """[summary]
+def CreateRayTracer(mesh_info_ptr: Union[c_void_p, List[c_void_p]], use_precise: bool) -> c_void_p:
+    """ Create a raytracer from a pointer to valid meshinfo previously created by CreateOBJ
 
     Args:
         mesh_info_ptr (Union[c_void_p, List[c_void_p]]): One or more pointers to MeshInfo objects to construct the BVH fromn
+        use_precise (bool): Use a slower but more accurate ray intersection method where applicable
 
     Raises:
         MissingDependencyException: Embree.dll or tbb.dll could not be loaded.
@@ -25,7 +26,7 @@ def CreateRayTracer(mesh_info_ptr: Union[c_void_p, List[c_void_p]]) -> c_void_p:
 
     # If this isn't a list, only call the function for a single value
     if (not isinstance(mesh_info_ptr, list)):
-        error_code = HFPython.CreateRaytracer(mesh_info_ptr, byref(rt_ptr))
+        error_code = HFPython.CreateRaytracer(mesh_info_ptr, byref(rt_ptr), use_precise)
 
     # If this is a list, call the multi-mesh version
     else:
@@ -304,6 +305,33 @@ def FireMultipleRaysDistance(
         raise Exception("Invalid input")
 
     return (vector_ptr, array_ptr)
+
+def C_PreciseIntersection(bvh_ptr: c_void_p, origin: Tuple[float,float,float], direction: Tuple[float, float, float]) -> float:
+    """ Cast a ray in C++ and get the distance back with double precision
+
+    Args:
+        bvh_ptr (c_void_p): Pointer to a bvh in C++ 
+        origin (Tuple[float,float,float]): Origin of the ray
+        direction (Tuple[float, float, float]): Direction to cast the ray in
+
+    Returns:
+        float: A double precision float containing the distance from the ray to it's point of intersection
+    """
+
+    out_double = c_double(0.0)
+    HFPython.PreciseIntersection(
+        bvh_ptr,
+        c_double(origin[0]),
+        c_double(origin[1]), 
+        c_double(origin[2]),
+        c_double(direction[0]),
+        c_double(direction[1]),
+        c_double(direction[2]), 
+        byref(out_double)
+    )
+
+    return out_double.value
+    
 
 
 def C_AddMeshes(bvh_ptr: c_void_p, mesh_ptrs : List[c_void_p]):

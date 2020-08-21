@@ -717,6 +717,7 @@ namespace HF::SpatialStructures {
 		// Iterate through parent's row to see if it has child.
 		for (EdgeMatrix::InnerIterator it(edge_matrix, parent_index); it; ++it) {
 			if (it.col() == child_index) return true;
+		}
 		
 		// If we've gotten to this point, then the child doesn't exist in parent's row
 		return false;
@@ -781,13 +782,14 @@ namespace HF::SpatialStructures {
 
 		// If this is the default name, check for the cost in the base CSR
 		else if (IsDefaultName(cost_type))
-			return (checkForEdge(parent, child) || (undirected && checkForEdge(child, parent)));
+			return (checkForEdge(parent, child) || ( undirected && checkForEdge(child, parent) ) );
 		
 		// If this isn't the default name, then get it from the cost set it's asking for
 		else {
 			// If this doesn't have the cost array defined before, return
-			if (!this->HasCostArray(cost_type)) return false;
-
+			if (!this->HasCostArray(cost_type)) {
+				return false;
+			}
 			// Otherwise get the cost array and try to find it. 
 			const auto& cost_array = GetCostArray(cost_type);
 			const auto cost = GetCostForSet(cost_array, parent, child);
@@ -796,7 +798,7 @@ namespace HF::SpatialStructures {
 			// with undirected set to false.
 			bool check_undirected = undirected ? HasEdge(child, parent, false, cost_type) : false;
 
-			return !isnan(cost) || check_undirected;
+			return (!isnan(cost) || check_undirected);
 		}
 	}
 

@@ -33,7 +33,7 @@ namespace HumanFactors.RayTracing
             \see EmbreeBVH for more information about the abstraction between
                            raytracers and BVHs.
         */
-		internal static IntPtr C_ConstructRaytracer(IntPtr mesh_info_ptr)
+		internal static IntPtr C_ConstructRaytracer(IntPtr mesh_info_ptr, bool use_precise)
 		{
 
 			// Create a new pointer to hold the output of this function
@@ -41,7 +41,7 @@ namespace HumanFactors.RayTracing
 
 			// Call the function in C++. If this succeeds, then the ret_ptr will be
 			// updated with a pointer to the new object
-			HF_STATUS result = CreateRaytracer(mesh_info_ptr, ref ret_ptr);
+			HF_STATUS result = CreateRaytracer(mesh_info_ptr, ref ret_ptr, use_precise);
 
 			// Right now this is never thrown due to an unset compiler switch. This
 			// is a matter of changing a cmake option though, so it's here for when
@@ -390,7 +390,8 @@ namespace HumanFactors.RayTracing
 		[DllImport(dllpath)]
 		private static extern HF_STATUS CreateRaytracer(
 			IntPtr mesh,
-			ref IntPtr out_raytracer
+			ref IntPtr out_raytracer,
+			bool use_precise
 		);
 
 		[DllImport(dllpath)]
