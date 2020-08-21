@@ -7,7 +7,7 @@ import humanfactorspy.raytracer.raytracer_native_functions as raytracer_native_f
 from humanfactorspy.native_numpy_like import NativeNumpyLike
 from humanfactorspy.utils import is_point
 
-__all__ = ['ResultStruct','RayResultList','isValidBVH','Intersect','IntersectForPoint','IntersectOccluded']
+__all__ = ['ResultStruct','RayResultList','isValidBVH','Intersect','IntersectForPoint','IntersectOccluded', 'IntersectDistanceDouble']
 
 class ResultStruct(ctypes.Structure):
     """ A struct of results containing distance, and meshid 
@@ -329,3 +329,18 @@ def IntersectOccluded(
         return res[0]
     else:
         return res
+
+def IntersectDistanceDouble(bvh: EmbreeBVH, origin:Tuple[float, float, float], direction:Tuple[float, float, float]) -> float:
+    """ Obtain the distance between a raycast and a point of intersection with double precision
+
+    Args:
+        bvh (EmbreeBVH): BVH to intersect with
+        origin (Tuple[float, float, float]): Origin point of the ray
+        direction (Tuple[float, float, float]): Direction the ray is cast in
+
+    Returns:
+        float: Distance from origin to the point of intersection. If this value is less than 1 then 
+                no intersection could be found.
+    """
+   
+    return raytracer_native_functions.C_PreciseIntersection(bvh.pointer, origin, direction)

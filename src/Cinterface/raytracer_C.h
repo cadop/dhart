@@ -262,4 +262,6 @@ C_INTERFACE DestroyRayResultVector(
 	std::vector<RayResult>* analysis
 );
 
+C_INTERFACE PreciseIntersection(HF::RayTracer::EmbreeRayTracer* RT, double x, double y, double z, double dx, double dy, double dz, double * out_distance);
+
 /**@}*/

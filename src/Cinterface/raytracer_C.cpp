@@ -223,3 +223,22 @@ C_INTERFACE DestroyRayResultVector(std::vector<RayResult>* var) {
 	DeleteRawPtr(var);
 	return OK;
 }
+
+C_INTERFACE PreciseIntersection(
+	HF::RayTracer::EmbreeRayTracer* RT,
+	double x,
+	double y,
+	double z, 
+	double dx,
+	double dy, 
+	double dz, 
+	double * out_distance)
+{
+
+	*out_distance = -1.0;
+	HF::RayTracer::HitStructD<double> hs = RT->PreciseRayIntersect(x, y, z, dx, dy, dz, -1.0, -1);
+	
+	*out_distance = hs.distance;
+
+	return OK;
+}

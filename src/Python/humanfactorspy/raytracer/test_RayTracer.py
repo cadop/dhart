@@ -155,7 +155,6 @@ def test_MultiRayDistancereturnType():
     """ Tests if the return type of Intersect is as the
         documentation states
     """
-
     # Setup raytracer
     plane = LoadOBJ(
         humanfactorspy.get_sample_model("plane.obj"),
@@ -194,3 +193,21 @@ def test_FireMultipleRayDistance():
         mesh_id = res[1]
         distance = res[0]
         assert mesh_id >= 0 and distance >= 1
+
+
+def test_DoublePrecisionRayCast():
+    """ Tests if the return type of Intersect is as the
+        documentation states
+    """
+    # Setup raytracer
+    plane = LoadOBJ(
+        humanfactorspy.get_sample_model("plane.obj"),
+        rotation=CommonRotations.Yup_to_Zup,
+    )
+
+    bvh = EmbreeBVH(plane)
+    int_should_hit = IntersectDistanceDouble(bvh, (0,0,100), (0,0,-1))
+    int_should_miss = IntersectDistanceDouble(bvh, (0,0,100), (0,22,0))
+
+    assert(abs(int_should_hit - 100) < 0.00001 )
+    assert(int_should_miss == -1.0)

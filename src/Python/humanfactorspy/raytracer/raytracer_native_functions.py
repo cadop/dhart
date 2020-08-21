@@ -287,6 +287,33 @@ def FireMultipleRaysDistance(
 
     return (vector_ptr, array_ptr)
 
+def C_PreciseIntersection(bvh_ptr: c_void_p, origin: Tuple[float,float,float], direction: Tuple[float, float, float]) -> float:
+    """ Cast a ray in C++ and get the distance back with double precision
+
+    Args:
+        bvh_ptr (c_void_p): Pointer to a bvh in C++ 
+        origin (Tuple[float,float,float]): Origin of the ray
+        direction (Tuple[float, float, float]): Direction to cast the ray in
+
+    Returns:
+        float: A double precision float containing the distance from the ray to it's point of intersection
+    """
+
+    out_double = c_double(0.0)
+    HFPython.PreciseIntersection(
+        bvh_ptr,
+        c_double(origin[0]),
+        c_double(origin[1]), 
+        c_double(origin[2]),
+        c_double(direction[0]),
+        c_double(direction[1]),
+        c_double(direction[2]), 
+        byref(out_double)
+    )
+
+    return out_double.value
+    
+
 
 def DestroyRayTracer(rt_ptr: c_void_p):
     """ Call the destructor for a raytracer """

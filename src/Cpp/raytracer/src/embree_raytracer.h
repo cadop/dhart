@@ -1038,11 +1038,12 @@ namespace HF::RayTracer {
 
 		}
 
+		
 		template <typename real_t>
 		HitStructD<real_t> PreciseRayIntersect(
 			real_t x, real_t y, real_t z,
 			real_t dx, real_t dy, real_t dz,
-			real_t distance, int mesh_id)
+			real_t distance = -1, int mesh_id = -1)
 		{
 			// Define an Embree hit data type to store results
 			RTCRayHit hit;
