@@ -123,7 +123,7 @@ namespace HF::RayTracer {
 			2) Creates the scene using device
 			3) Sets the build quality of the scene
 			4) Sets scene flags
-			5) Inits Intersect context
+			5) Inits IMPL_Intersect context
 
 
 			\remarks
@@ -136,7 +136,76 @@ namespace HF::RayTracer {
 		/*!\brief Commit geometry and attach it to the scene. */
 		int InsertGeom(RTCGeometry& geom, int id = -1);
 
+		double CalculatePreciseDistance(RTCRayHit hit);
 
+		/// <summary> Cast a ray and store all relevant information in a HitStruct. </summary>
+/// <param name="x"> x component of the ray's origin. </param>
+/// <param name="y"> y component of the ray's origin. </param>
+/// <param name="z"> z component of the ray's origin. </param>
+/// <param name="dx"> x component of the ray's direction. </param>
+/// <param name="dy"> y component of the ray's direction. </param>
+/// <param name="dz"> z component of the ray's direction. </param>
+/// <param name="max_distance">
+/// Maximum distance the ray can travel. Any intersections beyond this distance will be
+/// ignored. If set to -1, all intersections will be counted regardless of distance.
+/// </param>
+/// <param name="mesh_id">
+/// (UNIMPLEMENTED) the id of the only mesh for this ray to collide with. Any geometry
+/// wihtout this ID is ignored.
+/// </param>
+/// <returns> A HitStruct containing information about the intersection if any occurred. </returns>
+/**
+	\par Example
+	\code
+		// Requires #include "embree_raytracer.h", #include "meshinfo.h"
+
+		// for brevity
+		using HF::RayTracer::EmbreeRayTracer;
+		using HF::Geometry::MeshInfo;
+
+		// Create Plane
+		const std::vector<float> plane_vertices{
+			-10.0f, 10.0f, 0.0f,
+			-10.0f, -10.0f, 0.0f,
+			10.0f, 10.0f, 0.0f,
+			10.0f, -10.0f, 0.0f,
+		};
+
+		const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
+
+		// Create RayTracer
+		EmbreeRayTracer ert(std::vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+
+		HitStruct res;
+
+		// Fire a ray straight down
+		res = ert.IMPL_Intersect(0, 0, 1, 0, 0, -1);
+
+		// Print distance if it connected
+		if (res.DidHit()) std::cerr << res.distance << std::endl;
+		else std::cerr << "Miss" << std::endl;
+
+		// Fire a ray straight up
+		res = ert.IMPL_Intersect(0, 0, 1, 0, 0, 1);
+
+		//Print distance if it connected
+		if (res.DidHit()) std::cerr << res.distance << std::endl;
+		else std::cerr << "Miss" << std::endl;
+	\endcode
+
+	`>>>1`\n
+	`>>>Miss`
+ */
+		RTCRayHit IMPL_Intersect(
+			float x,
+			float y,
+			float z,
+			float dx,
+			float dy,
+			float dz,
+			float max_distance = -1,
+			int mesh_id = -1
+		);
 	public:
 		/// <summary>Create an EmbreeRayTracer with no arguments</summary>
 
@@ -207,9 +276,6 @@ namespace HF::RayTracer {
 		*/
 		RTCGeometry ConstructGeometryFromBuffers(std::vector<Triangle>& tris, std::vector<Vertex>& verts);
 		
-
-
-
 		/// <summary>
 		/// Create a new Raytracer and generate its BVH from a flat array of vertices.
 		/// </summary>
@@ -487,75 +553,6 @@ namespace HF::RayTracer {
 			std::vector<std::array<float, 3>>& origins,
 			std::vector<std::array<float, 3>>& directions,
 			bool use_parallel = true,
-			float max_distance = -1,
-			int mesh_id = -1
-		);
-
-		/// <summary> Cast a ray and store all relevant information in a HitStruct. </summary>
-		/// <param name="x"> x component of the ray's origin. </param>
-		/// <param name="y"> y component of the ray's origin. </param>
-		/// <param name="z"> z component of the ray's origin. </param>
-		/// <param name="dx"> x component of the ray's direction. </param>
-		/// <param name="dy"> y component of the ray's direction. </param>
-		/// <param name="dz"> z component of the ray's direction. </param>
-		/// <param name="max_distance">
-		/// Maximum distance the ray can travel. Any intersections beyond this distance will be
-		/// ignored. If set to -1, all intersections will be counted regardless of distance.
-		/// </param>
-		/// <param name="mesh_id">
-		/// (UNIMPLEMENTED) the id of the only mesh for this ray to collide with. Any geometry
-		/// wihtout this ID is ignored.
-		/// </param>
-		/// <returns> A HitStruct containing information about the intersection if any occurred. </returns>
-		/**
-			\par Example
-			\code
-				// Requires #include "embree_raytracer.h", #include "meshinfo.h"
-
-				// for brevity
-				using HF::RayTracer::EmbreeRayTracer;
-				using HF::Geometry::MeshInfo;
-
-				// Create Plane
-				const std::vector<float> plane_vertices{
-					-10.0f, 10.0f, 0.0f,
-					-10.0f, -10.0f, 0.0f,
-					10.0f, 10.0f, 0.0f,
-					10.0f, -10.0f, 0.0f,
-				};
-
-				const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
-
-				// Create RayTracer
-				EmbreeRayTracer ert(std::vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
-
-				HitStruct res;
-
-				// Fire a ray straight down
-				res = ert.Intersect(0, 0, 1, 0, 0, -1);
-
-				// Print distance if it connected
-				if (res.DidHit()) std::cerr << res.distance << std::endl;
-				else std::cerr << "Miss" << std::endl;
-
-				// Fire a ray straight up
-				res = ert.Intersect(0, 0, 1, 0, 0, 1);
-
-				//Print distance if it connected
-				if (res.DidHit()) std::cerr << res.distance << std::endl;
-				else std::cerr << "Miss" << std::endl;
-			\endcode
-
-			`>>>1`\n
-			`>>>Miss`
-		 */
-		HitStruct Intersect(
-			float x,
-			float y,
-			float z,
-			float dx,
-			float dy,
-			float dz,
 			float max_distance = -1,
 			int mesh_id = -1
 		);
@@ -990,6 +987,124 @@ namespace HF::RayTracer {
 				bool res = false; float out_dist = -1; int out_id = -1;
 
 				// Fire a ray straight down
+				res = ert.Intersect(origin, direction, out_dist, out_id);
+
+				// Print its distance if it connected
+				if (res) std::cerr << out_dist << std::endl;
+				else std::cerr << "Miss" << std::endl;
+
+				// Fire a ray straight up
+				res = ert.Intersect(origin, origin, out_dist, out_id);
+
+				// Print its distance if it connected
+				if (res) std::cerr << out_dist << std::endl;
+				else std::cerr << "Miss" << std::endl;
+			\endcode
+
+			`>>>(0, 0, 0)`\n
+			`>>>Miss`
+
+		*/
+		template <class N, class V>
+		HitStruct Intersect(
+			const N& node,
+			const V& direction,
+			float max_distance = -1.0f, int mesh_id = -0.1f)
+		{
+
+			// create output value
+			HitStruct out_struct = { -1.0, -1.0 };
+
+			// Cast the ray
+			auto result = IMPL_Intersect(
+				node[0], node[1], node[2],
+				direction[0], direction[1], direction[2], max_distance, -1
+			);
+
+			// If an intersection occured, update the struct. 
+			if (DidIntersect(result.hit.geomID))
+			{
+				out_struct.distance = this->use_precise ? result.tfar : CalculatePreciseDistance(result);
+				out_struct.meshid = out_struct.meshid;
+			}
+
+			return out_struct;
+		}
+
+		template <typename numeric1 = double, typename numeric2 = double>
+		HitStruct Intersect(
+				numeric1 x, numeric1 y, numeric1 z,
+				numeric2 dx, numeric2 dy, numeric2 dz,
+				numeric1 distance = -1.0f, int mesh_id = -1)
+		{
+			// create output value
+			HitStruct out_struct = { -1.0, -1.0 };
+
+			// Cast the ray
+			auto result = IMPL_Intersect(
+				x,y,z,
+				dx,dy,dz, distance, mesh_id
+			);
+
+			// If an intersection occured, update the struct. 
+			if (DidIntersect(result.hit.geomID))
+			{
+				out_struct.distance = this->use_precise ? result.ray.tfar : CalculatePreciseDistance(result);
+				out_struct.meshid = out_struct.meshid;
+			}
+
+			return out_struct;
+		}
+
+
+		/// <summary>
+		/// Template for firing rays using array-like containers for the direction and origin.
+		/// </summary>
+		/// <param name="node"> A point in space. Must atleast have [0], [1], and [2] defined </param>
+		/// <param name="direction">
+		/// Direction to fire the ray in. Same constraints as node, but can be a different type
+		/// </param>
+		/// <param name="out_distance"> distance from the ray to the hit (if any) </param>
+		/// <param name="out_meshid"> ID of the mesh hit(if any) </param>
+		/// <param name="max_distance">
+		/// Maximum distance the ray can travel. And intersections beyond this distance will be
+		/// ignored. Will consider all intersections regardless of distance if set to -1.
+		/// </param>
+		/// <returns> True if the ray intersected any geometry, false otherwise. </returns>
+		/// <remarks>
+		/// This is preferrable to use over the other ray functions in many circumstances since
+		/// the use of templates ensures no unnecessary conversions are performed.
+		/// </remarks>
+		/// \note C++ 2020's Concepts would be a good way to explain how to use this whenever
+		/// they get implemented.
+		/*!
+			\par Example
+			\code
+				// Requires #include "embree_raytracer.h", #include "meshinfo.h"
+
+				// for brevity
+				using HF::RayTracer::EmbreeRayTracer;
+				using HF::Geometry::MeshInfo;
+
+				const std::vector<float> plane_vertices{
+					-10.0f, 10.0f, 0.0f,
+					-10.0f, -10.0f, 0.0f,
+					10.0f, 10.0f, 0.0f,
+					10.0f, -10.0f, 0.0f,
+				};
+
+				const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
+
+				// Create a new raytracer from a basic 10x10 plane centered on the origin.
+				EmbreeRayTracer ert(std::vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+
+				// Create origin/direction arrays
+				std::array<float, 3> origin{ 0, 0, 1 };
+				std::array<float, 3> direction{ 0, 0, -1 };
+
+				bool res = false; float out_dist = -1; int out_id = -1;
+
+				// Fire a ray straight down
 				res = ert.FireAnyRay(origin, direction, out_dist, out_id);
 
 				// Print its distance if it connected
@@ -1077,7 +1192,7 @@ namespace HF::RayTracer {
 			else
 			{
 				HitStruct result;
-				result = Intersect(
+				result = Intersect<float, float>(
 					node[0], node[1], node[2],
 					direction[0], direction[1], direction[2], max_distance, -1
 				);
@@ -1090,7 +1205,6 @@ namespace HF::RayTracer {
 					return true;
 				}
 			}
-
 		}
 
 		
@@ -1178,7 +1292,7 @@ namespace HF::RayTracer {
 
 		/// <summary>
 		/// Template for firing rays using array-like containers for the direction and origin.
-		/// Similar to <see cref="FireAnyRay" />.
+		/// Similar to <see cref="Intersect" />.
 		/// </summary>
 		/// <param name="node"> A point in space. Must atleast have [0], [1], and [2] defined. </param>
 		/// <param name="direction">

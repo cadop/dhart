@@ -20,9 +20,9 @@
 using std::vector;
 
 namespace HF::RayTracer {
-	template <typename numeric, typename numeric2, typename dist_type = float>
+	template <typename numeric1, typename numeric2, typename dist_type = float>
 	inline RTCRayHit ConstructHit(
-		numeric x, numeric y, numeric z,
+		numeric1 x, numeric1 y, numeric1 z,
 		numeric2 dx, numeric2 dy, numeric2 dz,
 		dist_type distance = -1.0f, int mesh_id = -1) 
 	{
@@ -44,9 +44,9 @@ namespace HF::RayTracer {
 		return hit;
 	}
 
-	template <typename numeric, typename numeric2, typename dist_type = float>
+	template <typename numeric1, typename numeric2, typename dist_type = float>
 	inline RTCRay ConstructRay(
-		numeric x, numeric y, numeric z,
+		numeric1 x, numeric1 y, numeric1 z,
 		numeric2 dx, numeric2 dy, numeric2 dz,
 		dist_type distance = -1.0f, int mesh_id = -1)
 	{
@@ -522,16 +522,16 @@ namespace HF::RayTracer {
 		return out_results;
 	}
 
-	HitStruct EmbreeRayTracer::Intersect(
+	RTCRayHit EmbreeRayTracer::IMPL_Intersect(
 		float x, float y, float z,
 		float dx, float dy, float dz,
-		float max_distance, int mesh_id
-	) {
+		float max_distance, int mesh_id)
+	{
 		RTCRayHit hit = ConstructHit(x, y, z, dx, dy, dz);
 
 		rtcIntersect1(scene, &context, &hit);
 
-		return HitStruct { hit.ray.tfar, hit.hit.geomID };
+		return hit;
 	}
 
 	bool EmbreeRayTracer::FireOcclusionRay(
