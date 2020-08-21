@@ -712,10 +712,10 @@ namespace HF::SpatialStructures {
 
 		// If the parent is not even in the graph, or the graph doesn't have any zeros, return early. 
 		// Calling the iterator in both of these cases is undefined behavior and should be avoided
-		if (edge_matrix.nonZeros() <= 0 || edge_matrix.rows() < parent) return false;
+		if (edge_matrix.nonZeros() <= 0 || edge_matrix.rows() <= parent) return false;
 	
 		// Iterate through parent's row to see if it has child.
-		for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, parent_index); it; ++it)
+		for (EdgeMatrix::InnerIterator it(edge_matrix, parent_index); it; ++it) {
 			if (it.col() == child_index) return true;
 		
 		// If we've gotten to this point, then the child doesn't exist in parent's row
