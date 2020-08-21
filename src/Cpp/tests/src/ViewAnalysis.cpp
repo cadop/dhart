@@ -240,7 +240,6 @@ TEST(_ViewAnalysis, SphericalViewAnalysis_LoadedMesh) {
 	DestroyRayTracer(bvh);
 }
 
-/*
 TEST(_ViewAnalysis, AllRaysHit) {
 	auto MI = LoadMeshObjects(big_teapot_path);
 	EmbreeRayTracer ERT(MI);
@@ -317,7 +316,7 @@ TEST(_ViewAnalysis, AggregateAverage)
 #undef min
 #undef max
 
-// Define values
+	// Define values
 	std::vector<int> values = { 1, 2, 3, 4, 5 };
 
 	// Calculate Average
@@ -354,76 +353,6 @@ TEST(_ViewAnalysis, AggregateAverage)
 	for (int val : values) Aggregate(total, val, AGGREGATE_TYPE::COUNT);
 	std::cerr << "Count: " << total << std::endl;
 	ASSERT_EQ(total, 5);
-}
-
-TEST(_ViewAnalysis, SphericalViewAnalysis) {
-	struct SampleResults {
-		float dist = -1.0f;
-		inline void SetHit(
-			const std::array<float, 3>& node,
-			const std::array<float, 3>& direction,
-			float distance,
-			int meshID
-		) {
-			dist = distance;
-		}
-	};
-
-	// Use this so we can fit within 80 characters
-	using HF::ViewAnalysis::SphericalViewAnalysis;
-	using HF::RayTracer::EmbreeRayTracer;
-
-	// Create Plane
-	const std::vector<float> plane_vertices{
-		-10.0f, 10.0f, 0.0f,
-		-10.0f, -10.0f, 0.0f,
-		10.0f, 10.0f, 0.0f,
-		10.0f, -10.0f, 0.0f,
-	};
-	const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
-
-	// Create RayTracer
-	EmbreeRayTracer ert(std::vector<MeshInfo>{
-		MeshInfo(plane_vertices, plane_indices, 0, " ")}
-	);
-
-	// Define observer points
-	std::vector<std::array<float, 3>> points{
-		{0,0,0}, {1,1,0}, {1,2,0}, {1000, 1000, 0}
-	};
-
-	// Perform View Analysis
-	int num_rays = 50;
-	auto results = SphericalViewAnalysis<SampleResults>(ert, points, num_rays);
-
-	// Determine how many directions there were
-	int num_directions = results.size() / points.size();
-
-	// Construct a vector from the results of the first node
-	std::vector<SampleResults> first_results(
-		results.begin(), results.begin() + num_directions
-	);
-
-	// Print Results
-	std::cerr << "(";
-	for (int i = 0; i < first_results.size(); i++) {
-		const auto& result = first_results[i];
-		std::cerr << result.dist;
-
-		if (i != first_results.size() - 1) std::cerr << ", ";
-	}
-	std::cerr << ")" << std::endl;
-
-	// Compare results with expected results
-	std::vector<float> first_five_expected_results{ -1, 7.35812, -1, -1, 3.70356, -1 };
-	std::vector<float> last_five_expected_results = { -1, 6.80486, -1, 5.12012, -1 };
-	std::vector<SampleResults> actual_first_five(first_results.begin(), first_results.begin() + 5);
-	std::vector<SampleResults> actual_last_five(first_results.end() - 5, first_results.end());
-
-	for (int i = 0; i < 5; i++) {
-		ASSERT_NEAR(actual_first_five[i].dist, first_five_expected_results[i], 0.00001f);
-		ASSERT_NEAR(actual_last_five[i].dist, last_five_expected_results[i], 0.00001f);
-	}
 }
 
 TEST(_ViewAnalysis, ViewAnalysisAggregate) {
@@ -484,7 +413,8 @@ TEST(C_ViewAnalysisCInterface, SphericalViewAnalysisAggregate) {
 	const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 	// Create and allocate a new instacnce of meshinfo
-	std::vector<MeshInfo>* MI;
+	MeshInfo* MI = nullptr;
+
 	auto MIR = StoreMesh(
 		&MI,
 		plane_indices.data(),
@@ -556,7 +486,8 @@ TEST(C_ViewAnalysisCInterface, SphericalViewAnalysisAggregateFlat) {
 	const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 	// Create and allocate a new instacnce of meshinfo
-	std::vector<MeshInfo>* MI;
+	MeshInfo* MI = nullptr;
+
 	auto MIR = StoreMesh(
 		&MI,
 		plane_indices.data(),
@@ -648,7 +579,6 @@ TEST(C_ViewAnalysisCInterface, SphericalDistribute)
 	DestroyFloatVector(out_float);
 }
 
-
 TEST(C_ViewAnalysisCInterface, SphericalViewAnalysisNoAggregateFlat) {
 	// Create Plane
 	const std::vector<float> plane_vertices{
@@ -660,7 +590,8 @@ TEST(C_ViewAnalysisCInterface, SphericalViewAnalysisNoAggregateFlat) {
 	const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 	// Create and allocate a new instacnce of meshinfo
-	std::vector<MeshInfo>* MI;
+	MeshInfo* MI = nullptr;
+
 	auto MIR = StoreMesh(
 		&MI,
 		plane_indices.data(),
@@ -737,7 +668,8 @@ TEST(C_ViewAnalysisCInterface, SphericalViewAnalysisNoAggregate) {
 	const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 	// Create and allocate a new instacnce of meshinfo
-	std::vector<MeshInfo>* MI;
+	MeshInfo* MI = nullptr;
+
 	auto MIR = StoreMesh(
 		&MI,
 		plane_indices.data(),
@@ -802,4 +734,3 @@ TEST(C_ViewAnalysisCInterface, SphericalViewAnalysisNoAggregate) {
 	DestroyMeshInfo(MI);
 	DestroyRayTracer(ert);
 }
-*/
