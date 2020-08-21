@@ -139,10 +139,9 @@ namespace HF::GraphGenerator {
 
 			// Move it in direction
 			MoveNode(dist, direction, *return_pt);
-			// double temp_diff = (origin[2]) - dist; // Sanity check for direction -1 to see influence of movenode arithmetic 
-			// Truncate the Z value before leaving this function
-			// This is for clarity, since the node was already modified
-			return_pt.pt[2] = trunchf_tmp<real_t>(return_pt.pt[2], node_z_tolerance);
+			//double temp_diff = (origin[2]) - dist; // Sanity check for direction -1 to see influence of movenode arithmetic 
+			// Round the position to the z value tolerance
+			return_pt.pt[2] = HF::SpatialStructures::roundhf_tail<real_t>(return_pt.pt[2], 1/node_z_tolerance);
 
 			// Return the optional point
 			return return_pt;
