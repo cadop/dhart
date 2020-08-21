@@ -72,6 +72,7 @@ def run():
 
     # start_location = (-30,0,20)
     start_location = (-1,-6,660)
+    # start_location = (919,374,577+5)
     x_offset = 20
     y_offset = 20
     # x_offset = 1
@@ -84,7 +85,7 @@ def run():
     cross_slope = 80
     width = 0
     max_connection = 1
-    max_nodes = 50000
+    max_nodes = 500000
 
     # start_location = (2519,614,661)
     # spacing = (25, 25, 70)
@@ -104,15 +105,15 @@ def run():
     print(len(graph.keys()))
     print('Time: ', time.time() - s)
 
-    # dups = []
-    # for n1 in graph.keys():
-    #     for n2 in graph.keys():
-    #         if n1 == n2: continue
-    #         if (abs(n1[0]-n2[0])<5) and (abs(n1[1]-n2[1])<5) and (abs(n1[2]-n2[2])<5):
-    #             dups.append((n1,n2))
-    #             break
+    dups = []
+    for n1 in graph.keys():
+        for n2 in graph.keys():
+            if n1 == n2: continue
+            if (abs(n1[0]-n2[0])<5) and (abs(n1[1]-n2[1])<5) and (abs(n1[2]-n2[2])<5):
+                dups.append((n1,n2))
+                break
 
-    # print(dups)
+    print(dups)
 
     #gd.storeDefaultGraphData('c_test',graph)
 

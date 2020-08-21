@@ -18,7 +18,8 @@ import math
 
 from humanfactorspy.raytracer import (EmbreeBVH,Intersect,
                                         IntersectForPoint,
-                                        IntersectOccluded)
+                                        IntersectOccluded,
+                                        IntersectDistanceDouble)
 
 checked_rays_mod = {}
 # checked_rays_dst = {}
@@ -31,9 +32,10 @@ def cast_ray(geom, p1, dir, pos=False ):
     if pos:
         return IntersectForPoint(geom, p1, dir)
 
-    dist, _ = Intersect(geom, (p1[0], p1[1], p1[2]), (dir[0], dir[1], dir[2]), -1)
+    dist = IntersectDistanceDouble(geom, (p1[0], p1[1], p1[2]), (dir[0], dir[1], dir[2]))
     
-    return mu.trunc(dist) 
+    return dist
+    return mu.trunc(dist,p=16) 
 
 
 def rhinoRayMod(geom,p1,direc):

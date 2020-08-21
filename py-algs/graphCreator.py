@@ -37,8 +37,8 @@ def check_floor(parent,child,geom,graphParams):
     else:
         # This is where the child is actually defined as it is the intersection
         #  point with the floor
-        nodePos = child[0],child[1],mu.trailing_round(child[2]-res,2)
-        
+        nodePos = child[0],child[1],mu.trailing_round(child[2]-res,8)
+        # This must be 
         if (parent[2]-nodePos[2]) > graphParams.get('downstep'):#downstep_limit:
             return None
         #if the child is higher than the parent
@@ -56,7 +56,7 @@ def check_start(child,geom):
         return None    
         
     else:
-        nodePos = child[0],child[1],mu.trailing_round(child[2]-res,2) #should match check_floor tolerance
+        nodePos = child[0],child[1],mu.trailing_round(child[2]-res,8) #should match check_floor tolerance
         return nodePos      
 
 def checkConnection(parent,child,testPnt,geom,obstacles,graphParams):    
