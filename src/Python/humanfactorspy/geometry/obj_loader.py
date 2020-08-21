@@ -1,14 +1,13 @@
-from typing import Tuple
-from enum import IntEnum as Enum
+from typing import Tuple, Union, List
+from enum import IntEnum
 
 from . import meshinfo_native_functions
 from . import MeshInfo
 
 __all__ = ['OBJGroupType','LoadOBJ']
 
-class OBJGroupType(Enum):
+class OBJGroupType(IntEnum):
     """ Different methods to seperate several meshes from a single OBJ """
-
     ONLY_FILE = 0  # Assign the same ID to all geometry in this file
     BY_GROUP = 1  # Assign different OBJ groups, different OBJs
     BY_MATERIAL = 2  # Seperate geometry based on material
@@ -16,9 +15,9 @@ class OBJGroupType(Enum):
 
 def LoadOBJ(
     path: str,
-    group_type: OBJGroupType = OBJGroupType.ONLY_FILE,
+    group_type: OBJGroupType = 0,
     rotation: Tuple[float, float, float] = (0, 0, 0),
-) -> MeshInfo:
+) -> Union[MeshInfo, List[MeshInfo]]:
     """ Load an obj file from the given path. 
     
     Args:
@@ -30,8 +29,9 @@ def LoadOBJ(
     
     Returns:
         MeshInfo: A new meshinfo object containing a the vertices and triangles
-            for the obj in path.
-   
+            for the obj in path. If group_type is not ONLY_FILE, a list of meshes
+            may be returned if submeshes are found. 
+
     Raises:
         humanfactorspy.Exceptions.InvalidOBJException: The OBJ at path
             either did not exist or could not be loaded
@@ -59,5 +59,10 @@ def LoadOBJ(
 
     """
 
-    mesh_ptr = meshinfo_native_functions.CreateOBJ(path, OBJGroupType, rotation)
-    return MeshInfo(mesh_ptr)
+    mesh_ptr = meshinfo_native_functions.CreateOBJ(path, group_type, rotation)
+
+    # Check return type. If multiple meshes were reutrned, then make a list
+    if (not isinstance(mesh_ptr, list)):
+        return MeshInfo(mesh_ptr)
+    else:
+        return [MeshInfo(ptr) for ptr in mesh_ptr]

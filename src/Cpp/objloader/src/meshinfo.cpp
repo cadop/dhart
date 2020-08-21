@@ -29,10 +29,10 @@ namespace HF::Geometry {
 		VectorsToBuffers(vertices);
 
 		// Throw if a NAN was placed into the mesh. 
-		if (verts.hasNaN()) throw std::exception("NAN DETECTED ON INPUT");
+		if (verts.hasNaN()) throw HF::Exceptions::InvalidOBJ();
 	
 		meshid = id;
-		name = n;
+		this->name = name;
 	}
 
 	inline void MeshInfo::SetVert(int index, float x, float y, float z)
@@ -150,7 +150,7 @@ namespace HF::Geometry {
 		std::move(in_indexes.begin(), in_indexes.end(), indices.data());
 
 		meshid = id;
-		name = name;
+		this->name = name;
 	}
 
 	void MeshInfo::AddVerts(const vector<array<float, 3>>& in_vertices)
@@ -214,6 +214,7 @@ namespace HF::Geometry {
 		q.normalize();
 		Eigen::Matrix3f rotation_matrix = q.toRotationMatrix();
 
+		//! [snippet_objloader_assert]
 		// Assert that we didn't create any NANS or infinite values
 		assert(rotation_matrix.allFinite());
 
@@ -222,6 +223,7 @@ namespace HF::Geometry {
 
 		// Once again assert that we didn't create any nans or infinite numbers.
 		assert(verts.allFinite());
+		//! [snippet_objloader_assert]
 	}
 
 	int MeshInfo::GetMeshID() const { return meshid; }
@@ -299,5 +301,23 @@ namespace HF::Geometry {
 				return false;
 		}
 		return true;
+	}
+
+	const array_and_size<int> MeshInfo::GetIndexPointer() const {
+		array_and_size<int> ret_array;
+
+		ret_array.size = indices.size();
+		ret_array.data = const_cast<int*>(indices.data());
+		
+		return ret_array;
+	}
+
+	const array_and_size<float> MeshInfo::GetVertexPointer() const {
+		array_and_size<float> ret_array;
+
+		ret_array.size = verts.size();
+		ret_array.data = const_cast<float*>(verts.data());
+
+		return ret_array;
 	}
 }

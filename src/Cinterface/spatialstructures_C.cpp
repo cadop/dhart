@@ -359,7 +359,7 @@ C_INTERFACE DeleteScoreArray(char** scores_to_delete, int num_char_arrays) {
 		// The heap knows how big these arrays are. 
 		for (int i = 0; i < num_char_arrays; i++) {
 			char* score_string = scores_to_delete[i];
-			delete[](score_string); // Explictly delete the char array at victim
+			delete score_string; // Explictly delete the char array at victim
 		}
 	}
 	return OK;

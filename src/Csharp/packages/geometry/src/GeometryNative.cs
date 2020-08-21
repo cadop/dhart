@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.CodeDom;
 using System.ComponentModel;
+using System.Diagnostics;
 
 namespace HumanFactors.Geometry
 {
@@ -16,6 +17,13 @@ namespace HumanFactors.Geometry
 	/*! \brief Native methods for the Geometry namespace */
 	internal static class NativeMethods
 	{
+		internal struct TrisAndVertsReturn {
+			public IntPtr tri_ptr;
+			public IntPtr vert_ptr;
+			public int tris;
+			public int verts;
+		}
+
 
 		/// <summary>
 		/// Path to the HumanFactors dll copied from <see cref="NativeConstants"/>.
@@ -35,13 +43,14 @@ namespace HumanFactors.Geometry
             \throws System.IO.FileNotFoundException No file was found at `path`.
 			\throws HumanFactors.Exceptions.InvalidMeshException The file at `path` did not represent a valid OBJ.
        */
-		internal static IntPtr C_LoadOBJ(string obj_path, float xrot, float yrot, float zrot)
+		internal static IntPtr[] C_LoadOBJ(string obj_path, float xrot, float yrot, float zrot, GROUP_METHOD gm)
 		{
 			// Create a pointer as an output parameter
 			IntPtr out_ptr = new IntPtr();
 
 			// Call the function in C++ and capture the error code
-			HF_STATUS res = LoadOBJ(obj_path, obj_path.Length, xrot, yrot, zrot, ref out_ptr);
+			int num_meshes = 0;
+			HF_STATUS res = LoadOBJ(obj_path, (int)gm, xrot, yrot, zrot, ref out_ptr, ref num_meshes);
 
 			// If the file was not found, throw the standard file not found exception
 			if (res == HF_STATUS.NOT_FOUND)
@@ -51,10 +60,56 @@ namespace HumanFactors.Geometry
 			else if (res == HF_STATUS.INVALID_MESH)
 				throw new InvalidMeshException(obj_path + " did not lead to an obj file, or the obj file was invalid!");
 
-			// Return the pointer 
-			return out_ptr;
+			// Iterate through the returned pointer array, and marshall each of it's pointers
+			// into managed memory
+			IntPtr[] out_ptrs = new IntPtr[num_meshes];
+			//for (int i = 0; i < num_meshes; i++)
+			//	out_ptrs[i] = Marshal.ReadIntPtr(out_ptr, i * sizeof(IntPtr));
+
+			Marshal.Copy(out_ptr, out_ptrs, 0, num_meshes);
+
+			// Free the memory allocated by C++ for the pointer array
+			DestroyMeshInfoPtrArray(out_ptr);	
+		
+			// Return managed pointer array
+			return out_ptrs;
 		}
 
+		/*! \brief Get the ID of an instance of MeshInfo in c++.
+			\param mesh_ptr Mesh to get the ID of
+			\returns the ID of the mesh in native memory
+		*/
+		internal static int GetMeshID(IntPtr mesh_ptr)
+		{
+			// Create an output parameter then call the native function
+			int out_int = -1;
+			GetMeshID(mesh_ptr, ref out_int);
+
+			// Assert it's different then return
+			Debug.Assert(out_int != -1, "out_int didn't get updated");
+			return out_int;
+		}
+
+
+		/*! \brief Get the name of an instance of MeshInfo in c++.
+			\param mesh_ptr Mesh to get the Name of
+			\returns the Name of the mesh in native memory
+		*/
+		internal static string GetMeshName(IntPtr mesh_ptr)
+		{
+			// Create an output parameter then call the native function
+			IntPtr out_string = new IntPtr();
+			GetMeshName(mesh_ptr, ref out_string);
+
+			// Copy the string into managed memory. If it's corrupted in some way
+			// then that will be reflected in a crash here
+			String ManagedString = Marshal.PtrToStringAnsi(out_string);
+
+			// Free the char array allocated by C++ now that we have the string
+			DestroyCharArray(out_string);
+
+			return ManagedString;
+		}
 
 		/*!
             \brief Construct an instance of meshinfo in native memory.
@@ -97,6 +152,19 @@ namespace HumanFactors.Geometry
 			return out_ptr;
 		}
 
+		/*! \brief Get pointers to the vertex and index arrays of a mesh in C++
+			\param MI the mesh to get the vertex and index arrays of.
+			\returns POinters and sizes of the index and verted arrays of `MI`.
+		*/
+		internal static TrisAndVertsReturn C_GetTrisAndVerts(IntPtr MI)
+		{
+			TrisAndVertsReturn ret = new TrisAndVertsReturn();
+
+			GetVertsAndTris(MI, ref ret.tri_ptr, ref ret.tris, ref ret.vert_ptr, ref ret.verts);
+
+			return ret;
+		}
+
 		/*! 
             \brief Rotate an instance of MeshInfo
            
@@ -112,11 +180,12 @@ namespace HumanFactors.Geometry
 		[DllImport(dllpath, CharSet = CharSet.Ansi)]
 		private static extern HF_STATUS LoadOBJ(
 			string obj_paths,
-			int length,
+			int group_method,
 			float yrot,
 			float xrot,
 			float zrot,
-			ref IntPtr out_mesh_info
+			ref IntPtr out_mesh_info,
+			ref int num_meshes
 		);
 
 		[DllImport(dllpath, CharSet = CharSet.Ansi)]
@@ -137,5 +206,21 @@ namespace HumanFactors.Geometry
 
 		[DllImport(dllpath, CharSet = CharSet.Ansi)]
 		internal static extern HF_STATUS RotateMesh(IntPtr Meshinfo, float xrot, float yrot, float zrot);
+
+		[DllImport(dllpath, CharSet = CharSet.Ansi)]
+		internal static extern HF_STATUS DestroyMeshInfoPtrArray(IntPtr data_array);
+
+		[DllImport(dllpath, CharSet = CharSet.Ansi)]
+		internal static extern HF_STATUS GetMeshName(IntPtr MeshInfo, ref IntPtr out_name);
+
+		[DllImport(dllpath, CharSet = CharSet.Ansi)]
+		internal static extern HF_STATUS GetMeshID(IntPtr MeshInfo, ref int out_id);
+
+		[DllImport(dllpath, CharSet = CharSet.Ansi)]
+		internal static extern HF_STATUS GetVertsAndTris(IntPtr MI, ref IntPtr index_out, ref int num_triangles, ref IntPtr vertex_out, ref int num_vertices);
+
+		[DllImport(dllpath, CharSet = CharSet.Ansi)]
+		internal static extern HF_STATUS DestroyCharArray(IntPtr char_array);
+
 	}
 }

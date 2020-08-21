@@ -211,3 +211,27 @@ def test_DoublePrecisionRayCast():
 
     assert(abs(int_should_hit - 100) < 0.00001 )
     assert(int_should_miss == -1.0)
+
+    
+def test_BVHConstructionWithMultipleMeshes():
+    # Insert multiple objs into a bvh on creation. This should crash if it isn't implemented properly.
+    objs = LoadOBJ(humanfactorspy.get_sample_model("sponza.obj"), group_type=1)
+    bvh = EmbreeBVH(objs)
+
+def test_addmeshestobvh():
+    # Load Meshinfos required for this test
+    base_obj = LoadOBJ(humanfactorspy.get_sample_model("plane.obj"), group_type=1)
+    objs_to_add = LoadOBJ(humanfactorspy.get_sample_model("sponza.obj"), group_type=1)
+    single_obj = LoadOBJ(humanfactorspy.get_sample_model("teapot.obj"), group_type=1)
+
+    # Create a new BVH From the plane. at this point it shouldn't intersect
+    BVH = EmbreeBVH(base_obj)
+    assert not IntersectOccluded(BVH, (0, 0, 1), (0, 0, -1), -1)
+
+    # Add the teapot to the plane. At this point it should intersect
+    BVH.AddMesh(single_obj)
+    assert IntersectOccluded(BVH, (0, 0, 1), (0, 0, -1), -1)
+
+    # Add every mesh in sponza. This should still intersect.
+    BVH.AddMesh(objs_to_add)
+    assert IntersectOccluded(BVH, (0, 0, 1), (0, 0, -1), -1)

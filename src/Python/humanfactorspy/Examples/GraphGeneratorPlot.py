@@ -110,6 +110,7 @@ import humanfactorspy
 
 # Get a sample model path
 obj_path = humanfactorspy.get_sample_model("energy_blob_zup.obj")
+print(obj_path)
 
 # Load the obj file
 obj = LoadOBJ(obj_path)

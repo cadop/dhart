@@ -119,7 +119,7 @@ namespace HF::RayTracer {
 				EmbreeRayTracer ert;
 			\endcode
 		*/
-		EmbreeRayTracer() {}
+		EmbreeRayTracer(bool use_precise = false);
 
 		/// <summary> Create a new EmbreeRayTracer and add a single mesh to the scene. </summary>
 		/// <param name="MI"> The mesh to use for scene construction. </param>
@@ -149,6 +149,13 @@ namespace HF::RayTracer {
 		*/
 		EmbreeRayTracer(std::vector<HF::Geometry::MeshInfo>& MI, bool use_precise_intersection = false);
 
+		/*! 
+			\brief Construct the raytracer using only a single mesh
+			
+			\param MI MeshInfo instance to create the BVH with.
+		*/
+		EmbreeRayTracer(HF::Geometry::MeshInfo& MI, bool use_precise = false);
+
 
 		/*! \brief Construct a raytracer using another raytracer.
 		
@@ -156,6 +163,37 @@ namespace HF::RayTracer {
 					 context. 
 		*/
 		EmbreeRayTracer(const EmbreeRayTracer& ERT2);
+
+		/*! 
+			\brief Create a new instance of RTCGeometry from a triangle and vertex buffer
+
+			\param tris Triangle buffer to construct new geometry with
+			\param verts Vertex buffer to construct geometry with
+
+			\returns Committed Geometry containing the specified triangles and vertices.
+		
+		*/
+		RTCGeometry InsertGeometryFromBuffers(std::vector<Triangle>& tris, std::vector<Vertex>& verts);
+		
+		/*! \brief Performs all the necessary operations to set up the scene.
+		
+			\details
+			1) Creates device
+			2) Creates the scene using device
+			3) Sets the build quality of the scene
+			4) Sets scene flags
+			5) Inits Intersect context
+
+
+			\remarks
+			Any changes to the internal settings of embree should be handled here. I.E. Enforcing
+			That all bvh's used be of robust quality, assigning a custom context, etc.
+
+		*/
+		void SetupScene();
+
+		/*!\brief Commit geometry and attach it to the scene. */
+		int TryToAddByID(RTCGeometry & geom, int id = -1);
 
 		/// <summary>
 		/// Create a new Raytracer and generate its BVH from a flat array of vertices.

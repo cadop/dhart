@@ -9,11 +9,12 @@
 
 #include <Graph.h>
 #include <algorithm>
-#include <math.h>
+#include <cmath>
 #include <Constants.h>
-#include <assert.h>
+#include <cassert>
 #include <HFExceptions.h>
 #include <numeric>
+#include <iostream>
 
 using namespace Eigen;
 using std::vector;
@@ -87,7 +88,7 @@ namespace HF::SpatialStructures {
 	}
 
 	template<typename csr>
-	inline float IMPL_GetCost(const csr & c, int parent, int child) {
+	inline int IMPL_GetCost(const csr & c, int parent, int child) {
 
 		// Get the inner and outer index array pointers of the CSR
 		const auto outer_index_ptr = c.outerIndexPtr();
@@ -282,7 +283,7 @@ namespace HF::SpatialStructures {
 
 				// Get the child id and cost of this edge
 				const int child_id = edge.child;
-				const int cost = edge.weight;
+				const float cost = edge.weight;
 
 				// Insert this edge into cost_set
 				InsertEdgeIntoCostSet(parent_id, child_id, cost, cost_set);
@@ -446,7 +447,7 @@ namespace HF::SpatialStructures {
 			// If this is zero this function won't work. 
 			if (count == 0) count = 1;
 
-			out_total = out_total + (new_value - out_total) / count;
+			out_total = out_total + (new_value - out_total) / static_cast<float>(count);
 			count++;
 			break;
 		}
@@ -709,9 +710,14 @@ namespace HF::SpatialStructures {
 		const int parent_index = parent;
 		const int child_index = child;
 
+		// If the parent is not even in the graph, or the graph doesn't have any zeros, return early. 
+		// Calling the iterator in both of these cases is undefined behavior and should be avoided
+		if (edge_matrix.nonZeros() <= 0 || edge_matrix.rows() <= parent) return false;
+	
 		// Iterate through parent's row to see if it has child.
-		for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, parent_index); it; ++it)
+		for (EdgeMatrix::InnerIterator it(edge_matrix, parent_index); it; ++it) {
 			if (it.col() == child_index) return true;
+		}
 		
 		// If we've gotten to this point, then the child doesn't exist in parent's row
 		return false;

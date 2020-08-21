@@ -12,21 +12,80 @@ using HF::Geometry::MeshInfo;
 using namespace HF::Exceptions;
 //TODO: Use a template for this
 
-C_INTERFACE CreateRaytracer(vector<MeshInfo>* mesh, EmbreeRayTracer** out_raytracer, bool use_precise)
+C_INTERFACE CreateRaytracer(MeshInfo * mesh, EmbreeRayTracer** out_raytracer, bool use_precise)
 {
-	// Throw if an invalid list was passed to us
-	if (!mesh) {
-		return HF_STATUS::GENERIC_ERROR;
-	}
+	// Create the raytracer with the first mesh.
+	try {
 
-	try { // to create the raytracer
-		auto& meshes = *mesh;
-		*out_raytracer = new EmbreeRayTracer(meshes, use_precise);
+		// Iterate through all of the meshes in our input and add
+		// them to the raytracer
+		*out_raytracer = new EmbreeRayTracer(*mesh);
 		return OK;
 	}
 	// Thrown if Embree is missing
-	catch (const HF::Exceptions::MissingDependency & e) { return MISSING_DEPEND; }
+	catch (const HF::Exceptions::MissingDependency & e) { 
+		if (*out_raytracer != NULL)
+			delete *out_raytracer;
+		return MISSING_DEPEND; 
+	}
+	catch (const HF::Exceptions::InvalidOBJ & e) {
+		if (*out_raytracer != NULL)
+			delete *out_raytracer;
+		return INVALID_OBJ;
+	}
 	return GENERIC_ERROR;
+}
+
+C_INTERFACE CreateRaytracerMultiMesh(MeshInfo** meshes, int num_meshes, EmbreeRayTracer** out_raytracer, bool use_precise)
+{
+	// Create the raytracer with the first mesh.
+	*out_raytracer = new EmbreeRayTracer(use_precise);
+	try {
+
+		// Iterate through all of the meshes in our input and add
+		// them to the raytracer
+		for (int i = 0; i < num_meshes; i++) {
+			// Only commit to scene if this is the final mesh in the array
+			bool should_commit = (i == num_meshes - 1);
+
+			(*out_raytracer)->InsertNewMesh(*(meshes[i]), should_commit);
+		}
+
+		return OK;
+	}
+	// Thrown if Embree is missing
+	catch (const HF::Exceptions::MissingDependency& e) {
+		if (*out_raytracer != NULL)
+			delete* out_raytracer;
+		return MISSING_DEPEND;
+	}
+	catch (const HF::Exceptions::InvalidOBJ& e) {
+		if (*out_raytracer != NULL)
+			delete* out_raytracer;
+		return INVALID_OBJ;
+	}
+	return GENERIC_ERROR;
+}
+
+
+C_INTERFACE AddMeshes(HF::RayTracer::EmbreeRayTracer* ERT, HF::Geometry::MeshInfo ** MI, int number_of_meshes)
+{
+	// Iterate through each input mesh, only committing the scene
+	// at the final mesh. 
+	for (int i = 0; i < number_of_meshes; i++) {
+		bool should_commit = (i == number_of_meshes - 1);
+	
+		ERT->InsertNewMesh(*(MI[i]), should_commit);
+	}
+
+	return HF_STATUS::OK;
+}
+
+C_INTERFACE AddMesh(HF::RayTracer::EmbreeRayTracer* ERT, HF::Geometry::MeshInfo* MI)
+{
+	ERT->InsertNewMesh(*MI, true);
+
+	return HF_STATUS::OK;
 }
 
 C_INTERFACE DestroyRayTracer(HF::RayTracer::EmbreeRayTracer* rt_to_destroy)

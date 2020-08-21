@@ -9,27 +9,46 @@ from typing import *
 HFPython = getDLLHandle()
 
 
-def CreateRayTracer(mesh_info_ptr: c_void_p, use_precise: bool) -> c_void_p:
+def CreateRayTracer(mesh_info_ptr: Union[c_void_p, List[c_void_p]], use_precise: bool) -> c_void_p:
     """ Create a raytracer from a pointer to valid meshinfo previously created by CreateOBJ
 
+    Args:
+        mesh_info_ptr (Union[c_void_p, List[c_void_p]]): One or more pointers to MeshInfo objects to construct the BVH fromn
+        use_precise (bool): Use a slower but more accurate ray intersection method where applicable
+
     Raises:
-        HF.Exceptions.MissingDependencyExceptio : If Embree DLL couldn't be found
+        MissingDependencyException: Embree.dll or tbb.dll could not be loaded.
+
     Returns:
-        c_void_p: A pointer to a fully constructed EmbreeRayTracer
+        c_void_p: A pointer to the newly created BVH
     """
     rt_ptr = c_void_p(0)
 
-    error_code = HFPython.CreateRaytracer(mesh_info_ptr, byref(rt_ptr), use_precise)
+    # If this isn't a list, only call the function for a single value
+    if (not isinstance(mesh_info_ptr, list)):
+        error_code = HFPython.CreateRaytracer(mesh_info_ptr, byref(rt_ptr), use_precise)
 
-    if error_code == HF_STATUS.OK:
-        pass
-    elif error_code == HF_STATUS.MISSING_DEPEND:
+    # If this is a list, call the multi-mesh version
+    else:
+        
+        # Create an array of c_void_p and fill it with values from input array
+        num_ptrs = len(mesh_info_ptr)
+        meshinfo_ptrs = (c_void_p * len(mesh_info_ptr))()
+        for i in range(0, num_ptrs):
+            meshinfo_ptrs[i] = mesh_info_ptr[i]
+
+        # Create the raytracer
+        error_code = HFPython.CreateRaytracerMultiMesh(
+            meshinfo_ptrs, num_ptrs, byref(rt_ptr)
+        )
+
+    if error_code == HF_STATUS.MISSING_DEPEND:
         raise MissingDependencyException
-    elif error_code == HF_STATUS.GENERIC_ERROR:
-        raise HFException
 
+    assert(error_code == HF_STATUS.OK)
+
+    # Return raytracer
     return rt_ptr
-
 
 def FireRay(
     rt_ptr: c_void_p,
@@ -315,10 +334,25 @@ def C_PreciseIntersection(bvh_ptr: c_void_p, origin: Tuple[float,float,float], d
     
 
 
+def C_AddMeshes(bvh_ptr: c_void_p, mesh_ptrs : List[c_void_p]):
+    """ Add meshes to a bvh in C++
+
+    Args:
+        bvh_ptr (c_void_p): Pointer to the raytracer to add meshes to
+        mesh_ptrs (List[c_void_p]): Pointers to MeshInfos to add to the bvh
+    """
+    # Create a ctypes array of pointers and insert thes epointersj
+    num_meshes = len(mesh_ptrs)
+    pointer_array = (c_void_p * num_meshes)()
+    for i in range(0, num_meshes):
+        pointer_array[i] = mesh_ptrs[i]
+
+    # Call C++ function to add the meshinfos
+    HFPython.AddMeshes(bvh_ptr, pointer_array, c_int(num_meshes))
+
 def DestroyRayTracer(rt_ptr: c_void_p):
     """ Call the destructor for a raytracer """
     HFPython.DestroyRayTracer(rt_ptr)
-
 
 def DestroyRayResultVector(vector_ptr):
     HFPython.DestroyRayResultVector(vector_ptr)
