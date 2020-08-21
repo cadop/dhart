@@ -217,6 +217,25 @@ TEST(_ViewAnalysis, SphericalViewAnalysis_LoadedMesh) {
 	}
 	std::cerr << ")" << std::endl;
 
+	// Compare results with expected results
+	std::vector<float> first_ten_expected_results {
+		-1.0f, -1.0f, -1.0f, -1.0f, 16.0640736f,
+		-1.0f, -1.0f, -1.0f, -1.0f, 9.80201912f
+	};
+
+	std::vector<float> last_ten_expected_results {
+		14.6495285f, -1.0f, -1.0f, 11.0168362f, -1.0f,
+		-1.0f, -1.0f, -1.0f, -1.0f, -1.0f
+	};
+
+	std::vector<SampleResults> actual_first_ten { first_results.begin(), first_results.begin() + 10 };
+	std::vector<SampleResults> actual_last_ten { first_results.end() - 10, first_results.end() };
+
+	for (int i = 0; i < 10; i++) {
+		ASSERT_NEAR(actual_first_ten[i].dist, first_ten_expected_results[i], 0.00001f);
+		ASSERT_NEAR(actual_last_ten[i].dist, last_ten_expected_results[i], 0.00001f);
+	}
+
 	delete loaded_obj;
 	DestroyRayTracer(bvh);
 }
