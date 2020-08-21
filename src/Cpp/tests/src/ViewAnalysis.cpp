@@ -18,6 +18,7 @@
 #include <raytracer_C.h>
 #include <objloader_C.h>
 #include <HFExceptions.h>
+#include <Constants.h>
 
 using namespace HF;
 using HF::SpatialStructures::Graph;
@@ -30,7 +31,215 @@ using namespace HF::Geometry;
 // to about 6.7 x 4 x 3.14. Has 3,238 vertices, 6,320 triangles. Copied to the directory
 // of the test executable when the project is built.
 std::string big_teapot_path = "big_teapot.obj";
-/*!
+
+TEST(_ViewAnalysis, SphericalViewAnalysis) {
+	struct SampleResults {
+		float dist = -1.0f;
+		inline void SetHit(
+			const std::array<float, 3>& node,
+			const std::array<float, 3>& direction,
+			float distance,
+			int meshID
+		) {
+			dist = distance;
+		}
+	};
+
+	// Use this so we can fit within 80 characters
+	using HF::ViewAnalysis::SphericalViewAnalysis;
+	using HF::RayTracer::EmbreeRayTracer;
+
+	// Create Plane
+	const std::vector<float> plane_vertices {
+		-10.0f, 10.0f, 0.0f,
+		-10.0f, -10.0f, 0.0f,
+		10.0f, 10.0f, 0.0f,
+		10.0f, -10.0f, 0.0f,
+	};
+
+	const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
+
+	// Create RayTracer
+	EmbreeRayTracer ert(std::vector<MeshInfo> {
+		MeshInfo(plane_vertices, plane_indices, 0, " ")}
+	);
+
+	// Define observer points
+	std::vector<std::array<float, 3>> points {
+		{ 0.0f, 0.0f, 0.0f }, 
+		{ 1.0f, 1.0f, 0.0f }, 
+		{ 1.0f, 2.0f, 0.0f }, 
+		{ 1000.0f, 1000.0f, 0.0f }
+	};
+
+	// Perform View Analysis
+	int num_rays = 50;
+	auto results = SphericalViewAnalysis<SampleResults>(ert, points, num_rays);
+
+	// Determine how many directions there were
+	int num_directions = results.size() / points.size();
+
+	// Construct a vector from the results of the first node
+	std::vector<SampleResults> first_results(
+		results.begin(), results.begin() + num_directions
+	);
+
+	// Print Results
+	std::cerr << "(";
+	for (int i = 0; i < first_results.size(); i++) {
+		const auto& result = first_results[i];
+		std::cerr << result.dist;
+
+		if (i != first_results.size() - 1) std::cerr << ", ";
+	}
+	std::cerr << ")" << std::endl;
+
+	// Compare results with expected results
+	std::vector<float> first_five_expected_results { -1.0f, 7.35812f, -1.0f, -1.0f, 3.70356f, -1.0f };
+	std::vector<float> last_five_expected_results { -1.0f, 6.80486f, -1.0f, 5.12012f, -1.0f };
+	std::vector<SampleResults> actual_first_five(first_results.begin(), first_results.begin() + 5);
+	std::vector<SampleResults> actual_last_five(first_results.end() - 5, first_results.end());
+
+	for (int i = 0; i < 5; i++) {
+		/*
+			The ASSERT_NEAR macro evaluates to this:
+			----------------------------------------
+			  ASSERT_PRED_FORMAT3(::testing::internal::DoubleNearPredFormat, \
+					  val1, val2, abs_error)
+
+			::testing::internal::DoubleNearPredFormat is a function with this definition:
+			-----------------------------------------------------------------------------
+				// Helper function for implementing ASSERT_NEAR.
+				AssertionResult DoubleNearPredFormat(const char* expr1,
+													 const char* expr2,
+													 const char* abs_error_expr,
+													 double val1,
+													 double val2,
+													 double abs_error) {
+				  const double diff = fabs(val1 - val2);
+				  if (diff <= abs_error) return AssertionSuccess();
+
+				  return AssertionFailure()
+					  << "The difference between " << expr1 << " and " << expr2
+					  << " is " << diff << ", which exceeds " << abs_error_expr << ", where\n"
+					  << expr1 << " evaluates to " << val1 << ",\n"
+					  << expr2 << " evaluates to " << val2 << ", and\n"
+					  << abs_error_expr << " evaluates to " << abs_error << ".";
+				}
+		*/
+		ASSERT_NEAR(actual_first_five[i].dist, first_five_expected_results[i], 0.00001f);
+		ASSERT_NEAR(actual_last_five[i].dist, last_five_expected_results[i], 0.00001f);
+	}
+}
+
+TEST(_ViewAnalysis, SphericalViewAnalysis_LoadedMesh) {
+	struct SampleResults {
+		float dist = -1.0f;
+		inline void SetHit(
+			const std::array<float, 3>& node,
+			const std::array<float, 3>& direction,
+			float distance,
+			int meshID
+		) {
+			dist = distance;
+		}
+	};
+
+	// Use this so we can fit within 80 characters
+	using HF::ViewAnalysis::SphericalViewAnalysis;
+	using HF::RayTracer::EmbreeRayTracer;
+
+	const std::string obj_path_str = "plane.obj";
+
+	// Load mesh, z-up
+	const std::array<float, 3> rot{ 90.0f, 0.0f, 0.0f };
+	HF::Geometry::MeshInfo** loaded_obj = nullptr;
+	int num_meshes = -1;
+	LoadOBJ(obj_path_str.c_str(), HF::Geometry::GROUP_METHOD::ONLY_FILE, rot[0], rot[1], rot[2], &loaded_obj, &num_meshes);
+
+	// Ensure loaded_obj not null
+	ASSERT_TRUE(loaded_obj != nullptr);
+
+	// Create BVH
+	EmbreeRayTracer* bvh = nullptr;
+	CreateRaytracer(*loaded_obj, &bvh);
+
+	// Ensure bvh not null
+	ASSERT_TRUE(bvh != nullptr);
+
+	std::array<float, 3> p1{ 0.0f, 0.0f, -1.0f };
+
+	const int node_count = 1;
+	int ray_count = 1000;
+	const float height = 1.7f;
+	const float upward_fov = 50.0f;
+	const float downward_fov = 70.0f;
+
+	// Define observer points
+	std::vector<std::array<float, 3>> points {
+		{ 0.0f, 0.0f, 0.0f },
+		{ 1.0f, 1.0f, 0.0f },
+		{ 1.0f, 2.0f, 0.0f },
+		{ 1000.0f, 1000.0f, 0.0f }
+	};
+
+	std::vector<SampleResults> results 
+		= SphericalViewAnalysis<SampleResults>(
+			*bvh, 
+			points, 
+			ray_count, 
+			upward_fov, 
+			downward_fov, 
+			height
+		);
+
+	// Determine how many directions there were
+	int num_directions = results.size() / points.size();
+
+	// num_directions is expected to be 999.
+	ASSERT_EQ(num_directions, 999);
+
+	// Construct a vector from the results of the first node
+	std::vector<SampleResults> first_results(
+		results.begin(), results.begin() + num_directions
+	);
+
+	// first_results.size() is expected to be 999.
+	ASSERT_EQ(first_results.size(), num_directions);
+
+	// Print Results
+	std::cerr << "(";
+	for (int i = 0; i < first_results.size(); i++) {
+		const auto& result = first_results[i];
+		std::cerr << result.dist;
+
+		if (i != first_results.size() - 1) std::cerr << ", ";
+	}
+	std::cerr << ")" << std::endl;
+
+	// Compare results with expected results
+	std::vector<float> first_ten_expected_results {
+		-1.0f, -1.0f, -1.0f, -1.0f, 16.0640736f,
+		-1.0f, -1.0f, -1.0f, -1.0f, 9.80201912f
+	};
+
+	std::vector<float> last_ten_expected_results {
+		14.6495285f, -1.0f, -1.0f, 11.0168362f, -1.0f,
+		-1.0f, -1.0f, -1.0f, -1.0f, -1.0f
+	};
+
+	std::vector<SampleResults> actual_first_ten { first_results.begin(), first_results.begin() + 10 };
+	std::vector<SampleResults> actual_last_ten { first_results.end() - 10, first_results.end() };
+
+	for (int i = 0; i < 10; i++) {
+		ASSERT_NEAR(actual_first_ten[i].dist, first_ten_expected_results[i], 0.00001f);
+		ASSERT_NEAR(actual_last_ten[i].dist, last_ten_expected_results[i], 0.00001f);
+	}
+
+	delete loaded_obj;
+	DestroyRayTracer(bvh);
+}
+
 TEST(_ViewAnalysis, AllRaysHit) {
 	auto MI = LoadMeshObjects(big_teapot_path);
 	EmbreeRayTracer ERT(MI);
@@ -107,7 +316,7 @@ TEST(_ViewAnalysis, AggregateAverage)
 #undef min
 #undef max
 
-// Define values
+	// Define values
 	std::vector<int> values = { 1, 2, 3, 4, 5 };
 
 	// Calculate Average
@@ -144,76 +353,6 @@ TEST(_ViewAnalysis, AggregateAverage)
 	for (int val : values) Aggregate(total, val, AGGREGATE_TYPE::COUNT);
 	std::cerr << "Count: " << total << std::endl;
 	ASSERT_EQ(total, 5);
-}
-
-TEST(_ViewAnalysis, SphericalViewAnalysis) {
-	struct SampleResults {
-		float dist = -1.0f;
-		inline void SetHit(
-			const std::array<float, 3>& node,
-			const std::array<float, 3>& direction,
-			float distance,
-			int meshID
-		) {
-			dist = distance;
-		}
-	};
-
-	// Use this so we can fit within 80 characters
-	using HF::ViewAnalysis::SphericalViewAnalysis;
-	using HF::RayTracer::EmbreeRayTracer;
-
-	// Create Plane
-	const std::vector<float> plane_vertices{
-		-10.0f, 10.0f, 0.0f,
-		-10.0f, -10.0f, 0.0f,
-		10.0f, 10.0f, 0.0f,
-		10.0f, -10.0f, 0.0f,
-	};
-	const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
-
-	// Create RayTracer
-	EmbreeRayTracer ert(std::vector<MeshInfo>{
-		MeshInfo(plane_vertices, plane_indices, 0, " ")}
-	);
-
-	// Define observer points
-	std::vector<std::array<float, 3>> points{
-		{0,0,0}, {1,1,0}, {1,2,0}, {1000, 1000, 0}
-	};
-
-	// Perform View Analysis
-	int num_rays = 50;
-	auto results = SphericalViewAnalysis<SampleResults>(ert, points, num_rays);
-
-	// Determine how many directions there were
-	int num_directions = results.size() / points.size();
-
-	// Construct a vector from the results of the first node
-	std::vector<SampleResults> first_results(
-		results.begin(), results.begin() + num_directions
-	);
-
-	// Print Results
-	std::cerr << "(";
-	for (int i = 0; i < first_results.size(); i++) {
-		const auto& result = first_results[i];
-		std::cerr << result.dist;
-
-		if (i != first_results.size() - 1) std::cerr << ", ";
-	}
-	std::cerr << ")" << std::endl;
-
-	// Compare results with expected results
-	std::vector<float> first_five_expected_results{ -1, 7.35812, -1, -1, 3.70356, -1 };
-	std::vector<float> last_five_expected_results = { -1, 6.80486, -1, 5.12012, -1 };
-	std::vector<SampleResults> actual_first_five(first_results.begin(), first_results.begin() + 5);
-	std::vector<SampleResults> actual_last_five(first_results.end() - 5, first_results.end());
-
-	for (int i = 0; i < 5; i++) {
-		ASSERT_NEAR(actual_first_five[i].dist, first_five_expected_results[i], 0.00001f);
-		ASSERT_NEAR(actual_last_five[i].dist, last_five_expected_results[i], 0.00001f);
-	}
 }
 
 TEST(_ViewAnalysis, ViewAnalysisAggregate) {
@@ -274,7 +413,8 @@ TEST(C_ViewAnalysisCInterface, SphericalViewAnalysisAggregate) {
 	const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 	// Create and allocate a new instacnce of meshinfo
-	std::vector<MeshInfo>* MI;
+	MeshInfo* MI = nullptr;
+
 	auto MIR = StoreMesh(
 		&MI,
 		plane_indices.data(),
@@ -346,7 +486,8 @@ TEST(C_ViewAnalysisCInterface, SphericalViewAnalysisAggregateFlat) {
 	const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 	// Create and allocate a new instacnce of meshinfo
-	std::vector<MeshInfo>* MI;
+	MeshInfo* MI = nullptr;
+
 	auto MIR = StoreMesh(
 		&MI,
 		plane_indices.data(),
@@ -438,7 +579,6 @@ TEST(C_ViewAnalysisCInterface, SphericalDistribute)
 	DestroyFloatVector(out_float);
 }
 
-
 TEST(C_ViewAnalysisCInterface, SphericalViewAnalysisNoAggregateFlat) {
 	// Create Plane
 	const std::vector<float> plane_vertices{
@@ -450,7 +590,8 @@ TEST(C_ViewAnalysisCInterface, SphericalViewAnalysisNoAggregateFlat) {
 	const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 	// Create and allocate a new instacnce of meshinfo
-	std::vector<MeshInfo>* MI;
+	MeshInfo* MI = nullptr;
+
 	auto MIR = StoreMesh(
 		&MI,
 		plane_indices.data(),
@@ -527,7 +668,8 @@ TEST(C_ViewAnalysisCInterface, SphericalViewAnalysisNoAggregate) {
 	const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 	// Create and allocate a new instacnce of meshinfo
-	std::vector<MeshInfo>* MI;
+	MeshInfo* MI = nullptr;
+
 	auto MIR = StoreMesh(
 		&MI,
 		plane_indices.data(),
@@ -592,4 +734,3 @@ TEST(C_ViewAnalysisCInterface, SphericalViewAnalysisNoAggregate) {
 	DestroyMeshInfo(MI);
 	DestroyRayTracer(ert);
 }
-*/
