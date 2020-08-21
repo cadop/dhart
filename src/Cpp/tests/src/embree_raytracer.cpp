@@ -1,22 +1,30 @@
 #include <gtest/gtest.h>
-#include <meshinfo.h>
+
 #include <string>
 #include <objloader.h>
+#include <meshinfo.h>
 #include <embree_raytracer.h>
 #include <robin_hood.h>
 #include <cmath>
+#include <HFExceptions.h>
+
+#include <objloader_C.h>
+#include <raytracer_C.h>
+
 
 #include "RayRequest.h"
 
 #include "performance_testing.h"
 
-using namespace HF::Geometry;
 using namespace HF::RayTracer;
 using std::vector;
 using std::array;
 using std::string;
 using std::cerr;
 using std::endl;
+
+using HF::Geometry::MeshInfo;
+using namespace HF::Geometry;
 
 /// <summary>
 /// Create a new raytracer from a basic 10x10 plane centered on the origin.
@@ -242,7 +250,7 @@ TEST(_EmbreeRayTracer, FireRays) {
 	// Fire every ray. Results should all be true and be within a certain distance of zero;
 	auto results = ert.FireRays(origins, directions);
 
-	// Print results
+	// Print after_added_results
 	std::cerr << "[";
 	for (int i = 0; i < 10; i++) {
 		if (results[i])
@@ -289,7 +297,7 @@ TEST(_EmbreeRayTracer, FireOcclusionRays) {
 	// Fire every ray.
 	std::vector<char> results = ert.FireOcclusionRays(origins, directions);
 
-	// Iterate through all results to print them
+	// Iterate through all after_added_results to print them
 	std::cerr << "[";
 	for (int i = 0; i < 10; i++) {
 		// Print true if the ray intersected, false otherwise
@@ -813,4 +821,161 @@ TEST(Performance, EmbreeRaytracer) {
 	}
 	
 	PrintTrials(watches, raycount, "rays");
+}
+
+namespace C_Interface{
+	using HF::Exceptions::HF_STATUS;
+
+	MeshInfo * ConstructExamplePlane() {
+		// Define Parameters to construct plane
+		const std::vector<float> plane_vertices{
+			-10.0f, 10.0f, 0.0f,
+			-10.0f, -10.0f, 0.0f,
+			10.0f, 10.0f, 0.0f,
+			10.0f, -10.0f, 0.0f,
+		};
+		const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
+		std::string name = "Test_Mesh";
+		int id = 39;
+
+		// Store mesh and assert that it succeeds
+		HF::Geometry::MeshInfo* MI;
+		auto mesh_store_res = StoreMesh(
+			&MI, plane_indices.data(),
+			plane_indices.size(),
+			plane_vertices.data(),
+			plane_vertices.size(),
+			name.c_str(),
+			id
+		);
+		EXPECT_EQ(HF_STATUS::OK, mesh_store_res);
+		
+		return MI;
+	}
+
+	EmbreeRayTracer* ConstructTestRaytracer() {
+		MeshInfo * MI = ConstructExamplePlane();
+
+		// Create RayTracer from the meshinfo we just stored
+		EmbreeRayTracer* ray_tracer;
+		int raytracer_res = CreateRaytracer(MI, &ray_tracer);
+		EXPECT_EQ(HF_STATUS::OK, raytracer_res);
+
+		// Delete the meshinfo to clean up
+		DestroyMeshInfo(MI);
+
+		return ray_tracer;
+	}
+
+	// If this crashes, then memory was corrupted by the construction of the raytracer.
+	TEST(C_EmbreeRayTracer, CreateRayTracer) {
+		// Call the raytracer function
+		EmbreeRayTracer* rt = ConstructTestRaytracer();
+
+		// Destroy the raytracer
+		DestroyRayTracer(rt);
+	}
+
+	// If this crashes, then memory was corrupted by the construction of the raytracer.
+	TEST(C_EmbreeRayTracer, AddMesh) {
+		// Call the raytracer function
+		EmbreeRayTracer* rt = ConstructTestRaytracer();
+
+		// Construct another instance of MeshInfo, then rotate it
+		auto rotated_plane = ConstructExamplePlane();
+		rotated_plane->PerformRotation(0, -90, 0);
+
+		// Add it to the raytracer
+		int add_mesh_result = AddMesh(rt, rotated_plane);
+		ASSERT_EQ(HF_STATUS::OK, add_mesh_result);
+
+		// If this was successful, the new mesh's ID should have been updated to 0 since
+		// it has the same id as another mesh, and embree is automatically assigning it. 
+		ASSERT_EQ(0, rotated_plane->GetMeshID());
+		
+		// Destroy the Plane and Raytracer
+		DestroyMeshInfo(rotated_plane);
+		DestroyRayTracer(rt);
+	}
+
+	// Ensure that new meshes can actually be intersected
+	TEST(C_EmbreeRayTracer, NewMeshesCanBeIntersected) {
+		
+		// Create initial BVH, then define origins and directions
+		EmbreeRayTracer* rt = ConstructTestRaytracer();
+		std::vector<float> origins = { 1,1,1, 1,1,1};
+		std::vector<float> directions = {0,0,-1, 0,-1,0};
+		
+		// Cast both rays. Only one should intersect
+		bool * before_added_results = new bool[2];
+		int err_c = FireOcclusionRays(rt, origins.data(), directions.data(), 2, 2, -1, before_added_results);
+		EXPECT_NE(before_added_results[0], before_added_results[1]);
+
+		// Create a new rotated plane and add it to the BVH
+		auto rotated_plane = ConstructExamplePlane();
+		rotated_plane->PerformRotation(-90, 0, 0);
+		int add_mesh_result = AddMesh(rt, rotated_plane);
+
+		// Cast both rays, and now ensure they both intersect
+		bool * after_added_results = new bool[2];
+		err_c = FireOcclusionRays(rt, origins.data(), directions.data(), 2, 2, -1, after_added_results);
+		EXPECT_EQ(after_added_results[0], after_added_results[1]);
+
+		// Destroy the Plane and Raytracer
+		DestroyMeshInfo(rotated_plane);
+		DestroyRayTracer(rt);
+		delete[] after_added_results;
+		delete[] before_added_results;
+	}
+
+	TEST(C_EmbreeRayTracer, ConstructionWithMultipleMeshes) {
+
+		// Load meshes
+		HF::Geometry::MeshInfo** MI;
+		int num_meshes = 0;
+		auto OBJs = LoadOBJ("sponza.obj", GROUP_METHOD::BY_GROUP, 0, 0, 0, &MI, &num_meshes);
+
+		// Create Raytracer
+		EmbreeRayTracer* ERT;
+		CreateRaytracerMultiMesh(MI, num_meshes, &ERT);
+
+		// Cast a ray at the ground and ensure it connects
+		float x = 0; float y = 0; float z = 1;
+		int dx = 0; int dy = 0; int dz = -1;
+		bool res = false;
+		FireRay(ERT, x, y, z, dx, dy, dz, -1, res);
+		ASSERT_TRUE(res);
+
+		for (int i = 0; i < num_meshes; i++)
+			DestroyMeshInfo(MI[i]);
+
+		DestroyRayTracer(ERT);
+	}
+
+	// This will crash if things are done improperly. 
+	TEST(C_EmbreeRayTracer, AdditionWithMultipleMeshes) {
+
+		// Get a basic raytracer
+		EmbreeRayTracer* ERT = ConstructTestRaytracer();
+		
+		// load every group in sponza
+		HF::Geometry::MeshInfo** MI;
+		int num_meshes = 0;
+		auto OBJs = LoadOBJ("sponza.obj", GROUP_METHOD::BY_GROUP, 0, 0, 0, &MI, &num_meshes);
+
+		// Add meshes to the basic raytracer
+		AddMeshes(ERT, MI, num_meshes);
+
+		// Cast a ray at the ground and ensure it connects
+		float x = 0; float y = 0; float z = 1;
+		int dx = 0; int dy = 0; int dz = -1;
+		bool res = false;
+		FireRay(ERT, x, y, z, dx, dy, dz, -1, res);
+		ASSERT_TRUE(res);
+
+		// Clean up every meshinfo and Raytracer
+		for (int i = 0; i < num_meshes; i++)
+			DestroyMeshInfo(MI[i]);
+		DestroyRayTracer(ERT);
+	}
 }

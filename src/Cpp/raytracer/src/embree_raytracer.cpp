@@ -26,12 +26,11 @@ namespace HF::RayTracer {
 	/// </summary>
 	/// <param name="device">Device to check for errors</param>
 	/// <exception cref="std::exception">Some error is found while casting rays.</exception>
-	void CheckState(RTCDevice& device) {
-		auto err = rtcGetDeviceError(device);
-
-		if (err != RTCError::RTC_ERROR_NONE)
-			throw std::exception("RTC DEVICE ERROR");
+	RTCError CheckState(RTCDevice& device) {
+		return rtcGetDeviceError(device);
 	}
+
+	using std::vector;
 	/// <summary>
 	/// A vertex. Used internally in Embree.
 	/// </summary>
@@ -125,39 +124,175 @@ namespace HF::RayTracer {
 		}
 	}
 
-	EmbreeRayTracer::EmbreeRayTracer(const std::vector<std::array<float, 3>>& geometry) {
-		device = rtcNewDevice("start_threads=1,set_affinity=1");
+	EmbreeRayTracer::EmbreeRayTracer()
+	{
+		SetupScene();
+	}
+
+	EmbreeRayTracer::EmbreeRayTracer(std::vector<HF::Geometry::MeshInfo>& MI) {
+		// Throw if MI's size is less than 0
+		if (MI.empty())
+			throw std::logic_error("Embree Ray Tracer was passed an empty vector of mesh info!");
+
+		SetupScene();
+
+		InsertNewMesh(MI, true);
+	}
+
+	EmbreeRayTracer::EmbreeRayTracer(HF::Geometry::MeshInfo& MI) {
+		SetupScene();
+		InsertNewMesh(MI, true);
+	}
+
+	void EmbreeRayTracer::SetupScene() {
+		device = rtcNewDevice("");
 		scene = rtcNewScene(device);
 		rtcSetSceneBuildQuality(scene, RTC_BUILD_QUALITY_HIGH);
 		rtcSetSceneFlags(scene, RTC_SCENE_FLAG_ROBUST);
-		RTCGeometry geom = rtcNewGeometry(device, RTC_GEOMETRY_TYPE_TRIANGLE);
-		Triangle* triangles;
-		Vertex* Vertices;
 
-		// Set Setup buffers
-		std::vector<Triangle> tris;
-		std::vector<Vertex> verts;
-		vectorsToBuffers(geometry, tris, verts);
-
-		// Cast to triangle/vertex structs so we can operate on them.  This trick is from the embree tutorial
-		triangles = (Triangle*)rtcSetNewGeometryBuffer(geom, RTC_BUFFER_TYPE_INDEX, 0, RTC_FORMAT_UINT3, sizeof(Triangle), tris.size() + 1);
-		Vertices = (Vertex*)rtcSetNewGeometryBuffer(geom, RTC_BUFFER_TYPE_VERTEX, 0, RTC_FORMAT_FLOAT3, sizeof(Vertex), verts.size() + 1);
-
-		// If either of these turns up null, this can't function
-		if (!triangles || !Vertices)
-			throw std::exception("RTC DEVICE ERROR");
-		
-		for (int i = 0; i < tris.size(); i++)
-			triangles[i] = tris[i];
-
-		for (int i = 0; i < verts.size(); i++)
-			Vertices[i] = verts[i];
-
-		// Add geometry and commit the scene
-		rtcCommitGeometry(geom);
-		rtcAttachGeometryByID(scene, geom, 0);
-		rtcCommitScene(scene);
 		rtcInitIntersectContext(&context);
+	}
+
+	EmbreeRayTracer::EmbreeRayTracer(const EmbreeRayTracer& ERT2)
+	{
+		// Copy over pointers to relevant embree objects
+		device = ERT2.device;
+		context = ERT2.context;
+		scene = ERT2.scene;
+		geometry = ERT2.geometry;
+
+		// Increment embree's internal refrence counter.
+		rtcRetainScene(scene);
+		rtcRetainDevice(device);
+	}
+
+	int EmbreeRayTracer::TryToAddByID(RTCGeometry& geom, int id)
+	{
+		if (id >= 0) {
+			rtcAttachGeometryByID(scene, geom, id);
+
+			// If we're attaching by ID, then we must check to see if the ID already exists.
+			// If it does already exist, then we'll have to just add it without specifying any ID
+			RTCError error = CheckState(device);
+
+			// Don't know the specific error that will be raised here (Documentation just states some error code)
+			if (error != RTCError::RTC_ERROR_NONE)
+				return TryToAddByID(geom);
+		}
+		else
+			return rtcAttachGeometry(scene, geom);
+	}
+
+	EmbreeRayTracer::EmbreeRayTracer(const std::vector<std::array<float, 3>>& geometry) {
+		SetupScene();
+
+		for (auto geom : geometry) {
+			// Set Setup buffers
+			std::vector<Triangle> tris;
+			std::vector<Vertex> verts;
+			vectorsToBuffers(geometry, tris, verts);
+
+			RTCGeometry geom = InsertGeometryFromBuffers(tris, verts);
+			// Cast to triangle/vertex structs so we can operate on them.  This trick is from the embree tutorial
+			TryToAddByID(geom);
+		}
+
+		rtcCommitScene(scene);
+	}
+
+	bool EmbreeRayTracer::InsertNewMesh(std::vector<std::array<float, 3>>& Mesh, int ID, bool Commit)
+	{
+		// Set Setup buffers
+		std::vector<Triangle> tris;	std::vector<Vertex> verts;
+		vectorsToBuffers(Mesh, tris, verts);
+
+		// Add the geometry to embree as a geometry object
+		auto geom = InsertGeometryFromBuffers(tris, verts);
+
+		// Add the geometry by ID
+		int added_id = TryToAddByID(geom);
+
+		// Commit the scene if specified
+		if (Commit)
+			rtcCommitScene(scene);
+
+		// Return False if it's id didn't need to be changed, true otherwise.
+		return (added_id == ID);
+	}
+
+	RTCGeometry EmbreeRayTracer::InsertGeometryFromBuffers(vector<Triangle>& tris, vector<Vertex>& verts) {
+		// Create new geometry object
+		RTCGeometry geom = rtcNewGeometry(device, RTC_GEOMETRY_TYPE_TRIANGLE);
+
+		// Allocate it's triangle and index buffers in embree
+		triangles = static_cast<Triangle*>(
+			rtcSetNewGeometryBuffer(
+				geom,
+				RTC_BUFFER_TYPE_INDEX,
+				0,
+				RTC_FORMAT_UINT3,
+				sizeof(Triangle),
+				tris.size() + 1
+			)
+			);
+		Vertices = static_cast<Vertex*>(
+			rtcSetNewGeometryBuffer(
+				geom,
+				RTC_BUFFER_TYPE_VERTEX,
+				0,
+				RTC_FORMAT_FLOAT3,
+				sizeof(Vertex),
+				verts.size() + 1
+			)
+			);
+
+		// Move data from input tris/verts into buffers
+		std::move(tris.begin(), tris.end(), triangles);
+		std::move(verts.begin(), verts.end(), Vertices);
+
+		// Add a reference to this geometry to internal array of geometry.
+		geometry.push_back(geom);
+		
+		// Commit this geometry to finalize the process then return
+		rtcCommitGeometry(geom);
+
+		return geom;
+	}
+
+	bool EmbreeRayTracer::InsertNewMesh(HF::Geometry::MeshInfo& Mesh, bool Commit) {
+
+		if (Mesh.NumTris() < 1 || Mesh.NumVerts() < 1) 
+			throw HF::Exceptions::InvalidOBJ();
+		// Get vertex and triangle data from the mesh
+
+		std::vector<Triangle> tris;	std::vector<Vertex> verts;
+		auto indices = Mesh.getRawIndices(); auto vertices = Mesh.GetIndexedVertices();
+		buffersToStructs(vertices, indices, verts, tris);
+
+		// Construct geometry using embree
+		auto geom = InsertGeometryFromBuffers(tris, verts);
+
+		// Add the Mesh to the scene and update it's ID
+		Mesh.meshid = TryToAddByID(geom, Mesh.meshid);
+
+		// commit if specified
+		if (Commit)
+			rtcCommitScene(scene);
+
+		return true;
+	}
+
+	bool EmbreeRayTracer::InsertNewMesh(std::vector<HF::Geometry::MeshInfo>& Meshes, bool Commit)
+	{
+		// Add every mesh in a loop
+		for (auto& mesh : Meshes)
+			InsertNewMesh(mesh, false);
+
+		// Commit at the end to save performance
+		if (Commit)
+			rtcCommitScene(scene);
+
+		return true;
 	}
 
 	bool EmbreeRayTracer::FireRay(
@@ -367,33 +502,6 @@ namespace HF::RayTracer {
 		return out_array;
 	}
 
-	EmbreeRayTracer::EmbreeRayTracer(std::vector<HF::Geometry::MeshInfo>& MI) {
-		// Throw if MI's size is less than 0
-		if (MI.empty())
-		{
-			std::cerr << "Embree Ray Tracer was passed an empty vector of mesh info!" << std::endl;
-			throw;
-		}
-
-		device = rtcNewDevice("start_threads=1,set_affinity=1");
-		scene = rtcNewScene(device);
-		rtcSetSceneBuildQuality(scene, RTC_BUILD_QUALITY_HIGH);
-		rtcSetSceneFlags(scene, RTC_SCENE_FLAG_ROBUST);
-
-		InsertNewMesh(MI, true);
-		rtcInitIntersectContext(&context);
-	}
-
-	EmbreeRayTracer::EmbreeRayTracer(const EmbreeRayTracer& ERT2)
-	{
-		device = ERT2.device;
-		context = ERT2.context;
-		scene = ERT2.scene;
-		geometry = ERT2.geometry;
-
-		rtcRetainScene(scene);
-		rtcRetainDevice(device);
-	}
 
 	bool EmbreeRayTracer::FireOcclusionRay(float x, float y, float z, float dx, float dy, float dz, float distance, int mesh_id)
 	{
@@ -409,114 +517,6 @@ namespace HF::RayTracer {
 		rtcOccluded1(scene, &context, &ray);
 
 		return ray.tfar == -INFINITY;
-	}
-
-
-	bool EmbreeRayTracer::InsertNewMesh(std::vector<std::array<float, 3>>& Mesh, int ID, bool Commit)
-	{
-		// Set Setup buffers
-		std::vector<Triangle> tris;	std::vector<Vertex> verts;
-		vectorsToBuffers(Mesh, tris, verts);
-		
-		RTCGeometry geom = rtcNewGeometry(device, RTC_GEOMETRY_TYPE_TRIANGLE);
-
-		// Create Geometry/Triangle buffers
-		triangles = static_cast<Triangle*>(
-			rtcSetNewGeometryBuffer(
-				geom,
-				RTC_BUFFER_TYPE_INDEX,
-				0,
-				RTC_FORMAT_UINT3,
-				sizeof(Triangle),
-				tris.size() + 1
-			)
-			);
-		Vertices = static_cast<Vertex*>(
-			rtcSetNewGeometryBuffer(
-				geom,
-				RTC_BUFFER_TYPE_VERTEX,
-				0,
-				RTC_FORMAT_FLOAT3,
-				sizeof(Vertex),
-				verts.size() + 1
-			)
-			);
-
-		// Use the move from tris/verts into embree's buffers
-		std::move(tris.begin(), tris.end(), triangles);
-		std::move(verts.begin(), verts.end(), Vertices);
-
-		// Even if the scene isn't going to be committed, we need to commit the 
-		// geometry.
-		rtcCommitGeometry(geom);
-		rtcAttachGeometryByID(scene, geom, ID);
-		geometry.push_back(geom);
-
-		// Commit the scene if specified
-		if (Commit)
-			rtcCommitScene(scene);
-
-		return ID;
-	}
-
-	bool EmbreeRayTracer::InsertNewMesh(HF::Geometry::MeshInfo& Mesh, bool Commit) {
-		// Get vertex and triangle data from the mesh
-		std::vector<Triangle> tris;	std::vector<Vertex> verts;
-		auto indices = Mesh.getRawIndices(); auto vertices = Mesh.GetIndexedVertices();
-		buffersToStructs(vertices, indices, verts, tris);
-
-		// Create embree buffers
-		RTCGeometry geom = rtcNewGeometry(device, RTC_GEOMETRY_TYPE_TRIANGLE);
-		triangles = static_cast<Triangle*>(
-			rtcSetNewGeometryBuffer(
-				geom,
-				RTC_BUFFER_TYPE_INDEX,
-				0,
-				RTC_FORMAT_UINT3,
-				sizeof(Triangle),
-				tris.size() + 1
-			)
-			);
-		Vertices = static_cast<Vertex*>(
-			rtcSetNewGeometryBuffer(
-				geom,
-				RTC_BUFFER_TYPE_VERTEX,
-				0,
-				RTC_FORMAT_FLOAT3,
-				sizeof(Vertex),
-				verts.size() + 1
-			)
-			);
-		if (!triangles || !Vertices) //? When would this occur
-			throw std::exception("RTC DEVICE ERROR");
-
-		// Move data into embree buffers
-		std::move(tris.begin(), tris.end(), triangles);
-		std::move(verts.begin(), verts.end(), Vertices);
-		geometry.push_back(geom);
-		rtcCommitGeometry(geom);
-
-		// If the mesh has an ID, then use that ID. Otherwise get an id from embree and assign it to the mesh.
-		const auto id = Mesh.GetMeshID();
-		if (id > 0) rtcAttachGeometryByID(scene, geom, id);
-		else Mesh.SetMeshID(rtcAttachGeometry(scene, geom));
-
-		// commit if specified
-		if (Commit)
-			rtcCommitScene(scene);
-
-		return true;
-	}
-
-	bool EmbreeRayTracer::InsertNewMesh(std::vector<HF::Geometry::MeshInfo>& Meshes, bool Commit)
-	{
-		for (auto& mesh : Meshes)
-			InsertNewMesh(mesh, false);
-
-		if (Commit) // Only commit at the end to save performance.
-			rtcCommitScene(scene);
-
-		return true;
 	}
 
 	// Increment reference counters to prevent destruction when this thing goes out of scope

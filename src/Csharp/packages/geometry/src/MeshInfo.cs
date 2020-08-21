@@ -1,4 +1,7 @@
+using HumanFactors.NativeUtils;
 using System;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 
 /*!
@@ -45,17 +48,41 @@ namespace HumanFactors.Geometry
 
 	public class MeshInfo : NativeUtils.NativeObject
 	{
-		/*!
-            \brief Calculates the mesh's pressure. Unimplemented for now
-            \todo
-            Make a function in C++ to calculate the size of indices/vertices so
-            the amount of pressure to exert on the GC can properly be calculated.
-        */
+        public int id = -1; ///< ID of the mesh. 
+        public string name = ""; ///< Name of the mesh
+        public DependentNativeArray<float> vertices; ///< An array of all the coordinates for every vertex in the mesh
+        public DependentNativeArray<int> indices; ///< An array of the indices for every triangle in the mesh
 
-		private static int CalculatePresure()
+        /*!
+            \brief Calculates the amount of pressure this mesh should exert on the GC.
+
+            \returns The approximate size of this mesh in bytes.
+        */
+        public int CalculatePresure()
 		{
-			return -1; // We don't really know the pressure for this class
+            int num_verts = this.vertices.size;
+            int num_tris = this.indices.size;
+
+            int float_pressure = (sizeof(float) * num_verts * 3);
+            int int_pressure = (sizeof(float) * num_tris * 3);
+
+            return int_pressure + float_pressure;
 		}
+
+        /*! \brief Updates this mesh's name, ID, and arrays with it's values from C++ */
+        internal void UpdateIDNameAndArrays()
+        {
+            // Get ID and name
+            this.id = NativeMethods.GetMeshID(this.Pointer);
+            this.name = NativeMethods.GetMeshName(this.Pointer);
+
+            // Pointers and size of verts and tris arrays
+            var verts_and_tris = NativeMethods.C_GetTrisAndVerts(this.Pointer);
+
+            // Store these locally
+            this.vertices = new DependentNativeArray<float>(verts_and_tris.vert_ptr, verts_and_tris.verts, 3);
+            this.indices = new DependentNativeArray<int>(verts_and_tris.tri_ptr, verts_and_tris.tris, 3);
+        }
 
 		/*!
             \brief Manually delete this mesh in Unmanaged memory.
@@ -90,7 +117,10 @@ namespace HumanFactors.Geometry
             \remarks This shouldn't be called directly unless pointer is gauranteed to point to a valid mesh
         */
 
-		internal MeshInfo(IntPtr pointer, int size = 0) : base(pointer, size) { }
+		internal MeshInfo(IntPtr pointer, int size = 0) : base(pointer, size) {
+            UpdateIDNameAndArrays();
+            this.UpdatePressure(this.CalculatePresure());
+        }
 
 		/*!
             \brief Create an instance of MeshInfo from an array of vertices and triangle indices.
@@ -108,14 +138,16 @@ namespace HumanFactors.Geometry
 
             \par Example
             \snippet geometry\test_geometry.cs EX_MeshInfoCstor
-
         */
 
-		public MeshInfo(int[] indices, float[] vertices, string name = "", int id = -1) :
-			base(NativeMethods.C_StoreMesh(vertices, indices, name, id), (vertices.Length * 4) + (indices.Length * 4))
-		{ }
+		public MeshInfo(int[] indices, float[] vertices, string name = "", int id = 0) :
+			base(NativeMethods.C_StoreMesh(vertices, indices, name, id))
+		{ 
+            UpdateIDNameAndArrays();
+            this.UpdatePressure(this.CalculatePresure());
+        }
 
-		/*!
+        /*!
             \brief Rotate this mesh by the desired magnitude.
 
             \param xrot Pitch to rotate by in degrees.
@@ -125,13 +157,16 @@ namespace HumanFactors.Geometry
             \remarks
             See the other overload for this function for use with CommonRotations.
 
-            
             \par Example
             \snippet geometry\test_geometry.cs EX_MeshInfoCstor
             \snippet geometry\test_geometry.cs EX_RotateMesh_xyz
         */
 
-		public void RotateMesh(float xrot, float yrot, float zrot) => NativeMethods.C_RotateMesh(handle, xrot, yrot, zrot);
+        public void RotateMesh(float xrot, float yrot, float zrot)
+        {
+            NativeMethods.C_RotateMesh(handle, xrot, yrot, zrot);
+            UpdateIDNameAndArrays();
+        }
 
 		/*!
             \brief Rotate this mesh by the desired magnitude. </summary>
@@ -143,7 +178,11 @@ namespace HumanFactors.Geometry
             \snippet geometry\test_geometry.cs EX_MeshInfoCstor
             \snippet geometry\test_geometry.cs EX_RotateMesh_Common
         */
-
 		public void RotateMesh(Vector3D rotation) => NativeMethods.C_RotateMesh(handle, rotation.x, rotation.y, rotation.z);
-	}
+
+        public override String ToString()
+        {
+            return "Name: " + this.name + ", ID: " + id.ToString() + ", Verts: " + vertices.size.ToString() + ", Triangles: " + (this.indices.size.ToString());
+        }
+    }
 }

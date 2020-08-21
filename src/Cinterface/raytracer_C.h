@@ -14,7 +14,6 @@
 
 namespace HF {
 	namespace RayTracer {
-		class MeshInfo;
 		class EmbreeRayTracer;
 	}
 	namespace Geometry {
@@ -119,7 +118,59 @@ struct RayResult {
 	\see	\ref mesh_setup (how to create a mesh), \ref mesh_teardown (how to destroy a mesh)
 	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
 */
-C_INTERFACE CreateRaytracer(std::vector<HF::Geometry::MeshInfo>* mesh, HF::RayTracer::EmbreeRayTracer** out_raytracer);
+C_INTERFACE CreateRaytracer(
+	HF::Geometry::MeshInfo * mesh, 
+	HF::RayTracer::EmbreeRayTracer ** out_raytracer
+);
+
+/*!
+	\brief		 Create a new raytracer using several meshes.
+
+	\param	mesh			The meshes to add to raytracer's BVH.
+	\param num_meshes	Number of meshes in meshes
+	\param	out_raytracer	Output parameter for the new raytracer.
+
+	\returns	HF_STATUS::MISSING_DEPEND if Embree's dll couldn't be found.
+				HF_STATUS::GENERIC_ERROR if `mesh` is null.
+*/
+C_INTERFACE CreateRaytracerMultiMesh(
+	HF::Geometry::MeshInfo** meshes,
+	int num_meshes,
+	HF::RayTracer::EmbreeRayTracer** out_raytracer
+);
+
+
+/*!
+	\brief Add a new mesh to a raytracer.
+
+	\param ERT raytracer to add the mesh to
+	\param MI MeshInfo to add to the raytracer. Will try to maintain IDs, however if there is a collision, then the
+			  MeshInfo will be updated to contain the ID assigned to it by the raytracer. 
+
+	\returns HF_STATUS::OK On completion
+*/
+C_INTERFACE AddMesh(
+	HF::RayTracer::EmbreeRayTracer* ERT,
+	HF::Geometry::MeshInfo* MI
+);
+
+
+/*!
+	\brief Add a new mesh to a raytracer.
+
+	\param ERT raytracer toa dd the mesh to
+	\param MI MeshInfo to add to the raytracer. Will try to maintain IDs, however if there is a collision, then each
+			  MeshInfo will be updated to contain the ID assigned to it by the raytracer.
+	\param number_of_meshes Number of meshes in `MI`.
+
+	\returns HF_STATUS::OK On completion
+*/
+C_INTERFACE AddMeshes(
+	HF::RayTracer::EmbreeRayTracer* ERT,
+	HF::Geometry::MeshInfo ** MI,
+	int number_of_meshes
+);
+
 
 /*!
 	\brief		Delete an existing raytracer.
