@@ -53,3 +53,31 @@ def test_EnsureParallelGraphIsEquivalentToStandardGraph():
                             + pow(std_node[2] - par_node[2], 2))
 
         assert distance < 0.001
+
+        
+def test_energyblob_size():
+    # Get a sample model path
+    obj_path = humanfactorspy.get_sample_model("energy_blob_zup.obj")
+    time.sleep(10)
+    # Load the obj file
+    obj = LoadOBJ(obj_path)
+
+    # Create a BVH
+    bvh = EmbreeBVH(obj)
+
+    # Set the graph parameters
+    start_point = (-30, 0, 20)
+    spacing = (1, 1, 10)
+    max_nodes = 5000
+    up_step, down_step = 5, 5
+    up_slope, down_slope = 60, 60
+    max_step_connections = 1
+
+    # Generate the Graph
+    graph = GenerateGraph(bvh, start_point, spacing, max_nodes,
+                            up_step,up_slope,down_step,down_slope,
+                            max_step_connections, cores=-1)
+
+    # Get Nodes
+    nodes = graph.getNodes()
+    assert len(nodes.array) == 3450
