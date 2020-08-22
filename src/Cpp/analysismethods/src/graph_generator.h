@@ -56,7 +56,7 @@ namespace HF::GraphGenerator {
 	class UniqueQueue;
 	struct optional_real3;
 
-	using real_t = double;							  ///< Internal decimal type of the graph generator
+	using real_t = float;							  ///< Internal decimal type of the graph generator
 	using real3 = std::array<real_t, 3>;			  ///< Type used for the standard coordinate set of the graph generator.
 	using RayTracer = HF::RayTracer::EmbreeRayTracer; ///< Type of raytracer to be used internally.
 	using graph_edge = HF::SpatialStructures::Edge;   ///< Type of edge for the graph generator to use internally
@@ -304,7 +304,7 @@ namespace HF::GraphGenerator {
 			down_slope_type DownSlope,
 			int max_step_connections,
 			int cores = -1,
-			z_precision_type node_z_precision = 0.001,
+			z_precision_type node_z_precision = default_z_precision,
 			connect_offset_type  node_spacing_precision = default_spacing_precision,
 			spacing_precision_type ground_offset = default_ground_offset
 		) {
@@ -370,9 +370,9 @@ namespace HF::GraphGenerator {
 			real_t DownSlope,
 			int max_step_connections,
 			int cores = -1,
-			real_t node_z_precision = 0.001,
-			real_t node_spacing_precision = 0.001,
-			real_t ground_offset = 0.0001
+			real_t node_z_precision = default_z_precision,
+			real_t node_spacing_precision = default_spacing_precision,
+			real_t ground_offset = default_ground_offset
 		);
 
 
