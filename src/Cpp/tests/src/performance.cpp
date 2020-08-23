@@ -23,7 +23,8 @@ using std::array;
 
 using namespace HF::GraphGenerator;
 
-inline int count_hits(vector<HitStruct>& results) {
+template <typename T>
+inline int count_hits(vector<HitStruct<T>>& results) {
 	int hits = 0;
 	for (const auto& result : results)
 		if (result.DidHit())
@@ -164,12 +165,12 @@ TEST(Performance, CustomTriangleIntersection) {
 
 			// Conduct Precise Check
 			precise_watch.StartClock();
-			vector<HitStruct> precise_results = mas.PreciseERT.FireAnyRayParallel(origins, dirs, -1.0f, true, false);
+			auto precise_results = mas.PreciseERT.FireAnyRayParallel(origins, dirs, -1.0f, true, false);
 			precise_watch.StopClock();
 
 			// Conduct standard check
 			standard_watch.StartClock();
-			vector<HitStruct> results = mas.StandardERT.FireAnyRayParallel(origins, dirs, -1.0f, false, false);
+			auto results = mas.StandardERT.FireAnyRayParallel(origins, dirs, -1.0f, false, false);
 			standard_watch.StopClock();
 
 
@@ -203,8 +204,8 @@ TEST(Performance, GraphGenerator_PrecisevsStandard) {
 	const vector<int> maxnodes = {
 		5000, 5000,	5000,
 		10000,	10000, 10000,
-		55555, 55555, 55555,
-		100000,	100000,	100000,
+	//	55555, 55555, 55555,
+	//	100000,	100000,	100000,
 	};
 
 	printf("Loading Models...\n");

@@ -295,7 +295,7 @@ C_INTERFACE PreciseIntersection(
 {
 
 	*out_distance = -1.0;
-	HF::RayTracer::HitStructD<double> hs = RT->PreciseRayIntersect(x, y, z, dx, dy, dz, -1.0, -1);
+	HF::RayTracer::HitStruct<double> hs = RT->PreciseRayIntersect(x, y, z, dx, dy, dz, -1.0, -1);
 	
 	*out_distance = hs.distance;
 

@@ -64,27 +64,16 @@ namespace HF::RayTracer {
 	//*! \brief Determine whether this mesh did or did not intersect */
 	bool DidIntersect(int mesh_id);
 
-	/*! \brief Get the precise distance from a ray intersection */
-	double PerformPreciseIntersection(RTCHit & hit);
-
 	/// <summary> A simple hit struct to carry all relevant information about hits. </summary>
+	template <typename numeric_type = double>
 	struct HitStruct {
-		float distance = -1.0f;  ///< Distance from the origin point to the hit point. Set to -1 if no hit was recorded.
-		unsigned int meshid = -1; ///< The ID of the hit mesh. Set to -1 if no hit was recorded
+		numeric_type distance;  ///< Distance from the origin point to the hit point. Set to -1 if no hit was recorded.
+		int meshid; ///< The ID of the hit mesh. Set to -1 if no hit was recorded
 
-		/// <summary> Determine whether or not this hitstruct contains a hit. </summary>
-		/// <returns> True if the point hit, false if it did not </returns>
-		inline bool DidHit() const {
-			return DidIntersect(this->meshid);
-		}
-	};
+		HitStruct(): distance(-1), meshid(-1) {}
 
-	/// <summary> A simple hit struct to carry all relevant information about hits as doubles. </summary>
-	template <typename real_t>
-	struct HitStructD {
-		real_t distance = -1.0;  ///< Distance from the origin point to the hit point. Set to -1 if no hit was recorded.
-		unsigned int meshid = -1; ///< The ID of the hit mesh. Set to -1 if no hit was recorded
-
+		HitStruct(numeric_type in_distance, int in_meshid) : distance(in_distance), meshid(in_meshid) {}
+		
 		/// <summary> Determine whether or not this hitstruct contains a hit. </summary>
 		/// <returns> True if the point hit, false if it did not </returns>
 		inline bool DidHit() const {
@@ -473,7 +462,7 @@ namespace HF::RayTracer {
 
 		std::array<Vector3D, 3> GetTriangle(unsigned int geomID, unsigned int primID) const;
 
-		HitStruct FirePreciseRay(double x, double y, double z, double dx, double dy, double dz, double distance, int mesh_id);	
+		HitStruct<float> FirePreciseRay(double x, double y, double z, double dx, double dy, double dz, double distance, int mesh_id);	
 
 		/// <summary> Fire multiple rays and recieve hitpoints in return. </summary>
 		/// <param name="origins"> An array of x,y,z coordinates to fire rays from. </param>
@@ -978,39 +967,23 @@ namespace HF::RayTracer {
 			`>>>Miss`
 
 		*/
-		template <class N, class V>
-		HitStruct Intersect(
+		template <class N, class V, typename real_t = double>
+		HitStruct<real_t> Intersect(
 			const N& node,
 			const V& direction,
 			float max_distance = -1.0f, int mesh_id = -0.1f)
 		{
-			// create output value
-			HitStruct out_struct = { -1.0, -1.0 };
-
-			// Cast the ray
-			auto result = IMPL_Intersect(
-				node[0], node[1], node[2],
-				direction[0], direction[1], direction[2], max_distance, -1
-			);
-
-			// If an intersection occured, update the struct. 
-			if (DidIntersect(result.hit.geomID))
-			{
-				out_struct.distance = this->use_precise ? result.tfar : CalculatePreciseDistance(result);
-				out_struct.meshid = out_struct.meshid;
-			}
-
-			return out_struct;
+			return Intersect<real_t>(node[0], node[1], node[2], direction[0], direction[1], direction[2], max_distance, mesh_id);
 		}
 
-		template <typename numeric1 = double, typename numeric2 = double>
-		HitStruct Intersect(
+		template <typename return_type = double, typename numeric1 = double, typename numeric2 = double>
+		HitStruct<return_type> Intersect(
 				numeric1 x, numeric1 y, numeric1 z,
 				numeric2 dx, numeric2 dy, numeric2 dz,
-				numeric1 distance = -1.0f, int mesh_id = -1)
+				float distance = -1.0f, int mesh_id = -1)
 		{
 			// create output value
-			HitStruct out_struct = { -1.0, -1.0 };
+			HitStruct<return_type> out_struct;
 
 			// Cast the ray
 			auto result = IMPL_Intersect(
@@ -1022,7 +995,7 @@ namespace HF::RayTracer {
 			if (DidIntersect(result.hit.geomID))
 			{
 				// Use a precise ray intersection if required
-				if (this->use_precise)
+				if (!(this->use_precise))
 					out_struct.distance = result.ray.tfar;
 				else
 					out_struct.distance = CalculatePreciseDistance(
@@ -1112,7 +1085,7 @@ namespace HF::RayTracer {
 			int& out_meshid,
 			float max_distance = -1.0f)
 		{
-			HitStruct result;
+			HitStruct<float> result;
 			// Use custom triangle intesection if required
 			if (use_precise)
 			{
@@ -1130,7 +1103,7 @@ namespace HF::RayTracer {
 			}
 			else
 			{
-				result = Intersect(
+				result = Intersect<float>(
 					node[0], node[1], node[2],
 					direction[0], direction[1], direction[2], max_distance, -1
 				);
@@ -1156,8 +1129,7 @@ namespace HF::RayTracer {
 			// Use custom triangle intesection if required
 			if (use_precise)
 			{
-				HitStructD<real_t> result;
-				result = PreciseRayIntersect<real_t>(
+				auto result = PreciseRayIntersect<real_t>(
 					node[0], node[1], node[2],
 					direction[0], direction[1], direction[2], max_distance, -1
 				);
@@ -1172,8 +1144,7 @@ namespace HF::RayTracer {
 			}
 			else
 			{
-				HitStruct result;
-				result = Intersect<float, float>(
+				auto result = Intersect<float, float>(
 					node[0], node[1], node[2],
 					direction[0], direction[1], direction[2], max_distance, -1
 				);
@@ -1187,56 +1158,18 @@ namespace HF::RayTracer {
 				}
 			}
 		}
-
 		
 		template <typename real_t>
-		HitStructD<real_t> PreciseRayIntersect(
+		HitStruct<double> PreciseRayIntersect(
 			real_t x, real_t y, real_t z,
 			real_t dx, real_t dy, real_t dz,
 			real_t distance = -1, int mesh_id = -1)
 		{
-			// Define an Embree hit data type to store results
-			RTCRayHit hit;
-
-			// Use the referenced values of the x,y,z position as the ray origin
-			hit.ray.org_x = x; hit.ray.org_y = y; hit.ray.org_z = z;
-			// Define the directions 
-			hit.ray.dir_x = dx; hit.ray.dir_y = dy; hit.ray.dir_z = dz;
-
-			hit.ray.tnear = 0.00000001f; // The start of the ray segment
-			hit.ray.tfar = INFINITY; // The end of the ray segment
-			hit.ray.time = 0.0f; // Time of ray for motion blur, unrelated to our package
-
-			hit.hit.geomID = RTC_INVALID_GEOMETRY_ID;
-			hit.hit.primID = -1;
-
-			// Cast the ray and update the hitstruct
-			rtcIntersect1(scene, &context, &hit);
-
-			// If valid geometry was hit, and the geometry matches the caller's desired mesh
-			// (if specified) then update the hitpoint and return
-			if (hit.hit.geomID == RTC_INVALID_GEOMETRY_ID || (mesh_id > -1 && hit.hit.geomID != mesh_id)) return HitStructD<real_t>();
-
-			unsigned int geom_id = hit.hit.geomID;
-			auto geometry = this->geometry[geom_id];
-
-			// Construct a Vector3D of the triangle
-			auto triangle = this->GetTriangle(geom_id, hit.hit.primID);
-
-			// do some multiplications to scale it up before intersection, then back down on return 
-			double ray_distance = RayTriangleIntersection(
-				Vector3D{ x,y,z },
-				Vector3D{ dx,dy,dz },
-				triangle[0],
-				triangle[1],
-				triangle[2]
-			);
-
-			return HitStructD<real_t>{ ray_distance, geom_id };
+			return Intersect(x, y, z, dx, dy, dz, distance, mesh_id);
 		}
 
 		template <typename N, typename V>
-		inline std::vector<HitStruct> FireAnyRayParallel(
+		inline std::vector<HitStruct<double>> FireAnyRayParallel(
 			const N & nodes,
 			const V & directions,
 			float max_distance = -1.0f,
@@ -1248,24 +1181,13 @@ namespace HF::RayTracer {
 			// Only use precision if we have it already enabled, or force_precise is true
 			const bool activate_precise = (use_precise || force_precise);
 			
-			std::vector<HitStruct> results (nodes.size());
+			std::vector<HitStruct<double>> results (nodes.size());
 
 			#pragma omp parallel for schedule(dynamic) if (use_parallel)
 			for (int i = 0; i < n; i++) {// Use custom triangle intesection if required
 				const auto& node = nodes[i];
 				const auto& direction = directions[i];
-				if (activate_precise) {
-					results[i] = FirePreciseRay(
-						node[0], node[1], node[2],
-						direction[0], direction[1], direction[2], max_distance, -1
-					);
-				}
-
-				else
-					results[i] = Intersect(
-						node[0], node[1], node[2],
-						direction[0], direction[1], direction[2], max_distance, -1
-					);
+				results[i] = Intersect(node, direction);
 			}
 			return results;
 		}

@@ -54,7 +54,7 @@ namespace HF::RayTracer {
 		ray.org_x = x; ray.org_y = y; ray.org_z = z;
 		ray.dir_x = dx; ray.dir_y = dy; ray.dir_z = dz;
 
-		ray.tnear = 0.0001f;
+		ray.tnear = 0.0000001f;
 		ray.tfar = (distance > 0) ? distance : INFINITY;
 		ray.time = 0.0f;
 		ray.flags = 0;
@@ -486,7 +486,7 @@ namespace HF::RayTracer {
 		};
 	}
 
-	HitStruct EmbreeRayTracer::FirePreciseRay(
+	HitStruct<float> EmbreeRayTracer::FirePreciseRay(
 		double x, double y, double z,
 		double dx, double dy, double dz,
 		double distance,	int mesh_id)
@@ -499,7 +499,7 @@ namespace HF::RayTracer {
 
 		// If valid geometry was hit, and the geometry matches the caller's desired mesh
 		// (if specified) then update the hitpoint and return
-		if (hit.hit.geomID == RTC_INVALID_GEOMETRY_ID || (mesh_id > -1 && hit.hit.geomID != mesh_id)) return HitStruct();
+		if (hit.hit.geomID == RTC_INVALID_GEOMETRY_ID || (mesh_id > -1 && hit.hit.geomID != mesh_id)) return HitStruct<float>(-1.0f, -1);
 
 		unsigned int geom_id = hit.hit.geomID;
 
@@ -514,7 +514,7 @@ namespace HF::RayTracer {
 			triangle[2]
 		);
 		float ray_distance = static_cast<float>(ray_distanceD);
-		return HitStruct{ ray_distance, geom_id};
+		return HitStruct<float>(ray_distance, geom_id);
 	}
 
 	std::vector<char> EmbreeRayTracer::FireRays(

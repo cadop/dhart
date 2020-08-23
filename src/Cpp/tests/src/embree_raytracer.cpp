@@ -479,10 +479,9 @@ TEST(_EmbreeRayTracer, Intersect) {
 	// Create RayTracer
 	EmbreeRayTracer ert(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
 
-	HitStruct res;
 
 	// Fire a ray straight down
-	res = ert.Intersect(0, 0, 1, 0, 0, -1);
+	auto res = ert.Intersect(0, 0, 1, 0, 0, -1);
 
 	// Print distance if it connected
 	if (res.DidHit()) std::cerr << res.distance << std::endl;
