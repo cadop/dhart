@@ -55,7 +55,7 @@ namespace HF::RayTracer {
 		ray.dir_x = dx; ray.dir_y = dy; ray.dir_z = dz;
 
 		ray.tnear = 0.0001f;
-		ray.tfar = distance > 0 ? distance : INFINITY;
+		ray.tfar = (distance > 0) ? distance : INFINITY;
 		ray.time = 0.0f;
 		ray.flags = 0;
 			
@@ -663,7 +663,7 @@ namespace HF::RayTracer {
 
 	bool EmbreeRayTracer::FireOcclusionRay(float x, float y, float z, float dx, float dy, float dz, float distance, int mesh_id)
 	{
-		auto ray = ConstructRay(x, y, z, dx, dy, dz);
+		auto ray = ConstructRay(x, y, z, dx, dy, dz, distance);
 		rtcOccluded1(scene, &context, &ray);
 		return ray.tfar == -INFINITY;
 	}
