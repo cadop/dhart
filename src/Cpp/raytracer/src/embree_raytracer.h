@@ -38,6 +38,12 @@ namespace HF::RayTracer {
 	struct Vector3D {
 		double x; double y; double z;
 
+		inline Vector3D::Vector3D(double x, double y, double z) {
+			this->x = x;
+			this->y = y;
+			this->z = z;
+
+		}
 		inline Vector3D operator-(const Vector3D& v2) const {
 			return Vector3D{
 				x - v2.x,
@@ -136,7 +142,11 @@ namespace HF::RayTracer {
 		/*!\brief Commit geometry and attach it to the scene. */
 		int InsertGeom(RTCGeometry& geom, int id = -1);
 
-		double CalculatePreciseDistance(RTCRayHit hit);
+	double CalculatePreciseDistance(
+			unsigned int geom_id,
+			unsigned int prim_id,
+			const Vector3D& origin,
+			const Vector3D& direction) const;
 
 		/// <summary> Cast a ray and store all relevant information in a HitStruct. </summary>
 /// <param name="x"> x component of the ray's origin. </param>
@@ -461,7 +471,7 @@ namespace HF::RayTracer {
 		);
 
 
-		std::array<Vector3D, 3> GetTriangle(int geomID, int primID);
+		std::array<Vector3D, 3> GetTriangle(unsigned int geomID, unsigned int primID) const;
 
 		HitStruct FirePreciseRay(double x, double y, double z, double dx, double dy, double dz, double distance, int mesh_id);	
 
@@ -962,43 +972,6 @@ namespace HF::RayTracer {
 		/*!
 			\par Example
 			\code
-				// Requires #include "embree_raytracer.h", #include "meshinfo.h"
-
-				// for brevity
-				using HF::RayTracer::EmbreeRayTracer;
-				using HF::Geometry::MeshInfo;
-
-				const std::vector<float> plane_vertices{
-					-10.0f, 10.0f, 0.0f,
-					-10.0f, -10.0f, 0.0f,
-					10.0f, 10.0f, 0.0f,
-					10.0f, -10.0f, 0.0f,
-				};
-
-				const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
-
-				// Create a new raytracer from a basic 10x10 plane centered on the origin.
-				EmbreeRayTracer ert(std::vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
-
-				// Create origin/direction arrays
-				std::array<float, 3> origin{ 0, 0, 1 };
-				std::array<float, 3> direction{ 0, 0, -1 };
-
-				bool res = false; float out_dist = -1; int out_id = -1;
-
-				// Fire a ray straight down
-				res = ert.Intersect(origin, direction, out_dist, out_id);
-
-				// Print its distance if it connected
-				if (res) std::cerr << out_dist << std::endl;
-				else std::cerr << "Miss" << std::endl;
-
-				// Fire a ray straight up
-				res = ert.Intersect(origin, origin, out_dist, out_id);
-
-				// Print its distance if it connected
-				if (res) std::cerr << out_dist << std::endl;
-				else std::cerr << "Miss" << std::endl;
 			\endcode
 
 			`>>>(0, 0, 0)`\n
@@ -1011,7 +984,6 @@ namespace HF::RayTracer {
 			const V& direction,
 			float max_distance = -1.0f, int mesh_id = -0.1f)
 		{
-
 			// create output value
 			HitStruct out_struct = { -1.0, -1.0 };
 
@@ -1049,8 +1021,17 @@ namespace HF::RayTracer {
 			// If an intersection occured, update the struct. 
 			if (DidIntersect(result.hit.geomID))
 			{
-				out_struct.distance = this->use_precise ? result.ray.tfar : CalculatePreciseDistance(result);
-				out_struct.meshid = out_struct.meshid;
+				// Use a precise ray intersection if required
+				if (this->use_precise)
+					out_struct.distance = result.ray.tfar;
+				else
+					out_struct.distance = CalculatePreciseDistance(
+						result.hit.geomID,
+						result.hit.primID,
+						Vector3D(x,y,z),
+						Vector3D(dx,dy,dz)
+					);
+				out_struct.meshid = result.hit.geomID;
 			}
 
 			return out_struct;
@@ -1440,40 +1421,12 @@ namespace HF::RayTracer {
 		return Vector3D{ -V.x, -V.y, -V.z };
 	}
 
-	inline double RayTriangleIntersection(
+	double RayTriangleIntersection(
 		const Vector3D& origin,
 		const Vector3D& direction,
 		const Vector3D& v1,
 		const Vector3D& v2,
-		const Vector3D& v3)
-	{
+		const Vector3D& v3);
 
-		const double EPSILON = 0.0000001;
-		const Vector3D inverted_direction = direction;//InvertVector(direction);
-
-		const Vector3D edge1 = v2 - v1;
-		const Vector3D edge2 = v3 - v1;
-		const Vector3D h = cross(inverted_direction, edge2);
-		const double a = dot(edge1, h);
-
-		// This ray is parallel to this triangle.
-		if (a > -EPSILON && a < EPSILON)
-			return -1;
-
-		const double f = 1.0 / a;
-		const Vector3D s = origin - v1;
-		const double u = f * dot(s, h);
-		if (u < 0.0 || u > 1.0)
-			return -1;
-
-		const Vector3D q = cross(s, edge1);
-		const double v = f * dot(direction, q);
-		if (v < 0.0 || u + v > 1.0)
-			return -1;
-
-		// At this stage we can compute t to find out where the intersection point is on the line.
-		double t_hit = f* dot(edge2, q);
-		return t_hit;
-	}
 }
 #endif

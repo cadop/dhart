@@ -231,6 +231,61 @@ namespace HF::RayTracer {
 		return static_cast<int>(rtcAttachGeometry(scene, geom));
 	}
 
+	double RayTriangleIntersection(
+		const Vector3D& origin,
+		const Vector3D& direction,
+		const Vector3D& v1,
+		const Vector3D& v2,
+		const Vector3D& v3)
+	{
+
+		const double EPSILON = 0.0000001;
+		const Vector3D inverted_direction = direction;//InvertVector(direction);
+
+		const Vector3D edge1 = v2 - v1;
+		const Vector3D edge2 = v3 - v1;
+		const Vector3D h = cross(inverted_direction, edge2);
+		const double a = dot(edge1, h);
+
+		// This ray is parallel to this triangle.
+		if (a > -EPSILON && a < EPSILON)
+			return -1;
+
+		const double f = 1.0 / a;
+		const Vector3D s = origin - v1;
+		const double u = f * dot(s, h);
+		if (u < 0.0 || u > 1.0)
+			return -1;
+
+		const Vector3D q = cross(s, edge1);
+		const double v = f * dot(direction, q);
+		if (v < 0.0 || u + v > 1.0)
+			return -1;
+
+		// At this stage we can compute t to find out where the intersection point is on the line.
+		double t_hit = f * dot(edge2, q);
+		return t_hit;
+	}
+
+	double EmbreeRayTracer::CalculatePreciseDistance(
+		unsigned int geom_id,
+		unsigned int prim_id, 
+		const Vector3D & origin, 
+		const Vector3D & direction) const
+	{
+		// Get the triangle intersected by this hit
+		auto triangle = this->GetTriangle(geom_id, prim_id);
+
+		// Perform the raytriangle intersection
+		return RayTriangleIntersection(
+			origin,
+			direction,
+			triangle[0],
+			triangle[1],
+			triangle[2]
+		);
+	}
+
 	EmbreeRayTracer::EmbreeRayTracer(const std::vector<std::array<float, 3>>& geometry) {
 		SetupScene();
 
@@ -401,30 +456,33 @@ namespace HF::RayTracer {
 		return	Vector3D{buffer[index].x, buffer[index].y,buffer[index].z};
 	}
 
-	std::array<Vector3D, 3> EmbreeRayTracer::GetTriangle(int geomID, int primID)
+	std::array<Vector3D, 3> EmbreeRayTracer::GetTriangle(unsigned int geomID, unsigned int primID) const
 	{
+		// Get the index buffer for the geometry at geomID
 		Triangle* index_buffer = reinterpret_cast<Triangle*>(rtcGetGeometryBufferData(
 			rtcGetGeometry(this->scene, geomID),
 			RTCBufferType::RTC_BUFFER_TYPE_INDEX,
 			0
 		));
 
-		int x_index = index_buffer[primID].v0;
-		int y_index = index_buffer[primID].v1;
-		int z_index = index_buffer[primID].v2;
+		// Get the indices of the 3 vertices that form this triangle from thig
+		// geometry's index buffer
+		int v1_index = index_buffer[primID].v0;
+		int v2_index = index_buffer[primID].v1;
+		int v3_index = index_buffer[primID].v2;
 
+		// Get a pointer to this geometry's vertex buffer
 		Vertex * vertex_buffer = reinterpret_cast<Vertex *>(rtcGetGeometryBufferData(
 			rtcGetGeometry(this->scene, geomID),
 			RTCBufferType::RTC_BUFFER_TYPE_VERTEX,
 			0
 		));
 
-		CheckState(this->device);
-
+		// Get the vertices at these indices from the vertex buffer.
 		return std::array<Vector3D, 3>{
-				GetPointFromBuffer(x_index, vertex_buffer),
-				GetPointFromBuffer(y_index, vertex_buffer),
-				GetPointFromBuffer(z_index, vertex_buffer)
+				GetPointFromBuffer(v1_index, vertex_buffer),
+				GetPointFromBuffer(v2_index, vertex_buffer),
+				GetPointFromBuffer(v3_index, vertex_buffer)
 		};
 	}
 
