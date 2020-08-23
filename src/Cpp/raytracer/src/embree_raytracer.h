@@ -462,10 +462,6 @@ namespace HF::RayTracer {
 			int mesh_id = -1
 		);
 
-
-
-		HitStruct<float> FirePreciseRay(double x, double y, double z, double dx, double dy, double dz, double distance, int mesh_id);	
-
 		/// <summary> Fire multiple rays and recieve hitpoints in return. </summary>
 		/// <param name="origins"> An array of x,y,z coordinates to fire rays from. </param>
 		/// <param name="directions"> An array of x,y,z directions to fire in. </param>
@@ -594,7 +590,7 @@ namespace HF::RayTracer {
 				EmbreeRayTracer ert(std::vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
 
 				// Fire a ray straight down
-				bool res = ert.FireOcclusionRay(
+				bool res = ert.Occluded_IMPL(
 					std::array<float, 3>{ 0, 0, 1 },
 					std::array<float, 3>{ 0, 0, -1 }
 				);
@@ -604,7 +600,7 @@ namespace HF::RayTracer {
 				else std::cerr << "False" << std::endl;
 
 				// Fire a ray straight up
-				res = ert.FireOcclusionRay(
+				res = ert.Occluded_IMPL(
 					std::array<float, 3>{ 0, 0, 1 },
 					std::array<float, 3>{ 0, 0, 1 }
 				);
@@ -617,7 +613,7 @@ namespace HF::RayTracer {
 			`>>> True`\n
 			`>>> False`
 		*/
-		bool FireOcclusionRay(
+		bool Occluded_IMPL(
 			const std::array<float, 3>& origin,
 			const std::array<float, 3>& direction,
 			float max_dist = -1
@@ -749,14 +745,14 @@ namespace HF::RayTracer {
 				EmbreeRayTracer ert(std::vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
 
 				// Fire a ray straight down
-				bool res = ert.FireOcclusionRay(0, 0, 1, 0, 0, -1);
+				bool res = ert.Occluded_IMPL(0, 0, 1, 0, 0, -1);
 
 				// Print Results
 				if (res) std::cerr << "True" << std::endl;
 				else std::cerr << "False" << std::endl;
 
 				// Fire a ray straight up
-				res = ert.FireOcclusionRay(0, 0, 1, 0, 0, 1);
+				res = ert.Occluded_IMPL(0, 0, 1, 0, 0, 1);
 
 				// Print results
 				if (res) std::cerr << "True" << std::endl;
@@ -766,7 +762,7 @@ namespace HF::RayTracer {
 			`>>> True`\n
 			`>>> False`
 		*/
-		bool FireOcclusionRay(
+		bool Occluded_IMPL(
 			float x,
 			float y,
 			float z,
@@ -1210,7 +1206,7 @@ namespace HF::RayTracer {
 			float max_distance = -1.0f,
 			int mesh_id = -1
 		) {
-			return FireOcclusionRay(
+			return Occluded_IMPL(
 				origin[0], origin[1], origin[2],
 				direction[0], direction[1], direction[2],
 				max_distance, mesh_id
@@ -1224,7 +1220,7 @@ namespace HF::RayTracer {
 			dist_type max_distance = -1.0,
 			int mesh_id = -1
 		) {
-			return FireOcclusionRay(
+			return Occluded_IMPL(
 				x,y,z,
 				dx,dy,dz,
 				max_distance, mesh_id
@@ -1310,6 +1306,5 @@ namespace HF::RayTracer {
 		const Vector3D& v1,
 		const Vector3D& v2,
 		const Vector3D& v3);
-
 }
 #endif

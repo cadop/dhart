@@ -415,41 +415,20 @@ namespace HF::RayTracer {
 			float distance,
 			int mesh_id) 
 	{
-		auto hit = ConstructHit(x, y, z, dx, dy, dz, distance, mesh_id);
-
-		rtcIntersect1(scene, &context, &hit);
-
-		CheckState(device);
-		// If valid geometry was hit, and the geometry matches the caller's desired mesh
-		// (if specified) then update the hitpoint and return
-		if (hit.hit.geomID == RTC_INVALID_GEOMETRY_ID || (mesh_id > -1 && hit.hit.geomID != mesh_id)) return false;
-
-		auto distance_to_hit = hit.ray.tfar;
-
-		// Use precise intersection if this is specified
-		if (use_precise) {
-			unsigned int geom_id = hit.hit.geomID;
-
-			// Construct a Vector3D of the triangle
-			auto triangle = this->GetTriangle(geom_id, hit.hit.primID);
-
-			distance_to_hit = RayTriangleIntersection(
-				Vector3D{ x,y,z },
-				Vector3D{ dx,dy,dz },
-				triangle[0],
-				triangle[1],
-				triangle[2]
-			);
-		}
+		HitStruct<float> res = Intersect<float>(x, y, z, dx, dy, dz, distance, mesh_id);
 
 		// If the ray did hit, update the node position by translating the distance along the directions
 		// This REQUIRES a normalized vector
 		// Translate the point along the direction vector 
-		x = x + (dx * distance_to_hit);
-		y = y + (dy * distance_to_hit);
-		z = z + (dz * distance_to_hit);
+		if (res.DidHit()) {
+			x = x + (dx * res.distance);
+			y = y + (dy * res.distance);
+			z = z + (dz * res.distance);
 
-		return true;
+			return true;
+		}
+		else
+			return false;
 	}
 
 	inline Vector3D GetPointFromBuffer(int index, Vertex* buffer) {
@@ -484,37 +463,6 @@ namespace HF::RayTracer {
 				GetPointFromBuffer(v2_index, vertex_buffer),
 				GetPointFromBuffer(v3_index, vertex_buffer)
 		};
-	}
-
-	HitStruct<float> EmbreeRayTracer::FirePreciseRay(
-		double x, double y, double z,
-		double dx, double dy, double dz,
-		double distance,	int mesh_id)
-	{
-		// Define an Embree hit data type to store results
-		auto hit = ConstructHit(x, y, z, dx, dy, dz);
-
-		// Cast the ray and update the hitstruct
-		rtcIntersect1(scene, &context, &hit);
-
-		// If valid geometry was hit, and the geometry matches the caller's desired mesh
-		// (if specified) then update the hitpoint and return
-		if (hit.hit.geomID == RTC_INVALID_GEOMETRY_ID || (mesh_id > -1 && hit.hit.geomID != mesh_id)) return HitStruct<float>(-1.0f, -1);
-
-		unsigned int geom_id = hit.hit.geomID;
-
-		// Construct a Vector3D of the triangle
-		auto triangle = this->GetTriangle(geom_id, hit.hit.primID);
-		
-		double ray_distanceD = RayTriangleIntersection(
-			Vector3D{ x,y,z },
-			Vector3D{ dx,dy,dz },
-			triangle[0],
-			triangle[1],
-			triangle[2]
-		);
-		float ray_distance = static_cast<float>(ray_distanceD);
-		return HitStruct<float>(ray_distance, geom_id);
 	}
 
 	std::vector<char> EmbreeRayTracer::FireRays(
@@ -592,12 +540,12 @@ namespace HF::RayTracer {
 		return hit;
 	}
 
-	bool EmbreeRayTracer::FireOcclusionRay(
+	bool EmbreeRayTracer::Occluded_IMPL(
 		const std::array<float, 3>& origin,
 		const std::array<float, 3>& direction,
 		float max_dist
 	) {
-		return FireOcclusionRay(origin[0], origin[1], origin[2], direction[0], direction[1], direction[2]);
+		return Occluded_IMPL(origin[0], origin[1], origin[2], direction[0], direction[1], direction[2]);
 	}
 
 	std::vector<char> EmbreeRayTracer::FireOcclusionRays(
@@ -620,7 +568,7 @@ namespace HF::RayTracer {
 				//const std::array<float, 3> direction = directions[i];
 				//printf("Origin: %f, %f, %f\n", origin[0], origin[1]);
 				//printf("Direction: %f, %f, %f\n", direction[0], direction[1], direction[2]);
-				out_array[i] = FireOcclusionRay(
+				out_array[i] = Occluded_IMPL(
 					origins[i][0], origins[i][1], origins[i][2],
 					directions[i][0], directions[i][1], directions[i][2],
 					max_distance, -1
@@ -634,7 +582,7 @@ namespace HF::RayTracer {
 #pragma omp parallel for if(use_parallel) schedule(dynamic)
 			for (int i = 0; i < directions.size(); i++) {
 				const auto& direction = directions[i];
-				out_array[i] = FireOcclusionRay(
+				out_array[i] = Occluded_IMPL(
 					origin[0], origin[1], origin[2],
 					direction[0], direction[1], direction[2],
 					max_distance, -1
@@ -648,7 +596,7 @@ namespace HF::RayTracer {
 #pragma omp parallel for if(use_parallel) schedule(dynamic)
 			for (int i = 0; i < origins.size(); i++) {
 				const auto& origin = origins[i];
-				out_array[i] = FireOcclusionRay(
+				out_array[i] = Occluded_IMPL(
 					origin[0], origin[1], origin[2],
 					direction[0], direction[1], direction[2],
 					max_distance, -1
@@ -656,12 +604,12 @@ namespace HF::RayTracer {
 			}
 		}
 		else if (directions.size() == 1 && origins.size() == 1) {
-			out_array = { FireOcclusionRay(origins[0], directions[0], max_distance) };
+			out_array = { Occluded_IMPL(origins[0], directions[0], max_distance) };
 		}
 		return out_array;
 	}
 
-	bool EmbreeRayTracer::FireOcclusionRay(float x, float y, float z, float dx, float dy, float dz, float distance, int mesh_id)
+	bool EmbreeRayTracer::Occluded_IMPL(float x, float y, float z, float dx, float dy, float dz, float distance, int mesh_id)
 	{
 		auto ray = ConstructRay(x, y, z, dx, dy, dz, distance);
 		rtcOccluded1(scene, &context, &ray);
