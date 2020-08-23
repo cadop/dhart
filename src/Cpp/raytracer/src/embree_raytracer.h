@@ -128,6 +128,9 @@ namespace HF::RayTracer {
 		*/
 		void SetupScene();
 
+		/*! \brief Get the vertices for a specific triangle in a mesh.*/
+		std::array<Vector3D, 3> GetTriangle(unsigned int geomID, unsigned int primID) const;
+
 		/*!\brief Commit geometry and attach it to the scene. */
 		int InsertGeom(RTCGeometry& geom, int id = -1);
 
@@ -460,7 +463,6 @@ namespace HF::RayTracer {
 		);
 
 
-		std::array<Vector3D, 3> GetTriangle(unsigned int geomID, unsigned int primID) const;
 
 		HitStruct<float> FirePreciseRay(double x, double y, double z, double dx, double dy, double dz, double distance, int mesh_id);	
 
@@ -775,7 +777,6 @@ namespace HF::RayTracer {
 			int mesh_id = -1
 		);
 
-		bool InternalIntersect(float x, float y, float z, float dx, float dy, float dz, float distance, int mesh_id);
 
 		/// <summary> Add a new mesh to this raytracer's BVH with the specified ID. </summary>
 		/// <param name="Mesh"> A vector of 3d points composing the mesh </param>
@@ -1103,7 +1104,7 @@ namespace HF::RayTracer {
 			int& out_meshid,
 			float max_distance = -1.0f)
 		{
-			HitStruct<double> result = Intersect(ndoe, direction, max_distance);
+			HitStruct<double> result = Intersect(node, direction, max_distance);
 			if (result.DidHit()) {
 				out_distance = result.distance;
 				out_meshid = result.meshid;
@@ -1113,14 +1114,6 @@ namespace HF::RayTracer {
 				return false;
 		}
 		
-		template <typename real_t>
-		HitStruct<double> PreciseRayIntersect(
-			real_t x, real_t y, real_t z,
-			real_t dx, real_t dy, real_t dz,
-			real_t distance = -1, int mesh_id = -1)
-		{
-			return Intersect(x, y, z, dx, dy, dz, distance, mesh_id);
-		}
 
 		template <typename N, typename V>
 		inline std::vector<HitStruct<double>> FireAnyRayParallel(
@@ -1187,7 +1180,7 @@ namespace HF::RayTracer {
 				EmbreeRayTracer ert(std::vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
 
 				// Fire a ray straight down
-				bool res = ert.FireAnyOcclusionRay(
+				bool res = ert.Occluded(
 					std::array<float, 3>{0, 0, 1},
 					std::array<float, 3>{0, 0, -1}
 				);
@@ -1197,7 +1190,7 @@ namespace HF::RayTracer {
 				else std::cerr << "False" << std::endl;
 
 				// Fire a ray straight up
-				res = ert.FireAnyOcclusionRay(
+				res = ert.Occluded(
 					std::array<float, 3>{0, 0, 1},
 					std::array<float, 3>{0, 0, 1}
 				);
@@ -1211,7 +1204,7 @@ namespace HF::RayTracer {
 			`>>> False`
 		*/
 		template <typename N, typename V>
-		bool FireAnyOcclusionRay(
+		bool Occluded(
 			const N& origin,
 			const V& direction,
 			float max_distance = -1.0f,
@@ -1220,6 +1213,20 @@ namespace HF::RayTracer {
 			return FireOcclusionRay(
 				origin[0], origin[1], origin[2],
 				direction[0], direction[1], direction[2],
+				max_distance, mesh_id
+			);
+		}
+
+		template <typename numeric1, typename numeric2, typename dist_type>
+		bool Occluded(
+			numeric1 x, numeric1 y, numeric1 z,
+			numeric2 dx, numeric2 dy, numeric2 dz,
+			dist_type max_distance = -1.0,
+			int mesh_id = -1
+		) {
+			return FireOcclusionRay(
+				x,y,z,
+				dx,dy,dz,
 				max_distance, mesh_id
 			);
 		}

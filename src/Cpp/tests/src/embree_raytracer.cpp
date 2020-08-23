@@ -535,7 +535,7 @@ TEST(_EmbreeRayTracer, FireAnyRay) {
 	else std::cerr << "Miss" << std::endl;
 }
 
-TEST(_EmbreeRayTracer, FireAnyOcclusionRay) {
+TEST(_EmbreeRayTracer, Occluded) {
 	// Create Plane
 	const vector<float> plane_vertices{
 		-10.0f, 10.0f, 0.0f,
@@ -549,7 +549,7 @@ TEST(_EmbreeRayTracer, FireAnyOcclusionRay) {
 	EmbreeRayTracer ert(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
 
 	// Fire a ray straight down
-	bool res = ert.FireAnyOcclusionRay(
+	bool res = ert.Occluded(
 		std::array<float, 3>{0, 0, 1},
 		std::array<float, 3>{0, 0, -1}
 	);
@@ -559,7 +559,7 @@ TEST(_EmbreeRayTracer, FireAnyOcclusionRay) {
 	else std::cerr << "False" << std::endl;
 
 	// Fire a ray straight up
-	res = ert.FireAnyOcclusionRay(
+	res = ert.Occluded(
 		std::array<float, 3>{0, 0, 1},
 		std::array<float, 3>{0, 0, 1}
 	);

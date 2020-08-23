@@ -51,7 +51,7 @@ namespace HF::VisibilityGraph {
 		auto node_copy = array<float, 3>{Node[0], Node[1], Node[2] + ROUNDING_PRECISION};
 		
 		// Cast an occlusion ray straight up with a distance of height.
-		return !ert.FireAnyOcclusionRay(node_copy, up, height);
+		return !ert.Occluded(node_copy, up, height);
 	}
 
 
@@ -122,7 +122,7 @@ namespace HF::VisibilityGraph {
 		auto direction = node_a.directionTo(node_b);
 
 		// Cast the ray and return the result.
-		return ert.FireAnyOcclusionRay(heightened_node, direction, distance);
+		return ert.Occluded(heightened_node, direction, distance);
 	}
 
 	Graph AllToAll(EmbreeRayTracer& ert, const vector<Node>& nodes, float height) {

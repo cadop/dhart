@@ -257,7 +257,7 @@ namespace HF::GraphGenerator {
 	{
 		// Use the distance between parent and child
 		// as the maximum distance for the occlusion check
-		return RT.FireAnyOcclusionRay(parent, DirectionTo(parent, child), DistanceTo(parent, child));
+		return RT.Occluded(parent, DirectionTo(parent, child), DistanceTo(parent, child));
 	}
 
 	bool CheckSlope(const real3& parent, const real3& child, const GraphParams& gp)
