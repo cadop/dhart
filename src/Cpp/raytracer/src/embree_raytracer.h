@@ -967,7 +967,7 @@ namespace HF::RayTracer {
 			`>>>Miss`
 
 		*/
-		template <class N, class V, typename real_t = double>
+		template <typename real_t = double, class N, class V>
 		HitStruct<real_t> Intersect(
 			const N& node,
 			const V& direction,
@@ -1085,37 +1085,14 @@ namespace HF::RayTracer {
 			int& out_meshid,
 			float max_distance = -1.0f)
 		{
-			HitStruct<float> result;
-			// Use custom triangle intesection if required
-			if (use_precise)
-			{
-				//HitStructD resultD;
-				result = FirePreciseRay(
-					node[0], node[1], node[2],
-					direction[0], direction[1], direction[2], max_distance, -1
-				);
-				/*
-				// Convert to float
-				if (!resultD.DidHit()) return false;
-				result.distance = resultD.distance;
-				result.meshid = resultD.meshid;
-				*/
-			}
-			else
-			{
-				result = Intersect<float>(
-					node[0], node[1], node[2],
-					direction[0], direction[1], direction[2], max_distance, -1
-				);
-			}
-			// If no intersection was found, return false
-			if (!result.DidHit()) return false;
-			else {
-				// otherwise update outputs then return true
+			HitStruct<float> result = Intersect<float>(node, direction, max_distance);
+			if (result.DidHit()) {
 				out_distance = result.distance;
 				out_meshid = result.meshid;
 				return true;
 			}
+			else
+				return false;
 		}
 
 		template <typename N, typename V, typename real_t>
@@ -1126,37 +1103,14 @@ namespace HF::RayTracer {
 			int& out_meshid,
 			float max_distance = -1.0f)
 		{
-			// Use custom triangle intesection if required
-			if (use_precise)
-			{
-				auto result = PreciseRayIntersect<real_t>(
-					node[0], node[1], node[2],
-					direction[0], direction[1], direction[2], max_distance, -1
-				);
-				// If no intersection was found, return false
-				if (!result.DidHit()) return false;
-				else {
-					// otherwise update outputs then return true
-					out_distance = result.distance;
-					out_meshid = result.meshid;
-					return true;
-				}
+			HitStruct<double> result = Intersect(ndoe, direction, max_distance);
+			if (result.DidHit()) {
+				out_distance = result.distance;
+				out_meshid = result.meshid;
+				return true;
 			}
 			else
-			{
-				auto result = Intersect<float, float>(
-					node[0], node[1], node[2],
-					direction[0], direction[1], direction[2], max_distance, -1
-				);
-				// If no intersection was found, return false
-				if (!result.DidHit()) return false;
-				else {
-					// otherwise update outputs then return true
-					out_distance = result.distance;
-					out_meshid = result.meshid;
-					return true;
-				}
-			}
+				return false;
 		}
 		
 		template <typename real_t>
