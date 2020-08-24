@@ -54,6 +54,17 @@ std::ostringstream PrintGraph(const Graph & g) {
 	return out_str;
 }
 
+template <typename N, typename N2>
+void ComparePoints(const N& expected_nodes, const N2& actual_nodes) {
+
+	ASSERT_EQ(expected_nodes.size(), actual_nodes.size());
+
+	for (int i = 0; i < actual_nodes.size(); i++) {
+		auto distance = DistanceTo(expected_nodes[i], actual_nodes[i]);
+		EXPECT_NEAR(0, distance, 0.000001);
+	}
+}
+
 TEST(_GraphGenerator, BuildNetwork) {
 	EmbreeRayTracer ray_tracer = CreateGGExmapleRT();
 
@@ -85,8 +96,19 @@ TEST(_GraphGenerator, BuildNetwork) {
 	auto out_str = PrintGraph(g);
 
 	// Compare output against expected output
-	std::string expected_output = "[(0, 0, -0),(-1, -1, -0),(-1, 0, -0),(-1, 1, 0),(0, -1, -0),(0, 1, 0),(1, -1, -0),(1, 0, -0),(1, 1, 0),(-2, -2, -0),(-2, -1, -0),(-2, 0, -0),(-1, -2, -0),(0, -2, -0),(-2, 1, 0),(-2, 2, 0),(-1, 2, 0),(0, 2, 0),(1, -2, -0)]";
-	ASSERT_EQ(expected_output, out_str.str());
+	const std::vector<Node> expected_nodes = {
+		{0, 0, -0}, {-1, -1, -0}, {-1, 0, -0},
+		{-1, 1, 0},{0, -1, -0}, {0, 1, 0 },
+		{1, -1, -0}, {1, 0, -0}, {1, 1, 0},
+		{-2, -2, -0 }, { -2, -1, -0 },{-2, 0, -0}, Node{-1, -2, -0 },
+		{0, -2, -0 }, { -2, 1, 0 }, Node(-2, 2, 0),
+		{-1, 2, 0}, {0, 2, 0},{1, -2, -0}};
+	const auto graph_nodes = g.Nodes();
+
+	ASSERT_EQ(graph_nodes.size(), expected_nodes.size());
+
+	ComparePoints(graph_nodes, expected_nodes);
+
 }
 
 TEST(_GraphGenerator, CrawlGeom) {
@@ -131,7 +153,14 @@ TEST(_GraphGenerator, CrawlGeom) {
 	//! [EX_CrawlGeom]
 	
 	// Define Expected Output
-	std::string expected_output = "[(0, 1, 0),(-1, 0, -0),(-1, 1, 0),(-1, 2, 0),(0, 0, -0),(0, 2, 0),(1, 0, -0),(1, 1, 0),(1, 2, 0),(-2, -1, -0),(-2, 0, -0),(-2, 1, 0),(-1, -1, -0),(0, -1, -0),(-2, 2, 0),(-2, 3, 0),(-1, 3, 0),(0, 3, 0),(1, -1, -0)]";
+	const std::vector<Node> expected_output = {
+		{0, 1, 0},{-1, 0, -0},{-1, 1, 0},
+		{-1, 2, 0},{0, 0, -0},{0, 2, 0},
+		{1, 0, -0},{1, 1, 0},{1, 2, 0},
+		{-2, -1, -0},{-2, 0, -0},{-2, 1, 0},
+		{-1, -1, -0},{0, -1, -0},{-2, 2, 0},
+		{-2, 3, 0},{-1, 3, 0},{0, 3, 0},
+		{1, -1, -0} };
 	
 	//! [EX_CrawlGeom_Serial]
 	
@@ -141,8 +170,7 @@ TEST(_GraphGenerator, CrawlGeom) {
 	//! [EX_CrawlGeom_Serial]
 	
 	// Check Serial
-	auto out_str = PrintGraph(g);
-	ASSERT_EQ(expected_output, out_str.str());
+	ComparePoints(g.Nodes(), expected_output);
 
 	//! [EX_CrawlGeom_Parallel]
 	
@@ -152,9 +180,18 @@ TEST(_GraphGenerator, CrawlGeom) {
 	//! [EX_CrawlGeom_Parallel]
 
 	// CheckParallel
-	std::string expected_parallel = "[(0, 2, 0),(-1, 1, 0),(-1, 2, 0),(-1, 3, 0),(0, 1, 0),(0, 3, 0),(1, 1, 0),(1, 2, 0),(1, 3, 0),(1, 0, -0),(0, -1, -0),(0, 0, -0),(1, -1, -0),(2, -1, -0),(2, 0, -0),(2, 1, 0),(2, 2, 0),(2, 3, 0),(-2, -1, -0),(-3, -2, -0),(-3, -1, -0),(-3, 0, -0),(-2, -2, -0),(-2, 0, -0),(-1, -2, -0),(-1, -1, -0),(-1, 0, -0)]";
-	auto parallel_out_str = PrintGraph(g);
-	ASSERT_EQ(expected_parallel, parallel_out_str.str());
+	const std::vector<Node> expected_parallel = {
+		{0, 2, 0},{-1, 1, 0},{-1, 2, 0},
+		{-1, 3, 0},{0, 1, 0},{0, 3, 0},
+		{1, 1, 0},{1, 2, 0},{1, 3, 0},
+		{1, 0, -0},{0, -1, -0},{0, 0, -0},
+		{1, -1, -0},{2, -1, -0},{2, 0, -0},
+		{2, 1, 0},{2, 2, 0},{2, 3, 0},
+		{-2, -1, -0},{-3, -2, -0},{-3, -1, -0},
+		{-3, 0, -0},{-2, -2, -0},{-2, 0, -0},
+		{-1, -2, -0},{-1, -1, -0},{-1, 0, -0} };
+
+	ComparePoints(expected_parallel, g.Nodes());
 }
 
 TEST(_GraphGenerator, ValidateStartPoint) {
@@ -334,6 +371,11 @@ TEST(_GraphGenerator, GetChildren) {
 	ASSERT_EQ(expected_output, out_str.str());
 }
 
+template<typename n1_type, typename n2_type>
+inline double DistanceTo(const n1_type& n1, const n2_type& n2) {
+	return sqrt(pow((n1[0] - n2[0]), 2) + pow((n1[1] - n2[1]), 2) + pow((n1[2] - n2[2]), 2));
+}
+
 TEST(_GraphGenerator, CheckChildren) {
 	EmbreeRayTracer ray_tracer = CreateGGExmapleRT();
 
@@ -368,10 +410,17 @@ TEST(_GraphGenerator, CheckChildren) {
 
 	//! [EX_CheckChildren]
 
-	std::string expected_output = "[(0, 2, 0),(1, 0, -0),(0, 1, 0),(2, 0, -0)]";
-	ASSERT_EQ(expected_output, out_str.str());
-}
+	const std::vector<HF::GraphGenerator::real3>  correct_children = {
+		{0,2,0}, {1,0,-0}, {0,1,0}, {2,0,-0}
+	};
 
+	ASSERT_EQ(valid_children.size(), correct_children.size());
+	for (int i = 0; i < valid_children.size(); i++) {
+		const auto& actual_child = valid_children[i];
+		const auto& expected_child = correct_children[i];
+		EXPECT_NEAR(0, DistanceTo(actual_child, expected_child), 0.00001);
+	}
+}
 TEST(_GraphGenerator, CheckConnection) {
 	EmbreeRayTracer ray_tracer = CreateGGExmapleRT();
 

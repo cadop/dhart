@@ -19,7 +19,7 @@ namespace HF::GraphGenerator {
 
 	using std::vector;
 
-
+	using HF::RayTracer::HitStruct;
 	/*! 
 		\brief Convert a point_type to a node.
 		
@@ -115,30 +115,28 @@ namespace HF::GraphGenerator {
 		HIT_FLAG flag)
 	{
 		// Setup default params
-		double dist = -1.0;
-		int id = -1.0f;
-		bool res = false;
+		HitStruct<real_t> res;
 
 		// Switch Geometry based on hitflag
 		switch (flag) {
 		case HIT_FLAG::FLOORS: // Both are the same for now. Waiting on obstacle support
 		case HIT_FLAG::OBSTACLES:
-			res = ray_tracer.FireAnyRayD(origin, direction, dist, id);
+			res = ray_tracer.Intersect(origin, direction);
 			break;
 		case HIT_FLAG::BOTH:
-			res = ray_tracer.FireAnyRayD(origin, direction, dist, id);
+			res = ray_tracer.Intersect(origin, direction);
 			break;
 		default:
 			assert(false);
 		}
 
 		// If successful, make a copy of the node, move it, then return it
-		if (res) {
+		if (res.DidHit()) {
 			// Create a new optional point with a copy of the origin
 			optional_real3 return_pt(origin);
 
 			// Move it in direction
-			MoveNode(dist, direction, *return_pt);
+			MoveNode(res.distance, direction, *return_pt);
 			//double temp_diff = (origin[2]) - dist; // Sanity check for direction -1 to see influence of movenode arithmetic 
 			// Round the position to the z value tolerance
 			return_pt.pt[2] = HF::SpatialStructures::roundhf_tail<real_t>(return_pt.pt[2], 1/node_z_tolerance);
@@ -259,7 +257,7 @@ namespace HF::GraphGenerator {
 	{
 		// Use the distance between parent and child
 		// as the maximum distance for the occlusion check
-		return RT.FireAnyOcclusionRay(parent, DirectionTo(parent, child), DistanceTo(parent, child));
+		return RT.Occluded(parent, DirectionTo(parent, child), DistanceTo(parent, child));
 	}
 
 	bool CheckSlope(const real3& parent, const real3& child, const GraphParams& gp)
