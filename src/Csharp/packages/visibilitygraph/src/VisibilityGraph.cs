@@ -121,9 +121,8 @@ namespace HumanFactors.VisibilityGraph
 
             `[1, 1.414214, 2.414214, 0]`
 
-            As you can see here, node 3 has a score of 0 since it both nodes in group A, node 0 and node 1 did not have
-            a clear line of sight to it, however node 2 has a score equal to that of 0 and 1 combined since it's visible to
-            both of them. 
+            As you can see here, node 3 has a score of 0 since it doesn't have a clear line of sight to either of the nodes
+            in group a. Node 2 has a score equal to that of 0 and 1 combined since it has a clear line of sight to both of them.
         */
         public static Graph GenerateGroupToGroup(
 			EmbreeBVH bvh,
