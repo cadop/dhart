@@ -322,6 +322,37 @@ namespace Humanfctors.Examples
 			Assert.AreEqual(100, cost_in_graph);
 		}
 
+		[TestMethod]
+		public void EnergyBlobExample()
+		{
+			MeshInfo MI = OBJLoader.LoadOBJ("ExampleModels/energy_blob_zup.obj");
+			EmbreeBVH bvh = new EmbreeBVH(MI, true);
+			int max_nodes = 5000;
+			float up_step = 5;
+			float up_slope = 60;
+			float down_step = 5;
+			float down_slope = 60;
+			int max_step_connections = 1;
+			int cores = -1;
 
+
+			Graph g = GraphGenerator.GenerateGraph(
+				bvh,
+				new Vector3D(-30.0f, 0.0f, 20.0f),
+				new Vector3D (1.0f, 1.0f, 10.0f),
+				max_nodes,
+				up_step,
+				up_slope,
+				down_step,
+				down_slope,
+				max_step_connections,
+				cores
+			);
+
+			g.CompressToCSR();
+			Assert.AreEqual(3450, g.NumNodes());
+			Debug.WriteLine(g);
+
+		}
 	}
 }

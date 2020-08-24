@@ -162,7 +162,7 @@ TEST(_ViewAnalysis, SphericalViewAnalysis_LoadedMesh) {
 
 	// Create BVH
 	EmbreeRayTracer* bvh = nullptr;
-	CreateRaytracer(*loaded_obj, &bvh);
+	CreateRaytracer(*loaded_obj, &bvh, false);
 
 	// Ensure bvh not null
 	ASSERT_TRUE(bvh != nullptr);
