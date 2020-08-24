@@ -35,12 +35,12 @@ class EmbreeBVH(object):
 
         """
         
-        if isinstance(geometry, List):
+        if isinstance(geometry, list):
             pointers = [mesh._MeshInfo__internal_ptr for mesh in geometry]
         else:
             pointers = geometry._MeshInfo__internal_ptr
         self.pointer = raytracer_native_functions.CreateRayTracer(
-            geometry._MeshInfo__internal_ptr, use_precise
+            pointers, use_precise
         )
 
     def AddMesh(self, mesh : Union[MeshInfo, List[MeshInfo]]):

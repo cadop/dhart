@@ -58,12 +58,12 @@ def test_EnsureParallelGraphIsEquivalentToStandardGraph():
 def test_energyblob_size():
     # Get a sample model path
     obj_path = humanfactorspy.get_sample_model("energy_blob_zup.obj")
-    time.sleep(10)
+    # time.sleep(10)
     # Load the obj file
     obj = LoadOBJ(obj_path)
 
     # Create a BVH
-    bvh = EmbreeBVH(obj)
+    bvh = EmbreeBVH(obj, True)
 
     # Set the graph parameters
     start_point = (-30, 0, 20)
