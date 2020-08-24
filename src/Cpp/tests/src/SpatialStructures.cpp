@@ -533,6 +533,48 @@ TEST(_Graph, AlternateCSR) {
 	ASSERT_FALSE(std::equal(stand_values.begin(), stand_values.end(), alt_values.begin()));
 }
 
+const string test_attribute = "test_attr";
+const vector<Node> test_param_nodes = {
+		{1,1,1}, {2,2,2}, {3,3,3},{4,4,4}
+};
+
+std::vector<int> GetIds(const Graph & G, const std::vector<Node> & nodes) {
+	std::vector<int> ids(4, -1);
+	for (int i = 0; i < nodes.size(); i++)
+		ids[i] = G.getID(nodes[i]);
+
+	return ids;
+}
+
+Graph CreateNodeAttributeGraph() {
+	Graph G;
+
+	G.Compress();
+	const auto& Nodes = test_param_nodes;
+
+	G.addEdge(Nodes[0], Nodes[2], 2);
+	G.addEdge(Nodes[0], Nodes[1], 1);
+	G.addEdge(Nodes[3], Nodes[0], 3);
+
+	auto ids = GetIds(G, Nodes);
+
+	// Create node attributes
+	G.AddNodeAttribute(ids[0], test_attribute, "000");
+	G.AddNodeAttribute(ids[1], test_attribute, "111");
+	G.AddNodeAttribute(ids[2], test_attribute, "222");
+	G.AddNodeAttribute(ids[3], test_attribute, "333");
+	
+	return G;
+}
+TEST(_Graph, NodeAttributesToParameters) {
+	Graph G = CreateNodeAttributeGraph();
+	auto ids = GetIds(G, test_param_nodes);
+
+	// make a graph and add some edges. 
+	G.GenerateEdgeCostsFromNodeAttribute(test_attribute, "output_str");
+
+	ASSERT_EQ(333, G.GetCost(ids[3], ids[0], "output_str"));
+}
 
 TEST(_Rounding, addition_error)
 {

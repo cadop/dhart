@@ -124,6 +124,14 @@ namespace HF::SpatialStructures {
 
 	}
 
+	void Graph::GenerateEdgeCostsFromNodeAttribute(
+		const std::string& node_attribute,
+		const std::string out_attribute, 
+		GENERATE_USING )
+	{
+
+	}
+
 	int Graph::size() const { return ordered_nodes.size(); }
 
 	int Graph::MaxID() const {
@@ -205,7 +213,7 @@ namespace HF::SpatialStructures {
 	{
 		// Ensure that we throw our custom exception if this key doesn't exist
 		if (!this->HasCostArray(key)) 
-			throw NoCost(key.c_str());
+			throw NoCost("");
 		
 		// Get the cost from the cost map
 		return (edge_cost_maps.at(key));
