@@ -52,14 +52,14 @@ points = graph.get_node_points() # Define points as the graph nodes
 # scores = VG.AggregateEdgeCosts(2, True) # Aggregate the visibility graph scores
 
 ray_count = 100
-aggregate_results = SphericalViewAnalysisAggregate(bvh, points, ray_count, height, 
+aggregate_results = SphericalViewAnalysisAggregate(bvh, nodes, ray_count, height, 
                                                     upward_fov = 20, downward_fov=20, 
                                                     agg_type=AggregationType.AVERAGE)
 
 
 # Plot the graph using visibility graph as the colors
 fig = plt.figure(figsize=(6,6))
-plt.scatter(x, y, c=scores)
+plt.scatter(x, y, c=aggregate_results)
 plt.show()
 
 
