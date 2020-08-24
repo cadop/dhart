@@ -19,7 +19,7 @@ C_INTERFACE CreateRaytracer(MeshInfo * mesh, EmbreeRayTracer** out_raytracer, bo
 
 		// Iterate through all of the meshes in our input and add
 		// them to the raytracer
-		*out_raytracer = new EmbreeRayTracer(*mesh);
+		*out_raytracer = new EmbreeRayTracer(*mesh, use_precise);
 		return OK;
 	}
 	// Thrown if Embree is missing

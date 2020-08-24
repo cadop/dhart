@@ -63,4 +63,36 @@ namespace HF {
 		ASSERT_EQ(29, g.size());
 	}
 
+	TEST(_GraphAlgorithm, Energy_Blob) {
+		auto mesh = Geometry::LoadMeshObjects("energy_blob_zup.obj");
+
+		RayTracer::EmbreeRayTracer rt(mesh, true);
+		auto GG = GraphGenerator::GraphGenerator(rt, 0);
+		int max_nodes = 5000;
+		double up_step = 5;
+		double up_slope = 60;
+		double down_step = 5;
+		double down_slope = 60;
+		int max_step_connections = 1;
+		int cores = -1;
+
+
+		auto g = GG.BuildNetwork(
+			std::array<double, 3>{-30.0, 0.0, 20.0},
+			std::array<double, 3>{1.0, 1.0, 10.0},
+			max_nodes,
+			up_step,
+			up_slope,
+			down_step,
+			down_slope,
+			max_step_connections,
+			cores
+		);
+
+		printf("Graph size %i\n", g.size());
+		g.Compress();
+		ASSERT_EQ(3450, g.size());
+	}
+
+
 }

@@ -8,7 +8,8 @@ setup(name='humanfactors',
       author_email='',
       packages=find_packages(),
       data_files = [
-            ('bin', glob("humanfactorspy/bin/*"))
+            ('bin', glob("humanfactorspy/bin/*")),
+            ('Lib/site-packages/humanfactorspy/Example Models', glob("humanfactorspy/Example Models/*"))
       ],
       install_requires=[
             'numpy',
