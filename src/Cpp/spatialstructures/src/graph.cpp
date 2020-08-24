@@ -15,6 +15,7 @@
 #include <HFExceptions.h>
 #include <numeric>
 #include <iostream>
+#include <charconv>
 
 using namespace Eigen;
 using std::vector;
@@ -124,12 +125,62 @@ namespace HF::SpatialStructures {
 
 	}
 
+
+
+	inline float StringToFloat(const std::string & str_to_convert) {
+		return std::stod(str_to_convert);
+	}
+
+	inline std::vector<float> ConvertStringsToFloat(const std::vector<string>& strings) {
+		std::vector<float> out_floats(strings.size());
+
+		for (int i = 0; i < out_floats.size(); i++)
+			out_floats[i] = StringToFloat(strings[i]);
+		return out_floats;
+	}
+
+
+		
 	void Graph::GenerateEdgeCostsFromNodeAttribute(
 		const std::string& node_attribute,
-		const std::string out_attribute, 
-		GENERATE_USING )
+		const std::string & out_attribute, 
+		GENERATE_USING gen_using)
 	{
+		// Throw if we don't have this attribute
+		if (!this->HasNodeAttribute(node_attribute))
+			throw std::out_of_range("Node Attribute" + node_attribute + " doesn't exist in the graph!");
+		
+		// Get the costs for this attribute
+		const auto& scores = ConvertStringsToFloat(this->GetNodeAttributes(node_attribute));
 
+		// Iterate through all nodes in the graph
+		for (const auto& parent : ordered_nodes) {
+
+			// Get the subgraph for this node
+			const auto subgraph = this->GetIntEdges(parent.id);
+			
+			// Iterate through every edge of this node
+			for (const IntEdge& edge : subgraph)
+			{
+				// Calculate the cost for this node
+				float cost = -1;
+				switch (gen_using) {
+				case GENERATE_USING::INCOMING:
+					cost= scores[edge.child];
+					break;
+				case GENERATE_USING::BOTH:
+					cost= scores[edge.child] + scores[parent.id];
+					break;
+
+				case GENERATE_USING::OUTGOING:
+					cost = scores[parent.id];
+					break;
+				}
+
+				// Add it to the graph as an edge
+				this->addEdge(parent.id, edge.child, cost, out_attribute);
+			}
+		}
 	}
 
 	int Graph::size() const { return ordered_nodes.size(); }
@@ -215,6 +266,7 @@ namespace HF::SpatialStructures {
 		if (!this->HasCostArray(key)) 
 			throw NoCost(key);
 		
+
 		// Get the cost from the cost map
 		return (edge_cost_maps.at(key));
 	}
@@ -418,6 +470,21 @@ namespace HF::SpatialStructures {
 			}
 		}
 		return out_edges;
+	}
+
+	std::vector<IntEdge> Graph::GetIntEdges(int parent) const
+	{
+		if (parent > this->MaxID()) return std::vector<IntEdge>();
+
+		std::vector<IntEdge> intedges;
+		for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, parent); it; ++it)
+		{
+			// Add to array of edgesets
+			float cost = it.value();
+			int child = it.col();
+			intedges.push_back(IntEdge{ child, cost });
+		}
+		return intedges;
 	}
 
 	/// <summary> Aggregate new_value into out_total using the method specified in agg_type. </summary>
@@ -683,6 +750,11 @@ namespace HF::SpatialStructures {
 		const EdgeCostSet& cost_array = this->GetCostArray(cost_type);
 		const TempMatrix cost_matrix = CreateMappedCSR(this->edge_matrix, cost_array);
 		return cost_matrix;
+	}
+
+	bool Graph::HasNodeAttribute(const std::string& key) const
+	{
+		return this->node_attr_map.count(key) > 0;
 	}
 
 	void Graph::addEdge(const Node& parent, const Node& child, float score, const string & cost_type)
@@ -1087,7 +1159,7 @@ namespace HF::SpatialStructures {
 
 	void Graph::AddNodeAttribute(int id, std::string attribute, std::string score) {
 		const auto node = NodeFromID(id);
-		bool node_not_found = hasKey(node);
+		bool node_not_found = !hasKey(node);
 
 		// This usually would be an error but we're going to eat it for now, since multiple nodes
 		// may be being added. Proper error handling should erase all changes. 
@@ -1185,6 +1257,7 @@ namespace HF::SpatialStructures {
 		auto scores_iterator = scores.begin();
 
 		for (int node_id : id) {
+
 			// We can call AddNodeAttribute for each node_id in id.
 			// If the attribute type name does not exist,
 			// it will be created with the first invocation of AddNodeAttribute.

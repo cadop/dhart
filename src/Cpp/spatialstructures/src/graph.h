@@ -806,6 +806,9 @@ namespace HF::SpatialStructures {
 		*/
 		TempMatrix MapCostMatrix(const std::string& cost_type) const;
 
+		/*! \brief Check if this graph has a specific node attribute*/
+		bool HasNodeAttribute(const std::string & key) const;
+
 	public:
 		/*!
 		 \brief Construct a graph from a list of nodes, edges, and distances.
@@ -1123,6 +1126,13 @@ namespace HF::SpatialStructures {
 			\endcode
 		*/
 		std::vector<EdgeSet> GetEdges() const;
+	
+		/*! \brief Get children of a specific node as integers
+		
+			
+		
+		*/
+		std::vector<IntEdge> GetIntEdges(int parent) const;
 
 		/// <summary>
 		/// Summarize the costs of every outgoing edge for every node in the graph.
@@ -1926,6 +1936,7 @@ namespace HF::SpatialStructures {
 		void ClearCostArrays(const std::string & cost_name = "");
 
 		/*! \brief Generate edge costs from a set of node attributes. */
-		void GenerateEdgeCostsFromNodeAttribute(const std::string & node_attribute, const std::string cost_to_store_as, GENERATE_USING consider = GENERATE_USING::INCOMING);
+		void GenerateEdgeCostsFromNodeAttribute(const std::string & node_attribute, const std::string & cost_to_store_as, GENERATE_USING consider = GENERATE_USING::INCOMING);
+		
 	};
 }

@@ -555,6 +555,7 @@ Graph CreateNodeAttributeGraph() {
 	G.addEdge(Nodes[0], Nodes[2], 2);
 	G.addEdge(Nodes[0], Nodes[1], 1);
 	G.addEdge(Nodes[3], Nodes[0], 3);
+	G.addEdge(Nodes[2], Nodes[1], 4);
 
 	auto ids = GetIds(G, Nodes);
 
@@ -566,14 +567,66 @@ Graph CreateNodeAttributeGraph() {
 	
 	return G;
 }
-TEST(_Graph, NodeAttributesToParameters) {
+
+inline float StringToFloat(const std::string& str_to_convert) {
+	return std::stod(str_to_convert);
+}
+
+inline std::vector<float> ConvertStringsToFloat(const std::vector<std::string>& strings) {
+	std::vector<float> out_floats(strings.size());
+
+	for (int i = 0; i < out_floats.size(); i++)
+		out_floats[i] = StringToFloat(strings[i]);
+	return out_floats;
+}
+
+
+TEST(_Graph, AttrToParams_INCOMING) {
 	Graph G = CreateNodeAttributeGraph();
-	auto ids = GetIds(G, test_param_nodes);
+	const auto ids = GetIds(G, test_param_nodes);
+	const std::vector<std::string> attributes = G.GetNodeAttributes(test_attribute);
+	const std::vector<float> scores = ConvertStringsToFloat(attributes);
 
-	// make a graph and add some edges. 
-	G.GenerateEdgeCostsFromNodeAttribute(test_attribute, "output_str");
+	// Convert node attributes to strings
+	G.GenerateEdgeCostsFromNodeAttribute(test_attribute, "output_str", GENERATE_USING::INCOMING);
 
-	ASSERT_EQ(333, G.GetCost(ids[3], ids[0], "output_str"));
+	// Assert Correctness
+	ASSERT_EQ(scores[ids[0]], G.GetCost(ids[3], ids[0], "output_str"));
+	ASSERT_EQ(scores[ids[1]], G.GetCost(ids[0], ids[1], "output_str"));
+	ASSERT_EQ(scores[ids[0]], G.GetCost(ids[3], ids[0], "output_str"));
+	ASSERT_EQ(scores[ids[1]], G.GetCost(ids[2], ids[1], "output_str"));
+}
+
+TEST(_Graph, AttrToParams_OUTGOING) {
+	Graph G = CreateNodeAttributeGraph();
+	const auto ids = GetIds(G, test_param_nodes);
+	const std::vector<std::string> attributes = G.GetNodeAttributes(test_attribute);
+	const std::vector<float> scores = ConvertStringsToFloat(attributes);
+
+	// Convert node attributes to strings
+	G.GenerateEdgeCostsFromNodeAttribute(test_attribute, "output_str", GENERATE_USING::OUTGOING);
+
+	// Assert Correctness
+	ASSERT_EQ(scores[ids[3]], G.GetCost(ids[3], ids[0], "output_str"));
+	ASSERT_EQ(scores[ids[0]], G.GetCost(ids[0], ids[1], "output_str"));
+	ASSERT_EQ(scores[ids[3]], G.GetCost(ids[3], ids[0], "output_str"));
+	ASSERT_EQ(scores[ids[2]], G.GetCost(ids[2], ids[1], "output_str"));
+}
+
+TEST(_Graph, AttrToParams_BOTH) {
+	Graph G = CreateNodeAttributeGraph();
+	const auto ids = GetIds(G, test_param_nodes);
+	const std::vector<std::string> attributes = G.GetNodeAttributes(test_attribute);
+	const std::vector<float> scores = ConvertStringsToFloat(attributes);
+
+	// Convert node attributes to strings
+	G.GenerateEdgeCostsFromNodeAttribute(test_attribute, "output_str", GENERATE_USING::BOTH);
+
+	// Assert Correctness
+	ASSERT_EQ(scores[ids[3]] + scores[ids[0]], G.GetCost(ids[3], ids[0], "output_str"));
+	ASSERT_EQ(scores[ids[0]] + scores[ids[1]], G.GetCost(ids[0], ids[1], "output_str"));
+	ASSERT_EQ(scores[ids[3]] + scores[ids[0]], G.GetCost(ids[3], ids[0], "output_str"));
+	ASSERT_EQ(scores[ids[2]] + scores[ids[1]], G.GetCost(ids[2], ids[1], "output_str"));
 }
 
 TEST(_Rounding, addition_error)
