@@ -8,6 +8,8 @@ using HumanFactors;
 using System.Diagnostics;
 using System;
 using System.Text.RegularExpressions;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Humanfctors.Examples
 {
@@ -30,7 +32,7 @@ namespace Humanfctors.Examples
 			var blob = OBJLoader.LoadOBJ("ExampleModels/energy_blob_zup.obj");
 
 			// Generate a BVH from it 
-			EmbreeBVH bvh = new EmbreeBVH(blob);
+			EmbreeBVH bvh = new EmbreeBVH(blob, true);
 
 			// Setup graph variables
 			Vector3D start_point = new Vector3D(-30, 0, 20);
@@ -67,11 +69,20 @@ namespace Humanfctors.Examples
 			return graph;
 		}
 
+		public void AssertEquality(PathMember[] Expected, PathMember[] Actual)
+		{
+			for (int i = 0; i < Expected.Length; i++)
+			{
+				Assert.AreEqual(Expected[i].id, Actual[i].id);
+				Assert.AreEqual(Expected[i].cost_to_next, Actual[i].cost_to_next,0.001);
+			}
+		}
+
 		[TestMethod]
 		public void GeneratePathsWithCostAlgorithms()
 		{
 			var graph = GenerateExampleGraph();
-			
+
 			//! [EX_Pathfinding_Setup]
 
 			// Predeclare paths
@@ -82,7 +93,7 @@ namespace Humanfctors.Examples
 			string energy_key = CostAlgorithmNames.ENERGY_EXPENDITURE;
 
 			//! [EX_Pathfinding_Setup]
-			
+
 			//! [EX_Pathfinding_IDS]
 
 			// Generate a graph using the alternate cost type, then generate one using the graph's
@@ -95,7 +106,7 @@ namespace Humanfctors.Examples
 			//! [EX_Pathfinding_IDS]
 
 			//! [EX_Pathfinding_Nodes]
-			
+
 			// Get the nodes from the graph
 			var nodes = graph.getNodes();
 
@@ -110,18 +121,25 @@ namespace Humanfctors.Examples
 			//! [EX_Pathfinding_Nodes]
 
 			//! [EX_Pathfinding_Print]
-			
+
 			// Print paths to output. 
 			Debug.WriteLine(distance_path);
 			Debug.WriteLine(energy_path);
 
 			//! [EX_Pathfinding_Print]
 
-			string expected_distance = "[(105, 1.421), (32, 1.007), (6, 1.005), (4, 1.001), (1, 0)]";
-			string expected_energy = "[(1, 4.559), (12, 5.759), (26, 5.89), (39, 6.101), (50, 2.978), (63, 2.827), (80, 2.785), (105, 0)]";
+			PathMember[] expected_distance = { new PathMember(105, 1.415f), new PathMember(84, 1.0f),
+				new PathMember(66, 1.0f), new PathMember(52, 1.0f), new PathMember(41, 1.0f), new PathMember(28, 1.0f),
+				new PathMember(15, 1.0f), new PathMember(3, 1.0f), new PathMember(2, 1.0f), new PathMember(1, 0f)};
 
-			CompareOutputToExpected(expected_distance, distance_path.ToString());
-			CompareOutputToExpected(expected_energy, energy_path.ToString());
+			PathMember[] expected_energy ={new PathMember(1, 2.51f), new PathMember(2, 2.486f),
+				new PathMember(3, 2.488f), new PathMember(15, 2.5f), new PathMember(28, 2.5f),
+				new PathMember(41, 2.484f), new PathMember(52, 2.421f), new PathMember(66, 2.43f),
+				new PathMember(84, 2.741f), new PathMember(105, 0)
+			};
+			
+			AssertEquality(expected_distance, distance_path.CopyArray());
+			AssertEquality(expected_energy, energy_path.CopyArray());
 		}
 
 		[TestMethod]
@@ -155,14 +173,14 @@ namespace Humanfctors.Examples
 
 			//! [EX_MultiPathFinding]
 
-			string expected_output = @"1 to 101 Energy  : [(1, 2.461), (11, 2.5), (24, 2.5), (36, 4.491), (47, 5.402), (60, 5.302), (77, 5.129), (101, 0)]
-			1 to 101 Distance: [(1, 1), (11, 1), (24, 1), (36, 1.415), (47, 1.417), (60, 1.416), (77, 1.416), (101, 0)]
-			2 to 102 Energy  : [(2, 2.5), (1, 2.461), (11, 2.5), (24, 4.536), (37, 5.528), (48, 5.452), (61, 5.605), (78, 5.837), (102, 0)]
-			2 to 102 Distance: [(2, 1), (1, 1), (11, 1), (24, 1.415), (37, 1.417), (48, 1.417), (61, 1.417), (78, 1.418), (102, 0)]
-			3 to 103 Energy  : [(3, 2.52), (2, 2.5), (1, 4.559), (12, 2.48), (25, 5.708), (38, 5.656), (49, 5.916), (62, 6.644), (79, 5.08), (103, 0)]
-			3 to 103 Distance: [(3, 1), (2, 1), (1, 1.415), (12, 1), (25, 1.417), (38, 1.417), (49, 1.418), (62, 1.42), (79, 1.416), (103, 0)]
-			4 to 104 Energy  : [(4, 2.48), (12, 5.759), (26, 5.89), (39, 6.101), (50, 7.008), (64, 5.863), (83, 3.827), (104, 0)]
-			4 to 104 Distance: [(4, 1), (12, 1.418), (26, 1.418), (39, 1.418), (50, 1.421), (64, 1.418), (83, 1.002), (104, 0)]";
+			string expected_output = @"1 to 101 Energy  : [(1, 4.571), (12, 5.759), (26, 5.871), (39, 6.117), (50, 7.005), (64, 1.937), (80, 5.065), (101, 0)]
+1 to 101 Distance: [(1, 1.415), (12, 1.418), (26, 1.418), (39, 1.419), (50, 1.421), (64, 1), (80, 1.416), (101, 0)]
+2 to 102 Energy  : [(2, 2.49), (1, 4.571), (12, 5.759), (26, 5.871), (39, 6.117), (50, 7.005), (64, 3.388), (81, 3.271), (102, 0)]
+2 to 102 Distance: [(2, 1), (1, 1.415), (12, 1.418), (26, 1.418), (39, 1.419), (50, 1.421), (64, 1.001), (81, 1.001), (102, 0)]
+3 to 103 Energy  : [(3, 2.514), (2, 2.49), (1, 4.571), (12, 5.759), (26, 5.871), (39, 6.117), (50, 7.005), (64, 5.858), (82, 3.837), (103, 0)]
+3 to 103 Distance: [(3, 1), (2, 1), (1, 1.415), (12, 1.418), (26, 1.418), (39, 1.419), (50, 1.421), (64, 1.418), (82, 1.002), (103, 0)]
+4 to 104 Energy  : [(4, 2.475), (12, 5.759), (26, 5.871), (39, 6.117), (50, 7.005), (64, 5.858), (82, 6.109), (104, 0)]
+4 to 104 Distance: [(4, 1), (12, 1.418), (26, 1.418), (39, 1.419), (50, 1.421), (64, 1.418), (82, 1.419), (104, 0)]";
 
 			CompareOutputToExpected(expected_output, output);
 
@@ -214,14 +232,14 @@ namespace Humanfctors.Examples
 
 			// Compare this output to the expected output
 
-			string expected_output = @"(-30, 0, 1.068) to (-27, -8, 1.295) Energy  : [(0, 2.48), (4, 2.48), (12, 2.48), (25, 2.461), (37, 2.461), (47, 5.402), (60, 5.302), (77, 5.129), (101, 0)]
-			(-30, 0, 1.068) to (-27, -8, 1.295) Distance: [(0, 1), (4, 1), (12, 1), (25, 1), (37, 1), (47, 1.417), (60, 1.416), (77, 1.416), (101, 0)]
-			(-31, -1, 1.018) to (-26, -8, 1.427) Energy  : [(1, 2.461), (11, 2.5), (24, 4.536), (37, 5.528), (48, 5.452), (61, 5.605), (78, 5.837), (102, 0)]
-			(-31, -1, 1.018) to (-26, -8, 1.427) Distance: [(1, 1), (11, 1), (24, 1.415), (37, 1.417), (48, 1.417), (61, 1.417), (78, 1.418), (102, 0)]
-			(-31, 0, 1.018) to (-25, -8, 1.556) Energy  : [(2, 2.5), (1, 4.559), (12, 2.48), (25, 5.708), (38, 5.656), (49, 5.916), (62, 6.644), (79, 5.08), (103, 0)]
-			(-31, 0, 1.018) to (-25, -8, 1.556) Distance: [(2, 1), (1, 1.415), (12, 1), (25, 1.417), (38, 1.417), (49, 1.418), (62, 1.42), (79, 1.416), (103, 0)]
-			(-31, 1, 1.017) to (-25, -6, 1.678) Energy  : [(3, 2.52), (2, 2.5), (1, 4.559), (12, 5.759), (26, 5.89), (39, 6.101), (50, 7.008), (64, 5.863), (83, 3.827), (104, 0)]
-			(-31, 1, 1.017) to (-25, -6, 1.678) Distance: [(3, 1), (2, 1), (1, 1.415), (12, 1.418), (26, 1.418), (39, 1.418), (50, 1.421), (64, 1.418), (83, 1.002), (104, 0)]";
+			string expected_output = @"(-30, 0, 1.069) to (-25, -8, 1.556) Energy  : [(0, 2.484), (4, 2.475), (12, 5.759), (26, 5.871), (39, 6.117), (50, 7.005), (64, 1.937), (80, 5.065), (101, 0)]
+(-30, 0, 1.069) to (-25, -8, 1.556) Distance: [(0, 1), (4, 1), (12, 1.418), (26, 1.418), (39, 1.419), (50, 1.421), (64, 1), (80, 1.416), (101, 0)]
+(-31, -1, 1.018) to (-26, -4, 1.596) Energy  : [(1, 4.571), (12, 5.759), (26, 5.871), (39, 6.117), (50, 7.005), (64, 3.388), (81, 3.271), (102, 0)]
+(-31, -1, 1.018) to (-26, -4, 1.596) Distance: [(1, 1.415), (12, 1.418), (26, 1.418), (39, 1.419), (50, 1.421), (64, 1.001), (81, 1.001), (102, 0)]
+(-31, 0, 1.019) to (-25, -6, 1.679) Energy  : [(2, 2.49), (1, 4.571), (12, 5.759), (26, 5.871), (39, 6.117), (50, 7.005), (64, 5.858), (82, 3.837), (103, 0)]
+(-31, 0, 1.019) to (-25, -6, 1.679) Distance: [(2, 1), (1, 1.415), (12, 1.418), (26, 1.418), (39, 1.419), (50, 1.421), (64, 1.418), (82, 1.002), (103, 0)]
+(-31, 1, 1.018) to (-24, -8, 1.73) Energy  : [(3, 2.514), (2, 2.49), (1, 4.571), (12, 5.759), (26, 5.871), (39, 6.117), (50, 7.005), (64, 5.858), (82, 6.109), (104, 0)]
+(-31, 1, 1.018) to (-24, -8, 1.73) Distance: [(3, 1), (2, 1), (1, 1.415), (12, 1.418), (26, 1.418), (39, 1.419), (50, 1.421), (64, 1.418), (82, 1.419), (104, 0)]";
 			
 			CompareOutputToExpected(expected_output, output);
 		}
