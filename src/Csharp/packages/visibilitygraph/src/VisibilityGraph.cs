@@ -80,7 +80,7 @@ namespace HumanFactors.VisibilityGraph
 			else return new Graph(potential_graph);
 		}
 
-		/*!
+        /*!
             \brief Generate a directed visibility graph from nodes in `group_a` to the nodes in `group_b.`
 
             \param bvh The geometry to use for generating the visibility graph.
@@ -110,8 +110,22 @@ namespace HumanFactors.VisibilityGraph
             \snippet visibilitygraph\test_visibilitygraph.cs EX_GroupToGroup
 
             `1, 1.414214, 0, 0`
+
+            Note how the nodes in group B have scores of 0. This is because edges are only calculated from group a 
+            to group B and by default AggredgateEdgeCosts only considers outgoing costs with it's default parameters.
+            Since group to group graphs only store the edges for a node in one of the two nodes, you should use
+            `Graph.AggregateEdgeCosts(GraphEdgeAggregation.SUM, directed:false)` to get the accurate score for every
+            node, since the edges of a visibility graph are bidirectional.
+
+            \snippet visibilitygraph\test_visibilitygraph.cs EX_GroupToGroupUndirected
+
+            `[1, 1.414214, 2.414214, 0]`
+
+            As you can see here, node 3 has a score of 0 since it both nodes in group A, node 0 and node 1 did not have
+            a clear line of sight to it, however node 2 has a score equal to that of 0 and 1 combined since it's visible to
+            both of them. 
         */
-		public static Graph GenerateGroupToGroup(
+        public static Graph GenerateGroupToGroup(
 			EmbreeBVH bvh,
 			IEnumerable<Vector3D> group_a,
 			IEnumerable<Vector3D> group_b,
