@@ -297,7 +297,7 @@ Static Public Member Functions</h2></td></tr>
 <div class="line">            var blob = OBJLoader.LoadOBJ(<span class="stringliteral">&quot;ExampleModels/energy_blob_zup.obj&quot;</span>);</div>
 <div class="line"> </div>
 <div class="line">            <span class="comment">// Generate a BVH from it </span></div>
-<div class="line">            EmbreeBVH bvh = <span class="keyword">new</span> EmbreeBVH(blob);</div>
+<div class="line">            EmbreeBVH bvh = <span class="keyword">new</span> EmbreeBVH(blob, <span class="keyword">true</span>);</div>
 <div class="line"> </div>
 <div class="line">            <span class="comment">// Setup graph variables</span></div>
 <div class="line">            Vector3D start_point = <span class="keyword">new</span> Vector3D(-30, 0, 20);</div>
@@ -345,7 +345,7 @@ Static Public Member Functions</h2></td></tr>
 <div class="line">            energy_path = ShortestPath.DijkstraShortestPath(graph, start_id, end_id, energy_key);</div>
 <div class="line">            distance_path = ShortestPath.DijkstraShortestPath(graph, start_id, end_id);</div>
 <div class="line"> </div>
-</div><!-- fragment --><div class="fragment"><div class="line">            </div>
+</div><!-- fragment --><div class="fragment"><div class="line"> </div>
 <div class="line">            <span class="comment">// Print paths to output. </span></div>
 <div class="line">            Debug.WriteLine(distance_path);</div>
 <div class="line">            Debug.WriteLine(energy_path);</div>
@@ -430,7 +430,7 @@ Static Public Member Functions</h2></td></tr>
 <div class="line">            var blob = OBJLoader.LoadOBJ(<span class="stringliteral">&quot;ExampleModels/energy_blob_zup.obj&quot;</span>);</div>
 <div class="line"> </div>
 <div class="line">            <span class="comment">// Generate a BVH from it </span></div>
-<div class="line">            EmbreeBVH bvh = <span class="keyword">new</span> EmbreeBVH(blob);</div>
+<div class="line">            EmbreeBVH bvh = <span class="keyword">new</span> EmbreeBVH(blob, <span class="keyword">true</span>);</div>
 <div class="line"> </div>
 <div class="line">            <span class="comment">// Setup graph variables</span></div>
 <div class="line">            Vector3D start_point = <span class="keyword">new</span> Vector3D(-30, 0, 20);</div>
@@ -470,7 +470,7 @@ Static Public Member Functions</h2></td></tr>
 <div class="line">            <span class="comment">// a path using the cost set that we just generated.</span></div>
 <div class="line">            <span class="keywordtype">string</span> energy_key = CostAlgorithmNames.ENERGY_EXPENDITURE;</div>
 <div class="line"> </div>
-</div><!-- fragment --><div class="fragment"><div class="line">            </div>
+</div><!-- fragment --><div class="fragment"><div class="line"> </div>
 <div class="line">            <span class="comment">// Get the nodes from the graph</span></div>
 <div class="line">            var nodes = graph.getNodes();</div>
 <div class="line"> </div>
@@ -482,7 +482,7 @@ Static Public Member Functions</h2></td></tr>
 <div class="line">            energy_path = ShortestPath.DijkstraShortestPath(graph, start_node, end_node, energy_key);</div>
 <div class="line">            distance_path = ShortestPath.DijkstraShortestPath(graph, end_node, start_node);</div>
 <div class="line"> </div>
-</div><!-- fragment --><div class="fragment"><div class="line">            </div>
+</div><!-- fragment --><div class="fragment"><div class="line"> </div>
 <div class="line">            <span class="comment">// Print paths to output. </span></div>
 <div class="line">            Debug.WriteLine(distance_path);</div>
 <div class="line">            Debug.WriteLine(energy_path);</div>
@@ -569,7 +569,7 @@ Static Public Member Functions</h2></td></tr>
 <div class="line">            var blob = OBJLoader.LoadOBJ(<span class="stringliteral">&quot;ExampleModels/energy_blob_zup.obj&quot;</span>);</div>
 <div class="line"> </div>
 <div class="line">            <span class="comment">// Generate a BVH from it </span></div>
-<div class="line">            EmbreeBVH bvh = <span class="keyword">new</span> EmbreeBVH(blob);</div>
+<div class="line">            EmbreeBVH bvh = <span class="keyword">new</span> EmbreeBVH(blob, <span class="keyword">true</span>);</div>
 <div class="line"> </div>
 <div class="line">            <span class="comment">// Setup graph variables</span></div>
 <div class="line">            Vector3D start_point = <span class="keyword">new</span> Vector3D(-30, 0, 20);</div>
@@ -724,7 +724,7 @@ Static Public Member Functions</h2></td></tr>
 <div class="line">            var blob = OBJLoader.LoadOBJ(<span class="stringliteral">&quot;ExampleModels/energy_blob_zup.obj&quot;</span>);</div>
 <div class="line"> </div>
 <div class="line">            <span class="comment">// Generate a BVH from it </span></div>
-<div class="line">            EmbreeBVH bvh = <span class="keyword">new</span> EmbreeBVH(blob);</div>
+<div class="line">            EmbreeBVH bvh = <span class="keyword">new</span> EmbreeBVH(blob, <span class="keyword">true</span>);</div>
 <div class="line"> </div>
 <div class="line">            <span class="comment">// Setup graph variables</span></div>
 <div class="line">            Vector3D start_point = <span class="keyword">new</span> Vector3D(-30, 0, 20);</div>
@@ -900,11 +900,11 @@ Static Public Member Functions</h2></td></tr>
 <div class="ttc" id="aclass_human_factors_1_1_graph_generator_1_1_graph_generator_html_a2672814edcde623d71233353fe6e0d2f"><div class="ttname"><a href="class_human_factors_1_1_graph_generator_1_1_graph_generator.html#a2672814edcde623d71233353fe6e0d2f">HumanFactors.GraphGenerator.GraphGenerator.GenerateGraph</a></div><div class="ttdeci">static Graph GenerateGraph(EmbreeBVH bvh, Vector3D start_point, Vector3D spacing, int max_nodes=-1, float up_step=0.2f, float up_slope=20, float down_step=0.2f, float down_slope=20, int max_step_connections=1, int core_count=-1)</div><div class="ttdoc">Generate a graph of accessible space with the given settings. If no graph can be generated,...</div><div class="ttdef"><b>Definition:</b> GraphGenerator.cs:83</div></div>
 <div class="ttc" id="anamespace_human_factors_1_1_graph_generator_html"><div class="ttname"><a href="namespace_human_factors_1_1_graph_generator.html">HumanFactors.GraphGenerator</a></div><div class="ttdoc">Generate a graph of accessible space from a given start point.</div><div class="ttdef"><b>Definition:</b> GraphGenerator.cs:24</div></div>
 <div class="ttc" id="anamespace_human_factors_html"><div class="ttname"><a href="namespace_human_factors.html">HumanFactors</a></div><div class="ttdoc">Automated analysis of the built environent</div><div class="ttdef"><b>Definition:</b> CommonTypes.cs:9</div></div>
-<div class="ttc" id="anamespace_human_factors_1_1_pathfinding_html"><div class="ttname"><a href="namespace_human_factors_1_1_pathfinding.html">HumanFactors.Pathfinding</a></div><div class="ttdoc">Calculate the shortest path between points in a Graph.</div><div class="ttdef"><b>Definition:</b> Path.cs:5</div></div>
+<div class="ttc" id="anamespace_human_factors_1_1_pathfinding_html"><div class="ttname"><a href="namespace_human_factors_1_1_pathfinding.html">HumanFactors.Pathfinding</a></div><div class="ttdoc">Calculate the shortest path between points in a Graph.</div><div class="ttdef"><b>Definition:</b> Path.cs:6</div></div>
 <div class="ttc" id="aclass_human_factors_1_1_pathfinding_1_1_shortest_path_html"><div class="ttname"><a href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html">HumanFactors.Pathfinding.ShortestPath</a></div><div class="ttdoc">Functions for finding the shortest path between two nodes in a graph.</div><div class="ttdef"><b>Definition:</b> ShortestPath.cs:49</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Aug 20 2020 18:44:04 for Analysis by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Aug 24 2020 14:54:54 for Analysis by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>

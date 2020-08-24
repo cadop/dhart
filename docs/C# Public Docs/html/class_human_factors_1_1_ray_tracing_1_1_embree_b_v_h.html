@@ -91,9 +91,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:abe609aebad5a2369ad13c891eb1802f4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h.html#abe609aebad5a2369ad13c891eb1802f4">EmbreeBVH</a> (<a class="el" href="class_human_factors_1_1_geometry_1_1_mesh_info.html">MeshInfo</a> MI)</td></tr>
-<tr class="memdesc:abe609aebad5a2369ad13c891eb1802f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a BVH for an instance of MeshInfo.  <a href="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h.html#abe609aebad5a2369ad13c891eb1802f4">More...</a><br /></td></tr>
-<tr class="separator:abe609aebad5a2369ad13c891eb1802f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19eccce09b0701d3da27fad138656585"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h.html#a19eccce09b0701d3da27fad138656585">EmbreeBVH</a> (<a class="el" href="class_human_factors_1_1_geometry_1_1_mesh_info.html">MeshInfo</a> MI, bool use_precise=false)</td></tr>
+<tr class="memdesc:a19eccce09b0701d3da27fad138656585"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a BVH for an instance of MeshInfo.  <a href="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h.html#a19eccce09b0701d3da27fad138656585">More...</a><br /></td></tr>
+<tr class="separator:a19eccce09b0701d3da27fad138656585"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a738510fcc29c83190c33673c14f6173b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h.html#a738510fcc29c83190c33673c14f6173b">EmbreeBVH</a> (<a class="el" href="class_human_factors_1_1_geometry_1_1_mesh_info.html">MeshInfo</a>[] MI)</td></tr>
 <tr class="memdesc:a738510fcc29c83190c33673c14f6173b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a BVH from an array of meshes.  <a href="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h.html#a738510fcc29c83190c33673c14f6173b">More...</a><br /></td></tr>
 <tr class="separator:a738510fcc29c83190c33673c14f6173b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -132,8 +132,8 @@ override bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 <dl class="section remark"><dt>Remarks</dt><dd>A more detailed description of Embree's BVH is available in intel's paper: Embree: A Kernel Framework for Efficient CPU Ray Tracing <a href="http://cseweb.ucsd.edu/~ravir/274/15/papers/a143-wald.pdf">http://cseweb.ucsd.edu/~ravir/274/15/papers/a143-wald.pdf</a>.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="class_human_factors_1_1_ray_tracing_1_1_embree_raytracer.html" title="Cast rays with Intel&#39;s Embree raytracing library.">EmbreeRaytracer</a> for functions to use this BVH for ray intersections. </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="abe609aebad5a2369ad13c891eb1802f4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abe609aebad5a2369ad13c891eb1802f4">&#9670;&nbsp;</a></span>EmbreeBVH() <span class="overload">[1/2]</span></h2>
+<a id="a19eccce09b0701d3da27fad138656585"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19eccce09b0701d3da27fad138656585">&#9670;&nbsp;</a></span>EmbreeBVH() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -142,8 +142,18 @@ override bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
           <td class="memname">HumanFactors.RayTracing.EmbreeBVH.EmbreeBVH </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_human_factors_1_1_geometry_1_1_mesh_info.html">MeshInfo</a>&#160;</td>
-          <td class="paramname"><em>MI</em></td><td>)</td>
+          <td class="paramname"><em>MI</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>use_precise</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -151,7 +161,8 @@ override bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 <p>Generate a BVH for an instance of MeshInfo. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">MI</td><td>Mesh to generate the BVH from.</td></tr>
+    <tr><td class="paramname">MI</td><td>Mesh to generate the BVH from. </td></tr>
+    <tr><td class="paramname">use_precise</td><td>Increase the accuracy of all ray intersections at the cost of performance.</td></tr>
   </table>
   </dd>
 </dl>
@@ -167,7 +178,7 @@ override bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 <div class="line">            MeshInfo Mesh = OBJLoader.LoadOBJ(good_mesh_path, CommonRotations.Yup_To_Zup);</div>
 <div class="line"> </div>
 <div class="line">            <span class="comment">// Construct a BVH from the mesh</span></div>
-<div class="line">            <a class="code" href="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h.html#abe609aebad5a2369ad13c891eb1802f4">EmbreeBVH</a> BVH = <span class="keyword">new</span> <a class="code" href="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h.html#abe609aebad5a2369ad13c891eb1802f4">EmbreeBVH</a>(Mesh);</div>
+<div class="line">            <a class="code" href="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h.html#a19eccce09b0701d3da27fad138656585">EmbreeBVH</a> BVH = <span class="keyword">new</span> <a class="code" href="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h.html#a19eccce09b0701d3da27fad138656585">EmbreeBVH</a>(Mesh);</div>
 <div class="line"> </div>
 </div><!-- fragment --></dd></dl>
 
@@ -227,7 +238,7 @@ override bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 <div class="line">            var Plane = OBJLoader.LoadOBJ(<span class="stringliteral">&quot;ExampleModels/plane.obj&quot;</span>);</div>
 <div class="line">            </div>
 <div class="line">            <span class="comment">// Construct a BVH from the plane</span></div>
-<div class="line">            <a class="code" href="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h.html#abe609aebad5a2369ad13c891eb1802f4">EmbreeBVH</a> bvh = <span class="keyword">new</span> <a class="code" href="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h.html#abe609aebad5a2369ad13c891eb1802f4">EmbreeBVH</a>(Plane);</div>
+<div class="line">            <a class="code" href="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h.html#a19eccce09b0701d3da27fad138656585">EmbreeBVH</a> bvh = <span class="keyword">new</span> <a class="code" href="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h.html#a19eccce09b0701d3da27fad138656585">EmbreeBVH</a>(Plane);</div>
 <div class="line">           </div>
 <div class="line">            <span class="comment">// Cast rays and print the results</span></div>
 <div class="line">            Debug.WriteLine(<span class="stringliteral">&quot;--- Just Plane---&quot;</span>);</div>
@@ -291,7 +302,7 @@ override bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 <div class="line">            var Plane = OBJLoader.LoadOBJ(<span class="stringliteral">&quot;ExampleModels/plane.obj&quot;</span>);</div>
 <div class="line">            </div>
 <div class="line">            <span class="comment">// Construct a BVH from the plane</span></div>
-<div class="line">            <a class="code" href="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h.html#abe609aebad5a2369ad13c891eb1802f4">EmbreeBVH</a> bvh = <span class="keyword">new</span> <a class="code" href="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h.html#abe609aebad5a2369ad13c891eb1802f4">EmbreeBVH</a>(Plane);</div>
+<div class="line">            <a class="code" href="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h.html#a19eccce09b0701d3da27fad138656585">EmbreeBVH</a> bvh = <span class="keyword">new</span> <a class="code" href="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h.html#a19eccce09b0701d3da27fad138656585">EmbreeBVH</a>(Plane);</div>
 <div class="line">           </div>
 <div class="line">            <span class="comment">// Cast rays and print the results</span></div>
 <div class="line">            Debug.WriteLine(<span class="stringliteral">&quot;--- Just Plane---&quot;</span>);</div>
@@ -361,10 +372,10 @@ override bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 </ul>
 </div><!-- contents -->
 <div class="ttc" id="anamespace_human_factors_1_1_geometry_html_ae1dc76f9bc90183da6add631332cb1fd"><div class="ttname"><a href="namespace_human_factors_1_1_geometry.html#ae1dc76f9bc90183da6add631332cb1fd">HumanFactors.Geometry.GROUP_METHOD</a></div><div class="ttdeci">GROUP_METHOD</div><div class="ttdoc">Methods for seperating meshes when loading from OBJ.</div><div class="ttdef"><b>Definition:</b> OBJLoader.cs:12</div></div>
-<div class="ttc" id="aclass_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_html_abe609aebad5a2369ad13c891eb1802f4"><div class="ttname"><a href="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h.html#abe609aebad5a2369ad13c891eb1802f4">HumanFactors.RayTracing.EmbreeBVH.EmbreeBVH</a></div><div class="ttdeci">EmbreeBVH(MeshInfo MI)</div><div class="ttdoc">Generate a BVH for an instance of MeshInfo.</div><div class="ttdef"><b>Definition:</b> EmbreeBVH.cs:54</div></div>
+<div class="ttc" id="aclass_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_html_a19eccce09b0701d3da27fad138656585"><div class="ttname"><a href="class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h.html#a19eccce09b0701d3da27fad138656585">HumanFactors.RayTracing.EmbreeBVH.EmbreeBVH</a></div><div class="ttdeci">EmbreeBVH(MeshInfo MI, bool use_precise=false)</div><div class="ttdoc">Generate a BVH for an instance of MeshInfo.</div><div class="ttdef"><b>Definition:</b> EmbreeBVH.cs:56</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Aug 20 2020 18:44:04 for Analysis by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Aug 24 2020 14:54:54 for Analysis by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.18
 </small></address>
