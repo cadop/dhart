@@ -183,13 +183,13 @@ namespace HF::RayTracer {
 
 		SetupScene();
 
-		InsertNewMesh(MI, true);
+		AddMesh(MI, true);
 	}
 
 	EmbreeRayTracer::EmbreeRayTracer(HF::Geometry::MeshInfo& MI, bool use_precise) {
 		SetupScene();
 		this->use_precise = use_precise;
-		InsertNewMesh(MI, true);
+		AddMesh(MI, true);
 	}
 
 	void EmbreeRayTracer::SetupScene() {
@@ -301,7 +301,7 @@ namespace HF::RayTracer {
 		rtcCommitScene(scene);
 	}
 
-	bool EmbreeRayTracer::InsertNewMesh(std::vector<std::array<float, 3>>& Mesh, int ID, bool Commit)
+	bool EmbreeRayTracer::AddMesh(std::vector<std::array<float, 3>>& Mesh, int ID, bool Commit)
 	{
 		// Set Setup buffers
 		std::vector<Triangle> tris;	std::vector<Vertex> verts;
@@ -360,7 +360,7 @@ namespace HF::RayTracer {
 		return geom;
 	}
 
-	bool EmbreeRayTracer::InsertNewMesh(HF::Geometry::MeshInfo& Mesh, bool Commit) {
+	bool EmbreeRayTracer::AddMesh(HF::Geometry::MeshInfo& Mesh, bool Commit) {
 
 		if (Mesh.NumTris() < 1 || Mesh.NumVerts() < 1) 
 			throw HF::Exceptions::InvalidOBJ();
@@ -383,11 +383,11 @@ namespace HF::RayTracer {
 		return true;
 	}
 
-	bool EmbreeRayTracer::InsertNewMesh(std::vector<HF::Geometry::MeshInfo>& Meshes, bool Commit)
+	bool EmbreeRayTracer::AddMesh(std::vector<HF::Geometry::MeshInfo>& Meshes, bool Commit)
 	{
 		// Add every mesh in a loop
 		for (auto& mesh : Meshes)
-			InsertNewMesh(mesh, false);
+			AddMesh(mesh, false);
 
 		// Commit at the end to save performance
 		if (Commit)
@@ -396,16 +396,16 @@ namespace HF::RayTracer {
 		return true;
 	}
 
-	bool EmbreeRayTracer::FireRay(
+	bool EmbreeRayTracer::PointIntersection(
 		std::array<float, 3>& origin,
 		const std::array<float, 3>& dir,
 		float distance,
 		int mesh_id
 	) {
-		return FireRay(origin[0], origin[1], origin[2], dir[0], dir[1], dir[2], distance, mesh_id);
+		return PointIntersection(origin[0], origin[1], origin[2], dir[0], dir[1], dir[2], distance, mesh_id);
 	}
 
-	bool EmbreeRayTracer::FireRay(
+	bool EmbreeRayTracer::PointIntersection(
 			float& x,
 			float& y,
 			float& z,
@@ -465,7 +465,7 @@ namespace HF::RayTracer {
 		};
 	}
 
-	std::vector<char> EmbreeRayTracer::FireRays(
+	std::vector<char> EmbreeRayTracer::PointIntersections(
 		std::vector<std::array<float, 3>>& origins,
 		std::vector<std::array<float, 3>>& directions,
 		bool use_parallel,
@@ -480,7 +480,7 @@ namespace HF::RayTracer {
 			for (int i = 0; i < origins.size(); i++) {
 				auto& org = origins[i];
 				auto& dir = directions[i];
-				out_results[i] = FireRay(
+				out_results[i] = PointIntersection(
 					org[0], org[1], org[2],
 					dir[0], dir[1], dir[2],
 					max_distance, mesh_id
@@ -493,7 +493,7 @@ namespace HF::RayTracer {
 #pragma omp parallel for if(use_parallel) schedule(dynamic)
 			for (int i = 0; i < origins.size(); i++) {
 				auto& org = origins[i];
-				out_results[i] = FireRay(
+				out_results[i] = PointIntersection(
 					org[0], org[1], org[2],
 					dir[0], dir[1], dir[2],
 					max_distance, mesh_id
@@ -507,7 +507,7 @@ namespace HF::RayTracer {
 			for (int i = 0; i < directions.size(); i++) {
 				auto org = origins[0];
 				auto& dir = directions[i];
-				bool did_hit = FireRay(
+				bool did_hit = PointIntersection(
 					org[0], org[1], org[2],
 					dir[0], dir[1], dir[2],
 					max_distance, mesh_id
@@ -548,7 +548,7 @@ namespace HF::RayTracer {
 		return Occluded_IMPL(origin[0], origin[1], origin[2], direction[0], direction[1], direction[2]);
 	}
 
-	std::vector<char> EmbreeRayTracer::FireOcclusionRays(
+	std::vector<char> EmbreeRayTracer::Occlusions(
 		const std::vector<std::array<float, 3>>& origins,
 		const std::vector<std::array<float, 3>>& directions,
 		float max_distance, bool use_parallel)

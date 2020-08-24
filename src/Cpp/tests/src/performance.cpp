@@ -165,12 +165,12 @@ TEST(Performance, CustomTriangleIntersection) {
 
 			// Conduct Precise Check
 			precise_watch.StartClock();
-			auto precise_results = mas.PreciseERT.FireAnyRayParallel(origins, dirs, -1.0f, true, false);
+			vector<HitStruct<double>> precise_results = mas.PreciseERT.Intersections<double>(origins, dirs, -1.0f);
 			precise_watch.StopClock();
 
 			// Conduct standard check
 			standard_watch.StartClock();
-			auto results = mas.StandardERT.FireAnyRayParallel(origins, dirs, -1.0f, false, false);
+			vector<HitStruct<float>> results = mas.StandardERT.Intersections<float>(origins, dirs, -1.0f);
 			standard_watch.StopClock();
 
 
@@ -203,7 +203,7 @@ TEST(Performance, GraphGenerator_PrecisevsStandard) {
 	// Number of trials is based on number of elements here
 	const vector<int> maxnodes = {
 		5000, 5000,	5000,
-		10000,	10000, 10000,
+		///10000,	10000, 10000,
 	//	55555, 55555, 55555,
 	//	100000,	100000,	100000,
 	};

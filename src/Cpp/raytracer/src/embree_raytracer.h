@@ -208,6 +208,76 @@ namespace HF::RayTracer {
 			float max_distance = -1,
 			int mesh_id = -1
 		);
+
+		/// <summary> Cast a single occlusion ray. </summary>
+		/// <param name="x"> x component of the ray's origin. </param>
+		/// <param name="y"> y component of the ray's origin. </param>
+		/// <param name="z"> z component of the ray's origin. </param>
+		/// <param name="dx"> x component of the ray's direction. </param>
+		/// <param name="dy"> y component of the ray's direction. </param>
+		/// <param name="dz"> z component of the ray's direction. </param>
+		/// <param name="distance">
+		/// Maximum distance of the ray. Any hits beyond this distance will not be counted. If
+		/// negative, count all hits regardless of distance.
+		/// </param>
+		/// <param name="mesh_id">
+		/// (NOT IMPLEMENTED) The id of the only mesh for this ray to collide with. -1 for all.
+		/// </param>
+		/// <returns> True if the ray intersected any geometry. False otherwise. </returns>
+		/*!
+			\par Example
+			\code
+				// Requires #include "embree_raytracer.h", #include "meshinfo.h"
+
+				// for brevity
+				using HF::RayTracer::EmbreeRayTracer;
+				using HF::Geometry::MeshInfo;
+
+				// Create Plane
+				const std::vector<float> plane_vertices{
+					-10.0f, 10.0f, 0.0f,
+					-10.0f, -10.0f, 0.0f,
+					10.0f, 10.0f, 0.0f,
+					10.0f, -10.0f, 0.0f,
+				};
+
+				const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
+
+				// Create RayTracer
+				EmbreeRayTracer ert(std::vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+
+				// Fire a ray straight down
+				bool res = ert.Occluded_IMPL(0, 0, 1, 0, 0, -1);
+
+				// Print Results
+				if (res) std::cerr << "True" << std::endl;
+				else std::cerr << "False" << std::endl;
+
+				// Fire a ray straight up
+				res = ert.Occluded_IMPL(0, 0, 1, 0, 0, 1);
+
+				// Print results
+				if (res) std::cerr << "True" << std::endl;
+				else std::cerr << "False" << std::endl;
+			\endcode
+
+			`>>> True`\n
+			`>>> False`
+		*/
+		bool Occluded_IMPL(
+			float x,
+			float y,
+			float z,
+			float dx,
+			float dy,
+			float dz,
+			float distance = -1,
+			int mesh_id = -1
+		);
+
+
+
+
 	public:
 		/// <summary>Create an EmbreeRayTracer with no arguments</summary>
 
@@ -314,6 +384,167 @@ namespace HF::RayTracer {
 		*/
 		EmbreeRayTracer(const std::vector<std::array<float, 3>>& geometry);
 
+		/// <summary> Add a new mesh to this raytracer's BVH with the specified ID. </summary>
+/// <param name="Mesh"> A vector of 3d points composing the mesh </param>
+/// <param name="ID"> the id of the mesh </param>
+/// <param name="Commit">
+/// Whether or not to commit changes yet. This is slow, so only do this when you're done
+/// adding meshes.
+/// </param>
+/// <returns>
+/// True if the mesh was added successfully, false if the addition failed or the ID was
+/// already taken.
+/// </returns>
+/// <exception cref="std::exception">
+/// Embree failed to allocate vertex and or index buffers.
+/// </exception>
+
+/*!
+	\code
+		// Requires #include "embree_raytracer.h", #include "objloader.h"
+
+		// Create a container of coordinates
+		std::vector<std::array<float, 3>> directions = {
+			{0, 0, 1},
+			{0, 1, 0},
+			{1, 0, 0},
+			{-1, 0, 0},
+			{0, -1, 0},
+			{0, 0, -1},
+		};
+
+		// Create the EmbreeRayTracer
+		auto ert = HF::RayTracer::EmbreeRayTracer(directions);
+
+		// Prepare the mesh ID
+		const int id = 214;
+
+		// Insert the mesh, Commit parameter defaults to false
+		bool status = ert.AddMesh(directions, id);
+
+		// Retrieve status
+		std::string result = status ? "status okay" : "status not okay";
+		std::cout << result << std::endl;
+	\endcode
+
+	`>>>status okay`\n
+*/
+		bool AddMesh(std::vector<std::array<float, 3>>& Mesh, int ID, bool Commit = false);
+
+		/// <summary>
+		/// Add a new mesh to the BVH with the specified ID. If False, then the addition
+		/// failed, or the ID was already taken.
+		/// </summary>
+		/// <param name="Mesh"> A vector of 3d points composing the mesh </param>
+		/// <param name="ID"> the id of the mesh </param>
+		/// <param name="Commit">
+		/// Whether or not to commit changes yet. This is slow, so only do this when you're done
+		/// adding meshes.
+		/// </param>
+		/// <returns> True if successful </returns>
+		/// <exception cref="std::exception">
+		/// RTC failed to allocate vertex and or index buffers.
+		/// </exception>
+
+		/*!
+			\code
+				// Requires #include "embree_raytracer.h", #include "objloader.h"
+
+				// Create a container of coordinates
+				std::vector<std::array<float, 3>> directions = {
+					{0, 0, 1},
+					{0, 1, 0},
+					{1, 0, 0}
+				};
+
+
+				// Create the EmbreeRayTracer
+				auto ert = HF::RayTracer::EmbreeRayTracer(directions);
+
+				// Prepare coordinates to create a mesh
+				std::vector<std::array<float, 3>> mesh_coords = {
+					{-1, 0, 0},
+					{0, -1, 0},
+					{0, 0, -1}
+				};
+
+				// Create a mesh
+				const int id = 325;
+				const std::string mesh_name = "my mesh";
+				HF::Geometry::MeshInfo mesh(mesh_coords, id, mesh_name);
+
+				// Determine if mesh insertion successful
+				if (ert.AddMesh(mesh, false)) {
+					std::cout << "Mesh insertion okay" << std::endl;
+				}
+				else {
+					std::cout << "Mesh insertion error" << std::endl;
+				}
+			\endcode
+
+			`>>>Mesh insertion okay`\n
+		*/
+		bool AddMesh(HF::Geometry::MeshInfo& Mesh, bool Commit);
+
+		/// <summary> Add several new meshes to the BVH. </summary>
+/// <param name="Meshes"> A vector of meshinfo to each be added as a seperate mesh. </param>
+/// <param name="Commit">
+/// Whether or not to commit changes to the scene after all meshes in Meshes have been added.
+/// </param>
+/// <returns> True. </returns>
+
+/*!
+	\code
+		// Requires #include "embree_raytracer.h", #include "objloader.h"
+
+		// For brevity
+		using HF::Geometry::MeshInfo;
+		using HF::RayTracer::EmbreeRayTracer;
+
+		// Prepare the obj file path
+		std::string teapot_path = "teapot.obj";
+		std::vector<MeshInfo> geom = HF::Geometry::LoadMeshObjects(teapot_path, HF::Geometry::ONLY_FILE);
+
+		// Create the EmbreeRayTracer
+		auto ert = EmbreeRayTracer(geom);
+
+		// Prepare coordinates to create a mesh
+		std::vector<std::array<float, 3>> mesh_coords_0 = {
+			{0, 0, 1},
+			{0, 1, 0},
+			{1, 0, 0}
+		};
+
+		std::vector<std::array<float, 3>> mesh_coords_1 = {
+			{-1, 0, 0},
+			{0, -1, 0},
+			{0, 0, -1}
+		};
+
+		// Prepare mesh IDs and names
+		const int mesh_id_0 = 241;
+		const int mesh_id_1 = 363;
+		const std::string mesh_name_0 = "this mesh";
+		const std::string mesh_name_1 = "that mesh";
+
+		// Create each MeshInfo
+		MeshInfo mesh_0(mesh_coords_0, mesh_id_0, mesh_name_0);
+		MeshInfo mesh_1(mesh_coords_1, mesh_id_1, mesh_name_1);
+
+		// Create a container of MeshInfo
+		std::vector<MeshInfo> mesh_vec = { mesh_0, mesh_1 };
+
+		// Determine if mesh insertion successful
+		if (ert.AddMesh(mesh_vec, false)) {
+			std::cout << "Mesh insertion okay" << std::endl;
+		}
+		else {
+			std::cout << "Mesh insertion error" << std::endl;
+		}
+	\endcode
+*/
+		bool AddMesh(std::vector<HF::Geometry::MeshInfo>& Meshes, bool Commit = true);
+
 		/// <summary>
 		/// Cast a ray and overwrite the origin with the hitpoint if it intersects any geometry.
 		/// </summary>
@@ -356,7 +587,7 @@ namespace HF::RayTracer {
 
 				// Fire a ray straight down
 				std::array<float, 3> origin{ 0,0,1 };
-				bool res = ert.FireRay(
+				bool res = ert.PointIntersection(
 					origin,
 					std::array<float, 3>{0, 0, -1}
 				);
@@ -367,7 +598,7 @@ namespace HF::RayTracer {
 
 				// Fire a ray straight up
 				origin = std::array<float, 3>{ 0, 0, 1 };
-				res = ert.FireRay(
+				res = ert.PointIntersection(
 					origin,
 					std::array<float, 3>{0, 0, 1}
 				);
@@ -380,7 +611,7 @@ namespace HF::RayTracer {
 			` >>>(0,0,0)`\n
 			` >>>Miss`
 		*/
-		bool FireRay(
+		bool PointIntersection(
 			std::array<float, 3>& origin,
 			const std::array<float, 3>& dir,
 			float distance = -1,
@@ -433,7 +664,7 @@ namespace HF::RayTracer {
 
 				// Fire a ray straight down directly at the plane
 				float x = 0; float y = 0; float z = 1;
-				res = ert.FireRay(x, y, z, 0, 0, -1);
+				res = ert.PointIntersection(x, y, z, 0, 0, -1);
 
 				// Print output
 				if (res) std::cerr << "(" << x << ", " << y << ", " << z << ")" << std::endl;
@@ -441,7 +672,7 @@ namespace HF::RayTracer {
 
 				// Fire a ray straight up
 				x = 0; y = 0; z = 1;
-				res = ert.FireRay(x, y, z, 0, 0, 1);
+				res = ert.PointIntersection(x, y, z, 0, 0, 1);
 
 				// Print output
 				if (res) std::cerr << "(" << x << ", " << y << ", " << z << ")" << std::endl;
@@ -451,7 +682,7 @@ namespace HF::RayTracer {
 			`>>>(0, 0, 0)`\n
 			`>>>Miss`
 		*/
-		bool FireRay(
+		bool PointIntersection(
 			float& x,
 			float& y,
 			float& z,
@@ -529,7 +760,7 @@ namespace HF::RayTracer {
 				for (int i = 0; i < 10; i++) origins[i] = std::array<float, 3>{static_cast<float>(2 * i), 0, 1};
 
 				// Fire every ray.
-				auto results = ert.FireRays(origins, directions);
+				auto results = ert.PointIntersections(origins, directions);
 
 				// Print results
 				std::cout << "[";
@@ -546,7 +777,7 @@ namespace HF::RayTracer {
 
 			` >>> [(0, 0, 0), (1.99, 0, 0), (3.98, 0, 0), (5.97, 0, 0), (7.96, 0, 0), (9.95, 0, 0), Miss, Miss, Miss, Miss] `
 		*/
-		std::vector<char> FireRays(
+		std::vector<char> PointIntersections(
 			std::vector<std::array<float, 3>>& origins,
 			std::vector<std::array<float, 3>>& directions,
 			bool use_parallel = true,
@@ -683,7 +914,7 @@ namespace HF::RayTracer {
 				for (int i = 5; i < 10; i++) origins[i] = std::array<float, 3>{ 0.0f, 0.0f, -1.0f };
 
 				// Cast every occlusion ray
-				std::vector<char> results = ert.FireOcclusionRays(origins, directions);
+				std::vector<char> results = ert.Occlusions(origins, directions);
 
 				// Iterate through all results to print them
 				std::cout << "[";
@@ -700,240 +931,13 @@ namespace HF::RayTracer {
 
 			`>>> [True, True, True, True, True, False, False, False, False, False]`
 		*/
-		std::vector<char> FireOcclusionRays(
+		std::vector<char> Occlusions(
 			const std::vector<std::array<float, 3>>& origins,
 			const std::vector<std::array<float, 3>>& directions,
 			float max_distance = -1
 			, bool use_parallel = true
 		);
 
-		/// <summary> Cast a single occlusion ray. </summary>
-		/// <param name="x"> x component of the ray's origin. </param>
-		/// <param name="y"> y component of the ray's origin. </param>
-		/// <param name="z"> z component of the ray's origin. </param>
-		/// <param name="dx"> x component of the ray's direction. </param>
-		/// <param name="dy"> y component of the ray's direction. </param>
-		/// <param name="dz"> z component of the ray's direction. </param>
-		/// <param name="distance">
-		/// Maximum distance of the ray. Any hits beyond this distance will not be counted. If
-		/// negative, count all hits regardless of distance.
-		/// </param>
-		/// <param name="mesh_id">
-		/// (NOT IMPLEMENTED) The id of the only mesh for this ray to collide with. -1 for all.
-		/// </param>
-		/// <returns> True if the ray intersected any geometry. False otherwise. </returns>
-		/*!
-			\par Example
-			\code
-				// Requires #include "embree_raytracer.h", #include "meshinfo.h"
-
-				// for brevity
-				using HF::RayTracer::EmbreeRayTracer;
-				using HF::Geometry::MeshInfo;
-
-				// Create Plane
-				const std::vector<float> plane_vertices{
-					-10.0f, 10.0f, 0.0f,
-					-10.0f, -10.0f, 0.0f,
-					10.0f, 10.0f, 0.0f,
-					10.0f, -10.0f, 0.0f,
-				};
-
-				const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
-
-				// Create RayTracer
-				EmbreeRayTracer ert(std::vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
-
-				// Fire a ray straight down
-				bool res = ert.Occluded_IMPL(0, 0, 1, 0, 0, -1);
-
-				// Print Results
-				if (res) std::cerr << "True" << std::endl;
-				else std::cerr << "False" << std::endl;
-
-				// Fire a ray straight up
-				res = ert.Occluded_IMPL(0, 0, 1, 0, 0, 1);
-
-				// Print results
-				if (res) std::cerr << "True" << std::endl;
-				else std::cerr << "False" << std::endl;
-			\endcode
-
-			`>>> True`\n
-			`>>> False`
-		*/
-		bool Occluded_IMPL(
-			float x,
-			float y,
-			float z,
-			float dx,
-			float dy,
-			float dz,
-			float distance = -1,
-			int mesh_id = -1
-		);
-
-
-		/// <summary> Add a new mesh to this raytracer's BVH with the specified ID. </summary>
-		/// <param name="Mesh"> A vector of 3d points composing the mesh </param>
-		/// <param name="ID"> the id of the mesh </param>
-		/// <param name="Commit">
-		/// Whether or not to commit changes yet. This is slow, so only do this when you're done
-		/// adding meshes.
-		/// </param>
-		/// <returns>
-		/// True if the mesh was added successfully, false if the addition failed or the ID was
-		/// already taken.
-		/// </returns>
-		/// <exception cref="std::exception">
-		/// Embree failed to allocate vertex and or index buffers.
-		/// </exception>
-
-		/*!
-			\code
-				// Requires #include "embree_raytracer.h", #include "objloader.h"
-
-				// Create a container of coordinates
-				std::vector<std::array<float, 3>> directions = {
-					{0, 0, 1},
-					{0, 1, 0},
-					{1, 0, 0},
-					{-1, 0, 0},
-					{0, -1, 0},
-					{0, 0, -1},
-				};
-
-				// Create the EmbreeRayTracer
-				auto ert = HF::RayTracer::EmbreeRayTracer(directions);
-
-				// Prepare the mesh ID
-				const int id = 214;
-
-				// Insert the mesh, Commit parameter defaults to false
-				bool status = ert.InsertNewMesh(directions, id);
-
-				// Retrieve status
-				std::string result = status ? "status okay" : "status not okay";
-				std::cout << result << std::endl;
-			\endcode
-
-			`>>>status okay`\n
-		*/
-		bool InsertNewMesh(std::vector<std::array<float, 3>>& Mesh, int ID, bool Commit = false);
-
-		/// <summary>
-		/// Add a new mesh to the BVH with the specified ID. If False, then the addition
-		/// failed, or the ID was already taken.
-		/// </summary>
-		/// <param name="Mesh"> A vector of 3d points composing the mesh </param>
-		/// <param name="ID"> the id of the mesh </param>
-		/// <param name="Commit">
-		/// Whether or not to commit changes yet. This is slow, so only do this when you're done
-		/// adding meshes.
-		/// </param>
-		/// <returns> True if successful </returns>
-		/// <exception cref="std::exception">
-		/// RTC failed to allocate vertex and or index buffers.
-		/// </exception>
-
-		/*!
-			\code
-				// Requires #include "embree_raytracer.h", #include "objloader.h"
-
-				// Create a container of coordinates
-				std::vector<std::array<float, 3>> directions = {
-					{0, 0, 1},
-					{0, 1, 0},
-					{1, 0, 0}
-				};
-
-
-				// Create the EmbreeRayTracer
-				auto ert = HF::RayTracer::EmbreeRayTracer(directions);
-
-				// Prepare coordinates to create a mesh
-				std::vector<std::array<float, 3>> mesh_coords = { 
-					{-1, 0, 0},
-					{0, -1, 0},
-					{0, 0, -1} 
-				};
-
-				// Create a mesh
-				const int id = 325;
-				const std::string mesh_name = "my mesh";
-				HF::Geometry::MeshInfo mesh(mesh_coords, id, mesh_name);
-
-				// Determine if mesh insertion successful
-				if (ert.InsertNewMesh(mesh, false)) {
-					std::cout << "Mesh insertion okay" << std::endl;
-				}
-				else {
-					std::cout << "Mesh insertion error" << std::endl;
-				}
-			\endcode
-
-			`>>>Mesh insertion okay`\n
-		*/
-		bool InsertNewMesh(HF::Geometry::MeshInfo& Mesh, bool Commit);
-
-		/// <summary> Add several new meshes to the BVH. </summary>
-		/// <param name="Meshes"> A vector of meshinfo to each be added as a seperate mesh. </param>
-		/// <param name="Commit">
-		/// Whether or not to commit changes to the scene after all meshes in Meshes have been added.
-		/// </param>
-		/// <returns> True. </returns>
-
-		/*!
-			\code
-				// Requires #include "embree_raytracer.h", #include "objloader.h"
-
-				// For brevity
-				using HF::Geometry::MeshInfo;
-				using HF::RayTracer::EmbreeRayTracer;
-
-				// Prepare the obj file path
-				std::string teapot_path = "teapot.obj";
-				std::vector<MeshInfo> geom = HF::Geometry::LoadMeshObjects(teapot_path, HF::Geometry::ONLY_FILE);
-
-				// Create the EmbreeRayTracer
-				auto ert = EmbreeRayTracer(geom);
-
-				// Prepare coordinates to create a mesh
-				std::vector<std::array<float, 3>> mesh_coords_0 = {
-					{0, 0, 1},
-					{0, 1, 0},
-					{1, 0, 0}
-				};
-
-				std::vector<std::array<float, 3>> mesh_coords_1 = {
-					{-1, 0, 0},
-					{0, -1, 0},
-					{0, 0, -1}
-				};
-
-				// Prepare mesh IDs and names
-				const int mesh_id_0 = 241;
-				const int mesh_id_1 = 363;
-				const std::string mesh_name_0 = "this mesh";
-				const std::string mesh_name_1 = "that mesh";
-
-				// Create each MeshInfo
-				MeshInfo mesh_0(mesh_coords_0, mesh_id_0, mesh_name_0);
-				MeshInfo mesh_1(mesh_coords_1, mesh_id_1, mesh_name_1);
-
-				// Create a container of MeshInfo
-				std::vector<MeshInfo> mesh_vec = { mesh_0, mesh_1 };
-
-				// Determine if mesh insertion successful
-				if (ert.InsertNewMesh(mesh_vec, false)) {
-					std::cout << "Mesh insertion okay" << std::endl;
-				}
-				else {
-					std::cout << "Mesh insertion error" << std::endl;
-				}
-			\endcode
-		*/
-		bool InsertNewMesh(std::vector<HF::Geometry::MeshInfo>& Meshes, bool Commit = true);
 
 		/// <summary>
 		/// Template for firing rays using array-like containers for the direction and origin.
@@ -1008,99 +1012,15 @@ namespace HF::RayTracer {
 		}
 
 
-		/// <summary>
-		/// Template for firing rays using array-like containers for the direction and origin.
-		/// </summary>
-		/// <param name="node"> A point in space. Must atleast have [0], [1], and [2] defined </param>
-		/// <param name="direction">
-		/// Direction to fire the ray in. Same constraints as node, but can be a different type
-		/// </param>
-		/// <param name="out_distance"> distance from the ray to the hit (if any) </param>
-		/// <param name="out_meshid"> ID of the mesh hit(if any) </param>
-		/// <param name="max_distance">
-		/// Maximum distance the ray can travel. And intersections beyond this distance will be
-		/// ignored. Will consider all intersections regardless of distance if set to -1.
-		/// </param>
-		/// <returns> True if the ray intersected any geometry, false otherwise. </returns>
-		/// <remarks>
-		/// This is preferrable to use over the other ray functions in many circumstances since
-		/// the use of templates ensures no unnecessary conversions are performed.
-		/// </remarks>
-		/// \note C++ 2020's Concepts would be a good way to explain how to use this whenever
-		/// they get implemented.
-		/*!
-			\par Example
-			\code
-				// Requires #include "embree_raytracer.h", #include "meshinfo.h"
-
-				// for brevity
-				using HF::RayTracer::EmbreeRayTracer;
-				using HF::Geometry::MeshInfo;
-
-				const std::vector<float> plane_vertices{
-					-10.0f, 10.0f, 0.0f,
-					-10.0f, -10.0f, 0.0f,
-					10.0f, 10.0f, 0.0f,
-					10.0f, -10.0f, 0.0f,
-				};
-
-				const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
-
-				// Create a new raytracer from a basic 10x10 plane centered on the origin.
-				EmbreeRayTracer ert(std::vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
-
-				// Create origin/direction arrays
-				std::array<float, 3> origin{ 0, 0, 1 };
-				std::array<float, 3> direction{ 0, 0, -1 };
-
-				bool res = false; float out_dist = -1; int out_id = -1;
-
-				// Fire a ray straight down
-				res = ert.FireAnyRay(origin, direction, out_dist, out_id);
-
-				// Print its distance if it connected
-				if (res) std::cerr << out_dist << std::endl;
-				else std::cerr << "Miss" << std::endl;
-
-				// Fire a ray straight up
-				res = ert.FireAnyRay(origin, origin, out_dist, out_id);
-
-				// Print its distance if it connected
-				if (res) std::cerr << out_dist << std::endl;
-				else std::cerr << "Miss" << std::endl;
-			\endcode
-
-			`>>>(0, 0, 0)`\n
-			`>>>Miss`
-
-		*/
-		template <typename N, typename V>
-		bool FireAnyRay(
-			const N& node,
-			const V& direction,
-			float& out_distance,
-			int& out_meshid,
-			float max_distance = -1.0f)
-		{
-			HitStruct<float> result = Intersect<float>(node, direction, max_distance);
-			if (result.DidHit()) {
-				out_distance = result.distance;
-				out_meshid = result.meshid;
-				return true;
-			}
-			else
-				return false;
-		}
-
 		template <typename N, typename V, typename real_t>
-		bool FireAnyRayD(
+		bool IntersectOutputArguments(
 			const N& node,
 			const V& direction,
 			real_t& out_distance,
 			int& out_meshid,
 			float max_distance = -1.0f)
 		{
-			HitStruct<double> result = Intersect(node, direction, max_distance);
+			HitStruct<real_t> result = Intersect<real_t>(node, direction, max_distance);
 			if (result.DidHit()) {
 				out_distance = result.distance;
 				out_meshid = result.meshid;
@@ -1110,27 +1030,22 @@ namespace HF::RayTracer {
 				return false;
 		}
 		
-
-		template <typename N, typename V>
-		inline std::vector<HitStruct<double>> FireAnyRayParallel(
+		template <typename return_type, typename N, typename V>
+		inline std::vector<HitStruct<return_type>> Intersections(
 			const N & nodes,
 			const V & directions,
 			float max_distance = -1.0f,
-			const bool force_precise = false,
 			const bool use_parallel = false)
 		{
 			const int n = nodes.size();
 
-			// Only use precision if we have it already enabled, or force_precise is true
-			const bool activate_precise = (use_precise || force_precise);
-			
-			std::vector<HitStruct<double>> results (nodes.size());
+			std::vector<HitStruct<return_type>> results (nodes.size());
 
 			#pragma omp parallel for schedule(dynamic) if (use_parallel)
 			for (int i = 0; i < n; i++) {// Use custom triangle intesection if required
 				const auto& node = nodes[i];
 				const auto& direction = directions[i];
-				results[i] = Intersect(node, direction);
+				results[i] = Intersect<return_type>(node, direction);
 			}
 			return results;
 		}
