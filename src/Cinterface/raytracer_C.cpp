@@ -190,7 +190,7 @@ C_INTERFACE FireRaysDistance(
 	return OK;
 }
 
-C_INTERFACE PointIntersection(EmbreeRayTracer* ert, float& x, float& y, float& z, float dx, float dy, float dz, float max_distance, bool& result)
+C_INTERFACE FireRay(EmbreeRayTracer* ert, float& x, float& y, float& z, float dx, float dy, float dz, float max_distance, bool& result)
 {
 	result = ert->PointIntersection(x, y, z, dx, dy, dz, max_distance);
 	return OK;
@@ -268,7 +268,7 @@ C_INTERFACE FireMultipleDirectionsOneOrigin(EmbreeRayTracer* ert, const float* o
 	return OK;
 }
 
-C_INTERFACE Occlusions(EmbreeRayTracer* ert, const float* origins, const float* directions, int origin_size, int direction_size, float max_distance, bool* result_array)
+C_INTERFACE FireOcclusionRays(EmbreeRayTracer* ert, const float* origins, const float* directions, int origin_size, int direction_size, float max_distance, bool* result_array)
 {
 	auto origin_array = ConvertRawFloatArrayToPoints(origins, origin_size);
 	auto direction_array = ConvertRawFloatArrayToPoints(directions, direction_size);

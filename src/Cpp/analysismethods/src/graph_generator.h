@@ -56,7 +56,7 @@ namespace HF::GraphGenerator {
 	class UniqueQueue;
 	struct optional_real3;
 
-	using real_t = float;							  ///< Internal decimal type of the graph generator
+	using real_t = double;							  ///< Internal decimal type of the graph generator
 	using real3 = std::array<real_t, 3>;			  ///< Type used for the standard coordinate set of the graph generator.
 	using RayTracer = HF::RayTracer::EmbreeRayTracer; ///< Type of raytracer to be used internally.
 	using graph_edge = HF::SpatialStructures::Edge;   ///< Type of edge for the graph generator to use internally

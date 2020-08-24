@@ -359,7 +359,7 @@ C_INTERFACE FireSingleRayDistance(
 	`>>> CreateRaytracer created EmbreeRayTracer successfully into bvh at address 0000019E86D22BE0, code: 1`\n
 	`>>> Hit point: [0, 0, 0]`\n
 */
-C_INTERFACE PointIntersection(HF::RayTracer::EmbreeRayTracer* ert, float& x, float& y, float& z, float dx, float dy, float dz, float max_distance, bool& result);
+C_INTERFACE FireRay(HF::RayTracer::EmbreeRayTracer* ert, float& x, float& y, float& z, float dx, float dy, float dz, float max_distance, bool& result);
 
 /*!
 	\brief		Fire multiple rays at once in parallel and receive their hitpoints in return. The number of
@@ -551,7 +551,7 @@ C_INTERFACE FireMultipleDirectionsOneOrigin(HF::RayTracer::EmbreeRayTracer* ert,
 	`>>> Using multidirection, single origin`\n
 	`>>> Does the ray connect? True`\n
 */
-C_INTERFACE Occlusions(
+C_INTERFACE FireOcclusionRays(
 	HF::RayTracer::EmbreeRayTracer* ert,
 	const float* origins,
 	const float* directions,
