@@ -4,5 +4,5 @@ Visualize a Path
 
 .. currentmodule:: humanfactorspy
 
-.. automodule:: humanfactorspy.Examples.PathPlanningViz
+.. automodule:: humanfactorspy.Examples.PathPlanning
     :members:

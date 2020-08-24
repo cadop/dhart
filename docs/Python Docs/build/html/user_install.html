@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>Installation &mdash; Human Metrics 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" type="text/css" href="_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="_static/css/spc-extend.css">
+    <link rel="stylesheet" href="_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="genindex.html" >
+    <link rel="search" title="Search" href="search.html" >
+    <link rel="top" title="Human Metrics 0.0.1 documentation" href="index.html" >
+    <link rel="up" title="Setup" href="install.html" >
+    <link rel="next" title="Contributing and Testing" href="contributing.html" >
+    <link rel="prev" title="Setup" href="install.html" > 
+  </head>
+  <body>
+
+  <div class="container">
+    <div class="header">
+    </div>
+  </div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="http://">Git</a></li>
+	
+        <li class="active"><a href="index.html">Human Metrics 0.0.1 documentation</a></li>
+	
+          <li class="active"><a href="install.html" accesskey="U">Setup</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="contributing.html" title="Contributing and Testing"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="install.html" title="Setup"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="installation">
+<span id="user-install"></span><h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>This guide will explain how to install the Analysis package. Most of the explanation in Setup is how to
+create a virtual environment.  If you know how to do this, you can skip this and just use <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">.</span></code>
+as the regular python package installation method.</p>
+<div class="section" id="check-basic-requirements">
+<h2>Check Basic Requirements<a class="headerlink" href="#check-basic-requirements" title="Permalink to this headline">¶</a></h2>
+<p>Currently tested on <code class="docutils literal notranslate"><span class="pre">Python</span> <span class="pre">3.8+</span></code>.</p>
+<p>If the Analysis package is in the general repository, it will be located in <em class="xref py py-obj">Analysis/build/Python</em>.
+Navigate to this folder and the directory should look like:</p>
+<div class="line-block">
+<div class="line">Python</div>
+<div class="line">├── bin</div>
+<div class="line">├── humanfactorspy</div>
+<div class="line">├── lib</div>
+<div class="line">├── README.md</div>
+<div class="line">├── setup.py</div>
+</div>
+</div>
+<div class="section" id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<p>To install, open the windows <em class="xref py py-obj">Command Prompt</em> by typing <code class="docutils literal notranslate"><span class="pre">cmd</span></code> into the windows search bar.</p>
+<p>It is recommended to use virtual environments, at least to start, to ensure the code is working.
+For this, you will navigate to some folder that you can consistently find and is not part of the
+Analysis package. For example, make a folder called <code class="docutils literal notranslate"><span class="pre">py_envs</span></code> in your <code class="docutils literal notranslate"><span class="pre">Documents</span></code> folder.</p>
+<p>To setup a new virtual environment, go to the permanent folder location of your environments
+in the command prompt. For example:</p>
+<p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">C:\Documents\py_envs</span></code></p>
+<p>Assuming you have python 3 installed with the python selector, you should be able to use <code class="docutils literal notranslate"><span class="pre">py</span> <span class="pre">-3.8</span></code>.
+Otherwise, if python 3.8 is the only version installed, it should also be possible to create the environment
+with <code class="docutils literal notranslate"><span class="pre">python</span></code>. Depending on your case, you will type:</p>
+<p><code class="docutils literal notranslate"><span class="pre">py</span> <span class="pre">-3.8</span> <span class="pre">-m</span> <span class="pre">venv</span> <span class="pre">[preferred</span> <span class="pre">name]</span></code></p>
+<p>In the above line <code class="docutils literal notranslate"><span class="pre">[preferred</span> <span class="pre">name]</span></code> is really what you would like it to say. For this explanation,
+we will call the environment <code class="docutils literal notranslate"><span class="pre">hf_analysis</span></code>, which means you type:</p>
+<p><code class="docutils literal notranslate"><span class="pre">py</span> <span class="pre">-3.8</span> <span class="pre">-m</span> <span class="pre">venv</span> <span class="pre">hf_analysis</span></code></p>
+<p>It should take a second or two to finish. You will not see anything happen.  If you now type <code class="docutils literal notranslate"><span class="pre">dir</span></code>, you should
+see a folder called <code class="docutils literal notranslate"><span class="pre">hf_analysis</span></code>.  Now you need to ‘activate’ the virtual environment by typing:</p>
+<p><code class="docutils literal notranslate"><span class="pre">hf_analysis\Scripts\activate</span></code></p>
+<p>Now you should see <code class="docutils literal notranslate"><span class="pre">(hf_analysis)</span></code> before the directory in the command prompt. This means you are successfully
+in the virtual environment.  Anytime you want to reload the installed environment, you will navigate to the
+folder you made and type the above line for activating the environment.  If you want to end your virtual environment,
+simply type <code class="docutils literal notranslate"><span class="pre">deactivate</span></code> in the command prompt.</p>
+<p>Now that the virtual environment is activated, navigate to the Analysis folder e.g., <code class="docutils literal notranslate"><span class="pre">build/Python</span></code>. Make sure
+you are in the correct location by typing <code class="docutils literal notranslate"><span class="pre">dir</span></code> to see the <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> file. To install, type:</p>
+<p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">.</span></code></p>
+<p>To do a basic check that the package installed in the correct location, navigate to a different directory.
+For example:</p>
+<p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">../..</span></code></p>
+<p>Start a Python console with:</p>
+<p><code class="docutils literal notranslate"><span class="pre">python</span></code></p>
+<p>or if you have multiple versions:</p>
+<p><code class="docutils literal notranslate"><span class="pre">python3</span></code></p>
+<p>then enter:</p>
+<p><code class="docutils literal notranslate"><span class="pre">&gt;&gt;&gt;</span> <span class="pre">import</span> <span class="pre">humanfactorspy</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">&gt;&gt;&gt;</span> <span class="pre">humanfactorspy.get_sample_model()</span></code></p>
+<p>You should see the output being a path to your virtual environment folder:</p>
+<p><code class="docutils literal notranslate"><span class="pre">[your</span> <span class="pre">directory]\\lib\\site-packages\\humanfactorspy\\Example</span> <span class="pre">Models\\</span></code></p>
+<p>Where [your directory] would be <code class="docutils literal notranslate"><span class="pre">C:\\Documents\\py_envs\\hf_analysis</span></code> if following the directions in this document.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Installation</a><ul>
+<li><a class="reference internal" href="#check-basic-requirements">Check Basic Requirements</a></li>
+<li><a class="reference internal" href="#setup">Setup</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="install.html"
+                        title="previous chapter">Setup</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="contributing.html"
+                        title="next chapter">Contributing and Testing</a></p>
+
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.1.2.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

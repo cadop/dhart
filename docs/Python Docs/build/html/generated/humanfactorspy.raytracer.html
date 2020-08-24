@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>humanfactorspy.raytracer &mdash; Human Metrics 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="Human Metrics 0.0.1 documentation" href="../index.html" >
+    <link rel="up" title="Code Reference" href="../code.html" >
+    <link rel="next" title="humanfactorspy.raytracer.EmbreeBVH" href="humanfactorspy.raytracer.EmbreeBVH.html" >
+    <link rel="prev" title="humanfactorspy.pathfinding.calculate_distance_and_predecessor" href="humanfactorspy.pathfinding.calculate_distance_and_predecessor.html" > 
+  </head>
+  <body>
+
+  <div class="container">
+    <div class="header">
+    </div>
+  </div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="http://">Git</a></li>
+	
+        <li class="active"><a href="../index.html">Human Metrics 0.0.1 documentation</a></li>
+	
+          <li class="active"><a href="../code.html" accesskey="U">Code Reference</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="humanfactorspy.raytracer.EmbreeBVH.html" title="humanfactorspy.raytracer.EmbreeBVH"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="humanfactorspy.pathfinding.calculate_distance_and_predecessor.html" title="humanfactorspy.pathfinding.calculate_distance_and_predecessor"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="humanfactorspy-raytracer">
+<h1>humanfactorspy.raytracer<a class="headerlink" href="#humanfactorspy-raytracer" title="Permalink to this headline">¶</a></h1>
+<p class="rubric">Description</p>
+<span class="target" id="module-humanfactorspy.raytracer"></span><div class="section" id="perform-efficent-ray-intersections-with-geometry">
+<h2>Perform efficent ray intersections with geometry.<a class="headerlink" href="#perform-efficent-ray-intersections-with-geometry" title="Permalink to this headline">¶</a></h2>
+<p>This library is focused on performing ray intersections with geometry. The key
+datatype for this is the EmbreeBVH, which is required for most functions in
+this package.</p>
+<p>Raytracing involves determining where a line would intersect a mesh
+if it were to continue infinitely form a specific point in the space.
+Many of the other modules in HumanFactors make use of ray intersections
+in their analysis.</p>
+</div>
+<p class="rubric">Classes</p>
+<table border="1" class="longtable docutils align-default">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="humanfactorspy.raytracer.EmbreeBVH.html#humanfactorspy.raytracer.EmbreeBVH" title="humanfactorspy.raytracer.EmbreeBVH"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EmbreeBVH</span></code></a>(geometry,&nbsp;use_precise)</td>
+<td>An acceelerated datastructure optimized for high performane ray intersections</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="humanfactorspy.raytracer.RayResultList.html#humanfactorspy.raytracer.RayResultList" title="humanfactorspy.raytracer.RayResultList"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RayResultList</span></code></a>(vector_ptr,&nbsp;data_ptr,&nbsp;…)</td>
+<td>A list of results from a set of ray queries.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="humanfactorspy.raytracer.ResultStruct.html#humanfactorspy.raytracer.ResultStruct" title="humanfactorspy.raytracer.ResultStruct"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ResultStruct</span></code></a></td>
+<td>A struct of results containing distance, and meshid</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Functions</p>
+<table border="1" class="longtable docutils align-default">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="humanfactorspy.raytracer.Intersect.html#humanfactorspy.raytracer.Intersect" title="humanfactorspy.raytracer.Intersect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Intersect</span></code></a>(bvh,&nbsp;origin,&nbsp;direction[,&nbsp;max_distance])</td>
+<td>Cast one or more rays to get the distance to their point of intersection and the ID of the mesh they intersected.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="humanfactorspy.raytracer.IntersectDistanceDouble.html#humanfactorspy.raytracer.IntersectDistanceDouble" title="humanfactorspy.raytracer.IntersectDistanceDouble"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IntersectDistanceDouble</span></code></a>(bvh,&nbsp;origin,&nbsp;direction)</td>
+<td>Obtain the distance between a raycast and a point of intersection with double precision</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="humanfactorspy.raytracer.IntersectForPoint.html#humanfactorspy.raytracer.IntersectForPoint" title="humanfactorspy.raytracer.IntersectForPoint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IntersectForPoint</span></code></a>(bvh,&nbsp;origins,&nbsp;directions)</td>
+<td>Fire one or more rays based on input origins and directions</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="humanfactorspy.raytracer.IntersectOccluded.html#humanfactorspy.raytracer.IntersectOccluded" title="humanfactorspy.raytracer.IntersectOccluded"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IntersectOccluded</span></code></a>(bvh,&nbsp;origins,&nbsp;directions)</td>
+<td>Fire one or more occlusion rays in C++</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="humanfactorspy.raytracer.isValidBVH.html#humanfactorspy.raytracer.isValidBVH" title="humanfactorspy.raytracer.isValidBVH"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isValidBVH</span></code></a>(bvh)</td>
+<td>Check if the given object is actually a BVH before sending the pointer to C++</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">humanfactorspy.raytracer</a><ul>
+<li><a class="reference internal" href="#perform-efficent-ray-intersections-with-geometry">Perform efficent ray intersections with geometry.</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="humanfactorspy.pathfinding.calculate_distance_and_predecessor.html"
+                        title="previous chapter">humanfactorspy.pathfinding.calculate_distance_and_predecessor</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="humanfactorspy.raytracer.EmbreeBVH.html"
+                        title="next chapter">humanfactorspy.raytracer.EmbreeBVH</a></p>
+
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.1.2.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>
