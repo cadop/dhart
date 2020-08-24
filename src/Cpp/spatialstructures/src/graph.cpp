@@ -213,7 +213,7 @@ namespace HF::SpatialStructures {
 	{
 		// Ensure that we throw our custom exception if this key doesn't exist
 		if (!this->HasCostArray(key)) 
-			throw NoCost("");
+			throw NoCost(key);
 		
 		// Get the cost from the cost map
 		return (edge_cost_maps.at(key));
