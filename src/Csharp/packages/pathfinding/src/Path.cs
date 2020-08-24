@@ -1,5 +1,6 @@
 using HumanFactors.NativeUtils;
 using System;
+using System.CodeDom;
 
 namespace HumanFactors.Pathfinding
 {
@@ -21,6 +22,12 @@ namespace HumanFactors.Pathfinding
 		/*! \brief The ID of this node */
 		public int id;
 
+		public PathMember(int id, float cost_to_next)
+		{
+			this.cost_to_next = cost_to_next;
+			this.id = id;
+		}
+
 		/*! 
             \brief Compare the ID and Cost to next of this PathMember to another.
             
@@ -29,6 +36,9 @@ namespace HumanFactors.Pathfinding
             \returns True if the ID and cost to next of PM2 are equal to that of this pathmember.
         */
 		public bool Equals(PathMember PM2) => (this.id == PM2.id && this.cost_to_next == PM2.cost_to_next);
+
+		public static bool operator ==(PathMember PM1, PathMember PM2) => PM1.Equals(PM2);
+		public static bool operator !=(PathMember PM1, PathMember PM2) => !PM1.Equals(PM2);
 
 		/*! \brief Get a string representation of this pathmember's ID and cost to it's next element. */
 		public override string ToString() => String.Format("({0}, {1:0.###})", id, cost_to_next);

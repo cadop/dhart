@@ -948,7 +948,7 @@ namespace C_Interface{
 		
 		// Cast both rays. Only one should intersect
 		bool * before_added_results = new bool[2];
-		int err_c = Occlusions(rt, origins.data(), directions.data(), 2, 2, -1, before_added_results);
+		int err_c = FireOcclusionRays(rt, origins.data(), directions.data(), 2, 2, -1, before_added_results);
 		EXPECT_NE(before_added_results[0], before_added_results[1]);
 
 		// Create a new rotated plane and add it to the BVH
@@ -958,7 +958,7 @@ namespace C_Interface{
 
 		// Cast both rays, and now ensure they both intersect
 		bool * after_added_results = new bool[2];
-		err_c = Occlusions(rt, origins.data(), directions.data(), 2, 2, -1, after_added_results);
+		err_c = FireOcclusionRays(rt, origins.data(), directions.data(), 2, 2, -1, after_added_results);
 		EXPECT_EQ(after_added_results[0], after_added_results[1]);
 
 		// Destroy the Plane and Raytracer
@@ -983,7 +983,7 @@ namespace C_Interface{
 		float x = 0; float y = 0; float z = 1;
 		int dx = 0; int dy = 0; int dz = -1;
 		bool res = false;
-		PointIntersection(ERT, x, y, z, dx, dy, dz, -1, res);
+		FireRay(ERT, x, y, z, dx, dy, dz, -1, res);
 		ASSERT_TRUE(res);
 
 		for (int i = 0; i < num_meshes; i++)
@@ -1010,7 +1010,7 @@ namespace C_Interface{
 		float x = 0; float y = 0; float z = 1;
 		int dx = 0; int dy = 0; int dz = -1;
 		bool res = false;
-		PointIntersection(ERT, x, y, z, dx, dy, dz, -1, res);
+		FireRay(ERT, x, y, z, dx, dy, dz, -1, res);
 		ASSERT_TRUE(res);
 
 		// Clean up every meshinfo and Raytracer
