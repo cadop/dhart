@@ -113,7 +113,7 @@ TEST(_EmbreeRayTracer, Copy) {
 
 	// If the copy didn't work, then this operation would throw
 	auto rt2 = k;
-	rt2.Occluded_IMPL(std::array<float, 3>{1, 1, 1}, std::array<float, 3>{1, 1, 1});
+	rt2.Occluded(std::array<float, 3>{1, 1, 1}, std::array<float, 3>{1, 1, 1});
 }
 
 TEST(_EmbreeRayTracer, EmbreeGarbageCollectCorrect) {
@@ -132,7 +132,7 @@ TEST(_EmbreeRayTracer, EmbreeGarbageCollectCorrect) {
 	delete ERT;
 
 	// Try to fire a ray. If this crashes, then it means the copy constructor isn't correctly incrementing the reference counter.
-	ERT2.Occluded_IMPL(std::array<float, 3>{1, 1, 1}, std::array<float, 3>{1, 1, 1});
+	ERT2.Occluded(std::array<float, 3>{1, 1, 1}, std::array<float, 3>{1, 1, 1});
 }
 
 
@@ -152,7 +152,7 @@ TEST(_EmbreeRayTracer, OcclusionRays) {
 		{0,0,-1},
 	};
 	for (auto& dir : directions)
-		EXPECT_TRUE(k.Occluded_IMPL(origin, dir));
+		EXPECT_TRUE(k.Occluded(origin, dir));
 }
 
 TEST(_EmbreeRayTracer, StandardRays) {
@@ -583,7 +583,7 @@ TEST(_EmbreeRayTracer, FireOcclusionRayArray) {
 	EmbreeRayTracer ert(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
 
 	// Fire a ray straight down
-	bool res = ert.Occluded_IMPL(
+	bool res = ert.Occluded(
 		std::array<float, 3>{0, 0, 1},
 		std::array<float, 3>{0, 0, -1}
 	);
@@ -593,7 +593,7 @@ TEST(_EmbreeRayTracer, FireOcclusionRayArray) {
 	else std::cerr << "False" << std::endl;
 
 	// Fire a ray straight up
-	res = ert.Occluded_IMPL(
+	res = ert.Occluded(
 		std::array<float, 3>{0, 0, 1},
 		std::array<float, 3>{0, 0, 1}
 	);
@@ -603,7 +603,7 @@ TEST(_EmbreeRayTracer, FireOcclusionRayArray) {
 	else std::cerr << "False" << std::endl;
 }
 
-TEST(_EmbreeRayTracer, Occluded_IMPL) {
+TEST(_EmbreeRayTracer, OccludedSingle) {
 	// Create Plane
 	const vector<float> plane_vertices{
 		-10.0f, 10.0f, 0.0f,
@@ -617,13 +617,13 @@ TEST(_EmbreeRayTracer, Occluded_IMPL) {
 	EmbreeRayTracer ert(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
 
 	// Fire a ray straight down
-	bool res = ert.Occluded_IMPL(0, 0, 1, 0, 0, -1);
+	bool res = ert.Occluded(0, 0, 1, 0, 0, -1);
 	ASSERT_TRUE(res);
 	if (res) std::cerr << "True" << std::endl;
 	else std::cerr << "False" << std::endl;
 
 	// Fire a ray straight up
-	res = ert.Occluded_IMPL(0, 0, 1, 0, 0, 1);
+	res = ert.Occluded(0, 0, 1, 0, 0, 1);
 	ASSERT_FALSE(res);
 	if (res) std::cerr << "True" << std::endl;
 	else std::cerr << "False" << std::endl;

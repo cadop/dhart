@@ -48,7 +48,7 @@ C_INTERFACE CreateRaytracerMultiMesh(MeshInfo** meshes, int num_meshes, EmbreeRa
 			// Only commit to scene if this is the final mesh in the array
 			bool should_commit = (i == num_meshes - 1);
 
-			(*out_raytracer)->InsertNewMesh(*(meshes[i]), should_commit);
+			(*out_raytracer)->AddMesh(*(meshes[i]), should_commit);
 		}
 
 		return OK;
@@ -75,7 +75,7 @@ C_INTERFACE AddMeshes(HF::RayTracer::EmbreeRayTracer* ERT, HF::Geometry::MeshInf
 	for (int i = 0; i < number_of_meshes; i++) {
 		bool should_commit = (i == number_of_meshes - 1);
 	
-		ERT->InsertNewMesh(*(MI[i]), should_commit);
+		ERT->AddMesh(*(MI[i]), should_commit);
 	}
 
 	return HF_STATUS::OK;
@@ -83,7 +83,7 @@ C_INTERFACE AddMeshes(HF::RayTracer::EmbreeRayTracer* ERT, HF::Geometry::MeshInf
 
 C_INTERFACE AddMesh(HF::RayTracer::EmbreeRayTracer* ERT, HF::Geometry::MeshInfo* MI)
 {
-	ERT->InsertNewMesh(*MI, true);
+	ERT->AddMesh(*MI, true);
 
 	return HF_STATUS::OK;
 }
@@ -104,7 +104,7 @@ C_INTERFACE FireSingleRayDistance(
 	int* out_meshid
 )
 {
-	ert->FireAnyRay(origin, direction, *out_distance, *out_meshid);
+	ert->IntersectOutputArguments(origin, direction, *out_distance, *out_meshid);
 	return HF::Exceptions::HF_STATUS::OK;
 }
 
@@ -148,7 +148,7 @@ C_INTERFACE FireRaysDistance(
 		for (int i = 0; i < num_origins; i++) {
 			float out_distance = -1;
 			int out_id = -1;
-			if (ert->FireAnyRay(origin_pts[i], direction_pts[i], out_distance, out_id))
+			if (ert->IntersectOutputArguments(origin_pts[i], direction_pts[i], out_distance, out_id))
 				(*output_results)[i].SetHit(origin_pts[i], direction_pts[i], out_distance, out_id);
 		}
 		break;
@@ -163,7 +163,7 @@ C_INTERFACE FireRaysDistance(
 	#pragma omp parallel for schedule(dynamic)
 		for (int i = 0; i < num_directions; i++) {
 			float out_distance = -1; int out_id = -1;
-			if (ert->FireAnyRay(origin, direction_pts[i], out_distance, out_id))
+			if (ert->IntersectOutputArguments(origin, direction_pts[i], out_distance, out_id))
 				(*output_results)[i].SetHit(origin, direction_pts[i], out_distance, out_id);
 		}
 		break;
@@ -177,7 +177,7 @@ C_INTERFACE FireRaysDistance(
 	#pragma omp parallel for schedule(dynamic)
 		for (int i = 0; i < num_origins; i++) {
 			float out_distance = -1; int out_id = -1;
-			if (ert->FireAnyRay(origin_pts[i], direction, out_distance, out_id))
+			if (ert->IntersectOutputArguments(origin_pts[i], direction, out_distance, out_id))
 				(*output_results)[i].SetHit(origin_pts[i], direction, out_distance, out_id);
 
 		}
@@ -190,9 +190,9 @@ C_INTERFACE FireRaysDistance(
 	return OK;
 }
 
-C_INTERFACE FireRay(EmbreeRayTracer* ert, float& x, float& y, float& z, float dx, float dy, float dz, float max_distance, bool& result)
+C_INTERFACE PointIntersection(EmbreeRayTracer* ert, float& x, float& y, float& z, float dx, float dy, float dz, float max_distance, bool& result)
 {
-	result = ert->FireRay(x, y, z, dx, dy, dz, max_distance);
+	result = ert->PointIntersection(x, y, z, dx, dy, dz, max_distance);
 	return OK;
 }
 
@@ -206,7 +206,7 @@ C_INTERFACE FireMultipleRays(
 ) {
 	auto origin_array = ConvertRawFloatArrayToPoints(origins, size);
 	auto dir_array = ConvertRawFloatArrayToPoints(directions, size);
-	auto results = ert->FireRays(origin_array, dir_array, size, true, max_distance);
+	auto results = ert->PointIntersections(origin_array, dir_array, size, true, max_distance);
 
 	for (int i = 0; i < size; i++) {
 		if (results[i])
@@ -228,7 +228,7 @@ C_INTERFACE FireMultipleOriginsOneDirection(EmbreeRayTracer* ert, float* origins
 {
 	auto origin_array = ConvertRawFloatArrayToPoints(origins, size);
 	auto dir_array = ConvertRawFloatArrayToPoints(direction, 1);
-	auto results = ert->FireRays(origin_array, dir_array, size, true, max_distance);
+	auto results = ert->PointIntersections(origin_array, dir_array, size, true, max_distance);
 
 	for (int i = 0; i < size; i++) {
 		if (results[i])
@@ -250,7 +250,7 @@ C_INTERFACE FireMultipleDirectionsOneOrigin(EmbreeRayTracer* ert, const float* o
 {
 	auto origin_array = ConvertRawFloatArrayToPoints(origin, 1);
 	auto dir_array = ConvertRawFloatArrayToPoints(directions, size);
-	auto results = ert->FireRays(origin_array, dir_array, size, true, max_distance);
+	auto results = ert->PointIntersections(origin_array, dir_array, size, true, max_distance);
 
 	for (int i = 0; i < size; i++) {
 		if (results[i])
@@ -268,11 +268,11 @@ C_INTERFACE FireMultipleDirectionsOneOrigin(EmbreeRayTracer* ert, const float* o
 	return OK;
 }
 
-C_INTERFACE FireOcclusionRays(EmbreeRayTracer* ert, const float* origins, const float* directions, int origin_size, int direction_size, float max_distance, bool* result_array)
+C_INTERFACE Occlusions(EmbreeRayTracer* ert, const float* origins, const float* directions, int origin_size, int direction_size, float max_distance, bool* result_array)
 {
 	auto origin_array = ConvertRawFloatArrayToPoints(origins, origin_size);
 	auto direction_array = ConvertRawFloatArrayToPoints(directions, direction_size);
-	const auto results = ert->FireOcclusionRays(origin_array, direction_array, max_distance, true);
+	const auto results = ert->Occlusions(origin_array, direction_array, max_distance, true);
 
 	std::copy(results.begin(), results.end(), result_array);
 	return OK;

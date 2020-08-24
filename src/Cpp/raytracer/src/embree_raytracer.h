@@ -275,8 +275,81 @@ namespace HF::RayTracer {
 			int mesh_id = -1
 		);
 
+		/// <summary> Cast an occlusion ray using arrays as input. </summary>
+/// <param name="origin"> Start point of the ray. </param>
+/// <param name="direction"> Direction of the ray. </param>
+/// <param name="max_dist">
+/// Maximum distance of the ray. Any hits beyond this distance will not be counted. If
+/// negative, count all hits regardless of distance.
+/// </param>
+/// <returns> True if The ray intersected any geometry, False otherwise. </returns>
+/// <remarks>
+/// Occulsion rays are faster than the other ray functions, but can only tell if a ray
+/// intersected any geometry or it didn't. use the other functions for information such
+/// as distance, hitpoint, or meshid.
+/// </remarks>
+/*!
+	\par Example
+	\code
+		// Requires #include "embree_raytracer.h", #include "meshinfo.h"
 
+		// for brevity
+		using HF::RayTracer::EmbreeRayTracer;
+		using HF::Geometry::MeshInfo;
 
+		// Create Plane
+		const std::vector<float> plane_vertices{
+			-10.0f, 10.0f, 0.0f,
+			-10.0f, -10.0f, 0.0f,
+			10.0f, 10.0f, 0.0f,
+			10.0f, -10.0f, 0.0f,
+		};
+
+		const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
+
+		// Create RayTracer
+		EmbreeRayTracer ert(std::vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+
+		// Fire a ray straight down
+		bool res = ert.Occluded_IMPL(
+			std::array<float, 3>{ 0, 0, 1 },
+			std::array<float, 3>{ 0, 0, -1 }
+		);
+
+		// Print Result
+		if (res) std::cerr << "True" << std::endl;
+		else std::cerr << "False" << std::endl;
+
+		// Fire a ray straight up
+		res = ert.Occluded_IMPL(
+			std::array<float, 3>{ 0, 0, 1 },
+			std::array<float, 3>{ 0, 0, 1 }
+		);
+
+		// Print Result.
+		if (res) std::cerr << "True" << std::endl;
+		else std::cerr << "False" << std::endl;
+	\endcode
+
+	`>>> True`\n
+	`>>> False`
+*/
+		bool Occluded_IMPL(
+			const std::array<float, 3>& origin,
+			const std::array<float, 3>& direction,
+			float max_dist = -1
+		);
+
+		/*!
+			\brief Create a new instance of RTCGeometry from a triangle and vertex buffer
+
+			\param tris Triangle buffer to construct new geometry with
+			\param verts Vertex buffer to construct geometry with
+
+			\returns Committed Geometry containing the specified triangles and vertices.
+
+		*/
+		RTCGeometry ConstructGeometryFromBuffers(std::vector<Triangle>& tris, std::vector<Vertex>& verts);
 
 	public:
 		/// <summary>Create an EmbreeRayTracer with no arguments</summary>
@@ -337,16 +410,7 @@ namespace HF::RayTracer {
 		*/
 		EmbreeRayTracer(const EmbreeRayTracer& ERT2);
 
-		/*! 
-			\brief Create a new instance of RTCGeometry from a triangle and vertex buffer
 
-			\param tris Triangle buffer to construct new geometry with
-			\param verts Vertex buffer to construct geometry with
-
-			\returns Committed Geometry containing the specified triangles and vertices.
-		
-		*/
-		RTCGeometry ConstructGeometryFromBuffers(std::vector<Triangle>& tris, std::vector<Vertex>& verts);
 		
 		/// <summary>
 		/// Create a new Raytracer and generate its BVH from a flat array of vertices.
@@ -785,70 +849,7 @@ namespace HF::RayTracer {
 			int mesh_id = -1
 		);
 
-		/// <summary> Cast an occlusion ray using arrays as input. </summary>
-		/// <param name="origin"> Start point of the ray. </param>
-		/// <param name="direction"> Direction of the ray. </param>
-		/// <param name="max_dist">
-		/// Maximum distance of the ray. Any hits beyond this distance will not be counted. If
-		/// negative, count all hits regardless of distance.
-		/// </param>
-		/// <returns> True if The ray intersected any geometry, False otherwise. </returns>
-		/// <remarks>
-		/// Occulsion rays are faster than the other ray functions, but can only tell if a ray
-		/// intersected any geometry or it didn't. use the other functions for information such
-		/// as distance, hitpoint, or meshid.
-		/// </remarks>
-		/*!
-			\par Example
-			\code
-				// Requires #include "embree_raytracer.h", #include "meshinfo.h"
 
-				// for brevity
-				using HF::RayTracer::EmbreeRayTracer;
-				using HF::Geometry::MeshInfo;
-
-				// Create Plane
-				const std::vector<float> plane_vertices{
-					-10.0f, 10.0f, 0.0f,
-					-10.0f, -10.0f, 0.0f,
-					10.0f, 10.0f, 0.0f,
-					10.0f, -10.0f, 0.0f,
-				};
-
-				const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
-
-				// Create RayTracer
-				EmbreeRayTracer ert(std::vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
-
-				// Fire a ray straight down
-				bool res = ert.Occluded_IMPL(
-					std::array<float, 3>{ 0, 0, 1 },
-					std::array<float, 3>{ 0, 0, -1 }
-				);
-
-				// Print Result
-				if (res) std::cerr << "True" << std::endl;
-				else std::cerr << "False" << std::endl;
-
-				// Fire a ray straight up
-				res = ert.Occluded_IMPL(
-					std::array<float, 3>{ 0, 0, 1 },
-					std::array<float, 3>{ 0, 0, 1 }
-				);
-
-				// Print Result.
-				if (res) std::cerr << "True" << std::endl;
-				else std::cerr << "False" << std::endl;
-			\endcode
-			
-			`>>> True`\n
-			`>>> False`
-		*/
-		bool Occluded_IMPL(
-			const std::array<float, 3>& origin,
-			const std::array<float, 3>& direction,
-			float max_dist = -1
-		);
 
 		/// <summary> Cast multiple occlusion rays in parallel. </summary>
 		/// <param name="origins">
@@ -1128,7 +1129,7 @@ namespace HF::RayTracer {
 			);
 		}
 
-		template <typename numeric1, typename numeric2, typename dist_type>
+		template <typename numeric1, typename numeric2, typename dist_type = float>
 		bool Occluded(
 			numeric1 x, numeric1 y, numeric1 z,
 			numeric2 dx, numeric2 dy, numeric2 dz,
