@@ -2,8 +2,8 @@
 # We change the graph parameters to limit a 'step'.
 
 # Change some graph parameters
-up_step, down_step = 0.1, 0.1
-up_slope, down_slope = 10, 10
+up_step, down_step = 0.2, 0.5
+# >>>
 # Generate a new Graph
 graph = GenerateGraph(bvh, start_point, spacing, max_nodes,
                         up_step,up_slope,down_step,down_slope,
@@ -13,7 +13,7 @@ graph = GenerateGraph(bvh, start_point, spacing, max_nodes,
 
 nodes = graph.getNodes()
 print(f"Graph Generated with {len(nodes.array)} nodes")
-# Graph Generated with 790 nodes
+# Graph Generated with 3450 nodes
 
 # If we now get the closest node, it is now a different index. The key here is that the limitations
 # of the graph generator step size have caused certain edges to not be valid, which changed the order
@@ -21,7 +21,7 @@ print(f"Graph Generated with {len(nodes.array)} nodes")
 
 closest_nodes = graph.get_closest_nodes(p_desired,z=False)
 print("Closest Node: ", closest_nodes)
-# Closest Node:  [  0 779]
+# Closest Node:  [   0 2597]
 # >>>
 start_id, end_id = closest_nodes[0], closest_nodes[1]
 path = DijkstraShortestPath(graph, start_id, end_id)
@@ -35,7 +35,7 @@ path = DijkstraShortestPath(graph, start_id, end_id)
 # As the cost array is numpy, simple operations to sum the total cost can be calculated
 path_sum = np.sum(path['cost_to_next'])
 print('Total path cost: ', path_sum)
-# Total path cost:  33.58837
+# Total path cost:  81.40916
 
 # Now extract the location data for the nodes and path to be plotted.
 

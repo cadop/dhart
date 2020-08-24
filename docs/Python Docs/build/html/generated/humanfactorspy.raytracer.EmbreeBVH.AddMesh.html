@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>humanfactorspy.raytracer.EmbreeBVH.AddMesh &mdash; Human Metrics 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="Human Metrics 0.0.1 documentation" href="../index.html" >
+    <link rel="up" title="humanfactorspy.raytracer.EmbreeBVH" href="humanfactorspy.raytracer.EmbreeBVH.html" >
+    <link rel="next" title="humanfactorspy.raytracer.RayResultList" href="humanfactorspy.raytracer.RayResultList.html" >
+    <link rel="prev" title="humanfactorspy.raytracer.EmbreeBVH" href="humanfactorspy.raytracer.EmbreeBVH.html" > 
+  </head>
+  <body>
+
+  <div class="container">
+    <div class="header">
+    </div>
+  </div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="http://">Git</a></li>
+	
+        <li class="active"><a href="../index.html">Human Metrics 0.0.1 documentation</a></li>
+	
+          <li class="active"><a href="../code.html" >Code Reference</a></li>
+          <li class="active"><a href="humanfactorspy.raytracer.html" >humanfactorspy.raytracer</a></li>
+          <li class="active"><a href="humanfactorspy.raytracer.EmbreeBVH.html" accesskey="U">humanfactorspy.raytracer.EmbreeBVH</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="humanfactorspy.raytracer.RayResultList.html" title="humanfactorspy.raytracer.RayResultList"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="humanfactorspy.raytracer.EmbreeBVH.html" title="humanfactorspy.raytracer.EmbreeBVH"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="humanfactorspy-raytracer-embreebvh-addmesh">
+<h1>humanfactorspy.raytracer.EmbreeBVH.AddMesh<a class="headerlink" href="#humanfactorspy-raytracer-embreebvh-addmesh" title="Permalink to this headline">¶</a></h1>
+<dl class="py method">
+<dt id="humanfactorspy.raytracer.EmbreeBVH.AddMesh">
+<code class="descclassname">EmbreeBVH.</code><code class="descname">AddMesh</code><span class="sig-paren">(</span><em><span class="n">mesh</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>humanfactorspy.geometry.mesh_info.MeshInfo<span class="p">, </span>List<span class="p">[</span>humanfactorspy.geometry.mesh_info.MeshInfo<span class="p">]</span><span class="p">]</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/cadop/HumanMetrics/blob/master/Codebase/HumanFactors/humanfactorspy/..\build\Python\humanfactorspy\raytracer\embree_bvh.py#L46-L72"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#humanfactorspy.raytracer.EmbreeBVH.AddMesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add one or more new meshes to the BVH</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>mesh</strong> (<em>Union</em><em>[</em><a class="reference internal" href="humanfactorspy.geometry.MeshInfo.html#humanfactorspy.geometry.MeshInfo" title="humanfactorspy.geometry.MeshInfo"><em>MeshInfo</em></a><em>, </em><em>List</em><em>[</em><a class="reference internal" href="humanfactorspy.geometry.MeshInfo.html#humanfactorspy.geometry.MeshInfo" title="humanfactorspy.geometry.MeshInfo"><em>MeshInfo</em></a><em>]</em><em>]</em>) – One or more instances of meshinfo to be added to the BVH.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The IDs of each mesh will be updated to new values
+in the case that they collide with the id of any
+exiting meshes already in the BVH.</p>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="humanfactorspy.raytracer.EmbreeBVH.html"
+                        title="previous chapter">humanfactorspy.raytracer.EmbreeBVH</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="humanfactorspy.raytracer.RayResultList.html"
+                        title="next chapter">humanfactorspy.raytracer.RayResultList</a></p>
+
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.1.2.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

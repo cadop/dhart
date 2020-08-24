@@ -13,7 +13,7 @@ obj_path = humanfactorspy.get_sample_model("energy_blob_zup.obj")
 obj = LoadOBJ(obj_path)
 
 # Create a BVH
-bvh = EmbreeBVH(obj)
+bvh = EmbreeBVH(obj, True)
 
 # Set the graph parameters
 start_point = (0, -20, 20)

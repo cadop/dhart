@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>humanfactorspy.pathfinding.DijkstraShortestPath &mdash; Human Metrics 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="Human Metrics 0.0.1 documentation" href="../index.html" >
+    <link rel="up" title="humanfactorspy.pathfinding" href="humanfactorspy.pathfinding.html" >
+    <link rel="next" title="humanfactorspy.pathfinding.calculate_distance_and_predecessor" href="humanfactorspy.pathfinding.calculate_distance_and_predecessor.html" >
+    <link rel="prev" title="humanfactorspy.pathfinding.DijkstraFindAllShortestPaths" href="humanfactorspy.pathfinding.DijkstraFindAllShortestPaths.html" > 
+  </head>
+  <body>
+
+  <div class="container">
+    <div class="header">
+    </div>
+  </div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="http://">Git</a></li>
+	
+        <li class="active"><a href="../index.html">Human Metrics 0.0.1 documentation</a></li>
+	
+          <li class="active"><a href="../code.html" >Code Reference</a></li>
+          <li class="active"><a href="humanfactorspy.pathfinding.html" accesskey="U">humanfactorspy.pathfinding</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="humanfactorspy.pathfinding.calculate_distance_and_predecessor.html" title="humanfactorspy.pathfinding.calculate_distance_and_predecessor"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="humanfactorspy.pathfinding.DijkstraFindAllShortestPaths.html" title="humanfactorspy.pathfinding.DijkstraFindAllShortestPaths"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="humanfactorspy-pathfinding-dijkstrashortestpath">
+<h1>humanfactorspy.pathfinding.DijkstraShortestPath<a class="headerlink" href="#humanfactorspy-pathfinding-dijkstrashortestpath" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="humanfactorspy.pathfinding.DijkstraShortestPath">
+<code class="descclassname">humanfactorspy.pathfinding.</code><code class="descname">DijkstraShortestPath</code><span class="sig-paren">(</span><em><span class="n">graph</span><span class="p">:</span> <span class="n">humanfactorspy.spatialstructures.graph.Graph</span></em>, <em><span class="n">start</span><span class="p">:</span> <span class="n">List<span class="p">[</span>Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">, </span>Tuple<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">]</span><span class="p">]</span><span class="p">]</span></span></em>, <em><span class="n">end</span><span class="p">:</span> <span class="n">List<span class="p">[</span>Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">, </span>Tuple<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a><span class="p">]</span><span class="p">]</span><span class="p">]</span></span></em>, <em><span class="n">cost_type</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">''</span></em><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span>Union<span class="p">[</span>List<span class="p">[</span>Optional<span class="p">[</span>humanfactorspy.pathfinding.path.Path<span class="p">]</span><span class="p">]</span><span class="p">, </span>humanfactorspy.pathfinding.path.Path<span class="p">]</span><span class="p">]</span><a class="reference external" href="https://github.com/cadop/HumanMetrics/blob/master/Codebase/HumanFactors/humanfactorspy/..\build\Python\humanfactorspy\pathfinding\shortest_path.py#L48-L223"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#humanfactorspy.pathfinding.DijkstraShortestPath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the shortest path from start to end using Dijkstra’s shortest path algorithm</p>
+<p>Accepts a list of starting / ending points or single starting/ending
+points.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>Graph</strong> – A valid C++ Graph</li>
+<li><strong>start</strong> – one or more Starting Node IDs</li>
+<li><strong>end</strong> – one or more Ending Node IDs</li>
+<li><strong>cost_type</strong> – Which cost to use for path generation. If no cost type is specified,
+then the graph’s default cost type will be used. If a cost type is specified
+then it must already exist in the graph.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>if multiple start/end ids were passed.If a path cannot be found to</dt><dd><p>connect a start and end point that path will be set as None.</p>
+</dd>
+<dt>Union[Path, None]:</dt><dd><p>One start or end point was passed, return the single path or none
+if no path could be found between start and end.</p>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">List[Union[path, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)">None</a>]]</p>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>Preconditions:</dt><dd><ol class="arabic simple">
+<li>If using multiple paths, The length of start_ids must match
+the length of end_ids.</li>
+<li>Each node in start_nodes and end_nodes must contain the x,y,z
+position (or id) of an existing node in graph</li>
+<li>If cost_type is not left as the default, then it must be the name
+of a valid cost already defined in graph.</li>
+</ol>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.8)"><strong>ValueError</strong></a> – Length of start and end arrays did not match</li>
+<li><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.8)"><strong>KeyError</strong></a> – cost_type wasn’t blank and did not point to an already defined
+    cost in the graph</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<p>Creating a graph, adding edges to it, then generating a path from node 0 to 3.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">humanfactorspy.pathfinding</span> <span class="kn">import</span> <span class="n">DijkstraShortestPath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">humanfactorspy.spatialstructures</span> <span class="kn">import</span> <span class="n">Graph</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">AddEdgeToGraph</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">AddEdgeToGraph</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">AddEdgeToGraph</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">AddEdgeToGraph</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">csr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">CompressToCSR</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SP</span> <span class="o">=</span> <span class="n">DijkstraShortestPath</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">SP</span><span class="p">)</span>
+<span class="go">[(50., 0) (10., 2) ( 0., 3)]</span>
+</pre></div>
+</div>
+<p>The same, but creating multiple paths.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">humanfactorspy.pathfinding</span> <span class="kn">import</span> <span class="n">DijkstraShortestPath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">humanfactorspy.spatialstructures</span> <span class="kn">import</span> <span class="n">Graph</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">AddEdgeToGraph</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">AddEdgeToGraph</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">AddEdgeToGraph</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">AddEdgeToGraph</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">csr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">CompressToCSR</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SP</span> <span class="o">=</span> <span class="n">DijkstraShortestPath</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">SP</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="go">[(10., 1) ( 0., 3)]</span>
+<span class="go">[(10., 1) ( 0., 3)]</span>
+<span class="go">[(10., 1) ( 0., 3)]</span>
+<span class="go">[(10., 1) ( 0., 3)]</span>
+<span class="go">[(10., 1) ( 0., 3)]</span>
+<span class="go">[(10., 1) ( 0., 3)]</span>
+<span class="go">[(10., 1) ( 0., 3)]</span>
+<span class="go">[(10., 1) ( 0., 3)]</span>
+<span class="go">[(10., 1) ( 0., 3)]</span>
+<span class="go">[(10., 1) ( 0., 3)]</span>
+</pre></div>
+</div>
+<p class="rubric">Example</p>
+<p>Creating a graph then calculating an alternate cost type
+and generating a path on it.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">humanfactorspy</span> <span class="kn">import</span> <span class="n">get_sample_model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">humanfactorspy.geometry.obj_loader</span> <span class="kn">import</span> <span class="n">LoadOBJ</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">humanfactorspy.graphgenerator</span> <span class="kn">import</span> <span class="n">GenerateGraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">humanfactorspy.pathfinding</span> <span class="kn">import</span> <span class="n">DijkstraShortestPath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">humanfactorspy.raytracer</span> <span class="kn">import</span> <span class="n">EmbreeBVH</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">humanfactorspy.spatialstructures.cost_algorithms</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="gp">... </span>   <span class="n">CalculateEnergyExpenditure</span><span class="p">,</span> <span class="n">CostAlgorithmKeys</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Load the energy blob and create a BVH from it</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">energy_blob_path</span> <span class="o">=</span> <span class="n">get_sample_model</span><span class="p">(</span><span class="s2">&quot;energy_blob_zup.obj&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">energy_blob_mesh</span> <span class="o">=</span> <span class="n">LoadOBJ</span><span class="p">(</span><span class="n">energy_blob_path</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bvh</span> <span class="o">=</span> <span class="n">EmbreeBVH</span><span class="p">(</span><span class="n">energy_blob_mesh</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define graph generator parameters</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">start_point</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spacing</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">max_nodes</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">up_step</span><span class="p">,</span> <span class="n">down_step</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">up_slope</span><span class="p">,</span> <span class="n">down_slope</span> <span class="o">=</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">60</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">max_step_connections</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Generate a graph on it</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">GenerateGraph</span><span class="p">(</span><span class="n">bvh</span><span class="p">,</span> <span class="n">start_point</span><span class="p">,</span> <span class="n">spacing</span><span class="p">,</span> <span class="n">max_nodes</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="n">up_step</span><span class="p">,</span> <span class="n">up_slope</span><span class="p">,</span> <span class="n">down_step</span><span class="p">,</span> <span class="n">down_slope</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="n">max_step_connections</span><span class="p">,</span> <span class="n">cores</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Compress the graph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">csr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">CompressToCSR</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Generate an alternate cost type and store it in the graph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CalculateEnergyExpenditure</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Generate a path using the energy expenditure cost and</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># distance (the default)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">start_point</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">end_point</span> <span class="o">=</span> <span class="mi">150</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">energy_expend_key</span> <span class="o">=</span> <span class="n">CostAlgorithmKeys</span><span class="o">.</span><span class="n">ENERGY_EXPENDITURE</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">distance_path</span> <span class="o">=</span> <span class="n">DijkstraShortestPath</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">start_point</span><span class="p">,</span> <span class="n">end_point</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">energy_path</span> <span class="o">=</span> <span class="n">DijkstraShortestPath</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">g</span><span class="p">,</span> <span class="n">start_point</span><span class="p">,</span> <span class="n">end_point</span><span class="p">,</span> <span class="n">energy_expend_key</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Print both paths</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Distance Path:&quot;</span><span class="p">,</span> <span class="n">distance_path</span><span class="o">.</span><span class="n">array</span><span class="p">)</span>
+<span class="go">Distance Path: [(1.000002 ,   1) (0.9999999,  12) (1.       ,  26) (1.0000005,  43)</span>
+<span class="go"> (1.0000019,  64) (1.0000081,  89) (1.4148979, 118) (0.       , 150)]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Energy Path:&quot;</span><span class="p">,</span> <span class="n">energy_path</span><span class="o">.</span><span class="n">array</span><span class="p">)</span>
+<span class="go">Energy Path: [(2.4610138,   1) (2.5      ,  12) (2.5      ,  26) (2.4804544,  43)</span>
+<span class="go"> (2.461011 ,  64) (2.4224558,  89) (2.7486944, 118) (0.       , 150)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="humanfactorspy.pathfinding.DijkstraFindAllShortestPaths.html"
+                        title="previous chapter">humanfactorspy.pathfinding.DijkstraFindAllShortestPaths</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="humanfactorspy.pathfinding.calculate_distance_and_predecessor.html"
+                        title="next chapter">humanfactorspy.pathfinding.calculate_distance_and_predecessor</a></p>
+
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.1.2.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

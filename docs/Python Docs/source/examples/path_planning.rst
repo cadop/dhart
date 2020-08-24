@@ -8,8 +8,9 @@ Path Planning
 
    path/search.rst
    path/visualize.rst
+   path/limit.rst
    path/multi_cost.rst
-
+   
 
 .. seealso::
     These examples use methods found in the following modules:
