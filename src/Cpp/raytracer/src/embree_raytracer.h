@@ -92,7 +92,6 @@ namespace HF::RayTracer {
 	/// Embree's reference counters on copy, and decrementing them on deletion. This class also
 	/// provides methods for adding geometry to Embree's geometry buffers.
 	/// </remarks>
-	/// \todo Could use a constructor overload for a single instance of meshinfo for conveience. 
 	/// \todo Many functions support MeshID but don't actually check for it. 
 	class EmbreeRayTracer {
 		/// All objects in Embree are created from this. https://www.embree.org/api.html#device-object
@@ -118,7 +117,7 @@ namespace HF::RayTracer {
 			2) Creates the scene using device
 			3) Sets the build quality of the scene
 			4) Sets scene flags
-			5) Inits IMPL_Intersect context
+			5) Inits Intersect_IMPL context
 
 
 			\remarks
@@ -128,77 +127,120 @@ namespace HF::RayTracer {
 		*/
 		void SetupScene();
 
-		/*! \brief Get the vertices for a specific triangle in a mesh.*/
+		/*! 
+			\brief Get the vertices for a specific triangle in a mesh.
+		
+			\param geomID ID of the geometry the triangle belongs to
+			\param primID Id of the triangle to retrieve
+
+			\returns The 3 vertices that comprise the triangle with ID `primID` in the
+					 geometry with id `geomID`
+
+			\pre 1) `geomID` must be the ID of geometry that already exists within this raytracer's BVH
+			\pre 2) `primID` must be the ID of a triangle within the bounds of the geometry at `geomID`'s buffers
+		
+		*/
 		std::array<Vector3D, 3> GetTriangle(unsigned int geomID, unsigned int primID) const;
 
-		/*!\brief Commit geometry and attach it to the scene. */
+		/*!\brief Attach geometry to the current scene.
+			
+			\param geom Geometry to attach
+			\param id Id to attempt to attach with. If this ID is already taken, the next available
+					  ID will be assigned, and the new ID will be returned
+
+			\returns the New ID if a new ID needed to be given to the mesh or the ID given by ID.
+		
+		*/
 		int InsertGeom(RTCGeometry& geom, int id = -1);
 
+		/*! \brief Calculate the distance from origin to the point of intersection using an algorithm with higher precision
+			
+			\param geom_id ID of the geometry the ray intersected
+			\param prim_id ID of the primitive in geometry the ray intersected
+			\param origin The origin point of the ray
+			\param direction the direction the ray was casted in
+
+			\returns The distance between origin and the triangle it intersected
+
+			\details
+			Uses `geom_id` to get the buffers of the intersected geometry, then uses `prim_id` to get the 3 vertices
+			comprising the intersected triangle. Once these are obtained, this function calls RayTriangleIntersection
+			to calculate the precise point of intersection and returns the result. When use_precise is set to true, 
+			Intersect will call this function to calculate its distance value instead of returning the distance calculated
+			by embree.
+
+			\remarks
+			This algorithm was implemented due to the relatively low precision of the distances returned
+			from Embree which causes issues with certain analysis methods. 
+
+			\see GetTriangle for details on getting the geometry and triangle from embree 
+			\see RayTriangleIntersection for details on the intersection algorithm itself
+		*/
 	double CalculatePreciseDistance(
 			unsigned int geom_id,
 			unsigned int prim_id,
 			const Vector3D& origin,
 			const Vector3D& direction) const;
 
-		/// <summary> Cast a ray and store all relevant information in a HitStruct. </summary>
-/// <param name="x"> x component of the ray's origin. </param>
-/// <param name="y"> y component of the ray's origin. </param>
-/// <param name="z"> z component of the ray's origin. </param>
-/// <param name="dx"> x component of the ray's direction. </param>
-/// <param name="dy"> y component of the ray's direction. </param>
-/// <param name="dz"> z component of the ray's direction. </param>
-/// <param name="max_distance">
-/// Maximum distance the ray can travel. Any intersections beyond this distance will be
-/// ignored. If set to -1, all intersections will be counted regardless of distance.
-/// </param>
-/// <param name="mesh_id">
-/// (UNIMPLEMENTED) the id of the only mesh for this ray to collide with. Any geometry
-/// wihtout this ID is ignored.
-/// </param>
-/// <returns> A HitStruct containing information about the intersection if any occurred. </returns>
-/**
-	\par Example
-	\code
-		// Requires #include "embree_raytracer.h", #include "meshinfo.h"
+		/// <summary> Implementation for fundamental ray intersection. </summary>
+		/// <param name="x"> x component of the ray's origin. </param>
+		/// <param name="y"> y component of the ray's origin. </param>
+		/// <param name="z"> z component of the ray's origin. </param>
+		/// <param name="dx"> x component of the ray's direction. </param>
+		/// <param name="dy"> y component of the ray's direction. </param>
+		/// <param name="dz"> z component of the ray's direction. </param>
+		/// <param name="max_distance">
+		/// Maximum distance the ray can travel. Any intersections beyond this distance will be
+		/// ignored. If set to -1, all intersections will be counted regardless of distance.
+		/// </param>
+		/// <param name="mesh_id">
+		/// (UNIMPLEMENTED) the id of the only mesh for this ray to collide with. Any geometry
+		/// wihtout this ID is ignored.
+		/// </param>
+		/// <returns> A HitStruct containing information about the intersection if any occurred. </returns>
+		/**
+			\par Example
+			\code
+				// Requires #include "embree_raytracer.h", #include "meshinfo.h"
 
-		// for brevity
-		using HF::RayTracer::EmbreeRayTracer;
-		using HF::Geometry::MeshInfo;
+				// for brevity
+				using HF::RayTracer::EmbreeRayTracer;
+				using HF::Geometry::MeshInfo;
 
-		// Create Plane
-		const std::vector<float> plane_vertices{
-			-10.0f, 10.0f, 0.0f,
-			-10.0f, -10.0f, 0.0f,
-			10.0f, 10.0f, 0.0f,
-			10.0f, -10.0f, 0.0f,
-		};
+				// Create Plane
+				const std::vector<float> plane_vertices{
+					-10.0f, 10.0f, 0.0f,
+					-10.0f, -10.0f, 0.0f,
+					10.0f, 10.0f, 0.0f,
+					10.0f, -10.0f, 0.0f,
+				};
 
-		const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
+				const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
-		// Create RayTracer
-		EmbreeRayTracer ert(std::vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+				// Create RayTracer
+				EmbreeRayTracer ert(std::vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
 
-		HitStruct res;
+				HitStruct res;
 
-		// Fire a ray straight down
-		res = ert.IMPL_Intersect(0, 0, 1, 0, 0, -1);
+				// Fire a ray straight down
+				res = ert.Intersect_IMPL(0, 0, 1, 0, 0, -1);
 
-		// Print distance if it connected
-		if (res.DidHit()) std::cerr << res.distance << std::endl;
-		else std::cerr << "Miss" << std::endl;
+				// Print distance if it connected
+				if (res.DidHit()) std::cerr << res.distance << std::endl;
+				else std::cerr << "Miss" << std::endl;
 
-		// Fire a ray straight up
-		res = ert.IMPL_Intersect(0, 0, 1, 0, 0, 1);
+				// Fire a ray straight up
+				res = ert.Intersect_IMPL(0, 0, 1, 0, 0, 1);
 
-		//Print distance if it connected
-		if (res.DidHit()) std::cerr << res.distance << std::endl;
-		else std::cerr << "Miss" << std::endl;
-	\endcode
+				//Print distance if it connected
+				if (res.DidHit()) std::cerr << res.distance << std::endl;
+				else std::cerr << "Miss" << std::endl;
+			\endcode
 
-	`>>>1`\n
-	`>>>Miss`
- */
-		RTCRayHit IMPL_Intersect(
+			`>>>1`\n
+			`>>>Miss`
+		 */
+		RTCRayHit Intersect_IMPL(
 			float x,
 			float y,
 			float z,
@@ -209,7 +251,7 @@ namespace HF::RayTracer {
 			int mesh_id = -1
 		);
 
-		/// <summary> Cast a single occlusion ray. </summary>
+		/// <summary> Implementation for fundamental occlusion ray intersection. </summary>
 		/// <param name="x"> x component of the ray's origin. </param>
 		/// <param name="y"> y component of the ray's origin. </param>
 		/// <param name="z"> z component of the ray's origin. </param>
@@ -352,9 +394,11 @@ namespace HF::RayTracer {
 		RTCGeometry ConstructGeometryFromBuffers(std::vector<Triangle>& tris, std::vector<Vertex>& verts);
 
 	public:
-		/// <summary>Create an EmbreeRayTracer with no arguments</summary>
-
 		/*!
+			\brief Construct an empty EmbreeRayTracer;
+		
+			\param use_precise If set to true, use a more precise intesection algorithm to determine
+				   the distance between rays origin points and their points of intesection
 			\code
 				// Requires #include "embree_raytracer.h", #include "objloader.h"
 
@@ -369,6 +413,8 @@ namespace HF::RayTracer {
 
 		/// <summary> Create a new EmbreeRayTracer and add a single mesh to the scene. </summary>
 		/// <param name="MI"> The mesh to use for scene construction. </param>
+		/// <param name="use_precise">If set to true, use a more precise intesection algorithm to determine
+		///	the distance between rays origin pointsand their points of intesection </param>
 		/// <exception cref="Exception"> Thrown if MI contains no vertices. </exception>
 		/// \todo This function calls
 		/// <c> throw; </c>
@@ -396,9 +442,11 @@ namespace HF::RayTracer {
 		EmbreeRayTracer(std::vector<HF::Geometry::MeshInfo>& MI, bool use_precise_intersection = false);
 
 		/*! 
-			\brief Construct the raytracer using only a single mesh
+			\brief Construct the raytracer using only a single mesh.
 			
 			\param MI MeshInfo instance to create the BVH with.
+			\param use_precise If set to true, use a more precise intesection algorithm to determine
+							   the distance between rays origin points and their points of intesection
 		*/
 		EmbreeRayTracer(HF::Geometry::MeshInfo& MI, bool use_precise = false);
 
@@ -757,7 +805,7 @@ namespace HF::RayTracer {
 			int mesh_id = -1
 		);
 
-		/// <summary> Fire multiple rays and recieve hitpoints in return. </summary>
+		/// <summary> Cast multiple rays and recieve hitpoints in return. </summary>
 		/// <param name="origins"> An array of x,y,z coordinates to fire rays from. </param>
 		/// <param name="directions"> An array of x,y,z directions to fire in. </param>
 		/// <param name="use_parallel">
@@ -940,44 +988,70 @@ namespace HF::RayTracer {
 		);
 
 
-		/// <summary>
-		/// Template for firing rays using array-like containers for the direction and origin.
-		/// </summary>
-		/// <param name="node"> A point in space. Must atleast have [0], [1], and [2] defined </param>
-		/// <param name="direction">
-		/// Direction to fire the ray in. Same constraints as node, but can be a different type
-		/// </param>
-		/// <param name="out_distance"> distance from the ray to the hit (if any) </param>
-		/// <param name="out_meshid"> ID of the mesh hit(if any) </param>
-		/// <param name="max_distance">
-		/// Maximum distance the ray can travel. And intersections beyond this distance will be
-		/// ignored. Will consider all intersections regardless of distance if set to -1.
-		/// </param>
-		/// <returns> True if the ray intersected any geometry, false otherwise. </returns>
-		/// <remarks>
-		/// This is preferrable to use over the other ray functions in many circumstances since
-		/// the use of templates ensures no unnecessary conversions are performed.
-		/// </remarks>
-		/// \note C++ 2020's Concepts would be a good way to explain how to use this whenever
-		/// they get implemented.
-		/*!
-			\par Example
-			\code
-			\endcode
+		/*! \brief Cast a ray from origin in direction. 
+		
+			\tparam return_type Numeric type for the returned distance value i.e. double, long double, float, etc.
+			\tparam N X,Y,Z coordinates representing a point in space
+			\tparam V X,Y,Z Coordinates representing direction vector
 
-			`>>>(0, 0, 0)`\n
-			`>>>Miss`
+			\param node A point in space. Must atleast have [0], [1], and [2] defined.
+			\param direction Direction to cast the ray in. Same constraints as node, but can be a different type.
+			\param max_distance Maximum distance a ray can travel before intersections are ignored. Set to -1
+								for infinite distance.
+			\param mesh_id Only consider intersections with the mesh at this ID. Set to -1 to consider
+							intersections with all meshes. 
 
+			\returns The distance from origin to the ray's point of intersection. If no intersection was found
+					 the returned hitstruct's meshID will be -1. This is checkable with the hitstruct's DidHit()
+					 function.
+
+			\remarks
+			If `use_precise` is set to true then this will use a more precise algorithm to calculate returned 
+			distance value.  This is one of the most basic forms of intersection for the raytracer and many
+			other functions will call this internally. 
+
+			\see Intersections for a parallel version of this function
 		*/
-		template <typename real_t = double, class N, class V>
-		HitStruct<real_t> Intersect(
+		template <typename return_type = double, class N, class V>
+		HitStruct<return_type> Intersect(
 			const N& node,
 			const V& direction,
 			float max_distance = -1.0f, int mesh_id = -0.1f)
 		{
-			return Intersect<real_t>(node[0], node[1], node[2], direction[0], direction[1], direction[2], max_distance, mesh_id);
+			return Intersect<return_type>(node[0], node[1], node[2], direction[0], direction[1], direction[2], max_distance, mesh_id);
 		}
 
+		/*! \brief Cast a ray from origin in direction.
+		
+			\tparam return_type Numeric type used for the output distance value.
+			\tparam numeric1 Numeric type used for the x,y,z components of the origin
+			\tparam numeric2 Numeric type used for the x,y,z components of the direction
+			
+			\param x X component of the ray's origin.
+			\param y Y component of the ray's origin.
+			\param z Z component of the ray's origin.
+			\param dx X component of the ray's direction.
+			\param dy Y component of the ray's direction.
+			\param dz Z component of the ray's direction.
+			\param max_distance Maximum distance a ray can travel before intersections are ignored. Set to -1
+								for infinite distance.
+			\param mesh_id Ignore intersections with any mesh other than the mesh with this ID. set to -1 to
+					        consider intersections with any geometry
+
+			\returns The distance from origin to the ray's point of intersection. If no intersection was found
+					 the returned hitstruct's meshID will be -1. This is checkable with the hitstruct's DidHit()
+					 function.
+
+			\remarks
+			If `use_precise` is set to true then this will use a more precise algorithm to calculate returned
+			distance value.This is one of the most basic forms of intersection for the raytracerand many
+			other functions will call this internally.
+			
+			\see Intersections for a parallel version of this function
+			
+			\par Example
+			\snippet tests\src\embree_raytracer.cpp EX_Intersect
+		*/
 		template <typename return_type = double, typename numeric1 = double, typename numeric2 = double>
 		HitStruct<return_type> Intersect(
 				numeric1 x, numeric1 y, numeric1 z,
@@ -988,7 +1062,7 @@ namespace HF::RayTracer {
 			HitStruct<return_type> out_struct;
 
 			// Cast the ray
-			auto result = IMPL_Intersect(
+			auto result = Intersect_IMPL(
 				x,y,z,
 				dx,dy,dz, distance, mesh_id
 			);
@@ -1013,15 +1087,37 @@ namespace HF::RayTracer {
 		}
 
 
-		template <typename N, typename V, typename real_t>
+		/*! \brief Cast a ray from origin in direction and update the parameters instead of returning a hitstruct.
+
+			\tparam return_type Numeric type for the returned distance value i.e. double, long double, float, etc.
+			\tparam N X,Y,Z coordinates representing a point in space
+			\tparam V X,Y,Z Coordinates representing direction vector
+
+			\param node Origin point of the ray.
+			\param direction Direction to cast the ray in. 
+			\param max_distance Maximum distance a ray can travel before intersections are ignored. Set to -1
+								for infinite distance.
+			\param out_distance On intersection will be updated to contain the distance from origin to the point
+								of intersection.
+
+			\param out_meshid updated to contain the ID of the intersected mesh.
+			
+			\returns true if the ray did intersect any geometry and the outputs were updated, false otherwise.		
+
+			\remarks
+			It's suggested to use Intersect instead of this function. 
+
+			\see Intersections for a parallel version of this function
+		*/
+		template <typename N, typename V, typename return_type>
 		bool IntersectOutputArguments(
 			const N& node,
 			const V& direction,
-			real_t& out_distance,
+			return_type& out_distance,
 			int& out_meshid,
 			float max_distance = -1.0f)
 		{
-			HitStruct<real_t> result = Intersect<real_t>(node, direction, max_distance);
+			HitStruct<return_type> result = Intersect<return_type>(node, direction, max_distance);
 			if (result.DidHit()) {
 				out_distance = result.distance;
 				out_meshid = result.meshid;
@@ -1031,6 +1127,31 @@ namespace HF::RayTracer {
 				return false;
 		}
 		
+		/*! \brief Cast multiple rays in parallel.
+		
+			\tparam return_type Numeric type for the returned distance value i.e. double, long double, float, etc.
+			\tparam N X,Y,Z A container of objects holding x,y,z coordinates for the origin points of every ray
+			\tparam V X,Y,Z A container of objects holding x,y,z coordinates for the direction points of every ray
+
+			\param node Origin points to cast rays from.
+			\param direction Directions to cast rays in.
+			\param max_distance Maximum distance a ray can travel before intersections are ignored. Set to -1
+								for infinite distance.
+			\param mesh_id Only consider intersections with the mesh at this ID. Set to -1 to consider
+							intersections with all meshes.
+
+			\returns An ordered array of results from casting a ray for every origin in origins in the direciton
+			in directions with a matching index. Rays that do not result in an intersection will have hitstructs
+			with meshids of -1. This can be checked by calling the HitStruct's .DidHit function.  
+
+			\remarks
+			If `use_precise` is set to true then this will use a more precise algorithm to calculate returned
+			distance value.  This is one of the most basic forms of intersection for the raytracer and many
+			other functions will call this internally.
+
+			\pre The length of nodes must match the length of directions.
+
+		*/
 		template <typename return_type, typename N, typename V>
 		inline std::vector<HitStruct<return_type>> Intersections(
 			const N & nodes,
@@ -1042,7 +1163,7 @@ namespace HF::RayTracer {
 
 			std::vector<HitStruct<return_type>> results (nodes.size());
 
-			#pragma omp parallel for schedule(dynamic) if (use_parallel)
+			#pragma omp parallel for schedule(dynamic, 256) if (use_parallel)
 			for (int i = 0; i < n; i++) {// Use custom triangle intesection if required
 				const auto& node = nodes[i];
 				const auto& direction = directions[i];
@@ -1051,66 +1172,27 @@ namespace HF::RayTracer {
 			return results;
 		}
 
+		/*!
+			\brief Determine if there is an intersection with any geometry 
+			
+			\tparam N X,Y,Z coordinates representing a point in space
+			\tparam V X,Y,Z Coordinates representing direction vector
 
-		/// <summary>
-		/// Template for firing rays using array-like containers for the direction and origin.
-		/// Similar to <see cref="Intersect" />.
-		/// </summary>
-		/// <param name="node"> A point in space. Must atleast have [0], [1], and [2] defined. </param>
-		/// <param name="direction">
-		/// Direction to fire the ray in. Same constraints as node, but can be a different type.
-		/// </param>
-		/// <param name="max_distance"> Maximum distance the ray can travel. </param>
-		/// <returns> true if the ray connected with anything, false otherwise. </returns>
-		/// <remarks>
-		/// Like the other occlusion functions, this is much faster than its counterparts at the
-		/// cost of only being able to return true if the ray intersects any geometry, and false
-		/// if it doesn't.
-		/// </remarks>
-		/// \note C++ 2020's Concepts would be a good way to explain how to use this whenever
-		/// they get implemented.
-		/*!	
+			\param node A point in space. Must atleast have [0], [1], and [2] defined.
+			\param direction Direction to cast the ray in. Same constraints as node, but can be a different type.
+			\param max_distance Maximum distance a ray can travel before intersections are ignored. Set to -1 
+								for infinite distance.
+
+			\returns `true` if the ray intersected with any geometry within max_distance, `false` otherwise
+		
+			\remarks
+			Occlusion rays are much faster than other intersection functions however they are only able
+			tell whether they intersected with anything or not. These rays are very useful for quick line
+			of sight checks utilizing the `max_distance` parameter.
+
 			\par Example
-			\code
-				// Requires #include "embree_raytracer.h", #include "meshinfo.h"
 
-				// for brevity
-				using HF::RayTracer::EmbreeRayTracer;
-				using HF::Geometry::MeshInfo;
-
-				// Create Plane
-				const vector<float> plane_vertices{
-					-10.0f, 10.0f, 0.0f,
-					-10.0f, -10.0f, 0.0f,
-					10.0f, 10.0f, 0.0f,
-					10.0f, -10.0f, 0.0f,
-				};
-
-				const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
-
-				// Create RayTracer
-				EmbreeRayTracer ert(std::vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
-
-				// Fire a ray straight down
-				bool res = ert.Occluded(
-					std::array<float, 3>{0, 0, 1},
-					std::array<float, 3>{0, 0, -1}
-				);
-
-				// Print Results
-				if (res) std::cerr << "True" << std::endl;
-				else std::cerr << "False" << std::endl;
-
-				// Fire a ray straight up
-				res = ert.Occluded(
-					std::array<float, 3>{0, 0, 1},
-					std::array<float, 3>{0, 0, 1}
-				);
-
-				// Print Results
-				if (res) std::cerr << "True" << std::endl;
-				else std::cerr << "False" << std::endl;
-			\endcode
+			\snippet tests\src\embree_raytracer.cpp EX_Occluded_Array
 		
 			`>>> True`\n
 			`>>> False`
@@ -1129,6 +1211,39 @@ namespace HF::RayTracer {
 			);
 		}
 
+
+		/*!
+			\brief Determine if there is an intersection with any geometry
+
+			\tparam numeric1 Numeric type used for the x,y,z components of the origin
+			\tparam numeric2 Numeric type used for the x,y,z components of the direction
+			\tparam dist_type Numeric type used for the distance parameter. 
+
+			\param x X component of the ray's origin.
+			\param y Y component of the ray's origin.
+			\param z Z component of the ray's origin.
+			\param dx X component of the ray's direction.
+			\param dy Y component of the ray's direction.
+			\param dz Z component of the ray's direction.
+			\param max_distance Maximum distance a ray can travel before intersections are ignored. Set to -1
+								for infinite distance.
+			\param mesh_id Ignore intersections with any mesh other than the mesh with this ID. set to -1 to
+					        consider intersections with any geometry
+
+			\returns `true` if the ray intersected with any geometry within max_distance, `false` otherwise
+
+			\remarks
+			Occlusion rays are much faster than other intersection functions however they are only able
+			tell whether they intersected with anything or not. These rays are very useful for quick line
+			of sight checks utilizing the `max_distance` parameter.
+
+			\par Example
+
+			\snippet tests\src\embree_raytracer.cpp EX_Occluded
+
+			`>>> True`\n
+			`>>> False`
+		*/
 		template <typename numeric1, typename numeric2, typename dist_type = float>
 		bool Occluded(
 			numeric1 x, numeric1 y, numeric1 z,
@@ -1200,22 +1315,25 @@ namespace HF::RayTracer {
 		~EmbreeRayTracer();
 	};
 
-	inline Vector3D cross(const Vector3D& x, const Vector3D& y) {
-		return Vector3D{
-			x.y * y.z - y.y * x.z,
-			x.z * y.x - y.z * x.x,
-			x.x * y.y - y.x * x.y
-		};
-	}
+	/*!
+	\brief Determine the distance between a ray's origin and it's point of intersection with a triangle.
 
-	inline double dot(const Vector3D& v1, const Vector3D& v2) {
-		return (v1.x * v2.x + v1.y * v2.y + v1.z * v2.z);
-	}
+	\param origin Origin point of the ray.
+	\param direction Direction the ray was casted in
+	\param v1 First vertex of the triangle
+	\param v2 Second vertex of a triangle
+	\param v3 Third vertex of a triangle
 
-	inline Vector3D InvertVector(const Vector3D& V) {
-		return Vector3D{ -V.x, -V.y, -V.z };
-	}
 
+	\returns The distance between the ray's origin point and the point of intersection with the triangle defined
+			 by v1, v2, and v3 OR -1 if there was no intersection between the ray and the triangle.
+
+
+	\remarks
+	This algorithm is based on an implementation of the Möller–Trumbore intersection algorithm written
+	on the wikipedia page https://en.wikipedia.org/wiki/M%C3%B6ller%E2%80%93Trumbore_intersection_algorithm.
+
+*/
 	double RayTriangleIntersection(
 		const Vector3D& origin,
 		const Vector3D& direction,

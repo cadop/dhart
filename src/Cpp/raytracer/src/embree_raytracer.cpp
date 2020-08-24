@@ -231,6 +231,23 @@ namespace HF::RayTracer {
 		return static_cast<int>(rtcAttachGeometry(scene, geom));
 	}
 
+	inline Vector3D cross(const Vector3D& x, const Vector3D& y) {
+		return Vector3D{
+			x.y * y.z - y.y * x.z,
+			x.z * y.x - y.z * x.x,
+			x.x * y.y - y.x * x.y
+		};
+	}
+
+	inline double dot(const Vector3D& v1, const Vector3D& v2) {
+		return (v1.x * v2.x + v1.y * v2.y + v1.z * v2.z);
+	}
+
+	inline Vector3D InvertVector(const Vector3D& V) {
+		return Vector3D{ -V.x, -V.y, -V.z };
+	}
+
+
 	double RayTriangleIntersection(
 		const Vector3D& origin,
 		const Vector3D& direction,
@@ -528,7 +545,7 @@ namespace HF::RayTracer {
 		return out_results;
 	}
 
-	RTCRayHit EmbreeRayTracer::IMPL_Intersect(
+	RTCRayHit EmbreeRayTracer::Intersect_IMPL(
 		float x, float y, float z,
 		float dx, float dy, float dz,
 		float max_distance, int mesh_id)
@@ -564,10 +581,6 @@ namespace HF::RayTracer {
 			out_array.resize(origins.size());
 #pragma omp parallel for if(use_parallel) schedule(dynamic)
 			for (int i = 0; i < origins.size(); i++) {
-				//const std::array<float, 3> origin = { origins[i][0], origins[i][1], origins[i][2] };
-				//const std::array<float, 3> direction = directions[i];
-				//printf("Origin: %f, %f, %f\n", origin[0], origin[1]);
-				//printf("Direction: %f, %f, %f\n", direction[0], direction[1], direction[2]);
 				out_array[i] = Occluded_IMPL(
 					origins[i][0], origins[i][1], origins[i][2],
 					directions[i][0], directions[i][1], directions[i][2],

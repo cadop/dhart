@@ -64,7 +64,7 @@ namespace HF {
 		 
 		 \notes It may also be more simply solved by adding some small epsilon before rounding
 
-		 \tparam real_t Type of number to round. Can be float, double, or long double.
+		 \tparam return_type Type of number to round. Can be float, double, or long double.
 
 		 \param f Value to round.
 		 \param precision Number of digits to round to

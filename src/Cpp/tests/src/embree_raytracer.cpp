@@ -467,6 +467,8 @@ TEST(Sanity, Precision) {
 }
 */
 TEST(_EmbreeRayTracer, Intersect) {
+	//! [EX_Intersect]
+	
 	// Create Plane
 	const vector<float> plane_vertices{
 		-10.0f, 10.0f, 0.0f,
@@ -479,23 +481,23 @@ TEST(_EmbreeRayTracer, Intersect) {
 	// Create RayTracer
 	EmbreeRayTracer ert(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
 
-
 	// Fire a ray straight down
-	auto res = ert.Intersect(0, 0, 1, 0, 0, -1);
+	auto straight_down = ert.Intersect(0, 0, 1, 0, 0, -1);
 
 	// Print distance if it connected
-	if (res.DidHit()) std::cerr << res.distance << std::endl;
+	if (straight_down.DidHit()) std::cerr << straight_down.distance << std::endl;
 	else std::cerr << "Miss" << std::endl;
-
-	ASSERT_TRUE(res.DidHit());
-	ASSERT_NEAR(res.distance, 1, 0.0001);
 
 	// Fire a ray straight up and ensure it misses
-	res = ert.Intersect(0, 0, 1, 0, 0, 1);
-	if (res.DidHit()) std::cerr << res.distance << std::endl;
+	auto straight_up = ert.Intersect(0, 0, 1, 0, 0, 1);
+	if (straight_up.DidHit()) std::cerr << straight_up.distance << std::endl;
 	else std::cerr << "Miss" << std::endl;
 
-	ASSERT_FALSE(res.DidHit());
+	//! [EX_Intersect]
+
+	ASSERT_TRUE(straight_down.DidHit());
+	ASSERT_NEAR(straight_down.distance, 1, 0.0001);
+	ASSERT_FALSE(straight_up.DidHit());
 }
 
 TEST(_EmbreeRayTracer, IntersectOutputArguments) {
@@ -570,6 +572,7 @@ TEST(_EmbreeRayTracer, Occluded) {
 }
 
 TEST(_EmbreeRayTracer, FireOcclusionRayArray) {
+	//! [EX_Occluded_Array]
 	// Create Plane
 	const vector<float> plane_vertices{
 		-10.0f, 10.0f, 0.0f,
@@ -582,28 +585,29 @@ TEST(_EmbreeRayTracer, FireOcclusionRayArray) {
 	// Create RayTracer
 	EmbreeRayTracer ert(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
 
-	// Fire a ray straight down
-	bool res = ert.Occluded(
+	// Cast a ray straight down
+	bool straight_down = ert.Occluded(
 		std::array<float, 3>{0, 0, 1},
 		std::array<float, 3>{0, 0, -1}
 	);
-
-	ASSERT_TRUE(res);
-	if (res) std::cerr << "True" << std::endl;
+	if (straight_down) std::cerr << "True" << std::endl;
 	else std::cerr << "False" << std::endl;
 
-	// Fire a ray straight up
-	res = ert.Occluded(
+	// Cast a ray straight up
+	bool straight_up = ert.Occluded(
 		std::array<float, 3>{0, 0, 1},
 		std::array<float, 3>{0, 0, 1}
 	);
-
-	ASSERT_FALSE(res);
-	if (res) std::cerr << "True" << std::endl;
+	if (straight_up) std::cerr << "True" << std::endl;
 	else std::cerr << "False" << std::endl;
+
+	//! [EX_Occluded_Array]
+	ASSERT_TRUE(straight_down);
+	ASSERT_FALSE(straight_up);
 }
 
 TEST(_EmbreeRayTracer, OccludedSingle) {
+	//! [EX_Occluded]
 	// Create Plane
 	const vector<float> plane_vertices{
 		-10.0f, 10.0f, 0.0f,
@@ -617,16 +621,19 @@ TEST(_EmbreeRayTracer, OccludedSingle) {
 	EmbreeRayTracer ert(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
 
 	// Fire a ray straight down
-	bool res = ert.Occluded(0, 0, 1, 0, 0, -1);
-	ASSERT_TRUE(res);
-	if (res) std::cerr << "True" << std::endl;
+	bool straight_down = ert.Occluded(0, 0, 1, 0, 0, -1);
+	if (straight_down) std::cerr << "True" << std::endl;
 	else std::cerr << "False" << std::endl;
 
 	// Fire a ray straight up
-	res = ert.Occluded(0, 0, 1, 0, 0, 1);
-	ASSERT_FALSE(res);
-	if (res) std::cerr << "True" << std::endl;
+	bool straight_up = ert.Occluded(0, 0, 1, 0, 0, 1);
+	if (straight_up) std::cerr << "True" << std::endl;
 	else std::cerr << "False" << std::endl;
+	
+	//! [EX_Occluded]
+	
+	ASSERT_TRUE(straight_down);
+	ASSERT_FALSE(straight_up);
 }
 
 TEST(_EmbreeRayTracer, AddMesh) {
@@ -922,9 +929,9 @@ namespace C_Interface{
 		int add_mesh_result = AddMesh(rt, rotated_plane);
 		ASSERT_EQ(HF_STATUS::OK, add_mesh_result);
 
-		// If this was successful, the new mesh's ID should have been updated to 0 since
+		// If this was successful, the new mesh's ID should have been updated to 1 since
 		// it has the same id as another mesh, and embree is automatically assigning it. 
-		ASSERT_EQ(0, rotated_plane->GetMeshID());
+		ASSERT_EQ(1, rotated_plane->GetMeshID());
 		
 		// Destroy the Plane and Raytracer
 		DestroyMeshInfo(rotated_plane);
