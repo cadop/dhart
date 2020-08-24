@@ -21,7 +21,7 @@ namespace HF {
 	}
 	namespace RayTracer {
 		class EmbreeRayTracer;
-		struct FullRayRequest;
+		struct RayRequest;
 	}
 }
 
