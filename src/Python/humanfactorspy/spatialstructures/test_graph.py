@@ -6,7 +6,7 @@ import numpy
 
 from humanfactorspy.geometry import LoadOBJ, CommonRotations
 from humanfactorspy.raytracer import embree_raytracer, EmbreeBVH
-from humanfactorspy.spatialstructures import NodeList, NodeStruct, Graph, CostAggregationType
+from humanfactorspy.spatialstructures import NodeList, NodeStruct, Graph, CostAggregationType, Direction
 from humanfactorspy.Exceptions import LogicError, InvalidCostOperation
 from humanfactorspy.utils import is_point
 import humanfactorspy.spatialstructures.node as NodeFunctions
@@ -338,3 +338,19 @@ def test_IsPoint():
     assert is_point((1, 2, 3))
     assert is_point((1.0, 2.0, 3.0))
  
+def test_attributes_to_costs(SimpleGraph):
+
+    # Add node attributes to the simple graph
+    attr = "Test"
+    ids = [0, 1, 2]
+    scores = ["0", "100", "200"]
+    SimpleGraph.add_node_attributes(attr, ids, scores)
+
+    # Get attribute scores from the graph
+    out_attrs = SimpleGraph.get_node_attributes(attr)
+
+    SimpleGraph.attrs_to_costs(attr, "attr_cost", Direction.INCOMING)
+
+    # Assert it's equal to our input array
+    assert 200 == SimpleGraph.GetEdgeCost(1, 2, "attr_cost")
+
