@@ -3,6 +3,7 @@ using HumanFactors.NativeUtils.CommonNativeArrays;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
@@ -430,7 +431,7 @@ namespace HumanFactors.SpatialStructures
             `>>> 100`\n
             `>>> 200`\n
         */
-		public void AddNodeAttribute(string attribute, IEnumerable<int> ids, IEnumerable<string> scores)
+		public void AddNodeAttribute(string attribute, int[] ids, string[] scores)
 		{
 			// Ensure we're keeping our precondition. The length of these
 			// must match for proper behavior
@@ -442,12 +443,42 @@ namespace HumanFactors.SpatialStructures
 			SpatialStructures.NativeMethods.C_AddNodeAttributes(
 				this.Pointer,
 				attribute,
-				ids.ToArray(),
-				scores.ToArray()
+				ids,
+				scores
 			); ;
 		}
+    
+        /*  
+            \brief Convert input array to strings
+            \param in_array Array of objects to convert to strings
+            \returns String representation of all elements in in_array
+        */
+        private string[] MakeStringArray<T>(T[] in_array) where T : IFormattable => in_array.Select(x => x.ToString()).ToArray();
 
-		/*! 
+
+        /*! 
+            \brief  Add attribute to all node in ids, with their respective score in scores
+
+            \param  attribute   Name of the attribute to assign scores to for each node in the graph
+            \param  scores      Ordered ids of scores to add to the node at the id in `ids` at the same index
+
+            \pre the length of scores must equal the number of nodes in the graph.
+
+            \throws ArgumentException The number of scores in scores isn't equal to the nubmer of nodes in the graph
+
+        */
+        public void AddNodeAttribute<T>(string attribute, IEnumerable<T> scores) where T : IFormattable
+        {
+            // If the length of this array is less than the number of nodes in the graph, throw
+            int num_nodes = this.NumNodes();
+            if (scores.Count() < num_nodes)
+                throw new ArgumentException("Didn't provide a score for every node in the graph");
+            
+            // Create an ID array and convert all the input scores to strings. 
+            AddNodeAttribute(attribute, Enumerable.Range(0, num_nodes).ToArray(), MakeStringArray(scores.ToArray()));
+        }
+
+        /*! 
             \brief Get the score of every node for a given attribute.
 
             \param attribute The unique name of the attribute type to get from the graph fopr every node
@@ -469,7 +500,7 @@ namespace HumanFactors.SpatialStructures
             `0, 100, 200, ,`
 
         */
-		public string[] GetNodeAttributes(string attribute)
+        public string[] GetNodeAttributes(string attribute)
 			=> NativeMethods.C_GetNodeAttributes(Pointer, attribute, this.NumNodes());
 
 		/*!

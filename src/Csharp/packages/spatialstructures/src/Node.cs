@@ -59,6 +59,23 @@ namespace HumanFactors.SpatialStructures
             \param in_vector The vector to create this nodelist from.
         */
 		internal NodeList(CVectorAndData in_vector) : base(in_vector) { }
+	
+
+		/*! 
+			\brief Convert all nodes in this array to Vector3D
+			
+			\returns The Nodes in this list as Vector3D
+		*/
+		public Vector3D[] ToVector3D()
+		{
+			Vector3D[] out_array = new Vector3D[this.size];
+
+			var array = this.array;
+			for (int i = 0; i < this.size; i++)
+				out_array[i] = new Vector3D(array[i].x, array[i].y, array[i].z);
+
+			return out_array;
+		}
 		
 		/*!
 			 \brief Free the native memory managed by this class. 
