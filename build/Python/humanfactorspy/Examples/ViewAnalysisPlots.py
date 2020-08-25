@@ -40,7 +40,7 @@
     print(len(nodes))
 
     height = 1.7 # Set a height offset to cast rays from the points
-    ray_count = 100 # Set the number of rays to use per node
+    ray_count = 1500 # Set the number of rays to use per node
     scores = SphericalViewAnalysisAggregate(bvh, nodes, ray_count, height, 
                                                         upward_fov = 20, downward_fov=20, 
                                                         agg_type=AggregationType.AVERAGE)
