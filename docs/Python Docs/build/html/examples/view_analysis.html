@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     
-    <title>Calculating Spatial View &mdash; Human Metrics 0.0.1 documentation</title>
+    <title>Spatial View Analysis &mdash; Human Metrics 0.0.1 documentation</title>
     
     <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
@@ -29,7 +29,7 @@
     <link rel="search" title="Search" href="../search.html" >
     <link rel="top" title="Human Metrics 0.0.1 documentation" href="../index.html" >
     <link rel="up" title="Examples" href="../examples.html" >
-    <link rel="next" title="Create a Visbility Graph" href="visibility_graph.html" >
+    <link rel="next" title="Visualize Spatial View" href="view/basic.html" >
     <link rel="prev" title="Path Plan with Different Costs" href="path/multi_cost.html" > 
   </head>
   <body>
@@ -62,7 +62,7 @@
            accesskey="I">index</a>
       </li>
       <li class="active">
-        <a href="visibility_graph.html" title="Create a Visbility Graph"
+        <a href="view/basic.html" title="Visualize Spatial View"
            accesskey="N">next</a>
       </li>
       <li class="active">
@@ -82,40 +82,19 @@
         <div class="bodywrapper">
           <div class="body" id="spc-section-body">
             
-  <div class="section" id="module-humanfactorspy.Examples.ViewAnalysisExample">
-<span id="calculating-spatial-view"></span><h1>Calculating Spatial View<a class="headerlink" href="#module-humanfactorspy.Examples.ViewAnalysisExample" title="Permalink to this headline">¶</a></h1>
-<p>This example shows how to cast rays in a sphere from a given location, then aggregate the distance values to a single number.</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">humanfactorspy.geometry</span> <span class="kn">import</span> <span class="n">LoadOBJ</span><span class="p">,</span> <span class="n">CommonRotations</span>
-<span class="kn">from</span> <span class="nn">humanfactorspy.raytracer</span> <span class="kn">import</span> <span class="n">EmbreeBVH</span>
-<span class="kn">from</span> <span class="nn">humanfactorspy.viewanalysis</span> <span class="kn">import</span> <span class="n">SphericalViewAnalysis</span><span class="p">,</span> <span class="n">SphericalViewAnalysisAggregate</span><span class="p">,</span> <span class="n">AggregationType</span>
-
-<span class="kn">import</span> <span class="nn">humanfactorspy</span>
-
-<span class="c1"># Get model path</span>
-<span class="n">obj_path</span> <span class="o">=</span> <span class="n">humanfactorspy</span><span class="o">.</span><span class="n">get_sample_model</span><span class="p">(</span><span class="s1">&#39;plane.obj&#39;</span><span class="p">)</span>
-<span class="c1"># Load mesh</span>
-<span class="n">loaded_obj</span> <span class="o">=</span> <span class="n">LoadOBJ</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="n">CommonRotations</span><span class="o">.</span><span class="n">Yup_to_Zup</span><span class="p">)</span>
-<span class="c1"># Create BVH</span>
-<span class="n">bvh</span> <span class="o">=</span> <span class="n">EmbreeBVH</span><span class="p">(</span><span class="n">loaded_obj</span><span class="p">)</span>
-
-<span class="c1"># Define point to start ray</span>
-<span class="n">p1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="c1"># Define direction to cast ray</span>
-<span class="nb">dir</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">ray_count</span> <span class="o">=</span> <span class="mi">1000</span>
-<span class="n">height</span> <span class="o">=</span> <span class="mf">1.7</span>
-
-<span class="n">results</span> <span class="o">=</span> <span class="n">SphericalViewAnalysis</span><span class="p">(</span><span class="n">bvh</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">ray_count</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
-<span class="n">aggregate_results</span> <span class="o">=</span> <span class="n">SphericalViewAnalysisAggregate</span><span class="p">(</span><span class="n">bvh</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">ray_count</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">agg_type</span><span class="o">=</span><span class="n">AggregationType</span><span class="o">.</span><span class="n">AVERAGE</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="mi">15</span><span class="p">:</span><span class="mi">20</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">aggregate_results</span><span class="p">)</span>
-</pre></div>
+  <div class="section" id="spatial-view-analysis">
+<h1>Spatial View Analysis<a class="headerlink" href="#spatial-view-analysis" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="view/basic.html">Visualize Spatial View</a></li>
+</ul>
 </div>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[(-1.      , -1) (-1.      , -1) (15.833383,  0) (-1.      , -1)
- (-1.      , -1)]
-[7.43102]
-</pre></div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">These examples use methods found in the following modules:
+<a class="reference internal" href="../generated/humanfactorspy.graphgenerator.html#module-humanfactorspy.graphgenerator" title="humanfactorspy.graphgenerator"><code class="xref py py-mod docutils literal notranslate"><span class="pre">humanfactorspy.graphgenerator</span></code></a>,
+<a class="reference internal" href="../generated/humanfactorspy.geometry.html#module-humanfactorspy.geometry" title="humanfactorspy.geometry"><code class="xref py py-mod docutils literal notranslate"><span class="pre">humanfactorspy.geometry</span></code></a>,
+<a class="reference internal" href="../generated/humanfactorspy.raytracer.html#module-humanfactorspy.raytracer" title="humanfactorspy.raytracer"><code class="xref py py-mod docutils literal notranslate"><span class="pre">humanfactorspy.raytracer</span></code></a></p>
 </div>
 </div>
 
@@ -129,8 +108,8 @@
   <p class="topless"><a href="path/multi_cost.html"
                         title="previous chapter">Path Plan with Different Costs</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="visibility_graph.html"
-                        title="next chapter">Create a Visbility Graph</a></p>
+  <p class="topless"><a href="view/basic.html"
+                        title="next chapter">Visualize Spatial View</a></p>
 
         </div>
       </div>
