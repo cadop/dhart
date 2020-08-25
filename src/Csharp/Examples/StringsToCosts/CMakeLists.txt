@@ -22,7 +22,7 @@ set_target_properties(
 		VS_DOTNET_TARGET_FRAMEWORK_VERSION "v4.5"
 )
 
-target_compile_options(HumanFactorsCSharp PRIVATE "/unsafe")
+target_compile_options(StringsToCosts PRIVATE "/unsafe")
  install(TARGETS StringsToCosts
 		EXPORT StringsToCosts
 		RUNTIME DESTINATION bin
