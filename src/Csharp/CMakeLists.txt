@@ -94,3 +94,7 @@ set_target_properties(
 install(TARGETS hfcsharptest EXPORT hfcsharptest RUNTIME DESTINATION bin)
 
 
+if (HumanFactors_BuildCSharpTests)
+	add_subdirectory(Examples)
+endif()
+
