@@ -227,7 +227,7 @@ TEST(_EmbreeRayTracer, RayTolerance) {
 	const std::array<float, 3> direction{ 0,0,-1 };
 	float height = NAN;
 	for (auto& origin : origins) {
-		k.FireRay(origin, direction);
+		k.PointIntersection(origin, direction);
 		height = origin[2];
 		// 1.06882095
 		// 1.06833649
@@ -363,7 +363,7 @@ TEST(_EmbreeRayTracer, EmbreeRayPerformance) {
 			origin[0] = i * 0.01;
 			origin[1] = j * 0.01;
 			// We pass it our custom class that contains a built-in hit point member that will be modified in place
-			k.FireRay(origin, direction);
+			k.PointIntersection(origin, direction);
 			dist_sum += origin[2];
 
 			raycount[0]++;
