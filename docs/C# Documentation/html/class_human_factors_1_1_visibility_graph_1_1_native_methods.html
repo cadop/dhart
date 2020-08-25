@@ -74,12 +74,23 @@ $(function() {
 <div class="title">HumanFactors.VisibilityGraph.NativeMethods Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Native Functions for the <a class="el" href="class_human_factors_1_1_visibility_graph_1_1_visibility_graph.html" title="Contains all methods for generating Visibility Graphs.">VisibilityGraph</a>.  
+ <a href="class_human_factors_1_1_visibility_graph_1_1_native_methods.html#details">More...</a></p>
+<div class="dynheader">
+Collaboration diagram for HumanFactors.VisibilityGraph.NativeMethods:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_visibility_graph_1_1_native_methods__coll__graph.svg" width="210" height="142"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pac-static-methods"></a>
 Static Package Functions</h2></td></tr>
 <tr class="memitem:a1d143831fb37b4a2195d70a94cb3d977"><td class="memItemLeft" align="right" valign="top">static IntPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_visibility_graph_1_1_native_methods.html#a1d143831fb37b4a2195d70a94cb3d977">C_AllToAllVisibilityGraph</a> (IntPtr bvh, IEnumerable&lt; <a class="el" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> &gt; nodes, float height, bool directed=false)</td></tr>
+<tr class="memdesc:a1d143831fb37b4a2195d70a94cb3d977"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a visibility graph in C++.  <a href="class_human_factors_1_1_visibility_graph_1_1_native_methods.html#a1d143831fb37b4a2195d70a94cb3d977">More...</a><br /></td></tr>
 <tr class="separator:a1d143831fb37b4a2195d70a94cb3d977"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad47df2f1b644b87ecd8b4c99676ff8c1"><td class="memItemLeft" align="right" valign="top">static IntPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_visibility_graph_1_1_native_methods.html#ad47df2f1b644b87ecd8b4c99676ff8c1">C_GroupToGroupVisibilityGraph</a> (IntPtr bvh, IEnumerable&lt; <a class="el" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> &gt; group_a, IEnumerable&lt; <a class="el" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> &gt; group_b, float height)</td></tr>
+<tr class="memdesc:ad47df2f1b644b87ecd8b4c99676ff8c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a directed visibility graph from nodes in <code>group_a</code> to the nodes in <code>group_b.</code>  <a href="class_human_factors_1_1_visibility_graph_1_1_native_methods.html#ad47df2f1b644b87ecd8b4c99676ff8c1">More...</a><br /></td></tr>
 <tr class="separator:ad47df2f1b644b87ecd8b4c99676ff8c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
@@ -97,8 +108,9 @@ Static Private Attributes</h2></td></tr>
 <tr class="separator:a143473ee4f6439a1f0bf0756350ef353"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_visibility_graph_native_8cs_source.html#l00014">14</a> of file <a class="el" href="_visibility_graph_native_8cs_source.html">VisibilityGraphNative.cs</a>.</p>
+<div class="textblock"><p>Native Functions for the <a class="el" href="class_human_factors_1_1_visibility_graph_1_1_visibility_graph.html" title="Contains all methods for generating Visibility Graphs.">VisibilityGraph</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="_visibility_graph_native_8cs_source.html#l00017">17</a> of file <a class="el" href="_visibility_graph_native_8cs_source.html">VisibilityGraphNative.cs</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a1d143831fb37b4a2195d70a94cb3d977"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1d143831fb37b4a2195d70a94cb3d977">&#9670;&nbsp;</a></span>C_AllToAllVisibilityGraph()</h2>
@@ -146,11 +158,35 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_visibility_graph_native_8cs_source.html#l00018">18</a> of file <a class="el" href="_visibility_graph_native_8cs_source.html">VisibilityGraphNative.cs</a>.</p>
+<p>Generate a visibility graph in C++. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bvh</td><td>A pointer to the bvh to use in C++. </td></tr>
+    <tr><td class="paramname">nodes</td><td>The nodes to use in the visibility graph. </td></tr>
+    <tr><td class="paramname">height</td><td>The height to offset each node from the ground. </td></tr>
+    <tr><td class="paramname">directed</td><td>if set to true generate a directed graph, otherwise generate an undirected graph.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a pointer to the newly generated <a class="el" href="class_human_factors_1_1_visibility_graph_1_1_visibility_graph.html" title="Contains all methods for generating Visibility Graphs.">VisibilityGraph</a> in C++ </dd></dl>
 
-<p class="reference">References <a class="el" href="class_human_factors_1_1_visibility_graph_1_1_native_methods.html#aef47a7e91c6886fd55b4c7075c763826">HumanFactors.VisibilityGraph.NativeMethods.CreateVisibilityGraphAllToAll()</a>, <a class="el" href="class_human_factors_1_1_visibility_graph_1_1_native_methods.html#ade1cf7191ccdb49e0fe4f54340bf6c30">HumanFactors.VisibilityGraph.NativeMethods.CreateVisibilityGraphAllToAllUndirected()</a>, and <a class="el" href="_native_utils_8cs_source.html#l00120">HumanFactors.NativeUtils.HelperFunctions.FlattenVectorArray()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_visibility_graph_native_8cs_source.html#l00032">32</a> of file <a class="el" href="_visibility_graph_native_8cs_source.html">VisibilityGraphNative.cs</a>.</p>
+
+<p class="reference">References <a class="el" href="class_human_factors_1_1_visibility_graph_1_1_native_methods.html#aef47a7e91c6886fd55b4c7075c763826">HumanFactors.VisibilityGraph.NativeMethods.CreateVisibilityGraphAllToAll()</a>, <a class="el" href="class_human_factors_1_1_visibility_graph_1_1_native_methods.html#ade1cf7191ccdb49e0fe4f54340bf6c30">HumanFactors.VisibilityGraph.NativeMethods.CreateVisibilityGraphAllToAllUndirected()</a>, and <a class="el" href="_native_utils_8cs_source.html#l00137">HumanFactors.NativeUtils.HelperFunctions.FlattenVectorArray()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="_visibility_graph_8cs_source.html#l00073">HumanFactors.VisibilityGraph.VisibilityGraph.GenerateAllToAll()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_visibility_graph_1_1_native_methods_a1d143831fb37b4a2195d70a94cb3d977_cgraph.svg" width="547" height="214"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_visibility_graph_1_1_native_methods_a1d143831fb37b4a2195d70a94cb3d977_icgraph.svg" width="520" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
 
 </div>
 </div>
@@ -200,11 +236,35 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_visibility_graph_native_8cs_source.html#l00033">33</a> of file <a class="el" href="_visibility_graph_native_8cs_source.html">VisibilityGraphNative.cs</a>.</p>
+<p>Generate a directed visibility graph from nodes in <code>group_a</code> to the nodes in <code>group_b.</code> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bvh</td><td>A pointer to the raytracer to use in C++. </td></tr>
+    <tr><td class="paramname">group_a</td><td>The nodes to cast rays from. </td></tr>
+    <tr><td class="paramname">group_b</td><td>The nodes to cast rays to. </td></tr>
+    <tr><td class="paramname">height</td><td>The height to offset nodes from the ground.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A pointer to the newly generated visibity graph in C++ </dd></dl>
 
-<p class="reference">References <a class="el" href="class_human_factors_1_1_visibility_graph_1_1_native_methods.html#a2e8bfe5708d0278729f15bcf7e7c0f2e">HumanFactors.VisibilityGraph.NativeMethods.CreateVisibilityGraphGroupToGroup()</a>, and <a class="el" href="_native_utils_8cs_source.html#l00120">HumanFactors.NativeUtils.HelperFunctions.FlattenVectorArray()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_visibility_graph_native_8cs_source.html#l00065">65</a> of file <a class="el" href="_visibility_graph_native_8cs_source.html">VisibilityGraphNative.cs</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_visibility_graph_8cs_source.html#l00111">HumanFactors.VisibilityGraph.VisibilityGraph.GenerateGroupToGroup()</a>.</p>
+<p class="reference">References <a class="el" href="class_human_factors_1_1_visibility_graph_1_1_native_methods.html#a2e8bfe5708d0278729f15bcf7e7c0f2e">HumanFactors.VisibilityGraph.NativeMethods.CreateVisibilityGraphGroupToGroup()</a>, and <a class="el" href="_native_utils_8cs_source.html#l00137">HumanFactors.NativeUtils.HelperFunctions.FlattenVectorArray()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="_visibility_graph_8cs_source.html#l00127">HumanFactors.VisibilityGraph.VisibilityGraph.GenerateGroupToGroup()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_visibility_graph_1_1_native_methods_ad47df2f1b644b87ecd8b4c99676ff8c1_cgraph.svg" width="587" height="134"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_visibility_graph_1_1_native_methods_ad47df2f1b644b87ecd8b4c99676ff8c1_icgraph.svg" width="600" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
 
 </div>
 </div>
@@ -260,7 +320,13 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="_visibility_graph_native_8cs_source.html#l00018">HumanFactors.VisibilityGraph.NativeMethods.C_AllToAllVisibilityGraph()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_visibility_graph_native_8cs_source.html#l00032">HumanFactors.VisibilityGraph.NativeMethods.C_AllToAllVisibilityGraph()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_visibility_graph_1_1_native_methods_aef47a7e91c6886fd55b4c7075c763826_icgraph.svg" width="802" height="67"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
 
 </div>
 </div>
@@ -316,7 +382,13 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="_visibility_graph_native_8cs_source.html#l00018">HumanFactors.VisibilityGraph.NativeMethods.C_AllToAllVisibilityGraph()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_visibility_graph_native_8cs_source.html#l00032">HumanFactors.VisibilityGraph.NativeMethods.C_AllToAllVisibilityGraph()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_visibility_graph_1_1_native_methods_ade1cf7191ccdb49e0fe4f54340bf6c30_icgraph.svg" width="802" height="67"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
 
 </div>
 </div>
@@ -384,7 +456,13 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="_visibility_graph_native_8cs_source.html#l00033">HumanFactors.VisibilityGraph.NativeMethods.C_GroupToGroupVisibilityGraph()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_visibility_graph_native_8cs_source.html#l00065">HumanFactors.VisibilityGraph.NativeMethods.C_GroupToGroupVisibilityGraph()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_visibility_graph_1_1_native_methods_a2e8bfe5708d0278729f15bcf7e7c0f2e_icgraph.svg" width="882" height="67"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
 
 </div>
 </div>
@@ -409,7 +487,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_visibility_graph_native_8cs_source.html#l00016">16</a> of file <a class="el" href="_visibility_graph_native_8cs_source.html">VisibilityGraphNative.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_visibility_graph_native_8cs_source.html#l00019">19</a> of file <a class="el" href="_visibility_graph_native_8cs_source.html">VisibilityGraphNative.cs</a>.</p>
 
 </div>
 </div>

@@ -178,7 +178,13 @@ Static Public Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_visibility_graph_8cs_source.html#l00073">73</a> of file <a class="el" href="_visibility_graph_8cs_source.html">VisibilityGraph.cs</a>.</p>
 
-<p class="reference">References <a class="el" href="_visibility_graph_native_8cs_source.html#l00018">HumanFactors.VisibilityGraph.NativeMethods.C_AllToAllVisibilityGraph()</a>, and <a class="el" href="_pointer_holder_8cs_source.html#l00049">HumanFactors.NativeUtils.NativeObject.Pointer</a>.</p>
+<p class="reference">References <a class="el" href="_visibility_graph_native_8cs_source.html#l00032">HumanFactors.VisibilityGraph.NativeMethods.C_AllToAllVisibilityGraph()</a>, and <a class="el" href="_pointer_holder_8cs_source.html#l00067">HumanFactors.NativeUtils.NativeObject.Pointer</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_visibility_graph_1_1_visibility_graph_a6b9e6d59435543aebc5a42beea7e916d_cgraph.svg" width="802" height="214"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
 
 </div>
 </div>
@@ -268,11 +274,26 @@ Static Public Member Functions</h2></td></tr>
 <div class="line"> </div>
 <div class="line">            Debug.WriteLine(<span class="stringliteral">&quot;[{0}, {1}, {2}, {3}]&quot;</span>, results[0], results[1], results[2], results[3]);</div>
 <div class="line"> </div>
-</div><!-- fragment --><p> <code>1, 1.414214, 0, 0</code> </p>
+</div><!-- fragment --><p> <code>1, 1.414214, 0, 0</code></p>
+<p>Note how the nodes in group B have scores of 0. This is because edges are only calculated from group a to group B and by default AggredgateEdgeCosts only considers outgoing costs with it's default parameters. Since group to group graphs only store the edges for a node in one of the two nodes, you should use <code>Graph.AggregateEdgeCosts(GraphEdgeAggregation.SUM, directed:false)</code> to get the accurate score for every node, since the edges of a visibility graph are bidirectional.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">            <span class="comment">// Print the undirected results</span></div>
+<div class="line">            results = G.AggregateEdgeCosts(<a class="code" href="namespace_human_factors_1_1_spatial_structures.html#abd405fa41da0f9a771d547aa47b6e1a0">GraphEdgeAggregation</a>.SUM, directed:<span class="keyword">false</span>);</div>
+<div class="line"> </div>
+<div class="line">            Debug.WriteLine(<span class="stringliteral">&quot;[{0}, {1}, {2}, {3}]&quot;</span>, results[0], results[1], results[2], results[3]);</div>
+<div class="line"> </div>
+</div><!-- fragment --><p> <code>[1, 1.414214, 2.414214, 0]</code></p>
+<p>As you can see here, node 3 has a score of 0 since it doesn't have a clear line of sight to either of the nodes in group a. Node 2 has a score equal to that of 0 and 1 combined since it has a clear line of sight to both of them. </p>
 
-<p class="definition">Definition at line <a class="el" href="_visibility_graph_8cs_source.html#l00111">111</a> of file <a class="el" href="_visibility_graph_8cs_source.html">VisibilityGraph.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_visibility_graph_8cs_source.html#l00127">127</a> of file <a class="el" href="_visibility_graph_8cs_source.html">VisibilityGraph.cs</a>.</p>
 
-<p class="reference">References <a class="el" href="_visibility_graph_native_8cs_source.html#l00033">HumanFactors.VisibilityGraph.NativeMethods.C_GroupToGroupVisibilityGraph()</a>, and <a class="el" href="_pointer_holder_8cs_source.html#l00049">HumanFactors.NativeUtils.NativeObject.Pointer</a>.</p>
+<p class="reference">References <a class="el" href="_visibility_graph_native_8cs_source.html#l00065">HumanFactors.VisibilityGraph.NativeMethods.C_GroupToGroupVisibilityGraph()</a>, and <a class="el" href="_pointer_holder_8cs_source.html#l00067">HumanFactors.NativeUtils.NativeObject.Pointer</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_visibility_graph_1_1_visibility_graph_aebd2e16352a8e5a9920dffe809ed911d_cgraph.svg" width="882" height="134"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
 
 </div>
 </div>
@@ -282,8 +303,8 @@ Static Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <div class="ttc" id="aclass_human_factors_1_1_visibility_graph_1_1_visibility_graph_html_a6b9e6d59435543aebc5a42beea7e916d"><div class="ttname"><a href="class_human_factors_1_1_visibility_graph_1_1_visibility_graph.html#a6b9e6d59435543aebc5a42beea7e916d">HumanFactors.VisibilityGraph.VisibilityGraph.GenerateAllToAll</a></div><div class="ttdeci">static Graph GenerateAllToAll(EmbreeBVH bvh, IEnumerable&lt; Vector3D &gt; nodes, float height=1.7f, bool directed=true)</div><div class="ttdoc">Create a visibility graph from every node to every node in nodes.</div><div class="ttdef"><b>Definition:</b> <a href="_visibility_graph_8cs_source.html#l00073">VisibilityGraph.cs:73</a></div></div>
 <div class="ttc" id="anamespace_human_factors_html"><div class="ttname"><a href="namespace_human_factors.html">HumanFactors</a></div><div class="ttdoc">Automated analysis of the built environent</div><div class="ttdef"><b>Definition:</b> <a href="_common_types_8cs_source.html#l00008">CommonTypes.cs:9</a></div></div>
-<div class="ttc" id="aclass_human_factors_1_1_visibility_graph_1_1_visibility_graph_html_aebd2e16352a8e5a9920dffe809ed911d"><div class="ttname"><a href="class_human_factors_1_1_visibility_graph_1_1_visibility_graph.html#aebd2e16352a8e5a9920dffe809ed911d">HumanFactors.VisibilityGraph.VisibilityGraph.GenerateGroupToGroup</a></div><div class="ttdeci">static Graph GenerateGroupToGroup(EmbreeBVH bvh, IEnumerable&lt; Vector3D &gt; group_a, IEnumerable&lt; Vector3D &gt; group_b, float height=1.7f)</div><div class="ttdoc">Generate a directed visibility graph from nodes in group_a to the nodes in group_b.</div><div class="ttdef"><b>Definition:</b> <a href="_visibility_graph_8cs_source.html#l00111">VisibilityGraph.cs:111</a></div></div>
-<div class="ttc" id="anamespace_human_factors_1_1_spatial_structures_html_abd405fa41da0f9a771d547aa47b6e1a0"><div class="ttname"><a href="namespace_human_factors_1_1_spatial_structures.html#abd405fa41da0f9a771d547aa47b6e1a0">HumanFactors.SpatialStructures.GraphEdgeAggregation</a></div><div class="ttdeci">GraphEdgeAggregation</div><div class="ttdoc">Methods for aggregating edge costs per node from the graph.</div><div class="ttdef"><b>Definition:</b> <a href="_graph_8cs_source.html#l00022">Graph.cs:23</a></div></div>
+<div class="ttc" id="aclass_human_factors_1_1_visibility_graph_1_1_visibility_graph_html_aebd2e16352a8e5a9920dffe809ed911d"><div class="ttname"><a href="class_human_factors_1_1_visibility_graph_1_1_visibility_graph.html#aebd2e16352a8e5a9920dffe809ed911d">HumanFactors.VisibilityGraph.VisibilityGraph.GenerateGroupToGroup</a></div><div class="ttdeci">static Graph GenerateGroupToGroup(EmbreeBVH bvh, IEnumerable&lt; Vector3D &gt; group_a, IEnumerable&lt; Vector3D &gt; group_b, float height=1.7f)</div><div class="ttdoc">Generate a directed visibility graph from nodes in group_a to the nodes in group_b.</div><div class="ttdef"><b>Definition:</b> <a href="_visibility_graph_8cs_source.html#l00127">VisibilityGraph.cs:127</a></div></div>
+<div class="ttc" id="anamespace_human_factors_1_1_spatial_structures_html_abd405fa41da0f9a771d547aa47b6e1a0"><div class="ttname"><a href="namespace_human_factors_1_1_spatial_structures.html#abd405fa41da0f9a771d547aa47b6e1a0">HumanFactors.SpatialStructures.GraphEdgeAggregation</a></div><div class="ttdeci">GraphEdgeAggregation</div><div class="ttdoc">Methods for aggregating edge costs per node from the graph.</div><div class="ttdef"><b>Definition:</b> <a href="_graph_8cs_source.html#l00023">Graph.cs:24</a></div></div>
 <div class="ttc" id="aclass_human_factors_1_1_visibility_graph_1_1_visibility_graph_html"><div class="ttname"><a href="class_human_factors_1_1_visibility_graph_1_1_visibility_graph.html">HumanFactors.VisibilityGraph.VisibilityGraph</a></div><div class="ttdoc">Contains all methods for generating Visibility Graphs.</div><div class="ttdef"><b>Definition:</b> <a href="_visibility_graph_8cs_source.html#l00032">VisibilityGraph.cs:33</a></div></div>
 <div class="ttc" id="anamespace_human_factors_1_1_visibility_graph_html"><div class="ttname"><a href="namespace_human_factors_1_1_visibility_graph.html">HumanFactors.VisibilityGraph</a></div><div class="ttdoc">Evaluate visibility between a set of points.</div><div class="ttdef"><b>Definition:</b> <a href="_visibility_graph_8cs_source.html#l00029">VisibilityGraph.cs:30</a></div></div>
 <!-- start footer part -->

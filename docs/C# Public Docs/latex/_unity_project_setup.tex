@@ -1,0 +1,170 @@
+Next Tutorial\+: \mbox{\hyperlink{_using_the_raytracer}{Using The Raytracer}} OR \mbox{\hyperlink{_generating_a_graph}{Generating A Graph}}\hypertarget{_unity_project_setup_autotoc_md0}{}\doxysection{Before we begin}\label{_unity_project_setup_autotoc_md0}
+In this guide we will cover the following\+:
+
+
+\begin{DoxyItemize}
+\item Creating a new Unity project.
+\item Importing \mbox{\hyperlink{namespace_human_factors}{Human\+Factors}} to a Unity project.
+\item Verifying that a Unity project code can reference \mbox{\hyperlink{namespace_human_factors}{Human\+Factors}}.
+\end{DoxyItemize}\hypertarget{_unity_project_setup_autotoc_md1}{}\doxysubsection{Prerequisites}\label{_unity_project_setup_autotoc_md1}
+
+\begin{DoxyItemize}
+\item An installation of \href{https://unity3d.com/get-unity/download}{\texttt{ Unity}}. This tutorial has been tested with Unity 2019.\+3f, but should work from 2018.\+3 on.
+\item An installation of Visual Studio with Unity integration. Instructions for installing Unity with support for Visual Studio or adding Visual\+Studio support to an existing installation of Unity are available \href{https://docs.microsoft.com/en-us/visualstudio/cross-platform/getting-started-with-visual-studio-tools-for-unity?view=vs-2019}{\texttt{ here}}.
+\item A copy of the \mbox{\hyperlink{namespace_human_factors}{Human\+Factors}} release built with support for C\#. The {\ttfamily bin} folder of the release should contain the following files\+:
+\begin{DoxyEnumerate}
+\item embree3.\+dll
+\item Human\+Factors.\+dll
+\item Human\+Factors\+C\+Sharp.\+dll
+\item msvcp140.\+dll
+\item System.\+Buffers.\+dll
+\item System.\+Memory.\+dll
+\item System.\+Runtime.\+Compiler\+Services.\+Unsafe.\+dll
+\item tbb.\+dll
+\item vcomp140.\+dll
+\item vcruntime140.\+dll
+\item vcruntime140\+\_\+1.\+dll
+\end{DoxyEnumerate}
+\end{DoxyItemize}\hypertarget{_unity_project_setup_autotoc_md2}{}\doxysection{Creating a new project}\label{_unity_project_setup_autotoc_md2}
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{UnityNew.PNG}%Image
+\end{DoxyInlineImage}
+  
+
+{\itshape Figure} {\bfseries{1.\+1}}\+: {\itshape Creating a new project in the Unity Hub}
+
+To begin, open the Unity Hub then click the {\itshape N\+EW} button to create a new project.
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{unity_choose_project_type.png}%Choose Project Type
+\end{DoxyInlineImage}
+  
+
+{\itshape Figure} {\bfseries{1.\+2}}\+: {\itshape The Create a Project Dialog}
+
+Select your desired project type, directory, and project name. For the sake of this tutorial, we will be using the {\itshape 3D} project type and naming our project {\itshape Human\+Factors\+Unity\+Setup}, but you can name your project whatever you want. When done with this, press the {\itshape Create} button to create the project and wait while Unity imports all the necessary files.
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{blank_unity_scene.PNG}%Empty Unity Scene
+\end{DoxyInlineImage}
+  
+
+{\itshape Figure} {\bfseries{1.\+3}}\+: {\itshape An empty Unity scene}
+
+Upon completion you should be greeted by an empty Unity scene.\hypertarget{_unity_project_setup_autotoc_md3}{}\doxysection{Importing the Human Factors Library}\label{_unity_project_setup_autotoc_md3}
+Now that we have created a blank project, we need to import the \mbox{\hyperlink{namespace_human_factors}{Human\+Factors}} binaries as assets so Unity can see and interface with them.
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{bin_to_assets.png}%Moving the bin folder into the assets directory
+\end{DoxyInlineImage}
+  
+
+{\itshape Figure} {\bfseries{1.\+4}}\+: {\itshape Dragging the \mbox{\hyperlink{namespace_human_factors}{Human\+Factors}} bin folder into the Unity Project}
+
+If the \mbox{\hyperlink{namespace_human_factors}{Human\+Factors}} release package is zipped, unzip the contents to another location before copying it or you will get an error when trying to import it. Once you have the files, as shown in Figure 1.\+4, drag the {\ttfamily bin} folder from the location you extracted the release to into the Unity Editor\textquotesingle{}s assets window. Once you\textquotesingle{}ve done this, Unity should display the {\itshape bin} folder alongside the existing {\itshape Scenes} folder.
+
+\begin{quote}
+{\bfseries{N\+O\+TE}}\+: If you accidentally drag the bin folder into the {\itshape Scenes} folder or anywhere else that would cause two copies of the same dll to exist at the same time, delete any duplicates before proceding. Multiple copies of the same D\+LL will cause conflicts and may result in Unity being unable to load it in the future steps. You\textquotesingle{}ll know this has happened if you see the following error `Multiple plugins with the same name \textquotesingle{}humanfactors' (found at \textquotesingle{}Assets/\+Scenes/bin/\+Human\+Factors.\+dll\textquotesingle{} and \textquotesingle{}Assets/bin/\+Human\+Factors.\+dll\textquotesingle{})...\`{} at the bottom of the screen. $>$ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{duplicate_dll_error.png}%Duplicate D\+LL Error
+\end{DoxyInlineImage}
+  
+
+$>$ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{delete.png}%Delete Image
+\end{DoxyInlineImage}
+  
+
+\end{quote}
+\hypertarget{_unity_project_setup_autotoc_md4}{}\doxysection{Verifying Unity can reference Human\+Factors}\label{_unity_project_setup_autotoc_md4}
+The binaries have been added to our project as assets, but let\textquotesingle{}s make sure Unity is able to reference them in code. To verify that Unity can reference the \mbox{\hyperlink{namespace_human_factors}{Human\+Factors}} binaries, we\textquotesingle{}re going to create a new script and look at its references. If we did everything correctly, Unity should automatically have added Human\+Factors\+C\+Sharp as a reference.
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{create_new_script.png}%Creating a new C\# script
+\end{DoxyInlineImage}
+  
+
+{\itshape Figure} {\bfseries{1.\+5}}\+: {\itshape Creating a new C\# Script}
+
+To create a new script, right click on a blank space in the assets window, hover over {\itshape Create}, then click {\itshape C\# Script}.
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{rename_script.png}%Don\textquotesingle{}t click anything! Rename the script
+\end{DoxyInlineImage}
+  
+
+{\itshape Figure} {\bfseries{1.\+6}}\+: {\itshape Renaming a new script}
+
+Looking in the assets window, you should notice a new script file next to Scenes directory titled New\+Behaviour\+Script.\+cs by default, and the name of it is highlighted in blue indicatign that you can rename it. Rename the script to H\+F\+Example\+Script.\+cs.
+
+\begin{quote}
+{\bfseries{N\+O\+TE\+:}} If you didn\textquotesingle{}t name the file properly you can change the name of the script by right clicking on it and clicking {\itshape Rename}. This won\textquotesingle{}t change the name of the class that the script contains however, so be prepared to change that when we open it. $>$ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{walkthroughs/unity/1_project_setup}%/../2\+\_\+raycast\+\_\+at\+\_\+plane/rename\+\_\+dialog.png \char`\"{}\+Rename Dialog\char`\"{}
+\end{DoxyInlineImage}
+  
+
+\end{quote}
+
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{double_click_on_script.png}%Double Click On Script
+\end{DoxyInlineImage}
+  
+
+{\itshape Figure} {\bfseries{1.\+7}}\+: {\itshape H\+F\+Example\+Script.\+cs in the assets window}
+
+Now that we have our new script, double click on it to open Visual studio.
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{visual_studio_human_factors_reference.png}%Human\+Factors referenced by your project
+\end{DoxyInlineImage}
+  
+
+{\itshape Figure} {\bfseries{1.\+8}}\+: {\itshape Viewing the references of a project in Visual Studio}
+
+In Visual Studio, navigate to the {\itshape Solution Explorer} then expand the drop downs for your solution, Assembly-\/\+C-\/\+Sharp, and References. If everything was done correctly, you should see \mbox{\hyperlink{namespace_human_factors}{Human\+Factors}} C\# under the references for your project, as shown in Figure 1.\+8.
+
+\begin{quote}
+{\bfseries{N\+O\+TE}}\+: If Mono-\/\+Develop appears instead of Visual Studio, then your installation of Unity is not set up to support Visual Studio. You can follow the above instructions from prerequisites to fix this. \end{quote}
+
+
+\begin{quote}
+{\bfseries{N\+O\+TE}}\+: If you renamed the file earlier, then your class\textquotesingle{}s name may not match the name of the class in Figure 1.\+8. To fix this, just replace the class\textquotesingle{}s name with {\ttfamily H\+F\+Example\+Script.\+cs} on line 5.
+
+ 
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{walkthroughs/unity/1_project_setup}%/../2\+\_\+raycast\+\_\+at\+\_\+plane/change\+\_\+class\+\_\+name.png \char`\"{}\+Change Class name\char`\"{}
+\end{DoxyInlineImage}
+  
+
+\end{quote}
+
+
+\begin{quote}
+{\bfseries{N\+O\+TE\+:}} Your version of Visual Studio may use the light theme by default like pictured below. This is purely visual and will not have any impact on this tutorial.  
+\begin{DoxyInlineImage}
+\includegraphics[height=\baselineskip,keepaspectratio=true]{light_visual_studio.png}%Light Theme
+\end{DoxyInlineImage}
+  
+
+\end{quote}
+
+
+If you see \mbox{\hyperlink{namespace_human_factors}{Human\+Factors}} in your project\textquotesingle{}s references, then you\textquotesingle{}ve successfully imported the \mbox{\hyperlink{namespace_human_factors}{Human\+Factors}} library and are ready to start using the \mbox{\hyperlink{namespace_human_factors}{Human\+Factors}} library.\hypertarget{_unity_project_setup_autotoc_md5}{}\doxysection{Conclusion}\label{_unity_project_setup_autotoc_md5}
+Below is a link to the unity project created in this tutorial.
+
+\href{Tutorial\%201-\%20Unity\%20Project.zip}{\texttt{ Tutorial 1\+: Unity Project Setup}}
+
+In this tutorial, we went through the process of creating unity project and adding the Analysis toolkit to the project. In the following tutorials, we will use this basis for using the modules that come with the Analysis toolkit.
+
+In the next tutorial\+: \mbox{\hyperlink{_using_the_raytracer}{Using the Raytracer}} we will use \mbox{\hyperlink{namespace_human_factors}{Human\+Factors}} to create a plane, cast a ray at it, then get the point where the ray intersected the plane. 

@@ -1,9 +1,7 @@
 var searchData=
 [
-  ['no_5fcost_568',['NO_COST',['../namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987fa1e9aa2ce4f431ece7da1e367120763c7',1,'HumanFactors::Exceptions']]],
-  ['no_5fgraph_569',['NO_GRAPH',['../namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987fa4489f0952dceae59d10dbc94e751bea7',1,'HumanFactors::Exceptions']]],
-  ['no_5fpath_570',['NO_PATH',['../namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987fac04e8dcc1609779f0a17798c942c9640',1,'HumanFactors::Exceptions']]],
-  ['not_5fcompressed_571',['NOT_COMPRESSED',['../namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987fa92e7ea040dd93e2ae91f8f252b8edb5f',1,'HumanFactors::Exceptions']]],
-  ['not_5ffound_572',['NOT_FOUND',['../namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987fa8c02547a8a3b02382bac3557bcb2280d',1,'HumanFactors::Exceptions']]],
-  ['not_5fimplemented_573',['NOT_IMPLEMENTED',['../namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987fa3e860a081575fc82cc7b6ed2ca602947',1,'HumanFactors::Exceptions']]]
+  ['malformed_5fdb_642',['MALFORMED_DB',['../namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987fa756407fb634467c4e1b64c9ad375a89a',1,'HumanFactors::Exceptions']]],
+  ['max_643',['MAX',['../namespace_human_factors_1_1_view_analysis.html#ae24b8f5d9783a270e51183ff2eca765ca26a4b44a837bf97b972628509912b4a5',1,'HumanFactors::ViewAnalysis']]],
+  ['min_644',['MIN',['../namespace_human_factors_1_1_view_analysis.html#ae24b8f5d9783a270e51183ff2eca765cace31e2a082d17e038fcc6e3006166653',1,'HumanFactors::ViewAnalysis']]],
+  ['missing_5fdepend_645',['MISSING_DEPEND',['../namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987faa5d64576b28615a00eda3fa2bf1e03eb',1,'HumanFactors::Exceptions']]]
 ];

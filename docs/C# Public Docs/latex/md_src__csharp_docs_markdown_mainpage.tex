@@ -1,0 +1,200 @@
+Analysis of the Environment for A\+D\+A\+PT\hypertarget{md_src__csharp_docs_markdown_mainpage_autotoc_md47}{}\doxysection{C\# Documentation}\label{md_src__csharp_docs_markdown_mainpage_autotoc_md47}
+\hypertarget{md_src__csharp_docs_markdown_mainpage_autotoc_md48}{}\doxysubsection{Getting Started}\label{md_src__csharp_docs_markdown_mainpage_autotoc_md48}
+
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{_unity_tutorials}{Unity Tutorial Series}}
+\end{DoxyItemize}
+
+This guide will describe how to retrieve the contents of this repository, and build Analysis from source.
+
+\doxysubsection*{Please note\+: Analysis is currently designed to run on a PC~\newline
+ running the Windows 10 operating system.}
+
+Also note\+: This guide is a \textquotesingle{}work-\/in-\/progress\textquotesingle{} and subject to change.
+
+\doxysubsection*{Pre-\/requisites}
+
+{\bfseries{Git for Windows\+:}}~\newline
+ If you do not already have Git for Windows on your machine,~\newline
+ please download and install Git for Windows at \href{https://gitforwindows.org/}{\texttt{ https\+://gitforwindows.\+org/}}
+
+{\bfseries{Microsoft Visual Studio 2019\+:}}~\newline
+ \href{https://visualstudio.microsoft.com/downloads/}{\texttt{ https\+://visualstudio.\+microsoft.\+com/downloads/}}~\newline
+ You may use the Community edition.
+
+{\bfseries{C\+Make (Windows win64-\/x64)}}~\newline
+ \href{https://cmake.org/download/}{\texttt{ https\+://cmake.\+org/download/}}
+
+Once the software above is installed on your machine, you may continue with the following\+:
+
+\doxysubsubsection*{0. Using Git Bash}
+
+Open {\bfseries{Git Bash}}. Git Bash (M\+I\+N\+G\+W64) begins at {\ttfamily $\sim$}, your home directory.~\newline
+ You may remain here, or navigate to a directory of your choice.~\newline
+ In the next step, you will clone the {\bfseries{Analysis}} repository.
+
+\doxysubsubsection*{1. Cloning the repository}
+
+Type {\ttfamily {\bfseries{git clone \href{mailto:git@git.njit.edu}{\texttt{ git@git.\+njit.\+edu}}\+:A\+D\+A\+P\+T/\+Analysis.\+git}}} at the prompt~\newline
+ and hit E\+N\+T\+ER. The Analysis repository will then be cloned to your local machine.
+
+Now that a local copy of the {\bfseries{Analysis}} repository is on your machine,~\newline
+ you may build the project with either\+:
+\begin{DoxyItemize}
+\item Microsoft Visual Studio 2019
+\item cmake-\/gui (C\+Make\textquotesingle{}s standalone client)
+\end{DoxyItemize}
+
+\doxysubsection*{Building with Microsoft Visual Studio 2019}
+
+\doxysubsubsection*{0. Opening Visual Studio}
+
+Open {\bfseries{Microsoft Visual Studio 2019}}. After seeing the splash/welcome screen,~\newline
+ please click the button that reads {\bfseries{Open a local folder}}.
+
+\doxysubsubsection*{1. Opening the Analysis repository}
+
+When the {\bfseries{Browse}} window appears, navigate to the {\ttfamily {\bfseries{Analysis}}} folder~\newline
+ (the repository that you had cloned) on your local machine.~\newline
+ Then, navigate to {\ttfamily {\bfseries{src}}.}~\newline
+ Click the {\bfseries{Select}} folder button to confirm.~\newline
+
+
+\doxysubsubsection*{2. Revealing the Solution Explorer}
+
+If the {\bfseries{Solution Explorer}} view is not already open, you may open by~\newline
+ navigating to {\bfseries{View $>$ Solution Explorer}}, or alternatively,~\newline
+ you can also use the {\bfseries{Ctrl + Alt + L}} shortcut to reveal Solution Explorer.~\newline
+ Here, you can examine the sources imported by Visual Studio.~\newline
+
+
+\doxysubsubsection*{3. Choosing a build version}
+
+There are {\bfseries{two}} build versions for {\bfseries{Analysis}}\+:
+\begin{DoxyItemize}
+\item x64-\/\+Debug~\newline
+
+\item x64-\/\+Release~\newline
+
+\end{DoxyItemize}
+
+To change between build versions,~\newline
+ navigate (move your cursor) over to the top-\/left portion of Visual Studio,~\newline
+ and you will see a drop-\/down bar -- {\bfseries{x64-\/\+Debug}} is selected by default.
+
+If you want to build the {\bfseries{x64-\/\+Release}} version of {\bfseries{Analysis}},~\newline
+ change the option in the drop-\/down bar to {\bfseries{x64-\/\+Release}}.
+
+\doxysubsubsection*{4. Building the repository}
+
+{\bfseries{We are now ready to build Analysis.}}~\newline
+ {\bfseries{C\+Make}} is used to aid in the compilation process.~\newline
+
+
+To build, navigate to {\bfseries{Build $>$ Build All}},~\newline
+ or you may use the {\bfseries{Ctrl + Shift + B}} keyboard shortcut.~\newline
+
+
+{\bfseries{You have now built the sources for Analysis.}}~\newline
+ You can find the build files in {\ttfamily {\bfseries{.\textbackslash{}\+Analysis\textbackslash{}src\textbackslash{}out\textbackslash{}build\textbackslash{}x64-\/Debug}}}
+
+\doxysubsection*{Building with C\+Make\textquotesingle{}s standalone client (cmake-\/gui)}
+
+Please ensure that you have installed\+:
+\begin{DoxyItemize}
+\item Microsoft Visual Studio 2019 (you will get the Visual C++ compiler along with it)
+\item C\+Make
+\end{DoxyItemize}
+
+Also ensure that you have a local copy of the Analysis repository.
+
+\doxysubsubsection*{0. Opening cmake-\/gui}
+
+Open the {\bfseries{C\+Make (cmake-\/gui)}} application. (Hit the Windows key, and type \textquotesingle{}C\+Make\textquotesingle{})
+
+\doxysubsubsection*{1. Browse source...}
+
+Hit the {\bfseries{\textquotesingle{}Browse Source...\textquotesingle{}}} button to the right of the~\newline
+ {\bfseries{\textquotesingle{}Where is the source code\+:\textquotesingle{}}} text field.~\newline
+
+
+\doxysubsubsection*{2. Selecting the source code directory}
+
+In the window that appears (titled {\bfseries{\textquotesingle{}Enter Path to Source\textquotesingle{}}}),~\newline
+ navigate to the local copy of {\bfseries{Analysis}} on your machine.~\newline
+ ~\newline
+ Then, navigate to the {\bfseries{\textquotesingle{}src\textquotesingle{}}} subdirectory. Click {\bfseries{\textquotesingle{}Select Folder\textquotesingle{}}}. ~\newline
+ The {\bfseries{\textquotesingle{}Where is the source code\textquotesingle{}}} field should read\+:~\newline
+ {\ttfamily C\+:/\mbox{[}Y\+O\+U\+R\+\_\+\+P\+A\+T\+H\+\_\+\+H\+E\+RE\mbox{]}/\+Analysis/src}
+
+\doxysubsubsection*{3. Browse build...}
+
+Hit the {\bfseries{\textquotesingle{}Browse Build...\textquotesingle{}}} button to the right of the~\newline
+ {\bfseries{\textquotesingle{}Where to build the binaries\+:\textquotesingle{}}} text field.~\newline
+
+
+\doxysubsubsection*{4. Selecting the build directory}
+
+In the window that appears (titled {\bfseries{\textquotesingle{}Enter Path to Build\textquotesingle{}}}),~\newline
+ navigate to the local copy of {\bfseries{Analysis}} on your machine.~\newline
+ ~\newline
+ Then, navigate to the {\bfseries{\textquotesingle{}build\textquotesingle{}}} subdirectory. Click {\bfseries{\textquotesingle{}Select Folder.\textquotesingle{}}} ~\newline
+ The {\bfseries{\textquotesingle{}Where to build the binaries\textquotesingle{}}} field should read\+:~\newline
+ {\ttfamily C\+:/\mbox{[}Y\+O\+U\+R\+\_\+\+P\+A\+T\+H\+\_\+\+H\+E\+RE\mbox{]}/\+Analysis/build}
+
+\doxysubsubsection*{5. Confirming your configuration}
+
+Hit the {\bfseries{\textquotesingle{}Configure\textquotesingle{}}} button in the left-\/center area of the cmake-\/gui window.
+
+\doxysubsubsection*{6. Selecting compiler options}
+
+In the dialogue box that appears,~\newline
+ for the {\bfseries{\textquotesingle{}Specify the generator for this project\textquotesingle{}}} dropdown box, ensure that {\bfseries{\textquotesingle{}Visual Studio 16 2019\textquotesingle{}}} is selected.~\newline
+
+
+Ensure that the {\bfseries{\textquotesingle{}Use default native compilers\textquotesingle{}}} radio button is selected. Do not fill in the remaining text fields.~\newline
+
+
+Then, click {\bfseries{\textquotesingle{}Finish\textquotesingle{}}}.
+
+\doxysubsubsection*{7. Building the repository/choosing a build version}
+
+As stated previously, there are {\bfseries{two}} build versions for {\bfseries{Analysis}}\+:
+\begin{DoxyItemize}
+\item x64-\/\+Debug~\newline
+
+\item x64-\/\+Release~\newline
+
+\end{DoxyItemize}
+
+C\+Make will build the project.~\newline
+ {\bfseries{Note\+: The build will appear to fail at first. }}~\newline
+ The remainder of the directions for this step will rectify this,~\newline
+ and you will also be able to select your desired build version. ~\newline
+~\newline
+ In the center of the cmake-\/gui window, you will see~\newline
+ a {\bfseries{\textquotesingle{}Name\textquotesingle{}}} and {\bfseries{\textquotesingle{}Value\textquotesingle{}}} table, in red highlighting.~\newline
+
+
+Next to {\bfseries{\textquotesingle{}C\+M\+A\+K\+E\+\_\+\+C\+O\+N\+F\+I\+G\+U\+R\+A\+T\+I\+O\+N\+\_\+\+T\+Y\+P\+ES\textquotesingle{}}}, click the text field~\newline
+ that resides underneath the {\bfseries{\textquotesingle{}Value\textquotesingle{}}} column.~\newline
+
+
+To select the build version,~\newline
+ change the selected field to {\bfseries{Debug}}, for the x64-\/\+Debug version,~\newline
+ or {\bfseries{Release}}, for the x64-\/\+Release version, whichever is desired.~\newline
+
+
+Then, click {\bfseries{\textquotesingle{}Configure\textquotesingle{}}}.
+
+The build files generated by C\+Make will reside in~\newline
+ {\bfseries{{\ttfamily C\+:/\mbox{[}Y\+O\+U\+R\+\_\+\+P\+A\+T\+H\+\_\+\+H\+E\+RE\mbox{]}/\+Analysis/build}}}\hypertarget{md_src__csharp_docs_markdown_mainpage_autotoc_md49}{}\doxysection{Documentation}\label{md_src__csharp_docs_markdown_mainpage_autotoc_md49}
+Documentation for {\bfseries{Analysis}} can be found in .\textbackslash{}\+Analysis\textbackslash{}docs\textbackslash{}
+
+The codebase is comprised of sources from\+: ~\newline
+
+\begin{DoxyItemize}
+\item C++ (see .\textbackslash{}\+Analysis\textbackslash{}docs\textbackslash{}C++)
+\item C\# (see .\textbackslash{}\+Analysis\textbackslash{}docs\textbackslash{}C\#)
+\item Python (see .\textbackslash{}\+Analysis\textbackslash{}docs\textbackslash{}\+Python Docs) 
+\end{DoxyItemize}
