@@ -550,12 +550,44 @@ namespace HumanFactors.SpatialStructures
 		internal static void C_ClearAttributeType(IntPtr graph, string attribute_name)
 			=> ClearAttributeType(graph, attribute_name);
 
+		/*! 
+			\brief Generate a cost set based on a set of node parameters
+
+			\param graph_ptr Graph to perform this operation on.
+			\param attribute_key Attribute to create a new cost set from.
+			\param cost_key Key for the newly generated cost set. 
+			\param dir Direction to use for calculating the cost of any edge. For example
+					   INCOMING will use the cost of the node being traveled to by the edge. 
+
+			\throws KeyNotFoundException The parameter assinged by parameter_name is not
+										 the key of any node parameter in the graph. 
+		*/
+		internal static void C_AttrsToCosts(IntPtr graph_ptr, string attribute_key,  string cost_key, Direction dir)
+		{
+			HF_STATUS status = GraphAttrsToCosts(graph_ptr, attribute_key, cost_key, dir);
+
+			if (status == HF_STATUS.NOT_FOUND)
+				throw new KeyNotFoundException(attribute_key + " is not the key of any node attribute in the graph!");
+			else
+				Debug.Assert(status == HF_STATUS.OK);
+		}
+
 		[DllImport(NativeConstants.DLLPath)]
 		private static extern HF_STATUS GetNodes(
 			IntPtr graph,
 			ref IntPtr out_vector_ptr,
 			ref IntPtr out_data_ptr
 		);
+
+
+		[DllImport(NativeConstants.DLLPath)]
+		private static extern HF_STATUS GraphAttrsToCosts(
+			IntPtr graph,
+			string attr_key,
+			string cost_string,
+			Direction dir
+		);
+
 
 		[DllImport(NativeConstants.DLLPath)]
 		private static extern HF_STATUS GetSizeOfNodeVector(

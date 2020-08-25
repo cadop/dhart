@@ -15,6 +15,7 @@
 #include <HFExceptions.h>
 #include <numeric>
 #include <iostream>
+#include <charconv>
 
 using namespace Eigen;
 using std::vector;
@@ -124,6 +125,100 @@ namespace HF::SpatialStructures {
 
 	}
 
+
+
+	inline float StringToFloat(const std::string& str_to_convert) {
+
+		// As stated in the docs for stod, this will throw if the string you're trying to convert
+		// can't be converted to a number. This will occur when the string is empty, as it is in
+		// the case of a parameter that doesn't exist. 
+		try {
+			return std::stod(str_to_convert);
+		}
+		catch (std::invalid_argument) {
+			// Return -1 to signal that this string could not be converted
+			// to a decimal number
+			return -1;
+		}
+	}
+
+	inline std::vector<float> ConvertStringsToFloat(const std::vector<string>& strings) {
+		// Initialize a vector that's big enough to hold the result for every value in strings
+		std::vector<float> out_floats(strings.size());
+
+		// Iterate through every attribute in strings and convert them to floating point numbers
+		for (int i = 0; i < out_floats.size(); i++)
+			out_floats[i] = StringToFloat(strings[i]);
+
+		// Return output
+		return out_floats;
+	}
+
+	void Graph::AttrToCost(
+		const std::string& node_attribute,
+		const std::string & out_attribute, 
+		Direction gen_using)
+	{
+		// Throw if we don't have this attribute
+		if (!this->HasNodeAttribute(node_attribute))
+			throw std::out_of_range("Node Attribute" + node_attribute + " doesn't exist in the graph!");
+		
+		// Delete the cost set that already exists at out_attribute unless out_attribute is the default cost set
+		// in which case throw because we'd be clearing the entire graph.
+		if (!this->IsDefaultName(out_attribute)) {
+			if (this->HasCostArray(out_attribute))
+				this->ClearCostArrays(out_attribute);
+		}
+		else
+			throw std::out_of_range("Cost Set" + out_attribute + " is the default cost of the graph and can't be overwritten!");
+
+		// Get the costs for this attribute and convert every value to float. In the case that a 
+		// attribute score could not be converted due to not being a numeric value or not being set
+		// in the first place, those values will be set to -1.
+		const auto& scores = ConvertStringsToFloat(this->GetNodeAttributes(node_attribute));
+
+		// Iterate through all nodes in the graph
+		for (const auto& parent : ordered_nodes) {
+
+			// If this parent has no score for this attribute, don't do anything
+			if (scores[parent.id] == -1) continue;
+
+			// Get the subgraph for this node
+			const auto subgraph = this->GetIntEdges(parent.id);
+			// Iterate through every edge of this node
+			for (const IntEdge& edge : subgraph)
+			{
+				// If this child has no score for this attribute, skip it.
+				if (scores[edge.child] == -1) continue;
+
+				// Calculate the cost of this node based on the input direction
+				float cost = -1;
+				switch (gen_using) {
+				case Direction::INCOMING:
+					// If the direction is incoming, then the only cost we care about is the cost of
+					// the node that is being traversed to, the child.
+					cost= scores[edge.child];
+					break;
+				case Direction::BOTH:
+
+					// If BOTH is specified, then we sum the costs of both the parent node and the childn\
+					// node since we care about the costs of both
+					cost= scores[edge.child] + scores[parent.id];
+					break;
+
+				case Direction::OUTGOING:
+					// If this is out going, then the score is entirely determined by the parent node
+					// since it is the node being traversed from. 
+					cost = scores[parent.id];
+					break;
+				}
+
+				// Add it to the graph as an edge for the cost type specified in out_attribute
+				this->addEdge(parent.id, edge.child, cost, out_attribute);
+			}
+		}
+	}
+
 	int Graph::size() const { return ordered_nodes.size(); }
 
 	int Graph::MaxID() const {
@@ -205,8 +300,9 @@ namespace HF::SpatialStructures {
 	{
 		// Ensure that we throw our custom exception if this key doesn't exist
 		if (!this->HasCostArray(key)) 
-			throw NoCost(key.c_str());
+			throw NoCost(key);
 		
+
 		// Get the cost from the cost map
 		return (edge_cost_maps.at(key));
 	}
@@ -410,6 +506,28 @@ namespace HF::SpatialStructures {
 			}
 		}
 		return out_edges;
+	}
+
+	std::vector<IntEdge> Graph::GetIntEdges(int parent) const
+	{
+		// If this node is not in the graph, just return an empty array, since otherwise the following code
+		// will crash in release mode
+		if (parent > this->MaxID()) return std::vector<IntEdge>();
+
+		// Iterate through all of the edges in the graph
+		std::vector<IntEdge> intedges;
+		for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, parent); it; ++it)
+		{
+			// Get the cost and the child of this edge
+			float cost = it.value();
+			int child = it.col();
+
+			// Push it back to our return array
+			intedges.push_back(IntEdge{ child, cost });
+		}
+
+		// Return the edges for this node. 
+		return intedges;
 	}
 
 	/// <summary> Aggregate new_value into out_total using the method specified in agg_type. </summary>
@@ -675,6 +793,11 @@ namespace HF::SpatialStructures {
 		const EdgeCostSet& cost_array = this->GetCostArray(cost_type);
 		const TempMatrix cost_matrix = CreateMappedCSR(this->edge_matrix, cost_array);
 		return cost_matrix;
+	}
+
+	bool Graph::HasNodeAttribute(const std::string& key) const
+	{
+		return this->node_attr_map.count(key) > 0;
 	}
 
 	void Graph::addEdge(const Node& parent, const Node& child, float score, const string & cost_type)
@@ -1078,13 +1201,8 @@ namespace HF::SpatialStructures {
 	}
 
 	void Graph::AddNodeAttribute(int id, std::string attribute, std::string score) {
-		const auto node = NodeFromID(id);
-		bool node_not_found = hasKey(node);
-
-		// This usually would be an error but we're going to eat it for now, since multiple nodes
-		// may be being added. Proper error handling should erase all changes. 
-		if (node_not_found)
-			return;
+		// Check if this id belongs to any node in the graph
+		if (id > this->MaxID()) return;
 
 		/* // requires #include <algorithm>, but not working?
 		std::string lower_cased =
@@ -1177,6 +1295,7 @@ namespace HF::SpatialStructures {
 		auto scores_iterator = scores.begin();
 
 		for (int node_id : id) {
+
 			// We can call AddNodeAttribute for each node_id in id.
 			// If the attribute type name does not exist,
 			// it will be created with the first invocation of AddNodeAttribute.

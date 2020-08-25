@@ -478,6 +478,39 @@ def c_clear_node_attribute(graph_ptr: c_void_p, attr: str) -> None:
 
     return
 
+def C_AttrsToCosts(
+    graph_ptr: c_void_p, attribute_string: str, cost_string: str, direction: int):
+    """Generate a cost set based on a set of node parameters
+
+    Args:
+        graph_ptr (c_void_p): Pointer to the graph to modify
+        attribute_string (str): Attribute to create a new cost set from.]
+        cost_string (str):  Key for the newly generated cost set.direction (Direction): Direction to use for calculating the cost of any edge. example INCOMING will use the cost of the node being traveled to by the edge.
+
+    Raises:
+        KeyError: attribute_string was not the key of any node attribute in the graph
+    """
+
+    # Convert to charp
+    attribute_char = GetStringPtr(attribute_string)
+    cost_char = GetStringPtr(cost_string)
+
+    # Call C++ function
+    error_code = HFPython.GraphAttrsToCosts(
+        graph_ptr, attribute_char, cost_char, c_int(direction)
+    )
+
+    # Check error code
+    if error_code == HF_STATUS.NO_COST:
+        raise KeyError(
+            f"{attribute_string} was not the key of any node parameter in the graph!"
+        )
+
+    assert error_code == HF_STATUS.OK
+
+
+
+
 ### Destructors
 
 def C_DeleteFloatArray(float_ptr: c_void_p):

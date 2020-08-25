@@ -28,6 +28,8 @@ namespace HF {
 		struct Edge;	// Spent like 2 hours reading mangled names 
 						// because I accidentally defined these 
 						// as classes (V) instead of structs (U)
+
+		enum class Direction : int;
 	}
 }
 
@@ -894,5 +896,25 @@ C_INTERFACE ClearAttributeType(HF::SpatialStructures::Graph* g, const char* s);
 	it must be destroyed. (\ref graph_teardown)
 */
 C_INTERFACE GetSizeOfGraph(const HF::SpatialStructures::Graph* g, int* out_size);
+
+
+/*! 
+	\brief Create a cost in the graph based on a set of node parameters
+	
+	\param graph_ptr Graph to perform this operation on
+	\param attr_key Attribute to create a new cost set from.
+	\param cost_string Name of the new cost set.
+	\param dir Direction that the cost of the edge should be calculated in. For example
+			   INCOMING will use the cost of the node being traveled to by the edge. 
+
+	\returns `HF_STATUS::OK` If the cost was successfully added to the graph
+	\returns `HF_STATUS::NOT_FOUND` If `attr_key` is not the key of an already existing
+									node parameter. 
+*/
+C_INTERFACE GraphAttrsToCosts(
+	HF::SpatialStructures::Graph * graph_ptr, 
+	const char * attr_key,
+	const char * cost_string, 
+	HF::SpatialStructures::Direction dir);
 
 /**@}*/

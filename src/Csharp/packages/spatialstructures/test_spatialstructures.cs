@@ -437,9 +437,9 @@ namespace HumanFactors.Tests.SpatialStructures
 
             // Assert that the scores meet our expectations
             Assert.AreEqual(3, attr.Length);
-            Assert.AreEqual(attr[0], "0");
-            Assert.AreEqual(attr[1], "100");
-            Assert.AreEqual(attr[2], "200");
+            Assert.AreEqual("0", attr[0]);
+            Assert.AreEqual("100", attr[1]);
+            Assert.AreEqual("200", attr[2]);
 
             //! [EX_AddNodeAttribute_2]
             // Add another node to the graph
@@ -456,7 +456,7 @@ namespace HumanFactors.Tests.SpatialStructures
             //! [EX_AddNodeAttribute_2]
 
             // And that this is the empty string
-            Assert.AreEqual(attr[3], "");
+            Assert.AreEqual("", attr[3]);
         }
 
         [TestMethod]
@@ -530,6 +530,36 @@ namespace HumanFactors.Tests.SpatialStructures
 
             // ![EX_NumNodes]
             Assert.AreEqual(3, number_of_nodes);
+
+        }
+
+        [TestMethod]
+        public void ConvertAttributes()
+		{
+            // ![EX_ConvertAttributes]
+            
+            // Create a graph and add two edges to create nodes
+            Graph g = new Graph();
+            g.CompressToCSR();
+            g.AddEdge(0, 1, 150);
+            g.AddEdge(0, 2, 100);
+
+            // Create arrays for ids and scores
+            int[] ids = { 0, 1, 2 };
+            string[] scores = { "0", "100", "200" };
+
+            // Add them to the graph
+            g.AddNodeAttribute("Attr", ids, scores);
+
+            // Convert this to an edge cost
+            g.AttrsToCosts("Attr", "new_cost", Direction.BOTH);
+
+            // print results
+            Debug.WriteLine(String.Format("0->1 = {0}, 0->2 = {1}", g.GetCost(0, 1, "new_cost"), g.GetCost(0, 2, "new_cost")));
+
+            // ![EX_ConvertAttributes]
+            Assert.AreEqual(100, g.GetCost(0, 1, "new_cost"));
+            Assert.AreEqual(200, g.GetCost(0, 2, "new_cost"));
 
         }
     }

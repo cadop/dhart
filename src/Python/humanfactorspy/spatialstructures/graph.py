@@ -11,13 +11,17 @@ from humanfactorspy.native_numpy_like import NativeNumpyLike
 from .node import NodeStruct, NodeList
 from . import spatial_structures_native_functions
 
-__all__ = ['CostAggregationType','EdgeSumArray','Graph']
+__all__ = ['CostAggregationType','EdgeSumArray','Graph', 'Direction']
 
 class CostAggregationType(IntEnum):
     SUM = 0
     AVERAGE = 1
     COUNT = 2
-
+    
+class Direction(IntEnum):
+    INCOMING = 0
+    OUTGOING = 1
+    BOTH = 2
 
 class EdgeSumArray(NativeNumpyLike):
     """ Contains the scores for every node based on edges """
@@ -586,3 +590,40 @@ class Graph:
         spatial_structures_native_functions.c_clear_node_attribute(
             self.graph_ptr, attribute
         )
+
+    def attrs_to_costs(self, attribute_string: str, cost_string: str, direction: Direction):
+        """Generate a cost set based on a set of node parameters
+
+        Args:
+            attribute_string (str): Attribute to create a new cost set from.]
+            cost_string (str):  Key for the newly generated cost set. 
+            direction (Direction): Direction to use for calculating the cost of any edge. For example INCOMING will use the cost of the node being traveled to by the edge.
+
+        Raises:
+            KeyError: attribute_string was not the key of any node attribute in the graph
+
+        Examples:
+           >>> g = Graph()
+           >>> g.AddEdgeToGraph(0, 1, 100)
+           >>> g.AddEdgeToGraph(0, 2, 50)
+           >>> g.AddEdgeToGraph(1, 2, 20)
+           >>> csr = g.CompressToCSR()
+           
+           >>> attr = "Test"
+           >>> ids = [0, 1, 2]
+           >>> scores = ["0", "100", "200"]
+           >>> g.add_node_attributes(attr, ids, scores)
+
+           >>> # Get attribute scores from the graph
+           >>> out_attrs = g.get_node_attributes(attr)
+
+           >>> g.attrs_to_costs(attr, "attr_cost", Direction.INCOMING)
+
+           >>> g.GetEdgeCost(1, 2, "attr_cost")
+            200
+        """
+
+        spatial_structures_native_functions.C_AttrsToCosts(
+            self.graph_ptr, attribute_string, cost_string, direction
+        )
+
