@@ -17,6 +17,8 @@ humanfactorspy.spatialstructures
     
     CostAlgorithmKeys
     
+    Direction
+    
     Edge
     
     EdgeSumArray

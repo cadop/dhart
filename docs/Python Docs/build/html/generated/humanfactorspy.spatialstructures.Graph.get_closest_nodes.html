@@ -88,7 +88,7 @@
 <h1>humanfactorspy.spatialstructures.Graph.get_closest_nodes<a class="headerlink" href="#humanfactorspy-spatialstructures-graph-get-closest-nodes" title="Permalink to this headline">¶</a></h1>
 <dl class="py method">
 <dt id="humanfactorspy.spatialstructures.Graph.get_closest_nodes">
-<code class="descclassname">Graph.</code><code class="descname">get_closest_nodes</code><span class="sig-paren">(</span><em><span class="n">p_desired</span></em>, <em><span class="n">x</span><span class="o">=</span><span class="default_value">True</span></em>, <em><span class="n">y</span><span class="o">=</span><span class="default_value">True</span></em>, <em><span class="n">z</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/cadop/HumanMetrics/blob/master/Codebase/HumanFactors/humanfactorspy/..\build\Python\humanfactorspy\spatialstructures\graph.py#L229-L320"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#humanfactorspy.spatialstructures.Graph.get_closest_nodes" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">Graph.</code><code class="descname">get_closest_nodes</code><span class="sig-paren">(</span><em><span class="n">p_desired</span></em>, <em><span class="n">x</span><span class="o">=</span><span class="default_value">True</span></em>, <em><span class="n">y</span><span class="o">=</span><span class="default_value">True</span></em>, <em><span class="n">z</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/cadop/HumanMetrics/blob/master/Codebase/HumanFactors/humanfactorspy/..\build\Python\humanfactorspy\spatialstructures\graph.py#L233-L322"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#humanfactorspy.spatialstructures.Graph.get_closest_nodes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the closet nodes to the input set of points</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -120,49 +120,51 @@ where ndarray is size of number of points passed in p_desired</p>
 <p class="last">In future this should be calling a method in C interface instead of implemented in Python</p>
 </div>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="go">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">humanfactorspy</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">humanfactorspy.geometry</span> <span class="kn">import</span> <span class="n">LoadOBJ</span><span class="p">,</span> <span class="n">CommonRotations</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">humanfactorspy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">humanfactorspy.geometry</span> <span class="kn">import</span> <span class="n">LoadOBJ</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">humanfactorspy.graphgenerator</span> <span class="kn">import</span> <span class="n">GenerateGraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">humanfactorspy.raytracer</span> <span class="kn">import</span> <span class="n">EmbreeBVH</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">humanfactorspy.pathfinding</span> <span class="kn">import</span> <span class="n">DijkstraShortestPath</span>
-<span class="go">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Load BVH</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Load BVH</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">obj_path</span> <span class="o">=</span> <span class="n">humanfactorspy</span><span class="o">.</span><span class="n">get_sample_model</span><span class="p">(</span><span class="s2">&quot;energy_blob_zup.obj&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">loaded_obj</span> <span class="o">=</span> <span class="n">LoadOBJ</span><span class="p">(</span><span class="n">obj_path</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">embree_bvh</span> <span class="o">=</span> <span class="n">EmbreeBVH</span><span class="p">(</span><span class="n">loaded_obj</span><span class="p">)</span>
-<span class="go">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Set graph parameters</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Set graph parameters</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">start_point</span><span class="p">,</span> <span class="n">spacing</span><span class="p">,</span> <span class="n">max_nodes</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="mi">100000</span>
-<span class="go">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Generate the graph</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Generate the graph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span> <span class="o">=</span> <span class="n">GenerateGraph</span><span class="p">(</span><span class="n">embree_bvh</span><span class="p">,</span> <span class="n">start_point</span><span class="p">,</span> <span class="n">spacing</span><span class="p">,</span> <span class="n">max_nodes</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Check closest nodes using single x,y point</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">closest_node</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">get_closest_nodes</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span><span class="mi">0</span><span class="p">]),</span> <span class="n">z</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Closest Node: &quot;</span><span class="p">,</span> <span class="n">closest_node</span><span class="p">)</span>
-<span class="go">Closest Node:  1795</span>
+<span class="go">Closest Node:  2421</span>
 </pre></div>
 </div>
 <p>Check closest nodes using multiple x,y points</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">closest_node</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">get_closest_nodes</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">30</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">]]),</span> <span class="n">z</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Closest Node: &quot;</span><span class="p">,</span> <span class="n">closest_node</span><span class="p">)</span>
-<span class="go">Closest Node:  [1795 2513]</span>
+<span class="go">Closest Node:  [2421 2450]</span>
 </pre></div>
 </div>
 <p>Check closest nodes using single x,y,z point</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">closest_node</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">get_closest_nodes</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Closest Node: &quot;</span><span class="p">,</span> <span class="n">closest_node</span><span class="p">)</span>
-<span class="go">Closest Node:  1796</span>
+<span class="go">Closest Node:  2422</span>
 </pre></div>
 </div>
 <p>Check closest nodes using multiple x,y,z points</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">closest_node</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">get_closest_nodes</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">30</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">0</span><span class="p">]]))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Closest Node: &quot;</span><span class="p">,</span> <span class="n">closest_node</span><span class="p">)</span>
-<span class="go">Closest Node:  [1796 2513]</span>
+<span class="go">Closest Node:  [2422 2450]</span>
 </pre></div>
 </div>
 </dd></dl>

@@ -23,6 +23,7 @@ humanfactorspy.spatialstructures.Graph
             ~Graph.GetNodeID
             ~Graph.NumNodes
             ~Graph.add_node_attributes
+            ~Graph.attrs_to_costs
             ~Graph.clear_node_attribute
             ~Graph.getNodes
             ~Graph.get_closest_nodes

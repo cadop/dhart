@@ -117,15 +117,12 @@
                         <span class="n">up_step</span><span class="p">,</span><span class="n">up_slope</span><span class="p">,</span><span class="n">down_step</span><span class="p">,</span><span class="n">down_slope</span><span class="p">,</span>
                         <span class="n">max_step_connections</span><span class="p">,</span> <span class="n">cores</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="c1"># Convert the graph to a CSR</span>
-<span class="n">csr_graph</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">CompressToCSR</span><span class="p">()</span>
-
 <span class="c1"># Get the nodes of the graph as a list of x,y,z,type,id tuples</span>
 <span class="n">nodes</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">getNodes</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">))</span>
 
 <span class="n">height</span> <span class="o">=</span> <span class="mf">1.7</span> <span class="c1"># Set a height offset to cast rays from the points</span>
-<span class="n">ray_count</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1"># Set the number of rays to use per node</span>
+<span class="n">ray_count</span> <span class="o">=</span> <span class="mi">1500</span> <span class="c1"># Set the number of rays to use per node</span>
 <span class="n">scores</span> <span class="o">=</span> <span class="n">SphericalViewAnalysisAggregate</span><span class="p">(</span><span class="n">bvh</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">ray_count</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span>
                                                     <span class="n">upward_fov</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">downward_fov</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
                                                     <span class="n">agg_type</span><span class="o">=</span><span class="n">AggregationType</span><span class="o">.</span><span class="n">AVERAGE</span><span class="p">)</span>

@@ -686,6 +686,28 @@ c_void_p: Pointer to the vector’s underlying data</td>
 </dd></dl>
 
 <dl class="py function">
+<dt id="humanfactorspy.spatialstructures.spatial_structures_native_functions.C_AttrsToCosts">
+<code class="descclassname">humanfactorspy.spatialstructures.spatial_structures_native_functions.</code><code class="descname">C_AttrsToCosts</code><span class="sig-paren">(</span><em><span class="n">graph_ptr</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" title="(in Python v3.8)">ctypes.c_void_p</a></span></em>, <em><span class="n">attribute_string</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em>, <em><span class="n">cost_string</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em>, <em><span class="n">direction</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/cadop/HumanMetrics/blob/master/Codebase/HumanFactors/humanfactorspy/..\build\Python\humanfactorspy\spatialstructures\spatial_structures_native_functions.py#L481-L509"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#humanfactorspy.spatialstructures.spatial_structures_native_functions.C_AttrsToCosts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a cost set based on a set of node parameters</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>graph_ptr</strong> (<em>c_void_p</em>) – Pointer to the graph to modify</li>
+<li><strong>attribute_string</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Attribute to create a new cost set from.]</li>
+<li><strong>cost_string</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – Key for the newly generated cost set.direction (Direction): Direction to use for calculating the cost of any edge. example INCOMING will use the cost of the node being traveled to by the edge.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.8)"><strong>KeyError</strong></a> – attribute_string was not the key of any node attribute in the graph</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="py function">
 <dt id="humanfactorspy.spatialstructures.spatial_structures_native_functions.C_ClearGraph">
 <code class="descclassname">humanfactorspy.spatialstructures.spatial_structures_native_functions.</code><code class="descname">C_ClearGraph</code><span class="sig-paren">(</span><em><span class="n">graph_ptr</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" title="(in Python v3.8)">ctypes.c_void_p</a></span></em>, <em><span class="n">cost_type</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">''</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)">None</a><a class="reference external" href="https://github.com/cadop/HumanMetrics/blob/master/Codebase/HumanFactors/humanfactorspy/..\build\Python\humanfactorspy\spatialstructures\spatial_structures_native_functions.py#L329-L345"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#humanfactorspy.spatialstructures.spatial_structures_native_functions.C_ClearGraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Clear graph of a given cost type</p>
@@ -774,13 +796,13 @@ string, use the graph’s default cost type.</li>
 
 <dl class="py function">
 <dt id="humanfactorspy.spatialstructures.spatial_structures_native_functions.DestroyGraph">
-<code class="descclassname">humanfactorspy.spatialstructures.spatial_structures_native_functions.</code><code class="descname">DestroyGraph</code><span class="sig-paren">(</span><em><span class="n">graph_ptr</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" title="(in Python v3.8)">ctypes.c_void_p</a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/cadop/HumanMetrics/blob/master/Codebase/HumanFactors/humanfactorspy/..\build\Python\humanfactorspy\spatialstructures\spatial_structures_native_functions.py#L486-L488"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#humanfactorspy.spatialstructures.spatial_structures_native_functions.DestroyGraph" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">humanfactorspy.spatialstructures.spatial_structures_native_functions.</code><code class="descname">DestroyGraph</code><span class="sig-paren">(</span><em><span class="n">graph_ptr</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" title="(in Python v3.8)">ctypes.c_void_p</a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/cadop/HumanMetrics/blob/master/Codebase/HumanFactors/humanfactorspy/..\build\Python\humanfactorspy\spatialstructures\spatial_structures_native_functions.py#L519-L521"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#humanfactorspy.spatialstructures.spatial_structures_native_functions.DestroyGraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Call the destructor for a list of nodes</p>
 </dd></dl>
 
 <dl class="py function">
 <dt id="humanfactorspy.spatialstructures.spatial_structures_native_functions.DestroyNodes">
-<code class="descclassname">humanfactorspy.spatialstructures.spatial_structures_native_functions.</code><code class="descname">DestroyNodes</code><span class="sig-paren">(</span><em><span class="n">node_list_ptr</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" title="(in Python v3.8)">ctypes.c_void_p</a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/cadop/HumanMetrics/blob/master/Codebase/HumanFactors/humanfactorspy/..\build\Python\humanfactorspy\spatialstructures\spatial_structures_native_functions.py#L491-L493"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#humanfactorspy.spatialstructures.spatial_structures_native_functions.DestroyNodes" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">humanfactorspy.spatialstructures.spatial_structures_native_functions.</code><code class="descname">DestroyNodes</code><span class="sig-paren">(</span><em><span class="n">node_list_ptr</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" title="(in Python v3.8)">ctypes.c_void_p</a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/cadop/HumanMetrics/blob/master/Codebase/HumanFactors/humanfactorspy/..\build\Python\humanfactorspy\spatialstructures\spatial_structures_native_functions.py#L524-L526"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#humanfactorspy.spatialstructures.spatial_structures_native_functions.DestroyNodes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Call the destructor for a list of nodes</p>
 </dd></dl>
 
