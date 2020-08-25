@@ -23,8 +23,6 @@ class Direction(IntEnum):
     OUTGOING = 1
     BOTH = 2
 
-
-
 class EdgeSumArray(NativeNumpyLike):
     """ Contains the scores for every node based on edges """
 
@@ -603,6 +601,26 @@ class Graph:
 
         Raises:
             KeyError: attribute_string was not the key of any node attribute in the graph
+
+        Examples:
+           >>> g = Graph()
+           >>> g.AddEdgeToGraph(0, 1, 100)
+           >>> g.AddEdgeToGraph(0, 2, 50)
+           >>> g.AddEdgeToGraph(1, 2, 20)
+           >>> csr = g.CompressToCSR()
+           
+           >>> attr = "Test"
+           >>> ids = [0, 1, 2]
+           >>> scores = ["0", "100", "200"]
+           >>> g.add_node_attributes(attr, ids, scores)
+
+           >>> # Get attribute scores from the graph
+           >>> out_attrs = g.get_node_attributes(attr)
+
+           >>> g.attrs_to_costs(attr, "attr_cost", Direction.INCOMING)
+
+           >>> g.GetEdgeCost(1, 2, "attr_cost")
+            200
         """
 
         spatial_structures_native_functions.C_AttrsToCosts(
