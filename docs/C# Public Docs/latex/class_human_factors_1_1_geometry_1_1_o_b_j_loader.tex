@@ -1,0 +1,181 @@
+\hypertarget{class_human_factors_1_1_geometry_1_1_o_b_j_loader}{}\doxysection{Human\+Factors.\+Geometry.\+O\+B\+J\+Loader Class Reference}
+\label{class_human_factors_1_1_geometry_1_1_o_b_j_loader}\index{HumanFactors.Geometry.OBJLoader@{HumanFactors.Geometry.OBJLoader}}
+
+
+Load mesh geometry from O\+BJ files on disk.  
+
+
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_mesh_info}{Mesh\+Info}} \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_o_b_j_loader_a098857909670796a533833086d753fb2}{Load\+O\+BJ}} (string path, float xrot=0, float yrot=0, float zrot=0)
+\begin{DoxyCompactList}\small\item\em Load an obj from the O\+BJ file at the given filepath. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_mesh_info}{Mesh\+Info}}\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_o_b_j_loader_a547be54200d1c611af119660ce97ef13}{Load\+O\+B\+J\+Submeshes}} (string path, \mbox{\hyperlink{namespace_human_factors_1_1_geometry_ae1dc76f9bc90183da6add631332cb1fd}{G\+R\+O\+U\+P\+\_\+\+M\+E\+T\+H\+OD}} gm, float xrot=0, float yrot=0, float zrot=0)
+\begin{DoxyCompactList}\small\item\em Load an obj from the O\+BJ file at the given filepath. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_mesh_info}{Mesh\+Info}} \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_o_b_j_loader_a3901e6fb42296a1ace65f52aefb83ff3}{Load\+O\+BJ}} (string path, \mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}} rotation)
+\begin{DoxyCompactList}\small\item\em Load an obj from the O\+BJ file at the given filepath. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Load mesh geometry from O\+BJ files on disk. 
+
+\begin{DoxyRemark}{Remarks}
+Internally is doing the same work as calling \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_mesh_info}{Mesh\+Info}}\textquotesingle{}s constructor, so loaders for other filetypes can be created. 
+\end{DoxyRemark}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_human_factors_1_1_geometry_1_1_o_b_j_loader_a098857909670796a533833086d753fb2}\label{class_human_factors_1_1_geometry_1_1_o_b_j_loader_a098857909670796a533833086d753fb2}} 
+\index{HumanFactors.Geometry.OBJLoader@{HumanFactors.Geometry.OBJLoader}!LoadOBJ@{LoadOBJ}}
+\index{LoadOBJ@{LoadOBJ}!HumanFactors.Geometry.OBJLoader@{HumanFactors.Geometry.OBJLoader}}
+\doxysubsubsection{\texorpdfstring{LoadOBJ()}{LoadOBJ()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_mesh_info}{Mesh\+Info}} Human\+Factors.\+Geometry.\+O\+B\+J\+Loader.\+Load\+O\+BJ (\begin{DoxyParamCaption}\item[{string}]{path,  }\item[{float}]{xrot = {\ttfamily 0},  }\item[{float}]{yrot = {\ttfamily 0},  }\item[{float}]{zrot = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Load an obj from the O\+BJ file at the given filepath. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Path to a valid O\+BJ file. \\
+\hline
+{\em xrot} & Degrees to rotate the mesh on the x axis. \\
+\hline
+{\em yrot} & Degrees to rotate the mesh on the y axis. \\
+\hline
+{\em zrot} & Degrees to rotate the mesh on the z axis.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An instance of \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_mesh_info}{Mesh\+Info}} containing the mesh loaded from the O\+BJ at path.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em System.\+I\+O.\+File\+Not\+Found\+Exception} & No file was found at path. \\
+\hline
+{\em \mbox{\hyperlink{class_human_factors_1_1_exceptions_1_1_invalid_mesh_exception}{Human\+Factors.\+Exceptions.\+Invalid\+Mesh\+Exception}}} & The file at the path was not a valid O\+BJ.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyRemark}{Remarks}
+Use the other overload if you want to use a Common\+Rotation on the mesh.
+\end{DoxyRemark}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Loading a mesh from plane.obj with no rotation.}}
+\DoxyCodeLine{MeshInfo MI = OBJLoader.LoadOBJ(\textcolor{stringliteral}{"plane.obj"});}
+\end{DoxyCode}
+ 
+
+Referenced by String\+To\+Edge\+Cost.\+Main().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_human_factors_1_1_geometry_1_1_o_b_j_loader_a098857909670796a533833086d753fb2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_human_factors_1_1_geometry_1_1_o_b_j_loader_a3901e6fb42296a1ace65f52aefb83ff3}\label{class_human_factors_1_1_geometry_1_1_o_b_j_loader_a3901e6fb42296a1ace65f52aefb83ff3}} 
+\index{HumanFactors.Geometry.OBJLoader@{HumanFactors.Geometry.OBJLoader}!LoadOBJ@{LoadOBJ}}
+\index{LoadOBJ@{LoadOBJ}!HumanFactors.Geometry.OBJLoader@{HumanFactors.Geometry.OBJLoader}}
+\doxysubsubsection{\texorpdfstring{LoadOBJ()}{LoadOBJ()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_mesh_info}{Mesh\+Info}} Human\+Factors.\+Geometry.\+O\+B\+J\+Loader.\+Load\+O\+BJ (\begin{DoxyParamCaption}\item[{string}]{path,  }\item[{\mbox{\hyperlink{struct_human_factors_1_1_vector3_d}{Vector3D}}}]{rotation }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Load an obj from the O\+BJ file at the given filepath. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Path to a valid O\+BJ file. \\
+\hline
+{\em rotation} & Degrees to rotate the mesh in the x,y, and z direction after loading.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An instance of \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_mesh_info}{Mesh\+Info}} containing the mesh loaded from the O\+BJ at path.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em System.\+I\+O.\+File\+Not\+Found\+Exception} & No file was found at path. \\
+\hline
+{\em \mbox{\hyperlink{class_human_factors_1_1_exceptions_1_1_invalid_mesh_exception}{Human\+Factors.\+Exceptions.\+Invalid\+Mesh\+Exception}}} & The file at the path did not represent a valid O\+BJ.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyRemark}{Remarks}
+The rotation parameter can be used with the rotations in \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_common_rotations}{Common\+Rotations}} to easily perform common rotations on meshes. This is useful if you\textquotesingle{}re loading a mesh that is Y-\/up and you need to convert it to Z-\/up for use in the Graoh\+Generator.
+\end{DoxyRemark}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Loading a mesh from plane.obj with no rotation.}}
+\DoxyCodeLine{MeshInfo MI = OBJLoader.LoadOBJ(\textcolor{stringliteral}{"plane.obj"});}
+\end{DoxyCode}
+ \mbox{\Hypertarget{class_human_factors_1_1_geometry_1_1_o_b_j_loader_a547be54200d1c611af119660ce97ef13}\label{class_human_factors_1_1_geometry_1_1_o_b_j_loader_a547be54200d1c611af119660ce97ef13}} 
+\index{HumanFactors.Geometry.OBJLoader@{HumanFactors.Geometry.OBJLoader}!LoadOBJSubmeshes@{LoadOBJSubmeshes}}
+\index{LoadOBJSubmeshes@{LoadOBJSubmeshes}!HumanFactors.Geometry.OBJLoader@{HumanFactors.Geometry.OBJLoader}}
+\doxysubsubsection{\texorpdfstring{LoadOBJSubmeshes()}{LoadOBJSubmeshes()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_mesh_info}{Mesh\+Info}} \mbox{[}$\,$\mbox{]} Human\+Factors.\+Geometry.\+O\+B\+J\+Loader.\+Load\+O\+B\+J\+Submeshes (\begin{DoxyParamCaption}\item[{string}]{path,  }\item[{\mbox{\hyperlink{namespace_human_factors_1_1_geometry_ae1dc76f9bc90183da6add631332cb1fd}{G\+R\+O\+U\+P\+\_\+\+M\+E\+T\+H\+OD}}}]{gm,  }\item[{float}]{xrot = {\ttfamily 0},  }\item[{float}]{yrot = {\ttfamily 0},  }\item[{float}]{zrot = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Load an obj from the O\+BJ file at the given filepath. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Path to a valid O\+BJ file. \\
+\hline
+{\em gm} & Method of grouping the O\+BJ into submeshes \\
+\hline
+{\em xrot} & Degrees to rotate the mesh on the x axis. \\
+\hline
+{\em yrot} & Degrees to rotate the mesh on the y axis. \\
+\hline
+{\em zrot} & Degrees to rotate the mesh on the z axis.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+All submeshes in the obj file at {\ttfamily path} grouped by {\ttfamily gm}
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em System.\+I\+O.\+File\+Not\+Found\+Exception} & No file was found at path. \\
+\hline
+{\em \mbox{\hyperlink{class_human_factors_1_1_exceptions_1_1_invalid_mesh_exception}{Human\+Factors.\+Exceptions.\+Invalid\+Mesh\+Exception}}} & The file at the path was not a valid O\+BJ.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{namespace_human_factors_1_1_geometry_ae1dc76f9bc90183da6add631332cb1fd}{G\+R\+O\+U\+P\+\_\+\+M\+E\+T\+H\+OD}} to see the different ways of grouping the different geometry in a .obj file
+\end{DoxySeeAlso}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{            }
+\DoxyCodeLine{            \textcolor{comment}{// Load submeshes}}
+\DoxyCodeLine{            MeshInfo[] submeshes = OBJLoader.LoadOBJSubmeshes(\textcolor{stringliteral}{"ExampleModels/sponza.obj"}, \mbox{\hyperlink{namespace_human_factors_1_1_geometry_ae1dc76f9bc90183da6add631332cb1fd}{GROUP\_METHOD}}.BY\_GROUP);}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Print the first five}}
+\DoxyCodeLine{            \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < 5; i++)}
+\DoxyCodeLine{                Debug.WriteLine(submeshes[i]);}
+\DoxyCodeLine{}
+\end{DoxyCodeInclude}
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Name: arcs\_floor, ID: 0, Verts: 150, Triangles: 192}
+\DoxyCodeLine{Name: arcs\_03, ID: 1, Verts: 750, Triangles: 1344}
+\DoxyCodeLine{Name: object32, ID: 2, Verts: 3190, Triangles: 4784}
+\DoxyCodeLine{Name: object31, ID: 3, Verts: 3454, Triangles: 5264}
+\DoxyCodeLine{Name: pillar\_cor, ID: 4, Verts: 3478, Triangles: 5312}
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+
+\begin{DoxyCode}{0}
+\end{DoxyCode}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Csharp/packages/geometry/src/O\+B\+J\+Loader.\+cs\end{DoxyCompactItemize}

@@ -1,0 +1,288 @@
+\hypertarget{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h}{}\doxysection{Human\+Factors.\+Ray\+Tracing.\+Embree\+B\+VH Class Reference}
+\label{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h}\index{HumanFactors.RayTracing.EmbreeBVH@{HumanFactors.RayTracing.EmbreeBVH}}
+
+
+A Bounding Volume Hierarchy for the \mbox{\hyperlink{class_human_factors_1_1_ray_tracing_1_1_embree_raytracer}{Embree\+Raytracer}}.  
+
+
+
+
+Inheritance diagram for Human\+Factors.\+Ray\+Tracing.\+Embree\+B\+VH\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=215pt]{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Human\+Factors.\+Ray\+Tracing.\+Embree\+B\+VH\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=292pt]{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_a19eccce09b0701d3da27fad138656585}{Embree\+B\+VH}} (\mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_mesh_info}{Mesh\+Info}} MI, bool use\+\_\+precise=false)
+\begin{DoxyCompactList}\small\item\em Generate a B\+VH for an instance of Mesh\+Info. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_a738510fcc29c83190c33673c14f6173b}{Embree\+B\+VH}} (\mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_mesh_info}{Mesh\+Info}}\mbox{[}$\,$\mbox{]} MI)
+\begin{DoxyCompactList}\small\item\em Construct a B\+VH from an array of meshes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_aeb7347e829fd81d6da236e1ca8852f09}{Add\+Mesh}} (\mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_mesh_info}{Mesh\+Info}} MI)
+\begin{DoxyCompactList}\small\item\em Add a new mesh to the B\+VH. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_a0934caa038f71f5c3fa1bc0993ea202b}{Add\+Mesh}} (\mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_mesh_info}{Mesh\+Info}}\mbox{[}$\,$\mbox{]} MI)
+\begin{DoxyCompactList}\small\item\em Multiple new meshes to the B\+VH. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+override bool \mbox{\hyperlink{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_a9ece3f96ea62288bb7875ac37e037303}{Release\+Handle}} ()
+\begin{DoxyCompactList}\small\item\em Free the native memory managed by this class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+A Bounding Volume Hierarchy for the \mbox{\hyperlink{class_human_factors_1_1_ray_tracing_1_1_embree_raytracer}{Embree\+Raytracer}}. 
+
+Upon calling the constructor for this class, a Bounding Volume Hierarchy is generated for the \mbox{\hyperlink{class_human_factors_1_1_ray_tracing_1_1_embree_raytracer}{Ray\+Tracing.\+Embree\+Raytracer}}. Without this structure, the raytracer cannot be used.
+
+\begin{DoxyRemark}{Remarks}
+A more detailed description of Embree\textquotesingle{}s B\+VH is available in intel\textquotesingle{}s paper\+: Embree\+: A Kernel Framework for Efficient C\+PU Ray Tracing \href{http://cseweb.ucsd.edu/~ravir/274/15/papers/a143-wald.pdf}{\texttt{ http\+://cseweb.\+ucsd.\+edu/$\sim$ravir/274/15/papers/a143-\/wald.\+pdf}}.
+\end{DoxyRemark}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_human_factors_1_1_ray_tracing_1_1_embree_raytracer}{Embree\+Raytracer}} for functions to use this B\+VH for ray intersections. 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_a19eccce09b0701d3da27fad138656585}\label{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_a19eccce09b0701d3da27fad138656585}} 
+\index{HumanFactors.RayTracing.EmbreeBVH@{HumanFactors.RayTracing.EmbreeBVH}!EmbreeBVH@{EmbreeBVH}}
+\index{EmbreeBVH@{EmbreeBVH}!HumanFactors.RayTracing.EmbreeBVH@{HumanFactors.RayTracing.EmbreeBVH}}
+\doxysubsubsection{\texorpdfstring{EmbreeBVH()}{EmbreeBVH()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Human\+Factors.\+Ray\+Tracing.\+Embree\+B\+V\+H.\+Embree\+B\+VH (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_mesh_info}{Mesh\+Info}}}]{MI,  }\item[{bool}]{use\+\_\+precise = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Generate a B\+VH for an instance of Mesh\+Info. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em MI} & Mesh to generate the B\+VH from. \\
+\hline
+{\em use\+\_\+precise} & Increase the accuracy of all ray intersections at the cost of performance.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & Embree failed to create a B\+VH for the given mesh.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Load an OBJ from a filepath  into a new meshinfo instance}}
+\DoxyCodeLine{            \textcolor{keywordtype}{string} good\_mesh\_path = \textcolor{stringliteral}{"ExampleModels/plane.obj"};}
+\DoxyCodeLine{            MeshInfo Mesh = OBJLoader.LoadOBJ(good\_mesh\_path, CommonRotations.Yup\_To\_Zup);}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Construct a BVH from the mesh}}
+\DoxyCodeLine{            \mbox{\hyperlink{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_a19eccce09b0701d3da27fad138656585}{EmbreeBVH}} BVH = \textcolor{keyword}{new} \mbox{\hyperlink{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_a19eccce09b0701d3da27fad138656585}{EmbreeBVH}}(Mesh);}
+\DoxyCodeLine{}
+\end{DoxyCodeInclude}
+
+\end{DoxyParagraph}
+\mbox{\Hypertarget{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_a738510fcc29c83190c33673c14f6173b}\label{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_a738510fcc29c83190c33673c14f6173b}} 
+\index{HumanFactors.RayTracing.EmbreeBVH@{HumanFactors.RayTracing.EmbreeBVH}!EmbreeBVH@{EmbreeBVH}}
+\index{EmbreeBVH@{EmbreeBVH}!HumanFactors.RayTracing.EmbreeBVH@{HumanFactors.RayTracing.EmbreeBVH}}
+\doxysubsubsection{\texorpdfstring{EmbreeBVH()}{EmbreeBVH()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Human\+Factors.\+Ray\+Tracing.\+Embree\+B\+V\+H.\+Embree\+B\+VH (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_mesh_info}{Mesh\+Info}}\mbox{[}$\,$\mbox{]}}]{MI }\end{DoxyParamCaption})}
+
+
+
+Construct a B\+VH from an array of meshes. 
+
+\textbackslash{}params MI Meshes to build the B\+VH from. 
+
+References Human\+Factors.\+Native\+Utils.\+Native\+Object.\+pressure, and Human\+Factors.\+Native\+Utils.\+Native\+Object.\+Update\+Pressure().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_a738510fcc29c83190c33673c14f6173b_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_aeb7347e829fd81d6da236e1ca8852f09}\label{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_aeb7347e829fd81d6da236e1ca8852f09}} 
+\index{HumanFactors.RayTracing.EmbreeBVH@{HumanFactors.RayTracing.EmbreeBVH}!AddMesh@{AddMesh}}
+\index{AddMesh@{AddMesh}!HumanFactors.RayTracing.EmbreeBVH@{HumanFactors.RayTracing.EmbreeBVH}}
+\doxysubsubsection{\texorpdfstring{AddMesh()}{AddMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Human\+Factors.\+Ray\+Tracing.\+Embree\+B\+V\+H.\+Add\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_mesh_info}{Mesh\+Info}}}]{MI }\end{DoxyParamCaption})}
+
+
+
+Add a new mesh to the B\+VH. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em MI} & Meshinfo to add to this bvh. The ID of this Mesh\+Info will be updated if that ID is already occupied by another mesh in the B\+VH.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Example}
+Demonstrating that the B\+VH changes after the addition of new meshes.
+\end{DoxyParagraph}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Load a lot of submeshes from sponza}}
+\DoxyCodeLine{            var MeshInfos = OBJLoader.LoadOBJSubmeshes(\textcolor{stringliteral}{"ExampleModels/sponza.obj"}, \mbox{\hyperlink{namespace_human_factors_1_1_geometry_ae1dc76f9bc90183da6add631332cb1fd}{GROUP\_METHOD}}.BY\_GROUP);}
+\DoxyCodeLine{            var Plane = OBJLoader.LoadOBJ(\textcolor{stringliteral}{"ExampleModels/plane.obj"});}
+\DoxyCodeLine{            }
+\DoxyCodeLine{            \textcolor{comment}{// Construct a BVH from the plane}}
+\DoxyCodeLine{            \mbox{\hyperlink{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_a19eccce09b0701d3da27fad138656585}{EmbreeBVH}} bvh = \textcolor{keyword}{new} \mbox{\hyperlink{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_a19eccce09b0701d3da27fad138656585}{EmbreeBVH}}(Plane);}
+\DoxyCodeLine{           }
+\DoxyCodeLine{            \textcolor{comment}{// Cast rays and print the results}}
+\DoxyCodeLine{            Debug.WriteLine(\textcolor{stringliteral}{"-\/-\/-\/ Just Plane-\/-\/-\/"});}
+\DoxyCodeLine{            Vector3D[] origins = \{ \textcolor{keyword}{new} Vector3D(1, 1, 1), \textcolor{keyword}{new} Vector3D(1, 1, 1) \};}
+\DoxyCodeLine{            Vector3D[] directions = \{ \textcolor{keyword}{new} Vector3D(0, 0, -\/1), \textcolor{keyword}{new} Vector3D(0, -\/1, 0) \};}
+\DoxyCodeLine{            \textcolor{keywordtype}{bool}[] results = EmbreeRaytracer.IntersectOccluded(bvh, origins, directions);}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{keywordtype}{string} out\_str = directions[0].ToString() + (results[0] ? \textcolor{stringliteral}{"Intersected"} : \textcolor{stringliteral}{"Did not Intersect"}) + \textcolor{stringliteral}{"\(\backslash\)n"};}
+\DoxyCodeLine{            out\_str += directions[1].ToString() + (results[1] ? \textcolor{stringliteral}{"Intersected"} : \textcolor{stringliteral}{"Did not Intersect"});}
+\DoxyCodeLine{            Debug.WriteLine(out\_str);}
+\DoxyCodeLine{            }
+\DoxyCodeLine{            \textcolor{comment}{// Add meshes to the BVH}}
+\DoxyCodeLine{            bvh.AddMesh(MeshInfos);}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Cast rays again and see if the second ray connects}}
+\DoxyCodeLine{            Debug.WriteLine(\textcolor{stringliteral}{"-\/-\/-\/ After Addition-\/-\/-\/"});}
+\DoxyCodeLine{            \textcolor{keywordtype}{bool}[] post\_addition\_results = EmbreeRaytracer.IntersectOccluded(bvh, origins, directions);}
+\DoxyCodeLine{            \textcolor{keywordtype}{string} post\_addition\_out\_str = directions[0].ToString() + (post\_addition\_results[0] ? \textcolor{stringliteral}{"Intersected"} : \textcolor{stringliteral}{"Did not Intersect"}) + \textcolor{stringliteral}{"\(\backslash\)n"};}
+\DoxyCodeLine{            post\_addition\_out\_str += directions[1].ToString() + (post\_addition\_results[1] ? \textcolor{stringliteral}{"Intersected"} : \textcolor{stringliteral}{"Did not Intersect"});}
+\DoxyCodeLine{}
+\DoxyCodeLine{            Debug.WriteLine(post\_addition\_out\_str);}
+\DoxyCodeLine{}
+\end{DoxyCodeInclude}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ -\/-\/-\/ Just Plane-\/-\/-\/}
+\DoxyCodeLine{(0, 0, -\/1)Did not Intersect}
+\DoxyCodeLine{(0, -\/1, 0)Intersected}
+\DoxyCodeLine{-\/-\/-\/ After Addition-\/-\/-\/}
+\DoxyCodeLine{(0, 0, -\/1)Intersected}
+\DoxyCodeLine{(0, -\/1, 0)Intersected}
+\end{DoxyCode}
+ 
+
+References Human\+Factors.\+Native\+Utils.\+Native\+Object.\+pressure, and Human\+Factors.\+Native\+Utils.\+Native\+Object.\+Update\+Pressure().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_aeb7347e829fd81d6da236e1ca8852f09_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_a0934caa038f71f5c3fa1bc0993ea202b}\label{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_a0934caa038f71f5c3fa1bc0993ea202b}} 
+\index{HumanFactors.RayTracing.EmbreeBVH@{HumanFactors.RayTracing.EmbreeBVH}!AddMesh@{AddMesh}}
+\index{AddMesh@{AddMesh}!HumanFactors.RayTracing.EmbreeBVH@{HumanFactors.RayTracing.EmbreeBVH}}
+\doxysubsubsection{\texorpdfstring{AddMesh()}{AddMesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Human\+Factors.\+Ray\+Tracing.\+Embree\+B\+V\+H.\+Add\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_mesh_info}{Mesh\+Info}}\mbox{[}$\,$\mbox{]}}]{MI }\end{DoxyParamCaption})}
+
+
+
+Multiple new meshes to the B\+VH. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em MI} & Meshinfo to add to this bvh. The ID of this Mesh\+Info will be updated if that ID is already occupied by another mesh in the B\+VH.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Example}
+Demonstrating that the B\+VH changes after the addition of new meshes.
+\end{DoxyParagraph}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Load a lot of submeshes from sponza}}
+\DoxyCodeLine{            var MeshInfos = OBJLoader.LoadOBJSubmeshes(\textcolor{stringliteral}{"ExampleModels/sponza.obj"}, \mbox{\hyperlink{namespace_human_factors_1_1_geometry_ae1dc76f9bc90183da6add631332cb1fd}{GROUP\_METHOD}}.BY\_GROUP);}
+\DoxyCodeLine{            var Plane = OBJLoader.LoadOBJ(\textcolor{stringliteral}{"ExampleModels/plane.obj"});}
+\DoxyCodeLine{            }
+\DoxyCodeLine{            \textcolor{comment}{// Construct a BVH from the plane}}
+\DoxyCodeLine{            \mbox{\hyperlink{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_a19eccce09b0701d3da27fad138656585}{EmbreeBVH}} bvh = \textcolor{keyword}{new} \mbox{\hyperlink{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_a19eccce09b0701d3da27fad138656585}{EmbreeBVH}}(Plane);}
+\DoxyCodeLine{           }
+\DoxyCodeLine{            \textcolor{comment}{// Cast rays and print the results}}
+\DoxyCodeLine{            Debug.WriteLine(\textcolor{stringliteral}{"-\/-\/-\/ Just Plane-\/-\/-\/"});}
+\DoxyCodeLine{            Vector3D[] origins = \{ \textcolor{keyword}{new} Vector3D(1, 1, 1), \textcolor{keyword}{new} Vector3D(1, 1, 1) \};}
+\DoxyCodeLine{            Vector3D[] directions = \{ \textcolor{keyword}{new} Vector3D(0, 0, -\/1), \textcolor{keyword}{new} Vector3D(0, -\/1, 0) \};}
+\DoxyCodeLine{            \textcolor{keywordtype}{bool}[] results = EmbreeRaytracer.IntersectOccluded(bvh, origins, directions);}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{keywordtype}{string} out\_str = directions[0].ToString() + (results[0] ? \textcolor{stringliteral}{"Intersected"} : \textcolor{stringliteral}{"Did not Intersect"}) + \textcolor{stringliteral}{"\(\backslash\)n"};}
+\DoxyCodeLine{            out\_str += directions[1].ToString() + (results[1] ? \textcolor{stringliteral}{"Intersected"} : \textcolor{stringliteral}{"Did not Intersect"});}
+\DoxyCodeLine{            Debug.WriteLine(out\_str);}
+\DoxyCodeLine{            }
+\DoxyCodeLine{            \textcolor{comment}{// Add meshes to the BVH}}
+\DoxyCodeLine{            bvh.AddMesh(MeshInfos);}
+\DoxyCodeLine{}
+\DoxyCodeLine{            \textcolor{comment}{// Cast rays again and see if the second ray connects}}
+\DoxyCodeLine{            Debug.WriteLine(\textcolor{stringliteral}{"-\/-\/-\/ After Addition-\/-\/-\/"});}
+\DoxyCodeLine{            \textcolor{keywordtype}{bool}[] post\_addition\_results = EmbreeRaytracer.IntersectOccluded(bvh, origins, directions);}
+\DoxyCodeLine{            \textcolor{keywordtype}{string} post\_addition\_out\_str = directions[0].ToString() + (post\_addition\_results[0] ? \textcolor{stringliteral}{"Intersected"} : \textcolor{stringliteral}{"Did not Intersect"}) + \textcolor{stringliteral}{"\(\backslash\)n"};}
+\DoxyCodeLine{            post\_addition\_out\_str += directions[1].ToString() + (post\_addition\_results[1] ? \textcolor{stringliteral}{"Intersected"} : \textcolor{stringliteral}{"Did not Intersect"});}
+\DoxyCodeLine{}
+\DoxyCodeLine{            Debug.WriteLine(post\_addition\_out\_str);}
+\DoxyCodeLine{}
+\end{DoxyCodeInclude}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ -\/-\/-\/ Just Plane-\/-\/-\/}
+\DoxyCodeLine{(0, 0, -\/1)Did not Intersect}
+\DoxyCodeLine{(0, -\/1, 0)Intersected}
+\DoxyCodeLine{-\/-\/-\/ After Addition-\/-\/-\/}
+\DoxyCodeLine{(0, 0, -\/1)Intersected}
+\DoxyCodeLine{(0, -\/1, 0)Intersected}
+\end{DoxyCode}
+ 
+
+References Human\+Factors.\+Native\+Utils.\+Native\+Object.\+pressure, and Human\+Factors.\+Native\+Utils.\+Native\+Object.\+Update\+Pressure().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_a0934caa038f71f5c3fa1bc0993ea202b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_a9ece3f96ea62288bb7875ac37e037303}\label{class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h_a9ece3f96ea62288bb7875ac37e037303}} 
+\index{HumanFactors.RayTracing.EmbreeBVH@{HumanFactors.RayTracing.EmbreeBVH}!ReleaseHandle@{ReleaseHandle}}
+\index{ReleaseHandle@{ReleaseHandle}!HumanFactors.RayTracing.EmbreeBVH@{HumanFactors.RayTracing.EmbreeBVH}}
+\doxysubsubsection{\texorpdfstring{ReleaseHandle()}{ReleaseHandle()}}
+{\footnotesize\ttfamily override bool Human\+Factors.\+Ray\+Tracing.\+Embree\+B\+V\+H.\+Release\+Handle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Free the native memory managed by this class. 
+
+\begin{DoxyNote}{Note}
+the garbage collector will handle this automatically 
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+Do not attempt to use this class after freeing it! 
+\end{DoxyWarning}
+\begin{DoxyReturn}{Returns}
+True. This is guaranteed to execute properly. ~\newline
+ 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Csharp/packages/raytracer/src/Embree\+B\+V\+H.\+cs\end{DoxyCompactItemize}

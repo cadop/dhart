@@ -93,6 +93,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a3ede2597cc17a4f1a130741b0163bbab"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_human_factors_1_1_pathfinding_1_1_path.html">Path</a>[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#a3ede2597cc17a4f1a130741b0163bbab">DijkstraAllToAll</a> (<a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html">Graph</a> g, string cost_type=&quot;&quot;)</td></tr>
 <tr class="memdesc:a3ede2597cc17a4f1a130741b0163bbab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a path from every node in the graph to every other node in a graph.  <a href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#a3ede2597cc17a4f1a130741b0163bbab">More...</a><br /></td></tr>
 <tr class="separator:a3ede2597cc17a4f1a130741b0163bbab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf65038bac66da2c403034c05f83bee9"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#abf65038bac66da2c403034c05f83bee9">GeneratePredecessorAndDistanceMatricies</a> (<a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html">Graph</a> g, out <a class="el" href="class_human_factors_1_1_native_utils_1_1_common_native_arrays_1_1_unmanaged_float_array2_d.html">UnmanagedFloatArray2D</a> out_dist, out <a class="el" href="class_human_factors_1_1_native_utils_1_1_common_native_arrays_1_1_unmanaged_int_array2_d.html">UnmanagedIntArray2D</a> out_predecessor, string cost_type=&quot;&quot;)</td></tr>
+<tr class="memdesc:abf65038bac66da2c403034c05f83bee9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate Predecessor and Distance Matricies for a graph.  <a href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#abf65038bac66da2c403034c05f83bee9">More...</a><br /></td></tr>
+<tr class="separator:abf65038bac66da2c403034c05f83bee9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Functions for finding the shortest path between two nodes in a graph. </p>
@@ -101,9 +104,10 @@ Static Public Member Functions</h2></td></tr>
 <dd>
 <a class="el" href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#adc3fbf31af391a4ce9efd911c0c74fee" title="Perform Dijkstra&#39;s shortest path algorithm to find a path between two nodes.">DijkstraShortestPath</a> for generating multiple paths at once. </dd>
 <dd>
-<a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html" title="A graph representing connections between points in space.">SpatialStructures.Graph</a> for more information on how it stores multiple costs. </dd></dl>
+<a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html" title="A graph representing connections between points in space.">SpatialStructures.Graph</a> for more information on how it stores multiple costs.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>There are several functions that check the output of a C++ path function then insert null values where paths couldn't be generated into an output array, and create C# path wrappers for paths that could be generated. this could be consolidated in a single function, instead of scattered throughout the code. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_shortest_path_8cs_source.html#l00040">40</a> of file <a class="el" href="_shortest_path_8cs_source.html">ShortestPath.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shortest_path_8cs_source.html#l00048">48</a> of file <a class="el" href="_shortest_path_8cs_source.html">ShortestPath.cs</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a3ede2597cc17a4f1a130741b0163bbab"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3ede2597cc17a4f1a130741b0163bbab">&#9670;&nbsp;</a></span>DijkstraAllToAll()</h2>
@@ -155,7 +159,59 @@ Static Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section user"><dt>Example</dt><dd><div class="fragment"></div><!-- fragment --> <div class="fragment"><div class="line">0 -&gt; 1 : [(0, 10), (1, 0)]</div>
+<dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line">            </div>
+<div class="line">            <span class="comment">// Create a graph and add some edges</span></div>
+<div class="line">            Graph g = <span class="keyword">new</span> Graph();</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Create nodes and add edges to the graph</span></div>
+<div class="line">            Vector3D[] Nodes =</div>
+<div class="line">            {</div>
+<div class="line">                <span class="keyword">new</span> Vector3D(0,0,1),</div>
+<div class="line">                <span class="keyword">new</span> Vector3D(0,0,2),</div>
+<div class="line">                <span class="keyword">new</span> Vector3D(0,0,3),</div>
+<div class="line">                <span class="keyword">new</span> Vector3D(0,0,4)</div>
+<div class="line">            }; </div>
+<div class="line"> </div>
+<div class="line">            g.AddEdge(Nodes[0], Nodes[1], 10);</div>
+<div class="line">            g.AddEdge(Nodes[0], Nodes[2], 30);</div>
+<div class="line">            g.AddEdge(Nodes[0], Nodes[3], 30);</div>
+<div class="line">            g.AddEdge(Nodes[1], Nodes[2], 15);</div>
+<div class="line">            g.AddEdge(Nodes[3], Nodes[1], 15);</div>
+<div class="line">            g.AddEdge(Nodes[2], Nodes[3], 5);</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Compress the graph</span></div>
+<div class="line">            g.CompressToCSR();</div>
+<div class="line">            </div>
+<div class="line">            <span class="comment">// Generate all paths for this graph</span></div>
+<div class="line">            var paths = ShortestPath.DijkstraAllToAll(g);</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordtype">string</span> output = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Iterate through the return values to print the path from every node to every other node</span></div>
+<div class="line">            <span class="keywordtype">int</span> num_nodes = g.NumNodes();</div>
+<div class="line">            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> start_id = 0; start_id &lt; num_nodes; start_id++)</div>
+<div class="line">            {</div>
+<div class="line">                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> end_id = 0; end_id &lt; num_nodes; end_id++)</div>
+<div class="line">                {</div>
+<div class="line">                    <span class="comment">// If this is a node to itself then continue</span></div>
+<div class="line">                    <span class="keywordflow">if</span> (start_id == end_id) <span class="keywordflow">continue</span>;</div>
+<div class="line"> </div>
+<div class="line">                    <span class="comment">// get the path from parent id to child id</span></div>
+<div class="line">                    <span class="keywordtype">int</span> path_index = (start_id * num_nodes) + end_id;</div>
+<div class="line">                    Path start_to_end = paths[path_index];</div>
+<div class="line"> </div>
+<div class="line">                    <span class="comment">// Only print the path if it was able to be found</span></div>
+<div class="line">                    <span class="keywordflow">if</span> (start_to_end != <span class="keyword">null</span>)</div>
+<div class="line">                        output += String.Format(<span class="stringliteral">&quot;{0} -&gt; {1} : {2}&quot;</span>, start_id, end_id, start_to_end) + <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">                    <span class="keywordflow">else</span></div>
+<div class="line">                        output += String.Format(<span class="stringliteral">&quot;{0} -&gt; {1} : {2}&quot;</span>, start_id, end_id, <span class="stringliteral">&quot;[None]&quot;</span>) + <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">                }</div>
+<div class="line">            }</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Print output</span></div>
+<div class="line">            Debug.WriteLine(output);</div>
+<div class="line"> </div>
+</div><!-- fragment --> <div class="fragment"><div class="line">0 -&gt; 1 : [(0, 10), (1, 0)]</div>
 <div class="line">0 -&gt; 2 : [(0, 10), (1, 15), (2, 0)]</div>
 <div class="line">0 -&gt; 3 : [(0, 30), (3, 0)]</div>
 <div class="line">1 -&gt; 0 : [None]</div>
@@ -169,11 +225,15 @@ Static Public Member Functions</h2></td></tr>
 <div class="line">3 -&gt; 2 : [(3, 15), (1, 15), (2, 0)]</div>
 </div><!-- fragment --> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_shortest_path_8cs_source.html#l00290">290</a> of file <a class="el" href="_shortest_path_8cs_source.html">ShortestPath.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shortest_path_8cs_source.html#l00336">336</a> of file <a class="el" href="_shortest_path_8cs_source.html">ShortestPath.cs</a>.</p>
 
-<p class="reference">References <a class="el" href="_pathfinding_native_8cs_source.html#l00115">HumanFactors.Pathfinding.NativeMethods.C_AllToAllPaths()</a>, <a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a1a40fc2bab18a5adf42fb7a49ca6ddb9">HumanFactors.SpatialStructures.Graph.NumNodes()</a>, and <a class="el" href="_pointer_holder_8cs_source.html#l00049">HumanFactors.NativeUtils.NativeObject.Pointer</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="overall__examples_8cs_source.html#l00230">Humanfctors.Examples.OverallExamples.GenerateAllToAll()</a>.</p>
+<p class="reference">References <a class="el" href="_pathfinding_native_8cs_source.html#l00173">HumanFactors.Pathfinding.NativeMethods.C_AllToAllPaths()</a>, <a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a1a40fc2bab18a5adf42fb7a49ca6ddb9">HumanFactors.SpatialStructures.Graph.NumNodes()</a>, and <a class="el" href="_pointer_holder_8cs_source.html#l00067">HumanFactors.NativeUtils.NativeObject.Pointer</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_pathfinding_1_1_shortest_path_a3ede2597cc17a4f1a130741b0163bbab_cgraph.svg" width="739" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
 
 </div>
 </div>
@@ -244,15 +304,84 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#ab7f58f298125194e33d6c69ed4797442" title="Find the shortest paths between each pair of start_id and end_id in order.">DijkstraShortestPathMulti</a> for efficently generating multiple paths in parallel.</dd></dl>
-<dl class="section user"><dt>Example</dt><dd><div class="fragment"></div><!-- fragment --><div class="fragment"></div><!-- fragment --><div class="fragment"></div><!-- fragment --><div class="fragment"></div><!-- fragment --> <div class="fragment"><div class="line">[(1, 1.415028), (12, 1.417536), (26, 1.417887), (39, 1.418485), (50, 1.000265), (63, 1.000128), (80, 1.000098), (105, 0)]</div>
+<dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line">            <span class="comment">// Load the OBJ from ddisk</span></div>
+<div class="line">            var blob = OBJLoader.LoadOBJ(<span class="stringliteral">&quot;ExampleModels/energy_blob_zup.obj&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Generate a BVH from it </span></div>
+<div class="line">            EmbreeBVH bvh = <span class="keyword">new</span> EmbreeBVH(blob, <span class="keyword">true</span>);</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Setup graph variables</span></div>
+<div class="line">            Vector3D start_point = <span class="keyword">new</span> Vector3D(-30, 0, 20);</div>
+<div class="line">            Vector3D spacing = <span class="keyword">new</span> Vector3D(1, 1, 10);</div>
+<div class="line">            <span class="keywordtype">int</span> max_nodes = 10000;</div>
+<div class="line">            <span class="keywordtype">float</span> up_step = 5.0f;</div>
+<div class="line">            <span class="keywordtype">float</span> down_step = 5.0f;</div>
+<div class="line">            <span class="keywordtype">float</span> up_slope = 60.0f;</div>
+<div class="line">            <span class="keywordtype">float</span> down_slope = 60.0f;</div>
+<div class="line">            <span class="keywordtype">int</span> max_step_connections = 1;</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Generate a graph</span></div>
+<div class="line">            var graph = <a class="code" href="namespace_human_factors.html">HumanFactors</a>.<a class="code" href="namespace_human_factors_1_1_graph_generator.html">GraphGenerator</a>.<a class="code" href="class_human_factors_1_1_graph_generator_1_1_graph_generator.html">GraphGenerator</a>.<a class="code" href="class_human_factors_1_1_graph_generator_1_1_graph_generator.html#a2672814edcde623d71233353fe6e0d2f">GenerateGraph</a>(</div>
+<div class="line">                bvh,</div>
+<div class="line">                start_point,</div>
+<div class="line">                spacing,</div>
+<div class="line">                max_nodes,</div>
+<div class="line">                up_step,</div>
+<div class="line">                down_step,</div>
+<div class="line">                up_slope,</div>
+<div class="line">                down_slope,</div>
+<div class="line">                max_step_connections,</div>
+<div class="line">                -1</div>
+<div class="line">            );</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Compress the graph so we can use it with pathfinding</span></div>
+<div class="line">            graph.CompressToCSR();</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Calculate an alternate set of costs for the graph based on Energy Expenditure</span></div>
+<div class="line">            CostAlgorithms.CalculateAndStoreEnergyExpenditure(graph);</div>
+<div class="line">            </div>
+</div><!-- fragment --><div class="fragment"><div class="line"> </div>
+<div class="line">            <span class="comment">// Predeclare paths</span></div>
+<div class="line">            Path energy_path, distance_path;</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Get the unique key of this cost type. We&#39;ll use this to tell the pathfinder to generate</span></div>
+<div class="line">            <span class="comment">// a path using the cost set that we just generated.</span></div>
+<div class="line">            <span class="keywordtype">string</span> energy_key = CostAlgorithmNames.ENERGY_EXPENDITURE;</div>
+<div class="line"> </div>
+</div><!-- fragment --><div class="fragment"><div class="line"> </div>
+<div class="line">            <span class="comment">// Generate a graph using the alternate cost type, then generate one using the graph&#39;s</span></div>
+<div class="line">            <span class="comment">// default cost type, distance.</span></div>
+<div class="line">            <span class="keywordtype">int</span> start_id = 1;</div>
+<div class="line">            <span class="keywordtype">int</span> end_id = 105;</div>
+<div class="line">            energy_path = ShortestPath.DijkstraShortestPath(graph, start_id, end_id, energy_key);</div>
+<div class="line">            distance_path = ShortestPath.DijkstraShortestPath(graph, start_id, end_id);</div>
+<div class="line"> </div>
+</div><!-- fragment --><div class="fragment"><div class="line"> </div>
+<div class="line">            <span class="comment">// Print paths to output. </span></div>
+<div class="line">            Debug.WriteLine(distance_path);</div>
+<div class="line">            Debug.WriteLine(energy_path);</div>
+<div class="line"> </div>
+</div><!-- fragment --> <div class="fragment"><div class="line">[(1, 1.415028), (12, 1.417536), (26, 1.417887), (39, 1.418485), (50, 1.000265), (63, 1.000128), (80, 1.000098), (105, 0)]</div>
 <div class="line">[(1, 4.559175), (12, 5.759251), (26, 5.889585), (39, 6.100943), (50, 2.978094), (63, 2.826927), (80, 2.784634), (105, 0)]</div>
 </div><!-- fragment --> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_shortest_path_8cs_source.html#l00074">74</a> of file <a class="el" href="_shortest_path_8cs_source.html">ShortestPath.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shortest_path_8cs_source.html#l00083">83</a> of file <a class="el" href="_shortest_path_8cs_source.html">ShortestPath.cs</a>.</p>
 
-<p class="reference">References <a class="el" href="_pathfinding_native_8cs_source.html#l00027">HumanFactors.Pathfinding.NativeMethods.C_CreatePath()</a>, <a class="el" href="_pointer_holder_8cs_source.html#l00049">HumanFactors.NativeUtils.NativeObject.Pointer</a>, and <a class="el" href="_native_utils_8cs_source.html#l00038">HumanFactors.NativeUtils.CVectorAndData.size</a>.</p>
+<p class="reference">References <a class="el" href="_pathfinding_native_8cs_source.html#l00046">HumanFactors.Pathfinding.NativeMethods.C_CreatePath()</a>, <a class="el" href="struct_human_factors_1_1_native_utils_1_1_c_vector_and_data.html#ad6bec7bcd679afd2ef978232595ebb40">HumanFactors.NativeUtils.CVectorAndData.IsValid()</a>, and <a class="el" href="_pointer_holder_8cs_source.html#l00067">HumanFactors.NativeUtils.NativeObject.Pointer</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_shortest_path_8cs_source.html#l00117">HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath()</a>, and <a class="el" href="overall__examples_8cs_source.html#l00071">Humanfctors.Examples.OverallExamples.GeneratePathsWithCostAlgorithms()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_shortest_path_8cs_source.html#l00131">HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_pathfinding_1_1_shortest_path_adc3fbf31af391a4ce9efd911c0c74fee_cgraph.svg" width="700" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_pathfinding_1_1_shortest_path_adc3fbf31af391a4ce9efd911c0c74fee_icgraph.svg" width="504" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
 
 </div>
 </div>
@@ -324,13 +453,80 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#ab7f58f298125194e33d6c69ed4797442" title="Find the shortest paths between each pair of start_id and end_id in order.">DijkstraShortestPathMulti</a> for efficently generating multiple paths in parallel.</dd></dl>
-<dl class="section user"><dt>Example</dt><dd><div class="fragment"></div><!-- fragment --><div class="fragment"></div><!-- fragment --><div class="fragment"></div><!-- fragment --><div class="fragment"></div><!-- fragment --> <div class="fragment"><div class="line">[(1, 1.415028), (12, 1.417536), (26, 1.417887), (39, 1.418485), (50, 1.000265), (63, 1.000128), (80, 1.000098), (105, 0)]</div>
+<dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line">            <span class="comment">// Load the OBJ from ddisk</span></div>
+<div class="line">            var blob = OBJLoader.LoadOBJ(<span class="stringliteral">&quot;ExampleModels/energy_blob_zup.obj&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Generate a BVH from it </span></div>
+<div class="line">            EmbreeBVH bvh = <span class="keyword">new</span> EmbreeBVH(blob, <span class="keyword">true</span>);</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Setup graph variables</span></div>
+<div class="line">            Vector3D start_point = <span class="keyword">new</span> Vector3D(-30, 0, 20);</div>
+<div class="line">            Vector3D spacing = <span class="keyword">new</span> Vector3D(1, 1, 10);</div>
+<div class="line">            <span class="keywordtype">int</span> max_nodes = 10000;</div>
+<div class="line">            <span class="keywordtype">float</span> up_step = 5.0f;</div>
+<div class="line">            <span class="keywordtype">float</span> down_step = 5.0f;</div>
+<div class="line">            <span class="keywordtype">float</span> up_slope = 60.0f;</div>
+<div class="line">            <span class="keywordtype">float</span> down_slope = 60.0f;</div>
+<div class="line">            <span class="keywordtype">int</span> max_step_connections = 1;</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Generate a graph</span></div>
+<div class="line">            var graph = <a class="code" href="namespace_human_factors.html">HumanFactors</a>.<a class="code" href="namespace_human_factors_1_1_graph_generator.html">GraphGenerator</a>.<a class="code" href="class_human_factors_1_1_graph_generator_1_1_graph_generator.html">GraphGenerator</a>.<a class="code" href="class_human_factors_1_1_graph_generator_1_1_graph_generator.html#a2672814edcde623d71233353fe6e0d2f">GenerateGraph</a>(</div>
+<div class="line">                bvh,</div>
+<div class="line">                start_point,</div>
+<div class="line">                spacing,</div>
+<div class="line">                max_nodes,</div>
+<div class="line">                up_step,</div>
+<div class="line">                down_step,</div>
+<div class="line">                up_slope,</div>
+<div class="line">                down_slope,</div>
+<div class="line">                max_step_connections,</div>
+<div class="line">                -1</div>
+<div class="line">            );</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Compress the graph so we can use it with pathfinding</span></div>
+<div class="line">            graph.CompressToCSR();</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Calculate an alternate set of costs for the graph based on Energy Expenditure</span></div>
+<div class="line">            CostAlgorithms.CalculateAndStoreEnergyExpenditure(graph);</div>
+<div class="line">            </div>
+</div><!-- fragment --><div class="fragment"><div class="line"> </div>
+<div class="line">            <span class="comment">// Predeclare paths</span></div>
+<div class="line">            Path energy_path, distance_path;</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Get the unique key of this cost type. We&#39;ll use this to tell the pathfinder to generate</span></div>
+<div class="line">            <span class="comment">// a path using the cost set that we just generated.</span></div>
+<div class="line">            <span class="keywordtype">string</span> energy_key = CostAlgorithmNames.ENERGY_EXPENDITURE;</div>
+<div class="line"> </div>
+</div><!-- fragment --><div class="fragment"><div class="line"> </div>
+<div class="line">            <span class="comment">// Get the nodes from the graph</span></div>
+<div class="line">            var nodes = graph.getNodes();</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Convert these to Vector3D for use in pathfinding</span></div>
+<div class="line">            var start_node = nodes[1].ToVector3D();</div>
+<div class="line">            var end_node = nodes[105].ToVector3D();</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Generate paths using these nodes.</span></div>
+<div class="line">            energy_path = ShortestPath.DijkstraShortestPath(graph, start_node, end_node, energy_key);</div>
+<div class="line">            distance_path = ShortestPath.DijkstraShortestPath(graph, end_node, start_node);</div>
+<div class="line"> </div>
+</div><!-- fragment --><div class="fragment"><div class="line"> </div>
+<div class="line">            <span class="comment">// Print paths to output. </span></div>
+<div class="line">            Debug.WriteLine(distance_path);</div>
+<div class="line">            Debug.WriteLine(energy_path);</div>
+<div class="line"> </div>
+</div><!-- fragment --> <div class="fragment"><div class="line">[(1, 1.415028), (12, 1.417536), (26, 1.417887), (39, 1.418485), (50, 1.000265), (63, 1.000128), (80, 1.000098), (105, 0)]</div>
 <div class="line">[(1, 4.559175), (12, 5.759251), (26, 5.889585), (39, 6.100943), (50, 2.978094), (63, 2.826927), (80, 2.784634), (105, 0)]</div>
 </div><!-- fragment --> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_shortest_path_8cs_source.html#l00117">117</a> of file <a class="el" href="_shortest_path_8cs_source.html">ShortestPath.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shortest_path_8cs_source.html#l00131">131</a> of file <a class="el" href="_shortest_path_8cs_source.html">ShortestPath.cs</a>.</p>
 
-<p class="reference">References <a class="el" href="_shortest_path_8cs_source.html#l00074">HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath()</a>, and <a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#abe9106fd9584269e1291702aa401f6ac">HumanFactors.SpatialStructures.Graph.GetNodeID()</a>.</p>
+<p class="reference">References <a class="el" href="_shortest_path_8cs_source.html#l00083">HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath()</a>, and <a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#abe9106fd9584269e1291702aa401f6ac">HumanFactors.SpatialStructures.Graph.GetNodeID()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_pathfinding_1_1_shortest_path_a394c96543ad621b2e5d98554153d74b4_cgraph.svg" width="971" height="150"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
 
 </div>
 </div>
@@ -404,7 +600,77 @@ Static Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section user"><dt>Example</dt><dd><div class="fragment"></div><!-- fragment --> <div class="fragment"></div><!-- fragment --> <div class="fragment"><div class="line">(-30, 0, 1.068) to (-27, -8, 1.295) Energy  : [(0, 2.48), (4, 2.48), (12, 2.48), (25, 2.461), (37, 2.461), (47, 5.402), (60, 5.302), (77, 5.129), (101, 0)]</div>
+<dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line">            <span class="comment">// Load the OBJ from ddisk</span></div>
+<div class="line">            var blob = OBJLoader.LoadOBJ(<span class="stringliteral">&quot;ExampleModels/energy_blob_zup.obj&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Generate a BVH from it </span></div>
+<div class="line">            EmbreeBVH bvh = <span class="keyword">new</span> EmbreeBVH(blob, <span class="keyword">true</span>);</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Setup graph variables</span></div>
+<div class="line">            Vector3D start_point = <span class="keyword">new</span> Vector3D(-30, 0, 20);</div>
+<div class="line">            Vector3D spacing = <span class="keyword">new</span> Vector3D(1, 1, 10);</div>
+<div class="line">            <span class="keywordtype">int</span> max_nodes = 10000;</div>
+<div class="line">            <span class="keywordtype">float</span> up_step = 5.0f;</div>
+<div class="line">            <span class="keywordtype">float</span> down_step = 5.0f;</div>
+<div class="line">            <span class="keywordtype">float</span> up_slope = 60.0f;</div>
+<div class="line">            <span class="keywordtype">float</span> down_slope = 60.0f;</div>
+<div class="line">            <span class="keywordtype">int</span> max_step_connections = 1;</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Generate a graph</span></div>
+<div class="line">            var graph = <a class="code" href="namespace_human_factors.html">HumanFactors</a>.<a class="code" href="namespace_human_factors_1_1_graph_generator.html">GraphGenerator</a>.<a class="code" href="class_human_factors_1_1_graph_generator_1_1_graph_generator.html">GraphGenerator</a>.<a class="code" href="class_human_factors_1_1_graph_generator_1_1_graph_generator.html#a2672814edcde623d71233353fe6e0d2f">GenerateGraph</a>(</div>
+<div class="line">                bvh,</div>
+<div class="line">                start_point,</div>
+<div class="line">                spacing,</div>
+<div class="line">                max_nodes,</div>
+<div class="line">                up_step,</div>
+<div class="line">                down_step,</div>
+<div class="line">                up_slope,</div>
+<div class="line">                down_slope,</div>
+<div class="line">                max_step_connections,</div>
+<div class="line">                -1</div>
+<div class="line">            );</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Compress the graph so we can use it with pathfinding</span></div>
+<div class="line">            graph.CompressToCSR();</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Calculate an alternate set of costs for the graph based on Energy Expenditure</span></div>
+<div class="line">            CostAlgorithms.CalculateAndStoreEnergyExpenditure(graph);</div>
+<div class="line">            </div>
+</div><!-- fragment --> <div class="fragment"><div class="line"> </div>
+<div class="line">            <span class="comment">// Get the unique key of this cost type. We&#39;ll use this to tell the pathfinder to generate</span></div>
+<div class="line">            <span class="comment">// a path using the cost set that we just generated.</span></div>
+<div class="line">            <span class="keywordtype">string</span> energy_key = CostAlgorithmNames.ENERGY_EXPENDITURE;</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Get nodes from the graph</span></div>
+<div class="line">            var nodes = graph.getNodes();</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Generate a graph using the alternate cost type, then generate one using the graph&#39;s</span></div>
+<div class="line">            <span class="comment">// default cost type, distance.</span></div>
+<div class="line">            Vector3D[] start_nodes = {</div>
+<div class="line">                nodes[0].ToVector3D(),</div>
+<div class="line">                nodes[1].ToVector3D(),</div>
+<div class="line">                nodes[2].ToVector3D(),</div>
+<div class="line">                nodes[3].ToVector3D()</div>
+<div class="line">            };</div>
+<div class="line">            Vector3D[] end_nodes = {</div>
+<div class="line">                nodes[101].ToVector3D(),</div>
+<div class="line">                nodes[102].ToVector3D(),</div>
+<div class="line">                nodes[103].ToVector3D(),</div>
+<div class="line">                nodes[104].ToVector3D()</div>
+<div class="line">            };</div>
+<div class="line">            Path[] energy_path = ShortestPath.DijkstraShortestPathMulti(graph, start_nodes, end_nodes, energy_key);</div>
+<div class="line">            Path[] distance_path = ShortestPath.DijkstraShortestPathMulti(graph, start_nodes, end_nodes);</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Print out every pair of paths</span></div>
+<div class="line">            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; start_nodes.Length; i++)</div>
+<div class="line">            {</div>
+<div class="line">                output += String.Format(<span class="stringliteral">&quot;{0} to {1} Energy  : {2}&quot;</span>, start_nodes[i], end_nodes[i], energy_path[i]) + <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">                output +=</div>
+<div class="line">                    String.Format(<span class="stringliteral">&quot;{0} to {1} Distance: {2}&quot;</span>, start_nodes[i], end_nodes[i], distance_path[i]) + <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">            }</div>
+<div class="line"> </div>
+<div class="line">            Debug.WriteLine(output);</div>
+</div><!-- fragment --> <div class="fragment"><div class="line">(-30, 0, 1.068) to (-27, -8, 1.295) Energy  : [(0, 2.48), (4, 2.48), (12, 2.48), (25, 2.461), (37, 2.461), (47, 5.402), (60, 5.302), (77, 5.129), (101, 0)]</div>
 <div class="line">(-30, 0, 1.068) to (-27, -8, 1.295) Distance: [(0, 1), (4, 1), (12, 1), (25, 1), (37, 1), (47, 1.417), (60, 1.416), (77, 1.416), (101, 0)]</div>
 <div class="line">(-31, -1, 1.018) to (-26, -8, 1.427) Energy  : [(1, 2.461), (11, 2.5), (24, 4.536), (37, 5.528), (48, 5.452), (61, 5.605), (78, 5.837), (102, 0)]</div>
 <div class="line">(-31, -1, 1.018) to (-26, -8, 1.427) Distance: [(1, 1), (11, 1), (24, 1.415), (37, 1.417), (48, 1.417), (61, 1.417), (78, 1.418), (102, 0)]</div>
@@ -413,10 +679,17 @@ Static Public Member Functions</h2></td></tr>
 <div class="line">(-31, 1, 1.017) to (-25, -6, 1.678) Energy  : [(3, 2.52), (2, 2.5), (1, 4.559), (12, 5.759), (26, 5.89), (39, 6.101), (50, 7.008), (64, 5.863), (83, 3.827), (104, 0)]</div>
 <div class="line">(-31, 1, 1.017) to (-25, -6, 1.678) Distance: [(3, 1), (2, 1), (1, 1.415), (12, 1.418), (26, 1.418), (39, 1.418), (50, 1.421), (64, 1.418), (83, 1.002), (104, 0)]</div>
 </div><!-- fragment --> </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The process of finding IDS may fit better in the graph itself through an overload on Get ID instead of being implemented here. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_shortest_path_8cs_source.html#l00229">229</a> of file <a class="el" href="_shortest_path_8cs_source.html">ShortestPath.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shortest_path_8cs_source.html#l00259">259</a> of file <a class="el" href="_shortest_path_8cs_source.html">ShortestPath.cs</a>.</p>
 
-<p class="reference">References <a class="el" href="_shortest_path_8cs_source.html#l00167">HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti()</a>.</p>
+<p class="reference">References <a class="el" href="_shortest_path_8cs_source.html#l00183">HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_pathfinding_1_1_shortest_path_a9fb6fc6aff938136f7f9de42e5d8e5bc_cgraph.svg" width="1038" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
 
 </div>
 </div>
@@ -491,7 +764,66 @@ Static Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section user"><dt>Example</dt><dd><div class="fragment"></div><!-- fragment --><div class="fragment"></div><!-- fragment --> <div class="fragment"><div class="line">1 to 101 Energy  : [(1, 2.461), (11, 2.5), (24, 2.5), (36, 4.491), (47, 5.402), (60, 5.302), (77, 5.129), (101, 0)]</div>
+<dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line">            <span class="comment">// Load the OBJ from ddisk</span></div>
+<div class="line">            var blob = OBJLoader.LoadOBJ(<span class="stringliteral">&quot;ExampleModels/energy_blob_zup.obj&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Generate a BVH from it </span></div>
+<div class="line">            EmbreeBVH bvh = <span class="keyword">new</span> EmbreeBVH(blob, <span class="keyword">true</span>);</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Setup graph variables</span></div>
+<div class="line">            Vector3D start_point = <span class="keyword">new</span> Vector3D(-30, 0, 20);</div>
+<div class="line">            Vector3D spacing = <span class="keyword">new</span> Vector3D(1, 1, 10);</div>
+<div class="line">            <span class="keywordtype">int</span> max_nodes = 10000;</div>
+<div class="line">            <span class="keywordtype">float</span> up_step = 5.0f;</div>
+<div class="line">            <span class="keywordtype">float</span> down_step = 5.0f;</div>
+<div class="line">            <span class="keywordtype">float</span> up_slope = 60.0f;</div>
+<div class="line">            <span class="keywordtype">float</span> down_slope = 60.0f;</div>
+<div class="line">            <span class="keywordtype">int</span> max_step_connections = 1;</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Generate a graph</span></div>
+<div class="line">            var graph = <a class="code" href="namespace_human_factors.html">HumanFactors</a>.<a class="code" href="namespace_human_factors_1_1_graph_generator.html">GraphGenerator</a>.<a class="code" href="class_human_factors_1_1_graph_generator_1_1_graph_generator.html">GraphGenerator</a>.<a class="code" href="class_human_factors_1_1_graph_generator_1_1_graph_generator.html#a2672814edcde623d71233353fe6e0d2f">GenerateGraph</a>(</div>
+<div class="line">                bvh,</div>
+<div class="line">                start_point,</div>
+<div class="line">                spacing,</div>
+<div class="line">                max_nodes,</div>
+<div class="line">                up_step,</div>
+<div class="line">                down_step,</div>
+<div class="line">                up_slope,</div>
+<div class="line">                down_slope,</div>
+<div class="line">                max_step_connections,</div>
+<div class="line">                -1</div>
+<div class="line">            );</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Compress the graph so we can use it with pathfinding</span></div>
+<div class="line">            graph.CompressToCSR();</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Calculate an alternate set of costs for the graph based on Energy Expenditure</span></div>
+<div class="line">            CostAlgorithms.CalculateAndStoreEnergyExpenditure(graph);</div>
+<div class="line">            </div>
+</div><!-- fragment --><div class="fragment"><div class="line"> </div>
+<div class="line">            <span class="comment">// Get the unique key of this cost type. We&#39;ll use this to tell the pathfinder to generate</span></div>
+<div class="line">            <span class="comment">// a path using the cost set that we just generated.</span></div>
+<div class="line">            <span class="keywordtype">string</span> energy_key = CostAlgorithmNames.ENERGY_EXPENDITURE;</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Generate a graph using the alternate cost type, then generate one using the graph&#39;s</span></div>
+<div class="line">            <span class="comment">// default cost type, distance.</span></div>
+<div class="line">            <span class="keywordtype">int</span>[] start_ids = {1, 2, 3, 4};</div>
+<div class="line">            <span class="keywordtype">int</span>[] end_ids = {101, 102, 103, 104};</div>
+<div class="line">            Path[] energy_path = ShortestPath.DijkstraShortestPathMulti(graph, start_ids, end_ids, energy_key);</div>
+<div class="line">            Path[] distance_path = ShortestPath.DijkstraShortestPathMulti(graph, start_ids, end_ids);</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordtype">string</span> output = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Print out every pair of paths</span></div>
+<div class="line">            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; start_ids.Length; i++)</div>
+<div class="line">            {</div>
+<div class="line">                output += String.Format(<span class="stringliteral">&quot;{0} to {1} Energy  : {2}&quot;</span>, start_ids[i], end_ids[i], energy_path[i]) + <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">                output += String.Format(<span class="stringliteral">&quot;{0} to {1} Distance: {2}&quot;</span>, start_ids[i], end_ids[i], distance_path[i]) + <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">            }</div>
+<div class="line"> </div>
+<div class="line">            Debug.WriteLine(output);</div>
+<div class="line"> </div>
+</div><!-- fragment --> <div class="fragment"><div class="line">1 to 101 Energy  : [(1, 2.461), (11, 2.5), (24, 2.5), (36, 4.491), (47, 5.402), (60, 5.302), (77, 5.129), (101, 0)]</div>
 <div class="line">1 to 101 Distance: [(1, 1), (11, 1), (24, 1), (36, 1.415), (47, 1.417), (60, 1.416), (77, 1.416), (101, 0)]</div>
 <div class="line">2 to 102 Energy  : [(2, 2.5), (1, 2.461), (11, 2.5), (24, 4.536), (37, 5.528), (48, 5.452), (61, 5.605), (78, 5.837), (102, 0)]</div>
 <div class="line">2 to 102 Distance: [(2, 1), (1, 1), (11, 1), (24, 1.415), (37, 1.417), (48, 1.417), (61, 1.417), (78, 1.418), (102, 0)]</div>
@@ -501,11 +833,130 @@ Static Public Member Functions</h2></td></tr>
 <div class="line">4 to 104 Distance: [(4, 1), (12, 1.418), (26, 1.418), (39, 1.418), (50, 1.421), (64, 1.418), (83, 1.002), (104, 0)]</div>
 </div><!-- fragment --> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_shortest_path_8cs_source.html#l00167">167</a> of file <a class="el" href="_shortest_path_8cs_source.html">ShortestPath.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shortest_path_8cs_source.html#l00183">183</a> of file <a class="el" href="_shortest_path_8cs_source.html">ShortestPath.cs</a>.</p>
 
-<p class="reference">References <a class="el" href="_pathfinding_native_8cs_source.html#l00067">HumanFactors.Pathfinding.NativeMethods.C_CreatePaths()</a>, and <a class="el" href="_pointer_holder_8cs_source.html#l00049">HumanFactors.NativeUtils.NativeObject.Pointer</a>.</p>
+<p class="reference">References <a class="el" href="_pathfinding_native_8cs_source.html#l00103">HumanFactors.Pathfinding.NativeMethods.C_CreatePaths()</a>, and <a class="el" href="_pointer_holder_8cs_source.html#l00067">HumanFactors.NativeUtils.NativeObject.Pointer</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="overall__examples_8cs_source.html#l00128">Humanfctors.Examples.OverallExamples.DijkstraShortestPathMulti()</a>, <a class="el" href="_shortest_path_8cs_source.html#l00229">HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti()</a>, and <a class="el" href="overall__examples_8cs_source.html#l00172">Humanfctors.Examples.OverallExamples.DijkstraShortestPathMultiNodes()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_shortest_path_8cs_source.html#l00259">HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_pathfinding_1_1_shortest_path_ab7f58f298125194e33d6c69ed4797442_cgraph.svg" width="739" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_pathfinding_1_1_shortest_path_ab7f58f298125194e33d6c69ed4797442_icgraph.svg" width="560" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="abf65038bac66da2c403034c05f83bee9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf65038bac66da2c403034c05f83bee9">&#9670;&nbsp;</a></span>GeneratePredecessorAndDistanceMatricies()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void HumanFactors.Pathfinding.ShortestPath.GeneratePredecessorAndDistanceMatricies </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html">Graph</a>&#160;</td>
+          <td class="paramname"><em>g</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">out <a class="el" href="class_human_factors_1_1_native_utils_1_1_common_native_arrays_1_1_unmanaged_float_array2_d.html">UnmanagedFloatArray2D</a>&#160;</td>
+          <td class="paramname"><em>out_dist</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">out <a class="el" href="class_human_factors_1_1_native_utils_1_1_common_native_arrays_1_1_unmanaged_int_array2_d.html">UnmanagedIntArray2D</a>&#160;</td>
+          <td class="paramname"><em>out_predecessor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>cost_type</em> = <code>&quot;&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculate Predecessor and Distance Matricies for a graph. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">g</td><td>Graph to calculate predeessor and distance matricies for </td></tr>
+    <tr><td class="paramname">out_dist</td><td>Output parameter for the distance matrix </td></tr>
+    <tr><td class="paramname">out_predecessor</td><td>Output parameter for the predecessor matrix. </td></tr>
+    <tr><td class="paramname">cost_type</td><td>Type of cost to use for the distance and predecessor matricies. If left blank will use the default cost of the graph.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">KeyNotFoundException</td><td>If cost_type isn't left to the default, and does not match the key of any cost that already exists in the graph.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section post"><dt>Postcondition</dt><dd>out_dist and out_predecessor are updated to contain the distance and predecessor matricies for <code>g</code>.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This SHOULD by all means be returning a tuple, as it would allow for returning multiple parameters without needing to resort to ou tparameters however, that support isn't actually built into the language, but instead is accessible through a nuget package from microsoft like Span. This is not enough of a case to add another DLL that we need to ship with, so i'm doing output parameters.</dd></dl>
+<dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line">            <span class="comment">// Create a graph, add some edges and nodes</span></div>
+<div class="line">            Graph g = <span class="keyword">new</span> Graph();</div>
+<div class="line">            Vector3D[] nodes =</div>
+<div class="line">            {</div>
+<div class="line">                <span class="keyword">new</span> Vector3D(1,2,3),</div>
+<div class="line">                <span class="keyword">new</span> Vector3D(4, 5, 6),</div>
+<div class="line">                <span class="keyword">new</span> Vector3D(7, 8, 9),</div>
+<div class="line">                <span class="keyword">new</span> Vector3D(10, 1, 2)</div>
+<div class="line">            };</div>
+<div class="line">            g.AddEdge(nodes[1], nodes[2], 20);</div>
+<div class="line">            g.AddEdge(nodes[0], nodes[2], 5);</div>
+<div class="line">            g.AddEdge(nodes[1], nodes[0], 10);</div>
+<div class="line">            _ = g.CompressToCSR();</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Get the predecessor and distance matricies</span></div>
+<div class="line">            <span class="comment">// back from native code</span></div>
+<div class="line">            UnmanagedFloatArray2D dist_matrix = <span class="keyword">null</span>;</div>
+<div class="line">            UnmanagedIntArray2D pred_matrix = <span class="keyword">null</span>;</div>
+<div class="line">            <a class="code" href="namespace_human_factors.html">HumanFactors</a>.<a class="code" href="namespace_human_factors_1_1_pathfinding.html">Pathfinding</a>.<a class="code" href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html">ShortestPath</a>.<a class="code" href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#abf65038bac66da2c403034c05f83bee9">GeneratePredecessorAndDistanceMatricies</a>(</div>
+<div class="line">                g,</div>
+<div class="line">                out dist_matrix,</div>
+<div class="line">                out pred_matrix</div>
+<div class="line">            );</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Print to console</span></div>
+<div class="line">            Debug.WriteLine(dist_matrix);</div>
+<div class="line">            Debug.WriteLine(pred_matrix);</div>
+<div class="line"> </div>
+</div><!-- fragment --><code>[0, 15, 10, NaN, 0, NaN, NaN, 5, 0]</code><br  />
+<code>[0, 2, 0, -1, 1, -1, -1, 2, 2]</code> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_shortest_path_8cs_source.html#l00392">392</a> of file <a class="el" href="_shortest_path_8cs_source.html">ShortestPath.cs</a>.</p>
+
+<p class="reference">References <a class="el" href="_pathfinding_native_8cs_source.html#l00237">HumanFactors.Pathfinding.NativeMethods.C_GeneratePredecessorAndDistanceMatricies()</a>, <a class="el" href="class_human_factors_1_1_spatial_structures_1_1_graph.html#a1a40fc2bab18a5adf42fb7a49ca6ddb9">HumanFactors.SpatialStructures.Graph.NumNodes()</a>, <a class="el" href="_pointer_holder_8cs_source.html#l00067">HumanFactors.NativeUtils.NativeObject.Pointer</a>, <a class="el" href="_native_utils_8cs_source.html#l00038">HumanFactors.NativeUtils.CVectorAndData.size</a>, and <a class="el" href="_native_utils_8cs_source.html#l00041">HumanFactors.NativeUtils.CVectorAndData.size2</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_pathfinding_1_1_shortest_path_abf65038bac66da2c403034c05f83bee9_cgraph.svg" width="804" height="134"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
 
 </div>
 </div>
@@ -513,6 +964,13 @@ Static Public Member Functions</h2></td></tr>
 <li>src/Csharp/packages/pathfinding/src/<a class="el" href="_shortest_path_8cs_source.html">ShortestPath.cs</a></li>
 </ul>
 </div><!-- contents -->
+<div class="ttc" id="aclass_human_factors_1_1_pathfinding_1_1_shortest_path_html_abf65038bac66da2c403034c05f83bee9"><div class="ttname"><a href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html#abf65038bac66da2c403034c05f83bee9">HumanFactors.Pathfinding.ShortestPath.GeneratePredecessorAndDistanceMatricies</a></div><div class="ttdeci">static void GeneratePredecessorAndDistanceMatricies(Graph g, out UnmanagedFloatArray2D out_dist, out UnmanagedIntArray2D out_predecessor, string cost_type=&quot;&quot;)</div><div class="ttdoc">Calculate Predecessor and Distance Matricies for a graph.</div><div class="ttdef"><b>Definition:</b> <a href="_shortest_path_8cs_source.html#l00392">ShortestPath.cs:392</a></div></div>
+<div class="ttc" id="aclass_human_factors_1_1_graph_generator_1_1_graph_generator_html"><div class="ttname"><a href="class_human_factors_1_1_graph_generator_1_1_graph_generator.html">HumanFactors.GraphGenerator.GraphGenerator</a></div><div class="ttdoc">Generate a graph of accessible space on a mesh.</div><div class="ttdef"><b>Definition:</b> <a href="_graph_generator_8cs_source.html#l00032">GraphGenerator.cs:33</a></div></div>
+<div class="ttc" id="aclass_human_factors_1_1_graph_generator_1_1_graph_generator_html_a2672814edcde623d71233353fe6e0d2f"><div class="ttname"><a href="class_human_factors_1_1_graph_generator_1_1_graph_generator.html#a2672814edcde623d71233353fe6e0d2f">HumanFactors.GraphGenerator.GraphGenerator.GenerateGraph</a></div><div class="ttdeci">static Graph GenerateGraph(EmbreeBVH bvh, Vector3D start_point, Vector3D spacing, int max_nodes=-1, float up_step=0.2f, float up_slope=20, float down_step=0.2f, float down_slope=20, int max_step_connections=1, int core_count=-1)</div><div class="ttdoc">Generate a graph of accessible space with the given settings. If no graph can be generated,...</div><div class="ttdef"><b>Definition:</b> <a href="_graph_generator_8cs_source.html#l00083">GraphGenerator.cs:83</a></div></div>
+<div class="ttc" id="anamespace_human_factors_1_1_graph_generator_html"><div class="ttname"><a href="namespace_human_factors_1_1_graph_generator.html">HumanFactors.GraphGenerator</a></div><div class="ttdoc">Generate a graph of accessible space from a given start point.</div><div class="ttdef"><b>Definition:</b> <a href="_graph_generator_8cs_source.html#l00023">GraphGenerator.cs:24</a></div></div>
+<div class="ttc" id="anamespace_human_factors_html"><div class="ttname"><a href="namespace_human_factors.html">HumanFactors</a></div><div class="ttdoc">Automated analysis of the built environent</div><div class="ttdef"><b>Definition:</b> <a href="_common_types_8cs_source.html#l00008">CommonTypes.cs:9</a></div></div>
+<div class="ttc" id="anamespace_human_factors_1_1_pathfinding_html"><div class="ttname"><a href="namespace_human_factors_1_1_pathfinding.html">HumanFactors.Pathfinding</a></div><div class="ttdoc">Calculate the shortest path between points in a Graph.</div><div class="ttdef"><b>Definition:</b> <a href="_path_8cs_source.html#l00005">Path.cs:6</a></div></div>
+<div class="ttc" id="aclass_human_factors_1_1_pathfinding_1_1_shortest_path_html"><div class="ttname"><a href="class_human_factors_1_1_pathfinding_1_1_shortest_path.html">HumanFactors.Pathfinding.ShortestPath</a></div><div class="ttdoc">Functions for finding the shortest path between two nodes in a graph.</div><div class="ttdef"><b>Definition:</b> <a href="_shortest_path_8cs_source.html#l00048">ShortestPath.cs:49</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

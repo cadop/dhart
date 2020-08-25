@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['db_5fbusy_559',['DB_BUSY',['../namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987fa14c281877943a01a538580a4b7581e71',1,'HumanFactors::Exceptions']]]
+  ['count_635',['COUNT',['../namespace_human_factors_1_1_spatial_structures.html#abd405fa41da0f9a771d547aa47b6e1a0a4905ac9d6a22bdfc1ae096094ce6248d',1,'HumanFactors.SpatialStructures.COUNT()'],['../namespace_human_factors_1_1_view_analysis.html#ae24b8f5d9783a270e51183ff2eca765ca4905ac9d6a22bdfc1ae096094ce6248d',1,'HumanFactors.ViewAnalysis.COUNT()']]]
 ];

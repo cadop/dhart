@@ -1,0 +1,66 @@
+\hypertarget{namespace_human_factors_1_1_geometry}{}\doxysection{Human\+Factors.\+Geometry Namespace Reference}
+\label{namespace_human_factors_1_1_geometry}\index{HumanFactors.Geometry@{HumanFactors.Geometry}}
+
+
+Manipulate and load geometry from disk.  
+
+
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_common_rotations}{Common\+Rotations}}
+\begin{DoxyCompactList}\small\item\em A collection of rotations that are frequently useful in \mbox{\hyperlink{namespace_human_factors}{Human\+Factors}}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_mesh_info}{Mesh\+Info}}
+\begin{DoxyCompactList}\small\item\em A collection of vertices and indices representing geometry. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_o_b_j_loader}{O\+B\+J\+Loader}}
+\begin{DoxyCompactList}\small\item\em Load mesh geometry from O\+BJ files on disk. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespace_human_factors_1_1_geometry_ae1dc76f9bc90183da6add631332cb1fd}{G\+R\+O\+U\+P\+\_\+\+M\+E\+T\+H\+OD}} \{ \mbox{\hyperlink{namespace_human_factors_1_1_geometry_ae1dc76f9bc90183da6add631332cb1fda33e3f15f2b466fe10c57c375d63d97e2}{G\+R\+O\+U\+P\+\_\+\+M\+E\+T\+H\+O\+D.\+O\+N\+L\+Y\+\_\+\+F\+I\+LE}} = 0, 
+\mbox{\hyperlink{namespace_human_factors_1_1_geometry_ae1dc76f9bc90183da6add631332cb1fdab6c03f292e75485f4a0d86f9cfb5a8e9}{G\+R\+O\+U\+P\+\_\+\+M\+E\+T\+H\+O\+D.\+B\+Y\+\_\+\+G\+R\+O\+UP}} = 1, 
+\mbox{\hyperlink{namespace_human_factors_1_1_geometry_ae1dc76f9bc90183da6add631332cb1fda14907dd73a22e135b409651873cf6b9c}{G\+R\+O\+U\+P\+\_\+\+M\+E\+T\+H\+O\+D.\+B\+Y\+\_\+\+M\+A\+T\+E\+R\+I\+AL}} = 2
+ \}
+\begin{DoxyCompactList}\small\item\em Methods for seperating meshes when loading from O\+BJ. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Manipulate and load geometry from disk. 
+
+The \mbox{\hyperlink{namespace_human_factors_1_1_geometry}{Geometry}} namespace contains all functionality in \mbox{\hyperlink{namespace_human_factors}{Human\+Factors}} for dealing with mesh \mbox{\hyperlink{namespace_human_factors_1_1_geometry}{Geometry}}. The fundamental datatype of \mbox{\hyperlink{namespace_human_factors_1_1_geometry}{Human\+Factors.\+Geometry}} is \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_mesh_info}{Mesh\+Info}}, which stores the vertices and indices of a mesh in unmanaged memory.
+
+\begin{DoxyRemark}{Remarks}
+Right now only O\+BJ files are supported for loading geometry from disk, however \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_mesh_info}{Mesh\+Info}} offers multiple constructors that accept arrays of vertices and indices so support for more formats can be developed.
+\end{DoxyRemark}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_o_b_j_loader}{O\+B\+J\+Loader}} to load O\+BJ files from disk. 
+
+\mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_mesh_info}{Mesh\+Info}} for details on how \mbox{\hyperlink{namespace_human_factors}{Human\+Factors}} represents mesh geometry, and how to convert a mesh into a format that humanfactors can use. 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{namespace_human_factors_1_1_geometry_ae1dc76f9bc90183da6add631332cb1fd}\label{namespace_human_factors_1_1_geometry_ae1dc76f9bc90183da6add631332cb1fd}} 
+\index{HumanFactors.Geometry@{HumanFactors.Geometry}!GROUP\_METHOD@{GROUP\_METHOD}}
+\index{GROUP\_METHOD@{GROUP\_METHOD}!HumanFactors.Geometry@{HumanFactors.Geometry}}
+\doxysubsubsection{\texorpdfstring{GROUP\_METHOD}{GROUP\_METHOD}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{namespace_human_factors_1_1_geometry_ae1dc76f9bc90183da6add631332cb1fd}{Human\+Factors.\+Geometry.\+G\+R\+O\+U\+P\+\_\+\+M\+E\+T\+H\+OD}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Methods for seperating meshes when loading from O\+BJ. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ONLY\_FILE@{ONLY\_FILE}!HumanFactors.Geometry@{HumanFactors.Geometry}}\index{HumanFactors.Geometry@{HumanFactors.Geometry}!ONLY\_FILE@{ONLY\_FILE}}}\mbox{\Hypertarget{namespace_human_factors_1_1_geometry_ae1dc76f9bc90183da6add631332cb1fda33e3f15f2b466fe10c57c375d63d97e2}\label{namespace_human_factors_1_1_geometry_ae1dc76f9bc90183da6add631332cb1fda33e3f15f2b466fe10c57c375d63d97e2}} 
+O\+N\+L\+Y\+\_\+\+F\+I\+LE&Don\textquotesingle{}t group submeshes. Return the entire file as a single \mbox{\hyperlink{class_human_factors_1_1_geometry_1_1_mesh_info}{Mesh\+Info}}. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BY\_GROUP@{BY\_GROUP}!HumanFactors.Geometry@{HumanFactors.Geometry}}\index{HumanFactors.Geometry@{HumanFactors.Geometry}!BY\_GROUP@{BY\_GROUP}}}\mbox{\Hypertarget{namespace_human_factors_1_1_geometry_ae1dc76f9bc90183da6add631332cb1fdab6c03f292e75485f4a0d86f9cfb5a8e9}\label{namespace_human_factors_1_1_geometry_ae1dc76f9bc90183da6add631332cb1fdab6c03f292e75485f4a0d86f9cfb5a8e9}} 
+B\+Y\+\_\+\+G\+R\+O\+UP&Create a seperate meshinfo for every obj group in the file. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BY\_MATERIAL@{BY\_MATERIAL}!HumanFactors.Geometry@{HumanFactors.Geometry}}\index{HumanFactors.Geometry@{HumanFactors.Geometry}!BY\_MATERIAL@{BY\_MATERIAL}}}\mbox{\Hypertarget{namespace_human_factors_1_1_geometry_ae1dc76f9bc90183da6add631332cb1fda14907dd73a22e135b409651873cf6b9c}\label{namespace_human_factors_1_1_geometry_ae1dc76f9bc90183da6add631332cb1fda14907dd73a22e135b409651873cf6b9c}} 
+B\+Y\+\_\+\+M\+A\+T\+E\+R\+I\+AL&Create a seperate meshinfo for every material in the file. Requires the .mtl to be located next to the O\+BJ upon loading. If a .mtl could not be found, O\+N\+L\+Y\+\_\+\+F\+I\+LE is used as a fallback. \\
+\hline
+
+\end{DoxyEnumFields}

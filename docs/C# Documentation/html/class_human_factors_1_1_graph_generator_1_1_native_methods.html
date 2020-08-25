@@ -74,10 +74,21 @@ $(function() {
 <div class="title">HumanFactors.GraphGenerator.NativeMethods Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Native methods for the <a class="el" href="class_human_factors_1_1_graph_generator_1_1_graph_generator.html" title="Generate a graph of accessible space on a mesh.">GraphGenerator</a>.  
+ <a href="class_human_factors_1_1_graph_generator_1_1_native_methods.html#details">More...</a></p>
+<div class="dynheader">
+Collaboration diagram for HumanFactors.GraphGenerator.NativeMethods:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_graph_generator_1_1_native_methods__coll__graph.svg" width="218" height="142"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pac-static-methods"></a>
 Static Package Functions</h2></td></tr>
 <tr class="memitem:afac242a53a5c7b653d3dd26eff268928"><td class="memItemLeft" align="right" valign="top">static IntPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_graph_generator_1_1_native_methods.html#afac242a53a5c7b653d3dd26eff268928">C_GenerateGraph</a> (IntPtr bvh, <a class="el" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> start_point, <a class="el" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> spacing, int max_nodes=-1, float up_step=0.2f, float up_slope=20, float down_step=0.2f, float down_slope=20, int max_step_connections=1, int core_count=-1)</td></tr>
+<tr class="memdesc:afac242a53a5c7b653d3dd26eff268928"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a graph using the C++ graph generator. <br  />
+  <a href="class_human_factors_1_1_graph_generator_1_1_native_methods.html#afac242a53a5c7b653d3dd26eff268928">More...</a><br /></td></tr>
 <tr class="separator:afac242a53a5c7b653d3dd26eff268928"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
@@ -91,8 +102,9 @@ Static Private Attributes</h2></td></tr>
 <tr class="separator:a1108a63632dd88cfeca913ef269accba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_graph_generator_native_8cs_source.html#l00009">9</a> of file <a class="el" href="_graph_generator_native_8cs_source.html">GraphGeneratorNative.cs</a>.</p>
+<div class="textblock"><p>Native methods for the <a class="el" href="class_human_factors_1_1_graph_generator_1_1_graph_generator.html" title="Generate a graph of accessible space on a mesh.">GraphGenerator</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="_graph_generator_native_8cs_source.html#l00011">11</a> of file <a class="el" href="_graph_generator_native_8cs_source.html">GraphGeneratorNative.cs</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="afac242a53a5c7b653d3dd26eff268928"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afac242a53a5c7b653d3dd26eff268928">&#9670;&nbsp;</a></span>C_GenerateGraph()</h2>
@@ -176,11 +188,42 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_generator_native_8cs_source.html#l00013">13</a> of file <a class="el" href="_graph_generator_native_8cs_source.html">GraphGeneratorNative.cs</a>.</p>
+<p>Generate a graph using the C++ graph generator. <br  />
+ </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bvh</td><td>A pointer to a valid EmbreeBVH in native memory. </td></tr>
+    <tr><td class="paramname">start_point</td><td>The starting point for the graph generator. If this isn't above solid ground, no nodes will be generated. </td></tr>
+    <tr><td class="paramname">spacing</td><td>Space between nodes.Lower values will yield more nodes for a higher resolution graph. </td></tr>
+    <tr><td class="paramname">max_nodes</td><td>The maximum amount of nodes to generate. </td></tr>
+    <tr><td class="paramname">up_step</td><td>Maximum height of a step the graph can traverse.Any steps higher this will be considered inaccessible. </td></tr>
+    <tr><td class="paramname">up_slope</td><td>Maximum upward slope the graph can traverse in degrees.Any slopes steeper than this will be considered inaccessible. </td></tr>
+    <tr><td class="paramname">down_step</td><td>Maximum step down the graph can traverse.Any steps steeper than this will be considered inaccessible. </td></tr>
+    <tr><td class="paramname">down_slope</td><td>The maximum downward slope the graph can traverse. Any slopes steeper than this will be considered inaccessible. </td></tr>
+    <tr><td class="paramname">max_step_connections</td><td>Multiplier for number of children to generate for each node. Increasing this value will increase the number of edges in the graph, and as a result the amount of memory the algorithm requires. </td></tr>
+    <tr><td class="paramname">core_count</td><td>Number of cores to use. -1 will use all available cores, and 0 will run a serialized version of the algorithm.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A pointer to a graph generated with the given parameters or a null pointer if no graph could be generated with the given parameters. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_graph_generator_native_8cs_source.html#l00039">39</a> of file <a class="el" href="_graph_generator_native_8cs_source.html">GraphGeneratorNative.cs</a>.</p>
 
 <p class="reference">References <a class="el" href="class_human_factors_1_1_graph_generator_1_1_native_methods.html#a85bdf700aeb6a2ea6992a5a63b84d231">HumanFactors.GraphGenerator.NativeMethods.GenerateGraph()</a>, and <a class="el" href="struct_human_factors_1_1_vector3_d.html#a1f3e0afd7c741d15bb2572935d26aad6">HumanFactors.Vector3D.ToArray()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="_graph_generator_8cs_source.html#l00083">HumanFactors.GraphGenerator.GraphGenerator.GenerateGraph()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_graph_generator_1_1_native_methods_afac242a53a5c7b653d3dd26eff268928_cgraph.svg" width="480" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_graph_generator_1_1_native_methods_afac242a53a5c7b653d3dd26eff268928_icgraph.svg" width="480" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
 
 </div>
 </div>
@@ -272,7 +315,13 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="_graph_generator_native_8cs_source.html#l00013">HumanFactors.GraphGenerator.NativeMethods.C_GenerateGraph()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_graph_generator_native_8cs_source.html#l00039">HumanFactors.GraphGenerator.NativeMethods.C_GenerateGraph()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_graph_generator_1_1_native_methods_a85bdf700aeb6a2ea6992a5a63b84d231_icgraph.svg" width="735" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
 
 </div>
 </div>
@@ -297,7 +346,7 @@ Static Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_generator_native_8cs_source.html#l00010">10</a> of file <a class="el" href="_graph_generator_native_8cs_source.html">GraphGeneratorNative.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_graph_generator_native_8cs_source.html#l00013">13</a> of file <a class="el" href="_graph_generator_native_8cs_source.html">GraphGeneratorNative.cs</a>.</p>
 
 </div>
 </div>
