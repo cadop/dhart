@@ -127,8 +127,13 @@ namespace HF::SpatialStructures {
 
 
 
-	inline float StringToFloat(const std::string & str_to_convert) {
-		return std::stod(str_to_convert);
+	inline float StringToFloat(const std::string& str_to_convert) {
+		try {
+			return std::stod(str_to_convert);
+		}
+		catch (std::invalid_argument) {
+			return -1;
+		}
 	}
 
 	inline std::vector<float> ConvertStringsToFloat(const std::vector<string>& strings) {
@@ -154,12 +159,16 @@ namespace HF::SpatialStructures {
 		// Iterate through all nodes in the graph
 		for (const auto& parent : ordered_nodes) {
 
+			if (scores[parent.id] == -1)
+				continue;
+
 			// Get the subgraph for this node
 			const auto subgraph = this->GetIntEdges(parent.id);
-			
 			// Iterate through every edge of this node
 			for (const IntEdge& edge : subgraph)
 			{
+				if (scores[edge.child] == -1) continue;
+
 				// Calculate the cost for this node
 				float cost = -1;
 				switch (gen_using) {
