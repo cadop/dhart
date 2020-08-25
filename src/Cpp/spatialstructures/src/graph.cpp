@@ -139,12 +139,10 @@ namespace HF::SpatialStructures {
 		return out_floats;
 	}
 
-
-		
-	void Graph::GenerateEdgeCostsFromNodeAttribute(
+	void Graph::AttrToCost(
 		const std::string& node_attribute,
 		const std::string & out_attribute, 
-		GENERATE_USING gen_using)
+		Direction gen_using)
 	{
 		// Throw if we don't have this attribute
 		if (!this->HasNodeAttribute(node_attribute))
@@ -165,14 +163,14 @@ namespace HF::SpatialStructures {
 				// Calculate the cost for this node
 				float cost = -1;
 				switch (gen_using) {
-				case GENERATE_USING::INCOMING:
+				case Direction::INCOMING:
 					cost= scores[edge.child];
 					break;
-				case GENERATE_USING::BOTH:
+				case Direction::BOTH:
 					cost= scores[edge.child] + scores[parent.id];
 					break;
 
-				case GENERATE_USING::OUTGOING:
+				case Direction::OUTGOING:
 					cost = scores[parent.id];
 					break;
 				}

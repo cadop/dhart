@@ -35,7 +35,7 @@ namespace HF::SpatialStructures {
 
 	/*! \brief Methods of generating cost sets from node attributes. 
 	*/
-	enum class GENERATE_USING : int {
+	enum class Direction : int {
 		INCOMING = 0,
 		OUTGOING = 1,
 		BOTH = 2
@@ -1936,7 +1936,7 @@ namespace HF::SpatialStructures {
 		void ClearCostArrays(const std::string & cost_name = "");
 
 		/*! \brief Generate edge costs from a set of node attributes. */
-		void GenerateEdgeCostsFromNodeAttribute(const std::string & node_attribute, const std::string & cost_to_store_as, GENERATE_USING consider = GENERATE_USING::INCOMING);
+		void AttrToCost(const std::string & node_attribute, const std::string & cost_to_store_as, Direction consider = Direction::INCOMING);
 		
 	};
 }

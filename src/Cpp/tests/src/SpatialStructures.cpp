@@ -535,7 +535,7 @@ TEST(_Graph, AlternateCSR) {
 
 const string test_attribute = "test_attr";
 const vector<Node> test_param_nodes = {
-		{1,1,1}, {2,2,2}, {3,3,3},{4,4,4}
+		{1,1,1}, {2,2,2}, {3,3,3},{4,4,4},{5,5,5}
 };
 
 std::vector<int> GetIds(const Graph & G, const std::vector<Node> & nodes) {
@@ -556,6 +556,7 @@ Graph CreateNodeAttributeGraph() {
 	G.addEdge(Nodes[0], Nodes[1], 1);
 	G.addEdge(Nodes[3], Nodes[0], 3);
 	G.addEdge(Nodes[2], Nodes[1], 4);
+	G.addEdge(Nodes[5], Nodes[1], 4);
 
 	auto ids = GetIds(G, Nodes);
 
