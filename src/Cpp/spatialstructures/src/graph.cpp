@@ -1156,13 +1156,8 @@ namespace HF::SpatialStructures {
 	}
 
 	void Graph::AddNodeAttribute(int id, std::string attribute, std::string score) {
-		const auto node = NodeFromID(id);
-		bool node_not_found = !hasKey(node);
-
-		// This usually would be an error but we're going to eat it for now, since multiple nodes
-		// may be being added. Proper error handling should erase all changes. 
-		if (node_not_found)
-			return;
+		// Check if this id belongs to any node in the graph
+		if (id > this->MaxID()) return;
 
 		/* // requires #include <algorithm>, but not working?
 		std::string lower_cased =
