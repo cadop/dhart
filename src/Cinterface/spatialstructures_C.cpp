@@ -408,11 +408,15 @@ C_INTERFACE GraphAttrsToCosts(
 	const char* cost_string,
 	HF::SpatialStructures::Direction dir)
 {
+	// Call the function in the graph to convert this cost
 	try {
 		graph_ptr->AttrToCost(std::string(attr_key), std::string(cost_string), dir);
 	}
-	catch (std::out_of_range) {
+	catch (std::out_of_range) { // Catch if it throws out of range due to an invalid cost name
+		// return notfound to inform the caller that the node parameter they wanted didn't exist
 		return HF::Exceptions::HF_STATUS::NOT_FOUND;
 	}
+	// If we got past the trycatch without throwing then the postconditionsof attrtocost have been
+	// fulfilled. 
 	return HF::Exceptions::OK;
 }

@@ -128,19 +128,29 @@ namespace HF::SpatialStructures {
 
 
 	inline float StringToFloat(const std::string& str_to_convert) {
+
+		// As stated in the docs for stod, this will throw if the string you're trying to convert
+		// can't be converted to a number. This will occur when the string is empty, as it is in
+		// the case of a parameter that doesn't exist. 
 		try {
 			return std::stod(str_to_convert);
 		}
 		catch (std::invalid_argument) {
+			// Return -1 to signal that this string could not be converted
+			// to a decimal number
 			return -1;
 		}
 	}
 
 	inline std::vector<float> ConvertStringsToFloat(const std::vector<string>& strings) {
+		// Initialize a vector that's big enough to hold the result for every value in strings
 		std::vector<float> out_floats(strings.size());
 
+		// Iterate through every attribute in strings and convert them to floating point numbers
 		for (int i = 0; i < out_floats.size(); i++)
 			out_floats[i] = StringToFloat(strings[i]);
+
+		// Return output
 		return out_floats;
 	}
 
@@ -162,7 +172,9 @@ namespace HF::SpatialStructures {
 		else
 			throw std::out_of_range("Cost Set" + out_attribute + " is the default cost of the graph and can't be overwritten!");
 
-		// Get the costs for this attribute
+		// Get the costs for this attribute and convert every value to float. In the case that a 
+		// attribute score could not be converted due to not being a numeric value or not being set
+		// in the first place, those values will be set to -1.
 		const auto& scores = ConvertStringsToFloat(this->GetNodeAttributes(node_attribute));
 
 		// Iterate through all nodes in the graph
@@ -179,22 +191,29 @@ namespace HF::SpatialStructures {
 				// If this child has no score for this attribute, skip it.
 				if (scores[edge.child] == -1) continue;
 
-				// Calculate the cost for this node
+				// Calculate the cost of this node based on the input direction
 				float cost = -1;
 				switch (gen_using) {
 				case Direction::INCOMING:
+					// If the direction is incoming, then the only cost we care about is the cost of
+					// the node that is being traversed to, the child.
 					cost= scores[edge.child];
 					break;
 				case Direction::BOTH:
+
+					// If BOTH is specified, then we sum the costs of both the parent node and the childn\
+					// node since we care about the costs of both
 					cost= scores[edge.child] + scores[parent.id];
 					break;
 
 				case Direction::OUTGOING:
+					// If this is out going, then the score is entirely determined by the parent node
+					// since it is the node being traversed from. 
 					cost = scores[parent.id];
 					break;
 				}
 
-				// Add it to the graph as an edge
+				// Add it to the graph as an edge for the cost type specified in out_attribute
 				this->addEdge(parent.id, edge.child, cost, out_attribute);
 			}
 		}
@@ -491,16 +510,23 @@ namespace HF::SpatialStructures {
 
 	std::vector<IntEdge> Graph::GetIntEdges(int parent) const
 	{
+		// If this node is not in the graph, just return an empty array, since otherwise the following code
+		// will crash in release mode
 		if (parent > this->MaxID()) return std::vector<IntEdge>();
 
+		// Iterate through all of the edges in the graph
 		std::vector<IntEdge> intedges;
 		for (SparseMatrix<float, 1>::InnerIterator it(edge_matrix, parent); it; ++it)
 		{
-			// Add to array of edgesets
+			// Get the cost and the child of this edge
 			float cost = it.value();
 			int child = it.col();
+
+			// Push it back to our return array
 			intedges.push_back(IntEdge{ child, cost });
 		}
+
+		// Return the edges for this node. 
 		return intedges;
 	}
 
