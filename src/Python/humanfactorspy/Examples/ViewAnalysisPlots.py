@@ -1,7 +1,7 @@
 """
+
 .. plot::
     :context: close-figs
-
 
     import matplotlib.pyplot as plt
     from mpl_toolkits.mplot3d import Axes3D
@@ -9,7 +9,7 @@
     from humanfactorspy.geometry import LoadOBJ
     from humanfactorspy.raytracer import EmbreeBVH
     from humanfactorspy.graphgenerator import GenerateGraph
-    from humanfactorspy.visibilitygraph import VisibilityGraphAllToAll
+    from humanfactorspy.viewanalysis import SphericalViewAnalysis, SphericalViewAnalysisAggregate, AggregationType
     import humanfactorspy as hfpy
 
     # Get a sample model path
@@ -43,16 +43,15 @@
     print(len(nodes))
 
     height = 1.7 # Set a height offset to cast rays from the points
-    points = graph.get_node_points() # Define points as the graph nodes
-    VG = VisibilityGraphAllToAll(bvh, points, height) # Calculate the visibility graph
-    visibility_graph = VG.CompressToCSR() # Convert to a CSR (matrix)
-    scores = VG.AggregateEdgeCosts(2, True) # Aggregate the visibility graph scores
+    ray_count = 100 # Set the number of rays to use per node
+    scores = SphericalViewAnalysisAggregate(bvh, nodes, ray_count, height, 
+                                                        upward_fov = 20, downward_fov=20, 
+                                                        agg_type=AggregationType.AVERAGE)
 
     # Plot the graph using visibility graph as the colors
     fig = plt.figure(figsize=(6,6))
     plt.scatter(nodes['x'], nodes['y'], c=scores)
     plt.show()
-
 
 
 We can see all of the example cases in the test file by regenerating the graph 
@@ -77,17 +76,16 @@ by our known model offset
 
         # Get the nodes of the graph as a list of x,y,z,type,id tuples
         nodes = graph.getNodes()
-
-        height = 1.7 # Set a height offset to cast rays from the points
-        points = graph.get_node_points() # Define points as the graph nodes
-        VG = VisibilityGraphAllToAll(bvh, points, height) # Calculate the visibility graph
-        visibility_graph = VG.CompressToCSR() # Convert to a CSR (matrix)
-        scores = VG.AggregateEdgeCosts(2, True)
+        # Calculate view analysis on the new graph
+        scores = SphericalViewAnalysisAggregate(bvh, nodes, ray_count, height, 
+                                                upward_fov = 20, downward_fov=20, 
+                                                agg_type=AggregationType.AVERAGE)
 
         # Plot the graph using visibility graph as the colors
         fig = plt.figure(figsize=(6,6))
         plt.scatter(nodes['x'], nodes['y'], c=scores)
         plt.show()
+
 
 """
 
@@ -97,7 +95,7 @@ from mpl_toolkits.mplot3d import Axes3D
 from humanfactorspy.geometry import LoadOBJ
 from humanfactorspy.raytracer import EmbreeBVH
 from humanfactorspy.graphgenerator import GenerateGraph
-from humanfactorspy.visibilitygraph import VisibilityGraphAllToAll
+from humanfactorspy.viewanalysis import SphericalViewAnalysis, SphericalViewAnalysisAggregate, AggregationType
 import humanfactorspy as hfpy
 
 # Get a sample model path
@@ -131,10 +129,10 @@ nodes = graph.getNodes()
 print(len(nodes))
 
 height = 1.7 # Set a height offset to cast rays from the points
-points = graph.get_node_points() # Define points as the graph nodes
-VG = VisibilityGraphAllToAll(bvh, points, height) # Calculate the visibility graph
-visibility_graph = VG.CompressToCSR() # Convert to a CSR (matrix)
-scores = VG.AggregateEdgeCosts(2, True) # Aggregate the visibility graph scores
+ray_count = 100 # Set the number of rays to use per node
+scores = SphericalViewAnalysisAggregate(bvh, nodes, ray_count, height, 
+                                                    upward_fov = 20, downward_fov=20, 
+                                                    agg_type=AggregationType.AVERAGE)
 
 # Plot the graph using visibility graph as the colors
 fig = plt.figure(figsize=(6,6))
@@ -161,12 +159,10 @@ for i in range(5):
 
     # Get the nodes of the graph as a list of x,y,z,type,id tuples
     nodes = graph.getNodes()
-
-    height = 1.7 # Set a height offset to cast rays from the points
-    points = graph.get_node_points() # Define points as the graph nodes
-    VG = VisibilityGraphAllToAll(bvh, points, height) # Calculate the visibility graph
-    visibility_graph = VG.CompressToCSR() # Convert to a CSR (matrix)
-    scores = VG.AggregateEdgeCosts(2, True)
+    # Calculate view analysis on the new graph
+    scores = SphericalViewAnalysisAggregate(bvh, nodes, ray_count, height, 
+                                            upward_fov = 20, downward_fov=20, 
+                                            agg_type=AggregationType.AVERAGE)
 
     # Plot the graph using visibility graph as the colors
     fig = plt.figure(figsize=(6,6))
