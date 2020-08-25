@@ -1,8 +1,14 @@
-========================
-Create a Visbility Graph
-========================
+===================
+Visibility Analysis
+===================
 
-.. currentmodule:: humanfactorspy
-  
-.. automodule:: humanfactorspy.Examples.VisibilityGraphExample
-    :members:
+.. toctree::
+   :maxdepth: 2
+
+   visibility/basic.rst
+
+.. seealso::
+    These examples use methods found in the following modules:
+    :py:mod:`humanfactorspy.graphgenerator`, 
+    :py:mod:`humanfactorspy.geometry`, 
+    :py:mod:`humanfactorspy.raytracer`
