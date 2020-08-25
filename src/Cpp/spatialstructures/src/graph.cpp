@@ -153,20 +153,30 @@ namespace HF::SpatialStructures {
 		if (!this->HasNodeAttribute(node_attribute))
 			throw std::out_of_range("Node Attribute" + node_attribute + " doesn't exist in the graph!");
 		
+		// Delete the cost set that already exists at out_attribute unless out_attribute is the default cost set
+		// in which case throw because we'd be clearing the entire graph.
+		if (!this->IsDefaultName(out_attribute)) {
+			if (this->HasCostArray(out_attribute))
+				this->ClearCostArrays(out_attribute);
+		}
+		else
+			throw std::out_of_range("Cost Set" + out_attribute + " is the default cost of the graph and can't be overwritten!");
+
 		// Get the costs for this attribute
 		const auto& scores = ConvertStringsToFloat(this->GetNodeAttributes(node_attribute));
 
 		// Iterate through all nodes in the graph
 		for (const auto& parent : ordered_nodes) {
 
-			if (scores[parent.id] == -1)
-				continue;
+			// If this parent has no score for this attribute, don't do anything
+			if (scores[parent.id] == -1) continue;
 
 			// Get the subgraph for this node
 			const auto subgraph = this->GetIntEdges(parent.id);
 			// Iterate through every edge of this node
 			for (const IntEdge& edge : subgraph)
 			{
+				// If this child has no score for this attribute, skip it.
 				if (scores[edge.child] == -1) continue;
 
 				// Calculate the cost for this node
