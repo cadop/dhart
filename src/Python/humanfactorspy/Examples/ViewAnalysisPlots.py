@@ -35,9 +35,6 @@
                             up_step,up_slope,down_step,down_slope,
                             max_step_connections, cores=-1)
 
-    # Convert the graph to a CSR
-    csr_graph = graph.CompressToCSR()
-
     # Get the nodes of the graph as a list of x,y,z,type,id tuples
     nodes = graph.getNodes()
     print(len(nodes))
@@ -120,9 +117,6 @@ max_step_connections = 1
 graph = GenerateGraph(bvh, start_point, spacing, max_nodes,
                         up_step,up_slope,down_step,down_slope,
                         max_step_connections, cores=-1)
-
-# Convert the graph to a CSR
-csr_graph = graph.CompressToCSR()
 
 # Get the nodes of the graph as a list of x,y,z,type,id tuples
 nodes = graph.getNodes()
