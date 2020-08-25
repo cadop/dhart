@@ -536,6 +536,8 @@ namespace HumanFactors.Tests.SpatialStructures
         [TestMethod]
         public void ConvertAttributes()
 		{
+            // ![EX_ConvertAttributes]
+            
             // Create a graph and add two edges to create nodes
             Graph g = new Graph();
             g.CompressToCSR();
@@ -552,6 +554,10 @@ namespace HumanFactors.Tests.SpatialStructures
             // Convert this to an edge cost
             g.AttrsToCosts("Attr", "new_cost", Direction.BOTH);
 
+            // print results
+            Debug.WriteLine(String.Format("0->1 = {0}, 0->2 = {1}", g.GetCost(0, 1, "new_cost"), g.GetCost(0, 2, "new_cost")));
+
+            // ![EX_ConvertAttributes]
             Assert.AreEqual(100, g.GetCost(0, 1, "new_cost"));
             Assert.AreEqual(200, g.GetCost(0, 2, "new_cost"));
 

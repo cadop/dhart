@@ -518,10 +518,25 @@ namespace HumanFactors.SpatialStructures
 		public int NumNodes() => NativeMethods.C_GetGraphSize(this.Pointer);
 
         /*! 
-            \brief
+			\brief Generate a cost set based on a set of node parameters
+
+			\param attribute_key Attribute to create a new cost set from.
+			\param cost_key Key for the newly generated cost set. 
+			\param dir Direction to use for calculating the cost of any edge. For example
+					   INCOMING will use the cost of the node being traveled to by the edge. 
+            
+            \throws KeyNotFoundException The parameter assinged by parameter_name is not
+                                         the key of any node parameter in the graph. 
+
+            \pre An attribute of `attribute_key` already exists in the graph
+            \post A new cost set will be created in the graph with a key of `cost_key`.
+
+            \par Example
+            \snippet spatialstructures\test_spatialstructures.cs EX_ConvertAttributes
+            `0->1 = 100, 0->2 = 200`
         */
-        public void AttrsToCosts(string parameter_name, string attribute_name, Direction dir) =>
-            NativeMethods.C_AttrsToCosts(this.Pointer, parameter_name, attribute_name, dir);
+        public void AttrsToCosts(string attribute_key, string cost_key, Direction dir) =>
+            NativeMethods.C_AttrsToCosts(this.Pointer, attribute_key, cost_key, dir);
 	}
 
 
