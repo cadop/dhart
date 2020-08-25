@@ -550,12 +550,33 @@ namespace HumanFactors.SpatialStructures
 		internal static void C_ClearAttributeType(IntPtr graph, string attribute_name)
 			=> ClearAttributeType(graph, attribute_name);
 
+		internal static void C_AttrsToCosts(IntPtr graph_ptr, string parameter_name,  string cost_name, Direction dir)
+		{
+			HF_STATUS status = GraphAttrsToCosts(graph_ptr, parameter_name, cost_name, dir);
+
+			if (status == HF_STATUS.NOT_FOUND)
+				throw new KeyNotFoundException(parameter_name + " is not the key of any node attribute in the graph!");
+			else
+				Debug.Assert(status == HF_STATUS.OK);
+
+		}
+
 		[DllImport(NativeConstants.DLLPath)]
 		private static extern HF_STATUS GetNodes(
 			IntPtr graph,
 			ref IntPtr out_vector_ptr,
 			ref IntPtr out_data_ptr
 		);
+
+
+		[DllImport(NativeConstants.DLLPath)]
+		private static extern HF_STATUS GraphAttrsToCosts(
+			IntPtr graph,
+			string attr_key,
+			string cost_string,
+			Direction dir
+		);
+
 
 		[DllImport(NativeConstants.DLLPath)]
 		private static extern HF_STATUS GetSizeOfNodeVector(

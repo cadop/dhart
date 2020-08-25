@@ -26,6 +26,14 @@ namespace HumanFactors.SpatialStructures
 		COUNT = 2 ///< Count the number of edges.
 	}
 
+    public enum Direction
+    {
+        INCOMING = 0,
+        OUTGOING = 1,
+        BOTH = 2
+    }
+
+
 	/*!
         \brief Contains names for the costs of the cost algorithms in the CostAlgrorithms namespace
         
@@ -508,6 +516,12 @@ namespace HumanFactors.SpatialStructures
             `3`
         */
 		public int NumNodes() => NativeMethods.C_GetGraphSize(this.Pointer);
+
+        /*! 
+            \brief
+        */
+        public void AttrsToCosts(string parameter_name, string attribute_name, Direction dir) =>
+            NativeMethods.C_AttrsToCosts(this.Pointer, parameter_name, attribute_name, dir);
 	}
 
 
@@ -608,5 +622,8 @@ namespace HumanFactors.SpatialStructures
          */
 		public static void CalculateAndStoreEnergyExpenditure(Graph g)
 			=> NativeMethods.C_CalculateAndStoreEnergyExpenditure(g.Pointer);
+
+        /*! \brief 
+        */
 	}
 }
