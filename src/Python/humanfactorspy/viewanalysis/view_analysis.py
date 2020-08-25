@@ -2,12 +2,16 @@ from ctypes import c_void_p
 from typing import *
 from enum import Enum
 
+import numpy as np
+
 from humanfactorspy.spatialstructures import NodeList
 from humanfactorspy.spatialstructures.node import CreateListOfNodeStructs
 from humanfactorspy.raytracer import EmbreeBVH, RayResultList
 
 from . import viewanalysis_native_functions
 from .view_analysis_scores import ViewAnalysisAggregates, ViewAnalysisDirections
+
+from .. import utils
 
 __all__ = ['AggregationType','SphericalViewAnalysisAggregate','SphericalViewAnalysis','SphericallyDistributeRays']
 
@@ -84,21 +88,24 @@ def SphericalViewAnalysisAggregate(
         ViewAnalysisAggregates: view analysis scores resulting from the view analysis calculation
 
     """
-    
-    if isinstance(nodes, tuple):
+
+    # If the input was a single point make it a list
+    if utils.is_point(nodes):
         nodes = [nodes]
 
-    if isinstance(nodes, list):
-        np_arr_pts = CreateListOfNodeStructs(nodes)
-        data_ptr = np_arr_pts.ctypes.data_as(c_void_p)
-        size = len(np_arr_pts)
-    else:
-        data_ptr = nodes.data_pointer
-        size = len(nodes)
+    np_arr_pts = CreateListOfNodeStructs(nodes)
+    data_ptr = np_arr_pts.ctypes.data_as(c_void_p)
+    size = len(np_arr_pts)
 
     (size,score_vector_ptr,score_data_ptr) = viewanalysis_native_functions.C_SphericalViewAnalysisAggregate(
-                                                bvh.pointer, data_ptr, size, ray_count, height,
-                                                agg_type.value, upper_fov=upward_fov, lower_fov=downward_fov)
+                                                bvh.pointer, 
+                                                data_ptr, 
+                                                size, 
+                                                ray_count, 
+                                                height,
+                                                agg_type.value, 
+                                                upper_fov=upward_fov, 
+                                                lower_fov=downward_fov)
 
     return ViewAnalysisAggregates(score_vector_ptr, score_data_ptr, size)
 
@@ -146,37 +153,30 @@ def SphericalViewAnalysis(
         >>> va = SphericalViewAnalysis(BVH, origins, 10, 1.7)
         >>> print(va)
         [[(-1.      , -1) (-1.      , -1) (-1.      , -1) (-1.      , -1)
-          (-1.      , -1) ( 5.40725 , 39) (-1.      , -1) (-1.      , -1)
-          ( 3.529445, 39) (-1.      , -1)]
+          (-1.      , -1) ( 5.40725 ,  0) (-1.      , -1) (-1.      , -1)
+          ( 3.529445,  0) (-1.      , -1)]
          [(-1.      , -1) (-1.      , -1) (-1.      , -1) (-1.      , -1)
-          (-1.      , -1) ( 5.40725 , 39) (-1.      , -1) (-1.      , -1)
-          ( 3.529445, 39) (-1.      , -1)]]
+          (-1.      , -1) ( 5.40725 ,  0) (-1.      , -1) (-1.      , -1)
+          ( 3.529445,  0) (-1.      , -1)]]
 
     """
-    if isinstance(nodes, tuple):
+
+    # If the input was a single point make it a list
+    if utils.is_point(nodes):
         nodes = [nodes]
 
-    if isinstance(nodes, list):
-        np_arr_pts = CreateListOfNodeStructs(nodes)
-        data_ptr = np_arr_pts.ctypes.data_as(c_void_p)
-        size = len(np_arr_pts)
-    else:
-        data_ptr = nodes.data_pointer
-        size = len(nodes)
+    np_arr_pts = CreateListOfNodeStructs(nodes)
+    data_ptr = np_arr_pts.ctypes.data_as(c_void_p)
+    size = len(np_arr_pts)
 
-    (
-        score_vector_ptr,
-        score_data_ptr,
-        ray_count
-    ) = viewanalysis_native_functions.C_SphericalViewAnalysis(
-        bvh.pointer,
-        data_ptr,
-        size,
-        ray_count,
-        height,
-        upper_fov=upward_fov,
-        lower_fov=downward_fov,
-    )
+    (score_vector_ptr,score_data_ptr,ray_count) = viewanalysis_native_functions.C_SphericalViewAnalysis(
+                                                    bvh.pointer,
+                                                    data_ptr,
+                                                    size,
+                                                    ray_count,
+                                                    height,
+                                                    upper_fov=upward_fov,
+                                                    lower_fov=downward_fov)
 
     return RayResultList(score_vector_ptr, score_data_ptr, size, ray_count)
 

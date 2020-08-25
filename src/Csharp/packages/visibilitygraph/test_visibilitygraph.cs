@@ -121,7 +121,6 @@ namespace HumanFactors.Tests.VisibilityGraph
             Debug.WriteLine("[{0}, {1}, {2}, {3}]", results[0], results[1], results[2], results[3]);
 
             //! [EX_GroupToGroup]
-            
             // Assert this is a valid graph
             Assert.IsTrue(IsValidGraph(G));
 
@@ -130,6 +129,16 @@ namespace HumanFactors.Tests.VisibilityGraph
             Assert.IsTrue(IsNear(1.4142f, results[1]));
             Assert.IsTrue(IsNear(0, results[2]));
             Assert.IsTrue(IsNear(0, results[3]));
+
+            //! [EX_GroupToGroupUndirected]
+
+            // Print the undirected results
+            results = G.AggregateEdgeCosts(GraphEdgeAggregation.SUM, directed:false);
+
+            Debug.WriteLine("[{0}, {1}, {2}, {3}]", results[0], results[1], results[2], results[3]);
+
+            //! [EX_GroupToGroupUndirected]
+
         }
     }
 }

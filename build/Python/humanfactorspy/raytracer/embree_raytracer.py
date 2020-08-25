@@ -7,7 +7,7 @@ import humanfactorspy.raytracer.raytracer_native_functions as raytracer_native_f
 from humanfactorspy.native_numpy_like import NativeNumpyLike
 from humanfactorspy.utils import is_point
 
-__all__ = ['ResultStruct','RayResultList','isValidBVH','Intersect','IntersectForPoint','IntersectOccluded']
+__all__ = ['ResultStruct','RayResultList','isValidBVH','Intersect','IntersectForPoint','IntersectOccluded', 'IntersectDistanceDouble']
 
 class ResultStruct(ctypes.Structure):
     """ A struct of results containing distance, and meshid 
@@ -108,47 +108,53 @@ def Intersect(
     Examples:
         Firing a single ray
 
+        >>> import numpy as np
+        >>> from numpy.lib import recfunctions as rfn
         >>> from humanfactorspy.geometry import LoadOBJ, CommonRotations, ConstructPlane
         >>> from humanfactorspy.raytracer import EmbreeBVH, Intersect
-        
+        >>> 
         >>> loaded_obj = ConstructPlane()
         >>> loaded_obj.Rotate(CommonRotations.Yup_to_Zup)
         >>> bvh = EmbreeBVH(loaded_obj)
-        
+        >>> 
         >>> result = Intersect(bvh, (0,0,1), (0,0,-1))
-        >>> print(result)
-        (0.9999999403953552, 39)
+        >>> print(np.around(result,5))
+        [1. 0.]
 
-
-        Firing rays with an equal number of directions and origins
-
-        >>> from humanfactorspy.geometry import LoadOBJ, CommonRotations, ConstructPlane
-        >>> from humanfactorspy.raytracer import EmbreeBVH, Intersect
-
+        >>> #Firing rays with an equal number of directions and origins
+        >>> 
         >>> loaded_obj = ConstructPlane()
         >>> loaded_obj.Rotate(CommonRotations.Yup_to_Zup)
         >>> bvh = EmbreeBVH(loaded_obj)
-
+        >>> 
         >>> hit_point = Intersect(bvh, [(0,0,1)] * 10, [(0,0,-1)] * 10)
-        >>> print(hit_point)
-        [(0.99999994, 39) (0.99999994, 39) (0.99999994, 39) (0.99999994, 39)
-         (0.99999994, 39) (0.99999994, 39) (0.99999994, 39) (0.99999994, 39)
-         (0.99999994, 39) (0.99999994, 39)]
+        >>> # Convert to numpy unstructured and round
+        >>> print(np.around(rfn.structured_to_unstructured(hit_point.array),5))
+        [[1. 0.]
+         [1. 0.]
+         [1. 0.]
+         [1. 0.]
+         [1. 0.]
+         [1. 0.]
+         [1. 0.]
+         [1. 0.]
+         [1. 0.]
+         [1. 0.]]
 
-        Firing multiple rays with one direction and multiple origins
-
-        >>> from humanfactorspy.geometry import LoadOBJ, CommonRotations, ConstructPlane
-        >>> from humanfactorspy.raytracer import EmbreeBVH, Intersect
-
+        >>> #Firing multiple rays with one direction and multiple origins
+        >>> 
         >>> loaded_obj = ConstructPlane()
         >>> loaded_obj.Rotate(CommonRotations.Yup_to_Zup)
         >>> bvh = EmbreeBVH(loaded_obj)
-
+        >>> 
         >>> origins = [(0,0,x) for x in range(0,5)]
         >>> hit_point = Intersect(bvh, origins, (0,0,-1))
-        >>> print(hit_point)
-        [(-1.        , -1) ( 0.99999994, 39) ( 1.9999999 , 39) ( 2.9999998 , 39)
-         ( 3.9999995 , 39)]
+        >>> print(np.around(rfn.structured_to_unstructured(hit_point.array),5))
+        [[-1. -1.]
+         [ 1.  0.]
+         [ 2.  0.]
+         [ 3.  0.]
+         [ 4.  0.]]
 
     """
     # Check if origin and direction can be used as points
@@ -329,3 +335,18 @@ def IntersectOccluded(
         return res[0]
     else:
         return res
+
+def IntersectDistanceDouble(bvh: EmbreeBVH, origin:Tuple[float, float, float], direction:Tuple[float, float, float]) -> float:
+    """ Obtain the distance between a raycast and a point of intersection with double precision
+
+    Args:
+        bvh (EmbreeBVH): BVH to intersect with
+        origin (Tuple[float, float, float]): Origin point of the ray
+        direction (Tuple[float, float, float]): Direction the ray is cast in
+
+    Returns:
+        float: Distance from origin to the point of intersection. If this value is less than 1 then 
+                no intersection could be found.
+    """
+   
+    return raytracer_native_functions.C_PreciseIntersection(bvh.pointer, origin, direction)

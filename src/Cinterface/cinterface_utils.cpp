@@ -36,4 +36,8 @@ C_INTERFACE DestroyIntVector(std::vector<int>* int_vector)
 	return HF::Exceptions::HF_STATUS::OK;
 }
 
+C_INTERFACE DestroyCharArray(char* char_array) {
+	delete[] char_array;
+	return HF::Exceptions::HF_STATUS::OK;
+}
 

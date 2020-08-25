@@ -30,9 +30,10 @@ In this example we generate a graph.
 
 
 .. testoutput:: 
-
+    :options: +NORMALIZE_WHITESPACE
+    
     594
-    [(-1. , -6. ,  0., 0, 0) (-1.5, -6.5, -0., 0, 1) (-1.5, -6. , -0., 0, 2)]
+    [(-1. , -6. , -0., 0, 0) (-1.5, -6.5, -0., 0, 1) (-1.5, -6. , -0., 0, 2)]
 
 """
 

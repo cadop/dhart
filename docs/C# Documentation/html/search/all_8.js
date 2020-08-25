@@ -1,12 +1,11 @@
 var searchData=
 [
-  ['firemultipledirectionsoneorigin_112',['FireMultipleDirectionsOneOrigin',['../class_human_factors_1_1_ray_tracing_1_1_native_methods.html#a44c2b1d55dda3a993d0411f66f2d0c5f',1,'HumanFactors::RayTracing::NativeMethods']]],
-  ['firemultipleoriginsonedirection_113',['FireMultipleOriginsOneDirection',['../class_human_factors_1_1_ray_tracing_1_1_native_methods.html#a57f4977fd19a6ee72c4ab34dd563c8d7',1,'HumanFactors::RayTracing::NativeMethods']]],
-  ['firemultiplerays_114',['FireMultipleRays',['../class_human_factors_1_1_ray_tracing_1_1_native_methods.html#a5d6e9fc666bf29b2ac9bf3fe75c074db',1,'HumanFactors::RayTracing::NativeMethods']]],
-  ['fireocclusionrays_115',['FireOcclusionRays',['../class_human_factors_1_1_ray_tracing_1_1_native_methods.html#af942902fcb3b3fb189e0384da3791a12',1,'HumanFactors::RayTracing::NativeMethods']]],
-  ['fireray_116',['FireRay',['../class_human_factors_1_1_ray_tracing_1_1_native_methods.html#a985126efaaf8c95d6fb49425a8b6443c',1,'HumanFactors::RayTracing::NativeMethods']]],
-  ['fireraysdistance_117',['FireRaysDistance',['../class_human_factors_1_1_ray_tracing_1_1_native_methods.html#a96c75fac4a3d2e1804cab2f4dbddc868',1,'HumanFactors::RayTracing::NativeMethods']]],
-  ['firesingleraydistance_118',['FireSingleRayDistance',['../class_human_factors_1_1_ray_tracing_1_1_native_methods.html#a3107158dd3e14f505acc8adde2903801',1,'HumanFactors::RayTracing::NativeMethods']]],
-  ['flattenvectorarray_119',['FlattenVectorArray',['../class_human_factors_1_1_native_utils_1_1_helper_functions.html#a1b8660057551684c95da0edd711293e6',1,'HumanFactors::NativeUtils::HelperFunctions']]],
-  ['floatarraytovectorarray_120',['FloatArrayToVectorArray',['../class_human_factors_1_1_native_utils_1_1_helper_functions.html#ac871336ffa2bbfd33523a93ba600acb0',1,'HumanFactors::NativeUtils::HelperFunctions']]]
+  ['embreebvh_122',['EmbreeBVH',['../class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h.html',1,'HumanFactors.RayTracing.EmbreeBVH'],['../class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h.html#a19eccce09b0701d3da27fad138656585',1,'HumanFactors.RayTracing.EmbreeBVH.EmbreeBVH(MeshInfo MI, bool use_precise=false)'],['../class_human_factors_1_1_ray_tracing_1_1_embree_b_v_h.html#a738510fcc29c83190c33673c14f6173b',1,'HumanFactors.RayTracing.EmbreeBVH.EmbreeBVH(MeshInfo[] MI)']]],
+  ['embreebvh_2ecs_123',['EmbreeBVH.cs',['../_embree_b_v_h_8cs.html',1,'']]],
+  ['embreeraytracer_124',['EmbreeRaytracer',['../class_human_factors_1_1_ray_tracing_1_1_embree_raytracer.html',1,'HumanFactors::RayTracing']]],
+  ['embreeraytracer_2ecs_125',['EmbreeRayTracer.cs',['../_embree_ray_tracer_8cs.html',1,'']]],
+  ['energy_5fexpenditure_126',['ENERGY_EXPENDITURE',['../class_human_factors_1_1_spatial_structures_1_1_cost_algorithm_names.html#aadcfbad9347a58519714d6ce7db18280',1,'HumanFactors::SpatialStructures::CostAlgorithmNames']]],
+  ['equals_127',['Equals',['../class_human_factors_1_1_native_utils_1_1_native_array.html#a017a7b3798ef74f6603cfb88614f87b0',1,'HumanFactors.NativeUtils.NativeArray.Equals()'],['../struct_human_factors_1_1_pathfinding_1_1_path_member.html#a0d2f333b3aa87ca2741d202159033de5',1,'HumanFactors.Pathfinding.PathMember.Equals()']]],
+  ['exceptions_2ecs_128',['Exceptions.cs',['../_exceptions_8cs.html',1,'']]],
+  ['extensions_129',['Extensions',['../class_human_factors_1_1_extensions.html',1,'HumanFactors']]]
 ];

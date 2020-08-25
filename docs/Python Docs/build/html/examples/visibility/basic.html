@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>Visualize a Visbility Graph Connections &mdash; Human Metrics 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" >
+    <link rel="search" title="Search" href="../../search.html" >
+    <link rel="top" title="Human Metrics 0.0.1 documentation" href="../../index.html" >
+    <link rel="up" title="Visibility Analysis" href="../visibility_graph.html" >
+    <link rel="next" title="Visibility Graph Grouping" href="groups.html" >
+    <link rel="prev" title="Visibility Analysis" href="../visibility_graph.html" > 
+  </head>
+  <body>
+
+  <div class="container">
+    <div class="header">
+    </div>
+  </div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="http://">Git</a></li>
+	
+        <li class="active"><a href="../../index.html">Human Metrics 0.0.1 documentation</a></li>
+	
+          <li class="active"><a href="../../examples.html" >Examples</a></li>
+          <li class="active"><a href="../visibility_graph.html" accesskey="U">Visibility Analysis</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="groups.html" title="Visibility Graph Grouping"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="../visibility_graph.html" title="Visibility Analysis"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="module-humanfactorspy.Examples.VisibilityGraphPlots">
+<span id="visualize-a-visbility-graph-connections"></span><h1>Visualize a Visbility Graph Connections<a class="headerlink" href="#module-humanfactorspy.Examples.VisibilityGraphPlots" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
+
+<span class="kn">from</span> <span class="nn">humanfactorspy.geometry</span> <span class="kn">import</span> <span class="n">LoadOBJ</span>
+<span class="kn">from</span> <span class="nn">humanfactorspy.raytracer</span> <span class="kn">import</span> <span class="n">EmbreeBVH</span>
+<span class="kn">from</span> <span class="nn">humanfactorspy.graphgenerator</span> <span class="kn">import</span> <span class="n">GenerateGraph</span>
+<span class="kn">from</span> <span class="nn">humanfactorspy.visibilitygraph</span> <span class="kn">import</span> <span class="n">VisibilityGraphAllToAll</span>
+<span class="kn">import</span> <span class="nn">humanfactorspy</span> <span class="k">as</span> <span class="nn">hfpy</span>
+
+<span class="c1"># Get a sample model path</span>
+<span class="n">obj_path</span> <span class="o">=</span> <span class="n">hfpy</span><span class="o">.</span><span class="n">get_sample_model</span><span class="p">(</span><span class="s2">&quot;VisibilityTestCases.obj&quot;</span><span class="p">)</span>
+
+<span class="c1"># Load the obj file</span>
+<span class="n">obj</span> <span class="o">=</span> <span class="n">LoadOBJ</span><span class="p">(</span><span class="n">obj_path</span><span class="p">)</span>
+
+<span class="c1"># Create a BVH</span>
+<span class="n">bvh</span> <span class="o">=</span> <span class="n">EmbreeBVH</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Set the graph parameters</span>
+<span class="c1"># Test examples are failing on 1. Seems to be embree failing on edge intersection</span>
+<span class="n">start_point</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.1</span> <span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span> <span class="c1">#offset X by 60 for each new model</span>
+<span class="n">spacing</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">max_nodes</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">up_step</span><span class="p">,</span> <span class="n">down_step</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span>
+<span class="n">up_slope</span><span class="p">,</span> <span class="n">down_slope</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
+<span class="n">max_step_connections</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># Generate the Graph</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="n">GenerateGraph</span><span class="p">(</span><span class="n">bvh</span><span class="p">,</span> <span class="n">start_point</span><span class="p">,</span> <span class="n">spacing</span><span class="p">,</span> <span class="n">max_nodes</span><span class="p">,</span>
+                        <span class="n">up_step</span><span class="p">,</span><span class="n">up_slope</span><span class="p">,</span><span class="n">down_step</span><span class="p">,</span><span class="n">down_slope</span><span class="p">,</span>
+                        <span class="n">max_step_connections</span><span class="p">,</span> <span class="n">cores</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Convert the graph to a CSR</span>
+<span class="n">csr_graph</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">CompressToCSR</span><span class="p">()</span>
+
+<span class="c1"># Get the nodes of the graph as a list of x,y,z,type,id tuples</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">getNodes</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">))</span>
+
+<span class="n">height</span> <span class="o">=</span> <span class="mf">1.7</span> <span class="c1"># Set a height offset to cast rays from the points</span>
+<span class="n">points</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">get_node_points</span><span class="p">()</span> <span class="c1"># Define points as the graph nodes</span>
+<span class="n">VG</span> <span class="o">=</span> <span class="n">VisibilityGraphAllToAll</span><span class="p">(</span><span class="n">bvh</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span> <span class="c1"># Calculate the visibility graph</span>
+<span class="n">visibility_graph</span> <span class="o">=</span> <span class="n">VG</span><span class="o">.</span><span class="n">CompressToCSR</span><span class="p">()</span> <span class="c1"># Convert to a CSR (matrix)</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">VG</span><span class="o">.</span><span class="n">AggregateEdgeCosts</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span> <span class="c1"># Aggregate the visibility graph scores</span>
+
+<span class="c1"># Plot the graph using visibility graph as the colors</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">nodes</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">scores</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="../../examples/visibility/basic-1.py">Source code</a>)</p>
+<div class="figure align-default">
+<img alt="../../_images/basic-12.png" src="../../_images/basic-12.png" />
+</div>
+<p>We can see all of the example cases in the test file by regenerating the graph
+by our known model offset</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+
+    <span class="c1"># Set the graph parameters</span>
+    <span class="c1"># Test examples are failing on 1. Seems to be embree failing on edge intersection</span>
+    <span class="n">start_point</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.1</span> <span class="o">+</span> <span class="p">(</span><span class="mi">60</span><span class="o">*</span><span class="n">i</span><span class="p">)</span> <span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span> <span class="c1">#offset X by 60 for each new model</span>
+
+    <span class="c1"># Generate the Graph</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="n">GenerateGraph</span><span class="p">(</span><span class="n">bvh</span><span class="p">,</span> <span class="n">start_point</span><span class="p">,</span> <span class="n">spacing</span><span class="p">,</span> <span class="n">max_nodes</span><span class="p">,</span>
+                            <span class="n">up_step</span><span class="p">,</span><span class="n">up_slope</span><span class="p">,</span><span class="n">down_step</span><span class="p">,</span><span class="n">down_slope</span><span class="p">,</span>
+                            <span class="n">max_step_connections</span><span class="p">,</span> <span class="n">cores</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Convert the graph to a CSR</span>
+    <span class="n">csr_graph</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">CompressToCSR</span><span class="p">()</span>
+
+    <span class="c1"># Get the nodes of the graph as a list of x,y,z,type,id tuples</span>
+    <span class="n">nodes</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">getNodes</span><span class="p">()</span>
+
+    <span class="n">height</span> <span class="o">=</span> <span class="mf">1.7</span> <span class="c1"># Set a height offset to cast rays from the points</span>
+    <span class="n">points</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">get_node_points</span><span class="p">()</span> <span class="c1"># Define points as the graph nodes</span>
+    <span class="n">VG</span> <span class="o">=</span> <span class="n">VisibilityGraphAllToAll</span><span class="p">(</span><span class="n">bvh</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span> <span class="c1"># Calculate the visibility graph</span>
+    <span class="n">visibility_graph</span> <span class="o">=</span> <span class="n">VG</span><span class="o">.</span><span class="n">CompressToCSR</span><span class="p">()</span> <span class="c1"># Convert to a CSR (matrix)</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="n">VG</span><span class="o">.</span><span class="n">AggregateEdgeCosts</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Plot the graph using visibility graph as the colors</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">nodes</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">scores</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="../../examples/visibility/basic-2.py">Source code</a>)</p>
+<div class="figure align-default">
+<img alt="../../_images/basic-2_002.png" src="../../_images/basic-2_002.png" />
+</div>
+<div class="figure align-default">
+<img alt="../../_images/basic-2_012.png" src="../../_images/basic-2_012.png" />
+</div>
+<div class="figure align-default">
+<img alt="../../_images/basic-2_022.png" src="../../_images/basic-2_022.png" />
+</div>
+<div class="figure align-default">
+<img alt="../../_images/basic-2_032.png" src="../../_images/basic-2_032.png" />
+</div>
+<div class="figure align-default">
+<img alt="../../_images/basic-2_042.png" src="../../_images/basic-2_042.png" />
+</div>
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../visibility_graph.html"
+                        title="previous chapter">Visibility Analysis</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="groups.html"
+                        title="next chapter">Visibility Graph Grouping</a></p>
+
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 3.1.2.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

@@ -10,7 +10,7 @@ using std::string;
 
 using this_clock = std::chrono::high_resolution_clock; //< Type of clock to use
 using timepoint = this_clock::time_point;
-using hf_time_units = std::chrono::milliseconds; //< Units to use
+using hf_time_units = std::chrono::nanoseconds; //< Units to use
 static const string hf_time_unit_postfix = "ms"; //< shorthand for units I.E. milliseconds = ms
 
 /*
@@ -34,7 +34,7 @@ struct StopWatch {
 
 	/*! \brief Get the time from the start to now in milliseconds.*/
 	inline long long StartToNow() const {
-		return duration_cast<std::chrono::milliseconds>(this_clock::now() - start).count();
+		return duration_cast<hf_time_units>(this_clock::now() - start).count();
 	}
 
 	/*! \brief Set the end time of this stopwatch. */
@@ -42,7 +42,7 @@ struct StopWatch {
 		end = this_clock::now();
 	}
 
-	/*! \brief Get the duration from start to now. */
+	/*! \brief Get the duration from start to end. */
 	inline long long GetDuration() const {
 		return duration_cast<hf_time_units>(end - start).count();
 	}

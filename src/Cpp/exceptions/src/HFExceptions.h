@@ -90,13 +90,12 @@ namespace HF::Exceptions{
 	{
 		std::string cost_type;
 		NoCost(const std::string& cost_name) {
-			cost_type = cost_name;
+			cost_type = "Cost type " + cost_name + " doesn't exist in the graph!";
 		}
 
 		const char* what() const throw ()
 		{
-			std::string new_str = cost_type + "Doesn't exist in the graph!";
-			return new_str.c_str();
+			return cost_type.c_str();
 		}
 	};
 

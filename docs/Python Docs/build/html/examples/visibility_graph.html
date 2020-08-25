@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     
-    <title>Create a Visbility Graph &mdash; Human Metrics 0.0.1 documentation</title>
+    <title>Visibility Analysis &mdash; Human Metrics 0.0.1 documentation</title>
     
     <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
@@ -29,8 +29,8 @@
     <link rel="search" title="Search" href="../search.html" >
     <link rel="top" title="Human Metrics 0.0.1 documentation" href="../index.html" >
     <link rel="up" title="Examples" href="../examples.html" >
-    <link rel="next" title="Code Reference" href="../code.html" >
-    <link rel="prev" title="Calculating Spatial View" href="view_analysis.html" > 
+    <link rel="next" title="Visualize a Visbility Graph Connections" href="visibility/basic.html" >
+    <link rel="prev" title="Visualize Spatial View" href="view/basic.html" > 
   </head>
   <body>
 
@@ -62,11 +62,11 @@
            accesskey="I">index</a>
       </li>
       <li class="active">
-        <a href="../code.html" title="Code Reference"
+        <a href="visibility/basic.html" title="Visualize a Visbility Graph Connections"
            accesskey="N">next</a>
       </li>
       <li class="active">
-        <a href="view_analysis.html" title="Calculating Spatial View"
+        <a href="view/basic.html" title="Visualize Spatial View"
            accesskey="P">previous</a>
       </li>
     </ul>
@@ -82,29 +82,20 @@
         <div class="bodywrapper">
           <div class="body" id="spc-section-body">
             
-  <div class="section" id="module-humanfactorspy.Examples.VisibilityGraphExample">
-<span id="create-a-visbility-graph"></span><h1>Create a Visbility Graph<a class="headerlink" href="#module-humanfactorspy.Examples.VisibilityGraphExample" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">humanfactorspy.geometry</span> <span class="kn">import</span> <span class="n">LoadOBJ</span><span class="p">,</span> <span class="n">CommonRotations</span>
-<span class="kn">from</span> <span class="nn">humanfactorspy.raytracer</span> <span class="kn">import</span> <span class="n">EmbreeBVH</span>
-<span class="kn">from</span> <span class="nn">humanfactorspy.visibilitygraph</span> <span class="kn">import</span> <span class="n">VisibilityGraphAllToAll</span>
-
-<span class="kn">import</span> <span class="nn">humanfactorspy</span>
-
-<span class="n">obj_path</span> <span class="o">=</span> <span class="n">humanfactorspy</span><span class="o">.</span><span class="n">get_sample_model</span><span class="p">(</span><span class="s2">&quot;plane.obj&quot;</span><span class="p">)</span>
-<span class="n">loaded_obj</span> <span class="o">=</span> <span class="n">LoadOBJ</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="n">CommonRotations</span><span class="o">.</span><span class="n">Yup_to_Zup</span><span class="p">)</span>
-<span class="n">bvh</span> <span class="o">=</span> <span class="n">EmbreeBVH</span><span class="p">(</span><span class="n">loaded_obj</span><span class="p">)</span>
-
-<span class="c1"># The model is a flat plane, so only nodes 0,2 should connect.</span>
-<span class="n">points</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)]</span>
-<span class="n">height</span> <span class="o">=</span> <span class="mf">1.7</span>
-<span class="n">VG</span> <span class="o">=</span> <span class="n">VisibilityGraphAllToAll</span><span class="p">(</span><span class="n">bvh</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">VG</span><span class="o">.</span><span class="n">CompressToCSR</span><span class="p">())</span>
-</pre></div>
+  <div class="section" id="visibility-analysis">
+<h1>Visibility Analysis<a class="headerlink" href="#visibility-analysis" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="visibility/basic.html">Visualize a Visbility Graph Connections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visibility/groups.html">Visibility Graph Grouping</a></li>
+</ul>
 </div>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>(0, 2)        2.236068
-(2, 0)        2.236068
-</pre></div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">These examples use methods found in the following modules:
+<a class="reference internal" href="../generated/humanfactorspy.graphgenerator.html#module-humanfactorspy.graphgenerator" title="humanfactorspy.graphgenerator"><code class="xref py py-mod docutils literal notranslate"><span class="pre">humanfactorspy.graphgenerator</span></code></a>,
+<a class="reference internal" href="../generated/humanfactorspy.geometry.html#module-humanfactorspy.geometry" title="humanfactorspy.geometry"><code class="xref py py-mod docutils literal notranslate"><span class="pre">humanfactorspy.geometry</span></code></a>,
+<a class="reference internal" href="../generated/humanfactorspy.raytracer.html#module-humanfactorspy.raytracer" title="humanfactorspy.raytracer"><code class="xref py py-mod docutils literal notranslate"><span class="pre">humanfactorspy.raytracer</span></code></a></p>
 </div>
 </div>
 
@@ -115,11 +106,11 @@
       <div class="spc-rightsidebar span3">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="view_analysis.html"
-                        title="previous chapter">Calculating Spatial View</a></p>
+  <p class="topless"><a href="view/basic.html"
+                        title="previous chapter">Visualize Spatial View</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="../code.html"
-                        title="next chapter">Code Reference</a></p>
+  <p class="topless"><a href="visibility/basic.html"
+                        title="next chapter">Visualize a Visbility Graph Connections</a></p>
 
         </div>
       </div>

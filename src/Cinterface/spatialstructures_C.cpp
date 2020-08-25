@@ -359,7 +359,7 @@ C_INTERFACE DeleteScoreArray(char** scores_to_delete, int num_char_arrays) {
 		// The heap knows how big these arrays are. 
 		for (int i = 0; i < num_char_arrays; i++) {
 			char* score_string = scores_to_delete[i];
-			delete[](score_string); // Explictly delete the char array at victim
+			delete score_string; // Explictly delete the char array at victim
 		}
 	}
 	return OK;
@@ -400,4 +400,23 @@ C_INTERFACE CalculateAndStoreCrossSlope(HF::SpatialStructures::Graph* g) {
 C_INTERFACE GetSizeOfGraph(const Graph * g, int * out_size) {
 	*out_size = g->size();
 	return OK;
+}
+
+C_INTERFACE GraphAttrsToCosts(
+	HF::SpatialStructures::Graph* graph_ptr,
+	const char* attr_key, 
+	const char* cost_string,
+	HF::SpatialStructures::Direction dir)
+{
+	// Call the function in the graph to convert this cost
+	try {
+		graph_ptr->AttrToCost(std::string(attr_key), std::string(cost_string), dir);
+	}
+	catch (std::out_of_range) { // Catch if it throws out of range due to an invalid cost name
+		// return notfound to inform the caller that the node parameter they wanted didn't exist
+		return HF::Exceptions::HF_STATUS::NOT_FOUND;
+	}
+	// If we got past the trycatch without throwing then the postconditionsof attrtocost have been
+	// fulfilled. 
+	return HF::Exceptions::OK;
 }

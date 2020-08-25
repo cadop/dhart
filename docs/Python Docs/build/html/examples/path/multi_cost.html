@@ -29,8 +29,8 @@
     <link rel="search" title="Search" href="../../search.html" >
     <link rel="top" title="Human Metrics 0.0.1 documentation" href="../../index.html" >
     <link rel="up" title="Path Planning" href="../path_planning.html" >
-    <link rel="next" title="Calculating Spatial View" href="../view_analysis.html" >
-    <link rel="prev" title="Visualize a Path" href="visualize.html" > 
+    <link rel="next" title="Spatial View Analysis" href="../view_analysis.html" >
+    <link rel="prev" title="Limit a Path" href="limit.html" > 
   </head>
   <body>
 
@@ -63,11 +63,11 @@
            accesskey="I">index</a>
       </li>
       <li class="active">
-        <a href="../view_analysis.html" title="Calculating Spatial View"
+        <a href="../view_analysis.html" title="Spatial View Analysis"
            accesskey="N">next</a>
       </li>
       <li class="active">
-        <a href="visualize.html" title="Visualize a Path"
+        <a href="limit.html" title="Limit a Path"
            accesskey="P">previous</a>
       </li>
     </ul>
@@ -104,7 +104,7 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="n">obj</span> <span class="o">=</span> <span class="n">LoadOBJ</span><span class="p">(</span><span class="n">obj_path</span><span class="p">)</span>
 <span class="go">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Create a BVH</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">bvh</span> <span class="o">=</span> <span class="n">EmbreeBVH</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bvh</span> <span class="o">=</span> <span class="n">EmbreeBVH</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 <span class="go">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Set the graph parameters</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">start_point</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
@@ -123,14 +123,14 @@
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get Nodes</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nodes</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">getNodes</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Graph Generated with </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="o">.</span><span class="n">array</span><span class="p">)</span><span class="si">}</span><span class="s2"> nodes&quot;</span><span class="p">)</span>
-<span class="go">Graph Generated with 886 nodes</span>
+<span class="go">Graph Generated with 875 nodes</span>
 </pre></div>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define a start and end point in x,y</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p_desired</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">30</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">closest_nodes</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">get_closest_nodes</span><span class="p">(</span><span class="n">p_desired</span><span class="p">,</span><span class="n">z</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Closest Node: &quot;</span><span class="p">,</span> <span class="n">closest_nodes</span><span class="p">)</span>
-<span class="go">Closest Node:  [  0 795]</span>
+<span class="go">Closest Node:  [  0 786]</span>
 </pre></div>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">cdist</span>
@@ -145,7 +145,7 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># As the cost array is numpy, simple operations to sum the total cost can be calculated</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">path_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">path</span><span class="p">[</span><span class="s1">&#39;cost_to_next&#39;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total path cost: &#39;</span><span class="p">,</span> <span class="n">path_sum</span><span class="p">)</span>
-<span class="go">Total path cost:  62.02023</span>
+<span class="go">Total path cost:  62.0201</span>
 </pre></div>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get the x,y,z values of the nodes at the given path ids</span>
@@ -181,7 +181,7 @@ edge cost for the calculation.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># As the cost array is numpy, simple operations to sum the total cost can be calculated</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">path_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">energy_path</span><span class="p">[</span><span class="s1">&#39;cost_to_next&#39;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total path cost: &#39;</span><span class="p">,</span> <span class="n">path_sum</span><span class="p">)</span>
-<span class="go">Total path cost:  377.05716</span>
+<span class="go">Total path cost:  377.03708</span>
 </pre></div>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get the x,y,z values of the nodes at the given path ids</span>
@@ -212,11 +212,11 @@ edge cost for the calculation.</p>
       <div class="spc-rightsidebar span3">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="visualize.html"
-                        title="previous chapter">Visualize a Path</a></p>
+  <p class="topless"><a href="limit.html"
+                        title="previous chapter">Limit a Path</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="../view_analysis.html"
-                        title="next chapter">Calculating Spatial View</a></p>
+                        title="next chapter">Spatial View Analysis</a></p>
 
         </div>
       </div>

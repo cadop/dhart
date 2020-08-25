@@ -33,6 +33,15 @@ namespace HF::SpatialStructures {
 		COUNT = 2
 	};
 
+	/*! \brief Node to use for calculating the cost of an edge when converting node attributes to edge costs
+	*/
+	enum class Direction : int {
+		INCOMING = 0, //< Use the child node's attribute for the cost.
+		OUTGOING = 1, //< Use the parent node's attribute as the cost.
+		BOTH = 2	//< Add the parent and child's attributes for the cost.
+	};
+
+
 	/*! \brief A struct to hold all necessary information for a CSR.
 
 		\remarks
@@ -797,6 +806,9 @@ namespace HF::SpatialStructures {
 		*/
 		TempMatrix MapCostMatrix(const std::string& cost_type) const;
 
+		/*! \brief Check if this graph has a specific node attribute*/
+		bool HasNodeAttribute(const std::string & key) const;
+
 	public:
 		/*!
 		 \brief Construct a graph from a list of nodes, edges, and distances.
@@ -1114,6 +1126,13 @@ namespace HF::SpatialStructures {
 			\endcode
 		*/
 		std::vector<EdgeSet> GetEdges() const;
+	
+		/*! \brief Get children of a specific node as integers
+		
+			
+		
+		*/
+		std::vector<IntEdge> GetIntEdges(int parent) const;
 
 		/// <summary>
 		/// Summarize the costs of every outgoing edge for every node in the graph.
@@ -1915,5 +1934,25 @@ namespace HF::SpatialStructures {
 			cost type held by the graph.
 		*/
 		void ClearCostArrays(const std::string & cost_name = "");
+
+		/*! \brief Generate edge costs from a set of node attributes. 
+		
+			\param attr_key Attribute to create a new cost set from.
+			\param cost_string Name of the new cost set.
+			\param dir Direction that the cost of the edge should be calculated in. For example
+					   INCOMING will use the cost of the node being traveled to by the edge.
+
+			\throws std::out_of_range if `node_attribute` could not be found. 
+
+			\par Example
+			\snippet tests\src\SpatialStructures.cpp EX_AttrsToStrings
+			\snippet tests\src\SpatialStructures.cpp EX_AttrsToStrings2
+			`0->1: 111.000000`
+		*/
+		void AttrToCost(
+			const std::string & node_attribute,
+			const std::string & cost_to_store_as,
+			Direction consider = Direction::INCOMING);
+		
 	};
 }

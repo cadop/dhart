@@ -26,6 +26,65 @@ namespace HumanFactors.Tests.RayTracing
 
             //! [EX_BVH_CSTOR]
         }
+
+        [TestMethod]
+        public void CreateWithMultipleMeshes(){
+            
+            // Load a lot of submeshes from sponza
+            var MeshInfos = OBJLoader.LoadOBJSubmeshes("ExampleModels/sponza.obj", GROUP_METHOD.BY_GROUP);
+            
+            // Create a BVH for these meshes. If this crashes, then there's an issue we care about
+            EmbreeBVH bvh = new EmbreeBVH(MeshInfos);
+
+            // Cast a ray straight downwards, and ensure it intersects.
+            // If the point is false, then the bvh was created incorrectly
+            Vector3D origin = new Vector3D(0, 0, 1);
+            Vector3D direction = new Vector3D(0, 0, -1);
+            var pt = EmbreeRaytracer.IntersectForPoint(bvh, origin, direction);
+
+            Assert.IsTrue(pt.IsValid());
+        }
+
+        [TestMethod]
+        public void AddMeshes()
+        {
+            // ![EX_AddMesh]
+
+            // Load a lot of submeshes from sponza
+            var MeshInfos = OBJLoader.LoadOBJSubmeshes("ExampleModels/sponza.obj", GROUP_METHOD.BY_GROUP);
+            var Plane = OBJLoader.LoadOBJ("ExampleModels/plane.obj");
+            
+            // Construct a BVH from the plane
+            EmbreeBVH bvh = new EmbreeBVH(Plane);
+           
+            // Cast rays and print the results
+            Debug.WriteLine("--- Just Plane---");
+            Vector3D[] origins = { new Vector3D(1, 1, 1), new Vector3D(1, 1, 1) };
+            Vector3D[] directions = { new Vector3D(0, 0, -1), new Vector3D(0, -1, 0) };
+            bool[] results = EmbreeRaytracer.IntersectOccluded(bvh, origins, directions);
+
+            string out_str = directions[0].ToString() + (results[0] ? "Intersected" : "Did not Intersect") + "\n";
+            out_str += directions[1].ToString() + (results[1] ? "Intersected" : "Did not Intersect");
+            Debug.WriteLine(out_str);
+            
+            // Add meshes to the BVH
+            bvh.AddMesh(MeshInfos);
+
+            // Cast rays again and see if the second ray connects
+            Debug.WriteLine("--- After Addition---");
+            bool[] post_addition_results = EmbreeRaytracer.IntersectOccluded(bvh, origins, directions);
+            string post_addition_out_str = directions[0].ToString() + (post_addition_results[0] ? "Intersected" : "Did not Intersect") + "\n";
+            post_addition_out_str += directions[1].ToString() + (post_addition_results[1] ? "Intersected" : "Did not Intersect");
+
+            Debug.WriteLine(post_addition_out_str);
+
+            // ![EX_AddMesh]
+            Assert.IsFalse(results[0]);
+            Assert.IsTrue(results[1]);
+            Assert.IsTrue(post_addition_results[0]);
+            Assert.IsTrue(post_addition_results[1]);
+        }
+
     }
 
     [TestClass]
@@ -244,7 +303,7 @@ namespace HumanFactors.Tests.RayTracing
 
             var result_1 = results[0];
             foreach (var result in results)
-                Assert.IsTrue(result_1.DistanceTo(result) < 0.001);
+                Assert.AreEqual(0, result_1.DistanceTo(result), 0.0001, "Distance was greater than expected");
         }
 
         [TestMethod]

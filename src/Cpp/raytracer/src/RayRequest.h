@@ -10,7 +10,7 @@
 #include <array>
 namespace HF {
 	namespace RayTracer {
-		struct FullRayRequest {
+		struct RayRequest {
 			float x, y, z;			///< X, Y, and Z origin points
 			float dx, dy, dz;		///< X, Y and Z direction to fire the ray in
 			bool was_fired = false; ///< Whether this ray was fired or not
@@ -18,7 +18,7 @@ namespace HF {
 			int mesh_id = -1;		///< The ID of the hit mesh
 
 			/// <summary>
-			/// Constructs a FullRayRequest from origin points (x, y, z) 
+			/// Constructs a RayRequest from origin points (x, y, z) 
 			/// and destination points (dx, dy, dz),
 			/// as well as a starting distance for the ray.
 			/// </summary>
@@ -35,9 +35,9 @@ namespace HF {
 					// Requires #include "RayRequest.h"
 
 					// For brevity
-					using HF::RayTracer::FullRayRequest;
+					using HF::RayTracer::RayRequest;
 
-					// Prepare FullRayRequest's parameters
+					// Prepare RayRequest's parameters
 					const float x_in = 0.0;
 					const float y_in = 0.0;
 					const float z_in = 0.0;
@@ -46,11 +46,11 @@ namespace HF {
 					const float dz_in = 2.0;
 					const float distance_in = 10.0;
 
-					// Create the FullRayRequest
-					FullRayRequest request(x_in, y_in, z_in, dx_in, dy_in, dz_in, distance_in);
+					// Create the RayRequest
+					RayRequest request(x_in, y_in, z_in, dx_in, dy_in, dz_in, distance_in);
 				\endcode
 			*/
-			FullRayRequest(float x, float y, float z,
+			RayRequest(float x, float y, float z,
 				float dx, float dy, float dz,
 				float Distance = -1);
 
@@ -63,13 +63,13 @@ namespace HF {
 					// Requires #include "RayRequest.h"
 
 					// For brevity
-					using HF::RayTracer::FullRayRequest;
+					using HF::RayTracer::RayRequest;
 
-					// Create the FullRayRequest (no arguments)
-					FullRayRequest request;
+					// Create the RayRequest (no arguments)
+					RayRequest request;
 				\endcode
 			*/
-			FullRayRequest() {};
+			RayRequest() {};
 
 			/// <summary>
 			/// Tells if the rayrequest it or not. If true, the hit was successful, false otherwise.
@@ -81,9 +81,9 @@ namespace HF {
 					// Requires #include "RayRequest.h"
 
 					// For brevity
-					using HF::RayTracer::FullRayRequest;
+					using HF::RayTracer::RayRequest;
 
-					// Prepare FullRayRequest's parameters
+					// Prepare RayRequest's parameters
 					const float x_in = 0.0;
 					const float y_in = 0.0;
 					const float z_in = 0.0;
@@ -92,8 +92,8 @@ namespace HF {
 					const float dz_in = 2.0;
 					const float distance_in = 10.0;
 
-					// Create the FullRayRequest
-					FullRayRequest request(x_in, y_in, z_in, dx_in, dy_in, dz_in, distance_in);
+					// Create the RayRequest
+					RayRequest request(x_in, y_in, z_in, dx_in, dy_in, dz_in, distance_in);
 
 					// Use didHit
 					if (request.didHit()) {

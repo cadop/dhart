@@ -30,6 +30,8 @@ humanfactorspy.raytracer
     
     Intersect
     
+    IntersectDistanceDouble
+    
     IntersectForPoint
     
     IntersectOccluded

@@ -22,7 +22,7 @@
     >>> obj = LoadOBJ(obj_path)
     >>> 
     >>> # Create a BVH
-    >>> bvh = EmbreeBVH(obj)
+    >>> bvh = EmbreeBVH(obj, True)
     
     Now set parameters to be used for the graph generator. First, we will use a large
     step size which will ignore any small bumps in the mesh. Later on we will compare 
@@ -44,7 +44,7 @@
     >>> # Get Nodes
     >>> nodes = graph.getNodes()
     >>> print(f"Graph Generated with {len(nodes.array)} nodes")
-    Graph Generated with 3453 nodes
+    Graph Generated with 3450 nodes
     
     Once the graph is generated, we can define an array of spatial points and get the
     closest nodes of the graph to these points.
@@ -53,7 +53,7 @@
     >>> p_desired = np.array([[-30,0],[30,0]])
     >>> closest_nodes = graph.get_closest_nodes(p_desired,z=False)
     >>> print("Closest Node: ", closest_nodes)
-    Closest Node:  [   0 3126]
+    Closest Node:  [   0 3123]
     >>> 
     >>> # Define a start and end node to use for the path (from, to)
     >>> start_id, end_id = closest_nodes[0], closest_nodes[1]
@@ -67,7 +67,7 @@
     >>> # As the cost array is numpy, simple operations to sum the total cost can be calculated
     >>> path_sum = np.sum(path['cost_to_next'])
     >>> print('Total path cost: ', path_sum)
-    Total path cost:  62.035995
+    Total path cost:  62.035927
 
     >>> # Get the x,y,z values of the nodes at the given path ids
     >>> path_xyz = np.take(nodes[['x','y','z']], path['id'])
@@ -92,8 +92,8 @@
     We change the graph parameters to limit a 'step'. 
 
     >>> # Change some graph parameters
-    >>> up_step, down_step = 0.2, 0.5
-    >>> 
+    >>> up_step, down_step = 0.1, 0.1
+    >>> up_slope, down_slope = 10, 10
     >>> # Generate a new Graph
     >>> graph = GenerateGraph(bvh, start_point, spacing, max_nodes,
     ...                         up_step,up_slope,down_step,down_slope,
@@ -103,7 +103,7 @@
 
     >>> nodes = graph.getNodes()
     >>> print(f"Graph Generated with {len(nodes.array)} nodes")
-    Graph Generated with 3453 nodes
+    Graph Generated with 790 nodes
     
     If we now get the closest node, it is now a different index. The key here is that the limitations
     of the graph generator step size have caused certain edges to not be valid, which changed the order
@@ -111,7 +111,7 @@
 
     >>> closest_nodes = graph.get_closest_nodes(p_desired,z=False)
     >>> print("Closest Node: ", closest_nodes)
-    Closest Node:  [   0 2614]
+    Closest Node:  [  0 779]
     >>> 
     >>> start_id, end_id = closest_nodes[0], closest_nodes[1]
     >>> path = DijkstraShortestPath(graph, start_id, end_id)
@@ -125,7 +125,7 @@
     >>> # As the cost array is numpy, simple operations to sum the total cost can be calculated
     >>> path_sum = np.sum(path['cost_to_next'])
     >>> print('Total path cost: ', path_sum)
-    Total path cost:  81.42913
+    Total path cost:  33.58837
     
     Now extract the location data for the nodes and path to be plotted. 
 
@@ -163,7 +163,7 @@ obj_path = humanfactorspy.get_sample_model("energy_blob_zup.obj")
 obj = LoadOBJ(obj_path)
 
 # Create a BVH
-bvh = EmbreeBVH(obj)
+bvh = EmbreeBVH(obj, True)
 
 # Set the graph parameters
 start_point = (-30, 0, 20)
@@ -217,7 +217,8 @@ plt.show()
 ## We change the graph parameters to limit a 'step'
 
 # Change some graph parameters
-up_step, down_step = 0.2, 0.5
+up_step, down_step = 0.1, 0.1
+up_slope, down_slope = 10, 10
 
 # Generate a new Graph
 graph = GenerateGraph(bvh, start_point, spacing, max_nodes,

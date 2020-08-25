@@ -9,6 +9,7 @@
 #define eigen_plain_assert
 using namespace HF::Geometry;
 using std::string;
+using HF::Exceptions::HF_STATUS;
 using std::vector;
 
 const std::string obj_directiory = "../../Models/";
@@ -193,9 +194,12 @@ TEST(_MeshInfo, CopyConstructorWorks) {
 	auto test_MI = HF::Geometry::LoadMeshObjects(test_paths, HF::Geometry::ONLY_FILE)[0];
 
 	auto copy_MI = test_MI;
-	auto copy2_MI = copy_MI;
-	copy2_MI.ConvertToRhinoCoordinates();
+	MeshInfo copy2_MI(copy_MI);
 
+	ASSERT_EQ(test_MI.GetMeshID(), copy_MI.GetMeshID());
+	ASSERT_EQ(test_MI.GetMeshID(), copy2_MI.GetMeshID());
+
+	copy2_MI.ConvertToRhinoCoordinates();
 	CompareMeshInfo(test_MI, copy_MI, "base", "copied");
 }
 
@@ -754,101 +758,178 @@ TEST(_meshInfo, OperatorIndex) {
 		<< vertex[2] << ")" << std::endl;
 }
 
+TEST(_MeshInfo, CopyOperator) {
+
+}
+
+
+
 namespace CInterfaceTests {
-	TEST(_OBJLoaderCInterface, LoadOBJ) {
-		// Requires #include "objloader_C.h", #include "meshinfo.h"
+	int mesh_indices[] = { 0, 1, 2 };
+	const int mesh_num_indices = 3;
+	float mesh_vertices[] = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
+	const int mesh_num_vertices = 9;
+
+	std::string mesh_name = "This mesh";
+	const int mesh_id = 0;
+
+	TEST(C_OBJLoader, LoadOBJ) {
+		// Requires #include "objloader_C.h"
 
 		// Prepare parameters for LoadOBJ
 
 		// relative path begins where EXE file is located if file_path is not a path to a
 		// valid OBJ file, HF::Exceptions::FileNotFound is thrown
-		std::string file_path = "big_teapot.obj";
-
-		const int obj_length = file_path.size();
+		std::string file_path = "sponza.obj";
 
 		const float x_rot = 30;
 		const float y_rot = 20;
 		const float z_rot = 55;
 
-		std::vector<HF::Geometry::MeshInfo>* info = nullptr;
+		MeshInfo** info = nullptr;
+		int num_meshes = 0;
 
 		// Call LoadOBJ
-		if (LoadOBJ(file_path.c_str(), obj_length, x_rot, y_rot, z_rot, &info)) {
-			std::cout << "LoadOBJ successful" << std::endl;
+		int res = LoadOBJ(file_path.c_str(), HF::Geometry::GROUP_METHOD::BY_GROUP, x_rot, y_rot, z_rot, &info, &num_meshes);
+		switch (res) {
+
+			// If it's ok, then the function completed and our pointers are updated
+		case (HF::Exceptions::HF_STATUS::OK):
+			ASSERT_NE(nullptr, info);
+			break;
+
+			// Any other error code doesn't allocate any memory, so we don't need to explicitly handle them.
+		default:
+			std::cerr << "OBJ Loading Unsuccessful" << std::endl;
+			return;
 		}
-		else {
-			std::cout << "LoadOBJ unsuccessful" << std::endl;
+
+		// Print how many OBJs we loaded
+		printf("Loaded %i OBJs!\n", num_meshes);
+		for (int i = 0; i < num_meshes; i++) {
+			std::cout << i << ": " << info[i]->GetMeshID() << " | " << info[i]->name << std::endl;
+			ASSERT_EQ(i, info[i]->GetMeshID());
 		}
+
+		// Free the memory for MeshInfo and the returned pointerarray
+		for (int i = 0; i < num_meshes; i++)
+			DestroyMeshInfo(info[i]);
+
+		DestroyMeshInfoPtrArray(info);
+	}
+	TEST(C_OBJLoader, StoreMesh) {
+		// Requires #include "objloader_C.h", #include "meshinfo.h"
+		MeshInfo* info = nullptr;
+
+		// Store these vertices in a mesh and verify it completes
+		auto res = StoreMesh(&info, mesh_indices, mesh_num_indices, mesh_vertices, mesh_num_vertices, mesh_name.c_str(), mesh_id);
+		ASSERT_EQ(HF_STATUS::OK, res);
+
+		// Assert that the mesh's name and ID match our inputs
+		ASSERT_EQ(mesh_name, info->name);
+		ASSERT_EQ(mesh_id, info->GetMeshID());
 
 		// Release memory for info once finished with it
 		DestroyMeshInfo(info);
 	}
-
-	TEST(_OBJLoaderCInterface, StoreMesh) {
+	TEST(C_OBJLoader, RotateMesh) {
 		// Requires #include "objloader_C.h", #include "meshinfo.h"
+
+		// Prepare parameters for StoreMesh
+		MeshInfo * info = NULL;
+
+		auto res = StoreMesh(&info, mesh_indices, mesh_num_indices, mesh_vertices, mesh_num_vertices, mesh_name.c_str(), mesh_id);
+		ASSERT_EQ(HF_STATUS::OK, res);
 		
-		// Prepare parameters for StoreMesh
-		std::vector<HF::Geometry::MeshInfo>* info = nullptr;
-
-		int mesh_indices[] = { 0, 1, 2 };
-		const int mesh_num_indices = 3;
-		float mesh_vertices[] = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
-		const int mesh_num_vertices = 9;
-
-		std::string mesh_name = "This mesh";
-		const int mesh_id = 0;
-
-		// Call StoreMesh
-		if (StoreMesh(&info, mesh_indices, mesh_num_indices, mesh_vertices, mesh_num_vertices, mesh_name.c_str(), mesh_id)) {
-			std::cout << "StoreMesh successful" << std::endl;
-		}
-		else {
-			std::cout << "StoreMesh unsuccessful" << std::endl;
-		}
-
-		// Release memory for info once finished with it
-		DestroyMeshInfo(info);
-	}
-
-	TEST(_OBJLoaderCInterface, RotateMesh) {
-		// Requires #include "objloader_C.h", #include "meshinfo.h"
-
-		// Prepare parameters for StoreMesh
-		std::vector<HF::Geometry::MeshInfo>* info = nullptr;
-
-		int mesh_indices[] = { 0, 1, 2 };
-		const int mesh_num_indices = 3;
-		float mesh_vertices[] = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
-		const int mesh_num_vertices = 9;
-
-		std::string mesh_name = "This mesh";
-		const int mesh_id = 0;
-
-		// Call StoreMesh
-		if (StoreMesh(&info, mesh_indices, mesh_num_indices, mesh_vertices, mesh_num_vertices, mesh_name.c_str(), mesh_id)) {
-			std::cout << "StoreMesh successful" << std::endl;
-		}
-		else {
-			std::cout << "StoreMesh unsuccessful" << std::endl;
-		}
-
 		// Prepare desired rotation values
 		const float x_rot = 10;
 		const float y_rot = 10;
 		const float z_rot = 20;
 
-		// Call RotateMesh
-		if (RotateMesh(info, x_rot, y_rot, z_rot)) {
-			std::cout << "RotateMesh successful" << std::endl;
-		}
-		else {
-			std::cout << "RotateMesh unsuccessful" << std::endl;
-		}
+		// Rotate the mesh
+		RotateMesh(info, x_rot, y_rot, z_rot);
+
+		// Compare vertices. These should have been changed when this function is called.
+		auto verts = info->GetIndexedVertices();
+		for (int i = 0; i < verts.size(); i++)
+			ASSERT_NE(mesh_vertices[i], verts[i]);
 
 		// Release memory for info once finished with it
 		DestroyMeshInfo(info);
 	}
+
+	TEST(C_OBJLoader, GetVertsAndTris) {
+		// Requires #include "objloader_C.h", #include "meshinfo.h"
+
+		// Prepare parameters for StoreMesh
+		MeshInfo* info = NULL;
+
+		auto res = StoreMesh(&info, mesh_indices, mesh_num_indices, mesh_vertices, mesh_num_vertices, mesh_name.c_str(), mesh_id);
+		ASSERT_EQ(HF_STATUS::OK, res);
+
+		// Get vertices and triangles from the mesh
+		int* index_out = NULL;
+		int num_triangles = 0;
+		float* vertex_out = NULL;
+		int num_vertices = 0;
+
+		// Get the vertices and triangles of this mesh
+		res = GetVertsAndTris(info, &index_out, &num_triangles, &vertex_out, &num_vertices);
+		ASSERT_EQ(HF_STATUS::OK, res);
+
+
+		// Assert that the input matches the output
+		ASSERT_EQ(num_triangles * 3, mesh_num_indices);
+		ASSERT_EQ(num_vertices * 3, mesh_num_vertices);
+
+		for (int i = 0; i < num_vertices * 3; i++)
+			ASSERT_EQ(mesh_vertices[i], vertex_out[i]);
+		for (int i = 0; i < num_triangles; i++)
+			ASSERT_EQ(mesh_indices[i], index_out[i]);
+
+		// Release memory for info once finished with it
+		DestroyMeshInfo(info);
+	}
+
+	TEST(C_OBJLoader, GetMeshID) {
+		// Requires #include "objloader_C.h", #include "meshinfo.h"
+
+		// Prepare parameters for StoreMesh
+		MeshInfo* info = NULL;
+
+		auto res = StoreMesh(&info, mesh_indices, mesh_num_indices, mesh_vertices, mesh_num_vertices, mesh_name.c_str(), mesh_id);
+		ASSERT_EQ(HF_STATUS::OK, res);
 	
+		// call into C Interface and get the ID of this mesh
+		int id = 0;
+		GetMeshID(info, &id);
+		ASSERT_EQ(mesh_id, id);
+
+		// Release memory for info once finished with it
+		DestroyMeshInfo(info);
+	}
+
+	TEST(C_OBJLoader, GetName) {
+		// Requires #include "objloader_C.h", #include "meshinfo.h"
+
+		// Prepare parameters for StoreMesh
+		MeshInfo* info = NULL;
+
+		auto res = StoreMesh(&info, mesh_indices, mesh_num_indices, mesh_vertices, mesh_num_vertices, mesh_name.c_str(), mesh_id);
+		ASSERT_EQ(HF_STATUS::OK, res);
+
+		// call into C Interface and get the name of this mesh
+		char* out_name;
+		GetMeshName(info, &out_name);
+		ASSERT_EQ(mesh_name, std::string(out_name));
+
+		// Release memory for info once finished with it
+		DestroyMeshInfo(info);
+	}
+}
+
+	
+/*!
 	TEST(_OBJLoaderCInterface, DestroyMeshInfo) {
 		// Requires #include "objloader_C.h", #include "meshinfo.h"
 
@@ -904,7 +985,7 @@ namespace CInterfaceTests {
 	}
 }
 
-
+*/
 /*!
 	\brief Tests how quickly the raytracer can load OBJ files.
 */

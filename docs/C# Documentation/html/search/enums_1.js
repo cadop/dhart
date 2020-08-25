@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['hf_5fstatus_555',['HF_STATUS',['../namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987f',1,'HumanFactors::Exceptions']]]
+  ['graphedgeaggregation_627',['GraphEdgeAggregation',['../namespace_human_factors_1_1_spatial_structures.html#abd405fa41da0f9a771d547aa47b6e1a0',1,'HumanFactors::SpatialStructures']]],
+  ['group_5fmethod_628',['GROUP_METHOD',['../namespace_human_factors_1_1_geometry.html#ae1dc76f9bc90183da6add631332cb1fd',1,'HumanFactors::Geometry']]]
 ];

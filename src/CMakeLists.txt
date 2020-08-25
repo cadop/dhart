@@ -54,6 +54,7 @@ set(CMAKE_CXX_FLAGS "/EHsc /MP")
 option(HumanFactors_EnableTests "Install unit tests to the bin directory" ON)
 option(HumanFactors_EnableCSharp "Include C# Interface" ON)
 option(HumanFactors_EnablePython "Include Python Interface" ON)
+option(HumanFactors_BuildCSharpTests "Enable to build C# test projects" OFF)
 set(HumanFactors_InstallTitle "" CACHE STRING "Installed package will be written to release/<InstallTitle>/. An empty string will follow default behavior.")
 set(HumanFactors_Config "GraphGenerator" CACHE STRING "What projects to build")
 set(EXTERNAL_DIR "${CMAKE_SOURCE_DIR}\\external")
@@ -410,6 +411,14 @@ if(HumanFactors_EnableTests)
 					${C_TEST_DRIVER_DIR}/GraphAlgorithms.cpp
 					${C_TEST_DRIVER_DIR}/CostAlgorithms.cpp
 					${C_TEST_DRIVER_DIR}/GraphGenerator.cpp
+					${C_TEST_DRIVER_DIR}/Performance.cpp
+				#	${C_TEST_DRIVER_DIR}/embree_raytracer_cinterface.cpp
+				#	${C_TEST_DRIVER_DIR}/objloader_cinterface.cpp
+				#	${C_TEST_DRIVER_DIR}/analysis_C_cinterface.cpp
+				#	${C_TEST_DRIVER_DIR}/pathfinder_C_cinterface.cpp
+				#	${C_TEST_DRIVER_DIR}/view_analysis_cinterface.cpp
+				#	${C_TEST_DRIVER_DIR}/visibility_graph_cinterface.cpp
+				#	${C_TEST_DRIVER_DIR}/spatialstructures_C_cinterface.cpp
 		)
 	elseif(${HumanFactors_Config} STREQUAL "RayTracer")
 		target_sources(

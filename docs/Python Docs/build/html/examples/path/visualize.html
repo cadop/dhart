@@ -29,7 +29,7 @@
     <link rel="search" title="Search" href="../../search.html" >
     <link rel="top" title="Human Metrics 0.0.1 documentation" href="../../index.html" >
     <link rel="up" title="Path Planning" href="../path_planning.html" >
-    <link rel="next" title="Path Plan with Different Costs" href="multi_cost.html" >
+    <link rel="next" title="Limit a Path" href="limit.html" >
     <link rel="prev" title="Basic Search on A Graph" href="search.html" > 
   </head>
   <body>
@@ -63,7 +63,7 @@
            accesskey="I">index</a>
       </li>
       <li class="active">
-        <a href="multi_cost.html" title="Path Plan with Different Costs"
+        <a href="limit.html" title="Limit a Path"
            accesskey="N">next</a>
       </li>
       <li class="active">
@@ -83,8 +83,8 @@
         <div class="bodywrapper">
           <div class="body" id="spc-section-body">
             
-  <div class="section" id="module-humanfactorspy.Examples.PathPlanningViz">
-<span id="visualize-a-path"></span><h1>Visualize a Path<a class="headerlink" href="#module-humanfactorspy.Examples.PathPlanningViz" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-humanfactorspy.Examples.PathPlanning">
+<span id="visualize-a-path"></span><h1>Visualize a Path<a class="headerlink" href="#module-humanfactorspy.Examples.PathPlanning" title="Permalink to this headline">¶</a></h1>
 <p>Start with the required imports</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -104,7 +104,7 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="n">obj</span> <span class="o">=</span> <span class="n">LoadOBJ</span><span class="p">(</span><span class="n">obj_path</span><span class="p">)</span>
 <span class="go">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Create a BVH</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">bvh</span> <span class="o">=</span> <span class="n">EmbreeBVH</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bvh</span> <span class="o">=</span> <span class="n">EmbreeBVH</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Now set parameters to be used for the graph generator. First, we will use a large
@@ -126,7 +126,7 @@ the resulting graphs.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get Nodes</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nodes</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">getNodes</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Graph Generated with </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="o">.</span><span class="n">array</span><span class="p">)</span><span class="si">}</span><span class="s2"> nodes&quot;</span><span class="p">)</span>
-<span class="go">Graph Generated with 3453 nodes</span>
+<span class="go">Graph Generated with 3450 nodes</span>
 </pre></div>
 </div>
 <p>Once the graph is generated, we can define an array of spatial points and get the
@@ -135,7 +135,7 @@ closest nodes of the graph to these points.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p_desired</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">30</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">closest_nodes</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">get_closest_nodes</span><span class="p">(</span><span class="n">p_desired</span><span class="p">,</span><span class="n">z</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Closest Node: &quot;</span><span class="p">,</span> <span class="n">closest_nodes</span><span class="p">)</span>
-<span class="go">Closest Node:  [   0 3126]</span>
+<span class="go">Closest Node:  [   0 3123]</span>
 <span class="go">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define a start and end node to use for the path (from, to)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">start_id</span><span class="p">,</span> <span class="n">end_id</span> <span class="o">=</span> <span class="n">closest_nodes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">closest_nodes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
@@ -149,7 +149,7 @@ We can take the sum of the cost values in the array and print it to use as a com
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># As the cost array is numpy, simple operations to sum the total cost can be calculated</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">path_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">path</span><span class="p">[</span><span class="s1">&#39;cost_to_next&#39;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total path cost: &#39;</span><span class="p">,</span> <span class="n">path_sum</span><span class="p">)</span>
-<span class="go">Total path cost:  62.035995</span>
+<span class="go">Total path cost:  62.035927</span>
 </pre></div>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get the x,y,z values of the nodes at the given path ids</span>
@@ -186,7 +186,7 @@ We change the graph parameters to limit a ‘step’.</p>
 <p>We now get the nodes of the new graph, and can see the number of nodes are the same.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nodes</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">getNodes</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Graph Generated with </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="o">.</span><span class="n">array</span><span class="p">)</span><span class="si">}</span><span class="s2"> nodes&quot;</span><span class="p">)</span>
-<span class="go">Graph Generated with 3453 nodes</span>
+<span class="go">Graph Generated with 3450 nodes</span>
 </pre></div>
 </div>
 <p>If we now get the closest node, it is now a different index. The key here is that the limitations
@@ -194,7 +194,7 @@ of the graph generator step size have caused certain edges to not be valid, whic
 in which nodes were created.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">closest_nodes</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">get_closest_nodes</span><span class="p">(</span><span class="n">p_desired</span><span class="p">,</span><span class="n">z</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Closest Node: &quot;</span><span class="p">,</span> <span class="n">closest_nodes</span><span class="p">)</span>
-<span class="go">Closest Node:  [   0 2614]</span>
+<span class="go">Closest Node:  [   0 2597]</span>
 <span class="go">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">start_id</span><span class="p">,</span> <span class="n">end_id</span> <span class="o">=</span> <span class="n">closest_nodes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">closest_nodes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="n">DijkstraShortestPath</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">start_id</span><span class="p">,</span> <span class="n">end_id</span><span class="p">)</span>
@@ -208,7 +208,7 @@ thresholds defined when creating the graph.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># As the cost array is numpy, simple operations to sum the total cost can be calculated</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">path_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">path</span><span class="p">[</span><span class="s1">&#39;cost_to_next&#39;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total path cost: &#39;</span><span class="p">,</span> <span class="n">path_sum</span><span class="p">)</span>
-<span class="go">Total path cost:  81.42913</span>
+<span class="go">Total path cost:  81.40916</span>
 </pre></div>
 </div>
 <p>Now extract the location data for the nodes and path to be plotted.</p>
@@ -240,8 +240,8 @@ generator to run on.</p>
   <p class="topless"><a href="search.html"
                         title="previous chapter">Basic Search on A Graph</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="multi_cost.html"
-                        title="next chapter">Path Plan with Different Costs</a></p>
+  <p class="topless"><a href="limit.html"
+                        title="next chapter">Limit a Path</a></p>
 
         </div>
       </div>

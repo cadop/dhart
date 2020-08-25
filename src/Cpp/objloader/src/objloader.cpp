@@ -195,9 +195,8 @@ namespace HF::Geometry {
 			// Iterate through every shape in shapes.
 			for (int k = 0; k < shapes.size(); k++) {
 				auto& shape = shapes[k];
-
 				// Set MeshInfo parameters for shape
-				std::string name = path + shape.name;
+				std::string name = shape.name;
 				int id = k;
 				auto& indicies = shape.mesh.indices;
 
@@ -222,7 +221,7 @@ namespace HF::Geometry {
 		case GROUP_METHOD::BY_MATERIAL: {
 			// If there are no materials, just put every vert into the same mesh
 			if (mats.empty()) {
-				std::cout << "[C++] No materials found in model " << path << ". Grouping by obj group";
+				std::cerr << "[C++] No materials found in model " << path << ". Grouping by obj group";
 				return LoadMeshObjects(path, BY_GROUP);
 			}
 

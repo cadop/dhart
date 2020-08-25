@@ -21,7 +21,7 @@ namespace HF {
 	}
 	namespace RayTracer {
 		class EmbreeRayTracer;
-		struct FullRayRequest;
+		struct RayRequest;
 	}
 }
 
@@ -233,7 +233,7 @@ namespace HF::ViewAnalysis {
 		node, direction, distance to intersection, and MeshID intersected for every ray that intersects
 		geometry.
 
-		\tparam RT A Raytracer with FireAnyRay defined for the type of N.
+		\tparam RT A Raytracer with IntersectOutputArguments defined for the type of N.
 		\tparam N A point that overloads [] for 0, 1 and 2.
 
 		\return
@@ -362,7 +362,7 @@ namespace HF::ViewAnalysis {
 			for (int k = 0; k < directions.size(); k++)
 
 				// Call the result's SetHit if it intersected.
-				if (ray_tracer.FireAnyRay(node, directions[k], out_distance, out_mid))
+				if (ray_tracer.IntersectOutputArguments(node, directions[k], out_distance, out_mid))
 					out_results[os + k].SetHit(node, directions[k], out_distance, out_mid);
 		}
 
@@ -384,7 +384,7 @@ namespace HF::ViewAnalysis {
 		this distance from the ground (+Z) before calculations are performed
 		\param aggregation The type of aggregation to use.
 
-		\tparam RT A Raytracer with FireAnyRay defined for the type of N.
+		\tparam RT A Raytracer with IntersectOutputArguments defined for the type of N.
 		\tparam N A point that overloads [] for 0, 1 and 2.
 
 		\return
@@ -493,7 +493,7 @@ namespace HF::ViewAnalysis {
 
 				// If the ray intersects any geometry, calculate distance to the intersection point
 				// then plug that into the aggregation method.
-				if (ray_tracer.FireRay(
+				if (ray_tracer.PointIntersection(
 					node_copy[0], node_copy[1], node_copy[2],
 					direction[0], direction[1], direction[2]
 				)) {

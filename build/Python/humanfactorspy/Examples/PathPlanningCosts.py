@@ -20,7 +20,7 @@
     >>> obj = LoadOBJ(obj_path)
     >>> 
     >>> # Create a BVH
-    >>> bvh = EmbreeBVH(obj)
+    >>> bvh = EmbreeBVH(obj, True)
     >>> 
     >>> # Set the graph parameters
     >>> start_point = (-30, 0, 20)
@@ -38,13 +38,13 @@
     >>> # Get Nodes
     >>> nodes = graph.getNodes()
     >>> print(f"Graph Generated with {len(nodes.array)} nodes")
-    Graph Generated with 886 nodes
+    Graph Generated with 875 nodes
 
     >>> # Define a start and end point in x,y 
     >>> p_desired = np.array([[-30,0],[30,0]])
     >>> closest_nodes = graph.get_closest_nodes(p_desired,z=False)
     >>> print("Closest Node: ", closest_nodes)
-    Closest Node:  [  0 795]
+    Closest Node:  [  0 786]
 
     >>> from scipy.spatial.distance import cdist
     >>> closest_nodes_all = cdist(graph.get_node_points(), graph.get_node_points())
@@ -58,7 +58,7 @@
     >>> # As the cost array is numpy, simple operations to sum the total cost can be calculated
     >>> path_sum = np.sum(path['cost_to_next'])
     >>> print('Total path cost: ', path_sum)
-    Total path cost:  62.02023
+    Total path cost:  62.0201
 
     >>> # Get the x,y,z values of the nodes at the given path ids
     >>> path_xyz = np.take(nodes[['x','y','z']], path['id'])
@@ -93,7 +93,7 @@
     >>> # As the cost array is numpy, simple operations to sum the total cost can be calculated
     >>> path_sum = np.sum(energy_path['cost_to_next'])
     >>> print('Total path cost: ', path_sum)
-    Total path cost:  377.05716
+    Total path cost:  377.03708
 
     >>> # Get the x,y,z values of the nodes at the given path ids
     >>> path_xyz = np.take(nodes[['x','y','z']], energy_path['id'])
@@ -133,7 +133,7 @@ obj_path = humanfactorspy.get_sample_model("energy_blob_zup.obj")
 obj = LoadOBJ(obj_path)
 
 # Create a BVH
-bvh = EmbreeBVH(obj)
+bvh = EmbreeBVH(obj, True)
 
 # Set the graph parameters
 start_point = (-30, 0, 20)

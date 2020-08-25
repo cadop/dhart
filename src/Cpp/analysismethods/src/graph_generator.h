@@ -56,10 +56,14 @@ namespace HF::GraphGenerator {
 	class UniqueQueue;
 	struct optional_real3;
 
-	using real_t = float;							  ///< Internal decimal type of the graph generator
+	using real_t = double;							  ///< Internal decimal type of the graph generator
 	using real3 = std::array<real_t, 3>;			  ///< Type used for the standard coordinate set of the graph generator.
 	using RayTracer = HF::RayTracer::EmbreeRayTracer; ///< Type of raytracer to be used internally.
 	using graph_edge = HF::SpatialStructures::Edge;   ///< Type of edge for the graph generator to use internally
+
+	constexpr real_t default_z_precision = 0.0001;
+	constexpr real_t default_ground_offset = 0.01;
+	constexpr real_t default_spacing_precision = 0.00001;
 
 	using pair = std::pair<int, int>; ///< Type for Directions to be stored as
 
@@ -277,7 +281,7 @@ namespace HF::GraphGenerator {
 			\snippet tests\src\GraphGenerator.cpp EX_GraphGeneratorRayTracer
 			\snippet tests\src\GraphGenerator.cpp EX_BuildNetwork
 			\snippet tests\src\GraphGenerator.cpp EX_PrintGraph
-			`[(0, 0, 0),(-1, -1, -0),(-1, 0, 0),(-1, 1, 0),(0, -1, -0),(0, 1, 0),(1, -1, -0),(1, 0, 0),(1, 1, 0),(-2, -2, -0),(-2, -1, -0),(-2, 0, 0),(-1, -2, -0),(0, -2, -0),(-2, 1, 0),(-2, 2, 0),(-1, 2, 0),(0, 2, 0),(1, -2, -0)]`
+			`[(0, 0, -0),(-1, -1, -0),(-1, 0, -0),(-1, 1, 0),(0, -1, -0),(0, 1, 0),(1, -1, -0),(1, 0, -0),(1, 1, 0),(-2, -2, -0),(-2, -1, -0),(-2, 0, -0),(-1, -2, -0),(0, -2, -0),(-2, 1, 0),(-2, 2, 0),(-1, 2, 0),(0, 2, 0),(1, -2, -0)]`
 		*/
 		template <
 			typename node_type,
@@ -300,12 +304,11 @@ namespace HF::GraphGenerator {
 			down_slope_type DownSlope,
 			int max_step_connections,
 			int cores = -1,
-			z_precision_type node_z_precision = 0.01,
-			connect_offset_type  node_spacing_precision = 0.001,
-			spacing_precision_type ground_offset = 0.001
+			z_precision_type node_z_precision = default_z_precision,
+			connect_offset_type  node_spacing_precision = default_spacing_precision,
+			spacing_precision_type ground_offset = default_ground_offset
 		) {
 			assert(node_z_precision != 0);
-
 			return IMPL_BuildNetwork(
 				CastToReal3(start_point),
 				CastToReal3(Spacing),
@@ -367,9 +370,9 @@ namespace HF::GraphGenerator {
 			real_t DownSlope,
 			int max_step_connections,
 			int cores = -1,
-			real_t node_z_precision = 0.001,
-			real_t node_spacing_precision = 0.001,
-			real_t ground_offset = 0.0001
+			real_t node_z_precision = default_z_precision,
+			real_t node_spacing_precision = default_spacing_precision,
+			real_t ground_offset = default_ground_offset
 		);
 
 
@@ -389,7 +392,7 @@ namespace HF::GraphGenerator {
 			\snippet tests\src\GraphGenerator.cpp EX_CrawlGeom
 			\snippet tests\src\GraphGenerator.cpp EX_CrawlGeom_Serial
 			\snippet tests\src\GraphGenerator.cpp EX_PrintGraph
-			`[(0, 1, 0),(-1, 0, 0),(-1, 1, 0),(-1, 2, 0),(0, 0, 0),(0, 2, 0),(1, 0, 0),(1, 1, 0),(1, 2, 0),(-2, -1, -0),(-2, 0, 0),(-2, 1, 0),(-1, -1, -0),(0, -1, -0),(-2, 2, 0),(-2, 3, 0),(-1, 3, 0),(0, 3, 0),(1, -1, -0)]`
+			`[(0, 1, 0),(-1, 0, -0),(-1, 1, 0),(-1, 2, 0),(0, 0, -0),(0, 2, 0),(1, 0, -0),(1, 1, 0),(1, 2, 0),(-2, -1, -0),(-2, 0, -0),(-2, 1, 0),(-1, -1, -0),(0, -1, -0),(-2, 2, 0),(-2, 3, 0),(-1, 3, 0),(0, 3, 0),(1, -1, -0)]`
 
 		*/
 		SpatialStructures::Graph CrawlGeom(UniqueQueue& todo);
@@ -409,7 +412,7 @@ namespace HF::GraphGenerator {
 			\snippet tests\src\GraphGenerator.cpp EX_CrawlGeom_Parallel
 			\snippet tests\src\GraphGenerator.cpp EX_PrintGraph
 
-			`[(0, 2, 0),(-1, 1, 0),(-1, 2, 0),(-1, 3, 0),(0, 1, 0),(0, 3, 0),(1, 1, 0),(1, 2, 0),(1, 3, 0),(1, 0, 0),(0, -1, -0),(0, 0, 0),(1, -1, -0),(2, -1, -0),(2, 0, 0),(2, 1, 0),(2, 2, 0),(2, 3, 0),(-2, -1, -0),(-3, -2, -0),(-3, -1, -0),(-3, 0, 0),(-2, -2, -0),(-2, 0, 0),(-1, -2, -0),(-1, -1, -0),(-1, 0, 0)]`
+			`[(0, 2, 0),(-1, 1, -0),(-1, 2, 0),(-1, 3, 0),(0, 1, -0),(0, 3, 0),(1, 1, -0),(1, 2, 0),(1, 3, 0),(1, 0, -0),(0, -1, -0),(0, 0, -0),(1, -1, -0),(2, -1, -0),(2, 0, -0),(2, 1, -0),(2, 2, 0),(2, 3, 0),(-2, -1, -0),(-3, -2, -0),(-3, -1, -0),(-3, 0, -0),(-2, -2, -0),(-2, 0, -0),(-1, -2, -0),(-1, -1, -0),(-1, 0, -0)]`
 		*/
 		SpatialStructures::Graph CrawlGeomParallel(UniqueQueue& todo);
 	};
@@ -499,7 +502,7 @@ namespace HF::GraphGenerator {
 		\par Example
 		\snippet tests\src\GraphGenerator.cpp EX_GraphGeneratorRayTracer
 		\snippet tests\src\GraphGenerator.cpp EX_CreateChildren
-		`[((0, 2, 0), 2.23607, 1),((2, 0, 0), 2.23607, 1)]`
+		`[((0, 2, 0), 2.23607, 1),((2, 0, -0), 2.23607, 1)]`
 	*/
 	std::vector<graph_edge> GetChildren(
 		const real3 & parent,
@@ -545,8 +548,8 @@ namespace HF::GraphGenerator {
 
 		\post Node's members at [0], [1], [2] been moved in `direction` by `dist` units.
 	*/
-	template<typename D, typename N>
-	inline void MoveNode(const float dist, const D& direction, N& node) {
+	template<typename A, typename D, typename N>
+	inline void MoveNode(const A& dist, const D& direction, N& node) {
 		node[0] += (direction[0] * dist);
 		node[1] += (direction[1] * dist);
 		node[2] += (direction[2] * dist);
@@ -568,7 +571,7 @@ namespace HF::GraphGenerator {
 		\par Example
 		\snippet tests\src\GraphGenerator.cpp EX_GraphGeneratorRayTracer
 		\snippet tests\src\GraphGenerator.cpp EX_CheckChildren
-		`[(0, 2, 0),(1, 0, 0),(0, 1, 0),(2, 0, 0)]`
+		`[(0, 2, 0),(1, 0, -0),(0, 1, 0),(2, 0, -0)]`
 	*/
 	std::vector<real3> CheckChildren(
 		const real3& parent,

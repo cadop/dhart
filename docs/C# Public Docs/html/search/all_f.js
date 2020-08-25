@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['this_5bint_20i_5d_108',['this[int i]',['../struct_human_factors_1_1_vector3_d.html#a6dfb960b978635255639b779995049ed',1,'HumanFactors.Vector3D.this[int i]()'],['../class_human_factors_1_1_native_utils_1_1_native_array2_d.html#a192a2788c2e51415420fbf348fd44f0e',1,'HumanFactors.NativeUtils.NativeArray2D.this[int i]()']]],
-  ['this_5bint_20key_5d_109',['this[int key]',['../class_human_factors_1_1_native_utils_1_1_native_array.html#ab5ae2b7453b45c8f94c54a21ce60506d',1,'HumanFactors::NativeUtils::NativeArray']]],
-  ['toarray_110',['ToArray',['../struct_human_factors_1_1_vector3_d.html#a1f3e0afd7c741d15bb2572935d26aad6',1,'HumanFactors::Vector3D']]],
-  ['todo_20list_111',['Todo List',['../todo.html',1,'']]],
-  ['tostring_112',['ToString',['../class_human_factors_1_1_native_utils_1_1_native_array.html#a02ec6be681dc2006c5eb725ce59a9999',1,'HumanFactors::NativeUtils::NativeArray']]],
-  ['tovector3d_113',['ToVector3D',['../struct_human_factors_1_1_spatial_structures_1_1_node.html#a8458ee5b88b205717cfcb1c03c89b1e5',1,'HumanFactors::SpatialStructures::Node']]],
-  ['type_114',['type',['../struct_human_factors_1_1_spatial_structures_1_1_node.html#ac46e0068829054a3ea734507ce540a72',1,'HumanFactors::SpatialStructures::Node']]]
+  ['safehandle_121',['SafeHandle',['../class_safe_handle.html',1,'']]],
+  ['shortestpath_122',['ShortestPath',['../class_human_factors_1_1_pathfinding_1_1_shortest_path.html',1,'HumanFactors::Pathfinding']]],
+  ['size_123',['size',['../class_human_factors_1_1_native_utils_1_1_native_array.html#a08f9370818434ce452d8113466c8a0f0',1,'HumanFactors::NativeUtils::NativeArray']]],
+  ['sphericallydistributerays_124',['SphericallyDistributeRays',['../class_human_factors_1_1_view_analysis_1_1_view_analysis.html#abc1d51bdf752a4fa36af012e90cc8acb',1,'HumanFactors::ViewAnalysis::ViewAnalysis']]],
+  ['stringtoedgecost_125',['StringToEdgeCost',['../class_string_to_edge_cost.html',1,'']]],
+  ['sum_126',['SUM',['../namespace_human_factors_1_1_spatial_structures.html#abd405fa41da0f9a771d547aa47b6e1a0a6970bdc2201030b9c03fbdcf3973858a',1,'HumanFactors.SpatialStructures.SUM()'],['../namespace_human_factors_1_1_view_analysis.html#ae24b8f5d9783a270e51183ff2eca765ca6970bdc2201030b9c03fbdcf3973858a',1,'HumanFactors.ViewAnalysis.SUM()']]],
+  ['setting_20up_20a_20unity_20project_20for_20human_20factors_127',['Setting Up a Unity Project for Human Factors',['../_unity_project_setup.html',1,'']]]
 ];

@@ -29,7 +29,7 @@
     <link rel="search" title="Search" href="../search.html" >
     <link rel="top" title="Human Metrics 0.0.1 documentation" href="../index.html" >
     <link rel="up" title="humanfactorspy.raytracer" href="humanfactorspy.raytracer.html" >
-    <link rel="next" title="humanfactorspy.raytracer.RayResultList" href="humanfactorspy.raytracer.RayResultList.html" >
+    <link rel="next" title="humanfactorspy.raytracer.EmbreeBVH.AddMesh" href="humanfactorspy.raytracer.EmbreeBVH.AddMesh.html" >
     <link rel="prev" title="humanfactorspy.raytracer" href="humanfactorspy.raytracer.html" > 
   </head>
   <body>
@@ -63,7 +63,7 @@
            accesskey="I">index</a>
       </li>
       <li class="active">
-        <a href="humanfactorspy.raytracer.RayResultList.html" title="humanfactorspy.raytracer.RayResultList"
+        <a href="humanfactorspy.raytracer.EmbreeBVH.AddMesh.html" title="humanfactorspy.raytracer.EmbreeBVH.AddMesh"
            accesskey="N">next</a>
       </li>
       <li class="active">
@@ -87,7 +87,7 @@
 <h1>humanfactorspy.raytracer.EmbreeBVH<a class="headerlink" href="#humanfactorspy-raytracer-embreebvh" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="humanfactorspy.raytracer.EmbreeBVH">
-<em class="property">class </em><code class="descclassname">humanfactorspy.raytracer.</code><code class="descname">EmbreeBVH</code><span class="sig-paren">(</span><em><span class="n">geometry</span><span class="p">:</span> <span class="n">humanfactorspy.geometry.mesh_info.MeshInfo</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/cadop/HumanMetrics/blob/master/Codebase/HumanFactors/humanfactorspy/..\build\Python\humanfactorspy\raytracer\embree_bvh.py#L8-L43"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#humanfactorspy.raytracer.EmbreeBVH" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">humanfactorspy.raytracer.</code><code class="descname">EmbreeBVH</code><span class="sig-paren">(</span><em><span class="n">geometry</span><span class="p">:</span> <span class="n">humanfactorspy.geometry.mesh_info.MeshInfo</span></em>, <em><span class="n">use_precise</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/cadop/HumanMetrics/blob/master/Codebase/HumanFactors/humanfactorspy/..\build\Python\humanfactorspy\raytracer\embree_bvh.py#L8-L77"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#humanfactorspy.raytracer.EmbreeBVH" title="Permalink to this definition">¶</a></dt>
 <dd><p>An acceelerated datastructure optimized for high performane ray intersections</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -97,13 +97,17 @@ require the mesh first to be converted to this format.</p>
 </div>
 <dl class="py method">
 <dt id="humanfactorspy.raytracer.EmbreeBVH.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em><span class="n">geometry</span><span class="p">:</span> <span class="n">humanfactorspy.geometry.mesh_info.MeshInfo</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/cadop/HumanMetrics/blob/master/Codebase/HumanFactors/humanfactorspy/..\build\Python\humanfactorspy\raytracer\embree_bvh.py#L20-L39"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#humanfactorspy.raytracer.EmbreeBVH.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em><span class="n">geometry</span><span class="p">:</span> <span class="n">humanfactorspy.geometry.mesh_info.MeshInfo</span></em>, <em><span class="n">use_precise</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/cadop/HumanMetrics/blob/master/Codebase/HumanFactors/humanfactorspy/..\build\Python\humanfactorspy\raytracer\embree_bvh.py#L20-L44"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#humanfactorspy.raytracer.EmbreeBVH.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new BVH from an existing mesh</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>geometry</strong> – The mesh to create the BVH from.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>geometry</strong> – The mesh or meshes to create the BVH from.</li>
+<li><strong>use_precise</strong> – Use a more precise, but slower ray intersection function</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
@@ -126,6 +130,9 @@ require the mesh first to be converted to this format.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="humanfactorspy.raytracer.EmbreeBVH.AddMesh.html#humanfactorspy.raytracer.EmbreeBVH.AddMesh" title="humanfactorspy.raytracer.EmbreeBVH.AddMesh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AddMesh</span></code></a>(mesh)</td>
+<td>Add one or more new meshes to the BVH</td>
+</tr>
 </tbody>
 </table>
 <p class="rubric">Attributes</p>
@@ -154,8 +161,8 @@ require the mesh first to be converted to this format.</p>
   <p class="topless"><a href="humanfactorspy.raytracer.html"
                         title="previous chapter">humanfactorspy.raytracer</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="humanfactorspy.raytracer.RayResultList.html"
-                        title="next chapter">humanfactorspy.raytracer.RayResultList</a></p>
+  <p class="topless"><a href="humanfactorspy.raytracer.EmbreeBVH.AddMesh.html"
+                        title="next chapter">humanfactorspy.raytracer.EmbreeBVH.AddMesh</a></p>
 
         </div>
       </div>

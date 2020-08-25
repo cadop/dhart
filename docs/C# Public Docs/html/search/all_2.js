@@ -1,10 +1,17 @@
 var searchData=
 [
-  ['data_19',['data',['../struct_human_factors_1_1_spatial_structures_1_1_c_s_r_info.html#abcc0cc961220efc12b1872ba40a00c0a',1,'HumanFactors::SpatialStructures::CSRInfo']]],
-  ['dijkstraalltoall_20',['DijkstraAllToAll',['../class_human_factors_1_1_pathfinding_1_1_shortest_path.html#a3ede2597cc17a4f1a130741b0163bbab',1,'HumanFactors::Pathfinding::ShortestPath']]],
-  ['dijkstrashortestpath_21',['DijkstraShortestPath',['../class_human_factors_1_1_pathfinding_1_1_shortest_path.html#adc3fbf31af391a4ce9efd911c0c74fee',1,'HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath(Graph graph, int start_id, int end_id, string cost_type=&quot;&quot;)'],['../class_human_factors_1_1_pathfinding_1_1_shortest_path.html#a394c96543ad621b2e5d98554153d74b4',1,'HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPath(Graph graph, Vector3D start_node, Vector3D end_node, string cost_type=&quot;&quot;)']]],
-  ['dijkstrashortestpathmulti_22',['DijkstraShortestPathMulti',['../class_human_factors_1_1_pathfinding_1_1_shortest_path.html#ab7f58f298125194e33d6c69ed4797442',1,'HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti(Graph graph, int[] start_ids, int[] end_ids, string cost_type=&quot;&quot;)'],['../class_human_factors_1_1_pathfinding_1_1_shortest_path.html#a9fb6fc6aff938136f7f9de42e5d8e5bc',1,'HumanFactors.Pathfinding.ShortestPath.DijkstraShortestPathMulti(Graph graph, IEnumerable&lt; Vector3D &gt; start_nodes, IEnumerable&lt; Vector3D &gt; end_nodes, string cost_type=&quot;&quot;)']]],
-  ['directionarray_23',['DirectionArray',['../class_human_factors_1_1_view_analysis_1_1_direction_array.html',1,'HumanFactors::ViewAnalysis']]],
-  ['distance_24',['distance',['../struct_human_factors_1_1_ray_tracing_1_1_ray_result.html#adf3eb5cc80f3153a2d777f88710397cf',1,'HumanFactors.RayTracing.RayResult.distance()'],['../struct_human_factors_1_1_view_analysis_1_1_view_analysis_result.html#ae0e83b6507dcc07f73796f3f9c5cee29',1,'HumanFactors.ViewAnalysis.ViewAnalysisResult.distance()']]],
-  ['distanceto_25',['DistanceTo',['../struct_human_factors_1_1_vector3_d.html#ade036d62f63e1af4f0d11b60ed5a3b9c',1,'HumanFactors::Vector3D']]]
+  ['calculateandstorecrossslope_11',['CalculateAndStoreCrossSlope',['../class_human_factors_1_1_spatial_structures_1_1_cost_algorithms.html#a06095a84f8d2bc09ffc447a6d8241865',1,'HumanFactors::SpatialStructures::CostAlgorithms']]],
+  ['calculateandstoreenergyexpenditure_12',['CalculateAndStoreEnergyExpenditure',['../class_human_factors_1_1_spatial_structures_1_1_cost_algorithms.html#abc3e72806a517518dc8d40c96e818939',1,'HumanFactors::SpatialStructures::CostAlgorithms']]],
+  ['calculatepresure_13',['CalculatePresure',['../class_human_factors_1_1_geometry_1_1_mesh_info.html#a1b8aad938f25f5078b7688f60b574495',1,'HumanFactors::Geometry::MeshInfo']]],
+  ['clearnodeattributes_14',['ClearNodeAttributes',['../class_human_factors_1_1_spatial_structures_1_1_graph.html#a0ec380a14ed15e54db8f423a0af0c0d4',1,'HumanFactors::SpatialStructures::Graph']]],
+  ['cols_15',['cols',['../struct_human_factors_1_1_spatial_structures_1_1_c_s_r_info.html#a0086e6d776db7869717b10bbfe1691c4',1,'HumanFactors::SpatialStructures::CSRInfo']]],
+  ['commonrotations_16',['CommonRotations',['../class_human_factors_1_1_geometry_1_1_common_rotations.html',1,'HumanFactors::Geometry']]],
+  ['compresstocsr_17',['CompressToCSR',['../class_human_factors_1_1_spatial_structures_1_1_graph.html#a84a7286932920179d90a63cfd8ada207',1,'HumanFactors::SpatialStructures::Graph']]],
+  ['copyarray_18',['CopyArray',['../class_human_factors_1_1_native_utils_1_1_native_array.html#a9ea74c37970f76b067ebae91b6918c8c',1,'HumanFactors::NativeUtils::NativeArray']]],
+  ['cost_5fto_5fnext_19',['cost_to_next',['../struct_human_factors_1_1_pathfinding_1_1_path_member.html#a19ae4ae604a527ec5589595eee8dee6f',1,'HumanFactors::Pathfinding::PathMember']]],
+  ['costalgorithmnames_20',['CostAlgorithmNames',['../class_human_factors_1_1_spatial_structures_1_1_cost_algorithm_names.html',1,'HumanFactors::SpatialStructures']]],
+  ['costalgorithms_21',['CostAlgorithms',['../class_human_factors_1_1_spatial_structures_1_1_cost_algorithms.html',1,'HumanFactors::SpatialStructures']]],
+  ['count_22',['COUNT',['../namespace_human_factors_1_1_spatial_structures.html#abd405fa41da0f9a771d547aa47b6e1a0a4905ac9d6a22bdfc1ae096094ce6248d',1,'HumanFactors.SpatialStructures.COUNT()'],['../namespace_human_factors_1_1_view_analysis.html#ae24b8f5d9783a270e51183ff2eca765ca4905ac9d6a22bdfc1ae096094ce6248d',1,'HumanFactors.ViewAnalysis.COUNT()']]],
+  ['cross_5fslope_23',['CROSS_SLOPE',['../class_human_factors_1_1_spatial_structures_1_1_cost_algorithm_names.html#abac022f6ebf4e603aa7d1c4c1df37e9c',1,'HumanFactors::SpatialStructures::CostAlgorithmNames']]],
+  ['csrinfo_24',['CSRInfo',['../struct_human_factors_1_1_spatial_structures_1_1_c_s_r_info.html',1,'HumanFactors::SpatialStructures']]]
 ];

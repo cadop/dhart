@@ -19,7 +19,7 @@ namespace HF::GraphGenerator {
 
 	using std::vector;
 
-
+	using HF::RayTracer::HitStruct;
 	/*! 
 		\brief Convert a point_type to a node.
 		
@@ -115,34 +115,31 @@ namespace HF::GraphGenerator {
 		HIT_FLAG flag)
 	{
 		// Setup default params
-		float dist = -1.0f;
-		int id = -1.0f;
-		bool res = false;
+		HitStruct<real_t> res;
 
 		// Switch Geometry based on hitflag
 		switch (flag) {
 		case HIT_FLAG::FLOORS: // Both are the same for now. Waiting on obstacle support
 		case HIT_FLAG::OBSTACLES:
-			res = ray_tracer.FireAnyRay(origin, direction, dist, id);
+			res = ray_tracer.Intersect(origin, direction);
 			break;
 		case HIT_FLAG::BOTH:
-			res = ray_tracer.FireAnyRay(origin, direction, dist, id);
+			res = ray_tracer.Intersect(origin, direction);
 			break;
 		default:
 			assert(false);
 		}
 
 		// If successful, make a copy of the node, move it, then return it
-		if (res) {
+		if (res.DidHit()) {
 			// Create a new optional point with a copy of the origin
 			optional_real3 return_pt(origin);
 
 			// Move it in direction
-			MoveNode(dist, direction, *return_pt);
-
-			// Truncate the Z value before leaving this function
-			// This is for clarity, since the node was already modified
-			return_pt.pt[2] = trunchf_tmp<real_t>(return_pt.pt[2], node_z_tolerance);
+			MoveNode(res.distance, direction, *return_pt);
+			//double temp_diff = (origin[2]) - dist; // Sanity check for direction -1 to see influence of movenode arithmetic 
+			// Round the position to the z value tolerance
+			return_pt.pt[2] = HF::SpatialStructures::roundhf_tail<real_t>(return_pt.pt[2], 1/node_z_tolerance);
 
 			// Return the optional point
 			return return_pt;
@@ -232,6 +229,7 @@ namespace HF::GraphGenerator {
 		// Iterate through every child in the set of possible children
 		for (const auto& child : possible_children)
 		{
+
 			// Check if a ray intersects a mesh
 			optional_real3 potential_child = CheckRay(rt, child, down, GP.precision.node_z);
 			
@@ -259,7 +257,7 @@ namespace HF::GraphGenerator {
 	{
 		// Use the distance between parent and child
 		// as the maximum distance for the occlusion check
-		return RT.FireAnyOcclusionRay(parent, DirectionTo(parent, child), DistanceTo(parent, child));
+		return RT.Occluded(parent, DirectionTo(parent, child), DistanceTo(parent, child));
 	}
 
 	bool CheckSlope(const real3& parent, const real3& child, const GraphParams& gp)
@@ -310,7 +308,10 @@ namespace HF::GraphGenerator {
 			// If parent is higher than child, the check is to go downstairs
 			// Since the child is lower, raise the child height by the downstep limit
 			// to be checked for a connection
-			if (node1[2] > node2[2]) {
+			if (parent[2] > child[2]) 
+			{
+				node1 = child;
+				node2 = parent;
 				node1[2] = node1[2] + params.down_step;
 				node2[2] = node2[2] + GROUND_OFFSET;
 				s = STEP::DOWN;
@@ -319,7 +320,10 @@ namespace HF::GraphGenerator {
 			// If parent is lower than child, the check is to go upstairs
 			// Since the child is lower, raise the child height by the upstep limit
 			// to be checked for a connection
-			else if (node1[2] < node2[2]) {
+			else if (node1[2] < node2[2]) 
+			{
+				node1 = parent;
+				node2 = child;
 				node1[2] = node1[2] + params.up_step;
 				node2[2] = node2[2] + GROUND_OFFSET;
 				s = STEP::UP;
@@ -327,7 +331,10 @@ namespace HF::GraphGenerator {
 
 			// If they're on an equal plane then offset by upstep to see
 			// if the obstacle can be stepped over.
-			else if (node1[2] == node2[2]) {
+			else if (node1[2] == node2[2]) 
+			{
+				node1 = parent;
+				node2 = child;
 				node1[2] = node1[2] + params.up_step;
 				node2[2] = node2[2] + GROUND_OFFSET;
 				s = STEP::OVER;
@@ -367,7 +374,7 @@ namespace HF::GraphGenerator {
 			const real_t x = roundhf_tmp<real_t>(parent[0] + (x_offset * spacing[0]), GP.precision.node_spacing);
 			const real_t y = roundhf_tmp<real_t>(parent[1] + (y_offset * spacing[1]), GP.precision.node_spacing);
 			// Round the z value to a lower precision assuming it helps embree
-			const real_t z = roundhf_tmp<real_t>(parent[2] + spacing[2], GP.precision.node_spacing);
+			const real_t z = roundhf_tmp<real_t>(parent[2] + spacing[2], GP.precision.node_z);
 
 			// Add these new values as a node in the out_children list
 			out_children[i] = real3{ x, y, z };

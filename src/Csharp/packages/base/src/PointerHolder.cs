@@ -96,6 +96,18 @@ namespace HumanFactors.NativeUtils
 		/*! \brief There is no way to invalidate this class without destroying it, so will always return false */
 		public override bool IsInvalid => false;
 
+        /*! \brief Update the pressure of this object.*/
+        public void UpdatePressure(int new_pressure)
+        {
+            if (new_pressure == this.pressure)
+                return;
+
+            if (this.pressure > 0)
+                GC.RemoveMemoryPressure(this.pressure);
+
+            GC.AddMemoryPressure(new_pressure);
+            this.pressure = new_pressure;
+        }
 
 		/// \brief Destroy this object and free the memory of the native object it contains.
 		~NativeObject()
@@ -339,5 +351,24 @@ namespace HumanFactors.NativeUtils
         */
 		unsafe internal NativeArray2D(CVectorAndData ptrs) : base(ptrs, ptrs.size * ptrs.size2) { }
 	}
+
+    /*! 
+		\brief A native array 2D that doesn't require destruction.
+
+		\remarks
+		Use this for arrays that don't need to be destructed, but instead are destroyed by some other means.
+		An example of this is the vertex and index arrays for an instance of MeshInfo, in which both are destroyed
+		when the meshinfo is destroyed. 
+    */
+    public class DependentNativeArray<T> : NativeArray2D<T> where T : unmanaged
+    {
+
+        internal DependentNativeArray(IntPtr data, int length, int width)
+            : base(new CVectorAndData(data, IntPtr.Zero, length, width)) { }
+
+
+        /*!\brief Doesn't do anything since it's managed by it's parent MeshInfo */
+        protected override bool ReleaseHandle() => true;
+    }
 
 }

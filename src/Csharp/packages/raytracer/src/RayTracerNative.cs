@@ -24,7 +24,7 @@ namespace HumanFactors.RayTracing
 		/*!
             \brief Create a Raytracer in C++
 
-            \param mesh_info_ptr Pointer to a vector of MeshInfo in C++.
+            \param mesh_info_ptr Pointer to an instance of MeshInfo in C++.
 
             \returns
             A Pointer to a raytracer containing a BVH constructed from the meshinfo
@@ -33,7 +33,7 @@ namespace HumanFactors.RayTracing
             \see EmbreeBVH for more information about the abstraction between
                            raytracers and BVHs.
         */
-		internal static IntPtr C_ConstructRaytracer(IntPtr mesh_info_ptr)
+		internal static IntPtr C_ConstructRaytracer(IntPtr mesh_info_ptr, bool use_precise)
 		{
 
 			// Create a new pointer to hold the output of this function
@@ -41,7 +41,7 @@ namespace HumanFactors.RayTracing
 
 			// Call the function in C++. If this succeeds, then the ret_ptr will be
 			// updated with a pointer to the new object
-			HF_STATUS result = CreateRaytracer(mesh_info_ptr, ref ret_ptr);
+			HF_STATUS result = CreateRaytracer(mesh_info_ptr, ref ret_ptr, use_precise);
 
 			// Right now this is never thrown due to an unset compiler switch. This
 			// is a matter of changing a cmake option though, so it's here for when
@@ -57,6 +57,43 @@ namespace HumanFactors.RayTracing
 			return ret_ptr;
 		}
 
+		/*!
+			\brief Create a Raytracer in C++
+
+			\param mesh_info_ptr arrays of pointers to a MeshInfo in C++.
+
+			\returns
+			A Pointer to a raytracer containing a BVH constructed from the meshinfo
+			pointed to by `mesh_info_ptr`.
+
+			\see EmbreeBVH for more information about the abstraction between
+						   raytracers and BVHs.
+		*/
+		internal static IntPtr C_ConstructRaytracer(IntPtr[] mesh_info_ptr)
+		{
+			// Create a new pointer to hold the output of this function
+			IntPtr ret_ptr = new IntPtr();
+
+			// Call the function in C++. If this succeeds, then the ret_ptr will be
+			// updated with a pointer to the new object
+			HF_STATUS result = CreateRaytracerMultiMesh(mesh_info_ptr, mesh_info_ptr.Length, ref ret_ptr);
+
+			// Right now this is never thrown due to an unset compiler switch. This
+			// is a matter of changing a cmake option though, so it's here for when
+			// we set that up.
+			if (result == HF_STATUS.MISSING_DEPEND)
+				throw new Exception("Missing embree3.dll or tbb.dll");
+
+			// If it's not OK then something changed in the CInterface that wasn't reflected
+			// in C#. This is developer problem.
+			Debug.Assert(result == HF_STATUS.OK);
+
+			// Return the new pointer.
+			return ret_ptr;
+		}
+
+		internal static void C_AddMesh(IntPtr rt, IntPtr[] Meshes) => AddMeshes(rt, Meshes, Meshes.Length);
+		
 		/*! 
             \brief Cast a ray in C++ 
            
@@ -353,9 +390,24 @@ namespace HumanFactors.RayTracing
 		[DllImport(dllpath)]
 		private static extern HF_STATUS CreateRaytracer(
 			IntPtr mesh,
-			ref IntPtr out_raytracer
+			ref IntPtr out_raytracer,
+			bool use_precise
 		);
 
+		[DllImport(dllpath)]
+		private static extern HF_STATUS CreateRaytracerMultiMesh(
+			IntPtr[] meshes,
+			int num_meshes,
+			ref IntPtr out_raytracer
+		);	
+
+		[DllImport(dllpath)]
+		private static extern HF_STATUS AddMeshes(
+			IntPtr ray_tracer,
+			IntPtr[] meshes,
+			int num_meshes
+		);	
+		
 		[DllImport(dllpath)]
 		private static extern HF_STATUS FireRay(
 			IntPtr ert,

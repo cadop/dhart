@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['graphedgeaggregation_249',['GraphEdgeAggregation',['../namespace_human_factors_1_1_spatial_structures.html#abd405fa41da0f9a771d547aa47b6e1a0',1,'HumanFactors::SpatialStructures']]]
+  ['direction_291',['Direction',['../namespace_human_factors_1_1_spatial_structures.html#abcf592e043e02805b6f3fa202346d9cc',1,'HumanFactors::SpatialStructures']]]
 ];

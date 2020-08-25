@@ -533,6 +533,143 @@ TEST(_Graph, AlternateCSR) {
 	ASSERT_FALSE(std::equal(stand_values.begin(), stand_values.end(), alt_values.begin()));
 }
 
+const string test_attribute = "test_attr";
+const vector<Node> test_param_nodes = {
+		{1,1,1}, {2,2,2}, {3,3,3},{4,4,4}, {5,5,5}
+};
+
+std::vector<int> GetIds(const Graph & G, const std::vector<Node> & nodes) {
+	std::vector<int> ids(nodes.size(), -1);
+	for (int i = 0; i < nodes.size(); i++)
+		ids[i] = G.getID(nodes[i]);
+
+	return ids;
+}
+
+Graph CreateNodeAttributeGraph() {
+
+	//! [EX_AttrsToStrings]
+
+	// Define nodes
+	const vector<Node> Nodes = {
+		{1,1,1}, {2,2,2}, {3,3,3},{4,4,4}, {5,5,5}
+	};
+
+	// Define the graph, compress it then add edges
+	Graph G;
+	G.Compress();
+	G.addEdge(Nodes[0], Nodes[2], 2);
+	G.addEdge(Nodes[0], Nodes[1], 1);
+	G.addEdge(Nodes[3], Nodes[0], 3);
+	G.addEdge(Nodes[2], Nodes[1], 4);
+	G.addEdge(Nodes[0], Nodes[4], 555);
+
+	// Get the ids of every node since the graph assigns them
+	std::vector<int> ids(Nodes.size(), -1);
+	for (int i = 0; i < Nodes.size(); i++)
+		ids[i] = G.getID(Nodes[i]);
+
+	// Create node attributes
+	G.AddNodeAttribute(ids[0], test_attribute, "000");
+	G.AddNodeAttribute(ids[1], test_attribute, "111");
+	G.AddNodeAttribute(ids[2], test_attribute, "222");
+	G.AddNodeAttribute(ids[3], test_attribute, "333");
+	
+	//! [EX_AttrsToStrings]
+	return G;
+}
+
+inline float StringToFloat(const std::string& str_to_convert) {
+
+	try {
+		return std::stod(str_to_convert);
+	}
+	catch (std::invalid_argument) {
+		return -1;
+	}
+}
+
+inline std::vector<float> ConvertStringsToFloat(const std::vector<std::string>& strings) {
+	std::vector<float> out_floats(strings.size());
+
+	for (int i = 0; i < out_floats.size(); i++) 
+		out_floats[i] = StringToFloat(strings[i]);
+	return out_floats;
+}
+
+
+TEST(_Graph, AttrToParams_INCOMING) {
+	Graph G = CreateNodeAttributeGraph();
+	const auto ids = GetIds(G, test_param_nodes);
+	const std::vector<std::string> attributes = G.GetNodeAttributes(test_attribute);
+
+	//![EX_AttrsToStrings2]
+
+	// Convert node attributes to graph costs based on the cost of the child node
+	G.AttrToCost(test_attribute, "output_str", Direction::INCOMING);
+
+	// Print out the cost of edge 3 to 0
+	printf("0->1: %f\n", G.GetCost(ids[0], ids[1], "output_str"));
+
+	//![EX_AttrsToStrings2]
+	
+	// Assert Correctness
+	const std::vector<float> scores = ConvertStringsToFloat(attributes);
+	ASSERT_EQ(scores[ids[0]], G.GetCost(ids[3], ids[0], "output_str"));
+	ASSERT_EQ(scores[ids[1]], G.GetCost(ids[0], ids[1], "output_str"));
+	ASSERT_EQ(scores[ids[0]], G.GetCost(ids[3], ids[0], "output_str"));
+	ASSERT_EQ(scores[ids[1]], G.GetCost(ids[2], ids[1], "output_str"));
+}
+
+TEST(_Graph, AttrToParams_OUTGOING) {
+	Graph G = CreateNodeAttributeGraph();
+	const auto ids = GetIds(G, test_param_nodes);
+	const std::vector<std::string> attributes = G.GetNodeAttributes(test_attribute);
+	const std::vector<float> scores = ConvertStringsToFloat(attributes);
+
+	// Convert node attributes to strings
+	G.AttrToCost(test_attribute, "output_str", Direction::OUTGOING);
+
+	// Assert Correctness
+	ASSERT_EQ(scores[ids[3]], G.GetCost(ids[3], ids[0], "output_str"));
+	ASSERT_EQ(scores[ids[0]], G.GetCost(ids[0], ids[1], "output_str"));
+	ASSERT_EQ(scores[ids[3]], G.GetCost(ids[3], ids[0], "output_str"));
+	ASSERT_EQ(scores[ids[2]], G.GetCost(ids[2], ids[1], "output_str"));
+}
+
+TEST(_Graph, AttrToParams_BOTH) {
+	Graph G = CreateNodeAttributeGraph();
+	const auto ids = GetIds(G, test_param_nodes);
+	const std::vector<std::string> attributes = G.GetNodeAttributes(test_attribute);
+	const std::vector<float> scores = ConvertStringsToFloat(attributes);
+
+	// Convert node attributes to strings
+	G.AttrToCost(test_attribute, "output_str", Direction::BOTH);
+
+	// Assert Correctness
+	ASSERT_EQ(scores[ids[3]] + scores[ids[0]], G.GetCost(ids[3], ids[0], "output_str"));
+	ASSERT_EQ(scores[ids[0]] + scores[ids[1]], G.GetCost(ids[0], ids[1], "output_str"));
+	ASSERT_EQ(scores[ids[3]] + scores[ids[0]], G.GetCost(ids[3], ids[0], "output_str"));
+	ASSERT_EQ(scores[ids[2]] + scores[ids[1]], G.GetCost(ids[2], ids[1], "output_str"));
+}
+
+TEST(C_Graph, AttrToParams) {
+	
+	Graph G = CreateNodeAttributeGraph();
+	const auto ids = GetIds(G, test_param_nodes);
+	const std::vector<std::string> attributes = G.GetNodeAttributes(test_attribute);
+	const std::vector<float> scores = ConvertStringsToFloat(attributes);
+
+	
+	// Convert node attributes to strings
+	GraphAttrsToCosts(&G, test_attribute.c_str(), "output_str", Direction::BOTH);
+
+	// Assert Correctness
+	ASSERT_EQ(scores[ids[3]] + scores[ids[0]], G.GetCost(ids[3], ids[0], "output_str"));
+	ASSERT_EQ(scores[ids[0]] + scores[ids[1]], G.GetCost(ids[0], ids[1], "output_str"));
+	ASSERT_EQ(scores[ids[3]] + scores[ids[0]], G.GetCost(ids[3], ids[0], "output_str"));
+	ASSERT_EQ(scores[ids[2]] + scores[ids[1]], G.GetCost(ids[2], ids[1], "output_str"));
+}
 
 TEST(_Rounding, addition_error)
 {
