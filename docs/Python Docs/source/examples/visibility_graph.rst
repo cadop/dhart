@@ -6,6 +6,7 @@ Visibility Analysis
    :maxdepth: 2
 
    visibility/basic.rst
+   visibility/groups.rst
 
 .. seealso::
     These examples use methods found in the following modules:
