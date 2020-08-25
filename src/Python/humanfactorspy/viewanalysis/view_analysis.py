@@ -2,6 +2,8 @@ from ctypes import c_void_p
 from typing import *
 from enum import Enum
 
+import numpy as np
+
 from humanfactorspy.spatialstructures import NodeList
 from humanfactorspy.spatialstructures.node import CreateListOfNodeStructs
 from humanfactorspy.raytracer import EmbreeBVH, RayResultList
@@ -29,7 +31,7 @@ def SphericalViewAnalysisAggregate(
     upward_fov=50,
     downward_fov=70,
     agg_type: AggregationType = AggregationType.SUM,
-) -> ViewAnalysisAggregates:
+    ) -> ViewAnalysisAggregates:
     """ Conduct view analysis on every node in nodes and aggregate the results
 
     ray_count rays are evenly distributed around each node in nodes and fired at the
@@ -85,13 +87,22 @@ def SphericalViewAnalysisAggregate(
 
     """
     
+    # If the input was a tuple
+    # TODO: test if this is has proper size
     if isinstance(nodes, tuple):
         nodes = [nodes]
-
+    # If it is already a list, or has been converted from an input tuple
     if isinstance(nodes, list):
         np_arr_pts = CreateListOfNodeStructs(nodes)
         data_ptr = np_arr_pts.ctypes.data_as(c_void_p)
         size = len(np_arr_pts)
+    # If the input was a numpy array
+    elif isinstance(nodes, np.ndarray):
+        np_arr_pts = CreateListOfNodeStructs(nodes)
+        data_ptr = np_arr_pts.ctypes.data_as(c_void_p)
+        size = len(np_arr_pts)
+    # If the input was an original node datastructure
+    # TODO: make this specifically check the node type
     else:
         data_ptr = nodes.data_pointer
         size = len(nodes)
@@ -164,19 +175,15 @@ def SphericalViewAnalysis(
         data_ptr = nodes.data_pointer
         size = len(nodes)
 
-    (
-        score_vector_ptr,
-        score_data_ptr,
-        ray_count
-    ) = viewanalysis_native_functions.C_SphericalViewAnalysis(
-        bvh.pointer,
-        data_ptr,
-        size,
-        ray_count,
-        height,
-        upper_fov=upward_fov,
-        lower_fov=downward_fov,
-    )
+    (score_vector_ptr, score_data_ptr, ray_count) = 
+        viewanalysis_native_functions.C_SphericalViewAnalysis(
+                                                                bvh.pointer,
+                                                                data_ptr,
+                                                                size,
+                                                                ray_count,
+                                                                height,
+                                                                upper_fov=upward_fov,
+                                                                lower_fov=downward_fov)
 
     return RayResultList(score_vector_ptr, score_data_ptr, size, ray_count)
 
