@@ -108,47 +108,53 @@ def Intersect(
     Examples:
         Firing a single ray
 
+        >>> import numpy as np
+        >>> from numpy.lib import recfunctions as rfn
         >>> from humanfactorspy.geometry import LoadOBJ, CommonRotations, ConstructPlane
         >>> from humanfactorspy.raytracer import EmbreeBVH, Intersect
-        
+        >>> 
         >>> loaded_obj = ConstructPlane()
         >>> loaded_obj.Rotate(CommonRotations.Yup_to_Zup)
         >>> bvh = EmbreeBVH(loaded_obj)
-        
+        >>> 
         >>> result = Intersect(bvh, (0,0,1), (0,0,-1))
-        >>> print(result)
-        (0.9999999403953552, 39)
+        >>> print(np.around(result,5))
+        [1. 0.]
 
-
-        Firing rays with an equal number of directions and origins
-
-        >>> from humanfactorspy.geometry import LoadOBJ, CommonRotations, ConstructPlane
-        >>> from humanfactorspy.raytracer import EmbreeBVH, Intersect
-
+        >>> #Firing rays with an equal number of directions and origins
+        >>> 
         >>> loaded_obj = ConstructPlane()
         >>> loaded_obj.Rotate(CommonRotations.Yup_to_Zup)
         >>> bvh = EmbreeBVH(loaded_obj)
-
+        >>> 
         >>> hit_point = Intersect(bvh, [(0,0,1)] * 10, [(0,0,-1)] * 10)
-        >>> print(hit_point)
-        [(0.99999994, 39) (0.99999994, 39) (0.99999994, 39) (0.99999994, 39)
-         (0.99999994, 39) (0.99999994, 39) (0.99999994, 39) (0.99999994, 39)
-         (0.99999994, 39) (0.99999994, 39)]
+        >>> # Convert to numpy unstructured and round
+        >>> print(np.around(rfn.structured_to_unstructured(hit_point.array),5))
+        [[1. 0.]
+         [1. 0.]
+         [1. 0.]
+         [1. 0.]
+         [1. 0.]
+         [1. 0.]
+         [1. 0.]
+         [1. 0.]
+         [1. 0.]
+         [1. 0.]]
 
-        Firing multiple rays with one direction and multiple origins
-
-        >>> from humanfactorspy.geometry import LoadOBJ, CommonRotations, ConstructPlane
-        >>> from humanfactorspy.raytracer import EmbreeBVH, Intersect
-
+        >>> #Firing multiple rays with one direction and multiple origins
+        >>> 
         >>> loaded_obj = ConstructPlane()
         >>> loaded_obj.Rotate(CommonRotations.Yup_to_Zup)
         >>> bvh = EmbreeBVH(loaded_obj)
-
+        >>> 
         >>> origins = [(0,0,x) for x in range(0,5)]
         >>> hit_point = Intersect(bvh, origins, (0,0,-1))
-        >>> print(hit_point)
-        [(-1.        , -1) ( 0.99999994, 39) ( 1.9999999 , 39) ( 2.9999998 , 39)
-         ( 3.9999995 , 39)]
+        >>> print(np.around(rfn.structured_to_unstructured(hit_point.array),5))
+        [[-1. -1.]
+         [ 1.  0.]
+         [ 2.  0.]
+         [ 3.  0.]
+         [ 4.  0.]]
 
     """
     # Check if origin and direction can be used as points
