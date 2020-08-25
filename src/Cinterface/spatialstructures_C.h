@@ -28,6 +28,8 @@ namespace HF {
 		struct Edge;	// Spent like 2 hours reading mangled names 
 						// because I accidentally defined these 
 						// as classes (V) instead of structs (U)
+
+		enum class Direction : int;
 	}
 }
 
@@ -894,5 +896,11 @@ C_INTERFACE ClearAttributeType(HF::SpatialStructures::Graph* g, const char* s);
 	it must be destroyed. (\ref graph_teardown)
 */
 C_INTERFACE GetSizeOfGraph(const HF::SpatialStructures::Graph* g, int* out_size);
+
+C_INTERFACE GraphAttrsToCosts(
+	HF::SpatialStructures::Graph * graph_ptr, 
+	const char * attr_key,
+	const char * cost_string, 
+	HF::SpatialStructures::Direction dir);
 
 /**@}*/

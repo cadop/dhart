@@ -401,3 +401,18 @@ C_INTERFACE GetSizeOfGraph(const Graph * g, int * out_size) {
 	*out_size = g->size();
 	return OK;
 }
+
+C_INTERFACE GraphAttrsToCosts(
+	HF::SpatialStructures::Graph* graph_ptr,
+	const char* attr_key, 
+	const char* cost_string,
+	HF::SpatialStructures::Direction dir)
+{
+	try {
+		graph_ptr->AttrToCost(std::string(attr_key), std::string(cost_string), dir);
+	}
+	catch (std::out_of_range) {
+		return HF::Exceptions::HF_STATUS::NOT_FOUND;
+	}
+	return HF::Exceptions::OK;
+}
