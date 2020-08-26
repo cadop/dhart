@@ -38,6 +38,24 @@ using HF::Geometry::MeshInfo;
 using namespace HF::Geometry;
 
 
+
+TEST(_nanoRayTracer, MeshMatching) {
+	// Check to see if nanort will find the box
+
+	std::string objFilename = "VisibilityTestCases.obj";
+
+	// Use the custom nanoRT mesh loader
+	bool ret = false;
+	Mesh mesh;
+	ret = LoadObj(mesh, objFilename.c_str());
+
+	// Use the default mesh loader
+	auto geom = HF::Geometry::LoadMeshObjects(objFilename, HF::Geometry::ONLY_FILE, false);
+
+	// Find the vert and indices list and check they are the same
+	std::cout << " " << std::endl;
+}
+
 TEST(_nanoRayTracer, Edge_Vert_Intersection) {
 	// Check to see if nanort will find the box
 
