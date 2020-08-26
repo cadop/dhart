@@ -205,6 +205,26 @@ TEST(_EmbreeRayTracer, HitPointsAreAccurate) {
 	}
 }
 
+
+TEST(_EmbreeRayTracer, Edge_Vert_Intersection) {
+	std::string plane_path = "VisibilityTestCases.obj";
+
+	auto geom = HF::Geometry::LoadMeshObjects(plane_path, HF::Geometry::ONLY_FILE, false);
+	auto k = HF::RayTracer::EmbreeRayTracer(geom);
+
+	// All of these rays should hit since the origin is inside of the teapot
+	std::vector<std::array<float, 3>> origins = { {19, 10, 15},
+												  {20, 10, 15} };
+
+	const std::array<float, 3> direction{ 0,0,-1 };
+	float height = NAN;
+	for (auto& origin : origins) {
+		k.PointIntersection(origin, direction);
+		height = origin[2];
+		ASSERT_EQ(height, 10);
+	}
+}
+
 TEST(_EmbreeRayTracer, RayTolerance) {
 	std::string plane_path = "energy_blob_zup.obj";
 	int scale = 100;
