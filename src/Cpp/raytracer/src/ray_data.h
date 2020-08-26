@@ -146,11 +146,12 @@ namespace HF::RayTracer {
         std::unique_ptr<Intersector> intersector; ///< Triangle Intersector
         NanoBVH bvh; ///< A NanoRT BVH 
 
+        const real_t min_dist = 0.0;
         std::vector<real_t> vertices; //< Internal vertex array
         std::vector<unsigned int> indices; //< Internal index array
 
-        template <typename N, typename dist_type = real_t>
-        inline NanoRay ConstructRay(const N& origin, const N& direction, dist_type min_dist = 0.0, dist_type max_dist = std::numeric_limits<dist_type>::max()) {
+        template <typename dist_type = real_t, typename N>
+        inline NanoRay ConstructRay(const N& origin, const N& direction, dist_type max_dist = std::numeric_limits<dist_type>::max()) {
             NanoRay out_ray;
             out_ray.org[0] = origin[0]; out_ray.org[1] = origin[1]; out_ray.org[2] = origin[2];
             out_ray.dir[0] = direction[0]; out_ray.dir[1] = direction[1]; out_ray.dir[2] = direction[2];
@@ -177,14 +178,25 @@ namespace HF::RayTracer {
         /*! \brief Construct a new raytracer with an instance of meshinfo*/
         NanoRTRayTracer(const HF::Geometry::MeshInfo& MI);
 
-        template<typename point_type>
+        template<typename point_type, typename dist_type = real_t>
         inline HitStruct<real_t> Intersect(
             const point_type& origin,
             const point_type& dir,
-            float distance = -1,
+            dist_type distance = -1.0,
             int mesh_id = -1) 
         {
-            throw std::logic_error("Not Implemented");
+            dist_type max_dist = (distance < 0) ? std::numeric_limits<dist_type>::max() : distance;
+
+            NanoRay ray = ConstructRay<dist_type>(origin, dir, max_dist);
+            Intersection hit = CreateHit();
+
+            bool did_intersect = bvh.Traverse<Intersector>(ray, *(this->intersector), &hit);
+            
+            if (did_intersect)
+                return HitStruct{ hit.t, 0 };
+            else
+                return HitStruct();
+
         }
 
         template<typename point_type>
@@ -194,7 +206,7 @@ namespace HF::RayTracer {
             float distance = -1,
             int mesh_id = -1)
         {
-            throw std::logic_error("Not Implemented");
+            return Intersect(origin, dir, distance, mesh_id).DidHit();
         }
 
         template<typename point_type>
@@ -204,16 +216,11 @@ namespace HF::RayTracer {
             float distance = -1,
             int mesh_id = -1
         ) {
-            // Construct the ray and hit
-            NanoRay ray = ConstructRay(origin, dir, 0);
-            Intersection Hit = CreateHit();
-
-            // Cast the ray
-            bool did_intersect = bvh.Traverse<Intersector>(ray, *(this->intersector), &Hit);
+            auto res = Intersect(origin, dir, distance, mesh_id);
 
             // It it intersected, move the node and return true, otherwise do nothing and return false.
-            if (did_intersect) {
-                MovePoint(origin, dir, Hit.t);
+            if (res.DidHit()) {
+                MovePoint(origin, dir, res.distance);
                 return true;
             }
             else

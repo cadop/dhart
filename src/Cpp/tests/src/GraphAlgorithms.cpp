@@ -9,6 +9,7 @@
 #include <edge.h>
 #include <node.h>
 #include <Constants.h>
+#include<ray_data.h>
 
 #include "analysis_C.h"
 #include "graph.h"
@@ -93,6 +94,40 @@ namespace HF {
 		g.Compress();
 		ASSERT_EQ(3450, g.size());
 	}
+
+	TEST(_GraphAlgorithm, Energy_BlobNanoRT) {
+		auto mesh = Geometry::LoadMeshObjects("energy_blob_zup.obj");
+
+		HF::RayTracer::NanoRTRayTracer nrt(mesh[0]);
+		auto GG = GraphGenerator::GraphGenerator(nrt, 0);
+		int max_nodes = 5000;
+		double up_step = 5;
+		double up_slope = 60;
+		double down_step = 5;
+		double down_slope = 60;
+		int max_step_connections = 1;
+		int cores = -1;
+
+
+		auto g = GG.BuildNetwork(
+			std::array<double, 3>{-30.0, 0.0, 20.0},
+			std::array<double, 3>{1.0, 1.0, 10.0},
+			max_nodes,
+			up_step,
+			up_slope,
+			down_step,
+			down_slope,
+			max_step_connections,
+			cores
+		);
+
+		printf("Graph size %i\n", g.size());
+		g.Compress();
+		ASSERT_EQ(3450, g.size());
+
+		for (auto n : g.Nodes())
+			std::cout << n << std::endl;
+	}		
 
 
 }
