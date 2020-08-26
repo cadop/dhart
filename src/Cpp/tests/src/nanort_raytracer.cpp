@@ -21,9 +21,6 @@
 #include "performance_testing.h"
 
 // [nanoRT]
-#define NANORT_USE_CPP11_FEATURE  // MUST be defined for nanort.h 
-#include "nanort.h"
-#include "ray_data.h"
 using namespace HF::nanoGeom;
 // end [nanoRT]
 
@@ -86,7 +83,7 @@ TEST(_nanoRayTracer, Edge_Vert_Intersection) {
 	nanort::BVHAccel<double> accel;
 	accel = nanoRT_BVH(mesh);
 
-	nanoRT_Data nanoRTdata(mesh);
+	nanoRT_Data nanoRTdata(&mesh);
 
 	// Set the comparison to embree
 	std::vector<std::array<double, 3>> origins = { {19, 10, 15},
@@ -142,7 +139,7 @@ TEST(_nanoRayTracer, nanoRayTolerance) {
 	nanort::BVHAccel<double> accel;
 	accel = nanoRT_BVH(mesh);
 
-	nanoRT_Data nanoRTdata(mesh);
+	nanoRT_Data nanoRTdata(&mesh);
 
 	// Set the comparison to embree
 	std::vector<std::array<double, 3>> origins = { {-30.01, 0.0, 50.0},
@@ -191,7 +188,7 @@ TEST(_nanoRayTracer, nanoRayPerformance) {
 	nanort::BVHAccel<double> accel;
 	accel = nanoRT_BVH(mesh);
 
-	nanoRT_Data nanoRTdata(mesh);
+	nanoRT_Data nanoRTdata(&mesh);
 	nanoRTdata.ray.org[2] = 600;
 	nanoRTdata.ray.dir[2] = -1;
 

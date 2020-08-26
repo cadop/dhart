@@ -12,11 +12,13 @@
 #include <array>
 #include <Node.h>
 #include <cassert>
-
+#include <variant>
+#include <MultiRT.h>
 
 // Forward declares for embree raytracer.
 namespace HF::RayTracer {
 	class EmbreeRayTracer;
+	class NanoRTRayTracer;
 }
 namespace HF::SpatialStructures {
 	class Graph;
@@ -58,13 +60,13 @@ namespace HF::GraphGenerator {
 
 	using real_t = double;							  ///< Internal decimal type of the graph generator
 	using real3 = std::array<real_t, 3>;			  ///< Type used for the standard coordinate set of the graph generator.
-	using RayTracer = HF::RayTracer::EmbreeRayTracer; ///< Type of raytracer to be used internally.
 	using graph_edge = HF::SpatialStructures::Edge;   ///< Type of edge for the graph generator to use internally
 
 	constexpr real_t default_z_precision = 0.0001;
 	constexpr real_t default_ground_offset = 0.01;
 	constexpr real_t default_spacing_precision = 0.00001;
 
+	using RayTracer = HF::RayTracer::MultiRT; ///< Type of raytracer to be used internally.
 	using pair = std::pair<int, int>; ///< Type for Directions to be stored as
 
 	/*! \brief Cast an input value to real_t using static cast.
@@ -217,7 +219,7 @@ namespace HF::GraphGenerator {
 
 		GraphParams params; ///< Parameters to run the graph generator. 
 
-		RayTracer * ray_tracer; ///< A pointer to the raytracer to use for ray intersections.
+		RayTracer ray_tracer; ///< A pointer to the raytracer to use for ray intersections.
 	public:
 		
 		/*! 
@@ -233,7 +235,9 @@ namespace HF::GraphGenerator {
 			the graph generator is called again. It's not likely to occur in our codebase since GraphGenerators
 			are mostly disposed of before this has a chance to become a problem. 
 		*/
-		GraphGenerator(RayTracer& ray_tracer, int walkable_id = -1, int obstacle_id = -1);
+		GraphGenerator(HF::RayTracer::EmbreeRayTracer & ray_tracer, int walkable_id = -1, int obstacle_id = -1);
+		GraphGenerator(HF::RayTracer::NanoRTRayTracer & ray_tracer, int walkable_id = -1, int obstacle_id = -1);
+		GraphGenerator(HF::RayTracer::MultiRT & ray_tracer, int walkable_id = -1, int obstacle_id = -1);
 
 
 		/*! 

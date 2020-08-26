@@ -1,10 +1,18 @@
 #pragma once
 #define NANORT_USE_CPP11_FEATURE
 #include "nanort.h"
-#include "meshinfo.h"
+#include <HitStruct.h>
 #include <iostream>
 #include <array>
-#include <meshinfo.h>
+
+#undef max
+// Forward Declares
+namespace HF::Geometry {
+    class MeshInfo;
+}
+namespace HF::nanoGeom {
+    struct Mesh;
+}
 
 
 namespace HF::RayTracer{
@@ -73,7 +81,7 @@ public:
     // Don't let the default empty constructor work since it needs the mesh
     nanoRT_Data() = delete;
     // Add a mesh object
-    HF::nanoGeom::Mesh mesh;
+    HF::nanoGeom::Mesh * mesh;
     // Add a ray object to be used for intersections
     nanort::Ray<double> ray;
     // Add a hit object to be referenced
@@ -83,39 +91,10 @@ public:
     double point[3] = { -1,-1,-1 };
 
     // Set initialization of class by passing a mesh to create a nanort::TriangleIntersector
-    nanoRT_Data(HF::nanoGeom::Mesh mesh) : nanort::TriangleIntersector<double, nanort::TriangleIntersection<double> >(mesh.vertices, mesh.faces, sizeof(double) * 3)
-    {
-        // Set the mesh data
-        this->mesh = mesh;
-
-        // Setup a no hit (for safety)
-        hit.u = -1;
-        hit.v = -1;
-        hit.t = -1;
-        hit.prim_id = -1;
-
-        // Setup the ray
-        // Set origin of ray
-        this->ray.org[0] = 0.0;
-        this->ray.org[1] = 0.0;
-        this->ray.org[2] = 0.0;
-
-        this->ray.dir[0] = 0.0;
-        this->ray.dir[1] = 0.0;
-        this->ray.dir[2] = 0.0;
-
-        // Set max and min location 
-        this->ray.min_t = 0.0f;
-        this->ray.max_t = 20000.0f;
-    }
+    nanoRT_Data(HF::nanoGeom::Mesh * mesh);
 
     // Destructor
-    ~nanoRT_Data() {
-        // Mesh data was constructed with new, delete here
-        delete[] this->mesh.vertices;
-        delete[] this->mesh.faces;
-        std::cout << "Destroyed" << std::endl;
-    }
+    ~nanoRT_Data();
 };
 
 
@@ -147,9 +126,7 @@ namespace HF::nanoGeom {
         // Return the BVH object
         return accel;
     }
-    inline nanort::BVHAccel<double> nanoRT_BVH(Mesh mesh) {
-        return nanoRT_BVH(mesh.faces, mesh.vertices, mesh.num_vertices, mesh.num_faces);
-    }
+    nanort::BVHAccel<double> nanoRT_BVH(Mesh mesh);
 
     bool nanoRT_Intersect(Mesh& mesh, nanort::BVHAccel<double>& accel, nanoRT_Data& intersector);
 }
@@ -198,27 +175,26 @@ namespace HF::RayTracer {
     public:
 
         /*! \brief Construct a new raytracer with an instance of meshinfo*/
-        inline NanoRTRayTracer(const HF::Geometry::MeshInfo& MI){
+        NanoRTRayTracer(const HF::Geometry::MeshInfo& MI);
 
-            // Get the index and vertex arrays of the meshinfo
-            auto mi_vertices = MI.GetVertexPointer().CopyArray();
-            vertices.resize(mi_vertices.size());
-            for (int i = 0; i < mi_vertices.size(); i++)
-                vertices[i] = static_cast<vertex_t>(mi_vertices[i]);
+        template<typename point_type>
+        inline HitStruct<real_t> Intersect(
+            const point_type& origin,
+            const point_type& dir,
+            float distance = -1,
+            int mesh_id = -1) 
+        {
+            throw std::logic_error("Not Implemented");
+        }
 
-            // Convert indices to unsigned integer because that's what nanoRT uses
-            auto mi_indices = MI.GetIndexPointer().CopyArray();
-            indices.resize(mi_indices.size());
-            for (int i = 0; i < mi_indices.size(); i++)
-                indices[i] = static_cast<unsigned int>(mi_indices[i]);
-
-            // Build the BVH
-            bvh = HF::nanoGeom::nanoRT_BVH<vertex_t>(indices.data(), vertices.data(), vertices.size()/3, indices.size()/3);
-            
-            // Create a new intersector. Note: This can't be held as a member by value since you can't even construct this object without
-            // the proper input arguments, however the input arguments cannot be created until we've copied the data from
-            // the mesh and converted it to the proper types. Using a pointer allows us to construct an intersector later.
-            intersector = std::unique_ptr<Intersector>(new Intersector(vertices.data(), indices.data(), sizeof(real_t) * 3));
+        template<typename point_type>
+        inline bool Occluded(
+            const point_type& origin,
+            const point_type& dir,
+            float distance = -1,
+            int mesh_id = -1)
+        {
+            throw std::logic_error("Not Implemented");
         }
 
         template<typename point_type>

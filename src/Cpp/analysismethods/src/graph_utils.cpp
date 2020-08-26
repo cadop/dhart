@@ -1,8 +1,10 @@
 #include <graph_generator.h>
 
+#include <HitStruct.h>
 #include <Constants.h>
 #include <Edge.h>
 #include <embree_raytracer.h>
+#include <ray_data.h>
 #include <cassert>
 
 namespace HF::GraphGenerator {
@@ -106,7 +108,6 @@ namespace HF::GraphGenerator {
 	{
 		return CheckRay(RT, start_point, down, Params.precision.node_z);
 	}
-
 	optional_real3 CheckRay(
 		RayTracer& ray_tracer,
 		const real3& origin,

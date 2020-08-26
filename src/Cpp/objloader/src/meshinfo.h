@@ -14,7 +14,7 @@
 
 // [nanoRT]
 namespace HF::nanoGeom {
-	typedef struct {
+	struct Mesh {
 		size_t num_vertices;
 		size_t num_faces;
 		double* vertices;              /// [xyz] * num_vertices
@@ -25,7 +25,7 @@ namespace HF::nanoGeom {
 		double* facevarying_vertex_colors;   /// [xyz] * 3(triangle) * num_faces
 		unsigned int* faces;         /// triangle x num_faces
 		unsigned int* material_ids;   /// index x num_faces
-	} Mesh;
+	};
 }
 // end [nanoRT]
 

@@ -61,11 +61,6 @@ namespace HF::RayTracer {
 			
 		return ray;
 	}
-
-	bool DidIntersect(int mesh_id) {
-		return  mesh_id != RTC_INVALID_GEOMETRY_ID;
-	}
-
 	/// <summary>
 	/// Check an embree device for errors.
 	/// </summary>
