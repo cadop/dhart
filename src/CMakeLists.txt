@@ -328,7 +328,7 @@ else()
 	message(FATAL_ERROR "That is not a valid configuration ${HumanFactors_Config}")
 endif()
 
-# Add sources to HumanFactors
+# Add sources to HumanFactors 
 target_sources(HumanFactors PRIVATE ${HF_SOURCES})
 
 
@@ -412,6 +412,7 @@ if(HumanFactors_EnableTests)
 					${C_TEST_DRIVER_DIR}/CostAlgorithms.cpp
 					${C_TEST_DRIVER_DIR}/GraphGenerator.cpp
 					${C_TEST_DRIVER_DIR}/Performance.cpp
+					${C_TEST_DRIVER_DIR}/nanort_raytracer.cpp
 				#	${C_TEST_DRIVER_DIR}/embree_raytracer_cinterface.cpp
 				#	${C_TEST_DRIVER_DIR}/objloader_cinterface.cpp
 				#	${C_TEST_DRIVER_DIR}/analysis_C_cinterface.cpp
@@ -426,6 +427,7 @@ if(HumanFactors_EnableTests)
 			PRIVATE
 				${HF_SOURCES}
 				${C_TEST_DRIVER_DIR}/embree_raytracer.cpp
+				${C_TEST_DRIVER_DIR}/nanort_raytracer.cpp
 				${C_TEST_DRIVER_DIR}/OBJLoader.cpp
 			)
 		target_include_directories(
