@@ -1,11 +1,13 @@
 #pragma once
+#define NANORT_USE_CPP11_FEATURE
 #include "nanort.h"
 #include "meshinfo.h"
 #include <iostream>
 #include <array>
+#include <meshinfo.h>
 
-namespace {
 
+namespace HF::RayTracer{
     // Define struct of doubles to be used for ray and high precision raycasting
     struct double3 {
         double3() {}
@@ -98,16 +100,6 @@ public:
         this->ray.org[1] = 0.0;
         this->ray.org[2] = 0.0;
 
-        // Define direction of ray
-        // Must be normalized to work properly
-
-        // Custom double vector implementation with overloads
-        // not needed in basic test but later could be useful for node additions etc. 
-        //double3 dir(0,0,0); 
-        //this->ray.dir[0] = dir[0];
-        //this->ray.dir[1] = dir[1];
-        //this->ray.dir[2] = dir[2];
-
         this->ray.dir[0] = 0.0;
         this->ray.dir[1] = 0.0;
         this->ray.dir[2] = 0.0;
@@ -126,6 +118,8 @@ public:
     }
 };
 
+
+
 namespace HF::nanoGeom {
 
     // Convenience method not used now but here for clarity
@@ -134,8 +128,80 @@ namespace HF::nanoGeom {
         nanort::Ray<double>& ray,
         nanort::TriangleIntersection<double>& isect);
 
-    // Interface to nanoRT BVH
-    nanort::BVHAccel<double> nanoRT_BVH(Mesh& mesh);
+
+    template <typename T>
+    inline nanort::BVHAccel<T> nanoRT_BVH(unsigned int * indices, T * vertices, int num_vertices, int num_indices)
+    {
+        // Setup nanort tracer BVH options
+        nanort::BVHBuildOptions<T> build_options; // Use default option
+        build_options.cache_bbox = false;
+
+        // Construct datatype using verts and indices for building BVH
+        nanort::TriangleMesh<T> triangle_mesh(vertices, indices, sizeof(T) * 3);
+        nanort::TriangleSAHPred<T> triangle_pred(vertices, indices, sizeof(T) * 3);
+
+        // build BVH using NanoRT Method (Replace this assert with an exception)
+        nanort::BVHAccel<T> accel;
+        assert(accel.Build(num_indices, triangle_mesh, triangle_pred, build_options));
+
+        // Return the BVH object
+        return accel;
+    }
+    inline nanort::BVHAccel<double> nanoRT_BVH(Mesh mesh) {
+        return nanoRT_BVH(mesh.faces, mesh.vertices, mesh.num_vertices, mesh.num_faces);
+    }
 
     bool nanoRT_Intersect(Mesh& mesh, nanort::BVHAccel<double>& accel, nanoRT_Data& intersector);
+}
+namespace HF::RayTracer {
+
+    class NanoRTRayTracer {
+
+        using Intersection = nanort::TriangleIntersection<double>;
+        using Intersector = nanort::TriangleIntersector<float, Intersection>;
+        using NanoBVH = nanort::BVHAccel<float>;
+        using NanoRay = nanort::Ray<float>;
+    public:
+
+        NanoRay Ray;
+
+        // Add a hit object to be referenced
+        Intersector intersector; ///< Triangle Intersector
+        Intersection hit;
+        NanoBVH bvh; ///< A NanoRT BVH 
+
+        std::vector<float> vertices; //< Internal vertex array
+        std::vector<unsigned int> indices; //< Internal index array
+
+        // Add a distance attribute to store intersection distance
+        float dist = -1;
+        std::array<float, 3> point = { 0,0,0 };
+
+        /*! \brief Construct a new raytracer with an instance of meshinfo*/
+        inline NanoRTRayTracer(const HF::Geometry::MeshInfo& MI) : intersector(vertices.data(), indices.data(), sizeof(float) * 3)
+        {
+            // Get the index and vertex arrays of the meshinfo
+            auto mi_indices = MI.GetIndexPointer().CopyArray();
+
+            // Convert indices to unsigned integer because that's what nanoRT uses
+            vertices = MI.GetVertexPointer().CopyArray();
+            indices.resize(mi_indices.size());
+            for (int i = 0; i < mi_indices.size(); i++)
+                indices[i] = static_cast<unsigned int>(mi_indices[i]);
+
+            // Build the BVH
+            bvh = HF::nanoGeom::nanoRT_BVH<float>(indices.data(), vertices.data(), vertices.size()/3, indices.size()/3);
+        }
+
+        inline bool PointIntersection(
+            std::array<float, 3>& origin,
+            const std::array<float, 3>& dir,
+            float distance = -1,
+            int mesh_id = -1
+        ) {
+            throw std::logic_error("Not Implemented!");
+        }
+
+
+    };
 }

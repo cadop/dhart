@@ -96,6 +96,11 @@ namespace HF::Geometry {
 	struct array_and_size {
 		int size; ///< Number of elements in `data`
 		ptr_type* data; /// Pointer to some array
+
+		/* \brief Copy the contents of the array pointed to by this struct. */
+		inline std::vector<ptr_type> CopyArray() const {
+			return std::vector<ptr_type>(data, data + size);
+		}
 	};
 
 	/*!

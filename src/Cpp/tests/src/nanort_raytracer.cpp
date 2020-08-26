@@ -10,6 +10,7 @@
 #include <fstream>
 #include <view_analysis.h>
 #include <HFExceptions.h>
+#include <ray_data.h>
 
 #include <objloader_C.h>
 #include <raytracer_C.h>
@@ -103,9 +104,31 @@ TEST(_nanoRayTracer, Edge_Vert_Intersection) {
 		height = nanoRTdata.point[2];
 		ASSERT_EQ(height, 10);
 	}
-
 }
 
+// Test new NanoRT Raytracer
+TEST(_nanoRayTracer, NanoRayTracerBasic) {
+
+	// Load mesh
+	const std::string objFilename = "VisibilityTestCases.obj";
+	auto mesh = HF::Geometry::LoadMeshObjects(objFilename)[0];
+
+	// Construct Raytracer
+	HF::RayTracer::NanoRTRayTracer ray_tracer(mesh);
+
+	// Set the comparison to embree
+	std::vector<std::array<float, 3>> origins = { {19, 10, 15}, {20, 10, 15} };
+
+	// Cast 2 rays straight down
+	const std::array<float, 3> direction{ 0,0,-1 };
+	for (auto & origin : origins)
+		ray_tracer.PointIntersection(origin, direction);
+
+	printf("(%f, %f, %f)\n", origins[0][0], origins[0][1], origins[0][2]);
+	printf("(%f, %f, %f)\n", origins[1][0], origins[1][1], origins[1][2]);
+	
+	
+}
 TEST(_nanoRayTracer, nanoRayTolerance) {
 
 	std::string objFilename = "energy_blob_zup.obj";
