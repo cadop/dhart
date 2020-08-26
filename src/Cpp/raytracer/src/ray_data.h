@@ -157,51 +157,91 @@ namespace HF::RayTracer {
 
     class NanoRTRayTracer {
 
-        using Intersection = nanort::TriangleIntersection<double>;
-        using Intersector = nanort::TriangleIntersector<float, Intersection>;
-        using NanoBVH = nanort::BVHAccel<float>;
-        using NanoRay = nanort::Ray<float>;
-    public:
-
-        NanoRay Ray;
+    private:
+        using vertex_t = double;
+        using real_t = double;
+        using Intersection = nanort::TriangleIntersection<real_t>;
+        using Intersector = nanort::TriangleIntersector<vertex_t, Intersection>;
+        using NanoBVH = nanort::BVHAccel<vertex_t>;
+        using NanoRay = nanort::Ray<real_t>;
 
         // Add a hit object to be referenced
-        Intersector intersector; ///< Triangle Intersector
-        Intersection hit;
+        std::unique_ptr<Intersector> intersector; ///< Triangle Intersector
         NanoBVH bvh; ///< A NanoRT BVH 
 
-        std::vector<float> vertices; //< Internal vertex array
+        std::vector<real_t> vertices; //< Internal vertex array
         std::vector<unsigned int> indices; //< Internal index array
 
-        // Add a distance attribute to store intersection distance
-        float dist = -1;
-        std::array<float, 3> point = { 0,0,0 };
+        template <typename N, typename dist_type = real_t>
+        inline NanoRay ConstructRay(const N& origin, const N& direction, dist_type min_dist = 0.0, dist_type max_dist = std::numeric_limits<dist_type>::max()) {
+            NanoRay out_ray;
+            out_ray.org[0] = origin[0]; out_ray.org[1] = origin[1]; out_ray.org[2] = origin[2];
+            out_ray.dir[0] = direction[0]; out_ray.dir[1] = direction[1]; out_ray.dir[2] = direction[2];
+            out_ray.min_t = min_dist; out_ray.max_t = max_dist;
+
+            return out_ray;
+        }
+
+        inline Intersection CreateHit() {
+            Intersection out_hit;
+            out_hit.u = -1; out_hit.v = -1; out_hit.t = -1; out_hit.prim_id = -1;
+            return out_hit;
+        }
+
+        template <typename point_type, typename dist_type>
+        inline void MovePoint(point_type & point, const point_type & dir, dist_type dist) {
+            point[0] += (dir[0] * dist);
+            point[1] += (dir[1] * dist);
+            point[2] += (dir[2] * dist);
+        }
+
+    public:
 
         /*! \brief Construct a new raytracer with an instance of meshinfo*/
-        inline NanoRTRayTracer(const HF::Geometry::MeshInfo& MI) : intersector(vertices.data(), indices.data(), sizeof(float) * 3)
-        {
+        inline NanoRTRayTracer(const HF::Geometry::MeshInfo& MI){
+
             // Get the index and vertex arrays of the meshinfo
-            auto mi_indices = MI.GetIndexPointer().CopyArray();
+            auto mi_vertices = MI.GetVertexPointer().CopyArray();
+            vertices.resize(mi_vertices.size());
+            for (int i = 0; i < mi_vertices.size(); i++)
+                vertices[i] = static_cast<vertex_t>(mi_vertices[i]);
 
             // Convert indices to unsigned integer because that's what nanoRT uses
-            vertices = MI.GetVertexPointer().CopyArray();
+            auto mi_indices = MI.GetIndexPointer().CopyArray();
             indices.resize(mi_indices.size());
             for (int i = 0; i < mi_indices.size(); i++)
                 indices[i] = static_cast<unsigned int>(mi_indices[i]);
 
             // Build the BVH
-            bvh = HF::nanoGeom::nanoRT_BVH<float>(indices.data(), vertices.data(), vertices.size()/3, indices.size()/3);
+            bvh = HF::nanoGeom::nanoRT_BVH<vertex_t>(indices.data(), vertices.data(), vertices.size()/3, indices.size()/3);
+            
+            // Create a new intersector. Note: This can't be held as a member by value since you can't even construct this object without
+            // the proper input arguments, however the input arguments cannot be created until we've copied the data from
+            // the mesh and converted it to the proper types. Using a pointer allows us to construct an intersector later.
+            intersector = std::unique_ptr<Intersector>(new Intersector(vertices.data(), indices.data(), sizeof(real_t) * 3));
         }
 
+        template<typename point_type>
         inline bool PointIntersection(
-            std::array<float, 3>& origin,
-            const std::array<float, 3>& dir,
+            point_type & origin,
+            const point_type & dir,
             float distance = -1,
             int mesh_id = -1
         ) {
-            throw std::logic_error("Not Implemented!");
+            // Construct the ray and hit
+            NanoRay ray = ConstructRay(origin, dir, 0);
+            Intersection Hit = CreateHit();
+
+            // Cast the ray
+            bool did_intersect = bvh.Traverse<Intersector>(ray, *(this->intersector), &Hit);
+
+            // It it intersected, move the node and return true, otherwise do nothing and return false.
+            if (did_intersect) {
+                MovePoint(origin, dir, Hit.t);
+                return true;
+            }
+            else
+                return false;
         }
-
-
     };
 }

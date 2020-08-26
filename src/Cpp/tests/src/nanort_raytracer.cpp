@@ -122,13 +122,15 @@ TEST(_nanoRayTracer, NanoRayTracerBasic) {
 	// Cast 2 rays straight down
 	const std::array<float, 3> direction{ 0,0,-1 };
 	for (auto & origin : origins)
-		ray_tracer.PointIntersection(origin, direction);
+		EXPECT_TRUE(ray_tracer.PointIntersection(origin, direction));
 
 	printf("(%f, %f, %f)\n", origins[0][0], origins[0][1], origins[0][2]);
 	printf("(%f, %f, %f)\n", origins[1][0], origins[1][1], origins[1][2]);
-	
-	
+
+	ASSERT_EQ(10, origins[0][2]);
+	ASSERT_EQ(10, origins[1][2]);
 }
+
 TEST(_nanoRayTracer, nanoRayTolerance) {
 
 	std::string objFilename = "energy_blob_zup.obj";
