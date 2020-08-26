@@ -50,10 +50,27 @@ TEST(_nanoRayTracer, MeshMatching) {
 	ret = LoadObj(mesh, objFilename.c_str());
 
 	// Use the default mesh loader
-	auto geom = HF::Geometry::LoadMeshObjects(objFilename, HF::Geometry::ONLY_FILE, false);
+	auto geom = HF::Geometry::LoadMeshObjects(objFilename, HF::Geometry::ONLY_FILE, false)[0];
 
-	// Find the vert and indices list and check they are the same
-	std::cout << " " << std::endl;
+	// Assert that these have the same number of traingles/vertices before continuing
+	ASSERT_EQ(geom.NumTris(), mesh.num_faces);
+	ASSERT_EQ(geom.NumVerts(), mesh.num_vertices);
+
+	// Assert that indices are equal
+	auto MI_Ind = geom.getRawIndices();
+	std::vector<int> Mesh_Ind(mesh.faces, mesh.faces + mesh.num_faces * 3);
+	ASSERT_TRUE(std::equal(MI_Ind.begin(), MI_Ind.end(), Mesh_Ind.begin()));
+	
+	// Convert mesh vertices of Mesh to float
+	std::vector<double> Mesh_Vertices(mesh.vertices, mesh.vertices + (mesh.num_vertices *3));
+	std::vector<float> mesh_vertices_float(Mesh_Vertices.size());
+	for (int i = 0; i < Mesh_Vertices.size(); i++)
+		mesh_vertices_float[i] = static_cast<float>(Mesh_Vertices[i]);
+
+	// Assert that vertices are equal
+	auto MI_Vert_Info = geom.GetVertexPointer();
+	std::vector<float> MI_Vertices(MI_Vert_Info.data, MI_Vert_Info.data + MI_Vert_Info.size);
+	ASSERT_TRUE(std::equal(MI_Vertices.begin(), MI_Vertices.end(), mesh_vertices_float.begin()));
 }
 
 TEST(_nanoRayTracer, Edge_Vert_Intersection) {
