@@ -212,10 +212,9 @@ namespace HF {
 		printf("Embree Size: %i, NanoSize %i\n", EmbreeGraph.size(), NanoGraph.size());
 
 		CheckForDuplicatesNano(NanoGraph, 0.1f);
-		for (auto node : NanoGraph.Nodes())
-			if (node[0] < 20 && node[1] < 11)
-				std::cout << node << std::endl;
 		ASSERT_LT(NanoGraph.size(), EmbreeGraph.size());
+
+		NanoGraph.DumpToJson("GraphAsJson.json");
 	}
 
 
