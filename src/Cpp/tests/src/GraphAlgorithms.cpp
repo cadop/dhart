@@ -16,6 +16,54 @@
 
 namespace HF {
 
+	void CheckForDuplicatesNano(const HF::SpatialStructures::Graph& g, float precision = 0.0001f) {
+
+		// Get nodes from the graph
+		const auto nodes = g.Nodes();
+
+		// Setup variables
+		int duplicate_pairs = 0;
+		int duplicates_this_node = 0;
+		int duplicate_nodes = 0;
+
+		// Iterate through every node in the graph
+		for (const auto& node : nodes) {
+			--duplicate_pairs; // subrtact one because this node will be compared to itself atleast once
+			duplicates_this_node = 0;
+
+			// Iterate through every other node in the graph
+			for (const auto& node2 : nodes)
+			{
+				// Check if this node closer to node2 than our precision value
+				if (node.distanceTo(node2) < precision) {
+
+					// If it is, increment duplciate pairs
+					++duplicate_pairs;
+					++duplicates_this_node;
+
+					// If this has had 2 duplicates (itself and atleast one other node) then it is a duplicate and duplicates
+					// should be incremented
+					if (duplicates_this_node == 2)
+						duplicate_nodes++;
+				}
+			}
+		}
+
+
+		// Divide duplicate nodes by 2, since both duplicates would increment this counter
+		// and technically only one is the original
+		duplicate_nodes /= 2;
+		int total_pairs = g.size() * g.size() - 1;
+		float duplicate_node_percentage = (static_cast<float>(duplicate_nodes) / static_cast<float>(g.size())) * 100.00f;
+		float duplicate_pair_percentage = (static_cast<float>(duplicate_pairs) / static_cast<float>(g.size() * g.size())) * 100.00f;
+
+		// print to console	
+		std::cerr << duplicate_nodes << "/" << g.size() << "(" << duplicate_node_percentage << "\%) Duplicate Nodes" << std::endl;
+		std::cerr << duplicate_pairs << "/" << total_pairs << "(" << duplicate_pair_percentage << "\%) Duplicate Pairs" << std::endl;
+
+		// Fail if there are duplicate pairs
+		EXPECT_EQ(0, duplicate_pairs);
+	}
 	TEST(_GraphAlgorithm, BasicGenerator) {
 		//auto mesh = Geometry::LoadMeshObjects("plane.obj");
 		auto mesh = Geometry::LoadMeshObjects("energy_blob_zup.obj");
@@ -125,9 +173,51 @@ namespace HF {
 		g.Compress();
 		ASSERT_EQ(3450, g.size());
 
-		for (auto n : g.Nodes())
-			std::cout << n << std::endl;
-	}		
+	}
+
+	TEST(_GraphAlgorithm, NanoRTVisibilityGraphTC) {
+		auto mesh = Geometry::LoadMeshObjects("VisibilityTestCases.obj");
+
+		HF::RayTracer::NanoRTRayTracer nrt(mesh[0]);
+		GraphGenerator::GraphGenerator NanoRTGraphGen(nrt, 0);
+		
+		HF::RayTracer::EmbreeRayTracer ert(mesh[0], true);
+		GraphGenerator::GraphGenerator EmbreeGraphGen(ert, 0);
+
+		int max_nodes = 5000;
+		double up_step = 1;	double up_slope = 1;
+		double down_step = 1;	double down_slope = 1;
+		int max_step_connections = 1;
+		int cores = 1;
+		std::array<double, 3> start_point{ 1, 1, 20.0};
+		std::array<double, 3> spacing{ 1.0, 1.0, 20 };
+
+		auto EmbreeGraph = EmbreeGraphGen.BuildNetwork(
+			start_point, spacing,
+			max_nodes, up_step, up_slope,
+			down_step,	down_slope,	max_step_connections,
+			cores
+		);
+
+		auto NanoGraph = NanoRTGraphGen.BuildNetwork(
+			start_point, spacing,
+			max_nodes, up_step, up_slope,
+			down_step, down_slope, max_step_connections,
+			cores
+		);
+
+		EmbreeGraph.Compress();
+		NanoGraph.Compress();
+
+		printf("Embree Size: %i, NanoSize %i\n", EmbreeGraph.size(), NanoGraph.size());
+
+		CheckForDuplicatesNano(NanoGraph, 0.1f);
+		for (auto node : NanoGraph.Nodes())
+			if (node[0] < 20 && node[1] < 11)
+				std::cout << node << std::endl;
+		ASSERT_LT(NanoGraph.size(), EmbreeGraph.size());
+	}
+
 
 
 }
