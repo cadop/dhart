@@ -10,6 +10,7 @@
 #include <Node.h>
 #include <Edge.h>
 #include <Graph.h>
+#include <robin_hood.h>
 
 #include <unique_queue.h>
 
@@ -19,11 +20,11 @@
 using HF::SpatialStructures::Graph;
 using HF::SpatialStructures::Node;
 using HF::SpatialStructures::Edge;
-
-using std::vector;
-
 using HF::SpatialStructures::roundhf_tmp;
 using HF::SpatialStructures::trunchf_tmp;
+
+using std::vector;
+using HF::GraphGenerator::Dict_t;
 
 namespace HF::GraphGenerator{ 
 	/*! \brief Sets the core count of OpenMP
@@ -35,22 +36,34 @@ namespace HF::GraphGenerator{
 		else omp_set_num_threads(std::thread::hardware_concurrency());
 	}
 
-	GraphGenerator::GraphGenerator(HF::RayTracer::EmbreeRayTracer & rt, int walkable_id, int obstacle_id){
-		this->obstacle_surfaces = obstacle_id;
-		this->walkable_surfaces = walkable_id;
+	Dict_t CreateGeometryIDDictionary(const vector<int> & obstacles, const vector<int> & walkables) {
+	
+		Dict_t out_dict;
+
+		for (auto id : obstacles)
+			out_dict[id] = HIT_FLAG::OBSTACLES;
+		for (auto id : walkables)
+			out_dict[id] = HIT_FLAG::FLOORS;
+
+		return out_dict;
+	}
+
+	template <typename Raytracer>
+	inline void setupRT(GraphGenerator* gg, Raytracer rt, std::vector<int> obs_ids, std::vector<int> walk_ids ) {
+		gg->RayTracer = MultiRT(rt);
+		gg->params.geom_ids = CreateGeometryIDDictionary(obs_ids, walk_ids);
+	}
+
+	GraphGenerator::GraphGenerator(HF::RayTracer::EmbreeRayTracer & rt, const vector<int> & obstacle_ids, const vector<int> & walkable_ids){
 		this->ray_tracer =  HF::RayTracer::MultiRT(&rt);
 	}
 
-	GraphGenerator::GraphGenerator(HF::RayTracer::NanoRTRayTracer & rt, int walkable_id, int obstacle_id) {
-		this->obstacle_surfaces = obstacle_id;
-		this->walkable_surfaces = walkable_id;
+	GraphGenerator::GraphGenerator(HF::RayTracer::NanoRTRayTracer & rt, const vector<int> & obstacle_ids, const vector<int> & walkable_ids) {
 		this->ray_tracer = HF::RayTracer::MultiRT(&rt);
 	}
 
-	GraphGenerator::GraphGenerator(HF::RayTracer::MultiRT & ray_tracer, int walkable_id, int obstacle_id)
+	GraphGenerator::GraphGenerator(HF::RayTracer::MultiRT & ray_tracer, const vector<int> & obstacle_ids, const vector<int> & walkable_ids)
 	{
-		this->obstacle_surfaces = obstacle_id;
-		this->walkable_surfaces = walkable_id;
 		this->ray_tracer = ray_tracer;
 	}
 

@@ -253,8 +253,7 @@ TEST(_GraphGenerator, CheckRay) {
 
 	// Call CheckRay and capture the result
 	HF::GraphGenerator::optional_real3 result = HF::GraphGenerator::CheckRay(
-		HF::RayTracer::MultiRT(&ray_tracer), start_point, direction, node_z
-	);
+		HF::RayTracer::MultiRT(&ray_tracer), start_point, direction, node_z);
 
 	// If the ray intersected, print it
 	if (result)

@@ -106,33 +106,35 @@ namespace HF::GraphGenerator {
 
 	optional_real3 ValidateStartPoint(RayTracer& RT, const real3& start_point, const GraphParams& Params)
 	{
-		return CheckRay(RT, start_point, down, Params.precision.node_z);
+		return CheckRay(RT, start_point, down, Params.precision.node_z, HIT_FLAG::FLOORS, Params.geom_ids);
 	}
+
+	inline bool checkHit(HIT_FLAG goal, int id, const Dict_t & geom_dict) {
+		// If it's both, then any intersection is good
+		if (goal == HIT_FLAG::BOTH || geom_dict.empty()) return true;
+		
+		// If this doesn't exist in the hashmap, return false;
+		if (geom_dict.count(id) == 0) return false;
+		
+		return(goal == geom_dict.at(id));
+	}
+
 	optional_real3 CheckRay(
 		RayTracer& ray_tracer,
 		const real3& origin,
 		const real3& direction,
 		real_t node_z_tolerance,
-		HIT_FLAG flag)
+		HIT_FLAG flag,
+		const Dict_t & geometry_dict)
 	{
 		// Setup default params
 		HitStruct<real_t> res;
 
 		// Switch Geometry based on hitflag
-		switch (flag) {
-		case HIT_FLAG::FLOORS: // Both are the same for now. Waiting on obstacle support
-		case HIT_FLAG::OBSTACLES:
-			res = ray_tracer.Intersect(origin, direction);
-			break;
-		case HIT_FLAG::BOTH:
-			res = ray_tracer.Intersect(origin, direction);
-			break;
-		default:
-			assert(false);
-		}
+		res = ray_tracer.Intersect(origin, direction);
 
 		// If successful, make a copy of the node, move it, then return it
-		if (res.DidHit()) {
+		if (res.DidHit() && checkHit(flag, res.meshid, geometry_dict)) {
 			// Create a new optional point with a copy of the origin
 			optional_real3 return_pt(origin);
 
@@ -232,7 +234,7 @@ namespace HF::GraphGenerator {
 		{
 
 			// Check if a ray intersects a mesh
-			optional_real3 potential_child = CheckRay(rt, child, down, GP.precision.node_z);
+			optional_real3 potential_child = CheckRay(rt, child, down, GP.precision.node_z, HIT_FLAG::FLOORS, GP.geom_ids);
 			
 			if (potential_child)
 			{

@@ -29,7 +29,7 @@ C_INTERFACE GenerateGraph(
 	const std::array<double, 3> spacing_array{ spacing[0], spacing[1], spacing[2] };
 
 	Graph* G = new Graph();
-	GraphGenerator GraphGen(*ray_tracer, 0);
+	GraphGenerator GraphGen(*ray_tracer);
 	*G = GraphGen.BuildNetwork(
 		start_array,
 		spacing_array,

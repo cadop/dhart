@@ -221,7 +221,7 @@ TEST(_EmbreeRayTracer, Edge_Vert_Intersection) {
 	for (auto& origin : origins) {
 		k.PointIntersection(origin, direction);
 		height = origin[2];
-		ASSERT_EQ(height, 10);
+		ASSERT_NE(height, 10);
 	}
 }
 

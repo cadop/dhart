@@ -15,6 +15,7 @@
 #include <cassert>
 #include <variant>
 #include <MultiRT.h>
+#include <unordered_map>
 
 // Forward declares for embree raytracer.
 namespace HF::RayTracer {
@@ -102,7 +103,23 @@ namespace HF::GraphGenerator {
 		real_t node_spacing;		///< Precision to round nodes after spacing is calculated
 		real_t ground_offset;		///< Distance to offset nodes from the ground before checking line of sight
 	};
-	
+	/*!
+	\brief Determines which geometry the ray will collide with.
+
+	\remarks
+	Used internally by the GraphGenerator to determine which type of geometry to collide with
+	when casting a ray.
+*/
+	enum HIT_FLAG {
+		/// Floors only.
+		FLOORS = 1,
+		/// Obstacles only.
+		OBSTACLES = 2,
+		/// Collide with floors and obstacles.
+		BOTH = 3
+	};
+
+	using Dict_t = std::unordered_map<int, HIT_FLAG>;
 	/*! \brief Holds parameters for the GraphGenerator. */
 	struct GraphParams {
 		real_t up_step;	 ///< Maximum height of a step the graph can traverse.Any steps higher this will be considered inaccessible.
@@ -110,6 +127,7 @@ namespace HF::GraphGenerator {
 		real_t down_step; ///< Maximum step down the graph can traverse.Any steps steeper than this will be considered inaccessible.
 		real_t down_slope; ///<	The maximum downward slope the graph can traverse. Any slopes steeper than this will be considered inaccessible.
 		Precision precision; ///< Tolerances for the graph
+		Dict_t geom_ids;
 	};
 
 	/*! 
@@ -161,26 +179,11 @@ namespace HF::GraphGenerator {
 			\returns True if this was initialized with x,y, and z coordinates that are not NAN, false otherwise.
 		*/
 		inline explicit operator bool() const {
-			return !(std::isnan(pt[0]), std::isnan(pt[1]), std::isnan(pt[2]));
+			return !(std::isnan(pt[0]) && std::isnan(pt[1]) && std::isnan(pt[2]));
 		}
 	};
 
 
-	/*! 
-		\brief Determines which geometry the ray will collide with.
-		
-		\remarks 
-		Used internally by the GraphGenerator to determine which type of geometry to collide with
-		when casting a ray. 
-	*/ 
-	enum HIT_FLAG {
-		/// Floors only.
-		FLOORS = 1,
-		/// Obstacles only.
-		OBSTACLES = 2,
-		/// Collide with floors and obstacles.
-		BOTH = 3
-	};
 
 	/*! 
 		\brief Calculate P(n,r) as an array with each unique permutaton of 2 values being a pair. 
@@ -210,8 +213,6 @@ namespace HF::GraphGenerator {
 	class GraphGenerator
 	{
 	public:
-		int walkable_surfaces;	///< Corresponds to the meshID of walkable surfaces in the Raytracer (Unused)
-		int obstacle_surfaces;	///< Corresponds to the meshid of obstacle surfaces in the Raytracer (Unused)
 		int max_nodes;			///< Maximum number of nodes to generate. If less than zero, generate nodes without a limit.
 		int core_count;			///< Number of cores to use for graph generation.
 
@@ -236,9 +237,9 @@ namespace HF::GraphGenerator {
 			the graph generator is called again. It's not likely to occur in our codebase since GraphGenerators
 			are mostly disposed of before this has a chance to become a problem. 
 		*/
-		GraphGenerator(HF::RayTracer::EmbreeRayTracer & ray_tracer, int walkable_id = -1, int obstacle_id = -1);
-		GraphGenerator(HF::RayTracer::NanoRTRayTracer & ray_tracer, int walkable_id = -1, int obstacle_id = -1);
-		GraphGenerator(HF::RayTracer::MultiRT & ray_tracer, int walkable_id = -1, int obstacle_id = -1);
+		GraphGenerator(HF::RayTracer::EmbreeRayTracer& ray_tracer, const std::vector<int> & obstacle_ids = std::vector<int>(0), const std::vector<int> & walkable_ids = std::vector<int>(0));
+		GraphGenerator(HF::RayTracer::NanoRTRayTracer& ray_tracer, const std::vector<int> & obstacle_ids = std::vector<int>(0), const std::vector<int>& walkable_ids = std::vector<int>(0));
+		GraphGenerator(HF::RayTracer::MultiRT& ray_tracer, const std::vector<int> & obstacle_ids = std::vector<int>(0), const std::vector<int>& walkable_ids = std::vector<int>(0));
 
 
 		/*! 
@@ -464,7 +465,8 @@ namespace HF::GraphGenerator {
 		const real3& origin,
 		const real3& direction,
 		real_t node_z_tolerance,
-		HIT_FLAG flag = BOTH
+		HIT_FLAG flag = BOTH,
+		const Dict_t& geometry_dict = Dict_t()
 	);
 
 
