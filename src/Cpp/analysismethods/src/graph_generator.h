@@ -7,6 +7,7 @@
 #pragma once
 #define _USE_MATH_DEFINES
 
+#include <cmath>
 #include <set>
 #include <vector>
 #include <array>
@@ -554,9 +555,9 @@ namespace HF::GraphGenerator {
 	*/
 	template<typename A, typename D, typename N>
 	inline void MoveNode(const A& dist, const D& direction, N& node) {
-		node[0] += (direction[0] * dist);
-		node[1] += (direction[1] * dist);
-		node[2] += (direction[2] * dist);
+		node[0] = std::fma(direction[0], dist, node[0]);
+		node[1] = std::fma(direction[1], dist, node[1]);
+		node[2] = std::fma(direction[2], dist, node[2]);
 	}
 
 	/*! \brief Determine whether children are over valid ground, and and meet upstep/downstep requirements

@@ -16,7 +16,7 @@
 
 namespace HF {
 
-	void CheckForDuplicatesNano(const HF::SpatialStructures::Graph& g, float precision = 0.0001f) {
+	void CheckForDuplicatesNano(const HF::SpatialStructures::Graph& g, float precision = 0.0001f, bool insta_fail = false) {
 
 		// Get nodes from the graph
 		const auto nodes = g.Nodes();
@@ -44,7 +44,11 @@ namespace HF {
 					// If this has had 2 duplicates (itself and atleast one other node) then it is a duplicate and duplicates
 					// should be incremented
 					if (duplicates_this_node == 2)
-						duplicate_nodes++;
+						if (insta_fail)
+							FAIL("Duplicate nodes detected");
+						else
+							duplicate_nodes++;
+					
 				}
 			}
 		}
@@ -190,8 +194,8 @@ namespace HF {
 		double down_step = 1;	double down_slope = 1;
 		int max_step_connections = 1;
 		int cores = -1;
-		std::array<float, 3> start_point{ 1.0, 1.0, 20.0};
-		std::array<float, 3> spacing{ 1, 1, 15};
+		std::array<double, 3> start_point{ 1.0, 1.0, 20.0};
+		std::array<double, 3> spacing{ 1, 1, 15};
 
 		auto EmbreeGraph = EmbreeGraphGen.BuildNetwork(
 			start_point, spacing,
@@ -215,8 +219,54 @@ namespace HF {
 		//CheckForDuplicatesNano(NanoGraph, 0.1f);
 		NanoGraph.DumpToJson("NanoRtGraph.json");
 		EmbreeGraph.DumpToJson("EmbreeGraph.json");
+		CheckForDuplicatesNano(NanoGraph);
 
 		ASSERT_LT(NanoGraph.size(), EmbreeGraph.size());
+
+	}
+
+	TEST(_GraphAlgorithm, VsEmbree_blob) {
+		std::string mesh_path = "energy_blob_zup.obj";
+
+		auto mesh = Geometry::LoadMeshObjects(mesh_path);
+		auto double_mesh = Geometry::LoadTMPMeshObjects<double>(mesh_path);
+
+		HF::RayTracer::NanoRTRayTracer nrt(double_mesh);
+		GraphGenerator::GraphGenerator NanoRTGraphGen(nrt, 0);
+
+		HF::RayTracer::EmbreeRayTracer ert(mesh[0], true);
+		GraphGenerator::GraphGenerator EmbreeGraphGen(ert, 0);
+
+		int max_nodes = 50000;
+		double up_step = 50;	double up_slope = 45;
+		double down_step = 50;	double down_slope = 45;
+		int max_step_connections = 2;
+		int cores = -1;
+		std::array<double, 3> start_point{ -22.42, -12.0, 5.0};
+		std::array<double, 3> spacing{ 1.0, 1.0, 10.0 };				
+		auto EmbreeGraph = EmbreeGraphGen.BuildNetwork(
+			start_point, spacing,
+			max_nodes, up_step, up_slope,
+			down_step, down_slope, max_step_connections,
+			cores
+		);
+		auto NanoGraph = NanoRTGraphGen.BuildNetwork(
+			start_point, spacing,
+			max_nodes, up_step, up_slope,
+			down_step, down_slope, max_step_connections,
+			cores
+		);
+
+		EmbreeGraph.Compress();
+		NanoGraph.Compress();
+
+		printf("Embree Size: %i, NanoSize %i\n", EmbreeGraph.size(), NanoGraph.size());
+
+		//CheckForDuplicatesNano(NanoGraph, 0.1f);
+		NanoGraph.DumpToJson("NanoRtGraph.json");
+		EmbreeGraph.DumpToJson("EmbreeGraph.json");
+		CheckForDuplicatesNano(NanoGraph, 0.01f, true);
+
 
 	}
 
