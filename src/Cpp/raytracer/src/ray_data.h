@@ -121,7 +121,7 @@ namespace HF::nanoGeom {
 
         // build BVH using NanoRT Method (Replace this assert with an exception)
         nanort::BVHAccel<T> accel;
-        assert(accel.Build(num_indices, triangle_mesh, triangle_pred, build_options));
+        accel.Build(num_indices, triangle_mesh, triangle_pred, build_options);
 
         // Return the BVH object
         return accel;
