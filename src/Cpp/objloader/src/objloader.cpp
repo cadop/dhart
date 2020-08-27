@@ -9,6 +9,7 @@
 #include <Dense>
 #include <meshinfo.h>
 #define TINYOBJLOADER_IMPLEMENTATION ///< This MUST be defined before importing tiny_obj_loader.h
+#define TINYOBJLOADER_USE_DOUBLE
 #include <tiny_obj_loader.h>
 #include <robin_hood.h>
 #include <HFExceptions.h>
@@ -20,6 +21,7 @@ using std::vector;
 using std::array;
 using std::string;
 
+using tinyobj::ObjReader;
 
 // [nanoRT]
 namespace HF::nanoGeom {
@@ -114,7 +116,80 @@ namespace HF::Geometry {
 		{"energy blob", "energy_blob.obj" },
 		{"sibenik", "sibenik.obj" },
 	};
-	
+
+	tinyobj::ObjReader CreateReader(const std::string & path) {
+		// First, attempt to load the obj
+		tinyobj::ObjReader objloader;
+
+		// See if the filepath exists at all
+		if (!std::filesystem::exists(path)) {
+			std::cerr << " No file exists at " << path << std::endl;
+			throw HF::Exceptions::FileNotFound();
+		}
+
+		// Load the OBJ using tinyobj.
+		objloader.ParseFromFile(path);
+
+		// Throw if the OBJ isn't valid
+		if (!objloader.Valid() || objloader.GetShapes().size() == 0)
+		{
+			std::cerr << " The given file did not produce a valid mesh " << std::endl;
+			throw HF::Exceptions::InvalidOBJ();
+		}
+
+		return objloader;
+	}
+
+	template <typename T>
+	tinyobj_shape<T> MakeShape(const tinyobj::shape_t & shape) {
+		tinyobj_shape<T> out_shape;
+		
+		const int num_indices = shape.mesh.indices.size();
+		out_shape.indices.resize(num_indices);
+		for (int i = 0; i < num_indices; i++)
+			out_shape.indices[i] = shape.mesh.indices[i].vertex_index;
+
+		out_shape.mat_ids = shape.mesh.material_ids;
+		return out_shape;
+	}
+
+	template <typename T>
+	vector<tinyobj_shape<T>> MakeShapes(const vector<tinyobj::shape_t>& shapes) {
+		vector<tinyobj_shape<T>> out_shapes(shapes.size());
+		
+		for (int i = 0; i < shapes.size(); i++)
+			out_shapes[i] = MakeShape<T>(shapes[i]);
+		
+		return out_shapes;
+	}
+
+	vector<tinyobj_material> MakeMaterials(const vector<tinyobj::material_t> & materials) {
+		vector<tinyobj_material> out_mats(materials.size());
+		
+		for (int i = 0; i < materials.size(); i++)
+			out_mats[i].name = materials[i].name;
+		
+		return out_mats;
+	}
+
+	tinyobj_geometry<double> LoadMeshesFromTinyOBJ(std::string path)
+	{
+		tinyobj_geometry<double> out_obj;
+		ObjReader reader = CreateReader(path);
+
+		// get information from the reader.
+		auto mats = reader.GetMaterials(); // Materials of the mesh at path
+		tinyobj::attrib_t attributes = reader.GetAttrib(); // Attributes of the mesh at path
+		vector<tinyobj::shape_t> shapes = reader.GetShapes(); // Submeshes of the mesh at path
+
+		// Get the info about shapes for this mesh
+		out_obj.attributes.vertices = attributes.vertices;
+		out_obj.shapes = MakeShapes<double>(shapes);
+		out_obj.materials = MakeMaterials(mats);
+
+		return out_obj;
+	}
+
 	vector<MeshInfo> LoadMeshObjects(std::string path, GROUP_METHOD gm, bool change_coords, int scale)
 	{
 		// First, attempt to load the obj
@@ -152,13 +227,16 @@ namespace HF::Geometry {
 			
 			// Must be included in the other method types. It's not clear why the float conversion 
 			// wasn't done above with the attributes.vertices
-			auto vert_array = static_cast<vector<float>>(verts);
+			auto vert_array = static_cast<vector<double>>(verts);
 			auto vert_scaled = vert_array;
 			// Multiply each element of array by the user defined scale value (default of 1 which does not change vertex)
 			std::transform(vert_array.begin(), vert_array.end(), vert_scaled.begin(),[&](float i) { return i * scale; });
 			// assign the float vector to the scaled method
-			const vector<float>& vertexes = vert_scaled;
 
+			// Cast to float
+			vector<float> vertexes(vert_array.size());
+			for (int i = 0; i < vert_array.size(); i++)
+				vertexes[i] = static_cast<float>(vert_array[i]);
 
 			vector<int> indices;
 

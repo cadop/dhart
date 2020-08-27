@@ -11,15 +11,13 @@ target_sources(
 		src/node.cpp
 		src/path.cpp
 		src/graph.cpp
-
 		src/cost_algorithms.cpp
-		
 		src/Constants.h
 		src/Edge.h
 		src/node.h
 		src/path.h
 		src/graph.h
-
+		src/json.hpp
 		src/cost_algorithms.h
 	)
 

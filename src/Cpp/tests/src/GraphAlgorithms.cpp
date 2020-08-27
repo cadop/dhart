@@ -189,8 +189,8 @@ namespace HF {
 		double down_step = 1;	double down_slope = 1;
 		int max_step_connections = 1;
 		int cores = 1;
-		std::array<double, 3> start_point{ 1, 1, 20.0};
-		std::array<double, 3> spacing{ 1.0, 1.0, 20 };
+		std::array<float, 3> start_point{ 1.0, 1.0, 20.0};
+		std::array<float, 3> spacing{ 1, 1, 15};
 
 		auto EmbreeGraph = EmbreeGraphGen.BuildNetwork(
 			start_point, spacing,
@@ -211,10 +211,12 @@ namespace HF {
 
 		printf("Embree Size: %i, NanoSize %i\n", EmbreeGraph.size(), NanoGraph.size());
 
-		CheckForDuplicatesNano(NanoGraph, 0.1f);
+		//CheckForDuplicatesNano(NanoGraph, 0.1f);
+		NanoGraph.DumpToJson("NanoRtGraph.json");
+		EmbreeGraph.DumpToJson("EmbreeGraph.json");
+
 		ASSERT_LT(NanoGraph.size(), EmbreeGraph.size());
 
-		NanoGraph.DumpToJson("GraphAsJson.json");
 	}
 
 

@@ -68,7 +68,73 @@ namespace HF::Geometry{
 		MATERIAL_AND_FILE = 3 ///< UNIMPLEMENTED
 	};
 
-	class MeshInfo;
+	template <typename T>
+	struct tinyobj_attr {
+		std::vector<T> vertices;
+	};
+
+
+	template <typename T>
+	struct tinyobj_shape {
+		std::string name;
+		std::vector<int> indices;
+		std::vector<int> mat_ids;
+	};
+
+	struct tinyobj_material {
+		std::string name;
+	};
+
+	template <typename T> 
+	struct tinyobj_geometry{
+		std::vector<tinyobj_shape<T>> shapes;
+		tinyobj_attr<T> attributes;
+		std::vector<tinyobj_material> materials;
+	};
+
+	tinyobj_geometry<double> LoadMeshesFromTinyOBJ(std::string path);
+
+	/*
+	template <typename OUT, typename IN> 
+	inline std::vector<OUT> ConvertVertices(const std::vector<IN> & vertices) {
+		std::vector<OUT> out_vertices(vertices.size());
+
+		for (int i = 0; i < vertices.size(); i++)
+			out_vertices[i] = static_cast<OUT>(vertices[i]);
+
+		return out_vertices;
+	}
+	*/
+	template <typename T>
+	HF::Geometry::MeshInfo LoadTMPMeshObjects(const std::string & path) {
+
+		// Load the mesh from tinyobj
+		tinyobj_geometry<double> geom = LoadMeshesFromTinyOBJ(path);
+
+		// Count total indexes
+		int index_count = 0;
+		for (const auto & shape : geom.shapes)
+			index_count +=shape.indices.size();
+
+
+		// Copy all indices into one big array
+		int last_index = 0;
+		std::vector<int> complete_indices(index_count);
+		for (const auto& shape : geom.shapes) {
+			std::copy(shape.indices.begin(), shape.indices.end(), complete_indices.begin() + last_index);
+			last_index += shape.indices.size();
+		}
+
+		//std::vector<T> converted_vertices = ConvertVertices<T, double>(geom.attributes.vertices);
+
+		//Convert vertices to T
+		std::vector<T> out_vertices(geom.attributes.vertices.size());
+		for (int i = 0; i < geom.attributes.vertices.size(); i++)
+			out_vertices[i] = static_cast<T>(geom.attributes.vertices[i]);
+
+		return HF::Geometry::MeshInfo(out_vertices, complete_indices, 1, std::string("DoubleMesh"));
+	}
+
 
 	/// <summary> Create MeshInfo instances from the OBJ at path. </summary>
 	/// <param name="path"> Path to the OBJ to load.</param>

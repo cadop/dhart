@@ -168,6 +168,11 @@ TEST(_OBJLoader, By_Material) {
 	EXPECT_TRUE(MI[0].GetMeshID() == 0);
 }
 
+TEST(_OBJLoader, Doubles) {
+	std::string path = "teapot.obj"; // This is located in the folder where the EXE is
+	auto MI = HF::Geometry::LoadTMPMeshObjects<float>(path);
+}
+
 TEST(_MeshInfo, ManualRotationEqualsPreset) {
 	auto test_paths = std::vector<std::string>{ "teapot.obj" }; // This is located in the folder where the EXE is
 	
