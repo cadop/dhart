@@ -189,7 +189,7 @@ namespace HF {
 		double up_step = 1;	double up_slope = 1;
 		double down_step = 1;	double down_slope = 1;
 		int max_step_connections = 1;
-		int cores = 1;
+		int cores = -1;
 		std::array<float, 3> start_point{ 1.0, 1.0, 20.0};
 		std::array<float, 3> spacing{ 1, 1, 15};
 

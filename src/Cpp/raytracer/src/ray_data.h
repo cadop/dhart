@@ -192,7 +192,10 @@ namespace HF::RayTracer {
             NanoRay ray = ConstructRay<dist_type>(origin, dir, max_dist);
             Intersection hit = CreateHit();
 
-            bool did_intersect = bvh.Traverse<Intersector>(ray, *(this->intersector), &hit);
+            // Create a new intersector every time
+            NanoRTRayTracer::Intersector temp_intersector(this->vertices.data(), this->indices.data(), sizeof(real_t)*3);
+            
+            bool did_intersect = bvh.Traverse<Intersector>(ray, temp_intersector, &hit);
             
             if (did_intersect)
                 return HitStruct{ hit.t, 0 };
