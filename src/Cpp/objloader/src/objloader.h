@@ -94,17 +94,6 @@ namespace HF::Geometry{
 
 	tinyobj_geometry<double> LoadMeshesFromTinyOBJ(std::string path);
 
-	/*
-	template <typename OUT, typename IN> 
-	inline std::vector<OUT> ConvertVertices(const std::vector<IN> & vertices) {
-		std::vector<OUT> out_vertices(vertices.size());
-
-		for (int i = 0; i < vertices.size(); i++)
-			out_vertices[i] = static_cast<OUT>(vertices[i]);
-
-		return out_vertices;
-	}
-	*/
 	template <typename T>
 	HF::Geometry::MeshInfo<T> LoadTMPMeshObjects(const std::string & path) {
 
@@ -132,7 +121,7 @@ namespace HF::Geometry{
 		for (int i = 0; i < geom.attributes.vertices.size(); i++)
 			out_vertices[i] = static_cast<T>(geom.attributes.vertices[i]);
 
-		return HF::Geometry::MeshInfo(out_vertices, complete_indices, 1, std::string("DoubleMesh"));
+		return HF::Geometry::MeshInfo<T>(out_vertices, complete_indices, 1, std::string("DoubleMesh"));
 	}
 
 

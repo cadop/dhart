@@ -171,7 +171,7 @@ TEST(_OBJLoader, By_Material) {
 
 TEST(_OBJLoader, Doubles) {
 	std::string path = "teapot.obj"; // This is located in the folder where the EXE is
-	auto MI = HF::Geometry::LoadTMPMeshObjects<float>(path);
+	auto MI = HF::Geometry::LoadTMPMeshObjects<double>(path);
 }
 
 TEST(_MeshInfo, ManualRotationEqualsPreset) {

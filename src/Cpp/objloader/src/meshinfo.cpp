@@ -183,7 +183,7 @@ namespace HF::Geometry {
 	template <typename T>
 	void MeshInfo<T>::ConvertToRhinoCoordinates()
 	{
-		Eigen::AngleAxis<T> yrot(0.5f * static_cast<T>(M_PI), Eigen::Vector3f::UnitX());
+		Eigen::AngleAxis<T> yrot(0.5f * static_cast<T>(M_PI), Eigen::Vector3<T>::UnitX());
 		Eigen::Quaternion<T> quat;
 		quat = yrot;
 		quat.normalize();
@@ -195,11 +195,11 @@ namespace HF::Geometry {
 	template <typename T>
 	void MeshInfo<T>::ConvertToOBJCoordinates()
 	{
-		Eigen::AngleAxis<T> yrot(-0.5f * static_cast<T>(M_PI), Eigen::Vector3f::UnitX());
+		Eigen::AngleAxis<T> yrot(-0.5f * static_cast<T>(M_PI), Eigen::Vector3<T>::UnitX());
 		Eigen::Quaternion<T> quat;
 		quat = yrot;
 		quat.normalize();
-		Eigen::Matrix3f rotation_matrix = yrot.toRotationMatrix();
+		Eigen::Matrix3<T> rotation_matrix = yrot.toRotationMatrix();
 		assert(!rotation_matrix.hasNaN());
 		verts = (rotation_matrix * verts);
 		assert(!verts.hasNaN());
@@ -214,16 +214,16 @@ namespace HF::Geometry {
 
 		// Implementation based on 
 		// https://stackoverflow.com/questions/21412169/creating-a-rotation-matrix-with-pitch-yaw-roll-using-eigen
-		Eigen::AngleAxis<T> rollAngle(rz, Eigen::Vector3f::UnitZ());
-		Eigen::AngleAxis<T> yawAngle(ry, Eigen::Vector3f::UnitY());
-		Eigen::AngleAxis<T> pitchAngle(rx, Eigen::Vector3f::UnitX());
+		Eigen::AngleAxis<T> rollAngle(rz, Eigen::Vector3<T>::UnitZ());
+		Eigen::AngleAxis<T> yawAngle(ry, Eigen::Vector3<T>::UnitY());
+		Eigen::AngleAxis<T> pitchAngle(rx, Eigen::Vector3<T>::UnitX());
 
 
 		// Create a quaternion from the angles, normalize it, then
 		// convert it to a rotation matrix.
 		Eigen::Quaternion<T> q = (rollAngle * yawAngle * pitchAngle);
 		q.normalize();
-		Eigen::Matrix3f rotation_matrix = q.toRotationMatrix();
+		Eigen::Matrix3<T> rotation_matrix = q.toRotationMatrix();
 
 		//! [snippet_objloader_assert]
 		// Assert that we didn't create any NANS or infinite values
@@ -342,6 +342,6 @@ namespace HF::Geometry {
 		return ret_array;
 	}
 }
+template class HF::Geometry::MeshInfo<double>;
 
 template class HF::Geometry::MeshInfo<float>;
-//template class HF::Geometry::MeshInfo<double>;

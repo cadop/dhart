@@ -126,7 +126,9 @@ namespace HF::Geometry {
 		int meshid;						///< Identifier for this mesh.
 		std::string name = "";			///< A human-readable title. 
 	private:
-		Eigen::Matrix3X<numeric_type> verts;	///< 3 by X matrix of vertices
+
+		using VertMatrix = Eigen::Matrix3X<numeric_type>;
+		VertMatrix verts;	///< 3 by X matrix of vertices
 		Eigen::Matrix3X<int> indices;	///< 3 by X matrix of indices for triangles.
 
 
