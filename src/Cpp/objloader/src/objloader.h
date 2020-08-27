@@ -106,7 +106,7 @@ namespace HF::Geometry{
 	}
 	*/
 	template <typename T>
-	HF::Geometry::MeshInfo LoadTMPMeshObjects(const std::string & path) {
+	HF::Geometry::MeshInfo<T> LoadTMPMeshObjects(const std::string & path) {
 
 		// Load the mesh from tinyobj
 		tinyobj_geometry<double> geom = LoadMeshesFromTinyOBJ(path);
@@ -171,7 +171,7 @@ namespace HF::Geometry{
 			HF::Geometry::MeshInfo info = meshvec[0];
 		\endcode
 	*/
-	std::vector<MeshInfo> LoadMeshObjects(
+	std::vector<MeshInfo<float>> LoadMeshObjects(
 		std::string path,
 		GROUP_METHOD gm = ONLY_FILE,
 		bool change_coords = false,
@@ -216,7 +216,7 @@ namespace HF::Geometry{
 			}
 		\endcode
 	*/
-	std::vector<MeshInfo> LoadMeshObjects(
+	std::vector<MeshInfo<float>> LoadMeshObjects(
 		std::vector<std::string>& path,
 		GROUP_METHOD gm = ONLY_FILE,
 		bool change_coords = false,

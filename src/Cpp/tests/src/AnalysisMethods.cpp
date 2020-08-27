@@ -31,7 +31,7 @@ inline EmbreeRayTracer CreateRTWithPlane() {
 	};
 
 	const vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
-	return EmbreeRayTracer(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+	return EmbreeRayTracer(vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
 }
 
 

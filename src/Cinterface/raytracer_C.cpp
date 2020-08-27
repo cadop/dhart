@@ -8,7 +8,7 @@
 
 using std::vector;
 using HF::RayTracer::EmbreeRayTracer;
-using HF::Geometry::MeshInfo;
+using MeshInfo = HF::Geometry::MeshInfo<float>;
 using namespace HF::Exceptions;
 //TODO: Use a template for this
 
@@ -68,7 +68,7 @@ C_INTERFACE CreateRaytracerMultiMesh(MeshInfo** meshes, int num_meshes, EmbreeRa
 }
 
 
-C_INTERFACE AddMeshes(HF::RayTracer::EmbreeRayTracer* ERT, HF::Geometry::MeshInfo ** MI, int number_of_meshes)
+C_INTERFACE AddMeshes(HF::RayTracer::EmbreeRayTracer* ERT, MeshInfo ** MI, int number_of_meshes)
 {
 	// Iterate through each input mesh, only committing the scene
 	// at the final mesh. 
@@ -81,7 +81,7 @@ C_INTERFACE AddMeshes(HF::RayTracer::EmbreeRayTracer* ERT, HF::Geometry::MeshInf
 	return HF_STATUS::OK;
 }
 
-C_INTERFACE AddMesh(HF::RayTracer::EmbreeRayTracer* ERT, HF::Geometry::MeshInfo* MI)
+C_INTERFACE AddMesh(HF::RayTracer::EmbreeRayTracer* ERT,MeshInfo* MI)
 {
 	ERT->AddMesh(*MI, true);
 

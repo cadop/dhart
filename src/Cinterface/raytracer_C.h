@@ -17,7 +17,7 @@ namespace HF {
 		class EmbreeRayTracer;
 	}
 	namespace Geometry {
-		class MeshInfo;
+		template<typename T> class MeshInfo;
 	}
 }
 
@@ -120,7 +120,7 @@ struct RayResult {
 	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH)
 */
 C_INTERFACE CreateRaytracer(
-	HF::Geometry::MeshInfo * mesh, 
+	HF::Geometry::MeshInfo<float> * mesh, 
 	HF::RayTracer::EmbreeRayTracer ** out_raytracer,
 	bool use_precise
 );
@@ -136,7 +136,7 @@ C_INTERFACE CreateRaytracer(
 				HF_STATUS::GENERIC_ERROR if `mesh` is null.
 */
 C_INTERFACE CreateRaytracerMultiMesh(
-	HF::Geometry::MeshInfo** meshes,
+	HF::Geometry::MeshInfo<float> ** meshes,
 	int num_meshes,
 	HF::RayTracer::EmbreeRayTracer** out_raytracer,
 	bool use_precise
@@ -154,7 +154,7 @@ C_INTERFACE CreateRaytracerMultiMesh(
 */
 C_INTERFACE AddMesh(
 	HF::RayTracer::EmbreeRayTracer* ERT,
-	HF::Geometry::MeshInfo* MI
+	HF::Geometry::MeshInfo<float>* MI
 );
 
 
@@ -170,7 +170,7 @@ C_INTERFACE AddMesh(
 */
 C_INTERFACE AddMeshes(
 	HF::RayTracer::EmbreeRayTracer* ERT,
-	HF::Geometry::MeshInfo ** MI,
+	HF::Geometry::MeshInfo<float> ** MI,
 	int number_of_meshes
 );
 

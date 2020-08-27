@@ -190,7 +190,7 @@ namespace HF::Geometry {
 		return out_obj;
 	}
 
-	vector<MeshInfo> LoadMeshObjects(std::string path, GROUP_METHOD gm, bool change_coords, int scale)
+	vector<MeshInfo<float>> LoadMeshObjects(std::string path, GROUP_METHOD gm, bool change_coords, int scale)
 	{
 		// First, attempt to load the obj
 		tinyobj::ObjReader objloader;
@@ -212,7 +212,7 @@ namespace HF::Geometry {
 		}
 
 		// get the materials, attributes, and shapes
-		vector<MeshInfo> MI; // Vector of meshinf
+		vector<MeshInfo<float>> MI; // Vector of meshinf
 		auto mats = objloader.GetMaterials(); // Materials of the mesh at path
 		tinyobj::attrib_t attributes = objloader.GetAttrib(); // Attributes of the mesh at path
 		vector<tinyobj::shape_t> shapes = objloader.GetShapes(); // Submeshes of the mesh at path
@@ -407,15 +407,15 @@ namespace HF::Geometry {
 		return test_model_paths.at(key);
 	}
 
-	vector<MeshInfo> LoadMeshObjects(vector<std::string>& path, GROUP_METHOD gm, bool change_coords, int scale)
+	vector<MeshInfo<float>> LoadMeshObjects(vector<std::string>& path, GROUP_METHOD gm, bool change_coords, int scale)
 	{
 		// Create a vector of vectors and gather all individual results
-		vector<vector<MeshInfo>> MeshObjects(path.size());
+		vector<vector<MeshInfo<float>>> MeshObjects(path.size());
 		for (int i = 0; i < path.size(); i++)
 			MeshObjects[i] = LoadMeshObjects(path[i], gm, change_coords, scale);
 
 		// Compress all vectors into a single mesh and reassign meshid.
-		vector<MeshInfo> MI;
+		vector<MeshInfo<float>> MI;
 		int lid = 0;
 		for (int i = 0; i < MeshObjects.size(); i++) {
 			for (auto& mi : MeshObjects[i]) {

@@ -15,7 +15,7 @@
 
 namespace HF {
 	namespace Geometry {
-		class MeshInfo;
+		template<typename T> class MeshInfo;
 		enum GROUP_METHOD;
 	}
 }
@@ -139,7 +139,7 @@ C_INTERFACE LoadOBJ(
 	float xrot,
 	float yrot,
 	float zrot,
-	HF::Geometry::MeshInfo *** out_data_array,
+	HF::Geometry::MeshInfo<float> *** out_data_array,
 	int * num_meshes
 );
 
@@ -177,7 +177,7 @@ C_INTERFACE LoadOBJ(
 	`>>> The mesh was stored properly at address 0000029C6317BEB0.`\n
 */
 C_INTERFACE StoreMesh(
-	HF::Geometry::MeshInfo ** out_info,
+	HF::Geometry::MeshInfo<float> ** out_info,
 	const int* indices,
 	int num_indices,
 	const float* vertices,
@@ -201,7 +201,7 @@ C_INTERFACE StoreMesh(
 	\snippet tests\src\objloader_cinterface.cpp snippet_RotateMesh
 */
 C_INTERFACE RotateMesh(
-	HF::Geometry::MeshInfo * mesh_to_rotate,
+	HF::Geometry::MeshInfo<float> * mesh_to_rotate,
 	float xrot,
 	float yrot,
 	float zrot
@@ -222,7 +222,7 @@ C_INTERFACE RotateMesh(
 
 */
 C_INTERFACE GetVertsAndTris(
-	const HF::Geometry::MeshInfo * MI,
+	const HF::Geometry::MeshInfo<float> * MI,
 	int** index_out,
 	int* num_triangles,
 	float** vertex_out,
@@ -239,7 +239,7 @@ C_INTERFACE GetVertsAndTris(
 	
 */
 C_INTERFACE GetMeshName(
-	const HF::Geometry::MeshInfo* MI,
+	const HF::Geometry::MeshInfo<float>* MI,
 	char** out_name
 );
 
@@ -252,7 +252,7 @@ C_INTERFACE GetMeshName(
 	\returns `HF_STATUS::OK`
 */
 C_INTERFACE GetMeshID(
-	const HF::Geometry::MeshInfo* MI,
+	const HF::Geometry::MeshInfo<float>* MI,
 	int * out_id
 );
 
@@ -265,10 +265,10 @@ C_INTERFACE GetMeshID(
 
 	\see \ref mesh_setup (how to create a mesh), \ref mesh_teardown (how to destroy a mesh)
 */
-C_INTERFACE DestroyMeshInfo(HF::Geometry::MeshInfo * mesh_to_destroy);
+C_INTERFACE DestroyMeshInfo(HF::Geometry::MeshInfo<float> * mesh_to_destroy);
 
 
-C_INTERFACE DestroyMeshInfoPtrArray(HF::Geometry::MeshInfo** data_array);
+C_INTERFACE DestroyMeshInfoPtrArray(HF::Geometry::MeshInfo<float>** data_array);
 
 /**@}*/
 

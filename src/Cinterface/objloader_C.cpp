@@ -16,7 +16,7 @@ C_INTERFACE LoadOBJ(
 	float xrot,
 	float yrot,
 	float zrot,
-	MeshInfo *** out_data_array,
+	MeshInfo<float> *** out_data_array,
 	int* num_meshes
 ) {
 	// Copy marshalled char array into strings
@@ -33,9 +33,9 @@ C_INTERFACE LoadOBJ(
 			mesh.PerformRotation(xrot, yrot, zrot);
 	
 		// Insert into output array (this should be an instance of copy elision.
-		MeshInfo ** data_array  = new MeshInfo*[*num_meshes];
+		MeshInfo<float> ** data_array  = new MeshInfo<float>*[*num_meshes];
 		for (int i = 0; i < *num_meshes; i++) {
-			data_array[i] = new MeshInfo(loaded_objs[i]);
+			data_array[i] = new MeshInfo<float>(loaded_objs[i]);
 			assert(data_array[i]->GetMeshID() == loaded_objs[i].GetMeshID());
 		}
 		*out_data_array = data_array;
@@ -57,7 +57,7 @@ C_INTERFACE LoadOBJ(
 }
 
 C_INTERFACE StoreMesh(
-	MeshInfo ** out_info,
+	MeshInfo<float> ** out_info,
 	const int* indices,
 	int num_indices,
 	const float* vertices,
@@ -72,7 +72,7 @@ C_INTERFACE StoreMesh(
 
 	// Try to load mesh
 	try {
-		*out_info = new MeshInfo(vertex_array, index_array, id, mesh_name);
+		*out_info = new MeshInfo<float>(vertex_array, index_array, id, mesh_name);
 	}
 	catch (HF::Exceptions::InvalidOBJ E) {
 		// If the input wasn't correctly formed, or contained nans, then return an error code
@@ -81,7 +81,7 @@ C_INTERFACE StoreMesh(
 	return OK;
 }
 
-C_INTERFACE RotateMesh(MeshInfo * mesh_to_rotate, float xrot, float yrot, float zrot)
+C_INTERFACE RotateMesh(MeshInfo<float> * mesh_to_rotate, float xrot, float yrot, float zrot)
 {
 	if (mesh_to_rotate->meshid < 0)
 		return HF_STATUS::INVALID_OBJ;
@@ -91,7 +91,7 @@ C_INTERFACE RotateMesh(MeshInfo * mesh_to_rotate, float xrot, float yrot, float 
 	return HF_STATUS::OK;
 }
 
-C_INTERFACE GetVertsAndTris(const MeshInfo * MI, int** index_out, int* num_triangles, float** vertex_out, int* num_vertices)
+C_INTERFACE GetVertsAndTris(const MeshInfo<float> * MI, int** index_out, int* num_triangles, float** vertex_out, int* num_vertices)
 {
 	auto mesh_vertices = MI->GetVertexPointer();
 	auto mesh_indices = MI->GetIndexPointer();
@@ -105,7 +105,7 @@ C_INTERFACE GetVertsAndTris(const MeshInfo * MI, int** index_out, int* num_trian
 	return HF_STATUS::OK;
 }
 
-C_INTERFACE GetMeshName(const HF::Geometry::MeshInfo* MI, char** out_name)
+C_INTERFACE GetMeshName(const HF::Geometry::MeshInfo<float>* MI, char** out_name)
 {
 	auto name = MI->name;
 
@@ -116,20 +116,20 @@ C_INTERFACE GetMeshName(const HF::Geometry::MeshInfo* MI, char** out_name)
 	return HF_STATUS::OK;
 }
 
-C_INTERFACE GetMeshID(const HF::Geometry::MeshInfo* MI, int* out_id) {
+C_INTERFACE GetMeshID(const HF::Geometry::MeshInfo<float>* MI, int* out_id) {
 	*out_id = MI->meshid;
 	return HF_STATUS::OK;
 }
 
 
 
-C_INTERFACE DestroyMeshInfo(MeshInfo * mesh_to_destroy)
+C_INTERFACE DestroyMeshInfo(MeshInfo<float> * mesh_to_destroy)
 {
 	DeleteRawPtr(mesh_to_destroy);
 	return OK;
 }
 
-C_INTERFACE DestroyMeshInfoPtrArray(MeshInfo** data_array)
+C_INTERFACE DestroyMeshInfoPtrArray(MeshInfo<float>** data_array)
 {
 	if (*data_array)
 		delete[] data_array;

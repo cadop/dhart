@@ -7,12 +7,13 @@
 #include "objloader_C.h"
 #include "performance_testing.h"
 #define eigen_plain_assert
-using namespace HF::Geometry;
 using std::string;
 using HF::Exceptions::HF_STATUS;
 using std::vector;
 
 const std::string obj_directiory = "../../Models/";
+using HF::Geometry::LoadRawVertices;
+using MeshInfo = HF::Geometry::MeshInfo<float>;
 
 void PrintArray(std::array<float, 3> in_array) {
 	std::cerr << "(" << in_array[0] << "," << in_array[1] << "," << in_array[2] << ")";
@@ -23,7 +24,7 @@ inline float arrayDist(const std::array<float, 3> from, const std::array<float, 
 	return sqrtf(powf(from[0] - to[0], 2) + powf(from[1] - to[1], 2) + powf(from[2] - to[2], 2));
 }
 
-void CompareMeshInfo(const HF::Geometry::MeshInfo& MI1, const HF::Geometry::MeshInfo& MI2, std::string label1 = "MI1", std::string label2 = "MI2") {
+void CompareMeshInfo(const MeshInfo& MI1, const MeshInfo& MI2, std::string label1 = "MI1", std::string label2 = "MI2") {
 	ASSERT_EQ(MI1.NumVerts(), MI2.NumVerts());
 	int fail_count = 0;
 	for (int i = 0; i < MI1.NumVerts(); i++) {
@@ -267,10 +268,10 @@ TEST(_meshInfo, LoadMeshObjectsOne) {
 	std::string file_path = "big_teapot.obj";
 
 	// meshvec is a vector of meshinfo from file_path
-	std::vector<HF::Geometry::MeshInfo> meshvec = HF::Geometry::LoadMeshObjects(file_path, HF::Geometry::GROUP_METHOD::ONLY_FILE, false);
+	std::vector<MeshInfo> meshvec = HF::Geometry::LoadMeshObjects(file_path, HF::Geometry::GROUP_METHOD::ONLY_FILE, false);
 
 	// Retrieve the MeshInfo
-	HF::Geometry::MeshInfo info = meshvec[0];
+	MeshInfo info = meshvec[0];
 }
 
 TEST(_meshInfo, LoadMeshObjectsMany) {
@@ -288,7 +289,7 @@ TEST(_meshInfo, LoadMeshObjectsMany) {
 
 	// The overload for LoadMeshObjects is called for each member (which is an OBJ file path) in pathvec,
 	// then IDs are reassigned for each MeshInfo object within the std::vector<MeshInfo> that is returned
-	std::vector<HF::Geometry::MeshInfo> meshvec = HF::Geometry::LoadMeshObjects(pathvec, HF::Geometry::GROUP_METHOD::ONLY_FILE, false);
+	std::vector<MeshInfo> meshvec = HF::Geometry::LoadMeshObjects(pathvec, HF::Geometry::GROUP_METHOD::ONLY_FILE, false);
 
 	std::cout << "Total loaded: " << meshvec.size() << std::endl;
 
@@ -319,7 +320,7 @@ TEST(_meshInfo, LoadRawVertices) {
 TEST(_meshInfo, ConstructorDefault) {
 	// be sure to #include "meshinfo.h"
 
-	HF::Geometry::MeshInfo mesh;	// meshid == 0; verts is given 3 rows, 0 cols; name == "INVALID"
+	MeshInfo mesh;	// meshid == 0; verts is given 3 rows, 0 cols; name == "INVALID"
 }
 
 TEST(_meshInfo, ConstructorParamCoordsAsArray) {
@@ -337,7 +338,7 @@ TEST(_meshInfo, ConstructorParamCoordsAsArray) {
 	// Note that vertices is passed by reference.
 	// Also, passing a std::vector<std::array<float, 3>> with (size < 1) will cause
 	// HF::Exceptions::InvalidOBJ to be thrown.
-	HF::Geometry::MeshInfo mesh(vertices, 3451, "My Mesh");
+	MeshInfo mesh(vertices, 3451, "My Mesh");
 
 	// Display the vertices for mesh
 	std::cout << "Vertices in mesh with ID " << mesh.GetMeshID() << ": " << std::endl;
@@ -363,7 +364,7 @@ TEST(_meshInfo, ConstructorParamCoordsAsFloat) {
 	// will cause HF::Exceptions::InvalidOBJ to be thrown.
 	// Also, indices.size() == (vertices.size() / 3), because all members of indices
 	// must correspond to the index of the first member representing the initial coordinate within a vertex.
-	HF::Geometry::MeshInfo mesh(vertices, indices, 5901, "This Mesh");
+	MeshInfo mesh(vertices, indices, 5901, "This Mesh");
 
 	// Display the vertices for mesh
 	std::cout << "Vertices in mesh with ID " << mesh.GetMeshID() << ": " << std::endl;
@@ -384,7 +385,7 @@ TEST(_meshInfo, AddVertsAsArray) {
 	std::vector<std::array<float, 3>> vertices{ vertex_0, vertex_1, vertex_2 };
 
 	// Create the MeshInfo instance - this example uses the no-arg constructor
-	HF::Geometry::MeshInfo mesh;	// meshid == 0; verts is given 3 rows, 0 cols; name == "INVALID"
+	MeshInfo mesh;	// meshid == 0; verts is given 3 rows, 0 cols; name == "INVALID"
 
 	// Append the vertices to the mesh
 	mesh.AddVerts(vertices);
@@ -413,7 +414,7 @@ TEST(_meshInfo, AddVertsAsFloatAndIndices) {
 	std::vector<int> indices = { 0, 1, 2 };
 
 	// Create the MeshInfo instance - this example uses the no-arg constructor
-	HF::Geometry::MeshInfo mesh;	// meshid == 0; verts is given 3 rows, 0 cols; name == "INVALID"
+	MeshInfo mesh;	// meshid == 0; verts is given 3 rows, 0 cols; name == "INVALID"
 
 	// Append the vertices to the mesh.
 	mesh.AddVerts(vertices, indices);
@@ -432,7 +433,7 @@ TEST(_meshInfo, NumVerts) {
 	std::vector<std::array<float, 3>> vertices{ vertex_0, vertex_1, vertex_2 };
 
 	// Create the MeshInfo
-	HF::Geometry::MeshInfo mesh(vertices, 3451, "My Mesh");
+	MeshInfo mesh(vertices, 3451, "My Mesh");
 
 	int vert_count = 0;
 	if ((vert_count = mesh.NumVerts()) == 0) {
@@ -456,7 +457,7 @@ TEST(_meshInfo, NumTris) {
 	std::vector<std::array<float, 3>> vertices{ vertex_0, vertex_1, vertex_2 };
 
 	// Create the MeshInfo
-	HF::Geometry::MeshInfo mesh(vertices, 3451, "My Mesh");
+	MeshInfo mesh(vertices, 3451, "My Mesh");
 
 	int tri_count = 0;
 	if ((tri_count = mesh.NumTris()) == 0) {
@@ -482,7 +483,7 @@ TEST(_meshInfo, ConvertToRhinoCoordinates) {
 	std::vector<std::array<float, 3>> vertices{ vertex_0, vertex_1, vertex_2 };
 
 	// Create the MeshInfo
-	HF::Geometry::MeshInfo mesh(vertices, 3451, "My Mesh");
+	MeshInfo mesh(vertices, 3451, "My Mesh");
 
 	// Convert the coordinates
 	mesh.ConvertToRhinoCoordinates();
@@ -508,7 +509,7 @@ TEST(_meshInfo, ConvertToOBJCoordinates) {
 	std::vector<std::array<float, 3>> vertices{ vertex_0, vertex_1, vertex_2 };
 
 	// Create the MeshInfo
-	HF::Geometry::MeshInfo mesh(vertices, 3451, "My Mesh");
+	MeshInfo mesh(vertices, 3451, "My Mesh");
 
 	// Convert the coordinates
 	mesh.ConvertToOBJCoordinates();
@@ -532,7 +533,7 @@ TEST(_meshInfo, PerformRotation) {
 	std::vector<std::array<float, 3>> vertices{ vertex_0, vertex_1, vertex_2 };
 
 	// Create the MeshInfo
-	HF::Geometry::MeshInfo mesh(vertices, 3451, "My Mesh");
+	MeshInfo mesh(vertices, 3451, "My Mesh");
 
 	// Perform rotation
 	float rot_x = 10.0;
@@ -560,7 +561,7 @@ TEST(_meshInfo, GetMeshID) {
 	std::vector<std::array<float, 3>> vertices{ vertex_0, vertex_1, vertex_2 };
 
 	// Create the MeshInfo
-	HF::Geometry::MeshInfo mesh(vertices, 3451, "My Mesh");
+	MeshInfo mesh(vertices, 3451, "My Mesh");
 
 	// Use GetMeshID to do an ID match
 	int mesh_id = -1;
@@ -581,7 +582,7 @@ TEST(_meshInfo, GetRawVertices) {
 	std::vector<int> indices = { 0, 1, 2 };
 
 	// Create the mesh.
-	HF::Geometry::MeshInfo mesh(vertices, indices, 5901, "This Mesh");
+	MeshInfo mesh(vertices, indices, 5901, "This Mesh");
 
 	// Retrieve copies of mesh's vertices.
 	std::vector<float> vertices_copy_0 = mesh.GetIndexedVertices();
@@ -626,7 +627,7 @@ TEST(_meshInfo, GetRawIndices) {
 	std::vector<int> indices = { 0, 1, 2 };
 
 	// Create the mesh.
-	HF::Geometry::MeshInfo mesh(vertices, indices, 5901, "This Mesh");
+	MeshInfo mesh(vertices, indices, 5901, "This Mesh");
 
 	// Retrieve a copy of mesh's index vector
 	std::vector<int> indices_copy_0 = mesh.getRawIndices();
@@ -662,7 +663,7 @@ TEST(_meshInfo, GetVertsAsArrays) {
 	std::vector<int> indices = { 0, 1, 2 };
 
 	// Create the mesh.
-	HF::Geometry::MeshInfo mesh(vertices, indices, 5901, "This Mesh");
+	MeshInfo mesh(vertices, indices, 5901, "This Mesh");
 
 	// Retrieve vertices as a vector of coordinates (x, y, z)
 	// Useful if your vertices were prepared from a one-dimensional container c, of float
@@ -688,7 +689,7 @@ TEST(_meshInfo, SetMeshID) {
 	std::vector<int> indices = { 0, 1, 2 };
 
 	// Create the mesh.
-	HF::Geometry::MeshInfo mesh(vertices, indices, 5901, "This Mesh");
+	MeshInfo mesh(vertices, indices, 5901, "This Mesh");
 
 	// Prepare a new mesh ID.
 	int new_mesh_id = 9999;
@@ -718,8 +719,8 @@ TEST(_meshInfo, OperatorEquality) {
 	std::vector<int> indices_0 = { 0, 1, 2 };
 	std::vector<int> indices_1 = { 0, 1, 2 };
 
-	HF::Geometry::MeshInfo mesh_0(vertices_0, indices_0, 5901, "This Mesh");
-	HF::Geometry::MeshInfo mesh_1(vertices_1, indices_0, 4790, "That Mesh");
+	MeshInfo mesh_0(vertices_0, indices_0, 5901, "This Mesh");
+	MeshInfo mesh_1(vertices_1, indices_0, 4790, "That Mesh");
 
 	bool equivalent = mesh_0 == mesh_1;		// returns true
 
@@ -749,7 +750,7 @@ TEST(_meshInfo, OperatorIndex) {
 	std::vector<int> indices = { 0, 1, 2 };
 
 	// Create the mesh
-	HF::Geometry::MeshInfo mesh(vertices, indices, 5901, "This Mesh");
+	MeshInfo mesh(vertices, indices, 5901, "This Mesh");
 
 	// Retrieve the desired vertex
 	int index = 1;
@@ -950,7 +951,7 @@ namespace CInterfaceTests {
 		const float y_rot = 20;
 		const float z_rot = 55;
 
-		std::vector<HF::Geometry::MeshInfo>* info = nullptr;
+		std::vector<MeshInfo>* info = nullptr;
 
 		// Call LoadOBJ
 		if (LoadOBJ(file_path.c_str(), obj_length, x_rot, y_rot, z_rot, &info)) {

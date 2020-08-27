@@ -119,7 +119,7 @@ namespace HF::nanoGeom {
 
 namespace HF::RayTracer{
    
-    NanoRTRayTracer::NanoRTRayTracer(const HF::Geometry::MeshInfo& MI) {
+    NanoRTRayTracer::NanoRTRayTracer(const HF::Geometry::MeshInfo<float>& MI) {
         // Get the index and vertex arrays of the meshinfo
         auto mi_vertices = MI.GetVertexPointer().CopyArray();
         vertices.resize(mi_vertices.size());

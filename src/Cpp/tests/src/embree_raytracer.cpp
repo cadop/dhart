@@ -42,7 +42,7 @@ inline EmbreeRayTracer CreateRTWithPlane() {
 	};
 
 	const vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
-	return EmbreeRayTracer(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+	return EmbreeRayTracer(vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
 }
 
 /// <summary>
@@ -307,7 +307,7 @@ TEST(_EmbreeRayTracer, DeterministicResults) {
 	const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 	// Create RayTracer
-	EmbreeRayTracer ert(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+	EmbreeRayTracer ert(vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
 	
 	const int num_trials = 150;
 	const int num_rays = 1000;
@@ -364,7 +364,7 @@ TEST(_EmbreeRayTracer, PointIntersections) {
 	const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 	// Create RayTracer
-	EmbreeRayTracer ert(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+	EmbreeRayTracer ert(vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
 
 	// Create an array of directions all containing {0,0,-1}
 	std::vector<std::array<float, 3>> directions(10, std::array<float, 3>{0, 0, -1});
@@ -409,7 +409,7 @@ TEST(_EmbreeRayTracer, Occlusions) {
 	const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 	// Create RayTracer
-	EmbreeRayTracer ert(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+	EmbreeRayTracer ert(vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
 
 	// Create an array of directions all containing {0,0,-1}
 	std::vector<std::array<float, 3>> directions(10, std::array<float, 3>{0, 0, -1});
@@ -450,7 +450,7 @@ TEST(_EmbreeRayTracer, PointIntersection) {
 	const vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 	// Create RayTracer
-	EmbreeRayTracer ert(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+	EmbreeRayTracer ert(vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
 
 	float x = 0; float y = 0; float z = 1;
 	bool res;
@@ -483,7 +483,7 @@ TEST(_EmbreeRayTracer, FireRayArrayOverload) {
 	const vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 	// Create RayTracer
-	EmbreeRayTracer ert(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+	EmbreeRayTracer ert(vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
 
 	// Fire a ray straight down and ensure it connects with a distance of 1 (within a certain tolerance)
 	std::array<float, 3> origin{ 0,0,1 };
@@ -571,7 +571,7 @@ TEST(_EmbreeRayTracer, Intersect) {
 	const vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 	// Create RayTracer
-	EmbreeRayTracer ert(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+	EmbreeRayTracer ert(vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
 
 	// Fire a ray straight down
 	auto straight_down = ert.Intersect(0, 0, 1, 0, 0, -1);
@@ -603,7 +603,7 @@ TEST(_EmbreeRayTracer, IntersectOutputArguments) {
 	const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 	// Create RayTracer
-	EmbreeRayTracer ert(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+	EmbreeRayTracer ert(vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
 
 	// Create a vector of direction and origin arrays.
 	std::array<float, 3> origin{ 0,0.5,1 };
@@ -640,7 +640,7 @@ TEST(_EmbreeRayTracer, Occluded) {
 	const vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 	// Create RayTracer
-	EmbreeRayTracer ert(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+	EmbreeRayTracer ert(vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
 
 	// Fire a ray straight down
 	bool res = ert.Occluded(
@@ -675,7 +675,7 @@ TEST(_EmbreeRayTracer, FireOcclusionRayArray) {
 	const vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 	// Create RayTracer
-	EmbreeRayTracer ert(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+	EmbreeRayTracer ert(vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
 
 	// Cast a ray straight down
 	bool straight_down = ert.Occluded(
@@ -710,7 +710,7 @@ TEST(_EmbreeRayTracer, OccludedSingle) {
 	const vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 	// Create RayTracer
-	EmbreeRayTracer ert(vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+	EmbreeRayTracer ert(vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
 
 	// Fire a ray straight down
 	bool straight_down = ert.Occluded(0, 0, 1, 0, 0, -1);
@@ -776,7 +776,7 @@ TEST(_EmbreeRayTracer, InsertNewMeshOneMesh) {
 	// Create a mesh
 	const int id = 325;
 	const std::string mesh_name = "my mesh";
-	HF::Geometry::MeshInfo mesh(mesh_coords, id, mesh_name);
+	HF::Geometry::MeshInfo<float> mesh(mesh_coords, id, mesh_name);
 
 	// Determine if mesh insertion successful
 	if (ert.AddMesh(mesh, false)) {
@@ -796,7 +796,7 @@ TEST(_EmbreeRayTracer, InsertNewMeshVecMesh) {
 
 	// Prepare the obj file path
 	std::string teapot_path = "teapot.obj";
-	std::vector<MeshInfo> geom = HF::Geometry::LoadMeshObjects(teapot_path, HF::Geometry::ONLY_FILE);
+	std::vector<MeshInfo<float>> geom = HF::Geometry::LoadMeshObjects(teapot_path, HF::Geometry::ONLY_FILE);
 
 	// Create the EmbreeRayTracer
 	auto ert = EmbreeRayTracer(geom);
@@ -820,12 +820,12 @@ TEST(_EmbreeRayTracer, InsertNewMeshVecMesh) {
 	const std::string mesh_name_0 = "this mesh";
 	const std::string mesh_name_1 = "that mesh";
 
-	// Create each MeshInfo
-	MeshInfo mesh_0(mesh_coords_0, mesh_id_0, mesh_name_0);
-	MeshInfo mesh_1(mesh_coords_1, mesh_id_1, mesh_name_1);
+	// Create each MeshInfo<float>
+	MeshInfo<float> mesh_0(mesh_coords_0, mesh_id_0, mesh_name_0);
+	MeshInfo<float> mesh_1(mesh_coords_1, mesh_id_1, mesh_name_1);
 
-	// Create a container of MeshInfo
-	std::vector<MeshInfo> mesh_vec = { mesh_0, mesh_1 };
+	// Create a container of MeshInfo<float>
+	std::vector<MeshInfo<float>> mesh_vec = { mesh_0, mesh_1 };
 
 	// Determine if mesh insertion successful
 	if (ert.AddMesh(mesh_vec, false)) {
@@ -958,7 +958,7 @@ TEST(Performance, EmbreeRaytracer) {
 namespace C_Interface{
 	using HF::Exceptions::HF_STATUS;
 
-	MeshInfo * ConstructExamplePlane() {
+	MeshInfo<float> * ConstructExamplePlane() {
 		// Define Parameters to construct plane
 		const std::vector<float> plane_vertices{
 			-10.0f, 10.0f, 0.0f,
@@ -971,7 +971,7 @@ namespace C_Interface{
 		int id = 39;
 
 		// Store mesh and assert that it succeeds
-		HF::Geometry::MeshInfo* MI;
+		HF::Geometry::MeshInfo<float>* MI;
 		auto mesh_store_res = StoreMesh(
 			&MI, plane_indices.data(),
 			plane_indices.size(),
@@ -986,7 +986,7 @@ namespace C_Interface{
 	}
 
 	EmbreeRayTracer* ConstructTestRaytracer() {
-		MeshInfo * MI = ConstructExamplePlane();
+		MeshInfo<float> * MI = ConstructExamplePlane();
 
 		// Create RayTracer from the meshinfo we just stored
 		EmbreeRayTracer* ray_tracer;
@@ -1013,7 +1013,7 @@ namespace C_Interface{
 		// Call the raytracer function
 		EmbreeRayTracer* rt = ConstructTestRaytracer();
 
-		// Construct another instance of MeshInfo, then rotate it
+		// Construct another instance of MeshInfo<float>, then rotate it
 		auto rotated_plane = ConstructExamplePlane();
 		rotated_plane->PerformRotation(0, -90, 0);
 
@@ -1063,7 +1063,7 @@ namespace C_Interface{
 	TEST(C_EmbreeRayTracer, ConstructionWithMultipleMeshes) {
 
 		// Load meshes
-		HF::Geometry::MeshInfo** MI;
+		HF::Geometry::MeshInfo<float>** MI;
 		int num_meshes = 0;
 		auto OBJs = LoadOBJ("sponza.obj", GROUP_METHOD::BY_GROUP, 0, 0, 0, &MI, &num_meshes);
 
@@ -1091,7 +1091,7 @@ namespace C_Interface{
 		EmbreeRayTracer* ERT = ConstructTestRaytracer();
 		
 		// load every group in sponza
-		HF::Geometry::MeshInfo** MI;
+		HF::Geometry::MeshInfo<float>** MI;
 		int num_meshes = 0;
 		auto OBJs = LoadOBJ("sponza.obj", GROUP_METHOD::BY_GROUP, 0, 0, 0, &MI, &num_meshes);
 

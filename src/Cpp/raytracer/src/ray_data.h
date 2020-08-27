@@ -8,7 +8,7 @@
 #undef max
 // Forward Declares
 namespace HF::Geometry {
-    class MeshInfo;
+    template <typename T> class MeshInfo;
 }
 namespace HF::nanoGeom {
     struct Mesh;
@@ -176,7 +176,7 @@ namespace HF::RayTracer {
     public:
 
         /*! \brief Construct a new raytracer with an instance of meshinfo*/
-        NanoRTRayTracer(const HF::Geometry::MeshInfo& MI);
+        NanoRTRayTracer(const HF::Geometry::MeshInfo<float>& MI);
 
         template<typename point_type, typename dist_type = real_t>
         inline HitStruct<real_t> Intersect(
