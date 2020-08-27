@@ -16,8 +16,7 @@ using namespace HF::VisibilityGraph;
 using HF::SpatialStructures::Graph;
 using HF::SpatialStructures::Node;
 using HF::RayTracer::EmbreeRayTracer;
-using HF::Geometry::MeshInfo;
-using namespace HF::Geometry;
+using MeshInfo =  HF::Geometry::MeshInfo<float>;
 using std::vector;
 
 const std::string plane_path = "plane.obj"; // A flat plane
@@ -190,7 +189,7 @@ TEST(_visibilityGraph, AllToAll) {
 	// Note that LoadMeshObjects has two more arguments after plane_path -
 	//		an enum HF::Geometry::GROUP_METHOD (defaults to GROUP_METHOD::ONLY_FILE)
 	//		a bool (defaults to true, used to convert OBJ coordinate system to Rhino coordinates)
-	std::vector<HF::Geometry::MeshInfo> meshInfo = HF::Geometry::LoadMeshObjects(plane_path);
+	std::vector<MeshInfo> meshInfo = HF::Geometry::LoadMeshObjects(plane_path);
 
 	// Create an EmbreeRayTracer.
 	HF::RayTracer::EmbreeRayTracer tracer(meshInfo);
@@ -224,7 +223,7 @@ TEST(_visibilityGraph, GroupToGroup) {
 	// Note that LoadMeshObjects has two more arguments after plane_path -
 	//		an enum HF::Geometry::GROUP_METHOD (defaults to GROUP_METHOD::ONLY_FILE)
 	//		a bool (defaults to true, used to convert OBJ coordinate system to Rhino coordinates)
-	std::vector<HF::Geometry::MeshInfo> meshInfo = HF::Geometry::LoadMeshObjects(plane_path);
+	std::vector<MeshInfo> meshInfo = HF::Geometry::LoadMeshObjects(plane_path);
 
 	// Create an EmbreeRayTracer.
 	HF::RayTracer::EmbreeRayTracer tracer(meshInfo);
@@ -268,7 +267,7 @@ TEST(_visibilityGraph, AllToAllUndirected) {
 	// Note that LoadMeshObjects has two more arguments after plane_path -
 	//		an enum HF::Geometry::GROUP_METHOD (defaults to GROUP_METHOD::ONLY_FILE)
 	//		a bool (defaults to true, used to convert OBJ coordinate system to Rhino coordinates)
-	std::vector<HF::Geometry::MeshInfo> meshInfo = HF::Geometry::LoadMeshObjects(plane_path);
+	std::vector<MeshInfo> meshInfo = HF::Geometry::LoadMeshObjects(plane_path);
 
 	// Create an EmbreeRayTracer.
 	HF::RayTracer::EmbreeRayTracer tracer(meshInfo);

@@ -1,3 +1,4 @@
+#pragma once
 ///
 ///	\file		objloader.h
 /// \brief		Contains definitions for the <see cref="HF::Geometry">Geometry</see> namespace
@@ -10,6 +11,7 @@
 
 #include <vector>
 #include <string>
+#include "meshinfo.h"
 
 /*!
 	\brief 
@@ -26,6 +28,15 @@
 
 */
 namespace Eigen {}
+
+
+
+// [nanoRT]
+namespace HF::nanoGeom {
+	bool LoadObj(Mesh& mesh, const char* filename);
+}
+// end [nanoRT]
+
 
 
 /*!
@@ -57,13 +68,69 @@ namespace HF::Geometry{
 		MATERIAL_AND_FILE = 3 ///< UNIMPLEMENTED
 	};
 
-	class MeshInfo;
+	template <typename T>
+	struct tinyobj_attr {
+		std::vector<T> vertices;
+	};
+
+
+	template <typename T>
+	struct tinyobj_shape {
+		std::string name;
+		std::vector<int> indices;
+		std::vector<int> mat_ids;
+	};
+
+	struct tinyobj_material {
+		std::string name;
+	};
+
+	template <typename T> 
+	struct tinyobj_geometry{
+		std::vector<tinyobj_shape<T>> shapes;
+		tinyobj_attr<T> attributes;
+		std::vector<tinyobj_material> materials;
+	};
+
+	tinyobj_geometry<double> LoadMeshesFromTinyOBJ(std::string path);
+
+	template <typename T>
+	HF::Geometry::MeshInfo<T> LoadTMPMeshObjects(const std::string & path) {
+
+		// Load the mesh from tinyobj
+		tinyobj_geometry<double> geom = LoadMeshesFromTinyOBJ(path);
+
+		// Count total indexes
+		int index_count = 0;
+		for (const auto & shape : geom.shapes)
+			index_count +=shape.indices.size();
+
+
+		// Copy all indices into one big array
+		int last_index = 0;
+		std::vector<int> complete_indices(index_count);
+		for (const auto& shape : geom.shapes) {
+			std::copy(shape.indices.begin(), shape.indices.end(), complete_indices.begin() + last_index);
+			last_index += shape.indices.size();
+		}
+
+		//std::vector<T> converted_vertices = ConvertVertices<T, double>(geom.attributes.vertices);
+
+		//Convert vertices to T
+		std::vector<T> out_vertices(geom.attributes.vertices.size());
+		for (int i = 0; i < geom.attributes.vertices.size(); i++)
+			out_vertices[i] = static_cast<T>(geom.attributes.vertices[i]);
+
+		return HF::Geometry::MeshInfo<T>(out_vertices, complete_indices, 1, std::string("DoubleMesh"));
+	}
+
 
 	/// <summary> Create MeshInfo instances from the OBJ at path. </summary>
 	/// <param name="path"> Path to the OBJ to load.</param>
 	/// <param name="gm"> Method for dividing the mesh into subobjects. </param>
 	/// <param name="change_coords"> Rotate the mesh from Y-up to Z-up. </param>
 	/// <returns> A vector of meshinfo from the file at path. </returns>
+	/// \param scale Scaling factor to use for the imported mesh
 	/*!
 		\exception HF::Exceptions::InvalidOBJ The file at path was not a valid OBJ file.
 		\exception HF::Exceptions::FileNotFound No file could be found at path.
@@ -93,10 +160,11 @@ namespace HF::Geometry{
 			HF::Geometry::MeshInfo info = meshvec[0];
 		\endcode
 	*/
-	std::vector<MeshInfo> LoadMeshObjects(
+	std::vector<MeshInfo<float>> LoadMeshObjects(
 		std::string path,
 		GROUP_METHOD gm = ONLY_FILE,
-		bool change_coords = false
+		bool change_coords = false,
+		int scale = 1
 	);
 
 	/// <summary> Create MeshInfo instances from the OBJ files in path. </summary>
@@ -104,6 +172,7 @@ namespace HF::Geometry{
 	/// <param name="gm"> Method for dividing the mesh into subobjects. </param>
 	/// <param name="change_coords"> Rotate the mesh from Y-up to Z-up. </param>
 	/// <returns> A vector of meshinfo loaded from the files at path. </returns>
+	/// \param scale Scaling factor to use for the imported mesh
 	/*!
 
 		\exception HF::Exceptions::InvalidOBJ One or more of the files in paths was not a valid OBJ file.
@@ -136,10 +205,11 @@ namespace HF::Geometry{
 			}
 		\endcode
 	*/
-	std::vector<MeshInfo> LoadMeshObjects(
+	std::vector<MeshInfo<float>> LoadMeshObjects(
 		std::vector<std::string>& path,
 		GROUP_METHOD gm = ONLY_FILE,
-		bool change_coords = false
+		bool change_coords = false,
+		int scale = 1
 	);
 
 	/*!

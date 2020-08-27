@@ -11,6 +11,13 @@ target_sources(
 		src/RayRequest.cpp
 		src/embree_raytracer.h
 		src/RayRequest.h
+		src/nanort.h
+		src/ray_data.h 
+		src/nanort_raytracer.cpp
+		src/MultiRT.h
+		src/MultiRT.cpp
+		src/HitStruct.cpp
+		src/HitStruct.h
 	)
 
 # Just die if we can't find embree for now.

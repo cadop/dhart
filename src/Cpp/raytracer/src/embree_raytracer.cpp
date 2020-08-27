@@ -20,6 +20,7 @@
 using std::vector;
 
 namespace HF::RayTracer {
+
 	template <typename numeric1, typename numeric2, typename dist_type = float>
 	inline RTCRayHit ConstructHit(
 		numeric1 x, numeric1 y, numeric1 z,
@@ -61,11 +62,6 @@ namespace HF::RayTracer {
 			
 		return ray;
 	}
-
-	bool DidIntersect(int mesh_id) {
-		return  mesh_id != RTC_INVALID_GEOMETRY_ID;
-	}
-
 	/// <summary>
 	/// Check an embree device for errors.
 	/// </summary>
@@ -174,7 +170,7 @@ namespace HF::RayTracer {
 		SetupScene();
 	}
 
-	EmbreeRayTracer::EmbreeRayTracer(std::vector<HF::Geometry::MeshInfo>& MI, bool use_precise) {
+	EmbreeRayTracer::EmbreeRayTracer(std::vector<HF::Geometry::MeshInfo<float>>& MI, bool use_precise) {
 		// Throw if MI's size is less than 0
 		this->use_precise = true;
 
@@ -186,7 +182,7 @@ namespace HF::RayTracer {
 		AddMesh(MI, true);
 	}
 
-	EmbreeRayTracer::EmbreeRayTracer(HF::Geometry::MeshInfo& MI, bool use_precise) {
+	EmbreeRayTracer::EmbreeRayTracer(HF::Geometry::MeshInfo<float>& MI, bool use_precise) {
 		SetupScene();
 		this->use_precise = use_precise;
 		AddMesh(MI, true);
@@ -377,7 +373,7 @@ namespace HF::RayTracer {
 		return geom;
 	}
 
-	bool EmbreeRayTracer::AddMesh(HF::Geometry::MeshInfo& Mesh, bool Commit) {
+	bool EmbreeRayTracer::AddMesh(HF::Geometry::MeshInfo<float>& Mesh, bool Commit) {
 
 		if (Mesh.NumTris() < 1 || Mesh.NumVerts() < 1) 
 			throw HF::Exceptions::InvalidOBJ();
@@ -400,7 +396,7 @@ namespace HF::RayTracer {
 		return true;
 	}
 
-	bool EmbreeRayTracer::AddMesh(std::vector<HF::Geometry::MeshInfo>& Meshes, bool Commit)
+	bool EmbreeRayTracer::AddMesh(std::vector<HF::Geometry::MeshInfo<float>>& Meshes, bool Commit)
 	{
 		// Add every mesh in a loop
 		for (auto& mesh : Meshes)

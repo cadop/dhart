@@ -16,7 +16,7 @@
 
 using HF::RayTracer::HitStruct;
 using HF::RayTracer::EmbreeRayTracer;
-using HF::Geometry::MeshInfo;
+using MeshInfo = HF::Geometry::MeshInfo<float>;
 using HF::SpatialStructures::Graph;
 using std::vector;
 using std::array;

@@ -12,7 +12,6 @@
 #include <Graph.h>
 
 #include <unique_queue.h>
-#include <embree_raytracer.h>
 
 #include <iostream>
 #include <thread>
@@ -27,11 +26,6 @@ using HF::SpatialStructures::roundhf_tmp;
 using HF::SpatialStructures::trunchf_tmp;
 
 namespace HF::GraphGenerator{ 
-
-	GraphGenerator::GraphGenerator(RayTracer & RT, int walkable_id, int obstacle_id) 
-		: walkable_surfaces(walkable_id), obstacle_surfaces(obstacle_id) {this->ray_tracer = &RT;}
-
-
 	/*! \brief Sets the core count of OpenMP
 
 		\param cores Number of cores to use. If -1, use every as many cores as possible 
@@ -41,7 +35,24 @@ namespace HF::GraphGenerator{
 		else omp_set_num_threads(std::thread::hardware_concurrency());
 	}
 
+	GraphGenerator::GraphGenerator(HF::RayTracer::EmbreeRayTracer & rt, int walkable_id, int obstacle_id){
+		this->obstacle_surfaces = obstacle_id;
+		this->walkable_surfaces = walkable_id;
+		this->ray_tracer =  HF::RayTracer::MultiRT(&rt);
+	}
 
+	GraphGenerator::GraphGenerator(HF::RayTracer::NanoRTRayTracer & rt, int walkable_id, int obstacle_id) {
+		this->obstacle_surfaces = obstacle_id;
+		this->walkable_surfaces = walkable_id;
+		this->ray_tracer = HF::RayTracer::MultiRT(&rt);
+	}
+
+	GraphGenerator::GraphGenerator(HF::RayTracer::MultiRT & ray_tracer, int walkable_id, int obstacle_id)
+	{
+		this->obstacle_surfaces = obstacle_id;
+		this->walkable_surfaces = walkable_id;
+		this->ray_tracer = ray_tracer;
+	}
 
 	SpatialStructures::Graph GraphGenerator::IMPL_BuildNetwork(
 		const real3& start_point,
@@ -91,7 +102,7 @@ namespace HF::GraphGenerator{
 
 		// Define a queue to use for determining what nodes need to be checked
 		UniqueQueue to_do_list;
-		optional_real3 checked_start = ValidateStartPoint(*ray_tracer, start, this->params);
+		optional_real3 checked_start = ValidateStartPoint(ray_tracer, start, this->params);
 
 		// Check if the start raycast connected.
 		if (checked_start)
@@ -126,7 +137,7 @@ namespace HF::GraphGenerator{
 		// Initialize a tracker for the number of nodes that can be compared to the max nodes limit
 		int num_nodes = 0;
 
-		RayTracer& rt_ref = *this->ray_tracer;
+		RayTracer & rt_ref = this->ray_tracer;
 
 		Graph G;
 		// Iterate through every node int the todo-list while it does not reach the maximum number of nodes limit
@@ -204,7 +215,7 @@ namespace HF::GraphGenerator{
 		const auto directions = CreateDirecs(this->max_step_connection);
 
 		// Cast this to a reference to avoid dereferencing every time
-		RayTracer& rt_ref = *this->ray_tracer;
+		RayTracer& rt_ref = this->ray_tracer;
 
 		int num_nodes = 0;
 		Graph G;

@@ -24,8 +24,8 @@ using namespace HF;
 using HF::SpatialStructures::Graph;
 using HF::SpatialStructures::Node;
 using HF::RayTracer::EmbreeRayTracer;
-using HF::Geometry::MeshInfo;
-using namespace HF::Geometry;
+using MeshInfo = HF::Geometry::MeshInfo<float>;
+using HF::Geometry::LoadMeshObjects;
 
 // The Utah teapot scaled up https://en.wikipedia.org/wiki/File:Utah_teapot_simple_2.png
 // to about 6.7 x 4 x 3.14. Has 3,238 vertices, 6,320 triangles. Copied to the directory
@@ -153,7 +153,7 @@ TEST(_ViewAnalysis, SphericalViewAnalysis_LoadedMesh) {
 
 	// Load mesh, z-up
 	const std::array<float, 3> rot{ 90.0f, 0.0f, 0.0f };
-	HF::Geometry::MeshInfo** loaded_obj = nullptr;
+	MeshInfo** loaded_obj = nullptr;
 	int num_meshes = -1;
 	LoadOBJ(obj_path_str.c_str(), HF::Geometry::GROUP_METHOD::ONLY_FILE, rot[0], rot[1], rot[2], &loaded_obj, &num_meshes);
 

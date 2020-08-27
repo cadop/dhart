@@ -1,15 +1,35 @@
+#pragma once
 ///
 ///	\file		meshinfo.h
 /// \brief		Contains definitions for the <see cref = "HF::Geometry::MeshInfo">MeshInfo</see> class
 ///
 ///	\author		TBA
 ///	\date		16 Jun 2020
+#ifndef HF_MESHINFO
+#define HF_MESHINFO
 
 #include <Dense>
 #include <array>
 
 //#define EIGEN_DONT_ALIGN_STATICALLY
 //#define EIGEN_DONT_VECTORIZE
+
+// [nanoRT]
+namespace HF::nanoGeom {
+	struct Mesh {
+		size_t num_vertices;
+		size_t num_faces;
+		double* vertices;              /// [xyz] * num_vertices
+		double* facevarying_normals;   /// [xyz] * 3(triangle) * num_faces
+		double* facevarying_tangents;  /// [xyz] * 3(triangle) * num_faces
+		double* facevarying_binormals; /// [xyz] * 3(triangle) * num_faces
+		double* facevarying_uvs;       /// [xyz] * 3(triangle) * num_faces
+		double* facevarying_vertex_colors;   /// [xyz] * 3(triangle) * num_faces
+		unsigned int* faces;         /// triangle x num_faces
+		unsigned int* material_ids;   /// index x num_faces
+	};
+}
+// end [nanoRT]
 
 namespace std {
 	/// <summary> Combine the hash of value into seed. </summary>
@@ -34,9 +54,9 @@ namespace std {
 		seed ^= value + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 	}
 
-	/// <summary> Template specialization of std::hash for using std::array<float, 3>. </summary>
-	template <>
-	struct hash<std::array<float, 3>>
+	/// <summary> Template specialization of std::hash for using std::array<numeric_type, 3>. </summary>
+	template <typename T>
+	struct hash<std::array<T, 3>>
 	{
 		/// <summary> Calculate a hash for k. </summary>
 		/// <param name="k"> Reference to an array of coordinates (x, y, z) </param>
@@ -47,18 +67,18 @@ namespace std {
 				// be sure to #include "meshinfo.h"
 
 				// Create coordinates, (x, y, z)
-				std::array<float, 3> arr = { 123.0, 456.1, 789.2 };
+				std::array<numeric_type, 3> arr = { 123.0, 456.1, 789.2 };
 		
-				// Using the template specialization for std::hash (which takes a std::array<float,
+				// Using the template specialization for std::hash (which takes a std::array<numeric_type,
 				// 3>), we retrieve a seed
-				std::size_t arr_hash = std::hash<std::array<float, 3>>(arr);
+				std::size_t arr_hash = std::hash<std::array<numeric_type, 3>>(arr);
 			\endcode
 		*/
-		inline std::size_t operator()(const std::array<float, 3>& k) const
+		inline std::size_t operator()(const std::array<T, 3>& k) const
 		{
-			size_t seed = std::hash<float>()(k[0]);
-			array_hash_combine_impl(seed, std::hash<float>()(k[1]));
-			array_hash_combine_impl(seed, std::hash<float>()(k[2]));
+			size_t seed = std::hash<T>()(k[0]);
+			array_hash_combine_impl(seed, std::hash<T>()(k[1]));
+			array_hash_combine_impl(seed, std::hash<T>()(k[2]));
 			return seed;
 		}
 	};
@@ -78,6 +98,11 @@ namespace HF::Geometry {
 	struct array_and_size {
 		int size; ///< Number of elements in `data`
 		ptr_type* data; /// Pointer to some array
+
+		/* \brief Copy the contents of the array pointed to by this struct. */
+		inline std::vector<ptr_type> CopyArray() const {
+			return std::vector<ptr_type>(data, data + size);
+		}
 	};
 
 	/*!
@@ -95,13 +120,17 @@ namespace HF::Geometry {
 
 		\image html https://upload.wikimedia.org/wikipedia/commons/2/2d/Mesh_fv.jpg "MeshInfo"
 	*/
+	template <typename numeric_type = float>
 	class MeshInfo {
 	public:
 		int meshid;						///< Identifier for this mesh.
 		std::string name = "";			///< A human-readable title. 
 	private:
-		Eigen::Matrix3X<float> verts;	///< 3 by X matrix of vertices
+
+		using VertMatrix = Eigen::Matrix3X<numeric_type>;
+		VertMatrix verts;	///< 3 by X matrix of vertices
 		Eigen::Matrix3X<int> indices;	///< 3 by X matrix of indices for triangles.
+
 
 		/// <summary> Change the position of the vertex at index. </summary>
 		/// <param name="index"> Index of the vertex to change, </param>
@@ -113,7 +142,7 @@ namespace HF::Geometry {
 				// TODO: this is a private member function of MeshInfo, but it is not used by any other member function within MeshInfo
 			\endcode
 		*/
-		void SetVert(int index, float x, float y, float z);
+		void SetVert(int index, numeric_type x, numeric_type y, numeric_type z);
 
 		/// <summary>
 		/// Index vertices then insert them into verts and indices.
@@ -133,7 +162,7 @@ namespace HF::Geometry {
 				// TODO: this is a private member function of MeshInfo, but it is not used by any other member function with MeshInfo.
 			\endcode
 		*/
-		void VectorsToBuffers(const std::vector<std::array<float, 3>>& vertices);
+		void VectorsToBuffers(const std::vector<std::array<numeric_type, 3>>& vertices);
 	public:
 
 		/// <summary> Construct an empty instance of MeshInfo. </summary>
@@ -165,16 +194,16 @@ namespace HF::Geometry {
 				// be sure to #include "meshinfo.h", and #include <vector>
 
 				// Prepare the vertices
-				std::array<float, 3> vertex_0 = { 34.1, 63.9, 16.5 };
-				std::array<float, 3> vertex_1 = { 23.5, 85.7, 45.2 };
-				std::array<float, 3> vertex_2 = { 12.0, 24.6, 99.4 };
+				std::array<numeric_type, 3> vertex_0 = { 34.1, 63.9, 16.5 };
+				std::array<numeric_type, 3> vertex_1 = { 23.5, 85.7, 45.2 };
+				std::array<numeric_type, 3> vertex_2 = { 12.0, 24.6, 99.4 };
 
 				// Create an array of vertices
-				std::vector<std::array<float, 3>> vertices{ vertex_0, vertex_1, vertex_2 };
+				std::vector<std::array<numeric_type, 3>> vertices{ vertex_0, vertex_1, vertex_2 };
 
 				// This mesh contains a triangle (due to having 3 vertices), id == 3451, name ==
 				// "My Mesh" Note that vertices is passed by reference. Also, passing a
-				// std::vector<std::array<float, 3>> with (size < 1) will cause
+				// std::vector<std::array<numeric_type, 3>> with (size < 1) will cause
 				// HF::Exceptions::InvalidOBJ to be thrown.
 				HF::Geometry::MeshInfo mesh(vertices, 3451, "My Mesh");
 
@@ -186,14 +215,14 @@ namespace HF::Geometry {
 			\endcode
 		*/
 		MeshInfo(
-			const std::vector<std::array<float, 3>>& vertices,
+			const std::vector<std::array<numeric_type, 3>>& vertices,
 			int id,
 			std::string name = ""
 		);
 
 		/// <summary> Construct a new MeshInfo object from an indexed vector of vertices. </summary>
 		/// <param name="vertices">
-		/// An ordered list of floats with every 3 floats representing the x,y, and z coordinates for a single vertex.
+		/// An ordered list of numeric_types with every 3 numeric_types representing the x,y, and z coordinates for a single vertex.
 		/// </param>
 		/// <param name="indexes">
 		/// A vector of indices with each index matching up with a vertex in vertices.
@@ -207,19 +236,19 @@ namespace HF::Geometry {
 			\code
 				// be sure to #include "meshinfo.h", and #include <vector>
 
-				// Prepare the vertices. Every three floats represents one vertex.
-				std::vector<float> vertices = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
+				// Prepare the vertices. Every three numeric_types represents one vertex.
+				std::vector<numeric_type> vertices = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
 											// 0 1 2
 
 				// If indices.size() == 3, this means that vertices.size() == 9, and each member
-				// of indices represents a std::array<float, 3> i.e. indices[0] represents the
+				// of indices represents a std::array<numeric_type, 3> i.e. indices[0] represents the
 				// 0th set of (x, y, z) coordinates, {34.1, 63.9, 16.5} indices[1] represents
 				// the 1st set of (x, y, z) coordinates, {23.5, 85.7, 45.2} indices[2]
 				// represents the 2nd set of (x, y, z) coordinates, {12.0, 24.6, 99.4}
 				std::vector<int> indices = { 0, 1, 2 };
 
 				// Note that vertices and indices are passed by reference. Also, passing a
-				// std::vector<float> with a size that is not a multiple of 3, or passing a
+				// std::vector<numeric_type> with a size that is not a multiple of 3, or passing a
 				// std::vector<int> with a size that is not a multiple of 3 -- will cause
 				// HF::Exceptions::InvalidOBJ to be thrown. Also, indices.size() ==
 				// (vertices.size() / 3), because all members of indices must correspond to the
@@ -234,7 +263,7 @@ namespace HF::Geometry {
 			\endcode
 		*/
 		MeshInfo(
-			const std::vector<float>& in_vertices, 
+			const std::vector<numeric_type>& in_vertices, 
 			const std::vector<int>& in_indexes,
 			int id, 
 			std::string name = ""
@@ -258,12 +287,12 @@ namespace HF::Geometry {
 				// be sure to #include "meshinfo.h", and #include <vector>
 
 				// Prepare the vertices
-				std::array<float, 3> vertex_0 = { 34.1, 63.9, 16.5 };
-				std::array<float, 3> vertex_1 = { 23.5, 85.7, 45.2 };
-				std::array<float, 3> vertex_2 = { 12.0, 24.6, 99.4 };
+				std::array<numeric_type, 3> vertex_0 = { 34.1, 63.9, 16.5 };
+				std::array<numeric_type, 3> vertex_1 = { 23.5, 85.7, 45.2 };
+				std::array<numeric_type, 3> vertex_2 = { 12.0, 24.6, 99.4 };
 
 				// Create a vector of vertices
-				std::vector<std::array<float, 3>> vertices{ vertex_0, vertex_1, vertex_2 };
+				std::vector<std::array<numeric_type, 3>> vertices{ vertex_0, vertex_1, vertex_2 };
 
 				// Create the MeshInfo instance - this example uses the no-arg constructor
 				HF::Geometry::MeshInfo mesh;	// meshid == 0; verts is given 3 rows, 0 cols; name == "INVALID"
@@ -280,7 +309,7 @@ namespace HF::Geometry {
 				}
 			\endcode
 		*/
-		void AddVerts(const std::vector<std::array<float, 3>>& verts);
+		void AddVerts(const std::vector<std::array<numeric_type, 3>>& verts);
 	
 		/// <summary> Determine how many vertices are in this mesh. </summary>
 		/// <returns> Total number of vertices for this mesh. </returns>
@@ -295,12 +324,12 @@ namespace HF::Geometry {
 				// be sure to #include "meshinfo.h", and #include <vector>
 
 				// Prepare the vertices
-				std::array<float, 3> vertex_0 = { 34.1, 63.9, 16.5 };
-				std::array<float, 3> vertex_1 = { 23.5, 85.7, 45.2 };
-				std::array<float, 3> vertex_2 = { 12.0, 24.6, 99.4 };
+				std::array<numeric_type, 3> vertex_0 = { 34.1, 63.9, 16.5 };
+				std::array<numeric_type, 3> vertex_1 = { 23.5, 85.7, 45.2 };
+				std::array<numeric_type, 3> vertex_2 = { 12.0, 24.6, 99.4 };
 
 				// Create an array of vertices
-				std::vector<std::array<float, 3>> vertices{ vertex_0, vertex_1, vertex_2 };
+				std::vector<std::array<numeric_type, 3>> vertices{ vertex_0, vertex_1, vertex_2 };
 
 				// Create the MeshInfo
 				HF::Geometry::MeshInfo mesh(vertices, 3451, "My Mesh");
@@ -330,12 +359,12 @@ namespace HF::Geometry {
 				// be sure to #include "meshinfo.h", and #include <vector>
 
 				// Prepare the vertices
-				std::array<float, 3> vertex_0 = { 34.1, 63.9, 16.5 };
-				std::array<float, 3> vertex_1 = { 23.5, 85.7, 45.2 };
-				std::array<float, 3> vertex_2 = { 12.0, 24.6, 99.4 };
+				std::array<numeric_type, 3> vertex_0 = { 34.1, 63.9, 16.5 };
+				std::array<numeric_type, 3> vertex_1 = { 23.5, 85.7, 45.2 };
+				std::array<numeric_type, 3> vertex_2 = { 12.0, 24.6, 99.4 };
 		
 				// Create an array of vertices
-				std::vector<std::array<float, 3>> vertices(vertex_0, vertex_1, vertex_2);
+				std::vector<std::array<numeric_type, 3>> vertices(vertex_0, vertex_1, vertex_2);
 		
 				// Create the MeshInfo
 				HF::Geometry::MeshInfo mesh(vertices, 3451, "My Mesh");
@@ -365,12 +394,12 @@ namespace HF::Geometry {
 				// be sure to #include "meshinfo.h", and #include <vector>
 
 				// Prepare the vertices
-				std::array<float, 3> vertex_0 = { 34.1, 63.9, 16.5 };
-				std::array<float, 3> vertex_1 = { 23.5, 85.7, 45.2 };
-				std::array<float, 3> vertex_2 = { 12.0, 24.6, 99.4 };
+				std::array<numeric_type, 3> vertex_0 = { 34.1, 63.9, 16.5 };
+				std::array<numeric_type, 3> vertex_1 = { 23.5, 85.7, 45.2 };
+				std::array<numeric_type, 3> vertex_2 = { 12.0, 24.6, 99.4 };
 
 				// Create an array of vertices
-				std::vector<std::array<float, 3>> vertices{ vertex_0, vertex_1, vertex_2 };
+				std::vector<std::array<numeric_type, 3>> vertices{ vertex_0, vertex_1, vertex_2 };
 
 				// Create the MeshInfo
 				HF::Geometry::MeshInfo mesh(vertices, 3451, "My Mesh");
@@ -401,12 +430,12 @@ namespace HF::Geometry {
 				// be sure to #include "meshinfo.h", and #include <vector>
 
 				// Prepare the vertices
-				std::array<float, 3> vertex_0 = { 34.1, 63.9, 16.5 };
-				std::array<float, 3> vertex_1 = { 23.5, 85.7, 45.2 };
-				std::array<float, 3> vertex_2 = { 12.0, 24.6, 99.4 };
+				std::array<numeric_type, 3> vertex_0 = { 34.1, 63.9, 16.5 };
+				std::array<numeric_type, 3> vertex_1 = { 23.5, 85.7, 45.2 };
+				std::array<numeric_type, 3> vertex_2 = { 12.0, 24.6, 99.4 };
 
 				// Create an array of vertices
-				std::vector<std::array<float, 3>> vertices{ vertex_0, vertex_1, vertex_2 };
+				std::vector<std::array<numeric_type, 3>> vertices{ vertex_0, vertex_1, vertex_2 };
 
 				// Create the MeshInfo
 				HF::Geometry::MeshInfo mesh(vertices, 3451, "My Mesh");
@@ -439,20 +468,20 @@ namespace HF::Geometry {
 				// be sure to #include "meshinfo.h", and #include <vector>
 
 				// Prepare the vertices
-				std::array<float, 3> vertex_0 = { 34.1, 63.9, 16.5 };
-				std::array<float, 3> vertex_1 = { 23.5, 85.7, 45.2 };
-				std::array<float, 3> vertex_2 = { 12.0, 24.6, 99.4 };
+				std::array<numeric_type, 3> vertex_0 = { 34.1, 63.9, 16.5 };
+				std::array<numeric_type, 3> vertex_1 = { 23.5, 85.7, 45.2 };
+				std::array<numeric_type, 3> vertex_2 = { 12.0, 24.6, 99.4 };
 
 				// Create an array of vertices
-				std::vector<std::array<float, 3>> vertices{ vertex_0, vertex_1, vertex_2 };
+				std::vector<std::array<numeric_type, 3>> vertices{ vertex_0, vertex_1, vertex_2 };
 
 				// Create the MeshInfo
 				HF::Geometry::MeshInfo mesh(vertices, 3451, "My Mesh");
 
 				// Perform rotation
-				float rot_x = 10.0;
-				float rot_y = 20.0;
-				float rot_z = 30.0;
+				numeric_type rot_x = 10.0;
+				numeric_type rot_y = 20.0;
+				numeric_type rot_z = 30.0;
 
 				mesh.PerformRotation(rot_x, rot_y, rot_z);
 
@@ -463,7 +492,7 @@ namespace HF::Geometry {
 				}
 			\endcode
 		*/
-		void PerformRotation(float rx, float ry, float rz);
+		void PerformRotation(numeric_type rx, numeric_type ry, numeric_type rz);
 
 		/// <summary> Get the ID of this mesh. </summary>
 		/// <returns> The member field meshid, by value. </returns>
@@ -472,12 +501,12 @@ namespace HF::Geometry {
 				// be sure to #include "meshinfo.h", and #include <vector>
 
 				// Prepare the vertices
-				std::array<float, 3> vertex_0 = { 34.1, 63.9, 16.5 };
-				std::array<float, 3> vertex_1 = { 23.5, 85.7, 45.2 };
-				std::array<float, 3> vertex_2 = { 12.0, 24.6, 99.4 };
+				std::array<numeric_type, 3> vertex_0 = { 34.1, 63.9, 16.5 };
+				std::array<numeric_type, 3> vertex_1 = { 23.5, 85.7, 45.2 };
+				std::array<numeric_type, 3> vertex_2 = { 12.0, 24.6, 99.4 };
 		
 				// Create an array of vertices
-				std::vector<std::array<float, 3>> vertices(vertex_0, vertex_1, vertex_2);
+				std::vector<std::array<numeric_type, 3>> vertices(vertex_0, vertex_1, vertex_2);
 		
 				// Create the MeshInfo
 				HF::Geometry::MeshInfo mesh(vertices, 3451, "My Mesh");
@@ -511,12 +540,12 @@ namespace HF::Geometry {
 			\code
 				// be sure to #include "meshinfo.h", and #include <vector>
 
-				// Prepare the vertices. Every three floats represents one vertex.
-				std::vector<float> vertices = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
+				// Prepare the vertices. Every three numeric_types represents one vertex.
+				std::vector<numeric_type> vertices = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
 											// 0 1 2
 
 				// If indices.size() == 3, this means that vertices.size() == 9, and each member
-				// of indices represents a std::array<float, 3> i.e. indices[0] represents the
+				// of indices represents a std::array<numeric_type, 3> i.e. indices[0] represents the
 				// 0th set of (x, y, z) coordinates, {34.1, 63.9, 16.5} indices[1] represents
 				// the 1st set of (x, y, z) coordinates, {23.5, 85.7, 45.2} indices[2]
 				// represents the 2nd set of (x, y, z) coordinates, {12.0, 24.6, 99.4}
@@ -526,10 +555,10 @@ namespace HF::Geometry {
 				HF::Geometry::MeshInfo mesh(vertices, indices, 5901, "This Mesh");
 
 				// Retrieve copies of mesh's vertices.
-				std::vector<float> vertices_copy_0 = mesh.getRawVertices();
-				std::vector<float> vertices_copy_1 = mesh.getRawVertices();
+				std::vector<numeric_type> vertices_copy_0 = mesh.getRawVertices();
+				std::vector<numeric_type> vertices_copy_1 = mesh.getRawVertices();
 
-				// Uses std::vector<float>'s operator== to determine member equality
+				// Uses std::vector<numeric_type>'s operator== to determine member equality
 				if (vertices_copy_0 == vertices_copy_1) {
 					std::cout << "vertices_copy_0 and vertices_copy_1 share the same elements/permutation." << std::endl;
 				}
@@ -557,7 +586,7 @@ namespace HF::Geometry {
 				}
 			\endcode
 		*/
-		std::vector<float> GetIndexedVertices() const;
+		std::vector<numeric_type> GetIndexedVertices() const;
 		
 		/// <summary>
 		/// Retrieve a copy of this mesh's index buffer as a 1D array.
@@ -574,12 +603,12 @@ namespace HF::Geometry {
 			\code
 				// be sure to #include "meshinfo.h", and #include <vector>
 
-				// Prepare the vertices. Every three floats represents one vertex.
-				std::vector<float> vertices = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
+				// Prepare the vertices. Every three numeric_types represents one vertex.
+				std::vector<numeric_type> vertices = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
 										  // 0 1 2
 
 				// If indices.size() == 3, this means that vertices.size() == 9, and each member
-				// of indices represents a std::array<float, 3> i.e. indices[0] represents the
+				// of indices represents a std::array<numeric_type, 3> i.e. indices[0] represents the
 				// 0th set of (x, y, z) coordinates, {34.1, 63.9, 16.5} indices[1] represents
 				// the 1st set of (x, y, z) coordinates, {23.5, 85.7, 45.2} indices[2]
 				// represents the 2nd set of (x, y, z) coordinates, {12.0, 24.6, 99.4}
@@ -636,12 +665,12 @@ namespace HF::Geometry {
 			\code
 				// be sure to #include "meshinfo.h", and #include <vector>
 
-				// Prepare the vertices. Every three floats represents one vertex.
-				std::vector<float> vertices = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
+				// Prepare the vertices. Every three numeric_types represents one vertex.
+				std::vector<numeric_type> vertices = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
 										  // 0 1 2
 
 				// If indices.size() == 3, this means that vertices.size() == 9, and each member
-				// of indices represents a std::array<float, 3> i.e. indices[0] represents the
+				// of indices represents a std::array<numeric_type, 3> i.e. indices[0] represents the
 				// 0th set of (x, y, z) coordinates, {34.1, 63.9, 16.5} indices[1] represents
 				// the 1st set of (x, y, z) coordinates, {23.5, 85.7, 45.2} indices[2]
 				// represents the 2nd set of (x, y, z) coordinates, {12.0, 24.6, 99.4}
@@ -651,12 +680,12 @@ namespace HF::Geometry {
 				HF::Geometry::MeshInfo mesh(vertices, indices, 5901, "This Mesh");
 		
 				// Retrieve vertices as a vector of coordinates (x, y, z) Useful if your
-				// vertices were prepared from a one-dimensional container c, of float (such
+				// vertices were prepared from a one-dimensional container c, of numeric_type (such
 				// that c.size() % 3 == 0)
-				std::vector<std::array<float, 3>> vert_container = mesh.GetVertsAsArrays();
+				std::vector<std::array<numeric_type, 3>> vert_container = mesh.GetVertsAsArrays();
 			\endcode
 		*/
-		std::vector<std::array<float, 3>> GetUnindexedVertices() const;
+		std::vector<std::array<numeric_type, 3>> GetUnindexedVertices() const;
 
 		/// <summary>Change the ID of this mesh.</summary>
 		/// <param name="new_id"> New ID to assign to this mesh. </param>
@@ -664,12 +693,12 @@ namespace HF::Geometry {
 			\code
 				// be sure to #include "meshinfo.h", and #include <vector>
 
-				// Prepare the vertices. Every three floats represents one vertex.
-				std::vector<float> vertices = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
+				// Prepare the vertices. Every three numeric_types represents one vertex.
+				std::vector<numeric_type> vertices = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
 										 // 0 1 2
 
 				// If indices.size() == 3, this means that vertices.size() == 9, and each member
-				// of indices represents a std::array<float, 3> i.e. indices[0] represents the
+				// of indices represents a std::array<numeric_type, 3> i.e. indices[0] represents the
 				// 0th set of (x, y, z) coordinates, {34.1, 63.9, 16.5} indices[1] represents
 				// the 1st set of (x, y, z) coordinates, {23.5, 85.7, 45.2} indices[2]
 				// represents the 2nd set of (x, y, z) coordinates, {12.0, 24.6, 99.4}
@@ -707,15 +736,15 @@ namespace HF::Geometry {
 			\code
 				// be sure to #include "meshinfo.h", and #include <vector>
 
-				// Prepare the vertices. Every three floats represents one vertex.
-				std::vector<float> vertices_0 = { 11.0, 22.0, 33.0, 44.0, 55.0, 66.0, 77.0, 88.0, 99.0 };
+				// Prepare the vertices. Every three numeric_types represents one vertex.
+				std::vector<numeric_type> vertices_0 = { 11.0, 22.0, 33.0, 44.0, 55.0, 66.0, 77.0, 88.0, 99.0 };
 											// 0 1 2
 		
-				std::vector<float> vertices_1 = { 11.0, 22.0, 33.0, 44.0, 55.0, 66.0, 77.0, 88.0, 99.0 };
+				std::vector<numeric_type> vertices_1 = { 11.0, 22.0, 33.0, 44.0, 55.0, 66.0, 77.0, 88.0, 99.0 };
 											// 0 1 2
 		
 				// If indices_0.size() == 3, this means that vertices_0.size() == 9, and each
-				// member of indices represents a std::array<float, 3> i.e. indices[0]
+				// member of indices represents a std::array<numeric_type, 3> i.e. indices[0]
 				// represents the 0th set of (x, y, z) coordinates, {34.1, 63.9, 16.5}
 				// indices[1] represents the 1st set of (x, y, z) coordinates, {23.5, 85.7,
 				// 45.2} indices[2] represents the 2nd set of (x, y, z) coordinates, {12.0,
@@ -751,12 +780,12 @@ namespace HF::Geometry {
 			\code
 				// be sure to #include "meshinfo.h", and #include <vector>
 
-				// Prepare the vertices. Every three floats represents one vertex.
-				std::vector<float> vertices = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
+				// Prepare the vertices. Every three numeric_types represents one vertex.
+				std::vector<numeric_type> vertices = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
 										 // 0 1 2
 
 				// If indices.size() == 3, this means that vertices.size() == 9, and each member
-				// of indices represents a std::array<float, 3> i.e. indices[0] represents the
+				// of indices represents a std::array<numeric_type, 3> i.e. indices[0] represents the
 				// 0th set of (x, y, z) coordinates, {34.1, 63.9, 16.5} indices[1] represents
 				// the 1st set of (x, y, z) coordinates, {23.5, 85.7, 45.2} indices[2]
 				// represents the 2nd set of (x, y, z) coordinates, {12.0, 24.6, 99.4}
@@ -777,14 +806,14 @@ namespace HF::Geometry {
 				<< vertex[2] << ")" << std::endl;
 			\endcode
 		*/
-		std::array<float, 3> operator[](int i) const;
+		std::array<numeric_type, 3> operator[](int i) const;
 
 		/*! 
 			\brief Get a pointer to the vertex array of this mesh.
 
 			\returns A pointer to the vertex array of this mesh, and the number of elements it contains
 		*/
-		const array_and_size<float> GetVertexPointer() const;
+		const array_and_size<numeric_type> GetVertexPointer() const;
 
 		/*! 
 			\brief Get a pointer to the index array of this mesh.
@@ -793,4 +822,7 @@ namespace HF::Geometry {
 		*/
 		const array_and_size<int> GetIndexPointer() const;
 	};
+
+	template <typename T> MeshInfo()->MeshInfo<float>;
 }
+#endif

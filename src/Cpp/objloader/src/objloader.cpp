@@ -9,6 +9,7 @@
 #include <Dense>
 #include <meshinfo.h>
 #define TINYOBJLOADER_IMPLEMENTATION ///< This MUST be defined before importing tiny_obj_loader.h
+#define TINYOBJLOADER_USE_DOUBLE
 #include <tiny_obj_loader.h>
 #include <robin_hood.h>
 #include <HFExceptions.h>
@@ -20,6 +21,92 @@ using std::vector;
 using std::array;
 using std::string;
 
+using tinyobj::ObjReader;
+
+// [nanoRT]
+namespace HF::nanoGeom {
+
+	bool LoadObj(Mesh& mesh, const char* filename) {
+		// Need to have mesh.vertices, mesh.faces, mesh.num_faces
+
+		tinyobj::attrib_t attrib;
+		std::vector<tinyobj::shape_t> shapes;
+		std::vector<tinyobj::material_t> materials;
+
+		std::string warn;
+		std::string err;
+
+		bool ret = tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err, filename);
+
+		// Check for errors in the loading
+		if (!err.empty()) {
+			std::cerr << " Loading: " << err << std::endl;
+		}
+		if (!ret) {
+			exit(1);
+		}
+
+		// Get the number of faces (likely number of triangles)
+		size_t num_faces = 0;
+		// Loop over shapes
+		for (size_t s = 0; s < shapes.size(); s++)
+		{
+			// Increment the number of faces by getting the size of the indices and dividing by 3 (number of verts per face)
+			// Must be triangles for this calculation to make sense (I think)
+			num_faces += shapes[s].mesh.indices.size() / 3;
+		}
+
+		// Set the number of vertices by finding the total size of the vertex array and dividing by 3 (number of axis in point: x,y,z)
+		size_t num_vertices = attrib.vertices.size() / 3;
+		mesh.num_faces = num_faces;
+		mesh.num_vertices = num_vertices;
+		// Set a new array of doubles to the size of the number of vertices times 3 (number of axis in point)
+		mesh.vertices = new double[num_vertices * 3];
+		// Set a new array of doubles to the size of the number of faces times 3 (number of verts per face)
+		// While this is called faces, its really the indices
+		mesh.faces = new unsigned int[num_faces * 3];
+
+		// Loop over shapes
+		for (size_t s = 0; s < shapes.size(); s++)
+		{
+			// Loop over faces(polygon)
+			size_t index_offset = 0;
+			for (size_t f = 0; f < shapes[s].mesh.num_face_vertices.size(); f++)
+			{
+				int fv = shapes[s].mesh.num_face_vertices[f];
+
+				// Loop over vertices in the face.
+				for (size_t v = 0; v < fv; v++)
+				{
+					// extract the index of the start of the mesh indices
+					tinyobj::index_t idx = shapes[s].mesh.indices[index_offset + v];
+					// Assign the xyz values from the flat array
+					tinyobj::real_t vx = attrib.vertices[3 * idx.vertex_index + 0];
+					tinyobj::real_t vy = attrib.vertices[3 * idx.vertex_index + 1];
+					tinyobj::real_t vz = attrib.vertices[3 * idx.vertex_index + 2];
+
+					// set vertices to the mesh data object
+					// This could probably all be done in one step with the above 3 lines
+					mesh.vertices[3 * idx.vertex_index + 0] = vx;
+					mesh.vertices[3 * idx.vertex_index + 1] = vy;
+					mesh.vertices[3 * idx.vertex_index + 2] = vz;
+				}
+				index_offset += fv;
+			}
+
+			// Loop through the mesh indices and assign each vertices index to the face index
+			for (size_t vi = 0; vi < shapes[s].mesh.indices.size(); vi++)
+			{
+				// This should make it clearer that this really is the mesh indices despite the name "faces"
+				mesh.faces[vi] = shapes[s].mesh.indices[vi].vertex_index;
+			}
+		}
+		return true;
+	}
+
+}
+// end [nanoRT]
+
 namespace HF::Geometry {
 
 	static robin_hood::unordered_map<string, string> test_model_paths{
@@ -29,8 +116,83 @@ namespace HF::Geometry {
 		{"energy blob", "energy_blob.obj" },
 		{"sibenik", "sibenik.obj" },
 	};
-	
-	vector<MeshInfo> LoadMeshObjects(std::string path, GROUP_METHOD gm, bool change_coords)
+
+	tinyobj::ObjReader CreateReader(const std::string & path) {
+		// First, attempt to load the obj
+		tinyobj::ObjReader objloader;
+
+		// See if the filepath exists at all
+		if (!std::filesystem::exists(path)) {
+			std::cerr << " No file exists at " << path << std::endl;
+			throw HF::Exceptions::FileNotFound();
+		}
+
+		tinyobj::ObjReaderConfig config;
+		config.triangulate = true;
+		// Load the OBJ using tinyobj.
+		objloader.ParseFromFile(path, config);
+
+		// Throw if the OBJ isn't valid
+		if (!objloader.Valid() || objloader.GetShapes().size() == 0)
+		{
+			std::cerr << " The given file did not produce a valid mesh " << std::endl;
+			throw HF::Exceptions::InvalidOBJ();
+		}
+
+		return objloader;
+	}
+
+	template <typename T>
+	tinyobj_shape<T> MakeShape(const tinyobj::shape_t & shape) {
+		tinyobj_shape<T> out_shape;
+		
+		const int num_indices = shape.mesh.indices.size();
+		out_shape.indices.resize(num_indices);
+		for (int i = 0; i < num_indices; i++)
+			out_shape.indices[i] = shape.mesh.indices[i].vertex_index;
+
+		out_shape.mat_ids = shape.mesh.material_ids;
+		return out_shape;
+	}
+
+	template <typename T>
+	vector<tinyobj_shape<T>> MakeShapes(const vector<tinyobj::shape_t>& shapes) {
+		vector<tinyobj_shape<T>> out_shapes(shapes.size());
+		
+		for (int i = 0; i < shapes.size(); i++)
+			out_shapes[i] = MakeShape<T>(shapes[i]);
+		
+		return out_shapes;
+	}
+
+	vector<tinyobj_material> MakeMaterials(const vector<tinyobj::material_t> & materials) {
+		vector<tinyobj_material> out_mats(materials.size());
+		
+		for (int i = 0; i < materials.size(); i++)
+			out_mats[i].name = materials[i].name;
+		
+		return out_mats;
+	}
+
+	tinyobj_geometry<double> LoadMeshesFromTinyOBJ(std::string path)
+	{
+		tinyobj_geometry<double> out_obj;
+		ObjReader reader = CreateReader(path);
+
+		// get information from the reader.
+		auto mats = reader.GetMaterials(); // Materials of the mesh at path
+		tinyobj::attrib_t attributes = reader.GetAttrib(); // Attributes of the mesh at path
+		vector<tinyobj::shape_t> shapes = reader.GetShapes(); // Submeshes of the mesh at path
+
+		// Get the info about shapes for this mesh
+		out_obj.attributes.vertices = attributes.vertices;
+		out_obj.shapes = MakeShapes<double>(shapes);
+		out_obj.materials = MakeMaterials(mats);
+
+		return out_obj;
+	}
+
+	vector<MeshInfo<float>> LoadMeshObjects(std::string path, GROUP_METHOD gm, bool change_coords, int scale)
 	{
 		// First, attempt to load the obj
 		tinyobj::ObjReader objloader;
@@ -52,7 +214,7 @@ namespace HF::Geometry {
 		}
 
 		// get the materials, attributes, and shapes
-		vector<MeshInfo> MI; // Vector of meshinf
+		vector<MeshInfo<float>> MI; // Vector of meshinf
 		auto mats = objloader.GetMaterials(); // Materials of the mesh at path
 		tinyobj::attrib_t attributes = objloader.GetAttrib(); // Attributes of the mesh at path
 		vector<tinyobj::shape_t> shapes = objloader.GetShapes(); // Submeshes of the mesh at path
@@ -64,7 +226,20 @@ namespace HF::Geometry {
 			// A single mesh will just need to have its index arrays combined
 			int id = 0;
 			std::string name = "EntireFile";
-			const vector<float>& vertexes = static_cast<vector<float>>(verts);
+			
+			// Must be included in the other method types. It's not clear why the float conversion 
+			// wasn't done above with the attributes.vertices
+			auto vert_array = static_cast<vector<double>>(verts);
+			auto vert_scaled = vert_array;
+			// Multiply each element of array by the user defined scale value (default of 1 which does not change vertex)
+			std::transform(vert_array.begin(), vert_array.end(), vert_scaled.begin(),[&](float i) { return i * scale; });
+			// assign the float vector to the scaled method
+
+			// Cast to float
+			vector<float> vertexes(vert_array.size());
+			for (int i = 0; i < vert_array.size(); i++)
+				vertexes[i] = static_cast<float>(vert_array[i]);
+
 			vector<int> indices;
 
 			// Count total indexes
@@ -234,15 +409,15 @@ namespace HF::Geometry {
 		return test_model_paths.at(key);
 	}
 
-	vector<MeshInfo> LoadMeshObjects(vector<std::string>& path, GROUP_METHOD gm, bool change_coords)
+	vector<MeshInfo<float>> LoadMeshObjects(vector<std::string>& path, GROUP_METHOD gm, bool change_coords, int scale)
 	{
 		// Create a vector of vectors and gather all individual results
-		vector<vector<MeshInfo>> MeshObjects(path.size());
+		vector<vector<MeshInfo<float>>> MeshObjects(path.size());
 		for (int i = 0; i < path.size(); i++)
-			MeshObjects[i] = LoadMeshObjects(path[i], gm, change_coords);
+			MeshObjects[i] = LoadMeshObjects(path[i], gm, change_coords, scale);
 
 		// Compress all vectors into a single mesh and reassign meshid.
-		vector<MeshInfo> MI;
+		vector<MeshInfo<float>> MI;
 		int lid = 0;
 		for (int i = 0; i < MeshObjects.size(); i++) {
 			for (auto& mi : MeshObjects[i]) {

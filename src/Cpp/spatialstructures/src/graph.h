@@ -1849,6 +1849,8 @@ namespace HF::SpatialStructures {
 		*/
 		void ClearNodeAttributes(std::string name);
 
+		bool DumpToJson(std::string path);
+
 		/*!
 			\brief Add multiple edges to the graph.
 

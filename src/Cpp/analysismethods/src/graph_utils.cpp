@@ -1,8 +1,10 @@
 #include <graph_generator.h>
 
+#include <HitStruct.h>
 #include <Constants.h>
 #include <Edge.h>
 #include <embree_raytracer.h>
+#include <ray_data.h>
 #include <cassert>
 
 namespace HF::GraphGenerator {
@@ -106,7 +108,6 @@ namespace HF::GraphGenerator {
 	{
 		return CheckRay(RT, start_point, down, Params.precision.node_z);
 	}
-
 	optional_real3 CheckRay(
 		RayTracer& ray_tracer,
 		const real3& origin,
@@ -371,8 +372,8 @@ namespace HF::GraphGenerator {
 
 			// Add the user-defined spacing to the x and y components of the parent.
 			// Then round the result.
-			const real_t x = roundhf_tmp<real_t>(parent[0] + (x_offset * spacing[0]), GP.precision.node_spacing);
-			const real_t y = roundhf_tmp<real_t>(parent[1] + (y_offset * spacing[1]), GP.precision.node_spacing);
+			const real_t x = roundhf_tmp<real_t>(std::fma(x_offset,spacing[0], parent[0]), GP.precision.node_spacing);
+			const real_t y = roundhf_tmp<real_t>(std::fma(y_offset,spacing[1], parent[1]), GP.precision.node_spacing);
 			// Round the z value to a lower precision assuming it helps embree
 			const real_t z = roundhf_tmp<real_t>(parent[2] + spacing[2], GP.precision.node_z);
 

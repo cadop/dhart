@@ -13,6 +13,8 @@
 #include <objloader.h>
 #include <unique_queue.h>
 
+#include <MultiRT.h>
+
 using HF::SpatialStructures::Graph;
 using HF::GraphGenerator::GraphGenerator;
 using HF::RayTracer::EmbreeRayTracer;
@@ -214,7 +216,7 @@ TEST(_GraphGenerator, ValidateStartPoint) {
 
 	// Call ValidateStartPoint
 	HF::GraphGenerator::optional_real3 result = HF::GraphGenerator::ValidateStartPoint(
-		ray_tracer, start_point, params
+		HF::RayTracer::MultiRT(&ray_tracer), start_point, params
 	);
 
 	// If the ray intersected, print the result
@@ -251,7 +253,7 @@ TEST(_GraphGenerator, CheckRay) {
 
 	// Call CheckRay and capture the result
 	HF::GraphGenerator::optional_real3 result = HF::GraphGenerator::CheckRay(
-		ray_tracer, start_point, direction, node_z
+		HF::RayTracer::MultiRT(&ray_tracer), start_point, direction, node_z
 	);
 
 	// If the ray intersected, print it
@@ -353,7 +355,7 @@ TEST(_GraphGenerator, GetChildren) {
 	params.precision.ground_offset = 0.01f;
 
 	// Call GetChildren
-	auto edges = HF::GraphGenerator::GetChildren(parent, possible_children, ray_tracer, params);
+	auto edges = HF::GraphGenerator::GetChildren(parent, possible_children, HF::RayTracer::MultiRT(&ray_tracer), params);
 
 	// Print children
 	std::ostringstream out_str;
@@ -398,7 +400,7 @@ TEST(_GraphGenerator, CheckChildren) {
 	params.precision.ground_offset = 0.01f;
 
 	// Call CheckChildren 
-	auto valid_children = HF::GraphGenerator::CheckChildren(parent, possible_children, ray_tracer, params);
+	auto valid_children = HF::GraphGenerator::CheckChildren(parent, possible_children, HF::RayTracer::MultiRT(&ray_tracer), params);
 
 	// Print children
 	std::ostringstream out_str;
@@ -445,7 +447,7 @@ TEST(_GraphGenerator, CheckConnection) {
 	// Loop through potential children call each one with check connection
 	std::vector<HF::SpatialStructures::STEP> connections;
 	for (const auto& child : possible_children)
-		connections.push_back(HF::GraphGenerator::CheckConnection(parent, child, ray_tracer, params));
+		connections.push_back(HF::GraphGenerator::CheckConnection(parent, child, HF::RayTracer::MultiRT(&ray_tracer), params));
 		
 
 	// Print children
@@ -504,8 +506,8 @@ TEST(_GraphGenerator, OcclusionCheck) {
 	HF::GraphGenerator::real3 child_2{ 0,0,1 };
 
 	// Perform slope checks
-	bool occlusion_check_child_1 = HF::GraphGenerator::OcclusionCheck(parent, child_1, ray_tracer);
-	bool occlusion_check_child_2= HF::GraphGenerator::OcclusionCheck(parent, child_2, ray_tracer);
+	bool occlusion_check_child_1 = HF::GraphGenerator::OcclusionCheck(parent, child_1, HF::RayTracer::MultiRT(&ray_tracer));
+	bool occlusion_check_child_2= HF::GraphGenerator::OcclusionCheck(parent, child_2, HF::RayTracer::MultiRT(&ray_tracer));
 
 	std::cout << "Occlusion Check For Child 1 = " << (occlusion_check_child_1 ? "True" : "False") << std::endl;
 	std::cout << "Occlusion Check For Child 2 = " << (occlusion_check_child_2 ? "True" : "False") << std::endl;

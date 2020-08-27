@@ -16,6 +16,9 @@
 #include <numeric>
 #include <iostream>
 #include <charconv>
+#include <json.hpp>
+#include <fstream>
+#include <ostream>
 
 using namespace Eigen;
 using std::vector;
@@ -1350,6 +1353,25 @@ namespace HF::SpatialStructures {
 			// it contains.
 			node_attr_map.erase(name);
 		}
-
 	}
+
+	using namespace nlohmann;
+	bool Graph::DumpToJson(std::string path) {
+		json j;
+
+		j["nodes"] = json::array();
+
+		for (const auto& node : ordered_nodes)
+			j["nodes"].push_back(json::array({node[0], node[1], node[2] }));
+
+		std::ofstream out_file;
+
+		std::string json_str = j.dump();
+		out_file.open(path);
+		out_file.write(json_str.c_str(), json_str.size());
+		out_file.close();
+
+		return true;
+	}
+
 }

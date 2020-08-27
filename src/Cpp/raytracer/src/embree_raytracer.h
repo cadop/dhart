@@ -15,10 +15,11 @@
 #include <corecrt_math_defines.h>
 #include <vector>
 #include <array>
+#include <HitStruct.h>
 #define _USE_MATH_DEFINES
 
 namespace HF::Geometry {
-	class MeshInfo;
+	template <typename T> class MeshInfo;
 }
 
 /*!
@@ -63,23 +64,6 @@ namespace HF::RayTracer {
 
 	//*! \brief Determine whether this mesh did or did not intersect */
 	bool DidIntersect(int mesh_id);
-
-	/// <summary> A simple hit struct to carry all relevant information about hits. </summary>
-	template <typename numeric_type = double>
-	struct HitStruct {
-		numeric_type distance;  ///< Distance from the origin point to the hit point. Set to -1 if no hit was recorded.
-		int meshid; ///< The ID of the hit mesh. Set to -1 if no hit was recorded
-
-		HitStruct(): distance(-1), meshid(-1) {}
-
-		HitStruct(numeric_type in_distance, int in_meshid) : distance(in_distance), meshid(in_meshid) {}
-		
-		/// <summary> Determine whether or not this hitstruct contains a hit. </summary>
-		/// <returns> True if the point hit, false if it did not </returns>
-		inline bool DidHit() const {
-			return DidIntersect(this->meshid);
-		}
-	};
 
 	struct RayRequest;
 	struct Vertex;
@@ -205,7 +189,7 @@ namespace HF::RayTracer {
 
 				// for brevity
 				using HF::RayTracer::EmbreeRayTracer;
-				using HF::Geometry::MeshInfo;
+				using HF::Geometry::MeshInfo<float>;
 
 				// Create Plane
 				const std::vector<float> plane_vertices{
@@ -218,7 +202,7 @@ namespace HF::RayTracer {
 				const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 				// Create RayTracer
-				EmbreeRayTracer ert(std::vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+				EmbreeRayTracer ert(std::vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
 
 				HitStruct res;
 
@@ -273,7 +257,7 @@ namespace HF::RayTracer {
 
 				// for brevity
 				using HF::RayTracer::EmbreeRayTracer;
-				using HF::Geometry::MeshInfo;
+				using HF::Geometry::MeshInfo<float>;
 
 				// Create Plane
 				const std::vector<float> plane_vertices{
@@ -286,7 +270,7 @@ namespace HF::RayTracer {
 				const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 				// Create RayTracer
-				EmbreeRayTracer ert(std::vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+				EmbreeRayTracer ert(std::vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
 
 				// Fire a ray straight down
 				bool res = ert.Occluded_IMPL(0, 0, 1, 0, 0, -1);
@@ -337,7 +321,7 @@ namespace HF::RayTracer {
 
 		// for brevity
 		using HF::RayTracer::EmbreeRayTracer;
-		using HF::Geometry::MeshInfo;
+		using HF::Geometry::MeshInfo<float>;
 
 		// Create Plane
 		const std::vector<float> plane_vertices{
@@ -350,7 +334,7 @@ namespace HF::RayTracer {
 		const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 		// Create RayTracer
-		EmbreeRayTracer ert(std::vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+		EmbreeRayTracer ert(std::vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
 
 		// Fire a ray straight down
 		bool res = ert.Occluded_IMPL(
@@ -428,27 +412,27 @@ namespace HF::RayTracer {
 				// Requires #include "embree_raytracer.h", #include "objloader.h"
 
 				// For brevity
-				using HF::Geometry::MeshInfo;
+				using HF::Geometry::MeshInfo<float>;
 				using HF::RayTracer::EmbreeRayTracer;
 
 				// Prepare the obj file path
 				std::string teapot_path = "teapot.obj";
-				std::vector<MeshInfo> geom = HF::Geometry::LoadMeshObjects(teapot_path, HF::Geometry::ONLY_FILE);
+				std::vector<MeshInfo<float>> geom = HF::Geometry::LoadMeshObjects(teapot_path, HF::Geometry::ONLY_FILE);
 
 				// Create the EmbreeRayTracer
 				auto ert = EmbreeRayTracer(geom);
 			\endcode
 		*/
-		EmbreeRayTracer(std::vector<HF::Geometry::MeshInfo>& MI, bool use_precise_intersection = false);
+		EmbreeRayTracer(std::vector<HF::Geometry::MeshInfo<float>>& MI, bool use_precise_intersection = false);
 
 		/*! 
 			\brief Construct the raytracer using only a single mesh.
 			
-			\param MI MeshInfo instance to create the BVH with.
+			\param MI MeshInfo<float> instance to create the BVH with.
 			\param use_precise If set to true, use a more precise intesection algorithm to determine
 							   the distance between rays origin points and their points of intesection
 		*/
-		EmbreeRayTracer(HF::Geometry::MeshInfo& MI, bool use_precise = false);
+		EmbreeRayTracer(HF::Geometry::MeshInfo<float>& MI, bool use_precise = false);
 
 
 		/*! \brief Construct a raytracer using another raytracer.
@@ -583,7 +567,7 @@ namespace HF::RayTracer {
 				// Create a mesh
 				const int id = 325;
 				const std::string mesh_name = "my mesh";
-				HF::Geometry::MeshInfo mesh(mesh_coords, id, mesh_name);
+				HF::Geometry::MeshInfo<float> mesh(mesh_coords, id, mesh_name);
 
 				// Determine if mesh insertion successful
 				if (ert.AddMesh(mesh, false)) {
@@ -596,7 +580,7 @@ namespace HF::RayTracer {
 
 			`>>>Mesh insertion okay`\n
 		*/
-		bool AddMesh(HF::Geometry::MeshInfo& Mesh, bool Commit);
+		bool AddMesh(HF::Geometry::MeshInfo<float>& Mesh, bool Commit);
 
 		/// <summary> Add several new meshes to the BVH. </summary>
 /// <param name="Meshes"> A vector of meshinfo to each be added as a seperate mesh. </param>
@@ -610,12 +594,12 @@ namespace HF::RayTracer {
 		// Requires #include "embree_raytracer.h", #include "objloader.h"
 
 		// For brevity
-		using HF::Geometry::MeshInfo;
+		using HF::Geometry::MeshInfo<float>;
 		using HF::RayTracer::EmbreeRayTracer;
 
 		// Prepare the obj file path
 		std::string teapot_path = "teapot.obj";
-		std::vector<MeshInfo> geom = HF::Geometry::LoadMeshObjects(teapot_path, HF::Geometry::ONLY_FILE);
+		std::vector<MeshInfo<float>> geom = HF::Geometry::LoadMeshObjects(teapot_path, HF::Geometry::ONLY_FILE);
 
 		// Create the EmbreeRayTracer
 		auto ert = EmbreeRayTracer(geom);
@@ -639,12 +623,12 @@ namespace HF::RayTracer {
 		const std::string mesh_name_0 = "this mesh";
 		const std::string mesh_name_1 = "that mesh";
 
-		// Create each MeshInfo
-		MeshInfo mesh_0(mesh_coords_0, mesh_id_0, mesh_name_0);
-		MeshInfo mesh_1(mesh_coords_1, mesh_id_1, mesh_name_1);
+		// Create each MeshInfo<float>
+		MeshInfo<float> mesh_0(mesh_coords_0, mesh_id_0, mesh_name_0);
+		MeshInfo<float> mesh_1(mesh_coords_1, mesh_id_1, mesh_name_1);
 
-		// Create a container of MeshInfo
-		std::vector<MeshInfo> mesh_vec = { mesh_0, mesh_1 };
+		// Create a container of MeshInfo<float>
+		std::vector<MeshInfo<float>> mesh_vec = { mesh_0, mesh_1 };
 
 		// Determine if mesh insertion successful
 		if (ert.AddMesh(mesh_vec, false)) {
@@ -655,7 +639,7 @@ namespace HF::RayTracer {
 		}
 	\endcode
 */
-		bool AddMesh(std::vector<HF::Geometry::MeshInfo>& Meshes, bool Commit = true);
+		bool AddMesh(std::vector<HF::Geometry::MeshInfo<float>>& Meshes, bool Commit = true);
 
 		/// <summary>
 		/// Cast a ray and overwrite the origin with the hitpoint if it intersects any geometry.
@@ -682,7 +666,7 @@ namespace HF::RayTracer {
 
 				// for brevity
 				using HF::RayTracer::EmbreeRayTracer;
-				using HF::Geometry::MeshInfo;
+				using HF::Geometry::MeshInfo<float>;
 
 				// Create Plane
 				const std::vector<float> plane_vertices{
@@ -695,7 +679,7 @@ namespace HF::RayTracer {
 				const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 				// Create RayTracer
-				EmbreeRayTracer ert(std::vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+				EmbreeRayTracer ert(std::vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
 
 				// Fire a ray straight down
 				std::array<float, 3> origin{ 0,0,1 };
@@ -757,7 +741,7 @@ namespace HF::RayTracer {
 
 				// for brevity
 				using HF::RayTracer::EmbreeRayTracer;
-				using HF::Geometry::MeshInfo;
+				using HF::Geometry::MeshInfo<float>;
 
 				// Create Plane
 				const std::vector<float> plane_vertices{
@@ -770,7 +754,7 @@ namespace HF::RayTracer {
 				const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 				// Create RayTracer
-				EmbreeRayTracer ert(std::vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+				EmbreeRayTracer ert(std::vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
 
 				bool res;
 
@@ -849,7 +833,7 @@ namespace HF::RayTracer {
 
 				// for brevity
 				using HF::RayTracer::EmbreeRayTracer;
-				using HF::Geometry::MeshInfo;
+				using HF::Geometry::MeshInfo<float>;
 
 				// Create plane
 				const std::vector<float> plane_vertices{
@@ -862,7 +846,7 @@ namespace HF::RayTracer {
 				const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 				// Create RayTracer
-				EmbreeRayTracer ert(std::vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+				EmbreeRayTracer ert(std::vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
 
 				// Create an array of directions all containing {0,0,-1}
 				std::vector<std::array<float, 3>> directions(10, std::array<float, 3>{ 0, 0, -1 });
@@ -938,7 +922,7 @@ namespace HF::RayTracer {
 
 				// for brevity
 				using HF::RayTracer::EmbreeRayTracer;
-				using HF::Geometry::MeshInfo;
+				using HF::Geometry::MeshInfo<float>;
 
 				// Create Plane
 				const std::vector<float> plane_vertices{
@@ -951,7 +935,7 @@ namespace HF::RayTracer {
 				const std::vector<int> plane_indices{ 3, 1, 0, 2, 3, 0 };
 
 				// Create RayTracer
-				EmbreeRayTracer ert(std::vector<MeshInfo>{MeshInfo(plane_vertices, plane_indices, 0, " ")});
+				EmbreeRayTracer ert(std::vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
 
 				// Create an array of directions all containing {0,0,-1}
 				std::vector<std::array<float, 3>> directions(10, std::array<float, 3>{0, 0, -1});
@@ -1295,12 +1279,12 @@ namespace HF::RayTracer {
 				// Requires #include "embree_raytracer.h", #include "objloader.h"
 
 				// For brevity
-				using HF::Geometry::MeshInfo;
+				using HF::Geometry::MeshInfo<float>;
 				using HF::RayTracer::EmbreeRayTracer;
 
 				// Prepare the obj file path
 				std::string teapot_path = "teapot.obj";
-				std::vector<MeshInfo> geom = HF::Geometry::LoadMeshObjects(teapot_path, HF::Geometry::ONLY_FILE);
+				std::vector<MeshInfo<float>> geom = HF::Geometry::LoadMeshObjects(teapot_path, HF::Geometry::ONLY_FILE);
 
 				// Begin scope
 				{
