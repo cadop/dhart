@@ -127,8 +127,10 @@ namespace HF::Geometry {
 			throw HF::Exceptions::FileNotFound();
 		}
 
+		tinyobj::ObjReaderConfig config;
+		config.triangulate = true;
 		// Load the OBJ using tinyobj.
-		objloader.ParseFromFile(path);
+		objloader.ParseFromFile(path, config);
 
 		// Throw if the OBJ isn't valid
 		if (!objloader.Valid() || objloader.GetShapes().size() == 0)

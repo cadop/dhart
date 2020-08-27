@@ -177,8 +177,9 @@ namespace HF {
 
 	TEST(_GraphAlgorithm, NanoRTVisibilityGraphTC) {
 		auto mesh = Geometry::LoadMeshObjects("VisibilityTestCases.obj");
+		auto double_mesh = Geometry::LoadTMPMeshObjects<double>("VisibilityTestCases.obj");
 
-		HF::RayTracer::NanoRTRayTracer nrt(mesh[0]);
+		HF::RayTracer::NanoRTRayTracer nrt(double_mesh);
 		GraphGenerator::GraphGenerator NanoRTGraphGen(nrt, 0);
 		
 		HF::RayTracer::EmbreeRayTracer ert(mesh[0], true);

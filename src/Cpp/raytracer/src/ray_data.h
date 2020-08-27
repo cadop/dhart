@@ -177,6 +177,8 @@ namespace HF::RayTracer {
 
         /*! \brief Construct a new raytracer with an instance of meshinfo*/
         NanoRTRayTracer(const HF::Geometry::MeshInfo<float>& MI);
+        NanoRTRayTracer(const HF::Geometry::MeshInfo<double>& MI);
+
 
         template<typename point_type, typename dist_type = real_t>
         inline HitStruct<real_t> Intersect(

@@ -140,4 +140,25 @@ namespace HF::RayTracer{
         // the mesh and converted it to the proper types. Using a pointer allows us to construct an intersector later.
         intersector = std::unique_ptr<Intersector>(new Intersector(vertices.data(), indices.data(), sizeof(real_t) * 3));
     }
+    NanoRTRayTracer::NanoRTRayTracer(const HF::Geometry::MeshInfo<double>& MI) {
+        // Get the index and vertex arrays of the meshinfo
+        auto mi_vertices = MI.GetVertexPointer().CopyArray();
+        vertices.resize(mi_vertices.size());
+        for (int i = 0; i < mi_vertices.size(); i++)
+            vertices[i] = static_cast<vertex_t>(mi_vertices[i]);
+
+        // Convert indices to unsigned integer because that's what nanoRT uses
+        auto mi_indices = MI.GetIndexPointer().CopyArray();
+        indices.resize(mi_indices.size());
+        for (int i = 0; i < mi_indices.size(); i++)
+            indices[i] = static_cast<unsigned int>(mi_indices[i]);
+
+        // Build the BVH
+        bvh = HF::nanoGeom::nanoRT_BVH<vertex_t>(indices.data(), vertices.data(), vertices.size() / 3, indices.size() / 3);
+
+        // Create a new intersector. Note: This can't be held as a member by value since you can't even construct this object without
+        // the proper input arguments, however the input arguments cannot be created until we've copied the data from
+        // the mesh and converted it to the proper types. Using a pointer allows us to construct an intersector later.
+        intersector = std::unique_ptr<Intersector>(new Intersector(vertices.data(), indices.data(), sizeof(real_t) * 3));
+    }
 }
