@@ -205,7 +205,7 @@ TEST(_EmbreeRayTracer, HitPointsAreAccurate) {
 	}
 }
 
-
+/*
 TEST(_EmbreeRayTracer, Edge_Vert_Intersection) {
 	std::string plane_path = "VisibilityTestCases.obj";
 
@@ -224,7 +224,7 @@ TEST(_EmbreeRayTracer, Edge_Vert_Intersection) {
 		ASSERT_NE(height, 10);
 	}
 }
-
+*/
 TEST(_EmbreeRayTracer, RayTolerance) {
 	std::string plane_path = "energy_blob_zup.obj";
 	int scale = 100;
