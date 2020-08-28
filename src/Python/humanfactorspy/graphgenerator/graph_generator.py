@@ -21,7 +21,9 @@ def GenerateGraph(
     down_step: float = 0.197,
     down_slope: float = 20,
     max_step_connections: int = 1,
-    cores : int = -1
+    cores : int = -1,
+    obstacle_ids = [],
+    walkable_ids = []
 ) -> Union[Graph, None]:
     """Generate a graph of accessible space. If no graph can be generated, null will be returned. 
     
@@ -110,7 +112,9 @@ def GenerateGraph(
         down_step,
         down_slope,
         max_step_connections,
-        cores
+        cores,
+        obstacle_ids,
+        walkable_ids
     )
     if pointer:
         return Graph(pointer)

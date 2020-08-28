@@ -115,7 +115,12 @@ class MeshInfo(object):
         """ Clean up objects in C++ upon garbage collection """
         if self.__internal_ptr is not None:
             meshinfo_native_functions.DestroyMeshInfo(self.__internal_ptr)
+    
+    def __str__(self):
+        return f"({self.name}, {self.id})"
 
+    def __repr__(self):
+        return f"({self.name}, {self.id})"
 
 def ConstructPlane():
     """ Construct a new plane object. Used internally for testing """

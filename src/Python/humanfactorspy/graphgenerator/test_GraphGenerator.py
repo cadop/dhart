@@ -1,6 +1,6 @@
 import math
 
-from humanfactorspy.geometry import LoadOBJ, CommonRotations
+from humanfactorspy.geometry import LoadOBJ, CommonRotations, OBJGroupType
 from humanfactorspy.raytracer import EmbreeBVH
 from humanfactorspy.graphgenerator.graph_generator import GenerateGraph
 import humanfactorspy
@@ -81,3 +81,32 @@ def test_energyblob_size():
     # Get Nodes
     nodes = graph.getNodes()
     assert len(nodes.array) == 3450
+
+def test_obstacle_support():
+    obj_path = humanfactorspy.get_sample_model("obstacle_plane.obj")
+    # time.sleep(10)
+    # Load the obj file
+    obj = LoadOBJ(obj_path, group_type=OBJGroupType.BY_GROUP, rotation=CommonRotations.Yup_to_Zup)
+
+    # Create a BVH
+    bvh = EmbreeBVH(obj)
+
+    # Set the graph parameters
+    start_point = (0, 0, 1)
+    spacing = (0.5, 0.5, 1)
+    max_nodes = 5000
+    
+    for o in obj: print(o)
+    
+    non_obstacle_graph = GenerateGraph(
+        bvh, start_point, spacing, max_nodes, cores=-1
+    )
+    assert(non_obstacle_graph is not None)
+    
+    # Generate the Graph
+    obstacle_graph = GenerateGraph(
+        bvh, start_point, spacing, max_nodes, cores=-1, obstacle_ids=[obj[1].id]
+    )
+    assert(obstacle_graph is not None)
+
+    assert(obstacle_graph.NumNodes() < non_obstacle_graph.NumNodes())

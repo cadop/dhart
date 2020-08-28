@@ -5,6 +5,7 @@ from humanfactorspy.common_native_functions import (
     getDLLHandle,
     ConvertPointsToArray,
     GetStringPtr,
+    ConvertIntsToArray
 )
 from typing import *
 
@@ -21,7 +22,9 @@ def GenerateGraph(
     down_step: float,
     down_slope: float,
     max_step_connections: int,
-    cores : int = -1
+    cores : int = -1,
+    obstacle_geometry: List[int] = [],
+    walkable_geometry: List[int] = []
 ) -> Union[c_void_p, None]:
     """ Generate the graph in C++ with a raytracer from CreateRaytracer
 
@@ -41,22 +44,55 @@ def GenerateGraph(
     spacing_as_point[0] = c_float(spacing[0])
     spacing_as_point[1] = c_float(spacing[1])
     spacing_as_point[2] = c_float(spacing[2])
-
     graph_ptr = c_void_p(0)
-    error_code = HFPython.GenerateGraph(
-        rt_ptr,
-        byref(start_as_point),
-        byref(spacing_as_point),
-        max_nodes,
-        c_float(up_step),
-        c_float(up_slope),
-        c_float(down_step),
-        c_float(down_slope),
-        max_step_connections,
-        c_int(cores),
-        byref(graph_ptr)
-    )
 
+    # If either array is specified, we need to call the other graph function
+
+    num_walkables = len(walkable_geometry)
+    num_obstacles = len(obstacle_geometry)
+    has_geometry_ids = num_walkables > 0 or num_obstacles > 0
+    
+    if not has_geometry_ids:
+        error_code = HFPython.GenerateGraph(
+            rt_ptr,
+            byref(start_as_point),
+            byref(spacing_as_point),
+            max_nodes,
+            c_float(up_step),
+            c_float(up_slope),
+            c_float(down_step),
+            c_float(down_slope),
+            max_step_connections,
+            c_int(cores),
+            byref(graph_ptr)
+        )
+    else:
+        print("Doing obstacles")
+        print(obstacle_geometry, num_obstacles)
+        print(walkable_geometry, num_walkables)
+        walkable_array = ConvertIntsToArray(walkable_geometry)
+        obstacle_array = ConvertIntsToArray(obstacle_geometry)
+
+        print(obstacle_array)
+        print(walkable_array)
+        error_code = HFPython.GenerateGraphObstacles(
+            rt_ptr,
+            byref(start_as_point),
+            byref(spacing_as_point),
+            max_nodes,
+            c_float(up_step),
+            c_float(up_slope),
+            c_float(down_step),
+            c_float(down_slope),
+            max_step_connections,
+            c_int(cores),
+            obstacle_array,
+            walkable_array,
+            c_int(num_obstacles),
+            c_int(num_walkables),
+            byref(graph_ptr)
+        )
+    
     if error_code == HF_STATUS.OK:
         return graph_ptr
     elif error_code == HF_STATUS.NO_GRAPH:
