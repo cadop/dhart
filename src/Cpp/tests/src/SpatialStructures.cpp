@@ -557,12 +557,12 @@ Graph CreateNodeAttributeGraph() {
 
 	// Define the graph, compress it then add edges
 	Graph G;
-	G.Compress();
 	G.addEdge(Nodes[0], Nodes[2], 2);
 	G.addEdge(Nodes[0], Nodes[1], 1);
 	G.addEdge(Nodes[3], Nodes[0], 3);
 	G.addEdge(Nodes[2], Nodes[1], 4);
 	G.addEdge(Nodes[0], Nodes[4], 555);
+	G.Compress();
 
 	// Get the ids of every node since the graph assigns them
 	std::vector<int> ids(Nodes.size(), -1);

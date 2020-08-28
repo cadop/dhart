@@ -105,7 +105,7 @@ namespace HF::SpatialStructures
 				HF::SpatialStructures::Path path(members);
 			\endcode
 		*/
-		Path::Path(const std::vector<PathMember> pm);
+		Path::Path(const std::vector<PathMember> & pm);
 
 		/// \brief Add a new node to the path.
 		/// \details Constructs a PathMember and appends it to the underlying members vector.

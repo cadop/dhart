@@ -12,6 +12,7 @@
 #include <Edge.h>
 #include <Node.h>
 #include <Eigen>
+#include <iostream>
 
 namespace Eigen {
 }
@@ -377,7 +378,7 @@ namespace HF::SpatialStructures {
 
 	public:
 		/*! \brief Construct an empty edge cost set. */
-		EdgeCostSet() {};
+		EdgeCostSet() { this->costs.resize(0); };
 
 		/*! 
 			\brief Create an edge cost set and allocate a specific size.
@@ -420,28 +421,44 @@ namespace HF::SpatialStructures {
 			\param i index to get the cost of
 			\returns the value at index i in  costs.
 		*/
-		inline float& operator[](int i) { return this->costs[i]; }
+		inline float& operator[](int i) { 
+			assert(this->bounds_check(i));
+			return this->costs[i]; 
+		}
+
+		inline bool bounds_check(int i) const {
+			return i >= this->size() || i < 0;
+		}
 
 		/*!
 			\brief Index internal values array
 			\param i index to get the cost of
 			\returns the value at index i in  costs.
 		*/
-		inline float operator[](int i) const { return this->costs[i]; }
+		inline float operator[](int i) const { 
+			assert(this->bounds_check(i));
+			return this->costs[i]; 
+		}
 
 		/*! 
 			\brief Get the pointer to the start of this array.
 		
 			\returns a pointer to the value of this EdgeCostSet's internal costs array
 		*/
-		inline float* GetPtr() { return this->costs.data(); }
+		inline float* GetPtr() {
+			assert(this->costs.size() > 0);
+			return this->costs.data();
+		}
 		
 		/*! 
 			\brief Get the pointer to the start of this array.
 		
 			\returns a pointer to the value of this EdgeCostSet's internal costs array
 		*/
-		inline const float* GetPtr() const { return this->costs.data(); }
+		inline const float* GetPtr() const { 
+			assert(this->costs.size() == 0);
+			return this->costs.data(); 
+		}
 
 	};
 
@@ -485,7 +502,7 @@ namespace HF::SpatialStructures {
 		EdgeMatrix edge_matrix;				///< The underlying CSR containing edge information.
 
 		std::string default_cost = "Distance";/// < The default cost type of the graph. 
-		robin_hood::unordered_map<std::string, EdgeCostSet> edge_cost_maps; ///< Hashmap containing evey alternate cost type
+		std::unordered_map<std::string, EdgeCostSet> edge_cost_maps; ///< Hashmap containing evey alternate cost type
 
 		/*!\brief Indicates that the graph has cost arrays.
 
@@ -614,7 +631,7 @@ namespace HF::SpatialStructures {
 			\pre Key does not belong to the default graph.
 
 		*/
-		bool HasCostArray(std::string key) const;
+		bool HasCostArray(const std::string & key) const;
 
 		/*!
 			\brief Get a reference to the edge matrix at the given key.
@@ -1768,7 +1785,7 @@ namespace HF::SpatialStructures {
 				// TODO example
 			\endcode
 		*/
-		Subgraph GetSubgraph(int parent_id, const std::string& cost_type = "") const;
+		Subgraph GetSubgraph(int parent_id, const std::string & cost_type = "") const;
 
 		/// <summary>
 		/// Add an attribute to the node at id
@@ -1788,7 +1805,7 @@ namespace HF::SpatialStructures {
 				// TODO example
 			\endcode
 		*/
-		void AddNodeAttribute(int id, std::string attribute, std::string score);
+		void AddNodeAttribute(int id, const std::string & attribute, const std::string & score);
 
 		/// <summary>
 		/// Add an attribute to the node at id. If the node at id already has a score for the
@@ -1849,7 +1866,7 @@ namespace HF::SpatialStructures {
 		*/
 		void ClearNodeAttributes(std::string name);
 
-		bool DumpToJson(std::string path);
+		bool DumpToJson(const std::string & path);
 
 		/*!
 			\brief Add multiple edges to the graph.
