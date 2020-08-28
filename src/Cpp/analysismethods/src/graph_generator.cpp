@@ -36,23 +36,24 @@ namespace HF::GraphGenerator{
 		else omp_set_num_threads(std::thread::hardware_concurrency());
 	}
 
-	template <typename Raytracer>
-	inline void setupRT(GraphGenerator* gg, Raytracer rt, std::vector<int> obs_ids, std::vector<int> walk_ids ) {
-		gg->RayTracer = MultiRT(rt);
-		gg->params.geom_ids = CreateGeometryIDDictionary(obs_ids, walk_ids);
+	template <typename raytracer_type>
+	inline void setupRT(GraphGenerator* gg, raytracer_type & rt, const std::vector<int> & obs_ids, const std::vector<int> & walk_ids ) {
+		gg->ray_tracer = HF::RayTracer::MultiRT(&rt);
+		gg->params.geom_ids.SetGeometryIds(obs_ids, walk_ids);
 	}
 
 	GraphGenerator::GraphGenerator(HF::RayTracer::EmbreeRayTracer & rt, const vector<int> & obstacle_ids, const vector<int> & walkable_ids){
-		this->ray_tracer =  HF::RayTracer::MultiRT(&rt);
+		setupRT<HF::RayTracer::EmbreeRayTracer> (this, rt, obstacle_ids, walkable_ids);
 	}
 
 	GraphGenerator::GraphGenerator(HF::RayTracer::NanoRTRayTracer & rt, const vector<int> & obstacle_ids, const vector<int> & walkable_ids) {
-		this->ray_tracer = HF::RayTracer::MultiRT(&rt);
+		setupRT<HF::RayTracer::NanoRTRayTracer> (this, rt, obstacle_ids, walkable_ids);
 	}
 
 	GraphGenerator::GraphGenerator(HF::RayTracer::MultiRT & ray_tracer, const vector<int> & obstacle_ids, const vector<int> & walkable_ids)
 	{
-		this->ray_tracer = ray_tracer;
+		this->params.geom_ids.SetGeometryIds(obstacle_ids, walkable_ids);
+		this->params.geom_ids.SetGeometryIds(obstacle_ids, walkable_ids);
 	}
 
 	SpatialStructures::Graph GraphGenerator::IMPL_BuildNetwork(

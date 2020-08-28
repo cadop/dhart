@@ -34,6 +34,22 @@ EmbreeRayTracer CreateGGExmapleRT() {
 	return ray_tracer;
 }	
 
+const std::string obstacle_plane_path = "obstacle_plane.obj";
+const std::string obstacle_layer = "Obstacle";
+EmbreeRayTracer CreateObstacleExampleRT() {
+
+	// Load an OBJ containing a simple plane
+	auto mesh = HF::Geometry::LoadMeshObjects(obstacle_plane_path, HF::Geometry::BY_GROUP, true);
+
+	// Create a raytracer using this obj
+	EmbreeRayTracer ray_tracer = HF::RayTracer::EmbreeRayTracer(mesh);
+
+	for (const auto& m : mesh)
+		std::cout << m.name << " " << m.meshid << std::endl;
+
+	return ray_tracer;
+}
+
 std::ostringstream PrintGraph(const Graph & g) {
 
 	//![EX_PrintGraph]
@@ -110,7 +126,45 @@ TEST(_GraphGenerator, BuildNetwork) {
 	ASSERT_EQ(graph_nodes.size(), expected_nodes.size());
 
 	ComparePoints(graph_nodes, expected_nodes);
+}
 
+TEST(_GraphGenerator, BuildNetworkObstacles) {
+	EmbreeRayTracer ray_tracer = CreateObstacleExampleRT();
+
+	// Create a graphgenerator using the raytracer we just created
+	HF::GraphGenerator::GraphGenerator GG = GraphGenerator::GraphGenerator(ray_tracer);
+
+	// Setup Graph Parameters
+	std::array<float, 3> start_point{ 0,0,0.25 };
+	std::array<float, 3> spacing{ 0.5,0.5,1 };
+	int max_nodes = 1000;
+	int up_step = 1; int down_step = 1;
+	int up_slope = 45; int down_slope = 45;
+	int max_step_connections = 1;
+
+	// Generate the graph using our parameters
+	HF::SpatialStructures::Graph non_obstacle_graph = GG.BuildNetwork(
+		start_point,
+		spacing,
+		max_nodes,
+		up_step, down_step,
+		up_slope, down_slope,
+		max_step_connections
+	);
+
+	HF::GraphGenerator::GraphGenerator GG_Obstacle = GraphGenerator::GraphGenerator(ray_tracer, std::vector<int>{2});
+
+	// Generate the graph using our parameters
+	HF::SpatialStructures::Graph obstacle_graph = GG_Obstacle.BuildNetwork(
+		start_point,
+		spacing,
+		max_nodes,
+		up_step, down_step,
+		up_slope, down_slope,
+		max_step_connections
+	);
+
+	ASSERT_LT(obstacle_graph.size(), non_obstacle_graph.size());
 }
 
 TEST(_GraphGenerator, CrawlGeom) {

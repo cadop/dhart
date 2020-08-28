@@ -116,15 +116,16 @@ namespace HF::GraphGenerator {
 		
 		// If the target is both or the geometry rules are set to NO_FLAG, all hits are counted as
 		// being on walkable geometry
-		if (goal == HIT_FLAG::BOTH || geom_dict.Mode == GeometryFilterMode::ALL_INTERSECTIONS) return true;
+		if (geom_dict.Mode == GeometryFilterMode::ALL_INTERSECTIONS || goal == HIT_FLAG::BOTH)
+			return true;
 		
 		// Otherwise do different checks based on the ruleset
-		if (geom_dict.Mode == GeometryFilterMode::OBSTACLES_ONLY)
+		else if (geom_dict.Mode == GeometryFilterMode::OBSTACLES_ONLY)
 			// If only obstacles are specified, this works like a blacklist/whitelist
 			if (goal == OBSTACLES)
 				return geom_dict[id] == HIT_FLAG::OBSTACLES;
 			else
-				return goal != OBSTACLES;
+				return geom_dict[id] != HIT_FLAG::OBSTACLES;
 
 		else if (geom_dict.Mode == GeometryFilterMode::OBSTACLES_AND_FLOORS)
 			// In OBSTACLES_AND_FLOORS mode, the id's type must exactly match the goal

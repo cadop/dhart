@@ -168,12 +168,12 @@ namespace HF::GraphGenerator {
 		GeometryFilterMode Mode = GeometryFilterMode::ALL_INTERSECTIONS;
 		/*! \brief Set geometry ids as being walkable or obstacles*/
 		inline void SetGeometryIds(
-			const std::vector<int> & walkable_geometry, 
-			const std::vector<int> & obstacle_geometry)
+			const std::vector<int> & obstacle_geometry, 
+			const std::vector<int> & walkable_geometry)
 		{
-			for (auto id : walkable_geometry)
-				this->Set(id, HIT_FLAG::OBSTACLES);
 			for (auto id : obstacle_geometry)
+				this->Set(id, HIT_FLAG::OBSTACLES);
+			for (auto id : walkable_geometry)
 				this->Set(id, HIT_FLAG::FLOORS);
 
 			DetermineFilterMode(walkable_geometry, obstacle_geometry);
@@ -181,7 +181,7 @@ namespace HF::GraphGenerator {
 
 		/*! \brief Check if this id exists in the dictionary. */
 		inline bool HasKey(int id) const {
-			return internal_dictionary.count(id) == 0;
+			return internal_dictionary.count(id) >= 1;
 		}
 
 		/*
@@ -193,6 +193,7 @@ namespace HF::GraphGenerator {
 		*/
 		inline HIT_FLAG operator[](int id) const {
 			if (!HasKey(id)) return HIT_FLAG::NO_FLAG;
+			return internal_dictionary.at(id);
 		}
 
 		/*! \brief Set the value of a key in the internal dictionary.
@@ -206,8 +207,6 @@ namespace HF::GraphGenerator {
 			internal_dictionary[id] = flag;
 		}
 	};
-
-
 
 	using Dict_t = Hit_Dict;
 	/*! \brief Holds parameters for the GraphGenerator. */
