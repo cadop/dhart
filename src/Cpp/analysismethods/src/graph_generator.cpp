@@ -36,18 +36,6 @@ namespace HF::GraphGenerator{
 		else omp_set_num_threads(std::thread::hardware_concurrency());
 	}
 
-	Dict_t CreateGeometryIDDictionary(const vector<int> & obstacles, const vector<int> & walkables) {
-	
-		Dict_t out_dict;
-
-		for (auto id : obstacles)
-			out_dict[id] = HIT_FLAG::OBSTACLES;
-		for (auto id : walkables)
-			out_dict[id] = HIT_FLAG::FLOORS;
-
-		return out_dict;
-	}
-
 	template <typename Raytracer>
 	inline void setupRT(GraphGenerator* gg, Raytracer rt, std::vector<int> obs_ids, std::vector<int> walk_ids ) {
 		gg->RayTracer = MultiRT(rt);

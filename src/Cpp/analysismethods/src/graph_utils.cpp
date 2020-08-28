@@ -109,14 +109,26 @@ namespace HF::GraphGenerator {
 		return CheckRay(RT, start_point, down, Params.precision.node_z, HIT_FLAG::FLOORS, Params.geom_ids);
 	}
 
-	inline bool checkHit(HIT_FLAG goal, int id, const Dict_t & geom_dict) {
-		// If it's both, then any intersection is good
-		if (goal == HIT_FLAG::BOTH || geom_dict.empty()) return true;
+	/*! 
+		\brief Determine if a hit is against the geometry type specified
+	*/
+	inline bool CheckGeometryID(HIT_FLAG goal, int id, const Dict_t & geom_dict) {
 		
-		// If this doesn't exist in the hashmap, return false;
-		if (geom_dict.count(id) == 0) return false;
+		// If the target is both or the geometry rules are set to NO_FLAG, all hits are counted as
+		// being on walkable geometry
+		if (goal == HIT_FLAG::BOTH || geom_dict.Mode == GeometryFilterMode::ALL_INTERSECTIONS) return true;
 		
-		return(goal == geom_dict.at(id));
+		// Otherwise do different checks based on the ruleset
+		if (geom_dict.Mode == GeometryFilterMode::OBSTACLES_ONLY)
+			// If only obstacles are specified, this works like a blacklist/whitelist
+			if (goal == OBSTACLES)
+				return geom_dict[id] == HIT_FLAG::OBSTACLES;
+			else
+				return goal != OBSTACLES;
+
+		else if (geom_dict.Mode == GeometryFilterMode::OBSTACLES_AND_FLOORS)
+			// In OBSTACLES_AND_FLOORS mode, the id's type must exactly match the goal
+			return (goal == geom_dict[id]);
 	}
 
 	optional_real3 CheckRay(
@@ -130,11 +142,11 @@ namespace HF::GraphGenerator {
 		// Setup default params
 		HitStruct<real_t> res;
 
-		// Switch Geometry based on hitflag
+		// Cast the ray. On success, this returns the ID and distance to intersection.
 		res = ray_tracer.Intersect(origin, direction);
 
-		// If successful, make a copy of the node, move it, then return it
-		if (res.DidHit() && checkHit(flag, res.meshid, geometry_dict)) {
+		// Check if it hit and the ID of the geometry matches what we were looking for. 
+		if (res.DidHit() && CheckGeometryID(flag, res.meshid, geometry_dict)) {
 			// Create a new optional point with a copy of the origin
 			optional_real3 return_pt(origin);
 

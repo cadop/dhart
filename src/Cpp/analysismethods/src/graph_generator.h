@@ -111,6 +111,8 @@ namespace HF::GraphGenerator {
 	when casting a ray.
 */
 	enum HIT_FLAG {
+		/// No flag set.
+		NO_FLAG = 0,
 		/// Floors only.
 		FLOORS = 1,
 		/// Obstacles only.
@@ -119,7 +121,95 @@ namespace HF::GraphGenerator {
 		BOTH = 3
 	};
 
-	using Dict_t = std::unordered_map<int, HIT_FLAG>;
+	using hashmap = std::unordered_map<int, HIT_FLAG>;
+	
+	/*! \brief Different rules for how geometry is filtered by the graph generator. 
+	
+		\remarks
+		Each different filter mode was created to allow for different uses of the graph generator
+		depending on how much geometry was specifically specified to be in either group. This
+		allows for users to accept all geometry, Blacklist some geometry, or Blacklist and whitelist
+		some geometry from graph generation. 
+	*/
+	enum class GeometryFilterMode {
+		ALL_INTERSECTIONS = 0, ///< Consider all geometry as walkable surfaces
+		OBSTACLES_ONLY = 1, ///< Consider all geometry that isn't an obstacle as walkable
+		OBSTACLES_AND_FLOORS ///< Explicitly tag geometry ids as either obstacle or floor. Any ids outside of these ranges will always fail. 
+	};
+
+	/*! \brief Manages rules and ids for different types of geometry in the graph generator*/
+	struct Hit_Dict {
+
+	private:
+		hashmap internal_dictionary;
+
+		/*! \brief Set the filter mode of this Hit_Dict based on the input types. 
+		
+			\details
+			If the walkable array is empty, then set the mode to obstacles only. 
+			If the obstacle and the walkable arrays are empty set the mode to none
+			If both obstacle and walkable arrays are specified, set this mode to 
+			obstacles and floors.
+		
+		*/
+		inline void DetermineFilterMode(
+			const std::vector<int>& walkable,
+			const std::vector<int>& obstacle)
+		{
+			bool has_walkable = !(walkable.empty());
+			bool has_obstacle = !(obstacle.empty());
+
+			if (has_walkable && has_obstacle) this->Mode = GeometryFilterMode::OBSTACLES_AND_FLOORS;
+			else if (has_obstacle && !has_walkable) this->Mode = GeometryFilterMode::OBSTACLES_ONLY;
+			else this->Mode = GeometryFilterMode::ALL_INTERSECTIONS;
+		}
+
+	public:
+		GeometryFilterMode Mode = GeometryFilterMode::ALL_INTERSECTIONS;
+		/*! \brief Set geometry ids as being walkable or obstacles*/
+		inline void SetGeometryIds(
+			const std::vector<int> & walkable_geometry, 
+			const std::vector<int> & obstacle_geometry)
+		{
+			for (auto id : walkable_geometry)
+				this->Set(id, HIT_FLAG::OBSTACLES);
+			for (auto id : obstacle_geometry)
+				this->Set(id, HIT_FLAG::FLOORS);
+
+			DetermineFilterMode(walkable_geometry, obstacle_geometry);
+		}
+
+		/*! \brief Check if this id exists in the dictionary. */
+		inline bool HasKey(int id) const {
+			return internal_dictionary.count(id) == 0;
+		}
+
+		/*
+			\brief Get the flag of the geometry in this hit dictionary. 
+		
+			\remarks
+			Unlike the standard square brackets operator of std::unordered_map, this gaurantees
+			no memory is allocated. Note that this can't be used to assign keys. 
+		*/
+		inline HIT_FLAG operator[](int id) const {
+			if (!HasKey(id)) return HIT_FLAG::NO_FLAG;
+		}
+
+		/*! \brief Set the value of a key in the internal dictionary.
+		
+			\details
+			If an id already is in the dictionary, it's value will be overridden 
+			by the new value.
+		
+		*/
+		inline void Set(int id, HIT_FLAG flag) {
+			internal_dictionary[id] = flag;
+		}
+	};
+
+
+
+	using Dict_t = Hit_Dict;
 	/*! \brief Holds parameters for the GraphGenerator. */
 	struct GraphParams {
 		real_t up_step;	 ///< Maximum height of a step the graph can traverse.Any steps higher this will be considered inaccessible.
