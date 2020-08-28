@@ -7,10 +7,11 @@
 #define NOMINMAX
 #include <graph_generator.h>
 #include <Constants.h>
-#include <Node.h>
+#include <node.h>
 #include <Edge.h>
-#include <Graph.h>
+#include <graph.h>
 #include <robin_hood.h>
+#include <omp.h>
 
 #include <unique_queue.h>
 
