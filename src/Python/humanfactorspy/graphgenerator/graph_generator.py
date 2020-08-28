@@ -22,11 +22,11 @@ def GenerateGraph(
     down_slope: float = 20,
     max_step_connections: int = 1,
     cores : int = -1,
-    obstacle_ids = [],
-    walkable_ids = []
+    obstacle_ids : List[int] = [],
+    walkable_ids : List[int] = []
 ) -> Union[Graph, None]:
     """Generate a graph of accessible space. If no graph can be generated, null will be returned. 
-    
+
     Notes:
         The graph generator guarantees the order of nodes in the array to correspond 
         with the id. This may not be true if the graph is post-modified through adding edges. 
@@ -54,10 +54,28 @@ def GenerateGraph(
             edges in the graph, and as a result the amount of memory the algorithm requires.
         cores (int, optional):  Number of cores to use. -1 will use all available cores, 
             and 0 will run a serialized version of the algorithm.
+        obstacle_ids : Ids of geometry to consider as obstacles
+        walkable_ids : Ids of geometry to be considered as walkable
 
     Returns:
         Union[Graph, None]: If the graph fails to generate with these parameters, return none
             otherwise return the new graph
+
+    Obstacles:
+        The Graph Generator supports marking specific geometry as walkable or 
+        obstacles. Obstacle surfaces are surfaces that the graph generator is 
+        not allowed to generate nodes on, while walkable surfaces are the only 
+        surfaces that the graph generator is permitted to generate nodes on. 
+        Depending on what arguments are first passed to the graph generator, it 
+        will use different rules for determining which of the inputs are 
+        obstacles and which are not. When no geometry ids are specified, all 
+        geometry is considered walkable. When only obstacle surfaces are 
+        specified, all geometry other than that in the obstacles array are 
+        considered walkable. If both an obstacle and walkable array are 
+        specified then obstacles will be considered inaccessible, walkable 
+        surfaces will be accessible, and all geometry not in either array will 
+        be considered not traversable.
+
 
     Examples:
         Generate a graph on the example plane, then print its nodes

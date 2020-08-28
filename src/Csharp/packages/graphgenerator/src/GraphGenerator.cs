@@ -16,6 +16,16 @@ using System.Linq;
     offered by HumanFactors, allowing for it to be the starting point of other analysis methods within
     HumanFactors.
     
+	\par Obstacle Support
+	The Graph Generator supports marking specific geometry as walkable or obstacles. Obstacle surfaces  are surfaces
+	that the graph generator is not allowed to generate nodes on, while walkable surfaces are the only surfaces that the
+	graph generator is permitted to generate nodes on. Depending on what arguments are first passed to the graph generator,
+	it will use different rules for determining which of the inputs are obstacles and which are not. When no geometry
+	ids are specified, all geometry is considered walkable. When only obstacle surfaces are specified, all geometry
+	other than that in the obstacles array are considered walkable. If both an obstacle and walkable array are specified
+	then obstacles will be considered inaccessible, walkable surfaces will be accessible, and all geometry not in
+	either array will be considered not traversable.
+
     \note 
     All arguments are in meters for distances and degrees for angles
     unless otherwise specified. For all calculations, the Graph Generator assumes
@@ -52,13 +62,15 @@ namespace HumanFactors.GraphGenerator
          The maximum downward slope the graph can traverse. Any slopes steeper than this will be
          considered inaccessible.
 
-         \param max_step_connections Multiplier for number of children to generate for each node. Increasing this value will
-         increase the number of edges in the graph, and as a result the amount of memory the
-         algorithm requires.
+        \param max_step_connections Multiplier for number of children to generate for each node. Increasing this value will
+        increase the number of edges in the graph, and as a result the amount of memory the
+        algorithm requires.
 
-         \param core_count Number of cores to use. -1 will use all available cores, and 0 will run a serialized version of the algorithm.
+        \param core_count Number of cores to use. -1 will use all available cores, and 0 will run a serialized version of the algorithm.
+		\param walkable_id IDs of geometry to be considered as obstacles
+		\param obstacle_id IDs of geometry to be considered as walkable surfaces
          
-         \returns The resulting graph or, If no nodes were generated, null.
+        \returns The resulting graph or, If no nodes were generated, null.
          
          \note All parameters relating to distances are in meters, and all angles are in degrees.
          \note Geometry MUST be Z-UP in order for this to work. 
@@ -96,6 +108,7 @@ namespace HumanFactors.GraphGenerator
             int[] obstacle_ids = null,
             int[] walkable_ids = null)
         {
+            // Generate the graph in native code
             IntPtr graph_ptr = NativeMethods.C_GenerateGraph(
                  bvh.Pointer,
                  start_point,
@@ -111,6 +124,8 @@ namespace HumanFactors.GraphGenerator
                  walkable_ids
              );
 
+            // If null was returned, return null, otherwise
+            // wrap the graph pointer in the C# graph type
             if (graph_ptr == IntPtr.Zero)
                 return null;
             else

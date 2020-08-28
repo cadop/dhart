@@ -31,6 +31,8 @@ namespace HumanFactors.GraphGenerator
 			increase the number of edges in the graph, and as a result the amount of memory the
 			algorithm requires.
 			\param core_count Number of cores to use. -1 will use all available cores, and 0 will run a serialized version of the algorithm.
+			\param walkable_id IDs of geometry to be considered as obstacles
+			\param obstacle_id IDs of geometry to be considered as walkable surfaces
 
 			\returns 
 			A pointer to a graph generated with the given parameters or a null pointer if no graph could be generated with the 
@@ -54,10 +56,12 @@ namespace HumanFactors.GraphGenerator
 			float[] start_arr = start_point.ToArray();
 			float[] spacing_arr = spacing.ToArray();
 
+			// If obstacles/IDs are null, conider their links as 0
 			int num_obstacles = (obstacle_ids != null) ? obstacle_ids.Length : 0;
 			int num_walkables = (walkable_ids != null) ? walkable_ids.Length : 0;
 
-			// If obstacles/walkables are specified then use them. 
+			// Call the basic graph enerator if there's no obstacle geometry, otherwise call
+			// the obstacle version of the graph generator
 			HF_STATUS res = HF_STATUS.GENERIC_ERROR;
 			if (num_obstacles == 0)
 			{
@@ -96,7 +100,7 @@ namespace HumanFactors.GraphGenerator
 				);
 			}
 
-			// This indicates that a graph has failed to generate. 
+			// Return a null pointer if no graph could be generated
 			if (res == HF_STATUS.NO_GRAPH)
 				return IntPtr.Zero;
 			else

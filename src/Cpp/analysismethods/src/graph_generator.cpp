@@ -37,6 +37,15 @@ namespace HF::GraphGenerator{
 		else omp_set_num_threads(std::thread::hardware_concurrency());
 	}
 
+	/*! \brief Converts the raytracer to a multiRT if required, then map geometry ids to hitflags 
+		
+		\param gg Pointer to the graph generator to update
+		\param obs_ids array of geometry ids to set as obstacles
+		\param walk_ids Array of geometry ids to set as walkable
+
+		\post `gg` will have it's geometry map populated with the passed geometry ids and it's raytracer
+			  set to a MultiRT containing `gg`
+	*/
 	template <typename raytracer_type>
 	inline void setupRT(GraphGenerator* gg, raytracer_type & rt, const std::vector<int> & obs_ids, const std::vector<int> & walk_ids ) {
 		gg->ray_tracer = HF::RayTracer::MultiRT(&rt);
@@ -53,7 +62,7 @@ namespace HF::GraphGenerator{
 
 	GraphGenerator::GraphGenerator(HF::RayTracer::MultiRT & ray_tracer, const vector<int> & obstacle_ids, const vector<int> & walkable_ids)
 	{
-		this->params.geom_ids.SetGeometryIds(obstacle_ids, walkable_ids);
+		this->ray_tracer = ray_tracer;
 		this->params.geom_ids.SetGeometryIds(obstacle_ids, walkable_ids);
 	}
 
@@ -71,14 +80,11 @@ namespace HF::GraphGenerator{
 		real_t node_spacing_precision,
 		real_t ground_offset)
 	{
-		
-
 		if (ground_offset < node_z_precision)
 		{
 			std::cerr << "Ground offset is less than z-precision. Setting node offset to Z-Precision." << std::endl;
 			ground_offset = node_z_precision;
 			//std::logic_error("Ground offset is less than Z-Precision");
-
 		}
 
 		// Store parameters in params
@@ -128,7 +134,6 @@ namespace HF::GraphGenerator{
 		}
 		else
 			return Graph();
-
 	}
 
 	Graph GraphGenerator::CrawlGeomParallel(UniqueQueue& todo)
@@ -259,7 +264,6 @@ namespace HF::GraphGenerator{
 			// Increment node count
 			++num_nodes;
 		}
-
 		return G;
 	}
 }

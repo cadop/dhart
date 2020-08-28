@@ -38,7 +38,7 @@ namespace HF::SpatialStructures {
 	offered by HumanFactors, allowing for it to be the starting point of other analysis methods within
 	HumanFactors.
 
-	\par Differentiating Surfaces
+	\par Obstacle Support
 	The Graph Generator supports marking specific geometry as walkable or obstacles. Obstacle surfaces  are surfaces
 	that the graph generator is not allowed to generate nodes on, while walkable surfaces are the only surfaces that the
 	graph generator is permitted to generate nodes on. Depending on what arguments are first passed to the graph generator,

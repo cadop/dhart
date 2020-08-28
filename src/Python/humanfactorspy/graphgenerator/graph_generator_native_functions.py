@@ -11,7 +11,6 @@ from typing import *
 
 HFPython = getDLLHandle()
 
-
 def GenerateGraph(
     rt_ptr: c_void_p,
     start_point,
@@ -37,7 +36,6 @@ def GenerateGraph(
     point = c_float * 3
     spacing_as_point = point()
     start_as_point = point()
-
     start_as_point[0] = c_float(start_point[0])
     start_as_point[1] = c_float(start_point[1])
     start_as_point[2] = c_float(start_point[2])
@@ -46,12 +44,13 @@ def GenerateGraph(
     spacing_as_point[2] = c_float(spacing[2])
     graph_ptr = c_void_p(0)
 
-    # If either array is specified, we need to call the other graph function
-
+    # Determine how many elements are in either array.
     num_walkables = len(walkable_geometry)
     num_obstacles = len(obstacle_geometry)
     has_geometry_ids = num_walkables > 0 or num_obstacles > 0
     
+    # If this doesn't have geometry IDs sepecified, then we can just call
+    # the basic generate graph function
     if not has_geometry_ids:
         error_code = HFPython.GenerateGraph(
             rt_ptr,
@@ -67,14 +66,11 @@ def GenerateGraph(
             byref(graph_ptr)
         )
     else:
-        print("Doing obstacles")
-        print(obstacle_geometry, num_obstacles)
-        print(walkable_geometry, num_walkables)
+        # If we have geometry ids, then convert their arrays to c_style integer
+        # arrays and call the Obstacles version
         walkable_array = ConvertIntsToArray(walkable_geometry)
         obstacle_array = ConvertIntsToArray(obstacle_geometry)
 
-        print(obstacle_array)
-        print(walkable_array)
         error_code = HFPython.GenerateGraphObstacles(
             rt_ptr,
             byref(start_as_point),
@@ -93,6 +89,8 @@ def GenerateGraph(
             byref(graph_ptr)
         )
     
+    # If no graph could be generated using these settings
+    # return null, otherwise return the ponter to the new graph
     if error_code == HF_STATUS.OK:
         return graph_ptr
     elif error_code == HF_STATUS.NO_GRAPH:
