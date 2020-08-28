@@ -1,6 +1,8 @@
-﻿using HumanFactors.RayTracing;
+﻿using HumanFactors.Geometry;
+using HumanFactors.RayTracing;
 using HumanFactors.SpatialStructures;
 using System;
+using System.Linq;
 
 
 /*!
@@ -29,7 +31,7 @@ namespace HumanFactors.GraphGenerator
      Use the graph generator to quickly map out accessible space in an environment for other
      analysis methods without needing to manually place nodes.
     */
-public static class GraphGenerator
+    public static class GraphGenerator
     {
         /*!
         
@@ -90,8 +92,9 @@ public static class GraphGenerator
             float down_step = 0.2f,
             float down_slope = 20,
             int max_step_connections = 1,
-            int core_count = -1
-        )
+            int core_count = -1,
+            int[] obstacle_ids = null,
+            int[] walkable_ids = null)
         {
             IntPtr graph_ptr = NativeMethods.C_GenerateGraph(
                  bvh.Pointer,
@@ -103,7 +106,9 @@ public static class GraphGenerator
                  down_step,
                  down_slope,
                  max_step_connections,
-                 core_count
+                 core_count,
+                 obstacle_ids,
+                 walkable_ids
              );
 
             if (graph_ptr == IntPtr.Zero)
