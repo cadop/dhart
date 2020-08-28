@@ -38,7 +38,7 @@ namespace HF::SpatialStructures {
 	offered by HumanFactors, allowing for it to be the starting point of other analysis methods within
 	HumanFactors.
 
-	\param Differentiating Surfaces
+	\par Differentiating Surfaces
 	The Graph Generator supports marking specific geometry as walkable or obstacles. Obstacle surfaces  are surfaces
 	that the graph generator is not allowed to generate nodes on, while walkable surfaces are the only surfaces that the
 	graph generator is permitted to generate nodes on. Depending on what arguments are first passed to the graph generator,
@@ -258,7 +258,7 @@ namespace HF::GraphGenerator {
 		real_t down_step; ///< Maximum step down the graph can traverse.Any steps steeper than this will be considered inaccessible.
 		real_t down_slope; ///<	The maximum downward slope the graph can traverse. Any slopes steeper than this will be considered inaccessible.
 		Precision precision; ///< Tolerances for the graph
-		GeometryFlagMap geom_ids; ///< Stores a map of geometry IDs and their HIT_FLAGS and the current filter mode of the graph
+		GeometryFlagMap geom_ids; ///< Stores a map of geometry IDs to their HIT_FLAGS and the current filter mode of the graph
 	};
 
 	/*! 
