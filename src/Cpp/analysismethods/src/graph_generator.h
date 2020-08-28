@@ -38,6 +38,16 @@ namespace HF::SpatialStructures {
 	offered by HumanFactors, allowing for it to be the starting point of other analysis methods within
 	HumanFactors.
 
+	\param Differentiating Surfaces
+	The Graph Generator supports marking specific geometry as walkable or obstacles. Obstacle surfaces  are surfaces
+	that the graph generator is not allowed to generate nodes on, while walkable surfaces are the only surfaces that the
+	graph generator is permitted to generate nodes on. Depending on what arguments are first passed to the graph generator,
+	it will use different rules for determining which of the inputs are obstacles and which are not. When no geometry
+	ids are specified, all geometry is considered walkable. When only obstacle surfaces are specified, all geometry
+	other than that in the obstacles array are considered walkable. If both an obstacle and walkable array are specified
+	then obstacles will be considered inaccessible, walkable surfaces will be accessible, and all geometry not in
+	either array will be considered not traversable.
+
 	\note
 	All arguments are in meters for distances and degrees for angles
 	unless otherwise specified. For all calculations, the Graph Generator assumes
@@ -121,7 +131,7 @@ namespace HF::GraphGenerator {
 		BOTH = 3
 	};
 
-	using hashmap = std::unordered_map<int, HIT_FLAG>;
+	using hashmap = std::unordered_map<int, HIT_FLAG>; ///< Hashmap used for assigning and storing hitflags for IDs
 	
 	/*! \brief Different rules for how geometry is filtered by the graph generator. 
 	
@@ -137,20 +147,31 @@ namespace HF::GraphGenerator {
 		OBSTACLES_AND_FLOORS ///< Explicitly tag geometry ids as either obstacle or floor. Any ids outside of these ranges will always fail. 
 	};
 
-	/*! \brief Manages rules and ids for different types of geometry in the graph generator*/
+	/*! 
+		\brief Manages rules and ids for different types of geometry in the graph generator.
+	
+		\see GeometryFilterMode for more info about each mode of this struct
+		\see HIT_FLAG for info about the different geometry flags
+		\see CheckGeometryID for using this struct to check the results of an intersection
+	*/
 	struct Hit_Dict {
 
 	private:
 		hashmap internal_dictionary;
 
 		/*! \brief Set the filter mode of this Hit_Dict based on the input types. 
+			
+			\param walkable Array of walkable geometry IDs
+			\param obstacle Array of obstacle geometry IDs
 		
 			\details
 			If the walkable array is empty, then set the mode to obstacles only. 
 			If the obstacle and the walkable arrays are empty set the mode to none
 			If both obstacle and walkable arrays are specified, set this mode to 
 			obstacles and floors.
-		
+			
+			\post Sets the filter type for this hit_dict to the appropriate value for the number of elements
+				  in walkable and obstacle
 		*/
 		inline void DetermineFilterMode(
 			const std::vector<int>& walkable,
@@ -165,8 +186,17 @@ namespace HF::GraphGenerator {
 		}
 
 	public:
-		GeometryFilterMode Mode = GeometryFilterMode::ALL_INTERSECTIONS;
-		/*! \brief Set geometry ids as being walkable or obstacles*/
+		GeometryFilterMode Mode = GeometryFilterMode::ALL_INTERSECTIONS; ///< Filter mode of this Hit_Dict
+
+		/*! \brief Set geometry ids as being walkable or obstacles.
+		
+			\param obstacle_geometry IDs of meshes to set as obstacles
+			\param walkable_geometry IDs of meshes to set as walkable
+
+			\post 1) The filter mode for this hit_dict will be set to the appropriate value for the inputs
+			\post 2) All geometry in `obstacle_geometry` will return HIT_FLAG::OBSTACLES when calling operator []
+					 and all geometry in `walkable_geometry` will return HIT_FLAG::FLOORS when calling operator[]
+		*/
 		inline void SetGeometryIds(
 			const std::vector<int> & obstacle_geometry, 
 			const std::vector<int> & walkable_geometry)
@@ -179,14 +209,26 @@ namespace HF::GraphGenerator {
 			DetermineFilterMode(walkable_geometry, obstacle_geometry);
 		}
 
-		/*! \brief Check if this id exists in the dictionary. */
+		/*! 
+			\brief Check if this id exists in the dictionary.
+			
+			\param id ID to check for
+
+			\returns True if the ID exists, false otherwise. 
+		*/
 		inline bool HasKey(int id) const {
 			return internal_dictionary.count(id) >= 1;
 		}
 
-		/*
+		/*!
 			\brief Get the flag of the geometry in this hit dictionary. 
 		
+			\param id ID of geometry to get the hitflag of
+			
+			\returns
+			The flag assigned to `id` in SetGeometryIDs or HIT_FLAG::NO_FLAG if no flag was ever
+			assigned to `id`
+
 			\remarks
 			Unlike the standard square brackets operator of std::unordered_map, this gaurantees
 			no memory is allocated. Note that this can't be used to assign keys. 
@@ -198,10 +240,11 @@ namespace HF::GraphGenerator {
 
 		/*! \brief Set the value of a key in the internal dictionary.
 		
-			\details
-			If an id already is in the dictionary, it's value will be overridden 
-			by the new value.
-		
+			\param id ID to set as 
+
+			\post
+			Next call to [] for this object with `id` will return `flag`. If `id` already has been
+			assigned a flag, the value will be updated to `flag`.		
 		*/
 		inline void Set(int id, HIT_FLAG flag) {
 			internal_dictionary[id] = flag;
@@ -237,7 +280,7 @@ namespace HF::GraphGenerator {
 		location.
 	*/
 	struct optional_real3 {
-		real3 pt{ NAN, NAN, NAN };
+		real3 pt{ NAN, NAN, NAN }; ///< Point type.
 
 		/*! \brief Construct an invalid optional_real3 */
 		inline optional_real3() {};
@@ -317,9 +360,8 @@ namespace HF::GraphGenerator {
 			\brief Construct a new graph generator with a specific raytracer.
 			
 			\param ray_tracer Raytracer to use for performing ray intersctions
-
-			\param walkable_id unused. May be replaced in the future.
-			\param obstacle_id unused. May be replaced in the future.
+			\param walkable_id IDs of geometry to be considered as obstacles 
+			\param obstacle_id IDs of geometry to be considered as walkable surfaces
 		
 			\details
 			Stores a pointer to RT. This could be dangerous in the case that the raytracer is destroyed before
@@ -327,7 +369,33 @@ namespace HF::GraphGenerator {
 			are mostly disposed of before this has a chance to become a problem. 
 		*/
 		GraphGenerator(HF::RayTracer::EmbreeRayTracer& ray_tracer, const std::vector<int> & obstacle_ids = std::vector<int>(0), const std::vector<int> & walkable_ids = std::vector<int>(0));
+	
+		/*!
+			\brief Construct a new graph generator with a specific raytracer.
+
+			\param ray_tracer Raytracer to use for performing ray intersctions
+			\param walkable_id IDs of geometry to be considered as obstacles
+			\param obstacle_id IDs of geometry to be considered as walkable surfaces
+
+			\details
+			Stores a pointer to RT. This could be dangerous in the case that the raytracer is destroyed before
+			the graph generator is called again. It's not likely to occur in our codebase since GraphGenerators
+			are mostly disposed of before this has a chance to become a problem.
+		*/
 		GraphGenerator(HF::RayTracer::NanoRTRayTracer& ray_tracer, const std::vector<int> & obstacle_ids = std::vector<int>(0), const std::vector<int>& walkable_ids = std::vector<int>(0));
+		
+		/*!
+			\brief Construct a new graph generator with a specific raytracer.
+
+			\param ray_tracer Raytracer to use for performing ray intersctions
+			\param walkable_id IDs of geometry to be considered as obstacles
+			\param obstacle_id IDs of geometry to be considered as walkable surfaces
+
+			\details
+			Stores a pointer to RT. This could be dangerous in the case that the raytracer is destroyed before
+			the graph generator is called again. It's not likely to occur in our codebase since GraphGenerators
+			are mostly disposed of before this has a chance to become a problem.
+		*/
 		GraphGenerator(HF::RayTracer::MultiRT& ray_tracer, const std::vector<int> & obstacle_ids = std::vector<int>(0), const std::vector<int>& walkable_ids = std::vector<int>(0));
 
 
@@ -538,7 +606,11 @@ namespace HF::GraphGenerator {
 		\param origin Origin point of the ray.
 		\param direction direction to cast the ray in.
 		\param node_z_tolerance Precision to round the point of intersection's z-component to
-		\param flat Currently unused. Should determine which category of geometry will be intersected with.
+		\param flag Which category of geometry will be intersected with. In general, any intersections with
+					geometry other than this type will be discarded unless the type is BOTH, NONE, or the
+					geometry dictionary is empty. 
+		\param geometry_dict Dictionary containing rules for filtering ray intersections. If not specified,
+							 this will not filter any intersections.
 
 		\returns An invalid optional_real3 if the ray did not intersect any geometry, or a valid 
 				 optional_real3 containing the point of intesection if an intersection was found.
@@ -585,7 +657,7 @@ namespace HF::GraphGenerator {
 
 		\par Rules
 		An edge is considered valid if:
-		1) Both parent and child the potential child are over valid ground
+		1) Both parent and child the potential child are over valid walkable ground
 		2) After the child is moved to be directly on top of the ground it is over
 		   The slope between parent and child is within upslope/downslope limits OR
 		   the path between parent/child involves a step that is within upstep/downstep limits

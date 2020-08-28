@@ -111,6 +111,17 @@ namespace HF::GraphGenerator {
 
 	/*! 
 		\brief Determine if a hit is against the geometry type specified
+		
+		\param goal Hitflag that the intersection is being cheecked against
+		\param ID id of the mesh that was intesected
+		\param geom_dict Rules to use for determining if the intersection was successful
+
+		\returns True if the intersection abides by the rules in geom_dict, false otherwise
+
+		\remarks
+		This function serves as the sole place for intersection mesh ids to be checked using
+		the ifnormation in geom_dict. 
+
 	*/
 	inline bool CheckGeometryID(HIT_FLAG goal, int id, const Dict_t & geom_dict) {
 		
