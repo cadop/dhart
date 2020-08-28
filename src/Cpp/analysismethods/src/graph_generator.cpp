@@ -25,7 +25,7 @@ using HF::SpatialStructures::roundhf_tmp;
 using HF::SpatialStructures::trunchf_tmp;
 
 using std::vector;
-using HF::GraphGenerator::Dict_t;
+using HF::GraphGenerator::GeometryFlagMap;
 
 namespace HF::GraphGenerator{ 
 	/*! \brief Sets the core count of OpenMP

@@ -123,7 +123,7 @@ namespace HF::GraphGenerator {
 		the ifnormation in geom_dict. 
 
 	*/
-	inline bool CheckGeometryID(HIT_FLAG goal, int id, const Dict_t & geom_dict) {
+	inline bool CheckGeometryID(HIT_FLAG goal, int id, const GeometryFlagMap & geom_dict) {
 		
 		// If the target is both or the geometry rules are set to NO_FLAG, all hits are counted as
 		// being on walkable geometry
@@ -149,7 +149,7 @@ namespace HF::GraphGenerator {
 		const real3& direction,
 		real_t node_z_tolerance,
 		HIT_FLAG flag,
-		const Dict_t & geometry_dict)
+		const GeometryFlagMap & geometry_dict)
 	{
 		// Setup default params
 		HitStruct<real_t> res;

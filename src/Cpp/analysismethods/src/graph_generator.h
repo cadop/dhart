@@ -154,12 +154,12 @@ namespace HF::GraphGenerator {
 		\see HIT_FLAG for info about the different geometry flags
 		\see CheckGeometryID for using this struct to check the results of an intersection
 	*/
-	struct Hit_Dict {
+	struct GeometryFlagMap {
 
 	private:
 		hashmap internal_dictionary;
 
-		/*! \brief Set the filter mode of this Hit_Dict based on the input types. 
+		/*! \brief Set the filter mode of this GeometryFlagMap based on the input types. 
 			
 			\param walkable Array of walkable geometry IDs
 			\param obstacle Array of obstacle geometry IDs
@@ -186,7 +186,7 @@ namespace HF::GraphGenerator {
 		}
 
 	public:
-		GeometryFilterMode Mode = GeometryFilterMode::ALL_INTERSECTIONS; ///< Filter mode of this Hit_Dict
+		GeometryFilterMode Mode = GeometryFilterMode::ALL_INTERSECTIONS; ///< Filter mode of this GeometryFlagMap
 
 		/*! \brief Set geometry ids as being walkable or obstacles.
 		
@@ -251,7 +251,6 @@ namespace HF::GraphGenerator {
 		}
 	};
 
-	using Dict_t = Hit_Dict;
 	/*! \brief Holds parameters for the GraphGenerator. */
 	struct GraphParams {
 		real_t up_step;	 ///< Maximum height of a step the graph can traverse.Any steps higher this will be considered inaccessible.
@@ -259,7 +258,7 @@ namespace HF::GraphGenerator {
 		real_t down_step; ///< Maximum step down the graph can traverse.Any steps steeper than this will be considered inaccessible.
 		real_t down_slope; ///<	The maximum downward slope the graph can traverse. Any slopes steeper than this will be considered inaccessible.
 		Precision precision; ///< Tolerances for the graph
-		Dict_t geom_ids;
+		GeometryFlagMap geom_ids; ///< Stores a map of geometry IDs and their HIT_FLAGS and the current filter mode of the graph
 	};
 
 	/*! 
@@ -627,7 +626,7 @@ namespace HF::GraphGenerator {
 		const real3& direction,
 		real_t node_z_tolerance,
 		HIT_FLAG flag = BOTH,
-		const Dict_t& geometry_dict = Dict_t()
+		const GeometryFlagMap& geometry_dict = GeometryFlagMap()
 	);
 
 
