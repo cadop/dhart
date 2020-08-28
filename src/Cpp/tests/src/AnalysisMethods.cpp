@@ -89,7 +89,7 @@ namespace HF {
 	TEST(_GraphGenerator, GraphGeneratorParallel) {
 		auto mesh = Geometry::LoadMeshObjects("plane.obj", HF::Geometry::ONLY_FILE, true);
 		RayTracer::EmbreeRayTracer rt(mesh);
-		auto GG = GraphGenerator::GraphGenerator(rt, 0);
+		auto GG = GraphGenerator::GraphGenerator(rt);
 	
 		auto g = GG.BuildNetwork(
 			std::array<float, 3>{0, 0, 0.5},
@@ -112,7 +112,7 @@ namespace HF {
 		auto mesh = Geometry::LoadMeshObjects("energy_blob_zup.obj");
 
 		RayTracer::EmbreeRayTracer rt(mesh);
-		auto GG = GraphGenerator::GraphGenerator(rt, 0);
+		auto GG = GraphGenerator::GraphGenerator(rt);
 
 		// Generate the graph 
 		auto g = GG.BuildNetwork(
@@ -151,7 +151,7 @@ namespace HF {
 		auto mesh = Geometry::LoadMeshObjects("energy_blob.obj");
 
 		RayTracer::EmbreeRayTracer rt(mesh);
-		auto GG = GraphGenerator::GraphGenerator(rt, 0);
+		auto GG = GraphGenerator::GraphGenerator(rt);
 
 		// Generate the graph 
 		auto g = GG.BuildNetwork(
@@ -174,7 +174,7 @@ namespace HF {
 	TEST(_GraphGenerator, GraphGeneratorSingle) {
 		auto mesh = Geometry::LoadMeshObjects("plane.obj", HF::Geometry::ONLY_FILE, true);
 		RayTracer::EmbreeRayTracer rt(mesh);
-		auto GG = GraphGenerator::GraphGenerator(rt, 0);
+		auto GG = GraphGenerator::GraphGenerator(rt);
 
 		auto g = GG.BuildNetwork(
 			std::array<float, 3>{0, 0, 0.5},
@@ -198,7 +198,7 @@ namespace HF {
 		auto mesh = Geometry::LoadMeshObjects("energy_blob_zup.obj");
 
 		RayTracer::EmbreeRayTracer rt(mesh);
-		auto GG = GraphGenerator::GraphGenerator(rt, 0);
+		auto GG = GraphGenerator::GraphGenerator(rt);
 
 		// Generate the graph 
 		auto g = GG.BuildNetwork(
@@ -239,7 +239,7 @@ namespace HF {
 		auto mesh = Geometry::LoadMeshObjects("Weston_meshed_no-ngon.obj");
 
 		RayTracer::EmbreeRayTracer rt(mesh, true);
-		auto GG = GraphGenerator::GraphGenerator(rt, 0);
+		auto GG = GraphGenerator::GraphGenerator(rt);
 
 		double default_z_precision = 0.01;
 		double default_ground_offset = 0.01;
@@ -271,7 +271,7 @@ namespace HF {
 		auto mesh = Geometry::LoadMeshObjects("energy_blob_zup.obj");
 
 		RayTracer::EmbreeRayTracer rt(mesh, true);
-		auto GG = GraphGenerator::GraphGenerator(rt, 0);
+		auto GG = GraphGenerator::GraphGenerator(rt);
 
 		double default_z_precision = 0.00001;
 		double default_ground_offset = 0.01;
@@ -453,7 +453,7 @@ TEST(Performance, GraphGenerator) {
 		int max_nodes = max_nodes_list[i];
 
 		watch.StartClock();
-		auto GG = HF::GraphGenerator::GraphGenerator(ray_tracer, 0, 0);
+		auto GG = HF::GraphGenerator::GraphGenerator(ray_tracer);
 		auto graph = GG.BuildNetwork(
 			start,
 			spacing, 

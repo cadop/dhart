@@ -106,33 +106,59 @@ namespace HF::GraphGenerator {
 
 	optional_real3 ValidateStartPoint(RayTracer& RT, const real3& start_point, const GraphParams& Params)
 	{
-		return CheckRay(RT, start_point, down, Params.precision.node_z);
+		return CheckRay(RT, start_point, down, Params.precision.node_z, HIT_FLAG::FLOORS, Params.geom_ids);
 	}
+
+	/*! 
+		\brief Determine if a hit is against the geometry type specified
+		
+		\param goal Hitflag that the intersection is being cheecked against
+		\param ID id of the mesh that was intesected
+		\param geom_dict Rules to use for determining if the intersection was successful
+
+		\returns True if the intersection abides by the rules in geom_dict, false otherwise
+
+		\remarks
+		This function serves as the sole place for intersection mesh ids to be checked using
+		the ifnormation in geom_dict. 
+
+	*/
+	inline bool CheckGeometryID(HIT_FLAG goal, int id, const GeometryFlagMap & geom_dict) {
+		
+		// If the target is both or the geometry rules are set to NO_FLAG, all hits are counted as
+		// being on walkable geometry
+		if (geom_dict.Mode == GeometryFilterMode::ALL_INTERSECTIONS || goal == HIT_FLAG::BOTH)
+			return true;
+		
+		// Otherwise do different checks based on the ruleset
+		else if (geom_dict.Mode == GeometryFilterMode::OBSTACLES_ONLY)
+			// If only obstacles are specified, this works like a blacklist/whitelist
+			if (goal == OBSTACLES)
+				return geom_dict[id] == HIT_FLAG::OBSTACLES;
+			else
+				return geom_dict[id] != HIT_FLAG::OBSTACLES;
+
+		else if (geom_dict.Mode == GeometryFilterMode::OBSTACLES_AND_FLOORS)
+			// In OBSTACLES_AND_FLOORS mode, the id's type must exactly match the goal
+			return (goal == geom_dict[id]);
+	}
+
 	optional_real3 CheckRay(
 		RayTracer& ray_tracer,
 		const real3& origin,
 		const real3& direction,
 		real_t node_z_tolerance,
-		HIT_FLAG flag)
+		HIT_FLAG flag,
+		const GeometryFlagMap & geometry_dict)
 	{
 		// Setup default params
 		HitStruct<real_t> res;
 
-		// Switch Geometry based on hitflag
-		switch (flag) {
-		case HIT_FLAG::FLOORS: // Both are the same for now. Waiting on obstacle support
-		case HIT_FLAG::OBSTACLES:
-			res = ray_tracer.Intersect(origin, direction);
-			break;
-		case HIT_FLAG::BOTH:
-			res = ray_tracer.Intersect(origin, direction);
-			break;
-		default:
-			assert(false);
-		}
+		// Cast the ray. On success, this returns the ID and distance to intersection.
+		res = ray_tracer.Intersect(origin, direction);
 
-		// If successful, make a copy of the node, move it, then return it
-		if (res.DidHit()) {
+		// Check if it hit and the ID of the geometry matches what we were looking for. 
+		if (res.DidHit() && CheckGeometryID(flag, res.meshid, geometry_dict)) {
 			// Create a new optional point with a copy of the origin
 			optional_real3 return_pt(origin);
 
@@ -232,7 +258,7 @@ namespace HF::GraphGenerator {
 		{
 
 			// Check if a ray intersects a mesh
-			optional_real3 potential_child = CheckRay(rt, child, down, GP.precision.node_z);
+			optional_real3 potential_child = CheckRay(rt, child, down, GP.precision.node_z, HIT_FLAG::FLOORS, GP.geom_ids);
 			
 			if (potential_child)
 			{

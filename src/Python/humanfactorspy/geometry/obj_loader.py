@@ -54,7 +54,7 @@ def LoadOBJ(
         >>> obj = humanfactorspy.get_sample_model("plane.obj")
         >>> MI = LoadOBJ(obj)
         >>> MI 
-        <humanfactorspy.geometry.mesh_info.MeshInfo object at ...>
+        (EntireFile, 0)
 
 
     """

@@ -7,9 +7,11 @@
 #define NOMINMAX
 #include <graph_generator.h>
 #include <Constants.h>
-#include <Node.h>
+#include <node.h>
 #include <Edge.h>
-#include <Graph.h>
+#include <graph.h>
+#include <robin_hood.h>
+#include <omp.h>
 
 #include <unique_queue.h>
 
@@ -19,11 +21,11 @@
 using HF::SpatialStructures::Graph;
 using HF::SpatialStructures::Node;
 using HF::SpatialStructures::Edge;
-
-using std::vector;
-
 using HF::SpatialStructures::roundhf_tmp;
 using HF::SpatialStructures::trunchf_tmp;
+
+using std::vector;
+using HF::GraphGenerator::GeometryFlagMap;
 
 namespace HF::GraphGenerator{ 
 	/*! \brief Sets the core count of OpenMP
@@ -35,23 +37,33 @@ namespace HF::GraphGenerator{
 		else omp_set_num_threads(std::thread::hardware_concurrency());
 	}
 
-	GraphGenerator::GraphGenerator(HF::RayTracer::EmbreeRayTracer & rt, int walkable_id, int obstacle_id){
-		this->obstacle_surfaces = obstacle_id;
-		this->walkable_surfaces = walkable_id;
-		this->ray_tracer =  HF::RayTracer::MultiRT(&rt);
+	/*! \brief Converts the raytracer to a multiRT if required, then map geometry ids to hitflags 
+		
+		\param gg Pointer to the graph generator to update
+		\param obs_ids array of geometry ids to set as obstacles
+		\param walk_ids Array of geometry ids to set as walkable
+
+		\post `gg` will have it's geometry map populated with the passed geometry ids and it's raytracer
+			  set to a MultiRT containing `gg`
+	*/
+	template <typename raytracer_type>
+	inline void setupRT(GraphGenerator* gg, raytracer_type & rt, const std::vector<int> & obs_ids, const std::vector<int> & walk_ids ) {
+		gg->ray_tracer = HF::RayTracer::MultiRT(&rt);
+		gg->params.geom_ids.SetGeometryIds(obs_ids, walk_ids);
 	}
 
-	GraphGenerator::GraphGenerator(HF::RayTracer::NanoRTRayTracer & rt, int walkable_id, int obstacle_id) {
-		this->obstacle_surfaces = obstacle_id;
-		this->walkable_surfaces = walkable_id;
-		this->ray_tracer = HF::RayTracer::MultiRT(&rt);
+	GraphGenerator::GraphGenerator(HF::RayTracer::EmbreeRayTracer & rt, const vector<int> & obstacle_ids, const vector<int> & walkable_ids){
+		setupRT<HF::RayTracer::EmbreeRayTracer> (this, rt, obstacle_ids, walkable_ids);
 	}
 
-	GraphGenerator::GraphGenerator(HF::RayTracer::MultiRT & ray_tracer, int walkable_id, int obstacle_id)
+	GraphGenerator::GraphGenerator(HF::RayTracer::NanoRTRayTracer & rt, const vector<int> & obstacle_ids, const vector<int> & walkable_ids) {
+		setupRT<HF::RayTracer::NanoRTRayTracer> (this, rt, obstacle_ids, walkable_ids);
+	}
+
+	GraphGenerator::GraphGenerator(HF::RayTracer::MultiRT & ray_tracer, const vector<int> & obstacle_ids, const vector<int> & walkable_ids)
 	{
-		this->obstacle_surfaces = obstacle_id;
-		this->walkable_surfaces = walkable_id;
 		this->ray_tracer = ray_tracer;
+		this->params.geom_ids.SetGeometryIds(obstacle_ids, walkable_ids);
 	}
 
 	SpatialStructures::Graph GraphGenerator::IMPL_BuildNetwork(
@@ -68,14 +80,11 @@ namespace HF::GraphGenerator{
 		real_t node_spacing_precision,
 		real_t ground_offset)
 	{
-		
-
 		if (ground_offset < node_z_precision)
 		{
 			std::cerr << "Ground offset is less than z-precision. Setting node offset to Z-Precision." << std::endl;
 			ground_offset = node_z_precision;
 			//std::logic_error("Ground offset is less than Z-Precision");
-
 		}
 
 		// Store parameters in params
@@ -125,7 +134,6 @@ namespace HF::GraphGenerator{
 		}
 		else
 			return Graph();
-
 	}
 
 	Graph GraphGenerator::CrawlGeomParallel(UniqueQueue& todo)
@@ -256,7 +264,6 @@ namespace HF::GraphGenerator{
 			// Increment node count
 			++num_nodes;
 		}
-
 		return G;
 	}
 }

@@ -29,6 +29,20 @@ namespace HF {
 		constexpr float ROUNDING_PRECISION = 0.0001f; // Used to convert back to original value
 		constexpr float FLOAT_PRECISION = 10000.0f;  ///< Used to convert to a given precision (avoids division)
 		constexpr float GROUND_OFFSET = 0.001f; ///< Offset to be used for offsetting from a polygon when performing checks
+		/*!
+			\brief Cast a value to the specific type and divide 1 by it.
+
+			\tparam numeric_type Type of number to divide 1 by
+			\tparam desired_type Type to cast to and return.
+
+			\param n Number to divide 1 by.
+
+			\returns 1/n
+		*/
+		template<typename desired_type, typename numeric_type>
+		inline constexpr desired_type DivideBy1(numeric_type n) {
+			return static_cast<desired_type>(1) / static_cast<desired_type>(n);
+		}
 
 		/// <summary> Round a float to the nearest precision defined globally. The global values
 		/// can be overridden with optional parameters p and r.  If r is 0.01, p must be 100.0, meaning
@@ -194,20 +208,6 @@ namespace HF {
 			);
 		}
 
-		/*! 
-			\brief Cast a value to the specific type and divide 1 by it.
-
-			\tparam numeric_type Type of number to divide 1 by
-			\tparam desired_type Type to cast to and return. 
-
-			\param n Number to divide 1 by.
-		
-			\returns 1/n
-		*/
-		template<typename desired_type, typename numeric_type>
-		inline constexpr desired_type DivideBy1(numeric_type n) {
-			return static_cast<desired_type>(1) /static_cast<desired_type>(n);
-		}
 
 
 	}

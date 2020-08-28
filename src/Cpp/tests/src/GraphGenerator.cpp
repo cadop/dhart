@@ -34,6 +34,23 @@ EmbreeRayTracer CreateGGExmapleRT() {
 	return ray_tracer;
 }	
 
+const std::string obstacle_plane_path = "obstacle_plane.obj";
+const std::string obstacle_layer = "Obstacle";
+EmbreeRayTracer CreateObstacleExampleRT(std::string str = "") {
+
+	// Load an OBJ containing a simple plane
+	if (str.empty()) str = obstacle_plane_path;
+	auto mesh = HF::Geometry::LoadMeshObjects(str, HF::Geometry::BY_GROUP, true);
+
+	// Create a raytracer using this obj
+	EmbreeRayTracer ray_tracer = HF::RayTracer::EmbreeRayTracer(mesh);
+
+	for (const auto& m : mesh)
+		std::cout << m.name << " " << m.meshid << " " << m.NumVerts() << " " << m.NumTris() << std::endl;
+
+	return ray_tracer;
+}
+
 std::ostringstream PrintGraph(const Graph & g) {
 
 	//![EX_PrintGraph]
@@ -110,7 +127,86 @@ TEST(_GraphGenerator, BuildNetwork) {
 	ASSERT_EQ(graph_nodes.size(), expected_nodes.size());
 
 	ComparePoints(graph_nodes, expected_nodes);
+}
+TEST(_GraphGenerator, OBS_VisTestCase) {
+	EmbreeRayTracer ray_tracer = CreateObstacleExampleRT("obstacle_vistestcase.obj");
 
+	// Create a graphgenerator using the raytracer we just created
+	HF::GraphGenerator::GraphGenerator GG = GraphGenerator::GraphGenerator(ray_tracer);
+
+	// Setup Graph Parameters
+	std::array<float, 3> start_point{ 3,0,0.25 };
+	std::array<float, 3> spacing{ 1,1,20};
+	int max_nodes = 10000;
+	int up_step = 20; int down_step = 20;
+	int up_slope = 45; int down_slope = 45;
+	int max_step_connections = 1;
+
+	// Generate a graph without specifying obstacles, this will result on the graph not going on the
+	// boxes due to the low upstep
+	HF::SpatialStructures::Graph non_obstacle_graph = GG.BuildNetwork(
+		start_point,
+		spacing,
+		max_nodes,
+		1, 1,
+		up_slope, down_slope,
+		max_step_connections
+	);
+
+	HF::GraphGenerator::GraphGenerator GG_Obstacle = GraphGenerator::GraphGenerator(ray_tracer, std::vector<int>{2});
+
+	// Generating a graph that has a high enough upstep to get onto the boxes, but
+	// doesn't because they're marked as obstacles
+	HF::SpatialStructures::Graph obstacle_graph = GG_Obstacle.BuildNetwork(
+		start_point,
+		spacing,
+		max_nodes,
+		up_step, down_step,
+		up_slope, down_slope,
+		max_step_connections
+	);
+	
+	obstacle_graph.DumpToJson("Visgraph.json");
+	ASSERT_EQ(obstacle_graph.size(), non_obstacle_graph.size());
+}
+
+TEST(_GraphGenerator, OBS_BuildNetwork) {
+	EmbreeRayTracer ray_tracer = CreateObstacleExampleRT();
+
+	// Create a graphgenerator using the raytracer we just created
+	HF::GraphGenerator::GraphGenerator GG = GraphGenerator::GraphGenerator(ray_tracer);
+
+	// Setup Graph Parameters
+	std::array<float, 3> start_point{ 0,0,0.25 };
+	std::array<float, 3> spacing{ 0.5,0.5,1 };
+	int max_nodes = 1000;
+	int up_step = 1; int down_step = 1;
+	int up_slope = 45; int down_slope = 45;
+	int max_step_connections = 1;
+
+	// Generate the graph using our parameters
+	HF::SpatialStructures::Graph non_obstacle_graph = GG.BuildNetwork(
+		start_point,
+		spacing,
+		max_nodes,
+		up_step, down_step,
+		up_slope, down_slope,
+		max_step_connections
+	);
+
+	HF::GraphGenerator::GraphGenerator GG_Obstacle = GraphGenerator::GraphGenerator(ray_tracer, std::vector<int>{2});
+
+	// Generate the graph using our parameters
+	HF::SpatialStructures::Graph obstacle_graph = GG_Obstacle.BuildNetwork(
+		start_point,
+		spacing,
+		max_nodes,
+		up_step, down_step,
+		up_slope, down_slope,
+		max_step_connections
+	);
+
+	ASSERT_LT(obstacle_graph.size(), non_obstacle_graph.size());
 }
 
 TEST(_GraphGenerator, CrawlGeom) {
@@ -253,8 +349,7 @@ TEST(_GraphGenerator, CheckRay) {
 
 	// Call CheckRay and capture the result
 	HF::GraphGenerator::optional_real3 result = HF::GraphGenerator::CheckRay(
-		HF::RayTracer::MultiRT(&ray_tracer), start_point, direction, node_z
-	);
+		HF::RayTracer::MultiRT(&ray_tracer), start_point, direction, node_z);
 
 	// If the ray intersected, print it
 	if (result)

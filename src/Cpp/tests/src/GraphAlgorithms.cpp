@@ -98,7 +98,7 @@ namespace HF {
 
 
 		RayTracer::EmbreeRayTracer rt(mesh);
-		auto GG = GraphGenerator::GraphGenerator(rt, 0);
+		auto GG = GraphGenerator::GraphGenerator(rt);
 
 		auto g = GG.BuildNetwork(
 			std::array<float, 3>{-22.4280376, -12.856843, 5.4826779},
@@ -120,7 +120,7 @@ namespace HF {
 		auto mesh = Geometry::LoadMeshObjects("energy_blob_zup.obj");
 
 		RayTracer::EmbreeRayTracer rt(mesh, true);
-		auto GG = GraphGenerator::GraphGenerator(rt, 0);
+		auto GG = GraphGenerator::GraphGenerator(rt);
 		int max_nodes = 5000;
 		double up_step = 5;
 		double up_slope = 60;
@@ -151,7 +151,7 @@ namespace HF {
 		auto mesh = Geometry::LoadMeshObjects("energy_blob_zup.obj");
 
 		HF::RayTracer::NanoRTRayTracer nrt(mesh[0]);
-		auto GG = GraphGenerator::GraphGenerator(nrt, 0);
+		auto GG = GraphGenerator::GraphGenerator(nrt);
 		int max_nodes = 5000;
 		double up_step = 5;
 		double up_slope = 60;
@@ -184,10 +184,10 @@ namespace HF {
 		auto double_mesh = Geometry::LoadTMPMeshObjects<double>("VisibilityTestCases.obj");
 
 		HF::RayTracer::NanoRTRayTracer nrt(double_mesh);
-		GraphGenerator::GraphGenerator NanoRTGraphGen(nrt, 0);
+		GraphGenerator::GraphGenerator NanoRTGraphGen(nrt);
 		
 		HF::RayTracer::EmbreeRayTracer ert(mesh[0], true);
-		GraphGenerator::GraphGenerator EmbreeGraphGen(ert, 0);
+		GraphGenerator::GraphGenerator EmbreeGraphGen(ert);
 
 		int max_nodes = 5000;
 		double up_step = 1;	double up_slope = 1;
@@ -232,10 +232,10 @@ namespace HF {
 		auto double_mesh = Geometry::LoadTMPMeshObjects<double>(mesh_path);
 
 		HF::RayTracer::NanoRTRayTracer nrt(double_mesh);
-		GraphGenerator::GraphGenerator NanoRTGraphGen(nrt, 0);
+		GraphGenerator::GraphGenerator NanoRTGraphGen(nrt);
 
 		HF::RayTracer::EmbreeRayTracer ert(mesh[0], true);
-		GraphGenerator::GraphGenerator EmbreeGraphGen(ert, 0);
+		GraphGenerator::GraphGenerator EmbreeGraphGen(ert);
 
 		int max_nodes = 50000;
 		double up_step = 50;	double up_slope = 45;
