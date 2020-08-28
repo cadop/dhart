@@ -60,7 +60,7 @@ namespace HF {
 										and as a result the amount of memory the algorithm requires.
 
 	\param		core_count				Number of cores to use. -1 will use all available cores, 
-										and 0 will run a serialized version of the algorithm.
+										and 0 or 1 will run a serialized version of the algorithm.
 
 	\param		out_graph				Address of a (\link HF::SpatialStructures::Graph \endlink *);
 										*out_graph will address heap-allocated memory to an initialized 
@@ -148,7 +148,12 @@ C_INTERFACE GenerateGraph(
 										and as a result the amount of memory the algorithm requires.
 
 	\param		core_count				Number of cores to use. -1 will use all available cores,
-										and 0 will run a serialized version of the algorithm.
+										and 0 or 1 will run a serialized version of the algorithm.
+	
+	\param		obstacle_ids			Array of geometry IDs to consider obstacles
+	\param		walkable_ids			Array of geometry IDs to consider as walkable surfaces
+	\param		num_obstacles			number of elements in `obstacle_ids`
+	\param		num_walkables			number of elements in `walkable_ids`
 
 	\param		out_graph				Address of a (\link HF::SpatialStructures::Graph \endlink *);
 										*out_graph will address heap-allocated memory to an initialized
