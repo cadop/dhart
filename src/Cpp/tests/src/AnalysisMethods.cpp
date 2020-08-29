@@ -365,7 +365,7 @@ namespace CInterfaceTests {
 		}
 	}
 }
-
+/*!
 namespace CInterfaceTests {
 	TEST(_CInterfaceUtils, ConvertRawFloatArrayToPoints) {
 		// Requires #include "cinterface_utils.h"

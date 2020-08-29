@@ -6,6 +6,7 @@
 /// \date	06 Jun 2020
 
 #pragma once
+#include <cmath>
 
 namespace HF {
 

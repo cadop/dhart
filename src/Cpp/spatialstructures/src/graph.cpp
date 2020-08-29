@@ -7,7 +7,7 @@
 
 /// \todo Forward declares for eigen.
 
-#include <Graph.h>
+#include <graph.h>
 #include <algorithm>
 #include <cmath>
 #include <Constants.h>
@@ -26,6 +26,11 @@ using std::string;
 using namespace HF::Exceptions;
 
 namespace HF::SpatialStructures {
+
+	inline bool IsInRange(int nnz, int num_rows, int parent) {
+		bool out_of_range = (nnz <= 0 || num_rows <= parent);
+		return !out_of_range;
+	}
 
 	/*! \brief Constructs a mapped CSR that's identical to `g`, with the values arrays of `ca`.
 		
@@ -74,9 +79,7 @@ namespace HF::SpatialStructures {
 		bool result_3 = is_floating_type(str_3);	// false
 	\endcode
 */
-	bool is_floating_type(std::string value);
-
-	inline bool is_floating_type(std::string value) {
+	inline bool is_floating_type(const std::string & value) {
 		bool result = false;
 		char* ptr = nullptr;
 
@@ -136,7 +139,7 @@ namespace HF::SpatialStructures {
 		// can't be converted to a number. This will occur when the string is empty, as it is in
 		// the case of a parameter that doesn't exist. 
 		try {
-			return std::stod(str_to_convert);
+			return std::stof(str_to_convert);
 		}
 		catch (std::invalid_argument) {
 			// Return -1 to signal that this string could not be converted
@@ -259,7 +262,7 @@ namespace HF::SpatialStructures {
 		return (edge_cost_maps.at(key));
 	}
 
-	bool Graph::HasCostArray(string key) const {
+	bool Graph::HasCostArray(const string & key) const {
 		return (edge_cost_maps.count(key) > 0);
 	}
 
@@ -337,12 +340,14 @@ namespace HF::SpatialStructures {
 		// Return if we hit the end of our search bounds, indicating that the
 		// edge doesn't exist.
 
-		if (itr == search_end_ptr)
+		if (itr == search_end_ptr) {
 			return -1;
+		}
 		// Find the distance between the pointer we found earlier and the
 		// start of the values array
 		else {
 			int index = std::distance(inner_index_ptr, itr);
+
 			return index;
 		}
 
@@ -350,11 +355,18 @@ namespace HF::SpatialStructures {
 
 	int Graph::FindValueArrayIndex(int parent_id, int child_id) const
 	{
+		if (!IsInRange(edge_matrix.nonZeros(), edge_matrix.rows(), parent_id)) return -1;
+
 		// Get the inner and outer index array pointers of the CSR
 		const auto outer_index_ptr = edge_matrix.outerIndexPtr();
 		const auto inner_index_ptr = edge_matrix.innerIndexPtr();
 			
-		return IMPL_ValueArrayIndex(parent_id, child_id, outer_index_ptr, inner_index_ptr);
+
+		int index =  IMPL_ValueArrayIndex(parent_id, child_id, outer_index_ptr, inner_index_ptr);
+		if (index > edge_matrix.nonZeros())
+			return -1;
+		else
+			return index;
 	}
 
 	void Graph::InsertEdgeIntoCostSet(int parent_id, int child_id, float cost, EdgeCostSet& cost_set) {
@@ -362,8 +374,9 @@ namespace HF::SpatialStructures {
 		const int value_index = FindValueArrayIndex(parent_id, child_id);
 
 		// If the index is < 0 that means this edge doesn't exist and we must throw
-		if (value_index < 0)
+		if (value_index < 0) {
 			throw std::out_of_range("Tried to insert into edge that doesn't exist in default graph. ");
+		}
 
 		// otherwise write this to the cost set.
 		cost_set[value_index] = cost;
@@ -838,7 +851,8 @@ namespace HF::SpatialStructures {
 
 		// If the parent is not even in the graph, or the graph doesn't have any zeros, return early. 
 		// Calling the iterator in both of these cases is undefined behavior and should be avoided
-		if (edge_matrix.nonZeros() <= 0 || edge_matrix.rows() <= parent) return false;
+		if (!IsInRange(edge_matrix.nonZeros(), edge_matrix.rows(), parent)) return false;
+	//	if (edge_matrix.nonZeros() <= 0 || edge_matrix.rows() <= parent) return false;
 	
 		// Iterate through parent's row to see if it has child.
 		for (EdgeMatrix::InnerIterator it(edge_matrix, parent_index); it; ++it) {
@@ -1203,7 +1217,7 @@ namespace HF::SpatialStructures {
 		return Subgraph{ parent_node, this->GetEdgesForNode(parent_id, false, cost_type) };
 	}
 
-	void Graph::AddNodeAttribute(int id, std::string attribute, std::string score) {
+	void Graph::AddNodeAttribute(int id, const std::string & attribute, const std::string & score) {
 		// Check if this id belongs to any node in the graph
 		if (id > this->MaxID()) return;
 
@@ -1243,9 +1257,6 @@ namespace HF::SpatialStructures {
 			// Update this iterator so it can be used in the next code block
 			node_attr_value_map_it = node_attr_value_map.find(id);
 		}
-
-		// Should be the same as the id parameter passed in.
-		const int found_id = node_attr_value_map_it->first;
 
 		// Will be used to assess whether it is floating point, or not
 		std::string found_attr_value = node_attr_value_map_it->second;
@@ -1356,7 +1367,7 @@ namespace HF::SpatialStructures {
 	}
 
 	using namespace nlohmann;
-	bool Graph::DumpToJson(std::string path) {
+	bool Graph::DumpToJson(const std::string & path) {
 		json j;
 
 		j["nodes"] = json::array();

@@ -144,10 +144,10 @@ namespace HF::SpatialStructures::CostAlgorithms {
 			assert(e >= 0);
 
 			// Calculate the new score/distance for the IntEdge
-			auto expenditure = e * magnitude;
+			double expenditure = e * magnitude;
 
 			// Create the resulting IntEdge from the current child ID and calculation
-			IntEdge ie = { link_a.child.id, expenditure }; 
+			IntEdge ie = { link_a.child.id, static_cast<float>(expenditure) }; 
 
 			// Dereference the vector<IntEdge> iterator, assign it to the IntEdge created,
 			// then advance the iterator.

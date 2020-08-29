@@ -49,7 +49,7 @@ namespace HF::SpatialStructures {
 		return this->members[i];
 	}
 
-	Path::Path(const std::vector<PathMember> pm) {
+	Path::Path(const std::vector<PathMember> & pm) {
 		this->members = pm;
 	}
 
