@@ -460,6 +460,55 @@ namespace HumanFactors.Tests.SpatialStructures
         }
 
         [TestMethod]
+        public void AddManyNodeAttribute()
+        {
+            // Create a graph and add two edges to create nodes
+            Graph g = CreateSampleGraph();
+
+            //! [EX_AddNodeAttribute]
+
+            // Add node attributes to the graph for the nodes
+            // we just created
+            g.AddNodeAttribute(2, "Attr", "200");
+            g.AddNodeAttribute(1, "Attr", "100");
+            g.AddNodeAttribute(0, "Attr", "0");
+
+            // Get scores for this attribute from the graph
+            var attr = g.GetNodeAttributes("Attr");
+
+            // Print all results
+            foreach (string score in attr)
+                Debug.Write(score + ", ");
+            Debug.WriteLine("");
+
+            //! [EX_AddNodeAttribute]
+
+            // Assert that the scores meet our expectations
+            Assert.AreEqual(3, attr.Length);
+            Assert.AreEqual("0", attr[0]);
+            Assert.AreEqual("100", attr[1]);
+            Assert.AreEqual("200", attr[2]);
+
+            //! [EX_AddNodeAttribute_2]
+            // Add another node to the graph
+            g.AddEdge(0, 4, 50);
+
+            // Get the attributes again to update our list
+            attr = g.GetNodeAttributes("Attr");
+
+            // Print all results. Note how 4 is the empty string since it was not
+            // Assigned a score for ATTR since it was added to the graph
+            foreach (string score in attr)
+                Debug.Write(score + ", ");
+
+            //! [EX_AddNodeAttribute_2]
+
+            // And that this is the empty string
+            Assert.AreEqual("", attr[3]);
+        }
+
+
+        [TestMethod]
         public void AddMultipleNodeAttributes()
         {
 

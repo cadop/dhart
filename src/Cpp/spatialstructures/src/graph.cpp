@@ -228,12 +228,20 @@ namespace HF::SpatialStructures {
 	int Graph::size() const { return ordered_nodes.size(); }
 
 	int Graph::MaxID() const {
-		int max_id = -1;
+		// If the nodes are ordered, the maximum ID is the ID of the last node in the array
+		if(!this->nodes_out_of_order)
+			// If this empty, the MaxID should be zero.
+			return this->ordered_nodes.empty() ? 0 : ordered_nodes.back().id;
+		//Otherwise if the graph's nodes aren`t ordered, then we need to find the maximum
+		// id by comparing the IDS of every node in the graph.
+		else {
+			int max_id = -1;
 
-		for (const auto& node : ordered_nodes)
-			max_id = std::max(node.id, max_id);
+			for (const auto& node : ordered_nodes)
+				max_id = std::max(node.id, max_id);
 
-		return max_id;
+			return max_id;
+		}
 	}
 
 	int Graph::getID(const Node& node) const
@@ -890,7 +898,7 @@ namespace HF::SpatialStructures {
 		int num_nodes = -1;
 
 		// Find the maximum ID in the graph if using Int Nodes
-		if (using_int_nodes)
+		if (nodes_out_of_order)
 			num_nodes = MaxID();
 		else
 			num_nodes = size();
@@ -909,9 +917,15 @@ namespace HF::SpatialStructures {
 
 	inline bool Graph::hasKey(int id) const
 	{
-		// The only way to search for an ID now is brute force
-		for (int i = 0; i < ordered_nodes.size(); i++)
-			if (ordered_nodes[i].id == id) return true;
+		// If nodes are ordered, then we can simply compare this node's ID to the
+		// id of the final node in the ordered_nodes array.
+		if (!this->nodes_out_of_order)
+			return (id <= this->MaxID());
+
+		else
+			// Otherwise we need to loop through every node and check equality.
+			for (int i = 0; i < ordered_nodes.size(); i++)
+				if (ordered_nodes[i].id == id) return true;
 		
 		return false;
 	}
@@ -988,7 +1002,7 @@ namespace HF::SpatialStructures {
 			// If we're adding a new key that's an integer
 			// ordered_nodes is no longer gauranteed to be
 			// in order and we must tell the graph this.
-			this->using_int_nodes = true;
+			this->nodes_out_of_order = true;
 
 			// Add an empty node to ordered_nodes
 			ordered_nodes.push_back(Node());

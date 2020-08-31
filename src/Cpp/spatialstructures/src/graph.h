@@ -519,7 +519,7 @@ namespace HF::SpatialStructures {
 			This causes the graph to spend more time finding the maximum node ID, since it's not
 			gauranteed edges will be added in order.
 		*/
-		bool using_int_nodes = false;
+		bool nodes_out_of_order = false;
 
 		/*!
 			\brief
