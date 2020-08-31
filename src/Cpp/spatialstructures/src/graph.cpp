@@ -228,12 +228,16 @@ namespace HF::SpatialStructures {
 	int Graph::size() const { return ordered_nodes.size(); }
 
 	int Graph::MaxID() const {
-		int max_id = -1;
+		if(!this->using_int_nodes)
+			return this->ordered_nodes.empty() ? 0 : ordered_nodes.back().id;
+		else {
+			int max_id = -1;
 
-		for (const auto& node : ordered_nodes)
-			max_id = std::max(node.id, max_id);
+			for (const auto& node : ordered_nodes)
+				max_id = std::max(node.id, max_id);
 
-		return max_id;
+			return max_id;
+		}
 	}
 
 	int Graph::getID(const Node& node) const
@@ -909,9 +913,13 @@ namespace HF::SpatialStructures {
 
 	inline bool Graph::hasKey(int id) const
 	{
-		// The only way to search for an ID now is brute force
-		for (int i = 0; i < ordered_nodes.size(); i++)
-			if (ordered_nodes[i].id == id) return true;
+
+		if (!this->using_int_nodes)
+			return (id <= this->MaxID());
+
+		else
+			for (int i = 0; i < ordered_nodes.size(); i++)
+				if (ordered_nodes[i].id == id) return true;
 		
 		return false;
 	}

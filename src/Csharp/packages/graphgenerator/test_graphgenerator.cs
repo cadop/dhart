@@ -3,6 +3,7 @@ using HumanFactors.Geometry;
 using HumanFactors.SpatialStructures;
 using HumanFactors.RayTracing;
 using System.Runtime.InteropServices;
+using System.Diagnostics;
 
 namespace HumanFactors.Tests.GraphGenerator
 {
@@ -28,6 +29,30 @@ namespace HumanFactors.Tests.GraphGenerator
             var pts = G.getNodes();
 
             Assert.AreNotEqual(pts.size, 0);
+        }
+
+        [TestMethod]
+        public void StringsBeingPasses()
+        {
+            MeshInfo Mesh = OBJLoader.LoadOBJ(plane_path, CommonRotations.Yup_To_Zup);
+            EmbreeBVH BVH = new EmbreeBVH(Mesh);
+
+            Vector3D start_point = new Vector3D(0.001f, 0.001f, 1);
+            Vector3D spacing = new Vector3D(0.0001f, 0.0001f, 1.7f);
+
+            Graph G = HumanFactors.GraphGenerator.GraphGenerator.GenerateGraph(BVH, start_point, spacing, 1000000);
+
+            Assert.IsNotNull(G);
+
+            Debug.WriteLine(G.NumNodes());
+
+            float[] attrs = new float[G.NumNodes()];
+            for(int i = 0; i < G.NumNodes(); i++)
+                attrs[i] = i;
+
+            G.AddNodeAttribute("HI", attrs);
+            Assert.IsTrue(false, G.NumNodes().ToString());
+
         }
 
         [TestMethod]

@@ -469,6 +469,51 @@ TEST(Performance, GraphGenerator) {
 		nodes_generated[i] = graph.size();
 	}
 
+	// Generate random things for node attributes
+
 	// Print Results
 	PrintTrials(watches, nodes_generated, "Nodes");
+}
+
+TEST(Performance, attrs) {
+
+	// Setup trial arrays
+	// Set Graph generator settings
+	auto ray_tracer = CreateRTWithPlane();
+	std::array<float, 3> start{ 1,1,1 };
+	std::array<double, 3> spacing{ 0.01,0.01,0.01 };
+	float up_step = 1;
+	float down_step = 1;
+	float up_slope = 30;
+	float down_slope = 30;
+	int max_step_connections = 1;
+
+	auto GG = HF::GraphGenerator::GraphGenerator(ray_tracer);
+	auto graph = GG.BuildNetwork(
+		start,
+		spacing,
+		100000,
+		up_step,
+		up_slope,
+		down_step,
+		down_slope,
+		max_step_connections
+	);
+	graph.Compress();
+
+	if (graph.size() == 0)
+		FAIL();
+
+
+	// Generate random things for node attributes
+	std::vector<std::string> attrs(graph.size());
+	for (int i = 0; i < graph.size(); i++)
+		attrs[i] = std::to_string(i);
+	std::vector<int> ids(graph.size());
+	for (int i = 0; i < graph.size(); i++)
+		ids[i] = i;
+
+	std::string attr_string = "Attribute";
+	graph.AddNodeAttributes(ids, attr_string, attrs);
+	graph.AttrToCost(attr_string, attr_string);
 }
