@@ -32,7 +32,7 @@ namespace HumanFactors.Tests.GraphGenerator
         }
 
         [TestMethod]
-        public void StringsBeingPasses()
+        public void LargeNumberDoesntCauseStackOverflow()
         {
             MeshInfo Mesh = OBJLoader.LoadOBJ(plane_path, CommonRotations.Yup_To_Zup);
             EmbreeBVH BVH = new EmbreeBVH(Mesh);
@@ -50,7 +50,8 @@ namespace HumanFactors.Tests.GraphGenerator
             for(int i = 0; i < G.NumNodes(); i++)
                 attrs[i] = i;
 
-            G.AddNodeAttribute("HI", attrs);
+            G.AddNodeAttribute("node_attr", attrs);
+            Assert.AreEqual(G.GetNodeAttributes("node_attr").Length, attrs.Length);
 
         }
 
