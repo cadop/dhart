@@ -51,7 +51,6 @@ namespace HumanFactors.Tests.GraphGenerator
                 attrs[i] = i;
 
             G.AddNodeAttribute("HI", attrs);
-            Assert.IsTrue(false, G.NumNodes().ToString());
 
         }
 
