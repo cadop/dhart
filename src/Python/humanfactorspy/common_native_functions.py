@@ -1,8 +1,9 @@
 from ctypes import *
-from humanfactorspy.Exceptions import *
 from typing import *
 import os
 import numbers
+from humanfactorspy.Exceptions import *
+from humanfactorspy.utils import *
 
 # This is used to check if an object is a number
 
@@ -43,15 +44,19 @@ def ConvertPointsToArray(
     points: Union[Tuple[float, float, float], Iterable[Tuple[float, float, float]]]
     ) -> c_float:
     """ Convert a list of floats to a flat c-style array """
-    # If it's a tuple or list of floats, just do the one
-    if (
-            isinstance(points, (tuple))
-        ) or (  # IF this is a list, we need a little more proof
-                # that this shouldn't go in the else clause
-            isinstance(points, list)  # Must be a list
-            and isinstance(points[0], numbers.Number)  # Must hold numbers
-            and len(points) == 3  # Must be a length of 3
-        ):
+
+    # # If it's a tuple or list of floats, just do the one
+    # if (
+    #         isinstance(points, (tuple))
+    #     ) or (  # IF this is a list, we need a little more proof
+    #             # that this shouldn't go in the else clause
+    #         isinstance(points, list)  # Must be a list
+    #         and isinstance(points[0], numbers.Number)  # Must hold numbers
+    #         and len(points) == 3  # Must be a length of 3
+    #     ):
+
+    # Using the ispoint method
+    if (is_point(points) and len(points)==3):
         point_arr_type = c_float * 3
         point_arr = point_arr_type()
         point_arr[0] = points[0]
