@@ -10,6 +10,7 @@
 #include <cmath>
 #include <iostream>
 #include <assert.h>
+#include <limits>
 
 #ifndef VIEW_ANALYSIS_G
 #define VIEW_ANALYSIS_G
@@ -192,27 +193,29 @@ namespace HF::ViewAnalysis {
 		*/
 	inline void Aggregate(float& out_total, float new_value, const AGGREGATE_TYPE agg_type, int count = 0) {
 		switch (agg_type) {
-		case AGGREGATE_TYPE::COUNT:
-			if (new_value > 0) out_total += 1;
-			break;
-		case AGGREGATE_TYPE::SUM:
-			out_total += new_value;
-			break;
-		case AGGREGATE_TYPE::AVERAGE: {
-			int n = count - 1;
-			out_total = (n * (out_total)+new_value) / count;
-			break;
-		}
-		case AGGREGATE_TYPE::MAX:
-			out_total = std::max<float>(out_total, new_value);
-			break;
-		case AGGREGATE_TYPE::MIN:
-			out_total = std::min<float>(out_total, new_value);
-			break;
-		default:
-			throw std::out_of_range("Unimplemented aggregation type");
-			break;
-		}
+			case AGGREGATE_TYPE::COUNT:
+				if (new_value > 0) out_total += 1;
+				break;
+			case AGGREGATE_TYPE::SUM:
+				out_total += new_value;
+				break;
+			case AGGREGATE_TYPE::AVERAGE: {
+				int n = count - 1;
+				out_total = (n * (out_total)+new_value) / count;
+				break;
+			}
+			case AGGREGATE_TYPE::MAX: {
+				out_total = std::max<float>(out_total, new_value);
+				break;
+			}
+			case AGGREGATE_TYPE::MIN: {
+				out_total = std::min<float>(out_total, new_value);
+				break;
+			}
+			default:
+				throw std::out_of_range("Unimplemented aggregation type");
+				break;
+		} // End Switch
 		assert(out_total == 0 || isnormal(out_total));
 		return;
 	}
@@ -222,7 +225,7 @@ namespace HF::ViewAnalysis {
 	/// <param name="ray_tracer"> A valid raytracer that already has the geometry loaded. </param>
 	/// <param name="Nodes"> Points to perform analysis from. </param>
 	/// <param name="num_rays"> The number of rays to cast from each point in nodes. The actual amount of rays cast
-	/// may be less or more than this number. </param>
+	/// may be less or more than this number. Due to how the spherical ray distribution is calculated. </param>
 	/// \param upward_limit Maximum angle in degrees to cast rays above the viewpoint.
 	/// \param downward_limit Maximum angle in degrees to cast rays below the viewpoint.
 	/// \param height Height off the ground to cast from. All points in Nodes will be offset
@@ -335,8 +338,8 @@ namespace HF::ViewAnalysis {
 		int num_rays,
 		float upward_limit = 50.0f,
 		float downward_limit = 70.0f,
-		float height = 1.7f
-	) {
+		float height = 1.7f)
+	{
 		// Calculate directions then perform a quick check to see if we can even hold this vector
 		const auto directions = FibbonacciDistributePoints(num_rays, upward_limit, downward_limit);
 		int required_vector_size = directions.size() * Nodes.size();
@@ -350,31 +353,48 @@ namespace HF::ViewAnalysis {
 		}
 		out_results.resize(required_vector_size);
 
-		float out_distance = 0;	int out_mid = 0;
+		// Size of the vector is the number of rays
 		num_rays = directions.size();
-#pragma omp parallel for schedule(dynamic)
-		for (int i = 0; i < Nodes.size(); i++) {
-			auto node = Nodes[i];
-			node[2] += height;
-			int os = directions.size() * i;
 
-			// Iterate through every direction and fire a ray for it
-			for (int k = 0; k < directions.size(); k++)
+		#pragma omp parallel
+		{
+		// Start parallel intersections
+		#pragma omp for schedule(dynamic) 
+			for (int i = 0; i < Nodes.size(); i++)
+			{
+				// Reset out values to temporarily store results. Kept private by defining here
+				float out_distance = 0;
+				int out_mid = 0;
 
-				// Call the result's SetHit if it intersected.
-				if (ray_tracer.IntersectOutputArguments(node, directions[k], out_distance, out_mid))
-					out_results[os + k].SetHit(node, directions[k], out_distance, out_mid);
-		}
+				auto node = Nodes[i];
+				node[2] += height;
+				int os = directions.size() * i;
+
+				// Iterate through every direction and fire a ray for it
+				for (int k = 0; k < directions.size(); k++)
+				{
+					int idx = os + k;
+					// Call the result's SetHit if it intersected.
+					if (ray_tracer.IntersectOutputArguments(node, directions[k], out_distance, out_mid))
+					{
+						out_results[idx].SetHit(node, directions[k], out_distance, out_mid);
+					}
+				} // End direction loop
+			} // End node loop
+		} // End omp space
 
 		return out_results;
 	}
+
+// To use numeric limits, need to undefine max
+#undef max
 
 	/// <summary> Conduct view analysis and recieve a summarized set of results for each node. </summary>
 	/// <param name="ray_tracer"> A valid raytracer that already has the geometry loaded. </param>
 	/// <param name="Nodes"> Points to perform analysis from. </param>
 	/// <param name="num_rays">
 	/// The number of rays to cast from each point in nodes. The actual amount of rays cast may be
-	/// less or more than this number.
+	/// less or more than this number. Due to how the spherical ray distribution is calculated. 
 	/// </param>
 	/*!
 		\ingroup ViewAnalysis
@@ -468,45 +488,58 @@ namespace HF::ViewAnalysis {
 		float upward_limit = 50.0f,
 		float downward_limit = 70.0f,
 		float height = 1.7f,
-		const AGGREGATE_TYPE aggregation = AGGREGATE_TYPE::SUM
-	) {
+		const AGGREGATE_TYPE aggregation = AGGREGATE_TYPE::SUM)
+	{
 		// Allocate score array and calculate directions
 		std::vector<float> out_scores(Nodes.size());
 		const auto directions = FibbonacciDistributePoints(num_rays, upward_limit, downward_limit);
 
-#pragma omp parallel for schedule(dynamic)
-		for (int i = 0; i < Nodes.size(); i++) {
-			const auto& node = Nodes[i];
-
-			// Get a reference to the value in the score array, reset score and count to zero
-			float& score = out_scores[i];
-			score = 0;
-			int count = 1;
-
-			// Cast a ray for every direction in directions
-			for (const auto& direction : directions)
+		//#pragma omp parallel
+		//{
+			// Start parallel intersections
+		//#pragma omp for schedule(dynamic) 
+			for (int i = 0; i < Nodes.size(); i++)
 			{
-				// Create a copy of the node to offset.
-				auto node_copy = node;
-				node_copy[2] += height;
-				float distance = 0;
+				const auto& node = Nodes[i];
 
-				// If the ray intersects any geometry, calculate distance to the intersection point
-				// then plug that into the aggregation method.
-				if (ray_tracer.PointIntersection(
-					node_copy[0], node_copy[1], node_copy[2],
-					direction[0], direction[1], direction[2]
-				)) {
-					distance = sqrtf(
-						powf((node[0] - node_copy[0]), 2) +
-						powf((node[1] - node_copy[1]), 2) +
-						powf((node[2] - node_copy[2]), 2)
-					);
-					Aggregate(score, distance, aggregation, count);
-					count++;
+				// Get a reference to the value in the score array, reset score and count to zero
+				float& score = out_scores[i];
+				int count = 1;
+
+				// If the aggregation type is min, set the score to some large value
+				if (aggregation == AGGREGATE_TYPE::MIN){
+					score = std::numeric_limits<float>::max();
 				}
-			}
-		}
+				else {
+					score = 0;
+				}
+
+				// Cast a ray for every direction in directions
+				for (const auto& direction : directions)
+				{
+					// Create a copy of the node to offset.
+					auto node_copy = node;
+					node_copy[2] += height;
+					//float distance = 0;
+
+					// If the ray intersects any geometry, calculate distance to the intersection point
+					// then plug that into the aggregation method.
+					if (ray_tracer.PointIntersection(
+							node_copy[0], node_copy[1], node_copy[2],
+							direction[0], direction[1], direction[2]))
+					{
+						float distance = sqrtf(
+												powf((node[0] - node_copy[0]), 2) +
+												powf((node[1] - node_copy[1]), 2) +
+												powf((node[2] - node_copy[2]), 2));
+
+						// Based on aggregation method, check this new value against the last
+						Aggregate(score, distance, aggregation, count);
+						count++;
+					}
+				}// End FOR over directions
+			} // End FOR over Nodes
+		//}// End OMP
 		return out_scores;
 	}
 }
