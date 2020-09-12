@@ -494,10 +494,10 @@ namespace HF::ViewAnalysis {
 		std::vector<float> out_scores(Nodes.size());
 		const auto directions = FibbonacciDistributePoints(num_rays, upward_limit, downward_limit);
 
-		//#pragma omp parallel
-		//{
+		#pragma omp parallel
+		{
 			// Start parallel intersections
-		//#pragma omp for schedule(dynamic) 
+		#pragma omp for schedule(dynamic) 
 			for (int i = 0; i < Nodes.size(); i++)
 			{
 				const auto& node = Nodes[i];
@@ -540,7 +540,7 @@ namespace HF::ViewAnalysis {
 					}
 				}// End FOR over directions
 			} // End FOR over Nodes
-		//}// End OMP
+		}// End OMP
 		return out_scores;
 	}
 }
