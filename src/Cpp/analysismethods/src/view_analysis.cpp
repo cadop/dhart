@@ -81,11 +81,8 @@ namespace HF::ViewAnalysis {
 
 		\see AltitudeWithinRange to see how altitude is limited based on upward/downward fov.
 	*/ 
-	vector<std::array<float, 3>> FibbonacciDist(
-		int num_points,
-		float upwards_fov,
-		float downward_fov
-	) {
+	vector<std::array<float, 3>> FibbonacciDist(int num_points, float upwards_fov, float downward_fov) 
+	{
 
 		// Convert limits to radians
 		const float upperlimit = ConvertToRadians(upwards_fov);
@@ -121,11 +118,8 @@ namespace HF::ViewAnalysis {
 
 	}
 
-	vector<std::array<float, 3>> FibbonacciDistributePoints(
-		int num_points,
-		float upwards_fov,
-		float downward_fov
-	){
+	vector<std::array<float, 3>> FibbonacciDistributePoints(int num_points, float upwards_fov, float downward_fov)
+	{
 		// Generate initial set of directions
 		auto out_points = FibbonacciDist(num_points, upwards_fov, downward_fov);
 		
