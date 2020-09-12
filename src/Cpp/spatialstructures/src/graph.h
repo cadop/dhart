@@ -427,7 +427,7 @@ namespace HF::SpatialStructures {
 		}
 
 		inline bool bounds_check(int i) const {
-			return ~(i >= this->size()) || (i < 0);
+			return !(i >= this->size()) || (i < 0);
 		}
 
 		/*!
