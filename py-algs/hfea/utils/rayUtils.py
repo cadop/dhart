@@ -12,7 +12,7 @@ try:
 except:
     print('Not in Rhino Environment')
 
-import mathUtils as mu
+from . import mathUtils as mu
 import time
 import math
 
@@ -26,6 +26,15 @@ checked_rays_mod = {}
 
 rays_cast = 0
 ray_time = 0
+
+def cast_ray_multi(geom, nodes, dir, pos=False ):
+    """ Use the Embree Raytracer to get the distance of a ray intersection """
+    if pos:
+        return IntersectForPoint(geom, p1, dir)
+
+    dist_array = Intersect(geom, nodes, dir)
+    return dist_array
+
 
 def cast_ray(geom, p1, dir, pos=False ):
     """ Use the Embree Raytracer to get the distance of a ray intersection """
