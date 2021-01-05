@@ -530,9 +530,9 @@ namespace HF::ViewAnalysis {
 					{
 						// Add the height back to the original node so the distance check is accurate
 						float distance = sqrtf(
-												powf((node[0]		   - node_copy[0]), 2) +
-												powf((node[1]		   - node_copy[1]), 2) +
-												powf((node[2] + height - node_copy[2]), 2));
+												  powf((node[0]		   - node_copy[0]), 2) 
+												+ powf((node[1]		   - node_copy[1]), 2) 
+												+ powf((node[2] + height - node_copy[2]), 2));
 
 						// Based on aggregation method, check this new value against the last
 						Aggregate(score, distance, aggregation, count);
