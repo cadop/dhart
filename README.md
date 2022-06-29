@@ -1,4 +1,7 @@
-Getting started:
+
+
+Getting started
+===============
 
 This guide will describe how to retrieve the contents of this repository,
 and build Analysis from source.
@@ -8,7 +11,8 @@ Analysis is currently designed to run on a PC running the Windows 10
 operating system.
 Also note: This guide is a 'work-in-progress' and subject to change.
 
-Pre-requisites:
+Pre-requisites
+==============
 
 
 Git for Windows:
