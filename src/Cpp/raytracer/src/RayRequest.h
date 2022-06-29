@@ -69,7 +69,8 @@ namespace HF {
 					RayRequest request;
 				\endcode
 			*/
-			RayRequest() {};
+			// Commenting out empty rayrequest definition
+			//RayRequest() {};
 
 			/// <summary>
 			/// Tells if the rayrequest it or not. If true, the hit was successful, false otherwise.

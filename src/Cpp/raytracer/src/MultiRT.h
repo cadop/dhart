@@ -16,8 +16,9 @@ namespace HF::RayTracer {
 			EMBREE,
 			NANO_RT
 		};
+
 		void* RayTracer;
-		RT_Type type = NONE;
+		RT_Type type = RT_Type::NONE;
 
 		inline MultiRT() {};
 		MultiRT(HF::RayTracer::EmbreeRayTracer* ert);

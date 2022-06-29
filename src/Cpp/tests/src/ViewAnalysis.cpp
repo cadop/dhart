@@ -240,6 +240,7 @@ TEST(_ViewAnalysis, SphericalViewAnalysis_LoadedMesh) {
 	DestroyRayTracer(bvh);
 }
 
+/// \todo fix this to actually test if all rays hit
 TEST(_ViewAnalysis, AllRaysHit) {
 	auto MI = LoadMeshObjects(big_teapot_path);
 	EmbreeRayTracer ERT(MI);
@@ -402,6 +403,38 @@ TEST(_ViewAnalysis, ViewAnalysisAggregate) {
 	std::cerr << ")" << std::endl;
 }
 
+TEST(_ViewAnalysis, ViewAnalysisAggregate_MIN) {
+	// Use this so we can fit within 80 characters
+	using HF::ViewAnalysis::SphericalRayshootWithAnyRTForDistance;
+	using HF::ViewAnalysis::AGGREGATE_TYPE;
+
+	std::string weston_ngon_path = "Weston_meshed_no-ngon.obj";
+	auto MI = LoadMeshObjects(weston_ngon_path);
+	EmbreeRayTracer ert(MI);
+
+	// Define observer points
+	std::vector<std::array<float, 3>> points{
+												{1219.0, 84.0, 625.5}, 
+												{-351.0, -26.0, 625.5}, 
+												{1579.0, 44.0, 625.5}, 
+												{299.0, 254.0, 625.5}, 
+												{1709.0, 484.0, 625.5} };
+	
+	// Perform View Analysis and sum the distance to all intersections
+	// for every node
+	int num_rays = 2000;
+	auto results = SphericalRayshootWithAnyRTForDistance(
+						ert, points, num_rays, 5.0f, 5.0f, 10.0f, AGGREGATE_TYPE::MIN);
+
+	float sum = 0;
+	for (int i = 0; i < results.size(); i++) {
+		std::cerr << results[i];
+		sum += results[i];
+	}
+	// Checked from Python sum manually 
+	ASSERT_NEAR(sum, 256.33, 2);
+}
+
 TEST(C_ViewAnalysisCInterface, SphericalViewAnalysisAggregate) {
 	// Create Plane
 	const std::vector<float> plane_vertices{
@@ -424,6 +457,7 @@ TEST(C_ViewAnalysisCInterface, SphericalViewAnalysisAggregate) {
 		"",
 		0
 	);
+
 	ASSERT_EQ(MIR, HF::Exceptions::HF_STATUS::OK);
 
 	// Create a new raytracer

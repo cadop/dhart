@@ -25,8 +25,8 @@ C_INTERFACE SphereicalViewAnalysisAggregate(
 	AGGREGATE_TYPE AT,
 	vector<float>** out_scores,
 	float** out_scores_ptr, 
-	int* out_scores_size
-) {
+	int* out_scores_size)
+{
 	vector<float>* scores = new vector<float>();
 	vector<Node> nodes(node_ptr, node_ptr + node_size);
 	
@@ -81,7 +81,8 @@ C_INTERFACE SphericalViewAnalysisNoAggregate(
 	std::vector<RayResult> ** out_results,
 	RayResult ** out_results_ptr
 	//std::vector<float>** out_directions
-){
+	)
+{
 	
 	vector<RayResult> * scores = new vector<RayResult>();
 	vector<Node> nodes(node_ptr, node_ptr + node_size);
@@ -127,20 +128,23 @@ C_INTERFACE SphericalDistribute(
 	vector<float>** out_direction_vector,
 	float** out_direction_data,
 	float upward_fov,
-	float downward_fov
-) {
+	float downward_fov) 
+{
 	*out_direction_vector = new vector<float>();
 	auto array_array = ViewAnalysis::FibbonacciDistributePoints(*num_rays, upward_fov, downward_fov);
 	
 	auto& out_directions = **out_direction_vector;
 	
 	out_directions.resize(array_array.size()*3);
-	for (int i = 0; i < array_array.size(); i += 1) {
-		float os = i * 3;
+	for (int i = 0; i < array_array.size(); i += 1)
+	{
+		int os = i * 3;
+		int y_idx = os + 1;
+		int z_idx = os + 2;
 		const auto& arr = array_array[i];
 		out_directions[os] = arr[0];
-		out_directions[os + 1] = arr[1];
-		out_directions[os + 2] = arr[2];
+		out_directions[y_idx] = arr[1];
+		out_directions[z_idx] = arr[2];
 	}
 
 	*out_direction_data = out_directions.data();

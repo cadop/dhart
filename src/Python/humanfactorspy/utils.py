@@ -1,3 +1,4 @@
+import numpy 
 
 __all__ = ['is_point']
 
@@ -13,6 +14,9 @@ def is_point(potential_point) -> bool:
 
     Returns:
         true if it can be used as a point, false otherwise
+
+    Warning:
+        Will not work for an array of more than 3 values
 
     Example:
 
@@ -53,10 +57,11 @@ def is_point(potential_point) -> bool:
     # catch the exception and return false. Also must have numeric
     # type
     try:
+        valid_types = (int, float, complex, numpy.float32, numpy.float64)
         return (
-            isinstance(potential_point[0], (int, float, complex))
-            and isinstance(potential_point[1], (int, float, complex))
-            and isinstance(potential_point[2], (int, float, complex))
+            isinstance(potential_point[0], valid_types)
+            and isinstance(potential_point[1],valid_types)
+            and isinstance(potential_point[2], valid_types)
         )
     # These should be thrown if the object doesn't have a subscript operator
     # or does not have enough elements

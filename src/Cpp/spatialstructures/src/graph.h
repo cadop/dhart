@@ -427,7 +427,7 @@ namespace HF::SpatialStructures {
 		}
 
 		inline bool bounds_check(int i) const {
-			return i >= this->size() || i < 0;
+			return !(i >= this->size()) || (i < 0);
 		}
 
 		/*!
@@ -456,7 +456,7 @@ namespace HF::SpatialStructures {
 			\returns a pointer to the value of this EdgeCostSet's internal costs array
 		*/
 		inline const float* GetPtr() const { 
-			assert(this->costs.size() == 0);
+			assert(this->costs.size() > 0);
 			return this->costs.data(); 
 		}
 

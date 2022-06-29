@@ -223,7 +223,7 @@ namespace HF::RayTracer {
         ) {
             auto res = Intersect(origin, dir, distance, mesh_id);
 
-            // It it intersected, move the node and return true, otherwise do nothing and return false.
+            // If it intersected, move the node and return true, otherwise do nothing and return false.
             if (res.DidHit()) {
                 MovePoint(origin, dir, res.distance);
                 return true;
