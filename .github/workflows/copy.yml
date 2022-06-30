@@ -36,7 +36,7 @@ jobs:
         git config --local user.name "github-actions[bot]"
 
         mkdir html_build
-        git worktree add -B docs html_build origin/docs
+        git worktree add -B ghpages html_build origin/ghpages
 
         robocopy .\docs\ .\html_build\ /MIR
         cd html_build
