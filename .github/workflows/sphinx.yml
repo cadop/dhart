@@ -48,17 +48,18 @@ jobs:
         cmake --install .
     - name: Install package
       run: |
-        cd ../build/Python
+        ls
+        cd build/Python
         pip install -e .
-    - name: Install Sphinx Latex
-      run: |
-        sudo apt-get update -y && sudo apt-get install -y latexmk texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended
+    # - name: Install Sphinx Latex
+    #   run: |
+        # sudo apt-get update -y && sudo apt-get install -y latexmk texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended
     - name: Build documentation with sphinx
       run: |
-        cd docs
+        cd "docs/Python Docs"
         make clean
         make html
-        make latexpdf
+        # make latexpdf
         ls
 
     - name: Auto-deploy doc changes
