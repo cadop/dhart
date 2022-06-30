@@ -2,7 +2,7 @@
 Overview
 ========
 
-Welcome to DHART: Design, Humans, Analysis, and RoboTics -- A C++ package with interfaces to Python, C, and C#. 
+Welcome to DHART:a C++ package with interfaces to Python, C, and C# for  Design, Humans, Analysis, and RoboTics.
 
 There are a few components to the package, but the main focus is in providing fast ray-casting interfaces for python and C# for a variety of analysis and evaluation techniques.  Generally, you should be able to build a grid-like structure of the floors for a 3D model, calculate shortest paths by distance and custom metrics, and use these tools inside of a variety of programs such as Unity, Rhino, Revit, and more. 
 
@@ -64,6 +64,8 @@ When visiting the documentation page, click on Python to follow installation gui
 Building from Source
 --------------------
 
+- Uses Visual Studio
+
 This guide will describe how to retrieve the contents of this repository,
 and build from source.
 
@@ -95,33 +97,24 @@ In the next step, you will clone the Analysis repository.
 and hit ENTER. The Analysis repository will then be cloned to your local machine.
 
 
-2. Note that the time of this writing (06/03/2020 16:19), Analysis will build
-only on the UpdateCMake branch.
-To switch the branch from master to UpdateCMake,
-type git checkout UpdateCMake at the prompt.
-You will now be on the UpdateCMake branch.
+2. Open Microsoft Visual Studio 2019. After seeing the splash/welcome screen, please click the button that reads Open a local folder.
 
 
-3. Open Microsoft Visual Studio 2019. After seeing the splash/welcome screen,
-please click the button that reads Open a local folder.
-
-4. When the Browse window appears, navigate to the Analysis folder
+3. When the Browse window appears, navigate to the folder
 (the repository that you had cloned) on your local machine.
-Then, navigate to src.
-Click the Select folder button to confirm.
+Then, navigate to `src/`. Click the Select folder button to confirm.
 
+4. You may see a banner that asks to generate or configure the cmake project.  Click generate. 
 
 5. If the Solution Explorer view is not already open, you may open by
-navigating to View > Solution Explorer, or alternatively,
-you can also use the Ctrl + Alt + L shortcut to reveal Solution Explorer.
-Here, you can examine the sources imported by Visual Studio.
+navigating to View > Solution Explorer, or alternatively, you can also use the Ctrl + Alt + L shortcut to reveal Solution Explorer. Here, you can examine the sources imported by Visual Studio.
 
 
 6. We are now ready to build Analysis.
 CMake is used to aid in the compilation process.
-To build, navigate to Build > Build All,
-or you may use the Ctrl + Shift + B keyboard shortcut.
+There are a few provided configuration files. Specifically, debug and release, as well as C# and Python specific ones.  Select the one you are interested in and navigate to Build > Build All. 
 
-You have now built the sources for Analysis.
+7. Once it has successfully built, you need to install.  Going back to the same build menu dropdown, click on install.  This will save the files to a build directory. 
 
-You can find the build files in .\Analysis\src\out\build\x64-Debug
+
+You can find the build files in .\dhart\src\out\build\x64-Debug
