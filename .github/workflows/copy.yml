@@ -9,7 +9,8 @@ jobs:
   build:
 
 
-    runs-on: windows-2019
+    runs-on: ubuntu-latest
+    # runs-on: windows-2019
     strategy:
       matrix:
         python-version: [3.8]
@@ -36,9 +37,13 @@ jobs:
         git config --local user.name "github-actions[bot]"
 
         mkdir html_build
-        git worktree add -B ghpages html_build origin/ghpages
 
-        robocopy .\docs\ .\html_build\ /MIR
+        # git worktree add -B ghpages html_build origin/ghpages
+        # robocopy .\docs\ .\html_build\ /MIR
+
+        git worktree add -B ghpages html_build origin/ghpages
+        cp -a docs/. html_build/
+
         cd html_build
         ls 
         git worktree list
