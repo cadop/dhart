@@ -1,0 +1,686 @@
+\hypertarget{a00409}{}\doxysection{HF\+::Spatial\+Structures\+::Cost\+Algorithms Namespace Reference}
+\label{a00409}\index{HF::SpatialStructures::CostAlgorithms@{HF::SpatialStructures::CostAlgorithms}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00001_a02273}{double}} \mbox{\hyperlink{a00409_ae7b446fefe0b9994859f47b85de79039}{to\+\_\+radians}} (\mbox{\hyperlink{a00001_a02273}{double}} degrees)
+\item 
+\mbox{\hyperlink{a00001_a02273}{double}} \mbox{\hyperlink{a00409_adee2fb2573f4dbc2e5c7db153dff2694}{to\+\_\+degrees}} (\mbox{\hyperlink{a00001_a02273}{double}} radians)
+\item 
+\mbox{\hyperlink{a00001_a02273}{double}} \mbox{\hyperlink{a00409_ae06eb693d0d7858d7a863fae3a6eee2c}{Calculate\+Slope}} (\mbox{\hyperlink{a02017}{Node}} \&parent, \mbox{\hyperlink{a02017}{Node}} \&child)
+\item 
+\mbox{\hyperlink{a01481}{Edge\+Set}} \mbox{\hyperlink{a00409_ac51f2e76c00356f8a6145bee865cd922}{Calculate\+Energy\+Expenditure}} (const \mbox{\hyperlink{a00399_a01489}{Subgraph}} \&sg)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{a01481}{Edge\+Set}} $>$ \mbox{\hyperlink{a00409_adbe5e58355a884494d6e99bf17fc5f7b}{Calculate\+Energy\+Expenditure}} (const \mbox{\hyperlink{a01497}{Graph}} \&g)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{a01477}{Int\+Edge}} $>$ \mbox{\hyperlink{a00409_a51b88e596c3b5f68b7abbcbc91e30bdf}{Calculate\+Cross\+Slope}} (const \mbox{\hyperlink{a00399_a01489}{Subgraph}} \&sg)
+\item 
+std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{a01477}{Int\+Edge}} $>$ $>$ \mbox{\hyperlink{a00409_a6d12a3af69887cb335b490304138afc6}{Calculate\+Cross\+Slope}} (const \mbox{\hyperlink{a01497}{Graph}} \&g)
+\item 
+{\footnotesize template$<$size\+\_\+t dimension, typename float\+\_\+precision  = float$>$ }\\float\+\_\+precision \mbox{\hyperlink{a00409_a355d486f17db42f6c56411cc53f76aec}{euclidean\+\_\+distance}} (float\+\_\+precision point\+\_\+a\mbox{[}$\,$\mbox{]}, float\+\_\+precision point\+\_\+b\mbox{[}$\,$\mbox{]})
+\item 
+{\footnotesize template$<$size\+\_\+t dimension, typename float\+\_\+precision  = float$>$ }\\float\+\_\+precision \mbox{\hyperlink{a00409_afa250ed24ee2219f6632aaebfd7bd150}{dot\+\_\+product}} (float\+\_\+precision vec\+\_\+U\mbox{[}$\,$\mbox{]}, float\+\_\+precision vec\+\_\+V\mbox{[}$\,$\mbox{]})
+\item 
+{\footnotesize template$<$size\+\_\+t dimension, typename float\+\_\+precision  = float$>$ }\\bool \mbox{\hyperlink{a00409_a3de857e1e14eb6872146c36bef3b3fad}{is\+\_\+perpendicular}} (float\+\_\+precision vec\+\_\+U\mbox{[}$\,$\mbox{]}, float\+\_\+precision vec\+\_\+V\mbox{[}$\,$\mbox{]})
+\item 
+{\footnotesize template$<$size\+\_\+t dimension, typename float\+\_\+precision  = float$>$ }\\std\+::vector$<$ \mbox{\hyperlink{a01473}{Edge}} $>$ \mbox{\hyperlink{a00409_a84306feb66161c4163e00f3bf3482679}{Get\+Perpendicular\+Edges}} (const \mbox{\hyperlink{a00399_a01489}{Subgraph}} \&sg, const \mbox{\hyperlink{a02017}{Node}} \&child\+\_\+node\+\_\+a)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{a00409_a6d12a3af69887cb335b490304138afc6}\label{a00409_a6d12a3af69887cb335b490304138afc6}} 
+\index{HF::SpatialStructures::CostAlgorithms@{HF::SpatialStructures::CostAlgorithms}!CalculateCrossSlope@{CalculateCrossSlope}}
+\index{CalculateCrossSlope@{CalculateCrossSlope}!HF::SpatialStructures::CostAlgorithms@{HF::SpatialStructures::CostAlgorithms}}
+\doxysubsubsection{\texorpdfstring{CalculateCrossSlope()}{CalculateCrossSlope()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{a01477}{Int\+Edge}} $>$ $>$ H\+F\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Calculate\+Cross\+Slope (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01497}{Graph}} \&}]{g }\end{DoxyParamCaption})}
+
+\textbackslash{}summary Calculates cross slope for all subgraphs in \mbox{\hyperlink{a01497}{Graph}} g 
+\begin{DoxyParams}{Parameters}
+{\em g} & The \mbox{\hyperlink{a01497}{Graph}} to calculate cross slopes with \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A container of vector$<$\+Int\+Edge$>$, ordered by parent node ID
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// for brevity}}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a00409_a51b88e596c3b5f68b7abbcbc91e30bdf}{HF::SpatialStructures::CostAlgorithms::CalculateCrossSlope}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create 7 nodes}}
+\DoxyCodeLine{Node n0(0, 0, 0);}
+\DoxyCodeLine{Node n1(1, 3, 5);}
+\DoxyCodeLine{Node n2(3, -\/1, 2);}
+\DoxyCodeLine{Node n3(1, 2, 1);}
+\DoxyCodeLine{Node n4(4, 5, 7);}
+\DoxyCodeLine{Node n5(5, 3, 2);}
+\DoxyCodeLine{Node n6(-\/2, -\/5, 1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{Graph g;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Adding 9 edges}}
+\DoxyCodeLine{g.addEdge(n0, n1);}
+\DoxyCodeLine{g.addEdge(n1, n2);}
+\DoxyCodeLine{g.addEdge(n1, n3);}
+\DoxyCodeLine{g.addEdge(n1, n4);}
+\DoxyCodeLine{g.addEdge(n2, n4);}
+\DoxyCodeLine{g.addEdge(n3, n5);}
+\DoxyCodeLine{g.addEdge(n5, n6);}
+\DoxyCodeLine{g.addEdge(n4, n6);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Always compress the graph after adding edges!}}
+\DoxyCodeLine{g.Compress();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Get a container of vector<IntEdge>, ordered by parent ID.}}
+\DoxyCodeLine{\textcolor{comment}{// These consist of alternate edge costs for all subgraphs in g.}}
+\DoxyCodeLine{std::vector<std::vector<IntEdge>> all\_edge\_costs = \mbox{\hyperlink{a00409_a51b88e596c3b5f68b7abbcbc91e30bdf}{CalculateCrossSlope}}(g);}
+\end{DoxyCode}
+ 
+
+Definition at line 283 of file cost\+\_\+algorithms.\+cpp.
+
+
+
+References Calculate\+Cross\+Slope(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Get\+Subgraph(), and H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Nodes().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00409_a6d12a3af69887cb335b490304138afc6_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00409_a51b88e596c3b5f68b7abbcbc91e30bdf}\label{a00409_a51b88e596c3b5f68b7abbcbc91e30bdf}} 
+\index{HF::SpatialStructures::CostAlgorithms@{HF::SpatialStructures::CostAlgorithms}!CalculateCrossSlope@{CalculateCrossSlope}}
+\index{CalculateCrossSlope@{CalculateCrossSlope}!HF::SpatialStructures::CostAlgorithms@{HF::SpatialStructures::CostAlgorithms}}
+\doxysubsubsection{\texorpdfstring{CalculateCrossSlope()}{CalculateCrossSlope()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{a01477}{Int\+Edge}} $>$ H\+F\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Calculate\+Cross\+Slope (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a00399_a01489}{Subgraph}} \&}]{sg }\end{DoxyParamCaption})}
+
+\textbackslash{}summary Calculates cross slope for this subgraph (a parent node and all edges by this parent) 
+\begin{DoxyParams}{Parameters}
+{\em sg} & A \mbox{\hyperlink{a00399_a01489}{Subgraph}} type, which consists of a \mbox{\hyperlink{a02017}{Node}} (parent node) and a std\+::vector$<$\+Edge$>$ (all edges by this parent) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A container of \mbox{\hyperlink{a01477}{Int\+Edge}}
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// for brevity}}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a00409_a51b88e596c3b5f68b7abbcbc91e30bdf}{HF::SpatialStructures::CostAlgorithms::CalculateCrossSlope}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create 7 nodes}}
+\DoxyCodeLine{Node n0(2, 6, 6);}
+\DoxyCodeLine{Node n1(0, 0, 0);}
+\DoxyCodeLine{Node n2(-\/5, 5, 4);}
+\DoxyCodeLine{Node n3(-\/1, 1, 1);}
+\DoxyCodeLine{Node n4(2, 2, 2);}
+\DoxyCodeLine{Node n5(5, 3, 2);}
+\DoxyCodeLine{Node n6(-\/2, -\/5, 1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{Graph g;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Adding 9 edges}}
+\DoxyCodeLine{g.addEdge(n0, n1);  \textcolor{comment}{// [ -\/2, -\/6, -\/6 ]}}
+\DoxyCodeLine{g.addEdge(n1, n2);  \textcolor{comment}{// [ -\/5,  5,  4 ]}}
+\DoxyCodeLine{g.addEdge(n1, n3);  \textcolor{comment}{// [ -\/1,  1,  1 ]}}
+\DoxyCodeLine{g.addEdge(n1, n4);  \textcolor{comment}{// [  2,  2,  2 ]}}
+\DoxyCodeLine{g.addEdge(n2, n4);  \textcolor{comment}{// [ -\/9, -\/3, -\/2 ]}}
+\DoxyCodeLine{g.addEdge(n3, n5);  \textcolor{comment}{// [ -\/6,  2,  1 ]}}
+\DoxyCodeLine{g.addEdge(n5, n6);  \textcolor{comment}{// [ -\/7, -\/8, -\/1 ]}}
+\DoxyCodeLine{g.addEdge(n4, n6);  \textcolor{comment}{// [ -\/6, -\/7, -\/1 ]}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Always compress the graph after adding edges!}}
+\DoxyCodeLine{g.Compress();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Retrieve a subgraph of your choice, provide a parent node or parent node ID.}}
+\DoxyCodeLine{Subgraph sg = g.GetSubgraph(n1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Get a container of vector<IntEdge>, ordered by parent ID.}}
+\DoxyCodeLine{\textcolor{comment}{// These consist of alternate edge costs for Subgraph sg.}}
+\DoxyCodeLine{std::vector<IntEdge> edge\_costs = \mbox{\hyperlink{a00409_a51b88e596c3b5f68b7abbcbc91e30bdf}{CalculateCrossSlope}}(sg);}
+\end{DoxyCode}
+ 
+
+Definition at line 189 of file cost\+\_\+algorithms.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Node\+::id, H\+F\+::\+Spatial\+Structures\+::\+Subgraph\+::m\+\_\+edges, H\+F\+::\+Spatial\+Structures\+::\+Subgraph\+::m\+\_\+parent, and H\+F\+::\+Spatial\+Structures\+::\+Node\+::z.
+
+
+
+Referenced by Calculate\+And\+Store\+Cross\+Slope(), Calculate\+Cross\+Slope(), and Cost\+Algorithms\+Tests\+::\+T\+E\+S\+T().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00409_a51b88e596c3b5f68b7abbcbc91e30bdf_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00409_adbe5e58355a884494d6e99bf17fc5f7b}\label{a00409_adbe5e58355a884494d6e99bf17fc5f7b}} 
+\index{HF::SpatialStructures::CostAlgorithms@{HF::SpatialStructures::CostAlgorithms}!CalculateEnergyExpenditure@{CalculateEnergyExpenditure}}
+\index{CalculateEnergyExpenditure@{CalculateEnergyExpenditure}!HF::SpatialStructures::CostAlgorithms@{HF::SpatialStructures::CostAlgorithms}}
+\doxysubsubsection{\texorpdfstring{CalculateEnergyExpenditure()}{CalculateEnergyExpenditure()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{a01481}{Edge\+Set}} $>$ H\+F\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Calculate\+Energy\+Expenditure (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01497}{Graph}} \&}]{g }\end{DoxyParamCaption})}
+
+\textbackslash{}summary Calculates energy expenditure for all subgraphs in \mbox{\hyperlink{a01497}{Graph}} g 
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph to calculate energy expenditures with \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A container of vector$<$\+Edge\+Set$>$, ordered by parent node ID
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// for brevity}}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a00409_ac51f2e76c00356f8a6145bee865cd922}{HF::SpatialStructures::CostAlgorithms::CalculateEnergyExpenditure}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create 7 nodes}}
+\DoxyCodeLine{Node n0(0, 0, 0);}
+\DoxyCodeLine{Node n1(1, 3, 5);}
+\DoxyCodeLine{Node n2(3, -\/1, 2);}
+\DoxyCodeLine{Node n3(1, 2, 1);}
+\DoxyCodeLine{Node n4(4, 5, 7);}
+\DoxyCodeLine{Node n5(5, 3, 2);}
+\DoxyCodeLine{Node n6(-\/2, -\/5, 1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{Graph g;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Adding 9 edges}}
+\DoxyCodeLine{g.addEdge(n0, n1);}
+\DoxyCodeLine{g.addEdge(n1, n2);}
+\DoxyCodeLine{g.addEdge(n1, n3);}
+\DoxyCodeLine{g.addEdge(n1, n4);}
+\DoxyCodeLine{g.addEdge(n2, n4);}
+\DoxyCodeLine{g.addEdge(n3, n5);}
+\DoxyCodeLine{g.addEdge(n5, n6);}
+\DoxyCodeLine{g.addEdge(n4, n6);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Always compress the graph after adding edges!}}
+\DoxyCodeLine{g.Compress();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Get a container of vector<EdgeSet>, ordered by parent ID.}}
+\DoxyCodeLine{\textcolor{comment}{// These consist of alternate edge costs for all subgraphs in g.}}
+\DoxyCodeLine{std::vector<std::vector<EdgeSet>> all\_edge\_costs = \mbox{\hyperlink{a00409_ac51f2e76c00356f8a6145bee865cd922}{CalculateEnergyExpenditure}}(g);}
+\end{DoxyCode}
+ 
+
+Definition at line 162 of file cost\+\_\+algorithms.\+cpp.
+
+
+
+References Calculate\+Energy\+Expenditure(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Get\+Subgraph(), and H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Nodes().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00409_adbe5e58355a884494d6e99bf17fc5f7b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00409_ac51f2e76c00356f8a6145bee865cd922}\label{a00409_ac51f2e76c00356f8a6145bee865cd922}} 
+\index{HF::SpatialStructures::CostAlgorithms@{HF::SpatialStructures::CostAlgorithms}!CalculateEnergyExpenditure@{CalculateEnergyExpenditure}}
+\index{CalculateEnergyExpenditure@{CalculateEnergyExpenditure}!HF::SpatialStructures::CostAlgorithms@{HF::SpatialStructures::CostAlgorithms}}
+\doxysubsubsection{\texorpdfstring{CalculateEnergyExpenditure()}{CalculateEnergyExpenditure()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01481}{Edge\+Set}} H\+F\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Calculate\+Energy\+Expenditure (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a00399_a01489}{Subgraph}} \&}]{sg }\end{DoxyParamCaption})}
+
+\textbackslash{}summary Calculate energy expenditure for this subgraph (a parent node and all edges by this parent) 
+\begin{DoxyParams}{Parameters}
+{\em sg} & A subgraph type which consists of a \mbox{\hyperlink{a02017}{Node}} (parent node) and a std\+::vector$<$\+Edge$>$ (all edges by this parent) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A container of \mbox{\hyperlink{a01481}{Edge\+Set}}
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// For brevity}}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a00409_ac51f2e76c00356f8a6145bee865cd922}{HF::SpatialStructures::CostAlgorithms::CalculateEnergyExpenditure}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create 7 nodes}}
+\DoxyCodeLine{Node n0(0, 0, 0);}
+\DoxyCodeLine{Node n1(1, 3, 5);}
+\DoxyCodeLine{Node n2(3, -\/1, 2);}
+\DoxyCodeLine{Node n3(1, 2, 1);}
+\DoxyCodeLine{Node n4(4, 5, 7);}
+\DoxyCodeLine{Node n5(5, 3, 2);}
+\DoxyCodeLine{Node n6(-\/2, -\/5, 1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{Graph g;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Adding 9 edges}}
+\DoxyCodeLine{g.addEdge(n0, n1);}
+\DoxyCodeLine{g.addEdge(n1, n2);}
+\DoxyCodeLine{g.addEdge(n1, n3);}
+\DoxyCodeLine{g.addEdge(n1, n4);}
+\DoxyCodeLine{g.addEdge(n2, n4);}
+\DoxyCodeLine{g.addEdge(n3, n5);}
+\DoxyCodeLine{g.addEdge(n5, n6);}
+\DoxyCodeLine{g.addEdge(n4, n6);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Always compress the graph after adding edges!}}
+\DoxyCodeLine{g.Compress();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Retrieve a subgraph of your choice, provide a parent node or parent node ID.}}
+\DoxyCodeLine{Subgraph sg = g.GetSubgraph(n1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Get a container of vector<EdgeSet>, ordered by parent ID.}}
+\DoxyCodeLine{\textcolor{comment}{// These consist of alternate edge costs for Subgraph sg.}}
+\DoxyCodeLine{std::vector<EdgeSet> edge\_costs = \mbox{\hyperlink{a00409_ac51f2e76c00356f8a6145bee865cd922}{CalculateEnergyExpenditure}}(sg);}
+\end{DoxyCode}
+ 
+
+Definition at line 96 of file cost\+\_\+algorithms.\+cpp.
+
+
+
+References Calculate\+Slope(), H\+F\+::\+Spatial\+Structures\+::\+Int\+Edge\+::child, H\+F\+::\+Spatial\+Structures\+::\+Node\+::direction\+To(), H\+F\+::\+Spatial\+Structures\+::\+Node\+::distance\+To(), H\+F\+::\+Spatial\+Structures\+::\+Node\+::id, H\+F\+::\+Spatial\+Structures\+::\+Subgraph\+::m\+\_\+edges, H\+F\+::\+Spatial\+Structures\+::\+Subgraph\+::m\+\_\+parent, and to\+\_\+radians().
+
+
+
+Referenced by Calculate\+And\+Store\+Energy\+Expenditure(), Calculate\+Energy\+Expenditure(), T\+E\+S\+T(), and C\+Interface\+Tests\+::\+T\+E\+S\+T().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00409_ac51f2e76c00356f8a6145bee865cd922_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00409_ac51f2e76c00356f8a6145bee865cd922_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00409_ae06eb693d0d7858d7a863fae3a6eee2c}\label{a00409_ae06eb693d0d7858d7a863fae3a6eee2c}} 
+\index{HF::SpatialStructures::CostAlgorithms@{HF::SpatialStructures::CostAlgorithms}!CalculateSlope@{CalculateSlope}}
+\index{CalculateSlope@{CalculateSlope}!HF::SpatialStructures::CostAlgorithms@{HF::SpatialStructures::CostAlgorithms}}
+\doxysubsubsection{\texorpdfstring{CalculateSlope()}{CalculateSlope()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00001_a02273}{double}} H\+F\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Calculate\+Slope (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a02017}{Node}} \&}]{parent,  }\item[{\mbox{\hyperlink{a02017}{Node}} \&}]{child }\end{DoxyParamCaption})}
+
+
+
+Definition at line 34 of file cost\+\_\+algorithms.\+cpp.
+
+
+
+References to\+\_\+degrees().
+
+
+
+Referenced by Calculate\+Energy\+Expenditure(), and T\+E\+S\+T().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00409_ae06eb693d0d7858d7a863fae3a6eee2c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00409_ae06eb693d0d7858d7a863fae3a6eee2c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00409_afa250ed24ee2219f6632aaebfd7bd150}\label{a00409_afa250ed24ee2219f6632aaebfd7bd150}} 
+\index{HF::SpatialStructures::CostAlgorithms@{HF::SpatialStructures::CostAlgorithms}!dot\_product@{dot\_product}}
+\index{dot\_product@{dot\_product}!HF::SpatialStructures::CostAlgorithms@{HF::SpatialStructures::CostAlgorithms}}
+\doxysubsubsection{\texorpdfstring{dot\_product()}{dot\_product()}}
+{\footnotesize\ttfamily template$<$size\+\_\+t dimension, typename float\+\_\+precision  = float$>$ \\
+float\+\_\+precision H\+F\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::dot\+\_\+product (\begin{DoxyParamCaption}\item[{float\+\_\+precision}]{vec\+\_\+U\mbox{[}$\,$\mbox{]},  }\item[{float\+\_\+precision}]{vec\+\_\+V\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+\textbackslash{}summary Determines the dot product of vec\+\_\+U and vec\+\_\+V (vectors, as components) 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em dimension} & of a real coordinate space R$^\wedge$n, where n is dimension, an integral value (i.\+e. R$^\wedge$2 is 2D, R$^\wedge$3 is 3D) \\
+\hline
+{\em float\+\_\+precision} & a floating-\/point data type, i.\+e. float, double, long double, etc. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em vec\+\_\+U} & The components of vector U \\
+\hline
+{\em vec\+\_\+V} & The components of vector V \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The dot product of vec\+\_\+U and vec\+\_\+V, by the specified dimension
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "cost\_algorithms.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// for brevity}}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a00409_afa250ed24ee2219f6632aaebfd7bd150}{HF::SpatialStructures::CostAlgorithms::dot\_product}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// components of a 2D vector, \{ v\_x, v\_y \}}}
+\DoxyCodeLine{\textcolor{keywordtype}{float} vec\_u[] = \{ 4, 0 \};}
+\DoxyCodeLine{\textcolor{keywordtype}{float} vec\_v[] = \{ 0, 4 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// There are two template parameters for dot\_product:}}
+\DoxyCodeLine{\textcolor{comment}{// -\/ dimension (2 for 2D, 3 for 3D, etc)}}
+\DoxyCodeLine{\textcolor{comment}{// -\/ float\_precision (defaults to float if unspecified)}}
+\DoxyCodeLine{\textcolor{keywordtype}{float} dot\_prod = dot\_product<2>(vec\_u, vec\_v);  \textcolor{comment}{// 0.00000}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// vec\_u and vec\_v are perpendicular.}}
+\end{DoxyCode}
+ 
+
+Definition at line 132 of file cost\+\_\+algorithms.\+h.
+
+
+
+Referenced by Cost\+Algorithms\+Tests\+::\+T\+E\+S\+T().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00409_afa250ed24ee2219f6632aaebfd7bd150_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00409_a355d486f17db42f6c56411cc53f76aec}\label{a00409_a355d486f17db42f6c56411cc53f76aec}} 
+\index{HF::SpatialStructures::CostAlgorithms@{HF::SpatialStructures::CostAlgorithms}!euclidean\_distance@{euclidean\_distance}}
+\index{euclidean\_distance@{euclidean\_distance}!HF::SpatialStructures::CostAlgorithms@{HF::SpatialStructures::CostAlgorithms}}
+\doxysubsubsection{\texorpdfstring{euclidean\_distance()}{euclidean\_distance()}}
+{\footnotesize\ttfamily template$<$size\+\_\+t dimension, typename float\+\_\+precision  = float$>$ \\
+float\+\_\+precision H\+F\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::euclidean\+\_\+distance (\begin{DoxyParamCaption}\item[{float\+\_\+precision}]{point\+\_\+a\mbox{[}$\,$\mbox{]},  }\item[{float\+\_\+precision}]{point\+\_\+b\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+\textbackslash{}summary Determines the distance between two points, point\+\_\+a and point\+\_\+b 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em dimension} & of a real coordinate space R$^\wedge$n, where n is dimension, an integral value (i.\+e. R$^\wedge$2 is 2D, R$^\wedge$3 is 3D) \\
+\hline
+{\em float\+\_\+precision} & a floating-\/point data type, i.\+e. float, double, long double, etc. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em point\+\_\+a} & The starting point of a line segment \\
+\hline
+{\em point\+\_\+b} & The ending point of a line segment \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The euclidean distance from point\+\_\+a to point\+\_\+b, by the specified dimension
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "cost\_algorithms.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// for brevity;}}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a00409_a355d486f17db42f6c56411cc53f76aec}{HF::SpatialStructures::CostAlgorithms::euclidean\_distance}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// 2D coordinates, \{ x, y \}}}
+\DoxyCodeLine{\textcolor{keywordtype}{float} pos\_a[] = \{ 0, 0 \};}
+\DoxyCodeLine{\textcolor{keywordtype}{float} pos\_b[] = \{ 4, 3 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// There are two template parameters for euclidean\_distance:}}
+\DoxyCodeLine{\textcolor{comment}{// -\/ dimension (2 for 2D, 3 for 3D, etc)}}
+\DoxyCodeLine{\textcolor{comment}{// -\/ float\_precision (defaults to float if unspecified)}}
+\DoxyCodeLine{\textcolor{keywordtype}{float} distance = euclidean\_distance<2>(pos\_a, pos\_b);   \textcolor{comment}{// 5.00000}}
+\end{DoxyCode}
+ 
+
+Definition at line 94 of file cost\+\_\+algorithms.\+h.
+
+
+
+Referenced by Cost\+Algorithms\+Tests\+::\+T\+E\+S\+T(), and Node\+Example\+Tests\+::\+T\+E\+S\+T().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00409_a355d486f17db42f6c56411cc53f76aec_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00409_a84306feb66161c4163e00f3bf3482679}\label{a00409_a84306feb66161c4163e00f3bf3482679}} 
+\index{HF::SpatialStructures::CostAlgorithms@{HF::SpatialStructures::CostAlgorithms}!GetPerpendicularEdges@{GetPerpendicularEdges}}
+\index{GetPerpendicularEdges@{GetPerpendicularEdges}!HF::SpatialStructures::CostAlgorithms@{HF::SpatialStructures::CostAlgorithms}}
+\doxysubsubsection{\texorpdfstring{GetPerpendicularEdges()}{GetPerpendicularEdges()}}
+{\footnotesize\ttfamily template$<$size\+\_\+t dimension, typename float\+\_\+precision  = float$>$ \\
+std\+::vector$<$\mbox{\hyperlink{a01473}{Edge}}$>$ H\+F\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Get\+Perpendicular\+Edges (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a00399_a01489}{Subgraph}} \&}]{sg,  }\item[{const \mbox{\hyperlink{a02017}{Node}} \&}]{child\+\_\+node\+\_\+a }\end{DoxyParamCaption})}
+
+\textbackslash{}summary Obtains a container of \mbox{\hyperlink{a01473}{Edge}} that are perpendicular to the vector formed by parent\+\_\+node and child\+\_\+node\+\_\+a 
+\begin{DoxyParams}{Parameters}
+{\em sg} & A \mbox{\hyperlink{a00399_a01489}{Subgraph}} that consists of a parent node and a container of Edges by that parent node \textbackslash{}paramchild\+\_\+node\+\_\+a The child node that forms a vector (edge) with parent\+\_\+node, that will be compared with all \mbox{\hyperlink{a01473}{Edge}} in edges \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A container of \mbox{\hyperlink{a01473}{Edge}} that were found to be perpendicular to the edge formed by parent\+\_\+node and child\+\_\+node\+\_\+a
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "cost\_algorithms.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// for brevity}}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a00409_a84306feb66161c4163e00f3bf3482679}{HF::SpatialStructures::CostAlgorithms::GetPerpendicularEdges}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create 7 nodes}}
+\DoxyCodeLine{Node n0(2, 6, 6);}
+\DoxyCodeLine{Node n1(0, 0, 0);}
+\DoxyCodeLine{Node n2(-\/5, 5, 4);}
+\DoxyCodeLine{Node n3(-\/1, 1, 1);}
+\DoxyCodeLine{Node n4(2, 2, 2);}
+\DoxyCodeLine{Node n5(5, 3, 2);}
+\DoxyCodeLine{Node n6(-\/2, -\/5, 1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{Graph g;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Adding 9 edges}}
+\DoxyCodeLine{g.addEdge(n0, n1);  \textcolor{comment}{// [ -\/2, -\/6, -\/6 ]}}
+\DoxyCodeLine{g.addEdge(n1, n2);  \textcolor{comment}{// [ -\/5,  5,  4 ]}}
+\DoxyCodeLine{g.addEdge(n1, n3);  \textcolor{comment}{// [ -\/1,  1,  1 ]}}
+\DoxyCodeLine{g.addEdge(n1, n4);  \textcolor{comment}{// [  2,  2,  2 ]}}
+\DoxyCodeLine{g.addEdge(n2, n4);  \textcolor{comment}{// [ -\/9, -\/3, -\/2 ]}}
+\DoxyCodeLine{g.addEdge(n3, n5);  \textcolor{comment}{// [ -\/6,  2,  1 ]}}
+\DoxyCodeLine{g.addEdge(n5, n6);  \textcolor{comment}{// [ -\/7, -\/8, -\/1 ]}}
+\DoxyCodeLine{g.addEdge(n4, n6);  \textcolor{comment}{// [ -\/6, -\/7, -\/1 ]}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Always compress the graph after adding edges!}}
+\DoxyCodeLine{g.Compress();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// We will find all edges in g that are perpendicular to the edge (vector)}}
+\DoxyCodeLine{\textcolor{comment}{// formed by n1 and n4 -\/-\/ they will be stored in perp\_edges.}}
+\DoxyCodeLine{\textcolor{comment}{// Note that we have specifically chosen to check for 2D perpendicularity,}}
+\DoxyCodeLine{\textcolor{comment}{// as seen by the template parameter, despite these nodes being 3D.}}
+\DoxyCodeLine{\textcolor{keyword}{auto} perp\_edges = GetPerpendicularEdges<2>(g.GetSubgraph(n1), n4);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// The edge formed by n1 and n4 is perpendicular to}}
+\DoxyCodeLine{\textcolor{comment}{// -\/ the edge formed by n1 and n2}}
+\DoxyCodeLine{\textcolor{comment}{// -\/ the edge formed by n1 and n3}}
+\end{DoxyCode}
+ 
+
+Definition at line 231 of file cost\+\_\+algorithms.\+h.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Node\+::direction\+To(), H\+F\+::\+Spatial\+Structures\+::\+Subgraph\+::m\+\_\+edges, and H\+F\+::\+Spatial\+Structures\+::\+Subgraph\+::m\+\_\+parent.
+
+
+
+Referenced by Cost\+Algorithms\+Tests\+::\+T\+E\+S\+T().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00409_a84306feb66161c4163e00f3bf3482679_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00409_a84306feb66161c4163e00f3bf3482679_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00409_a3de857e1e14eb6872146c36bef3b3fad}\label{a00409_a3de857e1e14eb6872146c36bef3b3fad}} 
+\index{HF::SpatialStructures::CostAlgorithms@{HF::SpatialStructures::CostAlgorithms}!is\_perpendicular@{is\_perpendicular}}
+\index{is\_perpendicular@{is\_perpendicular}!HF::SpatialStructures::CostAlgorithms@{HF::SpatialStructures::CostAlgorithms}}
+\doxysubsubsection{\texorpdfstring{is\_perpendicular()}{is\_perpendicular()}}
+{\footnotesize\ttfamily template$<$size\+\_\+t dimension, typename float\+\_\+precision  = float$>$ \\
+bool H\+F\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::is\+\_\+perpendicular (\begin{DoxyParamCaption}\item[{float\+\_\+precision}]{vec\+\_\+U\mbox{[}$\,$\mbox{]},  }\item[{float\+\_\+precision}]{vec\+\_\+V\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+\textbackslash{}summary Determines if vec\+\_\+U and vec\+\_\+V (vectors, as components) are perpendicular, or not 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em dimension} & of a real coordinate space R$^\wedge$n, where n is dimension, an integral value (i.\+e. R$^\wedge$2 is 2D, R$^\wedge$3 is 3D) \\
+\hline
+{\em float\+\_\+precision} & a floating-\/point data type, i.\+e. float, double, long double, etc. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em vec\+\_\+U} & The components of vector U \\
+\hline
+{\em vec\+\_\+V} & The components of vector V \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True, if vec\+\_\+U and vec\+\_\+V have a dot product close to 0, false otherwise
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "cost\_algorithms.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// for brevity}}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a00409_a3de857e1e14eb6872146c36bef3b3fad}{HF::SpatialStructures::CostAlgorithms::is\_perpendicular}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// components of a 2D vector, \{ v\_x, v\_y \}}}
+\DoxyCodeLine{\textcolor{keywordtype}{float} vec\_u[] = \{ 4, 0 \};}
+\DoxyCodeLine{\textcolor{keywordtype}{float} vec\_v[] = \{ 0, 4 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// There are two template parameters for is\_perpendicular:}}
+\DoxyCodeLine{\textcolor{comment}{// -\/ dimension (2 for 2D, 3 for 3D, etc)}}
+\DoxyCodeLine{\textcolor{comment}{// -\/ float\_precision (defaults to float if unspecified)}}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} is\_perp = is\_perpendicular<2>(vec\_u, vec\_v);   \textcolor{comment}{// true}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// vec\_u and vec\_v are perpendicular.}}
+\end{DoxyCode}
+ 
+
+Definition at line 169 of file cost\+\_\+algorithms.\+h.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+R\+O\+U\+N\+D\+I\+N\+G\+\_\+\+P\+R\+E\+C\+I\+S\+I\+ON.
+
+
+
+Referenced by Cost\+Algorithms\+Tests\+::\+T\+E\+S\+T().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00409_a3de857e1e14eb6872146c36bef3b3fad_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00409_adee2fb2573f4dbc2e5c7db153dff2694}\label{a00409_adee2fb2573f4dbc2e5c7db153dff2694}} 
+\index{HF::SpatialStructures::CostAlgorithms@{HF::SpatialStructures::CostAlgorithms}!to\_degrees@{to\_degrees}}
+\index{to\_degrees@{to\_degrees}!HF::SpatialStructures::CostAlgorithms@{HF::SpatialStructures::CostAlgorithms}}
+\doxysubsubsection{\texorpdfstring{to\_degrees()}{to\_degrees()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00001_a02273}{double}} H\+F\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::to\+\_\+degrees (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a00001_a02273}{double}}}]{radians }\end{DoxyParamCaption})}
+
+\textbackslash{}summary Converts floating-\/point value radians into an equivalent value in degrees 
+\begin{DoxyParams}{Parameters}
+{\em radians} & The value (in radians) to convert into degrees \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value, radians, in degrees
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "cost\_algorithms.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// for brevity}}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a00409_adee2fb2573f4dbc2e5c7db153dff2694}{HF::SpatialStructures::CostAlgorithms::to\_degrees}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// The macro M\_PI requires}}
+\DoxyCodeLine{\textcolor{comment}{// \#define \_USE\_MATH\_DEFINES}}
+\DoxyCodeLine{\textcolor{comment}{// \#include <cmath>}}
+\DoxyCodeLine{\textcolor{comment}{//}}
+\DoxyCodeLine{\textcolor{comment}{// Use M\_PI in place of approximate\_pi when the value pi is needed.}}
+\DoxyCodeLine{\textcolor{keywordtype}{double} approximate\_pi = 3.14159;}
+\DoxyCodeLine{\textcolor{keywordtype}{double} in\_radians = 2 * approximate\_pi;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{double} in\_degrees = \mbox{\hyperlink{a00409_adee2fb2573f4dbc2e5c7db153dff2694}{to\_degrees}}(in\_radians);}
+\DoxyCodeLine{\textcolor{comment}{// 359.99969592100859, about 360.0 degrees}}
+\end{DoxyCode}
+ 
+
+Definition at line 30 of file cost\+\_\+algorithms.\+cpp.
+
+
+
+Referenced by Calculate\+Slope(), and Cost\+Algorithms\+Tests\+::\+T\+E\+S\+T().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00409_adee2fb2573f4dbc2e5c7db153dff2694_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00409_ae7b446fefe0b9994859f47b85de79039}\label{a00409_ae7b446fefe0b9994859f47b85de79039}} 
+\index{HF::SpatialStructures::CostAlgorithms@{HF::SpatialStructures::CostAlgorithms}!to\_radians@{to\_radians}}
+\index{to\_radians@{to\_radians}!HF::SpatialStructures::CostAlgorithms@{HF::SpatialStructures::CostAlgorithms}}
+\doxysubsubsection{\texorpdfstring{to\_radians()}{to\_radians()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00001_a02273}{double}} H\+F\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::to\+\_\+radians (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a00001_a02273}{double}}}]{degrees }\end{DoxyParamCaption})}
+
+\textbackslash{}summary Converts floating-\/point value degrees into an equivalent value in radians 
+\begin{DoxyParams}{Parameters}
+{\em degrees} & The value (in degrees) to convert into radians \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value, degrees, in radians
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Requires \#include "cost\_algorithms.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// for brevity}}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{a00409_ae7b446fefe0b9994859f47b85de79039}{HF::SpatialStructures::CostAlgorithms::to\_radians}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{double} in\_degrees = 360.0;}
+\DoxyCodeLine{\textcolor{keywordtype}{double} in\_radians = \mbox{\hyperlink{a00409_ae7b446fefe0b9994859f47b85de79039}{to\_radians}}(in\_degrees); \textcolor{comment}{// 6.2831853.., about 2 * M\_PI}}
+\end{DoxyCode}
+ 
+
+Definition at line 26 of file cost\+\_\+algorithms.\+cpp.
+
+
+
+Referenced by Calculate\+Energy\+Expenditure(), and Cost\+Algorithms\+Tests\+::\+T\+E\+S\+T().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00409_ae7b446fefe0b9994859f47b85de79039_icgraph}
+\end{center}
+\end{figure}

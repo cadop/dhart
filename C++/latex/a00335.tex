@@ -1,0 +1,315 @@
+\hypertarget{a00335}{}\doxysection{Cpp/tests/src/\+Visibility\+Graph.cpp File Reference}
+\label{a00335}\index{Cpp/tests/src/VisibilityGraph.cpp@{Cpp/tests/src/VisibilityGraph.cpp}}
+{\ttfamily \#include \char`\"{}gtest/gtest.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$array$>$}\newline
+{\ttfamily \#include $<$embree\+\_\+raytracer.\+h$>$}\newline
+{\ttfamily \#include $<$objloader.\+h$>$}\newline
+{\ttfamily \#include $<$meshinfo.\+h$>$}\newline
+{\ttfamily \#include $<$graph.\+h$>$}\newline
+{\ttfamily \#include $<$edge.\+h$>$}\newline
+{\ttfamily \#include $<$node.\+h$>$}\newline
+{\ttfamily \#include $<$visibility\+\_\+graph.\+h$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$visibility\+\_\+graph\+\_\+\+C.\+h$>$}\newline
+Include dependency graph for Visibility\+Graph.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00336}
+\end{center}
+\end{figure}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{a00335_acea841c68a73d07ad9d772ec2e94a683}{Mesh\+Info}} = \mbox{\hyperlink{a01297}{H\+F\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01357}{Embree\+Ray\+Tracer}} \mbox{\hyperlink{a00335_ab70accb6ed1a6cfe7e8e91135a899c94}{Create\+Plane\+Tracer}} ()
+\item 
+\mbox{\hyperlink{a00335_a498faa46d59cc333132309d698e1688e}{T\+E\+ST}} (\+\_\+\+Visibility\+Graph, Nodes\+On\+Flat\+Plane\+All\+Connect)
+\item 
+\mbox{\hyperlink{a00335_a6c5b602bf3b5b51b485e370fd5060c2a}{T\+E\+ST}} (\+\_\+\+Visibility\+Graph, Parallel\+Nodes\+On\+Flat\+Plane\+All\+Connect)
+\item 
+\mbox{\hyperlink{a00335_a235199f06e3c46966f392ed6518e87ac}{T\+E\+ST}} (\+\_\+\+Visibility\+Graph, Nodes\+On\+Flat\+Plane\+With\+Wall\+Dont\+Connect)
+\item 
+\mbox{\hyperlink{a00335_aee285dbd489d6166aef1bfc2fd84c595}{T\+E\+ST}} (\+\_\+\+Visibility\+Graph, Group\+Constructs\+Valid\+Graph)
+\item 
+\mbox{\hyperlink{a00335_aad85acff2b9716aaf14c5a73114822b9}{T\+E\+ST}} (C\+\_\+\+Visibility\+Graph, Group\+Constructs\+Valid\+Graph)
+\item 
+\mbox{\hyperlink{a00335_ab2032536d738c0c96aa579266298e3f6}{T\+E\+ST}} (\+\_\+visibility\+Graph, All\+To\+All)
+\begin{DoxyCompactList}\small\item\em The following are tests for the code samples for \mbox{\hyperlink{a00401}{H\+F\+::\+Visibility\+Graph}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00335_a041703d99f7f8f966568ceaea5783803}{T\+E\+ST}} (\+\_\+visibility\+Graph, Group\+To\+Group)
+\item 
+\mbox{\hyperlink{a00335_a1f28f4c38a7f1e531f0c8455567db59d}{T\+E\+ST}} (\+\_\+visibility\+Graph, All\+To\+All\+Undirected)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const std\+::string \mbox{\hyperlink{a00335_ad2d18c3c0371ab0b0822553fbbe333f9}{plane\+\_\+path}} = \char`\"{}plane.\+obj\char`\"{}
+\item 
+const std\+::string \mbox{\hyperlink{a00335_accb3db1d4686effb5756ded3fa943d00}{walled\+\_\+plane\+\_\+path}} = \char`\"{}plane\+\_\+walled.\+obj\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{a00335_acea841c68a73d07ad9d772ec2e94a683}\label{a00335_acea841c68a73d07ad9d772ec2e94a683}} 
+\index{VisibilityGraph.cpp@{VisibilityGraph.cpp}!MeshInfo@{MeshInfo}}
+\index{MeshInfo@{MeshInfo}!VisibilityGraph.cpp@{VisibilityGraph.cpp}}
+\doxysubsubsection{\texorpdfstring{MeshInfo}{MeshInfo}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{a02910_acea841c68a73d07ad9d772ec2e94a683}{Mesh\+Info}} =  \mbox{\hyperlink{a01297}{H\+F\+::\+Geometry\+::\+Mesh\+Info}}$<$float$>$}
+
+
+
+Definition at line 19 of file Visibility\+Graph.\+cpp.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{a00335_ab70accb6ed1a6cfe7e8e91135a899c94}\label{a00335_ab70accb6ed1a6cfe7e8e91135a899c94}} 
+\index{VisibilityGraph.cpp@{VisibilityGraph.cpp}!CreatePlaneTracer@{CreatePlaneTracer}}
+\index{CreatePlaneTracer@{CreatePlaneTracer}!VisibilityGraph.cpp@{VisibilityGraph.cpp}}
+\doxysubsubsection{\texorpdfstring{CreatePlaneTracer()}{CreatePlaneTracer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01357}{Embree\+Ray\+Tracer}} Create\+Plane\+Tracer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 27 of file Visibility\+Graph.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), H\+F\+::\+Geometry\+::\+O\+N\+L\+Y\+\_\+\+F\+I\+LE, and plane\+\_\+path.
+
+
+
+Referenced by T\+E\+S\+T().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00335_ab70accb6ed1a6cfe7e8e91135a899c94_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=262pt]{a00335_ab70accb6ed1a6cfe7e8e91135a899c94_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00335_ab2032536d738c0c96aa579266298e3f6}\label{a00335_ab2032536d738c0c96aa579266298e3f6}} 
+\index{VisibilityGraph.cpp@{VisibilityGraph.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!VisibilityGraph.cpp@{VisibilityGraph.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [1/8]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+visibility\+Graph}]{,  }\item[{All\+To\+All}]{ }\end{DoxyParamCaption})}
+
+
+
+The following are tests for the code samples for \mbox{\hyperlink{a00401}{H\+F\+::\+Visibility\+Graph}}. 
+
+
+
+Definition at line 182 of file Visibility\+Graph.\+cpp.
+
+
+
+References H\+F\+::\+Visibility\+Graph\+::\+All\+To\+All(), H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), and plane\+\_\+path.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00335_ab2032536d738c0c96aa579266298e3f6_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00335_a1f28f4c38a7f1e531f0c8455567db59d}\label{a00335_a1f28f4c38a7f1e531f0c8455567db59d}} 
+\index{VisibilityGraph.cpp@{VisibilityGraph.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!VisibilityGraph.cpp@{VisibilityGraph.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [2/8]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+visibility\+Graph}]{,  }\item[{All\+To\+All\+Undirected}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 260 of file Visibility\+Graph.\+cpp.
+
+
+
+References H\+F\+::\+Visibility\+Graph\+::\+All\+To\+All\+Undirected(), H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), and plane\+\_\+path.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00335_a1f28f4c38a7f1e531f0c8455567db59d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00335_aee285dbd489d6166aef1bfc2fd84c595}\label{a00335_aee285dbd489d6166aef1bfc2fd84c595}} 
+\index{VisibilityGraph.cpp@{VisibilityGraph.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!VisibilityGraph.cpp@{VisibilityGraph.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [3/8]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Visibility\+Graph}]{,  }\item[{Group\+Constructs\+Valid\+Graph}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 85 of file Visibility\+Graph.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+C\+O\+U\+NT, Create\+Plane\+Tracer(), and H\+F\+::\+Visibility\+Graph\+::\+Group\+To\+Group().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00335_aee285dbd489d6166aef1bfc2fd84c595_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00335_a041703d99f7f8f966568ceaea5783803}\label{a00335_a041703d99f7f8f966568ceaea5783803}} 
+\index{VisibilityGraph.cpp@{VisibilityGraph.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!VisibilityGraph.cpp@{VisibilityGraph.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [4/8]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+visibility\+Graph}]{,  }\item[{Group\+To\+Group}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 216 of file Visibility\+Graph.\+cpp.
+
+
+
+References H\+F\+::\+Visibility\+Graph\+::\+Group\+To\+Group(), H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), and plane\+\_\+path.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00335_a041703d99f7f8f966568ceaea5783803_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00335_a498faa46d59cc333132309d698e1688e}\label{a00335_a498faa46d59cc333132309d698e1688e}} 
+\index{VisibilityGraph.cpp@{VisibilityGraph.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!VisibilityGraph.cpp@{VisibilityGraph.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [5/8]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Visibility\+Graph}]{,  }\item[{Nodes\+On\+Flat\+Plane\+All\+Connect}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 31 of file Visibility\+Graph.\+cpp.
+
+
+
+References H\+F\+::\+Visibility\+Graph\+::\+All\+To\+All(), H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), H\+F\+::\+Geometry\+::\+O\+N\+L\+Y\+\_\+\+F\+I\+LE, and plane\+\_\+path.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00335_a498faa46d59cc333132309d698e1688e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00335_a235199f06e3c46966f392ed6518e87ac}\label{a00335_a235199f06e3c46966f392ed6518e87ac}} 
+\index{VisibilityGraph.cpp@{VisibilityGraph.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!VisibilityGraph.cpp@{VisibilityGraph.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [6/8]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Visibility\+Graph}]{,  }\item[{Nodes\+On\+Flat\+Plane\+With\+Wall\+Dont\+Connect}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 65 of file Visibility\+Graph.\+cpp.
+
+
+
+References H\+F\+::\+Visibility\+Graph\+::\+All\+To\+All(), H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), H\+F\+::\+Geometry\+::\+O\+N\+L\+Y\+\_\+\+F\+I\+LE, and walled\+\_\+plane\+\_\+path.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00335_a235199f06e3c46966f392ed6518e87ac_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00335_a6c5b602bf3b5b51b485e370fd5060c2a}\label{a00335_a6c5b602bf3b5b51b485e370fd5060c2a}} 
+\index{VisibilityGraph.cpp@{VisibilityGraph.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!VisibilityGraph.cpp@{VisibilityGraph.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [7/8]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Visibility\+Graph}]{,  }\item[{Parallel\+Nodes\+On\+Flat\+Plane\+All\+Connect}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 47 of file Visibility\+Graph.\+cpp.
+
+
+
+References H\+F\+::\+Visibility\+Graph\+::\+All\+To\+All\+Undirected(), H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), H\+F\+::\+Geometry\+::\+O\+N\+L\+Y\+\_\+\+F\+I\+LE, and plane\+\_\+path.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00335_a6c5b602bf3b5b51b485e370fd5060c2a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00335_aad85acff2b9716aaf14c5a73114822b9}\label{a00335_aad85acff2b9716aaf14c5a73114822b9}} 
+\index{VisibilityGraph.cpp@{VisibilityGraph.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!VisibilityGraph.cpp@{VisibilityGraph.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [8/8]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{C\+\_\+\+Visibility\+Graph}]{,  }\item[{Group\+Constructs\+Valid\+Graph}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 117 of file Visibility\+Graph.\+cpp.
+
+
+
+References Create\+Plane\+Tracer(), Create\+Visibility\+Graph\+Group\+To\+Group(), and H\+F\+::\+Spatial\+Structures\+::\+S\+UM.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00335_aad85acff2b9716aaf14c5a73114822b9_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{a00335_ad2d18c3c0371ab0b0822553fbbe333f9}\label{a00335_ad2d18c3c0371ab0b0822553fbbe333f9}} 
+\index{VisibilityGraph.cpp@{VisibilityGraph.cpp}!plane\_path@{plane\_path}}
+\index{plane\_path@{plane\_path}!VisibilityGraph.cpp@{VisibilityGraph.cpp}}
+\doxysubsubsection{\texorpdfstring{plane\_path}{plane\_path}}
+{\footnotesize\ttfamily const std\+::string plane\+\_\+path = \char`\"{}plane.\+obj\char`\"{}}
+
+
+
+Definition at line 22 of file Visibility\+Graph.\+cpp.
+
+
+
+Referenced by Create\+Plane\+Tracer(), and T\+E\+S\+T().
+
+\mbox{\Hypertarget{a00335_accb3db1d4686effb5756ded3fa943d00}\label{a00335_accb3db1d4686effb5756ded3fa943d00}} 
+\index{VisibilityGraph.cpp@{VisibilityGraph.cpp}!walled\_plane\_path@{walled\_plane\_path}}
+\index{walled\_plane\_path@{walled\_plane\_path}!VisibilityGraph.cpp@{VisibilityGraph.cpp}}
+\doxysubsubsection{\texorpdfstring{walled\_plane\_path}{walled\_plane\_path}}
+{\footnotesize\ttfamily const std\+::string walled\+\_\+plane\+\_\+path = \char`\"{}plane\+\_\+walled.\+obj\char`\"{}}
+
+
+
+Definition at line 25 of file Visibility\+Graph.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+

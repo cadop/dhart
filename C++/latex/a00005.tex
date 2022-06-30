@@ -1,0 +1,68 @@
+\hypertarget{a00005}{}\doxysection{Cpp/analysismethods/src/graph\+\_\+generator.cpp File Reference}
+\label{a00005}\index{Cpp/analysismethods/src/graph\_generator.cpp@{Cpp/analysismethods/src/graph\_generator.cpp}}
+
+
+Contains implementation for the functions in the Graph\+Generator class.  
+
+
+{\ttfamily \#include $<$graph\+\_\+generator.\+h$>$}\newline
+{\ttfamily \#include $<$Constants.\+h$>$}\newline
+{\ttfamily \#include $<$node.\+h$>$}\newline
+{\ttfamily \#include $<$Edge.\+h$>$}\newline
+{\ttfamily \#include $<$graph.\+h$>$}\newline
+{\ttfamily \#include $<$robin\+\_\+hood.\+h$>$}\newline
+{\ttfamily \#include $<$omp.\+h$>$}\newline
+{\ttfamily \#include $<$unique\+\_\+queue.\+h$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+Include dependency graph for graph\+\_\+generator.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00006}
+\end{center}
+\end{figure}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{a00396}{HF}}
+\begin{DoxyCompactList}\small\item\em Perform human scale analysis on 3D environments. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00397}{H\+F\+::\+Graph\+Generator}}
+\begin{DoxyCompactList}\small\item\em Generate a graph of accessible space from a given start point. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{a00005_a9f918755b601cf4bffca775992e6fb90}{N\+O\+M\+I\+N\+M\+AX}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{a00397_af8cc1a7a794699308cf5c46d3ae59491}{H\+F\+::\+Graph\+Generator\+::\+Setup\+Core\+Count}} (int cores=-\/1)
+\begin{DoxyCompactList}\small\item\em Sets the core count of Open\+MP. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename raytracer\+\_\+type $>$ }\\void \mbox{\hyperlink{a00397_a124a96c53ed2021db9d819369fe6b7ad}{H\+F\+::\+Graph\+Generator\+::setup\+RT}} (Graph\+Generator $\ast$gg, raytracer\+\_\+type \&rt, const std\+::vector$<$ int $>$ \&obs\+\_\+ids, const std\+::vector$<$ int $>$ \&walk\+\_\+ids)
+\begin{DoxyCompactList}\small\item\em Converts the raytracer to a multi\+RT if required, then map geometry ids to hitflags. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Contains implementation for the functions in the Graph\+Generator class. 
+
+\begin{DoxyAuthor}{Author}
+T\+BA 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+26 Jun 2020 
+\end{DoxyDate}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{a00005_a9f918755b601cf4bffca775992e6fb90}\label{a00005_a9f918755b601cf4bffca775992e6fb90}} 
+\index{graph\_generator.cpp@{graph\_generator.cpp}!NOMINMAX@{NOMINMAX}}
+\index{NOMINMAX@{NOMINMAX}!graph\_generator.cpp@{graph\_generator.cpp}}
+\doxysubsubsection{\texorpdfstring{NOMINMAX}{NOMINMAX}}
+{\footnotesize\ttfamily \#define N\+O\+M\+I\+N\+M\+AX}
+
+
+
+Definition at line 7 of file graph\+\_\+generator.\+cpp.
+

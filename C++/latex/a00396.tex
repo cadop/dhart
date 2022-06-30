@@ -1,0 +1,450 @@
+\hypertarget{a00396}{}\doxysection{HF Namespace Reference}
+\label{a00396}\index{HF@{HF}}
+
+
+Perform human scale analysis on 3D environments.  
+
+
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{a00402}{Exceptions}}
+\begin{DoxyCompactList}\small\item\em Custom exceptions and error codes used interally by Human\+Factors. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00403}{Geometry}}
+\begin{DoxyCompactList}\small\item\em Manipulate and load geometry from disk. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00397}{Graph\+Generator}}
+\begin{DoxyCompactList}\small\item\em Generate a graph of accessible space from a given start point. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00404}{nano\+Geom}}
+\item 
+ \mbox{\hyperlink{a00406}{Pathfinding}}
+\begin{DoxyCompactList}\small\item\em Algorithms to find the shortest path between nodes in a \mbox{\hyperlink{a01497}{H\+F\+::\+Spatial\+Structures\+::\+Graph}}. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00398}{Ray\+Tracer}}
+\begin{DoxyCompactList}\small\item\em Cast rays to determine if and where they intersect geometry. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00399}{Spatial\+Structures}}
+\begin{DoxyCompactList}\small\item\em Contains standard fundamental data structures for representing space used throughout Human\+Factors. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00400}{View\+Analysis}}
+\begin{DoxyCompactList}\small\item\em Analyze space from the perspective of observers within a 3D environment. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00401}{Visibility\+Graph}}
+\begin{DoxyCompactList}\small\item\em Evaluate visibility between points in a set of locations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{a00396_a2d6862311c7465384d42ce52d43a3e30}{Check\+For\+Duplicates}} (const \mbox{\hyperlink{a01497}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} \&g, float precision=0.\+0001f)
+\item 
+\mbox{\hyperlink{a00396_ad4d7fe23b2913d7e6f0bd00a9730ea10}{T\+E\+ST}} (\+\_\+\+Graph\+Generator, Graph\+Generator\+Parallel)
+\item 
+\mbox{\hyperlink{a00396_a74c66cb8ea66d94cd6962f4e3cc5d2fd}{T\+E\+ST}} (\+\_\+\+Graph\+Generator, Duplicate\+Nodes2)
+\item 
+\mbox{\hyperlink{a00396_a5e5d313f314a79a5489be1fababa9180}{T\+E\+ST}} (\+\_\+\+Graph\+Generator, Duplicate\+Nodes)
+\item 
+\mbox{\hyperlink{a00396_af2bdf6aded4ae1d171c944bf25aa1dc2}{T\+E\+ST}} (\+\_\+\+Graph\+Generator, Graph\+Generator\+Single)
+\item 
+\mbox{\hyperlink{a00396_ae080804ce8a994220e045f1355633a6b}{T\+E\+ST}} (\+\_\+\+Graph\+Generator, Duplicate\+Nodes\+\_\+\+Weston)
+\item 
+\mbox{\hyperlink{a00396_afde00c0da0767e97bd5569954af4bef5}{T\+E\+ST}} (\+\_\+\+Graph\+Generator, Duplicate\+Nodes\+\_\+2B)
+\item 
+\mbox{\hyperlink{a00396_a63cca75099597da83f12856f604116f3}{T\+E\+ST}} (\+\_\+\+Unique\+Queue, Block\+Repeats)
+\item 
+\mbox{\hyperlink{a00396_a5f698f479a173cc5ca2f0c575b3ec777}{T\+E\+ST}} (\+\_\+\+Unique\+Queue, Size)
+\item 
+\mbox{\hyperlink{a00396_ad15205c25d807d5d3384de6d2997802f}{T\+E\+ST}} (\+\_\+\+Unique\+Queue, Empty)
+\item 
+void \mbox{\hyperlink{a00396_a8428323b382fd801560d0b54d9b8e4ce}{Check\+For\+Duplicates\+Nano}} (const \mbox{\hyperlink{a01497}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} \&g, float precision=0.\+0001f, bool insta\+\_\+fail=false)
+\item 
+\mbox{\hyperlink{a00396_a65583999c9dbd3a48158f7c6b5d2cede}{T\+E\+ST}} (\+\_\+\+Graph\+Algorithm, Basic\+Generator)
+\item 
+\mbox{\hyperlink{a00396_a11e5cef884320fc8d7fdfbc2bf8c87a2}{T\+E\+ST}} (\+\_\+\+Graph\+Algorithm, Energy\+\_\+\+Blob)
+\item 
+\mbox{\hyperlink{a00396_a7f587c1adfe6a5cf694bb7b65fff4a89}{T\+E\+ST}} (\+\_\+\+Graph\+Algorithm, Energy\+\_\+\+Blob\+Nano\+RT)
+\item 
+\mbox{\hyperlink{a00396_a1c87886288259aba339494ad1602b311}{T\+E\+ST}} (\+\_\+\+Graph\+Algorithm, Nano\+R\+T\+Visibility\+Graph\+TC)
+\item 
+\mbox{\hyperlink{a00396_ad9d879f30e8a3c7a6890a51a2d94b073}{T\+E\+ST}} (\+\_\+\+Graph\+Algorithm, Vs\+Embree\+\_\+blob)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Perform human scale analysis on 3D environments. 
+
+\begin{DoxyRemark}{Remarks}
+This is the base namespace for the Human\+Factors package. All future modules should remain in this namespace and this should act as a jump page for all major sections of documentation. 
+\end{DoxyRemark}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{a00396_a2d6862311c7465384d42ce52d43a3e30}\label{a00396_a2d6862311c7465384d42ce52d43a3e30}} 
+\index{HF@{HF}!CheckForDuplicates@{CheckForDuplicates}}
+\index{CheckForDuplicates@{CheckForDuplicates}!HF@{HF}}
+\doxysubsubsection{\texorpdfstring{CheckForDuplicates()}{CheckForDuplicates()}}
+{\footnotesize\ttfamily void H\+F\+::\+Check\+For\+Duplicates (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01497}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} \&}]{g,  }\item[{float}]{precision = {\ttfamily 0.0001f} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 39 of file Analysis\+Methods.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Nodes(), and H\+F\+::\+Spatial\+Structures\+::\+Graph\+::size().
+
+
+
+Referenced by T\+E\+S\+T().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00396_a2d6862311c7465384d42ce52d43a3e30_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=307pt]{a00396_a2d6862311c7465384d42ce52d43a3e30_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00396_a8428323b382fd801560d0b54d9b8e4ce}\label{a00396_a8428323b382fd801560d0b54d9b8e4ce}} 
+\index{HF@{HF}!CheckForDuplicatesNano@{CheckForDuplicatesNano}}
+\index{CheckForDuplicatesNano@{CheckForDuplicatesNano}!HF@{HF}}
+\doxysubsubsection{\texorpdfstring{CheckForDuplicatesNano()}{CheckForDuplicatesNano()}}
+{\footnotesize\ttfamily void H\+F\+::\+Check\+For\+Duplicates\+Nano (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01497}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} \&}]{g,  }\item[{float}]{precision = {\ttfamily 0.0001f},  }\item[{bool}]{insta\+\_\+fail = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 19 of file Graph\+Algorithms.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Nodes(), and H\+F\+::\+Spatial\+Structures\+::\+Graph\+::size().
+
+
+
+Referenced by T\+E\+S\+T().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00396_a8428323b382fd801560d0b54d9b8e4ce_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=333pt]{a00396_a8428323b382fd801560d0b54d9b8e4ce_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00396_a65583999c9dbd3a48158f7c6b5d2cede}\label{a00396_a65583999c9dbd3a48158f7c6b5d2cede}} 
+\index{HF@{HF}!TEST@{TEST}}
+\index{TEST@{TEST}!HF@{HF}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [1/14]}}
+{\footnotesize\ttfamily H\+F\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Graph\+Algorithm}]{,  }\item[{Basic\+Generator}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 71 of file Graph\+Algorithms.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00396_a65583999c9dbd3a48158f7c6b5d2cede_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00396_a11e5cef884320fc8d7fdfbc2bf8c87a2}\label{a00396_a11e5cef884320fc8d7fdfbc2bf8c87a2}} 
+\index{HF@{HF}!TEST@{TEST}}
+\index{TEST@{TEST}!HF@{HF}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [2/14]}}
+{\footnotesize\ttfamily H\+F\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Graph\+Algorithm}]{,  }\item[{Energy\+\_\+\+Blob}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 119 of file Graph\+Algorithms.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00396_a11e5cef884320fc8d7fdfbc2bf8c87a2_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00396_a7f587c1adfe6a5cf694bb7b65fff4a89}\label{a00396_a7f587c1adfe6a5cf694bb7b65fff4a89}} 
+\index{HF@{HF}!TEST@{TEST}}
+\index{TEST@{TEST}!HF@{HF}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [3/14]}}
+{\footnotesize\ttfamily H\+F\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Graph\+Algorithm}]{,  }\item[{Energy\+\_\+\+Blob\+Nano\+RT}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 150 of file Graph\+Algorithms.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00396_a7f587c1adfe6a5cf694bb7b65fff4a89_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00396_a1c87886288259aba339494ad1602b311}\label{a00396_a1c87886288259aba339494ad1602b311}} 
+\index{HF@{HF}!TEST@{TEST}}
+\index{TEST@{TEST}!HF@{HF}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [4/14]}}
+{\footnotesize\ttfamily H\+F\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Graph\+Algorithm}]{,  }\item[{Nano\+R\+T\+Visibility\+Graph\+TC}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 182 of file Graph\+Algorithms.\+cpp.
+
+
+
+References H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Build\+Network(), Check\+For\+Duplicates\+Nano(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Compress(), and H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00396_a1c87886288259aba339494ad1602b311_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00396_ad9d879f30e8a3c7a6890a51a2d94b073}\label{a00396_ad9d879f30e8a3c7a6890a51a2d94b073}} 
+\index{HF@{HF}!TEST@{TEST}}
+\index{TEST@{TEST}!HF@{HF}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [5/14]}}
+{\footnotesize\ttfamily H\+F\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Graph\+Algorithm}]{,  }\item[{Vs\+Embree\+\_\+blob}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 228 of file Graph\+Algorithms.\+cpp.
+
+
+
+References H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Build\+Network(), Check\+For\+Duplicates\+Nano(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Compress(), and H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00396_ad9d879f30e8a3c7a6890a51a2d94b073_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00396_a5e5d313f314a79a5489be1fababa9180}\label{a00396_a5e5d313f314a79a5489be1fababa9180}} 
+\index{HF@{HF}!TEST@{TEST}}
+\index{TEST@{TEST}!HF@{HF}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [6/14]}}
+{\footnotesize\ttfamily H\+F\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Graph\+Generator}]{,  }\item[{Duplicate\+Nodes}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 150 of file Analysis\+Methods.\+cpp.
+
+
+
+References Check\+For\+Duplicates(), and H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00396_a5e5d313f314a79a5489be1fababa9180_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00396_a74c66cb8ea66d94cd6962f4e3cc5d2fd}\label{a00396_a74c66cb8ea66d94cd6962f4e3cc5d2fd}} 
+\index{HF@{HF}!TEST@{TEST}}
+\index{TEST@{TEST}!HF@{HF}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [7/14]}}
+{\footnotesize\ttfamily H\+F\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Graph\+Generator}]{,  }\item[{Duplicate\+Nodes2}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 111 of file Analysis\+Methods.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00396_a74c66cb8ea66d94cd6962f4e3cc5d2fd_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00396_afde00c0da0767e97bd5569954af4bef5}\label{a00396_afde00c0da0767e97bd5569954af4bef5}} 
+\index{HF@{HF}!TEST@{TEST}}
+\index{TEST@{TEST}!HF@{HF}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [8/14]}}
+{\footnotesize\ttfamily H\+F\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Graph\+Generator}]{,  }\item[{Duplicate\+Nodes\+\_\+2B}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 270 of file Analysis\+Methods.\+cpp.
+
+
+
+References Check\+For\+Duplicates(), H\+F\+::\+Graph\+Generator\+::default\+\_\+ground\+\_\+offset, H\+F\+::\+Graph\+Generator\+::default\+\_\+spacing\+\_\+precision, H\+F\+::\+Graph\+Generator\+::default\+\_\+z\+\_\+precision, and H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00396_afde00c0da0767e97bd5569954af4bef5_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00396_ae080804ce8a994220e045f1355633a6b}\label{a00396_ae080804ce8a994220e045f1355633a6b}} 
+\index{HF@{HF}!TEST@{TEST}}
+\index{TEST@{TEST}!HF@{HF}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [9/14]}}
+{\footnotesize\ttfamily H\+F\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Graph\+Generator}]{,  }\item[{Duplicate\+Nodes\+\_\+\+Weston}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 238 of file Analysis\+Methods.\+cpp.
+
+
+
+References Check\+For\+Duplicates(), H\+F\+::\+Graph\+Generator\+::default\+\_\+ground\+\_\+offset, H\+F\+::\+Graph\+Generator\+::default\+\_\+spacing\+\_\+precision, H\+F\+::\+Graph\+Generator\+::default\+\_\+z\+\_\+precision, and H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00396_ae080804ce8a994220e045f1355633a6b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00396_ad4d7fe23b2913d7e6f0bd00a9730ea10}\label{a00396_ad4d7fe23b2913d7e6f0bd00a9730ea10}} 
+\index{HF@{HF}!TEST@{TEST}}
+\index{TEST@{TEST}!HF@{HF}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [10/14]}}
+{\footnotesize\ttfamily H\+F\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Graph\+Generator}]{,  }\item[{Graph\+Generator\+Parallel}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 89 of file Analysis\+Methods.\+cpp.
+
+
+
+References Check\+For\+Duplicates(), H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), and H\+F\+::\+Geometry\+::\+O\+N\+L\+Y\+\_\+\+F\+I\+LE.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00396_ad4d7fe23b2913d7e6f0bd00a9730ea10_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00396_af2bdf6aded4ae1d171c944bf25aa1dc2}\label{a00396_af2bdf6aded4ae1d171c944bf25aa1dc2}} 
+\index{HF@{HF}!TEST@{TEST}}
+\index{TEST@{TEST}!HF@{HF}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [11/14]}}
+{\footnotesize\ttfamily H\+F\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Graph\+Generator}]{,  }\item[{Graph\+Generator\+Single}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 174 of file Analysis\+Methods.\+cpp.
+
+
+
+References Check\+For\+Duplicates(), H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), and H\+F\+::\+Geometry\+::\+O\+N\+L\+Y\+\_\+\+F\+I\+LE.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00396_af2bdf6aded4ae1d171c944bf25aa1dc2_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00396_a63cca75099597da83f12856f604116f3}\label{a00396_a63cca75099597da83f12856f604116f3}} 
+\index{HF@{HF}!TEST@{TEST}}
+\index{TEST@{TEST}!HF@{HF}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [12/14]}}
+{\footnotesize\ttfamily H\+F\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Unique\+Queue}]{,  }\item[{Block\+Repeats}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 301 of file Analysis\+Methods.\+cpp.
+
+
+
+References H\+F\+::\+Graph\+Generator\+::\+Unique\+Queue\+::push().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=293pt]{a00396_a63cca75099597da83f12856f604116f3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00396_ad15205c25d807d5d3384de6d2997802f}\label{a00396_ad15205c25d807d5d3384de6d2997802f}} 
+\index{HF@{HF}!TEST@{TEST}}
+\index{TEST@{TEST}!HF@{HF}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [13/14]}}
+{\footnotesize\ttfamily H\+F\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Unique\+Queue}]{,  }\item[{Empty}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 314 of file Analysis\+Methods.\+cpp.
+
+
+
+References H\+F\+::\+Graph\+Generator\+::\+Unique\+Queue\+::empty(), and H\+F\+::\+Graph\+Generator\+::\+Unique\+Queue\+::push().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00396_ad15205c25d807d5d3384de6d2997802f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00396_a5f698f479a173cc5ca2f0c575b3ec777}\label{a00396_a5f698f479a173cc5ca2f0c575b3ec777}} 
+\index{HF@{HF}!TEST@{TEST}}
+\index{TEST@{TEST}!HF@{HF}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [14/14]}}
+{\footnotesize\ttfamily H\+F\+::\+T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Unique\+Queue}]{,  }\item[{Size}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 308 of file Analysis\+Methods.\+cpp.
+
+
+
+References H\+F\+::\+Graph\+Generator\+::\+Unique\+Queue\+::push(), and H\+F\+::\+Graph\+Generator\+::\+Unique\+Queue\+::size().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=293pt]{a00396_a5f698f479a173cc5ca2f0c575b3ec777_cgraph}
+\end{center}
+\end{figure}

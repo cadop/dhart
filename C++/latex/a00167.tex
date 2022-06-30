@@ -1,0 +1,73 @@
+\hypertarget{a00167}{}\doxysection{Cpp/raytracer/src/ray\+\_\+data.h File Reference}
+\label{a00167}\index{Cpp/raytracer/src/ray\_data.h@{Cpp/raytracer/src/ray\_data.h}}
+{\ttfamily \#include \char`\"{}nanort.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$Hit\+Struct.\+h$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$array$>$}\newline
+Include dependency graph for ray\+\_\+data.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00168}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00169}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{a01297}{H\+F\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$}}
+\begin{DoxyCompactList}\small\item\em A collection of vertices and indices representing geometry. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a01457}{H\+F\+::\+Ray\+Tracer\+::double3}}
+\item 
+class \mbox{\hyperlink{a01461}{nano\+R\+T\+\_\+\+Data}}
+\item 
+class \mbox{\hyperlink{a01465}{H\+F\+::\+Ray\+Tracer\+::\+Nano\+R\+T\+Ray\+Tracer}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{a00396}{HF}}
+\begin{DoxyCompactList}\small\item\em Perform human scale analysis on 3D environments. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00403}{H\+F\+::\+Geometry}}
+\begin{DoxyCompactList}\small\item\em Manipulate and load geometry from disk. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00404}{H\+F\+::nano\+Geom}}
+\item 
+ \mbox{\hyperlink{a00398}{H\+F\+::\+Ray\+Tracer}}
+\begin{DoxyCompactList}\small\item\em Cast rays to determine if and where they intersect geometry. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{a00167_a441fa2508d213da8cf510e90af3762e3}{N\+A\+N\+O\+R\+T\+\_\+\+U\+S\+E\+\_\+\+C\+P\+P11\+\_\+\+F\+E\+A\+T\+U\+RE}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{a00404_ae4ab3809e1f437e93ae1ad78c2792025}{H\+F\+::nano\+Geom\+::nano\+R\+T\+\_\+\+Ray\+Cast}} (\mbox{\hyperlink{a01429}{nanort\+::\+B\+V\+H\+Accel}}$<$ \mbox{\hyperlink{a00001_a02273}{double}} $>$ \&accel, \mbox{\hyperlink{a01445}{nanort\+::\+Triangle\+Intersector}}$<$ \mbox{\hyperlink{a00001_a02273}{double}}, \mbox{\hyperlink{a00408_a01441}{nanort\+::\+Triangle\+Intersection}}$<$ \mbox{\hyperlink{a00001_a02273}{double}} $>$ $>$ \&triangle\+\_\+intersector, \mbox{\hyperlink{a01393}{nanort\+::\+Ray}}$<$ \mbox{\hyperlink{a00001_a02273}{double}} $>$ \&ray, \mbox{\hyperlink{a00408_a01441}{nanort\+::\+Triangle\+Intersection}}$<$ \mbox{\hyperlink{a00001_a02273}{double}} $>$ \&isect)
+\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{a01429}{nanort\+::\+B\+V\+H\+Accel}}$<$ T $>$ \mbox{\hyperlink{a00404_aa762e02289262d81266da3ca1b08b259}{H\+F\+::nano\+Geom\+::nano\+R\+T\+\_\+\+B\+VH}} (unsigned int $\ast$indices, T $\ast$vertices, int num\+\_\+vertices, int num\+\_\+indices)
+\item 
+\mbox{\hyperlink{a01429}{nanort\+::\+B\+V\+H\+Accel}}$<$ \mbox{\hyperlink{a00001_a02273}{double}} $>$ \mbox{\hyperlink{a00404_a6291ce624c796ab1fe2a45a92eb0c6b0}{H\+F\+::nano\+Geom\+::nano\+R\+T\+\_\+\+B\+VH}} (Mesh mesh)
+\item 
+bool \mbox{\hyperlink{a00404_ab842b43dc319eba17876627bae3286f6}{H\+F\+::nano\+Geom\+::nano\+R\+T\+\_\+\+Intersect}} (Mesh \&mesh, \mbox{\hyperlink{a01429}{nanort\+::\+B\+V\+H\+Accel}}$<$ \mbox{\hyperlink{a00001_a02273}{double}} $>$ \&accel, \mbox{\hyperlink{a01461}{nano\+R\+T\+\_\+\+Data}} \&intersector)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{a00167_a441fa2508d213da8cf510e90af3762e3}\label{a00167_a441fa2508d213da8cf510e90af3762e3}} 
+\index{ray\_data.h@{ray\_data.h}!NANORT\_USE\_CPP11\_FEATURE@{NANORT\_USE\_CPP11\_FEATURE}}
+\index{NANORT\_USE\_CPP11\_FEATURE@{NANORT\_USE\_CPP11\_FEATURE}!ray\_data.h@{ray\_data.h}}
+\doxysubsubsection{\texorpdfstring{NANORT\_USE\_CPP11\_FEATURE}{NANORT\_USE\_CPP11\_FEATURE}}
+{\footnotesize\ttfamily \#define N\+A\+N\+O\+R\+T\+\_\+\+U\+S\+E\+\_\+\+C\+P\+P11\+\_\+\+F\+E\+A\+T\+U\+RE}
+
+
+
+Definition at line 2 of file ray\+\_\+data.\+h.
+

@@ -1,0 +1,95 @@
+\hypertarget{a00146}{}\doxysection{Cpp/raytracer/src/embree\+\_\+raytracer.h File Reference}
+\label{a00146}\index{Cpp/raytracer/src/embree\_raytracer.h@{Cpp/raytracer/src/embree\_raytracer.h}}
+
+
+Contains definitions for the \mbox{\hyperlink{a01357}{Embree\+Ray\+Tracer}}  
+
+
+{\ttfamily \#include $<$rpc.\+h$>$}\newline
+{\ttfamily \#include $<$rtcore.\+h$>$}\newline
+{\ttfamily \#include $<$corecrt\+\_\+math\+\_\+defines.\+h$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$array$>$}\newline
+{\ttfamily \#include $<$Hit\+Struct.\+h$>$}\newline
+Include dependency graph for embree\+\_\+raytracer.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00147}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00148}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{a01297}{H\+F\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$}}
+\begin{DoxyCompactList}\small\item\em A collection of vertices and indices representing geometry. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a01353}{H\+F\+::\+Ray\+Tracer\+::\+Vector3D}}
+\item 
+class \mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}}
+\begin{DoxyCompactList}\small\item\em A wrapper for Intel\textquotesingle{}s Embree Library. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{a00396}{HF}}
+\begin{DoxyCompactList}\small\item\em Perform human scale analysis on 3D environments. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00403}{H\+F\+::\+Geometry}}
+\begin{DoxyCompactList}\small\item\em Manipulate and load geometry from disk. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00398}{H\+F\+::\+Ray\+Tracer}}
+\begin{DoxyCompactList}\small\item\em Cast rays to determine if and where they intersect geometry. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{a00146_a06bf78213fa612762b01a2b1959bd131}{E\+M\+B\+R\+E\+E\+\_\+\+R\+A\+Y\+\_\+\+T\+R\+A\+C\+ER}}
+\item 
+\#define \mbox{\hyperlink{a00146_a525335710b53cb064ca56b936120431e}{\+\_\+\+U\+S\+E\+\_\+\+M\+A\+T\+H\+\_\+\+D\+E\+F\+I\+N\+ES}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{a00398_a2630761a64fac02a4ee33abaf5c885a1}{H\+F\+::\+Ray\+Tracer\+::\+Did\+Intersect}} (int mesh\+\_\+id)
+\item 
+\mbox{\hyperlink{a00001_a02273}{double}} \mbox{\hyperlink{a00398_a9498ae7ffabd8c5bca4026374ac862e9}{H\+F\+::\+Ray\+Tracer\+::\+Ray\+Triangle\+Intersection}} (const Vector3D \&origin, const Vector3D \&direction, const Vector3D \&v1, const Vector3D \&v2, const Vector3D \&v3)
+\begin{DoxyCompactList}\small\item\em Determine the distance between a ray\textquotesingle{}s origin and it\textquotesingle{}s point of intersection with a triangle. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Contains definitions for the \mbox{\hyperlink{a01357}{Embree\+Ray\+Tracer}} 
+
+\begin{DoxyAuthor}{Author}
+T\+BA 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+26 Jun 2020 
+\end{DoxyDate}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{a00146_a525335710b53cb064ca56b936120431e}\label{a00146_a525335710b53cb064ca56b936120431e}} 
+\index{embree\_raytracer.h@{embree\_raytracer.h}!\_USE\_MATH\_DEFINES@{\_USE\_MATH\_DEFINES}}
+\index{\_USE\_MATH\_DEFINES@{\_USE\_MATH\_DEFINES}!embree\_raytracer.h@{embree\_raytracer.h}}
+\doxysubsubsection{\texorpdfstring{\_USE\_MATH\_DEFINES}{\_USE\_MATH\_DEFINES}}
+{\footnotesize\ttfamily \#define \+\_\+\+U\+S\+E\+\_\+\+M\+A\+T\+H\+\_\+\+D\+E\+F\+I\+N\+ES}
+
+
+
+Definition at line 19 of file embree\+\_\+raytracer.\+h.
+
+\mbox{\Hypertarget{a00146_a06bf78213fa612762b01a2b1959bd131}\label{a00146_a06bf78213fa612762b01a2b1959bd131}} 
+\index{embree\_raytracer.h@{embree\_raytracer.h}!EMBREE\_RAY\_TRACER@{EMBREE\_RAY\_TRACER}}
+\index{EMBREE\_RAY\_TRACER@{EMBREE\_RAY\_TRACER}!embree\_raytracer.h@{embree\_raytracer.h}}
+\doxysubsubsection{\texorpdfstring{EMBREE\_RAY\_TRACER}{EMBREE\_RAY\_TRACER}}
+{\footnotesize\ttfamily \#define E\+M\+B\+R\+E\+E\+\_\+\+R\+A\+Y\+\_\+\+T\+R\+A\+C\+ER}
+
+
+
+Definition at line 10 of file embree\+\_\+raytracer.\+h.
+

@@ -1,0 +1,638 @@
+\hypertarget{a00408}{}\doxysection{nanort Namespace Reference}
+\label{a00408}\index{nanort@{nanort}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{a01417}{B\+Box}}
+\begin{DoxyCompactList}\small\item\em Bounding box. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a01453}{Bin\+Buffer}}
+\item 
+class \mbox{\hyperlink{a01429}{B\+V\+H\+Accel}}
+\begin{DoxyCompactList}\small\item\em Bounding Volume Hierarchy acceleration. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a01405}{B\+V\+H\+Build\+Options}}
+\begin{DoxyCompactList}\small\item\em B\+VH build option. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{a01409}{B\+V\+H\+Build\+Statistics}}
+\begin{DoxyCompactList}\small\item\em B\+VH build statistics. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{a01397}{B\+V\+H\+Node}}
+\item 
+class \mbox{\hyperlink{a01413}{B\+V\+H\+Trace\+Options}}
+\begin{DoxyCompactList}\small\item\em B\+VH trace option. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{a01401}{Intersect\+Comparator}}
+\item 
+class \mbox{\hyperlink{a01421}{Node\+Hit}}
+\begin{DoxyCompactList}\small\item\em Hit class for traversing nodes. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{a01425}{Node\+Hit\+Comparator}}
+\begin{DoxyCompactList}\small\item\em Comparator object for \mbox{\hyperlink{a01421}{Node\+Hit}}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{a01393}{Ray}}
+\item 
+class \mbox{\hyperlink{a01389}{real3}}
+\item 
+class \mbox{\hyperlink{a01369}{Stack\+Allocator}}
+\item 
+class \mbox{\hyperlink{a01381}{Stack\+Container}}
+\item 
+class \mbox{\hyperlink{a01385}{Stack\+Vector}}
+\item 
+class \mbox{\hyperlink{a00408_a01441}{Triangle\+Intersection}}
+\item 
+class \mbox{\hyperlink{a01445}{Triangle\+Intersector}}
+\item 
+class \mbox{\hyperlink{a01437}{Triangle\+Mesh}}
+\item 
+class \mbox{\hyperlink{a01433}{Triangle\+S\+A\+H\+Pred}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{a00408_a6ffc0020d7d758bc91664a49a749f661}{Ray\+Type}} \{ \newline
+\mbox{\hyperlink{a00408_a6ffc0020d7d758bc91664a49a749f661a26df8dc570dac0c6a8e2f0b1c5599035}{R\+A\+Y\+\_\+\+T\+Y\+P\+E\+\_\+\+N\+O\+NE}} = 0x0, 
+\mbox{\hyperlink{a00408_a6ffc0020d7d758bc91664a49a749f661afa98b1a81432b92a40f2fb253dc3a90a}{R\+A\+Y\+\_\+\+T\+Y\+P\+E\+\_\+\+P\+R\+I\+M\+A\+RY}} = 0x1, 
+\mbox{\hyperlink{a00408_a6ffc0020d7d758bc91664a49a749f661a6be2832475a21a71054c96191824c846}{R\+A\+Y\+\_\+\+T\+Y\+P\+E\+\_\+\+S\+E\+C\+O\+N\+D\+A\+RY}} = 0x2, 
+\mbox{\hyperlink{a00408_a6ffc0020d7d758bc91664a49a749f661ab3c3a5f9859b5578509fc75f6295cf6b}{R\+A\+Y\+\_\+\+T\+Y\+P\+E\+\_\+\+D\+I\+F\+F\+U\+SE}} = 0x4, 
+\newline
+\mbox{\hyperlink{a00408_a6ffc0020d7d758bc91664a49a749f661ac321bb5b2eb584854abd74cf63ad14d3}{R\+A\+Y\+\_\+\+T\+Y\+P\+E\+\_\+\+R\+E\+F\+L\+E\+C\+T\+I\+ON}} = 0x8, 
+\mbox{\hyperlink{a00408_a6ffc0020d7d758bc91664a49a749f661a0da6cb6314b88bcad5b2e4bd4445789f}{R\+A\+Y\+\_\+\+T\+Y\+P\+E\+\_\+\+R\+E\+F\+R\+A\+C\+T\+I\+ON}} = 0x10
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{a01389}{real3}}$<$ T $>$ \mbox{\hyperlink{a00408_ae1693dffefd99a110afb8025c25b5b0a}{operator$\ast$}} (T f, const \mbox{\hyperlink{a01389}{real3}}$<$ T $>$ \&v)
+\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{a01389}{real3}}$<$ T $>$ \mbox{\hyperlink{a00408_a56b7d2ef9b2e87ee4ed7f87df8ff7e56}{vneg}} (const \mbox{\hyperlink{a01389}{real3}}$<$ T $>$ \&rhs)
+\item 
+{\footnotesize template$<$typename T $>$ }\\T \mbox{\hyperlink{a00408_ab9ba72d8d5e11d213c39ce9bd8e851ef}{vlength}} (const \mbox{\hyperlink{a01389}{real3}}$<$ T $>$ \&rhs)
+\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{a01389}{real3}}$<$ T $>$ \mbox{\hyperlink{a00408_ad95ebf4909da5be14689ba659bd261b5}{vnormalize}} (const \mbox{\hyperlink{a01389}{real3}}$<$ T $>$ \&rhs)
+\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{a01389}{real3}}$<$ T $>$ \mbox{\hyperlink{a00408_a2ac9f5ea480e55bab7a5935dd27e969b}{vcross}} (const \mbox{\hyperlink{a01389}{real3}}$<$ T $>$ a, const \mbox{\hyperlink{a01389}{real3}}$<$ T $>$ b)
+\item 
+{\footnotesize template$<$typename T $>$ }\\T \mbox{\hyperlink{a00408_a218842bcf14b05ea6840d88b58fc8ec6}{vdot}} (const \mbox{\hyperlink{a01389}{real3}}$<$ T $>$ a, const \mbox{\hyperlink{a01389}{real3}}$<$ T $>$ b)
+\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{a01389}{real3}}$<$ T $>$ \mbox{\hyperlink{a00408_af174757a9f102f087bdff1c75067de1b}{vsafe\+\_\+inverse}} (const \mbox{\hyperlink{a01389}{real3}}$<$ T $>$ v)
+\item 
+{\footnotesize template$<$typename real $>$ }\\const real $\ast$ \mbox{\hyperlink{a00408_a2c4199cb2c2699fd6c82f709c954bd90}{get\+\_\+vertex\+\_\+addr}} (const real $\ast$p, const size\+\_\+t idx, const size\+\_\+t stride\+\_\+bytes)
+\item 
+{\footnotesize template$<$class T $>$ }\\const T \& \mbox{\hyperlink{a00408_a64a1973042fc2b33110df2dbf928b359}{safemin}} (const T \&a, const T \&b)
+\item 
+{\footnotesize template$<$class T $>$ }\\const T \& \mbox{\hyperlink{a00408_ac69fcd275be693fe788c6b6668560ad4}{safemax}} (const T \&a, const T \&b)
+\item 
+{\footnotesize template$<$typename T $>$ }\\T \mbox{\hyperlink{a00408_a1f672faac125854c89c907614545fe60}{Calculate\+Surface\+Area}} (const \mbox{\hyperlink{a01389}{real3}}$<$ T $>$ \&min, const \mbox{\hyperlink{a01389}{real3}}$<$ T $>$ \&max)
+\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{a00408_a464fa0f048bdb306e2a84523579ab34b}{Get\+Bounding\+Box\+Of\+Triangle}} (\mbox{\hyperlink{a01389}{real3}}$<$ T $>$ $\ast$bmin, \mbox{\hyperlink{a01389}{real3}}$<$ T $>$ $\ast$bmax, const T $\ast$vertices, const unsigned int $\ast$faces, unsigned int index)
+\item 
+{\footnotesize template$<$typename T , class P $>$ }\\void \mbox{\hyperlink{a00408_a67ae269fe2215d261b995f1da13320f7}{Contribute\+Bin\+Buffer}} (\mbox{\hyperlink{a01453}{Bin\+Buffer}} $\ast$bins, const \mbox{\hyperlink{a01389}{real3}}$<$ T $>$ \&scene\+\_\+min, const \mbox{\hyperlink{a01389}{real3}}$<$ T $>$ \&scene\+\_\+max, unsigned int $\ast$indices, unsigned int left\+\_\+idx, unsigned int right\+\_\+idx, const P \&p)
+\item 
+{\footnotesize template$<$typename T $>$ }\\T \mbox{\hyperlink{a00408_a2224f7a101ce863a9332f059dfef9dd1}{S\+AH}} (size\+\_\+t ns1, T left\+Area, size\+\_\+t ns2, T right\+Area, T invS, T Taabb, T Ttri)
+\item 
+{\footnotesize template$<$typename T $>$ }\\bool \mbox{\hyperlink{a00408_ac281b6ed7e50b406666a6e67e9547b7e}{Find\+Cut\+From\+Bin\+Buffer}} (T $\ast$cut\+\_\+pos, int $\ast$min\+Cost\+Axis, const \mbox{\hyperlink{a01453}{Bin\+Buffer}} $\ast$bins, const \mbox{\hyperlink{a01389}{real3}}$<$ T $>$ \&bmin, const \mbox{\hyperlink{a01389}{real3}}$<$ T $>$ \&bmax, size\+\_\+t num\+\_\+primitives, T cost\+Taabb)
+\item 
+{\footnotesize template$<$typename T , class P $>$ }\\void \mbox{\hyperlink{a00408_a06549eb8469b9a2004cc5332ca0d011e}{Compute\+Bounding\+Box}} (\mbox{\hyperlink{a01389}{real3}}$<$ T $>$ $\ast$bmin, \mbox{\hyperlink{a01389}{real3}}$<$ T $>$ $\ast$bmax, const unsigned int $\ast$indices, unsigned int left\+\_\+index, unsigned int right\+\_\+index, const P \&p)
+\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{a00408_a60ac3f02ccb852decfdc6f7f02d7184f}{Get\+Bounding\+Box}} (\mbox{\hyperlink{a01389}{real3}}$<$ T $>$ $\ast$bmin, \mbox{\hyperlink{a01389}{real3}}$<$ T $>$ $\ast$bmax, const std\+::vector$<$ \mbox{\hyperlink{a01417}{B\+Box}}$<$ T $>$ $>$ \&bboxes, unsigned int $\ast$indices, unsigned int left\+\_\+index, unsigned int right\+\_\+index)
+\item 
+{\footnotesize template$<$typename T $>$ }\\bool \mbox{\hyperlink{a00408_aa5a9a561d084639fafc84873ab8f3d51}{Intersect\+Ray\+A\+A\+BB}} (T $\ast$tmin\+Out, T $\ast$tmax\+Out, T min\+\_\+t, T max\+\_\+t, const T bmin\mbox{[}3\mbox{]}, const T bmax\mbox{[}3\mbox{]}, \mbox{\hyperlink{a01389}{real3}}$<$ T $>$ ray\+\_\+org, \mbox{\hyperlink{a01389}{real3}}$<$ T $>$ ray\+\_\+inv\+\_\+dir, int ray\+\_\+dir\+\_\+sign\mbox{[}3\mbox{]})
+\item 
+template$<$$>$ bool \mbox{\hyperlink{a00408_abb906c21cbf94086beb735d63383a20e}{Intersect\+Ray\+A\+A\+B\+B$<$ float $>$}} (float $\ast$tmin\+Out, float $\ast$tmax\+Out, float min\+\_\+t, float max\+\_\+t, const float bmin\mbox{[}3\mbox{]}, const float bmax\mbox{[}3\mbox{]}, \mbox{\hyperlink{a01389}{real3}}$<$ float $>$ ray\+\_\+org, \mbox{\hyperlink{a01389}{real3}}$<$ float $>$ ray\+\_\+inv\+\_\+dir, int ray\+\_\+dir\+\_\+sign\mbox{[}3\mbox{]})
+\item 
+template$<$$>$ bool \mbox{\hyperlink{a00408_aa2274a88d11a6a83ac928c1d59be8748}{Intersect\+Ray\+A\+A\+B\+B$<$ double $>$}} (\mbox{\hyperlink{a00001_a02273}{double}} $\ast$tmin\+Out, \mbox{\hyperlink{a00001_a02273}{double}} $\ast$tmax\+Out, \mbox{\hyperlink{a00001_a02273}{double}} min\+\_\+t, \mbox{\hyperlink{a00001_a02273}{double}} max\+\_\+t, const \mbox{\hyperlink{a00001_a02273}{double}} bmin\mbox{[}3\mbox{]}, const \mbox{\hyperlink{a00001_a02273}{double}} bmax\mbox{[}3\mbox{]}, \mbox{\hyperlink{a01389}{real3}}$<$ \mbox{\hyperlink{a00001_a02273}{double}} $>$ ray\+\_\+org, \mbox{\hyperlink{a01389}{real3}}$<$ \mbox{\hyperlink{a00001_a02273}{double}} $>$ ray\+\_\+inv\+\_\+dir, int ray\+\_\+dir\+\_\+sign\mbox{[}3\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Class Documentation}
+\index{nanort::TriangleIntersection@{nanort::TriangleIntersection}}\label{a01441}
+\Hypertarget{a00408_a01441}
+\doxysubsubsection{class nanort\+::Triangle\+Intersection}
+\subsubsection*{template$<$typename T = float$>$\newline
+class nanort\+::\+Triangle\+Intersection$<$ T $>$}
+
+
+
+Definition at line 972 of file nanort.\+h.
+
+
+
+Collaboration diagram for nanort\+::Triangle\+Intersection$<$ T $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=259pt]{a01439}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00408_a1e3062943d9c131ef207cf4f92cd15b9}\label{a00408_a1e3062943d9c131ef207cf4f92cd15b9}} 
+unsigned int&
+prim\_id&
+\\
+\hline
+
+\mbox{\Hypertarget{a00408_ac6905be589222ab5c6d8367bee4370aa}\label{a00408_ac6905be589222ab5c6d8367bee4370aa}} 
+T&
+t&
+\\
+\hline
+
+\mbox{\Hypertarget{a00408_a3deaad23e30bd59d6932533d99a9927a}\label{a00408_a3deaad23e30bd59d6932533d99a9927a}} 
+T&
+u&
+\\
+\hline
+
+\mbox{\Hypertarget{a00408_a19beb63051e1c58b701fa132554816b1}\label{a00408_a19beb63051e1c58b701fa132554816b1}} 
+T&
+v&
+\\
+\hline
+
+\end{DoxyFields}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{a00408_a6ffc0020d7d758bc91664a49a749f661}\label{a00408_a6ffc0020d7d758bc91664a49a749f661}} 
+\index{nanort@{nanort}!RayType@{RayType}}
+\index{RayType@{RayType}!nanort@{nanort}}
+\doxysubsubsection{\texorpdfstring{RayType}{RayType}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{a00408_a6ffc0020d7d758bc91664a49a749f661}{nanort\+::\+Ray\+Type}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RAY\_TYPE\_NONE@{RAY\_TYPE\_NONE}!nanort@{nanort}}\index{nanort@{nanort}!RAY\_TYPE\_NONE@{RAY\_TYPE\_NONE}}}\mbox{\Hypertarget{a00408_a6ffc0020d7d758bc91664a49a749f661a26df8dc570dac0c6a8e2f0b1c5599035}\label{a00408_a6ffc0020d7d758bc91664a49a749f661a26df8dc570dac0c6a8e2f0b1c5599035}} 
+R\+A\+Y\+\_\+\+T\+Y\+P\+E\+\_\+\+N\+O\+NE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RAY\_TYPE\_PRIMARY@{RAY\_TYPE\_PRIMARY}!nanort@{nanort}}\index{nanort@{nanort}!RAY\_TYPE\_PRIMARY@{RAY\_TYPE\_PRIMARY}}}\mbox{\Hypertarget{a00408_a6ffc0020d7d758bc91664a49a749f661afa98b1a81432b92a40f2fb253dc3a90a}\label{a00408_a6ffc0020d7d758bc91664a49a749f661afa98b1a81432b92a40f2fb253dc3a90a}} 
+R\+A\+Y\+\_\+\+T\+Y\+P\+E\+\_\+\+P\+R\+I\+M\+A\+RY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RAY\_TYPE\_SECONDARY@{RAY\_TYPE\_SECONDARY}!nanort@{nanort}}\index{nanort@{nanort}!RAY\_TYPE\_SECONDARY@{RAY\_TYPE\_SECONDARY}}}\mbox{\Hypertarget{a00408_a6ffc0020d7d758bc91664a49a749f661a6be2832475a21a71054c96191824c846}\label{a00408_a6ffc0020d7d758bc91664a49a749f661a6be2832475a21a71054c96191824c846}} 
+R\+A\+Y\+\_\+\+T\+Y\+P\+E\+\_\+\+S\+E\+C\+O\+N\+D\+A\+RY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RAY\_TYPE\_DIFFUSE@{RAY\_TYPE\_DIFFUSE}!nanort@{nanort}}\index{nanort@{nanort}!RAY\_TYPE\_DIFFUSE@{RAY\_TYPE\_DIFFUSE}}}\mbox{\Hypertarget{a00408_a6ffc0020d7d758bc91664a49a749f661ab3c3a5f9859b5578509fc75f6295cf6b}\label{a00408_a6ffc0020d7d758bc91664a49a749f661ab3c3a5f9859b5578509fc75f6295cf6b}} 
+R\+A\+Y\+\_\+\+T\+Y\+P\+E\+\_\+\+D\+I\+F\+F\+U\+SE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RAY\_TYPE\_REFLECTION@{RAY\_TYPE\_REFLECTION}!nanort@{nanort}}\index{nanort@{nanort}!RAY\_TYPE\_REFLECTION@{RAY\_TYPE\_REFLECTION}}}\mbox{\Hypertarget{a00408_a6ffc0020d7d758bc91664a49a749f661ac321bb5b2eb584854abd74cf63ad14d3}\label{a00408_a6ffc0020d7d758bc91664a49a749f661ac321bb5b2eb584854abd74cf63ad14d3}} 
+R\+A\+Y\+\_\+\+T\+Y\+P\+E\+\_\+\+R\+E\+F\+L\+E\+C\+T\+I\+ON&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RAY\_TYPE\_REFRACTION@{RAY\_TYPE\_REFRACTION}!nanort@{nanort}}\index{nanort@{nanort}!RAY\_TYPE\_REFRACTION@{RAY\_TYPE\_REFRACTION}}}\mbox{\Hypertarget{a00408_a6ffc0020d7d758bc91664a49a749f661a0da6cb6314b88bcad5b2e4bd4445789f}\label{a00408_a6ffc0020d7d758bc91664a49a749f661a0da6cb6314b88bcad5b2e4bd4445789f}} 
+R\+A\+Y\+\_\+\+T\+Y\+P\+E\+\_\+\+R\+E\+F\+R\+A\+C\+T\+I\+ON&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 94 of file nanort.\+h.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{a00408_a1f672faac125854c89c907614545fe60}\label{a00408_a1f672faac125854c89c907614545fe60}} 
+\index{nanort@{nanort}!CalculateSurfaceArea@{CalculateSurfaceArea}}
+\index{CalculateSurfaceArea@{CalculateSurfaceArea}!nanort@{nanort}}
+\doxysubsubsection{\texorpdfstring{CalculateSurfaceArea()}{CalculateSurfaceArea()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T nanort\+::\+Calculate\+Surface\+Area (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01389}{real3}}$<$ T $>$ \&}]{min,  }\item[{const \mbox{\hyperlink{a01389}{real3}}$<$ T $>$ \&}]{max }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 1216 of file nanort.\+h.
+
+
+
+Referenced by Find\+Cut\+From\+Bin\+Buffer().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00408_a1f672faac125854c89c907614545fe60_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00408_a06549eb8469b9a2004cc5332ca0d011e}\label{a00408_a06549eb8469b9a2004cc5332ca0d011e}} 
+\index{nanort@{nanort}!ComputeBoundingBox@{ComputeBoundingBox}}
+\index{ComputeBoundingBox@{ComputeBoundingBox}!nanort@{nanort}}
+\doxysubsubsection{\texorpdfstring{ComputeBoundingBox()}{ComputeBoundingBox()}}
+{\footnotesize\ttfamily template$<$typename T , class P $>$ \\
+void nanort\+::\+Compute\+Bounding\+Box (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01389}{real3}}$<$ T $>$ $\ast$}]{bmin,  }\item[{\mbox{\hyperlink{a01389}{real3}}$<$ T $>$ $\ast$}]{bmax,  }\item[{const unsigned int $\ast$}]{indices,  }\item[{unsigned int}]{left\+\_\+index,  }\item[{unsigned int}]{right\+\_\+index,  }\item[{const P \&}]{p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 1553 of file nanort.\+h.
+
+
+
+Referenced by nanort\+::\+B\+V\+H\+Accel$<$ vertex\+\_\+t $>$\+::\+Build(), and nanort\+::\+B\+V\+H\+Accel$<$ vertex\+\_\+t $>$\+::\+Build\+Tree().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00408_a06549eb8469b9a2004cc5332ca0d011e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00408_a67ae269fe2215d261b995f1da13320f7}\label{a00408_a67ae269fe2215d261b995f1da13320f7}} 
+\index{nanort@{nanort}!ContributeBinBuffer@{ContributeBinBuffer}}
+\index{ContributeBinBuffer@{ContributeBinBuffer}!nanort@{nanort}}
+\doxysubsubsection{\texorpdfstring{ContributeBinBuffer()}{ContributeBinBuffer()}}
+{\footnotesize\ttfamily template$<$typename T , class P $>$ \\
+void nanort\+::\+Contribute\+Bin\+Buffer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01453}{Bin\+Buffer}} $\ast$}]{bins,  }\item[{const \mbox{\hyperlink{a01389}{real3}}$<$ T $>$ \&}]{scene\+\_\+min,  }\item[{const \mbox{\hyperlink{a01389}{real3}}$<$ T $>$ \&}]{scene\+\_\+max,  }\item[{unsigned int $\ast$}]{indices,  }\item[{unsigned int}]{left\+\_\+idx,  }\item[{unsigned int}]{right\+\_\+idx,  }\item[{const P \&}]{p }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 1252 of file nanort.\+h.
+
+
+
+References nanort\+::\+Bin\+Buffer\+::bin, and nanort\+::\+Bin\+Buffer\+::bin\+\_\+size.
+
+
+
+Referenced by nanort\+::\+B\+V\+H\+Accel$<$ vertex\+\_\+t $>$\+::\+Build\+Tree().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00408_a67ae269fe2215d261b995f1da13320f7_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00408_ac281b6ed7e50b406666a6e67e9547b7e}\label{a00408_ac281b6ed7e50b406666a6e67e9547b7e}} 
+\index{nanort@{nanort}!FindCutFromBinBuffer@{FindCutFromBinBuffer}}
+\index{FindCutFromBinBuffer@{FindCutFromBinBuffer}!nanort@{nanort}}
+\doxysubsubsection{\texorpdfstring{FindCutFromBinBuffer()}{FindCutFromBinBuffer()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool nanort\+::\+Find\+Cut\+From\+Bin\+Buffer (\begin{DoxyParamCaption}\item[{T $\ast$}]{cut\+\_\+pos,  }\item[{int $\ast$}]{min\+Cost\+Axis,  }\item[{const \mbox{\hyperlink{a01453}{Bin\+Buffer}} $\ast$}]{bins,  }\item[{const \mbox{\hyperlink{a01389}{real3}}$<$ T $>$ \&}]{bmin,  }\item[{const \mbox{\hyperlink{a01389}{real3}}$<$ T $>$ \&}]{bmax,  }\item[{size\+\_\+t}]{num\+\_\+primitives,  }\item[{T}]{cost\+Taabb }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 1334 of file nanort.\+h.
+
+
+
+References nanort\+::\+Bin\+Buffer\+::bin, nanort\+::\+Bin\+Buffer\+::bin\+\_\+size, Calculate\+Surface\+Area(), and S\+A\+H().
+
+
+
+Referenced by nanort\+::\+B\+V\+H\+Accel$<$ vertex\+\_\+t $>$\+::\+Build\+Tree().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00408_ac281b6ed7e50b406666a6e67e9547b7e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00408_ac281b6ed7e50b406666a6e67e9547b7e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00408_a2c4199cb2c2699fd6c82f709c954bd90}\label{a00408_a2c4199cb2c2699fd6c82f709c954bd90}} 
+\index{nanort@{nanort}!get\_vertex\_addr@{get\_vertex\_addr}}
+\index{get\_vertex\_addr@{get\_vertex\_addr}!nanort@{nanort}}
+\doxysubsubsection{\texorpdfstring{get\_vertex\_addr()}{get\_vertex\_addr()}}
+{\footnotesize\ttfamily template$<$typename real $>$ \\
+const real$\ast$ nanort\+::get\+\_\+vertex\+\_\+addr (\begin{DoxyParamCaption}\item[{const real $\ast$}]{p,  }\item[{const size\+\_\+t}]{idx,  }\item[{const size\+\_\+t}]{stride\+\_\+bytes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 474 of file nanort.\+h.
+
+
+
+Referenced by nanort\+::\+Triangle\+Mesh$<$ T $>$\+::\+Bounding\+Box(), and nanort\+::\+Triangle\+Intersector$<$ double, nanort\+::\+Triangle\+Intersection$<$ double $>$ $>$\+::\+Intersect().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00408_a2c4199cb2c2699fd6c82f709c954bd90_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00408_a60ac3f02ccb852decfdc6f7f02d7184f}\label{a00408_a60ac3f02ccb852decfdc6f7f02d7184f}} 
+\index{nanort@{nanort}!GetBoundingBox@{GetBoundingBox}}
+\index{GetBoundingBox@{GetBoundingBox}!nanort@{nanort}}
+\doxysubsubsection{\texorpdfstring{GetBoundingBox()}{GetBoundingBox()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void nanort\+::\+Get\+Bounding\+Box (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01389}{real3}}$<$ T $>$ $\ast$}]{bmin,  }\item[{\mbox{\hyperlink{a01389}{real3}}$<$ T $>$ $\ast$}]{bmax,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{a01417}{B\+Box}}$<$ T $>$ $>$ \&}]{bboxes,  }\item[{unsigned int $\ast$}]{indices,  }\item[{unsigned int}]{left\+\_\+index,  }\item[{unsigned int}]{right\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 1577 of file nanort.\+h.
+
+
+
+Referenced by nanort\+::\+B\+V\+H\+Accel$<$ vertex\+\_\+t $>$\+::\+Build\+Tree().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00408_a60ac3f02ccb852decfdc6f7f02d7184f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00408_a464fa0f048bdb306e2a84523579ab34b}\label{a00408_a464fa0f048bdb306e2a84523579ab34b}} 
+\index{nanort@{nanort}!GetBoundingBoxOfTriangle@{GetBoundingBoxOfTriangle}}
+\index{GetBoundingBoxOfTriangle@{GetBoundingBoxOfTriangle}!nanort@{nanort}}
+\doxysubsubsection{\texorpdfstring{GetBoundingBoxOfTriangle()}{GetBoundingBoxOfTriangle()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void nanort\+::\+Get\+Bounding\+Box\+Of\+Triangle (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01389}{real3}}$<$ T $>$ $\ast$}]{bmin,  }\item[{\mbox{\hyperlink{a01389}{real3}}$<$ T $>$ $\ast$}]{bmax,  }\item[{const T $\ast$}]{vertices,  }\item[{const unsigned int $\ast$}]{faces,  }\item[{unsigned int}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 1223 of file nanort.\+h.
+
+\mbox{\Hypertarget{a00408_aa5a9a561d084639fafc84873ab8f3d51}\label{a00408_aa5a9a561d084639fafc84873ab8f3d51}} 
+\index{nanort@{nanort}!IntersectRayAABB@{IntersectRayAABB}}
+\index{IntersectRayAABB@{IntersectRayAABB}!nanort@{nanort}}
+\doxysubsubsection{\texorpdfstring{IntersectRayAABB()}{IntersectRayAABB()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool nanort\+::\+Intersect\+Ray\+A\+A\+BB (\begin{DoxyParamCaption}\item[{T $\ast$}]{tmin\+Out,  }\item[{T $\ast$}]{tmax\+Out,  }\item[{T}]{min\+\_\+t,  }\item[{T}]{max\+\_\+t,  }\item[{const T}]{bmin\mbox{[}3\mbox{]},  }\item[{const T}]{bmax\mbox{[}3\mbox{]},  }\item[{\mbox{\hyperlink{a01389}{real3}}$<$ T $>$}]{ray\+\_\+org,  }\item[{\mbox{\hyperlink{a01389}{real3}}$<$ T $>$}]{ray\+\_\+inv\+\_\+dir,  }\item[{int}]{ray\+\_\+dir\+\_\+sign\mbox{[}3\mbox{]} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Referenced by nanort\+::\+B\+V\+H\+Accel$<$ vertex\+\_\+t $>$\+::\+List\+Node\+Intersections(), and nanort\+::\+B\+V\+H\+Accel$<$ vertex\+\_\+t $>$\+::\+Traverse().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00408_aa5a9a561d084639fafc84873ab8f3d51_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00408_aa2274a88d11a6a83ac928c1d59be8748}\label{a00408_aa2274a88d11a6a83ac928c1d59be8748}} 
+\index{nanort@{nanort}!IntersectRayAABB$<$ double $>$@{IntersectRayAABB$<$ double $>$}}
+\index{IntersectRayAABB$<$ double $>$@{IntersectRayAABB$<$ double $>$}!nanort@{nanort}}
+\doxysubsubsection{\texorpdfstring{IntersectRayAABB$<$ double $>$()}{IntersectRayAABB< double >()}}
+{\footnotesize\ttfamily template$<$$>$ \\
+bool \mbox{\hyperlink{a00408_aa5a9a561d084639fafc84873ab8f3d51}{nanort\+::\+Intersect\+Ray\+A\+A\+BB}}$<$ \mbox{\hyperlink{a00001_a02273}{double}} $>$ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a00001_a02273}{double}} $\ast$}]{tmin\+Out,  }\item[{\mbox{\hyperlink{a00001_a02273}{double}} $\ast$}]{tmax\+Out,  }\item[{\mbox{\hyperlink{a00001_a02273}{double}}}]{min\+\_\+t,  }\item[{\mbox{\hyperlink{a00001_a02273}{double}}}]{max\+\_\+t,  }\item[{const \mbox{\hyperlink{a00001_a02273}{double}}}]{bmin\mbox{[}3\mbox{]},  }\item[{const \mbox{\hyperlink{a00001_a02273}{double}}}]{bmax\mbox{[}3\mbox{]},  }\item[{\mbox{\hyperlink{a01389}{real3}}$<$ \mbox{\hyperlink{a00001_a02273}{double}} $>$}]{ray\+\_\+org,  }\item[{\mbox{\hyperlink{a01389}{real3}}$<$ \mbox{\hyperlink{a00001_a02273}{double}} $>$}]{ray\+\_\+inv\+\_\+dir,  }\item[{int}]{ray\+\_\+dir\+\_\+sign\mbox{[}3\mbox{]} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 2344 of file nanort.\+h.
+
+
+
+References safemax(), and safemin().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00408_aa2274a88d11a6a83ac928c1d59be8748_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00408_abb906c21cbf94086beb735d63383a20e}\label{a00408_abb906c21cbf94086beb735d63383a20e}} 
+\index{nanort@{nanort}!IntersectRayAABB$<$ float $>$@{IntersectRayAABB$<$ float $>$}}
+\index{IntersectRayAABB$<$ float $>$@{IntersectRayAABB$<$ float $>$}!nanort@{nanort}}
+\doxysubsubsection{\texorpdfstring{IntersectRayAABB$<$ float $>$()}{IntersectRayAABB< float >()}}
+{\footnotesize\ttfamily template$<$$>$ \\
+bool \mbox{\hyperlink{a00408_aa5a9a561d084639fafc84873ab8f3d51}{nanort\+::\+Intersect\+Ray\+A\+A\+BB}}$<$ float $>$ (\begin{DoxyParamCaption}\item[{float $\ast$}]{tmin\+Out,  }\item[{float $\ast$}]{tmax\+Out,  }\item[{float}]{min\+\_\+t,  }\item[{float}]{max\+\_\+t,  }\item[{const float}]{bmin\mbox{[}3\mbox{]},  }\item[{const float}]{bmax\mbox{[}3\mbox{]},  }\item[{\mbox{\hyperlink{a01389}{real3}}$<$ float $>$}]{ray\+\_\+org,  }\item[{\mbox{\hyperlink{a01389}{real3}}$<$ float $>$}]{ray\+\_\+inv\+\_\+dir,  }\item[{int}]{ray\+\_\+dir\+\_\+sign\mbox{[}3\mbox{]} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 2301 of file nanort.\+h.
+
+
+
+References safemax(), and safemin().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00408_abb906c21cbf94086beb735d63383a20e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00408_ae1693dffefd99a110afb8025c25b5b0a}\label{a00408_ae1693dffefd99a110afb8025c25b5b0a}} 
+\index{nanort@{nanort}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!nanort@{nanort}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{a01389}{real3}}$<$T$>$ nanort\+::operator$\ast$ (\begin{DoxyParamCaption}\item[{T}]{f,  }\item[{const \mbox{\hyperlink{a01389}{real3}}$<$ T $>$ \&}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 373 of file nanort.\+h.
+
+
+
+References nanort\+::real3$<$ T $>$\+::x(), nanort\+::real3$<$ T $>$\+::y(), and nanort\+::real3$<$ T $>$\+::z().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=308pt]{a00408_ae1693dffefd99a110afb8025c25b5b0a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00408_ac69fcd275be693fe788c6b6668560ad4}\label{a00408_ac69fcd275be693fe788c6b6668560ad4}} 
+\index{nanort@{nanort}!safemax@{safemax}}
+\index{safemax@{safemax}!nanort@{nanort}}
+\doxysubsubsection{\texorpdfstring{safemax()}{safemax()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+const T\& nanort\+::safemax (\begin{DoxyParamCaption}\item[{const T \&}]{a,  }\item[{const T \&}]{b }\end{DoxyParamCaption})}
+
+
+
+Definition at line 1194 of file nanort.\+h.
+
+
+
+Referenced by Intersect\+Ray\+A\+A\+B\+B$<$ double $>$(), and Intersect\+Ray\+A\+A\+B\+B$<$ float $>$().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00408_ac69fcd275be693fe788c6b6668560ad4_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00408_a64a1973042fc2b33110df2dbf928b359}\label{a00408_a64a1973042fc2b33110df2dbf928b359}} 
+\index{nanort@{nanort}!safemin@{safemin}}
+\index{safemin@{safemin}!nanort@{nanort}}
+\doxysubsubsection{\texorpdfstring{safemin()}{safemin()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+const T\& nanort\+::safemin (\begin{DoxyParamCaption}\item[{const T \&}]{a,  }\item[{const T \&}]{b }\end{DoxyParamCaption})}
+
+
+
+Definition at line 1190 of file nanort.\+h.
+
+
+
+Referenced by Intersect\+Ray\+A\+A\+B\+B$<$ double $>$(), and Intersect\+Ray\+A\+A\+B\+B$<$ float $>$().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00408_a64a1973042fc2b33110df2dbf928b359_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00408_a2224f7a101ce863a9332f059dfef9dd1}\label{a00408_a2224f7a101ce863a9332f059dfef9dd1}} 
+\index{nanort@{nanort}!SAH@{SAH}}
+\index{SAH@{SAH}!nanort@{nanort}}
+\doxysubsubsection{\texorpdfstring{SAH()}{SAH()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T nanort\+::\+S\+AH (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{ns1,  }\item[{T}]{left\+Area,  }\item[{size\+\_\+t}]{ns2,  }\item[{T}]{right\+Area,  }\item[{T}]{invS,  }\item[{T}]{Taabb,  }\item[{T}]{Ttri }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 1322 of file nanort.\+h.
+
+
+
+Referenced by Find\+Cut\+From\+Bin\+Buffer().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00408_a2224f7a101ce863a9332f059dfef9dd1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00408_a2ac9f5ea480e55bab7a5935dd27e969b}\label{a00408_a2ac9f5ea480e55bab7a5935dd27e969b}} 
+\index{nanort@{nanort}!vcross@{vcross}}
+\index{vcross@{vcross}!nanort@{nanort}}
+\doxysubsubsection{\texorpdfstring{vcross()}{vcross()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{a01389}{real3}}$<$T$>$ nanort\+::vcross (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01389}{real3}}$<$ T $>$}]{a,  }\item[{const \mbox{\hyperlink{a01389}{real3}}$<$ T $>$}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 401 of file nanort.\+h.
+
+\mbox{\Hypertarget{a00408_a218842bcf14b05ea6840d88b58fc8ec6}\label{a00408_a218842bcf14b05ea6840d88b58fc8ec6}} 
+\index{nanort@{nanort}!vdot@{vdot}}
+\index{vdot@{vdot}!nanort@{nanort}}
+\doxysubsubsection{\texorpdfstring{vdot()}{vdot()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T nanort\+::vdot (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01389}{real3}}$<$ T $>$}]{a,  }\item[{const \mbox{\hyperlink{a01389}{real3}}$<$ T $>$}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 410 of file nanort.\+h.
+
+\mbox{\Hypertarget{a00408_ab9ba72d8d5e11d213c39ce9bd8e851ef}\label{a00408_ab9ba72d8d5e11d213c39ce9bd8e851ef}} 
+\index{nanort@{nanort}!vlength@{vlength}}
+\index{vlength@{vlength}!nanort@{nanort}}
+\doxysubsubsection{\texorpdfstring{vlength()}{vlength()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T nanort\+::vlength (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01389}{real3}}$<$ T $>$ \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 383 of file nanort.\+h.
+
+
+
+References nanort\+::real3$<$ T $>$\+::x(), nanort\+::real3$<$ T $>$\+::y(), and nanort\+::real3$<$ T $>$\+::z().
+
+
+
+Referenced by vnormalize().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=298pt]{a00408_ab9ba72d8d5e11d213c39ce9bd8e851ef_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=316pt]{a00408_ab9ba72d8d5e11d213c39ce9bd8e851ef_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00408_a56b7d2ef9b2e87ee4ed7f87df8ff7e56}\label{a00408_a56b7d2ef9b2e87ee4ed7f87df8ff7e56}} 
+\index{nanort@{nanort}!vneg@{vneg}}
+\index{vneg@{vneg}!nanort@{nanort}}
+\doxysubsubsection{\texorpdfstring{vneg()}{vneg()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{a01389}{real3}}$<$T$>$ nanort\+::vneg (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01389}{real3}}$<$ T $>$ \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 378 of file nanort.\+h.
+
+
+
+References nanort\+::real3$<$ T $>$\+::x(), nanort\+::real3$<$ T $>$\+::y(), and nanort\+::real3$<$ T $>$\+::z().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=285pt]{a00408_a56b7d2ef9b2e87ee4ed7f87df8ff7e56_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00408_ad95ebf4909da5be14689ba659bd261b5}\label{a00408_ad95ebf4909da5be14689ba659bd261b5}} 
+\index{nanort@{nanort}!vnormalize@{vnormalize}}
+\index{vnormalize@{vnormalize}!nanort@{nanort}}
+\doxysubsubsection{\texorpdfstring{vnormalize()}{vnormalize()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{a01389}{real3}}$<$T$>$ nanort\+::vnormalize (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01389}{real3}}$<$ T $>$ \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 388 of file nanort.\+h.
+
+
+
+References nanort\+::real3$<$ T $>$\+::v, and vlength().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00408_ad95ebf4909da5be14689ba659bd261b5_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00408_af174757a9f102f087bdff1c75067de1b}\label{a00408_af174757a9f102f087bdff1c75067de1b}} 
+\index{nanort@{nanort}!vsafe\_inverse@{vsafe\_inverse}}
+\index{vsafe\_inverse@{vsafe\_inverse}!nanort@{nanort}}
+\doxysubsubsection{\texorpdfstring{vsafe\_inverse()}{vsafe\_inverse()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{a01389}{real3}}$<$T$>$ nanort\+::vsafe\+\_\+inverse (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01389}{real3}}$<$ T $>$}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 415 of file nanort.\+h.
+
+
+
+Referenced by nanort\+::\+B\+V\+H\+Accel$<$ vertex\+\_\+t $>$\+::\+List\+Node\+Intersections(), and nanort\+::\+B\+V\+H\+Accel$<$ vertex\+\_\+t $>$\+::\+Traverse().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00408_af174757a9f102f087bdff1c75067de1b_icgraph}
+\end{center}
+\end{figure}

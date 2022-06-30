@@ -1,0 +1,411 @@
+\hypertarget{a00329}{}\doxysection{Cpp/tests/src/\+View\+Analysis.cpp File Reference}
+\label{a00329}\index{Cpp/tests/src/ViewAnalysis.cpp@{Cpp/tests/src/ViewAnalysis.cpp}}
+{\ttfamily \#include \char`\"{}gtest/gtest.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$array$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$numeric$>$}\newline
+{\ttfamily \#include $<$graph\+\_\+generator.\+h$>$}\newline
+{\ttfamily \#include $<$embree\+\_\+raytracer.\+h$>$}\newline
+{\ttfamily \#include $<$view\+\_\+analysis.\+h$>$}\newline
+{\ttfamily \#include $<$objloader.\+h$>$}\newline
+{\ttfamily \#include $<$meshinfo.\+h$>$}\newline
+{\ttfamily \#include $<$graph.\+h$>$}\newline
+{\ttfamily \#include $<$edge.\+h$>$}\newline
+{\ttfamily \#include $<$node.\+h$>$}\newline
+{\ttfamily \#include $<$view\+\_\+analysis\+\_\+\+C.\+h$>$}\newline
+{\ttfamily \#include $<$raytracer\+\_\+\+C.\+h$>$}\newline
+{\ttfamily \#include $<$objloader\+\_\+\+C.\+h$>$}\newline
+{\ttfamily \#include $<$H\+F\+Exceptions.\+h$>$}\newline
+{\ttfamily \#include $<$Constants.\+h$>$}\newline
+Include dependency graph for View\+Analysis.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00330}
+\end{center}
+\end{figure}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{a00329_acea841c68a73d07ad9d772ec2e94a683}{Mesh\+Info}} = \mbox{\hyperlink{a01297}{H\+F\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00329_ae558819343351dce9a5c5a9484f2dbd4}{T\+E\+ST}} (\+\_\+\+View\+Analysis, Spherical\+View\+Analysis)
+\item 
+\mbox{\hyperlink{a00329_acb30ac5ae6c21828a68b922767b6916f}{T\+E\+ST}} (\+\_\+\+View\+Analysis, Spherical\+View\+Analysis\+\_\+\+Loaded\+Mesh)
+\item 
+\mbox{\hyperlink{a00329_a03f1a140d263fe8de36cba0dcecc214e}{T\+E\+ST}} (\+\_\+\+View\+Analysis, All\+Rays\+Hit)
+\item 
+\mbox{\hyperlink{a00329_ae4419ff5bcc528190c81d6526b0d493a}{T\+E\+ST}} (\+\_\+\+View\+Analysis, Fibbonacci\+Generates\+Right\+Amt\+Of\+Rays)
+\item 
+\mbox{\hyperlink{a00329_ab11f0128c421e39c90d2faa3dd0ba8c5}{T\+E\+ST}} (\+\_\+\+View\+Analysis, Aggregate\+Doesnt\+Return\+Infinite)
+\item 
+\mbox{\hyperlink{a00329_aa7edc3cd6855dfd2d8f650dbae1daf89}{T\+E\+ST}} (\+\_\+\+View\+Analysis, Fibbonacci\+Distribute\+Points)
+\item 
+\mbox{\hyperlink{a00329_ad1fe8aeee527dd4b0ea3494819532402}{T\+E\+ST}} (\+\_\+\+View\+Analysis, Aggregate\+Average)
+\item 
+\mbox{\hyperlink{a00329_a074fe26991a240dfbd4edc0511dfb82c}{T\+E\+ST}} (\+\_\+\+View\+Analysis, View\+Analysis\+Aggregate)
+\item 
+\mbox{\hyperlink{a00329_af96df3ef6e67e1fe39bb49007cf05b2d}{T\+E\+ST}} (\+\_\+\+View\+Analysis, View\+Analysis\+Aggregate\+\_\+\+M\+IN)
+\item 
+\mbox{\hyperlink{a00329_a2178ea93521f45cbc1bdc6a98d46cd94}{T\+E\+ST}} (C\+\_\+\+View\+Analysis\+C\+Interface, Spherical\+View\+Analysis\+Aggregate)
+\item 
+\mbox{\hyperlink{a00329_aeaedb32c27a0c02060cfd4b91698f1ef}{T\+E\+ST}} (C\+\_\+\+View\+Analysis\+C\+Interface, Spherical\+View\+Analysis\+Aggregate\+Flat)
+\item 
+\mbox{\hyperlink{a00329_ac35c076503841f23533271e27afb00b3}{T\+E\+ST}} (C\+\_\+\+View\+Analysis\+C\+Interface, \mbox{\hyperlink{a00393_gaf572b7bec28d55bf2c72719742703dff}{Spherical\+Distribute}})
+\item 
+\mbox{\hyperlink{a00329_a804ad544dafda5055205e813b0fe3fd2}{T\+E\+ST}} (C\+\_\+\+View\+Analysis\+C\+Interface, \mbox{\hyperlink{a00393_ga348af4492f3e4e7ffab6da3e86de3924}{Spherical\+View\+Analysis\+No\+Aggregate\+Flat}})
+\item 
+\mbox{\hyperlink{a00329_af8e5f32ed4edbe487d05ef46004a2792}{T\+E\+ST}} (C\+\_\+\+View\+Analysis\+C\+Interface, \mbox{\hyperlink{a00393_ga94d3ddc3981020e2852fc77e51266185}{Spherical\+View\+Analysis\+No\+Aggregate}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{a00329_aa7eefef67bc4a868d34ea42e9d1a7bcf}{big\+\_\+teapot\+\_\+path}} = \char`\"{}big\+\_\+teapot.\+obj\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{a00329_acea841c68a73d07ad9d772ec2e94a683}\label{a00329_acea841c68a73d07ad9d772ec2e94a683}} 
+\index{ViewAnalysis.cpp@{ViewAnalysis.cpp}!MeshInfo@{MeshInfo}}
+\index{MeshInfo@{MeshInfo}!ViewAnalysis.cpp@{ViewAnalysis.cpp}}
+\doxysubsubsection{\texorpdfstring{MeshInfo}{MeshInfo}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{a02910_acea841c68a73d07ad9d772ec2e94a683}{Mesh\+Info}} =  \mbox{\hyperlink{a01297}{H\+F\+::\+Geometry\+::\+Mesh\+Info}}$<$float$>$}
+
+
+
+Definition at line 27 of file View\+Analysis.\+cpp.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{a00329_ad1fe8aeee527dd4b0ea3494819532402}\label{a00329_ad1fe8aeee527dd4b0ea3494819532402}} 
+\index{ViewAnalysis.cpp@{ViewAnalysis.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ViewAnalysis.cpp@{ViewAnalysis.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [1/14]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+View\+Analysis}]{,  }\item[{Aggregate\+Average}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 308 of file View\+Analysis.\+cpp.
+
+
+
+References H\+F\+::\+View\+Analysis\+::\+Aggregate(), A\+V\+E\+R\+A\+GE, C\+O\+U\+NT, M\+AX, M\+IN, and S\+UM.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=314pt]{a00329_ad1fe8aeee527dd4b0ea3494819532402_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00329_ab11f0128c421e39c90d2faa3dd0ba8c5}\label{a00329_ab11f0128c421e39c90d2faa3dd0ba8c5}} 
+\index{ViewAnalysis.cpp@{ViewAnalysis.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ViewAnalysis.cpp@{ViewAnalysis.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [2/14]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+View\+Analysis}]{,  }\item[{Aggregate\+Doesnt\+Return\+Infinite}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 266 of file View\+Analysis.\+cpp.
+
+
+
+References H\+F\+::\+View\+Analysis\+::\+A\+V\+E\+R\+A\+GE, big\+\_\+teapot\+\_\+path, H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), and H\+F\+::\+View\+Analysis\+::\+Spherical\+Rayshoot\+With\+Any\+R\+T\+For\+Distance().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00329_ab11f0128c421e39c90d2faa3dd0ba8c5_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00329_a03f1a140d263fe8de36cba0dcecc214e}\label{a00329_a03f1a140d263fe8de36cba0dcecc214e}} 
+\index{ViewAnalysis.cpp@{ViewAnalysis.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ViewAnalysis.cpp@{ViewAnalysis.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [3/14]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+View\+Analysis}]{,  }\item[{All\+Rays\+Hit}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{a00386__todo000030}{Todo}}]fix this to actually test if all rays hit \end{DoxyRefDesc}
+
+
+Definition at line 244 of file View\+Analysis.\+cpp.
+
+
+
+References big\+\_\+teapot\+\_\+path, H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), H\+F\+::\+View\+Analysis\+::\+Spherical\+Rayshoot\+With\+Any\+R\+T\+For\+Distance(), and H\+F\+::\+View\+Analysis\+::\+S\+UM.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00329_a03f1a140d263fe8de36cba0dcecc214e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00329_aa7edc3cd6855dfd2d8f650dbae1daf89}\label{a00329_aa7edc3cd6855dfd2d8f650dbae1daf89}} 
+\index{ViewAnalysis.cpp@{ViewAnalysis.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ViewAnalysis.cpp@{ViewAnalysis.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [4/14]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+View\+Analysis}]{,  }\item[{Fibbonacci\+Distribute\+Points}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 284 of file View\+Analysis.\+cpp.
+
+
+
+References H\+F\+::\+View\+Analysis\+::\+Fibbonacci\+Distribute\+Points().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00329_aa7edc3cd6855dfd2d8f650dbae1daf89_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00329_ae4419ff5bcc528190c81d6526b0d493a}\label{a00329_ae4419ff5bcc528190c81d6526b0d493a}} 
+\index{ViewAnalysis.cpp@{ViewAnalysis.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ViewAnalysis.cpp@{ViewAnalysis.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [5/14]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+View\+Analysis}]{,  }\item[{Fibbonacci\+Generates\+Right\+Amt\+Of\+Rays}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 262 of file View\+Analysis.\+cpp.
+
+
+
+References H\+F\+::\+View\+Analysis\+::\+Fibbonacci\+Distribute\+Points().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00329_ae4419ff5bcc528190c81d6526b0d493a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00329_ae558819343351dce9a5c5a9484f2dbd4}\label{a00329_ae558819343351dce9a5c5a9484f2dbd4}} 
+\index{ViewAnalysis.cpp@{ViewAnalysis.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ViewAnalysis.cpp@{ViewAnalysis.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [6/14]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+View\+Analysis}]{,  }\item[{Spherical\+View\+Analysis}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 35 of file View\+Analysis.\+cpp.
+
+
+
+References H\+F\+::\+View\+Analysis\+::\+Spherical\+View\+Analysis().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00329_ae558819343351dce9a5c5a9484f2dbd4_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00329_acb30ac5ae6c21828a68b922767b6916f}\label{a00329_acb30ac5ae6c21828a68b922767b6916f}} 
+\index{ViewAnalysis.cpp@{ViewAnalysis.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ViewAnalysis.cpp@{ViewAnalysis.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [7/14]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+View\+Analysis}]{,  }\item[{Spherical\+View\+Analysis\+\_\+\+Loaded\+Mesh}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 135 of file View\+Analysis.\+cpp.
+
+
+
+References Create\+Raytracer(), Destroy\+Ray\+Tracer(), Load\+O\+B\+J(), H\+F\+::\+Geometry\+::\+O\+N\+L\+Y\+\_\+\+F\+I\+LE, and H\+F\+::\+View\+Analysis\+::\+Spherical\+View\+Analysis().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00329_acb30ac5ae6c21828a68b922767b6916f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00329_a074fe26991a240dfbd4edc0511dfb82c}\label{a00329_a074fe26991a240dfbd4edc0511dfb82c}} 
+\index{ViewAnalysis.cpp@{ViewAnalysis.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ViewAnalysis.cpp@{ViewAnalysis.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [8/14]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+View\+Analysis}]{,  }\item[{View\+Analysis\+Aggregate}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 359 of file View\+Analysis.\+cpp.
+
+
+
+References H\+F\+::\+View\+Analysis\+::\+Spherical\+Rayshoot\+With\+Any\+R\+T\+For\+Distance(), and S\+UM.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00329_a074fe26991a240dfbd4edc0511dfb82c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00329_af96df3ef6e67e1fe39bb49007cf05b2d}\label{a00329_af96df3ef6e67e1fe39bb49007cf05b2d}} 
+\index{ViewAnalysis.cpp@{ViewAnalysis.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ViewAnalysis.cpp@{ViewAnalysis.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [9/14]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+View\+Analysis}]{,  }\item[{View\+Analysis\+Aggregate\+\_\+\+M\+IN}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 406 of file View\+Analysis.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), M\+IN, and H\+F\+::\+View\+Analysis\+::\+Spherical\+Rayshoot\+With\+Any\+R\+T\+For\+Distance().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00329_af96df3ef6e67e1fe39bb49007cf05b2d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00329_ac35c076503841f23533271e27afb00b3}\label{a00329_ac35c076503841f23533271e27afb00b3}} 
+\index{ViewAnalysis.cpp@{ViewAnalysis.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ViewAnalysis.cpp@{ViewAnalysis.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [10/14]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{C\+\_\+\+View\+Analysis\+C\+Interface}]{,  }\item[{\mbox{\hyperlink{a00393_gaf572b7bec28d55bf2c72719742703dff}{Spherical\+Distribute}}}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 585 of file View\+Analysis.\+cpp.
+
+
+
+References Destroy\+Float\+Vector(), H\+F\+::\+Exceptions\+::\+OK, and Spherical\+Distribute().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00329_ac35c076503841f23533271e27afb00b3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00329_a2178ea93521f45cbc1bdc6a98d46cd94}\label{a00329_a2178ea93521f45cbc1bdc6a98d46cd94}} 
+\index{ViewAnalysis.cpp@{ViewAnalysis.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ViewAnalysis.cpp@{ViewAnalysis.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [11/14]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{C\+\_\+\+View\+Analysis\+C\+Interface}]{,  }\item[{Spherical\+View\+Analysis\+Aggregate}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 438 of file View\+Analysis.\+cpp.
+
+
+
+References A\+V\+E\+R\+A\+GE, Create\+Raytracer(), Destroy\+Float\+Vector(), Destroy\+Mesh\+Info(), Destroy\+Ray\+Tracer(), H\+F\+::\+Exceptions\+::\+OK, Sphereical\+View\+Analysis\+Aggregate(), and Store\+Mesh().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00329_a2178ea93521f45cbc1bdc6a98d46cd94_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00329_aeaedb32c27a0c02060cfd4b91698f1ef}\label{a00329_aeaedb32c27a0c02060cfd4b91698f1ef}} 
+\index{ViewAnalysis.cpp@{ViewAnalysis.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ViewAnalysis.cpp@{ViewAnalysis.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [12/14]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{C\+\_\+\+View\+Analysis\+C\+Interface}]{,  }\item[{Spherical\+View\+Analysis\+Aggregate\+Flat}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 512 of file View\+Analysis.\+cpp.
+
+
+
+References A\+V\+E\+R\+A\+GE, Create\+Raytracer(), Destroy\+Float\+Vector(), Destroy\+Mesh\+Info(), Destroy\+Ray\+Tracer(), H\+F\+::\+Exceptions\+::\+OK, Sphereical\+View\+Analysis\+Aggregate\+Flat(), and Store\+Mesh().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00329_aeaedb32c27a0c02060cfd4b91698f1ef_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00329_af8e5f32ed4edbe487d05ef46004a2792}\label{a00329_af8e5f32ed4edbe487d05ef46004a2792}} 
+\index{ViewAnalysis.cpp@{ViewAnalysis.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ViewAnalysis.cpp@{ViewAnalysis.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [13/14]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{C\+\_\+\+View\+Analysis\+C\+Interface}]{,  }\item[{\mbox{\hyperlink{a00393_ga94d3ddc3981020e2852fc77e51266185}{Spherical\+View\+Analysis\+No\+Aggregate}}}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 694 of file View\+Analysis.\+cpp.
+
+
+
+References A\+V\+E\+R\+A\+GE, Create\+Raytracer(), Destroy\+Mesh\+Info(), Destroy\+Ray\+Result\+Vector(), Destroy\+Ray\+Tracer(), Ray\+Result\+::distance, Ray\+Result\+::meshid, H\+F\+::\+Exceptions\+::\+OK, Spherical\+View\+Analysis\+No\+Aggregate(), and Store\+Mesh().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00329_af8e5f32ed4edbe487d05ef46004a2792_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00329_a804ad544dafda5055205e813b0fe3fd2}\label{a00329_a804ad544dafda5055205e813b0fe3fd2}} 
+\index{ViewAnalysis.cpp@{ViewAnalysis.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!ViewAnalysis.cpp@{ViewAnalysis.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [14/14]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{C\+\_\+\+View\+Analysis\+C\+Interface}]{,  }\item[{\mbox{\hyperlink{a00393_ga348af4492f3e4e7ffab6da3e86de3924}{Spherical\+View\+Analysis\+No\+Aggregate\+Flat}}}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 616 of file View\+Analysis.\+cpp.
+
+
+
+References A\+V\+E\+R\+A\+GE, Create\+Raytracer(), Destroy\+Mesh\+Info(), Destroy\+Ray\+Result\+Vector(), Destroy\+Ray\+Tracer(), Ray\+Result\+::distance, Ray\+Result\+::meshid, H\+F\+::\+Exceptions\+::\+OK, Spherical\+View\+Analysis\+No\+Aggregate\+Flat(), and Store\+Mesh().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00329_a804ad544dafda5055205e813b0fe3fd2_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{a00329_aa7eefef67bc4a868d34ea42e9d1a7bcf}\label{a00329_aa7eefef67bc4a868d34ea42e9d1a7bcf}} 
+\index{ViewAnalysis.cpp@{ViewAnalysis.cpp}!big\_teapot\_path@{big\_teapot\_path}}
+\index{big\_teapot\_path@{big\_teapot\_path}!ViewAnalysis.cpp@{ViewAnalysis.cpp}}
+\doxysubsubsection{\texorpdfstring{big\_teapot\_path}{big\_teapot\_path}}
+{\footnotesize\ttfamily std\+::string big\+\_\+teapot\+\_\+path = \char`\"{}big\+\_\+teapot.\+obj\char`\"{}}
+
+
+
+Definition at line 33 of file View\+Analysis.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+

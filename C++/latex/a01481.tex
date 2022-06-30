@@ -1,0 +1,213 @@
+\hypertarget{a01481}{}\doxysection{HF\+::Spatial\+Structures\+::Edge\+Set Struct Reference}
+\label{a01481}\index{HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}}
+
+
+A collection of edges and a parent.  
+
+
+
+
+{\ttfamily \#include $<$Edge.\+h$>$}
+
+
+
+Collaboration diagram for HF\+::Spatial\+Structures\+::Edge\+Set\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=269pt]{a01479}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01481_af6ea24f6930a23300942e17de55c5611}{Edge\+Set}} ()
+\begin{DoxyCompactList}\small\item\em Empty Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01481_a27b89d87c58a2e2775b430c9a27f1477}{Edge\+Set}} (int \mbox{\hyperlink{a01481_a1cf561c1c38a93316f15ac2ab29fc8f4}{parent}}, const std\+::vector$<$ \mbox{\hyperlink{a01477}{Int\+Edge}} $>$ \&edges)
+\begin{DoxyCompactList}\small\item\em Construct an edge set with a list of int edges and a parent. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{a01481_aefd67fc0614e2bca2eb54194452c2253}{size}} () const
+\begin{DoxyCompactList}\small\item\em Get the number of children in this edgeset. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a01481_a9ce7cfb064de84654c518905ec76b7e0}{Add\+Edges}} (const std\+::vector$<$ \mbox{\hyperlink{a01477}{Int\+Edge}} $>$ \&edges)
+\begin{DoxyCompactList}\small\item\em Add a set of edges to the array of children. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01481_a1ede402c01f651faf1cfea6a09a908b2}{operator==}} (const \mbox{\hyperlink{a01481}{Edge\+Set}} \&E\+S2) const
+\begin{DoxyCompactList}\small\item\em Check the equality of two edge sets. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{a01481_a1cf561c1c38a93316f15ac2ab29fc8f4}{parent}}
+\begin{DoxyCompactList}\small\item\em Identifier of parent node. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{a01477}{Int\+Edge}} $>$ \mbox{\hyperlink{a01481_ae0ed1fa60810e109100548a03e10259c}{children}}
+\begin{DoxyCompactList}\small\item\em vector of \mbox{\hyperlink{a01477}{Int\+Edge}} (children) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A collection of edges and a parent. 
+
+\begin{DoxyRemark}{Remarks}
+This can to represent a node and its edges without repeating any information such as parent\+\_\+id or node objects. 
+\end{DoxyRemark}
+
+
+Definition at line 77 of file Edge.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{a01481_af6ea24f6930a23300942e17de55c5611}\label{a01481_af6ea24f6930a23300942e17de55c5611}} 
+\index{HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}!EdgeSet@{EdgeSet}}
+\index{EdgeSet@{EdgeSet}!HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}}
+\doxysubsubsection{\texorpdfstring{EdgeSet()}{EdgeSet()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily H\+F\+::\+Spatial\+Structures\+::\+Edge\+Set\+::\+Edge\+Set (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Empty Constructor. 
+
+
+
+Definition at line 82 of file Edge.\+h.
+
+
+
+References parent.
+
+\mbox{\Hypertarget{a01481_a27b89d87c58a2e2775b430c9a27f1477}\label{a01481_a27b89d87c58a2e2775b430c9a27f1477}} 
+\index{HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}!EdgeSet@{EdgeSet}}
+\index{EdgeSet@{EdgeSet}!HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}}
+\doxysubsubsection{\texorpdfstring{EdgeSet()}{EdgeSet()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily H\+F\+::\+Spatial\+Structures\+::\+Edge\+Set\+::\+Edge\+Set (\begin{DoxyParamCaption}\item[{int}]{parent,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{a01477}{Int\+Edge}} $>$ \&}]{edges }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct an edge set with a list of int edges and a parent. 
+
+
+
+Definition at line 86 of file Edge.\+h.
+
+
+
+References Add\+Edges(), and parent.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01481_a27b89d87c58a2e2775b430c9a27f1477_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a01481_a9ce7cfb064de84654c518905ec76b7e0}\label{a01481_a9ce7cfb064de84654c518905ec76b7e0}} 
+\index{HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}!AddEdges@{AddEdges}}
+\index{AddEdges@{AddEdges}!HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}}
+\doxysubsubsection{\texorpdfstring{AddEdges()}{AddEdges()}}
+{\footnotesize\ttfamily void H\+F\+::\+Spatial\+Structures\+::\+Edge\+Set\+::\+Add\+Edges (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{a01477}{Int\+Edge}} $>$ \&}]{edges }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Add a set of edges to the array of children. 
+
+
+
+Definition at line 95 of file Edge.\+h.
+
+
+
+References children.
+
+
+
+Referenced by Edge\+Set().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01481_a9ce7cfb064de84654c518905ec76b7e0_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01481_a1ede402c01f651faf1cfea6a09a908b2}\label{a01481_a1ede402c01f651faf1cfea6a09a908b2}} 
+\index{HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}!operator==@{operator==}}
+\index{operator==@{operator==}!HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool H\+F\+::\+Spatial\+Structures\+::\+Edge\+Set\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01481}{Edge\+Set}} \&}]{E\+S2 }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check the equality of two edge sets. 
+
+
+
+Definition at line 107 of file Edge.\+h.
+
+
+
+References children, and parent.
+
+\mbox{\Hypertarget{a01481_aefd67fc0614e2bca2eb54194452c2253}\label{a01481_aefd67fc0614e2bca2eb54194452c2253}} 
+\index{HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}!size@{size}}
+\index{size@{size}!HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily int H\+F\+::\+Spatial\+Structures\+::\+Edge\+Set\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the number of children in this edgeset. 
+
+
+
+Definition at line 92 of file Edge.\+h.
+
+
+
+References children.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01481_ae0ed1fa60810e109100548a03e10259c}\label{a01481_ae0ed1fa60810e109100548a03e10259c}} 
+\index{HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}!children@{children}}
+\index{children@{children}!HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}}
+\doxysubsubsection{\texorpdfstring{children}{children}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{a01477}{Int\+Edge}}$>$ H\+F\+::\+Spatial\+Structures\+::\+Edge\+Set\+::children}
+
+
+
+vector of \mbox{\hyperlink{a01477}{Int\+Edge}} (children) 
+
+
+
+Definition at line 79 of file Edge.\+h.
+
+
+
+Referenced by Add\+Edges(), operator==(), and size().
+
+\mbox{\Hypertarget{a01481_a1cf561c1c38a93316f15ac2ab29fc8f4}\label{a01481_a1cf561c1c38a93316f15ac2ab29fc8f4}} 
+\index{HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}!parent@{parent}}
+\index{parent@{parent}!HF::SpatialStructures::EdgeSet@{HF::SpatialStructures::EdgeSet}}
+\doxysubsubsection{\texorpdfstring{parent}{parent}}
+{\footnotesize\ttfamily int H\+F\+::\+Spatial\+Structures\+::\+Edge\+Set\+::parent}
+
+
+
+Identifier of parent node. 
+
+
+
+Definition at line 78 of file Edge.\+h.
+
+
+
+Referenced by Edge\+Set(), and operator==().
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/spatialstructures/src/\mbox{\hyperlink{a00197}{Edge.\+h}}\end{DoxyCompactItemize}

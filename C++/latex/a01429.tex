@@ -1,0 +1,441 @@
+\hypertarget{a01429}{}\doxysection{nanort\+::B\+V\+H\+Accel$<$ T $>$ Class Template Reference}
+\label{a01429}\index{nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}}
+
+
+Bounding Volume Hierarchy acceleration.  
+
+
+
+
+{\ttfamily \#include $<$nanort.\+h$>$}
+
+
+
+Collaboration diagram for nanort\+::B\+V\+H\+Accel$<$ T $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01427}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01429_a30af1a9d966a67bc691ba560883d2780}{B\+V\+H\+Accel}} ()
+\item 
+\mbox{\hyperlink{a01429_a1773731f48394e7f0a28d2aa9cedf016}{$\sim$\+B\+V\+H\+Accel}} ()
+\item 
+{\footnotesize template$<$class Prim , class Pred $>$ }\\bool \mbox{\hyperlink{a01429_a96521982d08e0ccd728798410dabeed5}{Build}} (const unsigned int num\+\_\+primitives, const Prim \&p, const Pred \&pred, const \mbox{\hyperlink{a01405}{B\+V\+H\+Build\+Options}}$<$ T $>$ \&options=\mbox{\hyperlink{a01405}{B\+V\+H\+Build\+Options}}$<$ T $>$())
+\begin{DoxyCompactList}\small\item\em Build B\+VH for input primitives. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01409}{B\+V\+H\+Build\+Statistics}} \mbox{\hyperlink{a01429_af29580ba0608043d3776a05fb6e2eee4}{Get\+Statistics}} () const
+\begin{DoxyCompactList}\small\item\em Get statistics of built B\+VH tree. Valid after {\ttfamily \mbox{\hyperlink{a01429_a96521982d08e0ccd728798410dabeed5}{Build()}}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a01429_a1b5f5fb5f85cf6a91987c14aa70ab456}{Debug}} ()
+\item 
+{\footnotesize template$<$class I , class H $>$ }\\bool \mbox{\hyperlink{a01429_a4d07d0fc035d860dd1bfbeaa90c14a11}{Traverse}} (const \mbox{\hyperlink{a01393}{Ray}}$<$ T $>$ \&ray, const I \&intersector, H $\ast$isect, const \mbox{\hyperlink{a01413}{B\+V\+H\+Trace\+Options}} \&options=\mbox{\hyperlink{a01413}{B\+V\+H\+Trace\+Options}}()) const
+\begin{DoxyCompactList}\small\item\em Traverse into B\+VH along ray and find closest hit point \& primitive if found. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class I $>$ }\\bool \mbox{\hyperlink{a01429_a5f253e3bfd6bbefe21eb3c8faa881d59}{List\+Node\+Intersections}} (const \mbox{\hyperlink{a01393}{Ray}}$<$ T $>$ \&ray, int max\+\_\+intersections, const I \&intersector, \mbox{\hyperlink{a01385}{Stack\+Vector}}$<$ \mbox{\hyperlink{a01421}{Node\+Hit}}$<$ T $>$, 128 $>$ $\ast$hits) const
+\begin{DoxyCompactList}\small\item\em List up nodes which intersects along the ray. This function is useful for two-\/level B\+VH traversal. See {\ttfamily examples/nanosg} for example. \end{DoxyCompactList}\item 
+const std\+::vector$<$ \mbox{\hyperlink{a01397}{B\+V\+H\+Node}}$<$ T $>$ $>$ \& \mbox{\hyperlink{a01429_a1fa414dec6063b619143d4b123df23e8}{Get\+Nodes}} () const
+\item 
+const std\+::vector$<$ unsigned int $>$ \& \mbox{\hyperlink{a01429_a88196a12bd48ffb68d02760fc4dd21ea}{Get\+Indices}} () const
+\item 
+void \mbox{\hyperlink{a01429_a9533de0b8a6bc98cc09b33e319a4081b}{Bounding\+Box}} (T bmin\mbox{[}3\mbox{]}, T bmax\mbox{[}3\mbox{]}) const
+\begin{DoxyCompactList}\small\item\em Returns bounding box of built B\+VH. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a01429_a5ce72b4a1ba1b3c0254f76287a98e56a}{Is\+Valid}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class P , class Pred $>$ }\\unsigned int \mbox{\hyperlink{a01429_ae0e4bf0fab331dbacf469a3e991132e5}{Build\+Tree}} (\mbox{\hyperlink{a01409}{B\+V\+H\+Build\+Statistics}} $\ast$out\+\_\+stat, std\+::vector$<$ \mbox{\hyperlink{a01397}{B\+V\+H\+Node}}$<$ T $>$ $>$ $\ast$out\+\_\+nodes, unsigned int left\+\_\+idx, unsigned int right\+\_\+idx, unsigned int depth, const P \&p, const Pred \&pred)
+\begin{DoxyCompactList}\small\item\em Builds B\+VH tree recursively. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class I $>$ }\\bool \mbox{\hyperlink{a01429_ab231cc4c34a80708f5f9c452a46006a0}{Test\+Leaf\+Node}} (const \mbox{\hyperlink{a01397}{B\+V\+H\+Node}}$<$ T $>$ \&node, const \mbox{\hyperlink{a01393}{Ray}}$<$ T $>$ \&ray, const I \&intersector) const
+\item 
+{\footnotesize template$<$class I $>$ }\\bool \mbox{\hyperlink{a01429_a2669f66e17a1c33848c34dde88d1ccaa}{Test\+Leaf\+Node\+Intersections}} (const \mbox{\hyperlink{a01397}{B\+V\+H\+Node}}$<$ T $>$ \&node, const \mbox{\hyperlink{a01393}{Ray}}$<$ T $>$ \&ray, const int max\+\_\+intersections, const I \&intersector, std\+::priority\+\_\+queue$<$ \mbox{\hyperlink{a01421}{Node\+Hit}}$<$ T $>$, std\+::vector$<$ \mbox{\hyperlink{a01421}{Node\+Hit}}$<$ T $>$ $>$, \mbox{\hyperlink{a01425}{Node\+Hit\+Comparator}}$<$ T $>$ $>$ $\ast$isect\+\_\+pq) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{a01397}{B\+V\+H\+Node}}$<$ T $>$ $>$ \mbox{\hyperlink{a01429_ae4aa82a8281d54969ec85d6fe6f23195}{nodes\+\_\+}}
+\item 
+std\+::vector$<$ unsigned int $>$ \mbox{\hyperlink{a01429_a0137342b4dbaf88f78c7bcd77a1e484b}{indices\+\_\+}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{a01417}{B\+Box}}$<$ T $>$ $>$ \mbox{\hyperlink{a01429_ad1a08e2f0c69477a04a836e7c7fe933d}{bboxes\+\_\+}}
+\item 
+\mbox{\hyperlink{a01405}{B\+V\+H\+Build\+Options}}$<$ T $>$ \mbox{\hyperlink{a01429_a5f19f074b2fe2d5ca6426a5789960432}{options\+\_\+}}
+\item 
+\mbox{\hyperlink{a01409}{B\+V\+H\+Build\+Statistics}} \mbox{\hyperlink{a01429_ae10926e89f91be8a3bb3fa2dd38e267b}{stats\+\_\+}}
+\item 
+unsigned int \mbox{\hyperlink{a01429_ad725bfc4c37130636ef1d9df997b8696}{pad0\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+class nanort\+::\+B\+V\+H\+Accel$<$ T $>$}
+
+Bounding Volume Hierarchy acceleration. 
+
+\mbox{\hyperlink{a01429}{B\+V\+H\+Accel}} is central part of ray tracing(ray traversal). \mbox{\hyperlink{a01429}{B\+V\+H\+Accel}} takes an input geometry(primitive) information and build a data structure for efficient ray tracing({\ttfamily O(log2 N)} in theory, where N is the number of primitive in the scene).
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & real value type(float or double). \\
+\hline
+\end{DoxyTemplParams}
+
+
+Definition at line 705 of file nanort.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{a01429_a30af1a9d966a67bc691ba560883d2780}\label{a01429_a30af1a9d966a67bc691ba560883d2780}} 
+\index{nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}!BVHAccel@{BVHAccel}}
+\index{BVHAccel@{BVHAccel}!nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{BVHAccel()}{BVHAccel()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{a01429}{nanort\+::\+B\+V\+H\+Accel}}$<$ T $>$\+::\mbox{\hyperlink{a01429}{B\+V\+H\+Accel}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 707 of file nanort.\+h.
+
+\mbox{\Hypertarget{a01429_a1773731f48394e7f0a28d2aa9cedf016}\label{a01429_a1773731f48394e7f0a28d2aa9cedf016}} 
+\index{nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}!````~BVHAccel@{$\sim$BVHAccel}}
+\index{````~BVHAccel@{$\sim$BVHAccel}!nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$BVHAccel()}{~BVHAccel()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{a01429}{nanort\+::\+B\+V\+H\+Accel}}$<$ T $>$\+::$\sim$\mbox{\hyperlink{a01429}{B\+V\+H\+Accel}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 708 of file nanort.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a01429_a9533de0b8a6bc98cc09b33e319a4081b}\label{a01429_a9533de0b8a6bc98cc09b33e319a4081b}} 
+\index{nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}!BoundingBox@{BoundingBox}}
+\index{BoundingBox@{BoundingBox}!nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{BoundingBox()}{BoundingBox()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{a01429}{nanort\+::\+B\+V\+H\+Accel}}$<$ T $>$\+::Bounding\+Box (\begin{DoxyParamCaption}\item[{T}]{bmin\mbox{[}3\mbox{]},  }\item[{T}]{bmax\mbox{[}3\mbox{]} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns bounding box of built B\+VH. 
+
+
+
+Definition at line 798 of file nanort.\+h.
+
+\mbox{\Hypertarget{a01429_a96521982d08e0ccd728798410dabeed5}\label{a01429_a96521982d08e0ccd728798410dabeed5}} 
+\index{nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}!Build@{Build}}
+\index{Build@{Build}!nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Build()}{Build()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+template$<$class Prim , class Pred $>$ \\
+bool \mbox{\hyperlink{a01429}{nanort\+::\+B\+V\+H\+Accel}}$<$ T $>$\+::Build (\begin{DoxyParamCaption}\item[{const unsigned int}]{num\+\_\+primitives,  }\item[{const Prim \&}]{p,  }\item[{const Pred \&}]{pred,  }\item[{const \mbox{\hyperlink{a01405}{B\+V\+H\+Build\+Options}}$<$ T $>$ \&}]{options = {\ttfamily \mbox{\hyperlink{a01405}{B\+V\+H\+Build\+Options}}$<$T$>$()} }\end{DoxyParamCaption})}
+
+
+
+Build B\+VH for input primitives. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Prim} & Primitive(e.\+g. Triangle) accessor class. \\
+\hline
+{\em Pred} & Predicator(comparator class object for {\ttfamily Prim} class to find nearest hit point)\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em num\+\_\+primitives} & The number of primitive. \\
+\hline
+\mbox{\texttt{ in}}  & {\em p} & Primitive accessor class object. \\
+\hline
+\mbox{\texttt{ in}}  & {\em pred} & Predicator object.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true upon success. 
+\end{DoxyReturn}
+
+
+Definition at line 1907 of file nanort.\+h.
+
+
+
+Referenced by H\+F\+::nano\+Geom\+::nano\+R\+T\+\_\+\+B\+V\+H().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01429_a96521982d08e0ccd728798410dabeed5_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01429_ae0e4bf0fab331dbacf469a3e991132e5}\label{a01429_ae0e4bf0fab331dbacf469a3e991132e5}} 
+\index{nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}!BuildTree@{BuildTree}}
+\index{BuildTree@{BuildTree}!nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{BuildTree()}{BuildTree()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+template$<$class P , class Pred $>$ \\
+unsigned int \mbox{\hyperlink{a01429}{nanort\+::\+B\+V\+H\+Accel}}$<$ T $>$\+::Build\+Tree (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01409}{B\+V\+H\+Build\+Statistics}} $\ast$}]{out\+\_\+stat,  }\item[{std\+::vector$<$ \mbox{\hyperlink{a01397}{B\+V\+H\+Node}}$<$ T $>$ $>$ $\ast$}]{out\+\_\+nodes,  }\item[{unsigned int}]{left\+\_\+idx,  }\item[{unsigned int}]{right\+\_\+idx,  }\item[{unsigned int}]{depth,  }\item[{const P \&}]{p,  }\item[{const Pred \&}]{pred }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Builds B\+VH tree recursively. 
+
+
+
+Definition at line 1771 of file nanort.\+h.
+
+\mbox{\Hypertarget{a01429_a1b5f5fb5f85cf6a91987c14aa70ab456}\label{a01429_a1b5f5fb5f85cf6a91987c14aa70ab456}} 
+\index{nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}!Debug@{Debug}}
+\index{Debug@{Debug}!nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Debug()}{Debug()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{a01429}{nanort\+::\+B\+V\+H\+Accel}}$<$ T $>$\+::Debug}
+
+
+
+Definition at line 2168 of file nanort.\+h.
+
+\mbox{\Hypertarget{a01429_a88196a12bd48ffb68d02760fc4dd21ea}\label{a01429_a88196a12bd48ffb68d02760fc4dd21ea}} 
+\index{nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}!GetIndices@{GetIndices}}
+\index{GetIndices@{GetIndices}!nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{GetIndices()}{GetIndices()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+const std\+::vector$<$unsigned int$>$\& \mbox{\hyperlink{a01429}{nanort\+::\+B\+V\+H\+Accel}}$<$ T $>$\+::Get\+Indices (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 793 of file nanort.\+h.
+
+\mbox{\Hypertarget{a01429_a1fa414dec6063b619143d4b123df23e8}\label{a01429_a1fa414dec6063b619143d4b123df23e8}} 
+\index{nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}!GetNodes@{GetNodes}}
+\index{GetNodes@{GetNodes}!nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{GetNodes()}{GetNodes()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+const std\+::vector$<$\mbox{\hyperlink{a01397}{B\+V\+H\+Node}}$<$T$>$ $>$\& \mbox{\hyperlink{a01429}{nanort\+::\+B\+V\+H\+Accel}}$<$ T $>$\+::Get\+Nodes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 792 of file nanort.\+h.
+
+\mbox{\Hypertarget{a01429_af29580ba0608043d3776a05fb6e2eee4}\label{a01429_af29580ba0608043d3776a05fb6e2eee4}} 
+\index{nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}!GetStatistics@{GetStatistics}}
+\index{GetStatistics@{GetStatistics}!nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{GetStatistics()}{GetStatistics()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{a01409}{B\+V\+H\+Build\+Statistics}} \mbox{\hyperlink{a01429}{nanort\+::\+B\+V\+H\+Accel}}$<$ T $>$\+::Get\+Statistics (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get statistics of built B\+VH tree. Valid after {\ttfamily \mbox{\hyperlink{a01429_a96521982d08e0ccd728798410dabeed5}{Build()}}} 
+
+\begin{DoxyReturn}{Returns}
+B\+VH build statistics. 
+\end{DoxyReturn}
+
+
+Definition at line 731 of file nanort.\+h.
+
+\mbox{\Hypertarget{a01429_a5ce72b4a1ba1b3c0254f76287a98e56a}\label{a01429_a5ce72b4a1ba1b3c0254f76287a98e56a}} 
+\index{nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}!IsValid@{IsValid}}
+\index{IsValid@{IsValid}!nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{IsValid()}{IsValid()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool \mbox{\hyperlink{a01429}{nanort\+::\+B\+V\+H\+Accel}}$<$ T $>$\+::Is\+Valid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 813 of file nanort.\+h.
+
+\mbox{\Hypertarget{a01429_a5f253e3bfd6bbefe21eb3c8faa881d59}\label{a01429_a5f253e3bfd6bbefe21eb3c8faa881d59}} 
+\index{nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}!ListNodeIntersections@{ListNodeIntersections}}
+\index{ListNodeIntersections@{ListNodeIntersections}!nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{ListNodeIntersections()}{ListNodeIntersections()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+template$<$class I $>$ \\
+bool \mbox{\hyperlink{a01429}{nanort\+::\+B\+V\+H\+Accel}}$<$ T $>$\+::List\+Node\+Intersections (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01393}{Ray}}$<$ T $>$ \&}]{ray,  }\item[{int}]{max\+\_\+intersections,  }\item[{const I \&}]{intersector,  }\item[{\mbox{\hyperlink{a01385}{Stack\+Vector}}$<$ \mbox{\hyperlink{a01421}{Node\+Hit}}$<$ T $>$, 128 $>$ $\ast$}]{hits }\end{DoxyParamCaption}) const}
+
+
+
+List up nodes which intersects along the ray. This function is useful for two-\/level B\+VH traversal. See {\ttfamily examples/nanosg} for example. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em I} & Intersection class \\
+\hline
+\end{DoxyTemplParams}
+
+
+Definition at line 2628 of file nanort.\+h.
+
+\mbox{\Hypertarget{a01429_ab231cc4c34a80708f5f9c452a46006a0}\label{a01429_ab231cc4c34a80708f5f9c452a46006a0}} 
+\index{nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}!TestLeafNode@{TestLeafNode}}
+\index{TestLeafNode@{TestLeafNode}!nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{TestLeafNode()}{TestLeafNode()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+template$<$class I $>$ \\
+bool \mbox{\hyperlink{a01429}{nanort\+::\+B\+V\+H\+Accel}}$<$ T $>$\+::Test\+Leaf\+Node (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01397}{B\+V\+H\+Node}}$<$ T $>$ \&}]{node,  }\item[{const \mbox{\hyperlink{a01393}{Ray}}$<$ T $>$ \&}]{ray,  }\item[{const I \&}]{intersector }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 2390 of file nanort.\+h.
+
+\mbox{\Hypertarget{a01429_a2669f66e17a1c33848c34dde88d1ccaa}\label{a01429_a2669f66e17a1c33848c34dde88d1ccaa}} 
+\index{nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}!TestLeafNodeIntersections@{TestLeafNodeIntersections}}
+\index{TestLeafNodeIntersections@{TestLeafNodeIntersections}!nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{TestLeafNodeIntersections()}{TestLeafNodeIntersections()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+template$<$class I $>$ \\
+bool \mbox{\hyperlink{a01429}{nanort\+::\+B\+V\+H\+Accel}}$<$ T $>$\+::Test\+Leaf\+Node\+Intersections (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01397}{B\+V\+H\+Node}}$<$ T $>$ \&}]{node,  }\item[{const \mbox{\hyperlink{a01393}{Ray}}$<$ T $>$ \&}]{ray,  }\item[{const int}]{max\+\_\+intersections,  }\item[{const I \&}]{intersector,  }\item[{std\+::priority\+\_\+queue$<$ \mbox{\hyperlink{a01421}{Node\+Hit}}$<$ T $>$, std\+::vector$<$ \mbox{\hyperlink{a01421}{Node\+Hit}}$<$ T $>$ $>$, \mbox{\hyperlink{a01425}{Node\+Hit\+Comparator}}$<$ T $>$ $>$ $\ast$}]{isect\+\_\+pq }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 2577 of file nanort.\+h.
+
+\mbox{\Hypertarget{a01429_a4d07d0fc035d860dd1bfbeaa90c14a11}\label{a01429_a4d07d0fc035d860dd1bfbeaa90c14a11}} 
+\index{nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}!Traverse@{Traverse}}
+\index{Traverse@{Traverse}!nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Traverse()}{Traverse()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+template$<$class I , class H $>$ \\
+bool \mbox{\hyperlink{a01429}{nanort\+::\+B\+V\+H\+Accel}}$<$ T $>$\+::Traverse (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01393}{Ray}}$<$ T $>$ \&}]{ray,  }\item[{const I \&}]{intersector,  }\item[{H $\ast$}]{isect,  }\item[{const \mbox{\hyperlink{a01413}{B\+V\+H\+Trace\+Options}} \&}]{options = {\ttfamily \mbox{\hyperlink{a01413}{B\+V\+H\+Trace\+Options}}()} }\end{DoxyParamCaption}) const}
+
+
+
+Traverse into B\+VH along ray and find closest hit point \& primitive if found. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em I} & Intersector class \\
+\hline
+{\em H} & Hit class\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em ray} & Input ray \\
+\hline
+\mbox{\texttt{ in}}  & {\em intersector} & Intersector object. This object is called for each possible intersection of ray and B\+VH during traversal. \\
+\hline
+\mbox{\texttt{ out}}  & {\em isect} & Intersection point information(filled when any hit point was found) \\
+\hline
+\mbox{\texttt{ in}}  & {\em options} & Traversal options.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if any hit point found 
+\end{DoxyReturn}
+
+
+Definition at line 2505 of file nanort.\+h.
+
+
+
+Referenced by H\+F\+::\+Ray\+Tracer\+::\+Nano\+R\+T\+Ray\+Tracer\+::\+Intersect(), H\+F\+::nano\+Geom\+::nano\+R\+T\+\_\+\+Intersect(), and H\+F\+::nano\+Geom\+::nano\+R\+T\+\_\+\+Ray\+Cast().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01429_a4d07d0fc035d860dd1bfbeaa90c14a11_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01429_ad1a08e2f0c69477a04a836e7c7fe933d}\label{a01429_ad1a08e2f0c69477a04a836e7c7fe933d}} 
+\index{nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}!bboxes\_@{bboxes\_}}
+\index{bboxes\_@{bboxes\_}!nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{bboxes\_}{bboxes\_}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::vector$<$\mbox{\hyperlink{a01417}{B\+Box}}$<$T$>$ $>$ \mbox{\hyperlink{a01429}{nanort\+::\+B\+V\+H\+Accel}}$<$ T $>$\+::bboxes\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 863 of file nanort.\+h.
+
+\mbox{\Hypertarget{a01429_a0137342b4dbaf88f78c7bcd77a1e484b}\label{a01429_a0137342b4dbaf88f78c7bcd77a1e484b}} 
+\index{nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}!indices\_@{indices\_}}
+\index{indices\_@{indices\_}!nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{indices\_}{indices\_}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::vector$<$unsigned int$>$ \mbox{\hyperlink{a01429}{nanort\+::\+B\+V\+H\+Accel}}$<$ T $>$\+::indices\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 862 of file nanort.\+h.
+
+
+
+Referenced by nanort\+::\+B\+V\+H\+Accel$<$ vertex\+\_\+t $>$\+::\+Get\+Indices().
+
+\mbox{\Hypertarget{a01429_ae4aa82a8281d54969ec85d6fe6f23195}\label{a01429_ae4aa82a8281d54969ec85d6fe6f23195}} 
+\index{nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}!nodes\_@{nodes\_}}
+\index{nodes\_@{nodes\_}!nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{nodes\_}{nodes\_}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::vector$<$\mbox{\hyperlink{a01397}{B\+V\+H\+Node}}$<$T$>$ $>$ \mbox{\hyperlink{a01429}{nanort\+::\+B\+V\+H\+Accel}}$<$ T $>$\+::nodes\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 861 of file nanort.\+h.
+
+
+
+Referenced by nanort\+::\+B\+V\+H\+Accel$<$ vertex\+\_\+t $>$\+::\+Bounding\+Box(), nanort\+::\+B\+V\+H\+Accel$<$ vertex\+\_\+t $>$\+::\+Get\+Nodes(), and nanort\+::\+B\+V\+H\+Accel$<$ vertex\+\_\+t $>$\+::\+Is\+Valid().
+
+\mbox{\Hypertarget{a01429_a5f19f074b2fe2d5ca6426a5789960432}\label{a01429_a5f19f074b2fe2d5ca6426a5789960432}} 
+\index{nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}!options\_@{options\_}}
+\index{options\_@{options\_}!nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{options\_}{options\_}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{a01405}{B\+V\+H\+Build\+Options}}$<$T$>$ \mbox{\hyperlink{a01429}{nanort\+::\+B\+V\+H\+Accel}}$<$ T $>$\+::options\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 864 of file nanort.\+h.
+
+\mbox{\Hypertarget{a01429_ad725bfc4c37130636ef1d9df997b8696}\label{a01429_ad725bfc4c37130636ef1d9df997b8696}} 
+\index{nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}!pad0\_@{pad0\_}}
+\index{pad0\_@{pad0\_}!nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{pad0\_}{pad0\_}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+unsigned int \mbox{\hyperlink{a01429}{nanort\+::\+B\+V\+H\+Accel}}$<$ T $>$\+::pad0\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 866 of file nanort.\+h.
+
+
+
+Referenced by nanort\+::\+B\+V\+H\+Accel$<$ vertex\+\_\+t $>$\+::\+B\+V\+H\+Accel().
+
+\mbox{\Hypertarget{a01429_ae10926e89f91be8a3bb3fa2dd38e267b}\label{a01429_ae10926e89f91be8a3bb3fa2dd38e267b}} 
+\index{nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}!stats\_@{stats\_}}
+\index{stats\_@{stats\_}!nanort::BVHAccel$<$ T $>$@{nanort::BVHAccel$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{stats\_}{stats\_}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{a01409}{B\+V\+H\+Build\+Statistics}} \mbox{\hyperlink{a01429}{nanort\+::\+B\+V\+H\+Accel}}$<$ T $>$\+::stats\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 865 of file nanort.\+h.
+
+
+
+Referenced by nanort\+::\+B\+V\+H\+Accel$<$ vertex\+\_\+t $>$\+::\+Get\+Statistics().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/raytracer/src/\mbox{\hyperlink{a00161}{nanort.\+h}}\end{DoxyCompactItemize}

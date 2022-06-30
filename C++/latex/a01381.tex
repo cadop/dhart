@@ -1,0 +1,233 @@
+\hypertarget{a01381}{}\doxysection{nanort\+::Stack\+Container$<$ T\+Container\+Type, stack\+\_\+capacity $>$ Class Template Reference}
+\label{a01381}\index{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$@{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$}}
+
+
+{\ttfamily \#include $<$nanort.\+h$>$}
+
+
+
+Collaboration diagram for nanort\+::Stack\+Container$<$ T\+Container\+Type, stack\+\_\+capacity $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01379}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef T\+Container\+Type \mbox{\hyperlink{a01381_a95b22d28f0c6cb69681840cb38a3ae50}{Container\+Type}}
+\item 
+typedef Container\+Type\+::value\+\_\+type \mbox{\hyperlink{a01381_a437fb42ea149f8bb1137cd5ac347adfb}{Contained\+Type}}
+\item 
+typedef \mbox{\hyperlink{a01369}{Stack\+Allocator}}$<$ \mbox{\hyperlink{a01381_a437fb42ea149f8bb1137cd5ac347adfb}{Contained\+Type}}, stack\+\_\+capacity $>$ \mbox{\hyperlink{a01381_adee41f24a3ac6ea0b7986f6867b9e196}{Allocator}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01381_a2cbf454e80a2df06299bb68501b45b1c}{Stack\+Container}} ()
+\item 
+\mbox{\hyperlink{a01381_a95b22d28f0c6cb69681840cb38a3ae50}{Container\+Type}} \& \mbox{\hyperlink{a01381_a6e5ddb6a1637b1110acb22487421a235}{container}} ()
+\item 
+const \mbox{\hyperlink{a01381_a95b22d28f0c6cb69681840cb38a3ae50}{Container\+Type}} \& \mbox{\hyperlink{a01381_a97fe95d894981e044ec575125a84b3f0}{container}} () const
+\item 
+\mbox{\hyperlink{a01381_a95b22d28f0c6cb69681840cb38a3ae50}{Container\+Type}} $\ast$ \mbox{\hyperlink{a01381_a42972041b4cabe8917ba2dff84562b86}{operator-\/$>$}} ()
+\item 
+const \mbox{\hyperlink{a01381_a95b22d28f0c6cb69681840cb38a3ae50}{Container\+Type}} $\ast$ \mbox{\hyperlink{a01381_afdd2be7a7f76b40a16e3d9d1af4c1d74}{operator-\/$>$}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01381_a74af3d6ed0c9d04b05293075b47f4fb1}{Stack\+Container}} (const \mbox{\hyperlink{a01381}{Stack\+Container}} \&)
+\item 
+void \mbox{\hyperlink{a01381_ab4a7ac3bf979058399fe51398dfca19f}{operator=}} (const \mbox{\hyperlink{a01381}{Stack\+Container}} \&)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Allocator\+::\+Source \mbox{\hyperlink{a01381_ae62c48e89ceda926c8ee1f3bd07fbbf8}{stack\+\_\+data\+\_\+}}
+\item 
+unsigned char \mbox{\hyperlink{a01381_aec17d40ec4697fddd66440dee615d898}{pad\+\_\+}} \mbox{[}7\mbox{]}
+\item 
+\mbox{\hyperlink{a01381_adee41f24a3ac6ea0b7986f6867b9e196}{Allocator}} \mbox{\hyperlink{a01381_a3deacc82000a8dd504728c4d5d4c13d2}{allocator\+\_\+}}
+\item 
+\mbox{\hyperlink{a01381_a95b22d28f0c6cb69681840cb38a3ae50}{Container\+Type}} \mbox{\hyperlink{a01381_a57209394c4822c3b89a94b53eb3a63c7}{container\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename T\+Container\+Type, int stack\+\_\+capacity$>$\newline
+class nanort\+::\+Stack\+Container$<$ T\+Container\+Type, stack\+\_\+capacity $>$}
+
+
+
+Definition at line 235 of file nanort.\+h.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{a01381_adee41f24a3ac6ea0b7986f6867b9e196}\label{a01381_adee41f24a3ac6ea0b7986f6867b9e196}} 
+\index{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$@{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$}!Allocator@{Allocator}}
+\index{Allocator@{Allocator}!nanort::StackContainer$<$ TContainerType, stack\_capacity $>$@{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$}}
+\doxysubsubsection{\texorpdfstring{Allocator}{Allocator}}
+{\footnotesize\ttfamily template$<$typename T\+Container\+Type , int stack\+\_\+capacity$>$ \\
+typedef \mbox{\hyperlink{a01369}{Stack\+Allocator}}$<$\mbox{\hyperlink{a01381_a437fb42ea149f8bb1137cd5ac347adfb}{Contained\+Type}}, stack\+\_\+capacity$>$ \mbox{\hyperlink{a01381}{nanort\+::\+Stack\+Container}}$<$ T\+Container\+Type, stack\+\_\+capacity $>$\+::\mbox{\hyperlink{a01381_adee41f24a3ac6ea0b7986f6867b9e196}{Allocator}}}
+
+
+
+Definition at line 239 of file nanort.\+h.
+
+\mbox{\Hypertarget{a01381_a437fb42ea149f8bb1137cd5ac347adfb}\label{a01381_a437fb42ea149f8bb1137cd5ac347adfb}} 
+\index{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$@{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$}!ContainedType@{ContainedType}}
+\index{ContainedType@{ContainedType}!nanort::StackContainer$<$ TContainerType, stack\_capacity $>$@{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$}}
+\doxysubsubsection{\texorpdfstring{ContainedType}{ContainedType}}
+{\footnotesize\ttfamily template$<$typename T\+Container\+Type , int stack\+\_\+capacity$>$ \\
+typedef Container\+Type\+::value\+\_\+type \mbox{\hyperlink{a01381}{nanort\+::\+Stack\+Container}}$<$ T\+Container\+Type, stack\+\_\+capacity $>$\+::\mbox{\hyperlink{a01381_a437fb42ea149f8bb1137cd5ac347adfb}{Contained\+Type}}}
+
+
+
+Definition at line 238 of file nanort.\+h.
+
+\mbox{\Hypertarget{a01381_a95b22d28f0c6cb69681840cb38a3ae50}\label{a01381_a95b22d28f0c6cb69681840cb38a3ae50}} 
+\index{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$@{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$}!ContainerType@{ContainerType}}
+\index{ContainerType@{ContainerType}!nanort::StackContainer$<$ TContainerType, stack\_capacity $>$@{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$}}
+\doxysubsubsection{\texorpdfstring{ContainerType}{ContainerType}}
+{\footnotesize\ttfamily template$<$typename T\+Container\+Type , int stack\+\_\+capacity$>$ \\
+typedef T\+Container\+Type \mbox{\hyperlink{a01381}{nanort\+::\+Stack\+Container}}$<$ T\+Container\+Type, stack\+\_\+capacity $>$\+::\mbox{\hyperlink{a01381_a95b22d28f0c6cb69681840cb38a3ae50}{Container\+Type}}}
+
+
+
+Definition at line 237 of file nanort.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{a01381_a2cbf454e80a2df06299bb68501b45b1c}\label{a01381_a2cbf454e80a2df06299bb68501b45b1c}} 
+\index{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$@{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$}!StackContainer@{StackContainer}}
+\index{StackContainer@{StackContainer}!nanort::StackContainer$<$ TContainerType, stack\_capacity $>$@{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$}}
+\doxysubsubsection{\texorpdfstring{StackContainer()}{StackContainer()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T\+Container\+Type , int stack\+\_\+capacity$>$ \\
+\mbox{\hyperlink{a01381}{nanort\+::\+Stack\+Container}}$<$ T\+Container\+Type, stack\+\_\+capacity $>$\+::\mbox{\hyperlink{a01381}{Stack\+Container}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 242 of file nanort.\+h.
+
+\mbox{\Hypertarget{a01381_a74af3d6ed0c9d04b05293075b47f4fb1}\label{a01381_a74af3d6ed0c9d04b05293075b47f4fb1}} 
+\index{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$@{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$}!StackContainer@{StackContainer}}
+\index{StackContainer@{StackContainer}!nanort::StackContainer$<$ TContainerType, stack\_capacity $>$@{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$}}
+\doxysubsubsection{\texorpdfstring{StackContainer()}{StackContainer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T\+Container\+Type , int stack\+\_\+capacity$>$ \\
+\mbox{\hyperlink{a01381}{nanort\+::\+Stack\+Container}}$<$ T\+Container\+Type, stack\+\_\+capacity $>$\+::\mbox{\hyperlink{a01381}{Stack\+Container}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01381}{Stack\+Container}}$<$ T\+Container\+Type, stack\+\_\+capacity $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a01381_a6e5ddb6a1637b1110acb22487421a235}\label{a01381_a6e5ddb6a1637b1110acb22487421a235}} 
+\index{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$@{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$}!container@{container}}
+\index{container@{container}!nanort::StackContainer$<$ TContainerType, stack\_capacity $>$@{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$}}
+\doxysubsubsection{\texorpdfstring{container()}{container()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T\+Container\+Type , int stack\+\_\+capacity$>$ \\
+\mbox{\hyperlink{a01381_a95b22d28f0c6cb69681840cb38a3ae50}{Container\+Type}}\& \mbox{\hyperlink{a01381}{nanort\+::\+Stack\+Container}}$<$ T\+Container\+Type, stack\+\_\+capacity $>$\+::container (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 254 of file nanort.\+h.
+
+\mbox{\Hypertarget{a01381_a97fe95d894981e044ec575125a84b3f0}\label{a01381_a97fe95d894981e044ec575125a84b3f0}} 
+\index{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$@{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$}!container@{container}}
+\index{container@{container}!nanort::StackContainer$<$ TContainerType, stack\_capacity $>$@{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$}}
+\doxysubsubsection{\texorpdfstring{container()}{container()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T\+Container\+Type , int stack\+\_\+capacity$>$ \\
+const \mbox{\hyperlink{a01381_a95b22d28f0c6cb69681840cb38a3ae50}{Container\+Type}}\& \mbox{\hyperlink{a01381}{nanort\+::\+Stack\+Container}}$<$ T\+Container\+Type, stack\+\_\+capacity $>$\+::container (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 255 of file nanort.\+h.
+
+\mbox{\Hypertarget{a01381_a42972041b4cabe8917ba2dff84562b86}\label{a01381_a42972041b4cabe8917ba2dff84562b86}} 
+\index{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$@{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$}!operator-\/$>$@{operator-\/$>$}}
+\index{operator-\/$>$@{operator-\/$>$}!nanort::StackContainer$<$ TContainerType, stack\_capacity $>$@{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/$>$()}{operator->()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T\+Container\+Type , int stack\+\_\+capacity$>$ \\
+\mbox{\hyperlink{a01381_a95b22d28f0c6cb69681840cb38a3ae50}{Container\+Type}}$\ast$ \mbox{\hyperlink{a01381}{nanort\+::\+Stack\+Container}}$<$ T\+Container\+Type, stack\+\_\+capacity $>$\+::operator-\/$>$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 260 of file nanort.\+h.
+
+\mbox{\Hypertarget{a01381_afdd2be7a7f76b40a16e3d9d1af4c1d74}\label{a01381_afdd2be7a7f76b40a16e3d9d1af4c1d74}} 
+\index{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$@{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$}!operator-\/$>$@{operator-\/$>$}}
+\index{operator-\/$>$@{operator-\/$>$}!nanort::StackContainer$<$ TContainerType, stack\_capacity $>$@{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/$>$()}{operator->()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T\+Container\+Type , int stack\+\_\+capacity$>$ \\
+const \mbox{\hyperlink{a01381_a95b22d28f0c6cb69681840cb38a3ae50}{Container\+Type}}$\ast$ \mbox{\hyperlink{a01381}{nanort\+::\+Stack\+Container}}$<$ T\+Container\+Type, stack\+\_\+capacity $>$\+::operator-\/$>$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 261 of file nanort.\+h.
+
+\mbox{\Hypertarget{a01381_ab4a7ac3bf979058399fe51398dfca19f}\label{a01381_ab4a7ac3bf979058399fe51398dfca19f}} 
+\index{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$@{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!nanort::StackContainer$<$ TContainerType, stack\_capacity $>$@{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$typename T\+Container\+Type , int stack\+\_\+capacity$>$ \\
+void \mbox{\hyperlink{a01381}{nanort\+::\+Stack\+Container}}$<$ T\+Container\+Type, stack\+\_\+capacity $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01381}{Stack\+Container}}$<$ T\+Container\+Type, stack\+\_\+capacity $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01381_a3deacc82000a8dd504728c4d5d4c13d2}\label{a01381_a3deacc82000a8dd504728c4d5d4c13d2}} 
+\index{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$@{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$}!allocator\_@{allocator\_}}
+\index{allocator\_@{allocator\_}!nanort::StackContainer$<$ TContainerType, stack\_capacity $>$@{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$}}
+\doxysubsubsection{\texorpdfstring{allocator\_}{allocator\_}}
+{\footnotesize\ttfamily template$<$typename T\+Container\+Type , int stack\+\_\+capacity$>$ \\
+\mbox{\hyperlink{a01381_adee41f24a3ac6ea0b7986f6867b9e196}{Allocator}} \mbox{\hyperlink{a01381}{nanort\+::\+Stack\+Container}}$<$ T\+Container\+Type, stack\+\_\+capacity $>$\+::allocator\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 272 of file nanort.\+h.
+
+\mbox{\Hypertarget{a01381_a57209394c4822c3b89a94b53eb3a63c7}\label{a01381_a57209394c4822c3b89a94b53eb3a63c7}} 
+\index{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$@{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$}!container\_@{container\_}}
+\index{container\_@{container\_}!nanort::StackContainer$<$ TContainerType, stack\_capacity $>$@{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$}}
+\doxysubsubsection{\texorpdfstring{container\_}{container\_}}
+{\footnotesize\ttfamily template$<$typename T\+Container\+Type , int stack\+\_\+capacity$>$ \\
+\mbox{\hyperlink{a01381_a95b22d28f0c6cb69681840cb38a3ae50}{Container\+Type}} \mbox{\hyperlink{a01381}{nanort\+::\+Stack\+Container}}$<$ T\+Container\+Type, stack\+\_\+capacity $>$\+::container\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 273 of file nanort.\+h.
+
+
+
+Referenced by nanort\+::\+Stack\+Container$<$ std\+::vector$<$ T, Stack\+Allocator$<$ T, stack\+\_\+capacity $>$ $>$, stack\+\_\+capacity $>$\+::container(), nanort\+::\+Stack\+Container$<$ std\+::vector$<$ T, Stack\+Allocator$<$ T, stack\+\_\+capacity $>$ $>$, stack\+\_\+capacity $>$\+::operator-\/$>$(), and nanort\+::\+Stack\+Container$<$ std\+::vector$<$ T, Stack\+Allocator$<$ T, stack\+\_\+capacity $>$ $>$, stack\+\_\+capacity $>$\+::\+Stack\+Container().
+
+\mbox{\Hypertarget{a01381_aec17d40ec4697fddd66440dee615d898}\label{a01381_aec17d40ec4697fddd66440dee615d898}} 
+\index{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$@{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$}!pad\_@{pad\_}}
+\index{pad\_@{pad\_}!nanort::StackContainer$<$ TContainerType, stack\_capacity $>$@{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$}}
+\doxysubsubsection{\texorpdfstring{pad\_}{pad\_}}
+{\footnotesize\ttfamily template$<$typename T\+Container\+Type , int stack\+\_\+capacity$>$ \\
+unsigned char \mbox{\hyperlink{a01381}{nanort\+::\+Stack\+Container}}$<$ T\+Container\+Type, stack\+\_\+capacity $>$\+::pad\+\_\+\mbox{[}7\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 271 of file nanort.\+h.
+
+\mbox{\Hypertarget{a01381_ae62c48e89ceda926c8ee1f3bd07fbbf8}\label{a01381_ae62c48e89ceda926c8ee1f3bd07fbbf8}} 
+\index{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$@{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$}!stack\_data\_@{stack\_data\_}}
+\index{stack\_data\_@{stack\_data\_}!nanort::StackContainer$<$ TContainerType, stack\_capacity $>$@{nanort::StackContainer$<$ TContainerType, stack\_capacity $>$}}
+\doxysubsubsection{\texorpdfstring{stack\_data\_}{stack\_data\_}}
+{\footnotesize\ttfamily template$<$typename T\+Container\+Type , int stack\+\_\+capacity$>$ \\
+Allocator\+::\+Source \mbox{\hyperlink{a01381}{nanort\+::\+Stack\+Container}}$<$ T\+Container\+Type, stack\+\_\+capacity $>$\+::stack\+\_\+data\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 270 of file nanort.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/raytracer/src/\mbox{\hyperlink{a00161}{nanort.\+h}}\end{DoxyCompactItemize}

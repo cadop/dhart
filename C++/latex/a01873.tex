@@ -1,0 +1,169 @@
+\hypertarget{a01873}{}\doxysection{nlohmann\+::detail\+::iterator\+\_\+input\+\_\+adapter$<$ Iterator\+Type $>$ Class Template Reference}
+\label{a01873}\index{nlohmann::detail::iterator\_input\_adapter$<$ IteratorType $>$@{nlohmann::detail::iterator\_input\_adapter$<$ IteratorType $>$}}
+
+
+{\ttfamily \#include $<$json.\+hpp$>$}
+
+
+
+Collaboration diagram for nlohmann\+::detail\+::iterator\+\_\+input\+\_\+adapter$<$ Iterator\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=250pt]{a01871}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{a01873_a7cc60e68767005322ab4b692c9dff283}{char\+\_\+type}} = typename std\+::iterator\+\_\+traits$<$ Iterator\+Type $>$\+::value\+\_\+type
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01873_a9423d7166b9e3092f149266acd064ba7}{iterator\+\_\+input\+\_\+adapter}} (Iterator\+Type first, Iterator\+Type last)
+\item 
+std\+::char\+\_\+traits$<$ \mbox{\hyperlink{a01873_a7cc60e68767005322ab4b692c9dff283}{char\+\_\+type}} $>$\+::int\+\_\+type \mbox{\hyperlink{a01873_a01706f07681df083c2174d236ff3d643}{get\+\_\+character}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{a01873_ace7ba18b59cde50cbc53687034f649be}{empty}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Iterator\+Type \mbox{\hyperlink{a01873_a8abccad27590d381a94e474b16161938}{current}}
+\item 
+Iterator\+Type \mbox{\hyperlink{a01873_a8aa29994ca6fdc0f8c96abf9151738ab}{end}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Base\+Input\+Adapter , size\+\_\+t T$>$ }\\struct \mbox{\hyperlink{a01873_ab86106ba230f1542b94dcd96e6ab3221}{wide\+\_\+string\+\_\+input\+\_\+helper}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Iterator\+Type$>$\newline
+class nlohmann\+::detail\+::iterator\+\_\+input\+\_\+adapter$<$ Iterator\+Type $>$}
+
+
+
+Definition at line 4843 of file json.\+hpp.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{a01873_a7cc60e68767005322ab4b692c9dff283}\label{a01873_a7cc60e68767005322ab4b692c9dff283}} 
+\index{nlohmann::detail::iterator\_input\_adapter$<$ IteratorType $>$@{nlohmann::detail::iterator\_input\_adapter$<$ IteratorType $>$}!char\_type@{char\_type}}
+\index{char\_type@{char\_type}!nlohmann::detail::iterator\_input\_adapter$<$ IteratorType $>$@{nlohmann::detail::iterator\_input\_adapter$<$ IteratorType $>$}}
+\doxysubsubsection{\texorpdfstring{char\_type}{char\_type}}
+{\footnotesize\ttfamily template$<$typename Iterator\+Type $>$ \\
+using \mbox{\hyperlink{a01873}{nlohmann\+::detail\+::iterator\+\_\+input\+\_\+adapter}}$<$ Iterator\+Type $>$\+::\mbox{\hyperlink{a01873_a7cc60e68767005322ab4b692c9dff283}{char\+\_\+type}} =  typename std\+::iterator\+\_\+traits$<$Iterator\+Type$>$\+::value\+\_\+type}
+
+
+
+Definition at line 4846 of file json.\+hpp.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{a01873_a9423d7166b9e3092f149266acd064ba7}\label{a01873_a9423d7166b9e3092f149266acd064ba7}} 
+\index{nlohmann::detail::iterator\_input\_adapter$<$ IteratorType $>$@{nlohmann::detail::iterator\_input\_adapter$<$ IteratorType $>$}!iterator\_input\_adapter@{iterator\_input\_adapter}}
+\index{iterator\_input\_adapter@{iterator\_input\_adapter}!nlohmann::detail::iterator\_input\_adapter$<$ IteratorType $>$@{nlohmann::detail::iterator\_input\_adapter$<$ IteratorType $>$}}
+\doxysubsubsection{\texorpdfstring{iterator\_input\_adapter()}{iterator\_input\_adapter()}}
+{\footnotesize\ttfamily template$<$typename Iterator\+Type $>$ \\
+\mbox{\hyperlink{a01873}{nlohmann\+::detail\+::iterator\+\_\+input\+\_\+adapter}}$<$ Iterator\+Type $>$\+::\mbox{\hyperlink{a01873}{iterator\+\_\+input\+\_\+adapter}} (\begin{DoxyParamCaption}\item[{Iterator\+Type}]{first,  }\item[{Iterator\+Type}]{last }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 4848 of file json.\+hpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a01873_ace7ba18b59cde50cbc53687034f649be}\label{a01873_ace7ba18b59cde50cbc53687034f649be}} 
+\index{nlohmann::detail::iterator\_input\_adapter$<$ IteratorType $>$@{nlohmann::detail::iterator\_input\_adapter$<$ IteratorType $>$}!empty@{empty}}
+\index{empty@{empty}!nlohmann::detail::iterator\_input\_adapter$<$ IteratorType $>$@{nlohmann::detail::iterator\_input\_adapter$<$ IteratorType $>$}}
+\doxysubsubsection{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily template$<$typename Iterator\+Type $>$ \\
+bool \mbox{\hyperlink{a01873}{nlohmann\+::detail\+::iterator\+\_\+input\+\_\+adapter}}$<$ Iterator\+Type $>$\+::empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line 4872 of file json.\+hpp.
+
+
+
+References nlohmann\+::detail\+::iterator\+\_\+input\+\_\+adapter$<$ Iterator\+Type $>$\+::current, and nlohmann\+::detail\+::iterator\+\_\+input\+\_\+adapter$<$ Iterator\+Type $>$\+::end.
+
+\mbox{\Hypertarget{a01873_a01706f07681df083c2174d236ff3d643}\label{a01873_a01706f07681df083c2174d236ff3d643}} 
+\index{nlohmann::detail::iterator\_input\_adapter$<$ IteratorType $>$@{nlohmann::detail::iterator\_input\_adapter$<$ IteratorType $>$}!get\_character@{get\_character}}
+\index{get\_character@{get\_character}!nlohmann::detail::iterator\_input\_adapter$<$ IteratorType $>$@{nlohmann::detail::iterator\_input\_adapter$<$ IteratorType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_character()}{get\_character()}}
+{\footnotesize\ttfamily template$<$typename Iterator\+Type $>$ \\
+std\+::char\+\_\+traits$<$\mbox{\hyperlink{a01873_a7cc60e68767005322ab4b692c9dff283}{char\+\_\+type}}$>$\+::int\+\_\+type \mbox{\hyperlink{a01873}{nlohmann\+::detail\+::iterator\+\_\+input\+\_\+adapter}}$<$ Iterator\+Type $>$\+::get\+\_\+character (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 4851 of file json.\+hpp.
+
+
+
+References nlohmann\+::detail\+::iterator\+\_\+input\+\_\+adapter$<$ Iterator\+Type $>$\+::current, nlohmann\+::detail\+::iterator\+\_\+input\+\_\+adapter$<$ Iterator\+Type $>$\+::end, and J\+S\+O\+N\+\_\+\+H\+E\+D\+L\+E\+Y\+\_\+\+L\+I\+K\+E\+LY.
+
+
+
+\doxysubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{a01873_ab86106ba230f1542b94dcd96e6ab3221}\label{a01873_ab86106ba230f1542b94dcd96e6ab3221}} 
+\index{nlohmann::detail::iterator\_input\_adapter$<$ IteratorType $>$@{nlohmann::detail::iterator\_input\_adapter$<$ IteratorType $>$}!wide\_string\_input\_helper@{wide\_string\_input\_helper}}
+\index{wide\_string\_input\_helper@{wide\_string\_input\_helper}!nlohmann::detail::iterator\_input\_adapter$<$ IteratorType $>$@{nlohmann::detail::iterator\_input\_adapter$<$ IteratorType $>$}}
+\doxysubsubsection{\texorpdfstring{wide\_string\_input\_helper}{wide\_string\_input\_helper}}
+{\footnotesize\ttfamily template$<$typename Iterator\+Type $>$ \\
+template$<$typename Base\+Input\+Adapter , size\+\_\+t T$>$ \\
+friend struct \mbox{\hyperlink{a00411_a01877}{wide\+\_\+string\+\_\+input\+\_\+helper}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 4870 of file json.\+hpp.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01873_a8abccad27590d381a94e474b16161938}\label{a01873_a8abccad27590d381a94e474b16161938}} 
+\index{nlohmann::detail::iterator\_input\_adapter$<$ IteratorType $>$@{nlohmann::detail::iterator\_input\_adapter$<$ IteratorType $>$}!current@{current}}
+\index{current@{current}!nlohmann::detail::iterator\_input\_adapter$<$ IteratorType $>$@{nlohmann::detail::iterator\_input\_adapter$<$ IteratorType $>$}}
+\doxysubsubsection{\texorpdfstring{current}{current}}
+{\footnotesize\ttfamily template$<$typename Iterator\+Type $>$ \\
+Iterator\+Type \mbox{\hyperlink{a01873}{nlohmann\+::detail\+::iterator\+\_\+input\+\_\+adapter}}$<$ Iterator\+Type $>$\+::current\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 4866 of file json.\+hpp.
+
+
+
+Referenced by nlohmann\+::detail\+::iterator\+\_\+input\+\_\+adapter$<$ Iterator\+Type $>$\+::empty(), and nlohmann\+::detail\+::iterator\+\_\+input\+\_\+adapter$<$ Iterator\+Type $>$\+::get\+\_\+character().
+
+\mbox{\Hypertarget{a01873_a8aa29994ca6fdc0f8c96abf9151738ab}\label{a01873_a8aa29994ca6fdc0f8c96abf9151738ab}} 
+\index{nlohmann::detail::iterator\_input\_adapter$<$ IteratorType $>$@{nlohmann::detail::iterator\_input\_adapter$<$ IteratorType $>$}!end@{end}}
+\index{end@{end}!nlohmann::detail::iterator\_input\_adapter$<$ IteratorType $>$@{nlohmann::detail::iterator\_input\_adapter$<$ IteratorType $>$}}
+\doxysubsubsection{\texorpdfstring{end}{end}}
+{\footnotesize\ttfamily template$<$typename Iterator\+Type $>$ \\
+Iterator\+Type \mbox{\hyperlink{a01873}{nlohmann\+::detail\+::iterator\+\_\+input\+\_\+adapter}}$<$ Iterator\+Type $>$\+::end\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 4867 of file json.\+hpp.
+
+
+
+Referenced by nlohmann\+::detail\+::iterator\+\_\+input\+\_\+adapter$<$ Iterator\+Type $>$\+::empty(), and nlohmann\+::detail\+::iterator\+\_\+input\+\_\+adapter$<$ Iterator\+Type $>$\+::get\+\_\+character().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/spatialstructures/src/\mbox{\hyperlink{a00206}{json.\+hpp}}\end{DoxyCompactItemize}

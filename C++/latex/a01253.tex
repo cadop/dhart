@@ -1,0 +1,183 @@
+\hypertarget{a01253}{}\doxysection{HF\+::Graph\+Generator\+::optional\+\_\+real3 Struct Reference}
+\label{a01253}\index{HF::GraphGenerator::optional\_real3@{HF::GraphGenerator::optional\_real3}}
+
+
+A simple wrapper for real3 that is able to determine whether or not it\textquotesingle{}s defined.  
+
+
+
+
+{\ttfamily \#include $<$graph\+\_\+generator.\+h$>$}
+
+
+
+Collaboration diagram for HF\+::Graph\+Generator\+::optional\+\_\+real3\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=205pt]{a01251}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01253_a59234d3c39c9a9034f8e551d656ee467}{optional\+\_\+real3}} ()
+\begin{DoxyCompactList}\small\item\em Construct an invalid \mbox{\hyperlink{a01253}{optional\+\_\+real3}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01253_a6c7e313fe147a3d0f8912bf61a7b19ae}{optional\+\_\+real3}} (\mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\+\_\+t}} x, \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\+\_\+t}} y, \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\+\_\+t}} z)
+\begin{DoxyCompactList}\small\item\em Construct an valid optreal3 from x,y,z parameters. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01253_a8c605afc6d2d8357904a33c3c76bf9fe}{optional\+\_\+real3}} (const \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \&in\+\_\+real3)
+\begin{DoxyCompactList}\small\item\em Construct an optreal3 from x,y,z parameters. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \& \mbox{\hyperlink{a01253_a205f73d45aaa1db686990721d98f50e6}{operator$\ast$}} ()
+\begin{DoxyCompactList}\small\item\em Get a reference to the point held by this \mbox{\hyperlink{a01253}{optional\+\_\+real3}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01253_ad506f7821a34dd38f42c579d36a809f0}{operator bool}} () const
+\begin{DoxyCompactList}\small\item\em Check if this optional\+\_\+real\+\_\+3 has a value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \mbox{\hyperlink{a01253_a1c21b3590d2f9d2327cfc4d7c1a11521}{pt}} \{ N\+AN, N\+AN, N\+AN \}
+\begin{DoxyCompactList}\small\item\em Point type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A simple wrapper for real3 that is able to determine whether or not it\textquotesingle{}s defined. 
+
+Upon construction, an optional\+\_\+real\+\_\+3 is put into 2 states, valid or invalid. Constructing this with the empty constructor will create an invalid \mbox{\hyperlink{a01253}{optional\+\_\+real3}}, using the x,y,z parameters will create a valid \mbox{\hyperlink{a01253}{optional\+\_\+real3}}. This can be checked by checking the truth the object similar to std\+::optional (i.\+e. if(optional\+\_\+real3) ).
+
+\begin{DoxyRemark}{Remarks}
+This is used in place of std\+::optional, since std\+::optional doesn\textquotesingle{}t support arrays. In many ways it functions similarly, but doesn\textquotesingle{}t feature the exact same syntax for the sake of simplicity. This doesn\textquotesingle{}t use any extra memory than a real3, and comes with the benefit of being able to clearly indicate to callers that a function doesn\textquotesingle{}t always return a usable value and differentiate between code for checking a point and code for accessing a point in a single location. 
+\end{DoxyRemark}
+
+
+Definition at line 281 of file graph\+\_\+generator.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{a01253_a59234d3c39c9a9034f8e551d656ee467}\label{a01253_a59234d3c39c9a9034f8e551d656ee467}} 
+\index{HF::GraphGenerator::optional\_real3@{HF::GraphGenerator::optional\_real3}!optional\_real3@{optional\_real3}}
+\index{optional\_real3@{optional\_real3}!HF::GraphGenerator::optional\_real3@{HF::GraphGenerator::optional\_real3}}
+\doxysubsubsection{\texorpdfstring{optional\_real3()}{optional\_real3()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily H\+F\+::\+Graph\+Generator\+::optional\+\_\+real3\+::optional\+\_\+real3 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct an invalid \mbox{\hyperlink{a01253}{optional\+\_\+real3}}. 
+
+
+
+Definition at line 285 of file graph\+\_\+generator.\+h.
+
+\mbox{\Hypertarget{a01253_a6c7e313fe147a3d0f8912bf61a7b19ae}\label{a01253_a6c7e313fe147a3d0f8912bf61a7b19ae}} 
+\index{HF::GraphGenerator::optional\_real3@{HF::GraphGenerator::optional\_real3}!optional\_real3@{optional\_real3}}
+\index{optional\_real3@{optional\_real3}!HF::GraphGenerator::optional\_real3@{HF::GraphGenerator::optional\_real3}}
+\doxysubsubsection{\texorpdfstring{optional\_real3()}{optional\_real3()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily H\+F\+::\+Graph\+Generator\+::optional\+\_\+real3\+::optional\+\_\+real3 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\+\_\+t}}}]{x,  }\item[{\mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\+\_\+t}}}]{y,  }\item[{\mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\+\_\+t}}}]{z }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct an valid optreal3 from x,y,z parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & X Coordinate \\
+\hline
+{\em y} & Y Coordinate \\
+\hline
+{\em z} & Z Coordinate \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 293 of file graph\+\_\+generator.\+h.
+
+\mbox{\Hypertarget{a01253_a8c605afc6d2d8357904a33c3c76bf9fe}\label{a01253_a8c605afc6d2d8357904a33c3c76bf9fe}} 
+\index{HF::GraphGenerator::optional\_real3@{HF::GraphGenerator::optional\_real3}!optional\_real3@{optional\_real3}}
+\index{optional\_real3@{optional\_real3}!HF::GraphGenerator::optional\_real3@{HF::GraphGenerator::optional\_real3}}
+\doxysubsubsection{\texorpdfstring{optional\_real3()}{optional\_real3()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily H\+F\+::\+Graph\+Generator\+::optional\+\_\+real3\+::optional\+\_\+real3 (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \&}]{in\+\_\+real3 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct an optreal3 from x,y,z parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em in\+\_\+real3} & Input x,y,z coordinates in a real3 \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 299 of file graph\+\_\+generator.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a01253_ad506f7821a34dd38f42c579d36a809f0}\label{a01253_ad506f7821a34dd38f42c579d36a809f0}} 
+\index{HF::GraphGenerator::optional\_real3@{HF::GraphGenerator::optional\_real3}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!HF::GraphGenerator::optional\_real3@{HF::GraphGenerator::optional\_real3}}
+\doxysubsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily H\+F\+::\+Graph\+Generator\+::optional\+\_\+real3\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Check if this optional\+\_\+real\+\_\+3 has a value. 
+
+\begin{DoxyReturn}{Returns}
+True if this was initialized with x,y, and z coordinates that are not N\+AN, false otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line 312 of file graph\+\_\+generator.\+h.
+
+
+
+References pt.
+
+\mbox{\Hypertarget{a01253_a205f73d45aaa1db686990721d98f50e6}\label{a01253_a205f73d45aaa1db686990721d98f50e6}} 
+\index{HF::GraphGenerator::optional\_real3@{HF::GraphGenerator::optional\_real3}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!HF::GraphGenerator::optional\_real3@{HF::GraphGenerator::optional\_real3}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}}\& H\+F\+::\+Graph\+Generator\+::optional\+\_\+real3\+::operator$\ast$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get a reference to the point held by this \mbox{\hyperlink{a01253}{optional\+\_\+real3}}. 
+
+\begin{DoxyReturn}{Returns}
+a reference to the point held by this optreal3. 
+\end{DoxyReturn}
+
+
+Definition at line 305 of file graph\+\_\+generator.\+h.
+
+
+
+References pt.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01253_a1c21b3590d2f9d2327cfc4d7c1a11521}\label{a01253_a1c21b3590d2f9d2327cfc4d7c1a11521}} 
+\index{HF::GraphGenerator::optional\_real3@{HF::GraphGenerator::optional\_real3}!pt@{pt}}
+\index{pt@{pt}!HF::GraphGenerator::optional\_real3@{HF::GraphGenerator::optional\_real3}}
+\doxysubsubsection{\texorpdfstring{pt}{pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} H\+F\+::\+Graph\+Generator\+::optional\+\_\+real3\+::pt \{ N\+AN, N\+AN, N\+AN \}}
+
+
+
+Point type. 
+
+
+
+Definition at line 282 of file graph\+\_\+generator.\+h.
+
+
+
+Referenced by H\+F\+::\+Graph\+Generator\+::\+Check\+Children(), H\+F\+::\+Graph\+Generator\+::\+Check\+Ray(), operator bool(), operator$\ast$(), and T\+E\+S\+T().
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/analysismethods/src/\mbox{\hyperlink{a00008}{graph\+\_\+generator.\+h}}\end{DoxyCompactItemize}

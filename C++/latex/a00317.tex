@@ -1,0 +1,146 @@
+\hypertarget{a00317}{}\doxysection{Cpp/tests/src/performance\+\_\+testing.h File Reference}
+\label{a00317}\index{Cpp/tests/src/performance\_testing.h@{Cpp/tests/src/performance\_testing.h}}
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+Include dependency graph for performance\+\_\+testing.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=225pt]{a00318}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00319}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{a02041}{Stop\+Watch}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{a00317_a863850feaca9e401c7152f8620c3fc40}{this\+\_\+clock}} = std\+::chrono\+::high\+\_\+resolution\+\_\+clock
+\item 
+using \mbox{\hyperlink{a00317_a6bb0ce0b2249ee38e17c6c63ae0faf9b}{timepoint}} = this\+\_\+clock\+::time\+\_\+point
+\item 
+using \mbox{\hyperlink{a00317_abf5bb9360abe1b2cfd235e361d806f80}{hf\+\_\+time\+\_\+units}} = std\+::chrono\+::nanoseconds
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{a00317_a3ce0fc36ef0db9e452307aa9a3dbfa77}{Print\+Trials}} (const std\+::vector$<$ \mbox{\hyperlink{a02041}{Stop\+Watch}} $>$ \&watches, const std\+::vector$<$ int $>$ num\+\_\+units, std\+::string unit\+\_\+name=\char`\"{}Elements\char`\"{}, std\+::vector$<$ std\+::string $>$ trial\+\_\+names=std\+::vector$<$ std\+::string $>$())
+\begin{DoxyCompactList}\small\item\em A function to uniformly the results of multiple trials to std\+::cerr. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static const string \mbox{\hyperlink{a00317_aabeaf4da78c0924a101e8fb8688fb201}{hf\+\_\+time\+\_\+unit\+\_\+postfix}} = \char`\"{}ms\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{a00317_abf5bb9360abe1b2cfd235e361d806f80}\label{a00317_abf5bb9360abe1b2cfd235e361d806f80}} 
+\index{performance\_testing.h@{performance\_testing.h}!hf\_time\_units@{hf\_time\_units}}
+\index{hf\_time\_units@{hf\_time\_units}!performance\_testing.h@{performance\_testing.h}}
+\doxysubsubsection{\texorpdfstring{hf\_time\_units}{hf\_time\_units}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{a00317_abf5bb9360abe1b2cfd235e361d806f80}{hf\+\_\+time\+\_\+units}} =  std\+::chrono\+::nanoseconds}
+
+
+
+Definition at line 13 of file performance\+\_\+testing.\+h.
+
+\mbox{\Hypertarget{a00317_a863850feaca9e401c7152f8620c3fc40}\label{a00317_a863850feaca9e401c7152f8620c3fc40}} 
+\index{performance\_testing.h@{performance\_testing.h}!this\_clock@{this\_clock}}
+\index{this\_clock@{this\_clock}!performance\_testing.h@{performance\_testing.h}}
+\doxysubsubsection{\texorpdfstring{this\_clock}{this\_clock}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{a00317_a863850feaca9e401c7152f8620c3fc40}{this\+\_\+clock}} =  std\+::chrono\+::high\+\_\+resolution\+\_\+clock}
+
+
+
+Definition at line 11 of file performance\+\_\+testing.\+h.
+
+\mbox{\Hypertarget{a00317_a6bb0ce0b2249ee38e17c6c63ae0faf9b}\label{a00317_a6bb0ce0b2249ee38e17c6c63ae0faf9b}} 
+\index{performance\_testing.h@{performance\_testing.h}!timepoint@{timepoint}}
+\index{timepoint@{timepoint}!performance\_testing.h@{performance\_testing.h}}
+\doxysubsubsection{\texorpdfstring{timepoint}{timepoint}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{a00317_a6bb0ce0b2249ee38e17c6c63ae0faf9b}{timepoint}} =  this\+\_\+clock\+::time\+\_\+point}
+
+
+
+Definition at line 12 of file performance\+\_\+testing.\+h.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{a00317_a3ce0fc36ef0db9e452307aa9a3dbfa77}\label{a00317_a3ce0fc36ef0db9e452307aa9a3dbfa77}} 
+\index{performance\_testing.h@{performance\_testing.h}!PrintTrials@{PrintTrials}}
+\index{PrintTrials@{PrintTrials}!performance\_testing.h@{performance\_testing.h}}
+\doxysubsubsection{\texorpdfstring{PrintTrials()}{PrintTrials()}}
+{\footnotesize\ttfamily void Print\+Trials (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{a02041}{Stop\+Watch}} $>$ \&}]{watches,  }\item[{const std\+::vector$<$ int $>$}]{num\+\_\+units,  }\item[{std\+::string}]{unit\+\_\+name = {\ttfamily \char`\"{}Elements\char`\"{}},  }\item[{std\+::vector$<$ std\+::string $>$}]{trial\+\_\+names = {\ttfamily std\+:\+:vector$<$std\+:\+:string$>$()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+A function to uniformly the results of multiple trials to std\+::cerr. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em watches} & Stop\+Watches containing ths start/end times to print. \\
+\hline
+{\em num\+\_\+units} & number of units were processed by each trial in order. \\
+\hline
+{\em unit\+\_\+name} & Name of units being processed. I.\+E. the graph generator would put Nodes. \\
+\hline
+{\em trial\+\_\+names} & Name of each trial. If blank, will be generated as Trial 1. Trial 2. etc. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 60 of file performance\+\_\+testing.\+h.
+
+
+
+References hf\+\_\+time\+\_\+unit\+\_\+postfix, and nlohmann\+::to\+\_\+string().
+
+
+
+Referenced by T\+E\+S\+T().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=295pt]{a00317_a3ce0fc36ef0db9e452307aa9a3dbfa77_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=222pt]{a00317_a3ce0fc36ef0db9e452307aa9a3dbfa77_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{a00317_aabeaf4da78c0924a101e8fb8688fb201}\label{a00317_aabeaf4da78c0924a101e8fb8688fb201}} 
+\index{performance\_testing.h@{performance\_testing.h}!hf\_time\_unit\_postfix@{hf\_time\_unit\_postfix}}
+\index{hf\_time\_unit\_postfix@{hf\_time\_unit\_postfix}!performance\_testing.h@{performance\_testing.h}}
+\doxysubsubsection{\texorpdfstring{hf\_time\_unit\_postfix}{hf\_time\_unit\_postfix}}
+{\footnotesize\ttfamily const string hf\+\_\+time\+\_\+unit\+\_\+postfix = \char`\"{}ms\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line 14 of file performance\+\_\+testing.\+h.
+
+
+
+Referenced by Print\+Trials().
+

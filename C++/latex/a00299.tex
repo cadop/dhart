@@ -1,0 +1,578 @@
+\hypertarget{a00299}{}\doxysection{Cpp/tests/src/\+Graph\+Generator.cpp File Reference}
+\label{a00299}\index{Cpp/tests/src/GraphGenerator.cpp@{Cpp/tests/src/GraphGenerator.cpp}}
+{\ttfamily \#include \char`\"{}gtest/gtest.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$array$>$}\newline
+{\ttfamily \#include $<$graph\+\_\+generator.\+h$>$}\newline
+{\ttfamily \#include $<$unique\+\_\+queue.\+h$>$}\newline
+{\ttfamily \#include $<$embree\+\_\+raytracer.\+h$>$}\newline
+{\ttfamily \#include $<$objloader.\+h$>$}\newline
+{\ttfamily \#include $<$meshinfo.\+h$>$}\newline
+{\ttfamily \#include $<$graph.\+h$>$}\newline
+{\ttfamily \#include $<$edge.\+h$>$}\newline
+{\ttfamily \#include $<$node.\+h$>$}\newline
+{\ttfamily \#include $<$Constants.\+h$>$}\newline
+{\ttfamily \#include $<$Multi\+R\+T.\+h$>$}\newline
+Include dependency graph for Graph\+Generator.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00300}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01357}{Embree\+Ray\+Tracer}} \mbox{\hyperlink{a00299_a2ab46bd080864c755c80d925bedcfbb1}{Create\+G\+G\+Exmaple\+RT}} ()
+\item 
+\mbox{\hyperlink{a01357}{Embree\+Ray\+Tracer}} \mbox{\hyperlink{a00299_a7689b386735b992cd5ade95fdc57466c}{Create\+Obstacle\+Example\+RT}} (std\+::string str=\char`\"{}\char`\"{})
+\item 
+std\+::ostringstream \mbox{\hyperlink{a00299_afce78a78c14f98d2c1d1d030b716c910}{Print\+Graph}} (const \mbox{\hyperlink{a01497}{Graph}} \&g)
+\item 
+{\footnotesize template$<$typename N , typename N2 $>$ }\\void \mbox{\hyperlink{a00299_a76e698f518e194f21532cf5b0d07fc16}{Compare\+Points}} (const N \&expected\+\_\+nodes, const N2 \&actual\+\_\+nodes)
+\item 
+\mbox{\hyperlink{a00299_a6e58a2ac40628a75c6dfc70a1d4e48b5}{T\+E\+ST}} (\+\_\+\+Graph\+Generator, Build\+Network)
+\item 
+\mbox{\hyperlink{a00299_a3677846ac7d998cec3eb73845cd54a7f}{T\+E\+ST}} (\+\_\+\+Graph\+Generator, O\+B\+S\+\_\+\+Vis\+Test\+Case)
+\item 
+\mbox{\hyperlink{a00299_a241ca4083b8e53f266cc12d112df2d09}{T\+E\+ST}} (\+\_\+\+Graph\+Generator, O\+B\+S\+\_\+\+Build\+Network)
+\item 
+\mbox{\hyperlink{a00299_ae187b36d55d513be63fe7a8aab4b26bc}{T\+E\+ST}} (\+\_\+\+Graph\+Generator, Crawl\+Geom)
+\item 
+\mbox{\hyperlink{a00299_a7a120771ce971c2ae65abd8527aa9b7d}{T\+E\+ST}} (\+\_\+\+Graph\+Generator, Validate\+Start\+Point)
+\item 
+\mbox{\hyperlink{a00299_ab7ed8ad4ad6833649ea48a0edb117663}{T\+E\+ST}} (\+\_\+\+Graph\+Generator, Check\+Ray)
+\item 
+\mbox{\hyperlink{a00299_ab2faa5a4973f785a20ec5cdb1683a675}{T\+E\+ST}} (\+\_\+\+Graph\+Generator, Create\+Direcs)
+\item 
+\mbox{\hyperlink{a00299_a90b8b7b4c2c633faebf9568b9c665c42}{T\+E\+ST}} (\+\_\+\+Graph\+Generator, Generate\+Potential\+Children)
+\item 
+\mbox{\hyperlink{a00299_afcea751082da3151de71eee351f612f8}{T\+E\+ST}} (\+\_\+\+Graph\+Generator, Get\+Children)
+\item 
+{\footnotesize template$<$typename n1\+\_\+type , typename n2\+\_\+type $>$ }\\\mbox{\hyperlink{a00001_a02273}{double}} \mbox{\hyperlink{a00299_a68644d658b00e6ade10de66d9fc78952}{Distance\+To}} (const n1\+\_\+type \&n1, const n2\+\_\+type \&n2)
+\item 
+\mbox{\hyperlink{a00299_a2aa92223460978c94dce117bb610c264}{T\+E\+ST}} (\+\_\+\+Graph\+Generator, Check\+Children)
+\item 
+\mbox{\hyperlink{a00299_a4358fe4833bb6ff00fbfba5d4040e5d3}{T\+E\+ST}} (\+\_\+\+Graph\+Generator, Check\+Connection)
+\item 
+\mbox{\hyperlink{a00299_aac654c0f714f7085f4f4d1d8e0e96184}{T\+E\+ST}} (\+\_\+\+Graph\+Generator, Check\+Slope)
+\item 
+\mbox{\hyperlink{a00299_a0487dd17d922cab87291d35fcef68991}{T\+E\+ST}} (\+\_\+\+Graph\+Generator, Occlusion\+Check)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const std\+::string \mbox{\hyperlink{a00299_a301e254b996e69c77642cc3a873ff189}{obstacle\+\_\+plane\+\_\+path}} = \char`\"{}obstacle\+\_\+plane.\+obj\char`\"{}
+\item 
+const std\+::string \mbox{\hyperlink{a00299_a0c89e82327834fa6499ea2e9fcadcac6}{obstacle\+\_\+layer}} = \char`\"{}Obstacle\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{a00299_a76e698f518e194f21532cf5b0d07fc16}\label{a00299_a76e698f518e194f21532cf5b0d07fc16}} 
+\index{GraphGenerator.cpp@{GraphGenerator.cpp}!ComparePoints@{ComparePoints}}
+\index{ComparePoints@{ComparePoints}!GraphGenerator.cpp@{GraphGenerator.cpp}}
+\doxysubsubsection{\texorpdfstring{ComparePoints()}{ComparePoints()}}
+{\footnotesize\ttfamily template$<$typename N , typename N2 $>$ \\
+void Compare\+Points (\begin{DoxyParamCaption}\item[{const N \&}]{expected\+\_\+nodes,  }\item[{const N2 \&}]{actual\+\_\+nodes }\end{DoxyParamCaption})}
+
+
+
+Definition at line 77 of file Graph\+Generator.\+cpp.
+
+
+
+References Distance\+To().
+
+
+
+Referenced by T\+E\+S\+T().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=277pt]{a00299_a76e698f518e194f21532cf5b0d07fc16_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=248pt]{a00299_a76e698f518e194f21532cf5b0d07fc16_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00299_a2ab46bd080864c755c80d925bedcfbb1}\label{a00299_a2ab46bd080864c755c80d925bedcfbb1}} 
+\index{GraphGenerator.cpp@{GraphGenerator.cpp}!CreateGGExmapleRT@{CreateGGExmapleRT}}
+\index{CreateGGExmapleRT@{CreateGGExmapleRT}!GraphGenerator.cpp@{GraphGenerator.cpp}}
+\doxysubsubsection{\texorpdfstring{CreateGGExmapleRT()}{CreateGGExmapleRT()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01357}{Embree\+Ray\+Tracer}} Create\+G\+G\+Exmaple\+RT (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{[}E\+X\+\_\+\+Graph\+Generator\+Ray\+Tracer\mbox{]}
+
+\mbox{[}E\+X\+\_\+\+Graph\+Generator\+Ray\+Tracer\mbox{]}
+
+Definition at line 24 of file Graph\+Generator.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), and H\+F\+::\+Geometry\+::\+O\+N\+L\+Y\+\_\+\+F\+I\+LE.
+
+
+
+Referenced by T\+E\+S\+T().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00299_a2ab46bd080864c755c80d925bedcfbb1_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=276pt]{a00299_a2ab46bd080864c755c80d925bedcfbb1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00299_a7689b386735b992cd5ade95fdc57466c}\label{a00299_a7689b386735b992cd5ade95fdc57466c}} 
+\index{GraphGenerator.cpp@{GraphGenerator.cpp}!CreateObstacleExampleRT@{CreateObstacleExampleRT}}
+\index{CreateObstacleExampleRT@{CreateObstacleExampleRT}!GraphGenerator.cpp@{GraphGenerator.cpp}}
+\doxysubsubsection{\texorpdfstring{CreateObstacleExampleRT()}{CreateObstacleExampleRT()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01357}{Embree\+Ray\+Tracer}} Create\+Obstacle\+Example\+RT (\begin{DoxyParamCaption}\item[{std\+::string}]{str = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 39 of file Graph\+Generator.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+B\+Y\+\_\+\+G\+R\+O\+UP, H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), and obstacle\+\_\+plane\+\_\+path.
+
+
+
+Referenced by T\+E\+S\+T().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00299_a7689b386735b992cd5ade95fdc57466c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=303pt]{a00299_a7689b386735b992cd5ade95fdc57466c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00299_a68644d658b00e6ade10de66d9fc78952}\label{a00299_a68644d658b00e6ade10de66d9fc78952}} 
+\index{GraphGenerator.cpp@{GraphGenerator.cpp}!DistanceTo@{DistanceTo}}
+\index{DistanceTo@{DistanceTo}!GraphGenerator.cpp@{GraphGenerator.cpp}}
+\doxysubsubsection{\texorpdfstring{DistanceTo()}{DistanceTo()}}
+{\footnotesize\ttfamily template$<$typename n1\+\_\+type , typename n2\+\_\+type $>$ \\
+\mbox{\hyperlink{a00001_a02273}{double}} Distance\+To (\begin{DoxyParamCaption}\item[{const n1\+\_\+type \&}]{n1,  }\item[{const n2\+\_\+type \&}]{n2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 472 of file Graph\+Generator.\+cpp.
+
+
+
+Referenced by Compare\+Points(), and T\+E\+S\+T().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00299_a68644d658b00e6ade10de66d9fc78952_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00299_afce78a78c14f98d2c1d1d030b716c910}\label{a00299_afce78a78c14f98d2c1d1d030b716c910}} 
+\index{GraphGenerator.cpp@{GraphGenerator.cpp}!PrintGraph@{PrintGraph}}
+\index{PrintGraph@{PrintGraph}!GraphGenerator.cpp@{GraphGenerator.cpp}}
+\doxysubsubsection{\texorpdfstring{PrintGraph()}{PrintGraph()}}
+{\footnotesize\ttfamily std\+::ostringstream Print\+Graph (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01497}{Graph}} \&}]{g }\end{DoxyParamCaption})}
+
+\mbox{[}E\+X\+\_\+\+Print\+Graph\mbox{]}
+
+\mbox{[}E\+X\+\_\+\+Print\+Graph\mbox{]}
+
+Definition at line 54 of file Graph\+Generator.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Nodes().
+
+
+
+Referenced by T\+E\+S\+T().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=303pt]{a00299_afce78a78c14f98d2c1d1d030b716c910_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=225pt]{a00299_afce78a78c14f98d2c1d1d030b716c910_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00299_a6e58a2ac40628a75c6dfc70a1d4e48b5}\label{a00299_a6e58a2ac40628a75c6dfc70a1d4e48b5}} 
+\index{GraphGenerator.cpp@{GraphGenerator.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!GraphGenerator.cpp@{GraphGenerator.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [1/13]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Graph\+Generator}]{,  }\item[{Build\+Network}]{ }\end{DoxyParamCaption})}
+
+\mbox{[}E\+X\+\_\+\+Build\+Network\mbox{]}
+
+\mbox{[}E\+X\+\_\+\+Build\+Network\mbox{]}
+
+Definition at line 87 of file Graph\+Generator.\+cpp.
+
+
+
+References H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Build\+Network(), Compare\+Points(), Create\+G\+G\+Exmaple\+R\+T(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Nodes(), and Print\+Graph().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00299_a6e58a2ac40628a75c6dfc70a1d4e48b5_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00299_a2aa92223460978c94dce117bb610c264}\label{a00299_a2aa92223460978c94dce117bb610c264}} 
+\index{GraphGenerator.cpp@{GraphGenerator.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!GraphGenerator.cpp@{GraphGenerator.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [2/13]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Graph\+Generator}]{,  }\item[{Check\+Children}]{ }\end{DoxyParamCaption})}
+
+\mbox{[}E\+X\+\_\+\+Check\+Children\mbox{]}
+
+\mbox{[}E\+X\+\_\+\+Check\+Children\mbox{]}
+
+Definition at line 476 of file Graph\+Generator.\+cpp.
+
+
+
+References H\+F\+::\+Graph\+Generator\+::\+Check\+Children(), Create\+G\+G\+Exmaple\+R\+T(), Distance\+To(), H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::down\+\_\+slope, H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::down\+\_\+step, H\+F\+::\+Graph\+Generator\+::\+Precision\+::ground\+\_\+offset, H\+F\+::\+Graph\+Generator\+::\+Precision\+::node\+\_\+z, H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::precision, H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::up\+\_\+slope, and H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::up\+\_\+step.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00299_a2aa92223460978c94dce117bb610c264_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00299_a4358fe4833bb6ff00fbfba5d4040e5d3}\label{a00299_a4358fe4833bb6ff00fbfba5d4040e5d3}} 
+\index{GraphGenerator.cpp@{GraphGenerator.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!GraphGenerator.cpp@{GraphGenerator.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [3/13]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Graph\+Generator}]{,  }\item[{Check\+Connection}]{ }\end{DoxyParamCaption})}
+
+\mbox{[}E\+X\+\_\+\+Check\+Connection\mbox{]}
+
+\mbox{[}E\+X\+\_\+\+Check\+Connection\mbox{]}
+
+Definition at line 521 of file Graph\+Generator.\+cpp.
+
+
+
+References H\+F\+::\+Graph\+Generator\+::\+Check\+Connection(), Create\+G\+G\+Exmaple\+R\+T(), H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::down\+\_\+slope, H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::down\+\_\+step, H\+F\+::\+Graph\+Generator\+::\+Precision\+::ground\+\_\+offset, H\+F\+::\+Graph\+Generator\+::\+Precision\+::node\+\_\+z, H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::precision, H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::up\+\_\+slope, and H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::up\+\_\+step.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00299_a4358fe4833bb6ff00fbfba5d4040e5d3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00299_ab7ed8ad4ad6833649ea48a0edb117663}\label{a00299_ab7ed8ad4ad6833649ea48a0edb117663}} 
+\index{GraphGenerator.cpp@{GraphGenerator.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!GraphGenerator.cpp@{GraphGenerator.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [4/13]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Graph\+Generator}]{,  }\item[{Check\+Ray}]{ }\end{DoxyParamCaption})}
+
+\mbox{[}E\+X\+\_\+\+Check\+Ray\mbox{]}
+
+\mbox{[}E\+X\+\_\+\+Check\+Ray\mbox{]}
+
+Definition at line 337 of file Graph\+Generator.\+cpp.
+
+
+
+References H\+F\+::\+Graph\+Generator\+::\+Check\+Ray(), Create\+G\+G\+Exmaple\+R\+T(), and H\+F\+::\+Graph\+Generator\+::optional\+\_\+real3\+::pt.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00299_ab7ed8ad4ad6833649ea48a0edb117663_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00299_aac654c0f714f7085f4f4d1d8e0e96184}\label{a00299_aac654c0f714f7085f4f4d1d8e0e96184}} 
+\index{GraphGenerator.cpp@{GraphGenerator.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!GraphGenerator.cpp@{GraphGenerator.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [5/13]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Graph\+Generator}]{,  }\item[{Check\+Slope}]{ }\end{DoxyParamCaption})}
+
+\mbox{[}E\+X\+\_\+\+Check\+Slope\mbox{]}
+
+\mbox{[}E\+X\+\_\+\+Check\+Slope\mbox{]}
+
+Definition at line 565 of file Graph\+Generator.\+cpp.
+
+
+
+References H\+F\+::\+Graph\+Generator\+::\+Check\+Slope(), H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::down\+\_\+slope, and H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::up\+\_\+slope.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=270pt]{a00299_aac654c0f714f7085f4f4d1d8e0e96184_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00299_ae187b36d55d513be63fe7a8aab4b26bc}\label{a00299_ae187b36d55d513be63fe7a8aab4b26bc}} 
+\index{GraphGenerator.cpp@{GraphGenerator.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!GraphGenerator.cpp@{GraphGenerator.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [6/13]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Graph\+Generator}]{,  }\item[{Crawl\+Geom}]{ }\end{DoxyParamCaption})}
+
+\mbox{[}E\+X\+\_\+\+Crawl\+Geom\mbox{]}
+
+\mbox{[}E\+X\+\_\+\+Crawl\+Geom\mbox{]}
+
+\mbox{[}E\+X\+\_\+\+Crawl\+Geom\+\_\+\+Serial\mbox{]}
+
+\mbox{[}E\+X\+\_\+\+Crawl\+Geom\+\_\+\+Serial\mbox{]}
+
+\mbox{[}E\+X\+\_\+\+Crawl\+Geom\+\_\+\+Parallel\mbox{]}
+
+\mbox{[}E\+X\+\_\+\+Crawl\+Geom\+\_\+\+Parallel\mbox{]}
+
+Definition at line 212 of file Graph\+Generator.\+cpp.
+
+
+
+References H\+F\+::\+Graph\+Generator\+::\+Cast\+To\+Real3(), Compare\+Points(), H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::core\+\_\+count, H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Crawl\+Geom(), H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Crawl\+Geom\+Parallel(), Create\+G\+G\+Exmaple\+R\+T(), H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::down\+\_\+slope, H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::down\+\_\+step, H\+F\+::\+Graph\+Generator\+::\+Precision\+::ground\+\_\+offset, H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::max\+\_\+nodes, H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::max\+\_\+step\+\_\+connection, H\+F\+::\+Graph\+Generator\+::\+Precision\+::node\+\_\+spacing, H\+F\+::\+Graph\+Generator\+::\+Precision\+::node\+\_\+z, H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::params, H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::precision, H\+F\+::\+Graph\+Generator\+::\+Unique\+Queue\+::push(), H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::spacing, H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::up\+\_\+slope, and H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::up\+\_\+step.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00299_ae187b36d55d513be63fe7a8aab4b26bc_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00299_ab2faa5a4973f785a20ec5cdb1683a675}\label{a00299_ab2faa5a4973f785a20ec5cdb1683a675}} 
+\index{GraphGenerator.cpp@{GraphGenerator.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!GraphGenerator.cpp@{GraphGenerator.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [7/13]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Graph\+Generator}]{,  }\item[{Create\+Direcs}]{ }\end{DoxyParamCaption})}
+
+\mbox{[}E\+X\+\_\+\+Create\+Direcs\mbox{]}
+
+\mbox{[}E\+X\+\_\+\+Create\+Direcs\mbox{]}
+
+Definition at line 373 of file Graph\+Generator.\+cpp.
+
+
+
+References H\+F\+::\+Graph\+Generator\+::\+Create\+Direcs().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00299_ab2faa5a4973f785a20ec5cdb1683a675_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00299_a90b8b7b4c2c633faebf9568b9c665c42}\label{a00299_a90b8b7b4c2c633faebf9568b9c665c42}} 
+\index{GraphGenerator.cpp@{GraphGenerator.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!GraphGenerator.cpp@{GraphGenerator.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [8/13]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Graph\+Generator}]{,  }\item[{Generate\+Potential\+Children}]{ }\end{DoxyParamCaption})}
+
+\mbox{[}E\+X\+\_\+\+Create\+Potential\+Children\mbox{]}
+
+\mbox{[}E\+X\+\_\+\+Create\+Potential\+Children\mbox{]}
+
+Definition at line 396 of file Graph\+Generator.\+cpp.
+
+
+
+References H\+F\+::\+Graph\+Generator\+::\+Generate\+Potential\+Children(), H\+F\+::\+Graph\+Generator\+::\+Precision\+::node\+\_\+spacing, H\+F\+::\+Graph\+Generator\+::\+Precision\+::node\+\_\+z, and H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::precision.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=309pt]{a00299_a90b8b7b4c2c633faebf9568b9c665c42_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00299_afcea751082da3151de71eee351f612f8}\label{a00299_afcea751082da3151de71eee351f612f8}} 
+\index{GraphGenerator.cpp@{GraphGenerator.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!GraphGenerator.cpp@{GraphGenerator.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [9/13]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Graph\+Generator}]{,  }\item[{Get\+Children}]{ }\end{DoxyParamCaption})}
+
+\mbox{[}E\+X\+\_\+\+Create\+Children\mbox{]}
+
+\mbox{[}E\+X\+\_\+\+Create\+Children\mbox{]}
+
+Definition at line 431 of file Graph\+Generator.\+cpp.
+
+
+
+References Create\+G\+G\+Exmaple\+R\+T(), H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::down\+\_\+slope, H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::down\+\_\+step, H\+F\+::\+Graph\+Generator\+::\+Get\+Children(), H\+F\+::\+Graph\+Generator\+::\+Precision\+::ground\+\_\+offset, H\+F\+::\+Graph\+Generator\+::\+Precision\+::node\+\_\+z, H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::precision, H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::up\+\_\+slope, and H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::up\+\_\+step.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00299_afcea751082da3151de71eee351f612f8_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00299_a241ca4083b8e53f266cc12d112df2d09}\label{a00299_a241ca4083b8e53f266cc12d112df2d09}} 
+\index{GraphGenerator.cpp@{GraphGenerator.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!GraphGenerator.cpp@{GraphGenerator.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [10/13]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Graph\+Generator}]{,  }\item[{O\+B\+S\+\_\+\+Build\+Network}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 173 of file Graph\+Generator.\+cpp.
+
+
+
+References H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Build\+Network(), Create\+Obstacle\+Example\+R\+T(), and H\+F\+::\+Spatial\+Structures\+::\+Graph\+::size().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00299_a241ca4083b8e53f266cc12d112df2d09_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00299_a3677846ac7d998cec3eb73845cd54a7f}\label{a00299_a3677846ac7d998cec3eb73845cd54a7f}} 
+\index{GraphGenerator.cpp@{GraphGenerator.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!GraphGenerator.cpp@{GraphGenerator.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [11/13]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Graph\+Generator}]{,  }\item[{O\+B\+S\+\_\+\+Vis\+Test\+Case}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 131 of file Graph\+Generator.\+cpp.
+
+
+
+References H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Build\+Network(), Create\+Obstacle\+Example\+R\+T(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Dump\+To\+Json(), and H\+F\+::\+Spatial\+Structures\+::\+Graph\+::size().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00299_a3677846ac7d998cec3eb73845cd54a7f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00299_a0487dd17d922cab87291d35fcef68991}\label{a00299_a0487dd17d922cab87291d35fcef68991}} 
+\index{GraphGenerator.cpp@{GraphGenerator.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!GraphGenerator.cpp@{GraphGenerator.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [12/13]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Graph\+Generator}]{,  }\item[{Occlusion\+Check}]{ }\end{DoxyParamCaption})}
+
+\mbox{[}E\+X\+\_\+\+Check\+Occlusion\mbox{]}
+
+\mbox{[}E\+X\+\_\+\+Check\+Occlusion\mbox{]}
+
+Definition at line 592 of file Graph\+Generator.\+cpp.
+
+
+
+References Create\+G\+G\+Exmaple\+R\+T(), and H\+F\+::\+Graph\+Generator\+::\+Occlusion\+Check().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00299_a0487dd17d922cab87291d35fcef68991_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00299_a7a120771ce971c2ae65abd8527aa9b7d}\label{a00299_a7a120771ce971c2ae65abd8527aa9b7d}} 
+\index{GraphGenerator.cpp@{GraphGenerator.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!GraphGenerator.cpp@{GraphGenerator.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [13/13]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Graph\+Generator}]{,  }\item[{Validate\+Start\+Point}]{ }\end{DoxyParamCaption})}
+
+\mbox{[}E\+X\+\_\+\+Validate\+Start\+Point\mbox{]}
+
+\mbox{[}E\+X\+\_\+\+Validate\+Start\+Point\mbox{]}
+
+Definition at line 295 of file Graph\+Generator.\+cpp.
+
+
+
+References Create\+G\+G\+Exmaple\+R\+T(), H\+F\+::\+Graph\+Generator\+::\+Precision\+::ground\+\_\+offset, H\+F\+::\+Graph\+Generator\+::\+Precision\+::node\+\_\+spacing, H\+F\+::\+Graph\+Generator\+::\+Precision\+::node\+\_\+z, H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::precision, H\+F\+::\+Graph\+Generator\+::optional\+\_\+real3\+::pt, and H\+F\+::\+Graph\+Generator\+::\+Validate\+Start\+Point().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00299_a7a120771ce971c2ae65abd8527aa9b7d_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{a00299_a0c89e82327834fa6499ea2e9fcadcac6}\label{a00299_a0c89e82327834fa6499ea2e9fcadcac6}} 
+\index{GraphGenerator.cpp@{GraphGenerator.cpp}!obstacle\_layer@{obstacle\_layer}}
+\index{obstacle\_layer@{obstacle\_layer}!GraphGenerator.cpp@{GraphGenerator.cpp}}
+\doxysubsubsection{\texorpdfstring{obstacle\_layer}{obstacle\_layer}}
+{\footnotesize\ttfamily const std\+::string obstacle\+\_\+layer = \char`\"{}Obstacle\char`\"{}}
+
+
+
+Definition at line 38 of file Graph\+Generator.\+cpp.
+
+\mbox{\Hypertarget{a00299_a301e254b996e69c77642cc3a873ff189}\label{a00299_a301e254b996e69c77642cc3a873ff189}} 
+\index{GraphGenerator.cpp@{GraphGenerator.cpp}!obstacle\_plane\_path@{obstacle\_plane\_path}}
+\index{obstacle\_plane\_path@{obstacle\_plane\_path}!GraphGenerator.cpp@{GraphGenerator.cpp}}
+\doxysubsubsection{\texorpdfstring{obstacle\_plane\_path}{obstacle\_plane\_path}}
+{\footnotesize\ttfamily const std\+::string obstacle\+\_\+plane\+\_\+path = \char`\"{}obstacle\+\_\+plane.\+obj\char`\"{}}
+
+
+
+Definition at line 37 of file Graph\+Generator.\+cpp.
+
+
+
+Referenced by Create\+Obstacle\+Example\+R\+T().
+

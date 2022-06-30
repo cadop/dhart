@@ -1,0 +1,397 @@
+\hypertarget{a01445}{}\doxysection{nanort\+::Triangle\+Intersector$<$ T, H $>$ Class Template Reference}
+\label{a01445}\index{nanort::TriangleIntersector$<$ T, H $>$@{nanort::TriangleIntersector$<$ T, H $>$}}
+
+
+{\ttfamily \#include $<$nanort.\+h$>$}
+
+
+
+Collaboration diagram for nanort\+::Triangle\+Intersector$<$ T, H $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01443}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{a01445_a01449}{Ray\+Coeff}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01445_a2181f19ddf2184cc93d1dc31103b9949}{Triangle\+Intersector}} (const T $\ast$vertices, const unsigned int $\ast$faces, const size\+\_\+t vertex\+\_\+stride\+\_\+bytes)
+\item 
+bool \mbox{\hyperlink{a01445_ac392e9a3133446809b902a178ea9092b}{Intersect}} (T $\ast$t\+\_\+inout, const unsigned int prim\+\_\+index) const
+\begin{DoxyCompactList}\small\item\em Do ray intersection stuff for {\ttfamily prim\+\_\+index} th primitive and return hit distance {\ttfamily t}, barycentric coordinate {\ttfamily u} and {\ttfamily v}. Returns true if there\textquotesingle{}s intersection. \end{DoxyCompactList}\item 
+T \mbox{\hyperlink{a01445_a5eda5bed00b03898ad719cde8653d3ea}{GetT}} () const
+\begin{DoxyCompactList}\small\item\em Returns the nearest hit distance. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a01445_a6b108535e10b320d287c853eb2e3142e}{Update}} (T t, unsigned int prim\+\_\+idx) const
+\begin{DoxyCompactList}\small\item\em Update is called when initializing intersection and nearest hit is found. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a01445_a10ab05ab1f92e4c1cda2da4f6de5fc59}{Prepare\+Traversal}} (const \mbox{\hyperlink{a01393}{Ray}}$<$ T $>$ \&ray, const \mbox{\hyperlink{a01413}{B\+V\+H\+Trace\+Options}} \&trace\+\_\+options) const
+\begin{DoxyCompactList}\small\item\em Prepare B\+VH traversal (e.\+g. compute inverse ray direction) This function is called only once in B\+VH traversal. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a01445_a543bcb67cbb100f2cb49a0b224d75dfe}{Post\+Traversal}} (const \mbox{\hyperlink{a01393}{Ray}}$<$ T $>$ \&ray, bool hit, H $\ast$isect) const
+\begin{DoxyCompactList}\small\item\em Post B\+VH traversal stuff. Fill {\ttfamily isect} if there is a hit. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const T $\ast$ \mbox{\hyperlink{a01445_a2cb6f374b8f26629e3c01bc1d5b49281}{vertices\+\_\+}}
+\item 
+const unsigned int $\ast$ \mbox{\hyperlink{a01445_af15783141ac090475a0ab5511f7e37ea}{faces\+\_\+}}
+\item 
+const size\+\_\+t \mbox{\hyperlink{a01445_a1782017f63d67ebf1e63bc56b7f4d13b}{vertex\+\_\+stride\+\_\+bytes\+\_\+}}
+\item 
+\mbox{\hyperlink{a01389}{real3}}$<$ T $>$ \mbox{\hyperlink{a01445_acc4cab87b7ed0b510dc0ddccbf2ab949}{ray\+\_\+org\+\_\+}}
+\item 
+\mbox{\hyperlink{a01445_a01449}{Ray\+Coeff}} \mbox{\hyperlink{a01445_ae57ba6626c926b2a9479dd3d013425b7}{ray\+\_\+coeff\+\_\+}}
+\item 
+\mbox{\hyperlink{a01413}{B\+V\+H\+Trace\+Options}} \mbox{\hyperlink{a01445_a6d0ea73ee3e801f2d4d14807f2d35008}{trace\+\_\+options\+\_\+}}
+\item 
+T \mbox{\hyperlink{a01445_adf2c8cac44aea278d3bb840b65cf72ad}{t\+\_\+min\+\_\+}}
+\item 
+T \mbox{\hyperlink{a01445_a50523ac73f73b22be639163ef9dacc80}{t\+\_\+}}
+\item 
+T \mbox{\hyperlink{a01445_acad6ff219fd226b6fdf8735cfa35cbbb}{u\+\_\+}}
+\item 
+T \mbox{\hyperlink{a01445_a1330de9010bc5c0129fafe90d94375c4}{v\+\_\+}}
+\item 
+unsigned int \mbox{\hyperlink{a01445_a382f51475802db6e426e7ca1dcd49f19}{prim\+\_\+id\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename T = float, class H = Triangle\+Intersection$<$\+T$>$$>$\newline
+class nanort\+::\+Triangle\+Intersector$<$ T, H $>$}
+
+
+
+Definition at line 983 of file nanort.\+h.
+
+
+
+\doxysubsection{Class Documentation}
+\index{nanort::TriangleIntersector::RayCoeff@{nanort::TriangleIntersector::RayCoeff}}\label{a01449}
+\Hypertarget{a01445_a01449}
+\doxysubsubsection{struct nanort\+::Triangle\+Intersector\+::Ray\+Coeff}
+\subsubsection*{template$<$typename T = float, class H = Triangle\+Intersection$<$\+T$>$$>$\newline
+struct nanort\+::\+Triangle\+Intersector$<$ T, H $>$\+::\+Ray\+Coeff}
+
+
+
+Definition at line 995 of file nanort.\+h.
+
+
+
+Collaboration diagram for nanort\+::Triangle\+Intersector$<$ T, H $>$\+::Ray\+Coeff\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=225pt]{a01447}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a01445_a9e85b4e367c2390c4654ec819a75741d}\label{a01445_a9e85b4e367c2390c4654ec819a75741d}} 
+int&
+kx&
+\\
+\hline
+
+\mbox{\Hypertarget{a01445_acecad1b0d9d78eb0c2e41813c5b1427c}\label{a01445_acecad1b0d9d78eb0c2e41813c5b1427c}} 
+int&
+ky&
+\\
+\hline
+
+\mbox{\Hypertarget{a01445_a7b93948ffe60a4f465b487b8e505707e}\label{a01445_a7b93948ffe60a4f465b487b8e505707e}} 
+int&
+kz&
+\\
+\hline
+
+\mbox{\Hypertarget{a01445_a2cac34b6bd01583a2ff88af0eb6f1c86}\label{a01445_a2cac34b6bd01583a2ff88af0eb6f1c86}} 
+T&
+Sx&
+\\
+\hline
+
+\mbox{\Hypertarget{a01445_aa79bacc86198f6bca3cd7aafbee465d5}\label{a01445_aa79bacc86198f6bca3cd7aafbee465d5}} 
+T&
+Sy&
+\\
+\hline
+
+\mbox{\Hypertarget{a01445_aec0f701c604c6521b99d57b5ff3b0c39}\label{a01445_aec0f701c604c6521b99d57b5ff3b0c39}} 
+T&
+Sz&
+\\
+\hline
+
+\end{DoxyFields}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{a01445_a2181f19ddf2184cc93d1dc31103b9949}\label{a01445_a2181f19ddf2184cc93d1dc31103b9949}} 
+\index{nanort::TriangleIntersector$<$ T, H $>$@{nanort::TriangleIntersector$<$ T, H $>$}!TriangleIntersector@{TriangleIntersector}}
+\index{TriangleIntersector@{TriangleIntersector}!nanort::TriangleIntersector$<$ T, H $>$@{nanort::TriangleIntersector$<$ T, H $>$}}
+\doxysubsubsection{\texorpdfstring{TriangleIntersector()}{TriangleIntersector()}}
+{\footnotesize\ttfamily template$<$typename T  = float, class H  = Triangle\+Intersection$<$\+T$>$$>$ \\
+\mbox{\hyperlink{a01445}{nanort\+::\+Triangle\+Intersector}}$<$ T, H $>$\+::\mbox{\hyperlink{a01445}{Triangle\+Intersector}} (\begin{DoxyParamCaption}\item[{const T $\ast$}]{vertices,  }\item[{const unsigned int $\ast$}]{faces,  }\item[{const size\+\_\+t}]{vertex\+\_\+stride\+\_\+bytes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 985 of file nanort.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a01445_a5eda5bed00b03898ad719cde8653d3ea}\label{a01445_a5eda5bed00b03898ad719cde8653d3ea}} 
+\index{nanort::TriangleIntersector$<$ T, H $>$@{nanort::TriangleIntersector$<$ T, H $>$}!GetT@{GetT}}
+\index{GetT@{GetT}!nanort::TriangleIntersector$<$ T, H $>$@{nanort::TriangleIntersector$<$ T, H $>$}}
+\doxysubsubsection{\texorpdfstring{GetT()}{GetT()}}
+{\footnotesize\ttfamily template$<$typename T  = float, class H  = Triangle\+Intersection$<$\+T$>$$>$ \\
+T \mbox{\hyperlink{a01445}{nanort\+::\+Triangle\+Intersector}}$<$ T, H $>$\+::GetT (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the nearest hit distance. 
+
+
+
+Definition at line 1106 of file nanort.\+h.
+
+\mbox{\Hypertarget{a01445_ac392e9a3133446809b902a178ea9092b}\label{a01445_ac392e9a3133446809b902a178ea9092b}} 
+\index{nanort::TriangleIntersector$<$ T, H $>$@{nanort::TriangleIntersector$<$ T, H $>$}!Intersect@{Intersect}}
+\index{Intersect@{Intersect}!nanort::TriangleIntersector$<$ T, H $>$@{nanort::TriangleIntersector$<$ T, H $>$}}
+\doxysubsubsection{\texorpdfstring{Intersect()}{Intersect()}}
+{\footnotesize\ttfamily template$<$typename T  = float, class H  = Triangle\+Intersection$<$\+T$>$$>$ \\
+bool \mbox{\hyperlink{a01445}{nanort\+::\+Triangle\+Intersector}}$<$ T, H $>$\+::Intersect (\begin{DoxyParamCaption}\item[{T $\ast$}]{t\+\_\+inout,  }\item[{const unsigned int}]{prim\+\_\+index }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Do ray intersection stuff for {\ttfamily prim\+\_\+index} th primitive and return hit distance {\ttfamily t}, barycentric coordinate {\ttfamily u} and {\ttfamily v}. Returns true if there\textquotesingle{}s intersection. 
+
+
+
+Definition at line 1007 of file nanort.\+h.
+
+\mbox{\Hypertarget{a01445_a543bcb67cbb100f2cb49a0b224d75dfe}\label{a01445_a543bcb67cbb100f2cb49a0b224d75dfe}} 
+\index{nanort::TriangleIntersector$<$ T, H $>$@{nanort::TriangleIntersector$<$ T, H $>$}!PostTraversal@{PostTraversal}}
+\index{PostTraversal@{PostTraversal}!nanort::TriangleIntersector$<$ T, H $>$@{nanort::TriangleIntersector$<$ T, H $>$}}
+\doxysubsubsection{\texorpdfstring{PostTraversal()}{PostTraversal()}}
+{\footnotesize\ttfamily template$<$typename T  = float, class H  = Triangle\+Intersection$<$\+T$>$$>$ \\
+void \mbox{\hyperlink{a01445}{nanort\+::\+Triangle\+Intersector}}$<$ T, H $>$\+::Post\+Traversal (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01393}{Ray}}$<$ T $>$ \&}]{ray,  }\item[{bool}]{hit,  }\item[{H $\ast$}]{isect }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Post B\+VH traversal stuff. Fill {\ttfamily isect} if there is a hit. 
+
+
+
+Definition at line 1158 of file nanort.\+h.
+
+\mbox{\Hypertarget{a01445_a10ab05ab1f92e4c1cda2da4f6de5fc59}\label{a01445_a10ab05ab1f92e4c1cda2da4f6de5fc59}} 
+\index{nanort::TriangleIntersector$<$ T, H $>$@{nanort::TriangleIntersector$<$ T, H $>$}!PrepareTraversal@{PrepareTraversal}}
+\index{PrepareTraversal@{PrepareTraversal}!nanort::TriangleIntersector$<$ T, H $>$@{nanort::TriangleIntersector$<$ T, H $>$}}
+\doxysubsubsection{\texorpdfstring{PrepareTraversal()}{PrepareTraversal()}}
+{\footnotesize\ttfamily template$<$typename T  = float, class H  = Triangle\+Intersection$<$\+T$>$$>$ \\
+void \mbox{\hyperlink{a01445}{nanort\+::\+Triangle\+Intersector}}$<$ T, H $>$\+::Prepare\+Traversal (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01393}{Ray}}$<$ T $>$ \&}]{ray,  }\item[{const \mbox{\hyperlink{a01413}{B\+V\+H\+Trace\+Options}} \&}]{trace\+\_\+options }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Prepare B\+VH traversal (e.\+g. compute inverse ray direction) This function is called only once in B\+VH traversal. 
+
+
+
+Definition at line 1116 of file nanort.\+h.
+
+\mbox{\Hypertarget{a01445_a6b108535e10b320d287c853eb2e3142e}\label{a01445_a6b108535e10b320d287c853eb2e3142e}} 
+\index{nanort::TriangleIntersector$<$ T, H $>$@{nanort::TriangleIntersector$<$ T, H $>$}!Update@{Update}}
+\index{Update@{Update}!nanort::TriangleIntersector$<$ T, H $>$@{nanort::TriangleIntersector$<$ T, H $>$}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily template$<$typename T  = float, class H  = Triangle\+Intersection$<$\+T$>$$>$ \\
+void \mbox{\hyperlink{a01445}{nanort\+::\+Triangle\+Intersector}}$<$ T, H $>$\+::Update (\begin{DoxyParamCaption}\item[{T}]{t,  }\item[{unsigned int}]{prim\+\_\+idx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update is called when initializing intersection and nearest hit is found. 
+
+
+
+Definition at line 1109 of file nanort.\+h.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01445_af15783141ac090475a0ab5511f7e37ea}\label{a01445_af15783141ac090475a0ab5511f7e37ea}} 
+\index{nanort::TriangleIntersector$<$ T, H $>$@{nanort::TriangleIntersector$<$ T, H $>$}!faces\_@{faces\_}}
+\index{faces\_@{faces\_}!nanort::TriangleIntersector$<$ T, H $>$@{nanort::TriangleIntersector$<$ T, H $>$}}
+\doxysubsubsection{\texorpdfstring{faces\_}{faces\_}}
+{\footnotesize\ttfamily template$<$typename T  = float, class H  = Triangle\+Intersection$<$\+T$>$$>$ \\
+const unsigned int$\ast$ \mbox{\hyperlink{a01445}{nanort\+::\+Triangle\+Intersector}}$<$ T, H $>$\+::faces\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 1170 of file nanort.\+h.
+
+
+
+Referenced by nanort\+::\+Triangle\+Intersector$<$ double, nanort\+::\+Triangle\+Intersection$<$ double $>$ $>$\+::\+Intersect().
+
+\mbox{\Hypertarget{a01445_a382f51475802db6e426e7ca1dcd49f19}\label{a01445_a382f51475802db6e426e7ca1dcd49f19}} 
+\index{nanort::TriangleIntersector$<$ T, H $>$@{nanort::TriangleIntersector$<$ T, H $>$}!prim\_id\_@{prim\_id\_}}
+\index{prim\_id\_@{prim\_id\_}!nanort::TriangleIntersector$<$ T, H $>$@{nanort::TriangleIntersector$<$ T, H $>$}}
+\doxysubsubsection{\texorpdfstring{prim\_id\_}{prim\_id\_}}
+{\footnotesize\ttfamily template$<$typename T  = float, class H  = Triangle\+Intersection$<$\+T$>$$>$ \\
+unsigned int \mbox{\hyperlink{a01445}{nanort\+::\+Triangle\+Intersector}}$<$ T, H $>$\+::prim\+\_\+id\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+
+
+Definition at line 1181 of file nanort.\+h.
+
+
+
+Referenced by nanort\+::\+Triangle\+Intersector$<$ double, nanort\+::\+Triangle\+Intersection$<$ double $>$ $>$\+::\+Post\+Traversal(), and nanort\+::\+Triangle\+Intersector$<$ double, nanort\+::\+Triangle\+Intersection$<$ double $>$ $>$\+::\+Update().
+
+\mbox{\Hypertarget{a01445_ae57ba6626c926b2a9479dd3d013425b7}\label{a01445_ae57ba6626c926b2a9479dd3d013425b7}} 
+\index{nanort::TriangleIntersector$<$ T, H $>$@{nanort::TriangleIntersector$<$ T, H $>$}!ray\_coeff\_@{ray\_coeff\_}}
+\index{ray\_coeff\_@{ray\_coeff\_}!nanort::TriangleIntersector$<$ T, H $>$@{nanort::TriangleIntersector$<$ T, H $>$}}
+\doxysubsubsection{\texorpdfstring{ray\_coeff\_}{ray\_coeff\_}}
+{\footnotesize\ttfamily template$<$typename T  = float, class H  = Triangle\+Intersection$<$\+T$>$$>$ \\
+\mbox{\hyperlink{a01445_a01449}{Ray\+Coeff}} \mbox{\hyperlink{a01445}{nanort\+::\+Triangle\+Intersector}}$<$ T, H $>$\+::ray\+\_\+coeff\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+
+
+Definition at line 1174 of file nanort.\+h.
+
+
+
+Referenced by nanort\+::\+Triangle\+Intersector$<$ double, nanort\+::\+Triangle\+Intersection$<$ double $>$ $>$\+::\+Intersect(), and nanort\+::\+Triangle\+Intersector$<$ double, nanort\+::\+Triangle\+Intersection$<$ double $>$ $>$\+::\+Prepare\+Traversal().
+
+\mbox{\Hypertarget{a01445_acc4cab87b7ed0b510dc0ddccbf2ab949}\label{a01445_acc4cab87b7ed0b510dc0ddccbf2ab949}} 
+\index{nanort::TriangleIntersector$<$ T, H $>$@{nanort::TriangleIntersector$<$ T, H $>$}!ray\_org\_@{ray\_org\_}}
+\index{ray\_org\_@{ray\_org\_}!nanort::TriangleIntersector$<$ T, H $>$@{nanort::TriangleIntersector$<$ T, H $>$}}
+\doxysubsubsection{\texorpdfstring{ray\_org\_}{ray\_org\_}}
+{\footnotesize\ttfamily template$<$typename T  = float, class H  = Triangle\+Intersection$<$\+T$>$$>$ \\
+\mbox{\hyperlink{a01389}{real3}}$<$T$>$ \mbox{\hyperlink{a01445}{nanort\+::\+Triangle\+Intersector}}$<$ T, H $>$\+::ray\+\_\+org\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+
+
+Definition at line 1173 of file nanort.\+h.
+
+
+
+Referenced by nanort\+::\+Triangle\+Intersector$<$ double, nanort\+::\+Triangle\+Intersection$<$ double $>$ $>$\+::\+Intersect(), and nanort\+::\+Triangle\+Intersector$<$ double, nanort\+::\+Triangle\+Intersection$<$ double $>$ $>$\+::\+Prepare\+Traversal().
+
+\mbox{\Hypertarget{a01445_a50523ac73f73b22be639163ef9dacc80}\label{a01445_a50523ac73f73b22be639163ef9dacc80}} 
+\index{nanort::TriangleIntersector$<$ T, H $>$@{nanort::TriangleIntersector$<$ T, H $>$}!t\_@{t\_}}
+\index{t\_@{t\_}!nanort::TriangleIntersector$<$ T, H $>$@{nanort::TriangleIntersector$<$ T, H $>$}}
+\doxysubsubsection{\texorpdfstring{t\_}{t\_}}
+{\footnotesize\ttfamily template$<$typename T  = float, class H  = Triangle\+Intersection$<$\+T$>$$>$ \\
+T \mbox{\hyperlink{a01445}{nanort\+::\+Triangle\+Intersector}}$<$ T, H $>$\+::t\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+
+
+Definition at line 1178 of file nanort.\+h.
+
+
+
+Referenced by nanort\+::\+Triangle\+Intersector$<$ double, nanort\+::\+Triangle\+Intersection$<$ double $>$ $>$\+::\+Get\+T(), nanort\+::\+Triangle\+Intersector$<$ double, nanort\+::\+Triangle\+Intersection$<$ double $>$ $>$\+::\+Post\+Traversal(), and nanort\+::\+Triangle\+Intersector$<$ double, nanort\+::\+Triangle\+Intersection$<$ double $>$ $>$\+::\+Update().
+
+\mbox{\Hypertarget{a01445_adf2c8cac44aea278d3bb840b65cf72ad}\label{a01445_adf2c8cac44aea278d3bb840b65cf72ad}} 
+\index{nanort::TriangleIntersector$<$ T, H $>$@{nanort::TriangleIntersector$<$ T, H $>$}!t\_min\_@{t\_min\_}}
+\index{t\_min\_@{t\_min\_}!nanort::TriangleIntersector$<$ T, H $>$@{nanort::TriangleIntersector$<$ T, H $>$}}
+\doxysubsubsection{\texorpdfstring{t\_min\_}{t\_min\_}}
+{\footnotesize\ttfamily template$<$typename T  = float, class H  = Triangle\+Intersection$<$\+T$>$$>$ \\
+T \mbox{\hyperlink{a01445}{nanort\+::\+Triangle\+Intersector}}$<$ T, H $>$\+::t\+\_\+min\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+
+
+Definition at line 1176 of file nanort.\+h.
+
+
+
+Referenced by nanort\+::\+Triangle\+Intersector$<$ double, nanort\+::\+Triangle\+Intersection$<$ double $>$ $>$\+::\+Intersect(), and nanort\+::\+Triangle\+Intersector$<$ double, nanort\+::\+Triangle\+Intersection$<$ double $>$ $>$\+::\+Prepare\+Traversal().
+
+\mbox{\Hypertarget{a01445_a6d0ea73ee3e801f2d4d14807f2d35008}\label{a01445_a6d0ea73ee3e801f2d4d14807f2d35008}} 
+\index{nanort::TriangleIntersector$<$ T, H $>$@{nanort::TriangleIntersector$<$ T, H $>$}!trace\_options\_@{trace\_options\_}}
+\index{trace\_options\_@{trace\_options\_}!nanort::TriangleIntersector$<$ T, H $>$@{nanort::TriangleIntersector$<$ T, H $>$}}
+\doxysubsubsection{\texorpdfstring{trace\_options\_}{trace\_options\_}}
+{\footnotesize\ttfamily template$<$typename T  = float, class H  = Triangle\+Intersection$<$\+T$>$$>$ \\
+\mbox{\hyperlink{a01413}{B\+V\+H\+Trace\+Options}} \mbox{\hyperlink{a01445}{nanort\+::\+Triangle\+Intersector}}$<$ T, H $>$\+::trace\+\_\+options\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+
+
+Definition at line 1175 of file nanort.\+h.
+
+
+
+Referenced by nanort\+::\+Triangle\+Intersector$<$ double, nanort\+::\+Triangle\+Intersection$<$ double $>$ $>$\+::\+Intersect(), and nanort\+::\+Triangle\+Intersector$<$ double, nanort\+::\+Triangle\+Intersection$<$ double $>$ $>$\+::\+Prepare\+Traversal().
+
+\mbox{\Hypertarget{a01445_acad6ff219fd226b6fdf8735cfa35cbbb}\label{a01445_acad6ff219fd226b6fdf8735cfa35cbbb}} 
+\index{nanort::TriangleIntersector$<$ T, H $>$@{nanort::TriangleIntersector$<$ T, H $>$}!u\_@{u\_}}
+\index{u\_@{u\_}!nanort::TriangleIntersector$<$ T, H $>$@{nanort::TriangleIntersector$<$ T, H $>$}}
+\doxysubsubsection{\texorpdfstring{u\_}{u\_}}
+{\footnotesize\ttfamily template$<$typename T  = float, class H  = Triangle\+Intersection$<$\+T$>$$>$ \\
+T \mbox{\hyperlink{a01445}{nanort\+::\+Triangle\+Intersector}}$<$ T, H $>$\+::u\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+
+
+Definition at line 1179 of file nanort.\+h.
+
+
+
+Referenced by nanort\+::\+Triangle\+Intersector$<$ double, nanort\+::\+Triangle\+Intersection$<$ double $>$ $>$\+::\+Intersect(), nanort\+::\+Triangle\+Intersector$<$ double, nanort\+::\+Triangle\+Intersection$<$ double $>$ $>$\+::\+Post\+Traversal(), and nanort\+::\+Triangle\+Intersector$<$ double, nanort\+::\+Triangle\+Intersection$<$ double $>$ $>$\+::\+Prepare\+Traversal().
+
+\mbox{\Hypertarget{a01445_a1330de9010bc5c0129fafe90d94375c4}\label{a01445_a1330de9010bc5c0129fafe90d94375c4}} 
+\index{nanort::TriangleIntersector$<$ T, H $>$@{nanort::TriangleIntersector$<$ T, H $>$}!v\_@{v\_}}
+\index{v\_@{v\_}!nanort::TriangleIntersector$<$ T, H $>$@{nanort::TriangleIntersector$<$ T, H $>$}}
+\doxysubsubsection{\texorpdfstring{v\_}{v\_}}
+{\footnotesize\ttfamily template$<$typename T  = float, class H  = Triangle\+Intersection$<$\+T$>$$>$ \\
+T \mbox{\hyperlink{a01445}{nanort\+::\+Triangle\+Intersector}}$<$ T, H $>$\+::v\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+
+
+Definition at line 1180 of file nanort.\+h.
+
+
+
+Referenced by nanort\+::\+Triangle\+Intersector$<$ double, nanort\+::\+Triangle\+Intersection$<$ double $>$ $>$\+::\+Intersect(), nanort\+::\+Triangle\+Intersector$<$ double, nanort\+::\+Triangle\+Intersection$<$ double $>$ $>$\+::\+Post\+Traversal(), and nanort\+::\+Triangle\+Intersector$<$ double, nanort\+::\+Triangle\+Intersection$<$ double $>$ $>$\+::\+Prepare\+Traversal().
+
+\mbox{\Hypertarget{a01445_a1782017f63d67ebf1e63bc56b7f4d13b}\label{a01445_a1782017f63d67ebf1e63bc56b7f4d13b}} 
+\index{nanort::TriangleIntersector$<$ T, H $>$@{nanort::TriangleIntersector$<$ T, H $>$}!vertex\_stride\_bytes\_@{vertex\_stride\_bytes\_}}
+\index{vertex\_stride\_bytes\_@{vertex\_stride\_bytes\_}!nanort::TriangleIntersector$<$ T, H $>$@{nanort::TriangleIntersector$<$ T, H $>$}}
+\doxysubsubsection{\texorpdfstring{vertex\_stride\_bytes\_}{vertex\_stride\_bytes\_}}
+{\footnotesize\ttfamily template$<$typename T  = float, class H  = Triangle\+Intersection$<$\+T$>$$>$ \\
+const size\+\_\+t \mbox{\hyperlink{a01445}{nanort\+::\+Triangle\+Intersector}}$<$ T, H $>$\+::vertex\+\_\+stride\+\_\+bytes\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 1171 of file nanort.\+h.
+
+
+
+Referenced by nanort\+::\+Triangle\+Intersector$<$ double, nanort\+::\+Triangle\+Intersection$<$ double $>$ $>$\+::\+Intersect().
+
+\mbox{\Hypertarget{a01445_a2cb6f374b8f26629e3c01bc1d5b49281}\label{a01445_a2cb6f374b8f26629e3c01bc1d5b49281}} 
+\index{nanort::TriangleIntersector$<$ T, H $>$@{nanort::TriangleIntersector$<$ T, H $>$}!vertices\_@{vertices\_}}
+\index{vertices\_@{vertices\_}!nanort::TriangleIntersector$<$ T, H $>$@{nanort::TriangleIntersector$<$ T, H $>$}}
+\doxysubsubsection{\texorpdfstring{vertices\_}{vertices\_}}
+{\footnotesize\ttfamily template$<$typename T  = float, class H  = Triangle\+Intersection$<$\+T$>$$>$ \\
+const T$\ast$ \mbox{\hyperlink{a01445}{nanort\+::\+Triangle\+Intersector}}$<$ T, H $>$\+::vertices\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 1169 of file nanort.\+h.
+
+
+
+Referenced by nanort\+::\+Triangle\+Intersector$<$ double, nanort\+::\+Triangle\+Intersection$<$ double $>$ $>$\+::\+Intersect().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/raytracer/src/\mbox{\hyperlink{a00161}{nanort.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,239 @@
+\hypertarget{a00125}{}\doxysection{Cpp/objloader/src/objloader.h File Reference}
+\label{a00125}\index{Cpp/objloader/src/objloader.h@{Cpp/objloader/src/objloader.h}}
+
+
+Contains definitions for the \mbox{\hyperlink{a00403}{Geometry}} namespace.  
+
+
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include \char`\"{}meshinfo.\+h\char`\"{}}\newline
+Include dependency graph for objloader.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=296pt]{a00126}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00127}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{a00403_a01301}{H\+F\+::\+Geometry\+::tinyobj\+\_\+attr$<$ T $>$}}
+\item 
+struct \mbox{\hyperlink{a00403_a01305}{H\+F\+::\+Geometry\+::tinyobj\+\_\+shape$<$ T $>$}}
+\item 
+struct \mbox{\hyperlink{a00403_a01309}{H\+F\+::\+Geometry\+::tinyobj\+\_\+material}}
+\item 
+struct \mbox{\hyperlink{a00403_a01313}{H\+F\+::\+Geometry\+::tinyobj\+\_\+geometry$<$ T $>$}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{a00405}{Eigen}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{a00405}{Eigen}} a C++ template library for linear algebra\+: matrices, vectors, numerical solvers, and related algorithms. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00396}{HF}}
+\begin{DoxyCompactList}\small\item\em Perform human scale analysis on 3D environments. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00404}{H\+F\+::nano\+Geom}}
+\item 
+ \mbox{\hyperlink{a00403}{H\+F\+::\+Geometry}}
+\begin{DoxyCompactList}\small\item\em Manipulate and load geometry from disk. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{a00125_a4104f7562d27efe7c2f57dc557d2ce16}{O\+B\+J\+L\+O\+A\+D\+E\+R\+\_\+H}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{a00403_aa9f0bc5275641fe23f6a7d760751bbc5}{H\+F\+::\+Geometry\+::\+G\+R\+O\+U\+P\+\_\+\+M\+E\+T\+H\+OD}} \{ \mbox{\hyperlink{a00403_aa9f0bc5275641fe23f6a7d760751bbc5a1f09cac4eec7512c5db99bd1c050ee1e}{H\+F\+::\+Geometry\+::\+O\+N\+L\+Y\+\_\+\+F\+I\+LE}} = 0, 
+\mbox{\hyperlink{a00403_aa9f0bc5275641fe23f6a7d760751bbc5afeacc3d8dc97902c6bf9332bdcda9912}{H\+F\+::\+Geometry\+::\+B\+Y\+\_\+\+G\+R\+O\+UP}} = 1, 
+\mbox{\hyperlink{a00403_aa9f0bc5275641fe23f6a7d760751bbc5ac47c481b667efc6c2689d46cd456237c}{H\+F\+::\+Geometry\+::\+B\+Y\+\_\+\+M\+A\+T\+E\+R\+I\+AL}} = 2, 
+\mbox{\hyperlink{a00403_aa9f0bc5275641fe23f6a7d760751bbc5a42c850fb543d857db34aea03c8671f2b}{H\+F\+::\+Geometry\+::\+M\+A\+T\+E\+R\+I\+A\+L\+\_\+\+A\+N\+D\+\_\+\+F\+I\+LE}} = 3
+ \}
+\begin{DoxyCompactList}\small\item\em Method of grouping submeshes in O\+BJ files. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{a00404_ad8e91aefa202de3abee6fd9914299e46}{H\+F\+::nano\+Geom\+::\+Load\+Obj}} (Mesh \&mesh, const char $\ast$filename)
+\item 
+tinyobj\+\_\+geometry$<$ \mbox{\hyperlink{a00001_a02273}{double}} $>$ \mbox{\hyperlink{a00403_a9bbdc23c626ed431d5a084722c22f99f}{H\+F\+::\+Geometry\+::\+Load\+Meshes\+From\+Tiny\+O\+BJ}} (std\+::string path)
+\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{a01297}{H\+F\+::\+Geometry\+::\+Mesh\+Info}}$<$ T $>$ \mbox{\hyperlink{a00403_a51cf9488cdaa75b15589174ead856d7a}{H\+F\+::\+Geometry\+::\+Load\+T\+M\+P\+Mesh\+Objects}} (const std\+::string \&path)
+\item 
+vector$<$ \mbox{\hyperlink{a02910_acea841c68a73d07ad9d772ec2e94a683}{Mesh\+Info}}$<$ float $>$ $>$ \mbox{\hyperlink{a00403_a06c0c11adb62f8b204e42f75ac1990ac}{H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects}} (std\+::string path, G\+R\+O\+U\+P\+\_\+\+M\+E\+T\+H\+OD gm=O\+N\+L\+Y\+\_\+\+F\+I\+LE, bool change\+\_\+coords=false, int scale=1)
+\begin{DoxyCompactList}\small\item\em Create \mbox{\hyperlink{a01297}{Mesh\+Info}} instances from the O\+BJ at path. \end{DoxyCompactList}\item 
+vector$<$ \mbox{\hyperlink{a02910_acea841c68a73d07ad9d772ec2e94a683}{Mesh\+Info}}$<$ float $>$ $>$ \mbox{\hyperlink{a00403_a5e3b85fb47ef06f7693802f3fe90e996}{H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects}} (std\+::vector$<$ std\+::string $>$ \&path, G\+R\+O\+U\+P\+\_\+\+M\+E\+T\+H\+OD gm=O\+N\+L\+Y\+\_\+\+F\+I\+LE, bool change\+\_\+coords=false, int scale=1)
+\begin{DoxyCompactList}\small\item\em Create \mbox{\hyperlink{a01297}{Mesh\+Info}} instances from the O\+BJ files in path. \end{DoxyCompactList}\item 
+vector$<$ array$<$ float, 3 $>$ $>$ \mbox{\hyperlink{a00403_aec1df746155d224838048d3a43c2fe96}{H\+F\+::\+Geometry\+::\+Load\+Raw\+Vertices}} (std\+::string path)
+\begin{DoxyCompactList}\small\item\em Load a list of vertices directly from an O\+BJ file. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{a00403_adec2459f5c4ee10fd9d2154114d751de}{H\+F\+::\+Geometry\+::\+Get\+Test\+O\+B\+J\+Path}} (std\+::string key)
+\begin{DoxyCompactList}\small\item\em Get the path to the O\+BJ with the given key. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Contains definitions for the \mbox{\hyperlink{a00403}{Geometry}} namespace. 
+
+\begin{DoxyAuthor}{Author}
+T\+BA 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+16 Jun 2020 
+\end{DoxyDate}
+
+
+\doxysubsection{Class Documentation}
+\index{HF::Geometry::tinyobj\_attr@{HF::Geometry::tinyobj\_attr}}\label{a01301}
+\Hypertarget{a00403_a01301}
+\doxysubsubsection{struct HF\+::Geometry\+::tinyobj\+\_\+attr}
+\subsubsection*{template$<$typename T$>$\newline
+struct H\+F\+::\+Geometry\+::tinyobj\+\_\+attr$<$ T $>$}
+
+
+
+Definition at line 72 of file objloader.\+h.
+
+
+
+Collaboration diagram for HF\+::Geometry\+::tinyobj\+\_\+attr$<$ T $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=203pt]{a01299}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00403_a9de3755934a7e392e9b392e23a541d8e}\label{a00403_a9de3755934a7e392e9b392e23a541d8e}} 
+vector$<$ T $>$&
+vertices&
+\\
+\hline
+
+\end{DoxyFields}
+\index{HF::Geometry::tinyobj\_shape@{HF::Geometry::tinyobj\_shape}}\label{a01305}
+\Hypertarget{a00403_a01305}
+\doxysubsubsection{struct HF\+::Geometry\+::tinyobj\+\_\+shape}
+\subsubsection*{template$<$typename T$>$\newline
+struct H\+F\+::\+Geometry\+::tinyobj\+\_\+shape$<$ T $>$}
+
+
+
+Definition at line 78 of file objloader.\+h.
+
+
+
+Collaboration diagram for HF\+::Geometry\+::tinyobj\+\_\+shape$<$ T $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=287pt]{a01303}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00403_ac9a66a69cf7f1688351a54806afe25ce}\label{a00403_ac9a66a69cf7f1688351a54806afe25ce}} 
+vector$<$ int $>$&
+indices&
+\\
+\hline
+
+\mbox{\Hypertarget{a00403_a1326b7839d7fe477f6bc7d0d699eadfb}\label{a00403_a1326b7839d7fe477f6bc7d0d699eadfb}} 
+vector$<$ int $>$&
+mat\_ids&
+\\
+\hline
+
+\mbox{\Hypertarget{a00403_a05d64e665db54cf98c8b159326c636f9}\label{a00403_a05d64e665db54cf98c8b159326c636f9}} 
+string&
+name&
+\\
+\hline
+
+\end{DoxyFields}
+\index{HF::Geometry::tinyobj\_material@{HF::Geometry::tinyobj\_material}}\label{a01309}
+\Hypertarget{a00403_a01309}
+\doxysubsubsection{struct HF\+::Geometry\+::tinyobj\+\_\+material}
+
+
+Definition at line 84 of file objloader.\+h.
+
+
+
+Collaboration diagram for HF\+::Geometry\+::tinyobj\+\_\+material\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=203pt]{a01307}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00403_ae4cf96eab579f41afb748b1714b21ecb}\label{a00403_ae4cf96eab579f41afb748b1714b21ecb}} 
+string&
+name&
+\\
+\hline
+
+\end{DoxyFields}
+\index{HF::Geometry::tinyobj\_geometry@{HF::Geometry::tinyobj\_geometry}}\label{a01313}
+\Hypertarget{a00403_a01313}
+\doxysubsubsection{struct HF\+::Geometry\+::tinyobj\+\_\+geometry}
+\subsubsection*{template$<$typename T$>$\newline
+struct H\+F\+::\+Geometry\+::tinyobj\+\_\+geometry$<$ T $>$}
+
+
+
+Definition at line 89 of file objloader.\+h.
+
+
+
+Collaboration diagram for HF\+::Geometry\+::tinyobj\+\_\+geometry$<$ T $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01311}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00403_a54c1f870295e1d35ec13f5aab4d4c3b9}\label{a00403_a54c1f870295e1d35ec13f5aab4d4c3b9}} 
+\mbox{\hyperlink{a00403_a01301}{tinyobj\_attr}}$<$ T $>$&
+attributes&
+\\
+\hline
+
+\mbox{\Hypertarget{a00403_a4a3ee4a16a711ab365e1f073633fda57}\label{a00403_a4a3ee4a16a711ab365e1f073633fda57}} 
+vector$<$ \mbox{\hyperlink{a00403_a01309}{tinyobj\_material}} $>$&
+materials&
+\\
+\hline
+
+\mbox{\Hypertarget{a00403_a93f2dc0a104bbd96931921e366b7ddb2}\label{a00403_a93f2dc0a104bbd96931921e366b7ddb2}} 
+vector$<$ \mbox{\hyperlink{a00403_a01305}{tinyobj\_shape}}$<$ T $>$ $>$&
+shapes&
+\\
+\hline
+
+\end{DoxyFields}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{a00125_a4104f7562d27efe7c2f57dc557d2ce16}\label{a00125_a4104f7562d27efe7c2f57dc557d2ce16}} 
+\index{objloader.h@{objloader.h}!OBJLOADER\_H@{OBJLOADER\_H}}
+\index{OBJLOADER\_H@{OBJLOADER\_H}!objloader.h@{objloader.h}}
+\doxysubsubsection{\texorpdfstring{OBJLOADER\_H}{OBJLOADER\_H}}
+{\footnotesize\ttfamily \#define O\+B\+J\+L\+O\+A\+D\+E\+R\+\_\+H}
+
+
+
+Definition at line 10 of file objloader.\+h.
+

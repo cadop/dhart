@@ -1,0 +1,566 @@
+\hypertarget{a01257}{}\doxysection{HF\+::Graph\+Generator\+::Graph\+Generator Class Reference}
+\label{a01257}\index{HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}}
+
+
+Generate a graph of accessible space from a given start point.  
+
+
+
+
+{\ttfamily \#include $<$graph\+\_\+generator.\+h$>$}
+
+
+
+Collaboration diagram for HF\+::Graph\+Generator\+::Graph\+Generator\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01255}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01257_afd9c31d0470d6e401949b91669029341}{Graph\+Generator}} (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&\mbox{\hyperlink{a01257_a5801e0e8dbaaa13ccab14ff0cae69de0}{ray\+\_\+tracer}}, const std\+::vector$<$ int $>$ \&obstacle\+\_\+ids=std\+::vector$<$ int $>$(0), const std\+::vector$<$ int $>$ \&walkable\+\_\+ids=std\+::vector$<$ int $>$(0))
+\begin{DoxyCompactList}\small\item\em Construct a new graph generator with a specific raytracer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01257_a6f5497f50588ed5937fc8c496657b71b}{Graph\+Generator}} (\mbox{\hyperlink{a01465}{H\+F\+::\+Ray\+Tracer\+::\+Nano\+R\+T\+Ray\+Tracer}} \&\mbox{\hyperlink{a01257_a5801e0e8dbaaa13ccab14ff0cae69de0}{ray\+\_\+tracer}}, const std\+::vector$<$ int $>$ \&obstacle\+\_\+ids=std\+::vector$<$ int $>$(0), const std\+::vector$<$ int $>$ \&walkable\+\_\+ids=std\+::vector$<$ int $>$(0))
+\begin{DoxyCompactList}\small\item\em Construct a new graph generator with a specific raytracer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01257_a804c4c9a8169aa9901cb32ee0f64c555}{Graph\+Generator}} (\mbox{\hyperlink{a01365}{H\+F\+::\+Ray\+Tracer\+::\+Multi\+RT}} \&\mbox{\hyperlink{a01257_a5801e0e8dbaaa13ccab14ff0cae69de0}{ray\+\_\+tracer}}, const std\+::vector$<$ int $>$ \&obstacle\+\_\+ids=std\+::vector$<$ int $>$(0), const std\+::vector$<$ int $>$ \&walkable\+\_\+ids=std\+::vector$<$ int $>$(0))
+\begin{DoxyCompactList}\small\item\em Construct a new graph generator with a specific raytracer. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename node\+\_\+type , typename node2\+\_\+type , typename up\+\_\+step\+\_\+type , typename up\+\_\+slope\+\_\+type , typename down\+\_\+step\+\_\+type , typename down\+\_\+slope\+\_\+type , typename z\+\_\+precision\+\_\+type  = real\+\_\+t, typename connect\+\_\+offset\+\_\+type  = real\+\_\+t, typename spacing\+\_\+precision\+\_\+type  = real\+\_\+t$>$ }\\\mbox{\hyperlink{a01497}{Spatial\+Structures\+::\+Graph}} \mbox{\hyperlink{a01257_ab82cd6b330063776a89a3c65f76d4c0a}{Build\+Network}} (const node\+\_\+type \&start\+\_\+point, const node2\+\_\+type \&Spacing, int Max\+Nodes, up\+\_\+step\+\_\+type Up\+Step, up\+\_\+slope\+\_\+type Up\+Slope, down\+\_\+step\+\_\+type Down\+Step, down\+\_\+slope\+\_\+type Down\+Slope, int max\+\_\+step\+\_\+connections, int cores=-\/1, z\+\_\+precision\+\_\+type node\+\_\+z\+\_\+precision=\mbox{\hyperlink{a00397_ad1ee2b33ac4982f6f4c4263946bf9e6b}{default\+\_\+z\+\_\+precision}}, connect\+\_\+offset\+\_\+type node\+\_\+spacing\+\_\+precision=\mbox{\hyperlink{a00397_a361fb70f3e88bb239a59900c9e21b5ac}{default\+\_\+spacing\+\_\+precision}}, spacing\+\_\+precision\+\_\+type ground\+\_\+offset=\mbox{\hyperlink{a00397_ad1cd92591557c21198238c7d06ef2252}{default\+\_\+ground\+\_\+offset}})
+\begin{DoxyCompactList}\small\item\em Generate a graph of accessible space. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01497}{Spatial\+Structures\+::\+Graph}} \mbox{\hyperlink{a01257_a2616d5577f2b87dae8bdb9caab75e52f}{I\+M\+P\+L\+\_\+\+Build\+Network}} (const \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \&start\+\_\+point, const \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \&Spacing, int Max\+Nodes, \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\+\_\+t}} Up\+Step, \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\+\_\+t}} Up\+Slope, \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\+\_\+t}} Down\+Step, \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\+\_\+t}} Down\+Slope, int max\+\_\+step\+\_\+connections, int cores=-\/1, \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\+\_\+t}} node\+\_\+z\+\_\+precision=\mbox{\hyperlink{a00397_ad1ee2b33ac4982f6f4c4263946bf9e6b}{default\+\_\+z\+\_\+precision}}, \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\+\_\+t}} node\+\_\+spacing\+\_\+precision=\mbox{\hyperlink{a00397_a361fb70f3e88bb239a59900c9e21b5ac}{default\+\_\+spacing\+\_\+precision}}, \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\+\_\+t}} ground\+\_\+offset=\mbox{\hyperlink{a00397_ad1cd92591557c21198238c7d06ef2252}{default\+\_\+ground\+\_\+offset}})
+\begin{DoxyCompactList}\small\item\em Generate a graph of accessible space. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01497}{Spatial\+Structures\+::\+Graph}} \mbox{\hyperlink{a01257_ac7052d4b625fb96f29c5bfc091a86f7e}{Crawl\+Geom}} (\mbox{\hyperlink{a01261}{Unique\+Queue}} \&todo)
+\begin{DoxyCompactList}\small\item\em Perform breadth first search to populate the graph with with nodes and edges. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01497}{Spatial\+Structures\+::\+Graph}} \mbox{\hyperlink{a01257_a843cc6b5b69b5d013930b3685789fa15}{Crawl\+Geom\+Parallel}} (\mbox{\hyperlink{a01261}{Unique\+Queue}} \&todo)
+\begin{DoxyCompactList}\small\item\em Perform breadth first search to populate the graph with nodes and edges using multiple cores. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{a01257_a6afac9c527d8483943ef61e9e9a1ca15}{max\+\_\+nodes}}
+\begin{DoxyCompactList}\small\item\em Maximum number of nodes to generate. If less than zero, generate nodes without a limit. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{a01257_a16da7abe348f7af1d232867f2d719db1}{core\+\_\+count}}
+\begin{DoxyCompactList}\small\item\em Number of cores to use for graph generation. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{a01257_a73847391cae1bc6c5a0ed5416844ab68}{max\+\_\+step\+\_\+connection}}
+\begin{DoxyCompactList}\small\item\em Multiplier for number of children to generate. The higher this is, the more directions there will be. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \mbox{\hyperlink{a01257_a9aba1df499733b653dff3ec59bf3871f}{spacing}}
+\begin{DoxyCompactList}\small\item\em Spacing between nodes. New nodes will be generated with atleast this much distance between them. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00397_a01249}{Graph\+Params}} \mbox{\hyperlink{a01257_a6c85bb69456393934b602a242d8f0bed}{params}}
+\begin{DoxyCompactList}\small\item\em Parameters to run the graph generator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00397_aef833458d20e4569c73f409b52d03bee}{Ray\+Tracer}} \mbox{\hyperlink{a01257_a5801e0e8dbaaa13ccab14ff0cae69de0}{ray\+\_\+tracer}}
+\begin{DoxyCompactList}\small\item\em A pointer to the raytracer to use for ray intersections. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Generate a graph of accessible space from a given start point. 
+
+The Graph Generator maps out \char`\"{}accessible\char`\"{} space on a model from a given starting point. In graphs created by this algorithm, node represents a point in space that a human can occupy, and each edge between nodes indicates that a human can traverse from one node to another node. The Graph Generator is a powerful tool for analyzing space, since the graph or nodes it outputs can be used as input to all the analysis methods offered by Human\+Factors, allowing for it to be the starting point of other analysis methods within Human\+Factors.
+
+\begin{DoxyNote}{Note}
+All arguments are in meters for distances and degrees for angles unless otherwise specified. For all calculations, the Graph Generator assumes geometry is Z-\/\+Up i.\+e. upstep is how high the step is in the z-\/direction, ground checks are performed in the -\/z direction etc. 
+\end{DoxyNote}
+
+
+Definition at line 344 of file graph\+\_\+generator.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{a01257_afd9c31d0470d6e401949b91669029341}\label{a01257_afd9c31d0470d6e401949b91669029341}} 
+\index{HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}!GraphGenerator@{GraphGenerator}}
+\index{GraphGenerator@{GraphGenerator}!HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{GraphGenerator()}{GraphGenerator()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Graph\+Generator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} \&}]{ray\+\_\+tracer,  }\item[{const std\+::vector$<$ int $>$ \&}]{obstacle\+\_\+ids = {\ttfamily std\+:\+:vector$<$int$>$(0)},  }\item[{const std\+::vector$<$ int $>$ \&}]{walkable\+\_\+ids = {\ttfamily std\+:\+:vector$<$int$>$(0)} }\end{DoxyParamCaption})}
+
+
+
+Construct a new graph generator with a specific raytracer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ray\+\_\+tracer} & Raytracer to use for performing ray intersctions \\
+\hline
+{\em walkable\+\_\+id} & I\+Ds of geometry to be considered as obstacles \\
+\hline
+{\em obstacle\+\_\+id} & I\+Ds of geometry to be considered as walkable surfaces\\
+\hline
+\end{DoxyParams}
+Stores a pointer to RT. This could be dangerous in the case that the raytracer is destroyed before the graph generator is called again. It\textquotesingle{}s not likely to occur in our codebase since Graph\+Generators are mostly disposed of before this has a chance to become a problem. 
+
+Definition at line 55 of file graph\+\_\+generator.\+cpp.
+
+\mbox{\Hypertarget{a01257_a6f5497f50588ed5937fc8c496657b71b}\label{a01257_a6f5497f50588ed5937fc8c496657b71b}} 
+\index{HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}!GraphGenerator@{GraphGenerator}}
+\index{GraphGenerator@{GraphGenerator}!HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{GraphGenerator()}{GraphGenerator()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Graph\+Generator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01465}{H\+F\+::\+Ray\+Tracer\+::\+Nano\+R\+T\+Ray\+Tracer}} \&}]{ray\+\_\+tracer,  }\item[{const std\+::vector$<$ int $>$ \&}]{obstacle\+\_\+ids = {\ttfamily std\+:\+:vector$<$int$>$(0)},  }\item[{const std\+::vector$<$ int $>$ \&}]{walkable\+\_\+ids = {\ttfamily std\+:\+:vector$<$int$>$(0)} }\end{DoxyParamCaption})}
+
+
+
+Construct a new graph generator with a specific raytracer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ray\+\_\+tracer} & Raytracer to use for performing ray intersctions \\
+\hline
+{\em walkable\+\_\+id} & I\+Ds of geometry to be considered as obstacles \\
+\hline
+{\em obstacle\+\_\+id} & I\+Ds of geometry to be considered as walkable surfaces\\
+\hline
+\end{DoxyParams}
+Stores a pointer to RT. This could be dangerous in the case that the raytracer is destroyed before the graph generator is called again. It\textquotesingle{}s not likely to occur in our codebase since Graph\+Generators are mostly disposed of before this has a chance to become a problem. 
+
+Definition at line 59 of file graph\+\_\+generator.\+cpp.
+
+\mbox{\Hypertarget{a01257_a804c4c9a8169aa9901cb32ee0f64c555}\label{a01257_a804c4c9a8169aa9901cb32ee0f64c555}} 
+\index{HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}!GraphGenerator@{GraphGenerator}}
+\index{GraphGenerator@{GraphGenerator}!HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{GraphGenerator()}{GraphGenerator()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Graph\+Generator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01365}{H\+F\+::\+Ray\+Tracer\+::\+Multi\+RT}} \&}]{ray\+\_\+tracer,  }\item[{const std\+::vector$<$ int $>$ \&}]{obstacle\+\_\+ids = {\ttfamily std\+:\+:vector$<$int$>$(0)},  }\item[{const std\+::vector$<$ int $>$ \&}]{walkable\+\_\+ids = {\ttfamily std\+:\+:vector$<$int$>$(0)} }\end{DoxyParamCaption})}
+
+
+
+Construct a new graph generator with a specific raytracer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ray\+\_\+tracer} & Raytracer to use for performing ray intersctions \\
+\hline
+{\em walkable\+\_\+id} & I\+Ds of geometry to be considered as obstacles \\
+\hline
+{\em obstacle\+\_\+id} & I\+Ds of geometry to be considered as walkable surfaces\\
+\hline
+\end{DoxyParams}
+Stores a pointer to RT. This could be dangerous in the case that the raytracer is destroyed before the graph generator is called again. It\textquotesingle{}s not likely to occur in our codebase since Graph\+Generators are mostly disposed of before this has a chance to become a problem. 
+
+Definition at line 63 of file graph\+\_\+generator.\+cpp.
+
+
+
+References H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::geom\+\_\+ids, params, ray\+\_\+tracer, and H\+F\+::\+Graph\+Generator\+::\+Geometry\+Flag\+Map\+::\+Set\+Geometry\+Ids().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01257_a804c4c9a8169aa9901cb32ee0f64c555_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a01257_ab82cd6b330063776a89a3c65f76d4c0a}\label{a01257_ab82cd6b330063776a89a3c65f76d4c0a}} 
+\index{HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}!BuildNetwork@{BuildNetwork}}
+\index{BuildNetwork@{BuildNetwork}!HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{BuildNetwork()}{BuildNetwork()}}
+{\footnotesize\ttfamily template$<$typename node\+\_\+type , typename node2\+\_\+type , typename up\+\_\+step\+\_\+type , typename up\+\_\+slope\+\_\+type , typename down\+\_\+step\+\_\+type , typename down\+\_\+slope\+\_\+type , typename z\+\_\+precision\+\_\+type  = real\+\_\+t, typename connect\+\_\+offset\+\_\+type  = real\+\_\+t, typename spacing\+\_\+precision\+\_\+type  = real\+\_\+t$>$ \\
+\mbox{\hyperlink{a01497}{Spatial\+Structures\+::\+Graph}} H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Build\+Network (\begin{DoxyParamCaption}\item[{const node\+\_\+type \&}]{start\+\_\+point,  }\item[{const node2\+\_\+type \&}]{Spacing,  }\item[{int}]{Max\+Nodes,  }\item[{up\+\_\+step\+\_\+type}]{Up\+Step,  }\item[{up\+\_\+slope\+\_\+type}]{Up\+Slope,  }\item[{down\+\_\+step\+\_\+type}]{Down\+Step,  }\item[{down\+\_\+slope\+\_\+type}]{Down\+Slope,  }\item[{int}]{max\+\_\+step\+\_\+connections,  }\item[{int}]{cores = {\ttfamily -\/1},  }\item[{z\+\_\+precision\+\_\+type}]{node\+\_\+z\+\_\+precision = {\ttfamily \mbox{\hyperlink{a00397_ad1ee2b33ac4982f6f4c4263946bf9e6b}{default\+\_\+z\+\_\+precision}}},  }\item[{connect\+\_\+offset\+\_\+type}]{node\+\_\+spacing\+\_\+precision = {\ttfamily \mbox{\hyperlink{a00397_a361fb70f3e88bb239a59900c9e21b5ac}{default\+\_\+spacing\+\_\+precision}}},  }\item[{spacing\+\_\+precision\+\_\+type}]{ground\+\_\+offset = {\ttfamily \mbox{\hyperlink{a00397_ad1cd92591557c21198238c7d06ef2252}{default\+\_\+ground\+\_\+offset}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Generate a graph of accessible space. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start\+\_\+point} & The starting point for the graph generator. If this isn\textquotesingle{}t above solid ground, no nodes will be generated. \\
+\hline
+{\em Spacing} & Space between nodes. Lower values will yield more nodes for a higher resolution graph. \\
+\hline
+{\em Max\+Nodes} & The maximum amount of nodes to generate. \\
+\hline
+{\em Up\+Step} & Maximum height of a step the graph can traverse. Any steps higher this will be considered inaccessible. \\
+\hline
+{\em Up\+Slope} & Maximum upward slope the graph can traverse in degrees. Any slopes steeper than this will be considered inaccessible. \\
+\hline
+{\em Down\+Step} & Maximum step down the graph can traverse. Any steps steeper than this will be considered inaccessible.\\
+\hline
+{\em Down\+Slope} & The maximum downward slope the graph can traverse. Any slopes steeper than this will be considered inaccessible.\\
+\hline
+{\em max\+\_\+step\+\_\+connections} & Multiplier for number of children to generate for each node. Increasing this value will increase the number of edges in the graph, and as a result the amount of memory the algorithm requires.\\
+\hline
+{\em cores} & Number of cores to use. -\/1 will use all available cores, and 0 will run a serialized version of the algorithm.\\
+\hline
+{\em node\+\_\+z\+\_\+precision} & \mbox{\hyperlink{a00397_a01241}{Precision}} to round the z-\/component of nodes after a raycast is performed \\
+\hline
+{\em node\+\_\+spacing\+\_\+precision} & \mbox{\hyperlink{a00397_a01241}{Precision}} to round nodes after spacing is calculated \\
+\hline
+{\em ground\+\_\+offset} & Distance to offset nodes from the ground before checking line of sight\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The resulting graph or an empty graph if the start check failed
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+All parameters relating to distances are in meters, and all angles are in degrees. 
+
+\mbox{\hyperlink{a00403}{Geometry}} M\+U\+ST be Z-\/\+UP in order for this to work.
+\end{DoxyNote}
+\begin{DoxyRemark}{Remarks}
+This exists to provide a softer interface to the graph itself. Without this template, all callers would need to intuitively know the type of real\+\_\+t or else their code wouldn\textquotesingle{}t compile. The actual implementation of this function is in I\+M\+P\+L\+\_\+\+Build\+Network.
+\end{DoxyRemark}
+The extensive use of templating on this function is to allow any numeric type to be used for any one of the template arguments. For example node\+\_\+1\+\_\+type could be a vector of floats while up\+\_\+step\+\_\+type could be an integer, and down\+\_\+slope\+\_\+type could be a float, etc.
+
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+{\ttfamily \mbox{[}(0, 0, -\/0),(-\/1, -\/1, -\/0),(-\/1, 0, -\/0),(-\/1, 1, 0),(0, -\/1, -\/0),(0, 1, 0),(1, -\/1, -\/0),(1, 0, -\/0),(1, 1, 0),(-\/2, -\/2, -\/0),(-\/2, -\/1, -\/0),(-\/2, 0, -\/0),(-\/1, -\/2, -\/0),(0, -\/2, -\/0),(-\/2, 1, 0),(-\/2, 2, 0),(-\/1, 2, 0),(0, 2, 0),(1, -\/2, -\/0)\mbox{]}} 
+\end{DoxyParagraph}
+
+
+Definition at line 459 of file graph\+\_\+generator.\+h.
+
+
+
+References H\+F\+::\+Graph\+Generator\+::\+Cast\+To\+Real(), H\+F\+::\+Graph\+Generator\+::\+Cast\+To\+Real3(), and I\+M\+P\+L\+\_\+\+Build\+Network().
+
+
+
+Referenced by Generate\+Graph(), Generate\+Graph\+Obstacles(), T\+E\+S\+T(), and H\+F\+::\+T\+E\+S\+T().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01257_ab82cd6b330063776a89a3c65f76d4c0a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01257_ab82cd6b330063776a89a3c65f76d4c0a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01257_ac7052d4b625fb96f29c5bfc091a86f7e}\label{a01257_ac7052d4b625fb96f29c5bfc091a86f7e}} 
+\index{HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}!CrawlGeom@{CrawlGeom}}
+\index{CrawlGeom@{CrawlGeom}!HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{CrawlGeom()}{CrawlGeom()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01497}{Graph}} H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Crawl\+Geom (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01261}{Unique\+Queue}} \&}]{todo }\end{DoxyParamCaption})}
+
+
+
+Perform breadth first search to populate the graph with with nodes and edges. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em todo} & Todo list to hold unchecked nodes. Must atleast contain a single start point.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+todo contains the starting point for the graph.
+\end{DoxyPrecond}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a01257_a843cc6b5b69b5d013930b3685789fa15}{Crawl\+Geom\+Parallel}} for a parallel version.
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+The Graph generated by performing the breadth first search.
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+{\ttfamily \mbox{[}(0, 1, 0),(-\/1, 0, -\/0),(-\/1, 1, 0),(-\/1, 2, 0),(0, 0, -\/0),(0, 2, 0),(1, 0, -\/0),(1, 1, 0),(1, 2, 0),(-\/2, -\/1, -\/0),(-\/2, 0, -\/0),(-\/2, 1, 0),(-\/1, -\/1, -\/0),(0, -\/1, -\/0),(-\/2, 2, 0),(-\/2, 3, 0),(-\/1, 3, 0),(0, 3, 0),(1, -\/1, -\/0)\mbox{]}} 
+\end{DoxyParagraph}
+
+
+Definition at line 220 of file graph\+\_\+generator.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Graph\+::add\+Edge(), H\+F\+::\+Graph\+Generator\+::\+Cast\+To\+Real3(), H\+F\+::\+Graph\+Generator\+::\+Create\+Direcs(), H\+F\+::\+Graph\+Generator\+::\+Unique\+Queue\+::empty(), H\+F\+::\+Graph\+Generator\+::\+Generate\+Potential\+Children(), H\+F\+::\+Graph\+Generator\+::\+Get\+Children(), max\+\_\+nodes, max\+\_\+step\+\_\+connection, params, H\+F\+::\+Graph\+Generator\+::\+Unique\+Queue\+::pop(), H\+F\+::\+Graph\+Generator\+::\+Unique\+Queue\+::\+Push\+Any(), ray\+\_\+tracer, and spacing.
+
+
+
+Referenced by I\+M\+P\+L\+\_\+\+Build\+Network(), and T\+E\+S\+T().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01257_ac7052d4b625fb96f29c5bfc091a86f7e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01257_ac7052d4b625fb96f29c5bfc091a86f7e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01257_a843cc6b5b69b5d013930b3685789fa15}\label{a01257_a843cc6b5b69b5d013930b3685789fa15}} 
+\index{HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}!CrawlGeomParallel@{CrawlGeomParallel}}
+\index{CrawlGeomParallel@{CrawlGeomParallel}!HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{CrawlGeomParallel()}{CrawlGeomParallel()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01497}{Graph}} H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Crawl\+Geom\+Parallel (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01261}{Unique\+Queue}} \&}]{todo }\end{DoxyParamCaption})}
+
+
+
+Perform breadth first search to populate the graph with nodes and edges using multiple cores. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em todo} & Todo list to hold unchecked nodes. Must atleast contain a single start point.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+todo contains the starting point for the graph.
+\end{DoxyPrecond}
+\begin{DoxyReturn}{Returns}
+The Graph generated by performing the breadth first search.
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ {\ttfamily \mbox{[}(0, 2, 0),(-\/1, 1, -\/0),(-\/1, 2, 0),(-\/1, 3, 0),(0, 1, -\/0),(0, 3, 0),(1, 1, -\/0),(1, 2, 0),(1, 3, 0),(1, 0, -\/0),(0, -\/1, -\/0),(0, 0, -\/0),(1, -\/1, -\/0),(2, -\/1, -\/0),(2, 0, -\/0),(2, 1, -\/0),(2, 2, 0),(2, 3, 0),(-\/2, -\/1, -\/0),(-\/3, -\/2, -\/0),(-\/3, -\/1, -\/0),(-\/3, 0, -\/0),(-\/2, -\/2, -\/0),(-\/2, 0, -\/0),(-\/1, -\/2, -\/0),(-\/1, -\/1, -\/0),(-\/1, 0, -\/0)\mbox{]}} 
+\end{DoxyParagraph}
+
+
+Definition at line 139 of file graph\+\_\+generator.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Graph\+::add\+Edge(), H\+F\+::\+Graph\+Generator\+::\+Cast\+To\+Real3(), H\+F\+::\+Graph\+Generator\+::\+Create\+Direcs(), H\+F\+::\+Graph\+Generator\+::\+Unique\+Queue\+::empty(), H\+F\+::\+Graph\+Generator\+::\+Generate\+Potential\+Children(), H\+F\+::\+Graph\+Generator\+::\+Get\+Children(), max\+\_\+nodes, max\+\_\+step\+\_\+connection, params, H\+F\+::\+Graph\+Generator\+::\+Unique\+Queue\+::pop\+Many(), H\+F\+::\+Graph\+Generator\+::\+Unique\+Queue\+::push(), ray\+\_\+tracer, H\+F\+::\+Graph\+Generator\+::\+Unique\+Queue\+::size(), and spacing.
+
+
+
+Referenced by I\+M\+P\+L\+\_\+\+Build\+Network(), and T\+E\+S\+T().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01257_a843cc6b5b69b5d013930b3685789fa15_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01257_a843cc6b5b69b5d013930b3685789fa15_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01257_a2616d5577f2b87dae8bdb9caab75e52f}\label{a01257_a2616d5577f2b87dae8bdb9caab75e52f}} 
+\index{HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}!IMPL\_BuildNetwork@{IMPL\_BuildNetwork}}
+\index{IMPL\_BuildNetwork@{IMPL\_BuildNetwork}!HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{IMPL\_BuildNetwork()}{IMPL\_BuildNetwork()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01497}{Spatial\+Structures\+::\+Graph}} H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+I\+M\+P\+L\+\_\+\+Build\+Network (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \&}]{start\+\_\+point,  }\item[{const \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \&}]{Spacing,  }\item[{int}]{Max\+Nodes,  }\item[{\mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\+\_\+t}}}]{Up\+Step,  }\item[{\mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\+\_\+t}}}]{Up\+Slope,  }\item[{\mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\+\_\+t}}}]{Down\+Step,  }\item[{\mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\+\_\+t}}}]{Down\+Slope,  }\item[{int}]{max\+\_\+step\+\_\+connections,  }\item[{int}]{cores = {\ttfamily -\/1},  }\item[{\mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\+\_\+t}}}]{node\+\_\+z\+\_\+precision = {\ttfamily \mbox{\hyperlink{a00397_ad1ee2b33ac4982f6f4c4263946bf9e6b}{default\+\_\+z\+\_\+precision}}},  }\item[{\mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\+\_\+t}}}]{node\+\_\+spacing\+\_\+precision = {\ttfamily \mbox{\hyperlink{a00397_a361fb70f3e88bb239a59900c9e21b5ac}{default\+\_\+spacing\+\_\+precision}}},  }\item[{\mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\+\_\+t}}}]{ground\+\_\+offset = {\ttfamily \mbox{\hyperlink{a00397_ad1cd92591557c21198238c7d06ef2252}{default\+\_\+ground\+\_\+offset}}} }\end{DoxyParamCaption})}
+
+
+
+Generate a graph of accessible space. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start\+\_\+point} & The starting point for the graph generator. If this isn\textquotesingle{}t above solid ground, no nodes will be generated. \\
+\hline
+{\em Spacing} & Space between nodes. Lower values will yield more nodes for a higher resolution graph. \\
+\hline
+{\em Max\+Nodes} & The maximum amount of nodes to generate. \\
+\hline
+{\em Up\+Step} & Maximum height of a step the graph can traverse. Any steps higher this will be considered inaccessible. \\
+\hline
+{\em Up\+Slope} & Maximum upward slope the graph can traverse in degrees. Any slopes steeper than this will be considered inaccessible. \\
+\hline
+{\em Down\+Step} & Maximum step down the graph can traverse. Any steps steeper than this will be considered inaccessible.\\
+\hline
+{\em Down\+Slope} & The maximum downward slope the graph can traverse. Any slopes steeper than this will be considered inaccessible.\\
+\hline
+{\em max\+\_\+step\+\_\+connections} & Multiplier for number of children to generate for each node. Increasing this value will increase the number of edges in the graph, and as a result the amount of memory the algorithm requires.\\
+\hline
+{\em cores} & Number of cores to use. -\/1 will use all available cores, and 0 will run a serialized version of the algorithm.\\
+\hline
+{\em node\+\_\+z\+\_\+precision} & \mbox{\hyperlink{a00397_a01241}{Precision}} to round the z-\/component of nodes after a raycast is performed \\
+\hline
+{\em node\+\_\+spacing\+\_\+precision} & \mbox{\hyperlink{a00397_a01241}{Precision}} to round nodes after spacing is calculated \\
+\hline
+{\em ground\+\_\+offset} & Distance to offset nodes from the ground before checking line of sight\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The resulting graph or an empty graph if the start check failed.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+All parameters relating to distances are in meters, and all angles are in degrees. 
+
+\mbox{\hyperlink{a00403}{Geometry}} M\+U\+ST be Z-\/\+UP in order for this to work. 
+\end{DoxyNote}
+
+
+Definition at line 69 of file graph\+\_\+generator.\+cpp.
+
+
+
+References core\+\_\+count, Crawl\+Geom(), Crawl\+Geom\+Parallel(), H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::down\+\_\+slope, H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::down\+\_\+step, H\+F\+::\+Graph\+Generator\+::\+Precision\+::ground\+\_\+offset, max\+\_\+nodes, max\+\_\+step\+\_\+connection, H\+F\+::\+Graph\+Generator\+::\+Precision\+::node\+\_\+spacing, H\+F\+::\+Graph\+Generator\+::\+Precision\+::node\+\_\+z, params, H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::precision, H\+F\+::\+Graph\+Generator\+::\+Unique\+Queue\+::\+Push\+Any(), ray\+\_\+tracer, H\+F\+::\+Graph\+Generator\+::\+Setup\+Core\+Count(), spacing, H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::up\+\_\+slope, H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::up\+\_\+step, and H\+F\+::\+Graph\+Generator\+::\+Validate\+Start\+Point().
+
+
+
+Referenced by Build\+Network().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01257_a2616d5577f2b87dae8bdb9caab75e52f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01257_a2616d5577f2b87dae8bdb9caab75e52f_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a01257_a16da7abe348f7af1d232867f2d719db1}\label{a01257_a16da7abe348f7af1d232867f2d719db1}} 
+\index{HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}!core\_count@{core\_count}}
+\index{core\_count@{core\_count}!HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{core\_count}{core\_count}}
+{\footnotesize\ttfamily int H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::core\+\_\+count}
+
+
+
+Number of cores to use for graph generation. 
+
+
+
+Definition at line 348 of file graph\+\_\+generator.\+h.
+
+
+
+Referenced by I\+M\+P\+L\+\_\+\+Build\+Network(), and T\+E\+S\+T().
+
+\mbox{\Hypertarget{a01257_a6afac9c527d8483943ef61e9e9a1ca15}\label{a01257_a6afac9c527d8483943ef61e9e9a1ca15}} 
+\index{HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}!max\_nodes@{max\_nodes}}
+\index{max\_nodes@{max\_nodes}!HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{max\_nodes}{max\_nodes}}
+{\footnotesize\ttfamily int H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::max\+\_\+nodes}
+
+
+
+Maximum number of nodes to generate. If less than zero, generate nodes without a limit. 
+
+
+
+Definition at line 347 of file graph\+\_\+generator.\+h.
+
+
+
+Referenced by Crawl\+Geom(), Crawl\+Geom\+Parallel(), I\+M\+P\+L\+\_\+\+Build\+Network(), and T\+E\+S\+T().
+
+\mbox{\Hypertarget{a01257_a73847391cae1bc6c5a0ed5416844ab68}\label{a01257_a73847391cae1bc6c5a0ed5416844ab68}} 
+\index{HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}!max\_step\_connection@{max\_step\_connection}}
+\index{max\_step\_connection@{max\_step\_connection}!HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{max\_step\_connection}{max\_step\_connection}}
+{\footnotesize\ttfamily int H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::max\+\_\+step\+\_\+connection}
+
+
+
+Multiplier for number of children to generate. The higher this is, the more directions there will be. 
+
+
+
+Definition at line 350 of file graph\+\_\+generator.\+h.
+
+
+
+Referenced by Crawl\+Geom(), Crawl\+Geom\+Parallel(), I\+M\+P\+L\+\_\+\+Build\+Network(), and T\+E\+S\+T().
+
+\mbox{\Hypertarget{a01257_a6c85bb69456393934b602a242d8f0bed}\label{a01257_a6c85bb69456393934b602a242d8f0bed}} 
+\index{HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}!params@{params}}
+\index{params@{params}!HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{params}{params}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00397_a01249}{Graph\+Params}} H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::params}
+
+
+
+Parameters to run the graph generator. 
+
+
+
+Definition at line 353 of file graph\+\_\+generator.\+h.
+
+
+
+Referenced by Crawl\+Geom(), Crawl\+Geom\+Parallel(), Graph\+Generator(), I\+M\+P\+L\+\_\+\+Build\+Network(), H\+F\+::\+Graph\+Generator\+::setup\+R\+T(), and T\+E\+S\+T().
+
+\mbox{\Hypertarget{a01257_a5801e0e8dbaaa13ccab14ff0cae69de0}\label{a01257_a5801e0e8dbaaa13ccab14ff0cae69de0}} 
+\index{HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}!ray\_tracer@{ray\_tracer}}
+\index{ray\_tracer@{ray\_tracer}!HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{ray\_tracer}{ray\_tracer}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00397_aef833458d20e4569c73f409b52d03bee}{Ray\+Tracer}} H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::ray\+\_\+tracer}
+
+
+
+A pointer to the raytracer to use for ray intersections. 
+
+
+
+Definition at line 355 of file graph\+\_\+generator.\+h.
+
+
+
+Referenced by Crawl\+Geom(), Crawl\+Geom\+Parallel(), Graph\+Generator(), I\+M\+P\+L\+\_\+\+Build\+Network(), and H\+F\+::\+Graph\+Generator\+::setup\+R\+T().
+
+\mbox{\Hypertarget{a01257_a9aba1df499733b653dff3ec59bf3871f}\label{a01257_a9aba1df499733b653dff3ec59bf3871f}} 
+\index{HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}!spacing@{spacing}}
+\index{spacing@{spacing}!HF::GraphGenerator::GraphGenerator@{HF::GraphGenerator::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{spacing}{spacing}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::spacing}
+
+
+
+Spacing between nodes. New nodes will be generated with atleast this much distance between them. 
+
+
+
+Definition at line 351 of file graph\+\_\+generator.\+h.
+
+
+
+Referenced by Crawl\+Geom(), Crawl\+Geom\+Parallel(), I\+M\+P\+L\+\_\+\+Build\+Network(), and T\+E\+S\+T().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/analysismethods/src/\mbox{\hyperlink{a00008}{graph\+\_\+generator.\+h}}\item 
+Cpp/analysismethods/src/\mbox{\hyperlink{a00005}{graph\+\_\+generator.\+cpp}}\end{DoxyCompactItemize}

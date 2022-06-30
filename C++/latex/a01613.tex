@@ -1,0 +1,336 @@
+\hypertarget{a01613}{}\doxysection{nlohmann\+::ordered\+\_\+map$<$ Key, T, Ignored\+Less, Allocator $>$ Struct Template Reference}
+\label{a01613}\index{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}}
+
+
+\mbox{\hyperlink{a01613}{ordered\+\_\+map}}\+: a minimal map-\/like container that preserves insertion order for use within nlohmann\+::basic\+\_\+json$<$ordered\+\_\+map$>$  
+
+
+
+
+{\ttfamily \#include $<$json.\+hpp$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{a01613_a57095c6ed403f02e1bc2c240a13c9ed8}{key\+\_\+type}} = Key
+\item 
+using \mbox{\hyperlink{a01613_a1c9c1509ee714a9814b45a8030c84ec7}{mapped\+\_\+type}} = T
+\item 
+using \mbox{\hyperlink{a01613_a0cabe346c38a4f1ab1b8a396fbd2bbe2}{Container}} = std\+::vector$<$ std\+::pair$<$ const Key, T $>$, Allocator $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01613_a87938c10b76510dac00412d2cb5fd1e4}{ordered\+\_\+map}} (const Allocator \&alloc=Allocator())
+\item 
+{\footnotesize template$<$class It $>$ }\\\mbox{\hyperlink{a01613_a9d25efb51325cc1be027b8ea00c1f8b8}{ordered\+\_\+map}} (It first, It last, const Allocator \&alloc=Allocator())
+\item 
+\mbox{\hyperlink{a01613_a0482ea79e7786367a2d9b5c789c091ce}{ordered\+\_\+map}} (std\+::initializer\+\_\+list$<$ T $>$ init, const Allocator \&alloc=Allocator())
+\item 
+std\+::pair$<$ iterator, bool $>$ \mbox{\hyperlink{a01613_a38834c948b844033caa7d5c76fee5866}{emplace}} (const \mbox{\hyperlink{a01613_a57095c6ed403f02e1bc2c240a13c9ed8}{key\+\_\+type}} \&key, T \&\&t)
+\item 
+T \& \mbox{\hyperlink{a01613_ae7a1ca8c1e234837d137471f73ae6012}{operator\mbox{[}$\,$\mbox{]}}} (const Key \&key)
+\item 
+const T \& \mbox{\hyperlink{a01613_a676082659d575e29bdb312bcde53023a}{operator\mbox{[}$\,$\mbox{]}}} (const Key \&key) const
+\item 
+T \& \mbox{\hyperlink{a01613_ab7b4bb185fe7ea84f8f5f32fd230ff91}{at}} (const Key \&key)
+\item 
+const T \& \mbox{\hyperlink{a01613_a8b7f27215180385b9b1e98adc4dd8ae7}{at}} (const Key \&key) const
+\item 
+size\+\_\+type \mbox{\hyperlink{a01613_a583c8976bbf0c137ff8e2439878f3058}{erase}} (const Key \&key)
+\item 
+iterator \mbox{\hyperlink{a01613_a26053569acb0a858d87482b2fa3d5dc5}{erase}} (iterator pos)
+\item 
+size\+\_\+type \mbox{\hyperlink{a01613_aee2c188dcc802d6b28910f707a5e637b}{count}} (const Key \&key) const
+\item 
+iterator \mbox{\hyperlink{a01613_a2486527ac56e07d58946ae9a93a46bc8}{find}} (const Key \&key)
+\item 
+const\+\_\+iterator \mbox{\hyperlink{a01613_a41e6e34fa8a90b96cbe5c71fec10d2ee}{find}} (const Key \&key) const
+\item 
+std\+::pair$<$ iterator, bool $>$ \mbox{\hyperlink{a01613_a48eceff729b80f3f4a023b737efccc5b}{insert}} (value\+\_\+type \&\&value)
+\item 
+std\+::pair$<$ iterator, bool $>$ \mbox{\hyperlink{a01613_a0241433138719e477a3cbb0c4cf0a243}{insert}} (const value\+\_\+type \&value)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class Key, class T, class Ignored\+Less = std\+::less$<$\+Key$>$, class Allocator = std\+::allocator$<$std\+::pair$<$const Key, T$>$$>$$>$\newline
+struct nlohmann\+::ordered\+\_\+map$<$ Key, T, Ignored\+Less, Allocator $>$}
+
+\mbox{\hyperlink{a01613}{ordered\+\_\+map}}\+: a minimal map-\/like container that preserves insertion order for use within nlohmann\+::basic\+\_\+json$<$ordered\+\_\+map$>$ 
+
+Definition at line 2936 of file json.\+hpp.
+
+
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{a01613_a0cabe346c38a4f1ab1b8a396fbd2bbe2}\label{a01613_a0cabe346c38a4f1ab1b8a396fbd2bbe2}} 
+\index{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}!Container@{Container}}
+\index{Container@{Container}!nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{Container}{Container}}
+{\footnotesize\ttfamily template$<$class Key , class T , class Ignored\+Less  = std\+::less$<$\+Key$>$, class Allocator  = std\+::allocator$<$std\+::pair$<$const Key, T$>$$>$$>$ \\
+using \mbox{\hyperlink{a01613}{nlohmann\+::ordered\+\_\+map}}$<$ Key, T, Ignored\+Less, Allocator $>$\+::\mbox{\hyperlink{a01613_a0cabe346c38a4f1ab1b8a396fbd2bbe2}{Container}} =  std\+::vector$<$std\+::pair$<$const Key, T$>$, Allocator$>$}
+
+
+
+Definition at line 16409 of file json.\+hpp.
+
+\mbox{\Hypertarget{a01613_a57095c6ed403f02e1bc2c240a13c9ed8}\label{a01613_a57095c6ed403f02e1bc2c240a13c9ed8}} 
+\index{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}!key\_type@{key\_type}}
+\index{key\_type@{key\_type}!nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{key\_type}{key\_type}}
+{\footnotesize\ttfamily template$<$class Key , class T , class Ignored\+Less  = std\+::less$<$\+Key$>$, class Allocator  = std\+::allocator$<$std\+::pair$<$const Key, T$>$$>$$>$ \\
+using \mbox{\hyperlink{a01613}{nlohmann\+::ordered\+\_\+map}}$<$ Key, T, Ignored\+Less, Allocator $>$\+::\mbox{\hyperlink{a01613_a57095c6ed403f02e1bc2c240a13c9ed8}{key\+\_\+type}} =  Key}
+
+
+
+Definition at line 16407 of file json.\+hpp.
+
+\mbox{\Hypertarget{a01613_a1c9c1509ee714a9814b45a8030c84ec7}\label{a01613_a1c9c1509ee714a9814b45a8030c84ec7}} 
+\index{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}!mapped\_type@{mapped\_type}}
+\index{mapped\_type@{mapped\_type}!nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{mapped\_type}{mapped\_type}}
+{\footnotesize\ttfamily template$<$class Key , class T , class Ignored\+Less  = std\+::less$<$\+Key$>$, class Allocator  = std\+::allocator$<$std\+::pair$<$const Key, T$>$$>$$>$ \\
+using \mbox{\hyperlink{a01613}{nlohmann\+::ordered\+\_\+map}}$<$ Key, T, Ignored\+Less, Allocator $>$\+::\mbox{\hyperlink{a01613_a1c9c1509ee714a9814b45a8030c84ec7}{mapped\+\_\+type}} =  T}
+
+
+
+Definition at line 16408 of file json.\+hpp.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{a01613_a87938c10b76510dac00412d2cb5fd1e4}\label{a01613_a87938c10b76510dac00412d2cb5fd1e4}} 
+\index{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}!ordered\_map@{ordered\_map}}
+\index{ordered\_map@{ordered\_map}!nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{ordered\_map()}{ordered\_map()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$class Key , class T , class Ignored\+Less  = std\+::less$<$\+Key$>$, class Allocator  = std\+::allocator$<$std\+::pair$<$const Key, T$>$$>$$>$ \\
+\mbox{\hyperlink{a01613}{nlohmann\+::ordered\+\_\+map}}$<$ Key, T, Ignored\+Less, Allocator $>$\+::\mbox{\hyperlink{a01613}{ordered\+\_\+map}} (\begin{DoxyParamCaption}\item[{const Allocator \&}]{alloc = {\ttfamily Allocator()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 16417 of file json.\+hpp.
+
+\mbox{\Hypertarget{a01613_a9d25efb51325cc1be027b8ea00c1f8b8}\label{a01613_a9d25efb51325cc1be027b8ea00c1f8b8}} 
+\index{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}!ordered\_map@{ordered\_map}}
+\index{ordered\_map@{ordered\_map}!nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{ordered\_map()}{ordered\_map()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$class Key , class T , class Ignored\+Less  = std\+::less$<$\+Key$>$, class Allocator  = std\+::allocator$<$std\+::pair$<$const Key, T$>$$>$$>$ \\
+template$<$class It $>$ \\
+\mbox{\hyperlink{a01613}{nlohmann\+::ordered\+\_\+map}}$<$ Key, T, Ignored\+Less, Allocator $>$\+::\mbox{\hyperlink{a01613}{ordered\+\_\+map}} (\begin{DoxyParamCaption}\item[{It}]{first,  }\item[{It}]{last,  }\item[{const Allocator \&}]{alloc = {\ttfamily Allocator()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 16419 of file json.\+hpp.
+
+\mbox{\Hypertarget{a01613_a0482ea79e7786367a2d9b5c789c091ce}\label{a01613_a0482ea79e7786367a2d9b5c789c091ce}} 
+\index{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}!ordered\_map@{ordered\_map}}
+\index{ordered\_map@{ordered\_map}!nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{ordered\_map()}{ordered\_map()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$class Key , class T , class Ignored\+Less  = std\+::less$<$\+Key$>$, class Allocator  = std\+::allocator$<$std\+::pair$<$const Key, T$>$$>$$>$ \\
+\mbox{\hyperlink{a01613}{nlohmann\+::ordered\+\_\+map}}$<$ Key, T, Ignored\+Less, Allocator $>$\+::\mbox{\hyperlink{a01613}{ordered\+\_\+map}} (\begin{DoxyParamCaption}\item[{std\+::initializer\+\_\+list$<$ T $>$}]{init,  }\item[{const Allocator \&}]{alloc = {\ttfamily Allocator()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 16421 of file json.\+hpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a01613_ab7b4bb185fe7ea84f8f5f32fd230ff91}\label{a01613_ab7b4bb185fe7ea84f8f5f32fd230ff91}} 
+\index{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}!at@{at}}
+\index{at@{at}!nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{at()}{at()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class Key , class T , class Ignored\+Less  = std\+::less$<$\+Key$>$, class Allocator  = std\+::allocator$<$std\+::pair$<$const Key, T$>$$>$$>$ \\
+T\& \mbox{\hyperlink{a01613}{nlohmann\+::ordered\+\_\+map}}$<$ Key, T, Ignored\+Less, Allocator $>$\+::at (\begin{DoxyParamCaption}\item[{const Key \&}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 16447 of file json.\+hpp.
+
+
+
+Referenced by nlohmann\+::ordered\+\_\+map$<$ Key, T, Ignored\+Less, Allocator $>$\+::operator\mbox{[}$\,$\mbox{]}().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01613_ab7b4bb185fe7ea84f8f5f32fd230ff91_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01613_a8b7f27215180385b9b1e98adc4dd8ae7}\label{a01613_a8b7f27215180385b9b1e98adc4dd8ae7}} 
+\index{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}!at@{at}}
+\index{at@{at}!nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{at()}{at()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class Key , class T , class Ignored\+Less  = std\+::less$<$\+Key$>$, class Allocator  = std\+::allocator$<$std\+::pair$<$const Key, T$>$$>$$>$ \\
+const T\& \mbox{\hyperlink{a01613}{nlohmann\+::ordered\+\_\+map}}$<$ Key, T, Ignored\+Less, Allocator $>$\+::at (\begin{DoxyParamCaption}\item[{const Key \&}]{key }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 16460 of file json.\+hpp.
+
+\mbox{\Hypertarget{a01613_aee2c188dcc802d6b28910f707a5e637b}\label{a01613_aee2c188dcc802d6b28910f707a5e637b}} 
+\index{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}!count@{count}}
+\index{count@{count}!nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{count()}{count()}}
+{\footnotesize\ttfamily template$<$class Key , class T , class Ignored\+Less  = std\+::less$<$\+Key$>$, class Allocator  = std\+::allocator$<$std\+::pair$<$const Key, T$>$$>$$>$ \\
+size\+\_\+type \mbox{\hyperlink{a01613}{nlohmann\+::ordered\+\_\+map}}$<$ Key, T, Ignored\+Less, Allocator $>$\+::count (\begin{DoxyParamCaption}\item[{const Key \&}]{key }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 16506 of file json.\+hpp.
+
+\mbox{\Hypertarget{a01613_a38834c948b844033caa7d5c76fee5866}\label{a01613_a38834c948b844033caa7d5c76fee5866}} 
+\index{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}!emplace@{emplace}}
+\index{emplace@{emplace}!nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{emplace()}{emplace()}}
+{\footnotesize\ttfamily template$<$class Key , class T , class Ignored\+Less  = std\+::less$<$\+Key$>$, class Allocator  = std\+::allocator$<$std\+::pair$<$const Key, T$>$$>$$>$ \\
+std\+::pair$<$iterator, bool$>$ \mbox{\hyperlink{a01613}{nlohmann\+::ordered\+\_\+map}}$<$ Key, T, Ignored\+Less, Allocator $>$\+::emplace (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01613_a57095c6ed403f02e1bc2c240a13c9ed8}{key\+\_\+type}} \&}]{key,  }\item[{T \&\&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 16424 of file json.\+hpp.
+
+
+
+Referenced by nlohmann\+::ordered\+\_\+map$<$ Key, T, Ignored\+Less, Allocator $>$\+::insert(), and nlohmann\+::ordered\+\_\+map$<$ Key, T, Ignored\+Less, Allocator $>$\+::operator\mbox{[}$\,$\mbox{]}().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01613_a38834c948b844033caa7d5c76fee5866_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01613_a583c8976bbf0c137ff8e2439878f3058}\label{a01613_a583c8976bbf0c137ff8e2439878f3058}} 
+\index{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}!erase@{erase}}
+\index{erase@{erase}!nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{erase()}{erase()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class Key , class T , class Ignored\+Less  = std\+::less$<$\+Key$>$, class Allocator  = std\+::allocator$<$std\+::pair$<$const Key, T$>$$>$$>$ \\
+size\+\_\+type \mbox{\hyperlink{a01613}{nlohmann\+::ordered\+\_\+map}}$<$ Key, T, Ignored\+Less, Allocator $>$\+::erase (\begin{DoxyParamCaption}\item[{const Key \&}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 16473 of file json.\+hpp.
+
+\mbox{\Hypertarget{a01613_a26053569acb0a858d87482b2fa3d5dc5}\label{a01613_a26053569acb0a858d87482b2fa3d5dc5}} 
+\index{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}!erase@{erase}}
+\index{erase@{erase}!nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{erase()}{erase()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class Key , class T , class Ignored\+Less  = std\+::less$<$\+Key$>$, class Allocator  = std\+::allocator$<$std\+::pair$<$const Key, T$>$$>$$>$ \\
+iterator \mbox{\hyperlink{a01613}{nlohmann\+::ordered\+\_\+map}}$<$ Key, T, Ignored\+Less, Allocator $>$\+::erase (\begin{DoxyParamCaption}\item[{iterator}]{pos }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 16492 of file json.\+hpp.
+
+\mbox{\Hypertarget{a01613_a2486527ac56e07d58946ae9a93a46bc8}\label{a01613_a2486527ac56e07d58946ae9a93a46bc8}} 
+\index{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}!find@{find}}
+\index{find@{find}!nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{find()}{find()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class Key , class T , class Ignored\+Less  = std\+::less$<$\+Key$>$, class Allocator  = std\+::allocator$<$std\+::pair$<$const Key, T$>$$>$$>$ \\
+iterator \mbox{\hyperlink{a01613}{nlohmann\+::ordered\+\_\+map}}$<$ Key, T, Ignored\+Less, Allocator $>$\+::find (\begin{DoxyParamCaption}\item[{const Key \&}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 16518 of file json.\+hpp.
+
+\mbox{\Hypertarget{a01613_a41e6e34fa8a90b96cbe5c71fec10d2ee}\label{a01613_a41e6e34fa8a90b96cbe5c71fec10d2ee}} 
+\index{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}!find@{find}}
+\index{find@{find}!nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{find()}{find()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class Key , class T , class Ignored\+Less  = std\+::less$<$\+Key$>$, class Allocator  = std\+::allocator$<$std\+::pair$<$const Key, T$>$$>$$>$ \\
+const\+\_\+iterator \mbox{\hyperlink{a01613}{nlohmann\+::ordered\+\_\+map}}$<$ Key, T, Ignored\+Less, Allocator $>$\+::find (\begin{DoxyParamCaption}\item[{const Key \&}]{key }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 16530 of file json.\+hpp.
+
+\mbox{\Hypertarget{a01613_a0241433138719e477a3cbb0c4cf0a243}\label{a01613_a0241433138719e477a3cbb0c4cf0a243}} 
+\index{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}!insert@{insert}}
+\index{insert@{insert}!nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class Key , class T , class Ignored\+Less  = std\+::less$<$\+Key$>$, class Allocator  = std\+::allocator$<$std\+::pair$<$const Key, T$>$$>$$>$ \\
+std\+::pair$<$iterator, bool$>$ \mbox{\hyperlink{a01613}{nlohmann\+::ordered\+\_\+map}}$<$ Key, T, Ignored\+Less, Allocator $>$\+::insert (\begin{DoxyParamCaption}\item[{const value\+\_\+type \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 16547 of file json.\+hpp.
+
+\mbox{\Hypertarget{a01613_a48eceff729b80f3f4a023b737efccc5b}\label{a01613_a48eceff729b80f3f4a023b737efccc5b}} 
+\index{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}!insert@{insert}}
+\index{insert@{insert}!nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class Key , class T , class Ignored\+Less  = std\+::less$<$\+Key$>$, class Allocator  = std\+::allocator$<$std\+::pair$<$const Key, T$>$$>$$>$ \\
+std\+::pair$<$iterator, bool$>$ \mbox{\hyperlink{a01613}{nlohmann\+::ordered\+\_\+map}}$<$ Key, T, Ignored\+Less, Allocator $>$\+::insert (\begin{DoxyParamCaption}\item[{value\+\_\+type \&\&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 16542 of file json.\+hpp.
+
+
+
+References nlohmann\+::ordered\+\_\+map$<$ Key, T, Ignored\+Less, Allocator $>$\+::emplace().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01613_a48eceff729b80f3f4a023b737efccc5b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01613_ae7a1ca8c1e234837d137471f73ae6012}\label{a01613_ae7a1ca8c1e234837d137471f73ae6012}} 
+\index{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class Key , class T , class Ignored\+Less  = std\+::less$<$\+Key$>$, class Allocator  = std\+::allocator$<$std\+::pair$<$const Key, T$>$$>$$>$ \\
+T\& \mbox{\hyperlink{a01613}{nlohmann\+::ordered\+\_\+map}}$<$ Key, T, Ignored\+Less, Allocator $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const Key \&}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 16437 of file json.\+hpp.
+
+
+
+References nlohmann\+::ordered\+\_\+map$<$ Key, T, Ignored\+Less, Allocator $>$\+::emplace().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01613_ae7a1ca8c1e234837d137471f73ae6012_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a01613_a676082659d575e29bdb312bcde53023a}\label{a01613_a676082659d575e29bdb312bcde53023a}} 
+\index{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$@{nlohmann::ordered\_map$<$ Key, T, IgnoredLess, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class Key , class T , class Ignored\+Less  = std\+::less$<$\+Key$>$, class Allocator  = std\+::allocator$<$std\+::pair$<$const Key, T$>$$>$$>$ \\
+const T\& \mbox{\hyperlink{a01613}{nlohmann\+::ordered\+\_\+map}}$<$ Key, T, Ignored\+Less, Allocator $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const Key \&}]{key }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 16442 of file json.\+hpp.
+
+
+
+References nlohmann\+::ordered\+\_\+map$<$ Key, T, Ignored\+Less, Allocator $>$\+::at().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01613_a676082659d575e29bdb312bcde53023a_cgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/spatialstructures/src/\mbox{\hyperlink{a00206}{json.\+hpp}}\end{DoxyCompactItemize}

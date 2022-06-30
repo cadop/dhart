@@ -1,0 +1,236 @@
+\hypertarget{a00388}{}\doxysection{Graph\+Generator}
+\label{a00388}\index{GraphGenerator@{GraphGenerator}}
+
+
+Perform a breadth-\/first search on a mesh to find accessible space.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00388_gac2583dc1ee6786b15fa4f06bfde2130a}{Generate\+Graph}} (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ray\+\_\+tracer, const float $\ast$start\+\_\+point, const float $\ast$spacing, int Max\+Nodes, float Up\+Step, float Up\+Slope, float Down\+Step, float Down\+Slope, int max\+\_\+step\+\_\+connection, int core\+\_\+count, \mbox{\hyperlink{a01497}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$$\ast$out\+\_\+graph)
+\begin{DoxyCompactList}\small\item\em Construct a graph by performing a breadth-\/first search of accessible space. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00388_ga4dea438697ab06c4ab5e6da840bfdcfa}{Generate\+Graph\+Obstacles}} (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ray\+\_\+tracer, const float $\ast$start\+\_\+point, const float $\ast$spacing, int Max\+Nodes, float Up\+Step, float Up\+Slope, float Down\+Step, float Down\+Slope, int max\+\_\+step\+\_\+connection, int core\+\_\+count, const int $\ast$obstacle\+\_\+ids, const int $\ast$walkable\+\_\+ids, int num\+\_\+obstacles, int num\+\_\+walkables, \mbox{\hyperlink{a01497}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$$\ast$out\+\_\+graph)
+\begin{DoxyCompactList}\small\item\em Construct a graph by performing a breadth-\/first search of accessible space, seperating obstacles from walkable geometry. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Perform a breadth-\/first search on a mesh to find accessible space. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{a00388_gac2583dc1ee6786b15fa4f06bfde2130a}\label{a00388_gac2583dc1ee6786b15fa4f06bfde2130a}} 
+\index{GraphGenerator@{GraphGenerator}!GenerateGraph@{GenerateGraph}}
+\index{GenerateGraph@{GenerateGraph}!GraphGenerator@{GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{GenerateGraph()}{GenerateGraph()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Generate\+Graph (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$}]{ray\+\_\+tracer,  }\item[{const float $\ast$}]{start\+\_\+point,  }\item[{const float $\ast$}]{spacing,  }\item[{int}]{Max\+Nodes,  }\item[{float}]{Up\+Step,  }\item[{float}]{Up\+Slope,  }\item[{float}]{Down\+Step,  }\item[{float}]{Down\+Slope,  }\item[{int}]{max\+\_\+step\+\_\+connection,  }\item[{int}]{core\+\_\+count,  }\item[{\mbox{\hyperlink{a01497}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$$\ast$}]{out\+\_\+graph }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00341}{Cinterface/analysis\+\_\+\+C.\+h}}$>$}
+
+
+
+Construct a graph by performing a breadth-\/first search of accessible space. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ray\+\_\+tracer} & Raytracer containing the geometry to use for graph generation.\\
+\hline
+{\em start\+\_\+point} & The starting point for the graph generator to begin searching from. If this isn\textquotesingle{}t above solid ground, no nodes will be generated.\\
+\hline
+{\em spacing} & Space between nodes for each step of the search. Lower values will yield more nodes for a higher resolution graph.\\
+\hline
+{\em Max\+Nodes} & Stop generation after this many nodes. A value of -\/1 will generate an infinite amount of nodes. Note that the final node count may be greater than this value.\\
+\hline
+{\em Up\+Step} & Maximum height of a step the graph can traverse. Any steps higher this will be considered inaccessible.\\
+\hline
+{\em Up\+Slope} & Maximum upward slope the graph can traverse in degrees. Any slopes steeper than this will be considered inaccessible.\\
+\hline
+{\em Down\+Step} & Maximum step down the graph can traverse. Any steps steeper than this will be considered inaccessible.\\
+\hline
+{\em Down\+Slope} & The maximum downward slope the graph can traverse. Any slopes steeper than this will be considered inaccessible.\\
+\hline
+{\em max\+\_\+step\+\_\+connection} & Multiplier for number of children to generate for each node. Increasing this value will increase the number of edges in the graph, and as a result the amount of memory the algorithm requires.\\
+\hline
+{\em core\+\_\+count} & Number of cores to use. -\/1 will use all available cores, and 0 or 1 will run a serialized version of the algorithm.\\
+\hline
+{\em out\+\_\+graph} & Address of a (\mbox{\hyperlink{a01497}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$); out\+\_\+graph will address heap-\/allocated memory to an initialized \mbox{\hyperlink{a01497}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} on success.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{}{H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+OK}} if graph creation was successful. \mbox{\hyperlink{}{H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+N\+O\+\_\+\+G\+R\+A\+PH}} if \mbox{\hyperlink{a00388_gac2583dc1ee6786b15fa4f06bfde2130a}{Generate\+Graph}} failed to generate a graph with more than a single node.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}} (how to create a B\+VH), \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} (how to destroy a B\+VH)
+\end{DoxySeeAlso}
+You must {\bfseries{load an .obj file}} and {\bfseries{create a B\+VH}} first.~\newline
+ Begin by reviewing the example at \mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}} before proceeding below.
+
+First, determine the {\bfseries{start point}}, {\bfseries{spacing of nodes for each axis}}, and {\bfseries{maximum nodes to generate}}.~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ Then, determine the remainder of the values required by \mbox{\hyperlink{a00388_gac2583dc1ee6786b15fa4f06bfde2130a}{Generate\+Graph}} before calling it.~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ {\bfseries{Very important!}} {\bfseries{Compress the graph}} after generating a graph or adding edges.~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ To output the graph to the console, we must {\bfseries{retrieve its nodes}}.~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ We are now ready to {\bfseries{output}} the generated graph to the {\bfseries{console}}.~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ When we are finished, we must destroy {\bfseries{node\+\_\+vector}} and {\bfseries{graph}}.~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ From here, please review the example at \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} for instructions~\newline
+ on how to free the remainder of the resources used by the graph --~\newline
+ which are the (vector$<$\mbox{\hyperlink{a01297}{H\+F\+::\+Geometry\+::\+Mesh\+Info}}$>$ $\ast$) and (\mbox{\hyperlink{}{H\+F\+::\+Raytracer\+::\+Embree\+Ray\+Tracer}} $\ast$) instances.
+
+~\newline
+ {\ttfamily $>$$>$$>$ Load\+O\+BJ loaded mesh successfully into loaded\+\_\+obj at address 000002468E\+E\+B\+B\+E\+B0, code\+: 1}~\newline
+{\ttfamily $>$$>$$>$ Create\+Raytracer created Embree\+Ray\+Tracer successfully into bvh at address 00000246849C59\+B0, code\+: 1}~\newline
+{\ttfamily $>$$>$$>$ Node count\+: 594}~\newline
+{\ttfamily $>$$>$$>$ \mbox{[}(-\/1, -\/6, 0, 0) (-\/1.\+5, -\/6.\+5, -\/0, 1) (-\/1.\+5, -\/6, -\/0, 2)\mbox{]}}~\newline
+
+
+Definition at line 22 of file analysis\+\_\+\+C.\+cpp.
+
+
+
+References H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Build\+Network(), H\+F\+::\+Exceptions\+::\+N\+O\+\_\+\+G\+R\+A\+PH, H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Nodes(), and H\+F\+::\+Exceptions\+::\+OK.
+
+
+
+Referenced by C\+Interface\+Tests\+::\+T\+E\+S\+T().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00388_gac2583dc1ee6786b15fa4f06bfde2130a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=329pt]{a00388_gac2583dc1ee6786b15fa4f06bfde2130a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00388_ga4dea438697ab06c4ab5e6da840bfdcfa}\label{a00388_ga4dea438697ab06c4ab5e6da840bfdcfa}} 
+\index{GraphGenerator@{GraphGenerator}!GenerateGraphObstacles@{GenerateGraphObstacles}}
+\index{GenerateGraphObstacles@{GenerateGraphObstacles}!GraphGenerator@{GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{GenerateGraphObstacles()}{GenerateGraphObstacles()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Generate\+Graph\+Obstacles (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$}]{ray\+\_\+tracer,  }\item[{const float $\ast$}]{start\+\_\+point,  }\item[{const float $\ast$}]{spacing,  }\item[{int}]{Max\+Nodes,  }\item[{float}]{Up\+Step,  }\item[{float}]{Up\+Slope,  }\item[{float}]{Down\+Step,  }\item[{float}]{Down\+Slope,  }\item[{int}]{max\+\_\+step\+\_\+connection,  }\item[{int}]{core\+\_\+count,  }\item[{const int $\ast$}]{obstacle\+\_\+ids,  }\item[{const int $\ast$}]{walkable\+\_\+ids,  }\item[{int}]{num\+\_\+obstacles,  }\item[{int}]{num\+\_\+walkables,  }\item[{\mbox{\hyperlink{a01497}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$$\ast$}]{out\+\_\+graph }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00341}{Cinterface/analysis\+\_\+\+C.\+h}}$>$}
+
+
+
+Construct a graph by performing a breadth-\/first search of accessible space, seperating obstacles from walkable geometry. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ray\+\_\+tracer} & Raytracer containing the geometry to use for graph generation.\\
+\hline
+{\em start\+\_\+point} & The starting point for the graph generator to begin searching from. If this isn\textquotesingle{}t above solid ground, no nodes will be generated.\\
+\hline
+{\em spacing} & Space between nodes for each step of the search. Lower values will yield more nodes for a higher resolution graph.\\
+\hline
+{\em Max\+Nodes} & Stop generation after this many nodes. A value of -\/1 will generate an infinite amount of nodes. Note that the final node count may be greater than this value.\\
+\hline
+{\em Up\+Step} & Maximum height of a step the graph can traverse. Any steps higher this will be considered inaccessible.\\
+\hline
+{\em Up\+Slope} & Maximum upward slope the graph can traverse in degrees. Any slopes steeper than this will be considered inaccessible.\\
+\hline
+{\em Down\+Step} & Maximum step down the graph can traverse. Any steps steeper than this will be considered inaccessible.\\
+\hline
+{\em Down\+Slope} & The maximum downward slope the graph can traverse. Any slopes steeper than this will be considered inaccessible.\\
+\hline
+{\em max\+\_\+step\+\_\+connection} & Multiplier for number of children to generate for each node. Increasing this value will increase the number of edges in the graph, and as a result the amount of memory the algorithm requires.\\
+\hline
+{\em core\+\_\+count} & Number of cores to use. -\/1 will use all available cores, and 0 or 1 will run a serialized version of the algorithm.\\
+\hline
+{\em obstacle\+\_\+ids} & Array of geometry I\+Ds to consider obstacles \\
+\hline
+{\em walkable\+\_\+ids} & Array of geometry I\+Ds to consider as walkable surfaces \\
+\hline
+{\em num\+\_\+obstacles} & number of elements in {\ttfamily obstacle\+\_\+ids} \\
+\hline
+{\em num\+\_\+walkables} & number of elements in {\ttfamily walkable\+\_\+ids}\\
+\hline
+{\em out\+\_\+graph} & Address of a (\mbox{\hyperlink{a01497}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$); out\+\_\+graph will address heap-\/allocated memory to an initialized \mbox{\hyperlink{a01497}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} on success.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{}{H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+OK}} if graph creation was successful. \mbox{\hyperlink{}{H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+N\+O\+\_\+\+G\+R\+A\+PH}} if \mbox{\hyperlink{a00388_gac2583dc1ee6786b15fa4f06bfde2130a}{Generate\+Graph}} failed to generate a graph with more than a single node.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}} (how to create a B\+VH), \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} (how to destroy a B\+VH)
+\end{DoxySeeAlso}
+You must {\bfseries{load an .obj file}} and {\bfseries{create a B\+VH}} first.~\newline
+ Begin by reviewing the example at \mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}} before proceeding below.
+
+First, determine the {\bfseries{start point}}, {\bfseries{spacing of nodes for each axis}}, and {\bfseries{maximum nodes to generate}}.~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ Then, determine the remainder of the values required by \mbox{\hyperlink{a00388_gac2583dc1ee6786b15fa4f06bfde2130a}{Generate\+Graph}} before calling it.~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ {\bfseries{Very important!}} {\bfseries{Compress the graph}} after generating a graph or adding edges.~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ To output the graph to the console, we must {\bfseries{retrieve its nodes}}.~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ We are now ready to {\bfseries{output}} the generated graph to the {\bfseries{console}}.~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ When we are finished, we must destroy {\bfseries{node\+\_\+vector}} and {\bfseries{graph}}.~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ From here, please review the example at \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} for instructions~\newline
+ on how to free the remainder of the resources used by the graph --~\newline
+ which are the (vector$<$\mbox{\hyperlink{a01297}{H\+F\+::\+Geometry\+::\+Mesh\+Info}}$>$ $\ast$) and (\mbox{\hyperlink{}{H\+F\+::\+Raytracer\+::\+Embree\+Ray\+Tracer}} $\ast$) instances.
+
+~\newline
+ {\ttfamily $>$$>$$>$ Load\+O\+BJ loaded mesh successfully into loaded\+\_\+obj at address 000002468E\+E\+B\+B\+E\+B0, code\+: 1}~\newline
+{\ttfamily $>$$>$$>$ Create\+Raytracer created Embree\+Ray\+Tracer successfully into bvh at address 00000246849C59\+B0, code\+: 1}~\newline
+{\ttfamily $>$$>$$>$ Node count\+: 594}~\newline
+{\ttfamily $>$$>$$>$ \mbox{[}(-\/1, -\/6, 0, 0) (-\/1.\+5, -\/6.\+5, -\/0, 1) (-\/1.\+5, -\/6, -\/0, 2)\mbox{]}}~\newline
+
+
+Definition at line 60 of file analysis\+\_\+\+C.\+cpp.
+
+
+
+References H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Build\+Network(), Map\+To\+Vector(), H\+F\+::\+Exceptions\+::\+N\+O\+\_\+\+G\+R\+A\+PH, H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Nodes(), and H\+F\+::\+Exceptions\+::\+OK.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00388_ga4dea438697ab06c4ab5e6da840bfdcfa_cgraph}
+\end{center}
+\end{figure}

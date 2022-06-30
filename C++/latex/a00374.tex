@@ -1,0 +1,30 @@
+\hypertarget{a00374}{}\doxysection{Cinterface/view\+\_\+analysis\+\_\+C.cpp File Reference}
+\label{a00374}\index{Cinterface/view\_analysis\_C.cpp@{Cinterface/view\_analysis\_C.cpp}}
+{\ttfamily \#include $<$view\+\_\+analysis\+\_\+\+C.\+h$>$}\newline
+{\ttfamily \#include $<$robin\+\_\+hood.\+h$>$}\newline
+{\ttfamily \#include $<$H\+F\+Exceptions.\+h$>$}\newline
+{\ttfamily \#include $<$view\+\_\+analysis.\+h$>$}\newline
+{\ttfamily \#include $<$embree\+\_\+raytracer.\+h$>$}\newline
+{\ttfamily \#include $<$graph.\+h$>$}\newline
+{\ttfamily \#include $<$node.\+h$>$}\newline
+Include dependency graph for view\+\_\+analysis\+\_\+\+C.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00375}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00393_gab6b8e3eab649b42ac014fb7d02d54892}{Sphereical\+View\+Analysis\+Aggregate}} (\mbox{\hyperlink{a01357}{Embree\+Ray\+Tracer}} $\ast$E\+RT, \mbox{\hyperlink{a02017}{Node}} $\ast$node\+\_\+ptr, int node\+\_\+size, int max\+\_\+rays, float upward\+\_\+fov, float downward\+\_\+fov, float height, \mbox{\hyperlink{a00377_a8a1aa9474094ff70818051c921c0537f}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}} AT, vector$<$ float $>$ $\ast$$\ast$out\+\_\+scores, float $\ast$$\ast$out\+\_\+scores\+\_\+ptr, int $\ast$out\+\_\+scores\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Conduct view analysis, then aggregate the results. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00393_gaa4c5714c1e557ef83a03d447eb30c6d0}{Sphereical\+View\+Analysis\+Aggregate\+Flat}} (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$E\+RT, const float $\ast$node\+\_\+ptr, int node\+\_\+size, int max\+\_\+rays, float upward\+\_\+fov, float downward\+\_\+fov, float height, \mbox{\hyperlink{a00377_a8a1aa9474094ff70818051c921c0537f}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}} AT, std\+::vector$<$ float $>$ $\ast$$\ast$out\+\_\+scores, float $\ast$$\ast$out\+\_\+scores\+\_\+ptr, int $\ast$out\+\_\+scores\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Conduct view analysis, and aggregate the results. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00393_ga94d3ddc3981020e2852fc77e51266185}{Spherical\+View\+Analysis\+No\+Aggregate}} (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$E\+RT, const \mbox{\hyperlink{a02017}{H\+F\+::\+Spatial\+Structures\+::\+Node}} $\ast$node\+\_\+ptr, int node\+\_\+size, int $\ast$max\+\_\+rays, float upward\+\_\+fov, float downward\+\_\+fov, float height, std\+::vector$<$ \mbox{\hyperlink{a02045}{Ray\+Result}} $>$ $\ast$$\ast$out\+\_\+results, \mbox{\hyperlink{a02045}{Ray\+Result}} $\ast$$\ast$out\+\_\+results\+\_\+ptr)
+\begin{DoxyCompactList}\small\item\em Perform view analysis, then get the distance and meshid for each individual ray casted. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00393_ga348af4492f3e4e7ffab6da3e86de3924}{Spherical\+View\+Analysis\+No\+Aggregate\+Flat}} (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$E\+RT, const float $\ast$node\+\_\+ptr, int node\+\_\+size, int $\ast$max\+\_\+rays, float upward\+\_\+fov, float downward\+\_\+fov, float height, std\+::vector$<$ \mbox{\hyperlink{a02045}{Ray\+Result}} $>$ $\ast$$\ast$out\+\_\+results, \mbox{\hyperlink{a02045}{Ray\+Result}} $\ast$$\ast$out\+\_\+results\+\_\+ptr)
+\begin{DoxyCompactList}\small\item\em Perform view analysis, and get the distance and meshid for each individual ray casted. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00393_gaf572b7bec28d55bf2c72719742703dff}{Spherical\+Distribute}} (int $\ast$num\+\_\+rays, vector$<$ float $>$ $\ast$$\ast$out\+\_\+direction\+\_\+vector, float $\ast$$\ast$out\+\_\+direction\+\_\+data, float upward\+\_\+fov, float downward\+\_\+fov)
+\begin{DoxyCompactList}\small\item\em Equally distribute points around a unit sphere. \end{DoxyCompactList}\end{DoxyCompactItemize}

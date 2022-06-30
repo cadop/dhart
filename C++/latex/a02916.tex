@@ -1,0 +1,684 @@
+\hypertarget{a02916}{}\doxysection{Cpp/tests/src/embree\+\_\+raytracer.cpp File Reference}
+\label{a02916}\index{Cpp/tests/src/embree\_raytracer.cpp@{Cpp/tests/src/embree\_raytracer.cpp}}
+{\ttfamily \#include $<$gtest/gtest.\+h$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$objloader.\+h$>$}\newline
+{\ttfamily \#include $<$meshinfo.\+h$>$}\newline
+{\ttfamily \#include $<$embree\+\_\+raytracer.\+h$>$}\newline
+{\ttfamily \#include $<$robin\+\_\+hood.\+h$>$}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$view\+\_\+analysis.\+h$>$}\newline
+{\ttfamily \#include $<$H\+F\+Exceptions.\+h$>$}\newline
+{\ttfamily \#include $<$objloader\+\_\+\+C.\+h$>$}\newline
+{\ttfamily \#include $<$raytracer\+\_\+\+C.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}Ray\+Request.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}performance\+\_\+testing.\+h\char`\"{}}\newline
+Include dependency graph for embree\+\_\+raytracer.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02917}
+\end{center}
+\end{figure}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{a00416}{C\+\_\+\+Interface}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01357}{Embree\+Ray\+Tracer}} \mbox{\hyperlink{a02916_a9d80c100f0fb078365530827625b6314}{Create\+R\+T\+With\+Plane}} ()
+\begin{DoxyCompactList}\small\item\em Create a new raytracer from a basic 10x10 plane centered on the origin. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{a02916_a2d7c64a990ab1f4e06dfd5ac3e903433}{Distance}} (const array$<$ float, 3 $>$ \&p1, const array$<$ float, 3 $>$ \&p2)
+\begin{DoxyCompactList}\small\item\em Calc distance between two arrays. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02916_abba9a7b078dbf6d0ce62d65096e514e6}{T\+E\+ST}} (\+\_\+\+Precision, Ray\+Tracer\+Connsistency)
+\item 
+\mbox{\hyperlink{a02916_a9a2f0da89ecacc3ecb09071d15642a7a}{T\+E\+ST}} (\+\_\+\+Embree\+Ray\+Tracer, Hash\+Algorithm)
+\item 
+\mbox{\hyperlink{a02916_ad5b770c3b41cc0890daf1ee1558d918f}{T\+E\+ST}} (\+\_\+\+Embree\+Ray\+Tracer, Init)
+\item 
+\mbox{\hyperlink{a02916_a2e15394a1995a11175514e20f8c4abdb}{T\+E\+ST}} (\+\_\+\+Embree\+Ray\+Tracer, Copy)
+\item 
+\mbox{\hyperlink{a02916_a56a8a753782e63c9a41f2bbf0a302ad1}{T\+E\+ST}} (\+\_\+\+Embree\+Ray\+Tracer, Embree\+Garbage\+Collect\+Correct)
+\item 
+\mbox{\hyperlink{a02916_a16dca684f6b0e926834d9237d2dc8d33}{T\+E\+ST}} (\+\_\+\+Embree\+Ray\+Tracer, Occlusion\+Rays)
+\item 
+\mbox{\hyperlink{a02916_a0c29fb59aefd93ef5870db9791c20540}{T\+E\+ST}} (\+\_\+\+Embree\+Ray\+Tracer, Standard\+Rays)
+\item 
+\mbox{\hyperlink{a02916_a3832f53ff35fb91ade94df5719405253}{T\+E\+ST}} (\+\_\+\+Embree\+Ray\+Tracer, Hit\+Points\+Are\+Accurate)
+\item 
+\mbox{\hyperlink{a02916_a67aee896569b97201ecd57e7018e1f02}{T\+E\+ST}} (\+\_\+\+Embree\+Ray\+Tracer, Ray\+Tolerance)
+\item 
+\mbox{\hyperlink{a02916_a52e4bac1b63d27d2823607bc8cb35b4f}{T\+E\+ST}} (\+\_\+\+Embree\+Ray\+Tracer, Embree\+Ray\+Performance)
+\item 
+\mbox{\hyperlink{a02916_a510db65c93ed34b3286c97ce976b01ec}{T\+E\+ST}} (\+\_\+\+Embree\+Ray\+Tracer, Deterministic\+Results)
+\item 
+\mbox{\hyperlink{a02916_a896dadbf546b95e684899eee745c8899}{T\+E\+ST}} (\+\_\+\+Embree\+Ray\+Tracer, Point\+Intersections)
+\item 
+\mbox{\hyperlink{a02916_acf26f22fb4111805f2dbb3a4cdb2b50c}{T\+E\+ST}} (\+\_\+\+Embree\+Ray\+Tracer, Occlusions)
+\item 
+\mbox{\hyperlink{a02916_af0131bc35104e8c2233bbd0a7ca148b3}{T\+E\+ST}} (\+\_\+\+Embree\+Ray\+Tracer, Point\+Intersection)
+\item 
+\mbox{\hyperlink{a02916_a68a8432576cc928a701ad252e13a4a1b}{T\+E\+ST}} (\+\_\+\+Embree\+Ray\+Tracer, Fire\+Ray\+Array\+Overload)
+\item 
+\mbox{\hyperlink{a02916_a0a19048bb08aa9ef8d95ad9661abc0a7}{T\+E\+ST}} (\+\_\+\+Embree\+Ray\+Tracer, Intersect)
+\item 
+\mbox{\hyperlink{a02916_a290b5d9896a5f2d1c3d51a858456ba9c}{T\+E\+ST}} (\+\_\+\+Embree\+Ray\+Tracer, Intersect\+Output\+Arguments)
+\item 
+\mbox{\hyperlink{a02916_a9c985a51e6a5733f3a83e1883da5e9f2}{T\+E\+ST}} (\+\_\+\+Embree\+Ray\+Tracer, Occluded)
+\item 
+\mbox{\hyperlink{a02916_ab9e41f3f72c00ec7faa42ae091a62978}{T\+E\+ST}} (\+\_\+\+Embree\+Ray\+Tracer, Fire\+Occlusion\+Ray\+Array)
+\item 
+\mbox{\hyperlink{a02916_ada10e93732c39842c5bd29882f52ec7a}{T\+E\+ST}} (\+\_\+\+Embree\+Ray\+Tracer, Occluded\+Single)
+\item 
+\mbox{\hyperlink{a02916_a435226940c0a70df401c419ba5ab1e08}{T\+E\+ST}} (\+\_\+\+Embree\+Ray\+Tracer, \mbox{\hyperlink{a00391_ga7f80c3aff3b2a8a28794830913ef2a36}{Add\+Mesh}})
+\item 
+\mbox{\hyperlink{a02916_a292a3a4b678cf8b2403f0c38be3706a1}{T\+E\+ST}} (\+\_\+\+Embree\+Ray\+Tracer, Insert\+New\+Mesh\+One\+Mesh)
+\item 
+\mbox{\hyperlink{a02916_a7f61e6b65757af94fa5cbd0d8f6619dc}{T\+E\+ST}} (\+\_\+\+Embree\+Ray\+Tracer, Insert\+New\+Mesh\+Vec\+Mesh)
+\item 
+\mbox{\hyperlink{a02916_a6c1d0077df64c4e59f12ba26f2908b39}{T\+E\+ST}} (\+\_\+\+Embree\+Ray\+Tracer, Operator\+Assignment)
+\item 
+\mbox{\hyperlink{a02916_a9aacff9a0b4d3303017d4bb78adc3f66}{T\+E\+ST}} (\+\_\+\+Full\+Ray\+Request, Constructor\+Args)
+\item 
+\mbox{\hyperlink{a02916_aaebabc51e6a9959ad28f6f3c70498b9b}{T\+E\+ST}} (\+\_\+\+Full\+Ray\+Request, Did\+Hit)
+\item 
+\mbox{\hyperlink{a02916_afb06f40977f1b09dc8b8cc160691dc8f}{T\+E\+ST}} (Performance, Embree\+Raytracer)
+\begin{DoxyCompactList}\small\item\em How quickly the raytracer can fire rays directly at a simple plane. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01297}{Mesh\+Info}}$<$ float $>$ $\ast$ \mbox{\hyperlink{a00416_a62a0b0af38f3ea2ac8b1919033df5c75}{C\+\_\+\+Interface\+::\+Construct\+Example\+Plane}} ()
+\item 
+\mbox{\hyperlink{a01357}{Embree\+Ray\+Tracer}} $\ast$ \mbox{\hyperlink{a00416_a1436297bd9d52cd225da8671e20252f3}{C\+\_\+\+Interface\+::\+Construct\+Test\+Raytracer}} ()
+\item 
+\mbox{\hyperlink{a00416_ab5b50e884ef382c46bffdea00b41cc23}{C\+\_\+\+Interface\+::\+T\+E\+ST}} (C\+\_\+\+Embree\+Ray\+Tracer, Create\+Ray\+Tracer)
+\item 
+\mbox{\hyperlink{a00416_a62ffaa28d4bf2697ae669e95cc0e7971}{C\+\_\+\+Interface\+::\+T\+E\+ST}} (C\+\_\+\+Embree\+Ray\+Tracer, \mbox{\hyperlink{a00391_ga7f80c3aff3b2a8a28794830913ef2a36}{Add\+Mesh}})
+\item 
+\mbox{\hyperlink{a00416_a75a69a5828e9048e18cd8174f762aa1c}{C\+\_\+\+Interface\+::\+T\+E\+ST}} (C\+\_\+\+Embree\+Ray\+Tracer, New\+Meshes\+Can\+Be\+Intersected)
+\item 
+\mbox{\hyperlink{a00416_a493636385f041004568ceaf4ae02d208}{C\+\_\+\+Interface\+::\+T\+E\+ST}} (C\+\_\+\+Embree\+Ray\+Tracer, Construction\+With\+Multiple\+Meshes)
+\item 
+\mbox{\hyperlink{a00416_a845333eb861cbeb8f8d18e4d1ea6bd66}{C\+\_\+\+Interface\+::\+T\+E\+ST}} (C\+\_\+\+Embree\+Ray\+Tracer, Addition\+With\+Multiple\+Meshes)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{a02916_a9d80c100f0fb078365530827625b6314}\label{a02916_a9d80c100f0fb078365530827625b6314}} 
+\index{embree\_raytracer.cpp@{embree\_raytracer.cpp}!CreateRTWithPlane@{CreateRTWithPlane}}
+\index{CreateRTWithPlane@{CreateRTWithPlane}!embree\_raytracer.cpp@{embree\_raytracer.cpp}}
+\doxysubsubsection{\texorpdfstring{CreateRTWithPlane()}{CreateRTWithPlane()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01357}{Embree\+Ray\+Tracer}} Create\+R\+T\+With\+Plane (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Create a new raytracer from a basic 10x10 plane centered on the origin. 
+
+
+
+Definition at line 36 of file embree\+\_\+raytracer.\+cpp.
+
+\mbox{\Hypertarget{a02916_a2d7c64a990ab1f4e06dfd5ac3e903433}\label{a02916_a2d7c64a990ab1f4e06dfd5ac3e903433}} 
+\index{embree\_raytracer.cpp@{embree\_raytracer.cpp}!Distance@{Distance}}
+\index{Distance@{Distance}!embree\_raytracer.cpp@{embree\_raytracer.cpp}}
+\doxysubsubsection{\texorpdfstring{Distance()}{Distance()}}
+{\footnotesize\ttfamily float Distance (\begin{DoxyParamCaption}\item[{const array$<$ float, 3 $>$ \&}]{p1,  }\item[{const array$<$ float, 3 $>$ \&}]{p2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Calc distance between two arrays. 
+
+
+
+Definition at line 51 of file embree\+\_\+raytracer.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=216pt]{a02916_a2d7c64a990ab1f4e06dfd5ac3e903433_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02916_a435226940c0a70df401c419ba5ab1e08}\label{a02916_a435226940c0a70df401c419ba5ab1e08}} 
+\index{embree\_raytracer.cpp@{embree\_raytracer.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!embree\_raytracer.cpp@{embree\_raytracer.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [1/27]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Embree\+Ray\+Tracer}]{,  }\item[{\mbox{\hyperlink{a00391_ga7f80c3aff3b2a8a28794830913ef2a36}{Add\+Mesh}}}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 731 of file embree\+\_\+raytracer.\+cpp.
+
+\mbox{\Hypertarget{a02916_a2e15394a1995a11175514e20f8c4abdb}\label{a02916_a2e15394a1995a11175514e20f8c4abdb}} 
+\index{embree\_raytracer.cpp@{embree\_raytracer.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!embree\_raytracer.cpp@{embree\_raytracer.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [2/27]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Embree\+Ray\+Tracer}]{,  }\item[{Copy}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 110 of file embree\+\_\+raytracer.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), and H\+F\+::\+Geometry\+::\+O\+N\+L\+Y\+\_\+\+F\+I\+LE.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02916_a2e15394a1995a11175514e20f8c4abdb_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02916_a510db65c93ed34b3286c97ce976b01ec}\label{a02916_a510db65c93ed34b3286c97ce976b01ec}} 
+\index{embree\_raytracer.cpp@{embree\_raytracer.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!embree\_raytracer.cpp@{embree\_raytracer.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [3/27]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Embree\+Ray\+Tracer}]{,  }\item[{Deterministic\+Results}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 299 of file embree\+\_\+raytracer.\+cpp.
+
+
+
+References Distance(), and H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Point\+Intersections().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02916_a510db65c93ed34b3286c97ce976b01ec_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02916_a56a8a753782e63c9a41f2bbf0a302ad1}\label{a02916_a56a8a753782e63c9a41f2bbf0a302ad1}} 
+\index{embree\_raytracer.cpp@{embree\_raytracer.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!embree\_raytracer.cpp@{embree\_raytracer.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [4/27]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Embree\+Ray\+Tracer}]{,  }\item[{Embree\+Garbage\+Collect\+Correct}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 120 of file embree\+\_\+raytracer.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Occluded(), and H\+F\+::\+Geometry\+::\+O\+N\+L\+Y\+\_\+\+F\+I\+LE.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02916_a56a8a753782e63c9a41f2bbf0a302ad1_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02916_a52e4bac1b63d27d2823607bc8cb35b4f}\label{a02916_a52e4bac1b63d27d2823607bc8cb35b4f}} 
+\index{embree\_raytracer.cpp@{embree\_raytracer.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!embree\_raytracer.cpp@{embree\_raytracer.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [5/27]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Embree\+Ray\+Tracer}]{,  }\item[{Embree\+Ray\+Performance}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 255 of file embree\+\_\+raytracer.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), H\+F\+::\+Geometry\+::\+O\+N\+L\+Y\+\_\+\+F\+I\+LE, and Print\+Trials().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02916_a52e4bac1b63d27d2823607bc8cb35b4f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02916_ab9e41f3f72c00ec7faa42ae091a62978}\label{a02916_ab9e41f3f72c00ec7faa42ae091a62978}} 
+\index{embree\_raytracer.cpp@{embree\_raytracer.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!embree\_raytracer.cpp@{embree\_raytracer.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [6/27]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Embree\+Ray\+Tracer}]{,  }\item[{Fire\+Occlusion\+Ray\+Array}]{ }\end{DoxyParamCaption})}
+
+\mbox{[}E\+X\+\_\+\+Occluded\+\_\+\+Array\mbox{]}
+
+\mbox{[}E\+X\+\_\+\+Occluded\+\_\+\+Array\mbox{]}
+
+Definition at line 666 of file embree\+\_\+raytracer.\+cpp.
+
+
+
+References H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Occluded().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02916_ab9e41f3f72c00ec7faa42ae091a62978_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02916_a68a8432576cc928a701ad252e13a4a1b}\label{a02916_a68a8432576cc928a701ad252e13a4a1b}} 
+\index{embree\_raytracer.cpp@{embree\_raytracer.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!embree\_raytracer.cpp@{embree\_raytracer.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [7/27]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Embree\+Ray\+Tracer}]{,  }\item[{Fire\+Ray\+Array\+Overload}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 475 of file embree\+\_\+raytracer.\+cpp.
+
+
+
+References Distance(), and H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Point\+Intersection().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=303pt]{a02916_a68a8432576cc928a701ad252e13a4a1b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02916_a9a2f0da89ecacc3ecb09071d15642a7a}\label{a02916_a9a2f0da89ecacc3ecb09071d15642a7a}} 
+\index{embree\_raytracer.cpp@{embree\_raytracer.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!embree\_raytracer.cpp@{embree\_raytracer.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [8/27]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Embree\+Ray\+Tracer}]{,  }\item[{Hash\+Algorithm}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 90 of file embree\+\_\+raytracer.\+cpp.
+
+\mbox{\Hypertarget{a02916_a3832f53ff35fb91ade94df5719405253}\label{a02916_a3832f53ff35fb91ade94df5719405253}} 
+\index{embree\_raytracer.cpp@{embree\_raytracer.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!embree\_raytracer.cpp@{embree\_raytracer.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [9/27]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Embree\+Ray\+Tracer}]{,  }\item[{Hit\+Points\+Are\+Accurate}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 180 of file embree\+\_\+raytracer.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), H\+F\+::\+Geometry\+::\+O\+N\+L\+Y\+\_\+\+F\+I\+LE, and plane\+\_\+path.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02916_a3832f53ff35fb91ade94df5719405253_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02916_ad5b770c3b41cc0890daf1ee1558d918f}\label{a02916_ad5b770c3b41cc0890daf1ee1558d918f}} 
+\index{embree\_raytracer.cpp@{embree\_raytracer.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!embree\_raytracer.cpp@{embree\_raytracer.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [10/27]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Embree\+Ray\+Tracer}]{,  }\item[{Init}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 103 of file embree\+\_\+raytracer.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), and H\+F\+::\+Geometry\+::\+O\+N\+L\+Y\+\_\+\+F\+I\+LE.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02916_ad5b770c3b41cc0890daf1ee1558d918f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02916_a292a3a4b678cf8b2403f0c38be3706a1}\label{a02916_a292a3a4b678cf8b2403f0c38be3706a1}} 
+\index{embree\_raytracer.cpp@{embree\_raytracer.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!embree\_raytracer.cpp@{embree\_raytracer.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [11/27]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Embree\+Ray\+Tracer}]{,  }\item[{Insert\+New\+Mesh\+One\+Mesh}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 757 of file embree\+\_\+raytracer.\+cpp.
+
+
+
+References C\+Interface\+Tests\+::mesh\+\_\+name.
+
+\mbox{\Hypertarget{a02916_a7f61e6b65757af94fa5cbd0d8f6619dc}\label{a02916_a7f61e6b65757af94fa5cbd0d8f6619dc}} 
+\index{embree\_raytracer.cpp@{embree\_raytracer.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!embree\_raytracer.cpp@{embree\_raytracer.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [12/27]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Embree\+Ray\+Tracer}]{,  }\item[{Insert\+New\+Mesh\+Vec\+Mesh}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 790 of file embree\+\_\+raytracer.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), H\+F\+::\+Geometry\+::\+Mesh\+Info(), and H\+F\+::\+Geometry\+::\+O\+N\+L\+Y\+\_\+\+F\+I\+LE.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02916_a7f61e6b65757af94fa5cbd0d8f6619dc_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02916_a0a19048bb08aa9ef8d95ad9661abc0a7}\label{a02916_a0a19048bb08aa9ef8d95ad9661abc0a7}} 
+\index{embree\_raytracer.cpp@{embree\_raytracer.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!embree\_raytracer.cpp@{embree\_raytracer.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [13/27]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Embree\+Ray\+Tracer}]{,  }\item[{Intersect}]{ }\end{DoxyParamCaption})}
+
+\mbox{[}E\+X\+\_\+\+Intersect\mbox{]}
+
+\mbox{[}E\+X\+\_\+\+Intersect\mbox{]}
+
+Definition at line 561 of file embree\+\_\+raytracer.\+cpp.
+
+
+
+References H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Intersect().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=303pt]{a02916_a0a19048bb08aa9ef8d95ad9661abc0a7_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02916_a290b5d9896a5f2d1c3d51a858456ba9c}\label{a02916_a290b5d9896a5f2d1c3d51a858456ba9c}} 
+\index{embree\_raytracer.cpp@{embree\_raytracer.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!embree\_raytracer.cpp@{embree\_raytracer.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [14/27]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Embree\+Ray\+Tracer}]{,  }\item[{Intersect\+Output\+Arguments}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 595 of file embree\+\_\+raytracer.\+cpp.
+
+
+
+References H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Intersect\+Output\+Arguments().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02916_a290b5d9896a5f2d1c3d51a858456ba9c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02916_a9c985a51e6a5733f3a83e1883da5e9f2}\label{a02916_a9c985a51e6a5733f3a83e1883da5e9f2}} 
+\index{embree\_raytracer.cpp@{embree\_raytracer.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!embree\_raytracer.cpp@{embree\_raytracer.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [15/27]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Embree\+Ray\+Tracer}]{,  }\item[{Occluded}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 632 of file embree\+\_\+raytracer.\+cpp.
+
+
+
+References H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Occluded().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02916_a9c985a51e6a5733f3a83e1883da5e9f2_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02916_ada10e93732c39842c5bd29882f52ec7a}\label{a02916_ada10e93732c39842c5bd29882f52ec7a}} 
+\index{embree\_raytracer.cpp@{embree\_raytracer.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!embree\_raytracer.cpp@{embree\_raytracer.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [16/27]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Embree\+Ray\+Tracer}]{,  }\item[{Occluded\+Single}]{ }\end{DoxyParamCaption})}
+
+\mbox{[}E\+X\+\_\+\+Occluded\mbox{]}
+
+\mbox{[}E\+X\+\_\+\+Occluded\mbox{]}
+
+Definition at line 701 of file embree\+\_\+raytracer.\+cpp.
+
+
+
+References H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Occluded().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02916_ada10e93732c39842c5bd29882f52ec7a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02916_a16dca684f6b0e926834d9237d2dc8d33}\label{a02916_a16dca684f6b0e926834d9237d2dc8d33}} 
+\index{embree\_raytracer.cpp@{embree\_raytracer.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!embree\_raytracer.cpp@{embree\_raytracer.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [17/27]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Embree\+Ray\+Tracer}]{,  }\item[{Occlusion\+Rays}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 140 of file embree\+\_\+raytracer.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), and H\+F\+::\+Geometry\+::\+O\+N\+L\+Y\+\_\+\+F\+I\+LE.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02916_a16dca684f6b0e926834d9237d2dc8d33_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02916_acf26f22fb4111805f2dbb3a4cdb2b50c}\label{a02916_acf26f22fb4111805f2dbb3a4cdb2b50c}} 
+\index{embree\_raytracer.cpp@{embree\_raytracer.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!embree\_raytracer.cpp@{embree\_raytracer.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [18/27]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Embree\+Ray\+Tracer}]{,  }\item[{Occlusions}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 401 of file embree\+\_\+raytracer.\+cpp.
+
+\mbox{\Hypertarget{a02916_a6c1d0077df64c4e59f12ba26f2908b39}\label{a02916_a6c1d0077df64c4e59f12ba26f2908b39}} 
+\index{embree\_raytracer.cpp@{embree\_raytracer.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!embree\_raytracer.cpp@{embree\_raytracer.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [19/27]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Embree\+Ray\+Tracer}]{,  }\item[{Operator\+Assignment}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 839 of file embree\+\_\+raytracer.\+cpp.
+
+\mbox{\Hypertarget{a02916_af0131bc35104e8c2233bbd0a7ca148b3}\label{a02916_af0131bc35104e8c2233bbd0a7ca148b3}} 
+\index{embree\_raytracer.cpp@{embree\_raytracer.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!embree\_raytracer.cpp@{embree\_raytracer.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [20/27]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Embree\+Ray\+Tracer}]{,  }\item[{Point\+Intersection}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 442 of file embree\+\_\+raytracer.\+cpp.
+
+
+
+References Distance(), and H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Point\+Intersection().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=303pt]{a02916_af0131bc35104e8c2233bbd0a7ca148b3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02916_a896dadbf546b95e684899eee745c8899}\label{a02916_a896dadbf546b95e684899eee745c8899}} 
+\index{embree\_raytracer.cpp@{embree\_raytracer.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!embree\_raytracer.cpp@{embree\_raytracer.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [21/27]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Embree\+Ray\+Tracer}]{,  }\item[{Point\+Intersections}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 356 of file embree\+\_\+raytracer.\+cpp.
+
+
+
+References Distance().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=216pt]{a02916_a896dadbf546b95e684899eee745c8899_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02916_a67aee896569b97201ecd57e7018e1f02}\label{a02916_a67aee896569b97201ecd57e7018e1f02}} 
+\index{embree\_raytracer.cpp@{embree\_raytracer.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!embree\_raytracer.cpp@{embree\_raytracer.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [22/27]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Embree\+Ray\+Tracer}]{,  }\item[{Ray\+Tolerance}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 228 of file embree\+\_\+raytracer.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), H\+F\+::\+Geometry\+::\+O\+N\+L\+Y\+\_\+\+F\+I\+LE, and plane\+\_\+path.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02916_a67aee896569b97201ecd57e7018e1f02_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02916_a0c29fb59aefd93ef5870db9791c20540}\label{a02916_a0c29fb59aefd93ef5870db9791c20540}} 
+\index{embree\_raytracer.cpp@{embree\_raytracer.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!embree\_raytracer.cpp@{embree\_raytracer.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [23/27]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Embree\+Ray\+Tracer}]{,  }\item[{Standard\+Rays}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 159 of file embree\+\_\+raytracer.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), and H\+F\+::\+Geometry\+::\+O\+N\+L\+Y\+\_\+\+F\+I\+LE.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02916_a0c29fb59aefd93ef5870db9791c20540_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02916_a9aacff9a0b4d3303017d4bb78adc3f66}\label{a02916_a9aacff9a0b4d3303017d4bb78adc3f66}} 
+\index{embree\_raytracer.cpp@{embree\_raytracer.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!embree\_raytracer.cpp@{embree\_raytracer.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [24/27]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Full\+Ray\+Request}]{,  }\item[{Constructor\+Args}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 863 of file embree\+\_\+raytracer.\+cpp.
+
+\mbox{\Hypertarget{a02916_aaebabc51e6a9959ad28f6f3c70498b9b}\label{a02916_aaebabc51e6a9959ad28f6f3c70498b9b}} 
+\index{embree\_raytracer.cpp@{embree\_raytracer.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!embree\_raytracer.cpp@{embree\_raytracer.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [25/27]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Full\+Ray\+Request}]{,  }\item[{Did\+Hit}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 882 of file embree\+\_\+raytracer.\+cpp.
+
+
+
+References H\+F\+::\+Ray\+Tracer\+::\+Ray\+Request\+::did\+Hit().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=305pt]{a02916_aaebabc51e6a9959ad28f6f3c70498b9b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02916_abba9a7b078dbf6d0ce62d65096e514e6}\label{a02916_abba9a7b078dbf6d0ce62d65096e514e6}} 
+\index{embree\_raytracer.cpp@{embree\_raytracer.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!embree\_raytracer.cpp@{embree\_raytracer.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [26/27]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Precision}]{,  }\item[{Ray\+Tracer\+Connsistency}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 59 of file embree\+\_\+raytracer.\+cpp.
+
+
+
+References H\+F\+::\+Ray\+Tracer\+::\+Ray\+Triangle\+Intersection(), and H\+F\+::\+Ray\+Tracer\+::\+Vector3\+D\+::z.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02916_abba9a7b078dbf6d0ce62d65096e514e6_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02916_afb06f40977f1b09dc8b8cc160691dc8f}\label{a02916_afb06f40977f1b09dc8b8cc160691dc8f}} 
+\index{embree\_raytracer.cpp@{embree\_raytracer.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!embree\_raytracer.cpp@{embree\_raytracer.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [27/27]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{Performance}]{,  }\item[{Embree\+Raytracer}]{ }\end{DoxyParamCaption})}
+
+
+
+How quickly the raytracer can fire rays directly at a simple plane. 
+
+Likely isn\textquotesingle{}t truly indicative of the raytracer\textquotesingle{}s performance, but provides a starting point for other more in depth performance tests. Variations on model complexity and ray direction are suggested. 
+
+Definition at line 917 of file embree\+\_\+raytracer.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Get\+Test\+O\+B\+J\+Path(), H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Point\+Intersections(), and Print\+Trials().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02916_afb06f40977f1b09dc8b8cc160691dc8f_cgraph}
+\end{center}
+\end{figure}

@@ -1,0 +1,214 @@
+\hypertarget{a00314}{}\doxysection{Cpp/tests/src/performance.cpp File Reference}
+\label{a00314}\index{Cpp/tests/src/performance.cpp@{Cpp/tests/src/performance.cpp}}
+{\ttfamily \#include \char`\"{}gtest/gtest.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}performance\+\_\+testing.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$embree\+\_\+raytracer.\+h$>$}\newline
+{\ttfamily \#include $<$objloader.\+h$>$}\newline
+{\ttfamily \#include $<$meshinfo.\+h$>$}\newline
+{\ttfamily \#include $<$view\+\_\+analysis.\+h$>$}\newline
+{\ttfamily \#include $<$graph.\+h$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$array$>$}\newline
+{\ttfamily \#include $<$ostream$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$graph\+\_\+generator.\+h$>$}\newline
+Include dependency graph for performance.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00315}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{a02033}{Model\+And\+Start}}
+\item 
+struct \mbox{\hyperlink{a00314_a02037}{Graph\+Generator\+Settings}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{a00314_acea841c68a73d07ad9d772ec2e94a683}{Mesh\+Info}} = \mbox{\hyperlink{a01297}{H\+F\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T $>$ }\\int \mbox{\hyperlink{a00314_af6294bc0a9d2a085cdd50e906deb45b0}{count\+\_\+hits}} (vector$<$ \mbox{\hyperlink{a01361}{Hit\+Struct}}$<$ T $>$$>$ \&results)
+\item 
+void \mbox{\hyperlink{a00314_af561c1c272fe38730c9af5de18ad52d1}{Print\+Directions}} (const std\+::vector$<$ std\+::array$<$ float, 3 $>$$>$ directions)
+\item 
+void \mbox{\hyperlink{a00314_a01cf79230c759fd538ee505625d86ac1}{Write\+To\+C\+SV}} (std\+::ofstream \&file, const std\+::vector$<$ string $>$ \&strings\+\_\+to\+\_\+write)
+\item 
+\mbox{\hyperlink{a00314_ac3af4c748eb499b15ad0164e913a45fa}{T\+E\+ST}} (Performance, Custom\+Triangle\+Intersection)
+\item 
+\mbox{\hyperlink{a00314_ac50ab181fa2bc1dfc71905c33b78a671}{T\+E\+ST}} (Performance, Graph\+Generator\+\_\+\+Precisevs\+Standard)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Class Documentation}
+\index{GraphGeneratorSettings@{GraphGeneratorSettings}}\label{a02037}
+\Hypertarget{a00314_a02037}
+\doxysubsubsection{struct Graph\+Generator\+Settings}
+
+
+Definition at line 191 of file performance.\+cpp.
+
+
+
+Collaboration diagram for Graph\+Generator\+Settings\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=324pt]{a02035}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00314_af85b0cb3633f45c9f4fd447a45e583db}\label{a00314_af85b0cb3633f45c9f4fd447a45e583db}} 
+float&
+DownSlope&
+\\
+\hline
+
+\mbox{\Hypertarget{a00314_ae2da405827a43c79b05778b22932e3e8}\label{a00314_ae2da405827a43c79b05778b22932e3e8}} 
+float&
+DownStep&
+\\
+\hline
+
+\mbox{\Hypertarget{a00314_a2bbf9c53801272c77403f68c5b9f7d25}\label{a00314_a2bbf9c53801272c77403f68c5b9f7d25}} 
+array$<$ float, 3 $>$&
+spacing&
+\\
+\hline
+
+\mbox{\Hypertarget{a00314_abf7e77544c68c4d3ee937b556a7dc690}\label{a00314_abf7e77544c68c4d3ee937b556a7dc690}} 
+float&
+UpSlope&
+\\
+\hline
+
+\mbox{\Hypertarget{a00314_a559063c10f903a14900b5162915d8785}\label{a00314_a559063c10f903a14900b5162915d8785}} 
+float&
+UpStep&
+\\
+\hline
+
+\end{DoxyFields}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{a00314_acea841c68a73d07ad9d772ec2e94a683}\label{a00314_acea841c68a73d07ad9d772ec2e94a683}} 
+\index{performance.cpp@{performance.cpp}!MeshInfo@{MeshInfo}}
+\index{MeshInfo@{MeshInfo}!performance.cpp@{performance.cpp}}
+\doxysubsubsection{\texorpdfstring{MeshInfo}{MeshInfo}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{a02910_acea841c68a73d07ad9d772ec2e94a683}{Mesh\+Info}} =  \mbox{\hyperlink{a01297}{H\+F\+::\+Geometry\+::\+Mesh\+Info}}$<$float$>$}
+
+
+
+Definition at line 19 of file performance.\+cpp.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{a00314_af6294bc0a9d2a085cdd50e906deb45b0}\label{a00314_af6294bc0a9d2a085cdd50e906deb45b0}} 
+\index{performance.cpp@{performance.cpp}!count\_hits@{count\_hits}}
+\index{count\_hits@{count\_hits}!performance.cpp@{performance.cpp}}
+\doxysubsubsection{\texorpdfstring{count\_hits()}{count\_hits()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+int count\+\_\+hits (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{a01361}{Hit\+Struct}}$<$ T $>$$>$ \&}]{results }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 27 of file performance.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=224pt]{a00314_af6294bc0a9d2a085cdd50e906deb45b0_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00314_af561c1c272fe38730c9af5de18ad52d1}\label{a00314_af561c1c272fe38730c9af5de18ad52d1}} 
+\index{performance.cpp@{performance.cpp}!PrintDirections@{PrintDirections}}
+\index{PrintDirections@{PrintDirections}!performance.cpp@{performance.cpp}}
+\doxysubsubsection{\texorpdfstring{PrintDirections()}{PrintDirections()}}
+{\footnotesize\ttfamily void Print\+Directions (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::array$<$ float, 3 $>$$>$}]{directions }\end{DoxyParamCaption})}
+
+
+
+Definition at line 36 of file performance.\+cpp.
+
+\mbox{\Hypertarget{a00314_ac3af4c748eb499b15ad0164e913a45fa}\label{a00314_ac3af4c748eb499b15ad0164e913a45fa}} 
+\index{performance.cpp@{performance.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!performance.cpp@{performance.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{Performance}]{,  }\item[{Custom\+Triangle\+Intersection}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 77 of file performance.\+cpp.
+
+
+
+References count\+\_\+hits(), H\+F\+::\+View\+Analysis\+::\+Fibbonacci\+Distribute\+Points(), Stop\+Watch\+::\+Get\+Duration(), Stop\+Watch\+::\+Start\+Clock(), Stop\+Watch\+::\+Stop\+Clock(), nlohmann\+::to\+\_\+string(), and Write\+To\+C\+S\+V().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00314_ac3af4c748eb499b15ad0164e913a45fa_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00314_ac50ab181fa2bc1dfc71905c33b78a671}\label{a00314_ac50ab181fa2bc1dfc71905c33b78a671}} 
+\index{performance.cpp@{performance.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!performance.cpp@{performance.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{Performance}]{,  }\item[{Graph\+Generator\+\_\+\+Precisevs\+Standard}]{ }\end{DoxyParamCaption})}
+
+10000, 10000, 10000,
+
+Definition at line 200 of file performance.\+cpp.
+
+
+
+References H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Build\+Network(), Stop\+Watch\+::\+Get\+Duration(), Stop\+Watch\+::\+Start\+Clock(), Stop\+Watch\+::\+Stop\+Clock(), nlohmann\+::to\+\_\+string(), and Write\+To\+C\+S\+V().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00314_ac50ab181fa2bc1dfc71905c33b78a671_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00314_a01cf79230c759fd538ee505625d86ac1}\label{a00314_a01cf79230c759fd538ee505625d86ac1}} 
+\index{performance.cpp@{performance.cpp}!WriteToCSV@{WriteToCSV}}
+\index{WriteToCSV@{WriteToCSV}!performance.cpp@{performance.cpp}}
+\doxysubsubsection{\texorpdfstring{WriteToCSV()}{WriteToCSV()}}
+{\footnotesize\ttfamily void Write\+To\+C\+SV (\begin{DoxyParamCaption}\item[{std\+::ofstream \&}]{file,  }\item[{const std\+::vector$<$ string $>$ \&}]{strings\+\_\+to\+\_\+write }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 69 of file performance.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=230pt]{a00314_a01cf79230c759fd538ee505625d86ac1_icgraph}
+\end{center}
+\end{figure}

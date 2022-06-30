@@ -1,0 +1,170 @@
+\hypertarget{a00287}{}\doxysection{Cpp/tests/src/\+Analysis\+Methods.cpp File Reference}
+\label{a00287}\index{Cpp/tests/src/AnalysisMethods.cpp@{Cpp/tests/src/AnalysisMethods.cpp}}
+{\ttfamily \#include \char`\"{}gtest/gtest.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$array$>$}\newline
+{\ttfamily \#include $<$graph\+\_\+generator.\+h$>$}\newline
+{\ttfamily \#include $<$unique\+\_\+queue.\+h$>$}\newline
+{\ttfamily \#include $<$embree\+\_\+raytracer.\+h$>$}\newline
+{\ttfamily \#include $<$objloader.\+h$>$}\newline
+{\ttfamily \#include $<$meshinfo.\+h$>$}\newline
+{\ttfamily \#include $<$graph.\+h$>$}\newline
+{\ttfamily \#include $<$edge.\+h$>$}\newline
+{\ttfamily \#include $<$node.\+h$>$}\newline
+{\ttfamily \#include $<$Constants.\+h$>$}\newline
+{\ttfamily \#include $<$analysis\+\_\+\+C.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}performance\+\_\+testing.\+h\char`\"{}}\newline
+Include dependency graph for Analysis\+Methods.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00288}
+\end{center}
+\end{figure}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{a00396}{HF}}
+\begin{DoxyCompactList}\small\item\em Perform human scale analysis on 3D environments. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00414}{C\+Interface\+Tests}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01357}{Embree\+Ray\+Tracer}} \mbox{\hyperlink{a00287_a9d80c100f0fb078365530827625b6314}{Create\+R\+T\+With\+Plane}} ()
+\begin{DoxyCompactList}\small\item\em Create a new raytracer from a basic 10x10 plane centered on the origin. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a00396_a2d6862311c7465384d42ce52d43a3e30}{H\+F\+::\+Check\+For\+Duplicates}} (const \mbox{\hyperlink{a01497}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} \&g, float precision=0.\+0001f)
+\item 
+\mbox{\hyperlink{a00396_ad4d7fe23b2913d7e6f0bd00a9730ea10}{H\+F\+::\+T\+E\+ST}} (\+\_\+\+Graph\+Generator, Graph\+Generator\+Parallel)
+\item 
+\mbox{\hyperlink{a00396_a74c66cb8ea66d94cd6962f4e3cc5d2fd}{H\+F\+::\+T\+E\+ST}} (\+\_\+\+Graph\+Generator, Duplicate\+Nodes2)
+\item 
+\mbox{\hyperlink{a00396_a5e5d313f314a79a5489be1fababa9180}{H\+F\+::\+T\+E\+ST}} (\+\_\+\+Graph\+Generator, Duplicate\+Nodes)
+\item 
+\mbox{\hyperlink{a00396_af2bdf6aded4ae1d171c944bf25aa1dc2}{H\+F\+::\+T\+E\+ST}} (\+\_\+\+Graph\+Generator, Graph\+Generator\+Single)
+\item 
+\mbox{\hyperlink{a00396_ae080804ce8a994220e045f1355633a6b}{H\+F\+::\+T\+E\+ST}} (\+\_\+\+Graph\+Generator, Duplicate\+Nodes\+\_\+\+Weston)
+\item 
+\mbox{\hyperlink{a00396_afde00c0da0767e97bd5569954af4bef5}{H\+F\+::\+T\+E\+ST}} (\+\_\+\+Graph\+Generator, Duplicate\+Nodes\+\_\+2B)
+\item 
+\mbox{\hyperlink{a00396_a63cca75099597da83f12856f604116f3}{H\+F\+::\+T\+E\+ST}} (\+\_\+\+Unique\+Queue, Block\+Repeats)
+\item 
+\mbox{\hyperlink{a00396_a5f698f479a173cc5ca2f0c575b3ec777}{H\+F\+::\+T\+E\+ST}} (\+\_\+\+Unique\+Queue, Size)
+\item 
+\mbox{\hyperlink{a00396_ad15205c25d807d5d3384de6d2997802f}{H\+F\+::\+T\+E\+ST}} (\+\_\+\+Unique\+Queue, Empty)
+\item 
+\mbox{\hyperlink{a00414_a05fe5ba0e3d843c9b5dfbe71beaf2c75}{C\+Interface\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Analysis\+C\+Interface, \mbox{\hyperlink{a00388_gac2583dc1ee6786b15fa4f06bfde2130a}{Generate\+Graph}})
+\item 
+\mbox{\hyperlink{a00287_ad04f582dae2b0faf1a502c07ed42de45}{T\+E\+ST}} (Performance, Graph\+Generator)
+\begin{DoxyCompactList}\small\item\em Evaluates how quickly the graph generator can create nodes on a flat plane. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00287_a6527c45b595bfab6fc557e47daa9e767}{T\+E\+ST}} (Performance, attrs)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{a00287_a9d80c100f0fb078365530827625b6314}\label{a00287_a9d80c100f0fb078365530827625b6314}} 
+\index{AnalysisMethods.cpp@{AnalysisMethods.cpp}!CreateRTWithPlane@{CreateRTWithPlane}}
+\index{CreateRTWithPlane@{CreateRTWithPlane}!AnalysisMethods.cpp@{AnalysisMethods.cpp}}
+\doxysubsubsection{\texorpdfstring{CreateRTWithPlane()}{CreateRTWithPlane()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01357}{Embree\+Ray\+Tracer}} Create\+R\+T\+With\+Plane (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Create a new raytracer from a basic 10x10 plane centered on the origin. 
+
+
+
+Definition at line 25 of file Analysis\+Methods.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=267pt]{a00287_a9d80c100f0fb078365530827625b6314_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00287_a6527c45b595bfab6fc557e47daa9e767}\label{a00287_a6527c45b595bfab6fc557e47daa9e767}} 
+\index{AnalysisMethods.cpp@{AnalysisMethods.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!AnalysisMethods.cpp@{AnalysisMethods.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{Performance}]{,  }\item[{attrs}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 478 of file Analysis\+Methods.\+cpp.
+
+
+
+References Create\+R\+T\+With\+Plane(), and nlohmann\+::to\+\_\+string().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=271pt]{a00287_a6527c45b595bfab6fc557e47daa9e767_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00287_ad04f582dae2b0faf1a502c07ed42de45}\label{a00287_ad04f582dae2b0faf1a502c07ed42de45}} 
+\index{AnalysisMethods.cpp@{AnalysisMethods.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!AnalysisMethods.cpp@{AnalysisMethods.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{Performance}]{,  }\item[{Graph\+Generator}]{ }\end{DoxyParamCaption})}
+
+
+
+Evaluates how quickly the graph generator can create nodes on a flat plane. 
+
+namespace \mbox{\hyperlink{a00414}{C\+Interface\+Tests}} \{ T\+E\+S\+T(\+\_\+\+C\+Interface\+Utils, Convert\+Raw\+Float\+Array\+To\+Points) \{ Requires \mbox{\hyperlink{a02898_aa67ab520a76a8af2f5059130268deaba}{include}} \char`\"{}cinterface\+\_\+utils.\+h\char`\"{} \begin{DoxyVerb}    float raw_array[] = { 34.1, 63.9, 16.5, 23.5, 85.7, 45.2, 12.0, 24.6, 99.4 };
+    const int size = 9;
+
+    std::vector<std::array<float, 3>> points = ConvertRawFloatArrayToPoints(raw_array, size);
+}
+
+TEST(_CInterfaceUtils, ConvertRawIntArrayToPoints) {
+\end{DoxyVerb}
+ Requires \mbox{\hyperlink{a02898_aa67ab520a76a8af2f5059130268deaba}{include}} \char`\"{}cinterface\+\_\+utils.\+h\char`\"{} \begin{DoxyVerb}    int raw_array[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
+    const int size = 9;
+
+    std::vector<std::array<int, 3>> points = ConvertRawIntArrayToPoints(raw_array, size);
+}
+
+TEST(_CInterfaceUtils, DestroyFloatVector) {
+\end{DoxyVerb}
+ Requires \mbox{\hyperlink{a02898_aa67ab520a76a8af2f5059130268deaba}{include}} \char`\"{}cinterface\+\_\+utils.\+h\char`\"{} \begin{DoxyVerb}    std::vector<float>* vec = new std::vector<float>{ 3, 6, 9 };
+\end{DoxyVerb}
+
+
+operator delete called on vec within Destroy\+Float\+Vector if (Destroy\+Float\+Vector(vec)) \{ std\+::cout $<$$<$ \char`\"{}\+Destroy\+Float\+Vector was successful\char`\"{} $<$$<$ std\+::endl; vec = nullptr; \} else \{ std\+::cout $<$$<$ \char`\"{}\+Destroy\+Float\+Vector unsuccessful\char`\"{} $<$$<$ std\+::endl; \} \}
+
+T\+E\+S\+T(\+\_\+\+C\+Interface\+Utils, Delete\+Raw\+Ptr) \{ Requires \mbox{\hyperlink{a02898_aa67ab520a76a8af2f5059130268deaba}{include}} \char`\"{}cinterface\+\_\+utils.\+h\char`\"{} \begin{DoxyVerb}    std::vector<int>* vec = new std::vector<int>{ 6, 3, 1, 0, 5, 0 };
+
+    DeleteRawPtr<std::vector<int>>(vec);
+\end{DoxyVerb}
+
+
+At this point here, we assume Delete\+Raw\+Ptr was successful. We set vec to nullptr to eliminate a dangling pointer. if (vec) \{ vec = nullptr; \} \}
+
+\}
+
+/$\ast$! 
+
+Definition at line 422 of file Analysis\+Methods.\+cpp.
+
+
+
+References Create\+R\+T\+With\+Plane(), and Print\+Trials().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00287_ad04f582dae2b0faf1a502c07ed42de45_cgraph}
+\end{center}
+\end{figure}

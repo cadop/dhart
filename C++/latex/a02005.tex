@@ -1,0 +1,648 @@
+\hypertarget{a02005}{}\doxysection{nlohmann\+::basic\+\_\+json\+::json\+\_\+value Union Reference}
+\label{a02005}\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
+
+
+a J\+S\+ON value  
+
+
+
+
+Collaboration diagram for nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02003}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a02005_addaa9da9958343a8687079c6c8561828}{json\+\_\+value}} ()=default
+\begin{DoxyCompactList}\small\item\em default constructor (for null values) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02005_a359b6d7bdd95150e28a21c2def590b3b}{json\+\_\+value}} (\mbox{\hyperlink{a01605_a8cc04e22d7ef18efd2d34bc04eb6a1b2}{boolean\+\_\+t}} v) noexcept
+\begin{DoxyCompactList}\small\item\em constructor for booleans \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02005_a7bd504626c862a55f3e464089390be61}{json\+\_\+value}} (\mbox{\hyperlink{a01605_ab227d71ad47b6ed6a3acae52dedbb49d}{number\+\_\+integer\+\_\+t}} v) noexcept
+\begin{DoxyCompactList}\small\item\em constructor for numbers (integer) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02005_a356100d324dddcc0ed1bdcca086bc809}{json\+\_\+value}} (\mbox{\hyperlink{a01605_a440094de5ef4e119b2771b549b33da70}{number\+\_\+unsigned\+\_\+t}} v) noexcept
+\begin{DoxyCompactList}\small\item\em constructor for numbers (unsigned) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02005_a5f3f88981a4c2a2a19aeb650e37bb117}{json\+\_\+value}} (\mbox{\hyperlink{a01605_ade1eb06e9fc3ff2ba1efd709b94b401d}{number\+\_\+float\+\_\+t}} v) noexcept
+\begin{DoxyCompactList}\small\item\em constructor for numbers (floating-\/point) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02005_a5b3c9b26efff2a7e4ff417df750db888}{json\+\_\+value}} (\mbox{\hyperlink{a00411_a1ed8fc6239da25abcaf681d30ace4985}{value\+\_\+t}} t)
+\begin{DoxyCompactList}\small\item\em constructor for empty values of a given type \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02005_a7d36046b1d3a41021459229963aa906d}{json\+\_\+value}} (const \mbox{\hyperlink{a01605_a561057a2cc70397ad0ab890745d1d7c7}{string\+\_\+t}} \&\mbox{\hyperlink{a01605_ab29a59d20767180d6d2fe4f5054dd245}{value}})
+\begin{DoxyCompactList}\small\item\em constructor for strings \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02005_a16cf11cea854b7d33ece1204c044d91d}{json\+\_\+value}} (\mbox{\hyperlink{a01605_a561057a2cc70397ad0ab890745d1d7c7}{string\+\_\+t}} \&\&\mbox{\hyperlink{a01605_ab29a59d20767180d6d2fe4f5054dd245}{value}})
+\begin{DoxyCompactList}\small\item\em constructor for rvalue strings \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02005_a9d5a9dd88cf61a0fa90fec56d035273d}{json\+\_\+value}} (const \mbox{\hyperlink{a01605_a949272bf6af5eb8eab9675505422f5b3}{object\+\_\+t}} \&\mbox{\hyperlink{a01605_ab29a59d20767180d6d2fe4f5054dd245}{value}})
+\begin{DoxyCompactList}\small\item\em constructor for objects \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02005_a03d2d3f64da9403ffc2393c4b419e514}{json\+\_\+value}} (\mbox{\hyperlink{a01605_a949272bf6af5eb8eab9675505422f5b3}{object\+\_\+t}} \&\&\mbox{\hyperlink{a01605_ab29a59d20767180d6d2fe4f5054dd245}{value}})
+\begin{DoxyCompactList}\small\item\em constructor for rvalue objects \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02005_a11a68bfcc7bd3623023594705788f25b}{json\+\_\+value}} (const \mbox{\hyperlink{a01605_a69524b1f8f42c0a81b86cee3fc54e034}{array\+\_\+t}} \&\mbox{\hyperlink{a01605_ab29a59d20767180d6d2fe4f5054dd245}{value}})
+\begin{DoxyCompactList}\small\item\em constructor for arrays \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02005_ae9a619d174aa0f8020847e965db7752d}{json\+\_\+value}} (\mbox{\hyperlink{a01605_a69524b1f8f42c0a81b86cee3fc54e034}{array\+\_\+t}} \&\&\mbox{\hyperlink{a01605_ab29a59d20767180d6d2fe4f5054dd245}{value}})
+\begin{DoxyCompactList}\small\item\em constructor for rvalue arrays \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02005_a9bfee5458a35e4b1d259797bb142bb12}{json\+\_\+value}} (const typename \mbox{\hyperlink{a01861_a4d27e8633c5a5e3b49dd4ccb06515713}{binary\+\_\+t\+::container\+\_\+type}} \&\mbox{\hyperlink{a01605_ab29a59d20767180d6d2fe4f5054dd245}{value}})
+\begin{DoxyCompactList}\small\item\em constructor for binary arrays \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02005_ae6cfc1f8254912522487a3596a030f8b}{json\+\_\+value}} (typename \mbox{\hyperlink{a01861_a4d27e8633c5a5e3b49dd4ccb06515713}{binary\+\_\+t\+::container\+\_\+type}} \&\&\mbox{\hyperlink{a01605_ab29a59d20767180d6d2fe4f5054dd245}{value}})
+\begin{DoxyCompactList}\small\item\em constructor for rvalue binary arrays \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02005_a2807432b367e5bd4e49f76c206b5cecf}{json\+\_\+value}} (const \mbox{\hyperlink{a01605_acbf51bc13484009ed204bd78a498355e}{binary\+\_\+t}} \&\mbox{\hyperlink{a01605_ab29a59d20767180d6d2fe4f5054dd245}{value}})
+\begin{DoxyCompactList}\small\item\em constructor for binary arrays (internal type) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02005_a15baffa618c4e5bacd7daf7bba0f8e74}{json\+\_\+value}} (\mbox{\hyperlink{a01605_acbf51bc13484009ed204bd78a498355e}{binary\+\_\+t}} \&\&\mbox{\hyperlink{a01605_ab29a59d20767180d6d2fe4f5054dd245}{value}})
+\begin{DoxyCompactList}\small\item\em constructor for rvalue binary arrays (internal type) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{a02005_a394e69339c27a67170aacb49e36243ea}{destroy}} (\mbox{\hyperlink{a00411_a1ed8fc6239da25abcaf681d30ace4985}{value\+\_\+t}} t) noexcept
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a01605_a949272bf6af5eb8eab9675505422f5b3}{object\+\_\+t}} $\ast$ \mbox{\hyperlink{a02005_a9a17d18e60b32adfe4f7f978d3ab5f15}{object}}
+\begin{DoxyCompactList}\small\item\em object (stored with pointer to save storage) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01605_a69524b1f8f42c0a81b86cee3fc54e034}{array\+\_\+t}} $\ast$ \mbox{\hyperlink{a02005_a230c40872531081809d0265a45e1a3be}{array}}
+\begin{DoxyCompactList}\small\item\em array (stored with pointer to save storage) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01605_a561057a2cc70397ad0ab890745d1d7c7}{string\+\_\+t}} $\ast$ \mbox{\hyperlink{a02005_a9eb894164977ae59922dddc11e1d901d}{string}}
+\begin{DoxyCompactList}\small\item\em string (stored with pointer to save storage) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01605_acbf51bc13484009ed204bd78a498355e}{binary\+\_\+t}} $\ast$ \mbox{\hyperlink{a02005_a5e02afb384ff616835e7756c54385015}{binary}}
+\begin{DoxyCompactList}\small\item\em binary (stored with pointer to save storage) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01605_a8cc04e22d7ef18efd2d34bc04eb6a1b2}{boolean\+\_\+t}} \mbox{\hyperlink{a02005_a10e0feb275d431d984cefd4b293d42d5}{boolean}}
+\begin{DoxyCompactList}\small\item\em boolean \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01605_ab227d71ad47b6ed6a3acae52dedbb49d}{number\+\_\+integer\+\_\+t}} \mbox{\hyperlink{a02005_a36022bc146c1c190fb77f51ab654964d}{number\+\_\+integer}}
+\begin{DoxyCompactList}\small\item\em number (integer) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01605_a440094de5ef4e119b2771b549b33da70}{number\+\_\+unsigned\+\_\+t}} \mbox{\hyperlink{a02005_a9a865e1935c91145c9d73aa1d925ce6b}{number\+\_\+unsigned}}
+\begin{DoxyCompactList}\small\item\em number (unsigned integer) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01605_ade1eb06e9fc3ff2ba1efd709b94b401d}{number\+\_\+float\+\_\+t}} \mbox{\hyperlink{a02005_a685ff0842614609b61fd634a6c958ca6}{number\+\_\+float}}
+\begin{DoxyCompactList}\small\item\em number (floating-\/point) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+a J\+S\+ON value 
+
+The actual storage for a J\+S\+ON value of the \mbox{\hyperlink{a01605}{basic\+\_\+json}} class. This union combines the different storage types for the J\+S\+ON value types defined in \mbox{\hyperlink{a01605_a4e43b685789a169bca7e69b3104c86d1}{value\+\_\+t}}.
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ J\+S\+ON type }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ value\+\_\+t type }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ used type  }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ J\+S\+ON type }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ value\+\_\+t type }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ used type  }\\\cline{1-3}
+\endhead
+object &object &pointer to \mbox{\hyperlink{a01605_a949272bf6af5eb8eab9675505422f5b3}{object\+\_\+t}}  \\\cline{1-3}
+array &array &pointer to \mbox{\hyperlink{a01605_a69524b1f8f42c0a81b86cee3fc54e034}{array\+\_\+t}}  \\\cline{1-3}
+string &string &pointer to \mbox{\hyperlink{a01605_a561057a2cc70397ad0ab890745d1d7c7}{string\+\_\+t}}  \\\cline{1-3}
+boolean &boolean &\mbox{\hyperlink{a01605_a8cc04e22d7ef18efd2d34bc04eb6a1b2}{boolean\+\_\+t}}  \\\cline{1-3}
+number &number\+\_\+integer &\mbox{\hyperlink{a01605_ab227d71ad47b6ed6a3acae52dedbb49d}{number\+\_\+integer\+\_\+t}}  \\\cline{1-3}
+number &number\+\_\+unsigned &\mbox{\hyperlink{a01605_a440094de5ef4e119b2771b549b33da70}{number\+\_\+unsigned\+\_\+t}}  \\\cline{1-3}
+number &number\+\_\+float &\mbox{\hyperlink{a01605_ade1eb06e9fc3ff2ba1efd709b94b401d}{number\+\_\+float\+\_\+t}}  \\\cline{1-3}
+binary &binary &pointer to \mbox{\hyperlink{a01605_acbf51bc13484009ed204bd78a498355e}{binary\+\_\+t}}  \\\cline{1-3}
+null &null &{\itshape no value is stored}  \\\cline{1-3}
+\end{longtabu}
+
+
+\begin{DoxyNote}{Note}
+Variable-\/length types (objects, arrays, and strings) are stored as pointers. The size of the union should not exceed 64 bits if the default value types are used.
+\end{DoxyNote}
+\begin{DoxySince}{Since}
+version 1.\+0.\+0 
+\end{DoxySince}
+
+
+Definition at line 17450 of file json.\+hpp.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{a02005_addaa9da9958343a8687079c6c8561828}\label{a02005_addaa9da9958343a8687079c6c8561828}} 
+\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!json\_value@{json\_value}}
+\index{json\_value@{json\_value}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
+\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [1/16]}}
+{\footnotesize\ttfamily nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+default constructor (for null values) 
+
+\mbox{\Hypertarget{a02005_a359b6d7bdd95150e28a21c2def590b3b}\label{a02005_a359b6d7bdd95150e28a21c2def590b3b}} 
+\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!json\_value@{json\_value}}
+\index{json\_value@{json\_value}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
+\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [2/16]}}
+{\footnotesize\ttfamily nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01605_a8cc04e22d7ef18efd2d34bc04eb6a1b2}{boolean\+\_\+t}}}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+constructor for booleans 
+
+
+
+Definition at line 17472 of file json.\+hpp.
+
+\mbox{\Hypertarget{a02005_a7bd504626c862a55f3e464089390be61}\label{a02005_a7bd504626c862a55f3e464089390be61}} 
+\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!json\_value@{json\_value}}
+\index{json\_value@{json\_value}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
+\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [3/16]}}
+{\footnotesize\ttfamily nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01605_ab227d71ad47b6ed6a3acae52dedbb49d}{number\+\_\+integer\+\_\+t}}}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+constructor for numbers (integer) 
+
+
+
+Definition at line 17474 of file json.\+hpp.
+
+\mbox{\Hypertarget{a02005_a356100d324dddcc0ed1bdcca086bc809}\label{a02005_a356100d324dddcc0ed1bdcca086bc809}} 
+\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!json\_value@{json\_value}}
+\index{json\_value@{json\_value}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
+\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [4/16]}}
+{\footnotesize\ttfamily nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01605_a440094de5ef4e119b2771b549b33da70}{number\+\_\+unsigned\+\_\+t}}}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+constructor for numbers (unsigned) 
+
+
+
+Definition at line 17476 of file json.\+hpp.
+
+\mbox{\Hypertarget{a02005_a5f3f88981a4c2a2a19aeb650e37bb117}\label{a02005_a5f3f88981a4c2a2a19aeb650e37bb117}} 
+\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!json\_value@{json\_value}}
+\index{json\_value@{json\_value}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
+\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [5/16]}}
+{\footnotesize\ttfamily nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01605_ade1eb06e9fc3ff2ba1efd709b94b401d}{number\+\_\+float\+\_\+t}}}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+constructor for numbers (floating-\/point) 
+
+
+
+Definition at line 17478 of file json.\+hpp.
+
+\mbox{\Hypertarget{a02005_a5b3c9b26efff2a7e4ff417df750db888}\label{a02005_a5b3c9b26efff2a7e4ff417df750db888}} 
+\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!json\_value@{json\_value}}
+\index{json\_value@{json\_value}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
+\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [6/16]}}
+{\footnotesize\ttfamily nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a00411_a1ed8fc6239da25abcaf681d30ace4985}{value\+\_\+t}}}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+constructor for empty values of a given type 
+
+
+
+Definition at line 17480 of file json.\+hpp.
+
+
+
+References nlohmann\+::detail\+::array, array, nlohmann\+::detail\+::binary, binary, nlohmann\+::detail\+::boolean, nlohmann\+::detail\+::other\+\_\+error\+::create(), J\+S\+O\+N\+\_\+\+H\+E\+D\+L\+E\+Y\+\_\+\+U\+N\+L\+I\+K\+E\+LY, J\+S\+O\+N\+\_\+\+T\+H\+R\+OW, nlohmann\+::detail\+::null, nlohmann\+::detail\+::number\+\_\+float, number\+\_\+float, nlohmann\+::detail\+::number\+\_\+integer, number\+\_\+integer, nlohmann\+::detail\+::number\+\_\+unsigned, number\+\_\+unsigned, nlohmann\+::detail\+::object, and nlohmann\+::detail\+::string.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02005_a5b3c9b26efff2a7e4ff417df750db888_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02005_a7d36046b1d3a41021459229963aa906d}\label{a02005_a7d36046b1d3a41021459229963aa906d}} 
+\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!json\_value@{json\_value}}
+\index{json\_value@{json\_value}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
+\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [7/16]}}
+{\footnotesize\ttfamily nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01605_a561057a2cc70397ad0ab890745d1d7c7}{string\+\_\+t}} \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+constructor for strings 
+
+
+
+Definition at line 17551 of file json.\+hpp.
+
+
+
+References nlohmann\+::basic\+\_\+json\+::value().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02005_a7d36046b1d3a41021459229963aa906d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02005_a16cf11cea854b7d33ece1204c044d91d}\label{a02005_a16cf11cea854b7d33ece1204c044d91d}} 
+\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!json\_value@{json\_value}}
+\index{json\_value@{json\_value}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
+\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [8/16]}}
+{\footnotesize\ttfamily nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01605_a561057a2cc70397ad0ab890745d1d7c7}{string\+\_\+t}} \&\&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+constructor for rvalue strings 
+
+
+
+Definition at line 17557 of file json.\+hpp.
+
+
+
+References nlohmann\+::basic\+\_\+json\+::value().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02005_a16cf11cea854b7d33ece1204c044d91d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02005_a9d5a9dd88cf61a0fa90fec56d035273d}\label{a02005_a9d5a9dd88cf61a0fa90fec56d035273d}} 
+\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!json\_value@{json\_value}}
+\index{json\_value@{json\_value}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
+\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [9/16]}}
+{\footnotesize\ttfamily nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01605_a949272bf6af5eb8eab9675505422f5b3}{object\+\_\+t}} \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+constructor for objects 
+
+
+
+Definition at line 17563 of file json.\+hpp.
+
+
+
+References nlohmann\+::basic\+\_\+json\+::value().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02005_a9d5a9dd88cf61a0fa90fec56d035273d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02005_a03d2d3f64da9403ffc2393c4b419e514}\label{a02005_a03d2d3f64da9403ffc2393c4b419e514}} 
+\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!json\_value@{json\_value}}
+\index{json\_value@{json\_value}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
+\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [10/16]}}
+{\footnotesize\ttfamily nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01605_a949272bf6af5eb8eab9675505422f5b3}{object\+\_\+t}} \&\&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+constructor for rvalue objects 
+
+
+
+Definition at line 17569 of file json.\+hpp.
+
+
+
+References nlohmann\+::basic\+\_\+json\+::value().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02005_a03d2d3f64da9403ffc2393c4b419e514_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02005_a11a68bfcc7bd3623023594705788f25b}\label{a02005_a11a68bfcc7bd3623023594705788f25b}} 
+\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!json\_value@{json\_value}}
+\index{json\_value@{json\_value}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
+\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [11/16]}}
+{\footnotesize\ttfamily nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01605_a69524b1f8f42c0a81b86cee3fc54e034}{array\+\_\+t}} \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+constructor for arrays 
+
+
+
+Definition at line 17575 of file json.\+hpp.
+
+
+
+References array, and nlohmann\+::basic\+\_\+json\+::value().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02005_a11a68bfcc7bd3623023594705788f25b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02005_ae9a619d174aa0f8020847e965db7752d}\label{a02005_ae9a619d174aa0f8020847e965db7752d}} 
+\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!json\_value@{json\_value}}
+\index{json\_value@{json\_value}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
+\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [12/16]}}
+{\footnotesize\ttfamily nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01605_a69524b1f8f42c0a81b86cee3fc54e034}{array\+\_\+t}} \&\&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+constructor for rvalue arrays 
+
+
+
+Definition at line 17581 of file json.\+hpp.
+
+
+
+References array, and nlohmann\+::basic\+\_\+json\+::value().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02005_ae9a619d174aa0f8020847e965db7752d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02005_a9bfee5458a35e4b1d259797bb142bb12}\label{a02005_a9bfee5458a35e4b1d259797bb142bb12}} 
+\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!json\_value@{json\_value}}
+\index{json\_value@{json\_value}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
+\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [13/16]}}
+{\footnotesize\ttfamily nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{const typename \mbox{\hyperlink{a01861_a4d27e8633c5a5e3b49dd4ccb06515713}{binary\+\_\+t\+::container\+\_\+type}} \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+constructor for binary arrays 
+
+
+
+Definition at line 17587 of file json.\+hpp.
+
+
+
+References binary, and nlohmann\+::basic\+\_\+json\+::value().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02005_a9bfee5458a35e4b1d259797bb142bb12_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02005_ae6cfc1f8254912522487a3596a030f8b}\label{a02005_ae6cfc1f8254912522487a3596a030f8b}} 
+\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!json\_value@{json\_value}}
+\index{json\_value@{json\_value}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
+\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [14/16]}}
+{\footnotesize\ttfamily nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{typename \mbox{\hyperlink{a01861_a4d27e8633c5a5e3b49dd4ccb06515713}{binary\+\_\+t\+::container\+\_\+type}} \&\&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+constructor for rvalue binary arrays 
+
+
+
+Definition at line 17593 of file json.\+hpp.
+
+
+
+References binary, and nlohmann\+::basic\+\_\+json\+::value().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02005_ae6cfc1f8254912522487a3596a030f8b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02005_a2807432b367e5bd4e49f76c206b5cecf}\label{a02005_a2807432b367e5bd4e49f76c206b5cecf}} 
+\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!json\_value@{json\_value}}
+\index{json\_value@{json\_value}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
+\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [15/16]}}
+{\footnotesize\ttfamily nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01605_acbf51bc13484009ed204bd78a498355e}{binary\+\_\+t}} \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+constructor for binary arrays (internal type) 
+
+
+
+Definition at line 17599 of file json.\+hpp.
+
+
+
+References binary, and nlohmann\+::basic\+\_\+json\+::value().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02005_a2807432b367e5bd4e49f76c206b5cecf_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02005_a15baffa618c4e5bacd7daf7bba0f8e74}\label{a02005_a15baffa618c4e5bacd7daf7bba0f8e74}} 
+\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!json\_value@{json\_value}}
+\index{json\_value@{json\_value}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
+\doxysubsubsection{\texorpdfstring{json\_value()}{json\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [16/16]}}
+{\footnotesize\ttfamily nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::json\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01605_acbf51bc13484009ed204bd78a498355e}{binary\+\_\+t}} \&\&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+constructor for rvalue binary arrays (internal type) 
+
+
+
+Definition at line 17605 of file json.\+hpp.
+
+
+
+References binary, and nlohmann\+::basic\+\_\+json\+::value().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02005_a15baffa618c4e5bacd7daf7bba0f8e74_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a02005_a394e69339c27a67170aacb49e36243ea}\label{a02005_a394e69339c27a67170aacb49e36243ea}} 
+\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!destroy@{destroy}}
+\index{destroy@{destroy}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
+\doxysubsubsection{\texorpdfstring{destroy()}{destroy()}}
+{\footnotesize\ttfamily void nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a00411_a1ed8fc6239da25abcaf681d30ace4985}{value\+\_\+t}}}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line 17610 of file json.\+hpp.
+
+
+
+References nlohmann\+::detail\+::array, array, nlohmann\+::detail\+::binary, binary, nlohmann\+::detail\+::object, object, and nlohmann\+::detail\+::string.
+
+
+
+Referenced by nlohmann\+::basic\+\_\+json\+::$\sim$basic\+\_\+json().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02005_a394e69339c27a67170aacb49e36243ea_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{a02005_a230c40872531081809d0265a45e1a3be}\label{a02005_a230c40872531081809d0265a45e1a3be}} 
+\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!array@{array}}
+\index{array@{array}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
+\doxysubsubsection{\texorpdfstring{array}{array}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01605_a69524b1f8f42c0a81b86cee3fc54e034}{array\+\_\+t}}$\ast$ nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::array}
+
+
+
+array (stored with pointer to save storage) 
+
+
+
+Definition at line 17455 of file json.\+hpp.
+
+
+
+Referenced by nlohmann\+::basic\+\_\+json\+::assert\+\_\+invariant(), nlohmann\+::basic\+\_\+json\+::at(), nlohmann\+::basic\+\_\+json\+::basic\+\_\+json(), nlohmann\+::basic\+\_\+json\+::clear(), destroy(), nlohmann\+::basic\+\_\+json\+::emplace\+\_\+back(), nlohmann\+::basic\+\_\+json\+::empty(), nlohmann\+::basic\+\_\+json\+::erase(), nlohmann\+::basic\+\_\+json\+::get\+\_\+impl\+\_\+ptr(), nlohmann\+::basic\+\_\+json\+::insert\+\_\+iterator(), json\+\_\+value(), nlohmann\+::basic\+\_\+json\+::max\+\_\+size(), nlohmann\+::basic\+\_\+json\+::operator\mbox{[}$\,$\mbox{]}(), nlohmann\+::basic\+\_\+json\+::push\+\_\+back(), nlohmann\+::basic\+\_\+json\+::size(), and nlohmann\+::basic\+\_\+json\+::swap().
+
+\mbox{\Hypertarget{a02005_a5e02afb384ff616835e7756c54385015}\label{a02005_a5e02afb384ff616835e7756c54385015}} 
+\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!binary@{binary}}
+\index{binary@{binary}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
+\doxysubsubsection{\texorpdfstring{binary}{binary}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01605_acbf51bc13484009ed204bd78a498355e}{binary\+\_\+t}}$\ast$ nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::binary}
+
+
+
+binary (stored with pointer to save storage) 
+
+
+
+Definition at line 17459 of file json.\+hpp.
+
+
+
+Referenced by nlohmann\+::basic\+\_\+json\+::assert\+\_\+invariant(), nlohmann\+::basic\+\_\+json\+::basic\+\_\+json(), nlohmann\+::basic\+\_\+json\+::clear(), destroy(), nlohmann\+::basic\+\_\+json\+::erase(), nlohmann\+::basic\+\_\+json\+::get\+\_\+impl\+\_\+ptr(), json\+\_\+value(), and nlohmann\+::basic\+\_\+json\+::swap().
+
+\mbox{\Hypertarget{a02005_a10e0feb275d431d984cefd4b293d42d5}\label{a02005_a10e0feb275d431d984cefd4b293d42d5}} 
+\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!boolean@{boolean}}
+\index{boolean@{boolean}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
+\doxysubsubsection{\texorpdfstring{boolean}{boolean}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01605_a8cc04e22d7ef18efd2d34bc04eb6a1b2}{boolean\+\_\+t}} nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::boolean}
+
+
+
+boolean 
+
+
+
+Definition at line 17461 of file json.\+hpp.
+
+
+
+Referenced by nlohmann\+::basic\+\_\+json\+::basic\+\_\+json(), nlohmann\+::basic\+\_\+json\+::clear(), nlohmann\+::basic\+\_\+json\+::get\+\_\+impl(), and nlohmann\+::basic\+\_\+json\+::get\+\_\+impl\+\_\+ptr().
+
+\mbox{\Hypertarget{a02005_a685ff0842614609b61fd634a6c958ca6}\label{a02005_a685ff0842614609b61fd634a6c958ca6}} 
+\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!number\_float@{number\_float}}
+\index{number\_float@{number\_float}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
+\doxysubsubsection{\texorpdfstring{number\_float}{number\_float}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01605_ade1eb06e9fc3ff2ba1efd709b94b401d}{number\+\_\+float\+\_\+t}} nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::number\+\_\+float}
+
+
+
+number (floating-\/point) 
+
+
+
+Definition at line 17467 of file json.\+hpp.
+
+
+
+Referenced by nlohmann\+::basic\+\_\+json\+::basic\+\_\+json(), nlohmann\+::basic\+\_\+json\+::clear(), nlohmann\+::basic\+\_\+json\+::get\+\_\+impl\+\_\+ptr(), and json\+\_\+value().
+
+\mbox{\Hypertarget{a02005_a36022bc146c1c190fb77f51ab654964d}\label{a02005_a36022bc146c1c190fb77f51ab654964d}} 
+\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!number\_integer@{number\_integer}}
+\index{number\_integer@{number\_integer}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
+\doxysubsubsection{\texorpdfstring{number\_integer}{number\_integer}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01605_ab227d71ad47b6ed6a3acae52dedbb49d}{number\+\_\+integer\+\_\+t}} nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::number\+\_\+integer}
+
+
+
+number (integer) 
+
+
+
+Definition at line 17463 of file json.\+hpp.
+
+
+
+Referenced by nlohmann\+::basic\+\_\+json\+::basic\+\_\+json(), nlohmann\+::basic\+\_\+json\+::clear(), nlohmann\+::basic\+\_\+json\+::get\+\_\+impl\+\_\+ptr(), and json\+\_\+value().
+
+\mbox{\Hypertarget{a02005_a9a865e1935c91145c9d73aa1d925ce6b}\label{a02005_a9a865e1935c91145c9d73aa1d925ce6b}} 
+\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!number\_unsigned@{number\_unsigned}}
+\index{number\_unsigned@{number\_unsigned}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
+\doxysubsubsection{\texorpdfstring{number\_unsigned}{number\_unsigned}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01605_a440094de5ef4e119b2771b549b33da70}{number\+\_\+unsigned\+\_\+t}} nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::number\+\_\+unsigned}
+
+
+
+number (unsigned integer) 
+
+
+
+Definition at line 17465 of file json.\+hpp.
+
+
+
+Referenced by nlohmann\+::basic\+\_\+json\+::basic\+\_\+json(), nlohmann\+::basic\+\_\+json\+::clear(), nlohmann\+::basic\+\_\+json\+::get\+\_\+impl\+\_\+ptr(), and json\+\_\+value().
+
+\mbox{\Hypertarget{a02005_a9a17d18e60b32adfe4f7f978d3ab5f15}\label{a02005_a9a17d18e60b32adfe4f7f978d3ab5f15}} 
+\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!object@{object}}
+\index{object@{object}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
+\doxysubsubsection{\texorpdfstring{object}{object}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01605_a949272bf6af5eb8eab9675505422f5b3}{object\+\_\+t}}$\ast$ nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::object}
+
+
+
+object (stored with pointer to save storage) 
+
+
+
+Definition at line 17453 of file json.\+hpp.
+
+
+
+Referenced by nlohmann\+::basic\+\_\+json\+::assert\+\_\+invariant(), nlohmann\+::basic\+\_\+json\+::at(), nlohmann\+::basic\+\_\+json\+::basic\+\_\+json(), nlohmann\+::basic\+\_\+json\+::clear(), nlohmann\+::basic\+\_\+json\+::contains(), nlohmann\+::basic\+\_\+json\+::count(), destroy(), nlohmann\+::basic\+\_\+json\+::emplace(), nlohmann\+::basic\+\_\+json\+::empty(), nlohmann\+::basic\+\_\+json\+::erase(), nlohmann\+::basic\+\_\+json\+::find(), nlohmann\+::basic\+\_\+json\+::get\+\_\+impl\+\_\+ptr(), nlohmann\+::basic\+\_\+json\+::insert(), nlohmann\+::basic\+\_\+json\+::max\+\_\+size(), nlohmann\+::basic\+\_\+json\+::operator\mbox{[}$\,$\mbox{]}(), nlohmann\+::basic\+\_\+json\+::patch(), nlohmann\+::basic\+\_\+json\+::push\+\_\+back(), nlohmann\+::basic\+\_\+json\+::size(), nlohmann\+::basic\+\_\+json\+::swap(), and nlohmann\+::basic\+\_\+json\+::update().
+
+\mbox{\Hypertarget{a02005_a9eb894164977ae59922dddc11e1d901d}\label{a02005_a9eb894164977ae59922dddc11e1d901d}} 
+\index{nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}!string@{string}}
+\index{string@{string}!nlohmann::basic\_json::json\_value@{nlohmann::basic\_json::json\_value}}
+\doxysubsubsection{\texorpdfstring{string}{string}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01605_a561057a2cc70397ad0ab890745d1d7c7}{string\+\_\+t}}$\ast$ nlohmann\+::basic\+\_\+json\+::json\+\_\+value\+::string}
+
+
+
+string (stored with pointer to save storage) 
+
+
+
+Definition at line 17457 of file json.\+hpp.
+
+
+
+Referenced by nlohmann\+::basic\+\_\+json\+::assert\+\_\+invariant(), nlohmann\+::basic\+\_\+json\+::basic\+\_\+json(), nlohmann\+::basic\+\_\+json\+::clear(), nlohmann\+::basic\+\_\+json\+::erase(), nlohmann\+::basic\+\_\+json\+::get\+\_\+impl\+\_\+ptr(), and nlohmann\+::basic\+\_\+json\+::swap().
+
+
+
+The documentation for this union was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/spatialstructures/src/\mbox{\hyperlink{a00206}{json.\+hpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,403 @@
+\hypertarget{a00311}{}\doxysection{Cpp/tests/src/\+Path\+Finding.cpp File Reference}
+\label{a00311}\index{Cpp/tests/src/PathFinding.cpp@{Cpp/tests/src/PathFinding.cpp}}
+{\ttfamily \#include \char`\"{}gtest/gtest.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$boost/graph/dijkstra\+\_\+shortest\+\_\+paths.\+hpp$>$}\newline
+{\ttfamily \#include $<$boost/graph/breadth\+\_\+first\+\_\+search.\+hpp$>$}\newline
+{\ttfamily \#include $<$boost/graph/dijkstra\+\_\+shortest\+\_\+paths\+\_\+no\+\_\+color\+\_\+map.\+hpp$>$}\newline
+{\ttfamily \#include $<$boost/exception/exception.\+hpp$>$}\newline
+{\ttfamily \#include $<$path\+\_\+finder.\+h$>$}\newline
+{\ttfamily \#include $<$boost\+\_\+graph.\+h$>$}\newline
+{\ttfamily \#include $<$graph.\+h$>$}\newline
+{\ttfamily \#include $<$node.\+h$>$}\newline
+{\ttfamily \#include $<$edge.\+h$>$}\newline
+{\ttfamily \#include $<$path.\+h$>$}\newline
+{\ttfamily \#include $<$H\+F\+Exceptions.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}pathfinder\+\_\+\+C.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cost\+\_\+algorithms.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}spatialstructures\+\_\+\+C.\+h\char`\"{}}\newline
+Include dependency graph for Path\+Finding.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00312}
+\end{center}
+\end{figure}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{a00414}{C\+Interface\+Tests}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00311_a72b51a74dc9e8548915dfbc666d99045}{T\+E\+ST}} (\+\_\+\+Pathfinding, Boost\+Graph\+Creation)
+\item 
+\mbox{\hyperlink{a00311_a9ffe9c91e627f6fcb588198962f7e134}{T\+E\+ST}} (\+\_\+\+Pathfinding, Single\+Path)
+\item 
+\mbox{\hyperlink{a00311_a60214b4e05fd8120b9a287838fc152a7}{T\+E\+ST}} (\+\_\+\+Pathfinding, Multiple\+Paths)
+\item 
+\mbox{\hyperlink{a02029}{Path}} \mbox{\hyperlink{a00311_ad03ee88dee5ac4231a3d356f7776b855}{Quick\+Construct\+Path}} (int start, int end, const std\+::vector$<$ int $>$ \&pred, const std\+::vector$<$ float $>$ \&distances)
+\item 
+\mbox{\hyperlink{a00311_a09030f1e30c1d241c360d2f8a96023c8}{T\+E\+ST}} (\+\_\+\+Pathfinding, Distance\+And\+Predecessor\+Matrices)
+\item 
+\mbox{\hyperlink{a00311_a9cd14b781d7d4572fbcd5be32c359bf8}{T\+E\+ST}} (C\+\_\+\+Pathfinder, Distance\+And\+Predecessor\+Matrices\+\_\+C)
+\item 
+\mbox{\hyperlink{a00311_afa1d5d6ee8c0e7d0df9c38e954b872c8}{T\+E\+ST}} (\+\_\+boost\+Graph, Constructor)
+\begin{DoxyCompactList}\small\item\em The following are tests for the code samples for H\+F\+::\+Spatial\+Structures\+::\+Pathfinding. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00311_a04976105acb669014bac1adcfdaeef06}{T\+E\+ST}} (\+\_\+boost\+Graph, Constructor\+Cost\+Name)
+\item 
+\mbox{\hyperlink{a00311_ad8f1de0b5f0ddc1ccb16541578ec3dd6}{T\+E\+ST}} (\+\_\+boost\+Graph, Destructor)
+\item 
+\mbox{\hyperlink{a00311_a5b2350191ef4ab9bd7cbe1161ef00437}{T\+E\+ST}} (\+\_\+boost\+Graph\+Deleter, Operator\+Function)
+\item 
+\mbox{\hyperlink{a00311_a1e7f3a87f12d013dbb439e1610f47b2e}{T\+E\+ST}} (\+\_\+path\+Finding, Create\+Boost\+Graph)
+\item 
+\mbox{\hyperlink{a00311_afa42541c1f95fbb27ef2c7a84cdbabe2}{T\+E\+ST}} (\+\_\+path\+Finding, Create\+Boost\+Graph\+Cost\+Name)
+\item 
+\mbox{\hyperlink{a00311_aac8caae24fd13ae99b2231e37c8c6390}{T\+E\+ST}} (\+\_\+path\+Finding, Find\+Path)
+\item 
+\mbox{\hyperlink{a00311_a5c3f5f0ecf59a077baeda04c886b6a09}{T\+E\+ST}} (\+\_\+path\+Finding, Find\+Paths)
+\item 
+\mbox{\hyperlink{a00311_afc26a35699f40db24c034a33a67f6917}{T\+E\+ST}} (\+\_\+path\+Finding, Insert\+All\+To\+All\+Paths\+Into\+Array)
+\item 
+\mbox{\hyperlink{a00414_ae8529c684ce898cdec84448a5db5cc82}{C\+Interface\+Tests\+::\+T\+E\+ST}} (C\+\_\+\+Pathfinder, \mbox{\hyperlink{a00390_ga3dc85450e989a996a3c3fcfad0a5944e}{Create\+Path}})
+\item 
+\mbox{\hyperlink{a00414_a9455b5879fad35ca39726b5a8887fcf5}{C\+Interface\+Tests\+::\+T\+E\+ST}} (C\+\_\+\+Pathfinder, \mbox{\hyperlink{a00390_gae1ac2805c3b86883bb88269ed3868367}{Create\+Paths}})
+\item 
+\mbox{\hyperlink{a00414_ae0520bce28a4c49fb76f3bed091c72b2}{C\+Interface\+Tests\+::\+T\+E\+ST}} (C\+\_\+\+Pathfinder, Create\+Path\+Cost\+Type)
+\item 
+\mbox{\hyperlink{a00414_a3be5737749257fb480333dfb47835528}{C\+Interface\+Tests\+::\+T\+E\+ST}} (C\+\_\+\+Pathfinder, Create\+Paths\+Cost\+Type)
+\item 
+\mbox{\hyperlink{a00414_aef762b15f954ced5f0b6cd2bb5fa0ed9}{C\+Interface\+Tests\+::\+T\+E\+ST}} (C\+\_\+\+Pathfinder, \mbox{\hyperlink{a00390_gaac725d282f4fecd3aba1b3273c26e7e1}{Get\+Path\+Info}})
+\item 
+\mbox{\hyperlink{a00414_acf031c40dcf6d20e1c604697c3091e3d}{C\+Interface\+Tests\+::\+T\+E\+ST}} (C\+\_\+\+Pathfinder, \mbox{\hyperlink{a00390_ga884a3374d971261a01ccfd3b21e288e5}{Destroy\+Path}})
+\item 
+\mbox{\hyperlink{a00414_ae45ffb41638c6c14b9f936e1d37633f6}{C\+Interface\+Tests\+::\+T\+E\+ST}} (C\+\_\+\+Pathfinder, \mbox{\hyperlink{a00390_gaba6ec6ce84974dd6a311d7d65dd34221}{Create\+All\+To\+All\+Paths}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{a00311_ad03ee88dee5ac4231a3d356f7776b855}\label{a00311_ad03ee88dee5ac4231a3d356f7776b855}} 
+\index{PathFinding.cpp@{PathFinding.cpp}!QuickConstructPath@{QuickConstructPath}}
+\index{QuickConstructPath@{QuickConstructPath}!PathFinding.cpp@{PathFinding.cpp}}
+\doxysubsubsection{\texorpdfstring{QuickConstructPath()}{QuickConstructPath()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a02029}{Path}} Quick\+Construct\+Path (\begin{DoxyParamCaption}\item[{int}]{start,  }\item[{int}]{end,  }\item[{const std\+::vector$<$ int $>$ \&}]{pred,  }\item[{const std\+::vector$<$ float $>$ \&}]{distances }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 98 of file Path\+Finding.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Path\+::\+Add\+Node(), and H\+F\+::\+Spatial\+Structures\+::\+Path\+::\+Reverse().
+
+
+
+Referenced by T\+E\+S\+T().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=347pt]{a00311_ad03ee88dee5ac4231a3d356f7776b855_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=269pt]{a00311_ad03ee88dee5ac4231a3d356f7776b855_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00311_afa1d5d6ee8c0e7d0df9c38e954b872c8}\label{a00311_afa1d5d6ee8c0e7d0df9c38e954b872c8}} 
+\index{PathFinding.cpp@{PathFinding.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!PathFinding.cpp@{PathFinding.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [1/14]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+boost\+Graph}]{,  }\item[{Constructor}]{ }\end{DoxyParamCaption})}
+
+
+
+The following are tests for the code samples for H\+F\+::\+Spatial\+Structures\+::\+Pathfinding. 
+
+
+
+Definition at line 254 of file Path\+Finding.\+cpp.
+
+\mbox{\Hypertarget{a00311_a04976105acb669014bac1adcfdaeef06}\label{a00311_a04976105acb669014bac1adcfdaeef06}} 
+\index{PathFinding.cpp@{PathFinding.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!PathFinding.cpp@{PathFinding.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [2/14]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+boost\+Graph}]{,  }\item[{Constructor\+Cost\+Name}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 279 of file Path\+Finding.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Graph\+::add\+Edge(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Add\+Edges(), H\+F\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Calculate\+Energy\+Expenditure(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Compress(), and H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Get\+Subgraph().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00311_a04976105acb669014bac1adcfdaeef06_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00311_ad8f1de0b5f0ddc1ccb16541578ec3dd6}\label{a00311_ad8f1de0b5f0ddc1ccb16541578ec3dd6}} 
+\index{PathFinding.cpp@{PathFinding.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!PathFinding.cpp@{PathFinding.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [3/14]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+boost\+Graph}]{,  }\item[{Destructor}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 316 of file Path\+Finding.\+cpp.
+
+\mbox{\Hypertarget{a00311_a5b2350191ef4ab9bd7cbe1161ef00437}\label{a00311_a5b2350191ef4ab9bd7cbe1161ef00437}} 
+\index{PathFinding.cpp@{PathFinding.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!PathFinding.cpp@{PathFinding.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [4/14]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+boost\+Graph\+Deleter}]{,  }\item[{Operator\+Function}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 349 of file Path\+Finding.\+cpp.
+
+\mbox{\Hypertarget{a00311_a72b51a74dc9e8548915dfbc666d99045}\label{a00311_a72b51a74dc9e8548915dfbc666d99045}} 
+\index{PathFinding.cpp@{PathFinding.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!PathFinding.cpp@{PathFinding.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [5/14]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Pathfinding}]{,  }\item[{Boost\+Graph\+Creation}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 26 of file Path\+Finding.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Graph\+::add\+Edge(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Compress(), and H\+F\+::\+Pathfinding\+::\+Boost\+Graph\+::g.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=276pt]{a00311_a72b51a74dc9e8548915dfbc666d99045_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00311_a1e7f3a87f12d013dbb439e1610f47b2e}\label{a00311_a1e7f3a87f12d013dbb439e1610f47b2e}} 
+\index{PathFinding.cpp@{PathFinding.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!PathFinding.cpp@{PathFinding.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [6/14]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+path\+Finding}]{,  }\item[{Create\+Boost\+Graph}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 406 of file Path\+Finding.\+cpp.
+
+
+
+References H\+F\+::\+Pathfinding\+::\+Create\+Boost\+Graph().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=312pt]{a00311_a1e7f3a87f12d013dbb439e1610f47b2e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00311_afa42541c1f95fbb27ef2c7a84cdbabe2}\label{a00311_afa42541c1f95fbb27ef2c7a84cdbabe2}} 
+\index{PathFinding.cpp@{PathFinding.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!PathFinding.cpp@{PathFinding.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [7/14]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+path\+Finding}]{,  }\item[{Create\+Boost\+Graph\+Cost\+Name}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 437 of file Path\+Finding.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Graph\+::add\+Edge(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Add\+Edges(), H\+F\+::\+Spatial\+Structures\+::\+Cost\+Algorithms\+::\+Calculate\+Energy\+Expenditure(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Compress(), H\+F\+::\+Pathfinding\+::\+Create\+Boost\+Graph(), and H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Get\+Subgraph().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00311_afa42541c1f95fbb27ef2c7a84cdbabe2_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00311_a09030f1e30c1d241c360d2f8a96023c8}\label{a00311_a09030f1e30c1d241c360d2f8a96023c8}} 
+\index{PathFinding.cpp@{PathFinding.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!PathFinding.cpp@{PathFinding.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [8/14]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Pathfinding}]{,  }\item[{Distance\+And\+Predecessor\+Matrices}]{ }\end{DoxyParamCaption})}
+
+Ensures taht no runtime errors occur and the array if of the correct length. \mbox{[}E\+X\+\_\+\+Dist\+Pred\mbox{]}
+
+\mbox{[}E\+X\+\_\+\+Dist\+Pred\mbox{]}
+
+\mbox{[}E\+X\+\_\+\+Dist\+Pred\+\_\+2\mbox{]}
+
+\mbox{[}E\+X\+\_\+\+Dist\+Pred\+\_\+2\mbox{]}
+
+Definition at line 131 of file Path\+Finding.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Graph\+::add\+Edge(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Compress(), H\+F\+::\+Pathfinding\+::\+Create\+Boost\+Graph(), H\+F\+::\+Pathfinding\+::\+Find\+Path(), H\+F\+::\+Pathfinding\+::\+Generate\+Distance\+And\+Pred(), Quick\+Construct\+Path(), and H\+F\+::\+Spatial\+Structures\+::\+Graph\+::size().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00311_a09030f1e30c1d241c360d2f8a96023c8_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00311_aac8caae24fd13ae99b2231e37c8c6390}\label{a00311_aac8caae24fd13ae99b2231e37c8c6390}} 
+\index{PathFinding.cpp@{PathFinding.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!PathFinding.cpp@{PathFinding.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [9/14]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+path\+Finding}]{,  }\item[{Find\+Path}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 475 of file Path\+Finding.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Graph\+::add\+Edge(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Compress(), H\+F\+::\+Pathfinding\+::\+Create\+Boost\+Graph(), H\+F\+::\+Pathfinding\+::\+Find\+Path(), and H\+F\+::\+Spatial\+Structures\+::\+Path\+::members.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00311_aac8caae24fd13ae99b2231e37c8c6390_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00311_a5c3f5f0ecf59a077baeda04c886b6a09}\label{a00311_a5c3f5f0ecf59a077baeda04c886b6a09}} 
+\index{PathFinding.cpp@{PathFinding.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!PathFinding.cpp@{PathFinding.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [10/14]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+path\+Finding}]{,  }\item[{Find\+Paths}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 500 of file Path\+Finding.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Graph\+::add\+Edge(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Compress(), H\+F\+::\+Pathfinding\+::\+Create\+Boost\+Graph(), and H\+F\+::\+Pathfinding\+::\+Find\+Paths().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00311_a5c3f5f0ecf59a077baeda04c886b6a09_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00311_afc26a35699f40db24c034a33a67f6917}\label{a00311_afc26a35699f40db24c034a33a67f6917}} 
+\index{PathFinding.cpp@{PathFinding.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!PathFinding.cpp@{PathFinding.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [11/14]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+path\+Finding}]{,  }\item[{Insert\+All\+To\+All\+Paths\+Into\+Array}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 540 of file Path\+Finding.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Graph\+::add\+Edge(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Compress(), H\+F\+::\+Pathfinding\+::\+Create\+Boost\+Graph(), H\+F\+::\+Pathfinding\+::\+Insert\+All\+To\+All\+Paths\+Into\+Array(), H\+F\+::\+Spatial\+Structures\+::\+Path\+::members, and H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Nodes().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00311_afc26a35699f40db24c034a33a67f6917_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00311_a60214b4e05fd8120b9a287838fc152a7}\label{a00311_a60214b4e05fd8120b9a287838fc152a7}} 
+\index{PathFinding.cpp@{PathFinding.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!PathFinding.cpp@{PathFinding.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [12/14]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Pathfinding}]{,  }\item[{Multiple\+Paths}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 64 of file Path\+Finding.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Graph\+::add\+Edge(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Compress(), and H\+F\+::\+Pathfinding\+::\+Find\+Paths().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00311_a60214b4e05fd8120b9a287838fc152a7_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00311_a9ffe9c91e627f6fcb588198962f7e134}\label{a00311_a9ffe9c91e627f6fcb588198962f7e134}} 
+\index{PathFinding.cpp@{PathFinding.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!PathFinding.cpp@{PathFinding.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [13/14]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Pathfinding}]{,  }\item[{Single\+Path}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 39 of file Path\+Finding.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Graph\+::add\+Edge(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Compress(), and H\+F\+::\+Pathfinding\+::\+Find\+Path().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00311_a9ffe9c91e627f6fcb588198962f7e134_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00311_a9cd14b781d7d4572fbcd5be32c359bf8}\label{a00311_a9cd14b781d7d4572fbcd5be32c359bf8}} 
+\index{PathFinding.cpp@{PathFinding.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!PathFinding.cpp@{PathFinding.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [14/14]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{C\+\_\+\+Pathfinder}]{,  }\item[{Distance\+And\+Predecessor\+Matrices\+\_\+C}]{ }\end{DoxyParamCaption})}
+
+\mbox{[}E\+X\+\_\+\+Dist\+Pred\+\_\+C\mbox{]}
+
+\mbox{[}E\+X\+\_\+\+Dist\+Pred\+\_\+C\mbox{]}
+
+\mbox{[}E\+X\+\_\+\+Dist\+Pred\+\_\+\+C\+\_\+2\mbox{]}
+
+\mbox{[}E\+X\+\_\+\+Dist\+Pred\+\_\+\+C\+\_\+2\mbox{]}
+
+Definition at line 183 of file Path\+Finding.\+cpp.
+
+
+
+References Add\+Edge\+From\+Nodes(), Calculate\+Distance\+And\+Predecessor(), Compress(), H\+F\+::\+Pathfinding\+::\+Create\+Boost\+Graph(), Create\+Graph(), Destroy\+Float\+Vector(), Destroy\+Int\+Vector(), H\+F\+::\+Pathfinding\+::\+Generate\+Distance\+And\+Pred(), H\+F\+::\+Exceptions\+::\+OK, and H\+F\+::\+Spatial\+Structures\+::\+Graph\+::size().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00311_a9cd14b781d7d4572fbcd5be32c359bf8_cgraph}
+\end{center}
+\end{figure}

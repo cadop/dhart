@@ -1,0 +1,1382 @@
+\hypertarget{a00397}{}\doxysection{HF\+::Graph\+Generator Namespace Reference}
+\label{a00397}\index{HF::GraphGenerator@{HF::GraphGenerator}}
+
+
+Generate a graph of accessible space from a given start point.  
+
+
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{a01245}{Geometry\+Flag\+Map}}
+\begin{DoxyCompactList}\small\item\em Manages rules and ids for different types of geometry in the graph generator. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{a01257}{Graph\+Generator}}
+\begin{DoxyCompactList}\small\item\em Generate a graph of accessible space from a given start point. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a00397_a01249}{Graph\+Params}}
+\begin{DoxyCompactList}\small\item\em Holds parameters for the \mbox{\hyperlink{a01257}{Graph\+Generator}}.  \mbox{\hyperlink{a00397_a01249}{More...}}\end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a01253}{optional\+\_\+real3}}
+\begin{DoxyCompactList}\small\item\em A simple wrapper for real3 that is able to determine whether or not it\textquotesingle{}s defined. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a00397_a01241}{Precision}}
+\begin{DoxyCompactList}\small\item\em Various parameters to set the precision of certain parts of the graph generator.  \mbox{\hyperlink{a00397_a01241}{More...}}\end{DoxyCompactList}\item 
+class \mbox{\hyperlink{a01261}{Unique\+Queue}}
+\begin{DoxyCompactList}\small\item\em A queue that remembers every object inserted, and prevents the addition of nodes that have already been inserted even if they\textquotesingle{}ve been popped. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\+\_\+t}} = \mbox{\hyperlink{a00001_a02273}{double}}
+\begin{DoxyCompactList}\small\item\em Internal decimal type of the graph generator. \end{DoxyCompactList}\item 
+using \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} = std\+::array$<$ \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\+\_\+t}}, 3 $>$
+\begin{DoxyCompactList}\small\item\em Type used for the standard coordinate set of the graph generator. \end{DoxyCompactList}\item 
+using \mbox{\hyperlink{a00397_a2472e370aa77f9486bb1c46a1ff704c5}{graph\+\_\+edge}} = \mbox{\hyperlink{a01473}{H\+F\+::\+Spatial\+Structures\+::\+Edge}}
+\begin{DoxyCompactList}\small\item\em Type of edge for the graph generator to use internally. \end{DoxyCompactList}\item 
+using \mbox{\hyperlink{a00397_aef833458d20e4569c73f409b52d03bee}{Ray\+Tracer}} = \mbox{\hyperlink{a01365}{H\+F\+::\+Ray\+Tracer\+::\+Multi\+RT}}
+\begin{DoxyCompactList}\small\item\em Type of raytracer to be used internally. \end{DoxyCompactList}\item 
+using \mbox{\hyperlink{a00397_ab618c832ef23d48d9f4ea9d9e46116dc}{pair}} = std\+::pair$<$ int, int $>$
+\begin{DoxyCompactList}\small\item\em Type for Directions to be stored as. \end{DoxyCompactList}\item 
+using \mbox{\hyperlink{a00397_adacfd76227db1d19cad7c15a8dde7330}{hashmap}} = std\+::unordered\+\_\+map$<$ int, \mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598}{H\+I\+T\+\_\+\+F\+L\+AG}} $>$
+\begin{DoxyCompactList}\small\item\em Hashmap used for assigning and storing hitflags for I\+Ds. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598}{H\+I\+T\+\_\+\+F\+L\+AG}} \{ \mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598a213316326ca943ae8582c8778a28a5f0}{N\+O\+\_\+\+F\+L\+AG}} = 0, 
+\mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598aaf146b316ade4ca80d23d9d22b0539cc}{F\+L\+O\+O\+RS}} = 1, 
+\mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598a9118a6ea0d5aaa017a735193ac79d08d}{O\+B\+S\+T\+A\+C\+L\+ES}} = 2, 
+\mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598a9d20e9f6abc3d3630c75432b0dac052c}{B\+O\+TH}} = 3
+ \}
+\begin{DoxyCompactList}\small\item\em Determines which geometry the ray will collide with. \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{a00397_af86d7be7ec8351dfc26ab5c11f727207}{Geometry\+Filter\+Mode}} \{ \mbox{\hyperlink{a00397_af86d7be7ec8351dfc26ab5c11f727207abd38aa552d58d6dee7dc932c374f0e04}{Geometry\+Filter\+Mode\+::\+A\+L\+L\+\_\+\+I\+N\+T\+E\+R\+S\+E\+C\+T\+I\+O\+NS}} = 0, 
+\mbox{\hyperlink{a00397_af86d7be7ec8351dfc26ab5c11f727207ac78656cbac82f2af0177cfe76dd1aa12}{Geometry\+Filter\+Mode\+::\+O\+B\+S\+T\+A\+C\+L\+E\+S\+\_\+\+O\+N\+LY}} = 1, 
+\mbox{\hyperlink{a00397_af86d7be7ec8351dfc26ab5c11f727207adb49be99500731a1909db6bcf395d27f}{Geometry\+Filter\+Mode\+::\+O\+B\+S\+T\+A\+C\+L\+E\+S\+\_\+\+A\+N\+D\+\_\+\+F\+L\+O\+O\+RS}}
+ \}
+\begin{DoxyCompactList}\small\item\em Different rules for how geometry is filtered by the graph generator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{a00397_af8cc1a7a794699308cf5c46d3ae59491}{Setup\+Core\+Count}} (int cores=-\/1)
+\begin{DoxyCompactList}\small\item\em Sets the core count of Open\+MP. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename raytracer\+\_\+type $>$ }\\void \mbox{\hyperlink{a00397_a124a96c53ed2021db9d819369fe6b7ad}{setup\+RT}} (\mbox{\hyperlink{a01257}{Graph\+Generator}} $\ast$gg, raytracer\+\_\+type \&rt, const std\+::vector$<$ int $>$ \&obs\+\_\+ids, const std\+::vector$<$ int $>$ \&walk\+\_\+ids)
+\begin{DoxyCompactList}\small\item\em Converts the raytracer to a multi\+RT if required, then map geometry ids to hitflags. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename real\+\_\+type $>$ }\\\mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\+\_\+t}} \mbox{\hyperlink{a00397_a73b53db067a504d36e9481dfe3326b60}{Cast\+To\+Real}} (real\+\_\+type t)
+\begin{DoxyCompactList}\small\item\em Cast an input value to real\+\_\+t using static cast. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename real\+\_\+3\+\_\+type $>$ }\\\mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \mbox{\hyperlink{a00397_a58892abe1152c28d26d3ca749c99ea4d}{Cast\+To\+Real3}} (real\+\_\+3\+\_\+type t)
+\begin{DoxyCompactList}\small\item\em Cast an array of 3 values to the graph\+\_\+generator\textquotesingle{}s real\+\_\+3 type. \end{DoxyCompactList}\item 
+std\+::set$<$ std\+::pair$<$ int, int $>$ $>$ \mbox{\hyperlink{a00397_afe5670b4cb780fd3ccf2a0d72a2e3c2e}{permutations}} (int limit)
+\begin{DoxyCompactList}\small\item\em Calculate P(n,r) as an array with each unique permutaton of 2 values being a pair. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01253}{optional\+\_\+real3}} \mbox{\hyperlink{a00397_a9ddffecb75b34434d7157b49d3c67b60}{Validate\+Start\+Point}} (\mbox{\hyperlink{a00397_aef833458d20e4569c73f409b52d03bee}{Ray\+Tracer}} \&RT, const \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \&start\+\_\+point, const \mbox{\hyperlink{a00397_a01249}{Graph\+Params}} \&Params)
+\begin{DoxyCompactList}\small\item\em Determine if the start point of the graph is over valid ground. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a01253}{optional\+\_\+real3}} \mbox{\hyperlink{a00397_a74be560268a713fc9e9b8b4a453afa2f}{Check\+Ray}} (\mbox{\hyperlink{a00397_aef833458d20e4569c73f409b52d03bee}{Ray\+Tracer}} \&RT, const \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \&origin, const \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \&direction, \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\+\_\+t}} node\+\_\+z\+\_\+tolerance, \mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598}{H\+I\+T\+\_\+\+F\+L\+AG}} flag=\mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598a9d20e9f6abc3d3630c75432b0dac052c}{B\+O\+TH}}, const \mbox{\hyperlink{a01245}{Geometry\+Flag\+Map}} \&geometry\+\_\+dict=\mbox{\hyperlink{a01245}{Geometry\+Flag\+Map}}())
+\begin{DoxyCompactList}\small\item\em Cast a ray and get the point of intersection if it connects. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{a00397_ab618c832ef23d48d9f4ea9d9e46116dc}{pair}} $>$ \mbox{\hyperlink{a00397_aefd344ebb2faadc64a56a16dc8582026}{Create\+Direcs}} (int max\+\_\+step\+\_\+connections)
+\begin{DoxyCompactList}\small\item\em Create a set of directions based on max\+\_\+step\+\_\+connections. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{a00397_a2472e370aa77f9486bb1c46a1ff704c5}{graph\+\_\+edge}} $>$ \mbox{\hyperlink{a00397_ab7ffcc7d6657ce276c06deed24c546a4}{Get\+Children}} (const \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \&parent, const std\+::vector$<$ \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} $>$ \&possible\+\_\+children, \mbox{\hyperlink{a00397_aef833458d20e4569c73f409b52d03bee}{Ray\+Tracer}} \&rt, const \mbox{\hyperlink{a00397_a01249}{Graph\+Params}} \&GP)
+\begin{DoxyCompactList}\small\item\em Calculate all possible edges between parent and possible\+\_\+children. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} $>$ \mbox{\hyperlink{a00397_a41e03f9bab54e4e0d1314c6a4bdf2ec1}{Generate\+Potential\+Children}} (const \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \&parent, const std\+::vector$<$ \mbox{\hyperlink{a00397_ab618c832ef23d48d9f4ea9d9e46116dc}{pair}} $>$ \&direcs, const \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \&spacing, const \mbox{\hyperlink{a00397_a01249}{Graph\+Params}} \&gp)
+\begin{DoxyCompactList}\small\item\em Populare out\+\_\+children with a potential child position for every direction in directions. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename A , typename D , typename N $>$ }\\void \mbox{\hyperlink{a00397_a5ad3e8fac4a21eee744f3633f7a3692f}{Move\+Node}} (const A \&dist, const D \&direction, N \&node)
+\begin{DoxyCompactList}\small\item\em Move a node in {\ttfamily direction} by {\ttfamily dist} units. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} $>$ \mbox{\hyperlink{a00397_a4b7cc0ad0002975404acef5064f4f546}{Check\+Children}} (const \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \&parent, const std\+::vector$<$ \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} $>$ \&possible\+\_\+children, \mbox{\hyperlink{a00397_aef833458d20e4569c73f409b52d03bee}{Ray\+Tracer}} \&rt, const \mbox{\hyperlink{a00397_a01249}{Graph\+Params}} \&params)
+\begin{DoxyCompactList}\small\item\em Determine whether children are over valid ground, and and meet upstep/downstep requirements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00399_af0378d900074d484ba791d4317e5935e}{H\+F\+::\+Spatial\+Structures\+::\+S\+T\+EP}} \mbox{\hyperlink{a00397_aeab1db37b5aa614235f109d5dd9711a9}{Check\+Connection}} (const \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \&parent, const \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \&child, \mbox{\hyperlink{a00397_aef833458d20e4569c73f409b52d03bee}{Ray\+Tracer}} \&rt, const \mbox{\hyperlink{a00397_a01249}{Graph\+Params}} \&params)
+\begin{DoxyCompactList}\small\item\em Determine what kind of step (if any) is between parent and child. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a00397_ace66c1b60785c32433402f012019ab81}{Occlusion\+Check}} (const \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \&parent, const \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \&child, \mbox{\hyperlink{a00397_aef833458d20e4569c73f409b52d03bee}{Ray\+Tracer}} \&RT)
+\begin{DoxyCompactList}\small\item\em Determine if there is a valid line of sight between parent and child. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a00397_a9daa85cb56a1b18d44f46aa9c420afde}{Check\+Slope}} (const \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \&parent, const \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \&child, const \mbox{\hyperlink{a00397_a01249}{Graph\+Params}} \&gp)
+\begin{DoxyCompactList}\small\item\em Determine if the slope between parent and child is traversable according to the graph parameters. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename point\+\_\+type $>$ }\\\mbox{\hyperlink{a02017}{Node}} \mbox{\hyperlink{a00397_abf1a3ae7dc89b3cf430e059a87fcd477}{To\+Node}} (const point\+\_\+type \&ct)
+\begin{DoxyCompactList}\small\item\em Convert a point\+\_\+type to a node. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename n1\+\_\+type , typename n2\+\_\+type $>$ }\\\mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\+\_\+t}} \mbox{\hyperlink{a00397_a7f96186b8f24f878404d1feccf2f64db}{Distance\+To}} (const n1\+\_\+type \&n1, const n2\+\_\+type \&n2)
+\begin{DoxyCompactList}\small\item\em Calculate the distance between two nodes. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename vector\+\_\+type $>$ }\\void \mbox{\hyperlink{a00397_ad2e09e0825a1db4fc511907179eddf00}{Normalize}} (vector\+\_\+type \&v)
+\begin{DoxyCompactList}\small\item\em Normalize a vector. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a00397_ab731d597ee2a843f7b7cb1ccbae67782}{Check\+Geometry\+ID}} (\mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598}{H\+I\+T\+\_\+\+F\+L\+AG}} goal, int id, const \mbox{\hyperlink{a01245}{Geometry\+Flag\+Map}} \&geom\+\_\+dict)
+\begin{DoxyCompactList}\small\item\em Determine if a hit is against the geometry type specified. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+constexpr \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\+\_\+t}} \mbox{\hyperlink{a00397_ad1ee2b33ac4982f6f4c4263946bf9e6b}{default\+\_\+z\+\_\+precision}} = 0.\+0001
+\item 
+constexpr \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\+\_\+t}} \mbox{\hyperlink{a00397_ad1cd92591557c21198238c7d06ef2252}{default\+\_\+ground\+\_\+offset}} = 0.\+01
+\item 
+constexpr \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\+\_\+t}} \mbox{\hyperlink{a00397_a361fb70f3e88bb239a59900c9e21b5ac}{default\+\_\+spacing\+\_\+precision}} = 0.\+00001
+\item 
+static const \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \mbox{\hyperlink{a00397_a986887183de94b00a1b8b05572da8767}{down}} = \{ 0,0,-\/1 \}
+\begin{DoxyCompactList}\small\item\em Constant used as a direction for downwards raycasts. \end{DoxyCompactList}\item 
+static const vector$<$ \mbox{\hyperlink{a00397_ab618c832ef23d48d9f4ea9d9e46116dc}{pair}} $>$ \mbox{\hyperlink{a00397_ad69a24044327f56034e251c25499a910}{init\+\_\+directs}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Generate a graph of accessible space from a given start point. 
+
+The Graph Generator maps out \char`\"{}accessible\char`\"{} space on a model from a given starting point. In graphs created by this algorithm, node represents a point in space that a human can occupy, and each edge between nodes indicates that a human can traverse from one node to another node. The Graph Generator is a powerful tool for analyzing space, since the graph or nodes it outputs can be used as input to all the analysis methods offered by Human\+Factors, allowing for it to be the starting point of other analysis methods within Human\+Factors.
+
+\begin{DoxyParagraph}{Obstacle Support}
+The Graph Generator supports marking specific geometry as walkable or obstacles. Obstacle surfaces are surfaces that the graph generator is not allowed to generate nodes on, while walkable surfaces are the only surfaces that the graph generator is permitted to generate nodes on. Depending on what arguments are first passed to the graph generator, it will use different rules for determining which of the inputs are obstacles and which are not. When no geometry ids are specified, all geometry is considered walkable. When only obstacle surfaces are specified, all geometry other than that in the obstacles array are considered walkable. If both an obstacle and walkable array are specified then obstacles will be considered inaccessible, walkable surfaces will be accessible, and all geometry not in either array will be considered not traversable.
+\end{DoxyParagraph}
+\begin{DoxyNote}{Note}
+All arguments are in meters for distances and degrees for angles unless otherwise specified. For all calculations, the Graph Generator assumes geometry is Z-\/\+Up i.\+e. upstep is how high the step is in the z-\/direction, ground checks are performed in the -\/z direction etc.
+\end{DoxyNote}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a01257}{Graph\+Generator}} for more details. 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Class Documentation}
+\index{HF::GraphGenerator::GraphParams@{HF::GraphGenerator::GraphParams}}\label{a01249}
+\Hypertarget{a00397_a01249}
+\doxysubsubsection{struct HF\+::Graph\+Generator\+::Graph\+Params}
+Holds parameters for the \mbox{\hyperlink{a01257}{Graph\+Generator}}. 
+
+Definition at line 255 of file graph\+\_\+generator.\+h.
+
+
+
+Collaboration diagram for HF\+::Graph\+Generator\+::Graph\+Params\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01247}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00397_a7c141d33285a77c81fc1b9ce0b210d72}\label{a00397_a7c141d33285a77c81fc1b9ce0b210d72}} 
+\mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}}&
+down\_slope&
+The maximum downward slope the graph can traverse. Any slopes steeper than this will be considered inaccessible. \\
+\hline
+
+\mbox{\Hypertarget{a00397_add2b6fa6bf77a8c4626a1e6d0559970f}\label{a00397_add2b6fa6bf77a8c4626a1e6d0559970f}} 
+\mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}}&
+down\_step&
+Maximum step down the graph can traverse.\+Any steps steeper than this will be considered inaccessible. \\
+\hline
+
+\mbox{\Hypertarget{a00397_a5dc55aa5861e9bb2f2675146b11812af}\label{a00397_a5dc55aa5861e9bb2f2675146b11812af}} 
+\mbox{\hyperlink{a01245}{GeometryFlagMap}}&
+geom\_ids&
+Stores a map of geometry I\+Ds to their H\+I\+T\+\_\+\+F\+L\+A\+GS and the current filter mode of the graph. \\
+\hline
+
+\mbox{\Hypertarget{a00397_af7a57e8e6b17f86ac29a8df2685e56c1}\label{a00397_af7a57e8e6b17f86ac29a8df2685e56c1}} 
+\mbox{\hyperlink{a00397_a01241}{Precision}}&
+precision&
+Tolerances for the graph. \\
+\hline
+
+\mbox{\Hypertarget{a00397_add7f080950668f5dfa8d857e9c66b89d}\label{a00397_add7f080950668f5dfa8d857e9c66b89d}} 
+\mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}}&
+up\_slope&
+Maximum upward slope the graph can traverse in degrees.\+Any slopes steeper than this will be considered inaccessible. \\
+\hline
+
+\mbox{\Hypertarget{a00397_a0b8afc5f531e3286ce2434b1bc2b1f50}\label{a00397_a0b8afc5f531e3286ce2434b1bc2b1f50}} 
+\mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}}&
+up\_step&
+Maximum height of a step the graph can traverse.\+Any steps higher this will be considered inaccessible. \\
+\hline
+
+\end{DoxyFields}
+\index{HF::GraphGenerator::Precision@{HF::GraphGenerator::Precision}}\label{a01241}
+\Hypertarget{a00397_a01241}
+\doxysubsubsection{struct HF\+::Graph\+Generator\+::Precision}
+Various parameters to set the precision of certain parts of the graph generator. 
+
+Definition at line 111 of file graph\+\_\+generator.\+h.
+
+
+
+Collaboration diagram for HF\+::Graph\+Generator\+::Precision\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=207pt]{a01239}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00397_a4fa4f096863296469711e52da4b36b9c}\label{a00397_a4fa4f096863296469711e52da4b36b9c}} 
+\mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}}&
+ground\_offset&
+Distance to offset nodes from the ground before checking line of sight. \\
+\hline
+
+\mbox{\Hypertarget{a00397_ac982230f7d151df6018c19d712cd3436}\label{a00397_ac982230f7d151df6018c19d712cd3436}} 
+\mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}}&
+node\_spacing&
+\mbox{\hyperlink{a00397_a01241}{Precision}} to round nodes after spacing is calculated. \\
+\hline
+
+\mbox{\Hypertarget{a00397_a6ec86cb69c1cc0e0dc8ea229310939b6}\label{a00397_a6ec86cb69c1cc0e0dc8ea229310939b6}} 
+\mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\_t}}&
+node\_z&
+\mbox{\hyperlink{a00397_a01241}{Precision}} to round the z-\/component of nodes after a raycast is performed. \\
+\hline
+
+\end{DoxyFields}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{a00397_a2472e370aa77f9486bb1c46a1ff704c5}\label{a00397_a2472e370aa77f9486bb1c46a1ff704c5}} 
+\index{HF::GraphGenerator@{HF::GraphGenerator}!graph\_edge@{graph\_edge}}
+\index{graph\_edge@{graph\_edge}!HF::GraphGenerator@{HF::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{graph\_edge}{graph\_edge}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{a00397_a2472e370aa77f9486bb1c46a1ff704c5}{H\+F\+::\+Graph\+Generator\+::graph\+\_\+edge}} = typedef \mbox{\hyperlink{a01473}{H\+F\+::\+Spatial\+Structures\+::\+Edge}}}
+
+
+
+Type of edge for the graph generator to use internally. 
+
+
+
+Definition at line 75 of file graph\+\_\+generator.\+h.
+
+\mbox{\Hypertarget{a00397_adacfd76227db1d19cad7c15a8dde7330}\label{a00397_adacfd76227db1d19cad7c15a8dde7330}} 
+\index{HF::GraphGenerator@{HF::GraphGenerator}!hashmap@{hashmap}}
+\index{hashmap@{hashmap}!HF::GraphGenerator@{HF::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{hashmap}{hashmap}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{a00397_adacfd76227db1d19cad7c15a8dde7330}{H\+F\+::\+Graph\+Generator\+::hashmap}} = typedef std\+::unordered\+\_\+map$<$int, \mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598}{H\+I\+T\+\_\+\+F\+L\+AG}}$>$}
+
+
+
+Hashmap used for assigning and storing hitflags for I\+Ds. 
+
+
+
+Definition at line 134 of file graph\+\_\+generator.\+h.
+
+\mbox{\Hypertarget{a00397_ab618c832ef23d48d9f4ea9d9e46116dc}\label{a00397_ab618c832ef23d48d9f4ea9d9e46116dc}} 
+\index{HF::GraphGenerator@{HF::GraphGenerator}!pair@{pair}}
+\index{pair@{pair}!HF::GraphGenerator@{HF::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{pair}{pair}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{a00397_ab618c832ef23d48d9f4ea9d9e46116dc}{H\+F\+::\+Graph\+Generator\+::pair}} = typedef std\+::pair$<$int, int$>$}
+
+
+
+Type for Directions to be stored as. 
+
+
+
+Definition at line 82 of file graph\+\_\+generator.\+h.
+
+\mbox{\Hypertarget{a00397_aef833458d20e4569c73f409b52d03bee}\label{a00397_aef833458d20e4569c73f409b52d03bee}} 
+\index{HF::GraphGenerator@{HF::GraphGenerator}!RayTracer@{RayTracer}}
+\index{RayTracer@{RayTracer}!HF::GraphGenerator@{HF::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{RayTracer}{RayTracer}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{a00397_aef833458d20e4569c73f409b52d03bee}{H\+F\+::\+Graph\+Generator\+::\+Ray\+Tracer}} = typedef \mbox{\hyperlink{a01365}{H\+F\+::\+Ray\+Tracer\+::\+Multi\+RT}}}
+
+
+
+Type of raytracer to be used internally. 
+
+
+
+Definition at line 81 of file graph\+\_\+generator.\+h.
+
+\mbox{\Hypertarget{a00397_a8f7754dd4958185062ba8e0bc28d6579}\label{a00397_a8f7754dd4958185062ba8e0bc28d6579}} 
+\index{HF::GraphGenerator@{HF::GraphGenerator}!real3@{real3}}
+\index{real3@{real3}!HF::GraphGenerator@{HF::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{real3}{real3}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{H\+F\+::\+Graph\+Generator\+::real3}} = typedef std\+::array$<$\mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\+\_\+t}}, 3$>$}
+
+
+
+Type used for the standard coordinate set of the graph generator. 
+
+
+
+Definition at line 74 of file graph\+\_\+generator.\+h.
+
+\mbox{\Hypertarget{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}\label{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}} 
+\index{HF::GraphGenerator@{HF::GraphGenerator}!real\_t@{real\_t}}
+\index{real\_t@{real\_t}!HF::GraphGenerator@{HF::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{real\_t}{real\_t}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{H\+F\+::\+Graph\+Generator\+::real\+\_\+t}} = typedef \mbox{\hyperlink{a00001_a02273}{double}}}
+
+
+
+Internal decimal type of the graph generator. 
+
+
+
+Definition at line 73 of file graph\+\_\+generator.\+h.
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{a00397_af86d7be7ec8351dfc26ab5c11f727207}\label{a00397_af86d7be7ec8351dfc26ab5c11f727207}} 
+\index{HF::GraphGenerator@{HF::GraphGenerator}!GeometryFilterMode@{GeometryFilterMode}}
+\index{GeometryFilterMode@{GeometryFilterMode}!HF::GraphGenerator@{HF::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{GeometryFilterMode}{GeometryFilterMode}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{a00397_af86d7be7ec8351dfc26ab5c11f727207}{H\+F\+::\+Graph\+Generator\+::\+Geometry\+Filter\+Mode}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Different rules for how geometry is filtered by the graph generator. 
+
+\begin{DoxyRemark}{Remarks}
+Each different filter mode was created to allow for different uses of the graph generator depending on how much geometry was specifically specified to be in either group. This allows for users to accept all geometry, Blacklist some geometry, or Blacklist and whitelist some geometry from graph generation. 
+\end{DoxyRemark}
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ALL\_INTERSECTIONS@{ALL\_INTERSECTIONS}!HF::GraphGenerator@{HF::GraphGenerator}}\index{HF::GraphGenerator@{HF::GraphGenerator}!ALL\_INTERSECTIONS@{ALL\_INTERSECTIONS}}}\mbox{\Hypertarget{a00397_af86d7be7ec8351dfc26ab5c11f727207abd38aa552d58d6dee7dc932c374f0e04}\label{a00397_af86d7be7ec8351dfc26ab5c11f727207abd38aa552d58d6dee7dc932c374f0e04}} 
+A\+L\+L\+\_\+\+I\+N\+T\+E\+R\+S\+E\+C\+T\+I\+O\+NS&Consider all geometry as walkable surfaces. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OBSTACLES\_ONLY@{OBSTACLES\_ONLY}!HF::GraphGenerator@{HF::GraphGenerator}}\index{HF::GraphGenerator@{HF::GraphGenerator}!OBSTACLES\_ONLY@{OBSTACLES\_ONLY}}}\mbox{\Hypertarget{a00397_af86d7be7ec8351dfc26ab5c11f727207ac78656cbac82f2af0177cfe76dd1aa12}\label{a00397_af86d7be7ec8351dfc26ab5c11f727207ac78656cbac82f2af0177cfe76dd1aa12}} 
+O\+B\+S\+T\+A\+C\+L\+E\+S\+\_\+\+O\+N\+LY&Consider all geometry that isn\textquotesingle{}t an obstacle as walkable. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OBSTACLES\_AND\_FLOORS@{OBSTACLES\_AND\_FLOORS}!HF::GraphGenerator@{HF::GraphGenerator}}\index{HF::GraphGenerator@{HF::GraphGenerator}!OBSTACLES\_AND\_FLOORS@{OBSTACLES\_AND\_FLOORS}}}\mbox{\Hypertarget{a00397_af86d7be7ec8351dfc26ab5c11f727207adb49be99500731a1909db6bcf395d27f}\label{a00397_af86d7be7ec8351dfc26ab5c11f727207adb49be99500731a1909db6bcf395d27f}} 
+O\+B\+S\+T\+A\+C\+L\+E\+S\+\_\+\+A\+N\+D\+\_\+\+F\+L\+O\+O\+RS&Explicitly tag geometry ids as either obstacle or floor. Any ids outside of these ranges will always fail. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 144 of file graph\+\_\+generator.\+h.
+
+\mbox{\Hypertarget{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598}\label{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598}} 
+\index{HF::GraphGenerator@{HF::GraphGenerator}!HIT\_FLAG@{HIT\_FLAG}}
+\index{HIT\_FLAG@{HIT\_FLAG}!HF::GraphGenerator@{HF::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{HIT\_FLAG}{HIT\_FLAG}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598}{H\+F\+::\+Graph\+Generator\+::\+H\+I\+T\+\_\+\+F\+L\+AG}}}
+
+
+
+Determines which geometry the ray will collide with. 
+
+\begin{DoxyRemark}{Remarks}
+Used internally by the \mbox{\hyperlink{a01257}{Graph\+Generator}} to determine which type of geometry to collide with when casting a ray. 
+\end{DoxyRemark}
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NO\_FLAG@{NO\_FLAG}!HF::GraphGenerator@{HF::GraphGenerator}}\index{HF::GraphGenerator@{HF::GraphGenerator}!NO\_FLAG@{NO\_FLAG}}}\mbox{\Hypertarget{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598a213316326ca943ae8582c8778a28a5f0}\label{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598a213316326ca943ae8582c8778a28a5f0}} 
+N\+O\+\_\+\+F\+L\+AG&No flag set. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FLOORS@{FLOORS}!HF::GraphGenerator@{HF::GraphGenerator}}\index{HF::GraphGenerator@{HF::GraphGenerator}!FLOORS@{FLOORS}}}\mbox{\Hypertarget{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598aaf146b316ade4ca80d23d9d22b0539cc}\label{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598aaf146b316ade4ca80d23d9d22b0539cc}} 
+F\+L\+O\+O\+RS&Floors only. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OBSTACLES@{OBSTACLES}!HF::GraphGenerator@{HF::GraphGenerator}}\index{HF::GraphGenerator@{HF::GraphGenerator}!OBSTACLES@{OBSTACLES}}}\mbox{\Hypertarget{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598a9118a6ea0d5aaa017a735193ac79d08d}\label{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598a9118a6ea0d5aaa017a735193ac79d08d}} 
+O\+B\+S\+T\+A\+C\+L\+ES&Obstacles only. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BOTH@{BOTH}!HF::GraphGenerator@{HF::GraphGenerator}}\index{HF::GraphGenerator@{HF::GraphGenerator}!BOTH@{BOTH}}}\mbox{\Hypertarget{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598a9d20e9f6abc3d3630c75432b0dac052c}\label{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598a9d20e9f6abc3d3630c75432b0dac052c}} 
+B\+O\+TH&Collide with floors and obstacles. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 123 of file graph\+\_\+generator.\+h.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{a00397_a73b53db067a504d36e9481dfe3326b60}\label{a00397_a73b53db067a504d36e9481dfe3326b60}} 
+\index{HF::GraphGenerator@{HF::GraphGenerator}!CastToReal@{CastToReal}}
+\index{CastToReal@{CastToReal}!HF::GraphGenerator@{HF::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{CastToReal()}{CastToReal()}}
+{\footnotesize\ttfamily template$<$typename real\+\_\+type $>$ \\
+\mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\+\_\+t}} H\+F\+::\+Graph\+Generator\+::\+Cast\+To\+Real (\begin{DoxyParamCaption}\item[{real\+\_\+type}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Cast an input value to real\+\_\+t using static cast. 
+
+\begin{DoxyRemark}{Remarks}
+Just a convience function. Same as static\+\_\+cast$<$real\+\_\+t$>$(t)
+\end{DoxyRemark}
+\begin{DoxyReturn}{Returns}
+{\ttfamily static\+\_\+cast$<$real\+\_\+t$>$(t)} 
+\end{DoxyReturn}
+
+
+Definition at line 91 of file graph\+\_\+generator.\+h.
+
+
+
+Referenced by H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Build\+Network(), and Cast\+To\+Real3().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00397_a73b53db067a504d36e9481dfe3326b60_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00397_a58892abe1152c28d26d3ca749c99ea4d}\label{a00397_a58892abe1152c28d26d3ca749c99ea4d}} 
+\index{HF::GraphGenerator@{HF::GraphGenerator}!CastToReal3@{CastToReal3}}
+\index{CastToReal3@{CastToReal3}!HF::GraphGenerator@{HF::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{CastToReal3()}{CastToReal3()}}
+{\footnotesize\ttfamily template$<$typename real\+\_\+3\+\_\+type $>$ \\
+\mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} H\+F\+::\+Graph\+Generator\+::\+Cast\+To\+Real3 (\begin{DoxyParamCaption}\item[{real\+\_\+3\+\_\+type}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Cast an array of 3 values to the graph\+\_\+generator\textquotesingle{}s real\+\_\+3 type. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em real\+\_\+3\+\_\+type} & A vector type that is indexable with square brackets for up to 3 elements (pointlike concept)\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em t} & X,Y,Z coordinates to convert to a real3\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A real3 containing the x,y,z coordinates of {\ttfamily t} 
+\end{DoxyReturn}
+
+
+Definition at line 104 of file graph\+\_\+generator.\+h.
+
+
+
+References Cast\+To\+Real().
+
+
+
+Referenced by H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Build\+Network(), H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Crawl\+Geom(), H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Crawl\+Geom\+Parallel(), and T\+E\+S\+T().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=342pt]{a00397_a58892abe1152c28d26d3ca749c99ea4d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00397_a58892abe1152c28d26d3ca749c99ea4d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00397_a4b7cc0ad0002975404acef5064f4f546}\label{a00397_a4b7cc0ad0002975404acef5064f4f546}} 
+\index{HF::GraphGenerator@{HF::GraphGenerator}!CheckChildren@{CheckChildren}}
+\index{CheckChildren@{CheckChildren}!HF::GraphGenerator@{HF::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{CheckChildren()}{CheckChildren()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} $>$ H\+F\+::\+Graph\+Generator\+::\+Check\+Children (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \&}]{parent,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} $>$ \&}]{possible\+\_\+children,  }\item[{\mbox{\hyperlink{a00397_aef833458d20e4569c73f409b52d03bee}{Ray\+Tracer}} \&}]{rt,  }\item[{const \mbox{\hyperlink{a00397_a01249}{Graph\+Params}} \&}]{params }\end{DoxyParamCaption})}
+
+
+
+Determine whether children are over valid ground, and and meet upstep/downstep requirements. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & Parent of all children in possible\+\_\+children \\
+\hline
+{\em possible\+\_\+children} & Children of parent that may or may not be over valid ground \\
+\hline
+{\em rt} & Raytracer to use for all ray intersections \\
+\hline
+{\em params} & Parameters to use for upstep/downstep limits and rounding\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An array of children from {\ttfamily possible\+\_\+children} that are over valid ground and meet the upstep/downstep requirements in {\ttfamily params}. Any child that didn\textquotesingle{}t meet these requirements will not have been included. Each child in the return will have been moved to be directly over the valid ground they\textquotesingle{}re above.
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+{\ttfamily \mbox{[}(0, 2, 0),(1, 0, -\/0),(0, 1, 0),(2, 0, -\/0)\mbox{]}} 
+\end{DoxyParagraph}
+
+
+Definition at line 248 of file graph\+\_\+utils.\+cpp.
+
+
+
+References Check\+Ray(), down, H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::down\+\_\+step, F\+L\+O\+O\+RS, H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::geom\+\_\+ids, H\+F\+::\+Graph\+Generator\+::\+Precision\+::node\+\_\+z, H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::precision, H\+F\+::\+Graph\+Generator\+::optional\+\_\+real3\+::pt, and H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::up\+\_\+step.
+
+
+
+Referenced by Get\+Children(), and T\+E\+S\+T().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00397_a4b7cc0ad0002975404acef5064f4f546_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00397_a4b7cc0ad0002975404acef5064f4f546_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00397_aeab1db37b5aa614235f109d5dd9711a9}\label{a00397_aeab1db37b5aa614235f109d5dd9711a9}} 
+\index{HF::GraphGenerator@{HF::GraphGenerator}!CheckConnection@{CheckConnection}}
+\index{CheckConnection@{CheckConnection}!HF::GraphGenerator@{HF::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{CheckConnection()}{CheckConnection()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00399_af0378d900074d484ba791d4317e5935e}{H\+F\+::\+Spatial\+Structures\+::\+S\+T\+EP}} H\+F\+::\+Graph\+Generator\+::\+Check\+Connection (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \&}]{parent,  }\item[{const \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \&}]{child,  }\item[{\mbox{\hyperlink{a00397_aef833458d20e4569c73f409b52d03bee}{Ray\+Tracer}} \&}]{rt,  }\item[{const \mbox{\hyperlink{a00397_a01249}{Graph\+Params}} \&}]{params }\end{DoxyParamCaption})}
+
+
+
+Determine what kind of step (if any) is between parent and child. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & Node being traversed from \\
+\hline
+{\em child} & Node being traversed to \\
+\hline
+{\em rt} & Raytracer to use for all ray intersections \\
+\hline
+{\em params} & Parameters to use for upstep/downstep and upslope/downslope\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The type of step between parent/child or N\+O\+\_\+\+C\+O\+N\+N\+E\+C\+T\+I\+ON if no connection could be found between them.
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+{\ttfamily \mbox{[}1,0,0,1\mbox{]}} 
+\end{DoxyParagraph}
+
+
+Definition at line 303 of file graph\+\_\+utils.\+cpp.
+
+
+
+References Check\+Slope(), H\+F\+::\+Spatial\+Structures\+::\+D\+O\+WN, H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::down\+\_\+step, H\+F\+::\+Spatial\+Structures\+::\+G\+R\+O\+U\+N\+D\+\_\+\+O\+F\+F\+S\+ET, H\+F\+::\+Graph\+Generator\+::\+Precision\+::ground\+\_\+offset, H\+F\+::\+Spatial\+Structures\+::\+N\+O\+NE, H\+F\+::\+Spatial\+Structures\+::\+N\+O\+T\+\_\+\+C\+O\+N\+N\+E\+C\+T\+ED, Occlusion\+Check(), H\+F\+::\+Spatial\+Structures\+::\+O\+V\+ER, H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::precision, H\+F\+::\+Spatial\+Structures\+::\+UP, and H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::up\+\_\+step.
+
+
+
+Referenced by Get\+Children(), and T\+E\+S\+T().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00397_aeab1db37b5aa614235f109d5dd9711a9_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00397_aeab1db37b5aa614235f109d5dd9711a9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00397_ab731d597ee2a843f7b7cb1ccbae67782}\label{a00397_ab731d597ee2a843f7b7cb1ccbae67782}} 
+\index{HF::GraphGenerator@{HF::GraphGenerator}!CheckGeometryID@{CheckGeometryID}}
+\index{CheckGeometryID@{CheckGeometryID}!HF::GraphGenerator@{HF::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{CheckGeometryID()}{CheckGeometryID()}}
+{\footnotesize\ttfamily bool H\+F\+::\+Graph\+Generator\+::\+Check\+Geometry\+ID (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598}{H\+I\+T\+\_\+\+F\+L\+AG}}}]{goal,  }\item[{int}]{id,  }\item[{const \mbox{\hyperlink{a01245}{Geometry\+Flag\+Map}} \&}]{geom\+\_\+dict }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Determine if a hit is against the geometry type specified. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em goal} & Hitflag that the intersection is being cheecked against \\
+\hline
+{\em ID} & id of the mesh that was intesected \\
+\hline
+{\em geom\+\_\+dict} & Rules to use for determining if the intersection was successful\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the intersection abides by the rules in geom\+\_\+dict, false otherwise
+\end{DoxyReturn}
+\begin{DoxyRemark}{Remarks}
+This function serves as the sole place for intersection mesh ids to be checked using the ifnormation in geom\+\_\+dict. 
+\end{DoxyRemark}
+
+
+Definition at line 126 of file graph\+\_\+utils.\+cpp.
+
+
+
+References A\+L\+L\+\_\+\+I\+N\+T\+E\+R\+S\+E\+C\+T\+I\+O\+NS, B\+O\+TH, H\+F\+::\+Graph\+Generator\+::\+Geometry\+Flag\+Map\+::\+Mode, O\+B\+S\+T\+A\+C\+L\+ES, O\+B\+S\+T\+A\+C\+L\+E\+S\+\_\+\+A\+N\+D\+\_\+\+F\+L\+O\+O\+RS, and O\+B\+S\+T\+A\+C\+L\+E\+S\+\_\+\+O\+N\+LY.
+
+
+
+Referenced by Check\+Ray().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00397_ab731d597ee2a843f7b7cb1ccbae67782_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00397_a74be560268a713fc9e9b8b4a453afa2f}\label{a00397_a74be560268a713fc9e9b8b4a453afa2f}} 
+\index{HF::GraphGenerator@{HF::GraphGenerator}!CheckRay@{CheckRay}}
+\index{CheckRay@{CheckRay}!HF::GraphGenerator@{HF::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{CheckRay()}{CheckRay()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01253}{optional\+\_\+real3}} H\+F\+::\+Graph\+Generator\+::\+Check\+Ray (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a00397_aef833458d20e4569c73f409b52d03bee}{Ray\+Tracer}} \&}]{RT,  }\item[{const \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \&}]{origin,  }\item[{const \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \&}]{direction,  }\item[{\mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\+\_\+t}}}]{node\+\_\+z\+\_\+tolerance,  }\item[{\mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598}{H\+I\+T\+\_\+\+F\+L\+AG}}}]{flag = {\ttfamily \mbox{\hyperlink{a00397_a6180d5bc4bbfa9a5a426089e1f1ad598a9d20e9f6abc3d3630c75432b0dac052c}{B\+O\+TH}}},  }\item[{const \mbox{\hyperlink{a01245}{Geometry\+Flag\+Map}} \&}]{geometry\+\_\+dict = {\ttfamily \mbox{\hyperlink{a01245}{Geometry\+Flag\+Map}}()} }\end{DoxyParamCaption})}
+
+
+
+Cast a ray and get the point of intersection if it connects. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em RT} & Raytracer to use for intersection. \\
+\hline
+{\em origin} & Origin point of the ray. \\
+\hline
+{\em direction} & direction to cast the ray in. \\
+\hline
+{\em node\+\_\+z\+\_\+tolerance} & \mbox{\hyperlink{a00397_a01241}{Precision}} to round the point of intersection\textquotesingle{}s z-\/component to \\
+\hline
+{\em flag} & Which category of geometry will be intersected with. In general, any intersections with geometry other than this type will be discarded unless the type is B\+O\+TH, N\+O\+NE, or the geometry dictionary is empty. \\
+\hline
+{\em geometry\+\_\+dict} & Dictionary containing rules for filtering ray intersections. If not specified, this will not filter any intersections.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An invalid \mbox{\hyperlink{a01253}{optional\+\_\+real3}} if the ray did not intersect any geometry, or a valid \mbox{\hyperlink{a01253}{optional\+\_\+real3}} containing the point of intesection if an intersection was found.
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ {\ttfamily (1, 1, 0)} 
+\end{DoxyParagraph}
+
+
+Definition at line 146 of file graph\+\_\+utils.\+cpp.
+
+
+
+References Check\+Geometry\+I\+D(), H\+F\+::\+Ray\+Tracer\+::\+Hit\+Struct$<$ numeric\+\_\+type $>$\+::\+Did\+Hit(), H\+F\+::\+Ray\+Tracer\+::\+Hit\+Struct$<$ numeric\+\_\+type $>$\+::distance, H\+F\+::\+Ray\+Tracer\+::\+Multi\+R\+T\+::\+Intersect(), H\+F\+::\+Ray\+Tracer\+::\+Hit\+Struct$<$ numeric\+\_\+type $>$\+::meshid, Move\+Node(), and H\+F\+::\+Graph\+Generator\+::optional\+\_\+real3\+::pt.
+
+
+
+Referenced by Check\+Children(), T\+E\+S\+T(), and Validate\+Start\+Point().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00397_a74be560268a713fc9e9b8b4a453afa2f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00397_a74be560268a713fc9e9b8b4a453afa2f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00397_a9daa85cb56a1b18d44f46aa9c420afde}\label{a00397_a9daa85cb56a1b18d44f46aa9c420afde}} 
+\index{HF::GraphGenerator@{HF::GraphGenerator}!CheckSlope@{CheckSlope}}
+\index{CheckSlope@{CheckSlope}!HF::GraphGenerator@{HF::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{CheckSlope()}{CheckSlope()}}
+{\footnotesize\ttfamily bool H\+F\+::\+Graph\+Generator\+::\+Check\+Slope (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \&}]{parent,  }\item[{const \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \&}]{child,  }\item[{const \mbox{\hyperlink{a00397_a01249}{Graph\+Params}} \&}]{gp }\end{DoxyParamCaption})}
+
+
+
+Determine if the slope between parent and child is traversable according to the graph parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & Node being traversed from \\
+\hline
+{\em child} & Node being traversed to \\
+\hline
+{\em GP} & Parameters to use for up\+\_\+slope/down\+\_\+slope\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if the slope from parent to child meets upstep/downstep requirements in graph\+\_\+params. {\ttfamily false} otherwise. 
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ {\ttfamily Slope Check For Child 1 = True}~\newline
+{\ttfamily Slope Check For Child 2 = False} 
+\end{DoxyParagraph}
+
+
+Definition at line 290 of file graph\+\_\+utils.\+cpp.
+
+
+
+References H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::down\+\_\+slope, and H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::up\+\_\+slope.
+
+
+
+Referenced by Check\+Connection(), and T\+E\+S\+T().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00397_a9daa85cb56a1b18d44f46aa9c420afde_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00397_aefd344ebb2faadc64a56a16dc8582026}\label{a00397_aefd344ebb2faadc64a56a16dc8582026}} 
+\index{HF::GraphGenerator@{HF::GraphGenerator}!CreateDirecs@{CreateDirecs}}
+\index{CreateDirecs@{CreateDirecs}!HF::GraphGenerator@{HF::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{CreateDirecs()}{CreateDirecs()}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{a00397_ab618c832ef23d48d9f4ea9d9e46116dc}{pair}} $>$ H\+F\+::\+Graph\+Generator\+::\+Create\+Direcs (\begin{DoxyParamCaption}\item[{int}]{max\+\_\+step\+\_\+connections }\end{DoxyParamCaption})}
+
+
+
+Create a set of directions based on max\+\_\+step\+\_\+connections. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em max\+\_\+step\+\_\+conenctions} & Multiplier for directions to generate.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A set of all directions generated for max\+\_\+step\+\_\+connections.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a00397_afe5670b4cb780fd3ccf2a0d72a2e3c2e}{permutations}} for more information on how max\+\_\+step\+\_\+connections influences generated directions
+\end{DoxySeeAlso}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+{\ttfamily \mbox{[}(-\/1, -\/1),(-\/1, 0),(-\/1, 1),(0, -\/1),(0, 1),(1, -\/1),(1, 0),(1, 1),(-\/2, -\/1),(-\/2, 1),(-\/1, -\/2),(-\/1, 2),(1, -\/2),(1, 2),(2, -\/1),(2, 1)\mbox{]}} 
+\end{DoxyParagraph}
+
+
+Definition at line 201 of file graph\+\_\+utils.\+cpp.
+
+
+
+References init\+\_\+directs, and permutations().
+
+
+
+Referenced by H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Crawl\+Geom(), H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Crawl\+Geom\+Parallel(), and T\+E\+S\+T().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=342pt]{a00397_aefd344ebb2faadc64a56a16dc8582026_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00397_aefd344ebb2faadc64a56a16dc8582026_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00397_a7f96186b8f24f878404d1feccf2f64db}\label{a00397_a7f96186b8f24f878404d1feccf2f64db}} 
+\index{HF::GraphGenerator@{HF::GraphGenerator}!DistanceTo@{DistanceTo}}
+\index{DistanceTo@{DistanceTo}!HF::GraphGenerator@{HF::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{DistanceTo()}{DistanceTo()}}
+{\footnotesize\ttfamily template$<$typename n1\+\_\+type , typename n2\+\_\+type $>$ \\
+\mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\+\_\+t}} H\+F\+::\+Graph\+Generator\+::\+Distance\+To (\begin{DoxyParamCaption}\item[{const n1\+\_\+type \&}]{n1,  }\item[{const n2\+\_\+type \&}]{n2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Calculate the distance between two nodes. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em n1\+\_\+type} & A vector type that is indexable with square brackets for up to 3 elements (pointlike concept) \\
+\hline
+{\em n2\+\_\+type} & n1\+\_\+type A vector type that is indexable with square brackets for up to 3 elements (pointlike concept)\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em n1} & Location to calculate distance from \\
+\hline
+{\em n2} & Location to calculate distance to\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The distance from n1 to n2. 
+\end{DoxyReturn}
+
+
+Definition at line 54 of file graph\+\_\+utils.\+cpp.
+
+
+
+Referenced by Get\+Children(), and Occlusion\+Check().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00397_a7f96186b8f24f878404d1feccf2f64db_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00397_a41e03f9bab54e4e0d1314c6a4bdf2ec1}\label{a00397_a41e03f9bab54e4e0d1314c6a4bdf2ec1}} 
+\index{HF::GraphGenerator@{HF::GraphGenerator}!GeneratePotentialChildren@{GeneratePotentialChildren}}
+\index{GeneratePotentialChildren@{GeneratePotentialChildren}!HF::GraphGenerator@{HF::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{GeneratePotentialChildren()}{GeneratePotentialChildren()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} $>$ H\+F\+::\+Graph\+Generator\+::\+Generate\+Potential\+Children (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \&}]{parent,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{a00397_ab618c832ef23d48d9f4ea9d9e46116dc}{pair}} $>$ \&}]{direcs,  }\item[{const \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \&}]{spacing,  }\item[{const \mbox{\hyperlink{a00397_a01249}{Graph\+Params}} \&}]{gp }\end{DoxyParamCaption})}
+
+
+
+Populare out\+\_\+children with a potential child position for every direction in directions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & Parent to generate children from. \\
+\hline
+{\em directions} & X,Y pairs to use for generating children. I.\+E. A pair of {\ttfamily \{1,2\}}would create a child at {\ttfamily \{parent.\+x + 1$\ast$spacing.x, parent.\+y + 2$\ast$spacing.y, parent.\+z + spacing.\+z\}.} \\
+\hline
+{\em spacing} & Magnitude to offset children in the x,y,z direction for each direction in directions \\
+\hline
+{\em gp} & Parameters to use for rounding offset nodes.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An array of children offset from parent by spacing and directions.
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Example}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+{\ttfamily \mbox{[}(0, 2, 4),(0, 4, 4),(1, 0, 4),(2, 0, 4),(1, 2, 4),(2, 2, 4)\mbox{]}} 
+\end{DoxyParagraph}
+
+
+Definition at line 381 of file graph\+\_\+utils.\+cpp.
+
+
+
+References H\+F\+::\+Graph\+Generator\+::\+Precision\+::node\+\_\+spacing, H\+F\+::\+Graph\+Generator\+::\+Precision\+::node\+\_\+z, and H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::precision.
+
+
+
+Referenced by H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Crawl\+Geom(), H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Crawl\+Geom\+Parallel(), and T\+E\+S\+T().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00397_a41e03f9bab54e4e0d1314c6a4bdf2ec1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00397_ab7ffcc7d6657ce276c06deed24c546a4}\label{a00397_ab7ffcc7d6657ce276c06deed24c546a4}} 
+\index{HF::GraphGenerator@{HF::GraphGenerator}!GetChildren@{GetChildren}}
+\index{GetChildren@{GetChildren}!HF::GraphGenerator@{HF::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{GetChildren()}{GetChildren()}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{a00397_a2472e370aa77f9486bb1c46a1ff704c5}{graph\+\_\+edge}} $>$ H\+F\+::\+Graph\+Generator\+::\+Get\+Children (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \&}]{parent,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} $>$ \&}]{possible\+\_\+children,  }\item[{\mbox{\hyperlink{a00397_aef833458d20e4569c73f409b52d03bee}{Ray\+Tracer}} \&}]{rt,  }\item[{const \mbox{\hyperlink{a00397_a01249}{Graph\+Params}} \&}]{GP }\end{DoxyParamCaption})}
+
+
+
+Calculate all possible edges between parent and possible\+\_\+children. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & Parent of all children in {\ttfamily possible\+\_\+children} \\
+\hline
+{\em possible\+\_\+children} & Children that may have an edge with Parent \\
+\hline
+{\em rt} & Raytracer to use for ray intersections \\
+\hline
+{\em GP} & parameters to use for rounding and discarding nodes\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Rules}
+An edge is considered valid if\+: 1) Both parent and child the potential child are over valid walkable ground 2) After the child is moved to be directly on top of the ground it is over The slope between parent and child is within upslope/downslope limits OR the path between parent/child involves a step that is within upstep/downstep limits
+\end{DoxyParagraph}
+\begin{DoxyReturn}{Returns}
+An array of all edges that could be created between parent and possible\+\_\+children that meet the requirements of Graph\+Parameter. For every edge, the child will be moved downwards to ensure it\textquotesingle{}s over valid ground.
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+{\ttfamily \mbox{[}((0, 2, 0), 2.\+23607, 1),((2, 0, -\/0), 2.\+23607, 1)\mbox{]}} 
+\end{DoxyParagraph}
+
+
+Definition at line 218 of file graph\+\_\+utils.\+cpp.
+
+
+
+References Check\+Children(), Check\+Connection(), Distance\+To(), H\+F\+::\+Spatial\+Structures\+::\+N\+O\+T\+\_\+\+C\+O\+N\+N\+E\+C\+T\+ED, and To\+Node().
+
+
+
+Referenced by H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Crawl\+Geom(), H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+Crawl\+Geom\+Parallel(), and T\+E\+S\+T().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00397_ab7ffcc7d6657ce276c06deed24c546a4_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00397_ab7ffcc7d6657ce276c06deed24c546a4_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00397_a5ad3e8fac4a21eee744f3633f7a3692f}\label{a00397_a5ad3e8fac4a21eee744f3633f7a3692f}} 
+\index{HF::GraphGenerator@{HF::GraphGenerator}!MoveNode@{MoveNode}}
+\index{MoveNode@{MoveNode}!HF::GraphGenerator@{HF::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{MoveNode()}{MoveNode()}}
+{\footnotesize\ttfamily template$<$typename A , typename D , typename N $>$ \\
+void H\+F\+::\+Graph\+Generator\+::\+Move\+Node (\begin{DoxyParamCaption}\item[{const A \&}]{dist,  }\item[{const D \&}]{direction,  }\item[{N \&}]{node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Move a node in {\ttfamily direction} by {\ttfamily dist} units. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em D} & Must have \mbox{[}0\mbox{]}, \mbox{[}1\mbox{]}, \mbox{[}2\mbox{]} defined. \\
+\hline
+{\em N} & Must have \mbox{[}0\mbox{]}, \mbox{[}1\mbox{]}, \mbox{[}2\mbox{]} defined.\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em dist} & Distance to move the node. \\
+\hline
+{\em direction} & Direction to move the node in. \\
+\hline
+{\em node} & Node to move\\
+\hline
+\end{DoxyParams}
+\begin{DoxyPostcond}{Postcondition}
+Node\textquotesingle{}s members at \mbox{[}0\mbox{]}, \mbox{[}1\mbox{]}, \mbox{[}2\mbox{]} been moved in {\ttfamily direction} by {\ttfamily dist} units. 
+\end{DoxyPostcond}
+
+
+Definition at line 719 of file graph\+\_\+generator.\+h.
+
+
+
+Referenced by Check\+Ray().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00397_a5ad3e8fac4a21eee744f3633f7a3692f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00397_ad2e09e0825a1db4fc511907179eddf00}\label{a00397_ad2e09e0825a1db4fc511907179eddf00}} 
+\index{HF::GraphGenerator@{HF::GraphGenerator}!Normalize@{Normalize}}
+\index{Normalize@{Normalize}!HF::GraphGenerator@{HF::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{Normalize()}{Normalize()}}
+{\footnotesize\ttfamily template$<$typename vector\+\_\+type $>$ \\
+void H\+F\+::\+Graph\+Generator\+::\+Normalize (\begin{DoxyParamCaption}\item[{vector\+\_\+type \&}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Normalize a vector. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em vector\+\_\+type} & Must be indexable with square brackets for up to 3 elements. (pointlike concept)\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em v} & The vector to normalize\\
+\hline
+\end{DoxyParams}
+\begin{DoxyPostcond}{Postcondition}
+v will be normalized to have a magnitude of 1. 
+\end{DoxyPostcond}
+
+
+Definition at line 68 of file graph\+\_\+utils.\+cpp.
+
+\mbox{\Hypertarget{a00397_ace66c1b60785c32433402f012019ab81}\label{a00397_ace66c1b60785c32433402f012019ab81}} 
+\index{HF::GraphGenerator@{HF::GraphGenerator}!OcclusionCheck@{OcclusionCheck}}
+\index{OcclusionCheck@{OcclusionCheck}!HF::GraphGenerator@{HF::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{OcclusionCheck()}{OcclusionCheck()}}
+{\footnotesize\ttfamily bool H\+F\+::\+Graph\+Generator\+::\+Occlusion\+Check (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \&}]{parent,  }\item[{const \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \&}]{child,  }\item[{\mbox{\hyperlink{a00397_aef833458d20e4569c73f409b52d03bee}{Ray\+Tracer}} \&}]{RT }\end{DoxyParamCaption})}
+
+
+
+Determine if there is a valid line of sight between parent and child. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & Node to perform the line of sight check from \\
+\hline
+{\em child} & Node to perform the line of sight check to \\
+\hline
+{\em RT} & raytracer to use for the line of sight check\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily True} The line of sight between parent and child is obstructed 
+
+{\ttfamily False} There is a clear line of sight between parent and child
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Example}
+
+\end{DoxyParagraph}
+
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+{\ttfamily Occlusion Check For Child 1 = True}~\newline
+{\ttfamily Occlusion Check For Child 2 = False} 
+
+Definition at line 283 of file graph\+\_\+utils.\+cpp.
+
+
+
+References Distance\+To(), and H\+F\+::\+Ray\+Tracer\+::\+Multi\+R\+T\+::\+Occluded().
+
+
+
+Referenced by Check\+Connection(), and T\+E\+S\+T().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00397_ace66c1b60785c32433402f012019ab81_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00397_ace66c1b60785c32433402f012019ab81_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00397_afe5670b4cb780fd3ccf2a0d72a2e3c2e}\label{a00397_afe5670b4cb780fd3ccf2a0d72a2e3c2e}} 
+\index{HF::GraphGenerator@{HF::GraphGenerator}!permutations@{permutations}}
+\index{permutations@{permutations}!HF::GraphGenerator@{HF::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{permutations()}{permutations()}}
+{\footnotesize\ttfamily std\+::set$<$ std\+::pair$<$ int, int $>$ $>$ H\+F\+::\+Graph\+Generator\+::permutations (\begin{DoxyParamCaption}\item[{int}]{limit }\end{DoxyParamCaption})}
+
+
+
+Calculate P(n,r) as an array with each unique permutaton of 2 values being a pair. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em limit} & Highest number in the set\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a list of all permutations for integers from 0 to limit 
+\end{DoxyReturn}
+
+
+Definition at line 180 of file graph\+\_\+utils.\+cpp.
+
+
+
+Referenced by Create\+Direcs().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00397_afe5670b4cb780fd3ccf2a0d72a2e3c2e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00397_af8cc1a7a794699308cf5c46d3ae59491}\label{a00397_af8cc1a7a794699308cf5c46d3ae59491}} 
+\index{HF::GraphGenerator@{HF::GraphGenerator}!SetupCoreCount@{SetupCoreCount}}
+\index{SetupCoreCount@{SetupCoreCount}!HF::GraphGenerator@{HF::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{SetupCoreCount()}{SetupCoreCount()}}
+{\footnotesize\ttfamily void H\+F\+::\+Graph\+Generator\+::\+Setup\+Core\+Count (\begin{DoxyParamCaption}\item[{int}]{cores = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the core count of Open\+MP. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cores} & Number of cores to use. If -\/1, use every as many cores as possible \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 35 of file graph\+\_\+generator.\+cpp.
+
+
+
+Referenced by H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+I\+M\+P\+L\+\_\+\+Build\+Network().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00397_af8cc1a7a794699308cf5c46d3ae59491_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00397_a124a96c53ed2021db9d819369fe6b7ad}\label{a00397_a124a96c53ed2021db9d819369fe6b7ad}} 
+\index{HF::GraphGenerator@{HF::GraphGenerator}!setupRT@{setupRT}}
+\index{setupRT@{setupRT}!HF::GraphGenerator@{HF::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{setupRT()}{setupRT()}}
+{\footnotesize\ttfamily template$<$typename raytracer\+\_\+type $>$ \\
+void H\+F\+::\+Graph\+Generator\+::setup\+RT (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01257}{Graph\+Generator}} $\ast$}]{gg,  }\item[{raytracer\+\_\+type \&}]{rt,  }\item[{const std\+::vector$<$ int $>$ \&}]{obs\+\_\+ids,  }\item[{const std\+::vector$<$ int $>$ \&}]{walk\+\_\+ids }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Converts the raytracer to a multi\+RT if required, then map geometry ids to hitflags. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gg} & Pointer to the graph generator to update \\
+\hline
+{\em obs\+\_\+ids} & array of geometry ids to set as obstacles \\
+\hline
+{\em walk\+\_\+ids} & Array of geometry ids to set as walkable\\
+\hline
+\end{DoxyParams}
+\begin{DoxyPostcond}{Postcondition}
+{\ttfamily gg} will have it\textquotesingle{}s geometry map populated with the passed geometry ids and it\textquotesingle{}s raytracer set to a Multi\+RT containing {\ttfamily gg} 
+\end{DoxyPostcond}
+
+
+Definition at line 50 of file graph\+\_\+generator.\+cpp.
+
+
+
+References H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::geom\+\_\+ids, H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::params, H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::ray\+\_\+tracer, and H\+F\+::\+Graph\+Generator\+::\+Geometry\+Flag\+Map\+::\+Set\+Geometry\+Ids().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00397_a124a96c53ed2021db9d819369fe6b7ad_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00397_abf1a3ae7dc89b3cf430e059a87fcd477}\label{a00397_abf1a3ae7dc89b3cf430e059a87fcd477}} 
+\index{HF::GraphGenerator@{HF::GraphGenerator}!ToNode@{ToNode}}
+\index{ToNode@{ToNode}!HF::GraphGenerator@{HF::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{ToNode()}{ToNode()}}
+{\footnotesize\ttfamily template$<$typename point\+\_\+type $>$ \\
+\mbox{\hyperlink{a02017}{Node}} H\+F\+::\+Graph\+Generator\+::\+To\+Node (\begin{DoxyParamCaption}\item[{const point\+\_\+type \&}]{ct }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Convert a point\+\_\+type to a node. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em point\+\_\+type} & An array-\/like type that meets the pointlike concept\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em ct} & x,y,z coordinates to create the new node with.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A node containing the x,y,z components of {\ttfamily ct} 
+\end{DoxyReturn}
+
+
+Definition at line 36 of file graph\+\_\+utils.\+cpp.
+
+
+
+Referenced by Get\+Children().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00397_abf1a3ae7dc89b3cf430e059a87fcd477_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00397_a9ddffecb75b34434d7157b49d3c67b60}\label{a00397_a9ddffecb75b34434d7157b49d3c67b60}} 
+\index{HF::GraphGenerator@{HF::GraphGenerator}!ValidateStartPoint@{ValidateStartPoint}}
+\index{ValidateStartPoint@{ValidateStartPoint}!HF::GraphGenerator@{HF::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{ValidateStartPoint()}{ValidateStartPoint()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01253}{optional\+\_\+real3}} H\+F\+::\+Graph\+Generator\+::\+Validate\+Start\+Point (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a00397_aef833458d20e4569c73f409b52d03bee}{Ray\+Tracer}} \&}]{RT,  }\item[{const \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} \&}]{start\+\_\+point,  }\item[{const \mbox{\hyperlink{a00397_a01249}{Graph\+Params}} \&}]{Params }\end{DoxyParamCaption})}
+
+
+
+Determine if the start point of the graph is over valid ground. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em RT} & Raytracer to use for ray intersection \\
+\hline
+{\em start\+\_\+point} & the x,y,z coordinates of the starting point \\
+\hline
+{\em Params} & parameters to use for precision.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An invalid \mbox{\hyperlink{a01253}{optional\+\_\+real3}} if the check failed, or a valid \mbox{\hyperlink{a01253}{optional\+\_\+real3}} containing the x,y,z coordinates of the start point moved to be directly ontop of the intersected ground if the check succeeded.
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+{\ttfamily (0, 0, 0)} 
+\end{DoxyParagraph}
+
+
+Definition at line 107 of file graph\+\_\+utils.\+cpp.
+
+
+
+References Check\+Ray(), down, F\+L\+O\+O\+RS, H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::geom\+\_\+ids, H\+F\+::\+Graph\+Generator\+::\+Precision\+::node\+\_\+z, and H\+F\+::\+Graph\+Generator\+::\+Graph\+Params\+::precision.
+
+
+
+Referenced by H\+F\+::\+Graph\+Generator\+::\+Graph\+Generator\+::\+I\+M\+P\+L\+\_\+\+Build\+Network(), and T\+E\+S\+T().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00397_a9ddffecb75b34434d7157b49d3c67b60_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00397_a9ddffecb75b34434d7157b49d3c67b60_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{a00397_ad1cd92591557c21198238c7d06ef2252}\label{a00397_ad1cd92591557c21198238c7d06ef2252}} 
+\index{HF::GraphGenerator@{HF::GraphGenerator}!default\_ground\_offset@{default\_ground\_offset}}
+\index{default\_ground\_offset@{default\_ground\_offset}!HF::GraphGenerator@{HF::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{default\_ground\_offset}{default\_ground\_offset}}
+{\footnotesize\ttfamily constexpr \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\+\_\+t}} H\+F\+::\+Graph\+Generator\+::default\+\_\+ground\+\_\+offset = 0.\+01\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+
+
+Definition at line 78 of file graph\+\_\+generator.\+h.
+
+
+
+Referenced by H\+F\+::\+T\+E\+S\+T().
+
+\mbox{\Hypertarget{a00397_a361fb70f3e88bb239a59900c9e21b5ac}\label{a00397_a361fb70f3e88bb239a59900c9e21b5ac}} 
+\index{HF::GraphGenerator@{HF::GraphGenerator}!default\_spacing\_precision@{default\_spacing\_precision}}
+\index{default\_spacing\_precision@{default\_spacing\_precision}!HF::GraphGenerator@{HF::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{default\_spacing\_precision}{default\_spacing\_precision}}
+{\footnotesize\ttfamily constexpr \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\+\_\+t}} H\+F\+::\+Graph\+Generator\+::default\+\_\+spacing\+\_\+precision = 0.\+00001\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+
+
+Definition at line 79 of file graph\+\_\+generator.\+h.
+
+
+
+Referenced by H\+F\+::\+T\+E\+S\+T().
+
+\mbox{\Hypertarget{a00397_ad1ee2b33ac4982f6f4c4263946bf9e6b}\label{a00397_ad1ee2b33ac4982f6f4c4263946bf9e6b}} 
+\index{HF::GraphGenerator@{HF::GraphGenerator}!default\_z\_precision@{default\_z\_precision}}
+\index{default\_z\_precision@{default\_z\_precision}!HF::GraphGenerator@{HF::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{default\_z\_precision}{default\_z\_precision}}
+{\footnotesize\ttfamily constexpr \mbox{\hyperlink{a00397_a6d9d3b43eebc7f05a36e6264eb08bb5a}{real\+\_\+t}} H\+F\+::\+Graph\+Generator\+::default\+\_\+z\+\_\+precision = 0.\+0001\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+
+
+Definition at line 77 of file graph\+\_\+generator.\+h.
+
+
+
+Referenced by H\+F\+::\+T\+E\+S\+T().
+
+\mbox{\Hypertarget{a00397_a986887183de94b00a1b8b05572da8767}\label{a00397_a986887183de94b00a1b8b05572da8767}} 
+\index{HF::GraphGenerator@{HF::GraphGenerator}!down@{down}}
+\index{down@{down}!HF::GraphGenerator@{HF::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{down}{down}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{a00397_a8f7754dd4958185062ba8e0bc28d6579}{real3}} H\+F\+::\+Graph\+Generator\+::down = \{ 0,0,-\/1 \}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Constant used as a direction for downwards raycasts. 
+
+
+
+Definition at line 13 of file graph\+\_\+utils.\+cpp.
+
+
+
+Referenced by Check\+Children(), and Validate\+Start\+Point().
+
+\mbox{\Hypertarget{a00397_ad69a24044327f56034e251c25499a910}\label{a00397_ad69a24044327f56034e251c25499a910}} 
+\index{HF::GraphGenerator@{HF::GraphGenerator}!init\_directs@{init\_directs}}
+\index{init\_directs@{init\_directs}!HF::GraphGenerator@{HF::GraphGenerator}}
+\doxysubsubsection{\texorpdfstring{init\_directs}{init\_directs}}
+{\footnotesize\ttfamily const vector$<$\mbox{\hyperlink{a00397_ab618c832ef23d48d9f4ea9d9e46116dc}{pair}}$>$ H\+F\+::\+Graph\+Generator\+::init\+\_\+directs\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{        \mbox{\hyperlink{a00397_ab618c832ef23d48d9f4ea9d9e46116dc}{pair}}(-\/1, -\/1), \mbox{\hyperlink{a00397_ab618c832ef23d48d9f4ea9d9e46116dc}{pair}}(-\/1, 0), \mbox{\hyperlink{a00397_ab618c832ef23d48d9f4ea9d9e46116dc}{pair}}(-\/1, 1),}
+\DoxyCodeLine{        \mbox{\hyperlink{a00397_ab618c832ef23d48d9f4ea9d9e46116dc}{pair}}(0, -\/1), \mbox{\hyperlink{a00397_ab618c832ef23d48d9f4ea9d9e46116dc}{pair}}(0, 1), \mbox{\hyperlink{a00397_ab618c832ef23d48d9f4ea9d9e46116dc}{pair}}(1, -\/1),}
+\DoxyCodeLine{        \mbox{\hyperlink{a00397_ab618c832ef23d48d9f4ea9d9e46116dc}{pair}}(1, 0), \mbox{\hyperlink{a00397_ab618c832ef23d48d9f4ea9d9e46116dc}{pair}}(1, 1)}
+\DoxyCodeLine{    \}}
+
+\end{DoxyCode}
+
+
+Definition at line 101 of file graph\+\_\+utils.\+cpp.
+
+
+
+Referenced by Create\+Direcs().
+

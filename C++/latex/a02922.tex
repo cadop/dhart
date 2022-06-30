@@ -1,0 +1,152 @@
+\hypertarget{a02922}{}\doxysection{Cpp/tests/src/nanort\+\_\+raytracer.cpp File Reference}
+\label{a02922}\index{Cpp/tests/src/nanort\_raytracer.cpp@{Cpp/tests/src/nanort\_raytracer.cpp}}
+{\ttfamily \#include $<$gtest/gtest.\+h$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$objloader.\+h$>$}\newline
+{\ttfamily \#include $<$meshinfo.\+h$>$}\newline
+{\ttfamily \#include $<$embree\+\_\+raytracer.\+h$>$}\newline
+{\ttfamily \#include $<$robin\+\_\+hood.\+h$>$}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$view\+\_\+analysis.\+h$>$}\newline
+{\ttfamily \#include $<$H\+F\+Exceptions.\+h$>$}\newline
+{\ttfamily \#include $<$ray\+\_\+data.\+h$>$}\newline
+{\ttfamily \#include $<$objloader\+\_\+\+C.\+h$>$}\newline
+{\ttfamily \#include $<$raytracer\+\_\+\+C.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}Ray\+Request.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}performance\+\_\+testing.\+h\char`\"{}}\newline
+Include dependency graph for nanort\+\_\+raytracer.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02923}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a02922_a88e165aa8f5bc416adebd5788df8983a}{T\+E\+ST}} (\+\_\+nano\+Ray\+Tracer, Mesh\+Matching)
+\item 
+\mbox{\hyperlink{a02922_a45a0d895a7be5c04975d2434ef5b48e7}{T\+E\+ST}} (\+\_\+nano\+Ray\+Tracer, Edge\+\_\+\+Vert\+\_\+\+Intersection)
+\item 
+\mbox{\hyperlink{a02922_a35054c8cf817d77aa7cb8d0a27de473d}{T\+E\+ST}} (\+\_\+nano\+Ray\+Tracer, Nano\+Ray\+Tracer\+Basic)
+\item 
+\mbox{\hyperlink{a02922_ad5424ac15f2929f3ecedd591f0e8cdef}{T\+E\+ST}} (\+\_\+nano\+Ray\+Tracer, nano\+Ray\+Tolerance)
+\item 
+\mbox{\hyperlink{a02922_a4bd66d6d269c2c3ec69dbcece7a20ef5}{T\+E\+ST}} (\+\_\+nano\+Ray\+Tracer, nano\+Ray\+Performance)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{a02922_a45a0d895a7be5c04975d2434ef5b48e7}\label{a02922_a45a0d895a7be5c04975d2434ef5b48e7}} 
+\index{nanort\_raytracer.cpp@{nanort\_raytracer.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!nanort\_raytracer.cpp@{nanort\_raytracer.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+nano\+Ray\+Tracer}]{,  }\item[{Edge\+\_\+\+Vert\+\_\+\+Intersection}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 74 of file nanort\+\_\+raytracer.\+cpp.
+
+
+
+References nanort\+::\+Ray$<$ T $>$\+::dir, H\+F\+::nano\+Geom\+::\+Load\+Obj(), H\+F\+::nano\+Geom\+::nano\+R\+T\+\_\+\+B\+V\+H(), H\+F\+::nano\+Geom\+::nano\+R\+T\+\_\+\+Intersect(), nanort\+::\+Ray$<$ T $>$\+::org, nano\+R\+T\+\_\+\+Data\+::point, and nano\+R\+T\+\_\+\+Data\+::ray.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02922_a45a0d895a7be5c04975d2434ef5b48e7_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02922_a88e165aa8f5bc416adebd5788df8983a}\label{a02922_a88e165aa8f5bc416adebd5788df8983a}} 
+\index{nanort\_raytracer.cpp@{nanort\_raytracer.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!nanort\_raytracer.cpp@{nanort\_raytracer.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+nano\+Ray\+Tracer}]{,  }\item[{Mesh\+Matching}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 40 of file nanort\+\_\+raytracer.\+cpp.
+
+
+
+References H\+F\+::nano\+Geom\+::\+Mesh\+::faces, H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), H\+F\+::nano\+Geom\+::\+Load\+Obj(), H\+F\+::nano\+Geom\+::\+Mesh\+::num\+\_\+faces, H\+F\+::nano\+Geom\+::\+Mesh\+::num\+\_\+vertices, H\+F\+::\+Geometry\+::\+O\+N\+L\+Y\+\_\+\+F\+I\+LE, and H\+F\+::nano\+Geom\+::\+Mesh\+::vertices.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02922_a88e165aa8f5bc416adebd5788df8983a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02922_a4bd66d6d269c2c3ec69dbcece7a20ef5}\label{a02922_a4bd66d6d269c2c3ec69dbcece7a20ef5}} 
+\index{nanort\_raytracer.cpp@{nanort\_raytracer.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!nanort\_raytracer.cpp@{nanort\_raytracer.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+nano\+Ray\+Tracer}]{,  }\item[{nano\+Ray\+Performance}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 178 of file nanort\+\_\+raytracer.\+cpp.
+
+
+
+References nanort\+::\+Ray$<$ T $>$\+::dir, H\+F\+::nano\+Geom\+::\+Load\+Obj(), H\+F\+::nano\+Geom\+::nano\+R\+T\+\_\+\+B\+V\+H(), H\+F\+::nano\+Geom\+::nano\+R\+T\+\_\+\+Intersect(), nanort\+::\+Ray$<$ T $>$\+::org, nano\+R\+T\+\_\+\+Data\+::point, Print\+Trials(), and nano\+R\+T\+\_\+\+Data\+::ray.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02922_a4bd66d6d269c2c3ec69dbcece7a20ef5_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02922_ad5424ac15f2929f3ecedd591f0e8cdef}\label{a02922_ad5424ac15f2929f3ecedd591f0e8cdef}} 
+\index{nanort\_raytracer.cpp@{nanort\_raytracer.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!nanort\_raytracer.cpp@{nanort\_raytracer.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+nano\+Ray\+Tracer}]{,  }\item[{nano\+Ray\+Tolerance}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 131 of file nanort\+\_\+raytracer.\+cpp.
+
+
+
+References nanort\+::\+Ray$<$ T $>$\+::dir, nano\+R\+T\+\_\+\+Data\+::hit, H\+F\+::nano\+Geom\+::\+Load\+Obj(), H\+F\+::nano\+Geom\+::nano\+R\+T\+\_\+\+B\+V\+H(), H\+F\+::nano\+Geom\+::nano\+R\+T\+\_\+\+Intersect(), nanort\+::\+Ray$<$ T $>$\+::org, nano\+R\+T\+\_\+\+Data\+::point, nano\+R\+T\+\_\+\+Data\+::ray, and nanort\+::\+Triangle\+Intersection$<$ T $>$\+::t.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02922_ad5424ac15f2929f3ecedd591f0e8cdef_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02922_a35054c8cf817d77aa7cb8d0a27de473d}\label{a02922_a35054c8cf817d77aa7cb8d0a27de473d}} 
+\index{nanort\_raytracer.cpp@{nanort\_raytracer.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!nanort\_raytracer.cpp@{nanort\_raytracer.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+nano\+Ray\+Tracer}]{,  }\item[{Nano\+Ray\+Tracer\+Basic}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 107 of file nanort\+\_\+raytracer.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), and H\+F\+::\+Ray\+Tracer\+::\+Nano\+R\+T\+Ray\+Tracer\+::\+Point\+Intersection().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02922_a35054c8cf817d77aa7cb8d0a27de473d_cgraph}
+\end{center}
+\end{figure}

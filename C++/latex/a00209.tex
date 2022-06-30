@@ -1,0 +1,159 @@
+\hypertarget{a00209}{}\doxysection{Cpp/spatialstructures/src/node.h File Reference}
+\label{a00209}\index{Cpp/spatialstructures/src/node.h@{Cpp/spatialstructures/src/node.h}}
+
+
+Contains definitions for the \mbox{\hyperlink{a02017}{Node}} structure.  
+
+
+{\ttfamily \#include $<$array$>$}\newline
+{\ttfamily \#include $<$ostream$>$}\newline
+Include dependency graph for node.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=203pt]{a00210}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00211}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{a02017}{H\+F\+::\+Spatial\+Structures\+::\+Node}}
+\begin{DoxyCompactList}\small\item\em A point in space with an ID. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{a02021}{std\+::hash$<$ H\+F\+::\+Spatial\+Structures\+::\+Node $>$}}
+\begin{DoxyCompactList}\small\item\em Hash this node by combining the hashes of all of it\textquotesingle{}s position elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{a00396}{HF}}
+\begin{DoxyCompactList}\small\item\em Perform human scale analysis on 3D environments. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00399}{H\+F\+::\+Spatial\+Structures}}
+\begin{DoxyCompactList}\small\item\em Contains standard fundamental data structures for representing space used throughout Human\+Factors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{a00209_ae4ffe42f069a68102473a4f7c8328437}{H\+F\+\_\+\+N\+O\+DE}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{a00399_aa8ecd83cd353318532d791fc819343cc}{H\+F\+::\+Spatial\+Structures\+::\+N\+O\+D\+E\+\_\+\+T\+Y\+PE}} \{ \mbox{\hyperlink{a00399_aa8ecd83cd353318532d791fc819343cca5c2876be9857d3e0192c9e1cb3797bf8}{H\+F\+::\+Spatial\+Structures\+::\+G\+R\+A\+PH}} = 0, 
+\mbox{\hyperlink{a00399_aa8ecd83cd353318532d791fc819343cca023bd38e0854e766e5c483d451a383ad}{H\+F\+::\+Spatial\+Structures\+::\+P\+OI}} = 1, 
+\mbox{\hyperlink{a00399_aa8ecd83cd353318532d791fc819343cca996f30fa669937983b628671c4493b8e}{H\+F\+::\+Spatial\+Structures\+::\+O\+T\+H\+ER}} = 2
+ \}
+\begin{DoxyCompactList}\small\item\em The type of node this is. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename SizeT $>$ }\\void \mbox{\hyperlink{a00209_a3340e7ae931e28e5c83e07f1d48d3ea2}{std\+::hash\+\_\+combine\+\_\+impl}} (SizeT \&seed, SizeT value) noexcept
+\begin{DoxyCompactList}\small\item\em combine value into the hash value of seed \end{DoxyCompactList}\item 
+ostream \& \mbox{\hyperlink{a00209_af16e54cd5d732cad0aaf6c74059a027b}{std\+::operator$<$$<$}} (ostream \&os, const \mbox{\hyperlink{a02017}{H\+F\+::\+Spatial\+Structures\+::\+Node}} n)
+\begin{DoxyCompactList}\small\item\em Create a string containing the x,y,z position of this node. \end{DoxyCompactList}\item 
+ostream \& \mbox{\hyperlink{a00209_aee30eba635bd37255ea68605678ad5a2}{std\+::operator$<$$<$}} (ostream \&os, const std\+::array$<$ float, 3 $>$ n)
+\begin{DoxyCompactList}\small\item\em Create a string containing the x,y,z positions of this array. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Contains definitions for the \mbox{\hyperlink{a02017}{Node}} structure. 
+
+\begin{DoxyAuthor}{Author}
+T\+BA 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+06 Jun 2020 
+\end{DoxyDate}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{a00209_ae4ffe42f069a68102473a4f7c8328437}\label{a00209_ae4ffe42f069a68102473a4f7c8328437}} 
+\index{node.h@{node.h}!HF\_NODE@{HF\_NODE}}
+\index{HF\_NODE@{HF\_NODE}!node.h@{node.h}}
+\doxysubsubsection{\texorpdfstring{HF\_NODE}{HF\_NODE}}
+{\footnotesize\ttfamily \#define H\+F\+\_\+\+N\+O\+DE}
+
+
+
+Definition at line 11 of file node.\+h.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{a00209_a3340e7ae931e28e5c83e07f1d48d3ea2}\label{a00209_a3340e7ae931e28e5c83e07f1d48d3ea2}} 
+\index{node.h@{node.h}!hash\_combine\_impl@{hash\_combine\_impl}}
+\index{hash\_combine\_impl@{hash\_combine\_impl}!node.h@{node.h}}
+\doxysubsubsection{\texorpdfstring{hash\_combine\_impl()}{hash\_combine\_impl()}}
+{\footnotesize\ttfamily template$<$typename SizeT $>$ \\
+void std\+::hash\+\_\+combine\+\_\+impl (\begin{DoxyParamCaption}\item[{SizeT \&}]{seed,  }\item[{SizeT}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+combine value into the hash value of seed 
+
+
+
+Definition at line 414 of file node.\+h.
+
+
+
+References std\+::hash\+\_\+combine\+\_\+impl().
+
+
+
+Referenced by std\+::hash\+\_\+combine\+\_\+impl(), and std\+::hash$<$ H\+F\+::\+Spatial\+Structures\+::\+Node $>$\+::operator()().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=215pt]{a00209_a3340e7ae931e28e5c83e07f1d48d3ea2_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00209_a3340e7ae931e28e5c83e07f1d48d3ea2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00209_af16e54cd5d732cad0aaf6c74059a027b}\label{a00209_af16e54cd5d732cad0aaf6c74059a027b}} 
+\index{node.h@{node.h}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!node.h@{node.h}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily ostream\& std\+::operator$<$$<$ (\begin{DoxyParamCaption}\item[{ostream \&}]{os,  }\item[{const \mbox{\hyperlink{a02017}{H\+F\+::\+Spatial\+Structures\+::\+Node}}}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Create a string containing the x,y,z position of this node. 
+
+
+
+Definition at line 433 of file node.\+h.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Node\+::x, H\+F\+::\+Spatial\+Structures\+::\+Node\+::y, and H\+F\+::\+Spatial\+Structures\+::\+Node\+::z.
+
+\mbox{\Hypertarget{a00209_aee30eba635bd37255ea68605678ad5a2}\label{a00209_aee30eba635bd37255ea68605678ad5a2}} 
+\index{node.h@{node.h}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!node.h@{node.h}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily ostream\& std\+::operator$<$$<$ (\begin{DoxyParamCaption}\item[{ostream \&}]{os,  }\item[{const std\+::array$<$ float, 3 $>$}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Create a string containing the x,y,z positions of this array. 
+
+
+
+Definition at line 439 of file node.\+h.
+

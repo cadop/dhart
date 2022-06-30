@@ -1,0 +1,318 @@
+\hypertarget{a00161}{}\doxysection{Cpp/raytracer/src/nanort.h File Reference}
+\label{a00161}\index{Cpp/raytracer/src/nanort.h@{Cpp/raytracer/src/nanort.h}}
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$cassert$>$}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$cstdio$>$}\newline
+{\ttfamily \#include $<$cstdlib$>$}\newline
+{\ttfamily \#include $<$cstring$>$}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$limits$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$queue$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+Include dependency graph for nanort.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00162}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00163}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{a01369}{nanort\+::\+Stack\+Allocator$<$ T, stack\+\_\+capacity $>$}}
+\item 
+struct \mbox{\hyperlink{a01373}{nanort\+::\+Stack\+Allocator$<$ T, stack\+\_\+capacity $>$\+::\+Source}}
+\item 
+struct \mbox{\hyperlink{a01369_a01377}{nanort\+::\+Stack\+Allocator$<$ T, stack\+\_\+capacity $>$\+::rebind$<$ U $>$}}
+\item 
+class \mbox{\hyperlink{a01381}{nanort\+::\+Stack\+Container$<$ T\+Container\+Type, stack\+\_\+capacity $>$}}
+\item 
+class \mbox{\hyperlink{a01385}{nanort\+::\+Stack\+Vector$<$ T, stack\+\_\+capacity $>$}}
+\item 
+class \mbox{\hyperlink{a01389}{nanort\+::real3$<$ T $>$}}
+\item 
+class \mbox{\hyperlink{a01393}{nanort\+::\+Ray$<$ T $>$}}
+\item 
+class \mbox{\hyperlink{a01397}{nanort\+::\+B\+V\+H\+Node$<$ T $>$}}
+\item 
+class \mbox{\hyperlink{a01401}{nanort\+::\+Intersect\+Comparator$<$ H $>$}}
+\item 
+struct \mbox{\hyperlink{a01405}{nanort\+::\+B\+V\+H\+Build\+Options$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em B\+VH build option. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{a01409}{nanort\+::\+B\+V\+H\+Build\+Statistics}}
+\begin{DoxyCompactList}\small\item\em B\+VH build statistics. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{a01413}{nanort\+::\+B\+V\+H\+Trace\+Options}}
+\begin{DoxyCompactList}\small\item\em B\+VH trace option. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{a01417}{nanort\+::\+B\+Box$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em Bounding box. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{a01421}{nanort\+::\+Node\+Hit$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em Hit class for traversing nodes. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{a01425}{nanort\+::\+Node\+Hit\+Comparator$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em Comparator object for \mbox{\hyperlink{a01421}{Node\+Hit}}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{a01429}{nanort\+::\+B\+V\+H\+Accel$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em Bounding Volume Hierarchy acceleration. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{a01433}{nanort\+::\+Triangle\+S\+A\+H\+Pred$<$ T $>$}}
+\item 
+class \mbox{\hyperlink{a01437}{nanort\+::\+Triangle\+Mesh$<$ T $>$}}
+\item 
+class \mbox{\hyperlink{a00408_a01441}{nanort\+::\+Triangle\+Intersection$<$ T $>$}}
+\item 
+class \mbox{\hyperlink{a01445}{nanort\+::\+Triangle\+Intersector$<$ T, H $>$}}
+\item 
+struct \mbox{\hyperlink{a01445_a01449}{nanort\+::\+Triangle\+Intersector$<$ T, H $>$\+::\+Ray\+Coeff}}
+\item 
+struct \mbox{\hyperlink{a01453}{nanort\+::\+Bin\+Buffer}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{a00408}{nanort}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{a00161_aea82a5adc845e9b5799c245703456e24}{N\+A\+N\+O\+R\+T\+\_\+\+H\+\_\+}}
+\item 
+\#define \mbox{\hyperlink{a00161_a02232012dcf3dea116113dd4fec7f95d}{k\+N\+A\+N\+O\+R\+T\+\_\+\+M\+A\+X\+\_\+\+S\+T\+A\+C\+K\+\_\+\+D\+E\+P\+TH}}~(512)
+\item 
+\#define \mbox{\hyperlink{a00161_a0c674d5d198095296c8251eecfdb4377}{k\+N\+A\+N\+O\+R\+T\+\_\+\+M\+I\+N\+\_\+\+P\+R\+I\+M\+I\+T\+I\+V\+E\+S\+\_\+\+F\+O\+R\+\_\+\+P\+A\+R\+A\+L\+L\+E\+L\+\_\+\+B\+U\+I\+LD}}~(1024 $\ast$ 8)
+\item 
+\#define \mbox{\hyperlink{a00161_aaa838182f89d868d24b4f3ddb0df6b81}{k\+N\+A\+N\+O\+R\+T\+\_\+\+S\+H\+A\+L\+L\+O\+W\+\_\+\+D\+E\+P\+TH}}~(4)
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{a00408_a6ffc0020d7d758bc91664a49a749f661}{nanort\+::\+Ray\+Type}} \{ \newline
+\mbox{\hyperlink{a00408_a6ffc0020d7d758bc91664a49a749f661a26df8dc570dac0c6a8e2f0b1c5599035}{nanort\+::\+R\+A\+Y\+\_\+\+T\+Y\+P\+E\+\_\+\+N\+O\+NE}} = 0x0, 
+\mbox{\hyperlink{a00408_a6ffc0020d7d758bc91664a49a749f661afa98b1a81432b92a40f2fb253dc3a90a}{nanort\+::\+R\+A\+Y\+\_\+\+T\+Y\+P\+E\+\_\+\+P\+R\+I\+M\+A\+RY}} = 0x1, 
+\mbox{\hyperlink{a00408_a6ffc0020d7d758bc91664a49a749f661a6be2832475a21a71054c96191824c846}{nanort\+::\+R\+A\+Y\+\_\+\+T\+Y\+P\+E\+\_\+\+S\+E\+C\+O\+N\+D\+A\+RY}} = 0x2, 
+\mbox{\hyperlink{a00408_a6ffc0020d7d758bc91664a49a749f661ab3c3a5f9859b5578509fc75f6295cf6b}{nanort\+::\+R\+A\+Y\+\_\+\+T\+Y\+P\+E\+\_\+\+D\+I\+F\+F\+U\+SE}} = 0x4, 
+\newline
+\mbox{\hyperlink{a00408_a6ffc0020d7d758bc91664a49a749f661ac321bb5b2eb584854abd74cf63ad14d3}{nanort\+::\+R\+A\+Y\+\_\+\+T\+Y\+P\+E\+\_\+\+R\+E\+F\+L\+E\+C\+T\+I\+ON}} = 0x8, 
+\mbox{\hyperlink{a00408_a6ffc0020d7d758bc91664a49a749f661a0da6cb6314b88bcad5b2e4bd4445789f}{nanort\+::\+R\+A\+Y\+\_\+\+T\+Y\+P\+E\+\_\+\+R\+E\+F\+R\+A\+C\+T\+I\+ON}} = 0x10
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T $>$ }\\real3$<$ T $>$ \mbox{\hyperlink{a00408_ae1693dffefd99a110afb8025c25b5b0a}{nanort\+::operator$\ast$}} (T f, const real3$<$ T $>$ \&v)
+\item 
+{\footnotesize template$<$typename T $>$ }\\real3$<$ T $>$ \mbox{\hyperlink{a00408_a56b7d2ef9b2e87ee4ed7f87df8ff7e56}{nanort\+::vneg}} (const real3$<$ T $>$ \&rhs)
+\item 
+{\footnotesize template$<$typename T $>$ }\\T \mbox{\hyperlink{a00408_ab9ba72d8d5e11d213c39ce9bd8e851ef}{nanort\+::vlength}} (const real3$<$ T $>$ \&rhs)
+\item 
+{\footnotesize template$<$typename T $>$ }\\real3$<$ T $>$ \mbox{\hyperlink{a00408_ad95ebf4909da5be14689ba659bd261b5}{nanort\+::vnormalize}} (const real3$<$ T $>$ \&rhs)
+\item 
+{\footnotesize template$<$typename T $>$ }\\real3$<$ T $>$ \mbox{\hyperlink{a00408_a2ac9f5ea480e55bab7a5935dd27e969b}{nanort\+::vcross}} (const real3$<$ T $>$ a, const real3$<$ T $>$ b)
+\item 
+{\footnotesize template$<$typename T $>$ }\\T \mbox{\hyperlink{a00408_a218842bcf14b05ea6840d88b58fc8ec6}{nanort\+::vdot}} (const real3$<$ T $>$ a, const real3$<$ T $>$ b)
+\item 
+{\footnotesize template$<$typename T $>$ }\\real3$<$ T $>$ \mbox{\hyperlink{a00408_af174757a9f102f087bdff1c75067de1b}{nanort\+::vsafe\+\_\+inverse}} (const real3$<$ T $>$ v)
+\item 
+{\footnotesize template$<$typename real $>$ }\\const real $\ast$ \mbox{\hyperlink{a00408_a2c4199cb2c2699fd6c82f709c954bd90}{nanort\+::get\+\_\+vertex\+\_\+addr}} (const real $\ast$p, const size\+\_\+t idx, const size\+\_\+t stride\+\_\+bytes)
+\item 
+{\footnotesize template$<$class T $>$ }\\const T \& \mbox{\hyperlink{a00408_a64a1973042fc2b33110df2dbf928b359}{nanort\+::safemin}} (const T \&a, const T \&b)
+\item 
+{\footnotesize template$<$class T $>$ }\\const T \& \mbox{\hyperlink{a00408_ac69fcd275be693fe788c6b6668560ad4}{nanort\+::safemax}} (const T \&a, const T \&b)
+\item 
+{\footnotesize template$<$typename T $>$ }\\T \mbox{\hyperlink{a00408_a1f672faac125854c89c907614545fe60}{nanort\+::\+Calculate\+Surface\+Area}} (const real3$<$ T $>$ \&min, const real3$<$ T $>$ \&max)
+\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{a00408_a464fa0f048bdb306e2a84523579ab34b}{nanort\+::\+Get\+Bounding\+Box\+Of\+Triangle}} (real3$<$ T $>$ $\ast$bmin, real3$<$ T $>$ $\ast$bmax, const T $\ast$vertices, const unsigned int $\ast$faces, unsigned int index)
+\item 
+{\footnotesize template$<$typename T , class P $>$ }\\void \mbox{\hyperlink{a00408_a67ae269fe2215d261b995f1da13320f7}{nanort\+::\+Contribute\+Bin\+Buffer}} (Bin\+Buffer $\ast$bins, const real3$<$ T $>$ \&scene\+\_\+min, const real3$<$ T $>$ \&scene\+\_\+max, unsigned int $\ast$indices, unsigned int left\+\_\+idx, unsigned int right\+\_\+idx, const P \&p)
+\item 
+{\footnotesize template$<$typename T $>$ }\\T \mbox{\hyperlink{a00408_a2224f7a101ce863a9332f059dfef9dd1}{nanort\+::\+S\+AH}} (size\+\_\+t ns1, T left\+Area, size\+\_\+t ns2, T right\+Area, T invS, T Taabb, T Ttri)
+\item 
+{\footnotesize template$<$typename T $>$ }\\bool \mbox{\hyperlink{a00408_ac281b6ed7e50b406666a6e67e9547b7e}{nanort\+::\+Find\+Cut\+From\+Bin\+Buffer}} (T $\ast$cut\+\_\+pos, int $\ast$min\+Cost\+Axis, const Bin\+Buffer $\ast$bins, const real3$<$ T $>$ \&bmin, const real3$<$ T $>$ \&bmax, size\+\_\+t num\+\_\+primitives, T cost\+Taabb)
+\item 
+{\footnotesize template$<$typename T , class P $>$ }\\void \mbox{\hyperlink{a00408_a06549eb8469b9a2004cc5332ca0d011e}{nanort\+::\+Compute\+Bounding\+Box}} (real3$<$ T $>$ $\ast$bmin, real3$<$ T $>$ $\ast$bmax, const unsigned int $\ast$indices, unsigned int left\+\_\+index, unsigned int right\+\_\+index, const P \&p)
+\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{a00408_a60ac3f02ccb852decfdc6f7f02d7184f}{nanort\+::\+Get\+Bounding\+Box}} (real3$<$ T $>$ $\ast$bmin, real3$<$ T $>$ $\ast$bmax, const std\+::vector$<$ B\+Box$<$ T $>$ $>$ \&bboxes, unsigned int $\ast$indices, unsigned int left\+\_\+index, unsigned int right\+\_\+index)
+\item 
+{\footnotesize template$<$typename T $>$ }\\bool \mbox{\hyperlink{a00408_aa5a9a561d084639fafc84873ab8f3d51}{nanort\+::\+Intersect\+Ray\+A\+A\+BB}} (T $\ast$tmin\+Out, T $\ast$tmax\+Out, T min\+\_\+t, T max\+\_\+t, const T bmin\mbox{[}3\mbox{]}, const T bmax\mbox{[}3\mbox{]}, real3$<$ T $>$ ray\+\_\+org, real3$<$ T $>$ ray\+\_\+inv\+\_\+dir, int ray\+\_\+dir\+\_\+sign\mbox{[}3\mbox{]})
+\item 
+template$<$$>$ bool \mbox{\hyperlink{a00408_abb906c21cbf94086beb735d63383a20e}{nanort\+::\+Intersect\+Ray\+A\+A\+B\+B$<$ float $>$}} (float $\ast$tmin\+Out, float $\ast$tmax\+Out, float min\+\_\+t, float max\+\_\+t, const float bmin\mbox{[}3\mbox{]}, const float bmax\mbox{[}3\mbox{]}, real3$<$ float $>$ ray\+\_\+org, real3$<$ float $>$ ray\+\_\+inv\+\_\+dir, int ray\+\_\+dir\+\_\+sign\mbox{[}3\mbox{]})
+\item 
+template$<$$>$ bool \mbox{\hyperlink{a00408_aa2274a88d11a6a83ac928c1d59be8748}{nanort\+::\+Intersect\+Ray\+A\+A\+B\+B$<$ double $>$}} (\mbox{\hyperlink{a00001_a02273}{double}} $\ast$tmin\+Out, \mbox{\hyperlink{a00001_a02273}{double}} $\ast$tmax\+Out, \mbox{\hyperlink{a00001_a02273}{double}} min\+\_\+t, \mbox{\hyperlink{a00001_a02273}{double}} max\+\_\+t, const \mbox{\hyperlink{a00001_a02273}{double}} bmin\mbox{[}3\mbox{]}, const \mbox{\hyperlink{a00001_a02273}{double}} bmax\mbox{[}3\mbox{]}, real3$<$ \mbox{\hyperlink{a00001_a02273}{double}} $>$ ray\+\_\+org, real3$<$ \mbox{\hyperlink{a00001_a02273}{double}} $>$ ray\+\_\+inv\+\_\+dir, int ray\+\_\+dir\+\_\+sign\mbox{[}3\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Class Documentation}
+\index{nanort::StackAllocator::rebind@{nanort::StackAllocator::rebind}}\label{a01377}
+\Hypertarget{a01369_a01377}
+\doxysubsubsection{struct nanort\+::Stack\+Allocator\+::rebind}
+\subsubsection*{template$<$typename T, size\+\_\+t stack\+\_\+capacity$>$\newline
+template$<$typename U$>$\newline
+struct nanort\+::\+Stack\+Allocator$<$ T, stack\+\_\+capacity $>$\+::rebind$<$ U $>$}
+
+
+
+Definition at line 174 of file nanort.\+h.
+
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a01369_a698baf091fd2fa48069785c07d96a0bc}\label{a01369_a698baf091fd2fa48069785c07d96a0bc}} 
+typedef \mbox{\hyperlink{a01369}{StackAllocator}}$<$ U, stack\_capacity $>$&
+other&
+\\
+\hline
+
+\end{DoxyFields}
+\index{nanort::TriangleIntersection@{nanort::TriangleIntersection}}\label{a01441}
+\Hypertarget{a00408_a01441}
+\doxysubsubsection{class nanort\+::Triangle\+Intersection}
+\subsubsection*{template$<$typename T = float$>$\newline
+class nanort\+::\+Triangle\+Intersection$<$ T $>$}
+
+
+
+Definition at line 972 of file nanort.\+h.
+
+
+
+Collaboration diagram for nanort\+::Triangle\+Intersection$<$ T $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=259pt]{a01439}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a00408_a1e3062943d9c131ef207cf4f92cd15b9}\label{a00408_a1e3062943d9c131ef207cf4f92cd15b9}} 
+unsigned int&
+prim\_id&
+\\
+\hline
+
+\mbox{\Hypertarget{a00408_ac6905be589222ab5c6d8367bee4370aa}\label{a00408_ac6905be589222ab5c6d8367bee4370aa}} 
+T&
+t&
+\\
+\hline
+
+\mbox{\Hypertarget{a00408_a3deaad23e30bd59d6932533d99a9927a}\label{a00408_a3deaad23e30bd59d6932533d99a9927a}} 
+T&
+u&
+\\
+\hline
+
+\mbox{\Hypertarget{a00408_a19beb63051e1c58b701fa132554816b1}\label{a00408_a19beb63051e1c58b701fa132554816b1}} 
+T&
+v&
+\\
+\hline
+
+\end{DoxyFields}
+\index{nanort::TriangleIntersector::RayCoeff@{nanort::TriangleIntersector::RayCoeff}}\label{a01449}
+\Hypertarget{a01445_a01449}
+\doxysubsubsection{struct nanort\+::Triangle\+Intersector\+::Ray\+Coeff}
+\subsubsection*{template$<$typename T = float, class H = Triangle\+Intersection$<$\+T$>$$>$\newline
+struct nanort\+::\+Triangle\+Intersector$<$ T, H $>$\+::\+Ray\+Coeff}
+
+
+
+Definition at line 995 of file nanort.\+h.
+
+
+
+Collaboration diagram for nanort\+::Triangle\+Intersector$<$ T, H $>$\+::Ray\+Coeff\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=225pt]{a01447}
+\end{center}
+\end{figure}
+\begin{DoxyFields}{Class Members}
+\mbox{\Hypertarget{a01445_a9e85b4e367c2390c4654ec819a75741d}\label{a01445_a9e85b4e367c2390c4654ec819a75741d}} 
+int&
+kx&
+\\
+\hline
+
+\mbox{\Hypertarget{a01445_acecad1b0d9d78eb0c2e41813c5b1427c}\label{a01445_acecad1b0d9d78eb0c2e41813c5b1427c}} 
+int&
+ky&
+\\
+\hline
+
+\mbox{\Hypertarget{a01445_a7b93948ffe60a4f465b487b8e505707e}\label{a01445_a7b93948ffe60a4f465b487b8e505707e}} 
+int&
+kz&
+\\
+\hline
+
+\mbox{\Hypertarget{a01445_a2cac34b6bd01583a2ff88af0eb6f1c86}\label{a01445_a2cac34b6bd01583a2ff88af0eb6f1c86}} 
+T&
+Sx&
+\\
+\hline
+
+\mbox{\Hypertarget{a01445_aa79bacc86198f6bca3cd7aafbee465d5}\label{a01445_aa79bacc86198f6bca3cd7aafbee465d5}} 
+T&
+Sy&
+\\
+\hline
+
+\mbox{\Hypertarget{a01445_aec0f701c604c6521b99d57b5ff3b0c39}\label{a01445_aec0f701c604c6521b99d57b5ff3b0c39}} 
+T&
+Sz&
+\\
+\hline
+
+\end{DoxyFields}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{a00161_a02232012dcf3dea116113dd4fec7f95d}\label{a00161_a02232012dcf3dea116113dd4fec7f95d}} 
+\index{nanort.h@{nanort.h}!kNANORT\_MAX\_STACK\_DEPTH@{kNANORT\_MAX\_STACK\_DEPTH}}
+\index{kNANORT\_MAX\_STACK\_DEPTH@{kNANORT\_MAX\_STACK\_DEPTH}!nanort.h@{nanort.h}}
+\doxysubsubsection{\texorpdfstring{kNANORT\_MAX\_STACK\_DEPTH}{kNANORT\_MAX\_STACK\_DEPTH}}
+{\footnotesize\ttfamily \#define k\+N\+A\+N\+O\+R\+T\+\_\+\+M\+A\+X\+\_\+\+S\+T\+A\+C\+K\+\_\+\+D\+E\+P\+TH~(512)}
+
+
+
+Definition at line 70 of file nanort.\+h.
+
+\mbox{\Hypertarget{a00161_a0c674d5d198095296c8251eecfdb4377}\label{a00161_a0c674d5d198095296c8251eecfdb4377}} 
+\index{nanort.h@{nanort.h}!kNANORT\_MIN\_PRIMITIVES\_FOR\_PARALLEL\_BUILD@{kNANORT\_MIN\_PRIMITIVES\_FOR\_PARALLEL\_BUILD}}
+\index{kNANORT\_MIN\_PRIMITIVES\_FOR\_PARALLEL\_BUILD@{kNANORT\_MIN\_PRIMITIVES\_FOR\_PARALLEL\_BUILD}!nanort.h@{nanort.h}}
+\doxysubsubsection{\texorpdfstring{kNANORT\_MIN\_PRIMITIVES\_FOR\_PARALLEL\_BUILD}{kNANORT\_MIN\_PRIMITIVES\_FOR\_PARALLEL\_BUILD}}
+{\footnotesize\ttfamily \#define k\+N\+A\+N\+O\+R\+T\+\_\+\+M\+I\+N\+\_\+\+P\+R\+I\+M\+I\+T\+I\+V\+E\+S\+\_\+\+F\+O\+R\+\_\+\+P\+A\+R\+A\+L\+L\+E\+L\+\_\+\+B\+U\+I\+LD~(1024 $\ast$ 8)}
+
+
+
+Definition at line 71 of file nanort.\+h.
+
+\mbox{\Hypertarget{a00161_aaa838182f89d868d24b4f3ddb0df6b81}\label{a00161_aaa838182f89d868d24b4f3ddb0df6b81}} 
+\index{nanort.h@{nanort.h}!kNANORT\_SHALLOW\_DEPTH@{kNANORT\_SHALLOW\_DEPTH}}
+\index{kNANORT\_SHALLOW\_DEPTH@{kNANORT\_SHALLOW\_DEPTH}!nanort.h@{nanort.h}}
+\doxysubsubsection{\texorpdfstring{kNANORT\_SHALLOW\_DEPTH}{kNANORT\_SHALLOW\_DEPTH}}
+{\footnotesize\ttfamily \#define k\+N\+A\+N\+O\+R\+T\+\_\+\+S\+H\+A\+L\+L\+O\+W\+\_\+\+D\+E\+P\+TH~(4)}
+
+
+
+Definition at line 72 of file nanort.\+h.
+
+\mbox{\Hypertarget{a00161_aea82a5adc845e9b5799c245703456e24}\label{a00161_aea82a5adc845e9b5799c245703456e24}} 
+\index{nanort.h@{nanort.h}!NANORT\_H\_@{NANORT\_H\_}}
+\index{NANORT\_H\_@{NANORT\_H\_}!nanort.h@{nanort.h}}
+\doxysubsubsection{\texorpdfstring{NANORT\_H\_}{NANORT\_H\_}}
+{\footnotesize\ttfamily \#define N\+A\+N\+O\+R\+T\+\_\+\+H\+\_\+}
+
+
+
+Definition at line 38 of file nanort.\+h.
+

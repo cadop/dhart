@@ -1,0 +1,62 @@
+\hypertarget{a00011}{}\doxysection{Cpp/analysismethods/src/graph\+\_\+utils.cpp File Reference}
+\label{a00011}\index{Cpp/analysismethods/src/graph\_utils.cpp@{Cpp/analysismethods/src/graph\_utils.cpp}}
+{\ttfamily \#include $<$graph\+\_\+generator.\+h$>$}\newline
+{\ttfamily \#include $<$Hit\+Struct.\+h$>$}\newline
+{\ttfamily \#include $<$Constants.\+h$>$}\newline
+{\ttfamily \#include $<$Edge.\+h$>$}\newline
+{\ttfamily \#include $<$embree\+\_\+raytracer.\+h$>$}\newline
+{\ttfamily \#include $<$ray\+\_\+data.\+h$>$}\newline
+{\ttfamily \#include $<$cassert$>$}\newline
+Include dependency graph for graph\+\_\+utils.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00012}
+\end{center}
+\end{figure}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{a00396}{HF}}
+\begin{DoxyCompactList}\small\item\em Perform human scale analysis on 3D environments. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00397}{H\+F\+::\+Graph\+Generator}}
+\begin{DoxyCompactList}\small\item\em Generate a graph of accessible space from a given start point. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename point\+\_\+type $>$ }\\Node \mbox{\hyperlink{a00397_abf1a3ae7dc89b3cf430e059a87fcd477}{H\+F\+::\+Graph\+Generator\+::\+To\+Node}} (const point\+\_\+type \&ct)
+\begin{DoxyCompactList}\small\item\em Convert a point\+\_\+type to a node. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename n1\+\_\+type , typename n2\+\_\+type $>$ }\\real\+\_\+t \mbox{\hyperlink{a00397_a7f96186b8f24f878404d1feccf2f64db}{H\+F\+::\+Graph\+Generator\+::\+Distance\+To}} (const n1\+\_\+type \&n1, const n2\+\_\+type \&n2)
+\begin{DoxyCompactList}\small\item\em Calculate the distance between two nodes. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename vector\+\_\+type $>$ }\\void \mbox{\hyperlink{a00397_ad2e09e0825a1db4fc511907179eddf00}{H\+F\+::\+Graph\+Generator\+::\+Normalize}} (vector\+\_\+type \&v)
+\begin{DoxyCompactList}\small\item\em Normalize a vector. \end{DoxyCompactList}\item 
+optional\+\_\+real3 \mbox{\hyperlink{a00397_a9ddffecb75b34434d7157b49d3c67b60}{H\+F\+::\+Graph\+Generator\+::\+Validate\+Start\+Point}} (Ray\+Tracer \&RT, const real3 \&start\+\_\+point, const Graph\+Params \&Params)
+\begin{DoxyCompactList}\small\item\em Determine if the start point of the graph is over valid ground. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a00397_ab731d597ee2a843f7b7cb1ccbae67782}{H\+F\+::\+Graph\+Generator\+::\+Check\+Geometry\+ID}} (H\+I\+T\+\_\+\+F\+L\+AG goal, int id, const Geometry\+Flag\+Map \&geom\+\_\+dict)
+\begin{DoxyCompactList}\small\item\em Determine if a hit is against the geometry type specified. \end{DoxyCompactList}\item 
+optional\+\_\+real3 \mbox{\hyperlink{a00397_a74be560268a713fc9e9b8b4a453afa2f}{H\+F\+::\+Graph\+Generator\+::\+Check\+Ray}} (Ray\+Tracer \&RT, const real3 \&origin, const real3 \&direction, real\+\_\+t node\+\_\+z\+\_\+tolerance, H\+I\+T\+\_\+\+F\+L\+AG flag=B\+O\+TH, const Geometry\+Flag\+Map \&geometry\+\_\+dict=Geometry\+Flag\+Map())
+\begin{DoxyCompactList}\small\item\em Cast a ray and get the point of intersection if it connects. \end{DoxyCompactList}\item 
+std\+::set$<$ std\+::pair$<$ int, int $>$ $>$ \mbox{\hyperlink{a00397_afe5670b4cb780fd3ccf2a0d72a2e3c2e}{H\+F\+::\+Graph\+Generator\+::permutations}} (int limit)
+\begin{DoxyCompactList}\small\item\em Calculate P(n,r) as an array with each unique permutaton of 2 values being a pair. \end{DoxyCompactList}\item 
+std\+::vector$<$ pair $>$ \mbox{\hyperlink{a00397_aefd344ebb2faadc64a56a16dc8582026}{H\+F\+::\+Graph\+Generator\+::\+Create\+Direcs}} (int max\+\_\+step\+\_\+connections)
+\begin{DoxyCompactList}\small\item\em Create a set of directions based on max\+\_\+step\+\_\+connections. \end{DoxyCompactList}\item 
+std\+::vector$<$ graph\+\_\+edge $>$ \mbox{\hyperlink{a00397_ab7ffcc7d6657ce276c06deed24c546a4}{H\+F\+::\+Graph\+Generator\+::\+Get\+Children}} (const real3 \&parent, const std\+::vector$<$ real3 $>$ \&possible\+\_\+children, Ray\+Tracer \&rt, const Graph\+Params \&GP)
+\begin{DoxyCompactList}\small\item\em Calculate all possible edges between parent and possible\+\_\+children. \end{DoxyCompactList}\item 
+std\+::vector$<$ real3 $>$ \mbox{\hyperlink{a00397_a4b7cc0ad0002975404acef5064f4f546}{H\+F\+::\+Graph\+Generator\+::\+Check\+Children}} (const real3 \&parent, const std\+::vector$<$ real3 $>$ \&possible\+\_\+children, Ray\+Tracer \&rt, const Graph\+Params \&params)
+\begin{DoxyCompactList}\small\item\em Determine whether children are over valid ground, and and meet upstep/downstep requirements. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a00397_ace66c1b60785c32433402f012019ab81}{H\+F\+::\+Graph\+Generator\+::\+Occlusion\+Check}} (const real3 \&parent, const real3 \&child, Ray\+Tracer \&RT)
+\begin{DoxyCompactList}\small\item\em Determine if there is a valid line of sight between parent and child. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{a00397_a9daa85cb56a1b18d44f46aa9c420afde}{H\+F\+::\+Graph\+Generator\+::\+Check\+Slope}} (const real3 \&parent, const real3 \&child, const Graph\+Params \&gp)
+\begin{DoxyCompactList}\small\item\em Determine if the slope between parent and child is traversable according to the graph parameters. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00399_af0378d900074d484ba791d4317e5935e}{H\+F\+::\+Spatial\+Structures\+::\+S\+T\+EP}} \mbox{\hyperlink{a00397_aeab1db37b5aa614235f109d5dd9711a9}{H\+F\+::\+Graph\+Generator\+::\+Check\+Connection}} (const real3 \&parent, const real3 \&child, Ray\+Tracer \&rt, const Graph\+Params \&params)
+\begin{DoxyCompactList}\small\item\em Determine what kind of step (if any) is between parent and child. \end{DoxyCompactList}\item 
+std\+::vector$<$ real3 $>$ \mbox{\hyperlink{a00397_a41e03f9bab54e4e0d1314c6a4bdf2ec1}{H\+F\+::\+Graph\+Generator\+::\+Generate\+Potential\+Children}} (const real3 \&parent, const std\+::vector$<$ pair $>$ \&direcs, const real3 \&spacing, const Graph\+Params \&gp)
+\begin{DoxyCompactList}\small\item\em Populare out\+\_\+children with a potential child position for every direction in directions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static const real3 \mbox{\hyperlink{a00397_a986887183de94b00a1b8b05572da8767}{H\+F\+::\+Graph\+Generator\+::down}} = \{ 0,0,-\/1 \}
+\begin{DoxyCompactList}\small\item\em Constant used as a direction for downwards raycasts. \end{DoxyCompactList}\item 
+static const vector$<$ pair $>$ \mbox{\hyperlink{a00397_ad69a24044327f56034e251c25499a910}{H\+F\+::\+Graph\+Generator\+::init\+\_\+directs}}
+\end{DoxyCompactItemize}

@@ -1,0 +1,731 @@
+\hypertarget{a00320}{}\doxysection{Cpp/tests/src/\+Spatial\+Structures.cpp File Reference}
+\label{a00320}\index{Cpp/tests/src/SpatialStructures.cpp@{Cpp/tests/src/SpatialStructures.cpp}}
+{\ttfamily \#include \char`\"{}gtest/gtest.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$robin\+\_\+hood.\+h$>$}\newline
+{\ttfamily \#include $<$graph.\+h$>$}\newline
+{\ttfamily \#include $<$node.\+h$>$}\newline
+{\ttfamily \#include $<$edge.\+h$>$}\newline
+{\ttfamily \#include $<$constants.\+h$>$}\newline
+{\ttfamily \#include $<$H\+F\+Exceptions.\+h$>$}\newline
+{\ttfamily \#include $<$spatialstructures\+\_\+\+C.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}path.\+h\char`\"{}}\newline
+Include dependency graph for Spatial\+Structures.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00321}
+\end{center}
+\end{figure}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{a00417}{Graph\+Tests}}
+\item 
+ \mbox{\hyperlink{a00418}{Node\+Tests}}
+\item 
+ \mbox{\hyperlink{a00419}{Node\+Example\+Tests}}
+\begin{DoxyCompactList}\small\item\em The following are tests for the code samples for \mbox{\hyperlink{a02017}{H\+F\+::\+Spatial\+Structures\+::\+Node}}. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00420}{Edge\+Example\+Tests}}
+\begin{DoxyCompactList}\small\item\em The following are tests for the code samples for \mbox{\hyperlink{a01473}{H\+F\+::\+Spatial\+Structures\+::\+Edge}}. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00421}{Path\+Example\+Tests}}
+\begin{DoxyCompactList}\small\item\em The following are tests for the code samples for \mbox{\hyperlink{a02029}{H\+F\+::\+Spatial\+Structures\+::\+Path}}. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00422}{Graph\+Example\+Tests}}
+\begin{DoxyCompactList}\small\item\em The following are tests for the code samples for \mbox{\hyperlink{a01497}{H\+F\+::\+Spatial\+Structures\+::\+Graph}}. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00423}{Graph\+Example\+Tests\+::\+Constants\+Example\+Tests}}
+\begin{DoxyCompactList}\small\item\em The following are tests for the code samples for H\+F\+::\+Spatial\+Structures\+::\+Constants. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00424}{Constants\+Example\+Tests}}
+\item 
+ \mbox{\hyperlink{a00414}{C\+Interface\+Tests}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00417_a57418dc2df51e104cedd7bd08ee5d960}{Graph\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Graph, Creation)
+\item 
+\mbox{\hyperlink{a00417_a786749c14ecf9d15379608331bf694ae}{Graph\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Graph, Add\+Node\+Test)
+\item 
+\mbox{\hyperlink{a00417_a723eb40933510fd673495a65e2475a6c}{Graph\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Graph, Has\+Key\+Fail\+Test)
+\item 
+\mbox{\hyperlink{a00417_a16eca72308b36b25352cb2cd7d5a196b}{Graph\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Graph, Get\+Undirected\+Edges)
+\item 
+\mbox{\hyperlink{a00417_af68072a0197396414fa33c69506f58da}{Graph\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Graph, Get\+Undirected\+Edges\+Multi)
+\item 
+\mbox{\hyperlink{a00417_a94f3595251497e1a97e242e4afe56edc}{Graph\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Graph, Has\+Edge\+True)
+\item 
+\mbox{\hyperlink{a00417_ab193543220552618f384cb15be3933c4}{Graph\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Graph, Has\+Edge\+False)
+\item 
+\mbox{\hyperlink{a00417_a1488d72af80b907873d15a37b2c86140}{Graph\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Graph, Has\+Edge\+Multi)
+\item 
+\mbox{\hyperlink{a01497}{Graph}} \mbox{\hyperlink{a00417_a139103bfd32eff596bb03d77df3a6ad3}{Graph\+Tests\+::\+Create\+Test\+Aggregate\+Graph}} ()
+\item 
+\mbox{\hyperlink{a00417_ae1efc0781172b677d8808e2649d01bd4}{Graph\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Graph, Aggregate\+Costs\+\_\+\+Sum)
+\item 
+\mbox{\hyperlink{a00417_ac464abc46afa57a9cff83ec4b84c4acc}{Graph\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Graph, Aggregate\+Costs\+\_\+\+Average)
+\item 
+\mbox{\hyperlink{a00417_a8cb358c84b201337b5dd689e2dd63bab}{Graph\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Graph, Aggregate\+Costs\+\_\+\+Count)
+\item 
+\mbox{\hyperlink{a00417_a5787b16a0f2b583d7e6a41741dee61c6}{Graph\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Graph, Aggregate\+Costs\+\_\+\+Undirected\+\_\+\+Sum)
+\item 
+\mbox{\hyperlink{a00417_a74600feed3b5f64854119ed96251217b}{Graph\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Graph, Aggregate\+Costs\+\_\+\+Undirected\+\_\+\+Average)
+\item 
+\mbox{\hyperlink{a00417_ad7678109e09473f04128095b17026d51}{Graph\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Graph, Aggregate\+Costs\+\_\+\+Undirected\+\_\+\+Count)
+\item 
+\mbox{\hyperlink{a00417_acc6999bf4ef71a7b1640c98b15c83e96}{Graph\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Graph, Aggregate\+Costs\+Multi)
+\item 
+\mbox{\hyperlink{a00417_a4a4e7bcd8cb21cc0cd8ae7d7b0a9f987}{Graph\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Graph, Get\+Cost\+Types)
+\item 
+\mbox{\hyperlink{a00417_a7733509f357de97a20417b93e2357d5b}{Graph\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Graph, Size\+Equals\+Number\+Of\+Nodes)
+\item 
+\mbox{\hyperlink{a00417_a337909979df9d76db610e6f9ed3b2413}{Graph\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Graph, Size\+Equals\+Number\+Of\+Ints)
+\item 
+\mbox{\hyperlink{a00417_afc1e9b238a3192f188df9113a5b1787c}{Graph\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Graph, Group\+Insert)
+\item 
+bool \mbox{\hyperlink{a00417_ad1d2ba29436f0e916dc536660fe79e9f}{Graph\+Tests\+::\+Contains}} (const std\+::vector$<$ int $>$ \&domain, int target)
+\item 
+\mbox{\hyperlink{a00417_a79dee78fa93f2d22f27c23a4a2af120f}{Graph\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Graph, Get\+Edges)
+\item 
+\mbox{\hyperlink{a00320_a2ff5c40fc2cc711ba45e335d13d19d69}{T\+E\+ST}} (\+\_\+\+Graph, Add\+Edge\+To\+New\+Cost)
+\item 
+\mbox{\hyperlink{a00320_a41d33f057001ef5f928249c378b8691e}{T\+E\+ST}} (\+\_\+\+Graph, Multiple\+New\+Cost\+Doesnt\+Affect\+Default)
+\item 
+\mbox{\hyperlink{a00320_abdcb522c5d1549c0ab622b7be718241f}{T\+E\+ST}} (\+\_\+\+Graph, Get\+Sub\+Graph\+Multi)
+\item 
+void \mbox{\hyperlink{a00320_a0aa84d2acfe74000f5433715c774b8e7}{Compare\+Vectors\+Of\+Edge\+Sets}} (const vector$<$ \mbox{\hyperlink{a01481}{Edge\+Set}} $>$ \&E1, const vector$<$ \mbox{\hyperlink{a01481}{Edge\+Set}} $>$ \&E2)
+\item 
+\mbox{\hyperlink{a00320_a5bf02afaff2411891832c2b56fb2068c}{T\+E\+ST}} (\+\_\+\+Graph, Add\+Multiple\+Edge\+Sets\+To\+New\+Cost)
+\item 
+\mbox{\hyperlink{a00320_ae87529a45e92f9c6bd9ced7c65c8bce7}{T\+E\+ST}} (\+\_\+\+Graph, Default\+Name\+Change)
+\item 
+\mbox{\hyperlink{a00320_a049e3ccab6aa09cf2bf25023966828a6}{T\+E\+ST}} (\+\_\+\+Graph, Clear\+Multi)
+\item 
+\mbox{\hyperlink{a00320_a24a05180dfb42b123220fb8626775f0d}{T\+E\+ST}} (\+\_\+\+Graph, Alternate\+C\+SR)
+\item 
+std\+::vector$<$ int $>$ \mbox{\hyperlink{a00320_a36301884ca7e920be5eb71602c1d915d}{Get\+Ids}} (const \mbox{\hyperlink{a01497}{Graph}} \&G, const std\+::vector$<$ \mbox{\hyperlink{a02017}{Node}} $>$ \&nodes)
+\item 
+\mbox{\hyperlink{a01497}{Graph}} \mbox{\hyperlink{a00320_a7bc73cd302d249a0b9684bda2b724569}{Create\+Node\+Attribute\+Graph}} ()
+\item 
+float \mbox{\hyperlink{a00320_adef0c14ed1b57fb69940592d3f99f4f6}{String\+To\+Float}} (const std\+::string \&str\+\_\+to\+\_\+convert)
+\item 
+std\+::vector$<$ float $>$ \mbox{\hyperlink{a00320_aeb206f54c446e0930c89c7d3cceb5068}{Convert\+Strings\+To\+Float}} (const std\+::vector$<$ std\+::string $>$ \&strings)
+\item 
+\mbox{\hyperlink{a00320_a90e68068691f007f1060ab0b21b9a9f0}{T\+E\+ST}} (\+\_\+\+Graph, Attr\+To\+Params\+\_\+\+I\+N\+C\+O\+M\+I\+NG)
+\item 
+\mbox{\hyperlink{a00320_abb9b287354eecf7a390f9e6d53c4413e}{T\+E\+ST}} (\+\_\+\+Graph, Attr\+To\+Params\+\_\+\+O\+U\+T\+G\+O\+I\+NG)
+\item 
+\mbox{\hyperlink{a00320_a8580d304272a8602b480e2acae9934aa}{T\+E\+ST}} (\+\_\+\+Graph, Attr\+To\+Params\+\_\+\+B\+O\+TH)
+\item 
+\mbox{\hyperlink{a00320_aa218ae2c734c0562cffce4a79c33e00e}{T\+E\+ST}} (C\+\_\+\+Graph, Attr\+To\+Params)
+\item 
+\mbox{\hyperlink{a00320_a20cf7c0054af7915b915e33c3558827e}{T\+E\+ST}} (\+\_\+\+Rounding, addition\+\_\+error)
+\item 
+\mbox{\hyperlink{a00418_a2c5ac3a76660fdebd444a6d034c0dc43}{Node\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Node, \mbox{\hyperlink{a02916_a2d7c64a990ab1f4e06dfd5ac3e903433}{Distance}})
+\item 
+\mbox{\hyperlink{a00418_acf38dcb1dd88c7f461a78c3fa71f1835}{Node\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Node, Equality)
+\item 
+\mbox{\hyperlink{a00418_a803e5d5f83a14756b054a437733bab96}{Node\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Node, Rounding\+And\+Equality)
+\item 
+\mbox{\hyperlink{a00419_ade2fe933be0f91e1932993f8682e6130}{Node\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Node, Default\+Constructor)
+\item 
+\mbox{\hyperlink{a00419_aa8e074eedce557a43a403a6b545007e2}{Node\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Node, Param\+Constructor\+No\+ID)
+\item 
+\mbox{\hyperlink{a00419_ab7f7e2da0794a3f79b35505a6f290960}{Node\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Node, Param\+Constructor\+Array)
+\item 
+\mbox{\hyperlink{a00419_a96c3acb5eeeea4fd634c510f4ed16211}{Node\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+node, Param\+Constructor\+Array\+Type\+ID)
+\item 
+\mbox{\hyperlink{a00419_ae531762b8a1cc3bec235915b2f91161e}{Node\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+node, \mbox{\hyperlink{a00299_a68644d658b00e6ade10de66d9fc78952}{Distance\+To}})
+\item 
+\mbox{\hyperlink{a00419_ac00468cfab6fef2cafaab0b0e05c28e6}{Node\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+node, Angle\+To)
+\item 
+\mbox{\hyperlink{a00419_ac68b0176e9e9bf136dc8ab4e14c1949b}{Node\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+node, Direction\+To)
+\item 
+\mbox{\hyperlink{a00419_a22f65c9a54df6876a83d2691c5576880}{Node\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+node, Get\+Array)
+\item 
+\mbox{\hyperlink{a00419_a7b34b68f2e98d47b296c764dd7deb932}{Node\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+node, Operator\+Index\+By\+Ref)
+\item 
+\mbox{\hyperlink{a00419_af8dd9c7b6d74e0f976a669e2286a103e}{Node\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+node, Operator\+Index\+By\+Val)
+\item 
+\mbox{\hyperlink{a00419_adc75803d5726fdf6deeb7a71117cb743}{Node\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+node, Operator\+Equality)
+\item 
+\mbox{\hyperlink{a00419_a1bef2a948ae3142bd53aa230a0c606e6}{Node\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+node, Operator\+Assignment)
+\item 
+\mbox{\hyperlink{a00419_abd0cf2ca4f703c49ac4fa9277a2c827d}{Node\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+node, Operator\+N\+Equality)
+\item 
+\mbox{\hyperlink{a00419_aa4474ca27af9be07da68241755f0eb12}{Node\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+node, Operator\+Minus)
+\item 
+\mbox{\hyperlink{a00419_a27dcd5e2b569e7798a64c7c452b32f79}{Node\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+node, Operator\+Plus)
+\item 
+\mbox{\hyperlink{a00419_a308909e60da2ac3a46206ed60c280556}{Node\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+node, Operator\+Multiply)
+\item 
+\mbox{\hyperlink{a00419_afde0c04a229e09228aec524d87e3fe3b}{Node\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+node, Operator\+Less\+Than\+Const)
+\item 
+\mbox{\hyperlink{a00419_a3b55ec342f5ae9edf3bfebdced00a10a}{Node\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+node, Operator\+Less\+Than)
+\item 
+\mbox{\hyperlink{a00419_aaf50bec48dc7dbb8d40d556bfd6fdc78}{Node\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+node, Operator\+Greater\+Than\+Const)
+\item 
+\mbox{\hyperlink{a00420_a5abbd28f0787a450c9752133ee932c2e}{Edge\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+edge, Edge\+Constructor)
+\item 
+\mbox{\hyperlink{a00421_a9170904fa1e75a5b1fb3cf5d8ff313d5}{Path\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+path\+Member, Operator\+Equality)
+\item 
+\mbox{\hyperlink{a00421_a00096083ffbf5a896e09f98bd156da84}{Path\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+path\+Member, Operator\+N\+Equality)
+\item 
+\mbox{\hyperlink{a00421_a43f84aba5ae33c958778782bff3d1dd7}{Path\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+path, No\+Arg\+Constructor)
+\item 
+\mbox{\hyperlink{a00421_adeda7d7e32610b60af0fd4726d4ea802}{Path\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+path, Param\+Constructor)
+\item 
+\mbox{\hyperlink{a00421_a5e0d22e89d9c865601d032913e4e79f0}{Path\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+path, Add\+Node)
+\item 
+\mbox{\hyperlink{a00421_a176d9eddb8a2033e637dc622224761a5}{Path\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+path, Empty)
+\item 
+\mbox{\hyperlink{a00421_aac6cc14fa829fb161d7f33ad6b0f28c4}{Path\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+path, Size)
+\item 
+\mbox{\hyperlink{a00421_a5639608e74941bc09cefd45f9856ee6a}{Path\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+path, Reverse)
+\item 
+\mbox{\hyperlink{a00421_a0447018a074b21d032ae13e843ee0302}{Path\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+path, Operator\+Equality)
+\item 
+\mbox{\hyperlink{a00421_a9606edaf421953babbb64088639a70f4}{Path\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+path, Operator\+Index)
+\item 
+\mbox{\hyperlink{a00421_a971d48ca4b18b8281feb81f98aca9941}{Path\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+path, Get\+P\+M\+Pointer)
+\item 
+\mbox{\hyperlink{a00421_aa9a14a6c18ded37d3c39e4b11525e543}{Path\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+path, Operator\+Less\+Than\+Less\+Than)
+\item 
+\mbox{\hyperlink{a00422_af34884e1d967d4595172169294f4098f}{Graph\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+csrptrs, Are\+Valid)
+\item 
+\mbox{\hyperlink{a00422_abcc73e977ba229ab7c5a707b0d90c393}{Graph\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+graph, Param\+Constructor)
+\item 
+\mbox{\hyperlink{a00422_abfe5aebcb0e56ae2bf70d6fbb64c0e9b}{Graph\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+graph, No\+Arg\+Constructor)
+\item 
+\mbox{\hyperlink{a00422_a309d2ea3171fa96128561265e98d1b99}{Graph\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+graph, Has\+Edge\+\_\+\+Array)
+\item 
+\mbox{\hyperlink{a00422_a1e87589da484c514ab4d2892a8d7cb01}{Graph\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+graph, Has\+Edge\+\_\+\+Node)
+\item 
+\mbox{\hyperlink{a00422_a1f5b906ef664144ff2d1526f9d35113b}{Graph\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+graph, Has\+Edge\+\_\+\+Int)
+\item 
+\mbox{\hyperlink{a00422_a781b8ee283334fe4c441bc16b4388db2}{Graph\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+graph, Nodes)
+\item 
+\mbox{\hyperlink{a00422_a18a66f4ce286db9d470f2742b8ea3f0c}{Graph\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+graph, Get\+Undirected\+Edges)
+\item 
+\mbox{\hyperlink{a00422_a2b0d476237b96d57a5632b2b9c0c5587}{Graph\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+graph, Get\+Edges)
+\item 
+\mbox{\hyperlink{a00422_aca8bbc6ee9b374d375241b6325b988ec}{Graph\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+graph, Aggregate\+Graph)
+\item 
+\mbox{\hyperlink{a00422_a23d16092844479e099f7271c01b3b69e}{Graph\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+graph, Operator\+Index)
+\item 
+\mbox{\hyperlink{a00422_a2acf5bd477156c9514fe557fe62fabb7}{Graph\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+graph, Add\+Edge\+\_\+\+Node)
+\item 
+\mbox{\hyperlink{a00422_aaca08973954673e2a84ca11a78a235f8}{Graph\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+graph, Add\+Edge\+\_\+\+Int)
+\item 
+\mbox{\hyperlink{a00422_a8b87849c4ef3024d6e6cb8f93ffa7844}{Graph\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+graph, Has\+Key)
+\item 
+\mbox{\hyperlink{a00422_adaaf93362ebb5d0787809cf11f91120b}{Graph\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+graph, Nodes\+As\+Float3)
+\item 
+\mbox{\hyperlink{a00422_a68c9bc9bba9a42db7cf1ac6b241a9729}{Graph\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+graph, Size)
+\item 
+\mbox{\hyperlink{a00422_a2b9257dffc498ccb98d4cdd14b45e727}{Graph\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+graph, Get\+ID)
+\item 
+\mbox{\hyperlink{a00422_a1e3a3afe8b4dcc09259f35f72331f101}{Graph\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+graph, \mbox{\hyperlink{a00392_gab7ecc1be5c746ed3f99ab7494316c65d}{Compress}})
+\item 
+\mbox{\hyperlink{a00422_aa84cb04c7d2480c614d5b22f3d825263}{Graph\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+graph, \mbox{\hyperlink{a00392_ga58e27a4c3b5a2d9692536877c2e13691}{Get\+C\+S\+R\+Pointers}})
+\item 
+\mbox{\hyperlink{a00422_a06f0d69c03c003eb3728318e31da9aca}{Graph\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+graph, Node\+From\+ID)
+\item 
+\mbox{\hyperlink{a00422_af2bcdfba58f077f466fc59caf7eb4999}{Graph\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+graph, Clear)
+\item 
+\mbox{\hyperlink{a00423_a39c7602c4bab933fd737cfab83025265}{Graph\+Example\+Tests\+::\+Constants\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+functions, Round\+HF)
+\item 
+\mbox{\hyperlink{a00422_acf55a1d5d61b8807b9ba7c72790f5eb4}{Graph\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+graph, Add\+Node\+Attribute)
+\item 
+\mbox{\hyperlink{a00422_a37837a316682118585a9b66f67673de6}{Graph\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+graph, \mbox{\hyperlink{a00392_gad7060ed66926e8d028cd2e43e0cb73e6}{Add\+Node\+Attributes}})
+\item 
+\mbox{\hyperlink{a00422_a575fcb6b5ba066b297bdd36722e211eb}{Graph\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+graph, \mbox{\hyperlink{a00392_ga755a13df931e2e3047ed665958727ccb}{Get\+Node\+Attributes}})
+\item 
+\mbox{\hyperlink{a00422_a992d3575026fb21546a1858e5c67533b}{Graph\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+graph, Clear\+Node\+Attributes)
+\item 
+\mbox{\hyperlink{a00422_a034418672dce04e7568e1dfbcd4ff0ad}{Graph\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+graph, Get\+Edges\+Cost\+Name)
+\item 
+\mbox{\hyperlink{a00424_a7b95740573876b28e73012ce62cba3b8}{Constants\+Example\+Tests\+::\+T\+E\+ST}} (\+\_\+functions, Round\+HF)
+\item 
+\mbox{\hyperlink{a00414_a88692408fbb27499dd81e826fe4dc657}{C\+Interface\+Tests\+::\+T\+E\+ST}} (\+\_\+graph\+C\+Interface, \mbox{\hyperlink{a00392_gad7060ed66926e8d028cd2e43e0cb73e6}{Add\+Node\+Attributes}})
+\item 
+\mbox{\hyperlink{a00414_a1bf69f7375ffef8a204b599dc6093847}{C\+Interface\+Tests\+::\+T\+E\+ST}} (\+\_\+graph\+C\+Interface, \mbox{\hyperlink{a00392_ga755a13df931e2e3047ed665958727ccb}{Get\+Node\+Attributes}})
+\item 
+\mbox{\hyperlink{a00414_a74612037facbecc140293ce2a6767071}{C\+Interface\+Tests\+::\+T\+E\+ST}} (\+\_\+graph\+C\+Interface, \mbox{\hyperlink{a00392_gad6d3a72e20e71132c774b931567d76f7}{Delete\+Score\+Array}})
+\item 
+\mbox{\hyperlink{a00414_ad66bfe31bb8666d4e7ba7bb81c4f53e5}{C\+Interface\+Tests\+::\+T\+E\+ST}} (\+\_\+graph\+C\+Interface, \mbox{\hyperlink{a00392_ga718c5819f2cc2ffad1b9e8d0cb61dd9c}{Clear\+Attribute\+Type}})
+\item 
+\mbox{\hyperlink{a00414_a73d74bc0a7666d46dcacc913b09166d2}{C\+Interface\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Node\+C\+Interface, \mbox{\hyperlink{a00392_ga0cc5b82caab046c65a201e4e7be5e9d4}{Get\+All\+Nodes\+From\+Graph}})
+\item 
+\mbox{\hyperlink{a00414_a575e20b404feceda4f4f7fda4cf47b87}{C\+Interface\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Node\+C\+Interface, \mbox{\hyperlink{a00392_gac17c1fc05e6bf6900bac8689b7619bfb}{Get\+Size\+Of\+Node\+Vector}})
+\item 
+\mbox{\hyperlink{a00414_a1ebb722cbc503e5ec34bcda03af40f7b}{C\+Interface\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Node\+C\+Interface, \mbox{\hyperlink{a00392_ga0b0293bbac3cdc8bdaa1d2c36bec0a26}{Aggregate\+Costs}})
+\item 
+\mbox{\hyperlink{a00414_a801dd248d9bd3d252fa639e7c3087d5c}{C\+Interface\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Node\+C\+Interface, \mbox{\hyperlink{a00392_ga262a8f714fbd8d74840efa5832597fff}{Create\+Graph}})
+\item 
+\mbox{\hyperlink{a00414_a3fef21673ac6cf577fe0e2203ac0ba90}{C\+Interface\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Node\+C\+Interface, \mbox{\hyperlink{a00392_ga43f715ce7f57fb92e78f8f6e90b84baf}{Add\+Edge\+From\+Nodes}})
+\item 
+\mbox{\hyperlink{a00414_ac793e3084bdef3d84989748df5612128}{C\+Interface\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Node\+C\+Interface, \mbox{\hyperlink{a00392_ga02213608939a85d5165da6c0a47c113b}{Add\+Edge\+From\+Node\+I\+Ds}})
+\item 
+\mbox{\hyperlink{a00414_a39dada2979ec7c99d29347a80cecb44d}{C\+Interface\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Node\+C\+Interface, \mbox{\hyperlink{a00392_ga58e27a4c3b5a2d9692536877c2e13691}{Get\+C\+S\+R\+Pointers}})
+\item 
+\mbox{\hyperlink{a00414_ae3a4e69cfccb31ee93c41917dfe83861}{C\+Interface\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Node\+C\+Interface, \mbox{\hyperlink{a00392_ga31fad78ce410cd523bb337f46b078b4c}{Get\+Node\+ID}})
+\item 
+\mbox{\hyperlink{a00414_ab41c09d89ca562fb851886aa165347d2}{C\+Interface\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Node\+C\+Interface, \mbox{\hyperlink{a00392_gab7ecc1be5c746ed3f99ab7494316c65d}{Compress}})
+\item 
+\mbox{\hyperlink{a00414_a14699d28a8b3d261cbbb4031a7b8ced5}{C\+Interface\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Node\+C\+Interface, \mbox{\hyperlink{a00392_gac9581ead92b8caa513a77012af10aa63}{Clear\+Graph}})
+\item 
+\mbox{\hyperlink{a00414_af688f41a5d7c6432209728194d94ee50}{C\+Interface\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Node\+C\+Interface, \mbox{\hyperlink{a00392_ga87e9b9ecfc5293712d75f3cb8c992c77}{Destroy\+Nodes}})
+\item 
+\mbox{\hyperlink{a00414_a8982311c13cc974d390bfa3951e32b85}{C\+Interface\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Node\+C\+Interface, \mbox{\hyperlink{a00392_gac46191088d698cc007a2176ab6b5674d}{Destroy\+Edges}})
+\item 
+\mbox{\hyperlink{a00414_ad27225741ae1626818f340f962e7625b}{C\+Interface\+Tests\+::\+T\+E\+ST}} (\+\_\+\+Node\+C\+Interface, \mbox{\hyperlink{a00392_ga645abacd11e1fa535f953344aaa77727}{Destroy\+Graph}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const string \mbox{\hyperlink{a00320_af7c5183a783c69be2d95ba4990afcabf}{test\+\_\+attribute}} = \char`\"{}test\+\_\+attr\char`\"{}
+\item 
+const vector$<$ \mbox{\hyperlink{a02017}{Node}} $>$ \mbox{\hyperlink{a00320_abe6be36f9a3652c3453a113df00bbb98}{test\+\_\+param\+\_\+nodes}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{a00320_a0aa84d2acfe74000f5433715c774b8e7}\label{a00320_a0aa84d2acfe74000f5433715c774b8e7}} 
+\index{SpatialStructures.cpp@{SpatialStructures.cpp}!CompareVectorsOfEdgeSets@{CompareVectorsOfEdgeSets}}
+\index{CompareVectorsOfEdgeSets@{CompareVectorsOfEdgeSets}!SpatialStructures.cpp@{SpatialStructures.cpp}}
+\doxysubsubsection{\texorpdfstring{CompareVectorsOfEdgeSets()}{CompareVectorsOfEdgeSets()}}
+{\footnotesize\ttfamily void Compare\+Vectors\+Of\+Edge\+Sets (\begin{DoxyParamCaption}\item[{const vector$<$ \mbox{\hyperlink{a01481}{Edge\+Set}} $>$ \&}]{E1,  }\item[{const vector$<$ \mbox{\hyperlink{a01481}{Edge\+Set}} $>$ \&}]{E2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 435 of file Spatial\+Structures.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=310pt]{a00320_a0aa84d2acfe74000f5433715c774b8e7_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00320_aeb206f54c446e0930c89c7d3cceb5068}\label{a00320_aeb206f54c446e0930c89c7d3cceb5068}} 
+\index{SpatialStructures.cpp@{SpatialStructures.cpp}!ConvertStringsToFloat@{ConvertStringsToFloat}}
+\index{ConvertStringsToFloat@{ConvertStringsToFloat}!SpatialStructures.cpp@{SpatialStructures.cpp}}
+\doxysubsubsection{\texorpdfstring{ConvertStringsToFloat()}{ConvertStringsToFloat()}}
+{\footnotesize\ttfamily std\+::vector$<$float$>$ Convert\+Strings\+To\+Float (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{strings }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 592 of file Spatial\+Structures.\+cpp.
+
+
+
+References String\+To\+Float().
+
+
+
+Referenced by T\+E\+S\+T().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=320pt]{a00320_aeb206f54c446e0930c89c7d3cceb5068_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=281pt]{a00320_aeb206f54c446e0930c89c7d3cceb5068_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00320_a7bc73cd302d249a0b9684bda2b724569}\label{a00320_a7bc73cd302d249a0b9684bda2b724569}} 
+\index{SpatialStructures.cpp@{SpatialStructures.cpp}!CreateNodeAttributeGraph@{CreateNodeAttributeGraph}}
+\index{CreateNodeAttributeGraph@{CreateNodeAttributeGraph}!SpatialStructures.cpp@{SpatialStructures.cpp}}
+\doxysubsubsection{\texorpdfstring{CreateNodeAttributeGraph()}{CreateNodeAttributeGraph()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a01497}{Graph}} Create\+Node\+Attribute\+Graph (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{[}E\+X\+\_\+\+Attrs\+To\+Strings\mbox{]}
+
+\mbox{[}E\+X\+\_\+\+Attrs\+To\+Strings\mbox{]}
+
+Definition at line 549 of file Spatial\+Structures.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Graph\+::add\+Edge(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Add\+Node\+Attribute(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Compress(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::get\+I\+D(), and test\+\_\+attribute.
+
+
+
+Referenced by T\+E\+S\+T().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00320_a7bc73cd302d249a0b9684bda2b724569_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=303pt]{a00320_a7bc73cd302d249a0b9684bda2b724569_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00320_a36301884ca7e920be5eb71602c1d915d}\label{a00320_a36301884ca7e920be5eb71602c1d915d}} 
+\index{SpatialStructures.cpp@{SpatialStructures.cpp}!GetIds@{GetIds}}
+\index{GetIds@{GetIds}!SpatialStructures.cpp@{SpatialStructures.cpp}}
+\doxysubsubsection{\texorpdfstring{GetIds()}{GetIds()}}
+{\footnotesize\ttfamily std\+::vector$<$int$>$ Get\+Ids (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a01497}{Graph}} \&}]{G,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{a02017}{Node}} $>$ \&}]{nodes }\end{DoxyParamCaption})}
+
+
+
+Definition at line 541 of file Spatial\+Structures.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Graph\+::get\+I\+D().
+
+
+
+Referenced by T\+E\+S\+T().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=283pt]{a00320_a36301884ca7e920be5eb71602c1d915d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=205pt]{a00320_a36301884ca7e920be5eb71602c1d915d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00320_adef0c14ed1b57fb69940592d3f99f4f6}\label{a00320_adef0c14ed1b57fb69940592d3f99f4f6}} 
+\index{SpatialStructures.cpp@{SpatialStructures.cpp}!StringToFloat@{StringToFloat}}
+\index{StringToFloat@{StringToFloat}!SpatialStructures.cpp@{SpatialStructures.cpp}}
+\doxysubsubsection{\texorpdfstring{StringToFloat()}{StringToFloat()}}
+{\footnotesize\ttfamily float String\+To\+Float (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str\+\_\+to\+\_\+convert }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 582 of file Spatial\+Structures.\+cpp.
+
+
+
+Referenced by Convert\+Strings\+To\+Float().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00320_adef0c14ed1b57fb69940592d3f99f4f6_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00320_a2ff5c40fc2cc711ba45e335d13d19d69}\label{a00320_a2ff5c40fc2cc711ba45e335d13d19d69}} 
+\index{SpatialStructures.cpp@{SpatialStructures.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!SpatialStructures.cpp@{SpatialStructures.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [1/12]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Graph}]{,  }\item[{Add\+Edge\+To\+New\+Cost}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 349 of file Spatial\+Structures.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Graph\+::add\+Edge(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Compress(), and H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Get\+Edges().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=276pt]{a00320_a2ff5c40fc2cc711ba45e335d13d19d69_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00320_a5bf02afaff2411891832c2b56fb2068c}\label{a00320_a5bf02afaff2411891832c2b56fb2068c}} 
+\index{SpatialStructures.cpp@{SpatialStructures.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!SpatialStructures.cpp@{SpatialStructures.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [2/12]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Graph}]{,  }\item[{Add\+Multiple\+Edge\+Sets\+To\+New\+Cost}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 442 of file Spatial\+Structures.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Add\+Edges(), Compare\+Vectors\+Of\+Edge\+Sets(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Compress(), and H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Get\+Edges().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=310pt]{a00320_a5bf02afaff2411891832c2b56fb2068c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00320_a24a05180dfb42b123220fb8626775f0d}\label{a00320_a24a05180dfb42b123220fb8626775f0d}} 
+\index{SpatialStructures.cpp@{SpatialStructures.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!SpatialStructures.cpp@{SpatialStructures.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [3/12]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Graph}]{,  }\item[{Alternate\+C\+SR}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 505 of file Spatial\+Structures.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Add\+Edges(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Compress(), H\+F\+::\+Spatial\+Structures\+::\+C\+S\+R\+Ptrs\+::data, H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Get\+C\+S\+R\+Pointers(), and H\+F\+::\+Spatial\+Structures\+::\+C\+S\+R\+Ptrs\+::nnz.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=291pt]{a00320_a24a05180dfb42b123220fb8626775f0d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00320_a8580d304272a8602b480e2acae9934aa}\label{a00320_a8580d304272a8602b480e2acae9934aa}} 
+\index{SpatialStructures.cpp@{SpatialStructures.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!SpatialStructures.cpp@{SpatialStructures.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [4/12]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Graph}]{,  }\item[{Attr\+To\+Params\+\_\+\+B\+O\+TH}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 640 of file Spatial\+Structures.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Attr\+To\+Cost(), H\+F\+::\+Spatial\+Structures\+::\+B\+O\+TH, Convert\+Strings\+To\+Float(), Create\+Node\+Attribute\+Graph(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Get\+Cost(), Get\+Ids(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Get\+Node\+Attributes(), test\+\_\+attribute, and test\+\_\+param\+\_\+nodes.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00320_a8580d304272a8602b480e2acae9934aa_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00320_a90e68068691f007f1060ab0b21b9a9f0}\label{a00320_a90e68068691f007f1060ab0b21b9a9f0}} 
+\index{SpatialStructures.cpp@{SpatialStructures.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!SpatialStructures.cpp@{SpatialStructures.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [5/12]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Graph}]{,  }\item[{Attr\+To\+Params\+\_\+\+I\+N\+C\+O\+M\+I\+NG}]{ }\end{DoxyParamCaption})}
+
+\mbox{[}E\+X\+\_\+\+Attrs\+To\+Strings2\mbox{]}
+
+\mbox{[}E\+X\+\_\+\+Attrs\+To\+Strings2\mbox{]}
+
+Definition at line 601 of file Spatial\+Structures.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Attr\+To\+Cost(), Convert\+Strings\+To\+Float(), Create\+Node\+Attribute\+Graph(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Get\+Cost(), Get\+Ids(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Get\+Node\+Attributes(), H\+F\+::\+Spatial\+Structures\+::\+I\+N\+C\+O\+M\+I\+NG, test\+\_\+attribute, and test\+\_\+param\+\_\+nodes.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00320_a90e68068691f007f1060ab0b21b9a9f0_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00320_abb9b287354eecf7a390f9e6d53c4413e}\label{a00320_abb9b287354eecf7a390f9e6d53c4413e}} 
+\index{SpatialStructures.cpp@{SpatialStructures.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!SpatialStructures.cpp@{SpatialStructures.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [6/12]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Graph}]{,  }\item[{Attr\+To\+Params\+\_\+\+O\+U\+T\+G\+O\+I\+NG}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 624 of file Spatial\+Structures.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Attr\+To\+Cost(), Convert\+Strings\+To\+Float(), Create\+Node\+Attribute\+Graph(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Get\+Cost(), Get\+Ids(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Get\+Node\+Attributes(), H\+F\+::\+Spatial\+Structures\+::\+O\+U\+T\+G\+O\+I\+NG, test\+\_\+attribute, and test\+\_\+param\+\_\+nodes.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00320_abb9b287354eecf7a390f9e6d53c4413e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00320_a049e3ccab6aa09cf2bf25023966828a6}\label{a00320_a049e3ccab6aa09cf2bf25023966828a6}} 
+\index{SpatialStructures.cpp@{SpatialStructures.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!SpatialStructures.cpp@{SpatialStructures.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [7/12]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Graph}]{,  }\item[{Clear\+Multi}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 487 of file Spatial\+Structures.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Graph\+::add\+Edge(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Clear(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Compress(), and H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Has\+Edge().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=276pt]{a00320_a049e3ccab6aa09cf2bf25023966828a6_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00320_ae87529a45e92f9c6bd9ced7c65c8bce7}\label{a00320_ae87529a45e92f9c6bd9ced7c65c8bce7}} 
+\index{SpatialStructures.cpp@{SpatialStructures.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!SpatialStructures.cpp@{SpatialStructures.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [8/12]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Graph}]{,  }\item[{Default\+Name\+Change}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 466 of file Spatial\+Structures.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Graph\+::add\+Edge(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Compress(), and H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Has\+Edge().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=276pt]{a00320_ae87529a45e92f9c6bd9ced7c65c8bce7_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00320_abdcb522c5d1549c0ab622b7be718241f}\label{a00320_abdcb522c5d1549c0ab622b7be718241f}} 
+\index{SpatialStructures.cpp@{SpatialStructures.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!SpatialStructures.cpp@{SpatialStructures.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [9/12]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Graph}]{,  }\item[{Get\+Sub\+Graph\+Multi}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 406 of file Spatial\+Structures.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Add\+Edges(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Compress(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Get\+Edges(), and H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Get\+Subgraph().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=278pt]{a00320_abdcb522c5d1549c0ab622b7be718241f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00320_a41d33f057001ef5f928249c378b8691e}\label{a00320_a41d33f057001ef5f928249c378b8691e}} 
+\index{SpatialStructures.cpp@{SpatialStructures.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!SpatialStructures.cpp@{SpatialStructures.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [10/12]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Graph}]{,  }\item[{Multiple\+New\+Cost\+Doesnt\+Affect\+Default}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 376 of file Spatial\+Structures.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Add\+Edges(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Compress(), and H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Get\+Edges().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=276pt]{a00320_a41d33f057001ef5f928249c378b8691e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00320_a20cf7c0054af7915b915e33c3558827e}\label{a00320_a20cf7c0054af7915b915e33c3558827e}} 
+\index{SpatialStructures.cpp@{SpatialStructures.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!SpatialStructures.cpp@{SpatialStructures.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [11/12]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Rounding}]{,  }\item[{addition\+\_\+error}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 674 of file Spatial\+Structures.\+cpp.
+
+\mbox{\Hypertarget{a00320_aa218ae2c734c0562cffce4a79c33e00e}\label{a00320_aa218ae2c734c0562cffce4a79c33e00e}} 
+\index{SpatialStructures.cpp@{SpatialStructures.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!SpatialStructures.cpp@{SpatialStructures.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [12/12]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{C\+\_\+\+Graph}]{,  }\item[{Attr\+To\+Params}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 656 of file Spatial\+Structures.\+cpp.
+
+
+
+References H\+F\+::\+Spatial\+Structures\+::\+B\+O\+TH, Convert\+Strings\+To\+Float(), Create\+Node\+Attribute\+Graph(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Get\+Cost(), Get\+Ids(), H\+F\+::\+Spatial\+Structures\+::\+Graph\+::\+Get\+Node\+Attributes(), Graph\+Attrs\+To\+Costs(), test\+\_\+attribute, and test\+\_\+param\+\_\+nodes.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00320_aa218ae2c734c0562cffce4a79c33e00e_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{a00320_af7c5183a783c69be2d95ba4990afcabf}\label{a00320_af7c5183a783c69be2d95ba4990afcabf}} 
+\index{SpatialStructures.cpp@{SpatialStructures.cpp}!test\_attribute@{test\_attribute}}
+\index{test\_attribute@{test\_attribute}!SpatialStructures.cpp@{SpatialStructures.cpp}}
+\doxysubsubsection{\texorpdfstring{test\_attribute}{test\_attribute}}
+{\footnotesize\ttfamily const string test\+\_\+attribute = \char`\"{}test\+\_\+attr\char`\"{}}
+
+
+
+Definition at line 536 of file Spatial\+Structures.\+cpp.
+
+
+
+Referenced by Create\+Node\+Attribute\+Graph(), and T\+E\+S\+T().
+
+\mbox{\Hypertarget{a00320_abe6be36f9a3652c3453a113df00bbb98}\label{a00320_abe6be36f9a3652c3453a113df00bbb98}} 
+\index{SpatialStructures.cpp@{SpatialStructures.cpp}!test\_param\_nodes@{test\_param\_nodes}}
+\index{test\_param\_nodes@{test\_param\_nodes}!SpatialStructures.cpp@{SpatialStructures.cpp}}
+\doxysubsubsection{\texorpdfstring{test\_param\_nodes}{test\_param\_nodes}}
+{\footnotesize\ttfamily const vector$<$\mbox{\hyperlink{a02017}{Node}}$>$ test\+\_\+param\+\_\+nodes}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{        \{1,1,1\}, \{2,2,2\}, \{3,3,3\},\{4,4,4\}, \{5,5,5\}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Definition at line 537 of file Spatial\+Structures.\+cpp.
+
+
+
+Referenced by T\+E\+S\+T().
+

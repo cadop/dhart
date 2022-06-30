@@ -1,0 +1,73 @@
+\hypertarget{a00341}{}\doxysection{Cinterface/analysis\+\_\+C.h File Reference}
+\label{a00341}\index{Cinterface/analysis\_C.h@{Cinterface/analysis\_C.h}}
+
+
+Header file for C Interface functions related to graph generation.  
+
+
+{\ttfamily \#include $<$cinterface\+\_\+utils.\+h$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$array$>$}\newline
+Include dependency graph for analysis\+\_\+\+C.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=211pt]{a00342}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00343}
+\end{center}
+\end{figure}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{a00396}{HF}}
+\begin{DoxyCompactList}\small\item\em Perform human scale analysis on 3D environments. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00399}{H\+F\+::\+Spatial\+Structures}}
+\begin{DoxyCompactList}\small\item\em Contains standard fundamental data structures for representing space used throughout Human\+Factors. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00397}{H\+F\+::\+Graph\+Generator}}
+\begin{DoxyCompactList}\small\item\em Generate a graph of accessible space from a given start point. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{a00398}{H\+F\+::\+Ray\+Tracer}}
+\begin{DoxyCompactList}\small\item\em Cast rays to determine if and where they intersect geometry. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{a00341_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}}~extern \char`\"{}C\char`\"{} \+\_\+\+\_\+declspec(dllexport) int
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00388_gac2583dc1ee6786b15fa4f06bfde2130a}{Generate\+Graph}} (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ray\+\_\+tracer, const float $\ast$start\+\_\+point, const float $\ast$spacing, int Max\+Nodes, float Up\+Step, float Up\+Slope, float Down\+Step, float Down\+Slope, int max\+\_\+step\+\_\+connection, int core\+\_\+count, \mbox{\hyperlink{a01497}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$$\ast$out\+\_\+graph)
+\begin{DoxyCompactList}\small\item\em Construct a graph by performing a breadth-\/first search of accessible space. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00388_ga4dea438697ab06c4ab5e6da840bfdcfa}{Generate\+Graph\+Obstacles}} (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ray\+\_\+tracer, const float $\ast$start\+\_\+point, const float $\ast$spacing, int Max\+Nodes, float Up\+Step, float Up\+Slope, float Down\+Step, float Down\+Slope, int max\+\_\+step\+\_\+connection, int core\+\_\+count, const int $\ast$obstacle\+\_\+ids, const int $\ast$walkable\+\_\+ids, int num\+\_\+obstacles, int num\+\_\+walkables, \mbox{\hyperlink{a01497}{H\+F\+::\+Spatial\+Structures\+::\+Graph}} $\ast$$\ast$out\+\_\+graph)
+\begin{DoxyCompactList}\small\item\em Construct a graph by performing a breadth-\/first search of accessible space, seperating obstacles from walkable geometry. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Header file for C Interface functions related to graph generation. 
+
+\begin{DoxyAuthor}{Author}
+T\+BA 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+11 Aug 2020 
+\end{DoxyDate}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{a00341_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}\label{a00341_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}} 
+\index{analysis\_C.h@{analysis\_C.h}!C\_INTERFACE@{C\_INTERFACE}}
+\index{C\_INTERFACE@{C\_INTERFACE}!analysis\_C.h@{analysis\_C.h}}
+\doxysubsubsection{\texorpdfstring{C\_INTERFACE}{C\_INTERFACE}}
+{\footnotesize\ttfamily \#define C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE~extern \char`\"{}C\char`\"{} \+\_\+\+\_\+declspec(dllexport) int}
+
+
+
+Definition at line 16 of file analysis\+\_\+\+C.\+h.
+

@@ -1,0 +1,84 @@
+\hypertarget{a01289}{}\doxysection{std\+::hash$<$ std\+::array$<$ T, 3 $>$ $>$ Struct Template Reference}
+\label{a01289}\index{std::hash$<$ std::array$<$ T, 3 $>$ $>$@{std::hash$<$ std::array$<$ T, 3 $>$ $>$}}
+
+
+Template specialization of std\+::hash for using std\+::array$<$numeric\+\_\+type, 3$>$.  
+
+
+
+
+{\ttfamily \#include $<$meshinfo.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::size\+\_\+t \mbox{\hyperlink{a01289_afb0661eb1c8c1113e135274672e3026c}{operator()}} (const std\+::array$<$ T, 3 $>$ \&k) const
+\begin{DoxyCompactList}\small\item\em Calculate a hash for k. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+struct std\+::hash$<$ std\+::array$<$ T, 3 $>$ $>$}
+
+Template specialization of std\+::hash for using std\+::array$<$numeric\+\_\+type, 3$>$. 
+
+
+
+Definition at line 59 of file meshinfo.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{a01289_afb0661eb1c8c1113e135274672e3026c}\label{a01289_afb0661eb1c8c1113e135274672e3026c}} 
+\index{std::hash$<$ std::array$<$ T, 3 $>$ $>$@{std::hash$<$ std::array$<$ T, 3 $>$ $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!std::hash$<$ std::array$<$ T, 3 $>$ $>$@{std::hash$<$ std::array$<$ T, 3 $>$ $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::size\+\_\+t std\+::hash$<$ std\+::array$<$ T, 3 $>$ $>$\+::operator() (\begin{DoxyParamCaption}\item[{const std\+::array$<$ T, 3 $>$ \&}]{k }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Calculate a hash for k. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em k} & Reference to an array of coordinates (x, y, z) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The hashed value of k. 
+\end{DoxyReturn}
+
+
+Combines the hash of x,y,and z. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// be sure to \#include "meshinfo.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Create coordinates, (x, y, z)}}
+\DoxyCodeLine{std::array<numeric\_type, 3> arr = \{ 123.0, 456.1, 789.2 \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Using the template specialization for std::hash (which takes a std::array<numeric\_type,}}
+\DoxyCodeLine{\textcolor{comment}{// 3>), we retrieve a seed}}
+\DoxyCodeLine{std::size\_t arr\_hash = std::hash<std::array<numeric\_type, 3>>(arr);}
+\end{DoxyCode}
+ 
+
+Definition at line 77 of file meshinfo.\+h.
+
+
+
+References std\+::array\+\_\+hash\+\_\+combine\+\_\+impl().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a01289_afb0661eb1c8c1113e135274672e3026c_cgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Cpp/objloader/src/\mbox{\hyperlink{a00119}{meshinfo.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,1092 @@
+\hypertarget{a02910}{}\doxysection{Cpp/tests/src/\+O\+B\+J\+Loader.cpp File Reference}
+\label{a02910}\index{Cpp/tests/src/OBJLoader.cpp@{Cpp/tests/src/OBJLoader.cpp}}
+{\ttfamily \#include $<$gtest/gtest.\+h$>$}\newline
+{\ttfamily \#include $<$objloader.\+h$>$}\newline
+{\ttfamily \#include $<$meshinfo.\+h$>$}\newline
+{\ttfamily \#include $<$H\+F\+Exceptions.\+h$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include \char`\"{}objloader\+\_\+\+C.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}performance\+\_\+testing.\+h\char`\"{}}\newline
+Include dependency graph for O\+B\+J\+Loader.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02911}
+\end{center}
+\end{figure}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{a00414}{C\+Interface\+Tests}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{a02910_aa705e8b0a656accbeec8a442e64351cb}{eigen\+\_\+plain\+\_\+assert}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{a02910_acea841c68a73d07ad9d772ec2e94a683}{Mesh\+Info}} = \mbox{\hyperlink{a01297}{H\+F\+::\+Geometry\+::\+Mesh\+Info}}$<$ float $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{a02910_a6c2c9a67b8a5a4bb71137eab10a76370}{Print\+Array}} (std\+::array$<$ float, 3 $>$ in\+\_\+array)
+\item 
+float \mbox{\hyperlink{a02910_a37c22abaa96da9c1dd6be57a5b22c84b}{array\+Dist}} (const std\+::array$<$ float, 3 $>$ from, const std\+::array$<$ float, 3 $>$ \&to)
+\item 
+void \mbox{\hyperlink{a02910_a58a819aea1e26f09c69d427711b9712b}{Compare\+Mesh\+Info}} (const \mbox{\hyperlink{a02910_acea841c68a73d07ad9d772ec2e94a683}{Mesh\+Info}} \&M\+I1, const \mbox{\hyperlink{a02910_acea841c68a73d07ad9d772ec2e94a683}{Mesh\+Info}} \&M\+I2, std\+::string label1=\char`\"{}M\+I1\char`\"{}, std\+::string label2=\char`\"{}M\+I2\char`\"{})
+\item 
+void \mbox{\hyperlink{a02910_ac47d95246f25eb642753138e6e3bf184}{Compare\+Vert\+Arrays}} (const std\+::vector$<$ std\+::array$<$ float, 3 $>$$>$ \&vert\+\_\+array1, const std\+::vector$<$ std\+::array$<$ float, 3 $>$$>$ \&vert\+\_\+array2, std\+::string label1=\char`\"{}M\+I1\char`\"{}, std\+::string label2=\char`\"{}M\+I2\char`\"{})
+\item 
+bool \mbox{\hyperlink{a02910_ab87d0404ef81e1c14b48b7ae4e0f8503}{Compare\+Vert\+Arrays\+Unordered}} (const std\+::vector$<$ std\+::array$<$ float, 3 $>$$>$ \&vert\+\_\+array1, const std\+::vector$<$ std\+::array$<$ float, 3 $>$$>$ \&vert\+\_\+array2, std\+::string label1=\char`\"{}M\+I1\char`\"{}, std\+::string label2=\char`\"{}M\+I2\char`\"{})
+\item 
+\mbox{\hyperlink{a02910_a0f83117d0204d0aefca369c08e7e01ca}{T\+E\+ST}} (\+\_\+\+O\+B\+J\+Loader, Correctly\+Produces\+Output)
+\item 
+\mbox{\hyperlink{a02910_aab9a1717ae7e9d6eaf99277ec6e6f3c8}{T\+E\+ST}} (\+\_\+\+O\+B\+J\+Loader, Throw\+Missing\+File\+On\+Missing\+Mesh)
+\item 
+\mbox{\hyperlink{a02910_a52a8fec3b8c1215519dd30f578b0b0b5}{T\+E\+ST}} (\+\_\+\+O\+B\+J\+Loader, Vertex\+Count\+Matches\+Model)
+\item 
+\mbox{\hyperlink{a02910_a0e8920d078a12b29dac0f6eecf9b937b}{T\+E\+ST}} (\+\_\+\+O\+B\+J\+Loader, By\+\_\+\+File)
+\item 
+\mbox{\hyperlink{a02910_a5dab33347a93b646fc87c9085eeca078}{T\+E\+ST}} (\+\_\+\+O\+B\+J\+Loader, By\+\_\+\+Material)
+\item 
+\mbox{\hyperlink{a02910_a3345d9b6a5b0d418531f1ab8c214cddf}{T\+E\+ST}} (\+\_\+\+O\+B\+J\+Loader, Doubles)
+\item 
+\mbox{\hyperlink{a02910_a3896196daf54470d77928a1f3c8fc32d}{T\+E\+ST}} (\+\_\+\+Mesh\+Info, Manual\+Rotation\+Equals\+Preset)
+\item 
+\mbox{\hyperlink{a02910_ad67c10f4f716565196e7785a5e0f5a7e}{T\+E\+ST}} (\+\_\+\+Mesh\+Info, Rotation\+To\+Rhino\+Is\+Accurate)
+\item 
+\mbox{\hyperlink{a02910_af15cddcdbae65f2a7e44cd1435f0f99b}{T\+E\+ST}} (\+\_\+\+Mesh\+Info, Copy\+Constructor\+Works)
+\item 
+\mbox{\hyperlink{a02910_abeb2fc4aa6c5a59c39994119cdbff442}{T\+E\+ST}} (\+\_\+\+Mesh\+Info, Creation\+Is\+Deterministic)
+\item 
+\mbox{\hyperlink{a02910_a8dbb0a4e121470baca0f2a1de24212da}{T\+E\+ST}} (\+\_\+\+Mesh\+Info, Can\+Disable\+Rotation\+On\+Load)
+\item 
+\mbox{\hyperlink{a02910_af86eb42c05cc2ffed8001ae1edaab407}{T\+E\+ST}} (\+\_\+\+Mesh\+Info, Rotation\+Is\+Deterministic)
+\item 
+\mbox{\hyperlink{a02910_a87fb14b822e964fd57841137e68b9523}{T\+E\+ST}} (\+\_\+\+Mesh\+Info, Rotation\+Is\+Reversable)
+\item 
+\mbox{\hyperlink{a02910_a83aee8a18695a2716a1ed885dac089e5}{T\+E\+ST}} (\+\_\+\+Mesh\+Info, Can\+Reproduce\+Input\+Array)
+\item 
+\mbox{\hyperlink{a02910_a203f4e587894c4d5284af4d1b864dd7e}{T\+E\+ST}} (\+\_\+mesh\+Info, Load\+Mesh\+Objects\+One)
+\begin{DoxyCompactList}\small\item\em The following are tests for the code samples for \mbox{\hyperlink{a00403}{H\+F\+::\+Geometry}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02910_a6c5b99ca87a1f7273b5b5b5ac12ea5ca}{T\+E\+ST}} (\+\_\+mesh\+Info, Load\+Mesh\+Objects\+Many)
+\item 
+\mbox{\hyperlink{a02910_a35e9d56c1b97d219c191c382f12b4a47}{T\+E\+ST}} (\+\_\+mesh\+Info, Load\+Raw\+Vertices)
+\item 
+\mbox{\hyperlink{a02910_abdcd8217f01d523963a6d3ef556f3838}{T\+E\+ST}} (\+\_\+mesh\+Info, Constructor\+Default)
+\begin{DoxyCompactList}\small\item\em end \mbox{\hyperlink{a00125}{objloader.\+h}} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a02910_a93083249b4dbae11f14722a5ee27adcc}{T\+E\+ST}} (\+\_\+mesh\+Info, Constructor\+Param\+Coords\+As\+Array)
+\item 
+\mbox{\hyperlink{a02910_a5da846b084b27db220912a3221c7bce3}{T\+E\+ST}} (\+\_\+mesh\+Info, Constructor\+Param\+Coords\+As\+Float)
+\item 
+\mbox{\hyperlink{a02910_a9e14f5d5b279d7f955807dd2877f5f7b}{T\+E\+ST}} (\+\_\+mesh\+Info, Add\+Verts\+As\+Array)
+\item 
+\mbox{\hyperlink{a02910_aaefcf7cb4b6d495fbd3178bfd2fdbe1a}{T\+E\+ST}} (\+\_\+mesh\+Info, Add\+Verts\+As\+Float\+And\+Indices)
+\item 
+\mbox{\hyperlink{a02910_ad88d9345f01260c7a9a6403b7102a6c2}{T\+E\+ST}} (\+\_\+mesh\+Info, Num\+Verts)
+\item 
+\mbox{\hyperlink{a02910_a77e77de802f179a3aee0ee58818cdfda}{T\+E\+ST}} (\+\_\+mesh\+Info, Num\+Tris)
+\item 
+\mbox{\hyperlink{a02910_a1695649357185bb53ba65748e1094523}{T\+E\+ST}} (\+\_\+mesh\+Info, Convert\+To\+Rhino\+Coordinates)
+\item 
+\mbox{\hyperlink{a02910_acfecf27cee104681ed442d95acc4ca0b}{T\+E\+ST}} (\+\_\+mesh\+Info, Convert\+To\+O\+B\+J\+Coordinates)
+\item 
+\mbox{\hyperlink{a02910_af40574180a69ba912290aa9566b3090c}{T\+E\+ST}} (\+\_\+mesh\+Info, Perform\+Rotation)
+\item 
+\mbox{\hyperlink{a02910_a7c22c6d3f6b0328524577807811452e7}{T\+E\+ST}} (\+\_\+mesh\+Info, \mbox{\hyperlink{a00389_gaa07792b399e76e6101388bb6bbb96047}{Get\+Mesh\+ID}})
+\item 
+\mbox{\hyperlink{a02910_acb560018dc3169e2ab80715adf58a3d3}{T\+E\+ST}} (\+\_\+mesh\+Info, Get\+Raw\+Vertices)
+\item 
+\mbox{\hyperlink{a02910_ac91b4ffb6fb8aa9910ab60f94a6ea110}{T\+E\+ST}} (\+\_\+mesh\+Info, Get\+Raw\+Indices)
+\item 
+\mbox{\hyperlink{a02910_aa0c8426f669fd98106104be1d75d63b3}{T\+E\+ST}} (\+\_\+mesh\+Info, Get\+Verts\+As\+Arrays)
+\item 
+\mbox{\hyperlink{a02910_ad0e021e43bd688115929cbd1fb69f517}{T\+E\+ST}} (\+\_\+mesh\+Info, Set\+Mesh\+ID)
+\item 
+\mbox{\hyperlink{a02910_a3e1c9d4db9c384745b5977eb1528b840}{T\+E\+ST}} (\+\_\+mesh\+Info, Operator\+Equality)
+\item 
+\mbox{\hyperlink{a02910_aa9698b22dcb5e5eef6d1ad825c2a9dc2}{T\+E\+ST}} (\+\_\+mesh\+Info, Operator\+Index)
+\item 
+\mbox{\hyperlink{a02910_a02bfb4dc87059168c5e9dac193d6d00a}{T\+E\+ST}} (\+\_\+\+Mesh\+Info, Copy\+Operator)
+\item 
+\mbox{\hyperlink{a00414_a4cb7e9517019e6eab0c645212b2c9956}{C\+Interface\+Tests\+::\+T\+E\+ST}} (C\+\_\+\+O\+B\+J\+Loader, \mbox{\hyperlink{a00389_ga0805e80d13b29aeddc35f0bcf3f16a1a}{Load\+O\+BJ}})
+\item 
+\mbox{\hyperlink{a00414_ad9da02f524cb4bf5ae33c85e92c556da}{C\+Interface\+Tests\+::\+T\+E\+ST}} (C\+\_\+\+O\+B\+J\+Loader, \mbox{\hyperlink{a00389_ga6ac447e5805d3d7e65c9083ffa603cfe}{Store\+Mesh}})
+\item 
+\mbox{\hyperlink{a00414_a2e76d2977770184c7a4c2b8d426271aa}{C\+Interface\+Tests\+::\+T\+E\+ST}} (C\+\_\+\+O\+B\+J\+Loader, \mbox{\hyperlink{a00389_ga907c8e39b159c8bad22645448bc97f57}{Rotate\+Mesh}})
+\item 
+\mbox{\hyperlink{a00414_a8db34e9b419daf0d2517297e9bb1da66}{C\+Interface\+Tests\+::\+T\+E\+ST}} (C\+\_\+\+O\+B\+J\+Loader, \mbox{\hyperlink{a00389_ga89fc0803b894e7fa218ae271c46fb434}{Get\+Verts\+And\+Tris}})
+\item 
+\mbox{\hyperlink{a00414_ae9ded7a9ba09ff7bfdd1d975f3cb5384}{C\+Interface\+Tests\+::\+T\+E\+ST}} (C\+\_\+\+O\+B\+J\+Loader, \mbox{\hyperlink{a00389_gaa07792b399e76e6101388bb6bbb96047}{Get\+Mesh\+ID}})
+\item 
+\mbox{\hyperlink{a00414_a93f190a76d167ed66d3d99ae576f9b45}{C\+Interface\+Tests\+::\+T\+E\+ST}} (C\+\_\+\+O\+B\+J\+Loader, Get\+Name)
+\item 
+\mbox{\hyperlink{a02910_ac598fb0c1e93020feaaaed428bd221e7}{T\+E\+ST}} (Performance, O\+B\+J\+Loader)
+\begin{DoxyCompactList}\small\item\em Tests how quickly the raytracer can load O\+BJ files. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const std\+::string \mbox{\hyperlink{a02910_a7583675921683bdd2348df78c8f395dd}{obj\+\_\+directiory}} = \char`\"{}../../Models/\char`\"{}
+\item 
+int \mbox{\hyperlink{a00414_a1a60b24f27224f19d77eb86e391cd4f6}{C\+Interface\+Tests\+::mesh\+\_\+indices}} \mbox{[}$\,$\mbox{]} = \{ 0, 1, 2 \}
+\item 
+const int \mbox{\hyperlink{a00414_a582822db41c0ba73b290c4f33024f374}{C\+Interface\+Tests\+::mesh\+\_\+num\+\_\+indices}} = 3
+\item 
+float \mbox{\hyperlink{a00414_aa2ce54027b00ba2733331256a96d9ada}{C\+Interface\+Tests\+::mesh\+\_\+vertices}} \mbox{[}$\,$\mbox{]} = \{ 34.\+1, 63.\+9, 16.\+5, 23.\+5, 85.\+7, 45.\+2, 12.\+0, 24.\+6, 99.\+4 \}
+\item 
+const int \mbox{\hyperlink{a00414_a893e1cdbd9db8bbb96f79bcfb7618547}{C\+Interface\+Tests\+::mesh\+\_\+num\+\_\+vertices}} = 9
+\item 
+std\+::string \mbox{\hyperlink{a00414_a4575c4da91a523571de9a83c533ffb36}{C\+Interface\+Tests\+::mesh\+\_\+name}} = \char`\"{}This mesh\char`\"{}
+\item 
+const int \mbox{\hyperlink{a00414_a7fd861dfb2d27b86e848287863ceffc3}{C\+Interface\+Tests\+::mesh\+\_\+id}} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{a02910_aa705e8b0a656accbeec8a442e64351cb}\label{a02910_aa705e8b0a656accbeec8a442e64351cb}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!eigen\_plain\_assert@{eigen\_plain\_assert}}
+\index{eigen\_plain\_assert@{eigen\_plain\_assert}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{eigen\_plain\_assert}{eigen\_plain\_assert}}
+{\footnotesize\ttfamily \#define eigen\+\_\+plain\+\_\+assert}
+
+
+
+Definition at line 9 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{a02910_acea841c68a73d07ad9d772ec2e94a683}\label{a02910_acea841c68a73d07ad9d772ec2e94a683}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!MeshInfo@{MeshInfo}}
+\index{MeshInfo@{MeshInfo}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{MeshInfo}{MeshInfo}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{a02910_acea841c68a73d07ad9d772ec2e94a683}{Mesh\+Info}} =  \mbox{\hyperlink{a01297}{H\+F\+::\+Geometry\+::\+Mesh\+Info}}$<$float$>$}
+
+
+
+Definition at line 16 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{a02910_a37c22abaa96da9c1dd6be57a5b22c84b}\label{a02910_a37c22abaa96da9c1dd6be57a5b22c84b}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!arrayDist@{arrayDist}}
+\index{arrayDist@{arrayDist}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{arrayDist()}{arrayDist()}}
+{\footnotesize\ttfamily float array\+Dist (\begin{DoxyParamCaption}\item[{const std\+::array$<$ float, 3 $>$}]{from,  }\item[{const std\+::array$<$ float, 3 $>$ \&}]{to }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 23 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+Referenced by Compare\+Mesh\+Info(), Compare\+Vert\+Arrays(), and Compare\+Vert\+Arrays\+Unordered().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02910_a37c22abaa96da9c1dd6be57a5b22c84b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02910_a58a819aea1e26f09c69d427711b9712b}\label{a02910_a58a819aea1e26f09c69d427711b9712b}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!CompareMeshInfo@{CompareMeshInfo}}
+\index{CompareMeshInfo@{CompareMeshInfo}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{CompareMeshInfo()}{CompareMeshInfo()}}
+{\footnotesize\ttfamily void Compare\+Mesh\+Info (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{a02910_acea841c68a73d07ad9d772ec2e94a683}{Mesh\+Info}} \&}]{M\+I1,  }\item[{const \mbox{\hyperlink{a02910_acea841c68a73d07ad9d772ec2e94a683}{Mesh\+Info}} \&}]{M\+I2,  }\item[{std\+::string}]{label1 = {\ttfamily \char`\"{}MI1\char`\"{}},  }\item[{std\+::string}]{label2 = {\ttfamily \char`\"{}MI2\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 27 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+References array\+Dist(), H\+F\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Num\+Verts(), and Print\+Array().
+
+
+
+Referenced by T\+E\+S\+T().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02910_a58a819aea1e26f09c69d427711b9712b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=263pt]{a02910_a58a819aea1e26f09c69d427711b9712b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02910_ac47d95246f25eb642753138e6e3bf184}\label{a02910_ac47d95246f25eb642753138e6e3bf184}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!CompareVertArrays@{CompareVertArrays}}
+\index{CompareVertArrays@{CompareVertArrays}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{CompareVertArrays()}{CompareVertArrays()}}
+{\footnotesize\ttfamily void Compare\+Vert\+Arrays (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::array$<$ float, 3 $>$$>$ \&}]{vert\+\_\+array1,  }\item[{const std\+::vector$<$ std\+::array$<$ float, 3 $>$$>$ \&}]{vert\+\_\+array2,  }\item[{std\+::string}]{label1 = {\ttfamily \char`\"{}MI1\char`\"{}},  }\item[{std\+::string}]{label2 = {\ttfamily \char`\"{}MI2\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 52 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+References array\+Dist(), and Print\+Array().
+
+
+
+Referenced by T\+E\+S\+T().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=293pt]{a02910_ac47d95246f25eb642753138e6e3bf184_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=269pt]{a02910_ac47d95246f25eb642753138e6e3bf184_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02910_ab87d0404ef81e1c14b48b7ae4e0f8503}\label{a02910_ab87d0404ef81e1c14b48b7ae4e0f8503}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!CompareVertArraysUnordered@{CompareVertArraysUnordered}}
+\index{CompareVertArraysUnordered@{CompareVertArraysUnordered}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{CompareVertArraysUnordered()}{CompareVertArraysUnordered()}}
+{\footnotesize\ttfamily bool Compare\+Vert\+Arrays\+Unordered (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::array$<$ float, 3 $>$$>$ \&}]{vert\+\_\+array1,  }\item[{const std\+::vector$<$ std\+::array$<$ float, 3 $>$$>$ \&}]{vert\+\_\+array2,  }\item[{std\+::string}]{label1 = {\ttfamily \char`\"{}MI1\char`\"{}},  }\item[{std\+::string}]{label2 = {\ttfamily \char`\"{}MI2\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Definition at line 79 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+References array\+Dist().
+
+
+
+Referenced by T\+E\+S\+T().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=341pt]{a02910_ab87d0404ef81e1c14b48b7ae4e0f8503_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=320pt]{a02910_ab87d0404ef81e1c14b48b7ae4e0f8503_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02910_a6c2c9a67b8a5a4bb71137eab10a76370}\label{a02910_a6c2c9a67b8a5a4bb71137eab10a76370}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!PrintArray@{PrintArray}}
+\index{PrintArray@{PrintArray}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{PrintArray()}{PrintArray()}}
+{\footnotesize\ttfamily void Print\+Array (\begin{DoxyParamCaption}\item[{std\+::array$<$ float, 3 $>$}]{in\+\_\+array }\end{DoxyParamCaption})}
+
+
+
+Definition at line 18 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+Referenced by Compare\+Mesh\+Info(), and Compare\+Vert\+Arrays().
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02910_a6c2c9a67b8a5a4bb71137eab10a76370_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02910_a9e14f5d5b279d7f955807dd2877f5f7b}\label{a02910_a9e14f5d5b279d7f955807dd2877f5f7b}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [1/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+mesh\+Info}]{,  }\item[{Add\+Verts\+As\+Array}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 376 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Add\+Verts(), H\+F\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Get\+Indexed\+Vertices(), H\+F\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Get\+Mesh\+I\+D(), and H\+F\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Get\+Unindexed\+Vertices().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=291pt]{a02910_a9e14f5d5b279d7f955807dd2877f5f7b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02910_aaefcf7cb4b6d495fbd3178bfd2fdbe1a}\label{a02910_aaefcf7cb4b6d495fbd3178bfd2fdbe1a}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [2/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+mesh\+Info}]{,  }\item[{Add\+Verts\+As\+Float\+And\+Indices}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 402 of file O\+B\+J\+Loader.\+cpp.
+
+\mbox{\Hypertarget{a02910_a8dbb0a4e121470baca0f2a1de24212da}\label{a02910_a8dbb0a4e121470baca0f2a1de24212da}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [3/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Mesh\+Info}]{,  }\item[{Can\+Disable\+Rotation\+On\+Load}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 220 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), and H\+F\+::\+Geometry\+::\+O\+N\+L\+Y\+\_\+\+F\+I\+LE.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02910_a8dbb0a4e121470baca0f2a1de24212da_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02910_a83aee8a18695a2716a1ed885dac089e5}\label{a02910_a83aee8a18695a2716a1ed885dac089e5}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [4/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Mesh\+Info}]{,  }\item[{Can\+Reproduce\+Input\+Array}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 249 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+References Compare\+Vert\+Arrays(), H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), H\+F\+::\+Geometry\+::\+Load\+Raw\+Vertices(), and H\+F\+::\+Geometry\+::\+O\+N\+L\+Y\+\_\+\+F\+I\+LE.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02910_a83aee8a18695a2716a1ed885dac089e5_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02910_abdcd8217f01d523963a6d3ef556f3838}\label{a02910_abdcd8217f01d523963a6d3ef556f3838}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [5/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+mesh\+Info}]{,  }\item[{Constructor\+Default}]{ }\end{DoxyParamCaption})}
+
+
+
+end \mbox{\hyperlink{a00125}{objloader.\+h}} 
+
+
+
+Definition at line 320 of file O\+B\+J\+Loader.\+cpp.
+
+\mbox{\Hypertarget{a02910_a93083249b4dbae11f14722a5ee27adcc}\label{a02910_a93083249b4dbae11f14722a5ee27adcc}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [6/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+mesh\+Info}]{,  }\item[{Constructor\+Param\+Coords\+As\+Array}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 326 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Get\+Mesh\+I\+D(), and H\+F\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Get\+Unindexed\+Vertices().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=291pt]{a02910_a93083249b4dbae11f14722a5ee27adcc_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02910_a5da846b084b27db220912a3221c7bce3}\label{a02910_a5da846b084b27db220912a3221c7bce3}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [7/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+mesh\+Info}]{,  }\item[{Constructor\+Param\+Coords\+As\+Float}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 350 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Get\+Mesh\+I\+D(), and H\+F\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Get\+Unindexed\+Vertices().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=291pt]{a02910_a5da846b084b27db220912a3221c7bce3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02910_acfecf27cee104681ed442d95acc4ca0b}\label{a02910_acfecf27cee104681ed442d95acc4ca0b}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [8/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+mesh\+Info}]{,  }\item[{Convert\+To\+O\+B\+J\+Coordinates}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 500 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Convert\+To\+O\+B\+J\+Coordinates(), H\+F\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Get\+Mesh\+I\+D(), and H\+F\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Get\+Unindexed\+Vertices().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=304pt]{a02910_acfecf27cee104681ed442d95acc4ca0b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02910_a1695649357185bb53ba65748e1094523}\label{a02910_a1695649357185bb53ba65748e1094523}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [9/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+mesh\+Info}]{,  }\item[{Convert\+To\+Rhino\+Coordinates}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 474 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Convert\+To\+Rhino\+Coordinates(), H\+F\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Get\+Mesh\+I\+D(), and H\+F\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Get\+Unindexed\+Vertices().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=315pt]{a02910_a1695649357185bb53ba65748e1094523_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02910_af15cddcdbae65f2a7e44cd1435f0f99b}\label{a02910_af15cddcdbae65f2a7e44cd1435f0f99b}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [10/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Mesh\+Info}]{,  }\item[{Copy\+Constructor\+Works}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 198 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+References Compare\+Mesh\+Info(), H\+F\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Convert\+To\+Rhino\+Coordinates(), H\+F\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Get\+Mesh\+I\+D(), H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), and H\+F\+::\+Geometry\+::\+O\+N\+L\+Y\+\_\+\+F\+I\+LE.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02910_af15cddcdbae65f2a7e44cd1435f0f99b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02910_a02bfb4dc87059168c5e9dac193d6d00a}\label{a02910_a02bfb4dc87059168c5e9dac193d6d00a}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [11/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Mesh\+Info}]{,  }\item[{Copy\+Operator}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 767 of file O\+B\+J\+Loader.\+cpp.
+
+\mbox{\Hypertarget{a02910_abeb2fc4aa6c5a59c39994119cdbff442}\label{a02910_abeb2fc4aa6c5a59c39994119cdbff442}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [12/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Mesh\+Info}]{,  }\item[{Creation\+Is\+Deterministic}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 212 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+References Compare\+Mesh\+Info(), H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), and H\+F\+::\+Geometry\+::\+O\+N\+L\+Y\+\_\+\+F\+I\+LE.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02910_abeb2fc4aa6c5a59c39994119cdbff442_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02910_a7c22c6d3f6b0328524577807811452e7}\label{a02910_a7c22c6d3f6b0328524577807811452e7}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [13/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+mesh\+Info}]{,  }\item[{\mbox{\hyperlink{a00389_gaa07792b399e76e6101388bb6bbb96047}{Get\+Mesh\+ID}}}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 552 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Get\+Mesh\+I\+D(), and C\+Interface\+Tests\+::mesh\+\_\+id.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=291pt]{a02910_a7c22c6d3f6b0328524577807811452e7_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02910_ac91b4ffb6fb8aa9910ab60f94a6ea110}\label{a02910_ac91b4ffb6fb8aa9910ab60f94a6ea110}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [14/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+mesh\+Info}]{,  }\item[{Get\+Raw\+Indices}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 618 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::get\+Raw\+Indices().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=291pt]{a02910_ac91b4ffb6fb8aa9910ab60f94a6ea110_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02910_acb560018dc3169e2ab80715adf58a3d3}\label{a02910_acb560018dc3169e2ab80715adf58a3d3}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [15/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+mesh\+Info}]{,  }\item[{Get\+Raw\+Vertices}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 573 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Get\+Indexed\+Vertices(), and H\+F\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Num\+Tris().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=291pt]{a02910_acb560018dc3169e2ab80715adf58a3d3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02910_aa0c8426f669fd98106104be1d75d63b3}\label{a02910_aa0c8426f669fd98106104be1d75d63b3}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [16/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+mesh\+Info}]{,  }\item[{Get\+Verts\+As\+Arrays}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 654 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Get\+Mesh\+I\+D(), and H\+F\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Get\+Unindexed\+Vertices().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=291pt]{a02910_aa0c8426f669fd98106104be1d75d63b3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02910_a6c5b99ca87a1f7273b5b5b5ac12ea5ca}\label{a02910_a6c5b99ca87a1f7273b5b5b5ac12ea5ca}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [17/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+mesh\+Info}]{,  }\item[{Load\+Mesh\+Objects\+Many}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 277 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), and H\+F\+::\+Geometry\+::\+O\+N\+L\+Y\+\_\+\+F\+I\+LE.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02910_a6c5b99ca87a1f7273b5b5b5ac12ea5ca_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02910_a203f4e587894c4d5284af4d1b864dd7e}\label{a02910_a203f4e587894c4d5284af4d1b864dd7e}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [18/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+mesh\+Info}]{,  }\item[{Load\+Mesh\+Objects\+One}]{ }\end{DoxyParamCaption})}
+
+
+
+The following are tests for the code samples for \mbox{\hyperlink{a00403}{H\+F\+::\+Geometry}}. 
+
+start \mbox{\hyperlink{a00125}{objloader.\+h}} 
+
+Definition at line 263 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), and H\+F\+::\+Geometry\+::\+O\+N\+L\+Y\+\_\+\+F\+I\+LE.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02910_a203f4e587894c4d5284af4d1b864dd7e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02910_a35e9d56c1b97d219c191c382f12b4a47}\label{a02910_a35e9d56c1b97d219c191c382f12b4a47}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [19/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+mesh\+Info}]{,  }\item[{Load\+Raw\+Vertices}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 302 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Load\+Raw\+Vertices().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=330pt]{a02910_a35e9d56c1b97d219c191c382f12b4a47_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02910_a3896196daf54470d77928a1f3c8fc32d}\label{a02910_a3896196daf54470d77928a1f3c8fc32d}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [20/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Mesh\+Info}]{,  }\item[{Manual\+Rotation\+Equals\+Preset}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 177 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+References Compare\+Mesh\+Info(), H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), and H\+F\+::\+Geometry\+::\+O\+N\+L\+Y\+\_\+\+F\+I\+LE.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02910_a3896196daf54470d77928a1f3c8fc32d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02910_a77e77de802f179a3aee0ee58818cdfda}\label{a02910_a77e77de802f179a3aee0ee58818cdfda}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [21/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+mesh\+Info}]{,  }\item[{Num\+Tris}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 448 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Num\+Tris().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=291pt]{a02910_a77e77de802f179a3aee0ee58818cdfda_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02910_ad88d9345f01260c7a9a6403b7102a6c2}\label{a02910_ad88d9345f01260c7a9a6403b7102a6c2}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [22/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+mesh\+Info}]{,  }\item[{Num\+Verts}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 424 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Num\+Verts().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=291pt]{a02910_ad88d9345f01260c7a9a6403b7102a6c2_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02910_a3e1c9d4db9c384745b5977eb1528b840}\label{a02910_a3e1c9d4db9c384745b5977eb1528b840}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [23/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+mesh\+Info}]{,  }\item[{Operator\+Equality}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 706 of file O\+B\+J\+Loader.\+cpp.
+
+\mbox{\Hypertarget{a02910_aa9698b22dcb5e5eef6d1ad825c2a9dc2}\label{a02910_aa9698b22dcb5e5eef6d1ad825c2a9dc2}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [24/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+mesh\+Info}]{,  }\item[{Operator\+Index}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 741 of file O\+B\+J\+Loader.\+cpp.
+
+\mbox{\Hypertarget{a02910_af40574180a69ba912290aa9566b3090c}\label{a02910_af40574180a69ba912290aa9566b3090c}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [25/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+mesh\+Info}]{,  }\item[{Perform\+Rotation}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 526 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Get\+Mesh\+I\+D(), H\+F\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Get\+Unindexed\+Vertices(), and H\+F\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Perform\+Rotation().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=291pt]{a02910_af40574180a69ba912290aa9566b3090c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02910_af86eb42c05cc2ffed8001ae1edaab407}\label{a02910_af86eb42c05cc2ffed8001ae1edaab407}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [26/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Mesh\+Info}]{,  }\item[{Rotation\+Is\+Deterministic}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 227 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+References Compare\+Mesh\+Info(), H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), and H\+F\+::\+Geometry\+::\+O\+N\+L\+Y\+\_\+\+F\+I\+LE.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02910_af86eb42c05cc2ffed8001ae1edaab407_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02910_a87fb14b822e964fd57841137e68b9523}\label{a02910_a87fb14b822e964fd57841137e68b9523}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [27/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Mesh\+Info}]{,  }\item[{Rotation\+Is\+Reversable}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 237 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+References Compare\+Mesh\+Info(), H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), and H\+F\+::\+Geometry\+::\+O\+N\+L\+Y\+\_\+\+F\+I\+LE.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02910_a87fb14b822e964fd57841137e68b9523_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02910_ad67c10f4f716565196e7785a5e0f5a7e}\label{a02910_ad67c10f4f716565196e7785a5e0f5a7e}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [28/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+Mesh\+Info}]{,  }\item[{Rotation\+To\+Rhino\+Is\+Accurate}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 188 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+References Compare\+Mesh\+Info(), H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), and H\+F\+::\+Geometry\+::\+O\+N\+L\+Y\+\_\+\+F\+I\+LE.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02910_ad67c10f4f716565196e7785a5e0f5a7e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02910_ad0e021e43bd688115929cbd1fb69f517}\label{a02910_ad0e021e43bd688115929cbd1fb69f517}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [29/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+mesh\+Info}]{,  }\item[{Set\+Mesh\+ID}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 680 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Get\+Mesh\+I\+D(), and H\+F\+::\+Geometry\+::\+Mesh\+Info$<$ numeric\+\_\+type $>$\+::\+Set\+Mesh\+I\+D().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=291pt]{a02910_ad0e021e43bd688115929cbd1fb69f517_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02910_a0e8920d078a12b29dac0f6eecf9b937b}\label{a02910_a0e8920d078a12b29dac0f6eecf9b937b}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [30/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+O\+B\+J\+Loader}]{,  }\item[{By\+\_\+\+File}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 154 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+References Get\+Mesh\+I\+D(), H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), and H\+F\+::\+Geometry\+::\+O\+N\+L\+Y\+\_\+\+F\+I\+LE.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02910_a0e8920d078a12b29dac0f6eecf9b937b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02910_a5dab33347a93b646fc87c9085eeca078}\label{a02910_a5dab33347a93b646fc87c9085eeca078}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [31/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+O\+B\+J\+Loader}]{,  }\item[{By\+\_\+\+Material}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 163 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+References Get\+Mesh\+I\+D(), H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(), and H\+F\+::\+Geometry\+::\+O\+N\+L\+Y\+\_\+\+F\+I\+LE.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02910_a5dab33347a93b646fc87c9085eeca078_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02910_a0f83117d0204d0aefca369c08e7e01ca}\label{a02910_a0f83117d0204d0aefca369c08e7e01ca}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [32/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+O\+B\+J\+Loader}]{,  }\item[{Correctly\+Produces\+Output}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 112 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+References Compare\+Vert\+Arrays\+Unordered(), and H\+F\+::\+Geometry\+::\+Load\+Raw\+Vertices().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02910_a0f83117d0204d0aefca369c08e7e01ca_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02910_a3345d9b6a5b0d418531f1ab8c214cddf}\label{a02910_a3345d9b6a5b0d418531f1ab8c214cddf}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [33/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+O\+B\+J\+Loader}]{,  }\item[{Doubles}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 172 of file O\+B\+J\+Loader.\+cpp.
+
+\mbox{\Hypertarget{a02910_aab9a1717ae7e9d6eaf99277ec6e6f3c8}\label{a02910_aab9a1717ae7e9d6eaf99277ec6e6f3c8}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [34/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+O\+B\+J\+Loader}]{,  }\item[{Throw\+Missing\+File\+On\+Missing\+Mesh}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 142 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+B\+Y\+\_\+\+G\+R\+O\+UP, and H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02910_aab9a1717ae7e9d6eaf99277ec6e6f3c8_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02910_a52a8fec3b8c1215519dd30f578b0b0b5}\label{a02910_a52a8fec3b8c1215519dd30f578b0b0b5}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [35/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{\+\_\+\+O\+B\+J\+Loader}]{,  }\item[{Vertex\+Count\+Matches\+Model}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 147 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Load\+Raw\+Vertices().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=330pt]{a02910_a52a8fec3b8c1215519dd30f578b0b0b5_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a02910_ac598fb0c1e93020feaaaed428bd221e7}\label{a02910_ac598fb0c1e93020feaaaed428bd221e7}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!TEST@{TEST}}
+\index{TEST@{TEST}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{TEST()}{TEST()}\hspace{0.1cm}{\footnotesize\ttfamily [36/36]}}
+{\footnotesize\ttfamily T\+E\+ST (\begin{DoxyParamCaption}\item[{Performance}]{,  }\item[{O\+B\+J\+Loader}]{ }\end{DoxyParamCaption})}
+
+
+
+Tests how quickly the raytracer can load O\+BJ files. 
+
+\begin{DoxyVerb}TEST(_OBJLoaderCInterface, DestroyMeshInfo) {
+\end{DoxyVerb}
+ Requires \mbox{\hyperlink{a02898_aa67ab520a76a8af2f5059130268deaba}{include}} \char`\"{}objloader\+\_\+\+C.\+h\char`\"{}, \mbox{\hyperlink{a02898_aa67ab520a76a8af2f5059130268deaba}{include}} \char`\"{}meshinfo.\+h\char`\"{}
+
+Prepare parameters for Load\+O\+BJ
+
+relative path begins where E\+XE file is located if file\+\_\+path is not a path to a valid O\+BJ file, \mbox{\hyperlink{a01265}{H\+F\+::\+Exceptions\+::\+File\+Not\+Found}} is thrown std\+::string file\+\_\+path = \char`\"{}big\+\_\+teapot.\+obj\char`\"{};
+
+const int obj\+\_\+length = file\+\_\+path.\+size();
+
+const float x\+\_\+rot = 30; const float y\+\_\+rot = 20; const float z\+\_\+rot = 55;
+
+std\+::vector$<$\+Mesh\+Info$>$$\ast$ info = nullptr;
+
+Call Load\+O\+BJ if (Load\+O\+BJ(file\+\_\+path.\+c\+\_\+str(), obj\+\_\+length, x\+\_\+rot, y\+\_\+rot, z\+\_\+rot, \&info)) \{ std\+::cout $<$$<$ \char`\"{}\+Load\+O\+B\+J successful\char`\"{} $<$$<$ std\+::endl; \} else \{ std\+::cout $<$$<$ \char`\"{}\+Load\+O\+B\+J unsuccessful\char`\"{} $<$$<$ std\+::endl; \}
+
+Release memory for info once finished with it Destroy\+Mesh\+Info(info); \}
+
+T\+E\+S\+T(\+\_\+\+Geometry, Get\+Test\+O\+B\+J\+Path) \{ std\+::vector$<$std\+::string$>$ strings\+\_\+to\+\_\+test = \{ \char`\"{}teapot\char`\"{}, \char`\"{}plane\char`\"{}, \char`\"{}big teapot\char`\"{}, \char`\"{}energy blob\char`\"{}, \char`\"{}sibenik\char`\"{} \};
+
+Try to load these names. If a name isn\textquotesingle{}t there is will throw. for (const auto\& name \+: strings\+\_\+to\+\_\+test) H\+F\+::\+Geometry\+::\+Load\+Mesh\+Objects(\+H\+F\+::\+Geometry\+::\+Get\+Test\+O\+B\+J\+Path(name));
+
+Try to load a name that doesn\textquotesingle{}t exist. This should throw. try \{ \mbox{\hyperlink{a00403_adec2459f5c4ee10fd9d2154114d751de}{H\+F\+::\+Geometry\+::\+Get\+Test\+O\+B\+J\+Path}}(\char`\"{}meshthatdoesntexist\char`\"{});
+
+And put an instant fail here in case we actually reach this A\+S\+S\+E\+R\+T\+\_\+\+T\+R\+U\+E(false); \} catch (std\+::out\+\_\+of\+\_\+range\& e) \{
+
+\} \} \} 
+
+Definition at line 998 of file O\+B\+J\+Loader.\+cpp.
+
+
+
+References H\+F\+::\+Geometry\+::\+Get\+Test\+O\+B\+J\+Path(), H\+F\+::\+Geometry\+::\+Load\+Raw\+Vertices(), and Print\+Trials().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a02910_ac598fb0c1e93020feaaaed428bd221e7_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{a02910_a7583675921683bdd2348df78c8f395dd}\label{a02910_a7583675921683bdd2348df78c8f395dd}} 
+\index{OBJLoader.cpp@{OBJLoader.cpp}!obj\_directiory@{obj\_directiory}}
+\index{obj\_directiory@{obj\_directiory}!OBJLoader.cpp@{OBJLoader.cpp}}
+\doxysubsubsection{\texorpdfstring{obj\_directiory}{obj\_directiory}}
+{\footnotesize\ttfamily const std\+::string obj\+\_\+directiory = \char`\"{}../../Models/\char`\"{}}
+
+
+
+Definition at line 14 of file O\+B\+J\+Loader.\+cpp.
+
