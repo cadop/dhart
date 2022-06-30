@@ -39,9 +39,12 @@ jobs:
     - name: cmake build
       run: |
         ls
-        cmake --build dhart/../src
+        cd src
+        cmake --build ../src
     - name: cmake Install
       run: |
+        ls
+        cd src
         cmake --install .
     - name: Install package
       run: |
