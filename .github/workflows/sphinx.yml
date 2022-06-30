@@ -51,7 +51,7 @@ jobs:
         ls
         cd build/Python
         ls
-        pip install .
+        pip install -e . 
     # - name: Install Sphinx Latex
     #   run: |
         # sudo apt-get update -y && sudo apt-get install -y latexmk texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended
@@ -74,17 +74,15 @@ jobs:
         git config --local user.name "github-actions[bot]"
 
         mkdir html_build
-        git worktree add -B docs html_build origin/docs
 
-        xcopy /e /s .\docs\ .\html_build\ 
-        ls
+        git worktree add -B ghpages html_build origin/ghpages
+        robocopy .\docs\ .\html_build\ /MIR
 
         cd html_build
-        ls 
-        cd docs
-        ls
 
         git add . 
-        git commit -m "ghpages for python docs"
+        git commit -m "ghpages"
         git push 
+            
+
             

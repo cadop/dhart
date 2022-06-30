@@ -8,9 +8,8 @@ on:
 jobs:
   build:
 
-
-    runs-on: ubuntu-latest
-    # runs-on: windows-2019
+    # runs-on: ubuntu-latest
+    runs-on: windows-2019
     strategy:
       matrix:
         python-version: [3.8]
@@ -38,17 +37,16 @@ jobs:
 
         mkdir html_build
 
-        # git worktree add -B ghpages html_build origin/ghpages
-        # robocopy .\docs\ .\html_build\ /MIR
-
         git worktree add -B ghpages html_build origin/ghpages
-        cp -a docs/. html_build/
+        robocopy .\docs\ .\html_build\ /MIR
+
+        # git worktree add -B ghpages html_build origin/ghpages
+        # cp -a docs/. html_build/
 
         cd html_build
-        ls 
-        git worktree list
 
         git add . 
         git commit -m "ghpages"
         git push 
             
+
