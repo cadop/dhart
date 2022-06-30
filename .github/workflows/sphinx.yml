@@ -31,6 +31,12 @@ jobs:
     - name: Install documentation dependencies
       run: |
         pip install sphinx numpydoc matplotlib     
+
+    - name: Install windows documentation requirements
+      run: |
+        choco install doxygen.install -y
+        choco install graphviz -y
+    
     - name: Setup cmake
       run: |
         ls 
@@ -66,6 +72,11 @@ jobs:
         ls
         cd html
         ls
+
+    - name: Build documentation with doxygen
+      run: |
+        cd src
+        doxygen .\Doxyfile
 
 
     - name: Auto-deploy doc changes
