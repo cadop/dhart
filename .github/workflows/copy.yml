@@ -38,7 +38,7 @@ jobs:
         mkdir html_build
 
         git worktree add -B ghpages html_build origin/ghpages
-        robocopy .\docs\ .\html_build\ /MIR
+        robocopy .\docs\ .\html_build\ /e
 
         # git worktree add -B ghpages html_build origin/ghpages
         # cp -a docs/. html_build/
