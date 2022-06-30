@@ -1,4 +1,4 @@
-name: Sphinx Documentation
+name: Doxygen Documentation
 
 on:
   push:
@@ -33,7 +33,7 @@ jobs:
     - name: Build documentation with doxygen
       run: |
         cd src
-        doxygen .\Doxyfile
+        doxygen Doxyfile
 
     - name: Auto-deploy doc changes
       run : |
