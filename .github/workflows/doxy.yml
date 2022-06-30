@@ -30,16 +30,16 @@ jobs:
         sudo apt-get install -y doxygen
         sudo apt-get install -y graphviz
     
-    - name: Build documentation with doxygen
+    - name: Build c++ documentation with doxygen
       run: |
         cd src
         doxygen Doxyfile
         ls 
         
-    - name: Build documentation with doxygen
+    - name: Build c# documentation with doxygen
       run: |
-        cd docs
-        ls 
+        doxygen Doxyfile_Csharp
+        doxygen Doxyfile_Public_CSharp
 
     - name: Auto-deploy doc changes
       run : |
