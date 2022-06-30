@@ -34,7 +34,7 @@ jobs:
 
     - name: Install windows documentation requirements
       run: |
-        choco install doxygen.install -y
+        choco install doxygen.portable -y
         choco install graphviz -y
     
     - name: Setup cmake
@@ -76,7 +76,7 @@ jobs:
     - name: Build documentation with doxygen
       run: |
         cd src
-        doxygen .\Doxyfile
+        doxygen.exe .\Doxyfile
 
 
     - name: Auto-deploy doc changes
