@@ -34,7 +34,7 @@ jobs:
 
     - name: Install windows documentation requirements
       run: |
-        winget install -e --id DimitriVanHeesch.Doxygen
+        Install-Package Doxygen -Version 1.8.14 -y
         choco install graphviz -y
     
     - name: Setup cmake
@@ -76,7 +76,7 @@ jobs:
     - name: Build documentation with doxygen
       run: |
         cd src
-        doxygen.exe .\Doxyfile
+        doxygen .\Doxyfile
 
 
     - name: Auto-deploy doc changes
