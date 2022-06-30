@@ -56,6 +56,9 @@ Installing
 
 - Requires Windows 10
 
+
+We supply dll's to try and make the installation and linking process as easy as possible. 
+
 Depending on your goal, you may want to download the Python or the C# release. Each one has a different process. 
 
 When visiting the documentation page, click on Python to follow installation guide for running in a python environment or as a Python Grasshopper node for Rhino.  Click on the C# documentation for a guide on how to use the project with Unity. 
