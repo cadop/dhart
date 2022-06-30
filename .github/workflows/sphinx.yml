@@ -50,7 +50,7 @@ jobs:
       run: |
         ls
         cd build/Python
-        pip install -e .
+        pip install .
     # - name: Install Sphinx Latex
     #   run: |
         # sudo apt-get update -y && sudo apt-get install -y latexmk texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended
@@ -61,6 +61,7 @@ jobs:
         ./make.bat clean
         ./make.bat html
         # make latexpdf
+        cd build
         ls
 
     - name: Auto-deploy doc changes
@@ -77,7 +78,7 @@ jobs:
 
         cd html_build
         ls 
-        
+
         git add . 
         git commit -m "ghpages for python docs"
         git push 
