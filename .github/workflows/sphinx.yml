@@ -9,7 +9,7 @@ jobs:
   build:
 
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     strategy:
       matrix:
         python-version: [3.8]
@@ -32,8 +32,20 @@ jobs:
     - name: Install documentation dependencies
       run: |
         pip install sphinx numpydoc matplotlib     
+    - name: Setup cmake
+      run: |
+        ls 
+        cd src
+        cmake ./src/ -G"Visual Studio 16 2019" -DCMAKE_GENERATOR_PLATFORM="x64"  -DCMAKE_CONFIGURATION_TYPES="Debug" -DCMAKE_INSTALL_PREFIX=".\..\build\Python" -DHumanFactors_Config="All" -DHumanFactors_EnableTests="False" -DCMAKE_BUILD_TYPE="Debug" -DHumanFactors_EnablePython="True" -DHumanFactors_EnableCSharp="False" -DINSTALL_GTEST="False"  ".\" 2>&1 
+    - name: cmake build
+      run: |
+        cmake --build ../src
+    - name: cmake Install
+      run: |
+        cmake --install .
     - name: Install package
       run: |
+        cd ../build/Python
         pip install -e .
     - name: Install Sphinx Latex
       run: |
