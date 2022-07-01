@@ -24,7 +24,7 @@ HFPython = getDLLHandle()
 
 
 def DeleteFloatArrayC(pointer : c_void_p):
-    HPython.DeleteFloatArray(pointer)
+    HFPython.DeleteFloatArray(pointer)
 
 
 def DeleteIntArrayC(pointer : c_void_p):
