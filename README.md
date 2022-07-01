@@ -150,7 +150,13 @@ and hit ENTER. The Analysis repository will then be cloned to your local machine
 
 Currently we directly call the configuration arguments when using cmake. 
 
+Python Debug
+
 1. `cmake ./src/ -G"Visual Studio 16 2019" -DCMAKE_GENERATOR_PLATFORM="x64"  -DCMAKE_CONFIGURATION_TYPES="Debug" -DCMAKE_INSTALL_PREFIX=".\..\build\Python" -DHumanFactors_Config="All" -DHumanFactors_EnableTests="False" -DCMAKE_BUILD_TYPE="Debug" -DHumanFactors_EnablePython="True" -DHumanFactors_EnableCSharp="False" -DINSTALL_GTEST="False"  ".\" 2>&1` 
+
+Python Release
+
+1. `cmake ./src/  -G"Visual Studio 16 2019"  -DCMAKE_GENERATOR_PLATFORM="x64"  -DCMAKE_CONFIGURATION_TYPES="Release" -DCMAKE_INSTALL_PREFIX=".\..\build\Python" -DHumanFactors_Config="All" -DHumanFactors_EnableTests="False" -DCMAKE_BUILD_TYPE="Release" -DHumanFactors_EnablePython="True" -DHumanFactors_EnableCSharp="False" -DINSTALL_GTEST="False"  ".\" 2>&1`
 
 1. `cmake --build ../src`
 
