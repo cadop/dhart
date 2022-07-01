@@ -9,6 +9,6 @@ Spatial View Analysis
 
 .. seealso::
     These examples use methods found in the following modules:
-    :py:mod:`humanfactorspy.graphgenerator`, 
-    :py:mod:`humanfactorspy.geometry`, 
-    :py:mod:`humanfactorspy.raytracer`
+    :py:mod:`dhart.graphgenerator`, 
+    :py:mod:`dhart.geometry`, 
+    :py:mod:`dhart.raytracer`

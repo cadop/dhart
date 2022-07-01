@@ -13,14 +13,14 @@
 import os
 import sys
 
-# sys.path.insert(0, os.path.abspath('../../../build/Python'))
+sys.path.insert(0, os.path.abspath('../../../build/Python'))
 sys.path.insert(0, os.path.abspath('../../build/Python'))
 
 # master_doc = 'source/index'
 
 # -- Project information -----------------------------------------------------
 
-project = 'Human Metrics'
+project = 'DHART'
 copyright = '2020'
 author = 'Mathew Schwartz, Drew Balletto'
 
@@ -217,7 +217,7 @@ def linkcode_resolve(domain, info):
     print('**',fn)
     fn = relpath(fn, start='..\..\python_release')
     
-    newpath = "https://github.com/cadop/dhart/blob/main/src/Python/pydhart/%s%s" % (
+    newpath = "https://github.com/cadop/dhart/blob/main/src/Python/dhart/%s%s" % (
            fn, linespec)
 
     return newpath

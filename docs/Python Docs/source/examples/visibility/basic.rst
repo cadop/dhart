@@ -2,7 +2,7 @@
 Visualize a Visbility Graph Connections
 =======================================
 
-.. currentmodule:: humanfactorspy
+.. currentmodule:: dhart
   
-.. automodule:: humanfactorspy.Examples.VisibilityGraphPlots
+.. automodule:: dhart.Examples.VisibilityGraphPlots
     :members:

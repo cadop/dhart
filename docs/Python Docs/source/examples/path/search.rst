@@ -2,7 +2,7 @@
 Basic Search on A Graph
 =======================
 
-.. currentmodule:: humanfactorspy
+.. currentmodule:: dhart
 
-.. automodule:: humanfactorspy.Examples.PathPlanningBasic
+.. automodule:: dhart.Examples.PathPlanningBasic
     :members:

@@ -2,7 +2,7 @@
 Visualize the Graph
 ===================
 
-.. currentmodule:: humanfactorspy
+.. currentmodule:: dhart
 
-.. automodule:: humanfactorspy.Examples.GraphGeneratorPlot
+.. automodule:: dhart.Examples.GraphGeneratorPlot
     :members:

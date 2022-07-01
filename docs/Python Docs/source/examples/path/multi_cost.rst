@@ -2,7 +2,7 @@
 Path Plan with Different Costs
 ==============================
 
-.. currentmodule:: humanfactorspy
+.. currentmodule:: dhart
 
-.. automodule:: humanfactorspy.Examples.PathPlanningCosts
+.. automodule:: dhart.Examples.PathPlanningCosts
     :members:

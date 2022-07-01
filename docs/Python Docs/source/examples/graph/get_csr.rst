@@ -2,7 +2,7 @@
 Get a CSR of the Graph
 ======================
 
-.. currentmodule:: humanfactorspy
+.. currentmodule:: dhart
 
-.. automodule:: humanfactorspy.Examples.GraphToCSR
+.. automodule:: dhart.Examples.GraphToCSR
     :members:
