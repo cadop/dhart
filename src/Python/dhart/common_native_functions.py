@@ -14,17 +14,17 @@ HFPython: Union[None, CDLL] = None  # The C++ DLL containing all functionality w
 
 
 # Try to load the DLL, and throw if it fails
-
-
 def getDLLHandle() -> CDLL:
     """ Get a reference to the C++ DLL """
     global HFPython
-    if HFPython is not None: return HFPython
+    if HFPython is not None: 
+        return HFPython
     try:
-        directory = os.path.dirname(os.path.realpath(__file__)) + "\\bin"
+        directory = os.path.join(os.path.dirname(os.path.realpath(__file__)),"bin")
         os.add_dll_directory(directory)
 
-        HFPython = CDLL(directory + "\\" + dllname, use_last_error=True)
+        cdll_dir = os.path.join(directory, dllname)
+        HFPython = CDLL(cdll_dir, use_last_error=True)
     except FileNotFoundError as e:
         print("CDLL Failed to load!")
         print(e)
