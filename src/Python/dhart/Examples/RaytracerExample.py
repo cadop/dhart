@@ -5,14 +5,14 @@ In this example we cast an individual ray into a plane that was loaded from an O
 
 .. testcode:: 
 
-    from humanfactorspy.geometry import LoadOBJ, CommonRotations
-    from humanfactorspy.raytracer import (EmbreeBVH,Intersect,
+    from dhart.geometry import LoadOBJ, CommonRotations
+    from dhart.raytracer import (EmbreeBVH,Intersect,
                                             IntersectForPoint,
                                             IntersectOccluded)
-    import humanfactorspy
+    import dhart
 
     # Get model path
-    obj_path = humanfactorspy.get_sample_model('plane.obj')
+    obj_path = dhart.get_sample_model('plane.obj')
     # Load mesh
     loaded_obj = LoadOBJ(obj_path, rotation=CommonRotations.Yup_to_Zup)
     # Create BVH
@@ -44,14 +44,14 @@ In this example we cast an individual ray into a plane that was loaded from an O
 
 """
 
-from humanfactorspy.geometry import LoadOBJ, CommonRotations
-from humanfactorspy.raytracer import (EmbreeBVH,Intersect,
+from dhart.geometry import LoadOBJ, CommonRotations
+from dhart.raytracer import (EmbreeBVH,Intersect,
                                         IntersectForPoint,
                                         IntersectOccluded)
-import humanfactorspy
+import dhart
 
 # Get model path
-obj_path = humanfactorspy.get_sample_model('plane.obj')
+obj_path = dhart.get_sample_model('plane.obj')
 # Load mesh
 loaded_obj = LoadOBJ(obj_path, rotation=CommonRotations.Yup_to_Zup)
 # Create BVH

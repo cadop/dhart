@@ -2,8 +2,8 @@ from ctypes import *
 from typing import *
 import os
 import numbers
-from humanfactorspy.Exceptions import *
-from humanfactorspy.utils import *
+from dhart.Exceptions import *
+from dhart.utils import *
 
 # This is used to check if an object is a number
 

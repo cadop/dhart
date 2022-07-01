@@ -9,8 +9,8 @@ from itertools import permutations as perm
 from itertools import combinations as combi
 from itertools import product as prod
 
-from humanfactorspy.raytracer import EmbreeBVH, embree_raytracer
-from humanfactorspy.geometry import mesh_info
+from dhart.raytracer import EmbreeBVH, embree_raytracer
+from dhart.geometry import mesh_info
 
 plot_point = True
 

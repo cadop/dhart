@@ -1,8 +1,8 @@
 from ctypes import *
-from humanfactorspy.Exceptions import *
+from dhart.Exceptions import *
 from typing import *
 
-from humanfactorspy.common_native_functions import getDLLHandle, ConvertPointsToArray
+from dhart.common_native_functions import getDLLHandle, ConvertPointsToArray
 
 HFPython: Union[
     None, CDLL

@@ -6,14 +6,14 @@ In this example we generate a graph.
 
     import numpy
 
-    from humanfactorspy.geometry import LoadOBJ, CommonRotations
-    from humanfactorspy.raytracer import EmbreeBVH
-    from humanfactorspy.graphgenerator import GenerateGraph
-    from humanfactorspy.viewanalysis import SphericalViewAnalysisAggregate, AggregationType
+    from dhart.geometry import LoadOBJ, CommonRotations
+    from dhart.raytracer import EmbreeBVH
+    from dhart.graphgenerator import GenerateGraph
+    from dhart.viewanalysis import SphericalViewAnalysisAggregate, AggregationType
 
-    import humanfactorspy
+    import dhart
 
-    obj_path = humanfactorspy.get_sample_model("plane.obj")
+    obj_path = dhart.get_sample_model("plane.obj")
 
     obj = LoadOBJ(obj_path, rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(obj)
@@ -46,14 +46,14 @@ In this example we generate a graph.
 
 import numpy
 
-from humanfactorspy.geometry import LoadOBJ, CommonRotations
-from humanfactorspy.raytracer import EmbreeBVH
-from humanfactorspy.graphgenerator import GenerateGraph
-from humanfactorspy.viewanalysis import SphericalViewAnalysisAggregate, AggregationType
+from dhart.geometry import LoadOBJ, CommonRotations
+from dhart.raytracer import EmbreeBVH
+from dhart.graphgenerator import GenerateGraph
+from dhart.viewanalysis import SphericalViewAnalysisAggregate, AggregationType
 
-import humanfactorspy
+import dhart
 
-obj_path = humanfactorspy.get_sample_model("plane.obj")
+obj_path = dhart.get_sample_model("plane.obj")
 
 obj = LoadOBJ(obj_path, rotation=CommonRotations.Yup_to_Zup)
 bvh = EmbreeBVH(obj)

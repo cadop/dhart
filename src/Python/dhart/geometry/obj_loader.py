@@ -33,25 +33,25 @@ def LoadOBJ(
             may be returned if submeshes are found. 
 
     Raises:
-        humanfactorspy.Exceptions.InvalidOBJException: The OBJ at path
+        dhart.Exceptions.InvalidOBJException: The OBJ at path
             either did not exist or could not be loaded
-        humanfactorspy.Exceptions.FileNotFoundException: No file exists
+        dhart.Exceptions.FileNotFoundException: No file exists
             at the given path.
 
     Example:
         Load plane.obj from a folder titled "Example Models" but fail because that file doesn't exist
         
-        >>> import humanfactorspy
-        >>> from humanfactorspy.geometry import LoadOBJ
-        >>> obj = humanfactorspy.get_sample_model("not_real.obj")
+        >>> import dhart
+        >>> from dhart.geometry import LoadOBJ
+        >>> obj = dhart.get_sample_model("not_real.obj")
         >>> MI = LoadOBJ(obj)
         Traceback (most recent call last):
         ...
-        humanfactorspy.Exceptions.FileNotFoundException
+        dhart.Exceptions.FileNotFoundException
 
-        >>> import humanfactorspy
-        >>> from humanfactorspy.geometry import LoadOBJ
-        >>> obj = humanfactorspy.get_sample_model("plane.obj")
+        >>> import dhart
+        >>> from dhart.geometry import LoadOBJ
+        >>> obj = dhart.get_sample_model("plane.obj")
         >>> MI = LoadOBJ(obj)
         >>> MI 
         (EntireFile, 0)

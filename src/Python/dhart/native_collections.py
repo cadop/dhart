@@ -14,8 +14,8 @@ Note:
 
 from ctypes import c_int, c_float, c_void_p
 from typing import *
-from humanfactorspy.common_native_functions import getDLLHandle
-from humanfactorspy.native_numpy_like import NativeNumpyLike
+from dhart.common_native_functions import getDLLHandle
+from dhart.native_numpy_like import NativeNumpyLike
 
 __all__ = ["FloatArray2D", "IntArray2D"]
 

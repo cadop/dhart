@@ -5,9 +5,9 @@
 import ctypes
 from typing import *
 
-from humanfactorspy.spatialstructures import Graph
+from dhart.spatialstructures import Graph
 from . import graph_generator_native_functions
-from humanfactorspy.raytracer import EmbreeBVH
+from dhart.raytracer import EmbreeBVH
 
 __all__ = ['GenerateGraph']
 
@@ -80,11 +80,11 @@ def GenerateGraph(
     Examples:
         Generate a graph on the example plane, then print its nodes
         
-        >>> from humanfactorspy.geometry import LoadOBJ, MeshInfo, CommonRotations
-        >>> from humanfactorspy.raytracer import EmbreeBVH  
-        >>> from humanfactorspy.geometry.mesh_info import ConstructPlane
-        >>> from humanfactorspy.graphgenerator import GenerateGraph
-        >>> import humanfactorspy
+        >>> from dhart.geometry import LoadOBJ, MeshInfo, CommonRotations
+        >>> from dhart.raytracer import EmbreeBVH  
+        >>> from dhart.geometry.mesh_info import ConstructPlane
+        >>> from dhart.graphgenerator import GenerateGraph
+        >>> import dhart
 
         >>> MI = ConstructPlane()
         >>> MI.Rotate(CommonRotations.Zup_to_Yup)
@@ -105,7 +105,7 @@ def GenerateGraph(
 
         Alternatively, you can load an obj file
 
-        >>> obj_path = humanfactorspy.get_sample_model("plane.obj")
+        >>> obj_path = dhart.get_sample_model("plane.obj")
         >>> obj = LoadOBJ(obj_path, rotation=CommonRotations.Yup_to_Zup)
         >>> bvh = EmbreeBVH(obj)
 

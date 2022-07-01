@@ -1,4 +1,4 @@
-from humanfactorspy.native_numpy_like import NativeNumpyLike
+from dhart.native_numpy_like import NativeNumpyLike
 import ctypes
 from . import pathfinder_native_functions
 

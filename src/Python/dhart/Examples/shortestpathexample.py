@@ -1,9 +1,9 @@
-from humanfactorspy import get_sample_model
-from humanfactorspy.geometry.obj_loader import LoadOBJ
-from humanfactorspy.graphgenerator import GenerateGraph
-from humanfactorspy.pathfinding import DijkstraShortestPath
-from humanfactorspy.raytracer import EmbreeBVH
-from humanfactorspy.spatialstructures.cost_algorithms import (
+from dhart import get_sample_model
+from dhart.geometry.obj_loader import LoadOBJ
+from dhart.graphgenerator import GenerateGraph
+from dhart.pathfinding import DijkstraShortestPath
+from dhart.raytracer import EmbreeBVH
+from dhart.spatialstructures.cost_algorithms import (
     CalculateEnergyExpenditure, CostAlgorithmKeys)
 
 # Load the energy blob and create a BVH from it

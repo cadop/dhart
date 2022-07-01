@@ -1,8 +1,8 @@
 from ctypes import *
-from humanfactorspy.Exceptions import *
+from dhart.Exceptions import *
 from typing import *
 
-from humanfactorspy.common_native_functions import getDLLHandle
+from dhart.common_native_functions import getDLLHandle
 
 HFPython: Union[None, CDLL] = None  # The C++ DLL that contains all functionality we need
 

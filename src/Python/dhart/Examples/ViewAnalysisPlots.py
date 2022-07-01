@@ -6,11 +6,11 @@
     import matplotlib.pyplot as plt
     from mpl_toolkits.mplot3d import Axes3D
 
-    from humanfactorspy.geometry import LoadOBJ
-    from humanfactorspy.raytracer import EmbreeBVH
-    from humanfactorspy.graphgenerator import GenerateGraph
-    from humanfactorspy.viewanalysis import SphericalViewAnalysis, SphericalViewAnalysisAggregate, AggregationType
-    import humanfactorspy as hfpy
+    from dhart.geometry import LoadOBJ
+    from dhart.raytracer import EmbreeBVH
+    from dhart.graphgenerator import GenerateGraph
+    from dhart.viewanalysis import SphericalViewAnalysis, SphericalViewAnalysisAggregate, AggregationType
+    import dhart as hfpy
 
     # Get a sample model path
     obj_path = hfpy.get_sample_model("VisibilityTestCases.obj")
@@ -89,11 +89,11 @@ by our known model offset
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
-from humanfactorspy.geometry import LoadOBJ
-from humanfactorspy.raytracer import EmbreeBVH
-from humanfactorspy.graphgenerator import GenerateGraph
-from humanfactorspy.viewanalysis import SphericalViewAnalysis, SphericalViewAnalysisAggregate, AggregationType
-import humanfactorspy as hfpy
+from dhart.geometry import LoadOBJ
+from dhart.raytracer import EmbreeBVH
+from dhart.graphgenerator import GenerateGraph
+from dhart.viewanalysis import SphericalViewAnalysis, SphericalViewAnalysisAggregate, AggregationType
+import dhart as hfpy
 
 # Get a sample model path
 obj_path = hfpy.get_sample_model("VisibilityTestCases.obj")

@@ -1,12 +1,12 @@
 import math
 
-from humanfactorspy.geometry import LoadOBJ, CommonRotations, OBJGroupType
-from humanfactorspy.raytracer import EmbreeBVH
-from humanfactorspy.graphgenerator.graph_generator import GenerateGraph
-import humanfactorspy
+from dhart.geometry import LoadOBJ, CommonRotations, OBJGroupType
+from dhart.raytracer import EmbreeBVH
+from dhart.graphgenerator.graph_generator import GenerateGraph
+import dhart
 
 def test_GetNodes():
-    mesh_path = humanfactorspy.get_sample_model("plane.obj")
+    mesh_path = dhart.get_sample_model("plane.obj")
     obj = LoadOBJ(mesh_path, rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(obj)
     g = GenerateGraph(bvh, (0, 0, 0.1), (0.5, 0.5, 0.5), 1000)
@@ -16,7 +16,7 @@ def test_GetNodes():
 
 
 def test_UnsuccessfulGraphCreationDoesntThrow():
-    mesh_path = humanfactorspy.get_sample_model("plane.obj")
+    mesh_path = dhart.get_sample_model("plane.obj")
     obj = LoadOBJ(mesh_path, rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(obj)
     g = GenerateGraph(bvh, (200000, 0, 0.1), (0.5, 0.5, 0.5), 1000)
@@ -24,7 +24,7 @@ def test_UnsuccessfulGraphCreationDoesntThrow():
 
 
 def test_EnsureParallelGraphIsEquivalentToStandardGraph():
-    mesh_path = humanfactorspy.get_sample_model("plane.obj")
+    mesh_path = dhart.get_sample_model("plane.obj")
     obj = LoadOBJ(mesh_path, rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(obj)
 
@@ -57,7 +57,7 @@ def test_EnsureParallelGraphIsEquivalentToStandardGraph():
         
 def test_energyblob_size():
     # Get a sample model path
-    obj_path = humanfactorspy.get_sample_model("energy_blob_zup.obj")
+    obj_path = dhart.get_sample_model("energy_blob_zup.obj")
     # time.sleep(10)
     # Load the obj file
     obj = LoadOBJ(obj_path)
@@ -83,7 +83,7 @@ def test_energyblob_size():
     assert len(nodes.array) == 3450
 
 def test_obstacle_support():
-    obj_path = humanfactorspy.get_sample_model("obstacle_plane.obj")
+    obj_path = dhart.get_sample_model("obstacle_plane.obj")
     # time.sleep(10)
     # Load the obj file
     obj = LoadOBJ(obj_path, group_type=OBJGroupType.BY_GROUP, rotation=CommonRotations.Yup_to_Zup)

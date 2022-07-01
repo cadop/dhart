@@ -2,13 +2,13 @@ import tkinter as tk
 from tkinter import filedialog
 import numpy
 
-from humanfactorspy.geometry import LoadOBJ, CommonRotations
-from humanfactorspy.raytracer import EmbreeBVH
-from humanfactorspy.graphgenerator import GenerateGraph
-from humanfactorspy.visibilitygraph import VisibilityGraphUndirectedAllToAll
-from humanfactorspy.spatialstructures.graph import CostAggregationType
+from dhart.geometry import LoadOBJ, CommonRotations
+from dhart.raytracer import EmbreeBVH
+from dhart.graphgenerator import GenerateGraph
+from dhart.visibilitygraph import VisibilityGraphUndirectedAllToAll
+from dhart.spatialstructures.graph import CostAggregationType
 
-import humanfactorspy
+import dhart
 
 # Try to load ujson since it's really fast
 try:
@@ -20,7 +20,7 @@ except:
     import json as this_json
     print("Ujson not detected. Using standard, slower python json writer ")
 
-obj_path = humanfactorspy.get_sample_model("Weston_Analysis.obj")
+obj_path = dhart.get_sample_model("Weston_Analysis.obj")
 ray_count = int(pow(10, 4.5))
 height = 120
 start_point = (-1, -6, 1623.976928)

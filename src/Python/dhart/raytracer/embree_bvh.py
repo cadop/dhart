@@ -1,5 +1,5 @@
-from humanfactorspy.raytracer import raytracer_native_functions
-from humanfactorspy.geometry import MeshInfo
+from dhart.raytracer import raytracer_native_functions
+from dhart.geometry import MeshInfo
 from typing import *
 from ctypes import c_void_p
 
@@ -27,8 +27,8 @@ class EmbreeBVH(object):
         Example:
             Creating a BVH from a plane object
 
-            >>> from humanfactorspy.geometry import ConstructPlane
-            >>> from humanfactorspy.raytracer import EmbreeBVH
+            >>> from dhart.geometry import ConstructPlane
+            >>> from dhart.raytracer import EmbreeBVH
 
             >>> MI = ConstructPlane()
             >>> BVH = EmbreeBVH(MI)
