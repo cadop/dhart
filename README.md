@@ -47,6 +47,55 @@ If you find this repo useful, please cite using the following bibtex
 There were dozens of contributors to this project over the years.  It has been led by Mathew Schwartz (NJIT) with a large part of the development by Drew Balletto. 
 
 
+Example Usage
+-------------
+
+Once the python package is installed, the basic setup for loading a model (e.g. obj), setting its rotation (if its not default z up), and creating a BVH (the accelerated structure of the mesh) is done by:
+
+```
+from dhart.geometry import LoadOBJ, CommonRotations
+from dhart.raytracer import (EmbreeBVH,Intersect,
+                                        IntersectForPoint,
+                                        IntersectOccluded)
+import dhart
+
+# Get model path
+obj_path = dhart.get_sample_model('plane.obj')
+# Load mesh
+loaded_obj = LoadOBJ(obj_path, rotation=CommonRotations.Yup_to_Zup)
+# Create BVH
+bvh = EmbreeBVH(loaded_obj)
+```
+
+After this, different methods for casting a ray can be used:
+
+```
+# Define point to start ray
+p1 = (0, 0, 2)
+# Define direction to cast ray
+dir = (0, 0, -1)
+
+# Cast a ray for the hitpoint
+hit_point = IntersectForPoint(bvh, p1, dir, -1)
+print(f"Hit point: {hit_point}")
+
+# Cast a ray for distance/meshid
+distance, mesh_id = Intersect(bvh, p1, dir, -1)
+print(f"distance is {distance}, meshid is {mesh_id}")
+
+# See if it occludes
+does_occlude = IntersectOccluded(bvh, p1, (0, 0, -1), 9999)
+print(f"Does the ray connect? {does_occlude}")
+```
+
+which would output
+
+```
+Hit point: (0.0, 0.0, 0.0)
+distance is 2.0, meshid is 0
+Does the ray connect? True
+```
+
 Getting started
 ===============
 
