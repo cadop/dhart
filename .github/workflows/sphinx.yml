@@ -30,7 +30,8 @@ jobs:
     - name: Install from pypi
       run: | 
         pip install -i https://test.pypi.org/simple/ dhart
-        
+        python -c "from dhart.spatialstructures import Graph"
+
     - name: Install documentation dependencies
       run: |
         pip install sphinx numpydoc matplotlib         
