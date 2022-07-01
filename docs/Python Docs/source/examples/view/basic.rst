@@ -2,7 +2,7 @@
 Visualize Spatial View
 ======================
 
-.. currentmodule:: humanfactorspy
+.. currentmodule:: dhart
   
-.. automodule:: humanfactorspy.Examples.ViewAnalysisPlots
+.. automodule:: dhart.Examples.ViewAnalysisPlots
     :members:

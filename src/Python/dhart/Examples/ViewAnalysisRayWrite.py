@@ -3,10 +3,10 @@ from tkinter import filedialog
 import numpy
 #import json
 
-from humanfactorspy.geometry import LoadOBJ, CommonRotations
-from humanfactorspy.raytracer import EmbreeBVH
-from humanfactorspy.graphgenerator import GenerateGraph
-from humanfactorspy.viewanalysis import SphericalViewAnalysisAggregate, AggregationType, SphericalViewAnalysis, SphericallyDistributeRays
+from dhart.geometry import LoadOBJ, CommonRotations
+from dhart.raytracer import EmbreeBVH
+from dhart.graphgenerator import GenerateGraph
+from dhart.viewanalysis import SphericalViewAnalysisAggregate, AggregationType, SphericalViewAnalysis, SphericallyDistributeRays
 
 # Try to load ujson since it's really fast
 try:

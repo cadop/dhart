@@ -4,13 +4,13 @@ import os
 
 import numpy
 
-from humanfactorspy.geometry import LoadOBJ, CommonRotations
-from humanfactorspy.raytracer import embree_raytracer, EmbreeBVH
-from humanfactorspy.spatialstructures import NodeList, NodeStruct, Graph, CostAggregationType, Direction
-from humanfactorspy.Exceptions import LogicError, InvalidCostOperation
-from humanfactorspy.utils import is_point
-import humanfactorspy.spatialstructures.node as NodeFunctions
-import humanfactorspy.spatialstructures.cost_algorithms as cost_algorithms
+from dhart.geometry import LoadOBJ, CommonRotations
+from dhart.raytracer import embree_raytracer, EmbreeBVH
+from dhart.spatialstructures import NodeList, NodeStruct, Graph, CostAggregationType, Direction
+from dhart.Exceptions import LogicError, InvalidCostOperation
+from dhart.utils import is_point
+import dhart.spatialstructures.node as NodeFunctions
+import dhart.spatialstructures.cost_algorithms as cost_algorithms
 
 
 # This is a pytest fixture!  You can add SimpleGraph to the arguments

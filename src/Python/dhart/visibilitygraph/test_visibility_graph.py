@@ -1,17 +1,17 @@
 import pytest
 
-from humanfactorspy.geometry import LoadOBJ, CommonRotations
-from humanfactorspy.raytracer import embree_raytracer, EmbreeBVH
-from humanfactorspy.spatialstructures import Graph, NodeList, node
-from humanfactorspy.visibilitygraph import visibility_graph
+from dhart.geometry import LoadOBJ, CommonRotations
+from dhart.raytracer import embree_raytracer, EmbreeBVH
+from dhart.spatialstructures import Graph, NodeList, node
+from dhart.visibilitygraph import visibility_graph
 
-import humanfactorspy
+import dhart
 
 from time import time
 
 
 def test_VisibilityGraph():
-    mesh_path = humanfactorspy.get_sample_model("plane.obj")
+    mesh_path = dhart.get_sample_model("plane.obj")
     obj = LoadOBJ(mesh_path, rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(obj)
 
@@ -35,7 +35,7 @@ def test_VisibilityGraph():
 
 
 def test_UndirectedVisibilityGraph():
-    mesh_path = humanfactorspy.get_sample_model("plane.obj")
+    mesh_path = dhart.get_sample_model("plane.obj")
     obj = LoadOBJ(mesh_path, rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(obj)
 
@@ -53,7 +53,7 @@ def test_UndirectedVisibilityGraph():
 
 
 def test_visibilitygraph_group():
-    mesh_path = humanfactorspy.get_sample_model("plane.obj")
+    mesh_path = dhart.get_sample_model("plane.obj")
     obj = LoadOBJ(mesh_path, rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(obj)
     graph_size = 10

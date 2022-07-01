@@ -8,11 +8,11 @@ First we setup the graph generator as seen in other examples.
     import matplotlib.pyplot as plt
     from mpl_toolkits.mplot3d import Axes3D
 
-    from humanfactorspy.geometry import LoadOBJ
-    from humanfactorspy.raytracer import EmbreeBVH
-    from humanfactorspy.graphgenerator import GenerateGraph
-    from humanfactorspy.visibilitygraph import VisibilityGraphAllToAll, VisibilityGraphGroupToGroup
-    import humanfactorspy as hfpy
+    from dhart.geometry import LoadOBJ
+    from dhart.raytracer import EmbreeBVH
+    from dhart.graphgenerator import GenerateGraph
+    from dhart.visibilitygraph import VisibilityGraphAllToAll, VisibilityGraphGroupToGroup
+    import dhart as hfpy
 
     # Get a sample model path
     obj_path = hfpy.get_sample_model("VisibilityTestCases.obj")
@@ -116,11 +116,11 @@ This is approx. the bottom left 10x10 square.
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
-from humanfactorspy.geometry import LoadOBJ
-from humanfactorspy.raytracer import EmbreeBVH
-from humanfactorspy.graphgenerator import GenerateGraph
-from humanfactorspy.visibilitygraph import VisibilityGraphAllToAll, VisibilityGraphGroupToGroup
-import humanfactorspy as hfpy
+from dhart.geometry import LoadOBJ
+from dhart.raytracer import EmbreeBVH
+from dhart.graphgenerator import GenerateGraph
+from dhart.visibilitygraph import VisibilityGraphAllToAll, VisibilityGraphGroupToGroup
+import dhart as hfpy
 
 # Get a sample model path
 obj_path = hfpy.get_sample_model("VisibilityTestCases.obj")

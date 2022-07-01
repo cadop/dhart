@@ -5,16 +5,16 @@
     >>> import matplotlib.pyplot as plt
     >>> import numpy as np
     >>> 
-    >>> import humanfactorspy
-    >>> from humanfactorspy.geometry import LoadOBJ, CommonRotations
-    >>> from humanfactorspy.graphgenerator import GenerateGraph
-    >>> from humanfactorspy.raytracer import EmbreeBVH
-    >>> from humanfactorspy.pathfinding import DijkstraShortestPath
-    >>> from humanfactorspy.spatialstructures.cost_algorithms import (
+    >>> import dhart
+    >>> from dhart.geometry import LoadOBJ, CommonRotations
+    >>> from dhart.graphgenerator import GenerateGraph
+    >>> from dhart.raytracer import EmbreeBVH
+    >>> from dhart.pathfinding import DijkstraShortestPath
+    >>> from dhart.spatialstructures.cost_algorithms import (
     ...                                     CalculateEnergyExpenditure, CostAlgorithmKeys)
 
     >>> # Get a sample model path
-    >>> obj_path = humanfactorspy.get_sample_model("energy_blob_zup.obj")
+    >>> obj_path = dhart.get_sample_model("energy_blob_zup.obj")
     >>> 
     >>> # Load the obj file
     >>> obj = LoadOBJ(obj_path)
@@ -118,16 +118,16 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-import humanfactorspy
-from humanfactorspy.geometry import LoadOBJ, CommonRotations
-from humanfactorspy.graphgenerator import GenerateGraph
-from humanfactorspy.raytracer import EmbreeBVH
-from humanfactorspy.pathfinding import DijkstraShortestPath
-from humanfactorspy.spatialstructures.cost_algorithms import (
+import dhart
+from dhart.geometry import LoadOBJ, CommonRotations
+from dhart.graphgenerator import GenerateGraph
+from dhart.raytracer import EmbreeBVH
+from dhart.pathfinding import DijkstraShortestPath
+from dhart.spatialstructures.cost_algorithms import (
                                     CalculateEnergyExpenditure, CostAlgorithmKeys)
 
 # Get a sample model path
-obj_path = humanfactorspy.get_sample_model("energy_blob_zup.obj")
+obj_path = dhart.get_sample_model("energy_blob_zup.obj")
 
 # Load the obj file
 obj = LoadOBJ(obj_path)

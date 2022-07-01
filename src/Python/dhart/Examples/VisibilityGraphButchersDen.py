@@ -4,12 +4,12 @@ import numpy
 
 # import json
 
-from humanfactorspy.geometry import LoadOBJ, CommonRotations
-from humanfactorspy.raytracer import EmbreeBVH, IntersectOccluded
-from humanfactorspy.graphgenerator import GenerateGraph
-from humanfactorspy.visibilitygraph import VisibilityGraphUndirectedAllToAll, VisibilityGraphGroupToGroup
-from humanfactorspy.spatialstructures.graph import CostAggregationType
-from humanfactorspy.viewanalysis import SphericalViewAnalysisAggregate, AggregationType
+from dhart.geometry import LoadOBJ, CommonRotations
+from dhart.raytracer import EmbreeBVH, IntersectOccluded
+from dhart.graphgenerator import GenerateGraph
+from dhart.visibilitygraph import VisibilityGraphUndirectedAllToAll, VisibilityGraphGroupToGroup
+from dhart.spatialstructures.graph import CostAggregationType
+from dhart.viewanalysis import SphericalViewAnalysisAggregate, AggregationType
 
 # Try to load ujson since it's really fast
 try:

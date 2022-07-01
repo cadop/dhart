@@ -4,13 +4,13 @@ import os
 import pywavefront
 import itertools
 
-from humanfactorspy.Exceptions import InvalidOBJException, FileNotFoundException
-from humanfactorspy.geometry import MeshInfo, LoadOBJ, OBJGroupType, CommonRotations
+from dhart.Exceptions import InvalidOBJException, FileNotFoundException
+from dhart.geometry import MeshInfo, LoadOBJ, OBJGroupType, CommonRotations
 
-import humanfactorspy
+import dhart
 
 # ---- TESTING CONSTANTS ----
-good_mesh_path = humanfactorspy.get_sample_model("sponza.obj")
+good_mesh_path = dhart.get_sample_model("sponza.obj")
 bad_mesh_path = "MeshPathThatDoesntExist"
 
 

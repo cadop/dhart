@@ -18,68 +18,68 @@ Main Module
 -----------
 
 
-.. currentmodule:: humanfactorspy
+.. currentmodule:: dhart
   
-.. automodule:: humanfactorspy.common_native_functions
+.. automodule:: dhart.common_native_functions
     :members:
     
 
 .. rubric:: Exceptions
 
-.. automodule:: humanfactorspy.Exceptions
+.. automodule:: dhart.Exceptions
     :members:
     
 
 .. rubric:: Numpy Interface 
 
-.. automodule:: humanfactorspy.native_numpy_like
+.. automodule:: dhart.native_numpy_like
     :members:
     
 
 Graph Generator
 ---------------
 
-.. automodule:: humanfactorspy.graphgenerator.graph_generator_native_functions
+.. automodule:: dhart.graphgenerator.graph_generator_native_functions
     :members:
 
 
 Geometry
 --------
 
-.. automodule:: humanfactorspy.geometry.meshinfo_native_functions
+.. automodule:: dhart.geometry.meshinfo_native_functions
     :members:
 
 
 Path Finding
 ------------
 
-.. automodule:: humanfactorspy.pathfinding.pathfinder_native_functions
+.. automodule:: dhart.pathfinding.pathfinder_native_functions
     :members:
 
 
 Raytracer
 ---------
 
-.. automodule:: humanfactorspy.raytracer.raytracer_native_functions
+.. automodule:: dhart.raytracer.raytracer_native_functions
     :members:
 
 
 Spatial Structures
 ------------------
 
-.. automodule:: humanfactorspy.spatialstructures.spatial_structures_native_functions
+.. automodule:: dhart.spatialstructures.spatial_structures_native_functions
     :members:
 
 
 View Analysis
 -------------
 
-.. automodule:: humanfactorspy.viewanalysis.viewanalysis_native_functions
+.. automodule:: dhart.viewanalysis.viewanalysis_native_functions
     :members:
 
 
 Visibility Graph
 ----------------
 
-.. automodule:: humanfactorspy.visibilitygraph.visibility_graph_native_functions
+.. automodule:: dhart.visibilitygraph.visibility_graph_native_functions
     :members:

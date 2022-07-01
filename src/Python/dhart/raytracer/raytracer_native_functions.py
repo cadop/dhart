@@ -1,6 +1,6 @@
 from ctypes import *
-from humanfactorspy.Exceptions import *
-from humanfactorspy.common_native_functions import (
+from dhart.Exceptions import *
+from dhart.common_native_functions import (
     getDLLHandle,
     ConvertPointsToArray,
 )

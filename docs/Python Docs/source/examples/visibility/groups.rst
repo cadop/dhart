@@ -2,7 +2,7 @@
 Visibility Graph Grouping
 =========================
 
-.. currentmodule:: humanfactorspy
+.. currentmodule:: dhart
   
-.. automodule:: humanfactorspy.Examples.VisibilityGraphGroups
+.. automodule:: dhart.Examples.VisibilityGraphGroups
     :members:

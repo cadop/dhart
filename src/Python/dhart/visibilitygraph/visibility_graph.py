@@ -1,7 +1,7 @@
 from typing import *
 
-from humanfactorspy.raytracer import EmbreeBVH
-from humanfactorspy.spatialstructures import Graph
+from dhart.raytracer import EmbreeBVH
+from dhart.spatialstructures import Graph
 
 from . import visibility_graph_native_functions
 
@@ -24,10 +24,10 @@ def VisibilityGraphAllToAll(
     Example:
         Create a visibility graph between 3 nodes
         
-        >>> from humanfactorspy.geometry import LoadOBJ, CommonRotations, ConstructPlane
-        >>> from humanfactorspy.spatialstructures.graph import CostAggregationType
-        >>> from humanfactorspy.raytracer import EmbreeBVH
-        >>> from humanfactorspy.visibilitygraph import VisibilityGraphAllToAll
+        >>> from dhart.geometry import LoadOBJ, CommonRotations, ConstructPlane
+        >>> from dhart.spatialstructures.graph import CostAggregationType
+        >>> from dhart.raytracer import EmbreeBVH
+        >>> from dhart.visibilitygraph import VisibilityGraphAllToAll
 
         >>> loaded_obj = ConstructPlane()
         >>> loaded_obj.Rotate(CommonRotations.Yup_to_Zup)
@@ -70,10 +70,10 @@ def VisibilityGraphUndirectedAllToAll(
         Create a visibility graph between 3 nodes
         
 
-        >>> from humanfactorspy.geometry import LoadOBJ, CommonRotations, ConstructPlane
-        >>> from humanfactorspy.spatialstructures.graph import CostAggregationType
-        >>> from humanfactorspy.raytracer import EmbreeBVH
-        >>> from humanfactorspy.visibilitygraph import VisibilityGraphUndirectedAllToAll
+        >>> from dhart.geometry import LoadOBJ, CommonRotations, ConstructPlane
+        >>> from dhart.spatialstructures.graph import CostAggregationType
+        >>> from dhart.raytracer import EmbreeBVH
+        >>> from dhart.visibilitygraph import VisibilityGraphUndirectedAllToAll
 
         >>> loaded_obj = ConstructPlane()
         >>> loaded_obj.Rotate(CommonRotations.Yup_to_Zup)
@@ -119,10 +119,10 @@ def VisibilityGraphGroupToGroup(
         Create a new visibility graph from one group of nodes to another group of nodes
         then print a summary of their scores
         
-        >>> from humanfactorspy.geometry import LoadOBJ, CommonRotations, ConstructPlane
-        >>> from humanfactorspy.spatialstructures.graph import CostAggregationType
-        >>> from humanfactorspy.raytracer import EmbreeBVH
-        >>> from humanfactorspy.visibilitygraph import VisibilityGraphGroupToGroup
+        >>> from dhart.geometry import LoadOBJ, CommonRotations, ConstructPlane
+        >>> from dhart.spatialstructures.graph import CostAggregationType
+        >>> from dhart.raytracer import EmbreeBVH
+        >>> from dhart.visibilitygraph import VisibilityGraphGroupToGroup
 
         >>> loaded_obj = ConstructPlane()
         >>> loaded_obj.Rotate(rotation=CommonRotations.Yup_to_Zup)

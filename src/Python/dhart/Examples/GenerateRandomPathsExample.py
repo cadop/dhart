@@ -1,14 +1,14 @@
 import random
 
-from humanfactorspy.geometry import LoadOBJ, CommonRotations
-from humanfactorspy.graphgenerator import GenerateGraph
-from humanfactorspy.raytracer import EmbreeBVH
-from humanfactorspy.pathfinding import DijkstraShortestPath
+from dhart.geometry import LoadOBJ, CommonRotations
+from dhart.graphgenerator import GenerateGraph
+from dhart.raytracer import EmbreeBVH
+from dhart.pathfinding import DijkstraShortestPath
 
-import humanfactorspy
+import dhart
 
 # Load BVH
-obj_path = humanfactorspy.get_sample_model("plane.obj")
+obj_path = dhart.get_sample_model("plane.obj")
 
 loaded_obj = LoadOBJ(obj_path, rotation=CommonRotations.Yup_to_Zup)
 embree_bvh = EmbreeBVH(loaded_obj)

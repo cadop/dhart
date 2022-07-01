@@ -2,13 +2,13 @@
 
 .. testcode::
 
-    from humanfactorspy.geometry import LoadOBJ, CommonRotations
-    from humanfactorspy.raytracer import EmbreeBVH
-    from humanfactorspy.visibilitygraph import VisibilityGraphAllToAll
+    from dhart.geometry import LoadOBJ, CommonRotations
+    from dhart.raytracer import EmbreeBVH
+    from dhart.visibilitygraph import VisibilityGraphAllToAll
 
-    import humanfactorspy
+    import dhart
 
-    obj_path = humanfactorspy.get_sample_model("plane.obj")
+    obj_path = dhart.get_sample_model("plane.obj")
     loaded_obj = LoadOBJ(obj_path, rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(loaded_obj)
 
@@ -28,13 +28,13 @@
 
 """
 
-from humanfactorspy.geometry import LoadOBJ, CommonRotations
-from humanfactorspy.raytracer import EmbreeBVH
-from humanfactorspy.visibilitygraph import VisibilityGraphAllToAll
+from dhart.geometry import LoadOBJ, CommonRotations
+from dhart.raytracer import EmbreeBVH
+from dhart.visibilitygraph import VisibilityGraphAllToAll
 
-import humanfactorspy
+import dhart
 
-obj_path = humanfactorspy.get_sample_model("plane.obj")
+obj_path = dhart.get_sample_model("plane.obj")
 loaded_obj = LoadOBJ(obj_path, rotation=CommonRotations.Yup_to_Zup)
 bvh = EmbreeBVH(loaded_obj)
 

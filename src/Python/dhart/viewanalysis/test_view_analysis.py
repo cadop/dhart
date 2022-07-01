@@ -1,19 +1,19 @@
 import pytest
 
-from humanfactorspy.geometry import LoadOBJ, CommonRotations
-from humanfactorspy.raytracer import EmbreeBVH
-from humanfactorspy.viewanalysis.view_analysis import (SphericalViewAnalysisAggregate,
+from dhart.geometry import LoadOBJ, CommonRotations
+from dhart.raytracer import EmbreeBVH
+from dhart.viewanalysis.view_analysis import (SphericalViewAnalysisAggregate,
                                                         AggregationType,SphericalViewAnalysis,
                                                         SphericallyDistributeRays)
 
-import humanfactorspy
+import dhart
 
 from time import time
 
 # Setup
 
 def test_Aggregates():
-    mesh_path = humanfactorspy.get_sample_model("plane.obj")
+    mesh_path = dhart.get_sample_model("plane.obj")
     obj = LoadOBJ(mesh_path,rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(obj)
 
@@ -26,7 +26,7 @@ def test_Aggregates():
     assert len(scores.array) == len(points)
 
 def test_AggregateCorrectness():
-    mesh_path = humanfactorspy.get_sample_model("plane.obj")
+    mesh_path = dhart.get_sample_model("plane.obj")
     obj = LoadOBJ(mesh_path, rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(obj)
 
@@ -42,7 +42,7 @@ def test_AggregateCorrectness():
 
 
 def test_NonAggregate():
-    mesh_path = humanfactorspy.get_sample_model("plane.obj")
+    mesh_path = dhart.get_sample_model("plane.obj")
     obj = LoadOBJ(mesh_path, rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(obj)
 

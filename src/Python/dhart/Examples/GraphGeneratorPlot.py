@@ -7,13 +7,13 @@
     import matplotlib.pyplot as plt
     from mpl_toolkits.mplot3d import Axes3D
 
-    from humanfactorspy.geometry import LoadOBJ
-    from humanfactorspy.raytracer import EmbreeBVH
-    from humanfactorspy.graphgenerator import GenerateGraph
-    import humanfactorspy
+    from dhart.geometry import LoadOBJ
+    from dhart.raytracer import EmbreeBVH
+    from dhart.graphgenerator import GenerateGraph
+    import dhart
 
     # Get a sample model path
-    obj_path = humanfactorspy.get_sample_model("energy_blob_zup.obj")
+    obj_path = dhart.get_sample_model("energy_blob_zup.obj")
 
     # Load the obj file
     obj = LoadOBJ(obj_path)
@@ -103,13 +103,13 @@ tolerances and plot a new graph which shows certain areas are not reachable.
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
-from humanfactorspy.geometry import LoadOBJ
-from humanfactorspy.raytracer import EmbreeBVH
-from humanfactorspy.graphgenerator import GenerateGraph
-import humanfactorspy
+from dhart.geometry import LoadOBJ
+from dhart.raytracer import EmbreeBVH
+from dhart.graphgenerator import GenerateGraph
+import dhart
 
 # Get a sample model path
-obj_path = humanfactorspy.get_sample_model("energy_blob_zup.obj")
+obj_path = dhart.get_sample_model("energy_blob_zup.obj")
 print(obj_path)
 
 # Load the obj file

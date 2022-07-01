@@ -3,14 +3,14 @@ This example shows how to cast rays in a sphere from a given location, then aggr
 
 .. testcode:: 
 
-    from humanfactorspy.geometry import LoadOBJ, CommonRotations
-    from humanfactorspy.raytracer import EmbreeBVH
-    from humanfactorspy.viewanalysis import SphericalViewAnalysis, SphericalViewAnalysisAggregate, AggregationType
+    from dhart.geometry import LoadOBJ, CommonRotations
+    from dhart.raytracer import EmbreeBVH
+    from dhart.viewanalysis import SphericalViewAnalysis, SphericalViewAnalysisAggregate, AggregationType
 
-    import humanfactorspy
+    import dhart
 
     # Get model path
-    obj_path = humanfactorspy.get_sample_model('plane.obj')
+    obj_path = dhart.get_sample_model('plane.obj')
     # Load mesh
     loaded_obj = LoadOBJ(obj_path, rotation=CommonRotations.Yup_to_Zup)
     # Create BVH
@@ -38,14 +38,14 @@ This example shows how to cast rays in a sphere from a given location, then aggr
 """
 
 
-from humanfactorspy.geometry import LoadOBJ, CommonRotations
-from humanfactorspy.raytracer import EmbreeBVH
-from humanfactorspy.viewanalysis import SphericalViewAnalysis, SphericalViewAnalysisAggregate, AggregationType
+from dhart.geometry import LoadOBJ, CommonRotations
+from dhart.raytracer import EmbreeBVH
+from dhart.viewanalysis import SphericalViewAnalysis, SphericalViewAnalysisAggregate, AggregationType
 
-import humanfactorspy
+import dhart
 
 # Get model path
-obj_path = humanfactorspy.get_sample_model('plane.obj')
+obj_path = dhart.get_sample_model('plane.obj')
 # Load mesh
 loaded_obj = LoadOBJ(obj_path, rotation=CommonRotations.Yup_to_Zup)
 # Create BVH

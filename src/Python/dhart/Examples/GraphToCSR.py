@@ -5,12 +5,12 @@ consisting of the node ides and the edge cost (which is distance in this case).
 
 .. testcode::
 
-    from humanfactorspy.geometry import LoadOBJ, CommonRotations
-    from humanfactorspy.raytracer import EmbreeBVH
-    from humanfactorspy.graphgenerator import GenerateGraph
-    import humanfactorspy
+    from dhart.geometry import LoadOBJ, CommonRotations
+    from dhart.raytracer import EmbreeBVH
+    from dhart.graphgenerator import GenerateGraph
+    import dhart
 
-    obj_path = humanfactorspy.get_sample_model("plane.obj")
+    obj_path = dhart.get_sample_model("plane.obj")
 
     obj = LoadOBJ(obj_path, rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(obj)
@@ -72,12 +72,12 @@ consisting of the node ides and the edge cost (which is distance in this case).
 
 """
 
-from humanfactorspy.geometry import LoadOBJ, CommonRotations
-from humanfactorspy.raytracer import EmbreeBVH
-from humanfactorspy.graphgenerator import GenerateGraph
-import humanfactorspy
+from dhart.geometry import LoadOBJ, CommonRotations
+from dhart.raytracer import EmbreeBVH
+from dhart.graphgenerator import GenerateGraph
+import dhart
 
-obj_path = humanfactorspy.get_sample_model("plane.obj")
+obj_path = dhart.get_sample_model("plane.obj")
 
 obj = LoadOBJ(obj_path, rotation=CommonRotations.Yup_to_Zup)
 bvh = EmbreeBVH(obj)

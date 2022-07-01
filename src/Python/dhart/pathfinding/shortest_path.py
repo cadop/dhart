@@ -1,10 +1,10 @@
 from . import Path
 from . import pathfinder_native_functions
-from humanfactorspy.Exceptions import OutOfRangeException
+from dhart.Exceptions import OutOfRangeException
 from typing import *
 import numpy
-from humanfactorspy.spatialstructures import Graph
-from humanfactorspy.native_collections import FloatArray2D, IntArray2D
+from dhart.spatialstructures import Graph
+from dhart.native_collections import FloatArray2D, IntArray2D
 
 __all__ = ["ConvertNodesToIds", "DijkstraShortestPath", 
            "DijkstraFindAllShortestPaths", "calculate_distance_and_predecessor"]
@@ -90,8 +90,8 @@ def DijkstraShortestPath(
     Example:
         Creating a graph, adding edges to it, then generating a path from node 0 to 3.
         
-        >>> from humanfactorspy.pathfinding import DijkstraShortestPath
-        >>> from humanfactorspy.spatialstructures import Graph
+        >>> from dhart.pathfinding import DijkstraShortestPath
+        >>> from dhart.spatialstructures import Graph
 
         >>> g = Graph()
         >>> g.AddEdgeToGraph(0, 1, 100)
@@ -106,8 +106,8 @@ def DijkstraShortestPath(
 
         The same, but creating multiple paths.
         
-        >>> from humanfactorspy.pathfinding import DijkstraShortestPath
-        >>> from humanfactorspy.spatialstructures import Graph
+        >>> from dhart.pathfinding import DijkstraShortestPath
+        >>> from dhart.spatialstructures import Graph
 
         >>> g = Graph()
         >>> g.AddEdgeToGraph(0, 1, 100)
@@ -137,12 +137,12 @@ def DijkstraShortestPath(
                 
 
         >>> import numpy as np
-        >>> from humanfactorspy import get_sample_model
-        >>> from humanfactorspy.geometry.obj_loader import LoadOBJ
-        >>> from humanfactorspy.graphgenerator import GenerateGraph
-        >>> from humanfactorspy.pathfinding import DijkstraShortestPath
-        >>> from humanfactorspy.raytracer import EmbreeBVH
-        >>> from humanfactorspy.spatialstructures.cost_algorithms import (
+        >>> from dhart import get_sample_model
+        >>> from dhart.geometry.obj_loader import LoadOBJ
+        >>> from dhart.graphgenerator import GenerateGraph
+        >>> from dhart.pathfinding import DijkstraShortestPath
+        >>> from dhart.raytracer import EmbreeBVH
+        >>> from dhart.spatialstructures.cost_algorithms import (
         ...                CalculateEnergyExpenditure, CostAlgorithmKeys)
 
         Load the energy blob and create a BVH from it
@@ -269,8 +269,8 @@ def DijkstraFindAllShortestPaths(
     Examples
     --------
 
-    >>> from humanfactorspy.pathfinding import DijkstraShortestPath, DijkstraFindAllShortestPaths
-    >>> from humanfactorspy.spatialstructures import Graph
+    >>> from dhart.pathfinding import DijkstraShortestPath, DijkstraFindAllShortestPaths
+    >>> from dhart.spatialstructures import Graph
     >>> import numpy as np
     >>> 
     >>> g = Graph()
@@ -384,8 +384,8 @@ def calculate_distance_and_predecessor(graph: Graph, cost_type: str = ""
     Examples:
         Create the predecessor and distance matricies for a graph
 
-        >>> from humanfactorspy.pathfinding import calculate_distance_and_predecessor
-        >>> from humanfactorspy.spatialstructures import Graph
+        >>> from dhart.pathfinding import calculate_distance_and_predecessor
+        >>> from dhart.spatialstructures import Graph
 
         >>> # Create a graph, add some nodes and edges, then compress
         >>> g = Graph()

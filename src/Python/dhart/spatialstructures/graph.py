@@ -7,7 +7,7 @@ from ctypes import c_float, c_int, c_void_p
 from typing import *
 from enum import IntEnum
 
-from humanfactorspy.native_numpy_like import NativeNumpyLike
+from dhart.native_numpy_like import NativeNumpyLike
 from .node import NodeStruct, NodeList
 from . import spatial_structures_native_functions
 
@@ -185,9 +185,9 @@ class Graph:
                createda
         
         Raises:
-            humanfactorspy.Exceptions.LogicError:
+            dhart.Exceptions.LogicError:
                 Tried to add an alternate cost type to an uncompressed graph
-            humanfactorspy.Exceptions.InvalidCostOperation:
+            dhart.Exceptions.InvalidCostOperation:
                 Tried to add an alternate cost tot he graph with an edge
                 that didn't first exist in the graph's default cost set
 
@@ -267,13 +267,13 @@ class Graph:
 
         >>> import numpy as np
 
-        >>> import humanfactorspy
-        >>> from humanfactorspy.geometry import LoadOBJ
-        >>> from humanfactorspy.graphgenerator import GenerateGraph
-        >>> from humanfactorspy.raytracer import EmbreeBVH
+        >>> import dhart
+        >>> from dhart.geometry import LoadOBJ
+        >>> from dhart.graphgenerator import GenerateGraph
+        >>> from dhart.raytracer import EmbreeBVH
 
         >>> # Load BVH
-        >>> obj_path = humanfactorspy.get_sample_model("energy_blob_zup.obj")
+        >>> obj_path = dhart.get_sample_model("energy_blob_zup.obj")
         >>> loaded_obj = LoadOBJ(obj_path)
         >>> embree_bvh = EmbreeBVH(loaded_obj)
 
@@ -488,7 +488,7 @@ class Graph:
         Example:
             Add node attributes to a graph
 
-           >>> from humanfactorspy.spatialstructures import Graph
+           >>> from dhart.spatialstructures import Graph
            >>> # Create a simple graph with 3 nodes
            >>> g = Graph()
            >>> g.AddEdgeToGraph(0, 1, 100)
@@ -531,7 +531,7 @@ class Graph:
             Create a graph, add some nodes, assign some attributes to its nodes
             then read them from the graph
            
-           >>> from humanfactorspy.spatialstructures import Graph
+           >>> from dhart.spatialstructures import Graph
            >>> # Create a simple graph with 3 nodes
            >>> g = Graph()
            >>> g.AddEdgeToGraph(0, 1, 100)
@@ -563,7 +563,7 @@ class Graph:
         
         Example:
             Adding an attribute, then clearing it from the graph
-           >>> from humanfactorspy.spatialstructures import Graph
+           >>> from dhart.spatialstructures import Graph
            >>> # Create a simple graph with 3 nodes
            >>> g = Graph()
            >>> g.AddEdgeToGraph(0, 1, 100)
@@ -601,7 +601,7 @@ class Graph:
             KeyError: attribute_string was not the key of any node attribute in the graph
 
         Examples:
-           >>> from humanfactorspy.spatialstructures import Graph, Direction
+           >>> from dhart.spatialstructures import Graph, Direction
            >>> g = Graph()
            >>> g.AddEdgeToGraph(0, 1, 100)
            >>> g.AddEdgeToGraph(0, 2, 50)

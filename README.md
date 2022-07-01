@@ -1,6 +1,5 @@
 
-Overview
-========
+# Overview
 
 Welcome to DHART:a C++ package with interfaces to Python, C, and C# for  Design, Humans, Analysis, and RoboTics.
 
@@ -116,7 +115,7 @@ When visiting the documentation page, click on Python to follow installation gui
 Building from Source
 --------------------
 
-- Uses Visual Studio
+### Prelim
 
 This guide will describe how to retrieve the contents of this repository,
 and build from source.
@@ -124,7 +123,6 @@ and build from source.
 Please note: DHART is currently designed to run on a PC running the Windows 10
 operating system.
 Also note: This guide is a 'work-in-progress' and subject to change.
-
 
 Git for Windows:
 If you do not already have Git for Windows on your machine,
@@ -144,29 +142,51 @@ Git Bash (MINGW64) begins at ~, your home directory.
 You may remain here, or navigate to a directory of your choice.
 In the next step, you will clone the Analysis repository.
 
-
 1. Type git clone git@github.com/cadop/dhart.git at the prompt
 and hit ENTER. The Analysis repository will then be cloned to your local machine.
 
 
-2. Open Microsoft Visual Studio 2019. After seeing the splash/welcome screen, please click the button that reads Open a local folder.
+### Using CMAKE Commands
+
+Currently we directly call the configuration arguments when using cmake. 
+
+Python Debug
+
+1. `cmake ./src/ -G"Visual Studio 16 2019" -DCMAKE_GENERATOR_PLATFORM="x64"  -DCMAKE_CONFIGURATION_TYPES="Debug" -DCMAKE_INSTALL_PREFIX=".\..\build\Python" -DHumanFactors_Config="All" -DHumanFactors_EnableTests="False" -DHumanFactors_EnablePython="True" -DHumanFactors_EnableCSharp="False" -DINSTALL_GTEST="False"  ".\" 2>&1` 
+
+1. `cmake --build . --config Debug`
+
+Python Release
+
+1. `cmake ./src/  -G"Visual Studio 16 2019"  -DCMAKE_GENERATOR_PLATFORM="x64"   -DCMAKE_INSTALL_PREFIX=".\..\build\Python" -DHumanFactors_Config="All" -DHumanFactors_EnableTests="False" -DCMAKE_CONFIGURATION_TYPES="Release" -DHumanFactors_EnablePython="True" -DHumanFactors_EnableCSharp="False" -DINSTALL_GTEST="False"  ".\" 2>&1`
+
+1. `cmake --build . --config Release`
+
+1. `cmake --install .`
+
+1. cd to build/Python and run `pip install .`
+
+### Using Visual Studio
 
 
-3. When the Browse window appears, navigate to the folder
+
+1. Open Microsoft Visual Studio 2019. After seeing the splash/welcome screen, please click the button that reads Open a local folder.
+
+
+1. When the Browse window appears, navigate to the folder
 (the repository that you had cloned) on your local machine.
 Then, navigate to `src/`. Click the Select folder button to confirm.
 
-4. You may see a banner that asks to generate or configure the cmake project.  Click generate. 
+1. You may see a banner that asks to generate or configure the cmake project.  Click generate. 
 
-5. If the Solution Explorer view is not already open, you may open by
+1. If the Solution Explorer view is not already open, you may open by
 navigating to View > Solution Explorer, or alternatively, you can also use the Ctrl + Alt + L shortcut to reveal Solution Explorer. Here, you can examine the sources imported by Visual Studio.
 
-
-6. We are now ready to build Analysis.
+1. We are now ready to build Analysis.
 CMake is used to aid in the compilation process.
 There are a few provided configuration files. Specifically, debug and release, as well as C# and Python specific ones.  Select the one you are interested in and navigate to Build > Build All. 
 
-7. Once it has successfully built, you need to install.  Going back to the same build menu dropdown, click on install.  This will save the files to a build directory. 
+1. Once it has successfully built, you need to install.  Going back to the same build menu dropdown, click on install.  This will save the files to a build directory. 
 
 
 You can find the build files in .\dhart\src\out\build\x64-Debug

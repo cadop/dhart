@@ -4,18 +4,18 @@
 
     >>> import numpy as np
     >>> 
-    >>> import humanfactorspy
-    >>> from humanfactorspy.geometry import LoadOBJ, CommonRotations
-    >>> from humanfactorspy.graphgenerator import GenerateGraph
-    >>> from humanfactorspy.raytracer import EmbreeBVH
-    >>> from humanfactorspy.pathfinding import DijkstraShortestPath
+    >>> import dhart
+    >>> from dhart.geometry import LoadOBJ, CommonRotations
+    >>> from dhart.graphgenerator import GenerateGraph
+    >>> from dhart.raytracer import EmbreeBVH
+    >>> from dhart.pathfinding import DijkstraShortestPath
     
     The first step for path planning is to start with a searchable graph. While a graph
     could be constructed manually, the normal process for this package is to create an 
     accessibility graph through the interface (explained in other examples but used here). 
 
     >>> # Load BVH
-    >>> obj_path = humanfactorspy.get_sample_model("plane.obj")
+    >>> obj_path = dhart.get_sample_model("plane.obj")
     >>> loaded_obj = LoadOBJ(obj_path, rotation=CommonRotations.Yup_to_Zup)
     >>> embree_bvh = EmbreeBVH(loaded_obj)
     >>> 
@@ -31,7 +31,7 @@
     >>> print(f"Graph Generated with {len(nodes.array)} nodes")
     Graph Generated with 1517 nodes
 
-    The node array comes from the struct `py:mod:humanfactorspy.spatialstructures.node`
+    The node array comes from the struct `py:mod:dhart.spatialstructures.node`
     which defines the node as an array of [x,y,z,type,id].
     Since the nodes are stored in a numpy structured array with names we can
     extract just the x,y,z values by using the [] operator. 
@@ -94,14 +94,14 @@
 
 import numpy as np
 
-import humanfactorspy
-from humanfactorspy.geometry import LoadOBJ, CommonRotations
-from humanfactorspy.graphgenerator import GenerateGraph
-from humanfactorspy.raytracer import EmbreeBVH
-from humanfactorspy.pathfinding import DijkstraShortestPath
+import dhart
+from dhart.geometry import LoadOBJ, CommonRotations
+from dhart.graphgenerator import GenerateGraph
+from dhart.raytracer import EmbreeBVH
+from dhart.pathfinding import DijkstraShortestPath
 
 # Load BVH
-obj_path = humanfactorspy.get_sample_model("plane.obj")
+obj_path = dhart.get_sample_model("plane.obj")
 loaded_obj = LoadOBJ(obj_path, rotation=CommonRotations.Yup_to_Zup)
 embree_bvh = EmbreeBVH(loaded_obj)
 
@@ -117,7 +117,7 @@ max_node = len(nodes.array) - 1
 print(f"Graph Generated with {len(nodes.array)} nodes")
 
 
-## The node array comes from the struct `py:mod:humanfactorspy.spatialstructures.node`
+## The node array comes from the struct `py:mod:dhart.spatialstructures.node`
 ## which defines the node as an array of [x,y,z,type,id].
 ## Since the nodes are stored in a numpy structured array with names we can
 ## extract just the x,y,z values by using the [] operator. 

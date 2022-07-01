@@ -3,7 +3,7 @@ import ctypes
 import numpy
 
 from . import viewanalysis_native_functions
-from humanfactorspy.native_numpy_like import NativeNumpyLike
+from dhart.native_numpy_like import NativeNumpyLike
 
 __all__ = ['ViewAnalysisAggregates','ViewAnalysisDirections']
 

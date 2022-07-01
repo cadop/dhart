@@ -109,17 +109,17 @@ endif()
 
 # These are lists of the files that need to be installed based configuration
 set(PYTHON_MODULES  #Folders in the python directory that need to be copied over
-        "${PYTHON_PACKAGE_DIR}/pydhart/Example Models" 
-        "${PYTHON_PACKAGE_DIR}/pydhart/Examples" 
+        "${PYTHON_PACKAGE_DIR}/dhart/Example Models" 
+        "${PYTHON_PACKAGE_DIR}/dhart/Examples" 
 )
 
 set(PYTHON_FILES # Files to be placed in the python root directory
-        ${PYTHON_PACKAGE_DIR}/pydhart/common_native_functions.py
-        ${PYTHON_PACKAGE_DIR}/pydhart/utils.py
-        ${PYTHON_PACKAGE_DIR}/pydhart/native_collections.py
-        ${PYTHON_PACKAGE_DIR}/pydhart/Exceptions.py
-        ${PYTHON_PACKAGE_DIR}/pydhart/native_numpy_like.py
-        ${PYTHON_PACKAGE_DIR}/pydhart/__init__.py
+        ${PYTHON_PACKAGE_DIR}/dhart/common_native_functions.py
+        ${PYTHON_PACKAGE_DIR}/dhart/utils.py
+        ${PYTHON_PACKAGE_DIR}/dhart/native_collections.py
+        ${PYTHON_PACKAGE_DIR}/dhart/Exceptions.py
+        ${PYTHON_PACKAGE_DIR}/dhart/native_numpy_like.py
+        ${PYTHON_PACKAGE_DIR}/dhart/__init__.py
 
 )
 set(ROOT_FILES # Files to be placed in the root of the project
@@ -164,13 +164,13 @@ if(${HumanFactors_Config} STREQUAL "All")
             ${C_INTERFACE_DIR}/pathfinder_C.h
     )
     LIST (APPEND PYTHON_MODULES
-            ${PYTHON_PACKAGE_DIR}/pydhart/raytracer	
-            ${PYTHON_PACKAGE_DIR}/pydhart/spatialstructures
-            ${PYTHON_PACKAGE_DIR}/pydhart/geometry
-            ${PYTHON_PACKAGE_DIR}/pydhart/viewanalysis
-            ${PYTHON_PACKAGE_DIR}/pydhart/visibilitygraph
-            ${PYTHON_PACKAGE_DIR}/pydhart/pathfinding
-            ${PYTHON_PACKAGE_DIR}/pydhart/graphgenerator
+            ${PYTHON_PACKAGE_DIR}/dhart/raytracer	
+            ${PYTHON_PACKAGE_DIR}/dhart/spatialstructures
+            ${PYTHON_PACKAGE_DIR}/dhart/geometry
+            ${PYTHON_PACKAGE_DIR}/dhart/viewanalysis
+            ${PYTHON_PACKAGE_DIR}/dhart/visibilitygraph
+            ${PYTHON_PACKAGE_DIR}/dhart/pathfinding
+            ${PYTHON_PACKAGE_DIR}/dhart/graphgenerator
     )
 
 elseif(${HumanFactors_Config} STREQUAL "RayTracer")
@@ -193,8 +193,8 @@ elseif(${HumanFactors_Config} STREQUAL "RayTracer")
             ${C_INTERFACE_DIR}/cinterface_utils.cpp
     )
     LIST (APPEND PYTHON_MODULES
-            ${PYTHON_PACKAGE_DIR}/pydhart/geometry
-            ${PYTHON_PACKAGE_DIR}/pydhart/raytracer
+            ${PYTHON_PACKAGE_DIR}/dhart/geometry
+            ${PYTHON_PACKAGE_DIR}/dhart/raytracer
     )
 
 elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
@@ -226,10 +226,10 @@ elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
             ${C_INTERFACE_DIR}/analysis_C.h
     )
     LIST(APPEND PYTHON_MODULES
-            ${PYTHON_PACKAGE_DIR}/pydhart/geometry
-            ${PYTHON_PACKAGE_DIR}/pydhart/raytracer
-            ${PYTHON_PACKAGE_DIR}/pydhart/spatialstructures
-            ${PYTHON_PACKAGE_DIR}/pydhart/graphgenerator
+            ${PYTHON_PACKAGE_DIR}/dhart/geometry
+            ${PYTHON_PACKAGE_DIR}/dhart/raytracer
+            ${PYTHON_PACKAGE_DIR}/dhart/spatialstructures
+            ${PYTHON_PACKAGE_DIR}/dhart/graphgenerator
     )
 
     elseif(${HumanFactors_Config} STREQUAL "ViewAnalysis")
@@ -260,10 +260,10 @@ elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
                 ${C_INTERFACE_DIR}/view_analysis_C.h
         )
         LIST(APPEND PYTHON_MODULES
-                ${PYTHON_PACKAGE_DIR}/pydhart/geometry
-                ${PYTHON_PACKAGE_DIR}/pydhart/raytracer
-                ${PYTHON_PACKAGE_DIR}/pydhart/spatialstructures
-                ${PYTHON_PACKAGE_DIR}/pydhart/viewanalysis
+                ${PYTHON_PACKAGE_DIR}/dhart/geometry
+                ${PYTHON_PACKAGE_DIR}/dhart/raytracer
+                ${PYTHON_PACKAGE_DIR}/dhart/spatialstructures
+                ${PYTHON_PACKAGE_DIR}/dhart/viewanalysis
         )
     
     elseif(${HumanFactors_Config} STREQUAL "VisibilityGraph")
@@ -295,10 +295,10 @@ elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
                 ${C_INTERFACE_DIR}/visibility_graph_C.cpp
         )
         LIST(APPEND PYTHON_MODULES
-                ${PYTHON_PACKAGE_DIR}/pydhart/geometry
-                ${PYTHON_PACKAGE_DIR}/pydhart/raytracer
-                ${PYTHON_PACKAGE_DIR}/pydhart/spatialstructures
-                ${PYTHON_PACKAGE_DIR}/pydhart/VisibilityGraph
+                ${PYTHON_PACKAGE_DIR}/dhart/geometry
+                ${PYTHON_PACKAGE_DIR}/dhart/raytracer
+                ${PYTHON_PACKAGE_DIR}/dhart/spatialstructures
+                ${PYTHON_PACKAGE_DIR}/dhart/VisibilityGraph
         )
         
     elseif(${HumanFactors_Config} STREQUAL "Pathfinder")
@@ -320,8 +320,8 @@ elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
                 ${C_INTERFACE_DIR}/pathfinder_C.cpp
         )
         LIST(APPEND PYTHON_MODULES
-                ${PYTHON_PACKAGE_DIR}/pydhart/spatialstructures
-                ${PYTHON_PACKAGE_DIR}/pydhart/pathfinder
+                ${PYTHON_PACKAGE_DIR}/dhart/spatialstructures
+                ${PYTHON_PACKAGE_DIR}/dhart/pathfinder
         )
     
 else()
@@ -592,13 +592,13 @@ install(FILES ${DEPENDENCY_BINARIES} DESTINATION bin)
 # Install python if the option is set to true
 if(HumanFactors_EnablePython)
     message("Installing Python!")
-    install(DIRECTORY ${PYTHON_MODULES} DESTINATION pydhart)
-    install(FILES ${PYTHON_FILES} DESTINATION pydhart)
-    install(FILES ${DEPENDENCY_BINARIES} DESTINATION pydhart/bin)
-    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIGURATION>/HumanFactors.dll" DESTINATION pydhart/bin)
+    install(DIRECTORY ${PYTHON_MODULES} DESTINATION dhart)
+    install(FILES ${PYTHON_FILES} DESTINATION dhart)
+    install(FILES ${DEPENDENCY_BINARIES} DESTINATION dhart/bin)
+    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIGURATION>/HumanFactors.dll" DESTINATION dhart/bin)
 
-    install (FILES ${RELEASE_DEPENDENCY_BINARIES} CONFIGURATIONS Release DESTINATION pydhart/bin)
-    install (FILES ${DEBUG_DEPENDENCY_BINARIES} CONFIGURATIONS Debug DESTINATION pydhart/bin)
+    install (FILES ${RELEASE_DEPENDENCY_BINARIES} CONFIGURATIONS Release DESTINATION dhart/bin)
+    install (FILES ${DEBUG_DEPENDENCY_BINARIES} CONFIGURATIONS Debug DESTINATION dhart/bin)
 
     LIST(APPEND ROOT_FILES ${PYTHON_PACKAGE_DIR}/setup.py)
 endif()
@@ -609,13 +609,13 @@ install (FILES ${DEBUG_DEPENDENCY_BINARIES} CONFIGURATIONS Debug DESTINATION bin
 
 #
 #if ($<IF<$<Config:Release>>)
-#	install(FILES ${RELEASE_DEPENDENCY_BINARIES} DESTINATION pydhart/bin)
+#	install(FILES ${RELEASE_DEPENDENCY_BINARIES} DESTINATION dhart/bin)
 #else()
-#	install(FILES ${DEBUG_DEPENDENCY_BINARIES} DESTINATION pydhart/bin)
+#	install(FILES ${DEBUG_DEPENDENCY_BINARIES} DESTINATION dhart/bin)
 #endif()
 
 
-#install(FILES $<IF:$<CONFIG:Release>,${RELEASE_DEPENDENCY_BINARIES},${DEBUG_DEPENDENCY_BINARIES}> DESTINATION pydhart/bin)
+#install(FILES $<IF:$<CONFIG:Release>,${RELEASE_DEPENDENCY_BINARIES},${DEBUG_DEPENDENCY_BINARIES}> DESTINATION dhart/bin)
 
 
 install(EXPORT ${project_name}Targets
@@ -652,7 +652,7 @@ if (HumanFactors_EnableCSharp)
     # Copy example models to the build directory for C#
     add_custom_command(TARGET HumanFactors POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory
-            "${CMAKE_CURRENT_SOURCE_DIR}/${PYTHON_PACKAGE_DIR}/pydhart/Example Models"
+            "${CMAKE_CURRENT_SOURCE_DIR}/${PYTHON_PACKAGE_DIR}/dhart/Example Models"
             "${CMAKE_CURRENT_BINARY_DIR}/CSharp/$<CONFIGURATION>/ExampleModels"
     )
     install (FILES ${CSHARP_DEPENDENCY_BINARIES} DESTINATION bin)

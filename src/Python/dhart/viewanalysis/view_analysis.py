@@ -4,9 +4,9 @@ from enum import Enum
 
 import numpy as np
 
-from humanfactorspy.spatialstructures import NodeList
-from humanfactorspy.spatialstructures.node import CreateListOfNodeStructs
-from humanfactorspy.raytracer import EmbreeBVH, RayResultList
+from dhart.spatialstructures import NodeList
+from dhart.spatialstructures.node import CreateListOfNodeStructs
+from dhart.raytracer import EmbreeBVH, RayResultList
 
 from . import viewanalysis_native_functions
 from .view_analysis_scores import ViewAnalysisAggregates, ViewAnalysisDirections
@@ -54,10 +54,10 @@ def SphericalViewAnalysisAggregate(
 
         Fire 150 rays for 3 nodesat 1.7m, then get the sum of the distance to every hit for all three
 
-        >>> from humanfactorspy.geometry import CommonRotations
-        >>> from humanfactorspy.raytracer import EmbreeBVH  
-        >>> from humanfactorspy.geometry.mesh_info import ConstructPlane
-        >>> from humanfactorspy.viewanalysis import SphericalViewAnalysisAggregate, AggregationType
+        >>> from dhart.geometry import CommonRotations
+        >>> from dhart.raytracer import EmbreeBVH  
+        >>> from dhart.geometry.mesh_info import ConstructPlane
+        >>> from dhart.viewanalysis import SphericalViewAnalysisAggregate, AggregationType
 
         >>> MI = ConstructPlane()
         >>> MI.Rotate(CommonRotations.Zup_to_Yup)
@@ -69,10 +69,10 @@ def SphericalViewAnalysisAggregate(
 
         Fire 150 rays for 3 nodesat 1.7m, then get the average distance for all three
         
-        >>> from humanfactorspy.geometry import CommonRotations
-        >>> from humanfactorspy.raytracer import EmbreeBVH  
-        >>> from humanfactorspy.geometry.mesh_info import ConstructPlane
-        >>> from humanfactorspy.viewanalysis import SphericalViewAnalysisAggregate, AggregationType
+        >>> from dhart.geometry import CommonRotations
+        >>> from dhart.raytracer import EmbreeBVH  
+        >>> from dhart.geometry.mesh_info import ConstructPlane
+        >>> from dhart.viewanalysis import SphericalViewAnalysisAggregate, AggregationType
 
         >>> MI = ConstructPlane()
         >>> MI.Rotate(CommonRotations.Zup_to_Yup)
@@ -141,10 +141,10 @@ def SphericalViewAnalysis(
 
         Conducting view analysis on 2 nodes firing 10 rays.
         
-        >>> from humanfactorspy.geometry import LoadOBJ, MeshInfo, CommonRotations
-        >>> from humanfactorspy.raytracer import EmbreeBVH  
-        >>> from humanfactorspy.geometry.mesh_info import ConstructPlane
-        >>> from humanfactorspy.viewanalysis import SphericalViewAnalysis
+        >>> from dhart.geometry import LoadOBJ, MeshInfo, CommonRotations
+        >>> from dhart.raytracer import EmbreeBVH  
+        >>> from dhart.geometry.mesh_info import ConstructPlane
+        >>> from dhart.viewanalysis import SphericalViewAnalysis
 
         >>> MI = ConstructPlane()
         >>> MI.Rotate(CommonRotations.Zup_to_Yup)
@@ -199,7 +199,7 @@ def SphericallyDistributeRays(num_rays: int, upward_fov : float = 50, downward_f
 
     Examples:
 
-        >>> from humanfactorspy.viewanalysis import SphericallyDistributeRays
+        >>> from dhart.viewanalysis import SphericallyDistributeRays
         >>> print(SphericallyDistributeRays(10))
         [[-0.         -1.          0.        ]
          [-0.26500335 -0.8181818  -0.51024675]

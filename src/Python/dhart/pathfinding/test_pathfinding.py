@@ -1,8 +1,8 @@
 import pytest
 import numpy
 
-from humanfactorspy.pathfinding import DijkstraShortestPath, DijkstraFindAllShortestPaths, calculate_distance_and_predecessor
-from humanfactorspy.spatialstructures import Graph
+from dhart.pathfinding import DijkstraShortestPath, DijkstraFindAllShortestPaths, calculate_distance_and_predecessor
+from dhart.spatialstructures import Graph
 
 test_cost = "Test"
 

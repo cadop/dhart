@@ -1,6 +1,6 @@
 import ctypes
 import numpy
-from humanfactorspy.geometry import meshinfo_native_functions
+from dhart.geometry import meshinfo_native_functions
 import itertools
 from typing import *
 
@@ -50,7 +50,7 @@ class MeshInfo(object):
             Manually construct a flat plane, by giving the vertices and triangles straight
             to the mesh info constructor. 
             
-            >>> from humanfactorspy.geometry import MeshInfo
+            >>> from dhart.geometry import MeshInfo
             >>> vertices = [(-10, 0.0, 10), (-10, 0.0, -10),(10, 0.0, 10),(10, 0.0, 10),]
             >>> tris = [[3, 1, 0], [2, 3, 0]]
             >>> MI = MeshInfo(tris, vertices)

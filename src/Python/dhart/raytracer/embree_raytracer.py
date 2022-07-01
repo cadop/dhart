@@ -2,10 +2,10 @@ import ctypes
 from typing import *
 import numpy
 
-from humanfactorspy.raytracer import EmbreeBVH
-import humanfactorspy.raytracer.raytracer_native_functions as raytracer_native_functions
-from humanfactorspy.native_numpy_like import NativeNumpyLike
-from humanfactorspy.utils import is_point
+from dhart.raytracer import EmbreeBVH
+import dhart.raytracer.raytracer_native_functions as raytracer_native_functions
+from dhart.native_numpy_like import NativeNumpyLike
+from dhart.utils import is_point
 
 __all__ = ['ResultStruct','RayResultList','isValidBVH','Intersect','IntersectForPoint','IntersectOccluded', 'IntersectDistanceDouble']
 
@@ -110,8 +110,8 @@ def Intersect(
 
         >>> import numpy as np
         >>> from numpy.lib import recfunctions as rfn
-        >>> from humanfactorspy.geometry import LoadOBJ, CommonRotations, ConstructPlane
-        >>> from humanfactorspy.raytracer import EmbreeBVH, Intersect
+        >>> from dhart.geometry import LoadOBJ, CommonRotations, ConstructPlane
+        >>> from dhart.raytracer import EmbreeBVH, Intersect
         >>> 
         >>> loaded_obj = ConstructPlane()
         >>> loaded_obj.Rotate(CommonRotations.Yup_to_Zup)
@@ -220,8 +220,8 @@ def IntersectForPoint(
     Examples:
         Fire a single ray straight downwards
 
-        >>> from humanfactorspy.geometry import LoadOBJ, CommonRotations, ConstructPlane
-        >>> from humanfactorspy.raytracer import EmbreeBVH, IntersectForPoint
+        >>> from dhart.geometry import LoadOBJ, CommonRotations, ConstructPlane
+        >>> from dhart.raytracer import EmbreeBVH, IntersectForPoint
 
         >>> loaded_obj = ConstructPlane()
         >>> loaded_obj.Rotate(CommonRotations.Yup_to_Zup)
@@ -310,8 +310,8 @@ def IntersectOccluded(
     Example:
         Firing multiple rays from a single origin in multiple directions
 
-        >>> from humanfactorspy.geometry import LoadOBJ, CommonRotations, ConstructPlane
-        >>> from humanfactorspy.raytracer import EmbreeBVH, IntersectOccluded
+        >>> from dhart.geometry import LoadOBJ, CommonRotations, ConstructPlane
+        >>> from dhart.raytracer import EmbreeBVH, IntersectOccluded
 
         >>> loaded_obj = ConstructPlane()
         >>> loaded_obj.Rotate(CommonRotations.Yup_to_Zup)

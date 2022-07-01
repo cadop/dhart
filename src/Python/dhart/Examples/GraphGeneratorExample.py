@@ -4,13 +4,13 @@ In this example we generate a graph.
 
 .. testcode::
 
-    from humanfactorspy.geometry import LoadOBJ, CommonRotations
-    from humanfactorspy.raytracer import EmbreeBVH
-    from humanfactorspy.graphgenerator import GenerateGraph
+    from dhart.geometry import LoadOBJ, CommonRotations
+    from dhart.raytracer import EmbreeBVH
+    from dhart.graphgenerator import GenerateGraph
 
-    import humanfactorspy
+    import dhart
 
-    obj_path = humanfactorspy.get_sample_model("plane.obj")
+    obj_path = dhart.get_sample_model("plane.obj")
 
     obj = LoadOBJ(obj_path, rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(obj)
@@ -37,13 +37,13 @@ In this example we generate a graph.
 
 """
 
-from humanfactorspy.geometry import LoadOBJ, CommonRotations
-from humanfactorspy.raytracer import EmbreeBVH
-from humanfactorspy.graphgenerator import GenerateGraph
+from dhart.geometry import LoadOBJ, CommonRotations
+from dhart.raytracer import EmbreeBVH
+from dhart.graphgenerator import GenerateGraph
 
-import humanfactorspy
+import dhart
 
-obj_path = humanfactorspy.get_sample_model("plane.obj")
+obj_path = dhart.get_sample_model("plane.obj")
 
 obj = LoadOBJ(obj_path, rotation=CommonRotations.Yup_to_Zup)
 bvh = EmbreeBVH(obj)

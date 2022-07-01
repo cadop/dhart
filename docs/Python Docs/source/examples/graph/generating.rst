@@ -2,7 +2,7 @@
 Generate a Graph
 ================
 
-.. currentmodule:: humanfactorspy
+.. currentmodule:: dhart
 
-.. automodule:: humanfactorspy.Examples.GraphGeneratorExample
+.. automodule:: dhart.Examples.GraphGeneratorExample
     :members:
