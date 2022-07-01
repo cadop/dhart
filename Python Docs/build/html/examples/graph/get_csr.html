@@ -87,8 +87,73 @@
         <div class="bodywrapper">
           <div class="body" id="spc-section-body">
             
-  <div class="section" id="get-a-csr-of-the-graph">
-<h1>Get a CSR of the Graph<a class="headerlink" href="#get-a-csr-of-the-graph" title="Permalink to this heading">¶</a></h1>
+  <div class="section" id="module-dhart.Examples.GraphToCSR">
+<span id="get-a-csr-of-the-graph"></span><h1>Get a CSR of the Graph<a class="headerlink" href="#module-dhart.Examples.GraphToCSR" title="Permalink to this heading">¶</a></h1>
+<p>In this example we generate a graph on a plane and print out the graph as a CSR matrix
+consisting of the node ides and the edge cost (which is distance in this case).</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dhart.geometry</span> <span class="kn">import</span> <span class="n">LoadOBJ</span><span class="p">,</span> <span class="n">CommonRotations</span>
+<span class="kn">from</span> <span class="nn">dhart.raytracer</span> <span class="kn">import</span> <span class="n">EmbreeBVH</span>
+<span class="kn">from</span> <span class="nn">dhart.graphgenerator</span> <span class="kn">import</span> <span class="n">GenerateGraph</span>
+<span class="kn">import</span> <span class="nn">dhart</span>
+
+<span class="n">obj_path</span> <span class="o">=</span> <span class="n">dhart</span><span class="o">.</span><span class="n">get_sample_model</span><span class="p">(</span><span class="s2">&quot;plane.obj&quot;</span><span class="p">)</span>
+
+<span class="n">obj</span> <span class="o">=</span> <span class="n">LoadOBJ</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="n">CommonRotations</span><span class="o">.</span><span class="n">Yup_to_Zup</span><span class="p">)</span>
+<span class="n">bvh</span> <span class="o">=</span> <span class="n">EmbreeBVH</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+
+<span class="n">start_point</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mf">1623.976928</span><span class="p">)</span>
+
+<span class="n">spacing</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">max_nodes</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="n">graph</span> <span class="o">=</span> <span class="n">GenerateGraph</span><span class="p">(</span><span class="n">bvh</span><span class="p">,</span> <span class="n">start_point</span><span class="p">,</span> <span class="n">spacing</span><span class="p">,</span> <span class="n">max_nodes</span><span class="p">,</span> <span class="n">cores</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">csr_graph</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">CompressToCSR</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">csr_graph</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>(0, 1)    0.70710677
+(0, 2)    0.5
+(0, 3)    0.70710677
+(0, 4)    0.5
+(0, 5)    0.5
+(0, 6)    0.70710677
+(0, 7)    0.5
+(0, 8)    0.70710677
+(1, 0)    0.70710677
+(1, 2)    0.5
+(1, 4)    0.5
+(1, 9)    0.70710677
+(1, 10)   0.5
+(1, 11)   0.70710677
+(1, 12)   0.5
+(1, 13)   0.70710677
+(2, 0)    0.5
+(2, 1)    0.5
+(2, 3)    0.5
+(2, 4)    0.70710677
+(2, 5)    0.70710677
+(2, 10)   0.70710677
+(2, 11)   0.5
+(2, 14)   0.70710677
+(3, 0)    0.70710677
+(3, 2)    0.5
+(3, 5)    0.5
+(3, 11)   0.70710677
+(3, 14)   0.5
+(3, 15)   0.70710677
+(3, 16)   0.5
+(3, 17)   0.70710677
+(4, 0)    0.5
+(4, 1)    0.5
+(4, 2)    0.70710677
+(4, 6)    0.5
+(4, 7)    0.70710677
+(4, 12)   0.70710677
+(4, 13)   0.5
+(4, 18)   0.70710677
+</pre></div>
+</div>
 </div>
 
 

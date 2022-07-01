@@ -90,7 +90,44 @@
 <h1>Ray Casting<a class="headerlink" href="#ray-casting" title="Permalink to this heading">¶</a></h1>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><code class="xref py py-mod docutils literal notranslate"><span class="pre">dhart.geometry</span></code></p>
+<p class="last"><a class="reference internal" href="../generated/dhart.geometry.html#module-dhart.geometry" title="dhart.geometry"><code class="xref py py-mod docutils literal notranslate"><span class="pre">dhart.geometry</span></code></a></p>
+</div>
+<span class="target" id="module-dhart.Examples.RaytracerExample"></span><p>In this example we cast an individual ray into a plane that was loaded from an OBJ file.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dhart.geometry</span> <span class="kn">import</span> <span class="n">LoadOBJ</span><span class="p">,</span> <span class="n">CommonRotations</span>
+<span class="kn">from</span> <span class="nn">dhart.raytracer</span> <span class="kn">import</span> <span class="p">(</span><span class="n">EmbreeBVH</span><span class="p">,</span><span class="n">Intersect</span><span class="p">,</span>
+                                        <span class="n">IntersectForPoint</span><span class="p">,</span>
+                                        <span class="n">IntersectOccluded</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">dhart</span>
+
+<span class="c1"># Get model path</span>
+<span class="n">obj_path</span> <span class="o">=</span> <span class="n">dhart</span><span class="o">.</span><span class="n">get_sample_model</span><span class="p">(</span><span class="s1">&#39;plane.obj&#39;</span><span class="p">)</span>
+<span class="c1"># Load mesh</span>
+<span class="n">loaded_obj</span> <span class="o">=</span> <span class="n">LoadOBJ</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="n">CommonRotations</span><span class="o">.</span><span class="n">Yup_to_Zup</span><span class="p">)</span>
+<span class="c1"># Create BVH</span>
+<span class="n">bvh</span> <span class="o">=</span> <span class="n">EmbreeBVH</span><span class="p">(</span><span class="n">loaded_obj</span><span class="p">)</span>
+
+<span class="c1"># Define point to start ray</span>
+<span class="n">p1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="c1"># Define direction to cast ray</span>
+<span class="nb">dir</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Fire a ray for the hitpoint</span>
+<span class="n">hit_point</span> <span class="o">=</span> <span class="n">IntersectForPoint</span><span class="p">(</span><span class="n">bvh</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="nb">dir</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hit point: </span><span class="si">{</span><span class="n">hit_point</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Fire a ray for distance/meshid</span>
+<span class="n">distance</span><span class="p">,</span> <span class="n">mesh_id</span> <span class="o">=</span> <span class="n">Intersect</span><span class="p">(</span><span class="n">bvh</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="nb">dir</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;distance is </span><span class="si">{</span><span class="n">distance</span><span class="si">}</span><span class="s2">, meshid is </span><span class="si">{</span><span class="n">mesh_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># See if it occludes</span>
+<span class="n">does_occlude</span> <span class="o">=</span> <span class="n">IntersectOccluded</span><span class="p">(</span><span class="n">bvh</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="mi">9999</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Does the ray connect? </span><span class="si">{</span><span class="n">does_occlude</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Hit point: (0.0, 0.0, 0.0)
+distance is 2.0, meshid is 0
+Does the ray connect? True
+</pre></div>
 </div>
 </div>
 

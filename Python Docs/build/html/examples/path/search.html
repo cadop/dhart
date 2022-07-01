@@ -87,8 +87,99 @@
         <div class="bodywrapper">
           <div class="body" id="spc-section-body">
             
-  <div class="section" id="basic-search-on-a-graph">
-<h1>Basic Search on A Graph<a class="headerlink" href="#basic-search-on-a-graph" title="Permalink to this heading">¶</a></h1>
+  <div class="section" id="module-dhart.Examples.PathPlanningBasic">
+<span id="basic-search-on-a-graph"></span><h1>Basic Search on A Graph<a class="headerlink" href="#module-dhart.Examples.PathPlanningBasic" title="Permalink to this heading">¶</a></h1>
+<p>First import the required  packages</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">dhart</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dhart.geometry</span> <span class="kn">import</span> <span class="n">LoadOBJ</span><span class="p">,</span> <span class="n">CommonRotations</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dhart.graphgenerator</span> <span class="kn">import</span> <span class="n">GenerateGraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dhart.raytracer</span> <span class="kn">import</span> <span class="n">EmbreeBVH</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dhart.pathfinding</span> <span class="kn">import</span> <span class="n">DijkstraShortestPath</span>
+</pre></div>
+</div>
+<p>The first step for path planning is to start with a searchable graph. While a graph
+could be constructed manually, the normal process for this package is to create an
+accessibility graph through the interface (explained in other examples but used here).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Load BVH</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj_path</span> <span class="o">=</span> <span class="n">dhart</span><span class="o">.</span><span class="n">get_sample_model</span><span class="p">(</span><span class="s2">&quot;plane.obj&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">loaded_obj</span> <span class="o">=</span> <span class="n">LoadOBJ</span><span class="p">(</span><span class="n">obj_path</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="n">CommonRotations</span><span class="o">.</span><span class="n">Yup_to_Zup</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embree_bvh</span> <span class="o">=</span> <span class="n">EmbreeBVH</span><span class="p">(</span><span class="n">loaded_obj</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Set graph parameters</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">start_point</span><span class="p">,</span> <span class="n">spacing</span><span class="p">,</span> <span class="n">max_nodes</span>  <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">100000</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Generate the graph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span> <span class="o">=</span> <span class="n">GenerateGraph</span><span class="p">(</span><span class="n">embree_bvh</span><span class="p">,</span> <span class="n">start_point</span><span class="p">,</span> <span class="n">spacing</span><span class="p">,</span> <span class="n">max_nodes</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get Nodes</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nodes</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">getNodes</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">max_node</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="o">.</span><span class="n">array</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Graph Generated with </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="o">.</span><span class="n">array</span><span class="p">)</span><span class="si">}</span><span class="s2"> nodes&quot;</span><span class="p">)</span>
+<span class="go">Graph Generated with 1517 nodes</span>
+</pre></div>
+</div>
+<p>The node array comes from the struct <em class="xref py py-obj">py:mod:dhart.spatialstructures.node</em>
+which defines the node as an array of [x,y,z,type,id].
+Since the nodes are stored in a numpy structured array with names we can
+extract just the x,y,z values by using the [] operator.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">xyz_nodes</span> <span class="o">=</span> <span class="n">nodes</span><span class="o">.</span><span class="n">array</span><span class="p">[[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">]]</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define a start and end node to use for the path (from,to)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">start_id</span><span class="p">,</span> <span class="n">end_id</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Extract the node from the set index</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">start_point</span> <span class="o">=</span> <span class="n">xyz_nodes</span><span class="p">[</span><span class="n">start_id</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">end_point</span>   <span class="o">=</span> <span class="n">xyz_nodes</span><span class="p">[</span><span class="n">end_id</span><span class="p">]</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Start: &#39;</span><span class="p">,</span><span class="n">start_point</span><span class="p">)</span>
+<span class="go">Start:  (0., 0., 0.)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;End:   &#39;</span><span class="p">,</span><span class="n">end_point</span><span class="p">)</span>
+<span class="go">End:    (-4., 5., 0.)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Call the shortest path</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="n">DijkstraShortestPath</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">start_id</span><span class="p">,</span> <span class="n">end_id</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="go">[(1.4142135,   0) (1.4142135,   3) (1.       ,  15) (1.4142134,  36)</span>
+<span class="go"> (1.4142137,  64) (0.       , 100)]</span>
+</pre></div>
+</div>
+<p>Just as the node xyz value can be extracted, the path costs and ids can be as well</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># extract cost array</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path_costs</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span><span class="s1">&#39;cost_to_next&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">path_costs</span><span class="p">)</span>
+<span class="go">[1.4142135 1.4142135 1.        1.4142134 1.4142137 0.       ]</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#extract id array</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path_ids</span> <span class="o">=</span> <span class="n">path</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">path_ids</span><span class="p">)</span>
+<span class="go">[  0   3  15  36  64 100]</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># As the cost array is numpy, simple operations to sum the total cost can be calculated</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">path_costs</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total path cost: &#39;</span><span class="p">,</span> <span class="n">path_sum</span><span class="p">)</span>
+<span class="go">Total path cost:  6.656854</span>
+</pre></div>
+</div>
+<p>The graph generator guarantees the order of nodes in the array to correspond with the id
+However, you can manually find the ID of the node itself as well.
+We can use the original structured node array to identify the location and
+value of the returned node ids from the shortest path.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node_ids</span> <span class="o">=</span> <span class="n">nodes</span><span class="o">.</span><span class="n">array</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">c</span><span class="p">,</span><span class="n">n</span> <span class="ow">in</span> <span class="n">path</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="c1"># find the numpy index where the node id exists (index should be same as the node id)</span>
+<span class="gp">... </span>    <span class="n">node_id</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">node_ids</span><span class="o">==</span><span class="n">n</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Index: &#39;</span><span class="p">,</span><span class="n">n</span> <span class="p">,</span><span class="s1">&#39; , Node id: &#39;</span><span class="p">,</span><span class="n">node_id</span><span class="p">,</span> <span class="s1">&#39;,  is: &#39;</span><span class="p">,</span> <span class="n">nodes</span><span class="p">[</span><span class="n">node_id</span><span class="p">])</span>
+<span class="go">Index:  0  , Node id:  (array([0], dtype=int64),) ,  is:  [(0., 0., 0., 0, 0)]</span>
+<span class="go">Index:  3  , Node id:  (array([3], dtype=int64),) ,  is:  [(-1., 1., 0., 0, 3)]</span>
+<span class="go">Index:  15  , Node id:  (array([15], dtype=int64),) ,  is:  [(-2., 2., 0., 0, 15)]</span>
+<span class="go">Index:  36  , Node id:  (array([36], dtype=int64),) ,  is:  [(-2., 3., 0., 0, 36)]</span>
+<span class="go">Index:  64  , Node id:  (array([64], dtype=int64),) ,  is:  [(-3., 4., 0., 0, 64)]</span>
+<span class="go">Index:  100  , Node id:  (array([100], dtype=int64),) ,  is:  [(-4., 5., 0., 0, 100)]</span>
+</pre></div>
+</div>
 </div>
 
 

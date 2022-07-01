@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>dhart.viewanalysis.SphericalViewAnalysisAggregate &mdash; DHART 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="DHART 0.0.1 documentation" href="../index.html" >
+    <link rel="up" title="dhart.viewanalysis" href="dhart.viewanalysis.html" >
+    <link rel="next" title="dhart.viewanalysis.SphericallyDistributeRays" href="dhart.viewanalysis.SphericallyDistributeRays.html" >
+    <link rel="prev" title="dhart.viewanalysis.SphericalViewAnalysis" href="dhart.viewanalysis.SphericalViewAnalysis.html" > 
+  </head>
+  <body>
+
+  <div class="container">
+    <div class="header">
+    </div>
+  </div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="http://">Git</a></li>
+	
+        <li class="active"><a href="../index.html">DHART 0.0.1 documentation</a></li>
+	
+          <li class="active"><a href="../code.html" >Code Reference</a></li>
+          <li class="active"><a href="dhart.viewanalysis.html" accesskey="U">dhart.viewanalysis</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="dhart.viewanalysis.SphericallyDistributeRays.html" title="dhart.viewanalysis.SphericallyDistributeRays"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="dhart.viewanalysis.SphericalViewAnalysis.html" title="dhart.viewanalysis.SphericalViewAnalysis"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="dhart-viewanalysis-sphericalviewanalysisaggregate">
+<h1>dhart.viewanalysis.SphericalViewAnalysisAggregate<a class="headerlink" href="#dhart-viewanalysis-sphericalviewanalysisaggregate" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="dhart.viewanalysis.SphericalViewAnalysisAggregate">
+<code class="sig-prename descclassname"><span class="pre">dhart.viewanalysis.</span></code><code class="sig-name descname"><span class="pre">SphericalViewAnalysisAggregate</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">bvh</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="dhart.raytracer.EmbreeBVH.html#dhart.raytracer.EmbreeBVH" title="dhart.raytracer.embree_bvh.EmbreeBVH"><span class="pre">EmbreeBVH</span></a></span></em>, <em><span class="n"><span class="pre">nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.10)"><span class="pre">Union</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.10)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="dhart.spatialstructures.NodeList.html#dhart.spatialstructures.NodeList" title="dhart.spatialstructures.node.NodeList"><span class="pre">NodeList</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em><span class="n"><span class="pre">ray_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></em>, <em><span class="n"><span class="pre">upward_fov</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em><span class="n"><span class="pre">downward_fov</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">70</span></span></em>, <em><span class="n"><span class="pre">agg_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="dhart.viewanalysis.AggregationType.html#dhart.viewanalysis.AggregationType" title="dhart.viewanalysis.view_analysis.AggregationType"><span class="pre">AggregationType</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">AggregationType.SUM</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="dhart.viewanalysis.ViewAnalysisAggregates.html#dhart.viewanalysis.ViewAnalysisAggregates" title="dhart.viewanalysis.view_analysis_scores.ViewAnalysisAggregates"><span class="pre">ViewAnalysisAggregates</span></a></span></span><a class="headerlink" href="#dhart.viewanalysis.SphericalViewAnalysisAggregate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Conduct view analysis on every node in nodes and aggregate the results</p>
+<p>ray_count rays are evenly distributed around each node in nodes and fired at the
+geometry in bvh. Hits are collected then summarized using the provided aggregation
+method. The actual number of rays fired may be slightly more or less than the amount specified,
+based on the fov limitations specified.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>bvh</strong> – the BVH for the geometry you’re shooting at</li>
+<li><strong>nodes</strong> – A list of tuples containing x,y,z coordinates of points to analyze</li>
+<li><strong>ray_count</strong> – Amount of rays to shoot</li>
+<li><strong>height</strong> – height to offset nodes from the ground in meters</li>
+<li><strong>upward_fov</strong> – maximum angle up from the user’s eyelevel  to be considred</li>
+<li><strong>downward_fov</strong> – maximum angle below from the user’s eyelevel to be considred</li>
+<li><strong>AT</strong> – aggregation method to use for distance.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>Fire 150 rays for 3 nodesat 1.7m, then get the sum of the distance to every hit for all three</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dhart.geometry</span> <span class="kn">import</span> <span class="n">CommonRotations</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dhart.raytracer</span> <span class="kn">import</span> <span class="n">EmbreeBVH</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dhart.geometry.mesh_info</span> <span class="kn">import</span> <span class="n">ConstructPlane</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dhart.viewanalysis</span> <span class="kn">import</span> <span class="n">SphericalViewAnalysisAggregate</span><span class="p">,</span> <span class="n">AggregationType</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MI</span> <span class="o">=</span> <span class="n">ConstructPlane</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MI</span><span class="o">.</span><span class="n">Rotate</span><span class="p">(</span><span class="n">CommonRotations</span><span class="o">.</span><span class="n">Zup_to_Yup</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">BVH</span> <span class="o">=</span> <span class="n">EmbreeBVH</span><span class="p">(</span><span class="n">MI</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">origins</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">va</span> <span class="o">=</span> <span class="n">SphericalViewAnalysisAggregate</span><span class="p">(</span><span class="n">BVH</span><span class="p">,</span> <span class="n">origins</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mf">1.7</span><span class="p">,</span> <span class="n">agg_type</span><span class="o">=</span><span class="n">AggregationType</span><span class="o">.</span><span class="n">SUM</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">va</span><span class="p">)</span>
+<span class="go">[95.05698 73.62985  0.     ]</span>
+</pre></div>
+</div>
+<p>Fire 150 rays for 3 nodesat 1.7m, then get the average distance for all three</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dhart.geometry</span> <span class="kn">import</span> <span class="n">CommonRotations</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dhart.raytracer</span> <span class="kn">import</span> <span class="n">EmbreeBVH</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dhart.geometry.mesh_info</span> <span class="kn">import</span> <span class="n">ConstructPlane</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dhart.viewanalysis</span> <span class="kn">import</span> <span class="n">SphericalViewAnalysisAggregate</span><span class="p">,</span> <span class="n">AggregationType</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MI</span> <span class="o">=</span> <span class="n">ConstructPlane</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MI</span><span class="o">.</span><span class="n">Rotate</span><span class="p">(</span><span class="n">CommonRotations</span><span class="o">.</span><span class="n">Zup_to_Yup</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">BVH</span> <span class="o">=</span> <span class="n">EmbreeBVH</span><span class="p">(</span><span class="n">MI</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">origins</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">va</span> <span class="o">=</span> <span class="n">SphericalViewAnalysisAggregate</span><span class="p">(</span><span class="n">BVH</span><span class="p">,</span> <span class="n">origins</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mf">1.7</span><span class="p">,</span> <span class="n">agg_type</span><span class="o">=</span><span class="n">AggregationType</span><span class="o">.</span><span class="n">AVERAGE</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">va</span><span class="p">)</span>
+<span class="go">[4.5265236 4.3311677 0.       ]</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">view analysis scores resulting from the view analysis calculation</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="dhart.viewanalysis.ViewAnalysisAggregates.html#dhart.viewanalysis.ViewAnalysisAggregates" title="dhart.viewanalysis.ViewAnalysisAggregates">ViewAnalysisAggregates</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="dhart.viewanalysis.SphericalViewAnalysis.html"
+                          title="previous chapter">dhart.viewanalysis.SphericalViewAnalysis</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="dhart.viewanalysis.SphericallyDistributeRays.html"
+                          title="next chapter">dhart.viewanalysis.SphericallyDistributeRays</a></p>
+  </div>
+
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.0.2.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

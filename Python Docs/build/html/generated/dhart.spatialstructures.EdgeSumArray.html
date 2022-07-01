@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>dhart.spatialstructures.EdgeSumArray &mdash; DHART 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="DHART 0.0.1 documentation" href="../index.html" >
+    <link rel="up" title="dhart.spatialstructures" href="dhart.spatialstructures.html" >
+    <link rel="next" title="dhart.spatialstructures.EdgeSumArray.GetPointers" href="dhart.spatialstructures.EdgeSumArray.GetPointers.html" >
+    <link rel="prev" title="dhart.spatialstructures.Edge" href="dhart.spatialstructures.Edge.html" > 
+  </head>
+  <body>
+
+  <div class="container">
+    <div class="header">
+    </div>
+  </div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="http://">Git</a></li>
+	
+        <li class="active"><a href="../index.html">DHART 0.0.1 documentation</a></li>
+	
+          <li class="active"><a href="../code.html" >Code Reference</a></li>
+          <li class="active"><a href="dhart.spatialstructures.html" accesskey="U">dhart.spatialstructures</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="dhart.spatialstructures.EdgeSumArray.GetPointers.html" title="dhart.spatialstructures.EdgeSumArray.GetPointers"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="dhart.spatialstructures.Edge.html" title="dhart.spatialstructures.Edge"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="dhart-spatialstructures-edgesumarray">
+<h1>dhart.spatialstructures.EdgeSumArray<a class="headerlink" href="#dhart-spatialstructures-edgesumarray" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="dhart.spatialstructures.EdgeSumArray">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><code class="sig-prename descclassname"><span class="pre">dhart.spatialstructures.</span></code><code class="sig-name descname"><span class="pre">EdgeSumArray</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">vector_ptr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" title="(in Python v3.10)"><span class="pre">c_void_p</span></a></span></em>, <em><span class="n"><span class="pre">data_ptr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" title="(in Python v3.10)"><span class="pre">c_void_p</span></a></span></em>, <em><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dhart.spatialstructures.EdgeSumArray" title="Permalink to this definition">¶</a></dt>
+<dd><p>Contains the scores for every node based on edges</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dhart.spatialstructures.EdgeSumArray.__init__">
+<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">vector_ptr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" title="(in Python v3.10)"><span class="pre">c_void_p</span></a></span></em>, <em><span class="n"><span class="pre">data_ptr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/ctypes.html#ctypes.c_void_p" title="(in Python v3.10)"><span class="pre">c_void_p</span></a></span></em>, <em><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dhart.spatialstructures.EdgeSumArray.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new numpy like instance</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>vector_ptr</strong> – A pointer to the C++ vector holding the information</li>
+<li><strong>data_ptr</strong> – A pointer to the underlying data of the vector. This
+is what is used for the numpy buffer.</li>
+<li><strong>size</strong> – The shape of the array. I.E. 100 would be a flat 100 element
+array, (100, 200) would be a 2dimensional array, etc.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="autosummary longtable docutils align-default">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="dhart.spatialstructures.EdgeSumArray.GetPointers.html#dhart.spatialstructures.EdgeSumArray.GetPointers" title="dhart.spatialstructures.EdgeSumArray.GetPointers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetPointers</span></code></a>()</td>
+<td>Return the underlying vector and data pointers.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="dhart.spatialstructures.EdgeSumArray.delete_fp.html#dhart.spatialstructures.EdgeSumArray.delete_fp" title="dhart.spatialstructures.EdgeSumArray.delete_fp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">delete_fp</span></code></a>()</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="dhart.spatialstructures.Edge.html"
+                          title="previous chapter">dhart.spatialstructures.Edge</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="dhart.spatialstructures.EdgeSumArray.GetPointers.html"
+                          title="next chapter">dhart.spatialstructures.EdgeSumArray.GetPointers</a></p>
+  </div>
+
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.0.2.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

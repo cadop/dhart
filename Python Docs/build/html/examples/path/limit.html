@@ -90,6 +90,149 @@
   <div class="section" id="limit-a-path">
 <h1>Limit a Path<a class="headerlink" href="#limit-a-path" title="Permalink to this heading">¶</a></h1>
 <p>In this example, we limit the path of the previous example by changes the graph significantly.</p>
+<span class="target" id="module-dhart.Examples.PathPlanningViz"></span><p>Start with the required imports</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">dhart</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dhart.geometry</span> <span class="kn">import</span> <span class="n">LoadOBJ</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dhart.graphgenerator</span> <span class="kn">import</span> <span class="n">GenerateGraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dhart.raytracer</span> <span class="kn">import</span> <span class="n">EmbreeBVH</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">dhart.pathfinding</span> <span class="kn">import</span> <span class="n">DijkstraShortestPath</span>
+</pre></div>
+</div>
+<p>Next, load a model and create the BVH</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get a sample model path</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj_path</span> <span class="o">=</span> <span class="n">dhart</span><span class="o">.</span><span class="n">get_sample_model</span><span class="p">(</span><span class="s2">&quot;energy_blob_zup.obj&quot;</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Load the obj file</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj</span> <span class="o">=</span> <span class="n">LoadOBJ</span><span class="p">(</span><span class="n">obj_path</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Create a BVH</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bvh</span> <span class="o">=</span> <span class="n">EmbreeBVH</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now set parameters to be used for the graph generator. First, we will use a large
+step size which will ignore any small bumps in the mesh. Later on we will compare
+the resulting graphs.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Set the graph parameters</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">start_point</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spacing</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">max_nodes</span> <span class="o">=</span> <span class="mi">5000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">up_step</span><span class="p">,</span> <span class="n">down_step</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">up_slope</span><span class="p">,</span> <span class="n">down_slope</span> <span class="o">=</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">60</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">max_step_connections</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Generate the Graph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span> <span class="o">=</span> <span class="n">GenerateGraph</span><span class="p">(</span><span class="n">bvh</span><span class="p">,</span> <span class="n">start_point</span><span class="p">,</span> <span class="n">spacing</span><span class="p">,</span> <span class="n">max_nodes</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="n">up_step</span><span class="p">,</span><span class="n">up_slope</span><span class="p">,</span><span class="n">down_step</span><span class="p">,</span><span class="n">down_slope</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="n">max_step_connections</span><span class="p">,</span> <span class="n">cores</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get Nodes</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nodes</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">getNodes</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Graph Generated with </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="o">.</span><span class="n">array</span><span class="p">)</span><span class="si">}</span><span class="s2"> nodes&quot;</span><span class="p">)</span>
+<span class="go">Graph Generated with 3450 nodes</span>
+</pre></div>
+</div>
+<p>Once the graph is generated, we can define an array of spatial points and get the
+closest nodes of the graph to these points.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define a start and end point in x,y</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p_desired</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">30</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">closest_nodes</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">get_closest_nodes</span><span class="p">(</span><span class="n">p_desired</span><span class="p">,</span><span class="n">z</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Closest Node: &quot;</span><span class="p">,</span> <span class="n">closest_nodes</span><span class="p">)</span>
+<span class="go">Closest Node:  [   0 3123]</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define a start and end node to use for the path (from, to)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">start_id</span><span class="p">,</span> <span class="n">end_id</span> <span class="o">=</span> <span class="n">closest_nodes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">closest_nodes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Now we call the shortest path algorithm on the default cost, which is euclidean distance.
+We can take the sum of the cost values in the array and print it to use as a comparison later.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Call the shortest path</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="n">DijkstraShortestPath</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">start_id</span><span class="p">,</span> <span class="n">end_id</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># As the cost array is numpy, simple operations to sum the total cost can be calculated</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">path</span><span class="p">[</span><span class="s1">&#39;cost_to_next&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total path cost: &#39;</span><span class="p">,</span> <span class="n">path_sum</span><span class="p">)</span>
+<span class="go">Total path cost:  62.035927</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Get the x,y,z values of the nodes at the given path ids</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path_xyz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="n">nodes</span><span class="p">[[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">]],</span> <span class="n">path</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Extract the xyz locations of the nodes</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x_nodes</span><span class="p">,</span> <span class="n">y_nodes</span><span class="p">,</span> <span class="n">z_nodes</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">nodes</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span> <span class="n">nodes</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">]</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Extract the xyz locations of the path nodes</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x_path</span><span class="p">,</span> <span class="n">y_path</span><span class="p">,</span> <span class="n">z_path</span> <span class="o">=</span> <span class="n">path_xyz</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">path_xyz</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span> <span class="n">path_xyz</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">]</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Plot the graph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">,</span> <span class="n">y_nodes</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">z_nodes</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_path</span><span class="p">,</span><span class="n">y_path</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> 
+</pre></div>
+</div>
+<p>As seen in the image, the shortest path on this graph is a straight line.</p>
+<p>(<a class="reference external" href="../../examples/path/limit-1.py">Source code</a>)</p>
+<div class="figure align-default">
+<img alt="../../_images/limit-1.png" class="plot-directive" src="../../_images/limit-1.png" />
+</div>
+<p>Repeat the process with a new graph based on different parameters and same locations
+We change the graph parameters to limit a ‘step’.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Change some graph parameters</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">up_step</span><span class="p">,</span> <span class="n">down_step</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">up_slope</span><span class="p">,</span> <span class="n">down_slope</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Generate a new Graph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span> <span class="o">=</span> <span class="n">GenerateGraph</span><span class="p">(</span><span class="n">bvh</span><span class="p">,</span> <span class="n">start_point</span><span class="p">,</span> <span class="n">spacing</span><span class="p">,</span> <span class="n">max_nodes</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="n">up_step</span><span class="p">,</span><span class="n">up_slope</span><span class="p">,</span><span class="n">down_step</span><span class="p">,</span><span class="n">down_slope</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="n">max_step_connections</span><span class="p">,</span> <span class="n">cores</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We now get the nodes of the new graph, and can see the number of nodes are the same.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nodes</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">getNodes</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Graph Generated with </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="o">.</span><span class="n">array</span><span class="p">)</span><span class="si">}</span><span class="s2"> nodes&quot;</span><span class="p">)</span>
+<span class="go">Graph Generated with 790 nodes</span>
+</pre></div>
+</div>
+<p>If we now get the closest node, it is now a different index. The key here is that the limitations
+of the graph generator step size have caused certain edges to not be valid, which changed the order
+in which nodes were created.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">closest_nodes</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">get_closest_nodes</span><span class="p">(</span><span class="n">p_desired</span><span class="p">,</span><span class="n">z</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Closest Node: &quot;</span><span class="p">,</span> <span class="n">closest_nodes</span><span class="p">)</span>
+<span class="go">Closest Node:  [  0 779]</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">start_id</span><span class="p">,</span> <span class="n">end_id</span> <span class="o">=</span> <span class="n">closest_nodes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">closest_nodes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="n">DijkstraShortestPath</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">start_id</span><span class="p">,</span> <span class="n">end_id</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If we sum the costs of the path, we see it has now increased. Important to note, we did not
+change the cost type when querying the shortest path. Instead, it is the lack of edge
+connections due to the graph generator settings. While the total number of nodes are the same,
+there a missing edges, which forces the shortest path by distance to travel around the
+thresholds defined when creating the graph.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># As the cost array is numpy, simple operations to sum the total cost can be calculated</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">path</span><span class="p">[</span><span class="s1">&#39;cost_to_next&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total path cost: &#39;</span><span class="p">,</span> <span class="n">path_sum</span><span class="p">)</span>
+<span class="go">Total path cost:  33.58837</span>
+</pre></div>
+</div>
+<p>Now extract the location data for the nodes and path to be plotted.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">path_xyz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="n">nodes</span><span class="p">[[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">]],</span> <span class="n">path</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x_nodes</span><span class="p">,</span> <span class="n">y_nodes</span><span class="p">,</span> <span class="n">z_nodes</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">nodes</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span> <span class="n">nodes</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x_path</span><span class="p">,</span> <span class="n">y_path</span><span class="p">,</span> <span class="n">z_path</span> <span class="o">=</span> <span class="n">path_xyz</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">path_xyz</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span> <span class="n">path_xyz</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">]</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Plot the graph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">,</span> <span class="n">y_nodes</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">z_nodes</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_path</span><span class="p">,</span><span class="n">y_path</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> 
+</pre></div>
+</div>
+<p>Seen in the image, the path avoids the center mound as it was too steep for the graph
+generator to run on.</p>
+<p>(<a class="reference external" href="../../examples/path/limit-2.py">Source code</a>)</p>
+<div class="figure align-default">
+<img alt="../../_images/limit-2.png" class="plot-directive" src="../../_images/limit-2.png" />
+</div>
 </div>
 
 

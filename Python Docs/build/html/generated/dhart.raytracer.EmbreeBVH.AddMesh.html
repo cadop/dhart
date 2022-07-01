@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>dhart.raytracer.EmbreeBVH.AddMesh &mdash; DHART 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../_static/css/spc-extend.css">
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/copybutton.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" >
+    <link rel="search" title="Search" href="../search.html" >
+    <link rel="top" title="DHART 0.0.1 documentation" href="../index.html" >
+    <link rel="up" title="dhart.raytracer.EmbreeBVH" href="dhart.raytracer.EmbreeBVH.html" >
+    <link rel="next" title="dhart.raytracer.RayResultList" href="dhart.raytracer.RayResultList.html" >
+    <link rel="prev" title="dhart.raytracer.EmbreeBVH" href="dhart.raytracer.EmbreeBVH.html" > 
+  </head>
+  <body>
+
+  <div class="container">
+    <div class="header">
+    </div>
+  </div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="http://">Git</a></li>
+	
+        <li class="active"><a href="../index.html">DHART 0.0.1 documentation</a></li>
+	
+          <li class="active"><a href="../code.html" >Code Reference</a></li>
+          <li class="active"><a href="dhart.raytracer.html" >dhart.raytracer</a></li>
+          <li class="active"><a href="dhart.raytracer.EmbreeBVH.html" accesskey="U">dhart.raytracer.EmbreeBVH</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="../genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="dhart.raytracer.RayResultList.html" title="dhart.raytracer.RayResultList"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="dhart.raytracer.EmbreeBVH.html" title="dhart.raytracer.EmbreeBVH"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="dhart-raytracer-embreebvh-addmesh">
+<h1>dhart.raytracer.EmbreeBVH.AddMesh<a class="headerlink" href="#dhart-raytracer-embreebvh-addmesh" title="Permalink to this heading">¶</a></h1>
+<dl class="py method">
+<dt class="sig sig-object py" id="dhart.raytracer.EmbreeBVH.AddMesh">
+<code class="sig-prename descclassname"><span class="pre">EmbreeBVH.</span></code><code class="sig-name descname"><span class="pre">AddMesh</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">mesh</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.10)"><span class="pre">Union</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="dhart.geometry.MeshInfo.html#dhart.geometry.MeshInfo" title="dhart.geometry.mesh_info.MeshInfo"><span class="pre">MeshInfo</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="dhart.geometry.MeshInfo.html#dhart.geometry.MeshInfo" title="dhart.geometry.mesh_info.MeshInfo"><span class="pre">MeshInfo</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dhart.raytracer.EmbreeBVH.AddMesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add one or more new meshes to the BVH</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>mesh</strong> (<em>Union</em><em>[</em><a class="reference internal" href="dhart.geometry.MeshInfo.html#dhart.geometry.MeshInfo" title="dhart.geometry.MeshInfo"><em>MeshInfo</em></a><em>, </em><em>List</em><em>[</em><a class="reference internal" href="dhart.geometry.MeshInfo.html#dhart.geometry.MeshInfo" title="dhart.geometry.MeshInfo"><em>MeshInfo</em></a><em>]</em><em>]</em>) – One or more instances of meshinfo to be added to the BVH.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The IDs of each mesh will be updated to new values
+in the case that they collide with the id of any
+exiting meshes already in the BVH.</p>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="dhart.raytracer.EmbreeBVH.html"
+                          title="previous chapter">dhart.raytracer.EmbreeBVH</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="dhart.raytracer.RayResultList.html"
+                          title="next chapter">dhart.raytracer.RayResultList</a></p>
+  </div>
+
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2020.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.0.2.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>
