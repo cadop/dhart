@@ -217,7 +217,7 @@ def linkcode_resolve(domain, info):
     print('**',fn)
     fn = relpath(fn, start='..\..\python_release')
     
-    newpath = "https://github.com/cadop/HumanMetrics/blob/master/Codebase/HumanFactors/humanfactorspy/%s%s" % (
+    newpath = "https://github.com/cadop/dhart/blob/main/src/Python/pydhart/%s%s" % (
            fn, linespec)
 
     return newpath
