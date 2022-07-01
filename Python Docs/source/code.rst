@@ -9,7 +9,7 @@ Modules
 Modules of the Human Factors package. 
 
 
-.. currentmodule:: humanfactorspy
+.. currentmodule:: dhart
 
 .. autosummary::
    :toctree: generated/
@@ -26,5 +26,5 @@ Modules of the Human Factors package.
 Main Module Methods
 -------------------
 
-.. automodule:: humanfactorspy
+.. automodule:: dhart
    :members:

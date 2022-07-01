@@ -2,10 +2,10 @@
 Ray Casting
 ===========
 
-.. currentmodule:: humanfactorspy
+.. currentmodule:: dhart
 
 .. seealso::
-    :py:mod:`humanfactorspy.geometry`
+    :py:mod:`dhart.geometry`
 
-.. automodule:: humanfactorspy.Examples.RaytracerExample
+.. automodule:: dhart.Examples.RaytracerExample
     :members:

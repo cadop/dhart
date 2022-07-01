@@ -14,7 +14,7 @@ Path Planning
 
 .. seealso::
     These examples use methods found in the following modules:
-    :py:mod:`humanfactorspy.pathfinding`, 
-    :py:mod:`humanfactorspy.graphgenerator`, 
-    :py:mod:`humanfactorspy.geometry`, 
-    :py:mod:`humanfactorspy.raytracer`
+    :py:mod:`dhart.pathfinding`, 
+    :py:mod:`dhart.graphgenerator`, 
+    :py:mod:`dhart.geometry`, 
+    :py:mod:`dhart.raytracer`

@@ -2,7 +2,7 @@
 Visualize a Path
 ================
 
-.. currentmodule:: humanfactorspy
+.. currentmodule:: dhart
 
-.. automodule:: humanfactorspy.Examples.PathPlanning
+.. automodule:: dhart.Examples.PathPlanning
     :members:

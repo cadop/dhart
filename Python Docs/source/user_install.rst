@@ -19,7 +19,7 @@ Navigate to this folder and the directory should look like:
 
 | Python
 | ├── bin
-| ├── humanfactorspy        
+| ├── dhart        
 | ├── lib
 | ├── README.md             
 | ├── setup.py
@@ -88,12 +88,12 @@ or if you have multiple versions:
 
 then enter:
 
-``>>> import humanfactorspy``
+``>>> import dhart``
 
-``>>> humanfactorspy.get_sample_model()``
+``>>> dhart.get_sample_model()``
 
 You should see the output being a path to your virtual environment folder:
 
-``[your directory]\\lib\\site-packages\\humanfactorspy\\Example Models\\``
+``[your directory]\\lib\\site-packages\\dhart\\Example Models\\``
 
 Where [your directory] would be ``C:\\Documents\\py_envs\\hf_analysis`` if following the directions in this document. 
