@@ -29,6 +29,9 @@ jobs:
         pip install flake8 pytest
     - name: Install from pypi
       run: | 
+        pip install matplotlib 
+        pip install numpy 
+        pip install scipy
         pip install -i https://test.pypi.org/simple/ dhart
         python -c "from dhart.spatialstructures import Graph"
 
