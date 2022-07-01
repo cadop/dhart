@@ -7,28 +7,28 @@ set(C_INTERFACE_DIR "Cinterface")
 set(C_PACKAGE_DIR "Cpp")
 set(C_TEST_DRIVER_DIR "Cpp/tests/src")
 set(DEPENDENCY_BINARIES
-		"${CMAKE_SOURCE_DIR}/external/Embree/bin/tbb.dll" 
-		"${CMAKE_SOURCE_DIR}/external/Embree/bin/embree3.dll"
-		"${CMAKE_SOURCE_DIR}/external/Microsoft/cpp/Release/msvcp140.dll"
-		"${CMAKE_SOURCE_DIR}/external/Microsoft/cpp/Release/vcruntime140.dll"
+        "${CMAKE_SOURCE_DIR}/external/Embree/bin/tbb.dll" 
+        "${CMAKE_SOURCE_DIR}/external/Embree/bin/embree3.dll"
+        "${CMAKE_SOURCE_DIR}/external/Microsoft/cpp/Release/msvcp140.dll"
+        "${CMAKE_SOURCE_DIR}/external/Microsoft/cpp/Release/vcruntime140.dll"
 )
 
 set(DEBUG_DEPENDENCY_BINARIES
-	"${CMAKE_SOURCE_DIR}/external/Microsoft/cpp/Debug/vcruntime140_1d.dll"
-	"${CMAKE_SOURCE_DIR}/external/Microsoft/cpp/Debug/vcruntime140d.dll"
-	"${CMAKE_SOURCE_DIR}/external/Microsoft/cpp/Debug/vcomp140d.dll"
-	"${CMAKE_SOURCE_DIR}/external/Microsoft/cpp/Debug/msvcp140d.dll"
+    "${CMAKE_SOURCE_DIR}/external/Microsoft/cpp/Debug/vcruntime140_1d.dll"
+    "${CMAKE_SOURCE_DIR}/external/Microsoft/cpp/Debug/vcruntime140d.dll"
+    "${CMAKE_SOURCE_DIR}/external/Microsoft/cpp/Debug/vcomp140d.dll"
+    "${CMAKE_SOURCE_DIR}/external/Microsoft/cpp/Debug/msvcp140d.dll"
 )
 
 set(RELEASE_DEPENDENCY_BINARIES
-	"${CMAKE_SOURCE_DIR}/external/Microsoft/cpp/Release/vcruntime140_1.dll"
-	"${CMAKE_SOURCE_DIR}/external/Microsoft/cpp/Release/vcomp140.dll"
+    "${CMAKE_SOURCE_DIR}/external/Microsoft/cpp/Release/vcruntime140_1.dll"
+    "${CMAKE_SOURCE_DIR}/external/Microsoft/cpp/Release/vcomp140.dll"
 )
 
 set(CSHARP_DEPENDENCY_BINARIES
-	"${CMAKE_SOURCE_DIR}/external/Microsoft/csharp/System.Buffers.dll"
-	"${CMAKE_SOURCE_DIR}/external/Microsoft/csharp/System.Memory.dll"
-	"${CMAKE_SOURCE_DIR}/external/Microsoft/csharp/System.Runtime.CompilerServices.Unsafe.dll"
+    "${CMAKE_SOURCE_DIR}/external/Microsoft/csharp/System.Buffers.dll"
+    "${CMAKE_SOURCE_DIR}/external/Microsoft/csharp/System.Memory.dll"
+    "${CMAKE_SOURCE_DIR}/external/Microsoft/csharp/System.Runtime.CompilerServices.Unsafe.dll"
 )
 
 set(HF_SOURCES)
@@ -40,14 +40,14 @@ set(project_name "HumanFactors")
 
 # Configuration options
 set_property(
-	CACHE HumanFactors_Config PROPERTY
-	STRINGS 
-		All
-		RayTracer
-		GraphGenerator
-		ViewAnalysis
-		VisibilityGraph
-		Pathfinder
+    CACHE HumanFactors_Config PROPERTY
+    STRINGS 
+        All
+        RayTracer
+        GraphGenerator
+        ViewAnalysis
+        VisibilityGraph
+        Pathfinder
 )
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS "/EHsc /MP")
@@ -61,7 +61,7 @@ set(EXTERNAL_DIR "${CMAKE_SOURCE_DIR}\\external")
 set (ENABLE_EXPORTS ON)
 
 if (NOT "${HumanFactors_InstallTitle}" STREQUAL "")
-	set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/release/${HumanFactors_InstallTitle})
+    set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/release/${HumanFactors_InstallTitle})
 endif()
 
 # Change install path if specified
@@ -88,10 +88,10 @@ add_subdirectory(external)
 
 # Set Compiler flags based on whether or not this is the release build
 if(CMAKE_BUILD_TYPE MATCHES Release)
-	set(CMAKE_CXX_FLAGS "/EHsc /openmp -O2")
-	message([STATUS] "Using release optimizations")
+    set(CMAKE_CXX_FLAGS "/EHsc /openmp -O2")
+    message([STATUS] "Using release optimizations")
 else()
-	set(CMAKE_CXX_FLAGS "/openmp /EHsc /MP")
+    set(CMAKE_CXX_FLAGS "/openmp /EHsc /MP")
 endif()
 
 
@@ -109,223 +109,223 @@ endif()
 
 # These are lists of the files that need to be installed based configuration
 set(PYTHON_MODULES  #Folders in the python directory that need to be copied over
-		"${PYTHON_PACKAGE_DIR}/humanfactorspy/Example Models" 
-		"${PYTHON_PACKAGE_DIR}/humanfactorspy/Examples" 
+        "${PYTHON_PACKAGE_DIR}/pydhart/Example Models" 
+        "${PYTHON_PACKAGE_DIR}/pydhart/Examples" 
 )
 
 set(PYTHON_FILES # Files to be placed in the python root directory
-		${PYTHON_PACKAGE_DIR}/humanfactorspy/common_native_functions.py
-		${PYTHON_PACKAGE_DIR}/humanfactorspy/utils.py
-		${PYTHON_PACKAGE_DIR}/humanfactorspy/native_collections.py
-		${PYTHON_PACKAGE_DIR}/humanfactorspy/Exceptions.py
-		${PYTHON_PACKAGE_DIR}/humanfactorspy/native_numpy_like.py
-		${PYTHON_PACKAGE_DIR}/humanfactorspy/__init__.py
+        ${PYTHON_PACKAGE_DIR}/pydhart/common_native_functions.py
+        ${PYTHON_PACKAGE_DIR}/pydhart/utils.py
+        ${PYTHON_PACKAGE_DIR}/pydhart/native_collections.py
+        ${PYTHON_PACKAGE_DIR}/pydhart/Exceptions.py
+        ${PYTHON_PACKAGE_DIR}/pydhart/native_numpy_like.py
+        ${PYTHON_PACKAGE_DIR}/pydhart/__init__.py
 
 )
 set(ROOT_FILES # Files to be placed in the root of the project
-		${PYTHON_PACKAGE_DIR}/README.md
+        ${PYTHON_PACKAGE_DIR}/README.md
 )
 
 # Change linked targets based on HumanFactors_Config
 message([STATUS] ${HumanFactors_Config} " Selected as the current HumanFactors_Configuration")
 if(${HumanFactors_Config} STREQUAL "All")
-	message([STATUS] "Generating all packages")
-	add_subdirectory(${C_PACKAGE_DIR}/raytracer)
-	add_subdirectory(${C_PACKAGE_DIR}/spatialstructures)
-	add_subdirectory(${C_PACKAGE_DIR}/objloader)
-	add_subdirectory(${C_PACKAGE_DIR}/analysismethods)
-	add_subdirectory(${C_PACKAGE_DIR}/pathfinding)
-	target_link_libraries(
-		HumanFactors PRIVATE 
-			EmbreeRayTracer
-			OBJLoader
-			SpatialStructures	
-			GraphGenerator
-			VisibilityGraph
-			ViewAnalysis
-			Pathfinder
-	)
-	LIST(APPEND HF_SOURCES
-			${C_INTERFACE_DIR}/analysis_C.cpp
-			${C_INTERFACE_DIR}/cinterface_utils.cpp
-			${C_INTERFACE_DIR}/raytracer_C.cpp
-			${C_INTERFACE_DIR}/spatialstructures_C.cpp
-			${C_INTERFACE_DIR}/view_analysis_C.cpp
-			${C_INTERFACE_DIR}/visibility_graph_C.cpp
-			${C_INTERFACE_DIR}/analysis_C.h
-			${C_INTERFACE_DIR}/cinterface_utils.h
-			${C_INTERFACE_DIR}/raytracer_C.h
-			${C_INTERFACE_DIR}/spatialstructures_C.h
-			${C_INTERFACE_DIR}/view_analysis_C.h
-			${C_INTERFACE_DIR}/visibility_graph_C.h
-			${C_INTERFACE_DIR}/objloader_C.cpp
-			${C_INTERFACE_DIR}/objloader_C.h
-			${C_INTERFACE_DIR}/pathfinder_C.cpp
-			${C_INTERFACE_DIR}/pathfinder_C.h
-	)
-	LIST (APPEND PYTHON_MODULES
-			${PYTHON_PACKAGE_DIR}/humanfactorspy/raytracer	
-			${PYTHON_PACKAGE_DIR}/humanfactorspy/spatialstructures
-			${PYTHON_PACKAGE_DIR}/humanfactorspy/geometry
-			${PYTHON_PACKAGE_DIR}/humanfactorspy/viewanalysis
-			${PYTHON_PACKAGE_DIR}/humanfactorspy/visibilitygraph
-			${PYTHON_PACKAGE_DIR}/humanfactorspy/pathfinding
-			${PYTHON_PACKAGE_DIR}/humanfactorspy/graphgenerator
-	)
+    message([STATUS] "Generating all packages")
+    add_subdirectory(${C_PACKAGE_DIR}/raytracer)
+    add_subdirectory(${C_PACKAGE_DIR}/spatialstructures)
+    add_subdirectory(${C_PACKAGE_DIR}/objloader)
+    add_subdirectory(${C_PACKAGE_DIR}/analysismethods)
+    add_subdirectory(${C_PACKAGE_DIR}/pathfinding)
+    target_link_libraries(
+        HumanFactors PRIVATE 
+            EmbreeRayTracer
+            OBJLoader
+            SpatialStructures	
+            GraphGenerator
+            VisibilityGraph
+            ViewAnalysis
+            Pathfinder
+    )
+    LIST(APPEND HF_SOURCES
+            ${C_INTERFACE_DIR}/analysis_C.cpp
+            ${C_INTERFACE_DIR}/cinterface_utils.cpp
+            ${C_INTERFACE_DIR}/raytracer_C.cpp
+            ${C_INTERFACE_DIR}/spatialstructures_C.cpp
+            ${C_INTERFACE_DIR}/view_analysis_C.cpp
+            ${C_INTERFACE_DIR}/visibility_graph_C.cpp
+            ${C_INTERFACE_DIR}/analysis_C.h
+            ${C_INTERFACE_DIR}/cinterface_utils.h
+            ${C_INTERFACE_DIR}/raytracer_C.h
+            ${C_INTERFACE_DIR}/spatialstructures_C.h
+            ${C_INTERFACE_DIR}/view_analysis_C.h
+            ${C_INTERFACE_DIR}/visibility_graph_C.h
+            ${C_INTERFACE_DIR}/objloader_C.cpp
+            ${C_INTERFACE_DIR}/objloader_C.h
+            ${C_INTERFACE_DIR}/pathfinder_C.cpp
+            ${C_INTERFACE_DIR}/pathfinder_C.h
+    )
+    LIST (APPEND PYTHON_MODULES
+            ${PYTHON_PACKAGE_DIR}/pydhart/raytracer	
+            ${PYTHON_PACKAGE_DIR}/pydhart/spatialstructures
+            ${PYTHON_PACKAGE_DIR}/pydhart/geometry
+            ${PYTHON_PACKAGE_DIR}/pydhart/viewanalysis
+            ${PYTHON_PACKAGE_DIR}/pydhart/visibilitygraph
+            ${PYTHON_PACKAGE_DIR}/pydhart/pathfinding
+            ${PYTHON_PACKAGE_DIR}/pydhart/graphgenerator
+    )
 
 elseif(${HumanFactors_Config} STREQUAL "RayTracer")
-	message([STATUS] "Building  raytracer")
-	add_subdirectory(${C_PACKAGE_DIR}/raytracer)
-	add_subdirectory(${C_PACKAGE_DIR}/objloader)
+    message([STATUS] "Building  raytracer")
+    add_subdirectory(${C_PACKAGE_DIR}/raytracer)
+    add_subdirectory(${C_PACKAGE_DIR}/objloader)
 
-	target_link_libraries(
-		HumanFactors 
-		PRIVATE 
-			EmbreeRayTracer
-			OBJLoader
-	)
-	LIST(APPEND HF_SOURCES
-			${C_INTERFACE_DIR}/objloader_C.cpp
-			${C_INTERFACE_DIR}/objloader_C.h
-			${C_INTERFACE_DIR}/raytracer_C.cpp
-			${C_INTERFACE_DIR}/raytracer_C.h
-			${C_INTERFACE_DIR}/cinterface_utils.h
-			${C_INTERFACE_DIR}/cinterface_utils.cpp
-	)
-	LIST (APPEND PYTHON_MODULES
-			${PYTHON_PACKAGE_DIR}/humanfactorspy/geometry
-			${PYTHON_PACKAGE_DIR}/humanfactorspy/raytracer
-	)
+    target_link_libraries(
+        HumanFactors 
+        PRIVATE 
+            EmbreeRayTracer
+            OBJLoader
+    )
+    LIST(APPEND HF_SOURCES
+            ${C_INTERFACE_DIR}/objloader_C.cpp
+            ${C_INTERFACE_DIR}/objloader_C.h
+            ${C_INTERFACE_DIR}/raytracer_C.cpp
+            ${C_INTERFACE_DIR}/raytracer_C.h
+            ${C_INTERFACE_DIR}/cinterface_utils.h
+            ${C_INTERFACE_DIR}/cinterface_utils.cpp
+    )
+    LIST (APPEND PYTHON_MODULES
+            ${PYTHON_PACKAGE_DIR}/pydhart/geometry
+            ${PYTHON_PACKAGE_DIR}/pydhart/raytracer
+    )
 
 elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
-	message([STATUS] "Building  graph generator")
-	add_subdirectory(${C_PACKAGE_DIR}/raytracer)
-	add_subdirectory(${C_PACKAGE_DIR}/objloader)
-	add_subdirectory(${C_PACKAGE_DIR}/analysismethods)
-	add_subdirectory(${C_PACKAGE_DIR}/spatialstructures)
+    message([STATUS] "Building  graph generator")
+    add_subdirectory(${C_PACKAGE_DIR}/raytracer)
+    add_subdirectory(${C_PACKAGE_DIR}/objloader)
+    add_subdirectory(${C_PACKAGE_DIR}/analysismethods)
+    add_subdirectory(${C_PACKAGE_DIR}/spatialstructures)
 
-	target_link_libraries(
-		HumanFactors 
-		PRIVATE
-			EmbreeRayTracer
-			OBJLoader
-			SpatialStructures
-			GraphGenerator
-	)
+    target_link_libraries(
+        HumanFactors 
+        PRIVATE
+            EmbreeRayTracer
+            OBJLoader
+            SpatialStructures
+            GraphGenerator
+    )
 
-	LIST(APPEND HF_SOURCES
-			${C_INTERFACE_DIR}/objloader_C.cpp
-			${C_INTERFACE_DIR}/objloader_C.h
-			${C_INTERFACE_DIR}/raytracer_C.cpp
-			${C_INTERFACE_DIR}/raytracer_C.h
-			${C_INTERFACE_DIR}/cinterface_utils.h
-			${C_INTERFACE_DIR}/cinterface_utils.cpp
-			${C_INTERFACE_DIR}/spatialstructures_C.h
-			${C_INTERFACE_DIR}/spatialstructures_C.cpp
-			${C_INTERFACE_DIR}/analysis_C.cpp
-			${C_INTERFACE_DIR}/analysis_C.h
-	)
-	LIST(APPEND PYTHON_MODULES
-			${PYTHON_PACKAGE_DIR}/humanfactorspy/geometry
-			${PYTHON_PACKAGE_DIR}/humanfactorspy/raytracer
-			${PYTHON_PACKAGE_DIR}/humanfactorspy/spatialstructures
-			${PYTHON_PACKAGE_DIR}/humanfactorspy/graphgenerator
-	)
+    LIST(APPEND HF_SOURCES
+            ${C_INTERFACE_DIR}/objloader_C.cpp
+            ${C_INTERFACE_DIR}/objloader_C.h
+            ${C_INTERFACE_DIR}/raytracer_C.cpp
+            ${C_INTERFACE_DIR}/raytracer_C.h
+            ${C_INTERFACE_DIR}/cinterface_utils.h
+            ${C_INTERFACE_DIR}/cinterface_utils.cpp
+            ${C_INTERFACE_DIR}/spatialstructures_C.h
+            ${C_INTERFACE_DIR}/spatialstructures_C.cpp
+            ${C_INTERFACE_DIR}/analysis_C.cpp
+            ${C_INTERFACE_DIR}/analysis_C.h
+    )
+    LIST(APPEND PYTHON_MODULES
+            ${PYTHON_PACKAGE_DIR}/pydhart/geometry
+            ${PYTHON_PACKAGE_DIR}/pydhart/raytracer
+            ${PYTHON_PACKAGE_DIR}/pydhart/spatialstructures
+            ${PYTHON_PACKAGE_DIR}/pydhart/graphgenerator
+    )
 
-	elseif(${HumanFactors_Config} STREQUAL "ViewAnalysis")
-		message([STATUS] "Building  ViewAnalysis")
-		add_subdirectory(${C_PACKAGE_DIR}/raytracer)
-		add_subdirectory(${C_PACKAGE_DIR}/objloader)
-		add_subdirectory(${C_PACKAGE_DIR}/analysismethods)
-		add_subdirectory(${C_PACKAGE_DIR}/spatialstructures)
+    elseif(${HumanFactors_Config} STREQUAL "ViewAnalysis")
+        message([STATUS] "Building  ViewAnalysis")
+        add_subdirectory(${C_PACKAGE_DIR}/raytracer)
+        add_subdirectory(${C_PACKAGE_DIR}/objloader)
+        add_subdirectory(${C_PACKAGE_DIR}/analysismethods)
+        add_subdirectory(${C_PACKAGE_DIR}/spatialstructures)
 
-		target_link_libraries(
-			HumanFactors 
-			PRIVATE
-				EmbreeRayTracer
-				OBJLoader
-				SpatialStructures
-				ViewAnalysis
-		)
-		LIST(APPEND HF_SOURCES
-				${C_INTERFACE_DIR}/objloader_C.cpp
-				${C_INTERFACE_DIR}/objloader_C.h
-				${C_INTERFACE_DIR}/raytracer_C.cpp
-				${C_INTERFACE_DIR}/raytracer_C.h
-				${C_INTERFACE_DIR}/cinterface_utils.h
-				${C_INTERFACE_DIR}/cinterface_utils.cpp
-				${C_INTERFACE_DIR}/spatialstructures_C.h
-				${C_INTERFACE_DIR}/spatialstructures_C.cpp
-				${C_INTERFACE_DIR}/view_analysis_C.cpp
-				${C_INTERFACE_DIR}/view_analysis_C.h
-		)
-		LIST(APPEND PYTHON_MODULES
-				${PYTHON_PACKAGE_DIR}/humanfactorspy/geometry
-				${PYTHON_PACKAGE_DIR}/humanfactorspy/raytracer
-				${PYTHON_PACKAGE_DIR}/humanfactorspy/spatialstructures
-				${PYTHON_PACKAGE_DIR}/humanfactorspy/viewanalysis
-		)
-	
-	elseif(${HumanFactors_Config} STREQUAL "VisibilityGraph")
-		message([STATUS] "Building Visibilitygraph")
-		add_subdirectory(${C_PACKAGE_DIR}/raytracer)
-		add_subdirectory(${C_PACKAGE_DIR}/objloader)
-		add_subdirectory(${C_PACKAGE_DIR}/analysismethods)
-		add_subdirectory(${C_PACKAGE_DIR}/spatialstructures)
+        target_link_libraries(
+            HumanFactors 
+            PRIVATE
+                EmbreeRayTracer
+                OBJLoader
+                SpatialStructures
+                ViewAnalysis
+        )
+        LIST(APPEND HF_SOURCES
+                ${C_INTERFACE_DIR}/objloader_C.cpp
+                ${C_INTERFACE_DIR}/objloader_C.h
+                ${C_INTERFACE_DIR}/raytracer_C.cpp
+                ${C_INTERFACE_DIR}/raytracer_C.h
+                ${C_INTERFACE_DIR}/cinterface_utils.h
+                ${C_INTERFACE_DIR}/cinterface_utils.cpp
+                ${C_INTERFACE_DIR}/spatialstructures_C.h
+                ${C_INTERFACE_DIR}/spatialstructures_C.cpp
+                ${C_INTERFACE_DIR}/view_analysis_C.cpp
+                ${C_INTERFACE_DIR}/view_analysis_C.h
+        )
+        LIST(APPEND PYTHON_MODULES
+                ${PYTHON_PACKAGE_DIR}/pydhart/geometry
+                ${PYTHON_PACKAGE_DIR}/pydhart/raytracer
+                ${PYTHON_PACKAGE_DIR}/pydhart/spatialstructures
+                ${PYTHON_PACKAGE_DIR}/pydhart/viewanalysis
+        )
+    
+    elseif(${HumanFactors_Config} STREQUAL "VisibilityGraph")
+        message([STATUS] "Building Visibilitygraph")
+        add_subdirectory(${C_PACKAGE_DIR}/raytracer)
+        add_subdirectory(${C_PACKAGE_DIR}/objloader)
+        add_subdirectory(${C_PACKAGE_DIR}/analysismethods)
+        add_subdirectory(${C_PACKAGE_DIR}/spatialstructures)
 
-		target_link_libraries(
-			HumanFactors 
-			PRIVATE
-				EmbreeRayTracer
-				OBJLoader
-				SpatialStructures
-				VisibilityGraph
-		)
+        target_link_libraries(
+            HumanFactors 
+            PRIVATE
+                EmbreeRayTracer
+                OBJLoader
+                SpatialStructures
+                VisibilityGraph
+        )
 
-		LIST(APPEND HF_SOURCES
-				${C_INTERFACE_DIR}/objloader_C.cpp
-				${C_INTERFACE_DIR}/objloader_C.h
-				${C_INTERFACE_DIR}/raytracer_C.cpp
-				${C_INTERFACE_DIR}/raytracer_C.h
-				${C_INTERFACE_DIR}/cinterface_utils.h
-				${C_INTERFACE_DIR}/cinterface_utils.cpp
-				${C_INTERFACE_DIR}/spatialstructures_C.h
-				${C_INTERFACE_DIR}/spatialstructures_C.cpp
-				${C_INTERFACE_DIR}/visibility_graph_C.h
-				${C_INTERFACE_DIR}/visibility_graph_C.cpp
-		)
-		LIST(APPEND PYTHON_MODULES
-				${PYTHON_PACKAGE_DIR}/humanfactorspy/geometry
-				${PYTHON_PACKAGE_DIR}/humanfactorspy/raytracer
-				${PYTHON_PACKAGE_DIR}/humanfactorspy/spatialstructures
-				${PYTHON_PACKAGE_DIR}/humanfactorspy/VisibilityGraph
-		)
-		
-	elseif(${HumanFactors_Config} STREQUAL "Pathfinder")
+        LIST(APPEND HF_SOURCES
+                ${C_INTERFACE_DIR}/objloader_C.cpp
+                ${C_INTERFACE_DIR}/objloader_C.h
+                ${C_INTERFACE_DIR}/raytracer_C.cpp
+                ${C_INTERFACE_DIR}/raytracer_C.h
+                ${C_INTERFACE_DIR}/cinterface_utils.h
+                ${C_INTERFACE_DIR}/cinterface_utils.cpp
+                ${C_INTERFACE_DIR}/spatialstructures_C.h
+                ${C_INTERFACE_DIR}/spatialstructures_C.cpp
+                ${C_INTERFACE_DIR}/visibility_graph_C.h
+                ${C_INTERFACE_DIR}/visibility_graph_C.cpp
+        )
+        LIST(APPEND PYTHON_MODULES
+                ${PYTHON_PACKAGE_DIR}/pydhart/geometry
+                ${PYTHON_PACKAGE_DIR}/pydhart/raytracer
+                ${PYTHON_PACKAGE_DIR}/pydhart/spatialstructures
+                ${PYTHON_PACKAGE_DIR}/pydhart/VisibilityGraph
+        )
+        
+    elseif(${HumanFactors_Config} STREQUAL "Pathfinder")
 
-		add_subdirectory(${C_PACKAGE_DIR}/spatialstructures)
-		add_subdirectory(${C_PACKAGE_DIR}/pathfinding)
-		target_link_libraries(
-			HumanFactors 
-			PRIVATE
-				SpatialStructures
-				Pathfinder
-		)
-		LIST(APPEND HF_SOURCES
-				${C_INTERFACE_DIR}/cinterface_utils.h
-				${C_INTERFACE_DIR}/cinterface_utils.cpp
-				${C_INTERFACE_DIR}/spatialstructures_C.h
-				${C_INTERFACE_DIR}/spatialstructures_C.cpp
-				${C_INTERFACE_DIR}/pathfinder_C.h
-				${C_INTERFACE_DIR}/pathfinder_C.cpp
-		)
-		LIST(APPEND PYTHON_MODULES
-				${PYTHON_PACKAGE_DIR}/humanfactorspy/spatialstructures
-				${PYTHON_PACKAGE_DIR}/humanfactorspy/pathfinder
-		)
-	
+        add_subdirectory(${C_PACKAGE_DIR}/spatialstructures)
+        add_subdirectory(${C_PACKAGE_DIR}/pathfinding)
+        target_link_libraries(
+            HumanFactors 
+            PRIVATE
+                SpatialStructures
+                Pathfinder
+        )
+        LIST(APPEND HF_SOURCES
+                ${C_INTERFACE_DIR}/cinterface_utils.h
+                ${C_INTERFACE_DIR}/cinterface_utils.cpp
+                ${C_INTERFACE_DIR}/spatialstructures_C.h
+                ${C_INTERFACE_DIR}/spatialstructures_C.cpp
+                ${C_INTERFACE_DIR}/pathfinder_C.h
+                ${C_INTERFACE_DIR}/pathfinder_C.cpp
+        )
+        LIST(APPEND PYTHON_MODULES
+                ${PYTHON_PACKAGE_DIR}/pydhart/spatialstructures
+                ${PYTHON_PACKAGE_DIR}/pydhart/pathfinder
+        )
+    
 else()
-	message(FATAL_ERROR "That is not a valid configuration ${HumanFactors_Config}")
+    message(FATAL_ERROR "That is not a valid configuration ${HumanFactors_Config}")
 endif()
 
 # Add sources to HumanFactors 
@@ -342,229 +342,229 @@ target_sources(HumanFactors PRIVATE ${HF_SOURCES})
 #   |__/ \_______/|_______/   \___/ |_______/ 
                                             
 if(HumanFactors_EnableTests)
-	enable_testing()
-	include(GoogleTest)
-	# Download and unpack googletest at HumanFactors_Configure time
-	configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
-	execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
-	  RESULT_VARIABLE result
-	  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-download )
-	if(result)
-	  message(FATAL_ERROR "CMake step for googletest failed: ${result}")
-	endif()
-	execute_process(COMMAND ${CMAKE_COMMAND} --build .
-	  RESULT_VARIABLE result
-	  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-download )
-	if(result)
-	  message(FATAL_ERROR "Build step for googletest failed: ${result}")
-	endif()
+    enable_testing()
+    include(GoogleTest)
+    # Download and unpack googletest at HumanFactors_Configure time
+    configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
+    execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
+      RESULT_VARIABLE result
+      WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-download )
+    if(result)
+      message(FATAL_ERROR "CMake step for googletest failed: ${result}")
+    endif()
+    execute_process(COMMAND ${CMAKE_COMMAND} --build .
+      RESULT_VARIABLE result
+      WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-download )
+    if(result)
+      message(FATAL_ERROR "Build step for googletest failed: ${result}")
+    endif()
 
-	# Prevent overriding the parent project's compiler/linker
-	# settings on Windows
-	set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+    # Prevent overriding the parent project's compiler/linker
+    # settings on Windows
+    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
-	# Add googletest directly to our build. This defines
-	# the gtest and gtest_main targets.
-	add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/googletest-src
-					 ${CMAKE_CURRENT_BINARY_DIR}/googletest-build
-					 EXCLUDE_FROM_ALL)
+    # Add googletest directly to our build. This defines
+    # the gtest and gtest_main targets.
+    add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/googletest-src
+                     ${CMAKE_CURRENT_BINARY_DIR}/googletest-build
+                     EXCLUDE_FROM_ALL)
 
-	# The gtest/gtest_main targets carry header search path
-	# dependencies automatically when using CMake 2.8.11 or
-	# later. Otherwise we have to add them here ourselves.
-	if (CMAKE_VERSION VERSION_LESS 2.8.11)
-	  include_directories("${gtest_SOURCE_DIR}/include")
-	endif()
+    # The gtest/gtest_main targets carry header search path
+    # dependencies automatically when using CMake 2.8.11 or
+    # later. Otherwise we have to add them here ourselves.
+    if (CMAKE_VERSION VERSION_LESS 2.8.11)
+      include_directories("${gtest_SOURCE_DIR}/include")
+    endif()
 
-	# Change the linked targets based on what config we're using
-	add_executable(HFUnitTests)
+    # Change the linked targets based on what config we're using
+    add_executable(HFUnitTests)
 
-	target_include_directories(HFUnitTests PRIVATE ${C_INTERFACE_DIR})
+    target_include_directories(HFUnitTests PRIVATE ${C_INTERFACE_DIR})
 
-	if(${HumanFactors_Config} STREQUAL "All")
-		message([STATUS] "Building all tests")
-		target_link_libraries(
-			HFUnitTests
-			PRIVATE
-				gtest_main
-				EmbreeRayTracer
-				OBJLoader
-				SpatialStructures
-				GraphGenerator
-				ViewAnalysis
-				VisibilityGraph
-				HFExceptions
-				Pathfinder
-		)			
-		target_sources(
-			HFUnitTests
-				PRIVATE
-					${HF_SOURCES}
-					${C_TEST_DRIVER_DIR}/AnalysisMethods.cpp
-					${C_TEST_DRIVER_DIR}/embree_raytracer.cpp
-					${C_TEST_DRIVER_DIR}/SpatialStructures.cpp
-					${C_TEST_DRIVER_DIR}/OBJLoader.cpp
-					${C_TEST_DRIVER_DIR}/VisibilityGraph.cpp
-					${C_TEST_DRIVER_DIR}/ViewAnalysis.cpp
-					${C_TEST_DRIVER_DIR}/PathFinding.cpp
-					${C_TEST_DRIVER_DIR}/performance_testing.h
-					${C_TEST_DRIVER_DIR}/GraphAlgorithms.cpp
-					${C_TEST_DRIVER_DIR}/CostAlgorithms.cpp
-					${C_TEST_DRIVER_DIR}/GraphGenerator.cpp
-					${C_TEST_DRIVER_DIR}/Performance.cpp
-					${C_TEST_DRIVER_DIR}/nanort_raytracer.cpp
-				#	${C_TEST_DRIVER_DIR}/embree_raytracer_cinterface.cpp
-				#	${C_TEST_DRIVER_DIR}/objloader_cinterface.cpp
-				#	${C_TEST_DRIVER_DIR}/analysis_C_cinterface.cpp
-				#	${C_TEST_DRIVER_DIR}/pathfinder_C_cinterface.cpp
-				#	${C_TEST_DRIVER_DIR}/view_analysis_cinterface.cpp
-				#	${C_TEST_DRIVER_DIR}/visibility_graph_cinterface.cpp
-				#	${C_TEST_DRIVER_DIR}/spatialstructures_C_cinterface.cpp
-		)
-	elseif(${HumanFactors_Config} STREQUAL "RayTracer")
-		target_sources(
-			HFUnitTests
-			PRIVATE
-				${HF_SOURCES}
-				${C_TEST_DRIVER_DIR}/embree_raytracer.cpp
-				${C_TEST_DRIVER_DIR}/nanort_raytracer.cpp
-				${C_TEST_DRIVER_DIR}/OBJLoader.cpp
-			)
-		target_include_directories(
-			HFUnitTests
-			PRIVATE
-				${CMAKE_CURRENT_LIST_DIR}/src
-		)
+    if(${HumanFactors_Config} STREQUAL "All")
+        message([STATUS] "Building all tests")
+        target_link_libraries(
+            HFUnitTests
+            PRIVATE
+                gtest_main
+                EmbreeRayTracer
+                OBJLoader
+                SpatialStructures
+                GraphGenerator
+                ViewAnalysis
+                VisibilityGraph
+                HFExceptions
+                Pathfinder
+        )			
+        target_sources(
+            HFUnitTests
+                PRIVATE
+                    ${HF_SOURCES}
+                    ${C_TEST_DRIVER_DIR}/AnalysisMethods.cpp
+                    ${C_TEST_DRIVER_DIR}/embree_raytracer.cpp
+                    ${C_TEST_DRIVER_DIR}/SpatialStructures.cpp
+                    ${C_TEST_DRIVER_DIR}/OBJLoader.cpp
+                    ${C_TEST_DRIVER_DIR}/VisibilityGraph.cpp
+                    ${C_TEST_DRIVER_DIR}/ViewAnalysis.cpp
+                    ${C_TEST_DRIVER_DIR}/PathFinding.cpp
+                    ${C_TEST_DRIVER_DIR}/performance_testing.h
+                    ${C_TEST_DRIVER_DIR}/GraphAlgorithms.cpp
+                    ${C_TEST_DRIVER_DIR}/CostAlgorithms.cpp
+                    ${C_TEST_DRIVER_DIR}/GraphGenerator.cpp
+                    ${C_TEST_DRIVER_DIR}/Performance.cpp
+                    ${C_TEST_DRIVER_DIR}/nanort_raytracer.cpp
+                #	${C_TEST_DRIVER_DIR}/embree_raytracer_cinterface.cpp
+                #	${C_TEST_DRIVER_DIR}/objloader_cinterface.cpp
+                #	${C_TEST_DRIVER_DIR}/analysis_C_cinterface.cpp
+                #	${C_TEST_DRIVER_DIR}/pathfinder_C_cinterface.cpp
+                #	${C_TEST_DRIVER_DIR}/view_analysis_cinterface.cpp
+                #	${C_TEST_DRIVER_DIR}/visibility_graph_cinterface.cpp
+                #	${C_TEST_DRIVER_DIR}/spatialstructures_C_cinterface.cpp
+        )
+    elseif(${HumanFactors_Config} STREQUAL "RayTracer")
+        target_sources(
+            HFUnitTests
+            PRIVATE
+                ${HF_SOURCES}
+                ${C_TEST_DRIVER_DIR}/embree_raytracer.cpp
+                ${C_TEST_DRIVER_DIR}/nanort_raytracer.cpp
+                ${C_TEST_DRIVER_DIR}/OBJLoader.cpp
+            )
+        target_include_directories(
+            HFUnitTests
+            PRIVATE
+                ${CMAKE_CURRENT_LIST_DIR}/src
+        )
 
-		target_link_libraries(HFUnitTests 
-			PRIVATE 
-				gtest_main
-				OBJLoader
-				HFExceptions 
-				EmbreeRayTracer
-			)
-	elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
-		target_link_libraries(
-			HFUnitTests
-			PRIVATE
-				gtest_main
-				OBJLoader
-				HFExceptions
-				EmbreeRayTracer
-				SpatialStructures
-				GraphGenerator
-		)
-		target_sources(
-			HFUnitTests
-			PRIVATE
-				${HF_SOURCES}
-				${C_TEST_DRIVER_DIR}/embree_raytracer.cpp
-				${C_TEST_DRIVER_DIR}/OBJLoader.cpp
-				${C_TEST_DRIVER_DIR}/SpatialStructures.cpp
-				${C_TEST_DRIVER_DIR}/AnalysisMethods.cpp
-				${C_TEST_DRIVER_DIR}/performance_testing.h
-		)
-	elseif(${HumanFactors_Config} STREQUAL "VisibilityGraph")
-		target_link_libraries(
-			HFUnitTests
-			PRIVATE
-				gtest_main
-				OBJLoader
-				HFExceptions
-				EmbreeRayTracer
-				SpatialStructures
-				VisibilityGraph
-		)
-		target_sources(
-			HFUnitTests
-			PRIVATE
-				${HF_SOURCES}
-				${C_TEST_DRIVER_DIR}/embree_raytracer.cpp
-				${C_TEST_DRIVER_DIR}/OBJLoader.cpp
-				${C_TEST_DRIVER_DIR}/SpatialStructures.cpp
-				${C_TEST_DRIVER_DIR}/VisibilityGraph.cpp
-				${C_TEST_DRIVER_DIR}/performance_testing.h
-		)
-	elseif(${HumanFactors_Config} STREQUAL "ViewAnalysis")
-		target_link_libraries(
-			HFUnitTests
-			PRIVATE
-				gtest_main
-				OBJLoader
-				HFExceptions
-				EmbreeRayTracer
-				SpatialStructures
-				ViewAnalysis
-		)
-		target_sources(
-			HFUnitTests
-			PRIVATE
-				${HF_SOURCES}
-				${C_TEST_DRIVER_DIR}/embree_raytracer.cpp
-				${C_TEST_DRIVER_DIR}/OBJLoader.cpp
-				${C_TEST_DRIVER_DIR}/SpatialStructures.cpp
-				${C_TEST_DRIVER_DIR}/ViewAnalysis.cpp
-				${C_TEST_DRIVER_DIR}/performance_testing.h
-		)
-	elseif(${HumanFactors_Config} STREQUAL "VisibilityGraph")
-		target_link_libraries(
-			HFUnitTests
-			PRIVATE
-				gtest_main
-				OBJLoader
-				HFExceptions
-				EmbreeRayTracer
-				SpatialStructures
-				VisibilityGraph
-		)
-		target_sources(
-			HFUnitTests
-			PRIVATE
-				${HF_SOURCES}
-				${C_TEST_DRIVER_DIR}/embree_raytracer.cpp
-				${C_TEST_DRIVER_DIR}/OBJLoader.cpp
-				${C_TEST_DRIVER_DIR}/SpatialStructures.cpp
-				${C_TEST_DRIVER_DIR}/VisibilityGraph.cpp
-				${C_TEST_DRIVER_DIR}/performance_testing.h
-		)
-	elseif(${HumanFactors_Config} STREQUAL "Pathfinder")
-		target_link_libraries(
-			HFUnitTests
-			PRIVATE
-				gtest_main
-				HFExceptions
-				SpatialStructures
-				Pathfinder
-		)
-		target_sources(
-			HFUnitTests
-			PRIVATE
-				${C_TEST_DRIVER_DIR}/SpatialStructures.cpp
-				${C_TEST_DRIVER_DIR}/PathFinding.cpp
-				${C_TEST_DRIVER_DIR}/performance_testing.h
-		)
-	endif()
-	# add_test(NAME FirstTest COMMAND HFUnitTests)
-	gtest_discover_tests(HFUnitTests WORKING_DIRECTORY $<TARGET_FILE_DIR:HFUnitTests>)
-	install(
-		TARGETS HFUnitTests
-		LIBRARY DESTINATION lib
-		ARCHIVE DESTINATION lib
-		RUNTIME DESTINATION bin
-		INCLUDES DESTINATION includes
-	)
-	add_custom_command(
-		TARGET HFUnitTests PRE_BUILD
-		COMMAND ${CMAKE_COMMAND} -E copy 
-		${DEPENDENCY_BINARIES}
-		$<TARGET_FILE_DIR:HFUnitTests>
-	)
-	add_custom_command(
-		TARGET HFUnitTests PRE_BUILD
-		COMMAND ${CMAKE_COMMAND} -E copy_directory
-		"${CMAKE_CURRENT_SOURCE_DIR}/${C_PACKAGE_DIR}/tests/Example Models"
-		$<TARGET_FILE_DIR:HFUnitTests>
-	)
+        target_link_libraries(HFUnitTests 
+            PRIVATE 
+                gtest_main
+                OBJLoader
+                HFExceptions 
+                EmbreeRayTracer
+            )
+    elseif(${HumanFactors_Config} STREQUAL "GraphGenerator")
+        target_link_libraries(
+            HFUnitTests
+            PRIVATE
+                gtest_main
+                OBJLoader
+                HFExceptions
+                EmbreeRayTracer
+                SpatialStructures
+                GraphGenerator
+        )
+        target_sources(
+            HFUnitTests
+            PRIVATE
+                ${HF_SOURCES}
+                ${C_TEST_DRIVER_DIR}/embree_raytracer.cpp
+                ${C_TEST_DRIVER_DIR}/OBJLoader.cpp
+                ${C_TEST_DRIVER_DIR}/SpatialStructures.cpp
+                ${C_TEST_DRIVER_DIR}/AnalysisMethods.cpp
+                ${C_TEST_DRIVER_DIR}/performance_testing.h
+        )
+    elseif(${HumanFactors_Config} STREQUAL "VisibilityGraph")
+        target_link_libraries(
+            HFUnitTests
+            PRIVATE
+                gtest_main
+                OBJLoader
+                HFExceptions
+                EmbreeRayTracer
+                SpatialStructures
+                VisibilityGraph
+        )
+        target_sources(
+            HFUnitTests
+            PRIVATE
+                ${HF_SOURCES}
+                ${C_TEST_DRIVER_DIR}/embree_raytracer.cpp
+                ${C_TEST_DRIVER_DIR}/OBJLoader.cpp
+                ${C_TEST_DRIVER_DIR}/SpatialStructures.cpp
+                ${C_TEST_DRIVER_DIR}/VisibilityGraph.cpp
+                ${C_TEST_DRIVER_DIR}/performance_testing.h
+        )
+    elseif(${HumanFactors_Config} STREQUAL "ViewAnalysis")
+        target_link_libraries(
+            HFUnitTests
+            PRIVATE
+                gtest_main
+                OBJLoader
+                HFExceptions
+                EmbreeRayTracer
+                SpatialStructures
+                ViewAnalysis
+        )
+        target_sources(
+            HFUnitTests
+            PRIVATE
+                ${HF_SOURCES}
+                ${C_TEST_DRIVER_DIR}/embree_raytracer.cpp
+                ${C_TEST_DRIVER_DIR}/OBJLoader.cpp
+                ${C_TEST_DRIVER_DIR}/SpatialStructures.cpp
+                ${C_TEST_DRIVER_DIR}/ViewAnalysis.cpp
+                ${C_TEST_DRIVER_DIR}/performance_testing.h
+        )
+    elseif(${HumanFactors_Config} STREQUAL "VisibilityGraph")
+        target_link_libraries(
+            HFUnitTests
+            PRIVATE
+                gtest_main
+                OBJLoader
+                HFExceptions
+                EmbreeRayTracer
+                SpatialStructures
+                VisibilityGraph
+        )
+        target_sources(
+            HFUnitTests
+            PRIVATE
+                ${HF_SOURCES}
+                ${C_TEST_DRIVER_DIR}/embree_raytracer.cpp
+                ${C_TEST_DRIVER_DIR}/OBJLoader.cpp
+                ${C_TEST_DRIVER_DIR}/SpatialStructures.cpp
+                ${C_TEST_DRIVER_DIR}/VisibilityGraph.cpp
+                ${C_TEST_DRIVER_DIR}/performance_testing.h
+        )
+    elseif(${HumanFactors_Config} STREQUAL "Pathfinder")
+        target_link_libraries(
+            HFUnitTests
+            PRIVATE
+                gtest_main
+                HFExceptions
+                SpatialStructures
+                Pathfinder
+        )
+        target_sources(
+            HFUnitTests
+            PRIVATE
+                ${C_TEST_DRIVER_DIR}/SpatialStructures.cpp
+                ${C_TEST_DRIVER_DIR}/PathFinding.cpp
+                ${C_TEST_DRIVER_DIR}/performance_testing.h
+        )
+    endif()
+    # add_test(NAME FirstTest COMMAND HFUnitTests)
+    gtest_discover_tests(HFUnitTests WORKING_DIRECTORY $<TARGET_FILE_DIR:HFUnitTests>)
+    install(
+        TARGETS HFUnitTests
+        LIBRARY DESTINATION lib
+        ARCHIVE DESTINATION lib
+        RUNTIME DESTINATION bin
+        INCLUDES DESTINATION includes
+    )
+    add_custom_command(
+        TARGET HFUnitTests PRE_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy 
+        ${DEPENDENCY_BINARIES}
+        $<TARGET_FILE_DIR:HFUnitTests>
+    )
+    add_custom_command(
+        TARGET HFUnitTests PRE_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${CMAKE_CURRENT_SOURCE_DIR}/${C_PACKAGE_DIR}/tests/Example Models"
+        $<TARGET_FILE_DIR:HFUnitTests>
+    )
 endif()
 
 
@@ -581,26 +581,26 @@ endif()
 
 # Install the current C++ Project
 install(TARGETS ${project_name}
-		EXPORT ${project_name}Targets
-		LIBRARY DESTINATION lib
-		ARCHIVE DESTINATION lib
-		RUNTIME DESTINATION bin
-		INCLUDES DESTINATION include
-	)
+        EXPORT ${project_name}Targets
+        LIBRARY DESTINATION lib
+        ARCHIVE DESTINATION lib
+        RUNTIME DESTINATION bin
+        INCLUDES DESTINATION include
+    )
 install(FILES ${DEPENDENCY_BINARIES} DESTINATION bin)
 
 # Install python if the option is set to true
 if(HumanFactors_EnablePython)
-	message("Installing Python!")
-	install(DIRECTORY ${PYTHON_MODULES} DESTINATION humanfactorspy)
-	install(FILES ${PYTHON_FILES} DESTINATION humanfactorspy)
-	install(FILES ${DEPENDENCY_BINARIES} DESTINATION humanfactorspy/bin)
-	install(FILES "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIGURATION>/HumanFactors.dll" DESTINATION humanfactorspy/bin)
+    message("Installing Python!")
+    install(DIRECTORY ${PYTHON_MODULES} DESTINATION pydhart)
+    install(FILES ${PYTHON_FILES} DESTINATION pydhart)
+    install(FILES ${DEPENDENCY_BINARIES} DESTINATION pydhart/bin)
+    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIGURATION>/HumanFactors.dll" DESTINATION pydhart/bin)
 
-	install (FILES ${RELEASE_DEPENDENCY_BINARIES} CONFIGURATIONS Release DESTINATION humanfactorspy/bin)
-	install (FILES ${DEBUG_DEPENDENCY_BINARIES} CONFIGURATIONS Debug DESTINATION humanfactorspy/bin)
+    install (FILES ${RELEASE_DEPENDENCY_BINARIES} CONFIGURATIONS Release DESTINATION pydhart/bin)
+    install (FILES ${DEBUG_DEPENDENCY_BINARIES} CONFIGURATIONS Debug DESTINATION pydhart/bin)
 
-	LIST(APPEND ROOT_FILES ${PYTHON_PACKAGE_DIR}/setup.py)
+    LIST(APPEND ROOT_FILES ${PYTHON_PACKAGE_DIR}/setup.py)
 endif()
 
 
@@ -609,53 +609,53 @@ install (FILES ${DEBUG_DEPENDENCY_BINARIES} CONFIGURATIONS Debug DESTINATION bin
 
 #
 #if ($<IF<$<Config:Release>>)
-#	install(FILES ${RELEASE_DEPENDENCY_BINARIES} DESTINATION humanfactorspy/bin)
+#	install(FILES ${RELEASE_DEPENDENCY_BINARIES} DESTINATION pydhart/bin)
 #else()
-#	install(FILES ${DEBUG_DEPENDENCY_BINARIES} DESTINATION humanfactorspy/bin)
+#	install(FILES ${DEBUG_DEPENDENCY_BINARIES} DESTINATION pydhart/bin)
 #endif()
 
 
-#install(FILES $<IF:$<CONFIG:Release>,${RELEASE_DEPENDENCY_BINARIES},${DEBUG_DEPENDENCY_BINARIES}> DESTINATION humanfactorspy/bin)
+#install(FILES $<IF:$<CONFIG:Release>,${RELEASE_DEPENDENCY_BINARIES},${DEBUG_DEPENDENCY_BINARIES}> DESTINATION pydhart/bin)
 
 
 install(EXPORT ${project_name}Targets
-	FILE
-		${project_name}Targets.cmake
+    FILE
+        ${project_name}Targets.cmake
 #	NAMESPACE
 #		${project_name}::
-	DESTINATION
-		lib/cmake/${project_name}
+    DESTINATION
+        lib/cmake/${project_name}
 )
 
 if (HumanFactors_EnableCSharp)
-	add_subdirectory(${CSHARP_DIR})
+    add_subdirectory(${CSHARP_DIR})
 
-	add_custom_command(TARGET HumanFactors POST_BUILD
-		COMMAND ${CMAKE_COMMAND} -E copy_if_different
-			"${CMAKE_SOURCE_DIR}/external/Embree/bin/tbb.dll" 
-			"${CMAKE_CURRENT_BINARY_DIR}/CSharp/$<CONFIGURATION>/tbb.dll"
-	)
+    add_custom_command(TARGET HumanFactors POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${CMAKE_SOURCE_DIR}/external/Embree/bin/tbb.dll" 
+            "${CMAKE_CURRENT_BINARY_DIR}/CSharp/$<CONFIGURATION>/tbb.dll"
+    )
 
-	add_custom_command(TARGET HumanFactors POST_BUILD
-		COMMAND ${CMAKE_COMMAND} -E copy_if_different
-			"${CMAKE_SOURCE_DIR}/external/Embree/bin/embree3.dll" 
-			"${CMAKE_CURRENT_BINARY_DIR}/CSharp/$<CONFIGURATION>/embree3.dll"
-	)
+    add_custom_command(TARGET HumanFactors POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${CMAKE_SOURCE_DIR}/external/Embree/bin/embree3.dll" 
+            "${CMAKE_CURRENT_BINARY_DIR}/CSharp/$<CONFIGURATION>/embree3.dll"
+    )
 
-	# The following commands copy resources necessary for C# to perform its unittests
-	add_custom_command(TARGET HumanFactors POST_BUILD
-		COMMAND ${CMAKE_COMMAND} -E copy_if_different
-			"${CMAKE_CURRENT_BINARY_DIR}/$<CONFIGURATION>/HumanFactors.dll"
-			"${CMAKE_CURRENT_BINARY_DIR}/CSharp/$<CONFIGURATION>/HumanFactors.dll"
-	)
+    # The following commands copy resources necessary for C# to perform its unittests
+    add_custom_command(TARGET HumanFactors POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIGURATION>/HumanFactors.dll"
+            "${CMAKE_CURRENT_BINARY_DIR}/CSharp/$<CONFIGURATION>/HumanFactors.dll"
+    )
 
-	# Copy example models to the build directory for C#
-	add_custom_command(TARGET HumanFactors POST_BUILD
-		COMMAND ${CMAKE_COMMAND} -E copy_directory
-			"${CMAKE_CURRENT_SOURCE_DIR}/${PYTHON_PACKAGE_DIR}/humanfactorspy/Example Models"
-			"${CMAKE_CURRENT_BINARY_DIR}/CSharp/$<CONFIGURATION>/ExampleModels"
-	)
-	install (FILES ${CSHARP_DEPENDENCY_BINARIES} DESTINATION bin)
+    # Copy example models to the build directory for C#
+    add_custom_command(TARGET HumanFactors POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+            "${CMAKE_CURRENT_SOURCE_DIR}/${PYTHON_PACKAGE_DIR}/pydhart/Example Models"
+            "${CMAKE_CURRENT_BINARY_DIR}/CSharp/$<CONFIGURATION>/ExampleModels"
+    )
+    install (FILES ${CSHARP_DEPENDENCY_BINARIES} DESTINATION bin)
 endif()
 
 
