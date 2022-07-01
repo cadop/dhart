@@ -55,6 +55,12 @@ jobs:
         pip install -e . 
     - name: test if package dll is installed
       run: | 
+        ls 
+        cd build/Python
+        ls 
+        cd bin 
+        ls
+        python -c "import dhart"
         python -c "from dhart.spatialstructures import Graph"
     # - name: Install Sphinx Latex
     #   run: |
