@@ -53,6 +53,9 @@ jobs:
         cd build/Python
         ls
         pip install -e . 
+    - name: test if package dll is installed
+      run: | 
+        python -c "from dhart.spatialstructures import Graph"
     # - name: Install Sphinx Latex
     #   run: |
         # sudo apt-get update -y && sudo apt-get install -y latexmk texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended
