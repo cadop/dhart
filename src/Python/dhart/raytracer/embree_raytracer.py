@@ -42,7 +42,7 @@ class RayResultList(NativeNumpyLike):
             vector_ptr: a pointer to a vector of floats
             data_ptr: a pointer to the underlying data of the node vector
             node_count : The number of nodes for this result set
-            ray_count : the number of rays fired per node in this result set
+            ray_count : the number of rays cast per node in this result set
         """
 
         # Make this one dimensional if either node_count or ray_count is 1
@@ -84,7 +84,7 @@ def Intersect(
     """ Cast one or more rays to get the distance to their point of intersection
     and the ID of the mesh they intersected.
     
-    In situations where multiple rays are shot, rays will be fired in parallel. 
+    In situations where multiple rays are shot, rays will be cast in parallel. 
 
     Note:
         Accepts the following configurations:
@@ -163,7 +163,7 @@ def Intersect(
     
     # If both are points, cast a single ray
     if origin_is_point and direction_is_point: 
-        return raytracer_native_functions.FireRaySingleDistance(
+        return raytracer_native_functions.CastRaySingleDistance(
             bvh.pointer, origin, direction, max_distance
         )
 
@@ -178,7 +178,7 @@ def Intersect(
         assert result_size != 0
 
         # Call native function
-        vector_ptr, array_ptr = raytracer_native_functions.FireMultipleRaysDistance(
+        vector_ptr, array_ptr = raytracer_native_functions.CastMultipleRaysDistance(
             bvh.pointer, origin, direction, max_distance
         )
 
@@ -192,13 +192,13 @@ def IntersectForPoint(
     directions: Union[Iterable[Tuple[float, float, float]], Tuple[float, float, float]],
     max_distance: float = -1,
 ) -> List[Union[Tuple[float, float, float], None]]:
-    """ Fire one or more rays based on input origins and directions 
+    """ Cast one or more rays based on input origins and directions 
         and get the hit point.
     
-    To shoot multiple rays from one origin, or fire rays from multiple origins
+    To shoot multiple rays from one origin, or cast rays from multiple origins
     in a single direction, set origins OR directions to a single value. If
-    they are both set to a single value then the ray will be fired as a single 
-    ray via FireRay.
+    they are both set to a single value then the ray will be cast as a single 
+    ray via CastRay.
 
     Note:
         Accepts the following configurations:
@@ -218,7 +218,7 @@ def IntersectForPoint(
         TypeError : When the passed BVH is invalid
 
     Examples:
-        Fire a single ray straight downwards
+        Cast a single ray straight downwards
 
         >>> from dhart.geometry import LoadOBJ, CommonRotations, ConstructPlane
         >>> from dhart.raytracer import EmbreeBVH, IntersectForPoint
@@ -265,19 +265,19 @@ def IntersectForPoint(
         if len(directions) != len(origins):
             print("Length of directions and origins do not match!")
             raise RuntimeError()
-        return raytracer_native_functions.FireMultipleRays(
+        return raytracer_native_functions.CastMultipleRays(
             bvh.pointer, origins, directions, max_distance
         )
     elif directions_is_list and not origins_is_list:
-        return raytracer_native_functions.FireOneOriginMultipleDirections(
+        return raytracer_native_functions.CastOneOriginMultipleDirections(
             bvh.pointer, origin, directions, max_distance
         )
     elif not directions_is_list and origins_is_list:
-        return raytracer_native_functions.FireMultipleOriginsOneDirection(
+        return raytracer_native_functions.CastMultipleOriginsOneDirection(
             bvh.pointer, origins, direction, max_distance
         )
     elif not directions_is_list and not origins_is_list:
-        return raytracer_native_functions.FireRay(
+        return raytracer_native_functions.CastRay(
             bvh.pointer, origin, direction, max_distance
         )
 
@@ -288,7 +288,7 @@ def IntersectOccluded(
     directions: Union[Iterable[Tuple[float, float, float]], Tuple[float, float, float]],
     max_distance: float = -1,
 ) -> Union[List[bool], bool]:
-    """ Fire one or more occlusion rays in C++
+    """ Cast one or more occlusion rays in C++
 
     Occlusion rays are faster than standard rays, however can only return whether
     or not they hit anything. 
@@ -327,7 +327,7 @@ def IntersectOccluded(
     if len(origins) == 1 or not isinstance(origins, List):
         origins = (origins[0], origins[1], origins[2])
 
-    res = raytracer_native_functions.FireOcclusionRays(
+    res = raytracer_native_functions.CastOcclusionRays(
         bvh.pointer, origins, directions, max_distance
     )
 

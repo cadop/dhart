@@ -116,7 +116,7 @@ namespace HumanFactors.RayTracing
 
             \param bvh  A valid BVH containing geometry to intersect with.
             \param origins A list of x,y,z coordinates to cast rays in.
-            \param directions A list of x,y,z directions to fire in.
+            \param directions A list of x,y,z directions to cast in.
             \param max_distance Maximum distance to consider for intersection.
 
             \returns
@@ -131,11 +131,11 @@ namespace HumanFactors.RayTracing
             origin/direction in order. i.e. (origin[0], direction[0]), (origin[1], direction[1]), etc.
             </item>
             <item>
-            One direction, multiple origins: Fire a ray in the given
+            One direction, multiple origins: Cast a ray in the given
             direction from each origin point in origins.
             </item>
             <item>
-             One origin, multiple directions: Fire a ray from the origin point
+             One origin, multiple directions: Cast a ray from the origin point
             in each direction in directions.
             </item>
             </list>
@@ -145,7 +145,7 @@ namespace HumanFactors.RayTracing
 
             \par Example
             \snippet raytracer\test_raytracer.cs EX_BVH_CSTOR
-            \snippet raytracer\test_raytracer.cs EX_FireRayMultiplePoints
+            \snippet raytracer\test_raytracer.cs EX_CastRayMultiplePoints
             ```
             Origin: (0, 0, 1), Intersection: (0, 0, 0)
 			Origin: (0, 1, 1), Intersection: (0, 1, 0)
@@ -196,7 +196,7 @@ namespace HumanFactors.RayTracing
 
             \param bvh  A valid BVH containing geometry to intersect with.
             \param origins A list of x, y, z coordinates to cast rays in.
-            \param directions A list of x, y, z directions to fire in.
+            \param directions A list of x, y, z directions to cast in.
             \param max_distance Maximum distance to consider for intersection.
 
             \returns
@@ -286,6 +286,6 @@ namespace HumanFactors.RayTracing
 			IEnumerable<Vector3D> origin,
 			IEnumerable<Vector3D> direction,
 			float max_distance = -1
-		) => NativeMethods.C_FireOcclusionRays(bvh.Pointer, origin, direction, max_distance);
+		) => NativeMethods.C_CastOcclusionRays(bvh.Pointer, origin, direction, max_distance);
 	}
 }

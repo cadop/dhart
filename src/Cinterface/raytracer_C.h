@@ -188,17 +188,17 @@ C_INTERFACE AddMeshes(
 C_INTERFACE DestroyRayTracer(HF::RayTracer::EmbreeRayTracer* rt_to_destroy);
 
 /*!
-	\brief		Fire rays for each node in origins/directions as ordered pairs and get distance back as a result.
+	\brief		Cast rays for each node in origins/directions as ordered pairs and get distance back as a result.
 
 	\param	ert				The raytracer to use for firing every ray. 
 
-	\param	origins			An array of origin points to fire rays from. Should be an array of floats with every 3 floats
+	\param	origins			An array of origin points to cast rays from. Should be an array of floats with every 3 floats
 							representing a new origin point.
 
 	\param	num_origins		The number of points in origins. NOTE: This should be equal to the length of origins / 3, since
 							every 3 floats in origins equals a single point.
 
-	\param	directions		An array of directions points to fire rays from. 
+	\param	directions		An array of directions points to cast rays from. 
 							Should be an array of floats with every 3 floats representing a new direction.
 
 	\param	num_directions	The number of directions in directions. NOTE: This should be equal to the length of
@@ -212,22 +212,22 @@ C_INTERFACE DestroyRayTracer(HF::RayTracer::EmbreeRayTracer* rt_to_destroy);
 			  HF::GENERIC_ERROR if the input parameters didn't meet at least one of the required cases below.
 
 	\remarks
-	<para> Can be fired in 3 configurations: </para>
+	<para> Can be cast in 3 configurations: </para>
 	
 	<list type="bullet">
 	
 		<item>
-		Equal amount of directions/origins: Fire a ray for every pair of
+		Equal amount of directions/origins: Cast a ray for every pair of
 		origin/direction in order. i.e. (origin[0], direction[0]), (origin[1], direction[1]).
 		</item>
 
 		<item>
-		One direction, multiple origins: Fire a ray in the given direction from
+		One direction, multiple origins: Cast a ray in the given direction from
 		each origin point in origins.
 		</item>
 	
 		<item>
-		One origin, multiple directions: Fire a ray from the origin point in each
+		One origin, multiple directions: Cast a ray from the origin point in each
 		direction in directions.
 		</item>
 	
@@ -239,16 +239,16 @@ C_INTERFACE DestroyRayTracer(HF::RayTracer::EmbreeRayTracer* rt_to_destroy);
 	Begin by <b>loading an .obj file</b> (\ref mesh_setup).<br>
 	Then, <b>create a BVH</b> (\ref raytracer_setup) using the <b>mesh</b>.<br>
 
-	Define the <b>starting points</b> from where the ray will fire.<br>
-	Define the <b>vector components</b> of the <b>ray</b> that will be fired.<br>
-	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireRaysDistance_points_components
+	Define the <b>starting points</b> from where the ray will cast.<br>
+	Define the <b>vector components</b> of the <b>ray</b> that will be cast.<br>
+	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_CastRaysDistance_points_components
 
 	Prepare a <b>pointer</b> to std::vector<\link RayResult \endlink>, and a pointer to a \link RayResult \endlink .<br>
-	Then, invoke</b> \link FireRaysDistance \endlink .<br>
-	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireRaysDistance
+	Then, invoke</b> \link CastRaysDistance \endlink .<br>
+	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_CastRaysDistance
 
 	We can <b>review the results</b> by outputting the contents of the <b>results container</b>:<br>
-	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireRaysDistance_results
+	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_CastRaysDistance_results
 
 	From here, please review the example at \ref raytracer_teardown for instructions<br>
 	on how to free the remainder of the resources used in this example --<br>
@@ -261,7 +261,7 @@ C_INTERFACE DestroyRayTracer(HF::RayTracer::EmbreeRayTracer* rt_to_destroy);
 	`>>> Mesh ID: 0}, {Distance: 1.33333`\n
 	`>>> Mesh ID: 0}]`\n
 */
-C_INTERFACE FireRaysDistance(
+C_INTERFACE CastRaysDistance(
 	HF::RayTracer::EmbreeRayTracer* ert,
 	float* origins,
 	int num_origins,
@@ -272,12 +272,12 @@ C_INTERFACE FireRaysDistance(
 );
 
 /*!
-	\brief		Fire a single ray and get the distance to its hit and the mesh ID if it hit anything. 
+	\brief		Cast a single ray and get the distance to its hit and the mesh ID if it hit anything. 
 				If it missed, then distance and meshid will both be -1.
 
-	\param	ert				The ray tracer to fire from.
-	\param	origin			The origin point to fire from.
-	\param	direction		The direction to fire the ray in.
+	\param	ert				The ray tracer to cast from.
+	\param	origin			The origin point to cast from.
+	\param	direction		The direction to cast the ray in.
 	\param	max_distance	Maximum distance to record a hit within. Any hits beyond this distance will not be counted.
 	\param	out_distance	Out parameter for Distance to the hitpoint. Will be set to -1 if the ray didn't hit anything.
 	\param	out_meshid		Out parameter for the ID of the hit mesh. Will be set to -1 if the ray didn't hit anything.
@@ -290,18 +290,18 @@ C_INTERFACE FireRaysDistance(
 	Begin by <b>loading an .obj file</b> (\ref mesh_setup).<br>
 	Then, <b>create a BVH</b> (\ref raytracer_setup) using the <b>mesh</b>.<br>
 
-	Define the <b>starting points</b> from where the ray will fire.<br>
-	Define the <b>vector components</b> of the <b>ray</b> that will be fired.<br>
-	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireSingleRayDistance_points_dir
+	Define the <b>starting points</b> from where the ray will cast.<br>
+	Define the <b>vector components</b> of the <b>ray</b> that will be cast.<br>
+	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_CastSingleRayDistance_points_dir
 
 	Define a <b>max_distance</b>.<br>
 	Also create variables <b>distance</b> and <b>mesh_id</b> and initialize them as shown.<br>
 	They will be mutated if a <b>hit</b> occurs.<br>
-	Then, <b>invoke</b> \link FireSingleRayDistance \endlink
-	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireSingleRayDistance
+	Then, <b>invoke</b> \link CastSingleRayDistance \endlink
+	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_CastSingleRayDistance
 
 	If <b>mesh_id</b> is not <b>-1</b>, and <b>distance</b> is not <b>-1</b>, a <b>hit</b> was made.<br>
-	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireSingleRayDistance_results
+	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_CastSingleRayDistance_results
 
 	From here, please review the example at \ref raytracer_teardown for instructions<br>
 	on how to free the remainder of the resources used in this example --<br>
@@ -311,7 +311,7 @@ C_INTERFACE FireRaysDistance(
 	`>>> CreateRaytracer created EmbreeRayTracer successfully into bvh at address 0000019C4EA12820, code: 1`\n
 	`>>> Distance is 2, meshid is 0`\n
 */
-C_INTERFACE FireSingleRayDistance(
+C_INTERFACE CastSingleRayDistance(
 	HF::RayTracer::EmbreeRayTracer* ert,
 	const float* origin,
 	const float* direction,
@@ -321,9 +321,9 @@ C_INTERFACE FireSingleRayDistance(
 );
 
 /*!
-	\brief		Fire a single ray from the raytracer and receive a point in return. 
+	\brief		Cast a single ray from the raytracer and receive a point in return. 
 
-	\param	ert		Raytracer to fire each ray from.
+	\param	ert		Raytracer to cast each ray from.
 	\param	x		x coordinate of the ray's origin. Will be set to the hit point's x coordinate if the ray something.
 	\param	y		y coordinate of the ray's origin. Will be set to the hit point's y coordinate if the ray something.
 	\param	z		z coordinate of the ray's origin. Will be set to the hit point's z coordinate if the ray something.
@@ -341,15 +341,15 @@ C_INTERFACE FireSingleRayDistance(
 	Begin by <b>loading an .obj file</b> (\ref mesh_setup).<br>
 	Then, <b>create a BVH</b> (\ref raytracer_setup) using the <b>mesh</b>.<br>
 
-	Define the <b>starting points</b> from where the ray will fire.<br>
-	Define the <b>vector components</b> of the <b>ray</b> that will be fired.<br>
-	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireRay_points_direction
+	Define the <b>starting points</b> from where the ray will cast.<br>
+	Define the <b>vector components</b> of the <b>ray</b> that will be cast.<br>
+	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_CastRay_points_direction
 
 	Define a <b>maximum distance value</b>, and a <b>hit point</b> that determines the ray's <b>intended destination</b>.</b>.<br>
-	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireRay_distance_hit_point
+	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_CastRay_distance_hit_point
 
 	<b>Invoke</b> \link PointIntersection \endlink . <b>did_hit</b> will be set <b>true</b> if a hit occurred.<br>
-	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireRay
+	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_CastRay
 
 	From here, please review the example at \ref raytracer_teardown for instructions<br>
 	on how to free the remainder of the resources used in this example --<br>
@@ -359,16 +359,16 @@ C_INTERFACE FireSingleRayDistance(
 	`>>> CreateRaytracer created EmbreeRayTracer successfully into bvh at address 0000019E86D22BE0, code: 1`\n
 	`>>> Hit point: [0, 0, 0]`\n
 */
-C_INTERFACE FireRay(HF::RayTracer::EmbreeRayTracer* ert, float& x, float& y, float& z, float dx, float dy, float dz, float max_distance, bool& result);
+C_INTERFACE CastRay(HF::RayTracer::EmbreeRayTracer* ert, float& x, float& y, float& z, float dx, float dy, float dz, float max_distance, bool& result);
 
 /*!
-	\brief		Fire multiple rays at once in parallel and receive their hitpoints in return. The number of
+	\brief		Cast multiple rays at once in parallel and receive their hitpoints in return. The number of
 				directions must be equal to the number of origins.
 
-	\param	ert				Raytracer to fire each ray from.
+	\param	ert				Raytracer to cast each ray from.
 
 	\param	origins			A list of floats representing origin points, with each 3 floats representing one point. If the
-							ray fired from a point is successful, said point will be overwritten with the place it hit.
+							ray cast from a point is successful, said point will be overwritten with the place it hit.
 
 	\param	directions		A list of floats representing ray directions, with each 3 floats representing one direction.
 	\param	size			Number of points and directions, equal to the total number of floats in one array / 3.			
@@ -385,15 +385,15 @@ C_INTERFACE FireRay(HF::RayTracer::EmbreeRayTracer* ert, float& x, float& y, flo
 	Begin by <b>loading an .obj file</b> (\ref mesh_setup).<br>
 	Then, <b>create a BVH</b> (\ref raytracer_setup) using the <b>mesh</b>.<br>
 
-	Define the <b>starting points</b> from where the ray will fire.<br>
-	Define the <b>vector components</b> of the <b>ray</b> that will be fired.<br>
-	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireMultipleRays_points_directions
+	Define the <b>starting points</b> from where the ray will cast.<br>
+	Define the <b>vector components</b> of the <b>ray</b> that will be cast.<br>
+	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_CastMultipleRays_points_directions
 
 	Define a <b>maximum distance value</b>, and a <b>container</b> to store the <b>ray collision results</b>.<br>
-	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireMultipleRays
+	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_CastMultipleRays
 
 	We can <b>review the results</b> by outputting the contents of the <b>results container</b>:<br>
-	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireMultipleRays_results
+	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_CastMultipleRays_results
 
 	From here, please review the example at \ref raytracer_teardown for instructions<br>
 	on how to free the remainder of the resources used in this example --<br>
@@ -408,12 +408,12 @@ C_INTERFACE FireRay(HF::RayTracer::EmbreeRayTracer* ert, float& x, float& y, flo
 	`>>> result[2]: hit`\n
 	`>>> [0, 0, 2.38419e-07], direction [0, 0, -3]`\n
 */
-C_INTERFACE FireMultipleRays(HF::RayTracer::EmbreeRayTracer* ert, float* origins, const float* directions, int size, float max_distance, bool* result_array);
+C_INTERFACE CastMultipleRays(HF::RayTracer::EmbreeRayTracer* ert, float* origins, const float* directions, int size, float max_distance, bool* result_array);
 
 /*!
-	\brief		Fire rays from each origin point in the given direction.
+	\brief		Cast rays from each origin point in the given direction.
 
-	\param	ert				The raytracer to fire each ray from.
+	\param	ert				The raytracer to cast each ray from.
 	\param	origins			A list of floats representing origin points, with each 3 floats representing one point.
 	\param	direction		An array of 3 floats representing the X, Y, and Z coordinates respectively.
 	\param	size			Number of points and directions, equal to the total number of floats in one array / 3.
@@ -430,17 +430,17 @@ C_INTERFACE FireMultipleRays(HF::RayTracer::EmbreeRayTracer* ert, float* origins
 	Begin by <b>loading an .obj file</b> (\ref mesh_setup).<br>
 	Then, <b>create a BVH</b> (\ref raytracer_setup) using the <b>mesh</b>.<br>
 
-	Define the <b>starting points</b> from where the ray will fire.<br>
-	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireMultipleOriginsOneDirection_start_point
+	Define the <b>starting points</b> from where the ray will cast.<br>
+	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_CastMultipleOriginsOneDirection_start_point
 
-	Define the <b>vector components</b> of the <b>ray</b> that will be fired.<br>
-	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireMultipleOriginsOneDirection_direction
+	Define the <b>vector components</b> of the <b>ray</b> that will be cast.<br>
+	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_CastMultipleOriginsOneDirection_direction
 
 	Define a <b>maximum distance value</b>, and a <b>container</b> to store the <b>ray collision results</b>.<br>
-	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireMultipleOriginsOneDirection
+	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_CastMultipleOriginsOneDirection
 
 	We can <b>review the results</b> by outputting the contents of the <b>results container</b>:<br>
-	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireMultipleOriginsOneDirection_results
+	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_CastMultipleOriginsOneDirection_results
 
 	From here, please review the example at \ref raytracer_teardown for instructions<br>
 	on how to free the remainder of the resources used in this example --<br>
@@ -455,16 +455,16 @@ C_INTERFACE FireMultipleRays(HF::RayTracer::EmbreeRayTracer* ert, float* origins
 	`>>> result[2]: hit`\n
 	`>>> [0, 0, -1], from point [0, 0, 0]`\n
 */
-C_INTERFACE FireMultipleOriginsOneDirection(HF::RayTracer::EmbreeRayTracer* ert, float* origins, const float* direction, int size, float max_distance, bool* result_array);
+C_INTERFACE CastMultipleOriginsOneDirection(HF::RayTracer::EmbreeRayTracer* ert, float* origins, const float* direction, int size, float max_distance, bool* result_array);
 
 /*!
-	\brief	Fire rays from a single origin point in multiple directions and get a the points where they intersected the geometry.
+	\brief	Cast rays from a single origin point in multiple directions and get a the points where they intersected the geometry.
 
 	\param	ert				A pointer to a valid embree raytracer.
-	\param	origin			An array of 3 floats representing the X, Y, and Z coordinates of the origin to fire from respectively
+	\param	origin			An array of 3 floats representing the X, Y, and Z coordinates of the origin to cast from respectively
 
 	\param	directions		A list of floats representing directions, with each 3 floats representing one direction. If a
-							ray fired in a direction resulted in a hit, that direction will be overwritten to the hitpoint.
+							ray cast in a direction resulted in a hit, that direction will be overwritten to the hitpoint.
 
 	\param	size			Number of points and directions, equal to the total number of floats in one array / 3
 	\param	max_distance	Maximum distance a ray can travel and still hit a target
@@ -478,15 +478,15 @@ C_INTERFACE FireMultipleOriginsOneDirection(HF::RayTracer::EmbreeRayTracer* ert,
 	Begin by <b>loading an .obj file</b> (\ref mesh_setup).<br>
 	Then, <b>create a BVH</b> (\ref raytracer_setup) using the <b>mesh</b>.<br>
 
-	Define the <b>starting points</b> from where the ray will fire.<br>
-	Define the <b>vector components</b> of the <b>ray(s)</b> that will be fired.<br>
-	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireMultipleDirectionsOneOrigin_start_point_direction
+	Define the <b>starting points</b> from where the ray will cast.<br>
+	Define the <b>vector components</b> of the <b>ray(s)</b> that will be cast.<br>
+	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_CastMultipleDirectionsOneOrigin_start_point_direction
 
 	Define a <b>maximum distance value</b>, and a <b>container</b> to store the <b>ray collision results</b>.<br>
-	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireMultipleDirectionsOneOrigin
+	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_CastMultipleDirectionsOneOrigin
 
 	We can <b>review the results</b> by outputting the contents of the <b>results container</b>:<br>
-	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireMultipleDirectionsOneOrigin_results
+	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_CastMultipleDirectionsOneOrigin_results
 
 	From here, please review the example at \ref raytracer_teardown for instructions<br>
 	on how to free the remainder of the resources used in this example --<br>
@@ -501,10 +501,10 @@ C_INTERFACE FireMultipleOriginsOneDirection(HF::RayTracer::EmbreeRayTracer* ert,
 	`>>> result[2]: hit`\n
 	`>>> [0, 0, 0], direction [0, 0, 1.19209e-07]`\n
 */
-C_INTERFACE FireMultipleDirectionsOneOrigin(HF::RayTracer::EmbreeRayTracer* ert, const float* origin, float* directions, int size, float max_distance, bool* result_array);
+C_INTERFACE CastMultipleDirectionsOneOrigin(HF::RayTracer::EmbreeRayTracer* ert, const float* origin, float* directions, int size, float max_distance, bool* result_array);
 
 /*!
-	\brief		Fire one or more occlusion rays in parallel.
+	\brief		Cast one or more occlusion rays in parallel.
 
 	\param	ert				A pointer to a valid embree raytracer
 	\param	origins			A list of floats representing origin points, with each 3 floats representing one point
@@ -530,17 +530,17 @@ C_INTERFACE FireMultipleDirectionsOneOrigin(HF::RayTracer::EmbreeRayTracer* ert,
 	Begin by <b>loading an .obj file</b> (\ref mesh_setup).<br>
 	Then, <b>create a BVH</b> (\ref raytracer_setup) using the <b>mesh</b>.<br>
 
-	Define the <b>starting points</b> from where the ray will fire.<br>
-	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireOcclusionRays_start_point
+	Define the <b>starting points</b> from where the ray will cast.<br>
+	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_CastOcclusionRays_start_point
 
-	Define the <b>vector components</b> of the <b>ray(s)</b> that will be fired.<br>
-	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireOcclusionRays_components
+	Define the <b>vector components</b> of the <b>ray(s)</b> that will be cast.<br>
+	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_CastOcclusionRays_components
 
 	Define a <b>maximum distance value</b>, and a <b>container</b> to store the <b>ray occlusion results</b>.<br>
-	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireOcclusionRays
+	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_CastOcclusionRays
 
 	If <b>does_occlude</b> is true, the ray <b>connects</b>.<br>
-	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_FireOcclusionRays_result
+	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_CastOcclusionRays_result
 
 	From here, please review the example at \ref raytracer_teardown for instructions<br>
 	on how to free the remainder of the resources used in this example --<br>
@@ -551,7 +551,7 @@ C_INTERFACE FireMultipleDirectionsOneOrigin(HF::RayTracer::EmbreeRayTracer* ert,
 	`>>> Using multidirection, single origin`\n
 	`>>> Does the ray connect? True`\n
 */
-C_INTERFACE FireOcclusionRays(
+C_INTERFACE CastOcclusionRays(
 	HF::RayTracer::EmbreeRayTracer* ert,
 	const float* origins,
 	const float* directions,
@@ -571,7 +571,7 @@ C_INTERFACE FireOcclusionRays(
 	\snippet tests\src\embree_raytracer_cinterface.cpp snippet_DestroyRayResultVector
 
 	\see	\ref mesh_setup (how to create a mesh), \ref mesh_teardown (how to destroy a mesh)
-	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH), FireRaysDistance
+	\see	\ref raytracer_setup (how to create a BVH), \ref raytracer_teardown (how to destroy a BVH), CastRaysDistance
 */
 C_INTERFACE DestroyRayResultVector(
 	std::vector<RayResult>* analysis

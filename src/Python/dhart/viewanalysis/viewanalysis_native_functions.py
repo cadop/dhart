@@ -53,7 +53,7 @@ def C_SphericalViewAnalysis(bvh: c_void_p, nodes: c_void_p, node_count: int,
                             ) -> Tuple[c_void_p, c_void_p]:
     """ Perform view analysis and get the result of each raycast individually
 
-    This function fires node_count * ray_count rays
+    This function casts node_count * ray_count rays
 
     Returns:
         c_void_p: Points to a ViewAnalysisResult vector.

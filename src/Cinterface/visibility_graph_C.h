@@ -32,7 +32,7 @@ namespace HF {
 /*!
 	\brief		Create a new directed visibility graph between all nodes in parameter nodes.
 	
-	\param		ert			The raytracer to fire rays from
+	\param		ert			The raytracer to cast rays from
 
 	\param		nodes		Coordinates of nodes to use in generating the visibility graph.
 							Every three floats (every three members in nodes) 
@@ -93,7 +93,7 @@ C_INTERFACE CreateVisibilityGraphAllToAll(
 /*!
 	\brief		Create a new undirected visibility graph between all nodes in nodes.
 
-	\param		ert			The raytracer to fire rays from
+	\param		ert			The raytracer to cast rays from
 
 	\param		nodes		Coordinates of nodes to use in generating the visibility graph.
 							Every three floats (every three members in nodes)
@@ -156,9 +156,9 @@ C_INTERFACE CreateVisibilityGraphAllToAllUndirected(
 /*!
 	\brief		Create a new visibility graph from the nodes in group_a, into the nodes of group_b.
 
-	\param		ert			The raytracer to fire rays from
+	\param		ert			The raytracer to cast rays from
 
-	\param		group_a		Coordinates of nodes to fire rays from. (source node coordinates)
+	\param		group_a		Coordinates of nodes to cast rays from. (source node coordinates)
 							Every three floats (every three members in nodes)
 							should represent a single node (point) {x, y, z}
 
@@ -166,7 +166,7 @@ C_INTERFACE CreateVisibilityGraphAllToAllUndirected(
 							This should be equal to (size of group_a / 3),
 							since every three floats represents a single point.
 
-	\param		group_b		Coordinates of nodes to fire rays at. (destination node coordinates)
+	\param		group_b		Coordinates of nodes to cast rays at. (destination node coordinates)
 
 	\param		size_b		Amount of nodes (points) in group_b.
 							This should be equal to (size of group_b / 3),
