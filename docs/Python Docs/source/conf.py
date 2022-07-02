@@ -13,8 +13,8 @@
 import os
 import sys
 
-sys.path.insert(0, os.path.abspath('../../../build/Python'))
-sys.path.insert(0, os.path.abspath('../../build/Python'))
+# sys.path.insert(0, os.path.abspath('../../../build/Python'))
+# sys.path.insert(0, os.path.abspath('../../build/Python'))
 
 # master_doc = 'source/index'
 
@@ -157,70 +157,70 @@ import numpy
 import inspect
 from os.path import relpath, dirname
 
-for name in ['sphinx.ext.linkcode', 'numpydoc.linkcode']:
-    try:
-        __import__(name)
-        extensions.append(name)
-        break
-    except ImportError:
-        pass
-else:
-    print("NOTE: linkcode extension not found -- no links to source generated")
+# for name in ['sphinx.ext.linkcode', 'numpydoc.linkcode']:
+#     try:
+#         __import__(name)
+#         extensions.append(name)
+#         break
+#     except ImportError:
+#         pass
+# else:
+#     print("NOTE: linkcode extension not found -- no links to source generated")
 
-def linkcode_resolve(domain, info):
-    """
-    Determine the URL corresponding to Python object
-    """
-    if domain != 'py':
-        return None
+# def linkcode_resolve(domain, info):
+#     """
+#     Determine the URL corresponding to Python object
+#     """
+#     if domain != 'py':
+#         return None
 
-    modname = info['module']
-    fullname = info['fullname']
+#     modname = info['module']
+#     fullname = info['fullname']
 
-    submod = sys.modules.get(modname)
-    if submod is None:
-        return None
+#     submod = sys.modules.get(modname)
+#     if submod is None:
+#         return None
 
-    obj = submod
-    for part in fullname.split('.'):
-        try:
-            obj = getattr(obj, part)
-        except Exception:
-            return None
+#     obj = submod
+#     for part in fullname.split('.'):
+#         try:
+#             obj = getattr(obj, part)
+#         except Exception:
+#             return None
 
-    # strip decorators, which would resolve to the source of the decorator
-    # possibly an upstream bug in getsourcefile, bpo-1764286
-    try:
-        unwrap = inspect.unwrap
-    except AttributeError:
-        pass
-    else:
-        obj = unwrap(obj)
+#     # strip decorators, which would resolve to the source of the decorator
+#     # possibly an upstream bug in getsourcefile, bpo-1764286
+#     try:
+#         unwrap = inspect.unwrap
+#     except AttributeError:
+#         pass
+#     else:
+#         obj = unwrap(obj)
 
-    try:
-        fn = inspect.getsourcefile(obj)
-    except Exception:
-        fn = None
-    if not fn:
-        return None
+#     try:
+#         fn = inspect.getsourcefile(obj)
+#     except Exception:
+#         fn = None
+#     if not fn:
+#         return None
 
-    try:
-        source, lineno = inspect.getsourcelines(obj)
-    except Exception:
-        lineno = None
+#     try:
+#         source, lineno = inspect.getsourcelines(obj)
+#     except Exception:
+#         lineno = None
 
-    if lineno:
-        linespec = "#L%d-L%d" % (lineno, lineno + len(source) - 1)
-    else:
-        linespec = ""
+#     if lineno:
+#         linespec = "#L%d-L%d" % (lineno, lineno + len(source) - 1)
+#     else:
+#         linespec = ""
 
-    print('**',fn)
-    fn = relpath(fn, start='..\..\python_release')
+#     print('**',fn)
+#     fn = relpath(fn, start='..\..\python_release')
     
-    newpath = "https://github.com/cadop/dhart/blob/main/src/Python/dhart/%s%s" % (
-           fn, linespec)
+#     newpath = "https://github.com/cadop/dhart/blob/main/src/Python/dhart/%s%s" % (
+#            fn, linespec)
 
-    return newpath
+#     return newpath
     
 
 from pygments.lexers import CLexer

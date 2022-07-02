@@ -27,6 +27,15 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install flake8 pytest
+
+    - name: Install from pypi
+      run: | 
+        pip install matplotlib 
+        pip install numpy 
+        pip install scipy
+        pip install -i https://test.pypi.org/simple/ dhart
+        python -c "from dhart.spatialstructures import Graph"
+
     - name: Install documentation dependencies
       run: |
         pip install sphinx numpydoc matplotlib         
@@ -47,12 +56,24 @@ jobs:
         ls
         cd src
         cmake --install .
-    - name: Install package
-      run: |
-        ls
-        cd build/Python
-        ls
-        pip install -e . 
+    # - name: Install package
+    #   run: |
+    #     ls
+    #     cd build/Python
+    #     ls
+    #     pip install -e . 
+
+    # - name: test if package dll is installed
+    #   run: | 
+    #     ls 
+    #     cd build/Python
+    #     ls 
+    #     cd bin 
+    #     ls
+    #     python -c "import dhart"
+    #     ls
+    #     python -c "from dhart.spatialstructures import Graph"
+    
     # - name: Install Sphinx Latex
     #   run: |
         # sudo apt-get update -y && sudo apt-get install -y latexmk texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended
