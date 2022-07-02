@@ -38,9 +38,9 @@ def rayDist(bvh: EmbreeBVH,
     """ Get the distance from the origin to its hit point
     
     Args:
-        bvh: The BVH to fire the ray at
-        Origin: The origin to fire the ray from
-        Direction: The direction to fire the ray in
+        bvh: The BVH to cast the ray at
+        Origin: The origin to cast the ray from
+        Direction: The direction to cast the ray in
     
     Returns:
         Union[float, None]: None on miss, distance from origin to the
@@ -91,9 +91,9 @@ def check_ray(
     """ Check if a ray fired from origin to direction hits
 
     Args:
-        bvh : The BVH to fire the ray at
-        origin: The origin to fire the ray from
-        direction: The direction to fire the ray in
+        bvh : The BVH to cast the ray at
+        origin: The origin to cast the ray from
+        direction: The direction to cast the ray in
     
     Returns:
         Union[Tuple[float, float, float], None]: None on miss or a tuple containing

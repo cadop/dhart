@@ -817,7 +817,7 @@ namespace CInterfaceTests {
 		// but it should not be empty after calling FireMultipleRays.
 		ASSERT_FALSE(results.empty());
 
-		// results.size() should be equal to the amount of rays to fire.
+		// results.size() should be equal to the amount of rays to cast.
 		ASSERT_EQ(results.size(), count_dir);
 
 		//! [snippet_FireMultipleRays_results]
@@ -983,7 +983,7 @@ namespace CInterfaceTests {
 		// results should not be empty after calling FireMultipleOriginsOneDirection.
 		ASSERT_FALSE(results.empty());
 
-		// results.size() should be equal to the amount of rays to fire.
+		// results.size() should be equal to the amount of rays to cast.
 		ASSERT_EQ(results.size(), count_p1);
 
 		//! [snippet_FireMultipleOriginsOneDirection_results]
@@ -1138,7 +1138,7 @@ namespace CInterfaceTests {
 		// results should not be an empty container after calling FireMultipleDirectionsOneOrigin.
 		ASSERT_FALSE(results.empty());
 
-		// results.size() should be equal to the amount of rays to fire.
+		// results.size() should be equal to the amount of rays to cast.
 		ASSERT_EQ(results.size(), count_dir);
 
 		//!	[snippet_FireMultipleDirectionsOneOrigin_results]
@@ -1295,7 +1295,7 @@ namespace CInterfaceTests {
 		// results should not be empty after calling FireOcclusionRays.
 		ASSERT_FALSE(results.empty());
 
-		// results.size() should be equal to the amount of occlusion rays to fire.
+		// results.size() should be equal to the amount of occlusion rays to cast.
 		ASSERT_EQ(results.size(), count_dir_occl);
 
 		//! [snippet_FireOcclusionRays_result]
@@ -1452,7 +1452,7 @@ namespace CInterfaceTests {
 		ASSERT_TRUE(ray_result != nullptr);
 		ASSERT_TRUE(ray_result_data != nullptr);
 
-		// ray_result->size() should be equal to the amount of rays to fire.
+		// ray_result->size() should be equal to the amount of rays to cast.
 		ASSERT_EQ(ray_result->size(), count_dir);
 
 		if (status != 1) {

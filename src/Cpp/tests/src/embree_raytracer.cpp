@@ -132,7 +132,7 @@ TEST(_EmbreeRayTracer, EmbreeGarbageCollectCorrect) {
 	// Delete the original raytracer
 	delete ERT;
 
-	// Try to fire a ray. If this crashes, then it means the copy constructor isn't correctly incrementing the reference counter.
+	// Try to cast a ray. If this crashes, then it means the copy constructor isn't correctly incrementing the reference counter.
 	ERT2.Occluded(std::array<float, 3>{1, 1, 1}, std::array<float, 3>{1, 1, 1});
 }
 
@@ -907,7 +907,7 @@ TEST(_FullRayRequest, DidHit) {
 }
 
 /*!
-	\brief How quickly the raytracer can fire rays directly at a simple plane.
+	\brief How quickly the raytracer can cast rays directly at a simple plane.
 
 	\details
 	Likely isn't truly indicative of the raytracer's performance, but provides a starting point

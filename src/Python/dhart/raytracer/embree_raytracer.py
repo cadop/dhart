@@ -195,7 +195,7 @@ def IntersectForPoint(
     """ Fire one or more rays based on input origins and directions 
         and get the hit point.
     
-    To shoot multiple rays from one origin, or fire rays from multiple origins
+    To shoot multiple rays from one origin, or cast rays from multiple origins
     in a single direction, set origins OR directions to a single value. If
     they are both set to a single value then the ray will be fired as a single 
     ray via FireRay.

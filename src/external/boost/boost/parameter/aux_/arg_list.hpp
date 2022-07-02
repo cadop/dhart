@@ -344,7 +344,7 @@ namespace boost { namespace parameter { namespace aux {
 #endif
         };
 
-        // Overload for key_type, so the assert below will fire
+        // Overload for key_type, so the assert below will cast
         // if the same keyword is used again.
         static ::boost::parameter::aux::yes_tag has_key(key_type*);
         using Next::has_key;
@@ -768,7 +768,7 @@ namespace boost { namespace parameter { namespace aux {
         };
 
 #if !BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x564))
-        // Overload for key_type, so the assert below will fire
+        // Overload for key_type, so the assert below will cast
         // if the same keyword is used again.
         static ::boost::parameter::aux::yes_tag has_key(key_type*);
         using Next::has_key;

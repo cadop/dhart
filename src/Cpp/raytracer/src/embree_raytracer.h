@@ -82,7 +82,7 @@ namespace HF::RayTracer {
 		RTCDevice device; 
 		/// Container for a set of geometries, and the BVH. https://www.embree.org/api.html#scene-object
 		RTCScene scene;
-		/// Context to fire rays within.
+		/// Context to cast rays within.
 		RTCIntersectContext context;
 		/// Triangle buffer. Is used in multiple places, but contents are dumped.
 		Triangle* triangles;
@@ -644,7 +644,7 @@ namespace HF::RayTracer {
 		/// <summary>
 		/// Cast a ray and overwrite the origin with the hitpoint if it intersects any geometry.
 		/// </summary>
-		/// <param name="dir"> Direction to fire the ray in. </param>
+		/// <param name="dir"> Direction to cast the ray in. </param>
 		/// <param name="origin">
 		/// Start point of the ray. Updated to contain the hitpoint if successful.
 		/// </param>
@@ -790,10 +790,10 @@ namespace HF::RayTracer {
 		);
 
 		/// <summary> Cast multiple rays and recieve hitpoints in return. </summary>
-		/// <param name="origins"> An array of x,y,z coordinates to fire rays from. </param>
-		/// <param name="directions"> An array of x,y,z directions to fire in. </param>
+		/// <param name="origins"> An array of x,y,z coordinates to cast rays from. </param>
+		/// <param name="directions"> An array of x,y,z directions to cast in. </param>
 		/// <param name="use_parallel">
-		/// Cast rays in parallel if true, if not fire in serial. All available cores will be used.
+		/// Cast rays in parallel if true, if not cast in serial. All available cores will be used.
 		/// </param>
 		/// <param name="max_distance">
 		/// Maximum distance the ray can travel. Any intersections beyond this distance will be
@@ -893,7 +893,7 @@ namespace HF::RayTracer {
 		/// in origins
 		/// </param>
 		/// <param name="max_distance"> Maximum distance the ray can travel </param>
-		/// <param name="parallel"> Whether or not to fire the rays in parallel. </param>
+		/// <param name="parallel"> Whether or not to cast the rays in parallel. </param>
 		/// <returns>
 		/// An ordered array of bools where every true indicates a hit and every false indicates
 		/// a miss.

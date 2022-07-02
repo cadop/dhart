@@ -126,7 +126,7 @@ namespace HumanFactors.RayTracing
 			// Create parameter to use as an output parameter
 			bool did_hit = false;
 
-			// Call the C++ function to fire a ray
+			// Call the C++ function to cast a ray
 			_ = FireRay(rt_ptr, ref x, ref y, ref z, dx, dy, dz, max_distance, ref did_hit);
 
 			// If it hit, return a new vector3d with it's coordinates
@@ -162,7 +162,7 @@ namespace HumanFactors.RayTracing
             </list>
 
             \throws System.ArgumentException Arguments did not match one of the predefined cases!</exception>
-            \throws System.Exception Multiple rays failed to fire 
+            \throws System.Exception Multiple rays failed to cast 
         */
 		internal static Vector3D[] C_IntersectPoints(
 			IntPtr ert,
@@ -219,7 +219,7 @@ namespace HumanFactors.RayTracing
 
             \param ray_tracer A pointer to the raytracer to use for intersections
             \param origins A list of x, y, z coordinates to cast rays in.
-            \param directions A list of x, y, z directions to fire in.
+            \param directions A list of x, y, z directions to cast in.
             \param max_distance Maximum distance to consider for intersection.
 
             \returns

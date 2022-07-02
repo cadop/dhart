@@ -12,7 +12,7 @@ namespace HF {
 	namespace RayTracer {
 		struct RayRequest {
 			float x, y, z;			///< X, Y, and Z origin points
-			float dx, dy, dz;		///< X, Y and Z direction to fire the ray in
+			float dx, dy, dz;		///< X, Y and Z direction to cast the ray in
 			bool was_fired = false; ///< Whether this ray was fired or not
 			float distance = -1;	///< Before firing: the maximum distance of the ray. After firing: distance to the hitpoint or -9999 on miss
 			int mesh_id = -1;		///< The ID of the hit mesh

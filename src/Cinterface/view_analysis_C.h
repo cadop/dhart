@@ -49,7 +49,7 @@ enum class AGGREGATE_TYPE {
 	\param	node_size		Number of nodes in the array pointed to by node_ptr.
 
 	\param	max_rays		Number of rays to cast for each node in node_ptr. 
-							Note that this may fire fewer rays than max_rays, depending on FOV restrictions.
+							Note that this may cast fewer rays than max_rays, depending on FOV restrictions.
 
 	\param	upward_fov		Maximum degrees upward from the viewer's eye level to consider.
 	\param	downward_fov	Maximum degrees downward from the viewer's eye level to consider. 
@@ -135,7 +135,7 @@ C_INTERFACE SphereicalViewAnalysisAggregate(
 	\param	node_size		Number of nodes in the array pointed to by node_ptr.
 
 	\param	max_rays		Number of rays to cast for each node in node_ptr. 
-							Note that this may fire fewer rays than max_rays depending on fov restrictions.
+							Note that this may cast fewer rays than max_rays depending on fov restrictions.
 
 	\param	upward_fov		Maximum degrees upward from the viewer's eye level to consider.
 	\param	downward_fov	Maximum degrees downward from the viewer's eye level to consider.

@@ -370,7 +370,7 @@ namespace HF::ViewAnalysis {
 				node[2] += height;
 				int os = directions.size() * i;
 
-				// Iterate through every direction and fire a ray for it
+				// Iterate through every direction and cast a ray for it
 				for (int k = 0; k < directions.size(); k++)
 				{
 					int idx = os + k;

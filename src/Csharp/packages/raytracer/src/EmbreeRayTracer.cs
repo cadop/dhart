@@ -116,7 +116,7 @@ namespace HumanFactors.RayTracing
 
             \param bvh  A valid BVH containing geometry to intersect with.
             \param origins A list of x,y,z coordinates to cast rays in.
-            \param directions A list of x,y,z directions to fire in.
+            \param directions A list of x,y,z directions to cast in.
             \param max_distance Maximum distance to consider for intersection.
 
             \returns
@@ -196,7 +196,7 @@ namespace HumanFactors.RayTracing
 
             \param bvh  A valid BVH containing geometry to intersect with.
             \param origins A list of x, y, z coordinates to cast rays in.
-            \param directions A list of x, y, z directions to fire in.
+            \param directions A list of x, y, z directions to cast in.
             \param max_distance Maximum distance to consider for intersection.
 
             \returns
