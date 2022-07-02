@@ -508,7 +508,7 @@ namespace CInterfaceTests {
 		float distance = 0.0f;
 		int mesh_id = -1;
 
-		// Fire a ray for the distance/meshid (Fire a ray, get a distance/mesh ID back)
+		// Cast a ray for the distance/meshid (Cast a ray, get a distance/mesh ID back)
 		status = FireSingleRayDistance(bvh, p1.data(), dir.data(), max_distance, &distance, &mesh_id);
 
 		if (status != 1) {
@@ -640,7 +640,7 @@ namespace CInterfaceTests {
 		ASSERT_TRUE(dir.size() == 3);
 
 		//! [snippet_FireRay_distance_hit_point]
-		// Fire a ray for the hitpoint (Fire a ray, get a hit point back)
+		// Cast a ray for the hitpoint (Cast a ray, get a hit point back)
 		float max_distance = -1;
 		bool did_hit = false;
 

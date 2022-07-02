@@ -56,7 +56,7 @@ def FireRay(
     direction: Tuple[float, float, float],
     max_distance: float = -1.0,
 ) -> Union[Tuple[float, float, float], None]:
-    """ Fire a single ray, get a point in return """
+    """ Cast a single ray, get a point in return """
 
     # Convert inputs to c_types
     c_x = c_float(origin[0])
@@ -64,7 +64,7 @@ def FireRay(
     c_z = c_float(origin[2])
     result = c_bool(False)
 
-    # Fire the ray. if it hits, x,y, and z are overwritten
+    # Cast the ray. if it hits, x,y, and z are overwritten
     HFPython.FireRay(
         rt_ptr,
         byref(c_x),
@@ -135,7 +135,7 @@ def FireOneOriginMultipleDirections(
     direction: List[Tuple[float, float, float]],
     max_distance: float,
 ) -> List[Union[Tuple[float, float, float], None]]:
-    """ Fire multiple rays from a single origin.
+    """ Cast multiple rays from a single origin.
 
     Returns:
         List: an ordered list of hitspoints or None
@@ -178,7 +178,7 @@ def FireMultipleOriginsOneDirection(
     direction: Tuple[float, float, float],
     max_distance: float,
 ) -> List[Union[Tuple[float, float, float], None]]:
-    """ Fire multiple rays in the same direction """
+    """ Cast multiple rays in the same direction """
 
     num_rays = len(origin)
     direction_array = ConvertPointsToArray(direction)
@@ -217,7 +217,7 @@ def FireOcclusionRays(
     direction: Union[Tuple[float, float, float], List[Tuple[float, float, float]]],
     max_distance: float,
 ) -> List[bool]:
-    """ Fire one or more Occlusion Rays """
+    """ Cast one or more Occlusion Rays """
     if isinstance(origin, tuple):
         num_origins = 1
     else:

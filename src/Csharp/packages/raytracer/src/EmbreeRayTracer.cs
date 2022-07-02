@@ -131,11 +131,11 @@ namespace HumanFactors.RayTracing
             origin/direction in order. i.e. (origin[0], direction[0]), (origin[1], direction[1]), etc.
             </item>
             <item>
-            One direction, multiple origins: Fire a ray in the given
+            One direction, multiple origins: Cast a ray in the given
             direction from each origin point in origins.
             </item>
             <item>
-             One origin, multiple directions: Fire a ray from the origin point
+             One origin, multiple directions: Cast a ray from the origin point
             in each direction in directions.
             </item>
             </list>

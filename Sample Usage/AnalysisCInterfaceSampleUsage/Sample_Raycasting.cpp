@@ -270,7 +270,7 @@ void CInterfaceTests::raycasting(HINSTANCE dll_hf) {
 	// These are vector components, not Cartesian coordinates.
 	float dir[] = { 0.0f, 0.0f, -1.0f };
 
-	// Fire a ray for the hitpoint (Fire a ray, get a hit point back)
+	// Cast a ray for the hitpoint (Cast a ray, get a hit point back)
 	float max_distance = -1;
 	bool did_hit = false;
 
@@ -294,7 +294,7 @@ void CInterfaceTests::raycasting(HINSTANCE dll_hf) {
 		std::cout << "Hit point: " << "(miss)" << std::endl;
 	}
 
-	// Fire a ray for the distance/meshid (Fire a ray, get a distance/mesh ID back)
+	// Cast a ray for the distance/meshid (Cast a ray, get a distance/mesh ID back)
 	float distance = 0.0f;
 	int mesh_id = -1;
 	status = FireSingleRayDistance(bvh, p1, dir, max_distance, &distance, &mesh_id);
@@ -306,7 +306,7 @@ void CInterfaceTests::raycasting(HINSTANCE dll_hf) {
 
 	std::cout << "Distance is " << distance << ", " << "meshid is " << mesh_id << std::endl;
 
-	// See if it occludes (Fire occlusion rays)
+	// See if it occludes (Cast occlusion rays)
 	//
 	// The array p1_occl represents the same point as that of p1,
 	// but for clarity, we create another array representing that point for this example.

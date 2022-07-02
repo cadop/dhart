@@ -23,11 +23,11 @@ In this example we cast an individual ray into a plane that was loaded from an O
     # Define direction to cast ray
     dir = (0, 0, -1)
 
-    # Fire a ray for the hitpoint
+    # Cast a ray for the hitpoint
     hit_point = IntersectForPoint(bvh, p1, dir, -1)
     print(f"Hit point: {hit_point}")
 
-    # Fire a ray for distance/meshid
+    # Cast a ray for distance/meshid
     distance, mesh_id = Intersect(bvh, p1, dir, -1)
     print(f"distance is {distance}, meshid is {mesh_id}")
 
@@ -62,11 +62,11 @@ p1 = (0, 0, 2)
 # Define direction to cast ray
 dir = (0, 0, -1)
 
-# Fire a ray for the hitpoint
+# Cast a ray for the hitpoint
 hit_point = IntersectForPoint(bvh, p1, dir, -1)
 print(f"Hit point: {hit_point}")
 
-# Fire a ray for distance/meshid
+# Cast a ray for distance/meshid
 distance, mesh_id = Intersect(bvh, p1, dir, -1)
 print(f"distance is {distance}, meshid is {mesh_id}")
 

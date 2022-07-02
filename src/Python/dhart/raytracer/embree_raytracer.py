@@ -192,7 +192,7 @@ def IntersectForPoint(
     directions: Union[Iterable[Tuple[float, float, float]], Tuple[float, float, float]],
     max_distance: float = -1,
 ) -> List[Union[Tuple[float, float, float], None]]:
-    """ Fire one or more rays based on input origins and directions 
+    """ Cast one or more rays based on input origins and directions 
         and get the hit point.
     
     To shoot multiple rays from one origin, or cast rays from multiple origins
@@ -218,7 +218,7 @@ def IntersectForPoint(
         TypeError : When the passed BVH is invalid
 
     Examples:
-        Fire a single ray straight downwards
+        Cast a single ray straight downwards
 
         >>> from dhart.geometry import LoadOBJ, CommonRotations, ConstructPlane
         >>> from dhart.raytracer import EmbreeBVH, IntersectForPoint
@@ -288,7 +288,7 @@ def IntersectOccluded(
     directions: Union[Iterable[Tuple[float, float, float]], Tuple[float, float, float]],
     max_distance: float = -1,
 ) -> Union[List[bool], bool]:
-    """ Fire one or more occlusion rays in C++
+    """ Cast one or more occlusion rays in C++
 
     Occlusion rays are faster than standard rays, however can only return whether
     or not they hit anything. 

@@ -52,7 +52,7 @@ def SphericalViewAnalysisAggregate(
 
     Examples:
 
-        Fire 150 rays for 3 nodesat 1.7m, then get the sum of the distance to every hit for all three
+        Cast 150 rays for 3 nodesat 1.7m, then get the sum of the distance to every hit for all three
 
         >>> from dhart.geometry import CommonRotations
         >>> from dhart.raytracer import EmbreeBVH  
@@ -67,7 +67,7 @@ def SphericalViewAnalysisAggregate(
         >>> print(va)
         [95.05698 73.62985  0.     ]
 
-        Fire 150 rays for 3 nodesat 1.7m, then get the average distance for all three
+        Cast 150 rays for 3 nodesat 1.7m, then get the average distance for all three
         
         >>> from dhart.geometry import CommonRotations
         >>> from dhart.raytracer import EmbreeBVH  

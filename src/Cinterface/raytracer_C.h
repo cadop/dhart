@@ -188,7 +188,7 @@ C_INTERFACE AddMeshes(
 C_INTERFACE DestroyRayTracer(HF::RayTracer::EmbreeRayTracer* rt_to_destroy);
 
 /*!
-	\brief		Fire rays for each node in origins/directions as ordered pairs and get distance back as a result.
+	\brief		Cast rays for each node in origins/directions as ordered pairs and get distance back as a result.
 
 	\param	ert				The raytracer to use for firing every ray. 
 
@@ -217,17 +217,17 @@ C_INTERFACE DestroyRayTracer(HF::RayTracer::EmbreeRayTracer* rt_to_destroy);
 	<list type="bullet">
 	
 		<item>
-		Equal amount of directions/origins: Fire a ray for every pair of
+		Equal amount of directions/origins: Cast a ray for every pair of
 		origin/direction in order. i.e. (origin[0], direction[0]), (origin[1], direction[1]).
 		</item>
 
 		<item>
-		One direction, multiple origins: Fire a ray in the given direction from
+		One direction, multiple origins: Cast a ray in the given direction from
 		each origin point in origins.
 		</item>
 	
 		<item>
-		One origin, multiple directions: Fire a ray from the origin point in each
+		One origin, multiple directions: Cast a ray from the origin point in each
 		direction in directions.
 		</item>
 	
@@ -272,7 +272,7 @@ C_INTERFACE FireRaysDistance(
 );
 
 /*!
-	\brief		Fire a single ray and get the distance to its hit and the mesh ID if it hit anything. 
+	\brief		Cast a single ray and get the distance to its hit and the mesh ID if it hit anything. 
 				If it missed, then distance and meshid will both be -1.
 
 	\param	ert				The ray tracer to cast from.
@@ -321,7 +321,7 @@ C_INTERFACE FireSingleRayDistance(
 );
 
 /*!
-	\brief		Fire a single ray from the raytracer and receive a point in return. 
+	\brief		Cast a single ray from the raytracer and receive a point in return. 
 
 	\param	ert		Raytracer to cast each ray from.
 	\param	x		x coordinate of the ray's origin. Will be set to the hit point's x coordinate if the ray something.
@@ -362,7 +362,7 @@ C_INTERFACE FireSingleRayDistance(
 C_INTERFACE FireRay(HF::RayTracer::EmbreeRayTracer* ert, float& x, float& y, float& z, float dx, float dy, float dz, float max_distance, bool& result);
 
 /*!
-	\brief		Fire multiple rays at once in parallel and receive their hitpoints in return. The number of
+	\brief		Cast multiple rays at once in parallel and receive their hitpoints in return. The number of
 				directions must be equal to the number of origins.
 
 	\param	ert				Raytracer to cast each ray from.
@@ -411,7 +411,7 @@ C_INTERFACE FireRay(HF::RayTracer::EmbreeRayTracer* ert, float& x, float& y, flo
 C_INTERFACE FireMultipleRays(HF::RayTracer::EmbreeRayTracer* ert, float* origins, const float* directions, int size, float max_distance, bool* result_array);
 
 /*!
-	\brief		Fire rays from each origin point in the given direction.
+	\brief		Cast rays from each origin point in the given direction.
 
 	\param	ert				The raytracer to cast each ray from.
 	\param	origins			A list of floats representing origin points, with each 3 floats representing one point.
@@ -458,7 +458,7 @@ C_INTERFACE FireMultipleRays(HF::RayTracer::EmbreeRayTracer* ert, float* origins
 C_INTERFACE FireMultipleOriginsOneDirection(HF::RayTracer::EmbreeRayTracer* ert, float* origins, const float* direction, int size, float max_distance, bool* result_array);
 
 /*!
-	\brief	Fire rays from a single origin point in multiple directions and get a the points where they intersected the geometry.
+	\brief	Cast rays from a single origin point in multiple directions and get a the points where they intersected the geometry.
 
 	\param	ert				A pointer to a valid embree raytracer.
 	\param	origin			An array of 3 floats representing the X, Y, and Z coordinates of the origin to cast from respectively
@@ -504,7 +504,7 @@ C_INTERFACE FireMultipleOriginsOneDirection(HF::RayTracer::EmbreeRayTracer* ert,
 C_INTERFACE FireMultipleDirectionsOneOrigin(HF::RayTracer::EmbreeRayTracer* ert, const float* origin, float* directions, int size, float max_distance, bool* result_array);
 
 /*!
-	\brief		Fire one or more occlusion rays in parallel.
+	\brief		Cast one or more occlusion rays in parallel.
 
 	\param	ert				A pointer to a valid embree raytracer
 	\param	origins			A list of floats representing origin points, with each 3 floats representing one point

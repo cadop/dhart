@@ -206,14 +206,14 @@ namespace HF::RayTracer {
 
 				HitStruct res;
 
-				// Fire a ray straight down
+				// Cast a ray straight down
 				res = ert.Intersect_IMPL(0, 0, 1, 0, 0, -1);
 
 				// Print distance if it connected
 				if (res.DidHit()) std::cerr << res.distance << std::endl;
 				else std::cerr << "Miss" << std::endl;
 
-				// Fire a ray straight up
+				// Cast a ray straight up
 				res = ert.Intersect_IMPL(0, 0, 1, 0, 0, 1);
 
 				//Print distance if it connected
@@ -272,14 +272,14 @@ namespace HF::RayTracer {
 				// Create RayTracer
 				EmbreeRayTracer ert(std::vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
 
-				// Fire a ray straight down
+				// Cast a ray straight down
 				bool res = ert.Occluded_IMPL(0, 0, 1, 0, 0, -1);
 
 				// Print Results
 				if (res) std::cerr << "True" << std::endl;
 				else std::cerr << "False" << std::endl;
 
-				// Fire a ray straight up
+				// Cast a ray straight up
 				res = ert.Occluded_IMPL(0, 0, 1, 0, 0, 1);
 
 				// Print results
@@ -336,7 +336,7 @@ namespace HF::RayTracer {
 		// Create RayTracer
 		EmbreeRayTracer ert(std::vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
 
-		// Fire a ray straight down
+		// Cast a ray straight down
 		bool res = ert.Occluded_IMPL(
 			std::array<float, 3>{ 0, 0, 1 },
 			std::array<float, 3>{ 0, 0, -1 }
@@ -346,7 +346,7 @@ namespace HF::RayTracer {
 		if (res) std::cerr << "True" << std::endl;
 		else std::cerr << "False" << std::endl;
 
-		// Fire a ray straight up
+		// Cast a ray straight up
 		res = ert.Occluded_IMPL(
 			std::array<float, 3>{ 0, 0, 1 },
 			std::array<float, 3>{ 0, 0, 1 }
@@ -681,7 +681,7 @@ namespace HF::RayTracer {
 				// Create RayTracer
 				EmbreeRayTracer ert(std::vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
 
-				// Fire a ray straight down
+				// Cast a ray straight down
 				std::array<float, 3> origin{ 0,0,1 };
 				bool res = ert.PointIntersection(
 					origin,
@@ -692,7 +692,7 @@ namespace HF::RayTracer {
 				if (res) std::cerr << "(" << origin[0] << ", " << origin[1] << ", " << origin[2] << ")" << std::endl;
 				else std::cerr << "Miss" << std::endl;
 
-				// Fire a ray straight up
+				// Cast a ray straight up
 				origin = std::array<float, 3>{ 0, 0, 1 };
 				res = ert.PointIntersection(
 					origin,
@@ -758,7 +758,7 @@ namespace HF::RayTracer {
 
 				bool res;
 
-				// Fire a ray straight down directly at the plane
+				// Cast a ray straight down directly at the plane
 				float x = 0; float y = 0; float z = 1;
 				res = ert.PointIntersection(x, y, z, 0, 0, -1);
 
@@ -766,7 +766,7 @@ namespace HF::RayTracer {
 				if (res) std::cerr << "(" << x << ", " << y << ", " << z << ")" << std::endl;
 				else std::cerr << "Miss" << std::endl;
 
-				// Fire a ray straight up
+				// Cast a ray straight up
 				x = 0; y = 0; z = 1;
 				res = ert.PointIntersection(x, y, z, 0, 0, 1);
 
@@ -809,15 +809,15 @@ namespace HF::RayTracer {
 		/// <para> Can be fired in 3 configurations: </para>
 		/// <list type="bullet">
 		/// <item>
-		/// Equal amount of directions/origins: Fire a ray for every pair of origin/direction in
+		/// Equal amount of directions/origins: Cast a ray for every pair of origin/direction in
 		/// order. i.e. (origin[0], direction[0]), (origin[1], direction[1])
 		/// </item>
 		/// <item>
-		/// One direction, multiple origins: Fire a ray in the given direction from each origin
+		/// One direction, multiple origins: Cast a ray in the given direction from each origin
 		/// point in origins.
 		/// </item>
 		/// <item>
-		/// One origin, multiple directions: Fire a ray from the origin point in each direction
+		/// One origin, multiple directions: Cast a ray from the origin point in each direction
 		/// in directions.
 		/// </item>
 		/// </list>
@@ -855,7 +855,7 @@ namespace HF::RayTracer {
 				std::vector<std::array<float, 3>> origins(10);
 				for (int i = 0; i < 10; i++) origins[i] = std::array<float, 3>{static_cast<float>(2 * i), 0, 1};
 
-				// Fire every ray.
+				// Cast every ray.
 				auto results = ert.PointIntersections(origins, directions);
 
 				// Print results
@@ -902,15 +902,15 @@ namespace HF::RayTracer {
 		/// <para> Can be fired in 3 configurations: </para>
 		/// <list type="bullet">
 		/// <item>
-		/// Equal amount of directions/origins: Fire a ray for every pair of origin/direction in
+		/// Equal amount of directions/origins: Cast a ray for every pair of origin/direction in
 		/// order. i.e. (origin[0], direction[0]), (origin[1], direction[1])
 		/// </item>
 		/// <item>
-		/// One direction, multiple origins: Fire a ray in the given direction from each origin
+		/// One direction, multiple origins: Cast a ray in the given direction from each origin
 		/// point in origins.
 		/// </item>
 		/// <item>
-		/// One origin, multiple directions: Fire a ray from the origin point in each direction
+		/// One origin, multiple directions: Cast a ray from the origin point in each direction
 		/// in directions.
 		/// </item>
 		/// </list>
