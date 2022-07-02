@@ -2,7 +2,7 @@ var searchData=
 [
   ['w_1620',['w',['../a00413.html#ad1668c60aeade5f2557fafed8b8aee1a',1,'nlohmann::detail::dtoa_impl::boundaries']]],
   ['walled_5fplane_5fpath_1621',['walled_plane_path',['../a00335.html#accb3db1d4686effb5756ded3fa943d00',1,'VisibilityGraph.cpp']]],
-  ['was_5ffired_1622',['was_fired',['../a01469.html#aac9adb9207c30b9f90c57951483d0dcb',1,'HF::RayTracer::RayRequest']]],
+  ['was_5fcast_1622',['was_cast',['../a01469.html#a86d351155983dd40759ce97a4e9b9f23',1,'HF::RayTracer::RayRequest']]],
   ['weight_1623',['weight',['../a00406.html#aefea62ffa2c7078ac7d9f2eefaa96e07',1,'HF::Pathfinding::Edge_Cost::weight()'],['../a01477.html#a4c5bcbef0f0b977f2bbf4495939c9f18',1,'HF::SpatialStructures::IntEdge::weight()']]],
   ['what_1624',['what',['../a01265.html#afcede4f1e3fc16cf919f36458cde3e68',1,'HF::Exceptions::FileNotFound::what()'],['../a01269.html#a1d1cf29e7cc7cc54374ca6e5cbab08cb',1,'HF::Exceptions::InvalidOBJ::what()'],['../a01273.html#a143f5978064a1311219b695a98533932',1,'HF::Exceptions::MissingDependency::what()'],['../a01281.html#a4c33926dc611aebf0163c446121c44e8',1,'HF::Exceptions::NoCost::what()'],['../a01505.html#a11fe48748e811531614c84883b00ccd5',1,'nlohmann::detail::exception::what()']]],
   ['wide_5fstring_5finput_5fadapter_1625',['wide_string_input_adapter',['../a01889.html',1,'nlohmann::detail::wide_string_input_adapter&lt; BaseInputAdapter, WideCharType &gt;'],['../a01889.html#aa12146f16f0a22ae3d23bd4af7460fcd',1,'nlohmann::detail::wide_string_input_adapter::wide_string_input_adapter()']]],

@@ -5,14 +5,19 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Analysis: Cinterface/spatialstructures_C.h Source File</title>
+<title>DHART: Cinterface/spatialstructures_C.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome-css.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -21,7 +26,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Analysis
+   <div id="projectname">DHART
    </div>
   </td>
  </tr>
@@ -45,6 +50,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('a00371_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -59,11 +81,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_37600e7aa46d6eb08a97d98a1c09ffb1.html">Cinterface</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">spatialstructures_C.h</div>  </div>
@@ -241,6 +258,7 @@ $(function() {
 <div class="line"><a name="l00918"></a><span class="lineno">  918</span>&#160;    <a class="code" href="a00399.html#afac7c4ef1cb1104941f4d5a27973b47e">HF::SpatialStructures::Direction</a> dir);</div>
 <div class="line"><a name="l00919"></a><span class="lineno">  919</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <div class="ttc" id="aa00392_html_ga645abacd11e1fa535f953344aaa77727"><div class="ttname"><a href="a00392.html#ga645abacd11e1fa535f953344aaa77727">DestroyGraph</a></div><div class="ttdeci">C_INTERFACE DestroyGraph(HF::SpatialStructures::Graph *graph_to_destroy)</div><div class="ttdoc">Delete a graph.</div><div class="ttdef"><b>Definition:</b> <a href="a00179_source.html#l00080">CInterface.cpp:80</a></div></div>
 <div class="ttc" id="aa00392_html_ga0b0293bbac3cdc8bdaa1d2c36bec0a26"><div class="ttname"><a href="a00392.html#ga0b0293bbac3cdc8bdaa1d2c36bec0a26">AggregateCosts</a></div><div class="ttdeci">C_INTERFACE AggregateCosts(const HF::SpatialStructures::Graph *graph, int agg, bool directed, const char *cost_type, std::vector&lt; float &gt; **out_vector_ptr, float **out_data_ptr)</div><div class="ttdoc">Get an ordered array of costs for each node aggregated by the desired function.</div><div class="ttdef"><b>Definition:</b> <a href="a00368_source.html#l00094">spatialstructures_C.cpp:94</a></div></div>
 <div class="ttc" id="aa00392_html_ga02213608939a85d5165da6c0a47c113b"><div class="ttname"><a href="a00392.html#ga02213608939a85d5165da6c0a47c113b">AddEdgeFromNodeIDs</a></div><div class="ttdeci">C_INTERFACE AddEdgeFromNodeIDs(HF::SpatialStructures::Graph *graph, int parent_id, int child_id, float score, const char *cost_type)</div><div class="ttdoc">Create a new edge between parent_id and child_id. If these IDs do not exist in the graph,...</div><div class="ttdef"><b>Definition:</b> <a href="a00368_source.html#l00170">spatialstructures_C.cpp:170</a></div></div>
@@ -279,10 +297,13 @@ $(function() {
 <div class="ttc" id="aa00392_html_gac9581ead92b8caa513a77012af10aa63"><div class="ttname"><a href="a00392.html#gac9581ead92b8caa513a77012af10aa63">ClearGraph</a></div><div class="ttdeci">C_INTERFACE ClearGraph(HF::SpatialStructures::Graph *graph, const char *cost_type)</div><div class="ttdoc">Clear the nodes/edges for the given graph, or clear a specific cost type.</div><div class="ttdef"><b>Definition:</b> <a href="a00368_source.html#l00234">spatialstructures_C.cpp:234</a></div></div>
 <div class="ttc" id="aa01473_html"><div class="ttname"><a href="a01473.html">HF::SpatialStructures::Edge</a></div><div class="ttdoc">A connection to a child node.</div><div class="ttdef"><b>Definition:</b> <a href="a00197_source.html#l00029">Edge.h:29</a></div></div>
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.17
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_37600e7aa46d6eb08a97d98a1c09ffb1.html">Cinterface</a></li><li class="navelem"><a class="el" href="a00371.html">spatialstructures_C.h</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
 </body>
 </html>

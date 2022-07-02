@@ -5,14 +5,19 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Analysis: RayTracer</title>
+<title>DHART: RayTracer</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome-css.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -21,7 +26,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Analysis
+   <div id="projectname">DHART
    </div>
   </td>
  </tr>
@@ -46,6 +51,22 @@ $(function() {
 /* @license-end */</script>
 <div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('a00391.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -95,27 +116,27 @@ Functions</h2></td></tr>
 <tr class="memitem:gac7ff0b75adf7d24754a702f09d5bcf07"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00391.html#gac7ff0b75adf7d24754a702f09d5bcf07">DestroyRayTracer</a> (<a class="el" href="a01357.html">HF::RayTracer::EmbreeRayTracer</a> *rt_to_destroy)</td></tr>
 <tr class="memdesc:gac7ff0b75adf7d24754a702f09d5bcf07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete an existing raytracer.  <a href="a00391.html#gac7ff0b75adf7d24754a702f09d5bcf07">More...</a><br /></td></tr>
 <tr class="separator:gac7ff0b75adf7d24754a702f09d5bcf07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6dcb31db6dbee37c03f277cb61cfdf37"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00391.html#ga6dcb31db6dbee37c03f277cb61cfdf37">FireRaysDistance</a> (<a class="el" href="a01357.html">HF::RayTracer::EmbreeRayTracer</a> *ert, float *origins, int num_origins, float *directions, int num_directions, std::vector&lt; <a class="el" href="a02045.html">RayResult</a> &gt; **out_results, <a class="el" href="a02045.html">RayResult</a> **results_data)</td></tr>
-<tr class="memdesc:ga6dcb31db6dbee37c03f277cb61cfdf37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fire rays for each node in origins/directions as ordered pairs and get distance back as a result.  <a href="a00391.html#ga6dcb31db6dbee37c03f277cb61cfdf37">More...</a><br /></td></tr>
-<tr class="separator:ga6dcb31db6dbee37c03f277cb61cfdf37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3104ee3687c70b5045ac3c69eb557b99"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00391.html#ga3104ee3687c70b5045ac3c69eb557b99">FireSingleRayDistance</a> (<a class="el" href="a01357.html">HF::RayTracer::EmbreeRayTracer</a> *ert, const float *origin, const float *direction, const float max_distance, float *out_distance, int *out_meshid)</td></tr>
-<tr class="memdesc:ga3104ee3687c70b5045ac3c69eb557b99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fire a single ray and get the distance to its hit and the mesh ID if it hit anything. If it missed, then distance and meshid will both be -1.  <a href="a00391.html#ga3104ee3687c70b5045ac3c69eb557b99">More...</a><br /></td></tr>
-<tr class="separator:ga3104ee3687c70b5045ac3c69eb557b99"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3c06d32b8a4af0110489372e292555fd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00391.html#ga3c06d32b8a4af0110489372e292555fd">FireRay</a> (<a class="el" href="a01357.html">HF::RayTracer::EmbreeRayTracer</a> *ert, float &amp;x, float &amp;y, float &amp;z, float dx, float dy, float dz, float max_distance, bool &amp;result)</td></tr>
-<tr class="memdesc:ga3c06d32b8a4af0110489372e292555fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fire a single ray from the raytracer and receive a point in return.  <a href="a00391.html#ga3c06d32b8a4af0110489372e292555fd">More...</a><br /></td></tr>
-<tr class="separator:ga3c06d32b8a4af0110489372e292555fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4ebcc7736a5e5d25b7696f7ce9f2d645"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00391.html#ga4ebcc7736a5e5d25b7696f7ce9f2d645">FireMultipleRays</a> (<a class="el" href="a01357.html">HF::RayTracer::EmbreeRayTracer</a> *ert, float *origins, const float *directions, int size, float max_distance, bool *result_array)</td></tr>
-<tr class="memdesc:ga4ebcc7736a5e5d25b7696f7ce9f2d645"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fire multiple rays at once in parallel and receive their hitpoints in return. The number of directions must be equal to the number of origins.  <a href="a00391.html#ga4ebcc7736a5e5d25b7696f7ce9f2d645">More...</a><br /></td></tr>
-<tr class="separator:ga4ebcc7736a5e5d25b7696f7ce9f2d645"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga245b0839ec087dfdec623a3e16ffa859"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00391.html#ga245b0839ec087dfdec623a3e16ffa859">FireMultipleOriginsOneDirection</a> (<a class="el" href="a01357.html">HF::RayTracer::EmbreeRayTracer</a> *ert, float *origins, const float *direction, int size, float max_distance, bool *result_array)</td></tr>
-<tr class="memdesc:ga245b0839ec087dfdec623a3e16ffa859"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fire rays from each origin point in the given direction.  <a href="a00391.html#ga245b0839ec087dfdec623a3e16ffa859">More...</a><br /></td></tr>
-<tr class="separator:ga245b0839ec087dfdec623a3e16ffa859"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga03461ff9a261808c13f79f054435d4a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00391.html#ga03461ff9a261808c13f79f054435d4a6">FireMultipleDirectionsOneOrigin</a> (<a class="el" href="a01357.html">HF::RayTracer::EmbreeRayTracer</a> *ert, const float *origin, float *directions, int size, float max_distance, bool *result_array)</td></tr>
-<tr class="memdesc:ga03461ff9a261808c13f79f054435d4a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fire rays from a single origin point in multiple directions and get a the points where they intersected the geometry.  <a href="a00391.html#ga03461ff9a261808c13f79f054435d4a6">More...</a><br /></td></tr>
-<tr class="separator:ga03461ff9a261808c13f79f054435d4a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6c1fa7c28a047526d9d41ad7d1a822bd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00391.html#ga6c1fa7c28a047526d9d41ad7d1a822bd">FireOcclusionRays</a> (<a class="el" href="a01357.html">HF::RayTracer::EmbreeRayTracer</a> *ert, const float *origins, const float *directions, int origin_size, int direction_size, float max_distance, bool *result_array)</td></tr>
-<tr class="memdesc:ga6c1fa7c28a047526d9d41ad7d1a822bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fire one or more occlusion rays in parallel.  <a href="a00391.html#ga6c1fa7c28a047526d9d41ad7d1a822bd">More...</a><br /></td></tr>
-<tr class="separator:ga6c1fa7c28a047526d9d41ad7d1a822bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga81a505c14bba3bed1515384b209b3422"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00391.html#ga81a505c14bba3bed1515384b209b3422">CastRaysDistance</a> (<a class="el" href="a01357.html">HF::RayTracer::EmbreeRayTracer</a> *ert, float *origins, int num_origins, float *directions, int num_directions, std::vector&lt; <a class="el" href="a02045.html">RayResult</a> &gt; **out_results, <a class="el" href="a02045.html">RayResult</a> **results_data)</td></tr>
+<tr class="memdesc:ga81a505c14bba3bed1515384b209b3422"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast rays for each node in origins/directions as ordered pairs and get distance back as a result.  <a href="a00391.html#ga81a505c14bba3bed1515384b209b3422">More...</a><br /></td></tr>
+<tr class="separator:ga81a505c14bba3bed1515384b209b3422"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1377ba0807c3141ef68b1c94682853e6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00391.html#ga1377ba0807c3141ef68b1c94682853e6">CastSingleRayDistance</a> (<a class="el" href="a01357.html">HF::RayTracer::EmbreeRayTracer</a> *ert, const float *origin, const float *direction, const float max_distance, float *out_distance, int *out_meshid)</td></tr>
+<tr class="memdesc:ga1377ba0807c3141ef68b1c94682853e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast a single ray and get the distance to its hit and the mesh ID if it hit anything. If it missed, then distance and meshid will both be -1.  <a href="a00391.html#ga1377ba0807c3141ef68b1c94682853e6">More...</a><br /></td></tr>
+<tr class="separator:ga1377ba0807c3141ef68b1c94682853e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab12d174cbad096750b3bc2acc1593ee7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00391.html#gab12d174cbad096750b3bc2acc1593ee7">CastRay</a> (<a class="el" href="a01357.html">HF::RayTracer::EmbreeRayTracer</a> *ert, float &amp;x, float &amp;y, float &amp;z, float dx, float dy, float dz, float max_distance, bool &amp;result)</td></tr>
+<tr class="memdesc:gab12d174cbad096750b3bc2acc1593ee7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast a single ray from the raytracer and receive a point in return.  <a href="a00391.html#gab12d174cbad096750b3bc2acc1593ee7">More...</a><br /></td></tr>
+<tr class="separator:gab12d174cbad096750b3bc2acc1593ee7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7763f4488e7c507e078882fe699d717f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00391.html#ga7763f4488e7c507e078882fe699d717f">CastMultipleRays</a> (<a class="el" href="a01357.html">HF::RayTracer::EmbreeRayTracer</a> *ert, float *origins, const float *directions, int size, float max_distance, bool *result_array)</td></tr>
+<tr class="memdesc:ga7763f4488e7c507e078882fe699d717f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast multiple rays at once in parallel and receive their hitpoints in return. The number of directions must be equal to the number of origins.  <a href="a00391.html#ga7763f4488e7c507e078882fe699d717f">More...</a><br /></td></tr>
+<tr class="separator:ga7763f4488e7c507e078882fe699d717f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad4a9f19d6fe4a802b7788948707ed5c0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00391.html#gad4a9f19d6fe4a802b7788948707ed5c0">CastMultipleOriginsOneDirection</a> (<a class="el" href="a01357.html">HF::RayTracer::EmbreeRayTracer</a> *ert, float *origins, const float *direction, int size, float max_distance, bool *result_array)</td></tr>
+<tr class="memdesc:gad4a9f19d6fe4a802b7788948707ed5c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast rays from each origin point in the given direction.  <a href="a00391.html#gad4a9f19d6fe4a802b7788948707ed5c0">More...</a><br /></td></tr>
+<tr class="separator:gad4a9f19d6fe4a802b7788948707ed5c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9debc0081ffc5b1f26262cd935b6f5ce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00391.html#ga9debc0081ffc5b1f26262cd935b6f5ce">CastMultipleDirectionsOneOrigin</a> (<a class="el" href="a01357.html">HF::RayTracer::EmbreeRayTracer</a> *ert, const float *origin, float *directions, int size, float max_distance, bool *result_array)</td></tr>
+<tr class="memdesc:ga9debc0081ffc5b1f26262cd935b6f5ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast rays from a single origin point in multiple directions and get a the points where they intersected the geometry.  <a href="a00391.html#ga9debc0081ffc5b1f26262cd935b6f5ce">More...</a><br /></td></tr>
+<tr class="separator:ga9debc0081ffc5b1f26262cd935b6f5ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad1ec557a577507e2da4dfcb0717ea05c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00391.html#gad1ec557a577507e2da4dfcb0717ea05c">CastOcclusionRays</a> (<a class="el" href="a01357.html">HF::RayTracer::EmbreeRayTracer</a> *ert, const float *origins, const float *directions, int origin_size, int direction_size, float max_distance, bool *result_array)</td></tr>
+<tr class="memdesc:gad1ec557a577507e2da4dfcb0717ea05c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast one or more occlusion rays in parallel.  <a href="a00391.html#gad1ec557a577507e2da4dfcb0717ea05c">More...</a><br /></td></tr>
+<tr class="separator:gad1ec557a577507e2da4dfcb0717ea05c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga5a68e1d668554f73ee06de8aeeaaffad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00391.html#ga5a68e1d668554f73ee06de8aeeaaffad">DestroyRayResultVector</a> (std::vector&lt; <a class="el" href="a02045.html">RayResult</a> &gt; *analysis)</td></tr>
 <tr class="memdesc:ga5a68e1d668554f73ee06de8aeeaaffad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy a vector of rayresults.  <a href="a00391.html#ga5a68e1d668554f73ee06de8aeeaaffad">More...</a><br /></td></tr>
 <tr class="separator:ga5a68e1d668554f73ee06de8aeeaaffad"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -301,245 +322,14 @@ Raytracer teardown</h1>
 
 </div>
 </div>
-<a id="ga3ac702d080e493d1fa8be6cf4243e38b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga3ac702d080e493d1fa8be6cf4243e38b">&#9670;&nbsp;</a></span>CreateRaytracer()</h2>
+<a id="ga9debc0081ffc5b1f26262cd935b6f5ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9debc0081ffc5b1f26262cd935b6f5ce">&#9670;&nbsp;</a></span>CastMultipleDirectionsOneOrigin()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> CreateRaytracer </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a01297.html">HF::Geometry::MeshInfo</a>&lt; float &gt; *&#160;</td>
-          <td class="paramname"><em>mesh</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a01357.html">HF::RayTracer::EmbreeRayTracer</a> **&#160;</td>
-          <td class="paramname"><em>out_raytracer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>use_precise</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p><code>#include &lt;<a class="el" href="a00365.html">Cinterface/raytracer_C.h</a>&gt;</code></p>
-
-<p>Create a new raytracer using several meshes. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">mesh</td><td>The meshes to add to raytracer's BVH. </td></tr>
-    <tr><td class="paramname">out_raytracer</td><td>Output parameter for the new raytracer. </td></tr>
-    <tr><td class="paramname">use_precise</td><td>If true, use a more precise but slower method of triangle intersections</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>HF_STATUS::MISSING_DEPEND if Embree's dll couldn't be found. HF_STATUS::GENERIC_ERROR if <em>mesh</em>  is null.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="a00389.html#mesh_setup">Mesh setup</a> (how to create a mesh), <a class="el" href="a00389.html#mesh_teardown">Mesh teardown</a> (how to destroy a mesh) </dd>
-<dd>
-<a class="el" href="a00391.html#raytracer_setup">Raytracer setup</a> (how to create a BVH), <a class="el" href="a00391.html#raytracer_teardown">Raytracer teardown</a> (how to destroy a BVH) </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="a00362_source.html#l00015">15</a> of file <a class="el" href="a00362_source.html">raytracer_C.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00110_source.html#l00038">HF::Exceptions::GENERIC_ERROR</a>, <a class="el" href="a00110_source.html#l00040">HF::Exceptions::INVALID_OBJ</a>, <a class="el" href="a00110_source.html#l00043">HF::Exceptions::MISSING_DEPEND</a>, and <a class="el" href="a00110_source.html#l00032">HF::Exceptions::OK</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="a02916_source.html#l00988">C_Interface::ConstructTestRaytracer()</a>, <a class="el" href="a00284_source.html#l00020">CInterfaceTests::TEST()</a>, and <a class="el" href="a00329_source.html#l00135">TEST()</a>.</p>
-<div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-4-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="a00391_ga3ac702d080e493d1fa8be6cf4243e38b_icgraph.svg" width="563" height="155"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-</div>
-
-</div>
-</div>
-<a id="gabf8cd153a421ed226ba298579bd56122"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gabf8cd153a421ed226ba298579bd56122">&#9670;&nbsp;</a></span>CreateRaytracerMultiMesh()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> CreateRaytracerMultiMesh </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a01297.html">HF::Geometry::MeshInfo</a>&lt; float &gt; **&#160;</td>
-          <td class="paramname"><em>meshes</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>num_meshes</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a01357.html">HF::RayTracer::EmbreeRayTracer</a> **&#160;</td>
-          <td class="paramname"><em>out_raytracer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>use_precise</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p><code>#include &lt;<a class="el" href="a00365.html">Cinterface/raytracer_C.h</a>&gt;</code></p>
-
-<p>Create a new raytracer using several meshes. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">mesh</td><td>The meshes to add to raytracer's BVH. </td></tr>
-    <tr><td class="paramname">num_meshes</td><td>Number of meshes in meshes </td></tr>
-    <tr><td class="paramname">out_raytracer</td><td>Output parameter for the new raytracer.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>HF_STATUS::MISSING_DEPEND if Embree's dll couldn't be found. HF_STATUS::GENERIC_ERROR if <code>mesh</code> is null. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="a00362_source.html#l00039">39</a> of file <a class="el" href="a00362_source.html">raytracer_C.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00110_source.html#l00038">HF::Exceptions::GENERIC_ERROR</a>, <a class="el" href="a00110_source.html#l00040">HF::Exceptions::INVALID_OBJ</a>, <a class="el" href="a00110_source.html#l00043">HF::Exceptions::MISSING_DEPEND</a>, and <a class="el" href="a00110_source.html#l00032">HF::Exceptions::OK</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="a02916_source.html#l01063">C_Interface::TEST()</a>.</p>
-<div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-5-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="a00391_gabf8cd153a421ed226ba298579bd56122_icgraph.svg" width="391" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-</div>
-
-</div>
-</div>
-<a id="ga5a68e1d668554f73ee06de8aeeaaffad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga5a68e1d668554f73ee06de8aeeaaffad">&#9670;&nbsp;</a></span>DestroyRayResultVector()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> DestroyRayResultVector </td>
-          <td>(</td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="a02045.html">RayResult</a> &gt; *&#160;</td>
-          <td class="paramname"><em>analysis</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p><code>#include &lt;<a class="el" href="a00365.html">Cinterface/raytracer_C.h</a>&gt;</code></p>
-
-<p>Destroy a vector of rayresults. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">analysis</td><td>The ray results to destroy</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>HF_STATUS::OK on completion</dd></dl>
-<div class="fragment"></div><!-- fragment --> <dl class="section see"><dt>See also</dt><dd><a class="el" href="a00389.html#mesh_setup">Mesh setup</a> (how to create a mesh), <a class="el" href="a00389.html#mesh_teardown">Mesh teardown</a> (how to destroy a mesh) </dd>
-<dd>
-<a class="el" href="a00391.html#raytracer_setup">Raytracer setup</a> (how to create a BVH), <a class="el" href="a00391.html#raytracer_teardown">Raytracer teardown</a> (how to destroy a BVH), <a class="el" href="a00391.html#ga6dcb31db6dbee37c03f277cb61cfdf37" title="Fire rays for each node in origins/directions as ordered pairs and get distance back as a result.">FireRaysDistance</a> </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="a00362_source.html#l00281">281</a> of file <a class="el" href="a00362_source.html">raytracer_C.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00347_source.html#l00112">DeleteRawPtr()</a>, and <a class="el" href="a00110_source.html#l00032">HF::Exceptions::OK</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="a00329_source.html#l00616">TEST()</a>.</p>
-<div id="dynsection-6" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-6-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-6-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="a00391_ga5a68e1d668554f73ee06de8aeeaaffad_cgraph.svg" width="350" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-</div>
-<div id="dynsection-7" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-7-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-7-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-7-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="a00391_ga5a68e1d668554f73ee06de8aeeaaffad_icgraph.svg" width="294" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-</div>
-
-</div>
-</div>
-<a id="gac7ff0b75adf7d24754a702f09d5bcf07"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gac7ff0b75adf7d24754a702f09d5bcf07">&#9670;&nbsp;</a></span>DestroyRayTracer()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> DestroyRayTracer </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a01357.html">HF::RayTracer::EmbreeRayTracer</a> *&#160;</td>
-          <td class="paramname"><em>rt_to_destroy</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p><code>#include &lt;<a class="el" href="a00365.html">Cinterface/raytracer_C.h</a>&gt;</code></p>
-
-<p>Delete an existing raytracer. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rt_to_destroy</td><td>Raytracer to destroy</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>HF::OK on completion.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="a00389.html#mesh_setup">Mesh setup</a> (how to create a mesh), <a class="el" href="a00389.html#mesh_teardown">Mesh teardown</a> (how to destroy a mesh) </dd>
-<dd>
-<a class="el" href="a00391.html#raytracer_setup">Raytracer setup</a> (how to create a BVH), <a class="el" href="a00391.html#raytracer_teardown">Raytracer teardown</a> (how to destroy a BVH) </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="a00362_source.html#l00091">91</a> of file <a class="el" href="a00362_source.html">raytracer_C.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="a00110_source.html#l00032">HF::Exceptions::OK</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="a00284_source.html#l00020">CInterfaceTests::TEST()</a>, <a class="el" href="a00329_source.html#l00135">TEST()</a>, and <a class="el" href="a02916_source.html#l01003">C_Interface::TEST()</a>.</p>
-<div id="dynsection-8" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-8-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-8-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="a00391_gac7ff0b75adf7d24754a702f09d5bcf07_icgraph.svg" width="359" height="139"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-</div>
-
-</div>
-</div>
-<a id="ga03461ff9a261808c13f79f054435d4a6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga03461ff9a261808c13f79f054435d4a6">&#9670;&nbsp;</a></span>FireMultipleDirectionsOneOrigin()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> FireMultipleDirectionsOneOrigin </td>
+          <td class="memname"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> CastMultipleDirectionsOneOrigin </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="a01357.html">HF::RayTracer::EmbreeRayTracer</a> *&#160;</td>
           <td class="paramname"><em>ert</em>, </td>
@@ -584,12 +374,12 @@ Raytracer teardown</h1>
 
 <p><code>#include &lt;<a class="el" href="a00365.html">Cinterface/raytracer_C.h</a>&gt;</code></p>
 
-<p>Fire rays from a single origin point in multiple directions and get a the points where they intersected the geometry. </p>
+<p>Cast rays from a single origin point in multiple directions and get a the points where they intersected the geometry. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ert</td><td>A pointer to a valid embree raytracer. </td></tr>
-    <tr><td class="paramname">origin</td><td>An array of 3 floats representing the X, Y, and Z coordinates of the origin to fire from respectively</td></tr>
-    <tr><td class="paramname">directions</td><td>A list of floats representing directions, with each 3 floats representing one direction. If a ray fired in a direction resulted in a hit, that direction will be overwritten to the hitpoint.</td></tr>
+    <tr><td class="paramname">origin</td><td>An array of 3 floats representing the X, Y, and Z coordinates of the origin to cast from respectively</td></tr>
+    <tr><td class="paramname">directions</td><td>A list of floats representing directions, with each 3 floats representing one direction. If a ray cast in a direction resulted in a hit, that direction will be overwritten to the hitpoint.</td></tr>
     <tr><td class="paramname">size</td><td>Number of points and directions, equal to the total number of floats in one array / 3 </td></tr>
     <tr><td class="paramname">max_distance</td><td>Maximum distance a ray can travel and still hit a target </td></tr>
     <tr><td class="paramname">result_array</td><td>Output parameter conatining an ordered list of booleans set to true if the their rays hit, and false if their rays did not.</td></tr>
@@ -603,8 +393,8 @@ Raytracer teardown</h1>
 <p>Begin by <b>loading an .obj file</b> (<a class="el" href="a00389.html#mesh_setup">Mesh setup</a>).<br  />
  Then, <b>create a BVH</b> (<a class="el" href="a00391.html#raytracer_setup">Raytracer setup</a>) using the <b>mesh</b>.<br  />
 </p>
-<p>Define the <b>starting points</b> from where the ray will fire.<br  />
- Define the <b>vector components</b> of the <b>ray(s)</b> that will be fired.<br  />
+<p>Define the <b>starting points</b> from where the ray will cast.<br  />
+ Define the <b>vector components</b> of the <b>ray(s)</b> that will be cast.<br  />
  </p><div class="fragment"></div><!-- fragment --><p> Define a <b>maximum distance value</b>, and a <b>container</b> to store the <b>ray collision results</b>.<br  />
  </p><div class="fragment"></div><!-- fragment --><p> We can <b>review the results</b> by outputting the contents of the <b>results container</b>:<br  />
  </p><div class="fragment"></div><!-- fragment --><p> From here, please review the example at <a class="el" href="a00391.html#raytracer_teardown">Raytracer teardown</a> for instructions<br  />
@@ -623,25 +413,25 @@ Raytracer teardown</h1>
 <p class="definition">Definition at line <a class="el" href="a00362_source.html#l00249">249</a> of file <a class="el" href="a00362_source.html">raytracer_C.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="a00179_source.html#l00024">ConvertRawFloatArrayToPoints()</a>, <a class="el" href="a00110_source.html#l00032">HF::Exceptions::OK</a>, and <a class="el" href="a02913_source.html#l00481">HF::RayTracer::EmbreeRayTracer::PointIntersections()</a>.</p>
-<div id="dynsection-9" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-9-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-9-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-4-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-9-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="a00391_ga03461ff9a261808c13f79f054435d4a6_cgraph.svg" width="715" height="104"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div id="dynsection-4-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="a00391_ga9debc0081ffc5b1f26262cd935b6f5ce_cgraph.svg" width="720" height="104"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
 </div>
 </div>
-<a id="ga245b0839ec087dfdec623a3e16ffa859"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga245b0839ec087dfdec623a3e16ffa859">&#9670;&nbsp;</a></span>FireMultipleOriginsOneDirection()</h2>
+<a id="gad4a9f19d6fe4a802b7788948707ed5c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad4a9f19d6fe4a802b7788948707ed5c0">&#9670;&nbsp;</a></span>CastMultipleOriginsOneDirection()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> FireMultipleOriginsOneDirection </td>
+          <td class="memname"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> CastMultipleOriginsOneDirection </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="a01357.html">HF::RayTracer::EmbreeRayTracer</a> *&#160;</td>
           <td class="paramname"><em>ert</em>, </td>
@@ -686,10 +476,10 @@ Raytracer teardown</h1>
 
 <p><code>#include &lt;<a class="el" href="a00365.html">Cinterface/raytracer_C.h</a>&gt;</code></p>
 
-<p>Fire rays from each origin point in the given direction. </p>
+<p>Cast rays from each origin point in the given direction. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">ert</td><td>The raytracer to fire each ray from. </td></tr>
+    <tr><td class="paramname">ert</td><td>The raytracer to cast each ray from. </td></tr>
     <tr><td class="paramname">origins</td><td>A list of floats representing origin points, with each 3 floats representing one point. </td></tr>
     <tr><td class="paramname">direction</td><td>An array of 3 floats representing the X, Y, and Z coordinates respectively. </td></tr>
     <tr><td class="paramname">size</td><td>Number of points and directions, equal to the total number of floats in one array / 3. </td></tr>
@@ -705,8 +495,8 @@ Raytracer teardown</h1>
 <p>Begin by <b>loading an .obj file</b> (<a class="el" href="a00389.html#mesh_setup">Mesh setup</a>).<br  />
  Then, <b>create a BVH</b> (<a class="el" href="a00391.html#raytracer_setup">Raytracer setup</a>) using the <b>mesh</b>.<br  />
 </p>
-<p>Define the <b>starting points</b> from where the ray will fire.<br  />
- </p><div class="fragment"></div><!-- fragment --><p> Define the <b>vector components</b> of the <b>ray</b> that will be fired.<br  />
+<p>Define the <b>starting points</b> from where the ray will cast.<br  />
+ </p><div class="fragment"></div><!-- fragment --><p> Define the <b>vector components</b> of the <b>ray</b> that will be cast.<br  />
  </p><div class="fragment"></div><!-- fragment --><p> Define a <b>maximum distance value</b>, and a <b>container</b> to store the <b>ray collision results</b>.<br  />
  </p><div class="fragment"></div><!-- fragment --><p> We can <b>review the results</b> by outputting the contents of the <b>results container</b>:<br  />
  </p><div class="fragment"></div><!-- fragment --><p> From here, please review the example at <a class="el" href="a00391.html#raytracer_teardown">Raytracer teardown</a> for instructions<br  />
@@ -725,25 +515,25 @@ Raytracer teardown</h1>
 <p class="definition">Definition at line <a class="el" href="a00362_source.html#l00227">227</a> of file <a class="el" href="a00362_source.html">raytracer_C.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="a00179_source.html#l00024">ConvertRawFloatArrayToPoints()</a>, <a class="el" href="a00110_source.html#l00032">HF::Exceptions::OK</a>, and <a class="el" href="a02913_source.html#l00481">HF::RayTracer::EmbreeRayTracer::PointIntersections()</a>.</p>
-<div id="dynsection-10" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-10-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-10-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-5-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-10-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="a00391_ga245b0839ec087dfdec623a3e16ffa859_cgraph.svg" width="755" height="104"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div id="dynsection-5-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="a00391_gad4a9f19d6fe4a802b7788948707ed5c0_cgraph.svg" width="759" height="104"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
 </div>
 </div>
-<a id="ga4ebcc7736a5e5d25b7696f7ce9f2d645"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga4ebcc7736a5e5d25b7696f7ce9f2d645">&#9670;&nbsp;</a></span>FireMultipleRays()</h2>
+<a id="ga7763f4488e7c507e078882fe699d717f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7763f4488e7c507e078882fe699d717f">&#9670;&nbsp;</a></span>CastMultipleRays()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> FireMultipleRays </td>
+          <td class="memname"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> CastMultipleRays </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="a01357.html">HF::RayTracer::EmbreeRayTracer</a> *&#160;</td>
           <td class="paramname"><em>ert</em>, </td>
@@ -788,11 +578,11 @@ Raytracer teardown</h1>
 
 <p><code>#include &lt;<a class="el" href="a00365.html">Cinterface/raytracer_C.h</a>&gt;</code></p>
 
-<p>Fire multiple rays at once in parallel and receive their hitpoints in return. The number of directions must be equal to the number of origins. </p>
+<p>Cast multiple rays at once in parallel and receive their hitpoints in return. The number of directions must be equal to the number of origins. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">ert</td><td>Raytracer to fire each ray from.</td></tr>
-    <tr><td class="paramname">origins</td><td>A list of floats representing origin points, with each 3 floats representing one point. If the ray fired from a point is successful, said point will be overwritten with the place it hit.</td></tr>
+    <tr><td class="paramname">ert</td><td>Raytracer to cast each ray from.</td></tr>
+    <tr><td class="paramname">origins</td><td>A list of floats representing origin points, with each 3 floats representing one point. If the ray cast from a point is successful, said point will be overwritten with the place it hit.</td></tr>
     <tr><td class="paramname">directions</td><td>A list of floats representing ray directions, with each 3 floats representing one direction. </td></tr>
     <tr><td class="paramname">size</td><td>Number of points and directions, equal to the total number of floats in one array / 3. <br  />
  </td></tr>
@@ -808,8 +598,8 @@ Raytracer teardown</h1>
 <p>Begin by <b>loading an .obj file</b> (<a class="el" href="a00389.html#mesh_setup">Mesh setup</a>).<br  />
  Then, <b>create a BVH</b> (<a class="el" href="a00391.html#raytracer_setup">Raytracer setup</a>) using the <b>mesh</b>.<br  />
 </p>
-<p>Define the <b>starting points</b> from where the ray will fire.<br  />
- Define the <b>vector components</b> of the <b>ray</b> that will be fired.<br  />
+<p>Define the <b>starting points</b> from where the ray will cast.<br  />
+ Define the <b>vector components</b> of the <b>ray</b> that will be cast.<br  />
  </p><div class="fragment"></div><!-- fragment --><p> Define a <b>maximum distance value</b>, and a <b>container</b> to store the <b>ray collision results</b>.<br  />
  </p><div class="fragment"></div><!-- fragment --><p> We can <b>review the results</b> by outputting the contents of the <b>results container</b>:<br  />
  </p><div class="fragment"></div><!-- fragment --><p> From here, please review the example at <a class="el" href="a00391.html#raytracer_teardown">Raytracer teardown</a> for instructions<br  />
@@ -828,25 +618,25 @@ Raytracer teardown</h1>
 <p class="definition">Definition at line <a class="el" href="a00362_source.html#l00199">199</a> of file <a class="el" href="a00362_source.html">raytracer_C.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="a00179_source.html#l00024">ConvertRawFloatArrayToPoints()</a>, <a class="el" href="a00110_source.html#l00032">HF::Exceptions::OK</a>, and <a class="el" href="a02913_source.html#l00481">HF::RayTracer::EmbreeRayTracer::PointIntersections()</a>.</p>
-<div id="dynsection-11" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-11-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-11-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-6" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-6-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-11-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="a00391_ga4ebcc7736a5e5d25b7696f7ce9f2d645_cgraph.svg" width="655" height="104"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div id="dynsection-6-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="a00391_ga7763f4488e7c507e078882fe699d717f_cgraph.svg" width="660" height="104"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
 </div>
 </div>
-<a id="ga6c1fa7c28a047526d9d41ad7d1a822bd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga6c1fa7c28a047526d9d41ad7d1a822bd">&#9670;&nbsp;</a></span>FireOcclusionRays()</h2>
+<a id="gad1ec557a577507e2da4dfcb0717ea05c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad1ec557a577507e2da4dfcb0717ea05c">&#9670;&nbsp;</a></span>CastOcclusionRays()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> FireOcclusionRays </td>
+          <td class="memname"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> CastOcclusionRays </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="a01357.html">HF::RayTracer::EmbreeRayTracer</a> *&#160;</td>
           <td class="paramname"><em>ert</em>, </td>
@@ -897,7 +687,7 @@ Raytracer teardown</h1>
 
 <p><code>#include &lt;<a class="el" href="a00365.html">Cinterface/raytracer_C.h</a>&gt;</code></p>
 
-<p>Fire one or more occlusion rays in parallel. </p>
+<p>Cast one or more occlusion rays in parallel. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ert</td><td>A pointer to a valid embree raytracer </td></tr>
@@ -918,8 +708,8 @@ Raytracer teardown</h1>
 <p>Begin by <b>loading an .obj file</b> (<a class="el" href="a00389.html#mesh_setup">Mesh setup</a>).<br  />
  Then, <b>create a BVH</b> (<a class="el" href="a00391.html#raytracer_setup">Raytracer setup</a>) using the <b>mesh</b>.<br  />
 </p>
-<p>Define the <b>starting points</b> from where the ray will fire.<br  />
- </p><div class="fragment"></div><!-- fragment --><p> Define the <b>vector components</b> of the <b>ray(s)</b> that will be fired.<br  />
+<p>Define the <b>starting points</b> from where the ray will cast.<br  />
+ </p><div class="fragment"></div><!-- fragment --><p> Define the <b>vector components</b> of the <b>ray(s)</b> that will be cast.<br  />
  </p><div class="fragment"></div><!-- fragment --><p> Define a <b>maximum distance value</b>, and a <b>container</b> to store the <b>ray occlusion results</b>.<br  />
  </p><div class="fragment"></div><!-- fragment --><p> If <b>does_occlude</b> is true, the ray <b>connects</b>.<br  />
  </p><div class="fragment"></div><!-- fragment --><p> From here, please review the example at <a class="el" href="a00391.html#raytracer_teardown">Raytracer teardown</a> for instructions<br  />
@@ -936,33 +726,33 @@ Raytracer teardown</h1>
 <p class="reference">References <a class="el" href="a00179_source.html#l00024">ConvertRawFloatArrayToPoints()</a>, <a class="el" href="a02913_source.html#l00564">HF::RayTracer::EmbreeRayTracer::Occlusions()</a>, and <a class="el" href="a00110_source.html#l00032">HF::Exceptions::OK</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="a02916_source.html#l01034">C_Interface::TEST()</a>.</p>
-<div id="dynsection-12" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-12-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-12-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-7" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-7-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-7-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-12-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="a00391_ga6c1fa7c28a047526d9d41ad7d1a822bd_cgraph.svg" width="920" height="104"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div id="dynsection-7-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="a00391_gad1ec557a577507e2da4dfcb0717ea05c_cgraph.svg" width="926" height="104"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
-<div id="dynsection-13" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-13-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-13-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-8" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-8-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-13-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="a00391_ga6c1fa7c28a047526d9d41ad7d1a822bd_icgraph.svg" width="336" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div id="dynsection-8-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="a00391_gad1ec557a577507e2da4dfcb0717ea05c_icgraph.svg" width="342" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
 </div>
 </div>
-<a id="ga3c06d32b8a4af0110489372e292555fd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga3c06d32b8a4af0110489372e292555fd">&#9670;&nbsp;</a></span>FireRay()</h2>
+<a id="gab12d174cbad096750b3bc2acc1593ee7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab12d174cbad096750b3bc2acc1593ee7">&#9670;&nbsp;</a></span>CastRay()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> FireRay </td>
+          <td class="memname"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> CastRay </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="a01357.html">HF::RayTracer::EmbreeRayTracer</a> *&#160;</td>
           <td class="paramname"><em>ert</em>, </td>
@@ -1025,10 +815,10 @@ Raytracer teardown</h1>
 
 <p><code>#include &lt;<a class="el" href="a00365.html">Cinterface/raytracer_C.h</a>&gt;</code></p>
 
-<p>Fire a single ray from the raytracer and receive a point in return. </p>
+<p>Cast a single ray from the raytracer and receive a point in return. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">ert</td><td>Raytracer to fire each ray from. </td></tr>
+    <tr><td class="paramname">ert</td><td>Raytracer to cast each ray from. </td></tr>
     <tr><td class="paramname">x</td><td>x coordinate of the ray's origin. Will be set to the hit point's x coordinate if the ray something. </td></tr>
     <tr><td class="paramname">y</td><td>y coordinate of the ray's origin. Will be set to the hit point's y coordinate if the ray something. </td></tr>
     <tr><td class="paramname">z</td><td>z coordinate of the ray's origin. Will be set to the hit point's z coordinate if the ray something. </td></tr>
@@ -1047,8 +837,8 @@ Raytracer teardown</h1>
 <p>Begin by <b>loading an .obj file</b> (<a class="el" href="a00389.html#mesh_setup">Mesh setup</a>).<br  />
  Then, <b>create a BVH</b> (<a class="el" href="a00391.html#raytracer_setup">Raytracer setup</a>) using the <b>mesh</b>.<br  />
 </p>
-<p>Define the <b>starting points</b> from where the ray will fire.<br  />
- Define the <b>vector components</b> of the <b>ray</b> that will be fired.<br  />
+<p>Define the <b>starting points</b> from where the ray will cast.<br  />
+ Define the <b>vector components</b> of the <b>ray</b> that will be cast.<br  />
  </p><div class="fragment"></div><!-- fragment --><p> Define a <b>maximum distance value</b>, and a <b>hit point</b> that determines the ray's <b>intended destination</b>..<br  />
  </p><div class="fragment"></div><!-- fragment --><p> <b>Invoke</b> <a class="el" href="">PointIntersection</a> . <b>did_hit</b> will be set <b>true</b> if a hit occurred.<br  />
  </p><div class="fragment"></div><!-- fragment --><p> From here, please review the example at <a class="el" href="a00391.html#raytracer_teardown">Raytracer teardown</a> for instructions<br  />
@@ -1064,33 +854,33 @@ Raytracer teardown</h1>
 <p class="reference">References <a class="el" href="a00110_source.html#l00032">HF::Exceptions::OK</a>, and <a class="el" href="a02913_source.html#l00412">HF::RayTracer::EmbreeRayTracer::PointIntersection()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="a02916_source.html#l01063">C_Interface::TEST()</a>.</p>
-<div id="dynsection-14" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-14-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-14-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-9" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-9-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-9-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-14-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="a00391_ga3c06d32b8a4af0110489372e292555fd_cgraph.svg" width="324" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div id="dynsection-9-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="a00391_gab12d174cbad096750b3bc2acc1593ee7_cgraph.svg" width="330" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
-<div id="dynsection-15" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-15-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
-<div id="dynsection-15-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-10" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-10-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-10-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-15-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="a00391_ga3c06d32b8a4af0110489372e292555fd_icgraph.svg" width="266" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div id="dynsection-10-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="a00391_gab12d174cbad096750b3bc2acc1593ee7_icgraph.svg" width="271" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
 </div>
 </div>
-<a id="ga6dcb31db6dbee37c03f277cb61cfdf37"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga6dcb31db6dbee37c03f277cb61cfdf37">&#9670;&nbsp;</a></span>FireRaysDistance()</h2>
+<a id="ga81a505c14bba3bed1515384b209b3422"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga81a505c14bba3bed1515384b209b3422">&#9670;&nbsp;</a></span>CastRaysDistance()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> FireRaysDistance </td>
+          <td class="memname"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> CastRaysDistance </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="a01357.html">HF::RayTracer::EmbreeRayTracer</a> *&#160;</td>
           <td class="paramname"><em>ert</em>, </td>
@@ -1141,13 +931,13 @@ Raytracer teardown</h1>
 
 <p><code>#include &lt;<a class="el" href="a00365.html">Cinterface/raytracer_C.h</a>&gt;</code></p>
 
-<p>Fire rays for each node in origins/directions as ordered pairs and get distance back as a result. </p>
+<p>Cast rays for each node in origins/directions as ordered pairs and get distance back as a result. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ert</td><td>The raytracer to use for firing every ray.</td></tr>
-    <tr><td class="paramname">origins</td><td>An array of origin points to fire rays from. Should be an array of floats with every 3 floats representing a new origin point.</td></tr>
+    <tr><td class="paramname">origins</td><td>An array of origin points to cast rays from. Should be an array of floats with every 3 floats representing a new origin point.</td></tr>
     <tr><td class="paramname">num_origins</td><td>The number of points in origins. NOTE: This should be equal to the length of origins / 3, since every 3 floats in origins equals a single point.</td></tr>
-    <tr><td class="paramname">directions</td><td>An array of directions points to fire rays from. Should be an array of floats with every 3 floats representing a new direction.</td></tr>
+    <tr><td class="paramname">directions</td><td>An array of directions points to cast rays from. Should be an array of floats with every 3 floats representing a new direction.</td></tr>
     <tr><td class="paramname">num_directions</td><td>The number of directions in directions. NOTE: This should be equal to the length of directions / 3, since every 3 floats in directions equals a single direction.</td></tr>
     <tr><td class="paramname">out_results</td><td>Output parameter for ray results.</td></tr>
     <tr><td class="paramname">results_data</td><td>Output parameter for the data of the array held by <em>out_results</em> </td></tr>
@@ -1155,22 +945,22 @@ Raytracer teardown</h1>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>HF_STATUS::OK on completion. HF::GENERIC_ERROR if the input parameters didn't meet at least one of the required cases below.</dd></dl>
-<dl class="section remark"><dt>Remarks</dt><dd>Can be fired in 3 configurations: </dd></dl>
+<dl class="section remark"><dt>Remarks</dt><dd>Can be cast in 3 configurations: </dd></dl>
 <ul>
 </ul>
-<p>Equal amount of directions/origins: Fire a ray for every pair of origin/direction in order. i.e. (origin[0], direction[0]), (origin[1], direction[1]). </p>
-<p>One direction, multiple origins: Fire a ray in the given direction from each origin point in origins. </p>
-<p>One origin, multiple directions: Fire a ray from the origin point in each direction in directions.  </p>
+<p>Equal amount of directions/origins: Cast a ray for every pair of origin/direction in order. i.e. (origin[0], direction[0]), (origin[1], direction[1]). </p>
+<p>One direction, multiple origins: Cast a ray in the given direction from each origin point in origins. </p>
+<p>One origin, multiple directions: Cast a ray from the origin point in each direction in directions.  </p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="a00389.html#mesh_setup">Mesh setup</a> (how to create a mesh), <a class="el" href="a00389.html#mesh_teardown">Mesh teardown</a> (how to destroy a mesh) </dd>
 <dd>
 <a class="el" href="a00391.html#raytracer_setup">Raytracer setup</a> (how to create a BVH), <a class="el" href="a00391.html#raytracer_teardown">Raytracer teardown</a> (how to destroy a BVH)</dd></dl>
 <p>Begin by <b>loading an .obj file</b> (<a class="el" href="a00389.html#mesh_setup">Mesh setup</a>).<br  />
  Then, <b>create a BVH</b> (<a class="el" href="a00391.html#raytracer_setup">Raytracer setup</a>) using the <b>mesh</b>.<br  />
 </p>
-<p>Define the <b>starting points</b> from where the ray will fire.<br  />
- Define the <b>vector components</b> of the <b>ray</b> that will be fired.<br  />
+<p>Define the <b>starting points</b> from where the ray will cast.<br  />
+ Define the <b>vector components</b> of the <b>ray</b> that will be cast.<br  />
  </p><div class="fragment"></div><!-- fragment --><p> Prepare a <b>pointer</b> to std::vector&lt;<a class="el" href="a02045.html">RayResult</a>&gt;, and a pointer to a <a class="el" href="a02045.html">RayResult</a> .<br  />
- Then, invoke <a class="el" href="a00391.html#ga6dcb31db6dbee37c03f277cb61cfdf37">FireRaysDistance</a> .<br  />
+ Then, invoke <a class="el" href="a00391.html#ga81a505c14bba3bed1515384b209b3422">CastRaysDistance</a> .<br  />
  </p><div class="fragment"></div><!-- fragment --><p> We can <b>review the results</b> by outputting the contents of the <b>results container</b>:<br  />
  </p><div class="fragment"></div><!-- fragment --><p> From here, please review the example at <a class="el" href="a00391.html#raytracer_teardown">Raytracer teardown</a> for instructions<br  />
  on how to free the remainder of the resources used in this example &ndash;<br  />
@@ -1186,25 +976,25 @@ Raytracer teardown</h1>
 <p class="definition">Definition at line <a class="el" href="a00362_source.html#l00111">111</a> of file <a class="el" href="a00362_source.html">raytracer_C.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="a00179_source.html#l00024">ConvertRawFloatArrayToPoints()</a>, <a class="el" href="a00110_source.html#l00038">HF::Exceptions::GENERIC_ERROR</a>, <a class="el" href="a00146_source.html#l01097">HF::RayTracer::EmbreeRayTracer::IntersectOutputArguments()</a>, and <a class="el" href="a00110_source.html#l00032">HF::Exceptions::OK</a>.</p>
-<div id="dynsection-16" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-16-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
-<div id="dynsection-16-summary" class="dynsummary" style="display:block;">
+<div id="dynsection-11" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-11-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-11-summary" class="dynsummary" style="display:block;">
 </div>
-<div id="dynsection-16-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="a00391_ga6dcb31db6dbee37c03f277cb61cfdf37_cgraph.svg" width="906" height="104"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div id="dynsection-11-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="a00391_ga81a505c14bba3bed1515384b209b3422_cgraph.svg" width="911" height="104"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
 </div>
 </div>
-<a id="ga3104ee3687c70b5045ac3c69eb557b99"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga3104ee3687c70b5045ac3c69eb557b99">&#9670;&nbsp;</a></span>FireSingleRayDistance()</h2>
+<a id="ga1377ba0807c3141ef68b1c94682853e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1377ba0807c3141ef68b1c94682853e6">&#9670;&nbsp;</a></span>CastSingleRayDistance()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> FireSingleRayDistance </td>
+          <td class="memname"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> CastSingleRayDistance </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="a01357.html">HF::RayTracer::EmbreeRayTracer</a> *&#160;</td>
           <td class="paramname"><em>ert</em>, </td>
@@ -1249,12 +1039,12 @@ Raytracer teardown</h1>
 
 <p><code>#include &lt;<a class="el" href="a00365.html">Cinterface/raytracer_C.h</a>&gt;</code></p>
 
-<p>Fire a single ray and get the distance to its hit and the mesh ID if it hit anything. If it missed, then distance and meshid will both be -1. </p>
+<p>Cast a single ray and get the distance to its hit and the mesh ID if it hit anything. If it missed, then distance and meshid will both be -1. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">ert</td><td>The ray tracer to fire from. </td></tr>
-    <tr><td class="paramname">origin</td><td>The origin point to fire from. </td></tr>
-    <tr><td class="paramname">direction</td><td>The direction to fire the ray in. </td></tr>
+    <tr><td class="paramname">ert</td><td>The ray tracer to cast from. </td></tr>
+    <tr><td class="paramname">origin</td><td>The origin point to cast from. </td></tr>
+    <tr><td class="paramname">direction</td><td>The direction to cast the ray in. </td></tr>
     <tr><td class="paramname">max_distance</td><td>Maximum distance to record a hit within. Any hits beyond this distance will not be counted. </td></tr>
     <tr><td class="paramname">out_distance</td><td>Out parameter for Distance to the hitpoint. Will be set to -1 if the ray didn't hit anything. </td></tr>
     <tr><td class="paramname">out_meshid</td><td>Out parameter for the ID of the hit mesh. Will be set to -1 if the ray didn't hit anything.</td></tr>
@@ -1268,12 +1058,12 @@ Raytracer teardown</h1>
 <p>Begin by <b>loading an .obj file</b> (<a class="el" href="a00389.html#mesh_setup">Mesh setup</a>).<br  />
  Then, <b>create a BVH</b> (<a class="el" href="a00391.html#raytracer_setup">Raytracer setup</a>) using the <b>mesh</b>.<br  />
 </p>
-<p>Define the <b>starting points</b> from where the ray will fire.<br  />
- Define the <b>vector components</b> of the <b>ray</b> that will be fired.<br  />
+<p>Define the <b>starting points</b> from where the ray will cast.<br  />
+ Define the <b>vector components</b> of the <b>ray</b> that will be cast.<br  />
  </p><div class="fragment"></div><!-- fragment --><p> Define a <b>max_distance</b>.<br  />
  Also create variables <b>distance</b> and <b>mesh_id</b> and initialize them as shown.<br  />
  They will be mutated if a <b>hit</b> occurs.<br  />
- Then, <b>invoke</b> <a class="el" href="a00391.html#ga3104ee3687c70b5045ac3c69eb557b99">FireSingleRayDistance</a> </p><div class="fragment"></div><!-- fragment --><p> If <b>mesh_id</b> is not <b>-1</b>, and <b>distance</b> is not <b>-1</b>, a <b>hit</b> was made.<br  />
+ Then, <b>invoke</b> <a class="el" href="a00391.html#ga1377ba0807c3141ef68b1c94682853e6">CastSingleRayDistance</a> </p><div class="fragment"></div><!-- fragment --><p> If <b>mesh_id</b> is not <b>-1</b>, and <b>distance</b> is not <b>-1</b>, a <b>hit</b> was made.<br  />
  </p><div class="fragment"></div><!-- fragment --><p> From here, please review the example at <a class="el" href="a00391.html#raytracer_teardown">Raytracer teardown</a> for instructions<br  />
  on how to free the remainder of the resources used in this example &ndash;<br  />
  which are the (vector&lt;<a class="el" href="a01297.html">HF::Geometry::MeshInfo</a>&gt; *) and (<a class="el" href="a01357.html">HF::RayTracer::EmbreeRayTracer</a> *) instances.</p>
@@ -1285,12 +1075,243 @@ Raytracer teardown</h1>
 <p class="definition">Definition at line <a class="el" href="a00362_source.html#l00098">98</a> of file <a class="el" href="a00362_source.html">raytracer_C.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="a00146_source.html#l01097">HF::RayTracer::EmbreeRayTracer::IntersectOutputArguments()</a>, and <a class="el" href="a00110_source.html#l00032">HF::Exceptions::OK</a>.</p>
+<div id="dynsection-12" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-12-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-12-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-12-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="a00391_ga1377ba0807c3141ef68b1c94682853e6_cgraph.svg" width="944" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="ga3ac702d080e493d1fa8be6cf4243e38b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3ac702d080e493d1fa8be6cf4243e38b">&#9670;&nbsp;</a></span>CreateRaytracer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> CreateRaytracer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a01297.html">HF::Geometry::MeshInfo</a>&lt; float &gt; *&#160;</td>
+          <td class="paramname"><em>mesh</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a01357.html">HF::RayTracer::EmbreeRayTracer</a> **&#160;</td>
+          <td class="paramname"><em>out_raytracer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>use_precise</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="a00365.html">Cinterface/raytracer_C.h</a>&gt;</code></p>
+
+<p>Create a new raytracer using several meshes. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mesh</td><td>The meshes to add to raytracer's BVH. </td></tr>
+    <tr><td class="paramname">out_raytracer</td><td>Output parameter for the new raytracer. </td></tr>
+    <tr><td class="paramname">use_precise</td><td>If true, use a more precise but slower method of triangle intersections</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>HF_STATUS::MISSING_DEPEND if Embree's dll couldn't be found. HF_STATUS::GENERIC_ERROR if <em>mesh</em>  is null.</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="a00389.html#mesh_setup">Mesh setup</a> (how to create a mesh), <a class="el" href="a00389.html#mesh_teardown">Mesh teardown</a> (how to destroy a mesh) </dd>
+<dd>
+<a class="el" href="a00391.html#raytracer_setup">Raytracer setup</a> (how to create a BVH), <a class="el" href="a00391.html#raytracer_teardown">Raytracer teardown</a> (how to destroy a BVH) </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00362_source.html#l00015">15</a> of file <a class="el" href="a00362_source.html">raytracer_C.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="a00110_source.html#l00038">HF::Exceptions::GENERIC_ERROR</a>, <a class="el" href="a00110_source.html#l00040">HF::Exceptions::INVALID_OBJ</a>, <a class="el" href="a00110_source.html#l00043">HF::Exceptions::MISSING_DEPEND</a>, and <a class="el" href="a00110_source.html#l00032">HF::Exceptions::OK</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a02916_source.html#l00988">C_Interface::ConstructTestRaytracer()</a>, <a class="el" href="a00284_source.html#l00020">CInterfaceTests::TEST()</a>, and <a class="el" href="a00329_source.html#l00135">TEST()</a>.</p>
+<div id="dynsection-13" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-13-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-13-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-13-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="a00391_ga3ac702d080e493d1fa8be6cf4243e38b_icgraph.svg" width="563" height="155"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="gabf8cd153a421ed226ba298579bd56122"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabf8cd153a421ed226ba298579bd56122">&#9670;&nbsp;</a></span>CreateRaytracerMultiMesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> CreateRaytracerMultiMesh </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a01297.html">HF::Geometry::MeshInfo</a>&lt; float &gt; **&#160;</td>
+          <td class="paramname"><em>meshes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>num_meshes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a01357.html">HF::RayTracer::EmbreeRayTracer</a> **&#160;</td>
+          <td class="paramname"><em>out_raytracer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>use_precise</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="a00365.html">Cinterface/raytracer_C.h</a>&gt;</code></p>
+
+<p>Create a new raytracer using several meshes. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mesh</td><td>The meshes to add to raytracer's BVH. </td></tr>
+    <tr><td class="paramname">num_meshes</td><td>Number of meshes in meshes </td></tr>
+    <tr><td class="paramname">out_raytracer</td><td>Output parameter for the new raytracer.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>HF_STATUS::MISSING_DEPEND if Embree's dll couldn't be found. HF_STATUS::GENERIC_ERROR if <code>mesh</code> is null. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00362_source.html#l00039">39</a> of file <a class="el" href="a00362_source.html">raytracer_C.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="a00110_source.html#l00038">HF::Exceptions::GENERIC_ERROR</a>, <a class="el" href="a00110_source.html#l00040">HF::Exceptions::INVALID_OBJ</a>, <a class="el" href="a00110_source.html#l00043">HF::Exceptions::MISSING_DEPEND</a>, and <a class="el" href="a00110_source.html#l00032">HF::Exceptions::OK</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a02916_source.html#l01063">C_Interface::TEST()</a>.</p>
+<div id="dynsection-14" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-14-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-14-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-14-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="a00391_gabf8cd153a421ed226ba298579bd56122_icgraph.svg" width="391" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="ga5a68e1d668554f73ee06de8aeeaaffad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5a68e1d668554f73ee06de8aeeaaffad">&#9670;&nbsp;</a></span>DestroyRayResultVector()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> DestroyRayResultVector </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="a02045.html">RayResult</a> &gt; *&#160;</td>
+          <td class="paramname"><em>analysis</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="a00365.html">Cinterface/raytracer_C.h</a>&gt;</code></p>
+
+<p>Destroy a vector of rayresults. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">analysis</td><td>The ray results to destroy</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>HF_STATUS::OK on completion</dd></dl>
+<div class="fragment"></div><!-- fragment --> <dl class="section see"><dt>See also</dt><dd><a class="el" href="a00389.html#mesh_setup">Mesh setup</a> (how to create a mesh), <a class="el" href="a00389.html#mesh_teardown">Mesh teardown</a> (how to destroy a mesh) </dd>
+<dd>
+<a class="el" href="a00391.html#raytracer_setup">Raytracer setup</a> (how to create a BVH), <a class="el" href="a00391.html#raytracer_teardown">Raytracer teardown</a> (how to destroy a BVH), <a class="el" href="a00391.html#ga81a505c14bba3bed1515384b209b3422" title="Cast rays for each node in origins/directions as ordered pairs and get distance back as a result.">CastRaysDistance</a> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00362_source.html#l00281">281</a> of file <a class="el" href="a00362_source.html">raytracer_C.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="a00347_source.html#l00112">DeleteRawPtr()</a>, and <a class="el" href="a00110_source.html#l00032">HF::Exceptions::OK</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00329_source.html#l00616">TEST()</a>.</p>
+<div id="dynsection-15" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-15-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+<div id="dynsection-15-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-15-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="a00391_ga5a68e1d668554f73ee06de8aeeaaffad_cgraph.svg" width="350" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+<div id="dynsection-16" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-16-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
+<div id="dynsection-16-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-16-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="a00391_ga5a68e1d668554f73ee06de8aeeaaffad_icgraph.svg" width="294" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="gac7ff0b75adf7d24754a702f09d5bcf07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac7ff0b75adf7d24754a702f09d5bcf07">&#9670;&nbsp;</a></span>DestroyRayTracer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00377.html#a91fa3b2bb3a7312ec39d74cc1fbc7bbe">C_INTERFACE</a> DestroyRayTracer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a01357.html">HF::RayTracer::EmbreeRayTracer</a> *&#160;</td>
+          <td class="paramname"><em>rt_to_destroy</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="a00365.html">Cinterface/raytracer_C.h</a>&gt;</code></p>
+
+<p>Delete an existing raytracer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rt_to_destroy</td><td>Raytracer to destroy</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>HF::OK on completion.</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="a00389.html#mesh_setup">Mesh setup</a> (how to create a mesh), <a class="el" href="a00389.html#mesh_teardown">Mesh teardown</a> (how to destroy a mesh) </dd>
+<dd>
+<a class="el" href="a00391.html#raytracer_setup">Raytracer setup</a> (how to create a BVH), <a class="el" href="a00391.html#raytracer_teardown">Raytracer teardown</a> (how to destroy a BVH) </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00362_source.html#l00091">91</a> of file <a class="el" href="a00362_source.html">raytracer_C.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="a00110_source.html#l00032">HF::Exceptions::OK</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00284_source.html#l00020">CInterfaceTests::TEST()</a>, <a class="el" href="a00329_source.html#l00135">TEST()</a>, and <a class="el" href="a02916_source.html#l01003">C_Interface::TEST()</a>.</p>
 <div id="dynsection-17" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-17-trigger" src="closed.png" alt="+"/> Here is the call graph for this function:</div>
+  <img id="dynsection-17-trigger" src="closed.png" alt="+"/> Here is the caller graph for this function:</div>
 <div id="dynsection-17-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-17-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="a00391_ga3104ee3687c70b5045ac3c69eb557b99_cgraph.svg" width="939" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="a00391_gac7ff0b75adf7d24754a702f09d5bcf07_icgraph.svg" width="359" height="139"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
@@ -1375,14 +1396,17 @@ Raytracer teardown</h1>
 </div>
 </div>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <div class="ttc" id="aa00391_html_ga3ac702d080e493d1fa8be6cf4243e38b"><div class="ttname"><a href="a00391.html#ga3ac702d080e493d1fa8be6cf4243e38b">CreateRaytracer</a></div><div class="ttdeci">C_INTERFACE CreateRaytracer(MeshInfo *mesh, EmbreeRayTracer **out_raytracer, bool use_precise)</div><div class="ttdoc">Create a new raytracer using several meshes.</div><div class="ttdef"><b>Definition:</b> <a href="a00362_source.html#l00015">raytracer_C.cpp:15</a></div></div>
 <div class="ttc" id="aa01357_html"><div class="ttname"><a href="a01357.html">HF::RayTracer::EmbreeRayTracer</a></div><div class="ttdoc">A wrapper for Intel's Embree Library.</div><div class="ttdef"><b>Definition:</b> <a href="a00146_source.html#l00080">embree_raytracer.h:80</a></div></div>
 <div class="ttc" id="aa00391_html_gac7ff0b75adf7d24754a702f09d5bcf07"><div class="ttname"><a href="a00391.html#gac7ff0b75adf7d24754a702f09d5bcf07">DestroyRayTracer</a></div><div class="ttdeci">C_INTERFACE DestroyRayTracer(HF::RayTracer::EmbreeRayTracer *rt_to_destroy)</div><div class="ttdoc">Delete an existing raytracer.</div><div class="ttdef"><b>Definition:</b> <a href="a00362_source.html#l00091">raytracer_C.cpp:91</a></div></div>
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.17
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
 </body>
 </html>

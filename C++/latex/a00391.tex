@@ -23,20 +23,20 @@ struct \mbox{\hyperlink{a02045}{Ray\+Result}}
 \begin{DoxyCompactList}\small\item\em Add a new mesh to a raytracer. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00391_gac7ff0b75adf7d24754a702f09d5bcf07}{Destroy\+Ray\+Tracer}} (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$rt\+\_\+to\+\_\+destroy)
 \begin{DoxyCompactList}\small\item\em Delete an existing raytracer. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00391_ga6dcb31db6dbee37c03f277cb61cfdf37}{Fire\+Rays\+Distance}} (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ert, float $\ast$origins, int num\+\_\+origins, float $\ast$directions, int num\+\_\+directions, std\+::vector$<$ \mbox{\hyperlink{a02045}{Ray\+Result}} $>$ $\ast$$\ast$out\+\_\+results, \mbox{\hyperlink{a02045}{Ray\+Result}} $\ast$$\ast$results\+\_\+data)
-\begin{DoxyCompactList}\small\item\em Fire rays for each node in origins/directions as ordered pairs and get distance back as a result. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00391_ga3104ee3687c70b5045ac3c69eb557b99}{Fire\+Single\+Ray\+Distance}} (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ert, const float $\ast$origin, const float $\ast$direction, const float max\+\_\+distance, float $\ast$out\+\_\+distance, int $\ast$out\+\_\+meshid)
-\begin{DoxyCompactList}\small\item\em Fire a single ray and get the distance to its hit and the mesh ID if it hit anything. If it missed, then distance and meshid will both be -\/1. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00391_ga3c06d32b8a4af0110489372e292555fd}{Fire\+Ray}} (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ert, float \&x, float \&y, float \&z, float dx, float dy, float dz, float max\+\_\+distance, bool \&result)
-\begin{DoxyCompactList}\small\item\em Fire a single ray from the raytracer and receive a point in return. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00391_ga4ebcc7736a5e5d25b7696f7ce9f2d645}{Fire\+Multiple\+Rays}} (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ert, float $\ast$origins, const float $\ast$directions, int size, float max\+\_\+distance, bool $\ast$result\+\_\+array)
-\begin{DoxyCompactList}\small\item\em Fire multiple rays at once in parallel and receive their hitpoints in return. The number of directions must be equal to the number of origins. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00391_ga245b0839ec087dfdec623a3e16ffa859}{Fire\+Multiple\+Origins\+One\+Direction}} (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ert, float $\ast$origins, const float $\ast$direction, int size, float max\+\_\+distance, bool $\ast$result\+\_\+array)
-\begin{DoxyCompactList}\small\item\em Fire rays from each origin point in the given direction. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00391_ga03461ff9a261808c13f79f054435d4a6}{Fire\+Multiple\+Directions\+One\+Origin}} (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ert, const float $\ast$origin, float $\ast$directions, int size, float max\+\_\+distance, bool $\ast$result\+\_\+array)
-\begin{DoxyCompactList}\small\item\em Fire rays from a single origin point in multiple directions and get a the points where they intersected the geometry. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00391_ga6c1fa7c28a047526d9d41ad7d1a822bd}{Fire\+Occlusion\+Rays}} (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ert, const float $\ast$origins, const float $\ast$directions, int origin\+\_\+size, int direction\+\_\+size, float max\+\_\+distance, bool $\ast$result\+\_\+array)
-\begin{DoxyCompactList}\small\item\em Fire one or more occlusion rays in parallel. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00391_ga81a505c14bba3bed1515384b209b3422}{Cast\+Rays\+Distance}} (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ert, float $\ast$origins, int num\+\_\+origins, float $\ast$directions, int num\+\_\+directions, std\+::vector$<$ \mbox{\hyperlink{a02045}{Ray\+Result}} $>$ $\ast$$\ast$out\+\_\+results, \mbox{\hyperlink{a02045}{Ray\+Result}} $\ast$$\ast$results\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Cast rays for each node in origins/directions as ordered pairs and get distance back as a result. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00391_ga1377ba0807c3141ef68b1c94682853e6}{Cast\+Single\+Ray\+Distance}} (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ert, const float $\ast$origin, const float $\ast$direction, const float max\+\_\+distance, float $\ast$out\+\_\+distance, int $\ast$out\+\_\+meshid)
+\begin{DoxyCompactList}\small\item\em Cast a single ray and get the distance to its hit and the mesh ID if it hit anything. If it missed, then distance and meshid will both be -\/1. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00391_gab12d174cbad096750b3bc2acc1593ee7}{Cast\+Ray}} (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ert, float \&x, float \&y, float \&z, float dx, float dy, float dz, float max\+\_\+distance, bool \&result)
+\begin{DoxyCompactList}\small\item\em Cast a single ray from the raytracer and receive a point in return. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00391_ga7763f4488e7c507e078882fe699d717f}{Cast\+Multiple\+Rays}} (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ert, float $\ast$origins, const float $\ast$directions, int size, float max\+\_\+distance, bool $\ast$result\+\_\+array)
+\begin{DoxyCompactList}\small\item\em Cast multiple rays at once in parallel and receive their hitpoints in return. The number of directions must be equal to the number of origins. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00391_gad4a9f19d6fe4a802b7788948707ed5c0}{Cast\+Multiple\+Origins\+One\+Direction}} (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ert, float $\ast$origins, const float $\ast$direction, int size, float max\+\_\+distance, bool $\ast$result\+\_\+array)
+\begin{DoxyCompactList}\small\item\em Cast rays from each origin point in the given direction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00391_ga9debc0081ffc5b1f26262cd935b6f5ce}{Cast\+Multiple\+Directions\+One\+Origin}} (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ert, const float $\ast$origin, float $\ast$directions, int size, float max\+\_\+distance, bool $\ast$result\+\_\+array)
+\begin{DoxyCompactList}\small\item\em Cast rays from a single origin point in multiple directions and get a the points where they intersected the geometry. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00391_gad1ec557a577507e2da4dfcb0717ea05c}{Cast\+Occlusion\+Rays}} (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$ert, const float $\ast$origins, const float $\ast$directions, int origin\+\_\+size, int direction\+\_\+size, float max\+\_\+distance, bool $\ast$result\+\_\+array)
+\begin{DoxyCompactList}\small\item\em Cast one or more occlusion rays in parallel. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00391_ga5a68e1d668554f73ee06de8aeeaaffad}{Destroy\+Ray\+Result\+Vector}} (std\+::vector$<$ \mbox{\hyperlink{a02045}{Ray\+Result}} $>$ $\ast$analysis)
 \begin{DoxyCompactList}\small\item\em Destroy a vector of rayresults. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} \mbox{\hyperlink{a00391_gacb9957117b62f9aee76b36c0fbae4160}{Precise\+Intersection}} (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$RT, \mbox{\hyperlink{a00001_a02273}{double}} x, \mbox{\hyperlink{a00001_a02273}{double}} y, \mbox{\hyperlink{a00001_a02273}{double}} z, \mbox{\hyperlink{a00001_a02273}{double}} dx, \mbox{\hyperlink{a00001_a02273}{double}} dy, \mbox{\hyperlink{a00001_a02273}{double}} dz, \mbox{\hyperlink{a00001_a02273}{double}} $\ast$out\+\_\+distance)
@@ -209,6 +209,623 @@ Here is the caller graph for this function\+:
 \includegraphics[width=291pt]{a00391_ga06215cb24d54f979920f6022af214a00_icgraph}
 \end{center}
 \end{figure}
+\mbox{\Hypertarget{a00391_ga9debc0081ffc5b1f26262cd935b6f5ce}\label{a00391_ga9debc0081ffc5b1f26262cd935b6f5ce}} 
+\index{RayTracer@{RayTracer}!CastMultipleDirectionsOneOrigin@{CastMultipleDirectionsOneOrigin}}
+\index{CastMultipleDirectionsOneOrigin@{CastMultipleDirectionsOneOrigin}!RayTracer@{RayTracer}}
+\doxysubsubsection{\texorpdfstring{CastMultipleDirectionsOneOrigin()}{CastMultipleDirectionsOneOrigin()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Cast\+Multiple\+Directions\+One\+Origin (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$}]{ert,  }\item[{const float $\ast$}]{origin,  }\item[{float $\ast$}]{directions,  }\item[{int}]{size,  }\item[{float}]{max\+\_\+distance,  }\item[{bool $\ast$}]{result\+\_\+array }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00365}{Cinterface/raytracer\+\_\+\+C.\+h}}$>$}
+
+
+
+Cast rays from a single origin point in multiple directions and get a the points where they intersected the geometry. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ert} & A pointer to a valid embree raytracer. \\
+\hline
+{\em origin} & An array of 3 floats representing the X, Y, and Z coordinates of the origin to cast from respectively\\
+\hline
+{\em directions} & A list of floats representing directions, with each 3 floats representing one direction. If a ray cast in a direction resulted in a hit, that direction will be overwritten to the hitpoint.\\
+\hline
+{\em size} & Number of points and directions, equal to the total number of floats in one array / 3 \\
+\hline
+{\em max\+\_\+distance} & Maximum distance a ray can travel and still hit a target \\
+\hline
+{\em result\+\_\+array} & Output parameter conatining an ordered list of booleans set to true if the their rays hit, and false if their rays did not.\\
+\hline
+{\em returns} & H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+OK on completion.\\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}} (how to create a mesh), \mbox{\hyperlink{a00389_mesh_teardown}{Mesh teardown}} (how to destroy a mesh) 
+
+\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}} (how to create a B\+VH), \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} (how to destroy a B\+VH)
+\end{DoxySeeAlso}
+Begin by {\bfseries{loading an .obj file}} (\mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}}).~\newline
+ Then, {\bfseries{create a B\+VH}} (\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}}) using the {\bfseries{mesh}}.~\newline
+
+
+Define the {\bfseries{starting points}} from where the ray will cast.~\newline
+ Define the {\bfseries{vector components}} of the {\bfseries{ray(s)}} that will be cast.~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ Define a {\bfseries{maximum distance value}}, and a {\bfseries{container}} to store the {\bfseries{ray collision results}}.~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ We can {\bfseries{review the results}} by outputting the contents of the {\bfseries{results container}}\+:~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ From here, please review the example at \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} for instructions~\newline
+ on how to free the remainder of the resources used in this example --~\newline
+ which are the (vector$<$\mbox{\hyperlink{a01297}{H\+F\+::\+Geometry\+::\+Mesh\+Info}}$>$ $\ast$) and (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$) instances.
+
+{\ttfamily $>$$>$$>$ Load\+O\+BJ loaded mesh successfully into loaded\+\_\+obj at address 0000019E906587\+A0, code\+: 1}~\newline
+{\ttfamily $>$$>$$>$ Create\+Raytracer created Embree\+Ray\+Tracer successfully into bvh at address 0000019E86\+D22500, code\+: 1}~\newline
+{\ttfamily $>$$>$$>$ result\mbox{[}0\mbox{]}\+: hit}~\newline
+{\ttfamily $>$$>$$>$ \mbox{[}0, 0, 0\mbox{]}, direction \mbox{[}0, 0, 0\mbox{]}}~\newline
+{\ttfamily $>$$>$$>$ result\mbox{[}1\mbox{]}\+: hit}~\newline
+{\ttfamily $>$$>$$>$ \mbox{[}0, 0, 0\mbox{]}, direction \mbox{[}0, 0, 0\mbox{]}}~\newline
+{\ttfamily $>$$>$$>$ result\mbox{[}2\mbox{]}\+: hit}~\newline
+{\ttfamily $>$$>$$>$ \mbox{[}0, 0, 0\mbox{]}, direction \mbox{[}0, 0, 1.\+19209e-\/07\mbox{]}}~\newline
+
+
+Definition at line 249 of file raytracer\+\_\+\+C.\+cpp.
+
+
+
+References Convert\+Raw\+Float\+Array\+To\+Points(), H\+F\+::\+Exceptions\+::\+OK, and H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Point\+Intersections().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00391_ga9debc0081ffc5b1f26262cd935b6f5ce_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00391_gad4a9f19d6fe4a802b7788948707ed5c0}\label{a00391_gad4a9f19d6fe4a802b7788948707ed5c0}} 
+\index{RayTracer@{RayTracer}!CastMultipleOriginsOneDirection@{CastMultipleOriginsOneDirection}}
+\index{CastMultipleOriginsOneDirection@{CastMultipleOriginsOneDirection}!RayTracer@{RayTracer}}
+\doxysubsubsection{\texorpdfstring{CastMultipleOriginsOneDirection()}{CastMultipleOriginsOneDirection()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Cast\+Multiple\+Origins\+One\+Direction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$}]{ert,  }\item[{float $\ast$}]{origins,  }\item[{const float $\ast$}]{direction,  }\item[{int}]{size,  }\item[{float}]{max\+\_\+distance,  }\item[{bool $\ast$}]{result\+\_\+array }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00365}{Cinterface/raytracer\+\_\+\+C.\+h}}$>$}
+
+
+
+Cast rays from each origin point in the given direction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ert} & The raytracer to cast each ray from. \\
+\hline
+{\em origins} & A list of floats representing origin points, with each 3 floats representing one point. \\
+\hline
+{\em direction} & An array of 3 floats representing the X, Y, and Z coordinates respectively. \\
+\hline
+{\em size} & Number of points and directions, equal to the total number of floats in one array / 3. \\
+\hline
+{\em max\+\_\+distance} & Maximum distance a ray can travel and still hit a target.\\
+\hline
+{\em result\+\_\+array} & Output parameter conatining an ordered list of booleans set to true if the their rays hit, and false if their rays did not.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+OK on completion.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}} (how to create a mesh), \mbox{\hyperlink{a00389_mesh_teardown}{Mesh teardown}} (how to destroy a mesh) 
+
+\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}} (how to create a B\+VH), \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} (how to destroy a B\+VH)
+\end{DoxySeeAlso}
+Begin by {\bfseries{loading an .obj file}} (\mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}}).~\newline
+ Then, {\bfseries{create a B\+VH}} (\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}}) using the {\bfseries{mesh}}.~\newline
+
+
+Define the {\bfseries{starting points}} from where the ray will cast.~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ Define the {\bfseries{vector components}} of the {\bfseries{ray}} that will be cast.~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ Define a {\bfseries{maximum distance value}}, and a {\bfseries{container}} to store the {\bfseries{ray collision results}}.~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ We can {\bfseries{review the results}} by outputting the contents of the {\bfseries{results container}}\+:~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ From here, please review the example at \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} for instructions~\newline
+ on how to free the remainder of the resources used in this example --~\newline
+ which are the (vector$<$\mbox{\hyperlink{a01297}{H\+F\+::\+Geometry\+::\+Mesh\+Info}}$>$ $\ast$) and (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$) instances.
+
+{\ttfamily $>$$>$$>$ Load\+O\+BJ loaded mesh successfully into loaded\+\_\+obj at address 0000019E90659220, code\+: 1}~\newline
+{\ttfamily $>$$>$$>$ Create\+Raytracer created Embree\+Ray\+Tracer successfully into bvh at address 0000019E86\+D22\+B\+E0, code\+: 1}~\newline
+{\ttfamily $>$$>$$>$ result\mbox{[}0\mbox{]}\+: hit}~\newline
+{\ttfamily $>$$>$$>$ \mbox{[}0, 0, -\/1\mbox{]}, from point \mbox{[}0, 0, 0\mbox{]}}~\newline
+{\ttfamily $>$$>$$>$ result\mbox{[}1\mbox{]}\+: hit}~\newline
+{\ttfamily $>$$>$$>$ \mbox{[}0, 0, -\/1\mbox{]}, from point \mbox{[}0, 0, -\/2.\+38419e-\/07\mbox{]}}~\newline
+ {\ttfamily $>$$>$$>$ result\mbox{[}2\mbox{]}\+: hit}~\newline
+{\ttfamily $>$$>$$>$ \mbox{[}0, 0, -\/1\mbox{]}, from point \mbox{[}0, 0, 0\mbox{]}}~\newline
+
+
+Definition at line 227 of file raytracer\+\_\+\+C.\+cpp.
+
+
+
+References Convert\+Raw\+Float\+Array\+To\+Points(), H\+F\+::\+Exceptions\+::\+OK, and H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Point\+Intersections().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00391_gad4a9f19d6fe4a802b7788948707ed5c0_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00391_ga7763f4488e7c507e078882fe699d717f}\label{a00391_ga7763f4488e7c507e078882fe699d717f}} 
+\index{RayTracer@{RayTracer}!CastMultipleRays@{CastMultipleRays}}
+\index{CastMultipleRays@{CastMultipleRays}!RayTracer@{RayTracer}}
+\doxysubsubsection{\texorpdfstring{CastMultipleRays()}{CastMultipleRays()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Cast\+Multiple\+Rays (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$}]{ert,  }\item[{float $\ast$}]{origins,  }\item[{const float $\ast$}]{directions,  }\item[{int}]{size,  }\item[{float}]{max\+\_\+distance,  }\item[{bool $\ast$}]{result\+\_\+array }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00365}{Cinterface/raytracer\+\_\+\+C.\+h}}$>$}
+
+
+
+Cast multiple rays at once in parallel and receive their hitpoints in return. The number of directions must be equal to the number of origins. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ert} & Raytracer to cast each ray from.\\
+\hline
+{\em origins} & A list of floats representing origin points, with each 3 floats representing one point. If the ray cast from a point is successful, said point will be overwritten with the place it hit.\\
+\hline
+{\em directions} & A list of floats representing ray directions, with each 3 floats representing one direction. \\
+\hline
+{\em size} & Number of points and directions, equal to the total number of floats in one array / 3. ~\newline
+ \\
+\hline
+{\em max\+\_\+distance} & Maximum distance a ray can travel and still hit a target. Any hits beyond this point will not be recorded.\\
+\hline
+{\em result\+\_\+array} & Output parameter containing an ordered list of booleans set to true if the their rays hit, and false if their rays did not.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+OK on completion.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}} (how to create a mesh), \mbox{\hyperlink{a00389_mesh_teardown}{Mesh teardown}} (how to destroy a mesh) 
+
+\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}} (how to create a B\+VH), \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} (how to destroy a B\+VH)
+\end{DoxySeeAlso}
+Begin by {\bfseries{loading an .obj file}} (\mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}}).~\newline
+ Then, {\bfseries{create a B\+VH}} (\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}}) using the {\bfseries{mesh}}.~\newline
+
+
+Define the {\bfseries{starting points}} from where the ray will cast.~\newline
+ Define the {\bfseries{vector components}} of the {\bfseries{ray}} that will be cast.~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ Define a {\bfseries{maximum distance value}}, and a {\bfseries{container}} to store the {\bfseries{ray collision results}}.~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ We can {\bfseries{review the results}} by outputting the contents of the {\bfseries{results container}}\+:~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ From here, please review the example at \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} for instructions~\newline
+ on how to free the remainder of the resources used in this example --~\newline
+ which are the (vector$<$\mbox{\hyperlink{a01297}{H\+F\+::\+Geometry\+::\+Mesh\+Info}}$>$ $\ast$) and (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$) instances.
+
+{\ttfamily $>$$>$$>$ Load\+O\+BJ loaded mesh successfully into loaded\+\_\+obj at address 0000019E906596\+A0, code\+: 1}~\newline
+{\ttfamily $>$$>$$>$ Create\+Raytracer created Embree\+Ray\+Tracer successfully into bvh at address 0000019E86\+D22500, code\+: 1}~\newline
+{\ttfamily $>$$>$$>$ result\mbox{[}0\mbox{]}\+: hit}~\newline
+{\ttfamily $>$$>$$>$ \mbox{[}0, 0, 0\mbox{]}, direction \mbox{[}0, 0, -\/1\mbox{]}}~\newline
+{\ttfamily $>$$>$$>$ result\mbox{[}1\mbox{]}\+: hit}~\newline
+{\ttfamily $>$$>$$>$ \mbox{[}0, 0, -\/2.\+38419e-\/07\mbox{]}, direction \mbox{[}0, 0, -\/2\mbox{]}}~\newline
+{\ttfamily $>$$>$$>$ result\mbox{[}2\mbox{]}\+: hit}~\newline
+{\ttfamily $>$$>$$>$ \mbox{[}0, 0, 2.\+38419e-\/07\mbox{]}, direction \mbox{[}0, 0, -\/3\mbox{]}}~\newline
+
+
+Definition at line 199 of file raytracer\+\_\+\+C.\+cpp.
+
+
+
+References Convert\+Raw\+Float\+Array\+To\+Points(), H\+F\+::\+Exceptions\+::\+OK, and H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Point\+Intersections().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00391_ga7763f4488e7c507e078882fe699d717f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00391_gad1ec557a577507e2da4dfcb0717ea05c}\label{a00391_gad1ec557a577507e2da4dfcb0717ea05c}} 
+\index{RayTracer@{RayTracer}!CastOcclusionRays@{CastOcclusionRays}}
+\index{CastOcclusionRays@{CastOcclusionRays}!RayTracer@{RayTracer}}
+\doxysubsubsection{\texorpdfstring{CastOcclusionRays()}{CastOcclusionRays()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Cast\+Occlusion\+Rays (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$}]{ert,  }\item[{const float $\ast$}]{origins,  }\item[{const float $\ast$}]{directions,  }\item[{int}]{origin\+\_\+size,  }\item[{int}]{direction\+\_\+size,  }\item[{float}]{max\+\_\+distance,  }\item[{bool $\ast$}]{result\+\_\+array }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00365}{Cinterface/raytracer\+\_\+\+C.\+h}}$>$}
+
+
+
+Cast one or more occlusion rays in parallel. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ert} & A pointer to a valid embree raytracer \\
+\hline
+{\em origins} & A list of floats representing origin points, with each 3 floats representing one point \\
+\hline
+{\em directions} & A list of floats representing ray directions, with each 3 floats representing one direction\\
+\hline
+{\em origin\+\_\+size} & How many origins points are included are included. Note that a single origin point is 3 floats, so this should equal the length of the origin array/3. This must match direction\+\_\+size or be equal to one.\\
+\hline
+{\em direction\+\_\+size} & How many directions are included. Note that a single direction is 3 floats, so this should equal the length of the origin array / 3. This must match origin\+\_\+size or be equal to one.\\
+\hline
+{\em max\+\_\+distance} & Maximum distance a ray can travel and still hit a target. \\
+\hline
+{\em result\+\_\+array} & Output array booleans\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+OK on completion
+\end{DoxyReturn}
+\begin{DoxyRemark}{Remarks}
+Occlusion rays are noticably faster than standard rays but are only capable of returning whether they hit something or not. This makes them good for line of sight checks.
+\end{DoxyRemark}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}} (how to create a mesh), \mbox{\hyperlink{a00389_mesh_teardown}{Mesh teardown}} (how to destroy a mesh) 
+
+\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}} (how to create a B\+VH), \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} (how to destroy a B\+VH)
+\end{DoxySeeAlso}
+Begin by {\bfseries{loading an .obj file}} (\mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}}).~\newline
+ Then, {\bfseries{create a B\+VH}} (\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}}) using the {\bfseries{mesh}}.~\newline
+
+
+Define the {\bfseries{starting points}} from where the ray will cast.~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ Define the {\bfseries{vector components}} of the {\bfseries{ray(s)}} that will be cast.~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ Define a {\bfseries{maximum distance value}}, and a {\bfseries{container}} to store the {\bfseries{ray occlusion results}}.~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ If {\bfseries{does\+\_\+occlude}} is true, the ray {\bfseries{connects}}.~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ From here, please review the example at \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} for instructions~\newline
+ on how to free the remainder of the resources used in this example --~\newline
+ which are the (vector$<$\mbox{\hyperlink{a01297}{H\+F\+::\+Geometry\+::\+Mesh\+Info}}$>$ $\ast$) and (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$) instances.
+
+{\ttfamily $>$$>$$>$ Load\+O\+BJ loaded mesh successfully into loaded\+\_\+obj at address 0000019E90658440, code\+: 1}~\newline
+{\ttfamily $>$$>$$>$ Create\+Raytracer created Embree\+Ray\+Tracer successfully into bvh at address 0000019E86\+D22\+B\+E0, code\+: 1}~\newline
+{\ttfamily $>$$>$$>$ Using multidirection, single origin}~\newline
+{\ttfamily $>$$>$$>$ Does the ray connect? True}~\newline
+
+
+Definition at line 271 of file raytracer\+\_\+\+C.\+cpp.
+
+
+
+References Convert\+Raw\+Float\+Array\+To\+Points(), H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Occlusions(), and H\+F\+::\+Exceptions\+::\+OK.
+
+
+
+Referenced by C\+\_\+\+Interface\+::\+T\+E\+S\+T().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00391_gad1ec557a577507e2da4dfcb0717ea05c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=328pt]{a00391_gad1ec557a577507e2da4dfcb0717ea05c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00391_gab12d174cbad096750b3bc2acc1593ee7}\label{a00391_gab12d174cbad096750b3bc2acc1593ee7}} 
+\index{RayTracer@{RayTracer}!CastRay@{CastRay}}
+\index{CastRay@{CastRay}!RayTracer@{RayTracer}}
+\doxysubsubsection{\texorpdfstring{CastRay()}{CastRay()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Cast\+Ray (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$}]{ert,  }\item[{float \&}]{x,  }\item[{float \&}]{y,  }\item[{float \&}]{z,  }\item[{float}]{dx,  }\item[{float}]{dy,  }\item[{float}]{dz,  }\item[{float}]{max\+\_\+distance,  }\item[{bool \&}]{result }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00365}{Cinterface/raytracer\+\_\+\+C.\+h}}$>$}
+
+
+
+Cast a single ray from the raytracer and receive a point in return. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ert} & Raytracer to cast each ray from. \\
+\hline
+{\em x} & x coordinate of the ray\textquotesingle{}s origin. Will be set to the hit point\textquotesingle{}s x coordinate if the ray something. \\
+\hline
+{\em y} & y coordinate of the ray\textquotesingle{}s origin. Will be set to the hit point\textquotesingle{}s y coordinate if the ray something. \\
+\hline
+{\em z} & z coordinate of the ray\textquotesingle{}s origin. Will be set to the hit point\textquotesingle{}s z coordinate if the ray something. \\
+\hline
+{\em dx} & x coordinate of the ray\textquotesingle{}s direction. \\
+\hline
+{\em dy} & y coordinate of the ray\textquotesingle{}s direction. \\
+\hline
+{\em dz} & z coordinate of the ray\textquotesingle{}s direction. \\
+\hline
+{\em max\+\_\+distance} & Maximum distance to record a hit within. Any hits beyond this distance will not be counted. \\
+\hline
+{\em result} & Set to true if the ray hits, false otherwise\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+H\+F\+::\+OK on completion
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}} (how to create a mesh), \mbox{\hyperlink{a00389_mesh_teardown}{Mesh teardown}} (how to destroy a mesh) 
+
+\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}} (how to create a B\+VH), \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} (how to destroy a B\+VH)
+\end{DoxySeeAlso}
+Begin by {\bfseries{loading an .obj file}} (\mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}}).~\newline
+ Then, {\bfseries{create a B\+VH}} (\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}}) using the {\bfseries{mesh}}.~\newline
+
+
+Define the {\bfseries{starting points}} from where the ray will cast.~\newline
+ Define the {\bfseries{vector components}} of the {\bfseries{ray}} that will be cast.~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ Define a {\bfseries{maximum distance value}}, and a {\bfseries{hit point}} that determines the ray\textquotesingle{}s {\bfseries{intended destination}}..~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ {\bfseries{Invoke}} \mbox{\hyperlink{}{Point\+Intersection}} . {\bfseries{did\+\_\+hit}} will be set {\bfseries{true}} if a hit occurred.~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ From here, please review the example at \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} for instructions~\newline
+ on how to free the remainder of the resources used in this example --~\newline
+ which are the (vector$<$\mbox{\hyperlink{a01297}{H\+F\+::\+Geometry\+::\+Mesh\+Info}}$>$ $\ast$) and (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$) instances.
+
+{\ttfamily $>$$>$$>$ Load\+O\+BJ loaded mesh successfully into loaded\+\_\+obj at address 0000019E906599\+A0, code\+: 1}~\newline
+{\ttfamily $>$$>$$>$ Create\+Raytracer created Embree\+Ray\+Tracer successfully into bvh at address 0000019E86\+D22\+B\+E0, code\+: 1}~\newline
+{\ttfamily $>$$>$$>$ Hit point\+: \mbox{[}0, 0, 0\mbox{]}}~\newline
+
+
+Definition at line 193 of file raytracer\+\_\+\+C.\+cpp.
+
+
+
+References H\+F\+::\+Exceptions\+::\+OK, and H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Point\+Intersection().
+
+
+
+Referenced by C\+\_\+\+Interface\+::\+T\+E\+S\+T().
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=319pt]{a00391_gab12d174cbad096750b3bc2acc1593ee7_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=275pt]{a00391_gab12d174cbad096750b3bc2acc1593ee7_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00391_ga81a505c14bba3bed1515384b209b3422}\label{a00391_ga81a505c14bba3bed1515384b209b3422}} 
+\index{RayTracer@{RayTracer}!CastRaysDistance@{CastRaysDistance}}
+\index{CastRaysDistance@{CastRaysDistance}!RayTracer@{RayTracer}}
+\doxysubsubsection{\texorpdfstring{CastRaysDistance()}{CastRaysDistance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Cast\+Rays\+Distance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$}]{ert,  }\item[{float $\ast$}]{origins,  }\item[{int}]{num\+\_\+origins,  }\item[{float $\ast$}]{directions,  }\item[{int}]{num\+\_\+directions,  }\item[{std\+::vector$<$ \mbox{\hyperlink{a02045}{Ray\+Result}} $>$ $\ast$$\ast$}]{out\+\_\+results,  }\item[{\mbox{\hyperlink{a02045}{Ray\+Result}} $\ast$$\ast$}]{results\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00365}{Cinterface/raytracer\+\_\+\+C.\+h}}$>$}
+
+
+
+Cast rays for each node in origins/directions as ordered pairs and get distance back as a result. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ert} & The raytracer to use for firing every ray.\\
+\hline
+{\em origins} & An array of origin points to cast rays from. Should be an array of floats with every 3 floats representing a new origin point.\\
+\hline
+{\em num\+\_\+origins} & The number of points in origins. N\+O\+TE\+: This should be equal to the length of origins / 3, since every 3 floats in origins equals a single point.\\
+\hline
+{\em directions} & An array of directions points to cast rays from. Should be an array of floats with every 3 floats representing a new direction.\\
+\hline
+{\em num\+\_\+directions} & The number of directions in directions. N\+O\+TE\+: This should be equal to the length of directions / 3, since every 3 floats in directions equals a single direction.\\
+\hline
+{\em out\+\_\+results} & Output parameter for ray results.\\
+\hline
+{\em results\+\_\+data} & Output parameter for the data of the array held by {\itshape out\+\_\+results} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+OK on completion. H\+F\+::\+G\+E\+N\+E\+R\+I\+C\+\_\+\+E\+R\+R\+OR if the input parameters didn\textquotesingle{}t meet at least one of the required cases below.
+\end{DoxyReturn}
+\begin{DoxyRemark}{Remarks}
+Can be cast in 3 configurations\+: 
+\end{DoxyRemark}
+
+
+
+\begin{DoxyItemize}
+\end{DoxyItemize}Equal amount of directions/origins\+: Cast a ray for every pair of origin/direction in order. i.\+e. (origin\mbox{[}0\mbox{]}, direction\mbox{[}0\mbox{]}), (origin\mbox{[}1\mbox{]}, direction\mbox{[}1\mbox{]}). 
+
+One direction, multiple origins\+: Cast a ray in the given direction from each origin point in origins. 
+
+One origin, multiple directions\+: Cast a ray from the origin point in each direction in directions.  
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}} (how to create a mesh), \mbox{\hyperlink{a00389_mesh_teardown}{Mesh teardown}} (how to destroy a mesh) 
+
+\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}} (how to create a B\+VH), \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} (how to destroy a B\+VH)
+\end{DoxySeeAlso}
+Begin by {\bfseries{loading an .obj file}} (\mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}}).~\newline
+ Then, {\bfseries{create a B\+VH}} (\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}}) using the {\bfseries{mesh}}.~\newline
+
+
+Define the {\bfseries{starting points}} from where the ray will cast.~\newline
+ Define the {\bfseries{vector components}} of the {\bfseries{ray}} that will be cast.~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ Prepare a {\bfseries{pointer}} to std\+::vector$<$\mbox{\hyperlink{a02045}{Ray\+Result}}$>$, and a pointer to a \mbox{\hyperlink{a02045}{Ray\+Result}} .~\newline
+ Then, invoke \mbox{\hyperlink{a00391_ga81a505c14bba3bed1515384b209b3422}{Cast\+Rays\+Distance}} .~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ We can {\bfseries{review the results}} by outputting the contents of the {\bfseries{results container}}\+:~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ From here, please review the example at \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} for instructions~\newline
+ on how to free the remainder of the resources used in this example --~\newline
+ which are the (vector$<$\mbox{\hyperlink{a01297}{H\+F\+::\+Geometry\+::\+Mesh\+Info}}$>$ $\ast$) and (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$) instances.
+
+{\ttfamily $>$$>$$>$ Load\+O\+BJ loaded mesh successfully into loaded\+\_\+obj at address 0000019C4\+E\+A752\+E0, code\+: 1}~\newline
+{\ttfamily $>$$>$$>$ Create\+Raytracer created Embree\+Ray\+Tracer successfully into bvh at address 0000019C4\+E\+A12280, code\+: 1}~\newline
+{\ttfamily $>$$>$$>$ Ray result\+: \mbox{[}\{Distance\+: 2}~\newline
+{\ttfamily $>$$>$$>$ Mesh ID\+: 0\}, \{Distance\+: 1.\+5}~\newline
+{\ttfamily $>$$>$$>$ Mesh ID\+: 0\}, \{Distance\+: 1.\+33333}~\newline
+{\ttfamily $>$$>$$>$ Mesh ID\+: 0\}\mbox{]}}~\newline
+
+
+Definition at line 111 of file raytracer\+\_\+\+C.\+cpp.
+
+
+
+References Convert\+Raw\+Float\+Array\+To\+Points(), H\+F\+::\+Exceptions\+::\+G\+E\+N\+E\+R\+I\+C\+\_\+\+E\+R\+R\+OR, H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Intersect\+Output\+Arguments(), and H\+F\+::\+Exceptions\+::\+OK.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00391_ga81a505c14bba3bed1515384b209b3422_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{a00391_ga1377ba0807c3141ef68b1c94682853e6}\label{a00391_ga1377ba0807c3141ef68b1c94682853e6}} 
+\index{RayTracer@{RayTracer}!CastSingleRayDistance@{CastSingleRayDistance}}
+\index{CastSingleRayDistance@{CastSingleRayDistance}!RayTracer@{RayTracer}}
+\doxysubsubsection{\texorpdfstring{CastSingleRayDistance()}{CastSingleRayDistance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Cast\+Single\+Ray\+Distance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$}]{ert,  }\item[{const float $\ast$}]{origin,  }\item[{const float $\ast$}]{direction,  }\item[{const float}]{max\+\_\+distance,  }\item[{float $\ast$}]{out\+\_\+distance,  }\item[{int $\ast$}]{out\+\_\+meshid }\end{DoxyParamCaption})}
+
+
+
+{\ttfamily \#include $<$\mbox{\hyperlink{a00365}{Cinterface/raytracer\+\_\+\+C.\+h}}$>$}
+
+
+
+Cast a single ray and get the distance to its hit and the mesh ID if it hit anything. If it missed, then distance and meshid will both be -\/1. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ert} & The ray tracer to cast from. \\
+\hline
+{\em origin} & The origin point to cast from. \\
+\hline
+{\em direction} & The direction to cast the ray in. \\
+\hline
+{\em max\+\_\+distance} & Maximum distance to record a hit within. Any hits beyond this distance will not be counted. \\
+\hline
+{\em out\+\_\+distance} & Out parameter for Distance to the hitpoint. Will be set to -\/1 if the ray didn\textquotesingle{}t hit anything. \\
+\hline
+{\em out\+\_\+meshid} & Out parameter for the ID of the hit mesh. Will be set to -\/1 if the ray didn\textquotesingle{}t hit anything.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+OK on success
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}} (how to create a mesh), \mbox{\hyperlink{a00389_mesh_teardown}{Mesh teardown}} (how to destroy a mesh) 
+
+\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}} (how to create a B\+VH), \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} (how to destroy a B\+VH)
+\end{DoxySeeAlso}
+Begin by {\bfseries{loading an .obj file}} (\mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}}).~\newline
+ Then, {\bfseries{create a B\+VH}} (\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}}) using the {\bfseries{mesh}}.~\newline
+
+
+Define the {\bfseries{starting points}} from where the ray will cast.~\newline
+ Define the {\bfseries{vector components}} of the {\bfseries{ray}} that will be cast.~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ Define a {\bfseries{max\+\_\+distance}}.~\newline
+ Also create variables {\bfseries{distance}} and {\bfseries{mesh\+\_\+id}} and initialize them as shown.~\newline
+ They will be mutated if a {\bfseries{hit}} occurs.~\newline
+ Then, {\bfseries{invoke}} \mbox{\hyperlink{a00391_ga1377ba0807c3141ef68b1c94682853e6}{Cast\+Single\+Ray\+Distance}} 
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ If {\bfseries{mesh\+\_\+id}} is not {\bfseries{-\/1}}, and {\bfseries{distance}} is not {\bfseries{-\/1}}, a {\bfseries{hit}} was made.~\newline
+ 
+\begin{DoxyCodeInclude}{0}
+\end{DoxyCodeInclude}
+ From here, please review the example at \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} for instructions~\newline
+ on how to free the remainder of the resources used in this example --~\newline
+ which are the (vector$<$\mbox{\hyperlink{a01297}{H\+F\+::\+Geometry\+::\+Mesh\+Info}}$>$ $\ast$) and (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$) instances.
+
+{\ttfamily $>$$>$$>$ Load\+O\+BJ loaded mesh successfully into loaded\+\_\+obj at address 0000019C4\+E\+A3\+F\+C\+B0, code\+: 1}~\newline
+{\ttfamily $>$$>$$>$ Create\+Raytracer created Embree\+Ray\+Tracer successfully into bvh at address 0000019C4\+E\+A12820, code\+: 1}~\newline
+{\ttfamily $>$$>$$>$ Distance is 2, meshid is 0}~\newline
+
+
+Definition at line 98 of file raytracer\+\_\+\+C.\+cpp.
+
+
+
+References H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Intersect\+Output\+Arguments(), and H\+F\+::\+Exceptions\+::\+OK.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{a00391_ga1377ba0807c3141ef68b1c94682853e6_cgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{a00391_ga3ac702d080e493d1fa8be6cf4243e38b}\label{a00391_ga3ac702d080e493d1fa8be6cf4243e38b}} 
 \index{RayTracer@{RayTracer}!CreateRaytracer@{CreateRaytracer}}
 \index{CreateRaytracer@{CreateRaytracer}!RayTracer@{RayTracer}}
@@ -334,7 +951,7 @@ H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+OK on completion
  \begin{DoxySeeAlso}{See also}
 \mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}} (how to create a mesh), \mbox{\hyperlink{a00389_mesh_teardown}{Mesh teardown}} (how to destroy a mesh) 
 
-\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}} (how to create a B\+VH), \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} (how to destroy a B\+VH), \mbox{\hyperlink{a00391_ga6dcb31db6dbee37c03f277cb61cfdf37}{Fire\+Rays\+Distance}} 
+\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}} (how to create a B\+VH), \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} (how to destroy a B\+VH), \mbox{\hyperlink{a00391_ga81a505c14bba3bed1515384b209b3422}{Cast\+Rays\+Distance}} 
 \end{DoxySeeAlso}
 
 
@@ -409,623 +1026,6 @@ Here is the caller graph for this function\+:
 \begin{center}
 \leavevmode
 \includegraphics[width=341pt]{a00391_gac7ff0b75adf7d24754a702f09d5bcf07_icgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a00391_ga03461ff9a261808c13f79f054435d4a6}\label{a00391_ga03461ff9a261808c13f79f054435d4a6}} 
-\index{RayTracer@{RayTracer}!FireMultipleDirectionsOneOrigin@{FireMultipleDirectionsOneOrigin}}
-\index{FireMultipleDirectionsOneOrigin@{FireMultipleDirectionsOneOrigin}!RayTracer@{RayTracer}}
-\doxysubsubsection{\texorpdfstring{FireMultipleDirectionsOneOrigin()}{FireMultipleDirectionsOneOrigin()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Fire\+Multiple\+Directions\+One\+Origin (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$}]{ert,  }\item[{const float $\ast$}]{origin,  }\item[{float $\ast$}]{directions,  }\item[{int}]{size,  }\item[{float}]{max\+\_\+distance,  }\item[{bool $\ast$}]{result\+\_\+array }\end{DoxyParamCaption})}
-
-
-
-{\ttfamily \#include $<$\mbox{\hyperlink{a00365}{Cinterface/raytracer\+\_\+\+C.\+h}}$>$}
-
-
-
-Fire rays from a single origin point in multiple directions and get a the points where they intersected the geometry. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em ert} & A pointer to a valid embree raytracer. \\
-\hline
-{\em origin} & An array of 3 floats representing the X, Y, and Z coordinates of the origin to fire from respectively\\
-\hline
-{\em directions} & A list of floats representing directions, with each 3 floats representing one direction. If a ray fired in a direction resulted in a hit, that direction will be overwritten to the hitpoint.\\
-\hline
-{\em size} & Number of points and directions, equal to the total number of floats in one array / 3 \\
-\hline
-{\em max\+\_\+distance} & Maximum distance a ray can travel and still hit a target \\
-\hline
-{\em result\+\_\+array} & Output parameter conatining an ordered list of booleans set to true if the their rays hit, and false if their rays did not.\\
-\hline
-{\em returns} & H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+OK on completion.\\
-\hline
-\end{DoxyParams}
-\begin{DoxySeeAlso}{See also}
-\mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}} (how to create a mesh), \mbox{\hyperlink{a00389_mesh_teardown}{Mesh teardown}} (how to destroy a mesh) 
-
-\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}} (how to create a B\+VH), \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} (how to destroy a B\+VH)
-\end{DoxySeeAlso}
-Begin by {\bfseries{loading an .obj file}} (\mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}}).~\newline
- Then, {\bfseries{create a B\+VH}} (\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}}) using the {\bfseries{mesh}}.~\newline
-
-
-Define the {\bfseries{starting points}} from where the ray will fire.~\newline
- Define the {\bfseries{vector components}} of the {\bfseries{ray(s)}} that will be fired.~\newline
- 
-\begin{DoxyCodeInclude}{0}
-\end{DoxyCodeInclude}
- Define a {\bfseries{maximum distance value}}, and a {\bfseries{container}} to store the {\bfseries{ray collision results}}.~\newline
- 
-\begin{DoxyCodeInclude}{0}
-\end{DoxyCodeInclude}
- We can {\bfseries{review the results}} by outputting the contents of the {\bfseries{results container}}\+:~\newline
- 
-\begin{DoxyCodeInclude}{0}
-\end{DoxyCodeInclude}
- From here, please review the example at \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} for instructions~\newline
- on how to free the remainder of the resources used in this example --~\newline
- which are the (vector$<$\mbox{\hyperlink{a01297}{H\+F\+::\+Geometry\+::\+Mesh\+Info}}$>$ $\ast$) and (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$) instances.
-
-{\ttfamily $>$$>$$>$ Load\+O\+BJ loaded mesh successfully into loaded\+\_\+obj at address 0000019E906587\+A0, code\+: 1}~\newline
-{\ttfamily $>$$>$$>$ Create\+Raytracer created Embree\+Ray\+Tracer successfully into bvh at address 0000019E86\+D22500, code\+: 1}~\newline
-{\ttfamily $>$$>$$>$ result\mbox{[}0\mbox{]}\+: hit}~\newline
-{\ttfamily $>$$>$$>$ \mbox{[}0, 0, 0\mbox{]}, direction \mbox{[}0, 0, 0\mbox{]}}~\newline
-{\ttfamily $>$$>$$>$ result\mbox{[}1\mbox{]}\+: hit}~\newline
-{\ttfamily $>$$>$$>$ \mbox{[}0, 0, 0\mbox{]}, direction \mbox{[}0, 0, 0\mbox{]}}~\newline
-{\ttfamily $>$$>$$>$ result\mbox{[}2\mbox{]}\+: hit}~\newline
-{\ttfamily $>$$>$$>$ \mbox{[}0, 0, 0\mbox{]}, direction \mbox{[}0, 0, 1.\+19209e-\/07\mbox{]}}~\newline
-
-
-Definition at line 249 of file raytracer\+\_\+\+C.\+cpp.
-
-
-
-References Convert\+Raw\+Float\+Array\+To\+Points(), H\+F\+::\+Exceptions\+::\+OK, and H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Point\+Intersections().
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a00391_ga03461ff9a261808c13f79f054435d4a6_cgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a00391_ga245b0839ec087dfdec623a3e16ffa859}\label{a00391_ga245b0839ec087dfdec623a3e16ffa859}} 
-\index{RayTracer@{RayTracer}!FireMultipleOriginsOneDirection@{FireMultipleOriginsOneDirection}}
-\index{FireMultipleOriginsOneDirection@{FireMultipleOriginsOneDirection}!RayTracer@{RayTracer}}
-\doxysubsubsection{\texorpdfstring{FireMultipleOriginsOneDirection()}{FireMultipleOriginsOneDirection()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Fire\+Multiple\+Origins\+One\+Direction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$}]{ert,  }\item[{float $\ast$}]{origins,  }\item[{const float $\ast$}]{direction,  }\item[{int}]{size,  }\item[{float}]{max\+\_\+distance,  }\item[{bool $\ast$}]{result\+\_\+array }\end{DoxyParamCaption})}
-
-
-
-{\ttfamily \#include $<$\mbox{\hyperlink{a00365}{Cinterface/raytracer\+\_\+\+C.\+h}}$>$}
-
-
-
-Fire rays from each origin point in the given direction. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em ert} & The raytracer to fire each ray from. \\
-\hline
-{\em origins} & A list of floats representing origin points, with each 3 floats representing one point. \\
-\hline
-{\em direction} & An array of 3 floats representing the X, Y, and Z coordinates respectively. \\
-\hline
-{\em size} & Number of points and directions, equal to the total number of floats in one array / 3. \\
-\hline
-{\em max\+\_\+distance} & Maximum distance a ray can travel and still hit a target.\\
-\hline
-{\em result\+\_\+array} & Output parameter conatining an ordered list of booleans set to true if the their rays hit, and false if their rays did not.\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+OK on completion.
-\end{DoxyReturn}
-\begin{DoxySeeAlso}{See also}
-\mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}} (how to create a mesh), \mbox{\hyperlink{a00389_mesh_teardown}{Mesh teardown}} (how to destroy a mesh) 
-
-\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}} (how to create a B\+VH), \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} (how to destroy a B\+VH)
-\end{DoxySeeAlso}
-Begin by {\bfseries{loading an .obj file}} (\mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}}).~\newline
- Then, {\bfseries{create a B\+VH}} (\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}}) using the {\bfseries{mesh}}.~\newline
-
-
-Define the {\bfseries{starting points}} from where the ray will fire.~\newline
- 
-\begin{DoxyCodeInclude}{0}
-\end{DoxyCodeInclude}
- Define the {\bfseries{vector components}} of the {\bfseries{ray}} that will be fired.~\newline
- 
-\begin{DoxyCodeInclude}{0}
-\end{DoxyCodeInclude}
- Define a {\bfseries{maximum distance value}}, and a {\bfseries{container}} to store the {\bfseries{ray collision results}}.~\newline
- 
-\begin{DoxyCodeInclude}{0}
-\end{DoxyCodeInclude}
- We can {\bfseries{review the results}} by outputting the contents of the {\bfseries{results container}}\+:~\newline
- 
-\begin{DoxyCodeInclude}{0}
-\end{DoxyCodeInclude}
- From here, please review the example at \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} for instructions~\newline
- on how to free the remainder of the resources used in this example --~\newline
- which are the (vector$<$\mbox{\hyperlink{a01297}{H\+F\+::\+Geometry\+::\+Mesh\+Info}}$>$ $\ast$) and (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$) instances.
-
-{\ttfamily $>$$>$$>$ Load\+O\+BJ loaded mesh successfully into loaded\+\_\+obj at address 0000019E90659220, code\+: 1}~\newline
-{\ttfamily $>$$>$$>$ Create\+Raytracer created Embree\+Ray\+Tracer successfully into bvh at address 0000019E86\+D22\+B\+E0, code\+: 1}~\newline
-{\ttfamily $>$$>$$>$ result\mbox{[}0\mbox{]}\+: hit}~\newline
-{\ttfamily $>$$>$$>$ \mbox{[}0, 0, -\/1\mbox{]}, from point \mbox{[}0, 0, 0\mbox{]}}~\newline
-{\ttfamily $>$$>$$>$ result\mbox{[}1\mbox{]}\+: hit}~\newline
-{\ttfamily $>$$>$$>$ \mbox{[}0, 0, -\/1\mbox{]}, from point \mbox{[}0, 0, -\/2.\+38419e-\/07\mbox{]}}~\newline
- {\ttfamily $>$$>$$>$ result\mbox{[}2\mbox{]}\+: hit}~\newline
-{\ttfamily $>$$>$$>$ \mbox{[}0, 0, -\/1\mbox{]}, from point \mbox{[}0, 0, 0\mbox{]}}~\newline
-
-
-Definition at line 227 of file raytracer\+\_\+\+C.\+cpp.
-
-
-
-References Convert\+Raw\+Float\+Array\+To\+Points(), H\+F\+::\+Exceptions\+::\+OK, and H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Point\+Intersections().
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a00391_ga245b0839ec087dfdec623a3e16ffa859_cgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a00391_ga4ebcc7736a5e5d25b7696f7ce9f2d645}\label{a00391_ga4ebcc7736a5e5d25b7696f7ce9f2d645}} 
-\index{RayTracer@{RayTracer}!FireMultipleRays@{FireMultipleRays}}
-\index{FireMultipleRays@{FireMultipleRays}!RayTracer@{RayTracer}}
-\doxysubsubsection{\texorpdfstring{FireMultipleRays()}{FireMultipleRays()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Fire\+Multiple\+Rays (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$}]{ert,  }\item[{float $\ast$}]{origins,  }\item[{const float $\ast$}]{directions,  }\item[{int}]{size,  }\item[{float}]{max\+\_\+distance,  }\item[{bool $\ast$}]{result\+\_\+array }\end{DoxyParamCaption})}
-
-
-
-{\ttfamily \#include $<$\mbox{\hyperlink{a00365}{Cinterface/raytracer\+\_\+\+C.\+h}}$>$}
-
-
-
-Fire multiple rays at once in parallel and receive their hitpoints in return. The number of directions must be equal to the number of origins. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em ert} & Raytracer to fire each ray from.\\
-\hline
-{\em origins} & A list of floats representing origin points, with each 3 floats representing one point. If the ray fired from a point is successful, said point will be overwritten with the place it hit.\\
-\hline
-{\em directions} & A list of floats representing ray directions, with each 3 floats representing one direction. \\
-\hline
-{\em size} & Number of points and directions, equal to the total number of floats in one array / 3. ~\newline
- \\
-\hline
-{\em max\+\_\+distance} & Maximum distance a ray can travel and still hit a target. Any hits beyond this point will not be recorded.\\
-\hline
-{\em result\+\_\+array} & Output parameter containing an ordered list of booleans set to true if the their rays hit, and false if their rays did not.\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+OK on completion.
-\end{DoxyReturn}
-\begin{DoxySeeAlso}{See also}
-\mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}} (how to create a mesh), \mbox{\hyperlink{a00389_mesh_teardown}{Mesh teardown}} (how to destroy a mesh) 
-
-\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}} (how to create a B\+VH), \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} (how to destroy a B\+VH)
-\end{DoxySeeAlso}
-Begin by {\bfseries{loading an .obj file}} (\mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}}).~\newline
- Then, {\bfseries{create a B\+VH}} (\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}}) using the {\bfseries{mesh}}.~\newline
-
-
-Define the {\bfseries{starting points}} from where the ray will fire.~\newline
- Define the {\bfseries{vector components}} of the {\bfseries{ray}} that will be fired.~\newline
- 
-\begin{DoxyCodeInclude}{0}
-\end{DoxyCodeInclude}
- Define a {\bfseries{maximum distance value}}, and a {\bfseries{container}} to store the {\bfseries{ray collision results}}.~\newline
- 
-\begin{DoxyCodeInclude}{0}
-\end{DoxyCodeInclude}
- We can {\bfseries{review the results}} by outputting the contents of the {\bfseries{results container}}\+:~\newline
- 
-\begin{DoxyCodeInclude}{0}
-\end{DoxyCodeInclude}
- From here, please review the example at \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} for instructions~\newline
- on how to free the remainder of the resources used in this example --~\newline
- which are the (vector$<$\mbox{\hyperlink{a01297}{H\+F\+::\+Geometry\+::\+Mesh\+Info}}$>$ $\ast$) and (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$) instances.
-
-{\ttfamily $>$$>$$>$ Load\+O\+BJ loaded mesh successfully into loaded\+\_\+obj at address 0000019E906596\+A0, code\+: 1}~\newline
-{\ttfamily $>$$>$$>$ Create\+Raytracer created Embree\+Ray\+Tracer successfully into bvh at address 0000019E86\+D22500, code\+: 1}~\newline
-{\ttfamily $>$$>$$>$ result\mbox{[}0\mbox{]}\+: hit}~\newline
-{\ttfamily $>$$>$$>$ \mbox{[}0, 0, 0\mbox{]}, direction \mbox{[}0, 0, -\/1\mbox{]}}~\newline
-{\ttfamily $>$$>$$>$ result\mbox{[}1\mbox{]}\+: hit}~\newline
-{\ttfamily $>$$>$$>$ \mbox{[}0, 0, -\/2.\+38419e-\/07\mbox{]}, direction \mbox{[}0, 0, -\/2\mbox{]}}~\newline
-{\ttfamily $>$$>$$>$ result\mbox{[}2\mbox{]}\+: hit}~\newline
-{\ttfamily $>$$>$$>$ \mbox{[}0, 0, 2.\+38419e-\/07\mbox{]}, direction \mbox{[}0, 0, -\/3\mbox{]}}~\newline
-
-
-Definition at line 199 of file raytracer\+\_\+\+C.\+cpp.
-
-
-
-References Convert\+Raw\+Float\+Array\+To\+Points(), H\+F\+::\+Exceptions\+::\+OK, and H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Point\+Intersections().
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a00391_ga4ebcc7736a5e5d25b7696f7ce9f2d645_cgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a00391_ga6c1fa7c28a047526d9d41ad7d1a822bd}\label{a00391_ga6c1fa7c28a047526d9d41ad7d1a822bd}} 
-\index{RayTracer@{RayTracer}!FireOcclusionRays@{FireOcclusionRays}}
-\index{FireOcclusionRays@{FireOcclusionRays}!RayTracer@{RayTracer}}
-\doxysubsubsection{\texorpdfstring{FireOcclusionRays()}{FireOcclusionRays()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Fire\+Occlusion\+Rays (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$}]{ert,  }\item[{const float $\ast$}]{origins,  }\item[{const float $\ast$}]{directions,  }\item[{int}]{origin\+\_\+size,  }\item[{int}]{direction\+\_\+size,  }\item[{float}]{max\+\_\+distance,  }\item[{bool $\ast$}]{result\+\_\+array }\end{DoxyParamCaption})}
-
-
-
-{\ttfamily \#include $<$\mbox{\hyperlink{a00365}{Cinterface/raytracer\+\_\+\+C.\+h}}$>$}
-
-
-
-Fire one or more occlusion rays in parallel. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em ert} & A pointer to a valid embree raytracer \\
-\hline
-{\em origins} & A list of floats representing origin points, with each 3 floats representing one point \\
-\hline
-{\em directions} & A list of floats representing ray directions, with each 3 floats representing one direction\\
-\hline
-{\em origin\+\_\+size} & How many origins points are included are included. Note that a single origin point is 3 floats, so this should equal the length of the origin array/3. This must match direction\+\_\+size or be equal to one.\\
-\hline
-{\em direction\+\_\+size} & How many directions are included. Note that a single direction is 3 floats, so this should equal the length of the origin array / 3. This must match origin\+\_\+size or be equal to one.\\
-\hline
-{\em max\+\_\+distance} & Maximum distance a ray can travel and still hit a target. \\
-\hline
-{\em result\+\_\+array} & Output array booleans\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+OK on completion
-\end{DoxyReturn}
-\begin{DoxyRemark}{Remarks}
-Occlusion rays are noticably faster than standard rays but are only capable of returning whether they hit something or not. This makes them good for line of sight checks.
-\end{DoxyRemark}
-\begin{DoxySeeAlso}{See also}
-\mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}} (how to create a mesh), \mbox{\hyperlink{a00389_mesh_teardown}{Mesh teardown}} (how to destroy a mesh) 
-
-\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}} (how to create a B\+VH), \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} (how to destroy a B\+VH)
-\end{DoxySeeAlso}
-Begin by {\bfseries{loading an .obj file}} (\mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}}).~\newline
- Then, {\bfseries{create a B\+VH}} (\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}}) using the {\bfseries{mesh}}.~\newline
-
-
-Define the {\bfseries{starting points}} from where the ray will fire.~\newline
- 
-\begin{DoxyCodeInclude}{0}
-\end{DoxyCodeInclude}
- Define the {\bfseries{vector components}} of the {\bfseries{ray(s)}} that will be fired.~\newline
- 
-\begin{DoxyCodeInclude}{0}
-\end{DoxyCodeInclude}
- Define a {\bfseries{maximum distance value}}, and a {\bfseries{container}} to store the {\bfseries{ray occlusion results}}.~\newline
- 
-\begin{DoxyCodeInclude}{0}
-\end{DoxyCodeInclude}
- If {\bfseries{does\+\_\+occlude}} is true, the ray {\bfseries{connects}}.~\newline
- 
-\begin{DoxyCodeInclude}{0}
-\end{DoxyCodeInclude}
- From here, please review the example at \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} for instructions~\newline
- on how to free the remainder of the resources used in this example --~\newline
- which are the (vector$<$\mbox{\hyperlink{a01297}{H\+F\+::\+Geometry\+::\+Mesh\+Info}}$>$ $\ast$) and (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$) instances.
-
-{\ttfamily $>$$>$$>$ Load\+O\+BJ loaded mesh successfully into loaded\+\_\+obj at address 0000019E90658440, code\+: 1}~\newline
-{\ttfamily $>$$>$$>$ Create\+Raytracer created Embree\+Ray\+Tracer successfully into bvh at address 0000019E86\+D22\+B\+E0, code\+: 1}~\newline
-{\ttfamily $>$$>$$>$ Using multidirection, single origin}~\newline
-{\ttfamily $>$$>$$>$ Does the ray connect? True}~\newline
-
-
-Definition at line 271 of file raytracer\+\_\+\+C.\+cpp.
-
-
-
-References Convert\+Raw\+Float\+Array\+To\+Points(), H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Occlusions(), and H\+F\+::\+Exceptions\+::\+OK.
-
-
-
-Referenced by C\+\_\+\+Interface\+::\+T\+E\+S\+T().
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a00391_ga6c1fa7c28a047526d9d41ad7d1a822bd_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=324pt]{a00391_ga6c1fa7c28a047526d9d41ad7d1a822bd_icgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a00391_ga3c06d32b8a4af0110489372e292555fd}\label{a00391_ga3c06d32b8a4af0110489372e292555fd}} 
-\index{RayTracer@{RayTracer}!FireRay@{FireRay}}
-\index{FireRay@{FireRay}!RayTracer@{RayTracer}}
-\doxysubsubsection{\texorpdfstring{FireRay()}{FireRay()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Fire\+Ray (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$}]{ert,  }\item[{float \&}]{x,  }\item[{float \&}]{y,  }\item[{float \&}]{z,  }\item[{float}]{dx,  }\item[{float}]{dy,  }\item[{float}]{dz,  }\item[{float}]{max\+\_\+distance,  }\item[{bool \&}]{result }\end{DoxyParamCaption})}
-
-
-
-{\ttfamily \#include $<$\mbox{\hyperlink{a00365}{Cinterface/raytracer\+\_\+\+C.\+h}}$>$}
-
-
-
-Fire a single ray from the raytracer and receive a point in return. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em ert} & Raytracer to fire each ray from. \\
-\hline
-{\em x} & x coordinate of the ray\textquotesingle{}s origin. Will be set to the hit point\textquotesingle{}s x coordinate if the ray something. \\
-\hline
-{\em y} & y coordinate of the ray\textquotesingle{}s origin. Will be set to the hit point\textquotesingle{}s y coordinate if the ray something. \\
-\hline
-{\em z} & z coordinate of the ray\textquotesingle{}s origin. Will be set to the hit point\textquotesingle{}s z coordinate if the ray something. \\
-\hline
-{\em dx} & x coordinate of the ray\textquotesingle{}s direction. \\
-\hline
-{\em dy} & y coordinate of the ray\textquotesingle{}s direction. \\
-\hline
-{\em dz} & z coordinate of the ray\textquotesingle{}s direction. \\
-\hline
-{\em max\+\_\+distance} & Maximum distance to record a hit within. Any hits beyond this distance will not be counted. \\
-\hline
-{\em result} & Set to true if the ray hits, false otherwise\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-H\+F\+::\+OK on completion
-\end{DoxyReturn}
-\begin{DoxySeeAlso}{See also}
-\mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}} (how to create a mesh), \mbox{\hyperlink{a00389_mesh_teardown}{Mesh teardown}} (how to destroy a mesh) 
-
-\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}} (how to create a B\+VH), \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} (how to destroy a B\+VH)
-\end{DoxySeeAlso}
-Begin by {\bfseries{loading an .obj file}} (\mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}}).~\newline
- Then, {\bfseries{create a B\+VH}} (\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}}) using the {\bfseries{mesh}}.~\newline
-
-
-Define the {\bfseries{starting points}} from where the ray will fire.~\newline
- Define the {\bfseries{vector components}} of the {\bfseries{ray}} that will be fired.~\newline
- 
-\begin{DoxyCodeInclude}{0}
-\end{DoxyCodeInclude}
- Define a {\bfseries{maximum distance value}}, and a {\bfseries{hit point}} that determines the ray\textquotesingle{}s {\bfseries{intended destination}}..~\newline
- 
-\begin{DoxyCodeInclude}{0}
-\end{DoxyCodeInclude}
- {\bfseries{Invoke}} \mbox{\hyperlink{}{Point\+Intersection}} . {\bfseries{did\+\_\+hit}} will be set {\bfseries{true}} if a hit occurred.~\newline
- 
-\begin{DoxyCodeInclude}{0}
-\end{DoxyCodeInclude}
- From here, please review the example at \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} for instructions~\newline
- on how to free the remainder of the resources used in this example --~\newline
- which are the (vector$<$\mbox{\hyperlink{a01297}{H\+F\+::\+Geometry\+::\+Mesh\+Info}}$>$ $\ast$) and (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$) instances.
-
-{\ttfamily $>$$>$$>$ Load\+O\+BJ loaded mesh successfully into loaded\+\_\+obj at address 0000019E906599\+A0, code\+: 1}~\newline
-{\ttfamily $>$$>$$>$ Create\+Raytracer created Embree\+Ray\+Tracer successfully into bvh at address 0000019E86\+D22\+B\+E0, code\+: 1}~\newline
-{\ttfamily $>$$>$$>$ Hit point\+: \mbox{[}0, 0, 0\mbox{]}}~\newline
-
-
-Definition at line 193 of file raytracer\+\_\+\+C.\+cpp.
-
-
-
-References H\+F\+::\+Exceptions\+::\+OK, and H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Point\+Intersection().
-
-
-
-Referenced by C\+\_\+\+Interface\+::\+T\+E\+S\+T().
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=315pt]{a00391_ga3c06d32b8a4af0110489372e292555fd_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=271pt]{a00391_ga3c06d32b8a4af0110489372e292555fd_icgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a00391_ga6dcb31db6dbee37c03f277cb61cfdf37}\label{a00391_ga6dcb31db6dbee37c03f277cb61cfdf37}} 
-\index{RayTracer@{RayTracer}!FireRaysDistance@{FireRaysDistance}}
-\index{FireRaysDistance@{FireRaysDistance}!RayTracer@{RayTracer}}
-\doxysubsubsection{\texorpdfstring{FireRaysDistance()}{FireRaysDistance()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Fire\+Rays\+Distance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$}]{ert,  }\item[{float $\ast$}]{origins,  }\item[{int}]{num\+\_\+origins,  }\item[{float $\ast$}]{directions,  }\item[{int}]{num\+\_\+directions,  }\item[{std\+::vector$<$ \mbox{\hyperlink{a02045}{Ray\+Result}} $>$ $\ast$$\ast$}]{out\+\_\+results,  }\item[{\mbox{\hyperlink{a02045}{Ray\+Result}} $\ast$$\ast$}]{results\+\_\+data }\end{DoxyParamCaption})}
-
-
-
-{\ttfamily \#include $<$\mbox{\hyperlink{a00365}{Cinterface/raytracer\+\_\+\+C.\+h}}$>$}
-
-
-
-Fire rays for each node in origins/directions as ordered pairs and get distance back as a result. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em ert} & The raytracer to use for firing every ray.\\
-\hline
-{\em origins} & An array of origin points to fire rays from. Should be an array of floats with every 3 floats representing a new origin point.\\
-\hline
-{\em num\+\_\+origins} & The number of points in origins. N\+O\+TE\+: This should be equal to the length of origins / 3, since every 3 floats in origins equals a single point.\\
-\hline
-{\em directions} & An array of directions points to fire rays from. Should be an array of floats with every 3 floats representing a new direction.\\
-\hline
-{\em num\+\_\+directions} & The number of directions in directions. N\+O\+TE\+: This should be equal to the length of directions / 3, since every 3 floats in directions equals a single direction.\\
-\hline
-{\em out\+\_\+results} & Output parameter for ray results.\\
-\hline
-{\em results\+\_\+data} & Output parameter for the data of the array held by {\itshape out\+\_\+results} \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+OK on completion. H\+F\+::\+G\+E\+N\+E\+R\+I\+C\+\_\+\+E\+R\+R\+OR if the input parameters didn\textquotesingle{}t meet at least one of the required cases below.
-\end{DoxyReturn}
-\begin{DoxyRemark}{Remarks}
-Can be fired in 3 configurations\+: 
-\end{DoxyRemark}
-
-
-
-\begin{DoxyItemize}
-\end{DoxyItemize}Equal amount of directions/origins\+: Fire a ray for every pair of origin/direction in order. i.\+e. (origin\mbox{[}0\mbox{]}, direction\mbox{[}0\mbox{]}), (origin\mbox{[}1\mbox{]}, direction\mbox{[}1\mbox{]}). 
-
-One direction, multiple origins\+: Fire a ray in the given direction from each origin point in origins. 
-
-One origin, multiple directions\+: Fire a ray from the origin point in each direction in directions.  
-
-\begin{DoxySeeAlso}{See also}
-\mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}} (how to create a mesh), \mbox{\hyperlink{a00389_mesh_teardown}{Mesh teardown}} (how to destroy a mesh) 
-
-\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}} (how to create a B\+VH), \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} (how to destroy a B\+VH)
-\end{DoxySeeAlso}
-Begin by {\bfseries{loading an .obj file}} (\mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}}).~\newline
- Then, {\bfseries{create a B\+VH}} (\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}}) using the {\bfseries{mesh}}.~\newline
-
-
-Define the {\bfseries{starting points}} from where the ray will fire.~\newline
- Define the {\bfseries{vector components}} of the {\bfseries{ray}} that will be fired.~\newline
- 
-\begin{DoxyCodeInclude}{0}
-\end{DoxyCodeInclude}
- Prepare a {\bfseries{pointer}} to std\+::vector$<$\mbox{\hyperlink{a02045}{Ray\+Result}}$>$, and a pointer to a \mbox{\hyperlink{a02045}{Ray\+Result}} .~\newline
- Then, invoke \mbox{\hyperlink{a00391_ga6dcb31db6dbee37c03f277cb61cfdf37}{Fire\+Rays\+Distance}} .~\newline
- 
-\begin{DoxyCodeInclude}{0}
-\end{DoxyCodeInclude}
- We can {\bfseries{review the results}} by outputting the contents of the {\bfseries{results container}}\+:~\newline
- 
-\begin{DoxyCodeInclude}{0}
-\end{DoxyCodeInclude}
- From here, please review the example at \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} for instructions~\newline
- on how to free the remainder of the resources used in this example --~\newline
- which are the (vector$<$\mbox{\hyperlink{a01297}{H\+F\+::\+Geometry\+::\+Mesh\+Info}}$>$ $\ast$) and (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$) instances.
-
-{\ttfamily $>$$>$$>$ Load\+O\+BJ loaded mesh successfully into loaded\+\_\+obj at address 0000019C4\+E\+A752\+E0, code\+: 1}~\newline
-{\ttfamily $>$$>$$>$ Create\+Raytracer created Embree\+Ray\+Tracer successfully into bvh at address 0000019C4\+E\+A12280, code\+: 1}~\newline
-{\ttfamily $>$$>$$>$ Ray result\+: \mbox{[}\{Distance\+: 2}~\newline
-{\ttfamily $>$$>$$>$ Mesh ID\+: 0\}, \{Distance\+: 1.\+5}~\newline
-{\ttfamily $>$$>$$>$ Mesh ID\+: 0\}, \{Distance\+: 1.\+33333}~\newline
-{\ttfamily $>$$>$$>$ Mesh ID\+: 0\}\mbox{]}}~\newline
-
-
-Definition at line 111 of file raytracer\+\_\+\+C.\+cpp.
-
-
-
-References Convert\+Raw\+Float\+Array\+To\+Points(), H\+F\+::\+Exceptions\+::\+G\+E\+N\+E\+R\+I\+C\+\_\+\+E\+R\+R\+OR, H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Intersect\+Output\+Arguments(), and H\+F\+::\+Exceptions\+::\+OK.
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a00391_ga6dcb31db6dbee37c03f277cb61cfdf37_cgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{a00391_ga3104ee3687c70b5045ac3c69eb557b99}\label{a00391_ga3104ee3687c70b5045ac3c69eb557b99}} 
-\index{RayTracer@{RayTracer}!FireSingleRayDistance@{FireSingleRayDistance}}
-\index{FireSingleRayDistance@{FireSingleRayDistance}!RayTracer@{RayTracer}}
-\doxysubsubsection{\texorpdfstring{FireSingleRayDistance()}{FireSingleRayDistance()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{a00377_a91fa3b2bb3a7312ec39d74cc1fbc7bbe}{C\+\_\+\+I\+N\+T\+E\+R\+F\+A\+CE}} Fire\+Single\+Ray\+Distance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$}]{ert,  }\item[{const float $\ast$}]{origin,  }\item[{const float $\ast$}]{direction,  }\item[{const float}]{max\+\_\+distance,  }\item[{float $\ast$}]{out\+\_\+distance,  }\item[{int $\ast$}]{out\+\_\+meshid }\end{DoxyParamCaption})}
-
-
-
-{\ttfamily \#include $<$\mbox{\hyperlink{a00365}{Cinterface/raytracer\+\_\+\+C.\+h}}$>$}
-
-
-
-Fire a single ray and get the distance to its hit and the mesh ID if it hit anything. If it missed, then distance and meshid will both be -\/1. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em ert} & The ray tracer to fire from. \\
-\hline
-{\em origin} & The origin point to fire from. \\
-\hline
-{\em direction} & The direction to fire the ray in. \\
-\hline
-{\em max\+\_\+distance} & Maximum distance to record a hit within. Any hits beyond this distance will not be counted. \\
-\hline
-{\em out\+\_\+distance} & Out parameter for Distance to the hitpoint. Will be set to -\/1 if the ray didn\textquotesingle{}t hit anything. \\
-\hline
-{\em out\+\_\+meshid} & Out parameter for the ID of the hit mesh. Will be set to -\/1 if the ray didn\textquotesingle{}t hit anything.\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-H\+F\+\_\+\+S\+T\+A\+T\+U\+S\+::\+OK on success
-\end{DoxyReturn}
-\begin{DoxySeeAlso}{See also}
-\mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}} (how to create a mesh), \mbox{\hyperlink{a00389_mesh_teardown}{Mesh teardown}} (how to destroy a mesh) 
-
-\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}} (how to create a B\+VH), \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} (how to destroy a B\+VH)
-\end{DoxySeeAlso}
-Begin by {\bfseries{loading an .obj file}} (\mbox{\hyperlink{a00389_mesh_setup}{Mesh setup}}).~\newline
- Then, {\bfseries{create a B\+VH}} (\mbox{\hyperlink{a00391_raytracer_setup}{Raytracer setup}}) using the {\bfseries{mesh}}.~\newline
-
-
-Define the {\bfseries{starting points}} from where the ray will fire.~\newline
- Define the {\bfseries{vector components}} of the {\bfseries{ray}} that will be fired.~\newline
- 
-\begin{DoxyCodeInclude}{0}
-\end{DoxyCodeInclude}
- Define a {\bfseries{max\+\_\+distance}}.~\newline
- Also create variables {\bfseries{distance}} and {\bfseries{mesh\+\_\+id}} and initialize them as shown.~\newline
- They will be mutated if a {\bfseries{hit}} occurs.~\newline
- Then, {\bfseries{invoke}} \mbox{\hyperlink{a00391_ga3104ee3687c70b5045ac3c69eb557b99}{Fire\+Single\+Ray\+Distance}} 
-\begin{DoxyCodeInclude}{0}
-\end{DoxyCodeInclude}
- If {\bfseries{mesh\+\_\+id}} is not {\bfseries{-\/1}}, and {\bfseries{distance}} is not {\bfseries{-\/1}}, a {\bfseries{hit}} was made.~\newline
- 
-\begin{DoxyCodeInclude}{0}
-\end{DoxyCodeInclude}
- From here, please review the example at \mbox{\hyperlink{a00391_raytracer_teardown}{Raytracer teardown}} for instructions~\newline
- on how to free the remainder of the resources used in this example --~\newline
- which are the (vector$<$\mbox{\hyperlink{a01297}{H\+F\+::\+Geometry\+::\+Mesh\+Info}}$>$ $\ast$) and (\mbox{\hyperlink{a01357}{H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer}} $\ast$) instances.
-
-{\ttfamily $>$$>$$>$ Load\+O\+BJ loaded mesh successfully into loaded\+\_\+obj at address 0000019C4\+E\+A3\+F\+C\+B0, code\+: 1}~\newline
-{\ttfamily $>$$>$$>$ Create\+Raytracer created Embree\+Ray\+Tracer successfully into bvh at address 0000019C4\+E\+A12820, code\+: 1}~\newline
-{\ttfamily $>$$>$$>$ Distance is 2, meshid is 0}~\newline
-
-
-Definition at line 98 of file raytracer\+\_\+\+C.\+cpp.
-
-
-
-References H\+F\+::\+Ray\+Tracer\+::\+Embree\+Ray\+Tracer\+::\+Intersect\+Output\+Arguments(), and H\+F\+::\+Exceptions\+::\+OK.
-
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{a00391_ga3104ee3687c70b5045ac3c69eb557b99_cgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{a00391_gacb9957117b62f9aee76b36c0fbae4160}\label{a00391_gacb9957117b62f9aee76b36c0fbae4160}} 

@@ -5,14 +5,19 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Analysis: ViewAnalysis</title>
+<title>DHART: ViewAnalysis</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome-css.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -21,7 +26,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Analysis
+   <div id="projectname">DHART
    </div>
   </td>
  </tr>
@@ -46,6 +51,22 @@ $(function() {
 /* @license-end */</script>
 <div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('a00393.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -287,7 +308,7 @@ Functions</h2></td></tr>
     <tr><td class="paramname">ERT</td><td>Raytracer containing the geometry to use for ray intersections. </td></tr>
     <tr><td class="paramname">node_ptr</td><td>Observer points for the view analysis. </td></tr>
     <tr><td class="paramname">node_size</td><td>Number of nodes in the array pointed to by node_ptr.</td></tr>
-    <tr><td class="paramname">max_rays</td><td>Number of rays to cast for each node in node_ptr. Note that this may fire fewer rays than max_rays, depending on FOV restrictions.</td></tr>
+    <tr><td class="paramname">max_rays</td><td>Number of rays to cast for each node in node_ptr. Note that this may cast fewer rays than max_rays, depending on FOV restrictions.</td></tr>
     <tr><td class="paramname">upward_fov</td><td>Maximum degrees upward from the viewer's eye level to consider. </td></tr>
     <tr><td class="paramname">downward_fov</td><td>Maximum degrees downward from the viewer's eye level to consider. </td></tr>
     <tr><td class="paramname">height</td><td>Height to offset nodes from the ground (+Z direction). </td></tr>
@@ -443,7 +464,7 @@ Functions</h2></td></tr>
     <tr><td class="paramname">ERT</td><td>Raytracer containing the geometry to use for ray intersections. </td></tr>
     <tr><td class="paramname">node_ptr</td><td>Observer points for the view analysis. Each 3 floats represent the {x, y, z} of a new node. </td></tr>
     <tr><td class="paramname">node_size</td><td>Number of nodes in the array pointed to by node_ptr.</td></tr>
-    <tr><td class="paramname">max_rays</td><td>Number of rays to cast for each node in node_ptr. Note that this may fire fewer rays than max_rays depending on fov restrictions.</td></tr>
+    <tr><td class="paramname">max_rays</td><td>Number of rays to cast for each node in node_ptr. Note that this may cast fewer rays than max_rays depending on fov restrictions.</td></tr>
     <tr><td class="paramname">upward_fov</td><td>Maximum degrees upward from the viewer's eye level to consider. </td></tr>
     <tr><td class="paramname">downward_fov</td><td>Maximum degrees downward from the viewer's eye level to consider. </td></tr>
     <tr><td class="paramname">height</td><td>Height to offset nodes from the ground (+Z direction). </td></tr>
@@ -709,7 +730,7 @@ template&lt;typename RT , typename N &gt; </div>
 </dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="a00393.html#ga6ca336e3887ef82d17b0713c2bf862df" title="Evenly distribute a set of points around a sphere centered at the origin.">FibbonacciDistributePoints</a> For details on how the directions are calculated from num_rays. </dd>
 <dd>
-<a class="el" href="a00393.html#gab99d16350ec1a4cac1dec3cbd731d7d8" title="Conduct view analysis with any Raytracer in parallel.">SphericalViewAnalysis</a> to get the result of every ray fired instead of summarizing the results. </dd>
+<a class="el" href="a00393.html#gab99d16350ec1a4cac1dec3cbd731d7d8" title="Conduct view analysis with any Raytracer in parallel.">SphericalViewAnalysis</a> to get the result of every ray cast instead of summarizing the results. </dd>
 <dd>
 <a class="el" href="a00400.html#a1fcaa17d2a8df8896a3b0447973bd07b" title="The type of aggregation to use for ViewAnalysisAggregate">AGGREGATE_TYPE</a> for a list of aggregation methods. </dd>
 <dd>
@@ -860,7 +881,7 @@ template&lt;typename RES , typename RT , typename N &gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>An <em>approximately</em> num_rays * Nodes.size() long vector of RES with one element for every ray fired. Results will be laid out in order with the first node's results first, then the second, etc. Every ray that intersected something, and all elements that didn't result in an intersection will left at their default values.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>An <em>approximately</em> num_rays * Nodes.size() long vector of RES with one element for every ray cast. Results will be laid out in order with the first node's results first, then the second, etc. Every ray that intersected something, and all elements that didn't result in an intersection will left at their default values.</dd></dl>
 <p><a class="el" href="a00400.html" title="Analyze space from the perspective of observers within a 3D environment.">ViewAnalysis</a> is calculated by casting a series of rays equally distributed in a sphere from each point in Nodes. This function will run in parallel using all available cores. Depending on RES, this function's complexity and results can vary.</p>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
@@ -1235,6 +1256,7 @@ template&lt;typename RES , typename RT , typename N &gt; </div>
 </div>
 </div>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <div class="ttc" id="aa02910_html_acea841c68a73d07ad9d772ec2e94a683"><div class="ttname"><a href="a02910.html#acea841c68a73d07ad9d772ec2e94a683">MeshInfo</a></div><div class="ttdeci">HF::Geometry::MeshInfo&lt; float &gt; MeshInfo</div><div class="ttdef"><b>Definition:</b> <a href="a02910_source.html#l00016">OBJLoader.cpp:16</a></div></div>
 <div class="ttc" id="aa00400_html_a1fcaa17d2a8df8896a3b0447973bd07ba6970bdc2201030b9c03fbdcf3973858a"><div class="ttname"><a href="a00400.html#a1fcaa17d2a8df8896a3b0447973bd07ba6970bdc2201030b9c03fbdcf3973858a">HF::ViewAnalysis::AGGREGATE_TYPE::SUM</a></div><div class="ttdeci">@ SUM</div><div class="ttdoc">Sum of the distance from the origin to all intersections.</div></div>
 <div class="ttc" id="aa00393_html_gab99d16350ec1a4cac1dec3cbd731d7d8"><div class="ttname"><a href="a00393.html#gab99d16350ec1a4cac1dec3cbd731d7d8">HF::ViewAnalysis::SphericalViewAnalysis</a></div><div class="ttdeci">std::vector&lt; RES &gt; SphericalViewAnalysis(RT &amp;ray_tracer, const std::vector&lt; N &gt; &amp;Nodes, int num_rays, float upward_limit=50.0f, float downward_limit=70.0f, float height=1.7f)</div><div class="ttdoc">Conduct view analysis with any Raytracer in parallel.</div><div class="ttdef"><b>Definition:</b> <a href="a00023_source.html#l00335">view_analysis.h:335</a></div></div>
@@ -1244,10 +1266,12 @@ template&lt;typename RES , typename RT , typename N &gt; </div>
 <div class="ttc" id="aa00403_html_a4f0c57b862a0826821217d8c3ac849c4"><div class="ttname"><a href="a00403.html#a4f0c57b862a0826821217d8c3ac849c4">HF::Geometry::MeshInfo</a></div><div class="ttdeci">MeshInfo() -&gt; MeshInfo&lt; float &gt;</div></div>
 <div class="ttc" id="aa01357_html"><div class="ttname"><a href="a01357.html">HF::RayTracer::EmbreeRayTracer</a></div><div class="ttdoc">A wrapper for Intel's Embree Library.</div><div class="ttdef"><b>Definition:</b> <a href="a00146_source.html#l00080">embree_raytracer.h:80</a></div></div>
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.17
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
 </body>
 </html>

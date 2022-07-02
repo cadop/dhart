@@ -13,6 +13,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome-css.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -100,9 +101,9 @@ Static Package Functions</h2></td></tr>
 <tr class="memitem:a678fc6a9e4fd7c2a083940dbea2083cf"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_human_factors_1_1_native_utils_1_1_c_vector_and_data.html">CVectorAndData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#a678fc6a9e4fd7c2a083940dbea2083cf">C_IntersectRays</a> (IntPtr ray_tracer, IEnumerable&lt; <a class="el" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> &gt; origins, IEnumerable&lt; <a class="el" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> &gt; directions, float max_distance)</td></tr>
 <tr class="memdesc:a678fc6a9e4fd7c2a083940dbea2083cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast multiple rays in C++ then recieve the distance and meshid of geometry intersected by each in return.  <a href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#a678fc6a9e4fd7c2a083940dbea2083cf">More...</a><br /></td></tr>
 <tr class="separator:a678fc6a9e4fd7c2a083940dbea2083cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab43791c6e75a4273e51c33db1ada2638"><td class="memItemLeft" align="right" valign="top">static bool[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#ab43791c6e75a4273e51c33db1ada2638">C_FireOcclusionRays</a> (IntPtr rt_ptr, IEnumerable&lt; <a class="el" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> &gt; origins, IEnumerable&lt; <a class="el" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> &gt; directions, float max_distance)</td></tr>
-<tr class="memdesc:ab43791c6e75a4273e51c33db1ada2638"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast occlusion rays in C++ using embree.  <a href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#ab43791c6e75a4273e51c33db1ada2638">More...</a><br /></td></tr>
-<tr class="separator:ab43791c6e75a4273e51c33db1ada2638"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a024cd49f0a64b0b5260e7f2025928a2d"><td class="memItemLeft" align="right" valign="top">static bool[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#a024cd49f0a64b0b5260e7f2025928a2d">C_CastOcclusionRays</a> (IntPtr rt_ptr, IEnumerable&lt; <a class="el" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> &gt; origins, IEnumerable&lt; <a class="el" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> &gt; directions, float max_distance)</td></tr>
+<tr class="memdesc:a024cd49f0a64b0b5260e7f2025928a2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast occlusion rays in C++ using embree.  <a href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#a024cd49f0a64b0b5260e7f2025928a2d">More...</a><br /></td></tr>
+<tr class="separator:a024cd49f0a64b0b5260e7f2025928a2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab66c33ca01db97ccb4e391dcefb4b8d4"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_human_factors_1_1_ray_tracing_1_1_ray_result.html">RayResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#ab66c33ca01db97ccb4e391dcefb4b8d4">C_IntersectRay</a> (IntPtr rt_ptr, <a class="el" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> origin, <a class="el" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> direction, float max_distance)</td></tr>
 <tr class="memdesc:ab66c33ca01db97ccb4e391dcefb4b8d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast a single ray in C++ and get the distance/meshid of the intersection if it intersects anything.  <a href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#ab66c33ca01db97ccb4e391dcefb4b8d4">More...</a><br /></td></tr>
 <tr class="separator:ab66c33ca01db97ccb4e391dcefb4b8d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -121,24 +122,24 @@ Private Member Functions</h2></td></tr>
 <tr class="separator:a8d6220f5d3b08bc3d2c534275adaef50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08f562061ed0dbd890b8bd0a52cae67d"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987f">HF_STATUS</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#a08f562061ed0dbd890b8bd0a52cae67d">AddMeshes</a> (IntPtr ray_tracer, IntPtr[] meshes, int num_meshes)</td></tr>
 <tr class="separator:a08f562061ed0dbd890b8bd0a52cae67d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a985126efaaf8c95d6fb49425a8b6443c"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987f">HF_STATUS</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#a985126efaaf8c95d6fb49425a8b6443c">FireRay</a> (IntPtr ert, ref float x, ref float y, ref float z, float dx, float dy, float dz, float max_distance, ref bool result)</td></tr>
-<tr class="separator:a985126efaaf8c95d6fb49425a8b6443c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3107158dd3e14f505acc8adde2903801"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987f">HF_STATUS</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#a3107158dd3e14f505acc8adde2903801">FireSingleRayDistance</a> (IntPtr ert, [In] float[] origin, [In] float[] direction, float max_distance, ref float out_distance, ref int out_meshid)</td></tr>
-<tr class="separator:a3107158dd3e14f505acc8adde2903801"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d6e9fc666bf29b2ac9bf3fe75c074db"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987f">HF_STATUS</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#a5d6e9fc666bf29b2ac9bf3fe75c074db">FireMultipleRays</a> (IntPtr ert, [In, Out] float[] origins, float[] directions, int size, float max_distance, [MarshalAs(UnmanagedType.LPArray, ArraySubType=UnmanagedType.I1)][Out]bool[] result_array)</td></tr>
-<tr class="separator:a5d6e9fc666bf29b2ac9bf3fe75c074db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44c2b1d55dda3a993d0411f66f2d0c5f"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987f">HF_STATUS</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#a44c2b1d55dda3a993d0411f66f2d0c5f">FireMultipleDirectionsOneOrigin</a> (IntPtr bvh, [In] float[] origin, [In] float[] directions, int size, float max_distance, [MarshalAs(UnmanagedType.LPArray, ArraySubType=UnmanagedType.I1)][Out] bool[] result_array)</td></tr>
-<tr class="separator:a44c2b1d55dda3a993d0411f66f2d0c5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57f4977fd19a6ee72c4ab34dd563c8d7"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987f">HF_STATUS</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#a57f4977fd19a6ee72c4ab34dd563c8d7">FireMultipleOriginsOneDirection</a> (IntPtr bvh, [In] float[] origin, [In] float[] directions, int size, float max_distance, [MarshalAs(UnmanagedType.LPArray, ArraySubType=UnmanagedType.I1)][Out] bool[] result_array)</td></tr>
-<tr class="separator:a57f4977fd19a6ee72c4ab34dd563c8d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af942902fcb3b3fb189e0384da3791a12"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987f">HF_STATUS</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#af942902fcb3b3fb189e0384da3791a12">FireOcclusionRays</a> (IntPtr bvh, [In] float[] origins, [In] float[] directions, int origin_size, int direction_size, float max_distance, [MarshalAs(UnmanagedType.LPArray, ArraySubType=UnmanagedType.I1)][Out] bool[] result_array)</td></tr>
-<tr class="separator:af942902fcb3b3fb189e0384da3791a12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade1f8c7e94f5baa836d0339a3deadf14"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987f">HF_STATUS</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#ade1f8c7e94f5baa836d0339a3deadf14">CastRay</a> (IntPtr ert, ref float x, ref float y, ref float z, float dx, float dy, float dz, float max_distance, ref bool result)</td></tr>
+<tr class="separator:ade1f8c7e94f5baa836d0339a3deadf14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a200175bf2623d708fbfea1f10dce4d12"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987f">HF_STATUS</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#a200175bf2623d708fbfea1f10dce4d12">CastSingleRayDistance</a> (IntPtr ert, [In] float[] origin, [In] float[] direction, float max_distance, ref float out_distance, ref int out_meshid)</td></tr>
+<tr class="separator:a200175bf2623d708fbfea1f10dce4d12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a8387c10924c7b3f3a4349885a4da0e"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987f">HF_STATUS</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#a0a8387c10924c7b3f3a4349885a4da0e">CastMultipleRays</a> (IntPtr ert, [In, Out] float[] origins, float[] directions, int size, float max_distance, [MarshalAs(UnmanagedType.LPArray, ArraySubType=UnmanagedType.I1)][Out]bool[] result_array)</td></tr>
+<tr class="separator:a0a8387c10924c7b3f3a4349885a4da0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea585f067b8c5b61276c3e62773a6757"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987f">HF_STATUS</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#aea585f067b8c5b61276c3e62773a6757">CastMultipleDirectionsOneOrigin</a> (IntPtr bvh, [In] float[] origin, [In] float[] directions, int size, float max_distance, [MarshalAs(UnmanagedType.LPArray, ArraySubType=UnmanagedType.I1)][Out] bool[] result_array)</td></tr>
+<tr class="separator:aea585f067b8c5b61276c3e62773a6757"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aded7e27d0b1d6f2cb95785216779807a"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987f">HF_STATUS</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#aded7e27d0b1d6f2cb95785216779807a">CastMultipleOriginsOneDirection</a> (IntPtr bvh, [In] float[] origin, [In] float[] directions, int size, float max_distance, [MarshalAs(UnmanagedType.LPArray, ArraySubType=UnmanagedType.I1)][Out] bool[] result_array)</td></tr>
+<tr class="separator:aded7e27d0b1d6f2cb95785216779807a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6728fa77a0963aca6fea01a286e066b"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987f">HF_STATUS</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#aa6728fa77a0963aca6fea01a286e066b">CastOcclusionRays</a> (IntPtr bvh, [In] float[] origins, [In] float[] directions, int origin_size, int direction_size, float max_distance, [MarshalAs(UnmanagedType.LPArray, ArraySubType=UnmanagedType.I1)][Out] bool[] result_array)</td></tr>
+<tr class="separator:aa6728fa77a0963aca6fea01a286e066b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71cd22d057375a51038f525365bf1dbb"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987f">HF_STATUS</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#a71cd22d057375a51038f525365bf1dbb">DestroyRayTracer</a> (IntPtr MeshPointer)</td></tr>
 <tr class="separator:a71cd22d057375a51038f525365bf1dbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4c1e1622cc5b1ba34cb23ade3436fb6"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987f">HF_STATUS</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#af4c1e1622cc5b1ba34cb23ade3436fb6">DestroyRayResultVector</a> (IntPtr analysis)</td></tr>
 <tr class="separator:af4c1e1622cc5b1ba34cb23ade3436fb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a96c75fac4a3d2e1804cab2f4dbddc868"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987f">HF_STATUS</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#a96c75fac4a3d2e1804cab2f4dbddc868">FireRaysDistance</a> (IntPtr ert, [In] float[] origins, int num_origins, [In] float[] directions, int num_directions, ref IntPtr out_results, ref IntPtr out_data)</td></tr>
-<tr class="separator:a96c75fac4a3d2e1804cab2f4dbddc868"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17c8096338130cbffd5aeaa9a3fc3714"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987f">HF_STATUS</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#a17c8096338130cbffd5aeaa9a3fc3714">CastRaysDistance</a> (IntPtr ert, [In] float[] origins, int num_origins, [In] float[] directions, int num_directions, ref IntPtr out_results, ref IntPtr out_data)</td></tr>
+<tr class="separator:a17c8096338130cbffd5aeaa9a3fc3714"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
 Static Private Attributes</h2></td></tr>
@@ -236,6 +237,85 @@ Static Private Attributes</h2></td></tr>
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_ray_tracing_1_1_native_methods_afccba3761364c8aa7fa62111482c0201_icgraph.svg" width="455" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="a024cd49f0a64b0b5260e7f2025928a2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a024cd49f0a64b0b5260e7f2025928a2d">&#9670;&nbsp;</a></span>C_CastOcclusionRays()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool [] HumanFactors.RayTracing.NativeMethods.C_CastOcclusionRays </td>
+          <td>(</td>
+          <td class="paramtype">IntPtr&#160;</td>
+          <td class="paramname"><em>rt_ptr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">IEnumerable&lt; <a class="el" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> &gt;&#160;</td>
+          <td class="paramname"><em>origins</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">IEnumerable&lt; <a class="el" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> &gt;&#160;</td>
+          <td class="paramname"><em>directions</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>max_distance</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">package</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Cast occlusion rays in C++ using embree. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rt_ptr</td><td>A pointer to a valid raytracer in C++ </td></tr>
+    <tr><td class="paramname">origins</td><td>One or more origins. </td></tr>
+    <tr><td class="paramname">directions</td><td>One or more directions. </td></tr>
+    <tr><td class="paramname">max_distance</td><td>Maximum distance that a ray can travel. Any hits beyond this point are not counted.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An array of true or false values indicating hits or misses respectively.</dd></dl>
+<p>Can be casted in 3 configurations: </p>
+<ul>
+<li>
+Equal amount of directions/origins: Cast a ray for every pair of origin/direction in order.i.e. (origin[0], direction[0]), (origin[1], direction[1]), etc.  </li>
+<li>
+One direction, multiple origins: Cast a ray in the given direction from each origin point in origins.  </li>
+<li>
+One origin, multiple directions: Cast a ray from the origin point in each direction in directions  </li>
+</ul>
+
+<p class="definition">Definition at line <a class="el" href="_ray_tracer_native_8cs_source.html#l00309">309</a> of file <a class="el" href="_ray_tracer_native_8cs_source.html">RayTracerNative.cs</a>.</p>
+
+<p class="reference">References <a class="el" href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#aa6728fa77a0963aca6fea01a286e066b">HumanFactors.RayTracing.NativeMethods.CastOcclusionRays()</a>, and <a class="el" href="_native_utils_8cs_source.html#l00137">HumanFactors.NativeUtils.HelperFunctions.FlattenVectorArray()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_ray_tracing_1_1_native_methods_a024cd49f0a64b0b5260e7f2025928a2d_cgraph.svg" width="578" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
@@ -427,85 +507,6 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="ab43791c6e75a4273e51c33db1ada2638"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab43791c6e75a4273e51c33db1ada2638">&#9670;&nbsp;</a></span>C_FireOcclusionRays()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool [] HumanFactors.RayTracing.NativeMethods.C_FireOcclusionRays </td>
-          <td>(</td>
-          <td class="paramtype">IntPtr&#160;</td>
-          <td class="paramname"><em>rt_ptr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">IEnumerable&lt; <a class="el" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> &gt;&#160;</td>
-          <td class="paramname"><em>origins</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">IEnumerable&lt; <a class="el" href="struct_human_factors_1_1_vector3_d.html">Vector3D</a> &gt;&#160;</td>
-          <td class="paramname"><em>directions</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>max_distance</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">package</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Cast occlusion rays in C++ using embree. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rt_ptr</td><td>A pointer to a valid raytracer in C++ </td></tr>
-    <tr><td class="paramname">origins</td><td>One or more origins. </td></tr>
-    <tr><td class="paramname">directions</td><td>One or more directions. </td></tr>
-    <tr><td class="paramname">max_distance</td><td>Maximum distance that a ray can travel. Any hits beyond this point are not counted.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>An array of true or false values indicating hits or misses respectively.</dd></dl>
-<p>Can be casted in 3 configurations: </p>
-<ul>
-<li>
-Equal amount of directions/origins: Cast a ray for every pair of origin/direction in order.i.e. (origin[0], direction[0]), (origin[1], direction[1]), etc.  </li>
-<li>
-One direction, multiple origins: Cast a ray in the given direction from each origin point in origins.  </li>
-<li>
-One origin, multiple directions: Cast a ray from the origin point in each direction in directions  </li>
-</ul>
-
-<p class="definition">Definition at line <a class="el" href="_ray_tracer_native_8cs_source.html#l00309">309</a> of file <a class="el" href="_ray_tracer_native_8cs_source.html">RayTracerNative.cs</a>.</p>
-
-<p class="reference">References <a class="el" href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#af942902fcb3b3fb189e0384da3791a12">HumanFactors.RayTracing.NativeMethods.FireOcclusionRays()</a>, and <a class="el" href="_native_utils_8cs_source.html#l00137">HumanFactors.NativeUtils.HelperFunctions.FlattenVectorArray()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_ray_tracing_1_1_native_methods_ab43791c6e75a4273e51c33db1ada2638_cgraph.svg" width="572" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-</div>
-
-</div>
-</div>
 <a id="a77972569d77c78827c4a16268357d8ee"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a77972569d77c78827c4a16268357d8ee">&#9670;&nbsp;</a></span>C_IntersectPoint()</h2>
 
@@ -594,7 +595,7 @@ Here is the call graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="_ray_tracer_native_8cs_source.html#l00115">115</a> of file <a class="el" href="_ray_tracer_native_8cs_source.html">RayTracerNative.cs</a>.</p>
 
-<p class="reference">References <a class="el" href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#a985126efaaf8c95d6fb49425a8b6443c">HumanFactors.RayTracing.NativeMethods.FireRay()</a>.</p>
+<p class="reference">References <a class="el" href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#ade1f8c7e94f5baa836d0339a3deadf14">HumanFactors.RayTracing.NativeMethods.CastRay()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -677,14 +678,14 @@ One origin, multiple directions: Cast a ray from the origin point in each direct
 </dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">System.Exception</td><td>Multiple rays failed to fire </td></tr>
+    <tr><td class="paramname">System.Exception</td><td>Multiple rays failed to cast </td></tr>
   </table>
   </dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="_ray_tracer_native_8cs_source.html#l00167">167</a> of file <a class="el" href="_ray_tracer_native_8cs_source.html">RayTracerNative.cs</a>.</p>
 
-<p class="reference">References <a class="el" href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#a44c2b1d55dda3a993d0411f66f2d0c5f">HumanFactors.RayTracing.NativeMethods.FireMultipleDirectionsOneOrigin()</a>, <a class="el" href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#a57f4977fd19a6ee72c4ab34dd563c8d7">HumanFactors.RayTracing.NativeMethods.FireMultipleOriginsOneDirection()</a>, <a class="el" href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#a5d6e9fc666bf29b2ac9bf3fe75c074db">HumanFactors.RayTracing.NativeMethods.FireMultipleRays()</a>, and <a class="el" href="_native_utils_8cs_source.html#l00183">HumanFactors.NativeUtils.HelperFunctions.FloatArrayToVectorArray()</a>.</p>
+<p class="reference">References <a class="el" href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#aea585f067b8c5b61276c3e62773a6757">HumanFactors.RayTracing.NativeMethods.CastMultipleDirectionsOneOrigin()</a>, <a class="el" href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#aded7e27d0b1d6f2cb95785216779807a">HumanFactors.RayTracing.NativeMethods.CastMultipleOriginsOneDirection()</a>, <a class="el" href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#a0a8387c10924c7b3f3a4349885a4da0e">HumanFactors.RayTracing.NativeMethods.CastMultipleRays()</a>, and <a class="el" href="_native_utils_8cs_source.html#l00183">HumanFactors.NativeUtils.HelperFunctions.FloatArrayToVectorArray()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -754,11 +755,11 @@ Here is the call graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="_ray_tracer_native_8cs_source.html#l00358">358</a> of file <a class="el" href="_ray_tracer_native_8cs_source.html">RayTracerNative.cs</a>.</p>
 
-<p class="reference">References <a class="el" href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#a3107158dd3e14f505acc8adde2903801">HumanFactors.RayTracing.NativeMethods.FireSingleRayDistance()</a>, <a class="el" href="_common_types_8cs_source.html#l00041">HumanFactors.Vector3D.x</a>, <a class="el" href="_common_types_8cs_source.html#l00042">HumanFactors.Vector3D.y</a>, and <a class="el" href="_common_types_8cs_source.html#l00043">HumanFactors.Vector3D.z</a>.</p>
+<p class="reference">References <a class="el" href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#a200175bf2623d708fbfea1f10dce4d12">HumanFactors.RayTracing.NativeMethods.CastSingleRayDistance()</a>, <a class="el" href="_common_types_8cs_source.html#l00041">HumanFactors.Vector3D.x</a>, <a class="el" href="_common_types_8cs_source.html#l00042">HumanFactors.Vector3D.y</a>, and <a class="el" href="_common_types_8cs_source.html#l00043">HumanFactors.Vector3D.z</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_ray_tracing_1_1_native_methods_ab66c33ca01db97ccb4e391dcefb4b8d4_cgraph.svg" width="552" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_ray_tracing_1_1_native_methods_ab66c33ca01db97ccb4e391dcefb4b8d4_cgraph.svg" width="558" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
@@ -815,7 +816,7 @@ Here is the call graph for this function:</div>
   <table class="params">
     <tr><td class="paramname">ray_tracer</td><td>A pointer to the raytracer to use for intersections </td></tr>
     <tr><td class="paramname">origins</td><td>A list of x, y, z coordinates to cast rays in. </td></tr>
-    <tr><td class="paramname">directions</td><td>A list of x, y, z directions to fire in. </td></tr>
+    <tr><td class="paramname">directions</td><td>A list of x, y, z directions to cast in. </td></tr>
     <tr><td class="paramname">max_distance</td><td>Maximum distance to consider for intersection.</td></tr>
   </table>
   </dd>
@@ -839,11 +840,517 @@ One origin, multiple directions: Cast a ray from the origin point in each direct
 
 <p class="definition">Definition at line <a class="el" href="_ray_tracer_native_8cs_source.html#l00249">249</a> of file <a class="el" href="_ray_tracer_native_8cs_source.html">RayTracerNative.cs</a>.</p>
 
-<p class="reference">References <a class="el" href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#a96c75fac4a3d2e1804cab2f4dbddc868">HumanFactors.RayTracing.NativeMethods.FireRaysDistance()</a>, and <a class="el" href="_native_utils_8cs_source.html#l00137">HumanFactors.NativeUtils.HelperFunctions.FlattenVectorArray()</a>.</p>
+<p class="reference">References <a class="el" href="class_human_factors_1_1_ray_tracing_1_1_native_methods.html#a17c8096338130cbffd5aeaa9a3fc3714">HumanFactors.RayTracing.NativeMethods.CastRaysDistance()</a>, and <a class="el" href="_native_utils_8cs_source.html#l00137">HumanFactors.NativeUtils.HelperFunctions.FlattenVectorArray()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_ray_tracing_1_1_native_methods_a678fc6a9e4fd7c2a083940dbea2083cf_cgraph.svg" width="543" height="118"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="aea585f067b8c5b61276c3e62773a6757"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea585f067b8c5b61276c3e62773a6757">&#9670;&nbsp;</a></span>CastMultipleDirectionsOneOrigin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987f">HF_STATUS</a> HumanFactors.RayTracing.NativeMethods.CastMultipleDirectionsOneOrigin </td>
+          <td>(</td>
+          <td class="paramtype">IntPtr&#160;</td>
+          <td class="paramname"><em>bvh</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">[In] float[]&#160;</td>
+          <td class="paramname"><em>origin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">[In] float[]&#160;</td>
+          <td class="paramname"><em>directions</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>max_distance</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">[Out] bool[]&#160;</td>
+          <td class="paramname"><em>result_array</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="_ray_tracer_native_8cs_source.html#l00167">HumanFactors.RayTracing.NativeMethods.C_IntersectPoints()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_ray_tracing_1_1_native_methods_aea585f067b8c5b61276c3e62773a6757_icgraph.svg" width="571" height="67"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="aded7e27d0b1d6f2cb95785216779807a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aded7e27d0b1d6f2cb95785216779807a">&#9670;&nbsp;</a></span>CastMultipleOriginsOneDirection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987f">HF_STATUS</a> HumanFactors.RayTracing.NativeMethods.CastMultipleOriginsOneDirection </td>
+          <td>(</td>
+          <td class="paramtype">IntPtr&#160;</td>
+          <td class="paramname"><em>bvh</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">[In] float[]&#160;</td>
+          <td class="paramname"><em>origin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">[In] float[]&#160;</td>
+          <td class="paramname"><em>directions</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>max_distance</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">[Out] bool[]&#160;</td>
+          <td class="paramname"><em>result_array</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="_ray_tracer_native_8cs_source.html#l00167">HumanFactors.RayTracing.NativeMethods.C_IntersectPoints()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_ray_tracing_1_1_native_methods_aded7e27d0b1d6f2cb95785216779807a_icgraph.svg" width="551" height="67"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="a0a8387c10924c7b3f3a4349885a4da0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a8387c10924c7b3f3a4349885a4da0e">&#9670;&nbsp;</a></span>CastMultipleRays()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987f">HF_STATUS</a> HumanFactors.RayTracing.NativeMethods.CastMultipleRays </td>
+          <td>(</td>
+          <td class="paramtype">IntPtr&#160;</td>
+          <td class="paramname"><em>ert</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">[In, Out] float[]&#160;</td>
+          <td class="paramname"><em>origins</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float[]&#160;</td>
+          <td class="paramname"><em>directions</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>max_distance</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">[Out] bool[]&#160;</td>
+          <td class="paramname"><em>result_array</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="_ray_tracer_native_8cs_source.html#l00167">HumanFactors.RayTracing.NativeMethods.C_IntersectPoints()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_ray_tracing_1_1_native_methods_a0a8387c10924c7b3f3a4349885a4da0e_icgraph.svg" width="536" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="aa6728fa77a0963aca6fea01a286e066b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6728fa77a0963aca6fea01a286e066b">&#9670;&nbsp;</a></span>CastOcclusionRays()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987f">HF_STATUS</a> HumanFactors.RayTracing.NativeMethods.CastOcclusionRays </td>
+          <td>(</td>
+          <td class="paramtype">IntPtr&#160;</td>
+          <td class="paramname"><em>bvh</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">[In] float[]&#160;</td>
+          <td class="paramname"><em>origins</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">[In] float[]&#160;</td>
+          <td class="paramname"><em>directions</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>origin_size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>direction_size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>max_distance</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">[Out] bool[]&#160;</td>
+          <td class="paramname"><em>result_array</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="_ray_tracer_native_8cs_source.html#l00309">HumanFactors.RayTracing.NativeMethods.C_CastOcclusionRays()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_ray_tracing_1_1_native_methods_aa6728fa77a0963aca6fea01a286e066b_icgraph.svg" width="574" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="ade1f8c7e94f5baa836d0339a3deadf14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade1f8c7e94f5baa836d0339a3deadf14">&#9670;&nbsp;</a></span>CastRay()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987f">HF_STATUS</a> HumanFactors.RayTracing.NativeMethods.CastRay </td>
+          <td>(</td>
+          <td class="paramtype">IntPtr&#160;</td>
+          <td class="paramname"><em>ert</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ref float&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ref float&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ref float&#160;</td>
+          <td class="paramname"><em>z</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>dx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>dy</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>dz</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>max_distance</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ref bool&#160;</td>
+          <td class="paramname"><em>result</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="_ray_tracer_native_8cs_source.html#l00115">HumanFactors.RayTracing.NativeMethods.C_IntersectPoint()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_ray_tracing_1_1_native_methods_ade1f8c7e94f5baa836d0339a3deadf14_icgraph.svg" width="484" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="a17c8096338130cbffd5aeaa9a3fc3714"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17c8096338130cbffd5aeaa9a3fc3714">&#9670;&nbsp;</a></span>CastRaysDistance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987f">HF_STATUS</a> HumanFactors.RayTracing.NativeMethods.CastRaysDistance </td>
+          <td>(</td>
+          <td class="paramtype">IntPtr&#160;</td>
+          <td class="paramname"><em>ert</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">[In] float[]&#160;</td>
+          <td class="paramname"><em>origins</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>num_origins</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">[In] float[]&#160;</td>
+          <td class="paramname"><em>directions</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>num_directions</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ref IntPtr&#160;</td>
+          <td class="paramname"><em>out_results</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ref IntPtr&#160;</td>
+          <td class="paramname"><em>out_data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="_ray_tracer_native_8cs_source.html#l00249">HumanFactors.RayTracing.NativeMethods.C_IntersectRays()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_ray_tracing_1_1_native_methods_a17c8096338130cbffd5aeaa9a3fc3714_icgraph.svg" width="532" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="a200175bf2623d708fbfea1f10dce4d12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a200175bf2623d708fbfea1f10dce4d12">&#9670;&nbsp;</a></span>CastSingleRayDistance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987f">HF_STATUS</a> HumanFactors.RayTracing.NativeMethods.CastSingleRayDistance </td>
+          <td>(</td>
+          <td class="paramtype">IntPtr&#160;</td>
+          <td class="paramname"><em>ert</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">[In] float[]&#160;</td>
+          <td class="paramname"><em>origin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">[In] float[]&#160;</td>
+          <td class="paramname"><em>direction</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>max_distance</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ref float&#160;</td>
+          <td class="paramname"><em>out_distance</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ref int&#160;</td>
+          <td class="paramname"><em>out_meshid</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="_ray_tracer_native_8cs_source.html#l00358">HumanFactors.RayTracing.NativeMethods.C_IntersectRay()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_ray_tracing_1_1_native_methods_a200175bf2623d708fbfea1f10dce4d12_icgraph.svg" width="558" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
@@ -998,512 +1505,6 @@ Here is the caller graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<a id="a44c2b1d55dda3a993d0411f66f2d0c5f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a44c2b1d55dda3a993d0411f66f2d0c5f">&#9670;&nbsp;</a></span>FireMultipleDirectionsOneOrigin()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987f">HF_STATUS</a> HumanFactors.RayTracing.NativeMethods.FireMultipleDirectionsOneOrigin </td>
-          <td>(</td>
-          <td class="paramtype">IntPtr&#160;</td>
-          <td class="paramname"><em>bvh</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">[In] float[]&#160;</td>
-          <td class="paramname"><em>origin</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">[In] float[]&#160;</td>
-          <td class="paramname"><em>directions</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>max_distance</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">[Out] bool[]&#160;</td>
-          <td class="paramname"><em>result_array</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="reference">Referenced by <a class="el" href="_ray_tracer_native_8cs_source.html#l00167">HumanFactors.RayTracing.NativeMethods.C_IntersectPoints()</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_ray_tracing_1_1_native_methods_a44c2b1d55dda3a993d0411f66f2d0c5f_icgraph.svg" width="566" height="67"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-</div>
-
-</div>
-</div>
-<a id="a57f4977fd19a6ee72c4ab34dd563c8d7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a57f4977fd19a6ee72c4ab34dd563c8d7">&#9670;&nbsp;</a></span>FireMultipleOriginsOneDirection()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987f">HF_STATUS</a> HumanFactors.RayTracing.NativeMethods.FireMultipleOriginsOneDirection </td>
-          <td>(</td>
-          <td class="paramtype">IntPtr&#160;</td>
-          <td class="paramname"><em>bvh</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">[In] float[]&#160;</td>
-          <td class="paramname"><em>origin</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">[In] float[]&#160;</td>
-          <td class="paramname"><em>directions</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>max_distance</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">[Out] bool[]&#160;</td>
-          <td class="paramname"><em>result_array</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="reference">Referenced by <a class="el" href="_ray_tracer_native_8cs_source.html#l00167">HumanFactors.RayTracing.NativeMethods.C_IntersectPoints()</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_ray_tracing_1_1_native_methods_a57f4977fd19a6ee72c4ab34dd563c8d7_icgraph.svg" width="546" height="67"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-</div>
-
-</div>
-</div>
-<a id="a5d6e9fc666bf29b2ac9bf3fe75c074db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d6e9fc666bf29b2ac9bf3fe75c074db">&#9670;&nbsp;</a></span>FireMultipleRays()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987f">HF_STATUS</a> HumanFactors.RayTracing.NativeMethods.FireMultipleRays </td>
-          <td>(</td>
-          <td class="paramtype">IntPtr&#160;</td>
-          <td class="paramname"><em>ert</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">[In, Out] float[]&#160;</td>
-          <td class="paramname"><em>origins</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float[]&#160;</td>
-          <td class="paramname"><em>directions</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>max_distance</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">[Out] bool[]&#160;</td>
-          <td class="paramname"><em>result_array</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="reference">Referenced by <a class="el" href="_ray_tracer_native_8cs_source.html#l00167">HumanFactors.RayTracing.NativeMethods.C_IntersectPoints()</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_ray_tracing_1_1_native_methods_a5d6e9fc666bf29b2ac9bf3fe75c074db_icgraph.svg" width="532" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-</div>
-
-</div>
-</div>
-<a id="af942902fcb3b3fb189e0384da3791a12"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af942902fcb3b3fb189e0384da3791a12">&#9670;&nbsp;</a></span>FireOcclusionRays()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987f">HF_STATUS</a> HumanFactors.RayTracing.NativeMethods.FireOcclusionRays </td>
-          <td>(</td>
-          <td class="paramtype">IntPtr&#160;</td>
-          <td class="paramname"><em>bvh</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">[In] float[]&#160;</td>
-          <td class="paramname"><em>origins</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">[In] float[]&#160;</td>
-          <td class="paramname"><em>directions</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>origin_size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>direction_size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>max_distance</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">[Out] bool[]&#160;</td>
-          <td class="paramname"><em>result_array</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="reference">Referenced by <a class="el" href="_ray_tracer_native_8cs_source.html#l00309">HumanFactors.RayTracing.NativeMethods.C_FireOcclusionRays()</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_ray_tracing_1_1_native_methods_af942902fcb3b3fb189e0384da3791a12_icgraph.svg" width="563" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-</div>
-
-</div>
-</div>
-<a id="a985126efaaf8c95d6fb49425a8b6443c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a985126efaaf8c95d6fb49425a8b6443c">&#9670;&nbsp;</a></span>FireRay()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987f">HF_STATUS</a> HumanFactors.RayTracing.NativeMethods.FireRay </td>
-          <td>(</td>
-          <td class="paramtype">IntPtr&#160;</td>
-          <td class="paramname"><em>ert</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ref float&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ref float&#160;</td>
-          <td class="paramname"><em>y</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ref float&#160;</td>
-          <td class="paramname"><em>z</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>dx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>dy</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>dz</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>max_distance</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ref bool&#160;</td>
-          <td class="paramname"><em>result</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="reference">Referenced by <a class="el" href="_ray_tracer_native_8cs_source.html#l00115">HumanFactors.RayTracing.NativeMethods.C_IntersectPoint()</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_ray_tracing_1_1_native_methods_a985126efaaf8c95d6fb49425a8b6443c_icgraph.svg" width="484" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-</div>
-
-</div>
-</div>
-<a id="a96c75fac4a3d2e1804cab2f4dbddc868"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a96c75fac4a3d2e1804cab2f4dbddc868">&#9670;&nbsp;</a></span>FireRaysDistance()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987f">HF_STATUS</a> HumanFactors.RayTracing.NativeMethods.FireRaysDistance </td>
-          <td>(</td>
-          <td class="paramtype">IntPtr&#160;</td>
-          <td class="paramname"><em>ert</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">[In] float[]&#160;</td>
-          <td class="paramname"><em>origins</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>num_origins</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">[In] float[]&#160;</td>
-          <td class="paramname"><em>directions</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>num_directions</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ref IntPtr&#160;</td>
-          <td class="paramname"><em>out_results</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ref IntPtr&#160;</td>
-          <td class="paramname"><em>out_data</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="reference">Referenced by <a class="el" href="_ray_tracer_native_8cs_source.html#l00249">HumanFactors.RayTracing.NativeMethods.C_IntersectRays()</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_ray_tracing_1_1_native_methods_a96c75fac4a3d2e1804cab2f4dbddc868_icgraph.svg" width="528" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-</div>
-
-</div>
-</div>
-<a id="a3107158dd3e14f505acc8adde2903801"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3107158dd3e14f505acc8adde2903801">&#9670;&nbsp;</a></span>FireSingleRayDistance()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="namespace_human_factors_1_1_exceptions.html#a8a5123945956ef2d754b5420be18987f">HF_STATUS</a> HumanFactors.RayTracing.NativeMethods.FireSingleRayDistance </td>
-          <td>(</td>
-          <td class="paramtype">IntPtr&#160;</td>
-          <td class="paramname"><em>ert</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">[In] float[]&#160;</td>
-          <td class="paramname"><em>origin</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">[In] float[]&#160;</td>
-          <td class="paramname"><em>direction</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>max_distance</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ref float&#160;</td>
-          <td class="paramname"><em>out_distance</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ref int&#160;</td>
-          <td class="paramname"><em>out_meshid</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="reference">Referenced by <a class="el" href="_ray_tracer_native_8cs_source.html#l00358">HumanFactors.RayTracing.NativeMethods.C_IntersectRay()</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_human_factors_1_1_ray_tracing_1_1_native_methods_a3107158dd3e14f505acc8adde2903801_icgraph.svg" width="552" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-</div>
 
 </div>
 </div>

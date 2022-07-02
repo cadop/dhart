@@ -13,6 +13,7 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome-css.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -217,7 +218,7 @@ Static Public Member Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">bvh</td><td>A valid BVH containing geometry to intersect with. </td></tr>
     <tr><td class="paramname">origins</td><td>A list of x, y, z coordinates to cast rays in. </td></tr>
-    <tr><td class="paramname">directions</td><td>A list of x, y, z directions to fire in. </td></tr>
+    <tr><td class="paramname">directions</td><td>A list of x, y, z directions to cast in. </td></tr>
     <tr><td class="paramname">max_distance</td><td>Maximum distance to consider for intersection.</td></tr>
   </table>
   </dd>
@@ -452,7 +453,7 @@ One origin, multiple directions: Cast a ray from the origin point in each direct
   <table class="params">
     <tr><td class="paramname">bvh</td><td>A valid BVH containing geometry to intersect with. </td></tr>
     <tr><td class="paramname">origins</td><td>A list of x,y,z coordinates to cast rays in. </td></tr>
-    <tr><td class="paramname">directions</td><td>A list of x,y,z directions to fire in. </td></tr>
+    <tr><td class="paramname">directions</td><td>A list of x,y,z directions to cast in. </td></tr>
     <tr><td class="paramname">max_distance</td><td>Maximum distance to consider for intersection.</td></tr>
   </table>
   </dd>
@@ -463,9 +464,9 @@ One origin, multiple directions: Cast a ray from the origin point in each direct
 <li>
 Equal amount of directions/origins: Cast a ray for every pair of origin/direction in order. i.e. (origin[0], direction[0]), (origin[1], direction[1]), etc.  </li>
 <li>
-One direction, multiple origins: Fire a ray in the given direction from each origin point in origins.  </li>
+One direction, multiple origins: Cast a ray in the given direction from each origin point in origins.  </li>
 <li>
-One origin, multiple directions: Fire a ray from the origin point in each direction in directions.  </li>
+One origin, multiple directions: Cast a ray from the origin point in each direction in directions.  </li>
 </ul>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
@@ -559,7 +560,7 @@ One origin, multiple directions: Cast a ray from the origin point in each direct
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jul 1 2022 23:07:25 for Analysis by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jul 2 2022 19:30:57 for Analysis by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.17
 </small></address>

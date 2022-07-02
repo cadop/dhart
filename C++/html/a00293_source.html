@@ -5,14 +5,19 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Analysis: Cpp/tests/src/embree_raytracer_cinterface.cpp Source File</title>
+<title>DHART: Cpp/tests/src/embree_raytracer_cinterface.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome-css.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -21,7 +26,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Analysis
+   <div id="projectname">DHART
    </div>
   </td>
  </tr>
@@ -45,6 +50,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('a00293_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -59,11 +81,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_882abde7eca0231e2bae1ceefe5e858a.html">Cpp</a></li><li class="navelem"><a class="el" href="dir_5d715898c03dcdb47bf950c413823cbf.html">tests</a></li><li class="navelem"><a class="el" href="dir_5f16828ad0a6c808daf466be2f4263d6.html">src</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">embree_raytracer_cinterface.cpp</div>  </div>
@@ -282,7 +299,7 @@ $(function() {
 <div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="comment">        }</span></div>
 <div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="comment">    }</span></div>
 <div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="comment">    TEST(EX_raytracer_cinterface, FireRaysDistance) {</span></div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="comment">    TEST(EX_raytracer_cinterface, CastRaysDistance) {</span></div>
 <div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="comment">        // Status code variable, value returned by C Interface functions</span></div>
 <div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="comment">        // See documentation for HF::Exceptions::HF_STATUS for error code definitions.</span></div>
 <div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="comment">        int status = 0;</span></div>
@@ -385,7 +402,7 @@ $(function() {
 <div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;<span class="comment">        // dir represents vector components in R3; the member count should be a multiple of 3.</span></div>
 <div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;<span class="comment">        ASSERT_TRUE(size_dir % 3 == 0);</span></div>
 <div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;<span class="comment">        // Valid input accepted by FireRaysDistance:</span></div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;<span class="comment">        // Valid input accepted by CastRaysDistance:</span></div>
 <div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;<span class="comment">        //      count_points == count_dir (one direction per origin)</span></div>
 <div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;<span class="comment">        //      count_points == 1 &amp;&amp; count_directions &gt; 1 (one origin, multiple directions)</span></div>
 <div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;<span class="comment">        //      count_points &gt; 1 &amp;&amp; count_directions == 1 (multiple origins, one direction)</span></div>
@@ -394,21 +411,21 @@ $(function() {
 <div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;<span class="comment">        ASSERT_EQ(count_points, count_dir);</span></div>
 <div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;<span class="comment">        // Declare a pointer to vector&lt;RayResult&gt;.</span></div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;<span class="comment">        // FireRaysDistance will allocate memory for this pointer,</span></div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;<span class="comment">        // CastRaysDistance will allocate memory for this pointer,</span></div>
 <div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;<span class="comment">        // we must call DestroyRayResultVector on ray_result when we are done with it.</span></div>
 <div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;<span class="comment">        // ray_result_data will refer to the address of (*ray_result)&#39;s internal buffer.</span></div>
 <div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;<span class="comment">        // As such, we do NOT call operator delete on ray_result_data.</span></div>
 <div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;<span class="comment">        std::vector&lt;RayResult&gt;* ray_result = nullptr;</span></div>
 <div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;<span class="comment">        RayResult* ray_result_data = nullptr;</span></div>
 <div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;<span class="comment">        status = FireRaysDistance(bvh, points.data(), count_points, dir.data(), count_dir, &amp;ray_result, &amp;ray_result_data);</span></div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;<span class="comment">        status = CastRaysDistance(bvh, points.data(), count_points, dir.data(), count_dir, &amp;ray_result, &amp;ray_result_data);</span></div>
 <div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;<span class="comment">        if (status != 1) {</span></div>
 <div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;<span class="comment">            // Error!</span></div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;<span class="comment">            std::cerr &lt;&lt; &quot;Error at FireRaysDistance, code: &quot; &lt;&lt; status &lt;&lt; std::endl;</span></div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;<span class="comment">            std::cerr &lt;&lt; &quot;Error at CastRaysDistance, code: &quot; &lt;&lt; status &lt;&lt; std::endl;</span></div>
 <div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;<span class="comment">        }</span></div>
 <div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;<span class="comment">        // If invalid values for count_points and count_dir are given to FireRaysDistance,</span></div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;<span class="comment">        // If invalid values for count_points and count_dir are given to CastRaysDistance,</span></div>
 <div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;<span class="comment">        // ray_result will not be assigned a valid address -- which means ray_result_data,</span></div>
 <div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;<span class="comment">        // which addresses (*ray_result)&#39;s internal buffer, will also not be assigned a valid address.</span></div>
 <div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;<span class="comment">        ASSERT_TRUE(ray_result != nullptr);</span></div>
@@ -417,7 +434,7 @@ $(function() {
 <div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;<span class="comment">        // *ray_result should not be an empty container.</span></div>
 <div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;<span class="comment">        ASSERT_FALSE(ray_result-&gt;empty());</span></div>
 <div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;<span class="comment">        // ray_result-&gt;size() should be equal to the amount of rays that will be fired.</span></div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;<span class="comment">        // ray_result-&gt;size() should be equal to the amount of rays that will be cast.</span></div>
 <div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;<span class="comment">        ASSERT_EQ(ray_result-&gt;size(), count_dir);</span></div>
 <div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;<span class="comment">        //</span></div>
@@ -463,7 +480,7 @@ $(function() {
 <div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;<span class="comment">        }</span></div>
 <div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;<span class="comment">    }</span></div>
 <div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;<span class="comment">    TEST(EX_raytracer_cinterface, FireSingleRayDistance) {</span></div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;<span class="comment">    TEST(EX_raytracer_cinterface, CastSingleRayDistance) {</span></div>
 <div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;<span class="comment">        // Status code variable, value returned by C Interface functions</span></div>
 <div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;<span class="comment">        // See documentation for HF::Exceptions::HF_STATUS for error code definitions.</span></div>
 <div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;<span class="comment">        int status = 0;</span></div>
@@ -561,12 +578,12 @@ $(function() {
 <div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160;<span class="comment">        float distance = 0.0f;</span></div>
 <div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;<span class="comment">        int mesh_id = -1;</span></div>
 <div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;<span class="comment">        // Fire a ray for the distance/meshid (Fire a ray, get a distance/mesh ID back)</span></div>
-<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;<span class="comment">        status = FireSingleRayDistance(bvh, p1.data(), dir.data(), max_distance, &amp;distance, &amp;mesh_id);</span></div>
+<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;<span class="comment">        // Cast a ray for the distance/meshid (Cast a ray, get a distance/mesh ID back)</span></div>
+<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;<span class="comment">        status = CastSingleRayDistance(bvh, p1.data(), dir.data(), max_distance, &amp;distance, &amp;mesh_id);</span></div>
 <div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160;<span class="comment">        if (status != 1) {</span></div>
 <div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;<span class="comment">            // Error!</span></div>
-<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;<span class="comment">            std::cerr &lt;&lt; &quot;Error at FireSingleRayDistance, code: &quot; &lt;&lt; status &lt;&lt; std::endl;</span></div>
+<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;<span class="comment">            std::cerr &lt;&lt; &quot;Error at CastSingleRayDistance, code: &quot; &lt;&lt; status &lt;&lt; std::endl;</span></div>
 <div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;<span class="comment">        }</span></div>
 <div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;<span class="comment">        // If mesh_id returns -1, this indicates a miss.</span></div>
@@ -594,7 +611,7 @@ $(function() {
 <div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;<span class="comment">        }</span></div>
 <div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;<span class="comment">    }</span></div>
 <div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;<span class="comment">    TEST(EX_raytracer_cinterface, FireRay) {</span></div>
+<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;<span class="comment">    TEST(EX_raytracer_cinterface, CastRay) {</span></div>
 <div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;<span class="comment">        // Status code variable, value returned by C Interface functions</span></div>
 <div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;<span class="comment">        // See documentation for HF::Exceptions::HF_STATUS for error code definitions.</span></div>
 <div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;<span class="comment">        int status = 0;</span></div>
@@ -687,7 +704,7 @@ $(function() {
 <div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160;<span class="comment">        // dir represents a single vector (in component form) in R3. Member count should be 3.</span></div>
 <div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160;<span class="comment">        ASSERT_TRUE(dir.size() == 3);</span></div>
 <div class="line"><a name="l00641"></a><span class="lineno">  641</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160;<span class="comment">        // Fire a ray for the hitpoint (Fire a ray, get a hit point back)</span></div>
+<div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160;<span class="comment">        // Cast a ray for the hitpoint (Cast a ray, get a hit point back)</span></div>
 <div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160;<span class="comment">        float max_distance = -1;</span></div>
 <div class="line"><a name="l00645"></a><span class="lineno">  645</span>&#160;<span class="comment">        bool did_hit = false;</span></div>
 <div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160;<span class="comment"></span> </div>
@@ -695,17 +712,17 @@ $(function() {
 <div class="line"><a name="l00648"></a><span class="lineno">  648</span>&#160;<span class="comment">        // hit_point will be initialized to the origin point values,</span></div>
 <div class="line"><a name="l00649"></a><span class="lineno">  649</span>&#160;<span class="comment">        // and if a hit occurs, hit_point will be set to the hit coordinate values.</span></div>
 <div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160;<span class="comment">        //</span></div>
-<div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160;<span class="comment">        // We will know if a hit occurs if did_hit is set &#39;true&#39; by FireRay.</span></div>
+<div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160;<span class="comment">        // We will know if a hit occurs if did_hit is set &#39;true&#39; by CastRay.</span></div>
 <div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160;<span class="comment">        std::array&lt;float, 3&gt; hit_point = { p1[0], p1[1], p1[2] };</span></div>
 <div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160;<span class="comment">        // hit_point represents a single point in R3. Member count should be 3.</span></div>
 <div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160;<span class="comment">        ASSERT_TRUE(hit_point.size() == 3);</span></div>
 <div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160;<span class="comment">        status = FireRay(bvh, hit_point[0], hit_point[1], hit_point[2], dir[0], dir[1], dir[2], max_distance, did_hit);</span></div>
+<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160;<span class="comment">        status = CastRay(bvh, hit_point[0], hit_point[1], hit_point[2], dir[0], dir[1], dir[2], max_distance, did_hit);</span></div>
 <div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160;<span class="comment">        if (status != 1) {</span></div>
 <div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160;<span class="comment">            // Error!</span></div>
-<div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160;<span class="comment">            std::cerr &lt;&lt; &quot;Error at FireRay, code: &quot; &lt;&lt; status &lt;&lt; std::endl;</span></div>
+<div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160;<span class="comment">            std::cerr &lt;&lt; &quot;Error at CastRay, code: &quot; &lt;&lt; status &lt;&lt; std::endl;</span></div>
 <div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160;<span class="comment">        }</span></div>
 <div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00666"></a><span class="lineno">  666</span>&#160;<span class="comment">        if (did_hit) {</span></div>
@@ -737,7 +754,7 @@ $(function() {
 <div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;<span class="comment">        }</span></div>
 <div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;<span class="comment">    }</span></div>
 <div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160;<span class="comment">    TEST(EX_raytracer_cinterface, FireMultipleRays) {</span></div>
+<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160;<span class="comment">    TEST(EX_raytracer_cinterface, CastMultipleRays) {</span></div>
 <div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;<span class="comment">        // Status code variable, value returned by C Interface functions</span></div>
 <div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160;<span class="comment">        // See documentation for HF::Exceptions::HF_STATUS for error code definitions.</span></div>
 <div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160;<span class="comment">        int status = 0;</span></div>
@@ -845,18 +862,18 @@ $(function() {
 <div class="line"><a name="l00805"></a><span class="lineno">  805</span>&#160;<span class="comment">        // results[i] will be set true. Otherwise, results[i] will be set false.</span></div>
 <div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160;<span class="comment">        std::array&lt;bool, count_dir&gt; results;</span></div>
 <div class="line"><a name="l00807"></a><span class="lineno">  807</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00808"></a><span class="lineno">  808</span>&#160;<span class="comment">        status = FireMultipleRays(bvh, points.data(), dir.data(), count_points, max_distance, results.data());</span></div>
+<div class="line"><a name="l00808"></a><span class="lineno">  808</span>&#160;<span class="comment">        status = CastMultipleRays(bvh, points.data(), dir.data(), count_points, max_distance, results.data());</span></div>
 <div class="line"><a name="l00809"></a><span class="lineno">  809</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00810"></a><span class="lineno">  810</span>&#160;<span class="comment">        if (status != 1) {</span></div>
 <div class="line"><a name="l00811"></a><span class="lineno">  811</span>&#160;<span class="comment">            // Error!</span></div>
-<div class="line"><a name="l00812"></a><span class="lineno">  812</span>&#160;<span class="comment">            std::cerr &lt;&lt; &quot;Error at FireMultipleRays, code: &quot; &lt;&lt; status &lt;&lt; std::endl;</span></div>
+<div class="line"><a name="l00812"></a><span class="lineno">  812</span>&#160;<span class="comment">            std::cerr &lt;&lt; &quot;Error at CastMultipleRays, code: &quot; &lt;&lt; status &lt;&lt; std::endl;</span></div>
 <div class="line"><a name="l00813"></a><span class="lineno">  813</span>&#160;<span class="comment">        }</span></div>
 <div class="line"><a name="l00815"></a><span class="lineno">  815</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00816"></a><span class="lineno">  816</span>&#160;<span class="comment">        // results was initialized to be an empty container, </span></div>
-<div class="line"><a name="l00817"></a><span class="lineno">  817</span>&#160;<span class="comment">        // but it should not be empty after calling FireMultipleRays.</span></div>
+<div class="line"><a name="l00817"></a><span class="lineno">  817</span>&#160;<span class="comment">        // but it should not be empty after calling CastMultipleRays.</span></div>
 <div class="line"><a name="l00818"></a><span class="lineno">  818</span>&#160;<span class="comment">        ASSERT_FALSE(results.empty());</span></div>
 <div class="line"><a name="l00819"></a><span class="lineno">  819</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00820"></a><span class="lineno">  820</span>&#160;<span class="comment">        // results.size() should be equal to the amount of rays to fire.</span></div>
+<div class="line"><a name="l00820"></a><span class="lineno">  820</span>&#160;<span class="comment">        // results.size() should be equal to the amount of rays to cast.</span></div>
 <div class="line"><a name="l00821"></a><span class="lineno">  821</span>&#160;<span class="comment">        ASSERT_EQ(results.size(), count_dir);</span></div>
 <div class="line"><a name="l00822"></a><span class="lineno">  822</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00824"></a><span class="lineno">  824</span>&#160;<span class="comment">        //</span></div>
@@ -890,7 +907,7 @@ $(function() {
 <div class="line"><a name="l00853"></a><span class="lineno">  853</span>&#160;<span class="comment">        }</span></div>
 <div class="line"><a name="l00854"></a><span class="lineno">  854</span>&#160;<span class="comment">    }</span></div>
 <div class="line"><a name="l00855"></a><span class="lineno">  855</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00856"></a><span class="lineno">  856</span>&#160;<span class="comment">    TEST(EX_raytracer_cinterface, FireMultipleOriginsOneDirection) {</span></div>
+<div class="line"><a name="l00856"></a><span class="lineno">  856</span>&#160;<span class="comment">    TEST(EX_raytracer_cinterface, CastMultipleOriginsOneDirection) {</span></div>
 <div class="line"><a name="l00857"></a><span class="lineno">  857</span>&#160;<span class="comment">        // Status code variable, value returned by C Interface functions</span></div>
 <div class="line"><a name="l00858"></a><span class="lineno">  858</span>&#160;<span class="comment">        // See documentation for HF::Exceptions::HF_STATUS for error code definitions.</span></div>
 <div class="line"><a name="l00859"></a><span class="lineno">  859</span>&#160;<span class="comment">        int status = 0;</span></div>
@@ -997,24 +1014,24 @@ $(function() {
 <div class="line"><a name="l00965"></a><span class="lineno">  965</span>&#160;<span class="comment">        // If a given ray i hits a target (dir[i] is a vector extending from p1[i]),</span></div>
 <div class="line"><a name="l00966"></a><span class="lineno">  966</span>&#160;<span class="comment">        // results[i] will be set true. Otherwise, results[i] will be set false.</span></div>
 <div class="line"><a name="l00967"></a><span class="lineno">  967</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00968"></a><span class="lineno">  968</span>&#160;<span class="comment">        // count_points rays will be fired, from the coordinates described at the array p1.</span></div>
-<div class="line"><a name="l00969"></a><span class="lineno">  969</span>&#160;<span class="comment">        // results[i] is true if a ray fired from p1[i], p1[i + 1], p1[i + 2] via direction dir</span></div>
+<div class="line"><a name="l00968"></a><span class="lineno">  968</span>&#160;<span class="comment">        // count_points rays will be cast, from the coordinates described at the array p1.</span></div>
+<div class="line"><a name="l00969"></a><span class="lineno">  969</span>&#160;<span class="comment">        // results[i] is true if a ray cast from p1[i], p1[i + 1], p1[i + 2] via direction dir</span></div>
 <div class="line"><a name="l00970"></a><span class="lineno">  970</span>&#160;<span class="comment">        // makes a hit.</span></div>
 <div class="line"><a name="l00971"></a><span class="lineno">  971</span>&#160;<span class="comment">        std::array&lt;bool, count_p1&gt; results;</span></div>
 <div class="line"><a name="l00972"></a><span class="lineno">  972</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00973"></a><span class="lineno">  973</span>&#160;<span class="comment">        // results will be mutated by FireMultipleOriginsOneDirection.</span></div>
-<div class="line"><a name="l00974"></a><span class="lineno">  974</span>&#160;<span class="comment">        status = FireMultipleOriginsOneDirection(bvh, p1.data(), dir.data(), count_p1, max_distance, results.data());</span></div>
+<div class="line"><a name="l00973"></a><span class="lineno">  973</span>&#160;<span class="comment">        // results will be mutated by CastMultipleOriginsOneDirection.</span></div>
+<div class="line"><a name="l00974"></a><span class="lineno">  974</span>&#160;<span class="comment">        status = CastMultipleOriginsOneDirection(bvh, p1.data(), dir.data(), count_p1, max_distance, results.data());</span></div>
 <div class="line"><a name="l00975"></a><span class="lineno">  975</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00976"></a><span class="lineno">  976</span>&#160;<span class="comment">        if (status != 1) {</span></div>
 <div class="line"><a name="l00977"></a><span class="lineno">  977</span>&#160;<span class="comment">            // Error!</span></div>
-<div class="line"><a name="l00978"></a><span class="lineno">  978</span>&#160;<span class="comment">            std::cerr &lt;&lt; &quot;Error at FireMultipleDirectionsOneOrigin, code: &quot; &lt;&lt; status &lt;&lt; std::endl;</span></div>
+<div class="line"><a name="l00978"></a><span class="lineno">  978</span>&#160;<span class="comment">            std::cerr &lt;&lt; &quot;Error at CastMultipleDirectionsOneOrigin, code: &quot; &lt;&lt; status &lt;&lt; std::endl;</span></div>
 <div class="line"><a name="l00979"></a><span class="lineno">  979</span>&#160;<span class="comment">        }</span></div>
 <div class="line"><a name="l00980"></a><span class="lineno">  980</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00982"></a><span class="lineno">  982</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00983"></a><span class="lineno">  983</span>&#160;<span class="comment">        // results should not be empty after calling FireMultipleOriginsOneDirection.</span></div>
+<div class="line"><a name="l00983"></a><span class="lineno">  983</span>&#160;<span class="comment">        // results should not be empty after calling CastMultipleOriginsOneDirection.</span></div>
 <div class="line"><a name="l00984"></a><span class="lineno">  984</span>&#160;<span class="comment">        ASSERT_FALSE(results.empty());</span></div>
 <div class="line"><a name="l00985"></a><span class="lineno">  985</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00986"></a><span class="lineno">  986</span>&#160;<span class="comment">        // results.size() should be equal to the amount of rays to fire.</span></div>
+<div class="line"><a name="l00986"></a><span class="lineno">  986</span>&#160;<span class="comment">        // results.size() should be equal to the amount of rays to cast.</span></div>
 <div class="line"><a name="l00987"></a><span class="lineno">  987</span>&#160;<span class="comment">        ASSERT_EQ(results.size(), count_p1);</span></div>
 <div class="line"><a name="l00988"></a><span class="lineno">  988</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00990"></a><span class="lineno">  990</span>&#160;<span class="comment">        //</span></div>
@@ -1048,7 +1065,7 @@ $(function() {
 <div class="line"><a name="l01019"></a><span class="lineno"> 1019</span>&#160;<span class="comment">        }</span></div>
 <div class="line"><a name="l01020"></a><span class="lineno"> 1020</span>&#160;<span class="comment">    }</span></div>
 <div class="line"><a name="l01021"></a><span class="lineno"> 1021</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l01022"></a><span class="lineno"> 1022</span>&#160;<span class="comment">    TEST(EX_raytracer_cinterface, FireMultipleDirectionsOneOrigin) {</span></div>
+<div class="line"><a name="l01022"></a><span class="lineno"> 1022</span>&#160;<span class="comment">    TEST(EX_raytracer_cinterface, CastMultipleDirectionsOneOrigin) {</span></div>
 <div class="line"><a name="l01023"></a><span class="lineno"> 1023</span>&#160;<span class="comment">        // Status code variable, value returned by C Interface functions</span></div>
 <div class="line"><a name="l01024"></a><span class="lineno"> 1024</span>&#160;<span class="comment">        // See documentation for HF::Exceptions::HF_STATUS for error code definitions.</span></div>
 <div class="line"><a name="l01025"></a><span class="lineno"> 1025</span>&#160;<span class="comment">        int status = 0;</span></div>
@@ -1150,20 +1167,20 @@ $(function() {
 <div class="line"><a name="l01124"></a><span class="lineno"> 1124</span>&#160;<span class="comment">        // results[i] will be set true. Otherwise, results[i] will be set false.</span></div>
 <div class="line"><a name="l01125"></a><span class="lineno"> 1125</span>&#160;<span class="comment">        std::array&lt;bool, count_dir&gt; results;</span></div>
 <div class="line"><a name="l01126"></a><span class="lineno"> 1126</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l01127"></a><span class="lineno"> 1127</span>&#160;<span class="comment">        // dir, and results will be mutated by FireMultipleDirectionsOneOrigin.</span></div>
+<div class="line"><a name="l01127"></a><span class="lineno"> 1127</span>&#160;<span class="comment">        // dir, and results will be mutated by CastMultipleDirectionsOneOrigin.</span></div>
 <div class="line"><a name="l01128"></a><span class="lineno"> 1128</span>&#160;<span class="comment">        // if results[i] is true, representing a hit,</span></div>
 <div class="line"><a name="l01129"></a><span class="lineno"> 1129</span>&#160;<span class="comment">        // dir[i], dir[i + 1], dir[i + 2] represents a hit point.</span></div>
-<div class="line"><a name="l01130"></a><span class="lineno"> 1130</span>&#160;<span class="comment">        status = FireMultipleDirectionsOneOrigin(bvh, p1.data(), dir.data(), count_dir, max_distance, results.data());</span></div>
+<div class="line"><a name="l01130"></a><span class="lineno"> 1130</span>&#160;<span class="comment">        status = CastMultipleDirectionsOneOrigin(bvh, p1.data(), dir.data(), count_dir, max_distance, results.data());</span></div>
 <div class="line"><a name="l01131"></a><span class="lineno"> 1131</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l01132"></a><span class="lineno"> 1132</span>&#160;<span class="comment">        if (status != 1) {</span></div>
 <div class="line"><a name="l01133"></a><span class="lineno"> 1133</span>&#160;<span class="comment">            // Error!</span></div>
-<div class="line"><a name="l01134"></a><span class="lineno"> 1134</span>&#160;<span class="comment">            std::cerr &lt;&lt; &quot;Error at FireMultipleDirectionsOneOrigin, code: &quot; &lt;&lt; status &lt;&lt; std::endl;</span></div>
+<div class="line"><a name="l01134"></a><span class="lineno"> 1134</span>&#160;<span class="comment">            std::cerr &lt;&lt; &quot;Error at CastMultipleDirectionsOneOrigin, code: &quot; &lt;&lt; status &lt;&lt; std::endl;</span></div>
 <div class="line"><a name="l01135"></a><span class="lineno"> 1135</span>&#160;<span class="comment">        }</span></div>
 <div class="line"><a name="l01137"></a><span class="lineno"> 1137</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l01138"></a><span class="lineno"> 1138</span>&#160;<span class="comment">        // results should not be an empty container after calling FireMultipleDirectionsOneOrigin.</span></div>
+<div class="line"><a name="l01138"></a><span class="lineno"> 1138</span>&#160;<span class="comment">        // results should not be an empty container after calling CastMultipleDirectionsOneOrigin.</span></div>
 <div class="line"><a name="l01139"></a><span class="lineno"> 1139</span>&#160;<span class="comment">        ASSERT_FALSE(results.empty());</span></div>
 <div class="line"><a name="l01140"></a><span class="lineno"> 1140</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l01141"></a><span class="lineno"> 1141</span>&#160;<span class="comment">        // results.size() should be equal to the amount of rays to fire.</span></div>
+<div class="line"><a name="l01141"></a><span class="lineno"> 1141</span>&#160;<span class="comment">        // results.size() should be equal to the amount of rays to cast.</span></div>
 <div class="line"><a name="l01142"></a><span class="lineno"> 1142</span>&#160;<span class="comment">        ASSERT_EQ(results.size(), count_dir);</span></div>
 <div class="line"><a name="l01143"></a><span class="lineno"> 1143</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l01145"></a><span class="lineno"> 1145</span>&#160;<span class="comment">        //</span></div>
@@ -1197,7 +1214,7 @@ $(function() {
 <div class="line"><a name="l01174"></a><span class="lineno"> 1174</span>&#160;<span class="comment">        }</span></div>
 <div class="line"><a name="l01175"></a><span class="lineno"> 1175</span>&#160;<span class="comment">    }</span></div>
 <div class="line"><a name="l01176"></a><span class="lineno"> 1176</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l01177"></a><span class="lineno"> 1177</span>&#160;<span class="comment">    TEST(EX_raytracer_cinterface, FireOcclusionRays) {</span></div>
+<div class="line"><a name="l01177"></a><span class="lineno"> 1177</span>&#160;<span class="comment">    TEST(EX_raytracer_cinterface, CastOcclusionRays) {</span></div>
 <div class="line"><a name="l01178"></a><span class="lineno"> 1178</span>&#160;<span class="comment">        // Status code variable, value returned by C Interface functions</span></div>
 <div class="line"><a name="l01179"></a><span class="lineno"> 1179</span>&#160;<span class="comment">        // See documentation for HF::Exceptions::HF_STATUS for error code definitions.</span></div>
 <div class="line"><a name="l01180"></a><span class="lineno"> 1180</span>&#160;<span class="comment">        int status = 0;</span></div>
@@ -1295,24 +1312,24 @@ $(function() {
 <div class="line"><a name="l01275"></a><span class="lineno"> 1275</span>&#160;<span class="comment">        const int count_dir_occl = size_dir_occl / 3;</span></div>
 <div class="line"><a name="l01277"></a><span class="lineno"> 1277</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l01278"></a><span class="lineno"> 1278</span>&#160;<span class="comment">        // dir_occl represents direction components in R3, size_dir_occl should be a multiple of 3 --</span></div>
-<div class="line"><a name="l01279"></a><span class="lineno"> 1279</span>&#160;<span class="comment">        // or, if dir_occl has three members, count_dir_occl should be 1 (only one ray fired)</span></div>
+<div class="line"><a name="l01279"></a><span class="lineno"> 1279</span>&#160;<span class="comment">        // or, if dir_occl has three members, count_dir_occl should be 1 (only one ray cast)</span></div>
 <div class="line"><a name="l01280"></a><span class="lineno"> 1280</span>&#160;<span class="comment">        ASSERT_TRUE(size_dir_occl % 3 == 0 || (size_dir_occl == 3 &amp;&amp; count_dir_occl == 1));</span></div>
 <div class="line"><a name="l01281"></a><span class="lineno"> 1281</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l01283"></a><span class="lineno"> 1283</span>&#160;<span class="comment">        // The array results should be the amount of rays we are firing, i.e. the value of count_dir_occl.</span></div>
 <div class="line"><a name="l01284"></a><span class="lineno"> 1284</span>&#160;<span class="comment">        std::array&lt;bool, count_dir_occl&gt; results;</span></div>
 <div class="line"><a name="l01285"></a><span class="lineno"> 1285</span>&#160;<span class="comment">        float max_distance_occl = 9999.0f;</span></div>
 <div class="line"><a name="l01286"></a><span class="lineno"> 1286</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l01287"></a><span class="lineno"> 1287</span>&#160;<span class="comment">        status = FireOcclusionRays(bvh, p1_occl.data(), dir_occl.data(), count_origin, count_dir_occl, max_distance_occl, results.data());</span></div>
+<div class="line"><a name="l01287"></a><span class="lineno"> 1287</span>&#160;<span class="comment">        status = CastOcclusionRays(bvh, p1_occl.data(), dir_occl.data(), count_origin, count_dir_occl, max_distance_occl, results.data());</span></div>
 <div class="line"><a name="l01288"></a><span class="lineno"> 1288</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l01289"></a><span class="lineno"> 1289</span>&#160;<span class="comment">        if (status != 1) {</span></div>
 <div class="line"><a name="l01290"></a><span class="lineno"> 1290</span>&#160;<span class="comment">            // Error!</span></div>
-<div class="line"><a name="l01291"></a><span class="lineno"> 1291</span>&#160;<span class="comment">            std::cerr &lt;&lt; &quot;Error at FireOcclusionRays, code: &quot; &lt;&lt; status &lt;&lt; std::endl;</span></div>
+<div class="line"><a name="l01291"></a><span class="lineno"> 1291</span>&#160;<span class="comment">            std::cerr &lt;&lt; &quot;Error at CastOcclusionRays, code: &quot; &lt;&lt; status &lt;&lt; std::endl;</span></div>
 <div class="line"><a name="l01292"></a><span class="lineno"> 1292</span>&#160;<span class="comment">        }</span></div>
 <div class="line"><a name="l01294"></a><span class="lineno"> 1294</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l01295"></a><span class="lineno"> 1295</span>&#160;<span class="comment">        // results should not be empty after calling FireOcclusionRays.</span></div>
+<div class="line"><a name="l01295"></a><span class="lineno"> 1295</span>&#160;<span class="comment">        // results should not be empty after calling CastOcclusionRays.</span></div>
 <div class="line"><a name="l01296"></a><span class="lineno"> 1296</span>&#160;<span class="comment">        ASSERT_FALSE(results.empty());</span></div>
 <div class="line"><a name="l01297"></a><span class="lineno"> 1297</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l01298"></a><span class="lineno"> 1298</span>&#160;<span class="comment">        // results.size() should be equal to the amount of occlusion rays to fire.</span></div>
+<div class="line"><a name="l01298"></a><span class="lineno"> 1298</span>&#160;<span class="comment">        // results.size() should be equal to the amount of occlusion rays to cast.</span></div>
 <div class="line"><a name="l01299"></a><span class="lineno"> 1299</span>&#160;<span class="comment">        ASSERT_EQ(results.size(), count_dir_occl);</span></div>
 <div class="line"><a name="l01300"></a><span class="lineno"> 1300</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l01302"></a><span class="lineno"> 1302</span>&#160;<span class="comment">        bool does_occlude = results[0];</span></div>
@@ -1444,14 +1461,14 @@ $(function() {
 <div class="line"><a name="l01429"></a><span class="lineno"> 1429</span>&#160;<span class="comment">        ASSERT_TRUE(count_dir % 3 == 0);</span></div>
 <div class="line"><a name="l01430"></a><span class="lineno"> 1430</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l01431"></a><span class="lineno"> 1431</span>&#160;<span class="comment">        // Declare a pointer to vector&lt;RayResult&gt;.</span></div>
-<div class="line"><a name="l01432"></a><span class="lineno"> 1432</span>&#160;<span class="comment">        // FireRaysDistance will allocate memory for this pointer,</span></div>
+<div class="line"><a name="l01432"></a><span class="lineno"> 1432</span>&#160;<span class="comment">        // CastRaysDistance will allocate memory for this pointer,</span></div>
 <div class="line"><a name="l01433"></a><span class="lineno"> 1433</span>&#160;<span class="comment">        // we must call DestroyRayResultVector on ray_result when we are done with it.</span></div>
 <div class="line"><a name="l01434"></a><span class="lineno"> 1434</span>&#160;<span class="comment">        // ray_result_data will refer to the address of (*ray_result)&#39;s internal buffer.</span></div>
 <div class="line"><a name="l01435"></a><span class="lineno"> 1435</span>&#160;<span class="comment">        // As such, we do NOT call operator delete on ray_result_data.</span></div>
 <div class="line"><a name="l01436"></a><span class="lineno"> 1436</span>&#160;<span class="comment">        std::vector&lt;RayResult&gt;* ray_result = nullptr;</span></div>
 <div class="line"><a name="l01437"></a><span class="lineno"> 1437</span>&#160;<span class="comment">        RayResult* ray_result_data = nullptr;</span></div>
 <div class="line"><a name="l01438"></a><span class="lineno"> 1438</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l01439"></a><span class="lineno"> 1439</span>&#160;<span class="comment">        // Valid input accepted by FireRaysDistance:</span></div>
+<div class="line"><a name="l01439"></a><span class="lineno"> 1439</span>&#160;<span class="comment">        // Valid input accepted by CastRaysDistance:</span></div>
 <div class="line"><a name="l01440"></a><span class="lineno"> 1440</span>&#160;<span class="comment">        //      count_points == count_dir (one direction per origin)</span></div>
 <div class="line"><a name="l01441"></a><span class="lineno"> 1441</span>&#160;<span class="comment">        //      count_points == 1 &amp;&amp; count_directions &gt; 1 (one origin, multiple directions)</span></div>
 <div class="line"><a name="l01442"></a><span class="lineno"> 1442</span>&#160;<span class="comment">        //      count_points &gt; 1 &amp;&amp; count_directions == 1 (multiple origins, one direction)</span></div>
@@ -1459,20 +1476,20 @@ $(function() {
 <div class="line"><a name="l01444"></a><span class="lineno"> 1444</span>&#160;<span class="comment">        // Since we are firing one direction per origin, we must ensure the following:</span></div>
 <div class="line"><a name="l01445"></a><span class="lineno"> 1445</span>&#160;<span class="comment">        ASSERT_EQ(count_points, count_dir);</span></div>
 <div class="line"><a name="l01446"></a><span class="lineno"> 1446</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l01447"></a><span class="lineno"> 1447</span>&#160;<span class="comment">        status = FireRaysDistance(bvh, points.data(), count_points, dir.data(), count_dir, &amp;ray_result, &amp;ray_result_data);</span></div>
+<div class="line"><a name="l01447"></a><span class="lineno"> 1447</span>&#160;<span class="comment">        status = CastRaysDistance(bvh, points.data(), count_points, dir.data(), count_dir, &amp;ray_result, &amp;ray_result_data);</span></div>
 <div class="line"><a name="l01448"></a><span class="lineno"> 1448</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l01449"></a><span class="lineno"> 1449</span>&#160;<span class="comment">        // If invalid values for count_points and count_dir are given to FireRaysDistance,</span></div>
+<div class="line"><a name="l01449"></a><span class="lineno"> 1449</span>&#160;<span class="comment">        // If invalid values for count_points and count_dir are given to CastRaysDistance,</span></div>
 <div class="line"><a name="l01450"></a><span class="lineno"> 1450</span>&#160;<span class="comment">        // ray_result will not be assigned a valid address -- which means ray_result_data,</span></div>
 <div class="line"><a name="l01451"></a><span class="lineno"> 1451</span>&#160;<span class="comment">        // which addresses (*ray_result)&#39;s internal buffer, will also not be assigned a valid address.</span></div>
 <div class="line"><a name="l01452"></a><span class="lineno"> 1452</span>&#160;<span class="comment">        ASSERT_TRUE(ray_result != nullptr);</span></div>
 <div class="line"><a name="l01453"></a><span class="lineno"> 1453</span>&#160;<span class="comment">        ASSERT_TRUE(ray_result_data != nullptr);</span></div>
 <div class="line"><a name="l01454"></a><span class="lineno"> 1454</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l01455"></a><span class="lineno"> 1455</span>&#160;<span class="comment">        // ray_result-&gt;size() should be equal to the amount of rays to fire.</span></div>
+<div class="line"><a name="l01455"></a><span class="lineno"> 1455</span>&#160;<span class="comment">        // ray_result-&gt;size() should be equal to the amount of rays to cast.</span></div>
 <div class="line"><a name="l01456"></a><span class="lineno"> 1456</span>&#160;<span class="comment">        ASSERT_EQ(ray_result-&gt;size(), count_dir);</span></div>
 <div class="line"><a name="l01457"></a><span class="lineno"> 1457</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l01458"></a><span class="lineno"> 1458</span>&#160;<span class="comment">        if (status != 1) {</span></div>
 <div class="line"><a name="l01459"></a><span class="lineno"> 1459</span>&#160;<span class="comment">            // Error!</span></div>
-<div class="line"><a name="l01460"></a><span class="lineno"> 1460</span>&#160;<span class="comment">            std::cerr &lt;&lt; &quot;Error at FireRaysDistance, code: &quot; &lt;&lt; status &lt;&lt; std::endl;</span></div>
+<div class="line"><a name="l01460"></a><span class="lineno"> 1460</span>&#160;<span class="comment">            std::cerr &lt;&lt; &quot;Error at CastRaysDistance, code: &quot; &lt;&lt; status &lt;&lt; std::endl;</span></div>
 <div class="line"><a name="l01461"></a><span class="lineno"> 1461</span>&#160;<span class="comment">        }</span></div>
 <div class="line"><a name="l01463"></a><span class="lineno"> 1463</span>&#160;<span class="comment">        //</span></div>
 <div class="line"><a name="l01464"></a><span class="lineno"> 1464</span>&#160;<span class="comment">        // Memory resource cleanup.</span></div>
@@ -1501,13 +1518,17 @@ $(function() {
 <div class="line"><a name="l01488"></a><span class="lineno"> 1488</span>&#160;<span class="comment">}</span></div>
 <div class="line"><a name="l01489"></a><span class="lineno"> 1489</span>&#160;<span class="comment">*/</span></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <div class="ttc" id="aa00365_html"><div class="ttname"><a href="a00365.html">raytracer_C.h</a></div><div class="ttdoc">C Interface header file for Raytracer functionality.</div></div>
 <div class="ttc" id="aa00353_html"><div class="ttname"><a href="a00353.html">objloader_C.h</a></div><div class="ttdoc">Header file for functions related to loading/storing an OBJ file (a mesh)</div></div>
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.17
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_882abde7eca0231e2bae1ceefe5e858a.html">Cpp</a></li><li class="navelem"><a class="el" href="dir_5d715898c03dcdb47bf950c413823cbf.html">tests</a></li><li class="navelem"><a class="el" href="dir_5f16828ad0a6c808daf466be2f4263d6.html">src</a></li><li class="navelem"><a class="el" href="a00293.html">embree_raytracer_cinterface.cpp</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
 </body>
 </html>

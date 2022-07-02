@@ -89,7 +89,7 @@ R\+T\+C\+Device \mbox{\hyperlink{a01357_a5608742889ff45a0294fdf21e5a85b2e}{devic
 R\+T\+C\+Scene \mbox{\hyperlink{a01357_a7c66f28f5b889021767745d198661da0}{scene}}
 \begin{DoxyCompactList}\small\item\em Container for a set of geometries, and the B\+VH. \href{https://www.embree.org/api.html\#scene-object}{\texttt{ https\+://www.\+embree.\+org/api.\+html\#scene-\/object}}. \end{DoxyCompactList}\item 
 R\+T\+C\+Intersect\+Context \mbox{\hyperlink{a01357_a01968c52807e6930909b7f9c31f45e80}{context}}
-\begin{DoxyCompactList}\small\item\em Context to fire rays within. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Context to cast rays within. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{a00398_a01349}{Triangle}} $\ast$ \mbox{\hyperlink{a01357_a6eced6bbe321079476603f7e7ef97ed8}{triangles}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{a00398_a01349}{Triangle}} buffer. Is used in multiple places, but contents are dumped. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{a00398_a01345}{Vertex}} $\ast$ \mbox{\hyperlink{a01357_a62b06bf58c3b134de8f271fbc778e412}{Vertices}}
@@ -1010,14 +1010,14 @@ A \mbox{\hyperlink{a01361}{Hit\+Struct}} containing information about the inters
 \DoxyCodeLine{}
 \DoxyCodeLine{HitStruct res;}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Fire a ray straight down}}
+\DoxyCodeLine{\textcolor{comment}{// Cast a ray straight down}}
 \DoxyCodeLine{res = ert.Intersect\_IMPL(0, 0, 1, 0, 0, -\/1);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Print distance if it connected}}
 \DoxyCodeLine{\textcolor{keywordflow}{if} (res.DidHit()) std::cerr << res.distance << std::endl;}
 \DoxyCodeLine{\textcolor{keywordflow}{else} std::cerr << \textcolor{stringliteral}{"Miss"} << std::endl;}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Fire a ray straight up}}
+\DoxyCodeLine{\textcolor{comment}{// Cast a ray straight up}}
 \DoxyCodeLine{res = ert.Intersect\_IMPL(0, 0, 1, 0, 0, 1);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{//Print distance if it connected}}
@@ -1153,7 +1153,7 @@ References H\+F\+::\+Ray\+Tracer\+::\+Hit\+Struct$<$ numeric\+\_\+type $>$\+::\+
 
 
 
-Referenced by Fire\+Rays\+Distance(), Fire\+Single\+Ray\+Distance(), and T\+E\+S\+T().
+Referenced by Cast\+Rays\+Distance(), Cast\+Single\+Ray\+Distance(), and T\+E\+S\+T().
 
 Here is the call graph for this function\+:
 \nopagebreak
@@ -1355,7 +1355,7 @@ Occulsion rays are faster than the other ray functions, but can only tell if a r
 \DoxyCodeLine{\textcolor{comment}{// Create RayTracer}}
 \DoxyCodeLine{\mbox{\hyperlink{a01357_aec975d50cd4a80c595e611db321713b8}{EmbreeRayTracer}} ert(std::vector<\mbox{\hyperlink{a01297}{MeshInfo<float>}}>\{\mbox{\hyperlink{a01297}{MeshInfo<float>}}(plane\_vertices, plane\_indices, 0, \textcolor{stringliteral}{" "})\});}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Fire a ray straight down}}
+\DoxyCodeLine{\textcolor{comment}{// Cast a ray straight down}}
 \DoxyCodeLine{\textcolor{keywordtype}{bool} res = ert.Occluded\_IMPL(}
 \DoxyCodeLine{    std::array<float, 3>\{ 0, 0, 1 \},}
 \DoxyCodeLine{    std::array<float, 3>\{ 0, 0, -\/1 \}}
@@ -1365,7 +1365,7 @@ Occulsion rays are faster than the other ray functions, but can only tell if a r
 \DoxyCodeLine{\textcolor{keywordflow}{if} (res) std::cerr << \textcolor{stringliteral}{"True"} << std::endl;}
 \DoxyCodeLine{\textcolor{keywordflow}{else} std::cerr << \textcolor{stringliteral}{"False"} << std::endl;}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Fire a ray straight up}}
+\DoxyCodeLine{\textcolor{comment}{// Cast a ray straight up}}
 \DoxyCodeLine{res = ert.Occluded\_IMPL(}
 \DoxyCodeLine{    std::array<float, 3>\{ 0, 0, 1 \},}
 \DoxyCodeLine{    std::array<float, 3>\{ 0, 0, 1 \}}
@@ -1450,14 +1450,14 @@ True if the ray intersected any geometry. False otherwise.
 \DoxyCodeLine{\textcolor{comment}{// Create RayTracer}}
 \DoxyCodeLine{\mbox{\hyperlink{a01357_aec975d50cd4a80c595e611db321713b8}{EmbreeRayTracer}} ert(std::vector<\mbox{\hyperlink{a01297}{MeshInfo<float>}}>\{\mbox{\hyperlink{a01297}{MeshInfo<float>}}(plane\_vertices, plane\_indices, 0, \textcolor{stringliteral}{" "})\});}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Fire a ray straight down}}
+\DoxyCodeLine{\textcolor{comment}{// Cast a ray straight down}}
 \DoxyCodeLine{\textcolor{keywordtype}{bool} res = ert.Occluded\_IMPL(0, 0, 1, 0, 0, -\/1);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Print Results}}
 \DoxyCodeLine{\textcolor{keywordflow}{if} (res) std::cerr << \textcolor{stringliteral}{"True"} << std::endl;}
 \DoxyCodeLine{\textcolor{keywordflow}{else} std::cerr << \textcolor{stringliteral}{"False"} << std::endl;}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Fire a ray straight up}}
+\DoxyCodeLine{\textcolor{comment}{// Cast a ray straight up}}
 \DoxyCodeLine{res = ert.Occluded\_IMPL(0, 0, 1, 0, 0, 1);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Print results}}
@@ -1507,13 +1507,13 @@ Cast multiple occlusion rays in parallel.
 
 
 \begin{DoxyParams}{Parameters}
-{\em origins} & A list of origins. If only one is supplied then it will be fired for every direction in directions. \\
+{\em origins} & A list of origins. If only one is supplied then it will be cast for every direction in directions. \\
 \hline
-{\em directions} & A list of directions. If only one is supplied then it will be fired for every origin in origins \\
+{\em directions} & A list of directions. If only one is supplied then it will be cast for every origin in origins \\
 \hline
 {\em max\+\_\+distance} & Maximum distance the ray can travel \\
 \hline
-{\em parallel} & Whether or not to fire the rays in parallel. \\
+{\em parallel} & Whether or not to cast the rays in parallel. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -1521,13 +1521,13 @@ An ordered array of bools where every true indicates a hit and every false indic
 \end{DoxyReturn}
 
 
-Can be fired in 3 configurations\+: 
+Can be cast in 3 configurations\+: 
 
 
 \begin{DoxyItemize}
-\item Equal amount of directions/origins\+: Fire a ray for every pair of origin/direction in order. i.\+e. (origin\mbox{[}0\mbox{]}, direction\mbox{[}0\mbox{]}), (origin\mbox{[}1\mbox{]}, direction\mbox{[}1\mbox{]})  
-\item One direction, multiple origins\+: Fire a ray in the given direction from each origin point in origins.  
-\item One origin, multiple directions\+: Fire a ray from the origin point in each direction in directions.  
+\item Equal amount of directions/origins\+: Cast a ray for every pair of origin/direction in order. i.\+e. (origin\mbox{[}0\mbox{]}, direction\mbox{[}0\mbox{]}), (origin\mbox{[}1\mbox{]}, direction\mbox{[}1\mbox{]})  
+\item One direction, multiple origins\+: Cast a ray in the given direction from each origin point in origins.  
+\item One origin, multiple directions\+: Cast a ray from the origin point in each direction in directions.  
 \end{DoxyItemize}
 
 \begin{DoxyParagraph}{Example}
@@ -1588,7 +1588,7 @@ References Occluded\+\_\+\+I\+M\+P\+L().
 
 
 
-Referenced by Fire\+Occlusion\+Rays().
+Referenced by Cast\+Occlusion\+Rays().
 
 Here is the call graph for this function\+:
 \nopagebreak
@@ -1714,7 +1714,7 @@ true if the ray hit, false otherwise
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keywordtype}{bool} res;}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Fire a ray straight down directly at the plane}}
+\DoxyCodeLine{\textcolor{comment}{// Cast a ray straight down directly at the plane}}
 \DoxyCodeLine{\textcolor{keywordtype}{float} x = 0; \textcolor{keywordtype}{float} y = 0; \textcolor{keywordtype}{float} z = 1;}
 \DoxyCodeLine{res = ert.PointIntersection(x, y, z, 0, 0, -\/1);}
 \DoxyCodeLine{}
@@ -1722,7 +1722,7 @@ true if the ray hit, false otherwise
 \DoxyCodeLine{\textcolor{keywordflow}{if} (res) std::cerr << \textcolor{stringliteral}{"("} << x << \textcolor{stringliteral}{", "} << y << \textcolor{stringliteral}{", "} << z << \textcolor{stringliteral}{")"} << std::endl;}
 \DoxyCodeLine{\textcolor{keywordflow}{else} std::cerr << \textcolor{stringliteral}{"Miss"} << std::endl;}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Fire a ray straight up}}
+\DoxyCodeLine{\textcolor{comment}{// Cast a ray straight up}}
 \DoxyCodeLine{x = 0; y = 0; z = 1;}
 \DoxyCodeLine{res = ert.PointIntersection(x, y, z, 0, 0, 1);}
 \DoxyCodeLine{}
@@ -1761,7 +1761,7 @@ Cast a ray and overwrite the origin with the hitpoint if it intersects any geome
 
 
 \begin{DoxyParams}{Parameters}
-{\em dir} & Direction to fire the ray in. \\
+{\em dir} & Direction to cast the ray in. \\
 \hline
 {\em origin} & Start point of the ray. Updated to contain the hitpoint if successful. \\
 \hline
@@ -1797,7 +1797,7 @@ True if the ray intersected some geometry and the origin is updated with the hit
 \DoxyCodeLine{\textcolor{comment}{// Create RayTracer}}
 \DoxyCodeLine{\mbox{\hyperlink{a01357_aec975d50cd4a80c595e611db321713b8}{EmbreeRayTracer}} ert(std::vector<\mbox{\hyperlink{a01297}{MeshInfo<float>}}>\{\mbox{\hyperlink{a01297}{MeshInfo<float>}}(plane\_vertices, plane\_indices, 0, \textcolor{stringliteral}{" "})\});}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Fire a ray straight down}}
+\DoxyCodeLine{\textcolor{comment}{// Cast a ray straight down}}
 \DoxyCodeLine{std::array<float, 3> origin\{ 0,0,1 \};}
 \DoxyCodeLine{\textcolor{keywordtype}{bool} res = ert.PointIntersection(}
 \DoxyCodeLine{    origin,}
@@ -1808,7 +1808,7 @@ True if the ray intersected some geometry and the origin is updated with the hit
 \DoxyCodeLine{\textcolor{keywordflow}{if} (res) std::cerr << \textcolor{stringliteral}{"("} << origin[0] << \textcolor{stringliteral}{", "} << origin[1] << \textcolor{stringliteral}{", "} << origin[2] << \textcolor{stringliteral}{")"} << std::endl;}
 \DoxyCodeLine{\textcolor{keywordflow}{else} std::cerr << \textcolor{stringliteral}{"Miss"} << std::endl;}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Fire a ray straight up}}
+\DoxyCodeLine{\textcolor{comment}{// Cast a ray straight up}}
 \DoxyCodeLine{origin = std::array<float, 3>\{ 0, 0, 1 \};}
 \DoxyCodeLine{res = ert.PointIntersection(}
 \DoxyCodeLine{    origin,}
@@ -1832,7 +1832,7 @@ References C\+Interface\+Tests\+::mesh\+\_\+id.
 
 
 
-Referenced by Fire\+Ray(), Point\+Intersections(), and T\+E\+S\+T().
+Referenced by Cast\+Ray(), Point\+Intersections(), and T\+E\+S\+T().
 
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -1854,11 +1854,11 @@ Cast multiple rays and recieve hitpoints in return.
 
 
 \begin{DoxyParams}{Parameters}
-{\em origins} & An array of x,y,z coordinates to fire rays from. \\
+{\em origins} & An array of x,y,z coordinates to cast rays from. \\
 \hline
-{\em directions} & An array of x,y,z directions to fire in. \\
+{\em directions} & An array of x,y,z directions to cast in. \\
 \hline
-{\em use\+\_\+parallel} & Cast rays in parallel if true, if not fire in serial. All available cores will be used. \\
+{\em use\+\_\+parallel} & Cast rays in parallel if true, if not cast in serial. All available cores will be used. \\
 \hline
 {\em max\+\_\+distance} & Maximum distance the ray can travel. Any intersections beyond this distance will be ignored. If set to 1, all intersections will be counted regardless of distance. \\
 \hline
@@ -1866,17 +1866,17 @@ Cast multiple rays and recieve hitpoints in return.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-A vector of \mbox{\hyperlink{a01353}{Vector3D}} for the hitpoint of each ray fired. If a ray didn\textquotesingle{}t hit, its point will be invalid, checkable using Vector3\+D.\+Is\+Valid(). 
+A vector of \mbox{\hyperlink{a01353}{Vector3D}} for the hitpoint of each ray cast. If a ray didn\textquotesingle{}t hit, its point will be invalid, checkable using Vector3\+D.\+Is\+Valid(). 
 \end{DoxyReturn}
 
 
-Can be fired in 3 configurations\+: 
+Can be cast in 3 configurations\+: 
 
 
 \begin{DoxyItemize}
-\item Equal amount of directions/origins\+: Fire a ray for every pair of origin/direction in order. i.\+e. (origin\mbox{[}0\mbox{]}, direction\mbox{[}0\mbox{]}), (origin\mbox{[}1\mbox{]}, direction\mbox{[}1\mbox{]})  
-\item One direction, multiple origins\+: Fire a ray in the given direction from each origin point in origins.  
-\item One origin, multiple directions\+: Fire a ray from the origin point in each direction in directions.  
+\item Equal amount of directions/origins\+: Cast a ray for every pair of origin/direction in order. i.\+e. (origin\mbox{[}0\mbox{]}, direction\mbox{[}0\mbox{]}), (origin\mbox{[}1\mbox{]}, direction\mbox{[}1\mbox{]})  
+\item One direction, multiple origins\+: Cast a ray in the given direction from each origin point in origins.  
+\item One origin, multiple directions\+: Cast a ray from the origin point in each direction in directions.  
 \end{DoxyItemize}
 
 
@@ -1915,7 +1915,7 @@ Can be fired in 3 configurations\+:
 \DoxyCodeLine{std::vector<std::array<float, 3>> origins(10);}
 \DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 10; i++) origins[i] = std::array<float, 3>\{\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(2 * i), 0, 1\};}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{// Fire every ray.}}
+\DoxyCodeLine{\textcolor{comment}{// Cast every ray.}}
 \DoxyCodeLine{\textcolor{keyword}{auto} results = ert.PointIntersections(origins, directions);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// Print results}}
@@ -1942,7 +1942,7 @@ References C\+Interface\+Tests\+::mesh\+\_\+id, and Point\+Intersection().
 
 
 
-Referenced by Fire\+Multiple\+Directions\+One\+Origin(), Fire\+Multiple\+Origins\+One\+Direction(), Fire\+Multiple\+Rays(), and T\+E\+S\+T().
+Referenced by Cast\+Multiple\+Directions\+One\+Origin(), Cast\+Multiple\+Origins\+One\+Direction(), Cast\+Multiple\+Rays(), and T\+E\+S\+T().
 
 Here is the call graph for this function\+:
 \nopagebreak
@@ -2006,7 +2006,7 @@ Here is the caller graph for this function\+:
 
 
 
-Context to fire rays within. 
+Context to cast rays within. 
 
 
 

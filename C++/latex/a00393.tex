@@ -143,7 +143,7 @@ Conduct view analysis, then aggregate the results.
 \hline
 {\em node\+\_\+size} & Number of nodes in the array pointed to by node\+\_\+ptr.\\
 \hline
-{\em max\+\_\+rays} & Number of rays to cast for each node in node\+\_\+ptr. Note that this may fire fewer rays than max\+\_\+rays, depending on F\+OV restrictions.\\
+{\em max\+\_\+rays} & Number of rays to cast for each node in node\+\_\+ptr. Note that this may cast fewer rays than max\+\_\+rays, depending on F\+OV restrictions.\\
 \hline
 {\em upward\+\_\+fov} & Maximum degrees upward from the viewer\textquotesingle{}s eye level to consider. \\
 \hline
@@ -273,7 +273,7 @@ Conduct view analysis, and aggregate the results.
 \hline
 {\em node\+\_\+size} & Number of nodes in the array pointed to by node\+\_\+ptr.\\
 \hline
-{\em max\+\_\+rays} & Number of rays to cast for each node in node\+\_\+ptr. Note that this may fire fewer rays than max\+\_\+rays depending on fov restrictions.\\
+{\em max\+\_\+rays} & Number of rays to cast for each node in node\+\_\+ptr. Note that this may cast fewer rays than max\+\_\+rays depending on fov restrictions.\\
 \hline
 {\em upward\+\_\+fov} & Maximum degrees upward from the viewer\textquotesingle{}s eye level to consider. \\
 \hline
@@ -540,7 +540,7 @@ The analysis performed by this function is identical to that described in Spheri
 \begin{DoxySeeAlso}{See also}
 \mbox{\hyperlink{a00393_ga6ca336e3887ef82d17b0713c2bf862df}{Fibbonacci\+Distribute\+Points}} For details on how the directions are calculated from num\+\_\+rays. 
 
-\mbox{\hyperlink{a00393_gab99d16350ec1a4cac1dec3cbd731d7d8}{Spherical\+View\+Analysis}} to get the result of every ray fired instead of summarizing the results. 
+\mbox{\hyperlink{a00393_gab99d16350ec1a4cac1dec3cbd731d7d8}{Spherical\+View\+Analysis}} to get the result of every ray cast instead of summarizing the results. 
 
 \mbox{\hyperlink{a00400_a1fcaa17d2a8df8896a3b0447973bd07b}{A\+G\+G\+R\+E\+G\+A\+T\+E\+\_\+\+T\+Y\+PE}} for a list of aggregation methods. 
 
@@ -674,7 +674,7 @@ Conduct view analysis with any Raytracer in parallel.
 \hline
 \end{DoxyTemplParams}
 \begin{DoxyReturn}{Returns}
-An {\itshape approximately} num\+\_\+rays $\ast$ Nodes.\+size() long vector of R\+ES with one element for every ray fired. Results will be laid out in order with the first node\textquotesingle{}s results first, then the second, etc. Every ray that intersected something, and all elements that didn\textquotesingle{}t result in an intersection will left at their default values.
+An {\itshape approximately} num\+\_\+rays $\ast$ Nodes.\+size() long vector of R\+ES with one element for every ray cast. Results will be laid out in order with the first node\textquotesingle{}s results first, then the second, etc. Every ray that intersected something, and all elements that didn\textquotesingle{}t result in an intersection will left at their default values.
 \end{DoxyReturn}
 \mbox{\hyperlink{a00400}{View\+Analysis}} is calculated by casting a series of rays equally distributed in a sphere from each point in Nodes. This function will run in parallel using all available cores. Depending on R\+ES, this function\textquotesingle{}s complexity and results can vary.
 
