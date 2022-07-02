@@ -139,7 +139,7 @@ def SphericalViewAnalysis(
 
     Examples:
 
-        Conducting view analysis on 2 nodes firing 10 rays.
+        Conducting view analysis on 2 nodes casting 10 rays.
         
         >>> from dhart.geometry import LoadOBJ, MeshInfo, CommonRotations
         >>> from dhart.raytracer import EmbreeBVH  

@@ -106,7 +106,7 @@ def Intersect(
             distance/meshid of -1 indicates a miss.
 
     Examples:
-        Firing a single ray
+        Casting a single ray
 
         >>> import numpy as np
         >>> from numpy.lib import recfunctions as rfn
@@ -121,7 +121,7 @@ def Intersect(
         >>> print(np.around(result,5))
         [1. 0.]
 
-        >>> #Firing rays with an equal number of directions and origins
+        >>> #Casting rays with an equal number of directions and origins
         >>> 
         >>> loaded_obj = ConstructPlane()
         >>> loaded_obj.Rotate(CommonRotations.Yup_to_Zup)
@@ -141,7 +141,7 @@ def Intersect(
          [1. 0.]
          [1. 0.]]
 
-        >>> #Firing multiple rays with one direction and multiple origins
+        >>> #Casting multiple rays with one direction and multiple origins
         >>> 
         >>> loaded_obj = ConstructPlane()
         >>> loaded_obj.Rotate(CommonRotations.Yup_to_Zup)
@@ -259,7 +259,7 @@ def IntersectForPoint(
     else:
         direction = directions
 
-    # They are both lists so we're firing
+    # They are both lists so we're casting
     if directions_is_list and origins_is_list:
         # this will cause a problem in C if it isn't caught
         if len(directions) != len(origins):
@@ -308,7 +308,7 @@ def IntersectOccluded(
         TypeError: BVH is not a valid EmbreeBVH
 
     Example:
-        Firing multiple rays from a single origin in multiple directions
+        Casting multiple rays from a single origin in multiple directions
 
         >>> from dhart.geometry import LoadOBJ, CommonRotations, ConstructPlane
         >>> from dhart.raytracer import EmbreeBVH, IntersectOccluded

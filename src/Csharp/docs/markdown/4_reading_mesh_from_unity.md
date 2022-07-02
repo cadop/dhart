@@ -65,7 +65,7 @@ Just like the previous tutorials, we're going to declare which namespaces this s
 using HumanFactors.Geometry;
 ```
 
-Later you will be using different sections depending on whether you're generating a graph or firing a ray.
+Later you will be using different sections depending on whether you're generating a graph or casting a ray.
 
 ### Setup for Adding References Through The Unity Inspector
 

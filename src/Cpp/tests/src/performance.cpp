@@ -161,7 +161,7 @@ TEST(Performance, CustomTriangleIntersection) {
 			// Create arrays of origins and directions
 			const vector<array<float, 3>> origins(rc, origin);
 
-			printf("Firing %i Rays... \n", rc);
+			printf("Casting %i Rays... \n", rc);
 
 			// Conduct Precise Check
 			precise_watch.StartClock();

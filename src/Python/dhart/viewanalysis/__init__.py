@@ -2,7 +2,7 @@
 Determine visual variety from points within the environment
 ===========================================================
 
-View analysis methods involve firing a large volume of rays from the estimated
+View analysis methods involve casting a large volume of rays from the estimated
 viewpoint of a human in the environment. From this information, conclusions
 can be drawn about how much visual variety there is from a given viewpoint. 
 
