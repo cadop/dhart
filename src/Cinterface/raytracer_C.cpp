@@ -95,7 +95,7 @@ C_INTERFACE DestroyRayTracer(HF::RayTracer::EmbreeRayTracer* rt_to_destroy)
 	return OK;
 }
 
-C_INTERFACE FireSingleRayDistance(
+C_INTERFACE CastSingleRayDistance(
 	HF::RayTracer::EmbreeRayTracer* ert,
 	const float* origin,
 	const float* direction,
@@ -108,7 +108,7 @@ C_INTERFACE FireSingleRayDistance(
 	return HF::Exceptions::HF_STATUS::OK;
 }
 
-C_INTERFACE FireRaysDistance(
+C_INTERFACE CastRaysDistance(
 	HF::RayTracer::EmbreeRayTracer* ert,
 	float* origins,
 	int num_origins,
@@ -118,12 +118,12 @@ C_INTERFACE FireRaysDistance(
 	RayResult** results_data
 )
 {
-	enum FireType {
+	enum CastType {
 		ONE_ORIGIN,
 		ONE_DIRECTION,
 		MULTIPLE_RAY
 	};
-	FireType type;
+	CastType type;
 	if (num_origins == num_directions)
 		type = MULTIPLE_RAY;
 	else if (num_origins == 1 && num_directions > 1)
@@ -190,13 +190,13 @@ C_INTERFACE FireRaysDistance(
 	return OK;
 }
 
-C_INTERFACE FireRay(EmbreeRayTracer* ert, float& x, float& y, float& z, float dx, float dy, float dz, float max_distance, bool& result)
+C_INTERFACE CastRay(EmbreeRayTracer* ert, float& x, float& y, float& z, float dx, float dy, float dz, float max_distance, bool& result)
 {
 	result = ert->PointIntersection(x, y, z, dx, dy, dz, max_distance);
 	return OK;
 }
 
-C_INTERFACE FireMultipleRays(
+C_INTERFACE CastMultipleRays(
 	EmbreeRayTracer* ert,
 	float* origins,
 	const float* directions,
@@ -224,7 +224,7 @@ C_INTERFACE FireMultipleRays(
 	return OK;
 }
 
-C_INTERFACE FireMultipleOriginsOneDirection(EmbreeRayTracer* ert, float* origins, const float* direction, int size, float max_distance, bool* result_array)
+C_INTERFACE CastMultipleOriginsOneDirection(EmbreeRayTracer* ert, float* origins, const float* direction, int size, float max_distance, bool* result_array)
 {
 	auto origin_array = ConvertRawFloatArrayToPoints(origins, size);
 	auto dir_array = ConvertRawFloatArrayToPoints(direction, 1);
@@ -246,7 +246,7 @@ C_INTERFACE FireMultipleOriginsOneDirection(EmbreeRayTracer* ert, float* origins
 	return OK;
 }
 
-C_INTERFACE FireMultipleDirectionsOneOrigin(EmbreeRayTracer* ert, const float* origin, float* directions, int size, float max_distance, bool* result_array)
+C_INTERFACE CastMultipleDirectionsOneOrigin(EmbreeRayTracer* ert, const float* origin, float* directions, int size, float max_distance, bool* result_array)
 {
 	auto origin_array = ConvertRawFloatArrayToPoints(origin, 1);
 	auto dir_array = ConvertRawFloatArrayToPoints(directions, size);
@@ -268,7 +268,7 @@ C_INTERFACE FireMultipleDirectionsOneOrigin(EmbreeRayTracer* ert, const float* o
 	return OK;
 }
 
-C_INTERFACE FireOcclusionRays(EmbreeRayTracer* ert, const float* origins, const float* directions, int origin_size, int direction_size, float max_distance, bool* result_array)
+C_INTERFACE CastOcclusionRays(EmbreeRayTracer* ert, const float* origins, const float* directions, int origin_size, int direction_size, float max_distance, bool* result_array)
 {
 	auto origin_array = ConvertRawFloatArrayToPoints(origins, origin_size);
 	auto direction_array = ConvertRawFloatArrayToPoints(directions, direction_size);

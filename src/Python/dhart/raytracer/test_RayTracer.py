@@ -16,7 +16,7 @@ def test_BVHCreation():
     bvh = EmbreeBVH(obj)
 
 
-def test_FireRay():
+def test_CastRay():
     plane = LoadOBJ(dhart.get_sample_model("plane.obj"), rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(plane)
     origins = [(0, 0, 1), (1, 1, 1), (-1, -1, 1)]
@@ -37,7 +37,7 @@ def test_FireRay():
             pytest.approx(height, hit_point[2])
 
 
-def test_FireMultipleOfTheSameRay():
+def test_CastMultipleOfTheSameRay():
     plane = LoadOBJ(dhart.get_sample_model("plane.obj"), rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(plane)
     origins = [(0, 0, 1), (0, 0, 1), (0, 0, 1)]
@@ -140,7 +140,7 @@ def test_SingleOcclusionRays():
     pass
 
 
-def test_FireRayDistance():
+def test_CastRayDistance():
     import numpy
     plane = LoadOBJ(dhart.get_sample_model("plane.obj"), rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(plane)
@@ -172,7 +172,7 @@ def test_MultiRayDistancereturnType():
     assert isinstance(Intersect(bvh, [[0, 0, 1]], (0, 0, -1)), RayResultList)
     assert isinstance(Intersect(bvh, [[0, 0, 1], [0, 0, 2]], (0, 0, -1)), RayResultList)
 
-def test_FireMultipleRayDistance():
+def test_CastMultipleRayDistance():
     plane = LoadOBJ(dhart.get_sample_model("plane.obj"), rotation=CommonRotations.Yup_to_Zup)
     bvh = EmbreeBVH(plane)
     origins = [(0, 0, 1), (0, 0, 2), (0, 0, 3)] * 5000

@@ -7,6 +7,8 @@ There are a few components to the package, but the main focus is in providing fa
 
 We have extensive documentation on the API, and welcome new contributions and bug fixes. Please make sure to take a look at the contributing guide.  
 
+Currently it is only available on Windows OS. We happily would accept contributors to help expand to Linux. 
+
 Features
 --------
 
@@ -48,6 +50,10 @@ There were dozens of contributors to this project over the years.  It has been l
 
 Example Usage
 -------------
+
+- Python docs: https://cadop.github.io/dhart/Python%20Docs/build/html/index.html
+- C++ and C Interface docs: https://cadop.github.io/dhart/C++/html/index.html
+- C# docs: https://cadop.github.io/dhart/C%23%20Public%20Docs/html/index.html
 
 Once the python package is installed, the basic setup for loading a model (e.g. obj), setting its rotation (if its not default z up), and creating a BVH (the accelerated structure of the mesh) is done by:
 

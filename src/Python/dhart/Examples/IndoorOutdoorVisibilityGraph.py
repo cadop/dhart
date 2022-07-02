@@ -122,7 +122,7 @@ def RunViewAnalysis(
 
 
 def SeperateIndoor(nodes):
-    """ Fire a ray directly upwards from each node to tell if it's indoors or not """
+    """ Cast a ray directly upwards from each node to tell if it's indoors or not """
     indoors = []
     outdoors = []
 

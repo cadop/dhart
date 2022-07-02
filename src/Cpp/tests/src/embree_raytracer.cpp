@@ -132,7 +132,7 @@ TEST(_EmbreeRayTracer, EmbreeGarbageCollectCorrect) {
 	// Delete the original raytracer
 	delete ERT;
 
-	// Try to fire a ray. If this crashes, then it means the copy constructor isn't correctly incrementing the reference counter.
+	// Try to cast a ray. If this crashes, then it means the copy constructor isn't correctly incrementing the reference counter.
 	ERT2.Occluded(std::array<float, 3>{1, 1, 1}, std::array<float, 3>{1, 1, 1});
 }
 
@@ -295,7 +295,7 @@ TEST(_EmbreeRayTracer, EmbreeRayPerformance) {
 }
 
 
-// Fire a large volume of rays to assert that we don't have any issues with race conditions.
+// Cast a large volume of rays to assert that we don't have any issues with race conditions.
 TEST(_EmbreeRayTracer, DeterministicResults) {
 	// Create plane
 	const std::vector<float> plane_vertices{
@@ -321,7 +321,7 @@ TEST(_EmbreeRayTracer, DeterministicResults) {
 		std::vector<std::array<float, 3>> directions(num_rays, std::array<float, 3>{0, 0, -1});
 		std::vector<std::array<float, 3>> origins(num_rays, std::array<float, 3>{0, 0, 2.10000001});
 		
-		// Fire rays in parallel
+		// Cast rays in parallel
 		auto results = ert.PointIntersections(origins, directions);
 
 		// Check the result of each ray
@@ -373,7 +373,7 @@ TEST(_EmbreeRayTracer, PointIntersections) {
 	std::vector<std::array<float, 3>> origins(10);
 	for (int i = 0; i < 10; i++) origins[i] = std::array<float, 3>{static_cast<float>(1.99 * i), 0, 1};
 
-	// Fire every ray. Results should all be true and be within a certain distance of zero;
+	// Cast every ray. Results should all be true and be within a certain distance of zero;
 	auto results = ert.PointIntersections(origins, directions);
 
 	// Print after_added_results
@@ -420,7 +420,7 @@ TEST(_EmbreeRayTracer, Occlusions) {
 	for (int i = 0; i < 5; i++) origins[i] = std::array<float, 3>{0.0f, 0.0f, 1.0f};
 	for (int i = 5; i < 10; i++) origins[i] = std::array<float, 3>{0.0f, 0.0f, -1.0f};
 
-	// Fire every ray.
+	// Cast every ray.
 	std::vector<char> results = ert.Occlusions(origins, directions);
 
 	// Iterate through all after_added_results to print them
@@ -455,7 +455,7 @@ TEST(_EmbreeRayTracer, PointIntersection) {
 	float x = 0; float y = 0; float z = 1;
 	bool res;
 
-	// Fire a ray straight down and ensure it connects with a distance of 1 (within a certain tolerance)
+	// Cast a ray straight down and ensure it connects with a distance of 1 (within a certain tolerance)
 	res = ert.PointIntersection(x, y, z, 0, 0, -1);
 	if (res) std::cerr << "(" << x << ", " << y << ", " << z << ")" << std::endl;
 	else std::cerr << "Miss" << std::endl;
@@ -464,7 +464,7 @@ TEST(_EmbreeRayTracer, PointIntersection) {
 	ASSERT_NEAR(Distance(std::array<float, 3>{x, y, z}, std::array<float, 3>{0, 0, 0}), 0, 0.0001);
 
 	x = 0; y = 0; z = 1;
-	// Fire a ray straight up and ensure it misses
+	// Cast a ray straight up and ensure it misses
 	res = ert.PointIntersection(x, y, z, 0, 0, 1);
 	if (res) std::cerr << "(" << x << ", " << y << ", " << z << ")" << std::endl;
 	else std::cerr << "Miss" << std::endl;
@@ -472,7 +472,7 @@ TEST(_EmbreeRayTracer, PointIntersection) {
 	ASSERT_FALSE(res);
 }
 
-TEST(_EmbreeRayTracer, FireRayArrayOverload) {
+TEST(_EmbreeRayTracer, CastRayArrayOverload) {
 	// Create Plane
 	const vector<float> plane_vertices{
 		-10.0f, 10.0f, 0.0f,
@@ -485,7 +485,7 @@ TEST(_EmbreeRayTracer, FireRayArrayOverload) {
 	// Create RayTracer
 	EmbreeRayTracer ert(vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
 
-	// Fire a ray straight down and ensure it connects with a distance of 1 (within a certain tolerance)
+	// Cast a ray straight down and ensure it connects with a distance of 1 (within a certain tolerance)
 	std::array<float, 3> origin{ 0,0,1 };
 	bool res = ert.PointIntersection(
 		origin,
@@ -499,7 +499,7 @@ TEST(_EmbreeRayTracer, FireRayArrayOverload) {
 	ASSERT_TRUE(res);
 	ASSERT_NEAR(Distance(origin, std::array<float, 3>{0, 0, 0}), 0, 0.0001);
 
-	// Fire a ray straight up and ensure it misses
+	// Cast a ray straight up and ensure it misses
 	origin = std::array<float, 3>{ 0, 0, 1 };
 	res = ert.PointIntersection(
 		origin,
@@ -573,14 +573,14 @@ TEST(_EmbreeRayTracer, Intersect) {
 	// Create RayTracer
 	EmbreeRayTracer ert(vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
 
-	// Fire a ray straight down
+	// Cast a ray straight down
 	auto straight_down = ert.Intersect(0, 0, 1, 0, 0, -1);
 
 	// Print distance if it connected
 	if (straight_down.DidHit()) std::cerr << straight_down.distance << std::endl;
 	else std::cerr << "Miss" << std::endl;
 
-	// Fire a ray straight up and ensure it misses
+	// Cast a ray straight up and ensure it misses
 	auto straight_up = ert.Intersect(0, 0, 1, 0, 0, 1);
 	if (straight_up.DidHit()) std::cerr << straight_up.distance << std::endl;
 	else std::cerr << "Miss" << std::endl;
@@ -611,7 +611,7 @@ TEST(_EmbreeRayTracer, IntersectOutputArguments) {
 
 	bool res = false; float out_dist = -1; int out_id = -1;
 
-	// Fire a ray straight down
+	// Cast a ray straight down
 	res = ert.IntersectOutputArguments(origin, direction, out_dist, out_id);
 	ASSERT_TRUE(res);
 	ASSERT_NEAR(out_dist, 1, 0.0001);
@@ -620,7 +620,7 @@ TEST(_EmbreeRayTracer, IntersectOutputArguments) {
 	if (res) std::cerr << out_dist << std::endl;
 	else std::cerr << "Miss" << std::endl;
 
-	// Fire a ray straight up and ensure it misses
+	// Cast a ray straight up and ensure it misses
 	res = ert.IntersectOutputArguments(origin, origin, out_dist, out_id);
 	ASSERT_FALSE(res);
 
@@ -642,7 +642,7 @@ TEST(_EmbreeRayTracer, Occluded) {
 	// Create RayTracer
 	EmbreeRayTracer ert(vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
 
-	// Fire a ray straight down
+	// Cast a ray straight down
 	bool res = ert.Occluded(
 		std::array<float, 3>{0, 0, 1},
 		std::array<float, 3>{0, 0, -1}
@@ -652,7 +652,7 @@ TEST(_EmbreeRayTracer, Occluded) {
 	if (res) std::cerr << "True" << std::endl;
 	else std::cerr << "False" << std::endl;
 
-	// Fire a ray straight up
+	// Cast a ray straight up
 	res = ert.Occluded(
 		std::array<float, 3>{0, 0, 1},
 		std::array<float, 3>{0, 0, 1}
@@ -663,7 +663,7 @@ TEST(_EmbreeRayTracer, Occluded) {
 	else std::cerr << "False" << std::endl;
 }
 
-TEST(_EmbreeRayTracer, FireOcclusionRayArray) {
+TEST(_EmbreeRayTracer, CastOcclusionRayArray) {
 	//! [EX_Occluded_Array]
 	// Create Plane
 	const vector<float> plane_vertices{
@@ -712,12 +712,12 @@ TEST(_EmbreeRayTracer, OccludedSingle) {
 	// Create RayTracer
 	EmbreeRayTracer ert(vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
 
-	// Fire a ray straight down
+	// Cast a ray straight down
 	bool straight_down = ert.Occluded(0, 0, 1, 0, 0, -1);
 	if (straight_down) std::cerr << "True" << std::endl;
 	else std::cerr << "False" << std::endl;
 
-	// Fire a ray straight up
+	// Cast a ray straight up
 	bool straight_up = ert.Occluded(0, 0, 1, 0, 0, 1);
 	if (straight_up) std::cerr << "True" << std::endl;
 	else std::cerr << "False" << std::endl;
@@ -907,7 +907,7 @@ TEST(_FullRayRequest, DidHit) {
 }
 
 /*!
-	\brief How quickly the raytracer can fire rays directly at a simple plane.
+	\brief How quickly the raytracer can cast rays directly at a simple plane.
 
 	\details
 	Likely isn't truly indicative of the raytracer's performance, but provides a starting point
@@ -1040,7 +1040,7 @@ namespace C_Interface{
 		
 		// Cast both rays. Only one should intersect
 		bool * before_added_results = new bool[2];
-		int err_c = FireOcclusionRays(rt, origins.data(), directions.data(), 2, 2, -1, before_added_results);
+		int err_c = CastOcclusionRays(rt, origins.data(), directions.data(), 2, 2, -1, before_added_results);
 		EXPECT_NE(before_added_results[0], before_added_results[1]);
 
 		// Create a new rotated plane and add it to the BVH
@@ -1050,7 +1050,7 @@ namespace C_Interface{
 
 		// Cast both rays, and now ensure they both intersect
 		bool * after_added_results = new bool[2];
-		err_c = FireOcclusionRays(rt, origins.data(), directions.data(), 2, 2, -1, after_added_results);
+		err_c = CastOcclusionRays(rt, origins.data(), directions.data(), 2, 2, -1, after_added_results);
 		EXPECT_EQ(after_added_results[0], after_added_results[1]);
 
 		// Destroy the Plane and Raytracer
@@ -1075,7 +1075,7 @@ namespace C_Interface{
 		float x = 0; float y = 0; float z = 1;
 		int dx = 0; int dy = 0; int dz = -1;
 		bool res = false;
-		FireRay(ERT, x, y, z, dx, dy, dz, -1, res);
+		CastRay(ERT, x, y, z, dx, dy, dz, -1, res);
 		ASSERT_TRUE(res);
 
 		for (int i = 0; i < num_meshes; i++)
@@ -1102,7 +1102,7 @@ namespace C_Interface{
 		float x = 0; float y = 0; float z = 1;
 		int dx = 0; int dy = 0; int dz = -1;
 		bool res = false;
-		FireRay(ERT, x, y, z, dx, dy, dz, -1, res);
+		CastRay(ERT, x, y, z, dx, dy, dz, -1, res);
 		ASSERT_TRUE(res);
 
 		// Clean up every meshinfo and Raytracer

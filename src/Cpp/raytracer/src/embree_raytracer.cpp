@@ -535,7 +535,7 @@ namespace HF::RayTracer {
 			}
 		}
 		else {
-			throw std::exception("Incorrect usage of firerays");
+			throw std::exception("Incorrect usage of castrays");
 		}
 
 		return out_results;

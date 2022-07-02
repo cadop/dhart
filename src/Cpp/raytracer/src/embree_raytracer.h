@@ -82,7 +82,7 @@ namespace HF::RayTracer {
 		RTCDevice device; 
 		/// Container for a set of geometries, and the BVH. https://www.embree.org/api.html#scene-object
 		RTCScene scene;
-		/// Context to fire rays within.
+		/// Context to cast rays within.
 		RTCIntersectContext context;
 		/// Triangle buffer. Is used in multiple places, but contents are dumped.
 		Triangle* triangles;
@@ -206,14 +206,14 @@ namespace HF::RayTracer {
 
 				HitStruct res;
 
-				// Fire a ray straight down
+				// Cast a ray straight down
 				res = ert.Intersect_IMPL(0, 0, 1, 0, 0, -1);
 
 				// Print distance if it connected
 				if (res.DidHit()) std::cerr << res.distance << std::endl;
 				else std::cerr << "Miss" << std::endl;
 
-				// Fire a ray straight up
+				// Cast a ray straight up
 				res = ert.Intersect_IMPL(0, 0, 1, 0, 0, 1);
 
 				//Print distance if it connected
@@ -272,14 +272,14 @@ namespace HF::RayTracer {
 				// Create RayTracer
 				EmbreeRayTracer ert(std::vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
 
-				// Fire a ray straight down
+				// Cast a ray straight down
 				bool res = ert.Occluded_IMPL(0, 0, 1, 0, 0, -1);
 
 				// Print Results
 				if (res) std::cerr << "True" << std::endl;
 				else std::cerr << "False" << std::endl;
 
-				// Fire a ray straight up
+				// Cast a ray straight up
 				res = ert.Occluded_IMPL(0, 0, 1, 0, 0, 1);
 
 				// Print results
@@ -336,7 +336,7 @@ namespace HF::RayTracer {
 		// Create RayTracer
 		EmbreeRayTracer ert(std::vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
 
-		// Fire a ray straight down
+		// Cast a ray straight down
 		bool res = ert.Occluded_IMPL(
 			std::array<float, 3>{ 0, 0, 1 },
 			std::array<float, 3>{ 0, 0, -1 }
@@ -346,7 +346,7 @@ namespace HF::RayTracer {
 		if (res) std::cerr << "True" << std::endl;
 		else std::cerr << "False" << std::endl;
 
-		// Fire a ray straight up
+		// Cast a ray straight up
 		res = ert.Occluded_IMPL(
 			std::array<float, 3>{ 0, 0, 1 },
 			std::array<float, 3>{ 0, 0, 1 }
@@ -644,7 +644,7 @@ namespace HF::RayTracer {
 		/// <summary>
 		/// Cast a ray and overwrite the origin with the hitpoint if it intersects any geometry.
 		/// </summary>
-		/// <param name="dir"> Direction to fire the ray in. </param>
+		/// <param name="dir"> Direction to cast the ray in. </param>
 		/// <param name="origin">
 		/// Start point of the ray. Updated to contain the hitpoint if successful.
 		/// </param>
@@ -681,7 +681,7 @@ namespace HF::RayTracer {
 				// Create RayTracer
 				EmbreeRayTracer ert(std::vector<MeshInfo<float>>{MeshInfo<float>(plane_vertices, plane_indices, 0, " ")});
 
-				// Fire a ray straight down
+				// Cast a ray straight down
 				std::array<float, 3> origin{ 0,0,1 };
 				bool res = ert.PointIntersection(
 					origin,
@@ -692,7 +692,7 @@ namespace HF::RayTracer {
 				if (res) std::cerr << "(" << origin[0] << ", " << origin[1] << ", " << origin[2] << ")" << std::endl;
 				else std::cerr << "Miss" << std::endl;
 
-				// Fire a ray straight up
+				// Cast a ray straight up
 				origin = std::array<float, 3>{ 0, 0, 1 };
 				res = ert.PointIntersection(
 					origin,
@@ -758,7 +758,7 @@ namespace HF::RayTracer {
 
 				bool res;
 
-				// Fire a ray straight down directly at the plane
+				// Cast a ray straight down directly at the plane
 				float x = 0; float y = 0; float z = 1;
 				res = ert.PointIntersection(x, y, z, 0, 0, -1);
 
@@ -766,7 +766,7 @@ namespace HF::RayTracer {
 				if (res) std::cerr << "(" << x << ", " << y << ", " << z << ")" << std::endl;
 				else std::cerr << "Miss" << std::endl;
 
-				// Fire a ray straight up
+				// Cast a ray straight up
 				x = 0; y = 0; z = 1;
 				res = ert.PointIntersection(x, y, z, 0, 0, 1);
 
@@ -790,10 +790,10 @@ namespace HF::RayTracer {
 		);
 
 		/// <summary> Cast multiple rays and recieve hitpoints in return. </summary>
-		/// <param name="origins"> An array of x,y,z coordinates to fire rays from. </param>
-		/// <param name="directions"> An array of x,y,z directions to fire in. </param>
+		/// <param name="origins"> An array of x,y,z coordinates to cast rays from. </param>
+		/// <param name="directions"> An array of x,y,z directions to cast in. </param>
 		/// <param name="use_parallel">
-		/// Cast rays in parallel if true, if not fire in serial. All available cores will be used.
+		/// Cast rays in parallel if true, if not cast in serial. All available cores will be used.
 		/// </param>
 		/// <param name="max_distance">
 		/// Maximum distance the ray can travel. Any intersections beyond this distance will be
@@ -801,23 +801,23 @@ namespace HF::RayTracer {
 		/// </param>
 		/// <param name="mesh_id"> (UNUSED) Only intersect with the mesh of this ID </param>
 		/// <returns>
-		/// A vector of <see cref="Vector3D" /> for the hitpoint of each ray fired. If a ray
+		/// A vector of <see cref="Vector3D" /> for the hitpoint of each ray cast. If a ray
 		/// didn't hit, its point will be invalid, checkable using <see
 		/// cref="Vector3D.IsValid()" />.
 		/// </returns>
 		/// <remarks>
-		/// <para> Can be fired in 3 configurations: </para>
+		/// <para> Can be cast in 3 configurations: </para>
 		/// <list type="bullet">
 		/// <item>
-		/// Equal amount of directions/origins: Fire a ray for every pair of origin/direction in
+		/// Equal amount of directions/origins: Cast a ray for every pair of origin/direction in
 		/// order. i.e. (origin[0], direction[0]), (origin[1], direction[1])
 		/// </item>
 		/// <item>
-		/// One direction, multiple origins: Fire a ray in the given direction from each origin
+		/// One direction, multiple origins: Cast a ray in the given direction from each origin
 		/// point in origins.
 		/// </item>
 		/// <item>
-		/// One origin, multiple directions: Fire a ray from the origin point in each direction
+		/// One origin, multiple directions: Cast a ray from the origin point in each direction
 		/// in directions.
 		/// </item>
 		/// </list>
@@ -855,7 +855,7 @@ namespace HF::RayTracer {
 				std::vector<std::array<float, 3>> origins(10);
 				for (int i = 0; i < 10; i++) origins[i] = std::array<float, 3>{static_cast<float>(2 * i), 0, 1};
 
-				// Fire every ray.
+				// Cast every ray.
 				auto results = ert.PointIntersections(origins, directions);
 
 				// Print results
@@ -885,32 +885,32 @@ namespace HF::RayTracer {
 
 		/// <summary> Cast multiple occlusion rays in parallel. </summary>
 		/// <param name="origins">
-		/// A list of origins. If only one is supplied then it will be fired for every direction
+		/// A list of origins. If only one is supplied then it will be cast for every direction
 		/// in directions.
 		/// </param>
 		/// <param name="directions">
-		/// A list of directions. If only one is supplied then it will be fired for every origin
+		/// A list of directions. If only one is supplied then it will be cast for every origin
 		/// in origins
 		/// </param>
 		/// <param name="max_distance"> Maximum distance the ray can travel </param>
-		/// <param name="parallel"> Whether or not to fire the rays in parallel. </param>
+		/// <param name="parallel"> Whether or not to cast the rays in parallel. </param>
 		/// <returns>
 		/// An ordered array of bools where every true indicates a hit and every false indicates
 		/// a miss.
 		/// </returns>
 		/// <remarks>
-		/// <para> Can be fired in 3 configurations: </para>
+		/// <para> Can be cast in 3 configurations: </para>
 		/// <list type="bullet">
 		/// <item>
-		/// Equal amount of directions/origins: Fire a ray for every pair of origin/direction in
+		/// Equal amount of directions/origins: Cast a ray for every pair of origin/direction in
 		/// order. i.e. (origin[0], direction[0]), (origin[1], direction[1])
 		/// </item>
 		/// <item>
-		/// One direction, multiple origins: Fire a ray in the given direction from each origin
+		/// One direction, multiple origins: Cast a ray in the given direction from each origin
 		/// point in origins.
 		/// </item>
 		/// <item>
-		/// One origin, multiple directions: Fire a ray from the origin point in each direction
+		/// One origin, multiple directions: Cast a ray from the origin point in each direction
 		/// in directions.
 		/// </item>
 		/// </list>

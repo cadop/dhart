@@ -168,9 +168,9 @@ int main(int argc, const char* argv[]) {
 	----------------------------------
 		LoadOBJ - objloader_C.h
 		CreateRaytracer - raytracer_C.h
-		FireRay - raytracer_C.h
-		FireSingleRayDistance - raytracer_C.h
-		FireOcclusionRays - raytracer_C.h
+		CastRay - raytracer_C.h
+		CastSingleRayDistance - raytracer_C.h
+		CastOcclusionRays - raytracer_C.h
 		DestroyRaytracer - raytracer_C.h
 		DestroyMeshInfo - objloader_C.h
 
@@ -192,18 +192,18 @@ void CInterfaceTests::raycasting(HINSTANCE dll_hf) {
 	// typedefs for brevity of syntax
 	typedef int (*p_LoadOBJ)(const char*, int, float, float, float, std::vector<HF::Geometry::MeshInfo>**);
 	typedef int (*p_CreateRaytracer)(std::vector<HF::Geometry::MeshInfo>*, HF::RayTracer::EmbreeRayTracer**);
-	typedef int (*p_FireRay)(HF::RayTracer::EmbreeRayTracer* ert, float& x, float& y, float& z, float dx, float dy, float dz, float max_distance, bool& result);
-	typedef int (*p_FireSingleRayDistance)(HF::RayTracer::EmbreeRayTracer*, const float*, const float*, const float, float*, int*);
-	typedef int (*p_FireOcclusionRays)(HF::RayTracer::EmbreeRayTracer*, const float*, const float*, int, int, float, bool*);
+	typedef int (*p_CastRay)(HF::RayTracer::EmbreeRayTracer* ert, float& x, float& y, float& z, float dx, float dy, float dz, float max_distance, bool& result);
+	typedef int (*p_CastSingleRayDistance)(HF::RayTracer::EmbreeRayTracer*, const float*, const float*, const float, float*, int*);
+	typedef int (*p_CastOcclusionRays)(HF::RayTracer::EmbreeRayTracer*, const float*, const float*, int, int, float, bool*);
 	typedef int (*p_DestroyRayTracer)(HF::RayTracer::EmbreeRayTracer*);
 	typedef int (*p_DestroyMeshInfo)(std::vector<HF::Geometry::MeshInfo>*);
 
 	// Create pointers-to-functions addressed at the procedures defined in dll_hf, by using GetProcAddress()
 	auto LoadOBJ = (p_LoadOBJ)GetProcAddress(dll_hf, "LoadOBJ");
 	auto CreateRaytracer = (p_CreateRaytracer)GetProcAddress(dll_hf, "CreateRaytracer");
-	auto FireRay = (p_FireRay)GetProcAddress(dll_hf, "FireRay");
-	auto FireSingleRayDistance = (p_FireSingleRayDistance)GetProcAddress(dll_hf, "FireSingleRayDistance");
-	auto FireOcculsionRays = (p_FireOcclusionRays)GetProcAddress(dll_hf, "FireOcclusionRays");
+	auto CastRay = (p_CastRay)GetProcAddress(dll_hf, "CastRay");
+	auto CastSingleRayDistance = (p_CastSingleRayDistance)GetProcAddress(dll_hf, "CastSingleRayDistance");
+	auto CastOcculsionRays = (p_CastOcclusionRays)GetProcAddress(dll_hf, "CastOcclusionRays");
 	auto DestroyRayTracer = (p_DestroyRayTracer)GetProcAddress(dll_hf, "DestroyRayTracer");
 	auto DestroyMeshInfo = (p_DestroyMeshInfo)GetProcAddress(dll_hf, "DestroyMeshInfo");
 
@@ -270,7 +270,7 @@ void CInterfaceTests::raycasting(HINSTANCE dll_hf) {
 	// These are vector components, not Cartesian coordinates.
 	float dir[] = { 0.0f, 0.0f, -1.0f };
 
-	// Fire a ray for the hitpoint (Fire a ray, get a hit point back)
+	// Cast a ray for the hitpoint (Cast a ray, get a hit point back)
 	float max_distance = -1;
 	bool did_hit = false;
 
@@ -278,13 +278,13 @@ void CInterfaceTests::raycasting(HINSTANCE dll_hf) {
 	// hit_point will be initialized to the origin point values,
 	// and if a hit occurs, hit_point will be set to the hit coordinate values.
 	//
-	// We will know if a hit occurs if did_hit is set 'true' by FireRay.
+	// We will know if a hit occurs if did_hit is set 'true' by CastRay.
 	float hit_point[] = { p1[0], p1[1], p1[2] };
-	status = FireRay(bvh, hit_point[0], hit_point[1], hit_point[2], dir[0], dir[1], dir[2], max_distance, did_hit);
+	status = CastRay(bvh, hit_point[0], hit_point[1], hit_point[2], dir[0], dir[1], dir[2], max_distance, did_hit);
 
 	if (status != 1) {
 		// Error!
-		std::cerr << "Error at FireRay, code: " << status << std::endl;
+		std::cerr << "Error at CastRay, code: " << status << std::endl;
 	}
 
 	if (did_hit) {
@@ -294,19 +294,19 @@ void CInterfaceTests::raycasting(HINSTANCE dll_hf) {
 		std::cout << "Hit point: " << "(miss)" << std::endl;
 	}
 
-	// Fire a ray for the distance/meshid (Fire a ray, get a distance/mesh ID back)
+	// Cast a ray for the distance/meshid (Cast a ray, get a distance/mesh ID back)
 	float distance = 0.0f;
 	int mesh_id = -1;
-	status = FireSingleRayDistance(bvh, p1, dir, max_distance, &distance, &mesh_id);
+	status = CastSingleRayDistance(bvh, p1, dir, max_distance, &distance, &mesh_id);
 
 	if (status != 1) {
 		// Error!
-		std::cerr << "Error at FireSingleRayDistance, code: " << status << std::endl;
+		std::cerr << "Error at CastSingleRayDistance, code: " << status << std::endl;
 	}
 
 	std::cout << "Distance is " << distance << ", " << "meshid is " << mesh_id << std::endl;
 
-	// See if it occludes (Fire occlusion rays)
+	// See if it occludes (Cast occlusion rays)
 	//
 	// The array p1_occl represents the same point as that of p1,
 	// but for clarity, we create another array representing that point for this example.
@@ -326,11 +326,11 @@ void CInterfaceTests::raycasting(HINSTANCE dll_hf) {
 	// The array results should be the amount of rays we are firing, i.e. the value of count_origin.
 	bool results[size_p1_occl] = { false };
 	float max_distance_occl = 9999.0f;
-	status = FireOcculsionRays(bvh, p1_occl, dir_occl, count_origin, count_dir_occl, max_distance_occl, results);
+	status = CastOcculsionRays(bvh, p1_occl, dir_occl, count_origin, count_dir_occl, max_distance_occl, results);
 
 	if (status != 1) {
 		// Error!
-		std::cerr << "Error at FireOcclusionRays, code: " << status << std::endl;
+		std::cerr << "Error at CastOcclusionRays, code: " << status << std::endl;
 	}
 
 	bool does_occlude = results[0];

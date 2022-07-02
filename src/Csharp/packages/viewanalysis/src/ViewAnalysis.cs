@@ -55,7 +55,7 @@ namespace HumanFactors.ViewAnalysis
             
             \param bvh the Geometry to intersect with.
             \param nodes Observer locations to perform view analysis from.
-            \param  ray_count Number of rays to fire. Higher values provide more 
+            \param  ray_count Number of rays to cast. Higher values provide more 
                     accurate analysis, but increase the runtime of this function
             \param upward_fov Maximum angle in degrees above the viewer's eye level that is considered.
             \param downward_fov Maximum angle in degrees below the viewer's eye level that is considered.
@@ -103,7 +103,7 @@ namespace HumanFactors.ViewAnalysis
             
             \param bvh Geometry to intersect with.
             \param nodes Observer locations to perform view analysis from.
-            \param ray_count Number of rays to fire.Higher values provide more
+            \param ray_count Number of rays to cast.Higher values provide more
                    accurate analysis, but increase the runtime and memory consumption
                    of this function.
             \param upward_fov Maximum angle in degrees above the viewer's eye level that is considered.
