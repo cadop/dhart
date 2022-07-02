@@ -1,0 +1,168 @@
+name: Documentation
+
+on:
+  push:
+    branches:    
+      - main
+
+jobs:
+  doxygen:
+
+    runs-on: windows-2019
+    strategy:
+      matrix:
+        python-version: [3.8]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - uses: actions/checkout@v2
+      with: # for github push action
+        #persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+        fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+
+    - name: Install windows documentation requirements
+      run: |
+        $url = "https://www.doxygen.nl/files/doxygen-1.9.4.windows.x64.bin.zip"
+        Start-DownloadWit`hRetry -Url $url -Name "doxygen.zip" -DownloadPath "C:\"
+        Extract-7Zip -Path  "C:\doxygen.zip" -DestinationPath "C:\windows\system32"
+        doxygen --version`
+
+        choco install graphviz -y
+
+        #sudo apt-get install -y doxygen
+        #sudo apt-get install -y graphviz
+    
+    - name: Build c++ documentation with doxygen
+      run: |
+        cd src
+        doxygen Doxyfile
+        ls 
+        
+    - name: Build c# documentation with doxygen
+      run: |
+        doxygen Doxyfile_Csharp
+        doxygen Doxyfile_Public_CSharp
+
+    - name: Auto-deploy doc changes
+      run : |
+        
+        git config --local user.email "action@github.com"
+        git config --local user.name "github-actions[bot]"
+
+        mkdir html_build
+
+        git worktree add -B docs html_build origin/docs
+        # cp -a docs/. html_build/ 
+        robocopy .\docs\ .\html_build\ /e
+
+        cd html_build
+
+        git add . 
+        git commit -m "ghpages"
+        git push -f
+            
+  sphinx:
+    runs-on: windows-2019
+    strategy:
+      matrix:
+        python-version: [3.8]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - uses: actions/checkout@v2
+      with: # for github push action
+        #persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+        fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8 pytest
+
+    - name: Install from pypi
+      run: | 
+        pip install matplotlib 
+        pip install numpy 
+        pip install scipy
+        pip install -i https://test.pypi.org/simple/ dhart
+        python -c "from dhart.spatialstructures import Graph"
+
+    - name: Install documentation dependencies
+      run: |
+        pip install sphinx numpydoc matplotlib         
+    - name: Setup cmake
+      run: |
+        ls 
+        cd src
+
+        cmake ./src/  -G"Visual Studio 16 2019"  -DCMAKE_GENERATOR_PLATFORM="x64"   -DCMAKE_INSTALL_PREFIX=".\..\build\Python" -DHumanFactors_Config="All" -DHumanFactors_EnableTests="False" -DCMAKE_CONFIGURATION_TYPES="Release" -DHumanFactors_EnablePython="True" -DHumanFactors_EnableCSharp="False" -DINSTALL_GTEST="False"  ".\" 2>&1
+
+    - name: cmake build
+      run: |
+        ls
+        cd src
+        cmake --build . --config Release
+    - name: cmake Install
+      run: |
+        ls
+        cd src
+        cmake --install .
+    # - name: Install package
+    #   run: |
+    #     ls
+    #     cd build/Python
+    #     ls
+    #     pip install -e . 
+
+    # - name: test if package dll is installed
+    #   run: | 
+    #     ls 
+    #     cd build/Python
+    #     ls 
+    #     cd bin 
+    #     ls
+    #     python -c "import dhart"
+    #     ls
+    #     python -c "from dhart.spatialstructures import Graph"
+    
+    # - name: Install Sphinx Latex
+    #   run: |
+        # sudo apt-get update -y && sudo apt-get install -y latexmk texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended
+
+    - name: Build documentation with sphinx
+      run: |
+        cd "docs/Python Docs"
+        ls
+        ./make.bat clean
+        ./make.bat html
+        # make latexpdf
+        cd build
+        ls
+        cd html
+        ls
+
+    - name: Auto-deploy doc changes
+      run : |
+        
+        git config --local user.email "action@github.com"
+        git config --local user.name "github-actions[bot]"
+
+        mkdir html_build
+
+        git worktree add -B docs html_build origin/docs
+        robocopy .\docs\ .\html_build\ /e
+
+        cd html_build
+
+        git add . 
+        git commit -m "ghpages"
+        git push -f
+            
+            
